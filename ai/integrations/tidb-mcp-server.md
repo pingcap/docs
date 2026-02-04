@@ -5,7 +5,7 @@ summary: Manage your TiDB databases using natural language instructions with the
 
 # TiDB MCP Server
 
-The TiDB MCP Server is an open-source tool that enables you to interact with TiDB databases using natural language instructions.
+TiDB MCP Server is an open-source tool that lets you interact with TiDB databases using natural language instructions.
 
 ## Understanding MCP and TiDB MCP Server
 
@@ -19,15 +19,15 @@ MCP adopts a client-server architecture, allowing a host application to connect 
 
 - **Servers**: External services, such as the **TiDB MCP Server**, which provide tools, context, and prompts to clients for interacting with external systems.
 
-The **TiDB MCP Server** is an MCP-compatible server that provides tools, context to MCP clients for interacting with TiDB databases.
+The **TiDB MCP Server** is an MCP-compatible server that provides tools and context for MCP clients to interact with TiDB databases.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 - **An MCP-compatible client**: For example, [Cursor](/ai/integrations/tidb-mcp-cursor.md) or [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md).
-- **Python (>=3.10) and uv**: Ensure Python (version 3.10 or later) and uv is installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install uv.
-- **A TiDB Cloud Starter Cluster**: You can create a free TiDB cluster here [tidbcloud.com](https://tidbcloud.com/free-trial).
+- **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Supported MCP Clients
 
@@ -36,7 +36,7 @@ Refer to the following guides for detailed examples of using the TiDB MCP Server
 - [Cursor](/ai/integrations/tidb-mcp-cursor.md)
 - [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
 
-If your MCP client is not listed above, please follow the setup steps below.
+If the preceding list does not include your MCP client, follow the setup steps below.
 
 ## Setup steps
 
@@ -45,22 +45,22 @@ The TiDB MCP Server supports two modes to integrate with MCP clients:
 - Standard Input/Output (STDIO) mode (default)
 - Server-Sent Events (SSE) mode
 
-TiDB MCP Server uses STDIO mode by default, which is not required to start up a standalone server in advance.
+TiDB MCP Server uses STDIO mode by default, so you do not need to start a standalone server in advance.
 
-You can choose one of them to set up the TiDB MCP Server in your MCP client.
+You can choose one of the modes to set up the TiDB MCP Server in your MCP client.
 
 ### STDIO Mode
 
-To set up the TiDB MCP Server in your MCP client using STDIO mode, follow these steps:
+To set up the TiDB MCP Server in your MCP client using STDIO mode, take the following steps:
 
-1. Refer to your MCP client’s documentation to learn how to configure the MCP Server.
+1. Refer to your MCP client documentation to learn how to configure your MCP server.
 
-2. Go to your [TiDB Cloud clusters](https://tidbcloud.com/console/clusters) page and navigate to your cluster.
+2. Go to your [TiDB Cloud clusters](https://tidbcloud.com/console/clusters) page and navigate to the overview page of your cluster.
 
-3. Click the **Connect** button in the cluster page to get the connection parameters.
+3. Click **Connect** on the cluster overview page to get the connection parameters.
 
 4. Configure the TiDB MCP Server with your connection parameters in the `mcpServers` section of your AI application’s configuration file.
-  
+
       Example MCP configuration file:
 
       ```json
@@ -82,15 +82,15 @@ To set up the TiDB MCP Server in your MCP client using STDIO mode, follow these 
 
 ### Server-Sent Events (SSE) Mode
 
-To set up the TiDB MCP Server in your MCP client using SSE mode, follow these steps:
+To set up the TiDB MCP Server in your MCP client using SSE mode, take the following steps:
 
-1. Refer to your MCP client’s documentation to learn how to configure the MCP Server.
+1. Refer to your MCP client documentation to learn how to configure an MCP server.
 
-2. Go to your [TiDB Cloud clusters](https://tidbcloud.com/console/clusters) page and navigate to your cluster.
+2. Go to your [TiDB Cloud clusters](https://tidbcloud.com/console/clusters) page and select your cluster.
 
-3. Click the **Connect** button in the cluster page to get the connection parameters.
+3. Click **Connect** on the cluster page to get the connection parameters.
 
-4. Create a `.env` file with your own connection parameters.
+4. Create a `.env` file with your connection parameters.
 
     Example `.env` file:
 
@@ -104,13 +104,13 @@ To set up the TiDB MCP Server in your MCP client using SSE mode, follow these st
     EOF
     ```
 
-5. Start the TiDB MCP Server with the `--transport sse` option.
+5. Start the TiDB MCP Server with the `--transport sse` option:
 
     ```bash
     uvx --from "pytidb[mcp]" tidb-mcp-server --transport sse
     ```
 
-6. Add the `TiDB` MCP server configuration to the `mcpServers` section of your AI application’s configuration file.
+6. Add the `TiDB` MCP server configuration to the `mcpServers` section of your AI application's configuration file.
 
     ```json
     {
@@ -124,7 +124,7 @@ To set up the TiDB MCP Server in your MCP client using SSE mode, follow these st
 
 ## Supported actions (tools)
 
-The TiDB MCP Server provides the following actions (tools) to MCP clients. You can use these tools to interact with your TiDB projects and databases using natural language instructions.
+The TiDB MCP Server provides the following actions (tools) to MCP clients. You can use them to interact with your TiDB projects and databases in natural language instructions.
 
 **Database Management**
 

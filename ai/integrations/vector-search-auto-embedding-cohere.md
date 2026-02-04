@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-cohere/']
 
 # Cohere Embeddings
 
-This document describes how to use Cohere embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use Cohere embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -56,7 +56,7 @@ For a full list of Cohere models, see [Cohere Documentation](https://docs.cohere
 
 ## SQL usage example (TiDB Cloud hosted)
 
-The following example shows how to use the Cohere embedding model hosted by TiDB Cloud with Auto Embedding.
+The following example shows how to use a Cohere embedding model hosted by TiDB Cloud with Auto Embedding.
 
 ```sql
 CREATE TABLE sample (
@@ -127,7 +127,7 @@ Both the **Embed v3** and **Multilingual Embed v3** models support the following
 
 ## Usage example (BYOK)
 
-This example demonstrates creating a vector table, inserting documents, and performing similarity search using Bring Your Own Key (BYOK) Cohere models.
+This example shows how to create a vector table, insert documents, and run similarity search using Bring Your Own Key (BYOK) Cohere models.
 
 ### Step 1: Connect to the database
 
@@ -303,7 +303,7 @@ All [Cohere embedding options](https://docs.cohere.com/v2/reference/embed) are s
 
 **Example: Specify different `input_type` for search and insert operations**
 
-Use the `@search` suffix to indicates that the field takes effect only during vector search queries.
+Use the `@search` suffix to indicate that the field takes effect only during vector search queries.
 
 ```sql
 CREATE TABLE sample (

@@ -5,21 +5,23 @@ summary: Automatically generate embeddings for your text data using built-in emb
 
 # Auto Embedding Example
 
-This example showcases how to use the auto embedding feature with PyTiDB Client.
+This example shows how to use the [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) feature with the [pytidb](https://github.com/pingcap/pytidb) client.
 
-* Connect to TiDB with PyTiDB Client
-* Define a table with a VectorField configured for automatic embedding
-* Insert plain text data, embeddings are populated automatically in the background
-* Run vector searches with natural language queries, embedding happens transparently
+1. Connect to TiDB using the `pytidb` client.
+2. Define a table with a VectorField configured for automatic embedding.
+3. Insert plain text data: embeddings are populated automatically in the background.
+4. Run vector searches with natural-language queries: embeddings are generated transparently.
 
 ## Prerequisites
 
-- **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
+Before you begin, ensure you have the following:
+
+- **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
@@ -34,9 +36,11 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-### Step 3. Set up environment to connect to database
+### Step 3. Set environment variables
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters and set up the environment variable like this:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/clusters) page, and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+3. Set environment variables according to the connection parameters as follows:
 
 ```bash
 cat > .env <<EOF

@@ -3,9 +3,9 @@ title: Transactions
 summary: Learn how to use transactions in your application.
 ---
 
-# Transaction
+# Transactions
 
-TiDB supports ACID transactions, which ensure data consistency and reliability.
+TiDB supports ACID transactions to ensure data consistency and reliability.
 
 ## Basic usage
 

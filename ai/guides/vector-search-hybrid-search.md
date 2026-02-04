@@ -53,7 +53,7 @@ db = TiDBClient.connect(
 )
 ```
 
-You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com):
+You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com) as follows:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -147,7 +147,7 @@ For a complete example, see [pytidb hybrid search demo](https://github.com/pingc
 
 Fusion methods combine results from vector (semantic) and full-text (keyword) searches into a single, unified ranking. This ensures that the final results leverage both semantic relevance and keyword matching.
 
-PyTiDB supports two fusion methods:
+`pytidb` supports two fusion methods:
 
 - `rrf`: Reciprocal Rank Fusion (default)
 - `weighted`: Weighted Score Fusion

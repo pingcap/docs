@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-nvidia-nim/']
 
 # NVIDIA NIM Embeddings
 
-This document describes how to use NVIDIA NIM embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use NVIDIA NIM embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -75,7 +75,7 @@ Result:
 
 ## nv-embed-v1
 
-This example demonstrates creating a vector table, inserting documents, and performing similarity search using `nvidia/nv-embed-v1` model.
+This example shows how to create a vector table, insert documents, and run similarity search using the `nvidia/nv-embed-v1` model.
 
 ### Step 1: Connect to the database
 

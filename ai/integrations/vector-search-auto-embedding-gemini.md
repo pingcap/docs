@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-gemini/']
 
 # Gemini Embeddings
 
-This document describes how to use Gemini embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use Gemini embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -30,7 +30,7 @@ For a full list of available models, see [Gemini documentation](https://ai.googl
 
 ## Usage example
 
-This example demonstrates creating a vector table, inserting documents, and performing similarity search using Google Gemini embedding models.
+This example shows how to create a vector table, insert documents, and run similarity search using Google Gemini embedding models.
 
 ### Step 1: Connect to the database
 
@@ -185,7 +185,7 @@ print(results)
 </div>
 <div label="SQL" value="sql">
 
-Use the `VEC_EMBED_COSINE_DISTANCE` function to perform vector search based on cosine distance metric:
+Use the `VEC_EMBED_COSINE_DISTANCE` function to perform vector search based on cosine distance:
 
 ```sql
 SELECT
@@ -202,7 +202,7 @@ LIMIT 2;
 
 ## Custom embedding dimensions
 
-The `gemini-embedding-001` model supports flexible vector dimensions through Matryoshka Representation Learning (MRL). You can specify the desired dimensions in your embedding function:
+The `gemini-embedding-001` model supports flexible dimensions through Matryoshka Representation Learning (MRL). You can specify the desired dimensions in your embedding function:
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -243,7 +243,7 @@ embedding: list[float] = EmbeddingFunction(
 </div>
 </SimpleTab>
 
-Choose the appropriate dimensions based on your performance requirements and storage constraints. Higher dimensions provide better accuracy but require more storage and computational resources.
+Choose dimensions based on your performance requirements and storage constraints. Higher dimensions can improve accuracy but require more storage and compute resources.
 
 ## Options
 

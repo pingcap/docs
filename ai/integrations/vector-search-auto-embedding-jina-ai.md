@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-jina-ai/']
 
 # Jina AI Embeddings
 
-This document describes how to use [Jina AI embedding models](https://jina.ai/embeddings/) with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use [Jina AI embedding models](https://jina.ai/embeddings/) with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -42,7 +42,7 @@ For a full list of available models, see [Jina AI Documentation](https://jina.ai
 
 ## Usage example
 
-This example demonstrates creating a vector table, inserting documents, and performing similarity search using Jina AI embedding models.
+This example shows how to create a vector table, insert documents, and run similarity search using Jina AI embedding models.
 
 ### Step 1: Connect to the database
 
@@ -256,7 +256,7 @@ CREATE TABLE sample (
 
 For all available options, see [Jina AI Documentation](https://jina.ai/embeddings/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md)
 - [Vector Search](/ai/concepts/vector-search-overview.md)

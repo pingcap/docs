@@ -5,7 +5,7 @@ summary: Learn how to use multiple table joins in your application.
 
 # Multiple Table Joins
 
-As a relational database, TiDB allows you to store diverse data in tables with different structures (for example: `chunks`, `documents`, `users`, `chats`) in a single database. Moreover, you can use joins to combine data from multiple tables to perform complex queries.
+As a relational database, TiDB lets you store diverse data in tables with different structures (for example, `chunks`, `documents`, `users`, `chats`) in a single database. You can also use joins to combine data from multiple tables and perform complex queries.
 
 ## Basic Usage
 
@@ -14,7 +14,7 @@ As a relational database, TiDB allows you to store diverse data in tables with d
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-Assuming you have already [connected to the TiDB database](/ai/guides/connect.md) via TiDBClient:
+Assuming you have already [connected to TiDB](/ai/guides/connect.md) using `TiDBClient`:
 
 Create a `documents` table and insert some sample data:
 

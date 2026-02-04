@@ -6,16 +6,16 @@ aliases: ['/tidb/stable/vector-search-integrate-with-langchain/','/tidb/dev/vect
 
 # Integrate Vector Search with LangChain
 
-This tutorial demonstrates how to integrate the [vector search](/ai/concepts/vector-search-overview.md) feature of TiDB with [LangChain](https://python.langchain.com/).
+This tutorial demonstrates how to integrate [TiDB Vector Search](/ai/concepts/vector-search-overview.md) with [LangChain](https://python.langchain.com/).
 
 > **Note:**
 >
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 > **Tip**
 >
-> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) in Jupyter Notebook, or run it directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -299,7 +299,7 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 ### Use as a retriever
 
-In Langchain, a [retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers) is an interface that retrieves documents in response to an unstructured query, providing more functionality than a vector store. The following code demonstrates how to use TiDB vector store as a retriever.
+In LangChain, a [retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers) is an interface that retrieves documents for an unstructured query and provides more functionality than a vector store. The following code demonstrates how to use TiDB vector store as a retriever.
 
 ```python
 retriever = vector_store.as_retriever(

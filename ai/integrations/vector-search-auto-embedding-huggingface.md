@@ -1,12 +1,12 @@
 ---
-title: HuggingFace Embeddings
-summary: Learn how to use HuggingFace embedding models in TiDB Cloud.
+title: Hugging Face Embeddings
+summary: Learn how to use Hugging Face embedding models in TiDB Cloud.
 aliases: ['/tidbcloud/vector-search-auto-embedding-huggingface/']
 ---
 
-# HuggingFace Embeddings
+# Hugging Face Embeddings
 
-This document describes how to use HuggingFace embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use Hugging Face embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -14,16 +14,16 @@ This document describes how to use HuggingFace embedding models with [Auto Embed
 
 ## Available models
 
-HuggingFace models are available for use with the `huggingface/` prefix if you bring your own [HuggingFace Inference API](https://huggingface.co/docs/inference-providers/index) key (BYOK).
+Hugging Face models are available for use with the `huggingface/` prefix if you bring your own [Hugging Face Inference API](https://huggingface.co/docs/inference-providers/index) key (BYOK).
 
-For your convenience, the following sections take several popular models as examples to show how to use them with Auto Embedding. For a full list of available models, see [HuggingFace Models](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending). Note that not all models are provided by HuggingFace Inference API or always working.
+For your convenience, the following sections use several popular models as examples. For a full list of available models, see [Hugging Face models](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending). Note that not all models are available through Hugging Face Inference API or reliably work.
 
 ## multilingual-e5-large
 
 - Name: `huggingface/intfloat/multilingual-e5-large`
 - Dimensions: 1024
 - Distance metric: Cosine, L2
-- Price: Charged by HuggingFace
+- Price: Charged by Hugging Face
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 - Project home: <https://huggingface.co/intfloat/multilingual-e5-large>
@@ -67,7 +67,7 @@ LIMIT 2;
 - Name: `huggingface/BAAI/bge-m3`
 - Dimensions: 1024
 - Distance metric: Cosine, L2
-- Price: Charged by HuggingFace
+- Price: Charged by Hugging Face
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 - Project home: <https://huggingface.co/BAAI/bge-m3>
@@ -109,7 +109,7 @@ LIMIT 2;
 - Name: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
 - Dimensions: 384
 - Distance metric: Cosine, L2
-- Price: Charged by HuggingFace
+- Price: Charged by Hugging Face
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 - Project home: <https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2>
@@ -153,7 +153,7 @@ LIMIT 2;
 - Name: `huggingface/sentence-transformers/all-mpnet-base-v2`
 - Dimensions: 768
 - Distance metric: Cosine, L2
-- Price: Charged by HuggingFace
+- Price: Charged by Hugging Face
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 - Project home: <https://huggingface.co/sentence-transformers/all-mpnet-base-v2>
@@ -194,13 +194,13 @@ LIMIT 2;
 
 > **Note:**
 >
-> HuggingFace Inference API might be not stable for this model.
+> Hugging Face Inference API might be unstable for this model.
 
 - Name: `huggingface/Qwen/Qwen3-Embedding-0.6B`
 - Dimensions: 1024
 - Distance metric: Cosine, L2
 - Maximum input text tokens: 512
-- Price: Charged by HuggingFace
+- Price: Charged by Hugging Face
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 - Project home: <https://huggingface.co/Qwen/Qwen3-Embedding-0.6B>
@@ -239,7 +239,7 @@ LIMIT 2;
 
 ## Python usage example
 
-This example demonstrates creating a vector table, inserting documents, and performing similarity search using Hugging Face embedding models.
+This example shows how to create a vector table, insert documents, and run similarity search using Hugging Face embedding models.
 
 ### Step 1: Connect to the database
 

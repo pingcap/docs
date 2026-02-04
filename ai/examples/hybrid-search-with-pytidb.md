@@ -1,11 +1,11 @@
 ---
 title: Hybrid Search Example
-summary: Combine vector search and fulltext search for more comprehensive results.
+summary: Combine vector search and full-text search for more comprehensive results.
 ---
 
 # Hybrid Search Example
 
-In this demo, we will show you how to use hybrid search to combine vector search and full-text search on a set of documents.
+This demo shows how to combine vector search and full-text search to improve the retrieval quality over a document set.
 
 <p align="center">
     <img src="https://github.com/user-attachments/assets/6e1c639d-2160-44c8-86b4-958913b9eca5" alt="TiDB Hybrid Search Demo" width="700"/>
@@ -14,26 +14,30 @@ In this demo, we will show you how to use hybrid search to combine vector search
 
 ## Prerequisites
 
-* Python 3.10+
-* TiDB database instance (👉 [Create a free TiDB Serverless Cluster](https://tidbcloud.com/free-trial))
-* OpenAI API key (Go to [OpenAI](https://platform.openai.com/api-keys) to get the API key)
+Before you begin, ensure you have the following:
+
+- **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **OpenAI API key**: Get an OpenAI API key from [OpenAI](https://platform.openai.com/api-keys).
 
 > **Note**
 >
-> Currently, full-text search is only available for the following product option and region:
+> Currently, full-text search is available only in the following product option and regions:
 >
-> - TiDB Cloud Starter: Frankfurt (eu-central-1), Singapore (ap-southeast-1)
+> - TiDB Cloud Starter: Frankfurt (`eu-central-1`), Singapore (`ap-southeast-1`)
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
+
+[pytidb](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
-cd pytidb/examples/hybrid_search;
+cd pytidb/examples/hybrid_search
 ```
 
-### Step 2. Install the required packages and setup environment
+### Step 2. Install the required packages and set up the environment
 
 ```bash
 python -m venv .venv
@@ -41,16 +45,18 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-### Step 3. Set up environment to connect to storage
+### Step 3. Set environment variables
 
-If you are using TiDB Cloud, you can find the connection parameters in the [TiDB Cloud console](https://tidbcloud.com/).
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/clusters) page, and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+3. Set environment variables according to the connection parameters as follows:
 
 ```bash
 cat > .env <<EOF
-TIDB_HOST=localhost
+TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
 TIDB_PORT=4000
-TIDB_USERNAME=root
-TIDB_PASSWORD=
+TIDB_USERNAME={prefix}.root
+TIDB_PASSWORD={password}
 TIDB_DATABASE=pytidb_hybrid_demo
 OPENAI_API_KEY=<your-openai-api-key>
 EOF
@@ -66,7 +72,7 @@ If you want to check the demo with a web UI, you can run the following command:
 streamlit run app.py
 ```
 
-Open the browser and visit `http://localhost:8501`
+Open your browser and visit `http://localhost:8501`
 
 ### Option 2. Run the demo script
 

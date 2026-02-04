@@ -5,7 +5,7 @@ summary: Learn how to use auto embedding in your application.
 
 # Auto Embedding
 
-Auto embedding is a feature that allows you to automatically generate vector embeddings for text data.
+Auto embedding automatically generates vector embeddings for your text data.
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ This document uses a TiDB Cloud hosted embedding model for demonstration. For a 
 
 ### Step 1. Define an embedding function
 
-Define an embedding function to generate vector embeddings for text data.
+Define an embedding function to generate vector embeddings for your text data.
 
 ```python
 from pytidb.embeddings import EmbeddingFunction
@@ -29,9 +29,9 @@ embed_func = EmbeddingFunction(
 
 ### Step 2. Create a table and a vector field
 
-Use `embed_func.VectorField()` to create a vector field on the table.
+Use `embed_func.VectorField()` to create a vector field in the table schema.
 
-To enable auto embedding, you need to set `source_field` to the field that you want to embed.
+To enable auto embedding, set `source_field` to the field you want to embed.
 
 ```python hl_lines="7"
 from pytidb.schema import TableModel, Field
@@ -45,9 +45,9 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
-You don't need to specify the `dimensions` parameter, it will be automatically determined by the embedding model.
+You don't need to specify the `dimensions` parameter, because the embedding model automatically determines it.
 
-However, you can specify the `dimensions` parameter to override the default dimension.
+However, you can set the `dimensions` parameter to override the default dimension.
 
 ### Step 3. Insert some sample data
 
@@ -61,11 +61,11 @@ table.bulk_insert([
 ])
 ```
 
-When inserting data, the `text_vec` field will be automatically populated with the vector embeddings generated based on the `text` field.
+When inserting data, the `text_vec` field is automatically populated with embeddings generated from `text`.
 
 ### Step 4. Perform a vector search
 
-You can pass the query text to the `search()` method directly, the query text will be embedded and then used for vector search.
+You can pass query text directly to the `search()` method. The query text will be embedded automatically and then used for vector search.
 
 ```python
 table.search("HTAP database").limit(3).to_list()

@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-amazon-titan/']
 
 # Amazon Titan Embeddings
 
-This document describes how to use Amazon Titan embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use Amazon Titan embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -126,10 +126,6 @@ Result:
 |    4 | Java's syntax is used in Android apps.                         |
 +------+----------------------------------------------------------------+
 ```
-
-## Python usage example
-
-See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
 ## See also
 

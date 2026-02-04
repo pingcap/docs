@@ -5,11 +5,11 @@ summary: Learn how to use raw queries in your application.
 
 # Raw Queries
 
-This document introduces how to use raw SQL queries in your application.
+This guide describes how to run raw SQL queries in your application.
 
 ## Operate data with raw SQL
 
-You can use `client.execute()` method to execute `INSERT`, `UPDATE`, `DELETE` and other data manipulation SQL statements.
+Use the `client.execute()` method to execute `INSERT`, `UPDATE`, `DELETE`, and other data-manipulation statements.
 
 ```python
 client.execute("INSERT INTO chunks(text, user_id) VALUES ('sample text', 5)")
@@ -29,9 +29,9 @@ client.execute(
 )
 ```
 
-## Query data with rawSQL
+## Query data with raw SQL
 
-You can use `client.query()` method to execute `SELECT`, `SHOW` and other query SQL statements.
+Use the `client.query()` method to execute `SELECT`, `SHOW`, and other query statements.
 
 ### Output query result
 
@@ -43,10 +43,9 @@ The `client.query()` method will return a `SQLQueryResult` instance with some he
 - `to_rows()`
 - `scalar()`
 
-
 #### As Pydantic model
 
-The `to_pydantic()` method will return a list of Pydantic models.
+The `to_pydantic()` method returns a list of Pydantic models.
 
 ```python
 client.query("SELECT id, text, user_id FROM chunks").to_pydantic()
@@ -54,7 +53,7 @@ client.query("SELECT id, text, user_id FROM chunks").to_pydantic()
 
 #### As SQLAlchemy result rows
 
-The `to_rows()` method will return a list of tuple, every tuple represent of one row of data.
+The `to_rows()` method returns a list of tuples, where each tuple represents one row.
 
 ```python
 client.query("SHOW TABLES;").to_rows()
@@ -62,7 +61,7 @@ client.query("SHOW TABLES;").to_rows()
 
 #### As list of dict
 
-The `to_list()` method will convert the query result into a list of dict.
+The `to_list()` method converts the query result to a list of dictionaries.
 
 ```python
 client.query(
@@ -75,7 +74,7 @@ client.query(
 
 #### As pandas DataFrame
 
-The `to_pandas()` method to convert the query result to a `pandas.DataFrame`, which is displayed as human-friendly style on the notebook:
+The `to_pandas()` method converts the query result to a `pandas.DataFrame`, which is displayed in a human-friendly format within the notebook:
 
 ```python
 client.query("SELECT id, text, user_id FROM chunks").to_pandas()

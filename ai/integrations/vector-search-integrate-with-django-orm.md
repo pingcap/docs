@@ -6,12 +6,12 @@ aliases: ['/tidb/stable/vector-search-integrate-with-django-orm/','/tidb/dev/vec
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/ai/concepts/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use the [Django](https://www.djangoproject.com/) ORM to interact with [TiDB Vector Search](/ai/concepts/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note:**
 >
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
-You can quickly learn about how to integrate TiDB Vector Search with Django ORM by following the steps below.
+You can quickly learn how to integrate TiDB Vector Search with Django ORM by following the steps below.
 
 ### Step 1. Clone the repository
 
@@ -64,7 +64,7 @@ pip install Django django-tidb mysqlclient numpy python-dotenv
 
 If you encounter installation issues with mysqlclient, refer to the mysqlclient official documentation.
 
-#### What is `django-tidb`
+#### What is `django-tidb`?
 
 `django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, Vector Search) and resolves compatibility issues between TiDB and Django.
 
@@ -231,7 +231,7 @@ Document.objects.create(content="tree", embedding=[1, 0, 0])
 
 ### Search the nearest neighbor documents
 
-TiDB Vector support the following distance functions:
+TiDB Vector supports the following distance functions:
 
 - `L1Distance`
 - `L2Distance`

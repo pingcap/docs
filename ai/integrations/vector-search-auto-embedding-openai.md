@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-openai/']
 
 # OpenAI Embeddings
 
-This document describes how to use OpenAI embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use OpenAI embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ For a full list of available models, see [OpenAI Documentation](https://platform
 
 ## Usage example
 
-This example demonstrates creating a vector table, inserting documents, and performing similarity search using OpenAI embedding models.
+This example shows how to create a vector table, insert documents, and run similarity search using OpenAI embedding models.
 
 You can integrate the OpenAI Embeddings API with TiDB using the AI SDK or native SQL functions for automatic embedding generation.
 
@@ -76,7 +76,7 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 
 ### Step 2: Configure the API key
 
-Create your own API key from the [OpenAI API Platform](https://platform.openai.com/api-keys) and bring your own key (BYOK) to use the embedding service.
+Create an API key in the [OpenAI API Platform](https://platform.openai.com/api-keys) and bring your own key (BYOK) to use the embedding service.
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -256,7 +256,7 @@ ORDER BY
 LIMIT 2;
 ```
 
-Note that even if your resource URL appears as `https://<your-resource-name>.cognitiveservices.azure.com/`, you must use `https://<your-resource-name>.openai.azure.com/openai/v1` as the API base to ensure OpenAI-compatible request and response formats.
+Even if your resource URL appears as `https://<your-resource-name>.cognitiveservices.azure.com/`, you still need to use `https://<your-resource-name>.openai.azure.com/openai/v1` as the API base to keep OpenAI-compatible request and response formats.
 
 To switch from Azure OpenAI to OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to an empty string:
 
@@ -288,10 +288,6 @@ CREATE TABLE sample (
 ```
 
 For all available options, see [OpenAI Documentation](https://platform.openai.com/docs/api-reference/embeddings/create).
-
-## Python usage example
-
-See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
 ## See also
 

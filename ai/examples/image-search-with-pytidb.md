@@ -5,28 +5,31 @@ summary: Build an image search application using multimodal embeddings for both 
 
 # Image Search Example
 
-This example showcases how to build a powerful image search application by combining TiDB's vector search capabilities with multimodal embedding models.
+This example shows how to build an image search app by combining TiDB vector search capabilities with multimodal embedding models.
 
-With just a few lines of code, you can create an intelligent search system that understands both text and images.
+With just a few lines of code, you can create a search system that understands both text and images.
 
-- 🔍 **Text-to-Image Search**: Find the perfect pet photos by describing what you're looking for in natural language - from "fluffy orange cat"
-- 🖼️ **Image-to-Image Search**: Upload a photo and instantly discover visually similar pets based on breed, color, pose and more
+- **Text-to-image search**: Find pet photos by describing what you want in natural language, such as "fluffy orange cat"
+- **Image-to-image search**: Upload a photo to find visually similar pets by breed, color, pose, and more
 
 <p align="center">
   <img width="700" alt="PyTiDB Image Search Demo" src="https://github.com/user-attachments/assets/7ba9733a-4d1f-4094-8edb-58731ebd08e9" />
   <p align="center"><i>Pet image search via multimodal embeddings</i></p>
 </p>
 
-
 ## Prerequisites
 
-- **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
-- **Jina AI API Key**: Get your free API key at [jina.ai Embeddings ↗️](https://jina.ai/embeddings/)
+Before you begin, ensure you have the following:
+
+- **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **Jina AI API key**: You can get a free API key from [Jina AI Embeddings](https://jina.ai/embeddings/).
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
+
+[`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
@@ -41,9 +44,11 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r reqs.txt
 ```
 
-### Step 3. Set up environment variables
+### Step 3. Set environment variables
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/clusters) page, and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+3. Set environment variables according to the connection parameters as follows:
 
 ```bash
 cat > .env <<EOF
@@ -59,7 +64,7 @@ EOF
 
 ### Step 4. Download and extract the dataset
 
-In this demo, we will use the [Oxford Pets dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/) to load pet images to the database for search.
+This demo uses the [Oxford Pets dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/) to load pet images into the database for search.
 
 *For Linux/MacOS:*
 

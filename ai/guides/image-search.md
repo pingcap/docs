@@ -7,7 +7,7 @@ summary: Learn how to use image search in your application.
 
 **Image search** helps you find similar images by comparing their visual content, not just text or metadata. This feature is useful for e-commerce, content moderation, digital asset management, and any scenario where you need to search for or deduplicate images based on appearance.
 
-TiDB enables image search using **vector search**. With automatic embedding, you can generate image embeddings from image URLs, PIL images, or keyword text using a multimodal embedding model. TiDB then efficiently searches for similar vectors at scale.
+TiDB enables image search through **vector search**. With automatic embedding, you can generate image embeddings from image URLs, PIL images, or keyword text using a multimodal embedding model. TiDB then searches for similar vectors at scale.
 
 > **Note:**
 >
@@ -17,11 +17,11 @@ TiDB enables image search using **vector search**. With automatic embedding, you
 
 ### Step 1. Define an embedding function
 
-To generate image embeddings, you need an embedding model that supports image input.
+To generate image embeddings, you need an embedding model that accepts image input.
 
-For demonstration, you can use Jina AI's multimodal embedding model to generate image embeddings.
+For demonstration, you can use the multimodal embedding model of Jina AI.
 
-Go to [Jina AI](https://jina.ai/embeddings) to create an API key, then initialize the embedding function as follows:
+Go to [Jina AI](https://jina.ai/embeddings) to create an API key, and then initialize the embedding function as follows:
 
 ```python hl_lines="7"
 from pytidb.embeddings import EmbeddingFunction
@@ -54,7 +54,7 @@ table = client.create_table(schema=ImageItem, if_exists="overwrite")
 
 ### Step 3. Insert image data
 
-When you insert data, the `image_vec` field is automatically populated with the embedding generated from the `image_uri`.
+When you insert data, the `image_vec` field is automatically populated with an embedding generated from `image_uri`.
 
 ```python
 table.bulk_insert([
@@ -66,7 +66,7 @@ table.bulk_insert([
 
 ### Step 4. Perform image search
 
-Image search is a type of vector search. Automatic embedding lets you input an image URL, PIL image, or keyword text directly. All these inputs are converted to vector embeddings for similarity matching.
+Image search is a type of vector search. With automatic embedding, you can provide an image URL, a PIL image, or keyword text directly, and each input is converted into an embedding for similarity matching.
 
 #### Option 1: Search by image URL
 
@@ -76,7 +76,7 @@ Search for similar images by providing an image URL:
 results = table.search("https://example.com/query.jpg").limit(3).to_list()
 ```
 
-The client converts the input image URL into a vector. TiDB then finds and returns the most similar images by comparing their vectors.
+The client converts the image URL into a vector. TiDB then returns the most similar images by comparing vectors.
 
 #### Option 2: Search by PIL image
 
@@ -90,19 +90,19 @@ image = Image.open("/path/to/query.jpg")
 results = table.search(image).limit(3).to_list()
 ```
 
-The client converts the PIL image object into a Base64 string before sending it to the embedding model.
+The client converts the PIL image object to a Base64 string before sending it to the embedding model.
 
 #### Option 3: Search by keyword text
 
 You can also search for similar images by providing keyword text.
 
-For example, if you are working on a pet image dataset, you can search for similar images by keywords like "orange tabby cat" or "golden retriever puppy".
+For example, if you are working on a pet image dataset, you can search by keywords such as "orange tabby cat" or "golden retriever puppy" to find similar images.
 
 ```python
 results = table.search("orange tabby cat").limit(3).to_list()
 ```
 
-The keyword text will be converted to a vector embedding that captures the semantic meaning by the multimodal embedding model, and then a vector search will be performed to find the images whose embeddings are most similar to the keyword embedding.
+Then, the multimodal embedding model converts the keyword text into an embedding that captures its semantic meaning, and TiDB performs a vector search to find images with embeddings most similar to that keyword embedding.
 
 ## See also
 

@@ -5,7 +5,9 @@ summary: Implement semantic search using vector embeddings to find similar conte
 
 # Vector Search Example
 
-This example demonstrates how to build a semantic search application using TiDB and local embedding models. It leverages vector search to find similar items based on meaning, not just keywords. The app uses Streamlit for the web UI and Ollama for local embedding generation.
+This example demonstrates how to build a semantic search application using TiDB and local embedding models. It uses vector search to find similar items by meaning (not just keywords).
+
+The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [`pytidb`](https://github.com/pingcap/pytidb) (the official Python SDK for TiDB) to build the RAG pipeline.
 
 <p align="center">
   <img width="700" alt="Semantic search with vector embeddings" src="https://github.com/user-attachments/assets/6d7783a5-ce9c-4dcc-8b95-49d5f0ca735a" />
@@ -14,9 +16,11 @@ This example demonstrates how to build a semantic search application using TiDB 
 
 ## Prerequisites
 
-- **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
-- **Ollama**: You can install it from [Ollama ↗️](https://ollama.com/download)
+Before you begin, ensure you have the following:
+
+- **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **Ollama**: Install from [Ollama](https://ollama.com/download).
 
 ## How to run
 
@@ -28,7 +32,7 @@ Pull the embedding model:
 ollama pull mxbai-embed-large
 ```
 
-Test the embedding service to make sure it is running:
+Verify that the embedding service is running:
 
 ```bash
 curl http://localhost:11434/api/embed -d '{
@@ -52,19 +56,21 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-### Step 4. Set up environment to connect to TiDB
+### Step 4. Set environment variables
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/clusters) page, and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+3. Set environment variables according to the connection parameters as follows:
 
-```bash
-cat > .env <<EOF
-TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
-TIDB_PORT=4000
-TIDB_USERNAME={prefix}.root
-TIDB_PASSWORD={password}
-TIDB_DATABASE=pytidb_vector_search
-EOF
-```
+    ```bash
+    cat > .env <<EOF
+    TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
+    TIDB_PORT=4000
+    TIDB_USERNAME={prefix}.root
+    TIDB_PASSWORD={password}
+    TIDB_DATABASE=pytidb_vector_search
+    EOF
+    ```
 
 ### Step 5. Run the Streamlit app
 

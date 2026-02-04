@@ -6,12 +6,12 @@ aliases: ['/tidb/stable/vector-search-integrate-with-peewee/','/tidb/dev/vector-
 
 # Integrate TiDB Vector Search with peewee
 
-This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/ai/concepts/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with [TiDB Vector Search](/ai/concepts/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note:**
 >
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
-You can quickly learn about how to integrate TiDB Vector Search with peewee by following the steps below.
+You can quickly learn how to integrate TiDB Vector Search with peewee by following the steps below.
 
 ### Step 1. Clone the repository
 
@@ -168,7 +168,7 @@ You can refer to the following sample code snippets to develop your application.
 
 ### Create vector tables
 
-#### Connect to TiDB cluster
+#### Connect to a TiDB cluster
 
 ```python
 import os

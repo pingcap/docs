@@ -26,13 +26,13 @@ Understand the foundational concepts behind AI-powered search in TiDB.
 
 ## Guides
 
-Step-by-step guides for building AI applications with TiDB using the PyTiDB SDK or SQL.
+Step-by-step guides for building AI applications with TiDB using the [`pytidb`](https://github.com/pingcap/pytidb) SDK or SQL.
 
 | Document | Description |
 | --- | --- |
-| [Connect to TiDB](/ai/guides/connect.md) | Connect to TiDB Cloud or self-managed clusters using PyTiDB. |
+| [Connect to TiDB](/ai/guides/connect.md) | Connect to TiDB Cloud or self-managed clusters using `pytidb`. |
 | [Working with Tables](/ai/guides/tables.md) | Create, query, and manage tables with vector fields. |
-| [Vector Search](/ai/guides/vector-search.md) | Perform semantic similarity searches using PyTiDB. |
+| [Vector Search](/ai/guides/vector-search.md) | Perform semantic similarity searches using `pytidb`. |
 | [Full-Text Search](/ai/guides/vector-search-full-text-search-python.md) | Keyword-based text search with BM25 ranking. |
 | [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) | Combine vector and full-text search for better results. |
 | [Image Search](/ai/guides/image-search.md) | Search images using multimodal embeddings. |
@@ -45,7 +45,7 @@ Complete code examples and demos showcasing TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [Basic CRUD Operations](/ai/examples/basic-with-pytidb.md) | Fundamental table operations with PyTiDB. |
+| [Basic CRUD Operations](/ai/examples/basic-with-pytidb.md) | Fundamental table operations with `pytidb`. |
 | [Vector Search](/ai/examples/vector-search-with-pytidb.md) | Semantic similarity search example. |
 | [RAG Application](/ai/examples/rag-with-pytidb.md) | Build a Retrieval-Augmented Generation application. |
 | [Image Search](/ai/examples/image-search-with-pytidb.md) | Multimodal image search with Jina AI embeddings. |

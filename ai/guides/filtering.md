@@ -5,23 +5,25 @@ summary: Learn how to use filtering in your application.
 
 # Filtering
 
-As a relational database, TiDB supports a rich set of [SQL operators](https://docs.pingcap.com/tidbcloud/operators/) and allows flexible combinations of filtering conditions that enable you to query your data precisely.
+As a relational database, TiDB supports a rich set of [SQL operators](https://docs.pingcap.com/tidbcloud/operators/) and flexible combinations of filtering conditions for precise queries.
 
 ## Overview
 
-You can not only apply filtering on scalar fields but also on JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search.md#metadata-filtering) in vector search.
+You can filter on both scalar fields and JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search.md#metadata-filtering) in vector search.
 
 > **Note:**
 >
 > For a complete example of filtering, see [Filtering Example](/ai/examples/filtering-with-pytidb.md).
 
-For PyTiDB, you can apply filtering by passing a **filters** parameter to the `table.query()`, `table.delete()`, `table.update()`, and `table.search()` methods.
+[`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
 
-The **filters** parameter supports two formats: [Dictionary Filters](#dictionary-filters) and [SQL String Filters](#sql-string-filters).
+When using `pytidb`, you can apply filtering by passing the **filters** parameter to the `table.query()`, `table.delete()`, `table.update()`, and `table.search()` methods.
+
+The **filters** parameter supports two formats: [Dictionary filters](#dictionary-filters) and [SQL string filters](#sql-string-filters).
 
 ## Dictionary filters
 
-PyTiDB allows you to define filter conditions using a Python dictionary with operators as the **filters** parameter.
+`pytidb` lets you define filter conditions using a Python dictionary with operators as the **filters** parameter.
 
 The dictionary structure of **filters** is as follows:
 
@@ -36,7 +38,7 @@ The dictionary structure of **filters** is as follows:
 
 - `<key>`: The key can be a column name, a JSON path expression to access a JSON field (see [Metadata filtering](/ai/guides/vector-search.md#metadata-filtering)), or a [logical operator](#logical-operators).
 - `<operator>`: The operator can be a [compare operator](#compare-operators) or an [inclusion operator](#inclusion-operators).
-- `<value>`: The value can be a scalar value, an array, it depends on the operator.
+- `<value>`: The value can be a scalar value or an array, depending on the operator.
 
 **Example: Filter records where `created_at` is greater than 2024-01-01**
 
@@ -67,7 +69,7 @@ results = (
 
 ### Compare operators
 
-You can use the following compare operators to filter records:
+You can use the following comparison operators to filter records:
 
 | Operator | Description                       |
 |----------|-----------------------------------|
@@ -78,7 +80,7 @@ You can use the following compare operators to filter records:
 | `$lt`    | Less than value                   |
 | `$lte`   | Less than or equal to value       |
 
-**Example: filter records where `user_id` is equal to 1**
+**Example: Filter records where `user_id` equals 1**
 
 ```python
 {
@@ -88,7 +90,7 @@ You can use the following compare operators to filter records:
 }
 ```
 
-You can omit the `$eq` operator. The following query is equivalent to the above:
+You can omit the `$eq` operator. The following filter is equivalent to the preceding one:
 
 ```python
 {
@@ -124,7 +126,7 @@ You can use the logical operators `$and` and `$or` to combine multiple filters.
 | `$and`   | Returns results that match **all** filters in the list |
 | `$or`    | Returns results that match **any** filter in the list |
 
-**Syntax for using `$and` or `$or`:**
+**Syntax for `$and` or `$or`:**
 
 ```python
 {
@@ -165,7 +167,7 @@ You can use the logical operators `$and` and `$or` to combine multiple filters.
 
 ## SQL String Filters
 
-You can also use a SQL string as the `filters` parameter. The string should be a valid SQL `WHERE` clause (without the `WHERE` keyword) using TiDB's SQL syntax.
+You can also use a SQL string as `filters`. The string must be a valid SQL `WHERE` clause (without the `WHERE` keyword) in the TiDB SQL syntax.
 
 **Example: Filter records where `created_at` is greater than 2024-01-01**
 
@@ -185,7 +187,7 @@ results = table.query(
 ).to_list()
 ```
 
-You can combine multiple conditions using `AND`, `OR`, and parentheses, and use any [SQL operators](https://docs.pingcap.com/tidbcloud/operators/) supported by TiDB.
+You can combine multiple conditions using `AND`, `OR`, and parentheses, and use any TiDB-supported [SQL operators](https://docs.pingcap.com/tidbcloud/operators/).
 
 > **Warning:**
 >
