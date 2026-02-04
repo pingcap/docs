@@ -81,9 +81,9 @@ TiDB supports two distance functions for vector indexes:
 
 ### Step 2. Insert vector data into the table
 
-For demonstration, insert some text and corresponding embeddings into the table. In this example, we use simple 3-dimensional vectors.
+For demonstration, insert some text and their corresponding embeddings into the table.
 
-We insert three documents:
+The following example inserts three documents, each with a simple 3-dimensional vector embedding:
 
 - `dog` with the vector embedding `[1, 2, 1]`
 - `fish` with the vector embedding `[1, 2, 4]`
@@ -126,7 +126,7 @@ For details, see the [Auto Embedding](/ai/guides/auto-embedding.md) guide.
 
 Vector search uses vector distance metrics to measure the similarity and relevance between vectors. The closer the distance, the more relevant the record. To find the most relevant documents in the table, you need to specify a query vector.
 
-In this example, we assume the query is `A swimming animal` and its vector embedding is `[1, 2, 3]`.
+The following example assumes the query is `A swimming animal` and its vector embedding is `[1, 2, 3]`.
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -152,7 +152,7 @@ The result shows that the most relevant document is `fish` with a distance of `0
 
 Use the `ORDER BY <distance_function>(<column_name>, <query_vector>) LIMIT <n>` clause in a `SELECT` statement to get the `n` nearest neighbors of a query vector.
 
-In this example, we use the `vec_cosine_distance` function to calculate the cosine distance between the vectors stored in the `text_vec` column and the provided query vector `[1, 2, 3]`.
+The following example uses the `vec_cosine_distance` function to calculate the cosine distance between the vectors stored in the `text_vec` column and the provided query vector `[1, 2, 3]`.
 
 ```sql
 SELECT id, text, vec_cosine_distance(text_vec, '[1,2,3]') AS distance
