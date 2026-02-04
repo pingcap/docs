@@ -80,7 +80,7 @@ The client converts the image URL into a vector. TiDB then returns the most simi
 
 #### Option 2: Search by PIL image
 
-You can also search for a similar image by providing an image file or bytes:
+You can also search for similar images by providing an image file or bytes:
 
 ```python
 from PIL import Image
@@ -102,7 +102,7 @@ For example, if you are working on a pet image dataset, you can search by keywor
 results = table.search("orange tabby cat").limit(3).to_list()
 ```
 
-Then, the multimodal model converts the keyword text into an embedding that captures its semantic meaning, and TiDB performs a vector search to find images with embeddings most similar to that keyword embedding.
+Then, the multimodal embedding model converts the keyword text into an embedding that captures its semantic meaning, and TiDB performs a vector search to find images with embeddings most similar to that keyword embedding.
 
 ## See also
 

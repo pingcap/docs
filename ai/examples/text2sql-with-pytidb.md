@@ -40,8 +40,8 @@ streamlit run app.py
 
 Open the browser and visit `http://localhost:8501`
 
-* Enter your OpenAI API key in the left sidebar
-* Enter the TiDB connection string in the left sidebar, for example: `mysql+pymysql://root@localhost:4000/test`
+1. Enter your OpenAI API key in the left sidebar
+2. Enter the TiDB connection string in the left sidebar, for example: `mysql+pymysql://root@localhost:4000/test`
 
 ## Related resources
 

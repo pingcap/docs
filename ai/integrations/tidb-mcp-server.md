@@ -49,9 +49,9 @@ TiDB MCP Server uses STDIO mode by default, so you do not need to start a standa
 
 You can choose one of the modes to set up the TiDB MCP Server in your MCP client.
 
-### STDIO Mod
+### STDIO Mode
 
-To set up the TiDB MCP Server in your MCP client using STDIO mode:
+To set up the TiDB MCP Server in your MCP client using STDIO mode, take the following steps:
 
 1. Refer to your MCP client documentation to learn how to configure your MCP server.
 
@@ -82,7 +82,7 @@ To set up the TiDB MCP Server in your MCP client using STDIO mode:
 
 ### Server-Sent Events (SSE) Mode
 
-To set up the TiDB MCP Server in your MCP client using SSE mode:
+To set up the TiDB MCP Server in your MCP client using SSE mode, take the following steps:
 
 1. Refer to your MCP client documentation to learn how to configure an MCP server.
 

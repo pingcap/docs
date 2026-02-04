@@ -69,7 +69,7 @@ CREATE TABLE documents (
 In this example:
 
 - The `text_vec` column is defined as `VECTOR(3)`, so vectors stored in this column must have 3 dimensions.
--A vector index is created using the `VEC_COSINE_DISTANCE` function to optimize vector search performance.
+- A vector index is created using the `VEC_COSINE_DISTANCE` function to optimize vector search performance.
 
 TiDB supports two distance functions for vector indexes:
 

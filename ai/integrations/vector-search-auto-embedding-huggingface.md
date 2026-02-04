@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-huggingface/']
 
 # Hugging Face Embeddings
 
-This document describes how to use Hugging Face embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic search with text queries.
+This document describes how to use Hugging Face embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches with text queries.
 
 > **Note:**
 >

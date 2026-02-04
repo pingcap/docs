@@ -45,9 +45,9 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
-You don't need to specify `dimensions`, because the embedding model automatically determines it.
+You don't need to specify the `dimensions` parameter, because the embedding model automatically determines it.
 
-However, you can set `dimensions` to override the default.
+However, you can set the `dimensions` parameter to override the default dimension.
 
 ### Step 3. Insert some sample data
 
@@ -61,11 +61,11 @@ table.bulk_insert([
 ])
 ```
 
-When inserting data, `text_vec` is automatically populated with embeddings generated from `text`.
+When inserting data, the `text_vec` field is automatically populated with embeddings generated from `text`.
 
 ### Step 4. Perform a vector search
 
-You can pass query text directly to `search()`. The query text will be embedded automatically and then used for vector search.
+You can pass query text directly to the `search()` method. The query text will be embedded automatically and then used for vector search.
 
 ```python
 table.search("HTAP database").limit(3).to_list()

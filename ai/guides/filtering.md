@@ -9,7 +9,7 @@ As a relational database, TiDB supports a rich set of [SQL operators](https://do
 
 ## Overview
 
-You can filter on both scalar fields and JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search/#metadata-filtering) in vector search.
+You can filter on both scalar fields and JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search.md#metadata-filtering) in vector search.
 
 > **Note:**
 >

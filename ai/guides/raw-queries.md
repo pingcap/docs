@@ -43,9 +43,9 @@ The `client.query()` method will return a `SQLQueryResult` instance with some he
 - `to_rows()`
 - `scalar()`
 
-#### As `Pydantic` model
+#### As Pydantic model
 
-The `to_pydantic()` method returns a list of `Pydantic` models.
+The `to_pydantic()` method returns a list of Pydantic models.
 
 ```python
 client.query("SELECT id, text, user_id FROM chunks").to_pydantic()

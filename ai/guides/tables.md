@@ -184,11 +184,11 @@ VALUES (1, 'TiDB is a distributed SQL database', '[0.1, 0.2, 0.3]', '{"category"
 
 ## Save data to a table
 
-The `save` method provides a convenient way to insert or update a single row. If the primary key of the data does not exist, the method inserts the data as a new row. If it exists, the method overwrites the entire row.
+The `save` method provides a convenient way to insert or update a single row. For a row, if the primary key does not exist in the table, the method inserts it into the table as a new row. If the record already exists, the method overwrites the entire row.
 
 > **Note:**
 >
-> If a record ID already exists, `table.save()` overwrites the entire record. To change only part of a record, use `table.update()`.
+> If a record ID already exists in the table, `table.save()` overwrites the entire record. To change only part of a record, use `table.update()`.
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">

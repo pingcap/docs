@@ -5,7 +5,7 @@ summary: Learn how to connect to a TiDB database using the PyTiDB client.
 
 # Connect to TiDB
 
-This guide explains how to connect to a TiDB database using the PyTiDB client.
+This guide shows how to connect to a TiDB database using the PyTiDB client.
 
 ## Install the dependencies
 
