@@ -229,12 +229,14 @@ function main() {
       console.error(
         `=== Missing pages referenced by TOC*.md (${missingScopePages.length}) ===`
       );
+      console.error("");
       for (const p of missingScopePages.slice(0, maxMissing)) {
         const referencedBy = [...(pageToTocs.get(p) || new Set())].sort(
           (a, b) => a.localeCompare(b)
         );
         if (referencedBy.length > 0) {
-          console.error(`- ${p} (referenced by: ${referencedBy.join(", ")})`);
+          console.error(`- ${p}`);
+          console.error(`  referenced by: ${referencedBy.join(", ")}`);
         } else {
           console.error(`- ${p}`);
         }
@@ -251,6 +253,7 @@ function main() {
       console.error(
         `=== TOC membership violations (grouped by source file) ===`
       );
+      console.error("");
 
       const sourceFiles = [...bySource.keys()].sort((a, b) =>
         a.localeCompare(b)
@@ -258,7 +261,11 @@ function main() {
       const shownSourceFiles = verbose
         ? sourceFiles
         : sourceFiles.slice(0, maxFiles);
+      let fileIndex = 0;
       for (const sourceRel of shownSourceFiles) {
+        if (fileIndex > 0) {
+          console.error("");
+        }
         const list = bySource.get(sourceRel) || [];
         // Deduplicate exact URLs to reduce noise.
         const seen = new Set();
@@ -271,7 +278,7 @@ function main() {
         }
         unique.sort((a, b) => a.url.localeCompare(b.url));
 
-        console.error(sourceRel);
+        console.error(`${sourceRel} (${unique.length})`);
         const shown = verbose
           ? unique
           : unique.slice(0, maxLinksPerFile);
@@ -293,14 +300,14 @@ function main() {
             `  - ... and ${unique.length - maxLinksPerFile} more (set TOC_MAX_LINKS_PER_FILE or VERBOSE_TOC=1)`
           );
         }
-        console.error("");
+        fileIndex += 1;
       }
 
       if (!verbose && sourceFiles.length > maxFiles) {
+        console.error("");
         console.error(
           `... and ${sourceFiles.length - maxFiles} more source files (set TOC_MAX_FILES or VERBOSE_TOC=1)`
         );
-        console.error("");
       }
 
       console.error("=== How to fix ===");
