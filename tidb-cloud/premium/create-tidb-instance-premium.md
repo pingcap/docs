@@ -9,7 +9,7 @@ This document describes how to create a {{{ .premium }}} instance in the [TiDB C
 
 > **Note:**
 >
-> - Currently, {{{ .premium }}} is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .premium }}}" in the **Description** in the **Description** field, and then click **Submit**.
+> - Currently, {{{ .premium }}} is only available upon request. To request {{{ .premium }}}, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .premium }}}" in the **Description** in the **Description** field, and then click **Submit**.
 > - To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Before you begin
