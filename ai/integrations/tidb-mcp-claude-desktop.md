@@ -42,7 +42,7 @@ Follow the steps below to set up the TiDB MCP Server in Claude Desktop:
     ```
 
 5. Go to the [TiDB Cloud cluster page](https://tidbcloud.com/console/clusters) and navigate to the cluster you want to connect to.
-6. Click the **Connect** button to get the connection parameters, and replace the `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, and `TIDB_DATABASE` values with your own.
+6. Click **Connect** in the upper-right corner to get the connection parameters, and replace the `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, and `TIDB_DATABASE` values with your own.
 7. Restart Claude Desktop.
 
 For more details, see [how to configure the MCP server in Claude Desktop](https://modelcontextprotocol.io/quickstart/user).

@@ -40,9 +40,11 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r reqs.txt
 ```
 
-### Step 3. Set up environment variables
+### Step 3. Set environment variables
 
-Go to the [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters, and then set environment variables as follows:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/clusters) page, and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+3. Set environment variables according to the connection parameters as follows:
 
 ```bash
 cat > .env <<EOF
