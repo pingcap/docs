@@ -1,10 +1,10 @@
 ---
-title: Choose Driver or ORM
+title: Choose a Driver or ORM
 summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 aliases: ['/tidb/stable/dev-guide-choose-driver-or-orm/','/tidb/dev/dev-guide-choose-driver-or-orm/','/tidbcloud/dev-guide-choose-driver-or-orm/']
 ---
 
-# Choose Driver or ORM
+# Choose a Driver or ORM
 
 > **Note:**
 >
@@ -302,13 +302,6 @@ For an example of using peewee to build a TiDB application, see [Connect to TiDB
 
 </div>
 </SimpleTab>
-
-## Next step
-
-After you have determined the driver or ORM, you can connect to your TiDB cluster according to one of the following documents:
-
-- [Connect to your TiDB Cloud cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
-- [Connect to your TiDB Self-Managed cluster](/develop/dev-guide-connect-to-tidb.md)
 
 ## Need help?
 

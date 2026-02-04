@@ -1,10 +1,10 @@
 ---
-title: Connect to {{{ .starter }}} with WordPress
+title: Integrate WordPress with {{{ .starter }}}
 summary: Learn how to use {{{ .starter }}} to run WordPress. This tutorial gives step-by-step guidance to run WordPress + {{{ .starter }}} in a few minutes.
 aliases: ['/tidbcloud/dev-guide-wordpress/']
 ---
 
-# Connect to {{{ .starter }}} with WordPress
+# Integrate WordPress with {{{ .starter }}}
 
 TiDB is a MySQL-compatible database, {{{ .starter }}} is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
 

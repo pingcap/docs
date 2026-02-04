@@ -37,7 +37,7 @@
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
   - Connect to Your TiDB Cloud Dedicated Cluster
-    - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
+    - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster.md)
     - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
     - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
     - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
