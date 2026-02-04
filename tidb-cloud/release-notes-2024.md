@@ -29,8 +29,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
 
     This feature enables you to replicate your databases between TiDB Cloud Dedicated clusters, ensuring rapid recovery in the event of a regional disaster. If you are in the Project Owner role, you can enable this feature by creating a new recovery group and assigning databases to the group. By replicating databases with recovery groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
-  
-    For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
 
 ## November 26, 2024
 
@@ -291,8 +289,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
 
     This feature enables you to replicate your databases between TiDB Cloud Dedicated clusters, ensuring rapid recovery in the event of a regional disaster. If you are in the `Project Owner` role, you can enable this feature by creating a new recovery group and assigning databases to the group. By replicating databases with recovery groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
-
-    For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
 
 - Introduce billing and metering (beta) for the [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) columnar storage [TiFlash](/tiflash/tiflash-overview.md).
 

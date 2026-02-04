@@ -40,8 +40,6 @@
     - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Navicat](/develop/dev-guide-gui-navicat.md)
   - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-  - BI
-    - [Looker Studio](/tidb-cloud/dev-guide-bi-looker-studio.md)
   - Java
     - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
     - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -602,12 +600,13 @@
   - [upgrade](/tidb-cloud/ticloud-upgrade.md)
   - [help](/tidb-cloud/ticloud-help.md)
 - General Reference
-  - TiDB Cluster Architecture
+  - TiDB Classic Architecture
     - [Overview](/tidb-architecture.md)
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
     - [TSO](/tso.md)
+  - [TiDB X Architecture](/tidb-cloud/tidb-x-architecture.md)
   - Storage Engines
     - TiKV
       - [TiKV Overview](/tikv-overview.md)
@@ -647,4 +646,5 @@
 ## RELEASES
 
 - Release Notes
-  - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2025](/tidb-cloud/release-notes-2025.md)

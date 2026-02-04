@@ -246,6 +246,7 @@
       - [Use Overview](/br/br-use-overview.md)
       - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
       - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+      - [Compact Log Backup](/br/br-compact-log-backup.md)
       - [Use Cases](/br/backup-and-restore-use-cases.md)
       - [Backup Storages](/br/backup-and-restore-storages.md)
     - BR CLI Manuals
@@ -439,6 +440,7 @@
   - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
   - [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md)
   - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
+  - [Use TiDB Partitioned Tables](/best-practices/tidb-partitioned-tables-best-practices.md)
   - [Use UUIDs as Primary Keys](/best-practices/uuid.md)
   - [Develop Java Applications](/best-practices/java-app-best-practices.md)
   - [Handle High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
@@ -880,6 +882,7 @@
       - [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
       - [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       - [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
       - [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
@@ -997,6 +1000,7 @@
     - [Temporary Tables](/temporary-tables.md)
     - [Cached Tables](/cached-tables.md)
     - [FOREIGN KEY Constraints](/foreign-key.md)
+    - [Table-Level Data Affinity](/table-affinity.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
@@ -1104,6 +1108,7 @@
   - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.5](/releases/release-8.5.5.md)
     - [8.5.4](/releases/release-8.5.4.md)
     - [8.5.3](/releases/release-8.5.3.md)
     - [8.5.2](/releases/release-8.5.2.md)

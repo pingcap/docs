@@ -181,15 +181,15 @@ Take the following steps to create the Kafka VPC.
 Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:). Create the bastion node in the bastion subnet.
 
 - **Name**: `bastion-node`
-- **Amazon Machine Image**: `Amazon linux`
+- **Amazon Machine Image**: `Amazon Linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for later configuration.
+- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download `kafka-vpc-key-pair.pem` to your local machine for later configuration.
 - Network settings
 
     - **VPC**: `Kafka VPC`
     - **Subnet**: `bastion`
     - **Auto-assign public IP**: `Enable`
-    - **Security Group**: create a new security group allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
+    - **Security Group**: create a new security group to allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
 
 **2.2. Create broker nodes**
 
@@ -198,7 +198,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - Broker 1 in subnet `broker-usw2-az1`
 
     - **Name**: `broker-node1`
-    - **Amazon Machine Image**: `Amazon linux`
+    - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
     - **Key pair**: reuse `kafka-vpc-key-pair`
     - Network settings
@@ -214,7 +214,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - Broker 2 in subnet `broker-usw2-az2`
 
     - **Name**: `broker-node2`
-    - **Amazon Machine Image**: `Amazon linux`
+    - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
     - **Key pair**: reuse `kafka-vpc-key-pair`
     - Network settings
@@ -230,7 +230,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - Broker 3 in subnet `broker-usw2-az3`
 
     - **Name**: `broker-node3`
-    - **Amazon Machine Image**: `Amazon linux`
+    - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
     - **Key pair**: reuse `kafka-vpc-key-pair`
     - Network settings

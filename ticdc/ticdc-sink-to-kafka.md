@@ -367,8 +367,9 @@ Sample configuration:
 [scheduler]
 # The default value is "false". You can set it to "true" to enable this feature.
 enable-table-across-nodes = true
-# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
-region-threshold = 100000
+# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value. For the TiCDC new architecture, the default value is `10000`; for the TiCDC classic architecture, the default value is `100000`.
+
+region-threshold = 10000
 # When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
 # Note:
 # * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.

@@ -1,11 +1,11 @@
 ---
 title: Sink to Cloud Storage
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
 ---
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
+This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage are supported.
 
 > **Note:**
 >
@@ -20,7 +20,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depend on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -85,9 +85,49 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
+<div label="Azure Blob Storage">
+
+For **Azure Blob Storage**, you must configure the container and get a SAS token in the Azure portal first. Take the following steps:
+
+1. In the [Azure portal](https://portal.azure.com/), create a container to store changefeed data.
+
+    1. In the left navigation pane, click **Storage Accounts**, and then select your storage account.
+    2. In the storage account navigation menu, select **Data storage** > **Containers**, and then click **+ Container**.
+    3. Enter a name for your new container, set the anonymous access level (the recommended level is **Private**), and then click **Create**.
+
+2. Get the URL of the target container.
+
+    1. In the container list, select your target container.
+    2. Click **...** for the container, and then select **Container properties**.
+    3. Save the **URL** value for later use, for example `https://<storage_account>.blob.core.windows.net/<container>`.
+
+3. Generate a SAS token.
+
+    1. In the storage account navigation menu, select **Security + networking** > **Shared access signature**.
+    2. In the **Allowed services** section, select **Blob**.
+    3. In the **Allowed resource types** section, select **Container** and **Object**.
+    4. In the **Allowed permissions** section, select **Read**, **Write**, **Delete**, **List**, and **Create**.
+    5. Specify a validity period for the SAS token that is long enough to meet your needs.
+
+        > **Note:**
+        >
+        > - The changefeed continuously writes events, so ensure the SAS token has a sufficiently long validity period. For security, it is recommended to replace the token every six to twelve months.
+        > - The generated SAS token cannot be revoked, so set its validity period carefully.
+        > - To ensure continuous availability, regenerate and update the SAS token before it expires.
+
+    6. Click **Generate SAS and connection string**, and then save the **SAS token**.
+
+        ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
+
+4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Configure Destination** page, and fill in the following fields:
+
+    - **Blob URL**: enter the container URL obtained in step 2. You can optionally add a prefix.
+    - **SAS Token**: enter the generated SAS token obtained in step 3.
+
+</div>
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3, GCS, or Azure Blob Storage. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
