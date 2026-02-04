@@ -74,6 +74,7 @@ function readTocFiles() {
 function buildTocIndex(tocFiles) {
   const tocToPages = new Map(); // tocFile -> Set(relPathWithoutLeadingSlash)
   const anyTocPages = new Set();
+  const pageToTocs = new Map(); // pageRel -> Set(tocFile)
 
   for (const toc of tocFiles) {
     const tocAbs = path.join(ROOT, toc);
@@ -86,12 +87,16 @@ function buildTocIndex(tocFiles) {
       const rel = p.replace(/^\/+/, "");
       pages.add(rel);
       anyTocPages.add(rel);
+
+      const tocs = pageToTocs.get(rel) || new Set();
+      tocs.add(toc);
+      pageToTocs.set(rel, tocs);
     }
 
     tocToPages.set(toc, pages);
   }
 
-  return { tocToPages, anyTocPages };
+  return { tocToPages, anyTocPages, pageToTocs };
 }
 
 function expectedSetForTarget(targetRel, tocToPages, anyTocPages) {
@@ -152,7 +157,7 @@ function main() {
     process.exit(1);
   }
 
-  const { tocToPages, anyTocPages } = buildTocIndex(tocFiles);
+  const { tocToPages, anyTocPages, pageToTocs } = buildTocIndex(tocFiles);
   const buildScopePages = [...anyTocPages].sort((a, b) => a.localeCompare(b));
 
   const missingScopePages = [];
@@ -181,7 +186,10 @@ function main() {
         anyTocPages
       );
       if (!ok) {
-        violations.push({ sourceRel, url, targetRel, expectedLabel });
+        const sourceTocs = [...(pageToTocs.get(sourceRel) || new Set())].sort(
+          (a, b) => a.localeCompare(b)
+        );
+        violations.push({ sourceRel, url, targetRel, expectedLabel, sourceTocs });
       }
     }
   }
@@ -222,7 +230,14 @@ function main() {
         `=== Missing pages referenced by TOC*.md (${missingScopePages.length}) ===`
       );
       for (const p of missingScopePages.slice(0, maxMissing)) {
-        console.error(`- ${p}`);
+        const referencedBy = [...(pageToTocs.get(p) || new Set())].sort(
+          (a, b) => a.localeCompare(b)
+        );
+        if (referencedBy.length > 0) {
+          console.error(`- ${p} (referenced by: ${referencedBy.join(", ")})`);
+        } else {
+          console.error(`- ${p}`);
+        }
       }
       if (!verbose && missingScopePages.length > maxMissing) {
         console.error(
@@ -261,7 +276,17 @@ function main() {
           ? unique
           : unique.slice(0, maxLinksPerFile);
         for (const v of shown) {
-          console.error(`  - ${v.url} (expected: ${v.expectedLabel})`);
+          if (v.expectedLabel === "any TOC*.md") {
+            const hint =
+              v.sourceTocs && v.sourceTocs.length > 0
+                ? `; hint: add target to one of [${v.sourceTocs.join(", ")}]`
+                : "";
+            console.error(
+              `  - ${v.url} (expected: present in some TOC*.md${hint})`
+            );
+          } else {
+            console.error(`  - ${v.url} (expected: ${v.expectedLabel})`);
+          }
         }
         if (!verbose && unique.length > maxLinksPerFile) {
           console.error(
