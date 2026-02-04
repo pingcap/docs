@@ -12,7 +12,7 @@ This document describes how to create a database using SQL and various programmi
 
 Before creating a database, do the following:
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 
 ## What is database

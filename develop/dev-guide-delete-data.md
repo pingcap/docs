@@ -12,7 +12,7 @@ This document describes how to use the [DELETE](/sql-statements/sql-statement-de
 
 Before reading this document, you need to prepare the following:
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 - [Insert Data](/develop/dev-guide-insert-data.md)
 
