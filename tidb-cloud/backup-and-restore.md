@@ -180,6 +180,10 @@ To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the follo
 
 To export a specific backup to cloud storage, such as Amazon S3 or Google Cloud Storage, follow the steps for your target storage provider.
 
+> **Note:**
+>
+> Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for the export backups feature" in the **Description** field, and then click **Submit**.
+
 <SimpleTab>
 
 <div label="Amazon S3">

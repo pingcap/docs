@@ -9,7 +9,7 @@ This document describes how to create a {{{ .premium }}} instance in the [TiDB C
 
 > **Note:**
 >
-> - Currently, {{{ .premium }}} is only available upon request. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for {{{ .premium }}}" in the **Description** field and click **Submit**.
+> - Currently, {{{ .premium }}} is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .premium }}}" in the **Description** in the **Description** field, and then click **Submit**.
 > - To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Before you begin
@@ -43,7 +43,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
     > **Note:**
     >
-    > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of {{{ .premium }}}. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support** to apply for {{{ .premium }}}.
+    > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of {{{ .premium }}}. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for the private preview of {{{ .premium }}}" in the **Description** field, and then click **Submit**.
 
 2. On the **TiDB Instances** page, click **Create Instance**.
 3. Enter a name for your {{{ .premium }}} instance.
