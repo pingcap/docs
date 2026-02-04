@@ -62,15 +62,15 @@ pip install -r reqs.txt
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 3. Set environment variables according to the connection parameters as follows:
 
-```bash
-cat > .env <<EOF
-TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
-TIDB_PORT=4000
-TIDB_USERNAME={prefix}.root
-TIDB_PASSWORD={password}
-TIDB_DATABASE=pytidb_vector_search
-EOF
-```
+    ```bash
+    cat > .env <<EOF
+    TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
+    TIDB_PORT=4000
+    TIDB_USERNAME={prefix}.root
+    TIDB_PASSWORD={password}
+    TIDB_DATABASE=pytidb_vector_search
+    EOF
+    ```
 
 ### Step 5. Run the Streamlit app
 
