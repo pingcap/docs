@@ -25,7 +25,9 @@ With just a few lines of code, you can create a search system that understands b
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
+
+[`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

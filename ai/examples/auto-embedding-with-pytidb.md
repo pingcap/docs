@@ -7,7 +7,7 @@ summary: Automatically generate embeddings for your text data using built-in emb
 
 This example shows how to use the [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) feature with the [pytidb](https://github.com/pingcap/pytidb) client.
 
-1. Connect to TiDB using the PyTiDB client.
+1. Connect to TiDB using the `pytidb` client.
 2. Define a table with a VectorField configured for automatic embedding.
 3. Insert plain text data: embeddings are populated automatically in the background.
 4. Run vector searches with natural-language queries: embeddings are generated transparently.
@@ -19,7 +19,7 @@ This example shows how to use the [Auto Embedding](/ai/integrations/vector-searc
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

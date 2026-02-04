@@ -5,9 +5,9 @@ summary: Build a RAG application that combines document retrieval with language 
 
 # RAG Example
 
-This example demonstrates how to use PyTiDB to build a minimal RAG application.
+This example demonstrates how to use [`pytidb`](https://github.com/pingcap/pytidb) (the official Python SDK for TiDB) to build a minimal RAG application.
 
-The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [PyTiDB](https://github.com/pingcap/pytidb) to build the RAG pipeline.
+The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and `pytidb` to build the RAG pipeline.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/dfd85672-65ce-4a46-8dd2-9f77d826363e" alt="RAG application built with PyTiDB" width="600" />

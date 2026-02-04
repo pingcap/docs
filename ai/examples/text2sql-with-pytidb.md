@@ -5,7 +5,7 @@ summary: Convert natural language queries into SQL statements using AI models.
 
 # Text2SQL Example
 
-This demo shows how to build an AI-powered interface that converts natural-language questions into SQL queries and executes them against TiDB. Built with PyTiDB, OpenAI GPT, and Streamlit, it lets you query your database using plain English.
+This demo shows how to build an AI-powered interface that converts natural-language questions into SQL queries and executes them against TiDB. Built with [`pytidb`](https://github.com/pingcap/pytidb) (the official Python SDK for TiDB), OpenAI GPT, and Streamlit, it lets you query your database using plain English.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This demo shows how to build an AI-powered interface that converts natural-langu
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

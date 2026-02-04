@@ -16,7 +16,9 @@ This two-stage retrieval approach significantly improves both document relevance
 
 ## Basic usage
 
-PyTiDB provides the `Reranker` class that lets you use reranker models from multiple third-party providers.
+[`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
+
+`pytidb` provides the `Reranker` class that lets you use reranker models from multiple third-party providers.
 
 1. Create a reranker instance:
 

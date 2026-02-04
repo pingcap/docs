@@ -9,6 +9,10 @@ TiDB uses tables to organize and store collections of related data. It provides 
 
 A table can contain multiple columns of different data types. Supported data types include text, numbers, vectors, binary data (`BLOB`), JSON, and more.
 
+This document shows how to work with tables using [`pytidb`](https://github.com/pingcap/pytidb).
+
+`pytidb` is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
+
 > **Note:**
 >
 > For a complete working example, see the [basic example](https://github.com/pingcap/pytidb/tree/main/examples/basic) in our repository.
@@ -17,7 +21,7 @@ A table can contain multiple columns of different data types. Supported data typ
 
 ### Using TableModel
 
-PyTiDB provides a `TableModel` class that represents the schema of a table. The class is compatible with the [Pydantic model](https://docs.pydantic.dev/latest/concepts/models/) and enables you to define tables declaratively.
+`pytidb` provides a `TableModel` class that represents the schema of a table. The class is compatible with the [Pydantic model](https://docs.pydantic.dev/latest/concepts/models/) and enables you to define tables declaratively.
 
 In the following example, you create a table named `items` with these columns:
 
@@ -29,7 +33,7 @@ In the following example, you create a table named `items` with these columns:
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-After you [connect to the database](/ai/guides/connect.md) using PyTiDB and obtain a `client` instance, you can create a table with the `create_table` method.
+After you [connect to the database](/ai/guides/connect.md) using `pytidb` and obtain a `client` instance, you can create a table with the `create_table` method.
 
 ```python hl_lines="12"
 from pytidb.schema import TableModel, Field, VectorField

@@ -7,7 +7,7 @@ summary: Implement semantic search using vector embeddings to find similar conte
 
 This example demonstrates how to build a semantic search application using TiDB and local embedding models. It uses vector search to find similar items by meaning (not just keywords).
 
-The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [PyTiDB](https://github.com/pingcap/pytidb) to build the RAG pipeline.
+The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [`pytidb`](https://github.com/pingcap/pytidb) (the official Python SDK for TiDB) to build the RAG pipeline.
 
 <p align="center">
   <img width="700" alt="Semantic search with vector embeddings" src="https://github.com/user-attachments/assets/6d7783a5-ce9c-4dcc-8b95-49d5f0ca735a" />

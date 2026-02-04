@@ -1,11 +1,11 @@
 ---
 title: Connect to TiDB
-summary: Learn how to connect to a TiDB database using the PyTiDB client.
+summary: Learn how to connect to a TiDB database using the `pytidb` client.
 ---
 
 # Connect to TiDB
 
-This guide shows how to connect to a TiDB database using the PyTiDB client.
+This guide shows how to connect to a TiDB database using the `pytidb` client.
 
 ## Install the dependencies
 
@@ -46,7 +46,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint. The PyTiDB client **automatically** enables TLS for TiDB Cloud Starter clusters.
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint. The `pytidb` client **automatically** enables TLS for TiDB Cloud Starter clusters.
 
 </div>
 <div label="TiDB Self-Managed">

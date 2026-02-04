@@ -15,13 +15,15 @@ You can filter on both scalar fields and JSON fields. Filtering on JSON fields i
 >
 > For a complete example of filtering, see [Filtering Example](/ai/examples/filtering-with-pytidb.md).
 
-When using PyTiDB, you can apply filtering by passing the **filters** parameter to the `table.query()`, `table.delete()`, `table.update()`, and `table.search()` methods.
+[`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
+
+When using `pytidb`, you can apply filtering by passing the **filters** parameter to the `table.query()`, `table.delete()`, `table.update()`, and `table.search()` methods.
 
 The **filters** parameter supports two formats: [Dictionary filters](#dictionary-filters) and [SQL string filters](#sql-string-filters).
 
 ## Dictionary filters
 
-PyTiDB lets you define filter conditions using a Python dictionary with operators as the **filters** parameter.
+`pytidb` lets you define filter conditions using a Python dictionary with operators as the **filters** parameter.
 
 The dictionary structure of **filters** is as follows:
 

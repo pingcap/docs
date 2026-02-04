@@ -1,13 +1,13 @@
 ---
 title: Basic CRUD Operations
-summary: Learn fundamental PyTiDB operations including database connection, table creation, and data manipulation.
+summary: Learn fundamental `pytidb` operations including database connection, table creation, and data manipulation.
 ---
 
 # Basic CRUD Operations
 
-This example demonstrates basic CRUD (Create, Read, Update, Delete) operations using PyTiDB.
+This example demonstrates basic CRUD (Create, Read, Update, Delete) operations using [`pytidb`](https://github.com/pingcap/pytidb) (the official Python SDK for TiDB).
 
-1. Connect to TiDB using the PyTiDB client.
+1. Connect to TiDB using the `pytidb` client.
 2. Create a table with text, vector, and JSON columns.
 3. Run basic CRUD operations on the data.
 
@@ -18,7 +18,7 @@ This example demonstrates basic CRUD (Create, Read, Update, Delete) operations u
 
 ## How to run
 
-### Step 1. Clone the repository
+### Step 1. Clone the `pytidb` repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
