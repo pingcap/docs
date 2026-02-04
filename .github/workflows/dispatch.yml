@@ -22,6 +22,7 @@ on:
 
 jobs:
   trigger:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
