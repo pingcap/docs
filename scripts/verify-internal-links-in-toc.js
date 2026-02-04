@@ -134,6 +134,18 @@ function expectedSetForTarget(targetRel, tocToPages, anyTocPages) {
 function main() {
   process.chdir(ROOT);
 
+  const verbose =
+    process.env.VERBOSE_TOC === "1" ||
+    process.env.VERBOSE_TOC === "true" ||
+    process.env.VERBOSE === "1" ||
+    process.env.VERBOSE === "true";
+  const maxMissing =
+    Number.parseInt(process.env.TOC_MAX_MISSING || "", 10) || 50;
+  const maxFiles =
+    Number.parseInt(process.env.TOC_MAX_FILES || "", 10) || 30;
+  const maxLinksPerFile =
+    Number.parseInt(process.env.TOC_MAX_LINKS_PER_FILE || "", 10) || 10;
+
   const tocFiles = readTocFiles();
   if (tocFiles.length === 0) {
     console.error("TOC check error: no TOC*.md files found in repo root.");
@@ -175,32 +187,107 @@ function main() {
   }
 
   if (missingScopePages.length > 0) {
-    console.error(
-      `TOC check error: ${missingScopePages.length} pages referenced by TOC*.md do not exist on disk.`
-    );
-    for (const p of missingScopePages.slice(0, 50)) {
-      console.error(`- missing: ${p}`);
-    }
-    if (missingScopePages.length > 50) {
-      console.error(`- ... and ${missingScopePages.length - 50} more`);
-    }
+    // Printed below in a grouped summary.
   }
 
   if (violations.length > 0) {
-    console.error(
-      `TOC check error: ${violations.length} internal doc links point to targets not included in the expected TOC.`
-    );
-    for (const v of violations.slice(0, 100)) {
-      console.error(
-        `- ${v.sourceRel}: ${v.url} (target: ${v.targetRel}; expected: ${v.expectedLabel})`
-      );
-    }
-    if (violations.length > 100) {
-      console.error(`- ... and ${violations.length - 100} more`);
-    }
+    // Printed below in a grouped summary.
   }
 
   if (missingScopePages.length > 0 || violations.length > 0) {
+    const bySource = new Map();
+    for (const v of violations) {
+      const arr = bySource.get(v.sourceRel) || [];
+      arr.push(v);
+      bySource.set(v.sourceRel, arr);
+    }
+
+    console.error("TOC check report: FAILED");
+    console.error(
+      `- Scope: pages included by TOC*.md (excluding: ${[
+        ...EXCLUDED_TOC_FILES,
+      ].join(", ") || "(none)"})`
+    );
+    console.error(`- In-scope pages: ${buildScopePages.length}`);
+    console.error(
+      `- Missing in-scope pages (referenced by TOC but not on disk): ${missingScopePages.length}`
+    );
+    console.error(
+      `- TOC membership violations: ${violations.length} links in ${bySource.size} files`
+    );
+    console.error("");
+
+    if (missingScopePages.length > 0) {
+      console.error(
+        `=== Missing pages referenced by TOC*.md (${missingScopePages.length}) ===`
+      );
+      for (const p of missingScopePages.slice(0, maxMissing)) {
+        console.error(`- ${p}`);
+      }
+      if (!verbose && missingScopePages.length > maxMissing) {
+        console.error(
+          `- ... and ${missingScopePages.length - maxMissing} more (set TOC_MAX_MISSING or VERBOSE_TOC=1 to show more)`
+        );
+      }
+      console.error("");
+    }
+
+    if (violations.length > 0) {
+      console.error(
+        `=== TOC membership violations (grouped by source file) ===`
+      );
+
+      const sourceFiles = [...bySource.keys()].sort((a, b) =>
+        a.localeCompare(b)
+      );
+      const shownSourceFiles = verbose
+        ? sourceFiles
+        : sourceFiles.slice(0, maxFiles);
+      for (const sourceRel of shownSourceFiles) {
+        const list = bySource.get(sourceRel) || [];
+        // Deduplicate exact URLs to reduce noise.
+        const seen = new Set();
+        const unique = [];
+        for (const item of list) {
+          const key = item.url;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          unique.push(item);
+        }
+        unique.sort((a, b) => a.url.localeCompare(b.url));
+
+        console.error(sourceRel);
+        const shown = verbose
+          ? unique
+          : unique.slice(0, maxLinksPerFile);
+        for (const v of shown) {
+          console.error(`  - ${v.url} (expected: ${v.expectedLabel})`);
+        }
+        if (!verbose && unique.length > maxLinksPerFile) {
+          console.error(
+            `  - ... and ${unique.length - maxLinksPerFile} more (set TOC_MAX_LINKS_PER_FILE or VERBOSE_TOC=1)`
+          );
+        }
+        console.error("");
+      }
+
+      if (!verbose && sourceFiles.length > maxFiles) {
+        console.error(
+          `... and ${sourceFiles.length - maxFiles} more source files (set TOC_MAX_FILES or VERBOSE_TOC=1)`
+        );
+        console.error("");
+      }
+
+      console.error("=== How to fix ===");
+      console.error(
+        "- If the target page should be part of the site, add it to the expected TOC (per folder mapping)."
+      );
+      console.error(
+        "- Otherwise, update the link to point to an in-scope page that is included by TOC."
+      );
+      console.error("");
+    }
+
     process.exit(1);
   }
 
