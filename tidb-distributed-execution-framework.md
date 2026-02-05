@@ -113,7 +113,7 @@ As shown in the preceding diagram, the execution of tasks in the DXF is mainly h
 
 <CustomContent platform="tidb">
 
-* [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
+* [Execution Principles and Best Practices of DDL Statements](/best-practices/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">

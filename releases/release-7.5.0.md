@@ -110,7 +110,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
+    For more information, see [documentation](/best-practices/ddl-introduction.md#ddl-related-commands).
 
 * BR supports backing up and restoring statistics [#48008](https://github.com/pingcap/tidb/issues/48008) @[Leavrth](https://github.com/Leavrth)
 
