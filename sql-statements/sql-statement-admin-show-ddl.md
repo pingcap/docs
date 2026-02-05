@@ -71,7 +71,7 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
     - `add index /* txn-merge */`: transactional backfilling with a temporary index that gets merged with the original index when the backfilling is finished.
 - `SCHEMA_STATE`: the current state of the schema object that the DDL operates on. If `JOB_TYPE` is `ADD INDEX`, it is the state of the index; if `JOB_TYPE` is `ADD COLUMN`, it is the state of the column; if `JOB_TYPE` is `CREATE TABLE`, it is the state of the table. Common states include the following:
     - `none`: indicates that it does not exist. Generally, after the `DROP` operation or after the `CREATE` operation fails and rolls back, it will become the `none` state.
-    - `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For their specific meanings, see [How the Online DDL Asynchronous Change Works in TiDB](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb). As the intermediate state conversion is fast, these states are generally not visible during operation. Only when performing `ADD INDEX` operation can the `write reorganization` state be seen, indicating that index data is being added.
+    - `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. For their specific meanings, see [How the Online DDL Asynchronous Change Works in TiDB](/best-practices/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb). As the intermediate state conversion is fast, these states are generally not visible during operation. Only when performing `ADD INDEX` operation can the `write reorganization` state be seen, indicating that index data is being added.
     - `public`: indicates that it exists and is available to users. Generally, after `CREATE TABLE` and `ADD INDEX` (or `ADD COLUMN`) operations are completed, it will become the `public` state, indicating that the newly created table, column, and index can be read and written normally.
 - `SCHEMA_ID`: the ID of the database where the DDL operation is performed.
 - `TABLE_ID`: the ID of the table where the DDL operation is performed.
@@ -239,7 +239,7 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [DDL introduction](/ddl-introduction.md)
+* [DDL introduction](/best-practices/ddl-introduction.md)
 * [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)
 * [ADMIN PAUSE DDL](/sql-statements/sql-statement-admin-pause-ddl.md)
 * [ADMIN RESUME DDL](/sql-statements/sql-statement-admin-resume-ddl.md)
