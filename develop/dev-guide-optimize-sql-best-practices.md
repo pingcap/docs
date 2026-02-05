@@ -167,7 +167,7 @@ For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conf
 
 <CustomContent platform="tidb">
 
-See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
+See [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md).
 
 </CustomContent>
 

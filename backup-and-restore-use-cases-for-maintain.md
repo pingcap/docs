@@ -46,7 +46,7 @@ It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-clust
 
 > **Note:**
 >
-> It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
+> It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](https://docs.pingcap.com/releases/tidb-self-managed/) and make sure that the BR version is **consistent with** the TiDB version.
 
 ### TiKV hardware information
 
