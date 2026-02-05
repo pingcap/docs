@@ -43,8 +43,8 @@ MySQL maintains a series of [server status variables starting with `Com_`](https
 
 Do not use these variables. One common scenario is monitoring. TiDB is well observable and does not require querying from server status variables. For more information about monitoring services, refer to the following documentation:
 
-- TiDB Cloud Documentation: [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
-- TiDB Self-Managed Documentation: [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+- TiDB Cloud documentation: [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
+- TiDB Self-Managed documentation: [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
 ### TiDB distinguishes between `TIMESTAMP` and `DATETIME` in error messages
 
