@@ -39,8 +39,10 @@ The [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/
 
 You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/servicedesk/customer/portals> directly, or through the [TiDB Cloud console](https://tidbcloud.com/) in the following ways:
 
-- Click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
-- Click **Support** in the lower-left corner of [TiDB Cloud console](https://tidbcloud.com/), and then click **Create Ticket**.
+- Click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Support Tickets**.
+- Click **Support** in the lower-left corner of [TiDB Cloud console](https://tidbcloud.com/), and then do one of the following depending on your support plan:
+    - **Basic**:  in the **Account & Billing** area, click **Account/Billing issues**.
+    - **Developer**, **Enterprise**, or **Premium**:  in the **Talk to an expert** area, click **PingCAP Help Center**.
 - On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
 - On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
 

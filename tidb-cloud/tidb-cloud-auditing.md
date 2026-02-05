@@ -9,7 +9,7 @@ TiDB Cloud provides an audit logging feature that records user access activities
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Submit**.
+> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for database audit logging" in the **Description** field, and then click **Submit**.
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
@@ -36,7 +36,7 @@ TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster t
 
 > **Note:**
 >
-> For TiDB clusters deployed on AWS, you can choose to store audit log files in TiDB Cloud when enabling database audit logging. Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply to store audit log files in TiDB Cloud" in the **Description** field and click **Submit**.
+> For TiDB clusters deployed on AWS, you can choose to store audit log files in TiDB Cloud when enabling database audit logging. Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply to store audit log files in TiDB Cloud" in the **Description** field, and then click **Submit**.
 
 ### Enable audit logging for AWS
 

@@ -333,4 +333,4 @@ This document lists the feature support status for different TiDB Cloud plans, i
 
 > **Tip:**
 >
-> To request a feature in private preview, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in the feature name in the **Description** field and click **Submit**.
+> To request a feature in private preview, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for `<feature_name>`" in the **Description** field, and then click **Submit**.
