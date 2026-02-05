@@ -161,11 +161,10 @@ with connection:
 
 </SimpleTab>
 
-The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
-
 > **Note:**
 >
-> Like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
+> - The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
+> - Like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
 
 ## Performance considerations
 

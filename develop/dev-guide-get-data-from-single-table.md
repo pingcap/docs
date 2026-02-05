@@ -114,7 +114,7 @@ public class AuthorDAO {
 }
 ```
 
-After [connecting to TiDB using the JDBC driver](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can create a `Statement` object with `conn.createStatus()`, and then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
+After [connecting to TiDB using the JDBC driver](/develop/dev-guide-sample-application-java-jdbc.md), you can create a `Statement` object with `conn.createStatement()`, and then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
 
 The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
