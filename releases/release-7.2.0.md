@@ -146,7 +146,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v7.2/quick-sta
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
+    For more information, see [documentation](/best-practices/ddl-introduction.md#ddl-related-commands).
 
 ### Data migration
 
