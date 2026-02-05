@@ -143,9 +143,9 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> - Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
 >
-> Starting from version 8.5.5, if the system table data of the source cluster version does not have case-sensitivity conflicts (for example, simultaneous records of test.t1 and test.T1), you can specify the BR parameter --sys-check-collation during restoration. BR will then check the compatibility of the data across different collations. If compatible, backups from older versions can be successfully restored; otherwise, BR will return an error.
+> - Starting from v8.5.5, if the system tables in the cluster do not contain case-conflicting records (for example, both `test.t1` and `test.T1`), you can specify the BR parameter` --sys-check-collation` during restore. BR checks whether the system table data is compatible across different collations. If it is compatible, BR can successfully restore backups from earlier versions; otherwise, BR reports an error and stops the restore.
 
 The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
