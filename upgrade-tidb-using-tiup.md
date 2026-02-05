@@ -39,7 +39,7 @@ This document is targeted for the following upgrade paths:
     4. Upgrade the cluster to v6.5.12 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
 - When upgrading TiFlash from versions earlier than v6.3.0 to v6.3.0 and later versions, note that the CPU must support the AVX2 instruction set under the Linux AMD64 architecture and the ARMv8 instruction set architecture under the Linux ARM64 architecture. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
-- For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
+- For detailed compatibility changes of different versions, see the [Release Notes](https://docs.pingcap.com/releases/tidb-self-managed/) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
 - For clusters that upgrade from versions earlier than v5.3 to v5.3 or later versions, the default deployed Prometheus will upgrade from v2.8.1 to v2.27.1. Prometheus v2.27.1 provides more features and fixes a security issue. Compared with v2.8.1, alert time representation in v2.27.1 is changed. For more details, see [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06) for more details.
 
 ## Preparations
@@ -50,7 +50,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 Review compatibility changes in TiDB release notes. If any changes affect your upgrade, take actions accordingly.
 
-This following provides compatibility changes you need to know when you upgrade from v6.4.0 to the current version (v6.5.12). If you are upgrading from v6.3.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions in the corresponding [release notes](/releases/release-notes.md).
+This following provides compatibility changes you need to know when you upgrade from v6.4.0 to the current version (v6.5.12). If you are upgrading from v6.3.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions in the corresponding [release notes](https://docs.pingcap.com/releases/tidb-self-managed/).
 
 - TiDB v6.5.0 [compatibility changes](/releases/release-6.5.0.md#compatibility-changes) and [deprecated features](/releases/release-6.5.0.md#deprecated-feature)
 - TiDB v6.5.1 [compatibility changes](/releases/release-6.5.1.md#compatibility-changes)
@@ -292,7 +292,7 @@ Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade
 
 ### How to fix the issue that the upgrade gets stuck when upgrading to v6.2.0 or later versions?
 
-Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
+Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/best-practices/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
 
 - Upgrade gets stuck due to plugin loading
 
