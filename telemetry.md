@@ -9,7 +9,7 @@ By default, TiDB, TiUP and TiDB Dashboard collect usage information and share th
 
 ## What is shared?
 
-The following sections describe the shared usage information in detail for each component. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](/releases/release-notes.md).
+The following sections describe the shared usage information in detail for each component. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](https://docs.pingcap.com/releases/tidb-self-managed/).
 
 > **Note:**
 >
