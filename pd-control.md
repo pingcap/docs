@@ -987,7 +987,7 @@ The detection of slow-network nodes is enabled by default, and the scheduling is
     scheduler config evict-slow-store-scheduler set enable-network-slow-store true
     ```
 
-2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) configuration item to an appropriate value. Setting it to a smaller value increases the detection frequency, which helps detect network jitter more quickly, but it also consumes more network bandwidth and CPU resources.
+2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) configuration item to an appropriate value. Setting it to a smaller value increases the detection frequency, which helps detect network jitter more quickly, but it also consumes more network bandwidth and CPU resources. The value is `100ms` by default.
 
 #### Recovery time control
 
