@@ -11,10 +11,6 @@ As a relational database, TiDB supports a rich set of [SQL operators](https://do
 
 You can filter on both scalar fields and JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search.md#metadata-filtering) in vector search.
 
-> **Note:**
->
-> For a complete example of filtering, see [Filtering Example](/ai/examples/filtering-with-pytidb.md).
-
 [`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
 
 When using `pytidb`, you can apply filtering by passing the **filters** parameter to the `table.query()`, `table.delete()`, `table.update()`, and `table.search()` methods.

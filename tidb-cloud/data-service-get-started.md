@@ -120,7 +120,7 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
 
     > **Note:**
     >
-    > To try the AI capacity of TiDB Cloud, you need to allow PingCAP and Amazon Bedrock to use your code snippets for research and service improvement. For more information, see [Enable or disable AI to generate SQL queries]((/tidb-cloud/explore-data-with-chat2query.md)#enable-or-disable-ai-to-generate-sql-queries).
+    > To try the AI capacity of TiDB Cloud, you need to allow PingCAP and Amazon Bedrock to use your code snippets for research and service improvement. For more information, see [Enable or disable AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries).
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
 

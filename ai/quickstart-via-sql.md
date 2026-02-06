@@ -72,7 +72,7 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root
 
 ### Step 2. Create a vector table
 
-When creating a table, you can define a column as a [vector](/ai/vector-search-overview.md#vector-embedding) column by specifying the `VECTOR` data type.
+When creating a table, you can define a column as a [vector](/ai/concepts/vector-search-overview.md#vector-embedding) column by specifying the `VECTOR` data type.
 
 For example, to create a table `embedded_documents` with a three-dimensional `VECTOR` column, execute the following SQL statements using your MySQL CLI:
 
@@ -95,7 +95,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### Step 3. Insert vector embeddings to the table
 
-Insert three documents with their [vector embeddings](/ai/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
+Insert three documents with their [vector embeddings](/ai/concepts/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
 
 ```sql
 INSERT INTO embedded_documents
@@ -116,7 +116,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 >
 > This example simplifies the dimensions of the vector embeddings and uses only 3-dimensional vectors for demonstration purposes.
 >
-> In real-world applications, [embedding models](/ai/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
+> In real-world applications, [embedding models](/ai/concepts/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
 
 ### Step 4. Query the vector table
 

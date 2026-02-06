@@ -235,7 +235,7 @@ Note that vector data type columns stored in a table cannot be converted to othe
 
 ## Restrictions
 
-For restrictions on vector data types, see [Vector search limitations](/ai/reference/vector-search-limitations.md) and [Vector index restrictions](/ai/vector-search-index.md#restrictions).
+For restrictions on vector data types, see [Vector search limitations](/ai/reference/vector-search-limitations.md) and [Vector index restrictions](/ai/reference/vector-search-index.md#restrictions).
 
 ## MySQL compatibility
 

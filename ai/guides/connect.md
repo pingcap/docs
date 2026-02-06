@@ -141,5 +141,5 @@ After connecting to your TiDB database, you can explore the following guides to 
 
 - [Working with Tables](/ai/guides/tables.md): Learn how to define and manage tables in TiDB.
 - [Vector Search](/ai/guides/vector-search.md): Perform semantic search using vector embeddings.
-- [Full-Text search](/ai/guides/fulltext-search.md): Retrieve documents using keyword-based search.
+- [Full-Text Search](/ai/guides/vector-search-full-text-search-python.md): Retrieve documents using keyword-based search.
 - [Hybrid Search](/ai/guides/vector-search-hybrid-search.md): Combine vector and full-text search for more relevant results.
