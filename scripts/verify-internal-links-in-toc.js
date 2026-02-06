@@ -30,6 +30,8 @@ const PREFIX_TO_TOC = [
   { prefix: "best-practices/", toc: "TOC-best-practices.md" },
 ];
 
+const sortByLocale = (left, right) => left.localeCompare(right);
+
 function isExternalUrl(url = "") {
   return (
     url.startsWith("//") || url.includes("://") || url.startsWith("mailto:")
@@ -51,6 +53,22 @@ function isInternalDocLink(url = "") {
   return p.endsWith(".md") || p.endsWith(".mdx");
 }
 
+function toTargetRel(url = "") {
+  return stripQueryAndHash(url).path.replace(/^\/+/, "");
+}
+
+function extractInternalDocTargetsFromUrls(urls = []) {
+  return urls.filter((url) => isInternalDocLink(url)).map((url) => toTargetRel(url));
+}
+
+function extractInternalDocTargetsFromMarkdownFile(absPath) {
+  return extractInternalDocTargetsFromUrls(extractUrlsFromMarkdownFile(absPath));
+}
+
+function sortedValues(values = []) {
+  return [...values].sort(sortByLocale);
+}
+
 function extractUrlsFromMarkdownFile(absPath) {
   const buf = fs.readFileSync(absPath);
   const ast = generateMdAstFromFile(buf);
@@ -67,7 +85,7 @@ function readTocFiles() {
   const tocFiles = glob
     .sync("TOC*.md", { cwd: ROOT, nodir: true })
     .filter((f) => !EXCLUDED_TOC_FILES.has(f))
-    .sort((a, b) => a.localeCompare(b));
+    .sort(sortByLocale);
   return tocFiles;
 }
 
@@ -76,30 +94,30 @@ function buildTocIndex(tocFiles) {
   const anyTocPages = new Set();
   const pageToTocs = new Map(); // pageRel -> Set(tocFile)
 
-  for (const toc of tocFiles) {
+  tocFiles.forEach((toc) => {
     const tocAbs = path.join(ROOT, toc);
-    const urls = extractUrlsFromMarkdownFile(tocAbs);
     const pages = new Set();
 
-    for (const url of urls) {
-      if (!isInternalDocLink(url)) continue;
-      const { path: p } = stripQueryAndHash(url);
-      const rel = p.replace(/^\/+/, "");
-      pages.add(rel);
-      anyTocPages.add(rel);
+    extractInternalDocTargetsFromMarkdownFile(tocAbs).forEach((rel) => {
+        pages.add(rel);
+        anyTocPages.add(rel);
 
-      const tocs = pageToTocs.get(rel) || new Set();
-      tocs.add(toc);
-      pageToTocs.set(rel, tocs);
-    }
+        const tocs = pageToTocs.get(rel) || new Set();
+        tocs.add(toc);
+        pageToTocs.set(rel, tocs);
+    });
 
     tocToPages.set(toc, pages);
-  }
+  });
 
-  return { tocToPages, anyTocPages, pageToTocs };
+  const cloudTocPages = new Set(
+    CLOUD_TOC_FILES.flatMap((toc) => [...(tocToPages.get(toc) || new Set())])
+  );
+
+  return { tocToPages, anyTocPages, pageToTocs, cloudTocPages };
 }
 
-function expectedSetForTarget(targetRel, tocToPages, anyTocPages) {
+function expectedSetForTarget(targetRel, tocToPages, anyTocPages, cloudTocPages) {
   if (
     targetRel === "_index.md" ||
     targetRel.endsWith("/_index.md") ||
@@ -113,23 +131,18 @@ function expectedSetForTarget(targetRel, tocToPages, anyTocPages) {
     targetRel.startsWith("tidb-cloud/") &&
     !targetRel.startsWith("tidb-cloud/releases/")
   ) {
-    const union = new Set();
-    for (const toc of CLOUD_TOC_FILES) {
-      const set = tocToPages.get(toc);
-      if (!set) continue;
-      for (const p of set) union.add(p);
-    }
     return {
-      ok: union.has(targetRel),
+      ok: cloudTocPages.has(targetRel),
       expectedLabel: "any TiDB Cloud TOC",
     };
   }
 
-  for (const { prefix, toc } of PREFIX_TO_TOC) {
-    if (targetRel.startsWith(prefix)) {
-      const set = tocToPages.get(toc) || new Set();
-      return { ok: set.has(targetRel), expectedLabel: toc };
-    }
+  const matchedPrefix = PREFIX_TO_TOC.find(({ prefix }) =>
+    targetRel.startsWith(prefix)
+  );
+  if (matchedPrefix) {
+    const set = tocToPages.get(matchedPrefix.toc) || new Set();
+    return { ok: set.has(targetRel), expectedLabel: matchedPrefix.toc };
   }
 
   // Default: the target appears in any TOC*.md
@@ -157,42 +170,40 @@ function main() {
     process.exit(1);
   }
 
-  const { tocToPages, anyTocPages, pageToTocs } = buildTocIndex(tocFiles);
-  const buildScopePages = [...anyTocPages].sort((a, b) => a.localeCompare(b));
+  const { tocToPages, anyTocPages, pageToTocs, cloudTocPages } =
+    buildTocIndex(tocFiles);
+  const buildScopePages = sortedValues(anyTocPages);
 
   const missingScopePages = [];
   const violations = [];
 
-  for (const sourceRel of buildScopePages) {
+  buildScopePages.forEach((sourceRel) => {
     const sourceAbs = path.join(ROOT, sourceRel);
     if (!fs.existsSync(sourceAbs)) {
       missingScopePages.push(sourceRel);
-      continue;
+      return;
     }
 
-    const urls = extractUrlsFromMarkdownFile(sourceAbs);
-    for (const url of urls) {
-      if (!isInternalDocLink(url)) continue;
-      const { path: p } = stripQueryAndHash(url);
-      const targetRel = p.replace(/^\/+/, "");
-
-      if (SPECIAL_IMPLICIT_TARGETS.has(path.basename(targetRel))) {
-        continue;
-      }
-
-      const { ok, expectedLabel } = expectedSetForTarget(
-        targetRel,
-        tocToPages,
-        anyTocPages
-      );
-      if (!ok) {
-        const sourceTocs = [...(pageToTocs.get(sourceRel) || new Set())].sort(
-          (a, b) => a.localeCompare(b)
+    extractInternalDocTargetsFromMarkdownFile(sourceAbs)
+      .filter((targetRel) =>
+        !SPECIAL_IMPLICIT_TARGETS.has(path.basename(targetRel))
+      )
+      .forEach((targetRel) => {
+        const { ok, expectedLabel } = expectedSetForTarget(
+          targetRel,
+          tocToPages,
+          anyTocPages,
+          cloudTocPages
         );
-        violations.push({ sourceRel, url, targetRel, expectedLabel, sourceTocs });
-      }
-    }
-  }
+        if (!ok) {
+          violations.push({
+            sourceRel,
+            targetRel,
+            expectedLabel,
+          });
+        }
+      });
+  });
 
   if (missingScopePages.length > 0) {
     // Printed below in a grouped summary.
@@ -203,12 +214,16 @@ function main() {
   }
 
   if (missingScopePages.length > 0 || violations.length > 0) {
-    const bySource = new Map();
-    for (const v of violations) {
-      const arr = bySource.get(v.sourceRel) || [];
-      arr.push(v);
-      bySource.set(v.sourceRel, arr);
-    }
+    const byTarget = violations.reduce((groupedMap, violation) => {
+      const current = groupedMap.get(violation.targetRel) || {
+        targetRel: violation.targetRel,
+        expectedLabel: violation.expectedLabel,
+        sourceFiles: new Set(),
+      };
+      current.sourceFiles.add(violation.sourceRel);
+      groupedMap.set(violation.targetRel, current);
+      return groupedMap;
+    }, new Map());
 
     console.error("TOC check report: FAILED");
     console.error(
@@ -221,7 +236,7 @@ function main() {
       `- Missing in-scope pages (referenced by TOC but not on disk): ${missingScopePages.length}`
     );
     console.error(
-      `- TOC membership violations: ${violations.length} links in ${bySource.size} files`
+      `- TOC membership violations: ${violations.length} links across ${byTarget.size} targets`
     );
     console.error("");
 
@@ -230,17 +245,15 @@ function main() {
         `=== Missing pages referenced by TOC*.md (${missingScopePages.length}) ===`
       );
       console.error("");
-      for (const p of missingScopePages.slice(0, maxMissing)) {
-        const referencedBy = [...(pageToTocs.get(p) || new Set())].sort(
-          (a, b) => a.localeCompare(b)
-        );
+      missingScopePages.slice(0, maxMissing).forEach((p) => {
+        const referencedBy = sortedValues(pageToTocs.get(p) || new Set());
         if (referencedBy.length > 0) {
           console.error(`- ${p}`);
           console.error(`  referenced by: ${referencedBy.join(", ")}`);
         } else {
           console.error(`- ${p}`);
         }
-      }
+      });
       if (!verbose && missingScopePages.length > maxMissing) {
         console.error(
           `- ... and ${missingScopePages.length - maxMissing} more (set TOC_MAX_MISSING or VERBOSE_TOC=1 to show more)`
@@ -250,63 +263,58 @@ function main() {
     }
 
     if (violations.length > 0) {
-      console.error(
-        `=== TOC membership violations (grouped by source file) ===`
-      );
+      console.error(`=== TOC membership violations (grouped by target) ===`);
       console.error("");
 
-      const sourceFiles = [...bySource.keys()].sort((a, b) =>
-        a.localeCompare(b)
-      );
-      const shownSourceFiles = verbose
-        ? sourceFiles
-        : sourceFiles.slice(0, maxFiles);
-      let fileIndex = 0;
-      for (const sourceRel of shownSourceFiles) {
-        if (fileIndex > 0) {
+      const targets = [...byTarget.values()].sort((a, b) => {
+        const diff = b.sourceFiles.size - a.sourceFiles.size;
+        if (diff !== 0) return diff;
+        return sortByLocale(a.targetRel, b.targetRel);
+      });
+      const shownTargets = verbose ? targets : targets.slice(0, maxFiles);
+
+      shownTargets.forEach((item, index) => {
+        if (index > 0) {
           console.error("");
         }
-        const list = bySource.get(sourceRel) || [];
-        // Deduplicate exact URLs to reduce noise.
-        const seen = new Set();
-        const unique = [];
-        for (const item of list) {
-          const key = item.url;
-          if (seen.has(key)) continue;
-          seen.add(key);
-          unique.push(item);
-        }
-        unique.sort((a, b) => a.url.localeCompare(b.url));
 
-        console.error(`${sourceRel} (${unique.length})`);
-        const shown = verbose
-          ? unique
-          : unique.slice(0, maxLinksPerFile);
-        for (const v of shown) {
-          if (v.expectedLabel === "any TOC*.md") {
-            const hint =
-              v.sourceTocs && v.sourceTocs.length > 0
-                ? `; hint: add target to one of [${v.sourceTocs.join(", ")}]`
-                : "";
-            console.error(
-              `  - ${v.url} (expected: present in some TOC*.md${hint})`
-            );
+        const targetUrl = `/${item.targetRel}`;
+        const targetTocs = sortedValues(pageToTocs.get(item.targetRel) || new Set());
+        const sourceFiles = sortedValues(item.sourceFiles);
+
+        console.error(`Target: ${targetUrl}`);
+        if (targetTocs.length === 0) {
+          if (item.expectedLabel === "any TOC*.md") {
+            console.error(`Issue: Missing from TOC index`);
+            console.error(`Expected TOC: any TOC*.md`);
           } else {
-            console.error(`  - ${v.url} (expected: ${v.expectedLabel})`);
+            console.error(`Issue: Missing from TOC index`);
+            console.error(`Expected TOC: ${item.expectedLabel}`);
           }
+        } else {
+          console.error(`Issue: TOC mismatch`);
+          console.error(`Current TOC: ${targetTocs.join(", ")}`);
+          console.error(`Expected TOC: ${item.expectedLabel}`);
         }
-        if (!verbose && unique.length > maxLinksPerFile) {
+
+        console.error(`Referenced in (${sourceFiles.length}):`);
+        const shownFiles = verbose
+          ? sourceFiles
+          : sourceFiles.slice(0, maxLinksPerFile);
+        shownFiles.forEach((sourceRel) => {
+          console.error(`  - ${sourceRel}`);
+        });
+        if (!verbose && sourceFiles.length > maxLinksPerFile) {
           console.error(
-            `  - ... and ${unique.length - maxLinksPerFile} more (set TOC_MAX_LINKS_PER_FILE or VERBOSE_TOC=1)`
+            `  - ... and ${sourceFiles.length - maxLinksPerFile} more (set TOC_MAX_LINKS_PER_FILE or VERBOSE_TOC=1)`
           );
         }
-        fileIndex += 1;
-      }
+      });
 
-      if (!verbose && sourceFiles.length > maxFiles) {
+      if (!verbose && targets.length > maxFiles) {
         console.error("");
         console.error(
-          `... and ${sourceFiles.length - maxFiles} more source files (set TOC_MAX_FILES or VERBOSE_TOC=1)`
+          `... and ${targets.length - maxFiles} more target links (set TOC_MAX_FILES or VERBOSE_TOC=1)`
         );
       }
 
