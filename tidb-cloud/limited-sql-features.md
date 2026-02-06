@@ -142,6 +142,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_ddl_reorg_batch_size` | No limitation | Read-only [^10] |
 | `tidb_ddl_reorg_priority` | No limitation | Read-only [^10] |
 | `tidb_ddl_reorg_worker_cnt` | No limitation | Read-only [^10] |
+| `tidb_dml_type` | No limitation | Read-only [^10] |
 | `tidb_enable_1pc` | No limitation | Read-only [^10] |
 | `tidb_enable_async_commit` | No limitation | Read-only [^10] |
 | `tidb_enable_auto_analyze` | No limitation | Read-only [^10] |
