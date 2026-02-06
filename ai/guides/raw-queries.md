@@ -59,7 +59,7 @@ The `to_rows()` method returns a list of tuples, where each tuple represents one
 client.query("SHOW TABLES;").to_rows()
 ```
 
-#### As list of dict
+#### As a list of dictionaries
 
 The `to_list()` method converts the query result to a list of dictionaries.
 

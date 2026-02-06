@@ -18,7 +18,7 @@ Because the OpenAI Embedding API is widely used, many providers offer compatible
 - [Ollama](https://ollama.com/)
 - [vLLM](https://vllm.ai/)
 
-TiDB AI SDK provides the `EmbeddingFunction` class to integrate with OpenAI-compatible embedding services.
+The TiDB Python SDK [pytidb](https://github.com/pingcap/pytidb) provides the `EmbeddingFunction` class to integrate with OpenAI-compatible embedding services.
 
 ## Usage example
 

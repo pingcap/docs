@@ -87,7 +87,7 @@ EOF
 streamlit run main.py
 ```
 
-Open the browser and visit `http://localhost:8501`
+Open your browser and visit `http://localhost:8501`.
 
 ## Troubleshooting
 

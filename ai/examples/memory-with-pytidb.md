@@ -74,7 +74,7 @@ Choose one of the following options:
 streamlit run app.py
 ```
 
-Visit `http://localhost:8501` in your browser and follow [Interact with memory in Web Application](https://github.com/pingcap/pytidb/tree/main/examples/memory/#interact-with-memory-in-web-application) to start using the memory-enabled AI assistant.
+Open your browser, visit `http://localhost:8501`, and then follow [Interact with memory in Web Application](https://github.com/pingcap/pytidb/tree/main/examples/memory/#interact-with-memory-in-web-application) to start using the memory-enabled AI assistant.
 
 ### Option 2. Run the command-line application
 
@@ -111,7 +111,7 @@ You: Hello, I am Mini256.
 AI: Hello, Mini256! How can I assist you today?
 You: I am working at PingCAP.
 AI: That's great to hear, Mini256! PingCAP is known for its work on distributed databases, particularly TiDB. How's your experience been working there?
-You: I am developing pytidb (A Python SDK for TiDB) which helps developers easy to connect to TiDB.
+You: I am developing pytidb (A Python SDK for TiDB) which helps developers easily connect to TiDB.
 AI: That sounds like a great project, Mini256! Developing a Python SDK for TiDB can make it much easier for developers to integrate with TiDB and interact with it using Python. If you need any advice on best practices, libraries to use, or specific features to implement, feel free to ask!
 You: exit
 Goodbye!

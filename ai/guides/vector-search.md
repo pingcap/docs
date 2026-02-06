@@ -13,7 +13,7 @@ Vector search uses semantic similarity to help you find the most relevant record
 
 ## Basic usage
 
-This section shows you how to use vector search in your application in just a few steps. Before you start, you need to [connect to the database](/ai/guides/connect.md).
+This section shows how to use vector search in your application in just a few steps. Before you start, you need to [connect to the database](/ai/guides/connect.md).
 
 ### Step 1. Create a table with a vector field
 
@@ -323,9 +323,9 @@ results = (
 
 > **Note:**
 >
-> When using a vector index, if the final `limit` is very small, the accuracy of the results may decrease. You can use the `.num_candidate()` method to control how many candidates to retrieve from the vector index during the vector search phase, without changing the `limit` parameter.
+> When using a vector index, if the final `limit` is very small, the accuracy of the results might decrease. You can use the `.num_candidate()` method to control how many candidates to retrieve from the vector index during the vector search phase, without changing the `limit` parameter.
 
-> A higher `num_candidate` value generally improves recall but may reduce query performance. Adjust this value based on your dataset and accuracy requirements.
+> A higher `num_candidate` value generally improves recall but might reduce query performance. Adjust this value based on your dataset and accuracy requirements.
 
 </div>
 <div label="SQL" value="sql">

@@ -86,7 +86,7 @@ If you prefer to use a connection string (database URL), you can follow the form
 You can [create a TiDB Cloud Starter cluster](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console as follows:
 
 1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed with the connection parameters listed.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with the connection parameters listed.
 3. Copy the connection parameters and construct a connection string in the following format:
 
 ```python title="main.py"

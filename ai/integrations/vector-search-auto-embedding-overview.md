@@ -28,8 +28,8 @@ The following example shows how to use Auto Embedding with cosine distance to pe
 
 ```sql
 -- Create a table with auto-embedding
--- The dimension of the vector column must match the dimension of the embedding model,
--- otherwise TiDB returns an error when inserting data.
+-- The dimension of the vector column must match the dimension of the embedding model;
+-- Otherwise, TiDB returns an error when inserting data.
 CREATE TABLE documents (
     id INT PRIMARY KEY AUTO_INCREMENT,
     content TEXT,
@@ -122,7 +122,7 @@ You can also use open-source embedding models through the following inference se
 
 | Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models          |
 | --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | --------------------------------- |
-| Hugging Face Inference | [HuggingFace Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
+| Hugging Face Inference | [Hugging Face Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
 | NVIDIA NIM            | [NVIDIA NIM Embeddings](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 
 &#8203;<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. Currently, these hosted models are free to use, but certain usage limits might be applied to keep them available to everyone.

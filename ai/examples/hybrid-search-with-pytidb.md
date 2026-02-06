@@ -72,7 +72,7 @@ If you want to check the demo with a web UI, you can run the following command:
 streamlit run app.py
 ```
 
-Open your browser and visit `http://localhost:8501`
+Open your browser and visit `http://localhost:8501`.
 
 ### Option 2. Run the demo script
 

@@ -5,12 +5,12 @@ summary: Learn how to use reranking in your application.
 
 # Reranking
 
-Reranking is a technique used to improve the relevance and accuracy of search results by re-evaluating and reordering them using a dedicated rerank model.
+Reranking is a technique used to improve the relevance and accuracy of search results by re-evaluating and reordering them using a dedicated reranking model.
 
 The search process works in two stages:
 
-1. **Initial Retrieval**: Vector search identifies the top `k` most similar documents from the collection
-2. **Reranking**: A reranking model evaluates these `k` documents based on the relevance between the query and the documents and reorders them to produce the final top `n` results (where `n` ≤ `k`)
+1. **Initial Retrieval**: Vector search identifies the top `k` most similar documents from the collection.
+2. **Reranking**: A reranking model evaluates these `k` documents based on the relevance between the query and the documents and reorders them to produce the final top `n` results (where `n` ≤ `k`).
 
 This two-stage retrieval approach significantly improves both document relevance and accuracy.
 
@@ -18,7 +18,7 @@ This two-stage retrieval approach significantly improves both document relevance
 
 [`pytidb`](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently.
 
-`pytidb` provides the `Reranker` class that lets you use reranker models from multiple third-party providers.
+`pytidb` provides the `Reranker` class that lets you use reranking models from multiple third-party providers.
 
 1. Create a reranker instance:
 
@@ -36,7 +36,7 @@ This two-stage retrieval approach significantly improves both document relevance
 
 ## Supported providers
 
-Here are some examples to use reranker models from third-party providers.
+The following examples show how to use reranking models from third-party providers.
 
 ### Jina AI
 

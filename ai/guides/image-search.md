@@ -3,7 +3,7 @@ title: Image Search
 summary: Learn how to use image search in your application.
 ---
 
-# Image search
+# Image Search
 
 **Image search** helps you find similar images by comparing their visual content, not just text or metadata. This feature is useful for e-commerce, content moderation, digital asset management, and any scenario where you need to search for or deduplicate images based on appearance.
 

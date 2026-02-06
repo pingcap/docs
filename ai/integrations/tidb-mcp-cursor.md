@@ -15,7 +15,7 @@ For one-click installation, click the following button:
 
 Before you begin, ensure you have the following:
 
-- **Cursor Editor**: Download and install Cursor from [cursor.com](https://cursor.com).
+- **Cursor**: Download and install Cursor from [cursor.com](https://cursor.com).
 - **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
 - **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
@@ -63,4 +63,4 @@ If you encounter issues installing the TiDB MCP Server, check the MCP logs in Cu
 
 1. Click **View** > **Output** in the main menu at the top of the editor.
 2. Select **MCP** from the dropdown menu in the **Output** panel.
-3. If you see errors like `[error] Could not start MCP server tidb-mcp-server: Error: spawn uvx ENOENT`, it means the `uvx` command may not exist in your `$PATH` system variable. For macOS users, you can install `uvx` by running `brew install uv`.
+3. If you see errors like `[error] Could not start MCP server tidb-mcp-server: Error: spawn uvx ENOENT`, it means the `uvx` command might not exist in your system `$PATH` environment variable. For macOS users, you can install `uvx` by running `brew install uv`.

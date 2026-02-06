@@ -26,7 +26,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 ## Get started
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
 
 - AWS: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 
@@ -70,7 +70,7 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
 
-- `STANDARD`: fast, works for English contents, splitting words by spaces and punctuation.
+- `STANDARD`: fast, works for English content, splitting words by spaces and punctuation.
 
 - `MULTILINGUAL`: supports multiple languages, including English, Chinese, Japanese, and Korean.
 

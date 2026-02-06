@@ -26,5 +26,5 @@ with client.session() as session:
 
 ## See also
 
-- [TiDB Develop Guide - Transaction](https://docs.pingcap.com/tidbcloud/dev-guide-transaction-overview/)
-- [TiDB Docs- SQL Reference - Transactions](https://docs.pingcap.com/tidbcloud/transaction-overview/)
+- [TiDB Developer Guide - Transactions](/develop/dev-guide-transaction-overview.md)
+- [TiDB Documentation - SQL Reference - Transactions](/transaction-overview.md)
