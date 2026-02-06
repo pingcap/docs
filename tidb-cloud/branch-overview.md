@@ -43,6 +43,8 @@ Currently, TiDB Cloud branches are in beta and free of charge.
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a cluster with spending limit > 0, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
+- Branches are intended for short-term feature development and functional testing. Because branches lack auto-scaling capability, they are not suitable for performance testing.
+
 - If your cluster has tables with TiFlash replicas, these replicas will be temporarily unavailable in the new branch after you create it, because TiFlash needs to rebuild the replica data.
 
 - When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
