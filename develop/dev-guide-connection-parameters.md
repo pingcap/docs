@@ -8,7 +8,13 @@ aliases: ['/tidb/stable/dev-guide-connection-parameters/','/tidb/dev/dev-guide-c
 
 This document describes how to configure connection pools and connection parameters when you use a driver or ORM framework to connect to TiDB.
 
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md#connection-pool)
+> **Tip:**
+>
+> In this document, the following sections are excerpted from [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md):
+>
+> - [Configure the number of connections](#configure-the-number-of-connections)
+> - [Probe configuration](#probe-configuration)
+> - [Connection parameters](#connection-parameters)
 
 ## Connection pool
 

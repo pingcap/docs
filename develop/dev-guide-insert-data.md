@@ -238,15 +238,15 @@ The following are the recommended tools for bulk-insert:
 <SimpleTab groupId="platform">
 <div label="TiDB Cloud" value="tidb-cloud">
 
-- Data export: [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). You can export MySQL or TiDB data to local or Amazon S3. For a TiDB Cloud Starter or Essential cluster, you can also use the [Export](/tidb-cloud/serverless-export.md) feature to export data more efficiently.
-- Data import: [Import](/tidb-cloud/import-sample-data.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can import **Dumpling** exported data, import a local **CSV** file, or [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
-- Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
-- Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
+- Data export: use [Dumpling](/dumpling-overview.md) to export MySQL or TiDB data to local or your cloud storage. For a TiDB Cloud Starter or Essential cluster, you can also use the [Export](/tidb-cloud/serverless-export.md) feature in the [TiDB Cloud console](https://tidbcloud.com/) to export data more efficiently.
+- Data import: use the [Import](/tidb-cloud/import-sample-data.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). You can import Dumpling exported data, import a local CSV file, or [import CSV files from cloud storage into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+- Data replication: use the [TiDB Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). You can replicate MySQL-compatible databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
+- Data backup and restore: use the [Backup](/tidb-cloud/backup-and-restore.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). Compared to Dumpling, backup and restore is more suitable for big data scenario.
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-- Data export: [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). You can export MySQL or TiDB data to local or Amazon S3.
+- Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
 - Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or Amazon S3 cloud disk.
 - Data replication: [TiDB Data Migration](/dm/dm-overview.md). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.

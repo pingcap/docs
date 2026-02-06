@@ -20,12 +20,10 @@ By default, TiDB only reads and writes data on the leader of the same Region. Wh
 
 You can visually analyze whether your application has a hotspot Region by doing one of the following:
 
-- For TiDB Cloud, use [Key Visualizer in the TiDB Cloud console](/tidb-cloud/tune-performance.md#key-visualizer) to analyze the hotspot Region.
-- For TiDB Self-Managed, use [Key Visualizer in TiDB Dashboard](/dashboard/dashboard-key-visualizer.md) to analyze the hotspot Region.
+- TiDB Cloud: navigate to the [Key Visualizer in the TiDB Cloud console](/tidb-cloud/tune-performance.md#key-visualizer), and then check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+- TiDB Self-Managed: navigate to the [Key Visualizer in TiDB Dashboard](/dashboard/dashboard-key-visualizer.md), and then check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
 
-You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
-
-For more information about handling hotspot, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+If hotspot issues do exist, you can troubleshoot them by referring to [Handle TiDB Hotspot Issues](/troubleshoot-hot-spot-issues.md), which helps to avoid hotspot generation at the application level.
 
 If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
 
