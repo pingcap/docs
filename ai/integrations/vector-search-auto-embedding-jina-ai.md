@@ -42,7 +42,7 @@ For a full list of available models, see [Jina AI Documentation](https://jina.ai
 
 ## Usage example
 
-This example shows how to create a vector table, insert documents, and run similarity search using Jina AI embedding models.
+This example shows how to create a vector table, insert documents, and run a similarity search using Jina AI embedding models.
 
 ### Step 1: Connect to the database
 

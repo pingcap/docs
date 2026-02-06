@@ -83,7 +83,7 @@ tar -xzf oxford_pets.tar.gz -C oxford_pets
 streamlit run app.py
 ```
 
-Open `http://localhost:8501` in your browser.
+Open your browser and visit `http://localhost:8501`.
 
 ### Step 6. Load data
 
@@ -93,9 +93,9 @@ Or if you want to load all the data in the Oxford Pets dataset, click the **Load
 
 ### Step 7. Search
 
-1. Select the **Search type** in the sidebar
-2. Input a text description of the pet you're looking for, or upload a photo of a dog or cat
-3. Click the **Search** button
+1. Select the **Search type** in the sidebar.
+2. Input a text description of the pet you're looking for, or upload a photo of a dog or cat.
+3. Click the **Search** button.
 
 ## Related resources
 

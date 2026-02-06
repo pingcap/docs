@@ -5,7 +5,7 @@ summary: Learn how to use auto embedding in your application.
 
 # Auto Embedding
 
-Auto embedding automatically generates vector embeddings for your text data.
+The Auto Embedding feature automatically generates vector embeddings for your text data.
 
 > **Note:**
 >

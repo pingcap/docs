@@ -147,7 +147,7 @@ The TiDB MCP Server provides the following actions (tools) to MCP clients. You c
 
     * `sql_stmt`: SQL query statement (string, required)
 
-- `db_execute` - Execute data modification SQL statements
+- `db_execute` - Execute SQL statements (DML or DDL)
 
     * `sql_stmts`: A single SQL statement or an array of SQL statements (string or array, required)
 

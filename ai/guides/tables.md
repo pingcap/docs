@@ -318,7 +318,7 @@ table.update(
     values={
         "content": "TiDB Cloud Starter is a fully managed, auto-scaling cloud database service",
         "embedding": [0.1, 0.2, 0.4],
-        "meta": {"category": "dbass"},
+        "meta": {"category": "dbaas"},
     },
     filters={
         "id": 1
@@ -338,7 +338,7 @@ UPDATE items
 SET
     content = 'TiDB Cloud Starter is a fully managed, auto-scaling cloud database service',
     embedding = '[0.1, 0.2, 0.4]',
-    meta = '{"category": "dbass"}'
+    meta = '{"category": "dbaas"}'
 WHERE
     id = 1;
 ```

@@ -19,7 +19,7 @@ This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](ht
 
 ## Prerequisites
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
 
 - AWS: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 
@@ -179,7 +179,7 @@ Parameters:
 
 ### Weighted Score Fusion
 
-Weighted Score Fusion combines vector search and full-text search scores using weighted sum:
+Weighted Score Fusion combines vector search and full-text search scores using a weighted sum:
 
 ```python
 final_score = vs_weight * vector_score + fts_weight * fulltext_score

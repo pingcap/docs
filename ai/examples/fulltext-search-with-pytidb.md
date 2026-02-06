@@ -60,7 +60,7 @@ EOF
 streamlit run app.py
 ```
 
-Open the browser and visit `http://localhost:8501`.
+Open your browser and visit `http://localhost:8501`.
 
 ## Related resources
 

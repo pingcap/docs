@@ -3,7 +3,7 @@ title: Get started with Claude Desktop and TiDB MCP Server
 summary: This guide shows you how to configure the TiDB MCP Server in Claude Desktop.
 ---
 
-# Integrate TiDB MCP Server with Claude Desktop
+# Get started with Claude Desktop and TiDB MCP Server
 
 This guide shows how to configure the TiDB MCP Server in Claude Desktop.
 
