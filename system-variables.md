@@ -6164,7 +6164,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `4096`
+- Default value: `32768` (32 KiB)
 - Range: `[0, 2147483647]`
 - Unit: Bytes
 
