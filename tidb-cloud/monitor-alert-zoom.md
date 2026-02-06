@@ -93,7 +93,7 @@ If an alert condition remains unchanged, the alert sends notifications every thr
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications, please take the following steps. The steps vary by cluster plans.
+If you no longer want to receive alert notifications, take the following steps. The steps vary by cluster plans.
 
 <CustomContent plan="dedicated">
 
