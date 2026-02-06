@@ -4985,6 +4985,19 @@ SHOW WARNINGS;
 
 </details>
 
+### tidb_opt_group_ndv_skew_ratio <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> The TiDB query optimizer uses this variable. Do not adjust this variable without guidance from TiDB support or engineering.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 1]`
+- Default value: `0`
+- This variable controls the ratio between naive estimation and exponential backoff estimation for group NDV (Number of Distinct Values). When set to `0`, it uses naive estimation. When set to `1`, it uses exponential backoff estimation. Values between `0` and `1` provide a weighted combination of both estimation methods.
+
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
