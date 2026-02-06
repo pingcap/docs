@@ -979,15 +979,13 @@ For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-st
 
 Starting from v8.5.5 and v9.0.0, TiKV supports reporting a `NetworkSlowScore` in store heartbeats to PD. It is calculated based on network detection results and helps identify slow nodes experiencing network jitter. The score ranges from 1 to 100, where a higher value indicates a higher possibility of network anomalies.
 
-The detection of slow-network nodes is enabled by default, and the scheduling is disabled by default. To modify the probing frequency, configure the following settings:
+- TiKV enables detection of slow network nodes by default, with a default probing interval of `100ms`. To modify the probing frequency, set the TiKV configuration item [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) to an appropriate value. A smaller value increases the probing frequency, which helps detect network jitter more quickly, but also consumes more network and CPU resources.
 
-1. Enable the PD scheduler to handle slow-network nodes:
+- Scheduling for slow network nodes is disabled by default on the PD side. To enable it, configure PD as follows:
 
     ```bash
     scheduler config evict-slow-store-scheduler set enable-network-slow-store true
     ```
-
-2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) configuration item to an appropriate value. Setting it to a smaller value increases the detection frequency, which helps detect network jitter more quickly, but it also consumes more network bandwidth and CPU resources. The value is `100ms` by default.
 
 #### Recovery time control
 
