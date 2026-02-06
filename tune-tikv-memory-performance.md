@@ -40,7 +40,7 @@ log-level = "info"
 # Size of thread pool for gRPC
 # grpc-concurrency = 4
 # The number of gRPC connections between each TiKV instance
-# grpc-raft-conn-num = 10
+# grpc-raft-conn-num = 1
 
 # Most read requests from TiDB are sent to the coprocessor of TiKV. This parameter is used to set the number of threads
 # of the coprocessor. If many read requests exist, add the number of threads and keep the number within that of the

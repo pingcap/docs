@@ -9,7 +9,7 @@ This document describes how to create a {{{ .premium }}} instance in the [TiDB C
 
 > **Note:**
 >
-> - Currently, {{{ .premium }}} is only available upon request. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for {{{ .premium }}}" in the **Description** field and click **Submit**.
+> - Currently, {{{ .premium }}} is only available upon request. To request {{{ .premium }}}, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .premium }}}" in the **Description** in the **Description** field, and then click **Submit**.
 > - To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Before you begin
@@ -43,14 +43,18 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
     > **Note:**
     >
-    > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of {{{ .premium }}}. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support** to apply for {{{ .premium }}}.
+    > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of {{{ .premium }}}. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for the private preview of {{{ .premium }}}" in the **Description** field, and then click **Submit**.
 
 2. On the **TiDB Instances** page, click **Create Instance**.
 3. Enter a name for your {{{ .premium }}} instance.
 4. Choose a cloud provider and a region where you want to host your instance.
-5. Specify the minimum and maximum number of Request Capacity Units (RCUs) for your instance
+5. In the **Capacity** area, set the maximum number of the Request Capacity Units (RCUs) for your instance.
 
     RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
+
+    > **Note:**
+    >
+    > You will be billed for the **Minimum Billing RCU** shown below the maximum number of RCUs, even if your actual usage is lower. The maximum RCU value must be set in increments of 100.
 
 6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 

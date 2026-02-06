@@ -11,15 +11,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 > **Note:**
 >
-> - To use the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v6.1.3 or later.
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
-
-</CustomContent>
-<CustomContent plan="premium">
-
-> **Note:**
->
-> For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
+> To use the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v6.1.3 or later.
 
 </CustomContent>
 
@@ -86,7 +78,7 @@ Make sure that your TiDB Cloud instance can connect to the MySQL service.
 
 > **Note:**
 >
-> Currently, the VPC Peering feature for {{{ .premium }}} instances is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for VPC Peering for {{{ .premium }}} instance" in the **Description** field and click **Submit**.
+> Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for VPC Peering for {{{ .premium }}} instance" in the **Description** field, and then click **Submit**.
 
 Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 

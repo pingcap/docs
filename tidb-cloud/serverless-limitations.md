@@ -49,8 +49,8 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Stream data
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} and {{{ .essential }}} currently.
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} and {{{ .essential }}} currently.
+- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} currently.
+- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} currently.
 
 ### Time to live (TTL)
 

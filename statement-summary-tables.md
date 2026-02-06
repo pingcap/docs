@@ -455,6 +455,11 @@ Fields related to Resource Control:
 - `MAX_QUEUED_RC_TIME`: the maximum waiting time for available RU when executing SQL statements.
 - `RESOURCE_GROUP`: the resource group bound to SQL statements.
 
+Fields related to storage engines:
+
+- `STORAGE_KV`: introduced in v8.5.5, indicates whether the previous execution of SQL statements of this category read data from TiKV.
+- `STORAGE_MPP`: introduced in v8.5.5, indicates whether the previous execution of SQL statements of this category read data from TiFlash.
+
 ### `statements_summary_evicted` fields description
 
 - `BEGIN_TIME`: Records the starting time.

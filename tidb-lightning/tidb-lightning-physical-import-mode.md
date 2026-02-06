@@ -89,9 +89,7 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 
     - TiDB Lightning earlier than v5.4.0 cannot import tables of `charset=GBK`.
 
-- When you use TiDB Lightning with TiCDC, note the following:
-
-    - TiCDC cannot capture the data inserted in the physical import mode.
+- For considerations when using TiDB Lightning together with TiCDC, see [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
 
 - When you use TiDB Lightning with BR, note the following:
 

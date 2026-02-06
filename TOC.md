@@ -132,6 +132,7 @@
       - [Use Overview](/br/br-use-overview.md)
       - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
       - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+      - [Compact Log Backup](/br/br-compact-log-backup.md)
       - [Use Cases](/br/backup-and-restore-use-cases.md)
       - [Backup Storages](/br/backup-and-restore-storages.md)
     - BR CLI Manuals
@@ -749,6 +750,7 @@
       - [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
+      - [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
       - [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
       - [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
       - [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
@@ -866,6 +868,7 @@
     - [Temporary Tables](/temporary-tables.md)
     - [Cached Tables](/cached-tables.md)
     - [FOREIGN KEY Constraints](/foreign-key.md)
+    - [Table-Level Data Affinity](/table-affinity.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)

@@ -176,6 +176,73 @@ To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the follo
 
 4. Click **Confirm**. Then your cluster data is backed up.
 
+### Export backups
+
+To export a specific backup to cloud storage, such as Amazon S3 or Google Cloud Storage, follow the steps for your target storage provider.
+
+> **Note:**
+>
+> Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for the export backups feature" in the **Description** field, and then click **Submit**.
+
+<SimpleTab>
+
+<div label="Amazon S3">
+
+To export a backup to Amazon S3, perform the following steps:
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+
+2. Locate the backup you want to export, and then click **...** > **Export** in the **Action** column.
+
+3. In the **Export Backup to Amazon S3** dialog, enter the **Folder URI** field, and then select a bucket region for the backup bucket.
+
+4. Click **Generate Command** to view the command for configuring permissions.
+
+    - **With AWS CLI**:
+
+        Execute the generated command on AWS to grant TiDB Cloud access to your Amazon S3 bucket.
+
+    - **With AWS Console**:
+
+        1. Navigate to the [Amazon S3 console](https://console.aws.amazon.com/s3/).
+        2. Open the target bucket details page, and then click the **Permissions** tab.
+        3. Scroll to **Bucket policy**, and then click **Edit**.
+        4. Copy the policy content from the generated command, and then paste it into the policy editor.
+        5. Click **Save changes**.
+
+5. Click **Export** to start the export process.
+
+</div>
+
+<div label="Google Cloud Storage">
+
+To export a backup to Google Cloud Storage, perform the following steps:
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+
+2. Locate the backup you want to export, and then click **...** > **Export** in the **Action** column.
+
+3. In the **Export Backup to Google Cloud Storage** dialog, note down the **Google Cloud Service Account ID**, which is required for a later step.
+
+4. In the [Google Cloud console](https://console.cloud.google.com/), create a custom IAM role with the following permissions. If you use an existing role, verify that it has these permissions.
+    
+    - `storage.buckets.get`
+    - `storage.objects.list`
+    - `storage.objects.create`
+    - `storage.objects.delete`
+
+5. Go to **Cloud Storage** > **Buckets**, select the target bucket, and then click **Permissions** > **Grant Access**.
+
+6. In **New principals**, enter the **Service Account ID** from step 3, assign the role from step 4, and then click **Save**.
+
+7. Open the **Configuration** tab, copy the **gsutil URI**, and paste it into the **Export Path** field in the **Export Backup to Google Cloud Storage** dialog. To export to a subdirectory, append a path suffix to the URI.
+
+8. Click **Export** to start the export process.
+
+</div>
+
+</SimpleTab>
+
 ### Delete backups
 
 #### Delete backup files

@@ -127,7 +127,20 @@ tiup br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
+> **Note:**
+>
+> Starting from v8.5.5, when the `--load-stats` parameter is set to `false`, BR no longer writes statistics for the restored tables to the `mysql.stats_meta` table. After the restore is complete, you can manually execute the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) SQL statement to update the relevant statistics.
+
 When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
+
+Starting from v8.5.5, BR introduces the `--fast-load-sys-tables` parameter, which is enabled by default. When restoring data to a new cluster using the `br` command-line tool, and the IDs of tables and partitions between the upstream and downstream clusters can be reused (otherwise, BR will automatically fall back to logically load statistics), enabling `--fast-load-sys-tables` lets BR to first restore the statistics-related system tables to the temporary system database `__TiDB_BR_Temporary_mysql`, and then atomically swap these tables with the corresponding tables in the `mysql` database using the `RENAME TABLE` statement.
+
+The following is an example:
+
+```shell
+tiup br restore full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log --load-stats --fast-load-sys-tables
+```
 
 ## Encrypt the backup data
 
@@ -176,8 +189,26 @@ In the preceding command:
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
 
 ```shell
-Full Restore <---------/...............................................> 17.12%.
+Split&Scatter Region <--------------------------------------------------------------------> 100.00%
+Download&Ingest SST <---------------------------------------------------------------------> 100.00%
+Restore Pipeline <-------------------------/...............................................> 17.12%
 ```
+
+Starting from TiDB v8.5.5, BR lets you specify `--fast-load-sys-tables` to restore statistics physically in a new cluster:
+
+```shell
+tiup br restore full \
+    --pd "${PD_IP}:2379" \
+    --with-sys-table \
+    --fast-load-sys-tables \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --ratelimit 128 \
+    --log-file restorefull.log
+```
+
+> **Note:**
+>
+> Unlike the logical restoration of system tables using the `REPLACE INTO` SQL statement, physical restoration completely overwrites the existing data in the system tables.
 
 ## Restore a database or a table
 

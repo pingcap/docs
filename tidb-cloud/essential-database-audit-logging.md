@@ -10,7 +10,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for {{{ .essential }}} database audit logging" in the **Description** field and click **Submit**.
+> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .essential }}} database audit logging" in the **Description** field, and then click **Submit**.
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
@@ -451,6 +451,10 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 | `HOST_PORT`       | The current port of the connected TiDB server.                                                     |
 | `CLIENT_IP`       | The current IP address of the client.                                                              |
 | `CLIENT_PORT`     | The current port of the client.                                                                    |
+
+> **Note:**
+>
+> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 
