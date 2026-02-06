@@ -107,25 +107,11 @@ TiDB Cloud provides distinct alert rules for each cluster plan, aligned with the
 
 | Condition | Recommended Action |
 |:--- |:--- |
-| The Request Unit/s  exceeded 80% of Max RCU | Suggested actions: 
-1. Check your traffic pattern in the RU metrics to determine if it's a gradual increase or a sharp spike.
-2. If it's a gradual increase, verify if Query Duration has increased. If so, your current max RCU configuration is likely insufficient.
-3. Scale up your capacity by manually increasing the max RCU in the TiDB Cloud console to meet demand.
-If the problem cannot be fixed by your side, you can contact TiDB Cloud Support for further assistance.|
-| QPS suddenly dropped by 80% | Suggested actions:
-1. Check if it's caused by increasing query latency.
-2. Check if your application is healthy.
-If this drop is intentional, please ignore this alert.
-If not, and you cannot identify the root cause, please contact Support immediately.|
-| Query P99 latency exceeded 200 ms | Recommended Actions:
-1. Investigate Slow Queries: Go to Slow Query page. Filter by the recent time range to find newly appeared or slower-running queries.
-2. Review Recent Changes: Was there a recent application deployment, schema change, or data import job that could explain the change in traffic pattern?
-If you cannot identify the root cause, please contact Support immediately.|
-| Query P95 latency exceeded 200 ms | Recommended Actions:
-1. Investigate Slow Queries: Go to Slow Query page. Filter by the recent time range to find newly appeared or slower-running queries.
-2. Review Recent Changes: Was there a recent application deployment, schema change, or data import job that could explain the change in traffic pattern?
-If you cannot identify the root cause, please contact Support immediately.|
-| Request Error Rate exceeded 10%  | Please check the recent errors and overall statement execution status for this cluster.|
+| The Request Unit/s  exceeded 80% of Max RCU | Suggested actions: <ul><li>1. Check your traffic pattern in the RU metrics to determine if it is a gradual increase or a sharp spike.</li><li>2. If it is a gradual increase, verify if Query Duration has increased. If yes, your current max RCU configuration is likely insufficient.</li><li>3. Scale up your capacity by manually increasing the max RCU in the TiDB Cloud console to meet demand.</li></ul><br/>If the problem cannot be fixed by your side,  you can contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.|
+| QPS suddenly dropped by 80% | Suggested actions:<ul><li>1. Check if it's caused by increasing query latency.</li><li>2. Check if your application is healthy. If this drop is intentional, ignore this alert. If this drop is not intentional and you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.</li></ul>|
+| Query P99 latency exceeded 200 ms | Recommended Actions:<ul><li>1. Investigate Slow Queries: Go to Slow Query page. Filter by the recent time range to find newly appeared or slower-running queries.</li><li>2. Review Recent Changes: Was there a recent application deployment, schema change, or data import job that could explain the change in traffic pattern?</li></ul><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
+| Query P95 latency exceeded 200 ms | Recommended Actions:<ul><li>1. Investigate slow queries: go to the Slow Query page and filter by the recent time range to find newly appeared or slower-running queries.</li><li>2. Review recent changes: was there a recent application deployment, schema change, or data import job that could explain the change in traffic pattern?</li></ul><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
+| Request Error Rate exceeded 10%  | Check the recent errors and overall statement execution status for this cluster.|
 
 ### Changefeed alerts
 
@@ -136,5 +122,3 @@ If you cannot identify the root cause, please contact Support immediately.|
 | The changefeed status is `WARNING`.              | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> If the problem cannot be fixed from your side, you can contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.|
 
 </CustomContent>
-
-
