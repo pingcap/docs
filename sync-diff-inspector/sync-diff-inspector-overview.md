@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/d
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tiflow/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tiflow/tree/master/sync_diff_inspector) is a tool used to compare data stored in MySQL-compatible databases (including MySQL and TiDB). For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool.
 
@@ -53,7 +53,12 @@ For TiDB versions before v9.0.0:
 
 * Online check is not supported for data migration between MySQL and TiDB. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
-* In TiDB and MySQL, `FLOAT`, `DOUBLE` and other floating-point types are implemented differently. `FLOAT` and `DOUBLE` respectively take 6 and 15 significant digits for calculating checksum. If you do not want to use this feature, set `ignore-columns` to skip checking these columns.
+* Data type support notes:
+
+    * **FLOAT/DOUBLE**: Floating-point types are implemented differently in TiDB and MySQL. `FLOAT` and `DOUBLE` respectively take 6 and 15 significant digits for calculating checksum. If you do not want to use this feature, set `ignore-columns` to skip checking these columns.
+    * **JSON**: Supported for comparison. Be aware that collation and character set differences for JSON string values between upstream and downstream can lead to false positives.
+    * **BLOB/VARBINARY**: Supported as binary data and compared byte-for-byte.
+    * **BIT**: Supported for MySQL to TiDB comparisons. Validated for widths 1, 8, 16, and 64. If your schema uses non-standard widths or application-level transformations, perform a targeted validation test.
 
 * Support checking tables that do not contain the primary key or the unique index. However, if data is inconsistent, the generated SQL statements might not be able to repair the data correctly.
 
@@ -175,8 +180,9 @@ range = "age > 10 AND age < 20"
 # (optional) Specifies the column used to divide data into chunks. If you do not configure it,
 # sync-diff-inspector chooses an appropriate column (primary key, unique key, or a field with index).
 index-fields = ["col1","col2"]
-# (optional) Ignores checking some columns such as some types (json, bit, blob, etc.)
-# that sync-diff-inspector does not currently support.
+# (optional) Ignores checking columns that you want to exclude from validation.
+# For example, columns with known cross-implementation differences (such as floating-point types)
+# or columns you prefer to validate separately.
 # The floating-point data type behaves differently in TiDB and MySQL. You can use
 # `ignore-columns` to skip checking these columns.
 ignore-columns = ["",""]
@@ -312,7 +318,10 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 ## Note
 
 - sync-diff-inspector consumes a certain amount of server resources when checking data. Avoid using sync-diff-inspector to check data during peak business hours.
-- Before comparing the data in MySQL with that in TiDB, check the character set and `collation` configuration of the tables. This is especially important when the primary key or unique key of a table is the `varchar` type. If collation rules differ between upstream and downstream databases, sorting issues might occur, leading to inaccurate verification results. For example, MySQL's default collation is case-insensitive, while TiDB's default collation is case-sensitive. This inconsistency might cause identical delete and insert records in the repair SQL. To avoid this issue, use the `index-fields` configuration to specify index columns that are not affected by case sensitivity. If you configure `collation` in the sync-diff-inspector configuration file and explicitly use the same collation for both upstream and downstream during chunk-based comparison, note that the order of index fields depends on the table's collation configuration. If the collations differ, one side might be unable to use the index. Additionally, if the character sets differ between upstream and downstream (for example, MySQL uses UTF-8 while TiDB uses UTF-8MB4), it is not possible to unify the collation configuration.
+- Before comparing data in MySQL with TiDB, verify the character set and `collation` configuration of your tables. This is critical for tables with `varchar`, `text`, or `JSON` columns containing UTF-8 data, especially when these columns are part of a primary key or unique key. MySQL 8.0 defaults to `utf8mb4_0900_ai_ci` (case-insensitive, accent-insensitive), while TiDB often uses `utf8mb4_bin` (binary/case-sensitive). This mismatch causes sync-diff-inspector to report false differences for identical UTF-8 strings and JSON string values. To avoid false positives, align collations on both upstream and downstream tables (for example, `utf8mb4_bin`) or use `ignore-columns` to exclude affected UTF-8 text and JSON columns.
+- If you configure `collation` in the sync-diff-inspector configuration file and explicitly use the same collation for both upstream and downstream during chunk-based comparison, note that the order of index fields depends on the table's collation configuration. If the collations differ, one side might be unable to use the index. Additionally, if the character sets differ between upstream and downstream (for example, MySQL uses `utf8` while TiDB uses `utf8mb4`), it is not possible to unify the collation configuration.
+- The following scenarios can produce false differences even when data is logically identical: (1) VARCHAR and TEXT columns with different collations between upstream and downstream (for example, `utf8mb4_0900_ai_ci` vs `utf8mb4_bin`) will report differences for identical string values; (2) JSON columns containing string values are subject to the same collation-based comparison issues; (3) Auto-populated TIMESTAMP columns (such as `DEFAULT CURRENT_TIMESTAMP` or `ON UPDATE CURRENT_TIMESTAMP`) can introduce noise when schemas are loaded at different times or when comparing data with slight timing variations.
+- If you validate datasets that include auto-populated timestamp columns, consider setting deterministic TIMESTAMP values for validation data rather than relying on `DEFAULT CURRENT_TIMESTAMP`, or use `ignore-columns` to exclude auto-populated TIMESTAMP columns if their exact values are not critical to your validation goals.
 - If the primary key differs between upstream and downstream tables, sync-diff-inspector does not use the original primary key column to divide chunks. For example, when sharded tables in MySQL are merged into TiDB using a composite primary key that includes the original primary key and a shard key. In this case, configure the original primary key column using `index-fields` and set `check-data-only` to `true`.
 - sync-diff-inspector divides data into chunks first according to TiDB statistics and you need to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server's *workload is light*.
 - Pay special attention to `table-rules`. If you configure `schema-pattern="test1"`, `table-pattern = "t_1"`, `target-schema="test2"` and `target-table = "t_2"`, the `test1`.`t_1` schema in the source database and the `test2`.`t_2` schema in the target database are compared. Sharding is enabled by default in sync-diff-inspector, so if the source database has a `test2`.`t_2` table, the `test1`.`t_1` table and `test2`.`t_2` table in the source database serving as sharding are compared with the `test2`.`t_2` table in the target database.
