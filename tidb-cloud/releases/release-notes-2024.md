@@ -270,7 +270,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **SQL Editor**: the default interface for manually writing and executing SQL queries in the TiDB Cloud console.
     - **Chat2Query**: the AI-assisted text-to-query feature, which enables you to interact with your databases using natural language to generate, rewrite, and optimize SQL queries.
 
-  For more information, see [Explore your data with AI-assisted SQL Editor]((/tidb-cloud/explore-data-with-chat2query.md)).
+  For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
 ## June 18, 2024
 
