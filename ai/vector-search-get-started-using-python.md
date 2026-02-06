@@ -51,7 +51,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
 - `tidb-vector`: the Python client for interacting with TiDB vector search.
-- [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/ai/vector-search-overview.md#vector-embedding) from text.
+- [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/ai/concepts/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
 
@@ -117,7 +117,7 @@ The following are descriptions for each parameter:
 
 ### Step 4. Initialize the embedding model
 
-An [embedding model](/ai/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/ai/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
+An [embedding model](/ai/concepts/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/ai/concepts/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
 
 To set up the model, copy the following code into the `example.py` file. This code initializes a `SentenceTransformer` instance and defines a `text_to_embedding()` function for later use.
 

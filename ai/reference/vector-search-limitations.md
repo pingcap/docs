@@ -25,7 +25,7 @@ This document describes the known limitations of TiDB vector search.
 
 ## Vector index limitations
 
-See [Vector search restrictions](/ai/vector-search-index.md#restrictions).
+See [Vector search restrictions](/ai/reference/vector-search-index.md#restrictions).
 
 ## Compatibility with TiDB tools
 

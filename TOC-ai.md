@@ -6,7 +6,7 @@
 ## QUICK START
 
 - [Get Started via Python](/ai/quickstart-via-python.md)
-- [Get Started via SQL](/ai/guides/quickstart-via-sql.md)
+- [Get Started via SQL](/ai/quickstart-via-sql.md)
 
 ## CONCEPTS
 

@@ -230,4 +230,4 @@ client.drop_table("chunks")
 
 ## Next steps
 
-- Learn more details about [Vector Search](/ai/guides/vector-search.md), [Fulltext Search](/ai/guides/fulltext-search.md) and [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) in TiDB.
+- Learn more details about [Vector Search](/ai/guides/vector-search.md), [Full-Text Search](/ai/guides/vector-search-full-text-search-python.md) and [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) in TiDB.
