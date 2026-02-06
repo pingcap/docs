@@ -979,7 +979,7 @@ For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-st
 
 Starting from v8.5.5 and v9.0.0, TiKV supports reporting a `NetworkSlowScore` in store heartbeats to PD. It is calculated based on network detection results and helps identify slow nodes experiencing network jitter. The score ranges from 1 to 100, where a higher value indicates a higher possibility of network anomalies.
 
-The detection and scheduling of slow-network nodes are enabled by default. To modify the probing frequency, configure the following settings:
+The detection of slow-network nodes is enabled by default, and the scheduling is disabled by default. To modify the probing frequency, configure the following settings:
 
 1. Enable the PD scheduler to handle slow-network nodes:
 
