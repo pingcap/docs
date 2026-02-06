@@ -978,7 +978,7 @@ For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-st
 
 Starting from v8.5.5, TiKV supports reporting a `NetworkSlowScore` in store heartbeats to PD. It is calculated based on network detection results and helps identify slow nodes experiencing network jitter. The score ranges from 1 to 100, where a higher value indicates a higher possibility of network anomalies.
 
-- TiKV enables detection of slow-network nodes by default, with a default probing interval of `100ms`. To modify the probing frequency, set the TiKV configuration item [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) to an appropriate value. A smaller value increases the probing frequency, which helps detect network jitter more quickly, but also consumes more network and CPU resources.
+- TiKV enables detection of slow-network nodes by default, with a default probing interval of `100ms`. To modify the probing frequency, set the TiKV configuration item [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855) to an appropriate value. A smaller value increases the probing frequency, which helps detect network jitter more quickly, but also consumes more network and CPU resources.
 
 - Scheduling for slow-network nodes is disabled by default on the PD side. To enable it, configure PD as follows:
 
@@ -986,11 +986,6 @@ Starting from v8.5.5, TiKV supports reporting a `NetworkSlowScore` in store hear
     scheduler config evict-slow-store-scheduler set enable-network-slow-store true
     ```
 
-<<<<<<< HEAD
-2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855) configuration item to a value greater than `0` to enable network detection.
-
-=======
->>>>>>> dbeacea624 (pd: fix wrong description about `inspect-network-interval` (#22416))
 #### Recovery time control
 
 You can specify how long a slow node must remain stable before it is considered recovered by using the `recovery-duration` parameter.
