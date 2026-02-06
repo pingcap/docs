@@ -8,7 +8,6 @@
 - [Release Timeline](/releases/release-timeline.md)
 - [TiDB Versioning](/releases/versioning.md)
 - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
-- [TiDB Installation Packages](/binary-package.md)
 
 ## RELEASE NOTES
 
