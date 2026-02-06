@@ -950,6 +950,7 @@
   - [Telemetry](/telemetry.md)
   - [Error Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
+  - [TiDB Installation Packages](/binary-package.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)

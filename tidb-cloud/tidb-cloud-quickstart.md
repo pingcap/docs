@@ -132,6 +132,6 @@ TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets
 ## What's next
 
 - To learn how to connect to your cluster using different methods, see [Connect to a {{{ .starter }}} or Essential cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
-- For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor]((/tidb-cloud/explore-data-with-chat2query.md)).
+- For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).

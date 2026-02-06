@@ -19,7 +19,7 @@ The following functions are designed specifically for [Vector data types](/ai/re
 
 **Vector distance functions:**
 
-| Function name                                               | Description                                                      | Supported by [vector index](/ai/vector-search-index.md#vector-search-index) |
+| Function name                                               | Description                                                      | Supported by [vector index](/ai/reference/vector-search-index.md) |
 | ----------------------------------------------------------- | ---------------------------------------------------------------- |---------------------------|
 | [`VEC_L2_DISTANCE`](#vec_l2_distance)                       | Calculates L2 distance (Euclidean distance) between two vectors  | Yes                       |
 | [`VEC_COSINE_DISTANCE`](#vec_cosine_distance)               | Calculates the cosine distance between two vectors               | Yes                       |
@@ -46,7 +46,7 @@ The following built-in functions and operators are extended to support operation
 | [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | Vector element-wise addition operator    |
 | [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | Vector element-wise subtraction operator |
 
-For more information about how vector arithmetic works, see [Vector Data Type | Arithmetic](/ai/vector-search-data-types.md#arithmetic).
+For more information about how vector arithmetic works, see [Vector Data Type | Arithmetic](/ai/reference/vector-search-data-types.md#arithmetic).
 
 **Aggregate (GROUP BY) functions:**
 
@@ -78,7 +78,7 @@ For more information about how vector arithmetic works, see [Vector Data Type | 
 | [`!=`, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)                  | Not equal operator                                    |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | Check whether a value is not within a set of values   |
 
-For more information about how vectors are compared, see [Vector Data Type | Comparison](/ai/vector-search-data-types.md#comparison).
+For more information about how vectors are compared, see [Vector Data Type | Comparison](/ai/reference/vector-search-data-types.md#comparison).
 
 **Control flow functions:**
 
@@ -96,7 +96,7 @@ For more information about how vectors are compared, see [Vector Data Type | Com
 | [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | Cast a value as a string or vector |
 | [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | Cast a value as a string |
 
-For more information about how to use `CAST()`, see [Vector Data Type | Cast](/ai/vector-search-data-types.md#cast).
+For more information about how to use `CAST()`, see [Vector Data Type | Cast](/ai/reference/vector-search-data-types.md#cast).
 
 ## Full references
 

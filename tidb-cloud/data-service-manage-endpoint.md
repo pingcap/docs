@@ -24,7 +24,7 @@ In Data Service, you can automatically generate endpoints, manually create endpo
 
 > **Tip:**
 >
-> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file]((/tidb-cloud/explore-data-with-chat2query.md)#generate-an-endpoint-from-a-sql-file).
+> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ### Generate an endpoint automatically
 

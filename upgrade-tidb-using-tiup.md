@@ -314,7 +314,7 @@ Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade
 
 ### How to fix the issue that the upgrade gets stuck when upgrading to v6.2.0 or later versions?
 
-Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
+Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/best-practices/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
 
 - Upgrade gets stuck due to plugin loading
 

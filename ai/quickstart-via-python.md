@@ -167,7 +167,7 @@ table.bulk_insert([
 
 ## Search for nearest neighbors
 
-To search for nearest neighbors of a given query, you can use the `table.search()` method, it will perform a [vector search](ai/guides/vector-search.md) by default.
+To search for nearest neighbors of a given query, you can use the `table.search()` method. This method performs a [vector search](/ai/guides/vector-search.md) by default.
 
 ```python
 table.search(
@@ -230,4 +230,4 @@ client.drop_table("chunks")
 
 ## Next steps
 
-- Learn more details about [Vector Search](/ai/guides/vector-search.md), [Fulltext Search](/ai/guides/fulltext-search.md) and [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) in TiDB.
+- Learn more details about [Vector Search](/ai/guides/vector-search.md), [Full-Text Search](/ai/guides/vector-search-full-text-search-python.md) and [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) in TiDB.

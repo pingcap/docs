@@ -59,9 +59,9 @@ Integrate TiDB with popular AI frameworks, embedding providers, and development 
 | Document | Description |
 | --- | --- |
 | [Integration Overview](/ai/integrations/vector-search-integration-overview.md) | Overview of all available integrations. |
-| [Embedding Providers](/ai/integrations/embedding-overview.md) | Unified interface for OpenAI, Cohere, Jina AI, and more. |
-| [LangChain](/ai/integrations/langchain.md) | Use TiDB as a vector store with LangChain. |
-| [LlamaIndex](/ai/integrations/llamaindex.md) | Use TiDB as a vector store with LlamaIndex. |
+| [Embedding Providers](/ai/integrations/vector-search-auto-embedding-overview.md#available-text-embedding-models) | Unified interface for OpenAI, Cohere, Jina AI, and more. |
+| [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md) | Use TiDB as a vector store with LangChain. |
+| [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) | Use TiDB as a vector store with LlamaIndex. |
 | [MCP Server](/ai/integrations/tidb-mcp-server.md) | Connect TiDB to Claude Code, Cursor, and other AI-powered IDEs. |
 
 ## Reference

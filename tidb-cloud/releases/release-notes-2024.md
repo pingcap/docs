@@ -246,7 +246,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [Vector data types](/ai/reference/vector-search-data-types.md), [vector index](/ai/reference/vector-search-index.md), and [vector functions and operators](/ai/reference/vector-search-functions-and-operators.md).
     - Ecosystem integrations with [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md), [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md), and [JinaAI](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md).
-    - Programming language support for Python: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md), [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md), and [Django ORM](/ai/vector-search-integrate-with-django-orm.md).
+    - Programming language support for Python: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md), [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md), and [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md).
     - Sample applications and tutorials: perform semantic searches for documents using [Python](/ai/quickstart-via-python.md) or [SQL](/ai/quickstart-via-sql.md).
 
   For more information, see [Vector search (beta) overview](/ai/concepts/vector-search-overview.md).
@@ -270,7 +270,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **SQL Editor**: the default interface for manually writing and executing SQL queries in the TiDB Cloud console.
     - **Chat2Query**: the AI-assisted text-to-query feature, which enables you to interact with your databases using natural language to generate, rewrite, and optimize SQL queries.
 
-  For more information, see [Explore your data with AI-assisted SQL Editor]((/tidb-cloud/explore-data-with-chat2query.md)).
+  For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
 ## June 18, 2024
 
