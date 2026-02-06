@@ -14,8 +14,8 @@ To make your reading on the application developer guide more smoothly, we presen
 
 To import table structures and data of the Bookshop application, choose one of the following import methods:
 
-- [TiDB Self-Managed: via `tiup demo`](#ti-db-self-managed-via-tiup-demo).
-- [TiDB Cloud: via the Import feature](#ti-db-cloud-via-the-import-feature).
+- [TiDB Self-Managed: via `tiup demo`](#tidb-self-managed-via-tiup-demo).
+- [TiDB Cloud: via the Import feature](#tidb-cloud-via-the-import-feature).
 
 ### TiDB Self-Managed: via `tiup demo`
 
