@@ -2535,7 +2535,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ### `wait-for-lock-timeout`
 
-- The longest time that a pessimistic transaction in TiKV waits for other transactions to release the lock. If the time is out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by `innodb_lock_wait_timeout`.
+- The longest time that a pessimistic transaction in TiKV waits for other transactions to release the lock. If the time is out, an error is returned to TiDB, and TiDB retries to add a lock. The lock wait timeout is set by [`innodb_lock_wait_timeout`](/system-variables.md#innodb_lock_wait_timeout).
 - Default value: `"1s"`
 - Minimum value: `"1ms"`
 
