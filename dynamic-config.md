@@ -94,7 +94,7 @@ If an error occurs during the batch modification, a warning is returned:
 {{< copyable "sql" >}}
 
 ```sql
-set config tikv `log-level`='warn';
+set config tikv `log-level`='warn'; -- correct config item is log.level
 ```
 
 ```sql
