@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Managing Indexes and Identifying Unused Indexes
 summary: Learn the best practices for managing and optimizing indexes, identifying and removing unused indexes in TiDB.
+aliases: ['/tidb/stable/index-management-best-practices/','/tidb/dev/index-management-best-practices/']
 ---
 
 # Best Practices for Managing Indexes and Identifying Unused Indexes

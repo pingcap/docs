@@ -63,9 +63,9 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 
 ### Full-text search
 
-Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
-For more information, see [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/developer/vector-search-full-text-search-sql) and [Full-Text Search with Python](https://docs.pingcap.com/developer/vector-search-full-text-search-python).
 
 ## M
 
@@ -190,7 +190,7 @@ A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that 
 
 ### Vector search
 
-[Vector search](/vector-search/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+[Vector search](/ai/concepts/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
 
 ### Virtual Private Cloud
 

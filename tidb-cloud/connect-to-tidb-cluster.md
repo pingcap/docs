@@ -9,9 +9,10 @@ This document introduces the methods to connect to your TiDB Cloud Dedicated clu
 
 > **Tip:**
 >
-> To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster, see [Connect to Your {{{ .starter }}} or Essential Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster, see [Connect to Your {{{ .starter }}} or Essential Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+> - This document focuses on the network connection methods for TiDB Cloud Dedicated. To connect to TiDB via a specific tool, driver, or ORM, see [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
-After your TiDB Cloud Dedicated cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+After your TiDB Cloud Dedicated cluster is created on TiDB Cloud, you can connect to it via one of the following network connection methods:
 
 - Direct connections
 

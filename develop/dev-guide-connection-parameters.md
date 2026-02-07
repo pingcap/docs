@@ -1,23 +1,20 @@
 ---
-title: Connection Pools and Connection Parameters
+title: Configure Connection Pools and Connection Parameters
 summary: This document explains how to configure connection pools and parameters for TiDB. It covers connection pool size, probe configuration, and formulas for optimal throughput. It also discusses JDBC API usage and MySQL Connector/J parameter configurations for performance optimization.
+aliases: ['/tidb/stable/dev-guide-connection-parameters/','/tidb/dev/dev-guide-connection-parameters/','/tidbcloud/dev-guide-connection-parameters/']
 ---
 
-# Connection Pools and Connection Parameters
+# Configure Connection Pools and Connection Parameters
 
 This document describes how to configure connection pools and connection parameters when you use a driver or ORM framework to connect to TiDB.
 
-<CustomContent platform="tidb">
-
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md#connection-pool)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices)
-
-</CustomContent>
+> **Tip:**
+>
+> In this document, the following sections are excerpted from [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md):
+>
+> - [Configure the number of connections](#configure-the-number-of-connections)
+> - [Probe configuration](#probe-configuration)
+> - [Connection parameters](#connection-parameters)
 
 ## Connection pool
 
@@ -315,14 +312,6 @@ However, in an actual production environment, idle connections and SQL statement
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

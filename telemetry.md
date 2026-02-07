@@ -16,7 +16,7 @@ When the telemetry feature is enabled, TiUP and TiSpark collect usage informatio
 
 ## What is shared when telemetry is enabled?
 
-The following sections describe the shared usage information in detail for TiUP and TiSpark. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](/releases/release-notes.md).
+The following sections describe the shared usage information in detail for TiUP and TiSpark. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](/releases/_index.md).
 
 > **Note:**
 >
