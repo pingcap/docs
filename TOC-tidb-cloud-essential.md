@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: c45dc08dc21d774994ed8eb78af4e0bca5343fcc-->
+# 目录 <!--Corresponding EN commit: 797251ecc59fbe2263fec7e80b38d3944c2c0742-->
 
 ## 快速开始
 
@@ -41,8 +41,6 @@
     - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Navicat](/develop/dev-guide-gui-navicat.md)
   - [选择驱动或 ORM 框架](/develop/dev-guide-choose-driver-or-orm.md)
-  - BI
-    - [Looker Studio](/tidb-cloud/dev-guide-bi-looker-studio.md)
   - Java
     - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
     - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -655,12 +653,13 @@
   - [upgrade](/tidb-cloud/ticloud-upgrade.md)
   - [help](/tidb-cloud/ticloud-help.md)
 - 通用参考
-  - TiDB 集群架构
+  - TiDB 经典架构
     - [概述](/tidb-architecture.md)
     - [存储](/tidb-storage.md)
     - [计算](/tidb-computing.md)
     - [调度](/tidb-scheduling.md)
     - [TSO](/tso.md)
+  - [TiDB X 架构](/tidb-cloud/tidb-x-architecture.md)
   - 存储引擎
     - TiKV
         - [TiKV 简介](/tikv-overview.md)
