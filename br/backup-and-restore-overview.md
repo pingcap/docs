@@ -147,28 +147,60 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 >
 > Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
 
-Starting from v8.5.5, if the system tables in the cluster do not contain case-conflicting records (for example, both `test.t1` and `test.T1`), you can specify the BR parameter` --sys-check-collation` during restore. BR checks whether the system table data is compatible across different collations. If it is compatible, BR can successfully restore backups from earlier versions; otherwise, BR reports an error and stops the restore. If the upstream cluster still exists before the restore, you can manually execute the following three sets of SQL statements in the upstream cluster to verify data compatibility across different collations by confirming that the COUNT results are consistent:
+<details>
+<summary>Verify whether the system table data remains compatible under the target cluster's collation</summary>
 
-SQL set 1:
+Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR verifies whether the system table data remains compatible under the target cluster's collation.
+
+- If the data is compatible with the target collation, BR can successfully restore backups from earlier versions.
+- If conflicts are detected (for example, both `test.t1` and `test.T1` exist), BR reports an error and terminates the restore.
+
+If the upstream cluster is still available before the restore, you can run the following SQL statements on the upstream cluster to perform a precheck on the system tables. By comparing the original row count with the row count after grouping under the target collation, you can determine whether conflicts would occur under the target collation.
+
+Replace `utf8mb4_general_ci` in the following SQL statements with the default collation of the target cluster.
+
+Group 1
 
 ```sql
 SELECT COUNT(1) FROM mysql.db;
-SELECT COUNT(1) FROM (SELECT Host, DB COLLATE utf8mb4_general_ci, User FROM mysql.db GROUP BY Host, DB COLLATE utf8mb4_general_ci, User) as a;
+SELECT COUNT(1) FROM (
+  SELECT Host, DB COLLATE utf8mb4_general_ci, User
+  FROM mysql.db
+  GROUP BY Host, DB COLLATE utf8mb4_general_ci, User
+) AS a;
 ```
 
-SQL set 2:
+Group 2
 
 ```sql
 SELECT COUNT(1) FROM mysql.tables_priv;
-SELECT COUNT(1) FROM (SELECT Host, DB COLLATE utf8mb4_general_ci, User, Table_name COLLATE utf8mb4_general_ci FROM mysql.tables_priv GROUP BY Host, DB COLLATE utf8mb4_general_ci, User, Table_name COLLATE utf8mb4_general_ci) as a;
+SELECT COUNT(1) FROM (
+  SELECT Host, DB COLLATE utf8mb4_general_ci, User,
+         Table_name COLLATE utf8mb4_general_ci
+  FROM mysql.tables_priv
+  GROUP BY Host, DB COLLATE utf8mb4_general_ci, User,
+           Table_name COLLATE utf8mb4_general_ci
+) AS a;
 ```
 
-SQL set 3:
+Group 3
 
 ```sql
 SELECT COUNT(1) FROM mysql.columns_priv;
-SELECT COUNT(1) FROM (SELECT Host, DB COLLATE utf8mb4_general_ci, User, Table_name COLLATE utf8mb4_general_ci, Column_name COLLATE utf8mb4_general_ci FROM mysql.columns_priv GROUP BY Host, DB COLLATE utf8mb4_general_ci, User, Table_name COLLATE utf8mb4_general_ci, Column_name COLLATE utf8mb4_general_ci) as a;
+SELECT COUNT(1) FROM (
+  SELECT Host, DB COLLATE utf8mb4_general_ci, User,
+         Table_name COLLATE utf8mb4_general_ci,
+         Column_name COLLATE utf8mb4_general_ci
+  FROM mysql.columns_priv
+  GROUP BY Host, DB COLLATE utf8mb4_general_ci, User,
+           Table_name COLLATE utf8mb4_general_ci,
+           Column_name COLLATE utf8mb4_general_ci
+) AS a;
 ```
+
+If the two `COUNT` results are equal, no case-insensitive conflicts will occur under the target collation.
+
+</details>
 
 The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
