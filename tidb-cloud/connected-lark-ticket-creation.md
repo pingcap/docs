@@ -29,7 +29,6 @@ After the ticket is created, the bot replies with the ticket link in the thread.
 
 ## Subscribe to ticket updates
 
-The **Enterprise** support plan enables you to subscribe to ticket updates in Lark. When a support engineer responds to a ticket, a ticket update message appears in the Lark group. The message includes information such as the ticket title, ticket link, and the last comment content.
 For customers in the **Enterprise** support plan, you can also subscribe to ticket updates in Lark. When a support engineer responds to a ticket, an update message is posted in the **PingCAP Support Group** of Lark. The message includes the ticket title, ticket link, and the latest comment content.
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
