@@ -13,7 +13,7 @@ For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connec
 
 ## Create a support ticket
 
-In the PingCAP Support lark group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a ephemeral card message that is only visible to you.
+In the PingCAP Support Lark group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the bot will send you an ephemeral card message that is only visible to you.
 
 ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
@@ -29,7 +29,7 @@ After successfully creating the ticket, the bot will reply with the ticket link 
 
 ## Subscribe to ticket updates
 
-The **Enterprise** support plan supports subscriptions to ticket updates in Lark. When a support engineer responds to a ticket, a ticket update message will appear in the Lark group. The message includes information such as the ticket title, ticket link, and last comment content.
+The **Enterprise** support plan enables you to subscribe to ticket updates in Lark. When a support engineer responds to a ticket, a ticket update message appears in the Lark group. The message includes information such as the ticket title, ticket link, and the last comment content.
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 

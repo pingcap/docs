@@ -13,7 +13,7 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 
 ## Interact with support tickets
 
-In the Lark support group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a ephemeral card message that is only visible to you.
+In the PingCAP Support Lark group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the bot will send you an ephemeral card message that is only visible to you.
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
@@ -21,13 +21,13 @@ Fill in the card according to your actual problem, and then click **Submit** to 
 
 ![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
-After successfully creating the ticket, the bot will reply with the ticket link in the thread. 
+After successfully creating the ticket, the bot will reply with the ticket link in the thread.
 
 ![lark-ticket-interaction-3](/media/tidb-cloud/connected-lark-ticket-interaction-3.png)
 
-For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), two-way information synchronization is supported between Lark and the ticket system.
+Customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md) can use two-way information synchronization between Lark and the ticket system.
 
-The support engineer's comments on the ticket will be synchronized to the lark message thread, and users do not need to jump to the support portal to view them. Users can reply directly in this message thread, and these replies will be synchronized to the ticket system.
+The support engineer's comments on the ticket will be synchronized to the Lark message thread, so you do not need to go to the support portal to view them. You can reply directly in this message thread, and your replies will also be synchronized to the ticket system.
 
 In this way, customers subscribed to the **Premium** support plan can quickly create, respond, and manage tickets without leaving Lark.
 
