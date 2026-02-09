@@ -5,7 +5,7 @@ summary: Introduces detailed information about the Lark ticket creation and upda
 
 # Create Tickets and Subscribe to Ticket Updates via Lark
 
-For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to manage ticket creation and updates from the support ticket system.
+For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/). This bot helps you create support tickets and receive updates directly from the support ticket system.
 
 > **Note:**
 >
@@ -13,15 +13,15 @@ For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connec
 
 ## Create a support ticket
 
-In the PingCAP Support Lark group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the bot will send you an ephemeral card message that is only visible to you.
+1. In the **PingCAP Support Group** of Lark, mention `@PingCAP Support Bot` and describe the problem in a message. Then, the bot will send you an ephemeral card message that is visible only to you.
 
-![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
+    ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-Fill in the card according to your actual problem, and then click **Submit** to submit the ticket. Please note that the "Reporter" field should be the email address you use in the [TiDB Cloud console](https://tidbcloud.com/).
+2. In the card, fill in the **Reporter** field with your email address used in the [TiDB Cloud console](https://tidbcloud.com/), fill in other fields according to the actual problem, and then click **Submit** to create the ticket.
 
-![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
+    ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
-After successfully creating the ticket, the bot will reply with the ticket link in the thread. You can click the link to view the ticket details in the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+After the ticket is created, the bot replies with the ticket link in the thread. You can click the link to view ticket details in the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
 
 ![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
@@ -30,6 +30,7 @@ After successfully creating the ticket, the bot will reply with the ticket link 
 ## Subscribe to ticket updates
 
 The **Enterprise** support plan enables you to subscribe to ticket updates in Lark. When a support engineer responds to a ticket, a ticket update message appears in the Lark group. The message includes information such as the ticket title, ticket link, and the last comment content.
+For customers in the **Enterprise** support plan, you can also subscribe to ticket updates in Lark. When a support engineer responds to a ticket, an update message is posted in the **PingCAP Support Group** of Lark. The message includes the ticket title, ticket link, and the latest comment content.
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 
