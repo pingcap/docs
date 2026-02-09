@@ -17,7 +17,7 @@ In the Lark support group, you only need to mention **PingCAP Support Bot** and 
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-Fill in the card according to your actual problem, and then click **Submit** to submit the ticket.
+Fill in the card according to your actual problem, and then click **Submit** to submit the ticket. Please note that the "Reporter" field should be the email address you use in the [TiDB Cloud console](https://tidbcloud.com/).
 
 ![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
