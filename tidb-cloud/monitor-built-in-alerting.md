@@ -11,7 +11,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essetial) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#-essential--essential) clusters.
 
 ## View alerts
 

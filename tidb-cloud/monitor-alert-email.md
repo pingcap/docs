@@ -9,7 +9,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essetial) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#-essential--essential) clusters.
 
 ## Prerequisites
 
