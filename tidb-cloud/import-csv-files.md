@@ -211,7 +211,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 4. Click **Connect**.
 
-    If you selected **Private Link** as the connectivity method, TiDB Cloud creates a private endpoint targeting your storage account. You need to approve this endpoint request in the Azure portal before the connection can proceed:
+    If you selected **Private Link** as the connectivity method, TiDB Cloud creates a private endpoint for your storage account. You need to approve this endpoint request in the Azure portal before the connection can proceed:
 
     1. Go to the [Azure portal](https://portal.azure.com/) and navigate to your storage account.
     2. Click **Networking** > **Private endpoint connections**.
