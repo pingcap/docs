@@ -5,7 +5,7 @@ summary: 了解基于 shared-storage（共享存储）的云原生 TiDB X 架构
 
 # TiDB X 架构
 
-TiDB X 是一种全新的分布式 SQL 架构，将云原生对象存储作为 TiDB 的核心基础。目前该架构已在 TiDB Cloud <CustomContent plan="starter,essential,dedicated">Starter 和 Essential</CustomContent><CustomContent plan="premium">Starter、Essential 和 Premium</CustomContent> 版本中提供支持，能够为 AI 时代的工作负载带来弹性扩展、可预测性能以及优化的总体拥有成本（TCO）。
+TiDB X 是一种全新的分布式 SQL 架构，其在设计上将云原生对象存储作为 TiDB 的核心存储基础。目前该架构已在 TiDB Cloud <CustomContent plan="starter,essential,dedicated">Starter 和 Essential</CustomContent><CustomContent plan="premium">Starter、Essential 和 Premium</CustomContent> 提供支持，能够为 AI 时代的工作负载带来弹性扩展、可预测性能以及优化的总体拥有成本（TCO）。
 
 TiDB X 代表了从 [经典 TiDB](/tidb-architecture.md) 的 shared-nothing（无共享）架构向云原生 shared-storage（共享存储）架构的根本性演进。通过将对象存储作为共享的持久化存储层，TiDB X 实现了计算工作负载的分离，从而将在线事务处理工作负载与资源密集型后台任务相隔离。
 
