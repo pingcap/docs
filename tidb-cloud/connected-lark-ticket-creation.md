@@ -13,23 +13,25 @@ For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connec
 
 ## Create a support ticket
 
-In the **Customer Support Group** Lark group, type `@PingCAP Support Bot create ticket` in a message. Then, **PingCAP Support Bot** will reply with a Lark message card for ticket creation.
+In the PingCAP Support lark group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a ephemeral card message that is only visible to you.
 
 ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-Fill in the required fields and click **Submit**. Once submitted, the card will be updated to **Ticket Submitted**, indicating that your request is being processed.
+Fill in the card according to your actual problem, and then click **Submit** to submit the ticket.
 
 ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
-After the support ticket is created, the **Ticket Submitted** card will be updated to the **Support Ticket Created** card, providing the ticket name and a link to view the ticket.
+After successfully creating the ticket, the bot will reply with the ticket link in the thread. You can click the link to view the ticket details in the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
 
 ![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
+![lark-ticket-creation-4](/media/tidb-cloud/connected-lark-ticket-creation-4.png)
+
 ## Subscribe to ticket updates
 
-Whenever a PingCAP support engineer comments on the ticket, **PingCAP Support Bot** will send a **New Comment on Your Ticket** card to the Lark group.
+The **Enterprise** support plan supports subscriptions to ticket updates in Lark. When a support engineer responds to a ticket, a ticket update message will appear in the Lark group. The message includes information such as the ticket title, ticket link, and last comment content.
 
-![connected-lark-ticket-creation-4](/media/tidb-cloud/connected-lark-ticket-creation-4.png)
+![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 
 ## FAQs
 
