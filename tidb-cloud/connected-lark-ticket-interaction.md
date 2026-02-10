@@ -21,7 +21,7 @@ Fill in the card according to your actual problem, and then click **Submit** to 
 
 ![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
-After successfully creating the ticket, the bot will reply with the ticket link in the thread.
+In the **PingCAP Support Group** of Lark, after you [create a support ticket](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket), the bot replies with the ticket link in the message thread.
 
 ![lark-ticket-interaction-3](/media/tidb-cloud/connected-lark-ticket-interaction-3.png)
 
