@@ -13,17 +13,9 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 
 ## Interact with support tickets
 
-In the PingCAP Support Lark group, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the bot will send you an ephemeral card message that is only visible to you.
-
-![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
-
-Fill in the card according to your actual problem, and then click **Submit** to submit the ticket. Please note that the "Reporter" field should be the email address you use in the [TiDB Cloud console](https://tidbcloud.com/).
-
-![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
-
 In the **PingCAP Support Group** of Lark, after you [create a support ticket](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket), the bot replies with the ticket link in the message thread.
 
-![lark-ticket-interaction-3](/media/tidb-cloud/connected-lark-ticket-interaction-3.png)
+![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
 Customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md) can use two-way information synchronization between Lark and the ticket system.
 
@@ -31,7 +23,7 @@ When a support engineer responds to the ticket, the response will be synchronize
 
 With this capability, customers subscribed to the **Premium** support plan can quickly create, respond to, and manage tickets without leaving Lark.
 
-![lark-ticket-interaction-4](/media/tidb-cloud/connected-lark-ticket-interaction-4.png)
+![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
 ## FAQs
 
