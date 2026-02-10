@@ -79,7 +79,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**.
-    - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage:
+    - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage. To import the sample data, you can use the default connectivity method.
 
         - **Public** (default): connects over the public internet. Use this option when the storage account allows public network access.
         - **Private Link**: connects through an Azure private endpoint for network-isolated access. Use this option when the storage account blocks public access or when your security policy requires private connectivity. If you select **Private Link**, you also need to fill in the additional field **Azure Blob Storage Resource ID**. To find the resource ID:
