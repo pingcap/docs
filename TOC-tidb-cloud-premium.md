@@ -28,7 +28,6 @@
 ## DEVELOP
 
 - Development Quick Start
-  - [Developer Guide Overview](https://docs.pingcap.com/developer/)
   - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud
