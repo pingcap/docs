@@ -32,7 +32,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more information, see [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data.md), [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md), and [Import Apache Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md).
 
-    - Add "Enable/Disable Public Endpoint" events to Audit Logging in the TiDB Cloud console for better security tracking.
+    - Add "Enable/Disable Public Endpoint" events to Console Audit Logging in the TiDB Cloud console for better security tracking.
 
 ## February 3, 2026
 
