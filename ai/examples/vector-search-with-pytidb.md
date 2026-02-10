@@ -10,7 +10,7 @@ This example demonstrates how to build a semantic search application using TiDB 
 The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [`pytidb`](https://github.com/pingcap/pytidb) (the official Python SDK for TiDB) to build the RAG pipeline.
 
 <p align="center">
-  <img width="700" alt="Semantic search with vector embeddings" src="https://github.com/user-attachments/assets/6d7783a5-ce9c-4dcc-8b95-49d5f0ca735a" />
+  <img width="700" alt="Semantic search with vector embeddings" src="https://docs-download.pingcap.com/media/images/docs/ai/semantic-search-with-vector-embeddings.png" />
   <p align="center"><i>Semantic search with vector embeddings</i></p>
 </p>
 

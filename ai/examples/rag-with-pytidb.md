@@ -10,7 +10,7 @@ This example demonstrates how to use [`pytidb`](https://github.com/pingcap/pytid
 The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and `pytidb` to build the RAG pipeline.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/dfd85672-65ce-4a46-8dd2-9f77d826363e" alt="RAG application built with PyTiDB" width="600" />
+  <img src="https://docs-download.pingcap.com/media/images/docs/ai/rag-application-built-with-pytidb.png" alt="RAG application built with PyTiDB" width="600" />
   <p align="center"><i>RAG application built with PyTiDB</i></p>
 </p>
 

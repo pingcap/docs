@@ -13,7 +13,7 @@ With just a few lines of code, you can create a search system that understands b
 - **Image-to-image search**: Upload a photo to find visually similar pets by breed, color, pose, and more
 
 <p align="center">
-  <img width="700" alt="PyTiDB Image Search Demo" src="https://github.com/user-attachments/assets/7ba9733a-4d1f-4094-8edb-58731ebd08e9" />
+  <img width="700" alt="PyTiDB Image Search Demo" src="https://docs-download.pingcap.com/media/images/docs/ai/pet-image-search-via-multimodal-embeddings.png" />
   <p align="center"><i>Pet image search via multimodal embeddings</i></p>
 </p>
 

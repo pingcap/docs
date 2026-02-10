@@ -8,7 +8,7 @@ summary: Combine vector search and full-text search for more comprehensive resul
 This demo shows how to combine vector search and full-text search to improve the retrieval quality over a document set.
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/6e1c639d-2160-44c8-86b4-958913b9eca5" alt="TiDB Hybrid Search Demo" width="700"/>
+    <img src="https://docs-download.pingcap.com/media/images/docs/ai/tidb-hybrid-search-demo.png" alt="TiDB Hybrid Search Demo" width="700"/>
     <p align="center"><i>TiDB Hybrid Search Demo</i></p>
 </p>
 

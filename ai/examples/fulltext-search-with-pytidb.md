@@ -8,7 +8,7 @@ summary: Perform traditional text search using TiDB full-text search.
 This example demonstrates how to build an e-commerce product search app using TiDB full-text search with multilingual support. Users of this app can search for products by keywords in their preferred language.
 
 <p align="center">
-  <img width="700" alt="E-commerce product search with full-text search" src="https://github.com/user-attachments/assets/c81ddad4-f996-4b1f-85c0-5cbb55bc2a3a" />
+  <img width="700" alt="E-commerce product search with full-text search" src="https://docs-download.pingcap.com/media/images/docs/ai/e-commerce-product-search-with-full-text-search.png" />
   <p align="center"><i>E-commerce product search with full-text search</i></p>
 </p>
 

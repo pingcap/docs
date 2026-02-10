@@ -15,7 +15,7 @@ With just a few lines of code, you can create a conversational AI that remembers
 - **Real-time memory viewing**: Shows stored memories in the web interface
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/b57ae0fb-9075-43a9-8690-edaa69ca9f40" alt="AI Agent with memory powered by TiDB" width="700"/>
+    <img src="https://docs-download.pingcap.com/media/images/docs/ai/ai-agent-with-memory-powered-by-tidb.png" alt="AI Agent with memory powered by TiDB" width="700"/>
     <p align="center"><i>AI Agent with memory powered by TiDB</i></p>
 </p>
 
