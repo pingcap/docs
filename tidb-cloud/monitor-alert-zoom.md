@@ -9,7 +9,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ### Step 3. Subscribe from TiDB Cloud
 
-Alert notification subscriptions vary by cluster plans.
+Alert notification subscriptions vary by cluster plan.
 
 <CustomContent plan="dedicated">
 
@@ -71,7 +71,7 @@ Alert notification subscriptions vary by cluster plans.
 
 > **Tip:**
 >
-> The alert subscription is for all alerts in the current cluster. If you have multiple clusters, you need to subscribe to each one individually.
+> The alert subscription is for all alerts in the current cluster. If you have multiple clusters, you need to subscribe to each cluster individually.
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target cluster using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
@@ -93,7 +93,7 @@ If an alert condition remains unchanged, the alert sends notifications every thr
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications, take the following steps. The steps vary by cluster plans.
+If you no longer want to receive alert notifications, take the following steps. The steps vary by cluster plan.
 
 <CustomContent plan="dedicated">
 

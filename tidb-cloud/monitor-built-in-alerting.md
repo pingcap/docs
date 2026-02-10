@@ -11,7 +11,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## View alerts
 
@@ -60,7 +60,7 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 > - You can edit the thresholds of the alerts on the TiDB Cloud console. 
 > - Some alert rules are disabled by default. You can enable them as needed.
 
-TiDB Cloud provides distinct alert rules for each cluster plan, aligned with their respective feature sets.
+TiDB Cloud provides different alert rules for each cluster plan, based on the features available in that plan.
 
 <CustomContent plan="dedicated">
 
@@ -103,15 +103,15 @@ TiDB Cloud provides distinct alert rules for each cluster plan, aligned with the
 
 <CustomContent plan="essential">
 
-### Performance Overview alerts
+### Performance overview alerts
 
 | Condition | Recommended Action |
 |:--- |:--- |
-| The Request Unit/s  exceeded 80% of Max RCU | Suggested actions: <ol><li>Check your traffic pattern in the RU metrics to determine if it is a gradual increase or a sharp spike.</li><li>If it is a gradual increase, verify if Query Duration has increased. If yes, your current max RCU configuration is likely insufficient.</li><li>Scale up your capacity by manually increasing the max RCU in the TiDB Cloud console to meet demand.</li></ol><br/>If the problem cannot be fixed by your side, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.|
-| QPS suddenly dropped by 80% | Suggested actions:<ol><li>Check if it's caused by increasing query latency.</li><li>Check if your application is healthy. If this drop is intentional, ignore this alert. If this drop is not intentional and you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.</li></ol>|
-| Query P99 latency exceeded 200 ms | Recommended Actions:<ol><li>Investigate Slow Queries: Go to Slow Query page. Filter by the recent time range to find newly appeared or slower-running queries.</li><li>Review Recent Changes: Was there a recent application deployment, schema change, or data import job that could explain the change in traffic pattern?</li></ol><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
-| Query P95 latency exceeded 200 ms | Recommended Actions:<ol><li>Investigate slow queries: go to the Slow Query page and filter by the recent time range to find newly appeared or slower-running queries.</li><li>Review recent changes: was there a recent application deployment, schema change, or data import job that could explain the change in traffic pattern?</li></ol><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
-| Request Error Rate exceeded 10%  | Check the recent errors and overall statement execution status for this cluster.|
+| Request units per second (RU/s) exceed 80% of the maximum RCU | <ol><li>Review RU metrics to determine whether the increase is gradual or a sudden spike.</li><li>If the increase is gradual, check whether query duration has increased. If so, the current maximum RCU might be insufficient.</li><li>Scale capacity by manually increasing the maximum RCU in the TiDB Cloud console.</li></ol><br/>If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).|
+| QPS drops by 80% | <ol><li>Check whether the drop is caused by increasing query latency.</li><li>Verify that your application is operating normally. If the drop is intentional, ignore this alert. If the drop is unintentional and you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.</li></ol>|
+| Query P99 latency exceeds 200 ms | <ol><li>Investigate slow queries: go to the Slow Query page and filter by a recent time range to identify newly introduced or slower-running queries.</li><li>Review recent changes, such as application deployments, schema changes, or data import jobs, that might have affected traffic patterns.</li></ol><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
+| Query P95 latency exceeds 200 ms | <ol><li>Investigate slow queries: go to the Slow Query page and filter by a recent time range to identify newly introduced or slower-running queries.</li><li>Review recent changes, such as application deployments, schema changes, or data import jobs, that might have affected traffic patterns.</li></ol><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
+| Request error rate exceeds 10%  | Review recent errors and the overall statement execution status for the cluster.|
 
 ### Changefeed alerts for {{{ .essential }}}
 
