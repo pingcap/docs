@@ -27,9 +27,9 @@ After successfully creating the ticket, the bot will reply with the ticket link 
 
 Customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md) can use two-way information synchronization between Lark and the ticket system.
 
-The support engineer's comments on the ticket will be synchronized to the Lark message thread, so you do not need to go to the support portal to view them. You can reply directly in this message thread, and your replies will also be synchronized to the ticket system.
+When a support engineer responds to the ticket, the response will be synchronized to the Lark message thread, so you do not need to visit the support portal to view them. You can reply directly in the same message thread, and your replies will also be synchronized to the ticket system.
 
-In this way, customers subscribed to the **Premium** support plan can quickly create, respond, and manage tickets without leaving Lark.
+With this capability, customers subscribed to the **Premium** support plan can quickly create, respond to, and manage tickets without leaving Lark.
 
 ![lark-ticket-interaction-4](/media/tidb-cloud/connected-lark-ticket-interaction-4.png)
 
