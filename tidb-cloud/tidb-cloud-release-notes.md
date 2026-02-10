@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## February 10, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v7.5.6](https://docs.pingcap.com/tidb/v7.5/release-7.5.6) to [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3).
+
+- **TiDB Cloud Essential**
+
+    - Support built-in alerting. 
+
+        Built-in alerting enables you to subscribe to receive instant alerts through email, Slack, Zoom, Flashduty, and PagerDuty. You can also customize alerts by defining specific thresholds for each alert type.
+
+        For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+
+- **TiDB Cloud Dedicated**
+
+    - Support Private Link connectivity for data imports from Azure Blob Storage.
+  
+        When importing data from Azure Blob Storage into a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster, you can now select Private Link as the connectivity method to connect via an Azure private endpoint instead of the public internet. This feature enables secure, network-isolated data imports for storage accounts that restrict public access.
+
+        For more information, see [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data.md), [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md), and [Import Apache Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md).
+
+    - Audit Logging in the TiDB Cloud console now includes "Enable/Disable Public Endpoint" events for better security tracking.
+
 ## February 3, 2026
 
 **General changes**
