@@ -6,7 +6,19 @@ aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-
 
 # Get Started with TiDB + AI via Python
 
-In this guide, you will learn how to get started with [vector search](/ai/concepts/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
+This document demonstrates how to get started with [Vector Search](/ai/concepts/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
+
+By following this document, you will learn how to:
+
+- Connect to TiDB using the TiDB Python SDK.
+- Generate text embeddings with popular embedding models.
+- Store vectors in TiDB tables.
+- Perform semantic search using vector similarity.
+
+> **Note:**
+>
+> - The vector search feature is in beta and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 

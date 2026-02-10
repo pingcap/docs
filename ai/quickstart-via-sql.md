@@ -1,14 +1,14 @@
 ---
-title: Get Started with Vector Search via SQL
+title: Get Started with TiDB + AI via SQL
 summary: Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
 aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-search-get-started-using-sql/','/tidbcloud/vector-search-get-started-using-sql/']
 ---
 
-# Get Started with Vector Search via SQL
+# Get Started with TiDB + AI via SQL
 
 TiDB extends MySQL syntax to support [Vector Search](/ai/concepts/vector-search-overview.md) and introduce new [Vector data types](/ai/reference/vector-search-data-types.md) and several [vector functions](/ai/reference/vector-search-functions-and-operators.md).
 
-This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to complete the following operations:
+This document demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to complete the following operations:
 
 - Connect to your TiDB cluster.
 - Create a vector table.
@@ -22,7 +22,7 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 
 ## Prerequisites
 
-To complete this tutorial, you need:
+To complete steps in this document, you need:
 
 - [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
 - A TiDB cluster.
