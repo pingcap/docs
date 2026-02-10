@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Upgrade the default TiDB version of new [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v7.5.6](https://docs.pingcap.com/tidb/v7.5/release-7.5.6) to [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3).
+    - Upgrade the default TiDB version of new [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v7.5.6](https://docs.pingcap.com/tidb/stable/release-7.5.6) to [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3).
 
 - **TiDB Cloud Essential**
 
