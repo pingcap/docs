@@ -156,6 +156,11 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
+    - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+    - Subscribe to Alert Notifications
+      - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -686,6 +691,11 @@
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
   - Connected Care Support Service Features
     - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected: IM Subscription for TiDB Cloud Alerts
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
+      - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
+      - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)

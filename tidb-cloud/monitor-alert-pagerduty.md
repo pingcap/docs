@@ -9,7 +9,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 > **Note:**
 >
-> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ## Subscribe to alert notifications
 
-To receive alert notifications of clusters in your project, take the following steps:
+To receive alert notifications, take the following steps:
 
 ### Step 1. Generate a PagerDuty integration key
 
@@ -27,6 +27,10 @@ To receive alert notifications of clusters in your project, take the following s
 2. Save the generated integration key to use in the next step.
 
 ### Step 2. Subscribe from TiDB Cloud
+
+Alert notification subscriptions vary by cluster plan.
+
+<CustomContent plan="dedicated">
 
 > **Tip:**
 >
@@ -44,15 +48,50 @@ To receive alert notifications of clusters in your project, take the following s
 
 7. Click **Save** to complete the subscription.
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
+</CustomContent>
+
+<CustomContent plan="essential">
+
+> **Tip:**
+>
+> The alert subscription is for all alerts in the current cluster. If you have multiple clusters, you need to subscribe to each cluster individually.
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target cluster using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+4. Select **PagerDuty** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field and your PagerDuty integration key in the **Integration Key** field.
+6. Click **Test Connection**.
+
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
+
+7. Click **Save** to complete the subscription.
+
+</CustomContent>
+
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscription** page.
 
 If an alert condition remains unchanged, the alert sends notifications every three hours.
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications of clusters in your project, take the following steps:
+If you no longer want to receive alert notifications, take the following steps. The steps vary by cluster plan.
 
+<CustomContent plan="dedicated">
+    
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target cluster using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.
+
+</CustomContent>
