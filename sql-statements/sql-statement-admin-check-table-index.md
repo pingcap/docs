@@ -1,35 +1,33 @@
 ---
-title: ADMIN CHECK [TABLE|INDEX] | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
-category: reference
+title: ADMIN CHECK [TABLE|INDEX]
+summary: TiDB 数据库中 ADMIN CHECK [TABLE|INDEX] 的使用概况。
 ---
 
 # ADMIN CHECK [TABLE|INDEX]
 
-The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes.
+`ADMIN CHECK [TABLE|INDEX]` 语句用于校验表中数据和对应索引的一致性。
 
-It does not support the following:
+该语句不支持：
 
-- Checking [FOREIGN KEY constraints](/foreign-key.md).
-- Checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
+- 校验[外键约束](/foreign-key.md)。
+- 当使用[聚簇索引](/clustered-indexes.md)时，校验主键索引。
 
-If `ADMIN CHECK [TABLE|INDEX]` finds any issues, you can resolve them by dropping and recreating the index. If the issue is not resolved, you can [report a bug](https://docs.pingcap.com/tidb/stable/support).
+如果执行 `ADMIN CHECK [TABLE|INDEX]` 发现任何问题，你可以删除并重新创建索引来解决。如果问题仍未解决，你可以尝试 [TiDB 支持资源](/support.md)。
 
-## Principles
+## 原理
 
-The `ADMIN CHECK TABLE` statement takes the following steps to check the table:
+`ADMIN CHECK TABLE` 语句执行以下步骤来校验表：
 
-1. For each index, it checks if the number of records in the index is the same as that in the table.
+1. 对每个索引，检查索引中的记录数是否与表中的记录数一致。
+2. 对每个索引，遍历每行的值，并将其与表中的值进行比较。
 
-2. For each index, it loops over the values in each row and compares the values with that in the table.
+如果使用 `ADMIN CHECK INDEX` 语句，它只会校验指定的索引。
 
-If you use the `ADMIN CHECK INDEX` statement, it only checks the specified index.
-
-## Synopsis
+## 语法图
 
 ```ebnf+diagram
 AdminCheckStmt ::=
-    'ADMIN' 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) 
+    'ADMIN' 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? )
 
 TableNameList ::=
     TableName ( ',' TableName )*
@@ -37,32 +35,32 @@ TableNameList ::=
 HandleRange ::= '(' Int64Num ',' Int64Num ')'
 ```
 
-## Examples
+## 示例
 
-To check the consistency of all the data and corresponding indexes in the `tbl_name` table, use `ADMIN CHECK TABLE`:
+可以通过 `ADMIN CHECK TABLE` 语句校验 `tbl_name` 表中所有数据和对应索引的一致性：
 
 ```sql
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
 
-If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
+若通过一致性校验，则返回空的查询结果；否则返回数据不一致的错误信息。
 
 ```sql
 ADMIN CHECK INDEX tbl_name idx_name;
 ```
 
-The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table. If the consistency check is passed, an empty result is returned; otherwise, an error message is returned indicating that the data is inconsistent.
+以上语句用于对 `tbl_name` 表中 `idx_name` 索引对应列数据和索引数据进行一致性校验。若通过校验，则返回空的查询结果；否则返回数据不一致的错误信息。
 
 ```sql
 ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_val)] ...;
 ```
 
-The above statement is used to check the consistency of the column data and index data corresponding to the `idx_name` index in the `tbl_name` table, with the data range (to be checked) specified. If the consistency check is passed, an empty result is returned. Otherwise, an error message is returned indicating that the data is inconsistent.
+以上语句用于对 `tbl_name` 表中 `idx_name` 索引对应列数据和索引数据进行一致性校验，并且指定了需要检查的数据范围。若通过校验，则返回空的查询结果；否则返回数据不一致的错误信息。
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+`ADMIN CHECK [TABLE|INDEX]` 语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
-* [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)
+* [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-table-语句)
