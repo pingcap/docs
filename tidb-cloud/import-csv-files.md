@@ -198,12 +198,12 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Data Format**: select **CSV**.
     - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage:
 
-        - **Public** (default): connects over the public internet. Suitable for storage accounts that allow public network access.
-        - **Private Link**: connects via an Azure private endpoint for network-isolated access. Use this when your storage account restricts public access or when your security policy requires private connectivity.
-
-        If you select **Private Link**, you need to provide the following additional field:
-
-        - **Azure Blob Storage Resource ID**: enter the resource ID of your Azure Storage account. To find the resource ID, go to the [Azure portal](https://portal.azure.com/), navigate to your storage account, click **Overview** > **JSON View**, and copy the value of the `id` property. The resource ID is in the format `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`.
+        - **Public** (default): connects over the public internet. Use this option when the storage account allows public network access.
+        - **Private Link**: connects through an Azure private endpoint for network-isolated access. Use this option when the storage account blocks public access or when your security policy requires private connectivity. If you select **Private Link**, you need to provide the following additional field **Azure Blob Storage Resource ID**.  To find the resource ID:
+            
+            1. Go to the [Azure portal](https://portal.azure.com/).
+            2. Navigate to your storage account, click **Overview** > **JSON View**.
+            3. Copy the value of the `id` property. The resource ID is in the format `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`.
 
     - **Edit CSV Configuration**: if necessary, configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters, and specify whether your files contain a header row.
     - **Folder URI**: enter the Azure Blob Storage URI where your source files are located using the format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/`. The path must end with a `/`. For example, `https://myaccount.blob.core.windows.net/mycontainer/myfolder/`.
@@ -216,11 +216,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
     1. Go to the [Azure portal](https://portal.azure.com/) and navigate to your storage account.
     2. Click **Networking** > **Private endpoint connections**.
     3. Find the pending connection request from TiDB Cloud and click **Approve**.
-    4. Return to TiDB Cloud. The import wizard proceeds automatically once the endpoint is approved.
+    4. Return to the [TiDB Cloud console](https://tidbcloud.com/). The import wizard proceeds automatically once the endpoint is approved.
 
     > **Note:**
     >
-    > If the endpoint is not yet approved, TiDB Cloud displays the following message: "Connection pending. Please approve the Private Endpoint request in your Azure Portal settings and try again." Approve the request in the Azure portal and retry the connection.
+    > If the endpoint is not yet approved, TiDB Cloud displays the following message: "Connection pending. Please approve the Private Endpoint request in your Azure Portal settings and try again." Approve the request in the [Azure portal](https://portal.azure.com/) and retry the connection.
 
 5. In the **Destination** section, select the target database and table.
 
