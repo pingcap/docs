@@ -161,6 +161,8 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
 | DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
 | UpdateAuthenticationMethod     | Update the authentication method for Cloud Organization SSO                        |
+| Enable Public Endpoint         | Enable a Public Endpoint                                                         |
+| Disable Public Endpoint        | Disable Public Endpoint                                                          |
 
 ## Console audit log fields
 
