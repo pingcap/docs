@@ -72,6 +72,7 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
     -p{password} \
     -D {database}
 ```
+
 </div>
 </SimpleTab>
 

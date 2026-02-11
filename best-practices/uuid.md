@@ -59,7 +59,6 @@ For more information about Key Visualizer, see the following documentation:
 - [Key Visualizer](/dashboard/dashboard-key-visualizer.md) for TiDB Self-Managed
 - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) for TiDB Cloud
 
-
 ## MySQL compatibility
 
 UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.

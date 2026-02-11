@@ -9,12 +9,12 @@ summary: Learn the API of TiDB Operator.
 
 To manage TiDB clusters on Kubernetes, you can use the following TiDB Operator APIs:
 
-- [Backup](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#backup>)
-- [BackupSchedule](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#backupschedule>)
-- [DMCluster](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#dmcluster>)
-- [Restore](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#restore>)
-- [TidbCluster](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#tidbcluster>)
-- [TidbInitializer](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#tidbinitializer>)
-- [TidbMonitor](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md#tidbmonitor>)
+- [Backup](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#backup)
+- [BackupSchedule](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#backupschedule)
+- [DMCluster](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#dmcluster)
+- [Restore](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#restore)
+- [TidbCluster](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#tidbcluster)
+- [TidbInitializer](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#tidbinitializer)
+- [TidbMonitor](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md#tidbmonitor)
 
-For more information, see [TiDB Operator API Document](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md>).
+For more information, see [TiDB Operator API Document](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md).
