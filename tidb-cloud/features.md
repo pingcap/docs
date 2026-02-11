@@ -40,15 +40,15 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td>向量存储 &amp; 向量检索</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
   </tr>
   <tr>
     <td>API</td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">开发者体验</td>
@@ -116,19 +116,19 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   <tr>
     <td>从 MySQL 兼容数据库迁移数据到 TiDB Cloud</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>通过 CSV、Parquet 和 SQL 文件导出数据到本地或对象存储</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>通过变更数据流（changefeed）将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
+    <td>通过 changefeed 将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -227,13 +227,13 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td rowspan="3" style="background-color: white;">网络连接</td>
-    <td>私有端点</td>
+    <td>私有端口</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>公网端点</td>
+    <td>公网端口</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -333,4 +333,4 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
 
 > **提示：**
 >
-> 如需申请私测功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写功能名称后，点击 **Submit** 提交。
+> 如需申请私测功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Support Tickets** 跳转到 [帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)。创建工单，在 **Description** 字段填写 “Apply for `<feature_name>`”，然后点击 **Submit**。

@@ -142,6 +142,7 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 | `tidb_ddl_reorg_batch_size` | 无限制 | 只读 [^10] |
 | `tidb_ddl_reorg_priority` | 无限制 | 只读 [^10] |
 | `tidb_ddl_reorg_worker_cnt` | 无限制 | 只读 [^10] |
+| `tidb_dml_type` | 无限制 | 只读 [^10] |
 | `tidb_enable_1pc` | 无限制 | 只读 [^10] |
 | `tidb_enable_async_commit` | 无限制 | 只读 [^10] |
 | `tidb_enable_auto_analyze` | 无限制 | 只读 [^10] |
@@ -238,6 +239,6 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 
 [^10]: 该变量在 TiDB Cloud Starter 和 TiDB Cloud Essential 上为只读。
 
-[^11]: TiDB Cloud Starter 和 TiDB Cloud Essential 不支持像[示例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)中那样通过 `${tidb-server-status-port}` 下载 `PLAN REPLAYER` 导出的文件。相反，TiDB Cloud Starter 和 TiDB Cloud Essential 会为你生成一个 [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) 用于下载文件。注意该 URL 在生成后 10 小时内有效。
+[^11]: TiDB Cloud Starter 和 TiDB Cloud Essential 不支持像[示例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)中那样通过 `${tidb-server-status-port}` 下载 `PLAN REPLAYER` 导出的文件。取而代之，TiDB Cloud Starter 和 TiDB Cloud Essential 会为你生成一个 [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) 用于下载文件。注意该 URL 在生成后 10 小时内有效。
 
-[^12]: 不支持。为 TiDB Cloud Dedicated 集群启用 `require_secure_transport` 会导致 SQL 客户端连接失败。
+[^12]: 不支持。在 TiDB Cloud Dedicated 集群上启用 `require_secure_transport` 会导致 SQL 客户端连接失败。
