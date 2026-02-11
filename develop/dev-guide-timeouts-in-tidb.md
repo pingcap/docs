@@ -74,7 +74,25 @@ TiDB also provides a system variable (`max_execution_time`, `0` by default, indi
 
 ## JDBC query timeout
 
-MySQL JDBC's query timeout setting for `setQueryTimeout()` does **_NOT_** work for TiDB, because the client sends a `KILL` command to the database when it detects the timeout. However, the tidb-server is load balanced, and it will not execute this `KILL` command to avoid termination of the connection on a wrong tidb-server. You need to use `MAX_EXECUTION_TIME` to check the query timeout effect.
+<CustomContent platform="tidb">
+
+Starting from v6.1.0, when the [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) configuration item is set to its default value `true`, you can use the `setQueryTimeout()` method provided by MySQL JDBC to control the query timeout.
+
+> **Note:**
+>
+> When your TiDB version is earlier than v6.1.0 or [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is set to `false`, `setQueryTimeout()` does not work for TiDB. This is because the client sends a `KILL` command to the database when it detects the query timeout. However, because the TiDB service is load balanced, TiDB does not execute the `KILL` command to avoid termination of the connection on a wrong TiDB node. In such cases, you can use `max_execution_time` to control query timeout.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Starting from v6.1.0, when the [`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#enable-global-kill-new-in-v610) configuration item is set to its default value `true`, you can use the `setQueryTimeout()` method provided by MySQL JDBC to control the query timeout.
+
+> **Note:**
+>
+> When your TiDB version is earlier than v6.1.0 or [`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#enable-global-kill-new-in-v610) is set to `false`, `setQueryTimeout()` does not work for TiDB. This is because the client sends a `KILL` command to the database when it detects the query timeout. However, because the TiDB service is load balanced, TiDB does not execute the `KILL` command to avoid termination of the connection on a wrong TiDB node. In such cases, you can use `max_execution_time` to control query timeout.
+
+</CustomContent>
 
 TiDB provides the following MySQL-compatible timeout control parameters.
 

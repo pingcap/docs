@@ -171,7 +171,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 ```
 
 - `--changefeed-id=uuid` represents the ID of the changefeed that corresponds to the replication task you want to resume.
-- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default.
+- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default. You can use the `cdc cli changefeed list` command to check the current value of `checkpoint-ts`.
 - `--no-confirm`: when the replication is resumed, you do not need to confirm the related information. Defaults to `false`.
 
 > **Note:**
@@ -301,10 +301,10 @@ For the changefeeds created using `cdc cli` after v4.0.13, Unified Sorter is ena
 To check whether or not the Unified Sorter feature is enabled on a changefeed, you can run the following example command (assuming the IP address of the PD instance is `http://10.0.10.25:2379`):
 
 ```shell
-cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
+cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort_engine'
 ```
 
-In the output of the above command, if the value of `sort-engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
+In the output of the above command, if the value of `sort_engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
 
 > **Note:**
 >

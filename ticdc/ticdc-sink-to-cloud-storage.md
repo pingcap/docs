@@ -122,7 +122,13 @@ Data change records are saved to the following path:
 
 > **Note:**
 >
-> The table version changes only after a DDL operation is performed on the upstream table, and the new table version is the TSO when the upstream TiDB completes the execution of the DDL. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the schema file content to change.
+> The table version changes in the following scenarios:
+>
+> - The upstream TiDB performs a DDL operation on the table.
+> - TiCDC schedules the table across nodes.
+> - The changefeed to which the table belongs restarts.
+> 
+> Note that the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the schema file content to change.
 
 ### Index files
 

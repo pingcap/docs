@@ -143,7 +143,7 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 Currently, there are several different types of limitations for the clustered index feature. See the following:
 
 - Situations that are not supported and not in the support plan:
-    - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes.
+    - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes that are not [`AUTO_RANDOM`](/auto-random.md).
     - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.

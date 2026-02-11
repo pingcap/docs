@@ -350,7 +350,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - A `loader.<name>.on-duplicate` parameter is added. The default value is `replace`, which means using the new data to replace the existing data. If you want to keep the previous behavior, you can set the value to `error`. This parameter only controls the behavior during the full import phase.
 - To use DM, you should use the corresponding version of `dmctl`
     - Due to internal mechanism changes, after upgrading DM to v6.0.0, you should also upgrade `dmctl` to v6.0.0.
-- In v5.4 (v5.4 only), TiDB allows incorrect values for some noop system variables. Since v6.0.0, TiDB disallows setting incorrect values for system variables. [#31538](https://github.com/pingcap/tidb/issues/31538)
+- For v5.4 and earlier versions, TiDB allows incorrect values for some noop system variables. Starting from v6.0.0, TiDB disallows setting incorrect values for system variables. [#31538](https://github.com/pingcap/tidb/issues/31538)
 
 ## Improvements
 

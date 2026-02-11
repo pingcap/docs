@@ -1198,11 +1198,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Type: Integer
+- Type: String
 - Default value: `0`
-- Range: `[0, 1125899906842624]` (the maximum value that can be set is 1 PiB)
+- Range: `[0, 1PiB]`
 - This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
-- The default value `0` means no write bandwidth limit. The default unit is bytes per second. You can also set the value in formats such as `'1GiB'` or `'256MiB'`.
+- The default value `0` means no write bandwidth limit. 
+- You can specify the value of this variable either with a unit or without a unit.
+    - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
+    - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
 
 ### tidb_ddl_reorg_worker_cnt
 
@@ -3580,7 +3583,7 @@ SHOW WARNINGS;
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`

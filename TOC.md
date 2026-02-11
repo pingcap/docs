@@ -1,7 +1,6 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 6.5 Release Notes](/releases/release-6.5.0.md)
@@ -9,7 +8,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
-  - [Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
   - [Try Out HTAP](/quick-start-with-htap.md)
@@ -71,6 +69,7 @@
   - Upgrade
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
+    - [Migrate and Upgrade a TiDB Cluster](/tidb-upgrade-migration-guide.md)
     - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -283,6 +282,7 @@
         - [tiup cluster start](/tiup/tiup-component-cluster-start.md)
         - [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
         - [tiup cluster template](/tiup/tiup-component-cluster-template.md)
+        - [tiup cluster tls](/tiup/tiup-component-cluster-tls.md)
         - [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
       - TiUP DM Commands
         - [Overview](/tiup/tiup-component-dm.md)
@@ -326,7 +326,7 @@
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.5/deploy-tidb-dm)
     - Tutorials
       - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Sources](/dm/dm-manage-source.md)
@@ -459,6 +459,7 @@
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - Reference
       - [Architecture](/ticdc/ticdc-architecture.md)
+      - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
       - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
       - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
       - Output Protocols
