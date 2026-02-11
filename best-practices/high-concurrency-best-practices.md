@@ -1,12 +1,7 @@
 ---
 title: Best Practices for High-Concurrency Writes
-<<<<<<< HEAD
-summary: This document provides best practices for handling high-concurrency write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
-aliases: ['/docs/dev/best-practices/high-concurrency-best-practices/','/docs/dev/reference/best-practices/high-concurrency/']
-=======
 summary: This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
-aliases: ['/tidb/stable/high-concurrency-best-practices/','/tidb/dev/high-concurrency-best-practices/']
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
+aliases: ['/tidb/stable/high-concurrency-best-practices/','/tidb/dev/high-concurrency-best-practices/','/docs/dev/best-practices/high-concurrency-best-practices/','/docs/dev/reference/best-practices/high-concurrency/']
 ---
 
 # Best Practices for High-Concurrency Writes

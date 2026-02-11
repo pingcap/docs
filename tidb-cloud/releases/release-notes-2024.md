@@ -405,11 +405,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2024.md
-- Upgrade the TiDB version of [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0) to [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
-=======
 - Upgrade the TiDB version of [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.6.0](https://docs.pingcap.com/tidb/stable/release-6.6.0) to [v7.1.3](https://docs.pingcap.com/tidb/stable/release-7.1.3).
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2024.md
 
 ## February 20, 2024
 

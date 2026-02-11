@@ -1,18 +1,10 @@
 ---
-<<<<<<< HEAD:tidb-cloud/dev-guide-wordpress.md
-title: Connect to TiDB Cloud Serverless with WordPress
-summary: Learn how to use TiDB Cloud Serverless to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Cloud Serverless in a few minutes.
----
-
-# Connect to TiDB Cloud Serverless with WordPress
-=======
 title: Integrate WordPress with {{{ .starter }}}
 summary: Learn how to use {{{ .starter }}} to run WordPress. This tutorial gives step-by-step guidance to run WordPress + {{{ .starter }}} in a few minutes.
 aliases: ['/tidbcloud/dev-guide-wordpress/']
 ---
 
 # Integrate WordPress with {{{ .starter }}}
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):develop/dev-guide-wordpress.md
 
 TiDB is a MySQL-compatible database, TiDB Cloud Serverless is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
 

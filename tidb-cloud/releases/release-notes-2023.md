@@ -810,11 +810,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2023.md
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
-=======
 - Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.4.0](https://docs.pingcap.com/tidb/stable/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/stable/release-6.6.0).
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2023.md
 
 ## February 28, 2023
 
@@ -995,11 +991,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Use Grafana GUI dashboards to visualize the metrics](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics).
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2023.md
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0). The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
-=======
 - Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.3.0](https://docs.pingcap.com/tidb/stable/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/stable/release-6.4.0). The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2023.md
 
 **Console changes**
 

@@ -61,20 +61,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 ### Step 1: Review compatibility changes
 
-<<<<<<< HEAD
 Review [the compatibility changes](/releases/release-8.5.0.md#compatibility-changes) in TiDB v8.5.0 release notes. If any changes affect your upgrade, take actions accordingly.
-=======
-Review compatibility changes in TiDB release notes. If any changes affect your upgrade, take actions accordingly.
-
-The following provides release notes you need to know when you upgrade from v8.4.0 to the current version (v{{{ .tidb-version }}}). If you are upgrading from v8.3.0 or earlier versions to the current version, you might also need to check the [release notes](/releases/_index.md) of the intermediate versions.
-
-- TiDB v8.5.0 [compatibility changes](/releases/release-8.5.0.md#compatibility-changes)
-- TiDB v8.5.1 [release notes](/releases/release-8.5.1.md)
-- TiDB v8.5.2 [release notes](/releases/release-8.5.2.md)
-- TiDB v8.5.3 [compatibility changes](/releases/release-8.5.3.md#compatibility-changes)
-- TiDB v8.5.4 [compatibility changes](/releases/release-8.5.4.md#compatibility-changes)
-- TiDB v8.5.5 [compatibility changes](https://docs.pingcap.com/tidb/stable/release-8.5.5/#compatibility-changes)
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 

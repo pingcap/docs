@@ -19,11 +19,7 @@ This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](ht
 
 ## Prerequisites
 
-<<<<<<< HEAD:tidb-cloud/vector-search-hybrid-search.md
-Hybrid search relies on both [full-text search](/tidb-cloud/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
-=======
 Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):ai/guides/vector-search-hybrid-search.md
 
 - TiDB Cloud Serverless: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 

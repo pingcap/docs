@@ -26,11 +26,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 ## Get started
 
-<<<<<<< HEAD:tidb-cloud/vector-search-full-text-search-sql.md
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
-=======
 Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):ai/guides/vector-search-full-text-search-sql.md
 
 - TiDB Cloud Serverless: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 

@@ -1,12 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
-<<<<<<< HEAD:tidb-cloud/serverless-driver.md
-summary: Learn how to connect to TiDB Cloud Serverless from serverless and edge environments.
-aliases: ['/tidbcloud/serverless-driver-config']
-=======
 summary: Learn how to connect to {{{ .starter }}} or {{{ .essential }}} from serverless and edge environments.
-aliases: ['/tidbcloud/serverless-driver-config/','/tidbcloud/serverless-driver/']
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):develop/serverless-driver.md
+aliases: ['/tidbcloud/serverless-driver-config/','/tidbcloud/serverless-driver/','/tidb/stable/serverless-driver/','/tidb/dev/serverless-driver/']
 ---
 
 # TiDB Cloud Serverless Driver (Beta)
@@ -332,14 +327,10 @@ TiDB Cloud serverless driver has been integrated with the following ORMs:
 
 ## Pricing
 
-<<<<<<< HEAD:tidb-cloud/serverless-driver.md
-The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Cloud Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
-=======
 The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru) and storage usage.
 
 - For {{{ .starter }}} clusters, the pricing follows the [{{{ .starter }}} pricing](https://www.pingcap.com/tidb-cloud-starter-pricing-details/) model.
 - For {{{ .essential }}} clusters, the pricing follows the [{{{ .essential }}} pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) model.
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):develop/serverless-driver.md
 
 ## Limitations
 
@@ -347,12 +338,8 @@ Currently, using serverless driver has the following limitations:
 
 - Up to 10,000 rows can be fetched in a single query.
 - You can execute only a single SQL statement at a time. Multiple SQL statements in one query are not supported yet.
-<<<<<<< HEAD:tidb-cloud/serverless-driver.md
-- Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
-=======
 - Connection with [private endpoints](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
 - The server blocks requests from unauthorized browser origins via Cross-Origin Resource Sharing (CORS) to protect your credentials. As a result, you can use the serverless driver only from backend services.
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):develop/serverless-driver.md
 
 ## What's next
 

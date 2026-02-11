@@ -1,11 +1,7 @@
 ---
 title: Connect to TiDB with Django
 summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
-<<<<<<< HEAD
-aliases: ['/tidb/dev/dev-guide-outdated-for-django']
-=======
-aliases: ['/tidb/stable/dev-guide-sample-application-python-django/','/tidb/dev/dev-guide-sample-application-python-django/','/tidbcloud/dev-guide-sample-application-python-django/']
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
+aliases: ['/tidb/dev/dev-guide-outdated-for-django','/tidb/stable/dev-guide-sample-application-python-django/','/tidb/dev/dev-guide-sample-application-python-django/','/tidbcloud/dev-guide-sample-application-python-django/']
 ---
 
 # Connect to TiDB with Django

@@ -1,11 +1,7 @@
 ---
 title: Connect to TiDB with JDBC
 summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
-<<<<<<< HEAD
-aliases: ['/tidb/dev/sample-application-java','/tidb/dev/dev-guide-sample-application-java']
-=======
-aliases: ['/tidb/stable/dev-guide-sample-application-java-jdbc/','/tidb/dev/dev-guide-sample-application-java-jdbc/','/tidbcloud/dev-guide-sample-application-java-jdbc/']
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
+aliases: ['/tidb/dev/sample-application-java','/tidb/dev/dev-guide-sample-application-java','/tidb/stable/dev-guide-sample-application-java-jdbc/','/tidb/dev/dev-guide-sample-application-java-jdbc/','/tidbcloud/dev-guide-sample-application-java-jdbc/']
 ---
 
 # Connect to TiDB with JDBC

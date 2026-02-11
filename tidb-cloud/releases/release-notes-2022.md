@@ -11,21 +11,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2022.md
-- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
-=======
 - Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.3.0](https://docs.pingcap.com/tidb/stable/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/stable/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2022.md
 
 ## December 27, 2022
 
 **General changes**
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2022.md
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0).
-=======
 - Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.3.0](https://docs.pingcap.com/tidb/stable/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/stable/release-6.4.0).
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2022.md
 
 - The point-in-time recovery (PITR) for Dedicated Tier clusters is now in General Availability (GA).
 
@@ -255,11 +247,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2022.md
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0).
-=======
 * Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.2.0](https://docs.pingcap.com/tidb/stable/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/stable/release-6.3.0).
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2022.md
 
 **Console changes**
 
@@ -386,11 +374,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-<<<<<<< HEAD:tidb-cloud/release-notes-2022.md
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
-=======
 * Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs.pingcap.com/tidb/stable/release-6.2.0).
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):tidb-cloud/releases/release-notes-2022.md
 
 **API changes**
 

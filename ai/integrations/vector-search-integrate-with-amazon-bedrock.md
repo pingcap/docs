@@ -14,18 +14,8 @@ This tutorial demonstrates how to integrate [TiDB Vector Search](/ai/concepts/ve
 
 > **Note:**
 >
-<<<<<<< HEAD:tidb-cloud/vector-search-integrate-with-amazon-bedrock.md
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note**
->
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
-=======
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):ai/integrations/vector-search-integrate-with-amazon-bedrock.md
 
 > **Tip**
 >
@@ -47,11 +37,7 @@ To complete this tutorial, you need:
 
 - A TiDB Cloud Serverless cluster
 
-<<<<<<< HEAD:tidb-cloud/vector-search-integrate-with-amazon-bedrock.md
-    Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
-=======
     Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#starter) to create your own TiDB Cloud cluster if you don't have one.
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420)):ai/integrations/vector-search-integrate-with-amazon-bedrock.md
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 

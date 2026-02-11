@@ -1,11 +1,7 @@
 ---
 title: Connect to TiDB with Spring Boot
 summary: Learn how to connect to TiDB using Spring Boot. This tutorial gives Java sample code snippets that work with TiDB using Spring Boot.
-<<<<<<< HEAD
-aliases: ['/tidbcloud/dev-guide-sample-application-spring-boot','/tidb/dev/dev-guide-sample-application-spring-boot']
-=======
-aliases: ['/tidb/stable/dev-guide-sample-application-java-spring-boot/','/tidb/dev/dev-guide-sample-application-java-spring-boot/','/tidbcloud/dev-guide-sample-application-java-spring-boot/']
->>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
+aliases: ['/tidbcloud/dev-guide-sample-application-spring-boot','/tidb/dev/dev-guide-sample-application-spring-boot','/tidb/stable/dev-guide-sample-application-java-spring-boot/','/tidb/dev/dev-guide-sample-application-java-spring-boot/','/tidbcloud/dev-guide-sample-application-java-spring-boot/']
 ---
 
 # Connect to TiDB with Spring Boot
