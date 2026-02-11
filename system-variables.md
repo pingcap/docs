@@ -1795,16 +1795,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
-### `tidb_opt_selectivity_factor` <span class="version-mark">Introduced in v9.0.0</span>
-
-- Scope: SESSION | GLOBAL
-- Is persisted to the cluster: Yes
-- Is controlled by Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: Floating-point number
-- Value range: `[0, 1]`
-- Default value: `0.8`
-- This variable specifies the default selectivity factor for the TiDB optimizer. In some cases, when the optimizer cannot derive the predicate selectivity based on statistics, the optimizer uses this default selectivity as a substitute. **It is not recommended** to modify this value.
-
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
