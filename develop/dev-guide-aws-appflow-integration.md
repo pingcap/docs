@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB with Amazon AppFlow
 summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
+aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide-aws-appflow-integration/','/tidbcloud/dev-guide-aws-appflow-integration/']
 ---
 
 # Integrate TiDB with Amazon AppFlow
@@ -249,14 +250,6 @@ test> SELECT * FROM sf_account;
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

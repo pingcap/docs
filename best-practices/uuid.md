@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Using UUIDs as Primary Keys
 summary: UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
+aliases: ['/tidb/stable/uuid/','/tidb/dev/uuid/','/tidbcloud/uuid/']
 ---
 
 # Best Practices for Using UUIDs as Primary Keys
@@ -27,33 +28,13 @@ The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`,
 
 The `UUID_TO_BIN()` function can be used with one argument, the UUID or with two arguments where the second argument is a `swap_flag`.
 
-<CustomContent platform="tidb">
-
 It is recommended to not set the `swap_flag` with TiDB to avoid [hotspots](/best-practices/high-concurrency-best-practices.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-It is recommended to not set the `swap_flag` with TiDB to avoid hotspots.
-
-</CustomContent>
 
 You can also explicitly set the [`CLUSTERED` option](/clustered-indexes.md) for UUID based primary keys to avoid hotspots.
 
 To demonstrate the effect of the `swap_flag`, here are two tables with an identical structure. The difference is that the data inserted into `uuid_demo_1` uses `UUID_TO_BIN(?, 0)` and `uuid_demo_2` uses `UUID_TO_BIN(?, 1)`.
 
-<CustomContent platform="tidb">
-
-In the screenshot of the [Key Visualizer](/dashboard/dashboard-key-visualizer.md) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-In the screenshot of the [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
-
-</CustomContent>
+In the screenshot of the Key Visualizer below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
 
 ![Key Visualizer](/media/best-practices/uuid_keyviz.png)
 
@@ -72,6 +53,11 @@ CREATE TABLE `uuid_demo_2` (
   PRIMARY KEY (`uuid`) CLUSTERED
 )
 ```
+
+For more information about Key Visualizer, see the following documentation:
+
+- [Key Visualizer](/dashboard/dashboard-key-visualizer.md) for TiDB Self-Managed
+- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) for TiDB Cloud
 
 ## MySQL compatibility
 

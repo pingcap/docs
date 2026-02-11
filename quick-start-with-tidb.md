@@ -492,8 +492,8 @@ If you are ready to deploy a TiDB cluster for the production environment, here a
 
 If you are an application developer and want to quickly build an application using TiDB, here are the next steps:
 
-- [Developer Guide Overview](/develop/dev-guide-overview.md)
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Developer Guide Overview](https://docs.pingcap.com/developer/)
+- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
 - [Example Applications](/develop/dev-guide-sample-application-java-jdbc.md)
 
 If you are looking for an analytics solution with TiFlash, here are the next steps:

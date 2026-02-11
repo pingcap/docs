@@ -1,6 +1,7 @@
 ---
 title: Insert Data
 summary: Learn about how to insert data.
+aliases: ['/tidb/stable/dev-guide-insert-data/','/tidb/dev/dev-guide-insert-data/','/tidbcloud/dev-guide-insert-data/']
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -13,7 +14,7 @@ This document describes how to insert data into TiDB by using the SQL language w
 
 Before reading this document, you need to prepare the following:
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
 ## Insert rows
@@ -234,33 +235,30 @@ If you need to quickly import a large amount of data into a TiDB cluster, it is 
 
 The following are the recommended tools for bulk-insert:
 
-- Data export: [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). You can export MySQL or TiDB data to local or Amazon S3.
+<SimpleTab groupId="platform">
+<div label="TiDB Cloud" value="tidb-cloud">
 
-<CustomContent platform="tidb">
+- Data export: use [Dumpling](/dumpling-overview.md) to export MySQL or TiDB data to local or your cloud storage. For a TiDB Cloud Starter or Essential cluster, you can also use the [Export](/tidb-cloud/serverless-export.md) feature in the [TiDB Cloud console](https://tidbcloud.com/) to export data more efficiently.
+- Data import: use the [Import](/tidb-cloud/import-sample-data.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). You can import Dumpling exported data, import a local CSV file, or [import CSV files from cloud storage into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+- Data replication: use the [TiDB Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). You can replicate MySQL-compatible databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
+- Data backup and restore: use the [Backup](/tidb-cloud/backup-and-restore.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). Compared to Dumpling, backup and restore is more suitable for big data scenario.
 
+</div>
+<div label="TiDB Self-Managed" value="tidb">
+
+- Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
 - Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or Amazon S3 cloud disk.
 - Data replication: [TiDB Data Migration](/dm/dm-overview.md). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Data import: [Create Import](/tidb-cloud/import-sample-data.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can import **Dumpling** exported data, import a local **CSV** file, or [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
-- Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
-- Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
-
-</CustomContent>
+</div>
+</SimpleTab>
 
 ## Avoid hotspots
 
 When designing a table, you need to consider if there is a large number of insert operations. If so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
 
-<CustomContent platform="tidb">
-
-For more information on how to handle hotspot issues, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
-
-</CustomContent>
+For more information on how to handle hotspot issues in TiDB Self-Managed, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 ## Insert data to a table with the `AUTO_RANDOM` primary key
 
@@ -305,14 +303,6 @@ In TiDB, HTAP capabilities save you from performing additional operations when i
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

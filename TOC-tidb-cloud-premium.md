@@ -10,7 +10,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
@@ -29,7 +28,6 @@
 ## DEVELOP
 
 - Development Quick Start
-  - [Developer Guide Overview](/develop/dev-guide-overview.md)
   - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud
@@ -68,13 +66,13 @@
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - C#
     - [C#](/develop/dev-guide-sample-application-cs.md)
-  - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
+  - [WordPress](/develop/dev-guide-wordpress.md)
   - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
-    - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-    - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
-    - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
-    - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
-    - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
+    - [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)
+    - [Node.js Example](/develop/serverless-driver-node-example.md)
+    - [Prisma Example](/develop/serverless-driver-prisma-example.md)
+    - [Kysely Example](/develop/serverless-driver-kysely-example.md)
+    - [Drizzle Example](/develop/serverless-driver-drizzle-example.md)
 - Development Reference
   - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
@@ -534,15 +532,7 @@
       - [Overview](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
-  - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/api-overview.md)
-  - v1beta1
-    - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-    - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-    - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
-  - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
   - auth
@@ -624,7 +614,6 @@
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
 - Support Plan
@@ -642,9 +631,3 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
-
-## RELEASES
-
-- Release Notes
-  - [2026](/tidb-cloud/tidb-cloud-release-notes.md)
-  - [2025](/tidb-cloud/release-notes-2025.md)
