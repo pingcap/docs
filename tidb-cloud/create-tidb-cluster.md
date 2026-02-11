@@ -9,7 +9,7 @@ This tutorial guides you through signing up and creating a TiDB Cloud Dedicated 
 
 > **Tip:**
 >
-> To learn how to create a TiDB Cloud Serverless cluster, see [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+> To learn how to create a {{{ .starter }}} or {{{ .essential }}} cluster, see [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Before you begin
 
@@ -79,7 +79,11 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 6. Click **Create**.
 
-    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
+    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes. You will receive a notification from the TiDB Cloud console when the creation is complete.
+
+    > **Note:**
+    >
+    > The cluster creation time can vary by region and might take longer than 30 minutes. If the process takes significantly longer than expected, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Step 3. Set the root password
 

@@ -156,7 +156,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 2. Select **Import data from Cloud Storage**.
 
-3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Cloud Storage** page, provide the following information for the source Parquet files:
 
     - **Included Schema Files**: if the source folder contains the target table schema files (such as `${db_name}-schema-create.sql`), select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
@@ -200,10 +200,30 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - **Included Schema Files**: if the source folder contains the target table schema files (such as `${db_name}-schema-create.sql`), select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
+    - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage:
+
+        - **Public** (default): connects over the public internet. Use this option when the storage account allows public network access.
+        - **Private Link**: connects through an Azure private endpoint for network-isolated access. Use this option when the storage account blocks public access or when your security policy requires private connectivity. If you select **Private Link**, you also need to fill in the additional field **Azure Blob Storage Resource ID**. To find the resource ID:
+            
+            1. Go to the [Azure portal](https://portal.azure.com/).
+            2. Navigate to your storage account and click **Overview** > **JSON View**.
+            3. Copy the value of the `id` property. The resource ID is in the format `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`.
+
     - **Folder URI**: enter the Azure Blob Storage URI where your source files are located using the format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/`. The path must end with a `/`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
     - **SAS Token**: enter an account SAS token to allow TiDB Cloud to access the source files in your Azure Blob Storage container. If you don't have one yet, you can create it using the provided Azure ARM template by clicking **Click here to create a new one with Azure ARM template** and following the instructions on the screen. Alternatively, you can manually create an account SAS token. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Connect**.
+
+    If you selected **Private Link** as the connectivity method, TiDB Cloud creates a private endpoint for your storage account. You need to approve this endpoint request in the Azure portal before the connection can proceed:
+
+    1. Go to the [Azure portal](https://portal.azure.com/) and navigate to your storage account.
+    2. Click **Networking** > **Private endpoint connections**.
+    3. Find the pending connection request from TiDB Cloud and click **Approve**.
+    4. Return to the [TiDB Cloud console](https://tidbcloud.com/). The import wizard proceeds automatically once the endpoint is approved.
+
+    > **Note:**
+    >
+    > If the endpoint is not yet approved, TiDB Cloud displays a message indicating that the connection is pending approval. Approve the request in the [Azure portal](https://portal.azure.com/) and retry the connection.
 
 5. In the **Destination** section, select the target database and table.
 

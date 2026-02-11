@@ -85,7 +85,7 @@ If the upstream cluster contains a global temporary table, the downstream TiDB c
 
 ### Compatibility with vector data types
 
-Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/vector-search/vector-search-data-types.md) to downstream (experimental).
+Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/ai/reference/vector-search-data-types.md) to downstream (experimental).
 
 When the downstream is Kafka or a storage service (such as Amazon S3, GCS, Azure Blob Storage, or NFS), TiCDC converts vector data types into string types before writing to the downstream.
 

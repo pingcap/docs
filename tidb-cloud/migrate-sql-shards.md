@@ -21,7 +21,7 @@ The environment information of the upstream cluster is as follows:
 - MySQL instance1:
     - schema `store_01` and table `[sale_01, sale_02]`
     - schema `store_02` and table `[sale_01, sale_02]`
-- MySQL instance 2:
+- MySQL instance2:
     - schema `store_01`and table `[sale_01, sale_02]`
     - schema `store_02`and table `[sale_01, sale_02]`
 - Table structure:
@@ -189,7 +189,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 3. On the **Import Data from Amazon S3** page, fill in the following information:
 
-    - **Import File Count**: for TiDB Cloud Serverless, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
+    - **Import File Count**: for {{{ .starter }}} or {{{ .essential }}}, select **Multiple files**. This field is not available in TiDB Cloud Dedicated.
     - **Included Schema Files**: select **No**.
     - **Data Format**: select **CSV**.
     - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.

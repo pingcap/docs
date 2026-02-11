@@ -9,7 +9,7 @@ This document describes how to manage TiDB node groups and their endpoints to is
 
 > **Note**:
 >
-> The TiDB Node Group feature is **NOT** available for TiDB Cloud Serverless clusters.
+> The TiDB Node Group feature is **NOT** available for {{{ .starter }}} or {{{ .essential }}} clusters.
 
 ## Terms
 

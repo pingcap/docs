@@ -1,20 +1,24 @@
 ---
-title: Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
-summary: Introduce how to integrate TiDB Cloud Serverless with Amazon Lambda and CloudFormation step by step.
+title: Integrate {{{ .starter }}} with Amazon Lambda Using AWS CloudFormation
+summary: Introduce how to integrate {{{ .starter }}} with Amazon Lambda and CloudFormation step by step.
 ---
 
-# Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
+# Integrate {{{ .starter }}} with Amazon Lambda Using AWS CloudFormation
 
-This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [AWS Lambda](https://aws.amazon.com/lambda/), a serverless and event-driven compute service. By integrating TiDB Cloud Serverless with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through TiDB Cloud Serverless and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [{{{ .starter }}}](https://www.pingcap.com/tidb-cloud-starter/), a cloud-native distributed SQL database, with [AWS Lambda](https://aws.amazon.com/lambda/), a serverless and event-driven compute service. By integrating {{{ .starter }}} with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through {{{ .starter }}} and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+
+> **Note:**
+>
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 ## Solution overview
 
 In this guide, you will create a fully functional online bookshop with the following components:
 
-- AWS Lambda Function: handles requests and queries data from a TiDB Cloud Serverless cluster using Sequelize ORM and Fastify API framework.
-- AWS Secrets Manager SDK: retrieves and manages connection configurations for the TiDB Cloud Serverless cluster.
+- AWS Lambda Function: handles requests and queries data from a {{{ .starter }}} cluster using Sequelize ORM and Fastify API framework.
+- AWS Secrets Manager SDK: retrieves and manages connection configurations for the {{{ .starter }}} cluster.
 - AWS API Gateway: handles HTTP request routes.
-- TiDB Cloud Serverless: a cloud-native distributed SQL database.
+- {{{ .starter }}}: a cloud-native distributed SQL database.
 
 AWS CloudFormation is used to create the necessary resources for the project, including the Secrets Manager, API Gateway, and Lambda Functions.
 
@@ -33,7 +37,7 @@ Before getting started, ensure that you have the following:
     - [Lambda services](https://aws.amazon.com/lambda/)
     - [S3](https://aws.amazon.com/s3/)
     - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- A [TiDB Cloud](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster. Get the connection information for your TiDB Cloud Serverless cluster:
+- A [TiDB Cloud](https://tidbcloud.com) account and a {{{ .starter }}} cluster. Get the connection information for your {{{ .starter }}} cluster:
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 

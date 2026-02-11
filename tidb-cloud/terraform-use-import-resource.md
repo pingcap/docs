@@ -1,32 +1,34 @@
 ---
-title: Use Import Resource
-summary: Learn how to manage the import task using the import resource.
+title: Use the `tidbcloud_import` Resource
+summary: Learn how to manage the import task using the `tidbcloud_import` resource.
 ---
 
-# Use Import Resource
+# Use the `tidbcloud_import` Resource
 
 You can learn how to import data to a TiDB Cloud cluster with the `tidbcloud_import` resource in this document.
 
 The features of the `tidbcloud_import` resource include the following:
 
-- Create import tasks for TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
+- Create import tasks for TiDB Cloud clusters.
 - Import data either from local disks or from Amazon S3 buckets.
 - Cancel ongoing import tasks.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- Refer to one of the following documents to create a TiDB Cloud cluster:
+    - [Create a {{{ .starter }}} or Essential cluster](/tidb-cloud/create-tidb-cluster-serverless.md) 
+    - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Create and run an import task
 
-You can manage either a local import task or an Amazon S3 import task using the import resource.
+You can manage either a local import task or an Amazon S3 import task using the `tidbcloud_import` resource.
 
 ### Create and run a local import task
 
 > **Note:**
 >
-> Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
+> Importing local files is supported only for {{{ .starter }}} or {{{ .essential }}} clusters, not for TiDB Cloud Dedicated clusters.
 
 1. Create a CSV file for import. For example:
 
@@ -253,7 +255,7 @@ Import tasks cannot be updated.
 
 ## Delete an import task
 
-For Terraform, deleting an import task means canceling the corresponding import resource.
+For Terraform, deleting an import task means canceling the corresponding `tidbcloud_import` resource.
 
 You cannot cancel a `COMPLETED` import task. Otherwise, you will get a `Delete Error` as in the following example:
 
@@ -298,4 +300,4 @@ Destroy complete! Resources: 1 destroyed.
 
 ## Configurations
 
-See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for the import resource.
+See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for the `tidbcloud_import` resource.

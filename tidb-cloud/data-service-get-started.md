@@ -17,7 +17,11 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before creating a Data App, make sure that you have created a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) cluster hosted on AWS. If you do not have one, follow the steps in [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+
+> **Note:**
+>
+> Data Service is available only for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) clusters hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Get started with a sample Data App
 

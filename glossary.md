@@ -96,7 +96,7 @@ For more information, see [Use Dumpling to Export Data](/dumpling-overview.md).
 
 ### Data Definition Language (DDL)
 
-Data Definition Language (DDL) is a part of the SQL standard that deals with creating, modifying, and dropping tables and other objects. For more information, see [DDL Introduction](/ddl-introduction.md).
+Data Definition Language (DDL) is a part of the SQL standard that deals with creating, modifying, and dropping tables and other objects. For more information, see [DDL Introduction](/best-practices/ddl-introduction.md).
 
 ### Data Migration (DM)
 
@@ -412,4 +412,4 @@ Universally Unique Identifier (UUID) is a 128-bit (16-byte) generated ID used to
 
 ### Vector search
 
-[Vector search](/vector-search/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+[Vector search](/ai/concepts/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
