@@ -10,8 +10,6 @@ aliases: ['/tidb/stable/dev-guide-overview/','/tidb/dev/dev-guide-overview/','/t
 
 This guide helps application developers quickly learn how to connect to TiDB, design databases, write and query data, and build reliable, high-performance applications on TiDB.
 
-Whether you are new to TiDB or migrating an existing MySQL-based application, this guide provides practical, step-by-step instructions and best practices to help you get productive quickly.
-
 > **Note:**
 >
 > This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
