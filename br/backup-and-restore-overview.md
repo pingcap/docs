@@ -157,8 +157,6 @@ Starting from v8.5.5, BR supports checking collation compatibility when restorin
 
 If the upstream cluster is still available before the restore, you can run the following SQL statements on the upstream cluster to perform a precheck on the system tables. By comparing the original row count with the row count after grouping under the target collation, you can determine whether conflicts would occur under the target collation.
 
-Replace `utf8mb4_general_ci` in the following SQL statements with the default collation of the target cluster.
-
 Group 1
 
 ```sql
