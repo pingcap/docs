@@ -26,6 +26,20 @@ To complete this tutorial, you need:
 - (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
+In addition, to connect to a {{{ .starter }}} or {{{ .essential }}} public endpoint from DBeaver on **Windows**, you must configure an additional SSL certificate (ISRG Root X1) as follows. Otherwise, the connection will fail. For other operating systems, you can skip these steps.
+
+1. Download the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem) and save it to a local path, such as `C:\certs\isrgrootx1.pem`.
+
+2. In DBeaver, edit your connection and go to the **SSL** tab:
+
+    1. Select **Use SSL**.
+    2. In the **CA certificate** field, select the `isrgrootx1.pem` file you downloaded.
+    3. Leave the other certificate fields empty.
+
+3. On the **Driver properties** tab, remove any existing `sslMode`, `useSSL`, or `requireSSL` entries to avoid SSL configuration conflicts.
+
+4. Click **Test Connection** to verify that the connection is successful.
+
 ## Connect to TiDB
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
