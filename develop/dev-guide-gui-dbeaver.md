@@ -38,16 +38,16 @@ To complete this tutorial, you need:
 </CustomContent>
 <CustomContent plan="starter,essential">
 
-On Windows, you must configure an additional SSL certificate (ISRG Root X1) in DBeaver to connect to the {{{ .starter }}} or {{{ .essential }}} public endpoint. Otherwise, the connection fails.
+To connect to a {{{ .starter }}} or {{{ .essential }}} public endpoint from DBeaver on Windows, you must configure an additional SSL certificate (ISRG Root X1). Otherwise, your connection will fail.
 
 To configure the ISRG Root X1 certificate, do the following:
 
-1. Download the ISRG Root X1 certificate from: https://letsencrypt.org/certs/isrgrootx1.pem. Save it locally, for example, to `C:\certs\isrgrootx1.pem`.
+1. Download the ISRG Root X1 certificate from https://letsencrypt.org/certs/isrgrootx1.pem and save it to a local path, for example, `C:\certs\isrgrootx1.pem`.
 
 2. In DBeaver, edit your connection and go to the **SSL** tab:
 
     1. Select **Use SSL**.
-    2. In **CA certificate**, browse to select the downloaded `isrgrootx1.pem` file.
+    2. In the **CA certificate** field, browse to select the downloaded `isrgrootx1.pem` file.
     3. Leave the other certificate fields empty.
 
 3. Remove any previously added `sslMode`, `useSSL`, or `requireSSL` entries from the **Driver properties** tab to avoid conflicting SSL settings.
