@@ -20,8 +20,18 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Connection
 
+<<<<<<< HEAD
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Cloud Serverless clusters. 
 - No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
+=======
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters.
+- No [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) support for Private Endpoint.
+- Your database client connections might be terminated unexpectedly if they remain open for more than 30 minutes. This can occur when a TiDB server shuts down, restarts, or undergoes maintenance, potentially causing application disruptions. To avoid this issue, configure a maximum connection lifetime. It is recommended to start with 5 minutes and increase it gradually if it affects tail latency. For more information, see [Recommended settings for connection pools](/develop/dev-guide-connection-parameters.md).
+
+> **Note:**
+>
+> Due to a [limitation of AWS Global Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout), the idle timeout for a Public Endpoint connection on AWS is 340 seconds. For the same reason, you cannot use TCP keep-alive packets to keep the connection open.
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
 
 ### Encryption
 

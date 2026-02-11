@@ -49,7 +49,7 @@ For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.m
 
 The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Serverless and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
 
-For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
+For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/api/tidb-cloud-api-overview).
 
 ## Nodes
 

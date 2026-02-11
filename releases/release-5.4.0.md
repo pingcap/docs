@@ -27,7 +27,7 @@ In v5.4, the key new features or improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.4.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) of the corresponding version.
+> When upgrading from an earlier TiDB version to v5.4.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/_index.md) of the corresponding version.
 
 ### System variables
 

@@ -9,9 +9,10 @@ This document describes how to connect to your TiDB Cloud Serverless cluster.
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Cloud Dedicated cluster, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+> - To learn how to connect to a TiDB Cloud Dedicated cluster, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+> - This document focuses on the network connection methods for {{{ .starter }}} and {{{ .essential }}}. To connect to TiDB via a specific tool, driver, or ORM, see [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
-## Connection methods
+## Network connection methods
 
 After your TiDB Cloud Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
@@ -23,7 +24,7 @@ After your TiDB Cloud Serverless cluster is created on TiDB Cloud, you can conne
 
   TiDB Cloud provides a Data Service feature that enables you to connect to your TiDB Cloud Serverless cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Cloud Serverless data via a RESTful API rather than raw SQL.
 
-- [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
+- [Serverless Driver (beta)](/develop/serverless-driver.md)
 
   TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your TiDB Cloud Serverless cluster in edge environments with the same experience as direct connections.
 

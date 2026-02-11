@@ -44,7 +44,7 @@ No.
 - Starting from January 2, 2025, the default TiDB version for new TiDB Cloud Dedicated clusters is [v8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2).
 - Starting from February 21, 2024, the TiDB version for TiDB Cloud Serverless clusters is [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
 
-For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
+For more information, see [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 

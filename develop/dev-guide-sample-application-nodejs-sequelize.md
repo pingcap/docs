@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with Sequelize
 summary: Learn how to connect to TiDB using Sequelize. This tutorial gives Node.js sample code snippets that work with TiDB using Sequelize.
+aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-sequelize/','/tidb/dev/dev-guide-sample-application-nodejs-sequelize/','/tidbcloud/dev-guide-sample-application-nodejs-sequelize/']
 ---
 
 # Connect to TiDB with Sequelize
@@ -25,22 +26,10 @@ To complete this tutorial, you need:
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
-<CustomContent platform="tidb">
-
 **If you don't have a TiDB cluster, you can create one as follows:**
 
 - (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
-
-</CustomContent>
 
 ## Run the sample app to connect to TiDB
 
@@ -151,7 +140,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 </div>
 
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 1. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -320,19 +309,11 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 ## Next steps
 
 - Learn more usage of the ORM framework Sequelize driver from [the documentation of Sequelize](https://sequelize.org/).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](https://docs.pingcap.com/developer/), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

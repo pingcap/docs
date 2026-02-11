@@ -1,25 +1,16 @@
 ---
-title: Build a {{{ .starter }}} Cluster
-summary: Learn how to build a {{{ .starter }}} cluster in TiDB Cloud and connect to it.
+title: Create a {{{ .starter }}} Cluster
+summary: Learn how to create a {{{ .starter }}} cluster and connect to it.
+aliases: ['/tidb/stable/dev-guide-build-cluster-in-cloud/','/tidb/dev/dev-guide-build-cluster-in-cloud/','/tidbcloud/dev-guide-build-cluster-in-cloud/']
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a {{{ .starter }}} Cluster
-
-<CustomContent platform="tidb">
+# Create a {{{ .starter }}} Cluster
 
 This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} cluster, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-This document walks you through the quickest way to get started with TiDB Cloud. You will create a TiDB cluster, connect to it, and run a sample application on it.
-
-</CustomContent>
 
 ## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
 
@@ -41,21 +32,9 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 8. Click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
 
-<CustomContent platform="tidb">
-
 > **Note:**
 >
 > For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-
-</CustomContent>
 
 ## Step 2. Connect to a cluster
 
@@ -138,23 +117,10 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
 
-<CustomContent platform="tidb">
-
 > **Note:**
 >
 > - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
 > - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-> - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
-
-</CustomContent>
 
 3. Fill in the password to sign in.
 
@@ -180,14 +146,6 @@ If your actual output is similar to the expected output, congratulations, you ha
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

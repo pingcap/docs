@@ -226,7 +226,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
 
 ## Use the edge function
 
-The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
+The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/develop/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
 
 To use the edge function, take the following steps:
 

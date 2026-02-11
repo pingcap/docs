@@ -200,13 +200,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.
 
-    Starting from v8.4.0, TiDB supports [vector data types](/vector-search/vector-search-data-types.md) and [vector search indexes](/vector-search/vector-search-index.md), offering powerful vector search capabilities. TiDB vector data types support up to 16,383 dimensions and support various [distance functions](/vector-search/vector-search-functions-and-operators.md#vector-functions), including L2 distance (Euclidean distance), cosine distance, negative inner product, and L1 distance (Manhattan distance).
+    Starting from v8.4.0, TiDB supports [vector data types](/ai/reference/vector-search-data-types.md) and [vector search indexes](/ai/reference/vector-search-index.md), offering powerful vector search capabilities. TiDB vector data types support up to 16,383 dimensions and support various [distance functions](/ai/reference/vector-search-functions-and-operators.md#vector-functions), including L2 distance (Euclidean distance), cosine distance, negative inner product, and L1 distance (Manhattan distance).
 
     To start vector search, you only need to create a table with vector data types, insert vector data, and then perform a query of vector data. You can also perform mixed queries of vector data and traditional relational data.
 
-    To enhance the performance of vector search, you can create and use [vector search indexes](/vector-search/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
+    To enhance the performance of vector search, you can create and use [vector search indexes](/ai/reference/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
-    For more information, see [documentation](/vector-search/vector-search-overview.md).
+    For more information, see [documentation](/ai/concepts/vector-search-overview.md).
 
 ### DB operations
 

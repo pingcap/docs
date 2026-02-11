@@ -18,7 +18,7 @@ This guide describes how to connect your TiDB Cloud clusters to Vercel projects 
 
 For both of the preceding methods, TiDB Cloud provides the following options for programmatically connecting to your database:
 
-- Cluster: connect your TiDB Cloud cluster to your Vercel project with direct connections or [serverless driver](/tidb-cloud/serverless-driver.md).
+- Cluster: connect your TiDB Cloud cluster to your Vercel project with direct connections or [serverless driver](/develop/serverless-driver.md).
 - [Data App](/tidb-cloud/data-service-manage-data-app.md): access data of your TiDB Cloud cluster through a collection of HTTP endpoints.
 
 ## Prerequisites

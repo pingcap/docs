@@ -17,7 +17,7 @@ This document introduces how to build an auto-workflow: create a TiDB Cloud Serv
 4. Enter a description for the API key, and then click **Next**.
 5. Copy the created API key for later use in n8n, and then click **Done**.
 
-For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
+For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/api/tidb-cloud-api-overview).
 
 ## Step 1: Install n8n
 

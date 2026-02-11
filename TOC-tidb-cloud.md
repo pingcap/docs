@@ -8,9 +8,14 @@
 - Why TiDB Cloud
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
+<<<<<<< HEAD
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
+=======
+- Get Started
+  - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -31,6 +36,7 @@
   - [Backup & Restore](/tidb-cloud/backup-and-restore-concepts.md)
   - [Security](/tidb-cloud/security-concepts.md)
 
+<<<<<<< HEAD
 ## DEVELOP
 
 - Development Quick Start
@@ -132,6 +138,8 @@
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
 
+=======
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
 ## GUIDES
 
 - Manage Cluster
@@ -139,6 +147,7 @@
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
+<<<<<<< HEAD
   - Manage TiDB Cloud Serverless Clusters
     - [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - Connect to Your TiDB Cloud Serverless Cluster
@@ -166,6 +175,21 @@
     - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
     - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
+=======
+  - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
+  - Connect to Your TiDB Cloud Dedicated Cluster
+    - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster.md)
+    - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
+  - [Scale a TiDB Cloud Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
+  - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
+  - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+  - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -284,6 +308,7 @@
 - Explore Data
   - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
+<<<<<<< HEAD
 - Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/vector-search/vector-search-overview.md)
   - Get Started
@@ -313,6 +338,8 @@
   - [Improve Performance](/vector-search/vector-search-improve-performance.md)
   - [Limitations](/vector-search/vector-search-limitations.md)
   - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
+=======
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
 - Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
@@ -717,9 +744,9 @@
       - [Overview](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
-  - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - [Schema Cache](/schema-cache.md)
+<<<<<<< HEAD
 - API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
   - [Overview](/tidb-cloud/api-overview.md) 
   - v1beta1
@@ -795,6 +822,8 @@
     - [list](/tidb-cloud/ticloud-project-list.md)
   - [upgrade](/tidb-cloud/ticloud-upgrade.md)
   - [help](/tidb-cloud/ticloud-help.md)
+=======
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
 - General Reference
   - TiDB Classic Architecture
     - [Overview](/tidb-architecture.md)
@@ -842,7 +871,6 @@
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
   - [Batch Processing](/batch-processing.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
@@ -868,6 +896,7 @@
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 
+<<<<<<< HEAD
 ## RELEASES
 
 - Release Notes
@@ -886,3 +915,8 @@
   - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
+=======
+## _BUILD_ALLOWLIST
+
+- [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))

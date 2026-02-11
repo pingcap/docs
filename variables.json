@@ -1,6 +1,12 @@
 {
   "tidb": "TiDB",
+<<<<<<< HEAD
   "tidb-version": "v8.5.0",
+=======
+  "tidb-version": "8.5.5",
+  "tidb-release-date": "2026-01-15",
+  "tidb-operator-version": "v1.6.4",
+>>>>>>> b7469123c6 (release-8.5: implement a new information architecture for TiDB and TiDB Cloud docs (#22420))
   "self-managed": "TiDB Self-Managed",
   "starter": "TiDB Cloud Starter",
   "essential": "TiDB Cloud Essential",

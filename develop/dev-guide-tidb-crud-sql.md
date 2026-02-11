@@ -1,6 +1,7 @@
 ---
 title: CRUD SQL in TiDB
 summary: A brief introduction to TiDB's CRUD SQL.
+aliases: ['/tidb/stable/dev-guide-tidb-crud-sql/','/tidb/dev/dev-guide-tidb-crud-sql/','/tidbcloud/dev-guide-tidb-crud-sql/']
 ---
 
 # CRUD SQL in TiDB
@@ -9,7 +10,7 @@ This document briefly introduces how to use TiDB's CRUD SQL.
 
 ## Before you start
 
-Please make sure you are connected to a TiDB cluster. If not, refer to [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster.
+Please make sure you are connected to a TiDB cluster. If not, refer to [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster.
 
 ## Explore SQL with TiDB
 
@@ -104,14 +105,6 @@ SELECT * FROM person WHERE id < 5;
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)
