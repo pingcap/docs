@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 797251ecc59fbe2263fec7e80b38d3944c2c0742-->
+# 目录 <!--Corresponding EN commit: b7469123c65aa8409bf754e4a7909e16d8ed3082-->
 
 ## 快速开始
 
@@ -11,7 +11,6 @@
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
 - 快速上手
   - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [试用 TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [进行 PoC](/tidb-cloud/tidb-cloud-poc.md)
 - 关键概念
@@ -29,97 +28,6 @@
   - [备份 & 恢复](/tidb-cloud/backup-and-restore-concepts.md)
   - [安全性](/tidb-cloud/security-concepts.md)
 
-## 应用开发
-
-- 开发快速入门
-  - [概览](/develop/dev-guide-overview.md)
-  - [构建 TiDB Cloud 集群](/develop/dev-guide-build-cluster-in-cloud.md)
-  - [使用 TiDB 的增删改查 SQL](/develop/dev-guide-tidb-crud-sql.md)
-- 连接到 TiDB Cloud
-  - GUI 数据库工具
-    - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
-    - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
-    - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
-    - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
-    - [Navicat](/develop/dev-guide-gui-navicat.md)
-  - [选择驱动或 ORM 框架](/develop/dev-guide-choose-driver-or-orm.md)
-  - Java
-    - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
-    - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
-    - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
-    - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
-    - [连接池与连接参数](/develop/dev-guide-connection-parameters.md)
-  - Go
-    - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
-    - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
-  - Python
-    - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
-    - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-    - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
-    - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
-    - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
-    - [Django](/develop/dev-guide-sample-application-python-django.md)
-  - Node.js
-    - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
-    - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
-    - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
-    - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
-    - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-  - Ruby
-    - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-    - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
-  - C#
-    - [C#](/develop/dev-guide-sample-application-cs.md)
-  - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
-- 开发参考
-  - 数据库模式设计
-    - [概览](/develop/dev-guide-schema-design-overview.md)
-    - [创建数据库](/develop/dev-guide-create-database.md)
-    - [创建表](/develop/dev-guide-create-table.md)
-    - [创建二级索引](/develop/dev-guide-create-secondary-indexes.md)
-  - 数据写入
-    - [插入数据](/develop/dev-guide-insert-data.md)
-    - [更新数据](/develop/dev-guide-update-data.md)
-    - [删除数据](/develop/dev-guide-delete-data.md)
-    - [使用 TTL (Time to Live) 定期删除过期数据](/time-to-live.md)
-    - [预处理语句](/develop/dev-guide-prepared-statement.md)
-  - 数据读取
-    - [单表读取](/develop/dev-guide-get-data-from-single-table.md)
-    - [多表连接查询](/develop/dev-guide-join-tables.md)
-    - [子查询](/develop/dev-guide-use-subqueries.md)
-    - [查询结果分页](/develop/dev-guide-paginate-results.md)
-    - [视图](/develop/dev-guide-use-views.md)
-    - [临时表](/develop/dev-guide-use-temporary-tables.md)
-    - [公共表表达式](/develop/dev-guide-use-common-table-expression.md)
-    - 读取副本数据
-      - [Follower Read](/develop/dev-guide-use-follower-read.md)
-      - [Stale Read](/develop/dev-guide-use-stale-read.md)
-    - [HTAP 查询](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-  - 事务
-    - [概览](/develop/dev-guide-transaction-overview.md)
-    - [乐观事务和悲观事务](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-    - [事务限制](/develop/dev-guide-transaction-restraints.md)
-    - [事务错误处理](/develop/dev-guide-transaction-troubleshoot.md)
-  - 优化 SQL 性能
-    - [概览](/develop/dev-guide-optimize-sql-overview.md)
-    - [SQL 性能调优](/develop/dev-guide-optimize-sql.md)
-    - [性能调优最佳实践](/develop/dev-guide-optimize-sql-best-practices.md)
-    - [索引的最佳实践](/develop/dev-guide-index-best-practice.md)
-    - 其他优化
-      - [避免隐式类型转换](/develop/dev-guide-implicit-type-conversion.md)
-      - [唯一序列号生成方案](/develop/dev-guide-unique-serial-number-generation.md)
-  - 故障诊断
-    - [SQL 或事务问题](/develop/dev-guide-troubleshoot-overview.md)
-    - [结果集不稳定](/develop/dev-guide-unstable-result-set.md)
-    - [超时](/develop/dev-guide-timeouts-in-tidb.md)
-  - 引用文档
-    - [命名规范](/develop/dev-guide-object-naming-guidelines.md)
-    - [SQL 开发规范](/develop/dev-guide-sql-development-specification.md)
-  - [Bookshop 示例应用](/develop/dev-guide-bookshop-schema-design.md)
-  - 第三方工具支持
-    - [TiDB 支持的第三方工具](/develop/dev-guide-third-party-support.md)
-    - [已知的第三方工具兼容问题](/develop/dev-guide-third-party-tools-compatibility.md)
-
 ## 指南
 
 - 管理集群
@@ -129,7 +37,7 @@
     - [TiDB Cloud 性能参考](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
   - 连接到 TiDB Cloud Dedicated 集群
-    - [连接方法概览](/tidb-cloud/connect-to-tidb-cluster.md)
+    - [网络连接概述](/tidb-cloud/connect-to-tidb-cluster.md)
     - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection.md)
     - [通过 AWS Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections.md)
     - [通过 Azure Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
@@ -259,31 +167,6 @@
 - 探索数据
   - [SQL 编辑器中的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](/tidb-cloud/sql-proxy-account.md)
-- 向量搜索 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [概述](/vector-search/vector-search-overview.md)
-  - 快速上手
-    - [使用 SQL 开始向量搜索](/vector-search/vector-search-get-started-using-sql.md)
-    - [使用 Python 开始向量搜索](/vector-search/vector-search-get-started-using-python.md)
-  - 集成
-    - [集成概览](/vector-search/vector-search-integration-overview.md)
-    - AI 框架
-      - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
-    - AI 服务
-      - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
-    - 嵌入模型/服务
-      - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-    - ORM 库
-      - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
-      - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
-      - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
-  - 参考
-    - [向量数据类型](/vector-search/vector-search-data-types.md)
-    - [向量函数和操作符](/vector-search/vector-search-functions-and-operators.md)
-    - [向量索引](/vector-search/vector-search-index.md)
-  - [优化搜索性能](/vector-search/vector-search-improve-performance.md)
-  - [使用限制](/vector-search/vector-search-limitations.md)
-  - [更新日志](/tidb-cloud/vector-search-changelogs.md)
 - 数据服务 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/data-service-overview.md)
   - [快速上手](/tidb-cloud/data-service-get-started.md)
@@ -679,19 +562,8 @@
       - [概述](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元数据锁](/metadata-lock.md)
-  - [使用 UUID](/best-practices/uuid.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
   - [Schema 缓存](/schema-cache.md)
-- API 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [概述](/tidb-cloud/api-overview.md)
-  - v1beta1
-    - [TiDB Cloud Starter 和 Essential](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
-    - [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated)
-    - [计费](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-    - [数据服务](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
-    - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-    - [MSP (已弃用)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
-  - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - 通用参考
   - TiDB 经典架构
     - [概述](/tidb-architecture.md)
@@ -738,7 +610,6 @@
   - [服务器状态变量](/status-variables.md)
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
-  - [DDL 最佳实践](/ddl-introduction.md)
   - [内嵌于 DDL 的 Analyze](/ddl_embedded_analyze.md)
   - [数据批量处理](/batch-processing.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
@@ -764,26 +635,6 @@
 - 常见问题
   - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
 - [术语表](/tidb-cloud/tidb-cloud-glossary.md)
-
-## 发布
-
-- Release Notes
-  - [2026](/tidb-cloud/tidb-cloud-release-notes.md)
-  - [2025](/tidb-cloud/release-notes-2025.md)
-  - [2024](/tidb-cloud/release-notes-2024.md)
-  - [2023](/tidb-cloud/release-notes-2023.md)
-  - [2022](/tidb-cloud/release-notes-2022.md)
-  - [2021](/tidb-cloud/release-notes-2021.md)
-  - [2020](/tidb-cloud/release-notes-2020.md)
-- 维护通知
-  - [[2024-09-15] TiDB Cloud 控制台维护通知](/tidb-cloud/notification-2024-09-15-console-maintenance.md)
-  - [[2024-04-18] TiDB Cloud 数据迁移 (DM) 功能维护通知](/tidb-cloud/notification-2024-04-18-dm-feature-maintenance.md)
-  - [[2024-04-16] TiDB Cloud 监控功能维护通知](/tidb-cloud/notification-2024-04-16-monitoring-features-maintenance.md)
-  - [[2024-04-11] TiDB Cloud 数据迁移 (DM) 功能维护通知](/tidb-cloud/notification-2024-04-11-dm-feature-maintenance.md)
-  - [[2024-04-09] TiDB Cloud 监控功能维护通知](/tidb-cloud/notification-2024-04-09-monitoring-features-maintenance.md)
-  - [[2023-11-14] TiDB Cloud Dedicated Scale 功能维护通知](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
-  - [[2023-09-26] TiDB Cloud 控制台维护通知](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
-  - [[2023-08-31] TiDB Cloud 控制台维护通知](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
 
 ## _BUILD_ALLOWLIST
 
