@@ -245,7 +245,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL Execution
 
-This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md).
+This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/best-practices/ddl-introduction.md).
 
 ### How long does it take to perform various DDL operations?
 

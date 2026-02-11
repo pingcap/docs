@@ -128,7 +128,7 @@ As shown in the preceding diagram, the execution of backend tasks in the distrib
 
 <CustomContent platform="tidb">
 
-* [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
+* [Execution Principles and Best Practices of DDL Statements](/best-practices/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
