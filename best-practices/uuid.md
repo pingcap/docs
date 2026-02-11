@@ -19,6 +19,26 @@ When used as a primary key, a UUID offers the following advantages compared with
 
 This section describes best practices for storing and indexing UUIDs in TiDB.
 
+### UUID versions
+
+[RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562) defines 8 different versions of UUIDs. TiDB can store any version of UUID and can create v1, v4 and v7 UUIDs.
+
+UUIDv1 is created with the [`UUID()`](/functions-and-operators/miscellaneous-functions.md#uuid) function.
+
+UUIDv2 is not commonly used.
+
+UUIDv3 uses a namespace with a MD5 hash.
+
+UUIDv4 is created with the [`UUID_V4()`](/functions-and-operators/miscellaneous-functions.md#uuid_v4) function. This function does not store a timestamp and is fully random except for the bits that store the version and variant.
+
+UUIDv5 uses a namespace with a SHA1 hash.
+
+UUIDv6 is a modern alternative to UUIDv1 that is field compatible with UUIDv1.
+
+UUIDv7 is created with the [`UUID_V7()`](/functions-and-operators/miscellaneous-functions.md#uuid_v7) function. This function is meant as a modern alternative to UUIDv1 for applications that don't require a UUID that is field compatible with UUIDv1.
+
+UUIDv8 is a custom format UUID that only requires the version bits to be set to 0b1000 (binary representation of 8).
+
 ### Store as binary
 
 The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin), the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a [`BINARY(16)`](/data-type-string.md#binary-type) column. When retrieving the UUID, you can use the [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid) function to get back to the textual format.
@@ -73,6 +93,28 @@ CREATE TABLE `uuid_demo_2` (
 )
 ```
 
+### Generated UUID as default
+
+An expression default can be used to generate a UUID for a primary key. Replace `UUID()` with `UUID_V4()` or `UUID_V7()` to use a UUIDv4 or UUIDv7 instead of a UUIDv1 if needed.
+
+```sql
+CREATE TABLE `uuid_demo_3` (
+  `uuid` BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+  PRIMARY KEY (`uuid`)
+)
+```
+
+### Converting from binary to text using a generated column
+
+```sql
+CREATE TABLE `uuid_demo_4` (
+  `uuid` BINARY(16) PRIMARY KEY,
+  `uuid_text` CHAR(36) AS (BIN_TO_UUID(uuid))
+);
+```
+
 ## MySQL compatibility
 
 UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.
+
+The `UUID_V4()`, `UUID_V7()`, `UUID_VERSION()` and `UUID_TIMESTAMP()` functions are TiDB specific extensions.
