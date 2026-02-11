@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 797251ecc59fbe2263fec7e80b38d3944c2c0742-->
+# 目录 <!--Corresponding EN commit: 46d65b71ce4adf9b3f924fba9c8abe40c943ccbb-->
 
 ## 快速开始
 
@@ -156,6 +156,11 @@
   - 监控和告警
     - [概览](/tidb-cloud/monitor-tidb-cluster.md)
     - [内置指标](/tidb-cloud/built-in-monitoring.md)
+    - [内置告警](/tidb-cloud/monitor-built-in-alerting.md)
+    - 订阅告警通知
+      - [通过邮件订阅](/tidb-cloud/monitor-alert-email.md)
+      - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
+      - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
     - [集群事件](/tidb-cloud/tidb-cloud-events.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -686,6 +691,11 @@
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected：通过 IM 订阅 TiDB Cloud 告警
+      - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
+      - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
+      - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
+      - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
       - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)
