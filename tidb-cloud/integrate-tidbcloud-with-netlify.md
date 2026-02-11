@@ -1,28 +1,28 @@
 ---
 title: 集成 TiDB Cloud 与 Netlify
-summary: 了解如何将你的 TiDB Cloud 集群连接到 Netlify 项目。
+summary: 学习如何将 TiDB Cloud 集群连接到 Netlify 项目。
 ---
 
 # 集成 TiDB Cloud 与 Netlify
 
-[Netlify](https://netlify.com/) 是一个一体化平台，用于自动化现代 Web 项目。它用单一的工作流替代了你的托管基础设施、持续集成和部署流水线，并在项目发展过程中集成了如无服务器函数、用户认证和表单处理等动态功能。
+[Netlify](https://netlify.com/) 是一个一体化平台，用于自动化现代 Web 项目。它用单一工作流替代了你的托管基础设施、持续集成和部署流水线，并在项目发展过程中集成了如无服务器函数、用户认证和表单处理等动态功能。
 
-本文档介绍了如何在 Netlify 上部署一个以 TiDB Cloud 作为数据库后端的全栈应用。你还可以学习如何将 Netlify edge function 与我们的 TiDB Cloud serverless driver 一起使用。
+本文档介绍了如何在 Netlify 上部署一个以 TiDB Cloud 作为数据库后端的全栈应用。你还可以学习如何将 Netlify 边缘函数与我们的 TiDB Cloud serverless 驱动配合使用。
 
 ## 前置条件
 
 在部署之前，请确保满足以下前置条件。
 
-### 一个 Netlify 账号和 CLI
+### 一个 Netlify 账户和 CLI
 
-你需要拥有一个 Netlify 账号和 CLI。如果还没有，请参考以下链接创建：
+你需要拥有一个 Netlify 账户和 CLI。如果还没有，请参考以下链接创建：
 
-* [注册 Netlify 账号](https://app.netlify.com/signup)
-* [获取 Netlify CLI](https://docs.netlify.com/cli/get-started/)
+* [注册 Netlify 账户](https://app.netlify.com/signup)。
+* [获取 Netlify CLI](https://docs.netlify.com/cli/get-started/)。
 
-### 一个 TiDB Cloud 账号和 TiDB 集群
+### 一个 TiDB Cloud 账户和 TiDB 集群
 
-你需要在 TiDB Cloud 中拥有一个账号和一个集群。如果还没有，请参考以下内容创建：
+你需要在 TiDB Cloud 中拥有一个账户和集群。如果还没有，请参考以下内容创建：
 
 - [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
@@ -37,11 +37,11 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
 
 ## 步骤 1. 获取示例项目和连接字符串
 
-为了帮助你快速开始，TiDB Cloud 提供了一个使用 TypeScript、Next.js、React 和 Prisma Client 的全栈示例应用。它是一个简单的博客站点，你可以在其中发布和删除自己的博客。所有内容都通过 Prisma 存储在 TiDB Cloud 中。
+为了帮助你快速上手，TiDB Cloud 提供了一个使用 TypeScript、Next.js、React 和 Prisma Client 的全栈示例应用。它是一个简单的博客站点，你可以在其中发布和删除自己的博客。所有内容都通过 Prisma 存储在 TiDB Cloud 中。
 
 ### Fork 示例项目并克隆到你自己的空间
 
-1. Fork [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) 仓库到你自己的 GitHub 仓库。
+1. 将 [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) 仓库 fork 到你自己的 GitHub 仓库。
 
 2. 将 fork 后的仓库克隆到你自己的空间：
 
@@ -59,7 +59,7 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
-> **Tip:**
+> **提示：**
 >
 > 如果你还没有安装 Cloud CLI，请参考 [TiDB Cloud CLI 快速入门](/tidb-cloud/get-started-with-cli.md) 进行快速安装，然后再执行以下步骤。
 
@@ -69,7 +69,7 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
     ticloud cluster connect-info
     ```
 
-2. 按提示选择你的集群、客户端和操作系统。注意，本教程使用的客户端是 `Prisma`。
+2. 按提示选择你的集群、客户端和操作系统。注意本文档中使用的客户端为 `Prisma`。
 
     ```
     Choose the cluster
@@ -89,9 +89,9 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
     }
     ```
 
-    > **Note:**
+    > **注意：**
     >
-    > 在后续使用连接字符串时，请注意以下事项：
+    > 后续使用连接字符串时，请注意以下事项：
     >
     > - 将连接字符串中的参数替换为实际值。
     > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为唯一的新名称。
@@ -112,9 +112,9 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     ```
 
-    > **Note:**
+    > **注意：**
     >
-    > 在后续使用连接字符串时，请注意以下事项：
+    > 后续使用连接字符串时，请注意以下事项：
     >
     > - 将连接字符串中的参数替换为实际值。
     > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为唯一的新名称。
@@ -124,7 +124,7 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
 
 ## 步骤 2. 将示例应用部署到 Netlify
 
-1. 在 Netlify CLI 中，认证你的 Netlify 账号并获取访问令牌。
+1. 在 Netlify CLI 中，认证你的 Netlify 账户并获取访问令牌。
 
     ```shell
     netlify login
@@ -180,35 +180,35 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
 3. 设置环境变量。为了让你自己的空间和 Netlify 空间都能连接到 TiDB Cloud 集群，你需要将 `DATABASE_URL` 设置为在 [步骤 1](#step-1-get-the-example-project-and-the-connection-string) 获取到的连接字符串。
 
     ```shell
-    # 为你自己的空间设置环境变量
+    # set the environment variable for your own space
     export DATABASE_URL='mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
 
-    # 为 Netlify 空间设置环境变量
+    # set the environment variable for the Netlify space
     netlify env:set DATABASE_URL 'mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     ```
 
     检查你的环境变量。
 
     ```shell
-    # 检查你自己空间的环境变量
+    # check the environment variable for your own space
     env | grep DATABASE_URL
 
-    # 检查 Netlify 空间的环境变量
+    # check the environment variable for the Netlify space
     netlify env:list
     ```
 
-4. 在本地构建应用并将 schema 迁移到你的 TiDB Cloud 集群。
+4. 在本地构建应用并将 schema 迁移到 TiDB Cloud 集群。
 
-    > **Tips:**
+    > **提示：**
     >
-    > 如果你想跳过本地部署，直接将应用部署到 Netlify，可以直接跳到第 6 步。
+    > 如果你想跳过本地部署，直接将应用部署到 Netlify，请直接跳到第 6 步。
 
     ```shell
     npm install .
     npm run netlify-build
     ```
 
-5. 在本地运行应用。你可以启动本地开发服务器预览你的网站。
+5. 在本地运行应用。你可以启动本地开发服务器预览你的站点。
 
     ```shell
     netlify dev
@@ -216,19 +216,19 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
 
     然后在浏览器中访问 `http://localhost:3000/`，体验其界面。
 
-6. 将应用部署到 Netlify。当你对本地预览满意后，可以使用以下命令将你的网站部署到 Netlify。`--trigger` 表示不上传本地文件进行部署。如果你有本地更改，请确保已经提交到你的 GitHub 仓库。
+6. 将应用部署到 Netlify。当你对本地预览满意后，可以使用以下命令将站点部署到 Netlify。`--trigger` 表示不上传本地文件进行部署。如果你有任何本地更改，请确保已提交到你的 GitHub 仓库。
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-    前往你的 Netlify 控制台检查部署状态。部署完成后，应用站点将拥有 Netlify 提供的公网 IP 地址，所有人都可以访问。
+    前往你的 Netlify 控制台检查部署状态。部署完成后，应用的站点将拥有 Netlify 提供的公网 IP 地址，所有人都可以访问。
 
-## 使用 edge function
+## 使用边缘函数
 
-上文提到的示例应用运行在 Netlify 的无服务器函数上。本节将介绍如何将 [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) 与 edge function 一起使用。edge function 是 Netlify 提供的一个特性，允许你在 Netlify CDN 的边缘运行无服务器函数。
+上文提到的示例应用运行在 Netlify 的无服务器函数上。本节将介绍如何将 [TiDB Cloud serverless 驱动](/develop/serverless-driver.md) 与边缘函数配合使用。边缘函数是 Netlify 提供的一项功能，允许你在 Netlify CDN 的边缘运行无服务器函数。
 
-要使用 edge function，请按照以下步骤操作：
+要使用边缘函数，请按以下步骤操作：
 
 1. 在项目根目录下创建名为 `netlify/edge-functions` 的目录。
 
@@ -252,10 +252,10 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址�
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
     ```
 
-4. 将 edge function 部署到 Netlify。
+4. 将边缘函数部署到 Netlify。
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-然后你可以前往 Netlify 控制台检查部署状态。部署完成后，你可以通过 `https://<netlify-host>/api/hello` 这个 URL 访问 edge function。
+然后你可以前往 Netlify 控制台检查部署状态。部署完成后，你可以通过 `https://<netlify-host>/api/hello` URL 访问该边缘函数。

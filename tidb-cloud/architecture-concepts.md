@@ -17,7 +17,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flex
 
 </CustomContent>
 
-TiDB 兼容 MySQL，使得迁移和对接现有应用变得简单，同时具备无缝扩展性，能够从小型负载到大规模高性能集群灵活应对。它在一个系统中同时支持事务型（OLTP）和分析型（OLAP）负载，简化运维并实现实时洞察。
+TiDB 兼容 MySQL，使得迁移和对接现有应用变得简单，同时具备无缝扩展性，能够应对从小型负载到大规模高性能集群的各种需求。它在一个系统中同时支持事务型（OLTP）和分析型（OLAP）负载，简化运维并实现实时洞察。
 
 TiDB Cloud 让你轻松扩展数据库，处理复杂的管理任务，专注于开发可靠且高性能的应用。
 
@@ -50,23 +50,23 @@ Starter 集群方案非常适合刚开始使用 TiDB Cloud 的用户。它为开
 
 对于负载持续增长、需要实时扩展的应用，Essential 集群方案提供灵活性和性能，助力你的业务增长，具备以下特性：
 
-- **增强能力**：包含 Starter 方案的全部功能，并具备处理更大、更复杂负载的能力，以及高级安全特性。
+- **增强功能**：包含 Starter 方案的全部功能，并具备处理更大、更复杂负载的能力，以及高级安全特性。
 - **自动扩展**：自动调整存储和计算资源，高效应对不断变化的负载需求。
 - **高可用性**：内置容错和冗余机制，确保你的应用在基础设施故障时依然可用且具备弹性。
 - **可预测的定价**：根据存储和计算资源的 Request Capacity Units (RCUs) 计费，提供透明、按用量计费的定价模式，随需扩展，按实际使用付费，无隐藏费用。
 
-TiDB Cloud Essential 提供两种高可用类型，以满足不同的运维需求。
+TiDB Cloud Essential 提供两种高可用性选项，以满足不同的运维需求。
 
-- 默认情况下，采用 Zonal High Availability 选项的集群，其所有组件位于同一可用区，带来更低的网络延时。
+- 默认情况下，采用 Zonal High Availability 选项的集群，其所有组件都位于同一可用区，从而降低网络延时。
 - 对于需要最大基础设施隔离和冗余的应用，Regional High Availability 选项会将节点分布在多个可用区。
 
 更多信息，参见 [TiDB Cloud 的高可用性](/tidb-cloud/serverless-high-availability.md)。
 
 ## TiDB Cloud Dedicated
 
-TiDB Cloud Dedicated 专为关键业务设计，提供跨多个可用区的高可用性、水平扩展能力和完整的 HTAP 能力。
+TiDB Cloud Dedicated 专为关键业务设计，提供跨多个可用区的高可用性、水平扩展能力以及完整的 HTAP 功能。
 
-该方案基于隔离的云资源（如 VPC、VM、托管 Kubernetes 服务和云存储）构建，充分利用主流云厂商的基础设施。TiDB Cloud Dedicated 集群支持完整的 TiDB 功能集，实现快速扩展、可靠备份、在指定 VPC 内部署以及地域级容灾。
+该方案基于隔离的云资源（如 VPC、VM、托管 Kubernetes 服务和云存储）构建，充分利用主流云服务商的基础设施。TiDB Cloud Dedicated 集群支持完整的 TiDB 功能集，实现快速扩展、可靠备份、在指定 VPC 内部署以及地域级容灾。
 
 ![TiDB Cloud Dedicated 架构](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
@@ -76,7 +76,7 @@ TiDB Cloud Dedicated 专为关键业务设计，提供跨多个可用区的高�
 
 ## TiDB Cloud CLI（Beta）
 
-TiDB Cloud CLI，即 `ticloud`，允许你通过简单命令在终端直接管理 TiDB Cloud 集群。你可以执行如下任务：
+TiDB Cloud CLI，命令为 `ticloud`，允许你通过终端使用简单命令直接管理 TiDB Cloud 集群。你可以执行如下任务：
 
 - 创建、删除和列出集群。
 - 向集群导入数据。
@@ -88,20 +88,20 @@ TiDB Cloud CLI，即 `ticloud`，允许你通过简单命令在终端直接管�
 
 TiDB Cloud API 是基于 REST 的接口，提供对 TiDB Cloud Starter 和 TiDB Cloud Dedicated 资源的编程访问能力。它支持自动化、高效地处理项目、集群、备份、恢复、数据导入、计费以及 [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md) 中的其他资源管理任务。
 
-更多信息，参见 [TiDB Cloud API 概览](/tidb-cloud/api-overview.md)。
+更多信息，参见 [TiDB Cloud API 概览](https://docs.pingcap.com/api/tidb-cloud-api-overview)。
 
 ## 节点
 
 在 TiDB Cloud 中，每个集群由 TiDB、TiKV 和 TiFlash 节点组成。
 
 - 在 TiDB Cloud Dedicated 集群中，你可以根据性能需求完全管理专属 TiDB、TiKV 和 TiFlash 节点的数量和规格。更多信息，参见 [扩展性](/tidb-cloud/scalability-concepts.md)。
-- 在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中，TiDB、TiKV 和 TiFlash 节点的数量和规格由系统自动管理，确保无缝扩展，无需用户手动配置或管理节点。
+- 在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中，TiDB、TiKV 和 TiFlash 节点的数量和规格由系统自动管理。这确保了无缝扩展，无需用户手动配置或管理节点。
 
 ### TiDB 节点
 
 [TiDB 节点](/tidb-computing.md) 是无状态的 SQL 层，通过 MySQL 兼容端点与应用连接。它负责解析、优化 SQL 查询，并生成分布式执行计划。
 
-你可以部署多个 TiDB 节点以实现水平扩展，承载更高负载。这些节点通常与负载均衡器（如 TiProxy 或 HAProxy）配合，提供无缝接口。TiDB 节点本身不存储数据——它们会将数据请求转发给 TiKV 节点（行存储）或 TiFlash 节点（列存储）。
+你可以部署多个 TiDB 节点以实现水平扩展，处理更高负载。这些节点与负载均衡器（如 TiProxy 或 HAProxy）协同工作，提供无缝接口。TiDB 节点本身不存储数据——它们会将数据请求转发给 TiKV 节点（行存储）或 TiFlash 节点（列存储）。
 
 ### TiKV 节点
 
@@ -117,16 +117,16 @@ TiDB Cloud API 是基于 REST 的接口，提供对 TiDB Cloud Starter 和 TiDB 
 - **事务支持**
 
     - TiKV 节点在键值层面原生支持分布式事务，默认隔离级别为 Snapshot Isolation。
-    - TiDB 节点会将 SQL 执行计划转换为对 TiKV 节点 API 的调用，从而实现无缝的 SQL 级事务支持。
+    - TiDB 节点将 SQL 执行计划转换为对 TiKV 节点 API 的调用，实现无缝的 SQL 级事务支持。
 
 - **高可用性**
 
-    - TiKV 节点中的所有数据都会进行副本复制（默认 3 副本），以保证数据持久性。
-    - TiKV 原生支持高可用和自动故障转移，防止节点故障带来影响。
+    - TiKV 节点中的所有数据都会被复制（默认 3 副本），以保证持久性。
+    - TiKV 原生支持高可用性和自动故障转移，防止节点故障带来的影响。
 
 - **扩展性与可靠性**
 
-    - TiKV 节点设计用于应对不断扩展的数据集，同时保持分布式一致性和容错能力。
+    - TiKV 节点设计用于处理不断扩展的数据集，同时保持分布式一致性和容错能力。
 
 ### TiFlash 节点
 
@@ -136,7 +136,7 @@ TiDB Cloud API 是基于 REST 的接口，提供对 TiDB Cloud Starter 和 TiDB 
 
 - **列存储**
 
-    TiFlash 节点以列式格式存储数据，针对分析型查询进行了优化，显著提升读密集型负载的性能。
+    TiFlash 节点以列式格式存储数据，针对分析型查询进行了优化，大幅提升读密集型负载的性能。
 
 - **向量检索索引支持**
 
