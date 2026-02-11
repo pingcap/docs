@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with Hibernate
 summary: Hibernateを使用してTiDBに接続する方法を学びます。このチュートリアルでは、Hibernateを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
+aliases: ['/tidb/stable/dev-guide-sample-application-java-hibernate/','/tidb/dev/dev-guide-sample-application-java-hibernate/','/tidbcloud/dev-guide-sample-application-java-hibernate/']
 ---
 
 # Hibernate で TiDB に接続する {#connect-to-tidb-with-hibernate}
@@ -26,22 +27,10 @@ TiDBはMySQL互換データベースであり、 [休止状態](https://hibernat
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
 
-<CustomContent platform="tidb">
-
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**TiDB クラスターがない場合は、次のように作成できます。**
-
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
-
-</CustomContent>
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -93,7 +82,7 @@ cd tidb-java-hibernate-quickstart
     cp env.sh.example env.sh
     ```
 
-6.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
+6.  対応する接続​​文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -129,7 +118,7 @@ cd tidb-java-hibernate-quickstart
     cp env.sh.example env.sh
     ```
 
-5.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
+5.  対応する接続​​文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -145,7 +134,7 @@ cd tidb-java-hibernate-quickstart
 6.  `env.sh`ファイルを保存します。
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 1.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
@@ -153,7 +142,7 @@ cd tidb-java-hibernate-quickstart
     cp env.sh.example env.sh
     ```
 
-2.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
+2.  対応する接続​​文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -228,7 +217,7 @@ public SessionFactory getSessionFactory() {
 }
 ```
 
-この関数を使用する場合、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスを使用する場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の1つにすぎません。設定で問題が発生した場合、または Hibernate について詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
+この関数を使用する場合、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスがある場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の1つにすぎません。設定で問題が発生した場合、または Hibernate について詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 
 ### データの挿入または更新 {#insert-or-update-data}
 
@@ -297,21 +286,13 @@ SET GLOBAL tidb_enable_check_constraint=ON;
 
 ## 次のステップ {#next-steps}
 
--   [Hibernateのドキュメント](https://hibernate.org/orm/documentation)から Hibernate の使い方を詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   [Hibernateのドキュメント](https://hibernate.org/orm/documentation)から Hibernate の詳しい使い方を学びます。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

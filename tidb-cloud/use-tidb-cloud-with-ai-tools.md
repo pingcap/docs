@@ -164,5 +164,5 @@ TiDB MCPプラグインをWindsurfに追加するには、 `mcp_config.json`フ�
 
 ## 参照 {#see-also}
 
--   [TiDB + Vector Search を試す](/vector-search/vector-search-get-started-using-python.md)
--   [開発者ガイドの概要](/develop/dev-guide-overview.md)
+-   [TiDB + Vector Search を試す](/ai/quickstart-via-python.md)
+-   [開発者ガイドの概要](https://docs.pingcap.com/developer/)

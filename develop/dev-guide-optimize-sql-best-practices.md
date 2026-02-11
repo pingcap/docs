@@ -1,6 +1,7 @@
 ---
 title: Performance Tuning Best Practices
 summary: TiDB パフォーマンスをチューニングするためのベスト プラクティスを紹介します。
+aliases: ['/tidb/stable/dev-guide-optimize-sql-best-practices/','/tidb/dev/dev-guide-optimize-sql-best-practices/','/tidbcloud/dev-guide-optimize-sql-best-practices/']
 ---
 
 # 性能チューニングのベストプラクティス {#performance-tuning-best-practices}
@@ -33,9 +34,9 @@ DELETE FROM t WHERE id = 2;
 DELETE FROM t WHERE id = 3;
 ```
 
-### <code>PREPARE</code>を使用する {#use-code-prepare-code}
+### <code>PREPARE</code>使用する {#use-code-prepare-code}
 
-SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析するオーバーヘッドを回避するために、 `PREPARE`ステートメントを使用することをお勧めします。
+SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析することによるオーバーヘッドを回避するために、 `PREPARE`ステートメントを使用することをお勧めします。
 
 <SimpleTab>
 <div label="Golang">
@@ -96,13 +97,13 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### 一括削除を使用する {#use-bulk-delete}
 
-大量のデータを削除する場合は、 [一括削除](/develop/dev-guide-delete-data.md#bulk-delete)使用することをお勧めします。
+大量のデータを削除する場合は[一括削除](/develop/dev-guide-delete-data.md#bulk-delete)使用することをお勧めします。
 
 ### 一括更新を使用する {#use-bulk-update}
 
-大量のデータを更新する場合は、 [一括更新](/develop/dev-guide-update-data.md#bulk-update)使用することをお勧めします。
+大量のデータを更新する場合は[一括更新](/develop/dev-guide-update-data.md#bulk-update)使用することをお勧めします。
 
-### テーブル全体のデータには、 <code>DELETE</code>ではなく<code>TRUNCATE</code>使用します。 {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
+### テーブルデータ全体を取得するには、 <code>DELETE</code>ではなく<code>TRUNCATE</code>使用します。 {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
 テーブルからすべてのデータを削除する必要がある場合は、 `TRUNCATE`ステートメントを使用することをお勧めします。
 
@@ -122,7 +123,7 @@ DELETE FROM t;
 
 ### 主キーのベストプラクティス {#primary-key-best-practices}
 
-[主キーを選択する際に従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照してください。
+[主キーを選択する際に従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)を参照してください。
 
 ## インデックスのベストプラクティス {#index-best-practices}
 
@@ -142,7 +143,7 @@ SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-インデックス追加操作の対象列が頻繁に更新される場合（ `UPDATE`など）、上記の変数`INSERT`値を増やすと書き込み競合が増加し、オンラインワークロード`DELETE`影響を与えます。そのため、再試行が頻繁に発生するため、インデックス追加操作の完了に時間がかかる可能性があります。このような場合は、オンラインアプリケーションとの書き込み競合を回避するために、上記の変数の値を減らすことをお勧めします。
+インデックス追加操作の対象列が頻繁に更新される場合（ `UPDATE` `DELETE` ）、上記の変数の値を増やすと書き込み競合が増加し、オンラインワークロードに影響を与えます。そのため、再試行`INSERT`頻繁に発生するため、インデックス追加操作の完了に時間がかかる可能性があります。このような場合は、オンラインアプリケーションとの書き込み競合を回避するために、上記の変数の値を減らすことをお勧めします。
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;
@@ -151,56 +152,18 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ## トランザクションの競合 {#transaction-conflicts}
 
-<CustomContent platform="tidb">
-
-トランザクションの競合を見つけて解決する方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-トランザクションの競合を見つけて解決する方法については、 [ロックの競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)参照してください。
-
-</CustomContent>
+トランザクションの競合を見つけて解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
 
 ## TiDB を使用したJavaアプリケーション開発のベスト プラクティス {#best-practices-for-developing-java-applications-with-tidb}
 
-<CustomContent platform="tidb">
-
-[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)参照。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)参照。
-
-</CustomContent>
+[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)参照。
 
 ### 参照 {#see-also}
 
-<CustomContent platform="tidb">
-
 -   [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [高同時書き込みのベストプラクティス](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
-
-</CustomContent>
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

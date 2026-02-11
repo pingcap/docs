@@ -15,7 +15,7 @@ summary: TiDB の機能の概要について説明します。
 >
 > 以下の表の略語の意味は次のとおりです。
 >
-> -   Y: 機能は一般提供（GA）されており、本番環境で使用できます。DMRバージョンでGAとなっている機能であっても、後続のLTSバージョンで本番環境で使用することを推奨します。
+> -   Y: 機能は一般提供（GA）されており、本番環境で使用できます。DMRバージョンでGAとなっている機能であっても、本番環境では後続のLTSバージョンで使用することをお勧めします。
 > -   N: 機能はサポートされていません。
 > -   E: この機能はまだ一般公開（実験的）ではありませんので、使用上の制限事項にご注意ください。Experimental機能は予告なく変更または削除される場合があります。構文と実装は一般公開前に変更される可能性があります。問題が発生した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告してください。
 
@@ -27,7 +27,7 @@ summary: TiDB の機能の概要について説明します。
 | [日付と時刻の種類](/data-type-date-and-time.md)                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字列型](/data-type-string.md)                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [JSON型](/data-type-json.md)                                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [ベクトル型](/vector-search/vector-search-data-types.md)                          |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
+| [ベクトル型](/ai/reference/vector-search-data-types.md)                           |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
 | [制御フロー関数](/functions-and-operators/control-flow-functions.md)                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字列関数](/functions-and-operators/string-functions.md)                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -35,7 +35,7 @@ summary: TiDB の機能の概要について説明します。
 | [ビット関数と演算子](/functions-and-operators/bit-functions-and-operators.md)         |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [暗号化と圧縮関数](/functions-and-operators/encryption-and-compression-functions.md) |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [ベクトル関数と演算子](/vector-search/vector-search-functions-and-operators.md)        |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
+| [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)         |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
 | [情報関数](/functions-and-operators/information-functions.md)                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [JSON関数](/functions-and-operators/json-functions.md)                         |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
 | [集計関数](/functions-and-operators/aggregate-group-by-functions.md)             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -66,7 +66,7 @@ summary: TiDB の機能の概要について説明します。
 | [外部キー](/foreign-key.md)                                                                     |  Y  |  E  |  E  |  E  |  北  |  北  |  北  |
 | [TiFlashの遅い実体化](/tiflash/tiflash-late-materialization.md)                                   |  Y  |  Y  |  Y  |  Y  |  北  |  北  |  北  |
 | [グローバルインデックス](/global-indexes.md)                                                           |  Y  |  北  |  北  |  北  |  北  |  北  |  北  |
-| [ベクトルインデックス](/vector-search/vector-search-index.md)                                         |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
+| [ベクトルインデックス](/ai/reference/vector-search-index.md)                                          |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
 
 ## SQL文 {#sql-statements}
 
@@ -97,7 +97,7 @@ summary: TiDB の機能の概要について説明します。
 
 | 高度なSQL機能                                                                                                     | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| [ベクトル検索](/vector-search/vector-search-overview.md)                                                           |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
+| [ベクトル検索](/ai/concepts/vector-search-overview.md)                                                             |  E  |  北  |  北  |  北  |  北  |  北  |  北  |
 | [準備されたステートメントキャッシュ](/sql-prepared-plan-cache.md)                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [非プリペアドステートメントキャッシュ](/sql-non-prepared-plan-cache.md)                                                        |  Y  |  Y  |  Y  |  E  |  北  |  北  |  北  |
 | [インスタンスレベルの実行プランキャッシュ](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)                     |  E  |  北  |  北  |  北  |  北  |  北  |  北  |

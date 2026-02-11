@@ -49,7 +49,7 @@ tiup ctl:v<CLUSTER_VERSION> pd store -u http://127.0.0.1:2379
 tiup ctl:v<CLUSTER_VERSION> pd -i -u http://127.0.0.1:2379
 ```
 
-環境変数を使用する:
+環境変数を使用します:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
@@ -971,7 +971,7 @@ TiDB v6.3.0以降、PDは`balance-region-scheduler`と`balance-leader-scheduler`
 
 #### 低速ディスクノード {#slow-disk-nodes}
 
-v6.2.0以降、TiKVはPDにストアハートビートスコア`SlowScore`を報告します。このスコアはディスクI/O状態に基づいて計算され、1から100の範囲となります。値が高いほど、そのノードでディスクパフォーマンスの異常が発生している可能性が高くなります。
+v6.2.0以降、TiKVはPDにストアハートビートスコア`SlowScore`を報告します。このスコアはディスクI/O状態に基づいて計算され、1から100の範囲となります。値が高いほど、そのノードでディスクパフォ​​ーマンスの異常が発生している可能性が高くなります。
 
 低速ディスクノードの場合、TiKV での検出と PD 上の`evict-slow-store-scheduler`経由のスケジュールがデフォルトで有効になっているため、追加の構成は必要ありません。
 
@@ -979,15 +979,13 @@ v6.2.0以降、TiKVはPDにストアハートビートスコア`SlowScore`を報
 
 v8.5.5以降、TiKVはストア内の`NetworkSlowScore`ビートをPDに報告する機能をサポートします。これはネットワーク検出結果に基づいて計算され、ネットワークジッターが発生している低速ノードを特定するのに役立ちます。スコアの範囲は1～100で、値が高いほどネットワーク異常の可能性が高くなります。
 
-互換性とリソース消費を考慮し、低速ネットワークノードの検出とスケジュール設定はデフォルトで無効になっています。有効にするには、以下の両方を設定してください。
+-   TiKVはデフォルトで低速ネットワークノードの検出を有効にし、デフォルトのプロービング間隔は`100ms`です。プロービング頻度を変更するには、TiKV設定項目[`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855)適切な値に設定します。値を小さくするとプロービング頻度が増加し、ネットワークジッターの検出速度が向上しますが、ネットワークリソースとCPUリソースの消費量も増加します。
 
-1.  PD スケジューラを有効にして、低速ネットワーク ノードを処理できるようにします。
+-   PD側では、低速ネットワークノードのスケジューリングはデフォルトで無効になっています。有効にするには、PDを以下のように設定してください。
 
     ```bash
     scheduler config evict-slow-store-scheduler set enable-network-slow-store true
     ```
-
-2.  TiKV では、ネットワーク検出を有効にするために、 [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855)構成項目を`0`より大きい値に設定します。
 
 #### 回復時間制御 {#recovery-time-control}
 

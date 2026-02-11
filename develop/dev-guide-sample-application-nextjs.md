@@ -1,11 +1,12 @@
 ---
 title: Connect to TiDB with mysql2 in Next.js
 summary: この記事では、Next.js で TiDB と mysql2 を使用して CRUD アプリケーションを構築する方法について説明し、簡単なサンプル コード スニペットを示します。
+aliases: ['/tidb/stable/dev-guide-sample-application-nextjs/','/tidb/dev/dev-guide-sample-application-nextjs/','/tidbcloud/dev-guide-sample-application-nextjs/']
 ---
 
 # Next.js で mysql2 を使用して TiDB に接続する {#connect-to-tidb-with-mysql2-in-next-js}
 
-TiDB は MySQL 互換のデータベースであり、 [MySQL2](https://github.com/sidorares/node-mysql2) Node.js 用の人気のオープンソース ドライバーです。
+TiDB は MySQL 互換のデータベースであり、 [MySQL2](https://github.com/sidorares/node-mysql2) Node.js 用の人気のあるオープンソース ドライバーです。
 
 このチュートリアルでは、Next.js で TiDB と mysql2 を使用して次のタスクを実行する方法を学習します。
 
@@ -15,7 +16,7 @@ TiDB は MySQL 互換のデータベースであり、 [MySQL2](https://github.c
 
 > **注記**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、および TiDB Self-Managed で機能します。
+> このチュートリアルは、TiDB Cloud Starter、 TiDB Cloud Essential、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -25,22 +26,10 @@ TiDB は MySQL 互換のデータベースであり、 [MySQL2](https://github.c
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
 
-<CustomContent platform="tidb">
-
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**TiDB クラスターがない場合は、次のように作成できます。**
-
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
-
-</CustomContent>
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -52,7 +41,7 @@ TiDB は MySQL 互換のデータベースであり、 [MySQL2](https://github.c
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nextjs-vercel-quickstart.git
@@ -111,7 +100,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-6.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
+6.  対応する接続​​文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```bash
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -127,7 +116,7 @@ npm install
 
 </div>
 
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -141,7 +130,7 @@ npm install
     Copy-Item ".env.example" -Destination ".env"
     ```
 
-2.  対応する接続文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
+2.  対応する接続​​文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```bash
     TIDB_HOST='{tidb_server_host}'
@@ -167,11 +156,11 @@ npm install
     npm run dev
     ```
 
-2.  ブラウザを開いて`http://localhost:3000`アクセスします。(実際のポート番号はターミナルで確認してください。デフォルトは`3000`です。)
+2.  ブラウザを開いて`http://localhost:3000`アクセスします。(実際のポート番号についてはターミナルで確認してください。デフォルトは`3000`です。)
 
 3.  サンプル コードを実行するには、 **[SQL 実行]**をクリックします。
 
-4.  ターミナルの出力を確認します。出力が以下のようになっている場合、接続は成功しています。
+4.  ターミナルの出力を確認してください。出力が以下のようになっている場合、接続は成功しています。
 
     ```json
     {
@@ -226,7 +215,7 @@ export function getPool() {
 
 ### データを挿入する {#insert-data}
 
-次のクエリは、 `Player`つのレコードを作成し、 `ResultSetHeader`オブジェクトを返します。
+次のクエリは、1 つのレコード`Player`を作成し、 `ResultSetHeader`オブジェクトを返します。
 
 ```javascript
 const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
@@ -280,20 +269,12 @@ console.log(rsh.affectedRows);
 ## 次のステップ {#next-steps}
 
 -   ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)参照してください。
--   [node-mysql2のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から node-mysql2 ドライバーの使用法について詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [node-mysql2のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から node-mysql2 ドライバーの使用方法について詳しく学びます。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

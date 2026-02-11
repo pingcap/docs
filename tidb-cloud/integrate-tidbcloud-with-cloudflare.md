@@ -7,13 +7,13 @@ summary: TiDB Cloudを使用して Cloudflare Workers をデプロイする方�
 
 Cloudflare Workersは、HTTPリクエストやデータベースへの変更など、特定のイベントに応じてコードを実行できるプラットフォーム[Cloudflareワーカー](https://workers.cloudflare.com/) 。Cloudflare Workersは使いやすく、カスタムAPI、サーバーレス関数、マイクロサービスなど、さまざまなアプリケーションの構築に使用できます。特に、低レイテンシーのパフォーマンスが求められるアプリケーションや、迅速なスケーリングが必要なアプリケーションに便利です。
 
-Cloudflare WorkersはV8エンジンで動作しており、直接TCP接続ができないため、 TiDB Cloudへの接続が難しい場合があります。1 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)使用すると、HTTP接続経由でCloudflare Workersに接続できます。
+Cloudflare WorkersはV8エンジンで動作しており、直接TCP接続ができないため、 TiDB Cloudへの接続が難しい場合があります。1 [TiDB Cloudサーバーレス ドライバー](/develop/serverless-driver.md)使用すると、HTTP接続経由でCloudflare Workersに接続できます。
 
 このドキュメントでは、TiDB Cloudサーバーレス ドライバーを使用して Cloudflare Workers に接続する方法を段階的に説明します。
 
 > **注記：**
 >
-> TiDB Cloudサーバーレス ドライバーは、TiDB Cloud Starter およびTiDB Cloud Essential でのみ使用できます。
+> TiDB Cloudサーバーレス ドライバーは、 TiDB Cloud Starter およびTiDB Cloud Essential でのみ使用できます。
 
 ## 始める前に {#before-you-begin}
 
@@ -24,7 +24,7 @@ Cloudflare WorkersはV8エンジンで動作しており、直接TCP接続がで
 -   A [Cloudflare Workersアカウント](https://dash.cloudflare.com/login) 。
 -   [npm](https://docs.npmjs.com/about-npm)がインストールされています。
 
-## ステップ1: Wranglerを設定する {#step-1-set-up-wrangler}
+## ステップ1: Wranglerのセットアップ {#step-1-set-up-wrangler}
 
 [ラングラー](https://developers.cloudflare.com/workers/wrangler/)はCloudflareの公式Worker CLIです。Workerの生成、ビルド、プレビュー、公開に使用できます。
 
@@ -56,7 +56,7 @@ Cloudflare WorkersはV8エンジンで動作しており、直接TCP接続がで
 
 ## ステップ3: Cloudflare Worker関数を開発する {#step-3-develop-the-cloudflare-worker-function}
 
-必要に応じて`src/index.ts`変更する必要があります。
+必要に応じて`src/index.ts`を変更する必要があります。
 
 たとえば、すべてのデータベースを表示する場合は、次のコードを使用できます。
 
@@ -79,7 +79,7 @@ export default {
 
 ## ステップ4: 環境内でDATABASE_URLを設定する {#step-4-set-the-database-url-in-your-environment}
 
-`DATABASE_URL` `mysql://username:password@host/database`形式に従います。環境変数はwrangler cliで設定できます。
+`DATABASE_URL` `mysql://username:password@host/database`形式に従います。環境変数は wrangler cli で設定できます。
 
     wrangler secret put <DATABASE_URL>
 
@@ -101,4 +101,4 @@ Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレット�
 
 ## 例 {#examples}
 
-[Cloudflare Workersの例](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers)参照してください。
+[Cloudflare Workersの例](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers)を参照してください。

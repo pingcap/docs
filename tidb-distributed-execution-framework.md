@@ -15,7 +15,7 @@ TiDBは、優れたスケーラビリティと弾力性を備えたコンピュ�
 
 ## ユースケース {#use-cases}
 
-データベース管理システムでは、コアとなるトランザクション処理（TP）と分析処理（AP）のワークロードに加えて、DDL操作、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)バックアップ/リストアといった重要なタスクが存在します。これらのタスク[TTL](/time-to-live.md) 、データベースオブジェクト（テーブル）内の大量のデータを処理する必要があるため、通常、次のような特性を持ちます。
+データベース管理システムでは、コアとなるトランザクション処理（TP）と分析処理（AP）のワークロードに加えて、DDL操作、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)バックアップ/リストアといった重要なタスクが存在します。これらのタスクは、データベースオブジェクト（テーブル）内の大量のデータを処理する必要があるため、通常[TTL](/time-to-live.md)次のような特性を持ちます。
 
 -   スキーマまたはデータベース オブジェクト (テーブル) 内のすべてのデータを処理する必要があります。
 -   定期的に実行する必要があるかもしれませんが、頻度は低くなります。
@@ -29,14 +29,14 @@ DXF を有効にすると上記の問題が解決され、次の 3 つの利点�
 
 現在、DXF は[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)と[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントの分散実行をサポートしています。
 
--   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)インデックスを作成するために使用されるDDL文です。例:
+-   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)はインデックスを作成するために使用されるDDL文です。例:
 
     ```sql
     ALTER TABLE t1 ADD INDEX idx1(c1);
     CREATE INDEX idx1 ON table t1(c1);
     ```
 
--   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 、CSV、SQL、Parquet などの形式のデータを空のテーブルにインポートするために使用されます。
+-   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)は、CSV、SQL、Parquet などの形式のデータを空のテーブルにインポートするために使用されます。
 
 ## 制限 {#limitation}
 
@@ -93,7 +93,7 @@ DXF を使用して[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)タ�
 
 デフォルトでは、DXFはすべてのTiDBノードを分散タスクの実行対象としてスケジュールします。v7.4.0以降、TiDBセルフマネージドクラスターでは、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)設定することで、DXFが分散タスクの実行対象としてスケジュールするTiDBノードを制御できます。
 
--   バージョンv7.4.0からv8.0.0までの場合、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)のオプション値は`''`または`background`です。現在のクラスターに`tidb_service_scope = 'background'`のTiDBノードがある場合、DXFはこれらのノードにタスクの実行をスケジュールします。障害または通常のスケールインにより、現在のクラスターに`tidb_service_scope = 'background'`のTiDBノードがない場合、DXFは`tidb_service_scope = ''`のノードにタスクの実行をスケジュールします。
+-   バージョンv7.4.0からv8.0.0までの場合、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)のオプション値は`''`または`background`です。現在のクラスターに`tidb_service_scope = 'background'`のTiDBノードがある場合、DXFはこれらのノードにタスクの実行をスケジュールします。障害または通常のスケールインにより、現在のクラスターに`tidb_service_scope = 'background'` TiDBノードがない場合、DXFは`tidb_service_scope = ''`のノードにタスクの実行をスケジュールします。
 
 -   v8.1.0以降では、 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)任意の有効な値に設定できます。分散タスクが送信されると、タスクは現在接続されているTiDBノードの[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)値にバインドされ、DXFは同じ[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)値を持つTiDBノードにのみタスクの実行をスケジュールします。ただし、以前のバージョンとの設定互換性を保つため、分散タスクが`tidb_service_scope = ''`ノードに送信され、現在のクラスターに`tidb_service_scope = 'background'`のTiDBノードがある場合、DXFは`tidb_service_scope = 'background'`のTiDBノードにタスクの実行をスケジュールします。
 
@@ -121,7 +121,7 @@ DXF のアーキテクチャは次のとおりです。
 
 <CustomContent platform="tidb">
 
--   [DDL ステートメントの実行原則とベストプラクティス](/ddl-introduction.md)
+-   [DDL ステートメントの実行原則とベストプラクティス](/best-practices/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">

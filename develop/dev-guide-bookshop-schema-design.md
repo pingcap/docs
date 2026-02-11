@@ -1,6 +1,7 @@
 ---
 title: Bookshop Example Application
-summary: Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。テーブル構造とデータは、 TiUPまたはTiDB Cloudを介してインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成・インポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、書籍、著者、ユーザー、評価、書籍著者、注文が含まれます。データベース初期化スクリプト「dbinit.sql」は、Bookshopアプリケーションのテーブル構造を作成します。
+summary: Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。テーブル構造とデータは、 TiUPまたはTiDB Cloudを介してインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成・インポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、書籍、著者、ユーザー、評価、書籍著者、注文情報が含まれます。データベース初期化スクリプト「dbinit.sql」は、Bookshopアプリケーションのテーブル構造を作成します。
+aliases: ['/tidb/stable/dev-guide-bookshop-schema-design/','/tidb/dev/dev-guide-bookshop-schema-design/','/tidbcloud/dev-guide-bookshop-schema-design/']
 ---
 
 # 書店のサンプルアプリケーション {#bookshop-example-application}
@@ -11,37 +12,20 @@ Bookshop は、さまざまなカテゴリの本を購入したり、読んだ�
 
 ## テーブル構造とデータをインポートする {#import-table-structures-and-data}
 
-<CustomContent platform="tidb">
+Bookshop アプリケーションのテーブル構造とデータをインポートするには、次のいずれかのインポート方法を選択します。
 
-Bookshop テーブル構造とデータを[TiUP経由](#method-1-via-tiup-demo)または[TiDB Cloudのインポート機能を介して](#method-2-via-tidb-cloud-import)いずれかでインポートできます。
+-   [TiDB セルフマネージド: `tiup demo`経由](#tidb-self-managed-via-tiup-demo) 。
+-   [TiDB Cloud: インポート機能経由](#tidb-cloud-via-the-import-feature) 。
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-TiDB Cloudの場合は、 [方法1: `tiup demo`経由](#method-1-via-tiup-demo)スキップして Bookshop テーブル構造[TiDB Cloudのインポート機能を介して](#method-2-via-tidb-cloud-import)インポートできます。
-
-</CustomContent>
-
-### 方法1: <code>tiup demo</code>経由 {#method-1-via-code-tiup-demo-code}
-
-<CustomContent platform="tidb">
+### TiDB セルフマネージド: <code>tiup demo</code>経由 {#tidb-self-managed-via-code-tiup-demo-code}
 
 TiDB クラスターが[TiUP](/tiup/tiup-reference.md#tiup-reference)使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データを簡単に生成してインポートできます。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-TiDB クラスターが[TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference)使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データを簡単に生成してインポートできます。
-
-</CustomContent>
 
 ```shell
 tiup demo bookshop prepare
 ```
 
-デフォルトでは、このコマンドにより、アプリケーションはアドレス`127.0.0.1`のポート`4000`に接続できるようになり、パスワードなしで`root`ユーザーとしてログインできるようになり、 `bookshop`名前のデータベースに[テーブル構造](#description-of-the-tables)作成されます。
+デフォルトでは、このコマンドにより、アプリケーションはアドレス`127.0.0.1`のポート`4000`に接続できるようになり、パスワードなしで`root`ユーザーとしてログインできるようになり、 `bookshop`という名前のデータベースに[テーブル構造](#description-of-the-tables)作成されます。
 
 #### 接続情報を構成する {#configure-connection-information}
 
@@ -87,7 +71,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 `--drop-tables`のパラメータを使用して、元のテーブル構造を削除できます。パラメータの詳細については、 `tiup demo bookshop --help`コマンドを実行してください。
 
-### 方法2: TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
+### TiDB Cloud: インポート機能経由 {#tidb-cloud-via-the-import-feature}
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
@@ -97,18 +81,18 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
         >
         > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
 
 2.  **「Cloud Storage からデータをインポート」**を選択し、 **「Amazon S3」**をクリックします。
 
 3.  **「Amazon S3 からのデータのインポート」**ページで、次のソースデータ情報を設定します。
 
-    -   **インポートファイル数**： TiDB Cloud Serverlessの場合は**「複数ファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは使用できません。
-    -   **含まれるスキーマ ファイル**:**はいを**選択します。
+    -   **インポートファイル数**： TiDB Cloud Starterの場合は**「複数ファイル」**を選択してください。このフィールドはTiDB Cloud Dedicatedでは使用できません。
+    -   **含まれるスキーマ ファイル**:**はい**を選択します。
     -   **データ形式**: **SQL**を選択します。
     -   **フォルダー URI** : `s3://developer.pingcap.com/bookshop/`を入力します。
     -   **バケットアクセス**: **AWS ロール ARN**を選択します。
-    -   **ロール ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`と入力します。
+    -   **ロール ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`を入力します。
 
     この例では、次のデータが事前に生成されます。
 
@@ -162,10 +146,10 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名 | タイプ          | 説明                    |
 | ------ | ------------ | --------------------- |
-| id     | ビッグインテント     | 本の一意のID               |
+| id     | ビッグイント       | 本の一意のID               |
 | タイトル   | varchar(100) | 本のタイトル                |
 | タイプ    | 列挙型          | 本の種類（例：雑誌、アニメーション、教材） |
-| ストック   | ビッグインテント     | ストック                  |
+| ストック   | ビッグイント       | ストック                  |
 | 価格     | 小数点(15,2)    | 価格                    |
 | 公開日時   | 日時           | 公開日                   |
 
@@ -175,11 +159,11 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名 | タイプ          | 説明                        |
 | ------ | ------------ | ------------------------- |
-| id     | ビッグインテント     | 著者の一意のID                  |
+| id     | ビッグイント       | 著者の一意のID                  |
 | 名前     | varchar(100) | 著者名                       |
 | 性別     | タイニーイント      | 生物学的性別（0：女性、1：男性、NULL：不明） |
-| 生年     | スモールインテンス    | 生年                        |
-| 死亡年    | スモールインテンス    | 死亡年                       |
+| 生年     | スモールイント      | 生年                        |
+| 死亡年    | スモールイント      | 死亡年                       |
 
 ### <code>users</code>テーブル {#code-users-code-table}
 
@@ -187,7 +171,7 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名 | タイプ          | 説明         |
 | ------ | ------------ | ---------- |
-| id     | ビッグインテント     | ユーザーの一意のID |
+| id     | ビッグイント       | ユーザーの一意のID |
 | バランス   | 小数点(15,2)    | バランス       |
 | ニックネーム | varchar(100) | ニックネーム     |
 
@@ -195,33 +179,33 @@ WHERE table_schema LIKE 'bookshop';
 
 このテーブルには、書籍に対するユーザーの評価の記録が保存されます。
 
-| フィールド名 | タイプ      | 説明                                     |
-| ------ | -------- | -------------------------------------- |
-| 書籍ID   | ビッグインテント | 書籍の一意のID（ [本](#books-table)にリンク）       |
-| ユーザーID | ビッグインテント | ユーザーの一意の識別子（ [ユーザー](#users-table)にリンク） |
-| スコア    | タイニーイント  | ユーザー評価（1～5）                            |
-| 定格     | 日時       | 評価時間                                   |
+| フィールド名 | タイプ     | 説明                                     |
+| ------ | ------- | -------------------------------------- |
+| 書籍ID   | ビッグイント  | 書籍の一意のID（ [本](#books-table)にリンク）       |
+| ユーザーID | ビッグイント  | ユーザーの一意の識別子（ [ユーザー](#users-table)にリンク） |
+| スコア    | タイニーイント | ユーザー評価（1～5）                            |
+| 定格     | 日時      | 評価時間                                   |
 
 ### <code>book_authors</code>テーブル {#code-book-authors-code-table}
 
 著者は複数の本を執筆する場合があり、また、1冊の本に複数の著者が関わる場合もあります。このテーブルは、本と著者の対応関係を保存します。
 
-| フィールド名 | タイプ      | 説明                                  |
-| ------ | -------- | ----------------------------------- |
-| 書籍ID   | ビッグインテント | 書籍の一意のID（ [本](#books-table)にリンク）    |
-| 著者ID   | ビッグインテント | 著者の固有ID（ [著者](#authors-table)へのリンク） |
+| フィールド名 | タイプ    | 説明                                  |
+| ------ | ------ | ----------------------------------- |
+| 書籍ID   | ビッグイント | 書籍の一意のID（ [本](#books-table)にリンク）    |
+| 著者ID   | ビッグイント | 著者の固有ID（ [著者](#authors-table)へのリンク） |
 
 ### <code>orders</code>表 {#code-orders-code-table}
 
 このテーブルにはユーザーの購入情報が保存されます。
 
-| フィールド名 | タイプ      | 説明                                         |
-| ------ | -------- | ------------------------------------------ |
-| id     | ビッグインテント | 注文の一意のID                                   |
-| 書籍ID   | ビッグインテント | 書籍の一意のID（ [本](#books-table)にリンク）           |
-| ユーザーID | ビッグインテント | ユーザー固有識別子（ [ユーザー](#users-table)に関連付けられている） |
-| 量      | タイニーイント  | 購入数量                                       |
-| 注文時    | 日時       | 購入時間                                       |
+| フィールド名 | タイプ     | 説明                                         |
+| ------ | ------- | ------------------------------------------ |
+| id     | ビッグイント  | 注文の一意のID                                   |
+| 書籍ID   | ビッグイント  | 書籍の一意のID（ [本](#books-table)にリンク）           |
+| ユーザーID | ビッグイント  | ユーザー固有識別子（ [ユーザー](#users-table)に関連付けられている） |
+| 量      | タイニーイント | 購入数量                                       |
+| 注文日時   | 日時      | 購入時間                                       |
 
 ## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 
@@ -291,14 +275,6 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

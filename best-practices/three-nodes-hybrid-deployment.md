@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Three-Node Hybrid Deployment
 summary: TiDBクラスタは、3台のマシンでコスト効率よく導入できます。このハイブリッド導入におけるベストプラクティスとしては、安定性とパフォーマンスを向上させるためのパラメータ調整が挙げられます。リソース消費量の制限とスレッドプールサイズの調整は、クラスタを最適化する上で重要です。TiKVバックグラウンドタスクとTiDB実行オペレータのパラメータ調整も重要です。
+aliases: ['/tidb/stable/three-nodes-hybrid-deployment/','/tidb/dev/three-nodes-hybrid-deployment/']
 ---
 
 # 3ノードハイブリッド展開のベストプラクティス {#best-practices-for-three-node-hybrid-deployment}

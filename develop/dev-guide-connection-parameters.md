@@ -1,23 +1,20 @@
 ---
-title: Connection Pools and Connection Parameters
+title: Configure Connection Pools and Connection Parameters
 summary: このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを得るための計算式などについて説明します。また、パフォーマンスを最適化するための JDBC API の使用方法と MySQL Connector/J パラメータ設定についても説明します。
+aliases: ['/tidb/stable/dev-guide-connection-parameters/','/tidb/dev/dev-guide-connection-parameters/','/tidbcloud/dev-guide-connection-parameters/']
 ---
 
-# 接続プールと接続パラメータ {#connection-pools-and-connection-parameters}
+# 接続プールと接続パラメータを構成する {#configure-connection-pools-and-connection-parameters}
 
 このドキュメントでは、ドライバーまたは ORM フレームワークを使用して TiDB に接続するときに、接続プールと接続パラメータを構成する方法について説明します。
 
-<CustomContent platform="tidb">
-
-Javaアプリケーション開発に関するさらなるヒントに興味がある場合は、 [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md#connection-pool)参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Javaアプリケーション開発に関するさらなるヒントに興味がある場合は、 [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)参照してください。
-
-</CustomContent>
+> **ヒント：**
+>
+> この文書では、次のセクションが[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)から抜粋されています。
+>
+> -   [接続数を設定する](#configure-the-number-of-connections)
+> -   [プローブ構成](#probe-configuration)
+> -   [接続パラメータ](#connection-parameters)
 
 ## 接続プール {#connection-pool}
 
@@ -32,7 +29,7 @@ Java には、 [HikariCP](https://github.com/brettwooldridge/HikariCP) 、 [tomc
 -   **maximumPoolSize** : 接続プールの最大接続数。この値が大きすぎると、TiDBは無駄な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続速度が遅くなります。したがって、アプリケーションの特性に応じてこの値を設定する必要があります。詳細は[プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)参照してください。
 -   **minimumIdle** : 接続プール内のアイドル接続の最小数。これは主に、アプリケーションがアイドル状態のときに突発的なリクエストに対応するために、いくつかの接続を予約するために使用されます。アプリケーションの特性に応じて設定する必要があります。
 
-アプリケーションは、使用を終えた後、接続を返却する必要があります。接続プールの問題を適時に特定するために、アプリケーションでは対応する接続プール監視（ **metricRegistry**など）を使用することをお勧めします。
+アプリケーションは、使用を終えた後、接続を返却する必要があります。接続プールの問題を適時に特定するために、アプリケーションでは対応する接続​​プール監視（ **metricRegistry**など）を使用することをお勧めします。
 
 ### 接続の有効期間を設定する {#configure-the-lifetime-of-connections}
 
@@ -293,7 +290,7 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 監視中に、アプリケーションがTiDBクラスタに対して`INSERT`操作しか実行していないにもかかわらず、冗長な`SELECT`ステートメントが多数存在することに気付く場合があります。これは通常、JDBCが設定を照会するためにいくつかのSQLステートメント（例えば`select @@session.transaction_read_only`を送信するために発生します。これらのSQLステートメントはTiDBには役に立たないため、余分なオーバーヘッドを回避するために`useConfigs=maxPerformance`に設定することをお勧めします。
 
-`useConfigs=maxPerformance`には一連の設定が含まれています。MySQL Connector/J 8.0およびMySQL Connector/J 5.1の詳細な設定については、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)参照してください。
+`useConfigs=maxPerformance`には一連の設定が含まれています。MySQL Connector/J 8.0とMySQL Connector/J 5.1の詳細な設定については、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)参照してください。
 
 設定後、監視をチェックして、 `SELECT`ステートメントの数が減っていることを確認できます。
 
@@ -307,14 +304,6 @@ TiDB には、タイムアウトを制御するための MySQL 互換パラメ�
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

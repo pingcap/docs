@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Managing Indexes and Identifying Unused Indexes
 summary: TiDB でインデックスを管理および最適化し、未使用のインデックスを識別して削除するためのベスト プラクティスを学習します。
+aliases: ['/tidb/stable/index-management-best-practices/','/tidb/dev/index-management-best-practices/']
 ---
 
 # インデックスの管理と未使用のインデックスの特定に関するベストプラクティス {#best-practices-for-managing-indexes-and-identifying-unused-indexes}
@@ -16,7 +17,7 @@ summary: TiDB でインデックスを管理および最適化し、未使用の
 
 -   storageのオーバーヘッドを削減: 未使用のインデックスを削除すると、ディスク領域が解放され、長期的なstorageコストが削減されます。
 -   書き込みパフォーマンスの向上: 不要なインデックスメンテナンスが排除されると、書き込みが多いワークロード ( `INSERT` 、 `UPDATE` 、 `DELETE`など) のパフォーマンスが向上します。
--   クエリ実行の最適化: 効率的なインデックスによりスキャンされる行数が削減され、クエリ速度と応答時間が向上します。
+-   クエリ実行の最適化: 効率的なインデックスによりスキャンされる行数が削減され、クエリ速度と応答時​​間が向上します。
 -   データベース管理を合理化します。インデックスが少なく、適切に最適化されているため、バックアップ、リカバリ、スキーマの変更が簡素化されます。
 
 インデックスはビジネスロジックの変化に伴って進化するため、定期的なインデックス監査はデータベースメンテナンスの標準的な手順です。TiDBには、インデックスを安全かつ効果的に検出、評価、最適化するための組み込みの観測ツールが用意されています。
@@ -98,7 +99,7 @@ DESC TIDB_INDEX_USAGE;
 
 -   非効率的なインデックス:
 
-    -   `PERCENTAGE_ACCESS_100`の値が大きい場合は完全なインデックス スキャンが実行されることを意味し、インデックスが非効率的である可能性があります。
+    -   `PERCENTAGE_ACCESS_100`値が大きい場合は完全なインデックス スキャンが実行されることを意味し、インデックスが非効率的である可能性があります。
     -   `ROWS_ACCESS_TOTAL`と`QUERY_TOTAL`比較して、インデックスが使用量に比べてスキャンする行数が多すぎるかどうかを判断します。
 
 `TIDB_INDEX_USAGE`システム テーブルを使用すると、インデックスのパフォーマンスに関する詳細な情報を取得できるため、不要なインデックスを削除し、クエリ実行を最適化することが容易になります。
@@ -142,7 +143,7 @@ ORDER BY total_queries DESC;
 
 ### <code>TIDB_INDEX_USAGE</code>と<code>CLUSTER_TIDB_INDEX_USAGE</code>の主な違い {#key-differences-between-code-tidb-index-usage-code-and-code-cluster-tidb-index-usage-code}
 
-次の表は、 `TIDB_INDEX_USAGE`と`CLUSTER_TIDB_INDEX_USAGE`主な違いを示しています。
+次の表は、 `TIDB_INDEX_USAGE`と`CLUSTER_TIDB_INDEX_USAGE`の主な違いを示しています。
 
 | 特徴       | `TIDB_INDEX_USAGE`                     | `CLUSTER_TIDB_INDEX_USAGE`         |
 | -------- | -------------------------------------- | ---------------------------------- |
@@ -212,7 +213,7 @@ SELECT * FROM sys.schema_unused_indexes;
 -   毎日実行されないバッチ処理ジョブ
 -   アドホックトラブルシューティングクエリ
 
-インデックスが重要だが頻度の低いクエリに表示される場合は、まずそれを保持するか非表示にすることをお勧めします。
+重要だが頻度の低いクエリにインデックスが表示される場合は、まずインデックスを保持するか非表示にすることをお勧めします。
 
 [目に見えないインデックス](#safely-test-index-removal-using-invisible-indexes)使用すると、パフォーマンスに影響を与えずにインデックスを削除できるかどうかを安全にテストできます。
 
@@ -272,7 +273,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 1.  **インデックスの使用状況を定期的に監視します。**
 
     -   インデックスの使用アクティビティを追跡するには、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)と[`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage)使用します。
-    -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)使用して未使用のインデックスを識別し、削除できるかどうかを評価します。
+    -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を使用して未使用のインデックスを識別し、削除できるかどうかを評価します。
     -   クエリ実行プランを監視して、過剰な I/O を引き起こす可能性のある非効率的なインデックスを検出します。
 
 2.  **インデックスを削除する前に検証します。**
@@ -301,11 +302,11 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
         -   フィルタリングの効率を向上させるために列を追加します。
         -   インデックス構造の変更 (プレフィックス インデックス、複合インデックスなど)。
 
-    -   インデックスの選択性を分析します。3 `TIDB_INDEX_USAGE`のフィールドのうち`PERCENTAGE_ACCESS_*`使用して、インデックスがデータをどの程度適切にフィルタリングしているかを評価します。
+    -   インデックスの選択性を分析します。3 `TIDB_INDEX_USAGE`フィールドのうち`PERCENTAGE_ACCESS_*`使用して、インデックスがデータをどの程度適切にフィルタリングしているかを評価します。
 
 4.  **DML パフォーマンスへの影響に注意してください。**
 
-    -   過剰なインデックス作成は避けてください。インデックスを追加するごとに`UPDATE` `INSERT` `DELETE`操作のオーバーヘッドが増加します。
+    -   過剰なインデックス作成は避けてください。インデックスを追加するごとに`UPDATE` `INSERT` `DELETE`のオーバーヘッドが増加します。
     -   書き込みが多いワークロードのメンテナンス コストを最小限に抑えるために、クエリに必要なものだけをインデックスします。
 
 5.  **定期的にテストと調整を行ってください。**

@@ -1,11 +1,12 @@
 ---
 title: Common Table Expression
 summary: SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
+aliases: ['/tidb/stable/dev-guide-use-common-table-expression/','/tidb/dev/dev-guide-use-common-table-expression/','/tidbcloud/dev-guide-use-common-table-expression/']
 ---
 
 # 共通テーブル式 {#common-table-expression}
 
-トランザクションのシナリオによっては、アプリケーションの複雑さにより、最大2,000行にも及ぶSQL文を1つ記述しなければならない場合があります。このSQL文には、多数の集計や複数レベルのサブクエリのネストが含まれる可能性があります。このような長いSQL文を管理するのは、開発者にとって悪夢となる可能性があります。
+トランザクションのシナリオによっては、アプリケーションの複雑さにより、最大2,000行にも及ぶ単一のSQL文を記述しなければならない場合があります。この文には、多数の集計や複数レベルのサブクエリのネストが含まれる可能性があります。このような長いSQL文を管理することは、開発者にとって悪夢となる可能性があります。
 
 このような長い SQL 文を回避するには、 [ビュー](/develop/dev-guide-use-views.md)使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
@@ -30,12 +31,12 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-たとえば、最年長の著者 50 人がそれぞれ何冊の本を書いたかを知りたい場合は、次の手順を実行します。
+たとえば、最年長の 50 人の著者がそれぞれ何冊の本を書いたかを知りたい場合は、次の手順を実行します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-[一時テーブル](/develop/dev-guide-use-temporary-tables.md)の文を次のように変更します。
+[一時テーブル](/develop/dev-guide-use-temporary-tables.md)文を次のように変更します。
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -156,9 +157,9 @@ FROM
 
 この SQL ステートメントでは、 `,`で区切られた 3 つの CTE ブロックが定義されています。
 
-まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でそれぞれこれらの書籍の平均評価と順位を調べます。最後に、 `JOIN`ステートメントで結果を集計します。
+まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの書籍の平均評価と順位をそれぞれ求めます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-`books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。3 と`books_with_average_ratings` `books_with_orders`クエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
+`books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。3 と`books_with_orders` `books_with_average_ratings`クエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
 
 > **ヒント：**
 >
@@ -211,14 +212,6 @@ SELECT * FROM fibonacci;
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

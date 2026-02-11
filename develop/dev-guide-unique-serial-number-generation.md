@@ -1,17 +1,18 @@
 ---
 title: Unique Serial Number Generation
 summary: 独自の固有 ID を生成する開発者向けの固有シリアル番号生成ソリューション。
+aliases: ['/tidb/stable/dev-guide-unique-serial-number-generation/','/tidb/dev/dev-guide-unique-serial-number-generation/','/tidbcloud/dev-guide-unique-serial-number-generation/']
 ---
 
-# 一意のシリアル番号の生成 {#unique-serial-number-generation}
+# ユニークなシリアル番号の生成 {#unique-serial-number-generation}
 
 このドキュメントでは、独自の一意の ID を生成する開発者を支援するために、一意のシリアル番号生成スキームを紹介します。
 
 ## 自動増分列 {#auto-increment-column}
 
-`AUTO_INCREMENT`は、MySQLプロトコルと互換性のある多くのRDBMSの列属性です。2 属性を使用すると、データベースはユーザーの介入なしにこの列に自動的に値を割り当てることができます。テーブル内のレコード数が増加すると、この列の値は自動的に増加し、一意であることが保証されます。 `AUTO_INCREMENT`のシナリオでは、 `AUTO_INCREMENT`列は実際には意味を持たない代理主キーとして使用されます。
+`AUTO_INCREMENT`は、MySQL プロトコルと互換性のある多くの RDBMS の列属性です。2 属性を使用すると、データベースはユーザーの介入なしにこの列に自動的に値を割り当てることができます。テーブル内のレコード数が増加すると、この列の値は自動的に増加し、一意であることが保証されます。 `AUTO_INCREMENT`のシナリオでは、 `AUTO_INCREMENT`列は実際には意味を持たない代理主キーとして使用されます。
 
-`AUTO_INCREMENT`列目の制限は、列が整数型でなければならず、割り当てられる値も整数でなければならないことです。アプリケーションで必要なシリアル番号が文字、数字、その他の記号で区切られている場合、ユーザーは`AUTO_INCREMENT`列目を通してシリアル番号に必要な自動増分番号を取得することが困難になります。
+`AUTO_INCREMENT`列目の制限は、列が整数型でなければならず、割り当てられる値も整数でなければならないことです。アプリケーションで必要なシリアル番号が文字、数字、その他の文字で区切られている場合、ユーザーは`AUTO_INCREMENT`列目を通してシリアル番号に必要な自動増分番号を取得することが困難になります。
 
 ## シーケンス {#sequence}
 
@@ -30,18 +31,18 @@ Snowflakeは、Twitterが提案する分散ID生成ソリューションです�
     | 1bit |     28bits    | 22bits         | 13bits   |
 
 -   符号: 1ビットの固定長。生成されるIDが常に正の数であることを示すために`0`に固定されます。
--   デルタ秒：デフォルトは28ビット。現在の時刻を、あらかじめ設定されたタイムベース（デフォルトは`2016-05-20` ）に対する増分値（秒）で表します。28ビットでは最大約8.7年までサポートできます。
+-   デルタ秒: デフォルトは28ビット。現在の時刻を、あらかじめ設定されたタイムベース（デフォルトは`2016-05-20` ）に対する増分値（秒）で表します。28ビットでは最大約8.7年までサポートできます。
 -   ワーカーノードID：デフォルトでは22ビット。マシンIDを表します。通常、アプリケーションプロセスの開始時に中央IDジェネレータから取得されます。一般的な中央IDジェネレータには、自動インクリメント列やZooKeeperなどがあります。デフォルトの割り当てポリシーは「discard-as-you-go（実行時に破棄）」で、プロセスは再起動時に新しいワーカーノードIDを再取得します。22ビットでは最大約420万回の起動をサポートできます。
 -   シーケンス: デフォルトでは13ビット。1秒あたりの同時実行シーケンス数。13ビットでは1秒あたり8192の同時実行シーケンスをサポートできます。
 
 ## 番号割り当てソリューション {#number-allocation-solution}
 
-番号割り当てソリューションは、データベースから自動増分IDを一括取得することを意味します。この方式では、各行がシーケンスオブジェクトを表すシーケンス番号生成テーブルが必要です。テーブル定義の例を以下に示します。
+番号割り当てソリューションは、データベースから自動増分IDを一括取得することを意味します。このスキームでは、各行がシーケンスオブジェクトを表すシーケンス番号生成テーブルが必要です。テーブル定義の例を以下に示します。
 
 | フィールド名     | フィールドタイプ     | フィールドの説明                          |
 | ---------- | ------------ | --------------------------------- |
 | `SEQ_NAME` | varchar(128) | 異なるアプリケーションを区別するために使用されるシーケンスの名前。 |
-| `MAX_ID`   | ビッグインテント     | 現在割り当てられているシーケンスの最大値。             |
+| `MAX_ID`   | ビッグイント       | 現在割り当てられているシーケンスの最大値。             |
 | `STEP`     | 整数           | 割り当てられた各セグメントの長さを示すステップ。          |
 
 アプリケーションは毎回、設定されたステップでシーケンス番号のセグメントを取得します。同時にデータベースを更新し、現在割り当てられているシーケンスの最大値を維持します。シーケンス番号の処理と割り当てはアプリケーションのメモリ内で完了します。シーケンス番号のセグメントが使い果たされると、アプリケーションは新しいシーケンス番号のセグメントを取得し、データベースへの書き込み負荷を効果的に軽減します。実際には、ステップを調整することでデータベース更新の頻度を制御することもできます。
@@ -50,14 +51,6 @@ Snowflakeは、Twitterが提案する分散ID生成ソリューションです�
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

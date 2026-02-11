@@ -1,6 +1,7 @@
 ---
 title: Subquery
 summary: TiDB でサブクエリを使用する方法を学びます。
+aliases: ['/tidb/stable/dev-guide-use-subqueries/','/tidb/dev/dev-guide-use-subqueries/','/tidbcloud/dev-guide-use-subqueries/']
 ---
 
 # サブクエリ {#subquery}
@@ -11,7 +12,7 @@ summary: TiDB でサブクエリを使用する方法を学びます。
 
 サブクエリとは、別のSQLクエリ内に含まれるクエリです。サブクエリを使用すると、クエリの結果を別のクエリで使用できます。
 
-以下では、サブクエリを紹介するために、アプリケーション[書店](/develop/dev-guide-bookshop-schema-design.md)例に挙げます。
+以下では、サブクエリを紹介するために、アプリケーション[書店](/develop/dev-guide-bookshop-schema-design.md)を例に挙げます。
 
 ## サブクエリステートメント {#subquery-statement}
 
@@ -19,13 +20,13 @@ summary: TiDB でサブクエリを使用する方法を学びます。
 
 -   スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
 -   派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
--   存在テスト、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` `WHERE t1.a IN (SELECT ... FROM t2)`
--   `WHERE t1.a = ANY(SELECT ... FROM t2)`などの定量化された比較`WHERE t1.a = ANY(SELECT ... FROM t2)`
--   比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` )。
+-   存在テスト、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)` 。
+-   `WHERE t1.a = ANY(SELECT ... FROM t2)`など`WHERE t1.a = ANY(SELECT ... FROM t2)`定量化された比較。
+-   比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` 。
 
 ## サブクエリのカテゴリ {#category-of-subquery}
 
-サブクエリは、 [相関サブクエリ](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。TiDB では、これら 2 つのタイプを異なる方法で扱います。
+サブクエリは、 [相関サブクエリ](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。TiDBでは、これら2つのタイプを異なる方法で扱います。
 
 サブクエリが相関しているかどうかは、サブクエリが外部クエリで使用される列を参照しているかどうかによって決まります。
 
@@ -33,7 +34,7 @@ summary: TiDB でサブクエリを使用する方法を学びます。
 
 サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、実行プラン フェーズで TiDB によって定数として書き換えられます。
 
-たとえば、年齢が平均年齢より大きい`authors`テーブル内の著者を照会するには、サブクエリを比較演算子のオペランドとして使用できます。
+たとえば、年齢が平均年齢より大きい`authors`のテーブル内の著者を照会するには、サブクエリを比較演算子のオペランドとして使用できます。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -50,7 +51,7 @@ TiDB が上記のクエリを実行する前に、内部サブクエリが実行
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
-クエリの結果が 34 である、つまり平均年齢が 34 歳であると仮定し、34 が定数として使用され、元のサブクエリが置き換えられます。
+クエリの結果が 34 であるとします。つまり、平均年齢は 34 歳であり、34 が定数として使用され、元のサブクエリが置き換えられます。
 
 ```sql
 SELECT * FROM authors a1
@@ -77,15 +78,15 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
     | 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
     ...
 
-存在テストや定量比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のためにそれらを書き換え、同等のクエリに置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)参照してください。
+存在テストや定量比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のために、それらを同等のクエリに書き換えて置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)参照してください。
 
 ### 相関サブクエリ {#correlated-subquery}
 
-相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの各行に対して1回ずつ実行されます。つまり、外部クエリが1,000万件の結果を取得すると仮定すると、サブクエリも1,000万回実行され、より多くの時間とリソースが消費されます。
+相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの各行に対して1回ずつ実行されます。つまり、外部クエリが1,000万件の結果を取得すると仮定すると、サブクエリも1,000万回実行され、より多くの時間とリソースを消費することになります。
 
-したがって、処理の過程で、TiDB [相関サブクエリの非相関](/correlated-subquery-optimization.md)実行プラン レベルでクエリ効率を向上させるように努めます。
+したがって、処理の過程で、TiDB は実行プラン レベルでクエリ効率[相関サブクエリの非相関](/correlated-subquery-optimization.md)向上させるように努めます。
 
-次の文は、同じ性別の他の著者の平均年齢よりも年上の著者を照会するためのものです。
+次の文は、同じ性別の他の著者の平均年齢よりも年上の著者を問い合わせるためのものです。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -119,7 +120,7 @@ WHERE
     AND (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > a2.average_age;
 ```
 
-ベスト プラクティスとして、実際の開発では、パフォーマンスが向上する別の同等のクエリを記述できる場合は、相関サブクエリを介したクエリを避けることをお勧めします。
+ベストプラクティスとして、実際の開発では、パフォーマンスが向上する別の同等のクエリを記述できる場合は、相関サブクエリを介したクエリを避けることをお勧めします。
 
 ## 続きを読む {#read-more}
 
@@ -129,14 +130,6 @@ WHERE
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

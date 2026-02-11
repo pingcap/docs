@@ -11,7 +11,6 @@
     -   [MySQLの互換性](/mysql-compatibility.md)
 -   TiDB Cloudを使い始める
     -   [TiDB Cloudを試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
-    -   [TiDB + AIを試す](/vector-search/vector-search-get-started-using-python.md)
     -   [HTAPを試してみる](/tidb-cloud/tidb-cloud-htap-quickstart.md)
     -   [TiDB Cloud CLI を試す](/tidb-cloud/get-started-with-cli.md)
 -   重要な概念
@@ -30,7 +29,6 @@
 ## 開発する {#develop}
 
 -   開発クイックスタート
-    -   [開発者ガイドの概要](/develop/dev-guide-overview.md)
     -   [TiDB Cloudクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
     -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
 -   TiDB Cloudに接続する
@@ -57,7 +55,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   ノード.js
+    -   Node.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -69,13 +67,13 @@
         -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
     -   C#
         -   [C#](/develop/dev-guide-sample-application-cs.md)
-    -   [ワードプレス](/tidb-cloud/dev-guide-wordpress.md)
+    -   [ワードプレス](/develop/dev-guide-wordpress.md)
     -   サーバーレスDriver![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)<!--TBD, ToDo: Not sure if we need to update the driver name-->
-        -   [TiDB CloudサーバーレスDriver](/tidb-cloud/serverless-driver.md)
-        -   [Node.jsの例](/tidb-cloud/serverless-driver-node-example.md)
-        -   [Prismaの例](/tidb-cloud/serverless-driver-prisma-example.md)
-        -   [Kyselyの例](/tidb-cloud/serverless-driver-kysely-example.md)
-        -   [霧雨の例](/tidb-cloud/serverless-driver-drizzle-example.md)
+        -   [TiDB CloudサーバーレスDriver](/develop/serverless-driver.md)
+        -   [Node.jsの例](/develop/serverless-driver-node-example.md)
+        -   [Prismaの例](/develop/serverless-driver-prisma-example.md)
+        -   [Kyselyの例](/develop/serverless-driver-kysely-example.md)
+        -   [霧雨の例](/develop/serverless-driver-drizzle-example.md)
 -   開発リファレンス
     -   データベーススキーマの設計
         -   [概要](/develop/dev-guide-schema-design-overview.md)
@@ -236,9 +234,9 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/premium/manage-user-access-premium.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを構成する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
+        -   [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-        -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+        -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
@@ -535,21 +533,13 @@
             -   [概要](/sys-schema/sys-schema.md)
             -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     -   [メタデータロック](/metadata-lock.md)
-    -   [UUIDを使用する](/best-practices/uuid.md)
     -   [TiDB 高速テーブル作成](/accelerated-table-creation.md)
--   APIリファレンス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    -   [概要](/tidb-cloud/api-overview.md)
-    -   v1ベータ1
-        -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-        -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        -   [MSP（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
-    -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta)
 -   CLIリファレンス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [概要](/tidb-cloud/cli-reference.md)
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -625,7 +615,6 @@
     -   [サーバーステータス変数](/status-variables.md)
     -   [テーブルフィルター](/table-filter.md)
     -   [外部ストレージサービスのURI形式](/external-storage-uri.md)
-    -   [DDL実行の原則とベストプラクティス](/ddl-introduction.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
 -   サポートプラン
@@ -643,9 +632,3 @@
 -   よくある質問
     -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
 -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
-
-## リリース {#releases}
-
--   リリースノート
-    -   [2026](/tidb-cloud/tidb-cloud-release-notes.md)
-    -   [2025](/tidb-cloud/release-notes-2025.md)

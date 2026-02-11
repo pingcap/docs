@@ -7,7 +7,7 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
 TiDB Cloudは、お客様のニーズに合わせてカスタマイズされた段階的なサポートプランを提供しています。サポートプランの詳細については、 [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
 
-## サポートチャネル {#support-channels}
+## サポートチャンネル {#support-channels}
 
 TiDB Cloudは複数のサポートチャネルを提供しています。利用可能なオプションは、問題の種類と[サポートプラン](/tidb-cloud/connected-care-detail.md)によって異なります。
 
@@ -27,7 +27,7 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 -   コミュニティ（ [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap)と[不和](https://discord.com/invite/KVRZBR2DrG) ）
 
-    これらのオープンディスカッションチャンネルは、質問したり、経験を共有したり、他のユーザーやPingCAPエンジニアからアドバイスを得たりするのに便利です。これらのチャンネルは、一般的な質問、使用方法の議論、緊急性のない技術的な問題などに適しています。
+    これらのオープンディスカッションチャンネルは、質問をしたり、経験を共有したり、他のユーザーやPingCAPエンジニアからアドバイスを得たりするのに便利です。これらのチャンネルは、一般的な質問、使用方法の議論、緊急性のない技術的な問題などに適しています。
 
 -   [TiDB.AI](https://tidb.ai/)
 
@@ -39,8 +39,10 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servicedesk/customer/portals](https://tidb.support.pingcap.com/servicedesk/customer/portals)から直接アクセスすることも、次の[TiDB Cloudコンソール](https://tidbcloud.com/)の方法でアクセスすることもできます。
 
--   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポートのリクエスト]**をクリックします。
--   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート]**をクリックし、 **[チケットの作成] を**クリックします。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポート チケット]**をクリックします。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート] を**クリックし、サポート プランに応じて次のいずれかを実行します。
+    -   **基本**: **[アカウントと請求]**領域で、 **[アカウント/請求の問題]**をクリックします。
+    -   **Developer** 、 **Enterprise** 、または**Premium** : **「専門家に相談」**エリアで、 **PingCAP ヘルプ センター**をクリックします。
 -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 -   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 

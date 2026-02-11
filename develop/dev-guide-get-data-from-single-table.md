@@ -1,6 +1,7 @@
 ---
 title: Query Data from a Single Table
 summary: このドキュメントでは、データベース内の単一のテーブルからデータをクエリする方法について説明します。
+aliases: ['/tidb/stable/dev-guide-get-data-from-single-table/','/tidb/dev/dev-guide-get-data-from-single-table/','/tidbcloud/dev-guide-get-data-from-single-table/']
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -15,35 +16,26 @@ summary: このドキュメントでは、データベース内の単一のテ�
 
 データをクエリする前に、次の手順が完了していることを確認してください。
 
-<CustomContent platform="tidb">
+<SimpleTab groupId="platform">
+<div label="TiDB Cloud" value="tidb-cloud">
 
-1.  TiDB クラスターを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)使用を推奨)。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)使用して TiDB クラスターを構築します。
-
-</CustomContent>
-
+1.  [TiDB Cloudクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
-
-<CustomContent platform="tidb">
-
 3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md) 。
 
-</CustomContent>
+</div>
+<div label="TiDB Self-Managed" value="tidb">
 
-<CustomContent platform="tidb-cloud">
+1.  [TiDBセルフマネージドクラスタをデプロイ](/production-deployment-using-tiup.md) 。
+2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
+3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md) 。
 
-3.  [TiDBに接続する](/tidb-cloud/connect-to-tidb-cluster.md) 。
-
-</CustomContent>
+</div>
+</SimpleTab>
 
 ## 簡単なクエリを実行する {#execute-a-simple-query}
 
-Bookshopアプリケーションのデータベースでは、 `authors`のテーブルに著者の基本情報が保存されています。3 `SELECT ... FROM ...`のステートメントを使用して、データベースからデータをクエリできます。
+Bookshopアプリケーションのデータベースでは、 `authors`番目のテーブルに著者の基本情報が保存されています。3 `SELECT ... FROM ...`のステートメントを使用して、データベースからデータをクエリできます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -76,7 +68,7 @@ SELECT id, name FROM authors;
 </div>
 <div label="Java" value="java">
 
-Javaでは、著者の基本情報を格納するためにクラス`Author`宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に応じて適切なJavaデータ型を選択する必要があります。例えば、次のようになります。
+Javaでは、著者の基本情報を格納するためにクラス`Author`を宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に応じて適切なJavaデータ型を選択する必要があります。例えば、次のようになります。
 
 -   タイプ`Int`の変数を使用して、タイプ`int`のデータを保存します。
 -   タイプ`Long`の変数を使用して、タイプ`bigint`のデータを保存します。
@@ -120,25 +112,14 @@ public class AuthorDAO {
 }
 ```
 
-<CustomContent platform="tidb">
+[JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ要求を開始できます。
 
--   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-connect-to-tidb.md#jdbc)後は`conn.createStatus()`で`Statement`オブジェクトを作成できます。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)後は`conn.createStatus()`で`Statement`オブジェクトを作成できます。
-
-</CustomContent>
-
--   次に、 `stmt.executeQuery("query_sql")`呼び出して、TiDB へのデータベース クエリ要求を開始します。
--   クエリ結果は`ResultSet`オブジェクトに保存されます。 `ResultSet`トラバースすることで、返された結果を`Author`オブジェクトにマッピングできます。
+クエリ結果は`ResultSet`オブジェクトに保存されます。 `ResultSet`トラバースすることで、返された結果を`Author`オブジェクトにマッピングできます。
 
 </div>
 </SimpleTab>
 
-## 結果をフィルタリングする {#filter-results}
+## 結果をフィルタリング {#filter-results}
 
 クエリ結果をフィルタリングするには、 `WHERE`ステートメントを使用できます。
 
@@ -160,7 +141,7 @@ Javaでは、同じ SQL を使用して、動的パラメータを含むデー�
 
 これは、パラメータをSQL文に連結することで実現できます。ただし、この方法はアプリケーションのセキュリティに潜在的[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)リスクをもたらします。
 
-このようなクエリを処理するには、通常のステートメントの代わりに[準備された声明](/develop/dev-guide-prepared-statement.md)使用します。
+このようなクエリを処理するには、通常のステートメントの代わりに[準備された声明](/develop/dev-guide-prepared-statement.md)を使用します。
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -230,7 +211,7 @@ public List<Author> getAuthorsSortByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +-----------+------------------------+------------+
     | id        | name                   | birth_year |
@@ -293,7 +274,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 </div>
 </SimpleTab>
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +-----------+------------------------+------------+
     | id        | name                   | birth_year |
@@ -368,7 +349,7 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +------------+--------------+
     | birth_year | author_count |
@@ -391,14 +372,6 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

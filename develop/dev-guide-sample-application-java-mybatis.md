@@ -1,11 +1,12 @@
 ---
 title: Connect to TiDB with MyBatis
-summary: MyBatisを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使ってTiDBを操作するJavaサンプルコードを紹介します。
+summary: MyBatisを使用してTiDBに接続する方法を学びます。このチュートリアルでは、MyBatisを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
+aliases: ['/tidb/stable/dev-guide-sample-application-java-mybatis/','/tidb/dev/dev-guide-sample-application-java-mybatis/','/tidbcloud/dev-guide-sample-application-java-mybatis/']
 ---
 
 # MyBatisでTiDBに接続する {#connect-to-tidb-with-mybatis}
 
-TiDB は MySQL 互換のデータベースであり、 [マイバティス](https://mybatis.org/mybatis-3/index.html)人気のオープンソースのJava ORM です。
+TiDB は MySQL 互換のデータベースであり、 [マイバティス](https://mybatis.org/mybatis-3/index.html)人気のあるオープンソースのJava ORM です。
 
 このチュートリアルでは、TiDB と MyBatis を使用して次のタスクを実行する方法を学習します。
 
@@ -26,22 +27,10 @@ TiDB は MySQL 互換のデータベースであり、 [マイバティス](http
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
 
-<CustomContent platform="tidb">
-
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**TiDB クラスターがない場合は、次のように作成できます。**
-
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
-
-</CustomContent>
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -49,7 +38,7 @@ TiDB は MySQL 互換のデータベースであり、 [マイバティス](http
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-mybatis-quickstart.git
@@ -93,7 +82,7 @@ cd tidb-java-mybatis-quickstart
     cp env.sh.example env.sh
     ```
 
-6.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
+6.  対応する接続​​文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -119,7 +108,7 @@ cd tidb-java-mybatis-quickstart
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
     TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
@@ -129,7 +118,7 @@ cd tidb-java-mybatis-quickstart
     cp env.sh.example env.sh
     ```
 
-5.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
+5.  対応する接続​​文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -145,7 +134,7 @@ cd tidb-java-mybatis-quickstart
 6.  `env.sh`ファイルを保存します。
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 1.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
@@ -153,7 +142,7 @@ cd tidb-java-mybatis-quickstart
     cp env.sh.example env.sh
     ```
 
-2.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
+2.  対応する接続​​文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -164,7 +153,7 @@ cd tidb-java-mybatis-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `env.sh`ファイルを保存します。
 
@@ -179,7 +168,7 @@ cd tidb-java-mybatis-quickstart
     make
     ```
 
-2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-mybatis-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-mybatis-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -223,7 +212,7 @@ MyBatis設定ファイル`mybatis-config.xml`を編集します。
 </configuration>
 ```
 
-`${tidb_jdbc_url}` `${tidb_user}` TiDBクラスタの実際の値に置き換えてください。また、 `${mapper_location}` `${tidb_password}` XML設定ファイルのパスに置き換えてください。マッパーXML設定ファイルが複数ある場合は、それぞれに`<mapper/>`タグを追加する必要があります。次に、以下の関数を定義します。
+`${tidb_jdbc_url}` `${tidb_user}` `${tidb_password}` TiDBクラスタの実際の値に置き換えてください。また、 `${mapper_location}`マッパーXML設定ファイルのパスに置き換えてください。マッパーXML設定ファイルが複数ある場合は、それぞれに`<mapper/>`タグを追加する必要があります。次に、次の関数を定義します。
 
 ```java
 public SqlSessionFactory getSessionFactory() {
@@ -314,20 +303,12 @@ public SqlSessionFactory getSessionFactory() {
 ## 次のステップ {#next-steps}
 
 -   MyBatis の使い方を[MyBatisのドキュメント](http://www.mybatis.org/mybatis-3/)から詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

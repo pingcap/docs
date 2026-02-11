@@ -1,15 +1,16 @@
 ---
 title: Paginate Results
 summary: TiDB にページ区切り結果機能を導入します。
+aliases: ['/tidb/stable/dev-guide-paginate-results/','/tidb/dev/dev-guide-paginate-results/','/tidbcloud/dev-guide-paginate-results/']
 ---
 
 # 結果をページ付けする {#paginate-results}
 
-大きなクエリ結果をページングするには、必要な部分を「ページ分け」方式で取得できます。
+大きなクエリ結果をページングするには、「ページ分けされた」方法で必要な部分を取得できます。
 
-## クエリ結果をページ分割する {#paginate-query-results}
+## クエリ結果をページ区切りする {#paginate-query-results}
 
-TiDBでは、 `LIMIT`文を使ってクエリ結果をページ分割できます。例えば：
+TiDBでは、 `LIMIT`文を使ってクエリ結果をページ区切りすることができます。例えば：
 
 ```sql
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
@@ -34,7 +35,7 @@ LIMIT 0, 10;
 </div>
 <div label="Java" value="java">
 
-アプリケーション開発において、バックエンドプログラムはフロントエンドから`offset`番目のパラメータではなく、 `page_number`のパラメータ（リクエストされているページ番号）と`page_size`パラメータ（ページあたりのレコード数を制御するパラメータ）を受け取ります。そのため、クエリを実行する前にいくつかの変換を行う必要がありました。
+アプリケーション開発において、バックエンドプログラムはフロントエンドから`offset`番目のパラメータではなく、 `page_number`のパラメータ（リクエストされているページ番号）と`page_size`のパラメータ（ページあたりのレコード数を制御するパラメータ）を受け取ります。そのため、クエリを実行する前にいくつかの変換を行う必要がありました。
 
 ```java
 public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLException {
@@ -70,14 +71,14 @@ public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLE
 
 ## 単一フィールドの主キーテーブルのページングバッチ {#paging-batches-for-single-field-primary-key-tables}
 
-通常、ページネーションSQL文では、主キーまたは一意のインデックスを使用して結果をソートし、 `LIMIT`句の`offset`キーワードを使用して指定した行数でページを分割します。これにより、ページは独立したトランザクションにラップされ、柔軟なページング更新が実現します。しかし、欠点も明らかです。主キーまたは一意のインデックスをソートする必要があるため、オフセットが大きいほど、特にデータ量が多い場合は、より多くのコンピューティングリソースを消費します。
+通常、主キーまたは一意のインデックスを使用して結果をソートし、 `LIMIT`句の`offset`キーワードを使用して指定した行数でページを分割するページネーションSQL文を記述できます。その後、ページは独立したトランザクションにラップされ、柔軟なページング更新を実現します。ただし、欠点も明らかです。主キーまたは一意のインデックスをソートする必要があるため、オフセットが大きいほど、特にデータ量が多い場合は、より多くのコンピューティングリソースを消費します。
 
 以下に、より効率的なページング バッチ処理方法を紹介します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-まず、データを主キーでソートし、ウィンドウ関数`row_number()`呼び出して各行の行番号を生成します。次に、集計関数を呼び出して、指定されたページサイズで行番号をグループ化し、各ページの最小値と最大値を計算します。
+まず、データを主キーでソートし、ウィンドウ関数`row_number()`呼び出して各行の行番号を生成します。次に、集計関数を呼び出して行番号を指定されたページサイズでグループ化し、各ページの最小値と最大値を計算します。
 
 ```sql
 SELECT
@@ -93,7 +94,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +----------+------------+------------+-----------+
     | page_num | start_key  | end_key    | page_size |
@@ -108,9 +109,9 @@ ORDER BY page_num;
     +----------+------------+------------+-----------+
     20 rows in set (0.01 sec)
 
-次に、 `WHERE id BETWEEN start_key AND end_key`文を使用して各スライスのデータをクエリします。データをより効率的に更新するには、データの変更時に上記のスライス情報を使用できます。
+次に、 `WHERE id BETWEEN start_key AND end_key`ステートメントを使用して各スライスのデータをクエリします。データをより効率的に更新するには、データの変更時に上記のスライス情報を使用できます。
 
-1 ページ目にあるすべての書籍の基本情報を削除するには、上記の結果の`start_key`と`end_key` 1 ページ目の値に置き換えます。
+1 ページ目にあるすべての書籍の基本情報を削除するには、上記の結果の`start_key`と`end_key`を 1 ページ目の値に置き換えます。
 
 ```sql
 DELETE FROM books
@@ -189,7 +190,7 @@ if (pageMetaList.size() > 0) {
 }
 ```
 
-次のステートメントは、ページングによってすべての書籍データを一括削除します。
+次のステートメントは、ページングによってすべての書籍データを一括して削除します。
 
 ```java
 List<PageMeta<Long>> pageMetaList = bookDAO.getPageMetaList();
@@ -213,7 +214,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 非クラスター化インデックス テーブル (「非インデックス構成テーブル」とも呼ばれます) の場合、内部フィールド`_tidb_rowid`ページ区切りキーとして使用でき、ページ区切りの方法は単一フィールドの主キー テーブルの場合と同じです。
 
-> **Tip:**
+> **ヒント：**
 >
 > `SHOW CREATE TABLE users;`ステートメントを使用して、テーブルの主キーが[クラスター化インデックス](/clustered-indexes.md)使用しているかどうかを確認できます。
 
@@ -233,7 +234,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +----------+-----------+---------+-----------+
     | page_num | start_key | end_key | page_size |
@@ -257,9 +258,9 @@ ORDER BY page_num;
 
 この時点ではキーは文字列であり、 `min`と`max`集約関数を介したスライスで正しい`start_key`と`end_key`取得するには、文字列の長さが常に一定であることを確認する必要があります。文字列連結のフィールドの長さが固定でない場合は、 `LPAD`関数を使用してパディングすることができます。
 
-たとえば、次のようにして、テーブル`ratings`のデータのページング バッチを実装できます。
+たとえば、次のようにして`ratings`テーブル内のデータのページング バッチを実装できます。
 
-以下のステートメントを使用してメタ情報テーブルを作成します。5 種類の`book_id`と`user_id`連結したキーは同じ長さに変換できないため、 `bigint`の最大ビット数である 19 ビットに合わせて`bigint`関数`LPAD`使用して長さを`0`で埋めます。
+以下のステートメントを使用してメタ情報テーブルを作成します。5 種類の`book_id`と`user_id`を連結したキーは、同じ長さに変換できないため、 `bigint`の最大ビット数である`LPAD` `bigint`を使用して`0`をパディングします。
 
 ```sql
 SELECT
@@ -279,9 +280,9 @@ ORDER BY page_num;
 
 > **注記：**
 >
-> 上記のSQL文は`TableFullScan`として実行されます。データ量が多いとクエリが遅くなるため、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)高速化できます。
+> 上記のSQL文は`TableFullScan`として実行されます。データ量が多いとクエリが遅くなるため、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)で高速化できます。
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +----------+-------------------------------------------+-------------------------------------------+-----------+
     | page_num | start_key                                 | end_key                                   | page_size |
@@ -330,14 +331,6 @@ ORDER BY book_id, user_id;
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

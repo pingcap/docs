@@ -124,7 +124,7 @@ Apache Kafka サービスにパブリック IP アクセスを提供する場合
 
 <div label="VPC Peering">
 
-現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能は、リクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiDB Cloud PremiumインスタンスのVPCピアリングを申請」と入力し、 **「送信」を**クリックしてください。
+現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能は、リクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「 TiDB Cloud PremiumインスタンスのVPCピアリングを申請」と入力して、 **「送信」を**クリックしてください。
 
 </div>
 </SimpleTab>
@@ -333,7 +333,7 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
     -   **レプリケーション係数**: 各Kafkaメッセージが何台のKafkaサーバーに複製されるかを制御します。有効な値の範囲は[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
     -   **パーティション数**: トピック内に存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
 
-10. **「イベントの分割」**エリアでは、 `UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割するか、 `UPDATE`イベントのままにするかを選択します。詳細については、 [MySQL以外のシンクの主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
+10. **「イベントの分割」**エリアでは、 `UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割するか、 `UPDATE`イベントのままにするかを選択します。詳細については、 [MySQL 以外のシンクの主キーまたは一意キーの UPDATE イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
 
 11. **「次へ」**をクリックします。
 

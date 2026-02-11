@@ -33,7 +33,7 @@ TiDB バージョン: 8.4.0
 
     詳細については[ドキュメント](/system-variables.md#tidb_hash_join_version-new-in-v840)参照してください。
 
--   次の日付関数を TiKV [＃56297](https://github.com/pingcap/tidb/issues/56297) [＃17529](https://github.com/tikv/tikv/issues/17529) @ [ゲンリキ](https://github.com/gengliqi)にプッシュダウンすることをサポートします
+-   次の日付関数を TiKV [＃56297](https://github.com/pingcap/tidb/issues/56297) [＃17529](https://github.com/tikv/tikv/issues/17529) @ [ゲンリチ](https://github.com/gengliqi)にプッシュダウンすることをサポートします
 
     -   `DATE_ADD()`
     -   `DATE_SUB()`
@@ -133,13 +133,13 @@ TiDB バージョン: 8.4.0
 
     ベクトル検索は、データのセマンティクスに基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は検索拡張生成（RAG）、セマンティック検索、レコメンデーションシステムなど、様々なシナリオで活用できます。
 
-    TiDB v8.4.0以降、 [ベクトルデータ型](/vector-search/vector-search-data-types.md)と[ベクトル検索インデックス](/vector-search/vector-search-index.md)サポートし、強力なベクトル検索機能を提供します。TiDBベクトルデータ型は最大16,383次元をサポートし、L2距離（ユークリッド距離）、コサイン距離、負の内積、L1距離（マンハッタン距離）など、さまざまな[距離関数](/vector-search/vector-search-functions-and-operators.md#vector-functions)サポートします。
+    TiDB v8.4.0以降、 [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)サポートし、強力なベクトル検索機能を提供します。TiDBベクトルデータ型は最大16,383次元をサポートし、L2距離（ユークリッド距離）、コサイン距離、負の内積、L1距離（マンハッタン距離）など、さまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)サポートします。
 
     ベクトル検索を開始するには、ベクトルデータ型のテーブルを作成し、ベクトルデータを挿入し、ベクトルデータに対するクエリを実行するだけです。ベクトルデータと従来のリレーショナルデータを組み合わせたクエリも実行できます。
 
-    ベクトル検索のパフォーマンスを向上させるには、 [ベクトル検索インデックス](/vector-search/vector-search-index.md)作成して使用できます。TiDB ベクトル検索インデックスはTiFlashに依存していることに注意してください。ベクトル検索インデックスを使用する前に、TiDB クラスターにTiFlashノードがデプロイされていることを確認してください。
+    ベクトル検索のパフォーマンスを向上させるには、 [ベクトル検索インデックス](/ai/reference/vector-search-index.md)作成して使用できます。TiDB ベクトル検索インデックスはTiFlashに依存していることに注意してください。ベクトル検索インデックスを使用する前に、TiDB クラスターにTiFlashノードがデプロイされていることを確認してください。
 
-    詳細については[ドキュメント](/vector-search/vector-search-overview.md)参照してください。
+    詳細については[ドキュメント](/ai/concepts/vector-search-overview.md)参照してください。
 
 ### DB操作 {#db-operations}
 
@@ -175,7 +175,7 @@ TiDB バージョン: 8.4.0
 
 -   Top SQL は、テーブルまたはデータベースごとに集計された CPU 時間結果の表示をサポートします[＃55540](https://github.com/pingcap/tidb/issues/55540) @ [ノルーシュ](https://github.com/nolouch)
 
-    バージョン8.4.0より前のバージョンでは、 [Top SQL](/dashboard/top-sql.md) CPU時間をSQLごとに集計していました。CPU時間が消費されるSQL文が少ない場合、SQLごとの集計では問題を効果的に特定できません。バージョン8.4.0以降では、CPU時間を**テーブル別**または**データベース別に**集計できます。複数のシステムが存在するシナリオでは、新しい集計方法により、特定のシステムからの負荷変化をより効果的に特定できるため、診断効率が向上します。
+    バージョン8.4.0より前のバージョンでは、 [Top SQL](/dashboard/top-sql.md) CPU時間をSQLごとに集計していました。CPU時間が消費されるSQL文が少数の場合、SQLごとの集計では問題を効果的に特定できません。バージョン8.4.0以降では、CPU時間を**テーブル別**または**データベース別に**集計できます。複数のシステムが存在するシナリオでは、新しい集計方法により、特定のシステムからの負荷変化をより効果的に特定できるため、診断効率が向上します。
 
     詳細については[ドキュメント](/dashboard/top-sql.md#use-top-sql)参照してください。
 
@@ -229,7 +229,7 @@ TiDB バージョン: 8.4.0
 | [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-new-in-v840)                                             | 新しく追加された | TiDBがハッシュ結合演算子の最適化バージョンを使用するかどうかを制御します。デフォルト値の`legacy`は、最適化バージョンを使用しないことを意味します。 `optimized`に設定すると、TiDBはハッシュ結合演算子の実行時に最適化バージョンを使用し、ハッシュ結合のパフォーマンスを向上させます。                                                                                                                                            |
 | [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)                       | 新しく追加された | インスタンス プラン キャッシュの最大メモリ使用量を設定します。                                                                                                                                                                                                                                                                    |
 | [`tidb_instance_plan_cache_reserved_percentage`](/system-variables.md#tidb_instance_plan_cache_reserved_percentage-new-in-v840) | 新しく追加された | メモリの削除後にインスタンス プラン キャッシュ用に予約されるアイドルメモリの割合を制御します。                                                                                                                                                                                                                                                    |
-| [`tidb_pre_split_regions`](/system-variables.md#tidb_pre_split_regions-new-in-v840)                                             | 新しく追加された | バージョン8.4.0より前のバージョンでは、新規作成テーブルの行分割スライス数のデフォルト設定には、 `CREATE TABLE` SQL文ごとに`PRE_SPLIT_REGIONS`宣言する必要がありました。これは、多数のテーブルを同様に設定する必要がある場合、煩雑な作業となります。この変数はこうした問題を解決するために導入されました。このシステム変数を`GLOBAL`または`SESSION`レベルに設定することで、ユーザビリティを向上させることができます。                                                            |
+| [`tidb_pre_split_regions`](/system-variables.md#tidb_pre_split_regions-new-in-v840)                                             | 新しく追加された | バージョン8.4.0より前では、新規作成テーブルの行分割スライス数のデフォルト設定には、 `CREATE TABLE` SQL文ごとに`PRE_SPLIT_REGIONS`宣言する必要がありました。これは、多数のテーブルを同様に設定する必要がある場合、煩雑な作業となります。この変数はこうした問題を解決するために導入されました。このシステム変数を`GLOBAL`または`SESSION`レベルに設定することで、ユーザビリティを向上させることができます。                                                                  |
 | [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840)                                             | 新しく追加された | バージョン8.4.0より前では、新規作成テーブルの行IDのデフォルトのスライス数を設定するには、 `CREATE TABLE`または`ALTER TABLE` SQL文ごとに`SHARD_ROW_ID_BITS`宣言する必要がありました。これは、多数のテーブルを同様に設定する必要がある場合、煩雑になります。この変数は、こうした問題を解決するために導入されました。このシステム変数を`GLOBAL`または`SESSION`レベルに設定することで、ユーザビリティを向上させることができます。                                                |
 | [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)                                         | 新しく追加された | TiDBがPDにTSO RPCリクエストを送信するモードを切り替えます。このモードは、TSO RPCリクエストを並列処理できるかどうかを決定し、各TS取得操作のバッチ待機時間に影響を与えます。これにより、特定のシナリオにおけるクエリ実行中のTS取得の待機時間を短縮できます。                                                                                                                                                           |
 
@@ -322,7 +322,7 @@ TiDB をアップグレードする前に、オペレーティング システ�
 
 -   ティクブ
 
-    -   リージョン[＃17309](https://github.com/tikv/tikv/issues/17309) @ [LykxSassinator](https://github.com/LykxSassinator)が多すぎることによる余分なオーバーヘッドを回避するために、リージョンのデフォルト値を 96 MiB から 256 MiB に増やします。
+    -   リージョン[＃17309](https://github.com/tikv/tikv/issues/17309) @ [リクックスサシネーター](https://github.com/LykxSassinator)が多すぎることによる余分なオーバーヘッドを回避するために、リージョンのデフォルト値を 96 MiB から 256 MiB に増やします。
     -   リージョンまたはTiKVインスタンスにおけるメモリ内悲観的ロックのメモリ使用量制限の設定をサポートします。ホットライトシナリオによって大量の悲観的ロックが発生する場合は、設定によってメモリ制限を増やすことができます。これにより、悲観的ロックのディスクへの書き込みによって発生するCPUおよびI/Oのオーバーヘッドを回避できます[＃17542](https://github.com/tikv/tikv/issues/17542) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   Raft Engineに新しい`spill-dir`設定項目を導入し、 Raftログのマルチディスクstorageをサポートします。ホームディレクトリ（ `dir` ）があるディスクの容量が不足すると、 Raft Engineは自動的に新しいログを`spill-dir`に書き込み、システムの継続的な動作を保証します[＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   RocksDB の圧縮トリガー メカニズムを最適化し、多数の DELETE バージョン[＃17269](https://github.com/tikv/tikv/issues/17269) @ [アンドレ・ムーシュ](https://github.com/AndreMouche)を処理するときにディスク領域の再利用を高速化します。
@@ -384,7 +384,7 @@ TiDB をアップグレードする前に、オペレーティング システ�
     -   パーティションテーブル[＃56094](https://github.com/pingcap/tidb/issues/56094) @ [ミョンス](https://github.com/mjonss)を作成するときに、列の種類の制限が`CREATE TABLE`と`ALTER TABLE`の間で一致しない問題を修正しました。
     -   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`表[＃54770](https://github.com/pingcap/tidb/issues/54770) @ [HuSharp](https://github.com/HuSharp)の誤った時間タイプを修正
 
--   TiKV
+-   ティクブ
 
     -   マスターキーがキー管理サービス (KMS) [＃17410](https://github.com/tikv/tikv/issues/17410) @ [hhwyt](https://github.com/hhwyt)に保存されているときにマスターキーのローテーションを妨げる問題を修正しました
     -   大きなテーブルやパーティション[＃17304](https://github.com/tikv/tikv/issues/17304) @ [コナー1996](https://github.com/Connor1996)を削除した後に発生する可能性のあるトラフィック制御の問題を修正しました

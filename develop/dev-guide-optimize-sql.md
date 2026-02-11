@@ -1,6 +1,7 @@
 ---
 title: SQL Performance Tuning
 summary: TiDB の SQL パフォーマンス チューニング スキームと分析アプローチを紹介します。
+aliases: ['/tidb/stable/dev-guide-optimize-sql/','/tidb/dev/dev-guide-optimize-sql/','/tidbcloud/dev-guide-optimize-sql/']
 ---
 
 # SQL性能チューニング {#sql-performance-tuning}
@@ -9,13 +10,13 @@ summary: TiDB の SQL パフォーマンス チューニング スキームと�
 
 ## 始める前に {#before-you-begin}
 
-[`tiup demo`インポート](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)使用してデータを準備できます。
+[`tiup demo`インポート](/develop/dev-guide-bookshop-schema-design.md#tidb-self-managed-via-tiup-demo)使用してデータを準備できます。
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-または、事前に準備されたサンプル データをインポートする場合は[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) 。
+または、事前に準備されたサンプル データをインポートする場合は[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature) 。
 
 ## 問題: テーブル全体のスキャン {#issue-full-table-scan}
 
@@ -57,9 +58,9 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-実行プランの`TableFullScan_5`からわかるように、TiDBは`books`テーブルに対してフルテーブルスキャンを実行し、各行について`title`条件を満たすかどうかを確認します`TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザがこのフルテーブルスキャンで`1000000.00`行のデータが使用されると見積もっていることを意味します。
+実行プランの`TableFullScan_5`からわかるように、TiDBは`books`番目のテーブルに対してフルテーブルスキャンを実行し、各行について`title`条件を満たすかどうかを確認します。9の`estRows` `TableFullScan_5`の値は`1000000.00`です。これは、オプティマイザがこのフルテーブルスキャンで`1000000.00`行のデータが使用されると見積もっていることを意味します。
 
-`EXPLAIN`の使用法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)参照してください。
+`EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)参照してください。
 
 ### 解決策: セカンダリインデックスを使用する {#solution-use-secondary-index}
 
@@ -69,7 +70,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 CREATE INDEX title_idx ON books (title);
 ```
 
-クエリの実行ははるかに高速になります。
+クエリの実行ははるかに高速です。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -105,15 +106,15 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-実行プランの`IndexLookup_10`からわかるように、TiDBは`title_idx`のインデックスを使ってデータをクエリします。その`estRows`番目の値は`1.27`です。これは、オプティマイザが`1.27`行しかスキャンされないと見積もっていることを意味します。推定されるスキャン行数は、フルテーブルスキャンの`1000000.00`行のデータよりもはるかに少ないです。
+実行プランの`IndexLookup_10`からわかるように、TiDBは`title_idx`番目のインデックスを使ってデータをクエリします。5 `estRows`の値は`1.27`です。これは、オプティマイザが`1.27`行しかスキャンされないと見積もっていることを意味します。推定されるスキャン行数は、フルテーブルスキャンの`1000000.00`行のデータよりもはるかに少ないです。
 
-実行プラン`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用してインデックス データに格納されている行 ID に従って対応する行をクエリします。
+実行プラン`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
 
 TiDB 実行プランの詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)参照してください。
 
 ### 解決策: カバーインデックスを使用する {#solution-use-covering-index}
 
-インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバー インデックスである場合は、インデックス データをスキャンするだけでクエリに十分です。
+インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバーリング インデックスである場合は、インデックス データをスキャンするだけでクエリに十分です。
 
 たとえば、次のクエリでは、 `title`に基づいて対応する`price`クエリするだけで済みます。
 
@@ -151,7 +152,7 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-パフォーマンスを最適化するには、インデックス`title_idx`削除し、新しいカバー インデックス`title_price_idx`を作成します。
+パフォーマンスを最適化するには、インデックス`title_idx`を削除し、新しいカバーインデックス`title_price_idx`を作成します。
 
 ```sql
 ALTER TABLE books DROP INDEX title_idx;
@@ -196,7 +197,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.004s
 ```
 
-`books`のテーブルは後の例で使用されるため、 `title_price_idx`インデックスを削除します。
+`books`テーブルは後の例で使用されるため、 `title_price_idx`インデックスを削除します。
 
 ```sql
 ALTER TABLE books DROP INDEX title_price_idx;
@@ -204,7 +205,7 @@ ALTER TABLE books DROP INDEX title_price_idx;
 
 ### 解決策: プライマリインデックスを使用する {#solution-use-primary-index}
 
-クエリで主キーを使ってデータをフィルタリングすると、クエリの実行速度が向上します。例えば、テーブル`books`の主キーは列`id`なので、列`id`を使ってデータをクエリできます。
+クエリで主キーを使ってデータをフィルタリングすると、クエリの実行速度が速くなります。例えば、テーブル`books`の主キーは列`id`なので、列`id`を使ってデータをクエリできます。
 
 ```sql
 SELECT * FROM books WHERE id = 896;
@@ -247,14 +248,6 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

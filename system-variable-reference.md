@@ -382,7 +382,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiCDC データレプリケーション機能](/ticdc/ticdc-data-replication-capabilities.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 
-### グループ連結最大長 {#group-concat-max-len}
+### グループ連結最大長さ {#group-concat-max-len}
 
 参照先:
 
@@ -440,7 +440,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#interactive_timeout)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
@@ -527,7 +527,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
@@ -724,11 +724,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [PyMySQLでTiDBに接続する](/develop/dev-guide-sample-application-python-pymysql.md)
 -   [SQLAlchemy で TiDB に接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)
 -   [peeweeでTiDBに接続する](/develop/dev-guide-sample-application-python-peewee.md)
--   [PythonでTiDB + AIを使い始める](/vector-search/vector-search-get-started-using-python.md)
--   [TiDBベクトル検索をJina AI Embeddings APIと統合する](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
--   [TiDBベクトル検索をSQLAlchemyと統合する](/vector-search/vector-search-integrate-with-sqlalchemy.md)
--   [LangChainとベクトル検索を統合する](/vector-search/vector-search-integrate-with-langchain.md)
--   [LlamaIndexとベクター検索を統合する](/vector-search/vector-search-integrate-with-llamaindex.md)
+-   [TiDBベクトル検索をJina AI Embeddings APIと統合する](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
+-   [TiDBベクトル検索をSQLAlchemyと統合する](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+-   [LangChainとベクトル検索を統合する](/ai/integrations/vector-search-integrate-with-langchain.md)
+-   [LlamaIndexとベクター検索を統合する](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 -   [システム変数](/system-variables.md#ssl_ca)
 
 ### ssl_cert {#ssl-cert}
@@ -1211,7 +1210,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
 -   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
--   [TiDB における DDL 実行のベストプラクティス](/ddl-introduction.md)
+-   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
@@ -1257,7 +1256,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
 -   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
--   [TiDB における DDL 実行のベストプラクティス](/ddl-introduction.md)
+-   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
@@ -1682,7 +1681,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [システム変数](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
@@ -2046,7 +2045,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
 -   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
@@ -2352,7 +2351,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)
 
-### tidb_hash_exchange_with_new_collation {#tidb-hash-exchange-with-new-collation}
+### tidb_hash_exchange_with_new_collat​​ion {#tidb-hash-exchange-with-new-collation}
 
 参照先:
 
@@ -3544,7 +3543,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_replica_read-new-in-v40)
--   [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices-on-public-cloud.md)
+-   [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices/best-practices-on-public-cloud.md)
 -   [TiDB 8.5.4 リリースノート](/releases/release-8.5.4.md)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
@@ -4098,7 +4097,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)
--   [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices-on-public-cloud.md)
+-   [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices/best-practices-on-public-cloud.md)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
 ### tidb_tso_client_rpc_mode {#tidb-tso-client-rpc-mode}
@@ -4502,7 +4501,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)
+-   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#wait_timeout)

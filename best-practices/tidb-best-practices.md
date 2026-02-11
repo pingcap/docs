@@ -1,6 +1,7 @@
 ---
 title: TiDB Best Practices
 summary: このドキュメントでは、TiDBの使用に関するベストプラクティスをまとめ、OLAPおよびOLTPシナリオにおけるSQLの使用と最適化のヒント、特にTiDB固有の最適化オプションに焦点を当てています。また、ベストプラクティスに進む前に、TiDBの技術的原理を紹介する3つのブログ記事を読むことを推奨しています。
+aliases: ['/tidb/stable/tidb-best-practices/','/tidb/dev/tidb-best-practices/']
 ---
 
 # TiDB ベストプラクティス {#tidb-best-practices}
@@ -55,7 +56,7 @@ TiDBは完全な分散トランザクションを提供し、そのモデルは[
     -   各キー値エントリは最大 6 MB です (デフォルト)
     -   キー値エントリの合計サイズは 10 GB 以下です。
 
-    [Google クラウド スパナ](https://cloud.google.com/spanner/quotas)にも同様な制限があります。
+    [Google クラウド スパナ](https://cloud.google.com/spanner/quotas)にも同様の制限があります。
 
 ### データシャーディング {#data-sharding}
 
@@ -194,7 +195,7 @@ TiDBはシステムステータスを監視するために[グラファナ + プ
 
 監視に加えて、システムログも閲覧できます。TiDBの3つのコンポーネント、tidb-server、tikv-server、pd-serverにはそれぞれ`--log-file`パラメータがあります。クラスタ起動時にこのパラメータが設定されている場合、ログはパラメータで設定されたファイルに保存され、ログファイルは毎日自動的にアーカイブされます。3 `--log-file`パラメータが設定されていない場合、ログは`stderr`に出力されます。
 
-TiDB 4.0以降、TiDBはユーザビリティを向上させるために[TiDBダッシュボード](/dashboard/dashboard-intro.md) UIを提供します。ブラウザで[http://${PD_IP}:${PD_PORT}/ダッシュボード](http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard)にアクセスすると、TiDBダッシュボードにアクセスできます。TiDBダッシュボードでは、クラスタステータスの表示、パフォーマンス分析、トラフィックの可視化、クラスタ診断、ログ検索などの機能が提供されます。
+TiDB 4.0以降、TiDBはユーザビリティを向上させるために[TiDBダッシュボード](/dashboard/dashboard-intro.md) UIを提供します。ブラウザで[http://${PD_IP}:${PD_PORT}/ダッシュボード](http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard)にアクセスすると、TiDBダッシュボードにアクセスできます。TiDBダッシュボードでは、クラスタステータスの表示、パフォーマンス分析、トラフィックの可視化、クラスタ診​​断、ログ検索などの機能が提供されます。
 
 ### ドキュメント {#documentation}
 

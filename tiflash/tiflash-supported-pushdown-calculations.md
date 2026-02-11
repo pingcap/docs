@@ -42,16 +42,16 @@ TiFlash は次のプッシュダウン式をサポートしています。
 | [正規表現関数と演算子](/functions-and-operators/string-functions.md)                                                 | `REGEXP` `REGEXP_LIKE()` `REGEXP_INSTR()` `REGEXP_SUBSTR()` `REGEXP_REPLACE()` `RLIKE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | [日付関数](/functions-and-operators/date-and-time-functions.md)                                                | `DATE_FORMAT()` `TIMESTAMPDIFF()` `FROM_UNIXTIME()` `UNIX_TIMESTAMP(int)` `UNIX_TIMESTAMP(decimal)` `STR_TO_DATE(date)` `STR_TO_DATE(datetime)` `DATEDIFF()` `YEAR()` `MONTH()` `DAY()` `EXTRACT(datetime)` `DATE()` `HOUR()` `MICROSECOND()` `MINUTE()` `SECOND()` `SYSDATE()` `DATE_ADD/ADDDATE(datetime, int)` `DATE_ADD/ADDDATE(string, int/real)` `DATE_SUB/SUBDATE(datetime, int)` `DATE_SUB/SUBDATE(string, int/real)` `QUARTER()` `DAYNAME()` `DAYOFMONTH()` `DAYOFWEEK()` `DAYOFYEAR()` `LAST_DAY()` `MONTHNAME()` `TO_SECONDS()` `TO_DAYS()` `FROM_DAYS()` `WEEKOFYEAR()`                                                                               |
 | [JSON関数](/functions-and-operators/json-functions.md)                                                       | `JSON_LENGTH()` `->` `->>` `JSON_EXTRACT()` `JSON_ARRAY()` `JSON_DEPTH()` `JSON_VALID()` `JSON_KEYS()` `JSON_CONTAINS_PATH()` `JSON_UNQUOTE()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| [ベクトル関数](/vector-search/vector-search-functions-and-operators.md)                                          | `VEC_L2_DISTANCE` `VEC_COSINE_DISTANCE` `VEC_NEGATIVE_INNER_PRODUCT` `VEC_L1_DISTANCE` `VEC_DIMS` `VEC_L2_NORM` `VEC_AS_TEXT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [ベクトル関数](/ai/reference/vector-search-functions-and-operators.md)                                           | `VEC_L2_DISTANCE` `VEC_COSINE_DISTANCE` `VEC_NEGATIVE_INNER_PRODUCT` `VEC_L1_DISTANCE` `VEC_DIMS` `VEC_L2_NORM` `VEC_AS_TEXT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | [変換関数](/functions-and-operators/cast-functions-and-operators.md)                                           | `CAST(int AS DOUBLE), CAST(int AS DECIMAL)` `CAST(int AS STRING)` `CAST(int AS TIME)` `CAST(double AS INT)` `CAST(double AS DECIMAL)` `CAST(double AS STRING)` `CAST(double AS TIME)` `CAST(string AS INT)` `CAST(string AS DOUBLE), CAST(string AS DECIMAL)` `CAST(string AS TIME)` `CAST(decimal AS INT)` `CAST(decimal AS STRING)` `CAST(decimal AS TIME)` `CAST(decimal AS DOUBLE)` `CAST(time AS INT)` `CAST(time AS DECIMAL)` `CAST(time AS STRING)` `CAST(time AS REAL)` `CAST(json AS JSON)` `CAST(json AS STRING)` `CAST(int AS JSON)` `CAST(real AS JSON)` `CAST(decimal AS JSON)` `CAST(string AS JSON)` `CAST(time AS JSON)` `CAST(duration AS JSON)` |
 | [集計関数](/functions-and-operators/aggregate-group-by-functions.md)                                           | `MIN()` `MAX()` `SUM()` `COUNT()` `AVG()` `APPROX_COUNT_DISTINCT()` `GROUP_CONCAT()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | [その他の関数](/functions-and-operators/miscellaneous-functions.md)                                              | `INET_NTOA()` `INET_ATON()` `INET6_NTOA()` `INET6_ATON()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ## 制限 {#restrictions}
 
--   Bit、Set、Geometry 型を含む式はTiFlashにプッシュダウンできません。
+-   Bit、Set、Geometry 型を含む式は、 TiFlashにプッシュダウンできません。
 
--   `DATE_ADD()` `SUBDATE()` `ADDDATE()` `DATE_SUB()`以下の間隔タイプのみをサポートします。他の間隔タイプを使用した場合、 TiFlash はエラーを報告します。
+-   `DATE_ADD()` 、 `DATE_SUB()` 、 `ADDDATE()` 、 `SUBDATE()`関数は、以下の間隔タイプのみをサポートします。他の間隔タイプを使用した場合、 TiFlashはエラーを報告します。
 
     -   日
     -   週
@@ -61,13 +61,13 @@ TiFlash は次のプッシュダウン式をサポートしています。
     -   分
     -   2番
 
-クエリがサポートされていないプッシュダウン計算に遭遇した場合、TiDBは残りの計算を完了する必要があり、 TiFlashの高速化効果に大きく影響する可能性があります。現在サポートされていない演算子と式は、将来のバージョンでサポートされる可能性があります。
+クエリがサポートされていないプッシュダウン計算に遭遇した場合、TiDBは残りの計算を完了する必要があり、 TiFlashの高速化効果に大きな影響を与える可能性があります。現在サポートされていない演算子と式は、将来のバージョンでサポートされる可能性があります。
 
 `MAX()`ような関数は、集計関数として使用する場合はプッシュダウンがサポートされますが、ウィンドウ関数として使用する場合はサポートされません。
 
 ## 例 {#examples}
 
-このセクションでは、演算子と式をTiFlashにプッシュダウンする例をいくつか示します。
+このセクションでは、演算子と式をTiFlashにプッシュダウンするいくつかの例を示します。
 
 ### 例1:演算子をTiFlashにプッシュダウンする {#example-1-push-operators-down-to-tiflash}
 
@@ -89,7 +89,7 @@ EXPLAIN SELECT * FROM t LIMIT 3;
 5 rows in set (0.18 sec)
 ```
 
-上の例では、演算子`Limit`データのフィルタリングのためにTiFlashにプッシュダウンされており、これによりネットワーク経由で転送されるデータ量が削減され、ネットワークのオーバーヘッドが削減されます。これは、演算子`Limit_15`行の列`task`の値が`mpp[tiflash]`であることで示されています。
+上の例では、演算子`Limit`データのフィルタリングのためにTiFlashにプッシュダウンされており、これによりネットワーク経由で転送されるデータ量が削減され、ネットワークのオーバーヘッドが削減されます。これは、演算子`Limit_15`の行の列`task`の値が`mpp[tiflash]`であることで示されています。
 
 ### 例2: 式をTiFlashにプッシュダウンする {#example-2-push-expressions-down-to-tiflash}
 
@@ -115,7 +115,7 @@ EXPLAIN SELECT MAX(id + a) FROM t GROUP BY a;
 8 rows in set (0.18 sec)
 ```
 
-上の例では、式`id + a`計算のために事前にTiFlashにプッシュダウンされています。これにより、ネットワーク経由で転送されるデータ量が削減され、ネットワーク転送のオーバーヘッドが削減され、全体的な計算パフォーマンスが向上します。これは、 `operator`列目に`plus(test.t.id, test.t.a)`値が入った行の`task`列目に`mpp[tiflash]`値が入っていることで示されています。
+上の例では、式`id + a`は計算のために事前にTiFlashにプッシュダウンされています。これにより、ネットワーク経由で転送されるデータ量が削減され、ネットワーク転送のオーバーヘッドが削減され、全体的な計算パフォーマンスが向上します。これは、 `operator`列目に`plus(test.t.id, test.t.a)`値が設定されている行の`task`列目に`mpp[tiflash]`値があることで示されています。
 
 ### 例3: プッシュダウンの制限 {#example-3-restrictions-for-pushdown}
 
@@ -138,7 +138,7 @@ EXPLAIN SELECT id FROM t WHERE TIME(now()+ a) < '12:00:00';
 5 rows in set, 3 warnings (0.20 sec)
 ```
 
-上記の例では、 TiFlashに対して`TableFullScan`実行します。その他の関数は`root`で計算およびフィルタリングされ、 TiFlashにはプッシュダウンされません。
+上記の例では、 TiFlashに対して`TableFullScan`を実行します。その他の関数は`root`で計算およびフィルタリングされ、 TiFlashにはプッシュダウンされません。
 
 次のコマンドを実行すると、 TiFlashにプッシュダウンできない演算子と式を識別できます。
 
@@ -155,7 +155,7 @@ SHOW WARNINGS;
 3 rows in set (0.18 sec)
 ```
 
-前の例の式は、関数`Time`と`Cast` TiFlashにプッシュダウンできないため、 TiFlashに完全にプッシュダウンすることはできません。
+前の例の式は、関数`Time`と`Cast`をTiFlashにプッシュダウンできないため、 TiFlashに完全にプッシュダウンすることはできません。
 
 ### 例4: ウィンドウ関数 {#example-4-window-functions}
 
@@ -204,4 +204,4 @@ EXPLAIN SELECT id, MAX(id) OVER (PARTITION BY id > 10) FROM t;
 7 rows in set (0.0010 sec)
 ```
 
-この出力では、 `Window`操作の`task`列の値が`root`あることがわかります。これは、 `MAX(id) OVER (PARTITION BY id > 10)`操作をTiFlashにプッシュダウンできないことを示しています。これは、 `MAX()`プッシュダウンで集計関数としてのみサポートされており、ウィンドウ関数としてはサポートされていないためです。
+この出力では、 `Window`操作の`task`列の値が`root`であることがわかります。これは、 `MAX(id) OVER (PARTITION BY id > 10)`操作をTiFlashにプッシュダウンできないことを示しています。これは、 `MAX()`プッシュダウンで集計関数としてのみサポートされており、ウィンドウ関数としてはサポートされていないためです。

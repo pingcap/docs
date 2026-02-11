@@ -1,6 +1,7 @@
 ---
 title: Multi-table Join Queries
 summary: このドキュメントでは、複数テーブル結合クエリの使用方法について説明します。
+aliases: ['/tidb/stable/dev-guide-join-tables/','/tidb/dev/dev-guide-join-tables/','/tidbcloud/dev-guide-join-tables/']
 ---
 
 # 複数テーブルの結合クエリ {#multi-table-join-queries}
@@ -17,12 +18,12 @@ summary: このドキュメントでは、複数テーブル結合クエリの�
 
 ![Inner Join](/media/develop/inner-join.png)
 
-たとえば、最も多作な著者を知りたい場合は、 `authors`名前の著者テーブルと`book_authors`名前の書籍著者テーブルを結合する必要があります。
+たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の著者テーブルと`book_authors`という名前の書籍著者テーブルを結合する必要があります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-次のSQL文では、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を、結合条件`a.id = ba.author_id`で内部結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が書籍を執筆していない場合、テーブル`authors`のそのレコードは結合条件を満たさないため、結果セットには表示されません。
+次のSQL文では、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を結合条件`a.id = ba.author_id`で内部結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が書籍を執筆していない場合、テーブル`authors`の著者のレコードは結合条件を満たさないため、結果セットには表示されません。
 
 ```sql
 SELECT ANY_VALUE(a.id) AS author_id, ANY_VALUE(a.name) AS author_name, COUNT(ba.book_id) AS books
@@ -90,7 +91,7 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 場合によっては、データクエリを完了するために複数のテーブルを使用したいが、結合条件が満たされないためにデータセットが小さくなりすぎないようにしたいことがあります。
 
-例えば、Bookshopアプリのホームページに、平均評価の新着書籍のリストを表示したいとします。この場合、新着書籍はまだ誰にも評価されていない可能性があります。Inner Joinを使用すると、これらの評価されていない書籍の情報がフィルター処理されてしまい、期待どおりの結果になりません。
+例えば、Bookshopアプリのホームページに、平均的な評価が付いた新刊書籍のリストを表示したいとします。この場合、新刊書籍はまだ誰にも評価されていない可能性があります。Inner Joinを使用すると、これらの評価されていない書籍の情報がフィルター処理されてしまい、期待どおりの結果になりません。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -124,13 +125,13 @@ LIMIT 10;
     +------------+---------------------------------+---------------+
     10 rows in set (0.30 sec)
 
-最近出版された本にはすでに多くの評価が付けられているようです。上記の方法を検証するために、SQL文を使って*「The Documentary of lion」という*本のすべての評価を削除してみましょう。
+最近出版された本にはすでに多くの評価が付けられているようです。上記の方法を検証するために、SQL文を使って*「The Documentary of lion」*という本のすべての評価を削除してみましょう。
 
 ```sql
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-再度クエリを実行します。結果セットには書籍*「The Documentary of lion」*がまだ表示されますが、右側の表`ratings`の`score`から計算された`average_score`列目には`NULL`が入力されます。
+再度クエリを実行します。結果セットには書籍*「The Documentary of lion」*がまだ表示されますが、右側の表`ratings`の`score`から計算された`average_score`列目は`NULL`で埋められます。
 
     +------------+---------------------------------+---------------+
     | book_id    | book_title                      | average_score |
@@ -148,7 +149,7 @@ DELETE FROM ratings WHERE book_id = 3438991610;
     +------------+---------------------------------+---------------+
     10 rows in set (0.30 sec)
 
-`INNER JOIN`使用するとどうなるでしょうか? 試してみるのはあなた次第です。
+`INNER JOIN`使用するとどうなるでしょうか？試してみるのはあなた次第です。
 
 </div>
 <div label="Java" value="java">
@@ -189,7 +190,7 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### クロス結合 {#cross-join}
 
-結合条件が定数の場合、2つのテーブル間の内部結合は[クロス結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`レコードが生成されます。
+結合条件が定数の場合、2つのテーブル間の内部結合は[クロス結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`レコードが生成されます。
 
 ### 左セミ結合 {#left-semi-join}
 
@@ -199,7 +200,7 @@ TiDBはSQL構文レベルでは`LEFT SEMI JOIN table_name`サポートしてい�
 
 明示的に結合を宣言する`JOIN`文がSQL標準に追加される前は、 `FROM t1, t2`句を用いてSQL文で2つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を用いて結合条件を指定することができました。これは、内部結合を用いてテーブルを結合する暗黙的な結合と理解できます。
 
-## 結合関連アルゴリズム {#join-related-algorithms}
+## 関連するアルゴリズムを結合する {#join-related-algorithms}
 
 TiDB は、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
@@ -207,11 +208,11 @@ TiDB は、次の一般的なテーブル結合アルゴリズムをサポート
 -   [ハッシュ結合](/explain-joins.md#hash-join)
 -   [マージ結合](/explain-joins.md#merge-join)
 
-オプティマイザは、結合対象テーブルのデータ量などの要因に基づいて、適切な結合アルゴリズムを選択します。クエリが結合にどのアルゴリズムを使用しているかは、 `EXPLAIN`文で確認できます。
+オプティマイザは、結合対象テーブルのデータ量などの要因に基づいて、適切な結合アルゴリズムを選択します。クエリが結合にどのアルゴリズムを使用しているかは、 `EXPLAIN`ステートメントで確認できます。
 
-TiDB のオプティマイザーが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザヒント](/optimizer-hints.md)使用して、TiDB により適切な結合アルゴリズムを使用するように強制できます。
+TiDB のオプティマイザーが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザヒント](/optimizer-hints.md)使用して、TiDB がより適切な結合アルゴリズムを使用するように強制できます。
 
-例えば、上記の左結合クエリの例が、オプティマイザによって選択されないハッシュ結合アルゴリズムを使用した方が高速に実行されると仮定すると、キーワード`SELECT`後にヒント`/*+ HASH_JOIN(b, r) */`追加できます。テーブルに別名がある場合は、ヒントでも別名を使用することに注意してください。
+例えば、上記の左結合クエリの例が、オプティマイザによって選択されないハッシュ結合アルゴリズムを使用した方が高速に実行されると仮定すると、キーワード`SELECT`後にヒント`/*+ HASH_JOIN(b, r) */`を追加できます。テーブルに別名がある場合は、ヒントでも別名を使用することに注意してください。
 
 ```sql
 EXPLAIN SELECT /*+ HASH_JOIN(b, r) */ b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
@@ -245,19 +246,11 @@ WHERE b.id = ba.book_id AND ba.author_id = a.id;
 
 ## 参照 {#see-also}
 
--   [テーブル結合を使用する文を説明する](/explain-joins.md)
+-   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
 -   [結合したテーブルの再配置の概要](/join-reorder.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

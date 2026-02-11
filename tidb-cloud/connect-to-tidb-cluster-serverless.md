@@ -9,21 +9,22 @@ summary: さまざまな方法でTiDB Cloud Starter またはTiDB Cloud Essentia
 
 > **ヒント：**
 >
-> TiDB Cloud Dedicated クラスターに接続する方法については、 [TiDB Cloud専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+> -   TiDB Cloud Dedicated クラスターに接続する方法については、 [TiDB Cloud専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+> -   このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法に焦点を当てています。特定のツール、ドライバー、またはORMを介してTiDBに接続するには、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
 
-## 接続方法 {#connection-methods}
+## ネットワーク接続方法 {#network-connection-methods}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターがTiDB Cloud上に作成されたら、次のいずれかの方法でそのクラスターに接続できます。
 
 -   直接接続
 
-    直接接続とは、TCP経由のMySQLネイティブ接続システムを指します。MySQL接続をサポートする任意のツール（例： [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) ）を使用してクラスタに接続できます。
+    直接接続とは、TCP経由のMySQLネイティブ接続システムを指します。MySQL接続をサポートする任意のツール（例： [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用してクラスタに接続できます。
 
 -   [データサービス（ベータ版）](/tidb-cloud/data-service-overview.md)
 
     TiDB Cloud は、カスタム API エンドポイントを使用した HTTPS リクエストを介して、AWS でホストされているTiDB Cloud Starter クラスターに接続できるデータサービス機能を提供します。直接接続とは異なり、データサービスは生の SQL ではなく RESTful API を介してクラスターデータにアクセスします。
 
--   [サーバーレスDriver（ベータ版）](/tidb-cloud/serverless-driver.md)
+-   [サーバーレスDriver（ベータ版）](/develop/serverless-driver.md)
 
     TiDB Cloud はJavaScript 用のサーバーレス ドライバーを提供しており、これにより、直接接続と同じエクスペリエンスでエッジ環境のTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続できます。
 
@@ -59,4 +60,4 @@ TiDB Cloud Starter とTiDB Cloud Essential には、次の 2 つのネットワ�
 
 ## 次は何？ {#what-s-next}
 
-TiDB クラスターに正常に接続すると、 [TiDBでSQL文を調べる](/basic-sql-operations.md) 。
+TiDB クラスターに正常に接続すると、次の操作を実行できます[TiDBでSQL文を調べる](/basic-sql-operations.md) 。

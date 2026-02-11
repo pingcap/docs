@@ -9,7 +9,7 @@ summary: TiDB Cloud Premium インスタンスを作成する方法を学習し�
 
 > **注記：**
 >
-> -   現在、 TiDB Cloud Premiumはリクエストに応じてのみご利用いただけます。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートを**リクエスト」をクリックしてください。次に、「**説明」**欄に「 TiDB Cloud Premiumを申請」と入力し、 **「送信」を**クリックしてください。
+> -   現在、 TiDB Cloud Premiumはリクエストに応じてのみご利用いただけます。TiDB TiDB Cloud Premiumをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明****」**欄に「 TiDB Cloud Premiumを申請」と入力して、 **「送信」を**クリックしてください。
 > -   TiDB Cloud Dedicated クラスターを作成する方法については、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 
 ## 始める前に {#before-you-begin}
@@ -20,7 +20,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 -   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードでサインアップするか、Google、GitHub、または Microsoft アカウントでサインアップすることができます。
 -   AWS Marketplaceをご利用の場合は、AWS Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Azure Marketplaceユーザーの方は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+-   Azure Marketplaceをご利用の場合は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 -   Google Cloud Marketplace ユーザーの方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 -   Alibaba Cloud Marketplaceをご利用の方は、Alibaba Cloud Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
@@ -30,7 +30,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 -   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードでサインアップするか、Google、GitHub、または Microsoft アカウントでサインアップすることができます。
 -   AWS Marketplaceをご利用の場合は、AWS Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Azure Marketplaceユーザーの方は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+-   Azure Marketplaceをご利用の場合は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 -   Google Cloud Marketplace ユーザーの方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
 </CustomContent>
@@ -43,7 +43,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
     > **注記：**
     >
-    > TiDB Cloudコンソールの左下に**「プライベートプレビューに切り替える」が**表示されない場合は、組織がTiDB Cloud Premium のプライベートプレビューに招待されていないことを意味します。その場合は、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてTiDB Cloud Premium にお申し込みください。
+    > TiDB Cloudコンソールの左下に**「プライベートプレビューに切り替える」が**表示されない場合は、組織がTiDB Cloud Premium のプライベートプレビューに招待されていないことを意味します。この場合、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「 TiDB Cloud Premium のプライベートプレビューに申し込む」と入力して、 **「送信」を**クリックしてください。
 
 2.  **TiDB インスタンス**ページで、**インスタンスの作成を**クリックします。
 

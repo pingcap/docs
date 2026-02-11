@@ -1,6 +1,7 @@
 ---
 title: Views
 summary: TiDB でビューを使用する方法を学習します。
+aliases: ['/tidb/stable/dev-guide-use-views/','/tidb/dev/dev-guide-use-views/','/tidbcloud/dev-guide-use-views/']
 ---
 
 # ビュー {#views}
@@ -16,7 +17,7 @@ TiDBはビューをサポートしています。ビューは仮想テーブル�
 
 ## ビューを作成する {#create-a-view}
 
-TiDBでは、複雑なクエリを`CREATE VIEW`ステートメントでビューとして定義できます。構文は次のとおりです。
+TiDBでは、複雑なクエリを`CREATE VIEW`文でビューとして定義できます。構文は次のとおりです。
 
 ```sql
 CREATE VIEW view_name AS query;
@@ -48,9 +49,9 @@ TiDB がビューをクエリする場合、ビューに関連付けられた`SE
 
 ## ビューの更新 {#update-views}
 
-現在、TiDB のビューは`ALTER VIEW view_name AS query;`サポートしていませんが、次の 2 つの方法でビューを「更新」できます。
+現在、TiDB のビューは`ALTER VIEW view_name AS query;`をサポートしていませんが、次の 2 つの方法でビューを「更新」できます。
 
--   `DROP VIEW view_name;`ステートメントで古いビューを削除し、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
+-   `DROP VIEW view_name;`番目のステートメントで古いビューを削除し、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
 -   同じ名前の既存のビューを上書きするには、 `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用します。
 
 ```sql
@@ -69,7 +70,7 @@ GROUP BY b.id;
 SHOW CREATE VIEW book_with_ratings\G
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     *************************** 1. row ***************************
                     View: book_with_ratings
@@ -84,7 +85,7 @@ SHOW CREATE VIEW book_with_ratings\G
 SELECT * FROM information_schema.views WHERE TABLE_NAME = 'book_with_ratings'\G
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     *************************** 1. row ***************************
            TABLE_CATALOG: def
@@ -114,21 +115,13 @@ TiDB のビューの制限については、 [ビューの制限](/views.md#limi
 ## 続きを読む {#read-more}
 
 -   [ビュー](/views.md)
--   [CREATE VIEWステートメント](/sql-statements/sql-statement-create-view.md)
+-   [CREATE VIEW ステートメント](/sql-statements/sql-statement-create-view.md)
 -   [DROP VIEW ステートメント](/sql-statements/sql-statement-drop-view.md)
 -   [ビューを使用したEXPLAINステートメント](/explain-views.md)
 -   [TiFlink: TiKV と Flink を使用した強整合性マテリアライズド ビュー](https://github.com/tiflink/tiflink)
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

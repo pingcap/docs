@@ -1,9 +1,10 @@
 ---
-title: Choose Driver or ORM
+title: Choose a Driver or ORM
 summary: TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
+aliases: ['/tidb/stable/dev-guide-choose-driver-or-orm/','/tidb/dev/dev-guide-choose-driver-or-orm/','/tidbcloud/dev-guide-choose-driver-or-orm/']
 ---
 
-# DriverまたはORMを選択 {#choose-driver-or-orm}
+# DriverまたはORMを選択 {#choose-a-driver-or-orm}
 
 > **注記：**
 >
@@ -279,7 +280,7 @@ MySQL Connector/Python を使用して TiDB アプリケーションを構築す
 
 [ジャンゴ](https://docs.djangoproject.com/)は人気のPythonウェブフレームワークです。TiDBとDjangoの互換性問題を解決するため、PingCAPはTiDB方言`django-tidb`を提供しています。インストールするには、 [`django-tidb`ドキュメント](https://github.com/pingcap/django-tidb#installation-guide)を参照してください。
 
-Django を使用して TiDB アプリケーションを構築する例については、 [DjangoでTiDBに接続する](/develop/dev-guide-sample-application-python-django.md)参照してください。
+Django を使用して TiDB アプリケーションを構築する例については、 [Django で TiDB に接続する](/develop/dev-guide-sample-application-python-django.md)参照してください。
 
 </div>
 <div label="SQLAlchemy">
@@ -302,22 +303,8 @@ peewee を使用して TiDB アプリケーションを構築する例につい�
 </div>
 </SimpleTab>
 
-<CustomContent platform="tidb-cloud">
-
-ドライバーまたは ORM を決定したら、 [TiDBクラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)実行できます。
-
-</CustomContent>
-
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

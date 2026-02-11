@@ -78,7 +78,7 @@ TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコ�
         Choose the operating system
         > [x] macOS/Alpine (Detected)
 
-    出力は次のようになります`url`値に Prisma の接続文字列が含まれています。
+    出力は次のようになります。1 `url`値に Prisma の接続文字列が含まれています。
 
     ```shell
     datasource db {
@@ -224,7 +224,7 @@ TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコ�
 
 ## エッジ機能を使用する {#use-the-edge-function}
 
-前述のセクションで紹介したサンプルアプリは、Netlifyのサーバーレス関数上で動作します。このセクションでは、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)でエッジ関数を使用する方法を説明します。エッジ関数はNetlifyが提供する機能で、Netlify CDNのエッジでサーバーレス関数を実行できます。
+前述のセクションで紹介したサンプルアプリは、Netlifyのサーバーレス関数上で動作します。このセクションでは、 [TiDB Cloudサーバーレス ドライバー](/develop/serverless-driver.md)でエッジ関数を使用する方法を説明します。エッジ関数はNetlifyが提供する機能で、Netlify CDNのエッジでサーバーレス関数を実行できます。
 
 エッジ機能を使用するには、次の手順を実行します。
 

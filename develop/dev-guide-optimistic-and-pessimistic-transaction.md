@@ -1,19 +1,20 @@
 ---
 title: Optimistic Transactions and Pessimistic Transactions
 summary: TiDB の楽観的と悲観的トランザクションについて学習します。
+aliases: ['/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/tidb/dev/dev-guide-optimistic-and-pessimistic-transaction/','/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction/']
 ---
 
 # 楽観的なトランザクションと悲観的なトランザクション {#optimistic-transactions-and-pessimistic-transactions}
 
-[楽観的取引](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合が発生した場合はロールバックします。一方、 [悲観的取引](/pessimistic-transaction.md)モデルはトランザクションを実際にコミットする前に、変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることが確認できた場合にのみコミットを開始します。
+[楽観的取引](/optimistic-transaction.md)モデルではトランザクションを直接コミットし、競合が発生した場合はロールバックします。一方、 [悲観的取引](/pessimistic-transaction.md)モデルでは、トランザクションを実際にコミットする前に、変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることが確認できた場合にのみコミットを開始します。
 
 楽観的トランザクションモデルは、直接コミットの成功確率が高いため、競合率が低いシナリオに適しています。しかし、トランザクションの競合が発生すると、ロールバックのコストが比較的高くなります。
 
-悲観的トランザクションモデルの利点は、競合率の高いシナリオでは、先行ロックのコストが事後ロールバックのコストよりも低いことです。さらに、複数の同時トランザクションが競合のためにコミットに失敗するという問題を解決できます。ただし、競合率の低いシナリオでは、悲観的トランザクションモデルは楽観的トランザクションモデルほど効率的ではありません。
+悲観的トランザクションモデルの利点は、競合率の高いシナリオでは、先行ロックのコストが後続のロールバックのコストよりも低いことです。さらに、複数の同時トランザクションが競合のためにコミットに失敗するという問題を解決できます。ただし、競合率の低いシナリオでは、悲観的トランザクションモデルは楽観的トランザクションモデルほど効率的ではありません。
 
 悲観的トランザクションモデルはより直感的で、アプリケーション側での実装が容易です。一方、楽観的トランザクションモデルでは、アプリケーション側で複雑な再試行メカニズムが必要になります。
 
-以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的と悲観的取引の長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
+以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的取引と悲観的取引の長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
 
 1.  在庫数量を更新する
 2.  注文を作成する
@@ -29,13 +30,13 @@ summary: TiDB の楽観的と悲観的トランザクションについて学習
 
 <div label="Java" value="java">
 
-複数のユーザーが同時にデータを挿入する状況をシミュレートするために複数のスレッドを使用するため、安全なスレッドを持つ接続オブジェクトを使用する必要があります。ここでは、デモとしてJavaの一般的な接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)使用します。
+複数のユーザーが同時にデータを挿入する状況をシミュレートするために複数のスレッドを使用するため、安全なスレッドを備えた接続オブジェクトを使用する必要があります。ここでは、デモとしてJavaの一般的な接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)使用します。
 
 </div>
 
 <div label="Golang" value="golang">
 
-Golangの`sql.DB`は並行処理が安全なので、サードパーティのパッケージをインポートする必要はありません。
+Golangの`sql.DB`は並行処理が安全であるため、サードパーティのパッケージをインポートする必要はありません。
 
 TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
@@ -99,7 +100,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 </SimpleTab>
 
-### 悲観的トランザクションの例を書く {#write-a-pessimistic-transaction-example}
+### 悲観的取引の例を書く {#write-a-pessimistic-transaction-example}
 
 <SimpleTab groupId="language">
 
@@ -582,7 +583,7 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 }
 ```
 
-次に、 `helper.go`呼び出して受信したコマンド ライン引数を処理する`txn.go`と`main`関数を記述します。
+次に、 `helper.go`呼び出して受信したコマンドライン引数を処理する`txn.go`と`main`関数を記述します。
 
 ```go
 package main
@@ -886,7 +887,7 @@ SQL ログ:
 /* txn 1 */ COMMIT
 ```
 
-最後に、注文が作成され、ユーザー残高が差し引かれ、書籍在庫が期待どおりに差し引かれることを確認します。
+最後に、注文が作成され、ユーザー残高が差し引かれ、書籍の在庫が期待どおりに差し引かれることを確認します。
 
 ```sql
 mysql> SELECT * FROM `books`;
@@ -918,7 +919,7 @@ mysql> SELECT * FROM users;
 
 ### 過剰販売を防ぐ例 {#an-example-that-prevents-overselling}
 
-この例のタスクはより難易度が高いです。在庫が10冊残っているとします。ボブは7冊、アリスは4冊、そしてほぼ同時に注文しました。何が起こるでしょうか？前の例のコードを再利用してこの課題を解決し、ボブの購入数量を6から7に変更することができます。
+この例のタスクはより難易度が高いです。在庫が10冊残っているとします。ボブは7冊、アリスは4冊、そしてほぼ同時に注文したとします。何が起こるでしょうか？前の例のコードを再利用してこの課題を解決し、ボブの購入数量を6から7に変更することができます。
 
 サンプルプログラムを実行します。
 
@@ -998,7 +999,7 @@ mysql> SELECT * FROM users;
 
 ## 楽観的な取引 {#optimistic-transactions}
 
-以下のコードは、2つのスレッドを使用して、2人のユーザーが楽観的トランザクションで同じ本を購入するプロセスをシミュレートします。これは、悲観的トランザクションの例と同じです。在庫には10冊の本が残っています。ボブは6冊、アリスは4冊購入します。2人はほぼ同時に注文を完了します。最終的に、在庫には本が残っていません。
+以下のコードは、2つのスレッドを使用して、悲観的トランザクションの例と同様に、2人のユーザーが楽観的トランザクションで同じ本を購入するプロセスをシミュレートします。在庫には10冊の本が残っています。ボブは6冊、アリスは4冊購入します。2人はほぼ同時に注文を完了します。最終的に、在庫には本が残っていません。
 
 ### 楽観的トランザクションの例を書く {#write-an-optimistic-transaction-example}
 
@@ -1166,13 +1167,13 @@ public class TxnExample {
 
 **コンフィグレーションの変更**
 
-`pom.xml`の起動クラスを変更します:
+`pom.xml`の起動クラスを変更します。
 
 ```xml
 <mainClass>com.pingcap.txn.TxnExample</mainClass>
 ```
 
-楽観的トランザクションの例を指すように、次のように変更します。
+楽観的トランザクションの例を指すように次のように変更します。
 
 ```xml
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
@@ -1182,13 +1183,13 @@ public class TxnExample {
 
 <div label="Golang" value="golang">
 
-セクション[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)のGolangの例はすでに楽観的トランザクションをサポートしており、変更せずに直接使用できます。
+セクション[悲観的取引の例を書く](#write-a-pessimistic-transaction-example)のGolang の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
 
 </div>
 
 <div label="Python" value="python">
 
-セクション[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)の Python の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
+セクション[悲観的取引の例を書く](#write-a-pessimistic-transaction-example)の Python の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
 
 </div>
 
@@ -1251,7 +1252,7 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 /* txn 1 */ COMMIT
 ```
 
-楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように`affected_rows`まで正常に実行されたかどうかを判断できません。トランザクション全体を考慮に入れ、最後の`COMMIT`文目が例外を返すかどうかで、現在のトランザクションに書き込み競合があるかどうかを判断する必要があります。
+楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように`affected_rows`文目まで正常に実行されたかどうかを判断できません。トランザクション全体を考慮に入れ、最後の`COMMIT`文目が例外を返すかどうかで、現在のトランザクションに書き込み競合があるかどうかを判断する必要があります。
 
 上記のSQLログからわかるように、2つのトランザクションが同時に実行され、同じレコードが変更されたため、 `txn 1` COMMIT後に`9007 Write conflict`例外がスローされています。楽観的トランザクションモードにおける書き込み競合については、アプリケーション側で安全に再試行できます。1回の再試行後、データは正常にコミットされます。最終的な実行結果は期待どおりです。
 
@@ -1285,7 +1286,7 @@ mysql> SELECT * FROM users;
 
 ### 過剰販売を防ぐ例 {#an-example-that-prevents-overselling}
 
-このセクションでは、過剰販売を防ぐ楽観的トランザクションの例を説明します。在庫に10冊の本が残っているとします。ボブは7冊、アリスは4冊購入します。2人はほぼ同時に注文しました。何が起こるでしょうか？この要件に対処するために、楽観的トランザクションの例のコードを再利用できます。ボブの購入数を6冊から7冊に変更してください。
+このセクションでは、過剰販売を防ぐ楽観的トランザクションの例を説明します。在庫に10冊の本が残っているとします。ボブは7冊、アリスは4冊購入します。2人はほぼ同時に注文をしました。何が起こるでしょうか？この要件に対処するために、楽観的トランザクションの例のコードを再利用できます。ボブの購入数を6冊から7冊に変更してください。
 
 サンプルプログラムを実行します。
 
@@ -1369,14 +1370,6 @@ mysql> SELECT * FROM users;
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

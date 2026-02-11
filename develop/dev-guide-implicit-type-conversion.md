@@ -1,6 +1,7 @@
 ---
 title: Avoid Implicit Type Conversions
 summary: TiDB での暗黙的な型変換によって起こりうる結果と、それを回避する方法を紹介します。
+aliases: ['/tidb/stable/dev-guide-implicit-type-conversion/','/tidb/dev/dev-guide-implicit-type-conversion/','/tidbcloud/dev-guide-implicit-type-conversion/']
 ---
 
 # 暗黙的な型変換を避ける {#avoid-implicit-type-conversions}
@@ -9,14 +10,14 @@ summary: TiDB での暗黙的な型変換によって起こりうる結果と、
 
 ## 変換ルール {#conversion-rules}
 
-SQL ステートメントの述語の両側のデータ型が一致しない場合、TiDB は、述語操作のために、片側または両側のデータ型を互換性のあるデータ型に暗黙的に変換します。
+SQL ステートメントの述語の両側のデータ型が一致しない場合、TiDB は、述語操作のために、一方または両側のデータ型を互換性のあるデータ型に暗黙的に変換します。
 
 TiDB における暗黙的な型変換のルールは次のとおりです。
 
--   引数の一方または両方が`NULL`場合、比較の結果は`NULL`なります。NULL 安全な`<=>`比較演算子は変換を必要としません。NULL `<=>` NULL は`true`になります。
+-   引数の一方または両方が`NULL`場合、比較の結果は`NULL`なります。NULL 安全な`<=>`比較演算子は変換を必要としません。NULL `<=>` NULL は`true`となるためです。
 -   比較演算の両方の引数が文字列の場合、それらは文字列として比較されます。
 -   両方の引数が整数の場合、それらは整数として比較されます。
--   数値と比較しない場合は、16 進数値はバイナリ文字列として扱われます。
+-   数値との比較を行わない場合、16 進値はバイナリ文字列として扱われます。
 -   引数の一方が小数値の場合、比較はもう一方の引数に依存します。もう一方の引数が小数値または整数値の場合、その引数は小数値と比較されます。もう一方の引数が浮動小数点値の場合、その引数は浮動小数点値と比較されます。
 -   引数の 1 つが`TIMESTAMP`列または`DATETIME`列で、もう 1 つの引数が定数の場合、比較が実行される前に定数はタイムスタンプに変換されます。
 -   それ以外の場合、引数は浮動小数点数 ( `DOUBLE`型) として比較されます。
@@ -30,7 +31,7 @@ TiDB における暗黙的な型変換のルールは次のとおりです。
 
 ### インデックスの無効性 {#index-invalidity}
 
-以下のケースでは、主キーは`account_id`で、そのデータ型は`varchar`です。実行プランでは、このSQL文には暗黙的な型変換があり、インデックスを使用できません。
+以下のケースでは、主キーは`account_id`で、そのデータ型は`varchar`です。実行プランでは、このSQL文は暗黙的な型変換を行うため、インデックスを使用できません。
 
 ```sql
 DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
@@ -79,14 +80,6 @@ SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

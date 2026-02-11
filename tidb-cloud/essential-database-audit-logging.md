@@ -10,7 +10,7 @@ TiDB Cloud Essential は、実行された SQL ステートメントなど、デ
 
 > **注記：**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、 **「説明」**欄に「 TiDB Cloud Essential データベース監査ログの申請」と入力し、 **「送信」を**クリックしてください。
+> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「 TiDB Cloud Essential データベース監査ログの申請」と入力して、 **「送信」を**クリックしてください。
 
 組織のユーザー アクセス ポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティのベスト プラクティスです。
 
@@ -245,7 +245,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 ### フィルタールールを作成する {#create-a-filter-rule}
 
-フィルタールールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定して、ニーズに合わせてログ出力をカスタマイズできます。
+フィルタールールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定して、ニーズに合わせてログをカスタマイズできます。
 
 <SimpleTab>
 <div label="Console">
@@ -363,7 +363,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 ## TiDB Cloudストレージによるアクセス監査ログ {#access-audit-logging-with-tidb-cloud-storage}
 
-監査ログをTiDB Cloudに保存すると、 TiDB Cloud Essentialはそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、TiDB CloudコンソールまたはTiDB Cloud CLIを使用して表示およびダウンロードできます。
+TiDB Cloudに監査ログを保存すると、 TiDB Cloud Essential はそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、TiDB CloudコンソールまたはTiDB Cloud CLI を使用して表示およびダウンロードできます。
 
 > **注記：**
 >

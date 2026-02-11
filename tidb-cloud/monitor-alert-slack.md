@@ -7,13 +7,9 @@ summary: Slack 経由でアラート通知を受信して​​ TiDB クラス�
 
 TiDB Cloud は、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム](/tidb-cloud/monitor-alert-zoom.md)経由[ページャーデューティ](/tidb-cloud/monitor-alert-pagerduty.md)アラート通知を簡単に購読できる機能を提供しています。このドキュメントでは[フラッシュデューティ](/tidb-cloud/monitor-alert-flashduty.md) Slack 経由でアラート通知を購読する方法について説明します。
 
-次のスクリーンショットは、 2 つのアラートの例を示しています。
-
-![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
-
 > **注記：**
 >
-> 現在、アラート サブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ利用可能です。
+> 現在、アラート サブスクリプションは[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)および[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで利用できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -34,6 +30,10 @@ TiDB Cloud は、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム
 **「ワークスペースの Webhook URL」**セクションの下に、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
 
 ### ステップ2. TiDB Cloudからサブスクライブする {#step-2-subscribe-from-tidb-cloud}
+
+アラート通知サブスクリプションはクラスター プランによって異なります。
+
+<CustomContent plan="dedicated">
 
 > **ヒント：**
 >
@@ -56,15 +56,55 @@ TiDB Cloud は、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム
 
 7.  **「保存」**をクリックしてサブスクリプションを完了します。
 
-または、クラスターの**アラート**ページの右上隅にある**「サブスクライブ」**をクリックすることもできます。**アラートサブスクライバー**ページに移動します。
+</CustomContent>
+
+<CustomContent plan="essential">
+
+> **ヒント：**
+>
+> アラートサブスクリプションは、現在のクラスター内のすべてのアラートに適用されます。複数のクラスターがある場合は、各クラスターを個別にサブスクライブする必要があります。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット クラスターに切り替えます。
+
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[アラート サブスクリプション]**をクリックします。
+
+3.  **「アラート サブスクリプション」**ページで、右上隅の**「サブスクライバーの追加」**をクリックします。
+
+4.  **「サブスクライバータイプ」**ドロップダウンリストから**Slack を**選択します。
+
+5.  「**名前」**フィールドに名前を入力し、 **「URL」**フィールドに Slack Webhook URL を入力します。
+
+6.  **[接続テスト]**をクリックします。
+
+    -   テストが成功すると、 **[保存]**ボタンが表示されます。
+    -   テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従って問題を解決し、接続を再試行してください。
+
+7.  **「保存」**をクリックしてサブスクリプションを完了します。
+
+</CustomContent>
+
+または、クラスターの**アラート**ページの右上隅にある**「サブスクライブ」**をクリックすることもできます。 **「アラートサブスクリプション」**ページに移動します。
 
 アラート条件が変更されない場合、アラートは 3 時間ごとに通知を送信します。
 
 ## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
 
-プロジェクト内のクラスターのアラート通知を受信したくない場合は、次の手順を実行します。
+アラート通知の受信を停止したい場合は、以下の手順に従ってください。手順はクラスタープランによって異なります。
+
+<CustomContent plan="dedicated">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
 3.  **[アラート サブスクリプション]**ページで、削除する対象のサブスクライバーの行を見つけて、 **[...]** &gt; **[サブスクリプション解除]**をクリックします。
 4.  登録解除を確認するには、 **「登録解除」**をクリックします。
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット クラスターに切り替えます。
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[アラート サブスクリプション]**をクリックします。
+3.  **[アラート サブスクリプション]**ページで、削除する対象のサブスクライバーの行を見つけて、 **[...]** &gt; **[サブスクリプション解除]**をクリックします。
+4.  登録解除を確認するには、 **「登録解除」**をクリックします。
+
+</CustomContent>

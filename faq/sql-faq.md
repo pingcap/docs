@@ -142,7 +142,7 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 楽観的トランザクション モードでトランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
 
-## TiDB で、後から挿入されたデータの自動増分 ID が、前に挿入されたデータの自動増分 ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
+## TiDB で、後から挿入されたデータの自動インクリメント ID が、前に挿入されたデータの自動インクリメント ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
 TiDBの自動インクリメントID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータの自動インクリメントIDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [自動増分ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)参照してください。
 
@@ -211,7 +211,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 >
 > TiDB v6.6.0以降、 [リソース管理](/tidb-resource-control-ru-groups.md)サポートされます。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、優先度の異なるSQL文のスケジュールをより適切に制御できます。リソース制御を有効にすると、文の優先度は適用されなくなります。異なるSQL文のリソース使用量を管理するには、リソース制御を使用することをお勧めします。
 
-上記の2つのパラメータをTiDBのDMLと組み合わせて使用することができます。例えば：
+上記の2つのパラメータをTiDBのDMLと組み合わせて使用​​することができます。例えば：
 
 1.  データベースに SQL ステートメントを記述して優先順位を調整します。
 
@@ -243,7 +243,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL実行 {#ddl-execution}
 
-このセクションでは、DDL文の実行に関連する問題を列挙します。DDL実行の原則に関する詳細な説明については、 [DDL ステートメントの実行原則とベストプラクティス](/ddl-introduction.md)参照してください。
+このセクションでは、DDL文の実行に関連する問題を列挙します。DDL実行の原則に関する詳細な説明については、 [DDL ステートメントの実行原則とベストプラクティス](/best-practices/ddl-introduction.md)参照してください。
 
 ### さまざまな DDL 操作を実行するにはどのくらいの時間がかかりますか? {#how-long-does-it-take-to-perform-various-ddl-operations}
 

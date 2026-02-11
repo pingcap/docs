@@ -47,7 +47,7 @@ TiDB バージョン: 8.2.0
 
     SaaSまたはPaaSアプリケーションは多数のデータテーブルを持つ場合があり、初期統計の読み込み速度が低下するだけでなく、高負荷時の負荷同期の失敗率も高まります。TiDBの起動時間や実行計画の精度にも影響が出る可能性があります。v8.2.0では、TiDBは同時実行モデルやメモリ割り当てなど、複数の観点から統計の読み込みプロセスを最適化し、レイテンシーを削減し、スループットを向上させ、ビジネスのスケーリングに影響を与える統計の読み込み速度の低下を回避します。
 
-    適応型同時ロードがサポートされました。デフォルトでは、設定項目[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)は`0`に設定されており、統計情報のロードの同時実行数はハードウェア仕様に基づいて自動的に選択されます。
+    適応型同時読み込みがサポートされました。デフォルトでは、設定項目[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)は`0`に設定されており、統計情報の読み込みの同時実行数はハードウェア仕様に基づいて自動的に選択されます。
 
     詳細については[ドキュメント](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)参照してください。
 
@@ -198,7 +198,7 @@ TiDB バージョン: 8.2.0
 
 -   ティドブ
 
-    -   [論理DDL文（一般DDL）](/ddl-introduction.md#types-of-ddl-statements)の並列実行をサポートします。v8.1.0と比較して、10セッションを使用して異なるDDL文を同時に送信する場合、パフォーマンスは3～6倍向上します[＃53246](https://github.com/pingcap/tidb/issues/53246) @ [D3ハンター](https://github.com/D3Hunter)
+    -   [論理DDL文（一般DDL）](/best-practices/ddl-introduction.md#types-of-ddl-statements)の並列実行をサポートします。v8.1.0と比較して、10セッションを使用して異なるDDL文を同時に送信する場合、パフォーマンスは3～6倍向上します[＃53246](https://github.com/pingcap/tidb/issues/53246) @ [D3ハンター](https://github.com/D3Hunter)
     -   `((a = 1 and b = 2 and c > 3) or (a = 4 and b = 5 and c > 6)) and d > 3`ような式を使用して複数列のインデックスを一致させるロジックを改善し、より正確な`Range` [＃41598](https://github.com/pingcap/tidb/issues/41598) @ [ガザルファミリーUSA](https://github.com/ghazalfamilyusa)を生成します。
     -   大容量データを持つテーブルに対して単純なクエリを実行する際に、データ分布情報を取得するパフォーマンスを最適化します[＃53850](https://github.com/pingcap/tidb/issues/53850) @ [あなた06](https://github.com/you06)
     -   集約された結果セットはIndexJoinの内部テーブルとして使用することができ、より複雑なクエリをIndexJoinに一致させることが可能となり、インデックス[＃37068](https://github.com/pingcap/tidb/issues/37068) @ [エルサ0520](https://github.com/elsa0520)を通じてクエリの効率が向上します。
@@ -214,7 +214,7 @@ TiDB バージョン: 8.2.0
     -   **圧縮ジョブサイズ（ファイル）**メトリックを追加して、1回の圧縮ジョブに含まれるSSTファイルの数を表示します[＃16837](https://github.com/tikv/tikv/issues/16837) @ [張金鵬87](https://github.com/zhangjinpeng87)
     -   [早期申請](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)機能をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラムピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログを適用できるため、一部のTiKVノードにおけるジッターが書き込みリクエストのレイテンシー[＃16717](https://github.com/tikv/tikv/issues/16717) @ [栄光](https://github.com/glorv)に与える影響を軽減できます。
     -   **Raftのドロップされたメッセージ**の観測性を改善し、書き込み速度が遅い原因を特定します[＃17093](https://github.com/tikv/tikv/issues/17093) @ [コナー1996](https://github.com/Connor1996)
-    -   クラスタのレイテンシー問題をトラブルシューティングするために、取り込みファイルのレイテンシーの観測性を向上させる[＃17078](https://github.com/tikv/tikv/issues/17078) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   クラスタのレイテンシー問題をトラブルシューティングするために、取り込みファイルのレイテンシーの観測性を向上させる[＃17078](https://github.com/tikv/tikv/issues/17078) @ [リクックスサシネーター](https://github.com/LykxSassinator)
     -   重要なRaft の読み取りと書き込みのレイテンシーを安定させるために、別のスレッドを使用してリージョンのレプリカをクリーンアップします[＃16001](https://github.com/tikv/tikv/issues/16001) @ [ヒビシェン](https://github.com/hbisheng)
     -   適用されるスナップショットの数の観測性を向上させる[＃17078](https://github.com/tikv/tikv/issues/17078) @ [ヒビシェン](https://github.com/hbisheng)
 
@@ -273,7 +273,7 @@ TiDB バージョン: 8.2.0
     -   `?`の引数を含む`CONV`の式を持つ`PREPARE` `EXECUTE`ステートメントを複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[＃53505](https://github.com/pingcap/tidb/issues/53505) @ [qw4990](https://github.com/qw4990)
     -   BIGINT 以外の符号なし整数が文字列/小数点[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)と比較されたときに誤った結果を生成する可能性がある問題を修正しました
     -   外部キー[＃53652](https://github.com/pingcap/tidb/issues/53652) @ [ホーキングレイ](https://github.com/hawkingrei)を持つテーブルを作成するときに、TiDBが対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正しました。
-    -   クエリ内の特定のフィルタ条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラー[＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) [＃53594](https://github.com/pingcap/tidb/issues/53594) [＃53603](https://github.com/pingcap/tidb/issues/53603) @ [ヤンケオ](https://github.com/YangKeao)を報告する可能性がある問題を修正しました
+    -   クエリ内の特定のフィルター条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラー[＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) [＃53594](https://github.com/pingcap/tidb/issues/53594) [＃53603](https://github.com/pingcap/tidb/issues/53603) @ [ヤンケオ](https://github.com/YangKeao)を報告する可能性がある問題を修正しました
     -   `CREATE OR REPLACE VIEW`同時に実行すると`table doesn't exist`エラー[＃53673](https://github.com/pingcap/tidb/issues/53673) @ [接線](https://github.com/tangenta)が発生する可能性がある問題を修正
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `tidb_enable_async_merge_global_stats`無効になっている場合、グローバル統計の`Distinct_count`情報が正しくない可能性がある問題を修正しました[＃53752](https://github.com/pingcap/tidb/issues/53752) @ [ホーキングレイ](https://github.com/hawkingrei)
@@ -344,7 +344,7 @@ TiDB バージョン: 8.2.0
     -   TiCDC
 
         -   Grafana [＃10777](https://github.com/pingcap/tiflow/issues/10777) @ [アズドンメン](https://github.com/asddongmen)の**Kafka 送信バイト**パネルの表示が不正確になる問題を修正
-        -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @ [リデズ](https://github.com/lidezhu)
+        -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @ [リデジュ](https://github.com/lidezhu)
 
     -   TiDB データ移行 (DM)
 

@@ -79,7 +79,7 @@ TiDB Cloudインスタンスが MySQL サービスに接続できることを確
 
 > **注記：**
 >
-> 現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能は、リクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiDB Cloud PremiumインスタンスのVPCピアリングを申請」と入力し、 **「送信」を**クリックしてください。
+> 現在、この機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「 TiDB Cloud Premium インスタンスの VPC ピアリングを申請」と入力して、「**送信」**をクリックしてください。
 
 プライベート エンドポイントは、クラウド プロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用し、VPC 内のリソースが、あたかもそれらのサービスが VPC 内で直接ホストされているかのように、プライベート IP アドレスを介して他の VPC 内のサービスに接続できるようにします。
 
@@ -175,7 +175,7 @@ TiDB Cloudインスタンスは、プライベートエンドポイントを介�
 
 9.  **次へ**をクリックして、変更フィード仕様を構成します。
 
-    -   **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位（RCU）</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
+    -   **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位 (RCU)</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
     -   **「Changefeed 名」**領域で、Changefeed の名前を指定します。
 
 10. **「次へ」**をクリックして、変更フィード構成を確認します。

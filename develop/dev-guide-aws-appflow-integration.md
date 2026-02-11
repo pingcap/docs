@@ -1,11 +1,12 @@
 ---
 title: Integrate TiDB with Amazon AppFlow
 summary: TiDB を Amazon AppFlow と統合する方法を段階的に紹介します。
+aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide-aws-appflow-integration/','/tidbcloud/dev-guide-aws-appflow-integration/']
 ---
 
 # TiDB を Amazon AppFlow と統合する {#integrate-tidb-with-amazon-appflow}
 
-[Amazon AppFlow](https://aws.amazon.com/appflow/) 、SaaS (Software as a Service) アプリケーションを AWS のサービスに接続し、安全にデータを転送するためのフルマネージド API 統合サービスです。Amazon AppFlow を使用すると、Salesforce、Amazon S3、LinkedIn、GitHub など、様々なデータプロバイダーとの間で TiDB のデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[サポートされているソースアプリケーションと宛先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)ご覧ください。
+[Amazon AppFlow](https://aws.amazon.com/appflow/)は、SaaS (Software as a Service) アプリケーションを AWS のサービスに接続し、安全にデータを転送するためのフルマネージド API 統合サービスです。Amazon AppFlow を使用すると、Salesforce、Amazon S3、LinkedIn、GitHub など、様々なデータプロバイダーとの間で TiDB のデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[サポートされているソースアプリケーションと宛先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)ご覧ください。
 
 このドキュメントでは、TiDB を Amazon AppFlow と統合する方法について説明し、 TiDB Cloud Starter クラスターの統合を例として取り上げます。
 
@@ -25,14 +26,14 @@ TiDB クラスターがない場合は、 [TiDB Cloudスターター](https://ti
 
 -   次の要件を満たす AWS [アイデンティティおよびアクセス管理 (IAM) ユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) :
 
-    -   ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)使用して AWS にアクセスできます。
+    -   ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
     -   ユーザーには次の権限があります。
 
         -   `AWSCertificateManagerFullAccess` : [AWS シークレットマネージャー](https://aws.amazon.com/secrets-manager/)の読み取りと書き込みに使用されます。
-        -   `AWSCloudFormationFullAccess` : SAM CLI は[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
+        -   `AWSCloudFormationFullAccess` : SAM CLI は[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)使用して AWS リソースを宣言します。
         -   `AmazonS3FullAccess` : AWS CloudFormation は[アマゾンS3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)使用して公開します。
         -   `AWSLambda_FullAccess` : 現在、Amazon AppFlow の新しいコネクタを実装する唯一の方法は[AWS ラムダ](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)です。
-        -   `IAMFullAccess` : SAM CLI はコネクタ用に`ConnectorFunctionRole`作成する必要があります。
+        -   `IAMFullAccess` : SAM CLI はコネクタ用に`ConnectorFunctionRole`を作成する必要があります。
 
 -   [セールスフォース](https://developer.salesforce.com)アカウント。
 
@@ -70,7 +71,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     > **注記：**
     >
     > -   `--guided`オプションでは、プロンプトが表示され、デプロイメントの手順を案内します。入力内容は設定ファイル（デフォルトは`samconfig.toml`に保存されます。
-    > -   `stack_name` 、デプロイする AWS Lambda の名前を指定します。
+    > -   `stack_name`デプロイする AWS Lambda の名前を指定します。
     > -   このガイドでは、 TiDB Cloud StarterのクラウドプロバイダーとしてAWSを使用します。Amazon S3をソースまたはデスティネーションとして使用するには、AWS Lambdaの`region` Amazon S3と同じ値に設定する必要があります。
     > -   すでに`sam deploy --guided`実行している場合は、代わりに`sam deploy`実行するだけで、SAM CLI は構成ファイル`samconfig.toml`を使用して対話を簡素化します。
 
@@ -96,13 +97,13 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ2.フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)に移動して、 **「フローの作成」を**クリックします。
+[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)に移動して、 **「フローの作成」**をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
 ### フロー名を設定する {#set-the-flow-name}
 
-フロー名を入力し、「**次へ」**をクリックします。
+フロー名を入力し、 **「次へ」**をクリックします。
 
 ![name flow](/media/develop/aws-appflow-step-name-flow.png)
 
@@ -120,7 +121,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 2.  **[接続]**をクリックします。
 
-    1.  **「Salesforce に接続」**ダイアログで、この接続の名前を指定して、 **「続行」を**クリックします。
+    1.  **「Salesforce に接続」**ダイアログで、この接続の名前を指定して、 **「続行」**をクリックします。
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
@@ -132,7 +133,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > 貴社で既にSalesforceのProfessional Editionをご利用の場合、REST APIはデフォルトで有効化されていません。REST APIをご利用いただくには、新しいDeveloper Editionを登録していただく必要がある場合があります。詳しくは[Salesforceフォーラムトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)をご覧ください。
 
-3.  **「宛先の詳細」**エリアで、宛先として**「TiDB-Connector」を**選択します。「**接続」**ボタンが表示されます。
+3.  **「宛先の詳細」**エリアで、宛先として**「TiDB-Connector」**を選択します。「**接続」**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
@@ -164,7 +165,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8.  **「エラー処理」**エリアで、 **「現在のフロー実行を停止」**を選択します。「**フロートリガー」**エリアで、 **「オンデマンド実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。「**次へ」**をクリックします。
+8.  **「エラー処理」**エリアで、 **「現在のフロー実行を停止」**を選択します。 **「フロートリガー」**エリアで、「**オンデマンド実行**」トリガータイプを選択します。これは、フローを手動で実行する必要があることを意味します。「**次へ」**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
@@ -182,7 +183,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
     +----+------+------+---------------+--------+----------+
     ```
 
--   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **「フィールドのマッピング」を**クリックすると、ルールが設定されます。
+-   マッピングルールを設定するには、左側でソースフィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **「フィールドのマッピング」**をクリックすると、ルールが設定されます。
 
     ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
@@ -213,7 +214,7 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 ## ステップ3. フローを実行する {#step-3-run-the-flow}
 
-新しく作成されたフローのページで、右上隅の**[フロー実行] を**クリックします。
+新しく作成されたフローのページで、右上隅の**[フロー実行]**をクリックします。
 
 ![run flow](/media/develop/aws-appflow-step-run-flow.png)
 
@@ -253,14 +254,6 @@ test> SELECT * FROM sf_account;
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

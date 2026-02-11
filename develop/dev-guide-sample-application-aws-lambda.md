@@ -1,11 +1,12 @@
 ---
 title: Connect to TiDB with mysql2 in AWS Lambda Function
 summary: この記事では、AWS Lambda 関数で TiDB と mysql2 を使用して CRUD アプリケーションを構築する方法について説明し、簡単なサンプル コード スニペットを示します。
+aliases: ['/tidb/stable/dev-guide-sample-application-aws-lambda/','/tidb/dev/dev-guide-sample-application-aws-lambda/','/tidbcloud/dev-guide-sample-application-aws-lambda/']
 ---
 
-# AWS Lambda関数でmysql2を使ってTiDBに接続する {#connect-to-tidb-with-mysql2-in-aws-lambda-function}
+# AWS Lambda関数でmysql2を使用してTiDBに接続する {#connect-to-tidb-with-mysql2-in-aws-lambda-function}
 
-TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.amazon.com/lambda/)コンピューティング サービス、 [MySQL2](https://github.com/sidorares/node-mysql2) Node.js 用の人気のオープン ソース ドライバーです。
+TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.amazon.com/lambda/)はコンピューティング サービス、 [MySQL2](https://github.com/sidorares/node-mysql2)は Node.js 用の人気のあるオープン ソース ドライバーです。
 
 このチュートリアルでは、AWS Lambda 関数で TiDB と mysql2 を使用して次のタスクを実行する方法を学習します。
 
@@ -16,7 +17,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.ama
 
 > **注記**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、および TiDB Self-Managed で機能します。
+> このチュートリアルは、TiDB Cloud Starter、 TiDB Cloud Essential、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,22 +30,10 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.ama
 -   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 -   [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
-<CustomContent platform="tidb">
-
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**TiDB クラスターがない場合は、次のように作成できます。**
-
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
-
-</CustomContent>
 
 AWS アカウントまたはユーザーがない場合は、ガイド[Lambdaを使い始める](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html)の手順に従って作成できます。
 
@@ -58,7 +47,7 @@ AWS アカウントまたはユーザーがない場合は、ガイド[Lambdaを
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-aws-lambda-quickstart.git
@@ -105,7 +94,7 @@ npm install
     >
     > 以前にパスワードを生成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5.  対応する接続文字列をコピーして`env.json`に貼り付けます。以下に例を示します。
+5.  対応する接続​​文字列をコピーして`env.json`に貼り付けます。以下に例を示します。
 
     ```json
     {
@@ -122,9 +111,9 @@ npm install
 
 </div>
 
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
-対応する接続文字列をコピーして`env.json`に貼り付けます。以下に例を示します。
+対応する接続​​文字列をコピーして`env.json`に貼り付けます。以下に例を示します。
 
 ```json
 {
@@ -145,7 +134,7 @@ npm install
 
 ### ステップ4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-1.  (前提条件) [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)インストールします。
+1.  (前提条件) [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)をインストールします。
 
 2.  バンドルをビルドします。
 
@@ -159,7 +148,7 @@ npm install
     sam local invoke --env-vars env.json -e events/event.json "tidbHelloWorldFunction"
     ```
 
-4.  ターミナルの出力を確認します。出力が以下のようになっている場合、接続は成功しています。
+4.  ターミナルの出力を確認してください。出力が以下のようになっている場合、接続は成功しています。
 
     ```bash
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
@@ -169,9 +158,9 @@ npm install
 
 ## AWS Lambda関数をデプロイ {#deploy-the-aws-lambda-function}
 
-[SAM CLI](#sam-cli-deployment-recommended)または[AWS Lambdaコンソール](#web-console-deployment)いずれかを使用して AWS Lambda 関数をデプロイできます。
+[SAM CLI](#sam-cli-deployment-recommended)または[AWS Lambda コンソール](#web-console-deployment)のいずれかを使用して AWS Lambda 関数をデプロイできます。
 
-### SAM CLI の展開 (推奨) {#sam-cli-deployment-recommended}
+### SAM CLI の展開（推奨） {#sam-cli-deployment-recommended}
 
 1.  （ [前提条件](#prerequisites) ） [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)をインストールします。
 
@@ -247,21 +236,21 @@ npm install
     # dist/index.zip
     ```
 
-2.  [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)ご覧ください。
+2.  [AWS Lambda コンソール](https://console.aws.amazon.com/lambda/home#/functions)をご覧ください。
 
 3.  [Lambda関数の作成](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html)の手順に従って、Node.js Lambda 関数を作成します。
 
 4.  [Lambda デプロイメントパッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って`dist/index.zip`ファイルをアップロードします。
 
-5.  Lambda 関数では[対応する接続文字列をコピーして構成します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) 。
+5.  Lambda 関数では[対応する接続​​文字列をコピーして設定します](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) 。
 
     1.  Lambda コンソールの[機能](https://console.aws.amazon.com/lambda/home#/functions)ページで、 **[コンフィグレーション]**タブを選択し、 **[環境変数]**を選択します。
     2.  **編集**を選択します。
     3.  データベース アクセス資格情報を追加するには、次の手順を実行します。
-        -   **[環境変数の追加]**を選択し、**キー**に`TIDB_HOST`入力し、**値**にホスト名を入力します。
+        -   **[環境変数の追加]**を選択し、**キー**に`TIDB_HOST`を入力し、**値**にホスト名を入力します。
         -   **[環境変数の追加]**を選択し、**キー**に`TIDB_PORT`を入力し、**値**にポートを入力します (デフォルトは 4000)。
-        -   **[環境変数の追加]**を選択し、**キー**に`TIDB_USER`入力し、**値**にユーザー名を入力します。
-        -   **[環境変数の追加]**を選択し、**キー**に`TIDB_PASSWORD`入力し、**値**にデータベースの作成時に選択したパスワードを入力します。
+        -   **[環境変数の追加]**を選択し、**キー**に`TIDB_USER`を入力し、**値**にユーザー名を入力します。
+        -   **[環境変数の追加]**を選択し、**キー**に`TIDB_PASSWORD`を入力し、**値**にデータベースの作成時に選択したパスワードを入力します。
         -   **[保存]**を選択します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
@@ -307,7 +296,7 @@ export function getPool(): mysql.Pool {
 
 ### データを挿入する {#insert-data}
 
-次のクエリは、 `Player`つのレコードを作成し、 `ResultSetHeader`オブジェクトを返します。
+次のクエリは、1 つのレコード`Player`を作成し、 `ResultSetHeader`オブジェクトを返します。
 
 ```typescript
 const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
@@ -358,26 +347,18 @@ console.log(rsh.affectedRows);
 -   SQL インジェクションを回避するには、 [準備された文](https://github.com/sidorares/node-mysql2#using-prepared-statements)使用することをお勧めします。
 -   複雑な SQL ステートメントがあまり含まれないシナリオでは、 [続編](https://sequelize.org/) 、 [タイプORM](https://typeorm.io/) 、 [プリズマ](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 -   アプリケーション用の RESTful API を構築するには、 [API GatewayでAWS Lambdaを使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)をお勧めします。
--   TiDB Cloud Starter と AWS Lambda を使用して高パフォーマンス アプリケーションを設計する場合は、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
+-   TiDB Cloud Starter と AWS Lambda を使用して高パフォーマンス アプリケーションを設計する方法については、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
 
 ## 次のステップ {#next-steps}
 
--   AWS Lambda 関数で TiDB を使用する方法の詳細については、 [TiDB-Lambda-integration/aws-lambda-bookstore デモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)をご覧ください。また、AWS API Gateway を使用して、アプリケーション用の RESTful API を構築することもできます。
+-   AWS Lambda 関数で TiDB を使用する方法の詳細については、 [TiDB-Lambda-integration/aws-lambda-bookstore デモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)ご覧ください。また、AWS API Gateway を使用して、アプリケーション用の RESTful API を構築することもできます。
 -   [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から`mysql2`の使用法について詳しく学びます。
 -   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使い方を詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

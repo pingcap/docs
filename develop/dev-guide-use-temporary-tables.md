@@ -1,6 +1,7 @@
 ---
 title: Temporary Tables
 summary: 一時テーブルを作成、表示、クエリ、および削除する方法を学習します。
+aliases: ['/tidb/stable/dev-guide-use-temporary-tables/','/tidb/dev/dev-guide-use-temporary-tables/','/tidbcloud/dev-guide-use-temporary-tables/']
 ---
 
 # 一時テーブル {#temporary-tables}
@@ -18,7 +19,7 @@ ORDER BY age DESC
 LIMIT 50;
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     +------------+---------------------+------+
     | id         | name                | age  |
@@ -46,7 +47,7 @@ LIMIT 50;
 TiDB の一時テーブルは、ローカル一時テーブルとグローバル一時テーブルの 2 種類に分かれています。
 
 -   ローカル一時テーブルの場合、テーブル定義とテーブル内のデータは現在のセッションでのみ参照可能です。このタイプは、セッション中の中間データを一時的に保存するのに適しています。
--   グローバル一時テーブルの場合、テーブル定義はTiDBクラスタ全体から参照可能で、テーブル内のデータは現在のトランザクションからのみ参照可能です。このタイプは、トランザクション内の中間データを一時的に保存するのに適しています。
+-   グローバル一時テーブルの場合、テーブル定義はTiDBクラスタ全体から参照可能で、テーブル内のデータは現在のトランザクションからのみ参照可能です。このタイプは、トランザクション中の中間データを一時的に保存するのに適しています。
 
 ### ローカル一時テーブルを作成する {#create-a-local-temporary-table}
 
@@ -76,7 +77,7 @@ ORDER BY age DESC
 LIMIT 50;
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     Query OK, 50 rows affected (0.03 sec)
     Records: 50  Duplicates: 0  Warnings: 0
@@ -140,7 +141,7 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 ) ON COMMIT DELETE ROWS;
 ```
 
-グローバル一時テーブルにデータを挿入する際は、 `BEGIN`でトランザクションの開始を明示的に宣言する必要があります。そうしないと、 `INSERT INTO`ステートメントの実行後にデータがクリアされます。自動コミットモードでは、 `INSERT INTO`ステートメントの実行後にトランザクションが自動的にコミットされ、トランザクションの終了時にグローバル一時テーブルがクリアされるためです。
+グローバル一時テーブルにデータを挿入する際は、 `BEGIN`でトランザクションの開始を明示的に宣言する必要があります。そうしないと、 `INSERT INTO`ステートメントの実行後にデータがクリアされます。自動コミットモードでは、 `INSERT INTO`ステートメントの実行後にトランザクションが自動的にコミットされ、トランザクション終了時にグローバル一時テーブルがクリアされるためです。
 
 </div>
 <div label="Java" value="java">
@@ -194,7 +195,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 
 `SHOW [FULL] TABLES`文では既存のグローバル一時テーブルのリストを表示できますが、リストにローカル一時テーブルは表示されません。現時点では、TiDB には一時テーブル情報を格納するための同様の`information_schema.INNODB_TEMP_TABLE_INFO`システムテーブルはありません。
 
-たとえば、テーブル リストにはグローバル一時テーブル`top_50_eldest_authors_global`表示されますが、テーブル`top_50_eldest_authors`表示されません。
+たとえば、テーブル リストにはグローバル一時テーブル`top_50_eldest_authors_global`が表示されますが、テーブル`top_50_eldest_authors`は表示されません。
 
     +-------------------------------+------------+
     | Tables_in_bookshop            | Table_type |
@@ -254,14 +255,6 @@ TiDB の一時テーブルの制限については、 [他の TiDB 機能との�
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

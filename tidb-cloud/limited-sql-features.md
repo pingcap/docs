@@ -142,6 +142,7 @@ TiDB Cloud はTiDB がサポートするほぼすべてのワークロードで�
 | `tidb_ddl_reorg_batch_size`               | 制限なし             | 読み取り専用[^10]                              |
 | `tidb_ddl_reorg_priority`                 | 制限なし             | 読み取り専用[^10]                              |
 | `tidb_ddl_reorg_worker_cnt`               | 制限なし             | 読み取り専用[^10]                              |
+| `tidb_dml_type`                           | 制限なし             | 読み取り専用[^10]                              |
 | `tidb_enable_1pc`                         | 制限なし             | 読み取り専用[^10]                              |
 | `tidb_enable_async_commit`                | 制限なし             | 読み取り専用[^10]                              |
 | `tidb_enable_auto_analyze`                | 制限なし             | 読み取り専用[^10]                              |

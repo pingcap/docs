@@ -1,6 +1,7 @@
 ---
 title: Prepared Statements
-summary: TiDB 準備済みステートメントの使用方法について説明します。
+summary: TiDB 準備済みステートメントの使用方法について学習します。
+aliases: ['/tidb/stable/dev-guide-prepared-statement/','/tidb/dev/dev-guide-prepared-statement/','/tidbcloud/dev-guide-prepared-statement/']
 ---
 
 # 準備された声明 {#prepared-statements}
@@ -10,7 +11,7 @@ A [プリペアドステートメント](/sql-statements/sql-statement-prepare.m
 -   **Security**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
 -   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
 
-ほとんどのアプリケーションでは、SQL文を列挙できます。限られた数のSQL文で、アプリケーション全体のデータクエリを完了できます。そのため、プリペアドステートメントの使用がベストプラクティスです。
+ほとんどのアプリケーションでは、SQL文を列挙できます。限られた数のSQL文で、アプリケーション全体のデータクエリを完了できます。そのため、プリペアドステートメントを使用するのがベストプラクティスです。
 
 ## SQL構文 {#sql-syntax}
 
@@ -22,16 +23,16 @@ A [プリペアドステートメント](/sql-statements/sql-statement-prepare.m
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
 
-|            パラメータ名           |                説明                |
-| :-------------------------: | :------------------------------: |
-| `{prepared_statement_name}` |          プリペアドステートメントの名前         |
-|  `{prepared_statement_sql}` | プレースホルダとして疑問符が付いたプリペアドステートメントSQL |
+|            パラメータ名           |                説明               |
+| :-------------------------: | :-----------------------------: |
+| `{prepared_statement_name}` |         プリペアドステートメントの名前         |
+|  `{prepared_statement_sql}` | プレースホルダとして疑問符が付いプリペアドステートメントSQL |
 
 詳細については[PREPARE文](/sql-statements/sql-statement-prepare.md)参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントでは、パラメータとして**ユーザー変数**のみを使用できます。そのため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)プリペアドステートメントを呼び出す前に、 [`SET`文](/sql-statements/sql-statement-set-variable.md)使用して変数を設定します。
+プリペアドステートメントは、パラメータとして**ユーザー変数**のみを使用できるため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
@@ -44,7 +45,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |     `{parameter_value}`     |                                     ユーザー変数値                                    |
 | `{prepared_statement_name}` | 前処理文の名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)参照してください。
+詳細については[`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)を参照してください。
 
 ### プリペアドステートメントを削除する {#delete-the-prepared-statement}
 
@@ -56,15 +57,15 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :----------------------------------------------------------------------------: |
 | `{prepared_statement_name}` | 前処理文の名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)参照してください。
+詳細については[`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)を参照してください。
 
 ## 例 {#examples}
 
-このセクションでは、準備されたステートメントの 2 つの例 ( `SELECT`データと`INSERT`データ) について説明します。
+このセクションでは、準備されたステートメントの`SELECT`データと`INSERT`データの 2 つの例について説明します。
 
 ### <code>SELECT</code>例 {#code-select-code-example}
 
-たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む本をクエリする必要があります。
+たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む書籍をクエリする必要があります。
 
 <SimpleTab groupId="language">
 
@@ -129,7 +130,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
 
-[`books`](/develop/dev-guide-bookshop-schema-design.md#books-table)例に挙げると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、 `published_at = NOW()` （挿入時の現在時刻）の書籍を挿入する必要があります`books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入に関する詳細は、 [データの挿入](/develop/dev-guide-insert-data.md)参照してください。
+[`books`](/develop/dev-guide-bookshop-schema-design.md#books-table)を例に挙げると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、 `published_at = NOW()` （挿入時の現在時刻）の書籍を挿入する必要があります。17 `books`の**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入に関する詳細は、 [データの挿入](/develop/dev-guide-insert-data.md)参照してください。
 
 <SimpleTab groupId="language">
 
@@ -213,14 +214,6 @@ Javaの完全な例については、以下を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

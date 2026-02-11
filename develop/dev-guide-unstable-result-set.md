@@ -1,6 +1,7 @@
 ---
 title: Unstable Result Set
 summary: 不安定な結果セットのエラーを処理する方法を学習します。
+aliases: ['/tidb/stable/dev-guide-unstable-result-set/','/tidb/dev/dev-guide-unstable-result-set/','/tidbcloud/dev-guide-unstable-result-set/']
 ---
 
 # 不安定な結果セット {#unstable-result-set}
@@ -9,7 +10,7 @@ summary: 不安定な結果セットのエラーを処理する方法を学習�
 
 ## グループ化 {#group-by}
 
-便宜上、MySQLは`GROUP BY`の構文を「拡張」し、 `SELECT`番目の句で`GROUP BY`番目の句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`の構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
+便宜上、MySQLは`GROUP BY`構文を「拡張」し、 `SELECT`番目の句で`GROUP BY`番目の句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
 
 たとえば、次の 2 つのテーブルがあるとします。
 
@@ -47,9 +48,9 @@ ORDER BY
 3 rows in set (0.00 sec)
 ```
 
-`a` . `class`と`a` . `stuname`フィールドは`GROUP BY`文で指定されており、選択された列は`a` . `class` 、 `a` . `stuname` 、 `b` . `courscore`です。23 `GROUP BY`条件に含まれない唯一の列である`b` . `courscore`も、 `max()`関数を使用して一意の値で指定されています。このSQL文を曖昧さなく満たす結果は***1つだけ***あり、これを`FULL GROUP BY`構文と呼びます。
+`a` . `class`および`a` . `stuname`フィールドは`GROUP BY`文で指定されており、選択された列は`a` . `class` 、 `a` . `stuname` 、 `b` . `courscore`です。23 `GROUP BY`条件に含まれない唯一の列である`b` . `courscore`も、 `max()`関数を使用して一意の値で指定されています。このSQL文を曖昧さなく満たす結果は***1つだけ***あり、これを`FULL GROUP BY`構文と呼びます。
 
-反例として、 `NON-FULL GROUP BY`構文があります。例えば、この 2 つのテーブルに次の SQL クエリ (delete `a` . `stuname` in `GROUP BY` ) を記述します。
+反例として、構文`NON-FULL GROUP BY`があります。例えば、この2つのテーブルに次のSQLクエリを記述します (delete `a` . `stuname` in `GROUP BY` )。
 
 ```sql
 SELECT
@@ -90,9 +91,9 @@ ORDER BY
 +------------+--------------+------------------+
 ```
 
-結果が2つあるのは`stuname` `a`の値を取得する方法を指定して***おらず***、2つの結果がどちらもSQLセマンティクスを満たしているためです。そのため、結果セットは不安定になります。したがって、 `GROUP BY`文の結果セットの安定性を保証したい場合は、 `FULL GROUP BY`構文を使用してください。
+結果が2つあるのは`stuname` SQLで`a`フィールドの値を取得する方法を指定しておら***ず***、2つの結果がどちらもSQLセマンティクスを満たしているためです。そのため、結果セットは不安定になります。したがって、 `GROUP BY`文の結果セットの安定性を保証したい場合は、 `FULL GROUP BY`構文を使用してください。
 
-MySQLは、構文チェックを行うかどうかを制御するスイッチ`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`を提供しています。TiDBもこのスイッチ`FULL GROUP BY` `sql_mode`互換性があります。
+MySQLは、 `FULL GROUP BY`チェックを行うかどうかを制御するスイッチ`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`を提供しています。TiDBもこのスイッチ`sql_mode`と互換性があります。
 
 ```sql
 mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
@@ -113,11 +114,11 @@ ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and cont
 
 **実行結果**: 上記の例は、 `sql_mode`に`ONLY_FULL_GROUP_BY`設定した場合の効果を示しています。
 
-## 順序 {#order-by}
+## 注文方法 {#order-by}
 
 SQLセマンティクスでは、 `ORDER BY`構文が使用されている場合にのみ結果セットが順序通りに出力されます。単一インスタンスのデータベースでは、データが1つのサーバーに保存されるため、複数回実行してもデータの再編成なしで結果が安定することがよくあります。一部のデータベース（特にMySQL InnoDBstorageエンジン）では、主キーまたはインデックスの順序で結果セットを出力することも可能です。
 
-分散データベースであるTiDBは、複数のサーバーにデータを保存しています。また、TiDBレイヤーはデータページをキャッシュしないため、 `ORDER BY`を含まないSQL文の結果セットの順序は不安定であると認識されやすくなります。順序付けられた結果セットを出力するには、SQLセマンティクスに準拠した`ORDER BY`節に明示的に順序フィールドを追加する必要があります。
+分散データベースであるTiDBは、複数のサーバーにデータを保存しています。また、TiDBレイヤーはデータページをキャッシュしないため、 `ORDER BY`を含まないSQL文の結果セットの順序は不安定であると認識されやすくなります。連続した結果セットを出力するには、SQLセマンティクスに準拠した`ORDER BY`節に明示的に順序フィールドを追加する必要があります。
 
 次の例では、 `ORDER BY`句に 1 つのフィールドのみが追加され、TiDB はその 1 つのフィールドのみで結果を並べ替えます。
 
@@ -167,13 +168,13 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 
 ```
 
-`ORDER BY`値が同じ場合、結果は不安定になります。ランダム性を低減するには、 `ORDER BY`値が一意である必要があります。一意性を保証できない場合は、 `ORDER BY`フィールドのうち`ORDER BY`フィールドの組み合わせが一意になるまで、さらに`ORDER BY`フィールドを追加する必要があります。そうすれば、結果は安定します。
+`ORDER BY`値が同じ場合、結果は不安定になります。ランダム性を低減するには、 `ORDER BY`値が一意である必要があります。一意性を保証できない場合は、 `ORDER BY`のフィールドのうち`ORDER BY`フィールドの組み合わせが一意になるまで、さらに`ORDER BY`フィールドを追加する必要があります。そうすれば、結果は安定します。
 
 ## <code>GROUP_CONCAT()</code>で order by が使用されていないため、結果セットは不安定です。 {#the-result-set-is-unstable-because-order-by-is-not-used-in-code-group-concat-code}
 
 TiDB はstorageレイヤーからデータを並列に読み取るため、結果セットは不安定になります。そのため、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は不安定であると簡単に認識されます。
 
-`GROUP_CONCAT()`で結果セットの出力を順序どおりにするには、SQLセマンティクスに準拠した`ORDER BY`節にソートフィールドを追加する必要があります。次の例では、 `ORDER BY`を除いた`customer_id`を結合する`GROUP_CONCAT()`によって、不安定な結果セットが生成されます。
+`GROUP_CONCAT()`結果セットの出力を順序通りにするには、SQLセマンティクスに準拠した`ORDER BY`節にソートフィールドを追加する必要があります。次の例では、 `ORDER BY`を除いた`customer_id`を連結する`GROUP_CONCAT()`によって、結果セットが不安定になります。
 
 1.  除外`ORDER BY`
 
@@ -199,7 +200,7 @@ TiDB はstorageレイヤーからデータを並列に読み取るため、結�
     +-------------------------------------------------------------------------+
     ```
 
-2.  `ORDER BY`を含む
+2.  `ORDER BY`含む
 
     最初のクエリ:
 
@@ -229,14 +230,6 @@ TiDB はstorageレイヤーからデータを並列に読み取るため、結�
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

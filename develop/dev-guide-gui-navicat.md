@@ -1,11 +1,12 @@
 ---
 title: Connect to TiDB with Navicat
 summary: Navicat を使用して TiDB に接続する方法を学びます。
+aliases: ['/tidb/stable/dev-guide-gui-navicat/','/tidb/dev/dev-guide-gui-navicat/','/tidbcloud/dev-guide-gui-navicat/']
 ---
 
 # NavicatでTiDBに接続する {#connect-to-tidb-with-navicat}
 
-TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navicat.com)データベースユーザー向けのGUIツールセットです。このチュートリアルでは、 [ナビキャット プレミアム](https://www.navicat.com/en/products/navicat-premium)ツールを使用してTiDBに接続します。
+TiDBはMySQL互換データベースであり、 [ナビキャット](https://www.navicat.com)データベースユーザー向けのGUIツールセットです。このチュートリアルでは、 [ナビキャットプレミアム](https://www.navicat.com/en/products/navicat-premium)ツールを使用してTiDBに接続します。
 
 このチュートリアルでは、Navicat を使用して TiDB クラスターに接続する方法を学習します。
 
@@ -17,26 +18,14 @@ TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navi
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [ナビキャット プレミアム](https://www.navicat.com) **17.1.6**以降のバージョン。
+-   [ナビキャットプレミアム](https://www.navicat.com) **17.1.6**以降のバージョン。
 -   Navicat Premium の有料アカウント。
 -   TiDB クラスター。
-
-<CustomContent platform="tidb">
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**TiDB クラスターがない場合は、次のように作成できます。**
-
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
-
-</CustomContent>
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -66,7 +55,7 @@ TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navi
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  [**新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
+6.  **[新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -76,13 +65,13 @@ TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navi
 
     ![Navicat: configure connection general panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
-7.  **「SSL」**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する**」、 **「CA証明サーバーを検証する」の**チェックボックスをオンにします。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **「CA証明書」**フィールドに入力します。
+7.  **「SSL」**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する」** 、 **「CA証明サーバーを検証する」の**チェックボックスをオンにします。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し**、「CA証明書」**フィールドに入力します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
 8.  **「テスト接続」**をクリックして、 TiDB Cloud Starter クラスターへの接続を検証します。
 
-9.  接続テストが成功すると、「**接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+9.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -93,17 +82,17 @@ TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navi
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択します。
 
-    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
     TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
-4.  **CA 証明書をダウンロードするには、CA 証明**書をクリックします。
+4.  **CA 証明書をダウンロードするには、CA 証明書**をクリックします。
 
 5.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、**ベンダー フィルター**リストから**PingCAP**を選択して、右側のパネルで**TiDB を**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  [**新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
+6.  **[新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
@@ -113,22 +102,22 @@ TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navi
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **「SSL」**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する**」、 **「CAサーバー書を検証する」の**チェックボックスをオンにします。次に、 **「CA証明書」**フィールドで、手順4でダウンロードしたCAファイルを選択します。
+7.  **「SSL」**タブをクリックし、 **「SSLを使用する」** 、 **「認証を使用する**」、 **「CAサーバー書を検証する」の**チェックボックスをオンにします。次に、 **「CA証明書」**フィールドに、手順4でダウンロードしたCAファイルを選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
 8.  TiDB Cloud Dedicated クラスターへの接続を検証するための**テスト接続**。
 
-9.  接続テストが成功すると、「**接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+9.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 1.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、**ベンダー フィルター**リストから**PingCAP**を選択して、右側のパネルで**TiDB を**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-2.  [**新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
+2.  **[新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **ホスト**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。
@@ -140,26 +129,18 @@ TiDBはMySQL互換データベースで、 [ナビキャット](https://www.navi
 
 3.  **「テスト接続」**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
-4.  接続テストが成功すると、「**接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
+4.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
 
 </div>
 </SimpleTab>
 
 ## 次のステップ {#next-steps}
 
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

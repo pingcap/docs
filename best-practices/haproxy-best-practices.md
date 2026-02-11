@@ -1,11 +1,12 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
 summary: HAProxyは、TCPおよびHTTPベースのアプリケーション向けの無料のオープンソースロードバランサおよびプロキシサーバーです。高可用性、負荷分散、ヘルスチェック、スティッキーセッション、SSLサポート、監視機能を提供します。HAProxyを導入するには、ハードウェアとソフトウェアの要件を満たしていることを確認の上、インストールと設定を行ってください。最適な結果を得るには、最新の安定バージョンをご使用ください。
+aliases: ['/tidb/stable/haproxy-best-practices/','/tidb/dev/haproxy-best-practices/']
 ---
 
 # TiDB で HAProxy を使用するためのベストプラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-このドキュメントでは、TiDBにおける[HAプロキシ](https://github.com/haproxy/haproxy)の設定と使用に関するベストプラクティスについて説明します。HAProxyは、TCPベースのアプリケーションの負荷分散を提供します。TiDBクライアントからは、HAProxyが提供するフローティング仮想IPアドレスに接続するだけでデータを操作できるため、TiDBサーバーレイヤーでの負荷分散に役立ちます。
+このドキュメントでは、TiDBにおける[HAプロキシ](https://github.com/haproxy/haproxy)の設定と使用に関するベストプラクティスについて説明します。HAProxyは、TCPベースのアプリケーションの負荷分散を提供します。TiDBクライアントからは、HAProxyが提供するフローティング仮想IPアドレスに接続するだけでデータを操作できるため、TiDBサーバーレイヤーでの負荷分散を実現できます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
@@ -15,7 +16,7 @@ summary: HAProxyは、TCPおよびHTTPベースのアプリケーション向け
 
 ## HAProxyの概要 {#haproxy-overview}
 
-HAProxyは、C言語で書かれた無料のオープンソースソフトウェアで、TCPおよびHTTPベースのアプリケーション向けの高可用性ロードバランサおよびプロキシサーバーを提供します。CPUとメモリを高速かつ効率的に使用できるため、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）など、多くの有名ウェブサイトで広く利用されています。
+HAProxyは、C言語で書かれた無料のオープンソースソフトウェアで、TCPおよびHTTPベースのアプリケーション向けの高可用性ロードバランサおよびプロキシサーバーを提供します。CPUとメモリを高速かつ効率的に使用できるため、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）など、多くの著名なウェブサイトで広く利用されています。
 
 HAProxyは、LinuxカーネルのコアコントリビューターであるWilly Tarreauによって2000年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープンソースコミュニティに無料のソフトウェアアップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)使用しています。最新の安定版の使用を推奨します。詳細は[HAProxyのリリースバージョン](http://www.haproxy.org/)ご覧ください。
 
@@ -24,7 +25,7 @@ HAProxyは、LinuxカーネルのコアコントリビューターであるWilly
 -   [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
 -   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モード (レイヤー4 とも呼ばれる TCP とレイヤー7 とも呼ばれる HTTP) がサポートされています。ラウンドロビン、Leastconn、ランダムなど、9 種類以上の負荷分散アルゴリズムがサポートされています。
 -   [健康チェック](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
--   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキー セッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定することができます。
+-   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキーセッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定することができます。
 -   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
 -   [監視と統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) ：Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
@@ -34,14 +35,14 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 
 ### ハードウェア要件 {#hardware-requirements}
 
-[HAProxyドキュメント](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/)によると、HAProxyの最小ハードウェア構成は以下の表のとおりです。Sysbench `oltp_read_write`ワークロードでは、この構成での最大QPSは約50Kです。負荷分散環境に応じてサーバー構成を増やすことができます。
+[HAProxyドキュメント](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/)によると、HAProxyの最小ハードウェア構成は以下の表の通りです。Sysbench `oltp_read_write`ワークロードでは、この構成での最大QPSは約50Kです。負荷分散環境に応じてサーバー構成を増やすことができます。
 
-| ハードウェアリソース        | 最小仕様         |
-| :---------------- | :----------- |
-| CPU               | 2コア、3.5GHz   |
-| メモリ               | 4ギガバイト       |
-| ストレージ             | 50 GB（SATA）  |
-| ネットワークインターフェースカード | 10Gネットワークカード |
+| ハードウェアリソース        | 最小仕様           |
+| :---------------- | :------------- |
+| CPU               | 2コア、3.5GHz     |
+| メモリ               | 4ギガバイト         |
+| ストレージ             | 50 GB (SATA)   |
+| ネットワークインターフェースカード | 10Gネットワ​​ークカード |
 
 ### ソフトウェア要件 {#software-requirements}
 
@@ -74,11 +75,11 @@ yum -y install epel-release gcc systemd-devel
 
 ## HAProxyをデプロイ {#deploy-haproxy}
 
-HAProxyを使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的なデプロイメント操作について説明します。実際のシナリオに応じて、 [設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
+HAProxyを使用すると、負荷分散されたデータベース環境を簡単に構成・セットアップできます。このセクションでは、一般的なデプロイメント操作について説明します。実際のシナリオに合わせて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
 
 ### HAProxyをインストールする {#install-haproxy}
 
-1.  HAProxy 2.6.21 ソースコード パッケージをダウンロードします。
+1.  HAProxy 2.6.21 ソースコードのパッケージをダウンロードします。
 
     ```bash
     wget https://www.haproxy.org/download/2.6/src/haproxy-2.6.21.tar.gz
@@ -90,7 +91,7 @@ HAProxyを使用すると、負荷分散されたデータベース環境を簡�
     tar zxf haproxy-2.6.21.tar.gz
     ```
 
-3.  ソースコードからアプリケーションをコンパイルします。
+3.  ソース コードからアプリケーションをコンパイルします。
 
     ```bash
     cd haproxy-2.6.21
@@ -114,7 +115,7 @@ HAProxyを使用すると、負荷分散されたデータベース環境を簡�
 
 #### HAProxyコマンド {#haproxy-commands}
 
-キーワードとその基本的な使用方法のリストを印刷するには、次のコマンドを実行します。
+キーワードとその基本的な使用法のリストを印刷するには、次のコマンドを実行します。
 
 ```bash
 haproxy --help
@@ -129,7 +130,7 @@ haproxy --help
 | `-dM [<byte>]`                  | メモリポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域は、呼び出し元に渡される前に`<byte>`で埋められます。                                                                  |
 | `-V`                            | 詳細モードを有効にします (静音モードを無効にします)。                                                                                                                                    |
 | `-D`                            | デーモンとして起動します。                                                                                                                                                   |
-| `-C <dir>`                      | 設定ファイルをロードする前にディレクトリ`<dir>`に変更します。                                                                                                                              |
+| `-C <dir>`                      | 設定ファイルを読み込む前にディレクトリ`<dir>`に変更します。                                                                                                                               |
 | `-W`                            | マスターワーカーモード。                                                                                                                                                    |
 | `-q`                            | 「quiet」モードを設定します。これにより、構成の解析中および起動中に一部のメッセージが無効になります。                                                                                                           |
 | `-c`                            | バインドを試みる前に、構成ファイルのチェックのみを実行して終了します。                                                                                                                             |
@@ -139,7 +140,7 @@ haproxy --help
 | `-L <name>`                     | ローカル ピア名を`<name>`に変更します。これはデフォルトでローカル ホスト名になります。                                                                                                                |
 | `-p <file>`                     | 起動時にすべてのプロセスの PID を`<file>`に書き込みます。                                                                                                                             |
 | `-de`                           | epoll(7)の使用を無効にします。epoll(7)はLinux 2.6および一部のカスタムLinux 2.4システムでのみ利用可能です。                                                                                          |
-| `-dp`                           | poll(2)の使用を無効にします。代わりにselect(2)が使用される場合があります。                                                                                                                   |
+| `-dp`                           | poll(2) の使用を無効にします。代わりに select(2) が使用される場合があります。                                                                                                                |
 | `-dS`                           | 古いカーネルでは壊れているsplice(2)の使用を無効にします。                                                                                                                               |
 | `-dR`                           | SO_REUSEPORT の使用を無効にします。                                                                                                                                        |
 | `-dr`                           | サーバーのアドレス解決の失敗を無視します。                                                                                                                                           |
@@ -149,7 +150,7 @@ haproxy --help
 | `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからすべてのリスニングソケットを取得します。その後、新しいソケットをバインドする代わりに、これらのソケットを使用します。                                                                                |
 | `-S <bind>[,<bind_options>...]` | マスターワーカーモードでは、マスターCLIを作成します。このCLIは、すべてのワーカーのCLIへのアクセスを可能にします。デバッグに役立ち、離脱中のプロセスにアクセスする便利な方法です。                                                                   |
 
-HAProxy コマンドライン オプションの詳細については、 [HAProxy の管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)と[HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
+HAProxy コマンドライン オプションの詳細については、 [HAProxyの管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)と[HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
 ### HAProxyを設定する {#configure-haproxy}
 
@@ -195,7 +196,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-`SHOW PROCESSLIST`使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) TiDB に接続するように設定する必要があります。
+`SHOW PROCESSLIST`使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を TiDB に接続するように設定する必要があります。
 
 ```yaml
    server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
@@ -209,7 +210,7 @@ listen tidb-cluster                        # Database load balancing.
 
 ### HAProxyを起動する {#start-haproxy}
 
-HAProxy を起動するには、 `haproxy`実行します。デフォルトでは`/etc/haproxy/haproxy.cfg`読み込まれます (推奨)。
+HAProxy を起動するには、 `haproxy`を実行します。デフォルトでは`/etc/haproxy/haproxy.cfg`が読み込まれます (推奨)。
 
 ```bash
 haproxy -f /etc/haproxy/haproxy.cfg

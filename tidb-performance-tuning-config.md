@@ -69,7 +69,7 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)                                                                                         | TiFlashへの非再帰的な[共通テーブル式（CTE）](/sql-statements/sql-statement-with.md)プッシュダウンを有効にします。                           | これは実験的機能です。                                                                                |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                                                                                               | 読み取りコミット分離レベルの場合、この変数を有効にすると、グローバル タイムスタンプの取得のレイテンシーとコストが回避され、トランザクション レベルの読み取りレイテンシーが最適化されます。               | この機能は、繰り返し可能読み取り分離レベルと互換性がありません。                                                           |
 | [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)                                                                                                              | PDサーバーからのコミット タイムスタンプの取得をスキップすることでパフォーマンスが向上します。                                                             | これにより、パフォーマンスを優先して線形化可能性が犠牲になります。因果一貫性のみが保証されます。厳密な線形化可能性が求められるシナリオには適していません。              |
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)                                                                                                         | PDFollower機能を有効にすると、PDフォロワーがリージョンリクエストを処理できるようになります。これにより、すべてのPDサーバー間で負荷が均等に分散され、PDリーダーのCPU負荷が軽減されます。        | これは実験的機能です。本番環境以外でテストしてください。                                                               |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)                                                                                                         | PDFollower機能を有効にすると、PDフォロワーがリージョンリクエストを処理できるようになります。これにより、すべてのPDサーバー間で負荷が均等に分散され、PDリーダーのCPU負荷が軽減されます。        | 該当なし                                                                                       |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                                                                                        | 高度なクエリ最適化戦略を有効にして、追加の最適化ルールとヒューリスティックを通じてパフォーマンスを向上させます。                                                     | パフォーマンスの向上はワークロードによって異なるため、ご使用の環境で徹底的にテストしてください。                                           |
 
 追加の最適化を可能にするオプティマイザー制御構成について次に説明します。
@@ -129,7 +129,7 @@ soft-pending-compaction-bytes-limit = "192GiB"
 | [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラの書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新しい書き込み要求に対してエラー`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、書き込みが一時的に急増するシナリオでは、このしきい値を大きく（例えば`512MiB`に）することで負荷に対応しやすくなります。ただし、書き込みキューが蓄積し続け、このしきい値を継続的に超える場合は、根本的なパフォーマンスの問題を示している可能性があり、さらなる調査が必要です。        |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0ファイルの数に基づいて、書き込みフロー制御のトリガータイミングを制御します。しきい値を上げると、書き込みワークロードが高い場合の書き込みストールが減少します。                                                                                     | しきい値を高くすると、多くの L0 ファイルが存在する場合により積極的な圧縮が行われる可能性があります。                                                                                                                                |
 | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中の圧縮バイト数のしきい値を制御します。ソフトリミットは部分的な書き込み拒否をトリガーします。                                                                                                        | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、コンパクションプロセスが追いつかず、保留中のコンパクションバイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファスペースを増やすことができますが、継続的に蓄積されている場合は、根本的な問題が示唆されており、さらなる調査が必要です。    |
-| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger) [`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)             | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`手動でデフォルト値に戻す必要があります。これにより、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータをデフォルトパラメータと同じ圧縮効率を維持するように設定してください。 | 詳細については[問題 18708](https://github.com/tikv/tikv/issues/18708)参照してください。                                                                                                               |
+| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`手動でデフォルト値に戻す必要があります。これにより、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータをデフォルトパラメータと同じ圧縮効率を維持するように設定してください。 | 詳細については[問題 18708](https://github.com/tikv/tikv/issues/18708)参照してください。                                                                                                               |
 
 上の表で概説した圧縮およびフロー制御の構成調整は、次の仕様のインスタンス上の TiKV デプロイメントに合わせて調整されていることに注意してください。
 
@@ -277,7 +277,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 
 #### パフォーマンス分析 {#performance-analysis}
 
-Titanはv7.6.0以降でデフォルトで有効になっており、TiDB v8.4.0ではTitanのデフォルトの`min-blob-size` `32KiB`です。ベースライン構成では、データがRocksDBに保存されるようにレコードサイズを`31KiB`に設定しています。一方、キー設定構成では、 `min-blob-size`を`1KiB`に設定することで、データがTitanに保存されます。
+v7.6.0以降、Titanはデフォルトで有効になっています。TiDB v8.4.0では、Titanのデフォルト値は`min-blob-size`ですが、 `32KiB`設定されています。ベースライン構成では、データがRocksDBに保存されるように、レコードサイズを`31KiB`に設定しています。一方、キー設定構成では、 `min-blob-size`を`1KiB`に設定することで、データがTitanに保存されます。
 
 主要な設定で確認されたパフォーマンスの向上は、主にTitanがRocksDBの圧縮を削減する能力によるものです。以下の図に示されています。
 
@@ -547,7 +547,7 @@ TiKV のパフォーマンスを向上させるには、インスタンスの CP
 
 -   8 ～ 16 個のコアを持つインスタンスの場合、通常はデフォルト設定で十分です。
 
--   32コア以上のインスタンスでは、リソース利用率を向上させるためにプールサイズを大きくしてください。設定は次のように調整してください。
+-   32コア以上のインスタンスの場合、リソース利用率を向上させるためにプールサイズを大きくしてください。設定は次のように調整してください。
 
     ```toml
     [server]

@@ -1,42 +1,33 @@
 ---
 title: Create a Secondary Index
 summary: セカンダリ インデックスを作成する手順、ルール、および例を学習します。
+aliases: ['/tidb/stable/dev-guide-create-secondary-indexes/','/tidb/dev/dev-guide-create-secondary-indexes/','/tidbcloud/dev-guide-create-secondary-indexes/']
 ---
 
 # セカンダリインデックスを作成する {#create-a-secondary-index}
 
-このドキュメントでは、SQLと様々なプログラミング言語を用いてセカンダリインデックスを作成する方法と、インデックス作成のルールを列挙します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例に、セカンダリインデックスの作成手順を順を追って説明します。
+このドキュメントでは、SQLと様々なプログラミング言語を用いてセカンダリインデックスを作成する方法と、インデックス作成のルールを列挙します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例に挙げ、セカンダリインデックスの作成手順を順を追って説明します。
 
 ## 始める前に {#before-you-start}
 
 セカンダリ インデックスを作成する前に、次の操作を実行します。
 
--   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloudスタータークラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) 。
 
 ## セカンダリインデックスとは {#what-is-secondary-index}
 
-セカンダリインデックスは、TiDBクラスタ内の論理オブジェクトです。TiDBがクエリパフォーマンスを向上させるために使用する、ソート用のデータと考えることができます。TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックすることはありません。TiDBは各インデックスに対して、テーブル内の各行への参照を作成し、データではなく選択された列に基づいて参照をソートします。
-
-<CustomContent platform="tidb">
+セカンダリインデックスは、TiDBクラスタ内の論理オブジェクトです。TiDBがクエリパフォーマンスを向上させるために使用する、ソート用のデータと考えることができます。TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルへのデータの読み取りおよび書き込み操作をブロックすることはありません。TiDBは各インデックスに対して、テーブル内の各行への参照を作成し、データではなく選択された列に基づいて参照をソートします。
 
 セカンダリインデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-セカンダリインデックスの詳細については、 [セカンダリインデックス](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)参照してください。
-
-</CustomContent>
 
 TiDB では、 [既存のテーブルにセカンダリインデックスを追加する](#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
 
 ## 既存のテーブルにセカンダリインデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
-既存のテーブルにセカンダリ インデックスを追加するには、次のように[インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
+既存のテーブルにセカンダリ インデックスを追加するには、次の[インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用します。
 
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
@@ -46,7 +37,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 -   `{index_name}` : セカンダリインデックスの名前。
 -   `{table_name}` : テーブル名。
--   `{column_names}` : インデックスを作成する列の名前 (セミコロンで区切られます)。
+-   `{column_names}` : インデックスを作成する列の名前。セミコロンで区切られます。
 
 ## 新しいテーブルを作成するときにセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
@@ -59,7 +50,7 @@ KEY `{index_name}` (`{column_names}`)
 パラメータの説明:
 
 -   `{index_name}` : セカンダリインデックスの名前。
--   `{column_names}` : インデックスを作成する列の名前 (セミコロンで区切られます)。
+-   `{column_names}` : インデックスを作成する列の名前。セミコロンで区切られます。
 
 ## セカンダリインデックス作成のルール {#rules-in-secondary-index-creation}
 
@@ -67,20 +58,20 @@ KEY `{index_name}` (`{column_names}`)
 
 ## 例 {#example}
 
-`bookshop`アプリケーション**で、特定の年に出版されたすべての書籍の検索を**サポートするとします。
+`bookshop`アプリケーションで**、特定の年に出版されたすべての書籍の検索を**サポートするとします。
 
 `books`テーブルのフィールドは次のとおりです。
 
 | フィールド名 | タイプ          | フィールドの説明               |
 | ------ | ------------ | ---------------------- |
-| id     | ビッグインテント     | 本の一意のID                |
+| id     | ビッグイント       | 本の一意のID                |
 | タイトル   | varchar(100) | 書籍タイトル                 |
 | タイプ    | 列挙型          | 書籍の種類（例：雑誌、アニメーション、教材） |
-| ストック   | ビッグインテント     | ストック                   |
+| ストック   | ビッグイント       | ストック                   |
 | 価格     | 小数点(15,2)    | 価格                     |
 | 公開日時   | 日時           | 発行日                    |
 
-`books`テーブルは次の SQL ステートメントを使用して作成されます。
+`books`テーブルは、次の SQL ステートメントを使用して作成されます。
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -138,27 +129,22 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
     +-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
     3 rows in set (0.18 sec)
 
-出力には**TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がインデックスを使用してこのクエリを実行する準備ができていることを意味します。
+出力では、 **TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がインデックスを使用してこのクエリを実行する準備ができていることを意味します。
 
 実行プラン内の**TableFullScan**や**IndexRangeScan**といった単語は、TiDBでは[オペレーター](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)参照してください。
 
-<CustomContent platform="tidb">
+実行プランは毎回同じ演算子を返すわけではありません。これは、TiDBが**コストベース最適化（CBO）**アプローチを採用しているためです。CBOアプローチでは、実行プランはルールとデータ配分の両方に依存します。
 
-実行プランは毎回同じ演算子を返すわけではありません。これは、TiDBが**コストベース最適化（CBO）**アプローチを採用しているためです。CBOアプローチでは、実行プランはルールとデータ配分の両方に依存します。TiDBのTiDB SQLパフォーマンスの詳細については、 [SQLチューニングの概要](/sql-tuning-overview.md)参照してください。
+SQL パフォーマンス チューニングの詳細については、次のドキュメントを参照してください。
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-実行プランは毎回同じ演算子を返すわけではありません。これは、TiDBが**コストベース最適化（CBO）**アプローチを採用しているためです。CBOアプローチでは、実行プランはルールとデータ配分の両方に依存します。TiDBのTiDB SQLパフォーマンスの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)参照してください。
-
-</CustomContent>
+-   [TiDB Cloudの SQL チューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+-   [TiDBセルフマネージドのSQLチューニングの概要](/sql-tuning-overview.md)
 
 > **注記：**
 >
 > TiDBはクエリ実行時にインデックスを明示的に使用することもサポートしており、 [オプティマイザヒント](/optimizer-hints.md)または[SQL プラン管理 (SPM)](/sql-plan-management.md)使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザヒント、SPMについてよく理解していない場合は、予期しない結果を回避するために、この機能を使用**しないでください**。
 
-テーブルのインデックスをクエリするには、 [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
+テーブルのインデックスをクエリするには、次の[インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
@@ -180,14 +166,6 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

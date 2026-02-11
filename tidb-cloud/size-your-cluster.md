@@ -211,7 +211,7 @@ TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-
 
 #### パフォーマンスとプラスstorage {#performance-and-plus-storage}
 
-パフォーマンスストレージとプラスstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのstorageタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。パフォーマンスストレージまたはプラスstorageをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートを**リクエスト」をクリックします。次に、「**説明」**フィールドに「TiKVstorageタイプを申請」と入力し、 **「送信」を**クリックします。
+パフォーマンスストレージとプラスstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのstorageタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。パフォーマンスストレージまたはプラスstorageをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット**」をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明」**フィールドに「TiKVstorageタイプを申請」と入力して、 **「送信」**をクリックします。
 
 ## サイズTiFlash {#size-tiflash}
 
@@ -269,4 +269,4 @@ TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-
 
 #### プラスstorage {#plus-storage}
 
-Plusstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このstorageタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じてご利用いただけます。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiFlashstorageタイプを申請」と入力し、 **「送信」を**クリックしてください。
+Plusstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このstorageタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**フィールドに「 TiFlashstorageタイプを申請」と入力して、 **「送信」を**クリックしてください。

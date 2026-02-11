@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with Visual Studio Code
 summary: Visual Studio Code または GitHub Codespaces を使用して TiDB に接続する方法を学習します。
+aliases: ['/tidb/stable/dev-guide-gui-vscode-sqltools/','/tidb/dev/dev-guide-gui-vscode-sqltools/','/tidbcloud/dev-guide-gui-vscode-sqltools/']
 ---
 
 # Visual Studio Code で TiDB に接続する {#connect-to-tidb-with-visual-studio-code}
@@ -21,26 +22,14 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
 -   [ビジュアルスタジオコード](https://code.visualstudio.com/#alt-downloads) **1.72.0**以降のバージョン。
 -   Visual Studio Code の[SQLツール MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)拡張機能。インストールするには、以下のいずれかの方法があります。
     -   <a href="vscode:extension/mtxr.sqltools-driver-mysql">このリンク</a>をクリックして VS Code を起動し、拡張機能を直接インストールします。
-    -   [VS Code マーケットプレイス](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)に移動して、 **[インストール]**をクリックします。
-    -   VS Code の**拡張機能**タブで、 `mtxr.sqltools-driver-mysql`検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、**インストールを**クリックします。
+    -   [VS Code マーケットプレイス](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)に移動して、 **「インストール」**をクリックします。
+    -   VS Code の**拡張機能**タブで、 `mtxr.sqltools-driver-mysql`検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、 **「インストール」を**クリックします。
 -   TiDB クラスター。
-
-<CustomContent platform="tidb">
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-**TiDB クラスターがない場合は、次のように作成できます。**
-
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
-
-</CustomContent>
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -73,7 +62,7 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」**をクリックし、データベースドライバーとして**TiDBを**選択します。
+5.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」を**クリックし、データベースドライバーとして**TiDBを**選択します。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
@@ -90,7 +79,7 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
     -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
 
         -   **認証プロトコル**:**デフォルト**を選択します。
-        -   **SSL** ：**有効を**選択します。TiDB TiDB Cloud Starterは安全な接続を必要とします。 **「SSLオプション（node.TLSSocket）」**領域で、 **「証明機関（CA）証明書ファイル」**フィールドをTiDB Cloud接続ダイアログの`CA`のパラメータとして設定します。
+        -   **SSL** ：**有効を**選択します。TiDB TiDB Cloud Starterは安全な接続を必要とします。 **「SSLオプション（node.TLSSocket）」**領域で、 **「証明機関（CA）証明書ファイル」**フィールドをTiDB Cloud接続ダイアログの`CA`番目のパラメータとして設定します。
 
             > **注記：**
             >
@@ -105,7 +94,7 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
 
         ![VS Code SQLTools: enter password to connect to TiDB Cloud Starter](/media/develop/vsc-sqltools-password.jpg)
 
-8.  接続テストが成功すると、「**正常に接続されました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
+8.  接続テストが成功すると、「**正常に接続されました！」**というメッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -120,7 +109,7 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
 
     TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
-4.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」**をクリックし、データベースドライバーとして**TiDBを**選択します。
+4.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」を**クリックし、データベースドライバーとして**TiDBを**選択します。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
@@ -148,12 +137,12 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
 
     ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
 
-7.  接続テストが成功すると、「**正常に接続されました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
+7.  接続テストが成功すると、「**正常に接続されました！」**というメッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
-1.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」**をクリックし、データベースドライバーとして**TiDBを**選択します。
+1.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」を**クリックし、データベースドライバーとして**TiDBを**選択します。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
@@ -200,19 +189,11 @@ TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオ
 
 -   Visual Studio Code の使い方を[Visual Studio Codeのドキュメント](https://code.visualstudio.com/docs)から詳しく学びます。
 -   SQLTools の[ドキュメント](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)と[GitHubリポジトリ](https://github.com/mtxr/vscode-sqltools)から、VS Code SQLTools 拡張機能の詳細な使用方法を学習します。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

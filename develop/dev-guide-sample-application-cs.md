@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with C#
 summary: C#を使用してTiDBに接続する方法を学びます。このチュートリアルでは、TiDBを操作するためのサンプルC#コードスニペットを提供します。
+aliases: ['/tidb/stable/dev-guide-sample-application-cs/','/tidb/dev/dev-guide-sample-application-cs/','/tidbcloud/dev-guide-sample-application-cs/']
 ---
 
 # C#でTiDBに接続する {#connect-to-tidb-with-c}
@@ -11,13 +12,13 @@ C#（発音は「Cシャープ」）は、Microsoftによって開発された.N
 
 ## 前提条件 {#prerequisites}
 
--   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)ダウンロードしてください。
+-   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)をダウンロードしてください。
 -   このチュートリアルでは、 `dotnet`コマンドラインツールを使用します。または、Visual Studio Code IDE を使用して C# コードを操作することもできます。
 -   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB セルフマネージドクラスターを使用できます。
 
 ## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 
-`console`テンプレートを使用して新しいプロジェクトを作成します。これにより、 `tidb_cs`名前の新しいディレクトリが生成されます。以下のコマンドを実行する前に、このディレクトリを作成する場所に移動するか、フルパスを指定してください。
+`console`テンプレートを使用して新しいプロジェクトを作成します。これにより、 `tidb_cs`という名前の新しいディレクトリが生成されます。以下のコマンドを実行する前に、このディレクトリを作成する場所に移動するか、フルパスを指定してください。
 
     $ dotnet new console -o tidb_cs
     The template "Console App" was created successfully.
@@ -95,17 +96,17 @@ public class Tutorial1
 
 指定されたIPとポート上のTiDBインスタンスに接続します。TiDB TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)に記載されている詳細情報に置き換えてください。
 
-コードはデータベースに接続し、そのバージョンを出力、次に[`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にこの結果を出力。
+コードはデータベースに接続し、そのバージョンを出力、次に[`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にこの結果を出力。
 
 ## ステップ4. プログラムを実行する {#step-4-run-the-program}
 
     $ dotnet run
     Connecting to TiDB...
 
-    Connected to: 8.0.11-TiDB-v8.5.3
+    Connected to: 8.0.11-TiDB-v8.5.5
 
     Version details:
-    Release Version: v8.5.3
+    Release Version: v8.5.5
     Edition: Community
     Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
     Git Branch: HEAD

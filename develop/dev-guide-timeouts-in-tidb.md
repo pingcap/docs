@@ -1,6 +1,7 @@
 ---
 title: Timeouts in TiDB
 summary: TiDB のタイムアウトとエラーのトラブルシューティングの解決策について学習します。
+aliases: ['/tidb/stable/dev-guide-timeouts-in-tidb/','/tidb/dev/dev-guide-timeouts-in-tidb/','/tidbcloud/dev-guide-timeouts-in-tidb/']
 ---
 
 # TiDBのタイムアウト {#timeouts-in-tidb}
@@ -26,8 +27,6 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 
 システム変数の設定はグローバルかつ即座に反映されます。値を増やすと既存のスナップショットの有効期間が延長され、値を減らすとすべてのスナップショットの有効期間が即座に短縮されます。MVCCのバージョンが多すぎると、TiDBクラスタのパフォーマンスに影響します。そのため、この変数は適切なタイミングで以前の設定に戻す必要があります。
 
-<CustomContent platform="tidb">
-
 > **ヒント：**
 >
 > 具体的には、 Dumplingが TiDB (1 TB 未満) からデータをエクスポートする際に、TiDB のバージョンが v4.0.0 以降であり、 Dumpling がTiDB クラスターの PD アドレスと[`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)テーブルにアクセスできる場合、 Dumpling はGC セーフ ポイントを自動的に調整して、元のクラスターに影響を与えずに GC をブロックします。
@@ -40,25 +39,6 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 > このようなシナリオでは、エクスポート プロセス中の GC によるエクスポートの失敗を回避するために、事前に GC 時間を手動で延長する必要があります。
 >
 > 詳細については[TiDB GC時間を手動で設定する](/dumpling-overview.md#manually-set-the-tidb-gc-time)参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **ヒント：**
->
-> 具体的には、 Dumpling がTiDB (1 TB 未満) からデータをエクスポートするときに、TiDB のバージョンが v4.0.0 以上であり、 Dumpling がTiDB クラスターの PD アドレスにアクセスできる場合、 Dumpling は元のクラスターに影響を与えずに GC 時間を自動的に延長します。
->
-> ただし、次のいずれかのシナリオでは、 Dumpling はGC 時間を自動的に調整できません。
->
-> -   データサイズが非常に大きい（1 TB 以上）。
-> -   Dumpling はPD に直接接続できません。たとえば、 TiDB クラスターはTiDB Cloud上、またはDumplingとは分離された Kubernetes 上にあります。
->
-> このようなシナリオでは、エクスポート プロセス中の GC によるエクスポートの失敗を回避するために、事前に GC 時間を手動で延長する必要があります。
->
-> 詳細については[TiDB GC時間を手動で設定する](https://docs.pingcap.com/tidb/stable/dumpling-overview#manually-set-the-tidb-gc-time)参照してください。
-
-</CustomContent>
 
 GC の詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。
 
@@ -76,25 +56,11 @@ TiDB には、単一の SQL 文の実行時間を制限するシステム変数�
 
 ## JDBCクエリタイムアウト {#jdbc-query-timeout}
 
-<CustomContent platform="tidb">
-
 v6.1.0 以降では、 [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)構成項目がデフォルト値`true`に設定されている場合、MySQL JDBC によって提供される`setQueryTimeout()`メソッドを使用してクエリ タイムアウトを制御できます。
 
 > **注記：**
 >
 > TiDBのバージョンがv6.1.0より前の場合、または[`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) `false`に設定されている場合、 `setQueryTimeout()` TiDBでは機能しません。これは、クライアントがクエリタイムアウトを検出すると、データベースに`KILL`コマンドを送信するためです。ただし、TiDBサービスは負荷分散されているため、間違ったTiDBノードで接続が切断されるのを防ぐため、 `KILL`コマンドは実行されません。このような場合は、 `max_execution_time`を使用してクエリタイムアウトを制御できます。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-v6.1.0 以降では、 [`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#enable-global-kill-new-in-v610)構成項目がデフォルト値`true`に設定されている場合、MySQL JDBC によって提供される`setQueryTimeout()`メソッドを使用してクエリ タイムアウトを制御できます。
-
-> **注記：**
->
-> TiDBのバージョンがv6.1.0より前の場合、または[`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#enable-global-kill-new-in-v610) `false`に設定されている場合、 `setQueryTimeout()` TiDBでは機能しません。これは、クライアントがクエリタイムアウトを検出すると、データベースに`KILL`コマンドを送信するためです。ただし、TiDBサービスは負荷分散されているため、間違ったTiDBノードで接続が切断されるのを防ぐため、 `KILL`コマンドは実行されません。このような場合は、 `max_execution_time`を使用してクエリタイムアウトを制御できます。
-
-</CustomContent>
 
 TiDB は、次の MySQL 互換のタイムアウト制御パラメータを提供します。
 
@@ -109,14 +75,6 @@ TiDB は、次の MySQL 互換のタイムアウト制御パラメータを提�
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

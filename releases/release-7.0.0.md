@@ -23,7 +23,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     v7.0.0より前のTiFlashは、storageとコンピューティングを組み合わせたアーキテクチャのみをサポートしています。このアーキテクチャでは、各TiFlashノードはstorageとコンピューティングノードの両方として機能し、コンピューティング機能とstorage機能を個別に拡張することはできません。また、 TiFlashノードはローカルstorageのみを使用できます。
 
-    v7.0.0 以降、 TiFlash は分散storageおよびコンピューティングアーキテクチャもサポートします。このアーキテクチャでは、 TiFlashノードは 2 種類（コンピューティングノードと書き込みノード）に分かれており、S3 API と互換性のあるオブジェクトstorageをサポートします。どちらの種類のノードも、コンピューティング容量またはstorage容量に合わせて個別に拡張できます。**分散storageおよびコンピューティングアーキテクチャと**、**結合storageおよびコンピューティングアーキテクチャは**、同じクラスター内で使用したり、相互に変換したりすることはできません。TiFlashをデプロイする際に、使用するアーキテクチャを設定できます。
+    v7.0.0 以降、 TiFlash は分散storageおよびコンピューティングアーキテクチャもサポートします。このアーキテクチャでは、 TiFlashノードは 2 種類（コンピューティングノードと書き込みノード）に分かれており、S3 API と互換性のあるオブジェクトstorageをサポートします。どちらの種類のノードも、コンピューティング容量またはstorage容量に合わせて個別に拡張できます。**分散storageおよびコンピューティングアーキテクチャ**と、**結合storageおよびコンピューティングアーキテクチャは**、同じクラスター内で使用したり、相互に変換したりすることはできません。TiFlashをデプロイする際に、使用するアーキテクチャを設定できます。
 
     詳細については[ドキュメント](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
 
@@ -35,19 +35,19 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB v7.0.0以降、Fast Online DDLとPITRは完全に互換性があります。PITRを介してクラスターデータをリストアする場合、ログバックアップ中にFast Online DDLによって追加されたインデックス操作は、互換性を確保するために自動的に再生されます。
 
-    詳細については[ドキュメント](/ddl-introduction.md)参照してください。
+    詳細については[ドキュメント](/best-practices/ddl-introduction.md)参照してください。
 
--   TiFlashは、null対応セミ結合演算子とnull対応アンチセミ結合演算子[＃6674](https://github.com/pingcap/tiflash/issues/6674) @ [ゲンリチ](https://github.com/gengliqi)をサポートしています。
+-   TiFlashは、null対応セミ結合演算子とnull対応アンチセミ結合演算子[＃6674](https://github.com/pingcap/tiflash/issues/6674) @ [ゲンリキ](https://github.com/gengliqi)をサポートしています。
 
-    相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらをセミ結合またはアンチセミ結合に変換することで計算パフォーマンスを最適化します。結合キー列が`NULL`なる可能性がある場合は、 [Null対応セミ結合](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[Null 認識アンチセミ結合](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの null を認識する結合アルゴリズムが必要です。
+    相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらをセミ結合またはアンチセミ結合に変換することで計算パフォーマンスを最適化します。結合キー列が`NULL`になる可能性がある場合は、 [Null対応セミ結合](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[Null 認識アンチセミ結合](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの null を認識する結合アルゴリズムが必要です。
 
-    バージョン7.0.0より前のTiFlash、null対応セミ結合演算子とnull対応アンチセミ結合演算子をサポートしていないため、これらのサブクエリをTiFlashに直接プッシュダウンすることはできませんでした。バージョン7.0.0以降、 TiFlashはnull対応セミ結合演算子とnull対応アンチセミ結合演算子をサポートします。SQL文にこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)有効になっている場合、オプティマイザーはnull対応セミ結合演算子とnull対応アンチセミ結合演算子をTiFlashにプッシュダウンするかどうかを自動的に判断し、全体的なパフォーマンスを向上させます。
+    バージョン7.0.0より前のTiFlashでは、null対応セミ結合演算子とnull対応アンチセミ結合演算子をサポートしていないため、これらのサブクエリをTiFlashに直接プッシュダウンすることはできませんでした。バージョン7.0.0以降、 TiFlashはnull対応セミ結合演算子とnull対応アンチセミ結合演算子をサポートします。SQL文にこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)有効になっている場合、オプティマイザーはnull対応セミ結合演算子とnull対応アンチセミ結合演算子をTiFlashにプッシュダウンするかどうかを自動的に判断し、全体的なパフォーマンスを向上させます。
 
     詳細については[ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)参照してください。
 
 -   TiFlashはFastScan（GA） [＃5252](https://github.com/pingcap/tiflash/issues/5252) @ [ホンユニャン](https://github.com/hongyunyan)の使用をサポートします
 
-    TiFlash v6.3.0以降、FastScanは実験的機能として導入されました。v7.0.0では、この機能が一般公開されます。FastScanはシステム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)使用して有効化できます。この機能は、強力な一貫性を犠牲にすることで、テーブルスキャンのパフォーマンスを大幅に向上させます。対応するテーブルで`UPDATE` `DELETE`操作が含まれず、 `INSERT`操作のみが含まれる場合、FastScanは強力な一貫性を維持し、スキャンパフォーマンスを向上させることができます。
+    TiFlash v6.3.0以降、FastScanは実験的機能として導入されました。v7.0.0では、この機能が一般公開されます。FastScanはシステム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して有効化できます。この機能は、強力な一貫性を犠牲にすることで、テーブルスキャンのパフォーマンスを大幅に向上させます。対応するテーブルで`UPDATE` `DELETE`操作が含まれず、 `INSERT`操作のみが含まれる場合、FastScanは強力な一貫性を維持し、スキャンパフォーマンスを向上させることができます。
 
     詳細については[ドキュメント](/tiflash/use-fastscan.md)参照してください。
 
@@ -55,7 +55,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     フィルタ条件（ `WHERE`節）を含む`SELECT`文を処理する際、 TiFlashはデフォルトでクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションは、フィルタ条件の一部をTableScan演算子にプッシュダウンすることをサポートする最適化手法です。つまり、 TiFlashはまずプッシュダウンされたフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングした後、これらの行の他の列データをスキャンしてさらなる計算を行います。これにより、データ処理におけるIOスキャンと計算を削減できます。
 
-    TiFlash の遅延マテリアライゼーション機能はデフォルトでは有効になっていません。システム変数`tidb_opt_enable_late_materialization` `OFF`に設定することで有効にできます。この機能を有効にすると、TiDB オプティマイザーは統計情報とフィルター条件に基づいて、プッシュダウンするフィルター条件を決定します。
+    TiFlash の遅延マテリアライゼーション機能はデフォルトでは有効になっていません。システム変数`tidb_opt_enable_late_materialization`を`OFF`に設定することで有効にできます。この機能を有効にすると、TiDB オプティマイザーは統計情報とフィルター条件に基づいて、プッシュダウンするフィルター条件を決定します。
 
     詳細については[ドキュメント](/tiflash/tiflash-late-materialization.md)参照してください。
 
@@ -63,7 +63,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     実行プランキャッシュは同時実行OLTPの負荷容量向上に重要であり、TiDBはすでに[準備された実行プランのキャッシュ](/sql-prepared-plan-cache.md)サポートしています。v7.0.0では、TiDBは非Prepareステートメントの実行プランもキャッシュできるようになり、実行プランキャッシュの範囲が拡大され、TiDBの同時処理容量が向上しました。
 
-    この機能はデフォルトで無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性を考慮し、TiDB v7.0.0 では、準備されていない実行プランをキャッシュするための新しい領域が割り当てられており、キャッシュサイズはシステム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)使用して設定できます。また、この機能にはSQL文に対する一定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)参照してください。
+    この機能はデフォルトで無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性を考慮し、TiDB v7.0.0 では、準備されていない実行プランをキャッシュするための新しい領域が割り当てられており、キャッシュサイズはシステム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用して設定できます。また、この機能にはSQL文に対する一定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)参照してください。
 
     詳細については[ドキュメント](/sql-non-prepared-plan-cache.md)参照してください。
 
@@ -73,9 +73,9 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     詳細については[ドキュメント](/sql-prepared-plan-cache.md)参照してください。
 
--   TiKVは、ログリサイクル[＃14371](https://github.com/tikv/tikv/issues/14371) @ [LykxSassinator](https://github.com/LykxSassinator)の空のログファイルの自動生成をサポートします。
+-   TiKVは、ログリサイクル[＃14371](https://github.com/tikv/tikv/issues/14371) @ [LykxSassinator](https://github.com/LykxSassinator)用の空のログファイルの自動生成をサポートします。
 
-    TiKV v6.3.0では、書き込み負荷によるロングテールレイテンシーを削減する機能[Raft丸太のリサイクル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)導入されました。しかし、ログリサイクルはRaftログファイルの数が一定の閾値に達した場合にのみ有効になるため、ユーザーがこの機能によるスループットの向上を直接体験することは困難です。
+    TiKV v6.3.0では、書き込み負荷によるロングテールレイテンシーを削減する機能[Raftのリサイクル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)導入されました。しかし、ログリサイクルはRaftログファイルの数が一定の閾値に達した場合にのみ有効になるため、ユーザーがこの機能によるスループットの向上を直接体験することは困難です。
 
     バージョン7.0.0では、ユーザーエクスペリエンスを向上させるために、新しい設定項目「 `raft-engine.prefill-for-recycle`が導入されました。この設定項目は、プロセス開始時にリサイクル用の空のログファイルを生成するかどうかを制御します。この設定を有効にすると、TiKVは初期化中に空のログファイルを自動的にバッチ処理し、初期化直後にログのリサイクルが有効になります。
 
@@ -91,7 +91,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB v6.5.0は、Fast Online DDLによる通常のセカンダリインデックスの作成をサポートします。TiDB v7.0.0は、Fast Online DDLによるユニークインデックスの作成をサポートします。v6.1.0と比較して、大規模テーブルへのユニークインデックスの追加は、パフォーマンスの向上により数倍高速化されると予想されます。
 
-    詳細については[ドキュメント](/ddl-introduction.md)参照してください。
+    詳細については[ドキュメント](/best-practices/ddl-introduction.md)参照してください。
 
 ### 信頼性 {#reliability}
 
@@ -107,8 +107,8 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     リソース グループは次のように使用できます。
 
-    -   ユーザーレベル。1または[`CREATE USER`](/sql-statements/sql-statement-create-user.md) [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。リソースグループをユーザーにバインドすると、ユーザーが新たに作成したセッションは、対応するリソースグループに自動的にバインドされます。
-    -   セッションレベル。1 を介して現在の[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)で使用されるリソースグループを設定します。
+    -   ユーザーレベル。1 または[`CREATE USER`](/sql-statements/sql-statement-create-user.md) [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。リソースグループをユーザーにバインドすると、そのユーザーが新たに作成したセッションは、対応するリソースグループに自動的にバインドされます。
+    -   セッションレベル[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を介して現在のセッションで使用されるリソースグループを設定します。
     -   ステートメントレベル[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を介して現在のステートメントで使用されるリソースグループを設定します。
 
     詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)参照してください。
@@ -117,13 +117,13 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB v7.0.0では、 [高速オンラインDDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)にチェックポイント機構が導入され、フォールトトレランスと自動リカバリ機能が大幅に向上しました。DDLの進行状況を定期的に記録・同期することで、TiDB DDLオーナーの障害発生時や切り替え時でも、実行中のDDL操作を高速オンラインDDLモードで継続実行できます。これにより、DDLの実行がより安定し、効率的になります。
 
-    詳細については[ドキュメント](/ddl-introduction.md)参照してください。
+    詳細については[ドキュメント](/best-practices/ddl-introduction.md)参照してください。
 
 -   TiFlashはディスク[＃6528](https://github.com/pingcap/tiflash/issues/6528) @ [ウィンドトーカー](https://github.com/windtalker)へのスピルをサポート
 
     実行パフォーマンスを向上させるため、 TiFlashは可能な限りデータ全体をメモリ内で実行します。データ量がメモリの総容量を超えると、メモリ不足によるシステムクラッシュを回避するため、 TiFlashはクエリを終了します。そのため、 TiFlashが処理できるデータ量は、利用可能なメモリによって制限されます。
 
-    TiFlash v7.0.0以降、ディスクへの書き込みがサポートされます。演算子（ [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) ）のメモリ使用量のしきい値を調整することで、演算子が使用できるメモリの最大量を制御できます。演算子が使用するメモリがしきい値を超えると、自動的にデータがディスクに書き込まれます。これによりパフォーマンスは多少犠牲[`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)ますが、より多くのデータを処理できるようになります。
+    TiFlash v7.0.0以降、ディスクへの書き込みがサポートされます。演算子（ [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700) [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)のメモリ使用量のしきい値を調整することで、演算子が使用できるメモリの最大量を制御できます。演算子が使用するメモリがしきい値を超えると、自動的にデータ[`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)ディスクに書き込まれます。これによりパフォーマンスは多少犠牲になりますが、より多くのデータを処理できるようになります。
 
     詳細については[ドキュメント](/tiflash/tiflash-spill-disk.md)参照してください。
 
@@ -146,7 +146,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   オプティマイザヒントは結合方法と結合順序の指定をサポートします[＃36600](https://github.com/pingcap/tidb/issues/36600) @ [思い出させる](https://github.com/Reminiscent)
 
-    バージョン7.0.0では、オプティマイザヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)結合方法に影響を与えるヒントと組み合わせて使用でき、それらの動作は互換性があります。複数テーブルの結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行プランに対するオプティマイザヒントの制御が強化されます。
+    バージョン7.0.0では、オプティマイザヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)結合方法に影響を与えるヒントと組み合わせて使用​​でき、それらの動作は互換性があります。複数テーブルの結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行プランに対するオプティマイザヒントの制御が強化されます。
 
     新しいヒントの動作には若干の変更があります。前方互換性を確保するため、TiDB ではシステム変数[`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)が導入されています。この変数を`OFF`に設定すると、オプティマイザーヒントの動作は以前のバージョンと互換性があります。クラスターを以前のバージョンから v7.0.0 以降にアップグレードすると、この変数は`OFF`に設定されます。より柔軟なヒント動作を得るには、動作によってパフォーマンスの低下が発生しないことを確認した上で、この変数を`ON`に設定することを強くお勧めします。
 
@@ -156,7 +156,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   `prefer-leader`オプションをサポートすることで、読み取り操作の可用性が向上し、不安定なネットワーク状況での応答レイテンシーが短縮されます[＃40905](https://github.com/pingcap/tidb/issues/40905) @ [リクックスサシネーター](https://github.com/LykxSassinator)
 
-    TiDBのデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)介して制御できます。バージョン7.0.0では、この変数に`prefer-leader`オプションが追加されました。変数を`prefer-leader`に設定すると、TiDBはリーダーレプリカを優先的に選択して読み取り操作を実行します。ディスクやネットワークのパフォーマンス変動などにより、リーダーレプリカの処理速度が大幅に低下した場合、TiDBは利用可能な他のフォロワーレプリカを選択して読み取り操作を実行するため、可用性が向上し、応答レイテンシーが短縮されます。
+    TiDBのデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を介して制御できます。バージョン7.0.0では、この変数に`prefer-leader`オプションが追加されました。変数を`prefer-leader`に設定すると、TiDBはリーダーレプリカを優先的に選択して読み取り操作を実行します。ディスクやネットワークのパフォーマンス変動などにより、リーダーレプリカの処理速度が大幅に低下した場合、TiDBは利用可能な他のフォロワーレプリカを選択して読み取り操作を実行するため、可用性が向上し、応答レイテンシーが短縮されます。
 
     詳細については[ドキュメント](/develop/dev-guide-use-follower-read.md)参照してください。
 
@@ -201,7 +201,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
     -   外部キー タブを表示または非表示にするために TiDB バージョンの識別をサポートします。
     -   `EXPLAIN`結果で SQL 実行プランの視覚化をサポートします。
     -   `PESSIMISTIC` 、 `OPTIMISTIC` 、 `AUTO_RANDOM` 、 `PLACEMENT` 、 `POLICY` 、 `REORGANIZE` 、 `EXCHANGE` 、 `CACHE` 、 `NONCLUSTERED` 、 `CLUSTERED`などの TiDB キーワードの強調表示をサポートします。
-    -   `TIDB_BOUNDED_STALENESS` `TIDB_PARSE_TSO`の`TIDB_VERSION`関数の`TIDB_DECODE_PLAN`表示`TIDB_DECODE_KEY`サポート`TIDB_DECODE_SQL_DIGESTS` `TIDB_SHARD` `TIDB_IS_DDL_OWNER`
+    -   `TIDB_BOUNDED_STALENESS`など`TIDB_IS_DDL_OWNER` `TIDB_VERSION`関数の`TIDB_DECODE_KEY`表示`TIDB_DECODE_PLAN` `TIDB_DECODE_SQL_DIGESTS` `TIDB_PARSE_TSO`ます`TIDB_SHARD`
 
     詳細については[DBeaver ドキュメント](https://github.com/dbeaver/dbeaver/wiki)参照してください。
 
@@ -263,7 +263,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
     store_id INT) PARTITION BY KEY(store_id) PARTITIONS 4;
     ```
 
-    TiDBはv7.0.0以降、キーパーティションをサポートし、MySQL `PARTITION BY LINEAR KEY`構文を解析できます。ただし、TiDBは`LINEAR`キーワードを無視し、代わりに非線形ハッシュアルゴリズムを使用します。現在、パーティションタイプ`KEY`では、パーティション列リストが空であるパーティションステートメントはサポートされていません。
+    TiDBはv7.0.0以降、キーパーティションをサポートし、MySQL `PARTITION BY LINEAR KEY`構文を解析できます。ただし、TiDBは`LINEAR`キーワードを無視し、代わりに非線形ハッシュアルゴリズムを使用します。現在、パーティションタイプ`KEY`では、パーティション列リストが空であるパー​​ティションステートメントはサポートされていません。
 
     詳細については[ドキュメント](/partitioned-table.md#key-partitioning)参照してください。
 
@@ -289,13 +289,13 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 | [`tidb_enable_plan_cache_for_subquery`](/system-variables.md#tidb_enable_plan_cache_for_subquery-new-in-v700)                     | 新しく追加された | この変数は、プリペアドプランキャッシュがサブクエリを含むクエリをキャッシュするかどうかを制御します。                                                                                                                                            |
 | [`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)   | 新しく追加された | この変数は、 [`PLAN REPLAYER CONTINUOUS CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-continuous-capture)機能を有効にするかどうかを制御します。デフォルト値`OFF` 、この機能を無効にすることを意味します。                                    |
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)               | 新しく追加された | この変数は、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を設定します。この変数で制御される機能は、TiDB v7.0.0では完全には機能しません。デフォルト値を変更しないでください。                                                                                             |
-| [`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)                                     | 新しく追加された | この変数は、結合方法のヒントが結合順序の最適化に影響を与えるかどうかを制御します。デフォルト値は`ON`で、新しい互換制御モードが使用されることを意味します。値`OFF` 、バージョン7.0.0より前の動作が使用されることを意味します。前方互換性のため、クラスターが以前のバージョンからバージョン7.0.0以降にアップグレードされた場合、この変数の値は`OFF`に設定されます。 |
-| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                   | 新しく追加された | この変数は、最適化ルール[ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)有効にするかどうかを制御します。デフォルト値は`OFF`で、最適化ルールは無効です。                                                                               |
+| [`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)                                     | 新しく追加された | この変数は、結合方法のヒントが結合順序の最適化に影響を与えるかどうかを制御します。デフォルト値は`ON`で、新しい互換制御モードが使用されることを意味します。値`OFF`は、バージョン7.0.0より前の動作が使用されることを意味します。前方互換性のため、クラスターが以前のバージョンからバージョン7.0.0以降にアップグレードされた場合、この変数の値は`OFF`に設定されます。 |
+| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                   | 新しく追加された | この変数は、最適化ルール[ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)を有効にするかどうかを制御します。デフォルト値は`OFF`で、最適化ルールは無効です。                                                                              |
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                   | 新しく追加された | この変数は、 [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御します。デフォルト値は`OFF`で、この機能は無効です。                                                                                    |
 | [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | 新しく追加された | この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句が含まれ、フィルタリング条件がある場合に、オプティマイザーがインデックスを選択する方法を制御します。                                                                                                     |
 | [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)                         | 新しく追加された | 単一行競合シナリオにおけるトランザクションのテールレイテンシーを削減するために、拡張悲観的ロックウェイキングモデルを有効にするかどうかを制御します。デフォルト値は`ON`です。クラスターを以前のバージョンからv7.0.0以降にアップグレードすると、この変数の値は`OFF`に設定されます。                                              |
 | [`tidb_slow_txn_log_threshold`](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)                                     | 新しく追加された | 低速トランザクションログのしきい値を設定します。トランザクションの実行時間がこのしきい値を超えると、TiDBはトランザクションに関する詳細情報をログに記録します。デフォルト値の`0` 、この機能が無効であることを意味します。                                                                              |
-| [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)                                               | 新しく追加された | この変数は、クラスター全体のTTLタスクの同時実行数を制限するために使用されます。デフォルト値の`-1` 、TTLタスクがTiKVノードの数と同じであることを意味します。                                                                                                         |
+| [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)                                               | 新しく追加された | この変数は、クラスター全体のTTLタスクの同時実行数を制限するために使用されます。デフォルト値の`-1`は、TTLタスクがTiKVノードの数と同じであることを意味します。                                                                                                         |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
@@ -334,8 +334,8 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   ティドブ
 
-    -   `EXPAND`演算子を導入して、1 つの`SELECT`ステートメントに複数の`DISTINCT`含まれる SQL クエリのパフォーマンスを最適化します[＃16581](https://github.com/pingcap/tidb/issues/16581) @ [アイリンキッド](https://github.com/AilinKid)
-    -   インデックス結合[＃40505](https://github.com/pingcap/tidb/issues/40505) @ [イーサール](https://github.com/Yisaer)より多くの SQL 形式をサポート
+    -   `EXPAND`演算子を導入して、1 つの`SELECT`ステートメントに複数の`DISTINCT`が含まれる SQL クエリのパフォーマンスを最適化します[＃16581](https://github.com/pingcap/tidb/issues/16581) @ [アイリンキッド](https://github.com/AilinKid)
+    -   インデックス結合[＃40505](https://github.com/pingcap/tidb/issues/40505) @ [イーサール](https://github.com/Yisaer)のより多くの SQL 形式をサポート
     -   TiDB でパーティションテーブルデータをグローバルにソートすることを避ける必要がある場合[＃26166](https://github.com/pingcap/tidb/issues/26166) @ [定義2014](https://github.com/Defined2014)
     -   `fair lock mode`と`lock only if exists`同時に使用してサポート[＃42068](https://github.com/pingcap/tidb/issues/42068) @ [ミョンケミンタ](https://github.com/MyonKeminta)
     -   トランザクションのスローログとトランザクション内部イベントの印刷をサポート[＃41863](https://github.com/pingcap/tidb/issues/41863) @ [エキシウム](https://github.com/ekexium)
@@ -404,7 +404,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
     -   BIGINT 以外の符号なし整数が文字列/小数点[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)と比較されたときに誤った結果を生成する可能性がある問題を修正しました
     -   メモリ制限超過により前の`ANALYZE`ステートメントを強制終了すると、同じセッション内の現在の`ANALYZE`ステートメントが[＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐淮嶼](https://github.com/XuHuaiyu)で強制終了される可能性がある問題を修正しました。
     -   バッチコプロセッサ[＃41412](https://github.com/pingcap/tidb/issues/41412) @ [あなた06](https://github.com/you06)の情報収集プロセス中にデータ競合が発生する可能性がある問題を修正しました
-    -   アサーションエラーによりパーティションテーブル[＃40629](https://github.com/pingcap/tidb/issues/40629) @ [エキシウム](https://github.com/ekexium) MVCC 情報が印刷されない問題を修正しました
+    -   アサーションエラーによりパーティションテーブル[＃40629](https://github.com/pingcap/tidb/issues/40629) @ [エキシウム](https://github.com/ekexium)の MVCC 情報が印刷されない問題を修正しました
     -   フェアロックモードで存在しないキー[＃41527](https://github.com/pingcap/tidb/issues/41527) @ [エキシウム](https://github.com/ekexium)にロックが追加される問題を修正
     -   `INSERT IGNORE`と`REPLACE`ステートメントが値[＃42121](https://github.com/pingcap/tidb/issues/42121) @ [ジグアン](https://github.com/zyguan)を変更しないキーをロックしない問題を修正しました
 
@@ -418,7 +418,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 -   TiFlash
 
     -   特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @ [リトルフォール](https://github.com/LittleFall)
-    -   特定のケースで[＃6994](https://github.com/pingcap/tiflash/issues/6994) @ [ウィンドトーカー](https://github.com/windtalker) 10 進キャストが誤って切り上げられる問題を修正しました
+    -   特定のケースで[＃6994](https://github.com/pingcap/tiflash/issues/6994) @ [ウィンドトーカー](https://github.com/windtalker)の 10 進キャストが誤って切り上げられる問題を修正しました
     -   新しい照合順序[＃6807](https://github.com/pingcap/tiflash/issues/6807) @ [xzhangxian1008](https://github.com/xzhangxian1008)を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました
     -   単一のTiFlashノード[＃6993](https://github.com/pingcap/tiflash/issues/6993) @ [ウィンドトーカー](https://github.com/windtalker)で 1,200 万行を超える結果セットを集計するときにTiFlash がエラーを報告する問題を修正しました。
 
@@ -455,7 +455,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 TiDB コミュニティの以下の貢献者に感謝いたします。
 
--   [反トップクォーク](https://github.com/AntiTopQuark)
+-   [アンチトップクォーク](https://github.com/AntiTopQuark)
 -   [ブラックティア23](https://github.com/blacktear23)
 -   [生まれ変わった人](https://github.com/BornChanger)
 -   [ドゥーシル9](https://github.com/Dousir9)

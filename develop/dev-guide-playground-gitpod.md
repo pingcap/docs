@@ -1,6 +1,7 @@
 ---
 title: Gitpod
 summary: Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
+aliases: ['/tidb/stable/dev-guide-playground-gitpod/','/tidb/dev/dev-guide-playground-gitpod/','/tidbcloud/dev-guide-playground-gitpod/']
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -9,13 +10,13 @@ summary: Gitpodは、完全かつ自動化された、事前設定済みのク�
 
 [ギットポッド](https://www.gitpod.io/)使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
 
-Gitpodは、コードを直接操作する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
+Gitpodは、コードを直接記述する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
 
 ## クイックスタート {#quick-start}
 
-1.  TiDB アプリケーション開発用のサンプル コード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)フォークします。
+1.  TiDB アプリケーション開発用のサンプル コード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
 
-2.  ブラウザのアドレスバーでサンプル コード リポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
+2.  ブラウザのアドレスバーでサンプル コード リポジトリの URL の前に`https://gitpod.io/#`付けて、Gitpod ワークスペースを起動します。
 
     -   たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
 
@@ -27,7 +28,7 @@ Gitpodは、コードを直接操作する開発環境向けのオープンソ�
 
 [クイックスタート](#quick-start)手順を完了した後、Gitpod がワークスペースをセットアップするまでにしばらく時間がかかります。
 
-[スプリングブートウェブ](/develop/dev-guide-sample-application-java-spring-boot.md)のアプリケーションを例に挙げると、 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java`のURLで新しいワークスペースを作成できます。
+[スプリングブートウェブ](/develop/dev-guide-sample-application-java-spring-boot.md)アプリケーションを例に挙げると、 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URLで新しいワークスペースを作成できます。
 
 その後、次のようなページが表示されます。
 
@@ -35,9 +36,9 @@ Gitpodは、コードを直接操作する開発環境向けのオープンソ�
 
 このページのシナリオでは、 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用してTiDB Playgroundを構築します。ターミナル領域の左側で進行状況を確認できます。
 
-TiDB Playground の準備が完了すると、さらに`Spring JPA Hibernate`タスクが実行されます。ターミナル領域の右側で進行状況を確認できます。
+TiDB Playground の準備が完了すると、さらに`Spring JPA Hibernate`タスクが実行されます。進行状況はターミナル領域の右側で確認できます。
 
-これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーションペインの`REMOTE EXPLORER`領域（GitpodはURLベースのポート転送をサポートしています）を確認し、ポート`8080`のURLを見つけます。
+これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーションペインの`REMOTE EXPLORER`領域（Gitpod は URL ベースのポート転送をサポートしています）を確認し、ポート`8080`の URL を見つけます。
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 
@@ -93,11 +94,11 @@ ports:
 
 ### Gitpod Dockerイメージをカスタマイズする {#customize-gitpod-docker-images}
 
-Gitpod はデフォルトで、Workspace-Full という標準 Docker イメージをワークスペースのベースとして使用します。このデフォルトイメージから起動されたワークスペースには、Docker、Go、 Java、Node.js、C/C++、Python、Ruby、Rust、PHP、そしてHomebrew、Tailscale、Nginx などのツールがプリインストールされています。
+デフォルトでは、Gitpod は Workspace-Full という標準 Docker イメージをワークスペースのベースとして使用します。このデフォルトイメージから起動されたワークスペースには、Docker、Go、 Java、Node.js、C/C++、Python、Ruby、Rust、PHP、そしてHomebrew、Tailscale、Nginx などのツールがプリインストールされています。
 
 パブリック Docker イメージまたは Dockerfile を使用し、プロジェクトに必要な依存関係をインストールすることもできます。
 
-たとえば、次のように Dockerfile ( [`.gitpod.Dockerfile`例](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)も参照) を使用できます。
+たとえば、次のように Dockerfile ( [`.gitpod.Dockerfile`の例](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)も参照) を使用できます。
 
 ```dockerfile
 FROM gitpod/workspace-java-17
@@ -169,14 +170,6 @@ Gitpodは、完全かつ自動化された、事前設定済みのクラウド�
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

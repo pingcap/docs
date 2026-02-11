@@ -1,6 +1,7 @@
 ---
 title: Handle Transaction Errors
-summary: デッドロックやアプリケーションの再試行エラーなどのトランザクション エラーを処理する方法について学習します。
+summary: デッドロックやアプリケーション再試行エラーなどのトランザクション エラーを処理する方法について学習します。
+aliases: ['/tidb/stable/dev-guide-transaction-troubleshoot/','/tidb/dev/dev-guide-transaction-troubleshoot/','/tidbcloud/dev-guide-transaction-troubleshoot/']
 ---
 
 # トランザクションエラーの処理 {#handle-transaction-errors}
@@ -15,7 +16,7 @@ summary: デッドロックやアプリケーションの再試行エラーな�
 ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 ```
 
-デッドロックは、2 つ以上のトランザクションが、それぞれが保持しているロックを解放するのを待機している場合、またはロックの順序が一貫していないためにロック リソースを待機するループが発生している場合に発生します。
+デッドロックは、2 つ以上のトランザクションが、それぞれが保持しているロックを解放するのを待機している場合、またはロックの順序に一貫性がないため、ロック リソースを待機するループが発生している場合に発生します。
 
 以下は、データベース[`bookshop`](/develop/dev-guide-bookshop-schema-design.md)のテーブル`books`を使用したデッドロックの例です。
 
@@ -31,7 +32,7 @@ TiDB悲観的トランザクション モードでは、2 つのクライアン�
 | --------------------------------------------------------- | ------------------------------------------------------------- |
 | 始める;                                                      |                                                               |
 |                                                           | 始める;                                                          |
-| 本を更新します。set stock=stock-1 WHERE id=1;                     |                                                               |
+| 本を更新します。SET stock=stock-1 WHERE id=1;                     |                                                               |
 |                                                           | 本を更新します。set stock=stock-1 WHERE id=2;                         |
 | UPDATE books SET stock=stock-1 WHERE id=2; -- 実行はブロックされます |                                                               |
 |                                                           | UPDATE books SET stock=stock-1 WHERE id=1; -- デッドロックエラーが発生します |
@@ -40,13 +41,13 @@ TiDB悲観的トランザクション モードでは、2 つのクライアン�
 
 ### 解決策1: デッドロックを回避する {#solution-1-avoid-deadlocks}
 
-パフォーマンスを向上させるには、ビジネスロジックまたはスキーマ設計を調整することで、アプリケーションレベルでデッドロックを回避できます。上記の例では、クライアントBもクライアントAと同じ更新順序、つまり最初に書籍`id=1`を更新し、次に書籍番号`id=2`を更新すると、デッドロックを回避できます。
+パフォーマンスを向上させるには、ビジネスロジックまたはスキーマ設計を調整することで、アプリケーションレベルでデッドロックを回避できます。上記の例では、クライアントBもクライアントAと同じ更新順序、つまり最初に書籍を`id=1`で更新し、次に書籍を`id=2`で更新するとします。これにより、デッドロックを回避できます。
 
 | クライアントA                               | クライアントB                                                |
 | ------------------------------------- | ------------------------------------------------------ |
 | 始める;                                  |                                                        |
 |                                       | 始める;                                                   |
-| 本を更新します。set stock=stock-1 WHERE id=1; |                                                        |
+| 本を更新します。SET stock=stock-1 WHERE id=1; |                                                        |
 |                                       | UPDATE books SET stock=stock-1 WHERE id=1; -- ブロックされます |
 | 本を更新します。set stock=stock-1 WHERE id=2; |                                                        |
 | 専念;                                   |                                                        |
@@ -65,7 +66,7 @@ UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
 
 ### 解決策3:楽観的トランザクションを使用する {#solution-3-use-optimistic-transactions}
 
-楽観的トランザクションモデルではデッドロックは発生しません。ただし、アプリケーションでは、障害発生時に備えて楽観的トランザクションの再試行ロジックを追加する必要があります。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)参照してください。
+楽観的トランザクションモデルではデッドロックは発生しません。ただし、アプリケーションでは、障害発生時に備えて楽観的トランザクションの再試行ロジックを追加する必要があります。詳細は[アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)参照してください。
 
 ### 解決策4: 再試行 {#solution-4-retry}
 
@@ -79,7 +80,7 @@ TiDBはMySQLと可能な限り互換性がありますが、分散システム�
 
 MySQL などの従来のデータベースとは異なり、TiDB では、楽観的トランザクション モデルを使用してコミットの失敗を回避する場合、アプリケーションで関連する例外を処理するメカニズムを追加する必要があります。
 
-以下のPython擬似コードは、アプリケーションレベルの再試行を実装する方法を示しています。ドライバやORMに高度な再試行ロジックを実装する必要はありません。あらゆるプログラミング言語や環境で使用できます。
+以下のPython擬似コードは、アプリケーションレベルの再試行を実装する方法を示しています。ドライバーやORMに高度な再試行ロジックを実装する必要はありません。あらゆるプログラミング言語や環境で使用できます。
 
 再試行ロジックは次のルールに従う必要があります。
 
@@ -88,20 +89,10 @@ MySQL などの従来のデータベースとは異なり、TiDB では、楽観
     -   `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
     -   `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
     -   `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブル スキーマが変更され、トランザクションのコミットでエラーが発生しました。
-    -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードの使用時に、複数のトランザクションが同じデータ行を変更することによって発生します。
--   try ブロックの最後にトランザクションを`COMMIT` 。
-
-<CustomContent platform="tidb">
+    -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
+-   try ブロックの最後にあるトランザクションを`COMMIT` 。
 
 エラー コードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-エラー コードの詳細については、 [エラーコードとトラブルシューティング](https://docs.pingcap.com/tidb/stable/error-codes)参照してください。
-
-</CustomContent>
 
 ```python
 while True:
@@ -129,42 +120,14 @@ while True:
 >
 > `Error 9007: Write conflict`頻繁に発生する場合は、スキーマ設計とワークロードのデータ アクセス パターンを確認して競合の根本原因を特定し、設計を改善して競合を回避する必要があります。
 
-<CustomContent platform="tidb">
-
-トランザクションの競合のトラブルシューティングと解決方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-トランザクションの競合のトラブルシューティングと解決方法については、 [ロックの競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)参照してください。
-
-</CustomContent>
+トランザクションの競合のトラブルシューティングと解決方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
 
 ## 参照 {#see-also}
 
-<CustomContent platform="tidb">
-
 -   [楽観的トランザクションにおける書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [楽観的トランザクションにおける書き込み競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
-
-</CustomContent>
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

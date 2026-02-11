@@ -17,21 +17,21 @@ summary: TiDB に関する用語集。
 
 ### ACID {#acid}
 
-ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、独立性、そして永続性を指します。これらの特性についてそれぞれ以下で説明します。
+ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、独立性、そして永続性を指します。これらの特性については、以下でそれぞれ説明します。
 
--   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDBは、トランザクションの原子性を実現するために、主キーを格納する[リージョン](#regionpeerraft-group)の要素の原子性を保証します。
+-   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDBは、トランザクションの原子性を実現するために、主キーを格納する[リージョン](#regionpeerraft-group)のキーの原子性を保証します。
 
--   **一貫性と**は、トランザクションがデータベースを常にある一貫性のある状態から別の一貫性のある状態へと移行させることを意味します。TiDBでは、データをメモリに書き込む前にデータの一貫性が確保されます。
+-   **一貫性と**は、トランザクションが常にデータベースをある一貫性のある状態から別の一貫性のある状態へと移行させることを意味します。TiDBでは、データをメモリに書き込む前にデータの一貫性が確保されます。
 
 -   **分離と**は、処理中のトランザクションが完了するまで他のトランザクションから参照できないことを意味します。これにより、同時実行中のトランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。詳細については、 [TiDB トランザクション分離レベル](/transaction-isolation-levels.md#tidb-transaction-isolation-levels)参照してください。
 
--   **耐久性と**は、トランザクションが一度コミットされると、システム障害が発生してもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して耐久性を確保します。
+-   **耐久性**とは、トランザクションが一度コミットされると、システム障害が発生してもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して耐久性を確保します。
 
 ## B {#b}
 
 ### バックアップと復元 (BR) {#backup-x26-restore-br}
 
-BRはTiDBのバックアップおよびリストアツールです。詳細については[BRの概要](/br/backup-and-restore-overview.md)参照してください。
+BRはTiDBのバックアップおよび復元ツールです。詳細については[BRの概要](/br/backup-and-restore-overview.md)参照してください。
 
 `br`は、TiDB でのバックアップまたは復元に使用される[br コマンドラインツール](/br/use-br-command-line-tool.md)です。
 
@@ -45,7 +45,7 @@ BRはTiDBのバックアップおよびリストアツールです。詳細に�
 
 ### バケツ {#bucket}
 
-[リージョン](#regionpeerraft-group)論理的にバケットと呼ばれる複数の小さな範囲に分割されます。TiKVはバケットごとにクエリ統計情報を収集し、バケットのステータスをPDに報告します。詳細については、 [バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)参照してください。
+[リージョン](#regionpeerraft-group)は論理的にバケットと呼ばれる複数の小さな範囲に分割されます。TiKV はバケットごとにクエリ統計を収集し、バケットのステータスを PD に報告します。詳細については、 [バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
 
 ## C {#c}
 
@@ -61,7 +61,7 @@ TiDB データベースの分散アーキテクチャでは、次のようにな
 
 -   TiDB ノードは、クライアントとのやり取りにスケーラブルな SQLレイヤーを提供します。
 -   PD ノードは、TiDB に回復力のあるメタデータレイヤーを提供します。
--   TiKV ノードは、 Raftプロトコルを使用して、TiDB に可用性が高く、スケーラブルで、復元力のあるstorageを提供します。
+-   TiKV ノードは、 Raftプロトコルを使用して、TiDB に可用性、スケーラビリティ、および復元力に優れたstorageを提供します。
 
 詳細については[TiDBアーキテクチャ](/tidb-architecture.md)参照してください。
 
@@ -79,11 +79,11 @@ RocksDB および TiKV では、カラムファミリ (CF) は、データベー
 
 ### 継続的なプロファイリング {#continuous-profiling}
 
-継続的プロファイリングは、システムコールレベルでリソースのオーバーヘッドを観測する方法です。継続的プロファイリングにより、TiDBはパフォーマンスの問題をきめ細かく観測し、運用チームがフレームグラフを用いて根本原因を特定するのに役立ちます。詳細については、 [TiDBダッシュボードインスタンスプロファイリング - 継続的なプロファイリング](/dashboard/continuous-profiling.md)ご覧ください。
+継続的プロファイリングは、システムコールレベルでリソースのオーバーヘッドを観測する方法です。継続的プロファイリングにより、TiDBはパフォーマンスの問題をきめ細かく観測し、運用チームがフレームグラフを用いて根本原因を特定するのに役立ちます。詳細については、 [TiDB ダッシュボードインスタンスプロファイリング - 継続的なプロファイリング](/dashboard/continuous-profiling.md)ご覧ください。
 
 ### コプロセッサー {#coprocessor}
 
-コプロセッサーは、TiDBと計算ワークロードを共有するコプロセッシング機構です。storageレイヤー（TiKVまたはTiFlash）に配置され、TiDBからの計算[押し下げられた](/functions-and-operators/expressions-pushed-down.md)リージョンごとに協調的に処理します。
+コプロセッサーは、TiDBと計算ワークロードを共有するコプロセッシング機構です。storageレイヤー（TiKVまたはTiFlash）に配置され、TiDBからの計算[押し下げられた](/functions-and-operators/expressions-pushed-down.md)をリージョンごとに協調的に処理します。
 
 ## D {#d}
 
@@ -95,7 +95,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 ### データ定義言語（DDL） {#data-definition-language-ddl}
 
-データ定義言語（DDL）は、SQL標準の一部であり、テーブルやその他のオブジェクトの作成、変更、削除を扱います。詳細については、 [DDLの紹介](/ddl-introduction.md)参照してください。
+データ定義言語（DDL）は、SQL標準の一部であり、テーブルやその他のオブジェクトの作成、変更、削除を扱います。詳細については、 [DDLの紹介](/best-practices/ddl-introduction.md)参照してください。
 
 ### データ移行（DM） {#data-migration-dm}
 
@@ -103,7 +103,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 ### データ変更言語 (DML) {#data-modification-language-dml}
 
-データ変更言語 (DML) は、テーブル内の行の挿入、更新、および削除を処理する SQL 標準の一部です。
+データ変更言語 (DML) は、テーブル内の行の挿入、更新、削除を処理する SQL 標準の一部です。
 
 ### 開発マイルストーンリリース（DMR） {#development-milestone-release-dmr}
 
@@ -115,7 +115,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 ### 分散実行フレームワーク (DXF) {#distributed-execution-framework-dxf}
 
-Distributed eXecution Framework（DXF）は、TiDBが特定のタスク（インデックスの作成やデータのインポートなど）を集中的にスケジュールし、分散的に実行するために使用するフレームワークです。DXFは、クラスタリソースを効率的に使用しながら、リソース使用量を制御し、コアビジネストランザクションへの影響を軽減するように設計されています。詳細については、 [DXFの紹介](/tidb-distributed-execution-framework.md)参照してください。
+Distributed eXecution Framework（DXF）は、TiDBが特定のタスク（インデックスの作成やデータのインポートなど）を集中的にスケジュールし、分散実行するために使用するフレームワークです。DXFは、クラスタリソースを効率的に使用しながら、リソース使用量を制御し、コアビジネストランザクションへの影響を軽減するように設計されています。詳細については、 [DXFの紹介](/tidb-distributed-execution-framework.md)参照してください。
 
 ### 動的剪定 {#dynamic-pruning}
 
@@ -141,7 +141,7 @@ Distributed eXecution Framework（DXF）は、TiDBが特定のタスク（イン
 
 ### グローバルトランザクション識別子（GTID） {#global-transaction-identifiers-gtids}
 
-グローバルトランザクションID (GTID) は、MySQL バイナリ ログでどのトランザクションが複製されたかを追跡するために使用される一意のトランザクション ID です。1 [データ移行（DM）](/dm/dm-overview.md) 、これらの ID を使用して一貫したレプリケーションを保証します。
+グローバルトランザクションID (GTID) は、MySQL バイナリ ログでどのトランザクションが複製されたかを追跡するために使用される一意のトランザクション ID です。1 [データ移行（DM）](/dm/dm-overview.md)これらの ID を使用して一貫したレプリケーションを保証します。
 
 ## H {#h}
 
@@ -157,7 +157,7 @@ Distributed eXecution Framework（DXF）は、TiDBが特定のタスク（イン
 
 ### インメモリ悲観ロック {#in-memory-pessimistic-lock}
 
-インメモリ悲観的ロックは、TiDB v6.0.0で導入された新機能です。この機能を有効にすると、悲観的ロックは通常、リージョンリーダーのメモリにのみ保存され、ディスクへの永続化やRaft経由の他のレプリカへの複製は行われません。この機能により、悲観的ロックの取得にかかるオーバーヘッドが大幅に削減され、悲観的トランザクションのスループットが向上します。
+インメモリ悲観的ロックは、TiDB v6.0.0で導入された新機能です。この機能を有効にすると、悲観的ロックは通常、リージョンリーダーのメモリにのみ保存され、ディスクへの永続化やRaft経由の他のレプリカへの複製は行われません。この機能により、悲観的ロック取得のオーバーヘッドが大幅に削減され、悲観的トランザクションのスループットが向上します。
 
 ### インデックスの結合 {#index-merge}
 
@@ -177,9 +177,9 @@ Distributed eXecution Framework（DXF）は、TiDBが特定のタスク（イン
 
 ### Leader/Follower/Learner {#leader-follower-learner}
 
-Leader/Follower/Learnerはそれぞれ、 [仲間](#regionpeerraft-group)のRaftグループ内の役割に対応します。リーダーはすべてのクライアントリクエストを処理し、フォロワーにデータを複製します。グループリーダーが失敗した場合、フォロワーの1人が新しいリーダーに選出されます。学習者は、レプリカの追加プロセスでのみ機能する、投票権を持たないフォロワーです。
+Leader/Follower/Learnerはそれぞれ、 [仲間](#regionpeerraft-group)のRaftグループにおける役割に対応します。リーダーはすべてのクライアントリクエストを処理し、フォロワーにデータを複製します。グループリーダーが失敗した場合、フォロワーの 1 人が新しいリーダーに選出されます。学習者は、レプリカの追加プロセスでのみ機能する、投票権を持たないフォロワーです。
 
-### 軽量ディレクトリアクセスプロトコル（LDAP） {#lightweight-directory-access-protocol-ldap}
+### 軽量ディレクトリアクセスプロトコル (LDAP) {#lightweight-directory-access-protocol-ldap}
 
 軽量ディレクトリアクセスプロトコル（LDAP）は、情報を持つディレクトリにアクセスするための標準化された方法です。アカウントやユーザーデータの管理によく使用されます。TiDBは[LDAP認証プラグイン](/security-compatibility-with-mysql.md#authentication-plugin-status)を介してLDAPをサポートしています。
 
@@ -187,21 +187,21 @@ Leader/Follower/Learnerはそれぞれ、 [仲間](#regionpeerraft-group)のRaft
 
 ロックビュー機能は、悲観的ロックにおけるロックの競合やロック待機に関する詳細情報を提供するため、DBA がトランザクションのロック状況を観察し、デッドロックの問題をトラブルシューティングするのに便利です。
 
-詳細については、システム テーブルのドキュメント[`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) 、 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) 、および[`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)参照してください。
+詳細については、システム テーブルのドキュメント[`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) 、 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) 、および[`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)を参照してください。
 
 ### 長期サポート（LTS） {#long-term-support-lts}
 
-長期サポート（LTS）とは、長期間にわたって徹底的にテストされ、メンテナンスされているソフトウェアバージョンを指します。詳細については、 [TiDB のバージョン管理](/releases/versioning.md)ご覧ください。
+長期サポート（LTS）とは、長期間にわたって徹底的にテストされ、メンテナンスされているソフトウェアバージョンを指します。詳細については、 [TiDB のバージョン管理](/releases/versioning.md)参照してください。
 
 ## M {#m}
 
 ### 超並列処理（MPP） {#massively-parallel-processing-mpp}
 
-TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）アーキテクチャが導入され、大規模な結合クエリの実行ワークロードがTiFlashノード間で共有されます。MPPモードが有効になっている場合、TiDBはコストに基づいて、MPPフレームワークを使用して計算を実行するかどうかを判断します。MPPモードでは、計算中に結合キーがExchange操作を通じて再分配されるため、各TiFlashノードへの計算負荷が分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)参照してください。
+TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）アーキテクチャが導入され、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有できるようになりました。MPPモードを有効にすると、TiDBはコストに基づいて、MPPフレームワークを使用して計算を実行するかどうかを判断します。MPPモードでは、計算中に結合キーがExchange操作を通じて再分配されるため、各TiFlashノードへの計算負荷が分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)参照してください。
 
 ### マルチバージョン同時実行制御 (MVCC) {#multi-version-concurrency-control-mvcc}
 
-[MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) 、TiDBをはじめとするデータベースにおける同時実行制御メカニズムです。トランザクションによるメモリ読み取りを処理することで、TiDBへの同時アクセスを実現し、同時読み取りと書き込みの競合によるブロッキングを回避します。
+[MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) 、TiDBをはじめとするデータベースにおける同時実行制御メカニズムです。トランザクションによるメモリ読み取りを処理し、TiDBへの同時アクセスを実現することで、同時読み取りと書き込みの競合によるブロッキングを回避します。
 
 ## お {#o}
 
@@ -223,7 +223,7 @@ TiCDC が出力する増分変更ログ内の「元の値」。TiCDC が出力�
 
 ### オペレーター {#operator}
 
-オペレーターは、スケジュール設定のためにリージョンに適用されるアクションの集合です。オペレーターは、「リージョン2 のリーダーをストア 5 に移行する」や「リージョン2 のレプリカをストア 1、4、5 に移行する」といったスケジュール設定タスクを実行します。
+オペレーターは、スケジュール設定のためにリージョンに適用されるアクションの集合です。オペレーターは、「リージョン2 のリーダーをストア 5 に移行する」や「リージョン2 のレプリカをストア 1、4、5 に移行する」といったスケジュールタスクを実行します。
 
 演算子は[スケジューラ](#scheduler)によって計算および生成することも、外部 API によって作成することもできます。
 
@@ -234,7 +234,7 @@ TiCDC が出力する増分変更ログ内の「元の値」。TiCDC が出力�
 現在、PD によって生成される利用可能なステップは次のとおりです。
 
 -   `TransferLeader` : 指定されたメンバーにリーダーシップを委譲する
--   `AddPeer` : 指定されたストアにピアを追加する
+-   `AddPeer` : 指定されたストアにピアを追加します
 -   `RemovePeer` :リージョンのピアを削除します
 -   `AddLearner` : 指定されたストアに学習者を追加する
 -   `PromoteLearner` : 指定された学習者を投票メンバーに昇格させる
@@ -254,7 +254,7 @@ TiCDC が出力する増分変更ログ内の「元の値」。TiCDC が出力�
 
 ### PD Control(pd-ctl) {#pd-control-pd-ctl}
 
-PD Control （pd-ctl）は、TiDBクラスタ内のPlacement Driver （PD）と対話するためのコマンドラインツールです。クラスタのステータス情報を取得したり、クラスタ設定を変更したりできます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)参照してください。
+PD Control (pd-ctl) は、TiDB クラスタ内の Placement Driver (PD) と対話するためのコマンドラインツールです。クラスタのステータス情報を取得したり、クラスタ設定を変更したりできます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)参照してください。
 
 ### 保留中/ダウン {#pending-down}
 
@@ -262,11 +262,11 @@ PD Control （pd-ctl）は、TiDBクラスタ内のPlacement Driver （PD）と�
 
 ### 配置Driver（PD） {#placement-driver-pd}
 
-配置Driver（PD）は、 [TiDBアーキテクチャ](/tidb-architecture.md#placement-driver-pd-server)の中核コンポーネントであり、メタデータの保存、トランザクションタイムスタンプの割り当て[タイムスタンプ オラクル (TSO)](/tso.md) 、TiKVへのデータ配置の調整、および[TiDBダッシュボード](/dashboard/dashboard-overview.md)実行を担います。詳細については、 [TiDB スケジューリング](/tidb-scheduling.md)参照してください。
+配置Driver（PD）は、 [TiDBアーキテクチャ](/tidb-architecture.md#placement-driver-pd-server)の中核コンポーネントであり、メタデータの保存、トランザクションタイムスタンプの割り当て[タイムスタンプ オラクル (TSO)](/tso.md) 、TiKV へのデータ配置の調整、および[TiDBダッシュボード](/dashboard/dashboard-overview.md)実行を担います。詳細については、 [TiDB スケジューリング](/tidb-scheduling.md)参照してください。
 
 ### 配置ルール {#placement-rules}
 
-配置ルールは、TiKVクラスター内のデータの配置を構成するために使用されます。この機能を使用すると、テーブルとパーティションを異なるリージョン、データセンター、キャビネット、またはホストに配置するように指定できます。ユースケースとしては、低コストでデータ可用性戦略を最適化したり、ローカルデータレプリカをローカルの古いデータ読み取りに確実に使用できるようにしたり、ローカルデータのコンプライアンス要件に準拠したりすることが挙げられます。
+配置ルールは、TiKVクラスター内のデータの配置を構成するために使用されます。この機能を使用すると、テーブルとパーティションを異なるリージョン、データセンター、キャビネット、またはホストに配置するように指定できます。ユースケースとしては、低コストでデータ可用性戦略を最適化したり、ローカルデータレプリカをローカルの古い読み取りに確実に使用できるようにしたり、ローカルデータのコンプライアンス要件に準拠したりすることが挙げられます。
 
 詳細については[SQLの配置ルール](/placement-rules-in-sql.md)参照してください。
 
@@ -276,7 +276,7 @@ PD Control （pd-ctl）は、TiDBクラスタ内のPlacement Driver （PD）と�
 
 ### ポイントインタイムリカバリ（PITR） {#point-in-time-recovery-pitr}
 
-ポイントインタイムリカバリ（PITR）を使用すると、データを特定の時点（例えば、意図しない`DELETE`ステートメントの直前）に復元できます。詳細については、 [TiDB ログバックアップと PITRアーキテクチャ](/br/br-log-architecture.md)参照してください。
+ポイントインタイムリカバリ（PITR）を使用すると、特定の時点（例えば、意図しない`DELETE`ステートメントの直前）にデータを復元できます。詳細については、 [TiDB ログバックアップと PITRアーキテクチャ](/br/br-log-architecture.md)参照してください。
 
 ### 述語列 {#predicate-columns}
 
@@ -290,7 +290,7 @@ PD Control （pd-ctl）は、TiDBクラスタ内のPlacement Driver （PD）と�
 
 ### クォータリミッター {#quota-limiter}
 
-クォータリミッターは、TiDB v6.0.0で導入された実験的機能です。TiKVがデプロイされているマシンのリソースが限られている場合（例えば、CPUが4Vでメモリが16GBしかない場合）、TiKVのフォアグラウンドで過剰な読み取りおよび書き込み要求を処理すると、バックグラウンドで使用されているCPUリソースがそれらの要求の処理に占有され、TiKVのパフォーマンス安定性に影響を与えます。このような状況を回避するために、 [クォータ関連の設定項目](/tikv-configuration-file.md#quota)設定することで、フォアグラウンドで使用されるCPUリソースを制限できます。
+クォータリミッターは、TiDB v6.0.0で導入された実験的機能です。TiKVがデプロイされているマシンのリソースが限られている場合（例えば、CPUが4Vでメモリが16GBしかない場合）、TiKVのフォアグラウンドで過剰な読み取りおよび書き込み要求を処理すると、バックグラウンドで使用されているCPUリソースがそれらの要求の処理に占有され、TiKVのパフォーマンス安定性に影響を与えます。このような状況を回避するために、 [クォータ関連の設定項目](/tikv-configuration-file.md#quota)を設定することで、フォアグラウンドで使用されるCPUリソースを制限できます。
 
 ## R {#r}
 
@@ -314,32 +314,32 @@ TiKVクラスター内のリージョンは最初から分割されるのでは�
 
 ### リクエストユニット（RU） {#request-unit-ru}
 
-リクエストユニット（RU）は、TiDBにおけるリソース使用量の統一された抽象化単位です。1と[リソース管理](/tidb-resource-control-ru-groups.md)てリソース使用量を管理します。
+リクエストユニット（RU）は、TiDBにおけるリソース使用のための統一された抽象化単位です。1と[リソース管理](/tidb-resource-control-ru-groups.md)てリソース使用状況を管理するために使用されます。
 
 ### 復元する {#restore}
 
-リストアはバックアップ操作の逆の操作です。準備されたバックアップからデータを取得して、システムを以前の状態に戻すプロセスです。
+復元はバックアップ操作の逆の操作です。準備されたバックアップからデータを取得して、システムを以前の状態に戻すプロセスです。
 
 ### ロックスDB {#rocksdb}
 
-[ロックスDB](https://rocksdb.org/) 、キーバリューstorageと読み書き機能を提供するLSMツリー構造のエンジンです。Facebookによって開発され、LevelDBをベースにしています。RocksDBはTiKVの中核storageエンジンです。
+[ロックスDB](https://rocksdb.org/)は、キーバリューstorageと読み書き機能を提供するLSMツリー構造のエンジンです。Facebookによって開発され、LevelDBをベースにしています。RocksDBはTiKVの中核storageエンジンです。
 
 ## S {#s}
 
 ### スケジューラ {#scheduler}
 
-スケジューラはPD内のコンポーネントであり、スケジューリングタスクを生成します。PD内の各スケジューラは独立して動作し、それぞれ異なる目的を果たします。一般的に使用されるスケジューラは以下のとおりです。
+スケジューラはPD内のコンポーネントであり、スケジュールタスクを生成します。PD内の各スケジューラは独立して動作し、それぞれ異なる目的を果たします。一般的に使用されるスケジューラは以下のとおりです。
 
 -   `balance-leader-scheduler` : リーダーの分布を均衡させる
 -   `balance-region-scheduler` : ピアの分散をバランスさせる
 -   `hot-region-scheduler` : ホットリージョンの分布をバランスさせる
--   `evict-leader-{store-id}` : ノードのすべてのリーダーを排除します (ローリングアップグレードでよく使用されます)
+-   `evict-leader-{store-id}` : ノードのすべてのリーダーを削除します (ローリング アップグレードでよく使用されます)
 
 ### Security強化モード（SEM） {#security-enhanced-mode-sem}
 
 Security拡張モード（SEM）は、TiDB管理者の権限をよりきめ細かく制御するために使用されます。1 [セキュリティ強化Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)のシステムに着想を得たSEMは、 `SUPER`権限を持つユーザーの権限を制限し、代わりに`RESTRICTED`きめ細かい権限を必要とします。これらの権限は、特定の管理アクションを制御するために明示的に付与する必要があります。
 
-詳細については[System Variables documentation - `tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)参照してください。
+詳細については[システム変数のドキュメント - `tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)参照してください。
 
 ### ステイル読み取り {#stale-read}
 
@@ -353,7 +353,7 @@ Security拡張モード（SEM）は、TiDB管理者の権限をよりきめ細�
 
 ### 店 {#store}
 
-ストアとは、TiKVクラスター内のstorageノード（インスタンス数`tikv-server` ）を指します。各ストアには対応するTiKVインスタンスが存在します。
+ストアとは、TiKVクラスター内のstorageノード（インスタンス`tikv-server` ）を指します。各ストアには対応するTiKVインスタンスが存在します。
 
 ## T {#t}
 
@@ -365,7 +365,7 @@ Security拡張モード（SEM）は、TiDB管理者の権限をよりきめ細�
 
 ### TiCDC {#ticdc}
 
-[TiCDC](/ticdc/ticdc-overview.md) 、TiDBから様々な下流ターゲットへの増分データレプリケーションを可能にするツールです。これらの下流ターゲットには、他のTiDBインスタンス、MySQL互換データベース、storageサービス、ストリーミングプロセッサ（KafkaやPulsarなど）が含まれます。TiCDCは上流のTiKVからデータ変更ログを取得し、それを順序付けされた行レベルの変更データに解析し、下流に出力します。TiCDCの概念と用語の詳細については、 [TiCDC用語集](/ticdc/ticdc-glossary.md)参照してください。
+[TiCDC](/ticdc/ticdc-overview.md)は、TiDBから様々な下流ターゲットへの増分データレプリケーションを可能にするツールです。これらの下流ターゲットには、他のTiDBインスタンス、MySQL互換データベース、storageサービス、ストリーミングプロセッサ（KafkaやPulsarなど）が含まれます。TiCDCは上流TiKVからデータ変更ログを取得し、それを順序付けされた行レベルの変更データに解析し、下流に出力します。TiCDCの概念と用語の詳細については、 [TiCDC用語集](/ticdc/ticdc-glossary.md)参照してください。
 
 ### TiDB Lightning {#tidb-lightning}
 
@@ -387,7 +387,7 @@ TiKVは分散storageシステムであるため、単調増加するタイムス
 
 ### TiUP {#tiup}
 
-[TiUP](/tiup/tiup-overview.md) 、TiDBクラスタのデプロイ、アップグレード、管理、およびTiDB、PD、TiKVを含むTiDBクラスタ内の様々なコンポーネントの管理に使用される管理ツールです。TiUPを使用すると、1つのコマンドを実行するだけでTiDB内の任意のコンポーネントを簡単に実行できるため、管理プロセスが大幅に簡素化されます。
+[TiUP](/tiup/tiup-overview.md) 、TiDBクラスタのデプロイ、アップグレード、管理、およびTiDB、PD、TiKVなどTiDBクラスタ内の様々なコンポーネントの管理に使用される管理ツールです。TiUPを使用すると、単一のコマンドを実行するだけでTiDB内の任意のコンポーネントを簡単に実行できるため、管理プロセスが大幅に簡素化されます。
 
 ### Top SQL {#top-sql}
 
@@ -395,20 +395,20 @@ Top SQLは、指定された時間範囲におけるTiDBまたはTiKVノード�
 
 ### 1秒あたりのトランザクション数（TPS） {#transactions-per-second-tps}
 
-1 秒あたりのトランザクション数 (TPS) は、データベースが 1 秒あたりに処理するトランザクションの数であり、データベースのパフォーマンスとスループットを測定するための重要な指標として機能します。
+1 秒あたりのトランザクション数 (TPS) は、データベースが 1 秒あたりに処理するトランザクションの数であり、データベースのパフォーマンスとスループットを測定するための主要な指標として機能します。
 
 ## あなた {#u}
 
-### ユニフォームリソース識別子 (URI) {#uniform-resource-identifier-uri}
+### ユニフォームリソース識別子（URI） {#uniform-resource-identifier-uri}
 
-URI（Uniform Resource Identifier）は、リソースを識別するための標準化された形式です。詳細については、Wikipediaの[統一資源識別子](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)ご覧ください。
+URI（Uniform Resource Identifier）は、リソースを識別するための標準化されたフォーマットです。詳細については、Wikipediaの[統一資源識別子](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)ご覧ください。
 
 ### ユニバーサルユニーク識別子 (UUID) {#universally-unique-identifier-uuid}
 
-UUID（Universally Unique Identifier）は、データベース内のレコードを一意に識別するために使用される、128ビット（16バイト）のIDです。詳細については、 [UUID](/best-practices/uuid.md)参照してください。
+UUID（Universally Unique Identifier）は、データベース内のレコードを一意に識別するために使用される、128ビット（16バイト）の生成されたIDです。詳細については、 [UUID](/best-practices/uuid.md)参照してください。
 
 ## V {#v}
 
 ### ベクトル検索 {#vector-search}
 
-[ベクトル検索](/vector-search/vector-search-overview.md) 、データの意味を優先して関連性の高い結果を提供する検索手法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクター検索は、テキスト、画像、音声など様々なデータタイプを高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解します。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの検索意図に沿った結果を提供できます。
+[ベクトル検索](/ai/concepts/vector-search-overview.md)は、データの意味を優先して関連性の高い結果を提供する検索手法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクター検索は、テキスト、画像、音声など様々なデータタイプを高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解します。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの検索意図に沿った結果を提供できます。

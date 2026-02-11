@@ -88,7 +88,7 @@ TiDB Cloud CLI `ticloud`を使用すると、ターミナルから簡単なコ�
 
 TiDB Cloud APIは、 TiDB Cloud StarterとTiDB Cloud Dedicated全体のリソースを管理するためのプログラム的なアクセスを提供するRESTベースのインターフェースです。プロジェクト、クラスタ、バックアップ、リストア、データのインポート、課金、その他のリソース管理といったタスクを、 [TiDB Cloudデータサービス](/tidb-cloud/data-service-overview.md)内で自動化し、効率的に処理できます。
 
-詳細については[TiDB CloudAPI の概要](/tidb-cloud/api-overview.md)参照してください。
+詳細については[TiDB CloudAPI の概要](https://docs.pingcap.com/api/tidb-cloud-api-overview)参照してください。
 
 ## ノード {#nodes}
 
@@ -134,7 +134,7 @@ TiDB Cloudでは、各クラスターは TiDB、TiKV、およびTiFlashノード
 
 **主な機能:**
 
--   **列型storage**
+-   **列指向storage**
 
     TiFlashノードはデータを列形式で保存するため、分析クエリに最適化され、読み取り集中型のワークロードのパフォーマンスが大幅に向上します。
 

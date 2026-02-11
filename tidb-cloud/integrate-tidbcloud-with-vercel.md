@@ -16,9 +16,9 @@ TiDB Cloud をVercel と併用することで、MySQL 互換のリレーショ�
 -   [TiDB Cloud Vercel統合を介して接続](#connect-via-the-tidb-cloud-vercel-integration)
 -   [環境変数を手動で設定して接続する](#connect-via-manually-setting-environment-variables)
 
-上記の両方の方法では、 TiDB Cloud はプログラムによってデータベースに接続するための次のオプションを提供します。
+上記の両方の方法では、 TiDB Cloud はデータベースにプログラムで接続するための次のオプションを提供します。
 
--   クラスタ: 直接接続または[サーバーレスドライバー](/tidb-cloud/serverless-driver.md)を使用して、 TiDB Cloudクラスターを Vercel プロジェクトに接続します。
+-   クラスタ: 直接接続または[サーバーレスドライバー](/develop/serverless-driver.md)を使用して、 TiDB Cloudクラスターを Vercel プロジェクトに接続します。
 -   [データアプリ](/tidb-cloud/data-service-manage-data-app.md) : HTTP エンドポイントのコレクションを通じてTiDB Cloudクラスターのデータにアクセスします。
 
 ## 前提条件 {#prerequisites}
@@ -30,7 +30,7 @@ TiDB Cloud をVercel と併用することで、MySQL 互換のリレーショ�
 Vercel のアカウントとプロジェクトが必要です。まだお持ちでない場合は、以下の Vercel ドキュメントを参照して作成してください。
 
 -   [新しい個人アカウントを作成する](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account)または[新しいチームの作成](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team) 。
--   Vercel の[プロジェクトの作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)使用している場合、またはデプロイするアプリケーションがない場合は、 [TiDB Cloudスターター テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)使用して試してみることができます。
+-   Vercel の[プロジェクトの作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)使用している場合、またはデプロイするアプリケーションがない場合は、 [TiDB Cloudスターター テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を使用して試してみることができます。
 
 1つのVercelプロジェクトは1つのTiDB Cloudクラスターにのみ接続できます。統合を変更するには、まず現在のクラスターを切断し、新しいクラスターに接続する必要があります。
 
@@ -42,7 +42,7 @@ TiDB Cloudのアカウントとクラスターが必要です。まだお持ち�
 
     > **注記：**
     >
-    > TiDB Cloud Vercel 統合では、TiDB Cloud Starter およびTiDB Cloud Essential クラスターの作成をサポートしています。また、統合プロセス中に後からクラスターを作成することもできます。
+    > TiDB Cloud Vercel 統合では、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターの作成をサポートしています。また、統合プロセス中に後からクラスターを作成することもできます。
 
 -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
@@ -50,28 +50,28 @@ TiDB Cloudのアカウントとクラスターが必要です。まだお持ち�
     >
     > TiDB Cloud Dedicated クラスターの場合、Vercel デプロイメントでは[動的IPアドレス](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)使用されるため、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) が接続に許可されていることを確認してください。
 
-[TiDB Cloud Vercel統合を介してVercelと統合する](#connect-via-the-tidb-cloud-vercel-integration)については、所属組織の`Organization Owner`ロール、またはTiDB Cloudの対象プロジェクトの`Project Owner`ロールを担うことが求められます。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
+[TiDB Cloud Vercel統合を介してVercelと統合する](#connect-via-the-tidb-cloud-vercel-integration)については、所属組織の`Organization Owner`ロール、またはTiDB Cloudの対象プロジェクトの`Project Owner`ロールを担うことが求められます。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)参照してください。
 
 1 つのTiDB Cloudクラスターは複数の Vercel プロジェクトに接続できます。
 
 ### データアプリとエンドポイント {#a-data-app-and-endpoints}
 
-[データアプリ](/tidb-cloud/data-service-manage-data-app.md)経由でTiDB Cloudクラスターに接続する場合は、事前にTiDB Cloudに対象のデータアプリとエンドポイントを用意しておく必要があります。まだ用意していない場合は、以下を参照して作成してください。
+[データアプリ](/tidb-cloud/data-service-manage-data-app.md)経由でTiDB Cloudクラスターに接続する場合は、事前にTiDB Cloud内に対象のデータアプリとエンドポイントを用意しておく必要があります。まだ用意していない場合は、以下を参照して作成してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  プロジェクトの[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) 。
-3.  [データアプリをリンクする](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)ターゲットのTiDB Cloudクラスターに追加します。
+3.  [データアプリをリンクする](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)ターゲットのTiDB Cloudクラスターに送信します。
 4.  [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)なので、SQL ステートメントを実行するようにカスタマイズできます。
 
 1つのVercelプロジェクトは1つのTiDB Cloudデータアプリにのみ接続できます。Vercelプロジェクトのデータアプリを変更するには、まず現在のアプリを切断し、新しいアプリに接続する必要があります。
 
 ## TiDB Cloud Vercel統合を介して接続 {#connect-via-the-tidb-cloud-vercel-integration}
 
-TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マーケットプレイス](https://vercel.com/integrations)から[TiDB Cloud統合](https://vercel.com/integrations/tidb-cloud)ページに進みます。この方法では、接続するクラスターを選択すると、 TiDB CloudがVercelプロジェクトに必要なすべての環境変数を自動的に生成します。
+TiDB Cloud Vercel統合経由で接続するには、 [Vercelの統合マーケットプレイス](https://vercel.com/integrations)から[TiDB Cloud統合](https://vercel.com/integrations/tidb-cloud)ページに進みます。この方法では、接続するクラスターを選択すると、 TiDB CloudがVercelプロジェクトに必要なすべての環境変数を自動的に生成します。
 
 > **注記：**
 >
-> この方法は、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターでのみ利用可能です。TiDB TiDB Cloud Dedicated クラスターに接続する場合は、 [手動の方法](#connect-via-manually-setting-environment-variables)使用してください。
+> この方法は、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターでのみ利用可能です。TiDB TiDB Cloud Dedicated クラスターに接続する場合は、 [手動の方法](#connect-via-manually-setting-environment-variables)を使用してください。
 
 ### 統合ワークフロー {#integration-workflow}
 
@@ -89,15 +89,15 @@ TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マー�
     1.  対象の Vercel プロジェクトを選択し、 **「次へ」**をクリックします。
     2.  ターゲットのTiDB Cloud組織とプロジェクトを選択します。
     3.  接続タイプとして**「クラスタ」**を選択します。
-    4.  対象のTiDB Cloudクラスターを選択します。 **「クラスタ」**ドロップダウンリストが空の場合、または新しいTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターを選択する場合は、リスト内の**「+クラスタの作成」**をクリックしてクラスターを作成してください。
-    5.  接続するデータベースを選択します。**データベースの**ドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**「+ データベースの作成」**をクリックしてデータベースを作成してください。
+    4.  対象のTiDB Cloudクラスターを選択します。 **「クラスタ」**ドロップダウンリストが空の場合、または新しいTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターを選択する場合は、リスト内の**「+クラスタ**を作成してください。
+    5.  接続するデータベースを選択します。**データベースの**ドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**「+ データベースの作成」をクリックしてデータベースを**作成してください。
     6.  Vercelプロジェクトで使用しているフレームワークを選択してください。ターゲットフレームワークがリストにない場合は、 **「一般」**を選択してください。フレームワークによって環境変数が異なります。
-    7.  プレビュー環境用の新しいブランチを作成するために**ブランチ**を有効にするかどうかを選択します。
+    7.  プレビュー環境用に新しいブランチを作成するために**ブランチを**有効にするかどうかを選択します。
     8.  **「統合を追加」をクリックして、Vercel に戻ります**。
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
-6.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動して、 **[設定]** &gt; **[環境変数]**をクリックし、ターゲット TiDB クラスターの環境変数が自動的に追加されているかどうかを確認します。
+6.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動して、 **「設定」** &gt; **「環境変数」**をクリックし、ターゲット TiDB クラスターの環境変数が自動的に追加されているかどうかを確認します。
 
     以下の変数が追加されていれば統合は完了です。
 
@@ -155,7 +155,7 @@ TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マー�
 [TiDB Cloud Vercel統合](https://vercel.com/integrations/tidb-cloud)インストールしている場合は、統合内で接続を追加または削除できます。
 
 1.  Vercel ダッシュボードで、 **「統合」**をクリックします。
-2.  TiDB Cloudエントリで**[管理] を**クリックします。
+2.  TiDB Cloudエントリで**[管理]**をクリックします。
 3.  **［構成］**をクリックします。
 4.  接続を追加または削除するには、 **「リンクの追加」**または**「削除」**をクリックします。
 
@@ -165,11 +165,11 @@ TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マー�
 
 ### TiDB Cloudブランチに接続する {#connect-with-branching} {#connect-with-branching}
 
-Vercel の[プレビュー展開](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、Git プロジェクトの本番ブランチに変更をマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。 [TiDB Cloudブランチ](/tidb-cloud/branch-overview.md)では、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
+Vercel の[プレビューデプロイメント](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、Git プロジェクトの本番ブランチに変更をマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。 [TiDB Cloudブランチ](/tidb-cloud/branch-overview.md)では、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番のデータに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
 
 > **注記：**
 >
-> 現在、 TiDB Cloud Branching は[GitHubリポジトリに関連付けられたVercelプロジェクト](https://vercel.com/docs/deployments/git/vercel-for-github)のみをサポートしています。
+> 現在、 TiDB Cloud Branching は[GitHub リポジトリに関連付けられた Vercel プロジェクト](https://vercel.com/docs/deployments/git/vercel-for-github)のみをサポートしています。
 
 TiDB Cloudブランチを有効にするには、 [TiDB Cloud Vercel 統合ワークフロー](#integration-workflow)で次の点を確認する必要があります。
 
@@ -195,7 +195,7 @@ Gitリポジトリに変更をプッシュすると、Vercelはプレビュー�
 
         ![TiDB\_Cloud\_Branch\_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
-    2.  ブランチの準備ができたら、 TiDB Cloud統合によって、Vercel プロジェクトのプレビュー デプロイメントで環境変数が設定されます。
+    2.  ブランチの準備が整うと、 TiDB Cloud統合によって、Vercel プロジェクトのプレビュー デプロイメントで環境変数が設定されます。
 
         ![Preview\_Envs](/media/tidb-cloud/vercel/preview-envs.png)
 
@@ -218,7 +218,7 @@ Gitリポジトリに変更をプッシュすると、Vercelはプレビュー�
 
 1.  TiDB クラスターの接続情報を取得します。
 
-    接続情報は、クラスターの接続ダイアログから取得できます。ダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページ目に移動し、ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。
+    接続情報は、クラスターの接続ダイアログから取得できます。ダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。
 
 2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、TiDB クラスターの接続情報に応じて[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)実行します。
 
@@ -236,7 +236,7 @@ Vercel では、次のように環境変数を宣言できます。
 -   **キー**= `DATABASE_URL`
 -   **値**= `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
-`<User>` `<Endpoint>`情報`<Database>` `<Password>` TiDB Cloudコンソールで取得できます`<Port>`
+`<User>` `<Port>`情報`<Endpoint>` `<Password>` TiDB Cloudコンソールで取得でき`<Database>` 。
 
 </div>
 <div label="Data App">

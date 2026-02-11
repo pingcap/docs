@@ -48,7 +48,7 @@ summary: TiUPを使用して TiDB をアップグレードする方法を学び�
 -   現在、TiDB はバージョンのダウングレードやアップグレード後の以前のバージョンへのロールバックをサポートしていません。
 -   TiCDC、 TiFlash、およびその他のコンポーネントのバージョンのアップグレードをサポートします。
 -   TiFlashをv6.3.0より前のバージョンからv6.3.0以降のバージョンにアップグレードする場合、CPUがLinux AMD64アーキテクチャではAVX2命令セット、Linux ARM64アーキテクチャではARMv8命令セットアーキテクチャをサポートしている必要があることに注意してください。詳細については、 [v6.3.0 リリースノート](/releases/release-6.3.0.md#others)の説明を参照してください。
--   各バージョン間の互換性に関する変更の詳細については、各バージョンの[リリースノート](/releases/release-notes.md)ご覧ください。対応するリリースノートの「互換性に関する変更」セクションに従って、クラスター構成を変更してください。
+-   各バージョン間の互換性に関する変更の詳細については、各バージョンの[リリースノート](/releases/_index.md)ご覧ください。対応するリリースノートの「互換性に関する変更」セクションに従って、クラスター構成を変更してください。
 -   クラスターをv5.3より前のバージョンからv5.3以降のバージョンにアップデートする場合、デフォルトでデプロイされているPrometheusによって生成されるアラートの時刻形式が変更されていることにご注意ください。この形式の変更は、Prometheus v2.27.1以降で導入されています。詳細については、 [プロメテウスコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)ご覧ください。
 
 ## 準備 {#preparations}
@@ -59,14 +59,14 @@ summary: TiUPを使用して TiDB をアップグレードする方法を学び�
 
 TiDB リリースノートで互換性の変更点をご確認ください。アップグレードに影響する変更点がある場合は、それに応じた対応を行ってください。
 
-以下は、v8.4.0から最新バージョン（v8.5.5）にアップグレードする際に知っておくべきリリースノートです。v8.3.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョン[リリースノート](/releases/release-notes.md)も確認する必要があるかもしれません。
+以下は、v8.4.0から最新バージョン（v8.5.5）にアップグレードする際に知っておくべきリリースノートです。v8.3.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョン[リリースノート](/releases/_index.md)も確認する必要があるかもしれません。
 
 -   TiDB v8.5.0 [互換性の変更](/releases/release-8.5.0.md#compatibility-changes)
 -   TiDB v8.5.1 [リリースノート](/releases/release-8.5.1.md)
 -   TiDB v8.5.2 [リリースノート](/releases/release-8.5.2.md)
 -   TiDB v8.5.3 [互換性の変更](/releases/release-8.5.3.md#compatibility-changes)
 -   TiDB v8.5.4 [互換性の変更](/releases/release-8.5.4.md#compatibility-changes)
--   TiDB v8.5.5 [互換性の変更](https://docs.pingcap.com/tidb/v8.5/release-8.5.5/#compatibility-changes)
+-   TiDB v8.5.5 [互換性の変更](https://docs.pingcap.com/tidb/stable/release-8.5.5/#compatibility-changes)
 
 ### ステップ2: TiUPまたはTiUPオフラインミラーをアップグレードする {#step-2-upgrade-tiup-or-tiup-offline-mirror}
 
@@ -173,7 +173,7 @@ tiup cluster check <cluster-name> --cluster
 
 ### TiDBクラスタを指定のバージョンにアップグレードする {#upgrade-the-tidb-cluster-to-a-specified-version}
 
-クラスターは、オンライン アップグレードとオフライン アップグレードのいずれかの方法でアップグレードできます。
+クラスターは、オンライン アップグレードとオフライン アップグレードの 2 つの方法のいずれかでアップグレードできます。
 
 TiUP クラスタはデフォルトでオンライン方式を使用してTiDBクラスタをアップグレードします。つまり、アップグレードプロセス中もTiDBクラスタはサービスを提供し続けることができます。オンライン方式では、アップグレードと再起動の前に、各ノードでリーダーノードが1つずつ移行されます。そのため、大規模なクラスタでは、アップグレード操作全体を完了するのに長い時間がかかります。
 
@@ -280,7 +280,7 @@ tiup cluster display <cluster-name>
 
 ### v6.2.0 以降のバージョンにアップグレードするときにアップグレードが停止する問題を修正するにはどうすればよいですか? {#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v6-2-0-or-later-versions}
 
-v6.2.0以降、TiDBはデフォルトで[並行DDLフレームワーク](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)による同時DDL実行を有効にします。このフレームワークにより、DDLジョブのstorageがKVキューからテーブルキューに変更されます。この変更により、一部のシナリオでアップグレードが停止する可能性があります。この問題を引き起こす可能性のあるシナリオと、それに対応する解決策を以下に示します。
+v6.2.0以降、TiDBはデフォルトで[並行DDLフレームワーク](/best-practices/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)による同時DDL実行を有効にします。このフレームワークにより、DDLジョブのstorageがKVキューからテーブルキューに変更されます。この変更により、一部のシナリオでアップグレードが停止する可能性があります。この問題を引き起こす可能性のあるシナリオと、それに対応する解決策を以下に示します。
 
 -   プラグインの読み込みによりアップグレードが停止する
 

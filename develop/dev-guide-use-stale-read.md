@@ -1,13 +1,14 @@
 ---
 title: Stale Read
 summary: 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。
+aliases: ['/tidb/stable/dev-guide-use-stale-read/','/tidb/dev/dev-guide-use-stale-read/','/tidbcloud/dev-guide-use-stale-read/']
 ---
 
 # ステイル読み取り {#stale-read}
 
-ステイル読み取りは、TiDBが保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができ、storageノード間のデータレプリケーションによって発生するレイテンシーを削減できます。Stale ステイル読み取りを使用する場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカがデータ読み取りに利用可能になります。
+ステイル読み取りは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができ、storageノード間のデータレプリケーションによって発生するレイテンシーを削減できます。Stale ステイル読み取りを使用する場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカがデータ読み取りに利用可能になります。
 
-実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取り を有効にしないでください。
+実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて、TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取りを有効にしないでください。
 
 TiDB は、ステートメント レベル、トランザクション レベル、セッション レベルの 3 つのレベルのステイル読み取りを提供します。
 
@@ -60,7 +61,7 @@ UPDATE books SET price = 150 WHERE id = 3181093216;
 
 最新のデータを使用する必要がない場合は、古いデータを返す可能性のあるステイル読み取りを使用してクエリを実行し、強力な一貫性のある読み取り中にデータ複製によって発生するレイテンシーを回避できます。
 
-Bookshopアプリケーションでは、書籍のリアルタイム価格の表示は書籍一覧ページでは必須ではなく、書籍詳細ページと注文ページでのみ必須であると仮定します。Stale ステイル読み取りは、アプリケーション全体の改善に役立ちます。
+Bookshopアプリケーションでは、書籍のリアルタイム価格の表示は書籍一覧ページでは必須ではなく、書籍詳細ページと注文ページでのみ必要だと仮定します。Stale ステイル読み取りは、アプリケーション全体の改善に役立ちます。
 
 ## ステートメントレベル {#statement-level}
 
@@ -89,12 +90,12 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 正確な時間を指定することに加えて、次のことも指定できます。
 
 -   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 10 秒前の最新データを照会します。
--   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`間の最新データを照会します。
+-   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20 秒以内に最新のデータを照会します。
 
-指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`秒精度のデフォルトです。より高い精度を実現するには、パラメータを追加できます。例えば、 `NOW(3)`ミリ秒精度です。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)参照してください。
+指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`デフォルトで秒精度となります。より高い精度を実現するには、パラメータを追加することができます。例えば、 `NOW(3)`ミリ秒精度となります。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)参照してください。
 
-期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまで短期間保持されます。この期間は[GC 有効期間（デフォルト 10 分）](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
+期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
 
     ERROR 9006 (HY000): GC life time is shorter than transaction duration...
 
@@ -337,7 +338,7 @@ if (top5LatestBooks.size() > 0) {
 }
 ```
 
-結果は次のとおりです。
+結果は次のようになります。
 
     The latest book price (before update): 100.00
     The latest book price (after update): 150.00
@@ -347,7 +348,7 @@ if (top5LatestBooks.size() > 0) {
 </div>
 </SimpleTab>
 
-`SET TRANSACTION READ ONLY AS OF TIMESTAMP`文を使用すると、指定した履歴時間に基づいて、開いているトランザクションまたは次のトランザクションを読み取り専用トランザクションに設定できます。トランザクションは、指定された履歴時間に基づいて履歴データを読み取ります。
+`SET TRANSACTION READ ONLY AS OF TIMESTAMP`ステートメントを使用すると、指定された履歴時間に基づいて、開いているトランザクションまたは次のトランザクションを読み取り専用トランザクションとして設定できます。トランザクションは、指定された履歴時間に基づいて履歴データを読み取ります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -426,7 +427,7 @@ public class BookDAO {
 
 ## セッションレベル {#session-level}
 
-履歴データの読み取りをサポートするため、TiDBはv5.4以降、新しいシステム変数`tidb_read_staleness`導入しました。この変数を使用して、現在のセッションで読み取り可能な履歴データの範囲を設定できます。データ型は`int` 、スコープは`SESSION`です。
+履歴データの読み取りをサポートするため、TiDBはv5.4以降、新しいシステム変数`tidb_read_staleness`を導入しました。この変数を使用して、現在のセッションで読み取り可能な履歴データの範囲を設定できます。データ型は`int` 、スコープは`SESSION`です。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -480,14 +481,6 @@ public static class StaleReadHelper{
 
 ## ヘルプが必要ですか? {#need-help}
 
-<CustomContent platform="tidb">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
-
-</CustomContent>
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
