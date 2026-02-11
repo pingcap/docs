@@ -691,7 +691,7 @@
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
-    - Connected：通过  IM 订阅 TiDB Cloud 告警通知
+    - Connected：通过 IM 订阅 TiDB Cloud 告警通知
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
       - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
