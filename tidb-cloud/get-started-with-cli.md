@@ -87,7 +87,7 @@ Install the MySQL command-line client if you do not have it. You can refer to th
 
 ## Quick start
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Cloud Serverless cluster with TiDB Cloud CLI.
+[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a {{{ .starter }}} cluster with TiDB Cloud CLI.
 
 ### Create a user profile or log into TiDB Cloud
 
@@ -115,9 +115,9 @@ Before creating a cluster with TiDB Cloud CLI, you need to either create a user 
 >
 > In the preceding two methods, the TiDB Cloud API key takes precedence over the OAuth token. If both are available, the API key will be used.
 
-### Create a TiDB Cloud Serverless cluster
+### Create a {{{ .starter }}} cluster
 
-To create a TiDB Cloud Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information:
+To create a {{{ .starter }}} cluster, enter the following command, and then follow the CLI prompts to provide the required information:
 
 ```shell
 ticloud serverless create

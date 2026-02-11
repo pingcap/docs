@@ -13,7 +13,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 > **Note:**
 >
-> You cannot pause a [TiDB Cloud Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+> You cannot pause a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) cluster.
 
 ## Limitations
 

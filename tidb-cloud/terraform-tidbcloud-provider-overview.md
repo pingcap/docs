@@ -50,6 +50,7 @@ To get all the available configurations for the resources and data sources, see 
 
 - [Learn more about Terraform](https://www.terraform.io/docs)
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-- [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
-- [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
-- [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
+- [Use the `tidbcloud_serverless_cluster` Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+- [Use the `tidbcloud_dedicated_cluster` Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
+- [Use the `tidbcloud_backup` Resource](/tidb-cloud/terraform-use-backup-resource.md)
+- [Use the `tidbcloud_restore` Resource](/tidb-cloud/terraform-use-restore-resource.md)

@@ -1,71 +1,114 @@
 ---
-title: TiDB Cloud Release Notes in 2025
-summary: Learn about the release notes of TiDB Cloud in 2025.
+title: TiDB Cloud Release Notes in 2026
+summary: Learn about the release notes of TiDB Cloud in 2026.
 aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
-# TiDB Cloud Release Notes in 2025
+# TiDB Cloud Release Notes in 2026
 
-This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
+This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
-## June 24, 2025
-
-**General changes**
-
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) database audit logging (beta) is now available upon request. This feature lets you record a history of user access details (such as any SQL statements executed) in logs.
-
-    To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Serverless database audit logging" in the Description field and click **Submit**.
-
-    For more information, see [TiDB Cloud Serverless Database Audit Logging](/tidb-cloud/serverless-audit-logging.md).
-
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports user-controlled log redaction.
-
-    You can now enable or disable log redaction for your TiDB Cloud Dedicated clusters to manage the redaction status of cluster logs by yourself.
-
-    For more information, see [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md).
-
-- Encryption at Rest with Customer-Managed Encryption Keys (CMEK) is now generally available (GA) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
-
-    This feature enables you to secure your data at rest by leveraging a symmetric encryption key that you manage through Key Management Service (KMS).
-
-    For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md).
-
-## June 17, 2025
+## February 10, 2026
 
 **General changes**
 
-- For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, the maximum storage size of TiKV nodes with 16 vCPU and 32 vCPU is changed from **6144 GiB** to **4096 GiB**. 
+- **TiDB Cloud Starter**
 
-    For more information, see [TiKV node storage size](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size).
+    - Upgrade the default TiDB version of new [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v7.5.6](https://docs.pingcap.com/tidb/stable/release-7.5.6) to [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3).
+
+- **TiDB Cloud Essential**
+
+    - Support built-in alerting.
+
+        Built-in alerting enables you to subscribe to receive instant alerts through email, Slack, Zoom, Flashduty, and PagerDuty. You can also customize alerts by defining specific thresholds for each alert type.
+
+        For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+
+- **TiDB Cloud Dedicated**
+
+    - Support Private Link connectivity for data imports from Azure Blob Storage.
+  
+        When importing data from Azure Blob Storage into a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster, you can now select Private Link as the connectivity method to connect via an Azure private endpoint instead of the public internet. This feature enables secure, network-isolated data imports for storage accounts that restrict public access.
+
+        For more information, see [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data.md), [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md), and [Import Apache Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md).
+
+    - Add "Enable/Disable Public Endpoint" events to the Console Audit Logging in TiDB Cloud for better security tracking.
+
+## February 3, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support sinking changefeed data to Azure Blob Storage.
+
+        [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) now supports sinking changefeed data directly to Azure Blob Storage. This feature enables Azure-based users to archive change data efficiently for downstream analytics and long-term retention. It also reduces costs by eliminating the need for intermediate message queues and maintains format compatibility with existing Amazon S3 and Google Cloud Storage (GCS) sinks.
+
+        For more information, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
+
+## January 27, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support Flashduty and PagerDuty as alert subscription channels.
+  
+        These integrations are designed to streamline your incident management process and improve operational reliability.
+  
+        For more information, see [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md) and [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md).
+
+## January 20, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (beta).
+
+        TiDB Cloud now supports client IP pass-through, enabling the Slow Query view and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
+
+        Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
+
+- **TiDB Cloud Essential**
+
+    - Support data migration (beta).
+
+        Now you can use the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com) to seamlessly migrate data from any MySQL-compatible database to your [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+
+        - Supported source databases include various MySQL-compatible systems, such as self-hosted MySQL, Amazon RDS, Alibaba Cloud RDS, and PolarDB.
+        - Supported connection methods for data migration include public connection and PrivateLink to ensure both ease of use and enterprise-grade security:
+
+            - **Public connection**: quickly connects to your source database over the internet using secure and encrypted channels.
+            - **PrivateLink**: establishes a secure and private connection between your source VPC and TiDB Cloud, bypassing the public internet to ensure maximum data privacy and reduced network latency.
+
+      Currently, the Data Migration feature only supports logical mode.
+  
+        For more information, see [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) and [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+
+    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view, [DB audit logs](/tidb-cloud/essential-database-audit-logging.md), and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (beta)
+
+        TiDB Cloud now supports client IP pass-through, enabling the Slow Query view, DB audit logs, and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
+
+        Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 **Console changes**
 
-- Revamp the left navigation pane to improve the overall navigation experience.
-  
-    - A new <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="" style="width: calc(1.25rem * var(--mantine-scale)); height: calc(1.25rem * var(--mantine-scale));"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9 3v18M7.8 3h8.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C21 5.28 21 6.12 21 7.8v8.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C18.72 21 17.88 21 16.2 21H7.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C3 18.72 3 17.88 3 16.2V7.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C5.28 3 6.12 3 7.8 3" stroke-width="inherit"></path></svg> icon is now available in the upper-left corner, letting you easily hide or show the left navigation pane whenever you need.
-    - A combo box is now available in the upper-left corner, letting you quickly switch between organizations, projects, and clusters, all from one central location.
-  
-        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/tidb-cloud-combo-box.png" width="200" />
+- Improve the support experience with plan-aware support options.
 
-    - The entries shown on the left navigation pane now dynamically adapt to your current selection in the combo box, helping you focus on the most relevant functionalities.
-    - For your quick access, **Support**, **Notification**, and your account entries are now consistently displayed at the bottom of the left navigation pane on all console pages.
+    The [TiDB Cloud console](https://tidbcloud.com/) now offers plan-aware support options to enhance the support experience across all subscription plans. These updates include:
 
-## June 4, 2025
+    - **Plan-aware support redirection**: on the cluster overview page, selecting **Get Support** in the **Actions** column directs you to the most relevant resource based on your subscription plan. Users on the Basic plan are guided to the **Support Plan** panel, and users on paid plans are directed to the **Support Portal**.
+    - **Refined Help Center menu**: rename help menu items to **Support Options** and **Support Tickets** to better reflect available services. Add tooltips to clarify that technical support tickets are available only for paid plans.
+    - **Clear community support access**: within the **Support Plan** options, Slack and Discord are clearly identified as the primary technical support channels for Basic plan users. The following documentation is streamlined to clarify support channel policies and community access: [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md), [Connected Care Overview](/tidb-cloud/connected-care-overview.md), and [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+    - **Action-oriented Support Plan UI**: redesign the **Support Plan** window to prioritize the support options available for your current subscription, rather than generic plan comparisons. This change helps you quickly identify how to get support based on your active plan.
+
+  For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+## January 15, 2026
 
 **General changes**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Microsoft Azure is now available in public preview. 
-  
-    With this launch, TiDB Cloud now supports all three major public cloud platforms — AWS, Google Cloud, and Azure, which enables you to deploy TiDB Cloud Dedicated clusters wherever best fits your business needs and cloud strategy.
-  
-    - All core features available on AWS and Google Cloud are fully supported on Azure.
-    - Azure support is currently available in three regions: East US 2, Japan East, and Southeast Asia, with more regions coming soon.
-    - TiDB Cloud Dedicated clusters on Azure require TiDB version v7.5.3 or later.
-  
-  To quickly get started with TiDB Cloud Dedicated on Azure, see the following documentation:
-  
-    - [Create a TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/create-tidb-cluster.md)
-    - [Connect a TiDB Cloud Dedicated Cluster via Azure Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 
-    - [Import Data into TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/import-csv-files.md)
+- **TiDB Cloud Dedicated**
 
     - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.4](https://docs.pingcap.com/tidb/stable/release-8.5.4/) to [v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/).

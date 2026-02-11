@@ -9,11 +9,11 @@ TiDB Cloud Backup & Restore features are designed to safeguard your data and ens
 
 ## Automatic backup
 
-For both TiDB Cloud Serverless and TiDB Cloud Dedicated clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
+For TiDB Cloud clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
 
 For more information, see the following:
 
-- [Automatic backups for TiDB Cloud Serverless clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+- [Automatic backups for {{{ .starter }}} and {{{ .essential }}} clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
 - [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## Manual backup
@@ -38,5 +38,6 @@ Point-in-time Restore is a feature that enables you to restore data of any point
 
 If you want to perform Point-in-time Restore, note the following:
 
-- For TiDB Cloud Serverless clusters, Point-in-time Restore is available only for scalable clusters and not available for free clusters. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
+- For {{{ .starter }}} clusters, Point-in-time Restore is not available.
+- For {{{ .essential }}} clusters, you can restore to any time within the last 30 days. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
 - For TiDB Cloud Dedicated clusters, you need to [enable PITR](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) in advance.

@@ -1,11 +1,11 @@
 ---
-title: Connect to Your TiDB Cloud Serverless Cluster
-summary: Learn how to connect to your TiDB Cloud Serverless cluster via different methods.
+title: Connect to Your {{{ .starter }}} or Essential Cluster
+summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via different methods.
 ---
 
-# Connect to Your TiDB Cloud Serverless Cluster
+# Connect to Your {{{ .starter }}} or Essential Cluster
 
-This document describes how to connect to your TiDB Cloud Serverless cluster.
+This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
 
 > **Tip:**
 >
@@ -14,19 +14,19 @@ This document describes how to connect to your TiDB Cloud Serverless cluster.
 
 ## Network connection methods
 
-After your TiDB Cloud Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - Direct connections
 
-  Direct connections mean the MySQL native connection system over TCP. You can connect to your TiDB Cloud Serverless cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+  Direct connections mean the MySQL native connection system over TCP. You can connect to your cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Cloud provides a Data Service feature that enables you to connect to your TiDB Cloud Serverless cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Cloud Serverless data via a RESTful API rather than raw SQL.
+  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} cluster hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
 
 - [Serverless Driver (beta)](/develop/serverless-driver.md)
 
-  TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your TiDB Cloud Serverless cluster in edge environments with the same experience as direct connections.
+  TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster in edge environments with the same experience as direct connections.
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
@@ -38,7 +38,7 @@ In the preceding connection methods, you can choose your desired one based on yo
 
 ## Network
 
-There are two network connection types for TiDB Cloud Serverless:
+There are two network connection types for {{{ .starter }}} and {{{ .essential }}}:
 
 - [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
 
@@ -48,14 +48,14 @@ There are two network connection types for TiDB Cloud Serverless:
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-  TiDB Cloud Serverless requires [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+  {{{ .starter }}} and {{{ .essential }}} require [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
 The following table shows the network you can use in different connection methods:
 
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (beta)        | /                            | Accessing TiDB Cloud Serverless via Data Service (beta) does not need to specify the network type.                      |
+| Data Service (beta)        | /                            | Accessing {{{ .starter }}} hosted on AWS via Data Service (beta) does not need to specify the network type.                      |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next

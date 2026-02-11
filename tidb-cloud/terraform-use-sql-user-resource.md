@@ -1,9 +1,9 @@
 ---
-title: Use SQL User Resource
-summary: Learn how to use the SQL user resource to create and modify a TiDB Cloud SQL user.
+title: Use the `tidbcloud_sql_user` Resource
+summary: Learn how to use the `tidbcloud_sql_user` resource to create and modify a TiDB Cloud SQL user.
 ---
 
-# Use SQL User Resource
+# Use the `tidbcloud_sql_user` Resource
 
 This document describes how to manage TiDB Cloud SQL users using the `tidbcloud_sql_user` resource.
 
@@ -17,7 +17,9 @@ The features of the `tidbcloud_sql_user` resource include the following:
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) or [a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- Refer to one of the following documents to create a TiDB Cloud cluster:
+    - [Create a {{{ .starter }}} or Essential cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Create a SQL user
 
@@ -53,9 +55,9 @@ The following example shows how to create a TiDB Cloud SQL user.
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the SQL user resource, set the resource type as `tidbcloud_sql_user`.
+    - To use the `tidbcloud_sql_user` resource, set the resource type as `tidbcloud_sql_user`.
     - For the resource name, you can define it as needed. For example, `example`.
-    - For SQL users in the TiDB Cloud Serverless cluster, the `user_name` and builtin role `role_readonly` and `role_readwrite` must start with the user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
+    - For SQL users in the {{{ .starter }}} or {{{ .essential }}} cluster, the `user_name` and builtin role `role_readonly` and `role_readwrite` must start with the user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
     - To get the SQL user specification information, see [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
@@ -201,7 +203,7 @@ For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terrafor
 
 For example, you can import a SQL user that is not created by Terraform as follows:
 
-1. Add an import block for the new SQL user resource
+1. Add an import block for the new `tidbcloud_sql_user` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
 
@@ -212,9 +214,9 @@ For example, you can import a SQL user that is not created by Terraform as follo
     }
     ```
 
-2. Generate the new configuration file
+2. Generate the new configuration file.
 
-    Generate the new configuration file for the new SQL user resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_sql_user` resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf
@@ -224,7 +226,7 @@ For example, you can import a SQL user that is not created by Terraform as follo
 
     Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource. But the provider will throw an error because the required argument `password` is not set. You can replace the value of `password` argument to the `tidbcloud_sql_user` resource in the generated configuration file.
 
-3. Review and apply the generated configuration
+3. Review and apply the generated configuration.
 
     Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
 

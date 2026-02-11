@@ -1,11 +1,11 @@
 ---
 title: Sink to TiDB Cloud
-summary: This document explains how to stream data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster. There are restrictions on the number of changefeeds and regions available for the feature. Prerequisites include extending tidb_gc_life_time, backing up data, and obtaining the start position of TiDB Cloud sink. To create a TiDB Cloud sink, navigate to the cluster overview page, establish the connection, customize table and event filters, fill in the start replication position, specify the changefeed specification, review the configuration, and create the sink. Finally, restore tidb_gc_life_time to its original value.
+summary: This document explains how to stream data from a TiDB Cloud Dedicated cluster to a {{{ .starter }}} or {{{ .essential }}} cluster. There are restrictions on the number of changefeeds and regions available for the feature. Prerequisites include extending tidb_gc_life_time, backing up data, and obtaining the start position of TiDB Cloud sink. To create a TiDB Cloud sink, navigate to the cluster overview page, establish the connection, customize table and event filters, fill in the start replication position, specify the changefeed specification, review the configuration, and create the sink. Finally, restore tidb_gc_life_time to its original value.
 ---
 
 # Sink to TiDB Cloud
 
-This document describes how to stream data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster.
+This document describes how to stream data from a TiDB Cloud Dedicated cluster to a {{{ .starter }}} or {{{ .essential }}} cluster.
 
 > **Note:**
 >
@@ -23,14 +23,14 @@ This document describes how to stream data from a TiDB Cloud Dedicated cluster t
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
 
-- The source TiDB Cloud Dedicated cluster and the destination TiDB Cloud Serverless cluster must be in the same project and the same region.
-- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
+- The source TiDB Cloud Dedicated cluster and the destination {{{ .starter }}} or {{{ .essential }}} cluster must be in the same project and the same region.
+- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated cluster to a {{{ .starter }}} or {{{ .essential }}} cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
 
 ## Prerequisites
 
-The **Sink to TiDB Cloud** connector can only sink incremental data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster after a certain [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso).
+The **Sink to TiDB Cloud** connector can only sink incremental data from a TiDB Cloud Dedicated cluster to a {{{ .starter }}} or {{{ .essential }}} cluster after a certain [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso).
 
-Before creating a changefeed, you need to export existing data from the source TiDB Cloud Dedicated cluster and load the data to the destination TiDB Cloud Serverless cluster.
+Before creating a changefeed, you need to export existing data from the source TiDB Cloud Dedicated cluster and load the data to the destination {{{ .starter }}} or {{{ .essential }}} cluster.
 
 1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
 
@@ -43,7 +43,7 @@ Before creating a changefeed, you need to export existing data from the source T
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data from your TiDB Cloud Dedicated cluster, then use [TiDB Cloud Serverless Import](/tidb-cloud/import-csv-files-serverless.md) to load data to the destination TiDB Cloud Serverless cluster.
+2. Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data from your TiDB Cloud Dedicated cluster, then use [the import feature](/tidb-cloud/import-csv-files-serverless.md) to load data to the destination {{{ .starter }}} or {{{ .essential }}} cluster.
 
 3. From the [exported files of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files), get the start position of TiDB Cloud sink from the metadata file:
 
@@ -59,13 +59,13 @@ Before creating a changefeed, you need to export existing data from the source T
 
 ## Create a TiDB Cloud sink
 
-After completing the prerequisites, you can sink your data to the destination TiDB Cloud Serverless cluster.
+After completing the prerequisites, you can sink your data to the destination {{{ .starter }}} or {{{ .essential }}} cluster.
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Data** > **Changefeed** in the left navigation pane.
 
 2. Click **Create Changefeed**, and select **TiDB Cloud** as the destination.
 
-3. In the **TiDB Cloud Connection** area, select the destination TiDB Cloud Serverless cluster, and then fill in the user name and password of the destination cluster.
+3. In the **TiDB Cloud Connection** area, select the destination {{{ .starter }}} or {{{ .essential }}} cluster, and then fill in the user name and password of the destination cluster.
 
 4. Click **Next** to establish the connection between the two TiDB clusters and test whether the changefeed can connect them successfully:
 
@@ -74,6 +74,7 @@ After completing the prerequisites, you can sink your data to the destination Ti
 
 5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
 
+    - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
     - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when the downstream handles duplicate events. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can add filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
@@ -81,7 +82,13 @@ After completing the prerequisites, you can sink your data to the destination Ti
 6. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
-    - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
+    - **Event Filter**: you can use the following event filters to exclude specific events from the changefeed:
+        - **Ignore event**: excludes specified event types.
+        - **Ignore SQL**: excludes DDL events that match specified expressions. For example, `^drop` excludes statements starting with `DROP`, and `add column` excludes statements containing `ADD COLUMN`.
+        - **Ignore insert value expression**: excludes `INSERT` statements that meet specific conditions. For example, `id >= 100` excludes `INSERT` statements where `id` is greater than or equal to 100.
+        - **Ignore update new value expression**: excludes `UPDATE` statements where the new value matches a specified condition. For example, `gender = 'male'` excludes updates that result in `gender` being `male`.
+        - **Ignore update old value expression**: excludes `UPDATE` statements where the old value matches a specified condition. For example, `age < 18` excludes updates where the old value of `age` is less than 18.
+        - **Ignore delete value expression**: excludes `DELETE` statements that meet a specified condition. For example, `name = 'john'` excludes `DELETE` statements where `name` is `'john'`.
 
 7. In the **Start Replication Position** area, fill in the TSO that you get from Dumpling exported metadata files.
 

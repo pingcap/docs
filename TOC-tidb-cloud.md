@@ -6,12 +6,12 @@
 ## GET STARTED
 
 - Why TiDB Cloud
-  - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Features](/tidb-cloud/features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
@@ -22,9 +22,7 @@
   - [AI Features](/tidb-cloud/ai-feature-concepts.md)
   - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
-  - High Availability
-    - [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md)
-    - [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
+  - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
   - [Data Streaming](/tidb-cloud/data-streaming-concepts.md)
   - [Backup & Restore](/tidb-cloud/backup-and-restore-concepts.md)
@@ -34,7 +32,7 @@
 
 - Manage Cluster
   - Plan Your Cluster
-    - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
+    - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
@@ -70,12 +68,15 @@
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-    - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - Third-Party Metrics Integrations
+      - [Overview](/tidb-cloud/third-party-monitoring-integrations.md)
+      - [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md)
+      - [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
-      - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
+      - [Use the Diagnosis Page](/tidb-cloud/tune-performance.md)
       - [Use Statement Summary Tables](/statement-summary-tables.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
@@ -124,10 +125,11 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - Garbage Collection (GC)
-       - [Overview](/garbage-collection-overview.md)
-       - [Configuration](/garbage-collection-configuration.md)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - Optimize Resource Allocation
+    - [Overview of Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
     - Resource Manager
       - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
       - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
@@ -135,6 +137,9 @@
     - TiDB Node Group
       - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
       - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
+  - Manage Connections by TiProxy
+    - [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md)
+    - [Manage TiProxy](/tidb-cloud/tiproxy-management.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
@@ -147,19 +152,13 @@
     - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud Dedicated
-    - [Import Sample Data](/tidb-cloud/import-sample-data.md)
+    - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data.md)
     - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md)
+    - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
-  - Import Data into TiDB Cloud Serverless
-    - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
-    - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
-    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)
-    - [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -196,12 +195,9 @@
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
-- Disaster Recovery
-  - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
-  - [Get Started](/tidb-cloud/recovery-group-get-started.md)
-  - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
-  - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
+    - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md)
 - Security
+  - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
@@ -209,25 +205,20 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - TiDB Cloud Serverless
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-      - [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    - TiDB Cloud Dedicated
-      - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
-      - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-      - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-      - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+    - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Connect via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
-      - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
-      - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)
+    - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Database Access Control
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
     - [TiDB Cloud Dedicated Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
-    - [TiDB Cloud Serverless Database Audit Logging](/tidb-cloud/serverless-audit-logging.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -236,10 +227,9 @@
   - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from AWS, Azure, or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)
+  - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
-  - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -257,18 +247,15 @@
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use TiDB Cloud Dedicated Cluster Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
-    - [Use TiDB Cloud Dedicated Private Endpoint Connection Resource](/tidb-cloud/terraform-use-dedicated-private-endpoint-connection-resource.md)
-    - [Use TiDB Cloud Dedicated VPC Peering Resource](/tidb-cloud/terraform-use-dedicated-vpc-peering-resource.md)
-    - [Use TiDB Cloud Dedicated Network Container Resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)
-    - [Use TiDB Cloud Serverless Cluster Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
-    - [Use TiDB Cloud Serverless Branch Resource](/tidb-cloud/terraform-use-serverless-branch-resource.md)
-    - [Use TiDB Cloud Serverless Export Resource](/tidb-cloud/terraform-use-serverless-export-resource.md)
-    - [Use SQL User Resource](/tidb-cloud/terraform-use-sql-user-resource.md)
-    - [Use Cluster Resource (Deprecated)](/tidb-cloud/terraform-use-cluster-resource.md)
-    - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
-    - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
-    - [Use Import Resource](/tidb-cloud/terraform-use-import-resource.md)
+    - [Use the `tidbcloud_dedicated_cluster` Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
+    - [Use the `tidbcloud_dedicated_private_endpoint_connection` Resource](/tidb-cloud/terraform-use-dedicated-private-endpoint-connection-resource.md)
+    - [Use the `tidbcloud_dedicated_vpc_peering` Resource](/tidb-cloud/terraform-use-dedicated-vpc-peering-resource.md)
+    - [Use the `tidbcloud_dedicated_network_container` Resource](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)
+    - [Use the `tidbcloud_sql_user` Resource](/tidb-cloud/terraform-use-sql-user-resource.md)
+    - [Use the `tidbcloud_cluster` Resource (Deprecated)](/tidb-cloud/terraform-use-cluster-resource.md)
+    - [Use the `tidbcloud_backup` Resource](/tidb-cloud/terraform-use-backup-resource.md)
+    - [Use the `tidbcloud_restore` Resource](/tidb-cloud/terraform-use-restore-resource.md)
+    - [Use the `tidbcloud_import` Resource](/tidb-cloud/terraform-use-import-resource.md)
     - [Migrate Cluster Resource](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
@@ -322,6 +309,7 @@
     - [`BACKUP`](/sql-statements/sql-statement-backup.md)
     - [`BATCH`](/sql-statements/sql-statement-batch.md)
     - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+    - [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
     - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
     - [`COMMIT`](/sql-statements/sql-statement-commit.md)
     - [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
@@ -339,6 +327,7 @@
     - [`DELETE`](/sql-statements/sql-statement-delete.md)
     - [`DESC`](/sql-statements/sql-statement-desc.md)
     - [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
+    - [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
     - [`DO`](/sql-statements/sql-statement-do.md)
     - [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
     - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
@@ -402,6 +391,7 @@
     - [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
     - [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
     - [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
+    - [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
     - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
     - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
     - [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -424,6 +414,7 @@
     - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
     - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)
     - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+    - [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
     - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
     - [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
     - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
@@ -500,7 +491,6 @@
   - Character Set and Collation
     - [Overview](/character-set-and-collation.md)
     - [GBK](/character-set-gbk.md)
-    - [GB18030](/character-set-gb18030.md)
   - Read Historical Data
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
@@ -584,8 +574,8 @@
   - [TiDB X Architecture](/tidb-cloud/tidb-x-architecture.md)
   - Storage Engines
     - TiKV
-        - [TiKV Overview](/tikv-overview.md)
-        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      - [TiKV Overview](/tikv-overview.md)
+      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
@@ -597,7 +587,6 @@
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
@@ -625,7 +614,6 @@
   - [Batch Processing](/batch-processing.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
-  - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
@@ -635,6 +623,8 @@
     - Connected: IM Subscription for TiDB Cloud Alerts
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
+      - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
+      - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)
@@ -644,7 +634,7 @@
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
+- [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 
 ## _BUILD_ALLOWLIST
 

@@ -1,20 +1,20 @@
 ---
-title: Use TiDB Cloud Serverless Cluster Resource
-summary: Learn how to use the TiDB Cloud Serverless cluster resource to create and modify a TiDB Cloud Serverless cluster.
+title: Use the `tidbcloud_serverless_cluster` Resource
+summary: Learn how to use the `tidbcloud_serverless_cluster` resource to create and modify a {{{ .starter }}} cluster.
 ---
 
-# Use TiDB Cloud Serverless Cluster Resource
+# Use the `tidbcloud_serverless_cluster` Resource
 
-This document describes how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
+This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) cluster with the `tidbcloud_serverless_cluster` resource.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
+You will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 
 The features of the `tidbcloud_serverless_cluster` resource include the following:
 
-- Create TiDB Cloud Serverless clusters.
-- Modify TiDB Cloud Serverless clusters.
-- Import TiDB Cloud Serverless clusters.
-- Delete TiDB Cloud Serverless clusters.
+- Create {{{ .starter }}} clusters.
+- Modify {{{ .starter }}} clusters.
+- Import {{{ .starter }}} clusters.
+- Delete {{{ .starter }}} clusters.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ The features of the `tidbcloud_serverless_cluster` resource include the followin
 
 ## Get project IDs using the `tidbcloud_projects` data source
 
-Each TiDB cluster belongs to a project. Before creating a TiDB Cloud Serverless cluster, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
+Each TiDB cluster belongs to a project. Before creating a {{{ .starter }}} cluster, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
 
 To retrieve the information about all available projects, use the `tidbcloud_projects` data source as follows:
 
@@ -119,15 +119,15 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Create a TiDB Cloud Serverless cluster
+## Create a {{{ .starter }}} cluster
 
-You can create a TiDB Cloud Serverless cluster using the `tidbcloud_serverless_cluster` resource.
-
-The following example shows how to create a TiDB Cloud Serverless cluster.
+You can create a {{{ .starter }}} cluster using the `tidbcloud_serverless_cluster` resource.
 
 1. Create a directory for the cluster and enter it.
 
-2. Create a `cluster.tf` file:
+2. Create a `cluster.tf` file.
+
+    The following is an example of the `cluster.tf` file:
 
     ```
     terraform {
@@ -157,10 +157,9 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the TiDB Cloud Serverless cluster resource, set the resource type as `tidbcloud_serverless_cluster`.
+    - To use the `tidbcloud_serverless_cluster` resource, set the resource type as `tidbcloud_serverless_cluster`.
     - For the resource name, you can define it as needed. For example, `example`.
-    - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Serverless cluster specification information.
-    - To get the TiDB Cloud Serverless cluster specification information, see [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
+    - For resource details, you can configure them according to the Project ID and the [`tidbcloud_serverless_cluster` specification](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -289,16 +288,16 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
     }
     ```
 
-## Modify a TiDB Cloud Serverless cluster
+## Modify a {{{ .starter }}} cluster
 
-For a TiDB Cloud Serverless cluster, you can use Terraform to manage resources. The arguments that you can modify include:
+For a {{{ .starter }}} cluster, you can use Terraform to manage resources. The arguments that you can modify include:
 
 - `display_name`: The display name of the cluster.
 - `spending_limit`: The spending limit of the cluster.
 - `endpoints.public.disabled`: Whether to disable the public endpoint.
 - `automated_backup_policy.start_time`: The UTC time of day in `HH:mm` format when the automated backup starts.
 
-To modify a TiDB Cloud Serverless cluster, you can modify the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to apply the changes. For example, you can modify the `display_name` and `spending_limit` as follows:
+To modify a {{{ .starter }}} cluster, you can modify the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to apply the changes. For example, you can modify the `display_name` and `spending_limit` as follows:
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
@@ -418,13 +417,11 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## Import a TiDB Cloud Serverless cluster
+## Import a {{{ .starter }}} cluster
 
-For a TiDB Cloud Serverless cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a {{{ .starter }}} cluster that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
-Import a TiDB Cloud Serverless cluster that is not created by Terraform as follows:
-
-1. Add an import block for the new TiDB Cloud Serverless cluster resource.
+1. Add an import block for the new `tidbcloud_serverless_cluster` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
 
@@ -437,7 +434,7 @@ Import a TiDB Cloud Serverless cluster that is not created by Terraform as follo
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Serverless cluster resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_serverless_cluster` resource according to the import block:
 
       ```shell
       terraform plan -generate-config-out=generated.tf
@@ -460,9 +457,9 @@ Import a TiDB Cloud Serverless cluster that is not created by Terraform as follo
 
 Now you can manage the imported cluster with Terraform.
 
-## Delete a TiDB Cloud Serverless cluster
+## Delete a {{{ .starter }}} cluster
 
-To delete a TiDB Cloud Serverless cluster, you can delete the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to destroy the resource:
+To delete a {{{ .starter }}} cluster, you can delete the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply
@@ -542,7 +539,7 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been destroyed:
 
 ```
 $ terraform show
