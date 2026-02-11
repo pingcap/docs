@@ -36,6 +36,25 @@ To complete this tutorial, you need:
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
+<CustomContent plan="starter,essential">
+
+On Windows, you must configure an additional SSL certificate (ISRG Root X1) in DBeaver to connect to the {{{ .starter }}} or {{{ .essential }}} public endpoint. Otherwise, the connection fails.
+
+To configure the ISRG Root X1 certificate, do the following:
+
+1. Download the ISRG Root X1 certificate from: https://letsencrypt.org/certs/isrgrootx1.pem. Save it locally, for example, to `C:\certs\isrgrootx1.pem`.
+
+2. In DBeaver, edit your connection and go to the **SSL** tab:
+
+    1. Select **Use SSL**.
+    2. In **CA certificate**, browse to select the downloaded `isrgrootx1.pem` file.
+    3. Leave the other certificate fields empty.
+
+3. Remove any previously added `sslMode`, `useSSL`, or `requireSSL` entries from the **Driver properties** tab to avoid conflicting SSL settings.
+
+4. Click **Test Connection** to verify that the connection succeeds.
+
+</CustomContent>
 
 ## Connect to TiDB
 
