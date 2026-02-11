@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Developing Java Applications with TiDB
 summary: This document introduces best practices for developing Java applications with TiDB, covering database-related components, JDBC usage, connection pool configuration, data access framework, Spring Transaction, and troubleshooting tools. TiDB is highly compatible with MySQL, so most MySQL-based Java application best practices also apply to TiDB.
-aliases: ['/tidb/stable/java-app-best-practices/','/tidb/dev/java-app-best-practices/']
+aliases: ['/docs/dev/best-practices/java-app-best-practices/','/docs/dev/reference/best-practices/java-app/','/tidb/stable/java-app-best-practices/','/tidb/dev/java-app-best-practices/']
 ---
 
 # Best Practices for Developing Java Applications with TiDB
