@@ -42,7 +42,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} public endpoint from DBea
 
 To configure the ISRG Root X1 certificate, do the following:
 
-1. Download the ISRG Root X1 certificate from https://letsencrypt.org/certs/isrgrootx1.pem and save it to a local path, for example, `C:\certs\isrgrootx1.pem`.
+1. Download the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem) and save it to a local path, for example, `C:\certs\isrgrootx1.pem`.
 
 2. In DBeaver, edit your connection and go to the **SSL** tab:
 
