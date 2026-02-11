@@ -5,7 +5,7 @@ summary: Learn the concept, user scenarios, usages, and limitations of importing
 
 # Use TiDB Lightning to Import Data in Parallel
 
-Since v5.3.0, the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which greatly reduces the time required to import large amount of data.
+Since v5.3.0, the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data from single or multiple tables in parallel. In this way, TiDB Lightning provides the ability to scale horizontally, which greatly reduces the time required to import large amount of data.
 
 In technical implementation, TiDB Lightning records the meta data of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
 

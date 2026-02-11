@@ -130,7 +130,8 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
 
     > **Note:**
     >
-    > This operation is only required after you add PD nodes. If you only add TiDB or TiKV nodes, this operation is unnecessary.
+    > - Refreshing cluster configuration is only required after you add PD nodes. If you only add TiDB or TiKV nodes, skip this step.
+    > - If you are using TiUP v1.15.0 or a later version, skip this step because TiUP does it. If you are using a TiUP version earlier than v1.15.0, perform the following sub-steps.
 
     1. Refresh the cluster configuration:
 
@@ -139,10 +140,6 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
         ```
 
     2. Refresh the Prometheus configuration and restart Prometheus:
-
-        > **Note:**
-        >
-        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
 
         ```shell
         tiup cluster reload <cluster-name> -R prometheus
@@ -332,7 +329,8 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
     > **Note:**
     >
-    > This operation is only required after you remove PD nodes. If you only remove TiDB or TiKV nodes, this operation is unnecessary.
+    > - Refreshing cluster configuration is only required after you remove PD nodes. If you only remove TiDB or TiKV nodes, skip this step.
+    > - If you are using TiUP v1.15.0 or a later version, skip this step because TiUP does it. If you are using a TiUP version earlier than v1.15.0, perform the following sub-steps.
 
     1. Refresh the cluster configuration:
 
@@ -341,10 +339,6 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
         ```
 
     2. Refresh the Prometheus configuration and restart Prometheus:
-
-        > **Note:**
-        >
-        > If you are using TiUP v1.15.0 or a later version, skip this step. If you are using a TiUP version earlier than v1.15.0, execute the following command to update the Prometheus configuration and restart Prometheus.
 
         ```shell
         tiup cluster reload <cluster-name> -R prometheus

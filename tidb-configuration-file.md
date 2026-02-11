@@ -156,7 +156,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Sets the maximum allowable length of the newly created index.
 - Default value: `3072`
 - Unit: byte
-- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+- Range: `[3072, 3072*4]`
+- Compatibility:
+    - MySQL: the maximum index length is fixed at 3072 bytes.
+    - Earlier versions of TiDB:
+        - v3.0.7 and earlier: the maximum index length is fixed at 3072 × 4 bytes.
+        - v3.0.8 ~ v3.0.10: the maximum index length is fixed at 3072 bytes.
+    - v3.0.11 and later versions: TiDB introduces the `max-index-length` configuration item to ensure compatibility with different TiDB versions and with MySQL.
 
 ### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
 
@@ -235,7 +241,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 > - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by features such as [`txn-score`](/system-variables.md#txn_scope) and [`Follower read`](/follower-read.md).
 > - The `group` label has a special use in TiDB Operator. For clusters deployed using [TiDB Operator](/tidb-operator-overview.md), it is **NOT** recommended that you specify the `group` label manually.
 
-## Log
+## log
 
 Configuration items related to log.
 
@@ -337,7 +343,7 @@ Configuration items related to log files.
 - Default value: `0`
 - All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
 
-## Security
+## security
 
 Configuration items related to security.
 
@@ -382,6 +388,11 @@ Configuration items related to security.
 - The path of the SSL private key file used to connect TiKV or PD with TLS.
 - Default value: ""
 
+### `cluster-verify-cn`
+
+- A list of acceptable X.509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
+- Default value: [], which means that the client certificate CN check is disabled.
+
 ### `spilled-file-encryption-method`
 
 + Determines the encryption method used for saving the spilled files to disk.
@@ -418,17 +429,17 @@ Configuration items related to security.
 
 ### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
 
-+ The certificate file path, which is used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
++ The certificate file path, which is used by [TiProxy](https://docs.pingcap.com/tidb/stable/tiproxy-overview) for session migration.
 + Default value: ""
 + Empty value will cause TiProxy session migration to fail. To enable session migration, all TiDB nodes must set this to the same certificate and key. This means that you should store the same certificate and key on every TiDB node.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-+ The key file path used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
++ The key file path used by [TiProxy](https://docs.pingcap.com/tidb/stable/tiproxy-overview) for session migration.
 + Default value: ""
 + Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
-## Performance
+## performance
 
 Configuration items related to performance.
 
@@ -681,9 +692,13 @@ Configuration items related to opentracing.reporter.
 
 ### `grpc-compression-type`
 
-- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
+- Specifies the compression type used for data transfer from TiDB nodes to TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
 - Default value: `"none"`
 - Value options: `"none"`, `"gzip"`
+
+> **Note:**
+>
+> The compression algorithm for response messages returned from TiKV nodes to TiDB nodes is controlled by the TiKV configuration item [`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type).
 
 ### `commit-timeout`
 

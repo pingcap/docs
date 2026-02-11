@@ -328,7 +328,7 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 `SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
 
-`SHOW PROCESSLIST` requires `SUPER` to show connections belonging to other users.
+`SHOW PROCESSLIST` requires the `PROCESS` privilege to show connections belonging to other users.
 
 ### CREATE ROLE/USER
 

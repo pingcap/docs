@@ -7,15 +7,26 @@ summary: Learn about compatibility issues of TiCDC and how to handle them.
 
 This section describes compatibility issues related to TiCDC and how to handle them.
 
-<!--
-## component compatibility matrix
+## Compatibility with TiDB Lightning
 
-TODO
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) provides two data import modes: [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) and [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). This section describes the compatibility of these modes with TiCDC and the steps to use TiDB Lightning and TiCDC together in a cluster.
 
-## feature compatibility matrix
+In the logical import mode, TiDB Lightning imports data by executing SQL statements. This mode is compatible with TiCDC. To use TiDB Lightning's logical import mode with TiCDC for data replication, perform the following steps:
 
-TODO
--->
+1. Create a changefeed. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+2. Start TiDB Lightning and import data using the logical import mode. For more information, see [Use logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md).
+
+In the physical import mode, TiDB Lightning imports data by inserting SST files into TiKV. TiCDC is not compatible with this mode and does not support replicating data imported through physical import mode. If you need to use both TiDB Lightning's physical import mode and TiCDC, choose one of the following solutions based on your downstream system:
+
+- If the downstream is a TiDB cluster, perform the following steps:
+
+    1. Use TiDB Lightning to import data into both the upstream and downstream TiDB clusters to ensure data consistency.
+    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+
+- If the downstream is not a TiDB cluster, perform the following steps:
+
+    1. Use the offline import tool provided by your downstream system to import TiDB Lightning's input files.
+    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
 
 ## CLI and configuration file compatibility
 

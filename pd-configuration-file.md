@@ -285,6 +285,16 @@ Configuration items related to scheduling
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
 
+### `max-movable-hot-peer-size` <span class="version-mark">New in v6.1.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ Controls the maximum Region size that can be scheduled for hot Region scheduling.
++ Default value: `512`
++ Unit: MiB
+
 ### `max-snapshot-count`
 
 + Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
@@ -491,7 +501,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
 
-## Controllor
+## controller
 
 This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
 

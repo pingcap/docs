@@ -59,6 +59,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
 + "Session Tracker: Add GTIDs context to the OK packet"
++ JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
 
 ## Differences from MySQL
 

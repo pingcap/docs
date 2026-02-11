@@ -22,6 +22,10 @@ You can deploy TiUP on the control machine in either of the two ways: online dep
 
 ### Deploy TiUP online
 
+> **Note:**
+>
+> If the TiUP environment switches to offline, refer to [Deploy TiUP offline](#deploy-tiup-offline) for deployment. Otherwise, TiUP cannot work properly.
+
 Log in to the control machine using a regular user account (take the `tidb` user as an example). Subsequent TiUP installation and cluster management can be performed by the `tidb` user.
 
 1. Install TiUP by running the following command:
@@ -85,16 +89,16 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 **Method 1**: Download the offline binary packages (TiUP offline package included) of the target TiDB version using the following links. You need to download both the server and toolkit packages. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
 ```
-https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
 ```
 
 ```
-https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
 ```
 
 > **Tip:**
 >
-> `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.1.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.1.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.1.0` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-toolkit-v7.1.0-linux-amd64.tar.gz`.
 
 **Method 2**: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
 

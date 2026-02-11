@@ -5,7 +5,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 
 # TiCDC Overview
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used to replicate incremental data from TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases.
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used to replicate incremental data from TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases. For detailed data replication capabilities, see [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md).
 
 ## Usage scenarios
 
@@ -85,10 +85,6 @@ As shown in the architecture diagram, TiCDC supports replicating data to TiDB, M
     - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
 - To ensure eventual consistency when using TiCDC for disaster recovery, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) and ensure that the storage system where the redo log is written can be read normally when a disaster occurs in the upstream.
-
-> **Note:**
->
-> Since v4.0.8, TiCDC supports replicating tables without a valid index by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
 ## Implementation of processing data changes
 

@@ -32,7 +32,9 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 
 |Target database|Compatibility level|DM version|
 |-|-|-|
-|TiDB 6.0|GA|≥ 5.3.1|
+|TiDB 8.x|GA|≥ 5.3.1|
+|TiDB 7.x|GA|≥ 5.3.1|
+|TiDB 6.x|GA|≥ 5.3.1|
 |TiDB 5.4|GA|≥ 5.3.1|
 |TiDB 5.3|GA|≥ 5.3.1|
 |TiDB 5.2|GA|≥ 2.0.7, recommended: 5.4|

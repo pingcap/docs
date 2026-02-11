@@ -1,11 +1,11 @@
 ---
 title: CRUD SQL in TiDB
-summary: A brief introduction to TiDB's CURD SQL.
+summary: A brief introduction to TiDB's CRUD SQL.
 ---
 
 # CRUD SQL in TiDB
 
-This document briefly introduces how to use TiDB's CURD SQL.
+This document briefly introduces how to use TiDB's CRUD SQL.
 
 ## Before you start
 

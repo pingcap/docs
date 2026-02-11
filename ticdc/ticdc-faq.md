@@ -55,6 +55,111 @@ The expected output is as follows:
 >
 > This feature is introduced in TiCDC 4.0.3.
 
+## How to verify if TiCDC has replicated all updates after upstream stops updating?
+
+After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp is greater than or equal to the upstream TiDB cluster's TSO, then all updates have been replicated. To verify replication completeness, perform the following steps:
+
+1. Get the latest TSO timestamp from the upstream TiDB cluster.
+
+    > **Note:**
+    >
+    > Use the `TIDB_CURRENT_TSO()` function to get the current TSO, instead of using functions like `NOW()` that return the current time.
+
+    The following example uses [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso) to convert the TSO to a readable time format for further comparison:
+
+    ```sql
+    BEGIN;
+    SELECT TIDB_PARSE_TSO(TIDB_CURRENT_TSO());
+    ROLLBACK;
+    ```
+
+    The output is as follows:
+
+    ```sql
+    +------------------------------------+
+    | TIDB_PARSE_TSO(TIDB_CURRENT_TSO()) |
+    +------------------------------------+
+    | 2024-11-12 20:35:34.848000         |
+    +------------------------------------+
+    ```
+
+2. Get the replication progress in TiCDC.
+
+    You can check the replication progress in TiCDC using one of the following methods:
+
+    * **Method 1**: query the checkpoint of the changefeed (recommended).
+
+        Use the [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md) `cdc cli` to view the checkpoint for all replication tasks:
+
+        ```shell
+        cdc cli changefeed list --server=http://127.0.0.1:8300
+        ```
+
+        The output is as follows:
+
+        ```json
+        [
+          {
+            "id": "syncpoint",
+            "namespace": "default",
+            "summary": {
+              "state": "normal",
+              "tso": 453880043653562372,
+              "checkpoint": "2024-11-12 20:36:01.447",
+              "error": null
+            }
+          }
+        ]
+        ```
+
+        In the output, `"checkpoint": "2024-11-12 20:36:01.447"` indicates that TiCDC has replicated all upstream TiDB changes before this time. If this timestamp is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then all updates have been replicated downstream.
+
+    * **Method 2**: query Syncpoint from the downstream TiDB.
+
+        If the downstream is a TiDB cluster and the [TiCDC Syncpoint feature](/ticdc/ticdc-upstream-downstream-check.md) is enabled, you can get the replication progress by querying the Syncpoint in the downstream TiDB.
+
+        > **Note:**
+        >
+        > The Syncpoint update interval is controlled by the [`sync-point-interval`](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) configuration item. For the most up-to-date replication progress, use method 1.
+
+        Execute the following SQL statement in the downstream TiDB to get the upstream TSO (`primary_ts`) and downstream TSO (`secondary_ts`):
+
+        ```sql
+        SELECT * FROM tidb_cdc.syncpoint_v1;
+        ```
+
+        The output is as follows:
+
+        ```sql
+        +------------------+------------+--------------------+--------------------+---------------------+
+        | ticdc_cluster_id | changefeed | primary_ts         | secondary_ts       | created_at          |
+        +------------------+------------+--------------------+--------------------+---------------------+
+        | default          | syncpoint  | 453879870259200000 | 453879870545461257 | 2024-11-12 20:25:01 |
+        | default          | syncpoint  | 453879948902400000 | 453879949214351361 | 2024-11-12 20:30:01 |
+        | default          | syncpoint  | 453880027545600000 | 453880027751907329 | 2024-11-12 20:35:00 |
+        +------------------+------------+--------------------+--------------------+---------------------+
+        ```
+
+        In the output, each row shows the upstream TiDB snapshot at `primary_ts` matches the downstream TiDB snapshot at `secondary_ts`.
+
+        To view the replication progress, convert the latest `primary_ts` to a readable time format:
+
+        ```sql
+        SELECT TIDB_PARSE_TSO(453880027545600000);
+        ```
+
+        The output is as follows:
+
+        ```sql
+        +------------------------------------+
+        | TIDB_PARSE_TSO(453880027545600000) |
+        +------------------------------------+
+        | 2024-11-12 20:35:00                |
+        +------------------------------------+
+        ```
+
+        If the time corresponding to the latest `primary_ts` is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then TiCDC has replicated all updates downstream.
+
 ## What is `gc-ttl` in TiCDC?
 
 Since v4.0.0-rc.1, PD supports external services in setting the service-level GC safepoint. Any service can register and update its GC safepoint. PD ensures that the key-value data later than this GC safepoint is not cleaned by GC.
@@ -184,7 +289,15 @@ For more information, refer to [Open protocol Row Changed Event format](/ticdc/t
 
 ## How much PD storage does TiCDC use?
 
-TiCDC uses etcd in PD to store and regularly update the metadata. Because the time interval between the MVCC of etcd and PD's default compaction is one hour, the amount of PD storage that TiCDC uses is proportional to the amount of metadata versions generated within this hour. However, in v4.0.5, v4.0.6, and v4.0.7, TiCDC has a problem of frequent writing, so if there are 1000 tables created or scheduled in an hour, it then takes up all the etcd storage and returns the `etcdserver: mvcc: database space exceeded` error. You need to clean up the etcd storage after getting this error. See [etcd maintenance space-quota](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota) for details. It is recommended to upgrade your cluster to v4.0.9 or later versions.
+When using TiCDC, you might encounter the `etcdserver: mvcc: database space exceeded` error, which is primarily related to the mechanism that TiCDC uses etcd in PD to store metadata.
+
+etcd uses Multi-Version Concurrency Control (MVCC) to store data, and the default compaction interval in PD is 1 hour. This means that etcd retains multiple versions of all data for 1 hour before compaction.
+
+Before v6.0.0, TiCDC uses etcd in PD to store and update metadata for all tables in a changefeed. Therefore, the PD storage space used by TiCDC is proportional to the number of tables being replicated by the changefeed. When TiCDC is replicating a large number of tables, the etcd storage space could fill up quickly, increasing the probability of the `etcdserver: mvcc: database space exceeded` error.
+
+If you encounter this error, refer to [etcd maintenance space-quota](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota) to clean up the etcd storage space.
+
+Starting from v6.0.0, TiCDC optimizes its metadata storage mechanism, effectively avoiding the etcd storage space issues caused by the preceding reasons. If your TiCDC version is earlier than v6.0.0, it is recommended to upgrade to v6.0.0 or later versions.
 
 ## Does TiCDC support replicating large transactions? Is there any risk?
 
@@ -245,7 +358,9 @@ Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets
 
 TiCDC guarantees that all data is replicated at least once. When there is duplicate data in the downstream, write conflicts occur. To avoid this problem, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements. This behavior is controlled by the `safe-mode` parameter.
 
-In versions earlier than v6.1.3, `safe-mode` defaults to `true`, which means all `INSERT` and `UPDATE` statements are converted into `REPLACE INTO` statements. In v6.1.3 and later versions, TiCDC can automatically determine whether the downstream has duplicate data, and the default value of `safe-mode` changes to `false`. If no duplicate data is detected, TiCDC replicates `INSERT` and `UPDATE` statements without conversion.
+In versions earlier than v6.1.3, the default value of `safe-mode` is `true`, which means all `INSERT` and `UPDATE` statements are converted into `REPLACE INTO` statements.
+
+In v6.1.3 and later versions, the default value of `safe-mode` changes to `false`, and TiCDC can automatically determine whether the downstream has duplicate data. If no duplicate data is detected, TiCDC directly replicates `INSERT` and `UPDATE` statements without conversion; otherwise, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements and then replicates them.
 
 ## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
 
@@ -411,3 +526,73 @@ This is because the default port number of the TiCDC cluster deployed by TiDB Op
   }
 ]
 ```
+
+## Does TiCDC replicate generated columns of DML operations?
+
+Generated columns include virtual generated columns and stored generated columns. TiCDC ignores virtual generated columns and only replicates stored generated columns to the downstream. However, stored generated columns are also ignored when the downstream is MySQL or another MySQL-compatible database (rather than Kafka or other storage services).
+
+> **Note:**
+>
+> When replicating stored generated columns to Kafka or a storage service and then writing them back to MySQL, `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed` might occur. To avoid this error, you can use [Open Protocol](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol) for replication. The output of this protocol includes [bit flags of columns](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns), which can distinguish whether a column is a generated column.
+
+## How do I resolve frequent `CDC:ErrMySQLDuplicateEntryCDC` errors?
+
+When using TiCDC to replicate data to TiDB or MySQL, you might encounter the following error if SQL statements in the upstream are executed in a specific pattern:
+
+`CDC:ErrMySQLDuplicateEntryCDC`
+
+The cause of the error: TiDB combines `DELETE + INSERT` operations on the same row within the same transaction into a single `UPDATE` row change. When TiCDC replicates these changes as updates to the downstream, the `UPDATE` operations attempting to swap unique key values might result in conflicts.
+
+Taking the following table as an example:
+
+```sql
+CREATE TABLE data_table (
+    id BIGINT(20) NOT NULL PRIMARY KEY,
+    value BINARY(16) NOT NULL,
+    UNIQUE KEY value_index (value)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+```
+
+If the upstream attempts to swap the `value` field of the two rows in the table:
+
+```sql
+DELETE FROM data_table WHERE id = 1;
+DELETE FROM data_table WHERE id = 2;
+INSERT INTO data_table (id, value) VALUES (1, 'v3');
+INSERT INTO data_table (id, value) VALUES (2, 'v1');
+```
+
+TiDB generates two `UPDATE` row changes, so TiCDC converts them into two `UPDATE` statements for replication to the downstream:
+
+```sql
+UPDATE data_table SET value = 'v3' WHERE id = 1;
+UPDATE data_table SET value = 'v1' WHERE id = 2;
+```
+
+If the downstream table still contains `v1` when executing the second `UPDATE` statement, it violates the unique key constraint on the `value` column, resulting in the `CDC:ErrMySQLDuplicateEntryCDC` error.
+
+If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable TiCDC safe mode by setting the `safe-mode=true` parameter in the [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) configuration:
+
+```
+mysql://user:password@host:port/?safe-mode=true
+```
+
+In safe mode, TiCDC splits the `UPDATE` operation into `DELETE + REPLACE INTO` for execution, thus avoiding the unique key conflict error.
+
+## Why do TiCDC replication tasks to Kafka often fail with `broken pipe` errors?
+
+TiCDC uses the Sarama client to replicate data to Kafka. To avoid out-of-order data, TiCDC disables the automatic retry mechanism of Sarama (by setting the retry count to 0). As a result, if the connection between TiCDC and Kafka is closed by Kafka after being idle for some time, subsequent writes from TiCDC will trigger a `write: broken pipe` error, causing the replication task to fail.
+
+Although the changefeed might fail due to this error, TiCDC automatically restarts the affected changefeed, so the replication task can continue running normally. Note that during the restart process, the replication latency (lag) of the changefeed might temporarily increase by a small amount, typically within 30 seconds, before automatically returning to normal.
+
+If your application is highly sensitive to changefeed latency, it is recommended to do the following:
+
+1. Increase the Kafka connection idle timeout in the Kafka broker configuration file. For example:
+
+    ```properties
+    connections.max.idle.ms=86400000  # Set to 1 day
+    ```
+
+    It is recommended to adjust the value of `connections.max.idle.ms` according to your actual replication workload. For example, if a TiCDC changefeed always replicates data within several minutes, you can set `connections.max.idle.ms` to several minutes instead of a very large value.
+
+2. Restart Kafka to apply the configuration change. This prevents connections from being closed prematurely and helps reduce `broken pipe` errors.

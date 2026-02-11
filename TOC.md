@@ -1,7 +1,6 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 7.1 Release Notes](/releases/release-7.1.0.md)
@@ -9,7 +8,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
-  - [Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
   - [Try Out HTAP](/quick-start-with-htap.md)
@@ -73,6 +71,7 @@
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     - [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
+    - [Migrate and Upgrade a TiDB Cluster](/tidb-upgrade-migration-guide.md)
     - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -120,6 +119,37 @@
   - [Monitoring API](/tidb-monitoring-api.md)
   - [Deploy Monitoring Services](/deploy-monitoring-services.md)
   - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
+  - TiDB Dashboard
+    - [Overview](/dashboard/dashboard-intro.md)
+    - Maintain
+      - [Deploy](/dashboard/dashboard-ops-deploy.md)
+      - [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
+      - [User Management](/dashboard/dashboard-user.md)
+      - [Secure](/dashboard/dashboard-ops-security.md)
+    - [Access](/dashboard/dashboard-access.md)
+    - [Overview Page](/dashboard/dashboard-overview.md)
+    - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
+    - [Top SQL Page](/dashboard/top-sql.md)
+    - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+    - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
+    - SQL Statements Analysis
+      - [SQL Statements Page](/dashboard/dashboard-statement-list.md)
+      - [SQL Details Page](/dashboard/dashboard-statement-details.md)
+    - [Slow Queries Page](/dashboard/dashboard-slow-query.md)
+    - Cluster Diagnostics
+      - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
+      - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
+      - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
+    - [Monitoring Page](/dashboard/dashboard-monitoring.md)
+    - [Search Logs Page](/dashboard/dashboard-log-search.md)
+    - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
+    - Instance Profiling
+      - [Manual Profiling](/dashboard/dashboard-profiling.md)
+      - [Continuous Profiling](/dashboard/continuous-profiling.md)
+    - Session Management and Configuration
+      - [Share Session](/dashboard/dashboard-session-share.md)
+      - [Configure SSO](/dashboard/dashboard-session-sso.md)
+    - [FAQ](/dashboard/dashboard-faq.md)
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
@@ -289,6 +319,7 @@
         - [tiup cluster start](/tiup/tiup-component-cluster-start.md)
         - [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
         - [tiup cluster template](/tiup/tiup-component-cluster-template.md)
+        - [tiup cluster tls](/tiup/tiup-component-cluster-tls.md)
         - [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
       - TiUP DM Commands
         - [Overview](/tiup/tiup-component-dm.md)
@@ -332,7 +363,7 @@
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.5/deploy-tidb-dm)
     - Tutorials
       - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Sources](/dm/dm-manage-source.md)
@@ -467,6 +498,7 @@
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - Reference
       - [Architecture](/ticdc/ticdc-architecture.md)
+      - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
       - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
       - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
       - Output Protocols
@@ -541,6 +573,7 @@
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
+    - [MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [System Variables](/system-variables.md)
   - Configuration File Parameters
@@ -840,38 +873,6 @@
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
     - [Metadata Lock](/metadata-lock.md)
-  - UI
-    - TiDB Dashboard
-      - [Overview](/dashboard/dashboard-intro.md)
-      - Maintain
-        - [Deploy](/dashboard/dashboard-ops-deploy.md)
-        - [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
-        - [User Management](/dashboard/dashboard-user.md)
-        - [Secure](/dashboard/dashboard-ops-security.md)
-      - [Access](/dashboard/dashboard-access.md)
-      - [Overview Page](/dashboard/dashboard-overview.md)
-      - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
-      - [Top SQL Page](/dashboard/top-sql.md)
-      - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
-      - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
-      - SQL Statements Analysis
-        - [SQL Statements Page](/dashboard/dashboard-statement-list.md)
-        - [SQL Details Page](/dashboard/dashboard-statement-details.md)
-      - [Slow Queries Page](/dashboard/dashboard-slow-query.md)
-      - Cluster Diagnostics
-        - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
-        - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
-        - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
-      - [Monitoring Page](/dashboard/dashboard-monitoring.md)
-      - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
-      - Instance Profiling
-        - [Manual Profiling](/dashboard/dashboard-profiling.md)
-        - [Continuous Profiling](/dashboard/continuous-profiling.md)
-      - Session Management and Configuration
-        - [Share Session](/dashboard/dashboard-session-share.md)
-        - [Configure SSO](/dashboard/dashboard-session-sso.md)
-      - [FAQ](/dashboard/dashboard-faq.md)
   - [Telemetry](/telemetry.md)
   - [Error Codes](/error-codes.md)
   - [TiDB Installation Packages](/binary-package.md)

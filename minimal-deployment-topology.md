@@ -16,6 +16,10 @@ This document describes the minimal deployment topology of TiDB clusters.
 | TiKV | 3 | 16 VCore 32 GiB <br/> 2 TiB (NVMe SSD) for storage | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8 GiB <br/> 500 GiB (SSD) for storage | 10.0.1.10 | Default port <br/> Global directory configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ### Topology templates
 
 - [The simple template for the minimal topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)

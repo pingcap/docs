@@ -138,8 +138,13 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages
++ The compression algorithm for gRPC messages. It affects gRPC messages between TiKV nodes. Starting from v6.5.11 and v7.1.6, it also affects gRPC response messages sent from TiKV to TiDB.
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
+
+    > **Note:**
+    >
+    > TiDB does not support `"deflate"`. Therefore, if you want to compress gRPC response messages sent from TiKV to TiDB, set this configuration item to `"gzip"`.
+
 + Default value: `"none"`
 
 ### `grpc-concurrency`
@@ -658,10 +663,6 @@ Configuration items related to Raftstore.
 
 ### `raft-max-size-per-msg`
 
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
-
 + The soft limit on the size of a single message packet
 + Default value: `"1MB"`
 + Minimum value: greater than `0`
@@ -669,10 +670,6 @@ Configuration items related to Raftstore.
 + Unit: KB|MB|GB
 
 ### `raft-max-inflight-msgs`
-
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
@@ -1019,6 +1016,21 @@ Configuration items related to Raftstore.
 + Minimum value: `0`
 + Unit: second
 
+### `request-voter-replicated-index-interval` <span class="version-mark">New in v6.6.0</span>
+
++ Controls the interval at which the Witness node periodically retrieves the replicated Raft log position from voter nodes.
++ Default value: `5m`, which means 5 minutes.
+
+### `slow-trend-unsensitive-cause` <span class="version-mark">New in v6.6.0</span>
+
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of latency detection. A higher value indicates lower sensitivity.
++ Default value: `10`
+
+### `slow-trend-unsensitive-result` <span class="version-mark">New in v6.6.0</span>
+
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of QPS detection. A higher value indicates lower sensitivity.
++ Default value: `0.5`
+
 ## coprocessor
 
 Configuration items related to Coprocessor.
@@ -1311,11 +1323,20 @@ Configuration items related to RocksDB
     + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
     + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
 
+### `enable-multi-batch-write` <span class="version-mark">New in v6.2.0</span>
+
++ Controls whether to enable RocksDB write optimization, allowing the contents of WriteBatch to be written concurrently to the memtable, reducing write latency.
++ Default value: None. However, it is enabled by default unless explicitly set to `false` or if `rocksdb.enable-pipelined-write` or `rocksdb.enable-unordered-write` is enabled.
+
 ## rocksdb.titan
 
 Configuration items related to Titan.
 
 ### `enabled`
+
+> **Warning**
+>
+> When disabling Titan for TiDB versions earlier than v8.5.0, it is not recommended to modify this configuration item to `false`, as this might cause TiKV to crash. To disable Titan, refer to the steps in [Disable Titan](/storage-engine/titan-configuration.md#disable-titan).
 
 + Enables or disables Titan
 + Default value: `false`
@@ -1336,7 +1357,7 @@ Configuration items related to Titan.
 + Default value: `4`
 + Minimum value: `1`
 
-## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf
 
 Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rocksdb.lockcf`.
 
@@ -1577,6 +1598,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
 + + Default value: `"0s"`, meaning that periodic compaction is disabled by default.
 + Unit: s(second)|h(hour)|d(day)
+
+### `max-compactions` <span class="version-mark">New in v6.6.0</span>
+
++ The maximum number of concurrent compaction tasks. The value `0` means no limit.
++ Default value: `0`
 
 ## rocksdb.defaultcf.titan
 
@@ -1836,9 +1862,13 @@ Configuration items related to Raft Engine.
 
 ### `bytes-per-sync`
 
+> **Warning:**
+>
+> Starting from v6.5.0, Raft Engine writes logs to disk directly without buffering. Therefore, this configuration item is deprecated and no longer functional.
+
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `"4MB"`
++ Before v6.5.0, the default value is `"4MiB"`.
 
 ### `target-file-size`
 
@@ -2250,18 +2280,10 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 #### `background-write-bandwidth` <span class="version-mark">New in v6.2.0</span>
 
-> **Note:**
->
-> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
-
 + The soft limit on the bandwidth with which background transactions write data.
 + Default value: `0KB` (which means no limit)
 
 #### `background-read-bandwidth` <span class="version-mark">New in v6.2.0</span>
-
-> **Note:**
->
-> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
 
 + The soft limit on the bandwidth with which background transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)

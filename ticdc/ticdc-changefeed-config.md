@@ -97,7 +97,7 @@ rules = ['*.*', '!test.*']
 
 # The second event filter rule.
 # matcher = ["test.fruit"] # matcher is an allow list, which means this rule only applies to the fruit table in the test database.
-# ignore-event = ["drop table", "delete"] # Ignore the `drop table` DDL events and the `delete` DML events.
+# ignore-event = ["drop table", "delete"] # Ignore the `drop table` DDL events and the `delete` DML events. Note that when a value in the clustered index column is updated in TiDB, TiCDC splits an `UPDATE` event into `DELETE` and `INSERT` events. TiCDC cannot identify such events as `UPDATE` events and thus cannot correctly filter out such events.
 # ignore-sql = ["^drop table", "alter table"] # Ignore DDL statements that start with `drop table` or contain `alter table`.
 # ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
@@ -107,8 +107,8 @@ rules = ['*.*', '!test.*']
 # The value is "false" by default. Set it to "true" to enable this feature.
 enable-table-across-nodes = false
 # When `enable-table-across-nodes` is enabled, there are two allocation modes:
-# 1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of `region-threshold`, the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is 10000.
-# region-threshold = 10000
+# 1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of `region-threshold`, the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is 100000.
+# region-threshold = 100000
 # 2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of `write-key-threshold`, will this allocation take effect.
 # write-key-threshold = 30000
 # Note:
@@ -198,10 +198,10 @@ encoding-worker-num = 16
 # The number of flushing workers in the redo module.
 # The default value is 8.
 flush-worker-num = 8
-# The behavior to compress redo log files.
+# The behavior to compress redo log files (introduced in v6.5.6 and  v7.1.3).
 # Available options are "" and "lz4". The default value is "", which means no compression.
 compression = ""
-# The concurrency for uploading a single redo file.
+# The concurrency for uploading a single redo file (introduced in v6.5.6 and v7.1.3).
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
 

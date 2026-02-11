@@ -14,14 +14,14 @@ Create a replication task by running the following command:
 ```shell
 cdc cli changefeed create \
     --server=http://10.0.10.25:8300 \
-    --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1" \
+    --sink-uri="kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1" \
     --changefeed-id="simple-replication-task"
 ```
 
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-12-21T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
+Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
 - `--server`: The address of any TiCDC server in the TiCDC cluster.
@@ -62,13 +62,13 @@ The following are descriptions of sink URI parameters and values that can be con
 
 | Parameter/Parameter value               | Description                                                        |
 | :------------------ | :------------------------------------------------------------ |
-| `127.0.0.1`          | The IP address of the downstream Kafka services.                                 |
-| `9092`               | The port for the downstream Kafka.                                          |
+| `host`          | The IP address of the downstream Kafka services.                                 |
+| `port`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
 | `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
+| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default, and the maximum value is `100MB`). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
@@ -103,6 +103,7 @@ The following are descriptions of sink URI parameters and values that can be con
 * It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
 * If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
 * In most cases, it is recommended to use the `canal-json` protocol.
+* If the upstream data changes in TiCDC are infrequent, such as there might be no data changes for more than 10 minutes, it is recommended to increase the Kafka connection idle timeout in the Kafka broker configuration file. For more information, see [Why do TiCDC replication tasks to Kafka often fail with `broken pipe` errors](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors).
 
 > **Note:**
 >
@@ -149,7 +150,18 @@ The following are examples when using Kafka SASL authentication:
     The minimum set of permissions required for TiCDC to function properly is as follows.
 
     - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
-    - The `DescribeConfigs` permission for the Cluster resource type.
+    - The `DescribeConfig` permission for the Cluster resource type.
+
+  The usage scenarios for each permission are as follows:
+
+    | Resource type | Type of operation      |  Scenario                           |
+    | :-------------| :------------- | :--------------------------------|
+    | Cluster       | `DescribeConfig`| Gets the cluster metadata while the changefeed is running |
+    | Topic         | `Describe`      | Tries to create a topic when the changefeed starts |                
+    | Topic         | `Create`        | Tries to create a topic when the changefeed starts  |
+    | Topic         | `Write`         | Sends data to the topic                   | 
+
+    When creating or starting a changefeed, you can disable the `Describe` and `Create` permissions if the specified Kafka topic already exists.
 
 ### Integrate TiCDC with Kafka Connect (Confluent Platform)
 

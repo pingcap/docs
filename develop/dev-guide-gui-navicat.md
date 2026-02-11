@@ -5,12 +5,7 @@ summary: Learn how to connect to TiDB using Navicat.
 
 # Connect to TiDB with Navicat
 
-TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a GUI tool set for database users. This tutorial uses the [Navicat for MySQL](https://www.navicat.com/en/products/navicat-for-mysql) tool to connect to TiDB.
-
-> **Warning:**
->
-> - Although you can use Navicat to connect to TiDB due to its MySQL compatibility, Navicat does not fully support TiDB. You might encounter some issues during usage as it treats TiDB as MySQL. There is a known issue about [Navicat user management compatibility](https://github.com/pingcap/tidb/issues/45154). For more compatibility issues between Navicat and TiDB, see the [TiDB GitHub issue page](https://github.com/pingcap/tidb/issues?q=is%3Aissue+navicat+is%3Aopen).
-> - It is recommended to use other GUI tools that officially support TiDB, such as [DataGrip](/develop/dev-guide-gui-datagrip.md), [DBeaver](/develop/dev-guide-gui-dbeaver.md), and [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md). For a complete list of GUI tools that fully supported by TiDB, see [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md#gui).
+TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a GUI tool set for database users. This tutorial uses the [Navicat Premium](https://www.navicat.com/en/products/navicat-premium) tool to connect to TiDB.
 
 In this tutorial, you can learn how to connect to your TiDB cluster using Navicat.
 
@@ -22,8 +17,8 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Navica
 
 To complete this tutorial, you need:
 
-- [Navicat for MySQL](https://www.navicat.com/en/download/navicat-for-mysql) **16.3.2** or later versions.
-- A paid account for Navicat for MySQL.
+- [Navicat Premium](https://www.navicat.com) **17.1.6** or later versions.
+- A paid account for Navicat Premium.
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
@@ -67,11 +62,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     >
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
+5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
 
-    ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
+    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
+6. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
@@ -79,15 +74,15 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the password of the TiDB Serverless cluster.
 
-    ![Navicat: configure connection general panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-general.png)
+    ![Navicat: configure connection general panel for TiDB Serverless](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
 7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the `CA` file from the TiDB Cloud connection dialog into the **CA Certificate** field.
 
-    ![Navicat: configure connection SSL panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-ssl.png)
+    ![Navicat: configure connection SSL panel for TiDB Serverless](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
 8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
 
-9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
+9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
 
 </div>
 <div label="TiDB Dedicated">
@@ -104,11 +99,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 4. Click **CA cert** to download the CA certificate.
 
-5. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
+5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
 
-    ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
+    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
+6. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
@@ -116,24 +111,24 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the password of the TiDB Dedicated cluster.
 
-    ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)
+    ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
 7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the CA file downloaded in step 4 into the **CA Certificate** field.
 
-    ![Navicat: configure connection SSL panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-ssl.jpg)
+    ![Navicat: configure connection SSL panel for TiDB Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
 8. **Test Connection** to validate the connection to the TiDB Dedicated cluster.
 
-9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
+9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
+1. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
 
-    ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
+    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-2. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
+2. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
     - **Host**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
@@ -141,11 +136,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **User Name**: enter the username to use to connect to your TiDB.
     - **Password**: enter the password to use to connect to your TiDB.
 
-    ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-connection-config-self-hosted-general.png)
+    ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
 3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
 
-4. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
+4. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
 
 </div>
 </SimpleTab>

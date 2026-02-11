@@ -47,7 +47,7 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
   ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
 
-    The **Total RU of user resource groups** represents the total amount of RU for all user resource groups, excluding the `default` resource group. If this value is less than the estimated capacity, the system triggers an alert. By default, the system allocates unlimited usage to the predefined `default` resource group. When all users belong to the `default` resource group, resources are allocated in the same way as when resource control is disabled.
+    The **Total RU of user resource groups** represents the total amount of RU for all user resource groups, excluding the `default` resource group. If this value is more than the estimated capacity, the system triggers an alert. By default, the system allocates unlimited usage to the predefined `default` resource group. When all users belong to the `default` resource group, resources are allocated in the same way as when resource control is disabled.
 
 - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 

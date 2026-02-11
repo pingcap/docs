@@ -65,6 +65,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
 | `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
 | `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default). |
+| `multi-stmt-enable` | Controls whether the SQL statements executed downstream support multiple SQL statements separated by semicolons (optional, the default value is `true`). If it is set to `false`, each SQL statement is executed as a separate transaction. If it is set to `true`, `cache-prep-stmts` does not take effect. |
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |

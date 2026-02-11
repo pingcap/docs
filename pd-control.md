@@ -23,12 +23,12 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.1.5` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.1.5-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.1.5` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-server-v7.1.5-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -332,7 +332,7 @@ Usage:
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
 
-- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. It is not recommended that you use it in the production environment. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
     ```bash
     config set store-limit-version v2       // using store limit v2
@@ -440,6 +440,10 @@ Usage:
 ```
 
 ### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]`
+
+> **Note:**
+>
+> **DO NOT** use the `member delete` command to remove PD nodes in a production environment. To remove a PD node, see [Scale in a TiDB/PD/TiKV cluster](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster) and [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/).
 
 Use this command to view the PD members, remove a specified member, or configure the priority of leader.
 

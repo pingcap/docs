@@ -2485,15 +2485,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
 
-> **Note:**
->
-> This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Duration
 - Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]`
+- Range: `[10m0s, 8760h0m0s]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[10m0s, 168h0m0s]` for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
 - The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
 
 > **Note:**
@@ -4130,7 +4126,7 @@ SHOW WARNINGS;
 >
 > This TiDB variable is not applicable to TiDB Cloud.
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
@@ -4368,6 +4364,15 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
+
+### tidb_slow_txn_log_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION
+- Type: Unsigned integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- Unit: Milliseconds
+- This variable sets the threshold for slow transaction logging. When the execution time of a transaction exceeds this threshold, TiDB logs detailed information about the transaction. When the value is set to `0`, this feature is disabled.
 
 ### tidb_snapshot
 
