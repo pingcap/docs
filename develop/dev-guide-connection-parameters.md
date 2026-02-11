@@ -9,7 +9,7 @@ This document describes how to configure connection pools and connection paramet
 
 <CustomContent platform="tidb">
 
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md#connection-pool)
+If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md#connection-pool)
 
 </CustomContent>
 

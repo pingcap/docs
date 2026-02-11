@@ -86,7 +86,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     Starting from TiDB v7.0.0, Fast Online DDL and PITR are fully compatible. When restoring cluster data through PITR, the index operations added via Fast Online DDL during log backup will be automatically replayed to achieve compatibility.
 
-    For more information, see [documentation](/ddl-introduction.md).
+    For more information, see [documentation](/best-practices/ddl-introduction.md).
 
 * TiFlash supports null-aware semi join and null-aware anti semi join operators [#6674](https://github.com/pingcap/tiflash/issues/6674) @[gengliqi](https://github.com/gengliqi)
 
@@ -142,7 +142,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     TiDB v6.5.0 supports creating ordinary secondary indexes via Fast Online DDL. TiDB v7.0.0 supports creating unique indexes via Fast Online DDL. Compared to v6.1.0, adding unique indexes to large tables is expected to be several times faster with improved performance.
 
-    For more information, see [documentation](/ddl-introduction.md).
+    For more information, see [documentation](/best-practices/ddl-introduction.md).
 
 ### Reliability
 
@@ -168,7 +168,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     TiDB v7.0.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), which significantly improves its fault tolerance and automatic recovery capabilities. By periodically recording and synchronizing the DDL progress, ongoing DDL operations can continue to be executed in Fast Online DDL mode even if there is a TiDB DDL Owner failure or switch. This makes the execution of DDL more stable and efficient.
 
-    For more information, see [documentation](/ddl-introduction.md).
+    For more information, see [documentation](/best-practices/ddl-introduction.md).
 
 * TiFlash supports spilling to disk [#6528](https://github.com/pingcap/tiflash/issues/6528) @[windtalker](https://github.com/windtalker)
 
