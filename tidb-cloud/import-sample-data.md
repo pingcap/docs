@@ -79,6 +79,15 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
     - **Included Schema Files**: for the sample data, select **Yes**.
     - **Data Format**: select **SQL**.
+    - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage. To import the sample data, you can use the default connectivity method.
+
+        - **Public** (default): connects over the public internet. Use this option when the storage account allows public network access.
+        - **Private Link**: connects through an Azure private endpoint for network-isolated access. Use this option when the storage account blocks public access or when your security policy requires private connectivity. If you select **Private Link**, you also need to fill in the additional field **Azure Blob Storage Resource ID**. To find the resource ID:
+            
+            1. Go to the [Azure portal](https://portal.azure.com/).
+            2. Navigate to your storage account and click **Overview** > **JSON View**.
+            3. Copy the value of the `id` property. The resource ID is in the format `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`.
+
     - **Folder URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
     - **SAS Token**: 
         - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`.
@@ -86,7 +95,20 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
     If the region of the storage account is different from your cluster, confirm the compliance of cross region.
 
-4. Click **Connect** > **Start Import**.
+4. Click **Connect**.
+
+    If you selected **Private Link** as the connectivity method, TiDB Cloud creates a private endpoint for your storage account. You need to approve this endpoint request in the Azure portal before the connection can proceed:
+
+    1. Go to the [Azure portal](https://portal.azure.com/) and navigate to your storage account.
+    2. Click **Networking** > **Private endpoint connections**.
+    3. Find the pending connection request from TiDB Cloud and click **Approve**.
+    4. Return to the [TiDB Cloud console](https://tidbcloud.com/). The import wizard proceeds automatically once the endpoint is approved.
+
+    > **Note:**
+    >
+    > If the endpoint is not yet approved, TiDB Cloud displays a message indicating that the connection is pending approval. Approve the request in the [Azure portal](https://portal.azure.com/) and retry the connection.
+
+5. Click **Start Import**.
 
 </div>
 </SimpleTab>

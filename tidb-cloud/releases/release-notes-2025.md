@@ -275,6 +275,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- **TiDB Cloud Starter**
+
+    - Upgrade the TiDB version of [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2) to [v7.5.6](https://docs.pingcap.com/tidb/stable/release-7.5.6).
+
 - **TiDB Cloud Dedicated**
 
     - Encryption at Rest with Customer-Managed Encryption Keys (CMEK) is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on Azure.
