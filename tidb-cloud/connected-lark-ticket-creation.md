@@ -13,11 +13,11 @@ For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connec
 
 ## Create a support ticket
 
-1. In the **PingCAP Support Group** of Lark, mention `@PingCAP Support Bot` and describe the problem in a message. Then, the bot will send you an ephemeral card message that is visible only to you.
+1. In the **PingCAP Support Group** on Lark, mention `@PingCAP Support Bot` and describe the problem in a message. Then, the bot will send you an ephemeral card message that is visible only to you.
 
     ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-2. In the card, fill in the **Reporter** field with your email address used in the [TiDB Cloud console](https://tidbcloud.com/), fill in other fields according to the actual problem, and then click **Submit** to create the ticket.
+2. In the card, enter the email address you use for the [TiDB Cloud console](https://tidbcloud.com/) in the **Reporter** field, fill in the other fields as needed, and then click **Submit** to create the ticket.
 
     ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
@@ -29,7 +29,7 @@ After the ticket is created, the bot replies with the ticket link in the thread.
 
 ## Subscribe to ticket updates
 
-In the **PingCAP Support Group** of Lark, after you [create a support ticket](#create-a-support-ticket), you can receive ticket updates in Lark directly. When a support engineer responds to a ticket, an update message is posted in the **PingCAP Support Group** of Lark. The message includes the ticket title, ticket link, and the latest comment content.
+After you [create a support ticket](#create-a-support-ticket), you can receive ticket updates directly in the Lark **PingCAP Support Group**. When a support engineer responds to your ticket, the bot posts an update message in the group. The message includes the ticket title, a link to the ticket, and the latest comment.
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 

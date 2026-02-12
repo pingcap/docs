@@ -13,15 +13,15 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 
 ## Interact with support tickets
 
-In the **PingCAP Support Group** of Lark, after you [create a support ticket](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket), the bot replies with the ticket link in the message thread.
+After you [create a support ticket](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket) in the **PingCAP Support Group** on Lark, the bot replies with the ticket link in the message thread.
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-Customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md) can use two-way information synchronization between Lark and the ticket system.
+If you subscribe to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), you can use two-way information synchronization between Lark and the ticket system.
 
-When a support engineer responds to the ticket, the response will be synchronized to the Lark message thread, so you do not need to visit the support portal to view them. You can reply directly in the same message thread, and your replies will also be synchronized to the ticket system.
+When a support engineer responds to your ticket, the response is synchronized to the Lark message thread. You can view the response and reply directly in the thread without visiting the support portal. Your replies are also synchronized to the ticket system.
 
-With this capability, customers subscribed to the **Premium** support plan can quickly create, respond to, and manage tickets without leaving Lark.
+With this capability, if you subscribe to the **Premium** support plan, you can quickly create, respond to, and manage tickets without leaving Lark.
 
 ![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
