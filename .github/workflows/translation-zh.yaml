@@ -55,10 +55,6 @@ jobs:
           cd docs-toolkit/markdown-translator
           yarn
           cd ../..
-          echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=key.json
-          export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
-          export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           export LANGLINK_ACCESS_KEY=${{ secrets.LANGLINK_ACCESS_KEY }}
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}

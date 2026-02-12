@@ -9,7 +9,7 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Cloud Serverless cluster via public connection, see [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public connection, see [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
 
 ## Prerequisite: Configure IP access list
 

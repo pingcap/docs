@@ -23,19 +23,19 @@ The classic TiDB architecture provides the following foundational capabilities:
 
 - **Horizontal scalability**: It supports linear scaling for both read and write performance. Clusters can scale to handle millions of queries per second (QPS) and manage over 1 PiB of data across tens of millions of tables.
 - **Hybrid Transactional and Analytical Processing (HTAP)**: It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
-- **Non-blocking schema changes**: It utilizes a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
+- **Non-blocking schema changes**: It uses a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
 - **High availability**: It supports seamless cluster upgrades and scaling operations. This ensures that critical services remain accessible during maintenance or resource adjustment.
 - **Multi-cloud support**: It operates as an open-source solution with support for <CustomContent language="en,zh">Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud</CustomContent><CustomContent language="ja">Amazon Web Services (AWS), Google Cloud, and Microsoft Azure</CustomContent>. This provides cloud neutrality without vendor lock-in.
 
 ### Challenges of classic TiDB
 
-While the shared-nothing architecture of classic TiDB provides high resilience, the tight coupling of storage and compute on local nodes introduces limitations in extreme large-scale environments. As data volumes grow and cloud-native requirements evolve, several structural challenges emerge.
+While the shared-nothing architecture of classic TiDB provides high resilience, the tight coupling of storage and compute on local nodes introduces limitations in extremely large-scale environments. As data volumes grow and cloud-native requirements evolve, several structural challenges emerge.
 
 - **Scalability limitations**
 
     - Data movement overhead: In classic TiDB, scaling out (adding nodes) or scaling in (removing nodes) operations require physical movement of SST files between nodes. For large datasets, this process is time-consuming and can degrade online traffic performance due to heavy CPU and I/O consumption during data movement.
 
-    - Storage engine bottleneck: The underlying RocksDB storage engine in classic TiDB uses a single LSM-tree protected by a global mutex. This design creates a scalability ceiling where the system struggles to handle large datasets (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), preventing the system from fully utilizing the hardware capacity.
+    - Storage engine bottleneck: The underlying RocksDB storage engine in classic TiDB uses a single LSM tree protected by a global mutex. This design creates a scalability ceiling where the system struggles to handle large datasets (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), preventing the system from fully utilizing the hardware capacity.
 
 - **Stability and performance interference**
 
@@ -77,7 +77,7 @@ The TiDB X architecture is as follows:
 
 ### Object storage support
 
-TiDB X utilizes object storage, such as Amazon S3, as the single source of truth for all data. Unlike the classic architecture where data is stored on local disks, TiDB X stores the persistent copy of all data in a **shared object storage layer**. The upper **shared cache layer** (row engine and columnar engine) serves as a high-performance cache to ensure low latency.
+TiDB X uses object storage, such as Amazon S3, as the single source of truth for all data. Unlike the classic architecture where data is stored on local disks, TiDB X stores the persistent copy of all data in a **shared object storage layer**. The upper **shared cache layer** (row engine and columnar engine) serves as a high-performance cache to ensure low latency.
 
 Because the authoritative data is already stored in object storage, backups simply rely on incremental Raft logs and metadata stored in S3, allowing backup operations to complete in seconds regardless of total data volume. During scale-out operations, new TiKV nodes do not need to copy large volumes of data from existing nodes. Instead, they connect to object storage and load the required data on demand, significantly accelerating scale-out operations.
 
@@ -89,7 +89,7 @@ This technical elasticity enables a consumption-based, pay-as-you-go pricing mod
 
 ### Microservice and workload isolation
 
-TiDB X implements a sophisticated separation of duties to ensure that diverse workloads do not interfere with each other. The **isolated SQL layer** consists of separate groups of compute nodes, enabling workload isolation or multi-tenancy scenarios in which different applications can use dedicated compute resources while sharing the same underlying data.
+TiDB X implements a sophisticated separation of duties to ensure that diverse workloads do not interfere with each other. The **isolated SQL layer** consists of separate groups of compute nodes, enabling workload isolation or multi-tenancy scenarios where different applications can use dedicated compute resources while sharing the same underlying data.
 
 The **shared services layer** decomposes heavy database operations into independent microservices, including compaction, statistics collection, and DDL execution. By offloading resource-intensive background operations—such as index creation or large-scale data imports—to this layer, TiDB X ensures that these operations do not compete for CPU or memory resources with compute nodes serving online user traffic. This design provides more predictable performance for critical applications and allows each component—gateway, SQL compute, cache, and background services—to scale independently based on its own resource demands.
 
@@ -99,7 +99,7 @@ The following diagram provides a side-by-side comparison of classic TiDB and TiD
 
 ![Classic TiDB vs TiDB X architecture](/media/tidb-x/tidb-classic-vs-tidb-x-1.png)
 
-- **Engine evolution**: In classic TiDB, the Raft engine manages the multi-raft log, while RocksDB handles physical data storage on local disks. In TiDB X, these components are replaced by a **new RF engine** (Raft engine) and a **redesigned KV engine**. The KV engine is an LSM-tree storage engine that replaces RocksDB. Both new engines are specifically optimized for high performance and seamless integration with object storage.
+- **Engine evolution**: In classic TiDB, the Raft engine manages the multi-raft log, while RocksDB handles physical data storage on local disks. In TiDB X, these components are replaced by a **new RF engine** (Raft engine) and a **redesigned KV engine**. The KV engine is an LSM tree storage engine that replaces RocksDB. Both new engines are specifically optimized for high performance and seamless integration with object storage.
 
 - **Compute workload separation**: The dotted lines in the diagram represent background read and write operations to the object storage layer. In TiDB X, these interactions between the RF/KV engines and object storage are decoupled from foreground processes, ensuring that background operations do not affect online traffic latency.
 
@@ -129,11 +129,11 @@ The move to object storage does not degrade foreground read and write performanc
 
 In classic TiDB, clusters are often over-provisioned to handle peak traffic and background tasks simultaneously. TiDB X enables **auto-scaling**, allowing users to pay only for the resources consumed (pay-as-you-go). Background resources for heavy tasks are provisioned on demand and released when no longer needed, eliminating wasted costs.
 
-TiDB X uses the [Request Capacity Unit](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary/#request-capacity-unit-rcu) (RCU) to measure provisioned compute capacity. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. You can set an upper limit to control costs while still benefiting from elastic scaling.
+TiDB X uses the [Request Capacity Unit](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) (RCU) to measure provisioned compute capacity. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. You can set an upper limit to control costs while still benefiting from elastic scaling.
 
 ### From LSM tree to LSM forest
 
-In classic TiDB, each TiKV node runs a single RocksDB instance that stores data for all Regions in one large LSM tree. Because data from thousands of Regions is mixed together, operations such as moving a Region, scaling out, or scaling in, can trigger extensive compaction. This can consume significant CPU and I/O resources and potentially impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), increased contention on the global mutex lock can impact both read and write performance.
+In classic TiDB, each TiKV node runs a single RocksDB instance that stores data for all Regions in one large LSM tree. Because data from thousands of Regions is mixed together, operations such as moving a Region, scaling out, or scaling in, can trigger extensive compaction. This can consume significant CPU and I/O resources and potentially impact online traffic. The single LSM tree is protected by a global mutex. As data size grows, at scale (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), increased contention on the global mutex lock can impact both read and write performance.
 
 TiDB X redesigns the storage engine by moving from a single LSM tree to an **LSM forest**. While retaining the logical Region abstraction, TiDB X assigns each Region its own independent LSM tree. This physical isolation eliminates cross-Region compaction overhead during operations such as scaling, Region movement, and data loading. Operations on one Region are confined to its own tree, and there is no global mutex contention.
 
@@ -151,7 +151,7 @@ The following table summarizes the architectural transitions from classic TiDB t
 | --- | --- | --- | --- |
 | Architecture | Shared-nothing (data stored on local disks) | Shared-storage (object storage as authoritative persistent storage) | Object storage enables cloud-native elasticity |
 | Stability | Foreground and background tasks share the same resources | Separation of compute and compute (elastic compute pools for heavy tasks) | Protects OLTP workloads under write-intensive or maintenance workloads |
-| Performance | OLTP and tasks jobs contend for CPU and I/O | Dedicated elastic pools for heavy tasks | Lower OLTP latency while heavy tasks complete faster |
+| Performance | OLTP and background tasks contend for CPU and I/O | Dedicated elastic pools for heavy tasks | Lower OLTP latency while heavy tasks complete faster |
 | Scaling mechanism | Physical data migration (SST file copying between TiKV nodes) | TiKV nodes only read or write SST files via object storage | 5×–10× faster scale-out and scale-in |
 | Storage engine | Single LSM tree per TiKV node (RocksDB) | LSM forest (one independent LSM tree per Region) | Eliminates global mutex contention and reduces compaction interference |
 | DDL execution | DDL competes with user traffic for local CPU and I/O | DDL offloaded to elastic compute resources | Faster schema changes with more predictable latency |

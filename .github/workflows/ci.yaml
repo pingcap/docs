@@ -7,28 +7,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  tidb-check:
+  duplicated-file-names:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "18"
       - name: Verify duplicated file names
         run: ./scripts/verify-duplicated-file-name.sh
-      - name: Verify internal links and anchors - tidb only
-        run: |
-          npm i
-          node ./scripts/filterNonCloudDoc.js
-          cp -r ./scripts ./tmp
-          cp -r ./media ./tmp
-          cp .gitignore ./tmp/
-          cd ./tmp
-          ./scripts/verify-links.sh
-          ./scripts/verify-link-anchors.sh
 
-  tidb-cloud-check:
+  internal-links-files:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
@@ -36,22 +23,42 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
-      - name: Check TOC-tidb-cloud.md existence
-        id: check_cloud_toc
-        uses: andstor/file-existence-action@v2
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Verify internal links (full repo) - files
+        run: ./scripts/verify-links.sh
+
+  internal-links-anchors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          files: "TOC-tidb-cloud.md"
-      - name: Verify internal links - cloud only
-        if: steps.check_cloud_toc.outputs.files_exists == 'true'
-        run: |
-          npm i
-          node ./scripts/filterCloudDoc.js
-          cp -r ./scripts ./tmp
-          cp -r ./media ./tmp
-          cp .gitignore ./tmp/
-          cd ./tmp
-          ./scripts/verify-links.sh
-          ./scripts/verify-link-anchors.sh
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Verify internal links (full repo) - anchors
+        run: ./scripts/verify-link-anchors.sh
+
+  internal-links-toc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Verify internal links (full repo) - TOC membership
+        run: node ./scripts/verify-internal-links-in-toc.js
 
   vale:
     runs-on: ubuntu-latest

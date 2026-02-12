@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless update`.
 
 # ticloud serverless update
 
-Update a TiDB Cloud Serverless cluster:
+Update a {{{ .starter }}} or {{{ .essential }}} cluster:
 
 ```shell
 ticloud serverless update [flags]
@@ -13,19 +13,19 @@ ticloud serverless update [flags]
 
 ## Examples
 
-Update a TiDB Cloud Serverless cluster in interactive mode:
+Update a {{{ .starter }}} or {{{ .essential }}} cluster in interactive mode:
 
 ```shell
 ticloud serverless update
 ```
 
-Update the name of a TiDB Cloud Serverless cluster in non-interactive mode:
+Update the name of a {{{ .starter }}} or {{{ .essential }}} cluster in non-interactive mode:
 
 ```shell
 ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-Update labels of a TiDB Cloud Serverless cluster in non-interactive mode
+Update labels of a {{{ .starter }}} or {{{ .essential }}} cluster in non-interactive mode
 
 ```shell
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"

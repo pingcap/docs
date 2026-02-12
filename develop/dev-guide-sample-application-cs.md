@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with C#
 summary: Learn how to connect to TiDB using C#. This tutorial provides sample C# code snippets for interacting with TiDB.
+aliases: ['/tidb/stable/dev-guide-sample-application-cs/','/tidb/dev/dev-guide-sample-application-cs/','/tidbcloud/dev-guide-sample-application-cs/']
 ---
 
 # Connect to TiDB with C\#

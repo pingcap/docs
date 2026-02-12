@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Tuning TiKV Performance with Massive Regions
 summary: TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
-aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/reference/best-practices/massive-regions/']
+aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/reference/best-practices/massive-regions/','/tidb/stable/massive-regions-best-practices/','/tidb/dev/massive-regions-best-practices/']
 ---
 
 # Best Practices for Tuning TiKV Performance with Massive Regions

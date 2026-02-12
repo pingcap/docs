@@ -1,6 +1,7 @@
 ---
-title: ProxySQL Integration Guide
+title: Integrate TiDB with ProxySQL
 summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+aliases: ['/tidb/stable/dev-guide-proxysql-integration/','/tidb/dev/dev-guide-proxysql-integration/','/tidbcloud/dev-guide-proxysql-integration/']
 ---
 
 # Integrate TiDB with ProxySQL
@@ -10,7 +11,7 @@ This document provides a high-level introduction to ProxySQL, describes how to i
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
-- [TiDB Developer Guide](/develop/dev-guide-overview.md)
+- [TiDB Developer Guide](https://docs.pingcap.com/developer/)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 
 ## What is ProxySQL?
@@ -1128,14 +1129,6 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

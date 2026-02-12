@@ -5,13 +5,13 @@ summary: Learn about the limited SQL features on TiDB Cloud.
 
 # Limited SQL features on TiDB Cloud
 
-TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud Dedicated/Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud Dedicated/Serverless. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
+TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
 
 ## Statements
 
 ### Placement and range management
 
-| Statement | TiDB Cloud Dedicated | TiDB Cloud Serverless |
+| Statement | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | Supported | Not supported [^1] |
 | `CREATE PLACEMENT POLICY` | Supported | Not supported [^1] |
@@ -25,7 +25,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Resource groups
 
-| Statement | TiDB Cloud Dedicated | TiDB Cloud Serverless |
+| Statement | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | Supported | Not supported [^2] |
 | `CALIBRATE RESOURCE` | Not supported | Not supported [^2] |
@@ -36,18 +36,18 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Others
 
-| Statement | TiDB Cloud Dedicated | TiDB Cloud Serverless |
+| Statement | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `BACKUP` | Supported | Not supported [^3] |
 | `SHOW BACKUPS` | Supported | Not supported [^3] |
 | `RESTORE` | Supported | Not supported [^3] |
 | `SHOW RESTORES` | Supported | Not supported [^3] |
-| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on TiDB Cloud Serverless. |
+| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on {{{ .starter }}} or {{{ .essential }}}. |
 | `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
 | `ADMIN SHOW SLOW` | Supported | Not supported [^5] |
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
-| `ALTER INSTANCE RELOAD TLS` | Supported | TiDB Cloud Serverless automatically refreshes the TLS certificate. |
+| `ALTER INSTANCE RELOAD TLS` | Supported | {{{ .starter }}} and {{{ .essential }}} automatically refresh the TLS certificate. |
 | `LOAD DATA INFILE` | Supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
@@ -64,13 +64,13 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## Functions and operators
 
-| Function and operator | TiDB Cloud Dedicated | TiDB Cloud Serverless |
+| Function and operator | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `SLEEP` | No Limitation | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
 
 ## System tables
 
-| Database | Table | TiDB Cloud Dedicated | TiDB Cloud Serverless |
+| Database | Table | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|:-|
 | `information_schema` | `ATTRIBUTES` | Supported | Not supported [^1] |
 | `information_schema` | `CLUSTER_CONFIG` | Not supported [^4] | Not supported [^4] |
@@ -94,7 +94,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `information_schema` | `SLOW_QUERY` | Supported | Not supported [^5] |
 | `information_schema` | `STATEMENTS_SUMMARY` | Supported | Not supported [^6] |
 | `information_schema` | `STATEMENTS_SUMMARY_EVICTED` | Supported | Not supported [^6] |
-| `information_schema` | `STATEMENTS_SUMMARY_HISTORY` | Supported | Not supported [^6] |
 | `information_schema` | `TIDB_HOT_REGIONS` | Not supported [^4] | Not supported [^4] |
 | `information_schema` | `TIDB_HOT_REGIONS_HISTORY` | Supported | Not supported [^1] |
 | `information_schema` | `TIDB_SERVERS_INFO` | Supported | Not supported [^1] |
@@ -122,7 +121,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## System variables
 
-| Variable | TiDB Cloud Dedicated | TiDB Cloud Serverless |
+| Variable | TiDB Cloud Dedicated | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `datadir` | No limitation | Not supported [^1] |
 | `interactive_timeout` | No limitation | Read-only [^10] |
@@ -132,6 +131,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `require_secure_transport` | Not supported [^12] | Read-only [^10] |
 | `skip_name_resolve` | No limitation | Read-only [^10] |
 | `sql_log_bin` | No limitation | Read-only [^10] |
+| `tidb_analyze_skip_column_types` | No limitation | Read-only [^10] |
 | `tidb_cdc_write_source` | No limitation | Read-only [^10] |
 | `tidb_check_mb4_value_in_utf8` | Not supported [^4] | Not supported [^4] |
 | `tidb_config` | Not supported [^4] | Not supported [^4] |
@@ -142,6 +142,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_ddl_reorg_batch_size` | No limitation | Read-only [^10] |
 | `tidb_ddl_reorg_priority` | No limitation | Read-only [^10] |
 | `tidb_ddl_reorg_worker_cnt` | No limitation | Read-only [^10] |
+| `tidb_dml_type` | No limitation | Read-only [^10] |
 | `tidb_enable_1pc` | No limitation | Read-only [^10] |
 | `tidb_enable_async_commit` | No limitation | Read-only [^10] |
 | `tidb_enable_auto_analyze` | No limitation | Read-only [^10] |
@@ -209,6 +210,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_txn_mode` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_finish` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_timeout` | No limitation | Read-only [^10] |
+| `txn_scope` | No limitation | Read-only [^10] |
 | `validate_password.enable` | No limitation | Always enabled [^9] |
 | `validate_password.length` | No limitation | At least `8` [^9] |
 | `validate_password.mixed_case_count` | No limitation | At least `1` [^9] |
@@ -217,26 +219,26 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `validate_password.special_char_count` | No limitation | At least `1` [^9] |
 | `wait_timeout` | No limitation | Read-only [^10] |
 
-[^1]: Configuring data placement is not supported on TiDB Cloud Serverless.
+[^1]: Configuring data placement is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^2]: Configuring resource groups is not supported on TiDB Cloud Serverless.
+[^2]: Configuring resource groups is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Cloud Serverless, you can use the TiDB Cloud console instead.
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on TiDB Cloud Serverless, you can use the TiDB Cloud console instead.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
-[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on TiDB Cloud Serverless, you can use the TiDB Cloud console instead.
+[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
-[^8]: Plugin is not supported on TiDB Cloud Serverless.
+[^8]: Plugin is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^9]: TiDB Cloud Serverless enforces strong password policy.
+[^9]: {{{ .starter }}} and {{{ .essential }}} enforce strong password policy.
 
-[^10]: The variable is read-only on TiDB Cloud Serverless.
+[^10]: The variable is read-only on {{{ .starter }}} and {{{ .essential }}}.
 
-[^11]: TiDB Cloud Serverless does not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, TiDB Cloud Serverless generates a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
+[^11]: {{{ .starter }}} and {{{ .essential }}} do not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, {{{ .starter }}} and {{{ .essential }}} generate a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
 
 [^12]: Not supported. Enabling `require_secure_transport` for TiDB Cloud Dedicated clusters will result in SQL client connection failures.

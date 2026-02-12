@@ -118,7 +118,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
 | TiCDC | | BR v8.2.0 and later: if the target cluster to be restored has a changefeed and the changefeed [CheckpointTS](/ticdc/ticdc-classic-architecture.md#checkpointts) is earlier than the BackupTS, BR does not perform the restoration. BR versions before v8.2.0: if the target cluster to be restored has any active TiCDC changefeeds, BR does not perform the restoration. |
-| Vector search | | Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with [vector data types](/vector-search/vector-search-data-types.md) to TiDB clusters earlier than v8.4.0 is not supported. |
+| Vector search | | Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with [vector data types](/ai/reference/vector-search-data-types.md) to TiDB clusters earlier than v8.4.0 is not supported. |
 
 ### Version compatibility
 

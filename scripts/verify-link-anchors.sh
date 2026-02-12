@@ -7,8 +7,24 @@
 ROOT=$(unset CDPATH && cd $(dirname "${BASH_SOURCE[0]}")/.. && pwd)
 cd $ROOT
 
-npm install -g remark-cli@9.0.0 remark-lint@8.0.0 breeswish/remark-lint-pingcap-docs-anchor
+REMARK_CMD=()
+if [ -x "$ROOT/node_modules/.bin/remark" ]; then
+  # Prefer the repo-local pinned version (installed by `npm ci`).
+  REMARK_CMD=("$ROOT/node_modules/.bin/remark")
+elif command -v remark >/dev/null 2>&1; then
+  # Fall back to a globally-installed version (less reproducible).
+  REMARK_CMD=(remark)
+else
+  REMARK_CMD=(npx --no-install remark)
+fi
 
 echo "info: checking links anchors under $ROOT directory..."
 
-remark --ignore-path .gitignore -u lint -u remark-lint-pingcap-docs-anchor . --frail --quiet
+"${REMARK_CMD[@]}" \
+  --ignore-path .gitignore \
+  --ignore-pattern '.*/**' \
+  -u lint \
+  -u @breeswish-org/remark-lint-pingcap-docs-anchor \
+  . \
+  --frail \
+  --quiet
