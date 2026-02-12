@@ -26,13 +26,17 @@ Guide for an easy way to get started with TiDB Cloud.
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidbcloud/dev-guide-overview" label="Developer Guide" icon="cloud-developer-mauve">
+<DocHomeCard href="/developer/" label="Developer Guide" icon="cloud-developer-mauve">
 
 Connect your application with the languages and frameworks you prefer.
 
 </DocHomeCard>
 
+<<<<<<< HEAD
 <DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in {{{ .starter }}} (Beta)" icon="cloud-vector-mauve">
+=======
+<DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Beta)" icon="cloud-vector-mauve">
+>>>>>>> f550bb773b (master: update href links of developer guides and vector search docs in _docHome.md (#22449))
 
 Explore native support of Vector Search in {{{ .starter }}} to build your AI application.
 
@@ -80,9 +84,9 @@ Learn how to deploy TiDB locally in a production environment.
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidb/stable/dev-guide-overview" label="Developer Guide" icon="oss-developer-blue">
+<DocHomeCard href="/developer/" label="Developer Guide" icon="oss-developer-blue">
 
-For application developers using TiDB Self-Managed.
+Connect your application with the languages and frameworks you prefer.
 
 </DocHomeCard>
 
