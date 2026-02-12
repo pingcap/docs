@@ -111,7 +111,7 @@ sudo iptables -A INPUT -s internal IP address range -j ACCEPT
 
 # Only open ports 4000 and 9000 to external users
 sudo iptables -A INPUT -p tcp --dport 4000 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 9000 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 # Deny all other traffic by default
 sudo iptables -P INPUT DROP
