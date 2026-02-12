@@ -109,7 +109,7 @@ It is recommended to only expose the `4000` port for the database and the `3000`
 # Allow internal port communication from the whitelist of component IP addresses
 sudo iptables -A INPUT -s internal IP address range -j ACCEPT
 
-# Only open ports 4000 and 9000 to external users
+# Only open ports 4000 and 3000 to external users
 sudo iptables -A INPUT -p tcp --dport 4000 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
