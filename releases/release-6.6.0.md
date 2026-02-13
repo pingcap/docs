@@ -414,8 +414,8 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | DM | [`on-duplicate-physical`](/dm/task-configuration-file-full.md) | Newly added | This configuration item controls how DM resolves conflicting data in the physical import mode. The default value is `"none"`, which means not resolving conflicting data. `"none"` has the best performance, but might lead to inconsistent data in the downstream database. |
 | DM | [`sorting-dir-physical`](/dm/task-configuration-file-full.md) | Newly added | This configuration item specifies the directory used for local KV sorting in the physical import mode. The default value is the same as the `dir` configuration. |
 | sync-diff-inspector | [`skip-non-existing-table`](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description) | Newly added | This configuration item controls whether to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream.  |
-| TiSpark | [`spark.tispark.replica_read`](/tispark-overview.md#tispark-configurations) | Newly added | This configuration item controls the type of replicas to be read. The value options are `leader`, `follower`, and `learner`. |
-| TiSpark | [`spark.tispark.replica_read.label`](/tispark-overview.md#tispark-configurations) | Newly added | This configuration item is used to set labels for the target TiKV node. |
+| TiSpark | [`spark.tispark.replica_read`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview/#tispark-configurations) | Newly added | This configuration item controls the type of replicas to be read. The value options are `leader`, `follower`, and `learner`. |
+| TiSpark | [`spark.tispark.replica_read.label`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview#tispark-configurations) | Newly added | This configuration item is used to set labels for the target TiKV node. |
 
 ### Others
 
