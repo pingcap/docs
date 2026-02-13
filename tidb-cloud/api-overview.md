@@ -24,5 +24,9 @@ To start using TiDB Cloud API, refer to the following resources in TiDB Cloud AP
 - [Rate Limiting](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
 - API Full References
     - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+        - Scope: Billing 
+        - New APIs will continue to be added in the v1beta1 version. 
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
+        - Scope: TiDB Dedicated cluster management, TiDB Serverless cluster management, project management, backup and restore, import. 
+        - The v1beta version has been finalized and no new APIs will be added in this version.
 - [Changelog](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
