@@ -99,7 +99,6 @@ You can use TiDB to read TiFlash replicas for analytical processing. See the fol
 
 - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
-
 - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 
 <CustomContent platform="tidb">
