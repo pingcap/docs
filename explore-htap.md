@@ -57,21 +57,15 @@ For more information about the architecture, see [architecture of TiDB HTAP](/ti
 
 ## Environment preparation
 
-Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corresponding storage engines according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
+Before exploring TiDB HTAP features, you need to deploy TiDB and its columnar storage engine TiFlash. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the solution.
 
-- TiFlash
+- If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+- If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md). Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
+- When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
 
-    - If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md). Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
-    - When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
-
-        - If your use case requires OLTP with small-scale analytical processing and Ad-Hoc queries, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
-        - If the OLTP throughput does not cause significant pressure to I/O usage rate of the TiFlash nodes, each TiFlash node uses more resources for computation, and thus the TiFlash cluster can have near-linear scalability. The number of TiFlash nodes should be tuned based on expected performance and response time.
-        - If the OLTP throughput is relatively high (for example, the write or update throughput is higher than 10 million lines/hours), due to the limited write capacity of network and physical disks, the I/O between TiKV and TiFlash becomes a bottleneck and is also prone to read and write hotspots. In this case, the number of TiFlash nodes has a complex non-linear relationship with the computation volume of analytical processing, so you need to tune the number of TiFlash nodes based on the actual status of the system.
-
-- TiSpark
-
-    - If your data needs to be analyzed with Spark, deploy TiSpark. For specific process, see [TiSpark User Guide](/tispark-overview.md).
+    - If your use case requires OLTP with small-scale analytical processing and Ad-Hoc queries, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
+    - If the OLTP throughput does not cause significant pressure to I/O usage rate of the TiFlash nodes, each TiFlash node uses more resources for computation, and thus the TiFlash cluster can have near-linear scalability. The number of TiFlash nodes should be tuned based on expected performance and response time.
+    - If the OLTP throughput is relatively high (for example, the write or update throughput is higher than 10 million lines/hours), due to the limited write capacity of network and physical disks, the I/O between TiKV and TiFlash becomes a bottleneck and is also prone to read and write hotspots. In this case, the number of TiFlash nodes has a complex non-linear relationship with the computation volume of analytical processing, so you need to tune the number of TiFlash nodes based on the actual status of the system.
 
 <!--    - Real-time stream processing
   - If you want to build an efficient and easy-to-use real-time data warehouse with TiDB and Flink, you are welcome to participate in Apache Flink x TiDB meetups.-->
