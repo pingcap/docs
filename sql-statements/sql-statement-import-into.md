@@ -147,6 +147,7 @@ The supported options are described as follows:
 
 | Option name | Supported data sources and formats | Description |
 |:---|:---|:---|
+| `GROUP_KEY='<string>'` | All file formats | Specifies the group key for the job. The key can contain only alphanumeric characters, underscores (_), or hyphens (-), and can be up to 256 characters long. If no group key is set, the job will not belong to any group and will not appear in `SHOW IMPORT GROUPS` results. |
 | `CHARACTER_SET='<string>'` | CSV | Specifies the character set of the data file. The default character set is `utf8mb4`. The supported character sets include `binary`, `utf8`, `utf8mb4`, `gb18030`, `gbk`, `latin1`, and `ascii`. |
 | `FIELDS_TERMINATED_BY='<string>'` | CSV | Specifies the field separator. The default separator is `,`. |
 | `FIELDS_ENCLOSED_BY='<char>'` | CSV | Specifies the field delimiter. The default delimiter is `"`. |
@@ -255,7 +256,9 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 ### View and manage import jobs
 
-For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
+For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
+
+Besides, you can use [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-job.md) to view the overall progress of the jobs in the group.
 
 After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
 
