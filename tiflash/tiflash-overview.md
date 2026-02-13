@@ -30,7 +30,7 @@ Deploying TiFlash on Linux AMD64 architecture requires a CPU that supports the A
 
 <CustomContent platform="tidb">
 
-TiFlash is compatible with both TiDB, which enables you to freely choose between these two computing engines.
+TiFlash is compatible with TiDB.
 
 </CustomContent>
 
@@ -87,7 +87,7 @@ After TiFlash is deployed, data replication does not automatically begin. You ne
 
 <CustomContent platform="tidb">
 
-You can either use TiDB to read TiFlash replicas for medium-scale analytical processing, which is based on your own needs. See the following sections for details:
+You can use TiDB to read TiFlash replicas for medium-scale analytical processing. See the following sections for details:
 
 </CustomContent>
 
