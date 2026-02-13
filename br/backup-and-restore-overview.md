@@ -143,7 +143,8 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> - Known issue: Starting from v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> - Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR checks whether case conflicts exist under the target cluster collation. If the data is compatible with the target collation, BR can successfully restore backups from earlier versions. Otherwise, BR reports an error and terminates the restore.
 
 The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
