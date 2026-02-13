@@ -145,57 +145,8 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: Starting from v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
-
-<details>
-<summary>Check whether case conflicts exist under the target cluster collation</summary>
-
-Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR checkes whether case conflicts exist under the target cluster collation. If the data is compatible with the target collation, BR can successfully restore backups from earlier versions. Otherwise, BR reports an error and terminates the restore.
-
-If the upstream cluster is still available before the restore, you can run the following SQL statements on the upstream cluster to perform a precheck on the system tables. By comparing the original row count with the row count after grouping under the target collation, you can determine whether conflicts would occur under the target collation.
-
-Group 1
-
-```sql
-SELECT COUNT(1) FROM mysql.db;
-SELECT COUNT(1) FROM (
-  SELECT Host, DB COLLATE utf8mb4_general_ci, User
-  FROM mysql.db
-  GROUP BY Host, DB COLLATE utf8mb4_general_ci, User
-) AS a;
-```
-
-Group 2
-
-```sql
-SELECT COUNT(1) FROM mysql.tables_priv;
-SELECT COUNT(1) FROM (
-  SELECT Host, DB COLLATE utf8mb4_general_ci, User,
-         Table_name COLLATE utf8mb4_general_ci
-  FROM mysql.tables_priv
-  GROUP BY Host, DB COLLATE utf8mb4_general_ci, User,
-           Table_name COLLATE utf8mb4_general_ci
-) AS a;
-```
-
-Group 3
-
-```sql
-SELECT COUNT(1) FROM mysql.columns_priv;
-SELECT COUNT(1) FROM (
-  SELECT Host, DB COLLATE utf8mb4_general_ci, User,
-         Table_name COLLATE utf8mb4_general_ci,
-         Column_name COLLATE utf8mb4_general_ci
-  FROM mysql.columns_priv
-  GROUP BY Host, DB COLLATE utf8mb4_general_ci, User,
-           Table_name COLLATE utf8mb4_general_ci,
-           Column_name COLLATE utf8mb4_general_ci
-) AS a;
-```
-
-If the two `COUNT` results are equal, no case-insensitive conflicts will occur under the target collation.
-
-</details>
+> - Known issue: Starting from v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> - Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR checkes whether case conflicts exist under the target cluster collation. If the data is compatible with the target collation, BR can successfully restore backups from earlier versions. Otherwise, BR reports an error and terminates the restore.
 
 The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
