@@ -21,7 +21,7 @@
 | assignment expression | 赋值表达式 |  |
 | assignment operation | 赋值运算 |  |
 | authorize | 授予权限 |  |
-| auto embedding | auto embedding | Keep it in English as a feature name. If it is used as verb, translate it to "自动生成向量" in Chinese. |
+| auto embedding | auto embedding | Keep it in English as a feature name. If it is used as a verb, translate it to "自动生成向量" in Chinese. |
 | auto increment | 自增 |  |
 | auto-failover | 故障自恢复 |  |
 | auto-increment primary key | 自增主键 |  |
