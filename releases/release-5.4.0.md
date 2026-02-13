@@ -160,7 +160,7 @@ In v5.4, the key new features or improvements are as follows:
 
     This feature is disabled by default. When it is enabled, if a user operating through TiSpark does not have the needed permissions, the user gets an exception from TiSpark.
 
-    [User document](/tispark-overview.md#security)
+    [User document](https://docs.pingcap.com/tidb/v5.4/tispark-overview#security)
 
 - **TiUP supports generating an initial password for the root user**
 

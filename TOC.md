@@ -23,7 +23,6 @@
     - [PD Microservices Topology](/pd-microservices-deployment-topology.md)
     - [TiProxy Topology](/tiproxy/tiproxy-deployment-topology.md)
     - [TiCDC Topology](/ticdc-deployment-topology.md)
-    - [TiSpark Topology](/tispark-deployment-topology.md)
     - [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - [Deploy Using TiUP](/production-deployment-using-tiup.md)
@@ -552,8 +551,6 @@
     - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Troubleshoot Clusters Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
-  - TiSpark
-    - [User Guide](/tispark-overview.md)
   - sync-diff-inspector
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -586,7 +583,6 @@
     - [Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
-    - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
     - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
     - [Use FastScan](/tiflash/use-fastscan.md)
     - [Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md)
