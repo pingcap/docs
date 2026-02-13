@@ -172,7 +172,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Alerting</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
