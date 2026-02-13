@@ -150,10 +150,7 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 <details>
 <summary>Check whether case conflicts exist under the target cluster collation</summary>
 
-Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR checkes whether case conflicts exist under the target cluster collation.
-
-- If the data is compatible with the target collation, BR can successfully restore backups from earlier versions.
-- If conflicts are detected (for example, both `test.t1` and `test.T1` exist), BR reports an error and terminates the restore.
+Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR checkes whether case conflicts exist under the target cluster collation. If the data is compatible with the target collation, BR can successfully restore backups from earlier versions. Otherwise, BR reports an error and terminates the restore.
 
 If the upstream cluster is still available before the restore, you can run the following SQL statements on the upstream cluster to perform a precheck on the system tables. By comparing the original row count with the row count after grouping under the target collation, you can determine whether conflicts would occur under the target collation.
 
