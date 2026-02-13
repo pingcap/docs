@@ -5,7 +5,7 @@ summary: Learn the telemetry feature, how to disable the feature and view its st
 
 # Telemetry
 
-When the telemetry feature is enabled, TiUP collects usage information and share the information with PingCAP to help understand how to improve the product.
+When the telemetry feature is enabled, TiUP collects usage information and shares the information with PingCAP to help understand how to improve the product.
 
 > **Note:**
 >
