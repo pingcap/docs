@@ -1,7 +1,7 @@
 ---
 title: Connected Care Overview
 summary: 新しい世代のTiDB Cloudサポート サービスである Connected Care を紹介します。
-aliases: ['/tidbcloud/connected-care-announcement']
+aliases: ['/ja/tidbcloud/connected-care-announcement']
 ---
 
 # コネクテッドケアの概要 {#connected-care-overview}

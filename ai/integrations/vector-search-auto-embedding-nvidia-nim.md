@@ -1,7 +1,7 @@
 ---
 title: NVIDIA NIM Embeddings
 summary: TiDB Cloudで NVIDIA NIM 埋め込みモデルを使用する方法を学びます。
-aliases: ['/tidbcloud/vector-search-auto-embedding-nvidia-nim/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-nvidia-nim/']
 ---
 
 # NVIDIA NIM 埋め込み {#nvidia-nim-embeddings}

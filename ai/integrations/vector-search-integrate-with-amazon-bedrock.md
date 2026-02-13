@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with Amazon Bedrock
 summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生成 (RAG) Q&A ボットを構築する方法を学びます。
-aliases: ['/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
+aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 ---
 
 # TiDB Vector Search を Amazon Bedrock に統合する {#integrate-tidb-vector-search-with-amazon-bedrock}

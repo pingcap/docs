@@ -1,7 +1,7 @@
 ---
 title: Back Up and Restore TiDB Cloud Premium Data
 summary: TiDB Cloud Premium インスタンスをバックアップおよび復元する方法を学びます。
-aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
+aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
 # TiDB Cloud Premium データのバックアップと復元 {#back-up-and-restore-tidb-cloud-premium-data}

@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Prisma Tutorial
 summary: Prisma ORM でTiDB Cloudサーバーレス ドライバーを使用する方法を学習します。
-aliases: ['/tidbcloud/serverless-driver-prisma-example/']
+aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 ---
 
 # TiDB CloudサーバーレスDriverPrisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}

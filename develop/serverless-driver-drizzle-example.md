@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Drizzle Tutorial
 summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する方法を学びます。
-aliases: ['/tidbcloud/serverless-driver-drizzle-example/']
+aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 ---
 
 # TiDB CloudサーバーレスDriverDrizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}

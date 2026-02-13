@@ -1,7 +1,7 @@
 ---
 title: OpenAI Embeddings
 summary: TiDB Cloudで OpenAI 埋め込みモデルを使用する方法を学びます。
-aliases: ['/tidbcloud/vector-search-auto-embedding-openai/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-openai/']
 ---
 
 # OpenAI 埋め込み {#openai-embeddings}

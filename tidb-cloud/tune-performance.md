@@ -1,7 +1,7 @@
 ---
 title: Analyze and Tune Performance
 summary: TiDB Cloudでパフォーマンスを分析および調整する方法を学びます。
-aliases: ['/tidbcloud/index-insight']
+aliases: ['/ja/tidbcloud/index-insight']
 ---
 
 # パフォーマンスの分析と調整 {#analyze-and-tune-performance}
