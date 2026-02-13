@@ -1,6 +1,7 @@
 ---
 title: Use TiSpark to Read TiFlash Replicas
 summary: Learn how to use TiSpark to read TiFlash replicas.
+aliases: ['/tidb/stable/use-tispark-to-read-tiflash/','/tidb/dev/use-tispark-to-read-tiflash/']
 ---
 
 # Use TiSpark to Read TiFlash Replicas

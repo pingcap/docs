@@ -1,6 +1,7 @@
 ---
 title: TiSpark Deployment Topology
 summary: Learn the deployment topology of TiSpark using TiUP based on the minimal TiDB topology.
+aliases: ['/tidb/stable/tispark-deployment-topology/','/tidb/dev/tispark-deployment-topology/']
 ---
 
 # TiSpark Deployment Topology
