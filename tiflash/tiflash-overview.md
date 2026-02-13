@@ -85,17 +85,7 @@ TiFlash shares the computing workload in the same way as the TiKV Coprocessor do
 
 After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
 
-<CustomContent platform="tidb">
-
 You can use TiDB to read TiFlash replicas. See the following sections for details:
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-You can use TiDB to read TiFlash replicas for analytical processing. See the following sections for details:
-
-</CustomContent>
 
 - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
