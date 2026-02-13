@@ -1,7 +1,7 @@
 ---
 title: Delete Data
 summary: Learn about the SQL syntax, best practices, and examples for deleting data.
-aliases: ['/tidb/dev/delete-data','/tidb/stable/dev-guide-delete-data/','/tidb/dev/dev-guide-delete-data/','/tidbcloud/dev-guide-delete-data/']
+aliases: ['/tidb/stable/dev-guide-delete-data/','/tidb/dev/dev-guide-delete-data/','/tidbcloud/dev-guide-delete-data/']
 ---
 
 # Delete Data
