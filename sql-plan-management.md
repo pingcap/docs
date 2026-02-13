@@ -639,6 +639,211 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     Empty set (0.00 sec)
     ```
 
+## Optimize query plans using `EXPLAIN EXPLORE` <span class="version-mark">New in v9.0.0</span>
+
+Starting from v9.0.0, TiDB supports the [`EXPLAIN EXPLORE`](/sql-statements/sql-statement-explain.md) statement, which lets you evaluate multiple alternative execution plans for a specific SQL statement. Based on the results, you can choose an optimal plan and create a SQL binding for it. The syntax of `EXPLAIN EXPLORE` is as follows:
+
+```sql
+EXPLAIN EXPLORE [ANALYZE] Stmt;
+```
+
+If you include `ANALYZE`, TiDB executes each plan and provides actual runtime statistics.
+
+The following is an example:
+
+```sql
+mysql> create table t (a int, b int, key(a));
+Query OK, 0 rows affected (0.036 sec)
+
+mysql> set @@cte_max_recursion_depth=50000;
+Query OK, 0 rows affected (0.000 sec)
+
+mysql> insert into t select * from (
+    ->     with recursive gen_ as (
+    ->         select 1 as a, 1 as b
+    ->         union all
+    ->         select a + 1, b + 1 from gen_ where a < 50000
+    ->     )
+    ->     select * from gen_
+    -> ) gen;
+
+explain explore analyze select sum(b) from t where a=1\G
+Query OK, 50000 rows affected (0.738 sec)
+
+mysql> explain explore analyze select sum(b) from t where a=1\G
+*************************** 1. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: stream_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` ), agg_to_cop(@`sel_1`)
+                      plan: StreamAgg	1.00	root		funcs:sum(Column#9)->Column#4
+└─TableReader	1.00	root		data:StreamAgg
+  └─StreamAgg	1.00	cop[tikv]		funcs:sum(test.t.b)->Column#9
+    └─Selection	10.00	cop[tikv]		eq(test.t.a, 1)
+      └─TableFullScan	10000.00	cop[tikv]	table:t	keep order:false, stats:pseudo
+               plan_digest: 8fcbdc3628d5fe2c80c2dafdbb4bbb577cbb35be7aa485faca95894c0f00099c
+               avg_latency: 286167
+                exec_times: 1
+             avg_scan_rows: 0
+         avg_returned_rows: 1
+  latency_per_returned_row: 286167
+scan_rows_per_returned_row: 0
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE '8fcbdc3628d5fe2c80c2dafdbb4bbb577cbb35be7aa485faca95894c0f00099c'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST '8fcbdc3628d5fe2c80c2dafdbb4bbb577cbb35be7aa485faca95894c0f00099c'
+*************************** 2. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: hash_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` )
+                      plan: HashAgg	1.00	root		funcs:sum(Column#11)->Column#4
+└─Projection	10.00	root		cast(test.t.b, decimal(10,0) BINARY)->Column#11
+  └─TableReader	10.00	root		data:Selection
+    └─Selection	10.00	cop[tikv]		eq(test.t.a, 1)
+      └─TableFullScan	10000.00	cop[tikv]	table:t	keep order:false, stats:pseudo
+               plan_digest: 984551e776833bfbe82b64e7c18298fb2f307896860f03be6545b150ab0fccee
+               avg_latency: 304833
+                exec_times: 1
+             avg_scan_rows: 0
+         avg_returned_rows: 1
+  latency_per_returned_row: 304833
+scan_rows_per_returned_row: 0
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE '984551e776833bfbe82b64e7c18298fb2f307896860f03be6545b150ab0fccee'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST '984551e776833bfbe82b64e7c18298fb2f307896860f03be6545b150ab0fccee'
+*************************** 3. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: stream_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` )
+                      plan: StreamAgg	1.00	root		funcs:sum(Column#11)->Column#4
+└─Projection	10.00	root		cast(test.t.b, decimal(10,0) BINARY)->Column#11
+  └─TableReader	10.00	root		data:Selection
+    └─Selection	10.00	cop[tikv]		eq(test.t.a, 1)
+      └─TableFullScan	10000.00	cop[tikv]	table:t	keep order:false, stats:pseudo
+               plan_digest: dea894bed528c15ffa45eb6755a129466f4b4a70a1667c0489e815fbe7d3a286
+               avg_latency: 266292
+                exec_times: 1
+             avg_scan_rows: 0
+         avg_returned_rows: 1
+  latency_per_returned_row: 266292
+scan_rows_per_returned_row: 0
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE 'dea894bed528c15ffa45eb6755a129466f4b4a70a1667c0489e815fbe7d3a286'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'dea894bed528c15ffa45eb6755a129466f4b4a70a1667c0489e815fbe7d3a286'
+*************************** 4. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: stream_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`)
+                      plan: StreamAgg	1.00	root		funcs:sum(Column#9)->Column#4
+└─Projection	10.00	root		cast(test.t.b, decimal(10,0) BINARY)->Column#9
+  └─IndexLookUp	10.00	root		
+    ├─IndexRangeScan(Build)	10.00	cop[tikv]	table:t, index:a(a)	range:[1,1], keep order:false, stats:pseudo
+    └─TableRowIDScan(Probe)	10.00	cop[tikv]	table:t	keep order:false, stats:pseudo
+               plan_digest: c2047759024898d6baf0ee2f5ca18cbff684b31ae5e4113afea838a0ecf21be2
+               avg_latency: 1178125
+                exec_times: 1
+             avg_scan_rows: 2
+         avg_returned_rows: 1
+  latency_per_returned_row: 1178125
+scan_rows_per_returned_row: 2
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE 'c2047759024898d6baf0ee2f5ca18cbff684b31ae5e4113afea838a0ecf21be2'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'c2047759024898d6baf0ee2f5ca18cbff684b31ae5e4113afea838a0ecf21be2'
+*************************** 5. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: hash_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`), agg_to_cop(@`sel_1`)
+                      plan: HashAgg	1.00	root		funcs:sum(Column#6)->Column#4
+└─IndexLookUp	1.00	root		
+  ├─IndexRangeScan(Build)	10.00	cop[tikv]	table:t, index:a(a)	range:[1,1], keep order:false, stats:pseudo
+  └─HashAgg(Probe)	1.00	cop[tikv]		funcs:sum(test.t.b)->Column#6
+    └─TableRowIDScan	10.00	cop[tikv]	table:t	keep order:false, stats:pseudo
+               plan_digest: d4cc0b797027bb2627a8df48dd944ee73f1761aa32df0a64adf9dc2e7aec9ca3
+               avg_latency: 446542
+                exec_times: 1
+             avg_scan_rows: 2
+         avg_returned_rows: 1
+  latency_per_returned_row: 446542
+scan_rows_per_returned_row: 2
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE 'd4cc0b797027bb2627a8df48dd944ee73f1761aa32df0a64adf9dc2e7aec9ca3'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'd4cc0b797027bb2627a8df48dd944ee73f1761aa32df0a64adf9dc2e7aec9ca3'
+*************************** 6. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: hash_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` ), agg_to_cop(@`sel_1`)
+                      plan: HashAgg	1.00	root		funcs:sum(Column#5)->Column#4
+└─TableReader	1.00	root		data:HashAgg
+  └─HashAgg	1.00	cop[tikv]		funcs:sum(test.t.b)->Column#5
+    └─Selection	10.00	cop[tikv]		eq(test.t.a, 1)
+      └─TableFullScan	10000.00	cop[tikv]	table:t	keep order:false, stats:pseudo
+               plan_digest: fb7ba1191ca76f8d9a73c7180d7ba3cbb4043dec48ceb45752d0796006a190c7
+               avg_latency: 14910875
+                exec_times: 1
+             avg_scan_rows: 50000
+         avg_returned_rows: 1
+  latency_per_returned_row: 14910875
+scan_rows_per_returned_row: 50000
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE 'fb7ba1191ca76f8d9a73c7180d7ba3cbb4043dec48ceb45752d0796006a190c7'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'fb7ba1191ca76f8d9a73c7180d7ba3cbb4043dec48ceb45752d0796006a190c7'
+```
+
+In the preceding example, `EXPLAIN EXPLORE` returns six alternative execution plans of this query, each with performance statistics such as latency, rows scanned, and plan digests. Based on this data, you can select the optimal plan and bind it. For example:
+
+```sql
+CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'dea894bed528c15ffa45eb6755a129466f4b4a70a1667c0489e815fbe7d3a286';
+```
+
+To verify that TiDB uses the binding:
+
+```sql
+mysql> explain select sum(b) from t where a=1;
++------------------------------------+---------+-----------+---------------------+-------------------------------------------------+
+| id                                 | estRows | task      | access object       | operator info                                   |
++------------------------------------+---------+-----------+---------------------+-------------------------------------------------+
+| StreamAgg_10                       | 1.00    | root      |                     | funcs:sum(Column#10)->Column#4                  |
+| └─Projection_27                    | 1.00    | root      |                     | cast(test.t.b, decimal(10,0) BINARY)->Column#10 |
+|   └─IndexLookUp_24                 | 1.00    | root      |                     |                                                 |
+|     ├─IndexRangeScan_22(Build)     | 1.00    | cop[tikv] | table:t, index:a(a) | range:[1,1], keep order:false                   |
+|     └─TableRowIDScan_23(Probe)     | 1.00    | cop[tikv] | table:t             | keep order:false                                |
++------------------------------------+---------+-----------+---------------------+-------------------------------------------------+
+5 rows in set (0.006 sec)
+
+mysql> select @@last_plan_from_binding;
++--------------------------+
+| @@last_plan_from_binding |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.003 sec)
+```
+
+If you omit `ANALYZE`, TiDB generates the execution plans but doesn't execute them. In this case, execution-related metrics (such as latency and row counts) are shown as `0`:
+
+```sql
+mysql> explain explore select sum(b) from t where a=1\G
+...
+*************************** 2. row ***************************
+                 statement: select sum(b) from t where a=1
+              binding_hint: hash_agg(@`sel_1`), use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`)
+                      plan: HashAgg	1.00	root		funcs:sum(Column#8)->Column#4
+└─Projection	1.00	root		cast(test.t.b, decimal(10,0) BINARY)->Column#8
+  └─IndexLookUp	1.00	root		
+    ├─IndexRangeScan(Build)	1.00	cop[tikv]	table:t, index:a(a)	range:[1,1], keep order:false
+    └─TableRowIDScan(Probe)	1.00	cop[tikv]	table:t	keep order:false
+               plan_digest: 0af9b6dd116e3ccfb2be2aaa966f79be9e30767486af66242364858978497434
+               avg_latency: 0
+                exec_times: 0
+             avg_scan_rows: 0
+         avg_returned_rows: 0
+  latency_per_returned_row: 0
+scan_rows_per_returned_row: 0
+                 recommend: 
+                    reason: 
+           explain_analyze: EXPLAIN ANALYZE '0af9b6dd116e3ccfb2be2aaa966f79be9e30767486af66242364858978497434'
+                   binding: CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST '0af9b6dd116e3ccfb2be2aaa966f79be9e30767486af66242364858978497434'
+...
+```
+
 ## Baseline capturing
 
 Used for [preventing regression of execution plans during an upgrade](#prevent-regression-of-execution-plans-during-an-upgrade), this feature captures queries that meet capturing conditions and creates bindings for these queries.
