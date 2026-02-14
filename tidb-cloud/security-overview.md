@@ -21,7 +21,7 @@ You can encrypt all communications using TLS to ensure the confidentiality and i
 
 ## Data access control
 
-For cluster types that support Customer-Managed Encryption Keys (CMEK), TiDB Cloud provides encryption for both data at rest and backups.
+For [cluster types](/tidb-cloud/features.md) that support Customer-Managed Encryption Keys (CMEK), TiDB Cloud provides encryption for both data at rest and backups. Currently, CMEK is supported only for TiDB Cloud Dedicated clusters.
 
 Combined with robust key management mechanisms, you can control the lifecycle and usage of encryption keys, further enhancing data security and compliance.
 
