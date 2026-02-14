@@ -349,12 +349,12 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `size`
 
 - The size of a single log file.
-- Default value: `"100M"`
+- Default value: `"1000M"`
 
 ##### `count`
 
 - The maximum number of log files to save. For TiFlash logs and TiFlash error logs, the maximum number of log files to save is `count` respectively.
-- Default value: `10`
+- Default value: `20`
 
 #### raft
 
