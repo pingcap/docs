@@ -13,13 +13,17 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 
 ## Interact with support tickets
 
-If Interaction for Support Tickets is enabled, **PingCAP Support Bot** will convert the **Support Ticket Created** message card to a thread to manage ticket interactions.
+After you [create a support ticket](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket) in the **PingCAP Support Group** on Lark, the bot replies with the ticket link in the message thread.
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-When a PingCAP support engineer comments on the ticket, the comment will be automatically synchronized to the thread.
+If you subscribe to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), you can use two-way information synchronization between Lark and the ticket system.
 
-When anyone comments in the thread, the comment will be synchronized back to the corresponding support ticket.
+When a support engineer responds to your ticket, the response is synchronized to the Lark message thread. You can view the response and reply directly in the thread without visiting the support portal. Your replies are also synchronized to the ticket system.
+
+With this capability, if you subscribe to the **Premium** support plan, you can quickly create, respond to, and manage tickets without leaving Lark.
+
+![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
 ## FAQs
 
