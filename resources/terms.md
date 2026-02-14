@@ -21,6 +21,7 @@
 | assignment expression | 赋值表达式 |  |
 | assignment operation | 赋值运算 |  |
 | authorize | 授予权限 |  |
+| auto embedding | auto embedding | Keep it in English as a feature name. If it is used as a verb, translate it to "自动生成向量" in Chinese. |
 | auto increment | 自增 |  |
 | auto-failover | 故障自恢复 |  |
 | auto-increment primary key | 自增主键 |  |
@@ -35,6 +36,7 @@
 | bootstrap | 启动/引导程序 |  |
 | breakpoint | 断点 |  |
 | breakpoint resume | 断点续传 |  |
+| Bring Your Own Key (BYOK) | Bring Your Own Key（BYOK，由用户自行提供 API 密钥） |  |
 | business continuity | 业务可持续性 |  |
 | cache | 缓存 |  |
 | cache miss | 缓存未命中 |  |
@@ -43,6 +45,7 @@
 | case-sensitive | 大小写敏感 |  |
 | certificate signing request (CSR) | 证书签名请求 |  |
 | Cost-Based Optimization (CBO) | 基于代价的优化 |  |
+| CRUD | 增删改查 |  |
 | Custom Resource Definition (CRD) | 自定义资源类型 |  |
 | checksum | 校验和 |  |
 | circular dependency | 循环依赖 |  |
@@ -154,6 +157,7 @@
 | full import | 全量导入 |  |
 | full match | 全匹配 |  |
 | full table scan | 全表扫描 |  |
+| full-text search | 全文搜索 |  |
 | function | 函数 |  |
 | function signature | 函数签名 |  |
 | functional abstraction | 功能抽象 |  |
@@ -378,6 +382,7 @@
 | schedule | 调度 |  |
 | scope | 作用域 |  |
 | secondary indices | 次级索引 |  |
+| see also | 另请参阅 |  |
 | seed | 数据填充 |  |
 | sequential flooding | 顺序泛洪 |  |
 | service | 服务 |  |
@@ -437,6 +442,8 @@
 | TiDB Cloud on Kubernetes | TiDB Cloud on Kubernetes |  |
 | TiDB Cloud Serverless | TiDB Cloud Serverless |  |
 | TiDB Cloud Starter | TiDB Cloud Starter |  |
+| TiDB Cloud Premium | TiDB Cloud Premium |  |
+| TiDB Self-Managed | TiDB Self-Managed | Keep it in English if the context needs to distinguish it from TiDB Cloud. Otherwise, translate it to "TiDB" in Chinese. |
 | TiKV | TiKV |  |
 | time out | 超时 |  |
 | time series database | 时序数据库 |  |
@@ -467,6 +474,7 @@
 | user identification | 用户标识 |  |
 | user privilege | 用户权限 |  |
 | variable | 变量 |  |
+| vector search | 向量搜索 |  |
 | verification | 验证 |  |
 | verify | 验证 |  |
 | Vertical Pod Autoscaling (VPA) | Pod 自动垂直扩容 | TiDB on Kubernetes |
