@@ -115,15 +115,7 @@ To read data from read-only nodes when using TiDB, you can set the system variab
 set tidb_replica_read=learner;
 ```
 
-#### 3.2 Use Follower Read in TiSpark
-
-To read data from read-only nodes when using TiSpark, you can set the configuration item `spark.tispark.replica_read` to `learner` in the Spark configuration file:
-
-```
-spark.tispark.replica_read learner
-```
-
-#### 3.3 Use Follower Read when backing up cluster data
+#### 3.2 Use Follower Read when backing up cluster data
 
 To read data from read-only nodes when backing up cluster data, you can specify the `--replica-read-label` option in the br command line. Note that when running the following command in shell, you need to use single quotes to wrap the label to prevent `$` from being parsed.
 
