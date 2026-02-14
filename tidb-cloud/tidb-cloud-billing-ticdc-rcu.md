@@ -1,7 +1,7 @@
 ---
 title: Changefeed Billing for TiDB Cloud Dedicated
 summary: TiDB Cloudの変更フィードに対する課金について説明します。
-aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
+aliases: ['/ja/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
 # TiDB Cloud DedicatedのChangefeed課金 {#changefeed-billing-for-tidb-cloud-dedicated}

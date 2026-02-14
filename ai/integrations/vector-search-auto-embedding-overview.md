@@ -1,7 +1,7 @@
 ---
 title: Auto Embedding Overview
 summary: 自動埋め込みを使用して、ベクトルではなくプレーンテキストでセマンティック検索を実行する方法を学習します。
-aliases: ['/tidbcloud/vector-search-auto-embedding-overview/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-overview/']
 ---
 
 # 自動埋め込みの概要 {#auto-embedding-overview}

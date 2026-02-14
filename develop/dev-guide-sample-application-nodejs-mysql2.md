@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with node-mysql2
 summary: node-mysql2 を使用して TiDB に接続する方法を学びます。このチュートリアルでは、node-mysql2 を使用して TiDB を操作する Node.js のサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-mysql2/','/tidb/dev/dev-guide-sample-application-nodejs-mysql2/','/tidbcloud/dev-guide-sample-application-nodejs-mysql2/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-mysql2/','/ja/tidbcloud/dev-guide-sample-application-nodejs-mysql2/']
 ---
 
 # node-mysql2 で TiDB に接続する {#connect-to-tidb-with-node-mysql2}

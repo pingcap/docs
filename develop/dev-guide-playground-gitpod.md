@@ -1,7 +1,7 @@
 ---
 title: Gitpod
 summary: Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
-aliases: ['/tidb/stable/dev-guide-playground-gitpod/','/tidb/dev/dev-guide-playground-gitpod/','/tidbcloud/dev-guide-playground-gitpod/']
+aliases: ['/ja/tidb/stable/dev-guide-playground-gitpod/','/ja/tidbcloud/dev-guide-playground-gitpod/']
 ---
 
 <!-- markdownlint-disable MD029 -->

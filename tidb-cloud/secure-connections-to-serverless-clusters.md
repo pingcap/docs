@@ -1,7 +1,7 @@
 ---
 title: TLS Connections to TiDB Cloud Starter or Essential
 summary: TiDB Cloud Starter およびTiDB Cloud Essential に TLS 接続を導入します。
-aliases: ['/tidbcloud/secure-connections-to-serverless-tier-clusters']
+aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 ---
 
 # TiDB Cloud Starter または Essential への TLS 接続 {#tls-connections-to-tidb-cloud-starter-or-essential}

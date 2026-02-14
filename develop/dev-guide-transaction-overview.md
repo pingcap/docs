@@ -1,7 +1,7 @@
 ---
 title: Transaction overview
 summary: TiDB のトランザクションの簡単な紹介。
-aliases: ['/tidb/stable/dev-guide-transaction-overview/','/tidb/dev/dev-guide-transaction-overview/','/tidbcloud/dev-guide-transaction-overview/']
+aliases: ['/ja/tidb/stable/dev-guide-transaction-overview/','/ja/tidbcloud/dev-guide-transaction-overview/']
 ---
 
 # トランザクションの概要 {#transaction-overview}

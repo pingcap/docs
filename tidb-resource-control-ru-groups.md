@@ -1,7 +1,7 @@
 ---
 title: Use Resource Control to Achieve Resource Group Limitation and Flow Control
 summary: リソース制御機能を使用してアプリケーション リソースを制御およびスケジュールする方法を学習します。
-aliases: ['/tidb/v8.5/tidb-resource-control/','/tidb/stable/tidb-resource-control/']
+aliases: ['/ja/tidb/stable/tidb-resource-control/']
 ---
 
 # リソース制御を使用してリソースグループの制限とフロー制御を実現する {#use-resource-control-to-achieve-resource-group-limitation-and-flow-control}

@@ -1,7 +1,7 @@
 ---
 title: Select Your Cluster Plan
 summary: TiDB Cloudでクラスター プランを選択する方法について説明します。
-aliases: ['/tidbcloud/developer-tier-cluster']
+aliases: ['/ja/tidbcloud/developer-tier-cluster']
 ---
 
 # クラスタプランを選択 {#select-your-cluster-plan}

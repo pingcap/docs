@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Read-Only Storage Nodes
 summary: このドキュメントでは、オンラインサービスから高許容遅延負荷を分離するための読み取り専用storageノードの設定方法を紹介します。手順としては、TiKVノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードに学習者としてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
-aliases: ['/tidb/stable/readonly-nodes/','/tidb/dev/readonly-nodes/']
+aliases: ['/ja/tidb/stable/readonly-nodes/']
 ---
 
 # 読み取り専用ストレージノードのベストプラクティス {#best-practices-for-read-only-storage-nodes}

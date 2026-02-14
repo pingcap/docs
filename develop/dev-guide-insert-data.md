@@ -1,7 +1,7 @@
 ---
 title: Insert Data
 summary: データの挿入方法について学習します。
-aliases: ['/tidb/stable/dev-guide-insert-data/','/tidb/dev/dev-guide-insert-data/','/tidbcloud/dev-guide-insert-data/']
+aliases: ['/ja/tidb/stable/dev-guide-insert-data/','/ja/tidbcloud/dev-guide-insert-data/']
 ---
 
 <!-- markdownlint-disable MD029 -->

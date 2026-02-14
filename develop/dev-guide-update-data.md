@@ -1,7 +1,7 @@
 ---
 title: Update Data
 summary: データを更新する方法とデータを一括更新する方法について説明します。
-aliases: ['/tidb/stable/dev-guide-update-data/','/tidb/dev/dev-guide-update-data/','/tidbcloud/dev-guide-update-data/']
+aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidbcloud/dev-guide-update-data/']
 ---
 
 # データの更新 {#update-data}

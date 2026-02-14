@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with MySQL Workbench
 summary: MySQL Workbench を使用して TiDB に接続する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-gui-mysql-workbench/','/tidb/dev/dev-guide-gui-mysql-workbench/','/tidbcloud/dev-guide-gui-mysql-workbench/']
+aliases: ['/ja/tidb/stable/dev-guide-gui-mysql-workbench/','/ja/tidbcloud/dev-guide-gui-mysql-workbench/']
 ---
 
 # MySQL Workbench で TiDB に接続する {#connect-to-tidb-with-mysql-workbench}

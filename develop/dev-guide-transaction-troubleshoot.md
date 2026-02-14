@@ -1,7 +1,7 @@
 ---
 title: Handle Transaction Errors
 summary: デッドロックやアプリケーション再試行エラーなどのトランザクション エラーを処理する方法について学習します。
-aliases: ['/tidb/stable/dev-guide-transaction-troubleshoot/','/tidb/dev/dev-guide-transaction-troubleshoot/','/tidbcloud/dev-guide-transaction-troubleshoot/']
+aliases: ['/ja/tidb/stable/dev-guide-transaction-troubleshoot/','/ja/tidbcloud/dev-guide-transaction-troubleshoot/']
 ---
 
 # トランザクションエラーの処理 {#handle-transaction-errors}

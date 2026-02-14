@@ -1,7 +1,7 @@
 ---
 title: Views
 summary: TiDB でビューを使用する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-use-views/','/tidb/dev/dev-guide-use-views/','/tidbcloud/dev-guide-use-views/']
+aliases: ['/ja/tidb/stable/dev-guide-use-views/','/ja/tidbcloud/dev-guide-use-views/']
 ---
 
 # ビュー {#views}

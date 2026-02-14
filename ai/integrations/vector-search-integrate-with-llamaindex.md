@@ -1,7 +1,7 @@
 ---
 title: Integrate Vector Search with LlamaIndex
 summary: TiDB Vector Search を LlamaIndex と統合する方法を学びます。
-aliases: ['/tidb/stable/vector-search-integrate-with-llamaindex/','/tidb/dev/vector-search-integrate-with-llamaindex/','/tidbcloud/vector-search-integrate-with-llamaindex/']
+aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidbcloud/vector-search-integrate-with-llamaindex/']
 ---
 
 # LlamaIndexとベクター検索を統合する {#integrate-vector-search-with-llamaindex}

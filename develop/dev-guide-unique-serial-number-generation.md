@@ -1,7 +1,7 @@
 ---
 title: Unique Serial Number Generation
 summary: 独自の固有 ID を生成する開発者向けの固有シリアル番号生成ソリューション。
-aliases: ['/tidb/stable/dev-guide-unique-serial-number-generation/','/tidb/dev/dev-guide-unique-serial-number-generation/','/tidbcloud/dev-guide-unique-serial-number-generation/']
+aliases: ['/ja/tidb/stable/dev-guide-unique-serial-number-generation/','/ja/tidbcloud/dev-guide-unique-serial-number-generation/']
 ---
 
 # ユニークなシリアル番号の生成 {#unique-serial-number-generation}

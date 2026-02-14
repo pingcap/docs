@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB with Amazon AppFlow
 summary: TiDB を Amazon AppFlow と統合する方法を段階的に紹介します。
-aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide-aws-appflow-integration/','/tidbcloud/dev-guide-aws-appflow-integration/']
+aliases: ['/ja/tidb/stable/dev-guide-aws-appflow-integration/','/ja/tidbcloud/dev-guide-aws-appflow-integration/']
 ---
 
 # TiDB を Amazon AppFlow と統合する {#integrate-tidb-with-amazon-appflow}

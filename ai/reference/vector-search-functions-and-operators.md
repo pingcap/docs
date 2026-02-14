@@ -1,7 +1,7 @@
 ---
 title: Vector Functions and Operators
 summary: Vector データ型で使用できる関数と演算子について学習します。
-aliases: ['/tidb/stable/vector-search-functions-and-operators/','/tidb/dev/vector-search-functions-and-operators/','/tidbcloud/vector-search-functions-and-operators/']
+aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbcloud/vector-search-functions-and-operators/']
 ---
 
 # ベクトル関数と演算子 {#vector-functions-and-operators}

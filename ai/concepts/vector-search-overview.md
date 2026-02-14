@@ -1,7 +1,7 @@
 ---
 title: Vector Search Overview
 summary: TiDBのベクター検索について学びましょう。この機能は、ドキュメント、画像、音声、動画など、様々なデータタイプにわたってセマンティックな類似性検索を実行するための高度な検索ソリューションを提供します。
-aliases: ['/tidb/stable/vector-search-overview/','/tidb/dev/vector-search-overview/','/tidbcloud/vector-search-overview/']
+aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidbcloud/vector-search-overview/']
 ---
 
 # ベクトル検索の概要 {#vector-search-overview}

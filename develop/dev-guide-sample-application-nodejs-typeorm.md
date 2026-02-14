@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with TypeORM
 summary: TypeORMを使用してTiDBに接続する方法を学びます。このチュートリアルでは、TypeORMを使用してTiDBを操作するNode.jsのサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-typeorm/','/tidb/dev/dev-guide-sample-application-nodejs-typeorm/','/tidbcloud/dev-guide-sample-application-nodejs-typeorm/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-typeorm/','/ja/tidbcloud/dev-guide-sample-application-nodejs-typeorm/']
 ---
 
 # TypeORMでTiDBに接続する {#connect-to-tidb-with-typeorm}

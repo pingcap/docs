@@ -1,7 +1,7 @@
 ---
 title: Unstable Result Set
 summary: 不安定な結果セットのエラーを処理する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-unstable-result-set/','/tidb/dev/dev-guide-unstable-result-set/','/tidbcloud/dev-guide-unstable-result-set/']
+aliases: ['/ja/tidb/stable/dev-guide-unstable-result-set/','/ja/tidbcloud/dev-guide-unstable-result-set/']
 ---
 
 # 不安定な結果セット {#unstable-result-set}

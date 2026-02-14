@@ -1,7 +1,7 @@
 ---
 title: CRUD SQL in TiDB
 summary: TiDB の CRUD SQL の簡単な紹介。
-aliases: ['/tidb/stable/dev-guide-tidb-crud-sql/','/tidb/dev/dev-guide-tidb-crud-sql/','/tidbcloud/dev-guide-tidb-crud-sql/']
+aliases: ['/ja/tidb/stable/dev-guide-tidb-crud-sql/','/ja/tidbcloud/dev-guide-tidb-crud-sql/']
 ---
 
 # TiDB の CRUD SQL {#crud-sql-in-tidb}

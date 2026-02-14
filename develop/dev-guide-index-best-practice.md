@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Indexing
 summary: TiDB でインデックスを作成して使用するためのベスト プラクティスをいくつか学習します。
-aliases: ['/tidb/stable/dev-guide-index-best-practice/','/tidb/dev/dev-guide-index-best-practice/','/tidbcloud/dev-guide-index-best-practice/']
+aliases: ['/ja/tidb/stable/dev-guide-index-best-practice/','/ja/tidbcloud/dev-guide-index-best-practice/']
 ---
 
 <!-- markdownlint-disable MD029 -->

@@ -1,7 +1,7 @@
 ---
 title: Delete Data
 summary: データを削除するための SQL 構文、ベスト プラクティス、例について学習します。
-aliases: ['/tidb/stable/dev-guide-delete-data/','/tidb/dev/dev-guide-delete-data/','/tidbcloud/dev-guide-delete-data/']
+aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidbcloud/dev-guide-delete-data/']
 ---
 
 # データを削除 {#delete-data}

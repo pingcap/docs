@@ -1,7 +1,7 @@
 ---
 title: Common Table Expression
 summary: SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
-aliases: ['/tidb/stable/dev-guide-use-common-table-expression/','/tidb/dev/dev-guide-use-common-table-expression/','/tidbcloud/dev-guide-use-common-table-expression/']
+aliases: ['/ja/tidb/stable/dev-guide-use-common-table-expression/','/ja/tidbcloud/dev-guide-use-common-table-expression/']
 ---
 
 # 共通テーブル式 {#common-table-expression}

@@ -2,7 +2,7 @@
 title: TiDB Cloud Glossary
 summary: TiDB Cloudで使用される用語を学習します。
 category: glossary
-aliases: ['/tidbcloud/glossary']
+aliases: ['/ja/tidbcloud/glossary']
 ---
 
 # TiDB Cloud用語集 {#tidb-cloud-glossary}

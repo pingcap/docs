@@ -1,7 +1,7 @@
 ---
 title: Create a Secondary Index
 summary: セカンダリ インデックスを作成する手順、ルール、および例を学習します。
-aliases: ['/tidb/stable/dev-guide-create-secondary-indexes/','/tidb/dev/dev-guide-create-secondary-indexes/','/tidbcloud/dev-guide-create-secondary-indexes/']
+aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidbcloud/dev-guide-create-secondary-indexes/']
 ---
 
 # セカンダリインデックスを作成する {#create-a-secondary-index}

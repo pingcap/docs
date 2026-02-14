@@ -1,7 +1,7 @@
 ---
 title: Overview of Optimizing SQL Performance
 summary: TiDB アプリケーション開発者向けに、SQL パフォーマンス チューニングの概要を説明します。
-aliases: ['/tidb/stable/dev-guide-optimize-sql-overview/','/tidb/dev/dev-guide-optimize-sql-overview/','/tidbcloud/dev-guide-optimize-sql-overview/']
+aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-guide-optimize-sql-overview/']
 ---
 
 # SQLパフォーマンスの最適化の概要 {#overview-of-optimizing-sql-performance}

@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with peewee
 summary: TiDB Vector Search を peewee と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-aliases: ['/tidb/stable/vector-search-integrate-with-peewee/','/tidb/dev/vector-search-integrate-with-peewee/','/tidbcloud/vector-search-integrate-with-peewee/']
+aliases: ['/ja/tidb/stable/vector-search-integrate-with-peewee/','/ja/tidbcloud/vector-search-integrate-with-peewee/']
 ---
 
 # TiDBベクトル検索をpeeweeと統合する {#integrate-tidb-vector-search-with-peewee}

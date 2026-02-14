@@ -1,7 +1,7 @@
 ---
 title: Choose a Driver or ORM
 summary: TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-choose-driver-or-orm/','/tidb/dev/dev-guide-choose-driver-or-orm/','/tidbcloud/dev-guide-choose-driver-or-orm/']
+aliases: ['/ja/tidb/stable/dev-guide-choose-driver-or-orm/','/ja/tidbcloud/dev-guide-choose-driver-or-orm/']
 ---
 
 # DriverまたはORMを選択 {#choose-a-driver-or-orm}

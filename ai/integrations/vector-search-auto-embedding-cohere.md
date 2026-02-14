@@ -1,7 +1,7 @@
 ---
 title: Cohere Embeddings
 summary: TiDB Cloudで Cohere 埋め込みモデルを使用する方法を学習します。
-aliases: ['/tidbcloud/vector-search-auto-embedding-cohere/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-cohere/']
 ---
 
 # コヒーレ埋め込み {#cohere-embeddings}

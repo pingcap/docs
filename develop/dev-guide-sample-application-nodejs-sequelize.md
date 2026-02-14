@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with Sequelize
 summary: Sequelize を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Sequelize を使用して TiDB を操作する Node.js のサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-sequelize/','/tidb/dev/dev-guide-sample-application-nodejs-sequelize/','/tidbcloud/dev-guide-sample-application-nodejs-sequelize/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-sequelize/','/ja/tidbcloud/dev-guide-sample-application-nodejs-sequelize/']
 ---
 
 # Sequelize で TiDB に接続する {#connect-to-tidb-with-sequelize}

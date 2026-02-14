@@ -1,7 +1,7 @@
 ---
 title: Optimistic Transactions and Pessimistic Transactions
 summary: TiDB の楽観的と悲観的トランザクションについて学習します。
-aliases: ['/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/tidb/dev/dev-guide-optimistic-and-pessimistic-transaction/','/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction/']
+aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/ja/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction/']
 ---
 
 # 楽観的なトランザクションと悲観的なトランザクション {#optimistic-transactions-and-pessimistic-transactions}

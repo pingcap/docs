@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
 summary: サーバーレス環境およびエッジ環境からTiDB Cloud Starter またはTiDB Cloud Essential に接続する方法を学習します。
-aliases: ['/tidbcloud/serverless-driver-config/','/tidbcloud/serverless-driver/']
+aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-driver/']
 ---
 
 # TiDB CloudサーバーレスDriver(ベータ版) {#tidb-cloud-serverless-driver-beta}

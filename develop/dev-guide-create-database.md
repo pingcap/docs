@@ -1,7 +1,7 @@
 ---
 title: Create a Database
 summary: データベースを作成する手順、ルール、および例を学びます。
-aliases: ['/tidb/stable/dev-guide-create-database/','/tidb/dev/dev-guide-create-database/','/tidbcloud/dev-guide-create-database/']
+aliases: ['/ja/tidb/stable/dev-guide-create-database/','/ja/tidbcloud/dev-guide-create-database/']
 ---
 
 # データベースを作成する {#create-a-database}

@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Kysely Tutorial
 summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する方法を学びます。
-aliases: ['/tidbcloud/serverless-driver-kysely-example/']
+aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 ---
 
 # TiDB CloudサーバーレスDriverKysely チュートリアル {#tidb-cloud-serverless-driver-kysely-tutorial}

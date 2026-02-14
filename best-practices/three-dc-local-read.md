@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Local Reads in Three-Data-Center Deployments
 summary: TiDBの3データセンター展開モデルでは、センター間データ読み取りによりアクセスレイテンシーが増加する可能性があります。これを軽減するために、 ステイル読み取り機能ではローカルの履歴データへのアクセスを可能にし、リアルタイムデータ可用性を犠牲にしてレイテンシーを削減します。地理的に分散されたシナリオでステイル読み取りを使用する場合、TiDBはセンター間ネットワークレイテンシーを回避するためにローカルレプリカにアクセスします。これは、zone`ラベルを設定し、`tidb_replica_read`を`closest-replicas`に設定することで実現されます。Stale ステイル読み取りの実行方法の詳細については、ドキュメントを参照してください。
-aliases: ['/tidb/stable/three-dc-local-read/','/tidb/dev/three-dc-local-read/']
+aliases: ['/ja/tidb/stable/three-dc-local-read/']
 ---
 
 # 3つのデータセンター展開におけるローカル読み取りのベストプラクティス {#best-practices-for-local-reads-in-three-data-center-deployments}

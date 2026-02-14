@@ -1,7 +1,7 @@
 ---
 title: Bookshop Example Application
 summary: Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。テーブル構造とデータは、 TiUPまたはTiDB Cloudを介してインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成・インポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、書籍、著者、ユーザー、評価、書籍著者、注文情報が含まれます。データベース初期化スクリプト「dbinit.sql」は、Bookshopアプリケーションのテーブル構造を作成します。
-aliases: ['/tidb/stable/dev-guide-bookshop-schema-design/','/tidb/dev/dev-guide-bookshop-schema-design/','/tidbcloud/dev-guide-bookshop-schema-design/']
+aliases: ['/ja/tidb/stable/dev-guide-bookshop-schema-design/','/ja/tidbcloud/dev-guide-bookshop-schema-design/']
 ---
 
 # 書店のサンプルアプリケーション {#bookshop-example-application}

@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with SQLAlchemy
 summary: SQLAlchemyを使用してTiDBに接続する方法を学びます。このチュートリアルでは、SQLAlchemyを使用してTiDBを操作するPythonサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-python-sqlalchemy/','/tidb/dev/dev-guide-sample-application-python-sqlalchemy/','/tidbcloud/dev-guide-sample-application-python-sqlalchemy/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-sqlalchemy/','/ja/tidbcloud/dev-guide-sample-application-python-sqlalchemy/']
 ---
 
 # SQLAlchemy で TiDB に接続する {#connect-to-tidb-with-sqlalchemy}

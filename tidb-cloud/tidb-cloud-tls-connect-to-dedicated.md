@@ -1,7 +1,7 @@
 ---
 title: TLS Connections to TiDB Cloud Dedicated
 summary: TiDB Cloud Dedicated に TLS 接続を導入します。
-aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
+aliases: ['/ja/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 ---
 
 # TiDB Cloud専用へのTLS接続 {#tls-connections-to-tidb-cloud-dedicated}

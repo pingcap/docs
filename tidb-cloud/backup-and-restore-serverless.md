@@ -1,7 +1,7 @@
 ---
 title: Back Up and Restore TiDB Cloud Starter or Essential Data
 summary: TiDB Cloud Starter またはTiDB Cloud Essential クラスターをバックアップおよび復元する方法を学習します。
-aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
+aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
 # TiDB Cloud StarterまたはEssential Dataのバックアップと復元 {#back-up-and-restore-tidb-cloud-starter-or-essential-data}

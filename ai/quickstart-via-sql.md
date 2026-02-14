@@ -1,7 +1,7 @@
 ---
 title: Get Started with TiDB + AI via SQL
 summary: SQL ステートメントを使用して TiDB で Vector Search をすぐに開始し、生成 AI アプリケーションを強化する方法を学習します。
-aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-search-get-started-using-sql/','/tidbcloud/vector-search-get-started-using-sql/']
+aliases: ['/ja/tidb/stable/vector-search-get-started-using-sql/','/ja/tidbcloud/vector-search-get-started-using-sql/']
 ---
 
 # SQL経由でTiDB + AIを使い始める {#get-started-with-tidb-ai-via-sql}

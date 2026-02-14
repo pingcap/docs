@@ -1,7 +1,7 @@
 ---
 title: Paginate Results
 summary: TiDB にページ区切り結果機能を導入します。
-aliases: ['/tidb/stable/dev-guide-paginate-results/','/tidb/dev/dev-guide-paginate-results/','/tidbcloud/dev-guide-paginate-results/']
+aliases: ['/ja/tidb/stable/dev-guide-paginate-results/','/ja/tidbcloud/dev-guide-paginate-results/']
 ---
 
 # 結果をページ付けする {#paginate-results}

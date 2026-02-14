@@ -1,7 +1,7 @@
 ---
 title: Avoid Implicit Type Conversions
 summary: TiDB での暗黙的な型変換によって起こりうる結果と、それを回避する方法を紹介します。
-aliases: ['/tidb/stable/dev-guide-implicit-type-conversion/','/tidb/dev/dev-guide-implicit-type-conversion/','/tidbcloud/dev-guide-implicit-type-conversion/']
+aliases: ['/ja/tidb/stable/dev-guide-implicit-type-conversion/','/ja/tidbcloud/dev-guide-implicit-type-conversion/']
 ---
 
 # 暗黙的な型変換を避ける {#avoid-implicit-type-conversions}

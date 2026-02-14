@@ -1,7 +1,7 @@
 ---
 title: Multi-table Join Queries
 summary: このドキュメントでは、複数テーブル結合クエリの使用方法について説明します。
-aliases: ['/tidb/stable/dev-guide-join-tables/','/tidb/dev/dev-guide-join-tables/','/tidbcloud/dev-guide-join-tables/']
+aliases: ['/ja/tidb/stable/dev-guide-join-tables/','/ja/tidbcloud/dev-guide-join-tables/']
 ---
 
 # 複数テーブルの結合クエリ {#multi-table-join-queries}

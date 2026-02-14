@@ -1,7 +1,7 @@
 ---
 title: Object Naming Convention
 summary: TiDB におけるオブジェクトの命名規則について学習します。
-aliases: ['/tidb/stable/dev-guide-object-naming-guidelines/','/tidb/dev/dev-guide-object-naming-guidelines/','/tidbcloud/dev-guide-object-naming-guidelines/']
+aliases: ['/ja/tidb/stable/dev-guide-object-naming-guidelines/','/ja/tidbcloud/dev-guide-object-naming-guidelines/']
 ---
 
 # オブジェクトの命名規則 {#object-naming-convention}

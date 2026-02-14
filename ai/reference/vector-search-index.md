@@ -1,7 +1,7 @@
 ---
 title: Vector Search Index
 summary: ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
-aliases: ['/tidb/stable/vector-search-index/','/tidb/dev/vector-search-index/','/tidbcloud/vector-search-index/']
+aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-index/']
 ---
 
 # ベクター検索インデックス {#vector-search-index}

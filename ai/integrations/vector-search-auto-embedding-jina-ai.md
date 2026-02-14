@@ -1,7 +1,7 @@
 ---
 title: Jina AI Embeddings
 summary: TiDB Cloudで Jina AI 埋め込みモデルを使用する方法を学びます。
-aliases: ['/tidbcloud/vector-search-auto-embedding-jina-ai/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-jina-ai/']
 ---
 
 # Jina AI 埋め込み {#jina-ai-embeddings}

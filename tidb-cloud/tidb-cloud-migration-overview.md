@@ -1,7 +1,7 @@
 ---
 title: Migration and Import Overview
 summary: TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
-aliases: ['/tidbcloud/export-data-from-tidb-cloud']
+aliases: ['/ja/tidbcloud/export-data-from-tidb-cloud']
 ---
 
 # 移行とインポートの概要 {#migration-and-import-overview}

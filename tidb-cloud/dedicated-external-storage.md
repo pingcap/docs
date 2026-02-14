@@ -1,7 +1,7 @@
 ---
 title: Configure External Storage Access for TiDB Cloud Dedicated
 summary: Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage アクセスを構成する方法を学習します。
-aliases: ['/tidb-cloud/config-s3-and-gcs-access']
+aliases: []
 ---
 
 # TiDB Cloud Dedicatedの外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-dedicated}

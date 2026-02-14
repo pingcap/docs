@@ -1,7 +1,7 @@
 ---
 title: Limitations and Quotas of TiDB Cloud Starter and Essential
 summary: TiDB Cloud Starter の制限について説明します。
-aliases: ['/tidbcloud/serverless-tier-limitations']
+aliases: ['/ja/tidbcloud/serverless-tier-limitations']
 ---
 
 # TiDB Cloud StarterおよびEssentialの制限とクォータ {#limitations-and-quotas-of-tidb-cloud-starter-and-essential}

@@ -1,7 +1,7 @@
 ---
 title: Stale Read
 summary: 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-use-stale-read/','/tidb/dev/dev-guide-use-stale-read/','/tidbcloud/dev-guide-use-stale-read/']
+aliases: ['/ja/tidb/stable/dev-guide-use-stale-read/','/ja/tidbcloud/dev-guide-use-stale-read/']
 ---
 
 # ステイル読み取り {#stale-read}

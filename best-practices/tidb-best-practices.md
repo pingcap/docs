@@ -1,7 +1,7 @@
 ---
 title: TiDB Best Practices
 summary: このドキュメントでは、TiDBの使用に関するベストプラクティスをまとめ、OLAPおよびOLTPシナリオにおけるSQLの使用と最適化のヒント、特にTiDB固有の最適化オプションに焦点を当てています。また、ベストプラクティスに進む前に、TiDBの技術的原理を紹介する3つのブログ記事を読むことを推奨しています。
-aliases: ['/tidb/stable/tidb-best-practices/','/tidb/dev/tidb-best-practices/']
+aliases: ['/ja/tidb/stable/tidb-best-practices/']
 ---
 
 # TiDB ベストプラクティス {#tidb-best-practices}

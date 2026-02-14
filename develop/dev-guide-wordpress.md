@@ -1,7 +1,7 @@
 ---
 title: Integrate WordPress with TiDB Cloud Starter
 summary: TiDB Cloud Starterを使ってWordPressを実行する方法を学びましょう。このチュートリアルでは、WordPress + TiDB Cloud Starterを数分で実行するための手順をステップバイステップで説明します。
-aliases: ['/tidbcloud/dev-guide-wordpress/']
+aliases: ['/ja/tidbcloud/dev-guide-wordpress/']
 ---
 
 # WordPressとTiDB Cloud Starterを統合する {#integrate-wordpress-with-tidb-cloud-starter}

@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with Django ORM
 summary: TiDB Vector Search を Django ORM と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-aliases: ['/tidb/stable/vector-search-integrate-with-django-orm/','/tidb/dev/vector-search-integrate-with-django-orm/','/tidbcloud/vector-search-integrate-with-django-orm/']
+aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidbcloud/vector-search-integrate-with-django-orm/']
 ---
 
 # TiDB ベクトル検索を Django ORM と統合する {#integrate-tidb-vector-search-with-django-orm}

@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with Visual Studio Code
 summary: Visual Studio Code または GitHub Codespaces を使用して TiDB に接続する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-gui-vscode-sqltools/','/tidb/dev/dev-guide-gui-vscode-sqltools/','/tidbcloud/dev-guide-gui-vscode-sqltools/']
+aliases: ['/ja/tidb/stable/dev-guide-gui-vscode-sqltools/','/ja/tidbcloud/dev-guide-gui-vscode-sqltools/']
 ---
 
 # Visual Studio Code で TiDB に接続する {#connect-to-tidb-with-visual-studio-code}
