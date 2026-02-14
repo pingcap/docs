@@ -176,7 +176,6 @@ Connect and manage TiDB databases with DataGrip by JetBrains.
 
 Learn other topics about developing with TiDB.
 
-- Use [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) to develop, manage and deploy your applications.
-- Explore popular [service integrations](/tidb-cloud/integrate-tidbcloud-with-airbyte.md) with TiDB Cloud.
 - Follow [TiDB database development reference](/develop/dev-guide-schema-design-overview.md) to design, interact with, optimize, and troubleshoot your data and schema.
 - Follow the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
+- Explore popular [service integrations](/tidb-cloud/integrate-tidbcloud-with-airbyte.md) with TiDB Cloud.
