@@ -42,32 +42,9 @@ You can integrate TiDB Vector Search with your ORM library to interact with the 
 
 The following table lists the supported ORM libraries and the corresponding integration tutorials:
 
-<table>
-  <tr>
-    <th>Language</th>
-    <th>ORM/Client</th>
-    <th>How to install</th>
-    <th>Tutorial</th>
-  </tr>
-  <tr>
-    <td rowspan="4">Python</td>
-    <td>TiDB Vector Client</td>
-    <td><code>pip install tidb-vector[client]</code></td>
-    <td><a href="/tidb/v8.5/vector-search-get-started-using-python">Get Started with Vector Search Using Python</a></td>
-  </tr>
-  <tr>
-    <td>SQLAlchemy</td>
-    <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">Integrate TiDB Vector Search with SQLAlchemy</a></td>
-  </tr>
-  <tr>
-    <td>peewee</td>
-    <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-peewee">Integrate TiDB Vector Search with peewee</a></td>
-  </tr>
-  <tr>
-    <td>Django</td>
-    <td><code>pip install django-tidb[vector]</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-django-orm">Integrate TiDB Vector Search with Django</a></td>
-  </tr>
-</table>
+| Language | ORM/Client         | How to install                    | Tutorial |
+|----------|--------------------|-----------------------------------|----------|
+| Python   | TiDB Vector Client | `pip install tidb-vector[client]` | [Get Started with Vector Search Using Python](/ai/quickstart-via-python.md) |
+| Python   | SQLAlchemy         | `pip install tidb-vector`         | [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+| Python   | peewee             | `pip install tidb-vector`         | [Integrate TiDB Vector Search with peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
+| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDB Vector Search with Django](/ai/integrations/vector-search-integrate-with-django-orm.md)
