@@ -1,7 +1,7 @@
 ---
 title: Hugging Face Embeddings
 summary: TiDB Cloudで Hugging Face 埋め込みモデルを使用する方法を学びます。
-aliases: ['/tidbcloud/vector-search-auto-embedding-huggingface/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 ---
 
 # ハグフェイス埋め込み {#hugging-face-embeddings}

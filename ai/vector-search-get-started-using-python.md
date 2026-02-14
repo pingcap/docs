@@ -1,7 +1,7 @@
 ---
 title: Get Started with TiDB + AI via Python
 summary: Python と TiDB Vector Search を使用してセマンティック検索を実行する AI アプリケーションを迅速に開発する方法を学びます。
-aliases: ['/tidb/stable/vector-search-get-started-using-python/','/tidb/dev/vector-search-get-started-using-python/','/tidbcloud/vector-search-get-started-using-python/']
+aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidbcloud/vector-search-get-started-using-python/']
 ---
 
 # PythonでTiDB + AIを使い始める {#get-started-with-tidb-ai-via-python}

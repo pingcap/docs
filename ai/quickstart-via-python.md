@@ -1,7 +1,7 @@
 ---
 title: Get Started with TiDB + AI via Python
 summary: Python SDK を使用して TiDB でベクトル検索を開始する方法を学びます。
-aliases: ['/tidb/stable/vector-search-get-started-using-python/','/tidb/dev/vector-search-get-started-using-python/','/tidbcloud/vector-search-get-started-using-python/']
+aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidbcloud/vector-search-get-started-using-python/']
 ---
 
 # PythonでTiDB + AIを使い始める {#get-started-with-tidb-ai-via-python}

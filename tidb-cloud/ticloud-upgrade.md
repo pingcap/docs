@@ -1,7 +1,7 @@
 ---
 title: ticloud upgrade
 summary: ticloud アップグレード` のリファレンス。
-aliases: ['/tidbcloud/ticloud-update']
+aliases: ['/ja/tidbcloud/ticloud-update']
 ---
 
 # ticloud アップグレード {#ticloud-upgrade}

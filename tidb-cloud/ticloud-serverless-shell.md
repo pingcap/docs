@@ -1,7 +1,7 @@
 ---
 title: ticloud serverless shell
 summary: ticloud serverless shell` のリファレンス。
-aliases: ['/tidbcloud/ticloud-connect']
+aliases: ['/ja/tidbcloud/ticloud-connect']
 ---
 
 # ticloud サーバーレスシェル {#ticloud-serverless-shell}

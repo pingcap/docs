@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB
 summary: TiDB に接続する方法の概要。
-aliases: ['/tidb/stable/dev-guide-connect-to-tidb/','/tidb/dev/dev-guide-connect-to-tidb/']
+aliases: ['/ja/tidb/stable/dev-guide-connect-to-tidb/']
 ---
 
 # TiDBに接続する {#connect-to-tidb}

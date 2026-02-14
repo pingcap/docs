@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with Prisma
 summary: Prisma を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Prisma を使用して TiDB を操作する Node.js のサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-prisma/','/tidb/dev/dev-guide-sample-application-nodejs-prisma/','/tidbcloud/dev-guide-sample-application-nodejs-prisma/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-prisma/','/ja/tidbcloud/dev-guide-sample-application-nodejs-prisma/']
 ---
 
 # PrismaでTiDBに接続する {#connect-to-tidb-with-prisma}

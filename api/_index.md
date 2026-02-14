@@ -1,7 +1,7 @@
 ---
 title: TiDB API Overview
 summary: TiDB Cloudおよび TiDB Self-Managed で利用可能な API について学習します。
-aliases: ['/tidbcloud/api-overview/']
+aliases: ['/ja/tidbcloud/api-overview/']
 ---
 
 # TiDB APIの概要 {#tidb-api-overview}

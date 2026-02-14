@@ -1,7 +1,7 @@
 ---
 title: TiDB Database Schema Design Overview
 summary: TiDB データベース スキーマ設計の基礎を学びます。
-aliases: ['/tidb/stable/dev-guide-schema-design-overview/','/tidb/dev/dev-guide-schema-design-overview/','/tidbcloud/dev-guide-schema-design-overview/']
+aliases: ['/ja/tidb/stable/dev-guide-schema-design-overview/','/ja/tidbcloud/dev-guide-schema-design-overview/']
 ---
 
 # TiDB データベース スキーマ設計の概要 {#tidb-database-schema-design-overview}

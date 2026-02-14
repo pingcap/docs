@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with peewee
 summary: peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBを操作するPythonのサンプルコードを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-python-peewee/','/tidb/dev/dev-guide-sample-application-python-peewee/','/tidbcloud/dev-guide-sample-application-python-peewee/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-peewee/','/ja/tidbcloud/dev-guide-sample-application-python-peewee/']
 ---
 
 # peeweeでTiDBに接続する {#connect-to-tidb-with-peewee}

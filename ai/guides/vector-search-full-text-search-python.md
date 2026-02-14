@@ -1,7 +1,7 @@
 ---
 title: Full-Text Search with Python
 summary: 全文検索を使用すると、正確なキーワードでドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
-aliases: ['/tidb/stable/vector-search-full-text-search-python/','/tidbcloud/vector-search-full-text-search-python/']
+aliases: ['/ja/tidb/stable/vector-search-full-text-search-python/','/ja/tidbcloud/vector-search-full-text-search-python/']
 ---
 
 # Pythonによる全文検索 {#full-text-search-with-python}

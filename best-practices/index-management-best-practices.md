@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Managing Indexes and Identifying Unused Indexes
 summary: TiDB でインデックスを管理および最適化し、未使用のインデックスを識別して削除するためのベスト プラクティスを学習します。
-aliases: ['/tidb/stable/index-management-best-practices/','/tidb/dev/index-management-best-practices/']
+aliases: ['/ja/tidb/stable/index-management-best-practices/']
 ---
 
 # インデックスの管理と未使用のインデックスの特定に関するベストプラクティス {#best-practices-for-managing-indexes-and-identifying-unused-indexes}

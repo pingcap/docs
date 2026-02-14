@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB with ProxySQL
 summary: TiDB Cloudと TiDB (セルフホスト) を ProxySQL と統合する方法を学びます。
-aliases: ['/tidb/stable/dev-guide-proxysql-integration/','/tidb/dev/dev-guide-proxysql-integration/','/tidbcloud/dev-guide-proxysql-integration/']
+aliases: ['/ja/tidb/stable/dev-guide-proxysql-integration/','/ja/tidbcloud/dev-guide-proxysql-integration/']
 ---
 
 # TiDBとProxySQLを統合する {#integrate-tidb-with-proxysql}

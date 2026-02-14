@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with DBeaver
 summary: DBeaver Community を使用して TiDB に接続する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-gui-dbeaver/','/tidb/dev/dev-guide-gui-dbeaver/','/tidbcloud/dev-guide-gui-dbeaver/']
+aliases: ['/ja/tidb/stable/dev-guide-gui-dbeaver/','/ja/tidbcloud/dev-guide-gui-dbeaver/']
 ---
 
 # DBeaverでTiDBに接続する {#connect-to-tidb-with-dbeaver}

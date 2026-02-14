@@ -1,7 +1,7 @@
 ---
 title: Vector Search Integration Overview
 summary: サポートされている AI フレームワーク、埋め込みモデル、ORM ライブラリなど、TiDB ベクトル検索統合の概要。
-aliases: ['/tidb/stable/vector-search-integration-overview/','/tidb/dev/vector-search-integration-overview/','/tidbcloud/vector-search-integration-overview/']
+aliases: ['/ja/tidb/stable/vector-search-integration-overview/','/ja/tidbcloud/vector-search-integration-overview/']
 ---
 
 # ベクター検索統合の概要 {#vector-search-integration-overview}

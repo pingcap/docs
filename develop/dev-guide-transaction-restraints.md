@@ -1,7 +1,7 @@
 ---
 title: Transaction Restraints
 summary: TiDB のトランザクション制約について学習します。
-aliases: ['/tidb/stable/dev-guide-transaction-restraints/','/tidb/dev/dev-guide-transaction-restraints/','/tidbcloud/dev-guide-transaction-restraints/']
+aliases: ['/ja/tidb/stable/dev-guide-transaction-restraints/','/ja/tidbcloud/dev-guide-transaction-restraints/']
 ---
 
 # トランザクション制限 {#transaction-restraints}

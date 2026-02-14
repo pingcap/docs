@@ -1,7 +1,7 @@
 ---
 title: Third-Party Tools Supported by TiDB
 summary: TiDB でサポートされているサードパーティ ツールについて説明します。
-aliases: ['/tidb/stable/dev-guide-third-party-support/','/tidb/dev/dev-guide-third-party-support/','/tidbcloud/dev-guide-third-party-support/']
+aliases: ['/ja/tidb/stable/dev-guide-third-party-support/','/ja/tidbcloud/dev-guide-third-party-support/']
 ---
 
 # TiDB でサポートされているサードパーティ ツール {#third-party-tools-supported-by-tidb}

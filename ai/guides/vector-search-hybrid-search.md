@@ -1,7 +1,7 @@
 ---
 title: Hybrid Search
 summary: 全文検索とベクトル検索を併用して、検索品質を向上させます。
-aliases: ['/tidb/stable/vector-search-hybrid-search/','/tidbcloud/vector-search-hybrid-search/']
+aliases: ['/ja/tidb/stable/vector-search-hybrid-search/','/ja/tidbcloud/vector-search-hybrid-search/']
 ---
 
 # ハイブリッド検索 {#hybrid-search}

@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Release Notes in 2026
 summary: 2026 年のTiDB Cloudのリリース ノートについて説明します。
-aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
+aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 ---
 
 # 2026年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2026}

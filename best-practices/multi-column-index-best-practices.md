@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Optimizing Multi-Column Indexes
 summary: TiDB でマルチ列インデックスを効果的に使用し、高度な最適化手法を適用する方法を学習します。
-aliases: ['/tidb/stable/multi-column-index-best-practices/','/tidb/dev/multi-column-index-best-practices/']
+aliases: ['/ja/tidb/stable/multi-column-index-best-practices/']
 ---
 
 # 複数列インデックスの最適化のベストプラクティス {#best-practices-for-optimizing-multi-column-indexes}

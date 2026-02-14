@@ -1,7 +1,7 @@
 ---
 title: Prepared Statements
 summary: TiDB 準備済みステートメントの使用方法について学習します。
-aliases: ['/tidb/stable/dev-guide-prepared-statement/','/tidb/dev/dev-guide-prepared-statement/','/tidbcloud/dev-guide-prepared-statement/']
+aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-guide-prepared-statement/']
 ---
 
 # 準備された声明 {#prepared-statements}

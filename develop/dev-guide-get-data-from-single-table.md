@@ -1,7 +1,7 @@
 ---
 title: Query Data from a Single Table
 summary: このドキュメントでは、データベース内の単一のテーブルからデータをクエリする方法について説明します。
-aliases: ['/tidb/stable/dev-guide-get-data-from-single-table/','/tidb/dev/dev-guide-get-data-from-single-table/','/tidbcloud/dev-guide-get-data-from-single-table/']
+aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidbcloud/dev-guide-get-data-from-single-table/']
 ---
 
 <!-- markdownlint-disable MD029 -->

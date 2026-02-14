@@ -1,7 +1,7 @@
 ---
 title: SQL Development Specifications
 summary: TiDB の SQL 開発仕様について学習します。
-aliases: ['/tidb/stable/dev-guide-sql-development-specification/','/tidb/dev/dev-guide-sql-development-specification/','/tidbcloud/dev-guide-sql-development-specification/']
+aliases: ['/ja/tidb/stable/dev-guide-sql-development-specification/','/ja/tidbcloud/dev-guide-sql-development-specification/']
 ---
 
 # SQL開発仕様 {#sql-development-specifications}

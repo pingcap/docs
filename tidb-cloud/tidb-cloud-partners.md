@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Partner Web Console
 summary: 再販業者およびマネージド サービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
-aliases: ['/tidbcloud/managed-service-provider']
+aliases: ['/ja/tidbcloud/managed-service-provider']
 ---
 
 # TiDB Cloudパートナー Web コンソール {#tidb-cloud-partner-web-console}

@@ -1,7 +1,7 @@
 ---
 title: Vector Search Changelogs
 summary: TiDB ベクター検索機能の新機能、互換性の変更、改善、バグ修正について説明します。
-aliases: ['/tidbcloud/vector-search-changelogs/']
+aliases: ['/ja/tidbcloud/vector-search-changelogs/']
 ---
 
 # ベクター検索の変更履歴 {#vector-search-changelogs}

@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud HTAP Quick Start
 summary: TiDB Cloudで HTAP を使い始める方法を学習します。
-aliases: ['/tidbcloud/use-htap-cluster']
+aliases: ['/ja/tidbcloud/use-htap-cluster']
 ---
 
 # TiDB Cloud HTAP クイックスタート {#tidb-cloud-htap-quick-start}

@@ -1,7 +1,7 @@
 ---
 title: Temporary Tables
 summary: 一時テーブルを作成、表示、クエリ、および削除する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-use-temporary-tables/','/tidb/dev/dev-guide-use-temporary-tables/','/tidbcloud/dev-guide-use-temporary-tables/']
+aliases: ['/ja/tidb/stable/dev-guide-use-temporary-tables/','/ja/tidbcloud/dev-guide-use-temporary-tables/']
 ---
 
 # 一時テーブル {#temporary-tables}

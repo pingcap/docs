@@ -1,7 +1,7 @@
 ---
 title: Configure External Storage Access
 summary: Amazon Simple Storage Service (Amazon S3) などの外部storageへのクロスアカウントアクセスを構成する方法を学習します。
-aliases: ['/tidbcloud/serverless-external-storage']
+aliases: ['/ja/tidbcloud/serverless-external-storage']
 ---
 
 # 外部ストレージアクセスを構成する {#configure-external-storage-access}

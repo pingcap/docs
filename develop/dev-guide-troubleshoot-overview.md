@@ -1,7 +1,7 @@
 ---
 title: SQL or Transaction Issues
 summary: アプリケーション開発中に発生する可能性のある SQL またはトランザクションの問題をトラブルシューティングする方法を学習します。
-aliases: ['/tidb/stable/dev-guide-troubleshoot-overview/','/tidb/dev/dev-guide-troubleshoot-overview/','/tidbcloud/dev-guide-troubleshoot-overview/']
+aliases: ['/ja/tidb/stable/dev-guide-troubleshoot-overview/','/ja/tidbcloud/dev-guide-troubleshoot-overview/']
 ---
 
 # SQLまたはトランザクションの問題 {#sql-or-transaction-issues}

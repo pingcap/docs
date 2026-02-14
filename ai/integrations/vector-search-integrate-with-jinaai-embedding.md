@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with Jina AI Embeddings API
 summary: TiDB Vector Search を Jina AI Embeddings API と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-aliases: ['/tidb/stable/vector-search-integrate-with-jinaai-embedding/','/tidb/dev/vector-search-integrate-with-jinaai-embedding/','/tidbcloud/vector-search-integrate-with-jinaai-embedding/']
+aliases: ['/ja/tidb/stable/vector-search-integrate-with-jinaai-embedding/','/ja/tidbcloud/vector-search-integrate-with-jinaai-embedding/']
 ---
 
 # TiDBベクトル検索をJina AI Embeddings APIと統合する {#integrate-tidb-vector-search-with-jina-ai-embeddings-api}

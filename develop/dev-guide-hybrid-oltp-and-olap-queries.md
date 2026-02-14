@@ -1,7 +1,7 @@
 ---
 title: HTAP Queries
 summary: TiDB に HTAP クエリを導入します。
-aliases: ['/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries/','/tidb/dev/dev-guide-hybrid-oltp-and-olap-queries/','/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries/']
+aliases: ['/ja/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries/','/ja/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries/']
 ---
 
 # HTAPクエリ {#htap-queries}

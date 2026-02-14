@@ -1,7 +1,7 @@
 ---
 title: Follower Read
 summary: Follower Readを使用してクエリ パフォーマンスを最適化する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-use-follower-read/','/tidb/dev/dev-guide-use-follower-read/','/tidbcloud/dev-guide-use-follower-read/']
+aliases: ['/ja/tidb/stable/dev-guide-use-follower-read/','/ja/tidbcloud/dev-guide-use-follower-read/']
 ---
 
 # Follower Read {#follower-read}

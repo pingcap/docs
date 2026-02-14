@@ -1,7 +1,7 @@
 ---
 title: Database Audit Logging (Beta) for TiDB Cloud Essential
 summary: TiDB CloudでTiDB Cloud Essential クラスターを監査する方法について説明します。
-aliases: ['/tidbcloud/serverless-audit-logging']
+aliases: ['/ja/tidbcloud/serverless-audit-logging']
 ---
 
 # TiDB Cloud Essential のデータベース監査ログ (ベータ版) {#database-audit-logging-beta-for-tidb-cloud-essential}

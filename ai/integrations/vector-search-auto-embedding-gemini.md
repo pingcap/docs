@@ -1,7 +1,7 @@
 ---
 title: Gemini Embeddings
 summary: TiDB Cloudで Google Gemini 埋め込みモデルを使用する方法を学びます。
-aliases: ['/tidbcloud/vector-search-auto-embedding-gemini/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 ---
 
 # ジェミニ埋め込み {#gemini-embeddings}

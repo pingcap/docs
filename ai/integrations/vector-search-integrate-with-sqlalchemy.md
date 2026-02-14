@@ -1,7 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with SQLAlchemy
 summary: TiDB Vector Search を SQLAlchemy と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-aliases: ['/tidb/stable/vector-search-integrate-with-sqlalchemy/','/tidb/dev/vector-search-integrate-with-sqlalchemy/','/tidbcloud/vector-search-integrate-with-sqlalchemy/']
+aliases: ['/ja/tidb/stable/vector-search-integrate-with-sqlalchemy/','/ja/tidbcloud/vector-search-integrate-with-sqlalchemy/']
 ---
 
 # TiDBベクトル検索をSQLAlchemyと統合する {#integrate-tidb-vector-search-with-sqlalchemy}

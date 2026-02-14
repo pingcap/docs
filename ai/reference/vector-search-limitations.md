@@ -1,7 +1,7 @@
 ---
 title: Vector Search Limitations
 summary: TiDB ベクトル検索の制限について学習します。
-aliases: ['/tidb/stable/vector-search-limitations/','/tidb/dev/vector-search-limitations/','/tidbcloud/vector-search-limitations/']
+aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidbcloud/vector-search-limitations/']
 ---
 
 # ベクトル検索の制限 {#vector-search-limitations}

@@ -1,7 +1,7 @@
 ---
 title: Timeouts in TiDB
 summary: TiDB のタイムアウトとエラーのトラブルシューティングの解決策について学習します。
-aliases: ['/tidb/stable/dev-guide-timeouts-in-tidb/','/tidb/dev/dev-guide-timeouts-in-tidb/','/tidbcloud/dev-guide-timeouts-in-tidb/']
+aliases: ['/ja/tidb/stable/dev-guide-timeouts-in-tidb/','/ja/tidbcloud/dev-guide-timeouts-in-tidb/']
 ---
 
 # TiDBのタイムアウト {#timeouts-in-tidb}

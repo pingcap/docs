@@ -1,7 +1,7 @@
 ---
 title: Create a Table
 summary: テーブル作成における定義、ルール、ガイドラインを学習します。
-aliases: ['/tidb/stable/dev-guide-create-table/','/tidb/dev/dev-guide-create-table/','/tidbcloud/dev-guide-create-table/']
+aliases: ['/ja/tidb/stable/dev-guide-create-table/','/ja/tidbcloud/dev-guide-create-table/']
 ---
 
 # テーブルを作成する {#create-a-table}

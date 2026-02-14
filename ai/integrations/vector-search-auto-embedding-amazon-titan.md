@@ -1,7 +1,7 @@
 ---
 title: Amazon Titan Embeddings
 summary: TiDB Cloudで Amazon Titan 埋め込みモデルを使用する方法を学びます。
-aliases: ['/tidbcloud/vector-search-auto-embedding-amazon-titan/']
+aliases: ['/ja/tidbcloud/vector-search-auto-embedding-amazon-titan/']
 ---
 
 # Amazon Titan 埋め込み {#amazon-titan-embeddings}

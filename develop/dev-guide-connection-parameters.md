@@ -1,7 +1,7 @@
 ---
 title: Configure Connection Pools and Connection Parameters
 summary: このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを得るための計算式などについて説明します。また、パフォーマンスを最適化するための JDBC API の使用方法と MySQL Connector/J パラメータ設定についても説明します。
-aliases: ['/tidb/stable/dev-guide-connection-parameters/','/tidb/dev/dev-guide-connection-parameters/','/tidbcloud/dev-guide-connection-parameters/']
+aliases: ['/ja/tidb/stable/dev-guide-connection-parameters/','/ja/tidbcloud/dev-guide-connection-parameters/']
 ---
 
 # 接続プールと接続パラメータを構成する {#configure-connection-pools-and-connection-parameters}

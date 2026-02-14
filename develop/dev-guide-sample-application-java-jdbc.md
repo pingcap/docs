@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with JDBC
 summary: JDBCを使用してTiDBに接続する方法を学びます。このチュートリアルでは、JDBCを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-java-jdbc/','/tidb/dev/dev-guide-sample-application-java-jdbc/','/tidbcloud/dev-guide-sample-application-java-jdbc/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-java-jdbc/','/ja/tidbcloud/dev-guide-sample-application-java-jdbc/']
 ---
 
 # JDBC で TiDB に接続する {#connect-to-tidb-with-jdbc}

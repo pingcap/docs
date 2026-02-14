@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with Navicat
 summary: Navicat を使用して TiDB に接続する方法を学びます。
-aliases: ['/tidb/stable/dev-guide-gui-navicat/','/tidb/dev/dev-guide-gui-navicat/','/tidbcloud/dev-guide-gui-navicat/']
+aliases: ['/ja/tidb/stable/dev-guide-gui-navicat/','/ja/tidbcloud/dev-guide-gui-navicat/']
 ---
 
 # NavicatでTiDBに接続する {#connect-to-tidb-with-navicat}

@@ -1,7 +1,7 @@
 ---
 title: Back Up and Restore TiDB Cloud Dedicated Data
 summary: TiDB Cloud Dedicated クラスターをバックアップおよび復元する方法を学びます。
-aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
+aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
 # TiDB Cloud専用データのバックアップと復元 {#back-up-and-restore-tidb-cloud-dedicated-data}

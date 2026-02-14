@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
 summary: SaaS (Software as a Service) マルチテナント シナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベスト プラクティスを学習します。
-aliases: ['/tidb/stable/saas-best-practices/','/tidb/dev/saas-best-practices/']
+aliases: ['/ja/tidb/stable/saas-best-practices/']
 ---
 
 # SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス {#best-practices-for-handling-millions-of-tables-in-saas-multi-tenant-scenarios}

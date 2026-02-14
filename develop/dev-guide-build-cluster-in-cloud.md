@@ -1,7 +1,7 @@
 ---
 title: Create a TiDB Cloud Starter Cluster
 summary: TiDB Cloud Starter クラスターを作成し、それに接続する方法を学習します。
-aliases: ['/tidb/stable/dev-guide-build-cluster-in-cloud/','/tidb/dev/dev-guide-build-cluster-in-cloud/','/tidbcloud/dev-guide-build-cluster-in-cloud/']
+aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidbcloud/dev-guide-build-cluster-in-cloud/']
 ---
 
 <!-- markdownlint-disable MD029 -->

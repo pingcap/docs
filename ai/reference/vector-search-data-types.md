@@ -1,7 +1,7 @@
 ---
 title: Vector Data Types
 summary: TiDB の Vector データ型について学習します。
-aliases: ['/tidb/stable/vector-search-data-types/','/tidb/dev/vector-search-data-types/','/tidbcloud/vector-search-data-types/']
+aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-search-data-types/']
 ---
 
 # ベクトルデータ型 {#vector-data-types}

@@ -1,7 +1,7 @@
 ---
 title: Performance Tuning Best Practices
 summary: TiDB パフォーマンスをチューニングするためのベスト プラクティスを紹介します。
-aliases: ['/tidb/stable/dev-guide-optimize-sql-best-practices/','/tidb/dev/dev-guide-optimize-sql-best-practices/','/tidbcloud/dev-guide-optimize-sql-best-practices/']
+aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-best-practices/','/ja/tidbcloud/dev-guide-optimize-sql-best-practices/']
 ---
 
 # 性能チューニングのベストプラクティス {#performance-tuning-best-practices}

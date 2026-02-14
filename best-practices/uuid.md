@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Using UUIDs as Primary Keys
 summary: UUIDを主キーとして使用すると、ネットワーク通信の削減、ほとんどのプログラミング言語とデータベースでのサポート、列挙攻撃からの保護などの利点が得られます。UUIDはバイナリ形式でBINARY(16)`列に保存することをお勧めします。また、ホットスポットの発生を防ぐため、TiDBでは`swap_flag`の設定を避けることをお勧めします。UUIDはMySQLと互換性があります。
-aliases: ['/tidb/stable/uuid/','/tidb/dev/uuid/','/tidbcloud/uuid/']
+aliases: ['/ja/tidb/stable/uuid/','/ja/tidbcloud/uuid/']
 ---
 
 # UUIDを主キーとして使用するベストプラクティス {#best-practices-for-using-uuids-as-primary-keys}

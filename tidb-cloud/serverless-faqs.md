@@ -1,7 +1,7 @@
 ---
 title: "TiDB Cloud Starter FAQs"
 summary: TiDB Cloud Starter に関するよくある質問 (FAQ) について説明します。
-aliases: ['/tidbcloud/serverless-tier-faqs']
+aliases: ['/ja/tidbcloud/serverless-tier-faqs']
 ---
 
 # TiDB Cloud Starterに関するよくある質問 {#tidb-cloud-starter-faqs}

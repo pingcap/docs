@@ -1,7 +1,7 @@
 ---
 title: Encryption at Rest Using Customer-Managed Encryption Keys on AWS
 summary: AWS でホストされているTiDB Cloudクラスター内のデータをカスタマー管理暗号化キー (CMEK) を使用して暗号化する方法を学びます。
-aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
+aliases: ['/ja/tidbcloud/tidb-cloud-encrypt-cmek']
 ---
 
 # AWS での顧客管理の暗号化キーを使用した保存時の暗号化 {#encryption-at-rest-using-customer-managed-encryption-keys-on-aws}

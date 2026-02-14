@@ -1,7 +1,7 @@
 ---
 title: Subquery
 summary: TiDB でサブクエリを使用する方法を学びます。
-aliases: ['/tidb/stable/dev-guide-use-subqueries/','/tidb/dev/dev-guide-use-subqueries/','/tidbcloud/dev-guide-use-subqueries/']
+aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-use-subqueries/']
 ---
 
 # サブクエリ {#subquery}

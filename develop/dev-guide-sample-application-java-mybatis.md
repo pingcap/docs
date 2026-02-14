@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with MyBatis
 summary: MyBatisを使用してTiDBに接続する方法を学びます。このチュートリアルでは、MyBatisを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-aliases: ['/tidb/stable/dev-guide-sample-application-java-mybatis/','/tidb/dev/dev-guide-sample-application-java-mybatis/','/tidbcloud/dev-guide-sample-application-java-mybatis/']
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-java-mybatis/','/ja/tidbcloud/dev-guide-sample-application-java-mybatis/']
 ---
 
 # MyBatisでTiDBに接続する {#connect-to-tidb-with-mybatis}
