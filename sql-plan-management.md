@@ -478,6 +478,22 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
+### Binding usage statistics
+
+Starting from v9.0.0, TiDB introduces the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_binding_usage-new-in-v900) system variable to control whether to collect the usage statistics of SQL plan bindings. 
+
+When this variable is set to `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
+
+```sql
+SELECT sql_digest, last_used_date FROM mysql.bind_info LIMIT 1;
+
++------------------------------------------------------------------+----------------+
+| sql_digest                                                       | last_used_date |
++------------------------------------------------------------------+----------------+
+| 5d3975ef2160c1e0517353798dac90a9914095d82c025e7cd97bd55aeb804798 | 2025-10-21     |
++------------------------------------------------------------------+----------------+
+```
+
 ## Utilize the statement summary table to obtain queries that need to be bound
 
 [Statement summary](/statement-summary-tables.md) records recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query statement summary tables to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
