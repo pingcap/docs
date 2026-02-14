@@ -18,9 +18,10 @@ You can use `PLAN REPLAYER` to save the on-site information of a TiDB cluster. T
 
 ```sql
 PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
+PLAN REPLAYER DUMP EXPLAIN [ANALYZE] ( 'sql1', 'sql2', ... );
 ```
 
-Based on `sql-statement`, TiDB sorts out and exports the following on-site information:
+Based on the SQL statement or statements, TiDB sorts out and exports the following on-site information:
 
 - TiDB version
 - TiDB configuration
@@ -30,6 +31,11 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The statistics of the table in `sql-statement`
 - The result of `EXPLAIN [ANALYZE] sql-statement`
 - Some internal procedures of query optimization
+
+Depending on whether you dump a single SQL statement or multiple SQL statements, the structure of the exported ZIP file is as follows:
+
+- For a single SQL statement, the ZIP file includes `sql/sql0.sql` and `explain.txt`.
+- For multiple SQL statements, the ZIP file includes `sql/sql0.sql`, `sql/sql1.sql`, ... and the corresponding `explain/explain0.txt`, `explain/explain1.txt`, ..., together with schema and statistics files for the referenced tables.
 
 If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
 
@@ -88,7 +94,18 @@ SELECT @@tidb_last_plan_replayer_token;
 1 row in set (0.00 sec)
 ```
 
-When there are multiple SQL statements, you can obtain the result of the `PLAN REPLAYER DUMP` execution using a file. The results of multiple SQL statements are separated by `;` in this file.
+To dump multiple SQL statements in a single command, you can use the multi-statement syntax:
+
+{{< copyable "sql" >}}
+
+```sql
+PLAN REPLAYER DUMP EXPLAIN (
+ 'SELECT * FROM t WHERE a = 1',
+ 'SELECT * FROM t WHERE b > 1'
+);
+```
+
+Alternatively, when there are multiple SQL statements, you can obtain the result of the `PLAN REPLAYER DUMP` execution using a file. The results of multiple SQL statements are separated by `;` in this file.
 
 ```sql
 plan replayer dump explain 'sqls.txt';
