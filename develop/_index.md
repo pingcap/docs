@@ -21,7 +21,7 @@ Build your application with the language you use by following the guides with sa
 <DevLangAccordion label="JavaScript" defaultExpanded>
 <DevToolCard title="Serverless Driver (beta)" logo="tidb" docLink="/developer/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
 
-Connect to TiDB over HTTPS from edge environments.
+Connect to TiDB over HTTPS from edge environments (only applicable to TiDB Cloud).
 
 </DevToolCard>
 <DevToolCard title="Next.js" logo="nextjs" docLink="/developer/dev-guide-sample-application-nextjs" githubLink="https://github.com/vercel/next.js">
@@ -147,7 +147,7 @@ In addition to these guides, PingCAP works with the community to support [third-
 
 ## Use MySQL client software
 
-As TiDB is a MySQL-compatible database, you can use many familiar client software tools to connect to TiDB and manage your databases. Or, you can use our <a href="/tidbcloud/get-started-with-cli">command line tool</a> to connect and manage your databases.
+As TiDB is a MySQL-compatible database, you can use many familiar client software tools to connect to TiDB and manage your databases. For TiDB Cloud, you can also use our [command line tool](/tidb-cloud/get-started-with-cli.md) to connect and manage your databases.
 
 <DevToolGroup>
 <DevToolCard title="MySQL Workbench" logo="mysql-1" docLink="/developer/dev-guide-gui-mysql-workbench">
@@ -176,7 +176,6 @@ Connect and manage TiDB databases with DataGrip by JetBrains.
 
 Learn other topics about developing with TiDB.
 
-- Use <a href="/tidbcloud/get-started-with-cli">TiDB Cloud CLI</a> to develop, manage and deploy your applications.
-- Explore popular <a href="/tidbcloud/integrate-tidbcloud-with-airbyte">service integrations</a> with TiDB Cloud.
 - Follow [TiDB database development reference](/develop/dev-guide-schema-design-overview.md) to design, interact with, optimize, and troubleshoot your data and schema.
 - Follow the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
+- Explore popular [service integrations](/tidb-cloud/integrate-tidbcloud-with-airbyte.md) with TiDB Cloud.
