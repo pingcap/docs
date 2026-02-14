@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/dev-guide-delete-data/','/tidb/dev/dev-guide-delete-data
 
 # Delete Data
 
-This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB. If you need to periodically delete expired data, use the [time to live](/time-to-live.md) feature.
+This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB. If you need to periodically delete expired data, use the [time to live](/develop/dev-guide-time-to-live.md) feature.
 
 ## Before you start
 
