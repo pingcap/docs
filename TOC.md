@@ -868,6 +868,11 @@
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
+<<<<<<< HEAD
+=======
+      - [GB18030](/character-set-gb18030.md)
+    - [TTL (Time to Live)](/time-to-live.md)
+>>>>>>> bf6b8f2bc6 (developer-guide: add a TTL doc (#22464))
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - `mysql` Schema
