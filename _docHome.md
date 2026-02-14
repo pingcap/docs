@@ -32,11 +32,7 @@ Connect your application with the languages and frameworks you prefer.
 
 </DocHomeCard>
 
-<<<<<<< HEAD
-<DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in {{{ .starter }}} (Beta)" icon="cloud-vector-mauve">
-=======
 <DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Beta)" icon="cloud-vector-mauve">
->>>>>>> f550bb773b (master: update href links of developer guides and vector search docs in _docHome.md (#22449))
 
 Explore native support of Vector Search in {{{ .starter }}} to build your AI application.
 
