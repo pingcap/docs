@@ -256,6 +256,84 @@ ORDER BY
 
 See also [Character Set and Collation](/character-set-and-collation.md).
 
+### Index length
+
+As the following example shows, MariaDB automatically converts an index to a prefix index if it exceeds the maximum key length. TiDB, following MySQL's behavior, does not perform this automatic conversion and instead returns an error. Therefore, you need to modify your scripts to explicitly create prefix indexes where necessary.
+
+```
+MariaDB> \W
+Show warnings enabled.
+MariaDB> CREATE TABLE t1(id SERIAL, c1 VARCHAR(800));
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB> ALTER TABLE t1 ADD INDEX(c1);
+Query OK, 0 rows affected, 1 warning (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` varchar(800) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  KEY `c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
+
+MariaDB has special handling for unique indexes that are over the maximum length as shown below. TiDB does not provide this feature.
+
+```
+MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB> ALTER TABLE t2 ADD INDEX regular_index_c1 (c1);
+Query OK, 0 rows affected, 1 warning (0.034 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> ALTER TABLE t2 ADD UNIQUE INDEX unique_index_c1 (c1);
+Query OK, 0 rows affected (0.048 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB> SHOW CREATE TABLE t2\G
+*************************** 1. row ***************************
+       Table: t2
+Create Table: CREATE TABLE `t2` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_c1` (`c1`) USING HASH,
+  KEY `regular_index_c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
+
+You can emulate the behavior like this:
+
+```
+tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT);
+Query OK, 0 rows affected (0.102 sec)
+
+tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
+Query OK, 0 rows affected (0.242 sec)
+
+tidb> ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
+Query OK, 0 rows affected (0.363 sec)
+
+tidb> INSERT INTO t1(id,c1) VALUES (1,'aaa');
+Query OK, 1 row affected (0.015 sec)
+
+tidb> INSERT INTO t1(id,c1) VALUES (2,'bbb');
+Query OK, 1 row affected (0.006 sec)
+
+tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
+ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
+tidb> 
+```
+
 ## Dump data with Dumpling and restore data with TiDB Lightning
 
 This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
