@@ -1,32 +1,36 @@
 ---
-title: 通过飞书与支持工单互动
-summary: 介绍支持工单的飞书互动详细信息
+title: 通过 Lark 交互支持工单
+summary: 介绍通过 Lark 交互支持工单的详细信息
 ---
 
-# 通过飞书与支持工单互动
+# 通过 Lark 交互支持工单
 
-对于订阅了**高级**[支持计划](/tidb-cloud/connected-care-detail.md)的客户，TiDB Cloud 在[飞书](https://www.larksuite.com/)中提供了一个名为 **PingCAP Support Bot** 的工单机器人，以支持更全面的支持工单互动和管理。
+对于订阅了 **Premium** [support plan](/tidb-cloud/connected-care-detail.md) 的客户，TiDB Cloud 在 [Lark](https://www.larksuite.com/) 中提供了名为 **PingCAP Support Bot** 的工单机器人，以支持更全面的支持工单交互与管理。
 
 > **注意：**
 >
-> 飞书的工单支持功能需要申请才能使用。如果你对尝试此功能感兴趣，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系 TiDB Cloud 支持团队，或联系你的技术客户经理（TAM）。
+> Lark 的工单支持功能需按需开通。如果你有兴趣试用该功能，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系 TiDB Cloud 支持团队，或联系你的 Technical Account Manager (TAM)。
 
-## 与支持工单互动
+## 交互支持工单
 
-如果启用了支持工单互动功能，**PingCAP Support Bot** 会将**支持工单已创建**消息卡片转换为一个线程来管理工单互动。
+在 Lark 的 **PingCAP Support Group** 中 [创建支持工单](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket) 后，机器人会在消息 thread 中回复工单链接。
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-当 PingCAP 支持工程师在工单上发表评论时，评论会自动同步到线程中。
+如果你订阅了 **Premium** [support plan](/tidb-cloud/connected-care-detail.md)，可以实现 Lark 与工单系统之间的双向信息同步。
 
-当任何人在线程中发表评论时，评论会同步回相应的支持工单。
+当支持工程师回复你的工单时，回复内容会同步到 Lark 的消息 thread。你可以在 thread 中直接查看回复并进行回复，无需访问支持 portal。你的回复也会同步到工单系统。
+
+通过该能力，如果你订阅了 **Premium** support plan，可以在 Lark 内快速创建、回复和管理工单，无需切换平台。
+
+![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
 ## 常见问题
 
 - 如何查看我的工单状态？
 
-    使用创建工单时使用的电子邮件地址登录 [PingCAP 帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)。你可以查看当前账户的所有历史工单及其状态。
+    使用创建工单时的邮箱登录 [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)。你可以查看当前 account 下所有历史工单及其状态。
 
 ## 联系支持
 
-如需帮助或有任何问题，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系我们的支持团队。
+如需帮助或有任何疑问，请通过 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 联系我们的支持团队。
