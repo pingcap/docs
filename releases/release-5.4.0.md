@@ -27,7 +27,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 > **注記：**
 >
-> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、すべての中間バージョンの互換性変更ノートを知りたい場合は、該当するバージョンの[リリースノート](/releases/_index.md)を確認できます。
+> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、すべての中間バージョンの互換性変更ノートを知りたい場合は、該当するバージョンの[リリースノート](/releases/_index.md)確認できます。
 
 ### システム変数 {#system-variables}
 
@@ -45,8 +45,8 @@ v5.4 の主な新機能または改善点は次のとおりです。
 | ティクブ            | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新しく追加された | バージョン5.3.0では、デフォルト値は`false`です。バージョン5.4.0以降では、デフォルト値は`true`に変更されました。このパラメータは、クラスターリソースの使用率が高い場合に、バックアップタスクで使用されるリソースを制限することでクラスターへの影響を軽減するかどうかを制御します。デフォルト設定では、バックアップタスクの速度が低下する可能性があります。                                                                                                                       |
 | ティクブ            | `log-level` `log-format` `log-file` `log-rotation-size`                                                         | 修正済み     | TiKVログパラメータの名前は、TiDBログパラメータと一致する名前`log.file.filename` `log.level` `log.enable-timestamp`に置き換えられます。古いパラメータのみを設定し、その値をデフォルト以外の値に設定した場合、古いパラメータは新しいパラメータと互換性を保ちます。古いパラメータと新しいパラメータの両方を設定した場合、新しいパラメータ`log.format`有効になります。詳細については、 [TiKVコンフィグレーションファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)参照してください。 |
 | ティクブ            | `log-rotation-timespan`                                                                                         | 削除済み     | ログローテーションの間隔。この期間が経過すると、ログファイルがローテーションされます。つまり、現在のログファイルのファイル名にタイムスタンプが追加され、新しいログファイルが作成されます。                                                                                                                                                                                                                  |
-| ティクブ            | `allow-remove-leader`                                                                                           | 削除済み     | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                     |
-| ティクブ            | `raft-msg-flush-interval`                                                                                       | 削除済み     | Raftメッセージをバッチ送信する間隔を指定します。Raft メッセージは、この設定項目で指定された間隔ごとにRaft送信されます。                                                                                                                                                                                                                                             |
+| TiKV            | `allow-remove-leader`                                                                                           | 削除済み     | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                     |
+| TiKV            | `raft-msg-flush-interval`                                                                                       | 削除済み     | Raftメッセージをバッチ送信する間隔を指定します。Raft メッセージは、この設定項目で指定された間隔ごとにRaft送信されます。                                                                                                                                                                                                                                             |
 | PD              | [`log.level`](/pd-configuration-file.md#level)                                                                  | 修正済み     | デフォルト値は「INFO」から「info」に変更され、大文字と小文字が区別されないことが保証されます。                                                                                                                                                                                                                                                            |
 | TiFlash         | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新しく追加された | エラスティックスレッドプール機能を有効または無効にするかどうかを決定します。この設定項目を有効にすると、同時実行性の高いシナリオにおいてTiFlashのCPU使用率が大幅に向上します。デフォルト値は`false`です。                                                                                                                                                                                                  |
 | TiFlash         | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新しく追加された | DTFileのバージョンを指定します。デフォルト値は`2`で、ハッシュがデータファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データファイルにはメタデータとトークンデータのチェックサムが含まれ、複数のハッシュアルゴリズムがサポートされます。                                                                                                                                                                        |
@@ -95,7 +95,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     この機能はデフォルトで無効になっています。有効にすると、TiSpark を介して操作するユーザーに必要な権限がない場合、TiSpark から例外が発行されます。
 
-    [ユーザードキュメント](/tispark-overview.md#security)
+    [ユーザードキュメント](https://docs.pingcap.com/tidb/v5.4/tispark-overview#security)
 
 -   **TiUPはルートユーザーの初期パスワードの生成をサポートしています**
 

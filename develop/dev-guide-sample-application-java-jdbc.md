@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with JDBC
 summary: JDBCを使用してTiDBに接続する方法を学びます。このチュートリアルでは、JDBCを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-aliases: ['/ja/tidb/stable/dev-guide-sample-application-java-jdbc/','/ja/tidbcloud/dev-guide-sample-application-java-jdbc/']
+aliases: ['/ja/tidb/dev/sample-application-java','/ja/tidb/dev/dev-guide-sample-application-java','/ja/tidb/stable/dev-guide-sample-application-java-jdbc/','/ja/tidb/dev/dev-guide-sample-application-java-jdbc/','/ja/tidbcloud/dev-guide-sample-application-java-jdbc/']
 ---
 
 # JDBC で TiDB に接続する {#connect-to-tidb-with-jdbc}
@@ -109,7 +109,7 @@ cd tidb-java-jdbc-quickstart
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
     TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
@@ -300,7 +300,7 @@ TiDB v8.5.4 以降、TiDB は MySQL と動作を合わせます。つまり、�
 
 -   MySQL Connector/J の使用方法を[MySQL Connector/J のドキュメント](https://dev.mysql.com/doc/connector-j/en/)から詳しく学びます。
 -   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}

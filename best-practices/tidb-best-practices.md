@@ -1,7 +1,7 @@
 ---
 title: TiDB Best Practices
 summary: このドキュメントでは、TiDBの使用に関するベストプラクティスをまとめ、OLAPおよびOLTPシナリオにおけるSQLの使用と最適化のヒント、特にTiDB固有の最適化オプションに焦点を当てています。また、ベストプラクティスに進む前に、TiDBの技術的原理を紹介する3つのブログ記事を読むことを推奨しています。
-aliases: ['/ja/tidb/stable/tidb-best-practices/']
+aliases: ['/ja/docs/dev/tidb-best-practices/','/ja/tidb/stable/tidb-best-practices/','/ja/tidb/dev/tidb-best-practices/']
 ---
 
 # TiDB ベストプラクティス {#tidb-best-practices}
@@ -56,7 +56,7 @@ TiDBは完全な分散トランザクションを提供し、そのモデルは[
     -   各キー値エントリは最大 6 MB です (デフォルト)
     -   キー値エントリの合計サイズは 10 GB 以下です。
 
-    [Google クラウド スパナ](https://cloud.google.com/spanner/quotas)にも同様の制限があります。
+    [Google クラウド スパナ](https://cloud.google.com/spanner/quotas)にも同様な制限があります。
 
 ### データシャーディング {#data-sharding}
 

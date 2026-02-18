@@ -1,7 +1,7 @@
 ---
 title: Best Practices for High-Concurrency Writes
 summary: このドキュメントでは、TiDBにおける高同時書き込みワークロードの処理に関するベストプラクティスを紹介します。データ分散、ホットスポット発生事例、そして複雑なホットスポット問題に関する課題と解決策を解説します。また、パフォーマンスを最適化するためのパラメータ設定についても解説します。
-aliases: ['/ja/tidb/stable/high-concurrency-best-practices/']
+aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-concurrency-best-practices/','/ja/docs/dev/best-practices/high-concurrency-best-practices/','/ja/docs/dev/reference/best-practices/high-concurrency/']
 ---
 
 # 高同時書き込みのベストプラクティス {#best-practices-for-high-concurrency-writes}
@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/']
 
 -   膨大な量のデータ
 -   履歴データを短時間でデータベースにインポートする必要性
--   短時間でデータベースから膨大な量のデータを読み取る必要がある
+-   短時間でデータベースから大量のデータを読み取る必要がある
 
 これらの機能は TiDB に次のような課題をもたらします。
 
@@ -100,7 +100,7 @@ FROM
 
 [RaftストアCPU](/grafana-tikv-dashboard.md)はスレッド`raftstore`のCPU使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeader、 `tikv-0`と`tikv-1`フォロワーです。他のノードの負荷はほぼ空です。
 
-PD の監視メトリックでも、ホットスポットが発生したことが確認されています。
+PD の監視メトリックでも、ホットスポットが発生したことが確認されます。
 
 ![QPS4](/media/best-practices/QPS4.png)
 
@@ -192,9 +192,9 @@ ORDER BY
 
 **問題1:**
 
-テーブルに主キーがない場合、または主キーが`Int`型ではなく、ランダムに分散された主キーIDを生成したくない場合、TiDBは暗黙的に`_tidb_rowid`列目を行IDとして提供します。一般的に、 `SHARD_ROW_ID_BITS`番目のパラメータを使用しない場合、 `_tidb_rowid`番目の列の値も単調に増加するため、ホットスポットが発生する可能性があります。詳細は[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
+テーブルに主キーがない場合、または主キーが`Int`型ではなく、ランダムに分布する主キーIDを生成したくない場合、TiDBは暗黙的に`_tidb_rowid`列目を行IDとして提供します。一般的に、 `SHARD_ROW_ID_BITS`列目のパラメータを使用しない場合、 `_tidb_rowid`列目の値も単調に増加するため、ホットスポットが発生する可能性があります。詳細は[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
 
-このような状況でホットスポット問題を回避するには、テーブルを作成する際に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`使用できます。 `PRE_SPLIT_REGIONS`の詳細については、 [分割前のリージョン](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
+このような状況でホットスポット問題を回避するには、テーブル作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [分割前のリージョン](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
 
 `SHARD_ROW_ID_BITS` 、 `_tidb_rowid`列目に生成された行 ID をランダムに散布するために使用されます。4 `PRE_SPLIT_REGIONS` 、テーブルの作成後にリージョンを事前に分割するために使用されます。
 

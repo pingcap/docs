@@ -1,15 +1,15 @@
 ---
 title: Topology Configuration File for TiDB Deployment Using TiUP
-summary: TiUPは、TiDBのクラスタートポロジーをデプロイまたは変更するためにトポロジーファイルを使用します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジーファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
+summary: TiUPは、トポロジファイルを使用してTiDBのクラスタートポロジをデプロイまたは変更します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
 ---
 
 # TiUPを使用した TiDB デプロイメントのトポロジコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-TiUPを使用して TiDB をデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を用意する必要があります。
+TiUPを使用して TiDB をデプロイまたは拡張するには、クラスター トポロジを記述するトポロジ ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
-同様に、クラスタトポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスタのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと、各セクション内の各フィールドについて説明します。
+同様に、クラスタートポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと各セクション内の各フィールドについて説明します。
 
-TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、Grafana、Alertmanager などの監視サーバーもデプロイされます。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視範囲に追加します。上記の監視サーバーの設定をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
+TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、Grafana、Alertmanager などの監視サーバーTiUPデプロイされます。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視スコープに追加します。上記の監視サーバーの設定をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
 
 ## ファイル構造 {#file-structure}
 
@@ -17,8 +17,8 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 -   [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
 -   [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`のコンフィグレーション。各マシンに`node_exporter`と`blackbox_exporter`デプロイされています。
--   [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じ名前の設定項目が存在する場合、インスタンスの設定項目が有効になります。
--   [コンポーネントバージョン](#component_versions) : コンポーネントバージョン。コンポーネントがクラスタバージョンを使用しない場合に設定できます。このセクションはtiup-cluster v1.14.0で導入されました。
+-   [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じ名前の設定項目がある場合は、インスタンスの設定項目が有効になります。
+-   [コンポーネントバージョン](#component_versions) : コンポーネントバージョン。コンポーネントがクラスタバージョンを使用しない場合に設定します。このセクションはtiup-cluster v1.14.0で導入されました。
 -   [pd_servers](#pd_servers) : PDインスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。
 -   [tidb_servers](#tidb_servers) : TiDBインスタンスの構成。この構成では、TiDBコンポーネントがデプロイされるマシンを指定します。
 -   [tikv_servers](#tikv_servers) : TiKVインスタンスの構成。この構成では、TiKVコンポーネントがデプロイされるマシンを指定します。
@@ -26,10 +26,8 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 -   [tiproxy_servers](#tiproxy_servers) : TiProxyインスタンスの構成。この構成は、TiProxyコンポーネントがデプロイされるマシンを指定します。
 -   [kvcdc_servers](#kvcdc_servers) : インスタンス[TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)の構成。この構成では、TiKV-CDCコンポーネントがデプロイされるマシンを指定します。
 -   [cdc_servers](#cdc_servers) : TiCDCインスタンスの構成。この構成では、TiCDCコンポーネントがデプロイされるマシンを指定します。
--   [tispark_masters](#tispark_masters) : TiSpark マスターインスタンスの構成。この構成では、TiSpark マスターコンポーネントがデプロイされるマシンを指定します。TiSpark マスターのノードは 1 つだけデプロイできます。
--   [tispark_workers](#tispark_workers) : TiSparkワーカーインスタンスの構成。この構成では、TiSparkワーカーコンポーネントがデプロイされるマシンを指定します。
--   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの構成。この構成では、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)番目のマイクロサービスを有効にするには、 [`global`](#global)のマイクロサービスで`pd_mode: "ms"`マイクロサービスを構成する必要があります）。
--   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの構成。この構成では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)有効にするには、 [`global`](#global)で`pd_mode: "ms"`構成する必要があります）。
+-   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの設定。この設定は、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)番目のマイクロサービスを有効にするには、 [`global`](#global)のマイクロサービスで`pd_mode: "ms"`マイクロサービスを設定する必要があります）。
+-   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの設定。この設定では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)有効にするには、 [`global`](#global)で`pd_mode: "ms"`設定する必要があります）。
 -   [監視サーバー](#monitoring_servers) : PrometheusとNGMonitoringがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) : Grafanaインスタンスの設定。この設定では、Grafanaがデプロイされるマシンを指定します。
 -   [アラートマネージャーサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerがデプロイされるマシンを指定します。
@@ -38,9 +36,9 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 `global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
--   `user` : デプロイされたクラスターを起動するために使用するユーザー。デフォルト値は`"tidb"`です。4 `<user>`に指定されたユーザーがターゲットマシン上に存在しない場合、このユーザーは自動的に作成されます。
+-   `user` : デプロイされたクラスターを起動するために使用するユーザー。デフォルト値は`"tidb"`です。4 フィールドに指定されたユーザーが`<user>`マシン上に存在しない場合、このユーザーは自動的に作成されます。
 
--   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`のフィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
+-   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`番目のフィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
 
 -   `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)使用されます。
 
@@ -48,7 +46,7 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 -   `enable_tls` : クラスタでTLSを有効にするかどうかを指定します。TLSを有効にすると、生成されたTLS証明書はコンポーネント間またはクライアントとコンポーネント間の接続に使用する必要があります。デフォルト値は`false`です。
 
--   `listen_host` : デフォルトのリスニングIPアドレスを指定します。空の場合、各インスタンスは、 `host`フィールドに`:`含まれているかどうかに基づいて、自動的に`::`または`0.0.0.0`に設定します。このフィールドはtiup-cluster v1.14.0で導入されました。
+-   `listen_host` : デフォルトのリスニングIPアドレスを指定します。空の場合、各インスタンスは、 `host`フィールドに`:`含まれているかどうかに基づいて、自動的に`::`または`0.0.0.0`に設​​定します。このフィールドはtiup-cluster v1.14.0で導入されました。
 
 -   `deploy_dir` : 各コンポーネントの配置ディレクトリ。デフォルト値は`"deployed"`です。適用ルールは以下のとおりです。
 
@@ -58,21 +56,21 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
     -   `global.deploy_dir`が絶対パスの場合、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
-    -   `global.deploy_dir`が相対パスの場合、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
+    -   `global.deploy_dir`相対パスの場合、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
 -   `data_dir` : データディレクトリ。デフォルト値: `"data"` 。適用ルールは以下のとおりです。
 
     -   インスタンス レベルで絶対パス`data_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`data_dir`設定されます。
 
-    -   各インスタンスに対して`data_dir`設定しない場合、デフォルト値は`<global.data_dir>`なります。
+    -   各インスタンスに対して`data_dir`設定しない場合、デフォルト値は`<global.data_dir>`になります。
 
-    -   `data_dir`が相対パスの場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に配置されます。 `<deploy_dir>`の計算規則については、 `deploy_dir`フィールドの適用規則を参照してください。
+    -   `data_dir`相対パスの場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に配置されます。 `<deploy_dir>`の計算規則については、 `deploy_dir`フィールドの適用規則を参照してください。
 
 -   `log_dir` : ログディレクトリ。デフォルト値: `"log"` 。適用ルールは以下のとおりです。
 
-    -   絶対パス`log_dir`インスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンスに構成されている`log_dir`なります。
+    -   絶対パス`log_dir`インスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンスに構成されている`log_dir`になります。
 
-    -   各インスタンスに対して`log_dir`設定しない場合、デフォルト値は`<global.log_dir>`なります。
+    -   各インスタンスで`log_dir`設定しない場合、デフォルト値は`<global.log_dir>`になります。
 
     -   `log_dir`相対パスの場合、コンポーネントログは`<deploy_dir>/<log_dir>`に配置されます。 `<deploy_dir>`の計算規則については、 `deploy_dir`フィールドの適用規則を参照してください。
 
@@ -80,7 +78,7 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 -   `arch` : ターゲットマシンのCPUアーキテクチャ。このフィールドは、ターゲットマシンにプッシュされるバイナリパッケージをどのプラットフォームに適合させるかを制御します。サポートされている値は「amd64」と「arm64」です。デフォルト値は「amd64」です。
 
--   `pd_mode` : PD動作モード。このフィールドは、 [PDマイクロサービス](/pd-microservices.md)有効にするかどうかを制御します。サポートされる値は「ms」です。このフィールドを指定すると、PDマイクロサービスが有効になります。
+-   `pd_mode` : PD動作モード。このフィールドは、 [PDマイクロサービス](/pd-microservices.md)マイクロサービスを有効にするかどうかを制御します。サポートされる値は「ms」です。このフィールドを指定すると、PDマイクロサービスが有効になります。
 
 -   `resource_control` : ランタイムリソース制御。このフィールドのすべての設定は、systemd のサービスファイルに書き込まれます。デフォルトでは制限はありません。制御可能なリソースは以下のとおりです。
 
@@ -103,11 +101,11 @@ global:
     memory_limit: "2G"
 ```
 
-上記の構成では、 `tidb`ユーザーを使用してクラスターを起動します。同時に、各コンポーネントの実行中のメモリは最大2GBに制限されます。
+上記の構成では、 `tidb`ユーザーを使用してクラスターを起動します。同時に、各コンポーネントは最大2GBに制限されます。
 
 ### <code>monitored</code> {#code-monitored-code}
 
-`monitored`ターゲットマシンの監視サービスを設定するために使用されます: [`node_exporter`](https://github.com/prometheus/node_exporter)および[`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter) 。以下のフィールドが含まれます:
+`monitored`はターゲットマシン上の監視サービスを設定するために使用されます: [`node_exporter`](https://github.com/prometheus/node_exporter)および[`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter) 。以下のフィールドが含まれます:
 
 -   `node_exporter_port` : サービスポート`node_exporter`デフォルト値は`9100`です。
 
@@ -117,7 +115,7 @@ global:
 
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 `monitored`構成の例は次のとおりです。
 
@@ -131,25 +129,25 @@ monitored:
 
 ### <code>server_configs</code> {#code-server-configs-code}
 
-`server_configs` 、サービスの設定と`global`コンポーネントの設定ファイルの生成に使用されます。2 セクションと同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。4 `server_configs`は主に以下のフィールドが含まれます。
+`server_configs` 、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 `global`と同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。4 `server_configs`は主に以下のフィールドが含まれます。
 
 -   `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB構成ファイル](/tidb-configuration-file.md)参照してください。
 
 -   `tikv` : TiKVサービス関連の設定。詳細な設定については[TiKV設定ファイル](/tikv-configuration-file.md)参照してください。
 
--   `pd` ：PDサービス関連の設定。詳細な設定については[PD設定ファイル](/pd-configuration-file.md)参照してください。
+-   `pd` : PDサービス関連の設定。詳細な設定については[PD設定ファイル](/pd-configuration-file.md)参照してください。
 
 -   `tiflash` : TiFlashサービス関連の設定。詳細な設定については[TiFlash設定ファイル](/tiflash/tiflash-configuration.md)参照してください。
 
--   `tiflash_learner` ：各TiFlashノードには特別なTiKVが組み込まれています。この設定項目は、この特別なTiKVを設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
+-   `tiflash_learner` : 各TiFlashノードには特別な TiKV が組み込まれています。この設定項目は、この特別な TiKV を設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
 
 -   `tiproxy` : TiProxyサービス関連の設定。詳細な設定については[TiProxy設定ファイル](/tiproxy/tiproxy-configuration.md)参照してください。
 
 -   `cdc` : TiCDCサービス関連の設定。詳細な設定については[TiCDCをデプロイ](/ticdc/deploy-ticdc.md)参照してください。
 
--   `tso` : `tso`マイクロサービス関連の設定。詳細な設定については[TSO 構成ファイル](/tso-configuration-file.md)参照してください。
+-   `tso` : `tso`マイクロサービス関連の設定。完全な設定については[TSO構成ファイル](/tso-configuration-file.md)参照してください。
 
--   `scheduling` : `scheduling`マイクロサービス関連の設定。詳細な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)参照してください。
+-   `scheduling` : `scheduling`マイクロサービス関連の設定。完全な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)参照してください。
 
 `server_configs`構成の例は次のとおりです。
 
@@ -171,16 +169,16 @@ server_configs:
 
 > **注記：**
 >
-> TiDB、TiKV、PD、TiCDC など、バージョン番号を共有するコンポーネントについては、混在バージョンのデプロイメントシナリオで正常に動作することを保証するための完全なテストは用意されていません。このセクションはテスト環境でのみ使用するか、 [テクニカルサポート](/support.md)の支援を受けて使用してください。
+> TiDB、TiKV、PD、TiCDC など、バージョン番号を共有するコンポーネントについては、混在バージョンのデプロイメントシナリオで正常に動作することを保証するための完全なテストは存在しません。このセクションは、テスト環境でのみ使用するか、 [テクニカルサポート](/support.md)の支援を受けて使用してください。
 
-`component_versions` 、特定のコンポーネントのバージョン番号を指定するために使用されます。
+`component_versions`は、特定のコンポーネントのバージョン番号を指定するために使用されます。
 
--   `component_versions`設定されていない場合、各コンポーネントは TiDB クラスターと同じバージョン番号 (PD や TiKV など) を使用するか、最新バージョン (Alertmanager など) を使用します。
+-   `component_versions`が設定されていない場合、各コンポーネントはTiDB クラスターと同じバージョン番号 (PD や TiKV など) を使用するか、最新バージョン (Alertmanager など) を使用します。
 -   `component_versions`設定されている場合、対応するコンポーネントは指定されたバージョンを使用し、このバージョンは後続のクラスターのスケーリングおよびアップグレード操作で使用されます。
 
 特定のバージョンのコンポーネントを使用する必要がある場合にのみ構成するようにしてください。
 
-`component_versions`には次のフィールドが含まれます。
+`component_versions`は次のフィールドが含まれます。
 
 -   `tikv` : TiKVコンポーネントのバージョン
 -   `tiflash` : TiFlashコンポーネントのバージョン
@@ -206,13 +204,13 @@ component_versions:
 
 ### <code>pd_servers</code> {#code-pd-servers-code}
 
-`pd_servers` PDサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`pd_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
+`pd_servers` 、PD サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`pd_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
 -   `host` : PDサービスがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
 -   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `name` : PDインスタンスの名前を指定します。異なるインスタンスにはそれぞれ一意の名前を付ける必要があります。そうでない場合、インスタンスをデプロイできません。
 
@@ -224,7 +222,7 @@ component_versions:
 
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
@@ -234,7 +232,7 @@ component_versions:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -260,7 +258,7 @@ pd_servers:
   - host: 10.0.1.12
 ```
 
-上記の設定では、 PD が`10.0.1.11`と`10.0.1.12`にデプロイされることを指定し、 `10.0.1.11`の PD に対して特定の設定を行います。
+上記の構成では、 PD が`10.0.1.11`と`10.0.1.12`に展開されることを指定し、 `10.0.1.11`の PD に対して特定の構成を作成します。
 
 ### <code>tidb_servers</code> {#code-tidb-servers-code}
 
@@ -270,7 +268,7 @@ pd_servers:
 
 -   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : TiDBサービスのリスニングポート。MySQLクライアントへの接続に使用されます。デフォルト値は`4000`です。
 
@@ -278,7 +276,7 @@ pd_servers:
 
 -   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
@@ -288,7 +286,7 @@ pd_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -320,7 +318,7 @@ tidb_servers:
 
 -   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : TiKVサービスのリスニングポート。デフォルト値は`20160`です。
 
@@ -330,7 +328,7 @@ tidb_servers:
 
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
@@ -340,7 +338,7 @@ tidb_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -372,9 +370,9 @@ tikv_servers:
 
 -   `host` : TiFlashサービスが展開されるマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
--   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP v1.12.5以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
+-   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP TiUP以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
 
 -   `flash_service_port` : TiFlashがサービスを提供するポート。TiDBはこのポートを介してTiFlashからデータを読み取ります。デフォルト値は`3930`です。
 
@@ -388,7 +386,7 @@ tikv_servers:
 
 -   `data_dir` : データディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。TiFlashは、カンマで区切られた複数の`data_dir`ディレクトリをサポートしています。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `tmp_path` : TiFlash一時ファイルのstorageパス。デフォルト値は[ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot;です。
 
@@ -396,15 +394,15 @@ tikv_servers:
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tiflash`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiflash`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `learner_config` ：各TiFlashノードには特別なTiKVが組み込まれています。この設定項目は、この特別なTiKVを設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
+-   `learner_config` : 各TiFlashノードには特別な TiKV が組み込まれています。この設定項目は、この特別な TiKV を設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
 
 -   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-デプロイ後は、上記のフィールドについては、ディレクトリを`data_dir`にのみ追加できます。以下のフィールドについては、これらのフィールドを変更することはできません。
+デプロイメント後、上記のフィールドではディレクトリを`data_dir`にのみ追加できます。以下のフィールドでは、これらのフィールドを変更することはできません。
 
 -   `host`
 -   `tcp_port`
@@ -432,17 +430,17 @@ tiflash_servers:
 
 -   `host` : TiProxyサービスがデプロイされているマシンのIPアドレスを指定します。このフィールドは必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : TiProxy SQL サービスのリスニングポート。デフォルト値は`6000`です。
 
--   `status_port` : TiProxyステータスサービスのリスニングポート。外部からHTTPリクエストを介してTiProxyサービスのステータスを確認するために使用されます。デフォルト値は`3080`です。
+-   `status_port` : TiProxyステータスサービスのリスニングポート。HTTPリクエストを介して外部からTiProxyサービスのステータスを確認するために使用されます。デフォルト値は`3080`です。
 
 -   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに基づいてディレクトリが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、ターゲットマシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認してください。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。値はNUMAノードのID（例： `"0,1"` ）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。値は NUMA ノードの ID（例： `"0,1"`です。
 
--   `config` : このフィールドの設定ルールは、 `server_configs`の`tiproxy`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiproxy`内容と結合されます。これら 2 つのフィールドが重複している場合、このフィールドの内容が有効になります。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`tiproxy`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiproxy`内容とマージされます。これら 2 つのフィールドが重複している場合、このフィールドの内容が有効になります。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
 -   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
@@ -476,19 +474,19 @@ tiproxy_servers:
 
 ### <code>kvcdc_servers</code> {#code-kvcdc-servers-code}
 
-`kvcdc_servers` 、 [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス構成も指定します`kvcdc_servers`配列です。各配列要素には以下のフィールドが含まれます。
+`kvcdc_servers` 、 [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス構成も指定します`kvcdc_servers`は配列です。各配列要素には、以下のフィールドが含まれます。
 
 -   `host` : TiKV-CDC サービスがデプロイされるマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : TiKV-CDCサービスのリスニングポート。デフォルト値は`8600`です。
 
 -   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `data-dir` : TiKV-CDC が主にソート用の一時ファイルを保存するディレクトリを指定します（オプション）。このディレクトリの空きディスク容量は 500 GiB 以上が推奨されます。
+-   `data-dir` : TiKV-CDC が主にソート用の一時ファイルを保存するディレクトリを指定します（オプション）。このディレクトリの空きディスク容量は500 GiB以上が推奨されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `gc-ttl` : TiKV-CDC（オプション）によってPDに設定されるサービスレベルGCセーフポイントのTTL（Time to Live、秒単位）。これはレプリケーションタスクを一時停止できる期間で、デフォルトは`86400` （24時間）です。レプリケーションタスクの一時停止は、TiKVガベージコレクションセーフポイントの進行状況に影響することに注意してください。 `gc-ttl`長いほど、変更フィードを一時停止できる時間は長くなりますが、同時に、より多くの古いデータが保持され、より多くのスペースを占有することになります。逆もまた同様です。
 
@@ -502,7 +500,7 @@ tiproxy_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -528,7 +526,7 @@ kvcdc_servers:
 
 -   `host` : TiCDC サービスがデプロイされるマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : TiCDCサービスのリスニングポート。デフォルト値は`8300`です。
 
@@ -536,7 +534,7 @@ kvcdc_servers:
 
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `gc-ttl` : TiCDCによってPDに設定されるサービスレベルGCセーフポイントのTime To Live（TTL）期間（秒）。デフォルト値は`86400` （24時間）です。
 
@@ -550,7 +548,7 @@ kvcdc_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `ticdc_cluster_id` : サービスに対応するTiCDCクラスタIDを指定します。このフィールドが指定されていない場合、サービスはデフォルトのTiCDCクラスタに参加します。このフィールドはTiDB v6.3.0以降のバージョンでのみ有効です。
 
@@ -577,109 +575,12 @@ cdc_servers:
     data_dir: "/cdc-data"
 ```
 
-### <code>tispark_masters</code> {#code-tispark-masters-code}
-
-`tispark_masters` 、TiSpark のマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_masters`は配列です。各配列要素には以下のフィールドが含まれます。
-
--   `host` : TiSparkマスターがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
-
--   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
-
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
-
--   `port` : Sparkのリスニングポート。ノード前の通信に使用されます。デフォルト値は`7077`です。
-
--   `web_port` : SparkのWebポート。Webサービスとタスクステータスを提供します。デフォルト値は`8080`です。
-
--   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
-
--   `java_home` : 使用するJRE環境のパスを指定します。このパラメータはシステム環境変数`JAVA_HOME`に対応します。
-
--   `spark_config` : TiSparkサービスを構成するための設定を行います。その後、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
-
--   `spark_env` : Spark の起動時に環境変数を構成します。
-
--   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
-
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
-
-上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
-
--   `host`
--   `listen_host`
--   `port`
--   `web_port`
--   `deploy_dir`
--   `arch`
--   `os`
-
-`tispark_masters`構成の例は次のとおりです。
-
-```yaml
-tispark_masters:
-  - host: 10.0.1.21
-    spark_config:
-      spark.driver.memory: "2g"
-      spark.eventLog.enabled: "False"
-      spark.tispark.grpc.framesize: 2147483647
-      spark.tispark.grpc.timeout_in_sec: 100
-      spark.tispark.meta.reload_period_in_sec: 60
-      spark.tispark.request.command.priority: "Low"
-      spark.tispark.table.scan_concurrency: 256
-    spark_env:
-      SPARK_EXECUTOR_CORES: 5
-      SPARK_EXECUTOR_MEMORY: "10g"
-      SPARK_WORKER_CORES: 5
-      SPARK_WORKER_MEMORY: "10g"
-  - host: 10.0.1.22
-```
-
-### <code>tispark_workers</code> {#code-tispark-workers-code}
-
-`tispark_workers` 、TiSpark のワーカーノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_workers`は配列です。各配列要素には以下のフィールドが含まれます。
-
--   `host` : TiSparkワーカーがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
-
--   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
-
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
-
--   `port` : Sparkのリスニングポート。ノード前の通信に使用されます。デフォルト値は`7077`です。
-
--   `web_port` : SparkのWebポート。Webサービスとタスクステータスを提供します。デフォルト値は`8080`です。
-
--   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
-
--   `java_home` : 使用するJRE環境のパスを指定します。このパラメータはシステム環境変数`JAVA_HOME`に対応します。
-
--   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
-
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
-
-上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
-
--   `host`
--   `listen_host`
--   `port`
--   `web_port`
--   `deploy_dir`
--   `arch`
--   `os`
-
-`tispark_workers`構成の例は次のとおりです。
-
-```yaml
-tispark_workers:
-  - host: 10.0.1.22
-  - host: 10.0.1.23
-```
-
 ### <code>tso_servers</code> {#code-tso-servers-code}
 
 `tso_servers` 、 `tso`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `tso_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
--   `host` : `tso`マイクロサービスがデプロイされるマシンのIPアドレスを指定します。このフィールド値は必須です。
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `host` : `tso`マイクロサービスがデプロイされているマシンのIPアドレスを指定します。このフィールド値は必須です。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 -   `port` : `tso`マイクロサービスのリスニングポートを指定します。デフォルト値は`3379`です。
 -   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
@@ -708,8 +609,8 @@ tso_servers:
 
 `scheduling_servers` 、 `scheduling`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `scheduling_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
--   `host` : `scheduling`マイクロサービスがデプロイされるマシンのIPアドレスを指定します。このフィールドは必須です。
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `host` : `scheduling`マイクロサービスがデプロイされているマシンのIPアドレスを指定します。このフィールドは必須です。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 -   `port` : `scheduling`マイクロサービスのリスニングポートを指定します。デフォルト値は`3379`です。
 -   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
@@ -736,13 +637,13 @@ scheduling_servers:
 
 ### <code>monitoring_servers</code> {#code-monitoring-servers-code}
 
-`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス設定も指定します`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、各マシンのサービス設定も指定します`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 -   `host` : 監視サービスがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
--   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)サポートします。デフォルト値は`12020`です。
+-   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : Prometheusサービスのリスニングポート。デフォルト値は`9090`です。
 
@@ -750,25 +651,25 @@ scheduling_servers:
 
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `storage_retention` : Prometheus監視データの保持期間。デフォルト値は`"30d"`です。
 
--   `rule_dir` : `*.rules.yml`のファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、Prometheusのルールとして、クラスター構成の初期化フェーズ中にターゲットマシンに転送されます。
+-   `rule_dir` : `*.rules.yml`ファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、Prometheusのルールとして、クラスター構成の初期化フェーズ中にターゲットマシンに転送されます。
 
 -   `remote_config` : Prometheusデータのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには2つの設定があります。
     -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
     -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 
--   `external_alertmanagers` : フィールド`external_alertmanagers`が設定されている場合、Prometheusはクラスター外のAlertmanagerに構成動作を通知します。このフィールドは配列であり、各要素は外部Alertmanagerであり、フィールド`host`とフィールド`web_port`で構成されます。
+-   `external_alertmanagers` : `external_alertmanagers`番目のフィールドが設定されている場合、Prometheusはクラスター外のAlertmanagerに構成動作を通知します。このフィールドは配列であり、各要素は外部Alertmanagerであり、 `host`と`web_port`番目のフィールドで構成されます。
 
 -   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメータを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメータです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
 
@@ -815,7 +716,7 @@ monitoring_servers:
 
 -   `host` : Grafanaサービスがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `port` : Grafanaサービスのリスニングポート。デフォルト値は`3000`です。
 
@@ -831,15 +732,15 @@ monitoring_servers:
 
 -   `dashboard_dir` : `dashboard(*.json)`ファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、クラスター構成の初期化フェーズ中に、Grafanaのダッシュボードとしてターゲットマシンに転送されます。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `config` : このフィールドは、Grafanaにカスタム設定を追加するために使用されます。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`config`フィールドの内容をGrafana設定ファイル`grafana.ini`に追加します。詳細については、 [その他のGrafana設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations)参照してください。
 
 > **注記：**
 >
-> `dashboard_dir`フィールドが`grafana_servers`設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
+> `dashboard_dir`フィールドが`grafana_servers`に設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >
-> 1.  ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`クラスター名に基づいて名前が付けられているため)。
+> 1.  ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`クラスター名に基づいて命名されているため)。
 > 2.  `tiup cluster reload -R grafana`コマンドを実行します。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
@@ -860,11 +761,11 @@ grafana_servers:
 
 ### <code>alertmanager_servers</code> {#code-alertmanager-servers-code}
 
-`alertmanager_servers` 、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`alertmanager_servers` 、Alertmanager サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`alertmanager_servers`は配列です。各配列要素には、以下のフィールドが含まれます。
 
 -   `host` : Alertmanager サービスがデプロイされているマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
 -   `web_port` : AlertmanagerがWebサービスを提供するために使用するポートを指定します。デフォルト値は`9093`です。
 
@@ -874,7 +775,7 @@ grafana_servers:
 
 -   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
+-   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
@@ -884,9 +785,9 @@ grafana_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
--   `listen_host` : Alertmanagerにプロキシ経由でアクセスできるように、リスニングアドレスを指定します。 `0.0.0.0`に設定することをお勧めします。詳細については、 [Alertmanager 設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations)参照してください。
+-   `listen_host` : Alertmanager にプロキシ経由でアクセスできるように、リスニングアドレスを指定します。 `0.0.0.0`に設定することをお勧めします。詳細については、 [Alertmanager 設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations)参照してください。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 

@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
 summary: HAProxyは、TCPおよびHTTPベースのアプリケーション向けの無料のオープンソースロードバランサおよびプロキシサーバーです。高可用性、負荷分散、ヘルスチェック、スティッキーセッション、SSLサポート、監視機能を提供します。HAProxyを導入するには、ハードウェアとソフトウェアの要件を満たしていることを確認の上、インストールと設定を行ってください。最適な結果を得るには、最新の安定バージョンをご使用ください。
-aliases: ['/ja/tidb/stable/haproxy-best-practices/']
+aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/reference/best-practices/haproxy/','/ja/tidb/stable/haproxy-best-practices/','/ja/tidb/dev/haproxy-best-practices/']
 ---
 
 # TiDB で HAProxy を使用するためのベストプラクティス {#best-practices-for-using-haproxy-in-tidb}
@@ -91,7 +91,7 @@ HAProxyを使用すると、負荷分散されたデータベース環境を簡�
     tar zxf haproxy-2.6.21.tar.gz
     ```
 
-3.  ソース コードからアプリケーションをコンパイルします。
+3.  ソースコードからアプリケーションをコンパイルします。
 
     ```bash
     cd haproxy-2.6.21

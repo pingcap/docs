@@ -13,23 +13,22 @@ TiDB開発者は、新機能の開発、パフォーマンスの向上、安定�
 
 -   [pingcap/tidb](https://github.com/pingcap/tidb/graphs/contributors)
 -   [ティックブ/ティックブ](https://github.com/tikv/tikv/graphs/contributors)
--   [tikv/pd](https://github.com/tikv/pd/graphs/contributors)
+-   [ティックブ/PD](https://github.com/tikv/pd/graphs/contributors)
 -   [pingcap/tiflash](https://github.com/pingcap/tiflash/graphs/contributors)
 -   [pingcap/tidbオペレーター](https://github.com/pingcap/tidb-operator/graphs/contributors)
--   [pingcap/tiup](https://github.com/pingcap/tiup/graphs/contributors)
+-   [ピングキャップ/ティアップ](https://github.com/pingcap/tiup/graphs/contributors)
 -   [pingcap/tidb-ダッシュボード](https://github.com/pingcap/tidb-dashboard/graphs/contributors)
 -   [ピングキャップ/ティフロー](https://github.com/pingcap/tiflow/graphs/contributors)
--   [pingcap/tidb-ツール](https://github.com/pingcap/tidb-tools/graphs/contributors)
--   [ピングキャップ/ティスパーク](https://github.com/pingcap/tispark/graphs/contributors)
+-   [pingcap/tidb-tools](https://github.com/pingcap/tidb-tools/graphs/contributors)
 -   [tikv/クライアント-java](https://github.com/tikv/client-java/graphs/contributors)
 -   [tidbインキュベーター/TiBigData](https://github.com/tidb-incubator/TiBigData/graphs/contributors)
 -   [ti-コミュニティ-インフラ](https://github.com/orgs/ti-community-infra/people)
 
 ## TiDBドキュメントの作成者と翻訳者 {#writers-and-translators-for-tidb-documentation}
 
-ライターと翻訳者は、TiDBおよび関連プロジェクトのドキュメントの作成と翻訳を担当しています。TiDBドキュメント関連リポジトリへの貢献者リストは以下のとおりです。
+ライターと翻訳者は、TiDBおよび関連プロジェクトのドキュメントの執筆と翻訳を担当しています。以下は、TiDBドキュメント関連リポジトリの貢献者リストです。
 
--   [pingcap/docs-cn](https://github.com/pingcap/docs-cn/graphs/contributors)
+-   [pingcap/ドキュメント-cn](https://github.com/pingcap/docs-cn/graphs/contributors)
 -   [pingcap/ドキュメント](https://github.com/pingcap/docs/graphs/contributors)
 -   [pingcap/docs-tidb-operator](https://github.com/pingcap/docs-tidb-operator/graphs/contributors)
 -   [tikv/ウェブサイト](https://github.com/tikv/website/graphs/contributors)

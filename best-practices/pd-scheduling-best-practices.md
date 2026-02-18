@@ -1,7 +1,7 @@
 ---
 title: Best Practices for PD Scheduling
 summary: このドキュメントでは、PDスケジューリングのベストプラクティスをまとめています。具体的には、スケジューリングプロセス、負荷分散、ホットリージョンのスケジューリング、クラスタートポロジーの認識、スケールインと障害回復、リージョンのマージ、クエリスケジューリングステータス、スケジューリング戦略の制御などが含まれます。また、リーダー/リージョンの不均等な分散、ノードの回復速度の低下、TiKVノードのトラブルシューティングといった一般的なシナリオについても解説します。
-aliases: ['/ja/tidb/stable/pd-scheduling-best-practices/']
+aliases: ['/ja/docs/dev/best-practices/pd-scheduling-best-practices/','/ja/docs/dev/reference/best-practices/pd-scheduling/','/ja/tidb/stable/pd-scheduling-best-practices/','/ja/tidb/dev/pd-scheduling-best-practices/']
 ---
 
 # PDスケジュールのベストプラクティス {#best-practices-for-pd-scheduling}

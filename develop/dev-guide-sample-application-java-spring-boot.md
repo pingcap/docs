@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with Spring Boot
 summary: Spring Bootを使用してTiDBに接続する方法を学びます。このチュートリアルでは、Spring Bootを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-aliases: ['/ja/tidb/stable/dev-guide-sample-application-java-spring-boot/','/ja/tidbcloud/dev-guide-sample-application-java-spring-boot/']
+aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev/dev-guide-sample-application-spring-boot','/ja/tidb/stable/dev-guide-sample-application-java-spring-boot/','/ja/tidb/dev/dev-guide-sample-application-java-spring-boot/','/ja/tidbcloud/dev-guide-sample-application-java-spring-boot/']
 ---
 
 # Spring BootでTiDBに接続する {#connect-to-tidb-with-spring-boot}
@@ -200,7 +200,7 @@ spring:
       ddl-auto: create-drop
 ```
 
-設定後、環境変数`TIDB_JDBC_URL` 、 `TIDB_USER` 、 `TIDB_PASSWORD` TiDBクラスタの実際の値に設定してください。設定ファイルにはこれらの環境変数のデフォルト設定が含まれています。環境変数を設定しない場合は、デフォルト値は以下のとおりです。
+設定後、環境変数`TIDB_JDBC_URL` 、 `TIDB_USER` 、 `TIDB_PASSWORD` TiDBクラスタの実際の値に設定してください。設定ファイルには、これらの環境変数のデフォルト設定が含まれています。環境変数を設定しない場合は、デフォルト値は以下のとおりです。
 
 -   `TIDB_JDBC_URL` : `"jdbc:mysql://localhost:4000/test"`
 -   `TIDB_USER` : `"root"`

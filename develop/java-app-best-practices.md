@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Developing Java Applications with TiDB
 summary: このドキュメントでは、TiDB を使用したJavaアプリケーション開発のベストプラクティスを紹介します。データベース関連コンポーネント、JDBC の使用、接続プールの設定、データアクセスフレームワーク、Spring トランザクション、トラブルシューティングツールなどについて解説します。TiDB は MySQL と高い互換性があるため、MySQL ベースのJavaアプリケーションのベストプラクティスのほとんどは TiDB にも適用できます。
-aliases: ['/ja/tidb/stable/java-app-best-practices/']
+aliases: ['/ja/docs/dev/best-practices/java-app-best-practices/','/ja/docs/dev/reference/best-practices/java-app/','/ja/tidb/stable/java-app-best-practices/','/ja/tidb/dev/java-app-best-practices/']
 ---
 
 # TiDB を使用したJavaアプリケーション開発のベスト プラクティス {#best-practices-for-developing-java-applications-with-tidb}
@@ -13,7 +13,7 @@ aliases: ['/ja/tidb/stable/java-app-best-practices/']
 Javaアプリケーションで TiDB データベースと対話する一般的なコンポーネントは次のとおりです。
 
 -   ネットワーク プロトコル: クライアントは標準[MySQLプロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)を介して TiDBサーバーと対話します。
--   JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC (Javaデータベース接続)](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装したJDBCドライバを使用できます。MySQL用の一般的なJDBCドライバには、 [MySQL コネクタ/J](https://github.com/mysql/mysql-connector-j)と[MariaDB コネクタ/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)あります。
+-   JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC (Javaデータベース接続)](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装したJDBCドライバを使用できます。MySQLで一般的なJDBCドライバには、 [MySQL コネクタ/J](https://github.com/mysql/mysql-connector-j)と[MariaDB コネクタ/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)あります。
 -   データベース接続プール：接続が要求されるたびに作成するオーバーヘッドを削減するため、アプリケーションは通常、接続プールを使用して接続をキャッシュし、再利用します。JDBC [データソース](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)では接続プールAPIが定義されています。必要に応じて、様々なオープンソースの接続プール実装から選択できます。
 -   データ アクセス フレームワーク: アプリケーションは通常、 [マイバティス](https://mybatis.org/mybatis-3/index.html)や[休止状態](https://hibernate.org/)などのデータ アクセス フレームワークを使用して、データベース アクセス操作をさらに簡素化および管理します。
 -   アプリケーション実装：アプリケーションロジックは、データベースにどのコマンドをいつ送信するかを制御します。一部のアプリケーションでは、トランザクションの開始とコミットのロジックを管理するために[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用します。
@@ -60,7 +60,7 @@ OLTP（オンライントランザクション処理）シナリオでは、プ�
 
 #### <code>StreamingResult</code>を使用して実行結果を取得します {#use-code-streamingresult-code-to-get-the-execution-result}
 
-多くの場合、JDBCは実行効率を向上させるために、クエリ結果を事前に取得し、デフォルトでクライアントメモリに保存します。しかし、クエリが返す結果セットが非常に大きい場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らすよう要求し、クライアントのメモリが準備できて次のバッチを要求するまで待機することがよくあります。
+多くの場合、JDBCは実行効率を向上させるために、クエリ結果を事前に取得し、デフォルトでクライアントのメモリに保存します。しかし、クエリが返す結果セットが非常に大きい場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らすよう要求し、クライアントのメモリが準備できて次のバッチを要求するまで待機することがよくあります。
 
 JDBC では通常、次の 2 つの処理方法が使用されます。
 
@@ -72,7 +72,7 @@ JDBC では通常、次の 2 つの処理方法が使用されます。
 
 -   2 番目の方法: 最初に[`FetchSize`設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)正の整数として設定し、次に JDBC URL で`useCursorFetch = true`設定してカーソル フェッチを使用します。
 
-TiDB は両方の方法をサポートしていますが、実装が簡単で実行効率が優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
+TiDB は両方の方法をサポートしていますが、実装がより単純で実行効率が優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
 2番目の方法では、TiDBはまずすべてのデータをTiDBノードにロードし、その後`FetchSize`に従ってクライアントにデータを返します。そのため、通常は1番目の方法よりも多くのメモリを消費します。3 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) `ON`設定した場合、TiDBは結果を一時的にハードディスクに書き込む可能性があります。
 

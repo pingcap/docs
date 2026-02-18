@@ -1,12 +1,12 @@
 ---
 title: Best Practices for Monitoring TiDB Using Grafana
 summary: Grafanaを用いたTiDB監視のベストプラクティス。TiUPを使用してTiDBクラスターをデプロイ、監視用にGrafanaとPrometheusを追加します。メトリクスを使用してクラスターの状態を分析し、問題を診断します。PrometheusはTiDBコンポーネントからメトリクスを収集し、Grafanaはそれらを表示します。Grafanaを効率的に使用するためのヒントとしては、クエリ式の変更、Y軸スケールの切り替え、クエリ結果のAPI使用などが挙げられます。このプラットフォームは、TiDBクラスターの状態の分析と診断に非常に役立ちます。
-aliases: ['/ja/tidb/stable/grafana-monitor-best-practices/']
+aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/docs/dev/reference/best-practices/grafana-monitor/','/ja/tidb/stable/grafana-monitor-best-practices/','/ja/tidb/dev/grafana-monitor-best-practices/']
 ---
 
 # Grafana を使用した TiDB 監視のベストプラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-トポロジ構成にGrafanaとPrometheus [TiUPを使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
+トポロジ構成にGrafanaとPrometheus [TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 

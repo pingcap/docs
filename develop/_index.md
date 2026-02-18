@@ -1,7 +1,7 @@
 ---
 title: Developer Guide Overview
 summary: TiDB Cloudおよび TiDB Self-Managed の開発者ガイドの概要を紹介します。
-aliases: ['/ja/tidb/stable/dev-guide-overview/','/ja/tidbcloud/dev-guide-overview/']
+aliases: ['/ja/tidb/stable/dev-guide-overview/','/ja/tidb/dev/dev-guide-overview/','/ja/tidbcloud/dev-guide-overview/','/ja/tidb/dev/connectors-and-apis/','/ja/appdev/dev/','/ja/tidb/dev/dev-guide-outdated-for-laravel']
 ---
 
 # 開発者ガイドの概要 {#developer-guide-overview}
@@ -21,7 +21,7 @@ aliases: ['/ja/tidb/stable/dev-guide-overview/','/ja/tidbcloud/dev-guide-overvie
 <DevLangAccordion label="JavaScript" defaultExpanded>
 <DevToolCard title="Serverless Driver (beta)" logo="tidb" docLink="/developer/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
 
-エッジ環境から HTTPS 経由で TiDB に接続します。
+エッジ環境から HTTPS 経由で TiDB に接続します ( TiDB Cloudにのみ適用されます)。
 
 </DevToolCard>
 <DevToolCard title="Next.js" logo="nextjs" docLink="/developer/dev-guide-sample-application-nextjs" githubLink="https://github.com/vercel/next.js">
@@ -147,7 +147,7 @@ mysql2 ドライバーを使用して TiDB に接続します。
 
 ## MySQLクライアントソフトウェアを使用する {#use-mysql-client-software}
 
-TiDBはMySQL互換データベースであるため、多くの使い慣れたクライアントソフトウェアツールを使用してTiDBに接続し、データベースを管理できます。また、<a href="/tidbcloud/get-started-with-cli">コマンドラインツール</a>を使用してデータベースに接続し、管理することもできます。
+TiDBはMySQL互換データベースであるため、多くの使い慣れたクライアントソフトウェアツールを使用してTiDBに接続し、データベースを管理できます。TiDB TiDB Cloudでは、 [コマンドラインツール](/tidb-cloud/get-started-with-cli.md)使用してデータベースに接続および管理することもできます。
 
 <DevToolGroup>
 <DevToolCard title="MySQL Workbench" logo="mysql-1" docLink="/developer/dev-guide-gui-mysql-workbench">
@@ -176,7 +176,6 @@ JetBrains の DataGrip を使用して TiDB データベースに接続し、管
 
 TiDB を使用した開発に関するその他のトピックを学習します。
 
--   <a href="/tidbcloud/get-started-with-cli">TiDB Cloud CLI</a>を使用して、アプリケーションを開発、管理、デプロイします。
--   TiDB Cloudとの人気の<a href="/tidbcloud/integrate-tidbcloud-with-airbyte">サービス統合</a>をご覧ください。
 -   [TiDB データベース開発リファレンス](/develop/dev-guide-schema-design-overview.md)に従って、データとスキーマを設計、操作、最適化、およびトラブルシューティングします。
 -   無料のオンラインコース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を受講してください。
+-   TiDB Cloudで人気の[サービス統合](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)探索します。

@@ -1,12 +1,12 @@
 ---
 title: Delete Data
 summary: データを削除するための SQL 構文、ベスト プラクティス、例について学習します。
-aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidbcloud/dev-guide-delete-data/']
+aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidb/dev/dev-guide-delete-data/','/ja/tidbcloud/dev-guide-delete-data/']
 ---
 
 # データを削除 {#delete-data}
 
-このドキュメントでは、 [消去](/sql-statements/sql-statement-delete.md) SQL文を使用してTiDB内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、 [生きる時間](/time-to-live.md)機能を使用してください。
+このドキュメントでは、 [消去](/sql-statements/sql-statement-delete.md) SQL文を使用してTiDB内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、 [生きる時間](/develop/dev-guide-time-to-live.md)機能を使用してください。
 
 ## 始める前に {#before-you-start}
 
@@ -196,7 +196,7 @@ TiDBは[統計情報](/statistics.md)使用してインデックスの選択を�
 
 ### 一括削除の例 {#bulk-delete-example}
 
-特定の期間内にアプリケーションエラーが発生したとします。この期間（例えば`2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)分のデータをすべて削除する必要があり、15分間で10,000件以上のレコードが書き込まれたとします。この場合、以下の手順で実行できます。
+特定の期間内にアプリケーションエラーが発生したとします。この期間（例えば`2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のデータをすべて削除する必要があり、15分間で10,000件以上のレコードが書き込まれたとします。この場合、以下の手順で実行できます。
 
 <SimpleTab groupId="language">
 <div label="Java" value="java">

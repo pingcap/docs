@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with Django
 summary: Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
-aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-django/','/ja/tidbcloud/dev-guide-sample-application-python-django/']
+aliases: ['/ja/tidb/dev/dev-guide-outdated-for-django','/ja/tidb/stable/dev-guide-sample-application-python-django/','/ja/tidb/dev/dev-guide-sample-application-python-django/','/ja/tidbcloud/dev-guide-sample-application-python-django/']
 ---
 
 # DjangoでTiDBに接続する {#connect-to-tidb-with-django}
@@ -211,7 +211,7 @@ python manage.py migrate
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-サンプル/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリを参照してください。
 
 ### TiDBに接続する {#connect-to-tidb}
 

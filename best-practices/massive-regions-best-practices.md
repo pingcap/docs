@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Tuning TiKV Performance with Massive Regions
 summary: TiKVのパフォーマンスチューニングには、リージョンとメッセージ数の削減、 Raftstoreの同時実行性の向上、Hibernateリージョンとリージョンマージの有効化、 Raftベースのティック間隔の調整、TiKVインスタンスの増加、リージョンサイズの調整が含まれます。その他の問題としては、PDリーダーの切り替え速度の低下やPDルーティング情報の古さなどが挙げられます。
-aliases: ['/ja/tidb/stable/massive-regions-best-practices/']
+aliases: ['/ja/docs/dev/best-practices/massive-regions-best-practices/','/ja/docs/dev/reference/best-practices/massive-regions/','/ja/tidb/stable/massive-regions-best-practices/','/ja/tidb/dev/massive-regions-best-practices/']
 ---
 
 # 大規模リージョンでの TiKV パフォーマンスのチューニングに関するベストプラクティス {#best-practices-for-tuning-tikv-performance-with-massive-regions}

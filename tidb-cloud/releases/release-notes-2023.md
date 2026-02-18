@@ -39,7 +39,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloud Serverless は、各 SQL ステートメントの詳細な分析情報を提供するようになり[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)た。SQL ステートメントごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
 
-    SQL ステートメントの RU の詳細を確認するには、 [TiDB Cloud Serverless クラスター](https://tidbcloud.com/project/clusters)の**診断**ページに移動し、 **SQL ステートメント**タブをクリックします。
+    SQL ステートメントの RU の詳細を確認するには、 [TiDB Cloud Serverlessクラスター](https://tidbcloud.com/project/clusters)の**診断**ページに移動し、 **SQL ステートメント**タブをクリックします。
 
 ## 2023年11月21日 {#november-21-2023}
 
@@ -132,7 +132,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   特定の組織の特定の月の請求書を取得するためのTiDB Cloud Billing API エンドポイントを導入します。
 
-    このBilling APIエンドポイントは、 TiDB Cloudの最新APIバージョンであるTiDB Cloud API v1beta1でリリースされています。詳細については、 [APIドキュメント（v1beta1）](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing)をご覧ください。
+    このBilling APIエンドポイントは、 TiDB Cloudの最新APIバージョンであるTiDB Cloud API v1beta1でリリースされています。詳細については、 [APIドキュメント（v1beta1）](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)をご覧ください。
 
 ## 2023年9月19日 {#september-19-2023}
 
@@ -358,7 +358,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
     -   効率性の向上: 自動応答によりレイテンシーが短縮され、全体的な操作が改善されます。
     -   シームレスなドキュメント アクセス: TiDB Cloudドキュメントに直接アクセスして、情報を簡単に取得し、問題を迅速に解決できます。
 
-    TiDB Bot を使用するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[?]**をクリックし、 **[TiDB Bot に質問]**を選択してチャットを開始します。
+    TiDB Bot を使用するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある [ **?]**をクリックし、 **[TiDB Bot に質問]**を選択してチャットを開始します。
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターに対して[分岐機能（ベータ版）](/tidb-cloud/branch-overview.md)サポートします。
 
@@ -416,7 +416,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの 16 vCPU TiKV の最大ノードstorageを4 TiB から 6 TiB に増加します。
 
-    この機能強化により、TiDB Cloud Dedicated クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
+    この機能強化により、 TiDB Cloud Dedicated クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
     詳細については[クラスターのサイズ](/tidb-cloud/size-your-cluster.md)参照してください。
 

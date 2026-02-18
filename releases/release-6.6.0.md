@@ -362,14 +362,14 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 | PD             | [`pd-server.server-memory-limit`](/pd-configuration-file.md#server-memory-limit-new-in-v660)                                                                                                                                                              | 新しく追加された | この設定項目は、PDインスタンスのメモリ制限率を指定します。値`0`はメモリ制限なしを意味します。                                                                                                                                      |
 | TiCDC          | [`scheduler.region-per-span`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                                                                                                                                                      | 新しく追加された | この設定項目は、リージョン数に基づいてテーブルを複数のレプリケーション範囲に分割するかどうかを制御します。これらの範囲は複数のTiCDCノードによって複製できます。デフォルト値は`50000`です。                                                                                    |
 | TiDB Lightning | [`compress-kv-pairs`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                                                                                                                                | 新しく追加された | この設定項目は、物理インポートモードでKVペアをTiKVに送信する際に圧縮を有効にするかどうかを制御します。デフォルト値は空で、圧縮は無効です。                                                                                                               |
-| DM             | [`checksum-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                | 新しく追加された | この設定項目は、インポート後にデータ整合性を検証するために、DMが各テーブルに対して`ADMIN CHECKSUM TABLE <table>`実行するかどうかを制御します。デフォルト値は`"required"`で、インポート後に管理チェックサムを実行します。チェックサムが失敗した場合、DMはタスクを一時停止するため、手動でエラーを処理する必要があります。    |
+| DM             | [`checksum-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                | 新しく追加された | この設定項目は、インポート後にデータ整合性を検証するために、DMが各テーブルに対して`ADMIN CHECKSUM TABLE <table>`実行するかどうかを制御します。デフォルト値は`"required"`で、インポート後に管理チェックサムを実行します。チェックサムに失敗した場合、DMはタスクを一時停止するため、手動でエラーを処理する必要があります。    |
 | DM             | [`disk-quota-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                              | 新しく追加された | この設定項目はディスククォータを設定します。これはTiDB Lightningの[`disk-quota`設定](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620)に相当します。                         |
 | DM             | [`on-duplicate-logical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                             | 新しく追加された | この設定項目は、論理インポートモードにおいてDMが競合データを解決する方法を制御します。デフォルト値は`"replace"`で、これは新しいデータを使用して既存のデータを置き換えることを意味します。                                                                                    |
 | DM             | [`on-duplicate-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                            | 新しく追加された | この設定項目は、物理インポートモードにおいてDMが競合データを解決する方法を制御します。デフォルト値は`"none"`で、競合データを解決しないことを意味します。 `"none"`パフォーマンスが最も高くなりますが、下流のデータベースでデータの不整合が発生する可能性があります。                                            |
 | DM             | [`sorting-dir-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                             | 新しく追加された | この設定項目は、物理インポートモードにおけるローカルKVソートに使用するディレクトリを指定します。デフォルト値は設定`dir`と同じです。                                                                                                                  |
 | 同期差分インスペクター    | [`skip-non-existing-table`](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)                                                                                                                                          | 新しく追加された | この構成項目は、ダウンストリームのテーブルがアップストリームに存在しない場合に、アップストリームとダウンストリームのデータ整合性のチェックをスキップするかどうかを制御します。                                                                                                |
-| ティスパーク         | [`spark.tispark.replica_read`](/tispark-overview.md#tispark-configurations)                                                                                                                                                                               | 新しく追加された | この設定項目は、読み取るレプリカの種類を制御します。値のオプションは`leader` 、 `follower` 、 `learner`です。                                                                                                                 |
-| ティスパーク         | [`spark.tispark.replica_read.label`](/tispark-overview.md#tispark-configurations)                                                                                                                                                                         | 新しく追加された | この構成項目は、ターゲット TiKV ノードのラベルを設定するために使用されます。                                                                                                                                              |
+| ティスパーク         | [`spark.tispark.replica_read`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview/#tispark-configurations)                                                                                                                                       | 新しく追加された | この設定項目は、読み取るレプリカの種類を制御します。値のオプションは`leader` 、 `follower` 、 `learner`です。                                                                                                                 |
+| ティスパーク         | [`spark.tispark.replica_read.label`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview#tispark-configurations)                                                                                                                                  | 新しく追加された | この構成項目は、ターゲット TiKV ノードのラベルを設定するために使用されます。                                                                                                                                              |
 
 ### その他 {#others}
 
@@ -391,7 +391,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
     -   オプティマイザヒントと実行プランバインディング間の競合に関するエラーメッセージを追加する[＃40910](https://github.com/pingcap/tidb/issues/40910) @ [思い出させる](https://github.com/Reminiscent)
     -   いくつかのシナリオでプランキャッシュを使用するときに最適でないプランを回避するためにプランキャッシュ戦略を最適化します[＃40312](https://github.com/pingcap/tidb/pull/40312) [＃40218](https://github.com/pingcap/tidb/pull/40218) [＃40280](https://github.com/pingcap/tidb/pull/40280) [＃41136](https://github.com/pingcap/tidb/pull/41136) [＃40686](https://github.com/pingcap/tidb/pull/40686) @ [qw4990](https://github.com/qw4990)
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [スティクナーフ](https://github.com/sticnarf)
-    -   `MODIFY COLUMN`はパーティションテーブル[＃39915](https://github.com/pingcap/tidb/issues/39915) @ [wjhuang2016](https://github.com/wjhuang2016)ではサポートされません
+    -   `MODIFY COLUMN`はパーティションテーブル[＃39915](https://github.com/pingcap/tidb/issues/39915) @ [wjhuang2016](https://github.com/wjhuang2016)ではサポートされていません
     -   パーティションテーブルが依存する列の名前変更を無効にする[＃40150](https://github.com/pingcap/tidb/issues/40150) @ [ミョンス](https://github.com/mjonss)
     -   パーティションテーブルが依存する列が削除されたときに報告されるエラーメッセージを改善する[＃38739](https://github.com/pingcap/tidb/issues/38739) @ [ジフハスト](https://github.com/jiyfhust)
     -   `min-resolved-ts` [＃39836](https://github.com/pingcap/tidb/issues/39836) @ [定義2014](https://github.com/Defined2014)のチェックに失敗した場合、 `FLASHBACK CLUSTER`再試行するメカニズムを追加します。
@@ -400,7 +400,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   パーティション化されたraft-kvモードにおける一部のパラメータのデフォルト値を最適化しました。TiKV設定項目`storage.block-cache.capacity`のデフォルト値は45%から30%に調整され、デフォルト値`region-split-size`は`96MiB`から`10GiB`に調整されました。raft-kvモードを使用し、 `enable-region-bucket`が`true`の場合、 `region-split-size`はデフォルトで1GiBに調整されます[＃12842](https://github.com/tikv/tikv/issues/12842) @ [トニーシュキ](https://github.com/tonyxuqqi)
     -   Raftstoreの非同期書き込み[＃13730](https://github.com/tikv/tikv/issues/13730) @ [コナー1996](https://github.com/Connor1996)での優先スケジュールをサポート
-    -   1コア未満のCPUでのTiKVの起動をサポート[＃13586](https://github.com/tikv/tikv/issues/13586) [＃13752](https://github.com/tikv/tikv/issues/13752) [＃14017](https://github.com/tikv/tikv/issues/14017) @ [アンドレイド・DB](https://github.com/andreid-db)
+    -   1コア未満のCPUでのTiKVの起動をサポート[＃13586](https://github.com/tikv/tikv/issues/13586) [＃13752](https://github.com/tikv/tikv/issues/13752) [＃14017](https://github.com/tikv/tikv/issues/14017) @ [andreid-db](https://github.com/andreid-db)
     -   Raftstoreのスロースコアの新しい検出メカニズムを最適化し、 `evict-slow-trend-scheduler` [＃14131](https://github.com/tikv/tikv/issues/14131) @ [内側](https://github.com/innerr)を追加します
     -   RocksDB のブロックキャッシュを強制的に共有し、CF [＃12936](https://github.com/tikv/tikv/issues/12936) @ [忙しいカケス](https://github.com/busyjay)に従ってブロックキャッシュを個別に設定することはサポートされなくなりました。
 
@@ -424,7 +424,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   TiCDC
 
-        -   TiCDC レプリケーションのパフォーマンスを向上させるためにバッチ`UPDATE` DML ステートメントをサポートする[＃8084](https://github.com/pingcap/tiflow/issues/8084) @ [アミャンフェイ](https://github.com/amyangfei)
+        -   TiCDC レプリケーションのパフォーマンスを向上させるためにバッチ`UPDATE` DML ステートメントをサポートする[＃8084](https://github.com/pingcap/tiflow/issues/8084) @ [咸陽飛](https://github.com/amyangfei)
         -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装します[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [ヒック](https://github.com/hicqu) @ [ハイ・ラスティン](https://github.com/Rustin170506)
 
     -   TiDB データ移行 (DM)
@@ -443,7 +443,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
         -   物理インポートモードはキースペース[＃40531](https://github.com/pingcap/tidb/issues/40531) @ [イモムクゲ](https://github.com/iosmanthus)をサポートします
         -   競合の最大数を`lightning.max-error` [＃40743](https://github.com/pingcap/tidb/issues/40743) @ [dsdashun](https://github.com/dsdashun)に設定できるようになりました
         -   BOM ヘッダー[＃40744](https://github.com/pingcap/tidb/issues/40744) @ [dsdashun](https://github.com/dsdashun)を含む CSV データファイルのインポートをサポート
-        -   TiKVフロー制限エラーが発生した場合の処理ロジックを最適化し、代わりに他の利用可能な領域を試します[＃40205](https://github.com/pingcap/tidb/issues/40205) @ [ランス6716](https://github.com/lance6716)
+        -   TiKVフロー制限エラーが発生した場合の処理​​ロジックを最適化し、代わりに他の利用可能な領域を試します[＃40205](https://github.com/pingcap/tidb/issues/40205) @ [ランス6716](https://github.com/lance6716)
         -   インポート中にテーブルの外部キーのチェックを無効にする[＃40027](https://github.com/pingcap/tidb/issues/40027) @ [眠そうなモグラ](https://github.com/sleepymole)
 
     -   Dumpling
@@ -516,7 +516,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiFlash
 
-    -   TiFlash関連のシステムテーブルをクエリすると[＃6745](https://github.com/pingcap/tiflash/pull/6745) @ [リデジュ](https://github.com/lidezhu)でスタックする可能性がある問題を修正しました
+    -   TiFlash関連のシステムテーブルをクエリすると[＃6745](https://github.com/pingcap/tiflash/pull/6745) @ [リデズ](https://github.com/lidezhu)でスタックする可能性がある問題を修正しました
     -   直交積[＃6730](https://github.com/pingcap/tiflash/issues/6730) @ [ゲンリキ](https://github.com/gengliqi)を計算するときにセミ結合が過剰なメモリを使用する問題を修正しました
     -   DECIMALデータ型の除算演算の結果が[＃6393](https://github.com/pingcap/tiflash/issues/6393) @ [リトルフォール](https://github.com/LittleFall)に丸められない問題を修正しました
     -   `start_ts` TiFlashクエリでMPPクエリを一意に識別できないため、MPPクエリが誤ってキャンセルされる可能性がある問題を修正[＃43426](https://github.com/pingcap/tidb/issues/43426) @ [ヘヘチェン](https://github.com/hehechen)
@@ -577,4 +577,4 @@ TiDB コミュニティの以下の貢献者に感謝いたします。
 -   [ヒヒフフ](https://github.com/hihihuhu)
 -   [マイコキシン](https://github.com/mychoxin)
 -   [シュニン97](https://github.com/xuning97)
--   [andreid-db](https://github.com/andreid-db)
+-   [アンドレイド・DB](https://github.com/andreid-db)

@@ -1,7 +1,7 @@
 ---
 title: Connect to TiDB with MySQL Connector/Python
 summary: MySQL Connector/Python を使用して TiDB に接続する方法を学びます。このチュートリアルでは、MySQL Connector/Python を使用して TiDB で動作する Python サンプルコードスニペットを紹介します。
-aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-mysql-connector/','/ja/tidbcloud/dev-guide-sample-application-python-mysql-connector/']
+aliases: ['/ja/tidb/dev/dev-guide-sample-application-python','/ja/tidb/dev/dev-guide-outdated-for-python-mysql-connector','/ja/tidb/stable/dev-guide-sample-application-python-mysql-connector/','/ja/tidb/dev/dev-guide-sample-application-python-mysql-connector/','/ja/tidbcloud/dev-guide-sample-application-python-mysql-connector/']
 ---
 
 # MySQL Connector/Python で TiDB に接続する {#connect-to-tidb-with-mysql-connector-python}

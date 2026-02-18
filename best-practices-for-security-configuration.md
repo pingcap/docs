@@ -26,11 +26,11 @@ TiDBのセキュリティは、データの整合性と機密性を保護する�
 
 デフォルトでは、TiDB はパスワードの複雑さのポリシーを強制しないため、弱いパスワードや空のパスワードが使用され、セキュリティ リスクが増大する可能性があります。
 
-データベースユーザーが強力なパスワードを作成できるようにするには、適切な[パスワードの複雑さのポリシー](/password-management.md#password-complexity-policy)を設定することをお勧めします。例えば、パスワードに大文字、小文字、数字、特殊文字の組み合わせを含めることを要求するポリシーを設定します。パスワードの複雑さのチェックを強制することで、データベースのセキュリティを向上させ、ブルートフォース攻撃を防ぎ、内部の脅威を軽減し、規制へのコンプライアンスを確保し、データ侵害のリスクを低減し、全体的なセキュリティを強化できます。
+データベースユーザーが強力なパスワードを作成できるようにするには、適切な[パスワードの複雑さのポリシー](/password-management.md#password-complexity-policy)ポリシーを設定することをお勧めします。例えば、パスワードに大文字、小文字、数字、特殊文字の組み合わせを含めることを要求するポリシーを設定します。パスワードの複雑さのチェックを強制することで、データベースのセキュリティを向上させ、ブルートフォース攻撃を防ぎ、内部の脅威を軽減し、規制へのコンプライアンスを確保し、データ侵害のリスクを低減し、全体的なセキュリティを強化できます。
 
 ## デフォルトのGrafanaパスワードを変更する {#change-the-default-grafana-password}
 
-TiDBのインストールにはデフォルトでGrafanaコンポーネントが含まれており、デフォルトのユーザー名とパスワード`admin`通常`admin`です。パスワードを速やかに変更しないと、攻撃者がこれを悪用してシステムを制御できる可能性があります。
+TiDBのインストールにはデフォルトでGrafanaコンポーネントが含まれており、デフォルトのユーザー名とパスワードは通常`admin`です。パスワード`admin`速やかに変更しないと、攻撃者がこれを悪用してシステムを制御できる可能性があります。
 
 TiDBの導入中は、Grafanaのパスワードを強力なものに変更し、システムのセキュリティを確保するために定期的に更新することをお勧めします。Grafanaのパスワードを変更する手順は次のとおりです。
 
@@ -103,21 +103,21 @@ TiDBのインストールには、デフォルトでコンポーネント間通�
 | ブラックボックスエクスポーター | 9115     | HTTP       |
 | NGモニタリング        | 12020    | HTTP       |
 
-データベース用のポート`4000`とGrafanaダッシュボード用のポート`9000`のみを一般ユーザーに公開し、ネットワークセキュリティポリシーやファイアウォールを使用して他のポートへのアクセスを制限することをお勧めします。以下は、 `iptables`を使用してポートアクセスを制限する例です。
+データベース用のポート`4000`とGrafanaダッシュボード用のポート`3000`のみを一般ユーザーに公開し、ネットワークセキュリティポリシーやファイアウォールを使用して他のポートへのアクセスを制限することをお勧めします。以下は、ポート`iptables`を使用してポートアクセスを制限する例です。
 
 ```shell
 # Allow internal port communication from the whitelist of component IP addresses
 sudo iptables -A INPUT -s internal IP address range -j ACCEPT
 
-# Only open ports 4000 and 9000 to external users
+# Only open ports 4000 and 3000 to external users
 sudo iptables -A INPUT -p tcp --dport 4000 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 9000 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 # Deny all other traffic by default
 sudo iptables -P INPUT DROP
 ```
 
-TiDB ダッシュボードにアクセスする必要がある場合は、別[リバースプロキシを設定する](/dashboard/dashboard-ops-reverse-proxy.md#use-tidb-dashboard-behind-a-reverse-proxy)ポートで外部ネットワークに安全にサービスを提供することを推奨します。
+TiDB ダッシュボードにアクセスする必要がある場合は、 [リバースプロキシを設定する](/dashboard/dashboard-ops-reverse-proxy.md#use-tidb-dashboard-behind-a-reverse-proxy)のポートで外部ネットワークに安全にサービスを提供することを推奨します。
 
 ## サードパーティのMySQL脆弱性スキャナーからの誤検知を解決する {#resolving-false-positives-from-third-party-mysql-vulnerability-scanners}
 
