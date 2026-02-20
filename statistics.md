@@ -112,7 +112,7 @@ TiDB records the values and occurrences of Top-N values. Here `N` is controlled 
 
 > **Note:**
 >
-> When [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510), TiDB does not collect Top-N statistics for unique indexes that contain only a single column, because each value can occur at most once. This applies to both the index statistics and the corresponding column statistics.
+> When [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510), TiDB does not collect Top-N statistics for unique indexes that contain only a single column, or for the corresponding column statistics. This is because each value can occur at most once.
 
 ## Selective statistics collection
 
