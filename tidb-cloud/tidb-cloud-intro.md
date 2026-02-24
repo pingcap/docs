@@ -26,7 +26,7 @@ With TiDB Cloud, you can get the following key features:
 
 - **Fast and Customized Scaling**
 
-    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your performance and storage nodes separately according to your business needs.
+    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your computing and storage nodes separately according to your business needs.
 
 - **MySQL Compatibility**
 
