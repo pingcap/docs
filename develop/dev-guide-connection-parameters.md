@@ -1,23 +1,20 @@
 ---
-title: Connection Pools and Connection Parameters
+title: Configure Connection Pools and Connection Parameters
 summary: This document explains how to configure connection pools and parameters for TiDB. It covers connection pool size, probe configuration, and formulas for optimal throughput. It also discusses JDBC API usage and MySQL Connector/J parameter configurations for performance optimization.
+aliases: ['/tidb/stable/dev-guide-connection-parameters/','/tidb/dev/dev-guide-connection-parameters/','/tidbcloud/dev-guide-connection-parameters/']
 ---
 
-# Connection Pools and Connection Parameters
+# Configure Connection Pools and Connection Parameters
 
 This document describes how to configure connection pools and connection parameters when you use a driver or ORM framework to connect to TiDB.
 
-<CustomContent platform="tidb">
-
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md#connection-pool)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices)
-
-</CustomContent>
+> **Tip:**
+>
+> In this document, the following sections are excerpted from [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md):
+>
+> - [Configure the number of connections](#configure-the-number-of-connections)
+> - [Probe configuration](#probe-configuration)
+> - [Connection parameters](#connection-parameters)
 
 ## Connection pool
 
@@ -33,6 +30,38 @@ It is a common practice that the connection pool size is well adjusted according
 - **minimumIdle**: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You also need to configure it according to your application characteristics.
 
 The application needs to return the connection after finishing using it. It is recommended that the application uses the corresponding connection pool monitoring (such as **metricRegistry**) to locate connection pool issues in time.
+
+### Configure the lifetime of connections
+
+When a TiDB server shuts down, restarts for maintenance, or encounters unexpected issues such as hardware or network failures, your existing client connections might be reset, which can lead to application disruptions. To avoid such issues, it is recommended to close and recreate long-running database connections at least once a day.
+
+Most connection pool libraries provide a parameter to control the maximum lifetime of a connection:
+
+<SimpleTab>
+<div label="HikariCP">
+
+- **`maxLifetime`**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="tomcat-jdbc">
+
+- **`maxAge`**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="c3p0">
+
+- **`maxConnectionAge`**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="dbcp">
+
+- **`maxConnLifetimeMillis`**: The maximum lifetime of a connection in the pool.
+
+</div>
+</SimpleTab>
 
 ### Probe configuration
 
@@ -283,14 +312,6 @@ However, in an actual production environment, idle connections and SQL statement
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

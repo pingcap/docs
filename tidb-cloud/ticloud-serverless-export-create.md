@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export create`.
 
 # ticloud serverless export create
 
-Export data from a TiDB Cloud Serverless cluster:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster:
 
 ```shell
 ticloud serverless export create [flags]
@@ -13,37 +13,37 @@ ticloud serverless export create [flags]
 
 ## Examples
 
-Export data from a TiDB Cloud Serverless cluster in interactive mode:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster in interactive mode:
 
 ```shell
 ticloud serverless export create
 ```
 
-Export data from a TiDB Cloud Serverless cluster to a local file in non-interactive mode:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster to a local file in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Serverless cluster to Amazon S3 in non-interactive mode:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster to Amazon S3 in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Serverless cluster to Google Cloud Storage in non-interactive mode:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster to Google Cloud Storage in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Serverless cluster to Azure Blob Storage in non-interactive mode:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster to Azure Blob Storage in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Serverless cluster to Alibaba Cloud OSS in non-interactive mode:
+Export data from a {{{ .starter }}} or {{{ .essential }}} cluster to Alibaba Cloud OSS in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter <database.table>

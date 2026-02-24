@@ -14,6 +14,7 @@ on:
 
 jobs:
   ja-translation:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
@@ -81,6 +82,7 @@ jobs:
           git push -f --set-upstream origin ${{ github.event.inputs.to }}
 
   dispatch:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     needs: [ja-translation]
 

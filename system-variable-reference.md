@@ -438,7 +438,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#interactive_timeout)
 - [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
@@ -525,7 +525,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Optimizer Hints](/optimizer-hints.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
@@ -730,11 +730,10 @@ Referenced in:
 - [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
 - [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
-- [Get Started with TiDB + AI via Python](/vector-search/vector-search-get-started-using-python.md)
-- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-- [Integrate TiDB Vector Search with SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
-- [Integrate Vector Search with LangChain](/vector-search/vector-search-integrate-with-langchain.md)
-- [Integrate Vector Search with LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+- [Integrate TiDB Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
+- [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+- [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
+- [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - [System Variables](/system-variables.md#ssl_ca)
 
 ### ssl_cert
@@ -1221,7 +1220,7 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Best Practices for DDL Execution in TiDB](/ddl-introduction.md)
+- [Best Practices for DDL Execution in TiDB](/best-practices/ddl-introduction.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [Performance Tuning Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
@@ -1266,7 +1265,7 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Best Practices for DDL Execution in TiDB](/ddl-introduction.md)
+- [Best Practices for DDL Execution in TiDB](/best-practices/ddl-introduction.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [Performance Tuning Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
@@ -1689,7 +1688,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [System Variables](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
@@ -2052,7 +2051,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
 - [Explain Statements That Use Joins](/explain-joins.md)
@@ -3545,7 +3544,8 @@ Referenced in:
 - [Optimizer Hints](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_replica_read-new-in-v40)
-- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [TiDB Best Practices on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
@@ -4089,7 +4089,7 @@ Referenced in:
 
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)
-- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [TiDB Best Practices on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
 - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_tso_client_rpc_mode
@@ -4512,7 +4512,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#wait_timeout)

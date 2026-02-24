@@ -126,4 +126,4 @@ Setting `sync` to `true` is recommended, but note that `sync` currently only wor
 
 ## Next step
 
-Get started by managing a cluster with the [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).
+Get started by managing a cluster with the [`tidbcloud_serverless_cluster`](/tidb-cloud/terraform-use-serverless-cluster-resource.md) or [`tidbcloud_dedicated_cluster`](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) resource.

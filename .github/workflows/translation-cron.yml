@@ -12,6 +12,7 @@ env:
 
 jobs:
   dispatch-translation-zh:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -35,6 +36,7 @@ jobs:
         run: echo "matrix={\"include\":[{\"name\":\"LTS\",\"value\":\"${{ env.LTS_BRANCH }}\"},{\"name\":\"Cloud\",\"value\":\"${{ env.CLOUD_BRANCH }}\"}]}" >> $GITHUB_OUTPUT
 
   translate-ja:
+    if: github.repository == 'pingcap/docs'
     needs: build-matrix
     runs-on: ubuntu-latest
     strategy:

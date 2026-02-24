@@ -1,6 +1,7 @@
 ---
 title: SQL Performance Tuning
 summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
+aliases: ['/tidb/stable/dev-guide-optimize-sql/','/tidb/dev/dev-guide-optimize-sql/','/tidbcloud/dev-guide-optimize-sql/']
 ---
 
 # SQL Performance Tuning
@@ -9,13 +10,13 @@ This document introduces some common reasons for slow SQL statements and techniq
 
 ## Before you begin
 
-You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo) to prepare data:
+You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#tidb-self-managed-via-tiup-demo) to prepare data:
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-Or [using the Import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) to import the pre-prepared sample data.
+Or [using the Import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature) to import the pre-prepared sample data.
 
 ## Issue: Full table scan
 
@@ -247,14 +248,6 @@ See [JOIN Execution Plan](/explain-joins.md).
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)
