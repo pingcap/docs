@@ -68,7 +68,7 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 
 ### Configuration recommendations for table split mode
 
-After switching to the TiCDC new architecture, it is not recommended to continue using table split-related settings from the classic architecture. In most scenarios, it is recommended to start with the default values in the new architecture and only make minor adjustments for special cases.
+After switching to the TiCDC new architecture, you should not continue using table split-related settings from the classic architecture. In most scenarios, it is recommended that you start with the default values in the new architecture and only make minor adjustments for special cases.
 
 In table split mode, pay special attention to the following settings:
 
