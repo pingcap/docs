@@ -39,7 +39,7 @@
     -   [インポートのベストプラクティス](/tidb-lightning/data-import-best-practices.md)
     -   移行シナリオ
         -   [Auroraからの移行](/migrate-aurora-to-tidb.md)
-        -   [MySQLから小規模データセットを移行する](/migrate-small-mysql-to-tidb.md)
+        -   [MySQLから小規模なデータセットを移行する](/migrate-small-mysql-to-tidb.md)
         -   [MySQLから大規模なデータセットを移行する](/migrate-large-mysql-to-tidb.md)
         -   [小規模データセットの MySQL シャードの移行とマージ](/migrate-small-mysql-shards-to-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/migrate-large-mysql-shards-to-tidb.md)
@@ -75,7 +75,7 @@
         -   [アラートルール](/ticdc/ticdc-alert-rules.md)
     -   統合シナリオ
         -   [概要](/integration-overview.md)
-        -   [ConfluentとSnowflakeとの統合](/ticdc/integrate-confluent-using-ticdc.md)
+        -   [Confluent Cloud、Snowflake、ksqlDB、SQL Server との統合](/ticdc/integrate-confluent-using-ticdc.md)
         -   [Apache Kafka および Apache Flink との統合](/replicate-data-to-kafka.md)
     -   参照
         -   TiCDCアーキテクチャ
@@ -438,7 +438,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクを事前チェックする](/dm/dm-precheck.md)
@@ -589,7 +589,7 @@
         -   [分散ストレージとコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
         -   [ディスクへのスピル](/tiflash/tiflash-spill-disk.md)
         -   [データ検証](/tiflash/tiflash-data-validation.md)
         -   [MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)
@@ -621,7 +621,7 @@
         -   [パフォーマンスの概要](/grafana-performance-overview-dashboard.md)
         -   [ティドブ](/grafana-tidb-dashboard.md)
         -   [PD](/grafana-pd-dashboard.md)
-        -   [ティクブ](/grafana-tikv-dashboard.md)
+        -   [TiKV](/grafana-tikv-dashboard.md)
         -   [TiFlash](/tiflash/monitor-tiflash.md)
         -   [TiCDC](/ticdc/monitor-ticdc.md)
         -   [リソース管理](/grafana-resource-control-dashboard.md)

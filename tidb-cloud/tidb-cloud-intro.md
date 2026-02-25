@@ -22,11 +22,11 @@ TiDB Cloudの詳細については、次のビデオをご覧ください。
 
 <iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-TiDB Cloud を使用すると、次の主な機能を利用できます。
+TiDB Cloudを使用すると、次の主な機能を利用できます。
 
 -   **高速かつカスタマイズされたスケーリング**
 
-    ACIDトランザクションを維持しながら、重要なワークロード向けに数百ノードまで柔軟かつ透過的にスケールできます。シャーディングを気にする必要はありません。また、ビジネスニーズに合わせて、パフォーマンスノードとstorageノードを個別にスケールできます。
+    ACIDトランザクションを維持しながら、重要なワークロード向けに数百ノードまで柔軟かつ透過的に拡張できます。シャーディングを気にする必要はありません。また、ビジネスニーズに合わせてコンピューティングノードとstorageノードを個別に拡張できます。
 
 -   **MySQLの互換性**
 
@@ -52,13 +52,13 @@ TiDB Cloud を使用すると、次の主な機能を利用できます。
 
     <CustomContent language="en,zh">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud、Alibaba Cloud で利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud、Alibaba Cloud で利用可能です。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud で利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud で利用可能です。
 
     </CustomContent>
 
