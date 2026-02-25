@@ -74,7 +74,11 @@
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
   - Integration Scenarios
     - [Overview](/integration-overview.md)
-    - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
+    - Integrate with Confluent Cloud, Snowflake, ksqlDB, and SQL Server
+      - [Confluent Cloud](/ticdc/integrate-confluent-using-ticdc.md#replicate-incremental-data-to-confluent-cloud)
+      - [Snowflake](/ticdc/integrate-confluent-using-ticdc.md#integrate-data-with-snowflake)
+      - [ksqlDB](/ticdc/integrate-confluent-using-ticdc.md#integrate-data-with-ksqldb)
+      - [SQL Server](/ticdc/integrate-confluent-using-ticdc.md#integrate-data-with-sql-server)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
     - TiCDC Architecture
