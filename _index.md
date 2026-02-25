@@ -136,7 +136,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidb/dev/release-notes)
+[Release Notes](https://docs.pingcap.com/releases/tidb-self-managed)
 
 [FAQ Summary](https://docs.pingcap.com/tidb/dev/faq-overview)
 
