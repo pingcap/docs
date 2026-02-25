@@ -50,7 +50,7 @@ To use an IAM Role for authentication, follow these steps:
 #### Option 2: AWS Access Key
 
 > [!IMPORTANT]
-> Using Access Key and Secret Key (AK/SK) requires manual credential management and rotation, which increases security risks. For better security, it is recommended to use **AWS Role ARN** instead.
+> Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For better security, use an **AWS Role ARN** instead.
 
 To use an access key, fill in the following fields:
 - **S3 URI**
