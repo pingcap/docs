@@ -66,6 +66,16 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 >
 > For MySQL sink changefeeds, only tables that meet one of the preceding conditions and have **exactly one primary key or non-null unique key** can be split and distributed by TiCDC, to ensure the correctness of data replication in table split mode.
 
+### Configuration recommendations for table split mode
+
+After switching to the TiCDC new architecture, it is not recommended to continue using table split-related settings from the classic architecture. In most scenarios, it is recommended to start with the default values in the new architecture and only make minor adjustments for special cases.
+
+In table split mode, pay special attention to the following settings:
+
+- `scheduler.region-threshold`: the default value is `10000`. TiCDC splits a table when its Region count exceeds this threshold. For scenarios where the Region count is relatively low but overall table traffic is high, you can decrease this value appropriately. However, this value must not be less than `scheduler.region-count-per-span`; otherwise, tasks might be scheduled repeatedly, increasing replication latency.
+- `scheduler.region-count-per-span`: the default value is `100`. During changefeed initialization, tables that meet the split conditions are split according to this parameter, so that each split sub-table contains at most `region-count-per-span` Regions.
+- `scheduler.write-key-threshold`: the default value is `0` (disabled by default). TiCDC splits a table when its sink write traffic exceeds this threshold. It is not recommended to set this parameter to a non-`0` value.
+
 ## Compatibility
 
 ### DDL progress tracking table
