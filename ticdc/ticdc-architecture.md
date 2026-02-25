@@ -55,12 +55,16 @@ If your workload meets any of the following conditions, it is recommended to swi
 
 ## New features
 
-The new architecture supports **table-level task splitting** for MySQL sinks. You can enable this feature by setting `scheduler.enable-table-across-nodes = true` in the changefeed configuration.
+The new architecture supports **table-level task splitting** for all sinks. You can enable this feature by setting `scheduler.enable-table-across-nodes = true` in the changefeed configuration.
 
-When this feature is enabled, TiCDC automatically splits and distributes tables with **only one primary key or non-null unique key** across multiple nodes for parallel replication if those tables meet any of the following conditions. This improves replication efficiency and resource utilization:
+When this feature is enabled, TiCDC automatically splits and distributes tables across multiple nodes for parallel replication if those tables meet any of the following conditions. This improves replication efficiency and resource utilization:
 
-- The table Region count exceeds the configured threshold (`100000` by default, adjustable via `scheduler.region-threshold`).
+- The table Region count exceeds the configured threshold (`10000` by default, adjustable via `scheduler.region-threshold`).
 - The table write traffic exceeds the configured threshold (disabled by default, configurable via `scheduler.write-key-threshold`).
+
+> **Note:**
+>
+> For MySQL sink changefeeds, only tables that meet one of the preceding conditions and have **exactly one primary key or non-null unique key** can be split and distributed by TiCDC, to ensure the correctness of data replication in table split mode.
 
 ## Compatibility
 

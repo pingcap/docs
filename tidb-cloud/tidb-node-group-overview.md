@@ -11,7 +11,7 @@ With TiDB node groups, you can divide computing nodes into multiple TiDB node gr
 
 > **Note**:
 >
-> The TiDB Node Group feature is **NOT** available for TiDB Cloud Serverless clusters.
+> The TiDB Node Group feature is **NOT** available for {{{ .starter }}} and {{{ .essential }}} clusters.
 
 ## Implementation
 

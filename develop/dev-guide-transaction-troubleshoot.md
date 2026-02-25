@@ -1,6 +1,7 @@
 ---
 title: Handle Transaction Errors
 summary: Learn about how to handle transaction errors, such as deadlocks and application retry errors.
+aliases: ['/tidb/stable/dev-guide-transaction-troubleshoot/','/tidb/dev/dev-guide-transaction-troubleshoot/','/tidbcloud/dev-guide-transaction-troubleshoot/']
 ---
 
 # Handle Transaction Errors
@@ -91,17 +92,7 @@ Your retry logic must follow the following rules:
     - `Error 9007: Write conflict`: Write conflict error, usually caused by multiple transactions modifying the same row of data when the optimistic transaction mode is used.
 - `COMMIT` the transaction at the end of the try block.
 
-<CustomContent platform="tidb">
-
 For more information about error codes, see [Error Codes and Troubleshooting](/error-codes.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For more information about error codes, see [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes).
-
-</CustomContent>
 
 ```python
 while True:
@@ -129,42 +120,14 @@ while True:
 >
 > If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of the conflict and try to avoid conflicts by a better design.
 
-<CustomContent platform="tidb">
-
 For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
-
-</CustomContent>
 
 ## See also
 
-<CustomContent platform="tidb">
-
 - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Troubleshoot Write Conflicts in Optimistic Transactions](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
-
-</CustomContent>
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

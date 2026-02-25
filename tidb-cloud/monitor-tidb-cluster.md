@@ -32,6 +32,8 @@ You can see the current status of each running cluster on the cluster page.
 >
 > The TiDB node status is only available for TiDB Cloud Dedicated clusters.
 
+The node names starting with `tidb` are TiDB nodes, and those starting with `tiproxy` are TiProxy nodes.
+
 | TiDB node status | Description |
 |:--|:--|
 | **Available** | The TiDB node is healthy and available. |
