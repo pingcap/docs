@@ -25,7 +25,37 @@ Navigate to the cluster overview page of the target TiDB cluster. Click **Data**
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
+For **Amazon S3**, you can use either **AWS Role ARN** or **AWS Access Key** for authentication. Using **AWS Role ARN** is recommended for better security and easier management.
+
+Make sure that the S3 bucket is in the same region as your TiDB cluster.
+
+#### Option 1: AWS Role ARN (Recommended)
+
+To use an IAM Role for authentication, follow these steps:
+
+1.  In the TiDB Cloud console, go to the **Configure Destination** page for the S3 sink.
+2.  Fill in the **S3 URI**.
+3.  Under **Bucket Access**, select **AWS Role ARN**.
+4.  To create a new Role ARN, click the **Click here** link to use the AWS CloudFormation template. This will automatically configure the necessary permissions.
+    - If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
+5.  Ensure your IAM role has at least the following permissions for the target bucket:
+    - `s3:ListBucket`
+    - `s3:PutObject`
+    - `s3:GetObject`
+    - `s3:DeleteObject`
+6.  Paste the generated **Role ARN** into the corresponding field.
+
+![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint-arn.jpg)
+
+#### Option 2: AWS Access Key
+
+> [!IMPORTANT]
+> Using Access Key and Secret Key (AK/SK) requires manual credential management and rotation, which increases security risks. For better security, it is recommended to use **AWS Role ARN** instead.
+
+To use an access key, fill in the following fields:
+- **S3 URI**
+- **Access Key ID**
+- **Secret Access Key**
 
 ![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
 
