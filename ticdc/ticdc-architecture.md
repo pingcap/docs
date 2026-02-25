@@ -68,13 +68,13 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 
 ### Configuration recommendations for table split mode
 
-After switching to the TiCDC new architecture, you should not continue using table split-related settings from the classic architecture. In most scenarios, it is recommended that you start with the default values in the new architecture and only make minor adjustments for special cases.
+After switching to the new TiCDC architecture, do not reuse the table-splitting configurations from the classic architecture. In most scenarios, use the default configuration of the new architecture. Adjust parameters only in special cases, and make minor incremental changes based on the defaults.
 
-In table split mode, pay special attention to the following settings:
+In table split mode, pay attention to the following settings:
 
-- `scheduler.region-threshold`: the default value is `10000`. TiCDC splits a table when its region count exceeds this threshold. For scenarios where the region count is relatively low but overall table traffic is high, you can decrease this value appropriately. However, this value must not be less than `scheduler.region-count-per-span`; otherwise, tasks might be scheduled repeatedly, increasing replication latency.
-- `scheduler.region-count-per-span`: the default value is `100`. During changefeed initialization, tables that meet the split conditions are split according to this parameter, so that each split sub-table contains at most `region-count-per-span` regions.
-- `scheduler.write-key-threshold`: the default value is `0` (disabled by default). TiCDC splits a table when its sink write traffic exceeds this threshold. It is not recommended to set this parameter to a value other than `0`.
+- `scheduler.region-threshold`: the default value is `10000`. When the number of Regions in a table exceeds this threshold, TiCDC splits the table. For tables with relatively few Regions but high overall write throughput, you can reduce this value appropriately. This parameter must be greater than or equal to `scheduler.region-count-per-span`. Otherwise, tasks might be rescheduled repeatedly, which increases replication latency.
+- `scheduler.region-count-per-span`: the default value is `100`. During changefeed initialization, tables that meet the split conditions are split according to this parameter. After splitting, each split sub-table contains at most `region-count-per-span` regions.
+- `scheduler.write-key-threshold`: the default value is `0` (disabled). When the sink write throughput of a table exceeds this threshold, TiCDC triggers table splitting. In most cases, keep this parameter to `0`.
 
 ## Compatibility
 
