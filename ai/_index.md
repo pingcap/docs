@@ -7,7 +7,7 @@ summary: Build modern AI applications with TiDB's integrated vector search, full
 
 TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities. This document provides an overview of the AI features and tools available for building AI-powered applications with TiDB.
 
-## Quick Start
+## Quick start
 
 Get up and running quickly with TiDB's AI capabilities.
 
