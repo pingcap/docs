@@ -25,20 +25,22 @@ Navigate to the cluster overview page of the target TiDB cluster. Click **Data**
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, you can use either **AWS Role ARN** or **AWS Access Key** for authentication. Using **AWS Role ARN** is recommended for better security and easier management.
+For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for authentication. Using **AWS Role ARN** is recommended for stronger security and easier management.
 
-Make sure that the S3 bucket is in the same region as your TiDB cluster.
+Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
 
-#### Option 1: AWS Role ARN (Recommended)
+**Option 1: AWS Role ARN (recommended)**
 
 To use an IAM Role for authentication, follow these steps:
 
 1.  In the TiDB Cloud console, go to the **Configure Destination** page for the S3 sink.
-2.  Fill in the **S3 URI**.
+2.  Enter the **S3 URI**.
 3.  Under **Bucket Access**, select **AWS Role ARN**.
-4.  To create a new Role ARN, click **Click here** to use the AWS CloudFormation template. This will automatically configure the necessary permissions.
-    - If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
-5.  Ensure your IAM role has at least the following permissions for the target bucket:
+4.  To create a new Role ARN, click **Click here** to use the AWS CloudFormation template. This template automatically configures the required permissions.
+
+    If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
+
+5. Ensure your IAM role has at least the following permissions for the target bucket:
     - `s3:ListBucket`
     - `s3:PutObject`
     - `s3:GetObject`
@@ -47,12 +49,13 @@ To use an IAM Role for authentication, follow these steps:
 
 ![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint-arn.jpg)
 
-#### Option 2: AWS Access Key
+**Option 2: AWS access key**
 
 > [!IMPORTANT]
-> Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For better security, use an **AWS Role ARN** instead.
+> Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, it is recommended to use **AWS Role ARN** instead.
 
 To use an access key, fill in the following fields:
+
 - **S3 URI**
 - **Access Key ID**
 - **Secret Access Key**
