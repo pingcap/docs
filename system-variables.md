@@ -4695,6 +4695,58 @@ mysql> desc select count(distinct a) from test.t;
 +----------------------------------+---------+-----------+----------------------+-------------------------------------+
 ```
 
+### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">Introduced in v8.5.6 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Whether to persist to the cluster: YES
+- Whether controlled by Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
+- Type: ENUM
+- Default value: `DISABLE`
+- Optional values: `DISABLE`, `COST`
+- Used to control whether to enable the partial order TopN optimization. When a query contains `ORDER BY ... LIMIT` and the sorting process can utilize the prefix index of the sort column (e.g., a single-column prefix index, or the last column of a composite index is a prefix column), the optimizer can leverage the partial ordered nature of these indexes to gradually build the TopN result during scanning. It stops scanning early after the LIMIT is met, thus reducing the sorting calculation overhead.
+- Applicable scenarios: When the sort column for `ORDER BY ... LIMIT` is a relatively long string and only a prefix index is created, to reduce the TopN sorting overhead, you can set this variable to `COST` and specify `USE INDEX` or `FORCE INDEX` Hints in the query to apply the partial order TopN optimization.
+
+  - The default value of this variable is `DISABLE`, which means the partial order TopN optimization is turned off. In this case, the optimizer will directly use the conventional global sort TopN method.
+  - To forcefully apply the partial order TopN optimization, set this variable to `COST` and specify the qualifying index in the query using `USE INDEX` or `FORCE INDEX` Hints. If the specified index does not meet the prerequisites for this optimization (e.g., `ORDER BY` does not match the index prefix, or the query contains unsupported sorting forms), the optimization may not be applied even if the variable is set to `COST`, and the execution plan will degrade to the conventional TopN method.
+
+> **Note:**
+>
+> The optimizer currently does not support dynamically choosing whether to apply the partial order TopN optimization based on the cost model. If you only set this variable to `COST` without specifying `USE INDEX` or `FORCE INDEX` Hints, the optimizer might not apply the partial order TopN optimization. To forcefully apply this optimization, use it in conjunction with `USE INDEX` or `FORCE INDEX` Hints (as shown in Example 1).
+
+- Example 1: Forcefully apply partial order TopN optimization (`COST` + `USE INDEX`).
+
+    ```sql
+    > SET SESSION tidb_opt_partial_ordered_index_for_topn = 'COST';
+
+    > EXPLAIN FORMAT='brief' SELECT /*+ use_index(t_varchar, idx_name_prefix) */ *
+        FROM t_varchar ORDER BY name LIMIT 5;
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    | id                                        | estRows | task      | access object                | operator info                                                                                |
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    | TopN                                      | 5.00    | root      |                              | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5, prefix_col:planner__core__partial_order_topn.t_varchar.name, prefix_len:10 |
+    | └─IndexLookUp                             | 5.00    | root      |                              |                                                                                              |
+    |   ├─Limit(Build)                          | 5.00    | cop[tikv] |                              | offset:0, count:5, prefix_col:planner__core__partial_order_topn.t_varchar.name, prefix_len:10 |
+    |   │ └─IndexFullScan                       | 10000.00| cop[tikv] | table:t_varchar, index:idx_name_prefix(name) | keep order:true, stats:pseudo                                               |
+    |   └─TableRowIDScan(Probe)                 | 5.00    | cop[tikv] | table:t_varchar              | keep order:false, stats:pseudo                                                               |
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    ```
+
+- Example 2: Disable partial order TopN optimization (`DISABLE`)
+
+    ```sql
+    > SET SESSION tidb_opt_partial_ordered_index_for_topn = 'DISABLE';
+
+    > EXPLAIN FORMAT='brief' SELECT * FROM t_varchar ORDER BY name LIMIT 5;
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    | id                        | estRows | task      | access object       | operator info                                      |
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    | TopN                      | 5.00    | root      |                     | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5 |
+    | └─TableReader             | 5.00    | root      | data:TopN           |                                                    |
+    |   └─TopN                  | 5.00    | cop[tikv] |                     | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5 |
+    |     └─TableFullScan       | 10000.00| cop[tikv] | table:t_varchar     | keep order:false, stats:pseudo                     |
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    ```
+
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
 > **Note:**
