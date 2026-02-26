@@ -36,7 +36,7 @@ To use an IAM Role for authentication, follow these steps:
 1.  In the TiDB Cloud console, go to the **Configure Destination** page for the S3 sink.
 2.  Enter the **S3 URI**.
 3.  Under **Bucket Access**, select **AWS Role ARN**.
-4.  To create a new Role ARN, click **Click here** to use the AWS CloudFormation template. This template automatically configures the required permissions.
+4.  To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
 
     If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
 
@@ -51,10 +51,11 @@ To use an IAM Role for authentication, follow these steps:
 
 **Option 2: AWS access key**
 
-> [!IMPORTANT]
+> **Note:**
+>
 > Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, it is recommended to use **AWS Role ARN** instead.
 
-To use an access key, fill in the following fields:
+To use an access key, select **AWS Access Key** under **Bucket Access**, and then fill in the following fields:
 
 - **S3 URI**
 - **Access Key ID**
