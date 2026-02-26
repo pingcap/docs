@@ -64,9 +64,9 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 
 > **Note:**
 >
-> For MySQL sink changefeeds, only tables that meet one of the preceding conditions and have **exactly one primary key or non-null unique key** can be split and distributed by TiCDC, to ensure the correctness of data replication in table split mode.
+> For MySQL sink changefeeds, only tables that meet one of the preceding conditions and have **exactly one primary key or non-null unique key** can be split and distributed by TiCDC, to ensure the correctness of data replication in table-level task splitting mode.
 
-### Configuration recommendations for table split mode
+### Recommended configurations for table-level task splitting mode
 
 After switching to the new TiCDC architecture, do not reuse the table-splitting configurations from the classic architecture. In most scenarios, use the default configuration of the new architecture. Adjust parameters only in special cases, and make minor incremental changes based on the defaults.
 
