@@ -20,34 +20,31 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Create Changefeed** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depend on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
 
 For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for authentication. Using **AWS Role ARN** is recommended for stronger security and easier management.
 
-Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
-
 **Option 1: AWS Role ARN (recommended)**
 
 To use an IAM Role for authentication, follow these steps:
 
-1.  In the TiDB Cloud console, go to the **Configure Destination** page for the S3 sink.
-2.  Enter the **S3 URI**.
-3.  Under **Bucket Access**, select **AWS Role ARN**.
-4.  To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
+1. On the **Configure Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+2. Under **Bucket Access**, select **AWS Role ARN**.
+3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
 
     If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
 
-5. Ensure your IAM role has at least the following permissions for the target bucket:
+4. Ensure your IAM role has at least the following permissions for the target bucket:
+
     - `s3:ListBucket`
     - `s3:PutObject`
     - `s3:GetObject`
     - `s3:DeleteObject`
-6.  Paste the generated **Role ARN** into the corresponding field.
 
-![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint-arn.jpg)
+5. Paste the generated **Role ARN** into the corresponding field.
 
 **Option 2: AWS access key**
 
@@ -55,13 +52,14 @@ To use an IAM Role for authentication, follow these steps:
 >
 > Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, it is recommended to use **AWS Role ARN** instead.
 
-To use an access key, select **AWS Access Key** under **Bucket Access**, and then fill in the following fields:
+To use an access key for authentication, follow these steps:
 
-- **S3 URI**
-- **Access Key ID**
-- **Secret Access Key**
+1. On the **Configure Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+2. Under **Bucket Access**, select **AWS Access Key**.
+3. Fill in the following fields:
 
-![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
+    - **Access Key ID**
+    - **Secret Access Key**
 
 </div>
 <div label="GCS">
