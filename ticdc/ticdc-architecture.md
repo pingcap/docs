@@ -68,7 +68,7 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 
 ### Recommended configurations for table-level task splitting mode
 
-After switching to the new TiCDC architecture, do not reuse the table-splitting configurations from the classic architecture. In most scenarios, use the default configuration of the new architecture. Adjust parameters only in special cases, and make minor incremental changes based on the defaults.
+After switching to the new TiCDC architecture, do not reuse the table-splitting configurations from the classic architecture. In most scenarios, use the default configuration of the new architecture. Make incremental adjustments based on the default values only in special scenarios where replication performance bottlenecks or scheduling imbalance occur.
 
 In table split mode, pay attention to the following settings:
 
