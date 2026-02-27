@@ -409,7 +409,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="M" class="letter" href="#M">M</a>
 
-- MASKING 
+- MASKING
 - MASTER
 - MATCH (R)
 - MAXVALUE (R)
