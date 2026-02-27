@@ -722,7 +722,7 @@ The steps to check and configure these parameters are as follows:
 
 This section describes how to manually configure SSH mutual trust from the control machine to the target nodes. If you use the TiUP deployment tool, SSH mutual trust and passwordless login are configured automatically. You can skip this section.
 
-When configuring SSH mutual trust, it is recommended to create and use the `tidb` user on all target nodes. In general, TiDB does not require the same user to exist on every node. However, pay attention to user consistency in the following scenarios:
+When configuring SSH mutual trust, it is recommended to create and use the `tidb` user on all target nodes. In general, TiDB does not require that you use the same user on every node. However, pay attention to user consistency in the following scenarios:
 
 - Using Backup & Restore (BR): it is strongly recommended that you use the same user to perform all BR and TiDB–related operations.
 - Using network storage such as NFS: ensure that the user has the same UID and GID on all nodes. NFS relies on underlying UID and GID values to determine file access permissions. If the UID or GID differs across nodes, or if BR runs under a different user than TiDB (especially in environments without `sudo` privileges), backup or restore operations might fail with "Permission Denied" errors.
