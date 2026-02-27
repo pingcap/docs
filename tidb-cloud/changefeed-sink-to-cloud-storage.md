@@ -20,7 +20,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Create Changefeed** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Configure Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depending on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
