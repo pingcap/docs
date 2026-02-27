@@ -163,6 +163,11 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 - The value is `false` by default. Set it to `true` to enable this feature.
 - Default value: `false`
 
+#### `region-count-per-span` <span class="version-mark">New in v8.5.4</span>
+
+- Introduced in the [TiCDC new architecture](/ticdc/ticdc-architecture.md). During changefeed initialization, tables that meet the split conditions are split according to this parameter. After splitting, each split sub-table contains at most `region-count-per-span` Regions.
+- Default value: `100` 
+
 #### `region-threshold`
 
 - Default value: for the [TiCDC new architecture](/ticdc/ticdc-architecture.md), the default value is `10000`; for the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), the default value is `100000`.
