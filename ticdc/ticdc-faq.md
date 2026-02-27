@@ -195,8 +195,12 @@ The default Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 
 
 ||Upstream time zone| TiCDC time zone|Downstream time zone|
 | :-: | :-: | :-: | :-: |
-| Configuration method | See [Time Zone Support](/configure-time-zone.md) | Configured using the `--tz` parameter when you start the TiCDC server |  Configured using the `time-zone` parameter in `sink-uri` |
-| Description | The time zone of the upstream TiDB, which affects DML operations of the timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp in the DML and DDL operations according to the downstream time zone setting.|
+| Configuration method | See [Time Zone Support](/configure-time-zone.md) | Configured using the `--tz` parameter when you start the TiCDC server |  Configured using the `time-zone` parameter in `sink-uri`. This only takes effect when the downstream is `mysql` or `tidb` sink. |
+| Description | The time zone of the upstream TiDB, which affects DML operations of the timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| Downstream `mysql` and `tidb` sinks process the timestamp in DML and DDL operations according to the time zone setting of the connection session.|
+
+> **Description:**
+>
+> The `time-zone` parameter in `sink-uri` only takes effect for `mysql` and `tidb` type sinks. For sinks like Kafka, Pulsar, and Cloud Storage that do not involve downstream database session time zones, there is no need to configure `time-zone`. In such scenarios, you only need to ensure that the upstream database time zone and the TiCDC server's `--tz` parameter setting are consistent.
 
  > **Note:**
  >

@@ -59,7 +59,6 @@ The following are descriptions of sink URI parameters and parameter values that 
 | Parameter/Parameter value    | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
-| `12345678`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
 | `3306`         | The port for the downstream database.                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, the default value is `16`, and the maximum value is `1024`). |
@@ -71,7 +70,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
-| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
+| `time-zone` | The time zone name used when connecting to downstream MySQL and TiDB instances (i.e., the `time_zone` of the downstream connection session), which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no session time zone is specified when TiCDC connects, and the default time zone of the downstream is used. |
 | `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
 | `batch-dml-enable` | Enables the batch write (batch-dml) feature (optional, the default value is `true`). |
 | `read-timeout` | The go-sql-driver parameter, [I/O read timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-readtimeout) (optional, the default value is `2m`). |
@@ -79,6 +78,10 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `timeout` | The go-sql-driver parameter, [timeout for establishing connections](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout), also known as dial timeout (optional, the default value is `2m`). |
 | `tidb-txn-mode` | Specifies the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable (optional, the default value is `optimistic`). |
 | `safe-mode` | Specifies how TiCDC handles `INSERT` and `UPDATE` statements when replicating data to the downstream. When it is `true`, TiCDC converts all upstream `INSERT` statements to `REPLACE INTO` statements, and all `UPDATE` statements to `DELETE` + `REPLACE INTO` statements. Before v6.1.3, the default value of this parameter is `true`. Starting from v6.1.3, the default value is changed to `false`. When TiCDC starts, it obtains a current timestamp `ThresholdTs`. For `INSERT` and `UPDATE` statements with `CommitTs` less than `ThresholdTs`, TiCDC converts them to `REPLACE INTO` statements and `DELETE` + `REPLACE INTO` statements respectively. For `INSERT` and `UPDATE` statements with `CommitTs` greater than or equal to `ThresholdTs`, `INSERT` statements are directly replicated to the downstream, while the behavior of `UPDATE` statements follows the [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md). |
+
+> **Note:**
+>
+> `time-zone` is only effective for `mysql` and `tidb` type sinks. After TiCDC establishes a connection with the downstream, it sets the `time_zone` for the session. This `time_zone` is used by the downstream to parse time values affected by time zones, such as `TIMESTAMP`, when executing DDL and DML statements. `DATETIME`, `DATE`, and `TIME` are not affected. To avoid data inconsistency caused by inconsistent time zone settings, it is recommended to explicitly set `time-zone` and ensure that its value is consistent with the TiCDC Server's `--tz` parameter and the downstream database's time zone.
 
 To encode the database password in the sink URI using Base64, use the following command:
 
