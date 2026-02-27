@@ -7125,8 +7125,8 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 ### InPacketBytes
 
-- This variable is only used for internal metering.
+- This variable is only used for internal metering, not visible to users.
 
 ### OutPacketBytes
 
-- This variable is only used for internal metering.
+- This variable is only used for internal metering, not visible to users.
