@@ -513,7 +513,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PLUGINS
 - POINT
 - POLICY
-- POLICIES 
+- POLICIES
 - PRECEDING
 - PRECISION (R)
 - PREPARE
