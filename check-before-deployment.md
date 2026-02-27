@@ -720,12 +720,17 @@ The steps to check and configure these parameters are as follows:
 
 ## Manually configure the SSH mutual trust and sudo without password
 
-This section describes how to manually configure the SSH mutual trust and sudo without password. It is recommended to use TiUP for deployment, which automatically configure SSH mutual trust and login without password. If you deploy TiDB clusters using TiUP, ignore this section.
+This section describes how to manually configure SSH mutual trust from the control machine to the target nodes. If you use the TiUP deployment tool, SSH mutual trust and password-free login are configured automatically, and you can skip this section.
+
+When configuring SSH mutual trust, it is recommended to create and use the `tidb` user on all target nodes. In general, TiDB does not require that you use the same user across all nodes. However, pay attention to user consistency in the following scenarios:
+
+- Using Backup & Restore (BR): it is strongly recommended to perform all BR and TiDB-related operations with the same user.
+- Using network storage such as NFS: ensure that the user has the same UID and GID on all nodes. NFS determines file access permissions based on underlying UID and GID. If the UID or GID differs across nodes, or if the user running BR is different from the user running TiDB (especially without `sudo` privileges), permission denied errors might occur during backup or restore operations.
 
 1. Log in to the target machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
     ```bash
-    useradd tidb && \
+    useradd -m -d /home/tidb tidb
     passwd tidb
     ```
 
