@@ -409,6 +409,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="M" class="letter" href="#M">M</a>
 
+- MASKING
 - MASTER
 - MATCH (R)
 - MAXVALUE (R)
@@ -512,6 +513,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PLUGINS
 - POINT
 - POLICY
+- POLICIES
 - PRECEDING
 - PRECISION (R)
 - PREPARE
