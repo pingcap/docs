@@ -87,12 +87,9 @@ To create a private link connection using the TiDB Cloud CLI:
 
 ## Create an Amazon MSK Provisioned private link connection
 
-You can create an Amazon MSK Provisioned private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+You can create an Amazon MSK Provisioned private link connection using the TiDB Cloud console.
 
 Ensure that your Amazon MSK Provisioned cluster turn on multi-VPC connectivity. See [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md) for more detials.
-
-<SimpleTab>
-<div label="Console">
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -111,23 +108,6 @@ Ensure that your Amazon MSK Provisioned cluster turn on multi-VPC connectivity. 
     - **MSK Cluster Arn**: Enter the ARN of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/plc-test/11f9378a-ec59-4e08-bb42-ada47765a4e9-18`.
 
 5. Click **Create**.
-
-</div>
-
-<div label="CLI">
-
-To create a private link connection using the TiDB Cloud CLI:
-
-1. Run the following command:
-
-    ```shell
-    ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AMAZON_MSK_PROVISIONED --aws.endpoint-service-name <endpoint-service-name>
-    ```
-
-2. Go to the detail page of your endpoint service on the [AWS console](https://console.aws.amazon.com). In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
-
-</div>
-</SimpleTab>
 
 ## Create an Alibaba Cloud Endpoint Service private link connection
 
