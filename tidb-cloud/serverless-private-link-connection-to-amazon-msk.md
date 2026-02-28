@@ -11,7 +11,7 @@ This document describes how to connect a {{{ .essential }}} cluster to an [Amazo
 
 Before you begin, ensure the following:
 
-- **Region and AZ**: Your Amazon MSK Provisioned cluster is in the same AWS region as your {{{ .essential }}} cluster, and the availability zones of the MSK cluster is the same as your TiDB Cloud cluster.
+- **Region and AZ**: Your Amazon MSK Provisioned cluster is in the same AWS region as your {{{ .essential }}} cluster, and the availability zones of the MSK cluster are the same as your TiDB Cloud cluster.
 
 - **Authentication**: [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) is required for the MSK cluster.
 
@@ -73,7 +73,7 @@ Wait for the cluster status to change from **Updating** to **Active** again.
 
 ## Step 6. Create an Amazon MSK Provisioned private link connection in TiDB Cloud
 
-Create the private link connection in TiDB Cloud using the arn of your MSK cluster.
+Create the private link connection in TiDB Cloud using the `ARN` of your MSK cluster.
 
 For detailed steps, see [Create an Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
 

@@ -108,7 +108,7 @@ Ensure that your Amazon MSK Provisioned cluster turn on multi-VPC connectivity. 
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **Amazon MSK Provisioned**. If this option is not displayed, ensure that your cluster is created on AWS.
-    - **MSK Cluster Arn**: enter the arn of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/plc-test/11f9378a-ec59-4e08-bb42-ada47765a4e9-18`.
+    - **MSK Cluster Arn**: Enter the ARN of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/plc-test/11f9378a-ec59-4e08-bb42-ada47765a4e9-18`.
 
 5. Click **Create**.
 
@@ -195,7 +195,7 @@ Different private link connection types support attaching different domain types
 |--------------------------------|-------------------------------------------|
 | AWS Endpoint Service           | <ul><li>TiDB Cloud managed (`aws.tidbcloud.com`)</li><li>Confluent Dedicated (`aws.confluent.cloud`)</li></ul>  |
 | Alibaba Cloud Endpoint Service | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
-| Amazon MSK Provisioned | does not support attach domians |
+| Amazon MSK Provisioned         | Does not support attaching domains |
 
 If your domain is not included in this table, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request support.
 
