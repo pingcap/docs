@@ -82,7 +82,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 
 > **Note:**
 >
-> - `time-zone` is only effective for `mysql` and `tidb` sinks. After TiCDC establishes a connection with the downstream, it sets the `time_zone` for the session. This `time_zone` is used by the downstream to parse time values affected by time zones, such as `TIMESTAMP`, when executing DDL and DML statements. `DATETIME`, `DATE`, and `TIME` are not affected. 
+> - `time-zone` is only effective for `mysql` and `tidb` sinks. After TiCDC establishes a connection with the downstream, it sets the `time_zone` for the session. This `time_zone` is used by the downstream to parse time values affected by time zones, such as `TIMESTAMP`, when executing DDL and DML statements. The `DATETIME`, `DATE`, and `TIME` data types are not affected by time zone settings. 
 > - To avoid data inconsistency caused by inconsistent time zone settings, it is recommended to explicitly set `time-zone` and ensure that its value is consistent with the TiCDC Server's `--tz` parameter and the downstream database's time zone.
 
 To encode the database password in the sink URI using Base64, use the following command:
