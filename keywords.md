@@ -65,6 +65,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ADMIN
 - ADVISE
 - AFTER
+- AFFINITY
 - AGAINST
 - AGO
 - ALGORITHM
