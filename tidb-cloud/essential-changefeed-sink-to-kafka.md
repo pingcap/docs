@@ -33,14 +33,14 @@ Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka serv
 
 Private link connections leverage **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka, Confluent Cloud Dedicated clusters, and Amazon MSK. It does not support direct integration with other Kafka SaaS services.
+{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka, Confluent Cloud Dedicated clusters, and Amazon MSK Provisioned. It does not support direct integration with other Kafka SaaS services.
 
 To set up a Private Link connection based on your Kafka deployment and cloud provider, see the following guides:
 
 - [Connect to Confluent Cloud on AWS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
-- [Connect to Amazon MSK via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
+- [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 
 </div>
 

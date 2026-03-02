@@ -33,7 +33,7 @@ To view the AWS account ID and availability zones:
 
 ## Step 1. Create an MSK cluster (if needed)
 
-If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) in the same region as your {{{ .essential }}} cluster and in the same availability zones as your TiDB Cloud cluster.
+If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) in the same region and the same availability zone as your as your {{{ .essential }}} cluster.
 
 ## Step 2. Set up SASL/SCRAM authentication and ACLs
 
@@ -41,15 +41,15 @@ If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.
 
 Configure [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for your MSK cluster.
 
-- **Secret name**: The secret name must start with `AmazonMSK_`.
-- **Encryption**: Do not use the default encryption key; create a new one for the secret.
+- **Secret name**: the secret name must start with `AmazonMSK_`.
+- **Encryption**: do not use the default encryption key. Create a new one for the secret.
 
 ### Step 2.2. Set ACLs for TiDB Cloud access
 
 You must set ACLs so that TiDB Cloud can access your MSK cluster. You can use either of the following methods:
 
-- **SASL/SCRAM (recommended)**: Set ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
-- **IAM**: Set ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
+- **SASL/SCRAM (recommended)**: set ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
+- **IAM**: set ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
 
 ## Step 3. Configure the MSK cluster
 
@@ -75,9 +75,7 @@ Wait for the cluster status to change from **Updating** to **Active** again.
 
 Create the private link connection in TiDB Cloud using the `ARN` of your MSK cluster.
 
-For detailed steps, see [Create an Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
-
----
+For more information, see [Create an Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
 
 ## Create ACLs using SASL/SCRAM
 
@@ -94,7 +92,7 @@ Use this method to create ACLs in the same VPC as your MSK cluster using SASL/SC
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-3. Set the environment (replace the path with your own if different):
+3. Set the environment. Replace the path with your actual path.
 
     ```shell
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
@@ -120,8 +118,6 @@ Use this method to create ACLs in the same VPC as your MSK cluster using SASL/SC
 
     The principal `User:<username>` is the SASL/SCRAM user that TiDB Cloud uses to access your MSK cluster. Use the username you configured for TiDB Cloud in your MSK ACLs.
 
----
-
 ## Create ACLs using IAM
 
 As an alternative to SASL/SCRAM, you can create ACLs in the same VPC as your MSK cluster using IAM authentication. The IAM user or role must have **Amazon MSK** and **Apache Kafka APIs for MSK** permissions.
@@ -138,7 +134,7 @@ As an alternative to SASL/SCRAM, you can create ACLs in the same VPC as your MSK
     wget https://github.com/aws/aws-msk-iam-auth/releases/download/v2.3.5/aws-msk-iam-auth-2.3.5-all.jar
     ```
 
-3. Set the environment (replace paths and credentials with your own):
+3. Set the environment. Replace paths and credentials with your own values.
 
     ```shell
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
