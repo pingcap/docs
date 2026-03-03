@@ -44,12 +44,12 @@ Configure [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/dev
 - **Secret name**: the secret name must start with `AmazonMSK_`.
 - **Encryption**: do not use the default encryption key. Create a new one for the secret.
 
-### Step 2.2. Set ACLs for TiDB Cloud access
+### Step 2.2. Set up ACLs for TiDB Cloud access
 
-You must set ACLs so that TiDB Cloud can access your MSK cluster. You can use either of the following methods:
+You must set up ACLs so that TiDB Cloud can access your MSK cluster. You can use either of the following methods:
 
-- **SASL/SCRAM (recommended)**: set ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
-- **IAM**: set ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
+- **SASL/SCRAM (recommended)**: set up ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
+- **IAM**: set up ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
 
 ## Step 3. Configure the MSK cluster
 
@@ -134,7 +134,7 @@ As an alternative to SASL/SCRAM, you can create ACLs in the same VPC as your MSK
     wget https://github.com/aws/aws-msk-iam-auth/releases/download/v2.3.5/aws-msk-iam-auth-2.3.5-all.jar
     ```
 
-3. Set the environment. Replace paths and credentials with your own values.
+3. Configure the environment. Replace paths and credentials with your own values.
 
     ```shell
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
