@@ -75,12 +75,12 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiKV CPU Usage | node, limit | The CPU usage statistics or upper limit of each TiKV node. |
 | TiKV Memory Usage | node, limit | The memory usage statistics or upper limit of each TiKV node. |
 | TiKV IO Bps | node-write, node-read | The total input/output bytes per second of read and write in each TiKV node. |
-| TiKV Storage Usage | node, limit | The storage usage statistics or upper limit of each TiKV node. |
+| TiKV Storage Usage | node, limit | The storage usage statistics or upper limit of each TiKV node. The used storage size includes the logical data size in the storage engine, as well as filesystem overhead, WAL files, and temporary files. |
 | TiFlash Uptime | node | The runtime of each TiFlash node since last restart. |
 | TiFlash CPU Usage | node, limit | The CPU usage statistics or upper limit of each TiFlash node. |
 | TiFlash Memory Usage | node, limit | The memory usage statistics or upper limit of each TiFlash node. |
 | TiFlash IO MBps | node-write, node-read | The total bytes of read and write in each TiFlash node. |
-| TiFlash Storage Usage | node, limit | The storage usage statistics or upper limit of each TiFlash node. |
+| TiFlash Storage Usage | node, limit | The storage usage statistics or upper limit of each TiFlash node. The used storage size includes the logical data size in the storage engine, as well as filesystem overhead, WAL files, and temporary files. |
 | TiProxy CPU Usage | node | The CPU usage statistics of each TiProxy node. The upper limit is 100%. |
 | TiProxy Connections | node | The number of connections on each TiProxy node. |
 | TiProxy Throughput | node | The bytes transferred per second on each TiProxy node. |
