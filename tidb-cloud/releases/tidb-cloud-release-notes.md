@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         The calculation of TiKV and TiFlash storage usage for metrics and alerting systems now incorporates WAL files and temporary files, providing more accurate capacity and usage monitoring.
 
-        For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+        For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
 
 ## February 10, 2026
 
