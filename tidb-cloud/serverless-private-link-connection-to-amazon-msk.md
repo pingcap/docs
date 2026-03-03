@@ -37,19 +37,15 @@ If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.
 
 ## Step 2. Set up SASL/SCRAM authentication and ACLs
 
-### Step 2.1. Set up SASL/SCRAM authentication
+1. Set up SASL/SCRAM authentication. Configure [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for your MSK cluster.
 
-Configure [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for your MSK cluster.
+    - **Secret name**: the secret name must start with `AmazonMSK_`.
+    - **Encryption**: do not use the default encryption key. Create a new one for the secret.
 
-- **Secret name**: the secret name must start with `AmazonMSK_`.
-- **Encryption**: do not use the default encryption key. Create a new one for the secret.
+2. Set up ACLs for TiDB Cloud access. You must set up ACLs so that TiDB Cloud can access your MSK cluster. You can use either of the following methods:
 
-### Step 2.2. Set up ACLs for TiDB Cloud access
-
-You must set up ACLs so that TiDB Cloud can access your MSK cluster. You can use either of the following methods:
-
-- **SASL/SCRAM (recommended)**: set up ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
-- **IAM**: set up ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
+    - **SASL/SCRAM (recommended)**: set up ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
+    - **IAM**: set up ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
 
 ## Step 3. Configure the MSK cluster
 
