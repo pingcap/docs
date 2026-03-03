@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Changefeeds for Amazon S3 sinks support using AWS Role ARN for authentication.
 
-        You can now configure changefeeds for Amazon S3 sinks using an IAM Role ARN on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, in addition to the existing AK/SK authentication method. This update enhances security by enabling short-lived credentials and automatic rotation, simplifies secret management, and supports least-privileged practices.
+        You can now configure changefeeds for Amazon S3 sinks using an IAM Role ARN on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, in addition to the existing AK/SK authentication method. This feature enhances security by enabling short-lived credentials and automatic rotation, simplifies secret management, and supports least-privileged practices.
 
         For more information, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
 
