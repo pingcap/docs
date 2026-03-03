@@ -114,7 +114,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
+7. In the TiDB Cloud console, go to the Changefeed's **Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
 <div label="Azure Blob Storage">
@@ -151,7 +151,7 @@ For **Azure Blob Storage**, you must configure the container and get a SAS token
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Configure Destination** page, and fill in the following fields:
+4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Destination** page, and fill in the following fields:
 
     - **Blob URL**: enter the container URL obtained in step 2. You can optionally add a prefix.
     - **SAS Token**: enter the generated SAS token obtained in step 3.
