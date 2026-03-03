@@ -20,7 +20,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Configure Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depending on the destination you choose.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your cluster is hosted. The configuration process varies depending on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -31,7 +31,7 @@ For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for
 
 To use an IAM Role for authentication, follow these steps:
 
-1. On the **Configure Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
 2. Under **Bucket Access**, select **AWS Role ARN**.
 3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
 
@@ -54,7 +54,7 @@ To use an IAM Role for authentication, follow these steps:
 
 To use an access key for authentication, follow these steps:
 
-1. On the **Configure Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
 2. Under **Bucket Access**, select **AWS Access Key**.
 3. Fill in the following fields:
 
