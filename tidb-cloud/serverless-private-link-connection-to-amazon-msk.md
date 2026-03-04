@@ -7,17 +7,6 @@ summary: Learn how to connect to an Amazon MSK Provisioned cluster using an Amaz
 
 This document describes how to connect a {{{ .essential }}} cluster to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster using an [Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
 
-## Limitations and requirements
-
-Before you begin, ensure the following:
-
-- **Region and AZ**: Your Amazon MSK Provisioned cluster is in the same AWS region as your {{{ .essential }}} cluster, and the availability zones of the MSK cluster are the same as your TiDB Cloud cluster.
-
-- **Authentication**: [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) is required for the MSK cluster.
-
-- **Broker type**: Do not use the `t4.small` broker type. It does not support private link.
-
-See [Amazon MSK multi-VPC private connectivity in a single Region](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements) for more requirements.
 
 ## Prerequisites for {{{ .essential }}}
 
