@@ -38,34 +38,8 @@ For more requirements, see [Amazon MSK multi-VPC private connectivity in a singl
 
 You must set up Kafka ACLs so that TiDB Cloud can access your Amazon MSK Provisioned cluster. You can use SASL/SCRAM authentication (recommended) or IAM authentication to set up ACLs.
 
-
-## Step 3. Configure the MSK cluster
-
-Update the following cluster configuration properties:
-
-- Set `auto.create.topics.enable=true`.
-- Add `allow.everyone.if.no.acl.found=false` (required for SASL/SCRAM).
-- Keep other properties unchanged or adjust them as needed.
-
-Apply the changes and wait for the cluster status to change from **Updating** to **Active**.
-
-## Step 4. Attach the cluster policy
-
-[Attach the cluster policy](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) to allow TiDB Cloud to connect to your MSK cluster. Use the TiDB Cloud AWS account ID you obtained in [Prerequisites](#prerequisites).
-
-## Step 5. Turn on multi-VPC connectivity
-
-After the cluster is active, [turn on multi-VPC connectivity](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) for the MSK cluster. Multi-VPC connectivity is required for AWS PrivateLink. To connect from TiDB Cloud, you must enable SASL/SCRAM authentication.
-
-Wait for the cluster status to change from **Updating** to **Active** again.
-
-## Step 6. Create an Amazon MSK Provisioned private link connection in TiDB Cloud
-
-Create the private link connection in TiDB Cloud using the `ARN` of your MSK cluster.
-
-For more information, see [Create an Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
-
-## Create ACLs using SASL/SCRAM
+<SimpleTab>
+<div label="SASL/SCRAM">
 
 Use this method to create ACLs in the same VPC as your MSK cluster using SASL/SCRAM authentication.
 
@@ -106,7 +80,9 @@ Use this method to create ACLs in the same VPC as your MSK cluster using SASL/SC
 
     The principal `User:<username>` is the SASL/SCRAM user that TiDB Cloud uses to access your MSK cluster. Use the username you configured for TiDB Cloud in your MSK ACLs.
 
-## Create ACLs using IAM
+</div>
+
+<div label="IAM">
 
 As an alternative to SASL/SCRAM, you can create ACLs in the same VPC as your MSK cluster using IAM authentication. The IAM user or role must have **Amazon MSK** and **Apache Kafka APIs for MSK** permissions.
 
@@ -149,3 +125,32 @@ As an alternative to SASL/SCRAM, you can create ACLs in the same VPC as your MSK
     ```
 
     The principal `User:<username>` is the SASL/SCRAM user that TiDB Cloud uses to access your MSK cluster. Use the username you configured for TiDB Cloud in your MSK ACLs.
+
+</div>
+</SimpleTab>
+
+## Step 2. Configure the MSK cluster
+
+Update the following cluster configuration properties:
+
+- Set `auto.create.topics.enable=true`.
+- Add `allow.everyone.if.no.acl.found=false` (required for SASL/SCRAM).
+- Keep other properties unchanged or adjust them as needed.
+
+Apply the changes and wait for the cluster status to change from **Updating** to **Active**.
+
+## Step 3. Attach the cluster policy
+
+[Attach the cluster policy](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) to allow TiDB Cloud to connect to your MSK cluster. Use the TiDB Cloud AWS account ID you obtained in [Prerequisites](#prerequisites).
+
+## Step 4. Turn on multi-VPC connectivity
+
+After the cluster is active, [turn on multi-VPC connectivity](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) for the MSK cluster. Multi-VPC connectivity is required for AWS PrivateLink. To connect from TiDB Cloud, you must enable SASL/SCRAM authentication.
+
+Wait for the cluster status to change from **Updating** to **Active** again.
+
+## Step 5. Create an Amazon MSK Provisioned private link connection in TiDB Cloud
+
+Create the private link connection in TiDB Cloud using the `ARN` of your MSK cluster.
+
+For more information, see [Create an Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).

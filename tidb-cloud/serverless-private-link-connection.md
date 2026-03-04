@@ -105,7 +105,7 @@ Before creating the Amazon MSK Provisioned private link connection, ensure that 
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **Amazon MSK Provisioned**. If this option is not displayed, ensure that your cluster is created on AWS.
-    - **MSK Cluster ARN**: enter the ARN of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/plc-test/11f9378a-ec59-4e08-bb42-ada47765a4e9-18`.
+    - **MSK Cluster ARN**: enter the ARN of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx`.
 
 5. Click **Create**.
 
