@@ -98,4 +98,4 @@ TiDB Ansible version: 3.0.6
     - Fix the issue that Pump blocks when it exits because of gRPC's `GracefulStop` [#817](https://github.com/pingcap/tidb-binlog/pull/817)
     - Fix the issue that Drainer fails when it receives a binlog which misses a column during the execution of a `DROP COLUMN` statement in TiDB (v3.0.6 or later) [#827](https://github.com/pingcap/tidb-binlog/pull/827)
 + TiDB Lightning
-    - Add the `max-allowed-packet` configuration (64 M by default) for the TiDB backend [#248](https://github.com/pingcap/tidb-lightning/pull/248) 
+    - Add the `max-allowed-packet` configuration (64 M by default) for the TiDB backend [#248](https://github.com/pingcap/tidb-lightning/pull/248)

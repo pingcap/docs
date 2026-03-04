@@ -794,4 +794,4 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     + TiDB Binlog
 
-        - Fix the issue that TiDB Binlog might be skipped when large upstream write transactions are replicated to Kafka [#1136](https://github.com/pingcap/tidb-binlog/issues/1136) 
+        - Fix the issue that TiDB Binlog might be skipped when large upstream write transactions are replicated to Kafka [#1136](https://github.com/pingcap/tidb-binlog/issues/1136)

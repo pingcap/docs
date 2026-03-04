@@ -435,4 +435,4 @@ In 6.1.0, the key new features or improvements are as follows:
         - Fix the issue of incorrect routing for schemas [#33381](https://github.com/pingcap/tidb/issues/33381)
         - Fix the issue that the PD configuration is not restored correctly when TiDB Lightning panics [#31733](https://github.com/pingcap/tidb/issues/31733)
         - Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#27937](https://github.com/pingcap/tidb/issues/27937)
-        - Fix the issue of local backend import failure when the `auto_random` or `auto_increment` column is null [#34208](https://github.com/pingcap/tidb/issues/34208) 
+        - Fix the issue of local backend import failure when the `auto_random` or `auto_increment` column is null [#34208](https://github.com/pingcap/tidb/issues/34208)

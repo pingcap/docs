@@ -144,4 +144,4 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
 + Optimize `table-regions.py` script to display leader distribution by table [#739](https://github.com/pingcap/tidb-ansible/pull/739)
 + Update configuration file for Drainer [#745](https://github.com/pingcap/tidb-ansible/pull/745)
 + Optimize TiDB monitoring with new panels that display latencies by SQL categories [#747](https://github.com/pingcap/tidb-ansible/pull/747)
-+ Update the Lightning configuration file and add the `tidb_lightning_ctl` script [#1e946f8](https://github.com/pingcap/tidb-ansible/commit/1e946f89908e8fd6ef84128c6da3064ddfccf6a8) 
++ Update the Lightning configuration file and add the `tidb_lightning_ctl` script [#1e946f8](https://github.com/pingcap/tidb-ansible/commit/1e946f89908e8fd6ef84128c6da3064ddfccf6a8)

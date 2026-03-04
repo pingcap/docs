@@ -49,4 +49,4 @@ TiDB Ansible version: 3.0.12
     - Fix the issue of incorrect Region information caused by data race when PD processes Region heartbeats [#2233](https://github.com/pingcap/pd/pull/2233)
 
 + TiDB Ansible
-    - Support deploying multiple Grafana/Prometheus/Alertmanager in a cluster [#1198](https://github.com/pingcap/tidb-ansible/pull/1198) 
+    - Support deploying multiple Grafana/Prometheus/Alertmanager in a cluster [#1198](https://github.com/pingcap/tidb-ansible/pull/1198)

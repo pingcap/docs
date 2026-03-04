@@ -53,4 +53,4 @@ TiDB Ansible version: 3.0.11
 
 * TiDB Ansible
     + Update outdated document links in `tidb-ansible` [#1169](https://github.com/pingcap/tidb-ansible/pull/1169)
-    + Fix the issue that undefined variables might occur in the `wait for region replication complete` task [#1173](https://github.com/pingcap/tidb-ansible/pull/1173) 
+    + Fix the issue that undefined variables might occur in the `wait for region replication complete` task [#1173](https://github.com/pingcap/tidb-ansible/pull/1173)

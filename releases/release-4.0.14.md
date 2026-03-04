@@ -164,4 +164,4 @@ TiDB version: 4.0.14
         - Fix a bug that some MySQL connection might leak after MySQL sink meets the error and pauses [#1945](https://github.com/pingcap/tiflow/pull/1945)
         - Fix the issue that TiCDC changefeed cannot be created when start TS is less than current TS minus GC TTL [#1839](https://github.com/pingcap/tiflow/issues/1839)
         - Reduce memory `malloc` in sort heap to avoid too much CPU overhead [#1853](https://github.com/pingcap/tiflow/issues/1853)
-        - Fix a bug that the replication task might stop when moving a table [#1827](https://github.com/pingcap/tiflow/pull/1827) 
+        - Fix a bug that the replication task might stop when moving a table [#1827](https://github.com/pingcap/tiflow/pull/1827)

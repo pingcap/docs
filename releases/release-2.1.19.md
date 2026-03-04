@@ -90,4 +90,4 @@ TiDB Ansible version: 2.1.19
 ## TiDB Ansible
 
 - Rename the `Uncommon Error OPM` monitoring item of TiDB service to `Write Binlog Error` and add the corresponding alert message [#1038](https://github.com/pingcap/tidb-ansible/pull/1038)
-- Upgrade TiSpark to 2.1.8 [#1063](https://github.com/pingcap/tidb-ansible/pull/1063) 
+- Upgrade TiSpark to 2.1.8 [#1063](https://github.com/pingcap/tidb-ansible/pull/1063)

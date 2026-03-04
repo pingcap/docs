@@ -38,4 +38,4 @@ TiDB Ansible version: 2.1.7
 
 ## TiDB Ansible
 
-Change the default retention time of Prometheus monitoring data to 30d 
+Change the default retention time of Prometheus monitoring data to 30d

@@ -43,4 +43,4 @@ On December 12, 2018, TiDB 2.1.1 is released. Compared with TiDB 2.1.0, this rel
     - Optimize the `analyze` mechanism on imported tables to increase the import speed
     - Support storing the checkpoint information to a local file
 + TiDB Binlog
-    - Fix the output bug of pb files that a table only with the primary key column cannot generate the pb event 
+    - Fix the output bug of pb files that a table only with the primary key column cannot generate the pb event

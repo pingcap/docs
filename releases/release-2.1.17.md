@@ -89,4 +89,4 @@ TiDB Ansible version: 2.1.17
 ## TiDB Ansible
 
 - Update the Spark version to 2.4.3, and update the TiSpark version to 2.2.0 that is compatible with Spark 2.4.3 [#914](https://github.com/pingcap/tidb-ansible/pull/914), [#919](https://github.com/pingcap/tidb-ansible/pull/927)
-- Fix the issue that there is a long waiting time when the remote machine password has expired [#937](https://github.com/pingcap/tidb-ansible/pull/937), [#948](https://github.com/pingcap/tidb-ansible/pull/948) 
+- Fix the issue that there is a long waiting time when the remote machine password has expired [#937](https://github.com/pingcap/tidb-ansible/pull/937), [#948](https://github.com/pingcap/tidb-ansible/pull/948)

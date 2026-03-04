@@ -57,4 +57,4 @@ TiDB Ansible version: 2.1.10
 
 ## TiDB Ansible
 
-- Update the configuration file of TiDB Lightning and add the `tidb_lightning_ctl` script [#d3a4a368](https://github.com/pingcap/tidb-ansible/commit/d3a4a368810a421c49980899a286cf010569b4c7) 
+- Update the configuration file of TiDB Lightning and add the `tidb_lightning_ctl` script [#d3a4a368](https://github.com/pingcap/tidb-ansible/commit/d3a4a368810a421c49980899a286cf010569b4c7)

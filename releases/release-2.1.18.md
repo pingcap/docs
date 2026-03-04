@@ -73,4 +73,4 @@ TiDB Ansible version: 2.1.18
 - Update TiDB alerting rules [#961](https://github.com/pingcap/tidb-ansible/pull/961)
 - Check the configuration file before the deployment and upgrade [#973](https://github.com/pingcap/tidb-ansible/pull/973)
 - Add a new metric to monitor index speed in TiDB [#987](https://github.com/pingcap/tidb-ansible/pull/987)
-- Update TiDB Binlog monitoring dashboard to make it compatible with Grafana v4.6.3 [#993](https://github.com/pingcap/tidb-ansible/pull/993) 
+- Update TiDB Binlog monitoring dashboard to make it compatible with Grafana v4.6.3 [#993](https://github.com/pingcap/tidb-ansible/pull/993)

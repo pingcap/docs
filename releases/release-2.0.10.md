@@ -36,4 +36,4 @@ On December 18, 2018, TiDB 2.0.10 is released. The corresponding TiDB Ansible 2.
 ## TiKV
 
 - Avoid transferring the leader to a newly created peer, to optimize the possible delay [#3929](https://github.com/tikv/tikv/pull/3929)
-- Fix redundant Region heartbeats [#3930](https://github.com/tikv/tikv/pull/3930) 
+- Fix redundant Region heartbeats [#3930](https://github.com/tikv/tikv/pull/3930)

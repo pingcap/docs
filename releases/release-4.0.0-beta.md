@@ -111,4 +111,4 @@ TiDB Ansible version: 4.0.0-beta
 + Support checking the systemd version which must be `systemd-219-52` or later [#1020](https://github.com/pingcap/tidb-ansible/pull/1020) [#1074](https://github.com/pingcap/tidb-ansible/pull/1074)
 + Fix the issue that the log directory is incorrectly created when TiDB Lightning is started [#1103](https://github.com/pingcap/tidb-ansible/pull/1103)
 + Fix the issue that the customized port of TiDB Lightning is invalid [#1107](https://github.com/pingcap/tidb-ansible/pull/1107)
-+ Support deploying and maintaining TiFlash [#1119](https://github.com/pingcap/tidb-ansible/pull/1119) 
++ Support deploying and maintaining TiFlash [#1119](https://github.com/pingcap/tidb-ansible/pull/1119)

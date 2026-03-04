@@ -109,4 +109,4 @@ TiDB Ansible version: 3.0.8
 - Optimize the logic for checking the TiDB version when performing a rolling update [#1056](https://github.com/pingcap/tidb-ansible/pull/1056)
 - Upgrade TiSpark to v2.1.8 [#1061](https://github.com/pingcap/tidb-ansible/pull/1061)
 - Fix the issue that the PD role monitoring item is wrongly displayed on Grafana [#1065](https://github.com/pingcap/tidb-ansible/pull/1065)
-- Optimize `Thread Voluntary Context Switches` and `Thread Nonvoluntary Context Switches` monitoring items on the TiKV Detail page on Grafana [#1071](https://github.com/pingcap/tidb-ansible/pull/1071) 
+- Optimize `Thread Voluntary Context Switches` and `Thread Nonvoluntary Context Switches` monitoring items on the TiKV Detail page on Grafana [#1071](https://github.com/pingcap/tidb-ansible/pull/1071)

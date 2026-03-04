@@ -46,4 +46,4 @@ TiDB Ansible version: 3.1.1
 
     - Backup & Restore (BR)
 
-        * Fix the issue that after BR restores a table with the `auto_random` attribute, inserting data might trigger the duplicate entry error [#241](https://github.com/pingcap/br/issues/241) 
+        * Fix the issue that after BR restores a table with the `auto_random` attribute, inserting data might trigger the duplicate entry error [#241](https://github.com/pingcap/br/issues/241)

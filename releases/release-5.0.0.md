@@ -464,4 +464,4 @@ TiUP v1.4.0 further enhances the functionalities for operating and maintaining T
 
 TiDB adds cluster usage metrics in telemetry, such as the number of data tables, the number of queries, and whether new features are enabled.
 
-To learn more about details and how to disable this behavior, refer to [telemetry](/telemetry.md). 
+To learn more about details and how to disable this behavior, refer to [telemetry](/telemetry.md).

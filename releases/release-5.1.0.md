@@ -349,4 +349,4 @@ To learn more about the information and how to disable this behavior, refer to [
         - Revert the update for `explicit_defaults_for_timestamp` which requires the SUPER privilege when replicating data to MySQL [#1750](https://github.com/pingcap/tiflow/pull/1750)
         - Support the sink flow control to reduce the risk of memory overflow [#1840](https://github.com/pingcap/tiflow/pull/1840)
         - Fix a bug that the replication task might stop when moving a table [#1828](https://github.com/pingcap/tiflow/pull/1828)
-        - Fix the issue that the TiKV GC safe point is blocked due to the stagnation of TiCDC changefeed checkpoint [#1759](https://github.com/pingcap/tiflow/pull/1759) 
+        - Fix the issue that the TiKV GC safe point is blocked due to the stagnation of TiCDC changefeed checkpoint [#1759](https://github.com/pingcap/tiflow/pull/1759)

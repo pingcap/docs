@@ -137,4 +137,4 @@ TiDB version: 4.0.15
         - Fix the a memory leak issue that might occur when creating a new changefeed [#2389](https://github.com/pingcap/tiflow/issues/2389)
         - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2603](https://github.com/pingcap/tiflow/issues/2603)
         - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#1260](https://github.com/pingcap/tiflow/issues/1260)
-        - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2298](https://github.com/pingcap/tiflow/pull/2298) 
+        - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2298](https://github.com/pingcap/tiflow/pull/2298)

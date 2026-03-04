@@ -56,4 +56,4 @@ TiDB Ansible version: 3.0.9
 
 ## TiDB Ansible
 
-+ Support automatically creating directories to optimize the deployment of TiDB Lightning [#1105](https://github.com/pingcap/tidb-ansible/pull/1105) 
++ Support automatically creating directories to optimize the deployment of TiDB Lightning [#1105](https://github.com/pingcap/tidb-ansible/pull/1105)

@@ -105,4 +105,4 @@ On March 26, 2019, TiDB 3.0.0 Beta.1 is released. The corresponding TiDB Ansible
     - Support importing CSV files [#111](https://github.com/pingcap/tidb-lightning/pull/111)
 + Data replication comparison tool (sync-diff-inspector)
     - Support using TiDB statistics to split chunks to be compared [#197](https://github.com/pingcap/tidb-tools/pull/197)
-    - Support using multiple columns to split chunks to be compared [#197](https://github.com/pingcap/tidb-tools/pull/197) 
+    - Support using multiple columns to split chunks to be compared [#197](https://github.com/pingcap/tidb-tools/pull/197)

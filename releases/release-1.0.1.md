@@ -20,4 +20,4 @@ On November 1, 2017, TiDB 1.0.1 is released with the following updates:
 - Support flow control with write bytes.
 - Reduce Raft allocation.
 - Increase coprocessor stack size to 10MB.
-- Remove the useless log from the coprocessor. 
+- Remove the useless log from the coprocessor.

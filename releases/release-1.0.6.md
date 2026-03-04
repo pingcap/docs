@@ -25,4 +25,4 @@ On January 08, 2018, TiDB 1.0.6 is released with the following updates:
 
 None.
 
-To upgrade from 1.0.5 to 1.0.6, follow the rolling upgrade order of PD -> TiKV -> TiDB. 
+To upgrade from 1.0.5 to 1.0.6, follow the rolling upgrade order of PD -> TiKV -> TiDB.

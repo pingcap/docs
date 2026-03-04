@@ -408,4 +408,4 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
     + TiDB Binlog
 
-        - Fix the issue that when most tables are filtered out, checkpoint cannot be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075) 
+        - Fix the issue that when most tables are filtered out, checkpoint cannot be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)

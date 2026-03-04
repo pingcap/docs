@@ -153,4 +153,4 @@ TiDB version: 4.0.8
     + TiDB Lightning
 
         - Fix the issue of wrong column information [#420](https://github.com/pingcap/tidb-lightning/pull/420)
-        - Fix the infinity loop that occurs when retrying to get Region information in the local mode [#418](https://github.com/pingcap/tidb-lightning/pull/418) 
+        - Fix the infinity loop that occurs when retrying to get Region information in the local mode [#418](https://github.com/pingcap/tidb-lightning/pull/418)

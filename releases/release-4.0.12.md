@@ -135,4 +135,4 @@ TiDB version: 4.0.12
         - Fix the error that TiKV Importer might ignore that the file has already existed [#848](https://github.com/pingcap/br/pull/848)
         - Fix a bug that the TiDB Lightning might use the wrong timestamp and read the wrong data [#850](https://github.com/pingcap/br/pull/850)
         - Fix a bug that TiDB Lightning's unexpected exit might cause damaged checkpoint file [#889](https://github.com/pingcap/br/pull/889)
-        - Fix the issue of possible data error that occurs because the `cancel` error is ignored [#874](https://github.com/pingcap/br/pull/874) 
+        - Fix the issue of possible data error that occurs because the `cancel` error is ignored [#874](https://github.com/pingcap/br/pull/874)

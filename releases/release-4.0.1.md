@@ -52,4 +52,4 @@ TiDB version: 4.0.1
 + TiFlash
 
     - Fix the issue that default value of the `bit` type column in TiFlash is incorrectly parsed
-    - Fix the miscalculation of `1970-01-01 00:00:00 UTC` in some timezones in TiFlash 
+    - Fix the miscalculation of `1970-01-01 00:00:00 UTC` in some timezones in TiFlash

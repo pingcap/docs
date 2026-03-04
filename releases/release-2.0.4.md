@@ -38,4 +38,4 @@ On June 15, 2018, TiDB 2.0.4 is released. Compared with TiDB 2.0.3, this release
 - Add the `region-properties` command for `tikv-ctl`
 - Fix the issue that `reverse-seek` is slow when many RocksDB tombstones exist
 - Fix the crash issue caused by `do_sub`
-- Make GC record the log when GC encounters many versions of data 
+- Make GC record the log when GC encounters many versions of data

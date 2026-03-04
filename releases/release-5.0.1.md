@@ -95,4 +95,4 @@ TiDB version: 5.0.1
         - Set the default value of the `explicit_defaults_for_timestamp` session variable to `ON` to make the MySQL 5.7 downstream keep the same behavior with the upstream TiDB [#1659](https://github.com/pingcap/tiflow/pull/1659)
         - Fix the issue that the incorrect handling of `io.EOF` might cause replication interruption [#1648](https://github.com/pingcap/tiflow/pull/1648)
         - Correct the TiKV CDC endpoint CPU metric in the TiCDC dashboard [#1645](https://github.com/pingcap/tiflow/pull/1645)
-        - Increase `defaultBufferChanSize` to avoid replication blocking in some cases [#1632](https://github.com/pingcap/tiflow/pull/1632) 
+        - Increase `defaultBufferChanSize` to avoid replication blocking in some cases [#1632](https://github.com/pingcap/tiflow/pull/1632)

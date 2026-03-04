@@ -48,4 +48,4 @@ TiDB version: 3.0.17
 
     + TiDB Lightning
 
-        - Fix the issue that the `log-file` flag is ignored [#345](https://github.com/pingcap/tidb-lightning/pull/345) 
+        - Fix the issue that the `log-file` flag is ignored [#345](https://github.com/pingcap/tidb-lightning/pull/345)

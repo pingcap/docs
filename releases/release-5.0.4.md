@@ -195,4 +195,4 @@ TiDB version: 5.0.4
         - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#1260](https://github.com/pingcap/tiflow/issues/1260)
         - Fix the issue that the lock is resolved immediately after a Region is initialized [#2188](https://github.com/pingcap/tiflow/issues/2188)
         - Fix the issue of extra partition dispatching that occurs when adding a new partitioned table [#2263](https://github.com/pingcap/tiflow/pull/2263)
-        - Fix the issue that TiCDC keeps warning on removed changefeeds [#2156](https://github.com/pingcap/tiflow/issues/2156) 
+        - Fix the issue that TiCDC keeps warning on removed changefeeds [#2156](https://github.com/pingcap/tiflow/issues/2156)

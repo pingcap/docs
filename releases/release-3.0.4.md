@@ -126,4 +126,4 @@ TiDB Ansible version: 3.0.4
 - Replace the raw module to shell module to address the long waiting time in such situations as the password expires [#949](https://github.com/pingcap/tidb-ansible/pull/949)
 - Update the default value of the TiDB configuration item `txn_local_latches` to `false`
 - Optimize the monitoring metrics and alert rules of Grafana dashboard [#962](https://github.com/pingcap/tidb-ansible/pull/962) [#963](https://github.com/pingcap/tidb-ansible/pull/963) [#969](https://github.com/pingcap/tidb-ansible/pull/963)
-- Check the configuration file before the deployment and upgrade [#934](https://github.com/pingcap/tidb-ansible/pull/934) [#972](https://github.com/pingcap/tidb-ansible/pull/972) 
+- Check the configuration file before the deployment and upgrade [#934](https://github.com/pingcap/tidb-ansible/pull/934) [#972](https://github.com/pingcap/tidb-ansible/pull/972)

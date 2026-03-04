@@ -32,4 +32,4 @@ On February 11, 2018, TiDB 1.0.8 is released with the following updates:
 - [Using `Decimal` in Coprocessor sum](https://github.com/pingcap/tikv/pull/2754)
 - [Sync the metadata of the received Snapshot compulsorily to ensure its safety](https://github.com/pingcap/tikv/pull/2758)
 
-To upgrade from 1.0.7 to 1.0.8, follow the rolling upgrade order of PD -> TiKV -> TiDB. 
+To upgrade from 1.0.7 to 1.0.8, follow the rolling upgrade order of PD -> TiKV -> TiDB.

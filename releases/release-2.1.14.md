@@ -52,4 +52,4 @@ TiDB Binlog
 ## TiDB Ansible
 
 - Add the precheck feature for the `ansible` command and its `jmespath` and `jinja2` dependency packages [#807](https://github.com/pingcap/tidb-ansible/pull/807)
-- Add the `stop-write-at-available-space` parameter (10 GiB by default) in Pump, and stop writing binlog files in Pump when the available disk space is less than the parameter value [#807](https://github.com/pingcap/tidb-ansible/pull/807) 
+- Add the `stop-write-at-available-space` parameter (10 GiB by default) in Pump, and stop writing binlog files in Pump when the available disk space is less than the parameter value [#807](https://github.com/pingcap/tidb-ansible/pull/807)

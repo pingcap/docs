@@ -119,4 +119,4 @@ On June 21, 2019, TiDB 3.0.0-rc.3 is released. The corresponding TiDB Ansible ve
 
 ## TiDB Ansible
 
-- Add a monitoring item to predict the maximum QPS value of the cluster ("hide" by default) [#f5cfa4d](https://github.com/pingcap/tidb-ansible/commit/f5cfa4d903bbcd77e01eddc8d31eabb6e6157f73) 
+- Add a monitoring item to predict the maximum QPS value of the cluster ("hide" by default) [#f5cfa4d](https://github.com/pingcap/tidb-ansible/commit/f5cfa4d903bbcd77e01eddc8d31eabb6e6157f73)

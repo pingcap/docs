@@ -46,4 +46,4 @@ On May 16, 2018, TiDB 2.0.1 is released. Compared with TiDB 2.0.0 (GA), this rel
 - Fix the issue that Learner cannot be successfully elected in special conditions
 - Fix the issue that split might cause dirty read in extreme conditions
 - Correct the default value of the read thread pool configuration
-- Speed up Delete Range 
+- Speed up Delete Range

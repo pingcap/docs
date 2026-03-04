@@ -154,4 +154,4 @@ TiDB version: 5.1.1
     + TiDB Lightning
 
         - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1275](https://github.com/pingcap/br/pull/1275)
-        - Fix the issue of integer overflow when calculating key intervals [#1291](https://github.com/pingcap/br/issues/1291) [#1290](https://github.com/pingcap/br/issues/1290) 
+        - Fix the issue of integer overflow when calculating key intervals [#1291](https://github.com/pingcap/br/issues/1291) [#1290](https://github.com/pingcap/br/issues/1290)

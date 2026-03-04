@@ -101,4 +101,4 @@ TiDB version: 4.0.7
 
     + Dumpling
 
-        - Fix the issue that Dumpling fails to parse metadata when some variables are `NULL` [#150](https://github.com/pingcap/dumpling/pull/150) 
+        - Fix the issue that Dumpling fails to parse metadata when some variables are `NULL` [#150](https://github.com/pingcap/dumpling/pull/150)
