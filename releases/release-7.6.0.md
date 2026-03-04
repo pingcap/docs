@@ -13,7 +13,7 @@ TiDB バージョン: 7.6.0
 
 7.6.0 では、次の主な機能と改善が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能/拡張機能</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">スケーラビリティとパフォーマンス</td><td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#cross-database-binding">データベース間のSQLバインディング</a></td><td>同じスキーマを持つ数百のデータベースを管理する場合、これらのデータベース全体にSQLバインディングを適用する必要があることがよくあります。例えば、SaaSまたはPaaSデータプラットフォームでは、各ユーザーは通常、同じスキーマを持つ別々のデータベースを操作し、それらに対して類似のSQLクエリを実行します。このような場合、各データベースにSQLを個別にバインドするのは現実的ではありません。TiDB v7.6.0では、スキーマが同等のすべてのデータベース間で一致するバインディングを可能にする、データベース間SQLバインディングが導入されました。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.6/br-snapshot-guide#restore-cluster-snapshots">スナップショットの復元速度を最大 10 倍に高速化 (実験的)</a></td><td> BR v7.6.0では、クラスターのスナップショット復元を高速化するための、実験的粗粒リージョンリージョン分散アルゴリズムが導入されました。多数のTiKVノードを持つクラスターでは、このアルゴリズムにより、ノード間の負荷がより均等に分散され、ノードごとのネットワーク帯域幅がより有効に活用されるため、クラスターのリソース効率が大幅に向上します。いくつかの実環境では、この改善により復元プロセスが最大10倍程度高速化されています。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.6/ddl-v2">バッチでテーブルを作成する場合、最大 10 倍の高速化を実現します (実験的)</a></td><td> v7.6.0での新しいDDLアーキテクチャの実装により、バッチテーブル作成のパフォーマンスが大幅に向上し、最大10倍高速化しました。この大幅な機能強化により、多数のテーブルの作成に必要な時間が大幅に短縮されます。この高速化は、数万から数十万に及ぶ大量のテーブルが頻繁に使用されるSaaSシナリオにおいて特に顕著です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.6/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">アクティブ PD フォロワーを使用して PD のリージョン情報クエリ サービスを強化します (実験的)</a></td><td> TiDB v7.6.0では、PDフォロワーがリージョン情報クエリサービスを提供できる実験的機能「Active PD Follower 」が導入されました。この機能により、多数のTiDBノードとリージョンを持つクラスターにおいて、PDクラスターの<code>GetRegion</code>および<code>ScanRegions</code>リクエスト処理能力が向上し、PDリーダーのCPU負荷が軽減されます。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy-overview">TiProxy をサポート (実験的)</a></td><td>デプロイメント ツールを使用して簡単にデプロイできる TiProxy サービスを完全にサポートし、ローリング リスタート、アップグレード、またはスケーリング イベントを通じて TiDB への接続を管理および維持します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.6/dm-compatibility-catalog">データ移行（DM）はMySQL 8.0（GA）を正式にサポートします</a></td><td>これまで、DMを使用したMySQL 8.0からのデータ移行は実験的機能であり、本番環境ではご利用いただけませんでした。TiDB v7.6.0では、この機能の安定性と互換性が向上し、本番環境においてMySQL 8.0からTiDBへのデータ移行をスムーズかつ迅速に実行できるようになります。v7.6.0では、この機能が一般提供（GA）されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>Feature/Enhancement</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">スケーラビリティとパフォーマンス</td><td><a href="https://docs.pingcap.<span translate="no">com/tidb /v7.6/sql-plan-management#cross-database-binding&quot;&gt;データベース間のSQLバインディング</a></td><td>同じスキーマを持つ数百のデータベースを管理する場合、これらのデータベース全体にSQLバインディングを適用する必要があることがよくあります。例えば、SaaSまたはPaaSデータプラットフォームでは、各ユーザーは通常、同じスキーマを持つ別々のデータベースを操作し、それらに対して類似のSQLクエリを実行します。このような場合、各データベースにSQLを個別にバインドするのは現実的ではありません。TiDB v7.6.0では、スキーマが同等のすべてのデータベース間で一致するバインディングを可能にする、データベース間SQLバインディングが導入されました。</td></tr><tr><td> <a href="https://docs.pingcap.<span translate="no">com/tidb /v7.6/br-snapshot-guide#restore-cluster-snapshots&quot;&gt;スナップショットの復元速度が最大 10 倍向上（実験的）</a></td><td> BR v7.6.0では、クラスターのスナップショット復元を高速化するための、実験的粗粒リージョンリージョン分散アルゴリズムが導入されました。多数のTiKVノードを持つクラスターでは、このアルゴリズムにより、ノード間の負荷がより均等に分散され、ノードごとのネットワーク帯域幅がより有効に活用されるため、クラスターのリソース効率が大幅に向上します。いくつかの実環境では、この改善により復元プロセスが最大10倍程度高速化されています。</td></tr><tr><td> <a href="https://docs.pingcap.<span translate="no">com/tidb /v7.6/ddl-v2&quot;&gt;バッチでテーブルを作成する際の速度が最大 10 倍向上しました (実験的)</a></td><td> v7.6.0での新しいDDLアーキテクチャの実装により、バッチテーブル作成のパフォーマンスが大幅に向上し、最大10倍高速化しました。この大幅な機能強化により、多数のテーブルの作成に必要な時間が大幅に短縮されます。この高速化は、数万から数十万に及ぶ大量のテーブルが頻繁に使用されるSaaSシナリオにおいて特に顕著です。</td></tr><tr><td> <a href="https://docs.pingcap.<span translate="no">com/tidb /v7.6/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service&quot;&gt;Active PD Followers を使用して PD のリージョン情報クエリ サービスを強化します (実験的)</a></td><td> TiDB v7.6.0では、PDフォロワーがリージョン情報クエリサービスを提供できる実験的機能「Active PD Follower 」が導入されました。この機能により、多数のTiDBノードとリージョンを持つクラスターにおいて、PDクラスターの<code>GetRegion</code>および<code>ScanRegions</code>リクエスト処理能力が向上し、PDリーダーのCPU負荷が軽減されます。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs.pingcap.<span translate="no">com/tidb /v7.6/tiproxy-overview&quot;&gt;TiProxy をサポート（実験的）</a></td><td>デプロイメント ツールを使用して簡単にデプロイできる TiProxy サービスを完全にサポートし、ローリング リスタート、アップグレード、またはスケーリング イベントを通じて TiDB への接続を管理および維持します。</td></tr><tr><td> <a href="https://docs.pingcap.<span translate="no">com/tidb /v7.6/dm-compatibility-catalog&quot;&gt;データ移行（DM）はMySQL 8.0（GA）を正式にサポートします</a></td><td>これまで、DMを使用したMySQL 8.0からのデータ移行は実験的機能であり、本番環境ではご利用いただけませんでした。TiDB v7.6.0では、この機能の安定性と互換性が向上し、本番環境においてMySQL 8.0からTiDBへのデータ移行をスムーズかつ迅速に実行できるようになります。v7.6.0では、この機能が一般提供（GA）されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -55,7 +55,7 @@ TiDB バージョン: 7.6.0
 
     詳細については[ドキュメント](/storage-engine/titan-overview.md)参照してください。
 
--   次の文字列関数をTiKV [＃48170](https://github.com/pingcap/tidb/issues/48170) @ [ゲンリキ](https://github.com/gengliqi)にプッシュダウンすることをサポートします
+-   次の文字列関数をTiKV [＃48170](https://github.com/pingcap/tidb/issues/48170) @ [ゲンリチ](https://github.com/gengliqi)にプッシュダウンすることをサポートします
 
     -   `LOWER()`
     -   `UPPER()`
@@ -185,7 +185,7 @@ TiDB バージョン: 7.6.0
     -   [遅いクエリ](/identify-slow-queries.md) : リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
     -   [明細書要約表](/statement-summary-tables.md) : リソース グループ名、RU 消費量、リソースの待機時間を追加します。
     -   システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費されたリソース量[ロシア](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後の文のリソース消費量を取得できます。
-    -   リソース グループに基づいてデータベース メトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
+    -   リソース グループに基づいてデータベース メトリックを追加します: QPS/TPS 、実行時間 ( P999/P99 /P95)、障害数、接続数。
     -   すべてのリソース グループの毎日消費された RU の履歴レコードを記録するために、システム テーブル[`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を追加します。
 
     詳細については、 [遅いクエリを特定する](/identify-slow-queries.md) 、 [明細書要約表](/statement-summary-tables.md) 、 [リソース管理の主要な監視指標](/grafana-resource-control-dashboard.md)を参照してください。
@@ -250,7 +250,7 @@ TiDB バージョン: 7.6.0
 | TiKV           | [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)                                                                           | 修正済み     | Titanで値を圧縮するために使用されるアルゴリズム。単位はvalueです。TiDB v7.6.0以降、デフォルトの圧縮アルゴリズムは`zstd`です。                                                                                                                                           |
 | TiKV           | [`rocksdb.defaultcf.titan.min-blob-size`](/tikv-configuration-file.md#min-blob-size)                                                                   | 修正済み     | TiDB v7.6.0以降、新規クラスターのデフォルト値は`32KB`です。v7.6.0にアップグレードする既存のクラスターの場合、デフォルト値は`1KB`ままです。                                                                                                                                    |
 | TiKV           | [`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled)                                                                                         | 修正済み     | Titanを有効または無効にします。v7.5.0以前のバージョンでは、デフォルト値は`false`です。v7.6.0以降では、新規クラスタのみデフォルト値は`true`です。v7.6.0以降のバージョンにアップグレードされた既存のクラスタでは、元の設定が保持されます。                                                                                 |
-| TiKV           | [`cdc.incremental-scan-concurrency-limit`](/tikv-configuration-file.md#incremental-scan-concurrency-limit-new-in-v760)                                 | 新しく追加された | 実行待ちの履歴データの増分スキャンタスクのキューの最大長を設定します。デフォルト値は`10000`で、最大10000個のタスクをキューに入れて実行できます。                                                                                                                                         |
+| TiKV           | [`cdc.incremental-scan-concurrency-limit`](/tikv-configuration-file.md#incremental-scan-concurrency-limit-new-in-v760)                                 | 新しく追加された | 実行待ちの履歴データの増分スキャンタスクの最大キュー長を設定します。デフォルト値は`10000`で、最大10000個のタスクをキューに入れて実行できます。                                                                                                                                          |
 | TiKV           | [`gc.num-threads`](/tikv-configuration-file.md#num-threads-new-in-v658-v714-v751-and-v760)                                                             | 新しく追加された | `enable-compaction-filter` `false`に設定すると、このパラメータはGCスレッドの数を制御します。デフォルト値は`1`です。                                                                                                                                          |
 | TiKV           | [`raftstore.periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)                             | 新しく追加された | TiKVが定期的なフルコンパクションを開始する特定のタイミングを設定します。デフォルト値`[]`は、定期的なフルコンパクションが無効であることを意味します。                                                                                                                                         |
 | TiKV           | [`raftstore.periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)                         | 新しく追加された | TiKV定期フルコンパクションの最大CPU使用率を制限します。デフォルト値は`0.1`です。                                                                                                                                                                         |
@@ -315,7 +315,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   ディスクパフォ​​ーマンスジッターによる読み取りレイテンシーへの影響を軽減[＃8583](https://github.com/pingcap/tiflash/issues/8583) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   バックグラウンド GC タスクによる読み取りおよび書き込みタスクのレイテンシーへの影響を軽減します[＃8650](https://github.com/pingcap/tiflash/issues/8650) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   ストレージとコンピューティングの分離アーキテクチャで同一のデータ読み取り操作をマージして、高同時実行[＃6834](https://github.com/pingcap/tiflash/issues/6834) @ [ジンヘリン](https://github.com/JinheLin)でのデータスキャンパフォーマンスを向上させることをサポートします。
-    -   `JOIN ON` [＃47424](https://github.com/pingcap/tidb/issues/47424) @ [ゲンリキ](https://github.com/gengliqi)にJOIN KEYの等価条件のみが含まれている場合の`SEMI JOIN`と`LEFT OUTER SEMIJOIN`実行パフォーマンスを最適化します。
+    -   `JOIN ON` [＃47424](https://github.com/pingcap/tidb/issues/47424) @ [ゲンリチ](https://github.com/gengliqi)にJOIN KEYの等価条件のみが含まれている場合の`SEMI JOIN`と`LEFT OUTER SEMIJOIN`実行パフォーマンスを最適化します。
 
 -   ツール
 
@@ -338,7 +338,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   TiDB Lightning
 
         -   安定性を高めるために複数のPDアドレスの設定をサポート[＃49515](https://github.com/pingcap/tidb/issues/49515) @ [ミッタルリシャブ](https://github.com/mittalrishabh)
-        -   パフォーマンスを向上させるために、ローカルファイルのソートのI/Oブロックサイズを制御する`block-size`パラメータの設定をサポートします[＃45037](https://github.com/pingcap/tidb/issues/45037) @ [ミッタルリシャブ](https://github.com/mittalrishabh)
+        -   パフォーマンスを向上させるために、ローカルファイルのソート時にI/Oブロックサイズを制御する`block-size`パラメータの設定をサポート[＃45037](https://github.com/pingcap/tidb/issues/45037) @ [ミッタルリシャブ](https://github.com/mittalrishabh)
 
 ## バグ修正 {#bug-fixes}
 
@@ -450,10 +450,10 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   `ColumnRef in (Literal, Func...)` [＃8631](https://github.com/pingcap/tiflash/issues/8631) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました
     -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlashpanic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   分散storageおよびコンピューティングアーキテクチャ[＃8519](https://github.com/pingcap/tiflash/issues/8519) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)で、 TiFlash がオブジェクトstorageデータの GC 所有者を選択できない可能性がある問題を修正しました。
-    -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイト[＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [ゲンリキ](https://github.com/gengliqi)を占めることができない問題を修正しました。
+    -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイト[＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [ゲンリチ](https://github.com/gengliqi)を占めることができない問題を修正しました。
     -   `ENUM`値が 0 [＃8311](https://github.com/pingcap/tiflash/issues/8311) @ [ソロツグ](https://github.com/solotzg)の場合にTiFlash が`ENUM`誤って処理する問題を修正しました
     -   `INET_NTOA()`式[＃8211](https://github.com/pingcap/tiflash/issues/8211) @ [ソロツグ](https://github.com/solotzg)の非互換性の問題を修正
-    -   ストリーム読み取り[＃8505](https://github.com/pingcap/tiflash/issues/8505) @ [ゲンリキ](https://github.com/gengliqi)中に複数のパーティション テーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。
+    -   ストリーム読み取り[＃8505](https://github.com/pingcap/tiflash/issues/8505) @ [ゲンリチ](https://github.com/gengliqi)中に複数のパーティション テーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。
     -   短いクエリが正常に実行され、過剰な情報ログ[＃8592](https://github.com/pingcap/tiflash/issues/8592) @ [ウィンドトーカー](https://github.com/windtalker)が出力される問題を修正しました。
     -   TiFlashが停止したときにクラッシュする可能性がある問題を修正[＃8550](https://github.com/pingcap/tiflash/issues/8550) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   定数文字列パラメータ[＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [ウィンドトーカー](https://github.com/windtalker)を含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。

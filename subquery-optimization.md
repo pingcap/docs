@@ -9,9 +9,10 @@ summary: サブクエリに関連する最適化を理解します。
 
 サブクエリは通常、次のような状況で使用されます。
 
+-   `... </=/!=/>/ ALL (SELECT ... FROM ...)`
 -   `NOT IN (SELECT ... FROM ...)`
--   `NOT EXISTS (SELECT ... FROM ...)`
 -   `IN (SELECT ... FROM ..)`
+-   `NOT EXISTS (SELECT ... FROM ...)`
 -   `EXISTS (SELECT ... FROM ...)`
 -   `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
@@ -42,7 +43,7 @@ summary: サブクエリに関連する最適化を理解します。
 
 この場合、 `IN`のサブクエリは`SELECT ... FROM ... GROUP ...`に書き換えられ、その後`JOIN`の通常形式に書き換えられます。
 
-例えば、 `select * from t1 where t1.a in (select t2.a from t2)` `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`に書き換えられます。ここでの`DISTINCT`属性は、 `t2.a` `UNIQUE`属性を持つ場合、自動的に除去されます。
+例えば、 `select * from t1 where t1.a in (select t2.a from t2)`は`select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`に書き換えられます。ここでの`DISTINCT`属性は、 `t2.a` `UNIQUE`属性を持つ場合、自動的に除去されます。
 
 ```sql
 explain select * from t1 where t1.a in (select t2.a from t2);
@@ -61,7 +62,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えを行わないと、t2を駆動テーブルとして`index join`のクエリを使用することが不可能になるためです。ただし、書き換え中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えるという欠点があります。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
+この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えを行わないと、t2を駆動テーブルとして`index join`のサブクエリを使用することが不可能になるためです。ただし、書き換え中に集計を自動的に削除できず、 `t2`番目のテーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えるという欠点があります。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)が使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
 ## <code>EXISTS</code>サブクエリと<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 

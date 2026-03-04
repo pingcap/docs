@@ -7,7 +7,7 @@ summary: キーワードと予約語
 
 この記事では、TiDB のキーワード、予約語と非予約語の違いを紹介し、クエリのすべてのキーワードをまとめます。
 
-キーワードとは、SQL文において特別な意味を持つ単語の[`UPDATE`](/sql-statements/sql-statement-update.md) [`SELECT`](/sql-statements/sql-statement-select.md) [`DELETE`](/sql-statements/sql-statement-delete.md)キーワードの中には、直接識別子として使用できるものもあり、これらは**非予約キーワード**と呼ばれます。また、識別子として使用する前に特別な処理が必要なものもあり、これらは**予約キーワード**と呼ばれます。
+キーワードとは、SQL文において特別な意味を持つ単語のことです（例： [`SELECT`](/sql-statements/sql-statement-select.md) [`DELETE`](/sql-statements/sql-statement-delete.md) 。キーワードの中には、直接識別子として使用できるもの[`UPDATE`](/sql-statements/sql-statement-update.md)あり、これらは**非予約キーワード**と呼ばれます。また、識別子として使用する前に特別な処理が必要なものもあり、これらは**予約キーワード**と呼ばれます。
 
 予約語を識別子として使用するには、バッククォート`` ` ``で囲む必要があります。
 
@@ -23,7 +23,7 @@ CREATE TABLE `select` (a INT);
 
     Query OK, 0 rows affected (0.09 sec)
 
-予約されていないキーワードにはバックティックは必要ありません`BEGIN`や`END`など)。これらは次のステートメントで識別子として正常に使用できます。
+予約されていないキーワードにはバックティックは必要ありません ( `BEGIN`や`END`など)。これらは次のステートメントで識別子として正常に使用できます。
 
 ```sql
 CREATE TABLE `select` (BEGIN int, END int);
@@ -41,7 +41,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 
 v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)テーブルにキーワードの完全なリストを提供します。
 
-システム変数[`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function)使用すると、 [ウィンドウ関数](/functions-and-operators/window-functions.md)内のキーワードが構文ツリーで有効になるかどうかを制御できます。 `tidb_enable_window_function`を`OFF`に設定すると、ウィンドウ関数内の単語はキーワードとして扱われなくなります。
+システム変数[`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function)を使用すると、 [ウィンドウ関数](/functions-and-operators/window-functions.md)内のキーワードが構文ツリーで有効になるかどうかを制御できます。 `tidb_enable_window_function`を`OFF`に設定すると、ウィンドウ関数内の単語はキーワードとして扱われなくなります。
 
 ## キーワードリスト {#keyword-list}
 
@@ -57,6 +57,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   管理者
 -   アドバイス
 -   後
+-   親和性
 -   に対して
 -   前
 -   アルゴリズム
@@ -122,7 +123,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   因果関係
 -   鎖
 -   チェンジ（R）
--   CHAR（R）
+-   チャー（R）
 -   キャラクター（R）
 -   文字セット
 -   チェック（R）
@@ -135,7 +136,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   クライアントエラーの概要
 -   近い
 -   クラスタ
--   クラスター化された
+-   クラスター化
 -   CMスケッチ
 -   合体
 -   収集（R）
@@ -159,8 +160,8 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   一貫性のある
 -   制約（R）
 -   コンテクスト
--   続行（R）
--   変換（R）
+-   続行 (R)
+-   変換 (R)
 -   相関
 -   CPU
 -   クリエイト（R）
@@ -176,7 +177,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   現在
 -   現在の日付（R）
 -   現在の役割（R）
--   現在の時刻（R）
+-   現在の時間（R）
 -   CURRENT_TIMESTAMP (R)
 -   現在のユーザー (R)
 -   カーソル（R）
@@ -191,7 +192,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   日時
 -   日
 -   曜日_時間（R）
--   デイ_マイクロセカンド（R）
+-   DAY_MICROSECOND (R)
 -   曜日_分（R）
 -   DAY_SECOND（R）
 -   DDL
@@ -206,8 +207,8 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   DENSE_RANK (Rウィンドウ)
 -   依存
 -   深さ
--   説明（R）
--   記述する（R）
+-   説明 (R)
+-   記述する (R)
 -   ダイジェスト
 -   ディレクトリ
 -   無効にする
@@ -248,7 +249,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   イベント
 -   イベント
 -   進化
--   除く（R）
+-   （R）を除く
 -   交換
 -   エクスクルーシブ
 -   実行する
@@ -277,12 +278,12 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   続く
 -   賛成（R）
 -   フォース（R）
--   外国（R）
+-   外国語（R）
 -   形式
 -   見つかった
--   （R）より
+-   （R）から
 -   満杯
--   FULLTEXT (R)
+-   フルテキスト（R）
 -   関数
 
 <a id="G" class="letter" href="#G">G</a>
@@ -307,7 +308,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   歴史
 -   ホスト
 -   時間
--   時間_マイクロ秒（R）
+-   時間_マイクロ秒 (R)
 -   時_分（R）
 -   時間_秒（R）
 -   ヒポ
@@ -318,7 +319,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   IF（R）
 -   無視（R）
 -   統計を無視
--   アイライク（R）
+-   ILIKE（R）
 -   輸入
 -   輸入品
 -   IN（R）
@@ -376,7 +377,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   ラストバル
 -   LEAD（Rウィンドウ）
 -   リーディング（右）
--   退出（R）
+-   離脱（R）
 -   左（右）
 -   少ない
 -   レベル
@@ -392,7 +393,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   ローカルタイムスタンプ (R)
 -   位置
 -   ロック（R）
--   ロック済み
+-   ロックされています
 -   ログ
 -   ロング（右）
 -   ロングブロブ（R）
@@ -401,11 +402,12 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 
 <a id="M" class="letter" href="#M">M</a>
 
+-   マスキング
 -   マスター
 -   マッチ（R）
 -   マックスバリュー（R）
 -   1時間あたりの最大接続数
--   MAX_IDXNUM
+-   最大IDXNUM
 -   最大分
 -   1時間あたりの最大クエリ数
 -   最大行数
@@ -421,7 +423,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   マイクロ秒
 -   ミドルイント（R）
 -   分
--   分_マイクロ秒（R）
+-   分_マイクロ秒 (R)
 -   分_秒（R）
 -   最小値
 -   MIN_ROWS
@@ -453,21 +455,21 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   待ってください
 -   バイナリログへの書き込みなし (R)
 -   NTH_VALUE (Rウィンドウ)
--   NTILE（Rウィンドウ）
+-   NTILE (R-ウィンドウ)
 -   ヌル（R）
--   ヌル
+-   NULLS
 -   数値（R）
--   ネヴァルチャー
+-   NVARCHAR
 
 <a id="O" class="letter" href="#O">お</a>
 
--   の（右）
+-   の（R）
 -   オフ
 -   オフセット
 -   OLTP_読み取り専用
 -   OLTP_読み取り_書き込み
 -   OLTP_書き込み専用
--   オン（R）
+-   オン（右）
 -   複製オン
 -   オンライン
 -   のみ
@@ -497,12 +499,13 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   パスワードロック時間
 -   一時停止
 -   パーセント
--   PERCENT_RANK (Rウィンドウ)
+-   PERCENT_RANK（Rウィンドウ）
 -   PER_DB
 -   テーブルごと
 -   悲観的
 -   プラグイン
 -   ポイント
+-   ポリシー
 -   ポリシー
 -   前項
 -   プレシジョン（R）
@@ -576,7 +579,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   ルーティーン
 -   ROW（右）
 -   行数
--   行フォーマット
+-   ROW_FORMAT
 -   ROW_NUMBER (Rウィンドウ)
 -   ROWS (Rウィンドウ)
 -   RTREE
@@ -596,7 +599,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   セカンダリアンロード
 -   安全
 -   セレクト（R）
--   TIKVに資格情報を送信する
+-   TIKVに資格情報を送信
 -   セパレーター
 -   順序
 -   シリアル
@@ -604,7 +607,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   セッション
 -   セッション状態
 -   セット（R）
--   SETVAL
+-   設定値
 -   シャード行IDビット
 -   共有
 -   共有
@@ -630,16 +633,16 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   SQL_NO_CACHE
 -   SQL_SMALL_RESULT (R)
 -   SQL_TSI_DAY
--   SQL_TSI_HOUR
+-   SQL_TSI_時間
 -   SQL_TSI_分
 -   SQL_TSI_MONTH
 -   SQL_TSI_QUARTER
 -   SQL_TSI_SECOND
 -   SQL_TSI_WEEK
 -   SQL_TSI_YEAR
--   SQL例外 (R)
--   SQL状態 (R)
--   SQL警告 (R)
+-   SQL例外（R）
+-   SQL状態（R）
+-   SQL警告（R）
 -   SSL（R）
 -   始める
 -   スターティング（R）
@@ -647,7 +650,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   統計
 -   STATS_AUTO_RECALC
 -   統計バケット
--   統計_列_選択
+-   統計列選択
 -   統計列リスト
 -   統計_拡張
 -   健康状態
@@ -655,10 +658,10 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   統計がロックされています
 -   統計メタ
 -   統計オプション
--   統計_永続性
+-   統計_永続
 -   統計サンプルページ
 -   統計サンプルレート
--   統計_トップ
+-   統計_TOPN
 -   状態
 -   ストレージ
 -   保管済み（R）
@@ -689,11 +692,11 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   TIDB
 -   TIDB_CURRENT_TSO (R)
 -   ティフラッシュ
--   TIKV_IMPORTER
+-   TIKV_インポーター
 -   時間
 -   タイムスタンプ
 -   タイニーブロブ（R）
--   タイニーイント（R）
+-   タイニーント（R）
 -   タイニーテキスト（R）
 -   宛先（右）
 -   トークン発行者
@@ -733,7 +736,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   ユーザー
 -   (R) の使用
 -   UTC_DATE (R)
--   UTC_TIME（R）
+-   UTC_TIME (R)
 -   UTC_TIMESTAMP (R)
 
 <a id="V" class="letter" href="#V">V</a>
@@ -762,7 +765,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   どこ（R）
 -   （R）の間
 -   幅
--   WINDOW（R-ウィンドウ）
+-   WINDOW（R-Window）
 -   ウィズ（R）
 -   WITH_SYS_TABLE
 -   それなし

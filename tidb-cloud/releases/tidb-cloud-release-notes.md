@@ -8,6 +8,24 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2026年3月3日 {#march-3-2026}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   Amazon S3 シンクの Changefeeds は、認証に AWS ロール ARN を使用することをサポートします。
+
+        既存のAK/SK認証方法に加え、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでIAMロール ARN を使用して Amazon S3 シンクの changefeed を設定できるようになりました。この機能により、有効期間の短い認証情報と自動ローテーションが可能になり、セキュリティが強化されます。また、シークレット管理が簡素化され、最小権限のプラクティスもサポートされます。
+
+        詳細については[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
+
+    -   TiKV およびTiFlashのstorage使用量の計算を改良します。
+
+        メトリックおよびアラート システムの TiKV およびTiFlashstorage使用量の計算に WAL ファイルと一時ファイルが組み込まれるようになり、容量と使用量の監視がより正確になりました。
+
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+
 ## 2026年2月10日 {#february-10-2026}
 
 **一般的な変更**
@@ -32,7 +50,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         詳細については、 [Cloud Storage からサンプルデータ (SQL ファイル) をインポートする](/tidb-cloud/import-sample-data.md) 、 [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md) 、 [Cloud Storage から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
 
-    -   セキュリティ追跡を強化するために、 TiDB Cloudのコンソール監査ログに「パブリック エンドポイントの有効化/無効化」イベントを追加します。
+    -   セキュリティ追跡を強化するために、 TiDB Cloudのコンソール監査ログに「 Enable/Disableパブリック エンドポイント」イベントを追加します。
 
 ## 2026年2月3日 {#february-3-2026}
 

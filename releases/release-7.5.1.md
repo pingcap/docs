@@ -34,7 +34,7 @@ TiDB バージョン: 7.5.1
         -   [遅いクエリ](/identify-slow-queries.md) : リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
         -   [明細書要約表](/statement-summary-tables.md) : リソース グループ名、RU 消費量、リソースの待機時間を追加します。
         -   システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費されたリソース量[ロシア](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後の文のリソース消費量を取得できます。
-        -   リソース グループに基づいてデータベース メトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
+        -   リソース グループに基づいてデータベース メトリックを追加します: QPS/TPS 、実行時間 ( P999/P99 /P95)、障害数、接続数。
 
     -   `CANCEL IMPORT JOB`文を同期文[＃48736](https://github.com/pingcap/tidb/issues/48736) @ [D3ハンター](https://github.com/D3Hunter)に変更します。
 
@@ -50,9 +50,9 @@ TiDB バージョン: 7.5.1
 
     -   空のテーブルにインデックスを追加する速度を向上[＃49682](https://github.com/pingcap/tidb/issues/49682) @ [ジムララ](https://github.com/zimulala)
 
--   ティクブ
+-   TiKV
 
-    -   低速ストア検出アルゴリズムを強化し、感度を向上させ、特に集中的な読み取りおよび書き込み負荷のシナリオで誤検出率を低減します[＃15909](https://github.com/tikv/tikv/issues/15909) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   低速ストア検出アルゴリズムを強化し、感度を向上させ、特に集中的な読み取りおよび書き込み負荷のシナリオで誤検出率を低減します[＃15909](https://github.com/tikv/tikv/issues/15909) @ [リクックスサシネーター](https://github.com/LykxSassinator)
 
 -   TiFlash
 
@@ -170,7 +170,7 @@ TiDB バージョン: 7.5.1
     -   [＃15817](https://github.com/tikv/tikv/issues/15817) @ [コナー1996](https://github.com/Connor1996)にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました
     -   解決済みのTSが2時間ブロックされる可能性がある問題を修正[＃11847](https://github.com/tikv/tikv/issues/11847) [＃15520](https://github.com/tikv/tikv/issues/15520) [＃39130](https://github.com/pingcap/tidb/issues/39130) @ [金星の上](https://github.com/overvenus)
     -   `cast_duration_as_time`誤った結果を返す可能性がある問題を修正[＃16211](https://github.com/tikv/tikv/issues/16211) @ [ゲンリキ](https://github.com/gengliqi)
-    -   コーナーケース（ディスクI/O操作がブロックされている場合など）でTiKVがハングし、可用性[＃16368](https://github.com/tikv/tikv/issues/16368) @ [LykxSassinator](https://github.com/LykxSassinator)に影響する問題を修正しました。
+    -   コーナーケース（たとえば、ディスクI/O操作がブロックされている場合）で TiKV がハングし、可用性[＃16368](https://github.com/tikv/tikv/issues/16368) @ [LykxSassinator](https://github.com/LykxSassinator)に影響する問題を修正しました。
 
 -   PD
 

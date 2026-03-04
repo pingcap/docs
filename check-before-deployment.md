@@ -383,8 +383,8 @@ sudo systemctl enable ntpd.service
 
 -   storage媒体の[I/Oスケジューラ](/tune-operating-system.md#io-scheduler)設定します。
 
-    -   高速SSDstorageの場合、カーネルのデフォルトのI/Oスケジューリング操作によりパフォーマンスが低下する可能性があります。I/Oスケジューラを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはスケジューリングなしでI/O要求をハードウェアに直接渡すことができるため、パフォーマンスが向上します。
-    -   NVMestorageの場合、デフォルトの I/O スケジューラは`none`なので、調整は必要ありません。
+    -   高速SSDstorageの場合、カーネルのデフォルトのI/Oスケジューリング操作によってパフォーマンスが低下する可能性があります。 I/Oスケジューラを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはI/Oリクエストをスケジューリングなしで直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
+    -   NVMestorageの場合、デフォルトのI/Oスケジューラは`none`なので、調整は必要ありません。
 
 -   CPU周波数を動的に制御する[cpufreqモジュール](/tune-operating-system.md#cpufrequency-scaling)の`performance`モードを選択します。CPU周波数を動的な調整なしでサポートされている最高動作周波数に固定すると、パフォーマンスが最大限に発揮されます。
 
@@ -402,9 +402,9 @@ sudo systemctl enable ntpd.service
     >
     > `[always] madvise never`出力された場合、THP が有効になっています。無効にする必要があります。
 
-2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクの I/O スケジューラを確認します。
+2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/O Scheduler を確認します。
 
-    データ ディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行して I/O スケジューラを確認します。
+    データ ディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -415,9 +415,9 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > `noop [deadline] cfq`が出力された場合、ディスクのI/Oスケジューラは`deadline`モードです。これを`noop`に変更する必要があります。
+    > `noop [deadline] cfq`出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
 
-    データ ディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行して I/O スケジューラを確認します。
+    データ ディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/nvme[01]*/queue/scheduler
@@ -428,7 +428,7 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > `[none] mq-deadline kyber bfq` 、NVMe デバイスが`none` I/O スケジューラを使用しており、変更の必要がないことを示します。
+    > `[none] mq-deadline kyber bfq` 、NVMe デバイスが`none` I/Oスケジューラを使用しており、変更の必要がないことを示します。
 
 3.  ディスクの`ID_SERIAL`確認するには、次のコマンドを実行します。
 
@@ -509,7 +509,7 @@ sudo systemctl enable ntpd.service
 
             > **注記：**
             >
-            > デバイスが`noop`または`none` I/Oスケジューラを使用している場合は、この手順をスキップしてください。調整済みプロファイルではスケジューラの設定は必要ありません。
+            > デバイスがI/O `noop`または`none`スケジューラを使用している場合は、この手順をスキップしてください。tuned プロファイルではスケジューラの設定は必要ありません。
 
             ```bash
             tuned-adm profile balanced-tidb-optimal
@@ -565,7 +565,7 @@ sudo systemctl enable ntpd.service
             echo never > /sys/kernel/mm/transparent_hugepage/defrag
             ```
 
-        5.  udev スクリプトで I/O スケジューラを設定します。
+        5.  udev スクリプトでI/Oスケジューラを設定します。
 
             ```bash
             vi /etc/udev/rules.d/60-tidb-schedulers.rules
@@ -581,7 +581,7 @@ sudo systemctl enable ntpd.service
 
             > **注記：**
             >
-            > デバイスが`noop`または`none` I/Oスケジューラを使用している場合は、この手順をスキップしてください。udevルールの設定は必要ありません。
+            > デバイスがI/Oスケジューラ`noop`または`none`を使用している場合は、この手順をスキップしてください。udev ルールの設定は必要ありません。
 
             ```bash
             udevadm control --reload-rules
@@ -618,7 +618,7 @@ sudo systemctl enable ntpd.service
 
         always madvise [never]
 
-7.  次のコマンドを実行して、データ ディレクトリが配置されているディスクの I/O スケジューラを確認します。
+7.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -674,12 +674,17 @@ sudo systemctl enable ntpd.service
 
 ## SSH相互信頼とパスワードなしのsudoを手動で設定する {#manually-configure-the-ssh-mutual-trust-and-sudo-without-password}
 
-このセクションでは、SSH相互信頼とパスワードなしのsudoを手動で設定する方法について説明します。デプロイメントにはTiUPの使用をお勧めします。TiUPはSSH相互信頼とパスワードなしのログインを自動的に設定します。TiUPを使用してTiDBクラスターをデプロイする場合は、このセクションを無視してください。
+このセクションでは、コントロールマシンからターゲットノードへのSSH相互信頼を手動で設定する方法について説明します。TiUPデプロイメントツールを使用する場合は、 TiUP相互信頼とパスワード不要のログインが自動的に設定されるため、このセクションはスキップできます。
+
+SSH相互信頼を設定する際は、すべてのターゲットノードで`tidb`ユーザーを作成して使用することをお勧めします。通常、TiDBではすべてのノードで同じユーザーを使用する必要はありません。ただし、以下のシナリオではユーザーの一貫性に注意してください。
+
+-   バックアップと復元 (BR) の使用: すべてのBRおよび TiDB 関連の操作を同じユーザーで実行することを強くお勧めします。
+-   NFSなどのネットワークstorageを使用する場合：ユーザーがすべてのノードで同じUIDとGIDを持っていることを確認してください。NFSは、基盤となるUIDとGIDに基づいてファイルアクセス権限を決定します。ノード間でUIDまたはGIDが異なる場合、またはBRを実行しているユーザーがTiDBを実行しているユーザーと異なる場合（特に`sudo`権限がない場合）、バックアップまたはリストア操作中に権限拒否エラーが発生する可能性があります。
 
 1.  それぞれ`root`ユーザー アカウントを使用してターゲット マシンにログインし、 `tidb`ユーザーを作成してログイン パスワードを設定します。
 
     ```bash
-    useradd tidb && \
+    useradd -m -d /home/tidb tidb
     passwd tidb
     ```
 

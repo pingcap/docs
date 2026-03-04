@@ -102,9 +102,9 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   データ変更操作[＃53951](https://github.com/pingcap/tidb/issues/53951) @ [qw4990](https://github.com/qw4990)を含むトランザクションで仮想列を持つテーブルをクエリすると、TiDB が誤ったクエリ結果を返す可能性がある問題を修正しました
     -   `auth_socket`認証プラグイン[＃54031](https://github.com/pingcap/tidb/issues/54031) @ [lcwangchao](https://github.com/lcwangchao)を使用しているときに、TiDB が認証されていないユーザーの接続を拒否できないことがある問題を修正しました。
     -   クエリに非相関サブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適でないプラン[＃54213](https://github.com/pingcap/tidb/issues/54213) @ [qw4990](https://github.com/qw4990)になる可能性がある問題を修正しました。
-    -   BIGINT 以外の符号なし整数が文字列/小数点[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)と比較されたときに誤った結果を生成する可能性がある問題を修正しました
+    -   strings/decimals [＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)と比較すると、BIGINT 以外の符号なし整数が誤った結果を生成する可能性がある問題を修正しました。
     -   分散実行フレームワーク (DXF) [＃53281](https://github.com/pingcap/tidb/issues/53281) @ [ジムララ](https://github.com/zimulala)を使用してインデックスを追加するときに設定`max-index-length`で TiDB がpanicになる問題を修正しました
-    -   クエリ内の特定のフィルタ条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラー[＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) [＃53594](https://github.com/pingcap/tidb/issues/53594) [＃53603](https://github.com/pingcap/tidb/issues/53603) @ [ヤンケオ](https://github.com/YangKeao)を報告する可能性がある問題を修正しました
+    -   クエリ内の特定のフィルター条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラー[＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) [＃53594](https://github.com/pingcap/tidb/issues/53594) [＃53603](https://github.com/pingcap/tidb/issues/53603) @ [ヤンケオ](https://github.com/YangKeao)を報告する可能性がある問題を修正しました
     -   再帰CTEクエリが無効なポインタ[＃54449](https://github.com/pingcap/tidb/issues/54449) @ [ホーキングレイ](https://github.com/hawkingrei)を生成する可能性がある問題を修正しました
     -   述語[＃45783](https://github.com/pingcap/tidb/issues/45783) @ [ホーキングレイ](https://github.com/hawkingrei)の`Longlong`型のオーバーフローの問題を修正
     -   `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列[＃53872](https://github.com/pingcap/tidb/issues/53872) @ [qw4990](https://github.com/qw4990)を見つけられない問題を修正しました
@@ -130,7 +130,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   **gRPC リクエスト ソースの継続時間**メトリックが監視ダッシュボード[＃17133](https://github.com/tikv/tikv/issues/17133) @ [キング・ディラン](https://github.com/King-Dylan)に誤って表示される問題を修正しました
     -   tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報[＃17037](https://github.com/tikv/tikv/issues/17037) @ [栄光](https://github.com/glorv)が含まれていない問題を修正しました
     -   `raftstore.periodic-full-compact-start-times`構成項目をオンラインで変更すると、TiKVがpanicを起こす可能性がある問題を修正しました[＃17066](https://github.com/tikv/tikv/issues/17066) @ [スペードA-タン](https://github.com/SpadeA-Tang)
-    -   破損したRaftデータ スナップショット[＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)を適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。
+    -   破損したRaftデータ スナップショット[＃15292](https://github.com/tikv/tikv/issues/15292) @ [リクックスサシネーター](https://github.com/LykxSassinator)を適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。
     -   キャッシュエントリが永続化される前に解放すると TiKV がpanic[＃17040](https://github.com/tikv/tikv/issues/17040) @ [栄光](https://github.com/glorv)を起こす問題を修正しました
 
 -   PD

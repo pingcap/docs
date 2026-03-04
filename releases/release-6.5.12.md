@@ -13,7 +13,7 @@ TiDBバージョン: 6.5.12
 
 ## 互換性の変更 {#compatibility-changes}
 
--   openEuler 22.03 LTS SP3/SP4 オペレーティングシステムをサポートします。詳細については、 [OSおよびプラットフォームの要件](https://docs.pingcap.com/tidb/v6.5/hardware-and-software-requirements#os-and-platform-requirements)参照してください。
+-   openEuler 22.03 LTS SP3/SP4オペレーティングシステムをサポートします。詳細については、 [OSおよびプラットフォームの要件](https://docs.pingcap.com/tidb/v6.5/hardware-and-software-requirements#os-and-platform-requirements)参照してください。
 -   [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-6.5/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を 2048 に設定して、過剰な履歴タスク[＃55711](https://github.com/pingcap/tidb/issues/55711) @ [ジョッカウ](https://github.com/joccau)による OOM の問題を防止します。
 -   インデックス[＃57156](https://github.com/pingcap/tidb/issues/57156) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)を追加する際の取り込みフェーズの最大速度を制限する新しいシステム変数[`tidb_ddl_reorg_max_write_speed`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_ddl_reorg_max_write_speed-new-in-v6512)を追加します。
 
@@ -23,7 +23,7 @@ TiDBバージョン: 6.5.12
 
     -   読み取りタイムスタンプ[＃57786](https://github.com/pingcap/tidb/issues/57786) @ [ミョンケミンタ](https://github.com/MyonKeminta)の有効性チェックを強化
 
--   TiKV
+-   ティクブ
 
     -   無効な`max_ts`更新の検出メカニズムを追加[＃17916](https://github.com/tikv/tikv/issues/17916) @ [エキシウム](https://github.com/ekexium)
 
@@ -64,7 +64,7 @@ TiDBバージョン: 6.5.12
     -   `INSERT ... ON DUPLICATE KEY`文が`mysql_insert_id` [＃55965](https://github.com/pingcap/tidb/issues/55965) @ [天菜麻緒](https://github.com/tiancaiamao)と互換性がない問題を修正
     -   クエリ条件`column IS NULL` [＃56116](https://github.com/pingcap/tidb/issues/56116) @ [ホーキングレイ](https://github.com/hawkingrei)でユニークインデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。
     -   `IndexLookUp`演算子のメモリの一部が[＃56440](https://github.com/pingcap/tidb/issues/56440) @ [wshwsh12](https://github.com/wshwsh12)で追跡されない問題を修正
-    -   TiDBの内部コルーチン[＃57798](https://github.com/pingcap/tidb/issues/57798) [＃56053](https://github.com/pingcap/tidb/issues/56053) @ [フィシュウ](https://github.com/fishiu) @ [天菜麻緒](https://github.com/tiancaiamao)で発生する可能性のあるデータ競合問題を修正しました
+    -   TiDBの内部コルーチン[＃57798](https://github.com/pingcap/tidb/issues/57798) [＃56053](https://github.com/pingcap/tidb/issues/56053) @ [魚類](https://github.com/fishiu) @ [天菜麻緒](https://github.com/tiancaiamao)で発生する可能性のあるデータ競合問題を修正しました
     -   クエリに利用可能なインデックスマージ実行プラン[＃56217](https://github.com/pingcap/tidb/issues/56217) @ [アイリンキッド](https://github.com/AilinKid)がある場合に`read_from_storage`ヒントが有効にならない可能性がある問題を修正しました
     -   エイリアス[＃56726](https://github.com/pingcap/tidb/issues/56726) @ [ホーキングレイ](https://github.com/hawkingrei)を持つマルチテーブル`DELETE`ステートメントに対して実行プラン バインディングを作成できない問題を修正しました。
     -   異常終了時に`INDEX_HASH_JOIN`アップする可能性がある問題を修正[＃54055](https://github.com/pingcap/tidb/issues/54055) @ [wshwsh12](https://github.com/wshwsh12)
@@ -86,7 +86,7 @@ TiDBバージョン: 6.5.12
     -   統計情報を同期的にロードする際に発生するタイムアウトが正しく処理されない可能性がある問題を修正[＃57710](https://github.com/pingcap/tidb/issues/57710) @ [ホーキングレイ](https://github.com/hawkingrei)
     -   CTE [＃54582](https://github.com/pingcap/tidb/issues/54582) @ [ホーキングレイ](https://github.com/hawkingrei)でデータベース名を解析するときに誤ったデータベース名が返される可能性がある問題を修正しました
     -   無効なデータバインディング[＃58016](https://github.com/pingcap/tidb/issues/58016) @ [qw4990](https://github.com/qw4990)により、TiDB が起動時にpanic可能性がある問題を修正しました
-    -   特定の極端なケースでコスト推定によって無効な INF/NaN 値が生成される可能性があり、その結果、結合したテーブルの再配置の結果が不正確になる可能性がある問題を修正しました[＃56704](https://github.com/pingcap/tidb/issues/56704) @ [ウィノロス](https://github.com/winoros)
+    -   特定の極端なケースでコスト見積もりによって無効なINF/NaN値が生成される可能性があり、その結果結合したテーブルの再配置 の結果が不正確になる可能性がある問題を修正しました[＃56704](https://github.com/pingcap/tidb/issues/56704) @ [ウィノロス](https://github.com/winoros)
     -   統計ファイルに NULL 値[＃53966](https://github.com/pingcap/tidb/issues/53966) @ [キング・ディラン](https://github.com/King-Dylan)が含まれている場合、統計を手動でロードすると失敗する可能性がある問題を修正しました。
     -   同じ名前のビューを2つ作成してもエラーが報告されない問題を修正[＃58769](https://github.com/pingcap/tidb/issues/58769) @ [天菜麻緒](https://github.com/tiancaiamao)
     -   仮想生成列の依存関係に属性`ON UPDATE`を持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[＃56829](https://github.com/pingcap/tidb/issues/56829) @ [ジョーチェン](https://github.com/joechenrh)
@@ -104,7 +104,7 @@ TiDBバージョン: 6.5.12
     -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [ゲンリキ](https://github.com/gengliqi)
     -   領域をマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[＃17840](https://github.com/tikv/tikv/issues/17840) @ [栄光](https://github.com/glorv)
     -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) [LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
-    -   GBK/GB18030エンコードデータ[＃17618](https://github.com/tikv/tikv/issues/17618) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)の処理時にエンコードが失敗する可能性がある問題を修正
+    -   GBK/GB18030でエンコードされたデータ[＃17618](https://github.com/tikv/tikv/issues/17618) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)を処理するときにエンコードが失敗する可能性がある問題を修正しました
 
 -   PD
 
@@ -141,7 +141,7 @@ TiDBバージョン: 6.5.12
 
         -   TiKV [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [トリスタン1900](https://github.com/Tristan1900)にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BR が復元に失敗する問題を修正しました。
         -   `br log status --json` [＃57959](https://github.com/pingcap/tidb/issues/57959) @ [リーヴルス](https://github.com/Leavrth)を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。
-        -   ログバックアップ中のPDLeaderI/Oレイテンシーによりチェックポイントレイテンシー[＃58574](https://github.com/pingcap/tidb/issues/58574) @ [ユジュンセン](https://github.com/YuJuncen)が増加する可能性がある問題を修正しました。
+        -   ログバックアップ中のPDLeaderI/Oのレイテンシーにより、チェックポイントのレイテンシー[＃58574](https://github.com/pingcap/tidb/issues/58574) @ [ユジュンセン](https://github.com/YuJuncen)が増加する可能性がある問題を修正しました。
         -   `tiup br restore`コマンドがデータベースまたはテーブルの復元中にターゲット クラスタ テーブルが既に存在するかどうかのチェックを省略し、既存のテーブル[＃58168](https://github.com/pingcap/tidb/issues/58168) @ [リドリスR](https://github.com/RidRisR)を上書きする可能性がある問題を修正しました。
         -   アドバンサー所有者が[＃58031](https://github.com/pingcap/tidb/issues/58031) @ [3ポイントシュート](https://github.com/3pointer)に切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。
         -   ログバックアップが残留ロックをすぐに解決できず、チェックポイントが[＃57134](https://github.com/pingcap/tidb/issues/57134) @ [3ポイントシュート](https://github.com/3pointer)に進まない問題を修正しました。
@@ -153,14 +153,14 @@ TiDBバージョン: 6.5.12
 
         -   TiCDC が`RENAME TABLE`操作[＃11946](https://github.com/pingcap/tiflow/issues/11946) @ [wk989898](https://github.com/wk989898)中にフィルタリングに誤ったテーブル名を使用する問題を修正しました
         -   Avroプロトコル[＃11994](https://github.com/pingcap/tiflow/issues/11994) @ [wk989898](https://github.com/wk989898)経由で`default NULL`文を複製するときにTiCDCがエラーを報告する問題を修正
-        -   PDスケールイン[＃12004](https://github.com/pingcap/tiflow/issues/12004) @ [リデジュ](https://github.com/lidezhu)後にTiCDCがPDに正しく接続できない問題を修正
+        -   PDスケールイン[＃12004](https://github.com/pingcap/tiflow/issues/12004) @ [リデズ](https://github.com/lidezhu)後にTiCDCがPDに正しく接続できない問題を修正
         -   チェンジフィードが停止または削除された後に初期スキャンがキャンセルされない問題を修正[＃11638](https://github.com/pingcap/tiflow/issues/11638) @ [3エースショーハンド](https://github.com/3AceShowHand)
         -   アップストリームで新しく追加された列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
         -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが[＃12055](https://github.com/pingcap/tiflow/issues/12055) @ [ホンユニャン](https://github.com/hongyunyan)で停止する可能性がある問題を修正しました。
         -   `CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメント[＃11839](https://github.com/pingcap/tiflow/issues/11839) @ [チャールズ・チャン96](https://github.com/CharlesCheung96)を複製するときに TiCDC がpanic可能性がある問題を修正しました
         -   有効なインデックス[＃11765](https://github.com/pingcap/tiflow/issues/11765) @ [アズドンメン](https://github.com/asddongmen)のないテーブルで`TRUNCATE TABLE` DDL を複製するときに TiCDC がエラーを報告する可能性がある問題を修正しました。
         -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @ [wlwilliamx](https://github.com/wlwilliamx)
-        -   新しい TiKV ノードがクラスター[＃11766](https://github.com/pingcap/tiflow/issues/11766) @ [リデジュ](https://github.com/lidezhu)に追加された後に、変更フィードがスタックする可能性がある問題を修正しました。
+        -   新しい TiKV ノードがクラスター[＃11766](https://github.com/pingcap/tiflow/issues/11766) @ [リデズ](https://github.com/lidezhu)に追加された後に、変更フィードがスタックする可能性がある問題を修正しました。
         -   Sarama クライアントによって再送信された順序外メッセージによって Kafka メッセージの順序が正しくなくなる問題を修正[＃11935](https://github.com/pingcap/tiflow/issues/11935) @ [3エースショーハンド](https://github.com/3AceShowHand)
         -   PullerモジュールのResolved TSレイテンシーモニタリングで誤った値[＃11561](https://github.com/pingcap/tiflow/issues/11561) @ [wlwilliamx](https://github.com/wlwilliamx)が表示される問題を修正しました
         -   やり直しモジュールがエラー[＃11744](https://github.com/pingcap/tiflow/issues/11744) @ [チャールズ・チャン96](https://github.com/CharlesCheung96)を正しく報告できない問題を修正しました

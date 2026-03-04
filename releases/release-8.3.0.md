@@ -13,7 +13,7 @@ TiDB バージョン: 8.3.0
 
 8.3.0 では、次の主な機能と改善が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能/拡張機能</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">スケーラビリティとパフォーマンス</td><td><a href="https://docs.pingcap.com/tidb/v8.3/partitioned-table#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスは、パーティション化されていない列の取得効率を効果的に向上させ、一意のキーにパーティションキーが含まれていなければならないという制約を排除します。この機能により、TiDBパーティションテーブルの利用シナリオが拡張され、データ移行に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v8.3/system-variables#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>演算子のstorageエンジンへのデフォルトのプッシュダウン</a></td><td><code>Projection</code>演算子をstorageエンジンにプッシュダウンすることで、storageノード間の負荷を分散し、ノード間のデータ転送を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v8.3/statistics#collect-statistics-on-some-columns">統計を収集する際に不要な列を無視する</a></td><td>TiDBは、オプティマイザが必要な情報を確実に取得できるという前提のもと、統計収集を高速化し、統計の適時性を向上させ、最適な実行プランが選択されることを保証することで、クラスターのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率を向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs.pingcap.com/tidb/v8.3/tiproxy-overview">TiProxyに組み込まれた仮想IP管理</a></td><td>TiProxyは組み込みの仮想IP管理機能を導入しています。設定により、外部プラットフォームやツールに依存せずに自動仮想IP切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>Feature/Enhancement</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">スケーラビリティとパフォーマンス</td><td><a href="https://docs.pingcap.<span translate="no">com/tidb /v8.3/partitioned-table#global-indexes&quot;&gt;パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスは、パーティション化されていない列の取得効率を効果的に向上させ、一意のキーにパーティションキーが含まれていなければならないという制約を排除します。この機能により、TiDBパーティションテーブルの利用シナリオが拡張され、データ移行に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs.pingcap.<span translate="no">com/tidb /v8.3/system-variables#tidb_opt_projection_push_down-new-in-v610&quot;&gt; <code>Projection</code>子のstorageエンジンへのデフォルトのプッシュダウン</a></td><td><code>Projection</code>演算子をstorageエンジンにプッシュダウンすることで、storageノード間の負荷を分散し、ノード間のデータ転送を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td> <a href="https://docs.pingcap.<span translate="no">com/tidb /v8.3/statistics#collect-statistics-on-some-columns&quot;&gt;統計情報を収集する際に不要な列を無視する</a></td><td>TiDBは、オプティマイザが必要な情報を確実に取得できるという前提のもと、統計収集を高速化し、統計の適時性を向上させ、最適な実行プランが選択されることを保証することで、クラスターのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率を向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs.pingcap.<span translate="no">com/tidb /v8.3/tiproxy-overview&quot;&gt;TiProxy に組み込まれた仮想 IP 管理</a></td><td>TiProxyは組み込みの仮想IP管理機能を導入しています。設定により、外部プラットフォームやツールに依存せずに自動仮想IP切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -71,9 +71,9 @@ TiDB バージョン: 8.3.0
     -   `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
     -   `INFORMATION_SCHEMA.VIEWS`
 
--   パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングをサポートして、クエリパフォーマンスを向上します[＃54209](https://github.com/pingcap/tidb/pull/54209) @ [ミョンス](https://github.com/mjonss)
+-   パーティション式で`EXTRACT(YEAR_MONTH...)`​​関数を使用する場合にパーティションプルーニングをサポートして、クエリパフォーマンスを向上します[＃54209](https://github.com/pingcap/tidb/pull/54209) @ [ミョンス](https://github.com/mjonss)
 
-    以前のバージョンでは、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合、パーティションプルーニングがサポートされず、クエリパフォーマンスが低下していました。v8.3.0以降では、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合でもパーティションプルーニングがサポートされ、クエリパフォーマンスが向上します。
+    以前のバージョンでは、パーティション式で`EXTRACT(YEAR_MONTH...)`​​関数を使用する場合、パーティションプルーニングがサポートされず、クエリパフォーマンスが低下していました。v8.3.0以降では、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合でもパーティションプルーニングがサポートされ、クエリパフォーマンスが向上します。
 
     詳細については[ドキュメント](/partition-pruning.md#scenario-three)参照してください。
 
@@ -262,7 +262,7 @@ TiDB バージョン: 8.3.0
 
 -   TiKV
 
-    -   `async-io`有効になっている場合、 Raftログを書き込むためのバッチポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します[＃16907](https://github.com/tikv/tikv/issues/16907) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   `async-io`有効になっている場合、 Raftログを書き込むためのバッチポリシーを最適化して、ディスクI/O帯域幅リソース[＃16907](https://github.com/tikv/tikv/issues/16907) @ [リクックスサシネーター](https://github.com/LykxSassinator)の消費を削減します。
     -   TiCDC デリゲートおよびダウンストリーム モジュールを再設計して、リージョン部分サブスクリプション[＃16362](https://github.com/tikv/tikv/issues/16362) @ [ヒック](https://github.com/hicqu)をより適切にサポートします。
     -   単一のスロークエリログのサイズを[＃17294](https://github.com/tikv/tikv/issues/17294) @ [コナー1996](https://github.com/Connor1996)に縮小します
     -   新しい監視メトリック`min safe ts` [＃17307](https://github.com/tikv/tikv/issues/17307) @ [ミッタルリシャブ](https://github.com/mittalrishabh)を追加する

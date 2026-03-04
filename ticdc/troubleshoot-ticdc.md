@@ -70,9 +70,9 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
     Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
     Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 
-ダウンストリームが特殊な MySQL 環境 (パブリック クラウド RDS または一部の MySQL 派生バージョン) であり、前述の方法を使用したタイムゾーンのインポートが失敗した場合は、 `time-zone` `time-zone=""`などの空の値に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。
+ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。5 `time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
 
-TiCDCでタイムゾーンを使用する場合は、 `time-zone="Asia/Shanghai"`ように明示的にタイムゾーンを指定することをお勧めします。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone` 、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
+`mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"` 。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
 
 ## TiCDC のアップグレードによって発生した構成ファイルの非互換性の問題をどのように処理すればよいですか? {#how-do-i-handle-the-incompatibility-issue-of-configuration-files-caused-by-ticdc-upgrade}
 

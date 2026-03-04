@@ -20,14 +20,48 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 ## ステップ1. 宛先を設定する {#step-1-configure-destination}
 
-対象のTiDBクラスターのクラスター概要ページに移動します。左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックし、 **「Changefeedの作成」**をクリックして、保存先として**Amazon S3** 、 **GCS** 、または**Azure Blob Storageを**選択します。設定手順は、選択した保存先によって異なります。
+対象のTiDBクラスターのクラスター概要ページに移動します。左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックし、 **「Changefeedの作成」**をクリックして**「宛先」**ページに移動し、クラスターがホストされているクラウドプロバイダーに応じて、 **Amazon S3** 、 **GCS** 、または**Azure Blob Storageを**宛先として選択します。設定プロセスは、選択した宛先によって異なります。
 
 <SimpleTab>
 <div label="Amazon S3">
 
-**Amazon S3**の場合、 **S3エンドポイント**領域に`S3 URI` 、 `Access Key ID` 、 `Secret Access Key`を入力します。S3バケットをTiDBクラスターと同じリージョンに作成します。
+**Amazon S3**の場合、認証には**AWS ロール ARN**または**AWS アクセスキー**を使用できます。セキュリティ強化と管理の容易化のため、 **AWS ロール ARN の**使用をお勧めします。
 
-![s3\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
+**オプション 1: AWS ロール ARN (推奨)**
+
+認証にIAMロールを使用するには、次の手順に従います。
+
+1.  Amazon S3の**「Destination」**ページで、 **S3 URI**を入力します。S3バケットがTiDBクラスターと同じAWSリージョンにあることを確認してください。
+
+2.  **「バケットアクセス」**で、 **「AWS ロール ARN」**を選択します。
+
+3.  新しいロールARNを作成するには、 **「AWS CloudFormationで新しいロールARNを作成するにはここをクリック**してください」をクリックします。このテンプレートは必要な権限を自動的に設定します。
+
+    ロールを手動で作成する場合は、 **「ロール ARN を手動で作成」**をクリックして、 TiDB Cloudアカウント情報と必要なポリシーを表示します。
+
+4.  IAMロールに、ターゲット バケットに対する少なくとも次の権限があることを確認します。
+
+    -   `s3:ListBucket`
+    -   `s3:PutObject`
+    -   `s3:GetObject`
+    -   `s3:DeleteObject`
+
+5.  生成された**ロール ARN を**対応するフィールドに貼り付けます。
+
+**オプション2: AWSアクセスキー**
+
+> **注記：**
+>
+> アクセスキーとシークレットキー（ AK/SK ）を使用すると、手動で認証情報の管理とローテーションを行う必要があり、セキュリティリスクが高まります。セキュリティを強化するには、代わりに**AWSロールARNを**使用することをお勧めします。
+
+認証にアクセス キーを使用するには、次の手順に従います。
+
+1.  Amazon S3の**「Destination」**ページで、 **S3 URI**を入力します。S3バケットがTiDBクラスターと同じAWSリージョンにあることを確認してください。
+2.  **「バケットアクセス」**で、 **「AWS アクセスキー」**を選択します。
+3.  次のフィールドに入力します。
+
+    -   **アクセスキーID**
+    -   **秘密アクセスキー**
 
 </div>
 <div label="GCS">
@@ -85,7 +119,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7.  TiDB Cloudコンソールで、Changefeed の**[宛先の構成]**ページに移動し、**バケットの gsutil URI**フィールドに入力します。
+7.  TiDB Cloudコンソールで、Changefeed の**宛先**ページに移動し、**バケットの gsutil URI**フィールドに入力します。
 
 </div>
 <div label="Azure Blob Storage">
@@ -126,7 +160,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**[宛先の構成]**ページに移動し、次のフィールドに入力します。
+4.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**宛先**ページに移動し、次のフィールドに入力します。
 
     -   **BLOB URL** : 手順 2 で取得したコンテナー URL を入力します。必要に応じてプレフィックスを追加できます。
     -   **SAS トークン**: 手順 3 で取得した生成された SAS トークンを入力します。
@@ -178,7 +212,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     -   **日付区切り**: 年、月、日に基づいてデータを回転するか、まったく回転しないことを選択します。
     -   **区切り文字**: CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ( `,` )です。
     -   **引用符**: 区切り文字または特殊文字を含む値を囲む文字を指定します。引用符としては通常、二重引用符 ( `"` ) が使用されます。
-    -   **Null/空値**：CSVファイル内でNull値または空値をどのように表現するかを指定します。これは、データの適切な処理と解釈に重要です。
+    -   **Null/Empty値**：CSVファイル内でnullまたは空の値をどのように表現するかを指定します。これは、データを適切に処理および解釈するために重要です。
     -   **コミット Ts を含める**: CSV 行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)含めるかどうかを制御します。
 
     </div>
