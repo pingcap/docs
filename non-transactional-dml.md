@@ -384,7 +384,7 @@ WHERE t.c1 IS NULL;
 To avoid this error, follow these recommendations:
 
 - Avoid using table aliases in non-transactional DML statements. For example, rewrite `t.c1` as `c1` or `t_old.c1`.
-- When specifying the [shard column](#parameters), do not use table aliases. For example, rewrite `BATCH ON t.id` as `BATCH ON db.t_old.id` or `BATCH ON t_old.id`.
+- When specifying the [shard column](#parameter-description), do not use table aliases. For example, rewrite `BATCH ON t.id` as `BATCH ON db.t_old.id` or `BATCH ON t_old.id`.
 - Before execution, use `DRY RUN QUERY` or `DRY RUN` to preview the rewritten statements and verify that they meet your expectations.
 
 ### The actual batch size is not the same as the specified batch size

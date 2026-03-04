@@ -29,7 +29,7 @@ Non-transactional DML, shard column must be fully specified
 
 > **Note:**
 >
-> The `BATCH` statement is internally rewritten and split into multiple DML statements during execution. In the current version, table aliases might not be preserved, which can result in errors such as `Unknown column ... in 'where clause'`. To avoid this issue, do not use table aliases. Before execution, use `DRY RUN QUERY` or `DRY RUN` to preview the split statements before execution. For more information, see [Non-Transactional DML Statements](/non-transactional-dml.md).
+> The `BATCH` statement is internally rewritten and split into multiple DML statements during execution. In the current version, table aliases might not be preserved, which can result in errors such as `Unknown column '<alias>.<column>' in 'where clause'`. To avoid this issue, do not use table aliases. Before execution, use `DRY RUN QUERY` or `DRY RUN` to preview the split statements before execution. For more information, see [Non-Transactional DML Statements](/non-transactional-dml.md).
 
 ## Synopsis
 
