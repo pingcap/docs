@@ -57,4 +57,4 @@ TiDB version: 3.0.20
 
 + PD
 
-    - Fix the issue that too many logs are printed when starting PD and when there are too many stale Regions [#3064](https://github.com/pingcap/pd/pull/3064)
+    - Fix the issue that too many logs are printed when starting PD and when there are too many stale Regions [#3064](https://github.com/pingcap/pd/pull/3064) 

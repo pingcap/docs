@@ -547,4 +547,4 @@ We would like to thank the following contributors from the TiDB community:
 - [lqs](https://github.com/lqs)
 - [pingandb](https://github.com/pingandb)
 - [yorkhellen](https://github.com/yorkhellen)
-- [yujiarista](https://github.com/yujiarista) (First-time contributor)
+- [yujiarista](https://github.com/yujiarista) (First-time contributor) 

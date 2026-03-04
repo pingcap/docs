@@ -110,4 +110,4 @@ TiDB Ansible version: 3.1.0-rc
 
     - Backup & Restore (BR)
 
-        * Fix the issue that BR cannot restore the TiFlash cluster data [#194](https://github.com/pingcap/br/pull/194)
+        * Fix the issue that BR cannot restore the TiFlash cluster data [#194](https://github.com/pingcap/br/pull/194) 

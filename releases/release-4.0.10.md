@@ -107,4 +107,4 @@ TiDB version: 4.0.10
 
         - Fix a bug that the Region is not split because the Region key is incorrectly encoded [#531](https://github.com/pingcap/tidb-lightning/pull/531)
         - Fix the issue that the failure of `CREATE TABLE` might be lost when multiple tables are created [#530](https://github.com/pingcap/tidb-lightning/pull/530)
-        - Fix the issue of `column count mismatch` when using the TiDB-backend [#535](https://github.com/pingcap/tidb-lightning/pull/535)
+        - Fix the issue of `column count mismatch` when using the TiDB-backend [#535](https://github.com/pingcap/tidb-lightning/pull/535) 

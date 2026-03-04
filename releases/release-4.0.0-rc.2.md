@@ -194,4 +194,4 @@ TiDB version: 4.0.0-rc.2
 
     + Backup & Restore (BR)
 
-        - Fix the issue that inserting data might trigger the `duplicate entry` error after BR restores a table with the `auto_random` attribute [#241](https://github.com/pingcap/br/issues/241)
+        - Fix the issue that inserting data might trigger the `duplicate entry` error after BR restores a table with the `auto_random` attribute [#241](https://github.com/pingcap/br/issues/241) 

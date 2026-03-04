@@ -76,4 +76,4 @@ TiDB Ansible version: 3.0.3
 - Remove the Grafana Collector components that are not supported by the current Grafana version [#892](https://github.com/pingcap/tidb-ansible/pull/892)
 - Update TiKV alerting rules [#898](https://github.com/pingcap/tidb-ansible/pull/898)
 - Fix the issue that the generated TiKV configuration misses the `pessimistic-txn` parameter [#911](https://github.com/pingcap/tidb-ansible/pull/911)
-- Update Spark to V2.4.3, and update TiSpark to V2.1.4 that is compatible with Spark V2.4.3 [#913](https://github.com/pingcap/tidb-ansible/pull/913), [#918](https://github.com/pingcap/tidb-ansible/pull/918)
+- Update Spark to V2.4.3, and update TiSpark to V2.1.4 that is compatible with Spark V2.4.3 [#913](https://github.com/pingcap/tidb-ansible/pull/913), [#918](https://github.com/pingcap/tidb-ansible/pull/918) 

@@ -140,4 +140,4 @@ TiDB version: 4.0.13
 
     + TiDB Lightning
 
-        - Fix a bug that TiDB Lightning's TiDB-backend cannot load any data when autocommit is disabled
+        - Fix a bug that TiDB Lightning's TiDB-backend cannot load any data when autocommit is disabled 

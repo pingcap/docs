@@ -222,4 +222,4 @@ TiDB version: 4.0.9
 
         - Fix the issue that keys are encoded using the wrong field information [#437](https://github.com/pingcap/tidb-lightning/pull/437)
         - Fix the issue that GC life time TTL does not take effect [#448](https://github.com/pingcap/tidb-lightning/pull/448)
-        - Fix the issue that causes panic when manually stops the running TiDB Lightning in the Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484)
+        - Fix the issue that causes panic when manually stops the running TiDB Lightning in the Local-backend mode [#484](https://github.com/pingcap/tidb-lightning/pull/484) 

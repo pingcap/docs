@@ -152,4 +152,4 @@ On August 24, 2018, TiDB 2.1 RC1 is released! Compared with TiDB 2.1 Beta, this 
 - Bug fixes
     - Fix decimal related issues
     - Fix the issue that `gRPC max_send_message_len` is set mistakenly
-    - Fix the issue caused by misconfiguration of `region_size`
+    - Fix the issue caused by misconfiguration of `region_size` 

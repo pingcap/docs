@@ -121,4 +121,4 @@ On May 28, 2019, TiDB 3.0.0-rc.2 is released. The corresponding TiDB Ansible ver
     - Support merging sharded databases and tables [#95](https://github.com/pingcap/tidb-lightning/pull/95)
     - Add the retry mechanism for KV write failure [#176](https://github.com/pingcap/tidb-lightning/pull/176)
     - Update the default value of `table-concurrency` to 6 [#175](https://github.com/pingcap/tidb-lightning/pull/175)
-    - Reduce required configuration items by automatically discovering `tidb.pd-addr` and `tidb.port` if they are not provided [#173](https://github.com/pingcap/tidb-lightning/pull/173)
+    - Reduce required configuration items by automatically discovering `tidb.pd-addr` and `tidb.port` if they are not provided [#173](https://github.com/pingcap/tidb-lightning/pull/173) 

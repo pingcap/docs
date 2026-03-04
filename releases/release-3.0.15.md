@@ -44,4 +44,4 @@ TiDB version: 3.0.15
 
     - Fix the issue that memory defragmentation is not effective after running for a long time [#7790](https://github.com/tikv/tikv/pull/7790)
     - Fix the panic issue caused by incorrectly removing snapshot files after TiKV is restarted accidentally [#7925](https://github.com/tikv/tikv/pull/7925)
-    - Fix the gRPC disconnection caused by too large message packages [#7822](https://github.com/tikv/tikv/pull/7822)
+    - Fix the gRPC disconnection caused by too large message packages [#7822](https://github.com/tikv/tikv/pull/7822) 

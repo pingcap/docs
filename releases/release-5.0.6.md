@@ -166,4 +166,4 @@ TiDB version: 5.0.6
 
     + Dumpling
 
-        - Fix the bug that Dumpling becomes very slow when dumping tables with the composite primary key or unique key [#29386](https://github.com/pingcap/tidb/issues/29386)
+        - Fix the bug that Dumpling becomes very slow when dumping tables with the composite primary key or unique key [#29386](https://github.com/pingcap/tidb/issues/29386) 

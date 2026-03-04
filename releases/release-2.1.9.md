@@ -66,4 +66,4 @@ TiDB Ansible version: 2.1.9
 ## TiDB Ansible
 
 - Update links in tidb-ansible documentation according to docs refactoring [#740](https://github.com/pingcap/tidb-ansible/pull/740), [#741](https://github.com/pingcap/tidb-ansible/pull/741)
-- Remove the `enable_slow_query_log` parameter in the `inventory.ini` file and output the slow query log to a separate log file by default [#742](https://github.com/pingcap/tidb-ansible/pull/742)
+- Remove the `enable_slow_query_log` parameter in the `inventory.ini` file and output the slow query log to a separate log file by default [#742](https://github.com/pingcap/tidb-ansible/pull/742) 

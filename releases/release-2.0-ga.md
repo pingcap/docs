@@ -152,4 +152,4 @@ TiSpark uses a separate version number. The current TiSpark version is 1.0 GA. T
     - Support ThriftServer/JDBC
     - Support Spark-SQL interaction
     - Support PySpark Shell
-    - Support SparkR
+    - Support SparkR 

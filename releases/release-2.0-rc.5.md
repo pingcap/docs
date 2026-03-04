@@ -43,4 +43,4 @@ On April 17, 2018, TiDB 2.0 RC5 is released. This release has great improvement 
 - Provide statistics about the number of rows scanned by each `scan range` in Coprocessor
 - Fix the compilation issue on the macOS system
 - Fix the issue of misusing a RocksDB metric
-- Support the `overflow as warning` option in Coprocessor
+- Support the `overflow as warning` option in Coprocessor 

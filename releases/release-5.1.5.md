@@ -121,4 +121,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
 
         - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
         - Fix the issue that there are no sorter metrics [#5690](https://github.com/pingcap/tiflow/issues/5690)
-        - Fix excessive memory usage by optimizing the way DDL schemas are buffered [#1386](https://github.com/pingcap/tiflow/issues/1386)
+        - Fix excessive memory usage by optimizing the way DDL schemas are buffered [#1386](https://github.com/pingcap/tiflow/issues/1386) 

@@ -51,4 +51,4 @@ On October 23, 2018, TiDB 2.1 RC4 is released. Compared with TiDB 2.1 RC3, this 
 - Optimize the RocksDB Write stall issue caused by applying snapshots [#3606](https://github.com/tikv/tikv/pull/3606)
 - Add raftstore `tick` metrics [#3657](https://github.com/tikv/tikv/pull/3657)
 - Upgrade RocksDB and fix the Write block issue and that the source file might be damaged by the Write operation when performing `IngestExternalFile` [#3661](https://github.com/tikv/tikv/pull/3661)
-- Upgrade grpcio and fix the issue that "too many pings" is wrongly reported [#3650](https://github.com/tikv/tikv/pull/3650)
+- Upgrade grpcio and fix the issue that "too many pings" is wrongly reported [#3650](https://github.com/tikv/tikv/pull/3650) 

@@ -52,4 +52,4 @@ TiDB version: 3.0.16
 
 + PD
 
-    - Fix the `404` error when querying Region keys in PD Control [#2577](https://github.com/pingcap/pd/pull/2577)
+    - Fix the `404` error when querying Region keys in PD Control [#2577](https://github.com/pingcap/pd/pull/2577) 

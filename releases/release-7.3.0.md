@@ -340,4 +340,4 @@ We would like to thank the following contributors from the TiDB community:
 - [testwill](https://github.com/testwill)
 - [tisonkun](https://github.com/tisonkun)
 - [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-- [yumchina](https://github.com/yumchina)
+- [yumchina](https://github.com/yumchina) 

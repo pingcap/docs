@@ -492,4 +492,4 @@ In v5.4, the key new features or improvements are as follows:
 
     + TiDB Binlog
 
-        - Fix the issue that Drainer fails because it is incompatible with the `CREATE PLACEMENT POLICY` statement [#1118](https://github.com/pingcap/tidb-binlog/issues/1118)
+        - Fix the issue that Drainer fails because it is incompatible with the `CREATE PLACEMENT POLICY` statement [#1118](https://github.com/pingcap/tidb-binlog/issues/1118) 

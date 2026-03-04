@@ -49,4 +49,4 @@ On March 1, 2017, TiDB RC2 is released! This release is focused on the compatibi
 + Optimize the single read transaction performance
 + Support more push-down expressions
 + Improve the monitoring system
-+ Fix Bugs
++ Fix Bugs 

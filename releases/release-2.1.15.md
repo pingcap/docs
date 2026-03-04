@@ -49,4 +49,4 @@ TiDB Lightning
 
 ## TiDB Ansible
 
-+ Add the `parse duration` and `compile duration` monitoring items in TiDB Dashboard to monitor the time that it takes to parse SQL statements and execute compilation [#815](https://github.com/pingcap/tidb-ansible/pull/815)
++ Add the `parse duration` and `compile duration` monitoring items in TiDB Dashboard to monitor the time that it takes to parse SQL statements and execute compilation [#815](https://github.com/pingcap/tidb-ansible/pull/815) 

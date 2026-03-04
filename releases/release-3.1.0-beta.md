@@ -25,4 +25,4 @@ TiDB Ansible version: 3.1.0-beta
 
 ## PD
 
-- Support the distributed backup and restore feature [#1896](https://github.com/pingcap/pd/pull/1896)
+- Support the distributed backup and restore feature [#1896](https://github.com/pingcap/pd/pull/1896) 

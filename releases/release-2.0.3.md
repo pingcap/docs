@@ -34,4 +34,4 @@ On June 1, 2018, TiDB 2.0.3 is released. Compared with TiDB 2.0.2, this release 
 ## TiKV
 
 - Fix the bug that the learner flag mistakenly reports to PD
-- Report an error instead of getting a result if `divisor/dividend` is 0 in `do_div_mod`
+- Report an error instead of getting a result if `divisor/dividend` is 0 in `do_div_mod` 

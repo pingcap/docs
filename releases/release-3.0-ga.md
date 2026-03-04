@@ -215,4 +215,4 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
 - Optimize the `table-regions.py` script to support displaying Leader distribution by tables
 - Optimize TiDB monitoring and add latency related monitoring items by SQL categories
 - Modify the operating system version limit to only support the CentOS 7.0+ and Red Hat 7.0+ operating systems
-- Add the monitoring item to predict the maximum QPS of the cluster (hidden by default)
+- Add the monitoring item to predict the maximum QPS of the cluster (hidden by default) 

@@ -37,4 +37,4 @@ On February 15, 2019, TiDB 2.1.4 is released. The corresponding TiDB Ansible 2.1
     - Enable auto compactions in the import mode in TiKV [#4199](https://github.com/tikv/tikv/pull/4199)
     - Support disabling the TiKV periodic Level-1 compaction parameter, because the Level-1 compaction is automatically executed in the import mode when the TiKV cluster version is 2.1.4 or later [#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - Limit the number of import engines to avoid consuming too much importer disk space [#119](https://github.com/pingcap/tidb-lightning/pull/119)
-+ Support splitting chunks using the TiDB statistics in sync-diff-inspector [#197](https://github.com/pingcap/tidb-tools/pull/197)
++ Support splitting chunks using the TiDB statistics in sync-diff-inspector [#197](https://github.com/pingcap/tidb-tools/pull/197) 

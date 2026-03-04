@@ -30,4 +30,4 @@ On November 28, 2017, TiDB 1.0.3 is released with the following updates:
 - Fix the issue that the wrong leader value is prompted for `NotLeader`
 - Fix the issue that the chunk size is too large in the coprocessor
 
-To upgrade from 1.0.2 to 1.0.3, follow the rolling upgrade order of PD -> TiKV -> TiDB.
+To upgrade from 1.0.2 to 1.0.3, follow the rolling upgrade order of PD -> TiKV -> TiDB. 

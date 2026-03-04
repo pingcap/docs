@@ -506,4 +506,4 @@ We would like to thank the following contributors from the TiDB community:
 - [shawn0915](https://github.com/shawn0915)
 - [tedyu](https://github.com/tedyu)
 - [yumchina](https://github.com/yumchina)
-- [ZzzhHe](https://github.com/ZzzhHe)
+- [ZzzhHe](https://github.com/ZzzhHe) 

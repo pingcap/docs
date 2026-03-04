@@ -142,4 +142,4 @@ TiDB version: 5.0.3
         - Fix the TiDB Lightning panic issue for some special data [#1213](https://github.com/pingcap/br/issues/1213)
         - Fix the EOF error reported when TiDB Lightning splits the imported large CSV files [#1133](https://github.com/pingcap/br/issues/1133)
         - Fix a bug that an excessively large base value is generated when TiDB Lightning imports tables with the `auto_increment` column of the `FLOAT` or `DOUBLE` type [#1186](https://github.com/pingcap/br/pull/1186)
-        - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1277](https://github.com/pingcap/br/pull/1277)
+        - Fix the issue that TiDB fails to parse the `DECIMAL` type data in Parquet files [#1277](https://github.com/pingcap/br/pull/1277) 

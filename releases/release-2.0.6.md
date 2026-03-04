@@ -46,4 +46,4 @@ On August 6, 2018, TiDB 2.0.6 is released. Compared with TiDB 2.0.5, this releas
     - Reduce continuous records of rollback transactions, to improve the Read performance when conflicts are extremely severe
     - Limit the size and number of RocksDB log files, to reduce unnecessary disk usage in long-running condition
 - Bug Fixes
-    - Fix the crash issue when converting the data type from string to decimal
+    - Fix the crash issue when converting the data type from string to decimal 

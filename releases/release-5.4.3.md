@@ -101,4 +101,4 @@ TiDB version: 5.4.3
 
     + Dumpling
 
-        - Fix the issue that GetDSN does not support IPv6 [#36112](https://github.com/pingcap/tidb/issues/36112)
+        - Fix the issue that GetDSN does not support IPv6 [#36112](https://github.com/pingcap/tidb/issues/36112) 

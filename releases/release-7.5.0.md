@@ -302,4 +302,4 @@ To learn about the performance of TiDB v7.5.0, you can refer to the [TPC-C perfo
 We would like to thank the following contributors from the TiDB community:
 
 - [jgrande](https://github.com/jgrande) (First-time contributor)
-- [shawn0915](https://github.com/shawn0915)
+- [shawn0915](https://github.com/shawn0915) 

@@ -104,4 +104,4 @@ On January 19, 2019, TiDB 3.0 Beta is released. The corresponding TiDB Ansible 3
 - Upgrade gRPC to v1.17.2 [#4023](https://github.com/tikv/tikv/pull/4023)
 - Support receiving the client requests and sending replies in batch [#4043](https://github.com/tikv/tikv/pull/4043)
 - Support multi-thread Apply [#4044](https://github.com/tikv/tikv/pull/4044)
-- Support multi-thread Raftstore [#4066](https://github.com/tikv/tikv/pull/4066)
+- Support multi-thread Raftstore [#4066](https://github.com/tikv/tikv/pull/4066) 

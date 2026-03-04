@@ -145,4 +145,4 @@ TiDB version: 4.0.0-rc.1
     - Fix the null pointer exception (NPE) when collecting the Coprocessor statistics
     - Fix the check for Region meta to ensure that the process of Region Split/Region Merge is correct
     - Fix the issue that the message size exceeds the limit for gRPC because the size of Coprocessor response is not estimated
-    - Fix the handling of the `AdminCmdType::Split` command in TiFlash
+    - Fix the handling of the `AdminCmdType::Split` command in TiFlash 

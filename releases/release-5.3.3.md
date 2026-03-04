@@ -19,4 +19,4 @@ TiDB version: 5.3.3
         - Affected versions: v5.3.2 and v5.4.2. This issue has been fixed in v5.3.3. If you are using v5.3.2, you can upgrade your cluster to v5.3.3.
         - Workaround: In addition to upgrade, you can also restart the TiKV nodes that cannot send Region heartbeat to PD, until there is no Region heartbeat to send.
 
-        For bug details, see [#12934](https://github.com/tikv/tikv/issues/12934).
+        For bug details, see [#12934](https://github.com/tikv/tikv/issues/12934). 

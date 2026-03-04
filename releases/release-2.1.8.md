@@ -61,4 +61,4 @@ TiDB Ansible version: 2.1.8
 
 - Modify the version limit for the operating system and only support CentOS 7.0 or later and Red Hat 7.0 or later [#734](https://github.com/pingcap/tidb-ansible/pull/734)
 - Add the feature of checking whether `epollexclusive` is supported in every OS [#728](https://github.com/pingcap/tidb-ansible/pull/728)
-- Add the version limit for rolling update to prohibit upgrading a version of 2.0.1 or earlier to a version of 2.1 or later [#728](https://github.com/pingcap/tidb-ansible/pull/728)
+- Add the version limit for rolling update to prohibit upgrading a version of 2.0.1 or earlier to a version of 2.1 or later [#728](https://github.com/pingcap/tidb-ansible/pull/728) 

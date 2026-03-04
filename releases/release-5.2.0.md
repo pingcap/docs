@@ -323,4 +323,4 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
     + Dumpling
 
         - Fix a bug that the data export fails because the Dumpling GC safepoint is set too late [#290](https://github.com/pingcap/dumpling/pull/290)
-        - Fix the Dumpling getting stuck issue when exporting table names from the upstream database in certain MySQL versions [#322](https://github.com/pingcap/dumpling/issues/322)
+        - Fix the Dumpling getting stuck issue when exporting table names from the upstream database in certain MySQL versions [#322](https://github.com/pingcap/dumpling/issues/322) 

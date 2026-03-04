@@ -174,4 +174,4 @@ TiDB version: 4.0.5
 
     + TiDB Lightning
 
-        - Fix the syntax error on empty binary/hex literals when using TiDB backend [#357](https://github.com/pingcap/tidb-lightning/pull/357)
+        - Fix the syntax error on empty binary/hex literals when using TiDB backend [#357](https://github.com/pingcap/tidb-lightning/pull/357) 

@@ -43,4 +43,4 @@ On November 19, 2018, TiDB 2.0.9 is released. Compared with TiDB 2.0.8, this rel
 
 - Add the `end-key` limit to the `kv_scan` interface [#3749](https://github.com/tikv/tikv/pull/3749)
 - Abandon the `max-tasks-xxx` configuration and add `max-tasks-per-worker-xxx` [#3093](https://github.com/tikv/tikv/pull/3093)
-- Fix the `CompactFiles` issue in RocksDB [#3789](https://github.com/tikv/tikv/pull/3789)
+- Fix the `CompactFiles` issue in RocksDB [#3789](https://github.com/tikv/tikv/pull/3789) 

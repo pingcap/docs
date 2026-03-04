@@ -44,4 +44,4 @@ TiDB Ansible version: 2.1.11
 
 ## TiDB Ansible
 
-- Add Drainer parameters [#760](https://github.com/pingcap/tidb-ansible/pull/760)
+- Add Drainer parameters [#760](https://github.com/pingcap/tidb-ansible/pull/760) 

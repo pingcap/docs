@@ -33,4 +33,4 @@ On September 7, 2018, TiDB 2.0.7 is released. Compared with TiDB 2.0.6, this rel
 - Improvement
     - Open the `dynamic-level-bytes` parameter in an empty cluster by default, to reduce space amplification
 - Bug Fix
-    - Update `approximate size` and `approximate keys count` of a Region after Region merging
+    - Update `approximate size` and `approximate keys count` of a Region after Region merging 

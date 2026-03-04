@@ -23,4 +23,4 @@ TiDB Ansible version: 3.0.7
 ## TiKV
 
 - Make the deadlock detector only observe valid Regions to make sure the deadlock manager is in a valid Region [#6110](https://github.com/tikv/tikv/pull/6110)
-- Fix a potential memory leak issue [#6128](https://github.com/tikv/tikv/pull/6128)
+- Fix a potential memory leak issue [#6128](https://github.com/tikv/tikv/pull/6128) 

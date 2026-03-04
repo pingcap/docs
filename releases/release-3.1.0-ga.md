@@ -90,4 +90,4 @@ TiDB Ansible version: 3.1.0 GA
     - Backup & Restore (BR)
 
         * Fix the issue that the `checksum` operation is still executed when it is disabled [#223](https://github.com/pingcap/br/pull/223)
-        * Fix the issue that incremental backup fails when TiDB enables `auto-random` or `alter-pk` [#230](https://github.com/pingcap/br/pull/230) [#231](https://github.com/pingcap/br/pull/231)
+        * Fix the issue that incremental backup fails when TiDB enables `auto-random` or `alter-pk` [#230](https://github.com/pingcap/br/pull/230) [#231](https://github.com/pingcap/br/pull/231) 

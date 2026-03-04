@@ -65,4 +65,4 @@ TiDB Ansible version: 3.1.0-beta.2
     - BR (Backup and Restore)
         - Fix the issue that BR cannot exit in time due to an unrecoverable error it encounters when restoring data [#152](https://github.com/pingcap/br/pull/152)
 + TiDB Ansible
-    - Fix the issue that the rolling update command fails because the PD Leader cannot be obtained in some scenarios [#1122](https://github.com/pingcap/tidb-ansible/pull/1122)
+    - Fix the issue that the rolling update command fails because the PD Leader cannot be obtained in some scenarios [#1122](https://github.com/pingcap/tidb-ansible/pull/1122) 

@@ -207,4 +207,4 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
         - Fix the issue that changefeed tasks might get stuck when using Azure Blob Storage as the downstream [#12277](https://github.com/pingcap/tiflow/issues/12277) @[zurakutsia](https://github.com/zurakutsia)
         - Fix the issue that `DROP FOREIGN KEY` DDL is not replicated to the downstream [#12328](https://github.com/pingcap/tiflow/issues/12328) @[3AceShowHand](https://github.com/3AceShowHand)
         - Fix the issue that TiCDC might panic when encountering rollback and prewrite entries during Region subscription [#19048](https://github.com/tikv/tikv/issues/19048) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix the issue that assertion errors in TiKV might cause TiCDC to panic [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)
+        - Fix the issue that assertion errors in TiKV might cause TiCDC to panic [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga) 

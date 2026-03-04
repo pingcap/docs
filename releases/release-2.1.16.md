@@ -63,4 +63,4 @@ TiDB Ansible version: 2.1.16
 + Update the tispark jar package to v2.1.2 [#863](https://github.com/pingcap/tidb-ansible/pull/863)
 + Fix the issue that the Prometheus configuration file is generated in the wrong format when TiDB Binlog uses Kafka or ZooKeeper [#845](https://github.com/pingcap/tidb-ansible/pull/845)
 + Fix the bug that PD fails to switch the Leader when executing the `rolling_update.yml` operation [#888](https://github.com/pingcap/tidb-ansible/pull/888)
-+ Optimize the logic of rolling updating PD nodes - upgrade Followers first and then the Leader - to improve stability [#895](https://github.com/pingcap/tidb-ansible/pull/895)
++ Optimize the logic of rolling updating PD nodes - upgrade Followers first and then the Leader - to improve stability [#895](https://github.com/pingcap/tidb-ansible/pull/895) 

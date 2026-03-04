@@ -36,4 +36,4 @@ On January 22, 2018, TiDB 1.0.7 is released with the following updates:
 - [Fix the loss of scheduling command from PD](https://github.com/pingcap/tikv/pull/2669)
 - [Add timeout in Push metric](https://github.com/pingcap/tikv/pull/2686)
 
-To upgrade from 1.0.6 to 1.0.7, follow the rolling upgrade order of PD -> TiKV -> TiDB.
+To upgrade from 1.0.6 to 1.0.7, follow the rolling upgrade order of PD -> TiKV -> TiDB. 

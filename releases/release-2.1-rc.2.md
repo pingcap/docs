@@ -116,4 +116,4 @@ On September 14, 2018, TiDB 2.1 RC2 is released. Compared with TiDB 2.1 RC1, thi
 * Bug fixes
     * Fix the leader election issue caused by discarding the `PreVote` message of the newly split Region [#3557](https://github.com/tikv/tikv/pull/3557)
     * Fix follower related statistics after merging Regions [#3573](https://github.com/tikv/tikv/pull/3573)
-    * Fix the issue that the local reader uses obsolete Region information [#3565](https://github.com/tikv/tikv/pull/3565)
+    * Fix the issue that the local reader uses obsolete Region information [#3565](https://github.com/tikv/tikv/pull/3565) 

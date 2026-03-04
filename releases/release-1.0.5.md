@@ -30,4 +30,4 @@ On December 26, 2017, TiDB 1.0.5 is released with the following updates:
 - Fix the issue that it is slow to get the CPU ID using the [`get_cpuid`](https://github.com/pingcap/tikv/pull/2611) function.
 - Support the [`dynamic-level-bytes`](https://github.com/pingcap/tikv/pull/2605) parameter to improve the space collection situation.
 
-To upgrade from 1.0.4 to 1.0.5, follow the rolling upgrade order of PD -> TiKV -> TiDB.
+To upgrade from 1.0.4 to 1.0.5, follow the rolling upgrade order of PD -> TiKV -> TiDB. 

@@ -89,4 +89,4 @@ TiDB Ansible version: 4.0.0-beta.1
     + Fix the inconsistent behaviors of the `CAST` function in TiDB and TiKV [#6463](https://github.com/tikv/tikv/pull/6463) [#6461](https://github.com/tikv/tikv/pull/6461) [#6459](https://github.com/tikv/tikv/pull/6459) [#6474](https://github.com/tikv/tikv/pull/6474) [#6492](https://github.com/tikv/tikv/pull/6492) [#6569](https://github.com/tikv/tikv/pull/6569)
 
 * TiDB Lightning
-    + Fix the bug that the web interface does not work outside the Server mode [#259](https://github.com/pingcap/tidb-lightning/pull/259)
+    + Fix the bug that the web interface does not work outside the Server mode [#259](https://github.com/pingcap/tidb-lightning/pull/259) 

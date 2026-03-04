@@ -71,4 +71,4 @@ TiDB Ansible version: 3.0.10
 - Fix the issue that the command execution fails due to the failure to obtain PD leader in some scenarios [#1121](https://github.com/pingcap/tidb-ansible/pull/1121)
 - Add the `Deadlock Detect Duration` monitoring item in the TiDB dashboard [#1127](https://github.com/pingcap/tidb-ansible/pull/1127)
 - Add the `Statement Lock Keys Count` monitoring item in the TiDB dashboard [#1132](https://github.com/pingcap/tidb-ansible/pull/1132)
-- Add the `Statement Pessimistic Retry Count` monitoring item in the TiDB dashboard [#1133](https://github.com/pingcap/tidb-ansible/pull/1133)
+- Add the `Statement Pessimistic Retry Count` monitoring item in the TiDB dashboard [#1133](https://github.com/pingcap/tidb-ansible/pull/1133) 

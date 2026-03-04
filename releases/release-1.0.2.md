@@ -26,4 +26,4 @@ On November 13, 2017, TiDB 1.0.2 is released with the following updates:
 - Limit the length of a key to be no more than 4 KB
 - More accurate read traffic statistics
 - Implement deep protection on the coprocessor stack
-- Fix the `LIKE` behavior and the `do_div_mod` bug
+- Fix the `LIKE` behavior and the `do_div_mod` bug 

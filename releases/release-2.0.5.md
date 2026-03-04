@@ -37,4 +37,4 @@ On July 6, 2018, TiDB 2.0.5 is released. Compared with TiDB 2.0.4, this release 
 ## TiKV
 
 - Fix the potential overflow issue in decimal operations
-- Fix the dirty read issue that might occur in the process of merging
+- Fix the dirty read issue that might occur in the process of merging 

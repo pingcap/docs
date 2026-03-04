@@ -81,4 +81,4 @@ On June 29, 2018, TiDB 2.1 Beta is released! Compared with TiDB 2.0, this releas
 - Remove `box` in multiple modules and use patterns to improve the operating performance (YCSB `raw get` is improved by 3%)
 - Use `asynchronous log` to improve the performance of writing logs
 - Add a metric to collect the thread status
-- Decease memory copy times by decreasing `box` used in the application to improve the performance
+- Decease memory copy times by decreasing `box` used in the application to improve the performance 

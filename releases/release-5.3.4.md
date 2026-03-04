@@ -57,4 +57,4 @@ TiDB version: 5.3.4
 
     + TiCDC
 
-        - Fix the issue that changefeed state is incorrect because a MySQL-related error is not reported to the owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
+        - Fix the issue that changefeed state is incorrect because a MySQL-related error is not reported to the owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698) 

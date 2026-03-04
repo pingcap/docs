@@ -194,4 +194,4 @@ TiDB version: 4.0.6
     + TiDB Lightning
 
         - Fix the issue that all failed operations of writes and ingests are mistakenly displayed as successful [#381](https://github.com/pingcap/tidb-lightning/pull/381)
-        - Fix the issue that some checkpoint updates might not be written to the database before TiDB Lightning exits [#386](https://github.com/pingcap/tidb-lightning/pull/386)
+        - Fix the issue that some checkpoint updates might not be written to the database before TiDB Lightning exits [#386](https://github.com/pingcap/tidb-lightning/pull/386) 

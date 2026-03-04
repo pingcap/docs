@@ -494,4 +494,4 @@ We would like to thank the following contributors from the TiDB community:
 - [samba-rgb](https://github.com/samba-rgb) (First-time contributor)
 - [SeaRise](https://github.com/SeaRise)
 - [tuziemon](https://github.com/tuziemon) (First-time contributor)
-- [xyproto](https://github.com/xyproto) (First-time contributor)
+- [xyproto](https://github.com/xyproto) (First-time contributor) 

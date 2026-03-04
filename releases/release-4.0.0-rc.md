@@ -101,4 +101,4 @@ TiUP version: 0.0.3
         * Fix the issue that an error is returned if the `test` schema does not exist in the downstream when MySQL sink is executing the DDL statement [#353](https://github.com/pingcap/tiflow/pull/353)
         * Support the real-time interactive mode in CDC cli [#351](https://github.com/pingcap/tiflow/pull/351)
         * Support checking whether the table in the upstream can be replicated during data replication [#368](https://github.com/pingcap/tiflow/pull/368)
-        * Support asynchronous write to Kafka [#344](https://github.com/pingcap/tiflow/pull/344)
+        * Support asynchronous write to Kafka [#344](https://github.com/pingcap/tiflow/pull/344) 

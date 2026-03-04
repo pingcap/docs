@@ -56,4 +56,4 @@ On March 23, 2018, TiDB 2.0 RC3 is released. This release has great improvement 
 - Update the size information about the corresponding Region according to compaction events
 - Limit the size of `scan lock` to avoid request timeout
 - Use `DeleteRange` to speed up Region deletion
-- Support modifying RocksDB parameters online
+- Support modifying RocksDB parameters online 

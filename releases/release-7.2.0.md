@@ -331,4 +331,4 @@ We would like to thank the following contributors from the TiDB community:
 - [L-maple](https://github.com/L-maple)
 - [nyurik](https://github.com/nyurik)
 - [SeigeC](https://github.com/SeigeC)
-- [tangjingyu97](https://github.com/tangjingyu97)
+- [tangjingyu97](https://github.com/tangjingyu97) 

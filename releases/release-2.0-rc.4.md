@@ -35,4 +35,4 @@ On March 30, 2018, TiDB 2.0 RC4 is released. This release has great improvement 
 - Support splitting Region in the middle
 - Increase the speed of CI test
 - Use `crossbeam channel`
-- Fix the issue that too many logs are output caused by leader missing when TiKV is isolated
+- Fix the issue that too many logs are output caused by leader missing when TiKV is isolated 

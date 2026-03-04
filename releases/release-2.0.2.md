@@ -27,4 +27,4 @@ On May 21, 2018, TiDB 2.0.2 is released. Compared with TiDB 2.0.1, this release 
 - Support configuring more gRPC related parameters
 - Support configuring the timeout range of leader election
 - Fix the issue that the obsolete learner is not deleted
-- Fix the issue that the snapshot intermediate file is mistakenly deleted
+- Fix the issue that the snapshot intermediate file is mistakenly deleted 

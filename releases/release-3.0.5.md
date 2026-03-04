@@ -90,4 +90,4 @@ TiDB Ansible version: 3.0.5
 - Simplify the configuration file content and remove parameters that users do not need to configure [#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14), [#998](https://github.com/pingcap/tidb-ansible/pull/998)
 - Fix the monitoring expression error of performance read and performance write [#e90e7](https://github.com/pingcap/tidb-ansible/commit/e90e79f5117bb89197e01b1391fd02e25d57a440)
 - Update the monitoring display method and the alarm rules of Raftstore CPU usage [#992](https://github.com/pingcap/tidb-ansible/pull/992)
-- Update the TiKV CPU monitoring item in the Overview monitoring dashboard to filter out the excess monitoring content [#1001](https://github.com/pingcap/tidb-ansible/pull/1001)
+- Update the TiKV CPU monitoring item in the Overview monitoring dashboard to filter out the excess monitoring content [#1001](https://github.com/pingcap/tidb-ansible/pull/1001) 

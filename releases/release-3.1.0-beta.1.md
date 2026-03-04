@@ -37,4 +37,4 @@ TiDB Ansible version: 3.1.0-beta.1
 
 - Add the feature of automatically disabling Transparent Huge Pages (THP) in the operating system during the initialization phase [#1086](https://github.com/pingcap/tidb-ansible/pull/1086)
 - Add the Grafana monitoring for BR components [#1093](https://github.com/pingcap/tidb-ansible/pull/1093)
-- Optimize the deployment of TiDB Lightning by automatically creating related directories [#1104](https://github.com/pingcap/tidb-ansible/pull/1104)
+- Optimize the deployment of TiDB Lightning by automatically creating related directories [#1104](https://github.com/pingcap/tidb-ansible/pull/1104) 

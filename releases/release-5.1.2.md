@@ -152,4 +152,4 @@ TiDB version: 5.1.2
         - Fix a bug that multiple processors might write data to the same table when TiCDC is rescheduling the table [#2230](https://github.com/pingcap/tiflow/issues/2230)
         - Fix a bug that changefeed might be reset unexpectedly when TiCDC gets the `ErrSchemaStorageTableMiss` error [#2422](https://github.com/pingcap/tiflow/issues/2422)
         - Fix a bug that changefeed cannot be removed when TiCDC gets the `ErrGCTTLExceeded` error [#2391](https://github.com/pingcap/tiflow/issues/2391)
-        - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#1259](https://github.com/pingcap/tiflow/issues/1259) [#2424](https://github.com/pingcap/tiflow/issues/2424)
+        - Fix a bug that TiCDC fails to synchronize large tables to cdclog [#1259](https://github.com/pingcap/tiflow/issues/1259) [#2424](https://github.com/pingcap/tiflow/issues/2424) 
