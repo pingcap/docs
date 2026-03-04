@@ -36,4 +36,4 @@ On August 30, 2017, TiDB Pre-GA is released! This release is focused on MySQL co
 + Implement the predicates pushdown
 + Implement the aggregation pushdown
 + Implement range pruning
-+ Capable of running full set of TPC+H except for one query that needs view support 
++ Capable of running full set of TPC+H except for one query that needs view support

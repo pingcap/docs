@@ -60,4 +60,4 @@ On September 29, 2018, TiDB 2.1 RC3 is released. Compared with TiDB 2.1 RC2, thi
     - Add the support for the `truncate_real` function [#3633](https://github.com/tikv/tikv/pull/3633)
 + Bug fixes
     - Fix the reporting error behavior related to time functions [#3487](https://github.com/tikv/tikv/pull/3487), [#3615](https://github.com/tikv/tikv/pull/3615)
-    - Fix the issue that the time parsed from string is inconsistent with that in TiDB [#3589](https://github.com/tikv/tikv/pull/3589) 
+    - Fix the issue that the time parsed from string is inconsistent with that in TiDB [#3589](https://github.com/tikv/tikv/pull/3589)
