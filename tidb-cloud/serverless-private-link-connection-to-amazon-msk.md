@@ -19,7 +19,7 @@ Before you begin, ensure the following:
 
 See [Amazon MSK multi-VPC private connectivity in a single Region](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements) for more requirements.
 
-## Prerequisites
+## Prerequisites for {{{ .essential }}}
 
 - Your {{{ .essential }}} is hosted on AWS and is active. Retrieve and save the following for later use:
     - AWS Account ID
@@ -31,18 +31,23 @@ To view the AWS account ID and availability zones:
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the dialog, note the AWS account ID and availability zones.
 
-## Step 1. Create an MSK cluster (if needed)
+## Prerequisites for the Amazon MSK Provisioned cluster
 
-If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) in the same region and the same availability zone as your as your {{{ .essential }}} cluster.
+Before you begin, ensure the following for your Amazon MSK Provisioned cluster:
+ 
+- **Region and AZ**: Your Amazon MSK Provisioned cluster is in the same AWS region as your {{{ .essential }}} cluster, and the availability zones of the MSK cluster are the same as your TiDB Cloud cluster.
+- **Authentication**: [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) is required for the MSK cluster.
+- **Broker type**: Do not use the `t4.small` broker type. It does not support private link.
+    
+For more requirements, see [Amazon MSK multi-VPC private connectivity in a single Region](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements).
+    
+ If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) in the same region and the same availability zone as your {{{ .essential }}} cluster, and then [set up SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for the created cluster.
+     - **Secret name**: the secret name must start with `AmazonMSK_`.
+     - **Encryption**: do not use the default encryption key. Create a new custom AWS KMS key for your secret.
 
-## Step 2. Set up SASL/SCRAM authentication and ACLs
+## Step 1. Set up Kafka ACLs for TiDB Cloud access
 
-1. Set up SASL/SCRAM authentication. Configure [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for your MSK cluster.
-
-    - **Secret name**: the secret name must start with `AmazonMSK_`.
-    - **Encryption**: do not use the default encryption key. Create a new one for the secret.
-
-2. Set up ACLs for TiDB Cloud access. You must set up ACLs so that TiDB Cloud can access your MSK cluster. You can use either of the following methods:
+You must set up Kafka ACLs so that TiDB Cloud can access your Amazon MSK Provisioned cluster. You can use SASL/SCRAM authentication (recommended) or IAM authentication to set up ACLs.
 
     - **SASL/SCRAM (recommended)**: set up ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
     - **IAM**: set up ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
@@ -63,7 +68,7 @@ Apply the changes and wait for the cluster status to change from **Updating** to
 
 ## Step 5. Turn on multi-VPC connectivity
 
-After the cluster is active, [turn on multi-VPC connectivity](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) for the MSK cluster. Multi-VPC connectivity is required for private link and requires SASL/SCRAM authentication.
+After the cluster is active, [turn on multi-VPC connectivity](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) for the MSK cluster. Multi-VPC connectivity is required for AWS PrivateLink. To connect from TiDB Cloud, you must enable SASL/SCRAM authentication.
 
 Wait for the cluster status to change from **Updating** to **Active** again.
 

@@ -89,7 +89,7 @@ To create a private link connection using the TiDB Cloud CLI:
 
 You can create an Amazon MSK Provisioned private link connection using the TiDB Cloud console.
 
-Ensure that your Amazon MSK Provisioned cluster turn on multi-VPC connectivity. See [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md) for more detials.
+Before creating the Amazon MSK Provisioned private link connection, ensure that your Amazon MSK Provisioned cluster turns on multi-VPC connectivity. See [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md) for more details.
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -175,7 +175,7 @@ Different private link connection types support attaching different domain types
 |--------------------------------|-------------------------------------------|
 | AWS Endpoint Service           | <ul><li>TiDB Cloud managed (`aws.tidbcloud.com`)</li><li>Confluent Dedicated (`aws.confluent.cloud`)</li></ul>  |
 | Alibaba Cloud Endpoint Service | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
-| Amazon MSK Provisioned         | Does not support attaching domains |
+| Amazon MSK Provisioned         | Domain attachment is not supported. |
 
 If your domain is not included in this table, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request support.
 

@@ -91,7 +91,7 @@ The steps vary depending on the connectivity method you select.
 
 1. In **Connectivity Method**, select **Private Link**.
 2. In **Private Link Connection**, select the private link connection that you created in the [Network](#network) section. Make sure the Availability Zones of the private link connection match those of the Kafka deployment.
-3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section. The Amazon MSK Provisioned private link connection does not require a bootstrap port.
+3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section. If you are using the Amazon MSK Provisioned private link connection, you can skip this field.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
