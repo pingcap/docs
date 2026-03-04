@@ -1,7 +1,6 @@
 ---
 title: TiDB API Overview
 summary: Learn about the APIs available for TiDB Cloud and TiDB Self-Managed.
-aliases: ['/tidbcloud/api-overview/']
 ---
 
 # TiDB API Overview
