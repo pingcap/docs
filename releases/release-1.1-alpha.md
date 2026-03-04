@@ -49,4 +49,4 @@ On January 19, 2018, TiDB 1.1 Alpha is released. This release has great improvem
 - Support splitting according to table in Region
 - Support the `Delete Range` feature
 - Support setting the I/O limit caused by snapshot
-- Improve the flow control mechanism 
+- Improve the flow control mechanism

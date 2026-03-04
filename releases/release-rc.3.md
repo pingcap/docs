@@ -58,4 +58,4 @@ On June 16, 2017, TiDB RC3 is released! This release is focused on MySQL compati
 + Use Batch Apply to reduce CPU usage and improve the write performance
 + Support parallel Prewrite to improve the transaction write speed
 + Optimize the scheduling of the coprocessor thread pool to reduce the impact of big queries on point get
-+ The new Loader supports data importing at the table level, as well as splitting a big table into smaller logical blocks to import concurrently to improve the data importing speed. 
++ The new Loader supports data importing at the table level, as well as splitting a big table into smaller logical blocks to import concurrently to improve the data importing speed.

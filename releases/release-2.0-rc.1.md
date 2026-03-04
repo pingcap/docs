@@ -36,4 +36,4 @@ On March 9, 2018, TiDB 2.0 RC1 is released. This release has great improvement i
 - Add gRPC APIs used to obtain metrics
 - Check whether SSD is used when you start the cluster
 - Optimize the read performance using ReadPool, and improve the performance by 30% in the `raw get` test
-- Improve metrics and optimize the usage of metrics 
+- Improve metrics and optimize the usage of metrics

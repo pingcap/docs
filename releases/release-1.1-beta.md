@@ -46,4 +46,4 @@ On February 24, 2018, TiDB 1.1 Beta is released. This release has great improvem
 - Configure the Raft snapshot max size to avoid the retained files taking up too much space
 - Support more recovery operations in `tikv-ctl`
 - Optimize the ordered flow aggregation operation
-- Improve metrics and fix bugs 
+- Improve metrics and fix bugs

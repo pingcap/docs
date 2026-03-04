@@ -142,7 +142,7 @@ TiSpark uses a separate version number. The current TiSpark version is 1.0 GA. T
 - Provide index related support
     - Transform predicate into Region key range or secondary index
     - Optimize `Index Only` queries
-    - Adaptively downgrade index scan to table scan per Region
+    - Adaptively downgrade index scan to table scan per Region
 - Provide cost-based optimization
     - Support statistics
     - Select index
@@ -152,4 +152,4 @@ TiSpark uses a separate version number. The current TiSpark version is 1.0 GA. T
     - Support ThriftServer/JDBC
     - Support Spark-SQL interaction
     - Support PySpark Shell
-    - Support SparkR 
+    - Support SparkR

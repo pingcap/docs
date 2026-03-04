@@ -113,4 +113,4 @@ TiDB version: 4.0.0
     + TiCDC
         - Fix system panics caused by data race [#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
         - Fix resource leaks or system blockages caused by incorrect processing logic [#574](https://github.com/pingcap/tiflow/pull/574) [#586](https://github.com/pingcap/tiflow/pull/586)
-        - Fix the issue that the command line gets stuck because CLI cannot connect to PD [#579](https://github.com/pingcap/tiflow/pull/579) 
+        - Fix the issue that the command line gets stuck because CLI cannot connect to PD [#579](https://github.com/pingcap/tiflow/pull/579)

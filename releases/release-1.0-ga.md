@@ -266,4 +266,4 @@ On October 16, 2017, TiDB 1.0 is now released! This release is focused on MySQL 
 - zs634134578
 - zxylvlp
 - zyguan
-- zz-jason 
+- zz-jason

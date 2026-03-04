@@ -44,4 +44,4 @@ On December 23, 2016, TiDB RC1 is released. See the following updates in this re
     - Retry if error occurs
     - Breakpoint resume
     - Targeted optimization for TiDB
-+ The tool for one-click deployment is added. 
++ The tool for one-click deployment is added.
