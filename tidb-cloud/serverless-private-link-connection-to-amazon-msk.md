@@ -49,8 +49,6 @@ For more requirements, see [Amazon MSK multi-VPC private connectivity in a singl
 
 You must set up Kafka ACLs so that TiDB Cloud can access your Amazon MSK Provisioned cluster. You can use SASL/SCRAM authentication (recommended) or IAM authentication to set up ACLs.
 
-    - **SASL/SCRAM (recommended)**: set up ACLs in your VPC using SASL/SCRAM authentication. See [Create ACLs using SASL/SCRAM](#create-acls-using-saslscram).
-    - **IAM**: set up ACLs in your VPC using IAM authentication. See [Create ACLs using IAM](#create-acls-using-iam).
 
 ## Step 3. Configure the MSK cluster
 
