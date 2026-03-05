@@ -25,19 +25,19 @@ TiDB バージョン: 8.3.0
 
     詳細については[ドキュメント](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)参照してください。
 
--   KV（キーバリュー）リクエスト[＃55206](https://github.com/pingcap/tidb/issues/55206) @ [ジグアン](https://github.com/zyguan)のバッチ処理戦略を最適化
+-   KV（キーバリュー）リクエスト[＃55206](https://github.com/pingcap/tidb/issues/55206) @ [zyguan](https://github.com/zyguan)のバッチ処理戦略を最適化
 
     TiDBはTiKVにKVリクエストを送信することでデータを取得します。KVリクエストを一括処理することで、実行パフォーマンスを大幅に向上させることができます。v8.3.0より前のTiDBのバッチ戦略は効率が低かったです。v8.3.0以降では、既存のバッチ戦略に加えて、より効率的なバッチ戦略がいくつか導入されています。1 [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)設定項目を使用して、様々なワークロードに対応するために異なるバッチ戦略を設定できます。
 
     詳細については[ドキュメント](/tidb-configuration-file.md#batch-policy-new-in-v830)参照してください。
 
--   TiFlashは、高NDVデータ[＃9196](https://github.com/pingcap/tiflash/issues/9196) @ [グオシャオゲ](https://github.com/guo-shaoge)のパフォーマンスを向上させるHashAgg集約計算モードを導入しました。
+-   TiFlashは、高NDVデータ[＃9196](https://github.com/pingcap/tiflash/issues/9196) @ [guo-shaoge](https://github.com/guo-shaoge)のパフォーマンスを向上させるHashAgg集約計算モードを導入しました。
 
     v8.3.0より前のバージョンでは、 TiFlashは、NDV（個別値の数）の高いデータを扱う場合、HashAgg集計の最初の段階で集計計算効率が低下していました。v8.3.0以降、 TiFlashは複数のHashAgg集計計算モードを導入し、さまざまなデータ特性に対する集計パフォーマンスを向上させています。必要なHashAgg集計計算モードを選択するには、システム変数[`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830)を設定します。
 
     詳細については[ドキュメント](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830)参照してください。
 
--   統計を収集するときに不要な列を無視する[＃53567](https://github.com/pingcap/tidb/issues/53567) @ [ハイ・ラスティン](https://github.com/Rustin170506)
+-   統計を収集するときに不要な列を無視する[＃53567](https://github.com/pingcap/tidb/issues/53567) @ [Rustin170506](https://github.com/Rustin170506)
 
     オプティマイザが実行プランを生成する際には、フィルタ条件の列、結合キーの列、集計に使用される列など、一部の列の統計情報のみが必要です。v8.3.0以降、TiDBはSQL文で使用される列の履歴を継続的に監視します。デフォルトでは、TiDBはインデックスが設定された列と、統計収集が必要であると判断された列の統計情報のみを収集します。これにより、統計収集が高速化され、不要なリソース消費を回避できます。
 
@@ -47,7 +47,7 @@ TiDB バージョン: 8.3.0
 
     詳細については[ドキュメント](/statistics.md#collect-statistics-on-some-columns)参照してください。
 
--   一部のシステムテーブル[＃50305](https://github.com/pingcap/tidb/issues/50305) @ [接線](https://github.com/tangenta)のクエリパフォーマンスを向上
+-   一部のシステムテーブル[＃50305](https://github.com/pingcap/tidb/issues/50305) @ [tangenta](https://github.com/tangenta)のクエリパフォーマンスを向上
 
     以前のバージョンでは、クラスターのサイズが大きくなり、テーブル数が多すぎると、システム テーブルのクエリのパフォーマンスが低下しました。
 
@@ -71,7 +71,7 @@ TiDB バージョン: 8.3.0
     -   `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
     -   `INFORMATION_SCHEMA.VIEWS`
 
--   パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングをサポートして、クエリパフォーマンスを向上します[＃54209](https://github.com/pingcap/tidb/pull/54209) @ [ミョンス](https://github.com/mjonss)
+-   パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングをサポートして、クエリパフォーマンスを向上します[＃54209](https://github.com/pingcap/tidb/pull/54209) @ [mjonss](https://github.com/mjonss)
 
     以前のバージョンでは、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合、パーティションプルーニングがサポートされず、クエリパフォーマンスが低下していました。v8.3.0以降では、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合でもパーティションプルーニングがサポートされ、クエリパフォーマンスが向上します。
 
@@ -85,7 +85,7 @@ TiDB バージョン: 8.3.0
 
     詳細については[ドキュメント](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)参照してください。
 
--   パーティションテーブルはグローバルインデックスをサポートします（実験的） [＃45133](https://github.com/pingcap/tidb/issues/45133) @ [ミョンス](https://github.com/mjonss) @ [定義2014](https://github.com/Defined2014) @ [ジフハスト](https://github.com/jiyfhust) @ [L-メープル](https://github.com/L-maple)
+-   パーティションテーブルはグローバルインデックスをサポートします（実験的） [＃45133](https://github.com/pingcap/tidb/issues/45133) @ [mjonss](https://github.com/mjonss) @ [Defined2014](https://github.com/Defined2014) @ [jiyfhust](https://github.com/jiyfhust) @ [L-maple](https://github.com/L-maple)
 
     以前のバージョンのパーティションテーブルでは、グローバルインデックスがサポートされていないため、いくつかの制限がありました。例えば、一意キーはテーブルのパーティション式のすべての列を使用する必要があります。クエリ条件でパーティションキーが使用されていない場合、クエリはすべてのパーティションをスキャンするため、パフォーマンスが低下します。バージョン7.6.0以降では、グローバルインデックス機能を有効にするためにシステム変数[`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)導入されました。ただし、この機能は当時開発中であったため、有効化することは推奨されません。
 
@@ -95,7 +95,7 @@ TiDB バージョン: 8.3.0
 
 ### 信頼性 {#reliability}
 
--   ストリーミングカーソル結果セットのサポート（実験的） [＃54526](https://github.com/pingcap/tidb/issues/54526) @ [ヤンケオ](https://github.com/YangKeao)
+-   ストリーミングカーソル結果セットのサポート（実験的） [＃54526](https://github.com/pingcap/tidb/issues/54526) @ [YangKeao](https://github.com/YangKeao)
 
     アプリケーションコードが[カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)使用して結果セットを取得する場合、TiDB は通常、まず結果セット全体をメモリに保存し、その後、データをバッチ処理でクライアントに返します。結果セットが大きすぎる場合、TiDB は結果を一時的にハードディスクに書き込むことがあります。
 
@@ -103,7 +103,7 @@ TiDB バージョン: 8.3.0
 
     詳細については[ドキュメント](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)参照してください。
 
--   SQL実行プランバインディングの強化[＃55280](https://github.com/pingcap/tidb/issues/55280) [＃55343](https://github.com/pingcap/tidb/issues/55343) @ [時間と運命](https://github.com/time-and-fate)
+-   SQL実行プランバインディングの強化[＃55280](https://github.com/pingcap/tidb/issues/55280) [＃55343](https://github.com/pingcap/tidb/issues/55343) @ [time-and-fate](https://github.com/time-and-fate)
 
     OLTPシナリオでは、ほとんどのSQL文の最適な実行計画は固定されています。アプリケーション内の重要なSQL文にSQL実行計画バインディングを実装することで、実行計画が悪化する可能性を低減し、システムの安定性を向上させることができます。多数のSQL実行計画バインディングを作成するという要件を満たすため、TiDBはSQLバインディングの機能とエクスペリエンスを強化し、以下の機能を提供します。
 
@@ -132,13 +132,13 @@ TiDB バージョン: 8.3.0
 
 ### 可観測性 {#observability}
 
--   初期統計[＃53564](https://github.com/pingcap/tidb/issues/53564) @ [ホーキングレイ](https://github.com/hawkingrei)の読み込みの進行状況を表示します
+-   初期統計[＃53564](https://github.com/pingcap/tidb/issues/53564) @ [hawkingrei](https://github.com/hawkingrei)の読み込みの進行状況を表示します
 
     TiDBは起動時に基本統計を読み込みます。テーブルやパーティションの数が多い場合、このプロセスに時間がかかることがあります。設定項目[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) `ON`に設定すると、初期統計が読み込まれるまでTiDBはサービスを提供しません。この場合、サービスの開始時間を推定するには、読み込みプロセスを観察する必要があります。
 
     v8.3.0以降、TiDBは初期統計のロードの進行状況を段階的にログに出力、実行状況を把握できるようになりました。外部ツールにフォーマットされた結果を提供するために、TiDBは[監視API](/tidb-monitoring-api.md)という変数を追加し、起動フェーズの任意の時点で初期統計のロードの進行状況を確認できるようにしました。
 
--   リクエストユニット（RU）設定に関するメトリックを[＃8444](https://github.com/tikv/pd/issues/8444) @ [ノルーシュ](https://github.com/nolouch)に追加します
+-   リクエストユニット（RU）設定に関するメトリックを[＃8444](https://github.com/tikv/pd/issues/8444) @ [nolouch](https://github.com/nolouch)に追加します
 
 ### Security {#security}
 
@@ -150,7 +150,7 @@ TiDB バージョン: 8.3.0
 
     詳細については[ドキュメント](/log-redaction.md#log-redaction-in-pd-side)参照してください。
 
--   TiKV ログ編集[＃17206](https://github.com/tikv/tikv/issues/17206) @ [ルーカスリアン](https://github.com/LykxSassinator)を強化
+-   TiKV ログ編集[＃17206](https://github.com/tikv/tikv/issues/17206) @ [LykxSassinator](https://github.com/LykxSassinator)を強化
 
     TiDB v8.0.0ではログ編集機能が強化され、TiDBログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログ表示時にマークされた情報を編集するかどうかを決定できるため、ログ編集の柔軟性が向上します。v8.2.0では、 TiFlashにも同様のログ編集機能が実装されています。
 
@@ -160,7 +160,7 @@ TiDB バージョン: 8.3.0
 
 ### データ移行 {#data-migration}
 
--   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートしています（GA） [＃10301](https://github.com/pingcap/tiflow/issues/10301) [＃48519](https://github.com/pingcap/tidb/issues/48519) @ [okJiang](https://github.com/okJiang) @ [アズドンメン](https://github.com/asddongmen)
+-   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートしています（GA） [＃10301](https://github.com/pingcap/tiflow/issues/10301) [＃48519](https://github.com/pingcap/tidb/issues/48519) @ [okJiang](https://github.com/okJiang) @ [asddongmen](https://github.com/asddongmen)
 
     TiCDC v7.6.0では、双方向レプリケーションが設定されたDDL文のレプリケーションが導入されました。以前は、TiCDCではDDL文の双方向レプリケーションがサポートされていなかったため、TiCDCの双方向レプリケーションを使用するユーザーは、両方のTiDBクラスタでDDL文を個別に実行する必要がありました。この機能により、クラスタに`PRIMARY` BDRロールを割り当てることで、TiCDCはそのクラスタから`SECONDARY`のクラスタにDDL文を複製できるようになります。
 
@@ -231,31 +231,31 @@ TiDB バージョン: 8.3.0
 
 -   ティドブ
 
-    -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )`ステートメント[＃54162](https://github.com/pingcap/tidb/issues/54162) @ [ドヴェーデン](https://github.com/dveeden)をサポート
-    -   `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))` [＃54337](https://github.com/pingcap/tidb/issues/54337) @ [ガザルファミリーUSA](https://github.com/ghazalfamilyusa)のようなフィルタ条件に対してより正確なインデックスアクセス範囲を構築する
-    -   `WHERE idx_col_1 IS NULL ORDER BY idx_col_2` [＃54188](https://github.com/pingcap/tidb/issues/54188) @ [アリエ](https://github.com/ari-e)のようなSQLクエリの余分なソート操作を避けるためにインデックス順序を使用します。
-    -   `mysql.analyze_jobs`システムテーブル[＃53567](https://github.com/pingcap/tidb/issues/53567) @ [ハイ・ラスティン](https://github.com/Rustin170506)の分析されたインデックスを表示します。
-    -   `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用し、ログ[＃54565](https://github.com/pingcap/tidb/issues/54565) @ [ホーキングレイ](https://github.com/hawkingrei)の処理ロジックをさらに最適化することをサポート
-    -   クエリ効率を向上させるために、多値インデックスの`IndexRangeScan`で`Selection`演算子を生成することをサポート[＃54876](https://github.com/pingcap/tidb/issues/54876) @ [時間と運命](https://github.com/time-and-fate)
-    -   設定された時間枠外で実行されているタスク`ANALYZE`を自動的に強制終了する機能をサポート[＃55283](https://github.com/pingcap/tidb/issues/55283) @ [ホーキングレイ](https://github.com/hawkingrei)
-    -   統計情報がすべて TopN で構成され、対応するテーブル統計の変更された行数が 0 以外である場合に、TopN にヒットしない等価条件の推定結果を 0 から 1 に調整します[＃47400](https://github.com/pingcap/tidb/issues/47400) @ [テリー・パーセル](https://github.com/terry1purcell)
+    -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )`ステートメント[＃54162](https://github.com/pingcap/tidb/issues/54162) @ [dveeden](https://github.com/dveeden)をサポート
+    -   `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))` [＃54337](https://github.com/pingcap/tidb/issues/54337) @ [ghazalfamilyusa](https://github.com/ghazalfamilyusa)のようなフィルタ条件に対してより正確なインデックスアクセス範囲を構築する
+    -   `WHERE idx_col_1 IS NULL ORDER BY idx_col_2` [＃54188](https://github.com/pingcap/tidb/issues/54188) @ [ari-e](https://github.com/ari-e)のようなSQLクエリの余分なソート操作を避けるためにインデックス順序を使用します。
+    -   `mysql.analyze_jobs`システムテーブル[＃53567](https://github.com/pingcap/tidb/issues/53567) @ [Rustin170506](https://github.com/Rustin170506)の分析されたインデックスを表示します。
+    -   `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用し、ログ[＃54565](https://github.com/pingcap/tidb/issues/54565) @ [hawkingrei](https://github.com/hawkingrei)の処理ロジックをさらに最適化することをサポート
+    -   クエリ効率を向上させるために、多値インデックスの`IndexRangeScan`で`Selection`演算子を生成することをサポート[＃54876](https://github.com/pingcap/tidb/issues/54876) @ [time-and-fate](https://github.com/time-and-fate)
+    -   設定された時間枠外で実行されているタスク`ANALYZE`を自動的に強制終了する機能をサポート[＃55283](https://github.com/pingcap/tidb/issues/55283) @ [hawkingrei](https://github.com/hawkingrei)
+    -   統計情報がすべて TopN で構成され、対応するテーブル統計の変更された行数が 0 以外である場合に、TopN にヒットしない等価条件の推定結果を 0 から 1 に調整します[＃47400](https://github.com/pingcap/tidb/issues/47400) @ [terry1purcell](https://github.com/terry1purcell)
     -   TopN演算子はディスクスピル[＃47733](https://github.com/pingcap/tidb/issues/47733) @ [xzhangxian1008](https://github.com/xzhangxian1008)をサポートします
-    -   TiDBノードは、 `WITH ROLLUP`修飾子と`GROUPING`関数[＃42631](https://github.com/pingcap/tidb/issues/42631) @ [アリーナルクス](https://github.com/Arenatlx)を使用したクエリの実行をサポートしています。
+    -   TiDBノードは、 `WITH ROLLUP`修飾子と`GROUPING`関数[＃42631](https://github.com/pingcap/tidb/issues/42631) @ [Arenatlx](https://github.com/Arenatlx)を使用したクエリの実行をサポートしています。
     -   システム変数[`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) `GLOBAL`スコープ[＃55022](https://github.com/pingcap/tidb/issues/55022) @ [cfzjywxk](https://github.com/cfzjywxk)をサポートします
-    -   同時実行範囲削除をサポートすることで、GC（ガベージコレクション）の効率を向上します。同時実行スレッド数は[`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) [＃54570](https://github.com/pingcap/tidb/issues/54570) @ [エキシウム](https://github.com/ekexium)で制御できます。
-    -   バルクDML実行モードのパフォーマンスを向上させる（ `tidb_dml_type = "bulk"` ） [＃50215](https://github.com/pingcap/tidb/issues/50215) @ [エキシウム](https://github.com/ekexium)
+    -   同時実行範囲削除をサポートすることで、GC（ガベージコレクション）の効率を向上します。同時実行スレッド数は[`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) [＃54570](https://github.com/pingcap/tidb/issues/54570) @ [ekexium](https://github.com/ekexium)で制御できます。
+    -   バルクDML実行モードのパフォーマンスを向上させる（ `tidb_dml_type = "bulk"` ） [＃50215](https://github.com/pingcap/tidb/issues/50215) @ [ekexium](https://github.com/ekexium)
     -   スキーマ情報キャッシュ関連インターフェース`SchemaByID` [＃54074](https://github.com/pingcap/tidb/issues/54074) @ [ywqzzy](https://github.com/ywqzzy)のパフォーマンスを向上
-    -   スキーマ情報キャッシュが有効な場合の特定のシステムテーブルのクエリパフォーマンスを向上[＃50305](https://github.com/pingcap/tidb/issues/50305) @ [接線](https://github.com/tangenta)
-    -   一意のインデックス[＃53004](https://github.com/pingcap/tidb/issues/53004) @ [ランス6716](https://github.com/lance6716)を追加するときに競合するキーのエラーメッセージを最適化します
+    -   スキーマ情報キャッシュが有効な場合の特定のシステムテーブルのクエリパフォーマンスを向上[＃50305](https://github.com/pingcap/tidb/issues/50305) @ [tangenta](https://github.com/tangenta)
+    -   一意のインデックス[＃53004](https://github.com/pingcap/tidb/issues/53004) @ [lance6716](https://github.com/lance6716)を追加するときに競合するキーのエラーメッセージを最適化します
 
 -   PD
 
     -   リーダーの排除プロセスを加速するために、 `pd-ctl`を介して`evict-leader-scheduler`の`batch`構成を変更することをサポートします[＃8265](https://github.com/tikv/pd/issues/8265) @ [rleungx](https://github.com/rleungx)
     -   Grafanaの**「クラスタ&gt; ラベル配布**パネル」に`store_id`監視メトリックを追加して、異なるラベル[＃8337](https://github.com/tikv/pd/issues/8337) @ [HuSharp](https://github.com/HuSharp)に対応するストアIDを表示します。
-    -   指定されたリソース グループが存在しない場合に、デフォルトのリソース グループへのフォールバックをサポートします[＃8388](https://github.com/tikv/pd/issues/8388) @ [Jmポテト](https://github.com/JmPotato)
-    -   `pd-ctl` [＃8412](https://github.com/tikv/pd/issues/8412) @ [沢民州](https://github.com/zeminzhou)の`region`コマンドによって出力されるリージョン情報に`approximate_kv_size`フィールドを追加します。
+    -   指定されたリソース グループが存在しない場合に、デフォルトのリソース グループへのフォールバックをサポートします[＃8388](https://github.com/tikv/pd/issues/8388) @ [JmPotato](https://github.com/JmPotato)
+    -   `pd-ctl` [＃8412](https://github.com/tikv/pd/issues/8412) @ [zeminzhou](https://github.com/zeminzhou)の`region`コマンドによって出力されるリージョン情報に`approximate_kv_size`フィールドを追加します。
     -   PD APIを呼び出してTTL構成[＃8450](https://github.com/tikv/pd/issues/8450) @ [lhy1024](https://github.com/lhy1024)を削除するときに返されるメッセージを最適化します
-    -   大規模なクエリ読み取り要求の RU 消費動作を最適化して、他の要求への影響を軽減します[＃8457](https://github.com/tikv/pd/issues/8457) @ [ノルーシュ](https://github.com/nolouch)
+    -   大規模なクエリ読み取り要求の RU 消費動作を最適化して、他の要求への影響を軽減します[＃8457](https://github.com/tikv/pd/issues/8457) @ [nolouch](https://github.com/nolouch)
     -   PDマイクロサービス[＃52912](https://github.com/pingcap/tidb/issues/52912) @ [rleungx](https://github.com/rleungx)の設定ミス時に返されるエラーメッセージを最適化します
     -   PDマイクロサービスに`--name`スタートアップパラメータを追加して、デプロイメント中にサービス名をより正確に表示します[＃7995](https://github.com/tikv/pd/issues/7995) @ [HuSharp](https://github.com/HuSharp)
     -   領域の数に基づいて`PatrolRegionScanLimit`動的に調整して、リージョンスキャン時間を短縮する[＃7963](https://github.com/tikv/pd/issues/7963) @ [lhy1024](https://github.com/lhy1024)をサポートします。
@@ -263,80 +263,80 @@ TiDB バージョン: 8.3.0
 -   TiKV
 
     -   `async-io`有効になっている場合、 Raftログを書き込むためのバッチポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します[＃16907](https://github.com/tikv/tikv/issues/16907) @ [LykxSassinator](https://github.com/LykxSassinator)
-    -   TiCDC デリゲートおよびダウンストリーム モジュールを再設計して、リージョン部分サブスクリプション[＃16362](https://github.com/tikv/tikv/issues/16362) @ [ヒック](https://github.com/hicqu)をより適切にサポートします。
-    -   単一のスロークエリログのサイズを[＃17294](https://github.com/tikv/tikv/issues/17294) @ [コナー1996](https://github.com/Connor1996)に縮小します
-    -   新しい監視メトリック`min safe ts` [＃17307](https://github.com/tikv/tikv/issues/17307) @ [ミッタルリシャブ](https://github.com/mittalrishabh)を追加する
-    -   ピアメッセージチャネル[＃16229](https://github.com/tikv/tikv/issues/16229) @ [コナー1996](https://github.com/Connor1996)のメモリ使用量を削減
+    -   TiCDC デリゲートおよびダウンストリーム モジュールを再設計して、リージョン部分サブスクリプション[＃16362](https://github.com/tikv/tikv/issues/16362) @ [hicqu](https://github.com/hicqu)をより適切にサポートします。
+    -   単一のスロークエリログのサイズを[＃17294](https://github.com/tikv/tikv/issues/17294) @ [Connor1996](https://github.com/Connor1996)に縮小します
+    -   新しい監視メトリック`min safe ts` [＃17307](https://github.com/tikv/tikv/issues/17307) @ [mittalrishabh](https://github.com/mittalrishabh)を追加する
+    -   ピアメッセージチャネル[＃16229](https://github.com/tikv/tikv/issues/16229) @ [Connor1996](https://github.com/Connor1996)のメモリ使用量を削減
 
 -   TiFlash
 
-    -   SVG 形式[＃9320](https://github.com/pingcap/tiflash/issues/9320) @ [カルビンネオ](https://github.com/CalvinNeo)でのアドホック ヒープ プロファイリングの生成をサポート
+    -   SVG 形式[＃9320](https://github.com/pingcap/tiflash/issues/9320) @ [CalvinNeo](https://github.com/CalvinNeo)でのアドホック ヒープ プロファイリングの生成をサポート
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
-        -   ポイントインタイムリカバリ（PITR）を初めて開始する前に、フルバックアップが存在するかどうかの確認をサポートします。フルバックアップが見つからない場合、 BRは復元を終了し、エラー[＃54418](https://github.com/pingcap/tidb/issues/54418) @ [リーヴルス](https://github.com/Leavrth)を返します。
-        -   スナップショットバックアップを復元する前に、TiKVおよびTiFlashのディスク容量が十分かどうかのチェックをサポートします。容量が不足している場合、 BRは復元を終了し、エラー[＃54316](https://github.com/pingcap/tidb/issues/54316) @ [リドリスR](https://github.com/RidRisR)を返します。
-        -   TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかのチェックをサポートします。容量が不足している場合、 BRは復元を終了し、エラー[＃17224](https://github.com/tikv/tikv/issues/17224) @ [リドリスR](https://github.com/RidRisR)を返します。
-        -   環境変数[＃45551](https://github.com/pingcap/tidb/issues/45551) @ [リドリスR](https://github.com/RidRisR)を介した Alibaba Cloud アクセス資格情報の設定をサポート
-        -   バックアップとリストアにBRを使用するときに OOM を回避するために、 BRプロセスの使用可能なメモリに基づいて環境変数`GOMEMLIMIT`自動的に設定します[＃53777](https://github.com/pingcap/tidb/issues/53777) @ [リーヴルス](https://github.com/Leavrth)
-        -   増分バックアップをポイントインタイムリカバリ（PITR） [＃54474](https://github.com/pingcap/tidb/issues/54474) @ [3ポイントシュート](https://github.com/3pointer)と互換性のあるものにする
-        -   `mysql.column_stats_usage`テーブル[＃53567](https://github.com/pingcap/tidb/issues/53567) @ [ハイ・ラスティン](https://github.com/Rustin170506)のバックアップと復元をサポート
+        -   ポイントインタイムリカバリ（PITR）を初めて開始する前に、フルバックアップが存在するかどうかの確認をサポートします。フルバックアップが見つからない場合、 BRは復元を終了し、エラー[＃54418](https://github.com/pingcap/tidb/issues/54418) @ [Leavrth](https://github.com/Leavrth)を返します。
+        -   スナップショットバックアップを復元する前に、TiKVおよびTiFlashのディスク容量が十分かどうかのチェックをサポートします。容量が不足している場合、 BRは復元を終了し、エラー[＃54316](https://github.com/pingcap/tidb/issues/54316) @ [RidRisR](https://github.com/RidRisR)を返します。
+        -   TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかのチェックをサポートします。容量が不足している場合、 BRは復元を終了し、エラー[＃17224](https://github.com/tikv/tikv/issues/17224) @ [RidRisR](https://github.com/RidRisR)を返します。
+        -   環境変数[＃45551](https://github.com/pingcap/tidb/issues/45551) @ [RidRisR](https://github.com/RidRisR)を介した Alibaba Cloud アクセス資格情報の設定をサポート
+        -   バックアップとリストアにBRを使用するときに OOM を回避するために、 BRプロセスの使用可能なメモリに基づいて環境変数`GOMEMLIMIT`自動的に設定します[＃53777](https://github.com/pingcap/tidb/issues/53777) @ [Leavrth](https://github.com/Leavrth)
+        -   増分バックアップをポイントインタイムリカバリ（PITR） [＃54474](https://github.com/pingcap/tidb/issues/54474) @ [3pointer](https://github.com/3pointer)と互換性のあるものにする
+        -   `mysql.column_stats_usage`テーブル[＃53567](https://github.com/pingcap/tidb/issues/53567) @ [Rustin170506](https://github.com/Rustin170506)のバックアップと復元をサポート
 
 ## バグ修正 {#bug-fixes}
 
 -   ティドブ
 
-    -   `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに発生する予期しないエラーを修正します。これは[＃53600](https://github.com/pingcap/tidb/issues/53600) @ [徐淮嶼](https://github.com/XuHuaiyu)の繰り返し操作による以前のパラメータ値の再利用が原因です。
+    -   `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに発生する予期しないエラーを修正します。これは[＃53600](https://github.com/pingcap/tidb/issues/53600) @ [XuHuaiyu](https://github.com/XuHuaiyu)の繰り返し操作による以前のパラメータ値の再利用が原因です。
     -   メモリ使用量が`tidb_mem_quota_query` [＃55042](https://github.com/pingcap/tidb/issues/55042) @ [yibin87](https://github.com/yibin87)で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました
     -   HashAgg 演算子のディスク スピルにより並列計算[＃55290](https://github.com/pingcap/tidb/issues/55290) @ [xzhangxian1008](https://github.com/xzhangxian1008)中に誤ったクエリ結果が発生する問題を修正しました。
-    -   `YEAR` JSON 形式[＃54494](https://github.com/pingcap/tidb/issues/54494) @ [ヤンケオ](https://github.com/YangKeao)にキャストするときに間違った`JSON_TYPE`が発生する問題を修正
-    -   `tidb_schema_cache_size`システム変数の値の範囲が間違っている問題を修正[＃54034](https://github.com/pingcap/tidb/issues/54034) @ [リーリンハイ](https://github.com/lilinghai)
-    -   パーティション式が`EXTRACT(YEAR FROM col)` [＃54210](https://github.com/pingcap/tidb/issues/54210) @ [ミョンス](https://github.com/mjonss)の場合にパーティションプルーニングが機能しない問題を修正しました
-    -   データベースに多くのテーブルが存在する場合に`FLASHBACK DATABASE`失敗する問題を修正[＃54415](https://github.com/pingcap/tidb/issues/54415) @ [ランス6716](https://github.com/lance6716)
-    -   多数のデータベース[＃54915](https://github.com/pingcap/tidb/issues/54915) @ [ランス6716](https://github.com/lance6716)を処理するときに`FLASHBACK DATABASE`無限ループに入る問題を修正
-    -   インデックス加速モードでのインデックスの追加が失敗する可能性がある問題を修正[＃54568](https://github.com/pingcap/tidb/issues/54568) @ [ランス6716](https://github.com/lance6716)
-    -   `ADMIN CANCEL DDL JOBS`により DDL が失敗する可能性がある問題を修正[＃54687](https://github.com/pingcap/tidb/issues/54687) @ [ランス6716](https://github.com/lance6716)
-    -   DMから複製されたテーブルのインデックスの長さが`max-index-length` [＃55138](https://github.com/pingcap/tidb/issues/55138) @ [ランス6716](https://github.com/lance6716)で指定された最大長を超えるとテーブル複製が失敗する問題を修正しました
-    -   `tidb_enable_inl_join_inner_multi_pattern`有効になっている状態で SQL 文を実行するとエラー`runtime error: index out of range`が発生する可能性がある問題を修正しました[＃54535](https://github.com/pingcap/tidb/issues/54535) @ [ジョーチェン](https://github.com/joechenrh)
-    -   統計[＃54589](https://github.com/pingcap/tidb/issues/54589) @ [天菜麻緒](https://github.com/tiancaiamao)の初期化プロセス中に<kbd>Control</kbd> + <kbd>C</kbd>を使用してTiDBを終了できない問題を修正しました
-    -   `INL_MERGE_JOIN`オプティマイザヒントが誤った結果を返す問題を修正しました[＃54064](https://github.com/pingcap/tidb/issues/54064) @ [アイリンキッド](https://github.com/AilinKid)を廃止しました。
-    -   `WITH ROLLUP`を含む相関サブクエリによって TiDB がpanicを起こし、エラー`runtime error: index out of range` [＃54983](https://github.com/pingcap/tidb/issues/54983) @ [アイリンキッド](https://github.com/AilinKid)を返す可能性がある問題を修正しました。
+    -   `YEAR` JSON 形式[＃54494](https://github.com/pingcap/tidb/issues/54494) @ [YangKeao](https://github.com/YangKeao)にキャストするときに間違った`JSON_TYPE`が発生する問題を修正
+    -   `tidb_schema_cache_size`システム変数の値の範囲が間違っている問題を修正[＃54034](https://github.com/pingcap/tidb/issues/54034) @ [lilinghai](https://github.com/lilinghai)
+    -   パーティション式が`EXTRACT(YEAR FROM col)` [＃54210](https://github.com/pingcap/tidb/issues/54210) @ [mjonss](https://github.com/mjonss)の場合にパーティションプルーニングが機能しない問題を修正しました
+    -   データベースに多くのテーブルが存在する場合に`FLASHBACK DATABASE`失敗する問題を修正[＃54415](https://github.com/pingcap/tidb/issues/54415) @ [lance6716](https://github.com/lance6716)
+    -   多数のデータベース[＃54915](https://github.com/pingcap/tidb/issues/54915) @ [lance6716](https://github.com/lance6716)を処理するときに`FLASHBACK DATABASE`無限ループに入る問題を修正
+    -   インデックス加速モードでのインデックスの追加が失敗する可能性がある問題を修正[＃54568](https://github.com/pingcap/tidb/issues/54568) @ [lance6716](https://github.com/lance6716)
+    -   `ADMIN CANCEL DDL JOBS`により DDL が失敗する可能性がある問題を修正[＃54687](https://github.com/pingcap/tidb/issues/54687) @ [lance6716](https://github.com/lance6716)
+    -   DMから複製されたテーブルのインデックスの長さが`max-index-length` [＃55138](https://github.com/pingcap/tidb/issues/55138) @ [lance6716](https://github.com/lance6716)で指定された最大長を超えるとテーブル複製が失敗する問題を修正しました
+    -   `tidb_enable_inl_join_inner_multi_pattern`有効になっている状態で SQL 文を実行するとエラー`runtime error: index out of range`が発生する可能性がある問題を修正しました[＃54535](https://github.com/pingcap/tidb/issues/54535) @ [joechenrh](https://github.com/joechenrh)
+    -   統計[＃54589](https://github.com/pingcap/tidb/issues/54589) @ [tiancaiamao](https://github.com/tiancaiamao)の初期化プロセス中に<kbd>Control</kbd> + <kbd>C</kbd>を使用してTiDBを終了できない問題を修正しました
+    -   `INL_MERGE_JOIN`オプティマイザヒントが誤った結果を返す問題を修正しました[＃54064](https://github.com/pingcap/tidb/issues/54064) @ [AilinKid](https://github.com/AilinKid)を廃止しました。
+    -   `WITH ROLLUP`を含む相関サブクエリによって TiDB がpanicを起こし、エラー`runtime error: index out of range` [＃54983](https://github.com/pingcap/tidb/issues/54983) @ [AilinKid](https://github.com/AilinKid)を返す可能性がある問題を修正しました。
     -   SQLクエリのフィルタ条件に仮想列が含まれており、実行条件に`UnionScan` [＃54870](https://github.com/pingcap/tidb/issues/54870) @ [qw4990](https://github.com/qw4990)が含まれている場合に述語を適切にプッシュダウンできない問題を修正しました。
-    -   `tidb_enable_inl_join_inner_multi_pattern`有効になっている状態で SQL 文を実行するとエラー`runtime error: invalid memory address or nil pointer dereference`が発生する可能性がある問題を修正しました[＃55169](https://github.com/pingcap/tidb/issues/55169) @ [ホーキングレイ](https://github.com/hawkingrei)
-    -   `UNION`を含むクエリステートメントが誤った結果[＃52985](https://github.com/pingcap/tidb/issues/52985) @ [徐淮嶼](https://github.com/XuHuaiyu)を返す可能性がある問題を修正しました
+    -   `tidb_enable_inl_join_inner_multi_pattern`有効になっている状態で SQL 文を実行するとエラー`runtime error: invalid memory address or nil pointer dereference`が発生する可能性がある問題を修正しました[＃55169](https://github.com/pingcap/tidb/issues/55169) @ [hawkingrei](https://github.com/hawkingrei)
+    -   `UNION`を含むクエリステートメントが誤った結果[＃52985](https://github.com/pingcap/tidb/issues/52985) @ [XuHuaiyu](https://github.com/XuHuaiyu)を返す可能性がある問題を修正しました
     -   `mysql.stats_histograms`表の`tot_col_size`番目の列が負の数[＃55126](https://github.com/pingcap/tidb/issues/55126) @ [qw4990](https://github.com/qw4990)になる可能性がある問題を修正しました
-    -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文[＃53713](https://github.com/pingcap/tidb/issues/53713) @ [アイリンキッド](https://github.com/AilinKid)を実行すると`runtime error: index out of range`が発生する問題を修正しました。
+    -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文[＃53713](https://github.com/pingcap/tidb/issues/53713) @ [AilinKid](https://github.com/AilinKid)を実行すると`runtime error: index out of range`が発生する問題を修正しました。
     -   `STATS_EXTENDED`予約キーワード[＃39573](https://github.com/pingcap/tidb/issues/39573) @ [wddevries](https://github.com/wddevries)になる問題を修正
     -   `tidb_low_resolution`有効になっている場合、 `select for update` [＃54684](https://github.com/pingcap/tidb/issues/54684) @ [cfzjywxk](https://github.com/cfzjywxk)実行できる問題を修正しました
     -   `tidb_redact_log`有効になっている場合、内部 SQL クエリがスロークエリログに表示されない問題を修正[＃54190](https://github.com/pingcap/tidb/issues/54190) @ [lcwangchao](https://github.com/lcwangchao)
-    -   トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[＃53984](https://github.com/pingcap/tidb/issues/53984) @ [エキシウム](https://github.com/ekexium)
+    -   トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[＃53984](https://github.com/pingcap/tidb/issues/53984) @ [ekexium](https://github.com/ekexium)
     -   `SHOW WARNINGS;`使用して警告を取得するとpanic[＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)が発生する可能性がある問題を修正しました
-    -   インデックス統計の読み込み時にメモリリークが発生する可能性がある問題を修正[＃54022](https://github.com/pingcap/tidb/issues/54022) @ [ハイ・ラスティン](https://github.com/Rustin170506)
-    -   照合順序が`utf8_bin`または`utf8mb4_bin` [＃53730](https://github.com/pingcap/tidb/issues/53730) @ [エルサ0520](https://github.com/elsa0520)の場合に`LENGTH()`条件が予期せず削除される問題を修正しました
-    -   重複する主キー[＃47539](https://github.com/pingcap/tidb/issues/47539) @ [定義2014](https://github.com/Defined2014)に遭遇したときに統計収集で`stats_history`テーブルが更新されない問題を修正しました
-    -   再帰CTEクエリが無効なポインタ[＃54449](https://github.com/pingcap/tidb/issues/54449) @ [ホーキングレイ](https://github.com/hawkingrei)を生成する可能性がある問題を修正しました
-    -   ハンドシェイクが完了する前に一部の接続が終了した場合に、Grafana の接続数監視メトリックが正しくない問題を修正しました[＃54428](https://github.com/pingcap/tidb/issues/54428) @ [ヤンケオ](https://github.com/YangKeao)
-    -   TiProxy とリソース グループ[＃54545](https://github.com/pingcap/tidb/issues/54545) @ [ヤンケオ](https://github.com/YangKeao)を使用するときに、各リソース グループの接続数が正しくない問題を修正しました。
+    -   インデックス統計の読み込み時にメモリリークが発生する可能性がある問題を修正[＃54022](https://github.com/pingcap/tidb/issues/54022) @ [Rustin170506](https://github.com/Rustin170506)
+    -   照合順序が`utf8_bin`または`utf8mb4_bin` [＃53730](https://github.com/pingcap/tidb/issues/53730) @ [elsa0520](https://github.com/elsa0520)の場合に`LENGTH()`条件が予期せず削除される問題を修正しました
+    -   重複する主キー[＃47539](https://github.com/pingcap/tidb/issues/47539) @ [Defined2014](https://github.com/Defined2014)に遭遇したときに統計収集で`stats_history`テーブルが更新されない問題を修正しました
+    -   再帰CTEクエリが無効なポインタ[＃54449](https://github.com/pingcap/tidb/issues/54449) @ [hawkingrei](https://github.com/hawkingrei)を生成する可能性がある問題を修正しました
+    -   ハンドシェイクが完了する前に一部の接続が終了した場合に、Grafana の接続数監視メトリックが正しくない問題を修正しました[＃54428](https://github.com/pingcap/tidb/issues/54428) @ [YangKeao](https://github.com/YangKeao)
+    -   TiProxy とリソース グループ[＃54545](https://github.com/pingcap/tidb/issues/54545) @ [YangKeao](https://github.com/YangKeao)を使用するときに、各リソース グループの接続数が正しくない問題を修正しました。
     -   クエリに非相関サブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適でないプラン[＃54213](https://github.com/pingcap/tidb/issues/54213) @ [qw4990](https://github.com/qw4990)になる可能性がある問題を修正しました。
     -   `SELECT ... FOR UPDATE` [＃54652](https://github.com/pingcap/tidb/issues/54652) @ [qw4990](https://github.com/qw4990)の間違ったポイント取得プランを再利用する問題を修正しました
     -   最初の引数が`month`で、2番目の引数が負の[＃54908](https://github.com/pingcap/tidb/issues/54908) @ [xzhangxian1008](https://github.com/xzhangxian1008)場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。
     -   スローログ内の内部SQL文がデフォルトでnullに編集される問題を修正[＃54190](https://github.com/pingcap/tidb/issues/54190) [＃52743](https://github.com/pingcap/tidb/issues/52743) [＃53264](https://github.com/pingcap/tidb/issues/53264) @ [lcwangchao](https://github.com/lcwangchao)
-    -   `_tidb_rowid`の`PointGet`実行プランが[＃54583](https://github.com/pingcap/tidb/issues/54583) @ [定義2014](https://github.com/Defined2014)で生成できる問題を修正
-    -   v7.1 [＃54241](https://github.com/pingcap/tidb/issues/54241) @ [接線](https://github.com/tangenta)からアップグレードした後に`SHOW IMPORT JOBS`エラー`Unknown column 'summary'`を報告する問題を修正しました
-    -   ビュー定義[＃54343](https://github.com/pingcap/tidb/issues/54343) @ [ランス6716](https://github.com/lance6716)でサブクエリが列定義として使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告1356が返される問題を修正しました。
-    -   厳密に自己増分ではないRANGEパーティションテーブルが[＃54829](https://github.com/pingcap/tidb/issues/54829) @ [定義2014](https://github.com/Defined2014)で作成できる問題を修正
+    -   `_tidb_rowid`の`PointGet`実行プランが[＃54583](https://github.com/pingcap/tidb/issues/54583) @ [Defined2014](https://github.com/Defined2014)で生成できる問題を修正
+    -   v7.1 [＃54241](https://github.com/pingcap/tidb/issues/54241) @ [tangenta](https://github.com/tangenta)からアップグレードした後に`SHOW IMPORT JOBS`エラー`Unknown column 'summary'`を報告する問題を修正しました
+    -   ビュー定義[＃54343](https://github.com/pingcap/tidb/issues/54343) @ [lance6716](https://github.com/lance6716)でサブクエリが列定義として使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告1356が返される問題を修正しました。
+    -   厳密に自己増分ではないRANGEパーティションテーブルが[＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)で作成できる問題を修正
     -   SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @ [wshwsh12](https://github.com/wshwsh12)
-    -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックス[＃54897](https://github.com/pingcap/tidb/issues/54897) @ [接線](https://github.com/tangenta)の不整合が発生する可能性がある問題を修正しました。
+    -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックス[＃54897](https://github.com/pingcap/tidb/issues/54897) @ [tangenta](https://github.com/tangenta)の不整合が発生する可能性がある問題を修正しました。
 
 -   PD
 
-    -   ロールをリソースグループ[＃54417](https://github.com/pingcap/tidb/issues/54417) @ [Jmポテト](https://github.com/JmPotato)にバインドするときにエラーが報告されない問題を修正しました
-    -   500 ミリ秒を超えるトークンをリクエストするとリソース グループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @ [ノルーシュ](https://github.com/nolouch)
+    -   ロールをリソースグループ[＃54417](https://github.com/pingcap/tidb/issues/54417) @ [JmPotato](https://github.com/JmPotato)にバインドするときにエラーが報告されない問題を修正しました
+    -   500 ミリ秒を超えるトークンをリクエストするとリソース グループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @ [nolouch](https://github.com/nolouch)
     -   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`テーブルの時間データ型が正しくない問題を修正[＃54770](https://github.com/pingcap/tidb/issues/54770) @ [HuSharp](https://github.com/HuSharp)
-    -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @ [ノルーシュ](https://github.com/nolouch)
-    -   テーブル属性[＃55188](https://github.com/pingcap/tidb/issues/55188) @ [Jmポテト](https://github.com/JmPotato)を取得するときに誤った PD API が呼び出される問題を修正しました
+    -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @ [nolouch](https://github.com/nolouch)
+    -   テーブル属性[＃55188](https://github.com/pingcap/tidb/issues/55188) @ [JmPotato](https://github.com/JmPotato)を取得するときに誤った PD API が呼び出される問題を修正しました
     -   `scheduling`マイクロサービスが[＃8331](https://github.com/tikv/pd/issues/8331) @ [rleungx](https://github.com/rleungx)で有効化された後にスケーリングの進行状況が正しく表示されない問題を修正しました
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @ [rleungx](https://github.com/rleungx)
     -   一部のログが編集されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @ [rleungx](https://github.com/rleungx)
@@ -349,49 +349,49 @@ TiDB バージョン: 8.3.0
 
 -   TiFlash
 
-    -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[＃8754](https://github.com/pingcap/tiflash/issues/8754) @ [ソロツグ](https://github.com/solotzg)
-    -   データベース[＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)にまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`実行した後にTiFlash がpanic可能性がある問題を修正しました。
-    -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @ [ジンヘリン](https://github.com/JinheLin)
-    -   遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[＃9188](https://github.com/pingcap/tiflash/issues/9188) @ [ジンヘリン](https://github.com/JinheLin)
-    -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
-    -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
-    -   TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラー[＃9243](https://github.com/pingcap/tiflash/issues/9243) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)が発生する可能性がある問題を修正しました。
-    -   分散storageおよびコンピューティングアーキテクチャ[＃9282](https://github.com/pingcap/tiflash/issues/9282) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)でTiFlash書き込みノードが再起動に失敗する可能性がある問題を修正しました
-    -   分散storageおよびコンピューティングアーキテクチャ[＃9298](https://github.com/pingcap/tiflash/issues/9298) @ [ジンヘリン](https://github.com/JinheLin)で、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。
+    -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[＃8754](https://github.com/pingcap/tiflash/issues/8754) @ [solotzg](https://github.com/solotzg)
+    -   データベース[＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)にまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`実行した後にTiFlash がpanic可能性がある問題を修正しました。
+    -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @ [JinheLin](https://github.com/JinheLin)
+    -   遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[＃9188](https://github.com/pingcap/tiflash/issues/9188) @ [JinheLin](https://github.com/JinheLin)
+    -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラー[＃9243](https://github.com/pingcap/tiflash/issues/9243) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)が発生する可能性がある問題を修正しました。
+    -   分散storageおよびコンピューティングアーキテクチャ[＃9282](https://github.com/pingcap/tiflash/issues/9282) @ [JaySon-Huang](https://github.com/JaySon-Huang)でTiFlash書き込みノードが再起動に失敗する可能性がある問題を修正しました
+    -   分散storageおよびコンピューティングアーキテクチャ[＃9298](https://github.com/pingcap/tiflash/issues/9298) @ [JinheLin](https://github.com/JinheLin)で、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。
 
 -   TiKV
 
-    -   古い領域をクリーンアップすると、有効なデータ[＃17258](https://github.com/tikv/tikv/issues/17258) @ [ヒビシェン](https://github.com/hbisheng)が誤って削除される可能性がある問題を修正しました
-    -   Grafana [＃15990](https://github.com/tikv/tikv/issues/15990) @ [コナー1996](https://github.com/Connor1996)の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`誤って表示される問題を修正しました
-    -   `cancel_generating_snap`誤って更新すると`snap_tried_cnt`が TiKV でpanicになる問題を修正[＃17226](https://github.com/tikv/tikv/issues/17226) @ [ヒビシェン](https://github.com/hbisheng)
+    -   古い領域をクリーンアップすると、有効なデータ[＃17258](https://github.com/tikv/tikv/issues/17258) @ [hbisheng](https://github.com/hbisheng)が誤って削除される可能性がある問題を修正しました
+    -   Grafana [＃15990](https://github.com/tikv/tikv/issues/15990) @ [Connor1996](https://github.com/Connor1996)の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`誤って表示される問題を修正しました
+    -   `cancel_generating_snap`誤って更新すると`snap_tried_cnt`が TiKV でpanicになる問題を修正[＃17226](https://github.com/tikv/tikv/issues/17226) @ [hbisheng](https://github.com/hbisheng)
     -   `Ingest SST duration seconds`の情報が間違っている問題を修正[＃17239](https://github.com/tikv/tikv/issues/17239) @ [LykxSassinator](https://github.com/LykxSassinator)
-    -   エラー発生時にCPUプロファイリングフラグが正しくリセットされない問題を修正[＃17234](https://github.com/tikv/tikv/issues/17234) @ [コナー1996](https://github.com/Connor1996)
-    -   ブルームフィルタが以前のバージョン（v7.1より前）とそれ以降のバージョン[＃17272](https://github.com/tikv/tikv/issues/17272) @ [v01dスター](https://github.com/v01dstar)の間で互換性がない問題を修正しました
+    -   エラー発生時にCPUプロファイリングフラグが正しくリセットされない問題を修正[＃17234](https://github.com/tikv/tikv/issues/17234) @ [Connor1996](https://github.com/Connor1996)
+    -   ブルームフィルタが以前のバージョン（v7.1より前）とそれ以降のバージョン[＃17272](https://github.com/tikv/tikv/issues/17272) @ [v01dstar](https://github.com/v01dstar)の間で互換性がない問題を修正しました
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
-        -   `ADD INDEX`や`MODIFY COLUMN`などのバックフィルを必要とする DDL が、増分リストア[＃54426](https://github.com/pingcap/tidb/issues/54426) @ [3ポイントシュート](https://github.com/3pointer)中に正しく回復されない可能性がある問題を修正しました。
-        -   バックアップと復元[＃54140](https://github.com/pingcap/tidb/issues/54140) @ [リーヴルス](https://github.com/Leavrth)中に進行が停止する問題を修正
-        -   バックアップと復元のチェックポイントパスが一部の外部storageと互換性がない問題を修正[＃55265](https://github.com/pingcap/tidb/issues/55265) @ [リーヴルス](https://github.com/Leavrth)
+        -   `ADD INDEX`や`MODIFY COLUMN`などのバックフィルを必要とする DDL が、増分リストア[＃54426](https://github.com/pingcap/tidb/issues/54426) @ [3pointer](https://github.com/3pointer)中に正しく回復されない可能性がある問題を修正しました。
+        -   バックアップと復元[＃54140](https://github.com/pingcap/tidb/issues/54140) @ [Leavrth](https://github.com/Leavrth)中に進行が停止する問題を修正
+        -   バックアップと復元のチェックポイントパスが一部の外部storageと互換性がない問題を修正[＃55265](https://github.com/pingcap/tidb/issues/55265) @ [Leavrth](https://github.com/Leavrth)
 
     -   TiCDC
 
-        -   下流の Kafka にアクセスできない場合にプロセッサがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [アズドンメン](https://github.com/asddongmen)
+        -   下流の Kafka にアクセスできない場合にプロセッサがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [asddongmen](https://github.com/asddongmen)
 
     -   TiDB データ移行 (DM)
 
-        -   スキーマ トラッカーが LIST パーティション テーブルを誤って処理し、DM エラー[＃11408](https://github.com/pingcap/tiflow/issues/11408) @ [ランス6716](https://github.com/lance6716)が発生する問題を修正しました。
-        -   インデックスの長さがデフォルト値の`max-index-length` [＃11459](https://github.com/pingcap/tiflow/issues/11459) @ [マイケル・ムデン](https://github.com/michaelmdeng)を超えるとデータレプリケーションが中断される問題を修正しました
-        -   DMが`FAKE_ROTATE_EVENT`正しく処理できない問題を修正[＃11381](https://github.com/pingcap/tiflow/issues/11381) @ [ランス6716](https://github.com/lance6716)
+        -   スキーマ トラッカーが LIST パーティション テーブルを誤って処理し、DM エラー[＃11408](https://github.com/pingcap/tiflow/issues/11408) @ [lance6716](https://github.com/lance6716)が発生する問題を修正しました。
+        -   インデックスの長さがデフォルト値の`max-index-length` [＃11459](https://github.com/pingcap/tiflow/issues/11459) @ [michaelmdeng](https://github.com/michaelmdeng)を超えるとデータレプリケーションが中断される問題を修正しました
+        -   DMが`FAKE_ROTATE_EVENT`正しく処理できない問題を修正[＃11381](https://github.com/pingcap/tiflow/issues/11381) @ [lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 
-        -   TiDB Lightningがキースペース名[＃54232](https://github.com/pingcap/tidb/issues/54232) @ [ケニーtm](https://github.com/kennytm)の取得に失敗した場合、混乱を招く`WARN`ログを出力する問題を修正しました
-        -   TiDB LightningのTLS構成がクラスタ証明書[＃54172](https://github.com/pingcap/tidb/issues/54172) @ [杉本英](https://github.com/ei-sugimoto)に影響する問題を修正
-        -   TiDB Lightning [＃49826](https://github.com/pingcap/tidb/issues/49826) @ [ランス6716](https://github.com/lance6716)を使用してデータのインポート中にトランザクションの競合が発生する問題を修正しました
-        -   大きなチェックポイントファイルにより、多数のデータベースとテーブル[＃55054](https://github.com/pingcap/tidb/issues/55054) @ [D3ハンター](https://github.com/D3Hunter)のインポート時にパフォーマンスが低下する問題を修正しました。
+        -   TiDB Lightningがキースペース名[＃54232](https://github.com/pingcap/tidb/issues/54232) @ [kennytm](https://github.com/kennytm)の取得に失敗した場合、混乱を招く`WARN`ログを出力する問題を修正しました
+        -   TiDB LightningのTLS構成がクラスタ証明書[＃54172](https://github.com/pingcap/tidb/issues/54172) @ [ei-sugimoto](https://github.com/ei-sugimoto)に影響する問題を修正
+        -   TiDB Lightning [＃49826](https://github.com/pingcap/tidb/issues/49826) @ [lance6716](https://github.com/lance6716)を使用してデータのインポート中にトランザクションの競合が発生する問題を修正しました
+        -   大きなチェックポイントファイルにより、多数のデータベースとテーブル[＃55054](https://github.com/pingcap/tidb/issues/55054) @ [D3Hunter](https://github.com/D3Hunter)のインポート時にパフォーマンスが低下する問題を修正しました。
 
 ## 寄稿者 {#contributors}
 
