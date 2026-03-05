@@ -13,7 +13,7 @@ TiDBバージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone-
 
 v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス<br/></td><td>セッションレベル<a href="https://docs.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">非準備 SQL プランキャッシュ</a>(実験的)</td><td>セッション レベルでプラン キャッシュを自動的に再利用することをサポートし、事前に準備ステートメントを手動で設定しなくても、コンパイルを減らし、同じ SQL パターンのクエリ時間を短縮します。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.、分散storageとコンピューティングアーキテクチャ、および S3 共有storage</a>（実験的）をサポートしています。</td><td> TiFlash は、オプションとしてクラウド ネイティブアーキテクチャを導入します。<ul><li> TiFlash のコンピューティングとstorageを分離します。これは、弾力的な HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有storageを提供できる S3 ベースのstorageエンジンを導入します。</li></ul></td></tr><tr><td rowspan="2">信頼性と可用性<br/></td><td><a href="https://docs.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">リソース制御の強化</a>（実験的）</td><td>リソースグループを使用して、単一クラスタ内の様々なアプリケーションやワークロードにリソースを割り当て、分離できるようになりました。このリリースでは、TiDB は、異なるリソースバインディングモード（ユーザーレベル、セッションレベル、ステートメントレベル）とユーザー定義の優先順位のサポートを追加しました。さらに、コマンドを使用してリソースキャリブレーション（リソース全体の使用量の見積もり）を実行することもできます。</td></tr><tr><td> TiFlashは<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">ディスクへの書き込み</a>をサポートしています</td><td>TiFlash は、集計、ソート、ハッシュ結合などのデータ集約型操作における OOM を軽減するために、ディスクへの中間結果のスピルをサポートします。</td></tr><tr><td rowspan="2"> SQL</td><td> <a href="https://docs.pingcap.com/tidb/v7.0/time-to-live" target="_blank">行レベルのTTL</a> （GA）</td><td>一定の期間を経過したデータを自動的に期限切れにすることで、データベース サイズの管理をサポートし、パフォーマンスを向上します。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank"> <code>LIST</code> / <code>RANGE</code>パーティションの再編成</a></td><td><code>REORGANIZE PARTITION</code>ステートメントは、隣接するパーティションを結合したり、1 つのパーティションを複数のパーティションに分割したりするために使用でき、パーティション化されたテーブルの使いやすさが向上します。</td></tr><tr><td rowspan="2"> DB操作と可観測性<br/></td><td>TiDB は<a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"> <code>LOAD DATA</code>ステートメント</a>の機能を強化します (実験的)</td><td> TiDB は、 S3/GCSからのデータインポートのサポートなど、 <code>LOAD DATA</code> SQL ステートメントの機能を強化します。<br/></td></tr><tr><td> TiCDC は<a href="https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank"> オブジェクトstorageシンク</a>(GA) をサポートしています</td><td>TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのオブジェクトstorageサービスへの行変更イベントの複製をサポートしています。<br/></td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス<br/></td><td>セッション レベルの<a href="https://docs.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">非準備 SQL プラン キャッシュ</a>(実験的)</td><td>セッション レベルでプラン キャッシュを自動的に再利用することをサポートし、事前に準備ステートメントを手動で設定しなくても、コンパイルを減らし、同じ SQL パターンのクエリ時間を短縮します。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">、分散storageとコンピューティングアーキテクチャ、および S3 共有storage</a>(実験的) をサポートします。</td><td> TiFlash は、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlash のコンピューティングとstorageを分離します。これは、弾力的な HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有storageを提供できる S3 ベースのstorageエンジンを導入します。</li></ul></td></tr><tr><td rowspan="2">信頼性と可用性<br/></td><td><a href="https://docs.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">リソース制御の強化</a>（実験的）</td><td>リソースグループを使用して、単一クラスタ内の様々なアプリケーションやワークロードにリソースを割り当て、分離できるようになりました。このリリースでは、TiDB は、異なるリソースバインディングモード（ユーザーレベル、セッションレベル、ステートメントレベル）とユーザー定義の優先順位のサポートを追加しました。さらに、コマンドを使用してリソースキャリブレーション（リソース全体の使用量の見積もり）を実行することもできます。</td></tr><tr><td> TiFlashは<a href="https://docs.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">ディスクへの書き込み</a>をサポート</td><td>TiFlash は、集計、ソート、ハッシュ結合などのデータ集約型操作における OOM を軽減するために、ディスクへの中間結果のスピルをサポートします。</td></tr><tr><td rowspan="2"> SQL</td><td><a href="https://docs.pingcap.com/tidb/v7.0/time-to-live" target="_blank">行レベルの TTL</a> (GA)</td><td>一定の期間を経過したデータを自動的に期限切れにすることで、データベース サイズの管理をサポートし、パフォーマンスを向上します。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank"><code>LIST</code> / <code>RANGE</code>パーティションの再編成</a></td><td><code>REORGANIZE PARTITION</code>ステートメントは、隣接するパーティションを結合したり、1 つのパーティションを複数のパーティションに分割したりするために使用でき、パーティション化されたテーブルの使いやすさが向上します。</td></tr><tr><td rowspan="2"> DB操作と可観測性<br/></td><td>TiDB は<a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code>ステートメント</a>の機能を拡張します (実験的)</td><td> TiDB は、S3/GCS からのデータインポートのサポートなど、 <code>LOAD DATA</code> SQL ステートメントの機能を強化します。<br/></td></tr><tr><td> TiCDC は<a href="https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">オブジェクトstorageシンク</a>(GA) をサポートします</td><td>TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのオブジェクトstorageサービスへの行変更イベントの複製をサポートしています。<br/></td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -73,7 +73,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     詳細については[ドキュメント](/sql-prepared-plan-cache.md)参照してください。
 
--   TiKVは、ログリサイクル[＃14371](https://github.com/tikv/tikv/issues/14371) @ [リクックスサシネーター](https://github.com/LykxSassinator)用の空のログファイルの自動生成をサポートします。
+-   TiKVは、ログリサイクル[＃14371](https://github.com/tikv/tikv/issues/14371) @ [LykxSassinator](https://github.com/LykxSassinator)用の空のログファイルの自動生成をサポートします。
 
     TiKV v6.3.0では、書き込み負荷によるロングテールレイテンシーを削減する機能[Raftのリサイクル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)導入されました。しかし、ログリサイクルはRaftログファイルの数が一定の閾値に達した場合にのみ有効になるため、ユーザーがこの機能によるスループットの向上を直接体験することは困難です。
 
@@ -107,7 +107,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     リソース グループは次のように使用できます。
 
-    -   ユーザーレベル。1または[`CREATE USER`](/sql-statements/sql-statement-create-user.md) [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。リソースグループをユーザーにバインドすると、ユーザーが新たに作成したセッションは、対応するリソースグループに自動的にバインドされます。
+    -   ユーザーレベル。1 または[`CREATE USER`](/sql-statements/sql-statement-create-user.md) [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。リソースグループをユーザーにバインドすると、そのユーザーが新たに作成したセッションは、対応するリソースグループに自動的にバインドされます。
     -   セッションレベル[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を介して現在のセッションで使用されるリソースグループを設定します。
     -   ステートメントレベル[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を介して現在のステートメントで使用されるリソースグループを設定します。
 
@@ -154,7 +154,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### 可用性 {#availability}
 
--   `prefer-leader`オプションをサポートすることで、読み取り操作の可用性が向上し、不安定なネットワーク状況での応答レイテンシーが短縮されます[＃40905](https://github.com/pingcap/tidb/issues/40905) @ [LykxSassinator](https://github.com/LykxSassinator)
+-   `prefer-leader`オプションをサポートすることで、読み取り操作の可用性が向上し、不安定なネットワーク状況での応答レイテンシーが短縮されます[＃40905](https://github.com/pingcap/tidb/issues/40905) @ [リクックスサシネーター](https://github.com/LykxSassinator)
 
     TiDBのデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を介して制御できます。バージョン7.0.0では、この変数に`prefer-leader`オプションが追加されました。変数を`prefer-leader`に設定すると、TiDBはリーダーレプリカを優先的に選択して読み取り操作を実行します。ディスクやネットワークのパフォーマンス変動などにより、リーダーレプリカの処理速度が大幅に低下した場合、TiDBは利用可能な他のフォロワーレプリカを選択して読み取り操作を実行するため、可用性が向上し、応答レイテンシーが短縮されます。
 
@@ -291,7 +291,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)               | 新しく追加された | この変数は、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を設定します。この変数で制御される機能は、TiDB v7.0.0では完全には機能しません。デフォルト値を変更しないでください。                                                                                             |
 | [`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)                                     | 新しく追加された | この変数は、結合方法のヒントが結合順序の最適化に影響を与えるかどうかを制御します。デフォルト値は`ON`で、新しい互換制御モードが使用されることを意味します。値`OFF`は、バージョン7.0.0より前の動作が使用されることを意味します。前方互換性のため、クラスターが以前のバージョンからバージョン7.0.0以降にアップグレードされた場合、この変数の値は`OFF`に設定されます。 |
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                   | 新しく追加された | この変数は、最適化ルール[ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)を有効にするかどうかを制御します。デフォルト値は`OFF`で、最適化ルールは無効です。                                                                              |
-| [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                   | 新しく追加された | この変数は、 [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御します。デフォルト値は`OFF`で、この機能は無効です。                                                                            |
+| [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                   | 新しく追加された | この変数は、 [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御します。デフォルト値は`OFF`で、この機能は無効です。                                                                                    |
 | [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | 新しく追加された | この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句が含まれ、フィルタリング条件がある場合に、オプティマイザーがインデックスを選択する方法を制御します。                                                                                                     |
 | [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)                         | 新しく追加された | 単一行競合シナリオにおけるトランザクションのテールレイテンシーを削減するために、拡張悲観的ロックウェイキングモデルを有効にするかどうかを制御します。デフォルト値は`ON`です。クラスターを以前のバージョンからv7.0.0以降にアップグレードすると、この変数の値は`OFF`に設定されます。                                              |
 | [`tidb_slow_txn_log_threshold`](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)                                     | 新しく追加された | 低速トランザクションログのしきい値を設定します。トランザクションの実行時間がこのしきい値を超えると、TiDBはトランザクションに関する詳細情報をログに記録します。デフォルト値の`0` 、この機能が無効であることを意味します。                                                                              |
@@ -401,7 +401,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
     -   統計を2回連続して収集した後にTiDBが誤った列統計情報を読み取る可能性がある問題を修正[＃42073](https://github.com/pingcap/tidb/issues/42073) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   準備プランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正[＃41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990)
     -   IndexMerge で goroutine リークが発生する可能性がある問題を修正[＃41605](https://github.com/pingcap/tidb/issues/41605) @ [グオシャオゲ](https://github.com/guo-shaoge)
-    -   strings/decimals [＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)と比較すると、BIGINT 以外の符号なし整数が誤った結果を生成する可能性がある問題を修正しました。
+    -   BIGINT 以外の符号なし整数が文字列/小数点[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)と比較されたときに誤った結果を生成する可能性がある問題を修正しました
     -   メモリ制限超過により前の`ANALYZE`ステートメントを強制終了すると、同じセッション内の現在の`ANALYZE`ステートメントが[＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐淮嶼](https://github.com/XuHuaiyu)で強制終了される可能性がある問題を修正しました。
     -   バッチコプロセッサ[＃41412](https://github.com/pingcap/tidb/issues/41412) @ [あなた06](https://github.com/you06)の情報収集プロセス中にデータ競合が発生する可能性がある問題を修正しました
     -   アサーションエラーによりパーティションテーブル[＃40629](https://github.com/pingcap/tidb/issues/40629) @ [エキシウム](https://github.com/ekexium)の MVCC 情報が印刷されない問題を修正しました
@@ -419,7 +419,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
     -   特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @ [リトルフォール](https://github.com/LittleFall)
     -   特定のケースで[＃6994](https://github.com/pingcap/tiflash/issues/6994) @ [ウィンドトーカー](https://github.com/windtalker)の 10 進キャストが誤って切り上げられる問題を修正しました
-    -   新しい照合順序[＃6807](https://github.com/pingcap/tiflash/issues/6807) @ [xzhangxian1008](https://github.com/xzhangxian1008)を有効にした後にTopN/Sort演算子が誤った結果を生成する問題を修正しました
+    -   新しい照合順序[＃6807](https://github.com/pingcap/tiflash/issues/6807) @ [xzhangxian1008](https://github.com/xzhangxian1008)を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました
     -   単一のTiFlashノード[＃6993](https://github.com/pingcap/tiflash/issues/6993) @ [ウィンドトーカー](https://github.com/windtalker)で 1,200 万行を超える結果セットを集計するときにTiFlash がエラーを報告する問題を修正しました。
 
 -   ツール
@@ -456,7 +456,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 TiDB コミュニティの以下の貢献者に感謝いたします。
 
 -   [アンチトップクォーク](https://github.com/AntiTopQuark)
--   [blacktear23](https://github.com/blacktear23)
+-   [ブラックティア23](https://github.com/blacktear23)
 -   [生まれ変わった人](https://github.com/BornChanger)
 -   [ドゥーシル9](https://github.com/Dousir9)
 -   [エルワドバ](https://github.com/erwadba)

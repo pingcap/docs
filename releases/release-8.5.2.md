@@ -17,7 +17,7 @@ TiDB バージョン: 8.5.2
 
     -   TTLテーブルと関連する統計収集タスクのGCの実行を所有者ノードに制限することで、オーバーヘッド[＃59357](https://github.com/pingcap/tidb/issues/59357) @ [lcwangchao](https://github.com/lcwangchao)を削減します。
 
--   TiKV
+-   ティクブ
 
     -   `import.num-threads`構成項目を動的に変更するサポート[＃17807](https://github.com/tikv/tikv/issues/17807) @ [リドリスR](https://github.com/RidRisR)
 
@@ -58,7 +58,7 @@ TiDB バージョン: 8.5.2
     -   分散実行フレームワーク（DXF）が有効になっている場合、内部TiDBセッションで`tidb_txn_entry_size_limit`動的に調整できない問題を修正しました[＃59506](https://github.com/pingcap/tidb/issues/59506) @ [D3ハンター](https://github.com/D3Hunter)
     -   グローバルソートが有効な場合に、 `IMPORT INTO`機能が一意のキーの競合を適切に処理できない問題を修正[＃59650](https://github.com/pingcap/tidb/issues/59650) @ [ランス6716](https://github.com/lance6716)
     -   グローバルソートデ​​ータパスにネットワークレイテンシーエラーを挿入すると、 `IMPORT INTO`操作が[＃50451](https://github.com/pingcap/tidb/issues/50451) @ [D3ハンター](https://github.com/D3Hunter)で失敗する問題を修正しました。
-    -   `ADD UNIQUE INDEX`を実行するとデータの不整合が発生する可能性がある問題を修正[＃60339](https://github.com/pingcap/tidb/issues/60339) @ [接線](https://github.com/tangenta)
+    -   `ADD UNIQUE INDEX`実行するとデータの不整合が発生する可能性がある問題を修正[＃60339](https://github.com/pingcap/tidb/issues/60339) @ [接線](https://github.com/tangenta)
     -   `INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [＃59245](https://github.com/pingcap/tidb/issues/59245) @ [ランス6716](https://github.com/lance6716)をクエリしたときに`LABELS`列目の値が`BINLOG_STATUS`列目に誤って表示される問題を修正しました
     -   インデックス作成中にkill PD Leaderフォールトを挿入するとデータの不整合が発生する可能性がある問題を修正[＃59701](https://github.com/pingcap/tidb/issues/59701) @ [接線](https://github.com/tangenta)
     -   約650万のテーブル[＃58368](https://github.com/pingcap/tidb/issues/58368) @ [ランス6716](https://github.com/lance6716)を作成した後にTiDBがメモリ不足（OOM）になる問題を修正しました
@@ -67,18 +67,18 @@ TiDB バージョン: 8.5.2
     -   `information_schema.tables`クエリすると、 `table_schema`と`table_name`値が一致しない[＃60593](https://github.com/pingcap/tidb/issues/60593) @ [接線](https://github.com/tangenta)が返される問題を修正しました。
     -   内部SQLコミットが失敗したときにDDL通知が誤った通知を送信する可能性がある問題を修正[＃59055](https://github.com/pingcap/tidb/issues/59055) @ [ランス6716](https://github.com/lance6716)
     -   グローバルソート機能が有効になっている場合、リージョンサイズが 256 MiB [＃59962](https://github.com/pingcap/tidb/issues/59962) @ [D3ハンター](https://github.com/D3Hunter)であるにもかかわらず、 `ADD INDEX` DDL 操作で SST ファイルが 96 MiB に分割される問題を修正しました。
-    -   グローバルソート機能を有効にした状態でデータのインポート中にメモリ使用量が 80% を超えると TiDB サーバーのメモリ不足 (OOM) が発生する問題を修正[＃59508](https://github.com/pingcap/tidb/issues/59508) @ [D3ハンター](https://github.com/D3Hunter)
+    -   グローバルソート機能を有効にした状態でデータのインポート中にメモリ使用量が 80% を超えると TiDB サーバーのメモリ(OOM) が発生する問題を修正[＃59508](https://github.com/pingcap/tidb/issues/59508) @ [D3ハンター](https://github.com/D3Hunter)
 
--   TiKV
+-   ティクブ
 
     -   `txn_status_cache` [＃18384](https://github.com/tikv/tikv/issues/18384) @ [エキシウム](https://github.com/ekexium)で潜在的なデッドロックが発生する可能性がある問題を修正
     -   解決済み-TSの監視とログが異常になる可能性がある問題を修正[＃17989](https://github.com/tikv/tikv/issues/17989) @ [エキシウム](https://github.com/ekexium)
     -   リージョンマージでRaftインデックスの不一致[＃18129](https://github.com/tikv/tikv/issues/18129) @ [栄光](https://github.com/glorv)により TiKV 異常終了が発生する可能性がある問題を修正しました
-    -   ディスクが[＃17939](https://github.com/tikv/tikv/issues/17939) @ [リクックスサシネーター](https://github.com/LykxSassinator)でスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました
+    -   ディスクが[＃17939](https://github.com/tikv/tikv/issues/17939) @ [LykxSassinator](https://github.com/LykxSassinator)でスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました
     -   GCワーカーの負荷が高いときにデッドロックが発生する可能性がある問題を修正[＃18214](https://github.com/tikv/tikv/issues/18214) @ [ジグアン](https://github.com/zyguan)
     -   タイムロールバックによって異常なRocksDBフロー制御が発生し、パフォーマンスジッター[＃17995](https://github.com/tikv/tikv/issues/17995) @ [LykxSassinator](https://github.com/LykxSassinator)が発生する可能性がある問題を修正しました。
     -   例外[＃18245](https://github.com/tikv/tikv/issues/18245) @ [wlwilliamx](https://github.com/wlwilliamx)が発生したときに CDC 接続でリソース漏洩が発生する可能性がある問題を修正しました
-    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) [LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
+    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602)対[LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
     -   1フェーズコミット（1PC）のみが有効で、非同期コミットが有効になっていない場合に、最後に書き込まれたデータが読み取れない可能性がある問題を修正[＃18117](https://github.com/tikv/tikv/issues/18117) @ [ジグアン](https://github.com/zyguan)
     -   GCワーカーが予期せずエラーログ[＃18213](https://github.com/tikv/tikv/issues/18213) @ [エキシウム](https://github.com/ekexium)を出力問題を修正しました
 
@@ -94,7 +94,7 @@ TiDB バージョン: 8.5.2
     -   TSO [＃9004](https://github.com/tikv/pd/issues/9004) @ [rleungx](https://github.com/rleungx)を割り当てるときにメモリリークが発生する可能性がある問題を修正しました
     -   `tidb_enable_tso_follower_proxy`システム変数が[＃8947](https://github.com/tikv/pd/issues/8947) @ [Jmポテト](https://github.com/JmPotato)で有効にならない可能性がある問題を修正しました
     -   PDノードがLeader[＃9051](https://github.com/tikv/pd/issues/9051) @ [rleungx](https://github.com/rleungx)でない場合でもTSOを生成する可能性がある問題を修正しました
-    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対[rleungx](https://github.com/rleungx)の切り替え時にリージョン同期が間に合わない問題を修正しました
+    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対[rleungx](https://github.com/rleungx)切り替え時にリージョン同期が間に合わない問題を修正しました
     -   デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @ [rleungx](https://github.com/rleungx)
     -   `tidb_enable_tso_follower_proxy`有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @ [テーマ](https://github.com/Tema)
 
@@ -121,9 +121,9 @@ TiDB バージョン: 8.5.2
 
     -   バックアップと復元 (BR)
 
-        -   データの復元中に SST ファイルを繰り返しダウンロードすると、極端な場合には TiKV がpanicを起こす可能性がある問題を修正しました[＃18335](https://github.com/tikv/tikv/issues/18335) @ [3ポイントシュート](https://github.com/3pointer)
+        -   データの復元中に SST ファイルを繰り返しダウンロードすると、極端な場合には TiKV がpanic可能性がある問題を修正しました[＃18335](https://github.com/tikv/tikv/issues/18335) @ [3ポイントシュート](https://github.com/3pointer)
         -   `br log status --json` [＃57959](https://github.com/pingcap/tidb/issues/57959) @ [リーヴルス](https://github.com/Leavrth)を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。
-        -   TiKV [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [トリスタン1900](https://github.com/Tristan1900)にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BR が復元に失敗する問題を修正しました。
+        -   TiKV [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [トリスタン1900](https://github.com/Tristan1900)にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BRが復元に失敗する問題を修正しました。
         -   PD [＃18087](https://github.com/tikv/tikv/issues/18087) @ [ユジュンセン](https://github.com/YuJuncen)にアクセスできないために致命的なエラーが発生した場合にログバックアップが正常に終了しない問題を修正しました。
         -   PITRが3072バイトを超えるインデックスの復元に失敗する問題を修正[＃58430](https://github.com/pingcap/tidb/issues/58430) @ [ユジュンセン](https://github.com/YuJuncen)
 
@@ -131,10 +131,10 @@ TiDB バージョン: 8.5.2
 
         -   レプリケーショントラフィックが下流の Kafka [＃12110](https://github.com/pingcap/tiflow/issues/12110) @ [3エースショーハンド](https://github.com/3AceShowHand)のトラフィックしきい値を超えた後に、変更フィードがスタックする可能性がある問題を修正しました。
         -   `pulsar+http`または`pulsar+https`プロトコルが使用されている場合、Kafka シンクのディスパッチルールが有効にならない問題を修正しました[＃12068](https://github.com/pingcap/tiflow/issues/12068) @ [サンディープ・パディ](https://github.com/SandeepPadhi)
-        -   TiCDC が PD リーダーの移行を時間内に監視できず、レプリケーションのレイテンシーが[＃11997](https://github.com/pingcap/tiflow/issues/11997) @ [リデズ](https://github.com/lidezhu)に増加する問題を修正しました。
+        -   TiCDC が PD リーダーの移行を時間内に監視できず、レプリケーションのレイテンシーが[＃11997](https://github.com/pingcap/tiflow/issues/11997) @ [リデジュ](https://github.com/lidezhu)に増加する問題を修正しました。
         -   Avroプロトコル[＃11994](https://github.com/pingcap/tiflow/issues/11994) @ [wk989898](https://github.com/wk989898)経由で`default NULL`文を複製するときにTiCDCがエラーを報告する問題を修正
         -   アップストリームで新しく追加された列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
-        -   PDスケールイン[＃12004](https://github.com/pingcap/tiflow/issues/12004) @ [リデズ](https://github.com/lidezhu)後にTiCDCがPDに正しく接続できない問題を修正
+        -   PDスケールイン[＃12004](https://github.com/pingcap/tiflow/issues/12004) @ [リデジュ](https://github.com/lidezhu)後にTiCDCがPDに正しく接続できない問題を修正
         -   `CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメント[＃11839](https://github.com/pingcap/tiflow/issues/11839) @ [チャールズ・チャン96](https://github.com/CharlesCheung96)を複製するときに TiCDC がpanic可能性がある問題を修正しました
 
     -   TiDB データ移行 (DM)
@@ -148,7 +148,7 @@ TiDB バージョン: 8.5.2
         -   ログが適切に感度調整されない問題を修正[＃59086](https://github.com/pingcap/tidb/issues/59086) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   外部アカウントを使用して GCSstorage操作[＃60155](https://github.com/pingcap/tidb/issues/60155) @ [ランス6716](https://github.com/lance6716)を実行すると、認証が`context canceled`エラーで失敗する問題を修正しました
         -   クラウドstorageから TiDB [＃60224](https://github.com/pingcap/tidb/issues/60224) @ [ジョーチェン](https://github.com/joechenrh)に Parquet ファイルをインポートするときに、 TiDB Lightning が数時間停止する可能性がある問題を修正しました。
-        -   大量のデータをインポートする際に、 TiDB Lightning がSST ファイルの書き込みまたは TiKV クラスターへの取り込み中にメモリ不足 (OOM) になる可能性がある問題を修正しました[＃59947](https://github.com/pingcap/tidb/issues/59947) @ [オリバーS929](https://github.com/OliverS929)
+        -   大量のデータをインポートする際に、 TiDB Lightning がSST ファイルの書き込みまたは TiKV クラスターへの取り込み中にメモリ(OOM) になる可能性がある問題を修正しました[＃59947](https://github.com/pingcap/tidb/issues/59947) @ [オリバーS929](https://github.com/OliverS929)
         -   テーブル作成時の最大 QPS が低く、 `information_schema.tables`へのアクセスが遅いため、数百万のテーブルがあるシナリオでTiDB Lightning がスキーマ ジョブをディスパッチする速度が遅くなる問題を修正しました[＃58141](https://github.com/pingcap/tidb/issues/58141) @ [D3ハンター](https://github.com/D3Hunter)
 
     -   NGモニタリング

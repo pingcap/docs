@@ -24,7 +24,7 @@ TiDB バージョン: 8.1.2
 
     -   リクエストユニット（RU）設定に関するメトリックを[＃8444](https://github.com/tikv/pd/issues/8444) @ [ノルーシュ](https://github.com/nolouch)に追加します
 
--   ティクブ
+-   TiKV
 
     -   空のテーブルと小さなリージョン[＃17376](https://github.com/tikv/tikv/issues/17376) @ [LykxSassinator](https://github.com/LykxSassinator)のシナリオでのリージョン結合の速度を向上
     -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が[＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)で一貫して動作することを保証します。
@@ -93,7 +93,7 @@ TiDB バージョン: 8.1.2
     -   `tidb_ddl_enable_fast_reorg`経由で`ADD INDEX`と`CREATE INDEX`の加速を有効にすると、 `Duplicate entry`エラー[＃49233](https://github.com/pingcap/tidb/issues/49233) @ [ランス6716](https://github.com/lance6716)が発生する可能性がある問題を修正しました。
     -   大規模なテーブルに非分散方式でインデックスを追加するときにインデックスのタイムスタンプが`0`に設定される問題を修正[＃57980](https://github.com/pingcap/tidb/issues/57980) @ [ランス6716](https://github.com/lance6716)
 
--   ティクブ
+-   TiKV
 
     -   構成`resolved-ts.advance-ts-interval`有効にならないため、TiKV が[＃17107](https://github.com/tikv/tikv/issues/17107) @ [ミョンケミンタ](https://github.com/MyonKeminta)で再起動すると、TiCDC のレプリケーションレイテンシーと Point-in-time Recovery (PITR) が大幅に増加する問題を修正しました。
     -   リソース制御[＃17589](https://github.com/tikv/tikv/issues/17589) @ [栄光](https://github.com/glorv)をトリガーするときに一部のタスクで高いテールレイテンシーが発生する問題を修正しました
@@ -101,9 +101,9 @@ TiDB バージョン: 8.1.2
     -   ディスクが[＃17939](https://github.com/tikv/tikv/issues/17939) @ [LykxSassinator](https://github.com/LykxSassinator)でスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました
     -   Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[＃17884](https://github.com/tikv/tikv/issues/17884) @ [リクックスサシネーター](https://github.com/LykxSassinator)
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカ[＃17469](https://github.com/tikv/tikv/issues/17469) @ [ヒビシェン](https://github.com/hbisheng)の即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。
-    -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [ゲンリキ](https://github.com/gengliqi)
+    -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [ゲンリチ](https://github.com/gengliqi)
     -   多数のトランザクションが同じキーのロック解除待ち行列に入っていて、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題[＃17394](https://github.com/tikv/tikv/issues/17394) @ [ミョンケミンタ](https://github.com/MyonKeminta)が発生する可能性がある問題を修正しました
-    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) [LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
+    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) [リクックスサシネーター](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
     -   読み取りスレッドがRaft Engine[＃17383](https://github.com/tikv/tikv/issues/17383) @ [LykxSassinator](https://github.com/LykxSassinator)のMemTable内の古いインデックスにアクセスしたときに発生するpanic問題を修正しました。
     -   大きなテーブルやパーティション[＃17304](https://github.com/tikv/tikv/issues/17304) @ [コナー1996](https://github.com/Connor1996)を削除した後に発生する可能性のあるフロー制御の問題を修正しました
 
@@ -131,7 +131,7 @@ TiDB バージョン: 8.1.2
     -   TiFlashでサポートされていない一部の JSON関数がTiFlash [＃9444](https://github.com/pingcap/tiflash/issues/9444) @ [ウィンドトーカー](https://github.com/windtalker)にプッシュダウンされる問題を修正しました
     -   特定のケースで関数`CAST AS DECIMAL`の結果の符号が正しくない問題を修正[＃9301](https://github.com/pingcap/tiflash/issues/9301) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   分散storageおよびコンピューティングアーキテクチャ[＃9298](https://github.com/pingcap/tiflash/issues/9298) @ [ジンヘリン](https://github.com/JinheLin)で、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。
-    -   `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラー[＃9473](https://github.com/pingcap/tiflash/issues/9473) @ [ゲンリキ](https://github.com/gengliqi)が発生する問題を修正しました
+    -   `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラー[＃9473](https://github.com/pingcap/tiflash/issues/9473) @ [ゲンリチ](https://github.com/gengliqi)が発生する問題を修正しました
     -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[＃8754](https://github.com/pingcap/tiflash/issues/8754) @ [ソロツグ](https://github.com/solotzg)
     -   `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[＃9465](https://github.com/pingcap/tiflash/issues/9465) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   分散storageおよびコンピューティングアーキテクチャ[＃9665](https://github.com/pingcap/tiflash/issues/9665) @ [ジムララ](https://github.com/zimulala)で新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました

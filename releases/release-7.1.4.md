@@ -7,7 +7,7 @@ summary: TiDB 7.1.4 における互換性の変更、改善、およびバグ修
 
 発売日：2024年3月11日
 
-TiDB バージョン: 7.1.4
+TiDBバージョン: 7.1.4
 
 クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v7.1/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup)
 
@@ -112,7 +112,7 @@ TiDB バージョン: 7.1.4
 
 -   TiKV
 
-    -   例外的な状況で休止状態の領域がすぐに復帰しない問題を修正[＃16368](https://github.com/tikv/tikv/issues/16368) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   例外的な状況で休止状態の領域がすぐに起動しない問題を修正[＃16368](https://github.com/tikv/tikv/issues/16368) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   ノードをオフラインにする前に、リージョン内のすべてのレプリカの最後のハートビート時間をチェックすることで、1 つのレプリカがオフラインになるとリージョン全体が使用できなくなる問題を修正しました[＃16465](https://github.com/tikv/tikv/issues/16465) @ [トニーシュキ](https://github.com/tonyxuqqi)
     -   Titan が有効になっているときに RocksDB に保存されるテーブルプロパティが不正確になる可能性がある問題を修正[＃16319](https://github.com/tikv/tikv/issues/16319) @ [ヒック](https://github.com/hicqu)
     -   クラスターにTiFlashノード[＃16189](https://github.com/tikv/tikv/issues/16189) @ [新鮮な](https://github.com/frew)がある場合に`tikv-ctl compact-cluster`実行が失敗する問題を修正しました
@@ -145,7 +145,7 @@ TiDB バージョン: 7.1.4
     -   レプリカ移行[＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)中に PD とのネットワーク接続が不安定になり、 TiFlash がpanic可能性がある問題を修正しました
     -   `ENUM`値が 0 [＃8311](https://github.com/pingcap/tiflash/issues/8311) @ [ソロツグ](https://github.com/solotzg)の場合にTiFlash が`ENUM`誤って処理する問題を修正しました
     -   定数文字列パラメータ[＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [ウィンドトーカー](https://github.com/windtalker)を含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。
-    -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイト[＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [ゲンリチ](https://github.com/gengliqi)を占めることができない問題を修正しました。
+    -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイト[＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [ゲンリキ](https://github.com/gengliqi)を占めることができない問題を修正しました。
     -   短いクエリが正常に実行され、過剰な情報ログ[＃8592](https://github.com/pingcap/tiflash/issues/8592) @ [ウィンドトーカー](https://github.com/windtalker)が出力される問題を修正しました。
     -   クエリ[＃8564](https://github.com/pingcap/tiflash/issues/8564) @ [ジンヘリン](https://github.com/JinheLin)の低速化によりメモリ使用量が大幅に増加する問題を修正
     -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`実行した後にTiFlash がパニックを起こし、null 許容列が[＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)に非 null 許容に変更される問題を修正しました。

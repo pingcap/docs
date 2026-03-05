@@ -37,7 +37,7 @@ TiDBバージョン: 6.5.11
 
     -   TiCDC
 
-        -   下流が`SUPER`権限が付与されたTiDBの場合、TiCDCは下流データベースから`ADD INDEX DDL`の実行ステータスを照会することをサポートします。これにより、DDL文の実行を再試行する際のタイムアウトによるデータ複製の失敗を回避することができます[＃10682](https://github.com/pingcap/tiflow/issues/10682) @ [チャールズ・チャン96](https://github.com/CharlesCheung96)の場合）。
+        -   下流が`SUPER`権限が付与されたTiDBの場合、TiCDCは下流データベースから`ADD INDEX DDL`の実行ステータスを照会することをサポートします。これにより、DDL文の実行を再試行する際のタイムアウトによるデータ複製の失敗を回避できます[＃10682](https://github.com/pingcap/tiflow/issues/10682) @ [チャールズ・チャン96](https://github.com/CharlesCheung96)の場合）。
 
 ## バグ修正 {#bug-fixes}
 
@@ -80,7 +80,7 @@ TiDBバージョン: 6.5.11
     -   大きなテーブルやパーティション[＃17304](https://github.com/tikv/tikv/issues/17304) @ [コナー1996](https://github.com/Connor1996)を削除した後に発生する可能性のあるトラフィック制御の問題を修正しました
     -   削除された`sst_importer` SST ファイル[＃15053](https://github.com/tikv/tikv/issues/15053) @ [ランス6716](https://github.com/lance6716)を取り込むことにより TiKV がpanicになる可能性がある問題を修正しました
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカ[＃17469](https://github.com/tikv/tikv/issues/17469) @ [ヒビシェン](https://github.com/hbisheng)の即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。
-    -   破損したRaftデータ スナップショット[＃15292](https://github.com/tikv/tikv/issues/15292) @ [リクックスサシネーター](https://github.com/LykxSassinator)を適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。
+    -   破損したRaftデータ スナップショット[＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)を適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB [＃17176](https://github.com/tikv/tikv/issues/17176) @ [エキシウム](https://github.com/ekexium)に送信されるメッセージには反映されない問題を修正しました。
     -   CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[＃17107](https://github.com/tikv/tikv/issues/17107) @ [ミョンケミンタ](https://github.com/MyonKeminta)
 

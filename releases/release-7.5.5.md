@@ -93,15 +93,15 @@ TiDB バージョン: 7.5.5
     -   潜在的なセキュリティリスクを防ぐためのアップデート`golang-jwt`と`jwt` [＃57135](https://github.com/pingcap/tidb/issues/57135) @ [ホーキングレイ](https://github.com/hawkingrei)
     -   `ALTER TABLE`文[＃57510](https://github.com/pingcap/tidb/issues/57510) @ [ミョンス](https://github.com/mjonss)を使用して、クラスタ化インデックスを持つテーブルをパーティションテーブルに変換するときに、同時書き込みによってデータが重複する可能性がある問題を修正しました。
 
--   ティクブ
+-   TiKV
 
     -   領域をマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[＃17840](https://github.com/tikv/tikv/issues/17840) @ [栄光](https://github.com/glorv)
     -   Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[＃17884](https://github.com/tikv/tikv/issues/17884) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   `log-file`パラメータが指定されていない場合、jprof の出力が正しくキャプチャおよび処理されない問題を修正[＃17607](https://github.com/tikv/tikv/issues/17607) @ [ヘキシリー](https://github.com/Hexilee)
     -   休止状態のリージョンが起動しているときにレイテンシーが増加する可能性がある問題を修正[＃17101](https://github.com/tikv/tikv/issues/17101) @ [コナー1996](https://github.com/Connor1996)
-    -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [ゲンリチ](https://github.com/gengliqi)
+    -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [ゲンリキ](https://github.com/gengliqi)
     -   読み取りスレッドがRaft Engine[＃17383](https://github.com/tikv/tikv/issues/17383) @ [LykxSassinator](https://github.com/LykxSassinator)のMemTable内の古いインデックスにアクセスしたときに発生するpanic問題を修正しました。
-    -   多数のトランザクションが同じキーのロック解除待ち行列に入っていて、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題[＃17394](https://github.com/tikv/tikv/issues/17394) @ [ミョンケミンタ](https://github.com/MyonKeminta)が発生する可能性がある問題を修正しました。
+    -   多数のトランザクションが同じキーのロック解除待ち行列に入っていて、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題[＃17394](https://github.com/tikv/tikv/issues/17394) @ [ミョンケミンタ](https://github.com/MyonKeminta)が発生する可能性がある問題を修正しました
     -   すべての休止状態の領域が[＃17101](https://github.com/tikv/tikv/issues/17101) @ [hhwyt](https://github.com/hhwyt)で起動すると書き込みジッターが発生する可能性がある問題を修正しました
     -   TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @ [金星の上](https://github.com/overvenus)
     -   オンラインアンセーフリカバリがマージ中止[＃15580](https://github.com/tikv/tikv/issues/15580) @ [v01dスター](https://github.com/v01dstar)を処理できない問題を修正
@@ -155,7 +155,7 @@ TiDB バージョン: 7.5.5
 
     -   TiDB Lightning
 
-        -   TiDB LightningがTiKV [＃56114](https://github.com/pingcap/tidb/issues/56114) @ [魚類](https://github.com/fishiu)から送信されたサイズ超過のメッセージを受信できない問題を修正しました
+        -   TiDB LightningがTiKV [＃56114](https://github.com/pingcap/tidb/issues/56114) @ [フィシュウ](https://github.com/fishiu)から送信されたサイズ超過のメッセージを受信できない問題を修正しました
         -   物理インポートモード[＃56814](https://github.com/pingcap/tidb/issues/56814) @ [D3ハンター](https://github.com/D3Hunter)を使用してデータをインポートした後に`AUTO_INCREMENT`値が高すぎる値に設定される問題を修正しました
         -   メタデータ更新中に`Lock wait timeout`エラーが発生した場合にTiDB Lightning が自動的に再試行しない問題を修正しました[＃53042](https://github.com/pingcap/tidb/issues/53042) @ [グオショウヤン](https://github.com/guoshouyan)
         -   高同時実行シナリオでクラウドstorageからデータをインポートするときにパフォーマンスが低下する問題を修正[＃57413](https://github.com/pingcap/tidb/issues/57413) @ [xuanyu66](https://github.com/xuanyu66)

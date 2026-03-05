@@ -13,14 +13,14 @@ TiDB バージョン: 6.5.5
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
-    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-)追加し[qw4990](https://github.com/qw4990) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
+    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) @ [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) [qw4990](https://github.com/qw4990)し[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
     -   コプロセッサ[＃46514](https://github.com/pingcap/tidb/issues/46514) @ [あなた06](https://github.com/you06)に関連する要求元情報を追加します
 
 -   TiKV
 
-    -   接続再試行のプロセスでPDクライアントにバックオフメカニズムを追加し、エラー再試行中に再試行間隔を徐々に増やしてPD圧力[＃15428](https://github.com/tikv/tikv/issues/15428) @ [ノルーシュ](https://github.com/nolouch)を軽減します。
+    -   接続再試行のプロセスでPDクライアントのバックオフメカニズムを追加し、エラー再試行中に再試行間隔を徐々に増やしてPD圧力[＃15428](https://github.com/tikv/tikv/issues/15428) @ [ノルーシュ](https://github.com/nolouch)を軽減します。
     -   スナップショット[＃15401](https://github.com/tikv/tikv/issues/15401) @ [スペードA-タン](https://github.com/SpadeA-Tang)の監視メトリックを追加します
     -   リーダー転送中の PITR チェックポイント ラグの安定性を向上[＃13638](https://github.com/tikv/tikv/issues/13638) @ [ユジュンセン](https://github.com/YuJuncen)
     -   `safe-ts` [＃15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)に関連するログと監視メトリックを追加します
@@ -34,15 +34,15 @@ TiDB バージョン: 6.5.5
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   ステイル読み取り が利用できないレプリカ[＃46198](https://github.com/pingcap/tidb/issues/46198) @ [ジグアン](https://github.com/zyguan)を選択する可能性がある問題を修正しました
-    -   ステイル読み取りとSchema Cache [＃43481](https://github.com/pingcap/tidb/issues/43481) @ [crazycs520](https://github.com/crazycs520)の非互換性により追加のオーバーヘッドが発生する問題を修正しました。
+    -   ステイル読み取りとSchema Cache [＃43481](https://github.com/pingcap/tidb/issues/43481) @ [crazycs520](https://github.com/crazycs520)の非互換性により追加のオーバーヘッドが発生する問題を修正しました
 
--   ティクブ
+-   TiKV
 
-    -   Titan が有効になっているときに TiKV が起動に失敗し、 `Blob file deleted twice`エラーが[＃15454](https://github.com/tikv/tikv/issues/15454) @ [コナー1996](https://github.com/Connor1996)で発生する問題を修正しました。
-    -   オンラインアンセーフリカバリがマージ中止[＃15580](https://github.com/tikv/tikv/issues/15580) @ [v01dスター](https://github.com/v01dstar)を処理できない問題を修正
+    -   Titanが有効になっているときにTiKVが起動に失敗し、 `Blob file deleted twice`エラーが[＃15454](https://github.com/tikv/tikv/issues/15454) @ [コナー1996](https://github.com/Connor1996)発生する問題を修正しました
+    -   オンラインアンセーフリカバリがマージ中止[＃15580](https://github.com/tikv/tikv/issues/15580) @ [v01dstar](https://github.com/v01dstar)を処理できない問題を修正
 
 -   PD
 
@@ -62,15 +62,15 @@ TiDB バージョン: 6.5.5
     -   TiCDC
 
         -   PDノード[＃9565](https://github.com/pingcap/tiflow/issues/9565) @ [アズドンメン](https://github.com/asddongmen)のネットワーク分離によって発生するTiCDCレプリケーションのレイテンシーが大きくなる問題を修正
-        -   CSV形式[＃9658](https://github.com/pingcap/tiflow/issues/9658) @ [3エースショーハンド](https://github.com/3AceShowHand)を使用するとTiCDCが`UPDATE`演算を誤って`INSERT`に変更する問題を修正
+        -   CSV形式[＃9658](https://github.com/pingcap/tiflow/issues/9658) @ [3エースショーハンド](https://github.com/3AceShowHand)を使用するとTiCDCが誤って`UPDATE`演算を`INSERT`に変更する問題を修正
         -   一部のログにユーザーパスワードが記録される問題を修正[＃9690](https://github.com/pingcap/tiflow/issues/9690) @ [スドジ](https://github.com/sdojjy)
-        -   SASL認証を使用するとTiCDCがpanicを起こす可能性がある問題を修正[＃9669](https://github.com/pingcap/tiflow/issues/9669) @ [スドジ](https://github.com/sdojjy)
-        -   一部のコーナーケースで TiCDC レプリケーションタスクが失敗する可能性がある問題を修正[＃9685](https://github.com/pingcap/tiflow/issues/9685) [＃9697](https://github.com/pingcap/tiflow/issues/9697) [＃9695](https://github.com/pingcap/tiflow/issues/9695) [＃9736](https://github.com/pingcap/tiflow/issues/9736) @ [ヒック](https://github.com/hicqu) @ [チャールズ・チャン96](https://github.com/CharlesCheung96)
+        -   SASL認証を使用するとTiCDCがpanic可能性がある問題を修正[＃9669](https://github.com/pingcap/tiflow/issues/9669) @ [スドジ](https://github.com/sdojjy)
+        -   一部のコーナーケースで TiCDC レプリケーションタスクが失敗する可能性がある問題を修正[＃9685](https://github.com/pingcap/tiflow/issues/9685) [＃9697](https://github.com/pingcap/tiflow/issues/9697) [＃9695](https://github.com/pingcap/tiflow/issues/9695) [＃9736](https://github.com/pingcap/tiflow/issues/9736) @ [ヒック](https://github.com/hicqu) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   上流にリージョン[＃9741](https://github.com/pingcap/tiflow/issues/9741) @ [スドジ](https://github.com/sdojjy)が多数ある場合、TiCDC が TiKV ノード障害から迅速に回復できない問題を修正しました。
 
     -   TiDB Lightning
 
         -   ターゲットサーバー[＃41040](https://github.com/pingcap/tidb/issues/41040) @ [ランス6716](https://github.com/lance6716)にTiCDCがデプロイされているときにTiDB Lightningが起動に失敗する問題を修正
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [ランス6716](https://github.com/lance6716)
-        -   PD のリーダー[＃46540](https://github.com/pingcap/tidb/issues/46540)を[ランス6716](https://github.com/lance6716)に切り替えた後、 TiDB Lightning がデータのインポートを続行できない問題を修正しました。
+        -   PD のリーダー[＃46540](https://github.com/pingcap/tidb/issues/46540)を[ランス6716](https://github.com/lance6716)切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました
         -   事前チェックがターゲット クラスター[＃41040](https://github.com/pingcap/tidb/issues/41040) @ [ランス6716](https://github.com/lance6716)で実行中の TiCDC の存在を正確に検出できない問題を修正しました。
