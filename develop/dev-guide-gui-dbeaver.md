@@ -12,7 +12,7 @@ In this tutorial, you can learn how to connect to TiDB using DBeaver Community.
 
 > **Note:**
 >
-> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -85,6 +85,46 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
 9. Click **Finish** to save the connection configuration.
+
+</div>
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+
+2. In the left panel, click **Settings**, and then click **Networking**.
+
+3. In the **Public Endpoint** section, click **Enable**. Wait a few minutes until the public endpoint is enabled.
+
+4. Click **Overview** in the left panel to return to the overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed. In the connection dialog, select `Public` from the **Connection Type** drop-down list.
+
+    If you see a message indicating that the public endpoint is still being enabled, wait until it is enabled.
+
+6. Click **Configure IP Access List** to configure an IP access list.
+
+    Ensure that your client IP address is in the access list.
+
+7. (Optional) If you need to verify the server certificate or if the connection fails and you are prompted for a CA certificate, click **CA cert** to download the CA certificate.
+
+    If you have not set the password yet, click **Set Root Password** in the dialog.
+
+    In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connection types. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+8. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
+
+9. Configure the following connection parameters based on the connection dialog:
+
+    - **Server Host**: `{host}`
+    - **Port**: `{port}`
+    - **Username**: `{user}`
+    - **Password**: `{password}`
+
+    Keep the SSL settings disabled.
+
+10. Click **Test Connection** to validate the connection.
+
+11. Click **Finish** to save the connection configuration.
 
 </div>
 <div label="TiDB Cloud Dedicated">

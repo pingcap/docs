@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 
 > **Note:**
 >
-> - This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial works with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 > - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
 
 ## Prerequisites
@@ -98,6 +98,54 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 7. Save the `env.sh` file.
 
 </div>
+
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+
+2. In the left panel, click **Settings**, and then click **Networking**.
+
+3. In the **Public Endpoint** section, click **Enable**. Wait a few minutes until the public endpoint is enabled.
+
+4. Click **Overview** in the left panel to return to the overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed. In the connection dialog, select `Public` from the **Connection Type** drop-down list.
+
+    If you see a message indicating that the public endpoint is still being enabled, wait until it is enabled.
+
+6. Click **Configure IP Access List** to configure an IP access list.
+
+    Ensure that your client IP address is in the access list.
+
+7. (Optional) If you need to verify the server certificate or if the connection fails and you are prompted for a CA certificate, click **CA cert** to download the CA certificate.
+
+    If you have not set the password yet, click **Set Root Password** in the dialog.
+
+    In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connection types. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+8. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+
+    ```shell
+    cp env.sh.example env.sh
+    ```
+
+9. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+
+    ```shell
+    export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    export TIDB_PORT='4000'
+    export TIDB_USER='{user}'  # e.g. root
+    export TIDB_PASSWORD='{password}'
+    export TIDB_DB_NAME='test'
+    export USE_SSL='false'
+    ```
+
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+
+10. Save the `env.sh` file.
+
+</div>
+
 <div label="TiDB Cloud Dedicated">
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.

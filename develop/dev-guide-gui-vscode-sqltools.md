@@ -12,7 +12,7 @@ In this tutorial, you can learn how to connect to TiDB using Visual Studio Code.
 
 > **Note:**
 >
-> - This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 > - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
 
 ## Prerequisites
@@ -92,6 +92,52 @@ Connect to TiDB depending on the TiDB deployment option you have selected.
         ![VS Code SQLTools: enter password to connect to {{{ .starter }}}](/media/develop/vsc-sqltools-password.jpg)
 
 8. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+
+</div>
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+
+2. In the left panel, click **Settings**, and then click **Networking**.
+
+3. In the **Public Endpoint** section, click **Enable**. Wait a few minutes until the public endpoint is enabled.
+
+4. Click **Overview** in the left panel to return to the overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed. In the connection dialog, select `Public` from the **Connection Type** drop-down list.
+
+    If you see a message indicating that the public endpoint is still being enabled, wait until it is enabled.
+
+6. Click **Configure IP Access List** to configure an IP access list.
+
+    Ensure that your client IP address is in the access list.
+
+7. (Optional) If you need to verify the server certificate or if the connection fails and you are prompted for a CA certificate, click **CA cert** to download the CA certificate.
+
+    If you have not set the password yet, click **Set Root Password** in the dialog.
+
+    In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connection types. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+8. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+
+9. In the setting pane, configure the following connection parameters based on the connection dialog:
+
+    - **Connect using**: select **Server and Port**.
+    - **Server Address**: `{host}`
+    - **Port**: `{port}`
+    - **Database**: the database that you want to connect to.
+    - **Username**: `{user}`
+    - **Password mode**: select **SQLTools Driver Credentials**.
+    - In the **MySQL driver specific options** area, configure the following parameters:
+
+        - **Authentication Protocol**: select **default**.
+        - **SSL**: select **Disabled**.
+
+10. Click **TEST CONNECTION** to validate the connection.
+
+11. In the **SQLTools Driver Credentials** dialog, enter the password.
+
+12. If the connection test is successful, click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
 <div label="TiDB Cloud Dedicated">
