@@ -126,6 +126,7 @@
 
 - Manage Instances
   - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
+  - [Use the My TiDB Page](/tidb-cloud/my-tidb.md)
   - Manage TiDB Cloud Instances
     - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
     - Connect to Your TiDB Cloud Instance

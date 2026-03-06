@@ -35,6 +35,7 @@
     - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
+  - [Use the My TiDB Page](/tidb-cloud/my-tidb.md)
   - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
   - Connect to Your TiDB Cloud Dedicated Cluster
     - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster.md)

@@ -29,6 +29,12 @@ Chat2Query is an AI-powered feature integrated into SQL Editor that assists user
 
 In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
+### Cluster
+
+In TiDB Cloud, a cluster is a dedicated cloud deployment that includes explicit infrastructure details such as node topology, instance types, storage configuration, and scaling model.
+
+Among TiDB Cloud plans, only TiDB Cloud Dedicated clusters use this deployment model.
+
 ### Credit
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
@@ -66,6 +72,15 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/developer/vector-search-full-text-search-sql) and [Full-Text Search with Python](https://docs.pingcap.com/developer/vector-search-full-text-search-python).
+
+## I
+
+### Instance
+
+An instance is a [TiDB X](/tidb-cloud/tidb-x-architecture.md) cloud deployment that represents a service-oriented TiDB offering. With this deployment model, users do not need to manage or understand the underlying cluster topology.
+In TiDB Cloud product options, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment method.
+
+Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment model.
 
 ## M
 
@@ -109,7 +124,18 @@ A document that defines permissions applying to a role, user, or organization, s
 
 ### project
 
-Based on the projects created by the organization, resources such as personnel, instances, and networks can be managed separately according to projects, and resources between projects do not interfere with each other.
+In TiDB Cloud, you can use projects to group and manage your TiDB resources.
+
+- For {{{ .starter }}}, Essential, and Premium instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
+- For {{{ .dedicated }}} clusters, projects are required.
+
+The function of a project varies by project type. Currently, there are three types of projects:
+
+- TiDB X project: this is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page. In this type of project, you can only add {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
+- TiDB Dedicated project: this project type is used only for {{{ .dedicated }}} clusters. In this type of project, you can only add {{{ .dedicated }}} clusters. Within your organization, settings and access controls such as networks, maintenance, alert subscriptions, and encryption access can be managed separately by project, and configurations in different projects do not affect each other.
+- TiDB virtual project: this is a virtual project. It is not displayed in the [TiDB Cloud console](https://tidbcloud.com/) and does not provide any management capabilities. Its acts a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID.
+
+For more information about the differences between these project types, see [Project types](/tidb-cloud/manage-user-access.md#project-types).
 
 ### project members
 
@@ -138,6 +164,13 @@ A separate database that can be located in the same or different region and cont
 ### Replication Capacity Unit (RCU)
 
 TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
+
+### Resource
+
+A TiDB resource is a manageable TiDB deployment unit. It can be one of the following:
+
+- A {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium  }}} [instance](#instance)
+- A {{{ .dedicated }}} [cluster](#cluster)
 
 ### Request Capacity Unit (RCU)
 
