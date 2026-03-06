@@ -80,4 +80,4 @@ To learn more about the RU consumption of different resources (including read, w
 
 If you want to create a {{{ .starter }}} instance with an additional quota, you can set the monthly spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-After creating a {{{ .starter }}} instance, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for {{{ .starter }}} Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+After creating a {{{ .starter }}} instance, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for {{{ .starter }}} Instances](/tidb-cloud/manage-serverless-spend-limit.md).

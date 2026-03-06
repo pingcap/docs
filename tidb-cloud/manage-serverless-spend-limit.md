@@ -1,9 +1,9 @@
 ---
-title: Manage Spending Limit for {{{ .starter }}} Clusters
+title: Manage Spending Limit for {{{ .starter }}} Instances
 summary: Learn how to manage spending limit for your {{{ .starter }}} instances.
 ---
 
-# Manage Spending Limit for {{{ .starter }}} Clusters
+# Manage Spending Limit for {{{ .starter }}} Instances
 
 > **Note:**
 >

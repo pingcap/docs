@@ -1,12 +1,12 @@
 ---
-title: Create a {{{ .starter }}} Cluster
+title: Create a {{{ .starter }}} Instance
 summary: Learn how to create a {{{ .starter }}} instance and connect to it.
 aliases: ['/tidb/stable/dev-guide-build-cluster-in-cloud/','/tidb/dev/dev-guide-build-cluster-in-cloud/','/tidbcloud/dev-guide-build-cluster-in-cloud/']
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Create a {{{ .starter }}} Cluster
+# Create a {{{ .starter }}} Instance
 
 This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} instance, connect to it, and run a sample application on it.
 
@@ -120,7 +120,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 > **Note:**
 >
 > - When you connect to a {{{ .starter }}} instance, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
-> - If you encounter problems when connecting to a {{{ .starter }}} instance, you can read [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
+> - If you encounter problems when connecting to a {{{ .starter }}} instance, you can read [Secure Connections to {{{ .starter }}} Instances](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
 
 3. Fill in the password to sign in.
 
