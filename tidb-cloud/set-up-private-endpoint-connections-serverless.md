@@ -5,7 +5,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 
 # Connect to {{{ .starter }}} or Essential via AWS PrivateLink
 
-This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via AWS PrivateLink.
+This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} instance via AWS PrivateLink.
 
 > **Tip:**
 >
@@ -37,7 +37,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint with AWS
 
-To connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a private endpoint, follow these steps:
+To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint, follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -45,14 +45,14 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a private 
 
 ### Step 1. Choose a TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
 
     > **Note:**
     >
-    > You only need to create one private endpoint per AWS region, which can be shared by all {{{ .starter }}} or {{{ .essential }}} clusters located in the same region.
+    > You only need to create one private endpoint per AWS region, which can be shared by all {{{ .starter }}} or {{{ .essential }}} instances located in the same region.
 
 ### Step 2. Create an AWS interface endpoint
 

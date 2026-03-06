@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export list`.
 
 # ticloud serverless export list
 
-List data export tasks of {{{ .starter }}} and {{{ .essential }}} clusters:
+List data export tasks of {{{ .starter }}} and {{{ .essential }}} instances:
 
 ```shell
 ticloud serverless export list [flags]

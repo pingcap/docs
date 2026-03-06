@@ -24,7 +24,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Connect to TiDB
@@ -61,7 +61,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the {{{ .starter }}} cluster.
+    - **Password**: enter the password of the {{{ .starter }}} instance.
 
     ![Navicat: configure connection general panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
@@ -69,7 +69,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     ![Navicat: configure connection SSL panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
+8. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
 
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
 

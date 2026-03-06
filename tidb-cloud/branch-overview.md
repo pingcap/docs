@@ -5,7 +5,7 @@ summary: Learn the concept of TiDB Cloud branches.
 
 # TiDB Cloud Branching (Beta) Overview
 
-TiDB Cloud lets you create branches for {{{ .starter }}} and {{{ .essential }}} clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
+TiDB Cloud lets you create branches for {{{ .starter }}} and {{{ .essential }}} instances. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
 
 With branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
 
@@ -49,8 +49,8 @@ Currently, TiDB Cloud branches are in beta and free of charge.
 
 - When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
 
-    - For a free {{{ .starter }}} cluster, you can select any time within the last 24 hours.
-    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} cluster, you can select any time within the last 14 days.
+    - For a free {{{ .starter }}} instance, you can select any time within the last 24 hours.
+    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can select any time within the last 14 days.
 
 If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 

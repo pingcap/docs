@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
 
 - **An MCP-compatible client**: For example, [Cursor](/ai/integrations/tidb-mcp-cursor.md) or [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md).
 - **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A TiDB Cloud Starter instance**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Supported MCP Clients
 

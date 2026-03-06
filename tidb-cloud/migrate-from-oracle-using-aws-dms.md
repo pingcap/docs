@@ -9,7 +9,7 @@ This document describes a step-by-step example of how to migrate data from Amazo
 
 > **Tip:**
 >
-> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+> In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 
 If you are interested in learning more about TiDB Cloud and AWS DMS, see the following:
 
@@ -73,11 +73,11 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
-## Step 4. Create a {{{ .starter }}} cluster
+## Step 4. Create a {{{ .starter }}} instance
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/project/clusters).
 
-2. [Create a {{{ .starter }}} cluster](/tidb-cloud/tidb-cloud-quickstart.md).
+2. [Create a {{{ .starter }}} instance](/tidb-cloud/tidb-cloud-quickstart.md).
 
 3. In the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the target cluster name to go to its overview page.
 
@@ -143,7 +143,7 @@ For more information, see [Migrating your source schema to your target database 
 
 ## Step 9. Check data in the downstream TiDB cluster
 
-Connect to the [{{{ .starter }}} cluster](https://tidbcloud.com/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
+Connect to the [{{{ .starter }}} instance](https://tidbcloud.com/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 

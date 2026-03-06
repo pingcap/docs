@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 <CustomContent plan="starter,essential">
 
-If you want to import data from or export data to an external storage in a TiDB Cloud cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} and {{{ .essential }}} clusters.
+If you want to import data from or export data to an external storage in a TiDB Cloud cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} and {{{ .essential }}} instances.
 
 </CustomContent>
 

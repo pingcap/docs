@@ -28,7 +28,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Connect to TiDB
@@ -65,7 +65,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Hostname**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: click **Store in Keychain ...** or **Store in Vault**, enter the password of the {{{ .starter }}} cluster, and then click **OK** to store the password.
+    - **Password**: click **Store in Keychain ...** or **Store in Vault**, enter the password of the {{{ .starter }}} instance, and then click **OK** to store the password.
 
         ![MySQL Workbench: store the password of {{{ .starter }}} in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
@@ -73,7 +73,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     ![MySQL Workbench: configure connection settings for {{{ .starter }}}](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
+7. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
 
 8. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
 

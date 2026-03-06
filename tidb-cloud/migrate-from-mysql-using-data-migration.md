@@ -43,7 +43,7 @@ You can create up to 200 migration jobs on {{{ .dedicated }}} clusters for each 
 </CustomContent>
 <CustomContent plan="essential">
 
-You can create up to 100 migration jobs on {{{ .essential }}} clusters for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+You can create up to 100 migration jobs on {{{ .essential }}} instances for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 

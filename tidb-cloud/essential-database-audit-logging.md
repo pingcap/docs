@@ -1,6 +1,6 @@
 ---
 title: Database Audit Logging (Beta) for {{{ .essential }}}
-summary: Learn about how to audit a {{{ .essential }}} cluster in TiDB Cloud.
+summary: Learn about how to audit a {{{ .essential }}} instance in TiDB Cloud.
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
@@ -137,7 +137,7 @@ You can enable, edit, and disable audit logging.
 
 ### Enable audit logging
 
-You can enable audit logging for a {{{ .essential }}} cluster using the TiDB Cloud console or the TiDB Cloud CLI.
+You can enable audit logging for a {{{ .essential }}} instance using the TiDB Cloud console or the TiDB Cloud CLI.
 
 > **Note:**
 >
@@ -177,7 +177,7 @@ The `--rotation-size-mib`, `--rotation-interval-minutes`, and `--unredacted` par
 
 ### Edit audit logging
 
-You can edit the audit logging for a {{{ .essential }}} cluster after enabling it.
+You can edit the audit logging for a {{{ .essential }}} instance after enabling it.
 
 <SimpleTab>
 <div label="Console">
@@ -209,7 +209,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### Disable audit logging
 
-You can disable audit logging for a {{{ .essential }}} cluster.
+You can disable audit logging for a {{{ .essential }}} instance.
 
 <SimpleTab>
 <div label="Console">

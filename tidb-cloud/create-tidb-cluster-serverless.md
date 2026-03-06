@@ -1,11 +1,11 @@
 ---
-title: Create a {{{ .starter }}} or Essential Cluster
-summary: Learn how to create a {{{ .starter }}} or {{{ .essential }}} cluster.
+title: Create a {{{ .starter }}} or Essential Instance
+summary: Learn how to create a {{{ .starter }}} or {{{ .essential }}} instance.
 ---
 
-# Create a {{{ .starter }}} or Essential Cluster
+# Create a {{{ .starter }}} or Essential Instance
 
-This document describes how to create a {{{ .starter }}} or {{{ .essential }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/).
+This document describes how to create a {{{ .starter }}} or {{{ .essential }}} instance in the [TiDB Cloud console](https://tidbcloud.com/).
 
 > **Tip:**
 >
@@ -36,7 +36,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 ## Steps
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a {{{ .starter }}} or {{{ .essential }}} cluster as follows:
+If you are in the `Organization Owner` or the `Project Owner` role, you can create a {{{ .starter }}} or {{{ .essential }}} instance as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
 

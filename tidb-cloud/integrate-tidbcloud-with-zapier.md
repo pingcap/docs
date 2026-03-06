@@ -27,7 +27,7 @@ Before you start, you need:
 
 - A [Zapier account](https://zapier.com/app/login).
 - A [GitHub account](https://github.com/login).
-- A [TiDB Cloud account](https://tidbcloud.com/signup) and a {{{ .starter }}} cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+- A [TiDB Cloud account](https://tidbcloud.com/signup) and a {{{ .starter }}} instance on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
 
 ### Step 1: Get the template
 
@@ -161,15 +161,15 @@ The following table lists the actions supported by TiDB Cloud App. Note that som
 | Action | Description | Resource |
 |---|---|---|
 | Find Cluster | Finds an existing {{{ .starter }}} or TiDB Cloud Dedicated cluster. | None |
-| Create Cluster | Creates a new cluster. Only supports creating a {{{ .starter }}} cluster. | None |
-| Find Database | Finds an existing database. | A {{{ .starter }}} cluster |
-| Create Database | Creates a new database. | A {{{ .starter }}} cluster |
-| Find Table | Finds an existing Table. | A {{{ .starter }}} cluster and a database |
-| Create Table | Creates a new table. | A {{{ .starter }}} cluster and a database |
-| Create Row | Creates a new row. | A {{{ .starter }}} cluster, a database, and a table |
-| Update Row | Updates an existing row. | A {{{ .starter }}} cluster, a database, and a table |
-| Find Row | Finds a row in a table via a lookup column. | A {{{ .starter }}} cluster, a database, and a table |
-| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A {{{ .starter }}} cluster, a database, and a table |
+| Create Cluster | Creates a new cluster. Only supports creating a {{{ .starter }}} instance. | None |
+| Find Database | Finds an existing database. | A {{{ .starter }}} instance |
+| Create Database | Creates a new database. | A {{{ .starter }}} instance |
+| Find Table | Finds an existing Table. | A {{{ .starter }}} instance and a database |
+| Create Table | Creates a new table. | A {{{ .starter }}} instance and a database |
+| Create Row | Creates a new row. | A {{{ .starter }}} instance, a database, and a table |
+| Update Row | Updates an existing row. | A {{{ .starter }}} instance, a database, and a table |
+| Find Row | Finds a row in a table via a lookup column. | A {{{ .starter }}} instance, a database, and a table |
+| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A {{{ .starter }}} instance, a database, and a table |
 
 ## TiDB Cloud App templates
 

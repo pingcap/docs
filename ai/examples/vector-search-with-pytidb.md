@@ -19,7 +19,7 @@ The application uses [Ollama](https://ollama.com/download) for local embedding g
 Before you begin, ensure you have the following:
 
 - **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A TiDB Cloud Starter instance**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 - **Ollama**: Install from [Ollama](https://ollama.com/download).
 
 ## How to run

@@ -27,7 +27,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 ### Credit
 
@@ -141,7 +141,7 @@ TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overvie
 
 ### Request Capacity Unit (RCU)
 
-A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 ### Request Unit (RU)
 
@@ -156,7 +156,7 @@ For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resourc
 
 ### Spending limit
 
-[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card.
+[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} instances. If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card.
 
 ## T
 

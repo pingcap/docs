@@ -60,7 +60,7 @@ To create a custom budget to monitor the spending of your organization or specif
 
 > **Note:**
 >
-> The **Starter Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a {{{ .starter }}} cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> The **Starter Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a {{{ .starter }}} instance against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To edit a custom budget, take the following steps:
 
@@ -81,7 +81,7 @@ To edit a custom budget, take the following steps:
 > **Note:**
 >
 > - Once a custom budget is deleted, you will no longer receive any alert emails related to it.
-> - The **Starter Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a {{{ .starter }}} cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> - The **Starter Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a {{{ .starter }}} instance against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To delete a custom budget, take the following steps:
 

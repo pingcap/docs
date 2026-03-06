@@ -152,12 +152,12 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan                | Bind a support plan                                                              |
 | CancelSupportPlan              | Cancel a support plan                                                            |
 | UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a {{{ .starter }}} cluster                    |
+| SetSpendLimit                  | Edit the spending limit of a {{{ .starter }}} instance                    |
 | UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
 | DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a branch for {{{ .starter }}} or {{{ .essential }}} cluster                                                  |
-| DeleteBranch                   | Delete a branch for {{{ .starter }}} or {{{ .essential }}} cluster                                                  |
-| SetBranchRootPassword          | Set root password for a branch of your {{{ .starter }}} or {{{ .essential }}} cluster                                   |
+| CreateBranch                   | Create a branch for {{{ .starter }}} or {{{ .essential }}} instance                                                  |
+| DeleteBranch                   | Delete a branch for {{{ .starter }}} or {{{ .essential }}} instance                                                  |
+| SetBranchRootPassword          | Set root password for a branch of your {{{ .starter }}} or {{{ .essential }}} instance                                   |
 | ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
 | DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
 | UpdateAuthenticationMethod     | Update the authentication method for Cloud Organization SSO                        |

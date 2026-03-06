@@ -1,10 +1,10 @@
 ---
-title: Select Your Cluster Plan
-summary: Learn how to select your cluster plan on TiDB Cloud.
+title: Select a Plan
+summary: Learn how to select a plan on TiDB Cloud.
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Select Your Cluster Plan
+# Select a Plan
 
 The cluster plan determines the throughput and performance of your cluster.
 
@@ -30,9 +30,9 @@ The free cluster plan is ideal for those who are getting started with {{{ .start
 
 ### Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five free {{{ .starter }}} clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and specify a spending limit.
+For each organization in TiDB Cloud, you can create a maximum of five free {{{ .starter }}} instances by default. To create more {{{ .starter }}} instances, you need to add a credit card and specify a spending limit.
 
-For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five {{{ .starter }}} instances in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
@@ -57,7 +57,7 @@ For applications experiencing growing workloads and needing scalability in real 
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each {{{ .starter }}} or {{{ .essential }}} cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+For each {{{ .starter }}} or {{{ .essential }}} instance, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
 
 Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
 

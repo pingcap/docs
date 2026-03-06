@@ -5,7 +5,7 @@ summary: Learn how to connect to an Amazon RDS instance using an AWS Endpoint Se
 
 # Connect to Amazon RDS via a Private Link Connection
 
-This document describes how to connect a {{{ .essential }}} cluster to an [Amazon RDS](https://aws.amazon.com/rds/) instance using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
+This document describes how to connect a {{{ .essential }}} instance to an [Amazon RDS](https://aws.amazon.com/rds/) instance using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 ## Prerequisites
 
@@ -34,8 +34,8 @@ Identify an Amazon RDS instance to use, or [create a new one](https://docs.aws.a
 
 The Amazon RDS instance must meet the following requirements:
 
-- Region match: the instance must reside in the same AWS region as your {{{ .essential }}} cluster.
-- The [subnet group](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets) of your Amazon RDS instance must have availability zones that overlap with those of your {{{ .essential }}} cluster.
+- Region match: the instance must reside in the same AWS region as your {{{ .essential }}} instance.
+- The [subnet group](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets) of your Amazon RDS instance must have availability zones that overlap with those of your {{{ .essential }}} instance.
 - Set your Amazon RDS instance with a proper security group, and ensure that it is accessible within the VPC. For example, you can create a security group with the following rules:
 
     - An inbound rule that allows MySQL/Aurora: 
@@ -73,7 +73,7 @@ To set up the load balancer in the same region as your RDS, take the following s
     - **Schema**: select `Internal`
     - **Load balancer IP address type**: select `IPv4`
     - **VPC**: select the VPC where your RDS is located
-    - **Availability Zones**: select the availability zones that overlap with your {{{ .essential }}} cluster
+    - **Availability Zones**: select the availability zones that overlap with your {{{ .essential }}} instance
     - **Security groups**: create a new security group with the following rules:
         - An inbound rule that allows MySQL/Aurora: 
             - Type: `MySQL/Aurora`

@@ -7,11 +7,11 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 [n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic, and apps.
 
-This document introduces how to build an auto-workflow: create a {{{ .starter }}} cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
+This document introduces how to build an auto-workflow: create a {{{ .starter }}} instance, gather Hacker News RSS, store it to TiDB and send a briefing email.
 
 > **Note:**
 >
-> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+> In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 
 ## Prerequisites: Get TiDB Cloud API key
 
@@ -80,9 +80,9 @@ The final workflow should look like the following image.
 
 ![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
-### (Optional) Create a {{{ .starter }}} cluster
+### (Optional) Create a {{{ .starter }}} instance
 
-If you don't have a {{{ .starter }}} cluster, you can use this node to create one. Otherwise, feel free to skip this operation.
+If you don't have a {{{ .starter }}} instance, you can use this node to create one. Otherwise, feel free to skip this operation.
 
 1. Navigate to **Workflows** panel, and click **Add workflow**.
 2. In new workflow workspace, click **+** in the top right corner and choose **All** field.
@@ -97,7 +97,7 @@ If you don't have a {{{ .starter }}} cluster, you can use this node to create on
 
 > **Note:**
 >
-> It takes several seconds to create a new {{{ .starter }}} cluster.
+> It takes several seconds to create a new {{{ .starter }}} instance.
 
 ### Create a workflow
 
@@ -207,7 +207,7 @@ This trigger will execute your workflow every morning at 8 AM.
 
 After building up the workflow, you can click **Execute Workflow** to test run it.
 
-If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your {{{ .starter }}} cluster, so you don't have to worry about losing them.
+If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your {{{ .starter }}} instance, so you don't have to worry about losing them.
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the front-page articles on Hacker News every day.
 
@@ -217,7 +217,7 @@ Now you can activate this workflow in the **Workflows** panel. This workflow wil
 
 TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes) and only supports the following five operations:
 
-- **Create Serverless Cluster**: creates a {{{ .starter }}} cluster.
+- **Create Serverless Cluster**: creates a {{{ .starter }}} instance.
 - **Execute SQL**: executes an SQL statement in TiDB.
 - **Delete**: deletes rows in TiDB.
 - **Insert**: inserts rows in TiDB.

@@ -9,14 +9,14 @@ This document provides a step-by-step guide on how to use [AWS CloudFormation](h
 
 > **Note:**
 >
-> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+> In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 
 ## Solution overview
 
 In this guide, you will create a fully functional online bookshop with the following components:
 
-- AWS Lambda Function: handles requests and queries data from a {{{ .starter }}} cluster using Sequelize ORM and Fastify API framework.
-- AWS Secrets Manager SDK: retrieves and manages connection configurations for the {{{ .starter }}} cluster.
+- AWS Lambda Function: handles requests and queries data from a {{{ .starter }}} instance using Sequelize ORM and Fastify API framework.
+- AWS Secrets Manager SDK: retrieves and manages connection configurations for the {{{ .starter }}} instance.
 - AWS API Gateway: handles HTTP request routes.
 - {{{ .starter }}}: a cloud-native distributed SQL database.
 
@@ -37,7 +37,7 @@ Before getting started, ensure that you have the following:
     - [Lambda services](https://aws.amazon.com/lambda/)
     - [S3](https://aws.amazon.com/s3/)
     - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- A [TiDB Cloud](https://tidbcloud.com) account and a {{{ .starter }}} cluster. Get the connection information for your {{{ .starter }}} cluster:
+- A [TiDB Cloud](https://tidbcloud.com) account and a {{{ .starter }}} instance. Get the connection information for your {{{ .starter }}} instance:
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 

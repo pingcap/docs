@@ -23,7 +23,7 @@ Full-text search is still in the early stages, and we are continuously rolling i
 
 - AWS: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 
-To complete this tutorial, make sure you have a {{{ .starter }}} cluster in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+To complete this tutorial, make sure you have a {{{ .starter }}} instance in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
 ## Get started
 
@@ -70,7 +70,7 @@ You can get these connection parameters from the [TiDB Cloud console](https://ti
    CA:       /etc/ssl/cert.pem
    ```
 
-   The corresponding Python code to connect to the {{{ .starter }}} cluster would be as follows:
+   The corresponding Python code to connect to the {{{ .starter }}} instance would be as follows:
 
    ```python
    db = TiDBClient.connect(

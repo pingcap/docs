@@ -25,13 +25,13 @@ Create a TiDB Cloud cluster in non-interactive mode:
 ticloud serverless create --display-name <display-name> --region <region>
 ```
 
-Create a {{{ .starter }}} cluster with a spending limit in non-interactive mode:
+Create a {{{ .starter }}} instance with a spending limit in non-interactive mode:
 
 ```shell
 ticloud serverless create --display-name <display-name> --region <region> --spending-limit-monthly <spending-limit-monthly>
 ```
 
-Create a {{{ .essential }}} cluster in non-interactive mode:
+Create a {{{ .essential }}} instance in non-interactive mode:
 
 ```shell
 ticloud serverless create --display-name <display-name> --region <region> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
@@ -48,9 +48,9 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -p, --project-id string      | Specifies the ID of the project, in which the cluster will be created. The default value is `default project`. | No       | Only works in non-interactive mode.                 |
 | -r, --region string          | Specifies the name of the cloud region. You can view all available regions using the `ticloud serverless region` command.                | Yes      | Only works in non-interactive mode.                 |
 | --disable-public-endpoint    | Disables the public endpoint. Use this option if you want to prevent public access to the cluster.                                                                                 | No       | Only works in non-interactive mode.                 |
-| --encryption                 | Enables dual-layer data encryption. It is enabled by default for {{{ .essential }}} clusters, and disabled by default for {{{ .starter }}} clusters.                       | No       | Only works in non-interactive mode.                 |
-| --max-rcu int32              | Sets the maximum Request Capacity Units (RCUs) for the {{{ .essential }}} cluster, up to 100000.                                                                  | No       | Only works in non-interactive mode.                 |
-| --min-rcu int32              | Sets the minimum Request Capacity Units (RCUs) for the {{{ .essential }}} cluster, at least 2000.                                                                    | No       | Only works in non-interactive mode.                 |
+| --encryption                 | Enables dual-layer data encryption. It is enabled by default for {{{ .essential }}} instances, and disabled by default for {{{ .starter }}} instances.                       | No       | Only works in non-interactive mode.                 |
+| --max-rcu int32              | Sets the maximum Request Capacity Units (RCUs) for the {{{ .essential }}} instance, up to 100000.                                                                  | No       | Only works in non-interactive mode.                 |
+| --min-rcu int32              | Sets the minimum Request Capacity Units (RCUs) for the {{{ .essential }}} instance, at least 2000.                                                                    | No       | Only works in non-interactive mode.                 |
 | -h, --help                   | Shows help information for this command.                                                                       | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags

@@ -14,7 +14,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 ## Step 1: Create a TiDB cluster
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} cluster, follow these steps:
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} instance, follow these steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
 
@@ -24,13 +24,13 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
     The [**Clusters**](https://tidbcloud.com/project/clusters) page is displayed by default.
 
-3. For new sign-up users, TiDB Cloud automatically creates a default {{{ .starter }}} cluster named `Cluster0` for you.
+3. For new sign-up users, TiDB Cloud automatically creates a default {{{ .starter }}} instance named `Cluster0` for you.
 
     - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
-    - To create a new {{{ .starter }}} cluster on your own, follow these steps:
+    - To create a new {{{ .starter }}} instance on your own, follow these steps:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Starter** is selected by default. Select the cloud provider and target region for your cluster, update the default cluster name if necessary, and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Starter** is selected by default. Select the cloud provider and target region for your cluster, update the default cluster name if necessary, and then click **Create**. Your {{{ .starter }}} instance will be created in approximately 30 seconds.
 
         <CustomContent language="en,zh">
 
@@ -50,7 +50,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 ## Step 2: Try AI-assisted SQL Editor
 
-For {{{ .starter }}} clusters hosted on AWS, you can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
+For {{{ .starter }}} instances hosted on AWS, you can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
 1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
 
@@ -123,15 +123,15 @@ FROM
 
 ## Step 3: Try guided tour on the console
 
-TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets to help you quickly get started with TiDB Cloud. For {{{ .starter }}} clusters hosted on AWS, you can try this tutorial to learn how to use TiDB Cloud for high-performance data analytics.
+TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets to help you quickly get started with TiDB Cloud. For {{{ .starter }}} instances hosted on AWS, you can try this tutorial to learn how to use TiDB Cloud for high-performance data analytics.
 
 1. Click the **?** icon in the lower-right corner of the console and select **Guided tour of SQL Editor**.
-2. Choose a {{{ .starter }}} cluster that you want to use for the tour, and click **Import Dataset**. The import process might take approximately one minute.
+2. Choose a {{{ .starter }}} instance that you want to use for the tour, and click **Import Dataset**. The import process might take approximately one minute.
 3. Once the sample data is imported, follow the on-screen instructions to complete the tour.
 
 ## What's next
 
-- To learn how to connect to your cluster using different methods, see [Connect to a {{{ .starter }}} or Essential cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+- To learn how to connect to your cluster using different methods, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 - For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).

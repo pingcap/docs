@@ -1,11 +1,11 @@
 ---
-title: Connect to Your {{{ .starter }}} or Essential Cluster
-summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via different methods.
+title: Connect to Your {{{ .starter }}} or Essential Instance
+summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} instance via different methods.
 ---
 
-# Connect to Your {{{ .starter }}} or Essential Cluster
+# Connect to Your {{{ .starter }}} or Essential Instance
 
-This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
+This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} instance.
 
 > **Tip:**
 >
@@ -14,7 +14,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 
 ## Network connection methods
 
-After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+After your {{{ .starter }}} or {{{ .essential }}} instance is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - Direct connections
 
@@ -22,11 +22,11 @@ After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Clo
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} cluster hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
+  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} instance hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
 
 - [Serverless Driver (beta)](/develop/serverless-driver.md)
 
-  TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster in edge environments with the same experience as direct connections.
+  TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your {{{ .starter }}} or {{{ .essential }}} instance in edge environments with the same experience as direct connections.
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 

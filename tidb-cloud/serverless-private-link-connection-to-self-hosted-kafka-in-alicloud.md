@@ -5,7 +5,7 @@ summary: Learn how to connect to an Alibaba Cloud self-hosted Kafka using an Ali
 
 # Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection
 
-The document describes how to connect a {{{ .essential }}} cluster to a self-hosted Kafka cluster in Alibaba Cloud, using an [Alibaba Cloud Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
+The document describes how to connect a {{{ .essential }}} instance to a self-hosted Kafka cluster in Alibaba Cloud, using an [Alibaba Cloud Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 The mechanism works as follows:
 

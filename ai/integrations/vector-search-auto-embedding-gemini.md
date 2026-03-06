@@ -10,7 +10,7 @@ This document describes how to use Gemini embedding models with [Auto Embedding]
 
 > **Note:**
 >
-> [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
+> [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} instances hosted on AWS.
 
 ## Available models
 

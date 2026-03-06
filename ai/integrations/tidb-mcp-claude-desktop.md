@@ -13,7 +13,7 @@ Before you begin, ensure you have the following:
 
 - **Claude Desktop**: Download and install Claude Desktop from [claude.ai](https://claude.ai/download).
 - **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A TiDB Cloud Starter instance**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Setup steps
 

@@ -23,7 +23,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 In addition, to connect to a {{{ .starter }}} or {{{ .essential }}} public endpoint from DBeaver on **Windows**, you must configure an additional SSL certificate (ISRG Root X1) as follows. Otherwise, the connection will fail. For other operating systems, you can skip these steps.
@@ -74,7 +74,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     ![Configure connection settings for {{{ .starter }}}](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
+8. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 

@@ -1,12 +1,12 @@
 ---
 title: Back Up and Restore {{{ .starter }}} or Essential Data
-summary: Learn how to back up and restore your {{{ .starter }}} or {{{ .essential }}} clusters.
+summary: Learn how to back up and restore your {{{ .starter }}} or {{{ .essential }}} instances.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
 # Back Up and Restore {{{ .starter }}} or Essential Data
 
-This document describes how to back up and restore your data on {{{ .starter }}} or {{{ .essential }}} clusters.
+This document describes how to back up and restore your data on {{{ .starter }}} or {{{ .essential }}} instances.
 
 > **Tip:**
 >
@@ -28,7 +28,7 @@ TiDB Cloud automatically backs up your cluster data, allowing you to restore dat
 
 ### Learn about the backup setting
 
-Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essential }}} clusters, as shown in the following table:
+Automatic backup settings vary between {{{ .starter }}} instances and {{{ .essential }}} instances, as shown in the following table:
 
 | Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} |
 |------------------|----------------------------|----------------------------|----------------------------|
@@ -40,17 +40,17 @@ Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essent
 
 - **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
 
-    - For a free {{{ .starter }}} cluster, the backup retention is 1 day.
-    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} cluster, you can configure the backup retention to any value between 1 and 30 days. The default retention is 14 days.
+    - For a free {{{ .starter }}} instance, the backup retention is 1 day.
+    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can configure the backup retention to any value between 1 and 30 days. The default retention is 14 days.
 
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
 
-    - For a free {{{ .starter }}} cluster, the backup time is a randomly fixed time.
-    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} cluster, you can configure the backup time to every half an hour. The default value is a randomly fixed time.
+    - For a free {{{ .starter }}} instance, the backup time is a randomly fixed time.
+    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can configure the backup time to every half an hour. The default value is a randomly fixed time.
 
 ### Configure the backup setting
 
-To set the backup time for a {{{ .essential }}} cluster, perform the following steps:
+To set the backup time for a {{{ .essential }}} instance, perform the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
@@ -72,8 +72,8 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 
 - **Point-in-Time Restore (beta)**: restores your cluster to a specific time.
 
-    - {{{ .starter }}} clusters: not supported.
-    - {{{ .essential }}} clusters: restores to any time within the backup retention, but not earlier than the cluster creation time or later than one minute before the current time.
+    - {{{ .starter }}} instances: not supported.
+    - {{{ .essential }}} instances: restores to any time within the backup retention, but not earlier than the cluster creation time or later than one minute before the current time.
 
 ### Restore destination
 
@@ -110,7 +110,7 @@ To restore your data to a new cluster, take the following steps:
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time for a {{{ .essential }}} cluster, take the following steps:
+    To restore to a specific point in time for a {{{ .essential }}} instance, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
@@ -121,8 +121,8 @@ To restore your data to a new cluster, take the following steps:
 4. Enter a name for the new cluster.
 5. Choose a plan for the new cluster and update the capacity as needed.
 
-    - If you choose a {{{ .starter }}} cluster and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
-    - If you choose a {{{ .essential }}} cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
+    - If you choose a {{{ .starter }}} instance and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
+    - If you choose a {{{ .essential }}} instance, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
 6. Click **Restore** to begin the restore process.
 
@@ -131,5 +131,5 @@ Once the restore process begins, the cluster status changes to **Restoring**. Th
 ## Limitations
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
-- Manual backups are not supported for {{{ .starter }}} and {{{ .essential }}} clusters.
+- Manual backups are not supported for {{{ .starter }}} and {{{ .essential }}} instances.
 - Clusters with more than 1 TiB of data do not support restoring to new clusters by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.

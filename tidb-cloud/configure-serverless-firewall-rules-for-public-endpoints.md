@@ -1,11 +1,11 @@
 ---
 title: Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints 
-summary: Learn how to configure and manage firewall rules with public access to your {{{ .starter }}} or {{{ .essential }}} cluster securely.
+summary: Learn how to configure and manage firewall rules with public access to your {{{ .starter }}} or {{{ .essential }}} instance securely.
 ---
 
 # Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints
 
-This document describes the public connectivity option for {{{ .starter }}} and {{{ .essential }}} clusters. You will learn key concepts for securely managing a cluster accessible via the internet.
+This document describes the public connectivity option for {{{ .starter }}} and {{{ .essential }}} instances. You will learn key concepts for securely managing a cluster accessible via the internet.
 
 > **Note:**
 >
@@ -31,15 +31,15 @@ You can create a maximum of 200 IP firewall rules.
 
 ### Allow AWS access
 
-If your {{{ .starter }}} cluster is hosted on AWS, you can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
+If your {{{ .starter }}} instance is hosted on AWS, you can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
 
 TiDB Cloud regularly updates this list and uses the reserved IP address **169.254.65.87** to represent all AWS IP addresses.
 
 ## Create and manage a firewall rule
 
-This section describes how to manage firewall rules for a {{{ .starter }}} or {{{ .essential }}} cluster. With a public endpoint, the connections to your cluster are restricted to the IP addresses specified in the firewall rules.
+This section describes how to manage firewall rules for a {{{ .starter }}} or {{{ .essential }}} instance. With a public endpoint, the connections to your cluster are restricted to the IP addresses specified in the firewall rules.
 
-To add firewall rules to a {{{ .starter }}} or {{{ .essential }}} cluster, take the following steps:
+To add firewall rules to a {{{ .starter }}} or {{{ .essential }}} instance, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 

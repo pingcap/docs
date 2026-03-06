@@ -18,7 +18,7 @@ In this tutorial, you can learn how to use {{{ .starter }}} to run WordPress for
 
 To complete this tutorial, you need:
 
-- A {{{ .starter }}} cluster. Follow [creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
+- A {{{ .starter }}} instance. Follow [creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Run WordPress with {{{ .starter }}}
 
@@ -84,7 +84,7 @@ Configure the WordPress database connection to {{{ .starter }}}.
     TIDB_DB_NAME='test'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your {{{ .starter }}} comes with a `test` database. If you have already created another database in your {{{ .starter }}} cluster, you can replace `test` with your database name.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your {{{ .starter }}} comes with a `test` database. If you have already created another database in your {{{ .starter }}} instance, you can replace `test` with your database name.
 
 7. Save the `.env` file.
 

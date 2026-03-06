@@ -22,7 +22,7 @@ By following this document, you will learn how to:
 
 ## Prerequisites
 
-- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter cluster for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB Self-Managed cluster for local testing.
+- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter instance for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB Self-Managed cluster for local testing.
 
 ## Installation
 
@@ -61,7 +61,7 @@ DATABASE: test
 CA:       /etc/ssl/cert.pem
 ```
 
-The corresponding Python code to connect to the TiDB Cloud Starter cluster would be as follows:
+The corresponding Python code to connect to the TiDB Cloud Starter instance would be as follows:
 
 ```python
 from pytidb import TiDBClient

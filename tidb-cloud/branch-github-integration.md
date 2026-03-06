@@ -11,7 +11,7 @@ summary: Learn how to integrate the TiDB Cloud Branching feature with GitHub.
 
 If you use GitHub for application development, you can integrate TiDB Cloud Branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database.
 
-In the integration process, you will be prompted to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App. The app can automatically manage branches of your {{{ .starter }}} or {{{ .essential }}} cluster according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
+In the integration process, you will be prompted to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App. The app can automatically manage branches of your {{{ .starter }}} or {{{ .essential }}} instance according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
 
 This document covers the following topics:
 
@@ -25,13 +25,13 @@ Before the integration, make sure that you have the following:
 
 - A GitHub account
 - A GitHub repository for your application
-- A [{{{ .starter }}} or {{{ .essential }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- A [{{{ .starter }}} or {{{ .essential }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ## Integrate TiDB Cloud Branching with your GitHub repository {#integrate-branching-with-your-github-repository}
 
 To integrate TiDB Cloud Branching with your GitHub repository, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 
 2. Click **Branches** in the left navigation pane.
 
@@ -54,7 +54,7 @@ To integrate TiDB Cloud Branching with your GitHub repository, take the followin
 
 ## TiDB Cloud Branching app behaviors
 
-After you connect your {{{ .starter }}} or {{{ .essential }}} cluster to your GitHub repository, for each pull request in this repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App can automatically manage its corresponding branch for your cluster. The following lists the default behaviors for pull request changes:
+After you connect your {{{ .starter }}} or {{{ .essential }}} instance to your GitHub repository, for each pull request in this repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App can automatically manage its corresponding branch for your cluster. The following lists the default behaviors for pull request changes:
 
 | Pull request changes               | TiDB Cloud Branching app behaviors                                                                                                                                                                                                                                                                                                                                        |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -113,7 +113,7 @@ github:
 
 **Type:** boolean. **Default:** `true`.
 
-If it is set to `false`, the TiDB Cloud Branching app will not delete the branch for your {{{ .starter }}} or {{{ .essential }}} cluster when a pull request is closed or merged.
+If it is set to `false`, the TiDB Cloud Branching app will not delete the branch for your {{{ .starter }}} or {{{ .essential }}} instance when a pull request is closed or merged.
 
 ```yaml
 github:
@@ -133,7 +133,7 @@ Here are the main steps to create the workflow:
 
     You can use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the branch and get the connection information of the branch.
 
-    Taking the branch of a {{{ .starter }}} cluster as an example:
+    Taking the branch of a {{{ .starter }}} instance as an example:
 
    ```yaml
    steps:

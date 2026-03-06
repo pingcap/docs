@@ -25,7 +25,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Get started
@@ -60,7 +60,7 @@ Configure the cluster connection string depending on the TiDB deployment option 
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+For a {{{ .starter }}} instance, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

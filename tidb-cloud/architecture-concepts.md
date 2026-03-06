@@ -95,7 +95,7 @@ For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/api
 In TiDB Cloud, each cluster consists of TiDB, TiKV, and TiFlash nodes.
 
 - In a TiDB Cloud Dedicated cluster, you can fully manage the number and size of your dedicated TiDB, TiKV, and TiFlash nodes according to your performance requirements. For more information, see [Scalability](/tidb-cloud/scalability-concepts.md).
-- In a {{{ .starter }}} or {{{ .essential }}} cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
+- In a {{{ .starter }}} or {{{ .essential }}} instance, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
 
 ### TiDB node
 

@@ -16,7 +16,7 @@ Backup files can originate from the following sources:
 > **Tip:**
 >
 > - To learn how to back up and restore data on {{{ .dedicated }}} clusters, see [Back Up and Restore {{{ .dedicated }}} Data](/tidb-cloud/backup-and-restore.md).
-> - To learn how to back up and restore data on {{{ .starter }}} or {{{ .essential }}} clusters, see [Back Up and Restore {{{ .starter }}} or Essential Data](/tidb-cloud/backup-and-restore-serverless.md).
+> - To learn how to back up and restore data on {{{ .starter }}} or {{{ .essential }}} instances, see [Back Up and Restore {{{ .starter }}} or Essential Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## View the Backup page
 

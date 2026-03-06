@@ -38,11 +38,11 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
 
-- [Create a {{{ .starter }}} or {{{ .essential }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a {{{ .starter }}} or {{{ .essential }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 
     > **Note:**
     >
-    > The TiDB Cloud Vercel integration supports creating {{{ .starter }}} and {{{ .essential }}} clusters. You can also create one later during the integration process.
+    > The TiDB Cloud Vercel integration supports creating {{{ .starter }}} and {{{ .essential }}} instances. You can also create one later during the integration process.
 
 - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
@@ -71,7 +71,7 @@ To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integrat
 
 > **Note:**
 >
-> This method is only available for {{{ .starter }}} and {{{ .essential }}} clusters. If you want to connect to a TiDB Cloud Dedicated cluster, use the [manual method](#connect-via-manually-setting-environment-variables).
+> This method is only available for {{{ .starter }}} and {{{ .essential }}} instances. If you want to connect to a TiDB Cloud Dedicated cluster, use the [manual method](#connect-via-manually-setting-environment-variables).
 
 ### Integration workflow
 
@@ -89,7 +89,7 @@ The detailed steps are as follows:
     1. Select your target Vercel projects and click **Next**.
     2. Select your target TiDB Cloud organization and project.
     3. Select **Cluster** as your connection type.
-    4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new {{{ .starter }}} or {{{ .essential }}} cluster, click **+ Create Cluster** in the list to create one.
+    4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new {{{ .starter }}} or {{{ .essential }}} instance, click **+ Create Cluster** in the list to create one.
     5. Select the database that you want to connect to. If the **Database** drop-down list is empty or you want to select a new Database, click **+ Create Database** in the list to create one.
     6. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
     7. Choose whether to enable **Branching** to create new branches for preview environments.
@@ -211,7 +211,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
 > **Note:**
 >
-> For each organization in TiDB Cloud, you can create a maximum of five branches for {{{ .starter }}} clusters by default. To avoid exceeding the limit, you can delete the branches of your cluster that are no longer needed. For more information, see [Manage TiDB Cloud branches](/tidb-cloud/branch-manage.md).
+> For each organization in TiDB Cloud, you can create a maximum of five branches for {{{ .starter }}} instances by default. To avoid exceeding the limit, you can delete the branches of your cluster that are no longer needed. For more information, see [Manage TiDB Cloud branches](/tidb-cloud/branch-manage.md).
 
 ## Connect via manually setting environment variables
 
@@ -226,7 +226,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-Here we use a Prisma application and a {{{ .starter }}} cluster as an example. The following is a datasource setting in the Prisma schema file for a {{{ .starter }}} cluster:
+Here we use a Prisma application and a {{{ .starter }}} instance as an example. The following is a datasource setting in the Prisma schema file for a {{{ .starter }}} instance:
 
 ```
 datasource db {

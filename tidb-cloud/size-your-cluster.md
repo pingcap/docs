@@ -9,7 +9,7 @@ This document describes how to determine the size of a TiDB Cloud Dedicated clus
 
 > **Note:**
 >
-> You cannot change the size of a {{{ .starter }}} or {{{ .essential }}} cluster.
+> You cannot change the size of a {{{ .starter }}} or {{{ .essential }}} instance.
 
 ## Size TiDB
 

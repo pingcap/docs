@@ -35,9 +35,9 @@ To make the purpose of this entry tier clearer, we’ve renamed it to Starter, t
 
 Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
 
-### How many {{{ .starter }}} clusters can I create in TiDB Cloud?
+### How many {{{ .starter }}} instances can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters by default. To create more {{{ .starter }}} instances, you need to add a credit card and set the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
 ### Are all TiDB Cloud features fully supported on {{{ .starter }}}?
 
@@ -49,7 +49,7 @@ We are actively working on expanding {{{ .starter }}} to other cloud platforms, 
 
 ### I created a Developer Tier cluster before {{{ .starter }}} was available. Can I still use my cluster?
 
-Yes, your Developer Tier cluster has been automatically migrated to the {{{ .starter }}} cluster, providing you with an improved user experience without any disruptions to your prior usage.
+Yes, your Developer Tier cluster has been automatically migrated to the {{{ .starter }}} instance, providing you with an improved user experience without any disruptions to your prior usage.
 
 ### What is columnar storage in {{{ .starter }}}?
 
@@ -96,19 +96,19 @@ This error occurs when your cluster exceeds its maximum concurrent connection li
 
 ### Is there any free plan available for {{{ .starter }}}?
 
-For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five {{{ .starter }}} instances in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
-If the monthly spending limit is set for a {{{ .starter }}} cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you set a monthly spending limit or the usage is reset upon the start of a new month.
+If the monthly spending limit is set for a {{{ .starter }}} instance, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you set a monthly spending limit or the usage is reset upon the start of a new month.
 
 For more information, see [{{{ .starter }}} usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### What are the limitations of the free plan?
 
-Under the free plan, cluster performance is limited due to non-scalable resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize cluster performance and avoid these limitations, you can [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for your {{{ .starter }}} cluster.
+Under the free plan, cluster performance is limited due to non-scalable resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize cluster performance and avoid these limitations, you can [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for your {{{ .starter }}} instance.
 
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
@@ -122,7 +122,7 @@ Ensure that your queries have been carefully optimized for optimal performance b
 
 ### How storage is metered for {{{ .starter }}}？
 
-The storage is metered based on the amount of data stored in a {{{ .starter }}} cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
+The storage is metered based on the amount of data stored in a {{{ .starter }}} instance, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
 
 ### Why does the storage usage size remain unchanged after dropping a table or database immediately?
 
@@ -142,7 +142,7 @@ Once a cluster reaches its free quota or spending limit, the cluster immediately
 
 ### Why do I observe spikes in RU usage while importing data?
 
-During the data import process of a {{{ .starter }}} cluster, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
+During the data import process of a {{{ .starter }}} instance, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
 
 ### What costs are involved when using columnar storage in {{{ .starter }}}?
 
@@ -173,4 +173,4 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### Can I upgrade the version of TiDB that my cluster is running on?
 
-No. {{{ .starter }}} clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://tidbcloud.com/project/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+No. {{{ .starter }}} instances are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://tidbcloud.com/project/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.

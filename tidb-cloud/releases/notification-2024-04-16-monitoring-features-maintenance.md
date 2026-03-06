@@ -23,7 +23,7 @@ During the maintenance window, the monitoring features in the following regions 
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
     - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
 
-- {{{ .starter }}} clusters：
+- {{{ .starter }}} instances：
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
     - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
 

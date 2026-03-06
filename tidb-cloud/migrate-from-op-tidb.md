@@ -204,7 +204,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target cluster according to the following documentation:
 
    - For TiDB Cloud Dedicated clusters, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
-   - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn).
+   - For {{{ .starter }}} or {{{ .essential }}} instances, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn).
 
 2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
 
@@ -271,7 +271,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 6. Import data to TiDB Cloud.
 
     - For TiDB Cloud Dedicated clusters, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
-    - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-csv-files-serverless.md).
+    - For {{{ .starter }}} or {{{ .essential }}} instances, see [Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-csv-files-serverless.md).
 
 ## Replicate incremental data
 

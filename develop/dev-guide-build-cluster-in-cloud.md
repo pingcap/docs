@@ -1,6 +1,6 @@
 ---
 title: Create a {{{ .starter }}} Cluster
-summary: Learn how to create a {{{ .starter }}} cluster and connect to it.
+summary: Learn how to create a {{{ .starter }}} instance and connect to it.
 aliases: ['/tidb/stable/dev-guide-build-cluster-in-cloud/','/tidb/dev/dev-guide-build-cluster-in-cloud/','/tidbcloud/dev-guide-build-cluster-in-cloud/']
 ---
 
@@ -8,11 +8,11 @@ aliases: ['/tidb/stable/dev-guide-build-cluster-in-cloud/','/tidb/dev/dev-guide-
 
 # Create a {{{ .starter }}} Cluster
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} cluster, connect to it, and run a sample application on it.
+This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} instance, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
 
-## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
+## Step 1. Create a {{{ .starter }}} instance {#step-1-create-a-tidb-cloud-cluster}
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -22,7 +22,7 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
 4. On the **Create Cluster** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
-5. Click **Create** to create a {{{ .starter }}} cluster.
+5. Click **Create** to create a {{{ .starter }}} instance.
 
     Your TiDB Cloud cluster will be created in approximately 30 seconds.
 
@@ -119,8 +119,8 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
-> - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
+> - When you connect to a {{{ .starter }}} instance, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
+> - If you encounter problems when connecting to a {{{ .starter }}} instance, you can read [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
 
 3. Fill in the password to sign in.
 
