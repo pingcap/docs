@@ -146,7 +146,7 @@ To continuously replicate incremental changes from the source MySQL-compatible d
 | `binlog_format`                  | `ROW`          | Captures all data changes accurately (other formats miss edge cases) |
 | `binlog_row_image`               | `FULL`         | Includes all column values in events for safe conflict resolution |
 | `binlog_expire_logs_seconds`     | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
-| `binlog_transaction_compression` | `OFF`          | Transaction compression is not supported by DM |
+| `binlog_transaction_compression` | `OFF`          | DM does not support transaction compression |
 
 #### Check current values and configure the source MySQL instance
 
