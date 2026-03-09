@@ -52,7 +52,7 @@ Because Parquet files do not contain schema information, before importing data f
 
         Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud will create the `${db_name}` database to store your data when you import the data.
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud will create the `mydb` database when you import the data.
+        For example, if you create a `mydb-schema-create.sql` file that contains the following statement, TiDB Cloud will create the `mydb` database when you import the data.
 
         ```sql
         CREATE DATABASE mydb;
