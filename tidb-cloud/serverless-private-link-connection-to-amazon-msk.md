@@ -9,7 +9,7 @@ This document describes how to connect a {{{ .essential }}} cluster to an [Amazo
 
 ## Prerequisites for {{{ .essential }}}
 
-- Your {{{ .essential }}} is hosted on AWS and is active. Retrieve and save the following for later use:
+- Your {{{ .essential }}} cluster is hosted on AWS and is active. Retrieve and save the following for later use:
     - AWS Account ID
     - Availability zones (AZ)
 
@@ -140,7 +140,7 @@ Apply the changes and wait for the cluster status to change from **Updating** to
 
 ## Step 3. Attach the cluster policy
 
-[Attach the cluster policy](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) to allow TiDB Cloud to connect to your MSK cluster. Use the TiDB Cloud AWS account ID you obtained in [Prerequisites](#prerequisites).
+[Attach the cluster policy](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) to allow TiDB Cloud to connect to your MSK cluster. Use the TiDB Cloud AWS account ID you obtained in [Prerequisites](#prerequisites-for-essential).
 
 ## Step 4. Turn on multi-VPC connectivity
 
