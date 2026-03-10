@@ -10,6 +10,7 @@ This document describes how to connect a {{{ .essential }}} cluster to an [Amazo
 ## Prerequisites for {{{ .essential }}}
 
 - Your {{{ .essential }}} cluster is hosted on AWS and is active. Retrieve and save the following for later use:
+
     - AWS Account ID
     - Availability zones (AZ)
 
