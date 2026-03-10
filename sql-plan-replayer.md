@@ -63,7 +63,7 @@ plan replayer dump with stats as of timestamp '442012134592479233' explain selec
 
 > **Note:**
 >
-> The result file is kept for at most one hour. After one hour, TiDB deletes it from the corresponding local or external storage.
+> TiDB keeps the result file for at most one hour. After one hour, TiDB deletes it from the corresponding local or external storage.
 
 ```sql
 MySQL [test]> plan replayer dump explain select * from t;
