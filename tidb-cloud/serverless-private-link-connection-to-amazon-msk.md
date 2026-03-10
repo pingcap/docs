@@ -7,7 +7,6 @@ summary: Learn how to connect to an Amazon MSK Provisioned cluster using an Amaz
 
 This document describes how to connect a {{{ .essential }}} cluster to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster using an [Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
 
-
 ## Prerequisites for {{{ .essential }}}
 
 - Your {{{ .essential }}} is hosted on AWS and is active. Retrieve and save the following for later use:
