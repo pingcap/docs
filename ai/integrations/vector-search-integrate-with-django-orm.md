@@ -79,9 +79,9 @@ Configure the environment variables depending on the TiDB deployment option you'
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-For a {{{ .starter }}} instance, take the following steps to obtain the cluster connection string and configure environment variables:
+For a {{{ .starter }}} or Essential instance, take the following steps to obtain the cluster connection string and configure environment variables:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

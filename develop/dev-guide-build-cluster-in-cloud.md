@@ -18,9 +18,9 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
+3. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **Create Resource**.
 
-4. On the **Create Cluster** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create** to create a {{{ .starter }}} instance.
 
