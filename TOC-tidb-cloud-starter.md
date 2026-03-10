@@ -467,7 +467,6 @@
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
   - serverless
-    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - [create](/tidb-cloud/ticloud-cluster-create.md)
     - [delete](/tidb-cloud/ticloud-cluster-delete.md)
     - [describe](/tidb-cloud/ticloud-cluster-describe.md)
