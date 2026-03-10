@@ -54,7 +54,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support seamless AI integration with the Model Context Protocol (MCP) for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
-        TiDB Cloud Starter now supports MCP, providing a unified and secure way to connect your TiDB Cloud Starter instance to popular AI tools including Cursor, Claude Code, VS Code, and WindSurf. You can set up your connection once and begin querying your data with AI tools in minutes.
+        TiDB Cloud Starter now supports MCP, providing a unified and secure way to connect your TiDB Cloud Starter cluster to popular AI tools including Cursor, Claude Code, VS Code, and WindSurf. You can set up your connection once and begin querying your data with AI tools in minutes.
 
         To access this feature, click **Use with AI Tools** in the upper-right corner of your [cluster](https://tidbcloud.com/project/clusters) overview page.
 
@@ -194,7 +194,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) no longer supports database audit logging.
 
-        Currently, only [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) support database audit logging. Existing TiDB Cloud Starter instances currently using database audit logging are not affected.
+        Currently, only [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) support database audit logging. Existing TiDB Cloud Starter clusters currently using database audit logging are not affected.
 
     - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) removes the in-place restore feature, which means you can no longer restore a backup directly to the same cluster. This change helps prevent accidental overwrites of active production data and potential data loss.
 
@@ -304,7 +304,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - **TiDB Cloud Starter**
 
     - For newly created [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters, only zonal high availability is enabled, and it is not configurable.
-    - For existing TiDB Cloud Starter instances with regional high availability enabled before **September 9, 2025**, regional high availability remains supported and is not affected.
+    - For existing TiDB Cloud Starter clusters with regional high availability enabled before **September 9, 2025**, regional high availability remains supported and is not affected.
 
 <CustomContent language="en,zh">
 
