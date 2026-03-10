@@ -11,16 +11,16 @@ This document introduces how to use the blocklist of optimization rules and the 
 
 The blocklist of optimization rules is one way to tune optimization rules, mainly used to manually disable some optimization rules.
 
-### Optimization rules and rule names
+### Important optimization rules
 
-The available rule names are defined by each rule's `Name()` method in `pkg/planner/core`. The following table follows the logical optimizer pipeline in `optRuleList`.
+The following table lists the optimization rules that can be controlled by the blocklist and their corresponding rule names.
 
-Not every rule applies to every query. Some entries are internal optimizer stages, and some are enabled only for specific query patterns, hints, or session variables.
+Not every rule applies to every query. Some rules are effective only for specific query patterns, SQL features, hints, or session variables.
 
 |**Optimization Rule**|**Rule Name**|**Description**|
 | :--- | :--- | :--- |
 | Generated column substitution | generate_column_substitute | Replaces eligible expressions with equivalent indexed virtual generated columns so that expression indexes can be used. |
-| Column pruning | column_prune | Removes columns that are not needed by upper operators. This rule is executed twice in the logical optimizer pipeline. |
+| Column pruning | column_prune | Removes columns that are not needed by upper operators. This rule is executed twice during logical optimization. |
 | Result reorder | result_reorder | Adds or completes ordering keys to make result ordering deterministic in special scenarios. |
 | Build key information | build_keys | Derives unique key information for logical operators. |
 | Decorrelate subquery | decorrelate | Rewrites correlated subqueries to non-correlated joins or aggregations when possible. |
@@ -55,7 +55,7 @@ You can use the blocklist of optimization rules to disable some of them if some 
 
 > **Note:**
 >
-> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Optimization rules and rule names](#optimization-rules-and-rule-names).
+> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important optimization rules](#important-optimization-rules).
 
 - If you want to disable some rules, write its name to the `mysql.opt_rule_blacklist` table. For example:
 
