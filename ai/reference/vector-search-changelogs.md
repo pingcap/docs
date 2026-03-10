@@ -12,8 +12,8 @@ aliases: ['/tidbcloud/vector-search-changelogs/']
 
 ## June 25, 2024
 
-- TiDB Vector Search (beta) is now available for {{{ .starter }}} instances in all regions for all users.
+- TiDB Vector Search (beta) is now available for {{{ .starter }}} clusters in all regions for all users.
 
 ## April 1, 2024
 
-- TiDB Vector Search (beta) is now available for {{{ .starter }}} instances in EU regions for invited users.
+- TiDB Vector Search (beta) is now available for {{{ .starter }}} clusters in EU regions for invited users.
