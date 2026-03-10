@@ -293,7 +293,7 @@ To download the file of `PLAN REPLAYER CAPTURE`, use the `token` value together 
 
 > **Note:**
 >
-> The result file of `PLAN REPLAYER CAPTURE` is kept for up to one week. After one week, TiDB deletes it from the corresponding local or external storage.
+> TiDB keeps the result file of `PLAN REPLAYER CAPTURE` for up to one week. After one week, TiDB deletes it from the corresponding local or external storage.
 
 ### Remove the capture tasks
 
