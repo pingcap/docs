@@ -789,6 +789,23 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 1 row in set (0.00 sec)
 ```
 
+### performance_schema_session_connect_attrs_size
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `4096`
+- Range: `[-1, 65536]`
+- Unit: Bytes
+- Controls the maximum total size of connection attributes for each session.
+- If the total size of connection attributes exceeds this value, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes.
+- The value `-1` means no configured limit and is treated as up to `65536` bytes in TiDB.
+
+> **Note:**
+>
+> TiDB enforces a hard limit of 1 MiB for handshake connection attributes. If this hard limit is exceeded, the connection is rejected.
+
 ### pd_enable_follower_handle_region <span class="version-mark">New in v7.6.0</span>
 
 - Scope: GLOBAL
