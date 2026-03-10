@@ -14,7 +14,7 @@ This document describes how to back up and restore your data on {{{ .starter }}}
 
 ## View the Backup page
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
     > **Tip:**
     >

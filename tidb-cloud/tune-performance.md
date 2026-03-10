@@ -34,29 +34,13 @@ TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#sql-statement
 
 ## View the Diagnosis page
 
-<CustomContent plan="starter,essential,dedicated">
-
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
     > **Tip:**
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. In the left navigation pane, click **Monitoring** > **Diagnosis**.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target instance to go to its overview page.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations and instances.
-
-2. In the left navigation pane, click **Monitoring**.
-
-</CustomContent>
 
 ## Slow Query
 

@@ -63,7 +63,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-1. Navigate to the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

@@ -17,13 +17,13 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
+2. Click the name of the target resource. The overview page of that resource is displayed.
 3. Click **Alerts** in the left navigation pane.
 4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
 5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.

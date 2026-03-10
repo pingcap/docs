@@ -25,13 +25,13 @@ The recommended use cases of SQL Editor are as follows:
 
 ## Access SQL Editor
 
-1. Go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Go to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click your cluster name, and then click **SQL Editor** in the left navigation pane.
+2. Click the name of your {{{ .starter }}} instance or TiDB Cloud Dedicated cluster, and then click **SQL Editor** in the left navigation pane.
 
     > **Note:**
     >

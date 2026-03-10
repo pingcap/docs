@@ -49,7 +49,7 @@ Log redaction is enabled by default, ensuring that sensitive information in runn
 To disable log redaction, do the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the <CustomContent plan="dedicated">[**Clusters**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium">[**TiDB Instances**](https://tidbcloud.com/tidbs)</CustomContent> page, and then click the name of your target <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page.
+2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page.
 
     <CustomContent plan="dedicated">
 
@@ -96,7 +96,7 @@ To check the updated logs after log redaction is disabled, do the following:
 To maintain data security, **enable log redaction** as soon as you complete your diagnostic or maintenance task as follows.
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the <CustomContent plan="dedicated">[**Clusters**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium">[**TiDB Instances**](https://tidbcloud.com/tidbs)</CustomContent> page, and then click the name of your target <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page.
+2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page.
 
     <CustomContent plan="dedicated">
 

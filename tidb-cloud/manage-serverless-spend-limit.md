@@ -33,7 +33,7 @@ For a free {{{ .starter }}} instance, you can increase the usage quota by settin
 
 To update the spending limit for a {{{ .starter }}} instance, perform the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
 
     > **Tip:**
     >

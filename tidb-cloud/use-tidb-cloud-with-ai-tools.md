@@ -27,7 +27,7 @@ To complete this guide, you need the following:
 
 After you create a {{{ .starter }}} instance in TiDB Cloud, perform the following steps to connect it to your AI tool.
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page. Then, click **Use with AI Tools** in the upper-right corner.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. In the **Access `your_cluster_name` with AI tools** dialog, select the **Branch** and **Database** that you want the AI tool to access.
 3. Verify that you meet all the **Prerequisites** listed. If not, follow the on-screen instructions to install the required dependencies.
 4. Configure the password:

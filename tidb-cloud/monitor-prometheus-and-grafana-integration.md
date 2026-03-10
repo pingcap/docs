@@ -43,7 +43,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 <SimpleTab>
 <div label="Cluster-level Prometheus integration">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Prometheus**.
 4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.

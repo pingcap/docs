@@ -15,7 +15,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 
 To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint, take the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -57,7 +57,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
 
 If you do not need to use a public endpoint of a {{{ .starter }}} or {{{ .essential }}} instance, you can disable it to prevent connections from the internet:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
@@ -73,7 +73,7 @@ After disabling the public endpoint, the `Public` entry in the **Connection Type
 
 You can re-enable the public endpoint after disabling it:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 

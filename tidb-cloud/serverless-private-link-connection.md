@@ -44,7 +44,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
@@ -100,7 +100,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
@@ -157,7 +157,7 @@ You can attach domains to a private link connection using the TiDB Cloud console
 
 To attach domains to a private link connection using the TiDB Cloud console, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
@@ -210,7 +210,7 @@ You can detach domains from a private link connection using the TiDB Cloud conso
 
 To detach domains from a private link connection using the TiDB Cloud console, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
@@ -252,7 +252,7 @@ You can delete a private link connection using the TiDB Cloud console or the TiD
 
 To delete a private link connection using the TiDB Cloud console, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >

@@ -41,15 +41,15 @@ If you are an organization owner, you can rename the default project or create a
 
 If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Dedicated cluster as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click **Create Cluster**.
+2. Click **Create Resource**.
 
-3. On the **Create Cluster** page, select **Dedicated**, and then configure the cluster information as follows:
+3. On the **Create** page, select **Dedicated**, and then configure the cluster information as follows:
 
     1. Choose a cloud provider and a region.
 
