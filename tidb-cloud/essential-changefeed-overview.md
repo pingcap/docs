@@ -10,7 +10,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 > **Note:**
 >
 > - Currently, TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} instance.
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 
 ## Restrictions
 
