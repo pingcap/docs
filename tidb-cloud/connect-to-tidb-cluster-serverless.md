@@ -18,11 +18,11 @@ After your {{{ .starter }}} or {{{ .essential }}} instance is created on TiDB Cl
 
 - Direct connections
 
-  Direct connections mean the MySQL native connection system over TCP. You can connect to your cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+  Direct connections mean the MySQL native connection system over TCP. You can connect to your {{{ .starter }}} or Essential instance using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} instance hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
+  TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} instance hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your {{{ .starter }}} or Essential instance data via a RESTful API rather than raw SQL.
 
 - [Serverless Driver (beta)](/develop/serverless-driver.md)
 
@@ -46,9 +46,9 @@ There are two network connection types for {{{ .starter }}} and {{{ .essential }
 
 - [Public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-  The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
+  The standard connection exposes a public endpoint, so you can connect to your {{{ .starter }}} or Essential instance via a SQL client from your laptop.
 
-  {{{ .starter }}} and {{{ .essential }}} require [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+  {{{ .starter }}} and {{{ .essential }}} require [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to {{{ .starter }}} or Essential instances.
 
 The following table shows the network you can use in different connection methods:
 
@@ -60,4 +60,4 @@ The following table shows the network you can use in different connection method
 
 ## What's next
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+After you have successfully connected to your {{{ .starter }}} or Essential instance, you can [explore SQL statements with TiDB](/basic-sql-operations.md).

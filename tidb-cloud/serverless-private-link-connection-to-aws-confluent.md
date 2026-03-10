@@ -22,7 +22,7 @@ This document describes how to connect a {{{ .essential }}} instance to a [Confl
 
 To view the AWS account ID and availability zones, do the following:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the displayed dialog, you can find the AWS account ID and availability zones.
 

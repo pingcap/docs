@@ -31,23 +31,23 @@ To create a branch, perform the following steps:
 4. In the **Create Branch** dialog, configure the following options:
 
     - **Name**: enter a name for the branch.
-    - **Parent branch**: select the original cluster or an existing branch. `main` represents the current cluster.
+    - **Parent branch**: select the original {{{ .starter }}} or Essential instance or an existing branch. `main` represents the current instance.
     - **Include data up to**: choose one of the following:
         - **Current point in time**: create a branch from the current state.
         - **Specific date and time**: create a branch from a specified time.
 
 5. Click **Create**.
 
-Depending on the data size in your cluster, the branch creation will be completed in a few minutes.
+Depending on the data size in your {{{ .starter }}} or Essential instance, the branch creation will be completed in a few minutes.
 
 ## View branches
 
-To view branches for your cluster, perform the following steps:
+To view branches for your {{{ .starter }}} or Essential instance, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Branches** in the left navigation pane.
 
-    The branch list of the cluster is displayed in the right pane.
+    The branch list of the {{{ .starter }}} or Essential instance is displayed in the right pane.
 
 ## Connect to a branch
 
@@ -60,7 +60,7 @@ To connect to a branch, perform the following steps:
 5. Click **Generate Password** or **Reset Password** to create or reset the root password.
 6. Connect to the branch using the connection information.
 
-Alternatively, you can get the connection string from the cluster overview page:
+Alternatively, you can get the connection string from the overview page of your {{{ .starter }}} or Essential instance:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner.

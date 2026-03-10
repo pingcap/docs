@@ -115,7 +115,7 @@ You can create a data export task for a {{{ .starter }}} or {{{ .essential }}} i
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    In this example, the `tidbcloud_serverless_export.example` resource will create an export task to export data from the entire cluster. 
+    In this example, the `tidbcloud_serverless_export.example` resource will create an export task to export data from the entire {{{ .starter }}} or {{{ .essential }}} instance. 
     
     This resource is not synchronized. You can use `terraform refresh` to retrieve its latest state.
 

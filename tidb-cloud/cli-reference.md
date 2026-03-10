@@ -9,11 +9,11 @@ summary: Provides an overview of TiDB Cloud CLI.
 >
 > Currently, TiDB Cloud CLI is in beta and not applicable to TiDB Cloud Dedicated clusters.
 
-TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In the TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations.
+TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In the TiDB Cloud CLI, you can easily manage your {{{ .starter }}} and Essential instances, import data to your clusters, and perform more operations.
 
 ## Before you begin
 
-Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you have installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
+Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you have installed the `ticloud` CLI, you can use it to manage your {{{ .starter }}} and Essential instances from the command lines.
 
 ## Commands available
 

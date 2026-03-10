@@ -1,11 +1,11 @@
 ---
-title: ticloud serverless cluster describe
+title: ticloud serverless describe
 summary: The reference of `ticloud serverless describe`.
 ---
 
 # ticloud serverless describe
 
-Get information about a {{{ .starter }}} or {{{ .essential }}} instance (such as the cluster configurations and cluster status):
+Get information about a {{{ .starter }}} or {{{ .essential }}} instance (such as the instance configurations and instance status):
 
 ```shell
 ticloud serverless describe [flags]

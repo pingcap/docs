@@ -5,7 +5,7 @@ summary: Learn how to import local files to {{{ .starter }}} or {{{ .essential }
 
 # Import Local Files to {{{ .starter }}} or Essential
 
-You can import local files to {{{ .starter }}} or {{{ .essential }}} directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
+You can import local files to {{{ .starter }}} or {{{ .essential }}} directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your {{{ .starter }}} or Essential instance. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
 
 Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
 
@@ -17,7 +17,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 ## Import local files
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -87,7 +87,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
 
-To import only some specified columns, you can use the MySQL client to connect your TiDB cluster, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+To import only some specified columns, you can use the MySQL client to connect your {{{ .starter }}} or Essential instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
 
 ```sql
 CREATE TABLE `import_test` (

@@ -42,16 +42,16 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
 
     </CustomContent>
 
-4. TiDB Cloud lets you create [branches](/tidb-cloud/branch-overview.md) for your {{{ .starter }}} or {{{ .essential }}} instance. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
+4. TiDB Cloud lets you create [branches](/tidb-cloud/branch-overview.md) for your {{{ .starter }}} or {{{ .essential }}} instance. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the {{{ .starter }}} or Essential instance itself.
 
 5. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
-6. Connect to your cluster with the connection string.
+6. Connect to your {{{ .starter }}} or Essential instance with the connection string.
 
     > **Note:**
     >
-    > When you connect to a {{{ .starter }}} or {{{ .essential }}} instance, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > Your client IP must be in the allowed IP rules of the public endpoint of your cluster. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+    > When you connect to a {{{ .starter }}} or {{{ .essential }}} instance, you must include the prefix for your {{{ .starter }}} or Essential instance in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > Your client IP must be in the allowed IP rules of the public endpoint of your {{{ .starter }}} or Essential instance. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
 ## Disable a public endpoint
 
@@ -65,7 +65,7 @@ If you do not need to use a public endpoint of a {{{ .starter }}} or {{{ .essent
 
 4. Click **Disable** in the confirmation dialog.
 
-After disabling the public endpoint, the `Public` entry in the **Connection Type** drop-down list of the connect dialog is disabled. If users are still trying to access the cluster from the public endpoint, they will get an error.
+After disabling the public endpoint, the `Public` entry in the **Connection Type** drop-down list of the connect dialog is disabled. If users are still trying to access the {{{ .starter }}} or Essential instance from the public endpoint, they will get an error.
 
 > **Note:**
 >
@@ -81,4 +81,4 @@ You can re-enable the public endpoint after disabling it:
 
 ## What's next
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+After you have successfully connected to your {{{ .starter }}} or Essential instance, you can [explore SQL statements with TiDB](/basic-sql-operations.md).

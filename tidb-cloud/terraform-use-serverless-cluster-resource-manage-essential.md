@@ -5,7 +5,7 @@ summary: Learn how to use the `tidbcloud_serverless_cluster` resource to create 
 
 # Use the `tidbcloud_serverless_cluster` Resource
 
-This document describes how to manage a [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) cluster with the `tidbcloud_serverless_cluster` resource.
+This document describes how to manage a [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instance with the `tidbcloud_serverless_cluster` resource.
 
 You will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 
@@ -22,7 +22,7 @@ The features of the `tidbcloud_serverless_cluster` resource include the followin
 
 ## Get project IDs using the `tidbcloud_projects` data source
 
-Each TiDB cluster belongs to a project. Before creating a {{{ .essential }}} instance, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
+Each {{{ .essential }}} instance belongs to a project. Before creating a {{{ .essential }}} instance, you need to obtain the ID of the project where you want to create the {{{ .essential }}} instance. If no `project_id` is specified, the default project will be used.
 
 To retrieve the information about all available projects, use the `tidbcloud_projects` data source as follows:
 
@@ -123,7 +123,7 @@ Now, you can get all the available projects from the output. Copy one of the pro
 
 You can create a {{{ .essential }}} instance using the `tidbcloud_serverless_cluster` resource.
 
-1. Create a directory for the cluster and enter it.
+1. Create a directory for the {{{ .essential }}} instance and enter it.
 
 2. Create a `cluster.tf` file.
 
@@ -295,8 +295,8 @@ You can create a {{{ .essential }}} instance using the `tidbcloud_serverless_clu
 
 For a {{{ .essential }}} instance, you can use Terraform to manage resources. The arguments that you can modify include:
 
-- `display_name`: The display name of the cluster.
-- `auto_scaling`: The auto scaling configuration of the cluster.
+- `display_name`: The display name of the {{{ .essential }}} instance.
+- `auto_scaling`: The auto scaling configuration of the {{{ .essential }}} instance.
 - `endpoints.public.disabled`: Whether to disable the public endpoint.
 - `automated_backup_policy.start_time`: The UTC time of day in `HH:mm` format when the automated backup starts.
 
@@ -461,7 +461,7 @@ For a {{{ .essential }}} instance that is not managed by Terraform, you can brin
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported cluster with Terraform.
+Now you can manage the imported {{{ .essential }}} instance with Terraform.
 
 ## Delete a {{{ .essential }}} instance
 

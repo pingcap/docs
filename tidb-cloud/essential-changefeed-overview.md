@@ -56,7 +56,7 @@ You can view a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the corresponding changefeed you want to view, and click **...** > **View** in the **Action** column.
 3. You can see the details of a changefeed, including its configuration, status, and metrics.
 
@@ -80,7 +80,7 @@ You can pause or resume a changefeed using the TiDB Cloud console or the TiDB Cl
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}}instance.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 </div>
@@ -113,7 +113,7 @@ You can edit a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
@@ -145,7 +145,7 @@ ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <ch
 
 ## Duplicate a changefeed
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the changefeed that you want to duplicate. In the **Action** column, click **...** > **Duplicate**.
 3. TiDB Cloud automatically populates the new changefeed configuration with the original settings. You can review and modify the configuration as needed.
 4. After confirming the configuration, click **Submit** to create and start the new changefeed.
@@ -157,7 +157,7 @@ You can delete a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 </div>

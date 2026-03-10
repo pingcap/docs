@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is **disabled by default**. To audit a TiDB cluster, you need to enable audit logging for it.
+The audit logging feature is **disabled by default**. To audit a {{{ .essential }}} instance, you need to enable audit logging for it.
 
 ## Audit logging configurations
 
@@ -420,9 +420,9 @@ All classes of audit logs contain the following information:
 | `TABLES`        | The accessed tables related to this audit record.                                              |
 | `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
 | `KEYSPACE_NAME` | The keyspace name of the audit record.                                                        |
-| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the cluster belongs to.                 |
-| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the cluster belongs to.                |
-| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless cluster that the audit record belongs to.           |
+| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the {{{ .essential }}}     instance belongs to.                 |
+| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the {{{ .essential }}} instance belongs to.                |
+| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless {{{ .essential }}} instance that the audit record belongs to.           |
 | `REASON`        | The error message of the audit record. Only recorded when an error occurs during the operation.|
 
 ### SQL statement information

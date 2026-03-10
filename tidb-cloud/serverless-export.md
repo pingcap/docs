@@ -7,9 +7,9 @@ summary: Learn how to export data from {{{ .starter }}} or {{{ .essential }}} in
 
 TiDB Cloud enables you to export data from a {{{ .starter }}} or Essential instance to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a {{{ .starter }}} or Essential instance. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .starter }}} or Essential instance, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
@@ -35,7 +35,7 @@ You can export data to the following locations:
 
 ### A local file
 
-To export data from a TiDB Cloud cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+To export data from a {{{ .starter }}} or Essential instance to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
 
 Exporting data to a local file has the following limitations:
 
@@ -192,7 +192,7 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 
    > **Tip:**
    >
-   > If your cluster has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+   > If your {{{ .starter }}} or Essential instance has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
 
 4. Click **Export**.
 
@@ -416,7 +416,7 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## Export speed
 
-The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md):
+The export speed varies between {{{ .starter }}} and {{{ .essential }}}:
 
 - **{{{ .starter }}}**:
 

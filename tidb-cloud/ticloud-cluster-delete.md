@@ -1,5 +1,5 @@
 ---
-title: ticloud serverless cluster delete
+title: ticloud serverless delete
 summary: The reference of `ticloud serverless delete`.
 ---
 
@@ -38,7 +38,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                            | Required | Note                                                 |
 |-------------------------|----------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster to be deleted.    | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Deletes a cluster without confirmation. | No       | Works in both non-interactive and interactive modes. |
+| --force                 | Deletes a {{{ .starter }}} or Essential instance without confirmation. | No       | Works in both non-interactive and interactive modes. |
 | -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

@@ -91,7 +91,7 @@ Install the MySQL command-line client if you do not have it. You can refer to th
 
 ### Create a user profile or log into TiDB Cloud
 
-Before creating a cluster with TiDB Cloud CLI, you need to either create a user profile or log into TiDB Cloud.
+Before creating a {{{ .starter }}} instance with TiDB Cloud CLI, you need to either create a user profile or log into TiDB Cloud.
 
 - Create a user profile with your [TiDB Cloud API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management):
 

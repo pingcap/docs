@@ -106,7 +106,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 8. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
     - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time returned by Export. Ensure that the time zone is correct.
-    - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
+    - If you do not have any data in the upstream {{{ .essential }}} instance, select **Start replication from now on**.
 
 9. Click **Next** to configure your changefeed.
 

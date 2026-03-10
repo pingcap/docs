@@ -83,11 +83,11 @@ You need the following privileges to export data from the upstream database:
 
 ### Deploy TiCDC
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to {{{ .premium }}}.
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to {{{ .premium }}}.
 
-1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
+1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB Self-Managed cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
 
-2. Add the TiCDC component to the TiDB cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
+2. Add the TiCDC component to the TiDB Self-Managed cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
 
     ```yaml
     cdc_servers:
@@ -117,7 +117,7 @@ To migrate data from the TiDB Self-Managed cluster to {{{ .premium }}}, perform 
 
 You need to migrate data from the TiDB Self-Managed cluster to Amazon S3 using Dumpling.
 
-If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
+If your TiDB Self-Managed cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
 
 #### Step 1. Disable the GC mechanism of the upstream TiDB Self-Managed cluster temporarily
 
@@ -155,9 +155,9 @@ Create an access key in the AWS console. See [Create an access key](https://docs
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
 
-#### Step 3. Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
+#### Step 3. Export data from the upstream TiDB Self-Managed cluster to Amazon S3 using Dumpling
 
-Do the following to export data from the upstream TiDB cluster to Amazon S3 using Dumpling:
+Do the following to export data from the upstream TiDB Self-Managed cluster to Amazon S3 using Dumpling:
 
 1. Configure the environment variables for Dumpling.
 
