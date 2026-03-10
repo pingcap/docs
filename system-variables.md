@@ -3675,7 +3675,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
-- This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. The result is either a file token or, if the configured storage backend supports it, a presigned URL.
+- This read-only variable returns the result of the last `PLAN REPLAYER DUMP` execution in the current session. The result is either a file token or, if the configured storage backend supports it, a presigned URL.
 
 ### tidb_load_based_replica_read_threshold <span class="version-mark">New in v7.0.0</span>
 
