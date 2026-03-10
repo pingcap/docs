@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support Amazon MSK Provisioned in private link connections for dataflow scenarios.
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports creating private link connections to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster. This feature enables private network connectivity for changefeeds without exposing traffic to the public internet.
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports creating private link connections to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster. This feature enables private network connectivity for changefeeds to Amazon MSK Provisioned clusters, without exposing traffic to the public internet.
 
         For more information, see [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md).
 
