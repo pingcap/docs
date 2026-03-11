@@ -31,7 +31,6 @@ Not every rule applies to every query. Some rules are effective only for specifi
 | Convert outer joins to inner joins | convert_outer_to_inner_joins | Converts outer joins to inner joins when predicates filter out unmatched rows. |
 | Predicate pushdown | predicate_push_down | Pushes predicates down to the operators that are closer to the data source. |
 | Outer join elimination | outer_join_eliminate | Removes unnecessary left joins or right joins from the execution plan. |
-| Partition pruning | partition_processor | Prunes partitions rejected by predicates. |
 | Aggregation pushdown | aggregation_push_down | Pushes aggregations down to their children. |
 | Derive TopN or Limit from window functions | derive_topn_from_window | Derives `TopN` or `Limit` operators from window functions. |
 | Predicate simplification | predicate_simplification | Simplifies predicates by consolidating ranges and removing impossible branches. |
