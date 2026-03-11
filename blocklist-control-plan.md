@@ -13,16 +13,14 @@ The blocklist of optimization rules is one way to tune optimization rules, mainl
 
 ### Important optimization rules
 
-The following table lists the optimization rules that can be controlled by the blocklist and their corresponding rule names.
+The following table lists common optimization rules that can be controlled by the blocklist and their corresponding rule names.
 
 Not every rule applies to every query. Some rules are effective only for specific query patterns, SQL features, hints, or session variables.
 
 |**Optimization Rule**|**Rule Name**|**Description**|
 | :--- | :--- | :--- |
 | Generated column substitution | generate_column_substitute | Replaces eligible expressions with equivalent indexed virtual generated columns so that expression indexes can be used. |
-| Column pruning | column_prune | Removes columns that are not needed by upper operators. This rule is executed twice during logical optimization. |
-| Result reorder | result_reorder | Adds or completes ordering keys to make result ordering deterministic in special scenarios. |
-| Build key information | build_keys | Derives unique key information for logical operators. |
+| Column pruning | column_prune | Removes columns that are not needed by upper operators. |
 | Decorrelate subquery | decorrelate | Rewrites correlated subqueries to non-correlated joins or aggregations when possible. |
 | Semi join rewrite | semi_join_rewrite | Rewrites eligible `EXISTS` semi joins to inner joins with aggregation when the related hint or session variable is enabled. |
 | Aggregation elimination | aggregation_eliminate | Removes unnecessary aggregation operators from the execution plan. |
@@ -33,19 +31,13 @@ Not every rule applies to every query. Some rules are effective only for specifi
 | Convert outer joins to inner joins | convert_outer_to_inner_joins | Converts outer joins to inner joins when predicates filter out unmatched rows. |
 | Predicate pushdown | predicate_push_down | Pushes predicates down to the operators that are closer to the data source. |
 | Outer join elimination | outer_join_eliminate | Removes unnecessary left joins or right joins from the execution plan. |
-| Partition pruning | partition_processor | Prunes partitions rejected by predicates and rewrites partitioned table queries to the `UnionAll + Partition DataSource` form. |
-| Collect predicate columns point | collect_predicate_columns_point | Collects predicate columns and prunes access paths for later statistics loading. |
+| Partition pruning | partition_processor | Prunes partitions rejected by predicates. |
 | Aggregation pushdown | aggregation_push_down | Pushes aggregations down to their children. |
 | Derive TopN or Limit from window functions | derive_topn_from_window | Derives `TopN` or `Limit` operators from window functions. |
 | Predicate simplification | predicate_simplification | Simplifies predicates by consolidating ranges and removing impossible branches. |
 | TopN pushdown | topn_push_down | Pushes the `TopN` operator closer to the data source. |
-| Sync wait stats load point | sync_wait_stats_load_point | Waits for synchronous statistics loading before later cost-sensitive optimization stages continue. |
 | Join reorder | join_reorder | Decides the order of multi-table joins. |
 | Outer join to semi join rewrite | outer_join_to_semi_join | Rewrites eligible outer join plus `IS NULL` patterns to anti semi joins. |
-| Push down sequence | push_down_sequence | Pushes `LogicalSequence` nodes down the logical plan when possible. |
-| Eliminate empty `UnionAll` branches | union_all_eliminate_dual_item | Removes empty `TableDual` branches from `UnionAll` plans. |
-| Eliminate empty selection | eliminate_empty_selection | Removes `Selection` operators that have no remaining predicates. |
-| Resolve expand | resolve_expand | Finalizes `Expand` projections for grouping sets and `ROLLUP` after earlier logical optimization finishes. |
 
 ### Disable optimization rules
 
@@ -55,7 +47,7 @@ You can use the blocklist of optimization rules to disable some of them if some 
 
 > **Note:**
 >
-> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important optimization rules](#important-optimization-rules).
+> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The rule names listed in [Important optimization rules](#important-optimization-rules) are shown in the second column.
 
 - If you want to disable some rules, write its name to the `mysql.opt_rule_blacklist` table. For example:
 
