@@ -109,6 +109,10 @@ TableSample ::=
 >
 > Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`HIGH_PRIORITY`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
 
+> **Note:**
+>
+> Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, referencing the base table name when an alias is defined is still allowed, but it will trigger a warning advising you to use the explicit alias. When a query involves multiple tables with the same name across different databases (for example, `FROM db1.t, db2.t FOR UPDATE OF t`), TiDB now matches the target table from left to right based on the order in the `FROM` clause, rather than the current database context. To avoid ambiguity, it is recommended to specify the database name or use aliases in the `FOR UPDATE OF` clause.
+
 ## Examples
 
 ### SELECT
