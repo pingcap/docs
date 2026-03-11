@@ -161,6 +161,7 @@
         -   [Amazon RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
         -   [Alibaba Cloud RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
         -   [AWS 上の Confluent Cloud に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+        -   [Amazon MSK Provisioned に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
         -   [Alibaba Cloud 上のセルフホスト型 Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
         -   [AWS 上のセルフホスト型 Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
     -   監査管理
@@ -532,7 +533,7 @@
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクブ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
@@ -542,7 +543,7 @@
         -   [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
         -   [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
         -   [再販業者の顧客](/tidb-cloud/cppo-customer.md)
-    -   [TiDB Cloud Starter と基本的な制限事項](/tidb-cloud/serverless-limitations.md)
+    -   [TiDB Cloud StarterとEssential制限事項](/tidb-cloud/serverless-limitations.md)
     -   [TiDB Cloudの SQL 機能が制限されている](/tidb-cloud/limited-sql-features.md)
     -   [TiDB の制限](/tidb-limitations.md)
     -   [システム変数](/system-variables.md)

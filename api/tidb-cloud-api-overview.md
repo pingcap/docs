@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud API Overview
 summary: TiDB Cloud API とは何か、その機能、API を使用してTiDB Cloudクラスターを管理する方法について学習します。
+aliases: ['/ja/tidbcloud/api-overview/']
 ---
 
 # TiDB CloudAPI の概要 {#tidb-cloud-api-overview}
@@ -19,5 +20,5 @@ API には次の機能があります。
 
 TiDB Cloud API には、次の 2 つのバージョンがあります。
 
--   [v1ベータ1](/api/tidb-cloud-api-v1beta1.md) : TiDB Cloud Starter、Essential、Dedicated クラスター、および課金、データ サービス、 IAMリソースを管理します。
+-   [v1ベータ1](/api/tidb-cloud-api-v1beta1.md) : TiDB Cloud Starter、 Essential、 Dedicatedクラスター、および課金、データ サービス、 IAMリソースを管理します。
 -   [v1ベータ](/api/tidb-cloud-api-v1beta.md) : TiDB Cloudのプロジェクト、クラスター、バックアップ、インポート、および復元を管理します。

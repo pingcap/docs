@@ -468,7 +468,6 @@
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
         -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
-        -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
         -   [消去](/tidb-cloud/ticloud-cluster-delete.md)
         -   [説明する](/tidb-cloud/ticloud-cluster-describe.md)
@@ -536,7 +535,7 @@
         -   [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
         -   [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
         -   [再販業者の顧客](/tidb-cloud/cppo-customer.md)
-    -   [TiDB Cloud Starter と基本的な制限事項](/tidb-cloud/serverless-limitations.md)
+    -   [TiDB Cloud StarterとEssential制限事項](/tidb-cloud/serverless-limitations.md)
     -   [TiDB Cloudの SQL 機能が制限されている](/tidb-cloud/limited-sql-features.md)
     -   [TiDB の制限](/tidb-limitations.md)
     -   [システム変数](/system-variables.md)
@@ -559,5 +558,5 @@
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
     -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
-    -   [TiDB Cloud Starterに関するよくある質問](/tidb-cloud/serverless-faqs.md)
+    -   [TiDB Cloud Starterよくある質問](/tidb-cloud/serverless-faqs.md)
 -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)

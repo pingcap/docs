@@ -1,17 +1,17 @@
 ---
 title: Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated
-summary: Apache Parquet ファイルを Amazon S3、GCS、または Azure Blob Storage からTiDB Cloud Dedicated にインポートする方法を学びます。
+summary: Apache Parquet ファイルを Amazon S3、GCS、または Azure Blob Storage からTiDB Cloud Dedicatedにインポートする方法を学びます。
 ---
 
-# Apache Parquet ファイルを Cloud Storage からTiDB Cloud Dedicated にインポートする {#import-apache-parquet-files-from-cloud-storage-into-tidb-cloud-dedicated}
+# Apache Parquet ファイルを Cloud Storage からTiDB Cloud Dedicatedにインポートする {#import-apache-parquet-files-from-cloud-storage-into-tidb-cloud-dedicated}
 
-このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、またはAzure Blob StorageからTiDB Cloud DedicatedにApache Parquetファイルをインポートする方法について説明します。Parquetファイルは、非圧縮または[Google スナッピー](https://github.com/google/snappy)で圧縮された状態でインポートできます。その他のParquet圧縮コーデックはサポートされていません。
+このドキュメントでは、Amazon Simple Storage Service（Amazon S3）、Google Cloud Storage（GCS）、またはAzure Blob StorageからTiDB Cloud DedicatedにApache Parquetファイルをインポートする方法について説明します。Parquetファイルは、非圧縮ファイルでも[Google スナッピー](https://github.com/google/snappy)で圧縮されたファイルでもインポートできます。その他のParquet圧縮コーデックはサポートされていません。
 
 ## 制限事項 {#limitations}
 
 -   データの整合性を確保するため、 TiDB Cloud空のテーブルへの Parquet ファイルのインポートのみが許可されています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存テーブルにコピーします。
 
--   TiDB Cloud Dedicated クラスターで[チェンジフィード](/tidb-cloud/changefeed-overview.md)または[ポイントインタイムリストア](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません（「**データのインポート**」ボタンは無効になります）。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム復元はインポートされたデータを検出できません。
+-   TiDB Cloud Dedicatedクラスターで[チェンジフィード](/tidb-cloud/changefeed-overview.md)または[ポイントインタイムリストア](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません（「**データのインポート**」ボタンは無効になります）。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム復元はインポートされたデータを検出できません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -54,7 +54,7 @@ Parquet ファイルにはスキーマ情報が含まれていないため、Par
 
         各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloudはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
-        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
+        たとえば、次のステートメントを含む`mydb-schema-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
 
         ```sql
         CREATE DATABASE mydb;

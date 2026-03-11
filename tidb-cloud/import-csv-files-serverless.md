@@ -1,15 +1,15 @@
 ---
 title: Import CSV Files from Cloud Storage into TiDB Cloud Starter or Essential
-summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Starter またはTiDB Cloud Essential に CSV ファイルをインポートする方法を学習します。
+summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud StarterまたはTiDB Cloud Essentialに CSV ファイルをインポートする方法を学習します。
 ---
 
 # クラウドストレージからTiDB Cloud StarterまたはEssentialにCSVファイルをインポートする {#import-csv-files-from-cloud-storage-into-tidb-cloud-starter-or-essential}
 
-このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Starter またはTiDB Cloud Essential に CSV ファイルをインポートする方法について説明します。
+このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud StarterまたはTiDB Cloud Essentialに CSV ファイルをインポートする方法について説明します。
 
 > **注記：**
 >
-> TiDB Cloud Dedicated については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+> TiDB Cloud Dedicatedについては、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -17,7 +17,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object S
 
 ## ステップ1.CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
-1.  CSV ファイルが 256 MiB より大きい場合は、サイズがそれぞれ 256 MiB 程度の小さなファイルに分割することを検討してください。
+1.  CSV ファイルが 256 MiB より大きい場合は、サイズがそれぞれ約 256 MiB の小さなファイルに分割することを検討してください。
 
     TiDB Cloudは非常に大きなCSVファイルのインポートをサポートしていますが、256MiB程度の複数の入力ファイルで最適なパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並列処理できるため、インポート速度が大幅に向上するからです。
 
@@ -49,7 +49,7 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
         各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloudはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
-        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
+        たとえば、次のステートメントを含む`mydb-schema-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
 
         ```sql
         CREATE DATABASE mydb;
@@ -90,7 +90,7 @@ TiDB Cloud がAmazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Obj
 
 ## ステップ4.CSVファイルをインポートする {#step-4-import-csv-files}
 
-CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートするには、次の手順を実行します。
+CSV ファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポートするには、次の手順を実行します。
 
 <SimpleTab>
 <div label="Amazon S3">

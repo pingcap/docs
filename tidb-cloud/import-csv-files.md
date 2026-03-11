@@ -1,18 +1,18 @@
 ---
 title: Import CSV Files from Cloud Storage into TiDB Cloud Dedicated
-summary: Amazon S3、GCS、または Azure Blob Storage からTiDB Cloud Dedicated に CSV ファイルをインポートする方法を学びます。
+summary: Amazon S3、GCS、または Azure Blob Storage からTiDB Cloud Dedicatedに CSV ファイルをインポートする方法を学びます。
 aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-from-aurora-bulk-import']
 ---
 
 # クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする {#import-csv-files-from-cloud-storage-into-tidb-cloud-dedicated}
 
-このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、または Azure Blob Storage からTiDB Cloud Dedicated に CSV ファイルをインポートする方法について説明します。
+このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、または Azure Blob Storage からTiDB Cloud Dedicatedに CSV ファイルをインポートする方法について説明します。
 
 ## 制限事項 {#limitations}
 
 -   データの整合性を確保するため、 TiDB Cloud空のテーブルへのCSVファイルのインポートのみが許可されています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`ステートメントを使用してデータを対象の既存テーブルにコピーします。
 
--   TiDB Cloud Dedicated クラスターで[チェンジフィード](/tidb-cloud/changefeed-overview.md)または[ポイントインタイムリストア](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません（「**データのインポート**」ボタンは無効になります）。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム復元はインポートされたデータを検出できません。
+-   TiDB Cloud Dedicatedクラスターで[チェンジフィード](/tidb-cloud/changefeed-overview.md)または[ポイントインタイムリストア](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません（「**データのインポート**」ボタンは無効になります）。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム復元はインポートされたデータを検出できません。
 
 ## ステップ1.CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
@@ -49,7 +49,7 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
         各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloudはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
-        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
+        たとえば、次のステートメントを含む`mydb-schema-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
 
         ```sql
         CREATE DATABASE mydb;

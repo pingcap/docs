@@ -8,15 +8,27 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2026年3月10日 {#march-10-2026}
+
+**一般的な変更**
+
+-   **TiDB Cloud Essential**
+
+    -   データフローシナリオのプライベートリンク接続でプロビジョニングされた Amazon MSK をサポートします。
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)では、 [Amazon MSK プロビジョニング](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成がサポートされるようになりました。この機能により、Amazon MSK プロビジョニングされたクラスターへの変更フィードをプライベートネットワークで接続でき、トラフィックをパブリックインターネットに公開する必要がなくなります。
+
+        詳細については[プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)参照してください。
+
 ## 2026年3月3日 {#march-3-2026}
 
 **一般的な変更**
 
--   **TiDB Cloud専用**
+-   **TiDB Cloud Dedicated**
 
     -   Amazon S3 シンクの Changefeeds は、認証に AWS ロール ARN を使用することをサポートします。
 
-        既存のAK/SK認証方法に加え、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでIAMロール ARN を使用して Amazon S3 シンクの changefeed を設定できるようになりました。この機能により、有効期間の短い認証情報と自動ローテーションが可能になり、セキュリティが強化されます。また、シークレット管理が簡素化され、最小権限のプラクティスもサポートされます。
+        既存の AK/SK 認証方式に加え、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでIAMロール ARN を使用して Amazon S3 シンクの changefeed を設定できるようになりました。この機能により、有効期間の短い認証情報と自動ローテーションが可能になり、セキュリティが強化されます。また、シークレット管理が簡素化され、最小権限のプラクティスもサポートされます。
 
         詳細については[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
@@ -30,11 +42,11 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   **TiDB Cloudスターター**
+-   **TiDB Cloud Starter**
 
-    -   新しい[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.6](https://docs.pingcap.com/tidb/stable/release-7.5.6)から[バージョン8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)にアップグレードします。
+    -   新しい[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.6](https://docs.pingcap.com/tidb/stable/release-7.5.6)から[バージョン8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)にアップグレードします。
 
--   **TiDB Cloudエッセンシャル**
+-   **TiDB Cloud Essential**
 
     -   組み込みアラートをサポートします。
 
@@ -42,25 +54,25 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         詳細については[TiDB Cloud組み込みアラート](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting/?plan=essential)参照してください。
 
--   **TiDB Cloud専用**
+-   **TiDB Cloud Dedicated**
 
     -   Azure Blob Storage からのデータ インポート用の Private Link 接続をサポートします。
 
-        Azure Blob Storageから[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法として「Private Link」を選択できるようになりました。これにより、パブリックインターネットではなくAzureプライベートエンドポイント経由で接続できます。この機能により、パブリックアクセスが制限されているstorageアカウントでも、ネットワークから分離された安全なデータインポートが可能になります。
+        Azure Blob Storageから[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法として「Private Link」を選択できるようになりました。これにより、パブリックインターネットではなくAzureプライベートエンドポイント経由で接続できます。この機能により、パブリックアクセスが制限されているstorageアカウントでも、ネットワークから分離された安全なデータインポートが可能になります。
 
         詳細については、 [Cloud Storage からサンプルデータ (SQL ファイル) をインポートする](/tidb-cloud/import-sample-data.md) 、 [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md) 、 [Cloud Storage から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
 
-    -   セキュリティ追跡を強化するために、 TiDB Cloudのコンソール監査ログに「 Enable/Disableパブリック エンドポイント」イベントを追加します。
+    -   セキュリティ追跡を強化するために、 TiDB Cloudのコンソール監査ログに「パブリック エンドポイントの有効化/無効化」イベントを追加します。
 
 ## 2026年2月3日 {#february-3-2026}
 
 **一般的な変更**
 
--   **TiDB Cloud専用**
+-   **TiDB Cloud Dedicated**
 
     -   Azure Blob Storage への変更フィード データのシンクをサポートします。
 
-        [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では、Azure Blob Storageへの変更フィードデータの直接シンクがサポートされるようになりました。この機能により、Azureユーザーは変更データを効率的にアーカイブし、下流の分析や長期保存に活用できるようになります。また、中間メッセージキューが不要になるためコスト削減にもつながり、既存のAmazon S3およびGoogle Cloud Storage (GCS)シンクとのフォーマット互換性も維持されます。
+        [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では、Azure Blob Storageへの変更フィードデータの直接シンクがサポートされるようになりました。この機能により、Azureユーザーは変更データを効率的にアーカイブし、下流の分析や長期保存に活用できるようになります。また、中間メッセージキューが不要になるためコスト削減にもつながり、既存のAmazon S3およびGoogle Cloud Storage (GCS)シンクとのフォーマット互換性も維持されます。
 
         詳細については[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
@@ -68,7 +80,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   **TiDB Cloud専用**
+-   **TiDB Cloud Dedicated**
 
     -   アラートサブスクリプションチャネルとして Flashduty と PagerDuty をサポートします。
 
@@ -80,7 +92,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   **TiDB Cloudスターター**
+-   **TiDB Cloud Starter**
 
     -   実際のクライアント IP アドレスを[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ビューと[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に表示します。
 
@@ -88,11 +100,11 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         現在、この機能はベータ版であり、AWS リージョン`Frankfurt (eu-central-1)`でのみ利用できます。
 
--   **TiDB Cloudエッセンシャル**
+-   **TiDB Cloud Essential**
 
     -   データ移行をサポートします（ベータ版）。
 
-        これで、 [TiDB Cloudコンソール](https://tidbcloud.com)データ移行機能を使用して、MySQL 互換データベースから[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターにデータをシームレスに移行できるようになりました。
+        これで、 [TiDB Cloudコンソール](https://tidbcloud.com)データ移行機能を使用して、MySQL 互換データベースから[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターにデータをシームレスに移行できるようになりました。
 
         -   サポートされているソース データベースには、セルフホスト MySQL、Amazon RDS、Alibaba Cloud RDS、PolarDB など、さまざまな MySQL 互換システムが含まれます。
         -   データ移行にサポートされている接続方法には、使いやすさとエンタープライズ レベルのセキュリティの両方を保証するパブリック接続と PrivateLink が含まれます。
@@ -127,6 +139,6 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   **TiDB Cloud専用**
+-   **TiDB Cloud Dedicated**
 
-    -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.5.4](https://docs.pingcap.com/tidb/stable/release-8.5.4/)から[バージョン8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/)にアップグレードします。
+    -   新しい[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.5.4](https://docs.pingcap.com/tidb/stable/release-8.5.4/)から[バージョン8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/)にアップグレードします。
