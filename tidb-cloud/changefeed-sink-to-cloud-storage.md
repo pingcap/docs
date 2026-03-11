@@ -15,13 +15,13 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 100 changefeeds.
+- For each TiDB Cloud Dedicated cluster, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your cluster is hosted. The configuration process varies depending on the destination you choose.
+Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">

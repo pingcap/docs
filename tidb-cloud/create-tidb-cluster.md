@@ -22,9 +22,9 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 ## (Optional) Step 1. Use your default project or create a new project
 
-Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a default [project](/tidb-cloud/tidb-cloud-glossary.md#project). When there is only one project in your organization, your cluster will be created in that project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
+Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a default [project](/tidb-cloud/tidb-cloud-glossary.md#project). When there is only one project in your organization, your TiDB Cloud Dedicated cluster will be created in that project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
 
-If you are an organization owner, you can rename the default project or create a new project for the cluster according to your need as follows:
+If you are an organization owner, you can rename the default project or create a new project for the TiDB Cloud Dedicated cluster according to your need as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), click the combo box in the upper-left corner. Your default organization and project are displayed.
 
@@ -87,7 +87,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 ## Step 3. Set the root password
 
-After your cluster is created, take the following steps to set the root password:
+After your TiDB Cloud Dedicated cluster is created, take the following steps to set the root password:
 
 1. In the upper-right corner of your cluster overview page, click **...** and select **Password Settings**.
 
@@ -97,4 +97,4 @@ After your cluster is created, take the following steps to set the root password
 
 ## What's next
 
-After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+After your TiDB Cloud Dedicated cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).

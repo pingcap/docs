@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Quick Start
-summary: Sign up quickly to try TiDB Cloud and create your TiDB cluster.
+summary: Sign up quickly to try TiDB Cloud and create a {{{ .starter }}} instance.
 category: quick start
 ---
 
@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to get started with TiDB Cloud.
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-## Step 1: Create a TiDB cluster
+## Step 1: Create a {{{ .starter }}} instance
 
 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} instance, follow these steps:
 
@@ -24,13 +24,13 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
     The [**My TiDB**](https://tidbcloud.com/tidbs) page is displayed by default.
 
-3. For new sign-up users, TiDB Cloud automatically creates a default {{{ .starter }}} instance named `Cluster0` for you.
+3. For new sign-up users, TiDB Cloud automatically creates a default {{{ .starter }}} instance named `Instance0` for you.
 
-    - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
+    - To instantly try out TiDB Cloud features with this default {{{ .starter }}} instance, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
     - To create a new {{{ .starter }}} instance on your own, follow these steps:
 
-        1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Starter** is selected by default. Select the cloud provider and target region for your cluster, update the default cluster name if necessary, and then click **Create**. Your {{{ .starter }}} instance will be created in approximately 30 seconds.
+        1. Click **Create Resource**.
+        2. On the **Create** page, **Starter** is selected by default. Select the cloud provider and target region for your {{{ .starter }}} instance, update the default instance name if necessary, and then click **Create**. Your {{{ .starter }}} instance will be created in approximately 30 seconds.
 
         <CustomContent language="en,zh">
 
@@ -131,7 +131,7 @@ TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets
 
 ## What's next
 
-- To learn how to connect to your cluster using different methods, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+- To learn how to connect to your {{{ .starter }}} instance using different methods, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 - For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).

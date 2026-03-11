@@ -9,13 +9,22 @@ Monitoring in TiDB Cloud provides tools and integrations that enable you to over
 
 ## Built-in metrics
 
-Built-in metrics refer to a full set of standard metrics of your cluster that TiDB Cloud collects and presents on the **Metrics** page. With these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+Built-in metrics refer to a full set of standard metrics that TiDB Cloud collects and presents on the **Metrics** page at the <CustomContent plan="starter,essential,premium">instance</CustomContent><CustomContent plan="dedicated">cluster</CustomContent> level. With these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+
+<CustomContent plan="starter,essential,dedicated">
 
 For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
 
+</CustomContent>
+<CustomContent plan="premium">
+
+For more information, see [{{{ .premium }}} Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md).
+
+</CustomContent>
+
 ## Built-in alerting
 
-Built-in alerting refers to the cluster alerting mechanism that TiDB Cloud provides to assist you in monitoring your cluster. Currently, TiDB Cloud provides the following three types of alerts:
+Built-in alerting refers to the alerting mechanism that TiDB Cloud provides to assist you in monitoring your {{{ .essential }}} instances and TiDB Cloud Dedicated clusters. Currently, TiDB Cloud provides the following three types of alerts:
 
 - Resource usage alerts
 
@@ -23,7 +32,7 @@ Built-in alerting refers to the cluster alerting mechanism that TiDB Cloud provi
 
 - Changefeed alerts
 
-On the Alerts page of the TiDB Cloud console, you can view alerts of your cluster, edit alert rules, and subscribe to alert notification emails.
+On the Alerts page of the TiDB Cloud console, you can view alerts of your {{{ .essential }}} instance or TiDB Cloud Dedicated cluster, edit alert rules, and subscribe to alert notification emails.
 
 For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 

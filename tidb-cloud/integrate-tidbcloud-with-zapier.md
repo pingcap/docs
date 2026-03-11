@@ -69,11 +69,11 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 3. Set up action
 
-    In this step, you need to specify a table in your TiDB Cloud cluster to store the event data. If you do not already have a table, you can create one through this step.
+    In this step, you need to specify a table in your {{{ .starter }}} instance to store the event data. If you do not already have a table, you can create one through this step.
 
-    1. From the drop-down list, choose the project name and cluster name. The connection information of your cluster will be displayed automatically.
+    1. From the drop-down list, choose the project name and instance name. The connection information of your {{{ .starter }}} instance will be displayed automatically.
 
-        ![Set up project name and cluster name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
+        ![Set up project name and instance name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
     2. Enter your password.
 
@@ -81,7 +81,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
-        Zapier queries the databases from TiDB Cloud using the password you entered. If no database is found in your cluster, re-enter your password and refresh the page.
+        Zapier queries the databases from TiDB Cloud using the password you entered. If no database is found in your {{{ .starter }}} instance, re-enter your password and refresh the page.
 
     4. In **The table you want to search** box, fill in `github_global_event`. If the table does not exist, the template uses the following DDL to create the table. Click **Continue**.
 
@@ -117,7 +117,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 4. Test action
 
-    Click **Test action** to create a new row in the table. If you check your TiDB Cloud cluster, you can find the data is written successfully.
+    Click **Test action** to create a new row in the table. If you check your {{{ .starter }}} instance, you can find the data is written successfully.
 
    ```sql
    mysql> SELECT * FROM test.github_global_event;
@@ -160,7 +160,7 @@ The following table lists the actions supported by TiDB Cloud App. Note that som
 
 | Action | Description | Resource |
 |---|---|---|
-| Find Cluster | Finds an existing {{{ .starter }}} or TiDB Cloud Dedicated cluster. | None |
+| Find Cluster | Finds an existing {{{ .starter }}} instance or TiDB Cloud Dedicated cluster. | None |
 | Create Cluster | Creates a new cluster. Only supports creating a {{{ .starter }}} instance. | None |
 | Find Database | Finds an existing database. | A {{{ .starter }}} instance |
 | Create Database | Creates a new database. | A {{{ .starter }}} instance |

@@ -19,7 +19,7 @@ For public connections, TiDB Cloud Dedicated only allows client connections from
 
 To connect to a TiDB Cloud Dedicated cluster via public connection, take the following steps:
 
-1. Open the overview page of the target cluster.
+1. Open the overview page of the target TiDB Cloud Dedicated cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -27,7 +27,7 @@ To connect to a TiDB Cloud Dedicated cluster via public connection, take the fol
         >
         > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -37,7 +37,7 @@ To connect to a TiDB Cloud Dedicated cluster via public connection, take the fol
 
 4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your TiDB Cloud Dedicated cluster.
 
 ## What's next
 

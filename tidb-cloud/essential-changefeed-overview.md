@@ -38,7 +38,7 @@ To access the changefeed feature, take the following steps:
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
 On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as pausing, resuming, editing, and deleting a changefeed).
 

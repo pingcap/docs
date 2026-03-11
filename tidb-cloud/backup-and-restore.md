@@ -52,7 +52,7 @@ It is strongly recommended to turn on this feature. The cost is the same as snap
 
 To turn on this feature for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click **Backup Setting**.
 
@@ -72,7 +72,7 @@ TiDB Cloud Dedicated supports daily and weekly backup schedules. By default, the
 
 To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click **Backup Setting**.
 
@@ -115,7 +115,7 @@ Dual region backup costs include both backup storage usage and cross-region data
 
 To turn on dual region backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click **Backup Setting**.
 
@@ -133,7 +133,7 @@ To turn on dual region backup for your TiDB Cloud Dedicated cluster, perform the
 
 To turn off auto backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click **Backup Setting**.
 
@@ -149,7 +149,7 @@ To turn off auto backup for your TiDB Cloud Dedicated cluster, perform the follo
 
 To turn off dual region backup for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click **Backup Setting**.
 
@@ -168,7 +168,7 @@ Manual backups are user-initiated backups that enable you to back up your data t
 
 To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. In the upper-right corner, click **...** > **Manual Backup**. 
 
@@ -190,7 +190,7 @@ To export a specific backup to cloud storage, such as Amazon S3 or Google Cloud 
 
 To export a backup to Amazon S3, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Locate the backup you want to export, and then click **...** > **Export** in the **Action** column.
 
@@ -218,7 +218,7 @@ To export a backup to Amazon S3, perform the following steps:
 
 To export a backup to Google Cloud Storage, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Locate the backup you want to export, and then click **...** > **Export** in the **Action** column.
 
@@ -249,7 +249,7 @@ To export a backup to Google Cloud Storage, perform the following steps:
 
 To delete an existing backup file for your TiDB Cloud Dedicated cluster, perform the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
@@ -257,7 +257,7 @@ To delete an existing backup file for your TiDB Cloud Dedicated cluster, perform
 
 To delete a running backup job for your TiDB Cloud Dedicated cluster, follow a process similar to [**Delete backup files**](#delete-backup-files).
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Locate the running backup job that is in the **Pending** or **Running** state, and click **...** > **Delete** in the **Action** column.
 
@@ -271,7 +271,7 @@ To delete a running backup job for your TiDB Cloud Dedicated cluster, follow a p
 
 To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster, take the following steps:
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB Cloud Dedicated cluster.
 
 2. Click **Restore**. The setting window displays.
 
@@ -315,7 +315,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
 
    The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-8. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.
+8. In the **Password Settings** dialog box, set the root password to connect to your TiDB Cloud Dedicated cluster, and then click **Save**.
 
 ### Restore a deleted cluster
 
@@ -338,4 +338,4 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
    The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-7. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.
+7. In the **Password Settings** dialog box, set the root password to connect to your TiDB Cloud Dedicated cluster, and then click **Save**.

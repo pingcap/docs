@@ -17,7 +17,7 @@ You can enable TiProxy for either a new cluster or an existing cluster in any Ti
 
 ### Decide the size and number of TiProxy nodes
 
-The size and number of TiProxy nodes depend on both the QPS and network bandwidth of your cluster. Network bandwidth is the sum of the client request and TiDB response bandwidth.
+The size and number of TiProxy nodes depend on both the QPS and network bandwidth of your TiDB Cloud Dedicated cluster. Network bandwidth is the sum of the client request and TiDB response bandwidth.
 
 The following table shows the maximum QPS and network bandwidth of each TiProxy size.
 

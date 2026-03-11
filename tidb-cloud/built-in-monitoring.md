@@ -5,7 +5,7 @@ summary: Learn how to view TiDB Cloud built-in metrics and understand the meanin
 
 # TiDB Cloud Built-in Metrics
 
-TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloud collects and displays a full set of standard metrics of your TiDB resource on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 ## View the Metrics page
 

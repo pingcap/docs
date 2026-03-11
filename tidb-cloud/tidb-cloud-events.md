@@ -1,19 +1,29 @@
 ---
-title: TiDB Cloud Cluster Events
-summary: Learn how to view the events for TiDB Cloud clusters using the Events page.
+title: Events
+summary: Learn how to view the events for TiDB Cloud clusters or instances using the Events page.
 ---
 
-# TiDB Cloud Cluster Events
+# Events
 
-TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+<CustomContent plan="starter,essential">
 
-This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
+For {{{ .starter }}} and Essential, TiDB Cloud logs the historical events at the instance level. An *event* indicates a change in your {{{ .starter }}} or Essential instance. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+
+</CustomContent>
+
+<CustomContent plan="dedicated">`
+
+For TiDB Cloud Dedicated, TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud Dedicated cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+
+</CustomContent>
+
+This document describes how to view the historical events using the **Events** page and lists the supported event types.
 
 ## View the Events page
 
 To view the events on the **Events** page, take the following steps:
 
-1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter,essential">{{{ .starter }}} or Essential instance</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent> to go to its overview page.
 
     > **Tip:**
     >

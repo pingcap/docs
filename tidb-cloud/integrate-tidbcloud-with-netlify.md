@@ -20,14 +20,14 @@ You are expected to have a Netlify account and CLI. If you do not have any, refe
 * [Sign up for a Netlify account](https://app.netlify.com/signup).
 * [Get Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
-### A TiDB Cloud account and a TiDB cluster
+### A TiDB Cloud account and a TiDB Cloud cluster or instance
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+You are expected to have an account and a cluster or instance in TiDB Cloud. If you do not have any, refer to the following to create one:
 
 - [Create a {{{ .starter }}} or {{{ .essential }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
-One TiDB Cloud cluster can connect to multiple Netlify sites.
+One TiDB Cloud cluster or instance can connect to multiple Netlify sites.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
 
@@ -63,13 +63,13 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
 >
 > If you have not installed Cloud CLI, refer to [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) for quick installation before taking the following steps.
 
-1. Get the connection string of a cluster in interactive mode:
+1. Get the connection string of a {{{ .starter }}} or {{{ .essential }}} instance in interactive mode:
 
     ```shell
     ticloud cluster connect-info
     ```
 
-2. Follow the prompts to select your cluster, client, and operating system. Note that the client used in this document is `Prisma`.
+2. Follow the prompts to select your {{{ .starter }}} or {{{ .essential }}} instance, client, and operating system. Note that the client used in this document is `Prisma`.
 
     ```
     Choose the cluster
@@ -177,7 +177,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
+3. Set environment variables. To connect to your TiDB Cloud cluster or instance from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
 
     ```shell
     # set the environment variable for your own space
@@ -197,7 +197,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify env:list
     ```
 
-4. Build the app locally and migrate the schema to your TiDB Cloud cluster.
+4. Build the app locally and migrate the schema to your TiDB Cloud cluster or instance.
 
     > **Tips:**
     >

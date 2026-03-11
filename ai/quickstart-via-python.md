@@ -47,7 +47,7 @@ pip install "pytidb[models]"
 
 You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/clusters):
 
-1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
 For example, if the connection parameters are displayed as follows:

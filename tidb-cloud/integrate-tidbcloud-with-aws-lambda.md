@@ -46,13 +46,13 @@ Before getting started, ensure that you have the following:
 
 > **Note:**
 >
-> - When you create the AWS resources, it is recommended to use `us-east-1` as your cluster region. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
+> - When you create the AWS resources, it is recommended to use `us-east-1` as your region. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
 > - If you use a different region, you need to follow the following instructions to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
 <details>
 <summary>Modify and rebuild the Lambda function code if you use a region other than <code>us-east-1</code></summary>
 
-If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-bookshop-project-using-aws-cloudformation).
+If you use `us-east-1` as your region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-bookshop-project-using-aws-cloudformation).
 
 If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
@@ -123,7 +123,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
     3. Specify stack details.
 
-        - If you use `us-east-1` as your cluster region, fill in the fields as in the following screenshot:
+        - If you use `us-east-1` as your region, fill in the fields as in the following screenshot:
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 

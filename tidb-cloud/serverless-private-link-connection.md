@@ -50,7 +50,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 
@@ -106,7 +106,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 
@@ -163,7 +163,7 @@ To attach domains to a private link connection using the TiDB Cloud console, do 
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
 
@@ -216,7 +216,7 @@ To detach domains from a private link connection using the TiDB Cloud console, d
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
 
@@ -258,7 +258,7 @@ To delete a private link connection using the TiDB Cloud console, do the followi
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
 

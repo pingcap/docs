@@ -81,7 +81,7 @@ You can delete the original table structure through the `--drop-tables` paramete
         >
         > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target resource to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 

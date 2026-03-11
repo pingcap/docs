@@ -88,7 +88,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
 
-1. Open the overview page of the target cluster.
+1. Open the overview page of the target TiDB Cloud Dedicated cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -96,7 +96,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
         >
         > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
@@ -277,7 +277,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
 
-1. Open the overview page of the target cluster.
+1. Open the overview page of the target TiDB Cloud Dedicated cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -285,7 +285,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
         >
         > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 

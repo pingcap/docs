@@ -175,7 +175,7 @@ The following example only lists key policy configurations. Replace the Amazon S
 
 After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -183,7 +183,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
         >
         > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
@@ -195,7 +195,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
     - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
     - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region.
+    If the location of the bucket is different from your <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, confirm the compliance of cross region.
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 

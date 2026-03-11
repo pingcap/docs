@@ -152,7 +152,7 @@ TiDB Cloud supports TLS 1.2 or TLS 1.3.
 
 No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
 
-### Is my TiDB cluster secure?
+### Is my TiDB Cloud cluster or instance secure?
 
 In TiDB Cloud, you can use a TiDB Cloud Dedicated cluster, a {{{ .starter }}} instance, or a {{{ .essential }}} instance according to your needs.
 
@@ -163,13 +163,13 @@ For TiDB Cloud Dedicated clusters, TiDB Cloud ensures cluster security with the 
 - Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
 - Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
 
-For {{{ .starter }}} and {{{ .essential }}} instances, TiDB Cloud ensures cluster security with the following measures:
+For {{{ .starter }}} and {{{ .essential }}} instances, TiDB Cloud ensures instance security with the following measures:
 
-- Creates independent sub-accounts for each cluster.
+- Creates independent sub-accounts for each instance.
 - Sets up firewall rules to isolate external connections.
-- Provides cluster server TLS certificates to encrypt cluster data in transit.
+- Provides instance server TLS certificates to encrypt instance data in transit.
 
-### How do I connect to my database in a TiDB cluster?
+### How do I connect to my database in TiDB?
 
 <SimpleTab>
 <div label="TiDB Cloud Dedicated">
@@ -187,12 +187,12 @@ For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-c
 
 <div label="{{{ .starter }}}/Essential">
 
-For a {{{ .starter }}} or Essential instance, the steps to connect to your cluster are simplified as follows:
+For a {{{ .starter }}} or Essential instance, the steps to connect to your instance are simplified as follows:
 
 1. Set a database user and login credential.
-2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
+2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your {{{ .starter }}} or Essential instance through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Cloud Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+For more information, see [Connect to Your {{{ .starter }}} or Essential Instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 </div>
 </SimpleTab>

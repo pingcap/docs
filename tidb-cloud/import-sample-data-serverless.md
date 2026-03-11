@@ -19,7 +19,7 @@ This document describes how to import the sample data (SQL files) into {{{ .star
         >
         > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 

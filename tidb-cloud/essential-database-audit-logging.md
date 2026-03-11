@@ -152,7 +152,7 @@ You can enable audit logging for a {{{ .essential }}} instance using the TiDB Cl
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Enable**.
 
@@ -188,7 +188,7 @@ You can edit the audit logging for a {{{ .essential }}} instance after enabling 
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Settings**.
 
@@ -220,7 +220,7 @@ You can disable audit logging for a {{{ .essential }}} instance.
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **...** in the upper-right corner, and then click **Disable**.
 
@@ -256,7 +256,7 @@ To create a filter rule, define which users and events you want to capture in th
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Add Filter Rule**.
 
@@ -286,7 +286,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, locate the filter rule you want to edit, click **...** in its row, and then click **Edit**.
 
@@ -316,7 +316,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, locate the filter rule you want to disable, and turn off the toggle to disable the filter rule.
 
@@ -344,7 +344,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, locate the filter rule you want to delete and click **...**.
 
@@ -379,7 +379,7 @@ When you store audit logs in TiDB Cloud, {{{ .essential }}} saves them as readab
     >
     > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, you can view the list of audit logs under **TiDB Cloud Storage**.
 

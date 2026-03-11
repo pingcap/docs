@@ -13,8 +13,8 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 - Before you create an endpoint, make sure the following:
 
-    - You have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
-    - The databases, tables, and columns that the endpoint will operate on already exist in the target cluster.
+    - You have created a {{{ .starter }}} instance and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+    - The databases, tables, and columns that the endpoint will operate on already exist in the target {{{ .starter }}} instance.
 
 - Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
@@ -34,7 +34,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Autogenerate Endpoint**. The dialog for endpoint generation is displayed.
 3. In the dialog, do the following:
 
-    1. Select the target cluster, database, and table for the endpoint to be generated.
+    1. Select the target {{{ .starter }}} instance, database, and table for the endpoint to be generated.
 
         > **Note:**
         >
