@@ -1,9 +1,9 @@
 ---
-title: Connect AWS DMS to TiDB Cloud Resources
+title: Connect AWS DMS to TiDB Cloud
 summary: Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 ---
 
-# Connect AWS DMS to TiDB Cloud Resources
+# Connect AWS DMS to TiDB Cloud
 
 [AWS Database Migration Service (AWS DMS)](https://aws.amazon.com/dms/) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data from or into TiDB Cloud clusters. This document describes how to connect AWS DMS to a TiDB Cloud cluster.
 

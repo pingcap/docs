@@ -132,7 +132,7 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [Connect AWS DMS to TiDB Cloud Resources](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
