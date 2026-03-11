@@ -33,7 +33,7 @@ This document describes how to manage TiDB node groups and their endpoints to is
 
 To create a TiDB node group, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page    , and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 2. In the left navigation pane, click **Nodes**.
 3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, click **+** to add a new TiDB node group as follows. You can also use the default group directly.
