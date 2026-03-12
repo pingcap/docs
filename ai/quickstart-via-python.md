@@ -82,7 +82,7 @@ client = TiDBClient.connect(
 </div>
 <div label="TiDB Self-Managed">
 
-Here is a basic example for connecting to a self-managed TiDB cluster:
+Here is a basic example for connecting to a TiDB Self-Managed cluster:
 
 ```python
 from pytidb import TiDBClient

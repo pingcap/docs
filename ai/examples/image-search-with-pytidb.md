@@ -22,7 +22,7 @@ With just a few lines of code, you can create a search system that understands b
 Before you begin, ensure you have the following:
 
 - **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
-- **A TiDB Cloud Starter instance**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 - **Jina AI API key**: You can get a free API key from [Jina AI Embeddings](https://jina.ai/embeddings/).
 
 ## How to run

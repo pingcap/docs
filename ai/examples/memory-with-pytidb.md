@@ -24,7 +24,7 @@ With just a few lines of code, you can create a conversational AI that remembers
 Before you begin, ensure you have the following:
 
 - **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
-- **A TiDB Cloud Starter instance**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 - **OpenAI API key**: Get an OpenAI API key from [OpenAI](https://platform.openai.com/api-keys).
 
 ## How to run

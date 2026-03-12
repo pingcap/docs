@@ -10,7 +10,7 @@ aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide
 
 This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a {{{ .starter }}} instance as an example.
 
-If you do not have a TiDB cluster, you can create a [{{{ .starter }}}](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
+If you do not have a {{{ .starter }}} instance, you can follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create one, which is free and can be created in approximately 30 seconds.
 
 ## Prerequisites
 

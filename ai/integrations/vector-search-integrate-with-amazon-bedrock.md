@@ -37,7 +37,7 @@ To complete this tutorial, you need:
 
 - A {{{ .starter }}} instance
 
-    Follow [creating a {{{ .starter }}} instance](/tidb-cloud/select-cluster-tier.md#starter) to create your own TiDB Cloud cluster if you don't have one.
+    [Create a {{{ .starter }}} instance](/tidb-cloud/select-cluster-tier.md#starter) if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
