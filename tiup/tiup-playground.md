@@ -105,7 +105,7 @@ When you start a TiDB cluster using TiUP playground, you can access the TiDB Das
 
 > **Note:**
 >
-> If you have changed the TiDB `root` user password, use the new password to log in to TiDB Dashboard.
+> If you have changed the password for the TiDB `root` user, use the new password to log in to TiDB Dashboard.
 
 ## Quickly connect to the TiDB cluster started by playground
 
