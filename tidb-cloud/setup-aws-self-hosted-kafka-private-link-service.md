@@ -68,7 +68,7 @@ The document provides an example of connecting to a Kafka Private Link service d
 3. Get the Kafka deployment information from your {{{ .premium }}} instance.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the instance overview page of the {{{ .premium }}} instance, and then click **Data** > **Changefeed** in the left navigation pane.
-    2. On the overview page, find the region of the TiDB instance. Ensure that your Kafka cluster will be deployed to the same region.
+    2. On the overview page, find the region of the {{{ .premium }}} instance. Ensure that your Kafka cluster will be deployed to the same region.
     3. To create a changefeed, refer to the tutorials:
 
         - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
@@ -552,12 +552,12 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 <CustomContent plan="dedicated">
 
-Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB cluster. If any brokers are in different AZs, move them to the correct ones.
+Ensure that your Kafka cluster is deployed in the same region and AZs as the {{{ .dedicated }}} cluster. If any brokers are in different AZs, move them to the correct ones.
 
 </CustomContent>
 <CustomContent plan="premium">
 
-Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB instance. If any brokers are in different AZs, move them to the correct ones.
+Ensure that your Kafka cluster is deployed in the same region and AZs as the {{{ .premium }}} instance. If any brokers are in different AZs, move them to the correct ones.
 
 </CustomContent>
 

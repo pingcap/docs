@@ -13,7 +13,7 @@ For each {{{ .premium }}} instance in TiDB Cloud, you can configure an IP access
 
 To configure an IP access list for your {{{ .premium }}} instance, take the following steps:
 
-1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 
     > **Tip:**
     >

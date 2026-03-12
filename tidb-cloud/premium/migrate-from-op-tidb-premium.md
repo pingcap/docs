@@ -45,7 +45,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target TiDB instance.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target {{{ .premium }}} instance.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -207,9 +207,9 @@ Do the following to export data from the upstream TiDB Self-Managed cluster to A
 
 After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to {{{ .premium }}}.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target TiDB instance.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target {{{ .premium }}} instance.
 
-    1. Navigate to the **TiDB Instances** page, and click the name of your target instance.
+    1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and click the name of your target instance.
     2. In the left navigation pane, click **Data** > **Import**.
     3. Choose **Import data from Cloud Storage** > **Amazon S3**.
     4. Note down the **Account ID** and **External ID** displayed in the wizard. These values are embedded in the CloudFormation template.
@@ -285,14 +285,14 @@ To replicate incremental data, do the following:
 
 2. Grant TiCDC to connect to {{{ .premium }}}.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB instance to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
     2. In the left navigation pane, click **Settings** > **Networking**.
     3. On the **Networking** page, click **Add IP Address**.
     4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access {{{ .premium }}}. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
 3. Get the connection information of the downstream {{{ .premium }}} instance.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB instance to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
     4. From the connection information, you can get the host IP address and port of the instance. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
@@ -411,4 +411,4 @@ To replicate incremental data, do the following:
     backup_user_priv
     ```
 
-    After you get the user and privilege information, run the generated SQL statements in the downstream TiDB instance to restore the user and privilege information.
+    After you get the user and privilege information, run the generated SQL statements in the downstream {{{ .premium }}} instance to restore the user and privilege information.

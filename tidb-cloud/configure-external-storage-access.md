@@ -14,7 +14,7 @@ If you want to import data from or export data to an external storage in a {{{ .
 
 <CustomContent plan="premium">
 
-If you want to import data from or export data to an external storage in a TiDB Cloud instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .premium }}} instances.
+If you want to import data from or export data to an external storage in a {{{ .premium }}} instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .premium }}} instances.
 
 </CustomContent>
 

@@ -28,9 +28,9 @@ Before you can import data to a {{{ .premium }}} instance via the MySQL Command-
 
 ## Step 1. Connect to your {{{ .premium }}} instance
 
-Connect to your TiDB instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
+Connect to your {{{ .premium }}} instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/project/instances) page. Then, click the name of your target instance to go to its overview page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. Then, click the name of your target {{{ .premium }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
