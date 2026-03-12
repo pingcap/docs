@@ -285,9 +285,7 @@ Compression algorithm for internal blocks of parquet file.
 | `ZSTD` (default) | Zstandard v0.8 (and higher) is supported.                                   |
 | `SNAPPY`         | Snappy is a popular and fast compression algorithm often used with Parquet. |
 
-
 ## ORC Options
-
 
 ### MISSING_FIELD_AS (Load Only)
 

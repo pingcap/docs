@@ -68,12 +68,12 @@
     - [Load with Vector](/tidb-cloud-lake/guides/load-with-vector.md)
   - Load Semi-structured Formats
     - [Overview](/tidb-cloud-lake/guides/load-semi-structured-formats.md)
-    - [Load Parquet into Databend](/tidb-cloud-lake/guides/load-parquet.md)
-    - [Load CSV into Databend](/tidb-cloud-lake/guides/load-csv.md)
-    - [Load TSV into Databend](/tidb-cloud-lake/guides/load-tsv.md)
-    - [Load NDJSON into Databend](/tidb-cloud-lake/guides/load-ndjson.md)
-    - [Load ORC into Databend](/tidb-cloud-lake/guides/load-orc.md)
-    - [Load Avro into Databend](/tidb-cloud-lake/guides/load-avro.md)
+    - [Load Parquet](/tidb-cloud-lake/guides/load-parquet.md)
+    - [Load CSV](/tidb-cloud-lake/guides/load-csv.md)
+    - [Load TSV](/tidb-cloud-lake/guides/load-tsv.md)
+    - [Load NDJSON](/tidb-cloud-lake/guides/load-ndjson.md)
+    - [Load ORC](/tidb-cloud-lake/guides/load-orc.md)
+    - [Load Avro](/tidb-cloud-lake/guides/load-avro.md)
   - Query & Transform
     - [Overview](/tidb-cloud-lake/guides/query-transform-overview.md)
     - [Query Parquet Files](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)

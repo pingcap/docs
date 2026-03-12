@@ -3,9 +3,9 @@ title: Loading from Local File
 sidebar_label: Local
 ---
 
-Uploading your local data files to a stage or bucket before loading them into Databend can be unnecessary. Instead, you can use [BendSQL](../../35-connect/00-sql-clients/bendsql.md), the Databend native CLI tool, to directly import the data. This simplifies the workflow and can save you storage fees.
+Uploading your local data files to a stage or bucket before loading them into Databend can be unnecessary. Instead, you can use [BendSQL](/tidb-cloud-lake/guides/bendsql.md), the Databend native CLI tool, to directly import the data. This simplifies the workflow and can save you storage fees.
 
-Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/sql/sql-reference/file-format-options).
+Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 You can also load local files into tables programmatically using JDBC or Python drivers.
 
@@ -16,10 +16,9 @@ There are two methods to load data from local files:
 1. **Stage**: Upload the local file to an internal stage, then copy data from the staged file into the table. File upload occurs either through databend-query or using a presigned URL, depending on the `presigned_url_disabled` connection option (default: `false`).
 2. **Streaming**: Load the file directly into the table during upload. Use this method when the file is too large to store as a single object in your object storage.
 
-
 ## Tutorial 1 - Load from a Local File
 
-This tutorial uses a CSV file as an example to demonstrate how to import data into Databend using [BendSQL](../../35-connect/00-sql-clients/bendsql.md) from a local source.
+This tutorial uses a CSV file as an example to demonstrate how to import data into Databend using [BendSQL](/tidb-cloud-lake/guides/bendsql.md) from a local source.
 
 ### Before You Begin
 
@@ -61,7 +60,7 @@ Send loading data request with the following command:
 ```
 
 - The `@_databend_load` is a placeholder representing local file data.
-- The [file_format clause](/sql/sql-reference/file-format-options) uses the same syntax as the COPY command.
+- The [file_format clause](/tidb-cloud-lake/sql/input-output-file-formats.md) uses the same syntax as the COPY command.
 
 Alternatively, use a Python script:
 
