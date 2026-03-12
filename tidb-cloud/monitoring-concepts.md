@@ -5,7 +5,7 @@ summary: Learn about monitoring concepts for TiDB Cloud.
 
 # Monitoring
 
-Monitoring in TiDB Cloud provides tools and integrations that enable you to oversee cluster performance, track activity, and respond to issues in a timely manner.
+Monitoring in TiDB Cloud provides tools and integrations that enable you to oversee TiDB performance, track activity, and respond to issues in a timely manner.
 
 ## Built-in metrics
 
@@ -36,11 +36,16 @@ On the Alerts page of the TiDB Cloud console, you can view alerts of your {{{ .e
 
 For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
-## Cluster events
+## Events
 
-In TiDB Cloud, an event indicates a change in your TiDB Cloud cluster. TiDB Cloud logs the historical events at the cluster level to help you track cluster activities. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+In TiDB Cloud, an event indicates a change in your TiDB Cloud resource.
 
-For more information, see [TiDB Cloud Cluster Event](/tidb-cloud/tidb-cloud-events.md).
+- For {{{ .starter }}} and Essential instances, TiDB Cloud logs the historical events at the instance level.
+- For TiDB Cloud Dedicated clusters, TiDB Cloud logs the historical events at the cluster level.
+
+You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+
+For more information, see [Events](/tidb-cloud/tidb-cloud-events.md).
 
 ## Third-party metrics integrations
 

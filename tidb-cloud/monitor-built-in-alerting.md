@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Built-in Alerting
-summary: Learn how to monitor your TiDB cluster by getting alert notifications from TiDB Cloud.
+summary: Learn how to monitor your TiDB Cloud cluster or instance by getting alert notifications from TiDB Cloud.
 ---
 
 # TiDB Cloud Built-in Alerting
@@ -60,7 +60,7 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 > - You can edit the thresholds of the alerts on the TiDB Cloud console. 
 > - Some alert rules are disabled by default. You can enable them as needed.
 
-TiDB Cloud provides different alert rules for each cluster plan, based on the features available in that plan.
+TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md), based on the [features](/tidb-cloud/features.md) available in that plan.
 
 <CustomContent plan="dedicated">
 

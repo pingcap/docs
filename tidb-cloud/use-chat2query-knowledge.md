@@ -38,7 +38,7 @@ The following is a general code example for calling this endpoint.
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
  --header 'content-type: application/json'\
  --data-raw '{
-    "cluster_id": "<The ID of the cluster to which the database belongs>",
+    "cluster_id": "<The ID of the {{{ .starter }}} instance to which the database belongs>",
     "database": "<The name of the target database>",
     "description": "<Your knowledge base description>"
 }'

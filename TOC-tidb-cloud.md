@@ -32,7 +32,7 @@
 
 - Manage Cluster
   - Plan Your Cluster
-    - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
+    - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
@@ -67,7 +67,7 @@
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
-    - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
+    - [Events](/tidb-cloud/tidb-cloud-events.md)
     - Third-Party Metrics Integrations
       - [Overview](/tidb-cloud/third-party-monitoring-integrations.md)
       - [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md)
@@ -140,7 +140,7 @@
   - Manage Connections by TiProxy
     - [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md)
     - [Manage TiProxy](/tidb-cloud/tiproxy-management.md)
-  - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
@@ -163,7 +163,7 @@
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
-    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)

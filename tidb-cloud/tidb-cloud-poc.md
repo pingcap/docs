@@ -179,7 +179,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Upgrade
 
-    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md).
+    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md).
 
 - Backup
 

@@ -11,7 +11,7 @@ The example in this document uses a complex shard migration task across multiple
 
 ## Environment information in the example
 
-This section describes the basic information of the upstream cluster, DM, and downstream cluster used in the example.
+This section describes the basic information of the upstream cluster, DM, and downstream TiDB Cloud used in the example.
 
 ### Upstream cluster
 
@@ -44,7 +44,7 @@ The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed s
 
 This document uses the Amazon S3 as an example.
 
-### Downstream cluster
+### Downstream TiDB Cloud
 
 The sharded schemas and tables are merged into the table `store.sales`.
 
@@ -110,9 +110,9 @@ To export data to Amazon S3, do the following:
 
 For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
 
-### Step 3. Create schemas in TiDB Cloud cluster
+### Step 3. Create schemas in <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>
 
-Create schemas in the TiDB Cloud cluster as follows:
+Create schemas in the <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> as follows:
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -402,8 +402,8 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
          binlog-pos: 1312659
          binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
 
-    ## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
-    target-database:       # The target TiDB cluster on TiDB Cloud
+    ## ******** Configuration of the target TiDB database on TiDB Cloud **********
+    target-database:       # The target TiDB database on TiDB Cloud
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"

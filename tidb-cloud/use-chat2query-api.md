@@ -150,7 +150,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 In the preceding example, the request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `description`: _string_. A description of the data summary.
 - `reuse`: _boolean_. Specifies whether to reuse an existing data summary. If you set it to `true`, the API will reuse an existing data summary. If you set it to `false`, the API will generate a new data summary.
@@ -253,7 +253,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 The request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `data_summary_id`: _integer_. The ID of the data summary used to generate SQL. This property only takes effect if `cluster_id` and `database` are not provided. If you specify both `cluster_id` and `database`, the API uses the default data summary of the database.
 - `question`: _string_. A question in natural language describing the query you want.
@@ -378,7 +378,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 In the preceding example, the request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `tables`: _array_. (optional) A list of table names to be queried.
 - `instruction`: _string_. An instruction in natural language describing the query you want.

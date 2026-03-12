@@ -106,7 +106,7 @@ To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform 
 
 > **Note:**
 >
-> - Currently, the dual region backup feature is only available for clusters hosted on AWS and Google Cloud.
+> - Currently, the dual region backup feature is only available for TiDB Cloud Dedicated clusters hosted on AWS and Google Cloud.
 > - TiDB Cloud Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, **TiDB Cloud Dedicated supports dual-region pairing only within the same multi-region code as Google dual-region storage**. For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage. For more information, refer to [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr).
 
 TiDB Cloud Dedicated supports dual region backup by replicating backups from your cluster region to another different region. After you enable this feature, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.

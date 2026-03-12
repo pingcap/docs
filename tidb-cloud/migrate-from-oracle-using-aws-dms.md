@@ -95,7 +95,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 > **Note:**
 >
-> For detailed steps on creating an AWS DMS replication instance to work with {{{ .starter }}}, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+> For detailed steps on creating an AWS DMS replication instance to work with {{{ .starter }}}, see [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
 
 ## Step 6. Create DMS endpoints
 
@@ -113,7 +113,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 > **Note:**
 >
-> For detailed steps on creating a {{{ .starter }}} DMS endpoint, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+> For detailed steps on creating a {{{ .starter }}} DMS endpoint, see [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
 
 ## Step 7. Migrate the schema
 
@@ -141,7 +141,7 @@ For more information, see [Migrating your source schema to your target database 
 
     ![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
 
-## Step 9. Check data in the downstream TiDB cluster
+## Step 9. Check data in the downstream TiDB
 
 Connect to the [{{{ .starter }}} instance](https://tidbcloud.com/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
@@ -158,4 +158,4 @@ If you encounter any issues or failures during the migration, you can check the 
 ## See also
 
 - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-- [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+- [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)

@@ -29,7 +29,7 @@
 ## GUIDES
 
 - Manage Cluster
-  - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
+  - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
   - Manage TiDB Cloud Clusters
     - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - Connect to Your TiDB Cloud Cluster
@@ -62,7 +62,7 @@
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
-    - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
+    - [Events](/tidb-cloud/tidb-cloud-events.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -115,7 +115,7 @@
        - [Overview](/garbage-collection-overview.md)
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
@@ -137,7 +137,7 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed Overview](/tidb-cloud/essential-changefeed-overview.md)
   - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)

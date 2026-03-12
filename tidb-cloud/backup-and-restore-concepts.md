@@ -5,11 +5,11 @@ summary: Learn about backup & restore concepts for TiDB Cloud.
 
 # Backup & Restore
 
-TiDB Cloud Backup & Restore features are designed to safeguard your data and ensure business continuity by enabling you to back up and recover cluster data.
+TiDB Cloud Backup & Restore features are designed to safeguard your data and ensure business continuity by enabling you to back up and recover data.
 
 ## Automatic backup
 
-For TiDB Cloud clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
+In TiDB Cloud, snapshot backups are taken automatically by default and stored according to your backup retention policy.
 
 For more information, see the following:
 
@@ -30,7 +30,7 @@ For more information, see [Turn on dual region backup](/tidb-cloud/backup-and-re
 
 ## Point-in-time Restore
 
-Point-in-time Restore is a feature that enables you to restore data of any point in time to a new cluster. You can use it to:
+Point-in-time Restore is a feature that enables you to restore data of any point in time to a new TiDB cluster or instance. You can use it to:
 
 - Reduce RPO in disaster recovery.
 - Resolve cases of data write errors by restoring point-in-time that is before the error event.

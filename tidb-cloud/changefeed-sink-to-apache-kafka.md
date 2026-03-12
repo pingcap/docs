@@ -17,24 +17,24 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Restrictions
 
-- For each TiDB Cloud <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, you can create up to 100 changefeeds.
+- For each <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, you can create up to 100 changefeeds.
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 <CustomContent plan="dedicated">
 
-- If you choose Private Link or Private Service Connect as the network connectivity method, ensure that your TiDB cluster version meets the following requirements:
+- If you choose Private Link or Private Service Connect as the network connectivity method, ensure that your {{{ .dedicated }}} cluster version meets the following requirements:
 
     - For v6.5.x: version v6.5.9 or later
     - For v7.1.x: version v7.1.4 or later
     - For v7.5.x: version v7.5.1 or later
     - For v8.1.x: all versions of v8.1.x and later are supported
-- If you want to use Debezium as your data format, make sure the version of your TiDB cluster is v8.1.0 or later.
+- If you want to use Debezium as your data format, make sure the version of your {{{ .dedicated }}} cluster is v8.1.0 or later.
 - For the partition distribution of Kafka messages, note the following:
 
-    - If you want to distribute changelogs by primary key or index value to Kafka partition with a specified index name, make sure the version of your TiDB cluster is v7.5.0 or later.
-    - If you want to distribute changelogs by column value to Kafka partition, make sure the version of your TiDB cluster is v7.5.0 or later.
+    - If you want to distribute changelogs by primary key or index value to Kafka partition with a specified index name, make sure the version of your {{{ .dedicated }}} cluster is v7.5.0 or later.
+    - If you want to distribute changelogs by column value to Kafka partition, make sure the version of your {{{ .dedicated }}} cluster is v7.5.0 or later.
 
 </CustomContent>
 
@@ -47,7 +47,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> can connect to the Apache Kafka service. You can choose one of the following connection methods:
+Ensure that your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Private Connect: ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 - VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
@@ -71,10 +71,10 @@ TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It doe
 
 If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your {{{ .dedicated }}} cluster.
 2. Modify the inbound rules of the security group that the Apache Kafka service is associated with.
 
-    You must add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+    You must add the CIDR of the region where your {{{ .dedicated }}} cluster is located to the inbound rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your {{{ .dedicated }}} cluster to the Kafka brokers.
 
 3. If the Apache Kafka URL contains hostnames, you need to allow TiDB Cloud to be able to resolve the DNS hostnames of the Apache Kafka brokers.
 
@@ -83,10 +83,10 @@ If your Apache Kafka service is in an AWS VPC that has no internet access, take 
 
 If your Apache Kafka service is in a Google Cloud VPC that has no internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your {{{ .dedicated }}} cluster.
 2. Modify the ingress firewall rules of the VPC where Apache Kafka is located.
 
-    You must add the CIDR of the region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+    You must add the CIDR of the region where your {{{ .dedicated }}} cluster is located to the ingress firewall rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your {{{ .dedicated }}} cluster to the Kafka brokers.
 
 </div>
 <div label="Public IP">
@@ -141,7 +141,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 ## Step 1. Open the Changefeed page for Apache Kafka
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the overview page of the target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, and then click **Data** > **Changefeed** in the left navigation pane.
+2. Navigate to the overview page of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, and then click **Data** > **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**, and select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
@@ -281,7 +281,7 @@ The steps vary depending on the connectivity method you select.
 6. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
     - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and automatically filled in with your TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> endpoint and password.
+    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and automatically filled in with the endpoint and password of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
 7. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 

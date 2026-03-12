@@ -7,13 +7,13 @@ summary: Learn how to view the events for TiDB Cloud clusters or instances using
 
 <CustomContent plan="starter,essential">
 
-For {{{ .starter }}} and Essential, TiDB Cloud logs the historical events at the instance level. An *event* indicates a change in your {{{ .starter }}} or Essential instance. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+For {{{ .starter }}} and Essential instances, TiDB Cloud logs the historical events at the instance level. An *event* indicates a change in your {{{ .starter }}} or Essential instance. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
 
 </CustomContent>
 
 <CustomContent plan="dedicated">`
 
-For TiDB Cloud Dedicated, TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud Dedicated cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+For TiDB Cloud Dedicated clusters, TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud Dedicated cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
 
 </CustomContent>
 

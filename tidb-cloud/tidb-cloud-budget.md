@@ -11,7 +11,7 @@ When your monthly actual costs exceed the percentage thresholds of your specifie
 
 TiDB Cloud provides two types of budgets to help you track your spending:
 
-- **Starter Spending Limit** budget: for each {{{ .starter }}} with the spending limit > 0, TiDB Cloud automatically creates a **Starter Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
+- **Starter Spending Limit** budget: for each {{{ .starter }}} with the spending limit > 0, TiDB Cloud automatically creates a **Starter Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that {{{ .starter }}} instance. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
 
 - **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects. For each budget, you can specify a budget scope, set a target spending amount, and configure alert thresholds. After creating a custom budget, you can compare your monthly actual costs with your planned costs to ensure you stay within budget.
 

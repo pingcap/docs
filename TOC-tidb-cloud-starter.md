@@ -31,7 +31,7 @@
 ## GUIDES
 
 - Manage TiDB resources
-  - [Select a Plan](/tidb-cloud/select-cluster-tier.md)
+  - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
   - [Create a {{{ .starter }}} Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
   - Connect to Your {{{ .starter }}} Instance
     - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
@@ -59,7 +59,7 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
-    - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
+    - [Events](/tidb-cloud/tidb-cloud-events.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -112,7 +112,7 @@
       - [Overview](/garbage-collection-overview.md)
       - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)

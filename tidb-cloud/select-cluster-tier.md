@@ -4,7 +4,7 @@ summary: Learn how to select a plan on TiDB Cloud.
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Select a Plan
+# Select Your Plan
 
 The plan determines the throughput and performance of your TiDB resource.
 

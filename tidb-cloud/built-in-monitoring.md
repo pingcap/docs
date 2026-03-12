@@ -21,7 +21,7 @@ To view the metrics on the **Metrics** page, take the following steps:
 
 ## Metrics retention policy
 
-For TiDB Cloud clusters, the metrics data is kept for 7 days.
+In TiDB Cloud, the metrics data is kept for 7 days.
 
 ## Metrics for TiDB Cloud Dedicated clusters
 
@@ -103,7 +103,7 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The Request Capacity Units (RCUs) and the consumed Request Units (RU) per second in a {{{ .essential }}} instance. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of row-based storage and columnar storage. This metric is displayed only when each storage type is 50 MiB or larger. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} instance until the cluster executes the request and returns the result to the client. |
+| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} instance until the instance executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Transaction Duration | Avg, P99 | The execution duration of transactions. |
@@ -127,8 +127,8 @@ The following table illustrates the database-level main metrics under the **Data
 
 If a pane does not provide any metrics, the possible reasons are as follows:
 
-- The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
+- The workload of the corresponding TiDB Cloud cluster or instance does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The TiDB version of your TiDB Cloud cluster or instance is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 

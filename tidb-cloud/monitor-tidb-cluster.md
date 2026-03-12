@@ -1,11 +1,13 @@
 ---
-title: Monitor a TiDB Cluster
-summary: Learn how to monitor your TiDB cluster.
+title: Monitor TiDB
+summary: Learn how to monitor your TiDB Cloud cluster or instance.
 ---
 
-# Monitor a TiDB Cluster
+# Monitor TiDB
 
-This document describes how to monitor a TiDB cluster on TiDB Cloud.
+This document describes how to monitor a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
+
+<CustomContent plan="dedicated">
 
 ## Cluster status and node status
 
@@ -54,9 +56,29 @@ The node names starting with `tidb` are TiDB nodes, and those starting with `tip
 | **Unavailable** | The TiKV node is not available. |
 | **Deleting** | The TiKV node is being deleted. |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential,premium">
+
+## Instance status
+
+On the [**My TiDB**](https://tidbcloud.com/tidbs) page, you can see the current status of each running TiDB Cloud instance in the **Status** column.
+
+| Status | Description |
+|:--|:--|
+| **Active** | The instance is healthy and available. |
+| **Creating** | The instance is being created. The instance is inaccessible while it is being created. |
+| **Importing** | Importing data into the instance. |
+| **Maintaining** | The instance is in maintenance. |
+| **Modifying** | The instance is being modified. |
+| **Unavailable** | The instance has failed and TiDB cannot recover it. |
+| **Restoring** | The instance is currently being restored from a backup. |
+
+</CustomContent>
+
 ## Monitoring metrics
 
-In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
+In TiDB Cloud, you can view the commonly used metrics of a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> from the following pages:
 
 - **Overview** page
 - **Metrics** page

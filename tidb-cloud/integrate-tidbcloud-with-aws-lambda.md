@@ -130,7 +130,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
             - **Stack name**: enter the stack name.
             - **S3Bucket**: enter the S3 bucket where you store the zip file.
             - **S3Key**: enter the S3 key.
-            - **TiDBDatabase**: enter the TiDB Cloud cluster name.
+            - **TiDBDatabase**: enter the {{{ .starter }}} instance name.
             - **TiDBHost**: enter the host URL for TiDB Cloud database access. Enter `localhost`.
             - **TiDBPassword**: enter the password for TiDB Cloud database access.
             - **TiDBPort**: enter the port for TiDB Cloud database access.
