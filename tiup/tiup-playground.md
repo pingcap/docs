@@ -91,7 +91,7 @@ For a cluster started in this way, the data files are retained after the cluster
 
 ## Access TiDB Dashboard and Grafana
 
-When you start a TiDB cluster using TiUP playground, you can access the TiDB Dashboard and Grafana by the following web sites:
+When you start a TiDB cluster using TiUP playground, you can access the TiDB Dashboard and Grafana by the following websites:
 
 - TiDB Dashboard: `http://127.0.0.1:2379/dashboard`
 
