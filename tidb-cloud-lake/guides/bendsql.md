@@ -143,9 +143,9 @@ cargo install bendsql
 
 ## User Authentication
 
-If you are connecting to a self-hosted Databend instance, you can use the admin users specified in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or you can connect using an SQL user created with the [CREATE USER](/sql/sql-commands/ddl/user/user-create-user) command.
+If you are connecting to a self-hosted Databend instance, you can use the admin users specified in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or you can connect using an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command.
 
-For connections to Databend Cloud, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/sql/sql-commands/ddl/user/user-create-user) command. Please note that the user account you use to log in to the [Databend Cloud console](https://app.databend.com) cannot be used for connecting to Databend Cloud.
+For connections to Databend Cloud, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Please note that the user account you use to log in to the [Databend Cloud console](https://app.databend.com) cannot be used for connecting to Databend Cloud.
 
 ## Connecting with BendSQL
 
@@ -238,11 +238,6 @@ You can also define the connection using a DSN and export it as the `BENDSQL_DSN
 export BENDSQL_DSN="databend://eric:abc123@localhost:8000/?sslmode=disable"
 bendsql
 ```
-
-## Tutorials
-
-- [Connecting to Self-Hosted Databend using BendSQL](/tutorials/)
-- [Connecting to Databend Cloud using BendSQL](/tutorials/getting-started/connect-to-databendcloud-bendsql)
 
 ## BendSQL Settings
 

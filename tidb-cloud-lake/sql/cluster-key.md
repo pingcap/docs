@@ -15,7 +15,7 @@ This page provides a comprehensive overview of cluster key operations in Databen
 
 ## Related Topics
 
-- [Cluster Key](/guides/performance/cluster-key)
+- [Cluster Key](/tidb-cloud-lake/guides/cluster-key.md)
 
 :::note
 Cluster keys in Databend are used to physically organize data in tables to improve query performance by co-locating related data.

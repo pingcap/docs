@@ -8,20 +8,20 @@ This page provides a comprehensive overview of Password Policy operations in Dat
 
 | Command | Description |
 |---------|-------------|
-| [CREATE PASSWORD POLICY](create-password-policy.md) | Creates a new password policy with specific requirements |
-| [ALTER PASSWORD POLICY](alter-password-policy.md) | Modifies an existing password policy |
-| [DROP PASSWORD POLICY](drop-password-policy.md) | Removes a password policy |
+| [CREATE PASSWORD POLICY](/tidb-cloud-lake/sql/create-password-policy.md) | Creates a new password policy with specific requirements |
+| [ALTER PASSWORD POLICY](/tidb-cloud-lake/sql/alter-password-policy.md) | Modifies an existing password policy |
+| [DROP PASSWORD POLICY](/tidb-cloud-lake/sql/drop-password-policy.md) | Removes a password policy |
 
 ## Password Policy Information
 
 | Command | Description |
 |---------|-------------|
-| [DESCRIBE PASSWORD POLICY](desc-password-policy.md) | Shows details of a specific password policy |
-| [SHOW PASSWORD POLICIES](show-password-policies.md) | Lists all password policies |
+| [DESCRIBE PASSWORD POLICY](/tidb-cloud-lake/sql/desc-password-policy.md) | Shows details of a specific password policy |
+| [SHOW PASSWORD POLICIES](/tidb-cloud-lake/sql/show-password-policies.md) | Lists all password policies |
 
 ## Related Topics
 
-- [Password Policy](/guides/security/password-policy)
+- [Password Policy](/tidb-cloud-lake/guides/password-policy.md)
 
 :::note
 Password policies in Databend allow you to enforce security requirements for user passwords, such as minimum length, complexity, and expiration rules.

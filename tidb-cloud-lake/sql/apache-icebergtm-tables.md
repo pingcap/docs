@@ -213,19 +213,19 @@ This table maps data types between Apache Iceberg™ and Databend. Please note t
 
 | Apache Iceberg™                             | Databend                                                                 |
 | ------------------------------------------- | ------------------------------------------------------------------------ |
-| BOOLEAN                                     | [BOOLEAN](/sql/sql-reference/data-types/boolean)                         |
-| INT                                         | [INT32](/sql/sql-reference/data-types/numeric#integer-data-types)        |
-| LONG                                        | [INT64](/sql/sql-reference/data-types/numeric#integer-data-types)        |
-| DATE                                        | [DATE](/sql/sql-reference/data-types/datetime)                           |
-| TIMESTAMP/TIMESTAMPZ                        | [TIMESTAMP](/sql/sql-reference/data-types/datetime)                      |
-| FLOAT                                       | [FLOAT](/sql/sql-reference/data-types/numeric#floating-point-data-types) |
-| DOUBLE                                      | [DOUBLE](/sql/sql-reference/data-types/numeric#floating-point-data-type) |
-| STRING/BINARY                               | [STRING](/sql/sql-reference/data-types/string)                           |
-| DECIMAL                                     | [DECIMAL](/sql/sql-reference/data-types/decimal)                         |
-| ARRAY&lt;TYPE&gt;                           | [ARRAY](/sql/sql-reference/data-types/array), supports nesting           |
-| MAP&lt;KEYTYPE, VALUETYPE&gt;               | [MAP](/sql/sql-reference/data-types/map)                                 |
-| STRUCT&lt;COL1: TYPE1, COL2: TYPE2, ...&gt; | [TUPLE](/sql/sql-reference/data-types/tuple)                             |
-| LIST                                        | [ARRAY](/sql/sql-reference/data-types/array)                             |
+| BOOLEAN                                     | [BOOLEAN](/tidb-cloud-lake/sql/boolean.md)                         |
+| INT                                         | [INT32](/tidb-cloud-lake/sql/numeric.md#integer-data-types)        |
+| LONG                                        | [INT64](/tidb-cloud-lake/sql/numeric.md#integer-data-types)        |
+| DATE                                        | [DATE](/tidb-cloud-lake/sql/datetime.md)                           |
+| TIMESTAMP/TIMESTAMPZ                        | [TIMESTAMP](/tidb-cloud-lake/sql/datetime.md)                      |
+| FLOAT                                       | [FLOAT](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) |
+| DOUBLE                                      | [DOUBLE](/tidb-cloud-lake/sql/numeric.md#floating-point-data-type) |
+| STRING/BINARY                               | [STRING](/tidb-cloud-lake/sql/string.md)                           |
+| DECIMAL                                     | [DECIMAL](/tidb-cloud-lake/sql/decimal.md)                         |
+| ARRAY&lt;TYPE&gt;                           | [ARRAY](/tidb-cloud-lake/sql/array.md), supports nesting           |
+| MAP&lt;KEYTYPE, VALUETYPE&gt;               | [MAP](/tidb-cloud-lake/sql/map.md)                                 |
+| STRUCT&lt;COL1: TYPE1, COL2: TYPE2, ...&gt; | [TUPLE](/tidb-cloud-lake/sql/tuple.md)                             |
+| LIST                                        | [ARRAY](/tidb-cloud-lake/sql/array.md)                             |
 
 ## Managing Catalogs
 
@@ -543,8 +543,8 @@ SELECT * FROM t_multi_part;
 
 Databend provides the following table functions for querying Iceberg metadata, allowing users to inspect snapshots and manifests efficiently:
 
-- [ICEBERG_MANIFEST](/sql/sql-functions/table-functions/iceberg-manifest)
-- [ICEBERG_SNAPSHOT](/sql/sql-functions/table-functions/iceberg-snapshot)
+- [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md)
+- [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md)
 
 ## Usage Examples
 

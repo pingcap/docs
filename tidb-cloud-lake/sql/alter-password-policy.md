@@ -42,7 +42,7 @@ ALTER PASSWORD POLICY [ IF EXISTS ] <name> UNSET
     [ COMMENT ]
 ```
 
-For detailed descriptions of the password policy attributes, see [Password Policy Attributes](create-password-policy.md#password-policy-attributes).
+For detailed descriptions of the password policy attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
 
 ## Examples
 

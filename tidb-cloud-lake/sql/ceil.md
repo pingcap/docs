@@ -12,7 +12,7 @@ CEIL( <x> )
 
 ## Aliases
 
-- [CEILING](ceiling.md)
+- [CEILING](/tidb-cloud-lake/sql/ceiling.md)
 
 ## Examples
 

@@ -85,5 +85,5 @@ FROM projects;
 
 ## See Also
 
-- [DATE_DIFF](date-diff.md): Alternative function for calculating specific time unit differences
+- [DATE_DIFF](/tidb-cloud-lake/sql/date-diff.md): Alternative function for calculating specific time unit differences
 

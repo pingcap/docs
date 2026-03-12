@@ -16,7 +16,7 @@ TIMESTAMP
 
 ## Aliases
 
-- [CURRENT_TIMESTAMP](current-timestamp.md)
+- [CURRENT_TIMESTAMP](/tidb-cloud-lake/sql/current-timestamp.md)
 
 ## Examples
 

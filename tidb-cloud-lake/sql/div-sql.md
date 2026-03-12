@@ -9,8 +9,8 @@ Returns the quotient by dividing the first number by the second one. Returns 0 i
 
 See also:
 
-- [DIV](div.md)
-- [DIVNULL](divnull.md)
+- [DIV](/tidb-cloud-lake/sql/div.md)
+- [DIVNULL](/tidb-cloud-lake/sql/divnull.md)
 
 ## Syntax
 

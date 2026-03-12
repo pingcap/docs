@@ -2,24 +2,9 @@
 title: Editions
 ---
 
-import DatabendTable from '@site/src/components/DatabendTable';
-import LanguageDocs from '@site/src/components/LanguageDocs';
-
 Databend Cloud comes in three editions: **Personal**, **Business**, and **Dedicated**, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
 
-<LanguageDocs
-cn=
-'
-
-如需快速了解这些版本，请访问 [https://www.databend.cn/databend-cloud](https://www.databend.cn/databend-cloud)。有关定价信息，请参阅 [定价与计费](/guides/cloud/overview/pricing)。有关各版本详细功能列表，请参阅 [功能列表](#feature-lists)。
-
-'
-en=
-'
-
-For a quick overview of these editions, see [https://www.databend.com/databend-cloud](https://www.databend.com/databend-cloud). For the pricing information, see [Pricing & Billing](/guides/cloud/overview/pricing). For the detailed feature list among these editions, see [Feature Lists](#feature-lists).
-
-'/>
+For the pricing information, see [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md). For the detailed feature list among these editions, see [Feature Lists](#feature-lists).
 
 ## Feature Lists
 

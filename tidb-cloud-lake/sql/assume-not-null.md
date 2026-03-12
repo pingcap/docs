@@ -12,7 +12,7 @@ ASSUME_NOT_NULL(<x>)
 
 ## Aliases
 
-- [REMOVE_NULLABLE](remove-nullable.md)
+- [REMOVE_NULLABLE](/tidb-cloud-lake/sql/remove-nullable.md)
 
 ## Return Type
 

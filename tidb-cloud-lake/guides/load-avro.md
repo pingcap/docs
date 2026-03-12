@@ -18,8 +18,8 @@ COPY INTO [<database>.]<table_name>
 FILE_FORMAT = (TYPE = AVRO)
 ```
 
-- For more Avro file format options, refer to [Avro File Format Options](/sql/sql-reference/file-format-options#avro-options).
-- For more COPY INTO table options, refer to [COPY INTO table](/sql/sql-commands/dml/dml-copy-into-table).
+- For more Avro file format options, refer to [Avro File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#avro-options).
+- For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Avro Data into Databend from Remote HTTP URL
 

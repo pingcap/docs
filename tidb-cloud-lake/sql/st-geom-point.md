@@ -2,4 +2,4 @@
 title: ST_GEOM_POINT
 ---
 
-Alias for [ST_MAKEGEOMPOINT](st-makegeompoint.md).
+Alias for [ST_MAKEGEOMPOINT](/tidb-cloud-lake/sql/st-makegeompoint.md).

@@ -6,8 +6,8 @@ Removes all occurrences of the specified trim string from the end of the string.
 
 See also: 
 
-- [RTRIM](rtrim.md)
-- [TRIM_LEADING](trim-leading.md)
+- [RTRIM](/tidb-cloud-lake/sql/rtrim.md)
+- [TRIM_LEADING](/tidb-cloud-lake/sql/trim-leading.md)
 
 ## Syntax
 

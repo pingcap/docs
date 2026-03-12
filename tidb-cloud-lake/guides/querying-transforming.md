@@ -53,7 +53,7 @@ compared the two syntaxes
 - Same ` FROM {@<stage_name>[/<path>] | '<uri>'}`
 - diff parameters:
   - query use `table function parameters`, i.e. `(<key> => <value>, ...)` 
-  - transform use Options at the end of [Copy into table](/sql/sql-commands/dml/dml-copy-into-table)
+  - transform use Options at the end of [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md)
 
 :::
 

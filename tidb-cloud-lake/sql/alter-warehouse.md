@@ -39,7 +39,7 @@ ALTER WAREHOUSE <warehouse_name> RENAME TO <new_name>
 
 ## Options
 
-The `SET` clause accepts the same options as [CREATE WAREHOUSE](create-warehouse.md):
+The `SET` clause accepts the same options as [CREATE WAREHOUSE](/tidb-cloud-lake/sql/create-warehouse.md):
 
 | Option              | Type / Values                                                       | Description                                                          |
 | ------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- |

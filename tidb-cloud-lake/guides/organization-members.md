@@ -39,11 +39,11 @@ GRANT SELECT ON *.* TO ROLE writer;
 GRANT ROLE writer to 'eric@databend.com';
 ```
 
-- The page does not display users created using SQL. To view the SQL users that have been created([**CREATE USER**](/sql/sql-commands/ddl/user/user-create-user)、[**CREATE ROLE**](/sql/sql-commands/ddl/user/user-create-role)), use the [SHOW USERS](/sql/sql-commands/ddl/user/user-show-users) command.
+- The page does not display users created using SQL. To view the SQL users that have been created([**CREATE USER**](/tidb-cloud-lake/sql/create-user.md)、[**CREATE ROLE**](/tidb-cloud-lake/sql/create-role.md)), use the [SHOW USERS](/tidb-cloud-lake/sql/show-users.md) command.
 
 ### Inviting New Members
 
-To invite a new member to your organization, navigate to the **Admin** > **Users & Roles** page and click on **Invite New Member**. In the dialog box that appears, enter the user's email address and select a role from the list. This list includes built-in roles and any created roles created for your organization. For more information about the roles, see [Roles](/guides/security/access-control/roles).
+To invite a new member to your organization, navigate to the **Admin** > **Users & Roles** page and click on **Invite New Member**. In the dialog box that appears, enter the user's email address and select a role from the list. This list includes built-in roles and any created roles created for your organization. For more information about the roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
 
 An invitation email will be sent to the invited user. Inside the email, there will be a link that the user can click on to initiate the signup process.
 

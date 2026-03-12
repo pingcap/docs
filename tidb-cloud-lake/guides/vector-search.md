@@ -79,7 +79,7 @@ INSERT INTO frame_events VALUES
   ('FRAME-0501', 'VID-MISSING-001', 10, '2025-01-04 10:00:00', 'sensor_fault',     0.25, 15.0);
 ```
 
-Docs: [Vector type](/sql/sql-reference/data-types/vector) and [Vector index](/sql/sql-reference/data-types/vector#vector-indexing).
+Docs: [Vector type](/tidb-cloud-lake/sql/vector.md) and [Vector index](/tidb-cloud-lake/sql/vector.md#vector-indexing).
 
 ---
 

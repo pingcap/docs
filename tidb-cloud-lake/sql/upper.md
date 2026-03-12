@@ -12,7 +12,7 @@ UPPER(<str>)
 
 ## Aliases
 
-- [UCASE](ucase.md)
+- [UCASE](/tidb-cloud-lake/sql/ucase.md)
 
 ## Return Type
 

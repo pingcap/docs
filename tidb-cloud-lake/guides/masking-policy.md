@@ -166,5 +166,5 @@ id | email              | is_vip
 - Additional references:
   - [User & Role](/sql/sql-commands/ddl/user)
   - [CREATE MASKING POLICY](/sql/sql-commands/ddl/mask-policy/create-mask-policy)
-  - [ALTER TABLE](/sql/sql-commands/ddl/table/alter-table#column-operations)
+  - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
   - [Masking Policy Commands](/sql/sql-commands/ddl/mask-policy)

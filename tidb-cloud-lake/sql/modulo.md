@@ -12,7 +12,7 @@ MODULO( <x>, <y> )
 
 ## Aliases
 
-- [MOD](mod.md)
+- [MOD](/tidb-cloud-lake/sql/mod.md)
 
 ## Examples
 

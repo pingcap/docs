@@ -12,7 +12,7 @@ GEN_RANDOM_UUID()
 
 ## Aliases
 
-- [UUID](uuid.md)
+- [UUID](/tidb-cloud-lake/sql/uuid.md)
 
 ## Why Use UUID v7?
 

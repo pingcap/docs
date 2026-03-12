@@ -15,7 +15,7 @@ IF(<cond1>, <expr1>, [<cond2>, <expr2> ...], <expr_else>)
 
 ## Aliases
 
-- [IFF](iff.md)
+- [IFF](/tidb-cloud-lake/sql/iff.md)
 
 ## Examples
 

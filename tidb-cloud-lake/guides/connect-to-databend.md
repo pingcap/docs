@@ -6,11 +6,11 @@ Databend supports multiple connection methods to suit different use cases. All o
 
 ## Quick Selection
 
-| I want to... | Recommended | Link |
-|-------------|-------------|------|
-| Run SQL queries interactively | **BendSQL** (CLI) or **DBeaver** (GUI) | [SQL Clients](/guides/connect/sql-clients) |
-| Build an application | Language-specific **Driver** | [Drivers](/guides/connect/drivers) |
-| Create dashboards & reports | **BI/Visualization Tools** | [Visualization](/guides/connect/visualization) |
+| I want to... | Recommended |
+|-------------|-------------|
+| Run SQL queries interactively | **BendSQL** (CLI) or **DBeaver** (GUI) |
+| Build an application | Language-specific **Driver** |
+| Create dashboards & reports | **BI/Visualization Tools** |
 
 ## Connection Strings
 
@@ -28,29 +28,29 @@ Databend supports multiple connection methods to suit different use cases. All o
 
 | Tool | Type | Best For |
 |------|------|----------|
-| [BendSQL](/guides/connect/sql-clients/bendsql) | CLI | Developers, Scripting, Automation |
-| [DBeaver](/guides/connect/sql-clients/jdbc) | GUI | Data Analysis, Visual Query Building |
+| [BendSQL](/tidb-cloud-lake/guides/bendsql.md) | CLI | Developers, Scripting, Automation |
+| [DBeaver](/tidb-cloud-lake/guides/dbeaver.md) | GUI | Data Analysis, Visual Query Building |
 
 ## Drivers
 
 | Language | Guide | Use Case |
 |----------|-------|----------|
-| Go | [Golang Driver](/guides/connect/drivers/golang) | Backend services, microservices |
-| Python | [Python Connector](/guides/connect/drivers/python) | Data science, analytics, ML |
-| Node.js | [Node.js Driver](/guides/connect/drivers/nodejs) | Web applications |
-| Java | [JDBC Driver](/guides/connect/drivers/java) | Enterprise applications |
-| Rust | [Rust Driver](/guides/connect/drivers/rust) | System programming |
+| Go | [Golang Driver](/tidb-cloud-lake/guides/connect-using-golang.md) | Backend services, microservices |
+| Python | [Python Connector](/tidb-cloud-lake/guides/connect-using-python.md) | Data science, analytics, ML |
+| Node.js | [Node.js Driver](/tidb-cloud-lake/guides/connect-using-node-js.md) | Web applications |
+| Java | [JDBC Driver](/tidb-cloud-lake/guides/connect-using-java.md) | Enterprise applications |
+| Rust | [Rust Driver](/tidb-cloud-lake/guides/connect-using-rust.md) | System programming |
 
 ## Visualization Tools
 
 | Tool | Type |
 |------|------|
-| [Grafana](/guides/connect/visualization/grafana) | Monitoring & Dashboards |
-| [Tableau](/guides/connect/visualization/tableau) | Business Intelligence |
-| [Superset](/guides/connect/visualization/superset) | Data Exploration |
-| [Metabase](/guides/connect/visualization/metabase) | Self-Service BI |
-| [Jupyter](/guides/connect/visualization/jupyter) | Data Science Notebooks |
-| [Deepnote](/guides/connect/visualization/deepnote) | Collaborative Notebooks |
-| [MindsDB](/guides/connect/visualization/mindsdb) | ML Platform |
-| [Redash](/guides/connect/visualization/redash) | SQL-Based Dashboards |
+| [Grafana](/tidb-cloud-lake/guides/grafana.md) | Monitoring & Dashboards |
+| [Tableau](/tidb-cloud-lake/guides/tableau.md) | Business Intelligence |
+| [Superset](/tidb-cloud-lake/guides/superset.md) | Data Exploration |
+| [Metabase](/tidb-cloud-lake/guides/metabase.md) | Self-Service BI |
+| [Jupyter](/tidb-cloud-lake/guides/jupyter-notebook.md) | Data Science Notebooks |
+| [Deepnote](/tidb-cloud-lake/guides/deepnote.md) | Collaborative Notebooks |
+| [MindsDB](/tidb-cloud-lake/guides/mindsdb.md) | ML Platform |
+| [Redash](/tidb-cloud-lake/guides/redash.md) | SQL-Based Dashboards |
 

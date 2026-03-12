@@ -15,7 +15,7 @@ ST_ASWKT(<geometry_or_geography>)
 
 ## Aliases
 
-- [ST_ASTEXT](st-astext.md)
+- [ST_ASTEXT](/tidb-cloud-lake/sql/st-astext.md)
 
 ## Arguments
 

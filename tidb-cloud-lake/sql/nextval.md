@@ -24,7 +24,7 @@ Integer.
 | ACCESS SEQUENCE | SEQUENCE    | Access a sequence. |
 
 
-To access a sequence, the user performing the operation or the roles must have the ACCESS SEQUENCE [privilege](/guides/security/access-control/privileges).
+To access a sequence, the user performing the operation or the roles must have the ACCESS SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 :::note
 

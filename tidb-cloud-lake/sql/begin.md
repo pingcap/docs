@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.371"/>
 
-Starts a new transaction. BEGIN and [COMMIT](commit.md)/[ROLLBACK](rollback.md) must be used together to start and then either save or undo a transaction.
+Starts a new transaction. BEGIN and [COMMIT](/tidb-cloud-lake/sql/commit.md)/[ROLLBACK](/tidb-cloud-lake/sql/rollback.md) must be used together to start and then either save or undo a transaction.
 
 - Databend does *not* support nested transactions, so unmatched transaction statements will be ignored.
 

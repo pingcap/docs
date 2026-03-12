@@ -169,7 +169,7 @@ CREATE TABLE my_target_table (
 );
 ```
 
-2. Load the exported data in the bucket using [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table):
+2. Load the exported data in the bucket using [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md):
 
 ```sql
 COPY INTO my_target_table

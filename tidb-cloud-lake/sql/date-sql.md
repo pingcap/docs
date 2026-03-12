@@ -30,7 +30,7 @@ TO_DATE('<string>', '<format>')
 
 ## Aliases
 
-- [DATE](date.md)
+- [DATE](/tidb-cloud-lake/sql/date.md)
 - [STR_TO_DATE](str-to-date.md)
 
 ## Return Type
@@ -47,7 +47,7 @@ SELECT TYPEOF(TO_DATE('2022-01-02')), TYPEOF(STR_TO_DATE('2022-01-02'));
 └───────────────────────────────────────────────────────────────────┘
 ```
 
-To convert the returned date back to a string, use the [DATE_FORMAT](date-format.md) function:
+To convert the returned date back to a string, use the [DATE_FORMAT](/tidb-cloud-lake/sql/date-format.md) function:
 
 ```sql
 SELECT DATE_FORMAT(TO_DATE('2022-01-02')) AS dt, TYPEOF(dt);

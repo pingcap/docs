@@ -2,4 +2,4 @@
 title: ST_ASTEXT
 ---
 
-Alias for [ST_ASWKT](st-aswkt.md).
+Alias for [ST_ASWKT](/tidb-cloud-lake/sql/st-aswkt.md).

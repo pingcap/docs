@@ -8,15 +8,15 @@ This page provides a comprehensive overview of stream operations in Databend, or
 
 | Command | Description |
 |---------|-------------|
-| [CREATE STREAM](create-stream.md) | Creates a new stream to track changes in a table |
-| [DROP STREAM](drop-stream.md) | Removes a stream |
+| [CREATE STREAM](/tidb-cloud-lake/sql/create-stream.md) | Creates a new stream to track changes in a table |
+| [DROP STREAM](/tidb-cloud-lake/sql/drop-stream.md) | Removes a stream |
 
 ## Stream Information
 
 | Command | Description |
 |---------|-------------|
-| [DESC STREAM](desc-stream.md) | Shows detailed information about a stream |
-| [SHOW STREAMS](show-streams.md) | Lists all streams in the current or specified database |
+| [DESC STREAM](/tidb-cloud-lake/sql/desc-stream.md) | Shows detailed information about a stream |
+| [SHOW STREAMS](/tidb-cloud-lake/sql/show-streams.md) | Lists all streams in the current or specified database |
 
 ## Related Topics
 

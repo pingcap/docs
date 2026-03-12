@@ -7,9 +7,9 @@ This page provides a comprehensive overview of inverted index operations in Data
 
 | Command | Description |
 |---------|-------------|
-| [CREATE INVERTED INDEX](create-inverted-index.md) | Creates a new inverted index for full-text search |
-| [DROP INVERTED INDEX](drop-inverted-index.md) | Removes an inverted index |
-| [REFRESH INVERTED INDEX](refresh-inverted-index.md) | Updates an inverted index with the latest data |
+| [CREATE INVERTED INDEX](/tidb-cloud-lake/sql/create-inverted-index.md) | Creates a new inverted index for full-text search |
+| [DROP INVERTED INDEX](/tidb-cloud-lake/sql/drop-inverted-index.md) | Removes an inverted index |
+| [REFRESH INVERTED INDEX](/tidb-cloud-lake/sql/refresh-inverted-index.md) | Updates an inverted index with the latest data |
 
 ## Related Topics
 

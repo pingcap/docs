@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns the maximum value from a set of values. If any value in the set is `NULL`, the function returns `NULL`.
 
-See also: [GREATEST_IGNORE_NULLS](greatest-ignore-nulls.md)
+See also: [GREATEST_IGNORE_NULLS](/tidb-cloud-lake/sql/greatest-ignore-nulls.md)
 
 ## Syntax
 

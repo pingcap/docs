@@ -2,11 +2,11 @@
 title: Password Policy
 ---
 
-Password policies define how strong a Databend password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every `CREATE USER` and password change. For the full list of attributes, see [Password Policy Attributes](/sql/sql-commands/ddl/password-policy/create-password-policy#password-policy-attributes).
+Password policies define how strong a Databend password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every `CREATE USER` and password change. For the full list of attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
 
 ## How It Works
 
-- SQL users start with no password policy. Assign one either when creating the user (`CREATE USER ... WITH SET PASSWORD POLICY`) or later via [ALTER USER](/sql/sql-commands/ddl/user/user-alter-user). Policies do **not** apply to admin accounts declared in [`databend-query.toml`](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml).
+- SQL users start with no password policy. Assign one either when creating the user (`CREATE USER ... WITH SET PASSWORD POLICY`) or later via [ALTER USER](/tidb-cloud-lake/sql/alter-user.md). Policies do **not** apply to admin accounts declared in [`databend-query.toml`](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml).
 - Whenever a managed user sets or changes a password, Databend validates the complexity rules (length and character mix) and, for password changes, enforces minimum age and password history.
 - On login, Databend also tracks failed attempts and lockouts based on `PASSWORD_MAX_RETRIES`/`PASSWORD_LOCKOUT_TIME_MINS`, and it flags expired passwords after `PASSWORD_MAX_AGE_DAYS`. Expired users can log in only to change their password.
 
@@ -80,7 +80,7 @@ dba_policy |Strict controls for DBAs    |MIN_LENGTH=12,MAX_LENGTH=18,MIN_UPPER_C
 
 ### 4. Update a Policy Centrally
 
-Use [ALTER PASSWORD POLICY](/sql/sql-commands/ddl/password-policy/alter-password-policy) to tighten rules without touching each user:
+Use [ALTER PASSWORD POLICY](/tidb-cloud-lake/sql/alter-password-policy.md) to tighten rules without touching each user:
 
 ```sql
 ALTER PASSWORD POLICY analyst_policy SET
@@ -108,4 +108,4 @@ Databend prevents you from dropping a policy that is still in use; unset it from
 
 ---
 
-For full syntax, see the [Password Policy SQL reference](/sql/sql-commands/ddl/password-policy), which covers `CREATE`, `ALTER`, `SHOW`, `DESC`, and `DROP`.
+For full syntax, see the [Password Policy SQL reference](/tidb-cloud-lake/sql/password-policy.md), which covers `CREATE`, `ALTER`, `SHOW`, `DESC`, and `DROP`.

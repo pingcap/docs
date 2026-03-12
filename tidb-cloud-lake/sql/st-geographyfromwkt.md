@@ -15,10 +15,10 @@ ST_GEOGRAPHYFROMWKT(<string>)
 
 ## Aliases
 
-- [ST_GEOGFROMWKT](st-geogfromwkt.md)
-- [ST_GEOGRAPHYFROMEWKT](st-geographyfromewkt.md)
-- [ST_GEOGRAPHYFROMTEXT](st-geographyfromtext.md)
-- [ST_GEOGFROMTEXT](st-geogfromtext.md)
+- [ST_GEOGFROMWKT](/tidb-cloud-lake/sql/st-geogfromwkt.md)
+- [ST_GEOGRAPHYFROMEWKT](/tidb-cloud-lake/sql/st-geographyfromewkt.md)
+- [ST_GEOGRAPHYFROMTEXT](/tidb-cloud-lake/sql/st-geographyfromtext.md)
+- [ST_GEOGFROMTEXT](/tidb-cloud-lake/sql/st-geogfromtext.md)
 
 ## Arguments
 

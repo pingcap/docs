@@ -48,4 +48,4 @@ SELECT ARRAY_SUM([10, NULL, -3]) AS total;
 
 ## Related
 
-- [ARRAY_AGGREGATE](array-aggregate)
+- [ARRAY_AGGREGATE](/tidb-cloud-lake/sql/array-aggregate.md)

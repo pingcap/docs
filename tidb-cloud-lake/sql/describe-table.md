@@ -3,7 +3,7 @@ title: DESCRIBE TABLE
 sidebar_position: 2
 ---
 
-Shows information about the columns in a given table. Equivalent to [SHOW FIELDS](show-fields.md).
+Shows information about the columns in a given table. Equivalent to [SHOW FIELDS](/tidb-cloud-lake/sql/show-fields.md).
 
 :::tip
 [SHOW COLUMNS](show-full-columns.md) provides similar but more information about the columns of a table. 

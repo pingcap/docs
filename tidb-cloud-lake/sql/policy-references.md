@@ -6,7 +6,7 @@ Returns the associations between security policies (Masking Policy or Row Access
 
 See also:
 
-- [MASKING POLICY](/guides/security/masking-policy)
+- [MASKING POLICY](/tidb-cloud-lake/guides/masking-policy.md)
 
 ## Syntax
 

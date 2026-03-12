@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Displays all session variables and their details, such as names, values, and types.
 
-See also: [SHOW_VARIABLES](/sql/sql-functions/table-functions/show-variables)
+See also: [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md)
 
 ## Syntax
 

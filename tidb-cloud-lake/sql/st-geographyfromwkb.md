@@ -16,9 +16,9 @@ ST_GEOGRAPHYFROMWKB(<binary>)
 
 ## Aliases
 
-- [ST_GEOGFROMWKB](st-geogfromwkb.md)
-- [ST_GEOGETRYFROMWKB](st-geogetryfromwkb.md)
-- [ST_GEOGFROMEWKB](st-geogfromewkb.md)
+- [ST_GEOGFROMWKB](/tidb-cloud-lake/sql/st-geogfromwkb.md)
+- [ST_GEOGETRYFROMWKB](/tidb-cloud-lake/sql/st-geogetryfromwkb.md)
+- [ST_GEOGFROMEWKB](/tidb-cloud-lake/sql/st-geogfromewkb.md)
 
 ## Arguments
 

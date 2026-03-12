@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 
-See also: [SHOW GRANTS](/sql/sql-commands/ddl/user/show-grants)
+See also: [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)
 
 ## Syntax
 

@@ -15,4 +15,4 @@ CALL SYSTEM$FUSE_AMEND('<database_name>', '<table_name>');
 
 ## Examples
 
-This function is designed for fail-safe scenarios. See the [Fail-Safe Guide](/guides/security/fail-safe) for details.
+This function is designed for fail-safe scenarios. See the [Fail-Safe Guide](/tidb-cloud-lake/guides/fail-safe.md) for details.

@@ -2,4 +2,4 @@
 title: MID
 ---
 
-Alias for [SUBSTR](substr.md).
+Alias for [SUBSTR](/tidb-cloud-lake/sql/substr.md).

@@ -27,8 +27,8 @@ SUBSTR(<str>, <pos>, <len>)
 
 ## Aliases
 
-- [SUBSTRING](substring.md)
-- [MID](mid.md)
+- [SUBSTRING](/tidb-cloud-lake/sql/substring.md)
+- [MID](/tidb-cloud-lake/sql/mid.md)
 
 ## Return Type
 

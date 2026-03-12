@@ -32,7 +32,7 @@ CREATE [ OR REPLACE ] SEQUENCE [ IF NOT EXISTS ] <sequence>
 | CREATE SEQUENCE | Global      | Creates a sequence. |
 
 
-To create a sequence, the user performing the operation or the [current_role](/guides/security/access-control/roles) must have the CREATE SEQUENCE [privilege](/guides/security/access-control/privileges).
+To create a sequence, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 :::note
 

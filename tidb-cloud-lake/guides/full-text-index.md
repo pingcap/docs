@@ -3,7 +3,7 @@ title: Full-Text Index
 ---
 
 :::info
-Looking for a hands-on walkthrough? See [JSON & Search Guide](/guides/query/json-search).
+Looking for a hands-on walkthrough? See [JSON & Search Guide](/tidb-cloud-lake/guides/json-search.md).
 :::
 
 # Full-Text Index: Automatic Lightning-Fast Text Search

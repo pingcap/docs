@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns the maximum value from a set of values, ignoring any NULL values.
 
-See also: [GREATEST](greatest.md)
+See also: [GREATEST](/tidb-cloud-lake/sql/greatest.md)
 
 ## Syntax
 

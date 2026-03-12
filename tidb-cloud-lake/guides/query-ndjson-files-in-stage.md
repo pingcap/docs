@@ -88,4 +88,4 @@ FROM @ndjson_query_stage
 
 - [Loading NDJSON Files](../03-load-semistructured/03-load-ndjson.md) - How to load NDJSON data into tables
 - [NDJSON File Format Options](/sql/sql-reference/file-format-options#ndjson-options) - Complete NDJSON format configuration
-- [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) - Managing external and internal stages
+- [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) - Managing external and internal stages

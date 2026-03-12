@@ -12,7 +12,7 @@ CONTAINS( <array>, <element> )
 
 ## Aliases
 
-- [ARRAY_CONTAINS](array-contains.md)
+- [ARRAY_CONTAINS](/tidb-cloud-lake/sql/array-contains.md)
 
 ## Examples
 

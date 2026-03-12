@@ -12,7 +12,7 @@ SIPHASH64(<expr>)
 
 ## Aliases
 
-- [SIPHASH](siphash.md)
+- [SIPHASH](/tidb-cloud-lake/sql/siphash.md)
 
 ## Examples
 

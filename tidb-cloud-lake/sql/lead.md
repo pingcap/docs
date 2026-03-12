@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns the value from a subsequent row in the result set.
 
-See also: [LAG](lag.md)
+See also: [LAG](/tidb-cloud-lake/sql/lag.md)
 
 ## Syntax
 

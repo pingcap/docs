@@ -21,7 +21,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 ```
 
 - For more Parquet file format options, refer to [Parquet File Format Options](/sql/sql-reference/file-format-options#parquet-options).
-- For more COPY INTO table options, refer to [COPY INTO table](/sql/sql-commands/dml/dml-copy-into-table).
+- For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Data from Parquet Files
 
@@ -65,7 +65,7 @@ Result:
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-More details about unload data to stage can be found in [COPY INTO location](/sql/sql-commands/dml/dml-copy-into-location).
+More details about unload data to stage can be found in [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md).
 
 ### Step 3: Create Target Table
 

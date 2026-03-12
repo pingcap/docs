@@ -27,7 +27,7 @@ To assign the `account-admin` role to a user in Databend Cloud, select the role 
 
 ## Setting Default Role
 
-When a user is granted multiple roles, you can use the [CREATE USER](/sql/sql-commands/ddl/user/user-create-user) or [ALTER USER](/sql/sql-commands/ddl/user/user-alter-user) commands to set a default role for that user. The default role determines the role automatically assigned to the user at the beginning of a session:
+When a user is granted multiple roles, you can use the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) or [ALTER USER](/tidb-cloud-lake/sql/alter-user.md) commands to set a default role for that user. The default role determines the role automatically assigned to the user at the beginning of a session:
 
 ```sql title='Example:'
 -- Show existing roles in the system
@@ -51,15 +51,15 @@ GRANT ROLE account_admin TO eric;
 ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 ```
 
-- Users have the flexibility to switch to other roles within a session using the [SET ROLE](/sql/sql-commands/ddl/user/user-set-role) command.
-- A user can examine their current role and view all the roles granted to them by using the [SHOW ROLES](/sql/sql-commands/ddl/user/user-show-roles) command.
+- Users have the flexibility to switch to other roles within a session using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command.
+- A user can examine their current role and view all the roles granted to them by using the [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) command.
 - If you don't explicitly set a default role for a user, Databend will default to using the built-in role `public` as the default role.
 
 ## Active Role & Secondary Roles
 
 A user can be granted multiple roles in Databend. These roles are categorized into an active role and secondary roles:
 
-- The active role is the user's currently active primary role for the session, which can be set using the [SET ROLE](/sql/sql-commands/ddl/user/user-set-role) command. 
+- The active role is the user's currently active primary role for the session, which can be set using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command. 
 
 - Secondary roles are additional roles that provide extra permissions and are active by default. Users can activate or deactivate secondary roles with the [SET SECONDARY ROLES](/sql/sql-commands/ddl/user/user-set-2nd-roles) command to temporarily adjust their permission scope.
 

@@ -20,7 +20,7 @@ If your SQL statements are already saved in an SQL file, you can also create a w
 To edit and run an SQL statement:
 
 1. Click on the database icon <DbSVG/> above the SQL editor and select the database you want to query.
-2. Click on the user icon <RoleSVG/> above the SQL editor and choose a role to use. The dropdown list will display all the roles you have been granted, along with any child roles under your roles in the hierarchy. For more information about the role hierarchy, see [Inheriting Roles & Establishing Hierarchy](/guides/security/access-control/roles#inheriting-roles--establishing-hierarchy).
+2. Click on the user icon <RoleSVG/> above the SQL editor and choose a role to use. The dropdown list will display all the roles you have been granted, along with any child roles under your roles in the hierarchy. For more information about the role hierarchy, see [Inheriting Roles & Establishing Hierarchy](/tidb-cloud-lake/guides/roles.md#inheriting-roles--establishing-hierarchy).
 
 3. Edit the SQL statement in the SQL editor.
 4. Click on the warehouse icon <WarehouseSVG/> under the SQL editor and select a warehouse from the list.

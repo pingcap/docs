@@ -34,15 +34,15 @@ ALTER USER analyst WITH UNSET WORKLOAD GROUP;
 ### Management
 | Command | Description |
 |---------|-------------|
-| [CREATE WORKLOAD GROUP](create-workload-group.md) | Creates a new workload group with resource quotas |
-| [ALTER WORKLOAD GROUP](alter-workload-group.md) | Modifies workload group configuration |
-| [DROP WORKLOAD GROUP](drop-workload-group.md) | Removes a workload group |
-| [RENAME WORKLOAD GROUP](rename-workload-group.md) | Renames a workload group |
+| [CREATE WORKLOAD GROUP](/tidb-cloud-lake/sql/create-workload-group.md) | Creates a new workload group with resource quotas |
+| [ALTER WORKLOAD GROUP](/tidb-cloud-lake/sql/alter-workload-group.md) | Modifies workload group configuration |
+| [DROP WORKLOAD GROUP](/tidb-cloud-lake/sql/drop-workload-group.md) | Removes a workload group |
+| [RENAME WORKLOAD GROUP](/tidb-cloud-lake/sql/rename-workload-group.md) | Renames a workload group |
 
 ### Information
 | Command | Description |
 |---------|-------------|
-| [SHOW WORKLOAD GROUPS](show-workload-groups.md) | Lists all workload groups and their settings |
+| [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md) | Lists all workload groups and their settings |
 
 :::tip
 Resource quotas are normalized across all workload groups in a warehouse. For example, if two groups have 60% and 40% CPU quotas, they get 60% and 40% of actual resources respectively.

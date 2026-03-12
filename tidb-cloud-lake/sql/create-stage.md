@@ -77,7 +77,7 @@ copyOptions ::=
 |:----------|:--------------|:--------------------------------------------------------------------------|
 | SUPER     | Global, Table | Operates a stage(Lists stages. Creates, Drops a stage), catalog or share. |
 
-To create a stage, the user performing the operation or the [current_role](/guides/security/access-control/roles) must have the SUPER [privilege](/guides/security/access-control/privileges).
+To create a stage, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the SUPER [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 ## Examples
 

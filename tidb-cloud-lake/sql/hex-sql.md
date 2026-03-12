@@ -2,4 +2,4 @@
 title: FROM_HEX
 ---
 
-Alias for [UNHEX](unhex.md).
+Alias for [UNHEX](/tidb-cloud-lake/sql/unhex.md).

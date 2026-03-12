@@ -20,11 +20,11 @@ With Databend Time Travel, you can revisit and retrieve data from the past, even
 ### Main Uses of Time Travel
 
 - **Access Past Data**: Look at data from the past, even if it has been changed or deleted.
-- **Recover Lost Data**: Bring back tables and databases that were deleted using the [FLASHBACK TABLE](/sql/sql-commands/ddl/table/flashback-table) command.
+- **Recover Lost Data**: Bring back tables and databases that were deleted using the [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) command.
 
 ### Time Travel SQL Extensions
 
-- **SQL Extensions for Time Travel:** Use special SQL clauses like [`AT`](/sql/sql-commands/query-syntax/query-at) in SELECT statements and CREATE commands to specify the exact point in history you want to access.
+- **SQL Extensions for Time Travel:** Use special SQL clauses like [`AT`](/tidb-cloud-lake/sql/at.md) in SELECT statements and CREATE commands to specify the exact point in history you want to access.
 - **Revive Deleted Data:** Use the `UNDROP` command for tables, databases.
 
 ### Setting the Data Retention Period
@@ -139,4 +139,4 @@ export AWS_SECRET_ACCESS_KEY=minioadmin
 
 ### Tutorials
 
-- [Backing Up and Restoring Data with BendSave](/tutorials/operate-and-recover/bendsave)
+- [Backing Up and Restoring Data with BendSave](/tidb-cloud-lake/tutorials/backup-restore-with-bendsave.md)

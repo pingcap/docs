@@ -103,4 +103,4 @@ ORDER BY
 
 ## See Also
 
-- [DATE_TRUNC](date-trunc.md): Provides similar functionality with a different syntax for better SQL standard compatibility.
+- [DATE_TRUNC](/tidb-cloud-lake/sql/date-trunc.md): Provides similar functionality with a different syntax for better SQL standard compatibility.

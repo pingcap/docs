@@ -65,6 +65,6 @@ FROM numbers(5);
 
 ## See Also
 
-- [PLUS](plus.md) / [ADD](add.md)
-- [MINUS](minus.md) / [SUBTRACT](subtract.md)
-- [DIV](div.md)
+- [PLUS](/tidb-cloud-lake/sql/plus.md) / [ADD](/tidb-cloud-lake/sql/add.md)
+- [MINUS](/tidb-cloud-lake/sql/minus.md) / [SUBTRACT](/tidb-cloud-lake/sql/subtract.md)
+- [DIV](/tidb-cloud-lake/sql/div.md)

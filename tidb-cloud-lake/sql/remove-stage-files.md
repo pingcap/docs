@@ -8,7 +8,7 @@ Removes files from a stage.
 See also:
 
 - [LIST STAGE FILES](04-ddl-list-stage.md): Lists files in a stage.
-- [PRESIGN](presign.md): Databend recommends using the Presigned URL method to upload files to the stage.
+- [PRESIGN](/tidb-cloud-lake/sql/presign.md): Databend recommends using the Presigned URL method to upload files to the stage.
 
 ## Syntax
 

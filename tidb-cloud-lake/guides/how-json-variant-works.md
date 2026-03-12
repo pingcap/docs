@@ -5,8 +5,8 @@ sidebar_label: "How Databend JSON Works"
 
 See also:
 
-- [Variant Data Type](/sql/sql-reference/data-types/variant)
-- [Semi-Structured Functions](/sql/sql-functions/semi-structured-functions)
+- [Variant Data Type](/tidb-cloud-lake/sql/variant.md)
+- [Semi-Structured Functions](/tidb-cloud-lake/guides/load-semi-structured-formats.md)
 
 Databend reimagines JSON analytics by pairing a native binary layout with automatic JSON indexing so semi-structured data behaves like first-class columns.
 
@@ -142,7 +142,7 @@ With indexing handled behind the scenes, you interact with Variant columns using
 
 ### Inspect Virtual Columns
 
-Use [`SHOW VIRTUAL COLUMNS`](/sql/sql-commands/ddl/virtual-column/show-virtual-columns) to list the automatically generated virtual columns for a table when you want to verify what JSON paths Databend has materialised.
+Use [`SHOW VIRTUAL COLUMNS`](/tidb-cloud-lake/sql/show-virtual-columns.md) to list the automatically generated virtual columns for a table when you want to verify what JSON paths Databend has materialised.
 
 ### Access Syntax
 

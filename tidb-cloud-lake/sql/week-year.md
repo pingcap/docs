@@ -23,8 +23,8 @@ TO_WEEK_OF_YEAR(<expr>)
 
 ## Aliases
 
-- [WEEK](week.md)
-- [WEEKOFYEAR](weekofyear.md)
+- [WEEK](/tidb-cloud-lake/sql/week.md)
+- [WEEKOFYEAR](/tidb-cloud-lake/sql/weekofyear.md)
 
 ## Return Type
 

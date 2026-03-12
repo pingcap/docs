@@ -15,7 +15,7 @@ NVL(<expr1>, <expr2>)
 
 ## Aliases
 
-- [IFNULL](ifnull.md)
+- [IFNULL](/tidb-cloud-lake/sql/ifnull.md)
 
 ## Examples
 

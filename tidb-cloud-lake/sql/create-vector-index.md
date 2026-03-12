@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>
 
-Creates a Vector index on a [VECTOR](/sql/sql-reference/data-types/vector) column for a table to enable efficient similarity search using the HNSW (Hierarchical Navigable Small World) algorithm.
+Creates a Vector index on a [VECTOR](/tidb-cloud-lake/sql/vector.md) column for a table to enable efficient similarity search using the HNSW (Hierarchical Navigable Small World) algorithm.
 
 ## Syntax
 
@@ -114,7 +114,7 @@ CREATE TABLE multimodal_data (
 
 ### Viewing Indexes
 
-Use [SHOW INDEXES](/sql/sql-commands/administration-cmds/show-indexes) to view all indexes:
+Use [SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md) to view all indexes:
 
 ```sql
 SHOW INDEXES;
@@ -169,7 +169,7 @@ Result:
 
 ### Choosing Distance Metrics
 
-Choose the appropriate distance metric based on your use case. See [Vector Functions](/sql/sql-functions/vector-functions) for querying with distance functions.
+Choose the appropriate distance metric based on your use case. See [Vector Functions](/tidb-cloud-lake/sql/vector-functions.md) for querying with distance functions.
 
 - **Cosine distance**: Best for text embeddings from models like BERT, GPT, where vector magnitude doesn't matter
 - **L2 (Euclidean) distance**: Best for image features, spatial data where absolute differences matter
@@ -191,7 +191,7 @@ Choose the appropriate distance metric based on your use case. See [Vector Funct
 
 ## Limitations
 
-- Vector indexes only support columns with [VECTOR](/sql/sql-reference/data-types/vector) data type
+- Vector indexes only support columns with [VECTOR](/tidb-cloud-lake/sql/vector.md) data type
 - The `distance` parameter is required; indexes without it will be ignored
 - Quantization may introduce negligible errors in distance calculations (typically < 0.01%)
 - Index size increases with higher `m` values (approximately `m * vector_dimension * 4 bytes` per vector)

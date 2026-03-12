@@ -85,4 +85,4 @@ This will show statistics for all tables (`t1` and `t2`) in the `test_db` databa
 
 ## Related Commands
 
-- [SHOW TABLE STATUS](show-table-status.md): Shows status information about tables
+- [SHOW TABLE STATUS](/tidb-cloud-lake/sql/show-table-status.md): Shows status information about tables

@@ -12,8 +12,8 @@ LENGTH(<expr>)
 
 ## Aliases
 
-- [CHAR_LENGTH](char-length.md)
-- [CHARACTER_LENGTH](character-length.md)
+- [CHAR_LENGTH](/tidb-cloud-lake/sql/char-length.md)
+- [CHARACTER_LENGTH](/tidb-cloud-lake/sql/character-length.md)
 - [LENGTH_UTF8](length-utf8.md)
 
 ## Return Type

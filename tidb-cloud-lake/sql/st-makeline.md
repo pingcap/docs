@@ -15,7 +15,7 @@ ST_MAKELINE(<geometry_or_geography1>, <geometry_or_geography2>)
 
 ## Aliases
 
-- [ST_MAKE_LINE](st-make-line.md)
+- [ST_MAKE_LINE](/tidb-cloud-lake/sql/st-make-line.md)
 
 ## Arguments
 

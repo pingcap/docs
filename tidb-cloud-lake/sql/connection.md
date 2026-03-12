@@ -12,15 +12,15 @@ Connection can be utilized for creating external stages, external tables, and at
 
 | Command | Description |
 |---------|-------------|
-| [CREATE CONNECTION](create-connection.md) | Creates a new connection to an external storage service |
-| [DROP CONNECTION](drop-connection.md) | Removes an existing connection |
+| [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) | Creates a new connection to an external storage service |
+| [DROP CONNECTION](/tidb-cloud-lake/sql/drop-connection.md) | Removes an existing connection |
 
 ## Connection Information
 
 | Command | Description |
 |---------|-------------|
-| [DESCRIBE CONNECTION](desc-connection.md) | Shows details of a specific connection |
-| [SHOW CONNECTIONS](show-connections.md) | Lists all connections in the current database |
+| [DESCRIBE CONNECTION](/tidb-cloud-lake/sql/desc-connection.md) | Shows details of a specific connection |
+| [SHOW CONNECTIONS](/tidb-cloud-lake/sql/show-connections.md) | Lists all connections in the current database |
 
 ### Usage Examples
 

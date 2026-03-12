@@ -12,7 +12,7 @@ LOWER(<str>)
 
 ## Aliases
 
-- [LCASE](lcase.md)
+- [LCASE](/tidb-cloud-lake/sql/lcase.md)
 
 ## Return Type
 

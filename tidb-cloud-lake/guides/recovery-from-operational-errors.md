@@ -52,7 +52,7 @@ If you've accidentally dropped a database, you can restore it using the `UNDROP 
 
 **Important**: A dropped database can only be restored within the retention period (default is 24 hours).
 
-For more details, see [UNDROP DATABASE](/sql/sql-commands/ddl/database/undrop-database) and [SHOW DROP DATABASES](/sql/sql-commands/ddl/database/show-drop-databases).
+For more details, see [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md) and [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md).
 
 ### Scenario: Accidentally Dropped Table
 
@@ -84,7 +84,7 @@ If you've accidentally dropped a table, you can restore it using the `UNDROP TAB
 
 **Important**: A dropped table can only be restored within the retention period (default is 24 hours).
 
-For more details, see [UNDROP TABLE](/sql/sql-commands/ddl/table/ddl-undrop-table) and [SHOW DROP TABLES](/sql/sql-commands/ddl/table/show-drop-tables).
+For more details, see [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) and [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md).
 
 ### Scenario: Incorrect Data Updates or Deletions
 
@@ -123,7 +123,7 @@ SELECT * FROM sales_data.orders LIMIT 3;
 
 **Important**: Flashback operations are only possible for existing tables and within the retention period.
 
-For more details, see [FLASHBACK TABLE](/sql/sql-commands/ddl/table/flashback-table).
+For more details, see [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md).
 
 ### Scenario: Schema Evolution Rollbacks
 If you've made unwanted changes to a table's structure, you can revert to the previous schema:
@@ -188,7 +188,7 @@ Output:
 ## Important Considerations and Limitations
 
 - **Time Constraints**: Recovery only works within the retention period (default: 24 hours).
-- **Name Conflicts**: Cannot undrop if an object with the same name exists — [rename database](/sql/sql-commands/ddl/database/ddl-alter-database) or [rename table](/sql/sql-commands/ddl/table/ddl-rename-table) first.
+- **Name Conflicts**: Cannot undrop if an object with the same name exists — [rename database](/sql/sql-commands/ddl/database/ddl-alter-database) or [rename table](/tidb-cloud-lake/sql/rename-table.md) first.
 - **Ownership**: Ownership isn't automatically restored—manually grant it after recovery.
 - **Transient Tables**: Flashback doesn't work for transient tables (no snapshots stored).
 

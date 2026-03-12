@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns the value from a previous row in the result set.
 
-See also: [LEAD](lead.md)
+See also: [LEAD](/tidb-cloud-lake/sql/lead.md)
 
 ## Syntax
 

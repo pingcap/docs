@@ -2,4 +2,4 @@
 title: POWER
 ---
 
-Alias for [POW](pow.md).
+Alias for [POW](/tidb-cloud-lake/sql/pow.md).

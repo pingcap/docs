@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Removes spaces, specific characters, or substrings from the start, end, or both sides of a string.
 
-See also: [TRIM_BOTH](trim-both.md)
+See also: [TRIM_BOTH](/tidb-cloud-lake/sql/trim-both.md)
 
 ## Syntax
 

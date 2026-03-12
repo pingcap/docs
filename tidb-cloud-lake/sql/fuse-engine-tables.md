@@ -48,7 +48,7 @@ Below are the main parameters for creating a Fuse Engine table:
 
 #### `CLUSTER BY`
 - **Description:**
-  Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/guides/performance/cluster-key).
+  Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key.md).
 
 ---
 

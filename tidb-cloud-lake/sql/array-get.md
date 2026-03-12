@@ -2,4 +2,4 @@
 title: ARRAY_GET
 ---
 
-Alias for [GET](get.md).
+Alias for [GET](/tidb-cloud-lake/sql/get.md).

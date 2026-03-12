@@ -12,7 +12,7 @@ Returns `true` if the string `<expr>` matches the regular expression specified b
 
 ## Aliases
 
-- [RLIKE](rlike.md)
+- [RLIKE](/tidb-cloud-lake/sql/rlike.md)
 
 ## Examples
 

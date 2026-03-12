@@ -3,7 +3,7 @@ title: Loading from Bucket
 sidebar_label: Bucket
 ---
 
-When data files are stored in an object storage bucket, such as Amazon S3, it is possible to load them directly into Databend using the [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table) command. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/sql/sql-reference/file-format-options).
+When data files are stored in an object storage bucket, such as Amazon S3, it is possible to load them directly into Databend using the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ![image](/img/load/load-data-from-s3.jpeg)
 
@@ -47,7 +47,7 @@ CREATE TABLE books
 
 ### Step 2. Copy Data into Table
 
-1. Load data into the target table with the [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table) command:
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
 ```sql
 COPY INTO books

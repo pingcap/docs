@@ -9,7 +9,7 @@ import EEFeature from '@site/src/components/EEFeature';
 <EEFeature featureName='VIRTUAL COLUMN'/>
 
 
-Virtual columns automatically accelerate queries on semi-structured data stored in [VARIANT](/sql/sql-reference/data-types/variant) columns. This feature provides **zero-configuration performance optimization** for JSON data access.
+Virtual columns automatically accelerate queries on semi-structured data stored in [VARIANT](/tidb-cloud-lake/sql/variant.md) columns. This feature provides **zero-configuration performance optimization** for JSON data access.
 
 ## What Problem Does It Solve?
 
@@ -147,8 +147,8 @@ SHOW VIRTUAL COLUMNS WHERE table='test';
 
 | Command | Purpose |
 |---------|---------|
-| [`SHOW VIRTUAL COLUMNS`](/sql/sql-commands/ddl/virtual-column/show-virtual-columns) | View automatically created virtual columns |
-| [`REFRESH VIRTUAL COLUMN`](/sql/sql-commands/ddl/virtual-column/refresh-virtual-column) | Manually refresh virtual columns |
+| [`SHOW VIRTUAL COLUMNS`](/tidb-cloud-lake/sql/show-virtual-columns.md) | View automatically created virtual columns |
+| [`REFRESH VIRTUAL COLUMN`](/tidb-cloud-lake/sql/refresh-virtual-column.md) | Manually refresh virtual columns |
 | [`FUSE_VIRTUAL_COLUMN`](/sql/sql-functions/system-functions/fuse_virtual_column) | View virtual column metadata |
 
 ## Performance Results

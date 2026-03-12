@@ -9,8 +9,8 @@ Removes all occurrences of any character present in the specified trim string fr
 
 See also: 
 
-- [TRIM_TRAILING](trim-trailing.md)
-- [LTRIM](ltrim.md)
+- [TRIM_TRAILING](/tidb-cloud-lake/sql/trim-trailing.md)
+- [LTRIM](/tidb-cloud-lake/sql/ltrim.md)
 
 ## Syntax
 

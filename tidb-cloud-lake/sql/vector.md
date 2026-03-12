@@ -43,7 +43,7 @@ Where:
 
 | Function | Description | Use Case |
 |----------|-------------|----------|
-| **[cosine_distance](/sql/sql-functions/vector-functions/vector-cosine-distance)** | Calculates cosine distance between vectors | Semantic similarity, text embeddings |
+| **[cosine_distance](/tidb-cloud-lake/sql/cosine-distance.md)** | Calculates cosine distance between vectors | Semantic similarity, text embeddings |
 | **[l1_distance](/sql/sql-functions/vector-functions/vector-l1-distance)** | Calculates L1 distance (Manhattan distance) | Feature comparison, sparse data |
 | **[l2_distance](/sql/sql-functions/vector-functions/vector-l2-distance)** | Calculates L2 distance (Euclidean distance) | Geometric similarity, image features |
 
@@ -141,4 +141,4 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 
 ## Vector Functions
 
-See [Vector Functions](/sql/sql-functions/vector-functions).
+See [Vector Functions](/tidb-cloud-lake/sql/vector-functions.md).

@@ -10,8 +10,8 @@ Returns the value at the specified position (N) within the window frame.
 
 See also:
 
-- [FIRST_VALUE](first-value.md)
-- [LAST_VALUE](last-value.md)
+- [FIRST_VALUE](/tidb-cloud-lake/sql/first-value.md)
+- [LAST_VALUE](/tidb-cloud-lake/sql/last-value.md)
 
 ## Syntax
 

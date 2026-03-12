@@ -29,7 +29,7 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 ```
 
 - For more TSV file format options, refer to [TSV File Format Options](/sql/sql-reference/file-format-options#tsv-options).
-- For more COPY INTO table options, refer to [COPY INTO table](/sql/sql-commands/dml/dml-copy-into-table).
+- For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Data from TSV Files
 

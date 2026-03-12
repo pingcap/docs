@@ -13,11 +13,11 @@ Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted 
 
 ### Implementing Fail-Safe
 
-Databend offers the [SYSTEM$FUSE_AMEND](/sql/sql-functions/table-functions/fuse-amend) table function to enable Fail-Safe recovery. This function lets you restore data from an S3-compatible storage bucket when bucket versioning is enabled.
+Databend offers the [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md) table function to enable Fail-Safe recovery. This function lets you restore data from an S3-compatible storage bucket when bucket versioning is enabled.
 
 ### Usage Example
 
-Below is a step-by-step example of using the [SYSTEM$FUSE_AMEND](/sql/sql-functions/table-functions/fuse-amend) function to recover a table's data from S3:
+Below is a step-by-step example of using the [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md) function to recover a table's data from S3:
 
 1. Enable versioning for the bucket `databend-doc`.
 

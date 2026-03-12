@@ -5,4 +5,4 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>
 
-Alias for [IF](if.md).
+Alias for [IF](/tidb-cloud-lake/sql/if.md).

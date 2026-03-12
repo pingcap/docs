@@ -86,5 +86,5 @@ FROM contracts;
 
 ## See Also
 
-- [DATE_ADD](date-add.md): Alternative function for adding specific time intervals
-- [DATE_SUB](date-sub.md): Function for subtracting time intervals
+- [DATE_ADD](/tidb-cloud-lake/sql/date-add.md): Alternative function for adding specific time intervals
+- [DATE_SUB](/tidb-cloud-lake/sql/date-sub.md): Function for subtracting time intervals

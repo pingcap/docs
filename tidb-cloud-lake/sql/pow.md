@@ -12,7 +12,7 @@ POW( <x, y> )
 
 ## Aliases
 
-- [POWER](power.md)
+- [POWER](/tidb-cloud-lake/sql/power.md)
 
 ## Examples
 

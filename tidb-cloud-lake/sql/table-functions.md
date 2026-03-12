@@ -16,8 +16,8 @@ This page provides reference information for the table functions in Databend. Ta
 | Function | Description | Example |
 |----------|-------------|--------|
 | [LIST_STAGE](./03-list-stage.md) | Lists files in a stage | `SELECT * FROM LIST_STAGE(LOCATION => '@mystage/data/')` |
-| [READ_FILE](./read-file.md) | Reads file content from a stage as binary | `SELECT read_file('@mystage/file.csv')` |
-| [RESULT_SCAN](./result-scan.md) | Retrieves the result set of a previous query | `SELECT * FROM RESULT_SCAN(LAST_QUERY_ID())` |
+| [READ_FILE](/tidb-cloud-lake/sql/read-file.md) | Reads file content from a stage as binary | `SELECT read_file('@mystage/file.csv')` |
+| [RESULT_SCAN](/tidb-cloud-lake/sql/result-scan.md) | Retrieves the result set of a previous query | `SELECT * FROM RESULT_SCAN(LAST_QUERY_ID())` |
 
 ## Data Generation
 
@@ -29,31 +29,31 @@ This page provides reference information for the table functions in Databend. Ta
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [FLATTEN](./flatten.md) | Transforms nested JSON or array data into tabular format | `SELECT * FROM FLATTEN(INPUT => parse_json('[1,2,3]'))` |
+| [FLATTEN](/tidb-cloud-lake/sql/flatten.md) | Transforms nested JSON or array data into tabular format | `SELECT * FROM FLATTEN(INPUT => parse_json('[1,2,3]'))` |
 
 ## System Information & Management
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [SHOW_GRANTS](./show-grants.md) | Shows granted privileges | `SELECT * FROM SHOW_GRANTS()` |
-| [SHOW_VARIABLES](./show-variables.md) | Shows system variables | `SELECT * FROM SHOW_VARIABLES()` |
-| [STREAM_STATUS](./stream-status.md) | Shows stream status information | `SELECT * FROM STREAM_STATUS('mystream')` |
+| [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants.md) | Shows granted privileges | `SELECT * FROM SHOW_GRANTS()` |
+| [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md) | Shows system variables | `SELECT * FROM SHOW_VARIABLES()` |
+| [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) | Shows stream status information | `SELECT * FROM STREAM_STATUS('mystream')` |
 | [TASK_HISTROY](./task_histroy.md) | Shows task execution history | `SELECT * FROM TASK_HISTROY('mytask')` |
-| [POLICY_REFERENCES](./policy-references.md) | Returns associations between security policies and tables/views | `SELECT * FROM POLICY_REFERENCES(POLICY_NAME => 'mypolicy')` |
+| [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md) | Returns associations between security policies and tables/views | `SELECT * FROM POLICY_REFERENCES(POLICY_NAME => 'mypolicy')` |
 
 ## Storage Engine Functions
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [FUSE_VACUUM_TEMPORARY_TABLE](./fuse-vacuum-temporary-table.md) | Cleans up temporary tables | `SELECT * FROM FUSE_VACUUM_TEMPORARY_TABLE()` |
+| [FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md) | Cleans up temporary tables | `SELECT * FROM FUSE_VACUUM_TEMPORARY_TABLE()` |
 | [FUSE_AMEND](./fuse-amend.md) | Manages data amendments | `SELECT * FROM FUSE_AMEND()` |
 
 ## Iceberg Integration
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [ICEBERG_MANIFEST](./iceberg-manifest.md) | Shows Iceberg table manifest information | `SELECT * FROM ICEBERG_MANIFEST('mytable')` |
-| [ICEBERG_SNAPSHOT](./iceberg-snapshot.md) | Shows Iceberg table snapshot information | `SELECT * FROM ICEBERG_SNAPSHOT('mytable')` |
+| [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md) | Shows Iceberg table manifest information | `SELECT * FROM ICEBERG_MANIFEST('mytable')` |
+| [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md) | Shows Iceberg table snapshot information | `SELECT * FROM ICEBERG_SNAPSHOT('mytable')` |
 
 ## Anonymization
 

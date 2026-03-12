@@ -18,7 +18,7 @@ TO_MONTH(<expr>)
 
 ## Aliases
 
-- [MONTH](month.md)
+- [MONTH](/tidb-cloud-lake/sql/month.md)
 
 ## Return Type
 

@@ -9,8 +9,8 @@ Removes all occurrences of any character present in the specified trim string fr
 
 See also: 
 
-- [TRIM_LEADING](trim-leading.md)
-- [RTRIM](rtrim.md)
+- [TRIM_LEADING](/tidb-cloud-lake/sql/trim-leading.md)
+- [RTRIM](/tidb-cloud-lake/sql/rtrim.md)
 
 ## Syntax
 

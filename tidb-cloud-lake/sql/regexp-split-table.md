@@ -82,5 +82,5 @@ FROM data;
 
 ## See Also
 
-- [SPLIT](split.md): For simple string splitting
-- [REGEXP_SPLIT_TO_ARRAY](regexp-split-array.md): split string to array
+- [SPLIT](/tidb-cloud-lake/sql/split.md): For simple string splitting
+- [REGEXP_SPLIT_TO_ARRAY](/tidb-cloud-lake/sql/regexp-split-array.md): split string to array

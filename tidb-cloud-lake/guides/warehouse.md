@@ -101,9 +101,9 @@ To assign a role to a warehouse, select the desired role in the **Advanced Optio
 
 ![alt text](@site/static/img/documents/warehouses/warehouse-role.png)
 
-- The two [Built-in Roles](../../56-security/access-control/02-roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/sql/sql-commands/ddl/user/user-create-role) command. For more information about Databend roles, see [Roles](../../56-security/access-control/02-roles.md).
+- The two [Built-in Roles](../../56-security/access-control/02-roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about Databend roles, see [Roles](../../56-security/access-control/02-roles.md).
 - Warehouses without an assigned role default to the `public` role, allowing access to all users.
-- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/sql/sql-commands/ddl/user/grant) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](organization.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
+- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](organization.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
 
   ```sql title='Examples:'
   GRANT ROLE manager to 'name@example.com';
@@ -149,7 +149,7 @@ Databend Cloud supports multiple connection methods to meet your specific needs.
 
 | Client                                     | Type            | Best For                      | Key Features                                          |
 | ------------------------------------------ | --------------- | ----------------------------- | ----------------------------------------------------- |
-| **[BendSQL](/guides/connect/sql-clients/bendsql)** | Command Line    | Developers, Scripts           | Native CLI, Rich formatting, Multiple install options |
+| **[BendSQL](/tidb-cloud-lake/guides/bendsql.md)** | Command Line    | Developers, Scripts           | Native CLI, Rich formatting, Multiple install options |
 | **[DBeaver](/guides/connect/sql-clients/jdbc)**    | GUI Application | Data Analysis, Visual Queries | Built-in driver, Cross-platform, Query builder        |
 
 #### Developer Drivers
@@ -202,7 +202,7 @@ CREATE USER warehouse_user1 IDENTIFIED BY 'StrongPassword123' WITH DEFAULT_ROLE 
 GRANT ROLE warehouse_user1_role TO warehouse_user1;
 ```
 
-For more details, see [CREATE USER](/sql/sql-commands/ddl/user/user-create-user) and [GRANT](/sql/sql-commands/ddl/user/grant) documentation.
+For more details, see [CREATE USER](/tidb-cloud-lake/sql/create-user.md) and [GRANT](/tidb-cloud-lake/sql/grant.md) documentation.
 
 ### Connection Security
 

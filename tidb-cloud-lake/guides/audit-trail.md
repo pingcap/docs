@@ -6,7 +6,7 @@ import EEFeature from '@site/src/components/EEFeature';
 
 <EEFeature featureName='AUDIT TRAIL'/>
 
-Databend system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring. 
+Databend system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
 
 Allows the auditing of the user:
 - **Query execution** - Complete SQL execution audit trail (`query_history`)
@@ -19,9 +19,9 @@ Databend provides five system history tables that capture different aspects of d
 
 | Table | Purpose | Key Use Cases |
 |-------|---------|---------------|
-| [query_history](/sql/sql-reference/system-history-tables/query-history) | Complete SQL execution audit trail | Performance monitoring, security auditing, compliance reporting |
-| [access_history](/sql/sql-reference/system-history-tables/access-history) | Database object access and modifications | Data lineage tracking, compliance auditing, change management |
-| [login_history](/sql/sql-reference/system-history-tables/login-history) | Authentication attempts and sessions | Security monitoring, failed login detection, access pattern analysis |
+| [query_history](/tidb-cloud-lake/sql/system-history-query-history.md) | Complete SQL execution audit trail | Performance monitoring, security auditing, compliance reporting |
+| [access_history](/tidb-cloud-lake/sql/system-history-access-history.md) | Database object access and modifications | Data lineage tracking, compliance auditing, change management |
+| [login_history](/tidb-cloud-lake/sql/system-history-login-history.md) | Authentication attempts and sessions | Security monitoring, failed login detection, access pattern analysis |
 
 ## Audit Use Cases & Examples
 
@@ -105,4 +105,4 @@ query_duration_ms: 94
 client_address: 127.0.0.1
 ```
 
-For detailed information about each audit table and their specific fields, see the [System History Tables](/sql/sql-reference/system-history-tables) reference documentation.
+For detailed information about each audit table and their specific fields, see the [System History Tables](/tidb-cloud-lake/sql/system-history-tables.md) reference documentation.

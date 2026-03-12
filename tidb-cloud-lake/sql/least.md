@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns the minimum value from a set of values. If any value in the set is `NULL`, the function returns `NULL`.
 
-See also: [LEAST_IGNORE_NULLS](least-ignore-nulls.md)
+See also: [LEAST_IGNORE_NULLS](/tidb-cloud-lake/sql/least-ignore-nulls.md)
 
 ## Syntax
 

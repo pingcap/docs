@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Calculates the relative rank of each row as a percentage. Returns values between 0 and 1, where 0 represents the lowest rank and 1 represents the highest rank.
 
-See also: [CUME_DIST](cume-dist.md)
+See also: [CUME_DIST](/tidb-cloud-lake/sql/cume-dist.md)
 
 ## Syntax
 

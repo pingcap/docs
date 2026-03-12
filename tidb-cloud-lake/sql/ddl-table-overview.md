@@ -26,12 +26,12 @@ This page provides a comprehensive overview of table operations in Databend, org
 
 | Command | Description |
 |---------|-------------|
-| [DESCRIBE TABLE](50-describe-table.md) / [SHOW FIELDS](show-fields.md) | Shows information about the columns in a given table |
+| [DESCRIBE TABLE](50-describe-table.md) / [SHOW FIELDS](/tidb-cloud-lake/sql/show-fields.md) | Shows information about the columns in a given table |
 | [SHOW FULL COLUMNS](show-full-columns.md) | Retrieves comprehensive details about the columns in a given table |
-| [SHOW CREATE TABLE](show-create-table.md) | Shows the CREATE TABLE statement that creates the named table |
-| [SHOW TABLES](show-tables.md) | Lists the tables in the current or a specified database |
-| [SHOW TABLE STATUS](show-table-status.md) | Shows the status of the tables in a database |
-| [SHOW DROP TABLES](show-drop-tables.md) | Lists the dropped tables in the current or a specified database |
+| [SHOW CREATE TABLE](/tidb-cloud-lake/sql/show-create-table.md) | Shows the CREATE TABLE statement that creates the named table |
+| [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md) | Lists the tables in the current or a specified database |
+| [SHOW TABLE STATUS](/tidb-cloud-lake/sql/show-table-status.md) | Shows the status of the tables in a database |
+| [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md) | Lists the dropped tables in the current or a specified database |
 
 ## Table Deletion & Recovery
 

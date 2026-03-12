@@ -3,7 +3,7 @@ title: Loading from Stage
 sidebar_label: Stage
 ---
 
-Databend enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [BendSQL](../../35-connect/00-sql-clients/bendsql.md), and then employ the [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table) command to load the data from the staged file. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/sql/sql-reference/file-format-options).
+Databend enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [BendSQL](../../35-connect/00-sql-clients/bendsql.md), and then employ the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command to load the data from the staged file. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/sql/sql-reference/file-format-options).
 
 ![image](/img/load/load-data-from-stage.jpeg)
 
@@ -63,7 +63,7 @@ books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-27 16:03:51.000 +0
 
 ### Step 2. Copy Data into Table
 
-1. Load data into the target table with the [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table) command:
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
 ```sql
 COPY INTO books FROM @~ files=('books.parquet') FILE_FORMAT = (TYPE = PARQUET);
@@ -87,7 +87,7 @@ Follow this tutorial to upload the sample file to an internal stage and load dat
 
 ### Step 1. Create an Internal Stage
 
-1. Create an internal stage with the [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) command:
+1. Create an internal stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
 
 ```sql
 CREATE STAGE my_internal_stage;
@@ -131,7 +131,7 @@ books.parquet                      |   998|"88432bf90aadb79073682988b39d461c"|20
 
 ### Step 3. Copy Data into Table
 
-1. Load data into the target table with the [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table) command:
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
 ```sql
 COPY INTO books 
@@ -159,7 +159,7 @@ Follow this tutorial to upload the sample file to an external stage and load dat
 
 ### Step 1. Create an External Stage
 
-1. Create an external stage with the [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) command:
+1. Create an external stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
 
 ```sql
 CREATE STAGE my_external_stage
@@ -208,7 +208,7 @@ books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-28 04:13:15.178 +0
 
 ### Step 3. Copy Data into Table
 
-1. Load data into the target table with the [COPY INTO](/sql/sql-commands/dml/dml-copy-into-table) command:
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
 ```sql
 COPY INTO books

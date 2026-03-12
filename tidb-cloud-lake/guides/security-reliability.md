@@ -6,10 +6,10 @@ Databend offers **enterprise-grade security and reliability features** that safe
 
 | Security Feature | Purpose | When to Use |
 |-----------------|---------|------------|
-| [**Access Control**](/guides/security/access-control) | Manage user permissions | When you need to control data access with role-based security and object ownership |
-| [**Audit Trail**](audit-trail.md) | Track database activities | When you need comprehensive audit trails for security monitoring, compliance, and performance analysis |
-| [**Network Policy**](/guides/security/network-policy) | Restrict network access | When you want to limit connections to specific IP ranges even with valid credentials |
-| [**Password Policy**](/guides/security/password-policy) | Set password requirements | When you need to enforce password complexity, rotation, and account lockout rules |
-| [**Masking Policy**](/guides/security/masking-policy) | Hide sensitive data | When you need to protect confidential data while still allowing authorized access |
-| [**Fail-Safe**](/guides/security/fail-safe) | Prevent data loss | When you need to recover accidentally deleted data from S3-compatible storage |
-| [**Recovery from Errors**](/guides/security/recovery-from-operational-errors) | Fix operational mistakes | When you need to recover from dropped databases/tables or incorrect data modifications |
+| [**Access Control**](/tidb-cloud-lake/guides/access-control.md) | Manage user permissions | When you need to control data access with role-based security and object ownership |
+| [**Audit Trail**](/tidb-cloud-lake/guides/audit-trail.md) | Track database activities | When you need comprehensive audit trails for security monitoring, compliance, and performance analysis |
+| [**Network Policy**](/tidb-cloud-lake/guides/network-policy.md) | Restrict network access | When you want to limit connections to specific IP ranges even with valid credentials |
+| [**Password Policy**](/tidb-cloud-lake/guides/password-policy.md) | Set password requirements | When you need to enforce password complexity, rotation, and account lockout rules |
+| [**Masking Policy**](/tidb-cloud-lake/guides/masking-policy.md) | Hide sensitive data | When you need to protect confidential data while still allowing authorized access |
+| [**Fail-Safe**](/tidb-cloud-lake/guides/fail-safe.md) | Prevent data loss | When you need to recover accidentally deleted data from S3-compatible storage |
+| [**Recovery from Errors**](/tidb-cloud-lake/guides/recovery-from-operational-errors.md) | Fix operational mistakes | When you need to recover from dropped databases/tables or incorrect data modifications |

@@ -2,4 +2,4 @@
 title: CURRENT_TIMESTAMP
 ---
 
-Alias for [NOW](now.md).
+Alias for [NOW](/tidb-cloud-lake/sql/now.md).

@@ -79,7 +79,7 @@ Every column except the timestamp and line column becomes a LogQL label.
 
 ![Get Connection Info](/img/connect/grafana-get-connect-info.png)
 
-For detailed information on obtaining connection details, see [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting).
+For detailed information on obtaining connection details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ### Step 3. Configure Grafana Data Source
 
@@ -134,9 +134,7 @@ For advanced use cases requiring direct SQL access or when working with self-hos
 Before you start, ensure you have:
 
 - Grafana installed. Refer to the official installation guide: [https://grafana.com/docs/grafana/latest/setup-grafana/installation](https://grafana.com/docs/grafana/latest/setup-grafana/installation)
-- Either:
-  - A local Databend instance (follow the [Deployment Guide](/guides/self-hosted) to deploy)
-  - Or Databend Cloud access with connection information for a warehouse (see [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting))
+- Databend Cloud access with connection information for a warehouse (see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting))
 
 ### Step 2. Modify Grafana Configuration
 

@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Retrieves the designated portion of a date, timestamp, or interval.
 
-See also: [DATE_PART](date-part.md)
+See also: [DATE_PART](/tidb-cloud-lake/sql/date-part.md)
 
 ## Syntax
 

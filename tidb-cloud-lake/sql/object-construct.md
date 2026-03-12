@@ -18,7 +18,7 @@ Creates a JSON object with keys and values.
 - `JSON_OBJECT`
 - `TRY_JSON_OBJECT`
 
-See also: [OBJECT_CONSTRUCT_KEEP_NULL](object-construct-keep-null.md)
+See also: [OBJECT_CONSTRUCT_KEEP_NULL](/tidb-cloud-lake/sql/object-construct-keep-null.md)
 
 ## Syntax
 

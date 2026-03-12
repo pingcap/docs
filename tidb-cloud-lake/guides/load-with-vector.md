@@ -16,7 +16,7 @@ To integrate Databend with Vector, start by creating an SQL account in Databend 
 
 ### Step 1: Creating an SQL User in Databend
 
-For instructions on how to create a SQL user in Databend and grant appropriate privileges, see [Create User](/sql/sql-commands/ddl/user/user-create-user). Here's an example of creating a user named *user1* with the password *abc123*:
+For instructions on how to create a SQL user in Databend and grant appropriate privileges, see [Create User](/tidb-cloud-lake/sql/create-user.md). Here's an example of creating a user named *user1* with the password *abc123*:
 
 ```sql
 CREATE ROLE vector_role;

@@ -144,11 +144,11 @@ Omit `TOKEN` for public repositories; include it for private or rate-limited ass
 | CREATE CONNECTION | Global      | Creates a connection. |
 
 
-To create a connection, the user performing the operation or the [current_role](/guides/security/access-control/roles) must have the CREATE CONNECTION [privilege](/guides/security/access-control/privileges).
+To create a connection, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE CONNECTION [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 ## Update Table Connections
 
-To switch an existing table to a new connection, use [`ALTER TABLE ... CONNECTION`](/sql/sql-commands/ddl/table/alter-table#external-table-connection). This command rebinds external tables to a different connection without recreating the table.
+To switch an existing table to a new connection, use [`ALTER TABLE ... CONNECTION`](/tidb-cloud-lake/sql/alter-table.md#external-table-connection). This command rebinds external tables to a different connection without recreating the table.
 
 ## Examples
 

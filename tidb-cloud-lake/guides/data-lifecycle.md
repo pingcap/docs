@@ -32,10 +32,10 @@ Arrange your data in databases and tables.
 
 Key Commands:
 
-- [`CREATE DATABASE`](/sql/sql-commands/ddl/database/ddl-create-database): To create a new database.
-- [`ALTER DATABASE`](/sql/sql-commands/ddl/database/ddl-alter-database): To modify an existing database.
-- [`CREATE TABLE`](/sql/sql-commands/ddl/table/ddl-create-table): To create a new table.
-- [`ALTER TABLE`](/sql/sql-commands/ddl/table/alter-table): To modify an existing table.
+- [`CREATE DATABASE`](/tidb-cloud-lake/sql/create-database.md): To create a new database.
+- [`ALTER DATABASE`](/tidb-cloud-lake/sql/rename-database.md): To modify an existing database.
+- [`CREATE TABLE`](/tidb-cloud-lake/sql/create-table.md): To create a new table.
+- [`ALTER TABLE`](/tidb-cloud-lake/sql/alter-table.md): To modify an existing table.
 
 ## Storing Data
 
@@ -43,8 +43,8 @@ Directly add data to your tables. Databend also allows importing data from exter
 
 Key Commands:
 
-- [`INSERT`](/sql/sql-commands/dml/dml-insert): To add data to a table.
-- [`COPY INTO <table>`](/sql/sql-commands/dml/dml-copy-into-table): To bring in data from an external file.
+- [`INSERT`](/tidb-cloud-lake/sql/insert.md): To add data to a table.
+- [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md): To bring in data from an external file.
 
 ## Querying Data
 
@@ -52,7 +52,7 @@ After your data is in the tables, use `SELECT` to look at and analyze it.
 
 Key Command:
 
-- [`SELECT`](/sql/sql-commands/query-syntax/query-select): To get data from a table.
+- [`SELECT`](/tidb-cloud-lake/sql/select.md): To get data from a table.
 
 ## Working with Data
 
@@ -60,10 +60,10 @@ Once your data is in Databend, you can update, replace, merge, or delete it as n
 
 Key Commands:
 
-- [`UPDATE`](/sql/sql-commands/dml/dml-update): To change data in a table.
-- [`REPLACE`](/sql/sql-commands/dml/dml-replace): To replace existing data.
-- [`MERGE`](/sql/sql-commands/dml/dml-merge): To seamlessly insert, update, and delete by comparing data between main and source tables or subqueries.
-- [`DELETE`](/sql/sql-commands/dml/dml-delete-from): To remove data from a table.
+- [`UPDATE`](/tidb-cloud-lake/sql/update.md): To change data in a table.
+- [`REPLACE`](/tidb-cloud-lake/sql/replace.md): To replace existing data.
+- [`MERGE`](/tidb-cloud-lake/sql/merge.md): To seamlessly insert, update, and delete by comparing data between main and source tables or subqueries.
+- [`DELETE`](/tidb-cloud-lake/sql/delete.md): To remove data from a table.
 
 ## Removing Data
 
@@ -71,6 +71,6 @@ Databend allows you to delete specific data or entire tables and databases.
 
 Key Commands:
 
-- [`TRUNCATE TABLE`](/sql/sql-commands/ddl/table/ddl-truncate-table): To clear a table without deleting its structure.
-- [`DROP TABLE`](/sql/sql-commands/ddl/table/ddl-drop-table): To remove a table.
-- [`DROP DATABASE`](/sql/sql-commands/ddl/database/ddl-drop-database): To delete a database.
+- [`TRUNCATE TABLE`](/tidb-cloud-lake/sql/truncate-table.md): To clear a table without deleting its structure.
+- [`DROP TABLE`](/tidb-cloud-lake/sql/drop-table.md): To remove a table.
+- [`DROP DATABASE`](/tidb-cloud-lake/sql/drop-database.md): To delete a database.

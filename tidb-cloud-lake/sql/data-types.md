@@ -12,42 +12,42 @@ Databend stores data in strongly typed columns. This page summarizes the support
 
 | Data Type                                   | Alias      | Storage / Resolution              | Min Value                | Max Value                      |
 |--------------------------------------------|------------|-----------------------------------|--------------------------|--------------------------------|
-| [BOOLEAN](boolean.md)                      | BOOL       | 1 byte                            | –                        | –                              |
-| [BINARY](binary.md)                        | VARBINARY  | variable                          | –                        | –                              |
-| [VARCHAR](string.md)                       | STRING     | variable                          | –                        | –                              |
-| [TINYINT](numeric.md#integer-data-types)   | INT8       | 1 byte                            | -128                     | 127                            |
-| [SMALLINT](numeric.md#integer-data-types)  | INT16      | 2 bytes                           | -32768                   | 32767                          |
-| [INT](numeric.md#integer-data-types)       | INT32      | 4 bytes                           | -2147483648              | 2147483647                     |
-| [BIGINT](numeric.md#integer-data-types)    | INT64      | 8 bytes                           | -9223372036854775808     | 9223372036854775807            |
-| [FLOAT](numeric.md#floating-point-data-types) | –        | 4 bytes (Float32)                | -3.40e38                 | 3.40e38                        |
-| [DOUBLE](numeric.md#floating-point-data-types) | –       | 8 bytes (Float64)                | -1.79e308                | 1.79e308                       |
-| [DECIMAL](decimal.md)                      | –          | 16/32 bytes (precision ≤38/76)    | `-(10^P-1)/10^S`         | `(10^P-1)/10^S`                |
+| [BOOLEAN](/tidb-cloud-lake/sql/boolean.md)                      | BOOL       | 1 byte                            | –                        | –                              |
+| [BINARY](/tidb-cloud-lake/sql/binary.md)                        | VARBINARY  | variable                          | –                        | –                              |
+| [VARCHAR](/tidb-cloud-lake/sql/string.md)                       | STRING     | variable                          | –                        | –                              |
+| [TINYINT](/tidb-cloud-lake/sql/numeric.md#integer-data-types)   | INT8       | 1 byte                            | -128                     | 127                            |
+| [SMALLINT](/tidb-cloud-lake/sql/numeric.md#integer-data-types)  | INT16      | 2 bytes                           | -32768                   | 32767                          |
+| [INT](/tidb-cloud-lake/sql/numeric.md#integer-data-types)       | INT32      | 4 bytes                           | -2147483648              | 2147483647                     |
+| [BIGINT](/tidb-cloud-lake/sql/numeric.md#integer-data-types)    | INT64      | 8 bytes                           | -9223372036854775808     | 9223372036854775807            |
+| [FLOAT](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) | –        | 4 bytes (Float32)                | -3.40e38                 | 3.40e38                        |
+| [DOUBLE](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) | –       | 8 bytes (Float64)                | -1.79e308                | 1.79e308                       |
+| [DECIMAL](/tidb-cloud-lake/sql/decimal.md)                      | –          | 16/32 bytes (precision ≤38/76)    | `-(10^P-1)/10^S`         | `(10^P-1)/10^S`                |
 
 ## Date & Time Types
 
 | Data Type                 | Alias     | Resolution / Notes                   |
 |---------------------------|-----------|--------------------------------------|
-| [DATE](datetime.md)       | –         | Day precision                        |
-| [TIMESTAMP](datetime.md)  | DATETIME  | Microsecond, session timezone output |
-| [TIMESTAMP_TZ](datetime.md) | –       | Microsecond + stored offset          |
-| [INTERVAL](interval.md)   | –         | Microseconds, supports negative span |
+| [DATE](/tidb-cloud-lake/sql/datetime.md)       | –         | Day precision                        |
+| [TIMESTAMP](/tidb-cloud-lake/sql/datetime.md)  | DATETIME  | Microsecond, session timezone output |
+| [TIMESTAMP_TZ](/tidb-cloud-lake/sql/datetime.md) | –       | Microsecond + stored offset          |
+| [INTERVAL](/tidb-cloud-lake/sql/interval.md)   | –         | Microseconds, supports negative span |
 
 ## Structured & Semi-Structured Types
 
 | Data Type             | Sample                                | Description |
 |-----------------------|----------------------------------------|-------------|
-| [ARRAY](array.md)     | `[1, 2, 3]`                            | Ordered list of values with the same inner type. |
-| [TUPLE](tuple.md)     | `('2023-02-14','Valentine's Day')`     | Fixed-length ordered list with declared element types. |
-| [MAP](map.md)         | `{'a': 1, 'b': 2}`                     | Key-value collection (internally tuples of key and value types). |
-| [VARIANT](variant.md) | `[1, {"name":"databend"}]`             | JSON-like container that can mix primitives, arrays, and objects. |
-| [BITMAP](bitmap.md)   | `<bitmap binary>`                      | Compressed bitmap optimized for membership and set operations. |
+| [ARRAY](/tidb-cloud-lake/sql/array.md)     | `[1, 2, 3]`                            | Ordered list of values with the same inner type. |
+| [TUPLE](/tidb-cloud-lake/sql/tuple.md)     | `('2023-02-14','Valentine's Day')`     | Fixed-length ordered list with declared element types. |
+| [MAP](/tidb-cloud-lake/sql/map.md)         | `{'a': 1, 'b': 2}`                     | Key-value collection (internally tuples of key and value types). |
+| [VARIANT](/tidb-cloud-lake/sql/variant.md) | `[1, {"name":"databend"}]`             | JSON-like container that can mix primitives, arrays, and objects. |
+| [BITMAP](/tidb-cloud-lake/sql/bitmap.md)   | `<bitmap binary>`                      | Compressed bitmap optimized for membership and set operations. |
 
 ## Domain-Specific Types
 
 | Data Type                           | Description |
 |------------------------------------|-------------|
-| [VECTOR](vector.md)                | Float32 embeddings for similarity search / ML workloads. |
-| [GEOMETRY](geospatial.md) / GEOGRAPHY | Spatial objects stored in WKB/EWKB format. |
+| [VECTOR](/tidb-cloud-lake/sql/vector.md)                | Float32 embeddings for similarity search / ML workloads. |
+| [GEOMETRY](/tidb-cloud-lake/sql/geospatial.md) / GEOGRAPHY | Spatial objects stored in WKB/EWKB format. |
 
 ## Casting and Conversion
 

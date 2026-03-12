@@ -12,9 +12,9 @@ MINUS( <x> )
 
 ## Aliases
 
-- [NEG](neg.md)
-- [NEGATE](negate.md)
-- [SUBTRACT](subtract.md)
+- [NEG](/tidb-cloud-lake/sql/neg.md)
+- [NEGATE](/tidb-cloud-lake/sql/negate.md)
+- [SUBTRACT](/tidb-cloud-lake/sql/subtract.md)
 
 ## Examples
 

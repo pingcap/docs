@@ -15,7 +15,7 @@ ST_MAKEGEOMPOINT(<longitude>, <latitude>)
 
 ## Aliases
 
-- [ST_GEOM_POINT](st-geom-point.md)
+- [ST_GEOM_POINT](/tidb-cloud-lake/sql/st-geom-point.md)
 
 ## Arguments
 

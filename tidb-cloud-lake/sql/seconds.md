@@ -17,7 +17,7 @@ TO_SECONDS(<seconds>)
 
 ## Aliases
 
-- [EPOCH](epoch.md)
+- [EPOCH](/tidb-cloud-lake/sql/epoch.md)
 
 ## Return Type
 

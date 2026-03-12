@@ -2,4 +2,4 @@
 title: NEG
 ---
 
-Alias for [MINUS](minus.md).
+Alias for [MINUS](/tidb-cloud-lake/sql/minus.md).

@@ -75,8 +75,3 @@ FROM articles
 ORDER BY similarity ASC
 LIMIT 5;
 ```
-
-## Learn More
-
-- **[External Functions Guide](/guides/ai-functions/external-functions)** - Complete setup and deployment instructions
-- **[Databend Cloud](https://databend.com)** - Try external functions with a free account

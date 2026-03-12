@@ -33,11 +33,11 @@
     - [BendSQL](/tidb-cloud-lake/guides/bendsql.md)
     - [DBeaver](/tidb-cloud-lake/guides/dbeaver.md)
   - Drivers
-    - [Golang](/tidb-cloud-lake/guides/connect-to-databend-using-golang.md)
-    - [Java](/tidb-cloud-lake/guides/connect-to-databend-using-java.md)
-    - [Node.js](/tidb-cloud-lake/guides/connect-to-databend-using-node-js.md)
-    - [Python](/tidb-cloud-lake/guides/connect-to-databend-using-python.md)
-    - [Rust](/tidb-cloud-lake/guides/connect-to-databend-using-rust.md)
+    - [Golang](/tidb-cloud-lake/guides/connect-using-golang.md)
+    - [Java](/tidb-cloud-lake/guides/connect-using-java.md)
+    - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)
+    - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
+    - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
   - Visualization
     - [Grafana](/tidb-cloud-lake/guides/grafana.md)
     - [Tableau](/tidb-cloud-lake/guides/tableau.md)
@@ -115,7 +115,8 @@
   - [Query Result Cache](/tidb-cloud-lake/guides/query-result-cache.md)
 - Security & Reliability
   - [Overview](/tidb-cloud-lake/guides/security-reliability.md)
-  - [Access Control](/tidb-cloud-lake/guides/access-control.md)
+  - Access Control
+    - [Overview](/tidb-cloud-lake/guides/access-control.md)
     - [Privileges](/tidb-cloud-lake/guides/privileges.md)
     - [Roles](/tidb-cloud-lake/guides/roles.md)
     - [Ownership](/tidb-cloud-lake/guides/ownership.md)

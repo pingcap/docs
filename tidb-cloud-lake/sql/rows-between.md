@@ -310,6 +310,6 @@ This is normal behavior - the window frame adapts to available rows at partition
 ## See Also
 
 - [Window Functions Overview](index.md)
-- [RANGE BETWEEN](range-between.md) - Value-based window frames
+- [RANGE BETWEEN](/tidb-cloud-lake/sql/range-between.md) - Value-based window frames
 - [Aggregate Functions](../07-aggregate-functions/index.md) - Functions that can use window frames
-- [FIRST_VALUE](first-value.md) - Window function examples with frames
+- [FIRST_VALUE](/tidb-cloud-lake/sql/first-value.md) - Window function examples with frames

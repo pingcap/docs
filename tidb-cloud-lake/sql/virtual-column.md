@@ -11,9 +11,9 @@ This page provides a comprehensive overview of virtual column operations in Data
 
 | Command | Description |
 |---------|-------------|
-| [REFRESH VIRTUAL COLUMN](refresh-virtual-column.md) | Updates virtual columns with the latest data |
-| [SHOW VIRTUAL COLUMNS](show-virtual-columns.md) | Lists all virtual columns in a table |
+| [REFRESH VIRTUAL COLUMN](/tidb-cloud-lake/sql/refresh-virtual-column.md) | Updates virtual columns with the latest data |
+| [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md) | Lists all virtual columns in a table |
 
 ## Related Topics
 
-- [Virtual Column Performance](/guides/performance/virtual-column)
+- [Virtual Column Performance](/tidb-cloud-lake/guides/virtual-column.md)

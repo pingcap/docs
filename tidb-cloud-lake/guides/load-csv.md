@@ -31,8 +31,8 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 ) ]
 ```
 
-- For more CSV file format options, refer to [CSV File Format Options](/sql/sql-reference/file-format-options#csv-options).
-- For more COPY INTO table options, refer to [COPY INTO table](/sql/sql-commands/dml/dml-copy-into-table).
+- For more CSV file format options, refer to [CSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options).
+- For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Data from CSV Files
 
@@ -115,7 +115,7 @@ Result:
 
 ### Step 4 (Option). Using SELECT to Copy Data
 
-For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from CSV`](../04-transform/01-querying-csv.md).
+For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from CSV`](/tidb-cloud-lake/guides/query-csv-files-in-stage.md).
 
 ```sql
 COPY INTO books (title, author)

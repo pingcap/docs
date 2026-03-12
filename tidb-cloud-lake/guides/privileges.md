@@ -12,9 +12,9 @@ In Databend, privileges are granted to roles. Users receive privileges through t
 
 To manage privileges for a role, use the following commands:
 
-- [GRANT](/sql/sql-commands/ddl/user/grant)
-- [REVOKE](/sql/sql-commands/ddl/user/revoke)
-- [SHOW GRANTS](/sql/sql-commands/ddl/user/show-grants)
+- [GRANT](/tidb-cloud-lake/sql/grant.md)
+- [REVOKE](/tidb-cloud-lake/sql/revoke.md)
+- [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)
 
 ### Granting Privileges to Roles
 
@@ -154,7 +154,7 @@ Databend offers a range of privileges that allow you to exercise fine-grained co
 
 ### Database Privileges
 
-Please note that you can use the [USE DATABASE](/sql/sql-commands/ddl/database/ddl-use-database) command to specify a database once you have any of the following privileges to the database or any privilege to a table in the database.
+Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-database.md) command to specify a database once you have any of the following privileges to the database or any privilege to a table in the database.
 
 | Privilege | Description                                                                                                      |
 |:----------|:-----------------------------------------------------------------------------------------------------------------|

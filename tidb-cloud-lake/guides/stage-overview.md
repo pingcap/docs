@@ -21,7 +21,7 @@ Based on the actual storage location and accessibility, stages can be categorize
 | **Path Format**      | `@~/`                              | `@stage_name/`                                   | `@stage_name/`                                                                                                |
 ### Internal Stage
 
-Files in an internal stage are actually stored in the object storage where Databend resides. An internal stage is accessible to all users within your organization, allowing each user to utilize the stage for their data loading or export tasks. Similar to creating a folder, specifying a name is necessary when creating a stage. Below is an example of creating an internal stage with the [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) command:
+Files in an internal stage are actually stored in the object storage where Databend resides. An internal stage is accessible to all users within your organization, allowing each user to utilize the stage for their data loading or export tasks. Similar to creating a folder, specifying a name is necessary when creating a stage. Below is an example of creating an internal stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
 
 ```sql
 -- Create an internal stage named my_internal_stage
@@ -36,7 +36,7 @@ Below is an example of creating an external stage. Let's say you have datasets i
 
 ![alt text](/img/guides/external-stage.png)
 
-You can create an external stage with the [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) command to connect Databend to that bucket:
+You can create an external stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command to connect Databend to that bucket:
 
 ```sql
 -- Create an external stage named my_external_stage
@@ -61,7 +61,7 @@ LIST @my_external_stage;
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Please note that the external storage must be one of the object storage solutions supported by Databend. The [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) command page provides examples on how to specify connection information for commonly used object storage solutions.
+Please note that the external storage must be one of the object storage solutions supported by Databend. The [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command page provides examples on how to specify connection information for commonly used object storage solutions.
 
 ### User Stage
 
@@ -79,9 +79,9 @@ Databend provides a variety of commands to assist you in managing stages and the
 
 | Command                                                      | Description                                                                                                                                                                                                                          | Applies to User Stage | Applies to Internal Stage | Applies to External Stage |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- | ------------------------- | ------------------------- |
-| [CREATE STAGE](/sql/sql-commands/ddl/stage/ddl-create-stage) | Creates an internal or external stage.                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
-| [DROP STAGE](/sql/sql-commands/ddl/stage/ddl-drop-stage)     | Removes an internal or external stage.                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
-| [DESC STAGE](/sql/sql-commands/ddl/stage/ddl-desc-stage)     | Shows the properties of an internal or external stage.                                                                                                                                                                               | No                    | Yes                       | Yes                       |
-| [LIST](/sql/sql-commands/ddl/stage/ddl-list-stage)           | Returns a list of the staged files in a stage. Alternatively, the table function [LIST_STAGE](/sql/sql-functions/table-functions/list-stage) offers similar functionality with added flexibility to obtain specific file information | Yes                   | Yes                       | Yes                       |
+| [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) | Creates an internal or external stage.                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
+| [DROP STAGE](/tidb-cloud-lake/sql/drop-stage.md)     | Removes an internal or external stage.                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
+| [DESC STAGE](/tidb-cloud-lake/sql/desc-stage.md)     | Shows the properties of an internal or external stage.                                                                                                                                                                               | No                    | Yes                       | Yes                       |
+| [LIST](/tidb-cloud-lake/sql/list-stage.md)           | Returns a list of the staged files in a stage. Alternatively, the table function [LIST_STAGE](/tidb-cloud-lake/sql/list-stage.md) offers similar functionality with added flexibility to obtain specific file information | Yes                   | Yes                       | Yes                       |
 | [REMOVE](/sql/sql-commands/ddl/stage/ddl-remove-stage)       | Removes staged files from a stage.                                                                                                                                                                                                   | Yes                   | Yes                       | Yes                       |
-| [SHOW STAGES](/sql/sql-commands/ddl/stage/ddl-show-stages)   | Returns a list of the created internal and external stages.                                                                                                                                                                          | No                    | Yes                       | Yes                       |
+| [SHOW STAGES](/tidb-cloud-lake/sql/show-stages.md)   | Returns a list of the created internal and external stages.                                                                                                                                                                          | No                    | Yes                       | Yes                       |

@@ -16,9 +16,9 @@ import StepContent from '@site/src/components/Steps/step-content';
 
 ## User Authentication
 
-If you are connecting to a self-hosted Databend instance, you can use the admin users specified in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or you can connect using an SQL user created with the [CREATE USER](/sql/sql-commands/ddl/user/user-create-user) command.
+If you are connecting to a self-hosted Databend instance, you can use the admin users specified in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or you can connect using an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command.
 
-For connections to Databend Cloud, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/sql/sql-commands/ddl/user/user-create-user) command. Please note that the user account you use to log in to the [Databend Cloud console](https://app.databend.com) cannot be used for connecting to Databend Cloud.
+For connections to Databend Cloud, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Please note that the user account you use to log in to the [Databend Cloud console](https://app.databend.com) cannot be used for connecting to Databend Cloud.
 
 ## Connecting to Self-Hosted Databend
 
@@ -70,7 +70,7 @@ Once the download is complete, the test connection should succeed:
 
 ### Obtain Connection Information
 
-Log in to Databend Cloud to obtain connection information. For more information, see [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting).
+Log in to Databend Cloud to obtain connection information. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ![alt text](@site/static/img/connect/dbeaver-connect-info.png)
 

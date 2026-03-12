@@ -10,7 +10,7 @@ The loading loop is straightforward:
 Object storage → STAGE → COPY INTO tables → (optional) STREAMS/TASKS
 ```
 
-Adjust the bucket path or format to match your environment, then paste the commands below. Syntax mirrors the [Load Data guides](/guides/load-data).
+Adjust the bucket path or format to match your environment, then paste the commands below. Syntax mirrors the data loading guides.
 
 ---
 
@@ -170,7 +170,7 @@ SELECT * FROM frame_events_stream;   -- shows newly copied rows
 SELECT * FROM frame_events_stream WITH CONSUME;  -- advance the offset
 ```
 
-`WITH CONSUME` ensures the stream cursor moves forward after the rows are handled. Reference: [Streams](/guides/load-data/continuous-data-pipelines/stream).
+`WITH CONSUME` ensures the stream cursor moves forward after the rows are handled. Reference: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md).
 
 ---
 
@@ -217,7 +217,7 @@ CREATE OR REPLACE TASK task_load_frame_events
 ALTER TASK task_load_frame_events RESUME;
 ```
 
-Add more tasks for `frame_metadata_catalog`, embeddings, or GPS data using the same pattern. Full options: [Tasks](/guides/load-data/continuous-data-pipelines/task).
+Add more tasks for `frame_metadata_catalog`, embeddings, or GPS data using the same pattern. Full options: [Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md).
 
 ---
 

@@ -53,7 +53,7 @@ The script must implement these functions:
 |:----------|:--------------|:---------------|
 | SUPER     | Global, Table | Operates a UDF |
 
-To create a user-defined function, the user performing the operation or the [current_role](/guides/security/access-control/roles) must have the SUPER [privilege](/guides/security/access-control/privileges).
+To create a user-defined function, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the SUPER [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 ## Examples
 

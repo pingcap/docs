@@ -9,7 +9,7 @@ Returns the quotient by dividing the first number by the second one. Returns NUL
 
 See also:
 
-- [DIV](div.md)
+- [DIV](/tidb-cloud-lake/sql/div.md)
 - [DIV0](div0.md)
 
 ## Syntax

@@ -18,7 +18,7 @@ TO_DAY_OF_MONTH(<expr>)
 
 ## Aliases
 
-- [DAY](day.md)
+- [DAY](/tidb-cloud-lake/sql/day.md)
 
 ## Return Type
 

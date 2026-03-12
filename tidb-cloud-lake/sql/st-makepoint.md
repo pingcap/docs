@@ -15,7 +15,7 @@ ST_MAKEPOINT(<longitude>, <latitude>)
 
 ## Aliases
 
-- [ST_POINT](st-point.md)
+- [ST_POINT](/tidb-cloud-lake/sql/st-point.md)
 
 ## Arguments
 

@@ -19,7 +19,7 @@ FILE_FORMAT = (TYPE = ORC)
 ```
 
 - For more ORC file format options, refer to [ORC File Format Options](/sql/sql-reference/file-format-options#orc-options).
-- For more COPY INTO table options, refer to [COPY INTO table](/sql/sql-commands/dml/dml-copy-into-table).
+- For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Data from ORC Files
 

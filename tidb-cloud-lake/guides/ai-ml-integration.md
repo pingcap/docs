@@ -26,8 +26,8 @@ The Model Context Protocol (MCP) server enables AI assistants to interact with y
 
 ## Getting Started
 
-**[External Functions Guide](01-external-functions.md)** - Learn how to create and deploy custom AI functions with practical examples and implementation guidance
+**[External Functions Guide](/tidb-cloud-lake/guides/external-ai-functions.md)** - Learn how to create and deploy custom AI functions with practical examples and implementation guidance
 
-**[MCP Server Guide](02-mcp.md)** - Build a conversational BI tool using mcp-databend and natural language queries
+**[MCP Server Guide](/tidb-cloud-lake/guides/mcp-server.md)** - Build a conversational BI tool using mcp-databend and natural language queries
 
-**[MCP Client Integration](03-mcp-integration.md)** - Configure generic MCP clients (like Codex) to connect to Databend
+**[MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)** - Configure generic MCP clients (like Codex) to connect to Databend

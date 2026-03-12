@@ -2,4 +2,4 @@
 title: ADD
 ---
 
-Alias for [PLUS](plus.md).
+Alias for [PLUS](/tidb-cloud-lake/sql/plus.md).

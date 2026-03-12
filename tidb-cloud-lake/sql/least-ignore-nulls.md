@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns the maximum value from a set of values, ignoring any NULL values.
 
-See also: [LEAST](least.md)
+See also: [LEAST](/tidb-cloud-lake/sql/least.md)
 
 ## Syntax
 

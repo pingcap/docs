@@ -16,8 +16,8 @@ This page provides a comprehensive overview of view operations in Databend, orga
 
 | Command | Description |
 |---------|-------------|
-| [DESC VIEW](desc-view.md) | Shows detailed information about a view |
-| [SHOW VIEWS](show-views.md) | Lists all views in the current or specified database |
+| [DESC VIEW](/tidb-cloud-lake/sql/desc-view.md) | Shows detailed information about a view |
+| [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md) | Lists all views in the current or specified database |
 
 :::note
 Views in Databend are named queries stored in the database that can be referenced like tables. They provide a way to simplify complex queries and control access to underlying data.

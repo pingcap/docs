@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.425"/>
 
-`SCORE()` returns the relevance score assigned to the current row by the inverted index search. Use it together with [MATCH](match) or [QUERY](query) in a `WHERE` clause.
+`SCORE()` returns the relevance score assigned to the current row by the inverted index search. Use it together with [MATCH](/tidb-cloud-lake/sql/match.md) or [QUERY](/tidb-cloud-lake/sql/query.md) in a `WHERE` clause.
 
 :::info
 Databend's SCORE function is inspired by Elasticsearch's [SCORE](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-score).
@@ -53,7 +53,7 @@ ORDER BY SCORE() DESC;
 
 ### Example: Score QUERY Results
 
-Reusing the `frames` table from the [QUERY](query) examples:
+Reusing the `frames` table from the [QUERY](/tidb-cloud-lake/sql/query.md) examples:
 
 ```sql
 SELECT id, SCORE()

@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Returns a Boolean value indicating whether an expression is an error value.
 
-See also: [IS_NOT_ERROR](is-not-error.md)
+See also: [IS_NOT_ERROR](/tidb-cloud-lake/sql/is-not-error.md)
 
 ## Syntax
 

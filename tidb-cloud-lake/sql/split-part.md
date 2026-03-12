@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Splits a string using a specified delimiter and returns the specified part.
 
-See also: [SPLIT](split.md)
+See also: [SPLIT](/tidb-cloud-lake/sql/split.md)
 
 ## Syntax
 

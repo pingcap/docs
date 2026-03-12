@@ -8,8 +8,8 @@ Restores the recent version of a dropped table. This leverages the Databend Time
 **See also:**
 - [CREATE TABLE](./10-ddl-create-table.md)
 - [DROP TABLE](./20-ddl-drop-table.md)
-- [SHOW TABLES](show-tables.md)
-- [SHOW DROP TABLES](show-drop-tables.md)
+- [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
+- [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md)
 
 ## Syntax
 

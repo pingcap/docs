@@ -15,7 +15,7 @@ ST_MAKEPOLYGON(<geometry_or_geography>)
 
 ## Aliases
 
-- [ST_POLYGON](st-polygon.md)
+- [ST_POLYGON](/tidb-cloud-lake/sql/st-polygon.md)
 
 ## Arguments
 

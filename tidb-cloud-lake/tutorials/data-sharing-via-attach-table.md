@@ -3,7 +3,7 @@ title: "Databend Cloud: Data Sharing via ATTACH TABLE"
 sidebar_label: "Data Sharing"
 ---
 
-In this tutorial, we'll walk you through how to link a table in Databend Cloud with an existing Databend table stored in an S3 bucket using the [ATTACH TABLE](/sql/sql-commands/ddl/table/attach-table) command.
+In this tutorial, we'll walk you through how to link a table in Databend Cloud with an existing Databend table stored in an S3 bucket using the [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) command.
 
 ## Before You Start
 
@@ -12,7 +12,7 @@ Before you start, ensure you have the following prerequisites in place:
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch a self-hosted Databend.
 - An AWS S3 bucket used as storage for your self-hosted Databend. [Learn how to create an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html).
 - AWS Access Key ID and Secret Access Key with sufficient permissions for accessing your S3 bucket. [Manage your AWS credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
-- BendSQL is installed on your local machine. See [Installing BendSQL](/guides/connect/sql-clients/bendsql/#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 ## Step 1: Launch Databend in Docker
 

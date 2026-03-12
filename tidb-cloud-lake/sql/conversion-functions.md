@@ -8,8 +8,8 @@ This page provides a comprehensive overview of Conversion functions in Databend,
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [CAST](cast.md) | Converts a value to a specified data type | `CAST('123' AS INT)` → `123` |
-| [TRY_CAST](try-cast.md) | Safely converts a value to a specified data type, returning NULL on failure | `TRY_CAST('abc' AS INT)` → `NULL` |
+| [CAST](/tidb-cloud-lake/sql/cast.md) | Converts a value to a specified data type | `CAST('123' AS INT)` → `123` |
+| [TRY_CAST](/tidb-cloud-lake/sql/try-cast.md) | Safely converts a value to a specified data type, returning NULL on failure | `TRY_CAST('abc' AS INT)` → `NULL` |
 | [TO_BOOLEAN](to-boolean.md) | Converts a value to BOOLEAN type | `TO_BOOLEAN('true')` → `true` |
 | [TO_STRING](to-string.md) | Converts a value to STRING type | `TO_STRING(123)` → `'123'` |
 | [TO_VARCHAR](to-varchar.md) | Converts a value to VARCHAR type | `TO_VARCHAR(123)` → `'123'` |
@@ -38,7 +38,7 @@ This page provides a comprehensive overview of Conversion functions in Databend,
 | [TRY_TO_BINARY](try-to-binary.md) | Safely converts a value to BINARY type, returning NULL on failure | `TRY_TO_BINARY('abc')` → `binary value` |
 | [TO_HEX](to-hex.md) | Converts a value to hexadecimal string | `TO_HEX(255)` → `'FF'` |
 | [TO_VARIANT](to-variant.md) | Converts a value to VARIANT type | `TO_VARIANT('{"a": 1}')` → `{"a": 1}` |
-| [BUILD_BITMAP](build-bitmap.md) | Builds a bitmap from an array of integers | `BUILD_BITMAP([1,2,3])` → `bitmap value` |
+| [BUILD_BITMAP](/tidb-cloud-lake/sql/build-bitmap.md) | Builds a bitmap from an array of integers | `BUILD_BITMAP([1,2,3])` → `bitmap value` |
 | [TO_BITMAP](to-bitmap.md) | Converts a value to BITMAP type | `TO_BITMAP([1,2,3])` → `bitmap value` |
 
 Please note the following when converting a value from one type to another:

@@ -21,7 +21,7 @@ This page provides a comprehensive overview of Network Policy operations in Data
 
 ## Related Topics
 
-- [Network Policy](/guides/security/network-policy)
+- [Network Policy](/tidb-cloud-lake/guides/network-policy.md)
 
 :::note
 Network policies in Databend allow you to control access to your database by specifying allowed or blocked IP addresses and ranges.

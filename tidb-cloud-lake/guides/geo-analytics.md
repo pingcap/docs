@@ -74,7 +74,7 @@ INSERT INTO frame_metadata_catalog VALUES
   ('FRAME-0401', PARSE_JSON('{"scene":{"weather_code":"lightfog","lighting":"night"},"camera":{"sensor_view":"rear"},"vehicle":{"speed_kmh":38.9},"detections":{"objects":[{"type":"traffic_light","confidence":0.78},{"type":"vehicle","confidence":0.36}]},"media_meta":{"tagging":{"labels":["night_lowlight","traffic_light"]}}}'), '2025-01-03 21:18:07');
 ```
 
-Docs: [Geospatial types](/sql/sql-reference/data-types/geospatial).
+Docs: [Geospatial types](/tidb-cloud-lake/sql/geospatial.md).
 
 ---
 
@@ -106,7 +106,7 @@ FRAME-0102| VID-20250101-001 | pedestrian | 180.277138577
 FRAME-0101| VID-20250101-001 | hard_brake | 324.291965923
 ```
 
-Tip: add `ST_ASTEXT(l.geom)` while debugging or switch to [`HAVERSINE`](/sql/sql-functions/geospatial-functions#trigonometric-distance-functions) for great-circle math.
+Tip: add `ST_ASTEXT(l.geom)` while debugging or switch to [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#trigonometric-distance-functions) for great-circle math.
 
 ```sql
 WITH school_zone AS (
@@ -161,7 +161,7 @@ h3_cell         | frame_count | avg_risk
 613635011309993983| 1          | 0.59
 ```
 
-Docs: [H3 functions](/sql/sql-functions/geospatial-functions#h3-indexing--conversion).
+Docs: [H3 functions](/tidb-cloud-lake/sql/geospatial-functions.md#h3-indexing--conversion).
 
 ---
 

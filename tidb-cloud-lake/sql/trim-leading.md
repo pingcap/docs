@@ -6,8 +6,8 @@ Removes all occurrences of the specified trim string from the beginning of the s
 
 See also: 
 
-- [LTRIM](ltrim.md)
-- [TRIM_TRAILING](trim-trailing.md)
+- [LTRIM](/tidb-cloud-lake/sql/ltrim.md)
+- [TRIM_TRAILING](/tidb-cloud-lake/sql/trim-trailing.md)
 
 ## Syntax
 

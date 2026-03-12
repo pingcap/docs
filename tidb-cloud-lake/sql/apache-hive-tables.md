@@ -57,16 +57,16 @@ Databend automatically converts Hive primitive types to their closest native equ
 
 | Hive Type | Databend Type |
 | --------- | ------------- |
-| `BOOLEAN` | [BOOLEAN](/sql/sql-reference/data-types/boolean) |
-| `TINYINT`, `SMALLINT`, `INT`, `BIGINT` | [Integer types](/sql/sql-reference/data-types/numeric#integer-data-types) |
-| `FLOAT`, `DOUBLE` | [Floating-point types](/sql/sql-reference/data-types/numeric#floating-point-data-types) |
-| `DECIMAL(p,s)` | [DECIMAL](/sql/sql-reference/data-types/decimal) |
-| `STRING`, `VARCHAR`, `CHAR` | [STRING](/sql/sql-reference/data-types/string) |
-| `DATE`, `TIMESTAMP` | [DATETIME](/sql/sql-reference/data-types/datetime) |
-| `ARRAY<type>` | [ARRAY](/sql/sql-reference/data-types/array) |
-| `MAP<key,value>` | [MAP](/sql/sql-reference/data-types/map) |
+| `BOOLEAN` | [BOOLEAN](/tidb-cloud-lake/sql/boolean.md) |
+| `TINYINT`, `SMALLINT`, `INT`, `BIGINT` | [Integer types](/tidb-cloud-lake/sql/numeric.md#integer-data-types) |
+| `FLOAT`, `DOUBLE` | [Floating-point types](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) |
+| `DECIMAL(p,s)` | [DECIMAL](/tidb-cloud-lake/sql/decimal.md) |
+| `STRING`, `VARCHAR`, `CHAR` | [STRING](/tidb-cloud-lake/sql/string.md) |
+| `DATE`, `TIMESTAMP` | [DATETIME](/tidb-cloud-lake/sql/datetime.md) |
+| `ARRAY<type>` | [ARRAY](/tidb-cloud-lake/sql/array.md) |
+| `MAP<key,value>` | [MAP](/tidb-cloud-lake/sql/map.md) |
 
-Nested structures such as `STRUCT` are surfaced through the [VARIANT](/sql/sql-reference/data-types/variant) type.
+Nested structures such as `STRUCT` are surfaced through the [VARIANT](/tidb-cloud-lake/sql/variant.md) type.
 
 ## Notes and Limitations
 

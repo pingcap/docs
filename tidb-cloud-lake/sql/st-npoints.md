@@ -15,7 +15,7 @@ ST_NPOINTS(<geometry_or_geography>)
 
 ## Aliases
 
-- [ST_NUMPOINTS](st-numpoints.md)
+- [ST_NUMPOINTS](/tidb-cloud-lake/sql/st-numpoints.md)
 
 ## Arguments
 

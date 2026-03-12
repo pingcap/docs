@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.371"/>
 
-Undoes all changes made during a transaction. [BEGIN](begin.md) and [COMMIT](commit.md)/ROLLBACK must be used together to start and then either save or undo a transaction.
+Undoes all changes made during a transaction. [BEGIN](/tidb-cloud-lake/sql/begin.md) and [COMMIT](/tidb-cloud-lake/sql/commit.md)/ROLLBACK must be used together to start and then either save or undo a transaction.
 
 ## Syntax
 
@@ -15,4 +15,4 @@ ROLLBACK
 
 ## Examples
 
-See [Examples](begin.md#examples).
+See [Examples](/tidb-cloud-lake/sql/begin.md#examples).

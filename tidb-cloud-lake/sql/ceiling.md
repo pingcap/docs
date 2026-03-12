@@ -2,4 +2,4 @@
 title: CEILING
 ---
 
-Alias for [CEIL](ceil.md).
+Alias for [CEIL](/tidb-cloud-lake/sql/ceil.md).

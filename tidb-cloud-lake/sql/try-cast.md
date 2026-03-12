@@ -4,7 +4,7 @@ title: TRY_CAST
 
 Converts a value from one data type to another. Returns NULL on error.
 
-See also: [CAST](cast.md)
+See also: [CAST](/tidb-cloud-lake/sql/cast.md)
 
 ## Syntax
 

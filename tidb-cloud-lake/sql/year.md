@@ -18,7 +18,7 @@ TO_YEAR(<expr>)
 
 ## Aliases
 
-- [YEAR](year.md)
+- [YEAR](/tidb-cloud-lake/sql/year.md)
 
 ## Return Type
 

@@ -12,7 +12,7 @@ IFNULL(<expr1>, <expr2>)
 
 ## Aliases
 
-- [NVL](nvl.md)
+- [NVL](/tidb-cloud-lake/sql/nvl.md)
 
 ## Examples
 

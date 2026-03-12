@@ -69,6 +69,6 @@ SELECT regexp_split_to_array('One_Two_Three', '[_-]', 'i')
 
 ## See Also
 
-- [SPLIT](split.md): For simple string splitting
-- [REGEXP_SPLIT_TO_TABLE](regexp-split-table.md): split string to table
+- [SPLIT](/tidb-cloud-lake/sql/split.md): For simple string splitting
+- [REGEXP_SPLIT_TO_TABLE](/tidb-cloud-lake/sql/regexp-split-table.md): split string to table
 

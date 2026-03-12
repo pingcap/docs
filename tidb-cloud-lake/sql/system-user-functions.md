@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Contains information about user-defined functions and external functions in the system.
 
-See also: [SHOW USER FUNCTIONS](/sql/sql-commands/administration-cmds/show-user-functions).
+See also: [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md).
 
 ```sql
 SELECT * FROM system.user_functions;

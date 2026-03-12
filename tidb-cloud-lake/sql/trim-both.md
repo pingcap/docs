@@ -4,7 +4,7 @@ title: TRIM_BOTH
 
 Removes all occurrences of the specified trim string from the beginning, end, or both sides of the string.
 
-See also: [TRIM](trim.md)
+See also: [TRIM](/tidb-cloud-lake/sql/trim.md)
 
 ## Syntax
 

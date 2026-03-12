@@ -2,4 +2,4 @@
 title: SHA1
 ---
 
-Alias for [SHA](sha.md).
+Alias for [SHA](/tidb-cloud-lake/sql/sha.md).

@@ -6,7 +6,7 @@ title: How Databend Data Sharing Works
 
 Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.
 
-Databend's **[ATTACH TABLE](/sql/sql-commands/ddl/table/attach-table)** solves this elegantly: create multiple "views" of the same data without copying it. This leverages Databend's **true compute-storage separation** - whether using cloud storage or on-premise object storage: **store once, access everywhere**.
+Databend's **[ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md)** solves this elegantly: create multiple "views" of the same data without copying it. This leverages Databend's **true compute-storage separation** - whether using cloud storage or on-premise object storage: **store once, access everywhere**.
 
 Think of ATTACH TABLE like computer shortcuts - they point to the original file without duplicating it.
 

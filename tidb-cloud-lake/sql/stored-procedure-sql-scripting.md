@@ -34,7 +34,7 @@ $$;
 | `LANGUAGE SQL` | Databend currently accepts `SQL` only. |
 | `RETURN` / `RETURN TABLE` | Ends execution and provides either a scalar or tabular result. |
 
-Use [`CREATE PROCEDURE`](/sql/sql-commands/ddl/procedure/create-procedure) to persist the definition, [`CALL`](/sql/sql-commands/ddl/procedure/call-procedure) to run it, and [`DROP PROCEDURE`](/sql/sql-commands/ddl/procedure/drop-procedure) to remove it.
+Use [`CREATE PROCEDURE`](/tidb-cloud-lake/sql/create-procedure.md) to persist the definition, [`CALL`](/tidb-cloud-lake/sql/call-procedure.md) to run it, and [`DROP PROCEDURE`](/tidb-cloud-lake/sql/drop-procedure.md) to remove it.
 
 ### Minimal Example
 
@@ -634,8 +634,8 @@ CALL PROCEDURE sp_dynamic_resultset();
 
 ## Related Commands
 
-- [`CREATE PROCEDURE`](/sql/sql-commands/ddl/procedure/create-procedure)
-- [`CALL`](/sql/sql-commands/ddl/procedure/call-procedure)
-- [`SHOW PROCEDURES`](/sql/sql-commands/ddl/procedure/show-procedures)
-- [`DESCRIBE PROCEDURE`](/sql/sql-commands/ddl/procedure/desc-procedure)
-- [`EXECUTE IMMEDIATE`](/sql/sql-commands/administration-cmds/execute-immediate)
+- [`CREATE PROCEDURE`](/tidb-cloud-lake/sql/create-procedure.md)
+- [`CALL`](/tidb-cloud-lake/sql/call-procedure.md)
+- [`SHOW PROCEDURES`](/tidb-cloud-lake/sql/show-procedures.md)
+- [`DESCRIBE PROCEDURE`](/tidb-cloud-lake/sql/desc-procedure.md)
+- [`EXECUTE IMMEDIATE`](/tidb-cloud-lake/sql/execute-immediate.md)

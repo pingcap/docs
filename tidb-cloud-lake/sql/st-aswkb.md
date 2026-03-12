@@ -15,7 +15,7 @@ ST_ASWKB(<geometry_or_geography>)
 
 ## Aliases
 
-- [ST_ASBINARY](st-asbinary.md)
+- [ST_ASBINARY](/tidb-cloud-lake/sql/st-asbinary.md)
 
 ## Arguments
 

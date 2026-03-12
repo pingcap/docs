@@ -2,4 +2,4 @@
 title: MOD
 ---
 
-Alias for [MODULO](modulo.md).
+Alias for [MODULO](/tidb-cloud-lake/sql/modulo.md).

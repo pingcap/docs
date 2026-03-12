@@ -14,7 +14,7 @@ Before you start, ensure you have the following prerequisites in place:
 
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch MySQL.
 - [Go](https://go.dev/dl/) is installed on your local machine, as it is required to install bend-archiver.
-- BendSQL is installed on your local machine. See [Installing BendSQL](/guides/connect/sql-clients/bendsql/#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 ## Step 1: Launch MySQL in Docker
 

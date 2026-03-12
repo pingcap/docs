@@ -16,9 +16,9 @@ ST_GEOMETRYFROMWKB(<binary>, [<srid>])
 
 ## Aliases
 
-- [ST_GEOMFROMWKB](st-geomfromwkb.md)
-- [ST_GEOMETRYFROMEWKB](st-geometryfromewkb.md)
-- [ST_GEOMFROMEWKB](st-geomfromewkb.md)
+- [ST_GEOMFROMWKB](/tidb-cloud-lake/sql/st-geomfromwkb.md)
+- [ST_GEOMETRYFROMEWKB](/tidb-cloud-lake/sql/st-geometryfromewkb.md)
+- [ST_GEOMFROMEWKB](/tidb-cloud-lake/sql/st-geomfromewkb.md)
 
 ## Arguments
 

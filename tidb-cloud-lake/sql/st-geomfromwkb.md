@@ -2,4 +2,4 @@
 title: ST_GEOMFROMWKB
 ---
 
-Alias for [ST_GEOMTRYFROMWKB](st-geometryfromwkb.md).
+Alias for [ST_GEOMTRYFROMWKB](/tidb-cloud-lake/sql/st-geometryfromwkb.md).

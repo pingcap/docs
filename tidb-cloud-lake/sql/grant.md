@@ -23,7 +23,7 @@ See also:
 
 ### Granting Privileges
 
-To understand what a privilege is and how it works, see [Privileges](/guides/security/access-control/privileges).
+To understand what a privilege is and how it works, see [Privileges](/tidb-cloud-lake/guides/privileges.md).
 
 :::note Important
 CREATE-like privileges that create ownership objects cannot be granted directly to a user. These privileges must be granted to a role first, and then the role can be assigned to users. This includes:
@@ -122,7 +122,7 @@ GRANT OWNERSHIP ON ROW ACCESS POLICY <policy_name> TO ROLE '<role_name>'
 
 ### Granting Role
 
-To understand what a role is and how it works, see [Roles](/guides/security/access-control/roles).
+To understand what a role is and how it works, see [Roles](/tidb-cloud-lake/guides/roles.md).
 
 ```sql
 -- Grant a role to a user
@@ -134,7 +134,7 @@ GRANT ROLE <role_name> TO ROLE <role_name>
 
 ### Granting Ownership
 
-To understand what ownership is and how it works, see [Ownership](/guides/security/access-control/ownership).
+To understand what ownership is and how it works, see [Ownership](/tidb-cloud-lake/guides/ownership.md).
 
 ```sql
 -- Grant ownership of a specific table within a database to a role

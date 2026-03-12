@@ -52,12 +52,12 @@ Tags are returned in API responses and visible through `SHOW WAREHOUSES`.
 
 | Command                                 | Description                                       |
 | --------------------------------------- | ------------------------------------------------- |
-| [CREATE WAREHOUSE](create-warehouse.md) | Creates a new warehouse                           |
-| [USE WAREHOUSE](use-warehouse.md)       | Sets the current warehouse for the session        |
-| [SHOW WAREHOUSES](show-warehouses.md)   | Lists all warehouses with optional filtering      |
-| [ALTER WAREHOUSE](alter-warehouse.md)   | Suspends, resumes, or modifies warehouse settings |
-| [DROP WAREHOUSE](drop-warehouse.md)     | Removes a warehouse                               |
-| [QUERY_HISTORY](query-history.md)       | Inspects query logs for a warehouse               |
+| [CREATE WAREHOUSE](/tidb-cloud-lake/sql/create-warehouse.md) | Creates a new warehouse                           |
+| [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)       | Sets the current warehouse for the session        |
+| [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)   | Lists all warehouses with optional filtering      |
+| [ALTER WAREHOUSE](/tidb-cloud-lake/sql/alter-warehouse.md)   | Suspends, resumes, or modifies warehouse settings |
+| [DROP WAREHOUSE](/tidb-cloud-lake/sql/drop-warehouse.md)     | Removes a warehouse                               |
+| [QUERY_HISTORY](/tidb-cloud-lake/sql/query-history.md)       | Inspects query logs for a warehouse               |
 
 :::note
 A warehouse represents compute resources used to run queries in Databend Cloud.

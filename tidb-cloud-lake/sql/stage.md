@@ -10,7 +10,7 @@ This page provides a comprehensive overview of stage operations in Databend, org
 |---------|-------------|
 | [CREATE STAGE](01-ddl-create-stage.md) | Creates a new stage for storing files |
 | [DROP STAGE](02-ddl-drop-stage.md) | Removes a stage |
-| [PRESIGN](presign.md) | Generates a pre-signed URL for stage access |
+| [PRESIGN](/tidb-cloud-lake/sql/presign.md) | Generates a pre-signed URL for stage access |
 
 ## Stage Operations
 
@@ -31,7 +31,7 @@ This page provides a comprehensive overview of stage operations in Databend, org
 - [Working with Stages](/guides/load-data/stage)
 - [Loading from Stage](/guides/load-data/load/stage)
 - [Querying & Transforming](/guides/load-data/transform/querying-stage)
-- [File Format (DDL)](/sql/sql-commands/ddl/file-format) 
+- [File Format (DDL)](/tidb-cloud-lake/sql/file-format.md) 
 
 :::note
 Stages in Databend are used as temporary storage locations for data files that you want to load into tables or unload from tables.

@@ -26,7 +26,7 @@ Databend provides three VACUUM commands with **different cleanup scopes**. Under
 ```
 VACUUM DROP TABLE
 ├── Target: Dropped tables (after DROP TABLE command)
-├── S3 Storage: ✅ Removes ALL data (files, segments, blocks, indexes, statistics)  
+├── S3 Storage: ✅ Removes ALL data (files, segments, blocks, indexes, statistics)
 ├── Meta Service: ✅ Removes ALL metadata (schema, permissions, records)
 └── Result: Complete table removal - CANNOT be recovered
 
@@ -49,7 +49,7 @@ VACUUM TEMPORARY FILES
 
 ## Using VACUUM Commands
 
-The VACUUM command family is the primary method for cleaning data in Databend ([Enterprise Edition Feature](/guides/self-hosted/editions/enterprise/features)).
+The VACUUM command family is the primary method for cleaning data in Databend.
 
 ### VACUUM DROP TABLE
 

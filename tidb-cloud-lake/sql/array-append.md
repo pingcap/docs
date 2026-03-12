@@ -68,5 +68,5 @@ Result:
 
 ## Related Functions
 
-- [ARRAY_PREPEND](array-prepend): Prepends an element to the beginning of an array
-- [ARRAY_CONCAT](array-concat): Concatenates two arrays
+- [ARRAY_PREPEND](/tidb-cloud-lake/sql/array-prepend.md): Prepends an element to the beginning of an array
+- [ARRAY_CONCAT](/tidb-cloud-lake/sql/array-concat.md): Concatenates two arrays

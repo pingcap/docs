@@ -61,7 +61,7 @@ INSERT INTO frame_metadata_catalog VALUES
   ('FRAME-0401', PARSE_JSON('{"scene":{"weather_code":"lightfog","lighting":"night"},"camera":{"sensor_view":"rear"},"vehicle":{"speed_kmh":38.9},"detections":{"objects":[{"type":"traffic_light","confidence":0.78},{"type":"vehicle","confidence":0.36}]},"media_meta":{"tagging":{"labels":["night_lowlight","traffic_light"]}}}'), '2025-01-03 21:18:07');
 ```
 
-Docs: [CREATE TABLE](/sql/sql-commands/ddl/table/ddl-create-table), [INSERT](/sql/sql-commands/dml/dml-insert).
+Docs: [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md), [INSERT](/tidb-cloud-lake/sql/insert.md).
 
 ---
 
@@ -85,7 +85,7 @@ GROUP BY v.video_id, v.route_name, v.weather
 ORDER BY flagged_frames DESC;
 ```
 
-Docs: [DATEADD](/sql/sql-functions/datetime-functions/date-add), [GROUP BY](/sql/sql-commands/query-syntax/query-select#group-by-clause).
+Docs: [DATEADD](/tidb-cloud-lake/sql/date-add.md), [GROUP BY](/tidb-cloud-lake/sql/select.md#group-by-clause).
 
 Sample output:
 
@@ -161,7 +161,7 @@ FRAME-0102| pedestrian    | 0.92
 FRAME-0102| bike          | 0.35
 ```
 
-Docs: [JOIN](/sql/sql-commands/query-syntax/query-join), [FLATTEN](/sql/sql-functions/table-functions/flatten).
+Docs: [JOIN](/tidb-cloud-lake/sql/join.md), [FLATTEN](/tidb-cloud-lake/sql/flatten.md).
 
 ---
 
@@ -296,7 +296,7 @@ VID-20250103-001| FRAME-0401 | 522         | 0.63       | 0.63
 VID-MISSING-001 | FRAME-0501 | 10          | 0.25       | 0.25
 ```
 
-Docs: [Window functions](/sql/sql-functions/window-functions).
+Docs: [Window functions](/tidb-cloud-lake/sql/window-functions.md).
 
 ---
 
@@ -339,7 +339,7 @@ CBD Night Sweep    | night_lowlight | 1           | 0.63
 Airport Connector  | hard_brake     | 1           | 0.59
 ```
 
-Docs: [Aggregating Index](/guides/performance/aggregating-index) and [EXPLAIN](/sql/sql-commands/explain-cmds/explain).
+Docs: [Aggregating Index](/tidb-cloud-lake/guides/aggregating-index.md) and [EXPLAIN](/tidb-cloud-lake/sql/explain.md).
 
 ---
 

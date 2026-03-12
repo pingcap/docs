@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Calculates the difference between two dates or timestamps based on a specified time unit. The result is positive if the `<end_date>` is after the `<start_date>`, and negative if it's before.
 
-See also: [DATE_BETWEEN](date-between.md)
+See also: [DATE_BETWEEN](/tidb-cloud-lake/sql/date-between.md)
 
 ## Syntax
 

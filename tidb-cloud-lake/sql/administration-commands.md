@@ -43,10 +43,10 @@ This page provides reference information for the system administration commands 
 | **[VACUUM TABLE](09-vacuum-table.md)** | Reclaim storage space from tables |
 | **[VACUUM DROP TABLE](09-vacuum-drop-table.md)** | Clean up dropped table data |
 | **[VACUUM TEMP FILES](09-vacuum-temp-files.md)** | Remove temporary files |
-| **[SHOW INDEXES](show-indexes.md)** | Display table indexes |
+| **[SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md)** | Display table indexes |
 
 ## Dynamic Execution
 
 | Command | Description |
 |---------|-------------|
-| **[EXECUTE IMMEDIATE](execute-immediate.md)** | Execute dynamically constructed SQL statements |
+| **[EXECUTE IMMEDIATE](/tidb-cloud-lake/sql/execute-immediate.md)** | Execute dynamically constructed SQL statements |

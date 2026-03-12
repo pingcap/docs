@@ -6,7 +6,7 @@ Restores the most recent version of a dropped database. This leverages the Datab
 
 **See also:**
 [DROP DATABASE](ddl-drop-database.md)
-[SHOW DROP DATABASES](show-drop-databases.md)
+[SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
 
 ## Syntax
 

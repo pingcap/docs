@@ -119,7 +119,7 @@ By default, **all columns are nullable(NULL)** in Databend. If you need a column
 - An expression with no input arguments and returns a scalar value, such as `1 + 1`, `NOW()` or `UUID()`.
 - A dynamically generated value from a sequence, such as `NEXTVAL(staff_id_seq)` for the `staff_id` column in the example below.
   - NEXTVAL must be used as a standalone default value; expressions like `NEXTVAL(seq1) + 1` are not supported.
-  - Users must adhere to their granted permissions for sequence utilization, including operations such as [NEXTVAL](/sql/sql-functions/sequence-functions/nextval#access-control-requirements)
+  - Users must adhere to their granted permissions for sequence utilization, including operations such as [NEXTVAL](/tidb-cloud-lake/sql/nextval.md#access-control-requirements)
 
 ## Auto-Increment Columns
 
@@ -224,7 +224,7 @@ Databend's syntax is difference from MySQL mainly in the data type and some spec
 | CREATE    | Global, Table | Creates a table.       |
 
 
-To create a table, the user performing the operation or the [current_role](/guides/security/access-control/roles) must have the CREATE [privilege](/guides/security/access-control/privileges#table-privileges).
+To create a table, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE [privilege](/tidb-cloud-lake/guides/privileges.md#table-privileges).
 
 
 ## Examples

@@ -4,7 +4,7 @@ title: DROP DATABASE
 
 Drops a database.
 
-See also: [UNDROP DATABASE](undrop-database.md)
+See also: [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md)
 
 ## Syntax
 

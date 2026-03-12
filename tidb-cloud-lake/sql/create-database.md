@@ -22,7 +22,7 @@ CREATE [ OR REPLACE ] DATABASE [ IF NOT EXISTS ] <database_name>
 | CREATE DATABASE | Global      | Creates a database. |
 
 
-To create a database, the user performing the operation or the [current_role](/guides/security/access-control/roles) must have the CREATE DATABASE [privilege](/guides/security/access-control/privileges).
+To create a database, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE DATABASE [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 ## Examples
 

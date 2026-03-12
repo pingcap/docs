@@ -88,4 +88,4 @@ Confirm that no users depend on the policy before dropping it; otherwise, their 
 
 ---
 
-For full syntax details, see the [Network Policy SQL reference](/sql/sql-commands/ddl/network-policy), which covers `CREATE`, `ALTER`, `SHOW`, `DESC`, and `DROP`.
+For full syntax details, see the [Network Policy SQL reference](/tidb-cloud-lake/sql/network-policy.md), which covers `CREATE`, `ALTER`, `SHOW`, `DESC`, and `DROP`.

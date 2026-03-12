@@ -30,34 +30,34 @@ These functions are specifically designed for window operations.
 
 | Function | Description | Ties Handling | Example Output |
 |----------|-------------|---------------|----------------|
-| [ROW_NUMBER](row-number.md) | Sequential numbering | Always unique | `1, 2, 3, 4, 5` |
-| [RANK](rank.md) | Ranking with gaps | Same rank, gaps after | `1, 2, 2, 4, 5` |
-| [DENSE_RANK](dense-rank.md) | Ranking without gaps | Same rank, no gaps | `1, 2, 2, 3, 4` |
+| [ROW_NUMBER](/tidb-cloud-lake/sql/row-number.md) | Sequential numbering | Always unique | `1, 2, 3, 4, 5` |
+| [RANK](/tidb-cloud-lake/sql/rank.md) | Ranking with gaps | Same rank, gaps after | `1, 2, 2, 4, 5` |
+| [DENSE_RANK](/tidb-cloud-lake/sql/dense-rank.md) | Ranking without gaps | Same rank, no gaps | `1, 2, 2, 3, 4` |
 
 **Distribution Functions:**
 
 | Function | Description | Range | Example Output |
 |----------|-------------|-------|----------------|
 | [PERCENT_RANK](percent_rank.md) | Relative rank as percentage | 0.0 to 1.0 | `0.0, 0.25, 0.5, 0.75, 1.0` |
-| [CUME_DIST](cume-dist.md) | Cumulative distribution | 0.0 to 1.0 | `0.2, 0.4, 0.6, 0.8, 1.0` |
-| [NTILE](ntile.md) | Divide into N buckets | 1 to N | `1, 1, 2, 2, 3, 3` |
+| [CUME_DIST](/tidb-cloud-lake/sql/cume-dist.md) | Cumulative distribution | 0.0 to 1.0 | `0.2, 0.4, 0.6, 0.8, 1.0` |
+| [NTILE](/tidb-cloud-lake/sql/ntile.md) | Divide into N buckets | 1 to N | `1, 1, 2, 2, 3, 3` |
 
 **Value Access Functions:**
 
 | Function | Description | Use Case |
 |----------|-------------|----------|
-| [FIRST_VALUE](first-value.md) | First value in window | Get highest/earliest value |
-| [LAST_VALUE](last-value.md) | Last value in window | Get lowest/latest value |
-| [NTH_VALUE](nth-value.md) | Nth value in window | Get specific positioned value |
-| [LAG](lag.md) | Previous row value | Compare with previous |
-| [LEAD](lead.md) | Next row value | Compare with next |
+| [FIRST_VALUE](/tidb-cloud-lake/sql/first-value.md) | First value in window | Get highest/earliest value |
+| [LAST_VALUE](/tidb-cloud-lake/sql/last-value.md) | Last value in window | Get lowest/latest value |
+| [NTH_VALUE](/tidb-cloud-lake/sql/nth-value.md) | Nth value in window | Get specific positioned value |
+| [LAG](/tidb-cloud-lake/sql/lag.md) | Previous row value | Compare with previous |
+| [LEAD](/tidb-cloud-lake/sql/lead.md) | Next row value | Compare with next |
 
 **Aliases:**
 
 | Function | Alias For |
 |----------|----------|
-| [FIRST](first.md) | FIRST_VALUE |
-| [LAST](last.md) | LAST_VALUE |
+| [FIRST](/tidb-cloud-lake/sql/first.md) | FIRST_VALUE |
+| [LAST](/tidb-cloud-lake/sql/last.md) | LAST_VALUE |
 
 ### 2. Aggregate Functions Used as Window Functions
 
@@ -118,7 +118,7 @@ ROWS BETWEEN frame_start AND frame_end
 - `ROWS BETWEEN 2 PRECEDING AND CURRENT ROW` - 3-day moving average
 - `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING` - Centered window
 
-For detailed examples and usage, see [ROWS BETWEEN](rows-between.md).
+For detailed examples and usage, see [ROWS BETWEEN](/tidb-cloud-lake/sql/rows-between.md).
 
 ### 2. RANGE BETWEEN  
 Defines a window frame using logical value ranges.
@@ -132,7 +132,7 @@ RANGE BETWEEN frame_start AND frame_end
 - `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` - Cumulative by value
 - `RANGE BETWEEN INTERVAL '7' DAY PRECEDING AND CURRENT ROW` - 7-day window
 
-For detailed examples and usage, see [RANGE BETWEEN](range-between.md).
+For detailed examples and usage, see [RANGE BETWEEN](/tidb-cloud-lake/sql/range-between.md).
 
 ## Common Use Cases
 

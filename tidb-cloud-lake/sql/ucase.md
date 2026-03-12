@@ -2,4 +2,4 @@
 title: UCASE
 ---
 
-Alias for [UPPER](upper.md).
+Alias for [UPPER](/tidb-cloud-lake/sql/upper.md).
