@@ -89,6 +89,24 @@ tiup playground --tag ${tag_name}
 
 For a cluster started in this way, the data files are retained after the cluster is stopped. You can use this tag to start the cluster next time so that you can use the data kept since the cluster was stopped.
 
+## Access TiDB Dashboard and Grafana
+
+When you start a TiDB cluster using TiUP playground, you can access [TiDB Dashboard](/dashboard/dashboard-intro.md) and Grafana at the following addresses in your browser:
+
+- TiDB Dashboard: `http://127.0.0.1:2379/dashboard`
+
+    - Default username: `root`
+    - Default password: `` (empty, press `Enter` directly)
+
+- Grafana: `http://127.0.0.1:3000`
+
+    - Default username: `admin`
+    - Default password: `admin`
+
+> **Note:**
+>
+> If you have changed the password for the TiDB `root` user, use the new password to log in to TiDB Dashboard.
+
 ## Quickly connect to the TiDB cluster started by playground
 
 TiUP provides the `client` component, which is used to automatically find and connect to a local TiDB cluster started by playground. The usage is as follows:
