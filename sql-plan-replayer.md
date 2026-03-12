@@ -287,9 +287,9 @@ mysql> SELECT * FROM mysql.plan_replayer_status;
 3 rows in set (0.00 sec)
 ```
 
-If [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) is configured, the captured file is also stored in the configured external storage. The `token` column still records the file token.
+If [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) is configured, the captured file is also stored in the configured external storage. The `token` column in the `mysql.plan_replayer_status` table still records the file token of the generated capture file.
 
-To download the file of `PLAN REPLAYER CAPTURE`, use the `token` value together with the TiDB HTTP interface. This is the same as the file-token based download flow described in [Examples of exporting cluster information](#examples-of-exporting-cluster-information).
+To download the file of `PLAN REPLAYER CAPTURE`, use the value in the `token` column of `mysql.plan_replayer_status` together with the TiDB HTTP interface. This is the same as the file-token based download flow described in [Examples of exporting cluster information](#examples-of-exporting-cluster-information).
 
 > **Note:**
 >
