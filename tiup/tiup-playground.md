@@ -91,15 +91,17 @@ For a cluster started in this way, the data files are retained after the cluster
 
 ## Access TiDB Dashboard and Grafana
 
-When you start a TiDB cluster using TiUP playground, the following web interfaces are available:
+When you start a TiDB cluster using TiUP playground, you can access the TiDB Dashboard and Grafana by the following web sites:
 
-- **TiDB Dashboard**: `http://127.0.0.1:2379/dashboard`
-  - Default username: `root`
-  - Default password: (empty, press Enter directly)
+- TiDB Dashboard: `http://127.0.0.1:2379/dashboard`
 
-- **Grafana**: `http://127.0.0.1:3000`
-  - Default username: `admin`
-  - Default password: `admin`
+    - Default username: `root`
+    - Default password: `` (empty, press `Enter` directly)
+
+- Grafana: `http://127.0.0.1:3000`
+
+    - Default username: `admin`
+    - Default password: `admin`
 
 > **Note:**
 >
