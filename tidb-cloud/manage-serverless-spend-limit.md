@@ -37,7 +37,7 @@ To update the spending limit for a {{{ .starter }}} instance, perform the follow
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. In the **Capacity used this month** area, click **Set Spending Limit**.
 

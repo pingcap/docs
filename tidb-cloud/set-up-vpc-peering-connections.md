@@ -94,7 +94,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
@@ -283,7 +283,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 

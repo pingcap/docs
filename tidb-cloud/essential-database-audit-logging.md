@@ -150,7 +150,7 @@ You can enable audit logging for a {{{ .essential }}} instance using the TiDB Cl
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -186,7 +186,7 @@ You can edit the audit logging for a {{{ .essential }}} instance after enabling 
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -218,7 +218,7 @@ You can disable audit logging for a {{{ .essential }}} instance.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -254,7 +254,7 @@ To create a filter rule, define which users and events you want to capture in th
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -284,7 +284,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -314,7 +314,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -342,7 +342,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
@@ -377,7 +377,7 @@ When you store audit logs in TiDB Cloud, {{{ .essential }}} saves them as readab
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 

@@ -55,7 +55,7 @@ To disable log redaction, do the following:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     </CustomContent>
 
@@ -102,7 +102,7 @@ To maintain data security, **enable log redaction** as soon as you complete your
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     </CustomContent>
 

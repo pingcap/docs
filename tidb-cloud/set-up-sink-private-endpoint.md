@@ -67,7 +67,7 @@ If the Private Endpoint Service is not available for your downstream service, fo
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 3. In the left navigation pane, click **Settings** > **Networking**.
 

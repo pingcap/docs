@@ -125,7 +125,7 @@ To view and switch between organizations, take the following steps:
 
     > **Tip:**
     >
-    > - If you are currently on the page of a specific cluster, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are currently on the page of a specific TiDB Cloud resource, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
     > - If you are a member of multiple organizations, you can click the target organization name in the combo box to switch your account between organizations.
 
 2. To view the detailed information of your organization such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
@@ -221,7 +221,7 @@ To view and switch between projects, take the following steps:
 
     > **Tip:**
     >
-    > - If you are currently on the page of a specific cluster, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are currently on the page of a specific TiDB Cloud resource, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
     > - If you are a member of multiple projects, you can click the target project name in the combo box to switch between projects.
 
 2. To view the detailed information of your project, click the project name, and then click **Project Settings** in the left navigation pane.

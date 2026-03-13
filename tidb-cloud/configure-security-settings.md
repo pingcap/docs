@@ -15,7 +15,7 @@ For a TiDB Cloud Dedicated cluster, you can configure the root password and allo
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. In the row of your target TiDB Cloud Dedicated cluster, click **...** and select **Password Settings**.
 3. Set the root password to connect to your TiDB Cloud Dedicated cluster, and then click **Save**.

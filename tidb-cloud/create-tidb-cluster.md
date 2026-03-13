@@ -45,7 +45,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click **Create Resource**.
 

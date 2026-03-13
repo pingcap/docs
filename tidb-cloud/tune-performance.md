@@ -38,7 +38,7 @@ TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#sql-statement
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. In the left navigation pane, click **Monitoring** > **Diagnosis**.
 

@@ -28,7 +28,7 @@ The recommended use cases of SQL Editor are as follows:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your {{{ .starter }}} instance or TiDB Cloud Dedicated cluster, and then click **SQL Editor** in the left navigation pane.
 

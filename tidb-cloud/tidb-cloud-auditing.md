@@ -60,7 +60,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
@@ -134,7 +134,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
@@ -231,7 +231,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.

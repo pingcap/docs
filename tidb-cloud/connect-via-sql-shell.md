@@ -17,7 +17,7 @@ To Connect to TiDB using SQL shell, perform the following steps:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 3. On the **Networking** page, click **Web SQL Shell** in the upper-right corner.
