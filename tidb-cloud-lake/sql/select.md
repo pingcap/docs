@@ -267,7 +267,7 @@ The FROM clause can also specify a location, enabling direct querying of data fr
 
 ## AT Clause
 
-The AT clause enables you to query previous versions of your data. For more information, see [AT](./03-query-at.md).
+The AT clause enables you to query previous versions of your data. For more information, see [AT](/tidb-cloud-lake/sql/at.md).
 
 ## WHERE Clause
 

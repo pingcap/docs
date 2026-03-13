@@ -29,7 +29,7 @@ CONNECTION = (
 ```sql
 CREATE FILE FORMAT parquet_query_format TYPE = PARQUET;
 ```
-- More Parquet file format options refer to [Parquet File Format Options](/sql/sql-reference/file-format-options#parquet-options)
+- More Parquet file format options refer to [Parquet File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options)
 
 ### Step 3. Query Parquet Files
 

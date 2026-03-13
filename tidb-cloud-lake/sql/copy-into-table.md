@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 COPY INTO allows you to load data from files located in one of the following locations:
 
-- User / Internal / External stages: See [What is Stage?](/guides/load-data/stage/what-is-stage) to learn about stages in Databend.
+- User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/what-is-stage.md) to learn about stages in Databend.
 - Buckets or containers created in a storage service.
 - Remote servers from where you can access the files by their URL (starting with "https://...").
 - [IPFS](https://ipfs.tech) and Hugging Face repositories.
@@ -606,7 +606,7 @@ COPY INTO books_with_extra_columns
 ```
 
 :::note
-Extra columns in a table can have default values specified by [CREATE TABLE](../00-ddl/01-table/10-ddl-create-table.md) or [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations). If a default value is not explicitly set for an extra column, the default value associated with its data type will be applied. For instance, an integer-type column will default to 0 if no other value is specified.
+Extra columns in a table can have default values specified by [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md) or [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations). If a default value is not explicitly set for an extra column, the default value associated with its data type will be applied. For instance, an integer-type column will default to 0 if no other value is specified.
 :::
 
 ### Example 6: Loading JSON with Custom Format

@@ -60,7 +60,7 @@ This section provides reference information for array functions in Databend. Arr
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [ARRAY_TRANSFORM](array/array-transform) | Applies a function to each array element | `ARRAY_TRANSFORM([1,2,3], x -> x * 2)` → `[2,4,6]` |
+| [ARRAY_TRANSFORM](/tidb-cloud-lake/sql/json-array-transform.md) | Applies a function to each array element | `ARRAY_TRANSFORM([1,2,3], x -> x * 2)` → `[2,4,6]` |
 | [ARRAY_FILTER](/tidb-cloud-lake/sql/array-filter.md) | Filters array elements based on a condition | `ARRAY_FILTER([1,2,3,4], x -> x > 2)` → `[3,4]` |
 | [ARRAY_REDUCE](/tidb-cloud-lake/sql/array-reduce.md) | Reduces array to a single value using aggregation | `ARRAY_REDUCE([1,2,3], 0, (acc,x) -> acc + x)` → `6` |
 | [ARRAY_AGGREGATE](/tidb-cloud-lake/sql/array-aggregate.md) | Aggregates array elements using a function | `ARRAY_AGGREGATE([1,2,3], 'sum')` → `6` |
@@ -84,7 +84,7 @@ This section provides reference information for array functions in Databend. Arr
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [ARRAY_TO_STRING](array/array-to-string) | Joins array elements into a string | `ARRAY_TO_STRING(['a','b'], ',')` → `'a,b'` |
+| [ARRAY_TO_STRING](/tidb-cloud-lake/sql/array-to-string.md) | Joins array elements into a string | `ARRAY_TO_STRING(['a','b'], ',')` → `'a,b'` |
 
 ## Array Utility Functions
 

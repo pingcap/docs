@@ -52,8 +52,8 @@ ALTER USER <name> WITH UNSET WORKLOAD GROUP
 
 - *auth_type* can be `double_sha1_password` (default), `sha256_password` or `no_password`.
 - When `MUST_CHANGE_PASSWORD` is set to `true`, the user must change their password at the next login. Please note that this takes effect only for users who have never changed their password since their account was created. If a user has ever changed their password themselves, then they do not need to change it again.
-- When you set a default role for a user using [CREATE USER](01-user-create-user.md) or ALTER USER, Databend does not verify the role's existence or automatically grant the role to the user. You must explicitly grant the role to the user for the role to take effect.
-- `DISABLED` allows you to enable or disable a user. Disabled users cannot log in to Databend until they are enabled. Click [here](01-user-create-user.md#example-5-creating-user-in-disabled-state) to see an example.
+- When you set a default role for a user using [CREATE USER](/tidb-cloud-lake/sql/create-user.md) or ALTER USER, Databend does not verify the role's existence or automatically grant the role to the user. You must explicitly grant the role to the user for the role to take effect.
+- `DISABLED` allows you to enable or disable a user. Disabled users cannot log in to Databend until they are enabled. Click [here](/tidb-cloud-lake/sql/create-user.md#example-5-creating-user-in-disabled-state) to see an example.
 
 
 ## Examples
@@ -123,7 +123,7 @@ GRANT ROLE writer TO user1;
 ALTER USER user1 WITH DEFAULT_ROLE = 'writer';
 ```
 
-2. Verify the default role of user "user1" using the [SHOW ROLES](04-user-show-roles.md) command:
+2. Verify the default role of user "user1" using the [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) command:
 
 ```sql title='Connect as user "user1":'
 eric@Erics-iMac ~ % bendsql --user user1 --password abc123

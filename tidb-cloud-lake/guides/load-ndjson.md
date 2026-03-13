@@ -28,7 +28,7 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 ) ]
 ```
 
-- For more NDJSON file format options, refer to [NDJSON File Format Options](/sql/sql-reference/file-format-options#ndjson-options).
+- For more NDJSON file format options, refer to [NDJSON File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options).
 - For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Data from NDJSON Files

@@ -79,10 +79,10 @@ Databend ships with two complementary sets of geospatial capabilities: PostGIS-s
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [GEO_TO_H3](geo-to-h3.md) | Convert longitude/latitude to an H3 index | `GEO_TO_H3(37.7950, 55.7129, 15)` → `644325524701193974` |
-| [H3_TO_GEO](h3-to-geo.md) | Convert an H3 index to longitude/latitude | `H3_TO_GEO(644325524701193974)` → `[37.7950, 55.7129]` |
-| [H3_TO_STRING](h3-to-string.md) | Convert an H3 index to its string form | `H3_TO_STRING(644325524701193974)` → `'8f2830828052d25'` |
-| [STRING_TO_H3](string-to-h3.md) | Convert an H3 string to an index | `STRING_TO_H3('8f2830828052d25')` → `644325524701193974` |
+| [GEO_TO_H3](/tidb-cloud-lake/sql/geo-to-h3.md) | Convert longitude/latitude to an H3 index | `GEO_TO_H3(37.7950, 55.7129, 15)` → `644325524701193974` |
+| [H3_TO_GEO](/tidb-cloud-lake/sql/h3-to-geo.md) | Convert an H3 index to longitude/latitude | `H3_TO_GEO(644325524701193974)` → `[37.7950, 55.7129]` |
+| [H3_TO_STRING](/tidb-cloud-lake/sql/h3-to-string.md) | Convert an H3 index to its string form | `H3_TO_STRING(644325524701193974)` → `'8f2830828052d25'` |
+| [STRING_TO_H3](/tidb-cloud-lake/sql/string-to-h3.md) | Convert an H3 string to an index | `STRING_TO_H3('8f2830828052d25')` → `644325524701193974` |
 | [GEOHASH_ENCODE](/tidb-cloud-lake/sql/geohash-encode.md) | Encode longitude/latitude to GeoHash | `GEOHASH_ENCODE(37.7950, 55.7129, 12)` → `'ucfv0nzpt3s7'` |
 | [GEOHASH_DECODE](/tidb-cloud-lake/sql/geohash-decode.md) | Decode a GeoHash to longitude/latitude | `GEOHASH_DECODE('ucfv0nzpt3s7')` → `[37.7950, 55.7129]` |
 
@@ -96,14 +96,14 @@ Databend ships with two complementary sets of geospatial capabilities: PostGIS-s
 | [H3_IS_PENTAGON](/tidb-cloud-lake/sql/h3-is-pentagon.md) | Check whether an H3 index is a pentagon | `H3_IS_PENTAGON(644325524701193974)` → `FALSE` |
 | [H3_IS_RES_CLASS_III](/tidb-cloud-lake/sql/h3-is-res-class-iii.md) | Check whether an H3 index is class III | `H3_IS_RES_CLASS_III(644325524701193974)` → `FALSE` |
 | [H3_GET_FACES](/tidb-cloud-lake/sql/h3-get-faces.md) | Return intersecting icosahedron faces | `H3_GET_FACES(644325524701193974)` → `[7]` |
-| [H3_TO_PARENT](h3-to-parent.md) | Return the parent index at a lower resolution | `H3_TO_PARENT(644325524701193974, 10)` → `622236721289822207` |
-| [H3_TO_CHILDREN](h3-to-children.md) | Return child indexes at a higher resolution | `H3_TO_CHILDREN(622236721289822207, 11)` → `[...]` |
-| [H3_TO_CENTER_CHILD](h3-to-center-child.md) | Return the center child for a resolution | `H3_TO_CENTER_CHILD(622236721289822207, 11)` → `625561602857582591` |
+| [H3_TO_PARENT](/tidb-cloud-lake/sql/h3-to-parent.md) | Return the parent index at a lower resolution | `H3_TO_PARENT(644325524701193974, 10)` → `622236721289822207` |
+| [H3_TO_CHILDREN](/tidb-cloud-lake/sql/h3-to-children.md) | Return child indexes at a higher resolution | `H3_TO_CHILDREN(622236721289822207, 11)` → `[...]` |
+| [H3_TO_CENTER_CHILD](/tidb-cloud-lake/sql/h3-to-center-child.md) | Return the center child for a resolution | `H3_TO_CENTER_CHILD(622236721289822207, 11)` → `625561602857582591` |
 | [H3_CELL_AREA_M2](/tidb-cloud-lake/sql/h3-cell-area-m2.md) | Return the area of a cell in square meters | `H3_CELL_AREA_M2(644325524701193974)` → `0.8953` |
 | [H3_CELL_AREA_RADS2](/tidb-cloud-lake/sql/h3-cell-area-rads2.md) | Return the area of a cell in square radians | `H3_CELL_AREA_RADS2(644325524701193974)` → `2.2e-14` |
 | [H3_HEX_AREA_KM2](/tidb-cloud-lake/sql/h3-hex-area-km2.md) | Return the average hexagon area in km² | `H3_HEX_AREA_KM2(10)` → `0.0152` |
 | [H3_HEX_AREA_M2](/tidb-cloud-lake/sql/h3-hex-area-m2.md) | Return the average hexagon area in m² | `H3_HEX_AREA_M2(10)` → `15200` |
-| [H3_TO_GEO_BOUNDARY](h3-to-geo-boundary.md) | Return the boundary of a cell | `H3_TO_GEO_BOUNDARY(644325524701193974)` → `[[lon1,lat1], ...]` |
+| [H3_TO_GEO_BOUNDARY](/tidb-cloud-lake/sql/h3-to-geo-boundary.md) | Return the boundary of a cell | `H3_TO_GEO_BOUNDARY(644325524701193974)` → `[[lon1,lat1], ...]` |
 | [H3_NUM_HEXAGONS](/tidb-cloud-lake/sql/h3-num-hexagons.md) | Return the number of hexagons at a resolution | `H3_NUM_HEXAGONS(2)` → `5882` |
 
 ## H3 Neighborhoods

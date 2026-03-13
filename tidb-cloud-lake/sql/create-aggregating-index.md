@@ -15,7 +15,7 @@ Create a new aggregating index in Databend.
 CREATE [ OR REPLACE ] AGGREGATING INDEX <index_name> AS SELECT ...
 ```
 
-- When creating aggregating indexes, limit their usage to standard [Aggregate Functions](/tidb-cloud-lake/_index.md) (e.g., AVG, SUM, MIN, MAX, COUNT and GROUP BY), while keeping in mind that GROUPING SETS, [Window Functions](/tidb-cloud-lake/_index.md), [LIMIT](../../20-query-syntax/01-query-select.md#limit-clause), and [ORDER BY](../../20-query-syntax/01-query-select.md#order-by-clause) are not accepted, or you will get an error: `Currently create aggregating index just support simple query, like: SELECT ... FROM ... WHERE ... GROUP BY ...`.
+- When creating aggregating indexes, limit their usage to standard [Aggregate Functions](/tidb-cloud-lake/_index.md) (e.g., AVG, SUM, MIN, MAX, COUNT and GROUP BY), while keeping in mind that GROUPING SETS, [Window Functions](/tidb-cloud-lake/_index.md), [LIMIT](/tidb-cloud-lake/sql/select.md#limit-clause), and [ORDER BY](/tidb-cloud-lake/sql/select.md#order-by-clause) are not accepted, or you will get an error: `Currently create aggregating index just support simple query, like: SELECT ... FROM ... WHERE ... GROUP BY ...`.
 
 - The query filter scope defined when creating aggregating indexes should either match or encompass the scope of your actual queries.
 

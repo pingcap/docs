@@ -7,7 +7,7 @@ The `UNPIVOT` operation rotates a table by transforming columns into rows.
 It is a relational operator that accepts two columns (from a table or subquery), along with a list of columns, and generates a row for each column specified in the list. In a query, it is specified in the FROM clause after the table name or subquery.
 
 **See also:**
-[PIVOT](./05-query-pivot.md)
+[PIVOT](/tidb-cloud-lake/sql/pivot.md)
 
 
 ## Syntax

@@ -20,7 +20,7 @@ COPY INTO [<database>.]<table_name>
 FILE_FORMAT = (TYPE = PARQUET)
 ```
 
-- For more Parquet file format options, refer to [Parquet File Format Options](/sql/sql-reference/file-format-options#parquet-options).
+- For more Parquet file format options, refer to [Parquet File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options).
 - For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 ## Tutorial: Loading Data from Parquet Files

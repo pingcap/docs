@@ -8,10 +8,10 @@ This page provides a comprehensive overview of table operations in Databend, org
 
 | Command | Description |
 |---------|-------------|
-| [CREATE TABLE](10-ddl-create-table.md) | Creates a new table with specified columns and options |
-| [CREATE TABLE ... LIKE](10-ddl-create-table.md#create-table--like) | Creates a table with the same column definitions as an existing one |
-| [CREATE TABLE ... AS](10-ddl-create-table.md#create-table--as) | Creates a table and inserts data based on the results of a SELECT query |
-| [CREATE TRANSIENT TABLE](10-ddl-create-transient-table.md) | Creates a table without Time Travel support |
+| [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md) | Creates a new table with specified columns and options |
+| [CREATE TABLE ... LIKE](/tidb-cloud-lake/sql/create-table.md#create-table--like) | Creates a table with the same column definitions as an existing one |
+| [CREATE TABLE ... AS](/tidb-cloud-lake/sql/create-table.md#create-table--as) | Creates a table and inserts data based on the results of a SELECT query |
+| [CREATE TRANSIENT TABLE](/tidb-cloud-lake/sql/create-transient-table.md) | Creates a table without Time Travel support |
 | [CREATE EXTERNAL TABLE](10-ddl-create-table-external-location.md) | Creates a table with data stored in a specified external location |
 | [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) | Creates a table by associating it with an existing table |
 
@@ -20,7 +20,7 @@ This page provides a comprehensive overview of table operations in Databend, org
 | Command | Description |
 |---------|-------------|
 | [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md) | Modifies table columns, comments, Fuse options, external connections, or swaps metadata with another table |
-| [RENAME TABLE](30-ddl-rename-table.md) | Changes the name of a table |
+| [RENAME TABLE](/tidb-cloud-lake/sql/rename-table.md) | Changes the name of a table |
 
 ## Table Information
 
@@ -37,8 +37,8 @@ This page provides a comprehensive overview of table operations in Databend, org
 
 | Command | Description | Recovery Option |
 |---------|-------------|----------------|
-| [TRUNCATE TABLE](40-ddl-truncate-table.md) | Removes all data from a table while preserving the table's schema | [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) |
-| [DROP TABLE](20-ddl-drop-table.md) | Deletes a table | [UNDROP TABLE](21-ddl-undrop-table.md) |
+| [TRUNCATE TABLE](/tidb-cloud-lake/sql/truncate-table.md) | Removes all data from a table while preserving the table's schema | [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) |
+| [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md) | Deletes a table | [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) |
 | [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | Permanently removes historical data files of a table (Enterprise Edition) | Not recoverable |
 | [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | Permanently removes data files of dropped tables (Enterprise Edition) | Not recoverable |
 

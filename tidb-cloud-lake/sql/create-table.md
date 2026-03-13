@@ -25,8 +25,8 @@ Databend aims to be easy to use by design and does NOT require any of those oper
 
 See also:
 
-- [CREATE TEMP TABLE](10-ddl-create-temp-table.md)
-- [CREATE TRANSIENT TABLE](10-ddl-create-transient-table.md)
+- [CREATE TEMP TABLE](/tidb-cloud-lake/sql/create-temp-table.md)
+- [CREATE TRANSIENT TABLE](/tidb-cloud-lake/sql/create-transient-table.md)
 - [CREATE EXTERNAL TABLE](10-ddl-create-table-external-location.md)
 
 ## CREATE TABLE

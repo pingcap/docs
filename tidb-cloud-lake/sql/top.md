@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Limits the maximum number of rows returned by a query.
 
-See also: [Limit Clause](01-query-select.md#limit-clause)
+See also: [Limit Clause](/tidb-cloud-lake/sql/select.md#limit-clause)
 
 ## Syntax
 

@@ -33,7 +33,7 @@ CREATE FILE FORMAT tsv_query_format
     COMPRESSION = AUTO;
 ```
 
-- More TSV file format options refer to [TSV File Format Options](/sql/sql-reference/file-format-options#tsv-options)
+- More TSV file format options refer to [TSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options)
 
 ### Step 3. Query TSV Files
 

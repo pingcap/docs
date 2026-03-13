@@ -60,7 +60,7 @@ corp_vpn_policy |10.1.0.0/16,172.16.8.12/32|10.1.10.25     |Only VPN ranges |
 
 ### 4. Update and Reuse the Policy
 
-Use [ALTER NETWORK POLICY](/sql/sql-commands/ddl/network-policy/ddl-alter-policy) to adjust the allowed or blocked IPs without touching each user:
+Use [ALTER NETWORK POLICY](/tidb-cloud-lake/sql/network-policy.md) to adjust the allowed or blocked IPs without touching each user:
 
 ```sql
 ALTER NETWORK POLICY corp_vpn_policy

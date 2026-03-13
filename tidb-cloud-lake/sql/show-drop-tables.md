@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Lists the dropped tables in the current or a specified database.
 
-See also: [system.tables_with_history](../../../00-sql-reference/31-system-tables/system-tables-with-history.md)
+See also: [system.tables_with_history](/tidb-cloud-lake/sql/system-tables-with-history.md)
 
 ## Syntax
 

@@ -269,4 +269,4 @@ FROM TASK_HISTORY(
 ORDER BY scheduled_time DESC;
 ```
 
-See [TASK HISTORY](../../../20-sql-functions/17-table-functions/task_histroy.md) for all options, including filtering by time range or root task ID in a DAG.
+See [TASK HISTORY](/tidb-cloud-lake/sql/table-functions.md) for all options, including filtering by time range or root task ID in a DAG.

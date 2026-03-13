@@ -39,7 +39,7 @@ This page provides reference information for the query syntax in Databend. Each 
 
 | Component | Description |
 |-----------|-------------|
-| **[Settings](query-syntax/settings)** | Configure query optimization and execution parameters |
+| **[Settings](/tidb-cloud-lake/sql/settings-clause.md)** | Configure query optimization and execution parameters |
 
 ## Query Structure
 

@@ -25,7 +25,7 @@ CREATE [ OR REPLACE ] CONNECTION [ IF NOT EXISTS ] <connection_name>
 | Parameter        | Description                                                                                                                                        |
 |------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | STORAGE_TYPE     | Type of storage service. Possible values include: `s3`, `azblob`, `gcs`, `oss`, and `cos`.                                                         |
-| storage_params   | Vary based on storage type and authentication method. See [Connection Parameters](../../../00-sql-reference/51-connect-parameters.md) for the complete list. |
+| storage_params   | Vary based on storage type and authentication method. See [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) for the complete list. |
 
 ## Connection Parameters
 
@@ -40,7 +40,7 @@ Connections encapsulate the credentials and configuration for a specific storage
 | `cos`        | `SECRET_ID`, `SECRET_KEY`, `ENDPOINT_URL` | Tencent Cloud Object Storage. |
 | `hf`         | `REPO_TYPE`, `REVISION`, optional `TOKEN` | Hugging Face Hub datasets and models. |
 
-For parameter meanings, optional flags, and additional storage types, refer to [Connection Parameters](../../../00-sql-reference/51-connect-parameters.md). Expand the tabs below to see storage-specific examples:
+For parameter meanings, optional flags, and additional storage types, refer to [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md). Expand the tabs below to see storage-specific examples:
 
 <Tabs groupId="connection-storage-types">
 <TabItem value="s3" label="Amazon S3">

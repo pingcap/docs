@@ -48,7 +48,7 @@ CREATE FILE FORMAT ndjson_query_format
     COMPRESSION = AUTO;
 ```
 
-- More NDJSON file format options refer to [NDJSON File Format Options](/sql/sql-reference/file-format-options#ndjson-options)
+- More NDJSON file format options refer to [NDJSON File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options)
 
 ### Step 3. Query NDJSON Files
 
@@ -87,5 +87,5 @@ FROM @ndjson_query_stage
 ## Related Documentation
 
 - [Loading NDJSON Files](/tidb-cloud-lake/guides/load-ndjson.md) - How to load NDJSON data into tables
-- [NDJSON File Format Options](/sql/sql-reference/file-format-options#ndjson-options) - Complete NDJSON format configuration
+- [NDJSON File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options) - Complete NDJSON format configuration
 - [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) - Managing external and internal stages

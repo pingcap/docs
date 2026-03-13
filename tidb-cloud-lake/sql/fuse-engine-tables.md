@@ -34,7 +34,7 @@ CREATE TABLE <table_name> (
 [<Options>];
 ```
 
-For more details about the `CREATE TABLE` syntax, see [CREATE TABLE](../../10-sql-commands/00-ddl/01-table/10-ddl-create-table.md).
+For more details about the `CREATE TABLE` syntax, see [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md).
 
 ## Parameters
 

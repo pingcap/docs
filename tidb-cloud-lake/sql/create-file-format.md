@@ -15,7 +15,7 @@ Create a named file format.
 CREATE [ OR REPLACE ] FILE FORMAT [ IF NOT EXISTS ] <format_name> FileFormatOptions
 ```
 
-For details about `FileFormatOptions`, see [Input & Output File Formats](../../../00-sql-reference/50-file-format-options.md).
+For details about `FileFormatOptions`, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ## Use the file format
 

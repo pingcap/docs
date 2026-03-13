@@ -5,7 +5,7 @@ title: SET_VAR
 SET_VAR is used to specify optimizer hints within a single SQL statement, allowing for finer control over the execution plan of that specific statement. This includes:
 
 :::note
-SET_VAR will be deprecated in an upcoming release. Consider using the [SETTINGS Clause](../20-query-syntax/settings.md) instead.
+SET_VAR will be deprecated in an upcoming release. Consider using the [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md) instead.
 :::
 
 - Configure settings temporarily, affecting only the duration of the SQL statement execution. It's important to note that the settings specified with SET_VAR will solely impact the result of the current statement being executed and will not have any lasting effects on the overall database configuration. For a list of available settings that can be configured using SET_VAR, see [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md). To understand how it works, see these examples:
@@ -16,7 +16,7 @@ SET_VAR will be deprecated in an upcoming release. Consider using the [SETTINGS 
 - Control the deduplication behavior on [INSERT](/tidb-cloud-lake/sql/insert.md), [UPDATE](/tidb-cloud-lake/sql/update.md), or [REPLACE](/tidb-cloud-lake/sql/replace.md) operations with the label *deduplicate_label*. For those operations with a deduplicate_label in the SQL statements, Databend executes only the first statement, and subsequent statements with the same deduplicate_label value are ignored, regardless of their intended data modifications. Please note that once you set a deduplicate_label, it will remain in effect for a period of 24 hours. To understand how the deduplicate_label assists in deduplication, see [Example 3: Set Deduplicate Label](#example-3-set-deduplicate-label).
 
 See also: 
-- [SETTINGS Clause](../20-query-syntax/settings.md)
+- [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md)
 - [SET](02-set-global.md)
 
 ## Syntax
@@ -25,7 +25,7 @@ See also:
 /*+ SET_VAR(key=value) SET_VAR(key=value) ... */
 ```
 
-- The hint must immediately follow an [SELECT](../20-query-syntax/01-query-select.md), [INSERT](/tidb-cloud-lake/sql/insert.md), [UPDATE](/tidb-cloud-lake/sql/update.md), [REPLACE](/tidb-cloud-lake/sql/replace.md), [MERGE](/tidb-cloud-lake/sql/merge.md),[DELETE](../10-dml/dml-delete-from.md), or [COPY](/tidb-cloud-lake/sql/copy-into-table.md) (INTO) keyword that begins the SQL statement.
+- The hint must immediately follow an [SELECT](/tidb-cloud-lake/sql/select.md), [INSERT](/tidb-cloud-lake/sql/insert.md), [UPDATE](/tidb-cloud-lake/sql/update.md), [REPLACE](/tidb-cloud-lake/sql/replace.md), [MERGE](/tidb-cloud-lake/sql/merge.md),[DELETE](/tidb-cloud-lake/sql/dml.md), or [COPY](/tidb-cloud-lake/sql/copy-into-table.md) (INTO) keyword that begins the SQL statement.
 - A SET_VAR can include only one Key=Value pair, which means you can configure only one setting with one SET_VAR. However, you can use multiple SET_VAR hints to configure multiple settings.
     - If multiple SET_VAR hints containing a same key, the first Key=Value pair will be applied.
     - If a key fails to parse or bind, all hints will be ignored.

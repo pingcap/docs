@@ -57,7 +57,6 @@ CREATE STAGE my_minio_stage
   CONNECTION = (CONNECTION_NAME = 'my_minio_conn');
 ```
 
-
 To access your Amazon S3 buckets, you can also specify an AWS IAM role and external ID for authentication. By specifying an AWS IAM role and external ID, you can provide more granular control over which S3 buckets a user can access. This means that if the IAM role has been granted permissions to access only specific S3 buckets, then the user will only be able to access those buckets. An external ID can further enhance security by providing an additional layer of verification. For more information, see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html
 
 The following table lists connection parameters for accessing Amazon S3 storage service using AWS IAM role authentication:

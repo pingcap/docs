@@ -38,7 +38,7 @@ FROM ...
 
 ## Enabling Change Tracking
 
-The CHANGES clause requires that the Fuse engine option `change_tracking` must be set to `true` on the table. For more information about the `change_tracking` option, see [Fuse Engine Options](/sql/sql-reference/table-engines/fuse#options).
+The CHANGES clause requires that the Fuse engine option `change_tracking` must be set to `true` on the table. For more information about the `change_tracking` option, see [Fuse Engine Options](/tidb-cloud-lake/sql/table-engines.md#options).
 
 ```sql title='Example:'
 -- Enable change tracking for table 't'

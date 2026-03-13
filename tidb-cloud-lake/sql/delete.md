@@ -55,7 +55,7 @@ SELECT * FROM bookstore;
 
 ### Example 2: Subquery-Based Deletions
 
-When using a subquery to identify the rows to be deleted, [Subquery Operators](../30-query-operators/subquery.md) and [Comparison Operators](../30-query-operators/comparison.md) can be utilized to achieve the desired deletion.
+When using a subquery to identify the rows to be deleted, [Subquery Operators](/tidb-cloud-lake/sql/query-operators.md) and [Comparison Operators](/tidb-cloud-lake/sql/query-operators.md) can be utilized to achieve the desired deletion.
 
 The examples in this section are based on the following two tables:
 

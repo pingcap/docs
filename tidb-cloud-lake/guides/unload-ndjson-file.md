@@ -18,7 +18,7 @@ FILE_FORMAT = (
 [DETAILED_OUTPUT = true | false]
 ```
 
-- More NDJSON options refer to [NDJSON File Format Options](/sql/sql-reference/file-format-options#ndjson-options)
+- More NDJSON options refer to [NDJSON File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options)
 - Unloading into multiple files use the [MAX_FILE_SIZE Copy Option](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
 - More details about the syntax can be found in [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md)
 

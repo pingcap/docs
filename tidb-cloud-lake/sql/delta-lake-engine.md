@@ -24,7 +24,7 @@ LOCATION = 's3://<path_to_table>'
 CONNECTION_NAME = '<connection_name>'
 ```
 
-Before creating a table with the Delta Lake engine, you need to create a connection object used to establish a connection with your S3 storage. To create a connection in Databend, use the [CREATE CONNECTION](/sql/sql-reference/connect-parameters) command.
+Before creating a table with the Delta Lake engine, you need to create a connection object used to establish a connection with your S3 storage. To create a connection in Databend, use the [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) command.
 
 ## Examples
 

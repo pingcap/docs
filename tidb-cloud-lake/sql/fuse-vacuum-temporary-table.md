@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 ## Overview
 
-Temporary tables are typically cleaned up automatically at session end (details in [CREATE TEMP TABLE](../../10-sql-commands/00-ddl/01-table/10-ddl-create-temp-table.md)). However, this process can fail due to events like query node crashes or abnormal session terminations, leaving orphaned temporary files.
+Temporary tables are typically cleaned up automatically at session end (details in [CREATE TEMP TABLE](/tidb-cloud-lake/sql/create-temp-table.md)). However, this process can fail due to events like query node crashes or abnormal session terminations, leaving orphaned temporary files.
 
 `FUSE_VACUUM_TEMPORARY_TABLE()` manually removes these leftover files to reclaim storage.
 

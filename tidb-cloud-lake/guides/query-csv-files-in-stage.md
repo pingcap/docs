@@ -33,7 +33,7 @@ CREATE FILE FORMAT csv_query_format
     SKIP_HEADER = 1;        -- Skip first line when querying if the CSV file has header
 ```
 
-- More CSV file format options refer to [CSV File Format Options](/sql/sql-reference/file-format-options#csv-options)
+- More CSV file format options refer to [CSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options)
 
 ### Step 3. Query CSV Files
 

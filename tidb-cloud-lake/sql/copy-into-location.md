@@ -9,7 +9,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 COPY INTO allows you to unload data from a table or query into one or more files in one of the following locations:
 
-- User / Internal / External stages: See [What is Stage?](/guides/load-data/stage/what-is-stage) to learn about stages in Databend.
+- User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/what-is-stage.md) to learn about stages in Databend.
 - Buckets or containers created in a storage service.
 
 See also: [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
@@ -58,7 +58,7 @@ externalLocation ::=
   )
 ```
 
-For the connection parameters available for accessing Amazon S3-like storage services, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
+For the connection parameters available for accessing Amazon S3-like storage services, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 </TabItem>
 
 <TabItem value="Azure Blob Storage" label="Azure Blob Storage">
@@ -71,7 +71,7 @@ externalLocation ::=
   )
 ```
 
-For the connection parameters available for accessing Azure Blob Storage, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
+For the connection parameters available for accessing Azure Blob Storage, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 </TabItem>
 
 <TabItem value="Google Cloud Storage" label="Google Cloud Storage">
@@ -84,7 +84,7 @@ externalLocation ::=
   )
 ```
 
-For the connection parameters available for accessing Google Cloud Storage, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
+For the connection parameters available for accessing Google Cloud Storage, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 </TabItem>
 
 <TabItem value="Alibaba Cloud OSS" label="Alibaba Cloud OSS">
@@ -97,7 +97,7 @@ externalLocation ::=
   )
 ```
 
-For the connection parameters available for accessing Alibaba Cloud OSS, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
+For the connection parameters available for accessing Alibaba Cloud OSS, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 </TabItem>
 
 <TabItem value="Tencent Cloud Object Storage" label="Tencent Cloud Object Storage">
@@ -110,14 +110,14 @@ externalLocation ::=
   )
 ```
 
-For the connection parameters available for accessing Tencent Cloud Object Storage, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
+For the connection parameters available for accessing Tencent Cloud Object Storage, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 </TabItem>
 
 </Tabs>
 
 ### FILE_FORMAT
 
-See [Input & Output File Formats](../../00-sql-reference/50-file-format-options.md) for details.
+See [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md) for details.
 
 ### PARTITION BY
 

@@ -9,9 +9,9 @@ This page provides reference information for the DML (Data Manipulation Language
 | Command | Description |
 |---------|-------------|
 | **[INSERT](/tidb-cloud-lake/sql/insert.md)** | Add new rows to a table |
-| **[INSERT MULTI](dml/dml-insert-multi)** | Insert data into multiple tables in one statement |
+| **[INSERT MULTI](/tidb-cloud-lake/sql/insert-multi-table.md)** | Insert data into multiple tables in one statement |
 | **[UPDATE](/tidb-cloud-lake/sql/update.md)** | Modify existing rows in a table |
-| **[DELETE](dml/dml-delete-from)** | Remove rows from a table |
+| **[DELETE](/tidb-cloud-lake/sql/delete.md)** | Remove rows from a table |
 | **[REPLACE](/tidb-cloud-lake/sql/replace.md)** | Insert new rows or update existing ones |
 | **[MERGE](/tidb-cloud-lake/sql/merge.md)** | Perform upsert operations based on conditions |
 

@@ -61,7 +61,7 @@ A user can be granted multiple roles in Databend. These roles are categorized in
 
 - The active role is the user's currently active primary role for the session, which can be set using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command. 
 
-- Secondary roles are additional roles that provide extra permissions and are active by default. Users can activate or deactivate secondary roles with the [SET SECONDARY ROLES](/sql/sql-commands/ddl/user/user-set-2nd-roles) command to temporarily adjust their permission scope.
+- Secondary roles are additional roles that provide extra permissions and are active by default. Users can activate or deactivate secondary roles with the [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md) command to temporarily adjust their permission scope.
 
 ## Billing Role
 

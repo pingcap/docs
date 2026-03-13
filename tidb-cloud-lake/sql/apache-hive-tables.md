@@ -71,5 +71,5 @@ Nested structures such as `STRUCT` are surfaced through the [VARIANT](/tidb-clou
 ## Notes and Limitations
 
 - Hive catalogs are **read-only** in Databend (writes must happen through Hive-compatible engines).
-- Access to the underlying object storage is required; configure credentials by using [connection parameters](/sql/sql-reference/connect-parameters).
+- Access to the underlying object storage is required; configure credentials by using [connection parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 - Use `ALTER TABLE ... REFRESH CACHE` whenever table layout changes (for example, new partitions) to keep query results up to date.

@@ -49,13 +49,13 @@ externalStageParams ::=
   );
 ```
 
-For the connection parameters available for different storage services, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
+For the connection parameters available for different storage services, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
 
 For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md).
 
 ### FILE_FORMAT
 
-See [Input & Output File Formats](../../../00-sql-reference/50-file-format-options.md) for details.
+See [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md) for details.
 
 ### copyOptions
 

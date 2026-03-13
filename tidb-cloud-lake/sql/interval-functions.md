@@ -36,5 +36,5 @@ This section provides reference information for the interval functions in Databe
 | Function | Description | Example |
 |----------|-------------|--------|
 | [TO_DECADES](/tidb-cloud-lake/sql/decades.md) | Converts a number to an interval of decades | `TO_DECADES(2)` → `20 years` |
-| [TO_CENTRIES](interval-functions/to-centries) | Converts a number to an interval of centuries | `TO_CENTRIES(1)` → `100 years` |
+| [TO_CENTRIES](/tidb-cloud-lake/sql/to-centuries.md) | Converts a number to an interval of centuries | `TO_CENTRIES(1)` → `100 years` |
 | [TO_MILLENNIA](/tidb-cloud-lake/sql/millennia.md) | Converts a number to an interval of millennia | `TO_MILLENNIA(1)` → `1000 years` |

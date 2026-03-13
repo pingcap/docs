@@ -5,7 +5,7 @@ sidebar_position: 6
 
 Activates all secondary roles for the current session. This means that all secondary roles granted to the user will be active, extending the user's privileges. For more information about the active role and secondary roles, see [Active Role & Secondary Roles](/tidb-cloud-lake/guides/roles.md#active-role--secondary-roles).
 
-See also: [SET ROLE](04-user-set-role.md)
+See also: [SET ROLE](/tidb-cloud-lake/sql/set-role.md)
 
 ## Syntax
 

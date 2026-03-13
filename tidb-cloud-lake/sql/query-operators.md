@@ -8,9 +8,9 @@ This page provides reference information for the query operators in Databend.
 
 | Operator Type | Description |
 |--------------|-------------|
-| **[Arithmetic](query-operators/arithmetic)** | Mathematical operations (+, -, *, /, %, DIV) |
-| **[Comparison](query-operators/comparison)** | Value comparisons (=, !=, &lt;, &gt;, &lt;=, &gt;=, BETWEEN, IN) |
-| **[Logical](query-operators/logical)** | Boolean logic (AND, OR, NOT, XOR) |
-| **[JSON](query-operators/json)** | JSON data operations (::, -&gt;, -&gt;&gt;, @&gt;, &lt;@) |
+| **[Arithmetic](/tidb-cloud-lake/sql/arithmetic-operators.md)** | Mathematical operations (+, -, *, /, %, DIV) |
+| **[Comparison](/tidb-cloud-lake/sql/comparison-operators.md)** | Value comparisons (=, !=, &lt;, &gt;, &lt;=, &gt;=, BETWEEN, IN) |
+| **[Logical](/tidb-cloud-lake/sql/logical-operators.md)** | Boolean logic (AND, OR, NOT, XOR) |
+| **[JSON](/tidb-cloud-lake/sql/json-operators.md)** | JSON data operations (::, -&gt;, -&gt;&gt;, @&gt;, &lt;@) |
 | **[Set](/tidb-cloud-lake/sql/set.md)** | Combine query results (UNION, INTERSECT, EXCEPT) |
-| **[Subquery](query-operators/subquery)** | Nested queries (EXISTS, IN, ANY, ALL, SOME) |
+| **[Subquery](/tidb-cloud-lake/sql/subquery-operators.md)** | Nested queries (EXISTS, IN, ANY, ALL, SOME) |

@@ -34,7 +34,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 ### Transformation & Output
 | Function | Description | Example |
 |----------|-------------|--------|
-| [JSON_TO_STRING](semi-structured-functions/json/json-to-string) | Converts a JSON value to a string | `JSON_TO_STRING(PARSE_JSON('{"a":1}'))` |
+| [JSON_TO_STRING](/tidb-cloud-lake/sql/json-to-string.md) | Converts a JSON value to a string | `JSON_TO_STRING(PARSE_JSON('{"a":1}'))` |
 | [JSON_PRETTY](/tidb-cloud-lake/sql/json-pretty.md) | Formats JSON with proper indentation | `JSON_PRETTY(PARSE_JSON('{"a":1}'))` |
 | [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | Removes null values from JSON | `STRIP_NULL_VALUE(PARSE_JSON('{"a":1,"b":null}'))` |
 
@@ -74,7 +74,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 | [ARRAY_INTERSECTION](/tidb-cloud-lake/sql/array-intersection.md) | Returns common elements between arrays | `ARRAY_INTERSECTION([1,2,3], [2,3,4])` |
 | [ARRAY_EXCEPT](/tidb-cloud-lake/sql/array-except.md) | Returns elements in first array but not in second | `ARRAY_EXCEPT([1,2,3], [2,3])` |
 | [ARRAY_OVERLAP](/tidb-cloud-lake/sql/array-overlap.md) | Checks if arrays have common elements | `ARRAY_OVERLAP([1,2], [2,3])` |
-| [ARRAY_TRANSFORM](semi-structured-functions/array/array-transform) | Applies a function to each array element | `ARRAY_TRANSFORM([1,2,3], x -> x * 2)` |
+| [ARRAY_TRANSFORM](/tidb-cloud-lake/sql/json-array-transform.md) | Applies a function to each array element | `ARRAY_TRANSFORM([1,2,3], x -> x * 2)` |
 | [ARRAY_FILTER](/tidb-cloud-lake/sql/array-filter.md) | Filters array elements based on a condition | `ARRAY_FILTER([1,2,3,4], x -> x > 2)` |
 | [ARRAY_REDUCE](/tidb-cloud-lake/sql/array-reduce.md) | Reduces array to a single value using aggregation | `ARRAY_REDUCE([1,2,3], 0, (acc, x) -> acc + x)` |
 | [ARRAY_AGGREGATE](/tidb-cloud-lake/sql/array-aggregate.md) | Aggregates array elements using a function | `ARRAY_AGGREGATE([1,2,3], 'sum')` |
@@ -89,7 +89,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 | [ARRAY_SKEWNESS](/tidb-cloud-lake/sql/array-skewness.md) | Skewness | `ARRAY_SKEWNESS([1,2,3,10])` |
 | [ARRAY_APPROX_COUNT_DISTINCT](/tidb-cloud-lake/sql/array-approx-count-distinct.md) | Approximate distinct count | `ARRAY_APPROX_COUNT_DISTINCT([1,1,2])` |
 | [ARRAY_SORT](/tidb-cloud-lake/sql/array-sort.md) | Sorts values; variants control order/nulls | `ARRAY_SORT([3,1,2])` |
-| [ARRAY_TO_STRING](semi-structured-functions/array/array-to-string) | Joins array elements | `ARRAY_TO_STRING(['a','b'], ',')` |
+| [ARRAY_TO_STRING](/tidb-cloud-lake/sql/array-to-string.md) | Joins array elements | `ARRAY_TO_STRING(['a','b'], ',')` |
 | [ARRAY_COMPACT](/tidb-cloud-lake/sql/array-compact.md) | Removes null values from an array | `ARRAY_COMPACT([1, NULL, 2, NULL, 3])` |
 | [ARRAY_FLATTEN](/tidb-cloud-lake/sql/array-flatten.md) | Flattens nested arrays into a single array | `ARRAY_FLATTEN([[1,2], [3,4]])` |
 | [ARRAY_REVERSE](/tidb-cloud-lake/sql/array-reverse.md) | Reverses the order of array elements | `ARRAY_REVERSE([1,2,3])` |

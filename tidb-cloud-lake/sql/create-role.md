@@ -82,4 +82,4 @@ SHOW GRANTS FOR 'admin_user';
 
 - [GRANT](/tidb-cloud-lake/sql/grant.md) - Grant privileges and roles
 - [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md) - View granted privileges
-- [DROP ROLE](05-user-drop-role.md) - Drop roles
+- [DROP ROLE](/tidb-cloud-lake/sql/drop-role.md) - Drop roles

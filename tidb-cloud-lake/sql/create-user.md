@@ -10,8 +10,8 @@ Creates a SQL user for connecting to Databend. Users must be granted appropriate
 
 See also:
 - [GRANT](/tidb-cloud-lake/sql/grant.md)
-- [ALTER USER](03-user-alter-user.md)
-- [DROP USER](02-user-drop-user.md)
+- [ALTER USER](/tidb-cloud-lake/sql/alter-user.md)
+- [DROP USER](/tidb-cloud-lake/sql/drop-user.md)
 
 ## Syntax
 

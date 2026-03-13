@@ -6,8 +6,8 @@ sidebar_position: 20
 Restores the recent version of a dropped table. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**
-- [CREATE TABLE](./10-ddl-create-table.md)
-- [DROP TABLE](./20-ddl-drop-table.md)
+- [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md)
+- [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md)
 - [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
 - [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md)
 

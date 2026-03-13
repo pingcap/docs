@@ -20,7 +20,7 @@ FILE_FORMAT = (
 [DETAILED_OUTPUT = true | false]
 ```
 
-- More CSV options refer to [CSV File Format Options](/sql/sql-reference/file-format-options#csv-options)
+- More CSV options refer to [CSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options)
 - Unloading into multiple files use the [MAX_FILE_SIZE Copy Option](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
 - More details about the syntax can be found in [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md)
 

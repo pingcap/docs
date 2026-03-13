@@ -21,7 +21,7 @@ This section provides reference information for JSON functions in Databend. JSON
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [JSON_TO_STRING](json/json-to-string) | Converts a JSON value to a string | `JSON_TO_STRING({"name":"John"})` → `'{"name":"John"}'` |
+| [JSON_TO_STRING](/tidb-cloud-lake/sql/json-to-string.md) | Converts a JSON value to a string | `JSON_TO_STRING({"name":"John"})` → `'{"name":"John"}'` |
 
 ## JSON Path Operations
 

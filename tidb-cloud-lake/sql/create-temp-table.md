@@ -10,10 +10,10 @@ Creates a temporary table that is automatically dropped at the end of the sessio
 
 - A temporary table is visible only within the session that created it and is automatically dropped, with all data vacuumed, when the session ends.
        - In cases where automatic cleanup of temporary tables fails—for example, due to a query node crash—you can use the [FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md) function to manually clean up leftover files from temporary tables.
-- To show the existing temporary tables in the session, query the [system.temporary_tables](../../../00-sql-reference/31-system-tables/system-temp-tables.md) system table. See [Example-1](#example-1).
+- To show the existing temporary tables in the session, query the [system.temporary_tables](/tidb-cloud-lake/sql/system-tables.md) system table. See [Example-1](#example-1).
 - A temporary table with the same name as a normal table takes precedence, hiding the normal table until dropped. See [Example-2](#example-2).
 - No privileges are required to create or operate on a temporary table.
-- Databend supports creating temporary tables with the [Fuse Engine](../../../00-sql-reference/30-table-engines/00-fuse.md).
+- Databend supports creating temporary tables with the [Fuse Engine](/tidb-cloud-lake/sql/table-engines.md).
 - To create temporary tables using BendSQL, ensure you are using the latest version of BendSQL.
 
 ## Syntax
@@ -25,13 +25,13 @@ CREATE [ OR REPLACE ] { TEMPORARY | TEMP } TABLE
        ...
 ```
 
-The omitted parts follow the syntax of [CREATE TABLE](10-ddl-create-table.md).
+The omitted parts follow the syntax of [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md).
 
 ## Examples
 
 ### Example-1
 
-This example demonstrates how to create a temporary table and verify its existence by querying the [system.temporary_tables](../../../00-sql-reference/31-system-tables/system-temp-tables.md) system table:
+This example demonstrates how to create a temporary table and verify its existence by querying the [system.temporary_tables](/tidb-cloud-lake/sql/system-tables.md) system table:
 
 ```sql
 CREATE TEMP TABLE my_table (id INT, description STRING);

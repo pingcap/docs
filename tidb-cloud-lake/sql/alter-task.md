@@ -39,7 +39,7 @@ ALTER TASK [ IF EXISTS ] <name> MODIFY WHEN <boolean_expr>
 | IF EXISTS                        | Optional. If specified, the task will only be altered if a task of the same name already exists. |
 | name                             | The name of the task. This is a mandatory field.                                                       |
 | RESUME \| SUSPEND                | Resume or suspend the task.                                                                          |
-| SET                              | Change task settings. details parameter descriptions could be found on see [Create Task](01-ddl-create_task.md).                                                                               |
+| SET                              | Change task settings. details parameter descriptions could be found on see [Create Task](/tidb-cloud-lake/sql/create-task.md).                                                                               |
 | MODIFY AS                        | Change task SQL.                                                                                     |
 | REMOVE AFTER |  Remove predecessor task from the task dag, task would become a standalone task or a root task if no predecessor tasks left. |
 | ADD AFTER | Add predecessor task to the task dag. |

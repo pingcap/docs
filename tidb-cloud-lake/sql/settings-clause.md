@@ -19,15 +19,15 @@ SETTINGS ( <setting> = <value> [, <setting> = <value>, ...] ) <statement>
 
 The SETTINGS clause can be used with the following SQL statements:
 
-- [SELECT](01-query-select.md)
+- [SELECT](/tidb-cloud-lake/sql/select.md)
 - [INSERT](/tidb-cloud-lake/sql/insert.md)
-- [INSERT (multi-table)](../10-dml/dml-insert-multi.md)
+- [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
 - [MERGE](/tidb-cloud-lake/sql/merge.md)
 - [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
 - [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
 - [UPDATE](/tidb-cloud-lake/sql/update.md)
-- [DELETE](../10-dml/dml-delete-from.md)
-- [CREATE TABLE](../00-ddl/01-table/10-ddl-create-table.md)
+- [DELETE](/tidb-cloud-lake/sql/delete.md)
+- [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md)
 - [EXPLAIN](/tidb-cloud-lake/sql/explain.md)
 
 ## Examples

@@ -14,7 +14,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 [DETAILED_OUTPUT = true | false]
 ```
 
-- More Parquet options refer to [Parquet File Format Options](/sql/sql-reference/file-format-options#parquet-options)
+- More Parquet options refer to [Parquet File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options)
 - Unloading into multiple files use the [MAX_FILE_SIZE Copy Option](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
 - More details about the syntax can be found in [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md)
 

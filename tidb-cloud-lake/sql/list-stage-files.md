@@ -9,7 +9,7 @@ See also:
 
 - [LIST_STAGE](/tidb-cloud-lake/sql/list-stage.md): This function lists files in a stage and allows you to filter files in a stage based on their extensions and obtain comprehensive details about each file.
 - [PRESIGN](/tidb-cloud-lake/sql/presign.md): Databend recommends using the Presigned URL method to upload files to the stage.
-- [REMOVE STAGE FILES](05-ddl-remove-stage.md): Removes files from a stage.
+- [REMOVE STAGE FILES](/tidb-cloud-lake/sql/remove-stage-files.md): Removes files from a stage.
 
 ## Syntax
 

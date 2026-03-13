@@ -164,7 +164,7 @@ id | email              | is_vip
 - Grant the global `APPLY MASKING POLICY` privilege or `APPLY ON MASKING POLICY <policy_name>` to roles that attach or detach policies via `ALTER TABLE`.
 - Audit access with `SHOW GRANTS ON MASKING POLICY <policy_name>`.
 - Additional references:
-  - [User & Role](/sql/sql-commands/ddl/user)
-  - [CREATE MASKING POLICY](/sql/sql-commands/ddl/mask-policy/create-mask-policy)
+  - [User & Role](/tidb-cloud-lake/sql/user-role.md)
+  - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
   - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
-  - [Masking Policy Commands](/sql/sql-commands/ddl/mask-policy)
+  - [Masking Policy Commands](/tidb-cloud-lake/sql/masking-policy-sql.md)

@@ -2,4 +2,4 @@
 title: TRY_TO_DATETIME
 ---
 
-Alias for [TRY_TO_TIMESTAMP](try-to-timestamp.md).
+Alias for [TRY_TO_TIMESTAMP](/tidb-cloud-lake/sql/try-timestamp.md).

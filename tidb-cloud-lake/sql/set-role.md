@@ -3,7 +3,7 @@ title: SET ROLE
 sidebar_position: 5
 ---
 
-Switches the active role for a session, and the currently active role can be viewed using the [SHOW ROLES](04-user-show-roles.md) command, with the `is_current` field indicating the active role. For more information about the active role and secondary roles, see [Active Role & Secondary Roles](/tidb-cloud-lake/guides/roles.md#active-role--secondary-roles).
+Switches the active role for a session, and the currently active role can be viewed using the [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) command, with the `is_current` field indicating the active role. For more information about the active role and secondary roles, see [Active Role & Secondary Roles](/tidb-cloud-lake/guides/roles.md#active-role--secondary-roles).
 
 See also: [SET SECONDARY ROLES](04-user-set-2nd-roles.md)
 
