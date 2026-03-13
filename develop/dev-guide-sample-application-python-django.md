@@ -11,12 +11,12 @@ TiDB is a MySQL-compatible database, and [Django](https://www.djangoproject.com)
 In this tutorial, you can learn how to use TiDB and Django to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using Django.
+- Connect to TiDB using Django.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -237,7 +237,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-You need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and `${ca_path}` with the actual values of your TiDB cluster.
+You need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and `${ca_path}` with the actual values of your TiDB.
 
 ### Define the data model
 

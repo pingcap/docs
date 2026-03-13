@@ -19,7 +19,7 @@ To import table structures and data of the Bookshop application, choose one of t
 
 ### TiDB Self-Managed: via `tiup demo`
 
-If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+If your TiDB Self-Managed cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 ```shell
 tiup demo bookshop prepare
@@ -73,7 +73,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### TiDB Cloud: via the Import feature
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud resource.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 

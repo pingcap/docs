@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [Sequelize](https://sequelize.org/) is 
 In this tutorial, you can learn how to use TiDB and Sequelize to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using Sequelize.
+- Connect to TiDB using Sequelize.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note**

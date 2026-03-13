@@ -44,7 +44,7 @@ mysql
 
 ## View databases
 
-To view the databases in a cluster, use the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
+To view the databases, use the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
 
 For example:
 

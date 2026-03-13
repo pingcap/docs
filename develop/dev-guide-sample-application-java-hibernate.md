@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/)
 In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using Hibernate.
+- Connect to TiDB using Hibernate.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -203,7 +203,7 @@ Edit the Hibernate configuration file `hibernate.cfg.xml`:
 </hibernate-configuration>
 ```
 
-Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB cluster. Then, define the following function:
+Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB. Then, define the following function:
 
 ```java
 public SessionFactory getSessionFactory() {

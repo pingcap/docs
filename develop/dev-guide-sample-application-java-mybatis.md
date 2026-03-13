@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [MyBatis](https://mybatis.org/mybatis-3
 In this tutorial, you can learn how to use TiDB and MyBatis to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using MyBatis.
+- Connect to TiDB using MyBatis.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -209,7 +209,7 @@ Edit the MyBatis configuration file `mybatis-config.xml`:
 </configuration>
 ```
 
-Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB cluster. Also, replace `${mapper_location}` with the path of your mapper XML configuration file. For multiple mapper XML configuration files, you need to add a `<mapper/>` tag for each. Then, define the following function:
+Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB. Also, replace `${mapper_location}` with the path of your mapper XML configuration file. For multiple mapper XML configuration files, you need to add a `<mapper/>` tag for each. Then, define the following function:
 
 ```java
 public SqlSessionFactory getSessionFactory() {

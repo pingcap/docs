@@ -11,12 +11,12 @@ TiDB is a MySQL-compatible database, and [peewee](https://docs.peewee-orm.com/) 
 In this tutorial, you can learn how to use TiDB and peewee to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using peewee.
+- Connect to TiDB using peewee.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -205,7 +205,7 @@ def get_db_engine():
     )
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB.
 
 ### Define a table
 

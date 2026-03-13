@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [node-mysql2](https://github.com/sidora
 In this tutorial, you can learn how to use TiDB and node-mysql2 to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using node-mysql2.
+- Connect to TiDB using node-mysql2.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -179,7 +179,7 @@ Run the following command to execute the sample code:
 npm start
 ```
 
-If the connection is successful, the console will output the version of the TiDB cluster as follows:
+If the connection is successful, the console will output the TiDB version as follows:
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})
@@ -212,7 +212,7 @@ import * as fs from "fs";
 dotenv.config();
 
 async function main() {
-   // Step 3. Create a connection to the TiDB cluster.
+   // Step 3. Create a connection to TiDB.
    const options = {
       host: process.env.TIDB_HOST || '127.0.0.1',
       port: process.env.TIDB_PORT || 4000,

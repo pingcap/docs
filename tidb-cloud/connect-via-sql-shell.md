@@ -11,7 +11,7 @@ In TiDB Cloud SQL Shell, you can try TiDB SQL, test out TiDB's compatibility wit
 >
 > You cannot connect to [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) using SQL Shell. To connect to your {{{ .starter }}} or {{{ .essential }}} instance, see [Connect to {{{ .starter }}} or Essential Instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
-To connect to your TiDB cluster using SQL shell, perform the following steps:
+To Connect to TiDB using SQL shell, perform the following steps:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 

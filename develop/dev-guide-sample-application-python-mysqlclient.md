@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [mysqlclient](https://github.com/PyMySQ
 In this tutorial, you can learn how to use TiDB and mysqlclient to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using mysqlclient.
+- Connect to TiDB using mysqlclient.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
@@ -201,7 +201,7 @@ def get_mysqlclient_connection(autocommit:bool=True) -> MySQLdb.Connection:
     return MySQLdb.connect(**db_conf)
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB.
 
 ### Insert data
 

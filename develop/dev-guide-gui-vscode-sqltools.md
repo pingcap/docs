@@ -8,7 +8,7 @@ aliases: ['/tidb/stable/dev-guide-gui-vscode-sqltools/','/tidb/dev/dev-guide-gui
 
 TiDB is a MySQL-compatible database, and [Visual Studio Code (VS Code)](https://code.visualstudio.com/) is a lightweight but powerful source code editor. This tutorial uses the [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) extension which supports TiDB as an [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
 
-In this tutorial, you can learn how to connect to your TiDB cluster using Visual Studio Code.
+In this tutorial, you can learn how to Connect to TiDB using Visual Studio Code.
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ To complete this tutorial, you need:
 
 ## Connect to TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+Connect to TiDB depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">

@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [mysql2](https://github.com/sidorares/n
 In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using mysql2.
+- Connect to TiDB using mysql2.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note**

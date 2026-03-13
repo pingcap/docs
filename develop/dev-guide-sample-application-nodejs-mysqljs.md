@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [mysql.js](https://github.com/mysqljs/m
 In this tutorial, you can learn how to use TiDB and mysql.js driver to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using mysql.js driver.
+- Connect to TiDB using mysql.js driver.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -154,7 +154,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, replace the corresponding placeholders `{}` with connection parameters of your cluster. The example configuration is as follows:
+2. Edit the `.env` file, replace the corresponding placeholders `{}` with connection parameters of your TiDB. The example configuration is as follows:
 
     ```dotenv
     TIDB_HOST={host}
@@ -179,7 +179,7 @@ Run the following command to execute the sample code:
 npm start
 ```
 
-If the connection is successful, the console will output the version of the TiDB cluster as follows:
+If the connection is successful, the console will output the TiDB version as follows:
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})
@@ -211,7 +211,7 @@ import * as fs from "fs";
 // Step 2. Load environment variables from .env file to process.env.
 dotenv.config();
 
-// Step 3. Create a connection to the TiDB cluster.
+// Step 3. Create a connection to TiDB.
 const options = {
     host: process.env.TIDB_HOST || '127.0.0.1',
     port: process.env.TIDB_PORT || 4000,

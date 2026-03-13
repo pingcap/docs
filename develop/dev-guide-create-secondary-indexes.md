@@ -19,7 +19,7 @@ Before creating a secondary index, do the following:
 
 ## What is secondary index
 
-A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
+A secondary index is a logical object in TiDB. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
 
 For more information about secondary indexes, see [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index).
 

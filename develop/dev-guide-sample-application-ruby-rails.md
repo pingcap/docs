@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, [Rails](https://github.com/rails/rails) is 
 In this tutorial, you can learn how to use TiDB and Rails to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using Rails.
+- Connect to TiDB using Rails.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations using ActiveRecord ORM.
 
 > **Note:**
@@ -173,7 +173,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     bundle exec rails runner ./quickstart.rb
     ```
 
-If the connection is successful, the console will output the version of the TiDB cluster as follows:
+If the connection is successful, the console will output the TiDB version as follows:
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})

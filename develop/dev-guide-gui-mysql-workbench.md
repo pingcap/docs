@@ -13,7 +13,7 @@ TiDB is a MySQL-compatible database, and [MySQL Workbench](https://www.mysql.com
 > - Although you can use MySQL Workbench to connect to TiDB due to its MySQL compatibility, MySQL Workbench does not fully support TiDB. You might encounter some issues during usage as it treats TiDB as MySQL.
 > - It is recommended to use other GUI tools that officially support TiDB, such as [DataGrip](/develop/dev-guide-gui-datagrip.md), [DBeaver](/develop/dev-guide-gui-dbeaver.md), and [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md). For a complete list of GUI tools that fully supported by TiDB, see [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md#gui).
 
-In this tutorial, you can learn how to connect to your TiDB cluster using MySQL Workbench.
+In this tutorial, you can learn how to Connect to TiDB using MySQL Workbench.
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ To complete this tutorial, you need:
 
 ## Connect to TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+Connect to TiDB depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
@@ -125,7 +125,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Hostname**: enter the IP address or domain name of your TiDB Self-Managed cluster.
     - **Port**: enter the port number of your TiDB Self-Managed cluster.
     - **Username**: enter the username to use to connect to your TiDB.
-    - **Password**: click **Store in Keychain ...**, enter the password to use to connect to your TiDB cluster, and then click **OK** to store the password.
+    - **Password**: click **Store in Keychain ...**, enter the password to use to connect to your TiDB Self-Managed cluster, and then click **OK** to store the password.
 
         ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 

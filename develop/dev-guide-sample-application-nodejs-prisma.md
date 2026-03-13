@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [Prisma](https://github.com/prisma/pris
 In this tutorial, you can learn how to use TiDB and Prisma to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using Prisma.
+- Connect to TiDB using Prisma.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -157,7 +157,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB cluster:
+2. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB:
 
     ```dotenv
     DATABASE_URL='mysql://{user}:{password}@{host}:4000/test'
@@ -258,7 +258,7 @@ void main();
 
 **Expected execution output:**
 
-If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
+If the connection is successful, the terminal will output the TiDB version as follows:
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})

@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [mysql2](https://github.com/brianmario/
 In this tutorial, you can learn how to use TiDB and mysql2 to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using mysql2.
+- Connect to TiDB using mysql2.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -180,7 +180,7 @@ Run the following command to execute the sample code:
 ruby app.rb
 ```
 
-If the connection is successful, the console will output the version of the TiDB cluster as follows:
+If the connection is successful, the console will output the TiDB version as follows:
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})

@@ -205,7 +205,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, `TIDB_DATABASE`, and `TIDB_CA_PATH` with the actual values of your TiDB cluster.
+You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, `TIDB_DATABASE`, and `TIDB_CA_PATH` with the actual values of your TiDB.
 
 ### Create vector tables
 

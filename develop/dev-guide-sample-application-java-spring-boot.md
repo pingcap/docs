@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [Spring](https://spring.io/) is a popul
 In this tutorial, you can learn how to use TiDB along with [Spring Data JPA](https://spring.io/projects/spring-data-jpa) and [Hibernate](https://hibernate.org/orm/) as the JPA provider to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using Hibernate and Spring Data JPA.
+- Connect to TiDB using Hibernate and Spring Data JPA.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -197,7 +197,7 @@ spring:
       ddl-auto: create-drop
 ```
 
-After configuration, set the environment variables `TIDB_JDBC_URL`, `TIDB_USER`, and `TIDB_PASSWORD` to the actual values of your TiDB cluster. The configuration file provides default settings for these environment variables. If you do not configure the environment variables, the default values are as follows:
+After configuration, set the environment variables `TIDB_JDBC_URL`, `TIDB_USER`, and `TIDB_PASSWORD` to the actual values of your TiDB. The configuration file provides default settings for these environment variables. If you do not configure the environment variables, the default values are as follows:
 
 - `TIDB_JDBC_URL`: `"jdbc:mysql://localhost:4000/test"`
 - `TIDB_USER`: `"root"`

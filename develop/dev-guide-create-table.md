@@ -18,7 +18,7 @@ Before reading this document, make sure that the following tasks are completed:
 
 ## What is a table
 
-A [table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to store the data sent from SQL statements. Tables save data records in the form of rows and columns. A table has at least one column. If you have defined `n` columns, each row of data has exactly the same fields as the `n` columns.
+A [table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to store the data sent from SQL statements. Tables save data records in the form of rows and columns. A table has at least one column. If you have defined `n` columns, each row of data has exactly the same fields as the `n` columns.
 
 ## Name a table
 
@@ -168,7 +168,7 @@ In addition to [primary key constraints](#select-primary-key), TiDB also support
 
 To set a default value on a column, use the `DEFAULT` constraint. The default value allows you to insert data without specifying a value for each column.
 
-You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
+You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear are instead handled by the database. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (

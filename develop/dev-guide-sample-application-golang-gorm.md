@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [GORM](https://gorm.io/index.html) is a
 In this tutorial, you can learn how to use TiDB and GORM to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using GORM.
+- Connect to TiDB using GORM.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -190,7 +190,7 @@ func createDB() *gorm.DB {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. {{{ .starter }}} requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB. {{{ .starter }}} requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
 ### Insert data
 

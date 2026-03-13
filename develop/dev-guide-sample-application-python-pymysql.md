@@ -11,12 +11,12 @@ TiDB is a MySQL-compatible database, and [PyMySQL](https://github.com/PyMySQL/Py
 In this tutorial, you can learn how to use TiDB and PyMySQL to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using PyMySQL.
+- Connect to TiDB using PyMySQL.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -204,7 +204,7 @@ def get_connection(autocommit: bool = True) -> Connection:
     return pymysql.connect(**db_conf)
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB.
 
 ### Insert data
 

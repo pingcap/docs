@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and JDBC (Java Database Connectivity) is th
 In this tutorial, you can learn how to use TiDB and JDBC to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using JDBC.
+- Connect to TiDB using JDBC.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
@@ -194,7 +194,7 @@ public MysqlDataSource getMysqlDataSource() throws SQLException {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB.
 
 ### Insert data
 

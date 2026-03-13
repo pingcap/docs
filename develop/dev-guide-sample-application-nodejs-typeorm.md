@@ -11,7 +11,7 @@ TiDB is a MySQL-compatible database, and [TypeORM](https://github.com/TypeORM/Ty
 In this tutorial, you can learn how to use TiDB and TypeORM to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using TypeORM.
+- Connect to TiDB using TypeORM.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note**
@@ -160,7 +160,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB cluster:
+2. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB:
 
     ```dotenv
     TIDB_HOST={host}
@@ -221,7 +221,7 @@ npm start
 
 **Expected execution output:**
 
-If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
+If the connection is successful, the terminal will output the TiDB version as follows:
 
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})
@@ -322,7 +322,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ### Execute raw SQL queries
 
-The following query executes a raw SQL statement (`SELECT VERSION() AS tidb_version;`) and returns the version of the TiDB cluster:
+The following query executes a raw SQL statement (`SELECT VERSION() AS tidb_version;`) and returns the TiDB version:
 
 ```typescript
 const rows = await dataSource.query('SELECT VERSION() AS tidb_version;');
