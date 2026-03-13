@@ -82,9 +82,7 @@ server_configs:
 
 For more information about TiUP topology configuration, see [TiDB Cluster Topology Reference](/tiup/tiup-cluster-topology-reference.md).
 
-<a id="use-top-sql" name="use-top-sql"></a>
-
-## Use TopSQL
+## Use TopSQL {#use-top-sql}
 
 The following are the common steps to use TopSQL:
 
