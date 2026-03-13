@@ -85,9 +85,9 @@ In TiDB Cloud, you can view the commonly used metrics of a <CustomContent plan="
 
 ### Overview page
 
-The **Overview** page provides general metrics of a cluster.
+The **Overview** page provides general metrics of your TiDB Cloud resource.
 
-To view metrics on the cluster overview page, take the following steps:
+To view metrics on the overview page, take the following steps:
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
@@ -99,7 +99,7 @@ To view metrics on the cluster overview page, take the following steps:
 
 ### Metrics page
 
-The **Metrics** page provides a full set of metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+The **Metrics** page provides a full set of metrics of your TiDB Cloud resource. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 To view metrics on the **Metrics** page, take the following steps:
 

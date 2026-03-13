@@ -13,7 +13,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 > **Note:**
 >
-> You cannot pause a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances.
+> You cannot pause a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instance.
 
 ## Limitations
 

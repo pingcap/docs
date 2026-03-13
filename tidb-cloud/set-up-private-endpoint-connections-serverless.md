@@ -39,7 +39,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint, follow these steps:
 
-1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-x-instance)
+1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
 3. [Connect to your {{{ .starter }}} or Essential instance](#step-3-connect-to-your-tidb)
 

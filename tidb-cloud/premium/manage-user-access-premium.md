@@ -211,7 +211,7 @@ To invite a user to access or manage a {{{ .premium }}} instance, take the follo
 
 4. Enter the email address of the user to be invited, and then select an organization role for the user.
 
-5. Make sure the **Add access for projects and instances** option is enabled, click **Add access** in the **Instance access** section, and then select a instance role for the user.
+5. Make sure the **Add access for projects and instances** option is enabled, click **Add access** in the **Instance access** section, and then select an instance role for the user.
 
 6. Click **Add access**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 

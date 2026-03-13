@@ -168,7 +168,7 @@ The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [
 
 ### TiDB node
 
-The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the {{{ .dedicated}}} cluster can handle.
+The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the {{{ .dedicated }}} cluster can handle.
 
 ### TiDB X
 

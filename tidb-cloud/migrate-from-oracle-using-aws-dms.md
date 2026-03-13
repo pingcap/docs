@@ -28,7 +28,7 @@ If you want to migrate data from heterogeneous databases, such as PostgreSQL, Or
 At a high level, follow the following steps:
 
 1. Set up the source Amazon RDS for Oracle.
-2. Set up the target [{{{ .starter }}}](https://tidbcloud.com/project/clusters/create-cluster).
+2. Create a {{{ .starter }}} instance.
 3. Set up data migration (full load) using AWS DMS.
 
 The following diagram illustrates the high-level architecture.
@@ -75,7 +75,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 4. Create a {{{ .starter }}} instance
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/project/clusters).
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 
 2. [Create a {{{ .starter }}} instance](/tidb-cloud/tidb-cloud-quickstart.md).
 
@@ -143,7 +143,7 @@ For more information, see [Migrating your source schema to your target database 
 
 ## Step 9. Check data in the downstream TiDB
 
-Connect to the [{{{ .starter }}} instance](https://tidbcloud.com/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
+Connect to the [{{{ .starter }}} instance](https://tidbcloud.com/tidbs) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 

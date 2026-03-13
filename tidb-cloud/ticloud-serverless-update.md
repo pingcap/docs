@@ -38,7 +38,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                      | Description                                 | Required | Note                                                 |
 |---------------------------|---------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string   | Specifies the ID of the cluster.            | Yes      | Only works in non-interactive mode.                  |
-| -n --display-name string  | Specifies a new name for the {{{ .starter }}} or Essential instance.       | No       | Only works in non-interactive mode.                  |.
+| -n --display-name string  | Specifies a new name for the {{{ .starter }}} or Essential instance.       | No       | Only works in non-interactive mode.                  |
 | --labels string           | Specifies new labels for the {{{ .starter }}} or Essential instance.       | No       | Only works in non-interactive mode.                  |
 | --disable-public-endpoint | Disables the public endpoint of the {{{ .starter }}} or Essential instance. | No       | Only works in non-interactive mode.                  |
 | -h, --help                | Shows help information for this command.    | No       | Works in both non-interactive and interactive modes. |

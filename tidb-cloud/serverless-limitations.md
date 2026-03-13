@@ -74,10 +74,10 @@ For the first five {{{ .starter }}} instances in your organization, TiDB Cloud p
 
 The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for {{{ .starter }}} service.
 
-Once a {{{ .starter}}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
+Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
-If you want to create a {{{ .starter }}} instance with an additional quota, you can set the monthly spending limit on the {{{ .starter}}} instance creation page. For more information, see [Create a {{{ .starter }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
+If you want to create a {{{ .starter }}} instance with an additional quota, you can set the monthly spending limit on the {{{ .starter }}} instance creation page. For more information, see [Create a {{{ .starter }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-After creating a {{{ .starter }}} instance, you can still check and edit the spending limit on the overview page of your {{{ .starter}}} instance. For more information, see [Manage Spending Limit for {{{ .starter }}} Instances](/tidb-cloud/manage-serverless-spend-limit.md).
+After creating a {{{ .starter }}} instance, you can still check and edit the spending limit on the overview page of your {{{ .starter }}} instance. For more information, see [Manage Spending Limit for {{{ .starter }}} Instances](/tidb-cloud/manage-serverless-spend-limit.md).

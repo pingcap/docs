@@ -158,8 +158,8 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | CreateBranch                   | Create a branch for {{{ .starter }}} or {{{ .essential }}} instance                                                  |
 | DeleteBranch                   | Delete a branch for {{{ .starter }}} or {{{ .essential }}} instance                                                  |
 | SetBranchRootPassword          | Set root password for a branch of your {{{ .starter }}} or {{{ .essential }}} instance                                   |
-| ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
-| DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
+| ConnectBranchGitHub            | Connect a {{{ .starter }}} or {{{ .essential }}} instance with a GitHub repository to enable branching integration     |
+| DisconnectBranchGitHub         | Disconnect a {{{ .starter }}} or {{{ .essential }}} instance from a GitHub repository to disable branching integration |
 | UpdateAuthenticationMethod     | Update the authentication method for Cloud Organization SSO                        |
 
 ## Console audit log fields

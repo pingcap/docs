@@ -49,7 +49,7 @@ For more information, see [Events](/tidb-cloud/tidb-cloud-events.md).
 
 ## Third-party metrics integrations
 
-TiDB Cloud lets you integrate any of the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster.
+TiDB Cloud lets you integrate any of the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB Cloud Dedicated cluster.
 
 - [Datadog integration](/tidb-cloud/monitor-datadog-integration.md)
 

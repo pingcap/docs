@@ -173,4 +173,4 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### Can I upgrade the version of TiDB that my {{{ .starter }}} instance is running on?
 
-No. {{{ .starter }}} instances are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your {{{ .starter }}} instance is running in the [TiDB Cloud console](https://tidbcloud.com/project/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your {{{ .starter }}} instance and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+No. {{{ .starter }}} instances are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your {{{ .starter }}} instance is running in the [TiDB Cloud console](https://tidbcloud.com/tidbs) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your {{{ .starter }}} instance and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
