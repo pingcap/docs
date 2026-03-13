@@ -32,8 +32,8 @@ LISTAGG([DISTINCT] <expr> [, <delimiter>])
 
 ## Aliases
 
-- [STRING_AGG](aggregate-string-agg.md)
-- [GROUP_CONCAT](aggregate-group-concat.md)
+- [STRING_AGG](/tidb-cloud-lake/sql/string-agg.md)
+- [GROUP_CONCAT](/tidb-cloud-lake/sql/group-concat.md)
 
 ## Return Type
 

@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.190"/>
 
-Shows the list of [system metrics](../../00-sql-reference/31-system-tables/system-metrics.md).
+Shows the list of [system metrics](/tidb-cloud-lake/sql/system-metrics.md).
 
 ## Syntax
 

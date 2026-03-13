@@ -6,7 +6,7 @@ sidebar_position: 4
 Deletes the cluster key for a table.
 
 See also:
-[ALTER CLUSTER KEY](./dml-alter-cluster-key.md) 
+[ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md) 
 
 ## Syntax
 

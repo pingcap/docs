@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Lists the currently supported built-in scalar and aggregate functions.
 
-See also: [system.functions](../../00-sql-reference/31-system-tables/system-functions.md)
+See also: [system.functions](/tidb-cloud-lake/sql/system-functions.md)
 
 ## Syntax
 

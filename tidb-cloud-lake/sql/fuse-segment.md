@@ -2,12 +2,12 @@
 title: FUSE_SEGMENT
 ---
 
-Returns the segment information of a specified table snapshot. For more information about what is segment in Databend, see [What are Snapshot, Segment, and Block?](../../10-sql-commands/00-ddl/01-table/60-optimize-table.md#what-are-snapshot-segment-and-block).
+Returns the segment information of a specified table snapshot. For more information about what is segment in Databend, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#what-are-snapshot-segment-and-block).
 
 See Also:
 
-- [FUSE_SNAPSHOT](fuse_snapshot.md)
-- [FUSE_BLOCK](fuse_block.md)
+- [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md)
+- [FUSE_BLOCK](/tidb-cloud-lake/sql/fuse-block.md)
 
 ## Syntax
 

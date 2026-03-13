@@ -8,14 +8,14 @@ This page provides reference information for the table functions in Databend. Ta
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [INFER_SCHEMA](./01-infer-schema.md) | Detects file metadata schema and retrieves column definitions | `SELECT * FROM INFER_SCHEMA(LOCATION => '@mystage/data/')` |
-| [INSPECT_PARQUET](./02-inspect-parquet.md) | Inspects the structure of Parquet files | `SELECT * FROM INSPECT_PARQUET(LOCATION => '@mystage/data.parquet')` |
+| [INFER_SCHEMA](/tidb-cloud-lake/sql/infer-schema.md) | Detects file metadata schema and retrieves column definitions | `SELECT * FROM INFER_SCHEMA(LOCATION => '@mystage/data/')` |
+| [INSPECT_PARQUET](/tidb-cloud-lake/sql/inspect-parquet.md) | Inspects the structure of Parquet files | `SELECT * FROM INSPECT_PARQUET(LOCATION => '@mystage/data.parquet')` |
 
 ## Stage & Query Management
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [LIST_STAGE](./03-list-stage.md) | Lists files in a stage | `SELECT * FROM LIST_STAGE(LOCATION => '@mystage/data/')` |
+| [LIST_STAGE](/tidb-cloud-lake/sql/list-stage.md) | Lists files in a stage | `SELECT * FROM LIST_STAGE(LOCATION => '@mystage/data/')` |
 | [READ_FILE](/tidb-cloud-lake/sql/read-file.md) | Reads file content from a stage as binary | `SELECT read_file('@mystage/file.csv')` |
 | [RESULT_SCAN](/tidb-cloud-lake/sql/result-scan.md) | Retrieves the result set of a previous query | `SELECT * FROM RESULT_SCAN(LAST_QUERY_ID())` |
 
@@ -23,7 +23,7 @@ This page provides reference information for the table functions in Databend. Ta
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [GENERATE_SERIES](./05-generate-series.md) | Generates a sequence of values | `SELECT * FROM GENERATE_SERIES(1, 10, 2)` |
+| [GENERATE_SERIES](/tidb-cloud-lake/sql/generate-series.md) | Generates a sequence of values | `SELECT * FROM GENERATE_SERIES(1, 10, 2)` |
 
 ## Data Transformation & Expansion
 
@@ -59,4 +59,4 @@ This page provides reference information for the table functions in Databend. Ta
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [OBFUSCATE](../19-data-anonymization-functions/obfuscate.md) | dataset anonymization | `SELECT * FROM OBFUSCATE(users)` |
+| [OBFUSCATE](/tidb-cloud-lake/sql/obfuscate.md) | dataset anonymization | `SELECT * FROM OBFUSCATE(users)` |

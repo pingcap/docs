@@ -4,7 +4,7 @@ title: KILL
 
 Forcibly terminates the currently running queries.
 
-See also: [SHOW PROCESSLIST](07-show-processlist.md)
+See also: [SHOW PROCESSLIST](/tidb-cloud-lake/sql/show-processlist.md)
 
 ## Syntax
 

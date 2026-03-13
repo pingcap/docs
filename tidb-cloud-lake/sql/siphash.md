@@ -2,4 +2,4 @@
 title: SIPHASH
 ---
 
-Alias for [SIPHASH64](siphash64.md).
+Alias for [SIPHASH64](/tidb-cloud-lake/sql/siphash.md).

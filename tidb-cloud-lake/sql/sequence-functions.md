@@ -8,4 +8,4 @@ This section provides reference information for the sequence functions in Databe
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [NEXTVAL](sequence-functions/nextval) | Retrieves the next value from a sequence | `NEXTVAL(my_sequence)` |
+| [NEXTVAL](/tidb-cloud-lake/sql/nextval.md) | Retrieves the next value from a sequence | `NEXTVAL(my_sequence)` |

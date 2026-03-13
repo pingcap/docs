@@ -12,7 +12,7 @@ SHA(<expr>)
 
 ## Aliases
 
-- [SHA1](sha1.md)
+- [SHA1](/tidb-cloud-lake/sql/sha.md)
 
 ## Examples
 

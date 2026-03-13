@@ -94,8 +94,8 @@ This page provides a comprehensive overview of String functions in Databend, org
 | [OCT](/tidb-cloud-lake/sql/oct.md) | Returns octal representation | `OCT(8)` → `'10'` |
 | [HEX](/tidb-cloud-lake/sql/hex.md) | Returns hexadecimal representation | `HEX('ABC')` → `'414243'` |
 | [UNHEX](/tidb-cloud-lake/sql/unhex.md) | Converts hex to binary | `UNHEX('414243')` → `'ABC'` |
-| [TO_BASE64](to-base64.md) | Encodes to base64 | `TO_BASE64('databend')` → `'ZGF0YWJlbmQ='` |
-| [FROM_BASE64](from-base64.md) | Decodes from base64 | `FROM_BASE64('ZGF0YWJlbmQ=')` → `'databend'` |
+| [TO_BASE64](/tidb-cloud-lake/sql/to-base64.md) | Encodes to base64 | `TO_BASE64('databend')` → `'ZGF0YWJlbmQ='` |
+| [FROM_BASE64](/tidb-cloud-lake/sql/from-base64.md) | Decodes from base64 | `FROM_BASE64('ZGF0YWJlbmQ=')` → `'databend'` |
 
 ## Miscellaneous
 
@@ -103,4 +103,4 @@ This page provides a comprehensive overview of String functions in Databend, org
 |----------|-------------|---------|
 | [QUOTE](/tidb-cloud-lake/sql/quote.md) | Escapes string for SQL | `QUOTE('databend')` → `'"databend"'` |
 | [SOUNDEX](/tidb-cloud-lake/sql/soundex.md) | Returns soundex code | `SOUNDEX('databend')` → `'D315'` |
-| [SOUNDSLIKE](soundslike.md) | Compares soundex values | `SOUNDSLIKE('databend', 'databand')` → `true` |
+| [SOUNDSLIKE](/tidb-cloud-lake/sql/sounds-like.md) | Compares soundex values | `SOUNDSLIKE('databend', 'databand')` → `true` |

@@ -27,7 +27,7 @@ MARKOV_TRAIN(<order>, <frequency_cutoff>, <num_buckets_cutoff>, <frequency_add>,
 
 ## Return Type
 
-Depending on the implementation, it is only used as a argument for [MARKOV_GENERATE](../19-data-anonymization-functions/markov_generate.md).
+Depending on the implementation, it is only used as a argument for [MARKOV_GENERATE](/tidb-cloud-lake/sql/markov-generate.md).
 
 ## Examples
 

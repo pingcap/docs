@@ -5,7 +5,7 @@ title: UNDROP DATABASE
 Restores the most recent version of a dropped database. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**
-[DROP DATABASE](ddl-drop-database.md)
+[DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
 [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
 
 ## Syntax

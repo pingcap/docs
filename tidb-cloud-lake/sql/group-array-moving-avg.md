@@ -21,7 +21,7 @@ GROUP_ARRAY_MOVING_AVG(<window_size>)(<expr>)
 
 ## Return Type
 
-Returns an [Array](../../00-sql-reference/10-data-types/array.md) with elements of double or decimal depending on the source data type.
+Returns an [Array](/tidb-cloud-lake/sql/array.md) with elements of double or decimal depending on the source data type.
 
 ## Examples
 

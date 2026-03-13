@@ -154,7 +154,7 @@ To switch an existing table to a new connection, use [`ALTER TABLE ... CONNECTIO
 
 ### Using Access Keys
 
-This example creates a connection to Amazon S3 named 'toronto' and establishes an external stage named 'my_s3_stage' linked to the 's3://databend-toronto' URL, using the 'toronto' connection. For more practical examples about connection, see [Usage Examples](index.md#usage-examples).
+This example creates a connection to Amazon S3 named 'toronto' and establishes an external stage named 'my_s3_stage' linked to the 's3://databend-toronto' URL, using the 'toronto' connection. For more practical examples about connection, see [Usage Examples](/tidb-cloud-lake/sql/connection.md#usage-examples).
 
 ```sql
 CREATE CONNECTION toronto

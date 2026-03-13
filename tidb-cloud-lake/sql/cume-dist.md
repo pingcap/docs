@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Calculates the cumulative distribution of each row's value. Returns the fraction of rows with values less than or equal to the current row's value.
 
-See also: [PERCENT_RANK](percent_rank.md)
+See also: [PERCENT_RANK](/tidb-cloud-lake/sql/percent-rank.md)
 
 ## Syntax
 

@@ -38,7 +38,7 @@ userStage ::= @~[/<path>]
 
 ### PATTERN
 
-See [COPY INTO table](/10-sql-commands/10-dml/dml-copy-into-table.md).
+See [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
 
 ## Examples

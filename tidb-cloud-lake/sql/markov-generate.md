@@ -2,7 +2,7 @@
 title: MARKOV_GENERATE
 ---
 
-Using the model trained by [MARKOV_TRAIN](../07-aggregate-functions/aggregate-markov-train.md) to anonymize the dataset.
+Using the model trained by [MARKOV_TRAIN](/tidb-cloud-lake/sql/markov-train.md) to anonymize the dataset.
 
 ## Syntax
 

@@ -33,14 +33,14 @@ This page provides a comprehensive overview of Date & Time functions in Databend
 | Function                                  | Description                                 | Example                                                       |
 |-------------------------------------------|---------------------------------------------|---------------------------------------------------------------|
 | [DATE](/tidb-cloud-lake/sql/date.md)                           | Converts a value to DATE type               | `DATE('2024-06-04')` → `2024-06-04`                           |
-| [TO_DATE](to-date.md)                     | Converts a string to DATE type              | `TO_DATE('2024-06-04')` → `2024-06-04`                        |
-| [TO_DATETIME](to-datetime.md)             | Converts a string to DATETIME type          | `TO_DATETIME('2024-06-04 12:30:45')` → `2024-06-04 12:30:45`  |
-| [TO_TIMESTAMP](to-timestamp.md)           | Converts a string to TIMESTAMP type         | `TO_TIMESTAMP('2024-06-04 12:30:45')` → `2024-06-04 12:30:45` |
-| [TO_UNIX_TIMESTAMP](to-unix-timestamp.md) | Converts a date to Unix timestamp           | `TO_UNIX_TIMESTAMP('2024-06-04')` → `1717516800`              |
-| [TO_YYYYMM](to-yyyymm.md)                 | Formats date as YYYYMM                      | `TO_YYYYMM('2024-06-04')` → `202406`                          |
-| [TO_YYYYMMDD](to-yyyymmdd.md)             | Formats date as YYYYMMDD                    | `TO_YYYYMMDD('2024-06-04')` → `20240604`                      |
-| [TO_YYYYMMDDHH](to-yyyymmddhh.md)         | Formats date as YYYYMMDDHH                  | `TO_YYYYMMDDHH('2024-06-04 12:30:45')` → `2024060412`         |
-| [TO_YYYYMMDDHHMMSS](to-yyyymmddhhmmss.md) | Formats date as YYYYMMDDHHMMSS              | `TO_YYYYMMDDHHMMSS('2024-06-04 12:30:45')` → `20240604123045` |
+| [TO_DATE](/tidb-cloud-lake/sql/date.md)                     | Converts a string to DATE type              | `TO_DATE('2024-06-04')` → `2024-06-04`                        |
+| [TO_DATETIME](/tidb-cloud-lake/sql/datetime.md)             | Converts a string to DATETIME type          | `TO_DATETIME('2024-06-04 12:30:45')` → `2024-06-04 12:30:45`  |
+| [TO_TIMESTAMP](/tidb-cloud-lake/sql/timestamp.md)           | Converts a string to TIMESTAMP type         | `TO_TIMESTAMP('2024-06-04 12:30:45')` → `2024-06-04 12:30:45` |
+| [TO_UNIX_TIMESTAMP](/tidb-cloud-lake/sql/unix-timestamp.md) | Converts a date to Unix timestamp           | `TO_UNIX_TIMESTAMP('2024-06-04')` → `1717516800`              |
+| [TO_YYYYMM](/tidb-cloud-lake/sql/yyyymm.md)                 | Formats date as YYYYMM                      | `TO_YYYYMM('2024-06-04')` → `202406`                          |
+| [TO_YYYYMMDD](/tidb-cloud-lake/sql/yyyymmdd.md)             | Formats date as YYYYMMDD                    | `TO_YYYYMMDD('2024-06-04')` → `20240604`                      |
+| [TO_YYYYMMDDHH](/tidb-cloud-lake/sql/yyyymmddhh.md)         | Formats date as YYYYMMDDHH                  | `TO_YYYYMMDDHH('2024-06-04 12:30:45')` → `2024060412`         |
+| [TO_YYYYMMDDHHMMSS](/tidb-cloud-lake/sql/yyyymmddhhmmss.md) | Formats date as YYYYMMDDHHMMSS              | `TO_YYYYMMDDHHMMSS('2024-06-04 12:30:45')` → `20240604123045` |
 | [DATE_FORMAT](/tidb-cloud-lake/sql/date-format.md)             | Formats a date according to a format string | `DATE_FORMAT('2024-06-04', '%Y-%m-%d')` → `'2024-06-04'`      |
 | [CONVERT_TIMEZONE](/tidb-cloud-lake/sql/convert-timezone.md)   | Converts a timestamp to the target timezone | `CONVERT_TIMEZONE('America/Los_Angeles', '2024-11-01 11:36:10')` → `2024-10-31 20:36:10` |
 

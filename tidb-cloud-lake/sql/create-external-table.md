@@ -43,7 +43,7 @@ Connection parameters:
 | SECRET_ACCESS_KEY         	 | Your secret access key for connecting the AWS S3 compatible object storage. 	                                                                                                                                            | Optional 	 |
 | ENABLE_VIRTUAL_HOST_STYLE 	 | If you use virtual hosting to address the bucket, set it to "true".                               	                                                                                                                      | Optional 	 |
 
-For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](../13-connection/create-connection.md)
+For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
 
 ## S3-compatible Bucket Policy Requirements
 

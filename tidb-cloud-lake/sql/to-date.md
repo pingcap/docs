@@ -11,9 +11,9 @@ Converts an expression to a date, including:
 
 - **Converting an integer to a date**: Interprets the integer as the number of days before (for negative numbers) or after (for positive numbers) the Unix epoch (midnight on January 1, 1970). Please note that a Date value ranges from `1000-01-01` to `9999-12-31`. Databend would return an error if you run "SELECT TO_DATE(9999999999999999999)".
 
-- **Converting a string to a date using the specified format**: The function takes two arguments, converting the first string to a date based on the format specified in the second string. To customize the date and time format in Databend, specifiers can be used. For a comprehensive list of supported specifiers, see [Formatting Date and Time](../../00-sql-reference/10-data-types/datetime.md#formatting-date-and-time).
+- **Converting a string to a date using the specified format**: The function takes two arguments, converting the first string to a date based on the format specified in the second string. To customize the date and time format in Databend, specifiers can be used. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time-functions.md#formatting-date-and-time).
 
-See also: [TO_TIMESTAMP](to-timestamp)
+See also: [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)
 
 ## Syntax
 

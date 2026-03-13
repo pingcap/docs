@@ -17,11 +17,11 @@ Effective anonymization strategies typically target specific categories of sensi
 Databend provides a set of functions to implement various anonymization techniques, including data masking, pseudonymization, and synthetic data generation:
 
 - **Data Masking**: Use the [`OBFUSCATE` table function](/tidb-cloud-lake/sql/obfuscate.md) to automatically apply masking rules to columns, replacing original values with artificial ones that appear genuine.
-- **Pseudonymization**: Use [FEISTEL_OBFUSCATE](feistel_obfuscate.md) to replace identifiers with deterministic substitutes. This preserves data integrity and cardinality, making it suitable for maintaining join keys.
-- **Synthetic Data**: Use [MARKOV_TRAIN](../07-aggregate-functions/aggregate-markov-train.md) and [MARKOV_GENERATE](markov_generate.md) to produce machine-generated data that statistically resembles the original dataset but has no direct connection to real records.
+- **Pseudonymization**: Use [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md) to replace identifiers with deterministic substitutes. This preserves data integrity and cardinality, making it suitable for maintaining join keys.
+- **Synthetic Data**: Use [MARKOV_TRAIN](/tidb-cloud-lake/sql/markov-train.md) and [MARKOV_GENERATE](/tidb-cloud-lake/sql/markov-generate.md) to produce machine-generated data that statistically resembles the original dataset but has no direct connection to real records.
 
 | Function | Description |
 |----------|-------------|
-| [MARKOV_GENERATE](markov_generate.md) | Generate anonymized strings based on a Markov model |
-| [FEISTEL_OBFUSCATE](feistel_obfuscate.md) | Obfuscate numbers using a Feistel cipher |
+| [MARKOV_GENERATE](/tidb-cloud-lake/sql/markov-generate.md) | Generate anonymized strings based on a Markov model |
+| [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md) | Obfuscate numbers using a Feistel cipher |
 | [OBFUSCATE](/tidb-cloud-lake/sql/obfuscate.md) | Table-level masking using built-in rules |

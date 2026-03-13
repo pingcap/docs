@@ -26,7 +26,7 @@ Databend determines the file format used by a COPY or Select statement in the fo
 
 :::note
 - Databend currently supports ORC and AVRO as a source ONLY. Unloading data into an ORC or AVRO file is not supported yet.
-- For managing custom file formats in Databend, see [File Format](../10-sql-commands/00-ddl/13-file-format/index.md).
+- For managing custom file formats in Databend, see [File Format](/tidb-cloud-lake/sql/file-format.md).
 :::
 
 ### formatTypeOptions

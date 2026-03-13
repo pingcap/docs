@@ -8,15 +8,15 @@ This page provides a comprehensive overview of cluster key operations in Databen
 
 | Command | Description |
 |---------|-------------|
-| [SET CLUSTER KEY](dml-set-cluster-key.md) | Creates or replaces a cluster key for a table |
-| [ALTER CLUSTER KEY](dml-alter-cluster-key.md) | Modifies an existing cluster key |
-| [DROP CLUSTER KEY](dml-drop-cluster-key.md) | Removes a cluster key from a table |
-| [RECLUSTER TABLE](dml-recluster-table.md) | Reorganizes table data based on the cluster key |
+| [SET CLUSTER KEY](/tidb-cloud-lake/sql/set-cluster-key.md) | Creates or replaces a cluster key for a table |
+| [ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md) | Modifies an existing cluster key |
+| [DROP CLUSTER KEY](/tidb-cloud-lake/sql/drop-cluster-key.md) | Removes a cluster key from a table |
+| [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md) | Reorganizes table data based on the cluster key |
 
 ## Related Topics
 
-- [Cluster Key](/tidb-cloud-lake/guides/cluster-key.md)
+- [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md)
 
 :::note
 Cluster keys in Databend are used to physically organize data in tables to improve query performance by co-locating related data.
-:::
+::: 

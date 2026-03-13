@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.652"/>
 
-The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use [SHOW SETTINGS](../50-administration-cmds/03-show-settings.md).
+The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 
 See also: [SET](../50-administration-cmds/02-set-global.md)
 
@@ -20,15 +20,15 @@ SETTINGS ( <setting> = <value> [, <setting> = <value>, ...] ) <statement>
 The SETTINGS clause can be used with the following SQL statements:
 
 - [SELECT](01-query-select.md)
-- [INSERT](../10-dml/dml-insert.md)
+- [INSERT](/tidb-cloud-lake/sql/insert.md)
 - [INSERT (multi-table)](../10-dml/dml-insert-multi.md)
-- [MERGE](../10-dml/dml-merge.md)
-- [`COPY INTO <table>`](../10-dml/dml-copy-into-table.md)
-- [`COPY INTO <location>`](../10-dml/dml-copy-into-location.md)
-- [UPDATE](../10-dml/dml-update.md)
+- [MERGE](/tidb-cloud-lake/sql/merge.md)
+- [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
+- [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
+- [UPDATE](/tidb-cloud-lake/sql/update.md)
 - [DELETE](../10-dml/dml-delete-from.md)
 - [CREATE TABLE](../00-ddl/01-table/10-ddl-create-table.md)
-- [EXPLAIN](../40-explain-cmds/explain.md)
+- [EXPLAIN](/tidb-cloud-lake/sql/explain.md)
 
 ## Examples
 

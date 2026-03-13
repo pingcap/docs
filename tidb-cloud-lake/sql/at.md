@@ -33,7 +33,7 @@ AT (
 
 ## Obtaining Snapshot ID and Timestamp
 
-To return the snapshot IDs and timestamps of all the snapshots of a table, use the [FUSE_SNAPSHOT](../../20-sql-functions/16-system-functions/fuse_snapshot.md) function:
+To return the snapshot IDs and timestamps of all the snapshots of a table, use the [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md) function:
 
 ```sql
 SELECT snapshot_id, 

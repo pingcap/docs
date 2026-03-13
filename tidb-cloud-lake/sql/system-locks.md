@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Contains information about the locks in the system.
 
-See also: [SHOW LOCKS](../../10-sql-commands/00-ddl/14-transaction/show-locks.md)
+See also: [SHOW LOCKS](/tidb-cloud-lake/sql/show-locks.md)
 
 ```sql
 SELECT * FROM system.locks;

@@ -9,7 +9,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Converts values into a JSON array while skipping NULLs.
 
-See also: [JSON_OBJECT_AGG](aggregate-json-object-agg.md)
+See also: [JSON_OBJECT_AGG](/tidb-cloud-lake/sql/json-object-agg.md)
 
 ## Syntax
 

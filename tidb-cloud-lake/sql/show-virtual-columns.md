@@ -14,7 +14,7 @@ Shows the created virtual columns in the system. Equivalent to `SELECT * FROM sy
 
 Virtual columns are enabled by default starting from v1.2.832.
 
-See also: [system.virtual_columns](../../../00-sql-reference/31-system-tables/system-virtual-columns.md)
+See also: [system.virtual_columns](/tidb-cloud-lake/sql/system-virtual-columns.md)
 
 ## Preferred Syntax
 

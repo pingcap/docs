@@ -59,7 +59,7 @@ CREATE STAGE my_s3_stage
 
 #### Example 2: Attaching Table with Connection
 
-The [ATTACH TABLE](../01-table/92-attach-table.md) page offers [Examples](../01-table/92-attach-table.md#examples) demonstrating how to connect a new table in Databend Cloud with an existing table in Databend, where data is stored within an Amazon S3 bucket named "databend-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
+The [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) page offers [Examples](/tidb-cloud-lake/sql/attach-table.md#examples) demonstrating how to connect a new table in Databend Cloud with an existing table in Databend, where data is stored within an Amazon S3 bucket named "databend-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
 
 ```sql title='Databend Cloud:'
 ATTACH TABLE employees_backup 

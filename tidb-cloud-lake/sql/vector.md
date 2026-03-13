@@ -44,8 +44,8 @@ Where:
 | Function | Description | Use Case |
 |----------|-------------|----------|
 | **[cosine_distance](/tidb-cloud-lake/sql/cosine-distance.md)** | Calculates cosine distance between vectors | Semantic similarity, text embeddings |
-| **[l1_distance](/sql/sql-functions/vector-functions/vector-l1-distance)** | Calculates L1 distance (Manhattan distance) | Feature comparison, sparse data |
-| **[l2_distance](/sql/sql-functions/vector-functions/vector-l2-distance)** | Calculates L2 distance (Euclidean distance) | Geometric similarity, image features |
+| **[l1_distance](/tidb-cloud-lake/sql/l1-distance.md)** | Calculates L1 distance (Manhattan distance) | Feature comparison, sparse data |
+| **[l2_distance](/tidb-cloud-lake/sql/l2-distance.md)** | Calculates L2 distance (Euclidean distance) | Geometric similarity, image features |
 
 ## Basic Usage
 

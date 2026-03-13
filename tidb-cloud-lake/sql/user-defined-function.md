@@ -8,12 +8,12 @@ User-Defined Functions (UDFs) in Databend allow you to create custom operations 
 
 | Command | Description |
 |---------|-------------|
-| [CREATE SCALAR FUNCTION](ddl-create-function.md) | Scalar UDF (SQL/Python/JavaScript) |
-| [CREATE AGGREGATE FUNCTION](ddl-create-aggregate-function.md) | Script UDAF (JavaScript/Python runtimes) |
-| [CREATE TABLE FUNCTION](ddl-create-table-function.md) | SQL-only table function returning result sets |
-| [SHOW USER FUNCTIONS](ddl-show-user-functions.md) | Lists all user-defined functions |
-| [ALTER FUNCTION](ddl-alter-function.md) | Modifies existing functions |
-| [DROP FUNCTION](ddl-drop-function.md) | Removes functions |
+| [CREATE SCALAR FUNCTION](/tidb-cloud-lake/sql/create-function.md) | Scalar UDF (SQL/Python/JavaScript) |
+| [CREATE AGGREGATE FUNCTION](/tidb-cloud-lake/sql/create-aggregate-function.md) | Script UDAF (JavaScript/Python runtimes) |
+| [CREATE TABLE FUNCTION](/tidb-cloud-lake/sql/create-table-function.md) | SQL-only table function returning result sets |
+| [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md) | Lists all user-defined functions |
+| [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function.md) | Modifies existing functions |
+| [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md) | Removes functions |
 
 ## Function Type Comparison
 

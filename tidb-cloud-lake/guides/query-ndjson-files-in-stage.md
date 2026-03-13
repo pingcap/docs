@@ -23,8 +23,8 @@ NDJSON (Newline Delimited JSON) is a JSON-based file format where each line cont
 
 ## Syntax
 
-- [Query rows as Variants](./index.md#query-rows-as-variants)
-- [Query Metadata](./index.md#query-metadata)
+- [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)
+- [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
 
 ## Tutorial
 
@@ -86,6 +86,6 @@ FROM @ndjson_query_stage
 
 ## Related Documentation
 
-- [Loading NDJSON Files](../03-load-semistructured/03-load-ndjson.md) - How to load NDJSON data into tables
+- [Loading NDJSON Files](/tidb-cloud-lake/guides/load-ndjson.md) - How to load NDJSON data into tables
 - [NDJSON File Format Options](/sql/sql-reference/file-format-options#ndjson-options) - Complete NDJSON format configuration
 - [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) - Managing external and internal stages

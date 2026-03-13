@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.241"/>
 
-Checks whether a specified JSON path expression matches certain conditions within a JSON data. Please note that the `@@` operator is synonymous with this function. For more information, see [JSON Operators](../../../10-sql-commands/30-query-operators/index.md).
+Checks whether a specified JSON path expression matches certain conditions within a JSON data. Please note that the `@@` operator is synonymous with this function. For more information, see [JSON Operators](/tidb-cloud-lake/sql/json-operators.md).
 
 ## Syntax
 

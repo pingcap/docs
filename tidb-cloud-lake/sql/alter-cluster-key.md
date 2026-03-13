@@ -6,7 +6,7 @@ sidebar_position: 3
 Changes the cluster key for a table.
 
 See also:
-[DROP CLUSTER KEY](./dml-drop-cluster-key.md)
+[DROP CLUSTER KEY](/tidb-cloud-lake/sql/drop-cluster-key.md)
 
 ## Syntax
 

@@ -9,7 +9,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 Creates a temporary table that is automatically dropped at the end of the session.
 
 - A temporary table is visible only within the session that created it and is automatically dropped, with all data vacuumed, when the session ends.
-       - In cases where automatic cleanup of temporary tables fails—for example, due to a query node crash—you can use the [FUSE_VACUUM_TEMPORARY_TABLE](../../../20-sql-functions/17-table-functions/fuse-vacuum-temporary-table.md) function to manually clean up leftover files from temporary tables.
+       - In cases where automatic cleanup of temporary tables fails—for example, due to a query node crash—you can use the [FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md) function to manually clean up leftover files from temporary tables.
 - To show the existing temporary tables in the session, query the [system.temporary_tables](../../../00-sql-reference/31-system-tables/system-temp-tables.md) system table. See [Example-1](#example-1).
 - A temporary table with the same name as a normal table takes precedence, hiding the normal table until dropped. See [Example-2](#example-2).
 - No privileges are required to create or operate on a temporary table.

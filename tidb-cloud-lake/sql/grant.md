@@ -14,10 +14,10 @@ Grants privileges, roles, and ownership for a specific database object. This inc
 
 See also:
 
-- [REVOKE](11-revoke.md)
-- [SHOW GRANTS](22-show-grants.md)
+- [REVOKE](/tidb-cloud-lake/sql/revoke.md)
+- [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)
 
-> After changing privileges or roles with `GRANT`, run [SYSTEM FLUSH PRIVILEGES](../../50-administration-cmds/flush-privileges.md) to broadcast the updates to every query node immediately.
+> After changing privileges or roles with `GRANT`, run [SYSTEM FLUSH PRIVILEGES](/tidb-cloud-lake/guides/privileges.md) to broadcast the updates to every query node immediately.
 
 ## Syntax
 

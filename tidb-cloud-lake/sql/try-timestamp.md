@@ -5,9 +5,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.528"/>
 
-A variant of [TO_TIMESTAMP](to-timestamp.md) in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
+A variant of [TO_TIMESTAMP](/tidb-cloud-lake/sql/timestamp.md) in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
 
-See also: [TO_TIMESTAMP](to-timestamp.md)
+See also: [TO_TIMESTAMP](/tidb-cloud-lake/sql/timestamp.md)
 
 ## Syntax
 
@@ -19,7 +19,7 @@ TRY_TO_TIMESTAMP(<expr>)
 TRY_TO_TIMESTAMP(<expr>, <pattern>)
 ```
 
-If given two arguments, the function converts the first string to a timestamp based on the pattern specified in the second string. To specify the pattern, use specifiers. The specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](../../00-sql-reference/10-data-types/datetime.md#formatting-date-and-time).
+If given two arguments, the function converts the first string to a timestamp based on the pattern specified in the second string. To specify the pattern, use specifiers. The specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/datetime.md#formatting-date-and-time).
 
 ## Aliases
 

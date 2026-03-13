@@ -40,11 +40,11 @@ CONNECTION = ( CONNECTION_NAME = '<connection_name>' )
   - Format: `s3://<bucket-name>/<database_ID>/<table_ID>/`
   - Example: `s3://databend-toronto/1/23351/`
 
-- **`CONNECTION_NAME`**: References a connection created with [CREATE CONNECTION](../13-connection/create-connection.md)
+- **`CONNECTION_NAME`**: References a connection created with [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
 
 ### Finding the Source Table Path
 
-Use the [FUSE_SNAPSHOT](../../../20-sql-functions/16-system-functions/fuse_snapshot.md) function to get the database and table IDs:
+Use the [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md) function to get the database and table IDs:
 
 ```sql
 SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'employees');

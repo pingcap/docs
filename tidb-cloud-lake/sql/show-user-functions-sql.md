@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Lists the existing user-defined functions and external functions in the system. Equivalent to `SELECT name, is_aggregate, description, arguments, language FROM system.user_functions ...`.
 
-See also: [system.user_functions](../../00-sql-reference/31-system-tables/system-user-functions.md)
+See also: [system.user_functions](/tidb-cloud-lake/sql/system-user-functions.md)
 
 ## Syntax
 

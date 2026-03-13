@@ -31,11 +31,11 @@ Databend automatically creates table snapshots upon data updates. A snapshot rep
 
 When working with Databend, you're most likely to access a snapshot with the snapshot ID when you retrieve and query a previous version of the table's data with the [AT](../../20-query-syntax/03-query-at.md) clause.
 
-A snapshot is a JSON file that does not save the table's data but indicate the segments the snapshot links to. If you run [FUSE_SNAPSHOT](../../../20-sql-functions/16-system-functions/fuse_snapshot.md) against a table, you can find the saved snapshots for the table.
+A snapshot is a JSON file that does not save the table's data but indicate the segments the snapshot links to. If you run [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md) against a table, you can find the saved snapshots for the table.
 
-A segment is a JSON file that organizes the storage blocks (at least 1, at most 1,000) where the data is stored. If you run [FUSE_SEGMENT](../../../20-sql-functions/16-system-functions/fuse_segment.md) against a snapshot with the snapshot ID, you can find which segments are referenced by the snapshot.
+A segment is a JSON file that organizes the storage blocks (at least 1, at most 1,000) where the data is stored. If you run [FUSE_SEGMENT](/tidb-cloud-lake/sql/fuse-segment.md) against a snapshot with the snapshot ID, you can find which segments are referenced by the snapshot.
 
-Databends saves actual table data in parquet files and considers each parquet file as a block. If you run [FUSE_BLOCK](../../../20-sql-functions/16-system-functions/fuse_block.md) against a snapshot with the snapshot ID, you can find which blocks are referenced by the snapshot.
+Databends saves actual table data in parquet files and considers each parquet file as a block. If you run [FUSE_BLOCK](/tidb-cloud-lake/sql/fuse-block.md) against a snapshot with the snapshot ID, you can find which blocks are referenced by the snapshot.
 
 Databend creates a unique ID for each database and table for storing the snapshot, segment, and block files and saves them to your object storage in the path `<bucket_name>/<tenant_id>/<db_id>/<table_id>/`. Each snapshot, segment, and block file is named with a UUID (32-character lowercase hexadecimal string).
 

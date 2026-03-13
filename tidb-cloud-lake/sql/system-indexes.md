@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Contains information about the created indexes.
 
-See also: [SHOW INDEXES](../../10-sql-commands/50-administration-cmds/show-indexes.md)
+See also: [SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md)
 
 ```sql
 CREATE TABLE t1(a int,b int);

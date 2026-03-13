@@ -5,8 +5,8 @@ sidebar_label: CSV
 
 ## Syntax:
 
-- [Query columns by position](./index.md#query-columns-by-position)
-- [Query Metadata](./index.md#query-metadata)
+- [Query columns by position](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-position)
+- [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
 
 ## Tutorial
 

@@ -43,7 +43,7 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 | SUSPEND_TASK_AFTER_NUM_FAILURES                  | Optional. The number of consecutive failures after which the task will be automatically suspended.                                                                           |
 | AFTER                                            | List task that must be completed before this task starts.                                                                                                                  |
 | WHEN boolean_expr                                | A condition that must be true for the task to run.                                                                                                                           |
-| [ERROR_INTEGRATION](../16-notification/index.md) | Optional. The name of the notification integration to use for the task error notification with specific [task error payload ](./10-task-error-integration-payload.md)applied |
+| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | Optional. The name of the notification integration to use for the task error notification with specific [task error payload ](/tidb-cloud-lake/sql/task-error-notification-payload.md)applied |
 | COMMENT                                          | Optional. A string literal that serves as a comment or description for the task.                                                                                             |
 | session_parameter                                | Optional. Specifies session parameters to use for the task during task run. Note that session parameters must be placed after all other task parameters in the CREATE TASK statement. |
 | sql                                              | The SQL statement that the task will execute. It can be a single statement or a script wrapped in `BEGIN ... END;`. This is a mandatory field.                                |
@@ -56,7 +56,7 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 - When Condition only support a subset of `<boolean_expression>`
   The following are supported in a task WHEN clause:
 
-  - [STREAM_STATUS](../../../20-sql-functions/17-table-functions/stream-status.md) is supported for evaluation in the SQL expression. This function indicates whether a specified stream contains change tracking data. You can use this function to evaluate whether the specified stream contains change data before starting the current run. If the result is FALSE, then the task does not run.
+  - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) is supported for evaluation in the SQL expression. This function indicates whether a specified stream contains change tracking data. You can use this function to evaluate whether the specified stream contains change data before starting the current run. If the result is FALSE, then the task does not run.
   - Boolean operators such as AND, OR, NOT, and others.
   - Casts between numeric, string and boolean types.
   - Comparison operators such as equal, not equal, greater than, less than, and others.

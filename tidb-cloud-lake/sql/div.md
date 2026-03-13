@@ -6,7 +6,7 @@ Returns the quotient by dividing the first number by the second one, rounding do
 
 See also: 
 
-- [DIV0](div0.md)
+- [DIV0](/tidb-cloud-lake/sql/div0.md)
 - [DIVNULL](/tidb-cloud-lake/sql/divnull.md)
 
 ## Syntax

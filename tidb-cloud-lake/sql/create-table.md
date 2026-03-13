@@ -50,7 +50,7 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 :::note
 
-- For available data types in Databend, see [Data Types](../../../00-sql-reference/10-data-types/index.md).
+- For available data types in Databend, see [Data Types](/tidb-cloud-lake/sql/data-types.md).
 
 - Databend suggests avoiding special characters as much as possible when naming columns. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: CREATE TABLE price(\`$CA\` int);
 
@@ -109,7 +109,7 @@ create table t_new compression='lz4' as select * from t_old;
 
 ## Column Nullable
 
-By default, **all columns are nullable(NULL)** in Databend. If you need a column that does not allow NULL values, use the NOT NULL constraint. For more information, see [NULL Values and NOT NULL Constraint](../../../00-sql-reference/10-data-types/index.md).
+By default, **all columns are nullable(NULL)** in Databend. If you need a column that does not allow NULL values, use the NOT NULL constraint. For more information, see [NULL Values and NOT NULL Constraint](/tidb-cloud-lake/sql/data-types.md).
 
 ## Column Default Values
 

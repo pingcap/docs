@@ -80,6 +80,6 @@ SHOW GRANTS FOR 'admin_user';
 
 ## See Also
 
-- [GRANT](10-grant.md) - Grant privileges and roles
-- [SHOW GRANTS](22-show-grants.md) - View granted privileges
+- [GRANT](/tidb-cloud-lake/sql/grant.md) - Grant privileges and roles
+- [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md) - View granted privileges
 - [DROP ROLE](05-user-drop-role.md) - Drop roles

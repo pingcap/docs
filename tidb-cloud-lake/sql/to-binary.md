@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Converts supported data types, including string, variant, bitmap, geometry, and geography, into their binary representation (hex format).
 
-See also: [TRY_TO_BINARY](try-to-binary.md)
+See also: [TRY_TO_BINARY](/tidb-cloud-lake/sql/try-to-binary.md)
 
 ## Syntax
 

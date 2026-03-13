@@ -28,9 +28,9 @@ This page provides a comprehensive overview of stage operations in Databend, org
 
 ## Related Topics
 
-- [Working with Stages](/guides/load-data/stage)
-- [Loading from Stage](/guides/load-data/load/stage)
-- [Querying & Transforming](/guides/load-data/transform/querying-stage)
+- [Working with Stages](/tidb-cloud-lake/sql/stage.md)
+- [Loading from Stage](/tidb-cloud-lake/sql/stage.md)
+- [Querying & Transforming](/tidb-cloud-lake/sql/stage.md)
 - [File Format (DDL)](/tidb-cloud-lake/sql/file-format.md) 
 
 :::note

@@ -8,5 +8,5 @@ This page provides reference information for the test functions in Databend. The
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [SLEEP](test-functions/sleep) | Pauses execution for a specified number of seconds | `SELECT SLEEP(2)` → `0` |
+| [SLEEP](/tidb-cloud-lake/sql/sleep.md) | Pauses execution for a specified number of seconds | `SELECT SLEEP(2)` → `0` |
 

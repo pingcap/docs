@@ -149,7 +149,7 @@ SHOW VIRTUAL COLUMNS WHERE table='test';
 |---------|---------|
 | [`SHOW VIRTUAL COLUMNS`](/tidb-cloud-lake/sql/show-virtual-columns.md) | View automatically created virtual columns |
 | [`REFRESH VIRTUAL COLUMN`](/tidb-cloud-lake/sql/refresh-virtual-column.md) | Manually refresh virtual columns |
-| [`FUSE_VIRTUAL_COLUMN`](/sql/sql-functions/system-functions/fuse_virtual_column) | View virtual column metadata |
+| [`FUSE_VIRTUAL_COLUMN`](/tidb-cloud-lake/sql/fuse-virtual-column.md) | View virtual column metadata |
 
 ## Performance Results
 

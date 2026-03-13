@@ -8,10 +8,10 @@ This page provides reference information for the explain-related commands in Dat
 
 | Command | Use Case |
 |---------|----------|
-| [`EXPLAIN`](explain-cmds/explain) | Understanding query structure and optimization |
-| [`EXPLAIN ANALYZE`](explain-cmds/explain-analyze) | Performance analysis with runtime statistics |
-| [`EXPLAIN ANALYZE GRAPHICAL`](explain-cmds/explain-analyze-graphical) | Visual performance analysis (BendSQL only) |
-| [`EXPLAIN AST`](explain-cmds/explain-ast) | SQL parsing and syntax analysis |
-| [`EXPLAIN PERF`](explain-cmds/explain-perf) | Query performance profiling (BendSQL only) |
-| [`EXPLAIN RAW`](explain-cmds/explain-raw) | Internal query processing analysis |
-| [`EXPLAIN SYNTAX`](explain-cmds/explain-syntax) | SQL code formatting and standardization |
+| [`EXPLAIN`](/tidb-cloud-lake/sql/explain.md) | Understanding query structure and optimization |
+| [`EXPLAIN ANALYZE`](/tidb-cloud-lake/sql/explain-analyze.md) | Performance analysis with runtime statistics |
+| [`EXPLAIN ANALYZE GRAPHICAL`](/tidb-cloud-lake/sql/explain-analyze-graphical.md) | Visual performance analysis (BendSQL only) |
+| [`EXPLAIN AST`](/tidb-cloud-lake/sql/explain-ast.md) | SQL parsing and syntax analysis |
+| [`EXPLAIN PERF`](/tidb-cloud-lake/sql/explain-perf.md) | Query performance profiling (BendSQL only) |
+| [`EXPLAIN RAW`](/tidb-cloud-lake/sql/explain-raw.md) | Internal query processing analysis |
+| [`EXPLAIN SYNTAX`](/tidb-cloud-lake/sql/explain-syntax.md) | SQL code formatting and standardization |

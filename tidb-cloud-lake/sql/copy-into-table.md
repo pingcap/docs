@@ -16,7 +16,7 @@ COPY INTO allows you to load data from files located in one of the following loc
 - Remote servers from where you can access the files by their URL (starting with "https://...").
 - [IPFS](https://ipfs.tech) and Hugging Face repositories.
 
-See also: [`COPY INTO <location>`](dml-copy-into-location.md)
+See also: [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
 
 ## Syntax
 
@@ -294,7 +294,7 @@ If `RETURN_FAILED_ONLY` is set to `true`, the output will only contain the files
 ## Examples
 
 :::tip Best Practice
-For external storage sources, it's recommended to use pre-created connections with the `CONNECTION_NAME` parameter instead of specifying credentials directly in the COPY statement. This approach provides better security, maintainability, and reusability. See [CREATE CONNECTION](../00-ddl/13-connection/create-connection.md) for details on creating connections.
+For external storage sources, it's recommended to use pre-created connections with the `CONNECTION_NAME` parameter instead of specifying credentials directly in the COPY statement. This approach provides better security, maintainability, and reusability. See [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) for details on creating connections.
 :::
 
 ### Example 1: Loading from Stages
@@ -606,7 +606,7 @@ COPY INTO books_with_extra_columns
 ```
 
 :::note
-Extra columns in a table can have default values specified by [CREATE TABLE](../00-ddl/01-table/10-ddl-create-table.md) or [ALTER TABLE](../00-ddl/01-table/90-alter-table.md#column-operations). If a default value is not explicitly set for an extra column, the default value associated with its data type will be applied. For instance, an integer-type column will default to 0 if no other value is specified.
+Extra columns in a table can have default values specified by [CREATE TABLE](../00-ddl/01-table/10-ddl-create-table.md) or [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations). If a default value is not explicitly set for an extra column, the default value associated with its data type will be applied. For instance, an integer-type column will default to 0 if no other value is specified.
 :::
 
 ### Example 6: Loading JSON with Custom Format

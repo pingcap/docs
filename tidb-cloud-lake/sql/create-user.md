@@ -9,7 +9,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 Creates a SQL user for connecting to Databend. Users must be granted appropriate privileges to access databases and perform operations.
 
 See also:
-- [GRANT](10-grant.md)
+- [GRANT](/tidb-cloud-lake/sql/grant.md)
 - [ALTER USER](03-user-alter-user.md)
 - [DROP USER](02-user-drop-user.md)
 

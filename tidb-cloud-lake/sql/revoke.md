@@ -13,8 +13,8 @@ Revokes privileges, roles, and ownership of a specific database object. This inc
 
 See also:
 
-- [GRANT](10-grant.md)
-- [SHOW GRANTS](22-show-grants.md)
+- [GRANT](/tidb-cloud-lake/sql/grant.md)
+- [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)
 
 ## Syntax
 

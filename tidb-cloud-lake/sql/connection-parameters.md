@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.294"/>
 
-Connection parameters are key-value pairs you supply when creating reusable connections with `CREATE CONNECTION`. After a connection is created, reference it from stages, COPY commands, and other SQL features by using `CONNECTION = (CONNECTION_NAME = '<connection-name>')`. For full syntax and usage, see [CREATE CONNECTION](../10-sql-commands/00-ddl/13-connection/create-connection.md).
+Connection parameters are key-value pairs you supply when creating reusable connections with `CREATE CONNECTION`. After a connection is created, reference it from stages, COPY commands, and other SQL features by using `CONNECTION = (CONNECTION_NAME = '<connection-name>')`. For full syntax and usage, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md).
 
 For storage-specific connection details, see the tables below.
 

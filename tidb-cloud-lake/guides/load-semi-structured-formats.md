@@ -10,9 +10,9 @@ Semi-structured data contains tags or markers to separate semantic elements whil
 
 | File Format | Description | Guide |
 | ----------- | ----------- | ----- |
-| **Parquet** | Efficient columnar storage format | [Loading Parquet](load-semistructured/load-parquet) |
-| **CSV** | Comma-separated values | [Loading CSV](load-semistructured/load-csv) |
-| **TSV** | Tab-separated values | [Loading TSV](load-semistructured/load-tsv) |
-| **NDJSON** | Newline-delimited JSON | [Loading NDJSON](load-semistructured/load-ndjson) |
-| **ORC** | Optimized Row Columnar format | [Loading ORC](load-semistructured/load-orc) |
-| **Avro** | Row-based format with schema definition | [Loading Avro](load-semistructured/load-avro) |
+| **Parquet** | Efficient columnar storage format | [Loading Parquet](/tidb-cloud-lake/guides/load-parquet.md) |
+| **CSV** | Comma-separated values | [Loading CSV](/tidb-cloud-lake/guides/load-csv.md) |
+| **TSV** | Tab-separated values | [Loading TSV](/tidb-cloud-lake/guides/load-tsv.md) |
+| **NDJSON** | Newline-delimited JSON | [Loading NDJSON](/tidb-cloud-lake/guides/load-ndjson.md) |
+| **ORC** | Optimized Row Columnar format | [Loading ORC](/tidb-cloud-lake/guides/load-orc.md) |
+| **Avro** | Row-based format with schema definition | [Loading Avro](/tidb-cloud-lake/guides/load-avro.md) |

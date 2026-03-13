@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Shows the created indexes. Equivalent to `SELECT * FROM system.indexes`.
 
-See also: [system.indexes](../../00-sql-reference/31-system-tables/system-indexes.md)
+See also: [system.indexes](/tidb-cloud-lake/sql/system-indexes.md)
 
 ## Syntax
 

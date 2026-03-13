@@ -9,7 +9,7 @@ Ownership is a specialized privilege that signifies the exclusive rights and res
 An object's ownership is automatically granted to the role of the user who creates it and can be transferred between roles using the [GRANT](/tidb-cloud-lake/sql/grant.md) command:
 
 - Granting ownership of an object to a new role transfers full ownership to the new role, removing it from the previous role. For example, if Role A initially owns a table and you grant ownership to Role B, Role B will become the new owner, and Role A will no longer have ownership rights to that table.
-- Granting ownership to the built-in role `public` is not recommended for security reasons. If a user is in the `public` role when creating a object, then all users will have ownership of the object because each user has the `public` role by default. Databend recommends creating and assigning customized roles to users instead of using the `public` role for clarified ownership management. For information about the built-in roles, see [Built-in Roles](02-roles.md).
+- Granting ownership to the built-in role `public` is not recommended for security reasons. If a user is in the `public` role when creating a object, then all users will have ownership of the object because each user has the `public` role by default. Databend recommends creating and assigning customized roles to users instead of using the `public` role for clarified ownership management. For information about the built-in roles, see [Built-in Roles](/tidb-cloud-lake/guides/roles.md).
 - Ownership cannot be granted for tables in the `default` database, as it is owned by the built-in role `account_admin`.
 
 ## Revoking Ownership Not Allowed

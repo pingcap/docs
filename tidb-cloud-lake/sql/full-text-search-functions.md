@@ -22,9 +22,9 @@ CREATE OR REPLACE TABLE frames (
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [MATCH](search-functions/match) | Performs a relevance-ranked search across the listed columns. | `MATCH('summary, tags', 'traffic light red')` |
-| [QUERY](search-functions/query) | Evaluates a Lucene-style query expression, including nested `VARIANT` fields. | `QUERY('meta.signals.traffic_light:red')` |
-| [SCORE](search-functions/score) | Returns the relevance score for the current row when used with `MATCH` or `QUERY`. | `SELECT summary, SCORE() FROM frame_notes WHERE MATCH('summary, tags', 'traffic light red')` |
+| [MATCH](/tidb-cloud-lake/sql/match.md) | Performs a relevance-ranked search across the listed columns. | `MATCH('summary, tags', 'traffic light red')` |
+| [QUERY](/tidb-cloud-lake/sql/query.md) | Evaluates a Lucene-style query expression, including nested `VARIANT` fields. | `QUERY('meta.signals.traffic_light:red')` |
+| [SCORE](/tidb-cloud-lake/sql/score.md) | Returns the relevance score for the current row when used with `MATCH` or `QUERY`. | `SELECT summary, SCORE() FROM frame_notes WHERE MATCH('summary, tags', 'traffic light red')` |
 
 ## Query Syntax Examples
 

@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Consumes data from a stream within a SELECT query.
 
-See also: [WITH Stream Hints](with-stream-hints.md)
+See also: [WITH Stream Hints](/tidb-cloud-lake/sql/stream-hints.md)
 
 ## Syntax
 

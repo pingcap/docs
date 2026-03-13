@@ -51,7 +51,7 @@ externalStageParams ::=
 
 For the connection parameters available for different storage services, see [Connection Parameters](/00-sql-reference/51-connect-parameters.md).
 
-For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](../13-connection/create-connection.md).
+For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md).
 
 ### FILE_FORMAT
 

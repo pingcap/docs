@@ -5,8 +5,8 @@ sidebar_label: Avro
 
 ## Syntax:
 
-- [Query rows as Variants](./index.md#query-rows-as-variants)
-- [Query Metadata](./index.md#query-metadata)
+- [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)
+- [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
 
 ## Avro Querying Features Overview
 

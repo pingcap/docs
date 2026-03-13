@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Records all databases, including active and dropped ones. It shows each database's catalog, name, unique ID, owner (if specified), and the deletion timestamp (NULL if still active). 
 
-See also: [SHOW DROP DATABASES](../../10-sql-commands/00-ddl/00-database/show-drop-databases.md)
+See also: [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
 
 ```sql
 SELECT * FROM system.databases_with_history;

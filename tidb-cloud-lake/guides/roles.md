@@ -157,7 +157,7 @@ Align roles to business systems so each domain can access only its own data, and
 
 ### Ownership Behavior
 
-Objects are owned by the role that is active when they are created. Ensure you `SET ROLE <biz>_owner` before creating objects. For details, see [Ownership](03-ownership.md).
+Objects are owned by the role that is active when they are created. Ensure you `SET ROLE <biz>_owner` before creating objects. For details, see [Ownership](/tidb-cloud-lake/guides/ownership.md).
 
 ### Usage Examples (Business Domains)
 

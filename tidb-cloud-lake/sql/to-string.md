@@ -6,7 +6,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.745"/>
 
-Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](../../00-sql-reference/10-data-types/datetime.md#formatting-date-and-time).
+Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/datetime.md#formatting-date-and-time).
 
 ## Syntax
 
@@ -58,10 +58,10 @@ When `date_format_style` is set to 'Oracle', the following format specifiers are
 
 ## Aliases
 
-- [DATE_FORMAT](../05-datetime-functions/date-format.md)
+- [DATE_FORMAT](/tidb-cloud-lake/sql/date-format.md)
 - [JSON_TO_STRING](../10-semi-structured-functions/0-json/json-to-string.md)
-- [TO_TEXT](../02-conversion-functions/to-text.md)
-- [TO_VARCHAR](to-varchar.md)
+- [TO_TEXT](/tidb-cloud-lake/sql/text.md)
+- [TO_VARCHAR](/tidb-cloud-lake/sql/varchar.md)
 - TO_CHAR (Oracle compatibility)
 
 ## Return Type

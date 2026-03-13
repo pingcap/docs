@@ -11,8 +11,8 @@ Lists privileges granted to roles, role assignments for users, or privileges on 
 See also:
 
 - [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants.md)
-- [GRANT](10-grant.md)
-- [REVOKE](11-revoke.md)
+- [GRANT](/tidb-cloud-lake/sql/grant.md)
+- [REVOKE](/tidb-cloud-lake/sql/revoke.md)
 
 ## Syntax
 

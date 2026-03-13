@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 ## Overview
 
-`BITMAP` stores membership information for unsigned 64-bit integers and supports fast set operations (count, union, intersection, etc.). SELECT statements show a binary blob, so use [Bitmap Functions](../../20-sql-functions/01-bitmap-functions/index.md) to interpret the values.
+`BITMAP` stores membership information for unsigned 64-bit integers and supports fast set operations (count, union, intersection, etc.). SELECT statements show a binary blob, so use [Bitmap Functions](/tidb-cloud-lake/sql/bitmap-functions.md) to interpret the values.
 
 ## Examples
 

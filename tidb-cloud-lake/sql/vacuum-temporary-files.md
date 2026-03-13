@@ -12,7 +12,7 @@ import EEFeature from '@site/src/components/EEFeature';
 
 Removes temporary files created by Databend, such as spill files.
 
-See also: [system.temp_files](../../00-sql-reference/31-system-tables/system-temp-files.md)
+See also: [system.temp_files](/tidb-cloud-lake/sql/system-temp-files.md)
 
 ## Syntax
 

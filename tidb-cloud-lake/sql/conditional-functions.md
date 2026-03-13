@@ -15,7 +15,7 @@ This page provides a comprehensive overview of Conditional functions in Databend
 | [NULLIF](/tidb-cloud-lake/sql/nullif.md) | Returns NULL if two expressions are equal, otherwise the first expression | `NULLIF(5, 5)` → `NULL` |
 | [IFNULL](/tidb-cloud-lake/sql/ifnull.md) | Returns the first expression if not NULL, otherwise the second | `IFNULL(NULL, 'default')` → `'default'` |
 | [NVL](/tidb-cloud-lake/sql/nvl.md) | Returns the first non-NULL expression | `NVL(NULL, 'default')` → `'default'` |
-| [NVL2](nvl2.md) | Returns expr2 if expr1 is not NULL, otherwise expr3 | `NVL2('value', 'not null', 'is null')` → `'not null'` |
+| [NVL2](/tidb-cloud-lake/sql/nvl2.md) | Returns expr2 if expr1 is not NULL, otherwise expr3 | `NVL2('value', 'not null', 'is null')` → `'not null'` |
 
 ## Comparison Functions
 

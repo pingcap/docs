@@ -6,8 +6,8 @@ title: SYSTEM FLUSH PRIVILEGES
 
 See also:
 
-- [GRANT](../00-ddl/02-user/10-grant.md)
-- [REVOKE](../00-ddl/02-user/11-revoke.md)
+- [GRANT](/tidb-cloud-lake/sql/grant.md)
+- [REVOKE](/tidb-cloud-lake/sql/revoke.md)
 
 ## Syntax
 

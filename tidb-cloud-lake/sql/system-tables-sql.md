@@ -6,8 +6,8 @@ Provides metadata information for all tables. It includes details such as table 
 
 See also:
 
-- [information_schema.tables](../20-information-schema-tables/information-schema-tables.md)
-- [SHOW TABLES](../../10-sql-commands/00-ddl/01-table/show-tables.md)
+- [information_schema.tables](/tidb-cloud-lake/sql/information-schema-tables.md)
+- [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
 
 ```sql title='Examples:'
 SELECT * FROM system.tables LIMIT 3;

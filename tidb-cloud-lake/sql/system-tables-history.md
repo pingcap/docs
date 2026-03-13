@@ -4,7 +4,7 @@ title: system.tables_with_history
 
 Provides metadata information for all tables, including historical tables. It includes details such as table properties, creation time, number of rows, data size, and more.
 
-See also: [SHOW DROP TABLES](../../10-sql-commands/00-ddl/01-table/show-drop-tables.md)
+See also: [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md)
 
 ```sql title='Examples:'
 SELECT * FROM system.tables_with_history LIMIT 3;

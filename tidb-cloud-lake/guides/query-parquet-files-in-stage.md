@@ -6,9 +6,9 @@ sidebar_label: Parquet
 
 ## Syntax:
 
-- [Query rows as Variants](./index.md#query-rows-as-variants)
-- [Query columns by name](./index.md#query-columns-by-name)
-- [Query Metadata](./index.md#query-metadata)
+- [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)
+- [Query columns by name](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-name)
+- [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
 
 ## Tutorial
 

@@ -8,16 +8,16 @@ This page provides reference information for the DML (Data Manipulation Language
 
 | Command | Description |
 |---------|-------------|
-| **[INSERT](dml/dml-insert)** | Add new rows to a table |
+| **[INSERT](/tidb-cloud-lake/sql/insert.md)** | Add new rows to a table |
 | **[INSERT MULTI](dml/dml-insert-multi)** | Insert data into multiple tables in one statement |
-| **[UPDATE](dml/dml-update)** | Modify existing rows in a table |
+| **[UPDATE](/tidb-cloud-lake/sql/update.md)** | Modify existing rows in a table |
 | **[DELETE](dml/dml-delete-from)** | Remove rows from a table |
-| **[REPLACE](dml/dml-replace)** | Insert new rows or update existing ones |
-| **[MERGE](dml/dml-merge)** | Perform upsert operations based on conditions |
+| **[REPLACE](/tidb-cloud-lake/sql/replace.md)** | Insert new rows or update existing ones |
+| **[MERGE](/tidb-cloud-lake/sql/merge.md)** | Perform upsert operations based on conditions |
 
 ## Data Loading & Export
 
 | Command | Description |
 |---------|-------------|
-| **[COPY INTO Table](dml/dml-copy-into-table)** | Load data from files into tables |
-| **[COPY INTO Location](dml/dml-copy-into-location)** | Export table data to files |
+| **[COPY INTO Table](/tidb-cloud-lake/sql/copy-into-table.md)** | Load data from files into tables |
+| **[COPY INTO Location](/tidb-cloud-lake/sql/copy-into-location.md)** | Export table data to files |

@@ -8,10 +8,10 @@ This page provides a comprehensive overview of database operations in Databend, 
 
 | Command | Description |
 |---------|-------------|
-| [CREATE DATABASE](ddl-create-database.md) | Creates a new database |
+| [CREATE DATABASE](/tidb-cloud-lake/sql/create-database.md) | Creates a new database |
 | [ALTER DATABASE](ddl-alter-database.md) | Modifies a database |
-| [DROP DATABASE](ddl-drop-database.md) | Removes a database |
-| [USE DATABASE](ddl-use-database.md) | Sets the current working database |
+| [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md) | Removes a database |
+| [USE DATABASE](/tidb-cloud-lake/sql/use-database.md) | Sets the current working database |
 | [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md) | Recovers a dropped database |
 
 ## Database Information

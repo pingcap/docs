@@ -8,10 +8,10 @@ This guide set shows how Databend keeps all those workloads in one warehouse—n
 
 | Guide | What it covers |
 |-------|----------------|
-| [SQL Analytics](./00-sql-analytics.md) | Base tables, filters, joins, windows, aggregating indexes |
-| [JSON & Search](./01-json-search.md) | Load `frame_metadata_catalog`, run Elasticsearch `QUERY()`, link bitmap tags |
+| [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md) | Base tables, filters, joins, windows, aggregating indexes |
+| [JSON & Search](/tidb-cloud-lake/guides/json-search.md) | Load `frame_metadata_catalog`, run Elasticsearch `QUERY()`, link bitmap tags |
 | [Vector Search](./02-vector-db.md) | Persist embeddings, run cosine search, join risk metrics |
-| [Geo Analytics](./03-geo-analytics.md) | Use `GEOMETRY`, distance/polygon filters, traffic-light joins |
-| [Lakehouse ETL](./04-lakehouse-etl.md) | Stage once, `COPY INTO` shared tables, add streams/tasks |
+| [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md) | Use `GEOMETRY`, distance/polygon filters, traffic-light joins |
+| [Lakehouse ETL](/tidb-cloud-lake/guides/lakehouse-etl.md) | Stage once, `COPY INTO` shared tables, add streams/tasks |
 
 Walk through them in order to see how the same identifiers flow from classic SQL to text search, vector, geo, and ETL—everything grounded in a single CityDrive scenario.

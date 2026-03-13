@@ -14,7 +14,7 @@ Generates the Soundex code for a string.
 Soundex converts an alphanumeric string to a four-character code that is based on how the string sounds when spoken in English. For more information, see https://en.wikipedia.org/wiki/Soundex
 :::
 
-See also: [SOUNDS LIKE](soundslike.md)
+See also: [SOUNDS LIKE](/tidb-cloud-lake/sql/sounds-like.md)
 
 ## Syntax
 

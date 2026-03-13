@@ -31,7 +31,7 @@ SELECT
     [OFFSET <row_count>]
     [IGNORE_RESULT]
 ```
-- The SELECT statement also allows you to query staged files directly. For syntax and examples, see [Efficient Data Transformation with Databend](/guides/load-data/transform/querying-stage).
+- The SELECT statement also allows you to query staged files directly. For syntax and examples, see [Efficient Data Transformation with Databend](/tidb-cloud-lake/sql/stage.md).
 
 - In the examples on this page, the table `numbers(N)` is used for testing, with a single UInt64 column (named `number`) that contains integers from 0 to N-1.
 
@@ -263,7 +263,7 @@ FROM numbers(3) SELECT number;
 +--------+
 ```
 
-The FROM clause can also specify a location, enabling direct querying of data from various sources and eliminating the need to first load it into a table. For more information, see [Querying Staged Files](/guides/load-data/transform/querying-stage).
+The FROM clause can also specify a location, enabling direct querying of data from various sources and eliminating the need to first load it into a table. For more information, see [Querying Staged Files](/tidb-cloud-lake/sql/stage.md).
 
 ## AT Clause
 

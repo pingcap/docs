@@ -67,7 +67,7 @@ SELECT ST_ASWKB(geo), ST_ASEWKT(geo), ST_ASGEOJSON(geo) FROM ...;
 ## Functions
 
 Browse the catalogued list of spatial functions here:
-- [Geospatial Functions](../../20-sql-functions/09-geospatial-functions/index.md)
+- [Geospatial Functions](/tidb-cloud-lake/sql/geospatial-functions.md)
 
 ## Examples
 

@@ -14,8 +14,8 @@ ARG_MAX(<arg>, <val>)
 
 | Arguments | Description                                                                                       |
 |-----------|---------------------------------------------------------------------------------------------------|
-| `<arg>`   | Argument of [any data type that Databend supports](../../00-sql-reference/10-data-types/index.md) |
-| `<val>`   | Value of [any data type that Databend supports](../../00-sql-reference/10-data-types/index.md)    |
+| `<arg>`   | Argument of [any data type that Databend supports](/tidb-cloud-lake/sql/data-types.md) |
+| `<val>`   | Value of [any data type that Databend supports](/tidb-cloud-lake/sql/data-types.md)    |
 
 ## Return Type
 

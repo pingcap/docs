@@ -48,7 +48,7 @@ Below are the main parameters for creating a Fuse Engine table:
 
 #### `CLUSTER BY`
 - **Description:**
-  Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key.md).
+  Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md).
 
 ---
 
@@ -57,8 +57,8 @@ Below are the main parameters for creating a Fuse Engine table:
   The Fuse Engine offers various options (case-insensitive) that allow you to customize the table's properties.
   - See [Fuse Engine Options](#fuse-engine-options) for details.
   - Separate multiple options with a space.
-  - Use [ALTER TABLE](../../10-sql-commands/00-ddl/01-table/90-alter-table.md#fuse-engine-options) to modify a table's options.
-  - Use [SHOW CREATE TABLE](../../10-sql-commands/00-ddl/01-table/show-create-table.md) to show a table's options.
+  - Use [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#fuse-engine-options) to modify a table's options.
+  - Use [SHOW CREATE TABLE](/tidb-cloud-lake/sql/show-create-table.md) to show a table's options.
 
 ---
 
@@ -121,7 +121,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 - **Syntax:**
   `change_tracking = True / False`
 - **Description:**
-  Setting this option to `True` in the Fuse Engine allows for tracking changes for a table. Creating a stream for a table will automatically set `change_tracking` to `True` and introduce additional hidden columns to the table as change tracking metadata. For more information, see [How Stream Works](/guides/load-data/continuous-data-pipelines/stream#how-stream-works).
+  Setting this option to `True` in the Fuse Engine allows for tracking changes for a table. Creating a stream for a table will automatically set `change_tracking` to `True` and introduce additional hidden columns to the table as change tracking metadata. For more information, see [How Stream Works](/tidb-cloud-lake/sql/stream.md#how-stream-works).
 
 ---
 

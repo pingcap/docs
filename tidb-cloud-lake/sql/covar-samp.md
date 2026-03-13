@@ -27,8 +27,8 @@ COVAR_SAMP(<expr1>, <expr2>)
 
 ## Aliases
 
-- [VAR_SAMP](aggregate-var-samp.md)
-- [VARIANCE_SAMP](aggregate-variance-samp.md)
+- [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md)
+- [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md)
 
 ## Return Type
 

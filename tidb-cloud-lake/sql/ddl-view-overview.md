@@ -8,9 +8,9 @@ This page provides a comprehensive overview of view operations in Databend, orga
 
 | Command | Description |
 |---------|-------------|
-| [CREATE VIEW](ddl-create-view.md) | Creates a new view based on a query |
-| [ALTER VIEW](ddl-alter-view.md) | Modifies an existing view |
-| [DROP VIEW](ddl-drop-view.md) | Removes a view |
+| [CREATE VIEW](/tidb-cloud-lake/sql/create-view.md) | Creates a new view based on a query |
+| [ALTER VIEW](/tidb-cloud-lake/sql/alter-view.md) | Modifies an existing view |
+| [DROP VIEW](/tidb-cloud-lake/sql/drop-view.md) | Removes a view |
 
 ## View Information
 

@@ -38,7 +38,7 @@ These functions are specifically designed for window operations.
 
 | Function | Description | Range | Example Output |
 |----------|-------------|-------|----------------|
-| [PERCENT_RANK](percent_rank.md) | Relative rank as percentage | 0.0 to 1.0 | `0.0, 0.25, 0.5, 0.75, 1.0` |
+| [PERCENT_RANK](/tidb-cloud-lake/sql/percent-rank.md) | Relative rank as percentage | 0.0 to 1.0 | `0.0, 0.25, 0.5, 0.75, 1.0` |
 | [CUME_DIST](/tidb-cloud-lake/sql/cume-dist.md) | Cumulative distribution | 0.0 to 1.0 | `0.2, 0.4, 0.6, 0.8, 1.0` |
 | [NTILE](/tidb-cloud-lake/sql/ntile.md) | Divide into N buckets | 1 to N | `1, 1, 2, 2, 3, 3` |
 
@@ -65,25 +65,25 @@ These are standard aggregate functions that can be used with the OVER clause to 
 
 | Function | Description | Window Frame Support | Example |
 |----------|-------------|---------------------|---------|  
-| [SUM](../07-aggregate-functions/aggregate-sum.md) | Calculates sum over window | ✓ | `SUM(sales) OVER (PARTITION BY region ORDER BY date)` |
-| [AVG](../07-aggregate-functions/aggregate-avg.md) | Calculates average over window | ✓ | `AVG(score) OVER (ORDER BY id ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)` |
-| [COUNT](../07-aggregate-functions/aggregate-count.md) | Counts rows over window | ✓ | `COUNT(*) OVER (PARTITION BY department)` |
-| [MIN](../07-aggregate-functions/aggregate-min.md) | Returns minimum value in window | ✓ | `MIN(price) OVER (PARTITION BY category)` |
-| [MAX](../07-aggregate-functions/aggregate-max.md) | Returns maximum value in window | ✓ | `MAX(price) OVER (PARTITION BY category)` |
-| [ARRAY_AGG](../07-aggregate-functions/aggregate-array-agg.md) | Collects values into array | | `ARRAY_AGG(product) OVER (PARTITION BY category)` |
-| [STDDEV_POP](../07-aggregate-functions/aggregate-stddev-pop.md) | Population standard deviation | ✓ | `STDDEV_POP(value) OVER (PARTITION BY group)` |
-| [STDDEV_SAMP](../07-aggregate-functions/aggregate-stddev-samp.md) | Sample standard deviation | ✓ | `STDDEV_SAMP(value) OVER (PARTITION BY group)` |
-| [MEDIAN](../07-aggregate-functions/aggregate-median.md) | Median value | ✓ | `MEDIAN(response_time) OVER (PARTITION BY server)` |
+| [SUM](/tidb-cloud-lake/sql/sum.md) | Calculates sum over window | ✓ | `SUM(sales) OVER (PARTITION BY region ORDER BY date)` |
+| [AVG](/tidb-cloud-lake/sql/avg.md) | Calculates average over window | ✓ | `AVG(score) OVER (ORDER BY id ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)` |
+| [COUNT](/tidb-cloud-lake/sql/count.md) | Counts rows over window | ✓ | `COUNT(*) OVER (PARTITION BY department)` |
+| [MIN](/tidb-cloud-lake/sql/min.md) | Returns minimum value in window | ✓ | `MIN(price) OVER (PARTITION BY category)` |
+| [MAX](/tidb-cloud-lake/sql/max.md) | Returns maximum value in window | ✓ | `MAX(price) OVER (PARTITION BY category)` |
+| [ARRAY_AGG](/tidb-cloud-lake/sql/array-agg.md) | Collects values into array | | `ARRAY_AGG(product) OVER (PARTITION BY category)` |
+| [STDDEV_POP](/tidb-cloud-lake/sql/stddev-pop.md) | Population standard deviation | ✓ | `STDDEV_POP(value) OVER (PARTITION BY group)` |
+| [STDDEV_SAMP](/tidb-cloud-lake/sql/stddev-samp.md) | Sample standard deviation | ✓ | `STDDEV_SAMP(value) OVER (PARTITION BY group)` |
+| [MEDIAN](/tidb-cloud-lake/sql/median.md) | Median value | ✓ | `MEDIAN(response_time) OVER (PARTITION BY server)` |
 
 **Conditional Variants**
 
 | Function | Description | Window Frame Support | Example |
-|----------|-------------|---------------------|---------|  
-| [COUNT_IF](../07-aggregate-functions/aggregate-count-if.md) | Conditional count | ✓ | `COUNT_IF(status = 'complete') OVER (PARTITION BY dept)` |
-| [SUM_IF](../07-aggregate-functions/aggregate-sum-if.md) | Conditional sum | ✓ | `SUM_IF(amount, status = 'paid') OVER (PARTITION BY customer)` |
-| [AVG_IF](../07-aggregate-functions/aggregate-avg-if.md) | Conditional average | ✓ | `AVG_IF(score, passed = true) OVER (PARTITION BY class)` |
-| [MIN_IF](../07-aggregate-functions/aggregate-min-if.md) | Conditional minimum | ✓ | `MIN_IF(temp, location = 'outside') OVER (PARTITION BY day)` |
-| [MAX_IF](../07-aggregate-functions/aggregate-max-if.md) | Conditional maximum | ✓ | `MAX_IF(speed, vehicle = 'car') OVER (PARTITION BY test)` |
+|----------|-------------|---------------------|---------|
+| [COUNT_IF](/tidb-cloud-lake/sql/count-if.md) | Conditional count | ✓ | `COUNT_IF(status = 'complete') OVER (PARTITION BY dept)` |
+| [SUM_IF](/tidb-cloud-lake/sql/sum-if.md) | Conditional sum | ✓ | `SUM_IF(amount, status = 'paid') OVER (PARTITION BY customer)` |
+| [AVG_IF](/tidb-cloud-lake/sql/avg-if.md) | Conditional average | ✓ | `AVG_IF(score, passed = true) OVER (PARTITION BY class)` |
+| [MIN_IF](/tidb-cloud-lake/sql/min-if.md) | Conditional minimum | ✓ | `MIN_IF(temp, location = 'outside') OVER (PARTITION BY day)` |
+| [MAX_IF](/tidb-cloud-lake/sql/max-if.md) | Conditional maximum | ✓ | `MAX_IF(speed, vehicle = 'car') OVER (PARTITION BY test)` |
 
 ## Basic Syntax
 
@@ -98,7 +98,7 @@ FUNCTION() OVER (
 ```
 
 - **PARTITION BY**: Divides data into groups
-- **ORDER BY**: Sorts rows within each partition  
+- **ORDER BY**: Sorts rows within each partition
 - **window_frame**: Defines which rows to include (optional)
 
 ## Window Frame Specification

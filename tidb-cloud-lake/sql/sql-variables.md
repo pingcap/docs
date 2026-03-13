@@ -13,7 +13,7 @@ SQL variables allow you to store and manage temporary data within a session, mak
 | [UNSET VARIABLE](/tidb-cloud-lake/sql/unset-variable.md) | Removes a user-defined variable. |
 | [SHOW VARIABLES](/tidb-cloud-lake/sql/show-variables.md) | Displays current values of system and user variables. |
 
-The SHOW VARIABLES command also has a table function counterpart, [`SHOW_VARIABLES`](../../../20-sql-functions/17-table-functions/show-variables.md), which returns the same information in a tabular format for richer filtering and querying.
+The SHOW VARIABLES command also has a table function counterpart, [`SHOW_VARIABLES`](/tidb-cloud-lake/sql/show-variables.md), which returns the same information in a tabular format for richer filtering and querying.
 
 ## Querying with Variables
 

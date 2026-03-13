@@ -11,8 +11,8 @@ Cluster key is intended to improve query performance by physically clustering da
 
 See also:
 
-* [ALTER CLUSTER KEY](./dml-alter-cluster-key.md) 
-* [DROP CLUSTER KEY](./dml-drop-cluster-key.md)
+* [ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md) 
+* [DROP CLUSTER KEY](/tidb-cloud-lake/sql/drop-cluster-key.md)
 
 ## Syntax
 

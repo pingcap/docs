@@ -22,8 +22,8 @@ COVAR_POP(<expr1>, <expr2>)
 
 ## Aliases
 
-- [VAR_POP](aggregate-var-pop.md)
-- [VARIANCE_POP](aggregate-variance-pop.md)
+- [VAR_POP](/tidb-cloud-lake/sql/var-pop.md)
+- [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md)
 
 ## Return Type
 

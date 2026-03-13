@@ -4,7 +4,7 @@ title: system.databases
 
 Provides metadata about all databases in the system, including their catalogs, names, unique IDs, owners, and drop timestamps.
 
-See also: [SHOW DATABASES](../../10-sql-commands/00-ddl/00-database/show-databases.md)
+See also: [SHOW DATABASES](/tidb-cloud-lake/sql/show-databases.md)
 
 ```sql title='Examples:'
 SELECT * FROM system.databases;

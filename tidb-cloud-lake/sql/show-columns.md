@@ -6,7 +6,7 @@ sidebar_position: 13
 Shows information about the columns in a given table.
 
 :::tip
-[DESCRIBE TABLE](50-describe-table.md) provides similar but less information about the columns of a table. 
+[DESCRIBE TABLE](/tidb-cloud-lake/sql/describe-table.md) provides similar but less information about the columns of a table. 
 :::
 
 ## Syntax

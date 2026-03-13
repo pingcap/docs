@@ -380,7 +380,7 @@ Airport Connector  | hard_brake     | 1           | 0.59
 Port Perimeter     | lane_merge     | 1           | 0.74
 ```
 
-Stored procedures can be triggered manually, via [TASKS](/guides/load-data/continuous-data-pipelines/task), or from orchestration tools.
+Stored procedures can be triggered manually, via [TASKS](/tidb-cloud-lake/sql/task.md), or from orchestration tools.
 
 ---
 

@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Provides a list of active transactions currently holding locks on tables, either for the current user across all their sessions or for all users within the Databend system. A lock is a synchronization mechanism that restricts access to shared resources, such as tables, ensuring orderly and controlled interactions among processes or threads within the Databend system to maintain data consistency and prevent conflicts. 
 
-The operations, such as [UPDATE](../../10-dml/dml-update.md), [DELETE](../../10-dml/dml-delete-from.md), [OPTIMIZE TABLE](../01-table/60-optimize-table.md), [RECLUSTER TABLE](../06-clusterkey/dml-recluster-table.md), and [ALTER TABLE](../01-table/90-alter-table.md#column-operations), can result in table locks in the system. The table lock feature is enabled by default. In case of resource conflicts, you can examine specific details using the command. To disable this feature, execute `set enable_table_lock=0;`.
+The operations, such as [UPDATE](/tidb-cloud-lake/sql/update.md), [DELETE](../../10-dml/dml-delete-from.md), [OPTIMIZE TABLE](/tidb-cloud-lake/sql/optimize-table.md), [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md), and [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations), can result in table locks in the system. The table lock feature is enabled by default. In case of resource conflicts, you can examine specific details using the command. To disable this feature, execute `set enable_table_lock=0;`.
 
 ## Syntax
 

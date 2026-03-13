@@ -2,4 +2,4 @@
 title: HEX
 ---
 
-Alias for [TO_HEX](../02-conversion-functions/to-hex.md).
+Alias for [TO_HEX](/tidb-cloud-lake/sql/hex.md).

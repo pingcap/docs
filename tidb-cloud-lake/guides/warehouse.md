@@ -101,7 +101,7 @@ To assign a role to a warehouse, select the desired role in the **Advanced Optio
 
 ![alt text](@site/static/img/documents/warehouses/warehouse-role.png)
 
-- The two [Built-in Roles](../../56-security/access-control/02-roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about Databend roles, see [Roles](../../56-security/access-control/02-roles.md).
+- The two [Built-in Roles](/tidb-cloud-lake/guides/roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about Databend roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
 - Warehouses without an assigned role default to the `public` role, allowing access to all users.
 - You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](organization.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
 

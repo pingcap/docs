@@ -237,5 +237,5 @@ Rows stay in each stream until `WITH CONSUME` runs, so inserts that arrive at di
 
 **Integrations**
 - Pair streams with tasks using `task_history('<name>', <limit>)` for scheduled incremental loads.
-- Use [`WITH CONSUME`](02-task.md) when you want to drain only the latest delta.
+- Use [`WITH CONSUME`](/tidb-cloud-lake/sql/task.md) when you want to drain only the latest delta.
 
