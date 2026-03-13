@@ -30,8 +30,8 @@
 
 ## GUIDES
 
-- Manage TiDB resources
-  - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- Manage {{{ .starter }}} Instances
   - [Create a {{{ .starter }}} Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
   - Connect to Your {{{ .starter }}} Instance
     - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
@@ -45,7 +45,7 @@
   - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
   - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
   - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
-  - Use an HTAP Cluster with TiFlash
+  - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -113,7 +113,7 @@
       - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
+  - [Delete a {{{ .starter }}} Instance](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud

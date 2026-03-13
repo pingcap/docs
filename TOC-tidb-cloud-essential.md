@@ -28,22 +28,21 @@
 
 ## GUIDES
 
-- Manage Cluster
-  - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Clusters
-    - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your TiDB Cloud Cluster
-      - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-    - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-      - [Overview](/tidb-cloud/branch-overview.md)
-      - [Manage Branches](/tidb-cloud/branch-manage.md)
-      - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
-    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
-  - Use an HTAP Cluster with TiFlash
+- [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- Manage {{{ .essential }}} Instances
+  - [Create a {{{ .essential }}} Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - Connect to Your {{{ .essential }}} Instance
+    - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+    - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+  - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Overview](/tidb-cloud/branch-overview.md)
+    - [Manage Branches](/tidb-cloud/branch-manage.md)
+    - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
+  - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
+  - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
+  - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -116,7 +115,7 @@
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
+  - [Delete a {{{ .essential }}} Instance](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud

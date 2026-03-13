@@ -48,7 +48,7 @@
   - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
   - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
-  - Use an HTAP Cluster with TiFlash
+  - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -141,7 +141,7 @@
     - [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md)
     - [Manage TiProxy](/tidb-cloud/tiproxy-management.md)
   - [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
+  - [Delete a {{{ .dedicated }}} Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
