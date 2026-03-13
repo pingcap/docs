@@ -46,7 +46,7 @@ CREATE USER u1 IDENTIFIED BY '123' WITH DEFAULT ROLE 'role1';
 GRANT CREATE ON db.* TO ROLE role1;
 GRANT ROLE role1 TO u1;
 
--- After u1 logs into atabend, role1 has been granted to u1, so u1 can create and own tables under db:
+-- After u1 logs into Databend, role1 has been granted to u1, so u1 can create and own tables under db:
 u1> CREATE TABLE db.t(id INT);
 u1> INSERT INTO db.t VALUES(1);
 u1> SELECT * FROM db.t;

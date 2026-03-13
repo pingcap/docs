@@ -287,7 +287,7 @@
         - [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md)
         - [SET ROLE](/tidb-cloud-lake/sql/set-role.md)
         - [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md)
-        - [DROP ROLE](/tidb-cloud-lake/sql/drop-role.md)`
+        - [DROP ROLE](/tidb-cloud-lake/sql/drop-role.md)
         - [GRANT](/tidb-cloud-lake/sql/grant.md)
         - [REVOKE](/tidb-cloud-lake/sql/revoke.md)
         - [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)
