@@ -18,13 +18,13 @@ The overall procedure is as follows:
 
 ## Prerequisites
 
-It is recommended that you put the S3 bucket and the TiDB Cloud cluster or instance in the same region. Cross-region migration might incur additional cost for data conversion.
+It is recommended that you put the S3 bucket and the TiDB Cloud resource in the same region. Cross-region migration might incur additional cost for data conversion.
 
 Before migration, you need to prepare the following:
 
 - An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target TiDB Cloud cluster or instance hosted on AWS
+- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target TiDB Cloud resource hosted on AWS
 
 ## Prepare tools
 
@@ -39,7 +39,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB Cloud cluster or instance.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB Cloud resource.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -77,7 +77,7 @@ You need the following privileges to export data from the upstream database:
 
 ### Deploy TiCDC
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to the downstream TiDB Cloud cluster or instance.
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to the downstream TiDB Cloud resource.
 
 1. Confirm whether the current TiDB version of the upstream TiDB Self-Managed cluster supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the upstream TiDB Self-Managed cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
 
@@ -288,12 +288,12 @@ To replicate incremental data, do the following:
     3. On the **Networking** page, click **Add IP Address**.
     4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
-3. Get the connection information of the downstream TiDB Cloud cluster or instance.
+3. Get the connection information of the downstream TiDB Cloud resource.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud cluster or instance to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud resource to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, you can get the host IP address and port of the TiDB Cloud cluster or instance. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    4. From the connection information, you can get the host IP address and port of the TiDB Cloud resource. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
@@ -348,7 +348,7 @@ To replicate incremental data, do the following:
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster or instance.
+    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud resource.
 
 7. Set the same timezone for the upstream and downstream. By default, TiDB Cloud sets the timezone to UTC. If the timezone is different between the upstream and downstream, you need to set the same timezone for both upstream and downstream.
 
@@ -358,7 +358,7 @@ To replicate incremental data, do the following:
         SELECT @@global.time_zone;
         ```
 
-    2. In the downstream TiDB Cloud cluster or instance, run the following command to set the timezone:
+    2. In the downstream TiDB Cloud resource, run the following command to set the timezone:
 
         ```sql
         SET GLOBAL time_zone = '+08:00';
@@ -370,7 +370,7 @@ To replicate incremental data, do the following:
         SELECT @@global.time_zone;
         ```
 
-8. Back up the [query bindings](/sql-plan-management.md) in the upstream TiDB Self-Managed cluster and restore them in the downstream TiDB Cloud cluster or instance. You can use the following query to back up the query bindings:
+8. Back up the [query bindings](/sql-plan-management.md) in the upstream TiDB Self-Managed cluster and restore them in the downstream TiDB Cloud resource. You can use the following query to back up the query bindings:
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
@@ -378,9 +378,9 @@ To replicate incremental data, do the following:
 
     If you do not get any output, query bindings might not be used in the upstream cluster. In this case, you can skip this step.
 
-    After you get the query bindings, run them in the downstream TiDB Cloud cluster or instance to restore the query bindings.
+    After you get the query bindings, run them in the downstream TiDB Cloud resource to restore the query bindings.
 
-9. Back up the user and privilege information in the upstream TiDB Self-Managed cluster and restore them in the downstream TiDB Cloud cluster or instance. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
+9. Back up the user and privilege information in the upstream TiDB Self-Managed cluster and restore them in the downstream TiDB Cloud resource. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
 
     ```shell
     #!/bin/bash
@@ -409,4 +409,4 @@ To replicate incremental data, do the following:
     backup_user_priv
     ```
     
-    After you get the user and privilege information, run the generated SQL statements in the downstream TiDB Cloud cluster or instance to restore the user and privilege information.
+    After you get the user and privilege information, run the generated SQL statements in the downstream TiDB Cloud resource to restore the user and privilege information.

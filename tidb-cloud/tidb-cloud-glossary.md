@@ -127,7 +127,7 @@ Once a backed-up {{{ .dedicated }}} cluster or {{{ .premium }}} instance is dele
 
 - TiDB Cloud region
 
-    A geographical area in which a TiDB Cloud cluster or instance is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster or instance is deployed across these zones.
+    A geographical area in which a TiDB Cloud resource is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster or instance is deployed across these zones.
 
 - TiDB Region
 
@@ -186,7 +186,7 @@ The storage node that stores the online transactional processing (OLTP) data. It
 
 ### traffic filter
 
-A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster or instance via a SQL client. The traffic filter is empty by default.
+A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud resource via a SQL client. The traffic filter is empty by default.
 
 ## V
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Built-in Alerting
-summary: Learn how to monitor your TiDB Cloud cluster or instance by getting alert notifications from TiDB Cloud.
+summary: Learn how to monitor your TiDB Cloud resource by getting alert notifications from TiDB Cloud.
 ---
 
 # TiDB Cloud Built-in Alerting

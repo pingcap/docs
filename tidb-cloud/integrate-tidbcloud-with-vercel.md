@@ -11,7 +11,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 
 Using TiDB Cloud with Vercel enables you to build new frontend applications faster with a MySQL-compatible relational model and grow your app with confidence with a platform built for resilience, scale, and the highest levels of data privacy and security.
 
-This guide describes how to connect your TiDB Cloud clusters or instances to Vercel projects using one of the following methods:
+This guide describes how to connect your TiDB Cloud resources to Vercel projects using one of the following methods:
 
 * [Connect via the TiDB Cloud Vercel integration](#connect-via-the-tidb-cloud-vercel-integration)
 * [Connect via manually configuring environment variables](#connect-via-manually-setting-environment-variables)

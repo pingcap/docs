@@ -152,7 +152,7 @@ TiDB Cloud supports TLS 1.2 or TLS 1.3.
 
 No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
 
-### Is my TiDB Cloud cluster or instance secure?
+### Is my TiDB Cloud resource secure?
 
 In TiDB Cloud, you can use a TiDB Cloud Dedicated cluster, a {{{ .starter }}} instance, or a {{{ .essential }}} instance according to your needs.
 

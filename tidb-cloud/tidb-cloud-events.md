@@ -1,6 +1,6 @@
 ---
 title: Events
-summary: Learn how to view the events for TiDB Cloud clusters or instances using the Events page.
+summary: Learn how to view the events for TiDB Cloud resources using the Events page.
 ---
 
 # Events

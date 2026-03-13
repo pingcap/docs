@@ -127,8 +127,8 @@ The following table illustrates the database-level main metrics under the **Data
 
 If a pane does not provide any metrics, the possible reasons are as follows:
 
-- The workload of the corresponding TiDB Cloud cluster or instance does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The TiDB version of your TiDB Cloud cluster or instance is low. You need to upgrade it to the latest version of TiDB to see these metrics.
+- The workload of the corresponding TiDB Cloud resource does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The TiDB version of your TiDB Cloud resource is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 

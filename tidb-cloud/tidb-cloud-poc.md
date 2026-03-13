@@ -193,7 +193,7 @@ If you want to try TiDB Cloud on a larger scale, for a new round of deployments 
 
 If your credits are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
-You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
+You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cloud Resource](/tidb-cloud/delete-tidb-cluster.md).
 
 ## FAQ
 

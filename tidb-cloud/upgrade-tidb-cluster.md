@@ -5,7 +5,7 @@ summary: Learn how to upgrade the TiDB version of your TiDB cluster or instance.
 
 # Upgrade the TiDB version
 
-This document describes how to upgrade the TiDB version of your TiDB Cloud cluster or instance.
+This document describes how to upgrade the TiDB version of your TiDB Cloud resource.
 
 TiDB Cloud provides two upgrade mechanisms:
 

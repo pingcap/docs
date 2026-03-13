@@ -1,6 +1,6 @@
 ---
 title: Monitor TiDB
-summary: Learn how to monitor your TiDB Cloud cluster or instance.
+summary: Learn how to monitor your TiDB Cloud resource.
 ---
 
 # Monitor TiDB
