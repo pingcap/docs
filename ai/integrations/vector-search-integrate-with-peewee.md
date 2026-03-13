@@ -129,10 +129,10 @@ If you are running TiDB on your local machine, `TIDB_HOST` is `127.0.0.1` by def
 
 The following are descriptions for each parameter:
 
-- `TIDB_HOST`: The host of the TiDB cluster.
-- `TIDB_PORT`: The port of the TiDB cluster.
-- `TIDB_USERNAME`: The username to connect to TiDB.
-- `TIDB_PASSWORD`: The password to connect to TiDB.
+- `TIDB_HOST`: The host of the TiDB Self-Managed cluster.
+- `TIDB_PORT`: The port of the TiDB Self-Managed cluster.
+- `TIDB_USERNAME`: The username to connect to the TiDB Self-Managed cluster.
+- `TIDB_PASSWORD`: The password to connect to the TiDB Self-Managed cluster.
 - `TIDB_DATABASE`: The name of the database you want to connect to.
 
 </div>
