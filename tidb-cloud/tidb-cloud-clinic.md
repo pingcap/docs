@@ -105,7 +105,7 @@ To view TopSQL, take the following steps:
 
 4. Analyze the charts and tables displayed by TopSQL. Depending on the selected instance and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical IO hotspots.
 
-For more information, see [Top SQL in TiDB Dashboard](/dashboard/top-sql.md).
+For more information, see [TopSQL in TiDB Dashboard](/dashboard/top-sql.md).
 
 ## Generate benchmark reports
 
