@@ -18,24 +18,19 @@ graph TD
     Client --> ProxyLayer
 
     subgraph ProxyLayer["proxy layer"]
-        TiProxy1[TiProxy]
-        TiProxy2[TiProxy]
+        TiProxy1[TiProxy] ~~~ TiProxy2[TiProxy]
     end
 
     ProxyLayer --> ComputeLayer
 
     subgraph ComputeLayer["compute layer"]
-        TiDB1[TiDB]
-        TiDB2[TiDB]
-        TiDB3[TiDB]
+        TiDB1[TiDB] ~~~ TiDB2[TiDB] ~~~ TiDB3[TiDB]
     end
 
     ComputeLayer --> StorageLayer
 
     subgraph StorageLayer["storage layer"]
-        TiKV1[TiKV]
-        TiKV2[TiKV]
-        TiFlash[TiFlash]
+        TiKV1[TiKV] ~~~ TiKV2[TiKV] ~~~ TiFlash[TiFlash]
     end
 
     style ProxyLayer stroke-dasharray: 5 5
