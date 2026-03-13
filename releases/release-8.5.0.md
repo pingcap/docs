@@ -107,7 +107,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>The CPU time is now integrated into a system table, displayed alongside other metrics for sessions or SQL, letting you observe high CPU consumption operations from multiple perspectives, and improving diagnostic efficiency. This is especially useful for diagnosing scenarios such as CPU spikes in instances or read/write hotspots in clusters.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/top-sql#use-topsql">Support viewing aggregated TiKV CPU time by table or database</a> (introduced in v8.4.0) </td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/top-sql#use-top-sql">Support viewing aggregated TiKV CPU time by table or database</a> (introduced in v8.4.0) </td>
     <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in Top SQL can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues. </td>
   </tr>
   <tr>
