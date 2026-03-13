@@ -93,7 +93,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 ## Monitor TopSQL
 
-TiDB Cloud Clinic provides TopSQL information, enabling you to monitor and visually explore the CPU overhead of each SQL statement in your database in real time. This helps you optimize and resolve database performance issues.
+TiDB Cloud Clinic provides TopSQL information to help you visually analyze the most resource-intensive queries on a specific TiDB or TiKV instance over a period of time. By default, TopSQL continuously collects CPU load data. For TiKV instances, if TiKV network IO collection is enabled, you can also inspect `Network Bytes` and `Logical IO Bytes`, and analyze hotspots by `Query`, `Table`, `DB`, or `Region`. This helps you identify and troubleshoot performance issues from multiple resource dimensions instead of CPU alone.
 
 To view TopSQL, take the following steps:
 
@@ -103,9 +103,9 @@ To view TopSQL, take the following steps:
 
 3. Select a specific TiDB or TiKV instance to observe its load. You can use the time picker or select a time range in the chart to refine your analysis.
 
-4. Analyze the charts and tables displayed by TopSQL.
+4. Analyze the charts and tables displayed by TopSQL. Depending on the selected instance and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical IO hotspots.
 
-For more information, see [TopSQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql). 
+For more information, see [Top SQL in TiDB Dashboard](/dashboard/top-sql.md).
 
 ## Generate benchmark reports
 
