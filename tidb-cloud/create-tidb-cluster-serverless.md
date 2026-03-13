@@ -56,7 +56,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
         - You can update the spending limit for your {{{ .starter }}} instance. If the spending limit is set to 0, the instance remains free. If the spending limit is greater than 0, you need to add a credit card before creating the {{{ .starter }}} instance.
 
-        - By default, each organization can create up to five [free Starter clusters](/tidb-cloud/select-cluster-tier.md#starter). To create additional Starter clusters, you must add a credit card and specify a spending limit.
+        - By default, each organization can create up to five [free {{{ .starter }}} instances](/tidb-cloud/select-cluster-tier.md#starter). To create additional {{{ .starter }}} instances, you must add a credit card and specify a spending limit.
 
     - **Essential** plan:
 

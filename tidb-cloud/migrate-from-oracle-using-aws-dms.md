@@ -5,7 +5,7 @@ summary: Learn how to migrate data from Amazon RDS for Oracle into {{{ .starter 
 
 # Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
 
-This document describes a step-by-step example of how to migrate data from Amazon RDS for Oracle to [{{{ .starter }}}](https://tidbcloud.com/clusters/create-cluster) using AWS Database Migration Service (AWS DMS).
+This document describes a step-by-step example of how to migrate data from Amazon RDS for Oracle to [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) using AWS Database Migration Service (AWS DMS).
 
 > **Tip:**
 >

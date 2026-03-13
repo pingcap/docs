@@ -132,4 +132,4 @@ Once the restore process begins, the {{{ .starter }}} or Essential instance stat
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
 - Manual backups are not supported for {{{ .starter }}} and {{{ .essential }}} instances.
-- Clusters with more than 1 TiB of data do not support restoring to new clusters by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.
+- A {{{ .starter }}} or {{{ .essential }}} instance with more than 1 TiB of data does not support restoring to a new instance by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.

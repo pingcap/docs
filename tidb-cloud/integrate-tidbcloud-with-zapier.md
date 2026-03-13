@@ -169,7 +169,7 @@ The following table lists the actions supported by TiDB Cloud App. Note that som
 | Create Row | Creates a new row. | A {{{ .starter }}} instance, a database, and a table |
 | Update Row | Updates an existing row. | A {{{ .starter }}} instance, a database, and a table |
 | Find Row | Finds a row in a table via a lookup column. | A {{{ .starter }}} instance, a database, and a table |
-| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A {{{ .starter }}} instance, a database, and a table |
+| Find Row (Custom Query) | Finds a row in a table via a custom query that you provide. | A {{{ .starter }}} instance, a database, and a table |
 
 ## TiDB Cloud App templates
 

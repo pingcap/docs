@@ -125,7 +125,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 #### Step 1. Create a {{{ .starter }}} instance
 
 1. [Create a free {{{ .starter }}} instance](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance). Remember the root password that you set for your {{{ .starter }}} instance.
-2. Get your the hostname, port, and username of your {{{ .starter }}} instance for later use.
+2. Get the hostname, port, and username of your {{{ .starter }}} instance for later use.
 
     1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
     2. On the overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is the hostname of your {{{ .starter }}} instance.

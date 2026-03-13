@@ -211,7 +211,7 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
 > **Note:**
 >
-> For each organization in TiDB Cloud, you can create a maximum of five branches for {{{ .starter }}} instances by default. To avoid exceeding the limit, you can delete the branches of your cluster that are no longer needed. For more information, see [Manage TiDB Cloud branches](/tidb-cloud/branch-manage.md).
+> For each organization in TiDB Cloud, you can create a maximum of five branches for {{{ .starter }}} instances by default. To avoid exceeding the limit, you can delete the branches of your {{{ .starter }}} instance that are no longer needed. For more information, see [Manage TiDB Cloud branches](/tidb-cloud/branch-manage.md).
 
 ## Connect via manually setting environment variables
 

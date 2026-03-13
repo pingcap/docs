@@ -8,7 +8,7 @@ aliases: ['/tidb/stable/dev-guide-gui-dbeaver/','/tidb/dev/dev-guide-gui-dbeaver
 
 TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
 
-In this tutorial, you can learn how to Connect to TiDB using DBeaver Community.
+In this tutorial, you can learn how to connect to TiDB using DBeaver Community.
 
 > **Note:**
 >

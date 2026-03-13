@@ -8,7 +8,7 @@ aliases: ['/tidb/stable/dev-guide-gui-navicat/','/tidb/dev/dev-guide-gui-navicat
 
 TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a GUI tool set for database users. This tutorial uses the [Navicat Premium](https://www.navicat.com/en/products/navicat-premium) tool to connect to TiDB.
 
-In this tutorial, you can learn how to Connect to TiDB using Navicat.
+In this tutorial, you can learn how to connect to TiDB using Navicat.
 
 > **Note:**
 >

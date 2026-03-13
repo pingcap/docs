@@ -101,7 +101,7 @@ Configure the WordPress database connection to {{{ .starter }}}.
 ### Step 5: Confirm the database connection
 
 1. Close the connection dialog for your {{{ .starter }}} instance in the TiDB Cloud console, and open the **SQL Editor** page.
-2. Under the **Schemas** tab on the left, click the database you connected to Wordpress.
+2. Under the **Schemas** tab on the left, click the database you connected to WordPress.
 3. Confirm that you now see the WordPress tables (such as `wp_posts` and `wp_comments`) in the list of tables for that database.
 
 ## Need help?

@@ -45,7 +45,7 @@ pip install "pytidb[models]"
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/clusters):
+You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/tidbs):
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.

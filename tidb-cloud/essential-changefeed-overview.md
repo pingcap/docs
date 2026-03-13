@@ -80,7 +80,7 @@ You can pause or resume a changefeed using the TiDB Cloud console or the TiDB Cl
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}}instance.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 </div>

@@ -65,7 +65,7 @@ After completing the prerequisites, you can sink your data to the destination {{
 
 2. Click **Create Changefeed**, and select **TiDB Cloud** as the destination.
 
-3. In the **TiDB Cloud Connection** area, select the destination {{{ .starter }}} or {{{ .essential }}} instance, and then fill in the user name and password of the destination cluster.
+3. In the **TiDB Cloud Connection** area, select the destination {{{ .starter }}} or {{{ .essential }}} instance, and then fill in the user name and password of the destination instance.
 
 4. Click **Next** to establish the connection between the two TiDB clusters and test whether the changefeed can connect them successfully:
 
