@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to get started with TiDB Cloud.
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-## Step 1: Create a {{{ .starter }}} instance
+## Step 1: Create a {{{ .starter }}} instance {#step-1-create-a-starter-instance}
 
 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} instance, follow these steps:
 

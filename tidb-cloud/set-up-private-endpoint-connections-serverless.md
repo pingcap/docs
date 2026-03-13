@@ -43,7 +43,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
 3. [Connect to your {{{ .starter }}} or Essential instance](#step-3-connect-to-your-tidb)
 
-### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-x-instance}
+### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-instance}
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -69,7 +69,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
 3. Select **Endpoint services that use NLBs and GWLBs**.
-4. Enter the service name that you found in [step 1](#step-1-choose-a-tidb-cluster).
+4. Enter the service name that you found in [step 1](#step-1-choose-a-tidb-instance).
 5. Click **Verify service**.
 6. Select your VPC in the drop-down list. Expand **Additional settings** and select the **Enable DNS name** checkbox.
 7. In the **Subnets** area, select the availability zone where your {{{ .starter }}} or Essential instance is located, and select the Subnet ID.
@@ -86,7 +86,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
 To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
 
-1. To get the **VPC ID** and **Subnet ID**, navigate to your AWS Management Console, and locate them in the relevant sections. Make sure that you fill in the **Availability Zone ID** that you found in [step 1](#step-1-choose-a-tidb-cluster).
+1. To get the **VPC ID** and **Subnet ID**, navigate to your AWS Management Console, and locate them in the relevant sections. Make sure that you fill in the **Availability Zone ID** that you found in [step 1](#step-1-choose-a-tidb-instance).
 2. Copy the command provided below, replace the relevant arguments with the information you obtained, and then execute it in your terminal.
 
 ```bash

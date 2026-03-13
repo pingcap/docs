@@ -9,7 +9,7 @@ This document describes how to delete the following TiDB Cloud resources:
 
 - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instance
 - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instance
-- [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#dedicated) cluster
+- [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster
 
 You can delete a TiDB Cloud resource at any time by performing the following steps:
 

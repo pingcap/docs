@@ -20,7 +20,7 @@ This tutorial walks you through the steps to connect to your {{{ .starter }}} or
 
 To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint, follow these steps:
 
-1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-instancer)
+1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-instance)
 2. [Create a private endpoint on Alibaba Cloud](#step-2-create-a-private-endpoint-on-alibaba-cloud)
 3. [Connect to your {{{ .starter }}} or Essential instance using the private endpoint](#step-3-connect-to-your-instance-using-the-private-endpoint)
 

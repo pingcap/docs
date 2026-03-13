@@ -124,7 +124,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
 #### Step 1. Create a {{{ .starter }}} instance
 
-1. [Create a free {{{ .starter }}} instance](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your {{{ .starter }}} instance.
+1. [Create a free {{{ .starter }}} instance](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance). Remember the root password that you set for your {{{ .starter }}} instance.
 2. Get your the hostname, port, and username of your {{{ .starter }}} instance for later use.
 
     1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
@@ -803,7 +803,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 > **Note:**
 >
-> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2-integrate-tidb-self-hosted-with-proxysql) for detailed steps.
+> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2-integrate-tidb-self-managed-with-proxysql) for detailed steps.
 
 1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL. Skip this step if you have already cloned it in the previous steps.
 

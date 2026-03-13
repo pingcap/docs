@@ -10,7 +10,7 @@ This document briefly introduces how to use TiDB's CRUD SQL.
 
 ## Before you start
 
-Please make sure you are connected to TiDB. If not, [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) and connect to it first.
+Please make sure you are connected to TiDB. If not, [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance) and connect to it first.
 
 ## Explore SQL with TiDB
 
@@ -20,7 +20,7 @@ Please make sure you are connected to TiDB. If not, [Create a {{{ .starter }}} I
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) and then run SQL statements in it.
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance) and then run SQL statements in it.
 
 This page walks you through the basic TiDB SQL statements such as DDL, DML, and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 

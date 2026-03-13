@@ -149,7 +149,7 @@ To invite a user to an organization, take the following steps:
     >
     > - The default role at the organization level is `Organization Viewer`.
     > - If you want to invite multiple users at one time, you can enter multiple email addresses.
-    > - The invited user does not have access to any {{{ .premium }}} instances by default. To grant instance permissions to the user, see [Invite a user to access or manage a {{{ .premium }}} instance](#invite-a-user-to-access-or-manage-a-tidb-instance).
+    > - The invited user does not have access to any {{{ .premium }}} instances by default. To grant instance permissions to the user, see [Invite a user to access or manage a {{{ .premium }}} instance](#invite-a-user-to-access-or-manage-a-premium-instance).
 
 5. If you only need to assign the user an organization role and do not need to assign any project or instance roles, disable the **Add access for projects and instances** option.
 
