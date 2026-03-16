@@ -789,7 +789,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 1 row in set (0.00 sec)
 ```
 
-### performance_schema_session_connect_attrs_size
+### performance_schema_session_connect_attrs_size <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes

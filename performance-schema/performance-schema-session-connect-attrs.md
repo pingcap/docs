@@ -69,7 +69,7 @@ Fields in the `SESSION_CONNECT_ATTRS` table are described as follows:
 
 ## Size limit and truncation
 
-TiDB uses the [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size) global system variable to control the maximum total size of connection attributes per session.
+TiDB uses the [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900) global system variable to control the maximum total size of connection attributes per session.
 
 - Default value: `4096` bytes
 - Range: `[-1, 65536]`
