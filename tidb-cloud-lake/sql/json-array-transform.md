@@ -6,7 +6,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 
-Transforms each element of a JSON array using a specified transformation Lambda expression. For more information about Lambda expression, see [Lambda Expressions](/tidb-cloud-lake/sql/stored-procedure-sql-scripting.md#lambda-expressions).
+Transforms each element of a JSON array using a specified transformation Lambda expression. For more information about Lambda expression, see [Lambda Expressions](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 
 ## Syntax
 

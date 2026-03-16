@@ -12,7 +12,7 @@ TRY_INET_ATON( <str> )
 
 ## Aliases
 
-- [TRY_IPV4_STRING_TO_NUM](try-ipv4-string-to-num.md)
+- [TRY_IPV4_STRING_TO_NUM](/tidb-cloud-lake/sql/try-ipv4-string-to-num.md)
 
 ## Return Type
 

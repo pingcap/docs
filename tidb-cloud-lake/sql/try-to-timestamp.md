@@ -5,9 +5,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.528"/>
 
-A variant of [TO_TIMESTAMP](/tidb-cloud-lake/sql/timestamp.md) in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
+A variant of [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
 
-See also: [TO_TIMESTAMP](/tidb-cloud-lake/sql/timestamp.md)
+See also: [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)
 
 ## Syntax
 
@@ -23,7 +23,7 @@ If given two arguments, the function converts the first string to a timestamp ba
 
 ## Aliases
 
-- [TRY_TO_DATETIME](try-to-datetime.md)
+- [TRY_TO_DATETIME](/tidb-cloud-lake/sql/try-to-datetime.md)
 
 ## Examples
 

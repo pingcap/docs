@@ -12,7 +12,7 @@ INET_NOTA( <int32> )
 
 ## Aliases
 
-- [IPV4_NUM_TO_STRING](ipv4-num-to-string.md)
+- [IPV4_NUM_TO_STRING](/tidb-cloud-lake/sql/ipv4-num-to-string.md)
 
 ## Return Type
 

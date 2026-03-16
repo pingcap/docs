@@ -88,7 +88,7 @@ docker exec -it superset superset init
 
 ![Alt text](/img/integration/superset-select-other.png)
 
-4. On the **BASIC** tab, set a display name, for example, `Databend`, and then enter the URI to connect to Databend Cloud. The URI follows the format: `databend://<host>`, where` <host>` corresponds to the host field in your warehouse's connection information. For information on how to obtain the connection details, refer to [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting-to-a-warehouse).
+4. On the **BASIC** tab, set a display name, for example, `Databend`, and then enter the URI to connect to Databend Cloud. The URI follows the format: `databend://<host>`, where` <host>` corresponds to the host field in your warehouse's connection information. For information on how to obtain the connection details, refer to [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting-to-a-warehouse).
 
 ![Alt text](/img/integration/superset-uri.png)
 

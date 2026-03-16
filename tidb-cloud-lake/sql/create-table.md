@@ -27,7 +27,7 @@ See also:
 
 - [CREATE TEMP TABLE](/tidb-cloud-lake/sql/create-temp-table.md)
 - [CREATE TRANSIENT TABLE](/tidb-cloud-lake/sql/create-transient-table.md)
-- [CREATE EXTERNAL TABLE](10-ddl-create-table-external-location.md)
+- [CREATE EXTERNAL TABLE](/tidb-cloud-lake/sql/create-external-table.md)
 
 ## CREATE TABLE
 

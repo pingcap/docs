@@ -108,7 +108,7 @@ Result:
 
 ### Step 4 (Option). Using SELECT to Copy Data
 
-For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from NDJSON`](../04-transform/03-querying-ndjson.md).
+For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from NDJSON`](/tidb-cloud-lake/guides/query-ndjson-files-in-stage.md).
 
 ```sql
 COPY INTO books(title, author)

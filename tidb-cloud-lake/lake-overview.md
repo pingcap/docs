@@ -25,6 +25,6 @@ TiDB Cloud Lake is cloud-native data warehouse service focused on analytics work
 
 ## Get Started
 
-1. [**Sign Up**](cloud/getting-started) — Create your account in minutes
-2. [**Explore**](cloud/resources/) — Warehouses, Worksheets, Dashboards
-3. [**Connect**](/guides/connect) — BendSQL, Python, Go, Java, Node.js
+1. [**Sign Up**](/tidb-cloud-lake/lake-quick-start.md) — Create your account in minutes
+2. **Explore** — Warehouses, Worksheets, Dashboards
+3. [**Connect**](/tidb-cloud-lake/guides/connection-overview.md) — BendSQL, Python, Go, Java, Node.js

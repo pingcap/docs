@@ -12,7 +12,7 @@ Before you start, ensure you have the following prerequisites in place:
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch a self-hosted Databend.
 - An AWS S3 bucket used as storage for your self-hosted Databend. [Learn how to create an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html).
 - AWS Access Key ID and Secret Access Key with sufficient permissions for accessing your S3 bucket. [Manage your AWS credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 ## Step 1: Launch Databend in Docker
 
@@ -58,8 +58,7 @@ SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'population');
 
 ## Step 2: Set Up Attached Tables in Databend Cloud
 
-1. Connect to Databend Cloud using BendSQL. If you're unfamiliar with BendSQL, refer to this tutorial: [Connecting to Databend Cloud using BendSQL](../getting-started/connect-to-databendcloud-bendsql.md).
-
+1. [Connect to Databend Cloud using BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md).
 2. Execute the following statements to create two attached tables:
     - The first table, `population_all_columns`, includes all columns from the source data.
     - The second table, `population_only`, includes only the selected columns (`city` & `population`).

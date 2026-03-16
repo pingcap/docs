@@ -28,8 +28,8 @@ Databend supports multiple connection methods to suit different use cases. All o
 
 | Tool | Type | Best For |
 |------|------|----------|
-| [BendSQL](/tidb-cloud-lake/guides/bendsql.md) | CLI | Developers, Scripting, Automation |
-| [DBeaver](/tidb-cloud-lake/guides/dbeaver.md) | GUI | Data Analysis, Visual Query Building |
+| [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) | CLI | Developers, Scripting, Automation |
+| [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md) | GUI | Data Analysis, Visual Query Building |
 
 ## Drivers
 

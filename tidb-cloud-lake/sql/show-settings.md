@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.314"/>
 
-Databend provides a variety of system settings that enable you to control how Databend works. This command displays the current and default values, as well as the [Setting Levels](#setting-levels), of available system settings. To update a setting, use the [SET](02-set-global.md) or [UNSET](/tidb-cloud-lake/sql/unset.md) command.
+Databend provides a variety of system settings that enable you to control how Databend works. This command displays the current and default values, as well as the [Setting Levels](#setting-levels), of available system settings. To update a setting, use the [SET](/tidb-cloud-lake/sql/set.md) or [UNSET](/tidb-cloud-lake/sql/unset.md) command.
 
 - Some Databend behaviors cannot be changed through the system settings; you must take them into consideration while working with Databend. For example,
     - Databend encodes strings to the UTF-8 charset.

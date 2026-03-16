@@ -3,7 +3,7 @@ title: ALTER TABLE
 sidebar_position: 4
 slug: /sql-commands/ddl/table/alter-table
 ---
- 
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>
@@ -70,7 +70,7 @@ DROP [ COLUMN ] <column_name>
 - Only a constant value can be accepted as a default value when adding or modifying a column. If a non-constant expression is used, an error will occur.
 - Adding a stored computed column with ALTER TABLE is not supported yet.
 - When you change the data type of a table's columns, there's a risk of conversion errors. For example, if you try to convert a column with text (String) to numbers (Float), it might cause problems.
-- When you set a masking policy for a column, make sure that the data type (refer to the parameter *arg_type_to_mask* in the syntax of [CREATE MASKING POLICY](../12-mask-policy/create-mask-policy.md)) defined in the policy matches the column.
+- When you set a masking policy for a column, make sure that the data type (refer to the parameter *arg_type_to_mask* in the syntax of [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)) defined in the policy matches the column.
 - Use the optional `USING` clause when the policy definition expects additional parameters. List the column mapped to each policy argument in order; the first argument always represents the column being masked.
 - If you include `USING`, provide at least the masked column plus any additional columns needed by the policy. The first identifier in `USING (...)` must match the column being modified.
 - Masking policies can only be attached to regular tables. Views, streams, and temporary tables do not allow `SET MASKING POLICY`.
@@ -308,7 +308,7 @@ When working with external tables, AWS IAM roles provide significant security ad
 - Automatic rotation: Handles credential rotation automatically
 - Fine-grained control: Allows for more precise access control
 
-To use IAM roles with Databend Cloud, see [Authenticate with AWS IAM Role](/guides/cloud/security/iam-role).
+To use IAM roles with Databend Cloud, see [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md).
 
 ### Examples
 

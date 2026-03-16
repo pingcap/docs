@@ -59,9 +59,9 @@ When `date_format_style` is set to 'Oracle', the following format specifiers are
 ## Aliases
 
 - [DATE_FORMAT](/tidb-cloud-lake/sql/date-format.md)
-- [JSON_TO_STRING](../10-semi-structured-functions/0-json/json-to-string.md)
-- [TO_TEXT](/tidb-cloud-lake/sql/text.md)
-- [TO_VARCHAR](/tidb-cloud-lake/sql/varchar.md)
+- [JSON_TO_STRING](/tidb-cloud-lake/sql/json-to-string.md)
+- [TO_TEXT](/tidb-cloud-lake/sql/to-text.md)
+- [TO_VARCHAR](/tidb-cloud-lake/sql/to-varchar.md)
 - TO_CHAR (Oracle compatibility)
 
 ## Return Type

@@ -254,4 +254,4 @@ Result:
 
 ## JSON Functions
 
-See [Variant Functions](/sql/sql-functions/semi-structured-functions).
+See [Variant Functions](/tidb-cloud-lake/sql/structured-semi-structured-functions.md).

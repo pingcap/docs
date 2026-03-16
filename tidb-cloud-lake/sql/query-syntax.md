@@ -32,7 +32,7 @@ This page provides reference information for the query syntax in Databend. Each 
 |-----------|-------------|
 | **[AT](/tidb-cloud-lake/sql/at.md)** | Query data at a specific point in time |
 | **[CHANGES](/tidb-cloud-lake/sql/changes.md)** | Track insertions, updates, and deletions |
-| **[WITH CONSUME](/tidb-cloud-lake/sql/consume.md)** | Process streaming data with offset management |
+| **[WITH CONSUME](/tidb-cloud-lake/sql/with-consume.md)** | Process streaming data with offset management |
 | **[WITH STREAM HINTS](/tidb-cloud-lake/sql/stream-hints.md)** | Optimize stream processing behavior |
 
 ## Query Execution

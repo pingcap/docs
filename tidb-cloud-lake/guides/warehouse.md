@@ -14,7 +14,7 @@ The warehouse is an essential component of Databend Cloud. A warehouse represent
 - Modifying data with the INSERT, UPDATE, or DELETE statement
 - Loading data into a table with the COPY INTO command
 
-Running a warehouse incurs expenses. For more information, see [Warehouse Pricing](/guides/cloud/overview/pricing#warehouse-pricing).
+Running a warehouse incurs expenses. For more information, see [Warehouse Pricing](/tidb-cloud-lake/guides/pricing-billing.md#warehouse-pricing).
 
 ## Warehouse Sizes
 
@@ -103,7 +103,7 @@ To assign a role to a warehouse, select the desired role in the **Advanced Optio
 
 - The two [Built-in Roles](/tidb-cloud-lake/guides/roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about Databend roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
 - Warehouses without an assigned role default to the `public` role, allowing access to all users.
-- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](organization.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
+- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](/tidb-cloud-lake/guides/warehouse.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
 
   ```sql title='Examples:'
   GRANT ROLE manager to 'name@example.com';
@@ -143,24 +143,24 @@ Connecting to a warehouse provides the compute resources required to run queries
 
 ### Connection Methods
 
-Databend Cloud supports multiple connection methods to meet your specific needs. For detailed connection instructions, see the [SQL Clients documentation](/guides/connect).
+Databend Cloud supports multiple connection methods to meet your specific needs.
 
 #### SQL Clients & Tools
 
 | Client                                     | Type            | Best For                      | Key Features                                          |
 | ------------------------------------------ | --------------- | ----------------------------- | ----------------------------------------------------- |
-| **[BendSQL](/tidb-cloud-lake/guides/bendsql.md)** | Command Line    | Developers, Scripts           | Native CLI, Rich formatting, Multiple install options |
-| **[DBeaver](/guides/connect/sql-clients/jdbc)**    | GUI Application | Data Analysis, Visual Queries | Built-in driver, Cross-platform, Query builder        |
+| **[BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md)** | Command Line    | Developers, Scripts           | Native CLI, Rich formatting, Multiple install options |
+| **[DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md)**    | GUI Application | Data Analysis, Visual Queries | Built-in driver, Cross-platform, Query builder        |
 
 #### Developer Drivers
 
 | Language    | Driver            | Use Case                | Documentation                                          |
 | ----------- | ----------------- | ----------------------- | ------------------------------------------------------ |
-| **Go**      | Golang Driver     | Backend Applications    | [Golang Guide](/guides/connect/drivers/golang)  |
-| **Python**  | Python Connector  | Data Science, Analytics | [Python Guide](/guides/connect/drivers/python)  |
-| **Node.js** | JavaScript Driver | Web Applications        | [Node.js Guide](/guides/connect/drivers/nodejs) |
-| **Java**    | JDBC Driver       | Enterprise Applications | [JDBC Guide](/guides/connect/drivers/java)      |
-| **Rust**    | Rust Driver       | System Programming      | [Rust Guide](/guides/connect/drivers/rust)      |
+| **Go**      | Golang Driver     | Backend Applications    | [Golang Guide](/tidb-cloud-lake/guides/connect-using-golang.md)  |
+| **Python**  | Python Connector  | Data Science, Analytics | [Python Guide](/tidb-cloud-lake/guides/connect-using-python.md)  |
+| **Node.js** | JavaScript Driver | Web Applications        | [Node.js Guide](/tidb-cloud-lake/guides/connect-using-node-js.md) |
+| **Java**    | JDBC Driver       | Enterprise Applications | [JDBC Guide](/tidb-cloud-lake/guides/connect-using-java.md)      |
+| **Rust**    | Rust Driver       | System Programming      | [Rust Guide](/tidb-cloud-lake/guides/connect-using-rust.md)      |
 
 ### Obtaining Connection Information
 
@@ -206,4 +206,4 @@ For more details, see [CREATE USER](/tidb-cloud-lake/sql/create-user.md) and [GR
 
 ### Connection Security
 
-All connections to Databend Cloud warehouses use TLS encryption by default. For enterprise users requiring additional security, [AWS PrivateLink](/guides/cloud/security/private-link) is available to establish private connections between your VPC and Databend Cloud.
+All connections to Databend Cloud warehouses use TLS encryption by default. For enterprise users requiring additional security, [AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) is available to establish private connections between your VPC and Databend Cloud.

@@ -13,7 +13,7 @@ Before you start, ensure you have the following prerequisites in place:
     - [AWS CLI](https://aws.amazon.com/cli/): Used to manage buckets in MinIO.
     - If you are on AWS EC2, make sure your security group allows inbound traffic on port `8000`, as this is required for BendSQL to connect to Databend.
 
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 - The Databend release package: Download the release from the [Databend GitHub Releases page](https://github.com/databendlabs/databend/releases). The package contains the `databend-bendsave` binary in the `bin` directory, which is the tool we'll use for backup and restore operations in this tutorial.
 ```bash

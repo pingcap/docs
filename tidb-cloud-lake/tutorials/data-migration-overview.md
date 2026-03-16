@@ -24,9 +24,9 @@ Databend supports two main migration approaches from MySQL:
 
 | Tool | Capabilities | Best For | Choose When |
 |------|------------|----------|-------------|
-| [Debezium](/tutorials/migrate/migrating-from-mysql-with-debezium) | CDC, Full Load | Capturing row-level changes with minimal latency | You need complete CDC with all DML operations (INSERT/UPDATE/DELETE); You want binlog-based replication for minimal impact on source database |
-| [Flink CDC](/tutorials/migrate/migrating-from-mysql-with-flink-cdc) | CDC, Full Load, Transformation | Complex ETL with real-time transformation | You need to filter or transform data during migration; You need a scalable processing framework; You want SQL-based transformation capabilities |
-| [Kafka Connect](/tutorials/migrate/migrating-from-mysql-with-kafka-connect) | CDC, Incremental, Full Load | Existing Kafka infrastructure | You already use Kafka; You need simple configuration; You can use timestamp or auto-increment columns for incremental sync |
+| [Debezium](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-debezium.md) | CDC, Full Load | Capturing row-level changes with minimal latency | You need complete CDC with all DML operations (INSERT/UPDATE/DELETE); You want binlog-based replication for minimal impact on source database |
+| [Flink CDC](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-flink-cdc.md) | CDC, Full Load, Transformation | Complex ETL with real-time transformation | You need to filter or transform data during migration; You need a scalable processing framework; You want SQL-based transformation capabilities |
+| [Kafka Connect](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-kafka-connect.md) | CDC, Incremental, Full Load | Existing Kafka infrastructure | You already use Kafka; You need simple configuration; You can use timestamp or auto-increment columns for incremental sync |
 
 ### When to Choose Batch Migration
 
@@ -38,9 +38,9 @@ Databend supports two main migration approaches from MySQL:
 
 | Tool | Capabilities | Best For | Choose When |
 |------|------------|----------|-------------|
-| [bend-archiver](/tutorials/migrate/migrating-from-mysql-with-db-archiver) | Full Load, Incremental | Efficient historical data archiving | You have time-partitioned data; You need to archive historical data; You want a lightweight, focused tool |
-| [DataX](/tutorials/migrate/migrating-from-mysql-with-datax) | Full Load, Incremental | High-performance large dataset transfers | You need high throughput for large datasets; You want parallel processing capabilities; You need a mature, widely-used tool |
-| [Addax](/tutorials/migrate/migrating-from-mysql-with-addax) | Full Load, Incremental | Enhanced DataX with better performance | You need better error handling than DataX; You want improved monitoring capabilities; You need more recent updates and features |
+| [bend-archiver](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-bend-archiver.md) | Full Load, Incremental | Efficient historical data archiving | You have time-partitioned data; You need to archive historical data; You want a lightweight, focused tool |
+| [DataX](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-datax.md) | Full Load, Incremental | High-performance large dataset transfers | You need high throughput for large datasets; You want parallel processing capabilities; You need a mature, widely-used tool |
+| [Addax](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-addax.md) | Full Load, Incremental | Enhanced DataX with better performance | You need better error handling than DataX; You want improved monitoring capabilities; You need more recent updates and features |
 
 ## Snowflake to Databend
 
@@ -54,9 +54,4 @@ Migrating from Snowflake to Databend involves a three-step process:
 
 | Tool | Capabilities | Best For | Choose When |
 |------|------------|----------|-------------|
-| [Snowflake Migration](/tutorials/migrate/migrating-from-snowflake) | Full Load | Complete data warehouse transition | You need to migrate your entire Snowflake warehouse; You want to use Parquet format for efficient data transfer; You need to maintain schema compatibility between systems |
-
-## Related Topics
-
-- [Loading Data](/guides/load-data)
-- [Unloading Data](/guides/unload-data)
+| [Snowflake Migration](/tidb-cloud-lake/tutorials/migrate-from-snowflake.md) | Full Load | Complete data warehouse transition | You need to migrate your entire Snowflake warehouse; You want to use Parquet format for efficient data transfer; You need to maintain schema compatibility between systems |

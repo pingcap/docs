@@ -15,7 +15,7 @@ In this tutorial, you'll deploy and integrate a local Databend with [Tableau Des
 
 ### Step 1. Deploy Databend
 
-1. Follow the [Local and Docker Deployments](../../20-self-hosted/02-deployment/01-non-production/00-deploying-local.md) guide to deploy a local Databend.
+1. Deploy a local Databend.
 2. Create a SQL user in Databend. You will use this account to connect to Databend in Tableau Desktop.
 
 ```sql
@@ -63,7 +63,7 @@ In this tutorial, you'll deploy and integrate a local Databend with [Tableau Des
 
 ### Step 1. Deploy Databend
 
-1. Follow the [Local and Docker Deployments](../../20-self-hosted/02-deployment/01-non-production/00-deploying-local.md) guide to deploy a local Databend.
+1. Deploy a local Databend.
 2. Create a SQL user in Databend. You will use this account to connect to Databend in Tableau Desktop.
 
 ```sql
@@ -119,7 +119,7 @@ In this tutorial, you'll integrate Databend Cloud with [Tableau Desktop](https:/
 
 ### Step 1. Obtain Connection Information
 
-Obtain the connection information from Databend Cloud. For how to do that, refer to [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting).
+Obtain the connection information from Databend Cloud. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting).
 
 ### Step 2. Install databend-jdbc
 

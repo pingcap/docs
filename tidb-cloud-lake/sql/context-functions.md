@@ -17,7 +17,7 @@ This page provides reference information for the context-related functions in Da
 | Function | Description | Example |
 |----------|-------------|--------|
 | [CURRENT_CATALOG](/tidb-cloud-lake/sql/current-catalog.md) | Returns the name of the current catalog | `CURRENT_CATALOG()` → `'default'` |
-| [DATABASE](database.md) | Returns the name of the current database | `DATABASE()` → `'default'` |
+| [DATABASE](/tidb-cloud-lake/sql/database-function.md) | Returns the name of the current database | `DATABASE()` → `'default'` |
 
 ## System Information Functions
 

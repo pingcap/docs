@@ -5,7 +5,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 
-Filters key-value pairs in a JSON object based on a specified condition, defined using a [lambda expression](/tidb-cloud-lake/sql/stored-procedure-sql-scripting.md#lambda-expressions).
+Filters key-value pairs in a JSON object based on a specified condition, defined using a [lambda expression](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 
 ## Syntax
 

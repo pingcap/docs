@@ -90,4 +90,4 @@ SELECT CONVERT_TIMEZONE('UTC', '1947-04-15 00:00:00');
 
 - [TIMEZONE](/tidb-cloud-lake/sql/timezone.md)
 - [TO_TIMESTAMP_TZ](/tidb-cloud-lake/sql/timestamp-tz.md)
-- [TO_TIMESTAMP](/tidb-cloud-lake/sql/timestamp.md)
+- [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)

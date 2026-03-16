@@ -202,4 +202,4 @@ uv tool run mcp-databend
 | `SAFE_MODE`              | Block dangerous SQL operations (`DROP`, `DELETE`, etc.) | `true`   |
 | `DATABEND_QUERY_TIMEOUT` | Query timeout in seconds                                | `300`    |
 
-For more details on building conversational BI tools, see [MCP Server Guide](02-mcp.md).
+For more details on building conversational BI tools, see [MCP Server Guide](/tidb-cloud-lake/guides/mcp-server.md).

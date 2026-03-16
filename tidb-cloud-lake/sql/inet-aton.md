@@ -12,7 +12,7 @@ INET_ATON( '<ip>' )
 
 ## Aliases
 
-- [IPV4_STRING_TO_NUM](ipv4-string-to-num.md)
+- [IPV4_STRING_TO_NUM](/tidb-cloud-lake/sql/ipv4-string-to-num.md)
 
 ## Return Type
 

@@ -7,6 +7,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 ## JSON Functions
 
 ### Parsing & Validation
+
 | Function | Description | Example |
 |----------|-------------|--------|
 | [PARSE_JSON](/tidb-cloud-lake/sql/parse-json.md) | Parses a JSON string into a variant value | `PARSE_JSON('[1,2,3]')` |
@@ -14,6 +15,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 | [JSON_TYPEOF](/tidb-cloud-lake/sql/json-typeof.md) | Returns the type of a JSON value | `JSON_TYPEOF(PARSE_JSON('[1,2,3]'))` |
 
 ### Path-based Querying
+
 | Function | Description | Example |
 |----------|-------------|--------|
 | [JSON_PATH_EXISTS](/tidb-cloud-lake/sql/json-path-exists.md) | Checks if a JSON path exists | `JSON_PATH_EXISTS(json_obj, '$.name')` |
@@ -24,6 +26,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 | [JQ](/tidb-cloud-lake/sql/jq.md) | Advanced JSON processing using jq syntax | `JQ('.name', json_obj)` |
 
 ### Value Extraction
+
 | Function | Description | Example |
 |----------|-------------|--------|
 | [GET](/tidb-cloud-lake/sql/get.md) | Gets a value from a JSON object by key or array by index | `GET(PARSE_JSON('[1,2,3]'), 0)` |
@@ -32,6 +35,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 | [JSON_EXTRACT_PATH_TEXT](/tidb-cloud-lake/sql/json-extract-path-text.md) | Extracts text value from JSON using path | `JSON_EXTRACT_PATH_TEXT(json_obj, 'name')` |
 
 ### Transformation & Output
+
 | Function | Description | Example |
 |----------|-------------|--------|
 | [JSON_TO_STRING](/tidb-cloud-lake/sql/json-to-string.md) | Converts a JSON value to a string | `JSON_TO_STRING(PARSE_JSON('{"a":1}'))` |
@@ -39,6 +43,7 @@ Structured and semi-structured functions in Databend enable efficient processing
 | [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | Removes null values from JSON | `STRIP_NULL_VALUE(PARSE_JSON('{"a":1,"b":null}'))` |
 
 ### Array/Object Expansion
+
 | Function | Description | Example |
 |----------|-------------|--------|
 | [JSON_EACH](/tidb-cloud-lake/sql/json-each.md) | Expands JSON object into key-value pairs | `JSON_EACH(PARSE_JSON('{"a":1,"b":2}'))` |

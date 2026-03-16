@@ -20,4 +20,4 @@ If you need more information about DatabendWriter and its functionalities, you c
 
 ### Tutorials
 
-- [Migrating from MySQL with DataX](/tutorials/migrate/migrating-from-mysql-with-datax)
+- [Migrating from MySQL with DataX](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-datax.md)

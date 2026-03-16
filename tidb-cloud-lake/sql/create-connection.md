@@ -185,5 +185,5 @@ SELECT * FROM @databend_test/test.parquet LIMIT 1;
 ```
 
 :::info
-To use IAM roles with Databend Cloud, you need to set up a trust relationship between your AWS account and Databend Cloud. See [Authenticate with AWS IAM Role](/guides/cloud/security/iam-role) for detailed instructions.
+To use IAM roles with Databend Cloud, you need to set up a trust relationship between your AWS account and Databend Cloud. See [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) for detailed instructions.
 :::

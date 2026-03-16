@@ -23,7 +23,7 @@ Databend comes with the following built-in roles:
 | account-admin | Possesses all privileges, serves as the parent role for all other roles, and enables seamless switching to any role within the tenant. |
 | public        | Inherits no permissions, considers all roles as its parent roles, and allows any role to switch to the public role.                    |
 
-To assign the `account-admin` role to a user in Databend Cloud, select the role when inviting the user. You can also assign the role to a user after they join. If you're using Databend Community Edition or Enterprise Edition, configure an `account-admin` user during deployment first, and then assign the role to other users if needed. For more information about configuring admin users, see [Configuring Admin Users](../../20-self-hosted/04-references/admin-users.md).
+To assign the `account-admin` role to a user in Databend Cloud, select the role when inviting the user. You can also assign the role to a user after they join. If you're using Databend Community Edition or Enterprise Edition, configure an `account-admin` user during deployment first, and then assign the role to other users if needed.
 
 ## Setting Default Role
 
@@ -72,7 +72,7 @@ To set up and use the role `billing`, you can create it using the following comm
 ```sql
 CREATE ROLE billing;
 ```
-The role name is case-insensitive, so `billing` and `Billing` are considered the same. For detailed steps on setting and assigning the role `billing`, see [Granting Access to Finance Personnel](/guides/cloud/administration/costs#granting-access-to-finance-personnel).
+The role name is case-insensitive, so `billing` and `Billing` are considered the same. For detailed steps on setting and assigning the role `billing`, see [Granting Access to Finance Personnel](/tidb-cloud-lake/guides/manage-costs.md#granting-access-to-finance-personnel).
 
 ## Usage Examples (Basic)
 

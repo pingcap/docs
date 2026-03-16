@@ -58,6 +58,6 @@ This section provides reference information for JSON functions in Databend. JSON
 | Function | Description | Example |
 |----------|-------------|---------|
 | [JSON_CONTAINS_IN_LEFT](/tidb-cloud-lake/sql/contains.md) | Tests whether the left JSON contains the right JSON | `JSON_CONTAINS_IN_LEFT('{"a":1,"b":2}', '{"b":2}')` → `true` |
-| [JSON_EXISTS_KEY](json/json-exists-keys) | Checks whether specific keys exist | `JSON_EXISTS_KEY('{"a":1}', 'a')` → `true` |
-| [JSON_EXISTS_ANY_KEYS](json/json-exists-keys) | Returns `true` if any key in the list exists | `JSON_EXISTS_ANY_KEYS('{"a":1}', ['x','a'])` → `true` |
-| [JSON_EXISTS_ALL_KEYS](json/json-exists-keys) | Returns `true` only if all keys exist | `JSON_EXISTS_ALL_KEYS('{"a":1,"b":2}', ['a','b'])` → `true` |
+| [JSON_EXISTS_KEY](/tidb-cloud-lake/sql/json-exists-key.md) | Checks whether specific keys exist | `JSON_EXISTS_KEY('{"a":1}', 'a')` → `true` |
+| [JSON_EXISTS_ANY_KEYS](/tidb-cloud-lake/sql/json-exists-key.md) | Returns `true` if any key in the list exists | `JSON_EXISTS_ANY_KEYS('{"a":1}', ['x','a'])` → `true` |
+| [JSON_EXISTS_ALL_KEYS](/tidb-cloud-lake/sql/json-exists-key.md) | Returns `true` only if all keys exist | `JSON_EXISTS_ALL_KEYS('{"a":1,"b":2}', ['a','b'])` → `true` |

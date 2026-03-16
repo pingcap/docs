@@ -66,7 +66,7 @@ Databend ships with two complementary sets of geospatial capabilities: PostGIS-s
 | Function | Description | Example |
 |----------|-------------|---------|
 | [ST_CONTAINS](/tidb-cloud-lake/sql/st-contains.md) | Test whether one geometry contains another | `ST_CONTAINS(ST_MAKEPOLYGON(...), ST_MAKEGEOMPOINT(...))` → `TRUE` |
-| [POINT_IN_POLYGON](point-in-polygon.md) | Check if a point lies inside a polygon | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
+| [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | Check if a point lies inside a polygon | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
 
 ## Distance & Measurements
 
@@ -122,10 +122,10 @@ Databend ships with two complementary sets of geospatial capabilities: PostGIS-s
 |----------|-------------|---------|
 | [H3_GET_UNIDIRECTIONAL_EDGE](/tidb-cloud-lake/sql/h3-get-unidirectional-edge.md) | Return the edge between two adjacent cells | `H3_GET_UNIDIRECTIONAL_EDGE(from_h3, to_h3)` → `edge_index` |
 | [H3_UNIDIRECTIONAL_EDGE_IS_VALID](/tidb-cloud-lake/sql/h3-unidirectional-edge-is-valid.md) | Check whether an edge index is valid | `H3_UNIDIRECTIONAL_EDGE_IS_VALID(edge_index)` → `TRUE` |
-| [H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE](h3-get-origin-index-from-unidirectional-edge.md) | Return the origin cell from an edge | `H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE(edge_index)` → `from_h3` |
-| [H3_GET_DESTINATION_INDEX_FROM_UNIDIRECTIONAL_EDGE](h3-get-destination-index-from-unidirectional-edge.md) | Return the destination cell from an edge | `H3_GET_DESTINATION_INDEX_FROM_UNIDIRECTIONAL_EDGE(edge_index)` → `to_h3` |
-| [H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE](h3-get-indexes-from-unidirectional-edge.md) | Return both cells for an edge | `H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE(edge_index)` → `[from_h3, to_h3]` |
-| [H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON](h3-get-unidirectional-edges-from-hexagon.md) | List edges originating from a cell | `H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON(h3_index)` → `[edge1, edge2, ...]` |
+| [H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE](/tidb-cloud-lake/sql/h3-get-origin-index-unidirectional-edge.md) | Return the origin cell from an edge | `H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE(edge_index)` → `from_h3` |
+| [H3_GET_DESTINATION_INDEX_FROM_UNIDIRECTIONAL_EDGE](/tidb-cloud-lake/sql/h3-get-destination-index-unidirectional-edge.md) | Return the destination cell from an edge | `H3_GET_DESTINATION_INDEX_FROM_UNIDIRECTIONAL_EDGE(edge_index)` → `to_h3` |
+| [H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE](/tidb-cloud-lake/sql/h3-get-indexes-unidirectional-edge.md) | Return both cells for an edge | `H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE(edge_index)` → `[from_h3, to_h3]` |
+| [H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON](/tidb-cloud-lake/sql/h3-get-unidirectional-edges-hexagon.md) | List edges originating from a cell | `H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON(h3_index)` → `[edge1, edge2, ...]` |
 | [H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY](/tidb-cloud-lake/sql/h3-get-unidirectional-edge-boundary.md) | Return the boundary of an edge | `H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY(edge_index)` → `[[lon1,lat1], [lon2,lat2]]` |
 
 ## H3 Measurements & Angles

@@ -91,4 +91,4 @@ docker-compose up -d
 
 ### Tutorials
 
-- [Migrating from MySQL with Debezium](/tutorials/migrate/migrating-from-mysql-with-debezium)
+- [Migrating from MySQL with Debezium](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-debezium.md)

@@ -154,7 +154,7 @@ WHERE  t1.a NOT IN (SELECT *
 
 You can use ANY (or SOME) to check whether a comparison is true for any of the values returned by a subquery.
 
-- The keyword ANY (or SOME) must follow one of the [Comparison Operators](comparison.md).
+- The keyword ANY (or SOME) must follow one of the [Comparison Operators](/tidb-cloud-lake/sql/comparison-operators.md).
 - If the subquery doesn't return any values, the comparison evaluates to false.
 - SOME work the same way as ANY.
 
@@ -201,7 +201,7 @@ WHERE  t1.a < ANY (SELECT *
 
 You can use ALL to check whether a comparison is true for all of the values returned by a subquery.
 
-- The keyword ALL must follow one of the [Comparison Operators](comparison.md).
+- The keyword ALL must follow one of the [Comparison Operators](/tidb-cloud-lake/sql/comparison-operators.md).
 - If the subquery doesn't return any values, the comparison evaluates to true.
 
 ### Syntax

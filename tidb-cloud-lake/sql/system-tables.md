@@ -15,10 +15,10 @@ System tables are organized in the `system` schema and can be queried using stan
 | Table                                                             | Description                                                                                       |
 |-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | [system.tables](/tidb-cloud-lake/sql/system-tables.md)                                 | Provides metadata information for all tables including properties, creation time, size, and more. |
-| [system.tables_with_history](system-tables-with-history.md)       | Provides historical metadata information for tables, including dropped tables.                    |
+| [system.tables_with_history](/tidb-cloud-lake/sql/system-tables-with-history.md)       | Provides historical metadata information for tables, including dropped tables.                    |
 | [system.databases](/tidb-cloud-lake/sql/system-databases.md)                           | Contains information about all databases in the system.                                           |
 | [system.views](/tidb-cloud-lake/sql/system-views.md)                                   | Contains information about all views in the system.                                               |
-| [system.databases_with_history](system-databases-with-history.md) | Contains historical information about databases, including dropped databases.                     |
+| [system.databases_with_history](/tidb-cloud-lake/sql/system-databases-with-history.md) | Contains historical information about databases, including dropped databases.                     |
 | [system.columns](/tidb-cloud-lake/sql/system-columns.md)                               | Provides information about columns in all tables.                                                 |
 | [system.indexes](/tidb-cloud-lake/sql/system-indexes.md)                               | Contains information about table indexes.                                                         |
 | [system.virtual_columns](/tidb-cloud-lake/sql/system-virtual-columns.md)               | Lists virtual columns available in the system.                                                    |
@@ -58,5 +58,5 @@ System tables are organized in the `system` schema and can be queried using stan
 |-------|-------------|
 | [system.numbers](/tidb-cloud-lake/sql/system-numbers.md) | A table containing a single column with integers starting from 0, useful for generating test data. |
 | [system.streams](/tidb-cloud-lake/sql/system-streams.md) | Contains information about streams in the system. |
-| [system.temp_tables](system-temp-tables.md) | Contains information about temporary tables. |
+| [system.temp_tables](/tidb-cloud-lake/sql/system-temporary-tables.md) | Contains information about temporary tables. |
 | [system.temp_files](/tidb-cloud-lake/sql/system-temp-files.md) | Contains information about temporary files. |

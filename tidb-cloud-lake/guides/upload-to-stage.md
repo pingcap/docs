@@ -11,7 +11,7 @@ Databend recommends two file upload methods for stages: [PRESIGN](/tidb-cloud-la
 
 The PRESIGN method generates a time-limited URL with a signature, which clients can use to securely initiate file uploads. This URL grants temporary access to the designated stage, allowing clients to directly transfer data without relying on Databend servers for the entire process, enhancing both security and efficiency.
 
-If you're using [BendSQL](/tidb-cloud-lake/guides/bendsql.md) to manage files in a stage, you can use the PUT command for uploading files and the GET command for downloading files.
+If you're using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to manage files in a stage, you can use the PUT command for uploading files and the GET command for downloading files.
 
 - The GET command currently can only download all files in a stage, not individual ones.
 - These commands are exclusive to BendSQL and the GET command will not function when Databend uses the file system as the storage backend.

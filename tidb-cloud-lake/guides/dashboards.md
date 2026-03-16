@@ -61,4 +61,4 @@ To view the dashboards shared with you by others, click **Dashboards** in the si
 
 ## Tutorials
 
-- [Dashboarding COVID-19 Data](/tutorials/cloud-ops/dashboard)
+- [Dashboarding COVID-19 Data](/tidb-cloud-lake/tutorials/dashboard-tour.md)

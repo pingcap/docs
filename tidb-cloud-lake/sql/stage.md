@@ -17,7 +17,7 @@ This page provides a comprehensive overview of stage operations in Databend, org
 | Command | Description |
 |---------|-------------|
 | [LIST STAGE](/tidb-cloud-lake/sql/list-stage-files.md) | Lists files in a stage |
-| [REMOVE STAGE](05-ddl-remove-stage.md) | Removes files from a stage |
+| [REMOVE STAGE](/tidb-cloud-lake/sql/remove-stage-files.md) | Removes files from a stage |
 
 ## Stage Information
 

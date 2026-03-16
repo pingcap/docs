@@ -35,7 +35,7 @@ This page provides a comprehensive overview of Conversion functions in Databend,
 | Function | Description | Example |
 |----------|-------------|---------|
 | [TO_BINARY](/tidb-cloud-lake/sql/to-binary.md) | Converts a value to BINARY type | `TO_BINARY('abc')` → `binary value` |
-| [TRY_TO_BINARY](/tidb-cloud-lake/sql//tidb-cloud-lake/sql/try-to-binary.md) | Safely converts a value to BINARY type, returning NULL on failure | `TRY_TO_BINARY('abc')` → `binary value` |
+| [TRY_TO_BINARY](/tidb-cloud-lake/sql/try-to-binary.md) | Safely converts a value to BINARY type, returning NULL on failure | `TRY_TO_BINARY('abc')` → `binary value` |
 | [TO_HEX](/tidb-cloud-lake/sql/to-hex.md) | Converts a value to hexadecimal string | `TO_HEX(255)` → `'FF'` |
 | [TO_VARIANT](/tidb-cloud-lake/sql/to-variant.md) | Converts a value to VARIANT type | `TO_VARIANT('{"a": 1}')` → `{"a": 1}` |
 | [BUILD_BITMAP](/tidb-cloud-lake/sql/build-bitmap.md) | Builds a bitmap from an array of integers | `BUILD_BITMAP([1,2,3])` → `bitmap value` |

@@ -12,7 +12,7 @@ This page provides a comprehensive overview of table operations in Databend, org
 | [CREATE TABLE ... LIKE](/tidb-cloud-lake/sql/create-table.md#create-table--like) | Creates a table with the same column definitions as an existing one |
 | [CREATE TABLE ... AS](/tidb-cloud-lake/sql/create-table.md#create-table--as) | Creates a table and inserts data based on the results of a SELECT query |
 | [CREATE TRANSIENT TABLE](/tidb-cloud-lake/sql/create-transient-table.md) | Creates a table without Time Travel support |
-| [CREATE EXTERNAL TABLE](10-ddl-create-table-external-location.md) | Creates a table with data stored in a specified external location |
+| [CREATE EXTERNAL TABLE](/tidb-cloud-lake/sql/create-external-table.md) | Creates a table with data stored in a specified external location |
 | [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) | Creates a table by associating it with an existing table |
 
 ## Table Modification
@@ -27,7 +27,7 @@ This page provides a comprehensive overview of table operations in Databend, org
 | Command | Description |
 |---------|-------------|
 | [DESCRIBE TABLE](/tidb-cloud-lake/sql/describe-table.md) / [SHOW FIELDS](/tidb-cloud-lake/sql/show-fields.md) | Shows information about the columns in a given table |
-| [SHOW FULL COLUMNS](show-full-columns.md) | Retrieves comprehensive details about the columns in a given table |
+| [SHOW FULL COLUMNS](/tidb-cloud-lake/sql/show-columns.md) | Retrieves comprehensive details about the columns in a given table |
 | [SHOW CREATE TABLE](/tidb-cloud-lake/sql/show-create-table.md) | Shows the CREATE TABLE statement that creates the named table |
 | [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md) | Lists the tables in the current or a specified database |
 | [SHOW TABLE STATUS](/tidb-cloud-lake/sql/show-table-status.md) | Shows the status of the tables in a database |

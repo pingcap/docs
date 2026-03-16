@@ -12,7 +12,7 @@ TRY_INET_NTOA( <integer> )
 
 ## Aliases
 
-- [TRY_IPV4_NUM_TO_STRING](try-ipv4-num-to-string.md)
+- [TRY_IPV4_NUM_TO_STRING](/tidb-cloud-lake/sql/try-ipv4-num-to-string.md)
 
 ## Return Type
 

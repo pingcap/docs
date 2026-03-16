@@ -10,10 +10,10 @@ Databend's `COPY INTO` command exports data to various file formats and storage 
 
 | Format | Example Syntax | Primary Use Case |
 |--------|---------------|------------------|
-| [**Unload Parquet File**](/guides/unload-data/unload-parquet) | `FILE_FORMAT = (TYPE = PARQUET)` | Analytics workloads, efficient storage |
-| [**Unload CSV File**](/guides/unload-data/unload-csv) | `FILE_FORMAT = (TYPE = CSV)` | Data exchange, universal compatibility |
-| [**Unload TSV File**](/guides/unload-data/unload-tsv) | `FILE_FORMAT = (TYPE = TSV)` | Tabular data with comma values |
-| [**Unload NDJSON File**](/guides/unload-data/unload-ndjson) | `FILE_FORMAT = (TYPE = NDJSON)` | Semi-structured data, flexible schemas |
+| [**Unload Parquet File**](/tidb-cloud-lake/guides/unload-parquet-file.md) | `FILE_FORMAT = (TYPE = PARQUET)` | Analytics workloads, efficient storage |
+| [**Unload CSV File**](/tidb-cloud-lake/guides/unload-csv-file.md) | `FILE_FORMAT = (TYPE = CSV)` | Data exchange, universal compatibility |
+| [**Unload TSV File**](/tidb-cloud-lake/guides/unload-tsv-file.md) | `FILE_FORMAT = (TYPE = TSV)` | Tabular data with comma values |
+| [**Unload NDJSON File**](/tidb-cloud-lake/guides/unload-ndjson-file.md) | `FILE_FORMAT = (TYPE = NDJSON)` | Semi-structured data, flexible schemas |
 
 ## Storage Destinations
 

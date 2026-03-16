@@ -98,9 +98,9 @@ Result:
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 4 (Option). Using SELECT to Copy Data
+### Step 5 (Option). Using SELECT to Copy Data
 
-For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from Parquet`](../04-transform/00-querying-parquet.md)
+For more control, like transforming data while copying, use the SELECT statement. Learn more at [`SELECT from Parquet`](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)
 
 ```sql
 COPY INTO books (title, author)

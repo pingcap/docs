@@ -12,4 +12,4 @@ DatabendReader and DatabendWriter are integrated plugins of Addax, allowing seam
 
 ### Tutorials
 
-- [Migrating from MySQL with Addax](/tutorials/migrate/migrating-from-mysql-with-addax)
+- [Migrating from MySQL with Addax](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-addax.md)

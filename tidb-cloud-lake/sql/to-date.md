@@ -31,7 +31,7 @@ TO_DATE('<string>', '<format>')
 ## Aliases
 
 - [DATE](/tidb-cloud-lake/sql/date.md)
-- [STR_TO_DATE](str-to-date.md)
+- [STR_TO_DATE](/tidb-cloud-lake/sql/str-to-date.md)
 
 ## Return Type
 

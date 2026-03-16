@@ -17,7 +17,7 @@ SET_VAR will be deprecated in an upcoming release. Consider using the [SETTINGS 
 
 See also: 
 - [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md)
-- [SET](02-set-global.md)
+- [SET](/tidb-cloud-lake/sql/set.md)
 
 ## Syntax
 

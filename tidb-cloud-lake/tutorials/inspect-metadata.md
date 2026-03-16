@@ -9,7 +9,7 @@ In this tutorial, we'll walk you through uploading a sample Parquet file to an i
 Before you start, ensure you have the following prerequisites in place:
 
 - [Download the sample dataset](https://datasets.databend.com/iris.parquet) and save it to your local folder.
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 ### Step 1: Create an internal stage
 

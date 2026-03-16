@@ -414,7 +414,7 @@ iceberg_table_meta_count = 0
 ...
 ```
 
-In addition to metadata caching, Databend also supports table data caching for Iceberg catalog tables, similar to Fuse tables. For more information on data caching, refer to the [cache section](/guides/self-hosted/references/node-config/query-config#cache-section) in the Query Configurations reference.
+In addition to metadata caching, Databend also supports table data caching for Iceberg catalog tables, similar to Fuse tables.
 
 ## Writing to Iceberg Tables
 

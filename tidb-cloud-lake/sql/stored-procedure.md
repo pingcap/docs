@@ -25,4 +25,4 @@ Stored procedures in Databend allow you to encapsulate a series of SQL statement
 
 ## Further Reading
 
-Explore [Stored Procedure & SQL Scripting](/sql/stored-procedure-scripting) for a complete language reference, including variable handling, control flow, cursors, and dynamic SQL usage within procedures.
+Explore [Stored Procedure & SQL Scripting](/tidb-cloud-lake/sql/stored-procedure-scripting.md) for a complete language reference, including variable handling, control flow, cursors, and dynamic SQL usage within procedures.

@@ -27,9 +27,9 @@ These topics provide reference information for the DDL (Data Definition Language
 | Component | Description |
 |-----------|-------------|
 | **[User](/tidb-cloud-lake/sql/user-role.md)** | Create and manage database users |
-| **[Network Policy](/tidb-cloud-lake/sql/network-policy.md)** | Control network access to databases |
-| **[Mask Policy](/tidb-cloud-lake/sql/masking-policy.md)** | Apply data masking for sensitive information |
-| **[Password Policy](/tidb-cloud-lake/sql/password-policy.md)** | Enforce password requirements and rotation |
+| **[Network Policy](/tidb-cloud-lake/sql/network-policy-sql.md)** | Control network access to databases |
+| **[Mask Policy](/tidb-cloud-lake/sql/masking-policy-sql.md)** | Apply data masking for sensitive information |
+| **[Password Policy](/tidb-cloud-lake/sql/password-policy-sql.md)** | Enforce password requirements and rotation |
 
 ## Data Integration & Processing
 

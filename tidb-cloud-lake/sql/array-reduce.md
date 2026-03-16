@@ -6,7 +6,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 
-Reduces a JSON array to a single value by applying a specified Lambda expression. For more information about Lambda expression, see [Lambda Expressions](/sql/stored-procedure-scripting/#lambda-expressions).
+Reduces a JSON array to a single value by applying a specified Lambda expression. For more information about Lambda expression, see [Lambda Expressions](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 
 ## Syntax
 

@@ -20,7 +20,7 @@ Before you start, make sure you have completed the following tasks:
 
 ### Step 1. Deploy Databend
 
-1. Follow the [Deployment Guide](/guides/self-hosted) to deploy a local Databend.
+1. Deploy a local Databend.
 2. Create a SQL user in Databend. You will use this account to connect to Databend in Jupyter Notebook.
 
 ```sql
@@ -72,7 +72,7 @@ Before you start, ensure that you have [Python](https://www.python.org/) install
 
 ### Step 1. Deploy Databend
 
-1. Follow the [Deployment Guide](https://docs.databend.com/guides/self-hosted) to deploy a local Databend.
+1. Deploy a local Databend.
 2. Create a SQL user in Databend. You will use this account to connect to Databend in Jupyter Notebook.
 
 ```sql

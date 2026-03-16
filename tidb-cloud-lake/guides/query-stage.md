@@ -148,9 +148,9 @@ The following file-level metadata fields are available for the supported file fo
 - **Incremental processing**: Process only specific files or ranges within files
 
 ## Tutorials by File Formats
-- [Querying Parquet Files](./00-querying-parquet.md) 
-- [Querying ORC Files](./05-querying-orc.md)
-- [Querying NDJSON Files](./03-querying-ndjson.md)
-- [Querying Avro Files](./04-querying-avro.md)
-- [Querying CSV Files](./01-querying-csv.md)
-- [Querying TSV Files](./02-querying-tsv.md)
+- [Querying Parquet Files](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)
+- [Querying ORC Files](/tidb-cloud-lake/guides/query-staged-orc-files-in-stage.md)
+- [Querying NDJSON Files](/tidb-cloud-lake/guides/query-ndjson-files-in-stage.md)
+- [Querying Avro Files](/tidb-cloud-lake/guides/query-avro-files-in-stage.md)
+- [Querying CSV Files](/tidb-cloud-lake/guides/query-csv-files-in-stage.md)
+- [Querying TSV Files](/tidb-cloud-lake/guides/query-tsv-files-in-stage.md)

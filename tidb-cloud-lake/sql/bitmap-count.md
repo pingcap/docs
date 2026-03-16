@@ -1,23 +1,27 @@
 ---
-title: BITMAP_AND_COUNT
+title: BITMAP_COUNT
 ---
 
-Counts the number of bits set to 1 in the bitmap by performing a logical AND operation.
+Counts the number of bits set to 1 in the bitmap.
 
 ## Syntax
 
 ```sql
-BITMAP_AND_COUNT( <bitmap> )
+BITMAP_COUNT( <bitmap> )
 ```
+
+## Aliases
+
+- [BITMAP_CARDINALITY](/tidb-cloud-lake/sql/bitmap-cardinality.md)
 
 ## Examples
 
 ```sql
-SELECT BITMAP_AND_COUNT(TO_BITMAP('1, 3, 5'));
+SELECT BITMAP_COUNT(BUILD_BITMAP([1,4,5])), BITMAP_CARDINALITY(BUILD_BITMAP([1,4,5]));
 
-┌────────────────────────────────────────┐
-│ bitmap_and_count(to_bitmap('1, 3, 5')) │
-├────────────────────────────────────────┤
-│                                      3 │
-└────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ bitmap_count(build_bitmap([1, 4, 5])) │ bitmap_cardinality(build_bitmap([1, 4, 5])) │
+├───────────────────────────────────────┼─────────────────────────────────────────────┤
+│                                     3 │                                           3 │
+└─────────────────────────────────────────────────────────────────────────────────────┘
 ```

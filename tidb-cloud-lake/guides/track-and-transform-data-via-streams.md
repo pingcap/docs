@@ -111,7 +111,7 @@ Output:
 
 ## Example 3: Incremental Stream Join
 
-Join multiple append-only streams to produce incremental KPIs. Because Databend streams keep new rows until they are consumed, you can run the same query after each load. Every execution drains only the new rows via [`WITH CONSUME`](/tidb-cloud-lake/sql/consume.md), so updates that arrive at different times are still matched on the next iteration.
+Join multiple append-only streams to produce incremental KPIs. Because Databend streams keep new rows until they are consumed, you can run the same query after each load. Every execution drains only the new rows via [`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md), so updates that arrive at different times are still matched on the next iteration.
 
 ### 1. Create tables and streams
 

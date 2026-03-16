@@ -21,7 +21,7 @@ This page provides a comprehensive overview of user and role operations in Datab
 | [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) | Creates a new role |
 | [DROP ROLE](/tidb-cloud-lake/sql/drop-role.md) | Removes a role |
 | [SET ROLE](/tidb-cloud-lake/sql/set-role.md) | Sets the current active role for the session |
-| [SET SECONDARY ROLES](04-user-set-2nd-roles.md) | Sets secondary roles for the session |
+| [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md) | Sets secondary roles for the session |
 | [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) | Lists all roles in the system |
 
 ## Privilege Management

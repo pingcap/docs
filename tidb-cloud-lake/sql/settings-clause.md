@@ -7,7 +7,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 
-See also: [SET](../50-administration-cmds/02-set-global.md)
+See also: [SET](/tidb-cloud-lake/sql/set.md)
 
 ## Syntax
 

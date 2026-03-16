@@ -11,7 +11,7 @@ This page provides reference information for the system administration commands 
 | **[SHOW PROCESSLIST](/tidb-cloud-lake/sql/show-processlist.md)** | Display active queries and connections |
 | **[SHOW METRICS](/tidb-cloud-lake/sql/show-metrics.md)** | View system performance metrics |
 | **[KILL](/tidb-cloud-lake/sql/kill.md)** | Terminate running queries or connections |
-| **[RUST BACKTRACE](rust-backtrace.md)** | Debug Rust stack traces |
+| **[RUST BACKTRACE](/tidb-cloud-lake/sql/system-enable-disable-exception-backtrace.md)** | Debug Rust stack traces |
 
 ## Access Control
 
@@ -23,7 +23,7 @@ This page provides reference information for the system administration commands 
 
 | Command | Description |
 |---------|-------------|
-| **[SET](02-set-global.md)** | Set global configuration parameters |
+| **[SET](/tidb-cloud-lake/sql/set.md)** | Set global configuration parameters |
 | **[UNSET](/tidb-cloud-lake/sql/unset.md)** | Remove configuration settings |
 | **[SET VARIABLE](/tidb-cloud-lake/sql/set-var.md)** | Manage user-defined variables |
 | **[SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md)** | Display current system settings |
@@ -42,7 +42,7 @@ This page provides reference information for the system administration commands 
 |---------|-------------|
 | **[VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md)** | Reclaim storage space from tables |
 | **[VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md)** | Clean up dropped table data |
-| **[VACUUM TEMP FILES](09-vacuum-temp-files.md)** | Remove temporary files |
+| **[VACUUM TEMP FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md)** | Remove temporary files |
 | **[SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md)** | Display table indexes |
 
 ## Dynamic Execution

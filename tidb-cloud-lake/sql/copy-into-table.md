@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 COPY INTO allows you to load data from files located in one of the following locations:
 
-- User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/what-is-stage.md) to learn about stages in Databend.
+- User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) to learn about stages in Databend.
 - Buckets or containers created in a storage service.
 - Remote servers from where you can access the files by their URL (starting with "https://...").
 - [IPFS](https://ipfs.tech) and Hugging Face repositories.

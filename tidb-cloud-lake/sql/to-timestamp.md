@@ -81,7 +81,7 @@ Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
     ```
 
 - If the given string matches this format but does not have the time part, it is automatically extended to this pattern. The padding value is 0.
-- If the conversion fails, an error will be returned. To avoid such errors, you can use the [TRY_TO_TIMESTAMP](try-to-timestamp.md) function.
+- If the conversion fails, an error will be returned. To avoid such errors, you can use the [TRY_TO_TIMESTAMP](/tidb-cloud-lake/sql/try-to-timestamp.md) function.
 
     ```sql
     root@localhost:8000/default> SELECT TO_TIMESTAMP('20220102');
@@ -102,7 +102,7 @@ Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
 ## Aliases
 
 - [TO_DATETIME](/tidb-cloud-lake/sql/datetime.md)
-- [STR_TO_TIMESTAMP](str-to-timestamp.md)
+- [STR_TO_TIMESTAMP](/tidb-cloud-lake/sql/str-to-timestamp.md)
 
 ## Examples
 

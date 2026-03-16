@@ -146,7 +146,7 @@ parameters={
 ```
 
 :::tip
-The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
+The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
 :::
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:

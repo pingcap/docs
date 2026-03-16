@@ -37,8 +37,8 @@ To follow along, you'll need to install Metabase with Docker. Before you begin, 
 
 For this tutorial, you can integrate either with Databend or Databend Cloud:
 
-- If you choose to integrate with a local Databend instance, follow the [Deployment Guide](/guides/self-hosted) to deploy it if you don't have one already.
-- If you prefer to integrate with Databend Cloud, make sure you can log in to your account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/guides/cloud/resources/warehouses#connecting).
+- If you choose to integrate with a local Databend instance, deploy it if you don't have one already.
+- If you prefer to integrate with Databend Cloud, make sure you can log in to your account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting).
 
 ### Step 2. Deploy Metabase
 
