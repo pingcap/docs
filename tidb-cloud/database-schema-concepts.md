@@ -125,7 +125,7 @@ In TiDB, you can either [add a secondary index to an existing table](/develop/de
 
 In TiDB, a vector index is a specialized index designed for efficient approximate nearest neighbor (ANN) searches over columns containing vector data. Vector indexes, particularly the HNSW (Hierarchical Navigable Small World) algorithm, allow K-nearest neighbors (KNN) searches to identify the closest data points in a vector space quickly. This significantly speeds up query performance, enabling results in milliseconds compared to brute-force methods.
 
-For more information, see [Vector Search Index](/ai/reference/vector-search-index.md).
+Vector indexes rely on TiFlash replicas for data storage and search functionality. If you are using a TiDB Cloud Dedicated cluster, ensure TiFlash nodes are available in your cluster before creating or using vector indexes. For more information, see [Vector Search Index](/ai/reference/vector-search-index.md).
 
 ## Constraints
 
