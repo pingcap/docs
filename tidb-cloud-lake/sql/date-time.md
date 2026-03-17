@@ -166,7 +166,7 @@ Result:
 The values wrap to the minimum representable date or timestamp instead of raising an error.
 ## Formatting Date and Time
 
-Functions such as [TO_DATE](/tidb-cloud-lake/sql/date.md) and [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) accept explicit format strings. Control how they parse or render values by adjusting `date_format_style` and `week_start`.
+Functions such as [TO_DATE](/tidb-cloud-lake/sql/to-date.md) and [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) accept explicit format strings. Control how they parse or render values by adjusting `date_format_style` and `week_start`.
 
 ### Date Format Styles
 

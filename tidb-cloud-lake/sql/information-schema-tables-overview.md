@@ -6,7 +6,7 @@ title: Information_Schema Tables
 
 | Table                                        | Description                                    |
 |----------------------------------------------|------------------------------------------------|
-| [tables](/tidb-cloud-lake/sql/information-schema-tables.md)       | ANSI SQL standard metadata view for tables.    |
+| [tables](/tidb-cloud-lake/sql/information-schema-tables-sql.md)       | ANSI SQL standard metadata view for tables.    |
 | [schemata](/tidb-cloud-lake/sql/information-schema-schemata-sql.md) | ANSI SQL standard metadata view for databases. |
 | [views](/tidb-cloud-lake/sql/information-schema-views-sql.md)         | ANSI SQL standard metadata view for views.     |
 | [keywords](/tidb-cloud-lake/sql/information-schema-keywords-sql.md)   | ANSI SQL standard metadata view for keywords.  |
