@@ -17,10 +17,10 @@ These topics provide reference information for the DDL (Data Definition Language
 | Component | Description |
 |-----------|-------------|
 | **[Cluster Key](/tidb-cloud-lake/sql/cluster-key.md)** | Define data clustering for query optimization |
-| **[Aggregating Index](/tidb-cloud-lake/sql/aggregating-index.md)** | Pre-compute aggregations for faster queries |
+| **[Aggregating Index](/tidb-cloud-lake/sql/aggregating-index-sql.md)** | Pre-compute aggregations for faster queries |
 | **[Inverted Index](/tidb-cloud-lake/sql/inverted-index.md)** | Full-text search index for text columns |
-| **[Ngram Index](/tidb-cloud-lake/sql/ngram-index.md)** | Substring search index for LIKE patterns |
-| **[Virtual Column](/tidb-cloud-lake/sql/virtual-column.md)** | Extract and index JSON fields as virtual columns |
+| **[Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)** | Substring search index for LIKE patterns |
+| **[Virtual Column](/tidb-cloud-lake/sql/virtual-column-overview.md)** | Extract and index JSON fields as virtual columns |
 
 ## Security & Access Control
 
@@ -55,7 +55,7 @@ These topics provide reference information for the DDL (Data Definition Language
 
 | Component | Description |
 |-----------|-------------|
-| **[Warehouse](/tidb-cloud-lake/sql/warehouse.md)** | Manage compute resources for query execution |
+| **[Warehouse](/tidb-cloud-lake/sql/warehouse-overview.md)** | Manage compute resources for query execution |
 | **[Workload Group](/tidb-cloud-lake/sql/workload-group.md)** | Control resource allocation and priorities |
 | **[Transaction](/tidb-cloud-lake/sql/transaction.md)** | Manage database transactions |
 | **[Variable](/tidb-cloud-lake/sql/sql-variables.md)** | Set and use session/global variables |

@@ -32,7 +32,7 @@ When querying JSON data, traditional databases must parse the entire JSON struct
 3. **Background Optimization** → Virtual columns are created automatically
 4. **Query Acceleration** → Queries automatically use optimized paths
 
-![Virtual Column Workflow](/img/sql/virtual-column.png)
+![Virtual Column Workflow](/media/tidb-cloud-lake/virtual-column.png)
 
 ## Configuration
 

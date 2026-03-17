@@ -102,6 +102,7 @@ gift
 +-----------+
 ```
 
+```text
 sensor_readings
 +-----------+---------------------+-------------+
 | room      | reading_time        | temperature |

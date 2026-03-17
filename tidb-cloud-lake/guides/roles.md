@@ -4,7 +4,7 @@ title: Roles
 
 Roles in Databend play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
 
-![Alt text](/img/guides/access-control-3.png)
+![Alt text](/media/tidb-cloud-lake/access-control-3.png)
 
 ## Inheriting Roles & Establishing Hierarchy
 
@@ -12,7 +12,7 @@ Role granting enables one role to inherit permissions and responsibilities from 
 
 Consider the scenario where three roles are created: *manager*, *engineer*, and *intern*. In this example, the role of *intern* is granted to the engineer *role*. Consequently, the *engineer* not only possesses their own set of privileges but also inherits those associated with the *intern* role. Extending this hierarchy further, if the *engineer* role is granted to the *manager*, the *manager* now acquires both the inherent privileges of the *engineer* and the *intern* roles.
 
-![Alt text](/img/guides/access-control-4.png)
+![Alt text](/media/tidb-cloud-lake/access-control-4.png)
 
 ## Built-in Roles
 

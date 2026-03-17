@@ -102,7 +102,7 @@
   - [Overview](/tidb-cloud-lake/guides/multimodal-data-analytics.md)
   - [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md)
   - [JSON & Search](/tidb-cloud-lake/guides/json-search.md)
-  - [Vector Search](/tidb-cloud-lake/guides/vector-search.md)
+  - [Vector Search](/tidb-cloud-lake/guides/vector-search-guide.md)
   - [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md)
   - [Lakehouse ETL](/tidb-cloud-lake/guides/lakehouse-etl.md)
 - Performance Optimization
@@ -179,12 +179,12 @@
       - [Variant](/tidb-cloud-lake/sql/variant.md)
       - [Vector](/tidb-cloud-lake/sql/vector.md)
     - Information Schema
-      - [Information_Schema Tables](/tidb-cloud-lake/sql/information-schema-tables.md)
-      - [information_schema.columns](/tidb-cloud-lake/sql/information-schema-columns.md)
-      - [information_schema.keywords](/tidb-cloud-lake/sql/information-schema-keywords.md)
-      - [information_schema.schemata](/tidb-cloud-lake/sql/information-schema-schemata.md)
+      - [Information_Schema Tables](/tidb-cloud-lake/sql/information-schema-tables-overview.md)
+      - [information_schema.columns](/tidb-cloud-lake/sql/information-schema-columns-sql.md)
+      - [information_schema.keywords](/tidb-cloud-lake/sql/information-schema-keywords-sql.md)
+      - [information_schema.schemata](/tidb-cloud-lake/sql/information-schema-schemata-sql.md)
       - [information_schema.tables](/tidb-cloud-lake/sql/information-schema-tables-sql.md)
-      - [information_schema.views](/tidb-cloud-lake/sql/information-schema-views.md)
+      - [information_schema.views](/tidb-cloud-lake/sql/information-schema-views-sql.md)
     - Table Engines
       - [Overview](/tidb-cloud-lake/sql/table-engines.md)
       - [Fuse Engine Tables](/tidb-cloud-lake/sql/fuse-engine-tables.md)
@@ -345,7 +345,7 @@
       - Aggregating Index
         - [CREATE AGGREGATING INDEX](/tidb-cloud-lake/sql/create-aggregating-index.md)
         - [DROP AGGREGATING INDEX](/tidb-cloud-lake/sql/drop-aggregating-index.md)
-        - [Aggregating Index](/tidb-cloud-lake/sql/aggregating-index.md)
+        - [Aggregating Index](/tidb-cloud-lake/sql/aggregating-index-sql.md)
         - [REFRESH AGGREGATING INDEX](/tidb-cloud-lake/sql/refresh-aggregating-index.md)
       - Inverted Index
         - [CREATE INVERTED INDEX](/tidb-cloud-lake/sql/create-inverted-index.md)
@@ -355,7 +355,7 @@
       - Ngram Index
         - [CREATE NGRAM INDEX](/tidb-cloud-lake/sql/create-ngram-index.md)
         - [DROP NGRAM INDEX](/tidb-cloud-lake/sql/drop-ngram-index.md)
-        - [Ngram Index](/tidb-cloud-lake/sql/ngram-index.md)
+        - [Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)
         - [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md)
       - Vector Index
         - [CREATE VECTOR INDEX](/tidb-cloud-lake/sql/create-vector-index.md)
@@ -363,7 +363,7 @@
         - [Vector Index](/tidb-cloud-lake/sql/vector-index.md)
         - [REFRESH VECTOR INDEX](/tidb-cloud-lake/sql/refresh-vector-index.md)
       - Virtual Column
-        - [Virtual Column](/tidb-cloud-lake/sql/virtual-column.md)
+        - [Virtual Column](/tidb-cloud-lake/sql/virtual-column-overview.md)
         - [REFRESH VIRTUAL COLUMN](/tidb-cloud-lake/sql/refresh-virtual-column.md)
         - [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md)
       - User-Defined Function
@@ -417,7 +417,7 @@
         - [Stored Procedure](/tidb-cloud-lake/sql/stored-procedure.md)
         - [SHOW PROCEDURES](/tidb-cloud-lake/sql/show-procedures.md)
       - Warehouse
-        - [Overview](/tidb-cloud-lake/sql/warehouse.md)
+        - [Overview](/tidb-cloud-lake/sql/warehouse-overview.md)
         - [ALTER WAREHOUSE](/tidb-cloud-lake/sql/alter-warehouse.md)
         - [CREATE WAREHOUSE](/tidb-cloud-lake/sql/create-warehouse.md)
         - [DROP WAREHOUSE](/tidb-cloud-lake/sql/drop-warehouse.md)
@@ -463,7 +463,7 @@
       - [Query Operators](/tidb-cloud-lake/sql/query-operators.md)
       - [JSON Operators](/tidb-cloud-lake/sql/json-operators.md)
       - [Logical Operators](/tidb-cloud-lake/sql/logical-operators.md)
-      - [Set Operators](/tidb-cloud-lake/sql/set-operators.md)
+      - [Set Operators](/tidb-cloud-lake/sql/set-operators-sql.md)
       - [Subquery Operators](/tidb-cloud-lake/sql/subquery-operators.md)
     - Explain Commands
       - [Overview](/tidb-cloud-lake/sql/explain-commands.md)
@@ -641,14 +641,14 @@
       - [NOW](/tidb-cloud-lake/sql/now.md)
       - [PREVIOUS_DAY](/tidb-cloud-lake/sql/previous-day.md)
       - [QUARTER](/tidb-cloud-lake/sql/quarter.md)
-      - [STR_TO_DATE](/tidb-cloud-lake/sql/str-date.md)
+      - [STR_TO_DATE](/tidb-cloud-lake/sql/str-to-date.md)
       - [STR_TO_TIMESTAMP](/tidb-cloud-lake/sql/str-to-timestamp.md)
       - [SUBTRACT TIME INTERVAL](/tidb-cloud-lake/sql/subtract-interval.md)
       - [TIME_SLICE](/tidb-cloud-lake/sql/time-slice.md)
       - [TIME_SLOT](/tidb-cloud-lake/sql/time-slot.md)
       - [TIMESTAMP_DIFF](/tidb-cloud-lake/sql/timestamp-diff.md)
       - [TIMEZONE](/tidb-cloud-lake/sql/timezone.md)
-      - [TO_DATE](/tidb-cloud-lake/sql/str-to-date.md)
+      - [TO_DATE](/tidb-cloud-lake/sql/to-date.md)
       - [TO_DATETIME](/tidb-cloud-lake/sql/datetime.md)
       - [TO_DAY_OF_MONTH](/tidb-cloud-lake/sql/to-day-of-month.md)
       - [TO_DAY_OF_WEEK](/tidb-cloud-lake/sql/day-week.md)
@@ -706,6 +706,7 @@
       - [TO_WEEKS](/tidb-cloud-lake/sql/weeks.md)
       - [TO_YEARS](/tidb-cloud-lake/sql/years.md)
     - String Functions
+      - [Overview](/tidb-cloud-lake/sql/string-functions-overview.md)
       - [ASCII](/tidb-cloud-lake/sql/ascii.md)
       - [BIN](/tidb-cloud-lake/sql/bin.md)
       - [BIT_LENGTH](/tidb-cloud-lake/sql/bit-length.md)
@@ -718,7 +719,6 @@
       - [FROM_HEX](/tidb-cloud-lake/sql/from-hex.md)
       - [GLOB](/tidb-cloud-lake/sql/glob.md)
       - [HEX](/tidb-cloud-lake/sql/hex.md)
-      - [String Functions](/tidb-cloud-lake/sql/string-functions.md)
       - [INSERT](/tidb-cloud-lake/sql/insert-sql.md)
       - [INSTR](/tidb-cloud-lake/sql/instr.md)
       - [JARO_WINKLER](/tidb-cloud-lake/sql/jaro-winkler.md)
@@ -820,7 +820,7 @@
       - [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md)
       - [WINDOW_FUNNEL](/tidb-cloud-lake/sql/window-funnel.md)
     - Window Functions
-      - [Overview](/tidb-cloud-lake/sql/window-functions.md)
+      - [Overview](/tidb-cloud-lake/sql/window-functions-overview.md)
       - [CUME_DIST](/tidb-cloud-lake/sql/cume-dist.md)
       - [DENSE_RANK](/tidb-cloud-lake/sql/dense-rank.md)
       - [FIRST](/tidb-cloud-lake/sql/first.md)
@@ -948,12 +948,12 @@
     - Structured & Semi-Structured
       - [Structured & Semi-Structured Functions](/tidb-cloud-lake/sql/structured-semi-structured-functions.md)
       - JSON Functions
+        - [Overview](/tidb-cloud-lake/sql/json-functions-overview.md)
         - [CHECK_JSON](/tidb-cloud-lake/sql/check-json.md)
         - [GET](/tidb-cloud-lake/sql/get.md)
         - [GET_BY_KEYPATH](/tidb-cloud-lake/sql/get-by-keypath.md)
         - [GET_IGNORE_CASE](/tidb-cloud-lake/sql/get-ignore-case.md)
         - [GET_PATH](/tidb-cloud-lake/sql/get-path.md)
-        - [JSON Functions](/tidb-cloud-lake/sql/json-functions.md)
         - [JQ](/tidb-cloud-lake/sql/jq.md)
         - [JSON_ARRAY_ELEMENTS](/tidb-cloud-lake/sql/json-array-elements.md)
         - [JSON_CONTAINS_IN_LEFT](/tidb-cloud-lake/sql/json-contains-left.md)
@@ -1081,9 +1081,9 @@
       - [XXHASH32](/tidb-cloud-lake/sql/xxhash.md)
       - [XXHASH64](/tidb-cloud-lake/sql/xxhash-sql.md)
     - UUID Functions
+      - [Overview](/tidb-cloud-lake/sql/uuid-functions.md)
       - [GEN_RANDOM_UUID](/tidb-cloud-lake/sql/gen-random-uuid.md)
-      - [UUID Functions](/tidb-cloud-lake/sql/uuid-functions.md)
-      - [UUID](/tidb-cloud-lake/sql/uuid.md)
+      - [UUID](/tidb-cloud-lake/sql/uuid-sql.md)
     - IP Address Functions
       - [IP Address Functions](/tidb-cloud-lake/sql/ip-address-functions.md)
       - [INET_ATON](/tidb-cloud-lake/sql/inet-aton.md)
@@ -1132,7 +1132,7 @@
       - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md)
       - [TASK_HISTORY](/tidb-cloud-lake/sql/task-history.md)
     - Sequence Functions
-      - [Sequence Functions](/tidb-cloud-lake/sql/sequence-functions.md)
+      - [Overview](/tidb-cloud-lake/sql/sequence-functions-overview.md)
       - [NEXTVAL](/tidb-cloud-lake/sql/nextval.md)
     - Data Anonymization Functions
       - [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md)

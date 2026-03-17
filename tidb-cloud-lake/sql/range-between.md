@@ -263,7 +263,7 @@ ORDER BY sale_date;
 
 ## See Also
 
-- [Window Functions Overview](/tidb-cloud-lake/sql/window-functions.md)
+- [Window Functions Overview](/tidb-cloud-lake/sql/window-functions-overview.md)
 - [ROWS BETWEEN](/tidb-cloud-lake/sql/rows-between.md) - Row-based window frames
 - [Aggregate Functions](/tidb-cloud-lake/sql/aggregate-functions.md) - Functions that can use window frames
 - [Date and Time Functions](/tidb-cloud-lake/sql/date-time-functions.md) - Useful with RANGE intervals

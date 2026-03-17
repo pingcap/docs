@@ -64,7 +64,7 @@ REFRESH INVERTED INDEX nginx_request_idx ON nginx_logs;
 
 Every column except the timestamp and line column becomes a LogQL label.
 
-![Configure Table](/img/connect/grafana-configure-table.png)
+![Configure Table](/media/tidb-cloud-lake/grafana-configure-table.png)
 
 ### Step 2. Get Connection Information
 
@@ -77,7 +77,7 @@ Every column except the timestamp and line column becomes a LogQL label.
    - **Database**: The database name containing your log table
    - **Warehouse**: The warehouse name
 
-![Get Connection Info](/img/connect/grafana-get-connect-info.png)
+![Get Connection Info](/media/tidb-cloud-lake/grafana-get-connect-info.png)
 
 For detailed information on obtaining connection details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
@@ -91,7 +91,7 @@ For detailed information on obtaining connection details, see [Connecting to a W
    - **Name**: Give your data source a descriptive name (e.g., "Databend Cloud Logs")
    - **URL**: Enter `https://<host>` using the host from Step 2
 
-![Configure Loki Data Source - Basic](/img/connect/grafana-configure-loki-datasource-basic.png)
+![Configure Loki Data Source - Basic](/media/tidb-cloud-lake/grafana-configure-loki-datasource-basic.png)
 
 4. Configure authentication:
    - Enable **Basic auth** under the Authentication section
@@ -103,11 +103,11 @@ For detailed information on obtaining connection details, see [Connecting to a W
    - **Header**: `X-Databend-Database`, **Value**: Your database name
    - **Header**: `X-Databend-Table`, **Value**: Your table name
 
-![Configure Loki Data Source - Headers](/img/connect/grafana-configure-loki-datasource-header.png)
+![Configure Loki Data Source - Headers](/media/tidb-cloud-lake/grafana-configure-loki-datasource-header.png)
 
 6. Click **Save & test** to verify the connection.
 
-![Configure Loki Data Source - Complete](/img/connect/grafana-configure-loki-datasource-complete.png)
+![Configure Loki Data Source - Complete](/media/tidb-cloud-lake/grafana-configure-loki-datasource-complete.png)
 
 ### Step 4. Test Queries
 
@@ -123,7 +123,7 @@ For detailed information on obtaining connection details, see [Connecting to a W
 
 4. Customize the visualization as needed using Grafana's panel options.
 
-![Test Loki Query with Explore](/img/connect/grafana-test-loki-query-with-explore.png)
+![Test Loki Query with Explore](/media/tidb-cloud-lake/grafana-test-loki-query-with-explore.png)
 
 ## Using Custom Plugin (Alternative)
 
@@ -163,8 +163,8 @@ rm /tmp/grafana-databend-datasource.zip
 
 5. Navigate to the **Plugins** page in the Grafana UI, for example, `http://localhost:3000/plugins`, and ensure the plugin is installed.
 
-![Plugins](/img/integration/grafana-plugins.png)
-![Plugin detail](/img/integration/grafana-plugin-detail.png)
+![Plugins](/media/tidb-cloud-lake/grafana-plugins.png)
+![Plugin detail](/media/tidb-cloud-lake/grafana-plugin-detail.png)
 
 ### Step 4. Configure Data Source
 

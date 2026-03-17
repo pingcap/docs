@@ -158,7 +158,7 @@ TableScan
 
 ## Essential Commands
 
-For complete command reference, see [Ngram Index](/tidb-cloud-lake/sql/ngram-index.md).
+For complete command reference, see [Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md).
 
 | Command                                                  | Purpose                                      |
 |----------------------------------------------------------|----------------------------------------------|

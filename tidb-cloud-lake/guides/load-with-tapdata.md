@@ -6,7 +6,7 @@ title: Tapdata
 
 Databend is one of the data sources supported by Tapdata. You can use Tapdata to synchronize data from other platforms to Databend, using Databend as the **destination** for data migration/synchronization.
 
-![Alt text](@site/static/img/documents_cn/getting-started/tapdata-databend.png)
+![Alt text](/media/tidb-cloud-lake/tapdata-databend.png)
 
 ## Integrating with Tapdata Cloud
 
@@ -24,7 +24,7 @@ You need to establish a connection for each of the data source and data destinat
 
 Here is an example of connecting to Databend Cloud:
 
-![Alt text](@site/static/img/documents_cn/getting-started/tapdata-connect.png)
+![Alt text](/media/tidb-cloud-lake/tapdata-connect.png)
 
 ### Step 3: Create Data Replication Tasks
 

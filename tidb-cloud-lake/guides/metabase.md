@@ -38,7 +38,7 @@ To follow along, you'll need to install Metabase with Docker. Before you begin, 
 For this tutorial, you can integrate either with Databend or Databend Cloud:
 
 - If you choose to integrate with a local Databend instance, deploy it if you don't have one already.
-- If you prefer to integrate with Databend Cloud, make sure you can log in to your account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting).
+- If you prefer to integrate with Databend Cloud, make sure you can log in to your account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ### Step 2. Deploy Metabase
 
@@ -58,7 +58,7 @@ docker run  -d -p 3000:3000 --name metabase metabase/metabase
 
 3. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase Databend Driver, then import it to the **plugins** folder of the Metabase container in Docker.
 
-![Alt text](/img/integration/add2plugins.gif)
+![Alt text](/media/tidb-cloud-lake/add2plugins.gif)
 
 4. Restart the Metabase container.
 
@@ -68,7 +68,7 @@ docker run  -d -p 3000:3000 --name metabase metabase/metabase
 
 2. Complete the initial sign-up process. Select **I'll add my data later** in step 3.
 
-![Alt text](/img/integration/add-later.png)
+![Alt text](/media/tidb-cloud-lake/add-later.png)
 
 3. Click on the **gear** icon in the top right, and navigate to **Admin settings** > **Databases** > **Add a database** to create a connection:
 
@@ -85,4 +85,4 @@ docker run  -d -p 3000:3000 --name metabase metabase/metabase
 
 You're all set! You can now start creating a query and building a dashboard. For more information, please refer to the Metabase documentation: https://www.metabase.com/docs/latest/index.html
 
-![Alt text](/img/integration/allset.png)
+![Alt text](/media/tidb-cloud-lake/allset.png)

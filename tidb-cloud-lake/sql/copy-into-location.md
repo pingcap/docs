@@ -305,7 +305,7 @@ COPY INTO 's3://databend'
 └────────────────────────────────────────────┘
 ```
 
-![Alt text](/img/sql/copy-into-bucket.png)
+![Alt text](/media/tidb-cloud-lake/copy-into-bucket.png)
 
 ### Example 4: Unloading with PARTITION BY
 

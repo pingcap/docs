@@ -21,7 +21,7 @@ Below is a step-by-step example of using the [SYSTEM$FUSE_AMEND](/tidb-cloud-lak
 
 1. Enable versioning for the bucket `databend-doc`.
 
-![alt text](../../../../static/img/guides/bucket-versioning.png)
+![alt text](/media/tidb-cloud-lake/bucket-versioning.png)
 
 2. Create an external table, storing the table data in the `fail-safe` folder in the `databend-doc` bucket.
 
@@ -36,11 +36,11 @@ INSERT INTO t VALUES (1), (2), (3);
 
 If you open the `fail-safe` folder in the bucket now, you can see the data is already there:
 
-![alt text](../../../../static/img/guides/bucket-versioning-2.png)
+![alt text](/media/tidb-cloud-lake/bucket-versioning-2.png)
 
 3. Simulate data loss by deleting all the sub-folders and their files in the `fail-safe` folder.
 
-![alt text](../../../../static/img/guides/bucket-versioning-3.png)
+![alt text](/media/tidb-cloud-lake/bucket-versioning-3.png)
 
 4. Attempting to query the table after removal will result in an error:
 

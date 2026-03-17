@@ -65,7 +65,7 @@ In this step, you will create a Kafka topic in Confluent Cloud.
 
 3. Select **Create a schema for message values**, then click **Create Schema**.
 
-![alt text](../../../../static/img/documents/tutorials/kafka-2.png)
+![alt text](/media/tidb-cloud-lake/kafka-2.png)
 
 4. On the **Add new schema** page, select the **Avro** tab, then copy and paste the following schema to the editor:
 
@@ -94,7 +94,7 @@ In this step, you will create a Kafka topic in Confluent Cloud.
 }
 ```
 
-![alt text](../../../../static/img/documents/tutorials/kafka-1.png)
+![alt text](/media/tidb-cloud-lake/kafka-1.png)
 
 ### Step 4: Add a Connector
 
@@ -102,11 +102,11 @@ In this step, you will set up a connector that connects to Databend Cloud.
 
 1. In Confluent Cloud, from the navigation menu, click **Connectors** > **Add Connector**. Search for then select the plugin you uploaded. 
 
-![alt text](../../../../static/img/documents/tutorials/kafka-3.png)
+![alt text](/media/tidb-cloud-lake/kafka-3.png)
 
 2. In the **Kafka credentials** step, select **Use an existing API key**, then enter the API key & secret you created with the Confluent CLI. 
 
-![alt text](../../../../static/img/documents/tutorials/kafka-4.png)
+![alt text](/media/tidb-cloud-lake/kafka-4.png)
 
 3. In the **Configuration** step, select the **JSON** tab, then copy and paste the following configuration to the editor, replacing the placeholders with your actual values:
 
@@ -185,4 +185,4 @@ Starting Kafka Producer. Use Ctrl-C or Ctrl-D to exit.
 
 3. In Databend Cloud, verify that the data has been successfully loaded:
 
-![alt text](../../../../static/img/documents/tutorials/kafka-5.png)
+![alt text](/media/tidb-cloud-lake/kafka-5.png)

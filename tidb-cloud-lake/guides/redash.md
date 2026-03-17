@@ -70,7 +70,7 @@ docker-compose up
 
 2. Select `Databend` from the list on **Settings** > **New Data Source**.
 
-![Alt text](/img/integration/redash-select.png)
+![Alt text](/media/tidb-cloud-lake/integration-redash-select.png)
 
 3. Configure your Databend data source.
 
@@ -80,7 +80,7 @@ docker-compose up
    - Database: `default`
    - Secure: Enable this option if you enabled HTTPS on your Databend server.
 
-![Alt text](/img/integration/redash-cfg-local.png)
+![Alt text](/media/tidb-cloud-lake/redash-cfg-local.png)
 
 4. Click **Create**, then **Test Connection** to see check if the connection is successful.
 
@@ -92,7 +92,7 @@ In this tutorial, you'll install Redash with Docker. Before you start, ensure th
 
 ### Step 1. Obtain Connection Information
 
-Obtain the connection information from Databend Cloud. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting).
+Obtain the connection information from Databend Cloud. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ### Step 2. Deploy Redash
 
@@ -149,7 +149,7 @@ docker-compose up
 
 2. Select `Databend` from the list on **Settings** > **New Data Source**.
 
-![Alt text](@site/static/img/documents/BI/redash-select.png)
+![Alt text](/media/tidb-cloud-lake/bi-redash-select.png)
 
 3. Configure your Databend data source.
 
@@ -160,7 +160,7 @@ docker-compose up
    - Database: `default`
    - Secure: Enable this option.
 
-![Alt text](@site/static/img/documents/BI/redash-cfg-cloud.png)
+![Alt text](/media/tidb-cloud-lake/redash-cfg-cloud.png)
 
 4. Click **Create**, then **Test Connection** to see check if the connection is successful.
 

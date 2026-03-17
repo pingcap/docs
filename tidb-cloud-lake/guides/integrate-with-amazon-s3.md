@@ -24,7 +24,7 @@ The Amazon S3 data integration enables you to import files from S3 buckets into 
 | **Access Key** | Yes      | AWS Access Key ID                    |
 | **Secret Key** | Yes      | AWS Secret Access Key                |
 
-![Create S3 Data Source](/img/cloud/dataintegration/create-s3-datasource.png)
+![Create S3 Data Source](/media/tidb-cloud-lake/create-s3-datasource.png)
 
 3. Click **Test Connectivity** to verify the credentials. If the test succeeds, click **OK** to save the data source.
 
@@ -47,7 +47,7 @@ The AWS credentials must have read access to the target S3 bucket. If you plan t
 | **File Path**     | Yes      | S3 URI with optional wildcard pattern (e.g., `s3://mybucket/data/2025-*.csv`)                    |
 | **File Type**     | Auto     | Auto-detected from file extension. Supported: CSV, Parquet, NDJSON                              |
 
-![Create S3 Task - Basic Info](/img/cloud/dataintegration/create-s3-task-basic-info.png)
+![Create S3 Task - Basic Info](/media/tidb-cloud-lake/create-s3-task-basic-info.png)
 
 #### CSV Options
 
@@ -73,7 +73,7 @@ s3://mybucket/events/data.ndjson     # A single specific file
 
 After configuring the basic settings, click **Next** to preview the source data.
 
-![S3 Preview Data](/img/cloud/dataintegration/s3-task-preview-step.png)
+![S3 Preview Data](/media/tidb-cloud-lake/s3-task-preview-step.png)
 
 The system reads the first matching file and displays:
 - Sample data with column names and types
@@ -93,7 +93,7 @@ Configure the destination in Databend:
 | **Target Database** | Choose the target database in Databend                             |
 | **Target Table**    | The table name in Databend                                         |
 
-![S3 Set Target Table](/img/cloud/dataintegration/s3-task-set-target-table.png)
+![S3 Set Target Table](/media/tidb-cloud-lake/s3-task-set-target-table.png)
 
 The system auto-detects columns from the source files. You can review and edit column names and types before proceeding.
 

@@ -26,6 +26,6 @@ bendsql --quote-style never --query="EXPLAIN PERF SELECT avg(number) FROM number
 
 Then, you can open the `demo.html` file in your browser to view the flame graphs:
 
-<img alt="graphs" src="https://github.com/user-attachments/assets/07acfefa-a1c3-4c00-8c43-8ca1aafc3224"/>
+<img alt="graphs" src="/media/tidb-cloud-lake/remote-914114962b44-07acfefa-a1c3-4c00-8c43-8ca1aafc3224"/>
 
 If the query finishes very quickly, it may not collect enough data, resulting in an empty flame graph.

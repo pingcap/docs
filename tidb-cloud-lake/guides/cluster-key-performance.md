@@ -41,7 +41,7 @@ All you need to do is define a clustering key for each table (if appropriate) an
 
 Cluster keys organize data into storage blocks (Parquet files) based on specified columns:
 
-![Cluster Key Visualization](/img/sql/clustered.png)
+![Cluster Key Visualization](/media/tidb-cloud-lake/clustered.png)
 
 1. **Data Organization** → Similar values grouped into adjacent blocks
 2. **Metadata Creation** → Block-to-value mappings stored for fast lookup

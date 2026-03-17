@@ -40,4 +40,4 @@ View graphical online: http://127.0.0.1:8080?perf_id=1
 
 Opens an interactive view showing execution plan, operator runtimes, and data flow.
 
-![Graphical Analysis](@site/static/img/documents/sql/explain-graphical.png)
+![Graphical Analysis](/media/tidb-cloud-lake/explain-graphical.png)

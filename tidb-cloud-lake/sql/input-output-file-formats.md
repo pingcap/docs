@@ -49,9 +49,9 @@ formatTypeOptions ::=
 
 Databend CSV is compliant with [RFC 4180](https://www.rfc-editor.org/rfc/rfc4180) and is subject to the following conditions:
 
-- A string must be quoted if it contains the character of a [QUOTE](#quote), [ESCAPE](#escape), [RECORD_DELIMITER](#record_delimiter), or [FIELD_DELIMITER](#field_delimiter).
-- No character will be escaped in a quoted string except [QUOTE](#quote).
-- No space should be left between a [FIELD_DELIMITER](#field_delimiter) and a [QUOTE](#quote).
+- A string must be quoted if it contains the character of a [QUOTE](#quote-load-only), [ESCAPE](#escape), [RECORD_DELIMITER](#record_delimiter), or [FIELD_DELIMITER](#field_delimiter).
+- No character will be escaped in a quoted string except [QUOTE](#quote-load-only).
+- No space should be left between a [FIELD_DELIMITER](#field_delimiter) and a [QUOTE](#quote-load-only).
 
 ### RECORD_DELIMITER
 

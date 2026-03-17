@@ -31,7 +31,7 @@ If given an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date format strin
 TO_TIMESTAMP(<expr>, <pattern>)
 ```
 
-The function converts the first string to a timestamp based on the pattern specified in the second string. To specify the pattern, use specifiers. The specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/datetime.md#formatting-date-and-time).
+The function converts the first string to a timestamp based on the pattern specified in the second string. To specify the pattern, use specifiers. The specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
 
 
 ```sql

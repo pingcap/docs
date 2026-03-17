@@ -33,7 +33,7 @@ This page provides a comprehensive overview of Date & Time functions in Databend
 | Function                                  | Description                                 | Example                                                       |
 |-------------------------------------------|---------------------------------------------|---------------------------------------------------------------|
 | [DATE](/tidb-cloud-lake/sql/date.md)                           | Converts a value to DATE type               | `DATE('2024-06-04')` → `2024-06-04`                           |
-| [TO_DATE](/tidb-cloud-lake/sql/date.md)                     | Converts a string to DATE type              | `TO_DATE('2024-06-04')` → `2024-06-04`                        |
+| [TO_DATE](/tidb-cloud-lake/sql/to-date.md)                     | Converts a string to DATE type              | `TO_DATE('2024-06-04')` → `2024-06-04`                        |
 | [TO_DATETIME](/tidb-cloud-lake/sql/datetime.md)             | Converts a string to DATETIME type          | `TO_DATETIME('2024-06-04 12:30:45')` → `2024-06-04 12:30:45`  |
 | [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)           | Converts a string to TIMESTAMP type         | `TO_TIMESTAMP('2024-06-04 12:30:45')` → `2024-06-04 12:30:45` |
 | [TO_UNIX_TIMESTAMP](/tidb-cloud-lake/sql/unix-timestamp.md) | Converts a date to Unix timestamp           | `TO_UNIX_TIMESTAMP('2024-06-04')` → `1717516800`              |

@@ -149,7 +149,7 @@ INSERT INTO users (name, email) VALUES
 
 3. Find your Redis container ID on Docker Desktop or by running `docker ps` in the terminal:
 
-![alt text](../../../../static/img/documents/tutorials/redis-container-id.png)
+![alt text](/media/tidb-cloud-lake/redis-container-id.png)
 
 4. Access the Redis CLI using your Redis container ID (replace `14d50cc4d075` with your actual container ID):
 

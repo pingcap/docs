@@ -9,10 +9,10 @@ Build end-to-end change data capture (CDC) flows in Databend with two primitives
 
 ## Quick Navigation
 
-- [Example 1: Append-Only Stream Copy](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-1-append-only-stream-copy) – capture inserts and consume them into another table.
-- [Example 2: Standard Stream Updates](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-2-standard-stream-updates) – see how updates/deletes appear and why only one consumer can drain a stream.
-- [Example 3: Incremental Stream Metrics](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-3-incremental-stream-metrics) – join multiple streams with `WITH CONSUME` to compute deltas batch by batch.
-- [Example 1: Scheduled Copy Task](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-1-scheduled-copy) – generate and load files with two recurring tasks.
+- [Example 1: Append-Only Stream Copy](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-1-append-only-stream) – capture inserts and consume them into another table.
+- [Example 2: Standard Stream Updates](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-2-standard-stream-updates--deletes) – see how updates/deletes appear and why only one consumer can drain a stream.
+- [Example 3: Incremental Stream Metrics](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-3-incremental-stream-join) – join multiple streams with `WITH CONSUME` to compute deltas batch by batch.
+- [Example 1: Scheduled Copy Task](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-1-scheduled-copy) – generate and load files with two recurring tasks.
 - [Example 2: Stream-Triggered Merge](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-2-stream-triggered-merge) – fire a task only when `STREAM_STATUS` is true.
 
 ## Why CDC in Databend

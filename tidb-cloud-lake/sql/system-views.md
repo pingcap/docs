@@ -6,7 +6,7 @@ Provides metadata information for all views.
 
 See also:
 
-- [information_schema.views](/tidb-cloud-lake/sql/information-schema-views.md)
+- [information_schema.views](/tidb-cloud-lake/sql/information-schema-views-sql.md)
 - [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md)
 
 ```sql title='Examples:'

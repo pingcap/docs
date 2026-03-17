@@ -8,7 +8,7 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 The CHANGES clause allows querying the change tracking metadata for a table within a defined time interval. Please note that the time interval must fall within the data retention period (defaulted to 24 hours). To define a time interval, use the `AT` keyword to specify a time point as the start of the interval, with the current time being applied as the default end of the interval. If you wish to specify a past time as the end of the interval, use the `END` keyword in conjunction with the `AT` keyword to set the interval.
 
-![alt text](/img/sql/changes.png)
+![alt text](/media/tidb-cloud-lake/changes.png)
 
 ## Syntax
 
@@ -38,7 +38,7 @@ FROM ...
 
 ## Enabling Change Tracking
 
-The CHANGES clause requires that the Fuse engine option `change_tracking` must be set to `true` on the table. For more information about the `change_tracking` option, see [Fuse Engine Options](/tidb-cloud-lake/sql/table-engines.md#options).
+The CHANGES clause requires that the Fuse engine option `change_tracking` must be set to `true` on the table. For more information about the `change_tracking` option, see [Fuse Engine Options](/tidb-cloud-lake/sql/table-engines.md#available-engines).
 
 ```sql title='Example:'
 -- Enable change tracking for table 't'

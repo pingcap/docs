@@ -82,14 +82,14 @@ docker run -d \
 
 3. Open Prometheus in your browser at `http://localhost:9090`, navigate to **Status** > **Target health**, and confirm that the `databend-cloud` target is listed with a status of `UP`.
 
-![alt text](../../../../../static/img/documents/warehouses/metrics-1.png)
+![alt text](/media/tidb-cloud-lake/metrics-1.png)
 
 </StepContent>
 </StepsWrap>
 
 You're all set! You can now query your tenant metrics directly from Prometheus. For example, try querying `databend_cloud_warehouse_status`:
 
-![alt text](../../../../../static/img/documents/warehouses/metrics-2.png)
+![alt text](/media/tidb-cloud-lake/metrics-2.png)
 
 ## Available Metrics List
 

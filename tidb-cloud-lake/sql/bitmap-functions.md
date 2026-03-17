@@ -32,7 +32,7 @@ This page provides a comprehensive overview of Bitmap functions in Databend, org
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [BITMAP_AND_COUNT](bitmap-and-count.md) | Returns the count of elements in the bitwise AND of two bitmaps | `BITMAP_AND_COUNT(BUILD_BITMAP([1,2,3]), BUILD_BITMAP([2,3,4]))` → `2` |
+| [BITMAP_AND_COUNT](/tidb-cloud-lake/sql/bitmap-and-count.md) | Returns the count of elements in the bitwise AND of two bitmaps | `BITMAP_AND_COUNT(BUILD_BITMAP([1,2,3]), BUILD_BITMAP([2,3,4]))` → `2` |
 | [BITMAP_OR_COUNT](/tidb-cloud-lake/sql/bitmap-or-count.md) | Returns the count of elements in the bitwise OR of two bitmaps | `BITMAP_OR_COUNT(BUILD_BITMAP([1,2]), BUILD_BITMAP([2,3]))` → `3` |
 | [BITMAP_XOR_COUNT](/tidb-cloud-lake/sql/bitmap-xor-count.md) | Returns the count of elements in the bitwise XOR of two bitmaps | `BITMAP_XOR_COUNT(BUILD_BITMAP([1,2,3]), BUILD_BITMAP([2,3,4]))` → `2` |
 | [BITMAP_NOT_COUNT](/tidb-cloud-lake/sql/bitmap-not-count.md) | Returns the count of elements in the bitwise NOT of a bitmap | `BITMAP_NOT_COUNT(BUILD_BITMAP([1,2,3]), 5)` → `2` |
