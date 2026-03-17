@@ -50,19 +50,19 @@ pip install pymysql
 
 1. Run the command below to start Jupyter Notebook:
 
-```shell
-jupyter notebook
-```
+    ```shell
+    jupyter notebook
+    ```
 
-This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: http://localhost:8888/tree
+    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: http://localhost:8888/tree
 
-![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
+    ![Jupyter Notebook file tree](/media/tidb-cloud-lake/integration-notebook-tree.png)
 
 2. On the **Files** tab, navigate to the sample notebook you downloaded and open it.
 
 3. In the sample notebook, run the cells sequentially. By doing so, you create a table containing 5 rows in your local Databend, and visualize the data with a bar chart.
 
-![Alt text](/media/tidb-cloud-lake/integration-gui-jupyter.png)
+    ![Alt text](/media/tidb-cloud-lake/integration-gui-jupyter.png)
 
 ## Tutorial-2: Integrating Databend with Jupyter Notebook using ipython-sql
 

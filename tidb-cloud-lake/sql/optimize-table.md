@@ -25,7 +25,7 @@ Optimizing a table in Databend involves compacting or purging historical data to
 
 Snapshot, segment, and block are the concepts Databend uses for data storage. Databend uses them to construct a hierarchical structure for storing table data.
 
-![](/media/tidb-cloud-lake/storage-structure.PNG)
+![Data storage structure](/media/tidb-cloud-lake/storage-structure.PNG)
 
 Databend automatically creates table snapshots upon data updates. A snapshot represents a version of the table's segment metadata.
 
