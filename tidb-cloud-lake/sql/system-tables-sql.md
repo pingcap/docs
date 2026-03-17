@@ -6,7 +6,7 @@ Provides metadata information for all tables. It includes details such as table 
 
 See also:
 
-- [information_schema.tables](/tidb-cloud-lake/sql/information-schema-tables.md)
+- [information_schema.tables](/tidb-cloud-lake/sql/information-schema-tables-overview.md)
 - [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)
 
 ```sql title='Examples:'

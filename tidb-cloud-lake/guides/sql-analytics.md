@@ -296,7 +296,7 @@ VID-20250103-001| FRAME-0401 | 522         | 0.63       | 0.63
 VID-MISSING-001 | FRAME-0501 | 10          | 0.25       | 0.25
 ```
 
-Docs: [Window functions](/tidb-cloud-lake/sql/window-functions.md).
+Docs: [Window functions](/tidb-cloud-lake/sql/window-functions-overview.md).
 
 ---
 

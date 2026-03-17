@@ -29,7 +29,7 @@ INSERT INTO frame_metadata_catalog VALUES
   ('FRAME-0401', PARSE_JSON('{"scene":{"weather_code":"lightfog","lighting":"night"},"camera":{"sensor_view":"rear"},"vehicle":{"speed_kmh":38.9},"detections":{"objects":[{"type":"traffic_light","confidence":0.78},{"type":"vehicle","confidence":0.36}]},"media_meta":{"tagging":{"labels":["night_lowlight","traffic_light"]}}}'), '2025-01-03 21:18:07');
 ```
 
-> Need multimodal data (vector embeddings, GPS trails, tag bitmaps)? Grab the schemas from the [Vector](/tidb-cloud-lake/guides/vector-search.md) and [Geo](/tidb-cloud-lake/guides/geo-analytics.md) guides so you can combine them with the search results shown here.
+> Need multimodal data (vector embeddings, GPS trails, tag bitmaps)? Grab the schemas from the [Vector](/tidb-cloud-lake/guides/vector-search-guide.md) and [Geo](/tidb-cloud-lake/guides/geo-analytics.md) guides so you can combine them with the search results shown here.
 
 ## 2. Search Patterns with `QUERY()`
 ### Array Match

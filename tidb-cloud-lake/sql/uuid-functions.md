@@ -9,7 +9,7 @@ This page provides reference information for the UUID-related functions in Datab
 | Function | Description | Example |
 |----------|-------------|--------|
 | [GEN_RANDOM_UUID](/tidb-cloud-lake/sql/gen-random-uuid.md) | Generates a random UUID (version 7 from v1.2.658, version 4 before) | `GEN_RANDOM_UUID()` → `'01890a5d-ac96-7cc6-8128-01d71ab8b93e'` |
-| [UUID](/tidb-cloud-lake/sql/uuid.md) | Alias for GEN_RANDOM_UUID | `UUID()` → `'01890a5d-ac96-7cc6-8128-01d71ab8b93e'` |
+| [UUID](/tidb-cloud-lake/sql/uuid-sql.md) | Alias for GEN_RANDOM_UUID | `UUID()` → `'01890a5d-ac96-7cc6-8128-01d71ab8b93e'` |
 
 ## Usage Examples
 

@@ -10,7 +10,7 @@ This guide set shows how Databend keeps all those workloads in one warehouse—n
 |-------|----------------|
 | [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md) | Base tables, filters, joins, windows, aggregating indexes |
 | [JSON & Search](/tidb-cloud-lake/guides/json-search.md) | Load `frame_metadata_catalog`, run Elasticsearch `QUERY()`, link bitmap tags |
-| [Vector Search](/tidb-cloud-lake/guides/vector-search.md) | Persist embeddings, run cosine search, join risk metrics |
+| [Vector Search](/tidb-cloud-lake/guides/vector-search-guide.md) | Persist embeddings, run cosine search, join risk metrics |
 | [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md) | Use `GEOMETRY`, distance/polygon filters, traffic-light joins |
 | [Lakehouse ETL](/tidb-cloud-lake/guides/lakehouse-etl.md) | Stage once, `COPY INTO` shared tables, add streams/tasks |
 

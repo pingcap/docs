@@ -2,17 +2,19 @@
 title: 'Window Functions'
 ---
 
-## Overview 
+## Overview
 
 Window functions perform calculations across a set of related rows while returning one result per input row. Unlike aggregate functions, window functions don't collapse rows into a single output.
 
 **Key characteristics:**
+
 - Operate on a "window" of rows related to the current row
 - Return one value per input row (no grouping/collapsing)
 - Can access values from other rows in the window
 - Support partitioning and ordering for flexible calculations
 
 **Note on SQL examples in this documentation:**
+
 - ✅ **Complete SQL statements** have been validated against Databend
 - ⚠️ **Syntax examples** show window frame patterns (not complete statements)
 - 📋 All examples use standard SQL syntax supported by Databend

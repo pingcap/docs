@@ -39,7 +39,7 @@ OVER (
 - `n` must be a positive integer; `n = 1` is equivalent to `FIRST_VALUE`.
 - Returns `NULL` if the specified position does not exist in the frame.
 - Combine with `ROWS BETWEEN ...` to control whether the position is evaluated over the whole partition or the rows seen so far.
-- For window frame syntax, see [Window Frame Syntax](/tidb-cloud-lake/sql/window-functions.md#basic-syntax).
+- For window frame syntax, see [Window Frame Syntax](/tidb-cloud-lake/sql/window-functions-overview.md#basic-syntax).
 
 ## Examples
 

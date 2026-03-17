@@ -14,7 +14,7 @@ In Databend, strings can be stored in the `VARCHAR` field, the storage size is v
 
 ## Functions
 
-See [String Functions](/tidb-cloud-lake/sql/string-functions.md).
+See [String Functions](/tidb-cloud-lake/sql/string-functions-overview.md).
 
 
 ## Example
