@@ -555,7 +555,7 @@ Transaction Processing,Jim Gray,1992
 Readings in Database Systems,Michael Stonebraker,2004
 ```
 
-![Alt text](/img/load/load-extra.png)
+![Alt text](/media/tidb-cloud-lake/load-extra.png)
 
 By default, COPY INTO loads data into a table by matching the order of fields in the file to the corresponding columns in the table. It's essential to ensure that the data aligns correctly between the file and the table. For example,
 
@@ -588,7 +588,7 @@ COPY INTO books_with_language (title, author, date)
     FILE_FORMAT = (TYPE = CSV);
 ```
 
-If your table has more columns than the file, and the additional columns are at the end of the table, you can load data using the [FILE_FORMAT](#file_format) option `ERROR_ON_COLUMN_COUNT_MISMATCH`. This allows you to load data without specifying each column individually. Please note that ERROR_ON_COLUMN_COUNT_MISMATCH currently works for the CSV file format.
+If your table has more columns than the file, and the additional columns are at the end of the table, you can load data using the [FILE_FORMAT](/tidb-cloud-lake/sql/input-output-file-formats.md) option `ERROR_ON_COLUMN_COUNT_MISMATCH`. This allows you to load data without specifying each column individually. Please note that ERROR_ON_COLUMN_COUNT_MISMATCH currently works for the CSV file format.
 
 ```sql
 CREATE TABLE books_with_extra_columns

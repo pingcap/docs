@@ -40,7 +40,7 @@ The query result shows in the output area. You can click **Export** to save the 
 
 You can share your worksheets with everyone in your organization or specific individuals. To do so, click **Share** in the worksheet you want to share, or click **Share this Folder** to share a worksheet folder.
 
-![Alt text](@site/static/img/documents/worksheet/share.png)
+![Alt text](/media/tidb-cloud-lake/share.png)
 
 In the dialog box that appears, select the sharing scope. You can copy and share the link with the intended recipients, who will also receive an email notification. Please note that if you choose the **Designated Members** scope, recipients must click the link you share for the sharing to be successful.
 
@@ -51,8 +51,8 @@ In the dialog box that appears, select the sharing scope. You can copy and share
 
 Databend Cloud provides the ability to export query results. However, this feature requires the organization Owner to grant the **EXPORT** permission to team members. For data security purposes, this feature is disabled by default.
 
-![Alt text](@site/static/img/documents/worksheet/download.png)
+![Alt text](/media/tidb-cloud-lake/download.png)
 
 If you need to use this feature, please contact your organization Owner to enable the permission(**Admin** > **Users & Roles**):
 
-![Alt text](@site/static/img/documents/worksheet/export.png)
+![Alt text](/media/tidb-cloud-lake/export.png)

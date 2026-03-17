@@ -26,7 +26,7 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
 2. Verify your VPC settings
 
-   ![VPC Settings](/img/cloud/privatelink/aws/vpc-settings.png)
+   ![VPC Settings](/media/tidb-cloud-lake/vpc-settings.png)
 
    Ensure `Enable DNS resolution` and `Enable DNS hostnames` are checked.
 
@@ -36,7 +36,7 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
 4. Prepare a security group with tcp 443 port open:
 
-   ![Security Group](/img/cloud/privatelink/aws/security-group.png)
+   ![Security Group](/media/tidb-cloud-lake/security-group.png)
 
 5. Goto AWS Console:
 
@@ -44,39 +44,39 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
    Click `Create endpoint`:
 
-   ![Create Endpoint Button](/img/cloud/privatelink/aws/create-endpoint-1.png)
+   ![Create Endpoint Button](/media/tidb-cloud-lake/create-endpoint-1.png)
 
-   ![Create Endpoint Sheet](/img/cloud/privatelink/aws/create-endpoint-2.png)
+   ![Create Endpoint Sheet](/media/tidb-cloud-lake/create-endpoint-2.png)
 
    Select the previously created security group `HTTPS`
 
-   ![Create Endpoint SG](/img/cloud/privatelink/aws/create-endpoint-3.png)
+   ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 
-   ![Create Endpoint Done](/img/cloud/privatelink/aws/create-endpoint-4.png)
+   ![Create Endpoint Done](/media/tidb-cloud-lake/create-endpoint-4.png)
 
 6. Wait for cloud admin approving your connect request:
 
-   ![Request](/img/cloud/privatelink/aws/request.png)
+   ![Request](/media/tidb-cloud-lake/request.png)
 
 7. Wait for the PrivateLink creation:
 
-   ![Creation](/img/cloud/privatelink/aws/creation.png)
+   ![Creation](/media/tidb-cloud-lake/creation.png)
 
 8. Modify private DNS name setting:
 
-   ![DNS Menu](/img/cloud/privatelink/aws/dns-1.png)
+   ![DNS Menu](/media/tidb-cloud-lake/dns-1.png)
 
    Enable private DNS names:
 
-   ![DNS Sheet](/img/cloud/privatelink/aws/dns-2.png)
+   ![DNS Sheet](/media/tidb-cloud-lake/dns-2.png)
 
    Wait for changes to apply.
 
 9. Verify accessing Databend Cloud via PrivateLink:
 
-   ![Verify DNS](/img/cloud/privatelink/aws/verify-1.png)
+   ![Verify DNS](/media/tidb-cloud-lake/verify-1.png)
 
-   ![Verify Response](/img/cloud/privatelink/aws/verify-2.png)
+   ![Verify Response](/media/tidb-cloud-lake/verify-2.png)
 
    Gateway domain is resolved to VPC internal IP address.
 

@@ -21,7 +21,7 @@ Make sure you can log in to your Databend Cloud account and obtain the connectio
 
 2. Click **+** to the right of **INTEGRATIONS** in the left sidebar, then select **ClickHouse**.
 
-![Alt text](/img/integration/11.png)
+    ![Integration with ClickHouse](/media/tidb-cloud-lake/integration-clickhouse.png)
 
 3. Complete the fields with your connection information.
 
@@ -37,8 +37,8 @@ Make sure you can log in to your Databend Cloud account and obtain the connectio
 
 5. In the notebook, navigate to the **SQL** section, and then choose the connection you previously created.
 
-![Alt text](/img/integration/13.png)
+    ![Deepnote connection](/media/tidb-cloud-lake/deepnote-connection.png)
 
 You're all set! Refer to the Deepnote documentation for how to work with the tool.
 
-![Alt text](/img/integration/15.png)
+![Deepnote connection ready](/media/tidb-cloud-lake/deepnote-connection-ready.png)

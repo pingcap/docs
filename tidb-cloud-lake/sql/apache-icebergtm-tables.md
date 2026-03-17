@@ -219,7 +219,7 @@ This table maps data types between Apache Iceberg™ and Databend. Please note t
 | DATE                                        | [DATE](/tidb-cloud-lake/sql/datetime.md)                           |
 | TIMESTAMP/TIMESTAMPZ                        | [TIMESTAMP](/tidb-cloud-lake/sql/datetime.md)                      |
 | FLOAT                                       | [FLOAT](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) |
-| DOUBLE                                      | [DOUBLE](/tidb-cloud-lake/sql/numeric.md#floating-point-data-type) |
+| DOUBLE                                      | [DOUBLE](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) |
 | STRING/BINARY                               | [STRING](/tidb-cloud-lake/sql/string.md)                           |
 | DECIMAL                                     | [DECIMAL](/tidb-cloud-lake/sql/decimal.md)                         |
 | ARRAY&lt;TYPE&gt;                           | [ARRAY](/tidb-cloud-lake/sql/array.md), supports nesting           |

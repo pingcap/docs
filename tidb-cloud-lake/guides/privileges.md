@@ -6,7 +6,7 @@ A privilege is a permission to perform an action. Users must have specific privi
 
 In Databend, privileges are granted to roles. Users receive privileges through the roles assigned to them.
 
-![Alt text](/img/guides/access-control-2.png)
+![Alt text](/media/tidb-cloud-lake/access-control-2.png)
 
 ## Managing Privileges
 
@@ -208,6 +208,10 @@ Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-databas
 |:----------|:---------------------------------------------------------|
 | SUPER     | SHOW CREATE catalog. Creates or drops a catalog.         |
 | ALL       | Grants all the privileges for the specified object type. |
+
+### Share Privileges
+
+Share privileges can be granted and revoked for share objects using the same SQL privilege model (`GRANT`/`REVOKE`).
 
 ### Connection Privileges
 

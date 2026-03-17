@@ -10,7 +10,7 @@ Performs **INSERT**, **UPDATE**, or **DELETE** operations on rows within a targe
 
 The data source, which can be a subquery, is linked to the target data via a JOIN expression. This expression assesses whether each row in the source can find a match in the target table and then determines which type of clause (MATCHED or NOT MATCHED) it should move to in the next execution step.
 
-![Alt text](/img/sql/merge-into-single-clause.jpeg)
+![Alt text](/media/tidb-cloud-lake/merge-into-single-clause.jpeg)
 
 A MERGE statement usually contains a MATCHED and / or a NOT MATCHED clause, instructing Databend on how to handle matched and unmatched scenarios. For a MATCHED clause, you have the option to choose between performing an **UPDATE** or **DELETE** operation on the target table. Conversely, in the case of a NOT MATCHED clause, the available choice is **INSERT**.
 
@@ -18,7 +18,7 @@ A MERGE statement usually contains a MATCHED and / or a NOT MATCHED clause, inst
 
 A MERGE statement can include multiple MATCHED and / or NOT MATCHED clauses, giving you the flexibility to specify different actions to be taken based on the conditions met during the MERGE operation.
 
-![Alt text](/img/sql/merge-into-multi-clause.jpeg)
+![Alt text](/media/tidb-cloud-lake/merge-into-multi-clause.jpeg)
 
 If a MERGE statement includes multiple MATCHED clauses, a condition needs to be specified for each clause EXCEPT the last one. These conditions determine the criteria under which the associated operations are executed. Databend evaluates the conditions in the specified order. Once a condition is met, it triggers the specified operation, skips any remaining MATCHED clauses, then moves on to the next row in the source. If the MERGE statement also includes multiple NOT MATCHED clauses, Databend handles them in a similar way.
 

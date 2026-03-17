@@ -56,7 +56,7 @@ After Databend Cloud support shares the trusted principal information for your o
 
    Click `Create role`, and select `Custom trust policy` in `Trusted entity type`:
 
-   ![Create Role](/img/cloud/iam/aws/create-role.png)
+   ![Create Role](/media/tidb-cloud-lake/create-role.png)
 
    Input the the trust policy document:
 

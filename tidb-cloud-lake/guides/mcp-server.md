@@ -15,7 +15,7 @@ import DetailsWrap from '@site/src/components/DetailsWrap';
 
 This tutorial shows you how to build a conversational Business Intelligence tool using mcp-databend and the Agno framework. You'll create a local agent that can answer data questions in natural language.
 
-![Databend MCP ChatBI](@site/static/img/connect/databend-mcp-chatbi.png)
+![Databend MCP ChatBI](/media/tidb-cloud-lake/databend-mcp-chatbi.png)
 
 ## Prerequisites
 

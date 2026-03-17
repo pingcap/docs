@@ -32,7 +32,7 @@ We recommend using **Databend Cloud** for the best experience.
 4.  Copy your DSN, which looks like:
     `databend://user:pwd@host:443/database?warehouse=warehouse_name`
 
-![Use with AI Tools](@site/static/img/connect/ai-tools.png)
+![Use with AI Tools](/media/tidb-cloud-lake/ai-tools.png)
 
 ### 2. Configure Your MCP Client
 

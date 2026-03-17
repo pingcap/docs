@@ -12,7 +12,7 @@ This page provides reference information for the query syntax in Databend. Each 
 | **[FROM / JOIN](/tidb-cloud-lake/sql/join.md)** | Specify data sources and combine multiple tables |
 | **[WHERE](/tidb-cloud-lake/sql/select.md#where-clause)** | Filter rows based on conditions |
 | **[GROUP BY](/tidb-cloud-lake/sql/group-by.md)** | Group rows and perform aggregations (SUM, COUNT, AVG, etc.) |
-| **[HAVING](/tidb-cloud-lake/sql/group-by.md#having-clause)** | Filter grouped results |
+| **[HAVING](/tidb-cloud-lake/sql/group-by.md)** | Filter grouped results |
 | **[ORDER BY](/tidb-cloud-lake/sql/select.md#order-by-clause)** | Sort query results |
 | **[LIMIT / TOP](/tidb-cloud-lake/sql/top.md)** | Restrict the number of rows returned |
 

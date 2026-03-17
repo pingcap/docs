@@ -59,7 +59,7 @@ The SQL statements above connect the database `default` in Databend to your Mind
 SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
 ```
 
-![Alt text](/img/integration/mindsdb-verify.png)
+![Alt text](/media/tidb-cloud-lake/integration-mindsdb-verify.png)
 
 ### Step 3. Create a Predictor
 
@@ -100,7 +100,7 @@ WHERE (NO2 = 0.005)
 
 Output:
 
-![Alt text](/img/integration/mindsdb-predict.png)
+![Alt text](/media/tidb-cloud-lake/integration-mindsdb-predict.png)
 
 ## Tutorial-2: Integrating Databend Cloud with MindsDB
 
@@ -146,7 +146,7 @@ parameters={
 ```
 
 :::tip
-The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/sql/warehouse.md#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
+The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
 :::
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
@@ -155,7 +155,7 @@ The SQL statements above connect the database `default` in Databend Cloud to you
 SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
 ```
 
-![Alt text](@site/static/img/documents/BI/mindsdb-verify.png)
+![Alt text](/media/tidb-cloud-lake/bi-mindsdb-verify.png)
 
 ### Step 3. Create a Predictor
 
@@ -196,4 +196,4 @@ WHERE (NO2 = 0.005)
 
 Output:
 
-![Alt text](@site/static/img/documents/BI/mindsdb-predict.png)
+![Alt text](/media/tidb-cloud-lake/bi-mindsdb-predict.png)

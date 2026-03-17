@@ -28,11 +28,11 @@ The dataset "Covid-19 Data from New York Times" is a built-in sample dataset tha
 1. In Databend Cloud, click the **Load Data** button on the **Overview** page.
 2. On the page that opens, choose the **A new table** radio button, and then select **Covid-19 Data from New York Times.CSV** from the **Load sample data** dropdown menu:
 
-![Alt text](@site/static/public/img/cloud/dashboard-1.png)
+![Alt text](/media/tidb-cloud-lake/dashboard-1.png)
 
 3. On the next page, select a database and set a name for the target table to be created.
 
-![Alt text](@site/static/public/img/cloud/dashboard-2.png)
+![Alt text](/media/tidb-cloud-lake/dashboard-2.png)
 
 4. Click **Confirm**. Databend Cloud begins creating the target table and loading the dataset. This process may take a few seconds.
 
@@ -103,7 +103,7 @@ WHERE date = '2022-12-31';
 
 2. Create a scorecard within the worksheet using the query result:
 
-![Alt text](@site/static/public/img/cloud/dashboard-3.gif)
+![Alt text](/media/tidb-cloud-lake/dashboard-3.gif)
 
 </StepContent>
 
@@ -124,7 +124,7 @@ GROUP BY state;
 
 2. Create a pie chart within the worksheet using the query result:
 
-![Alt text](@site/static/public/img/cloud/dashboard-4.gif)
+![Alt text](/media/tidb-cloud-lake/dashboard-4.gif)
 
 </StepContent>
 
@@ -142,7 +142,7 @@ WHERE date = '2022-12-31' AND state = 'Virgin Islands';
 
 2. Create a bar chart within the worksheet using the query result:
 
-![Alt text](@site/static/public/img/cloud/dashboard-5.gif)
+![Alt text](/media/tidb-cloud-lake/dashboard-5.gif)
 
 </StepContent>
 
@@ -174,7 +174,7 @@ WHERE
 
 2. Create a line chart within the worksheet using the query result:
 
-![Alt text](@site/static/public/img/cloud/dashboard-6.gif)
+![Alt text](/media/tidb-cloud-lake/dashboard-6.gif)
 
 </StepContent>
 </StepsWrap>
@@ -185,4 +185,4 @@ WHERE
 
 2. Drag and drop the charts from the left onto the dashboard. You can resize or reposition a chart as needed.
 
-![Alt text](@site/static/public/img/cloud/dashboard-7.gif)
+![Alt text](/media/tidb-cloud-lake/dashboard-7.gif)

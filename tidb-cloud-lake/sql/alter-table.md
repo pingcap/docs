@@ -232,7 +232,7 @@ ALTER TABLE t COMMENT = 'new-comment';
 
 ## Fuse Engine Options {#fuse-engine-options}
 
-Sets or unsets [Fuse Engine options](/tidb-cloud-lake/sql/table-engines.md#fuse-engine-options) for a table.
+Sets or unsets [Fuse Engine options](/tidb-cloud-lake/sql/table-engines.md#available-engines) for a table.
 
 ### Syntax
 

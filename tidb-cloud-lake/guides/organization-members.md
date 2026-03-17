@@ -14,9 +14,9 @@ Please note that data is not shared across organizations, and organizations cann
 
 ### Creating an Organization
 
-When you provide an organization name during the signup process, you create an organization in Databend Cloud with your account as an Admin account. You will also need to select a pricing plan, a cloud provider, and a region for the new organization. For more information, see [Getting Started](../tidb-cloud-lake/lake-quick-start.md).
+When you provide an organization name during the signup process, you create an organization in Databend Cloud with your account as an Admin account. You will also need to select a pricing plan, a cloud provider, and a region for the new organization. For more information, see [Getting Started](/tidb-cloud-lake/lake-quick-start.md).
 
-![](@site/static/img/documents/getting-started/01.jpg)
+![](/media/tidb-cloud-lake/sign-up.jpg)
 
 :::tip
 If you're invited by a user who already belongs to an organization in Databend Cloud, the textbox will show that organization's name. In this case, you cannot create another organization.
@@ -26,7 +26,7 @@ If you're invited by a user who already belongs to an organization in Databend C
 
 If you're a Databend Cloud user who has accepted invitations from multiple organizations, you can switch between these organizations by clicking on the organization name in the top left corner of the page and selecting the organization you want to switch to.
 
-![Alt text](@site/static/img/documents/overview/switch-org.gif)
+![Alt text](/media/tidb-cloud-lake/switch-org.gif)
 
 ## Managing Members
 
@@ -47,9 +47,9 @@ To invite a new member to your organization, navigate to the **Admin** > **Users
 
 An invitation email will be sent to the invited user. Inside the email, there will be a link that the user can click on to initiate the signup process.
 
-![Alt text](@site/static/img/documents/overview/invite.png)
+![Alt text](/media/tidb-cloud-lake/invite.png)
 
-![Alt text](@site/static/img/documents/overview/invite2.png)
+![Alt text](/media/tidb-cloud-lake/invite2.png)
 
 :::note
 

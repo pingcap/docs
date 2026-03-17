@@ -4,7 +4,7 @@ description: Funnel Analysis
 ---
 
 <p align="center">
-<img alt="Databend Funnel Analysis" src="https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/learn/databend-funnel.png" width="550"/>
+<img alt="Databend Funnel Analysis" src="/media/tidb-cloud-lake/remote-7db0f18fbe80-databend-funnel.png" width="550"/>
 </p>
 
 ## WINDOW_FUNNEL

@@ -64,7 +64,7 @@ Databend automatically generates a transaction ID for each transaction. This ID 
 
 If you're on Databend Cloud, you can find the transaction IDs on **Monitor** > **SQL History**:
 
-![alt text](../../../../../../static/img/documents/sql/transaction-id.png)
+![alt text](/media/tidb-cloud-lake/transaction-id.png)
 
 In the **Transaction** column, you can also see the transaction status of SQL statements during execution:
 

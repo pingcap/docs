@@ -14,7 +14,7 @@ The warehouse is an essential component of Databend Cloud. A warehouse represent
 - Modifying data with the INSERT, UPDATE, or DELETE statement
 - Loading data into a table with the COPY INTO command
 
-Running a warehouse incurs expenses. For more information, see [Warehouse Pricing](/tidb-cloud-lake/guides/pricing-billing.md#warehouse-pricing).
+Running a warehouse incurs expenses. For more information, see [Warehouse Pricing](/tidb-cloud-lake/guides/pricing-billing.md).
 
 ## Warehouse Sizes
 
@@ -47,7 +47,7 @@ A suspended warehouse does not consume any credits. You can manually suspend or 
 
 You can perform bulk operations on warehouses, including bulk restart, bulk suspend, bulk resume, and bulk delete. To do so, select the warehouses for bulk operations by checking the checkboxes <CheckboxSVG/> in the warehouse list, and then click the ellipse button <EllipsisSVG/> for the desired operation.
 
-![alt text](@site/static/img/cloud/bulk.gif)
+![alt text](/media/tidb-cloud-lake/bulk.gif)
 
 ### Best Practices
 
@@ -99,11 +99,11 @@ Warehouse access control is _not_ enabled out of the box. To enable it, go to **
 
 To assign a role to a warehouse, select the desired role in the **Advanced Options** during the warehouse creation or modification process:
 
-![alt text](@site/static/img/documents/warehouses/warehouse-role.png)
+![alt text](/media/tidb-cloud-lake/warehouse-role.png)
 
 - The two [Built-in Roles](/tidb-cloud-lake/guides/roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about Databend roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
 - Warehouses without an assigned role default to the `public` role, allowing access to all users.
-- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](/tidb-cloud-lake/guides/warehouse.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
+- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](/tidb-cloud-lake/guides/organization-members.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
 
   ```sql title='Examples:'
   GRANT ROLE manager to 'name@example.com';
@@ -123,13 +123,13 @@ By default, a warehouse consists of a single cluster of compute resources, which
 
 When the number of concurrent queries exceeds the capacity of your warehouse, an additional cluster is added to handle the extra load. If the demand continues to grow, more clusters are added one by one. As query demand decreases, clusters with no activity for longer than the **Auto Suspend** duration are automatically shut down.
 
-![alt text](@site/static/img/cloud/multi-cluster-how-it-works.png)
+![alt text](/media/tidb-cloud-lake/multi-cluster-how-it-works.png)
 
 ### Enabling Multi-Cluster
 
 You can enable Multi-Cluster for a warehouse when you create it and set the maximum number of clusters that the warehouse can scale up to. Please note that if Multi-Cluster is enabled for a warehouse, the **Auto Suspend** duration must be set to at least 15 minutes.
 
-![alt text](@site/static/img/cloud/multi-cluster.png)
+![alt text](/media/tidb-cloud-lake/multi-cluster.png)
 
 ### Cost Calculation
 
@@ -170,7 +170,7 @@ To obtain the connection information for a warehouse:
 2. Select the database and warehouse you wish to connect to. The connection information will update based on your selection.
 3. The connection details include a SQL user named `cloudapp` with a randomly generated password. Databend Cloud does not store this password. Be sure to copy and save it securely. If you forget the password, click **Reset** to generate a new one.
 
-![alt text](@site/static/img/documents/warehouses/databend_cloud_dsn.gif)
+![alt text](/media/tidb-cloud-lake/databend_cloud_dsn.gif)
 
 ### Connection String Format
 

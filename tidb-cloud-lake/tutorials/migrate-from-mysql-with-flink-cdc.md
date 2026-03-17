@@ -179,7 +179,7 @@ taskmanager.memory.process.size: 4096m
 
 You can now open the Apache Flink Dashboard if you go to [http://localhost:8081](http://localhost:8081) in your browser:
 
-![Alt text](/img/load/cdc-dashboard.png)
+![Alt text](/media/tidb-cloud-lake/cdc-dashboard.png)
 
 ## Step 5: Start Migration
 
@@ -279,7 +279,7 @@ Job ID: 5b505d752b7c211cbdcb5566175b9182
 
 You can now see a running job in the Apache Flink Dashboard:
 
-![Alt text](/img/load/cdc-job.png)
+![Alt text](/media/tidb-cloud-lake/cdc-job.png)
 
 You're all set! If you go back to the BendSQL terminal and query the **products** table in Databend Cloud, you will see that the data from MySQL has been successfully synchronized:
 

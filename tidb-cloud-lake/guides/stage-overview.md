@@ -34,7 +34,7 @@ An external stage enables you to specify an object storage location outside of w
 
 Below is an example of creating an external stage. Let's say you have datasets in an Amazon S3 bucket named `databend-doc`:
 
-![alt text](/img/guides/external-stage.png)
+![alt text](/media/tidb-cloud-lake/external-stage.png)
 
 You can create an external stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command to connect Databend to that bucket:
 

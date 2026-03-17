@@ -114,11 +114,11 @@ root@localhost:8000/book_db> SELECT * FROM books;
 
 ## Tutorial 2 - Load into Specified Columns
 
-In [Tutorial 1](#tutorial-1---load-from-a-csv-file), you created a table containing three columns that exactly match the data in the sample file. You can also load data into specified columns of a table, so the table does not need to have the same columns as the data to be loaded as long as the specified columns can match. This tutorial shows how to do that.
+In [Tutorial 1](#tutorial-1---load-from-a-local-file), you created a table containing three columns that exactly match the data in the sample file. You can also load data into specified columns of a table, so the table does not need to have the same columns as the data to be loaded as long as the specified columns can match. This tutorial shows how to do that.
 
 ### Before You Begin
 
-Before you start this tutorial, make sure you have completed [Tutorial 1](#tutorial-1---load-from-a-csv-file).
+Before you start this tutorial, make sure you have completed [Tutorial 1](#tutorial-1---load-from-a-local-file).
 
 ### Step 1. Create Table
 

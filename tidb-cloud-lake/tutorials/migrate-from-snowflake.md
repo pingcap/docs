@@ -8,7 +8,7 @@ sidebar_label: Snowflake → Databend
 
 This tutorial walks you through the process of migrating your data from Snowflake to Databend. The migration involves exporting data from Snowflake to an Amazon S3 bucket and then loading it into Databend. The process is broken down into three main steps:
 
-![alt text](@site/static/img/load/snowflake-databend.png)
+![alt text](/media/tidb-cloud-lake/snowflake-databend.png)
 
 In this tutorial, we'll walk you through the process of exporting data from Snowflake in Parquet format to an Amazon S3 bucket, and then loading it into Databend Cloud.
 
@@ -68,7 +68,7 @@ This policy applies to the S3 bucket named `databend-doc` and specifically to th
 2. Create a role named `databend-doc-role` on **IAM** > **Roles** and attach the policy we created.
     - In the first step of creating the role, select **AWS account** for **Trusted entity type**, and **This account (xxxxx)** for **An AWS account**.
 
-    ![alt text](../../../../static/img/documents/tutorials/trusted-entity.png)
+    ![alt text](/media/tidb-cloud-lake/trusted-entity.png)
 
     - After the role is created, copy and save the role ARN in a secure location, for example, `arn:aws:iam::123456789012:role/databend-doc-role`.
     - We'll update the **Trust Relationships** for the role later, after we obtain the IAM user ARN for the Snowflake account.
@@ -152,7 +152,7 @@ COPY INTO @my_external_stage/my_table_data_
 
 If you open the bucket `databend-doc` now, you should see a Parquet file in the `snowflake` folder:
 
-![alt text](../../../../static/img/documents/tutorials/bucket-folder.png)
+![alt text](/media/tidb-cloud-lake/bucket-folder.png)
 
 ## Step 3: Loading Data into Databend Cloud
 

@@ -6,7 +6,7 @@ sidebar_label: Architecture
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-![Alt text](@site/static/img/documents/overview/2.png)
+![TiDB Cloud Lake Architecture](/media/tidb-cloud-lake/architecture.png)
 
 <Tabs groupId="databendlay">
 <TabItem value="Meta-Service Layer" label="Meta-Service Layer">

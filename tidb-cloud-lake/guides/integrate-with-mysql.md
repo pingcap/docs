@@ -61,7 +61,7 @@ Ensure the MySQL instance is accessible from Databend Cloud. Check your firewall
 | **DB Charset**  | No       | Character set (default: utf8mb4)                                            |
 | **Server ID**   | No       | Unique binlog replication identifier. Auto-generated if not provided        |
 
-![Create MySQL Data Source](/img/cloud/dataintegration/databendcloud-dataintegration-create-mysql-source.png)
+![Create MySQL Data Source](/media/tidb-cloud-lake/databendcloud-dataintegration-create-mysql-source.png)
 
 3. Click **Test Connectivity** to verify the connection. If the test succeeds, click **OK** to save the data source.
 
@@ -71,7 +71,7 @@ Ensure the MySQL instance is accessible from Databend Cloud. Check your firewall
 
 1. Navigate to **Data** > **Data Integration** and click **Create Task**.
 
-![Data Integration Page](/img/cloud/dataintegration/dataintegration-page-with-create-button.png)
+![Data Integration Page](/media/tidb-cloud-lake/dataintegration-page-with-create-button.png)
 
 2. Configure the basic settings:
 
@@ -87,7 +87,7 @@ Ensure the MySQL instance is accessible from Databend Cloud. Check your firewall
 | **Batch Size**            | No          | Number of rows per batch                                                                         |
 | **Allow Delete**          | No          | Whether to permit DELETE operations in CDC. Available for CDC Only and Snapshot + CDC modes       |
 
-![Create Task - Basic Info](/img/cloud/dataintegration/create-mysql-task-step1-basic-info.png)
+![Create Task - Basic Info](/media/tidb-cloud-lake/create-mysql-task-step1-basic-info.png)
 
 #### Snapshot Mode Options
 
@@ -108,7 +108,7 @@ When using **Snapshot** mode, additional options are available:
 
 After configuring the basic settings, click **Next** to preview the source data.
 
-![Preview Data](/img/cloud/dataintegration/create-mysql-task-preview-data-step.png)
+![Preview Data](/media/tidb-cloud-lake/create-mysql-task-preview-data-step.png)
 
 The system fetches a sample row from the selected MySQL table and displays the column names and data types. Review the data to ensure the correct table and columns are selected before proceeding.
 
@@ -122,7 +122,7 @@ Configure the destination in Databend:
 | **Target Database** | Choose the target database in Databend                             |
 | **Target Table**    | The table name in Databend (defaults to the source table name)     |
 
-![Set Target Table](/img/cloud/dataintegration/dataintegration-mysql-set-target-table.png)
+![Set Target Table](/media/tidb-cloud-lake/dataintegration-mysql-set-target-table.png)
 
 The system automatically maps source columns to the target table schema. Review the column mappings, then click **Create** to finalize the integration task.
 

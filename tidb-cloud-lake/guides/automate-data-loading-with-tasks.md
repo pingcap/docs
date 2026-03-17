@@ -5,7 +5,7 @@ sidebar_label: Task
 
 Tasks wrap SQL so Databend can run it for you on a schedule or when a condition is met. Keep the following knobs in mind when you define one with [CREATE TASK](/tidb-cloud-lake/sql/create-task.md):
 
-![alt text](/img/load/task.png)
+![alt text](/media/tidb-cloud-lake/task.png)
 
 - **Name & warehouse** – every task needs a warehouse.
     ```sql

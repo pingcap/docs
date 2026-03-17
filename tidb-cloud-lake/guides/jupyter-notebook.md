@@ -56,13 +56,13 @@ jupyter notebook
 
 This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: http://localhost:8888/tree
 
-![Alt text](/img/integration/notebook-tree.png)
+![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
 
 2. On the **Files** tab, navigate to the sample notebook you downloaded and open it.
 
 3. In the sample notebook, run the cells sequentially. By doing so, you create a table containing 5 rows in your local Databend, and visualize the data with a bar chart.
 
-![Alt text](/img/integration/integration-gui-jupyter.png)
+![Alt text](/media/tidb-cloud-lake/integration-gui-jupyter.png)
 
 ## Tutorial-2: Integrating Databend with Jupyter Notebook using ipython-sql
 
@@ -111,7 +111,7 @@ jupyter notebook
 
 This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: http://localhost:8888/tree
 
-![Alt text](/img/integration/notebook-tree.png)
+![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
 
 2. Select **New** > **Python 3** to create a notebook.
 
@@ -145,7 +145,7 @@ df.plot.bar(x='date', y='count')
 
 You can now see a bar chart on the notebook:
 
-![Alt text](/img/integration/jupyter-ipython-sql.png)
+![Alt text](/media/tidb-cloud-lake/jupyter-ipython-sql.png)
 
 ## Tutorial-3: Integrating Databend with Jupyter Notebook with Python Binding Library
 
@@ -178,7 +178,7 @@ jupyter notebook
 
 This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: http://localhost:8888/tree
 
-![Alt text](/img/integration/notebook-tree.png)
+![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
 
 2. Select **New** > **Python 3** to create a notebook.
 
@@ -226,7 +226,7 @@ plt.show()
 
 You can now see a bar chart on the notebook:
 
-![Alt text](/img/integration/localhost_8888_notebooks_Untitled.ipynb.png)
+![Alt text](/media/tidb-cloud-lake/localhost_8888_notebooks_Untitled.ipynb.png)
 
 ## Tutorial-4: Integrating Databend Cloud with Jupyter Notebook using ipython-sql
 
@@ -263,7 +263,7 @@ jupyter notebook
 
 This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: http://localhost:8888/tree
 
-![Alt text](@site/static/img/documents/pricing-billing/notebook-tree.png)
+![Alt text](/media/tidb-cloud-lake/pricing-billing-notebook-tree.png)
 
 2. Select **New** > **Python 3** to create a notebook.
 
@@ -301,4 +301,4 @@ plt.show()
 
 You can now see a bar chart on the notebook:
 
-![Alt text](@site/static/img/documents/BI/jupyter-bar.png)
+![Alt text](/media/tidb-cloud-lake/jupyter-bar.png)

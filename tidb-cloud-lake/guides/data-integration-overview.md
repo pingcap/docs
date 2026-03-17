@@ -30,7 +30,7 @@ An integration task defines how data flows from a source to a target table in Da
 
 ## Managing Data Sources
 
-![Data Sources Overview](/img/cloud/dataintegration/databendcloud-dataintegration-datasource-overview.png)
+![Data Sources Overview](/media/tidb-cloud-lake/databendcloud-dataintegration-datasource-overview.png)
 
 To manage data sources, navigate to **Data** > **Data Sources** from the left sidebar. From this page you can:
 
@@ -49,7 +49,7 @@ It is recommended to always test the connection before saving a data source. Thi
 
 After creation, a task is in a **Stopped** state. To begin data synchronization, click the **Start** button on the task.
 
-![Task List](/img/cloud/dataintegration/dataintegration-task-list-with-action-button.png)
+![Task List](/media/tidb-cloud-lake/dataintegration-task-list-with-action-button.png)
 
 To stop a running task, click the **Stop** button. The task will gracefully shut down and save its progress.
 
@@ -71,7 +71,7 @@ Click on a task to view its execution history. The run history includes:
 - Number of rows synced
 - Error details (if any)
 
-![Run History](/img/cloud/dataintegration/dataintegration-run-history-page.png)
+![Run History](/media/tidb-cloud-lake/dataintegration-run-history-page.png)
 
 ## Video Tour
 

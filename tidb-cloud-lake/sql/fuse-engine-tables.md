@@ -121,7 +121,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 - **Syntax:**
   `change_tracking = True / False`
 - **Description:**
-  Setting this option to `True` in the Fuse Engine allows for tracking changes for a table. Creating a stream for a table will automatically set `change_tracking` to `True` and introduce additional hidden columns to the table as change tracking metadata. For more information, see [How Stream Works](/tidb-cloud-lake/sql/stream.md#how-stream-works).
+  Setting this option to `True` in the Fuse Engine allows for tracking changes for a table. Creating a stream for a table will automatically set `change_tracking` to `True` and introduce additional hidden columns to the table as change tracking metadata. For more information, see [How Stream Works](/tidb-cloud-lake/sql/stream.md#stream-management).
 
 ---
 

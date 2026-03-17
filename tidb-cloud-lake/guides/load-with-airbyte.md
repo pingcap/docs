@@ -3,7 +3,7 @@ title: Airbyte
 ---
 
 <p align="center">
-<img alt="Airbyte" src="/img/integration/integration-airbyte.png"/>
+<img alt="Airbyte" src="/media/tidb-cloud-lake/integration-airbyte.png"/>
 </p>
 
 ## What is [Airbyte](https://airbyte.com/)?
@@ -62,7 +62,7 @@ You could add the destination in Settings -> Destinations -> Custom Destinations
 Our custom destination image is `datafuselabs/destination-databend:alpha`
 
 <p align="center">
-<img alt="Configure Airbyte" src="/img/integration/integration-airbyte-plugins.png"/>
+<img alt="Configure Airbyte" src="/media/tidb-cloud-lake/integration-airbyte-plugins.png"/>
 </p>
 
 ## Setup Databend destination
@@ -74,7 +74,7 @@ For local airbyte, you could not connect docker compose with your localhost netw
 You may take a look at [ngrok](https://ngrok.com/) to tunnel your service(**NEVER** expose it on your production environment).
 
 <p align="center">
-<img alt="Setup Databend destination" src="/img/integration/integration-airbyte-destinations.png"/>
+<img alt="Setup Databend destination" src="/media/tidb-cloud-lake/integration-airbyte-destinations.png"/>
 </p>
 
 ## Test your integration

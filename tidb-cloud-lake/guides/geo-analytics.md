@@ -106,7 +106,7 @@ FRAME-0102| VID-20250101-001 | pedestrian | 180.277138577
 FRAME-0101| VID-20250101-001 | hard_brake | 324.291965923
 ```
 
-Tip: add `ST_ASTEXT(l.geom)` while debugging or switch to [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#trigonometric-distance-functions) for great-circle math.
+Tip: add `ST_ASTEXT(l.geom)` while debugging or switch to [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#distance--measurements) for great-circle math.
 
 ```sql
 WITH school_zone AS (
