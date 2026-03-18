@@ -1,6 +1,6 @@
 ---
 title: Unloading TSV File
-summary: Syntax.
+summary: Learn about how to unload TSV files.
 ---
 ## Unloading TSV File
 

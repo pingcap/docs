@@ -1,6 +1,6 @@
 ---
 title: Unloading CSV File
-summary: Syntax.
+summary: Learn about how to unload CSV files.
 ---
 ## Unloading CSV File
 
