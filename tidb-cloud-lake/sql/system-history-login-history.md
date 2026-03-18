@@ -1,6 +1,6 @@
 ---
 title: system_history.login_history
-summary: Login successful example: ```sql SELECT * FROM system_history.login_history LIMIT 1;.
+summary: Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

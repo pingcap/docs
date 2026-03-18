@@ -1,6 +1,6 @@
 ---
 title: Unloading CSV File
-summary: Syntax:.
+summary: Syntax.
 ---
 ## Unloading CSV File
 

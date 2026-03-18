@@ -1,6 +1,6 @@
 ---
 title: Unloading NDJSON File
-summary: Syntax:.
+summary: Syntax.
 ---
 ## Unloading TSV File
 

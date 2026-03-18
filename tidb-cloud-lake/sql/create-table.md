@@ -1,6 +1,6 @@
 ---
 title: CREATE TABLE
-summary: Creating tables is one of the most complicated operations for many databases because you might need to:.
+summary: Creating tables is one of the most complicated operations for many databases because you might need to.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

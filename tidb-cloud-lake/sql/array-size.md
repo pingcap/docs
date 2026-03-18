@@ -1,6 +1,6 @@
 ---
 title: ARRAY_SIZE
-summary: Returns the length of an array, counting `NULL` elements.
+summary: Returns the length of an array, counting NULL elements.
 ---
 Returns the length of an array, counting `NULL` elements.
 

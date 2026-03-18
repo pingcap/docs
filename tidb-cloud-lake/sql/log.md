@@ -1,6 +1,6 @@
 ---
 title: LOG10
-summary: Returns the base-10 logarithm of `x`. If `x` is less than or equal to 0.0E0, the function returns NULL.
+summary: Returns the base-10 logarithm of x. If x is less than or equal to 0.0E0, the function returns NULL.
 ---
 Returns the base-10 logarithm of `x`. If `x` is less than or equal to 0.0E0, the function returns NULL.
 

@@ -1,6 +1,6 @@
 ---
 title: ARRAY_TO_STRING
-summary: Concatenates the string elements of an array into a single string, separated by a delimiter. `NULL` elements are skipped.
+summary: Concatenates the string elements of an array into a single string, separated by a delimiter. NULL elements are skipped.
 ---
 Concatenates the string elements of an array into a single string, separated by a delimiter. `NULL` elements are skipped.
 

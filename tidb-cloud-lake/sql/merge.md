@@ -1,6 +1,6 @@
 ---
 title: MERGE
-summary: Performs **INSERT**, **UPDATE**, or **DELETE** operations on rows within a target table, all in accordance with conditions and matching criteria specified within the statement, using data from a specified source.
+summary: Performs INSERT, UPDATE, or DELETE operations on rows within a target table, all in accordance with conditions and matching criteria specified within the statement, using data from a specified source.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,6 +1,6 @@
 ---
 title: Unloading Parquet File
-summary: Syntax:.
+summary: Syntax.
 ---
 ## Unloading Parquet File
 

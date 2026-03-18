@@ -1,6 +1,6 @@
 ---
 title: ALTER VIEW
-summary: Alter the existing view by using another `QUERY`.
+summary: Alter the existing view by using another QUERY.
 ---
 Alter the existing view by using another `QUERY`.
 

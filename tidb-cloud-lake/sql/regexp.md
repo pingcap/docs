@@ -1,6 +1,6 @@
 ---
 title: REGEXP
-summary: Returns `true` if the string `<expr>` matches the regular expression specified by the `<pattern>`, `false` otherwise.
+summary: Returns true if the string <expr> matches the regular expression specified by the <pattern>, false otherwise.
 ---
 Returns `true` if the string `<expr>` matches the regular expression specified by the `<pattern>`, `false` otherwise.
 

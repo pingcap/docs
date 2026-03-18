@@ -1,6 +1,6 @@
 ---
 title: GET_BY_KEYPATH
-summary: Extracts a nested value from a `VARIANT` using a **key path** string. `GET_BY_KEYPATH` returns the result as `VARIANT`, while `GET_BY_KEYPATH_STRING` returns a `STRING`.
+summary: Extracts a nested value from a VARIANT using a key path string. GET_BY_KEYPATH returns the result as VARIANT, while GET_BY_KEYPATH_STRING returns a STRING.
 ---
 Extracts a nested value from a `VARIANT` using a **key path** string. `GET_BY_KEYPATH` returns the result as `VARIANT`, while `GET_BY_KEYPATH_STRING` returns a `STRING`.
 

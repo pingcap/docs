@@ -1,6 +1,6 @@
 ---
 title: ARRAY_SKEWNESS
-summary: Returns the skewness of numeric values in an array. `NULL` items are ignored; non-numeric items raise an error.
+summary: Returns the skewness of numeric values in an array. NULL items are ignored; non-numeric items raise an error.
 ---
 Returns the skewness of numeric values in an array. `NULL` items are ignored; non-numeric items raise an error.
 

@@ -1,6 +1,6 @@
 ---
 title: Geospatial
-summary: Databend stores spatial data through two data types:.
+summary: Databend stores spatial data through two data types.
 ---
 Databend stores spatial data through two data types:
 

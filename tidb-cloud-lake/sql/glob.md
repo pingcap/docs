@@ -1,6 +1,6 @@
 ---
 title: GLOB
-summary: Performs case-sensitive pattern matching using wildcard characters:.
+summary: Performs case-sensitive pattern matching using wildcard characters.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

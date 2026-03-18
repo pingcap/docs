@@ -1,6 +1,6 @@
 ---
 title: DEGREES
-summary: Returns the argument `x`, converted from radians to degrees, where `x` is given in radians.
+summary: Returns the argument x, converted from radians to degrees, where x is given in radians.
 ---
 Returns the argument `x`, converted from radians to degrees, where `x` is given in radians.
 

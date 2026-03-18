@@ -1,6 +1,6 @@
 ---
 title: ARRAY_MAX
-summary: Returns the largest numeric value in an array. `NULL` elements are skipped; non-numeric values cause an error.
+summary: Returns the largest numeric value in an array. NULL elements are skipped; non-numeric values cause an error.
 ---
 Returns the largest numeric value in an array. `NULL` elements are skipped; non-numeric values cause an error.
 

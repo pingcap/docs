@@ -1,6 +1,6 @@
 ---
 title: System History Tables
-summary: Databend's system history tables provide **Data Governance** capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
+summary: Databend's system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
 ---
 import EEFeature from '@site/src/components/EEFeature';
 import DetailsWrap from '@site/src/components/DetailsWrap';

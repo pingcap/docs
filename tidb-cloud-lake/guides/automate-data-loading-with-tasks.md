@@ -1,6 +1,6 @@
 ---
 title: Automating Data Loading with Tasks
-summary: Tasks wrap SQL so Databend can run it for you on a schedule or when a condition is met. Keep the following knobs in mind when you define one with CREATE TASK:.
+summary: Tasks wrap SQL so Databend can run it for you on a schedule or when a condition is met. Keep the following knobs in mind when you define one with CREATE TASK.
 ---
 Tasks wrap SQL so Databend can run it for you on a schedule or when a condition is met. Keep the following knobs in mind when you define one with [CREATE TASK](/tidb-cloud-lake/sql/create-task.md):
 

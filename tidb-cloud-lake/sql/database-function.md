@@ -1,6 +1,6 @@
 ---
 title: DATABASE
-summary: Returns the name of the currently selected database. If no database is selected, then this function returns `default`.
+summary: Returns the name of the currently selected database. If no database is selected, then this function returns default.
 ---
 Returns the name of the currently selected database. If no database is selected, then this function returns `default`.
 

@@ -1,6 +1,6 @@
 ---
 title: Ngram Index
-summary: Ngram indexes accelerate pattern matching queries using the `LIKE` operator with wildcards (`%`), enabling fast substring searches without full table scans.
+summary: Ngram indexes accelerate pattern matching queries using the LIKE operator with wildcards (%), enabling fast substring searches without full table scans.
 ---
 # Ngram Index: Fast Pattern Matching for LIKE Queries
 

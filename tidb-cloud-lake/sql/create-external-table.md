@@ -1,6 +1,6 @@
 ---
 title: CREATE EXTERNAL TABLE
-summary: The `CREATE TABLE ... CONNECTION = (...)` statement creates a table and specifies an S3-compatible storage bucket for data storage instead of using the default local storage.
+summary: The CREATE TABLE... CONNECTION = (...) statement creates a table and specifies an S3-compatible storage bucket for data storage instead of using the default local storage.
 ---
 The `CREATE TABLE ... CONNECTION = (...)` statement creates a table and specifies an S3-compatible storage bucket for data storage instead of using the default local storage.
 

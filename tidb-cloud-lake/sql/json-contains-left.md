@@ -1,6 +1,6 @@
 ---
 title: JSON_CONTAINS_IN_LEFT
-summary: Tests containment relationships between two `VARIANT` values:.
+summary: Tests containment relationships between two VARIANT values.
 ---
 Tests containment relationships between two `VARIANT` values:
 

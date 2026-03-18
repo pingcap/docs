@@ -1,6 +1,6 @@
 ---
 title: DROP FUNCTION
-summary: Drops a user-defined function. Works with all function types: Scalar SQL, Tabular SQL, and Embedded functions.
+summary: Drops a user-defined function. Works with all function types Scalar SQL, Tabular SQL, and Embedded functions.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

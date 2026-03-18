@@ -1,6 +1,6 @@
 ---
 title: ALTER USER
-summary: Modifies a user account, including:.
+summary: Modifies a user account, including.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

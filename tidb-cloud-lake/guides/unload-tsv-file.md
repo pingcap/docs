@@ -1,6 +1,6 @@
 ---
 title: Unloading TSV File
-summary: Syntax:.
+summary: Syntax.
 ---
 ## Unloading TSV File
 

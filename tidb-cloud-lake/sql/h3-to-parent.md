@@ -1,6 +1,6 @@
 ---
 title: H3_TO_PARENT
-summary: Returns the parent index containing the `h3` at resolution `parent_res`. Returning 0 means an error occurred.
+summary: Returns the parent index containing the h3 at resolution parent_res. Returning 0 means an error occurred.
 ---
 Returns the parent index containing the `h3` at resolution `parent_res`. Returning 0 means an error occurred.
 

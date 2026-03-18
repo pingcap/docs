@@ -1,6 +1,6 @@
 ---
 title: ARG_MIN
-summary: Calculates the `arg` value for a minimum `val` value. If there are several different values of `arg` for minimum values of `val`, returns the first of these values encountered.
+summary: Calculates the arg value for a minimum val value. If there are several different values of arg for minimum values of val, returns the first of these values encountered.
 ---
 Calculates the `arg` value for a minimum `val` value. If there are several different values of `arg` for minimum values of `val`, returns the first of these values encountered.
 

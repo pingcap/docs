@@ -1,6 +1,6 @@
 ---
 title: system_history.access_history
-summary: The fields `base_objects_accessed`, `objects_modified`, and `object_modified_by_ddl` are all arrays of JSON objects. Each object may include the following fields:.
+summary: The fields base_objects_accessed, objects_modified, and object_modified_by_ddl are all arrays of JSON objects. Each object may include the following fields.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

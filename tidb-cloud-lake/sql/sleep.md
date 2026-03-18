@@ -1,6 +1,6 @@
 ---
 title: SLEEP
-summary: Sleeps `seconds` seconds on each data block.
+summary: Sleeps seconds seconds on each data block.
 ---
 Sleeps `seconds` seconds on each data block.
 

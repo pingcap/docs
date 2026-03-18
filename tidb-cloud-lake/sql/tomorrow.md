@@ -1,6 +1,6 @@
 ---
 title: TOMORROW
-summary: Returns tomorrow date, same as `today() + 1`.
+summary: Returns tomorrow date, same as today() + 1.
 ---
 Returns tomorrow date, same as `today() + 1`.
 

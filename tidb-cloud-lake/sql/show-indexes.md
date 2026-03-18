@@ -1,6 +1,6 @@
 ---
 title: SHOW INDEXES
-summary: Shows the created indexes. Equivalent to `SELECT * FROM system.indexes`.
+summary: Shows the created indexes. Equivalent to SELECT * FROM system.indexes.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

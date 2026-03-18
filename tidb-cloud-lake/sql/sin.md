@@ -1,6 +1,6 @@
 ---
 title: SIN
-summary: Returns the sine of `x`, where `x` is given in radians.
+summary: Returns the sine of x, where x is given in radians.
 ---
 Returns the sine of `x`, where `x` is given in radians.
 

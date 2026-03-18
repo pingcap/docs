@@ -1,6 +1,6 @@
 ---
 title: UNPIVOT
-summary: The `UNPIVOT` operation rotates a table by transforming columns into rows.
+summary: The UNPIVOT operation rotates a table by transforming columns into rows.
 ---
 The `UNPIVOT` operation rotates a table by transforming columns into rows. 
 

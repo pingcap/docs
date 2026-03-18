@@ -1,6 +1,6 @@
 ---
 title: TO_DATE
-summary: Converts an expression to a date, including:.
+summary: Converts an expression to a date, including.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

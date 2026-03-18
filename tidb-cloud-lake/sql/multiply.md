@@ -1,6 +1,6 @@
 ---
 title: MULTIPLY
-summary: The MULTIPLY function performs multiplication between two numbers. It is equivalent to using the `*` operator.
+summary: The MULTIPLY function performs multiplication between two numbers. It is equivalent to using the * operator.
 ---
 The MULTIPLY function performs multiplication between two numbers. It is equivalent to using the `*` operator.
 

@@ -1,6 +1,6 @@
 ---
 title: Monitoring Usage
-summary: Databend Cloud provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the **Monitor** page, click **Monitor** in the sidebar menu on the homepage. The page includes the following tabs:.
+summary: Databend Cloud provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the Monitor page, click Monitor in the sidebar menu on the homepage. The page includes the following tabs.
 ---
 Databend Cloud provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the **Monitor** page, click **Monitor** in the sidebar menu on the homepage. The page includes the following tabs:
 

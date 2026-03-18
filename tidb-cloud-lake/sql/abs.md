@@ -1,6 +1,6 @@
 ---
 title: ABS
-summary: Returns the absolute value of `x`.
+summary: Returns the absolute value of x.
 ---
 Returns the absolute value of `x`.
 

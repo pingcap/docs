@@ -1,6 +1,6 @@
 ---
 title: Multimodal Data Analytics
-summary: CityDrive Intelligence records video of every drive. Background processing tools split the video stream into keyframe images, extracting rich multimodal information from each image and storing it by `video_id`. These signals include relational metadata, JSON manifests, behavior tags, vector embeddings, and GPS traces.
+summary: CityDrive Intelligence records video of every drive. Background processing tools split the video stream into keyframe images, extracting rich multimodal information from each image and storing it by video_id. These signals include relational metadata, JSON manifests, behavior tags, vector embeddings, and GPS traces.
 ---
 CityDrive Intelligence records video of every drive. Background processing tools split the video stream into keyframe images, extracting rich multimodal information from each image and storing it by `video_id`. These signals include relational metadata, JSON manifests, behavior tags, vector embeddings, and GPS traces.
 

@@ -1,6 +1,6 @@
 ---
 title: ALTER FUNCTION
-summary: Alters a user-defined function. Supports all function types: Scalar SQL, Tabular SQL, and Embedded functions.
+summary: Alters a user-defined function. Supports all function types Scalar SQL, Tabular SQL, and Embedded functions.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

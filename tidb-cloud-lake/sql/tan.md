@@ -1,6 +1,6 @@
 ---
 title: TAN
-summary: Returns the tangent of `x`, where `x` is given in radians.
+summary: Returns the tangent of x, where x is given in radians.
 ---
 Returns the tangent of `x`, where `x` is given in radians.
 

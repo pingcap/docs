@@ -1,6 +1,6 @@
 ---
 title: GRANT
-summary: Grants privileges, roles, and ownership for a specific database object. This includes:.
+summary: Grants privileges, roles, and ownership for a specific database object. This includes.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

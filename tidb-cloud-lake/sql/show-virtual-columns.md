@@ -1,6 +1,6 @@
 ---
 title: SHOW VIRTUAL COLUMNS
-summary: Shows the created virtual columns in the system. Equivalent to `SELECT * FROM system.virtual_columns`.
+summary: Shows the created virtual columns in the system. Equivalent to SELECT * FROM system.virtual_columns.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,6 +1,6 @@
 ---
 title: Editions
-summary: Databend Cloud comes in three editions: Personal, Business, and Dedicated, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
+summary: Databend Cloud comes in three editions Personal, Business, and Dedicated, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
 ---
 Databend Cloud comes in three editions: **Personal**, **Business**, and **Dedicated**, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
 

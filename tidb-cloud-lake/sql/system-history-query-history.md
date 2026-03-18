@@ -1,6 +1,6 @@
 ---
 title: system_history.query_history
-summary: Query the history for a specific query using its `query_id`.
+summary: Query the history for a specific query using its query_id.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
