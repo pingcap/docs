@@ -27,8 +27,6 @@ In the current implementation, `_tidb_rowid` is an extra `BIGINT NOT NULL` handl
 
 The following example shows the difference:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t1 (a INT, b VARCHAR(20));
 CREATE TABLE t2 (id BIGINT PRIMARY KEY NONCLUSTERED, a INT);
@@ -37,16 +35,12 @@ CREATE TABLE t3 (id BIGINT PRIMARY KEY CLUSTERED, a INT);
 
 For `t1` and `t2`, you can query `_tidb_rowid`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT _tidb_rowid, a, b FROM t1;
 SELECT _tidb_rowid, id, a FROM t2;
 ```
 
 For `t3`, `_tidb_rowid` is unavailable because the clustered primary key is already the row handle:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT _tidb_rowid, id, a FROM t3;
@@ -61,8 +55,6 @@ ERROR 1054 (42S22): Unknown column '_tidb_rowid' in 'field list'
 You can use `_tidb_rowid` in `SELECT` statements for supported tables. This is useful for tasks such as pagination, troubleshooting, and batch processing.
 
 Example:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t (a INT, b VARCHAR(20));
@@ -81,8 +73,6 @@ SELECT _tidb_rowid, a, b FROM t ORDER BY _tidb_rowid;
 ```
 
 To inspect the next value that TiDB will allocate for the row ID, use `SHOW TABLE ... NEXT_ROW_ID`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW TABLE t NEXT_ROW_ID;
@@ -110,8 +100,6 @@ ERROR 1105 (HY000): insert, update and replace statements for _tidb_rowid are no
 
 If you need to preserve row IDs during data import or migration, enable the session variable `tidb_opt_write_row_id` first:
 
-{{< copyable "sql" >}}
-
 ```sql
 SET @@tidb_opt_write_row_id = ON;
 INSERT INTO t(_tidb_rowid, a, b) VALUES (100, 3, 'z');
@@ -130,7 +118,7 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 
 > **Warning:**
 >
-> `tidb_opt_write_row_id` is intended for import and migration scenarios. It is not recommended for normal application writes.
+> `tidb_opt_write_row_id` is intended for import and migration scenarios. It is not recommended for regular application writes.
 
 ## Restrictions
 
@@ -148,8 +136,6 @@ To mitigate this issue for tables that rely on implicit row IDs, consider using 
 
 Example:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t (
     id BIGINT PRIMARY KEY NONCLUSTERED,
@@ -161,10 +147,10 @@ CREATE TABLE t (
 
 ## Related statements and variables
 
-- [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md): Shows the next row ID that TiDB will allocate
-- [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md): Shards implicit row IDs to reduce hotspots
-- [`Clustered Indexes`](/clustered-indexes.md): Explains when a table uses the primary key instead of `_tidb_rowid`
-- [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id): Controls whether writes to `_tidb_rowid` are allowed
+- [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md): shows the next row ID that TiDB will allocate
+- [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md): shards implicit row IDs to reduce hotspots
+- [`Clustered Indexes`](/clustered-indexes.md): explains when a table uses the primary key instead of `_tidb_rowid`
+- [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id): controls whether writes to `_tidb_rowid` are allowed
 
 ## See also
 
