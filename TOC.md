@@ -279,6 +279,7 @@
         - [Subquery Related Optimizations](/subquery-optimization.md)
         - [Column Pruning](/column-pruning.md)
         - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        - [LATERAL Derived Tables](/lateral-derived-tables.md)
         - [Eliminate Max/Min](/max-min-eliminate.md)
         - [Predicates Push Down](/predicate-push-down.md)
         - [Partition Pruning](/partition-pruning.md)
