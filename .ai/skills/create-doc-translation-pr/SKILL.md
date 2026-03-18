@@ -5,7 +5,7 @@ description: Translate a docs pull request from pingcap/docs to pingcap/docs-cn 
 
 # Create Doc Translation PR
 
-Use this skill when the user asks to create an English doc translation PR in `pingcap/docs` according to a source language (Chinese) doc PR in `pingcap/docs-cn`.
+Use this skill when the user asks to create a Chinese doc translation PR in `pingcap/docs-cn` according to a source language (English) doc PR in `pingcap/docs`.
 
 ## Default behavior
 
@@ -22,7 +22,6 @@ Do not stop to ask whether to run scripts mentioned in the skill.
 - `.ai/shared/translation-rules.md`
 - `.ai/shared/translation-terms.md`
 - `resources/terms.md` when terminology is uncertain
-- `/Users/grcai/Documents/GitHub/octopus-github/gh-util.user.js` for the source-of-truth PR metadata rules
 
 ## Preconditions
 
@@ -51,7 +50,7 @@ Do not process every changed file the same way.
 - Deleted files: remove the matching target files directly. No AI is needed.
 - `TOC.md` and `keywords.md`: use structure-aware updates, not generic section translation.
 - Image files: copy, replace, or delete the binary files directly. Do not send image diffs to the LLM.
-- `ai` files, `tidb-cloud/` files, and `TOC-tidb-cloud-*.md` files: skip translation of them for `docs -> docs-cn` unless the user explicitly asks otherwise, because these docs will be translated into Chinese in another workflow.
+- `.ai` files, `tidb-cloud/` files, and `TOC-tidb-cloud-*.md` files: skip translation of them for `docs -> docs-cn` unless the user explicitly asks otherwise, because these docs will be translated into Chinese in another workflow.
 - Large translation inputs: if the total changed source content is too large for one LLM request, split work by file or by section batches before translating.
 
 ## Step 1. Prepare translation inputs
@@ -60,7 +59,7 @@ Run:
 
 ```bash
 python3 .ai/skills/create-doc-translation-pr/scripts/prepare_translation_inputs.py \
-  --source-pr-url "https://github.com/pingcap/docs/pull/21541/files" \
+  --source-pr-url "<source-pr-url>"
   --target-repo-dir "/Users/grcai/Documents/GitHub/docs-cn"
 ```
 
