@@ -188,6 +188,30 @@ Usage example:
 SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
+## `tidb_slow_log_rules` Usage
+[`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-introduced-in-v900) is used to define trigger rules for slow query logs, supporting multi-dimensional metric combinations. It is suitable for "targeted sampling" and "problem reproduction" of slow logs, allowing you to filter target statements based on specific metric combinations.
+The triggering behavior of slow query logs depends on the configuration of `tidb_slow_log_rules`:
+- If `tidb_slow_log_rules` is not set, slow query log triggering still relies on [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (in milliseconds).
+- If `tidb_slow_log_rules` is set, the configured rules take precedence, and [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) will be ignored.
+
+- Rule Capacity and Separation: `SESSION` and `GLOBAL` each support a maximum of 10 rules. A single session can have up to 20 active rules. Rules are separated by `;`.
+- Field and Scope: Field names are case-insensitive (underscores and other characters should be preserved). `Conn_ID` is not supported for `SESSION` rules; only `GLOBAL` supports `Conn_ID`.
+    - String and boolean fields are matched using equality (`=`).
+    - `DB` and `Resource_group` matching is case-insensitive.
+- Numeric types (`int64`, `uint64`, `float64`) uniformly require `>= 0`. Negative values will result in a parsing error.
+    - `int64`: Maximum value is `2^63-1`.
+    - `uint64`: Maximum value is `2^64-1`.
+    - `float64`: The general upper limit is approximately `1.79e308`. Currently, parsing is done using Go's `ParseFloat`. While `NaN`/`Inf` can be parsed, they may lead to rules that are always true or always false, so their use is not recommended.
+- `bool`: Supports `true`/`false`, `1`/`0`, and `t`/`f` (case-insensitive).
+- `string`: Currently does not support strings containing the separators `,` (condition separator) or `;` (rule separator), even with quotes (single or double). Escaping is not supported.
+
+- Standard format (SESSION scope):
+  SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+- Incorrect format (SESSION scope does not support `Conn_ID`):
+  SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
+  SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+  SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
+
 ## Related system variables
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for the slow query log. The SQL statement whose execution time exceeds this threshold is recorded in the slow query log. The default value is 300 ms.
