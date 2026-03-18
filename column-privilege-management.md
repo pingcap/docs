@@ -1,11 +1,11 @@
-``
+---
 title: Column-Level Privilege Management
-summary: TiDB supports a MySQL-compatible column-level privilege management mechanism, allowing you to grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, thus achieving finer-grained access control.
+summary: TiDB supports a MySQL-compatible column-level privilege management mechanism, enabling you to grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, thus achieving finer-grained access control.
 ---
 
 # Column-Level Privilege Management
 
-Starting from version v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. With column-level privileges, you can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table, achieving finer-grained data access control.
+Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. With column-level privileges, you can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table, achieving finer-grained data access control.
 
 > **Note:**
 >
@@ -92,8 +92,8 @@ SHOW GRANTS FOR 'newuser'@'%';
 After granting or revoking column-level privileges, TiDB performs privilege checks on columns referenced in SQL statements. For example:
 
 * `SELECT` statements: `SELECT` column privileges affect columns referenced in the `SELECT` list as well as `WHERE`, `ORDER BY`, and other clauses.
-* `UPDATE` statements: Columns being updated in the `SET` clause require `UPDATE` column privileges. Columns read in expressions or conditions usually also require `SELECT` column privileges.
-* `INSERT` statements: Columns being written to require `INSERT` column privileges. `INSERT INTO t VALUES (...)` is equivalent to writing to all columns.
+* `UPDATE` statements: columns being updated in the `SET` clause require `UPDATE` column privileges. Columns read in expressions or conditions usually also require `SELECT` column privileges.
+* `INSERT` statements: columns being written to require `INSERT` column privileges. `INSERT INTO t VALUES (...)` is equivalent to writing to all columns.
 
 In the following example, user `newuser` can only query `col1` and update `col3`:
 
@@ -113,6 +113,7 @@ UPDATE tbl SET col3 = col1 WHERE col1 > 0;
 ## Compatibility differences with MySQL
 
 TiDB's column-level privileges are generally compatible with MySQL. However, there are differences in the following scenarios:
+
 | Scenario                                             | TiDB                                                                                                                                                                   | MySQL                                                                                                                                                                            |
 | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Revoking column-level privileges not granted to a user | `REVOKE` executes successfully.                                                                                                                                        | `REVOKE` throws an error.                                                                                                                                                        |
@@ -120,7 +121,10 @@ TiDB's column-level privileges are generally compatible with MySQL. However, the
 
 ### Column pruning and privilege checks in view scenarios
 
-When performing `SELECT` privilege checks on views, MySQL first prunes columns in the view's internal query and then checks the column privileges of the internal tables, making the checks relatively lenient in some scenarios. TiDB does not perform column pruning before privilege checks, so additional column privileges might be required.
+When performing `SELECT` privilege checks on views, MySQL and TiDB differ as follows:
+
+- MySQL first prunes columns in the view's internal query and then checks the column privileges of the internal tables, making the checks relatively lenient in some scenarios. 
+- TiDB does not perform column pruning before privilege checks, so additional column privileges might be required.
 
 ```sql
 -- Prepare the environment by logging in as root
