@@ -64,7 +64,17 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 
 > **Note:**
 >
-> For MySQL sink changefeeds, only tables that meet one of the preceding conditions and have **exactly one primary key or non-null unique key** can be split and distributed by TiCDC, to ensure the correctness of data replication in table split mode.
+> For MySQL sink changefeeds, only tables that meet one of the preceding conditions and have **exactly one primary key or non-null unique key** can be split and distributed by TiCDC, to ensure the correctness of data replication in table-level task splitting mode.
+
+### Recommended configurations for table-level task splitting
+
+After switching to the new TiCDC architecture, do not reuse the table-splitting configurations from the classic architecture. In most scenarios, use the default configuration of the new architecture. Make incremental adjustments based on the default values only in special scenarios where replication performance bottlenecks or scheduling imbalance occur.
+
+In table split mode, pay attention to the following settings:
+
+- [`scheduler.region-threshold`](/ticdc/ticdc-changefeed-config.md#region-threshold): the default value is `10000`. When the number of Regions in a table exceeds this threshold, TiCDC splits the table. For tables with relatively few Regions but high overall write throughput, you can reduce this value appropriately. This parameter must be greater than or equal to `scheduler.region-count-per-span`. Otherwise, tasks might be rescheduled repeatedly, which increases replication latency.
+- [`scheduler.region-count-per-span`](/ticdc/ticdc-changefeed-config.md#region-count-per-span-new-in-v854): the default value is `100`. During changefeed initialization, tables that meet the split conditions are split according to this parameter. After splitting, each split sub-table contains at most `region-count-per-span` regions.
+- [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold): the default value is `0` (disabled). When the sink write throughput of a table exceeds this threshold, TiCDC triggers table splitting. In most cases, keep this parameter to `0`.
 
 ## Compatibility
 

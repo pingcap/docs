@@ -189,7 +189,7 @@ dispatchers = [
 ]
 ```
 
-For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
+For detailed integration guide, see [Integrate Data with Confluent Cloud, Snowflake, ksqlDB, and SQL Server](/ticdc/integrate-confluent-using-ticdc.md).
 
 ### Integrate TiCDC with AWS Glue Schema Registry
 

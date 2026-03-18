@@ -27,6 +27,10 @@ BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2
 Non-transactional DML, shard column must be fully specified
 ```
 
+> **Note:**
+>
+> The `BATCH` statement is internally rewritten and split into multiple DML statements during execution. In the current version, table aliases might not be preserved, which can result in errors such as `Unknown column '<alias>.<column>' in 'where clause'`. To avoid this issue, do not use table aliases. Before execution, use `DRY RUN QUERY` or `DRY RUN` to preview the split statements before execution. For more information, see [Non-Transactional DML Statements](/non-transactional-dml.md).
+
 ## Synopsis
 
 ```ebnf+diagram
