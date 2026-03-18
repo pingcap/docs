@@ -89,7 +89,7 @@ The detailed steps are as follows:
     1. Select your target Vercel projects and click **Next**.
     2. Select your target TiDB Cloud organization and project.
     3. Select **Cluster** as your connection type.
-    4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new {{{ .starter }}} or {{{ .essential }}} instance, click **+ Create Cluster** in the list to create one.
+    4. Select your target TiDB Cloud resource. If the **Cluster** drop-down list is empty or you want to select a new {{{ .starter }}} or {{{ .essential }}} instance, click **+ Create Cluster** in the list to create one.
     5. Select the database that you want to connect to. If the **Database** drop-down list is empty or you want to select a new Database, click **+ Create Database** in the list to create one.
     6. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
     7. Choose whether to enable **Branching** to create new branches for preview environments.
