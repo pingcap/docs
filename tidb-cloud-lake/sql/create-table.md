@@ -48,14 +48,13 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 )
 ```
 
-:::note
-
-- For available data types in Databend, see [Data Types](/tidb-cloud-lake/sql/data-types.md).
-
-- Databend suggests avoiding special characters as much as possible when naming columns. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: CREATE TABLE price(\`$CA\` int);
-
-- Databend will automatically convert column names into lowercase. For example, if you name a column as _Total_, it will appear as _total_ in the result.
-  :::
+> **Note:**
+>
+> - For available data types in Databend, see [Data Types](/tidb-cloud-lake/sql/data-types.md).
+>
+> - Databend suggests avoiding special characters as much as possible when naming columns. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: CREATE TABLE price(\`$CA\` int);
+>
+> - Databend will automatically convert column names into lowercase. For example, if you name a column as _Total_, it will appear as _total_ in the result.
 
 ## CREATE TABLE ... LIKE
 
@@ -70,17 +69,15 @@ LIKE [db.]origin_table_name
 
 This command does not include any data or attributes (such as `CLUSTER BY`, `TRANSIENT`, and `COMPRESSION`) from the original table, and instead creates a new table using the default system settings.
 
-:::note WORKAROUND
-
-- `TRANSIENT` and `COMPRESSION` can be explicitly specified when you create a new table with this command. For example,
-
-```sql
-create transient table t_new like t_old;
-
-create table t_new compression='lz4' like t_old;
-```
-
-:::
+> **Note:**
+>
+> - `TRANSIENT` and `COMPRESSION` can be explicitly specified when you create a new table with this command. For example,
+>
+> ```sql
+> create transient table t_new like t_old;
+>
+> create table t_new compression='lz4' like t_old;
+> ```
 
 ## CREATE TABLE ... AS
 
@@ -95,17 +92,15 @@ AS SELECT query
 
 This command does not include any attributes (such as CLUSTER BY, TRANSIENT, and COMPRESSION) from the original table, and instead creates a new table using the default system settings.
 
-:::note WORKAROUND
-
-- `TRANSIENT` and `COMPRESSION` can be explicitly specified when you create a new table with this command. For example,
-
-```sql
-create transient table t_new as select * from t_old;
-
-create table t_new compression='lz4' as select * from t_old;
-```
-
-:::
+> **Note:**
+>
+> - `TRANSIENT` and `COMPRESSION` can be explicitly specified when you create a new table with this command. For example,
+>
+> ```sql
+> create transient table t_new as select * from t_old;
+>
+> create table t_new compression='lz4' as select * from t_old;
+> ```
 
 ## Column Nullable
 
@@ -209,9 +204,9 @@ CREATE TABLE employees (
 );
 ```
 
-:::tip
-Choose **STORED** for frequently queried columns where performance matters. Choose **VIRTUAL** to save storage space when computation cost is acceptable.
-:::
+> **Tip:**
+>
+> Choose **STORED** for frequently queried columns where performance matters. Choose **VIRTUAL** to save storage space when computation cost is acceptable.
 
 ## MySQL Compatibility
 

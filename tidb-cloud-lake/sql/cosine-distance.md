@@ -39,9 +39,9 @@ cosine_distance(v1, v2) = 1 - (Σ(v1ᵢ * v2ᵢ) / (√Σ(v1ᵢ²) * √Σ(v2ᵢ
 
 Where v1ᵢ and v2ᵢ are the elements of the input vectors.
 
-:::info
-This function performs vector computations within Databend and does not rely on external APIs.
-:::
+> **Note:**
+>
+> This function performs vector computations within Databend and does not rely on external APIs.
 
 
 ## Examples

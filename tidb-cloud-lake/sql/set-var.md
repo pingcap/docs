@@ -4,9 +4,9 @@ title: SET_VAR
 
 SET_VAR is used to specify optimizer hints within a single SQL statement, allowing for finer control over the execution plan of that specific statement. This includes:
 
-:::note
-SET_VAR will be deprecated in an upcoming release. Consider using the [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md) instead.
-:::
+> **Note:**
+>
+> SET_VAR will be deprecated in an upcoming release. Consider using the [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md) instead.
 
 - Configure settings temporarily, affecting only the duration of the SQL statement execution. It's important to note that the settings specified with SET_VAR will solely impact the result of the current statement being executed and will not have any lasting effects on the overall database configuration. For a list of available settings that can be configured using SET_VAR, see [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md). To understand how it works, see these examples:
 

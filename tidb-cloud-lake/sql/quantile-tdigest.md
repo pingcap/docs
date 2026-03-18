@@ -7,9 +7,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Computes an approximate quantile of a numeric data sequence using the [t-digest](https://github.com/tdunning/t-digest/blob/master/docs/t-digest-paper/histo.pdf) algorithm.
 
-:::caution
-NULL values are not included in the calculation.
-:::
+> **Note:**
+>
+> NULL values are not included in the calculation.
 
 ## Syntax
 

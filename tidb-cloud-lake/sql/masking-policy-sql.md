@@ -19,6 +19,6 @@ This page provides a comprehensive overview of Masking Policy operations in Data
 
 - [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md)
 
-:::note
-Masking policies in Databend allow you to protect sensitive data by dynamically transforming or obfuscating it when queried by users without proper privileges.
-:::
+> **Note:**
+>
+> Masking policies in Databend allow you to protect sensitive data by dynamically transforming or obfuscating it when queried by users without proper privileges.

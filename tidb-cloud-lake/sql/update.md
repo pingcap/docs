@@ -7,9 +7,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Updates rows in a table with new values, optionally using values from other tables.
 
-:::tip atomic operations
-Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
-:::
+> **Tip:**
+>
+> Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 ## Syntax
 

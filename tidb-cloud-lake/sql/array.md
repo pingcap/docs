@@ -8,9 +8,9 @@ sidebar_position: 8
 
 `ARRAY(T)` stores variable-length collections whose elements all share the type `T`. Define the element type when creating a table and use array functions to read or transform the values.
 
-:::note
-Databend arrays are 1-based. `arr[1]` returns the first element and `arr[n]` the last.
-:::
+> **Note:**
+>
+> Databend arrays are 1-based. `arr[1]` returns the first element and `arr[n]` the last.
 
 ## Examples
 

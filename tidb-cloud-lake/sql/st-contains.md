@@ -20,9 +20,9 @@ ST_CONTAINS(<geometry1>, <geometry2>)
 | `<geometry1>` | The argument must be an expression of type GEOMETRY object that is not a GeometryCollection. |
 | `<geometry2>` | The argument must be an expression of type GEOMETRY object that is not a GeometryCollection. |
 
-:::note
-- The function reports an error if the two input GEOMETRY objects have different SRIDs.
-:::
+> **Note:**
+>
+> - The function reports an error if the two input GEOMETRY objects have different SRIDs.
 
 ## Return Type
 

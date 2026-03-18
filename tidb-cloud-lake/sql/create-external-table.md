@@ -64,13 +64,11 @@ The external location S3 bucket must have the following permissions granted thro
 
 ## Examples
 
-:::info
 
 Before using the `SHOW CREATE TABLE` command, you need to set the `hide_options_in_show_create_table` variable to `0`.
 ```sql
 SET GLOBAL hide_options_in_show_create_table = 0;
 ```
-:::
 
 ### Create a Table with External Location
 

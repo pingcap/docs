@@ -59,6 +59,6 @@ Tags are returned in API responses and visible through `SHOW WAREHOUSES`.
 | [DROP WAREHOUSE](/tidb-cloud-lake/sql/drop-warehouse.md)     | Removes a warehouse                               |
 | [QUERY_HISTORY](/tidb-cloud-lake/sql/query-history.md)       | Inspects query logs for a warehouse               |
 
-:::note
-A warehouse represents compute resources used to run queries in Databend Cloud.
-:::
+> **Note:**
+>
+> A warehouse represents compute resources used to run queries in Databend Cloud.

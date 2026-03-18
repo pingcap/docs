@@ -9,9 +9,9 @@ The count(distinct ...) function calculates the uniq value of a set of values.
 
 To obtain an estimated result from large data sets with little memory and time, consider using [APPROX_COUNT_DISTINCT](/tidb-cloud-lake/sql/approx-count-distinct.md).
 
-:::caution
- NULL values are not counted.
-:::
+> **Note:**
+>
+>  NULL values are not counted.
 
 ## Syntax
 

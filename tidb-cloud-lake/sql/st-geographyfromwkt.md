@@ -26,9 +26,9 @@ ST_GEOGRAPHYFROMWKT(<string>)
 |-------------|-----------------------------------------------------------------|
 | `<string>`  | The argument must be a string expression in WKT or EWKT format. |
 
-:::note
-Only SRID 4326 is supported for GEOGRAPHY inputs.
-:::
+> **Note:**
+>
+> Only SRID 4326 is supported for GEOGRAPHY inputs.
 
 ## Return Type
 

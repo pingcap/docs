@@ -17,6 +17,6 @@ This page provides a comprehensive overview of File Format operations in Databen
 |---------|-------------|
 | [SHOW FILE FORMATS](/tidb-cloud-lake/sql/show-file-formats.md) | Lists all file formats in the current database |
 
-:::note
-File formats in Databend define how data files should be parsed during data loading operations or formatted during data unloading operations. They provide a reusable way to specify file type, field delimiters, compression, and other formatting options.
-:::
+> **Note:**
+>
+> File formats in Databend define how data files should be parsed during data loading operations or formatted during data unloading operations. They provide a reusable way to specify file type, field delimiters, compression, and other formatting options.

@@ -61,7 +61,6 @@ DATE_ADD(MINUTE, 1, now()): 2024-10-10 01:36:33.601312
 DATE_ADD(SECOND, 1, now()): 2024-10-10 01:35:34.601312
 ```
 
-:::note
 - When unit is MONTH, If date is the last day of the month or if the resulting month has fewer days than the day component of date,
 - then the result is the last day of the resulting month. Otherwise, the result has the same day component as date.
 

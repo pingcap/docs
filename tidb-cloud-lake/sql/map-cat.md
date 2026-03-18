@@ -20,10 +20,10 @@ MAP_CAT( <map1>, <map2> )
 | `<map1>`  | The source MAP.                 |
 | `<map2>`  | The MAP to be appended to map1. |
 
-:::note
-- If both map1 and map2 have a value with the same key, then the output map contains the value from map2.
-- If either argument is NULL, the function returns NULL without reporting any error.
-:::
+> **Note:**
+>
+> - If both map1 and map2 have a value with the same key, then the output map contains the value from map2.
+> - If either argument is NULL, the function returns NULL without reporting any error.
 
 ## Return Type
 

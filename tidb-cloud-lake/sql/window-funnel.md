@@ -103,11 +103,9 @@ FROM
 GROUP BY level ORDER BY level ASC;
 ```
 
-:::tip
-
-The `event_timestamp` type is timestamp, `3600000000` is a hour time window.
-
-:::
+> **Tip:**
+>
+> The `event_timestamp` type is timestamp, `3600000000` is a hour time window.
 
 Result:
 

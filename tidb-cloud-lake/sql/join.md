@@ -169,9 +169,9 @@ FROM table_a
               ON join_condition
 ```
 
-:::tip
-`INNER` is optional. When the join columns share the same name, `USING(column_name)` can replace `ON table_a.column = table_b.column`.
-:::
+> **Tip:**
+>
+> `INNER` is optional. When the join columns share the same name, `USING(column_name)` can replace `ON table_a.column = table_b.column`.
 
 ### Example
 
@@ -366,9 +366,9 @@ LEFT [OUTER] JOIN table_b
              ON join_condition;
 ```
 
-:::tip
-`OUTER` is optional.
-:::
+> **Tip:**
+>
+> `OUTER` is optional.
 
 ### Example
 

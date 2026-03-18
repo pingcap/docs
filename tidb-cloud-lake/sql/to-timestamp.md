@@ -161,7 +161,6 @@ SELECT TO_TIMESTAMP(TO_INT64('994518299'));
 └─────────────────────────────────────┘
 ```
 
-:::note
 - You can use `SELECT TO_TIMESTAMP('994518299', '%s')` for the conversion as well, but it is not recommended. For such conversions, Databend recommends using the method in the example above for better performance.
 
 - A Timestamp value ranges from 1000-01-01 00:00:00.000000 to 9999-12-31 23:59:59.999999. Databend would return an error if you run the following statement:
@@ -170,7 +169,6 @@ SELECT TO_TIMESTAMP(TO_INT64('994518299'));
 root@localhost:8000/default> SELECT TO_TIMESTAMP(9999999999999999999);
 error: APIError: ResponseError with 1006: number overflowed while evaluating function `to_int64(9999999999999999999)`
 ```
-:::
 
 ### Example-3: Converting String with Pattern
 

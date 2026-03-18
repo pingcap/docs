@@ -30,9 +30,9 @@ Each Databend setting comes with a level that can be Global, Default, or Session
 
 ## Examples
 
-:::note
-As Databend updates the system settings every now and then, this example may not show the most recent results. To view the latest system settings in Databend, please execute `SHOW SETTINGS;` within your Databend instance.
-:::
+> **Note:**
+>
+> As Databend updates the system settings every now and then, this example may not show the most recent results. To view the latest system settings in Databend, please execute `SHOW SETTINGS;` within your Databend instance.
 
 ```sql
 SHOW SETTINGS LIMIT 5;

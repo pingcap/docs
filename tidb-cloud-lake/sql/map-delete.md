@@ -22,10 +22,10 @@ MAP_DELETE( <map>, <array> )
 | `<keyN>`  | The KEYs to be omitted from the returned MAP.          |
 | `<array>` | The Array of KEYs to be omitted from the returned MAP. |
 
-:::note
-- The types of the key expressions and the keys in the map must be the same.
-- Key values not found in the map will be ignored.
-:::
+> **Note:**
+>
+> - The types of the key expressions and the keys in the map must be the same.
+> - Key values not found in the map will be ignored.
 
 ## Return Type
 

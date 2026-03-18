@@ -4,9 +4,9 @@ title: COUNT
 
 The COUNT() function returns the number of records returned by a SELECT query.
 
-:::caution
-NULL values are not counted.
-:::
+> **Note:**
+>
+> NULL values are not counted.
 
 ## Syntax
 

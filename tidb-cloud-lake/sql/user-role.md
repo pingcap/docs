@@ -32,6 +32,6 @@ This page provides a comprehensive overview of user and role operations in Datab
 | [REVOKE](/tidb-cloud-lake/sql/revoke.md) | Removes privileges from roles |
 | [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md) | Shows role grants and role assignments |
 
-:::note
-Proper user and role management is essential for database security. Always follow the principle of least privilege when granting permissions.
-:::
+> **Note:**
+>
+> Proper user and role management is essential for database security. Always follow the principle of least privilege when granting permissions.

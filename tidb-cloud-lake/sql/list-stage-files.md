@@ -43,9 +43,9 @@ LIST @my_internal_stage;
 
 To list the files in the folder **2023**, run the following command:
 
-:::note
-It is necessary to add a slash "/" at the end of the path in the command, otherwise, the command may not work as expected and may result in an error.
-:::
+> **Note:**
+>
+> It is necessary to add a slash "/" at the end of the path in the command, otherwise, the command may not work as expected and may result in an error.
 
 ```sql
 LIST @my_internal_stage/2023/;

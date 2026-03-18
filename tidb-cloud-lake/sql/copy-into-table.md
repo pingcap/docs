@@ -172,11 +172,11 @@ copyOptions ::=
 
 ```
 
-:::note
-For remote files, you can use glob patterns to specify multiple files. For example:
-- `ontime_200{6,7,8}.csv` represents `ontime_2006.csv`, `ontime_2007.csv`, `ontime_2008.csv`
-- `ontime_200[6-8].csv` represents the same files
-:::
+> **Note:**
+>
+> For remote files, you can use glob patterns to specify multiple files. For example:
+> - `ontime_200{6,7,8}.csv` represents `ontime_2006.csv`, `ontime_2007.csv`, `ontime_2008.csv`
+> - `ontime_200[6-8].csv` represents the same files
 
 ## Key Parameters
 
@@ -273,9 +273,9 @@ These options are available for all file formats:
 | RETURN_FAILED_ONLY | Only returns failed files in output | `false` |
 | COLUMN_MATCH_MODE | For Parquet: column name matching mode | `case-insensitive` |
 
-:::tip
-When importing large volumes of data, such as logs, it is recommended to set both `PURGE` and `FORCE` to `true`. This ensures efficient data import without the need for interaction with the Meta server (updating the copied-files set). However, it is important to be aware that this may lead to duplicate data imports.
-:::
+> **Tip:**
+>
+> When importing large volumes of data, such as logs, it is recommended to set both `PURGE` and `FORCE` to `true`. This ensures efficient data import without the need for interaction with the Meta server (updating the copied-files set). However, it is important to be aware that this may lead to duplicate data imports.
 
 ## Output
 
@@ -293,9 +293,7 @@ If `RETURN_FAILED_ONLY` is set to `true`, the output will only contain the files
 
 ## Examples
 
-:::tip Best Practice
 For external storage sources, it's recommended to use pre-created connections with the `CONNECTION_NAME` parameter instead of specifying credentials directly in the COPY statement. This approach provides better security, maintainability, and reusability. See [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) for details on creating connections.
-:::
 
 ### Example 1: Loading from Stages
 
@@ -605,9 +603,9 @@ COPY INTO books_with_extra_columns
     FILE_FORMAT = (TYPE = CSV, ERROR_ON_COLUMN_COUNT_MISMATCH = false);
 ```
 
-:::note
-Extra columns in a table can have default values specified by [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md) or [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations). If a default value is not explicitly set for an extra column, the default value associated with its data type will be applied. For instance, an integer-type column will default to 0 if no other value is specified.
-:::
+> **Note:**
+>
+> Extra columns in a table can have default values specified by [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md) or [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations). If a default value is not explicitly set for an extra column, the default value associated with its data type will be applied. For instance, an integer-type column will default to 0 if no other value is specified.
 
 ### Example 6: Loading JSON with Custom Format
 

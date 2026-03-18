@@ -13,13 +13,13 @@ sidebar_position: 4
 | INT      | INT32 | 4 bytes | -2147483648          | 2147483647          |
 | BIGINT   | INT64 | 8 bytes | -9223372036854775808 | 9223372036854775807 |
 
-:::tip
-If you want unsigned integer, please use `UNSIGNED` constraint, this is compatible with MySQL, for example:
-
-```sql
-CREATE TABLE test_numeric(tiny TINYINT, tiny_unsigned TINYINT UNSIGNED)
-```
-:::
+> **Tip:**
+>
+> If you want unsigned integer, please use `UNSIGNED` constraint, this is compatible with MySQL, for example:
+>
+> ```sql
+> CREATE TABLE test_numeric(tiny TINYINT, tiny_unsigned TINYINT UNSIGNED)
+> ```
 
 ## Floating-Point Data Types
 

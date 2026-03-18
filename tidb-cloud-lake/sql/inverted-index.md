@@ -15,6 +15,6 @@ This page provides a comprehensive overview of inverted index operations in Data
 
 - [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md)
 
-:::note
-Inverted indexes in Databend enable efficient full-text search capabilities for text data, allowing for fast keyword searches across large text columns.
-:::
+> **Note:**
+>
+> Inverted indexes in Databend enable efficient full-text search capabilities for text data, allowing for fast keyword searches across large text columns.

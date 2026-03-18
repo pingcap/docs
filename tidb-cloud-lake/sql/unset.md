@@ -24,15 +24,10 @@ UNSET [ SESSION | GLOBAL ] ( <setting_name>, <setting_name> ... )
 | SESSION   | If the setting has a global-level value, it removes the session-level override and reverts to the global setting. If the setting only has a session-level value, it reverts to the default setting. |
 | GLOBAL    | Removes the global-level setting and reverts it to the default-level value.                                                                                                                         |
 
-
-:::warning[CAUTION]
-
 | Databend-Query Version | Description                                                                    |
 |------------------------|--------------------------------------------------------------------------------|
 | [-∞, v1.2.605)         | In default, `UNSET <setting_name>` is equal to `UNSET GLOBAL <setting_name>`.  |
 | [v1.2.605, +∞]         | In default, `UNSET <setting_name>` is equal to `UNSET SESSION <setting_name>`. |
-
-:::
 
 ## Examples
 

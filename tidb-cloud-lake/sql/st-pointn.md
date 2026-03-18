@@ -20,9 +20,9 @@ ST_POINTN(<geometry_or_geography>, <index>)
 | `<geometry_or_geography>` | The argument must be an expression of type GEOMETRY or GEOGRAPHY that represents a LineString. |
 | `<index>`    | The index of the Point to return.                                                 |
 
-:::note
-The index is 1-based, and a negative index is uesed as the offset from the end of LineString. If index is out of bounds, the function returns an error.
-:::
+> **Note:**
+>
+> The index is 1-based, and a negative index is uesed as the offset from the end of LineString. If index is out of bounds, the function returns an error.
 
 ## Return Type
 

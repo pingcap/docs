@@ -149,9 +149,9 @@ FROM
     LIMIT 1;
 ```
 
-:::info
-We recommend performing segment compaction first, followed by block compaction.
-:::
+> **Note:**
+>
+> We recommend performing segment compaction first, followed by block compaction.
 
 **Syntax**
 ```sql

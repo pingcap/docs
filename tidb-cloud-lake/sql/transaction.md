@@ -18,6 +18,6 @@ This page provides a comprehensive overview of Transaction operations in Databen
 |---------|-------------|
 | [SHOW LOCKS](/tidb-cloud-lake/sql/show-locks.md) | Displays information about active locks in the system |
 
-:::note
-Transactions in Databend ensure data consistency by grouping SQL operations into atomic units that either completely succeed or completely fail, maintaining database integrity.
-:::
+> **Note:**
+>
+> Transactions in Databend ensure data consistency by grouping SQL operations into atomic units that either completely succeed or completely fail, maintaining database integrity.
