@@ -170,4 +170,3 @@ SELECT * FROM v;
 * [Privilege Management](/privilege-management.md)
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 * [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
-```
