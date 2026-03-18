@@ -18,6 +18,6 @@ This page provides a comprehensive overview of sequence operations in Databend, 
 | [DESC SEQUENCE](/tidb-cloud-lake/sql/desc-sequence.md) | Shows detailed information about a sequence |
 | [SHOW SEQUENCES](/tidb-cloud-lake/sql/show-sequences.md) | Lists all sequences in the current or specified database |
 
-:::note
-Sequences in Databend are used to generate unique numeric values in a sequential order, commonly used for primary keys or other unique identifiers.
-:::
+> **Note:**
+>
+> Sequences in Databend are used to generate unique numeric values in a sequential order, commonly used for primary keys or other unique identifiers.

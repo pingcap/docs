@@ -25,23 +25,23 @@ See also:
 
 To understand what a privilege is and how it works, see [Privileges](/tidb-cloud-lake/guides/privileges.md).
 
-:::note Important
-CREATE-like privileges that create ownership objects cannot be granted directly to a user. These privileges must be granted to a role first, and then the role can be assigned to users. This includes:
-- CREATE
-- CREATE DATABASE
-- CREATE WAREHOUSE
-- CREATE CONNECTION
-- CREATE SEQUENCE
-- CREATE PROCEDURE
-- CREATE MASKING POLICY
-- CREATE ROW ACCESS POLICY
-
-Since `ALL` includes these CREATE privileges, `GRANT ALL ... TO USER` will also fail. For example, `GRANT ALL ON *.* TO USER u1` or `GRANT CREATE DATABASE ON *.* TO USER u1` will fail. Instead, use:
-```sql
-GRANT ALL ON *.* TO ROLE r1;
-GRANT ROLE r1 TO USER u1;
-```
-:::
+> **Note:**
+>
+> CREATE-like privileges that create ownership objects cannot be granted directly to a user. These privileges must be granted to a role first, and then the role can be assigned to users. This includes:
+> - CREATE
+> - CREATE DATABASE
+> - CREATE WAREHOUSE
+> - CREATE CONNECTION
+> - CREATE SEQUENCE
+> - CREATE PROCEDURE
+> - CREATE MASKING POLICY
+> - CREATE ROW ACCESS POLICY
+>
+> Since `ALL` includes these CREATE privileges, `GRANT ALL ... TO USER` will also fail. For example, `GRANT ALL ON *.* TO USER u1` or `GRANT CREATE DATABASE ON *.* TO USER u1` will fail. Instead, use:
+> ```sql
+> GRANT ALL ON *.* TO ROLE r1;
+> GRANT ROLE r1 TO USER u1;
+> ```
 
 ```sql
 GRANT { 

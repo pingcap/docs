@@ -4,9 +4,9 @@ summary: Sleeps seconds seconds on each data block.
 ---
 Sleeps `seconds` seconds on each data block.
 
-:::caution
-Only used for testing where sleep is required.
-:::
+> **Note:**
+>
+> Only used for testing where sleep is required.
 
 ## Syntax
 

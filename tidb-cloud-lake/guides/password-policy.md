@@ -10,9 +10,9 @@ Password policies define how strong a Databend password must be (length, charact
 - Whenever a managed user sets or changes a password, Databend validates the complexity rules (length and character mix) and, for password changes, enforces minimum age and password history.
 - On login, Databend also tracks failed attempts and lockouts based on `PASSWORD_MAX_RETRIES`/`PASSWORD_LOCKOUT_TIME_MINS`, and it flags expired passwords after `PASSWORD_MAX_AGE_DAYS`. Expired users can log in only to change their password.
 
-:::note
-Users normally cannot change their own password unless they have the built-in `account-admin` role. An `account-admin` can run `ALTER USER ... IDENTIFIED BY ...` to rotate passwords for anyone.
-:::
+> **Note:**
+>
+> Users normally cannot change their own password unless they have the built-in `account-admin` role. An `account-admin` can run `ALTER USER ... IDENTIFIED BY ...` to rotate passwords for anyone.
 
 ## End-to-End Example
 

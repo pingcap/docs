@@ -10,9 +10,9 @@ import TabItem from '@theme/TabItem';
 
 Creates a connection to external storage.
 
-:::warning
-IMPORTANT: When objects (stages, tables, etc.) use a connection, they copy and store the connection's parameters permanently. If you later modify the connection using CREATE OR REPLACE CONNECTION, existing objects will continue using the old parameters. To update objects with new connection parameters, you must drop and recreate those objects.
-:::
+> **Warning:**
+>
+> IMPORTANT: When objects (stages, tables, etc.) use a connection, they copy and store the connection's parameters permanently. If you later modify the connection using CREATE OR REPLACE CONNECTION, existing objects will continue using the old parameters. To update objects with new connection parameters, you must drop and recreate those objects.
 
 ## Syntax
 
@@ -184,6 +184,6 @@ CREATE STAGE databend_test
 SELECT * FROM @databend_test/test.parquet LIMIT 1;
 ```
 
-:::info
-To use IAM roles with Databend Cloud, you need to set up a trust relationship between your AWS account and Databend Cloud. See [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) for detailed instructions.
-:::
+> **Note:**
+>
+> To use IAM roles with Databend Cloud, you need to set up a trust relationship between your AWS account and Databend Cloud. See [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) for detailed instructions.

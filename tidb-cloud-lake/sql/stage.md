@@ -32,6 +32,6 @@ This page provides a comprehensive overview of stage operations in Databend, org
 - [Query & Transform](/tidb-cloud-lake/guides/query-stage.md)
 - [File Format (DDL)](/tidb-cloud-lake/sql/file-format.md)
 
-:::note
-Stages in Databend are used as temporary storage locations for data files that you want to load into tables or unload from tables.
-:::
+> **Note:**
+>
+> Stages in Databend are used as temporary storage locations for data files that you want to load into tables or unload from tables.

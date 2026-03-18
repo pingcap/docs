@@ -169,9 +169,9 @@ CDC mode continuously monitors the MySQL binlog and captures real-time row-level
 4. Periodically merges changes into the target table using the primary key
 5. Saves checkpoint (binlog position) for crash recovery
 
-:::note
-CDC mode requires MySQL binlog to be enabled with ROW format, and a primary key (unique column) must be specified. The MySQL user must have `REPLICATION SLAVE` and `REPLICATION CLIENT` privileges.
-:::
+> **Note:**
+>
+> CDC mode requires MySQL binlog to be enabled with ROW format, and a primary key (unique column) must be specified. The MySQL user must have `REPLICATION SLAVE` and `REPLICATION CLIENT` privileges.
 
 ### Snapshot + CDC
 

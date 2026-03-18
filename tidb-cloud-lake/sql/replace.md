@@ -14,9 +14,9 @@ REPLACE INTO can either insert multiple new rows into a table or update existing
 
 - Staged files: Databend enables you to replace data into a table from staged files with the REPLACE INTO statement. This is achieved through Databend's capacity to [Query Staged Files](/tidb-cloud-lake/sql/stage.md) and subsequently incorporate the query result into the table.
 
-:::tip atomic operations
-Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
-:::
+> **Tip:**
+>
+> Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 ## Syntax
 
@@ -141,9 +141,9 @@ FILE_FORMAT = (TYPE = PARQUET);
 
 3. Replace existing data using the staged Parquet file with `REPLACE INTO`
 
-:::tip
-You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command.
-:::
+> **Tip:**
+>
+> You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command.
 
 ```sql
 REPLACE INTO sample 

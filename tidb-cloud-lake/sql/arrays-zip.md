@@ -2,6 +2,7 @@
 title: ARRAYS_ZIP
 summary: Merges multiple arrays into a single array tuple.
 ---
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.690"/>
@@ -20,9 +21,9 @@ ARRAYS_ZIP( <array1> [, ...] )
 |------------|-------------------|
 | `<arrayN>` | The input ARRAYs. |
 
-:::note
-- The length of each array must be the same.
-:::
+> **Note:**
+>
+> - The length of each array must be the same.
 
 ## Return Type
 

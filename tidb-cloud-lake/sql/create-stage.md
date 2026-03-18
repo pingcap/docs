@@ -33,9 +33,9 @@ CREATE STAGE [ IF NOT EXISTS ] <external_stage_name>
 
 ### externalStageParams
 
-:::tip
-For external stages, it is recommended to use the `CONNECTION` parameter to reference pre-configured connection objects instead of inline credentials. This approach provides better security and maintainability.
-:::
+> **Tip:**
+>
+> For external stages, it is recommended to use the `CONNECTION` parameter to reference pre-configured connection objects instead of inline credentials. This approach provides better security and maintainability.
 
 ```sql
 externalStageParams ::=

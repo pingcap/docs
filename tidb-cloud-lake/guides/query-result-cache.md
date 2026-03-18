@@ -18,9 +18,9 @@ Query results are reused from cache only when **all** conditions are satisfied:
 | **Data Consistency** | Table data unchanged since caching (unless `query_result_cache_allow_inconsistent = 1`) |
 | **Session Scope** | Cache is session-specific |
 
-:::note Automatic Cache Invalidation
-By default (`query_result_cache_allow_inconsistent = 0`), cached results are automatically invalidated when underlying table data changes. This ensures data consistency but may reduce cache effectiveness in frequently updated tables.
-:::
+> **Note:**
+>
+> By default (`query_result_cache_allow_inconsistent = 0`), cached results are automatically invalidated when underlying table data changes. This ensures data consistency but may reduce cache effectiveness in frequently updated tables.
 
 ## Quick Start
 
@@ -105,6 +105,6 @@ Cached results are automatically removed when:
 - **Underlying data changes** (automatic invalidation for consistency)
 - **Table structure changes** (schema modifications invalidate cache)
 
-:::note Session Scope
-Query result cache is session-scoped. Each session maintains its own cache that's automatically cleaned up when the session ends.
-:::
+> **Note:**
+>
+> Query result cache is session-scoped. Each session maintains its own cache that's automatically cleaned up when the session ends.

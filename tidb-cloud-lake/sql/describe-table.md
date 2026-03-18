@@ -4,9 +4,9 @@ summary: Shows information about the columns in a given table. Equivalent to SHO
 ---
 Shows information about the columns in a given table. Equivalent to [SHOW FIELDS](/tidb-cloud-lake/sql/show-fields.md).
 
-:::tip
-[SHOW COLUMNS](/tidb-cloud-lake/sql/show-columns.md) provides similar but more information about the columns of a table. 
-:::
+> **Tip:**
+>
+> [SHOW COLUMNS](/tidb-cloud-lake/sql/show-columns.md) provides similar but more information about the columns of a table. 
 
 ## Syntax
 

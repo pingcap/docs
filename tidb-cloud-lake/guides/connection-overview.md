@@ -19,10 +19,10 @@ Databend supports multiple connection methods to suit different use cases. All o
 | **Databend Cloud** | `databend://<user>:<pass>@<tenant>.gw.<region>.default.databend.com:443/<db>?warehouse=<name>` |
 | **Self-Hosted** | `databend://<user>:<pass>@<host>:<port>/<db>` |
 
-:::tip Getting Your Connection String
-- **Databend Cloud**: Log in → Click **Connect** → Copy the generated DSN
-- **Self-Hosted**: Use your server address with the configured user credentials
-:::
+> **Tip:**
+>
+> - **Databend Cloud**: Log in → Click **Connect** → Copy the generated DSN
+> - **Self-Hosted**: Use your server address with the configured user credentials
 
 ## SQL Clients
 

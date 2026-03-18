@@ -45,9 +45,9 @@ The inner product is fundamental in:
 - Machine learning algorithms (neural networks, SVM, etc.)
 - Physics calculations involving work and energy
 
-:::info
-This function performs vector computations within Databend and does not rely on external APIs.
-:::
+> **Note:**
+>
+> This function performs vector computations within Databend and does not rely on external APIs.
 
 ## Examples
 

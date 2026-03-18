@@ -1,14 +1,15 @@
 ---
 title: MEDIAN
-summary: Aggregate function.
+summary: The MEDIAN() function.
 ---
+
 Aggregate function.
 
 The MEDIAN() function computes the median of a numeric data sequence.
 
-:::caution
-NULL values are not counted.
-:::
+> **Note:**
+>
+> NULL values are not counted.
 
 ## Syntax
 

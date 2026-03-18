@@ -48,9 +48,9 @@ mytable|FUSE  |      0|          |   5|              |         40|              
 
 The following example displays the status of tables in the current database where the number of rows is greater than 100:
 
-:::note
-When using the SHOW TABLE STATUS query, be aware that some column names, such as "rows," may be interpreted as SQL keywords, potentially leading to errors. To avoid this issue, always enclose column names with backticks, as shown in this example. This ensures that column names are treated as identifiers rather than keywords in the SQL query.
-:::
+> **Note:**
+>
+> When using the SHOW TABLE STATUS query, be aware that some column names, such as "rows," may be interpreted as SQL keywords, potentially leading to errors. To avoid this issue, always enclose column names with backticks, as shown in this example. This ensures that column names are treated as identifiers rather than keywords in the SQL query.
 
 ```sql
 SHOW TABLE STATUS WHERE `rows` > 100;

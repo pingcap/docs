@@ -45,9 +45,9 @@ The vector norm is fundamental in:
 - Feature scaling and preprocessing
 - Physics calculations involving magnitude
 
-:::info
-This function performs vector computations within Databend and does not rely on external APIs.
-:::
+> **Note:**
+>
+> This function performs vector computations within Databend and does not rely on external APIs.
 
 ## Examples
 

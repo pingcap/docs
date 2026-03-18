@@ -60,11 +60,11 @@ SELECT * FROM t WHERE content LIKE '%quick br%'
 2. Index filters data blocks containing these n-grams
 3. Full `LIKE` filter applied only to pre-filtered blocks
 
-:::note **Important Limitations**
-- Pattern must be at least `gram_size` characters long (short patterns like `'%yo%'` with `gram_size=3` won't use the index)
-- Matches are case-insensitive ("FOO" matches "foo", "Foo", "fOo")
-- Only works with `LIKE` operator, not with other pattern matching functions
-:::
+> **Note:**
+>
+> - Pattern must be at least `gram_size` characters long (short patterns like `'%yo%'` with `gram_size=3` won't use the index)
+> - Matches are case-insensitive ("FOO" matches "foo", "Foo", "fOo")
+> - Only works with `LIKE` operator, not with other pattern matching functions
 
 ## Quick Setup
 
@@ -167,7 +167,8 @@ For complete command reference, see [Ngram Index](/tidb-cloud-lake/sql/ngram-ind
 | `REFRESH NGRAM INDEX name ON table`                      | Refresh ngram index                          |
 | `DROP NGRAM INDEX name ON table`                         | Remove ngram index                           |
 
-:::tip **When to Use Ngram Indexes**
+**When to Use Ngram Indexes**
+
 **Ideal for:**
 - Log analysis and monitoring systems
 - Code search and pattern matching
@@ -178,7 +179,6 @@ For complete command reference, see [Ngram Index](/tidb-cloud-lake/sql/ngram-ind
 - Short pattern searches (less than `gram_size` characters)
 - Exact string matching (use equality comparison instead)
 - Complex text search requirements (use Full-Text Index instead)
-:::
 
 ---
 

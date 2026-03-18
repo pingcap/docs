@@ -8,9 +8,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Lists the tables in the current or a specified database.
 
-:::note
-Starting from version 1.2.415, the SHOW TABLES command no longer includes views in its results. To display views, use [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md) instead.
-:::
+> **Note:**
+>
+> Starting from version 1.2.415, the SHOW TABLES command no longer includes views in its results. To display views, use [SHOW VIEWS](/tidb-cloud-lake/sql/show-views.md) instead.
 
 See also: [system.tables](/tidb-cloud-lake/sql/system-tables.md)
 

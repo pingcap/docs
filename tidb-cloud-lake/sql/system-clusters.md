@@ -4,11 +4,11 @@ summary: Contains information about cluster nodes.
 ---
 Contains information about cluster nodes.
 
-:::note 
-You can disable access to `clusters` table using the configuration option `disable_system_table_load`.
-
-For instance, users of DatabendCloud will not be able to see this table. 
-:::
+> **Note:**
+>
+> You can disable access to `clusters` table using the configuration option `disable_system_table_load`.
+>
+> For instance, users of DatabendCloud will not be able to see this table. 
 
 ```sql
 SELECT * FROM system.clusters;

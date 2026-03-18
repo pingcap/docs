@@ -93,9 +93,9 @@ To effectively manage your warehouses and ensure optimal performance and cost-ef
 
 Databend Cloud allows you to manage warehouse access with role-based controls by assigning a specific role to a warehouse, so only users with that role can access the warehouse.
 
-:::note
-Warehouse access control is _not_ enabled out of the box. To enable it, go to **Support** > **Create New Ticket** and submit a request.
-:::
+> **Note:**
+>
+> Warehouse access control is _not_ enabled out of the box. To enable it, go to **Support** > **Create New Ticket** and submit a request.
 
 To assign a role to a warehouse, select the desired role in the **Advanced Options** during the warehouse creation or modification process:
 
@@ -113,9 +113,9 @@ To assign a role to a warehouse, select the desired role in the **Advanced Optio
 
 A multi-cluster warehouse automatically adjusts compute resources by adding or removing clusters based on workload demand. It ensures high concurrency and performance while optimizing cost by scaling up or down as needed.
 
-:::note
-Multi-Cluster is only available for Databend Cloud users on the Business and Dedicated plans.
-:::
+> **Note:**
+>
+> Multi-Cluster is only available for Databend Cloud users on the Business and Dedicated plans.
 
 ### How it Works
 

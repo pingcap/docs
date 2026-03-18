@@ -21,6 +21,6 @@ This page provides a comprehensive overview of task operations in Databend, orga
 | [TASK HISTORY](/tidb-cloud-lake/sql/task-history.md) | Shows run history for one or more tasks |
 | [TASK ERROR INTEGRATION PAYLOAD](/tidb-cloud-lake/sql/task-error-notification-payload.md) | Shows the error payload format for task error notifications |
 
-:::note
-Tasks in Databend allow you to schedule and automate SQL commands for execution at specified intervals.
-:::
+> **Note:**
+>
+> Tasks in Databend allow you to schedule and automate SQL commands for execution at specified intervals.

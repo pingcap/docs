@@ -6,9 +6,9 @@ Compares the pronunciation of two strings by their Soundex codes. Soundex is a p
 
 SOUNDS LIKE is frequently employed in the WHERE clause of SQL queries to narrow down rows using fuzzy string matching, such as for names and addresses, see [Filtering Rows](#filtering-rows) in [Examples](#examples).
 
-:::note
-While the function can be useful for approximate string matching, it is important to note that it is not always accurate. The Soundex algorithm is based on English pronunciation rules and may not work well for strings from other languages or dialects. 
-:::
+> **Note:**
+>
+> While the function can be useful for approximate string matching, it is important to note that it is not always accurate. The Soundex algorithm is based on English pronunciation rules and may not work well for strings from other languages or dialects. 
 
 ## Syntax
 

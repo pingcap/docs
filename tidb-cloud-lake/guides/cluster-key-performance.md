@@ -140,7 +140,6 @@ ALTER TABLE sales SET OPTIONS(
 
 ## Important Notes
 
-:::tip
 **When to Use Cluster Keys:**
 - Large tables (millions+ rows)
 - Slow query performance
@@ -151,7 +150,6 @@ ALTER TABLE sales SET OPTIONS(
 - Small tables
 - Random access patterns
 - Frequently changing data
-:::
 
 ---
 

@@ -8,9 +8,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Inserts rows into multiple tables in a single transaction, with the option for the insertion to be dependent on certain conditions (conditionally) or to occur regardless of any conditions (unconditionally).
 
-:::tip atomic operations
-Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
-:::
+> **Tip:**
+>
+> Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 See also: [INSERT](/tidb-cloud-lake/sql/insert.md)
 

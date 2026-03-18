@@ -2,9 +2,10 @@
 title: Full-Text Index
 summary: Full-text indexes (inverted indexes) automatically enable lightning-fast text searches across large document collections by mapping terms to documents, eliminating the need for slow table scans.
 ---
-:::info
-Looking for a hands-on walkthrough? See [JSON & Search Guide](/tidb-cloud-lake/guides/json-search.md).
-:::
+
+> **Note:**
+>
+> Looking for a hands-on walkthrough? See [JSON & Search Guide](/tidb-cloud-lake/guides/json-search.md).
 
 # Full-Text Index: Automatic Lightning-Fast Text Search
 
@@ -255,7 +256,6 @@ event_timestamp: 2024-04-08 12:00:00
 
 ## Important Notes
 
-:::tip
 **When to Use Full-Text Indexes:**
 - Large text datasets (documents, logs, comments)
 - Frequent text search operations
@@ -266,7 +266,6 @@ event_timestamp: 2024-04-08 12:00:00
 - Small text datasets
 - Exact string matching only
 - Infrequent search operations
-:::
 
 ## Index Limitations
 

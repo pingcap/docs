@@ -34,11 +34,10 @@ PUT fs:///Users/eric/Documents/iris.parquet @my_internal_stage;
 ```
 
 ### Step 3: Query column definitions from the staged file
-:::caution
 
-`infer_schema` currently only supports parquet file format.
-
-:::
+> **Note:**
+>
+> `infer_schema` currently only supports parquet file format.
 
 ```sql
 SELECT * FROM INFER_SCHEMA(location => '@my_internal_stage/iris.parquet');

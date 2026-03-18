@@ -29,9 +29,9 @@ TRY_TO_GEOGRAPHY(<variant>)
 | `<binary>`  | The argument must be a binary expression in WKB or EWKB format.         |
 | `<variant>` | The argument must be a JSON OBJECT in GeoJSON format.                   |
 
-:::note
-Only SRID 4326 is supported for GEOGRAPHY inputs.
-:::
+> **Note:**
+>
+> Only SRID 4326 is supported for GEOGRAPHY inputs.
 
 ## Return Type
 

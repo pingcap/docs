@@ -10,9 +10,9 @@ Returns a bit mask indicating which `GROUP BY` expressions are not included in t
 GROUPING ( expr [, expr, ...] )
 ```
 
-:::note
-`GROUPING` can only be used with `GROUPING SETS`, `ROLLUP`, or `CUBE`, and its arguments must be in the grouping sets list.
-:::
+> **Note:**
+>
+> `GROUPING` can only be used with `GROUPING SETS`, `ROLLUP`, or `CUBE`, and its arguments must be in the grouping sets list.
 
 ## Arguments
 

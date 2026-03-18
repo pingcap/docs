@@ -22,6 +22,6 @@ This page provides a comprehensive overview of stream operations in Databend, or
 
 - [Tracking and Transforming Data via Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
 
-:::note
-Streams in Databend are used to track and capture changes to tables, enabling continuous data pipelines and real-time data processing.
-:::
+> **Note:**
+>
+> Streams in Databend are used to track and capture changes to tables, enabling continuous data pipelines and real-time data processing.

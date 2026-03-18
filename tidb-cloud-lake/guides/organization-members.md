@@ -18,9 +18,9 @@ When you provide an organization name during the signup process, you create an o
 
 ![](/media/tidb-cloud-lake/sign-up.jpg)
 
-:::tip
-If you're invited by a user who already belongs to an organization in Databend Cloud, the textbox will show that organization's name. In this case, you cannot create another organization.
-:::
+> **Tip:**
+>
+> If you're invited by a user who already belongs to an organization in Databend Cloud, the textbox will show that organization's name. In this case, you cannot create another organization.
 
 ### Switching to Another Organization
 
@@ -51,9 +51,8 @@ An invitation email will be sent to the invited user. Inside the email, there wi
 
 ![Alt text](/media/tidb-cloud-lake/invite2.png)
 
-:::note
-
-- Inviting new members to the organization is a privilege restricted to account_admin roles only.
-
-- If your organization is under the Trial Plan, it permits a maximum of one user. In such a case, you won't have the capability to extend invitations to additional members.
-  :::
+> **Note:**
+>
+> - Inviting new members to the organization is a privilege restricted to account_admin roles only.
+>
+> - If your organization is under the Trial Plan, it permits a maximum of one user. In such a case, you won't have the capability to extend invitations to additional members.

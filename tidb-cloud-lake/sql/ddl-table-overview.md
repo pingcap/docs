@@ -49,6 +49,6 @@ This page provides a comprehensive overview of table operations in Databend, org
 | [OPTIMIZE TABLE](/tidb-cloud-lake/sql/optimize-table.md) | Compacts or purges historical data to save storage space and enhance query performance |
 | [SET CLUSTER KEY](/tidb-cloud-lake/sql/set-cluster-key.md) | Configures a cluster key to enhance query performance for large tables |
 
-:::note
-Table optimization is an advanced operation. Please carefully read the documentation before proceeding to avoid potential data loss.
-:::
+> **Note:**
+>
+> Table optimization is an advanced operation. Please carefully read the documentation before proceeding to avoid potential data loss.

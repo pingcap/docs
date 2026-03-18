@@ -22,6 +22,6 @@ This page provides a comprehensive overview of database operations in Databend, 
 | [SHOW CREATE DATABASE](/tidb-cloud-lake/sql/show-create-database.md) | Shows the CREATE DATABASE statement for a database |
 | [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md) | Lists dropped databases that can be recovered |
 
-:::note
-Database operations are foundational for organizing your data in Databend. Make sure you have appropriate privileges before executing these commands.
-:::
+> **Note:**
+>
+> Database operations are foundational for organizing your data in Databend. Make sure you have appropriate privileges before executing these commands.

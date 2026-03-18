@@ -48,9 +48,9 @@ parameters={
 };
 ```
 
-:::tip
-The SQL statements above connect the database `default` in Databend to your MindsDB Cloud account. For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
-:::
+> **Tip:**
+>
+> The SQL statements above connect the database `default` in Databend to your MindsDB Cloud account. For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
@@ -78,9 +78,9 @@ FROM mindsdb.models
 WHERE name='airq_predictor';
 ```
 
-:::note
-The status of the model must be `complete` before you can start making predictions.
-:::
+> **Note:**
+>
+> The status of the model must be `complete` before you can start making predictions.
 
 ### Step 4. Make Predictions
 
@@ -144,9 +144,9 @@ parameters={
 };
 ```
 
-:::tip
-The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
-:::
+> **Tip:**
+>
+> The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
@@ -174,9 +174,9 @@ FROM mindsdb.models
 WHERE name='airq_predictor';
 ```
 
-:::note
-The status of the model must be `complete` before you can start making predictions.
-:::
+> **Note:**
+>
+> The status of the model must be `complete` before you can start making predictions.
 
 ### Step 4. Make Predictions
 
