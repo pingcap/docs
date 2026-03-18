@@ -1,6 +1,6 @@
 ---
 title: Warehouses
-summary: import PlaySVG from '@site/static/img/icon/play.svg' import SuspendSVG from '@site/static/img/icon/suspend.svg' import CheckboxSVG from '@site/static/img/icon/checkbox.svg' import EllipsisSVG from '@site/static/img/icon/ellipsis.svg' import { Button } from 'antd'.
+summary: The warehouse is an essential component of TiDB Cloud Lake. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks.
 ---
 import PlaySVG from '@site/static/img/icon/play.svg'
 import SuspendSVG from '@site/static/img/icon/suspend.svg'
