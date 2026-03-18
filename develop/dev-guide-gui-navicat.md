@@ -69,7 +69,7 @@ Connect to TiDB depending on the TiDB deployment option you have selected.
 
     ![Navicat: configure connection SSL panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
+8. Click **Test Connection** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
 

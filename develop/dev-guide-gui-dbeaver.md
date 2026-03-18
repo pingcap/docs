@@ -74,7 +74,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
     ![Configure connection settings for {{{ .starter }}}](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
+8. Click **Test Connection** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 

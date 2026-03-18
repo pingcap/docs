@@ -73,7 +73,7 @@ Connect to TiDB depending on the TiDB deployment option you have selected.
 
     ![MySQL Workbench: configure connection settings for {{{ .starter }}}](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
+7. Click **Test Connection** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
 8. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
 

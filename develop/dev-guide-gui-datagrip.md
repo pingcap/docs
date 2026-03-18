@@ -69,7 +69,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
     If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} instance.
+8. Click **Test Connection** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
     ![Test the connection to a {{{ .starter }}} instance](/media/develop/datagrip-test-connection.jpg)
 

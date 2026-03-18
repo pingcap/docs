@@ -84,7 +84,7 @@ Connect to TiDB depending on the TiDB deployment option you have selected.
 
     ![VS Code SQLTools: configure connection settings for {{{ .starter }}}](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7. Click **TEST CONNECTION** to validate the connection to the {{{ .starter }}} instance.
+7. Click **TEST CONNECTION** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
     1. In the pop-up window, click **Allow**.
     2. In the **SQLTools Driver Credentials** dialog, enter the password you created in step 4.
