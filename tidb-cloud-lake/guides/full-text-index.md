@@ -1,6 +1,6 @@
 ---
 title: Full-Text Index
-summary: info Looking for a hands-on walkthrough? See JSON & Search Guide. :::.
+summary: Learn about full-text index.
 ---
 :::info
 Looking for a hands-on walkthrough? See [JSON & Search Guide](/tidb-cloud-lake/guides/json-search.md).

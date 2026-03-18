@@ -1,6 +1,6 @@
 ---
 title: Data Purge and Recycle
-summary: In Databend, data is not immediately deleted when you run `DROP`, `TRUNCATE`, or `DELETE` commands. This enables Databend's time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
+summary: In Databend, data is not immediately deleted when you run DROP, TRUNCATE, or DELETE commands. This enables Databend's time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
 ---
 ## Overview
 

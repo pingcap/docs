@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Cloud Lake
-summary: Databend supports multiple connection methods to suit different use cases. All options below work with both **Databend Cloud** and **self-hosted Databend**.
+summary: Databend supports multiple connection methods to suit different use cases. All options below work with Databend Cloud.
 ---
 Databend supports multiple connection methods to suit different use cases. All options below work with both **Databend Cloud** and **self-hosted Databend**.
 

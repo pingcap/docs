@@ -1,6 +1,6 @@
 ---
 title: AI-Powered Features
-summary: import SearchSVG from '@site/static/img/icon/search.svg' import LanguageFileParse from '@site/src/components/LanguageDocs/file-parse' import AITip from '@site/docs/fragment/ai-tip.md'.
+summary: Learn AI-powered features.
 ---
 import SearchSVG from '@site/static/img/icon/search.svg'
 import LanguageFileParse from '@site/src/components/LanguageDocs/file-parse'
