@@ -92,10 +92,10 @@ try (FileInputStream fileInputStream = new FileInputStream(new File("book.csv"))
 }
 ```
 
-:::note
-Be sure that you are able to connect to the backend object storage for Databend from local BendSQL directly.
-If not, you need to specify the `--set presigned_url_disabled=1` option to disable the presigned url feature.
-:::
+> **Note:**
+>
+> Be sure that you are able to connect to the backend object storage for Databend from local BendSQL directly.
+> If not, you need to specify the `--set presigned_url_disabled=1` option to disable the presigned url feature.
 
 
 ### Step 3. Verify Loaded Data

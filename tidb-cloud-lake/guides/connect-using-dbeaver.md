@@ -29,9 +29,9 @@ For connections to Databend Cloud, you can use the default `cloudapp` user or an
 
 Run the following command to launch a Databend instance:
 
-:::note
-If no custom values for `QUERY_DEFAULT_USER` or `QUERY_DEFAULT_PASSWORD` are specified when starting the container, a default `root` user will be created with no password.
-:::
+> **Note:**
+>
+> If no custom values for `QUERY_DEFAULT_USER` or `QUERY_DEFAULT_PASSWORD` are specified when starting the container, a default `root` user will be created with no password.
 
 ```bash
 docker run -d --name databend \
@@ -74,9 +74,9 @@ Log in to Databend Cloud to obtain connection information. For more information,
 
 ![alt text](/media/tidb-cloud-lake/dbeaver-connect-info.png)
 
-:::note
-If your `user` or `password` contains special characters, you need to provide them separately in the corresponding fields (e.g., the `Username` and `Password` fields in DBeaver). In this case, Databend will handle the necessary encoding for you. However, if you're providing the credentials together (e.g., as `user:password`), you must ensure that the entire string is properly encoded before use.
-:::
+> **Note:**
+>
+> If your `user` or `password` contains special characters, you need to provide them separately in the corresponding fields (e.g., the `Username` and `Password` fields in DBeaver). In this case, Databend will handle the necessary encoding for you. However, if you're providing the credentials together (e.g., as `user:password`), you must ensure that the entire string is properly encoded before use.
 
 </StepContent>
 <StepContent number="2">

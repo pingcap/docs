@@ -39,9 +39,9 @@ To manage data sources, navigate to **Data** > **Data Sources** from the left si
 - Edit or delete existing data sources
 - Test connectivity to verify credentials
 
-:::tip
-It is recommended to always test the connection before saving a data source. This helps catch common issues such as incorrect credentials or network restrictions early.
-:::
+> **Tip:**
+>
+> It is recommended to always test the connection before saving a data source. This helps catch common issues such as incorrect credentials or network restrictions early.
 
 ## Managing Tasks
 

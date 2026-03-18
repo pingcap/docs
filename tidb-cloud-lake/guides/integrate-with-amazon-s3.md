@@ -28,9 +28,9 @@ The Amazon S3 data integration enables you to import files from S3 buckets into 
 
 3. Click **Test Connectivity** to verify the credentials. If the test succeeds, click **OK** to save the data source.
 
-:::tip
-The AWS credentials must have read access to the target S3 bucket. If you plan to use the **Clean Up Original Files** option, write and delete permissions are also required.
-:::
+> **Tip:**
+>
+> The AWS credentials must have read access to the target S3 bucket. If you plan to use the **Clean Up Original Files** option, write and delete permissions are also required.
 
 ## Creating an S3 Integration Task
 
@@ -79,9 +79,9 @@ The system reads the first matching file and displays:
 - Sample data with column names and types
 - A list of matching files (up to 25 files) with their sizes
 
-:::note
-Files larger than 10GB are skipped during preview. Only the first 25 matching files are displayed.
-:::
+> **Note:**
+>
+> Files larger than 10GB are skipped during preview. Only the first 25 matching files are displayed.
 
 ### Step 3: Set Target Table
 
@@ -106,9 +106,9 @@ The system auto-detects columns from the source files. You can review and edit c
 | **Clean Up Original Files**  | Off      | When enabled, deletes source files from S3 after successful import                               |
 | **Allow Duplicate Imports**  | Off      | When enabled, allows re-importing files that have already been imported                          |
 
-:::tip
-Enable **Continuous Ingestion** when new files are regularly added to the S3 path and you want them automatically loaded into Databend. Disable it for one-time imports.
-:::
+> **Tip:**
+>
+> Enable **Continuous Ingestion** when new files are regularly added to the S3 path and you want them automatically loaded into Databend. Disable it for one-time imports.
 
 Click **Create** to finalize the integration task.
 
