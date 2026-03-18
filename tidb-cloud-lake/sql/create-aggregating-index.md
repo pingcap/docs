@@ -2,9 +2,10 @@
 title: CREATE AGGREGATING INDEX
 summary: Create a new aggregating index in Databend.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Create a new aggregating index in Databend.
 

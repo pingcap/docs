@@ -2,9 +2,10 @@
 title: CREATE VIEW
 summary: Creates a new view based on a query; the Logical View does not store any physical data, when we access a logical view, it will convert the sql into the subquery format to finish it.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Creates a new view based on a query; the Logical View does not store any physical data, when we access a logical view, it will convert the sql into the subquery format to finish it.
 

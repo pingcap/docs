@@ -2,9 +2,10 @@
 title: SHOW SEQUENCES
 summary: Returns a list of the created sequences.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.742"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.742.
 
 Returns a list of the created sequences.
 

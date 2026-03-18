@@ -2,9 +2,10 @@
 title: COVAR_POP
 summary: Returns the population covariance of a set of number pairs.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.738"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.738.
 
 Returns the population covariance of a set of number pairs. 
 

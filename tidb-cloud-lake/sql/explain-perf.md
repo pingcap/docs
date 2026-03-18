@@ -2,11 +2,10 @@
 title: EXPLAIN PERF
 summary: Profiles query CPU usage and returns an HTML flame graph collected from all cluster nodes.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
-<FunctionDescription description="Introduced or updated: v1.2.765"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.765.
 
 `EXPLAIN PERF` captures stack traces to perform CPU profiling. This command returns an HTML file containing flame graphs generated from data collected from all nodes in the current cluster. You can directly open this HTML file in your browser.
 

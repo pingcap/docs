@@ -2,9 +2,10 @@
 title: SCORE
 summary: Returns the relevance score for rows matched by inverted-index search conditions.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.425"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.425.
 
 `SCORE()` returns the relevance score assigned to the current row by the inverted index search. Use it together with [MATCH](/tidb-cloud-lake/sql/match.md) or [QUERY](/tidb-cloud-lake/sql/query.md) in a `WHERE` clause.
 

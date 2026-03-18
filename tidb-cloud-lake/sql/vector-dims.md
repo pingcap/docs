@@ -2,9 +2,10 @@
 title: VECTOR_DIMS
 summary: Returns the dimensionality (number of elements) of a vector.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.780"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.780.
 
 Returns the dimensionality (number of elements) of a vector.
 

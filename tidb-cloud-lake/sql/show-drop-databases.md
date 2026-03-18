@@ -2,9 +2,10 @@
 title: SHOW DROP DATABASES
 summary: Lists all databases along with their deletion timestamps if they have been dropped, allowing users to review deleted databases and their details.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.658"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.658.
 
 Lists all databases along with their deletion timestamps if they have been dropped, allowing users to review deleted databases and their details.
 

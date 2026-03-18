@@ -2,9 +2,10 @@
 title: IS_FLOAT
 summary: Checks if the input JSON value is a float.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.368"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.368.
 
 Checks if the input JSON value is a float.
 

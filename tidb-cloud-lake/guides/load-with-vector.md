@@ -2,9 +2,10 @@
 title: Vector
 summary: Vector is a high-performance observability data pipeline that puts organizations in control of their observability data. Collect, transform, and route all your logs, metrics, and traces to any vendors you want today and any other vendors you may want tomorrow. Vector enables dramatic cost reduction, novel data enrichment, and data security where you need it, not where is most convenient for your vendors. Open source and up to 10x faster than every alternative.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced: v1.1.55"/>
+> **Note:**
+>
+> Introduced in v1.1.55.
 
 [Vector](https://vector.dev/) is a high-performance observability data pipeline that puts organizations in control of their observability data. Collect, transform, and route all your logs, metrics, and traces to any vendors you want today and any other vendors you may want tomorrow. Vector enables dramatic cost reduction, novel data enrichment, and data security where you need it, not where is most convenient for your vendors. Open source and up to 10x faster than every alternative.
 
@@ -233,7 +234,6 @@ source = """
     }
   """
 
-
 [sinks.nginx_access_log_to_databend]
   type = "databend"
   inputs = ["nginx_access_log_parser"]
@@ -244,7 +244,6 @@ source = """
   // highlight-next-line
   endpoint = "http://localhost:8000/"
   compression = "gzip"
-
 
 [sinks.nginx_access_log_to_databend.auth]
   strategy = "basic"
@@ -384,7 +383,6 @@ SELECT count(*) AS count, request_uri AS uri FROM nginx.access_logs GROUP BY uri
 |        2 | /xx/yy             |
 +----------+--------------------+
 ```
-
 
 - __Top 10 HTTP 404 Pages__
 

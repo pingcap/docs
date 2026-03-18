@@ -2,13 +2,10 @@
 title: DESC STREAM
 summary: Describes the details of a specific stream.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.223"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='STREAM'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.223.
 
 Describes the details of a specific stream.
 

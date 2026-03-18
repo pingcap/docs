@@ -12,121 +12,90 @@ The following are feature lists of Databend Cloud among editions:
 
 #### Release Management
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-[`Early access to weekly new releases, which can be used for additional testing/validation before each release is deployed to your production accounts.`, '', '✓', '✓']
-]} />
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| Early access to weekly new releases, which can be used for additional testing/validation before each release is deployed to your production accounts. | | ✓ | ✓ |
 
 #### Security & Governance
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['SOC 2 Type II certification.', '✓', '✓', '✓'],
-['GDPR', '✓', '✓', '✓'],
-['Automatic encryption of all data.', '✓', '✓', '✓'],
-['Object-level access control.', '✓', '✓', '✓'],
-['Standard Time Travel (up to 1 day) for accessing/restoring modified and deleted data.', '✓', '✓', '✓'],
-['Disaster recovery of modified/deleted data (for 7 days beyond Time Travel) through Fail-safe.', '✓', '✓', '✓'],
-['<b>Extended Time Travel</b>.', '', '90 days', '90 days'],
-['Column-level Security to apply masking policies to columns in tables or views.', '✓', '✓', '✓'],
-['Audit the user access history through the Account Usage ACCESS_HISTORY view.', '✓', '✓', '✓'],
-['<b>Support for private connectivity to the Databend Cloud service using AWS PrivateLink</b>.', '', '✓', '✓'],
-['<b>Dedicated metadata store and pool of compute resources (used in virtual warehouses)</b>.', '', '', '✓'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| SOC 2 Type II certification. | ✓ | ✓ | ✓ |
+| GDPR | ✓ | ✓ | ✓ |
+| Automatic encryption of all data. | ✓ | ✓ | ✓ |
+| Object-level access control. | ✓ | ✓ | ✓ |
+| Standard Time Travel (up to 1 day) for accessing/restoring modified and deleted data. | ✓ | ✓ | ✓ |
+| Disaster recovery of modified/deleted data (for 7 days beyond Time Travel) through Fail-safe. | ✓ | ✓ | ✓ |
+| **Extended Time Travel**. | | 90 days | 90 days |
+| Column-level Security to apply masking policies to columns in tables or views. | ✓ | ✓ | ✓ |
+| Audit the user access history through the Account Usage ACCESS_HISTORY view. | ✓ | ✓ | ✓ |
+| **Support for private connectivity to the Databend Cloud service using AWS PrivateLink**. | | ✓ | ✓ |
+| **Dedicated metadata store and pool of compute resources (used in virtual warehouses)**. | | | ✓ |
 
 #### Compute Resource
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['Virtual warehouses, separate compute clusters for isolating query and data loading workloads.', '✓', '✓', '✓'],
-['Multi-cluster scaling', '', '✓', '✓'],
-['Resource monitors for monitoring virtual warehouse credit usage.', '✓', '✓', '✓'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| Virtual warehouses, separate compute clusters for isolating query and data loading workloads. | ✓ | ✓ | ✓ |
+| Multi-cluster scaling | | ✓ | ✓ |
+| Resource monitors for monitoring virtual warehouse credit usage. | ✓ | ✓ | ✓ |
 
 #### SQL Support
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['Standard SQL, including most DDL and DML defined in SQL:1999.', '✓', '✓', '✓'],
-['Advanced DML such as multi-table INSERT, MERGE, and multi-merge.', '✓', '✓', '✓'],
-['Broad support for standard data types.', '✓', '✓', '✓'],
-['Native support for semi-structured data (JSON, ORC, Parquet).', '✓', '✓', '✓'],
-['Native support for geospatial data.', '✓', '✓', '✓'],
-['Native support for unstructured data.', '✓', '✓', '✓'],
-['Collation rules for string/text data in table columns.', '✓', '✓', '✓'],
-['Multi-statement transactions.', '✓', '✓', '✓'],
-['User-defined functions (UDFs) with support for JavaScript, Python, and WebAssembly.', '', '✓', '✓'],
-['External functions for extending Databend Cloud to other development platforms.', '✓', '✓', '✓'],
-['Amazon API Gateway private endpoints for external functions.', '✓', '✓', '✓'],
-['External tables for referencing data in a cloud storage data lake.', '✓', '✓', '✓'],
-['Support for clustering data in very large tables to improve query performance, with automatic maintenance of clustering.', '✓', '✓', '✓'],
-['Search optimization for point lookup queries, with automatic maintenance.', '✓', '✓', '✓'],
-['Materialized views, with automatic maintenance of results.', '✓', '✓', '✓'],
-['Iceberg tables for referencing data in a cloud storage data lake.', '✓', '✓', '✓'],
-['Schema detection for automatically detecting the schema in a set of staged semi-structured data files and retrieving the column definitions.', '✓', '✓', '✓'],
-['Schema evolution for automatically evolving tables to support the structure of new data received from the data sources.', '✓', '✓', '✓'],
-['Support for <a href="/sql/sql-commands/ddl/table/ddl-create-table-external-location" target="_self">creating table with external location</a>.', '✓', '✓', '✓'],
-['Supports for <a href="/sql/sql-commands/ddl/table/attach-table" target="_self">ATTACH TABLE</a>.', '✓', '✓', '✓'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| Standard SQL, including most DDL and DML defined in SQL:1999. | ✓ | ✓ | ✓ |
+| Advanced DML such as multi-table INSERT, MERGE, and multi-merge. | ✓ | ✓ | ✓ |
+| Broad support for standard data types. | ✓ | ✓ | ✓ |
+| Native support for semi-structured data (JSON, ORC, Parquet). | ✓ | ✓ | ✓ |
+| Native support for geospatial data. | ✓ | ✓ | ✓ |
+| Native support for unstructured data. | ✓ | ✓ | ✓ |
+| Collation rules for string/text data in table columns. | ✓ | ✓ | ✓ |
+| Multi-statement transactions. | ✓ | ✓ | ✓ |
+| User-defined functions (UDFs) with support for JavaScript, Python, and WebAssembly. | | ✓ | ✓ |
+| External functions for extending Databend Cloud to other development platforms. | ✓ | ✓ | ✓ |
+| Amazon API Gateway private endpoints for external functions. | ✓ | ✓ | ✓ |
+| External tables for referencing data in a cloud storage data lake. | ✓ | ✓ | ✓ |
+| Support for clustering data in very large tables to improve query performance, with automatic maintenance of clustering. | ✓ | ✓ | ✓ |
+| Search optimization for point lookup queries, with automatic maintenance. | ✓ | ✓ | ✓ |
+| Materialized views, with automatic maintenance of results. | ✓ | ✓ | ✓ |
+| Iceberg tables for referencing data in a cloud storage data lake. | ✓ | ✓ | ✓ |
+| Schema detection for automatically detecting the schema in a set of staged semi-structured data files and retrieving the column definitions. | ✓ | ✓ | ✓ |
+| Schema evolution for automatically evolving tables to support the structure of new data received from the data sources. | ✓ | ✓ | ✓ |
+| Support for <a href="/sql/sql-commands/ddl/table/ddl-create-table-external-location" target="_self">creating table with external location</a>. | ✓ | ✓ | ✓ |
+| Supports for <a href="/sql/sql-commands/ddl/table/attach-table" target="_self">ATTACH TABLE</a>. | ✓ | ✓ | ✓ |
 
 #### Interfaces & Tools
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['The next-generation SQL worksheet for advanced query development, data analysis, and visualization.', '✓', '✓', '✓'],
-['BendSQL, a command line client for building/testing queries, loading/unloading bulk data, and automating DDL operations.', '✓', '✓', '✓'],
-['Programmatic interfaces for Rust, Python, Java, Node.js, .js, PHP, and Go.', '✓', '✓', '✓'],
-['Native support for JDBC.', '✓', '✓', '✓'],
-['Extensive ecosystem for connecting to ETL, BI, and other third-party vendors and technologies.', '✓', '✓', '✓'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| The next-generation SQL worksheet for advanced query development, data analysis, and visualization. | ✓ | ✓ | ✓ |
+| BendSQL, a command line client for building/testing queries, loading/unloading bulk data, and automating DDL operations. | ✓ | ✓ | ✓ |
+| Programmatic interfaces for Rust, Python, Java, Node.js, .js, PHP, and Go. | ✓ | ✓ | ✓ |
+| Native support for JDBC. | ✓ | ✓ | ✓ |
+| Extensive ecosystem for connecting to ETL, BI, and other third-party vendors and technologies. | ✓ | ✓ | ✓ |
 
 #### Data Import & Export
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['Bulk loading from delimited flat files (CSV, TSV, etc.) and semi-structured data files (JSON, ORC, Parquet).', '✓', '✓', '✓'],
-['Bulk unloading to delimited flat files and JSON files.', '✓', '✓', '✓'],
-['Continuous micro-batch loading.', '✓', '✓', '✓'],
-['Streaming for low-latency loading of streaming data.', '✓', '✓', '✓'],
-['Databend Cloud Connector for Kafka for loading data from Apache Kafka topics.', '✓', '✓', '✓'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| Bulk loading from delimited flat files (CSV, TSV, etc.) and semi-structured data files (JSON, ORC, Parquet). | ✓ | ✓ | ✓ |
+| Bulk unloading to delimited flat files and JSON files. | ✓ | ✓ | ✓ |
+| Continuous micro-batch loading. | ✓ | ✓ | ✓ |
+| Streaming for low-latency loading of streaming data. | ✓ | ✓ | ✓ |
+| Databend Cloud Connector for Kafka for loading data from Apache Kafka topics. | ✓ | ✓ | ✓ |
 
 #### Data Pipelines
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['Streams for tracking table changes.', '✓', '✓', '✓'],
-['Tasks for scheduling the execution of SQL statements, often in conjunction with table streams.', '✓', '✓', '✓'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| Streams for tracking table changes. | ✓ | ✓ | ✓ |
+| Tasks for scheduling the execution of SQL statements, often in conjunction with table streams. | ✓ | ✓ | ✓ |
 
 #### Customer Support
 
-<DatabendTable
-width={['67%', '11%', '11%', '11%']}
-thead={['Features', 'Personal', 'Business', 'Dedicated']}
-tbody={[
-['Logging and tracking support tickets.', '✓', '✓', '✓'],
-['4/7 coverage and 1-hour response window for Severity 1 issues.', '✓', '✓', '✓'],
-['<b>Response to non-severity-1 issues in hours</b>.', '8h', '4h', '1h'],
-]}
-/>
+| Features | Personal | Business | Dedicated |
+|----------|----------|----------|-----------|
+| Logging and tracking support tickets. | ✓ | ✓ | ✓ |
+| 4/7 coverage and 1-hour response window for Severity 1 issues. | ✓ | ✓ | ✓ |
+| **Response to non-severity-1 issues in hours**. | 8h | 4h | 1h |

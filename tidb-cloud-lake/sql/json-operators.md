@@ -2,9 +2,10 @@
 title: JSON Operators
 summary: This page describes JSON Operators in TiDB Cloud Lake.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.644"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.644.
 
 | Operator    | Description                                                                                                                          | Example                                                                                                                                                                                   | Result                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |

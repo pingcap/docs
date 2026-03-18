@@ -2,9 +2,10 @@
 title: REFRESH INVERTED INDEX
 summary: Databend automatically refreshes inverted indexes in SYNC mode whenever new data is written. Use REFRESH INVERTED INDEX primarily to backfill rows that existed before the index was declared.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.405"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.405.
 
 Databend automatically refreshes inverted indexes in `SYNC` mode whenever new data is written. Use `REFRESH INVERTED INDEX` primarily to backfill rows that existed before the index was declared.
 

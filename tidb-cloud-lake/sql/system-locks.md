@@ -2,9 +2,10 @@
 title: system.locks
 summary: Contains information about the locks in the system.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.262"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.262.
 
 Contains information about the locks in the system.
 

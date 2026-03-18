@@ -2,9 +2,10 @@
 title: system.settings
 summary: Stores the system settings of the current session.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.745"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.745.
 
 Stores the system settings of the current session.
 

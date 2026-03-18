@@ -2,9 +2,10 @@
 title: Arithmetic Operators
 summary: This page describes Arithmetic Operators in TiDB Cloud Lake.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.53"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.53.
 
 | Operator              | Description                                               | Example                    | Result    |
 | --------------------- | --------------------------------------------------------- | -------------------------- | --------- |

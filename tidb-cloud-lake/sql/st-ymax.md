@@ -2,9 +2,10 @@
 title: ST_YMAX
 summary: Returns the maximum latitude (Y coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.512"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.512.
 
 Returns the maximum latitude (Y coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 

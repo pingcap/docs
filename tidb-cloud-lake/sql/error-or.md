@@ -2,9 +2,10 @@
 title: ERROR_OR
 summary: Returns the first non-error expression among its inputs. If all expressions result in errors, it returns NULL.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.379"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.379.
 
 Returns the first non-error expression among its inputs. If all expressions result in errors, it returns NULL.
 

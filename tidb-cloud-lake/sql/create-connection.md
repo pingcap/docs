@@ -2,11 +2,10 @@
 title: CREATE CONNECTION
 summary: Creates a connection to external storage.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
-<FunctionDescription description="Introduced or updated: v1.2.780"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.780.
 
 Creates a connection to external storage.
 
@@ -42,13 +41,15 @@ Connections encapsulate the credentials and configuration for a specific storage
 
 For parameter meanings, optional flags, and additional storage types, refer to [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md). Expand the tabs below to see storage-specific examples:
 
-<Tabs groupId="connection-storage-types">
-<TabItem value="s3" label="Amazon S3">
+<SimpleTab groupId="connection-storage-types">
+
+<div label="Amazon S3" value="s3">
 
 Choose an authentication method for Amazon S3 and S3-compatible services:
 
-<Tabs groupId="s3-auth-methods">
-<TabItem value="access-keys" label="Access Keys">
+<SimpleTab groupId="s3-auth-methods">
+
+<div label="Access Keys" value="access-keys">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -62,8 +63,9 @@ CREATE CONNECTION <connection_name>
 | ACCESS_KEY_ID | Your AWS access key ID. |
 | SECRET_ACCESS_KEY | Your AWS secret access key. |
 
-</TabItem>
-<TabItem value="iam-role" label="IAM Role">
+</div>
+
+<div label="IAM Role" value="iam-role">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -75,11 +77,12 @@ CREATE CONNECTION <connection_name>
 |-----------|-------------|
 | ROLE_ARN  | The Amazon Resource Name (ARN) of the IAM role that Databend will assume to access your S3 resources. |
 
-</TabItem>
-</Tabs>
+</div>
+</SimpleTab>
 
-</TabItem>
-<TabItem value="azblob" label="Azure Blob">
+</div>
+
+<div label="Azure Blob" value="azblob">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -89,8 +92,9 @@ CREATE CONNECTION <connection_name>
     ENDPOINT_URL = 'https://<account-name>.blob.core.windows.net';
 ```
 
-</TabItem>
-<TabItem value="gcs" label="Google Cloud Storage">
+</div>
+
+<div label="Google Cloud Storage" value="gcs">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -98,8 +102,9 @@ CREATE CONNECTION <connection_name>
     CREDENTIAL = '<base64-encoded-service-account>';
 ```
 
-</TabItem>
-<TabItem value="oss" label="Alibaba Cloud OSS">
+</div>
+
+<div label="Alibaba Cloud OSS" value="oss">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -109,8 +114,9 @@ CREATE CONNECTION <connection_name>
     ENDPOINT_URL = 'https://<bucket-name>.<region-id>[-internal].aliyuncs.com';
 ```
 
-</TabItem>
-<TabItem value="cos" label="Tencent COS">
+</div>
+
+<div label="Tencent COS" value="cos">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -120,8 +126,9 @@ CREATE CONNECTION <connection_name>
     ENDPOINT_URL = '<your-endpoint-url>';
 ```
 
-</TabItem>
-<TabItem value="hf" label="Hugging Face">
+</div>
+
+<div label="Hugging Face" value="hf">
 
 ```sql
 CREATE CONNECTION <connection_name>
@@ -133,16 +140,14 @@ CREATE CONNECTION <connection_name>
 
 Omit `TOKEN` for public repositories; include it for private or rate-limited assets.
 
-</TabItem>
-</Tabs>
-
+</div>
+</SimpleTab>
 
 ## Access control requirements
 
 | Privilege         | Object Type | Description           |
 |:------------------|:------------|:----------------------|
 | CREATE CONNECTION | Global      | Creates a connection. |
-
 
 To create a connection, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE CONNECTION [privilege](/tidb-cloud-lake/guides/privileges.md).
 

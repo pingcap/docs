@@ -2,8 +2,6 @@
 title: MCP Client Integration
 summary: Databend MCP connects AI assistants to Databend via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients.
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # MCP Client Integration
 
@@ -36,9 +34,9 @@ We recommend using **Databend Cloud** for the best experience.
 
 ### 2. Configure Your MCP Client
 
-<Tabs groupId="mcp-clients">
+<SimpleTab groupId="mcp-clients">
 
-<TabItem value="codex" label="Codex">
+<div label="Codex" value="codex">
 
 ```bash
 codex mcp add databend \
@@ -59,9 +57,9 @@ DATABEND_DSN = "databend://user:password@host:port/database?warehouse=your_wareh
 SAFE_MODE = "false"
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="claude-code" label="Claude Code">
+<div label="Claude Code" value="claude-code">
 
 ```bash
 claude mcp add databend \
@@ -70,9 +68,9 @@ claude mcp add databend \
   -- uv tool run mcp-databend
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="gemini-cli" label="Gemini CLI">
+<div label="Gemini CLI" value="gemini-cli">
 
 Add to `~/.gemini/settings.json`:
 
@@ -91,9 +89,9 @@ Add to `~/.gemini/settings.json`:
 }
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="cursor" label="Cursor">
+<div label="Cursor" value="cursor">
 
 Add to `~/.cursor/mcp.json`:
 
@@ -112,9 +110,9 @@ Add to `~/.cursor/mcp.json`:
 }
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="claude-desktop" label="Claude Desktop">
+<div label="Claude Desktop" value="claude-desktop">
 
 Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%/Claude/claude_desktop_config.json` (Windows):
 
@@ -133,9 +131,9 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="vscode" label="VS Code">
+<div label="VS Code" value="vscode">
 
 Add to `.vscode/mcp.json`:
 
@@ -154,9 +152,9 @@ Add to `.vscode/mcp.json`:
 }
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="manual" label="Manual">
+<div label="Manual" value="manual">
 
 ```bash
 export DATABEND_DSN="databend://user:password@host:port/database?warehouse=your_warehouse"
@@ -165,9 +163,8 @@ export SAFE_MODE="false"
 uv tool run mcp-databend
 ```
 
-</TabItem>
-
-</Tabs>
+</div>
+</SimpleTab>
 
 ## Available Tools
 

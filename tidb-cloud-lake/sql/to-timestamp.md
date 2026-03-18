@@ -2,9 +2,10 @@
 title: TO_TIMESTAMP
 summary: Converts an expression to a date with time.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.664"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.664.
 
 Converts an expression to a date with time.
 
@@ -33,7 +34,6 @@ TO_TIMESTAMP(<expr>, <pattern>)
 ```
 
 The function converts the first string to a timestamp based on the pattern specified in the second string. To specify the pattern, use specifiers. The specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
-
 
 ```sql
 -- Convert an integer to a timestamp based on the specified scale

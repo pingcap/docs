@@ -2,28 +2,23 @@
 title: Worksheets
 summary: Worksheets in TiDB Cloud Lake are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
 ---
-import DbSVG from '@site/static/img/icon/database.svg'
-import RoleSVG from '@site/static/img/icon/role.svg'
-import WarehouseSVG from '@site/static/img/icon/warehouse.svg'
-import EllipsisSVG from '@site/static/img/icon/ellipsis.svg'
-
 Worksheets in Databend Cloud are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
 
 ## Creating a Worksheet
 
 To create a new worksheet, click on **Worksheets** in the sidebar and select **New Worksheet**.
 
-If your SQL statements are already saved in an SQL file, you can also create a worksheet directly from the file. To do so, click the ellipsis icon <EllipsisSVG/> to the right of **New Worksheet**, then select **Create from SQL File**.
+If your SQL statements are already saved in an SQL file, you can also create a worksheet directly from the file. To do so, click the ellipsis icon <svg t="1722479222306" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2315" width="16" height="16"><path d="M213.333333 512a85.333333 85.333333 0 1 1-85.333333-85.333333 85.333333 85.333333 0 0 1 85.333333 85.333333z m298.666667-85.333333a85.333333 85.333333 0 1 0 85.333333 85.333333 85.333333 85.333333 0 0 0-85.333333-85.333333z m384 0a85.333333 85.333333 0 1 0 85.333333 85.333333 85.333333 85.333333 0 0 0-85.333333-85.333333z" fill="#1677FF" p-id="2316"></path></svg> to the right of **New Worksheet**, then select **Create from SQL File**.
 
 ## Editing and Running SQL Statements
 
 To edit and run an SQL statement:
 
-1. Click on the database icon <DbSVG/> above the SQL editor and select the database you want to query.
-2. Click on the user icon <RoleSVG/> above the SQL editor and choose a role to use. The dropdown list will display all the roles you have been granted, along with any child roles under your roles in the hierarchy. For more information about the role hierarchy, see [Inheriting Roles & Establishing Hierarchy](/tidb-cloud-lake/guides/roles.md#inheriting-roles--establishing-hierarchy).
+1. Click on the database icon <svg t="1721790323165" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4273" width="16" height="16"><path d="M522.666667 96l8.533333 0.042667a910.08 910.08 0 0 1 91.562667 5.333333l14.549333 1.706667 15.402667 2.133333 15.125333 2.410667 7.573333 1.322666 14.890667 2.837334c125.205333 25.322667 212.928 79.488 216.256 150.677333l0.106667 4.202667v448c0 73.258667-88.704 129.066667-216.362667 154.88l-14.890667 2.837333-7.573333 1.322667-15.125333 2.389333-15.402667 2.133333c-36.266667 4.650667-74.773333 7.104-114.645333 7.104-39.872 0-78.378667-2.453333-114.645334-7.104l-15.402666-2.133333-15.125334-2.389333c-137.088-23.189333-235.264-79.488-238.72-154.901334L138.666667 714.666667v-448l0.106666-4.202667c3.328-71.189333 91.050667-125.354667 216.256-150.677333l14.890667-2.837334 7.573333-1.322666 15.125334-2.389334 15.402666-2.133333a892.202667 892.202667 0 0 1 97.642667-6.954667L522.666667 96z" fill="#1677FF" p-id="4274"></path></svg> above the SQL editor and select the database you want to query.
+2. Click on the user icon <svg t="1721790740383" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5380" width="16" height="16"><path d="M994.048 857.7024a36.4544 36.4544 0 0 0-70.6048 17.8688c5.5808 22.2208 9.4208 44.9024 11.4176 67.8912H89.1904c18.432-216.1152 199.5776-386.4064 420.096-387.7888 0.9216 0 1.7408 0.256 2.6624 0.256a256 256 0 1 0-256-256c0 84.8896 41.7792 159.5904 105.4208 206.1312C160.6144 570.0096 14.6944 758.1696 14.6944 979.8656c0 20.1216 16.3328 36.4544 36.4544 36.4544h921.6a36.4544 36.4544 0 0 0 36.4544-36.4544 494.1312 494.1312 0 0 0-15.1552-122.1632zM512 120.832c98.816 0 179.2 80.384 179.2 179.2s-80.384 179.2-179.2 179.2-179.2-80.384-179.2-179.2 80.384-179.2 179.2-179.2z" fill="#438CFF" p-id="5381"></path><path d="M579.7376 666.368a38.4 38.4 0 1 0-54.3232 54.3232l129.8432 129.792a38.2976 38.2976 0 0 0 54.272 0l274.6368-274.6368a38.4 38.4 0 1 0-54.3232-54.3232l-247.5008 247.5008-102.6048-102.656z" fill="#438CFF" p-id="5382"></path></svg> above the SQL editor and choose a role to use. The dropdown list will display all the roles you have been granted, along with any child roles under your roles in the hierarchy. For more information about the role hierarchy, see [Inheriting Roles & Establishing Hierarchy](/tidb-cloud-lake/guides/roles.md#inheriting-roles--establishing-hierarchy).
 
 3. Edit the SQL statement in the SQL editor.
-4. Click on the warehouse icon <WarehouseSVG/> under the SQL editor and select a warehouse from the list.
+4. Click on the warehouse icon <svg stroke="#1677FF" fill="transparent" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M9.632 17H17V3H6.316v3.684"></path><path d="M3 6.684h6.632V17H3V6.684z"></path><path d="M5.947 14.79h.737"></path><path d="M11.474 14.79h.736"></path></svg> under the SQL editor and select a warehouse from the list.
 5. Click **Run Script**.
 
 The query result shows in the output area. You can click **Export** to save the whole result to a CSV file, or select one or multiple cells in the output area and press Command + C (on Mac) or Ctrl + C (on Windows) to copy them to your clipboard.

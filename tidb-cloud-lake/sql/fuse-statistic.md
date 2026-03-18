@@ -2,9 +2,10 @@
 title: FUSE_STATISTIC
 summary: note This function is deprecated. Use SHOW STATISTICS instead to view table statistics..
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.587"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.587.
 
 > **Note:**
 >

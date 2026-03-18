@@ -2,9 +2,10 @@
 title: ARRAY_REMOVE_LAST
 summary: Removes the last occurrence of an element from an array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Removes the last occurrence of an element from an array.
 

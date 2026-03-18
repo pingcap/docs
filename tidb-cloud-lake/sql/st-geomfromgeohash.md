@@ -2,9 +2,10 @@
 title: ST_GEOMFROMGEOHASH
 summary: Returns a GEOMETRY object for the polygon that represents the boundaries of a geohash.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.402"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.402.
 
 Returns a GEOMETRY object for the polygon that represents the boundaries of a [geohash](https://en.wikipedia.org/wiki/Geohash).
 

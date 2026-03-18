@@ -2,9 +2,10 @@
 title: MAP_TRANSFORM_KEYS
 summary: Applies a transformation to each key in a JSON object using a lambda expression.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Applies a transformation to each key in a JSON object using a [lambda expression](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 

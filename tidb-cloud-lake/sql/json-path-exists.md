@@ -2,9 +2,10 @@
 title: JSON_PATH_EXISTS
 summary: Checks whether a specified path exists in JSON data.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.119"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.119.
 
 Checks whether a specified path exists in JSON data.
 
@@ -33,7 +34,6 @@ SELECT JSON_PATH_EXISTS(parse_json('{"a": 1, "b": 2}'), '$.a ? (@ == 1)');
 
 ----
 true
-
 
 SELECT JSON_PATH_EXISTS(parse_json('{"a": 1, "b": 2}'), '$.a ? (@ > 1)');
 

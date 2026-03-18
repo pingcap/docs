@@ -2,9 +2,10 @@
 title: ADD_MONTHS
 summary: The add_months() function adds a specified number of months to a given date or timestamp.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.760"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.760.
 
 The add_months() function adds a specified number of months to a given date or timestamp.
 

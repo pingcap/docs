@@ -2,9 +2,10 @@
 title: MAP_FILTER
 summary: Filters key-value pairs in a JSON object based on a specified condition, defined using a lambda expression.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Filters key-value pairs in a JSON object based on a specified condition, defined using a [lambda expression](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 

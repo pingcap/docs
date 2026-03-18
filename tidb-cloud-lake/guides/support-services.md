@@ -2,25 +2,12 @@
 title: Support Services
 summary: Databend provides comprehensive Support Services for our Databend Cloud users and customers. Our objective is to deliver exceptional support that reflects the Databend product's core values – high performance, ease of use, and fast, high-quality results.
 ---
-import LanguageDocs from '@site/src/components/LanguageDocs';
 
 # Databend Cloud Support Services
 
 Databend provides comprehensive Support Services for our Databend Cloud users and customers. Our objective is to deliver exceptional support that reflects the Databend product's core values – high performance, ease of use, and fast, high-quality results.
 
-<LanguageDocs
-cn=
-'
-
-有关各版本详细支持服务级别，请参阅 [支持服务级别](#support-service-levels)。如需了解更多信息，请联系我们的[销售团队](https://www.databend.cn/contact-us/)。
-
-'
-en=
-'
-
 For detailed information about support service levels across different editions, see [Support Service Levels](#support-service-levels). For more information, contact our [sales team](https://www.databend.com/contact-us/).
-
-'/>
 
 ## Getting Support
 

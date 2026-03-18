@@ -2,9 +2,10 @@
 title: SHOW WAREHOUSES
 summary: Lists all warehouses visible to the current tenant.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.687"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.687.
 
 Lists all warehouses visible to the current tenant.
 

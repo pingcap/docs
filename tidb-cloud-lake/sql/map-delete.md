@@ -2,9 +2,10 @@
 title: MAP_DELETE
 summary: Returns an existing MAP with one or more keys removed.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.547"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.547.
 
 Returns an existing MAP with one or more keys removed.
 

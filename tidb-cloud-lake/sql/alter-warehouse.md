@@ -2,9 +2,10 @@
 title: ALTER WAREHOUSE
 summary: Suspends, resumes, or modifies settings of an existing warehouse.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.687"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.687.
 
 Suspends, resumes, or modifies settings of an existing warehouse.
 

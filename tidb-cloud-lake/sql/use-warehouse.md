@@ -2,9 +2,10 @@
 title: USE WAREHOUSE
 summary: Binds the current session to a specific warehouse. Subsequent queries in the session will use this warehouse for execution.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.687"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.687.
 
 Binds the current session to a specific warehouse. Subsequent queries in the session will use this warehouse for execution.
 

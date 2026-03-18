@@ -2,9 +2,6 @@
 title: Virtual Column
 summary: This page provides a comprehensive overview of virtual column operations in Databend, organized by functionality for easy reference.
 ---
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='VIRTUAL COLUMN'/>
 
 This page provides a comprehensive overview of virtual column operations in Databend, organized by functionality for easy reference.
 

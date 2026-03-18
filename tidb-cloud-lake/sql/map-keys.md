@@ -2,9 +2,10 @@
 title: MAP_KEYS
 summary: Returns the keys in a map.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.429"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.429.
 
 Returns the keys in a map.
 

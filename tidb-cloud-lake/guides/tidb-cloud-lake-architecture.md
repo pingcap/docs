@@ -2,13 +2,12 @@
 title: TiDB Cloud Lake Architecture
 summary: TiDB Cloud Lake Architecture.
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 ![TiDB Cloud Lake Architecture](/media/tidb-cloud-lake/architecture.png)
 
-<Tabs groupId="databendlay">
-<TabItem value="Meta-Service Layer" label="Meta-Service Layer">
+<SimpleTab groupId="databendlay">
+
+<div label="Meta-Service Layer" value="Meta-Service Layer">
 
 The metadata service is a multi-tenant service that stores the metadata of each tenant in Databend Cloud in a highly available Raft cluster. This metadata includes:
 
@@ -16,8 +15,9 @@ The metadata service is a multi-tenant service that stores the metadata of each 
 - Cluster management: When the cluster of each tenant starts, multiple instances within the cluster will be registered as metadata and provide health checks for the instances to ensure the overall health of the cluster;
 - Security management: saves user, role, and permission-granting information to ensure the security and reliability of data access authentication and authorization processes.
 
-</TabItem>
-<TabItem value="Compute Layer" label="Compute Layer">
+</div>
+
+<div label="Compute Layer" value="Compute Layer">
 
 The architecture of complete separation of storage and compute gives Databend Cloud a unique computational elasticity.
 
@@ -31,8 +31,9 @@ In the compute cluster, queries are executed through the high-performance Databe
 
 In addition, Databend Cloud can dynamically increase or decrease nodes in the cluster with the change of query workload, making computing faster and more cost-effective.
 
-</TabItem>
-<TabItem value="Storage Layer" label="Storage Layer">
+</div>
+
+<div label="Storage Layer" value="Storage Layer">
 
 The storage layer of Databend Cloud is based on FuseEngine, which is designed and optimized for inexpensive object storage. FuseEngine efficiently organizes data based on the properties of object storage, allowing for high-throughput data ingestion and retrieval.
 
@@ -40,5 +41,5 @@ FuseEngine compresses data in a columnar format and stores it in object storage,
 
 In addition to storing data files, FuseEngine also generates index information, including MinMax index, Bloomfilter index, and others. These indexes reduce IO and CPU consumption during query execution, greatly improving query performance.
 
-</TabItem>
-</Tabs>
+</div>
+</SimpleTab>

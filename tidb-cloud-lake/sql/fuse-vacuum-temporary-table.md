@@ -2,9 +2,10 @@
 title: FUSE_VACUUM_TEMPORARY_TABLE
 summary: Temporary tables are typically cleaned up automatically at session end (details in CREATE TEMP TABLE). However, this process can fail due to events like query node crashes or abnormal session terminations, leaving orphaned temporary files.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.666"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.666.
 
 ## Overview
 
@@ -28,7 +29,6 @@ The `FUSE_VACUUM_TEMPORARY_TABLE()` function is designed to be a safe and reliab
 ```sql
 FUSE_VACUUM_TEMPORARY_TABLE();
 ```
-
 
 ## Examples
 

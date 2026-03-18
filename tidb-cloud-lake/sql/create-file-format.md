@@ -2,9 +2,10 @@
 title: CREATE FILE FORMAT
 summary: Create a named file format.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Create a named file format.
 

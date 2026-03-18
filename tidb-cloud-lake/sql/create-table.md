@@ -2,13 +2,10 @@
 title: CREATE TABLE
 summary: Creating tables is one of the most complicated operations for many databases because you might need to.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.821"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='COMPUTED COLUMN'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.821.
 
 Creating tables is one of the most complicated operations for many databases because you might need to:
 
@@ -117,7 +114,9 @@ By default, **all columns are nullable(NULL)** in Databend. If you need a column
 
 ## Auto-Increment Columns
 
-<FunctionDescription description="Introduced or updated: v1.2.821"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.821.
 
 `AUTOINCREMENT` or `IDENTITY` can be used to create auto-incrementing columns that automatically generate sequential numeric values. This is particularly useful for creating unique identifiers.
 
@@ -217,9 +216,7 @@ Databend's syntax is difference from MySQL mainly in the data type and some spec
 |:----------|:--------------|:-----------------------|
 | CREATE    | Global, Table | Creates a table.       |
 
-
 To create a table, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE [privilege](/tidb-cloud-lake/guides/privileges.md#table-privileges).
-
 
 ## Examples
 

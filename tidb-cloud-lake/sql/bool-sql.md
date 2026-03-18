@@ -2,9 +2,10 @@
 title: bool_or
 summary: Returns true if at least one input value is true, otherwise false.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.756"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.756.
 
 Returns true if at least one input value is true, otherwise false
 

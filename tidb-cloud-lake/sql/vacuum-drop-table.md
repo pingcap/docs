@@ -2,13 +2,10 @@
 title: VACUUM DROP TABLE
 summary: The VACUUM DROP TABLE command helps save storage space by permanently removing data files of dropped tables, freeing up storage space, and enabling you to manage the process efficiently. It offers optional parameters to target specific databases, preview, and limit the number of data files to be vacuumed. To list the dropped tables of a database, use SHOW DROP TABLES.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.368"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='VACUUM DROP TABLE'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.368.
 
 The VACUUM DROP TABLE command helps save storage space by permanently removing data files of dropped tables, freeing up storage space, and enabling you to manage the process efficiently. It offers optional parameters to target specific databases, preview, and limit the number of data files to be vacuumed. To list the dropped tables of a database, use [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md).
 

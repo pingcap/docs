@@ -2,9 +2,10 @@
 title: DROP WORKLOAD GROUP
 summary: Removes the specified workload group.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.743"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.743.
 
 Removes the specified workload group. 
 

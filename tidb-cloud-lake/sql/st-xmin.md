@@ -2,9 +2,10 @@
 title: ST_XMIN
 summary: Returns the minimum longitude (X coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.512"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.512.
 
 Returns the minimum longitude (X coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 

@@ -2,9 +2,10 @@
 title: system.temp_files
 summary: Contains information about temporary files created by Databend, such as spill files. To remove the temporary files, use the VACUUM TEMPORARY FILES command.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.348"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.348.
 
 Contains information about temporary files created by Databend, such as spill files. To remove the temporary files, use the [VACUUM TEMPORARY FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md) command.
 

@@ -2,9 +2,10 @@
 title: DATE_TRUNC
 summary: Truncates a date or timestamp to a specified precision, providing a standardized way to manipulate dates and timestamps. This function is designed to be compatible with various database systems, making it easier for users to migrate and work with different databases.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.745"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.745.
 
 Truncates a date or timestamp to a specified precision, providing a standardized way to manipulate dates and timestamps. This function is designed to be compatible with various database systems, making it easier for users to migrate and work with different databases.
 

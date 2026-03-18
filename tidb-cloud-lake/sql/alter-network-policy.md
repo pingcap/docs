@@ -2,9 +2,10 @@
 title: ALTER NETWORK POLICY
 summary: Modifies an existing network policy in Databend.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.26"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.26.
 
 Modifies an existing network policy in Databend. 
 

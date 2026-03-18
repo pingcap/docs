@@ -2,9 +2,10 @@
 title: CREATE STAGE
 summary: Creates an internal or external stage.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Creates an internal or external stage.
 
@@ -69,7 +70,6 @@ copyOptions ::=
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------|----------|
 | `SIZE_LIMIT = <num>` | Number (> 0) that specifies the maximum rows of data to be loaded for a given COPY statement. Default `0`                     | Optional |
 | `PURGE = <bool>`     | True specifies that the command will purge the files in the stage if they are loaded successfully into table. Default `false` | Optional |
-
 
 ## Access control requirements
 

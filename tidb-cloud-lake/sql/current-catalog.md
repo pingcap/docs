@@ -2,9 +2,10 @@
 title: CURRENT_CATALOG
 summary: Returns the name of the catalog currently in use for the session.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.668"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.668.
 
 Returns the name of the catalog currently in use for the session.
 

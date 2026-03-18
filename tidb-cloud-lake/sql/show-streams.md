@@ -2,13 +2,10 @@
 title: SHOW STREAMS
 summary: Lists the streams associated with a specific database.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.460"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='STREAM'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.460.
 
 Lists the streams associated with a specific database.
 

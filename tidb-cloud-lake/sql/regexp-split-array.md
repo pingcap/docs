@@ -2,9 +2,10 @@
 title: REGEXP_SPLIT_TO_ARRAY
 summary: Splits a string using a regular expression pattern and returns the segments as an array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.756"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.756.
 
 Splits a string using a regular expression pattern and returns the segments as an array.
 
@@ -65,7 +66,6 @@ SELECT regexp_split_to_array('One_Two_Three', '[_-]', 'i')
 ╰─────────────────────────────────────────────────────╯
 
 ```
-
 
 ## See Also
 

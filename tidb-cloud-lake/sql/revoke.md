@@ -2,9 +2,10 @@
 title: REVOKE
 summary: Revokes privileges, roles, and ownership of a specific database object. This includes.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.845"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.845.
 
 Revokes privileges, roles, and ownership of a specific database object. This includes:
 

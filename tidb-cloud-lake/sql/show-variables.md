@@ -2,9 +2,10 @@
 title: SHOW VARIABLES
 summary: Displays all session variables and their details, such as names, values, and types.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.634"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.634.
 
 Displays all session variables and their details, such as names, values, and types.
 

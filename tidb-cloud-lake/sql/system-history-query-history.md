@@ -2,13 +2,10 @@
 title: system_history.query_history
 summary: Query the history for a specific query using its query_id.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='QUERY HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Complete SQL execution audit trail** - Records comprehensive details of all SQL queries executed in Databend. Each query generates two entries (start and finish), providing complete visibility into:
 
@@ -71,7 +68,6 @@ import EEFeature from '@site/src/components/EEFeature';
 | has_profile               | BOOLEAN          | Whether the query has an associated execution profile.                                        |
 | peek_memory_usage         | VARIANT          | The peak memory usage during query execution (as a JSON object).                              |
 | session_id                | VARCHAR          | The session identifier associated with the query.                                             |
-
 
 ## Examples
 

@@ -2,9 +2,10 @@
 title: Vector
 summary: The VECTOR data type stores multi-dimensional arrays of 32-bit floating-point numbers, designed for machine learning, AI applications, and similarity search operations. Each vector has a fixed dimension (length) specified at creation time.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.777"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.777.
 
 The VECTOR data type stores multi-dimensional arrays of 32-bit floating-point numbers, designed for machine learning, AI applications, and similarity search operations. Each vector has a fixed dimension (length) specified at creation time.
 
@@ -36,7 +37,6 @@ Where:
 - `index_name`: Name of the vector index
 - `column_name`: Name of the VECTOR column to index
 - `distance`: Distance functions to support. Can be `'cosine'`, `'l1'`, `'l2'`, or combinations like `'cosine,l1,l2'`
-
 
 ### Supported Distance Functions
 
@@ -136,7 +136,6 @@ FROM (
 )
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
-
 
 ## Vector Functions
 

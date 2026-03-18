@@ -2,9 +2,10 @@
 title: TO_GEOMETRY
 summary: Parses an input and returns a value of type GEOMETRY.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.431"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.431.
 
 Parses an input and returns a value of type GEOMETRY.
 

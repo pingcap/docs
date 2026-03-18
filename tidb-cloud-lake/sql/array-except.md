@@ -2,9 +2,10 @@
 title: ARRAY_EXCEPT
 summary: Returns a new JSON array containing the elements from the first JSON array that are not present in the second JSON array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Returns a new JSON array containing the elements from the first JSON array that are not present in the second JSON array.
 

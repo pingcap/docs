@@ -2,13 +2,10 @@
 title: system_history.access_history
 summary: The fields base_objects_accessed, objects_modified, and object_modified_by_ddl are all arrays of JSON objects. Each object may include the following fields.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='ACCESS HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Data lineage and access control audit** - Tracks all database objects (tables, columns, stages) accessed or modified by queries. Essential for:
 
@@ -16,7 +13,6 @@ import EEFeature from '@site/src/components/EEFeature';
 - **Compliance Reporting**: Track who accessed sensitive data and when
 - **Change Management**: Monitor DDL operations and schema modifications
 - **Security Analysis**: Identify unusual access patterns or unauthorized data access
-
 
 ## Fields
 
@@ -41,7 +37,6 @@ The fields `base_objects_accessed`, `objects_modified`, and `object_modified_by_
 
 ## Examples
 
-
 ```sql
 CREATE TABLE t (a INT, b string);
 ```
@@ -60,7 +55,6 @@ direct_objects_accessed: []
 
 `CREATE TABLE` is a DDL operation, so it will be recorded in the `object_modified_by_ddl` field.
 
-
 ```sql
 INSERT INTO t VALUES (1, 'book');
 ```
@@ -78,7 +72,6 @@ direct_objects_accessed: []
 ```
 
 `INSERT INTO` is a DML operation, so it will be recorded in the `objects_modified` field.
-
 
 ```sql
 COPY INTO @s FROM t;

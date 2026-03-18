@@ -2,9 +2,10 @@
 title: INSERT (multi-table)
 summary: Inserts rows into multiple tables in a single transaction, with the option for the insertion to be dependent on certain conditions (conditionally) or to occur regardless of any conditions (unconditionally).
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.396"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.396.
 
 Inserts rows into multiple tables in a single transaction, with the option for the insertion to be dependent on certain conditions (conditionally) or to occur regardless of any conditions (unconditionally).
 
@@ -23,7 +24,6 @@ INSERT [ OVERWRITE ] ALL
     ...
 SELECT ...
 
-
 -- Conditional INSERT ALL: Inserts each row into multiple tables, but only if certain conditions are met.
 INSERT [ OVERWRITE ] ALL
     WHEN <condition> THEN
@@ -34,7 +34,6 @@ INSERT [ OVERWRITE ] ALL
 
   [ ELSE INTO ... ]
 SELECT ...
-
 
 -- Conditional INSERT FIRST: Inserts each row into multiple tables, but stops after the first successful insertion.
 INSERT [ OVERWRITE ] FIRST
@@ -217,7 +216,6 @@ INSERT FIRST
     WHEN quantity > 4 THEN INTO high_quantity_sales
     WHEN total_price > 50 THEN INTO high_price_sales
 SELECT * FROM sales_data_source;
-
 
 SELECT * FROM high_quantity_sales;
 

@@ -2,9 +2,10 @@
 title: DATE_DIFF
 summary: Calculates the difference between two dates or timestamps based on a specified time unit. The result is positive if the <end_date> is after the <start_date>, and negative if it's before.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.723"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.723.
 
 Calculates the difference between two dates or timestamps based on a specified time unit. The result is positive if the `<end_date>` is after the `<start_date>`, and negative if it's before.
 

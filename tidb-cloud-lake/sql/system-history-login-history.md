@@ -2,13 +2,10 @@
 title: system_history.login_history
 summary: Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='LOGIN HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Authentication security audit** - Comprehensive logging of all user login attempts (successful and failed). Critical for:
 
@@ -16,7 +13,6 @@ import EEFeature from '@site/src/components/EEFeature';
 - **Compliance Auditing**: Track user authentication for regulatory requirements
 - **Access Pattern Analysis**: Monitor when and how users access the system
 - **Incident Investigation**: Investigate security incidents and authentication issues
-
 
 ## Fields
 

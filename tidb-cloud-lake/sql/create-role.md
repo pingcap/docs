@@ -2,9 +2,10 @@
 title: CREATE ROLE
 summary: Creates a new role for access control. Roles are used to group privileges and can be assigned to users or other roles, providing a flexible way to manage permissions in Databend.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.703"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.703.
 
 Creates a new role for access control. Roles are used to group privileges and can be assigned to users or other roles, providing a flexible way to manage permissions in Databend.
 
@@ -76,7 +77,6 @@ SHOW GRANTS FOR ROLE sales_admin;
 SHOW GRANTS FOR 'alice';
 SHOW GRANTS FOR 'admin_user';
 ```
-
 
 ## See Also
 

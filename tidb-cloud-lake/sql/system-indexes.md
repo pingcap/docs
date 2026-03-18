@@ -2,9 +2,10 @@
 title: system.indexes
 summary: Contains information about the created indexes.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced: v1.1.50"/>
+> **Note:**
+>
+> Introduced in v1.1.50.
 
 Contains information about the created indexes.
 

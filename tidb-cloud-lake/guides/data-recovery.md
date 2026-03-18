@@ -2,9 +2,6 @@
 title: Data Recovery
 summary: This topic explains how to back up and restore data in Databend.
 ---
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='BendSave'/>
 
 This topic explains how to back up and restore data in Databend.
 
@@ -63,7 +60,6 @@ Fail-safe includes:
 > - Not intended for regular historical data access beyond the Time Travel period.
 > - For restoring data after big problems, and you can't set it up yourself.
 > - Recovery times can vary from a few hours to several days, depending on the situation.
-
 
 ## BendSave
 

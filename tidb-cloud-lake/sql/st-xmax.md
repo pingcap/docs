@@ -2,9 +2,10 @@
 title: ST_XMAX
 summary: Returns the maximum longitude (X coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.458"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.458.
 
 Returns the maximum longitude (X coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 

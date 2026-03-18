@@ -2,9 +2,10 @@
 title: CREATE FUNCTION
 summary: Creates an external function that calls a remote handler over Flight (typically Python or other services).
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Creates an external function that calls a remote handler over Flight (typically Python or other services).
 

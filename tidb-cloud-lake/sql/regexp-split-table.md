@@ -2,9 +2,10 @@
 title: REGEXP_SPLIT_TO_TABLE
 summary: Splits a string using a regular expression pattern and returns each segment as a table.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.754"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.754.
 
 Splits a string using a regular expression pattern and returns each segment as a table.
 
@@ -19,7 +20,6 @@ REGEXP_SPLIT_TO_TABLE(string, pattern [, flags text])
 | `string`     | The input string to split (VARCHAR type)                       |
 | `pattern`    | Regular expression pattern used for splitting (VARCHAR type)   |
 | `flags text` | A string of flags to modify the regular expression's behavior. |
-
 
 **Supported `flags` Parameter:**
 Provides flexible regular expression configuration options, controlling matching behavior by combining the following characters:

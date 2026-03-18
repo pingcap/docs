@@ -2,9 +2,10 @@
 title: ARRAY_PREPEND
 summary: Prepends an element to the beginning of an array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Prepends an element to the beginning of an array.
 

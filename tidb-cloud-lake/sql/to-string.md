@@ -2,9 +2,10 @@
 title: TO_STRING
 summary: Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see Formatting Date and Time.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.745"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.745.
 
 Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
 

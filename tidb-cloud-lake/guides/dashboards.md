@@ -2,9 +2,6 @@
 title: Dashboards
 summary: Dashboards are employed to present query results through a variety of chart types, including scorecards, pie charts, bar charts, and line charts. These charts are generated from the query results. You have the option to create a chart based on the query result after executing a query in a worksheet. Refreshing a dashboard allows you to re-execute the queries corresponding to the charts, thereby updating the charts with the latest results.
 ---
-import StepsWrap from '@site/src/components/StepsWrap';
-import StepContent from '@site/src/components/Steps/step-content';
-import EllipsisSVG from '@site/static/img/icon/ellipsis.svg';
 
 Dashboards are employed to present query results through a variety of chart types, including **scorecards**, **pie charts**, **bar charts**, and **line charts**. These charts are generated from the query results. You have the option to create a chart based on the query result after executing a query in a worksheet. Refreshing a dashboard allows you to re-execute the queries corresponding to the charts, thereby updating the charts with the latest results.
 
@@ -25,7 +22,6 @@ In Databend Cloud, you can create multiple dashboards as needed. A dashboard can
 3. On the **Chart** tab, choose a chart type from the dropdown menu on the right. Next, specify the data and customize the chart's appearance using the options found on the **Data** and **Style** tabs below the dropdown list.
 
 Please note that these aggregation functions assist in summarizing and revealing valuable patterns from the raw data in query results. The available functions for aggregation vary based on the distinct data types and the chart types you select.
-
 
 | Function             | Description                                                    |
 |----------------------|----------------------------------------------------------------|
@@ -48,7 +44,7 @@ Please note that these aggregation functions assist in summarizing and revealing
 
 ## Sharing a Dashboard
 
-You can share your dashboards with everyone in your organization or specific individuals. To do so, click the ellipse button <EllipsisSVG/> on the dashboard you want to share, then select **Share**.
+You can share your dashboards with everyone in your organization or specific individuals. To do so, click the ellipse button <svg t="1722479222306" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2315" width="16" height="16"><path d="M213.333333 512a85.333333 85.333333 0 1 1-85.333333-85.333333 85.333333 85.333333 0 0 1 85.333333 85.333333z m298.666667-85.333333a85.333333 85.333333 0 1 0 85.333333 85.333333 85.333333 85.333333 0 0 0-85.333333-85.333333z m384 0a85.333333 85.333333 0 1 0 85.333333 85.333333 85.333333 85.333333 0 0 0-85.333333-85.333333z" fill="#1677FF" p-id="2316"></path></svg> on the dashboard you want to share, then select **Share**.
 
 ![alt text](/media/tidb-cloud-lake/dashboard-share.png)
 

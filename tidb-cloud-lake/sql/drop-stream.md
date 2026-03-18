@@ -2,13 +2,10 @@
 title: DROP STREAM
 summary: Deletes an existing stream.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.223"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='STREAM'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.223.
 
 Deletes an existing stream.
 

@@ -2,9 +2,10 @@
 title: LAST_VALUE
 summary: Returns the last value in the window frame.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.697"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.697.
 
 Returns the last value in the window frame.
 

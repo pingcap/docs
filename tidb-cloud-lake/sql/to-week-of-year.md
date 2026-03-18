@@ -2,9 +2,10 @@
 title: TO_WEEK_OF_YEAR
 summary: Calculates the week number within a year for a given date.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.151"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.151.
 
 Calculates the week number within a year for a given date.
 

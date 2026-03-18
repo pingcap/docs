@@ -2,9 +2,10 @@
 title: SHOW USER FUNCTIONS
 summary: Lists all user-defined functions including scalar functions, table functions, embedded functions, and external functions.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.558"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.558.
 
 Lists all user-defined functions including scalar functions, table functions, embedded functions, and external functions.
 

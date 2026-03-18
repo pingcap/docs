@@ -2,9 +2,10 @@
 title: GLOB
 summary: Performs case-sensitive pattern matching using wildcard characters.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.714"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.714.
 
 Performs case-sensitive pattern matching using wildcard characters:  
 

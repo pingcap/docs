@@ -2,13 +2,10 @@
 title: system_history.log_history
 summary: Note This table contains raw log data that feeds into other specialized history tables. Other tables provide structured, query-specific views of this data.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='LOG HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **System operations audit trail** - Raw log repository from all Databend nodes and components. Foundation for operational intelligence:
 

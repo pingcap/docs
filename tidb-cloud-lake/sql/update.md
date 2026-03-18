@@ -2,9 +2,10 @@
 title: UPDATE
 summary: Updates rows in a table with new values, optionally using values from other tables.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.705"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.705.
 
 Updates rows in a table with new values, optionally using values from other tables.
 
@@ -100,8 +101,6 @@ WHERE target.id = source.id;
   │               2 │ 399.99                   │
   └────────────────────────────────────────────┘
   ```
-
-
 
 ## Examples
 

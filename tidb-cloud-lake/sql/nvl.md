@@ -2,9 +2,10 @@
 title: NVL
 summary: If <expr1> is NULL, returns <expr2>, otherwise returns <expr1>.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.312"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.312.
 
 If `<expr1>` is NULL, returns `<expr2>`, otherwise returns `<expr1>`.
 

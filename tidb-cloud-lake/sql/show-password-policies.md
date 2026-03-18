@@ -2,9 +2,10 @@
 title: SHOW PASSWORD POLICIES
 summary: Displays a list of all existing password policies in Databend.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.283"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.283.
 
 Displays a list of all existing password policies in Databend.
 

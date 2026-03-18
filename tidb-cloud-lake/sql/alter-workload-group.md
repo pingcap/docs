@@ -2,9 +2,10 @@
 title: ALTER WORKLOAD GROUP
 summary: Update a workload group with specified quota settings.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.743"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.743.
 
 Update a workload group with specified quota settings.
 

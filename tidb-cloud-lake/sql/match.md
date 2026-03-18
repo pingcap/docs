@@ -2,9 +2,10 @@
 title: MATCH
 summary: Searches indexed columns for keyword matches and can be used only in a WHERE clause.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.619"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.619.
 
 `MATCH` searches for rows that contain the supplied keywords within the listed columns. The function can only appear in a `WHERE` clause.
 

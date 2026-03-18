@@ -2,9 +2,10 @@
 title: CREATE WAREHOUSE
 summary: Creates a new warehouse for compute resources.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.687"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.687.
 
 Creates a new warehouse for compute resources.
 

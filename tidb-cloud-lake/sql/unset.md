@@ -2,9 +2,10 @@
 title: UNSET
 summary: Reverts one or more system settings to their global or default levels and values. For more information about the setting levels, see Setting Levels. To show all the current settings, use SHOW SETTINGS.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.605"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.605.
 
 Reverts one or more system settings to their global or default levels and values. For more information about the setting levels, see [Setting Levels](/tidb-cloud-lake/sql/show-settings.md#setting-levels). To show all the current settings, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 

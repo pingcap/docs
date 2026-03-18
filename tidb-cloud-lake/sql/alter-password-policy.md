@@ -2,9 +2,10 @@
 title: ALTER PASSWORD POLICY
 summary: Modifies an existing password policy in Databend.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.283"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.283.
 
 Modifies an existing password policy in Databend.
 
@@ -51,7 +52,6 @@ This example creates a password policy named 'SecureLogin' with a minimum passwo
 ```sql
 CREATE PASSWORD POLICY SecureLogin
     PASSWORD_MIN_LENGTH = 10;
-
 
 ALTER PASSWORD POLICY SecureLogin SET
     PASSWORD_MIN_LENGTH = 10

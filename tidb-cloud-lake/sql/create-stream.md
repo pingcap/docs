@@ -2,13 +2,10 @@
 title: CREATE STREAM
 summary: Creates a stream.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.391"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='STREAM'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.391.
 
 Creates a stream.
 

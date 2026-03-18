@@ -2,9 +2,10 @@
 title: ST_GEOMPOINTFROMGEOHASH
 summary: Returns a GEOMETRY object for the point that represents center of a geohash.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.413"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.413.
 
 Returns a GEOMETRY object for the point that represents center of a [geohash](https://en.wikipedia.org/wiki/Geohash).
 

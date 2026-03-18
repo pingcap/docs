@@ -2,9 +2,10 @@
 title: CREATE SEQUENCE
 summary: Creates a new sequence in Databend.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.807"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.807.
 
 Creates a new sequence in Databend.
 
@@ -29,7 +30,6 @@ CREATE [ OR REPLACE ] SEQUENCE [ IF NOT EXISTS ] <sequence>
 | Privilege       | Object Type | Description           |
 |:----------------|:------------|:----------------------|
 | CREATE SEQUENCE | Global      | Creates a sequence. |
-
 
 To create a sequence, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md).
 

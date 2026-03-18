@@ -2,9 +2,10 @@
 title: ST_CONTAINS
 summary: Returns TRUE if the second GEOMETRY object is completely inside the first GEOMETRY object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.564"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.564.
 
 Returns TRUE if the second GEOMETRY object is completely inside the first GEOMETRY object.
 

@@ -2,9 +2,10 @@
 title: TASK ERROR NOTIFICATION PAYLOAD
 summary: The payload body for task error notification.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 The payload body for task error notification.
 

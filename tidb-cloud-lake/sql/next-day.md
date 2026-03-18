@@ -2,9 +2,10 @@
 title: NEXT_DAY
 summary: Returns the date of the upcoming specified day of the week after the given date or timestamp.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.655"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.655.
 
 Returns the date of the upcoming specified day of the week after the given date or timestamp.
 

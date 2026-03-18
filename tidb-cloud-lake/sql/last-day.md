@@ -2,9 +2,10 @@
 title: LAST_DAY
 summary: Returns the last day of the specified interval (week, month, quarter, or year) based on the provided date or timestamp.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.655"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.655.
 
 Returns the last day of the specified interval (week, month, quarter, or year) based on the provided date or timestamp.
 

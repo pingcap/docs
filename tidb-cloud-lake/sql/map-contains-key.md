@@ -2,9 +2,10 @@
 title: MAP_CONTAINS_KEY
 summary: Determines whether the specified MAP contains the specified key.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.464"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.464.
 
 Determines whether the specified MAP contains the specified key.
 
