@@ -149,7 +149,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
     ```
 
 5. After the `sf_account` table is created, click **Connect**. A connection dialog is displayed.
-6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the {{{ .starter }}} instance. If you use a {{{ .starter }}} instance, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
+6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the {{{ .starter }}} instance. For {{{ .starter }}}, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
