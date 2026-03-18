@@ -1,6 +1,7 @@
 ---
 title: Prepared Statements
 summary: Learn about how to use the TiDB prepared statements.
+aliases: ['/tidb/stable/dev-guide-prepared-statement/','/tidb/dev/dev-guide-prepared-statement/','/tidbcloud/dev-guide-prepared-statement/']
 ---
 
 # Prepared Statements
@@ -227,14 +228,6 @@ For a complete example in Java, see:
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

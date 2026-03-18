@@ -159,6 +159,12 @@ In the above query, the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tid
 
 If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or in the [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.
 
+### Metadata locks
+
+If a session is waiting on a schema change, this can be because of a metadata lock.
+
+See [Metadata Lock](/metadata-lock.md) for more information.
+
 ## Troubleshoot optimistic lock conflicts
 
 This section provides the solutions of common lock conflict issues in the optimistic transaction mode.

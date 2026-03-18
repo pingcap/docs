@@ -1,7 +1,7 @@
 ---
 title: TiDB Best Practices
 summary: This document summarizes best practices for using TiDB, covering SQL use and optimization tips for OLAP and OLTP scenarios, with a focus on TiDB-specific optimization options. It also recommends reading three blog posts introducing TiDB's technical principles before diving into the best practices.
-aliases: ['/docs/dev/tidb-best-practices/']
+aliases: ['/docs/dev/tidb-best-practices/','/tidb/stable/tidb-best-practices/','/tidb/dev/tidb-best-practices/']
 ---
 
 # TiDB Best Practices
@@ -34,7 +34,7 @@ To store three replicas, compared with the replication of Source-Replica, Raft i
 
 ### Distributed transactions
 
-TiDB provides complete distributed transactions and the model has some optimizations on the basis of [Google Percolator](https://research.google.com/pubs/pub36726.html). This document introduces the following features:
+TiDB provides complete distributed transactions and the model has some optimizations on the basis of [Google Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/). This document introduces the following features:
 
 * Optimistic transaction model
 
@@ -81,7 +81,7 @@ Similarly, if all data is read from a focused small range (for example, the cont
 
 ### Secondary index
 
-TiDB supports the complete secondary indexes, which are also global indexes. Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
+TiDB supports the complete secondary indexes, which are also [global indexes](/global-indexes.md). Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
 
 Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has its unique features. The following are a few notes when using secondary indexes in TiDB.
 
@@ -142,7 +142,7 @@ In the last section, we discussed some basic implementation mechanisms of TiDB a
 
 ### Deployment
 
-Before deployment, read [Software and Hardware Requirements](/hardware-and-software-requirements.md).
+Before deployment, read [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md).
 
 It is recommended to deploy the TiDB cluster using [TiUP](/production-deployment-using-tiup.md). This tool can deploy, stop, destroy, and upgrade the whole cluster, which is quite convenient. It is not recommended to manually deploy the TiDB cluster, which might be troublesome to maintain and upgrade later.
 

@@ -65,7 +65,7 @@ For details about how to deploy TiDB primary and secondary clusters, see [Deploy
 
 When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed and managed together, and the network between them must be connected.
 
-- To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup).
+- To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc).
 - To deploy a new primary cluster and TiCDC, use the following deployment template and modify the configuration parameters as needed:
 
     ```yaml
@@ -299,13 +299,20 @@ It is important to conduct regular DR drills for critical business systems to te
 2. After there are no more writes, query the latest TSO (`Position`) of the TiDB cluster:
 
     ```sql
-    mysql> show master status;
-    +-------------+--------------------+--------------+------------------+-------------------+
-    | File        | Position           | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-    +-------------+--------------------+--------------+------------------+-------------------+
-    | tidb-binlog | 438223974697009153 |              |                  |                   |
-    +-------------+--------------------+--------------+------------------+-------------------+
-    1 row in set (0.33 sec)
+    BEGIN; SELECT TIDB_CURRENT_TSO(); ROLLBACK;
+    ```
+
+    ```sql
+    Query OK, 0 rows affected (0.00 sec)
+
+    +--------------------+
+    | TIDB_CURRENT_TSO() |
+    +--------------------+
+    | 452654700157468673 |
+    +--------------------+
+    1 row in set (0.00 sec)
+
+    Query OK, 0 rows affected (0.00 sec)
     ```
 
 3. Poll the changefeed `dr-primary-to-secondary` until it meets the condition `TSO >= Position`.

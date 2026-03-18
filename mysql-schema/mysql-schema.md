@@ -34,6 +34,7 @@ These system tables contain grant information about user accounts and their priv
     * `tidb_server_version`: the version information of TiDB when it is initialized. Note that this value is read-only and cannot be modified.
     * `system_tz`: the system time zone of TiDB.
     * `new_collation_enabled`: whether TiDB has enabled the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). Note that this value is read-only and cannot be modified.
+    * `cluster_id`: the unique identifier of the TiDB cluster. Note that this value is read-only and cannot be modified.
 
 ## Server-side help system tables
 
@@ -48,9 +49,11 @@ Currently, the `help_topic` is NULL.
 - `stats_extended`: extended statistics, such as the order correlation between columns
 - `stats_feedback`: the query feedback of statistics
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
+- `stats_table_locked`: information about the locked statistics
+- `stats_meta_history`: the meta information in the historical statistics
+- `stats_history`: the other information in the historical statistics
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
-- `schema_index_usage`: the usage of indexes
 - `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
 
 ## Execution plan-related system tables
@@ -58,11 +61,16 @@ Currently, the `help_topic` is NULL.
 - `bind_info`: the binding information of execution plans
 - `capture_plan_baselines_blacklist`: the blocklist for the automatic binding of the execution plan
 
+## System tables related to PLAN REPLAYER
+
+- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks registered by the user
+- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks
+
 ## GC worker system tables
 
 > **Note:**
 >
-> The GC worker system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> The GC worker system tables are only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 - `gc_delete_range`: the KV range to be deleted
 - `gc_delete_range_done`: the deleted KV range
@@ -85,13 +93,13 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to metadata locks
 
-* `tidb_mdl_view`: a view of metadata locks. You can use it to view information about the currently blocked DDL statements
-* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes
+* [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md): a view of metadata locks. You can use it to view the information about the currently blocked DDL statements. See also [Metadata Lock](/metadata-lock.md).
+* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes.
 
 ## System tables related to DDL statements
 
 * `tidb_ddl_history`: the history records of DDL statements
-* `tidb_ddl_jobs`: the metadata of DDL statements that are currently being executed by TiDB
+* `tidb_ddl_job`: the metadata of DDL statements that are currently being executed by TiDB
 * `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
 
 ## System tables related to TiDB Distributed eXecution Framework (DXF)
@@ -106,19 +114,25 @@ Currently, the `help_topic` is NULL.
 
 * `request_unit_by_group`: the history records of consumed resource units (RUs) of all resource groups
 
+## System tables related to backup and restore
+
+* `tidb_pitr_id_map`: the ID mapping information for point-in-time recovery (PITR) operations
+* `tidb_restore_registry` <span class="version-mark">New in v9.0.0</span>: the registry for restore tasks with a unique restore ID assigned to each task to prevent conflicts between different restore operations
+
 ## Miscellaneous system tables
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 - `GLOBAL_VARIABLES`: global system variable table
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 - `tidb_timers`: the metadata of internal timers
+- `advisory_locks`: information related to [Locking functions](/functions-and-operators/locking-functions.md)
 
 </CustomContent>
 

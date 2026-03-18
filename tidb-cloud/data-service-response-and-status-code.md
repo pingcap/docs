@@ -275,7 +275,7 @@ An example response is as follows:
 
 ### 429
 
-This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
 
 An example response is as follows:
 
@@ -290,7 +290,7 @@ An example response is as follows:
     "rows": [],
     "result": {
       "code": 49900007,
-      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://tidb.support.pingcap.com/",
       "start_ms": "",
       "end_ms": "",
       "latency": "",
@@ -314,7 +314,7 @@ An example response is as follows:
     "rows": [],
     "result": {
       "code": 429,
-      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://tidb.support.pingcap.com/",
       "start_ms": "",
       "end_ms": "",
       "latency": "",

@@ -22,7 +22,7 @@ TiDB assigns a TableID to each table, an IndexID to each index, and a RowID to e
 Each row of data is encoded as a key-value pair according to the following rule:
 
 ```
-Key: tablePrefix{tableID}_recordPrefixSep{rowID}
+Key: tablePrefix{TableID}_recordPrefixSep{RowID}
 Value: [col1, col2, col3, col4]
 ```
 
@@ -31,17 +31,17 @@ The `tablePrefix` and `recordPrefixSep` of the key are specific string constants
 For Index data, the key-value pair is encoded according to the following rule:
 
 ```
-Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
+Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
 Value: rowID
 ```
 
 Index data has two types: the unique index and the non-unique index.
 
 - For unique indexes, you can follow the coding rules above.
-- For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{tableID}_indexPrefixSep{indexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
+- For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{TableID}_indexPrefixSep{IndexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
 
     ```
-    Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
+    Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_rowID
     Value: null
     ```
 
@@ -178,9 +178,13 @@ For more details, see [Coprocessor Cache](/coprocessor-cache.md).
 
 **See also:**
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 - [Split Region](/sql-statements/sql-statement-split-region.md)
 
 ## Scatter read hotspots
 
 In a read hotspot scenario, the hotspot TiKV node cannot process read requests in time, resulting in the read requests queuing. However, not all TiKV resources are exhausted at this time. To reduce latency, TiDB v7.1.0 introduces the load-based replica read feature, which allows TiDB to read data from other TiKV nodes without queuing on the hotspot TiKV node. You can control the queue length of read requests using the [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) system variable. When the estimated queue time of the leader node exceeds this threshold, TiDB prioritizes reading data from follower nodes. This feature can improve read throughput by 70% to 200% in a read hotspot scenario compared to not scattering read hotspots.
+
+## Use TiKV MVCC in-memory engine to mitigate read hotspots caused by high MVCC read amplification
+
+When the retention time of historical MVCC data for GC is too long, or when the records are frequently updated or deleted, read hotspots might occur due to scanning a large number of MVCC versions. To alleviate this type of hotspot, you can enable the [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) feature.

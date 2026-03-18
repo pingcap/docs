@@ -26,7 +26,7 @@ After installing TiUP, you can use `tiup ctl:v<CLUSTER_VERSION> tidb` command to
 
 ### Compile from source code
 
-- Compilation environment requirement: [Go](https://golang.org/) 1.21 or later
+- Compilation environment requirement: [Go](https://golang.org/) 1.23 or later
 - Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 
@@ -179,7 +179,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     alter table t add column e varchar(20);
     ```
 
-2. Obtian MVCC data using the HTTP API interface:
+2. Obtain MVCC data using the HTTP API interface:
 
     ```shell
     $ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"

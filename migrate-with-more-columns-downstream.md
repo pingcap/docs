@@ -36,7 +36,7 @@ The following is an example upstream table schema:
 ```sql
 # Upstream table schema
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   PRIMARY KEY (`id`)
 )
 ```
@@ -46,7 +46,7 @@ The following is an example downstream table schema:
 ```sql
 # Downstream table schema
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `message` varchar(255) DEFAULT NULL, # This is the additional column that only exists in the downstream table.
   PRIMARY KEY (`id`)
 )
@@ -61,7 +61,7 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     ```sql
     # Upstream table schema
     CREATE TABLE `messages` (
-    `id` int(11) NOT NULL,
+    `id` int NOT NULL,
     PRIMARY KEY (`id`)
     )
     ```

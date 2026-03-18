@@ -21,48 +21,55 @@ unzip \*-tripdata.zip
 
 ## Load data into TiDB
 
-The system data can be imported into TiDB using the following schema:
+You can import the system data into TiDB using the following method.
 
-```sql
-CREATE DATABASE bikeshare;
-USE bikeshare;
+1. Rename the CSV files.
 
-CREATE TABLE trips (
- trip_id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
- duration integer not null,
- start_date datetime,
- end_date datetime,
- start_station_number integer,
- start_station varchar(255),
- end_station_number integer,
- end_station varchar(255),
- bike_number varchar(255),
- member_type varchar(255)
-);
-```
+    ```bash
+    i=1; for csv in *csv; do mv $csv bikeshare.trips.$(printf "%03d" $i).csv; i=$((i+1)); done
+    ```
 
-You can import files individually using the example `LOAD DATA` command here, or import all files using the bash loop below:
+2. Create the database and table.
 
-```sql
-LOAD DATA LOCAL INFILE '2017Q1-capitalbikeshare-tripdata.csv' INTO TABLE trips
-  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-  LINES TERMINATED BY '\r\n'
-  IGNORE 1 LINES
-(duration, start_date, end_date, start_station_number, start_station,
-end_station_number, end_station, bike_number, member_type);
-```
+    ```sql
+    CREATE SCHEMA bikeshare;
+    USE bikeshare;
+    CREATE TABLE trips (
+      `trip_id` BIGINT NOT NULL PRIMARY KEY AUTO_RANDOM,
+      `duration` INT NOT NULL,
+      `start date` DATETIME,
+      `end date` DATETIME,
+      `start station number` INT,
+      `start station` VARCHAR(255),
+      `end station number` INT,
+      `end station` VARCHAR(255),
+      `bike number` VARCHAR(255),
+      `member type` VARCHAR(255)
+    );
+    ```
 
-### Import all files
+3. Create a `tidb-lightning.toml` file as follows:
 
-> **Note:**
->
-> When you start the MySQL client, use the `--local-infile=1` option.
+    ```toml
+    [tikv-importer]
+    backend = "tidb"
 
-To import all `*.csv` files into TiDB in a bash loop:
+    [mydumper]
+    no-schema = true
+    data-source-dir = "~/bikeshare-data"
 
-```bash
-for FILE in *.csv; do
- echo "== $FILE =="
- mysql bikeshare --local-infile=1 -e "LOAD DATA LOCAL INFILE '${FILE}' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);"
-done;
-```
+    [mydumper.csv]
+    header = true
+
+    [tidb]
+    host = "127.0.0.1"
+    port = 4000
+    user = "root"
+    password = "very_secret"
+    ```
+
+4. Run the following command.
+
+    ```shell
+    tiup tidb-lightning -c tidb-lightning.toml
+    ```

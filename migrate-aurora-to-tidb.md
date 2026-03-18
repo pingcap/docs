@@ -51,7 +51,7 @@ Create a new `tidb-lightning-schema.toml` file, copy the following content into 
 # The target TiDB cluster information.
 host = ${host}
 port = ${port}
-user = "${user_name}
+user = "${user_name}"
 password = "${password}"
 status-port = ${status-port}  # The TiDB status port. Usually the port is 10080.
 pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379.
@@ -120,7 +120,7 @@ Create a new `tidb-lightning-data.toml` configuration file, copy the following c
 # The target TiDB cluster information.
 host = ${host}
 port = ${port}
-user = "${user_name}
+user = "${user_name}"
 password = "${password}"
 status-port = ${status-port}  # The TiDB status port. Usually the port is 10080.
 pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379.

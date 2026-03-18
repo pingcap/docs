@@ -29,7 +29,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **User scenario**: Full data import into TiDB
 - **Upstream (the imported source file)**:
     - Files exported from Dumpling
-    - Parquet files exported by Amazon Aurora or Apache Hive
+    - Parquet files exported by Amazon Aurora, Apache Hive, and Snowflake
     - CSV files
     - Data from local disks or Amazon S3
 - **Downstream**: TiDB
@@ -49,7 +49,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **Advantages**:
     - Support the table-filter feature that enables you to filter data easier
     - Support exporting data to Amazon S3
-- **Limitation**:
+- **Recommendation**:
     - If you want to restore the exported data to a database other than TiDB, it is recommended to use Dumpling.
     - If you want to restore the exported data to another TiDB cluster, it is recommended to use Backup & Restore (BR).
 
@@ -72,7 +72,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
     - Suitable for migrating data to another TiDB cluster
     - Support backing up data to an external storage for disaster recovery
 - **Limitation**:
-    - When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.
+    - When BR restores data to the upstream cluster of TiCDC, the restored data cannot be replicated to the downstream by TiCDC.
     - BR supports operations only between clusters that have the same `new_collation_enabled` value in the `mysql.tidb` table.
 
 ## [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)

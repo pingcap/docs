@@ -1,6 +1,7 @@
 ---
 title: Object Naming Convention
 summary: Learn the object naming convention in TiDB.
+aliases: ['/tidb/stable/dev-guide-object-naming-guidelines/','/tidb/dev/dev-guide-object-naming-guidelines/','/tidbcloud/dev-guide-object-naming-guidelines/']
 ---
 
 # Object Naming Convention
@@ -47,14 +48,6 @@ It is recommended to differentiate database names by business, product, or other
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

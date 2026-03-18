@@ -14,7 +14,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
 - `<cluster-name>`: the cluster name to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
-- `<version>`: the target version to upgrade to, such as `v8.2.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
+- `<version>`: the target version to upgrade to, such as `v8.5.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
 
 ## Options
 
@@ -116,6 +116,13 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `STRINGS`
 - If this option is not set, the version of Node Exporter remains consistent with the cluster version.
 
+### --restart-timeout
+
+- Specifies the waiting time after upgrading a component during a rolling upgrade.
+- Data type: `STRINGS`. Any type that can be parsed by [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration) is supported.
+- Default: `0`
+- If this option is not specified, there will be no waiting time after upgrading a component.
+
 ### -h, --help
 
 - Prints the help information.
@@ -146,4 +153,6 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 The log of the upgrading progress.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md)

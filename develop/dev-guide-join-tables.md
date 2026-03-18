@@ -1,6 +1,7 @@
 ---
 title: Multi-table Join Queries
 summary: This document describes how to use multi-table join queries.
+aliases: ['/tidb/stable/dev-guide-join-tables/','/tidb/dev/dev-guide-join-tables/','/tidbcloud/dev-guide-join-tables/']
 ---
 
 # Multi-table Join Queries
@@ -256,14 +257,6 @@ For more information about the implementation details and limitations of this Jo
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

@@ -9,7 +9,7 @@ The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a dat
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Synopsis
 
@@ -30,10 +30,12 @@ ResourceGroupOptionList ::=
 |   ResourceGroupOptionList ',' DirectResourceGroupOption
 
 DirectResourceGroupOption ::=
-    "RU_PER_SEC" EqOpt stringLit
+    "RU_PER_SEC" EqOpt LengthNum
 |   "PRIORITY" EqOpt ResourceGroupPriorityOption
 |   "BURSTABLE"
-|   "BURSTABLE" EqOpt Boolean
+|   "BURSTABLE" EqOpt "MODERATED"
+|   "BURSTABLE" EqOpt "UNLIMITED"
+|   "BURSTABLE" EqOpt "OFF"
 |   "QUERY_LIMIT" EqOpt '(' ResourceGroupRunawayOptionList ')'
 |   "QUERY_LIMIT" EqOpt '(' ')'
 |   "QUERY_LIMIT" EqOpt "NULL"
@@ -53,6 +55,8 @@ ResourceGroupRunawayOptionList ::=
 
 DirectResourceGroupRunawayOption ::=
     "EXEC_ELAPSED" EqOpt stringLit
+|   "PROCESSED_KEYS" EqOpt intLit
+|   "RU" EqOpt intLit
 |   "ACTION" EqOpt ResourceGroupRunawayActionOption
 |   "WATCH" EqOpt ResourceGroupRunawayWatchOption "DURATION" EqOpt stringLit
 
@@ -64,6 +68,7 @@ ResourceGroupRunawayActionOption ::=
     DRYRUN
 |   COOLDOWN
 |   KILL
+| "SWITCH_GROUP" '(' ResourceGroupName ')'
 
 BackgroundOptionList ::=
     DirectBackgroundOption
@@ -72,17 +77,18 @@ BackgroundOptionList ::=
 
 DirectBackgroundOption ::=
     "TASK_TYPES" EqOpt stringLit
+|   "UTILIZATION_LIMIT" EqOpt LengthNum
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
 
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
 | `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
 | `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
-| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries). |
-| `BACKGROUND`  | Configure the background tasks. For more details, see [Manage background tasks](/tidb-resource-control.md#manage-background-tasks). | `BACKGROUND=(TASK_TYPES="br,stats")` indicates that the backup and restore and statistics collection related tasks are scheduled as background tasks. |
+| `BURSTABLE`   | Whether to allow the resource group to overuse the available remaining system resources | Starting from v9.0.0, the following three modes are supported: `OFF` indicates that the resource group is not allowed to overuse any remaining system resources. `MODERATED` indicates that the resource group is allowed to overuse remaining system resources to a limited extent. `UNLIMITED` indicates that the resource group can overuse remaining system resources without limitation. If no value is specified for `BURSTABLE`, the `MODERATED` mode is enabled by default. |
+| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control-runaway-queries.md). |
+| `BACKGROUND`  | Configure the background tasks. For more details, see [Manage background tasks](/tidb-resource-control-background-tasks.md). | `BACKGROUND=(TASK_TYPES="br,stats", UTILIZATION_LIMIT=30)` indicates that the backup and restore and statistics collection related tasks are scheduled as background tasks, and background tasks can consume 30% of the TiKV resources at most. |
 
 > **Note:**
 >
@@ -120,7 +126,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 +------+------------+----------+-----------+-------------+------------+
 | NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND |
 +------+------------+----------+-----------+-------------+------------+
-| rg1  | 100        | MEDIUM   | NO        | NULL        | NULL       |
+| rg1  | 100        | MEDIUM   | OFF       | NULL        | NULL       |
 +------+------------+----------+-----------+-------------+------------+
 1 rows in set (1.30 sec)
 ```
@@ -144,7 +150,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 +------+------------+----------+-----------+----------------------------------------------------------------+------------+
 | NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT                                                    | BACKGROUND |
 +------+------------+----------+-----------+----------------------------------------------------------------+------------+
-| rg1  | 200        | LOW      | NO        | EXEC_ELAPSED='1s', ACTION=COOLDOWN, WATCH=EXACT DURATION='30s' | NULL       |
+| rg1  | 200        | LOW      | OFF       | EXEC_ELAPSED='1s', ACTION=COOLDOWN, WATCH=EXACT DURATION='30s' | NULL       |
 +------+------------+----------+-----------+----------------------------------------------------------------+------------+
 1 rows in set (1.30 sec)
 ```
@@ -152,7 +158,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 Modify the `BACKGROUND` option for the `default` resource group.
 
 ```sql
-ALTER RESOURCE GROUP default BACKGROUND = (TASK_TYPES = "br,ddl");
+ALTER RESOURCE GROUP default BACKGROUND = (TASK_TYPES = "br,ddl", UTILIZATION_LIMIT=30);
 ```
 
 ```sql
@@ -164,11 +170,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='default';
 ```
 
 ```sql
-+---------+------------+----------+-----------+-------------+---------------------+
-| NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND          |
-+---------+------------+----------+-----------+-------------+---------------------+
-| default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl' |
-+---------+------------+----------+-----------+-------------+---------------------+
++---------+------------+----------+------------------+-------------+-------------------------------------------+
+| NAME    | RU_PER_SEC | PRIORITY | BURSTABLE        | QUERY_LIMIT | BACKGROUND                                |
++---------+------------+----------+------------------+-------------+-------------------------------------------+
+| default | UNLIMITED  | MEDIUM   | UNLIMITED        | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
++---------+------------+----------+------------------+-------------+-------------------------------------------+
 1 rows in set (1.30 sec)
 ```
 
@@ -180,4 +186,4 @@ MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/
 
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+* [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

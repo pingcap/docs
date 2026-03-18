@@ -179,7 +179,7 @@ In the `GROUP BY` clause, you can specify one or more columns as a group list an
 
 > **Note:**
 >
-> Currently, TiDB does not support the Cube syntax, and TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode.
+> Currently, TiDB does not support the Cube syntax.
 
 ```sql
 explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;

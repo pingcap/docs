@@ -5,29 +5,109 @@ summary: Introduce the load balancing policies in TiProxy and their applicable s
 
 # TiProxy Load Balancing Policies
 
-TiProxy v1.0.0 only supports status-based and connection count-based load balancing policies for TiDB servers. Starting from v1.1.0, TiProxy introduces four additional load balancing policies that can be configured independently: health-based, memory-based, CPU-based, and location-based.
+TiProxy v1.0.0 only supports status-based and connection count-based load balancing policies for TiDB servers. Starting from v1.1.0, TiProxy introduces five additional load balancing policies: label-based, health-based, memory-based, CPU-based, and location-based.
 
-By default, TiProxy enables all policies with the following priorities:
+By default, TiProxy applies these policies with the following priorities:
 
 1. Status-based load balancing: when a TiDB server is shutting down, TiProxy migrates connections from that TiDB server to an online TiDB server.
-2. Health-based load balancing: when the health of a TiDB server is abnormal, TiProxy migrates connections from that TiDB server to a healthy TiDB server.
-3. Memory-based load balancing: when a TiDB server is at risk of running out of memory (OOM), TiProxy migrates connections from that TiDB server to a TiDB server with lower memory usage.
-4. CPU-based load balancing: when the CPU usage of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with lower CPU usage.
-5. Location-based load balancing: TiProxy prioritizes routing requests to the TiDB server geographically closest to TiProxy.
-6. Connection count-based load balancing: when the connection count of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with fewer connections.
+2. Label-based load balancing: TiProxy prioritizes routing requests to TiDB servers that share the same label as the TiProxy instance, enabling resource isolation at the computing layer.
+3. Health-based load balancing: when the health of a TiDB server is abnormal, TiProxy migrates connections from that TiDB server to a healthy TiDB server.
+4. Memory-based load balancing: when a TiDB server is at risk of running out of memory (OOM), TiProxy migrates connections from that TiDB server to a TiDB server with lower memory usage.
+5. CPU-based load balancing: when the CPU usage of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with lower CPU usage.
+6. Location-based load balancing: TiProxy prioritizes routing requests to the TiDB server geographically closest to TiProxy.
+7. Connection count-based load balancing: when the connection count of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with fewer connections.
 
-> **Note:**
->
-> - Health-based, memory-based, and CPU-based load balancing policies depend on [Prometheus](https://prometheus.io). Ensure that Prometheus is available. Otherwise, these policies do not take effect.
-> - To adjust the priorities of load balancing policies, see [Configure load balancing policies](#configure-load-balancing-policies).
+To adjust the priorities of load balancing policies, see [Configure load balancing policies](#configure-load-balancing-policies).
 
 ## Status-based load balancing
 
 TiProxy periodically checks whether a TiDB server is offline or shutting down using the SQL port and status port.
 
+## Label-based load balancing
+
+Label-based load balancing prioritizes routing connections to TiDB servers that share the same label as TiProxy, enabling resource isolation at the computing layer. This policy is disabled by default and should only be enabled when your workload requires computing resource isolation.
+
+To enable label-based load balancing, you need to:
+
+- Specify the matching label name through [`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name).
+- Configure the [`labels`](/tiproxy/tiproxy-configuration.md#labels) configuration item in TiProxy.
+- Configure the [`labels`](/tidb-configuration-file.md#labels) configuration item in TiDB servers.
+
+After configuration, TiProxy uses the label name specified in `balance.label-name` to route connections to TiDB servers with matching label values.
+
+Consider an application that handles both transaction and BI workloads. To prevent these workloads from interfering with each other, configure your cluster as follows:
+
+1. Set [`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name) to `"app"` in TiProxy, indicating that TiDB servers will be matched by the label name `"app"`, and connections will be routed to TiDB servers with matching label values.
+2. Deploy at least two TiProxy instances. Configure the TiProxy instance used for transaction business with [`labels`](/tiproxy/tiproxy-configuration.md#labels) as `{"app"="Order"}`, and the instance used for BI business with [`labels`](/tiproxy/tiproxy-configuration.md#labels) as `{"app"="BI"}`.
+3. If high availability of TiProxy is required, deploy at least four TiProxy instances, and configure different virtual IP addresses for different businesses. For example, configure two TiProxy instances used for transaction business with virtual IP `10.0.1.10/24`, and two TiProxy instances used for BI business with virtual IP `10.0.1.20/24`.
+4. Divide TiDB instances into two groups, adding `"app"="Order"` and `"app"="BI"` to their respective [`labels`](/tidb-configuration-file.md#labels) configuration items.
+5. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
+6. Direct transaction and BI clients to connect to their respective virtual IP addresses.
+
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label-v2.png" alt="Label-based Load Balancing" width="600" />
+
+Example configuration for this topology:
+
+```yaml
+component_versions:
+  tiproxy: "v1.1.0"
+
+server_configs:
+  tiproxy:
+    balance.label-name: "app"
+  tidb:
+    graceful-wait-before-shutdown: 30
+
+tiproxy_servers:
+  - host: tiproxy-host-1
+    config:
+      labels: {"app": "Order"}
+      ha.virtual-ip: "10.0.1.10/24"
+      ha.interface: "eth0"
+  - host: tiproxy-host-2
+    config:
+      labels: {"app": "Order"}
+      ha.virtual-ip: "10.0.1.10/24"
+      ha.interface: "eth0"
+  - host: tiproxy-host-3
+    config:
+      labels: {"app": "BI"}
+      ha.virtual-ip: "10.0.1.20/24"
+      ha.interface: "eth0"
+  - host: tiproxy-host-4
+    config:
+      labels: {"app": "BI"}
+      ha.virtual-ip: "10.0.1.20/24"
+      ha.interface: "eth0"
+
+tidb_servers:
+  - host: tidb-host-1
+    config:
+      labels: {"app": "Order"}
+  - host: tidb-host-2
+    config:
+      labels: {"app": "Order"}
+  - host: tidb-host-3
+    config:
+      labels: {"app": "BI"}
+  - host: tidb-host-4
+    config:
+      labels: {"app": "BI"}
+
+tikv_servers:
+  - host: tikv-host-1
+  - host: tikv-host-2
+  - host: tikv-host-3
+
+pd_servers:
+  - host: pd-host-1
+  - host: pd-host-2
+  - host: pd-host-3
+```
+
 ## Health-based load balancing
 
-TiProxy determines the health of a TiDB server by querying its error count from Prometheus. When the health of a TiDB server is abnormal while others are normal, TiProxy migrates connections from that server to a healthy TiDB server, achieving automatic failover.
+TiProxy determines the health of a TiDB server by querying its error count. When the health of a TiDB server is abnormal while others are normal, TiProxy migrates connections from that server to a healthy TiDB server, achieving automatic failover.
 
 This policy is suitable for the following scenarios:
 
@@ -36,7 +116,7 @@ This policy is suitable for the following scenarios:
 
 ## Memory-based load balancing
 
-TiProxy queries the memory usage of TiDB servers from Prometheus. When the memory usage of a TiDB server is rapidly increasing or reaching a high level, TiProxy migrates connections from that server to a TiDB server with lower memory usage, preventing unnecessary connection termination due to OOM. TiProxy does not guarantee identical memory usage across TiDB servers. This policy only takes effect when a TiDB server is at risk of OOM.
+TiProxy queries the memory usage of TiDB servers. When the memory usage of a TiDB server is rapidly increasing or reaching a high level, TiProxy migrates connections from that server to a TiDB server with lower memory usage, preventing unnecessary connection termination due to OOM. TiProxy does not guarantee identical memory usage across TiDB servers. This policy only takes effect when a TiDB server is at risk of OOM.
 
 When a TiDB server is at risk of OOM, TiProxy attempts to migrate all connections from it. Usually, if OOM is caused by runaway queries, ongoing runaway queries will not be migrated to another TiDB server for re-execution, because these connections can only be migrated after the transaction is complete.
 
@@ -48,7 +128,7 @@ This policy has the following limitations:
 
 ## CPU-based load balancing
 
-TiProxy queries the CPU usage of TiDB servers from Prometheus and migrates connections from a TiDB server with high CPU usage to a server with lower usage, reducing overall query latency. TiProxy does not guarantee identical CPU usage across TiDB servers but ensures that the CPU usage differences are minimized.
+TiProxy queries the CPU usage of TiDB servers and migrates connections from a TiDB server with high CPU usage to a server with lower usage, reducing overall query latency. TiProxy does not guarantee identical CPU usage across TiDB servers but ensures that the CPU usage differences are minimized.
 
 This policy is suitable for the following scenarios:
 
@@ -81,7 +161,7 @@ component_versions:
   tiproxy: "v1.1.0"
 server_configs:
   tidb:
-    graceful-wait-before-shutdown: 15
+    graceful-wait-before-shutdown: 30
 tiproxy_servers:
   - host: tiproxy-host-1
     config:
@@ -102,11 +182,12 @@ tidb_servers:
         zone: west
 tikv_servers:
   - host: tikv-host-1
-    port: 20160
   - host: tikv-host-2
-    port: 20160
   - host: tikv-host-3
-    port: 20160
+pd_servers:
+  - host: pd-host-1
+  - host: pd-host-2
+  - host: pd-host-3
 ```
 
 In the preceding configuration, the TiProxy instance on `tiproxy-host-1` prioritizes routing requests to the TiDB server on `tidb-host-1` because `tiproxy-host-1` has the same `zone` configuration as `tidb-host-1`. Similarly, the TiProxy instance on `tiproxy-host-2` prioritizes routing requests to the TiDB server on `tidb-host-2`.
@@ -124,9 +205,9 @@ Typically, TiProxy identifies the load on TiDB servers based on CPU usage. This 
 
 TiProxy lets you configure the combination and priority of load balancing policies through the [`policy`](/tiproxy/tiproxy-configuration.md#policy) configuration item.
 
-- `resource`: the resource priority policy performs load balancing based on the following priority order: status, health, memory, CPU, location, and connection count.
-- `location`: the location priority policy performs load balancing based on the following priority order: status, location, health, memory, CPU, and connection count.
-- `connection`: the minimum connection count policy performs load balancing based on the following priority order: status and connection count.
+- `resource`: the resource priority policy performs load balancing based on the following priority order: status, label, health, memory, CPU, location, and connection count.
+- `location`: the location priority policy performs load balancing based on the following priority order: status, label, location, health, memory, CPU, and connection count.
+- `connection`: the minimum connection count policy performs load balancing based on the following priority order: status, label, and connection count.
 
 ## More resources
 

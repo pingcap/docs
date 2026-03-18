@@ -45,9 +45,9 @@ Assume that tables 1~4 have the same table structure as follows.
 
 ```sql
 CREATE TABLE `table1` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sid` bigint(20) NOT NULL,
-  `pid` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `sid` bigint NOT NULL,
+  `pid` bigint NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sid` (`sid`)
@@ -60,9 +60,9 @@ For those four tables, the `id` column is the primary key. It is auto-incrementa
 
 ```sql
 CREATE TABLE `table5` (
-  `id` bigint(20) NOT NULL,
-  `sid` bigint(20) NOT NULL,
-  `pid` bigint(20) NOT NULL,
+  `id` bigint NOT NULL,
+  `sid` bigint NOT NULL,
+  `pid` bigint NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   INDEX (`id`),
   UNIQUE KEY `sid` (`sid`)
@@ -140,9 +140,9 @@ Create `mydb.table5` at downstream.
 
 ```sql
 CREATE TABLE `table5` (
-  `id` bigint(20) NOT NULL,
-  `sid` bigint(20) NOT NULL,
-  `pid` bigint(20) NOT NULL,
+  `id` bigint NOT NULL,
+  `sid` bigint NOT NULL,
+  `pid` bigint NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   INDEX (`id`),
   UNIQUE KEY `sid` (`sid`)
@@ -281,7 +281,7 @@ name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means full data migration is skipped and only incremental replication is performed.
 # Required for incremental replication from sharded tables. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
-# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb/dev/feature-shard-merge/).
+# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb/dev/feature-shard-merge/).
 
 shard-mode: "pessimistic"
 

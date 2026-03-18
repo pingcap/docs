@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Three-Node Hybrid Deployment
 summary: TiDB cluster can be deployed in a cost-effective way on three machines. Best practices for this hybrid deployment include adjusting parameters for stability and performance. Limiting resource consumption and adjusting thread pool sizes are key to optimizing the cluster. Adjusting parameters for TiKV background tasks and TiDB execution operators is also important.
+aliases: ['/tidb/stable/three-nodes-hybrid-deployment/','/tidb/dev/three-nodes-hybrid-deployment/']
 ---
 
 # Best Practices for Three-Node Hybrid Deployment
@@ -61,7 +62,7 @@ The default value of this parameter is 80% of the number of machine threads. In 
 
 #### `server.grpc-concurrency`
 
-This parameter defaults to `4`. Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
+Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency), and keep the usage rate below 80%.
 
 In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
 
@@ -69,7 +70,7 @@ In this test, the value of this parameter is set to `2`. Observe the **gRPC poll
 
 #### `storage.scheduler-worker-pool-size`
 
-When TiKV detects that the CPU core number of the machine is greater than or equal to `16`, this parameter value defaults to `8`. When the CPU core number is smaller than `16`, the parameter value defaults to `4`. This parameter is used when TiKV converts complex transaction requests to simple key-value reads or writes, but the scheduler thread pool does not performs any writes.
+When TiKV detects that the CPU core number of the machine is greater than or equal to `16`, this parameter value defaults to `8`. When the CPU core number is smaller than `16`, the parameter value defaults to `4`. This parameter is used when TiKV converts complex transaction requests to simple key-value reads or writes, but the scheduler thread pool does not perform any writes.
 
 Ideally, the usage rate of the scheduler thread pool is kept between 50% and 75%. Similar to the gRPC thread pool, the `storage.scheduler-worker-pool-size` parameter defaults to a larger value during the hybrid deployment, which makes resource usage insufficient. In this test, the value of this parameter is set to `2`, which is in line with the best practices, a conclusion drawn by observing the corresponding metrics in the **Scheduler worker CPU** panel.
 

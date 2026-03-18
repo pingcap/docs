@@ -1,9 +1,13 @@
 ---
-title: Use Cluster Resource
+title: Use the `tidbcloud_cluster` Resource (Deprecated)
 summary: Learn how to use the cluster resource to create and modify a TiDB Cloud cluster.
 ---
 
-# Use Cluster Resource
+# Use the `tidbcloud_cluster` Resource (Deprecated)
+
+> **Warning:**
+>
+> Starting from [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0, the `tidbcloud_cluster` resource is deprecated. It is recommended to use the `tidbcloud_dedicated_cluster` or `tidbcloud_serverless_cluster` resource instead. For more information, see [Use the `tidbcloud_dedicated_cluster` Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) or [Use the `tidbcloud_serverless_cluster` Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md).
 
 You can learn how to manage a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 
@@ -11,9 +15,9 @@ In addition, you will also learn how to get the necessary information with the `
 
 The features of the `tidbcloud_cluster` resource include the following:
 
-- Create TiDB Serverless and TiDB Dedicated clusters.
-- Modify TiDB Dedicated clusters.
-- Delete TiDB Serverless and TiDB Dedicated clusters.
+- Create {{{ .starter }}} and TiDB Cloud Dedicated clusters.
+- Modify TiDB Cloud Dedicated clusters.
+- Delete {{{ .starter }}} and TiDB Cloud Dedicated clusters.
 
 ## Prerequisites
 
@@ -39,6 +43,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
    provider "tidbcloud" {
      public_key = "your_public_key"
      private_key = "your_private_key"
+     sync = true
    }
 
    data "tidbcloud_projects" "example_project" {
@@ -137,6 +142,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
     provider "tidbcloud" {
       public_key = "your_public_key"
       private_key = "your_private_key"
+      sync = true
     }
     data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
@@ -267,11 +273,11 @@ In the results:
 
 > **Note:**
 >
-> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console. For more information, see [Set a Project CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
+> Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
 
 You can create a cluster using the `tidbcloud_cluster` resource.
 
-The following example shows how to create a TiDB Dedicated cluster.
+The following example shows how to create a TiDB Cloud Dedicated cluster.
 
 1. Create a directory for the cluster and enter it.
 
@@ -289,6 +295,7 @@ The following example shows how to create a TiDB Dedicated cluster.
    provider "tidbcloud" {
      public_key = "your_public_key"
      private_key = "your_private_key"
+     sync = true
    }
 
     resource "tidbcloud_cluster" "example_cluster" {
@@ -469,9 +476,9 @@ The following example shows how to create a TiDB Dedicated cluster.
 
 When the status is `AVAILABLE`, it indicates that your TiDB cluster is created and ready for use.
 
-## Modify a TiDB Dedicated cluster
+## Modify a TiDB Cloud Dedicated cluster
 
-For a TiDB Dedicated cluster, you can use Terraform to manage cluster resources as follows:
+For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster resources as follows:
 
 - Add a TiFlash component to the cluster.
 - Scale the cluster.
@@ -827,13 +834,13 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a TiDB Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
+Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by the [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md) resource.
 
 ## Import a cluster
 
 For a TiDB cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
-For example, you can import a cluster that is not created by Terraform or import a cluster that is [created with the restore resource](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task).
+For example, you can import a cluster that is not created by Terraform or import a cluster that is [created with the `tidbcloud_restore` resource](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task).
 
 1. Create a `import_cluster.tf` file as follows:
 

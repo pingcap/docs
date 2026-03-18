@@ -6,7 +6,7 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 # TiCDC Overview
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used to replicate incremental data from TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases.
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used to replicate incremental data from TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases. For detailed data replication capabilities, see [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md).
 
 ## Usage scenarios
 
@@ -53,7 +53,7 @@ TiCDC has the following key capabilities:
     >
     > Since v6.2, you can use the sink URI parameter [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
 
-## TiCDC architecture
+## TiCDC architecture overview
 
 TiCDC is an incremental data replication tool for TiDB, which is highly available through PD's etcd. The replication process consists of the following steps:
 
@@ -71,7 +71,20 @@ The components in the architecture diagram are described as follows:
 - TiCDC: TiCDC nodes where TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes and replicates the changes to the downstream system through the sink component.
 - PD: The scheduling module in a TiDB cluster. This module is responsible for scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
 
+In implementation, both the [new architecture](/ticdc/ticdc-architecture.md) and the [classic architecture](/ticdc/ticdc-classic-architecture.md) of TiCDC are built on the same incremental data replication model. Compared with the classic architecture, the new architecture refactors and optimizes task scheduling and replication mechanisms, significantly improving the performance, scalability, and stability of real-time data replication while reducing resource costs.
+
 As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, Kafka, and storage services.
+
+## Valid index
+
+Generally, TiCDC only replicates tables that have at least one valid index to the downstream. If an index in a table meets one of the following requirements, it is valid.
+
+- A primary key (`PRIMARY KEY`) is a valid index.
+- A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+
+> **Note:**
+>
+> When you set [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) to `true`, TiCDC will forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
 ## Best practices
 
@@ -80,10 +93,7 @@ As shown in the architecture diagram, TiCDC supports replicating data to TiDB, M
     - For TiCDC versions earlier than v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
     - With a series of improvements introduced starting from TiCDC v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the upstream TiDB cluster is located.
 
-- TiCDC only replicates tables that have at least one valid index. A valid index is defined as follows:
-
-    - A primary key (`PRIMARY KEY`) is a valid index.
-    - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+- Each table to be replicated by TiCDC has at least one [valid index](#valid-index).
 
 - To ensure eventual consistency when using TiCDC for disaster recovery, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) and ensure that the storage system where the redo log is written can be read normally when a disaster occurs in the upstream.
 
@@ -148,8 +158,8 @@ Currently, the following scenarios are not supported:
 
 - A TiKV cluster that uses RawKV alone.
 - The [`CREATE SEQUENCE` DDL operation](/sql-statements/sql-statement-create-sequence.md) and the [`SEQUENCE` function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
-- Currently, performing [TiDB Lightning physical import](/tidb-lightning/tidb-lightning-physical-import-mode.md) on tables and databases that are being replicated by TiCDC is not supported. For more information, see [Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream](/ticdc/ticdc-faq.md#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream).
-- Before v8.2.0, BR does not support [restoring data](/br/backup-and-restore-overview.md) for a cluster with TiCDC replication tasks. For more information, see [Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream](/ticdc/ticdc-faq.md#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream).
-- Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the `BackupTS` (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restoration normally. Considering that the `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks.
+- Currently, importing data using [TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) on tables and databases that are being replicated by TiCDC is not supported. For more information, see [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
+- Before v8.2.0, BR does not support [restoring data](/br/backup-and-restore-overview.md) for a cluster with TiCDC replication tasks. For more information, see [What are the compatibility limitations between BR (Backup & Restore) and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-br-and-ticdc).
+- Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the `BackupTS` (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restoration normally. Considering that the `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks.
 
 TiCDC only partially supports scenarios involving large transactions in the upstream. For details, refer to the [TiCDC FAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk), where you can find details on whether TiCDC supports replicating large transactions and any associated risks.

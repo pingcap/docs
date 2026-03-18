@@ -9,22 +9,23 @@ This article mainly introduces subquery related optimizations.
 
 Subqueries usually appear in the following situations:
 
+- `... </=/!=/>/ ALL (SELECT ... FROM ...)`
 - `NOT IN (SELECT ... FROM ...)`
-- `NOT EXISTS (SELECT ... FROM ...)`
 - `IN (SELECT ... FROM ..)`
+- `NOT EXISTS (SELECT ... FROM ...)`
 - `EXISTS (SELECT ... FROM ...)`
 - `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
 Sometimes a subquery contains non-subquery columns, such as `select * from t where t.a in (select * from t2 where t.b=t2.b)`. The `t.b` column in the subquery does not belong to the subquery, it is introduced from the outside of the subquery. This kind of subquery is usually called a "correlated subquery", and the externally introduced column is called a "correlated column". For optimizations about correlated subquery, see [Decorrelation of correlated subquery](/correlated-subquery-optimization.md). This article focuses on subqueries that do not involve correlated columns.
 
-By default, subqueries use `semi join` mentioned in [Understanding TiDB Execution Plan](/explain-overview.md) as the execution method. For some special subqueries, TiDB do some logical rewrite to get better performance.
+By default, subqueries use `semi join` mentioned in [Semi join (correlated subquery)](/explain-subqueries.md#semi-join-correlated-subquery) as the execution method. For some special subqueries, TiDB performs some logical rewrites to get better performance.
 
 ## `... < ALL (SELECT ... FROM ...)` or `... > ANY (SELECT ... FROM ...)`
 
 In this case, `ALL` and `ANY` can be replaced by `MAX` and `MIN`. When the table is empty, the result of `MAX(EXPR)` and `MIN(EXPR)` is NULL. It works the same when the result of `EXPR` contains `NULL`. Whether the result of `EXPR` contains `NULL` may affect the final result of the expression, so the complete rewrite is given in the following form:
 
 - `t.id < all (select s.id from s)` is rewritten as `t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`
-- `t.id < any (select s.id from s)` is rewritten as `t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`
+- `t.id > any (select s.id from s)` is rewritten as `t.id > max(s.id) or if(sum(s.id is null) != 0, null, false)`
 
 ## `... != ANY (SELECT ... FROM ...)`
 

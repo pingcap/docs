@@ -9,7 +9,7 @@ If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & 
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview.
 
-If your cluster has used the [Resource Control](/tidb-resource-control.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard.
+If your cluster has used the [Resource Control](/tidb-resource-control-ru-groups.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard.
 
 TiDB uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) for flow control. As described in the [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets), a TiDB node might have multiple Resource Groups, which are flow controlled by GAC (Global Admission Control) on the PD side. The Local Token Buckets in each TiDB node periodically (5 seconds by default) communicate with the GAC on the PD side to reconfigure the local tokens. In TiDB, the Local Token Buckets are implemented as Resource Controller Clients.
 
@@ -17,7 +17,7 @@ This document describes some key monitoring metrics displayed on the Resource Co
 
 ## Metrics about Request Unit
 
-- RU: the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) consumption information of each resource group, calculated in real time. `total` is the sum of the Request Units consumed by all Resource Groups. The Request Unit consumption of each resource group should be equal to the sum of its read consumption (Read Request Unit) and write consumption (Write Request Unit).
+- RU: the [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) consumption information of each resource group, calculated in real time. `total` is the sum of the Request Units consumed by all Resource Groups. The Request Unit consumption of each resource group should be equal to the sum of its read consumption (Read Request Unit) and write consumption (Write Request Unit).
 - RU Per Query: the average number of Request Units consumed by each SQL statement per second. It is obtained by dividing the above RU metric by the number of SQL statements executed per second.
 - RRU: the Read Request Unit consumption information of each resource group, calculated in real time. `total` is the sum of the Read Request Units consumed by all Resource Groups.
 - RRU Per Query: the average number of Read Request Units consumed by each SQL statement per second. It is obtained by dividing the above RRU metric by the number of SQL statements executed per second.

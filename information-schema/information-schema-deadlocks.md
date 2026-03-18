@@ -148,6 +148,8 @@ Two transactions are executed in the following order:
 
 | Transaction 1                               | Transaction 2                               | Description                 |
 |--------------------------------------|--------------------------------------|----------------------|
+| `BEGIN;`                             |                                      |                      |
+|                                      | `BEGIN;`                             |                      |
 | `UPDATE t SET v = 11 WHERE id = 1;`  |                                      |                      |
 |                                      | `UPDATE t SET v = 21 WHERE id = 2;`  |                      |
 | `UPDATE t SET v = 12 WHERE id = 2;`  |                                      | Transaction 1 gets blocked.          |

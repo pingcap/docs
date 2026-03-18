@@ -108,15 +108,23 @@ After you pause a log backup task, to prevent the MVCC data from being garbage c
 
 To address this problem, delete the current task using `br log stop`, and then create a log backup task using `br log start`. At the same time, you can perform a full backup for subsequent PITR.
 
+### What should I do if the error message `[ddl:8204]invalid ddl job type: none` is returned when using the PITR table filter?
+
+```shell
+failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:8204]invalid ddl job type: none
+```
+
+This error occurs because the TiDB node acting as the DDL Owner is running an outdated version that cannot recognize the Refresh Meta DDL. To resolve this issue, upgrade your cluster to v8.5.5 or later before using the PITR [table filter](/table-filter.md) feature.
+
 ## Feature compatibility issues
 
-### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC or Drainer?
+### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC?
 
 + **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
 
-+ Before v4.0.3, DDL jobs generated during the restore might cause unexpected DDL executions in TiCDC/Drainer. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using br command-line tool to the TiCDC/Drainer block list.
++ Before v4.0.3, DDL jobs generated during the restore might cause unexpected DDL executions in TiCDC. Therefore, if you need to perform restore on the upstream cluster of TiCDC, add all tables restored using br command-line tool to the TiCDC block list.
 
-You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
+You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC.
 
 ### Why is `new_collation_enabled` mismatch reported during restore?
 
@@ -151,7 +159,7 @@ To handle this issue, you can try to scale out the cluster resources, reduce the
 
 You can try to reduce the number of tables to be created in a batch by setting `--ddl-batch-size` to `128` or a smaller value.
 
-When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
+When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
 
 ### Where are the backed up files stored when I use `local` storage?
 
@@ -272,11 +280,11 @@ If you only need to restore `mysql.usertable`, run the following command:
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-Note that even if you configures [table filter](/table-filter.md#syntax), **BR does not restore the following system tables**:
+Note that even if you configure [table filter](/table-filter.md#syntax), **BR does not restore the following system tables**:
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
+- Other system tables. For more details, see [Restore tables in the `mysql` schema system tables](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 
 ### How to deal with the error of `cannot find rewrite rule` during restoration?
 

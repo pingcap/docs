@@ -51,7 +51,7 @@ The field description is as follows:
 
 | Field   | Type    | Description  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
+| `cluster_id` | Integer | The ID of your TiDB cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
 
 ## Data App configuration
 
@@ -142,7 +142,8 @@ The following is an example configuration of `config.json`. In this example, the
         "type": "<Parameter type>",
         "required": <0 | 1>,
         "default": "<Parameter default value>",
-        "description": "<Parameter description>"
+        "description": "<Parameter description>",
+        "is_path_parameter": <true | false>
       }
     ],
     "settings": {
@@ -169,7 +170,7 @@ The description of each field is as follows:
 | `description` | String | (Optional) The endpoint description.          |
 | `method`      | String | The HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data. |
 | `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
-| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
+| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
 | `params.name` | String | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results. |
 | `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, `integer`, `boolean`, and `array`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `string` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`. |
@@ -177,6 +178,7 @@ The description of each field is as follows:
 | `params.enum` | String | (Optional) Specifies the value options of the parameter. This field is only valid when `params.type` is set to `string`, `number`, or `integer`. To specify multiple values, you can separate them with a comma (`,`). |
 | `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. The default value of an `ARRAY` type parameter is a string and you can use a comma (`,`) to separate multiple values. |
 | `params.description` | String | The description of the parameter. |
+| `params.is_path_parameter` | Boolean | Specifies whether the parameter is a path parameter. If it is set to `true`, ensure that the `endpoint` field contains the corresponding parameter placeholders; otherwise, it will cause deployment failures. Conversely, if the `endpoint` field contains the corresponding parameter placeholders but this field is set to `false`, it will also cause deployment failures. |
 | `settings.timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `30000` by default. You can set it to an integer from `1` to `60000`.  |
 | `settings.row_limit`   | Integer  | The maximum number of rows that the endpoint can operate or return, which is `1000` by default. When `batch_operation` is set to `0`, you can set it to an integer from `1` to `2000`. When `batch_operation` is set to `1`, you can set it to an integer from `1` to `100`.  |
 | `settings.enable_pagination`   | Integer  | Controls whether to enable the pagination for the results returned by the request. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
@@ -185,7 +187,7 @@ The description of each field is as follows:
 | `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
 | `batch_operation`    | Integer | Controls whether to enable the endpoint to operate in batch mode. Supported values are `0` (disabled) and `1` (enabled). When it is set to `1`, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST` or `PUT`. |
 | `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
-| `type`        | String | The type of the endpoint, which can only be `"sql_endpoint"`.          |
+| `type`        | String | The type of the endpoint. The value is `"system-data"` for predefined system endpoints and `"sql_endpoint"` for other endpoints. |
 | `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
 
 ### SQL file configuration

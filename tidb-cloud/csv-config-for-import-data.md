@@ -7,9 +7,9 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 This document introduces CSV configurations for the Import Data service on TiDB Cloud.
 
-The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
 
-![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
+<img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/import-data-csv-config.png" width="500" />
 
 ## Separator
 
@@ -33,15 +33,15 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `"`
 
-## With header
+## Null Value
 
-- Definition: whether *all* CSV files contain a header row. If **With header** is `True`, the first row is used as the column names. If **With header** is `False`, the first row is treated as an ordinary data row.
+- Definition: defines the string that represents a `NULL` value in the CSV file.
 
-- Default: `True`
+- Default: `\N`
 
-## Backslash escape
+## Backslash Escape
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:
+- Definition: controls whether to parse backslashes within fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
@@ -71,4 +71,10 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: `True`
+- Default: Enabled
+
+## Skip Header
+
+- Definition: controls whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped during import.
+
+- Default: Disabled

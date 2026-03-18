@@ -36,13 +36,21 @@ Aggregating and summarizing data from multiple columns is commonly used in OLAP 
 
 ## Prerequisites
 
-Currently, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode. Therefore, make sure that your TiDB cluster has been deployed with TiFlash nodes and that target fact tables are configured with TiFlash replicas properly.
-
 <CustomContent platform="tidb">
 
-For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 
 </CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Change node number](/tidb-cloud/scale-tidb-cluster.md#change-node-number).
+
+</CustomContent>
+
+Starting from v8.3.0, the preceding limitation is removed. Regardless of whether your TiDB cluster contains TiFlash nodes, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
+
+To identify whether TiDB or TiFlash executes the `Expand` operator, you can check the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
 
 ## Examples
 
@@ -57,7 +65,7 @@ CREATE TABLE bank
     profit  DECIMAL(13, 7)
 );
 
-ALTER TABLE bank SET TIFLASH REPLICA 1; -- Add a TiFlash replica for the table
+ALTER TABLE bank SET TIFLASH REPLICA 1; -- Add a TiFlash replica for the table in TiFlash MPP mode.
 
 INSERT INTO bank VALUES(2000, "Jan", 1, 10.3),(2001, "Feb", 2, 22.4),(2000,"Mar", 3, 31.6)
 ```
@@ -162,14 +170,31 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 ## How to interpret the ROLLUP execution plan
 
-To meet the requirements of multidimensional grouping, multidimensional data aggregation uses the `Expand` operator to replicate data. Each replica corresponds to a group at a specific dimension. With the data shuffling capability of MPP, the `Expand` operator can rapidly reorganize and calculate a large volume of data between multiple TiFlash nodes, fully utilizing the computational power of each node.
+Multidimensional data aggregation uses the `Expand` operator to copy data to meet the needs of multidimensional grouping. Each data copy corresponds to a grouping of a specific dimension. In MPP mode, the `Expand` operator can facilitate data shuffle to quickly reorganize and calculate a large amount of data between multiple nodes, making full use of the computing capacity of each node. In a TiDB cluster without TiFlash nodes, because the `Expand` operator is only executed on a single TiDB node, data redundancy will increase as the number of dimension groupings (`grouping set`) increases.
 
 The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
 
-The following is an example of an execution plan:
+The following example shows the execution plan for a TiDB cluster without TiFlash nodes, where the `task` of the `Expand` operator is `root`, indicating that the `Expand` operator is executed in TiDB:
 
 ```sql
-explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
+EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
++--------------------------------+---------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id                             | estRows | task      | access object | operator info                                                                                                                                                                                                                        |
++--------------------------------+---------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Projection_7                   | 2.40    | root      |               | Column#6->Column#12, Column#7->Column#13, grouping(gid)->Column#14, grouping(gid)->Column#15, Column#9->Column#16                                                                                                                    |
+| └─HashAgg_8                    | 2.40    | root      |               | group by:Column#6, Column#7, gid, funcs:sum(test.bank.profit)->Column#9, funcs:firstrow(Column#6)->Column#6, funcs:firstrow(Column#7)->Column#7, funcs:firstrow(gid)->gid                                                            |
+|   └─Expand_12                  | 3.00    | root      |               | level-projection:[test.bank.profit, <nil>->Column#6, <nil>->Column#7, 0->gid],[test.bank.profit, Column#6, <nil>->Column#7, 1->gid],[test.bank.profit, Column#6, Column#7, 3->gid]; schema: [test.bank.profit,Column#6,Column#7,gid] |
+|     └─Projection_14            | 3.00    | root      |               | test.bank.profit, test.bank.year->Column#6, test.bank.month->Column#7                                                                                                                                                                |
+|       └─TableReader_16         | 3.00    | root      |               | data:TableFullScan_15                                                                                                                                                                                                                |
+|         └─TableFullScan_15     | 3.00    | cop[tikv] | table:bank    | keep order:false, stats:pseudo                                                                                                                                                                                                       |
++--------------------------------+---------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+6 rows in set (0.00 sec)
+```
+
+The following example shows the execution plan in TiFlash MPP mode, where the `task` of the `Expand` operator is `mpp[tiflash]`, indicating that the `Expand` operator is executed in TiFlash:
+
+```sql
+EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
 +----------------------------------------+---------+--------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                                     | estRows | task         | access object | operator info                                                                                                                                                                                                                        |
 +----------------------------------------+---------+--------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

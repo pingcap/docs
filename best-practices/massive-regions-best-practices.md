@@ -1,10 +1,10 @@
 ---
-title: Best Practices for TiKV Performance Tuning with Massive Regions
+title: Best Practices for Tuning TiKV Performance with Massive Regions
 summary: TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
-aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/reference/best-practices/massive-regions/']
+aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/reference/best-practices/massive-regions/','/tidb/stable/massive-regions-best-practices/','/tidb/dev/massive-regions-best-practices/']
 ---
 
-# Best Practices for TiKV Performance Tuning with Massive Regions
+# Best Practices for Tuning TiKV Performance with Massive Regions
 
 In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of Regions might be created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
 
@@ -95,8 +95,8 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
-config set max-merge-region-size 20
-config set max-merge-region-keys 200000
+config set max-merge-region-size 54
+config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
@@ -138,19 +138,19 @@ If Region followers have not received the heartbeat from the leader within the `
 
 ### Method 6: Adjust Region size
 
-The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+The default size of a Region is 256 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
 
-> **Warning:**
+> **Note:**
 >
-> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
+> Starting from v8.4.0, the default Region size is increased from 96 MiB to 256 MiB. If you have not modified the Region size manually, when you upgrade a TiKV cluster to v8.4.0 or later,  the TiKV cluster's default Region size will automatically be updated to 256 MiB.
+
+> **Note:**
 >
-> + Performance jitter might be caused.
-> + The query performance, especially for queries that deal with a large range of data, might decrease.
-> + The Region scheduling slows down.
+> Customized Region size is an experimental feature before TiDB v6.5.0. If you need to resize the Region size, it is recommended that you upgrade to v6.5.0 or a later version.
 
 ### Method 7: Increase the maximum number of connections for Raft communication
 
-By default, the maximum number of connections used for Raft communication between TiKV nodes is 1. Increasing this number can help alleviate blockage issues caused by heavy communication workloads of a large number of Regions. For detailed instructions, see [`grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num).
+To adjust the maximum number of connections used for Raft communication between TiKV nodes, you can modify the [`server.grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num) configuration item. Increasing this number can help alleviate blockage issues caused by heavy communication workloads of a large number of Regions.
 
 > **Note:**
 >

@@ -1,10 +1,10 @@
 ---
-title: Software and Hardware Recommendations
-summary: Learn the software and hardware recommendations for deploying and running TiDB.
+title: TiDB Software and Hardware Requirements
+summary: Learn the software and hardware requirements for deploying and running TiDB.
 aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/deploy/hardware-recommendations/']
 ---
 
-# Software and Hardware Recommendations
+# TiDB Software and Hardware Requirements
 
 <!-- Localization note for TiDB:
 
@@ -14,7 +14,7 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 -->
 
-As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+This document describes the software and hardware requirements for deploying and running the TiDB database. As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
@@ -27,11 +27,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 </thead>
 <tbody>
   <tr>
-    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul></td>
+    <td>Red Hat Enterprise Linux 8.6 or a later 8.x version</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -47,7 +43,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Kylin Euler V10 SP1/SP2</td>
+    <td>Kylin V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -55,57 +51,59 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>openEuler 22.03 LTS SP1/SP3</td>
+    <td>openEuler 24.03 LTS (SP4 or later)</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>macOS 12 (Monterey) or later</td>
+    <td>macOS 14 (Sonoma) or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Oracle Enterprise Linux 8 or a later</td>
+    <td>Oracle Enterprise Linux 8 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Ubuntu LTS 20.04 or later</td>
+    <td>Ubuntu LTS 22.04 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>CentOS 8 Stream</td>
+    <td>CentOS Stream 9</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Debian 10 (Buster) or later</td>
+    <td>Debian 12 (Bookworm) or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Fedora 38 or later</td>
+    <td>Fedora 42 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
+    <td>openSUSE Leap later than v15.6 (not including Tumbleweed)</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>SUSE Linux Enterprise Server 15</td>
+    <td>SUSE Linux Enterprise Server 15.6 or later</td>
     <td>x86_64</td>
   </tr>
 </tbody>
 </table>
 
+> **Warning:**
+>
+> - TiDB requires a 64-bit CPU architecture.
+> - Other operating system versions not mentioned above might work but are not officially supported.
+
 > **Note:**
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
-> - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
-> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
-> - Other operating system versions not mentioned above might work but are not officially supported.
+> - Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
 
 ### Libraries required for compiling and running TiDB
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.21 or later |
+|   Golang  |  1.23 or later |
 |   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
@@ -119,7 +117,7 @@ The following CPU architectures are supported:
 - x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
-## Software recommendations
+## Software requirements
 
 ### Control machine
 
@@ -140,19 +138,20 @@ The following CPU architectures are supported:
 | numa | 2.0.12 or later |
 | tar | any |
 
-## Server recommendations
+## Server requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
 
 ### Development and test environments
 
-| Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
-| :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | [Disk space requirements](#disk-space-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
-| PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
-| TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
-| TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
-| TiCDC | 8 core+ | 16 GB+ | SAS, 200 GB+ | Gigabit network card | 1 |
+| Component | CPU       | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
+| :-------: | :-------: | :----: | :------------: | :------: | :----------------: |
+| TiDB      | 8 core+   | 16 GB+ | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+| PD        | 4 core+   | 8 GB+  | SAS, 200 GB+   | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
+| TiKV      | 8 core+   | 32 GB+ | SAS, 200 GB+   | Gigabit network card | 3 |
+| TiFlash   | 32 core+  | 64 GB+ | SSD, 200 GB+   | Gigabit network card | 1 |
+| TiCDC     | 8 core+   | 16 GB+ | SAS, 200 GB+   | Gigabit network card | 1 |
+| TiProxy   | 4 core+   | 8 GB+  | SAS            | Gigabit network card | 1 |
 
 > **Note:**
 >
@@ -164,20 +163,22 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ### Production environment
 
-| Component | CPU | Memory | Hard Disk Type | Network | Number of Instances (Minimum Requirement) |
-| :-----: | :------: | :------: | :------: | :------: | :-----: |
-| TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
-| PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
-| TiCDC | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
-| Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
+| Component | CPU      | Memory | Hard Disk Type | Network | Number of Instances (Minimum Requirement) |
+| :-------: | :------: | :------: | :------: | :------: | :-----: |
+| TiDB      | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
+| PD        | 8 core+  | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
+| TiKV      | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
+| TiFlash   | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
+| TiCDC     | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
+| Monitor   | 8 core+  | 16 GB+ | SAS | Gigabit network card | 1 |
+| TiProxy   | 8 core+  | 16 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
 
 > **Note:**
 >
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
+> - If you deploy TiKV on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes. Data on local disks might be lost if the TiKV instance crashes in the cloud environment.
 
 Before you deploy TiFlash, note the following items:
 
@@ -213,8 +214,6 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
 | TiFlash | 8234 | the port for Prometheus to pull TiFlash metrics |
-| Pump | 8250 | the Pump communication port |
-| Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
 | Monitoring | 12020 | the communication port for the NgMonitoring service|
@@ -224,7 +223,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
 
-## Disk space requirements
+## Storage requirements
 
 <table>
 <thead>
@@ -267,6 +266,8 @@ As an open-source distributed SQL database, TiDB requires the following network 
   </tr>
 </tbody>
 </table>
+
+TiDB supports the XFS and Ext4 file systems. Other file systems are not recommended for production environments.  
 
 ## Web browser requirements
 

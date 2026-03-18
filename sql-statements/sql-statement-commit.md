@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-commit/','/docs/dev/reference/
 
 # COMMIT
 
-This statement commits a transaction inside of the TIDB server.
+This statement commits a transaction inside of the TiDB server.
 
 In the absence of a `BEGIN` or `START TRANSACTION` statement, the default behavior of TiDB is that every statement will be its own transaction and autocommit. This behavior ensures MySQL compatibility.
 
@@ -41,7 +41,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 * Currently, TiDB use Metadata Locking (MDL) to prevent DDL statements from modifying tables used by transactions by default. The behavior of metadata lock is different between TiDB and MySQL. For more details, see [Metadata Lock](/metadata-lock.md).
 * By default, TiDB 3.0.8 and later versions use [Pessimistic Locking](/pessimistic-transaction.md). When using [Optimistic Locking](/optimistic-transaction.md), it is important to consider that a `COMMIT` statement might fail because rows have been modified by another transaction.
-* When Optimistic Locking is enabled, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This results in additional situations where a a `COMMIT` statement might fail. This behavior can be changed by setting `tidb_constraint_check_in_place=ON`.
+* When Optimistic Locking is enabled, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This results in additional situations where a `COMMIT` statement might fail. This behavior can be changed by setting `tidb_constraint_check_in_place=ON`.
 * TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after committing the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
 * TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level while the current transaction is being committed. In TiDB, it is recommended to instead start a new transaction.
 

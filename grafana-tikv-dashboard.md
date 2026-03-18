@@ -411,6 +411,35 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Blob GC output file size: The size of Titan GC output file
 - Blob GC file count: The count of blob files involved in Titan GC
 
+### In Memory Engine
+
+The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) (IME).
+
+- Ops: The number of operations per second for column families
+- Read MBps: The total bytes of read traffic in RocksDB and the in-memory engine
+- Coprocessor Handle duration: The time consumed for handling coprocessor requests
+- Region Cache Hit: The number of times data is successfully retrieved from the Region cache
+- Region Cache Hit Rate: The hit rate of Region cache
+- Region Cache Miss Reason: The reasons why data is not retrieved from the Region cache
+- Memory Usage: The memory usage of the in-memory engine
+- Region Count: The count of different types of Regions
+- GC Filter: The information about the filtering process during garbage collection (GC)
+- Region GC Duration: The time consumed for Region GC
+- Region Load Duration: The time consumed for loading Regions
+- Region Load Count: The number of Regions loaded per second
+- Region Eviction Duration: The time consumed for evicting Regions
+- Region Eviction Count: The number of Regions evicted per second
+- Write duration: The time consumed for write operations in the Region cache engine
+- 99% In-memory engine write duration per server: The 99th percentile of write duration per TiKV server for the in-memory engine
+- Prepare for write duration: The time consumed for preparing write operations in the in-memory engine
+- 99% In-memory engine prepare for write duration per server: The 99th percentile of time consumed for preparing write operations per TiKV server in the in-memory engine
+- Iterator operations: The number of different types of iterator operations
+- Seek duration: The time consumed for seek operations
+- Oldest Auto GC SafePoint: The oldest automatic GC safepoint for Regions cached in the in-memory engine
+- Newest Auto GC SafePoint: The newest automatic GC safepoint for Regions cached in the in-memory engine
+- Auto GC SafePoint Gap: The time gap between the newest automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
+- Auto GC SafePoint Gap With TiKV: The gap between the TiKV automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
+
 ### Pessimistic Locking
 
 - Lock Manager Thread CPU: The CPU utilization of the lock manager thread
@@ -494,6 +523,44 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Request Result: The record of the coordinator's success or failure in advancing the Region checkpoint
 - Get Region Operation Count: The number of times the coordinator requests Region information from the PD
 - Try Advance Trigger Time: The time taken for the coordinator to attempt to advance the checkpoint
+
+### Backup & Import
+
+- Import CPU Utilization: The CPU utilization aggregated by SST importer.
+- Import Thread Count: The number of threads used by SST importer.
+- Import Errors: The number of errors encountered during SST import.
+- Import RPC Duration: The time spent on various RPC calls in SST importer.
+- Import RPC Ops: The total number of RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Import Write/Download RPC Duration: The RPC time for write or download operations in SST importer.
+- Import Wait Duration: The time spent waiting in queue for download task execution.
+- Import Read SST Duration: The time spent reading an SST file from external storage and downloading it to TiKV.
+- Import Rewrite SST Duration: The time spent rewriting the SST file based on rewrite rules.
+- Import Ingest RPC Duration: The time spent handling ingest RPC requests on TiKV.
+- Import Ingest SST Duration: The time spent ingesting the SST file into RocksDB.
+- Import Ingest SST Bytes: The number of bytes ingested.
+- Import Download SST Throughput: The SST download throughput in bytes per second.
+- cloud request: The number of requests to cloud providers.
+
+### Point In Time Restore
+
+- CPU Usage: The CPU utilization by point-in-time recovery (PITR).
+- P99 RPC Duration: The 99th percentile of RPC request duration.
+- Import RPC Ops: The total number of RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Cache Events: The number of events in the file cache during SST import.
+- Overall RPC Duration: The time spent on RPC calls.
+- Read File into Memory Duration: The time spent downloading files from external storage and loading them into memory.
+- Queuing Time: The time spent waiting to be scheduled on a thread.
+- Apply Request Throughput: The rate of applying requests in bytes.
+- Downloaded File Size: The size of downloaded file in bytes.
+- Apply Batch Size: The number of bytes for applying to Raft store in one batch.
+- Blocked by Concurrency Time: The time spent waiting for execution due to concurrency constraints.
+- Apply Request Speed: The speed of applying request to Raft store.
+- Cached File in Memory: The files cached by the applying requests of SST importer.
+- Engine Requests Unfinished: The number of pending requests to Raft store.
+- Apply Time: The time spent writing data to Raft store.
+- Raft Store Memory Usage: The memory usage for Raft store.
 
 ### Explanation of Common Parameters
 

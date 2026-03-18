@@ -1,12 +1,12 @@
 ---
 title: TiDB Monitoring Framework Overview
-summary: Use Prometheus and Grafana to build the TiDB monitoring framework.
+summary: Use Prometheus, Grafana, and TiDB Dashboard to build the TiDB monitoring framework.
 aliases: ['/docs/dev/tidb-monitoring-framework/','/docs/dev/how-to/monitor/overview/']
 ---
 
 # TiDB Monitoring Framework Overview
 
-The TiDB monitoring framework adopts two open source projects: Prometheus and Grafana. TiDB uses [Prometheus](https://prometheus.io) to store the monitoring and performance metrics and [Grafana](https://grafana.com/grafana) to visualize these metrics.
+The TiDB monitoring framework adopts two open source projects: Prometheus and Grafana. TiDB uses [Prometheus](https://prometheus.io) to store the monitoring and performance metrics and [Grafana](https://grafana.com/grafana) to visualize these metrics. TiDB also provides a built-in [TiDB Dashboard](/dashboard/dashboard-intro.md) for monitoring and diagnosing TiDB clusters.
 
 ## About Prometheus in TiDB
 
@@ -29,7 +29,6 @@ Grafana is an open source project for analyzing and visualizing metrics. TiDB us
 ![Grafana monitored_groups](/media/grafana-monitored-groups.png)
 
 - {TiDB_Cluster_name}-Backup-Restore: Monitoring metrics related to backup and restore.
-- {TiDB_Cluster_name}-Binlog: Monitoring metrics related to TiDB Binlog.
 - {TiDB_Cluster_name}-Blackbox_exporter: Monitoring metrics related to network probe.
 - {TiDB_Cluster_name}-Disk-Performance: Monitoring metrics related to disk performance.
 - {TiDB_Cluster_name}-Kafka-Overview: Monitoring metrics related to Kafka.
@@ -52,3 +51,7 @@ Grafana is an open source project for analyzing and visualizing metrics. TiDB us
 Each group has multiple panel labels of monitoring metrics, and each panel contains detailed information of multiple monitoring metrics. For example, the **Overview** monitoring group has five panel labels, and each labels corresponds to a monitoring panel. See the following UI:
 
 ![Grafana Overview](/media/grafana-monitor-overview.png)
+
+## TiDB Dashboard
+
+TiDB Dashboard is a web UI for monitoring, diagnosing, and managing the TiDB cluster, which is introduced in v4.0. It is built into the PD component and does not require an independent deployment. For more information, see [TiDB Dashboard introduction](/dashboard/dashboard-intro.md).

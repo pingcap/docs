@@ -20,7 +20,7 @@ TableName ::=
 
 ## Usage
 
-The following statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement deletes statistics of all partitions in this table as well as [GlobalStats generated in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+The following statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement deletes statistics of all partitions in this table as well as [global statistics generated in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
 ```sql
 DROP STATS TableName
@@ -40,7 +40,7 @@ DROP STATS TableName PARTITION PartitionNameList;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-The following statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
+The following statement only deletes global statistics generated in dynamic pruning mode of the specified table.
 
 ```sql
 DROP STATS TableName GLOBAL;

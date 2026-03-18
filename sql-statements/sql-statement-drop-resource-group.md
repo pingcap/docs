@@ -9,7 +9,7 @@ You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Synopsis
 
@@ -55,11 +55,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 ```
 
 ```sql
-+------+------------+----------+-----------+-------------+
-| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
-+------+------------+----------+-----------+-------------+
-| rg1  | 500        | MEDIUM   | YES       | NULL        |
-+------+------------+----------+-----------+-------------+
++------+------------+----------+----------------+-------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE      | QUERY_LIMIT |
++------+------------+----------+----------------+-------------+
+| rg1  | 500        | MEDIUM   | MODERATED      | NULL        |
++------+------------+----------+----------------+-------------+
 1 row in set (0.01 sec)
 ```
 
@@ -87,4 +87,4 @@ MySQL also supports [DROP RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/e
 
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+* [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

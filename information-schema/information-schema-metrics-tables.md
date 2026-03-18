@@ -10,7 +10,7 @@ The `METRICS_TABLES` table provides the PromQL (Prometheus Query Language) defin
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ```sql
 USE INFORMATION_SCHEMA;

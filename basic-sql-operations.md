@@ -100,7 +100,7 @@ For example, to create a table named `person` which includes fields such as numb
 
 ```sql
 CREATE TABLE person (
-    id INT(11),
+    id INT,
     name VARCHAR(255),
     birthday DATE
     );

@@ -32,6 +32,7 @@ This section lists the types of diagnostic data that can be collected by [Diag](
 | Log | `tidb.log` | `--include=log` |
 | Error log | `tidb_stderr.log` | `--include=log` |
 | Slow log | `tidb_slow_query.log` | `--include=log` |
+| Audit log | `tidb-audit.log.json` | `--include=log` |
 | Configuration file | `tidb.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
 
@@ -140,3 +141,14 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
 | List of kernel parameters | `sysctl.conf` | `--include=system` |
 | Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
+
+### Log file classification
+
+You can use the `--include=log.<type>` parameter to specify which types of logs to collect.
+
+Log types:
+
+- `std`: Log files that contain `stderr` in the filename.
+- `rocksdb`: Log files with a `rocksdb` prefix and a `.info` suffix.
+- `slow`: Slow query log files.
+- `unknown`: Log files that do not match any of the preceding types.

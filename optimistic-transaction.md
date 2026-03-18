@@ -6,7 +6,7 @@ aliases: ['/docs/dev/optimistic-transaction/','/docs/dev/reference/transactions/
 
 # TiDB Optimistic Transaction Model
 
-With optimistic transactions, conflicting changes are detected as part of a transaction commit. This helps improve the performance when concurrent transactions are infrequently modifying the same rows, because the process of acquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions may perform worse than [Pessimistic Transactions](/pessimistic-transaction.md).
+With optimistic transactions, conflicting changes are detected as part of a transaction commit. This helps improve the performance when concurrent transactions are infrequently modifying the same rows, because the process of acquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions might perform worse than [pessimistic transactions](/pessimistic-transaction.md).
 
 Before enabling optimistic transactions, make sure that your application correctly handles that a `COMMIT` statement could return errors. If you are unsure of how your application handles this, it is recommended to instead use Pessimistic Transactions.
 
@@ -18,7 +18,56 @@ Before enabling optimistic transactions, make sure that your application correct
 
 To support distributed transactions, TiDB adopts two-phase commit (2PC) in optimistic transactions. The procedure is as follows:
 
-![2PC in TiDB](/media/2pc-in-tidb.png)
+```mermaid
+---
+title: 2PC in TiDB
+---
+sequenceDiagram
+    participant client
+    participant TiDB
+    participant PD
+    participant TiKV
+
+    client->>TiDB: begin
+    TiDB->>PD: get ts as start_ts
+
+    loop excute SQL
+        alt do read
+            TiDB->>PD: get region from PD or cache
+            TiDB->>TiKV: get data from TiKV or cache with start_ts
+            TiDB-->>client: return read result
+        end
+        alt do write
+            TiDB-->>TiDB: write in cache
+            TiDB-->>client: return write result
+        end
+    end
+
+    client->>TiDB: commit
+
+    opt start 2PC
+        TiDB-->>TiDB: for all keys need to write,choose first one as primary
+        TiDB->>PD: locate each key
+        TiDB-->>TiDB: group keys by region to [](region,keys)
+
+        opt prewrite with start_ts
+            TiDB->>TiKV: prewrite(primary_key,start_ts)
+            loop prewrite to each region in [](region,keys) parallelly
+                TiDB->>TiKV: prewrite(keys,primary_key,start_ts)
+            end
+        end
+
+        opt commit
+            TiDB-->>PD: get ts as commit_ts
+            TiDB-->>TiKV: commit primary with commit_ts
+            loop send commit to each region in [](region,keys) parallelly
+                TiDB->>TiKV: commit(keys,commit_ts)
+            end
+        end
+    end
+
+    TiDB-->>client: success
+```
 
 1. The client begins a transaction.
 
@@ -69,9 +118,14 @@ However, TiDB transactions also have the following disadvantages:
 >
 > Starting from v8.0.0, the [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) system variable is deprecated, and TiDB no longer supports automatic retries of optimistic transactions. It is recommended to use the [Pessimistic transaction mode](/pessimistic-transaction.md). If you encounter optimistic transaction conflicts, you can capture the error and retry transactions in your application.
 
-In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
+In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. Starting from v3.0.8, TiDB uses the [pessimistic transaction mode](/pessimistic-transaction.md) by default, the same as MySQL. This means that TiDB and MySQL add locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions.
 
 ### Automatic retry
+
+> **Note:**
+>
+> - Starting from TiDB v3.0.0, the automatic retry of transactions is disabled by default, because it can **break the transaction isolation level**. 
+> - Starting from TiDB v8.0.0, automatic retries of optimistic transactions are no longer supported.
 
 If a write-write conflict occurs during the transaction commit, TiDB automatically retries the SQL statement that includes write operations. You can enable the automatic retry by setting `tidb_disable_txn_auto_retry` to `OFF` and set the retry limit by configuring `tidb_retry_limit`:
 

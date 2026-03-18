@@ -27,22 +27,27 @@ You can back up a TiDB cluster snapshot by running the `tiup br backup full` com
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
     --backupts '2022-09-08 13:30:00 +08:00' \
-    --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}" \
-    --ratelimit 128 \
+    --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}" 
 ```
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and `br` exits. When backing up using a timestamp, it is recommended to specify the time zone as well. Otherwise, `br` uses the local time zone to construct the timestamp by default, which might lead to an incorrect backup time point. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/tso.md) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and `br` exits. When backing up using a timestamp, it is recommended to specify the time zone as well. Otherwise, `br` uses the local time zone to construct the timestamp by default, which might lead to an incorrect backup time point. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI Formats of External Storage Services](/external-storage-uri.md).
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
 During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
+
+- `total-ranges`: indicates the total number of files to be backed up.
+- `ranges-succeed`: indicates the number of files that are successfully backed up.
+- `ranges-failed`: indicates the number of files that failed to be backed up.
+- `backup-total-ranges`: indicates the number of tables (including partitions) and indexes that are to be backed up.
+- `write-CF-files`: indicates the number of backup SST files that contain `write CF` data.
+- `default-CF-files`: indicates the number of backup SST files that contain `default CF` data.
 
 ```shell
 Full Backup <-------------------------------------------------------------------------------> 100.00%
 Checksum <----------------------------------------------------------------------------------> 100.00%
-*** ["Full Backup success summary"] *** [backup-checksum=3.597416ms] [backup-fast-checksum=2.36975ms] *** [total-take=4.715509333s] [BackupTS=435844546560000000] [total-kv=1131] [total-kv-size=250kB] [average-speed=53.02kB/s] [backup-data-size(after-compressed)=71.33kB] [Size=71330]
+*** ["Full Backup success summary"] *** [total-ranges=20] [ranges-succeed=20] [ranges-failed=0] [backup-checksum=3.597416ms] [backup-fast-checksum=2.36975ms] [backup-total-ranges=11] [backup-total-regions=10] [write-CF-files=14] [default-CF-files=6] [total-take=4.715509333s] [BackupTS=435844546560000000] [total-kv=1131] [total-kv-size=250kB] [average-speed=53.02kB/s] [backup-data-size(after-compressed)=71.33kB] [Size=71330]
 ```
 
 ## Get the backup time point of a snapshot backup
@@ -68,6 +73,7 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 > - Starting from BR v7.6.0, to address potential restore bottlenecks in scenarios with large-scale Regions, BR supports accelerating restore through the coarse-grained Region scattering algorithm (experimental). You can enable this feature by specifying the command-line parameter `--granularity="coarse-grained"`.
 > - Starting from BR v8.0.0, the snapshot restore through the coarse-grained Region scattering algorithm is generally available (GA) and enabled by default. BR improves the snapshot restore speed significantly by implementing various optimizations such as adopting the coarse-grained Region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics. According to test results from real-world cases, the SST file download speed for snapshot restore is improved by approximately up to 10 times, the data restore speed per TiKV node stabilizes at 1.2 GiB/s, the end-to-end restore speed is improved by approximately 1.5 to 3 times, and 100 TiB of data can be restored within one hour.
 > - Starting from BR v8.2.0, the command line parameter `--granularity` is deprecated, and the coarse-grained Region scattering algorithm is enabled by default.
+> - Starting from BR v8.3.0, the snapshot restore task introduces available disk space checks for TiKV and TiFlash: at the beginning of the task, BR verifies whether TiKV and TiFlash have sufficient disk space based on the size of SST files to be restored; for TiKV v8.3.0 or later version, TiKV verifies whether it has sufficient disk space before downloading each SST file. If the space is insufficient according to any of these checks, the restore task fails with an error. You can skip the check at the beginning of the restore task by setting `--check-requirements=false`, but the disk space check before TiKV downloads each SST file cannot be skipped.
 
 You can restore a snapshot backup by running the `tiup br restore full` command. Run `tiup br restore full --help` to see the help information:
 
@@ -80,10 +86,24 @@ tiup br restore full --pd "${PD_IP}:2379" \
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
+- `total-ranges`: indicates the total number of files that are to be restored.
+- `ranges-succeed`: indicates the number of files that are successfully restored.
+- `ranges-failed`: indicates the number of files that failed to be restored.
+- `merge-ranges`: indicates the time taken to merge the data range.
+- `split-region`: indicates the time taken to split and scatter Regions.
+- `restore-files`: indicates the time TiKV takes to download and ingest SST files.
+- `write-CF-files`: indicates the number of restored SST files that contain `write CF` data.
+- `default-CF-files`: indicates the number of restored SST files that contain `default CF` data.
+- `split-keys`: indicates the number of keys generated for splitting Regions.
+
 ```shell
-Full Restore <------------------------------------------------------------------------------> 100.00%
-*** ["Full Restore success summary"] *** [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
+Split&Scatter Region <--------------------------------------------------------------------> 100.00%
+Download&Ingest SST <---------------------------------------------------------------------> 100.00%
+Restore Pipeline <------------------------------------------------------------------------> 100.00%
+*** ["Full Restore success summary"] [total-ranges=20] [ranges-succeed=20] [ranges-failed=0] [merge-ranges=7.546971ms] [split-region=343.594072ms] [restore-files=1.57662s] [default-CF-files=6] [write-CF-files=14] [split-keys=9] [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
 ```
+
+During data restore, the table mode of the target table is automatically set to `restore`. Tables in `restore` mode do not allow any read or write operations. After data restore is complete, the table mode automatically switches back to `normal`, and you can read and write the table normally. This mechanism ensures task stability and data consistency throughout the restore process.
 
 ### Restore a database or a table
 
@@ -128,9 +148,12 @@ tiup br restore full \
 
 ### Restore tables in the `mysql` schema
 
-- Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default. 
-- Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**. 
+When you perform a snapshot backup, BR backs up system tables as tables with the `__TiDB_BR_Temporary_` prefix added to the database name. For example, BR backs up the `mysql.user` table as `__TiDB_BR_Temporary_mysql.user`. During the snapshot restore, BR first restores these tables with the `__TiDB_BR_Temporary_` prefix to avoid conflicts with existing system table data in the target cluster. While restoring system tables, BR writes the data from the tables with the `__TiDB_BR_Temporary_` prefix into the corresponding system tables using the `REPLACE INTO` statement.
+
+- Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default.
+- Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**.
 - Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
+- Starting from v8.5.5 and v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore system tables physically. This approach uses the `RENAME TABLE` DDL statement to atomically swap the system tables in the `__TiDB_BR_Temporary_mysql` database with the system tables in the `mysql` database. Unlike the logical restoration of system tables using the `REPLACE INTO` SQL statement, physical restoration completely overwrites the existing data in the system tables.
 
 **BR can restore data in the following system tables:**
 
@@ -152,16 +175,24 @@ tiup br restore full \
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
+- Other system tables
 
 ```
 +-----------------------------------------------------+
+| advisory_locks                                      |
+| analyze_jobs                                        |
+| analyze_options                                     |
 | capture_plan_baselines_blacklist                    |
 | column_stats_usage                                  |
+| dist_framework_meta                                 |
 | gc_delete_range                                     |
 | gc_delete_range_done                                |
 | global_variables                                    |
-| schema_index_usage                                  |
+| help_topic                                          |
+| index_advisor_results                               |
+| plan_replayer_status                                |
+| plan_replayer_task                                  |
+| request_unit_by_group                               |
 | stats_buckets                                       |
 | stats_extended                                      |
 | stats_feedback                                      |
@@ -172,7 +203,27 @@ tiup br restore full \
 | stats_meta_history                                  |
 | stats_table_locked                                  |
 | stats_top_n                                         |
+| table_cache_meta                                    |
 | tidb                                                |
+| tidb_background_subtask                             |
+| tidb_background_subtask_history                     |
+| tidb_ddl_history                                    |
+| tidb_ddl_job                                        |
+| tidb_ddl_notifier                                   |
+| tidb_ddl_reorg                                      |
+| tidb_global_task                                    |
+| tidb_global_task_history                            |
+| tidb_import_jobs                                    |
+| tidb_mdl_info                                       |
+| tidb_mdl_view                                       |
+| tidb_pitr_id_map                                    |
+| tidb_runaway_queries                                |
+| tidb_runaway_watch                                  |
+| tidb_runaway_watch_done                             |
+| tidb_timers                                         |
+| tidb_ttl_job_history                                |
+| tidb_ttl_table_status                               |
+| tidb_ttl_task                                       |
 +-----------------------------------------------------+
 ```
 
@@ -197,15 +248,25 @@ To illustrate the impact of backup, this document lists the test conclusions of 
 
 You can use the following methods to manually control the impact of backup tasks on cluster performance. However, these two methods also reduce the speed of backup tasks while reducing the impact of backup tasks on the cluster.
 
-- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` as a benchmark. When `--ratelimit` is set, to avoid too many tasks causing the speed limit to fail, the `concurrency` parameter of br is automatically adjusted to `1`.
-- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the number of threads used by backup tasks. According to internal tests, when BR uses no more than `8` threads for backup tasks, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write workload.
+- Recommended method: Adjust the TiKV configuration parameter [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1), which controls the number of worker threads used by backup tasks. Because backup is a CPU-intensive operation, tuning this parameter allows for more precise control over TiKV’s CPU usage, enabling better resource isolation and predictability. In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to `8` or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
+
+- Alternative method: If you have already set `backup.num-threads` to a small value (for example, `1`), but still want to further reduce the impact of backup on the cluster, consider using the `--ratelimit` parameter. This option limits the bandwidth used to write backup files to external storage, specified in MiB/s. Note that the actual rate limiting effect depends on the size of the compressed data. You can refer to the `backup data size (after compressed)` field in the logs for more insight. When `--ratelimit` is enabled, BR automatically sets `--concurrency` to `1` to reduce the number of concurrent requests.
+
+> **Note:** 
+>
+> Enabling `--ratelimit` will further reduce backup throughput. In most cases, if you are already performing backups during off-peak hours and have reduced `backup.num-threads` to 1 but still observe backup impact on foreground workloads, it typically indicates that the cluster is approaching its resource limits.
+>
+> In such situations, consider the following alternatives:
+>
+> - [Scale out a cluster](/tiup/tiup-cluster.md#scale-out-a-cluster) to increase available resources.
+> - Enable [`Log Backup`](/br/br-log-architecture.md) to offload backup pressure and minimize disruption to online workloads.
 
 The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
 
 ### Performance and impact of snapshot restore
 
 - During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
-- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
+- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
 - BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios.
 - Starting from v8.0.0, the `br` command-line tool introduces the `--tikv-max-restore-concurrency` parameter to control the maximum number of files that BR downloads and ingests per TiKV node. By configuring this parameter, you can also control the maximum length of the job queue (the maximum length of the job queue = 32 \* the number of TiKV nodes \* `--tikv-max-restore-concurrency`), thereby controlling the memory consumption of the BR node.
 

@@ -14,7 +14,7 @@ This document only describes parameters that are not included in command-line pa
 
 > **Tip:**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> After PD initialization, if you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) and [PD Control User Guide](/pd-control.md).
 
 ### `name`
 
@@ -78,7 +78,7 @@ This document only describes parameters that are not included in command-line pa
 ### `lease`
 
 + The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
++ Default value: Starting from v8.5.2, the default value is `5`. Before v8.5.2, the default value is `3`. 
 + Unit: second
 
 ### `quota-backend-bytes`
@@ -96,6 +96,22 @@ This document only describes parameters that are not included in command-line pa
 
 + The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
 + Default value: 1h
+
+### `tick-interval`
+
++ Equivalent to the `heartbeat-interval` configuration item of etcd. It controls the Raft heartbeat interval between embedded etcd instances in different PD nodes. A smaller value accelerates failure detection but increases network load.
++ Default value: `500ms`
+
+### `election-interval`
+
++ Equivalent to the `election-timeout` configuration item of etcd. It controls the election timeout for embedded etcd instances in PD nodes. If an etcd instance does not receive a valid heartbeat from other etcd instances within this period, it initiates a Raft election.
++ Default value: `3000ms`
++ This value must be at least five times the [`tick-interval`](#tick-interval). For example, if `tick-interval` is `500ms`, `election-interval` must be greater than or equal to `2500ms`.
+
+### `enable-prevote`
+
++ Equivalent to the `pre-vote` configuration item of etcd. It controls whether the embedded etcd in the PD node enables Raft pre-vote. When enabled, etcd performs an additional election phase to check whether enough votes can be obtained to win the election, minimizing service disruption.
++ Default value: `true`
 
 ### `force-new-cluster`
 
@@ -198,8 +214,9 @@ Configuration items related to security
 ### `redact-info-log` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to enable log redaction in the PD log
-+ When you set the configuration value to `true`, user data is redacted in the PD log.
++ Optional value: `false`, `true`, `"marker"`
 + Default value: `false`
++ For details on how to use it, see [Log redaction in PD side](/log-redaction.md#log-redaction-in-pd-side).
 
 ## `log`
 
@@ -258,26 +275,55 @@ Configuration items related to monitoring
 
 Configuration items related to scheduling
 
+> **Note:**
+>
+> To modify these PD configuration items related to `schedule`, choose one of the following methods based on your cluster status:
+>
+> - For clusters to be newly deployed, you can modify the PD configuration file directly.
+> - For existing clusters, use the command-line tool [PD Control](/pd-control.md) to make changes instead. Direct modifications to these PD configuration items related to `schedule` in the configuration file do not take effect on existing clusters.
+
 ### `max-merge-region-size`
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
-+ Default value: `20`
++ Default value: `54`. Before v8.4.0, the default value is `20`. Starting from v8.4.0, the default value is `54`.
 + Unit: MiB
 
 ### `max-merge-region-keys`
 
 + Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
-+ Default value: `200000`
++ Default value: `540000`. Before v8.4.0, the default value is `200000`. Starting from v8.4.0, the default value is `540000`.
+
+### `max-affinity-merge-region-size` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Controls the threshold for automatically merging small adjacent Regions that belong to the same [affinity](/table-affinity.md) group. When a Region belongs to an affinity group and its size is smaller than this threshold, PD attempts to merge this Region with other small adjacent Regions in the same affinity group to reduce the number of Regions and maintain the affinity effect.
++ Setting it to `0` disables the automatic merging of small adjacent Regions within an affinity group.
++ Default value: `256`
++ Unit: MiB
 
 ### `patrol-region-interval`
 
-+ Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
++ Controls the running frequency at which the checker inspects the health state of a Region. The smaller this value is, the faster the checker runs. Normally, you do not need to adjust this configuration.
 + Default value: `10ms`
+
+### `patrol-region-worker-count` <span class="version-mark">New in v8.5.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to a value greater than 1 enables concurrent checks. This is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
+
++ Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration.
++ Default value: `1`
 
 ### `split-merge-interval`
 
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
+
+### `max-movable-hot-peer-size` <span class="version-mark">New in v6.1.0</span>
+
++ Controls the maximum Region size that can be scheduled for hot Region scheduling.
++ Default value: `512`
++ Unit: MiB
 
 ### `max-snapshot-count`
 
@@ -334,6 +380,11 @@ Configuration items related to scheduling
 + The number of the `Region Merge` scheduling tasks performed at the same time. Set this parameter to `0` to disable `Region Merge`.
 + Default value: `8`
 
+### `affinity-schedule-limit` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Controls the number of [affinity](/table-affinity.md) scheduling tasks that can be performed concurrently. Setting it to `0` disables affinity scheduling.
++ Default value: `0`
+
 ### `high-space-ratio`
 
 + The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the Region size. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
@@ -371,15 +422,11 @@ Configuration items related to scheduling
 
 ### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
 
-> **Warning:**
->
-> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
-
 + Controls the version of the store limit formula
 + Default value: `v1`
 + Value options:
     + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
-    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+    + `v2`: In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -399,6 +446,16 @@ Configuration items related to scheduling
 
 + Specifies how many days the hot Region information is retained.
 + Default value: `7`
+
+### `enable-heartbeat-breakdown-metrics` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable breakdown metrics for Region heartbeats. These metrics measure the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
++ Default value: `true`
+
+### `enable-heartbeat-concurrent-runner` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable asynchronous concurrent processing for Region heartbeats. When enabled, an independent executor handles Region heartbeat requests asynchronously and concurrently, which can improve heartbeat processing throughput and reduce latency.
++ Default value: `true`
 
 ## `replication`
 
@@ -432,16 +489,20 @@ Configuration items related to replicas
 + Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
 
-## `label-property`
+## `label-property` (deprecated)
 
-Configuration items related to labels
+Configuration items related to labels, which only support the `reject-leader` type.
 
-### `key`
+> **Note:**
+>
+> Starting from v5.2, the configuration items related to labels are deprecated. It is recommended to use [Placement Rules](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center) to configure the replica policy.
+
+### `key` (deprecated)
 
 + The label key for the store that rejected the Leader
 + Default value: `""`
 
-### `value`
+### `value` (deprecated)
 
 + The label value for the store that rejected the Leader
 + Default value: `""`
@@ -449,6 +510,12 @@ Configuration items related to labels
 ## `dashboard`
 
 Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
+
+### `disable-custom-prom-addr`
+
++ Whether to disable configuring a custom Prometheus data source address in [TiDB Dashboard](/dashboard/dashboard-intro.md).
++ Default value: `false`
++ When it is set to `true`, if you configure a custom Prometheus data source address in TiDB Dashboard, TiDB Dashboard reports an error.
 
 ### `tidb-cacert-path`
 
@@ -473,17 +540,20 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `enable-telemetry`
 
-+ Determines whether to enable the telemetry collection feature in TiDB Dashboard.
+> **Warning:**
+>
+> Starting from v8.1.0, the telemetry feature in TiDB Dashboard is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions.
+
++ Before v8.1.0, this configuration item controls whether to enable telemetry collection in TiDB Dashboard.
 + Default value: `false`
-+ See [Telemetry](/telemetry.md) for details.
 
 ## `replication-mode`
 
 Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
 
-## Controller
+## controller
 
-This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
+This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control-ru-groups.md).
 
 ### `degraded-mode-wait-duration`
 
@@ -493,12 +563,12 @@ This section describes the configuration items that are built into PD for [Resou
 
 ### `request-unit`
 
-The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru).
+The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru).
 
 #### `read-base-cost`
 
 + Basis factor for conversion from a read request to RU
-+ Default value: 0.25
++ Default value: 0.125
 
 #### `write-base-cost`
 

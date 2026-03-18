@@ -1,9 +1,9 @@
 ---
-title: Periodically Delete Data Using TTL (Time to Live)
+title: TTL (Time to Live)
 summary: Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. In this document, you can learn how to use TTL to automatically expire and delete old data.
 ---
 
-# Periodically Delete Expired Data Using TTL (Time to Live)
+# TTL (Time to Live)
 
 Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level. This feature can effectively save storage space and enhance performance in some scenarios.
 
@@ -128,15 +128,17 @@ CREATE TABLE orders (
 
 ## TTL job
 
-For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 24 hours:
+For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 48 hours:
 
 ```sql
-ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
+ALTER TABLE orders TTL_JOB_INTERVAL = '48h';
 ```
 
-`TTL_JOB_INTERVAL` is set to `1h` by default.
+`TTL_JOB_INTERVAL` is set to `24h` by default. In v8.5 and earlier versions, the default value is `1h`.
 
-When executing a TTL job, TiDB will split the table into up to 64 tasks, with the Region being the smallest unit. These tasks will be executed distributedly. You can limit the number of concurrent TTL tasks across the entire cluster by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700). However, not all TTL jobs for all kinds of tables can be split into tasks. For more details on which kinds of tables' TTL jobs cannot be split into tasks, refer to the [Limitations](#limitations) section.
+When executing a TTL job, TiDB splits the table into tasks, with the Region as the smallest unit. These tasks are executed distributedly. Typically, a single table can have up to 64 tasks. However, in larger clusters with more than 64 TiKV instances, the maximum number of tasks for a single table is equal to the number of TiKV instances. Note that not the TTL jobs of all types of tables can be split into tasks. For more details on which table types are exceptions, see [Limitations](#limitations).
+
+TiDB also limits the number of concurrent TTL tasks at the cluster level. You can adjust this concurrency by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700).
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
 
@@ -159,7 +161,7 @@ The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:
 
 > **Note:**
 >
-> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide TTL metrics.
+> This section is only applicable to TiDB Self-Managed. Currently, TiDB Cloud does not provide TTL metrics.
 
 </CustomContent>
 
@@ -257,7 +259,16 @@ Currently, the TTL feature has the following limitations:
 * The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
 * A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
 * It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
-* For tables that use [clustered indexes](/clustered-indexes.md), if the primary key is neither an integer nor a binary string type, the TTL job cannot be split into multiple tasks. This will cause the TTL job to be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
+* For tables that use [clustered indexes](/clustered-indexes.md), a TTL job can be split into multiple subtasks only in the following scenarios:
+    - The first column of the primary key or composite primary key is of `INTEGER` or binary string types. The binary string types mainly refer to the following:
+        - `CHAR(N) CHARACTER SET BINARY`
+        - `VARCHAR(N) CHARACTER SET BINARY`
+        - `BINARY(N)`
+        - `VARBINARY(N)`
+        - `BIT(N)`
+    - The character set of the first column of the primary key or composite primary key is `utf8` or `utf8mb4`, and the collation is `utf8_bin`, `utf8mb4_bin`, or `utf8mb4_0900_bin`.
+    - For tables where the character set type of the first column of the primary key is `utf8` or `utf8mb4`, subtasks are split only based on the range of visible ASCII characters. If many primary key values have the same ASCII prefix, it might cause uneven task splitting.
+    - For tables that do not support splitting a TTL job into multiple subtasks, the TTL job will be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
 
 ## FAQs
 

@@ -8,6 +8,7 @@ on:
 
 jobs:
   linkChecker:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

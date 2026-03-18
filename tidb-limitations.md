@@ -8,6 +8,10 @@ aliases: ['/docs/dev/tidb-limitations/']
 
 This document describes the common usage limitations of TiDB, including the maximum identifier length and the maximum number of supported databases, tables, indexes, partitioned tables, and sequences.
 
+> **Note:**
+>
+> TiDB offers high compatibility with the MySQL protocol and syntax, including many MySQL limitations. For example, a single index can include a maximum of 16 columns. For more information, see [MySQL Compatibility](/mysql-compatibility.md) and the official MySQL documentation.
+
 ## Limitations on identifier length
 
 | Identifier type | Maximum length (number of characters allowed) |
@@ -59,7 +63,17 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 <CustomContent platform="tidb">
 
-You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item.
+You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration item.
+
+</CustomContent>
+
+## Limitations on indexes
+
+The maximum index length is 3072 bytes, equivalent to 768 characters using 4-byte UTF-8 encoding. The maximum number of columns in a single index is limited to 16.
+
+<CustomContent platform="tidb">
+
+You can adjust this limit using the [`max-index-length`](/tidb-configuration-file.md#max-index-length) configuration item.
 
 </CustomContent>
 
@@ -67,12 +81,12 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 
 | Type       | Upper limit   |
 |:----------|:----------|
-| CHAR       | 256 characters      |
-| BINARY     | 256 characters      |
-| VARBINARY  | 65535 characters    |
+| CHAR       | 255 characters      |
+| BINARY     | 255 bytes      |
+| VARBINARY  | 65535 bytes    |
 | VARCHAR    | 16383 characters    |
-| TEXT       | Defaults to 6 MiB and can be adjusted to 120 MiB                |
-| BLOB       | Defaults to 6 MiB and can be adjusted to 120 MiB               |
+| TEXT       | 65535 bytes    |
+| BLOB       | 65535 bytes    |
 
 ## Limitations on SQL statements
 

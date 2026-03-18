@@ -10,11 +10,11 @@ To access TiDB Dashboard, visit <http://127.0.0.1:2379/dashboard> via your brows
 
 > **Note:**
 >
-> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently).
 
 ## Access TiDB Dashboard when multiple PD instances are deployed
 
-When multiple multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
+When multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
 
 > **Note:**
 >
@@ -34,12 +34,11 @@ You can use TiDB Dashboard in the following common desktop browsers of a relativ
 
 ## Sign in
 
-After accessing TiDB Dashboard, you will be directed to the user login interface, as shown in the image below.
+After accessing TiDB Dashboard, you will be directed to the user login interface.
 
 - You can sign in to TiDB Dashboard using the TiDB `root` account.
+- You can also sign in to TiDB Dashboard via Single Sign-On (SSO). For more information, see [Configure SSO for TiDB Dashboard](/dashboard/dashboard-session-sso.md).
 - If you have created a [User-defined SQL User](/dashboard/dashboard-user.md), you can sign in using this account and the corresponding password.
-
-![Login interface](/media/dashboard/dashboard-access-login.png)
 
 If one of the following situations exists, the login might fail:
 

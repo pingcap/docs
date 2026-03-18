@@ -1,7 +1,7 @@
 ---
 title: TiDB 2.1 RC5 Release Notes
 aliases: ['/docs/dev/releases/release-2.1-rc.5/','/docs/dev/releases/21rc5/']
-summary: TiDB 2.1 RC5 was released on November 12, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. Fixes include issues with IndexReader, IndexScan Prepared statement, Union statement, and JSON data conversion. Server improvements include log readability, table data retrieval, and environment variable additions. PD fixes issues related to Region key reading, `regions/check` API, PD restart join, and event loss. TiKV improves error messages, adds panic mark file, downgrades grpcio, and adds an upper limit to the `kv_scan` interface. Tools now support the TiDB-Binlog cluster.
+summary: TiDB 2.1 RC5 was released on November 12, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. Fixes include issues with IndexReader, IndexScan Prepared statement, Union statement, and JSON data conversion. Server improvements include log readability, table data retrieval, and environment variable additions. PD fixes issues related to Region key reading, `regions/check` API, PD restart join, and event loss. TiKV improves error messages, adds panic mark file, downgrades grpcio, and adds an upper limit to the `kv_scan` interface.
 ---
 
 <!-- markdownlint-disable MD032 -->
@@ -61,4 +61,4 @@ On November 12, 2018, TiDB 2.1 RC5 is released. Compared with TiDB 2.1 RC4, this
 
 ## Tools
 
-- Support the TiDB-Binlog cluster, which is not compatible with the older version of binlog [#8093](https://github.com/pingcap/tidb/pull/8093), [documentation](/tidb-binlog/tidb-binlog-overview.md)
+- Support the TiDB-Binlog cluster, which is not compatible with the older version of binlog [#8093](https://github.com/pingcap/tidb/pull/8093), [documentation](https://docs-archive.pingcap.com/tidb/v2.1/tidb-binlog-overview)

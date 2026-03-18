@@ -11,15 +11,18 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the name of the resource group that the current session is bound to. See [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md). |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read the most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
+| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information about a key. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
@@ -33,16 +36,19 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md). |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | Decodes a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and logging outputs. |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
+| [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
+| [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information about a key. |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
 | [`TIDB_SHARD()`](#tidb_shard) | Creates a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
@@ -53,7 +59,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 ## CURRENT_RESOURCE_GROUP
 
-The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control-ru-groups.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
 
 When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
 
@@ -192,7 +198,7 @@ SHOW CREATE TABLE t2\G
        Table: t2
 Create Table: CREATE TABLE `t2` (
   `id` binary(36) NOT NULL,
-  `a` tinyint(3) unsigned NOT NULL,
+  `a` tinyint unsigned NOT NULL,
   `v` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`a`,`id`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -544,11 +550,11 @@ SELECT TIDB_VERSION()\G
 
 ```sql
 *************************** 1. row ***************************
-TIDB_VERSION(): Release Version: v8.2.0
+TIDB_VERSION(): Release Version: v8.5.0
 Edition: Community
 Git Commit Hash: 821e491a20fbab36604b36b647b5bae26a2c1418
 Git Branch: HEAD
-UTC Build Time: 2024-07-11 19:16:25
+UTC Build Time: 2024-12-05 19:16:25
 GoVersion: go1.21.10
 Race Enabled: false
 Check Table Before Drop: false
@@ -572,5 +578,167 @@ SELECT VITESS_HASH(123);
 +---------------------+
 | 1155070131015363447 |
 +---------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_ENCODE_INDEX_KEY
+
+The `TIDB_ENCODE_INDEX_KEY()` function encodes a specified index key into a hexadecimal string. The syntax is as follows:
+
+```sql
+TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>..., <handle_columns>...)
+```
+
+Parameter descriptions:
+
+* `<db_name>`: the name of the database that contains the target index.
+* `<table_name>`: the name of the table that contains the target index. For a partitioned table, you can specify the partition name, for example, `'t(p0)'`.
+* `<index_name>`: the name of the target index.
+* `<index_columns>...`: the values of the index columns. You must specify the values in the same order as defined in the index. For a composite index, you must specify values for all index columns.
+* `<handle_columns>...`: the handle values for the row. The required handle values depend on the primary key type of the table:
+
+    * If the table has no primary key, or the primary key is `NONCLUSTERED`, the handle value is the value of the hidden column `_tidb_rowid`.
+    * If the primary key is `CLUSTERED` and is a single-column integer, the handle value is the value of the primary key column.
+    * If the primary key is `CLUSTERED` and is a composite primary key or a non-integer type (common handle), the handle value consists of the values of all primary key columns in order.
+
+The following examples show how to call this function for the composite secondary index `idx(c1, c2)` under different primary key types.
+
+```sql
+-- For tables without a primary key or with a NONCLUSTERED primary key, use the _tidb_rowid column.
+SELECT TIDB_ENCODE_INDEX_KEY(
+    '<db_name>', '<table_name>', '<index_name>', 
+    <c1>, <c2>, <_tidb_rowid>
+);
+
+-- For tables with a CLUSTERED integer primary key (the primary key column is id), use the id column.
+SELECT TIDB_ENCODE_INDEX_KEY(
+    '<db_name>', '<table_name>', '<index_name>', 
+    <c1>, <c2>, <id>
+);
+
+-- For tables with a CLUSTERED composite primary key (the primary key columns are p1, p2), provide the values of p1 and p2 in their defined order.
+SELECT TIDB_ENCODE_INDEX_KEY(
+    '<db_name>', '<table_name>', '<index_name>', 
+    <c1>, <c2>, <p1>, <p2>
+);
+```
+
+```sql
+CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+INSERT INTO t VALUES(1,2);
+```
+
+```
+Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
+SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1);
+```
+
+```
++----------------------------------------------------------------------------+
+| TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1)                            |
++----------------------------------------------------------------------------+
+| 7480000000000000b45f698000000000000001038000000000000002038000000000000001 |
++----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_ENCODE_RECORD_KEY
+
+The `TIDB_ENCODE_RECORD_KEY()` function encodes a specified row record key into a hexadecimal string. The function syntax is as follows:
+
+```sql
+TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)
+```
+
+Parameter descriptions:
+
+* `<db_name>`: the name of the database that contains the target table.
+* `<table_name>`: the name of the target table. For a partitioned table, you can specify the partition name in `<table_name>`, for example, `'t(p0)'`.
+* `<handle_columns>...`: the handle (row key) values for the corresponding row. The exact composition of the handle depends on the primary key type of the table, such as whether the primary key is `CLUSTERED`, a common handle, or uses the hidden column `_tidb_rowid`. For more information, see the description of `<handle_columns>...` in [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key).
+
+```sql
+CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+INSERT INTO t VALUES(1,2);
+```
+
+```
+Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
+SELECT TIDB_ENCODE_RECORD_KEY('test', 't', 1);
+```
+
+```
++----------------------------------------+
+| TIDB_ENCODE_RECORD_KEY('test', 't', 1) |
++----------------------------------------+
+| 7480000000000000845f728000000000000001 |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
+```
+
+```
++-----------------------------------------------------------+
+| TIDB_DECODE_KEY('7480000000000000845f728000000000000001') |
++-----------------------------------------------------------+
+| {"id":1,"table_id":"132"}                                 |
++-----------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_MVCC_INFO
+
+Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information for a key. You can use the [`TIDB_ENCODE_INDEX_KEY`](#tidb_encode_index_key) function to obtain a key.
+
+```sql
+SELECT JSON_PRETTY(TIDB_MVCC_INFO('74800000000000007f5f698000000000000001038000000000000001038000000000000001')) AS info\G
+```
+
+```
+*************************** 1. row ***************************
+info: [
+  {
+    "key": "74800000000000007f5f698000000000000001038000000000000001038000000000000001",
+    "mvcc": {
+      "info": {
+        "values": [
+          {
+            "start_ts": 454654803134119936,
+            "value": "MA=="
+          }
+        ],
+        "writes": [
+          {
+            "commit_ts": 454654803134119937,
+            "short_value": "MA==",
+            "start_ts": 454654803134119936
+          }
+        ]
+      }
+    }
+  }
+]
 1 row in set (0.00 sec)
 ```

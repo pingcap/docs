@@ -9,7 +9,7 @@ You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current defin
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Synopsis
 
@@ -50,7 +50,7 @@ This statement is a TiDB extension for MySQL.
 
 ## See also
 
-* [TiDB RESOURCE CONTROL](/tidb-resource-control.md)
+* [TiDB RESOURCE CONTROL](/tidb-resource-control-ru-groups.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)

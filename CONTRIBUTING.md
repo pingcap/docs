@@ -44,7 +44,7 @@ Please check out these templates before you submit a pull request:
 We use separate branches to maintain different versions of TiDB documentation.
 
 - The [documentation under development](https://docs.pingcap.com/tidb/dev) is maintained in the `master` branch.
-- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<version>` branch. For example, TiDB v7.5 documentation is maintained in the `release-7.5` branch.
+- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<version>` branch. For example, TiDB v8.1 documentation is maintained in the `release-8.1` branch.
 - The [archived documentation](https://docs-archive.pingcap.com/) is no longer maintained and does not receive any further updates.
 
 ### Use cherry-pick labels
@@ -67,7 +67,7 @@ Please perform the following steps to create your Pull Request to this repositor
 
 ### Step 0: Sign the CLA
 
-Your Pull Requests can only be merged after you sign the [Contributor License Agreement](https://cla-assistant.io/pingcap/docs) (CLA). Please make sure you sign the CLA before continuing.
+To have your pull requests merged, you must sign the [Contributor License Agreement](https://cla.pingcap.net/pingcap/docs) (CLA). Please make sure you sign it before continuing.
 
 ### Step 1: Fork the repository
 
@@ -156,11 +156,11 @@ If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEA
 
 ## Guideline for contributing to TiDB Cloud documentation
 
-Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5/tidb-cloud) branch of this repository for reusing SQL documents and development documents of TiDB v7.5. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-7.5](https://github.com/pingcap/docs/tree/release-7.5) branch.
+Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the [release-8.1](https://github.com/pingcap/docs/tree/release-8.1/tidb-cloud) branch of this repository for reusing SQL documents and development documents of TiDB v8.1. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-8.1](https://github.com/pingcap/docs/tree/release-8.1) branch.
 
 > **Tip:**
 >
-> To learn which TiDB document is reused by TiDB Cloud, check the [TOC file of TiDB Cloud documentation](https://github.com/pingcap/docs/blob/release-7.5/TOC-tidb-cloud.md?plain=1).
+> To learn which TiDB document is reused by TiDB Cloud, check the [TOC file of TiDB Cloud documentation](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1).
 >
 > - If the path of a document in this file starts with `/tidb-cloud/`, it means that this document is only for TiDB Cloud.
 > - If the path of a document in this file does not start with `/tidb-cloud/`, it means that this TiDB document is reused by TiDB Cloud.

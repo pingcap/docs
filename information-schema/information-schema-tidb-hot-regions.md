@@ -9,7 +9,7 @@ The `TIDB_HOT_REGIONS` table provides information about the current hot Regions.
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 {{< copyable "sql" >}}
 

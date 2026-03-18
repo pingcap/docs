@@ -10,9 +10,9 @@ TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azur
 
 ## Send credentials to TiKV
 
-| CLI parameter | Description | Default value
-|:----------|:-------|:-------|
-| `--send-credentials-to-tikv` | Controls whether to send credentials obtained by BR to TiKV. | `true`|
+| CLI parameter                | Description                                                  | Default value |
+|:-----------------------------|:-------------------------------------------------------------|:--------------|
+| `--send-credentials-to-tikv` | Controls whether to send credentials obtained by BR to TiKV. | `true`        |
 
 By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, or Azure Blob Storage as the storage system. This behavior simplifies the configuration and is controlled by the parameter `--send-credentials-to-tikv`(or `-c` in short).
 
@@ -108,9 +108,13 @@ When storing backup data in a cloud storage system, you need to configure authen
 Before backup, configure the following privileges to access the backup directory on S3.
 
 - Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject`. BR writes checkpoint information to the `./checkpoints` subdirectory under the backup directory. When restoring log backup data, BR writes the table ID mapping relationship of the restored cluster to the `./pitr_id_maps` subdirectory under the backup directory.
+- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+
+> **Note:**
+>
+> In 2024, AWS changed the default behavior, and newly created instances now only support IMDSv2 by default. For more details, see [Set IMDSv2 as default for all new instance launches in your account](https://aws.amazon.com/about-aws/whats-new/2024/03/set-imdsv2-default-new-instance-launches/). Therefore, starting from v8.4.0, BR supports obtaining IAM role permissions on Amazon EC2 instances with only IMDSv2 enabled. When using BR of an earlier version before v8.4.0, you need to configure the instance to support both IMDSv1 and IMDSv2.
 
 It is recommended that you configure access to S3 using either of the following ways:
 
@@ -198,6 +202,66 @@ You can configure the account used to access GCS by specifying the access key. I
         tiup br backup full -u "${PD_IP}:2379" \
         --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
+
+- Method 4: Use Azure managed identities
+
+    Starting from v8.5.5 and v9.0.0, if your TiDB cluster and BR are running in an Azure Virtual Machine (VM) or Azure Kubernetes Service (AKS) environment and Azure managed identities have been assigned to the nodes, you can use Azure managed identities for authentication.
+
+    Before using this method, ensure that you have granted the permissions (such as `Storage Blob Data Contributor`) to the corresponding managed identity to access the target storage account in the [Azure Portal](https://azure.microsoft.com/).
+
+    - **System-assigned managed identity**:
+
+        When using a system-assigned managed identity, there is no need to configure any Azure-related environment variables. You can run the BR backup command directly.
+
+        ```shell
+        tiup br backup full -u "${PD_IP}:2379" \
+        --storage "azure://external/backup-20220915?account-name=${account-name}"
+        ```
+
+        > **Note:**
+        >
+        > Ensure that the `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_CLIENT_SECRET` environment variables are **not** set in the runtime environment. Otherwise, the Azure SDK might prioritize other authentication methods, preventing the managed identity from taking effect.
+
+    - **User-assigned managed identity**:
+
+        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the runtime environment of TiKV and BR, set its value to the client ID of the managed identity, and then run the BR backup command. The detailed steps are as follows:
+
+        1. Configure the client ID for TiKV when starting with TiUP:
+
+            The following steps use the TiKV port `24000` and the systemd service name `tikv-24000` as an example:
+
+            1. Open the systemd service editor by running the following command:
+
+                ```shell
+                systemctl edit tikv-24000
+                ```
+
+            2. Set the `AZURE_CLIENT_ID` environment variable to your managed identity client ID:
+
+                ```ini
+                [Service]
+                Environment="AZURE_CLIENT_ID=<your-client-id>"
+                ```
+
+            3. Reload the systemd configuration and restart TiKV:
+
+                ```shell
+                systemctl daemon-reload
+                systemctl restart tikv-24000
+                ```
+
+        2. Configure the `AZURE_CLIENT_ID` environment variable for BR:
+
+            ```shell
+            export AZURE_CLIENT_ID="<your-client-id>"
+            ```
+
+        3. Back up data to Azure Blob Storage using the following BR command:
+
+            ```shell
+            tiup br backup full -u "${PD_IP}:2379" \
+            --storage "azure://external/backup-20220915?account-name=${account-name}"
+            ```
 
 </div>
 </SimpleTab>
