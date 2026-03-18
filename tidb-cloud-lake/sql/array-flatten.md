@@ -1,5 +1,6 @@
 ---
 title: ARRAY_FLATTEN
+summary: Flattens a nested array into a single-dimensional array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

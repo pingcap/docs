@@ -1,7 +1,7 @@
 ---
 title: IP Address Functions
+summary: This page provides reference information for the IP address-related functions in Databend. These functions help convert between string and numeric representations of IP addresses.
 ---
-
 This page provides reference information for the IP address-related functions in Databend. These functions help convert between string and numeric representations of IP addresses.
 
 ## IP Address Conversion Functions

@@ -1,5 +1,6 @@
 ---
 title: SHOW DROP DATABASES
+summary: Lists all databases along with their deletion timestamps if they have been dropped, allowing users to review deleted databases and their details.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

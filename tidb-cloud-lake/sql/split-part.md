@@ -1,5 +1,6 @@
 ---
 title: SPLIT_PART
+summary: Splits a string using a specified delimiter and returns the specified part.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

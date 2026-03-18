@@ -1,5 +1,6 @@
 ---
 title: IFF
+summary: Alias for IF.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

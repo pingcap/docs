@@ -1,5 +1,6 @@
 ---
 title: NEXTVAL
+summary: Retrieves the next value from a sequence.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

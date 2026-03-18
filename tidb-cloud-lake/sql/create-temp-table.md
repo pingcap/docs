@@ -1,6 +1,6 @@
 ---
 title: CREATE TEMP TABLE
-sidebar_position: 1
+summary: Creates a temporary table that is automatically dropped at the end of the session.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

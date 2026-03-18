@@ -1,5 +1,6 @@
 ---
 title: TO_DAYS
+summary: Converts a specified number of days into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

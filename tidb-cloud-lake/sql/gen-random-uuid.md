@@ -1,7 +1,7 @@
 ---
 title: GEN_RANDOM_UUID
+summary: Generates a random UUID based on version 7, starting from version 1.2.658. Previously, this function generated UUIDs based on version 4.
 ---
-
 Generates a random UUID based on version 7, starting from version 1.2.658. Previously, this function generated UUIDs based on version 4.
 
 ## Syntax

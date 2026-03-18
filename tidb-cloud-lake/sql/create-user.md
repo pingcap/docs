@@ -1,6 +1,6 @@
 ---
 title: CREATE USER
-sidebar_position: 1
+summary: Creates a SQL user for connecting to Databend. Users must be granted appropriate privileges to access databases and perform operations.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

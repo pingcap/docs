@@ -1,6 +1,6 @@
 ---
 title: DROP FUNCTION
-sidebar_position: 3
+summary: Drops an external function.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

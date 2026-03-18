@@ -1,7 +1,7 @@
 ---
 title: NEXT_DAY
+summary: Returns the date of the upcoming specified day of the week after the given date or timestamp.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.655"/>

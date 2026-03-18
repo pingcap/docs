@@ -1,8 +1,7 @@
 ---
-title: 'COSINE_DISTANCE'
-description: 'Measuring similarity using the cosine_distance function in Databend'
+title: COSINE_DISTANCE
+summary: Measuring similarity using the cosine_distance function in Databend.
 ---
-
 Calculates the cosine distance between two vectors, measuring how dissimilar they are.
 
 ## Syntax

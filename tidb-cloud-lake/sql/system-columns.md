@@ -1,7 +1,7 @@
 ---
 title: system.columns
+summary: Contains information about columns of tables.
 ---
-
 Contains information about columns of tables.
 
 ```sql

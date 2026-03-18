@@ -1,6 +1,6 @@
 ---
 title: ARRAY_DISTINCT
-title_includes: JSON_ARRAY_DISTINCT
+summary: Removes duplicate elements from a JSON array and returns an array with only distinct elements.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

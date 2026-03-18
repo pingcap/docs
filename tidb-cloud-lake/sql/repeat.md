@@ -1,7 +1,7 @@
 ---
 title: REPEAT
+summary: Returns a string consisting of the string str repeated count times. If count is less than 1, returns an empty string. Returns NULL if str or count are NULL.
 ---
-
 Returns a string consisting of the string str repeated count times. If count is less than 1, returns an empty string. Returns NULL if str or count are NULL.
 
 ## Syntax

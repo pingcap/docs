@@ -1,7 +1,7 @@
 ---
 title: TO_DECIMAL
+summary: Converts a value to DECIMAL data type.
 ---
-
 Converts a value to DECIMAL data type.
 
 ## Syntax

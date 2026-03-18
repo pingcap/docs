@@ -1,5 +1,6 @@
 ---
 title: TO_MONTHS
+summary: Converts a specified number of months into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

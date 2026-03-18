@@ -1,7 +1,7 @@
 ---
 title: Airbyte
+summary: Currently we implemented an experimental airbyte destination allow you to send data from your airbyte source to databend.
 ---
-
 <p align="center">
 <img alt="Airbyte" src="/media/tidb-cloud-lake/integration-airbyte.png"/>
 </p>

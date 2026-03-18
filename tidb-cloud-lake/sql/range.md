@@ -1,7 +1,7 @@
 ---
 title: RANGE
+summary: Returns an array collected by [start, end).
 ---
-
 Returns an array collected by [start, end).
 
 ## Syntax

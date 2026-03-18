@@ -1,6 +1,6 @@
 ---
 title: OPTIMIZE TABLE
-sidebar_position: 8
+summary: Optimizing a table in Databend involves compacting or purging historical data to save storage space and enhance query performance.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

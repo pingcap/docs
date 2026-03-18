@@ -1,7 +1,7 @@
 ---
 title: AVG
+summary: Aggregate function.
 ---
-
 Aggregate function.
 
 The AVG() function returns the average value of an expression.

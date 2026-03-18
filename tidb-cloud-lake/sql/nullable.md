@@ -1,7 +1,7 @@
 ---
 title: TO_NULLABLE
+summary: Converts a value to its nullable equivalent.
 ---
-
 Converts a value to its nullable equivalent.
 
 When you apply this function to a value, it checks if the value is already able to hold NULL values or not. If the value is already able to hold NULL values, the function will return the value without making any changes.

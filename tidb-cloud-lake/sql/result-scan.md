@@ -1,7 +1,7 @@
 ---
 title: RESULT_SCAN
+summary: Retrieves the cached result of a previous query by its query ID.
 ---
-
 Retrieves the cached result of a previous query by its query ID.
 
 See also: [system.query_cache](/tidb-cloud-lake/sql/system-query-cache.md)

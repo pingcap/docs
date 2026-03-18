@@ -1,7 +1,7 @@
 ---
 title: RANGE BETWEEN
+summary: Defines a window frame using value-based boundaries for window functions.
 ---
-
 Defines a window frame using value-based boundaries for window functions.
 
 ## Overview

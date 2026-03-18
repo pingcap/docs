@@ -1,7 +1,7 @@
 ---
 title: Notification
+summary: This page provides a comprehensive overview of Notification operations in Databend Cloud, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Notification operations in Databend Cloud, organized by functionality for easy reference.
 
 ## Notification Management

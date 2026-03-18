@@ -1,5 +1,6 @@
 ---
 title: MAP_PICK
+summary: Returns a new MAP containing the specified key-value pairs from an existing MAP.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

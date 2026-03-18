@@ -1,5 +1,6 @@
 ---
 title: ST_ASEWKB
+summary: Converts a GEOMETRY or GEOGRAPHY object into a EWKB(extended well-known-binary) format representation.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,5 +1,6 @@
 ---
 title: DESC PROCEDURE
+summary: Displays detailed information about a specific stored procedure.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: BITMAP_NOT
+summary: Generates a new bitmap with elements from the first bitmap that are not in the second one.
 ---
-
 Generates a new bitmap with elements from the first bitmap that are not in the second one.
 
 ## Syntax

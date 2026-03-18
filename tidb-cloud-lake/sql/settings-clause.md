@@ -1,5 +1,6 @@
 ---
 title: SETTINGS Clause
+summary: The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use SHOW SETTINGS.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

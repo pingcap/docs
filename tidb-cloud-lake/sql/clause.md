@@ -1,7 +1,7 @@
 ---
 title: WITH Clause
+summary: The WITH clause is an optional clause that precedes the body of the SELECT statement, and defines one or more CTEs (common table expressions) that can be referenced later in the statement.
 ---
-
 The WITH clause is an optional clause that precedes the body of the SELECT statement, and defines one or more CTEs (common table expressions) that can be referenced later in the statement.
 
 

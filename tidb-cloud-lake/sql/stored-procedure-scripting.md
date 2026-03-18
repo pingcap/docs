@@ -1,8 +1,7 @@
 ---
 title: Stored Procedure & SQL Scripting
-slug: /stored-procedure-scripting/
+summary: Stored procedures in Databend let you package SQL logic that runs on the server with access to control flow, variables, cursors, and dynamic statements. This page explains how to create procedures and write the inline scripting that powers them.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.833"/>

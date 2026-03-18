@@ -1,8 +1,7 @@
 ---
-title: "Databend Cloud: Data Sharing via ATTACH TABLE"
-sidebar_label: "Data Sharing"
+title: TiDB Cloud Lake - Data Sharing via ATTACH TABLE
+summary: In this tutorial, we'll walk you through how to link a table in Databend Cloud with an existing Databend table stored in an S3 bucket using the ATTACH TABLE command.
 ---
-
 In this tutorial, we'll walk you through how to link a table in Databend Cloud with an existing Databend table stored in an S3 bucket using the [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) command.
 
 ## Before You Start

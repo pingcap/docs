@@ -1,7 +1,7 @@
 ---
 title: TO_UINT8
+summary: Converts a value to UINT8 data type.
 ---
-
 Converts a value to UINT8 data type.
 
 ## Syntax

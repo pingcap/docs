@@ -1,7 +1,7 @@
 ---
 title: FUSE_BLOCK
+summary: Returns the block information of the latest or specified snapshot of a table. For more information about what is block in Databend, see What are Snapshot, Segment, and Block?.
 ---
-
 Returns the block information of the latest or specified snapshot of a table. For more information about what is block in Databend, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#databend-data-storage-snapshot-segment-and-block).
 
 The command returns the location information of each parquet file referenced by a snapshot. This enables downstream applications to access and consume the data stored in the files.

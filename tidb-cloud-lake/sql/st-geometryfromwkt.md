@@ -1,5 +1,6 @@
 ---
 title: ST_GEOMETRYFROMWKT
+summary: Parses a WKT(well-known-text) or EWKT(extended well-known-text) input and returns a value of type GEOMETRY.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

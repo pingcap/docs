@@ -1,7 +1,7 @@
 ---
 title: Amazon S3
+summary: The Amazon S3 data integration enables you to import files from S3 buckets into Databend. It supports CSV, Parquet, and NDJSON file formats, with options for one-time imports or continuous ingestion that automatically polls for new files.
 ---
-
 The Amazon S3 data integration enables you to import files from S3 buckets into Databend. It supports CSV, Parquet, and NDJSON file formats, with options for one-time imports or continuous ingestion that automatically polls for new files.
 
 ## Supported File Formats

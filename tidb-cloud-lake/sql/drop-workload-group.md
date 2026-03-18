@@ -1,5 +1,6 @@
 ---
 title: DROP WORKLOAD GROUP
+summary: Removes the specified workload group.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

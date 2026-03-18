@@ -1,5 +1,6 @@
 ---
 title: VAR_POP
+summary: Alias for COVAR_POP.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

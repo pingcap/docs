@@ -1,8 +1,7 @@
 ---
 title: SHOW FILE FORMATS
-sidebar_position: 2
+summary: Returns a list of created file formats.
 ---
-
 Returns a list of created file formats.
 
 ## Syntax

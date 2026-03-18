@@ -1,9 +1,7 @@
 ---
 title: Tuple
-description: Tuple is a collection of ordered, immutable types.
-sidebar_position: 9
+summary: Tuple is a collection of ordered, immutable types.
 ---
-
 ## Overview
 
 `TUPLE(T1, T2, …)` stores a fixed ordered list of values with declared element types. Each tuple value can hold heterogeneous data (for example, `TUPLE(DATETIME, STRING)`) and behaves like a compact struct. Because tuples are immutable, insert the entire tuple value whenever you need to change its contents.

@@ -1,7 +1,7 @@
 ---
 title: TO_MONTH
+summary: Convert a date or date with time (timestamp/datetime) to a UInt8 number containing the month number (1-12).
 ---
-
 Convert a date or date with time (timestamp/datetime) to a UInt8 number containing the month number (1-12).
 
 ## Syntax

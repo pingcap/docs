@@ -1,7 +1,7 @@
 ---
 title: ARRAY_CONCAT
+summary: Concats two arrays.
 ---
-
 Concats two arrays.
 
 ## Syntax

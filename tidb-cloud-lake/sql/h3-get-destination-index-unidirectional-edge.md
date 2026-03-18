@@ -1,7 +1,7 @@
 ---
 title: H3_GET_DESTINATION_INDEX_FROM_UNIDIRECTIONAL_EDGE
+summary: Returns the destination hexagon index from the unidirectional edge H3Index.
 ---
-
 Returns the destination hexagon index from the unidirectional edge H3Index.
 
 ## Syntax

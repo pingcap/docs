@@ -1,8 +1,7 @@
 ---
 title: Migrate MySQL with bend-archiver (Batch)
-sidebar_label: 'MySQL → Databend: bend-archiver (Batch)'
+summary: Migrates MySQL historical data to TiDB Cloud Lake with bend-archiver using batch full-load and incremental archiving workflows.
 ---
-
 > **Capabilities**: Full Load, Incremental
 > **✅ Recommended** for batch migration of historical data
 

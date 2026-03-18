@@ -1,7 +1,7 @@
 ---
 title: MEDIAN
+summary: Aggregate function.
 ---
-
 Aggregate function.
 
 The MEDIAN() function computes the median of a numeric data sequence.

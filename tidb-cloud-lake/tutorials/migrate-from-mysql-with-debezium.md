@@ -1,8 +1,7 @@
 ---
 title: Migrate MySQL with Debezium (CDC)
-sidebar_label: 'MySQL → Databend: Debezium (CDC)'
+summary: Use Debezium CDC to migrate MySQL data to TiDB Cloud Lake with continuous change capture and optional full-load bootstrap.
 ---
-
 > **Capabilities**: CDC, Full Load  
 > **✅ Recommended** for real-time migration with complete change data capture
 

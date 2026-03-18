@@ -1,7 +1,7 @@
 ---
 title: Numeric Functions
+summary: This page provides a comprehensive overview of Numeric functions in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Numeric functions in Databend, organized by functionality for easy reference.
 
 ## Basic Arithmetic Functions

@@ -1,7 +1,7 @@
 ---
 title: Table Functions
+summary: This page provides reference information for the table functions in Databend. Table functions return a set of rows (similar to a table) and can be used in the FROM clause of a query.
 ---
-
 This page provides reference information for the table functions in Databend. Table functions return a set of rows (similar to a table) and can be used in the FROM clause of a query.
 
 ## Data Schema & File Inspection

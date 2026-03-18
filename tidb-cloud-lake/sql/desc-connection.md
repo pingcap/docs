@@ -1,6 +1,6 @@
 ---
 title: DESC CONNECTION
-sidebar_position: 2
+summary: Describes the details of a specific connection, providing information about its type and configuration.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

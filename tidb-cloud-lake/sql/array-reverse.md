@@ -1,5 +1,6 @@
 ---
 title: ARRAY_REVERSE
+summary: Reverses the order of elements in an array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

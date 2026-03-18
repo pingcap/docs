@@ -1,7 +1,7 @@
 ---
 title: REGEXP_SPLIT_TO_ARRAY
+summary: Splits a string using a regular expression pattern and returns the segments as an array.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.756"/>

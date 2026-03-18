@@ -1,7 +1,7 @@
 ---
 title: Transaction
+summary: This page provides a comprehensive overview of Transaction operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Transaction operations in Databend, organized by functionality for easy reference.
 
 ## Transaction Control

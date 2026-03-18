@@ -1,7 +1,7 @@
 ---
 title: SET
+summary: Changes the value of a system setting for the current session. To show all the current settings, use SHOW SETTINGS.
 ---
-
 Changes the value of a system setting for the current session. To show all the current settings, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 
 See also:

@@ -1,7 +1,7 @@
 ---
 title: BITMAP_HAS_ANY
+summary: Checks if the first bitmap has any bit matching the bits in the second bitmap.
 ---
-
 Checks if the first bitmap has any bit matching the bits in the second bitmap.
 
 ## Syntax

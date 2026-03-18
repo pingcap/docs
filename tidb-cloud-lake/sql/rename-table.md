@@ -1,8 +1,7 @@
 ---
 title: RENAME TABLE
-sidebar_position: 3
+summary: Changes the name of a table.
 ---
-
 Changes the name of a table.
 
 ## Syntax

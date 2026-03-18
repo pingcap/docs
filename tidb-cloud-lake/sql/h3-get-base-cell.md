@@ -1,7 +1,7 @@
 ---
 title: H3_GET_BASE_CELL
+summary: Returns the base cell number of the given H3 index.
 ---
-
 Returns the base cell number of the given [H3](https://eng.uber.com/h3/) index. 
 
 ## Syntax

@@ -1,6 +1,6 @@
 ---
 title: CREATE STREAM
-sidebar_position: 1
+summary: Creates a stream.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

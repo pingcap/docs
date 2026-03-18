@@ -1,7 +1,7 @@
 ---
 title: TO_YYYYMMDDHH
+summary: Formats a given date or timestamp into a string representation in the format "YYYYMMDDHH" (Year, Month, Day, Hour).
 ---
-
 Formats a given date or timestamp into a string representation in the format "YYYYMMDDHH" (Year, Month, Day, Hour).
 
 ## Syntax

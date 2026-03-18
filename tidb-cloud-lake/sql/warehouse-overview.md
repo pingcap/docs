@@ -1,8 +1,7 @@
 ---
 title: Warehouse
-sidebar_position: 0
+summary: Warehouse-related SQL commands for Databend Cloud.
 ---
-
 Warehouse-related SQL commands for Databend Cloud.
 
 ## General Rules

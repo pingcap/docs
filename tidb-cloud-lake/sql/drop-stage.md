@@ -1,8 +1,7 @@
 ---
 title: DROP STAGE
-sidebar_position: 7
+summary: Removes a stage.
 ---
-
 Removes a stage.
 
 ## Syntax

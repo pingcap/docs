@@ -1,7 +1,7 @@
 ---
 title: system.contributors
+summary: Contains information about contributors.
 ---
-
 Contains information about contributors.
 
 ```sql

@@ -1,7 +1,7 @@
 ---
 title: Map Functions
+summary: This section provides reference information for the map functions in Databend. Map functions allow you to create, manipulate, and extract information from map data structures (key-value pairs).
 ---
-
 This section provides reference information for the map functions in Databend. Map functions allow you to create, manipulate, and extract information from map data structures (key-value pairs).
 
 ## Map Creation and Combination

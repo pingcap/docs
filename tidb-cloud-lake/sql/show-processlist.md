@@ -1,5 +1,6 @@
 ---
 title: SHOW PROCESSLIST
+summary: The Databend process list indicates the operations currently being performed by the set of threads executed within the server.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

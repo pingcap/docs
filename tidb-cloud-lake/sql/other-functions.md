@@ -1,7 +1,7 @@
 ---
 title: Other Functions
+summary: This section collects assorted utilities that do not fit into the major functional groups.
 ---
-
 This section collects assorted utilities that do not fit into the major functional groups.
 
 | Function | Description |

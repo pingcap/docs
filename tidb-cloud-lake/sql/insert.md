@@ -1,5 +1,6 @@
 ---
 title: INSERT
+summary: Inserts one or more rows into a table.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: DROP SEQUENCE
+summary: Deletes an existing sequence from Databend.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.426"/>

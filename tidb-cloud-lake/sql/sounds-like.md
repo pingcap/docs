@@ -1,7 +1,7 @@
 ---
 title: SOUNDS LIKE
+summary: Compares the pronunciation of two strings by their Soundex codes. Soundex is a phonetic algorithm that produces a code representing the pronunciation of a string, allowing for approximate matching of strings based on their pronunciation rather than their spelling. Databend offers the SOUNDEX function that allows you to get the Soundex code from a string.
 ---
-
 Compares the pronunciation of two strings by their Soundex codes. Soundex is a phonetic algorithm that produces a code representing the pronunciation of a string, allowing for approximate matching of strings based on their pronunciation rather than their spelling. Databend offers the [SOUNDEX](/tidb-cloud-lake/sql/soundex.md) function that allows you to get the Soundex code from a string.
 
 SOUNDS LIKE is frequently employed in the WHERE clause of SQL queries to narrow down rows using fuzzy string matching, such as for names and addresses, see [Filtering Rows](#filtering-rows) in [Examples](#examples).

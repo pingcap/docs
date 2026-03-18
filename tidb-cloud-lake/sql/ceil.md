@@ -1,7 +1,7 @@
 ---
 title: CEIL
+summary: Rounds the number up.
 ---
-
 Rounds the number up.
 
 ## Syntax

@@ -1,5 +1,6 @@
 ---
 title: DATE
+summary: Alias for TO_DATE.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

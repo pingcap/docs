@@ -1,6 +1,6 @@
 ---
 title: ARRAY_CONSTRUCT
-title_includes: JSON_ARRAY
+summary: Creates a JSON array with specified values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: H3_EXACT_EDGE_LENGTH_RADS
+summary: Computes the length of this directed edge, in radians.
 ---
-
 Computes the length of this directed edge, in radians.
 
 ## Syntax

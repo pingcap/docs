@@ -1,7 +1,7 @@
 ---
 title: EXISTS
+summary: The exists condition is used in combination with a subquery and is considered "to be met" if the subquery returns at least one row.
 ---
-
 The exists condition is used in combination with a subquery and is considered "to be met" if the subquery returns at least one row.
 
 ## Syntax

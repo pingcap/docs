@@ -1,9 +1,7 @@
 ---
 title: Querying Parquet Files in Stage
-sidebar_label: Parquet
+summary: Create an external stage with your own S3 bucket and credentials where your Parquet files are stored. ```sql CREATE STAGE parquet_query_stage URL = 's3://load/parquet/' CONNECTION = ( ACCESS_KEY_ID = '<your-access-key-id>' SECRET_ACCESS_KEY = '<your-secret-access-key>' ); ```.
 ---
-
-
 ## Syntax:
 
 - [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)

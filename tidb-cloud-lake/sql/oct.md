@@ -1,7 +1,7 @@
 ---
 title: OCT
+summary: Returns a string representation of the octal value of N.
 ---
-
 Returns a string representation of the octal value of N.
 
 ## Syntax

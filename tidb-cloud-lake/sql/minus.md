@@ -1,7 +1,7 @@
 ---
 title: MINUS
+summary: Negates a numeric value.
 ---
-
 Negates a numeric value.
 
 ## Syntax

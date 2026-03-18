@@ -1,7 +1,7 @@
 ---
 title: Data Management
+summary: This page describes Data Management in TiDB Cloud Lake.
 ---
-
 # Data Management
 
 | Category | Description | Key Features | Common Operations |

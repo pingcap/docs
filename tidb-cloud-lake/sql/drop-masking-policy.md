@@ -1,8 +1,7 @@
 ---
 title: DROP MASKING POLICY
-sidebar_position: 3
+summary: Deletes an existing masking policy from Databend. When you drop a masking policy, it is removed from Databend, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>

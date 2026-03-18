@@ -1,5 +1,6 @@
 ---
 title: MAP_DELETE
+summary: Returns an existing MAP with one or more keys removed.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

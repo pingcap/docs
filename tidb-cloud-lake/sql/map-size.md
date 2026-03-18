@@ -1,5 +1,6 @@
 ---
 title: MAP_SIZE
+summary: Returns the size of a MAP.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

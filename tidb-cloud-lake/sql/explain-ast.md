@@ -1,7 +1,7 @@
 ---
 title: EXPLAIN AST
+summary: Returns the abstract syntax tree (AST) of an SQL statement. The command breaks an SQL statement into syntactic parts and represents them in a hierarchical structure.
 ---
-
 Returns the abstract syntax tree (AST) of an SQL statement. The command breaks an SQL statement into syntactic parts and represents them in a hierarchical structure.
 
 ## Syntax

@@ -1,7 +1,7 @@
 ---
 title: TO_VARIANT
+summary: Converts a value to VARIANT data type.
 ---
-
 Converts a value to VARIANT data type.
 
 ## Syntax

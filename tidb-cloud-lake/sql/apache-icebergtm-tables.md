@@ -1,10 +1,7 @@
 ---
-id: iceberg
 title: Apache Iceberg™ Tables
-sidebar_label: Apache Iceberg™ Tables
-slug: /sql-reference/table-engines/iceberg
+summary: Databend supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends Databend's capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.725"/>

@@ -1,5 +1,6 @@
 ---
 title: ARRAY_PREPEND
+summary: Prepends an element to the beginning of an array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

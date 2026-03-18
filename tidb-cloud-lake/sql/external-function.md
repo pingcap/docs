@@ -1,7 +1,7 @@
 ---
 title: External Function
+summary: This page provides a comprehensive overview of External Function operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of External Function operations in Databend, organized by functionality for easy reference.
 
 ## External Function Management

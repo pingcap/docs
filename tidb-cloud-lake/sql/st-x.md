@@ -1,5 +1,6 @@
 ---
 title: ST_X
+summary: Returns the longitude (X coordinate) of a Point represented by a GEOMETRY or GEOGRAPHY object.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

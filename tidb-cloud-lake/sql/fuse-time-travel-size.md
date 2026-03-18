@@ -1,5 +1,6 @@
 ---
 title: FUSE_TIME_TRAVEL_SIZE
+summary: Calculates the storage size of historical data (for Time Travel) for tables.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

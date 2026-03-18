@@ -1,8 +1,7 @@
 ---
 title: SHOW VIEWS
-sidebar_position: 4
+summary: Returns a list of view names within the specified database, or within the current database if no database name is provided.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.415"/>

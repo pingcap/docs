@@ -1,8 +1,7 @@
 ---
 title: RECLUSTER TABLE
-sidebar_position: 2
+summary: Re-clusters a table. For why and when to re-cluster a table, see Re-clustering Table.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced: v1.2.25"/>

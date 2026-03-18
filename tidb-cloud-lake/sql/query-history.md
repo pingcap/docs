@@ -1,8 +1,7 @@
 ---
 title: QUERY_HISTORY
-sidebar_position: 7
+summary: Retrieves query execution logs for analysis and monitoring purposes.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>

@@ -1,7 +1,7 @@
 ---
 title: TO_BASE64
+summary: Converts the string argument to base-64 encoded form and returns the result as a character string. If the argument is not a string, it is converted to a string before conversion takes place. The result is NULL if the argument is NULL.
 ---
-
 Converts the string argument to base-64 encoded form and returns the result as a character string.
 If the argument is not a string, it is converted to a string before conversion takes place.
 The result is NULL if the argument is NULL.

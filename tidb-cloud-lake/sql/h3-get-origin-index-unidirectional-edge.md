@@ -1,7 +1,7 @@
 ---
 title: H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE
+summary: Returns the origin hexagon index from the unidirectional edge H3Index.
 ---
-
 Returns the origin hexagon index from the unidirectional edge H3Index.
 
 ## Syntax

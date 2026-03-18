@@ -1,7 +1,7 @@
 ---
 title: FUSE_SEGMENT
+summary: Returns the segment information of a specified table snapshot. For more information about what is segment in Databend, see What are Snapshot, Segment, and Block?.
 ---
-
 Returns the segment information of a specified table snapshot. For more information about what is segment in Databend, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#databend-data-storage-snapshot-segment-and-block).
 
 See Also:

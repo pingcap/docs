@@ -1,5 +1,6 @@
 ---
 title: TO_DECADES
+summary: Converts a specified number of decades into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

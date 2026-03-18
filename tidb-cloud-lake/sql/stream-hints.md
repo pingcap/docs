@@ -1,5 +1,6 @@
 ---
 title: WITH Stream Hints
+summary: Specifies various stream configuration options using hints to control how the stream is processed.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

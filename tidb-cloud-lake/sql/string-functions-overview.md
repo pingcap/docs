@@ -1,7 +1,7 @@
 ---
 title: String Functions
+summary: This page provides a comprehensive overview of String functions in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of String functions in Databend, organized by functionality for easy reference.
 
 ## String Concatenation and Manipulation

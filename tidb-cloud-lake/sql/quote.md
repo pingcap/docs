@@ -1,7 +1,7 @@
 ---
 title: QUOTE
+summary: Quotes a string to produce a result that can be used as a properly escaped data value in an SQL statement.
 ---
-
 Quotes a string to produce a result that can be used as a properly escaped data value in an SQL statement. 
 
 ## Syntax

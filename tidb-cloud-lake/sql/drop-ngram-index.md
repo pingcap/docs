@@ -1,8 +1,7 @@
 ---
 title: DROP NGRAM INDEX
-sidebar_position: 4
+summary: Drops an existing NGRAM index from a table.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.726"/>

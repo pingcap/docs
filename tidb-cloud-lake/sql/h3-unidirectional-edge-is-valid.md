@@ -1,7 +1,7 @@
 ---
 title: H3_UNIDIRECTIONAL_EDGE_IS_VALID
+summary: Determines if the provided H3Index is a valid unidirectional edge index. Returns 1 if it's a unidirectional edge and 0 otherwise.
 ---
-
 Determines if the provided H3Index is a valid unidirectional edge index. Returns 1 if it's a unidirectional edge and 0 otherwise.
 
 ## Syntax

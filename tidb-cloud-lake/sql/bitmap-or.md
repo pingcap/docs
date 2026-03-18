@@ -1,7 +1,7 @@
 ---
 title: BITMAP_OR
+summary: Performs a bitwise OR operation on the two bitmaps.
 ---
-
 Performs a bitwise OR operation on the two bitmaps.
 
 ## Syntax

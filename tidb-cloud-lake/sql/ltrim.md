@@ -1,5 +1,6 @@
 ---
 title: LTRIM
+summary: Removes all occurrences of any character present in the specified trim string from the left side of the string.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

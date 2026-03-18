@@ -1,7 +1,7 @@
 ---
 title: Aggregating Index
+summary: Aggregating indexes dramatically accelerate analytical queries by precomputing and storing aggregation results, eliminating the need to scan entire tables for common analytics operations.
 ---
-
 # Aggregating Index: Precomputed Results for Instant Analytics
 
 Aggregating indexes dramatically accelerate analytical queries by precomputing and storing aggregation results, eliminating the need to scan entire tables for common analytics operations.

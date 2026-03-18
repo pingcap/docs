@@ -1,6 +1,6 @@
 ---
 title: ALTER TASK
-sidebar_position: 2
+summary: The ALTER TASK statement is used to modify an existing task.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

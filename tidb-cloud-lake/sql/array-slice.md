@@ -1,5 +1,6 @@
 ---
 title: ARRAY_SLICE
+summary: Extracts a sub-array using slice between start and end arguments.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

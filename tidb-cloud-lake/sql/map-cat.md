@@ -1,5 +1,6 @@
 ---
 title: MAP_CAT
+summary: Returns the concatenatation of two MAPs.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

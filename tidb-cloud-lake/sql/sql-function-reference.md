@@ -1,7 +1,7 @@
 ---
 title: SQL Function Reference
+summary: Databend provides comprehensive SQL functions for all types of data processing. Functions are organized by importance and usage frequency.
 ---
-
 Databend provides comprehensive SQL functions for all types of data processing. Functions are organized by importance and usage frequency.
 
 ## Core Data Functions

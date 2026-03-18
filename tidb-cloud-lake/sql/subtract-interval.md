@@ -1,9 +1,7 @@
 ---
 title: SUBTRACT TIME INTERVAL
-description: Subtract time interval function
-title_includes: subtract_years, subtract_quarters, subtract_months, subtract_days, subtract_hours, subtract_minutes, subtract_seconds
+summary: Subtract time interval function.
 ---
-
 Subtract time interval from a date or timestamp, return the result of date or timestamp type.
 ## Syntax
 

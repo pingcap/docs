@@ -1,5 +1,6 @@
 ---
 title: ST_GEOHASH
+summary: Returns the geohash string for a GEOMETRY or GEOGRAPHY value and supports optional precision to control result granularity.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

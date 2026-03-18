@@ -1,7 +1,7 @@
 ---
 title: TO_DAY_OF_YEAR
+summary: Convert a date or date with time (timestamp/datetime) to a UInt16 number containing the number of the day of the year (1-366).
 ---
-
 Convert a date or date with time (timestamp/datetime) to a UInt16 number containing the number of the day of the year (1-366).
 
 ## Syntax

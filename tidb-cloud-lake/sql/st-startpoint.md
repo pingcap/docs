@@ -1,5 +1,6 @@
 ---
 title: ST_STARTPOINT
+summary: Returns the first Point in a LineString.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

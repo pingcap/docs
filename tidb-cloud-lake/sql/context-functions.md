@@ -1,7 +1,7 @@
 ---
 title: Context Functions
+summary: This page provides reference information for the context-related functions in Databend. These functions return information about the current session, database, or system context.
 ---
-
 This page provides reference information for the context-related functions in Databend. These functions return information about the current session, database, or system context.
 
 ## Session Information Functions

@@ -1,7 +1,7 @@
 ---
 title: BITMAP_MIN
+summary: Gets the minimum value in the bitmap.
 ---
-
 Gets the minimum value in the bitmap.
 
 ## Syntax

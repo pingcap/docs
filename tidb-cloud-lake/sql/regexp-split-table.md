@@ -1,7 +1,7 @@
 ---
 title: REGEXP_SPLIT_TO_TABLE
+summary: Splits a string using a regular expression pattern and returns each segment as a table.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.754"/>

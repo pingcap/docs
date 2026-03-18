@@ -1,8 +1,7 @@
 ---
 title: DESC STAGE
-sidebar_position: 2
+summary: Describes the properties of a stage.
 ---
-
 Describes the properties of a stage.
 
 ## Syntax

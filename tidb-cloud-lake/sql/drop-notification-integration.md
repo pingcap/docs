@@ -1,6 +1,6 @@
 ---
 title: DROP NOTIFICATION INTEGRATION
-sidebar_position: 3
+summary: The DROP NOTIFICATION INTEGRATION statement is used to delete an existing notification.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

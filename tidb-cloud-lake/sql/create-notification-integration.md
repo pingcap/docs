@@ -1,6 +1,6 @@
 ---
 title: CREATE NOTIFICATION INTEGRATION
-sidebar_position: 1
+summary: Creates a named notification integration that can be used to send notifications to external messaging services.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

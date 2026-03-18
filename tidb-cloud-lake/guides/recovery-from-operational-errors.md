@@ -1,5 +1,6 @@
 ---
 title: Recovery from Operational Errors
+summary: This guide provides step-by-step instructions for recovering from common operational errors in Databend.
 ---
 import IndexOverviewList from '@site/src/components/IndexOverviewList';
 

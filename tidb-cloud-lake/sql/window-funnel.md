@@ -1,8 +1,7 @@
 ---
 title: WINDOW_FUNNEL
-description: Funnel Analysis
+summary: Funnel Analysis.
 ---
-
 <p align="center">
 <img alt="Databend Funnel Analysis" src="/media/tidb-cloud-lake/remote-7db0f18fbe80-databend-funnel.png" width="550"/>
 </p>

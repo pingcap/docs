@@ -1,8 +1,7 @@
 ---
 title: FLASHBACK TABLE
-sidebar_position: 9
+summary: Flashback a table to an earlier version with a snapshot ID or timestamp, only involving metadata operations, making it a fast process.
 ---
-
 Flashback a table to an earlier version with a snapshot ID or timestamp, only involving metadata operations, making it a fast process.
 
 By the snapshot ID or timestamp you specify in the command, Databend flashback the table to a prior state where the snapshot was created. To retrieve snapshot IDs and timestamps of a table, use [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md).

@@ -1,7 +1,7 @@
 ---
 title: JSON Operators
+summary: This page describes JSON Operators in TiDB Cloud Lake.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.644"/>

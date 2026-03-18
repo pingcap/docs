@@ -1,8 +1,7 @@
 ---
 title: SQL Identifiers
-sidebar_label: SQL Identifiers
+summary: SQL identifiers are names used for different elements within Databend, such as tables, views, and databases.
 ---
-
 SQL identifiers are names used for different elements within Databend, such as tables, views, and databases.
 
 ## Unquoted & Double-quoted Identifiers

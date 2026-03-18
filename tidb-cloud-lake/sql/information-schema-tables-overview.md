@@ -1,7 +1,7 @@
 ---
 title: Information_Schema Tables
+summary: This page describes Information_Schema Tables in TiDB Cloud Lake.
 ---
-
 ## Information Schema
 
 | Table                                        | Description                                    |

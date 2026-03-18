@@ -1,5 +1,6 @@
 ---
 title: MONTHS_BETWEEN
+summary: Returns the number of months between *date1* and *date2*.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

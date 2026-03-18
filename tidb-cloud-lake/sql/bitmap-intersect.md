@@ -1,7 +1,7 @@
 ---
 title: BITMAP_INTERSECT
+summary: Counts the number of bits set to 1 in the bitmap by performing a logical INTERSECT operation.
 ---
-
 Counts the number of bits set to 1 in the bitmap by performing a logical INTERSECT operation.
 
 ## Syntax

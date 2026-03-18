@@ -1,7 +1,7 @@
 ---
 title: H3_GET_FACES
+summary: Finds all icosahedron faces intersected by the given H3 index. Faces are represented as integers from 0-19.
 ---
-
 Finds all icosahedron faces intersected by the given [H3](https://eng.uber.com/h3/) index. Faces are represented as integers from 0-19.
 
 ## Syntax

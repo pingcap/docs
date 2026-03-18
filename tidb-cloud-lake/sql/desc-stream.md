@@ -1,6 +1,6 @@
 ---
 title: DESC STREAM
-sidebar_position: 2
+summary: Describes the details of a specific stream.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

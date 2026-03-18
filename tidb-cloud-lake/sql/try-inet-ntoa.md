@@ -1,7 +1,7 @@
 ---
 title: TRY_INET_NTOA
+summary: Takes an IPv4 address in network byte order and then returns the address as a dotted-quad string representation.
 ---
-
 Takes an IPv4 address in network byte order and then returns the address as a dotted-quad string representation.
 
 ## Syntax

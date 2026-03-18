@@ -1,7 +1,7 @@
 ---
 title: Query Operators
+summary: This page provides reference information for the query operators in Databend.
 ---
-
 This page provides reference information for the query operators in Databend.
 
 ## Operator Types

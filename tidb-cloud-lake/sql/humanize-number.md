@@ -1,7 +1,7 @@
 ---
 title: HUMANIZE_NUMBER
+summary: Returns a readable number.
 ---
-
 Returns a readable number.
 
 ## Syntax

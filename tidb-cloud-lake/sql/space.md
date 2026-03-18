@@ -1,7 +1,7 @@
 ---
 title: SPACE
+summary: Returns a string consisting of N blank space characters.
 ---
-
 Returns a string consisting of N blank space characters.
 
 ## Syntax

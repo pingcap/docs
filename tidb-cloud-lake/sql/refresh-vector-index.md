@@ -1,8 +1,7 @@
 ---
 title: REFRESH VECTOR INDEX
-sidebar_position: 2
+summary: Builds a Vector index for existing data that was inserted before the index was created.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>

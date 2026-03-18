@@ -1,7 +1,7 @@
 ---
 title: BITMAP_MAX
+summary: Gets the maximum value in the bitmap.
 ---
-
 Gets the maximum value in the bitmap.
 
 ## Syntax

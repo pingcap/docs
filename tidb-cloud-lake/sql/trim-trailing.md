@@ -1,7 +1,7 @@
 ---
 title: TRIM_TRAILING
+summary: Removes all occurrences of the specified trim string from the end of the string.
 ---
-
 Removes all occurrences of the specified trim string from the end of the string.
 
 See also: 

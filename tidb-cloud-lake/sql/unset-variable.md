@@ -1,5 +1,6 @@
 ---
 title: UNSET VARIABLE
+summary: Removes one or more variables from the current session.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

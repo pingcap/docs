@@ -1,5 +1,6 @@
 ---
 title: ST_MAKEGEOMPOINT
+summary: Constructs a GEOMETRY object that represents a Point with the specified longitude and latitude.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

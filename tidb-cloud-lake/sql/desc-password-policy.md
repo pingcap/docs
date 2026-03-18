@@ -1,6 +1,6 @@
 ---
 title: DESC PASSWORD POLICY
-sidebar_position: 2
+summary: Displays detailed information about a specific password policy in Databend. For detailed descriptions of the password policy attributes, see Password Policy Attributes.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

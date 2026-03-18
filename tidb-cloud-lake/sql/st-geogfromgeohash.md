@@ -1,5 +1,6 @@
 ---
 title: ST_GEOGFROMGEOHASH
+summary: Returns a GEOGRAPHY object for the polygon that represents the boundaries of a geohash.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

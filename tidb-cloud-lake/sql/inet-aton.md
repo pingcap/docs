@@ -1,7 +1,7 @@
 ---
 title: INET_ATON
+summary: Converts an IPv4 address to a 32-bit integer.
 ---
-
 Converts an IPv4 address to a 32-bit integer.
 
 ## Syntax

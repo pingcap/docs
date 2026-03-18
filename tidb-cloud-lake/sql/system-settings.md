@@ -1,5 +1,6 @@
 ---
 title: system.settings
+summary: Stores the system settings of the current session.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

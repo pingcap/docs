@@ -1,5 +1,6 @@
 ---
 title: HISTOGRAM
+summary: Generates a data distribution histogram using an "equal height" bucketing strategy.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

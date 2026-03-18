@@ -1,7 +1,7 @@
 ---
 title: File Format
+summary: This page provides a comprehensive overview of File Format operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of File Format operations in Databend, organized by functionality for easy reference.
 
 ## File Format Management

@@ -1,8 +1,7 @@
 ---
 title: TRUNCATE TABLE
-sidebar_position: 16
+summary: Removes all data from a table while preserving the table's schema. It deletes all rows in the table, making it an empty table with the same columns and constraints. Please note that, it does not release the disk space allocated to the table.
 ---
-
 Removes all data from a table while preserving the table's schema. It deletes all rows in the table, making it an empty table with the same columns and constraints. Please note that, it does not release the disk space allocated to the table.
 
 See also: [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md)

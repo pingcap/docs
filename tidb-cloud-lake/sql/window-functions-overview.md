@@ -1,7 +1,7 @@
 ---
-title: 'Window Functions'
+title: Window Functions
+summary: Window functions perform calculations across a set of related rows while returning one result per input row. Unlike aggregate functions, window functions don't collapse rows into a single output.
 ---
-
 ## Overview
 
 Window functions perform calculations across a set of related rows while returning one result per input row. Unlike aggregate functions, window functions don't collapse rows into a single output.

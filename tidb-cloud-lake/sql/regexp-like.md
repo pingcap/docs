@@ -1,7 +1,7 @@
 ---
 title: REGEXP_LIKE
+summary: REGEXP_LIKE function is used to check that whether the string matches regular expression.
 ---
-
 REGEXP_LIKE function is used to check that whether the string matches regular expression.
 
 ## Syntax

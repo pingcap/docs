@@ -1,5 +1,6 @@
 ---
 title: YEAR
+summary: Alias for TO_YEAR.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

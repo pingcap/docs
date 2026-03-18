@@ -1,7 +1,7 @@
 ---
 title: ROW_NUMBER
+summary: Assigns a sequential number to each row within a partition, starting from 1.
 ---
-
 Assigns a sequential number to each row within a partition, starting from 1.
 
 ## Syntax

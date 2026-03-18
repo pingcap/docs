@@ -1,6 +1,6 @@
 ---
 title: OBJECT_KEYS
-title_includes: JSON_OBJECT_KEYS
+summary: Returns the keys of the outermost JSON object as an array of strings.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

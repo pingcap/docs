@@ -1,7 +1,7 @@
 ---
 title: PLUS
+summary: Calculates the sum of two numeric or decimal values.
 ---
-
 Calculates the sum of two numeric or decimal values.
 
 ## Syntax

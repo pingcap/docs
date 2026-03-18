@@ -1,7 +1,7 @@
 ---
 title: H3_EDGE_LENGTH_M
+summary: Returns the average hexagon edge length in meters at the given resolution. Excludes pentagons.
 ---
-
 Returns the average hexagon edge length in meters at the given resolution. Excludes pentagons.
 
 ## Syntax

@@ -1,6 +1,6 @@
 ---
 title: OBJECT_PICK
-title_includes: JSON_OBJECT_PICK
+summary: Creates a new JSON object containing only the specified keys from the input JSON object. If a specified key doesn't exist in the input object, it is omitted from the result.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,8 +1,7 @@
 ---
 title: DESC MASKING POLICY
-sidebar_position: 2
+summary: Displays detailed information about a specific masking policy in Databend.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>

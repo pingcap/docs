@@ -1,7 +1,7 @@
 ---
 title: ARRAY_AGGREGATE
+summary: Aggregates elements in the array with an aggregate function.
 ---
-
 Aggregates elements in the array with an aggregate function.
 
 ## Syntax

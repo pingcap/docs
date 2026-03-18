@@ -1,6 +1,6 @@
 ---
 title: ARRAY_INSERT
-title_includes: JSON_ARRAY_INSERT
+summary: Inserts a value into a JSON array at the specified index and returns the updated JSON array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

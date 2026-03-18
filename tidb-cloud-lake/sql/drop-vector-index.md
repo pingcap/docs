@@ -1,8 +1,7 @@
 ---
 title: DROP VECTOR INDEX
-sidebar_position: 3
+summary: Removes a Vector index from a table.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>

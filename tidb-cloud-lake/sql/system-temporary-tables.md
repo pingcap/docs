@@ -1,5 +1,6 @@
 ---
 title: system.temporary_tables
+summary: Provides information about all existing temporary tables in the current session.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

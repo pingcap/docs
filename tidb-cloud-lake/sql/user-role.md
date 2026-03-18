@@ -1,7 +1,7 @@
 ---
-title: User & Role 
+title: User & Role
+summary: This page provides a comprehensive overview of user and role operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of user and role operations in Databend, organized by functionality for easy reference.
 
 ## User Management

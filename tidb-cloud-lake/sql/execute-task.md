@@ -1,6 +1,6 @@
 ---
 title: EXECUTE TASK
-sidebar_position: 4
+summary: The EXECUTE TASK statement is used to execute an existing task manually.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

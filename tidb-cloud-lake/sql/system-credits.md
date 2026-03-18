@@ -1,7 +1,7 @@
 ---
 title: system.credits
+summary: Contains information about credits.
 ---
-
 Contains information about credits.
 
 ```sql

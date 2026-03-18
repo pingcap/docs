@@ -1,7 +1,7 @@
 ---
 title: VACUUM TEMPORARY FILES
+summary: Removes temporary files created by Databend, such as spill files.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.348"/>

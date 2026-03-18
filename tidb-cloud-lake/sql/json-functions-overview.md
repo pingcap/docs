@@ -1,7 +1,7 @@
 ---
 title: JSON Functions
+summary: This section provides reference information for JSON functions in Databend. JSON functions enable parsing, validation, querying, and manipulation of JSON data structures.
 ---
-
 This section provides reference information for JSON functions in Databend. JSON functions enable parsing, validation, querying, and manipulation of JSON data structures.
 
 ## JSON Parsing & Validation

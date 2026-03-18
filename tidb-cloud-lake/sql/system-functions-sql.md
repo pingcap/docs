@@ -1,7 +1,7 @@
 ---
 title: System Functions
+summary: This page provides reference information for the system-related functions in Databend. These functions help you analyze and monitor the internal storage and performance aspects of your Databend deployment.
 ---
-
 This page provides reference information for the system-related functions in Databend. These functions help you analyze and monitor the internal storage and performance aspects of your Databend deployment.
 
 ## Table Metadata Functions

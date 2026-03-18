@@ -1,7 +1,7 @@
 ---
 title: Type Predicate Functions
+summary: This section provides reference information for type predicate functions in Databend. These functions enable type checking, validation, and conversion of JSON values.
 ---
-
 This section provides reference information for type predicate functions in Databend. These functions enable type checking, validation, and conversion of JSON values.
 
 ## Type Checking

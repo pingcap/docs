@@ -1,7 +1,7 @@
 ---
 title: PI
+summary: Returns the value of π as a floating-point value.
 ---
-
 Returns the value of π as a floating-point value.
 
 ## Syntax

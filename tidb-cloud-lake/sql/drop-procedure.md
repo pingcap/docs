@@ -1,5 +1,6 @@
 ---
 title: DROP PROCEDURE
+summary: Deletes an existing stored procedure.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

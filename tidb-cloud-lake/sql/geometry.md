@@ -1,6 +1,6 @@
 ---
 title: TO_GEOMETRY
-title_includes: TRY_TO_GEOMETRY
+summary: Parses an input and returns a value of type GEOMETRY.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

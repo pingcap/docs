@@ -1,7 +1,7 @@
 ---
 title: H3_TO_GEO
+summary: Returns the longitude and latitude corresponding to the given H3 index.
 ---
-
 Returns the longitude and latitude corresponding to the given [H3](https://eng.uber.com/h3/) index. 
 
 ## Syntax

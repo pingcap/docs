@@ -1,7 +1,7 @@
 ---
 title: LAST_QUERY_ID
+summary: Returns the ID of a query in the current session based on its order.
 ---
-
 Returns the ID of a query in the current session based on its order.
 
 :::note

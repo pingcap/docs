@@ -1,5 +1,6 @@
 ---
 title: MONTH
+summary: Alias for TO_MONTH.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

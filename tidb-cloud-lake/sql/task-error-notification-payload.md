@@ -1,6 +1,6 @@
 ---
 title: TASK ERROR NOTIFICATION PAYLOAD
-sidebar_position: 10
+summary: The payload body for task error notification.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

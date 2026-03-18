@@ -1,7 +1,7 @@
 ---
 title: JSON_PATH_QUERY_ARRAY
+summary: Get all JSON items returned by JSON path for the specified JSON value and wrap a result into an array.
 ---
-
 Get all JSON items returned by JSON path for the specified JSON value and wrap a result into an array.
 
 ## Syntax

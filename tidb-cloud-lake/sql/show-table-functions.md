@@ -1,5 +1,6 @@
 ---
 title: SHOW TABLE FUNCTIONS
+summary: Shows the list of supported table functions currently.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

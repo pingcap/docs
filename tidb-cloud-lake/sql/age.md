@@ -1,5 +1,6 @@
 ---
 title: AGE
+summary: The age() function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,5 +1,6 @@
 ---
 title: AT
+summary: The AT clause enables you to retrieve previous versions of your data by specifying a snapshot ID, timestamp, stream name, or a time interval.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

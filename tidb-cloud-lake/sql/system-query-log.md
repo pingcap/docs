@@ -1,7 +1,7 @@
 ---
 title: system.query_log
+summary: A read-only in-memory table stores all the query logs. For the specific fields available in the query logs, refer to the Examples section.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.696"/>

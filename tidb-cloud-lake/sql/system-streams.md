@@ -1,5 +1,6 @@
 ---
 title: system.streams
+summary: Provides information about streams in the system. Each row in this table corresponds to a stream, and the columns contain details such as the stream's mode, comment (if any), associated table name, table ID, table version, snapshot location, invalid reason (if applicable), and owner.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

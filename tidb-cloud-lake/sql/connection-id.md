@@ -1,7 +1,7 @@
 ---
 title: CONNECTION_ID
+summary: Returns the connection ID for the current connection.
 ---
-
 Returns the connection ID for the current connection.
 
 ## Syntax

@@ -1,7 +1,7 @@
 ---
 title: JARO_WINKLER
+summary: Calculates the Jaro-Winkler distance between two strings. It is commonly used for measuring the similarity between strings, with values ranging from 0.0 (completely dissimilar) to 1.0 (identical strings).
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.675"/>

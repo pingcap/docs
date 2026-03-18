@@ -1,5 +1,6 @@
 ---
 title: SHOW LOCKS
+summary: Provides a list of active transactions currently holding locks on tables, either for the current user across all their sessions or for all users within the Databend system. A lock is a synchronization mechanism that restricts access to shared resources, such as tables, ensuring orderly and controlled interactions among processes or threads within the Databend system to maintain data consistency and prevent conflicts.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

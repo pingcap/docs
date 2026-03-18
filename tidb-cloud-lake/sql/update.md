@@ -1,5 +1,6 @@
 ---
 title: UPDATE
+summary: Updates rows in a table with new values, optionally using values from other tables.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

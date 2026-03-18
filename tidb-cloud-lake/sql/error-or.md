@@ -1,5 +1,6 @@
 ---
 title: ERROR_OR
+summary: Returns the first non-error expression among its inputs. If all expressions result in errors, it returns NULL.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,5 +1,6 @@
 ---
 title: TO_WEEK_OF_YEAR
+summary: Calculates the week number within a year for a given date.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

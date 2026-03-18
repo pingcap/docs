@@ -1,8 +1,7 @@
 ---
-title: "Authenticate with AWS IAM Role"
-sidebar_label: "AWS IAM Role"
+title: Authenticate with AWS IAM Role
+summary: Cloud-native identity delegation (AWS IAM Role, Azure Managed Identity, Google Service Account federation, etc.) lets Databend Cloud obtain short-lived credentials to your object storage without ever handling raw access keys. That keeps data plane access inside your cloud provider's control plane while you retain ownership of every permission.
 ---
-
 # Authenticate with AWS IAM Role
 
 Cloud-native identity delegation (AWS IAM Role, Azure Managed Identity, Google Service Account federation, etc.) lets Databend Cloud obtain short-lived credentials to your object storage without ever handling raw access keys. That keeps data plane access inside your cloud provider's control plane while you retain ownership of every permission.

@@ -1,7 +1,7 @@
 ---
 title: TRIM_BOTH
+summary: Removes all occurrences of the specified trim string from the beginning, end, or both sides of the string.
 ---
-
 Removes all occurrences of the specified trim string from the beginning, end, or both sides of the string.
 
 See also: [TRIM](/tidb-cloud-lake/sql/trim.md)

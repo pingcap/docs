@@ -1,8 +1,7 @@
 ---
 title: Migrate MySQL with Addax (Batch)
-sidebar_label: 'MySQL → Databend: Addax (Batch)'
+summary: Loads MySQL data into TiDB Cloud Lake with Addax for batch full-load and incremental migration workflows.
 ---
-
 > **Capabilities**: Full Load, Incremental
 
 In this tutorial, you will load data from MySQL to Databend with Addax. Before you start, make sure you have successfully set up Databend, MySQL, and Addax in your environment.

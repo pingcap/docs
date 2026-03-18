@@ -1,5 +1,6 @@
 ---
 title: SHOW METRICS
+summary: Shows the list of system metrics.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

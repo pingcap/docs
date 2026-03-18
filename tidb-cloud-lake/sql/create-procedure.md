@@ -1,5 +1,6 @@
 ---
 title: CREATE PROCEDURE
+summary: Defines a stored procedure that executes SQL operations and returns a result.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

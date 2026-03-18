@@ -1,8 +1,7 @@
 ---
 title: CREATE WAREHOUSE
-sidebar_position: 1
+summary: Creates a new warehouse for compute resources.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>

@@ -1,6 +1,6 @@
 ---
 title: OBJECT_CONSTRUCT_KEEP_NULL
-title_includes: TRY_OBJECT_CONSTRUCT_KEEP_NULL, JSON_OBJECT_KEEP_NULL, TRY_JSON_OBJECT_KEEP_NULL
+summary: Creates a JSON object with keys and values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

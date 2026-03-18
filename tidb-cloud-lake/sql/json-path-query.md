@@ -1,7 +1,7 @@
 ---
 title: JSON_PATH_QUERY
+summary: Get all JSON items returned by JSON path for the specified JSON value.
 ---
-
 Get all JSON items returned by JSON path for the specified JSON value.
 
 ## Syntax

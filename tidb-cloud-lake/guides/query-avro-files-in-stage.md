@@ -1,8 +1,7 @@
 ---
 title: Querying Avro Files in Stage
-sidebar_label: Avro
+summary: Databend provides comprehensive support for querying Avro files directly from stages. This allows for flexible data exploration and transformation without needing to load the data into a table first.
 ---
-
 ## Syntax:
 
 - [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)

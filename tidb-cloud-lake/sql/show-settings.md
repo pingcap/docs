@@ -1,5 +1,6 @@
 ---
 title: SHOW SETTINGS
+summary: Databend provides a variety of system settings that enable you to control how Databend works. This command displays the current and default values, as well as the Setting Levels, of available system settings. To update a setting, use the SET or UNSET command.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

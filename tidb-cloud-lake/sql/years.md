@@ -1,5 +1,6 @@
 ---
 title: TO_YEARS
+summary: Converts a specified number of years into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

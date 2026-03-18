@@ -1,5 +1,6 @@
 ---
 title: TO_TIMESTAMP
+summary: Converts an expression to a date with time.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

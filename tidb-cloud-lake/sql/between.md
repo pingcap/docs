@@ -1,7 +1,7 @@
 ---
-title: "[ NOT ] BETWEEN"
+title: NOT ] BETWEEN
+summary: Returns `true` if the given numeric or string ` <expr>` falls inside the defined lower and upper limits.
 ---
-
 Returns `true` if the given numeric or string ` <expr>` falls inside the defined lower and upper limits.
 
 ## Syntax

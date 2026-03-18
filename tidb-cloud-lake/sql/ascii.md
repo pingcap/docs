@@ -1,7 +1,7 @@
 ---
 title: ASCII
+summary: Returns the numeric value of the leftmost character of the string str.
 ---
-
 Returns the numeric value of the leftmost character of the string str.
 
 ## Syntax

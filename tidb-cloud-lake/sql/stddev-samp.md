@@ -1,7 +1,7 @@
 ---
 title: STDDEV_SAMP
+summary: Returns the sample standard deviation (the square root of VAR_SAMP()) of an expression.
 ---
-
 Returns the sample standard deviation (the square root of VAR_SAMP()) of an expression.
 
 - NULL values are ignored.

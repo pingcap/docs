@@ -1,7 +1,7 @@
 ---
 title: TO_DAY_OF_WEEK
+summary: Converts a date or date with time (timestamp/datetime) to a UInt8 number containing the number of the day of the week (Monday is 1, and Sunday is 7).
 ---
-
 Converts a date or date with time (timestamp/datetime) to a UInt8 number containing the number of the day of the week (Monday is 1, and Sunday is 7).
 
 ## Syntax

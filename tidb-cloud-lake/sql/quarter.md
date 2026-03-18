@@ -1,5 +1,6 @@
 ---
 title: QUARTER
+summary: Alias for TO_QUARTER.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,5 +1,6 @@
 ---
 title: JSON_PATH_EXISTS
+summary: Checks whether a specified path exists in JSON data.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

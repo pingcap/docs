@@ -1,7 +1,7 @@
 ---
 title: Warehouses
+summary: import PlaySVG from '@site/static/img/icon/play.svg' import SuspendSVG from '@site/static/img/icon/suspend.svg' import CheckboxSVG from '@site/static/img/icon/checkbox.svg' import EllipsisSVG from '@site/static/img/icon/ellipsis.svg' import { Button } from 'antd'.
 ---
-
 import PlaySVG from '@site/static/img/icon/play.svg'
 import SuspendSVG from '@site/static/img/icon/suspend.svg'
 import CheckboxSVG from '@site/static/img/icon/checkbox.svg'

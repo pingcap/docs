@@ -1,5 +1,6 @@
 ---
 title: ST_POINTN
+summary: Returns a Point at a specified index in a LineString.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

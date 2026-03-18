@@ -1,5 +1,6 @@
 ---
 title: IS_FLOAT
+summary: Checks if the input JSON value is a float.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

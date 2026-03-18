@@ -1,5 +1,6 @@
 ---
 title: IS_ERROR
+summary: Returns a Boolean value indicating whether an expression is an error value.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

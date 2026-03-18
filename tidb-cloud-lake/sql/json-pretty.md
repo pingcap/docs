@@ -1,5 +1,6 @@
 ---
 title: JSON_PRETTY
+summary: Formats JSON data, making it more readable and presentable. It automatically adds indentation, line breaks, and other formatting to the JSON data for better visual representation.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

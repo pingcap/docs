@@ -1,5 +1,6 @@
 ---
 title: FLATTEN
+summary: Transforms nested JSON or array data into a tabular format, where each element or field is represented as a separate row.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

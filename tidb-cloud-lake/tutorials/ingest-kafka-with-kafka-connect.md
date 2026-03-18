@@ -1,7 +1,7 @@
 ---
 title: Ingest Kafka with Kafka Connect
+summary: In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, databend-kafka-connect. Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
 ---
-
 In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, [databend-kafka-connect](https://github.com/databendcloud/databend-kafka-connect). Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
 
 ### Step 1: Setting up Kafka Environment

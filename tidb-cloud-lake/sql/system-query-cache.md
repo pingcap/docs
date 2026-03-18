@@ -1,7 +1,7 @@
 ---
 title: system.query_cache
+summary: Stores information about cached query results, including details such as the query ID, result size, and the location of the cached data.
 ---
-
 Stores information about cached query results, including details such as the query ID, result size, and the location of the cached data.
 
 | Column               | Type    | Description                                                           |

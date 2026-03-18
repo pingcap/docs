@@ -1,7 +1,7 @@
 ---
 title: Password Policy
+summary: This page provides a comprehensive overview of Password Policy operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Password Policy operations in Databend, organized by functionality for easy reference.
 
 ## Password Policy Management

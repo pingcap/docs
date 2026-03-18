@@ -1,7 +1,7 @@
 ---
 title: BITMAP_SUBSET_IN_RANGE
+summary: Generates a sub-bitmap of the source bitmap within a specified range.
 ---
-
 Generates a sub-bitmap of the source bitmap within a specified range.
 
 ## Syntax

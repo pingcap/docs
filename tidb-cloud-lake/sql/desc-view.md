@@ -1,6 +1,6 @@
 ---
 title: DESC VIEW
-sidebar_position: 3
+summary: Returns the list of columns for a view.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

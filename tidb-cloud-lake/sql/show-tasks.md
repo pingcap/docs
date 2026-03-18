@@ -1,6 +1,6 @@
 ---
 title: SHOW TASKS
-sidebar_position: 5
+summary: Lists the tasks that are visible to the current role.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY
+summary: Returns the coordinates defining the unidirectional edge.
 ---
-
 Returns the coordinates defining the unidirectional edge.
 
 ## Syntax

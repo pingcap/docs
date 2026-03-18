@@ -1,8 +1,7 @@
 ---
-title: "How Databend JSON (Variant) Works"
-sidebar_label: "How Databend JSON Works"
+title: How TiDB Cloud Lake JSON (Variant) Works
+summary: See also:.
 ---
-
 See also:
 
 - [Variant Data Type](/tidb-cloud-lake/sql/variant.md)

@@ -1,7 +1,7 @@
 ---
 title: IS_NOT_NULL
+summary: Checks whether a value is not NULL.
 ---
-
 Checks whether a value is not NULL.
 
 ## Syntax

@@ -1,6 +1,6 @@
 ---
 title: Querying Staged ORC Files in Stage
-sidebar_label: ORC
+summary: In this tutorial, we will walk you through the process of downloading the Iris dataset in ORC format, uploading it to an Amazon S3 bucket, creating an external stage, and querying the data directly from the ORC file.
 ---
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';

@@ -1,7 +1,7 @@
 ---
 title: FROM_BASE64
+summary: Takes a string encoded with the base-64 encoded rules and returns the decoded result as a binary. The result is NULL if the argument is NULL or not a valid base-64 string.
 ---
-
 Takes a string encoded with the base-64 encoded rules and returns the decoded result as a binary.
 The result is NULL if the argument is NULL or not a valid base-64 string.
 

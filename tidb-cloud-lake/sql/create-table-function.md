@@ -1,6 +1,6 @@
 ---
 title: CREATE TABLE FUNCTION
-sidebar_position: 3
+summary: Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a table function. Table functions are written in SQL; no external languages are involved.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

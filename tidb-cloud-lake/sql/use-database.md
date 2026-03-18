@@ -1,6 +1,6 @@
 ---
 title: USE DATABASE
-sidebar_position: 3
+summary: Selects a database for the current session. This statement allows you to specify and switch to a different database. Once you set the current database using this command, it remains the same until the end of the session unless you choose to change it.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

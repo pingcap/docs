@@ -1,6 +1,6 @@
 ---
 title: ALTER FUNCTION
-sidebar_position: 2
+summary: Alters an external function.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

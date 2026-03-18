@@ -1,7 +1,7 @@
 ---
 title: ARRAY_REDUCE
+summary: Reduces a JSON array to a single value by applying a specified Lambda expression. For more information about Lambda expression, see Lambda Expressions.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>

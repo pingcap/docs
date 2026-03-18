@@ -1,8 +1,7 @@
 ---
 title: Vector
-sidebar_position: 13
+summary: The VECTOR data type stores multi-dimensional arrays of 32-bit floating-point numbers, designed for machine learning, AI applications, and similarity search operations. Each vector has a fixed dimension (length) specified at creation time.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>

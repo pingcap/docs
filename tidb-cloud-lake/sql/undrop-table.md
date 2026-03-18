@@ -1,8 +1,7 @@
 ---
 title: UNDROP TABLE
-sidebar_position: 20
+summary: Restores the recent version of a dropped table. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 ---
-
 Restores the recent version of a dropped table. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**

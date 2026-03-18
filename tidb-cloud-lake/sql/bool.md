@@ -1,5 +1,6 @@
 ---
 title: bool_and
+summary: Returns true if all input values are true, otherwise false.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

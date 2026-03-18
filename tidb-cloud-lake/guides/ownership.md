@@ -1,7 +1,7 @@
 ---
 title: Ownership
+summary: Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within Databend.
 ---
-
 Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within Databend. 
 
 ## Granting Ownership

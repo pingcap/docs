@@ -1,5 +1,6 @@
 ---
 title: IS_INTEGER
+summary: Checks if the input JSON value is an integer.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

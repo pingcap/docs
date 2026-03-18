@@ -1,7 +1,7 @@
 ---
 title: DECODE
+summary: The DECODE function compares the select expression to each search expression in order. As soon as a search expression matches the selection expression, the corresponding result expression is returned. If no match is found and a default value is provided, the default value is returned.
 ---
-
 The DECODE function compares the select expression to each search expression in order. As soon as a search expression matches the selection expression, the corresponding result expression is returned. If no match is found and a default value is provided, the default value is returned.
 
 ## Syntax

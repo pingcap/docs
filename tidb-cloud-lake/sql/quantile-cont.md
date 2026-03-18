@@ -1,7 +1,7 @@
 ---
 title: QUANTILE_CONT
+summary: Aggregate function.
 ---
-
 Aggregate function.
 
 The QUANTILE_CONT() function computes the interpolated quantile number of a numeric data sequence.

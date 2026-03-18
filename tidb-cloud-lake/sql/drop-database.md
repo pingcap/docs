@@ -1,7 +1,7 @@
 ---
 title: DROP DATABASE
+summary: Drops a database.
 ---
-
 Drops a database.
 
 See also: [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md)

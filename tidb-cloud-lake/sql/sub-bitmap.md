@@ -1,7 +1,7 @@
 ---
 title: SUB_BITMAP
+summary: Generates a sub-bitmap of the source bitmap, beginning from the start index, with a specified size.
 ---
-
 Generates a sub-bitmap of the source bitmap, beginning from the start index, with a specified size.
 
 ## Syntax

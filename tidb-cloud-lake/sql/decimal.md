@@ -1,9 +1,7 @@
 ---
 title: Decimal
-description: Decimal types are high-precision numeric values to be stored and manipulated.
-sidebar_position: 5
+summary: Decimal types are high-precision numeric values to be stored and manipulated.
 ---
-
 ## Overview
 
 `DECIMAL(P, S)` stores exact numeric values with precision `P` (total digits, 1–76) and scale `S` (digits to the right of the decimal point, 0–P). Values must sit within ±`(10^P - 1) / 10^S`. Precisions up to 38 use `DECIMAL128`, and larger values use `DECIMAL256`.
