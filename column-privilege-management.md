@@ -1,4 +1,4 @@
-```markdown
+``
 title: Column-Level Privilege Management
 summary: TiDB supports a MySQL-compatible column-level privilege management mechanism, allowing you to grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, thus achieving finer-grained access control.
 ---
@@ -40,7 +40,7 @@ For example, the following statement grants `SELECT` privileges on `col1` and `c
 GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 ```
 
-## Granting Column-Level Privileges
+## Grant column-level privileges
 
 The following example grants the `SELECT` privilege on `col1` and `col2` of table `test.tbl` to user `newuser`, and grants the `UPDATE` privilege on `col3` to the same user:
 
@@ -69,7 +69,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 
 In addition to using `SHOW GRANTS`, you can also view column-level privilege information by querying [`INFORMATION_SCHEMA.COLUMN_PRIVILEGES`](/information-schema/information-schema-columns.md).
 
-## Revoking Column-Level Privileges
+## Revoke column-level privileges
 
 The following example revokes the `SELECT` privilege on column `col2` from user `newuser`:
 
@@ -87,7 +87,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 +---------------------------------------------------------------+
 ```
 
-## Column-Level Privilege Access Control Example
+## Column-level privilege access control example
 
 After granting or revoking column-level privileges, TiDB performs privilege checks on columns referenced in SQL statements. For example:
 
@@ -110,7 +110,7 @@ UPDATE tbl SET col3 = col3 + 1; -- Error (missing SELECT column privilege for co
 UPDATE tbl SET col3 = col1 WHERE col1 > 0;
 ```
 
-## Compatibility Differences with MySQL
+## Compatibility differences with MySQL
 
 TiDB's column-level privileges are generally compatible with MySQL. However, there are differences in the following scenarios:
 | Scenario                                             | TiDB                                                                                                                                                                   | MySQL                                                                                                                                                                            |
@@ -118,7 +118,7 @@ TiDB's column-level privileges are generally compatible with MySQL. However, the
 | Revoking column-level privileges not granted to a user | `REVOKE` executes successfully.                                                                                                                                        | `REVOKE` throws an error.                                                                                                                                                        |
 | Execution order of column pruning and `SELECT` privilege check | `SELECT` column privileges are checked first, then column pruning is performed. For example: executing `SELECT a FROM (SELECT a, b FROM t) s` requires `SELECT` column privileges for both `t.a` and `t.b`. | Column pruning is performed first, then `SELECT` column privileges are checked. For example: executing `SELECT a FROM (SELECT a, b FROM t) s` only requires `SELECT` column privilege for `t.a`. |
 
-### Column Pruning and Privilege Checks in View Scenarios
+### Column pruning and privilege checks in view scenarios
 
 When performing `SELECT` privilege checks on views, MySQL first prunes columns in the view's internal query and then checks the column privileges of the internal tables, making the checks relatively lenient in some scenarios. TiDB does not perform column pruning before privilege checks, so additional column privileges might be required.
 
@@ -161,7 +161,7 @@ SELECT * FROM v;
 -- TiDB: Success
 ```
 
-## See Also
+## See also
 
 * [Privilege Management](/privilege-management.md)
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
