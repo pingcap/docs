@@ -23,7 +23,7 @@ In the current implementation, `_tidb_rowid` is an extra `BIGINT NOT NULL` handl
 `_tidb_rowid` is not available for tables that use a clustered index, including the following:
 
 - Tables whose integer primary key is the clustered row handle
-- Tables that use a common handle clustered primary key
+- Tables with a clustered index on a composite primary key
 
 The following example shows the difference:
 
