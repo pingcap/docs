@@ -1,6 +1,6 @@
 ---
 title: How TiDB Cloud Lake JSON (Variant) Works
-summary: See also:.
+summary: Learn how TiDB Cloud Lake JSON works.
 ---
 See also:
 
