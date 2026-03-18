@@ -2,6 +2,9 @@
 title: ARRAY_MIN
 summary: Returns the smallest numeric value in an array. NULL elements are skipped; non-numeric values cause an error.
 ---
+
+# ARRAY_MIN
+
 Returns the smallest numeric value in an array. `NULL` elements are skipped; non-numeric values cause an error.
 
 ## Syntax

@@ -2,6 +2,9 @@
 title: ARG_MAX
 summary: Calculates the arg value for a maximum val value. If there are several values of arg for maximum values of val, returns the first of these values encountered.
 ---
+
+# ARG_MAX
+
 Calculates the `arg` value for a maximum `val` value. If there are several values of `arg` for maximum values of `val`, returns the first of these values encountered.
 
 ## Syntax

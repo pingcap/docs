@@ -2,7 +2,12 @@
 title: TO_SECONDS
 summary: Converts a specified number of seconds into an Interval type.
 ---
+
+# TO_SECONDS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_SECONDS
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

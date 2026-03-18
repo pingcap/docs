@@ -2,7 +2,12 @@
 title: SHOW TASKS
 summary: Lists the tasks that are visible to the current role.
 ---
+
+# SHOW TASKS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW TASKS
 
 <FunctionDescription description="Introduced or updated: v1.2.900"/>
 

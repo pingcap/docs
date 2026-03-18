@@ -2,6 +2,9 @@
 title: TO_VARIANT
 summary: Converts a value to VARIANT data type.
 ---
+
+# TO_VARIANT
+
 Converts a value to VARIANT data type.
 
 ## Syntax

@@ -2,8 +2,13 @@
 title: TiDB Cloud Lake Architecture
 summary: TiDB Cloud Lake Architecture.
 ---
+
+# TiDB Cloud Lake Architecture
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+## TiDB Cloud Lake Architecture
 
 ![TiDB Cloud Lake Architecture](/media/tidb-cloud-lake/architecture.png)
 

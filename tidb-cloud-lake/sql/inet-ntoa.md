@@ -2,6 +2,9 @@
 title: INET_NTOA
 summary: Converts a 32-bit integer to an IPv4 address.
 ---
+
+# INET_NTOA
+
 Converts a 32-bit integer to an IPv4 address.
 
 ## Syntax

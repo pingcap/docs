@@ -2,7 +2,12 @@
 title: MEDIAN_TDIGEST
 summary: Computes the median of a numeric data sequence using the t-digest algorithm.
 ---
+
+# MEDIAN_TDIGEST
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MEDIAN_TDIGEST
 
 <FunctionDescription description="Introduced or updated: v1.2.41"/>
 
@@ -21,8 +26,8 @@ MEDIAN_TDIGEST(<expr>)
 ## Arguments
 
 | Arguments | Description              |
-|-----------|--------------------------|                                                                                                                 
-| `<expr>`  | Any numerical expression |                                                                                                     
+|-----------|--------------------------|
+| `<expr>`  | Any numerical expression |
 
 ## Return Type
 

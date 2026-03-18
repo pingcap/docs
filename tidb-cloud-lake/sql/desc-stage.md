@@ -2,6 +2,9 @@
 title: DESC STAGE
 summary: Describes the properties of a stage.
 ---
+
+# DESC STAGE
+
 Describes the properties of a stage.
 
 ## Syntax

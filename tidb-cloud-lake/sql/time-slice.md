@@ -2,11 +2,16 @@
 title: TIME_SLICE
 summary: TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
 ---
+
+# TIME_SLICE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TIME_SLICE
 
 <FunctionDescription description="Introduced or updated: v1.2.799"/>
 
-TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket). 
+TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
 
 It returns the boundary (starting or ending point) of the calendar interval containing the time point, and is often used to group, aggregate and report time series data by custom calendar periods, such as summarizing by a 2-week, 3-month or 15-minute window.
 
@@ -22,7 +27,6 @@ TIME_SLICE(<date_or_time_expr>, <slice_length>, <IntervalKind> [, <start_or_end>
 | `<slice_length>`      | INTEGER >= 1. The number of contiguous IntervalKind units in a slice (e.g., 2 for 2-week slices).           |
 | `<IntervalKind>`      | One of the following (case-insensitive): YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND.             |
 | `<start_or_end>`      | String 'START' or 'END' (case-insensitive). If omitted, defaults to 'START'.                                |
-
 
 ## Semantics
 
@@ -42,12 +46,10 @@ TIME_SLICE(<date_or_time_expr>, <slice_length>, <IntervalKind> [, <start_or_end>
     - Days start at 00:00:00.
     - Hour/Minute/Second slices begin at the natural boundary for those units.
 
-    
 ## Return Type
 
 - DATE input → returns DATE.
 - TIMESTAMP input → returns TIMESTAMP.
-
 
 ## Examples
 
@@ -78,7 +80,7 @@ VALUES
   (1, '2018-07-31', 100.00),
   (2, '2018-08-01', 200.00),
   (3, '2018-08-25', 400.00);
-       
+
 -- Group by 2-week slices:
 SELECT
     TIME_SLICE(billing_date, 2, 'WEEK', 'START') AS slice_start,

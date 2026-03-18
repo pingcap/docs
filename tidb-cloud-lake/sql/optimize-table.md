@@ -2,7 +2,12 @@
 title: OPTIMIZE TABLE
 summary: Optimizing a table in Databend involves compacting or purging historical data to save storage space and enhance query performance.
 ---
+
+# OPTIMIZE TABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## OPTIMIZE TABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.395"/>
 
@@ -76,7 +81,7 @@ FROM
 **Syntax**
 
 ```sql
-OPTIMIZE TABLE [database.]table_name COMPACT SEGMENT [LIMIT <segment_count>]    
+OPTIMIZE TABLE [database.]table_name COMPACT SEGMENT [LIMIT <segment_count>]
 ```
 
 Compacts the table data by merging small segments into larger ones.
@@ -103,10 +108,10 @@ FROM
 +-------------+---------------+-------------------------------------+
 |         751 |            32 | The table needs segment compact now |
 +-------------+---------------+-------------------------------------+
-    
+
 -- Compact segment
 OPTIMIZE TABLE hits COMPACT SEGMENT;
-    
+
 -- Check again
 SELECT
   block_count,
@@ -131,7 +136,7 @@ FROM
 
 Compact blocks when a table has a large number of small blocks or when the table has a high percentage of inserted, deleted, or updated rows.
 
-You can check it with if the uncompressed size of each block is close to the perfect size of `100MB`. 
+You can check it with if the uncompressed size of each block is close to the perfect size of `100MB`.
 
 If the size is less than `50MB`, we suggest doing block compaction, as it indicates too many small blocks:
 
@@ -155,7 +160,7 @@ FROM
 
 **Syntax**
 ```sql
-OPTIMIZE TABLE [database.]table_name COMPACT [LIMIT <segment_count>]    
+OPTIMIZE TABLE [database.]table_name COMPACT [LIMIT <segment_count>]
 ```
 Compacts the table data by merging small blocks and segments into larger ones.
 

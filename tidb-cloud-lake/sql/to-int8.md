@@ -2,6 +2,9 @@
 title: TO_INT8
 summary: Converts a value to INT8 data type.
 ---
+
+# TO_INT8
+
 Converts a value to INT8 data type.
 
 ## Syntax

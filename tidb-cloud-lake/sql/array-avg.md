@@ -2,6 +2,9 @@
 title: ARRAY_AVG
 summary: Returns the average of the numeric items in an array. NULL elements are ignored; non-numeric values raise an error.
 ---
+
+# ARRAY_AVG
+
 Returns the average of the numeric items in an array. `NULL` elements are ignored; non-numeric values raise an error.
 
 ## Syntax

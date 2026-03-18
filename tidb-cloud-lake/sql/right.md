@@ -2,6 +2,9 @@
 title: RIGHT
 summary: Returns the rightmost len characters from the string str, or NULL if any argument is NULL.
 ---
+
+# RIGHT
+
 Returns the rightmost len characters from the string str, or NULL if any argument is NULL.
 
 ## Syntax

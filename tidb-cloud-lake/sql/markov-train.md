@@ -2,6 +2,9 @@
 title: MARKOV_TRAIN
 summary: Extracting patterns from datasets using Markov models.
 ---
+
+# MARKOV_TRAIN
+
 Extracting patterns from datasets using Markov models
 
 ## Syntax

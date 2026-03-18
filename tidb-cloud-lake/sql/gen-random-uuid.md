@@ -2,6 +2,9 @@
 title: GEN_RANDOM_UUID
 summary: Generates a random UUID based on version 7, starting from version 1.2.658. Previously, this function generated UUIDs based on version 4.
 ---
+
+# GEN_RANDOM_UUID
+
 Generates a random UUID based on version 7, starting from version 1.2.658. Previously, this function generated UUIDs based on version 4.
 
 ## Syntax
@@ -17,7 +20,7 @@ GEN_RANDOM_UUID()
 ## Why Use UUID v7?
 
 - **Time-Based Ordering**: UUID v7 includes a timestamp, allowing events or records to be ordered chronologically by the time they were created. This is especially useful when you need to track the sequence of actions.
-  
+
 - **Chronological Sorting**: UUID v7 ensures that UUIDs are sorted by creation time, which is ideal for scenarios where sorting events by time is necessary, such as event logging or maintaining audit trails.
 
 ## Version Information

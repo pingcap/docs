@@ -2,7 +2,12 @@
 title: LEAD
 summary: Returns the value from a subsequent row in the result set.
 ---
+
+# LEAD
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## LEAD
 
 <FunctionDescription description="Introduced or updated: v1.2.45"/>
 
@@ -14,12 +19,12 @@ See also: [LAG](/tidb-cloud-lake/sql/lag.md)
 
 ```sql
 LEAD(
-    expression 
+    expression
     [, offset ]
     [, default ]
-) 
+)
 OVER (
-    [ PARTITION BY partition_expression ] 
+    [ PARTITION BY partition_expression ]
     ORDER BY sort_expression
 )
 ```

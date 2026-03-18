@@ -2,7 +2,12 @@
 title: Date & Time
 summary: Databend's Date and Time data type supports standardization and compatibility with various SQL standards, making it easier for users migrating from other database systems.
 ---
+
+# Date & Time
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Date & Time
 
 <FunctionDescription description="Introduced or updated: v1.2.834"/>
 

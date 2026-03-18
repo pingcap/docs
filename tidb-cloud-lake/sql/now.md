@@ -2,6 +2,9 @@
 title: NOW
 summary: Returns the current date and time.
 ---
+
+# NOW
+
 Returns the current date and time.
 
 ## Syntax

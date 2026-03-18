@@ -2,7 +2,12 @@
 title: LAST
 summary: Alias for LAST_VALUE.
 ---
+
+# LAST
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## LAST
 
 <FunctionDescription description="Introduced: v1.1.50"/>
 

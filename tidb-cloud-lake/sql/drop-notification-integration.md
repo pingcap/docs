@@ -2,7 +2,12 @@
 title: DROP NOTIFICATION INTEGRATION
 summary: The DROP NOTIFICATION INTEGRATION statement is used to delete an existing notification.
 ---
+
+# DROP NOTIFICATION INTEGRATION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP NOTIFICATION INTEGRATION
 
 <FunctionDescription description="Introduced or updated: v1.2.371"/>
 
@@ -21,11 +26,10 @@ DROP NOTIFICATION INTEGRATION [ IF EXISTS ] <name>
 | IF EXISTS                        | Optional. If specified, the notification will only be dropped if a notification of the same name already exists. |
 | name                             | The name of the notification. This is a mandatory field.                                                       |
 
-
 ## Usage Examples
 
 ```sql
 DROP NOTIFICATION INTEGRATION IF EXISTS error_notification;
 ```
 
-This command deletes the notification integration named `error_notification` if it exists. 
+This command deletes the notification integration named `error_notification` if it exists.

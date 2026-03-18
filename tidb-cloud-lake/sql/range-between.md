@@ -2,6 +2,9 @@
 title: RANGE BETWEEN
 summary: Defines a window frame using value-based boundaries for window functions.
 ---
+
+# RANGE BETWEEN
+
 Defines a window frame using value-based boundaries for window functions.
 
 ## Overview
@@ -54,7 +57,7 @@ RANGE BETWEEN 50 PRECEDING AND CURRENT ROW
 -- 7-day window
 RANGE BETWEEN INTERVAL '7' DAY PRECEDING AND CURRENT ROW
 
--- 1-hour window  
+-- 1-hour window
 RANGE BETWEEN INTERVAL '1' HOUR PRECEDING AND CURRENT ROW
 
 -- 30-minute centered window
@@ -96,8 +99,8 @@ INSERT INTO temperature_readings VALUES
 ```sql
 SELECT reading_time, sensor_id, temperature,
        AVG(temperature) OVER (
-           PARTITION BY sensor_id 
-           ORDER BY reading_time 
+           PARTITION BY sensor_id
+           ORDER BY reading_time
            RANGE BETWEEN INTERVAL '24' HOUR PRECEDING AND CURRENT ROW
        ) AS avg_24h
 FROM temperature_readings
@@ -109,8 +112,8 @@ ORDER BY sensor_id, reading_time;
 ```sql
 SELECT reading_time, sensor_id, temperature,
        COUNT(*) OVER (
-           PARTITION BY sensor_id 
-           ORDER BY temperature 
+           PARTITION BY sensor_id
+           ORDER BY temperature
            RANGE BETWEEN 0.5 PRECEDING AND 0.5 FOLLOWING
        ) AS similar_readings_count
 FROM temperature_readings
@@ -135,11 +138,11 @@ INSERT INTO sales_duplicates VALUES
 -- RANGE treats duplicate dates as the same "row" for window calculations
 SELECT sale_date, amount,
        SUM(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
        ) AS running_total_range,
        SUM(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
        ) AS running_total_rows
 FROM sales_duplicates
@@ -162,9 +165,9 @@ sale_date   | amount | running_total_range | running_total_rows
 ```sql
 SELECT reading_time, sensor_id, temperature,
        AVG(temperature) OVER (
-           PARTITION BY sensor_id 
-           ORDER BY reading_time 
-           RANGE BETWEEN INTERVAL '30' MINUTE PRECEDING 
+           PARTITION BY sensor_id
+           ORDER BY reading_time
+           RANGE BETWEEN INTERVAL '30' MINUTE PRECEDING
                      AND INTERVAL '30' MINUTE FOLLOWING
        ) AS avg_hour_centered
 FROM temperature_readings
@@ -191,7 +194,7 @@ RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
 -- 7-day rolling average
 SELECT sale_date, amount,
        AVG(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            RANGE BETWEEN INTERVAL '7' DAY PRECEDING AND CURRENT ROW
        ) AS avg_7day
 FROM sales
@@ -216,7 +219,7 @@ RANGE BETWEEN 100 PRECEDING AND CURRENT ROW
 -- Include rows within ±0.5 units
 SELECT temperature, reading_time,
        COUNT(*) OVER (
-           ORDER BY temperature 
+           ORDER BY temperature
            RANGE BETWEEN 0.5 PRECEDING AND 0.5 FOLLOWING
        ) AS similar_readings
 FROM temperature_readings
@@ -238,7 +241,7 @@ RANGE BETWEEN 0 PRECEDING AND 0 FOLLOWING
 -- RANGE treats duplicate dates as same window
 SELECT sale_date, amount,
        SUM(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
        ) AS running_total_range
 FROM sales_duplicates

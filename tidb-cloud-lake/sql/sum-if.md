@@ -2,7 +2,10 @@
 title: SUM_IF
 summary: The suffix -If can be appended to the name of any aggregate function. In this case, the aggregate function accepts an extra argument – a condition.
 ---
-## SUM_IF 
+
+# SUM_IF
+
+## SUM_IF
 
 The suffix -If can be appended to the name of any aggregate function. In this case, the aggregate function accepts an extra argument – a condition.
 

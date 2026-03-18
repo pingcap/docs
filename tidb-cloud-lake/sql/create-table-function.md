@@ -2,7 +2,12 @@
 title: CREATE TABLE FUNCTION
 summary: Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a table function. Table functions are written in SQL; no external languages are involved.
 ---
+
+# CREATE TABLE FUNCTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE TABLE FUNCTION
 
 <FunctionDescription description="Introduced or updated: v1.2.799"/>
 
@@ -15,9 +20,9 @@ Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a table functi
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name> 
-    ( [<parameter_list>] ) 
-    RETURNS TABLE ( <column_definition_list> ) 
+CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
+    ( [<parameter_list>] )
+    RETURNS TABLE ( <column_definition_list> )
     AS $$ <sql_statement> $$
 ```
 
@@ -44,20 +49,20 @@ This consistency makes it easy to understand and switch between function types.
 ```sql
 -- Create a sample table
 CREATE OR REPLACE TABLE employees (
-    id INT, 
-    name VARCHAR(100), 
+    id INT,
+    name VARCHAR(100),
     department VARCHAR(100),
     salary DECIMAL(10,2)
 );
 
-INSERT INTO employees VALUES 
-    (1, 'John', 'Engineering', 75000), 
+INSERT INTO employees VALUES
+    (1, 'John', 'Engineering', 75000),
     (2, 'Jane', 'Marketing', 65000),
     (3, 'Bob', 'Engineering', 80000),
     (4, 'Alice', 'Marketing', 70000);
 
 -- Create a simple table function to get all employees
-CREATE OR REPLACE FUNCTION get_all_employees() 
+CREATE OR REPLACE FUNCTION get_all_employees()
 RETURNS TABLE (id INT, name VARCHAR(100), department VARCHAR(100), salary DECIMAL(10,2))
 AS $$ SELECT id, name, department, salary FROM employees $$;
 

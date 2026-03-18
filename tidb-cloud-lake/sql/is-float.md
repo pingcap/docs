@@ -2,7 +2,12 @@
 title: IS_FLOAT
 summary: Checks if the input JSON value is a float.
 ---
+
+# IS_FLOAT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## IS_FLOAT
 
 <FunctionDescription description="Introduced or updated: v1.2.368"/>
 

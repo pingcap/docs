@@ -2,7 +2,12 @@
 title: DESC CONNECTION
 summary: Describes the details of a specific connection, providing information about its type and configuration.
 ---
+
+# DESC CONNECTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DESC CONNECTION
 
 <FunctionDescription description="Introduced or updated: v1.2.208"/>
 

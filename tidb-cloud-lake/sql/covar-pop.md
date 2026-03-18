@@ -2,11 +2,16 @@
 title: COVAR_POP
 summary: Returns the population covariance of a set of number pairs.
 ---
+
+# COVAR_POP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## COVAR_POP
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>
 
-Returns the population covariance of a set of number pairs. 
+Returns the population covariance of a set of number pairs.
 
 ## Syntax
 

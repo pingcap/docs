@@ -2,12 +2,12 @@
 title: Virtual Column
 summary: Virtual columns automatically accelerate queries on semi-structured data stored in VARIANT columns. This feature provides zero-configuration performance optimization for JSON data access.
 ---
-# Virtual Column: Automatic Acceleration for JSON Data
+
+# Virtual Column
 
 import EEFeature from '@site/src/components/EEFeature';
 
 <EEFeature featureName='VIRTUAL COLUMN'/>
-
 
 Virtual columns automatically accelerate queries on semi-structured data stored in [VARIANT](/tidb-cloud-lake/sql/variant.md) columns. This feature provides **zero-configuration performance optimization** for JSON data access.
 
@@ -28,7 +28,7 @@ When querying JSON data, traditional databases must parse the entire JSON struct
 ## How It Works Automatically
 
 1. **Data Ingestion** → Databend analyzes JSON structure in VARIANT columns
-2. **Smart Detection** → System identifies frequently accessed nested fields  
+2. **Smart Detection** → System identifies frequently accessed nested fields
 3. **Background Optimization** → Virtual columns are created automatically
 4. **Query Acceleration** → Queries automatically use optimized paths
 

@@ -2,6 +2,9 @@
 title: Backup & Restore with BendSave
 summary: This tutorial walks you through how to back up and restore data using BendSave. We'll use a local MinIO instance as both the S3-compatible storage backend for Databend and the destination for storing backups.
 ---
+
+# Backup & Restore with BendSave
+
 This tutorial walks you through how to back up and restore data using BendSave. We'll use a local MinIO instance as both the S3-compatible storage backend for Databend and the destination for storing backups.
 
 ## Before You Start
@@ -9,7 +12,7 @@ This tutorial walks you through how to back up and restore data using BendSave. 
 Before you start, ensure you have the following prerequisites in place:
 
 - A Linux machine (x86_64 or aarch64 architecture): In this tutorial, we'll deploy Databend on a Linux machine. You can use a local machine, a virtual machine, or a cloud instance such as AWS EC2.
-    - [Docker](https://www.docker.com/): Used to deploy a local MinIO instance. 
+    - [Docker](https://www.docker.com/): Used to deploy a local MinIO instance.
     - [AWS CLI](https://aws.amazon.com/cli/): Used to manage buckets in MinIO.
     - If you are on AWS EC2, make sure your security group allows inbound traffic on port `8000`, as this is required for BendSQL to connect to Databend.
 
@@ -65,7 +68,7 @@ wget https://github.com/databendlabs/databend/releases/download/v1.2.25-nightly/
 tar -xzvf databend-dbg-v1.2.725-nightly-x86_64-unknown-linux-gnu.tar.gz
 ```
 
-2. Configure the **databend-query.toml** configuration file in the **configs** folder. 
+2. Configure the **databend-query.toml** configuration file in the **configs** folder.
 
 ```bash
 vi configs/databend-query.toml

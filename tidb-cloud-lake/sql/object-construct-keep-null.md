@@ -2,7 +2,12 @@
 title: OBJECT_CONSTRUCT_KEEP_NULL
 summary: Creates a JSON object with keys and values.
 ---
+
+# OBJECT_CONSTRUCT_KEEP_NULL
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## OBJECT_CONSTRUCT_KEEP_NULL
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 
@@ -60,7 +65,6 @@ SELECT OBJECT_CONSTRUCT_KEEP_NULL('key');
   |
 1 | SELECT OBJECT_CONSTRUCT_KEEP_NULL('key')
   |        ^^^^^^^^^^^^^^^^^^ The number of keys and values must be equal while evaluating function `object_construct_keep_null('key')`
-
 
 SELECT TRY_OBJECT_CONSTRUCT_KEEP_NULL('key');
 ┌─────────────────────────────────────┐

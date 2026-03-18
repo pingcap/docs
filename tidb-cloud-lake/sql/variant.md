@@ -2,6 +2,9 @@
 title: Variant
 summary: A VARIANT can store a value of any other type, including NULL, BOOLEAN, NUMBER, STRING, ARRAY, and OBJECT, and the internal value can be any level of nested structure, which is very flexible to store various data. VARIANT can also be called JSON, for more information, please refer to JSON website.
 ---
+
+# Variant
+
 A VARIANT can store a value of any other type, including NULL, BOOLEAN, NUMBER, STRING, ARRAY, and OBJECT, and the internal value can be any level of nested structure, which is very flexible to store various data. VARIANT can also be called JSON, for more information, please refer to [JSON website](https://www.json.org/json-en.html).
 
 Here's an example of inserting and querying Variant data in Databend:
@@ -62,7 +65,7 @@ CREATE TABLE user_hobbies(user_id INT64, hobbies VARIANT NULL);
 
 Insert sample data into the table:
 ```sql
-INSERT INTO user_hobbies 
+INSERT INTO user_hobbies
 VALUES
     (1, '["Cooking", "Reading", "Cycling"]'),
     (2, '["Photography", "Travel", "Swimming"]');
@@ -195,7 +198,7 @@ VALUES
   );
 
 -- Double-quote the field name "new settings"
-SELECT preferences:"new settings":color 
+SELECT preferences:"new settings":color
 FROM user_preferences;
 
 ┌──────────────────────────────────┐
@@ -207,7 +210,7 @@ FROM user_preferences;
 └──────────────────────────────────┘
 
 -- No results are returned when 'c' in 'color' is capitalized
-SELECT preferences:"new settings":Color 
+SELECT preferences:"new settings":Color
 FROM user_preferences;
 
 ┌──────────────────────────────────┐
@@ -231,7 +234,7 @@ CREATE TABLE user_pref(user_id INT64, pref VARIANT NULL);
 
 Insert sample data into the table:
 ```sql
-INSERT INTO user_pref 
+INSERT INTO user_pref
 VALUES
     (1, parse_json('{"age": 25, "isPremium": "true", "lastActive": "2023-04-10"}')),
     (2, parse_json('{"age": 30, "isPremium": "false", "lastActive": "2023-03-15"}'));

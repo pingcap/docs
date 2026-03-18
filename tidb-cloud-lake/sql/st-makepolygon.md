@@ -2,7 +2,12 @@
 title: ST_MAKEPOLYGON
 summary: Constructs a GEOMETRY or GEOGRAPHY object that represents a Polygon without holes. The function uses the specified LineString as the outer loop.
 ---
+
+# ST_MAKEPOLYGON
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_MAKEPOLYGON
 
 <FunctionDescription description="Introduced or updated: v1.2.413"/>
 

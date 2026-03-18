@@ -2,7 +2,12 @@
 title: READ_FILE
 summary: Reads the content of a file from a stage and returns it as a BINARY value. This is useful for loading raw file content (images, PDFs, binary data, etc.) directly into a table column.
 ---
+
+# READ_FILE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## READ_FILE
 
 <FunctionDescription description="Introduced or updated: v1.2.882"/>
 

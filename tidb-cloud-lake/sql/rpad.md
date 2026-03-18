@@ -2,6 +2,9 @@
 title: RPAD
 summary: Returns the string str, right-padded with the string padstr to a length of len characters. If str is longer than len, the return value is shortened to len characters.
 ---
+
+# RPAD
+
 Returns the string str, right-padded with the string padstr to a length of len characters.
 If str is longer than len, the return value is shortened to len characters.
 

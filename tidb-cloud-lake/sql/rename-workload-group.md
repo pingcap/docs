@@ -2,7 +2,12 @@
 title: RENAME WORKLOAD GROUP
 summary: Renames an existing workload group to a new name.
 ---
+
+# RENAME WORKLOAD GROUP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## RENAME WORKLOAD GROUP
 
 <FunctionDescription description="Introduced or updated: v1.2.743"/>
 
@@ -21,4 +26,3 @@ This example renames `test_workload_group_1` to `test_workload_group`:
 ```sql
 RENAME WORKLOAD GROUP test_workload_group_1 TO test_workload_group;
 ```
-

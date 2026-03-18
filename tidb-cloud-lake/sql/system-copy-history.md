@@ -2,7 +2,12 @@
 title: system.copy_history
 summary: Contains information about copy history.
 ---
+
+# system.copy_history
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system.copy_history
 
 <FunctionDescription description="Introduced or updated: v1.2.823"/>
 
@@ -28,4 +33,3 @@ select * from copy_history('my_table');
 ```
 
 Note that, the results of `system.copy_history` is respected by settings `load_file_metadata_expire_hours` which is 24 hours by default.
-

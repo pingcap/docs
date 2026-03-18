@@ -2,7 +2,12 @@
 title: MAP_KEYS
 summary: Returns the keys in a map.
 ---
+
+# MAP_KEYS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MAP_KEYS
 
 <FunctionDescription description="Introduced or updated: v1.2.429"/>
 

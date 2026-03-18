@@ -2,6 +2,9 @@
 title: BITMAP_XOR
 summary: Performs a bitwise XOR (exclusive OR) operation on the two bitmaps.
 ---
+
+# BITMAP_XOR
+
 Performs a bitwise XOR (exclusive OR) operation on the two bitmaps.
 
 ## Syntax

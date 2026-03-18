@@ -2,7 +2,12 @@
 title: system.functions
 summary: Contains information about the supported built-in scalar and aggregate.
 ---
+
+# system.functions
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system.functions
 
 <FunctionDescription description="Introduced or updated: v1.2.315"/>
 

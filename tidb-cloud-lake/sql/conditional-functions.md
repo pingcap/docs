@@ -2,6 +2,9 @@
 title: Conditional Functions
 summary: This page provides a comprehensive overview of Conditional functions in Databend, organized by functionality for easy reference.
 ---
+
+# Conditional Functions
+
 This page provides a comprehensive overview of Conditional functions in Databend, organized by functionality for easy reference.
 
 ## Basic Conditional Functions

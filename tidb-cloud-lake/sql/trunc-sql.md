@@ -2,7 +2,12 @@
 title: TRUNC
 summary: Truncates a date or timestamp to a specified precision. This function follows a widely adopted date truncation syntax, making it easier for users migrating from other database systems.
 ---
+
+# TRUNC
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TRUNC
 
 <FunctionDescription description="Introduced: v1.2.745"/>
 

@@ -2,7 +2,8 @@
 title: Data Integration
 summary: The Data Integration feature in Databend Cloud enables you to load data from external sources into Databend through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the Databend Cloud console.
 ---
-# Data Integration Overview
+
+# Data Integration
 
 The Data Integration feature in Databend Cloud enables you to load data from external sources into Databend through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the Databend Cloud console.
 

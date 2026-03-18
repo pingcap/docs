@@ -2,6 +2,9 @@
 title: H3_INDEXES_ARE_NEIGHBORS
 summary: Returns whether or not the provided H3 indexes are neighbors.
 ---
+
+# H3_INDEXES_ARE_NEIGHBORS
+
 Returns whether or not the provided [H3](https://eng.uber.com/h3/) indexes are neighbors.
 
 ## Syntax

@@ -2,7 +2,12 @@
 title: CREATE TABLE
 summary: Creating tables is one of the most complicated operations for many databases because you might need to.
 ---
+
+# CREATE TABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE TABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.821"/>
 
@@ -217,9 +222,7 @@ Databend's syntax is difference from MySQL mainly in the data type and some spec
 |:----------|:--------------|:-----------------------|
 | CREATE    | Global, Table | Creates a table.       |
 
-
 To create a table, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE [privilege](/tidb-cloud-lake/guides/privileges.md#table-privileges).
-
 
 ## Examples
 

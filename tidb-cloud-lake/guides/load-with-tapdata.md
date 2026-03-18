@@ -2,6 +2,9 @@
 title: Tapdata
 summary: Tapdata is a platform-oriented product designed for data services, aimed at helping enterprises break down multiple data silos, achieve rapid data delivery, and enhance data transfer efficiency through real-time data synchronization. We also support the creation of tasks through a low-code approach, making it easy to create tasks with a simple drag-and-drop of nodes, effectively reducing development complexity and shortening project deployment cycles.
 ---
+
+# Tapdata
+
 [Tapdata](https://tapdata.net) is a platform-oriented product designed for data services, aimed at helping enterprises break down multiple data silos, achieve rapid data delivery, and enhance data transfer efficiency through real-time data synchronization. We also support the creation of tasks through a low-code approach, making it easy to create tasks with a simple drag-and-drop of nodes, effectively reducing development complexity and shortening project deployment cycles.
 
 Databend is one of the data sources supported by Tapdata. You can use Tapdata to synchronize data from other platforms to Databend, using Databend as the **destination** for data migration/synchronization.

@@ -2,7 +2,12 @@
 title: ST_NPOINTS
 summary: Returns the number of points in a GEOMETRY or GEOGRAPHY object.
 ---
+
+# ST_NPOINTS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_NPOINTS
 
 <FunctionDescription description="Introduced or updated: v1.2.566"/>
 

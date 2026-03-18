@@ -2,6 +2,9 @@
 title: ALTER CLUSTER KEY
 summary: Changes the cluster key for a table.
 ---
+
+# ALTER CLUSTER KEY
+
 Changes the cluster key for a table.
 
 See also:
@@ -33,5 +36,5 @@ SELECT * FROM clustering_information('db1','playground');
 ALTER TABLE playground DROP CLUSTER KEY;
 
 -- Add cluster key by expressions
-ALTER TABLE playground CLUSTER BY(rand()+a); 
+ALTER TABLE playground CLUSTER BY(rand()+a);
 ```

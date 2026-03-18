@@ -2,7 +2,12 @@
 title: CREATE PROCEDURE
 summary: Defines a stored procedure that executes SQL operations and returns a result.
 ---
+
+# CREATE PROCEDURE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE PROCEDURE
 
 <FunctionDescription description="Introduced or updated: v1.2.816"/>
 
@@ -40,9 +45,7 @@ $$;
 |:-----------------|:------------|:---------------------|
 | CREATE PROCEDURE | Global      | Creates a procedure. |
 
-
 To create a procedure, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE PROCEDURE [privilege](/tidb-cloud-lake/guides/privileges.md).
-
 
 ## Examples
 

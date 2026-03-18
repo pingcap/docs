@@ -2,6 +2,9 @@
 title: MySQL
 summary: The MySQL data integration enables you to sync data from MySQL databases into Databend in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
 ---
+
+# MySQL
+
 The MySQL data integration enables you to sync data from MySQL databases into Databend in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
 
 ## Sync Modes

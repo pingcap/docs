@@ -2,7 +2,12 @@
 title: WEEKOFYEAR
 summary: Alias for TO_WEEK_OF_YEAR.
 ---
+
+# WEEKOFYEAR
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## WEEKOFYEAR
 
 <FunctionDescription description="Introduced or updated: v1.2.375"/>
 

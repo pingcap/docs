@@ -2,7 +2,12 @@
 title: ARRAY_OVERLAP
 summary: Checks if there is any overlap between two JSON arrays and returns true if there are common elements; otherwise, it returns false.
 ---
+
+# ARRAY_OVERLAP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_OVERLAP
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 
@@ -29,17 +34,16 @@ The function returns a boolean value:
 
 ```sql
 SELECT ARRAY_OVERLAP(
-    '["apple", "banana", "cherry"]'::JSON,  
+    '["apple", "banana", "cherry"]'::JSON,
     '["banana", "kiwi", "mango"]'::JSON
 );
 
 -[ RECORD 1 ]-----------------------------------
 array_overlap('["apple", "banana", "cherry"]'::VARIANT, '["banana", "kiwi", "mango"]'::VARIANT): true
 
-
 SELECT ARRAY_OVERLAP(
-    '["grape", "orange"]'::JSON,  
-    '["apple", "kiwi"]'::JSON     
+    '["grape", "orange"]'::JSON,
+    '["apple", "kiwi"]'::JSON
 );
 
 -[ RECORD 1 ]-----------------------------------

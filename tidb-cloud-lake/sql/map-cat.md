@@ -2,7 +2,12 @@
 title: MAP_CAT
 summary: Returns the concatenatation of two MAPs.
 ---
+
+# MAP_CAT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MAP_CAT
 
 <FunctionDescription description="Introduced or updated: v1.2.459"/>
 

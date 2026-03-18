@@ -2,6 +2,9 @@
 title: TO_INT16
 summary: Converts a value to INT16 data type.
 ---
+
+# TO_INT16
+
 Converts a value to INT16 data type.
 
 ## Syntax

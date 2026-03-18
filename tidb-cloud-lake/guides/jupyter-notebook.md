@@ -2,6 +2,9 @@
 title: Jupyter Notebook
 summary: Jupyter Notebook is a web-based interactive application that enables you to create notebook documents that feature live code, interactive plots, widgets, equations, images, etc., and share these documents easily. It is also quite versatile as it can support many programming languages via kernels such as Julia, Python, Ruby, Scala, Haskell, and R.
 ---
+
+# Jupyter Notebook
+
 [Jupyter Notebook](https://jupyter.org) is a web-based interactive application that enables you to create notebook documents that feature live code, interactive plots, widgets, equations, images, etc., and share these documents easily. It is also quite versatile as it can support many programming languages via kernels such as Julia, Python, Ruby, Scala, Haskell, and R.
 
 With the SQLAlchemy library in Python or [ipython-sql](https://github.com/catherinedevlin/ipython-sql), you can establish a connection to Databend and Databend Cloud within a Jupyter Notebook, allowing you to execute queries and visualize your data from Databend directly in the notebook.

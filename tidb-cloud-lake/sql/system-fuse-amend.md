@@ -2,7 +2,12 @@
 title: SYSTEM$FUSE_AMEND
 summary: Recovers table data from S3-compatible object storage.
 ---
+
+# SYSTEM$FUSE_AMEND
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SYSTEM$FUSE_AMEND
 
 <FunctionDescription description="Introduced or updated: v1.2.609"/>
 

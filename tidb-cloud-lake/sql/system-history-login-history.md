@@ -2,7 +2,12 @@
 title: system_history.login_history
 summary: Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
 ---
+
+# system_history.login_history
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system_history.login_history
 
 <FunctionDescription description="Introduced or updated: v1.2.764"/>
 
@@ -16,7 +21,6 @@ import EEFeature from '@site/src/components/EEFeature';
 - **Compliance Auditing**: Track user authentication for regulatory requirements
 - **Access Pattern Analysis**: Monitor when and how users access the system
 - **Incident Investigation**: Investigate security incidents and authentication issues
-
 
 ## Fields
 
@@ -51,7 +55,7 @@ connection_uri: /session/login?disable_session_token=true
     user_agent: bendsql/0.26.2-unknown
     session_id: 9a3ba9d8-44d9-49ca-9446-501deaca15c9
        node_id: 765ChL6Ra949Ioeb5LrTs
- error_message: 
+ error_message:
 ```
 
 Login failed example:
@@ -62,11 +66,11 @@ SELECT * FROM system_history.login_history LIMIT 1;
     event_time: 2025-06-03 06:07:32.512021
        handler: MySQL
     event_type: LoginFailed
-connection_uri: 
+connection_uri:
      auth_type: Password
      user_name: root1
      client_ip: 127.0.0.1:62050
-    user_agent: 
+    user_agent:
     session_id: 4fb87258-865a-402c-8680-e3be1e01b4e6
        node_id: 765ChL6Ra949Ioeb5LrTs
  error_message: UnknownUser. Code: 2201, Text = User 'root1'@'%' does not exist..

@@ -2,7 +2,12 @@
 title: SHOW INDEXES
 summary: Shows the created indexes. Equivalent to SELECT * FROM system.indexes.
 ---
+
+# SHOW INDEXES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW INDEXES
 
 <FunctionDescription description="Introduced or updated: v1.2.190"/>
 
@@ -24,7 +29,6 @@ CREATE TABLE t1(a int,b int);
 CREATE AGGREGATING INDEX agg_idx AS SELECT avg(a), abs(sum(b)), abs(b) AS bs FROM t1 GROUP BY bs;
 
 SHOW INDEXES;
-
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │   name  │     type    │                               original                               │                                     definition                                     │         created_on         │      updated_on     │

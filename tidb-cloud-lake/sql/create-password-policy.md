@@ -2,7 +2,12 @@
 title: CREATE PASSWORD POLICY
 summary: Creates a new password policy in Databend.
 ---
+
+# CREATE PASSWORD POLICY
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE PASSWORD POLICY
 
 <FunctionDescription description="Introduced or updated: v1.2.339"/>
 

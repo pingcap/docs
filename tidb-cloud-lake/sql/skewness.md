@@ -2,6 +2,9 @@
 title: SKEWNESS
 summary: Aggregate function.
 ---
+
+# SKEWNESS
+
 Aggregate function.
 
 The `SKEWNESS()` function returns the skewness of all input values.
@@ -53,6 +56,3 @@ FROM temperature_data;
 |----------------------|
 |      0.68            |
 ```
-
-
-

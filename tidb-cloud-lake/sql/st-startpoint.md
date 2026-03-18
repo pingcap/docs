@@ -2,7 +2,12 @@
 title: ST_STARTPOINT
 summary: Returns the first Point in a LineString.
 ---
+
+# ST_STARTPOINT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_STARTPOINT
 
 <FunctionDescription description="Introduced or updated: v1.2.458"/>
 

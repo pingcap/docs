@@ -2,6 +2,9 @@
 title: How TiDB Cloud Lake Optimizer Works
 summary: Databend's query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators.
 ---
+
+# How TiDB Cloud Lake Optimizer Works
+
 Databend's query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators.
 
 The same optimizer pipeline powers analytic reporting, JSON search, vector retrieval, and geospatial search—**Databend maintains one optimizer that understands every data type it stores.**

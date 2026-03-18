@@ -2,7 +2,12 @@
 title: WITH Stream Hints
 summary: Specifies various stream configuration options using hints to control how the stream is processed.
 ---
+
+# WITH Stream Hints
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## WITH Stream Hints
 
 <FunctionDescription description="Introduced or updated: v1.2.670"/>
 

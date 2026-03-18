@@ -2,6 +2,9 @@
 title: Ingest Kafka with Bend Ingest
 summary: In this tutorial, we'll guide you through setting up a Kafka environment using Docker and loading messages from Kafka into Databend Cloud with bend-ingest-kafka.
 ---
+
+# Ingest Kafka with Bend Ingest
+
 In this tutorial, we'll guide you through setting up a Kafka environment using Docker and loading messages from Kafka into Databend Cloud with [bend-ingest-kafka](https://github.com/databendcloud/bend-ingest-kafka).
 
 ### Step 1: Setting up Kafka Environment
@@ -124,7 +127,7 @@ bend-ingest-kafka \
   --kafka-bootstrap-servers="localhost:9092" \
   --kafka-topic="test-topic" \
   --databend-dsn="<your-dsn>" \
-  --is-json-transform=false 
+  --is-json-transform=false
 ```
 
 You will get a new table in the `doc` database, containing the following rows:

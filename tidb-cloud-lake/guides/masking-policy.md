@@ -2,8 +2,13 @@
 title: Masking Policy
 summary: Masking policies protect sensitive data by dynamically transforming column values during query execution. They enable role-based access to confidential information—authorized users see actual data, while others see masked values.
 ---
+
+# Masking Policy
+
 import IndexOverviewList from '@site/src/components/IndexOverviewList';
 import EEFeature from '@site/src/components/EEFeature';
+
+## Masking Policy
 
 <EEFeature featureName='MASKING POLICY'/>
 

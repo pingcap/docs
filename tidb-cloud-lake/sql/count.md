@@ -2,6 +2,9 @@
 title: COUNT
 summary: The COUNT() function returns the number of records returned by a SELECT query.
 ---
+
+# COUNT
+
 The COUNT() function returns the number of records returned by a SELECT query.
 
 > **Note:**

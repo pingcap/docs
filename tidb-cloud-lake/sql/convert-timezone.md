@@ -2,7 +2,12 @@
 title: CONVERT_TIMEZONE
 summary: Converts a timestamp from one timezone to another and requires a valid IANA destination timezone name.
 ---
+
+# CONVERT_TIMEZONE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CONVERT_TIMEZONE
 
 <FunctionDescription description="Introduced or updated: v1.2.680"/>
 

@@ -2,7 +2,12 @@
 title: SHOW WAREHOUSES
 summary: Lists all warehouses visible to the current tenant.
 ---
+
+# SHOW WAREHOUSES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW WAREHOUSES
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>
 

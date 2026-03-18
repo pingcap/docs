@@ -2,8 +2,13 @@
 title: Superset
 summary: Superset is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geospatial charts.
 ---
+
+# Superset
+
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
+
+## Superset
 
 [Superset](https://superset.apache.org/) is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geospatial charts.
 
@@ -26,7 +31,7 @@ These steps involve creating a customized Superset Docker image with Databend in
 FROM apache/superset
 # Switching to root to install the required packages
 USER root
-RUN pip install databend-py 
+RUN pip install databend-py
 RUN pip install databend-sqlalchemy
 # Switching back to using the `superset` user
 USER superset
@@ -74,7 +79,6 @@ docker exec -it superset superset init
 
 </StepContent>
 <StepContent number="3">
-
 
 ### Connecting to Databend Cloud
 

@@ -2,6 +2,9 @@
 title: Hash Functions
 summary: This page provides a comprehensive overview of Hash functions in Databend, organized by functionality for easy reference.
 ---
+
+# Hash Functions
+
 This page provides a comprehensive overview of Hash functions in Databend, organized by functionality for easy reference.
 
 ## Cryptographic Hash Functions
@@ -28,7 +31,7 @@ This page provides a comprehensive overview of Hash functions in Databend, organ
 
 ```sql
 -- Calculate MD5 hash for file content verification
-SELECT 
+SELECT
   filename,
   MD5(file_content) AS content_hash
 FROM files
@@ -39,7 +42,7 @@ ORDER BY filename;
 
 ```sql
 -- Hash sensitive data before storing or processing
-SELECT 
+SELECT
   user_id,
   SHA2(email, 256) AS hashed_email,
   SHA2(phone_number, 256) AS hashed_phone
@@ -50,7 +53,7 @@ FROM users;
 
 ```sql
 -- Use hash functions for data distribution
-SELECT 
+SELECT
   XXHASH64(customer_id) % 10 AS partition_id,
   COUNT(*) AS records_count
 FROM orders

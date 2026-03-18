@@ -2,7 +2,12 @@
 title: DIVNULL
 summary: Returns the quotient by dividing the first number by the second one. Returns NULL if the second number is 0 or NULL.
 ---
+
+# DIVNULL
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DIVNULL
 
 <FunctionDescription description="Introduced or updated: v1.2.345"/>
 

@@ -2,6 +2,9 @@
 title: YEARWEEK
 summary: Returns the year and week number in YYYYWW format, according to ISO week date. Week 1 is the week with the first Thursday of the year.
 ---
+
+# YEARWEEK
+
 Returns the year and week number in `YYYYWW` format, according to ISO week date. Week 1 is the week with the first Thursday of the year.
 
 ## Syntax
@@ -19,7 +22,7 @@ UInt32.
 ```sql
 SELECT
   YEARWEEK('2024-01-01') AS yw1,
-  YEARWEEK('2024-12-31') AS yw2;   
+  YEARWEEK('2024-12-31') AS yw2;
 ```
 
 ```sql

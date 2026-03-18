@@ -2,14 +2,16 @@
 title: JSON_PATH_QUERY_FIRST
 summary: Get the first JSON item returned by JSON path for the specified JSON value.
 ---
-Get the first JSON item returned by JSON path for the specified JSON value. 
+
+# JSON_PATH_QUERY_FIRST
+
+Get the first JSON item returned by JSON path for the specified JSON value.
 
 ## Syntax
 
 ```sql
 JSON_PATH_QUERY_FIRST(<variant>, '<path_name>')
 ```
-
 
 ## Return Type
 

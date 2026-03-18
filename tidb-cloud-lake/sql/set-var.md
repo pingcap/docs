@@ -2,6 +2,9 @@
 title: SET_VAR
 summary: SET_VAR is used to specify optimizer hints within a single SQL statement, allowing for finer control over the execution plan of that specific statement. This includes.
 ---
+
+# SET_VAR
+
 SET_VAR is used to specify optimizer hints within a single SQL statement, allowing for finer control over the execution plan of that specific statement. This includes:
 
 > **Note:**
@@ -15,7 +18,7 @@ SET_VAR is used to specify optimizer hints within a single SQL statement, allowi
 
 - Control the deduplication behavior on [INSERT](/tidb-cloud-lake/sql/insert.md), [UPDATE](/tidb-cloud-lake/sql/update.md), or [REPLACE](/tidb-cloud-lake/sql/replace.md) operations with the label *deduplicate_label*. For those operations with a deduplicate_label in the SQL statements, Databend executes only the first statement, and subsequent statements with the same deduplicate_label value are ignored, regardless of their intended data modifications. Please note that once you set a deduplicate_label, it will remain in effect for a period of 24 hours. To understand how the deduplicate_label assists in deduplication, see [Example 3: Set Deduplicate Label](#example-3-set-deduplicate-label).
 
-See also: 
+See also:
 - [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md)
 - [SET](/tidb-cloud-lake/sql/set.md)
 

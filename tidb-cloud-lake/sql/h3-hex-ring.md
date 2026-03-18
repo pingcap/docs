@@ -2,6 +2,9 @@
 title: H3_HEX_RING
 summary: Returns the "hollow" ring of hexagons at exactly grid distance k from the given H3 index.
 ---
+
+# H3_HEX_RING
+
 Returns the "hollow" ring of hexagons at exactly grid distance `k` from the given [H3](https://eng.uber.com/h3/) index.
 
 ## Syntax

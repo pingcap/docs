@@ -2,9 +2,12 @@
 title: DIV
 summary: Returns the quotient by dividing the first number by the second one, rounding down to the closest smaller integer. Equivalent to the division operator //.
 ---
+
+# DIV
+
 Returns the quotient by dividing the first number by the second one, rounding down to the closest smaller integer. Equivalent to the division operator `//`.
 
-See also: 
+See also:
 
 - [DIV0](/tidb-cloud-lake/sql/div0.md)
 - [DIVNULL](/tidb-cloud-lake/sql/divnull.md)

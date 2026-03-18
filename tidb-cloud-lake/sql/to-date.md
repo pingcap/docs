@@ -2,7 +2,12 @@
 title: TO_DATE
 summary: Converts an expression to a date, including.
 ---
+
+# TO_DATE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_DATE
 
 <FunctionDescription description="Introduced or updated: v1.1.39"/>
 

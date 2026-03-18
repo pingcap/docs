@@ -2,6 +2,9 @@
 title: ROWS BETWEEN
 summary: Defines a window frame using row-based boundaries for window functions.
 ---
+
+# ROWS BETWEEN
+
 Defines a window frame using row-based boundaries for window functions.
 
 ## Overview
@@ -67,8 +70,8 @@ INSERT INTO sales VALUES
 ```sql
 SELECT sale_date, product, amount,
        SUM(amount) OVER (
-           PARTITION BY product 
-           ORDER BY sale_date 
+           PARTITION BY product
+           ORDER BY sale_date
            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
        ) AS running_total
 FROM sales
@@ -96,8 +99,8 @@ sale_date   | product | amount | running_total
 ```sql
 SELECT sale_date, product, amount,
        AVG(amount) OVER (
-           PARTITION BY product 
-           ORDER BY sale_date 
+           PARTITION BY product
+           ORDER BY sale_date
            ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
        ) AS moving_avg_3day
 FROM sales
@@ -120,8 +123,8 @@ sale_date   | product | amount | moving_avg_3day
 ```sql
 SELECT sale_date, product, amount,
        SUM(amount) OVER (
-           PARTITION BY product 
-           ORDER BY sale_date 
+           PARTITION BY product
+           ORDER BY sale_date
            ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
        ) AS centered_sum
 FROM sales
@@ -144,8 +147,8 @@ sale_date   | product | amount | centered_sum
 ```sql
 SELECT sale_date, product, amount,
        MIN(amount) OVER (
-           PARTITION BY product 
-           ORDER BY sale_date 
+           PARTITION BY product
+           ORDER BY sale_date
            ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING
        ) AS min_next_3days
 FROM sales
@@ -168,13 +171,13 @@ sale_date   | product | amount | min_next_3days
 ```sql
 SELECT sale_date, product, amount,
        MAX(amount) OVER (
-           PARTITION BY product 
-           ORDER BY sale_date 
+           PARTITION BY product
+           ORDER BY sale_date
            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
        ) AS max_in_partition,
        MIN(amount) OVER (
-           PARTITION BY product 
-           ORDER BY sale_date 
+           PARTITION BY product
+           ORDER BY sale_date
            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
        ) AS min_in_partition
 FROM sales
@@ -200,7 +203,7 @@ sale_date   | product | amount | max_in_partition | min_in_partition
 -- Running total
 SUM(column) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
 
--- Running average  
+-- Running average
 AVG(column) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
 
 -- Running count
@@ -212,7 +215,7 @@ COUNT(*) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT RO
 -- Running total with actual table
 SELECT sale_date, product, amount,
        SUM(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
        ) AS running_total
 FROM sales
@@ -237,7 +240,7 @@ AVG(column) OVER (ORDER BY sort_col ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)
 -- 3-day moving average
 SELECT sale_date, amount,
        AVG(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
        ) AS moving_avg_3day
 FROM sales
@@ -250,7 +253,7 @@ ORDER BY sale_date;
 -- First 3 rows of partition
 SUM(column) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING)
 
--- Last 3 rows of partition  
+-- Last 3 rows of partition
 SUM(column) OVER (ORDER BY sort_col ROWS BETWEEN 2 PRECEDING AND UNBOUNDED FOLLOWING)
 
 -- Fixed window of 5 rows
@@ -262,7 +265,7 @@ AVG(column) OVER (ORDER BY sort_col ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
 -- Fixed 5-row window average
 SELECT sale_date, amount,
        AVG(amount) OVER (
-           ORDER BY sale_date 
+           ORDER BY sale_date
            ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING
        ) AS avg_5row_window
 FROM sales
@@ -285,7 +288,7 @@ ORDER BY sale_date;
 -- For row 1: ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
 -- Actual window: CURRENT ROW AND 1 FOLLOWING (no preceding row exists)
 
--- For last row: ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING  
+-- For last row: ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
 -- Actual window: 1 PRECEDING AND CURRENT ROW (no following row exists)
 ```
 

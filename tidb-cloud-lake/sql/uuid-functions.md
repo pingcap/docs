@@ -2,6 +2,9 @@
 title: UUID Functions
 summary: This page provides reference information for the UUID-related functions in Databend. These functions generate and work with Universally Unique Identifiers (UUIDs).
 ---
+
+# UUID Functions
+
 This page provides reference information for the UUID-related functions in Databend. These functions generate and work with Universally Unique Identifiers (UUIDs).
 
 ## UUID Generation Functions
@@ -25,7 +28,7 @@ CREATE TABLE users (
 );
 
 -- Insert data without specifying UUID
-INSERT INTO users (username, email) 
+INSERT INTO users (username, email)
 VALUES ('johndoe', 'john@example.com');
 
 -- Query to see the auto-generated UUID
@@ -36,7 +39,7 @@ SELECT * FROM users;
 
 ```sql
 -- Generate multiple UUIDs for distributed event tracking
-SELECT 
+SELECT
   GEN_RANDOM_UUID() AS event_id,
   'user_login' AS event_type,
   NOW() AS event_time

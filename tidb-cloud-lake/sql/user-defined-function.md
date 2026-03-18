@@ -2,6 +2,9 @@
 title: User-Defined Function
 summary: User-Defined Functions (UDFs) in Databend allow you to create custom operations tailored to your specific data processing needs. This page highlights the commands you will use most often and helps you choose the right function type for your use case.
 ---
+
+# User-Defined Function
+
 User-Defined Functions (UDFs) in Databend allow you to create custom operations tailored to your specific data processing needs. This page highlights the commands you will use most often and helps you choose the right function type for your use case.
 
 ## Function Management Commands
@@ -34,7 +37,7 @@ All local UDF types use consistent `$$` syntax:
 -- Scalar Function
 CREATE FUNCTION func_name(param TYPE) RETURNS TYPE AS $$ expression $$;
 
--- Tabular Function  
+-- Tabular Function
 CREATE FUNCTION func_name(param TYPE) RETURNS TABLE(...) AS $$ query $$;
 
 -- Scalar Function (Python/JavaScript)

@@ -2,9 +2,14 @@
 title: EXPLAIN PERF
 summary: Profiles query CPU usage and returns an HTML flame graph collected from all cluster nodes.
 ---
+
+# EXPLAIN PERF
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+## EXPLAIN PERF
 
 <FunctionDescription description="Introduced or updated: v1.2.765"/>
 

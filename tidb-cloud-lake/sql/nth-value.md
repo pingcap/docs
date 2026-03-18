@@ -2,7 +2,12 @@
 title: NTH_VALUE
 summary: Returns the value at the specified position (N) within the window frame.
 ---
+
+# NTH_VALUE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## NTH_VALUE
 
 <FunctionDescription description="Introduced or updated: v1.2.697"/>
 
@@ -17,13 +22,13 @@ See also:
 
 ```sql
 NTH_VALUE(
-    expression, 
+    expression,
     n
-) 
-[ { RESPECT | IGNORE } NULLS ] 
+)
+[ { RESPECT | IGNORE } NULLS ]
 OVER (
-    [ PARTITION BY partition_expression ] 
-    ORDER BY order_expression 
+    [ PARTITION BY partition_expression ]
+    ORDER BY order_expression
     [ window_frame ]
 )
 ```

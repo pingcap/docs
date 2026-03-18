@@ -2,7 +2,12 @@
 title: SHOW FUNCTIONS
 summary: Lists the currently supported built-in scalar and aggregate functions.
 ---
+
+# SHOW FUNCTIONS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW FUNCTIONS
 
 <FunctionDescription description="Introduced or updated: v1.2.315"/>
 

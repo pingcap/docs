@@ -2,7 +2,12 @@
 title: LISTAGG
 summary: Concatenates values from multiple rows into a single string, separated by a specified delimiter. This operation can be performed using two different function types - Aggregate Function The concatenation happens across all rows in the entire result set. - Window Function The concatenation happens within each partition of the result set, as defined by the PARTITION BY clause.
 ---
+
+# LISTAGG
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## LISTAGG
 
 <FunctionDescription description="Introduced or updated: v1.2.725"/>
 

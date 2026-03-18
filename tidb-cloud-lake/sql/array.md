@@ -2,6 +2,9 @@
 title: Array
 summary: Array of defined data type.
 ---
+
+# Array
+
 ## Overview
 
 `ARRAY(T)` stores variable-length collections whose elements all share the type `T`. Define the element type when creating a table and use array functions to read or transform the values.

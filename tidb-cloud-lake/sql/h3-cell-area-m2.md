@@ -2,6 +2,9 @@
 title: H3_CELL_AREA_M2
 summary: Returns the exact area of specific cell in square meters.
 ---
+
+# H3_CELL_AREA_M2
+
 Returns the exact area of specific cell in square meters.
 
 ## Syntax

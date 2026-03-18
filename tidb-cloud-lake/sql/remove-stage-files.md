@@ -2,6 +2,9 @@
 title: REMOVE STAGE FILES
 summary: Removes files from a stage.
 ---
+
+# REMOVE STAGE FILES
+
 Removes files from a stage.
 
 See also:

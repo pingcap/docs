@@ -2,7 +2,12 @@
 title: ALTER NOTIFICATION INTEGRATION
 summary: Alter the settings of a named notification integration that can be used to send notifications to external messaging services.
 ---
+
+# ALTER NOTIFICATION INTEGRATION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ALTER NOTIFICATION INTEGRATION
 
 <FunctionDescription description="Introduced or updated: v1.2.371"/>
 
@@ -24,7 +29,6 @@ ALTER NOTIFICATION INTEGRATION [ IF NOT EXISTS ] <name> SET
 |---------------------|-------------|
 | name                | The name of the notification integration. This is a mandatory field. |
 
-
 | Optional Parameters [(Webhook)](#webhook-notification) | Description |
 |---------------------|-------------|
 | enabled             | Whether the notification integration is enabled. |
@@ -42,5 +46,3 @@ ALTER NOTIFICATION INTEGRATION SampleNotification SET enabled = true
 ```
 
 This example enables the notification integration named `SampleNotification`.
-
-

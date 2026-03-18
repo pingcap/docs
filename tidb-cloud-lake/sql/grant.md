@@ -2,7 +2,12 @@
 title: GRANT
 summary: Grants privileges, roles, and ownership for a specific database object. This includes.
 ---
+
+# GRANT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## GRANT
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>
 
@@ -44,7 +49,7 @@ To understand what a privilege is and how it works, see [Privileges](/tidb-cloud
 > ```
 
 ```sql
-GRANT { 
+GRANT {
         schemaObjectPrivileges | ALL [ PRIVILEGES ] ON <privileges_level>
       }
 TO ROLE <role_name>
@@ -56,19 +61,19 @@ Where:
 schemaObjectPrivileges ::=
 -- For TABLE
   { SELECT | INSERT }
-  
+
 -- For SCHEMA
   { CREATE | DROP | ALTER }
-  
+
 -- For USER
   { CREATE USER }
-  
+
 -- For ROLE
   { CREATE ROLE}
-  
+
 -- For STAGE
   { READ, WRITE }
-           
+
 -- For UDF
   { USAGE }
 
@@ -157,7 +162,7 @@ CREATE ROLE user1_role;
 ```
 
 Grant the `ALL` privilege on all existing tables in the `default` database to the role `user1_role`:
- 
+
 ```sql
 GRANT ALL ON default.* TO ROLE user1_role;
 ```
@@ -219,7 +224,7 @@ SHOW GRANTS FOR ROLE user1_role;
 Grant the `SELECT` privilege on all existing tables in the `mydb` database to the role `role1`:
 
 Create role:
-```sql 
+```sql
 CREATE ROLE role1;
 ```
 

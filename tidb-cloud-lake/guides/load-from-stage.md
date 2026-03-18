@@ -2,6 +2,9 @@
 title: Loading from Stage
 summary: Databend enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using BendSQL, and then employ the COPY INTO command to load the data from the staged file. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see Input & Output File Formats.
 ---
+
+# Loading from Stage
+
 Databend enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md), and then employ the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command to load the data from the staged file. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ![image](/media/tidb-cloud-lake/load-data-from-stage.jpeg)
@@ -133,9 +136,9 @@ books.parquet                      |   998|"88432bf90aadb79073682988b39d461c"|20
 1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
 ```sql
-COPY INTO books 
-FROM @my_internal_stage 
-FILES = ('books.parquet') 
+COPY INTO books
+FROM @my_internal_stage
+FILES = ('books.parquet')
 FILE_FORMAT = (
     TYPE = 'PARQUET'
 );
@@ -164,8 +167,8 @@ Follow this tutorial to upload the sample file to an external stage and load dat
 CREATE STAGE my_external_stage
     URL = 's3://databend'
     CONNECTION = (
-        ENDPOINT_URL = 'http://127.0.0.1:9000', 
-        ACCESS_KEY_ID = 'ROOTUSER', 
+        ENDPOINT_URL = 'http://127.0.0.1:9000',
+        ACCESS_KEY_ID = 'ROOTUSER',
         SECRET_ACCESS_KEY = 'CHANGEME123'
     );
 ```

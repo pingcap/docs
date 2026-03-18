@@ -2,6 +2,9 @@
 title: H3_IS_VALID
 summary: Checks if the given H3 index is valid.
 ---
+
+# H3_IS_VALID
+
 Checks if the given [H3](https://eng.uber.com/h3/) index is valid.
 
 ## Syntax

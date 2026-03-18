@@ -2,12 +2,17 @@
 title: System History Tables
 summary: Databend's system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
 ---
+
+# System History Tables
+
 import EEFeature from '@site/src/components/EEFeature';
 import DetailsWrap from '@site/src/components/DetailsWrap';
 
+## System History Tables
+
 <EEFeature featureName='SYSTEM HISTORY'/>
 
-# System History Tables
+## System History Tables
 
 Databend's system history tables provide **Data Governance** capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
 
@@ -107,7 +112,6 @@ root = "history_tables"
 endpoint_url = "https://s3.amazonaws.com"
 access_key_id = "your-access-key"
 secret_access_key = "your-secret-key"
-
 
 [[log.history.tables]]
 table_name = "query_history"

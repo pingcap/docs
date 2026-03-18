@@ -2,6 +2,9 @@
 title: MAX
 summary: Aggregate function.
 ---
+
+# MAX
+
 Aggregate function.
 
 The MAX() function returns the maximum value in a set of values.

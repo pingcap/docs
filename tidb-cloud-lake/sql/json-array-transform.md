@@ -2,7 +2,12 @@
 title: JSON_ARRAY_TRANSFORM
 summary: Transforms each element of a JSON array using a specified transformation Lambda expression. For more information about Lambda expression, see Lambda Expressions.
 ---
+
+# JSON_ARRAY_TRANSFORM
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## JSON_ARRAY_TRANSFORM
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

@@ -2,6 +2,9 @@
 title: HUMANIZE_NUMBER
 summary: Returns a readable number.
 ---
+
+# HUMANIZE_NUMBER
+
 Returns a readable number.
 
 ## Syntax
@@ -15,7 +18,6 @@ HUMANIZE_NUMBER(x);
 | Arguments | Description                |
 |-----------|----------------------------|
 | x         | The numerical size.        |
-
 
 ## Return Type
 

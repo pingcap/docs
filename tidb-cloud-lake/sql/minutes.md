@@ -2,7 +2,12 @@
 title: TO_MINUTES
 summary: Converts a specified number of minutes into an Interval type.
 ---
+
+# TO_MINUTES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_MINUTES
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

@@ -2,6 +2,9 @@
 title: FLOOR
 summary: Rounds the number down.
 ---
+
+# FLOOR
+
 Rounds the number down.
 
 ## Syntax

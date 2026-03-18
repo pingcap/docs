@@ -2,7 +2,12 @@
 title: bool_or
 summary: Returns true if at least one input value is true, otherwise false.
 ---
+
+# bool_or
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## bool_or
 
 <FunctionDescription description="Introduced or updated: v1.2.756"/>
 

@@ -2,7 +2,12 @@
 title: CREATE STAGE
 summary: Creates an internal or external stage.
 ---
+
+# CREATE STAGE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE STAGE
 
 <FunctionDescription description="Introduced or updated: v1.2.339"/>
 
@@ -70,7 +75,6 @@ copyOptions ::=
 | `SIZE_LIMIT = <num>` | Number (> 0) that specifies the maximum rows of data to be loaded for a given COPY statement. Default `0`                     | Optional |
 | `PURGE = <bool>`     | True specifies that the command will purge the files in the stage if they are loaded successfully into table. Default `false` | Optional |
 
-
 ## Access control requirements
 
 | Privilege | Object Type   | Description                                                               |
@@ -108,8 +112,8 @@ CREATE CONNECTION my_s3_connection
   SECRET_ACCESS_KEY = '<your-secret-access-key>';
 
 -- Create stage using the connection
-CREATE STAGE my_s3_stage 
-  URL='s3://load/files/' 
+CREATE STAGE my_s3_stage
+  URL='s3://load/files/'
   CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 
 DESC STAGE my_s3_stage;
@@ -182,8 +186,8 @@ CREATE CONNECTION iam_s3_connection
   EXTERNAL_ID = 'my-external-id-123';
 
 -- Create stage using the connection
-CREATE STAGE iam_external_stage 
-  URL = 's3://databend-toronto' 
+CREATE STAGE iam_external_stage
+  URL = 's3://databend-toronto'
   CONNECTION = (CONNECTION_NAME = 'iam_s3_connection');
 ```
 

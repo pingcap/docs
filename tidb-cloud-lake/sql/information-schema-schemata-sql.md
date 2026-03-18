@@ -2,6 +2,9 @@
 title: information_schema.schemata
 summary: Provides metadata about all databases in the system.
 ---
+
+# information_schema.schemata
+
 Provides metadata about all databases in the system.
 
 ```sql

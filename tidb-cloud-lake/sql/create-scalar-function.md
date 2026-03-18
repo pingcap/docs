@@ -2,7 +2,12 @@
 title: CREATE SCALAR FUNCTION
 summary: Creates a scalar user-defined function (Scalar UDF). The same CREATE FUNCTION statement supports two implementation styles.
 ---
+
+# CREATE SCALAR FUNCTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE SCALAR FUNCTION
 
 <FunctionDescription description="Introduced or updated: SQL v1.2.799; Python/JavaScript v1.2.339"/>
 
@@ -18,8 +23,8 @@ If you need to call external systems (HTTP/services), see External Function comm
 ### SQL (expression)
 
 ```sql
-CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name> 
-    ( [<parameter_list>] ) 
+CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
+    ( [<parameter_list>] )
     RETURNS <return_type>
     AS $$ <expression> $$
     [ DESC='<description>' ]
@@ -28,8 +33,8 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 ### Python / JavaScript
 
 ```sql
-CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name> 
-    ( [<parameter_list>] ) 
+CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
+    ( [<parameter_list>] )
     RETURNS <return_type>
     LANGUAGE <language>
     [IMPORTS = ('<import_path>', ...)]

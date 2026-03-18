@@ -2,6 +2,9 @@
 title: Interval Functions
 summary: This section provides reference information for the interval functions in Databend. Interval functions allow you to create interval values of various time units for use in date and time calculations.
 ---
+
+# Interval Functions
+
 This section provides reference information for the interval functions in Databend. Interval functions allow you to create interval values of various time units for use in date and time calculations.
 
 ## Time Unit Conversion Functions

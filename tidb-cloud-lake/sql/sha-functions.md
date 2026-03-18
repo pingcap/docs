@@ -2,6 +2,9 @@
 title: SHA2
 summary: Calculates the SHA-2 family of hash functions (SHA-224, SHA-256, SHA-384, and SHA-512). If the hash length is not one of the permitted values, the return value is NULL. Otherwise, the function result is a hash value containing the desired number of bits as a string of hexadecimal digits.
 ---
+
+# SHA2
+
 Calculates the SHA-2 family of hash functions (SHA-224, SHA-256, SHA-384, and SHA-512). If the hash length is not one of the permitted values, the return value is NULL. Otherwise, the function result is a hash value containing the desired number of bits as a string of hexadecimal digits.
 
 ## Syntax

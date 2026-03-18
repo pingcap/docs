@@ -2,7 +2,12 @@
 title: FLATTEN
 summary: Transforms nested JSON or array data into a tabular format, where each element or field is represented as a separate row.
 ---
+
+# FLATTEN
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## FLATTEN
 
 <FunctionDescription description="Introduced or updated: v1.2.213"/>
 
@@ -116,13 +121,13 @@ Results in nested objects being flattened:
 ```sql
 -- Use LATERAL FLATTEN to transform a JSON array into rows
 -- This allows direct access to array elements without a table
-SELECT 
+SELECT
   f.value:item::STRING AS item_name,
   f.value:price::FLOAT AS price
-FROM 
+FROM
   LATERAL FLATTEN(
     INPUT => PARSE_JSON('[
-      {"item":"coffee", "price":2.50}, 
+      {"item":"coffee", "price":2.50},
       {"item":"donut", "price":1.20}
     ]')
   ) f;

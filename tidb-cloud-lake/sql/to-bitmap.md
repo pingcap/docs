@@ -2,6 +2,9 @@
 title: TO_BITMAP
 summary: Converts a value to BITMAP data type.
 ---
+
+# TO_BITMAP
+
 Converts a value to BITMAP data type.
 
 ## Syntax

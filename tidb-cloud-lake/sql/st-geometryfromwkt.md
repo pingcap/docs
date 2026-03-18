@@ -2,7 +2,12 @@
 title: ST_GEOMETRYFROMWKT
 summary: Parses a WKT(well-known-text) or EWKT(extended well-known-text) input and returns a value of type GEOMETRY.
 ---
+
+# ST_GEOMETRYFROMWKT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_GEOMETRYFROMWKT
 
 <FunctionDescription description="Introduced or updated: v1.2.347"/>
 

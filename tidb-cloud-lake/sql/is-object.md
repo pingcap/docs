@@ -2,7 +2,12 @@
 title: IS_OBJECT
 summary: Checks if the input value is a JSON object.
 ---
+
+# IS_OBJECT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## IS_OBJECT
 
 <FunctionDescription description="Introduced or updated: v1.2.368"/>
 

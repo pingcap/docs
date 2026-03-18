@@ -2,7 +2,12 @@
 title: SET VARIABLE
 summary: Sets the value of one or more SQL variables within a session. The values can be simple constants, expressions, query results, or database objects. Variables persist for the duration of your session and can be used in subsequent queries.
 ---
+
+# SET VARIABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SET VARIABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.609"/>
 
@@ -31,7 +36,7 @@ Variables can be accessed using the dollar sign syntax: `$variable_name`
 
 ```sql
 -- Sets variable a to the string 'databend'
-SET VARIABLE a = 'databend'; 
+SET VARIABLE a = 'databend';
 
 -- Access the variable
 SELECT $a;
@@ -61,7 +66,7 @@ SELECT $x, $y;
 
 ```sql
 -- Sets variable a to 3 and b to 55
-SET VARIABLE (a, b) = (SELECT 3, 55); 
+SET VARIABLE (a, b) = (SELECT 3, 55);
 
 -- Access the variables
 SELECT $a, $b;

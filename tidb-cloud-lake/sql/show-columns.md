@@ -2,11 +2,14 @@
 title: SHOW COLUMNS
 summary: Shows information about the columns in a given table.
 ---
+
+# SHOW COLUMNS
+
 Shows information about the columns in a given table.
 
 > **Tip:**
 >
-> [DESCRIBE TABLE](/tidb-cloud-lake/sql/describe-table.md) provides similar but less information about the columns of a table. 
+> [DESCRIBE TABLE](/tidb-cloud-lake/sql/describe-table.md) provides similar but less information about the columns of a table.
 
 ## Syntax
 
@@ -27,7 +30,7 @@ CREATE TABLE books
      price  FLOAT Default 0.00,
      pub_time DATETIME Default '1900-01-01',
      author VARCHAR
-  ); 
+  );
 
 SHOW COLUMNS FROM books FROM default;
 
@@ -43,7 +46,7 @@ Field   |Type     |Null|Default     |Extra|Key|Collation|Privileges|Comment|
 --------+---------+----+------------+-----+---+---------+----------+-------+
 author  |VARCHAR  |NO  |            |     |   |         |          |       |
 price   |FLOAT    |NO  |0.00        |     |   |         |          |       |
-pub_time|TIMESTAMP|NO  |'1900-01-01'|     |   |         |          |       | 
+pub_time|TIMESTAMP|NO  |'1900-01-01'|     |   |         |          |       |
 
 SHOW FULL COLUMNS FROM books LIKE 'a%'
 

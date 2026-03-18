@@ -2,7 +2,12 @@
 title: MAP_FILTER
 summary: Filters key-value pairs in a JSON object based on a specified condition, defined using a lambda expression.
 ---
+
+# MAP_FILTER
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MAP_FILTER
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

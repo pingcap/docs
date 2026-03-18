@@ -2,13 +2,18 @@
 title: Vector
 summary: Vector is a high-performance observability data pipeline that puts organizations in control of their observability data. Collect, transform, and route all your logs, metrics, and traces to any vendors you want today and any other vendors you may want tomorrow. Vector enables dramatic cost reduction, novel data enrichment, and data security where you need it, not where is most convenient for your vendors. Open source and up to 10x faster than every alternative.
 ---
+
+# Vector
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Vector
 
 <FunctionDescription description="Introduced: v1.1.55"/>
 
 [Vector](https://vector.dev/) is a high-performance observability data pipeline that puts organizations in control of their observability data. Collect, transform, and route all your logs, metrics, and traces to any vendors you want today and any other vendors you may want tomorrow. Vector enables dramatic cost reduction, novel data enrichment, and data security where you need it, not where is most convenient for your vendors. Open source and up to 10x faster than every alternative.
 
-Vector natively supports delivering data to [Databend as a sink](https://vector.dev/docs/reference/configuration/sinks/databend/), this means that Vector can send data to Databend for storage or further processing. Databend acts as the destination for the data collected and processed by Vector. By configuring Vector to use Databend as a sink, you can seamlessly transfer data from Vector to Databend, enabling efficient data analysis, storage, and retrieval. 
+Vector natively supports delivering data to [Databend as a sink](https://vector.dev/docs/reference/configuration/sinks/databend/), this means that Vector can send data to Databend for storage or further processing. Databend acts as the destination for the data collected and processed by Vector. By configuring Vector to use Databend as a sink, you can seamlessly transfer data from Vector to Databend, enabling efficient data analysis, storage, and retrieval.
 
 ## Integrating with Vector
 
@@ -233,7 +238,6 @@ source = """
     }
   """
 
-
 [sinks.nginx_access_log_to_databend]
   type = "databend"
   inputs = ["nginx_access_log_parser"]
@@ -244,7 +248,6 @@ source = """
   // highlight-next-line
   endpoint = "http://localhost:8000/"
   compression = "gzip"
-
 
 [sinks.nginx_access_log_to_databend.auth]
   strategy = "basic"
@@ -384,7 +387,6 @@ SELECT count(*) AS count, request_uri AS uri FROM nginx.access_logs GROUP BY uri
 |        2 | /xx/yy             |
 +----------+--------------------+
 ```
-
 
 - __Top 10 HTTP 404 Pages__
 

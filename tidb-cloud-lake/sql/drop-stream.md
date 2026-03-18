@@ -2,7 +2,12 @@
 title: DROP STREAM
 summary: Deletes an existing stream.
 ---
+
+# DROP STREAM
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP STREAM
 
 <FunctionDescription description="Introduced or updated: v1.2.223"/>
 

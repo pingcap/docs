@@ -2,7 +2,12 @@
 title: SPLIT
 summary: Splits a string using a specified delimiter and returns the resulting parts as an array.
 ---
+
+# SPLIT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SPLIT
 
 <FunctionDescription description="Introduced or updated: v1.2.164"/>
 

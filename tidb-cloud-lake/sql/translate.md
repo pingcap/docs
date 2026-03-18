@@ -2,7 +2,12 @@
 title: TRANSLATE
 summary: Transforms a given string by replacing specific characters with corresponding replacements, as defined by the provided mapping.
 ---
+
+# TRANSLATE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TRANSLATE
 
 <FunctionDescription description="Introduced or updated: v1.2.203"/>
 

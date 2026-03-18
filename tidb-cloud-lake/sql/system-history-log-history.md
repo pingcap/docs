@@ -2,7 +2,12 @@
 title: system_history.log_history
 summary: Note This table contains raw log data that feeds into other specialized history tables. Other tables provide structured, query-specific views of this data.
 ---
+
+# system_history.log_history
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system_history.log_history
 
 <FunctionDescription description="Introduced or updated: v1.2.764"/>
 

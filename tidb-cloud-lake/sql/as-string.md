@@ -2,6 +2,9 @@
 title: AS_STRING
 summary: Strict casting VARIANT values to VARCHAR data type. If the input data type is not VARIANT, the output is NULL. If the type of value in the VARIANT does not match the output value, the output is NULL.
 ---
+
+# AS_STRING
+
 Strict casting `VARIANT` values to VARCHAR data type.
 If the input data type is not `VARIANT`, the output is `NULL`.
 If the type of value in the `VARIANT` does not match the output value, the output is `NULL`.

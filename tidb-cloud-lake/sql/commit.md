@@ -2,7 +2,12 @@
 title: COMMIT
 summary: Saves all changes made during a transaction. BEGIN and COMMIT/ROLLBACK must be used together to start and then either save or undo a transaction.
 ---
+
+# COMMIT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## COMMIT
 
 <FunctionDescription description="Introduced or updated: v1.2.371"/>
 

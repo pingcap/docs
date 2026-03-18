@@ -2,7 +2,12 @@
 title: ICEBERG_MANIFEST
 summary: Returns metadata about manifest files of an Iceberg table, including file paths, partitioning details, and snapshot associations.
 ---
+
+# ICEBERG_MANIFEST
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ICEBERG_MANIFEST
 
 <FunctionDescription description="Introduced or updated: v1.2.709"/>
 
@@ -33,7 +38,7 @@ The function returns a table with the following columns:
 
 ```sql
 SELECT * FROM ICEBERG_MANIFEST('tpcds', 'catalog_returns');
- 
+
 ╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ content │      path      │ length │ partition_spec │ added_snapshot │ added_data_fil │ existing_data_ │ deleted_data_ │ added_delete_ │ existing_dele │ deleted_delet │ partition_sum │
 │  Int32  │     String     │  Int64 │       _id      │       _id      │    es_count    │   files_count  │  files_count  │  files_count  │ te_files_coun │ e_files_count │     maries    │

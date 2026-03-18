@@ -2,7 +2,12 @@
 title: ARRAY_REVERSE
 summary: Reverses the order of elements in an array.
 ---
+
+# ARRAY_REVERSE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_REVERSE
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

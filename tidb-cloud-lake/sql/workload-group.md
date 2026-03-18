@@ -2,6 +2,9 @@
 title: Workload Group
 summary: Workload groups enable resource management and query concurrency control in Databend by allocating CPU, memory quotas and limiting concurrent queries for different user groups.
 ---
+
+# Workload Group
+
 Workload groups enable resource management and query concurrency control in Databend by allocating CPU, memory quotas and limiting concurrent queries for different user groups.
 
 ## How It Works

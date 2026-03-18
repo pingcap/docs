@@ -2,7 +2,12 @@
 title: DROP TABLE
 summary: Deletes a table.
 ---
+
+# DROP TABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP TABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.155"/>
 
@@ -24,7 +29,6 @@ This command only marks the table schema as deleted in the metadata service, ens
 
 For completely removing a table along with its data files, consider using the [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) command.
 
-
 ## Examples
 
 ### Deleting a Table
@@ -43,7 +47,7 @@ a|b      |
 -- Delete the table
 DROP TABLE test;
 SELECT * FROM test;
->> SQL Error [1105] [HY000]: UnknownTable. Code: 1025, Text = error: 
+>> SQL Error [1105] [HY000]: UnknownTable. Code: 1025, Text = error:
   --> SQL:1:80
   |
 1 | /* ApplicationName=DBeaver 23.2.0 - SQLEditor <Script-12.sql> */ SELECT * FROM test

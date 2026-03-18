@@ -2,6 +2,9 @@
 title: H3_EXACT_EDGE_LENGTH_M
 summary: Computes the length of this directed edge, in meters.
 ---
+
+# H3_EXACT_EDGE_LENGTH_M
+
 Computes the length of this directed edge, in meters.
 
 ## Syntax

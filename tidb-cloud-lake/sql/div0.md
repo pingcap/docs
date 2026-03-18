@@ -2,7 +2,12 @@
 title: DIV0
 summary: Returns the quotient by dividing the first number by the second one. Returns 0 if the second number is 0.
 ---
+
+# DIV0
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DIV0
 
 <FunctionDescription description="Introduced or updated: v1.2.345"/>
 

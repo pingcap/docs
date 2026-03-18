@@ -2,7 +2,12 @@
 title: TO_TIMESTAMP
 summary: Converts an expression to a date with time.
 ---
+
+# TO_TIMESTAMP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_TIMESTAMP
 
 <FunctionDescription description="Introduced or updated: v1.2.664"/>
 
@@ -34,7 +39,6 @@ TO_TIMESTAMP(<expr>, <pattern>)
 
 The function converts the first string to a timestamp based on the pattern specified in the second string. To specify the pattern, use specifiers. The specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
 
-
 ```sql
 -- Convert an integer to a timestamp based on the specified scale
 TO_TIMESTAMP(<int>, <scale>)
@@ -48,7 +52,7 @@ The function converts an integer value to a timestamp, interpreting the integer 
 
 ## Return Type
 
-Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`: 
+Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
 
 - The returned timestamp always reflects your Databend timezone.
     - When timezone information is present in the given string, it converts the timestamp to the time corresponding to the timezone configured in Databend. In other words, it adjusts the timestamp to reflect the timezone set in Databend.
@@ -71,7 +75,7 @@ Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
     ```sql
     -- Set timezone to 'America/Toronto' (UTC-5:00, Eastern Standard Time)
     SET timezone = 'America/Toronto';
-    
+
     SELECT TO_TIMESTAMP('2022-01-02T01:12:00'), TO_TIMESTAMP('2022/01/02T01:12:00', '%Y/%m/%dT%H:%M:%S');
 
     ┌────────────────────────────────────────────────────────────────────────────────────────────────┐

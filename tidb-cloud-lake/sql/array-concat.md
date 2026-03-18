@@ -2,6 +2,9 @@
 title: ARRAY_CONCAT
 summary: Concats two arrays.
 ---
+
+# ARRAY_CONCAT
+
 Concats two arrays.
 
 ## Syntax

@@ -2,7 +2,12 @@
 title: IS_INTEGER
 summary: Checks if the input JSON value is an integer.
 ---
+
+# IS_INTEGER
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## IS_INTEGER
 
 <FunctionDescription description="Introduced or updated: v1.2.368"/>
 

@@ -2,6 +2,9 @@
 title: SHOW STAGES
 summary: Returns a list of the created stages. The output list does not include the user stage.
 ---
+
+# SHOW STAGES
+
 Returns a list of the created stages. The output list does not include the user stage.
 
 ## Syntax

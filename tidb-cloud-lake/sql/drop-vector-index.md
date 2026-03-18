@@ -2,7 +2,12 @@
 title: DROP VECTOR INDEX
 summary: Removes a Vector index from a table.
 ---
+
+# DROP VECTOR INDEX
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP VECTOR INDEX
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>
 

@@ -2,6 +2,9 @@
 title: BIN
 summary: Returns a string representation of the binary value of N.
 ---
+
+# BIN
+
 Returns a string representation of the binary value of N.
 
 ## Syntax

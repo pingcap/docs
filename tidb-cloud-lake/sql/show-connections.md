@@ -2,7 +2,12 @@
 title: SHOW CONNECTIONS
 summary: Displays a list of all available connections.
 ---
+
+# SHOW CONNECTIONS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW CONNECTIONS
 
 <FunctionDescription description="Introduced or updated: v1.2.208"/>
 

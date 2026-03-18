@@ -2,6 +2,9 @@
 title: Inspect TiDB Cloud Lake Metadata
 summary: In this tutorial, we'll walk you through uploading a sample Parquet file to an internal stage, inferring the column definitions, and creating a table that includes file-level metadata fields. This is useful when you want to track the origin of each row or include metadata like file names and row numbers in your dataset.
 ---
+
+# Inspect TiDB Cloud Lake Metadata
+
 In this tutorial, we'll walk you through uploading a sample Parquet file to an internal stage, inferring the column definitions, and creating a table that includes file-level metadata fields. This is useful when you want to track the origin of each row or include metadata like file names and row numbers in your dataset.
 
 ### Before You Start

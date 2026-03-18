@@ -2,6 +2,9 @@
 title: Migrate MySQL with bend-archiver (Batch)
 summary: Migrates MySQL historical data to TiDB Cloud Lake with bend-archiver using batch full-load and incremental archiving workflows.
 ---
+
+# Migrate MySQL with bend-archiver (Batch)
+
 > **Capabilities**: Full Load, Incremental
 > **✅ Recommended** for batch migration of historical data
 
@@ -36,7 +39,7 @@ docker ps
 
 Check the output for a container named **mysql-server**:
 
-```bash 
+```bash
 CONTAINER ID   IMAGE                          COMMAND                  CREATED        STATUS             PORTS                                                                                            NAMES
 1a8f8d7d0e1a   mysql:8                        "docker-entrypoint.s…"   10 hours ago   Up About an hour   0.0.0.0:3306->3306/tcp, 33060/tcp                                                                mysql-server
 ```

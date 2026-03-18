@@ -2,6 +2,9 @@
 title: ARRAY_SKEWNESS
 summary: Returns the skewness of numeric values in an array. NULL items are ignored; non-numeric items raise an error.
 ---
+
+# ARRAY_SKEWNESS
+
 Returns the skewness of numeric values in an array. `NULL` items are ignored; non-numeric items raise an error.
 
 ## Syntax

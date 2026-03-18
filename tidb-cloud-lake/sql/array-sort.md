@@ -2,6 +2,9 @@
 title: ARRAY_SORT
 summary: Sorts the elements of an array. By default, ARRAY_SORT orders ascending and places NULL values last. Use the explicit variants to control order and NULL placement.
 ---
+
+# ARRAY_SORT
+
 Sorts the elements of an array. By default, `ARRAY_SORT` orders ascending and places `NULL` values last. Use the explicit variants to control order and `NULL` placement.
 
 ## Syntax

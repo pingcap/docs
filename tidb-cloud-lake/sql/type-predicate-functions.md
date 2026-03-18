@@ -2,6 +2,9 @@
 title: Type Predicate Functions
 summary: This section provides reference information for type predicate functions in Databend. These functions enable type checking, validation, and conversion of JSON values.
 ---
+
+# Type Predicate Functions
+
 This section provides reference information for type predicate functions in Databend. These functions enable type checking, validation, and conversion of JSON values.
 
 ## Type Checking
@@ -15,5 +18,3 @@ This section provides reference information for type predicate functions in Data
 | [IS_FLOAT](/tidb-cloud-lake/sql/is-float.md) | Checks if a JSON value is a floating-point number | `IS_FLOAT('3.14')` → `true` |
 | [IS_BOOLEAN](/tidb-cloud-lake/sql/is-boolean.md) | Checks if a JSON value is a boolean | `IS_BOOLEAN('true')` → `true` |
 | [IS_NULL_VALUE](/tidb-cloud-lake/sql/is-null-value.md) | Checks if a JSON value is null | `IS_NULL_VALUE('null')` → `true` |
-
-

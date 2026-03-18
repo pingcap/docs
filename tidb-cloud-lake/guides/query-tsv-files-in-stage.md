@@ -2,11 +2,13 @@
 title: Querying TSV Files in Stage
 summary: Create an external stage with your own S3 bucket and credentials where your TSV files are stored.
 ---
+
+# Querying TSV Files in Stage
+
 ## Syntax:
 
 - [Query columns by position](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-position)
 - [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
-
 
 ## Tutorial
 
@@ -14,10 +16,10 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 
 Create an external stage with your own S3 bucket and credentials where your TSV files are stored.
 ```sql
-CREATE STAGE tsv_query_stage 
-URL = 's3://load/tsv/' 
+CREATE STAGE tsv_query_stage
+URL = 's3://load/tsv/'
 CONNECTION = (
-    ACCESS_KEY_ID = '<your-access-key-id>' 
+    ACCESS_KEY_ID = '<your-access-key-id>'
     SECRET_ACCESS_KEY = '<your-secret-access-key>'
 );
 ```
@@ -25,7 +27,7 @@ CONNECTION = (
 ### Step 2. Create Custom TSV File Format
 
 ```sql
-CREATE FILE FORMAT tsv_query_format 
+CREATE FILE FORMAT tsv_query_format
     TYPE = TSV,
     RECORD_DELIMITER = '\n',
     FIELD_DELIMITER = ',',

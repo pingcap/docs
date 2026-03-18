@@ -2,6 +2,9 @@
 title: information_schema.columns
 summary: Contains information about columns of tables.
 ---
+
+# information_schema.columns
+
 Contains information about columns of tables.
 
 ```sql

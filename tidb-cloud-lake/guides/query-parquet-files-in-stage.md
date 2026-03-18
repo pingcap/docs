@@ -2,6 +2,9 @@
 title: Querying Parquet Files in Stage
 summary: Create an external stage with your own S3 bucket and credentials where your Parquet files are stored.
 ---
+
+# Querying Parquet Files in Stage
+
 ## Syntax:
 
 - [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)
@@ -14,10 +17,10 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 
 Create an external stage with your own S3 bucket and credentials where your Parquet files are stored.
 ```sql
-CREATE STAGE parquet_query_stage 
-URL = 's3://load/parquet/' 
+CREATE STAGE parquet_query_stage
+URL = 's3://load/parquet/'
 CONNECTION = (
-    ACCESS_KEY_ID = '<your-access-key-id>' 
+    ACCESS_KEY_ID = '<your-access-key-id>'
     SECRET_ACCESS_KEY = '<your-secret-access-key>'
 );
 ```
@@ -44,7 +47,6 @@ FROM @parquet_query_stage
 
 query with path expressions:
 
-
 ```sql
 SELECT $1
 FROM @parquet_query_stage
@@ -53,7 +55,6 @@ FROM @parquet_query_stage
     PATTERN => '.*[.]parquet'
 );
 ```
-
 
 ### Query with Metadata
 

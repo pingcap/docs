@@ -2,7 +2,12 @@
 title: VALUES
 summary: The VALUES clause creates an inline table by explicitly defining rows of data. This temporary table can be used directly or within other SQL statements.
 ---
+
+# VALUES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## VALUES
 
 <FunctionDescription description="Introduced or updated: v1.2.65"/>
 

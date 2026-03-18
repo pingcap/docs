@@ -2,7 +2,12 @@
 title: ARRAY_COMPACT
 summary: Removes all NULL values from an array.
 ---
+
+# ARRAY_COMPACT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_COMPACT
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

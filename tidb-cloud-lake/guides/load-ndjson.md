@@ -2,6 +2,9 @@
 title: Loading NDJSON into TiDB Cloud Lake
 summary: NDJSON is built on top of JSON, and it is a strict subset of JSON. Each line must contain a separate, self-contained valid JSON object.
 ---
+
+# Loading NDJSON into TiDB Cloud Lake
+
 ## What is NDJSON?
 
 NDJSON is built on top of JSON, and it is a strict subset of JSON. Each line must contain a separate, self-contained valid JSON object.

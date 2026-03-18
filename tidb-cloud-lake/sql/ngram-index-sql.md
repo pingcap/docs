@@ -2,6 +2,9 @@
 title: Ngram Index
 summary: This page provides a comprehensive overview of Ngram index operations in Databend, organized by functionality for easy reference.
 ---
+
+# Ngram Index
+
 This page provides a comprehensive overview of Ngram index operations in Databend, organized by functionality for easy reference.
 
 ## Ngram Index Management

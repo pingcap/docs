@@ -2,6 +2,9 @@
 title: CONTAINS
 summary: Checks if the array contains a specific element.
 ---
+
+# CONTAINS
+
 Checks if the array contains a specific element.
 
 ## Syntax

@@ -2,6 +2,9 @@
 title: PLUS
 summary: Calculates the sum of two numeric or decimal values.
 ---
+
+# PLUS
+
 Calculates the sum of two numeric or decimal values.
 
 ## Syntax

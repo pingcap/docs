@@ -2,7 +2,12 @@
 title: ST_GEOMETRYFROMWKB
 summary: Parses a WKB(well-known-binary) or EWKB(extended well-known-binary) input and returns a value of type GEOMETRY.
 ---
+
+# ST_GEOMETRYFROMWKB
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_GEOMETRYFROMWKB
 
 <FunctionDescription description="Introduced or updated: v1.2.395"/>
 

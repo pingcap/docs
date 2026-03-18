@@ -2,6 +2,9 @@
 title: Boolean
 summary: Basic logical data type.
 ---
+
+# Boolean
+
 ## Overview
 
 `BOOLEAN` (alias `BOOL`) represents `TRUE` or `FALSE` and always uses one byte of storage. Numeric and string inputs automatically coerce to boolean values when possible.

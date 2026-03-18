@@ -2,7 +2,12 @@
 title: system_history.query_history
 summary: Query the history for a specific query using its query_id.
 ---
+
+# system_history.query_history
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system_history.query_history
 
 <FunctionDescription description="Introduced or updated: v1.2.764"/>
 
@@ -72,7 +77,6 @@ import EEFeature from '@site/src/components/EEFeature';
 | peek_memory_usage         | VARIANT          | The peak memory usage during query execution (as a JSON object).                              |
 | session_id                | VARCHAR          | The session identifier associated with the query.                                             |
 
-
 ## Examples
 
 Query the history for a specific query using its `query_id`
@@ -125,9 +129,9 @@ written_io_bytes_cost_ms: 0
           client_address: 127.0.0.1
               user_agent: bendsql/0.26.2-unknown
           exception_code: 0
-          exception_text: 
+          exception_text:
           server_version: v1.2.753-nightly-c3d5fabb79(rust-1.88.0-nightly-2025-06-12T01:48:36.733925000Z)
-               query_tag: 
+               query_tag:
              has_profile: NULL
        peek_memory_usage: {"jxSgvulZFAq1sDckR1bu85":223840}
               session_id: e3c54c32-f3c0-4ea9-bdd2-65701aa3f2a6

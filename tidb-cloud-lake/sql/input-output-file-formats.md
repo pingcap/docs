@@ -2,7 +2,12 @@
 title: Input & Output File Formats
 summary: Databend accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options.
 ---
+
+# Input & Output File Formats
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Input & Output File Formats
 
 <FunctionDescription description="Introduced or updated: v1.2.713"/>
 
@@ -89,7 +94,7 @@ For data loading, the quote is not necessary unless a string contains the charac
 
 ### ESCAPE
 
-Character used to escape the quote character within quoted values, in addition to [QUOTE](#quote-load-only) itself. 
+Character used to escape the quote character within quoted values, in addition to [QUOTE](#quote-load-only) itself.
 
 In some variants of CSV, quotes are escaped using a special escape character like `\`, instead of escaping quotes by doubling quoting.
 
@@ -127,7 +132,7 @@ When loading data, unquoted matches always become NULL, quoted matches convert t
 
 ### ALLOW_QUOTED_NULLS (Load Only)
 
-Allow the conversion of quoted strings to NULL values. 
+Allow the conversion of quoted strings to NULL values.
 
 Quoted strings that match `NULL_DISPLAY` become NULL only when this flag is true. Unquoted matches become NULL regardless of this option.
 
@@ -295,7 +300,6 @@ The value that missing field is converted to.
 |------------------|----------------------------------------------------------|
 | `ERROR` (Default)| Error.                                                   |
 | `FIELD_DEFAULT`  | The default value of the field.                          |
-
 
 ## AVRO Options
 

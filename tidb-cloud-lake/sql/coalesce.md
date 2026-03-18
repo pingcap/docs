@@ -2,6 +2,9 @@
 title: COALESCE
 summary: Returns the first non-NULL expression within its arguments; if all arguments are NULL, it returns NULL.
 ---
+
+# COALESCE
+
 Returns the first non-NULL expression within its arguments; if all arguments are NULL, it returns NULL.
 
 ## Syntax

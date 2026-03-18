@@ -2,7 +2,12 @@
 title: REVOKE
 summary: Revokes privileges, roles, and ownership of a specific database object. This includes.
 ---
+
+# REVOKE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## REVOKE
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>
 
@@ -21,7 +26,7 @@ See also:
 ### Revoking Privileges
 
 ```sql
-REVOKE { 
+REVOKE {
         schemaObjectPrivileges | ALL [ PRIVILEGES ] ON <privileges_level>
        }
 FROM ROLE <role_name>
@@ -33,13 +38,13 @@ Where:
 schemaObjectPrivileges ::=
 -- For TABLE
   { SELECT | INSERT }
-  
+
 -- For SCHEMA
   { CREATE | DROP | ALTER }
-  
+
 -- For USER
   { CREATE USER }
-  
+
 -- For ROLE
   { CREATE ROLE}
 
@@ -107,7 +112,7 @@ CREATE ROLE user1_role;
 ```
 
 Grant the `SELECT,INSERT` privilege on all existing tables in the `default` database to the role `user1_role`:
- 
+
 ```sql
 GRANT SELECT,INSERT ON default.* TO ROLE user1_role;
 ```

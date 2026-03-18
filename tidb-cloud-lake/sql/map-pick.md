@@ -2,7 +2,12 @@
 title: MAP_PICK
 summary: Returns a new MAP containing the specified key-value pairs from an existing MAP.
 ---
+
+# MAP_PICK
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MAP_PICK
 
 <FunctionDescription description="Introduced or updated: v1.2.654"/>
 

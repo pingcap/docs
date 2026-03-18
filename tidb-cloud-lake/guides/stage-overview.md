@@ -2,6 +2,9 @@
 title: Stage Overview
 summary: A stage is a virtual location where data files reside. Files in a stage can be queried directly or loaded into a table. Alternatively, you can unload data from a table into a stage as a file.
 ---
+
+# Stage Overview
+
 In Databend, a stage is a virtual location where data files reside. Files in a stage can be queried directly or loaded into a table. Alternatively, you can unload data from a table into a stage as a file. The beauty of using a stage is that you can access it for data loading and unloading as conveniently as you would with folders on your computer. Just as when you put a file in a folder, you don't necessarily need to know its exact location on your hard disk. When accessing a file in a stage, you only need to specify the stage name and the file name, such as `@mystage/mydatafile.csv`, rather than specifying its location in the bucket of your object storage. Similar to folders on your computer, you can create as many stages as you need in Databend. However, it's important to note that a stage cannot contain another stage. Each stage operates independently and does not encompass other stages.
 
 Utilizing a stage for loading data also improves the efficiency of uploading, managing, and filtering your data files. With [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md), you can easily upload or download files to or from a stage using a single command. When loading data into Databend, you can directly specify a stage in the COPY INTO command, allowing the command to read and even filter data files from that stage. Similarly, when exporting data from Databend, you can dump your data files into a stage.

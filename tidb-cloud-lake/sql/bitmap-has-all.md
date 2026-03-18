@@ -2,6 +2,9 @@
 title: BITMAP_HAS_ALL
 summary: Checks if the first bitmap contains all the bits in the second bitmap.
 ---
+
+# BITMAP_HAS_ALL
+
 Checks if the first bitmap contains all the bits in the second bitmap.
 
 ## Syntax

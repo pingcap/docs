@@ -2,7 +2,12 @@
 title: ALTER FUNCTION
 summary: Alters a user-defined function. Supports all function types Scalar SQL, Tabular SQL, and Embedded functions.
 ---
+
+# ALTER FUNCTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ALTER FUNCTION
 
 <FunctionDescription description="Introduced or updated: v1.2.116"/>
 
@@ -12,8 +17,8 @@ Alters a user-defined function. Supports all function types: Scalar SQL, Tabular
 
 ### For Scalar SQL Functions
 ```sql
-ALTER FUNCTION [ IF EXISTS ] <function_name> 
-    ( [<parameter_list>] ) 
+ALTER FUNCTION [ IF EXISTS ] <function_name>
+    ( [<parameter_list>] )
     RETURNS <return_type>
     AS $$ <expression> $$
     [ DESC='<description>' ]
@@ -21,17 +26,17 @@ ALTER FUNCTION [ IF EXISTS ] <function_name>
 
 ### For Tabular SQL Functions
 ```sql
-ALTER FUNCTION [ IF EXISTS ] <function_name> 
-    ( [<parameter_list>] ) 
-    RETURNS TABLE ( <column_definition_list> ) 
+ALTER FUNCTION [ IF EXISTS ] <function_name>
+    ( [<parameter_list>] )
+    RETURNS TABLE ( <column_definition_list> )
     AS $$ <sql_statement> $$
     [ DESC='<description>' ]
 ```
 
 ### For Embedded Functions
 ```sql
-ALTER FUNCTION [ IF EXISTS ] <function_name> 
-    ( [<parameter_list>] ) 
+ALTER FUNCTION [ IF EXISTS ] <function_name>
+    ( [<parameter_list>] )
     RETURNS <return_type>
     LANGUAGE <language>
     [IMPORTS = ('<import_path>', ...)]
@@ -53,8 +58,8 @@ AS $$ income * 0.2 $$;
 -- Modify the function to use progressive tax rate
 ALTER FUNCTION calculate_tax(income DECIMAL)
 RETURNS DECIMAL
-AS $$ 
-  CASE 
+AS $$
+  CASE
     WHEN income <= 50000 THEN income * 0.15
     ELSE income * 0.25
   END
@@ -64,12 +69,12 @@ $$;
 ### Altering Tabular SQL Function
 ```sql
 -- Create a table function
-CREATE FUNCTION get_employees() 
-RETURNS TABLE (id INT, name VARCHAR(100)) 
+CREATE FUNCTION get_employees()
+RETURNS TABLE (id INT, name VARCHAR(100))
 AS $$ SELECT id, name FROM employees $$;
 
 -- Modify to include department and salary
-ALTER FUNCTION get_employees() 
+ALTER FUNCTION get_employees()
 RETURNS TABLE (id INT, name VARCHAR(100), department VARCHAR(100), salary DECIMAL)
 AS $$ SELECT id, name, department, salary FROM employees $$;
 ```

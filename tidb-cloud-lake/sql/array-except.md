@@ -2,7 +2,12 @@
 title: ARRAY_EXCEPT
 summary: Returns a new JSON array containing the elements from the first JSON array that are not present in the second JSON array.
 ---
+
+# ARRAY_EXCEPT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_EXCEPT
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 
@@ -26,8 +31,8 @@ JSON array.
 
 ```sql
 SELECT ARRAY_EXCEPT(
-    '["apple", "banana", "orange"]'::VARIANT,  
-    '["banana", "grapes"]'::VARIANT         
+    '["apple", "banana", "orange"]'::VARIANT,
+    '["banana", "grapes"]'::VARIANT
 );
 
 -[ RECORD 1 ]-----------------------------------

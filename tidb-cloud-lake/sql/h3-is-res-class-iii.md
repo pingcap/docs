@@ -2,6 +2,9 @@
 title: H3_IS_RES_CLASS_III
 summary: Checks if the given H3 index has a resolution with Class III orientation.
 ---
+
+# H3_IS_RES_CLASS_III
+
 Checks if the given [H3](https://eng.uber.com/h3/) index has a resolution with Class III orientation.
 
 ## Syntax

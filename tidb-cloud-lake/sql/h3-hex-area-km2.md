@@ -2,6 +2,9 @@
 title: H3_HEX_AREA_KM2
 summary: Returns the average hexagon area in square kilometers at the given resolution. Excludes pentagons.
 ---
+
+# H3_HEX_AREA_KM2
+
 Returns the average hexagon area in square kilometers at the given resolution. Excludes pentagons.
 
 ## Syntax

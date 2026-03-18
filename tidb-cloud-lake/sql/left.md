@@ -2,6 +2,9 @@
 title: LEFT
 summary: Returns the leftmost len characters from the string str, or NULL if any argument is NULL. If len is greater than the length of str, the entire str is returned.
 ---
+
+# LEFT
+
 Returns the leftmost `len` characters from the string `str`, or NULL if any argument is NULL. If `len` is greater than the length of `str`, the entire `str` is returned.
 
 ## Syntax

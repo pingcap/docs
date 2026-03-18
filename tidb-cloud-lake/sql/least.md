@@ -2,7 +2,12 @@
 title: LEAST
 summary: Returns the minimum value from a set of values. If any value in the set is NULL, the function returns NULL.
 ---
+
+# LEAST
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## LEAST
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>
 

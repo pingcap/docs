@@ -2,6 +2,9 @@
 title: SUBSTR
 summary: Extracts a string containing a specific number of characters from a particular position of a given string.
 ---
+
+# SUBSTR
+
 Extracts a string containing a specific number of characters from a particular position of a given string.
 
 - The forms without a `len` argument return a substring from string `str` starting at position `pos`.

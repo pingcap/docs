@@ -2,6 +2,9 @@
 title: How TiDB Cloud Lake Data Sharing Works
 summary: Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.
 ---
+
+# How TiDB Cloud Lake Data Sharing Works
+
 ## What is Data Sharing?
 
 Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.
@@ -36,19 +39,19 @@ SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'company_sales');
 **Step 2: Create team-specific views**
 ```sql
 -- Marketing: Customer behavior analysis
-ATTACH TABLE marketing_view (customer_id, product, amount, order_date) 
+ATTACH TABLE marketing_view (customer_id, product, amount, order_date)
 's3://your-bucket/1/23351/' CONNECTION = (ACCESS_KEY_ID = 'xxx', SECRET_ACCESS_KEY = 'yyy');
 
 -- Finance: Revenue tracking
-ATTACH TABLE finance_view (order_id, amount, profit, order_date) 
+ATTACH TABLE finance_view (order_id, amount, profit, order_date)
 's3://your-bucket/1/23351/' CONNECTION = (ACCESS_KEY_ID = 'xxx', SECRET_ACCESS_KEY = 'yyy');
 
 -- HR: Employee info without salaries
-ATTACH TABLE hr_employees (employee_id, name, department) 
+ATTACH TABLE hr_employees (employee_id, name, department)
 's3://data/1/23351/' CONNECTION = (...);
 
 -- Development: Production structure without sensitive data
-ATTACH TABLE dev_customers (customer_id, country, created_date) 
+ATTACH TABLE dev_customers (customer_id, country, created_date)
 's3://data/1/23351/' CONNECTION = (...);
 ```
 

@@ -2,6 +2,9 @@
 title: MIN
 summary: Aggregate function.
 ---
+
+# MIN
+
 Aggregate function.
 
 The MIN() function returns the minimum value in a set of values.

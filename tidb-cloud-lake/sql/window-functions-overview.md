@@ -2,6 +2,9 @@
 title: Window Functions
 summary: Window functions perform calculations across a set of related rows while returning one result per input row. Unlike aggregate functions, window functions don't collapse rows into a single output.
 ---
+
+# Window Functions
+
 ## Overview
 
 Window functions perform calculations across a set of related rows while returning one result per input row. Unlike aggregate functions, window functions don't collapse rows into a single output.
@@ -66,7 +69,7 @@ These functions are specifically designed for window operations.
 These are standard aggregate functions that can be used with the OVER clause to perform window operations.
 
 | Function | Description | Window Frame Support | Example |
-|----------|-------------|---------------------|---------|  
+|----------|-------------|---------------------|---------|
 | [SUM](/tidb-cloud-lake/sql/sum.md) | Calculates sum over window | ✓ | `SUM(sales) OVER (PARTITION BY region ORDER BY date)` |
 | [AVG](/tidb-cloud-lake/sql/avg.md) | Calculates average over window | ✓ | `AVG(score) OVER (ORDER BY id ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)` |
 | [COUNT](/tidb-cloud-lake/sql/count.md) | Counts rows over window | ✓ | `COUNT(*) OVER (PARTITION BY department)` |
@@ -122,7 +125,7 @@ ROWS BETWEEN frame_start AND frame_end
 
 For detailed examples and usage, see [ROWS BETWEEN](/tidb-cloud-lake/sql/rows-between.md).
 
-### 2. RANGE BETWEEN  
+### 2. RANGE BETWEEN
 Defines a window frame using logical value ranges.
 
 **Syntax:**

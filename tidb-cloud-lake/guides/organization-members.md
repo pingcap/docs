@@ -2,6 +2,9 @@
 title: Organization & Members
 summary: This topic explains the concept of an organization and its members in Databend Cloud.
 ---
+
+# Organization & Members
+
 This topic explains the concept of an organization and its members in Databend Cloud.
 
 ## Understanding Organization

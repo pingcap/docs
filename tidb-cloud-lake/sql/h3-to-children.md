@@ -2,6 +2,9 @@
 title: H3_TO_CHILDREN
 summary: Returns the indexes contained by h3 at resolution child_res.
 ---
+
+# H3_TO_CHILDREN
+
 Returns the indexes contained by `h3` at resolution `child_res`.
 
 ## Syntax

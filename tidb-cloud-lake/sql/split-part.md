@@ -2,7 +2,12 @@
 title: SPLIT_PART
 summary: Splits a string using a specified delimiter and returns the specified part.
 ---
+
+# SPLIT_PART
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SPLIT_PART
 
 <FunctionDescription description="Introduced or updated: v1.2.164"/>
 

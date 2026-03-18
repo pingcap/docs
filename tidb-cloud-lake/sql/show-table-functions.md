@@ -2,7 +2,12 @@
 title: SHOW TABLE FUNCTIONS
 summary: Shows the list of supported table functions currently.
 ---
+
+# SHOW TABLE FUNCTIONS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW TABLE FUNCTIONS
 
 <FunctionDescription description="Introduced or updated: v1.2.190"/>
 

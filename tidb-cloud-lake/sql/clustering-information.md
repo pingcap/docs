@@ -2,6 +2,9 @@
 title: CLUSTERING_INFORMATION
 summary: Returns clustering information of a table.
 ---
+
+# CLUSTERING_INFORMATION
+
 Returns clustering information of a table.
 
 ## Syntax

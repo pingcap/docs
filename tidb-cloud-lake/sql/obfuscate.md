@@ -2,6 +2,9 @@
 title: OBFUSCATE
 summary: Dataset anonymization. This is a quick tool, and for more complex scenarios, it is recommended to directly use the underlying function MARKOV_TRAIN, MARKOV_GENERATE, FEISTEL_OBFUSCATE.
 ---
+
+# OBFUSCATE
+
 Dataset anonymization. This is a quick tool, and for more complex scenarios, it is recommended to directly use the underlying function [MARKOV_TRAIN](/tidb-cloud-lake/sql/markov-train.md), [MARKOV_GENERATE](/tidb-cloud-lake/sql/markov-generate.md), [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md).
 
 ## Syntax

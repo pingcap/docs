@@ -2,7 +2,12 @@
 title: SHOW VIRTUAL COLUMNS
 summary: Shows the created virtual columns in the system. Equivalent to SELECT * FROM system.virtual_columns.
 ---
+
+# SHOW VIRTUAL COLUMNS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW VIRTUAL COLUMNS
 
 <FunctionDescription description="Introduced or updated: v1.2.832"/>
 

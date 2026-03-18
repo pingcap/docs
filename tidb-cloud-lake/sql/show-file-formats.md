@@ -2,6 +2,9 @@
 title: SHOW FILE FORMATS
 summary: Returns a list of created file formats.
 ---
+
+# SHOW FILE FORMATS
+
 Returns a list of created file formats.
 
 ## Syntax

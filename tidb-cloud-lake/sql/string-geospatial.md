@@ -2,7 +2,12 @@
 title: TO_STRING
 summary: Converts a GEOMETRY object into a String representation. The display format of the output data is controlled by the geometry_output_format setting, which contains the following types.
 ---
+
+# TO_STRING
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_STRING
 
 <FunctionDescription description="Introduced or updated: v1.2.330"/>
 

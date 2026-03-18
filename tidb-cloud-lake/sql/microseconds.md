@@ -2,7 +2,12 @@
 title: TO_MICROSECONDS
 summary: Converts a specified number of microseconds into an Interval type.
 ---
+
+# TO_MICROSECONDS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_MICROSECONDS
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

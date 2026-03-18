@@ -2,7 +2,12 @@
 title: COPY INTO <location>
 summary: COPY INTO allows you to unload data from a table or query into one or more files in one of the following locations.
 ---
+
+# COPY INTO <location>
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## COPY INTO <location>
 
 <FunctionDescription description="Introduced or updated: v1.2.881"/>
 

@@ -2,6 +2,9 @@
 title: IS_NOT_NULL
 summary: Checks whether a value is not NULL.
 ---
+
+# IS_NOT_NULL
+
 Checks whether a value is not NULL.
 
 ## Syntax

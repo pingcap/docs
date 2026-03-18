@@ -2,8 +2,13 @@
 title: Querying Staged ORC Files in Stage
 summary: In this tutorial, we will walk you through the process of downloading the Iris dataset in ORC format, uploading it to an Amazon S3 bucket, creating an external stage, and querying the data directly from the ORC file.
 ---
+
+# Querying Staged ORC Files in Stage
+
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
+
+## Querying Staged ORC Files in Stage
 
 ## Syntax
 
@@ -72,7 +77,7 @@ FROM @orc_query_stage
 (
     FILE_FORMAT => 'orc',
     PATTERN => '.*[.]orc'
-    
+
 );
 ```
 
@@ -91,8 +96,6 @@ FROM
 ### Query with Metadata
 
 Query ORC files directly from a stage, including metadata columns like `METADATA$FILENAME` and `METADATA$FILE_ROW_NUMBER`:
-
-
 
 ```sql
 SELECT

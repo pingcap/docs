@@ -2,7 +2,12 @@
 title: FUSE_ENCODING
 summary: Returns the encoding types applied to a specific column within a table. It helps you understand how data is compressed and stored in a native format within the table.
 ---
+
+# FUSE_ENCODING
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## FUSE_ENCODING
 
 <FunctionDescription description="Introduced or updated: v1.2.162"/>
 
@@ -34,8 +39,8 @@ CREATE TABLE t(c INT) STORAGE_FORMAT = 'native' COMPRESSION = 'lz4';
 INSERT INTO t SELECT number FROM numbers(2048);
 
 -- Analyze the encoding for column 'c' in table 't'
-SELECT LEVEL_ONE, LEVEL_TWO, COUNT(*) 
-FROM FUSE_ENCODING('default', 't', 'c') 
+SELECT LEVEL_ONE, LEVEL_TWO, COUNT(*)
+FROM FUSE_ENCODING('default', 't', 'c')
 GROUP BY LEVEL_ONE, LEVEL_TWO;
 
 level_one   |level_two|count(*)|
@@ -47,8 +52,8 @@ INSERT INTO t (c)
 SELECT 1
 FROM numbers(2048);
 
-SELECT LEVEL_ONE, LEVEL_TWO, COUNT(*) 
-FROM FUSE_ENCODING('default', 't', 'c') 
+SELECT LEVEL_ONE, LEVEL_TWO, COUNT(*)
+FROM FUSE_ENCODING('default', 't', 'c')
 GROUP BY LEVEL_ONE, LEVEL_TWO;
 
 level_one   |level_two|count(*)|

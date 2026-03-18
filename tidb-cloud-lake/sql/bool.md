@@ -2,7 +2,12 @@
 title: bool_and
 summary: Returns true if all input values are true, otherwise false.
 ---
+
+# bool_and
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## bool_and
 
 <FunctionDescription description="Introduced or updated: v1.2.756"/>
 

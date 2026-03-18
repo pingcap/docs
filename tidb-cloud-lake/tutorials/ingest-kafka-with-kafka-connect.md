@@ -2,6 +2,9 @@
 title: Ingest Kafka with Kafka Connect
 summary: In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, databend-kafka-connect. Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
 ---
+
+# Ingest Kafka with Kafka Connect
+
 In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, [databend-kafka-connect](https://github.com/databendcloud/databend-kafka-connect). Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
 
 ### Step 1: Setting up Kafka Environment
@@ -38,7 +41,7 @@ Save the API key and secret. The secret is not retrievable later.
 confluent api-key use <your-api-key> --resource lkc-jr57j2
 ```
 
-### Step 2: Add Custom Connector Plugin 
+### Step 2: Add Custom Connector Plugin
 
 In this step, you will upload the Kafka Connect sink connector plugin, databend-kafka-connect, to Confluent Cloud.
 
@@ -46,7 +49,7 @@ In this step, you will upload the Kafka Connect sink connector plugin, databend-
 
 2. In Confluent Cloud, from the navigation menu, click **Connectors** > **Add Connector** > **Add plugin**.
 
-3. Fill the plugin details as follows then upload the databend-kafka-connect package. 
+3. Fill the plugin details as follows then upload the databend-kafka-connect package.
 
 | Parameter                 | Description                                                                   |
 |---------------------------|-------------------------------------------------------------------------------|
@@ -57,7 +60,7 @@ In this step, you will upload the Kafka Connect sink connector plugin, databend-
 
 ### Step 3: Create a Kafka Topic
 
-In this step, you will create a Kafka topic in Confluent Cloud. 
+In this step, you will create a Kafka topic in Confluent Cloud.
 
 1. In Confluent Cloud, from the navigation menu, click **Topics** > **Add topic**.
 
@@ -100,11 +103,11 @@ In this step, you will create a Kafka topic in Confluent Cloud.
 
 In this step, you will set up a connector that connects to Databend Cloud.
 
-1. In Confluent Cloud, from the navigation menu, click **Connectors** > **Add Connector**. Search for then select the plugin you uploaded. 
+1. In Confluent Cloud, from the navigation menu, click **Connectors** > **Add Connector**. Search for then select the plugin you uploaded.
 
 ![alt text](/media/tidb-cloud-lake/kafka-3.png)
 
-2. In the **Kafka credentials** step, select **Use an existing API key**, then enter the API key & secret you created with the Confluent CLI. 
+2. In the **Kafka credentials** step, select **Use an existing API key**, then enter the API key & secret you created with the Confluent CLI.
 
 ![alt text](/media/tidb-cloud-lake/kafka-4.png)
 
@@ -136,7 +139,7 @@ In this step, you will set up a connector that connects to Databend Cloud.
 
 4. In the **Networking** step, enter your Databend Cloud warehouse endpoint, such as `xxxxxxxxx--xxx.gw.aws-us-east-2.default.databend.com`.
 
-5. In the **Sizing** step, set it to **1 task**. 
+5. In the **Sizing** step, set it to **1 task**.
 
 6. In the **Review and launch** step, set a name, for example, `databend_connector`.
 

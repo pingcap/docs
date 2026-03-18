@@ -2,6 +2,9 @@
 title: Ingest JSON Logs with Vector (Cloud)
 summary: In this tutorial, we'll simulate generating logs locally, collect them using Vector, store them in S3, and automate their ingestion into Databend Cloud using scheduled tasks.
 ---
+
+# Ingest JSON Logs with Vector (Cloud)
+
 In this tutorial, we'll simulate generating logs locally, collect them using [Vector](https://vector.dev/), store them in S3, and automate their ingestion into Databend Cloud using scheduled tasks.
 
 ![Automating JSON Log Loading with Vector](/media/tidb-cloud-lake/vector-tutorial.png)
@@ -17,7 +20,7 @@ Before you start, ensure you have the following prerequisites in place:
 
 ## Step 1: Create a Target Folder in S3 Bucket
 
-To store the logs collected by Vector, create a folder named logs in your S3 bucket. In this tutorial, we use `s3://databend-doc/logs/` as the target location. 
+To store the logs collected by Vector, create a folder named logs in your S3 bucket. In this tutorial, we use `s3://databend-doc/logs/` as the target location.
 
 This command creates an empty folder named `logs` in the `databend-doc` bucket:
 
@@ -63,10 +66,10 @@ sinks:
       - "extract_message"
     bucket: databend-doc
     region: us-east-2
-    key_prefix: "logs/" 
-    content_type: "text/plain" 
+    key_prefix: "logs/"
+    content_type: "text/plain"
     encoding:
-      codec: "native_json" 
+      codec: "native_json"
     auth:
       access_key_id: "<your-access-key-id>"
       secret_access_key: "<your-secret-access-key>"
@@ -151,13 +154,13 @@ CREATE TASK IF NOT EXISTS myvectortask
     SCHEDULE = 1 MINUTE
     SUSPEND_TASK_AFTER_NUM_FAILURES = 3
 AS
-COPY INTO logs 
+COPY INTO logs
 FROM (
     SELECT $1:log:event, $1:log:timestamp, $1:log:user_id
     FROM @mylog/
 )
-FILE_FORMAT = (TYPE = NDJSON, COMPRESSION = AUTO) 
-MAX_FILES = 10000 
+FILE_FORMAT = (TYPE = NDJSON, COMPRESSION = AUTO)
+MAX_FILES = 10000
 PURGE = TRUE;
 ```
 

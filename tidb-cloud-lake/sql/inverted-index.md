@@ -2,6 +2,9 @@
 title: Inverted Index
 summary: This page provides a comprehensive overview of inverted index operations in Databend, organized by functionality for easy reference.
 ---
+
+# Inverted Index
+
 This page provides a comprehensive overview of inverted index operations in Databend, organized by functionality for easy reference.
 
 ## Inverted Index Management

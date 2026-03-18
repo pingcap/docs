@@ -2,6 +2,9 @@
 title: MINUS
 summary: Negates a numeric value.
 ---
+
+# MINUS
+
 Negates a numeric value.
 
 ## Syntax

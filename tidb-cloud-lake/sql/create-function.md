@@ -2,7 +2,12 @@
 title: CREATE FUNCTION
 summary: Creates an external function that calls a remote handler over Flight (typically Python or other services).
 ---
+
+# CREATE FUNCTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## CREATE FUNCTION
 
 <FunctionDescription description="Introduced or updated: v1.2.339"/>
 
@@ -15,9 +20,9 @@ Creates an external function that calls a remote handler over Flight (typically 
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name> 
-    AS ( <input_param_types> ) RETURNS <return_type> LANGUAGE <language_name> 
-    HANDLER = '<handler_name>' ADDRESS = '<udf_server_address>' 
+CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
+    AS ( <input_param_types> ) RETURNS <return_type> LANGUAGE <language_name>
+    HANDLER = '<handler_name>' ADDRESS = '<udf_server_address>'
     [DESC='<description>']
 ```
 
@@ -38,9 +43,9 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 This example creates an external function that calculates the greatest common divisor (GCD) of two integers:
 
 ```sql
-CREATE FUNCTION gcd AS (INT, INT) 
-    RETURNS INT 
-    LANGUAGE python 
-    HANDLER = 'gcd' 
+CREATE FUNCTION gcd AS (INT, INT)
+    RETURNS INT
+    LANGUAGE python
+    HANDLER = 'gcd'
     ADDRESS = 'http://localhost:8815';
 ```

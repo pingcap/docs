@@ -2,6 +2,9 @@
 title: TODAY
 summary: Returns current date.
 ---
+
+# TODAY
+
 Returns current date.
 
 ## Syntax

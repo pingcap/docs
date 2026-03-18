@@ -2,7 +2,12 @@
 title: PREVIOUS_DAY
 summary: Returns the date of the most recent specified day of the week before the given date or timestamp.
 ---
+
+# PREVIOUS_DAY
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## PREVIOUS_DAY
 
 <FunctionDescription description="Introduced or updated: v1.2.655"/>
 

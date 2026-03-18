@@ -2,7 +2,12 @@
 title: ADD_MONTHS
 summary: The add_months() function adds a specified number of months to a given date or timestamp.
 ---
+
+# ADD_MONTHS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ADD_MONTHS
 
 <FunctionDescription description="Introduced or updated: v1.2.760"/>
 
@@ -72,7 +77,7 @@ INSERT INTO contracts VALUES
     (2, '2024-02-28', 6),
     (3, '2023-11-30', 3);
 
-SELECT 
+SELECT
     id,
     sign_date,
     ADD_MONTHS(sign_date, duration_months) AS end_date

@@ -2,7 +2,12 @@
 title: TRY_TO_TIMESTAMP
 summary: A variant of TO_TIMESTAMP in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
 ---
+
+# TRY_TO_TIMESTAMP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TRY_TO_TIMESTAMP
 
 <FunctionDescription description="Introduced or updated: v1.2.528"/>
 

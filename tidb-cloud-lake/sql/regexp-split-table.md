@@ -2,7 +2,12 @@
 title: REGEXP_SPLIT_TO_TABLE
 summary: Splits a string using a regular expression pattern and returns each segment as a table.
 ---
+
+# REGEXP_SPLIT_TO_TABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## REGEXP_SPLIT_TO_TABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.754"/>
 
@@ -19,7 +24,6 @@ REGEXP_SPLIT_TO_TABLE(string, pattern [, flags text])
 | `string`     | The input string to split (VARCHAR type)                       |
 | `pattern`    | Regular expression pattern used for splitting (VARCHAR type)   |
 | `flags text` | A string of flags to modify the regular expression's behavior. |
-
 
 **Supported `flags` Parameter:**
 Provides flexible regular expression configuration options, controlling matching behavior by combining the following characters:
@@ -71,7 +75,7 @@ SELECT regexp_split_to_table('One_Two_Three', '[_-]', 'i')
 WITH data AS (
   SELECT 'id=123,name=John' AS kv_pairs
 )
-SELECT 
+SELECT
   REGEXP_SPLIT_TO_TABLE(kv_pairs, ',') AS pair
 FROM data;
 ┌──────────────┐

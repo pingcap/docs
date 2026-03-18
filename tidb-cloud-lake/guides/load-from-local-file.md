@@ -2,6 +2,9 @@
 title: Loading from Local File
 summary: Uploading your local data files to a stage or bucket before loading them into Databend can be unnecessary. Instead, you can use BendSQL, the Databend native CLI tool, to directly import the data. This simplifies the workflow and can save you storage fees.
 ---
+
+# Loading from Local File
+
 Uploading your local data files to a stage or bucket before loading them into Databend can be unnecessary. Instead, you can use [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md), the Databend native CLI tool, to directly import the data. This simplifies the workflow and can save you storage fees.
 
 Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
@@ -95,7 +98,6 @@ try (FileInputStream fileInputStream = new FileInputStream(new File("book.csv"))
 >
 > Be sure that you are able to connect to the backend object storage for Databend from local BendSQL directly.
 > If not, you need to specify the `--set presigned_url_disabled=1` option to disable the presigned url feature.
-
 
 ### Step 3. Verify Loaded Data
 

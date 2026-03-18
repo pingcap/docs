@@ -3,6 +3,8 @@ title: MEDIAN
 summary: The MEDIAN() function.
 ---
 
+# MEDIAN
+
 Aggregate function.
 
 The MEDIAN() function computes the median of a numeric data sequence.
@@ -20,8 +22,8 @@ MEDIAN(<expr>)
 ## Arguments
 
 | Arguments | Description              |
-|-----------|--------------------------|                                                                                                                 
-| `<expr>`  | Any numerical expression |                                                                                                     
+|-----------|--------------------------|
+| `<expr>`  | Any numerical expression |
 
 ## Return Type
 

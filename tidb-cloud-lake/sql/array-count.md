@@ -2,6 +2,9 @@
 title: ARRAY_COUNT
 summary: Counts the non-NULL elements in an array.
 ---
+
+# ARRAY_COUNT
+
 Counts the non-`NULL` elements in an array.
 
 ## Syntax

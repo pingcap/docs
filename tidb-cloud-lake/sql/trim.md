@@ -2,7 +2,12 @@
 title: TRIM
 summary: Removes spaces, specific characters, or substrings from the start, end, or both sides of a string.
 ---
+
+# TRIM
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TRIM
 
 <FunctionDescription description="Introduced or updated: v1.2.694"/>
 

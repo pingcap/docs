@@ -2,6 +2,9 @@
 title: MODULO
 summary: Returns the remainder of x divided by y. If y is 0, it returns an error.
 ---
+
+# MODULO
+
 Returns the remainder of `x` divided by `y`. If `y` is 0, it returns an error.
 
 ## Syntax

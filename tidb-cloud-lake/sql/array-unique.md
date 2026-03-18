@@ -2,7 +2,12 @@
 title: ARRAY_UNIQUE
 summary: Returns the number of unique elements in the array.
 ---
+
+# ARRAY_UNIQUE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_UNIQUE
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

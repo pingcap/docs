@@ -2,6 +2,9 @@
 title: Migrate from Snowflake to TiDB Cloud Lake
 summary: Migrates data from Snowflake to TiDB Cloud Lake by exporting data to Amazon S3 and loading it into TiDB Cloud Lake tables.
 ---
+
+# Migrate from Snowflake to TiDB Cloud Lake
+
 > **Capabilities**: Full Load
 
 This tutorial walks you through the process of migrating your data from Snowflake to Databend. The migration involves exporting data from Snowflake to an Amazon S3 bucket and then loading it into Databend. The process is broken down into three main steps:
@@ -22,7 +25,7 @@ Before you start, ensure you have the following prerequisites in place:
 
 In this step, we'll configure Snowflake to access Amazon S3 using IAM roles. First, we'll create an IAM role, and then use that role to establish a Snowflake Storage Integration for secure data access.
 
-1. Sign in to the AWS Management Console, then create a policy on **IAM** > **Policies** with the following JSON code: 
+1. Sign in to the AWS Management Console, then create a policy on **IAM** > **Policies** with the following JSON code:
 
 ```json
 {
@@ -71,8 +74,7 @@ This policy applies to the S3 bucket named `databend-doc` and specifically to th
     - After the role is created, copy and save the role ARN in a secure location, for example, `arn:aws:iam::123456789012:role/databend-doc-role`.
     - We'll update the **Trust Relationships** for the role later, after we obtain the IAM user ARN for the Snowflake account.
 
-
-3. Open a SQL worksheet in Snowflake and create a storage integration named `my_s3_integration` using the role ARN. 
+3. Open a SQL worksheet in Snowflake and create a storage integration named `my_s3_integration` using the role ARN.
 
 ```sql
 CREATE OR REPLACE STORAGE INTEGRATION my_s3_integration
@@ -80,7 +82,7 @@ CREATE OR REPLACE STORAGE INTEGRATION my_s3_integration
   STORAGE_PROVIDER = 'S3'
   STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::123456789012:role/databend-doc-role'
   STORAGE_ALLOWED_LOCATIONS = ('s3://databend-doc/snowflake/')
-  ENABLED = TRUE; 
+  ENABLED = TRUE;
 ```
 
 4. Show the storage integration details and obtain the value for the `STORAGE_AWS_IAM_USER_ARN` property in the result, for example, `arn:aws:iam::123456789012:user/example`. We'll use this value to update the **Trust Relationships** for the role `databend-doc-role` in the next step.
@@ -108,15 +110,14 @@ DESCRIBE INTEGRATION my_s3_integration;
 
     The ARN `arn:aws:iam::123456789012:user/example` is the IAM user ARN for the Snowflake account that we obtained in the previous step.
 
-
 ## Step 2: Preparing and Exporting Data to Amazon S3
 
 1. Create an external stage in Snowflake with the Snowflake storage integration `my_s3_integration`:
 
 ```sql
-CREATE OR REPLACE STAGE my_external_stage 
-    URL = 's3://databend-doc/snowflake/' 
-    STORAGE_INTEGRATION = my_s3_integration 
+CREATE OR REPLACE STAGE my_external_stage
+    URL = 's3://databend-doc/snowflake/'
+    STORAGE_INTEGRATION = my_s3_integration
     FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 

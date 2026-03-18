@@ -2,6 +2,9 @@
 title: LIKE
 summary: Pattern matching using an SQL pattern. Returns 1 (TRUE) or 0 (FALSE). If either expr or pat is NULL, the result is NULL.
 ---
+
+# LIKE
+
 Pattern matching using an SQL pattern. Returns 1 (TRUE) or 0 (FALSE). If either expr or pat is NULL, the result is NULL.
 
 ## Syntax

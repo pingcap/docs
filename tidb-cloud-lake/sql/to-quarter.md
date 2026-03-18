@@ -2,7 +2,12 @@
 title: TO_QUARTER
 summary: Retrieves the quarter (1, 2, 3, or 4) from a given date or timestamp.
 ---
+
+# TO_QUARTER
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_QUARTER
 
 <FunctionDescription description="Introduced or updated: v1.2.153"/>
 

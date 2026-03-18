@@ -2,7 +2,12 @@
 title: ST_Y
 summary: Returns the latitude (Y coordinate) of a Point represented by a GEOMETRY or GEOGRAPHY object.
 ---
+
+# ST_Y
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_Y
 
 <FunctionDescription description="Introduced or updated: v1.2.458"/>
 

@@ -2,7 +2,12 @@
 title: IS_ERROR
 summary: Returns a Boolean value indicating whether an expression is an error value.
 ---
+
+# IS_ERROR
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## IS_ERROR
 
 <FunctionDescription description="Introduced or updated: v1.2.379"/>
 

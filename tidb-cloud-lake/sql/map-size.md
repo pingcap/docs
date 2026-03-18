@@ -2,7 +2,12 @@
 title: MAP_SIZE
 summary: Returns the size of a MAP.
 ---
+
+# MAP_SIZE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MAP_SIZE
 
 <FunctionDescription description="Introduced or updated: v1.2.459"/>
 

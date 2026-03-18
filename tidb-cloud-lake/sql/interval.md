@@ -2,7 +2,12 @@
 title: Interval
 summary: INTERVAL represents a duration that can be written in natural-language text ('1 year 2 months', '3 days ago') or as an integer number of microseconds. Databend supports units from millennia down to microseconds and allows arithmetic on intervals, dates, and timestamps.
 ---
+
+# Interval
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Interval
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

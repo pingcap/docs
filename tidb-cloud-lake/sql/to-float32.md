@@ -2,6 +2,9 @@
 title: TO_FLOAT32
 summary: Converts a value to FLOAT32 data type.
 ---
+
+# TO_FLOAT32
+
 Converts a value to FLOAT32 data type.
 
 ## Syntax

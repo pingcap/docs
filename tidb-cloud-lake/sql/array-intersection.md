@@ -2,7 +2,12 @@
 title: ARRAY_INTERSECTION
 summary: Returns the common elements between two JSON arrays.
 ---
+
+# ARRAY_INTERSECTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_INTERSECTION
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

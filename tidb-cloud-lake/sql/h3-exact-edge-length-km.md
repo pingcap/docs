@@ -2,6 +2,9 @@
 title: H3_EXACT_EDGE_LENGTH_KM
 summary: Computes the length of this directed edge, in kilometers.
 ---
+
+# H3_EXACT_EDGE_LENGTH_KM
+
 Computes the length of this directed edge, in kilometers.
 
 ## Syntax

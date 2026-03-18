@@ -2,6 +2,9 @@
 title: DROP FILE FORMAT
 summary: Removes a file format.
 ---
+
+# DROP FILE FORMAT
+
 Removes a file format.
 
 ## Syntax

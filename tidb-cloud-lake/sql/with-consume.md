@@ -2,7 +2,12 @@
 title: WITH CONSUME
 summary: Consumes data from a stream within a SELECT query.
 ---
+
+# WITH CONSUME
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## WITH CONSUME
 
 <FunctionDescription description="Introduced or updated: v1.2.469"/>
 
@@ -54,7 +59,7 @@ WHERE
 └─────────────────┘
 ```
 
-The stream is now empty because the query above has consumed all of the data present in the stream. 
+The stream is now empty because the query above has consumed all of the data present in the stream.
 
 ```sql
 -- empty results

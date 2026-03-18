@@ -2,7 +2,12 @@
 title: DESC SEQUENCE
 summary: Describes the properties of a sequence.
 ---
+
+# DESC SEQUENCE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DESC SEQUENCE
 
 <FunctionDescription description="Introduced or updated: v1.2.742"/>
 

@@ -2,7 +2,12 @@
 title: RECLUSTER TABLE
 summary: Re-clusters a table. For why and when to re-cluster a table, see Re-clustering Table.
 ---
+
+# RECLUSTER TABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## RECLUSTER TABLE
 
 <FunctionDescription description="Introduced: v1.2.25"/>
 

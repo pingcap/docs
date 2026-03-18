@@ -2,7 +2,10 @@
 title: system.caches
 summary: An overview of various caches being managed in Databend.
 ---
-An overview of various caches being managed in Databend. 
+
+# system.caches
+
+An overview of various caches being managed in Databend.
 
 The table below shows the cache name, the number of items in the cache, and the size of the cache:
 ```sql

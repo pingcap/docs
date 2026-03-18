@@ -2,6 +2,9 @@
 title: ADD TIME INTERVAL
 summary: Add a time interval to a date or timestamp, return the result of date or timestamp type.
 ---
+
+# ADD TIME INTERVAL
+
 Add a time interval to a date or timestamp, return the result of date or timestamp type.
 
 ## Syntax

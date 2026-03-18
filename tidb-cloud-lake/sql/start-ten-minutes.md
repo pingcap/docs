@@ -2,6 +2,9 @@
 title: TO_START_OF_TEN_MINUTES
 summary: Rounds down a date with time (timestamp/datetime) to the start of the ten-minute interval.
 ---
+
+# TO_START_OF_TEN_MINUTES
+
 Rounds down a date with time (timestamp/datetime) to the start of the ten-minute interval.
 
 ## Syntax

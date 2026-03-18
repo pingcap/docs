@@ -2,7 +2,12 @@
 title: HISTOGRAM
 summary: Generates a data distribution histogram using an "equal height" bucketing strategy.
 ---
+
+# HISTOGRAM
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## HISTOGRAM
 
 <FunctionDescription description="Introduced or updated: v1.2.377"/>
 

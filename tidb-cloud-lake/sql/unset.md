@@ -2,7 +2,12 @@
 title: UNSET
 summary: Reverts one or more system settings to their global or default levels and values. For more information about the setting levels, see Setting Levels. To show all the current settings, use SHOW SETTINGS.
 ---
+
+# UNSET
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## UNSET
 
 <FunctionDescription description="Introduced or updated: v1.2.605"/>
 
@@ -14,7 +19,7 @@ See also: [SET](/tidb-cloud-lake/sql/set.md)
 
 ```sql
 -- Unset one setting
-UNSET [ SESSION | GLOBAL ] <setting_name> 
+UNSET [ SESSION | GLOBAL ] <setting_name>
 
 -- Unset multiple settings
 UNSET [ SESSION | GLOBAL ] ( <setting_name>, <setting_name> ... )

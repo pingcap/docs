@@ -2,13 +2,18 @@
 title: RTRIM
 summary: Removes all occurrences of any character present in the specified trim string from the right side of the string.
 ---
+
+# RTRIM
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## RTRIM
 
 <FunctionDescription description="Introduced or updated: v1.2.694"/>
 
 Removes all occurrences of any character present in the specified trim string from the right side of the string.
 
-See also: 
+See also:
 
 - [TRIM_TRAILING](/tidb-cloud-lake/sql/trim-trailing.md)
 - [LTRIM](/tidb-cloud-lake/sql/ltrim.md)

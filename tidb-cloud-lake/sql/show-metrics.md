@@ -2,7 +2,12 @@
 title: SHOW METRICS
 summary: Shows the list of system metrics.
 ---
+
+# SHOW METRICS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW METRICS
 
 <FunctionDescription description="Introduced or updated: v1.2.190"/>
 

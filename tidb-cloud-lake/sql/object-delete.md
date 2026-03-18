@@ -2,7 +2,12 @@
 title: OBJECT_DELETE
 summary: Deletes specified keys from a JSON object and returns the modified object. If a specified key doesn't exist in the object, it is ignored.
 ---
+
+# OBJECT_DELETE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## OBJECT_DELETE
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

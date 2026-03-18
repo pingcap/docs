@@ -2,7 +2,12 @@
 title: DATE_ADD
 summary: Adds a specified time interval to a DATE or TIMESTAMP value.
 ---
+
+# DATE_ADD
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DATE_ADD
 
 <FunctionDescription description="Introduced or updated: v1.2.641"/>
 

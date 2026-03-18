@@ -2,6 +2,9 @@
 title: BITMAP_MIN
 summary: Gets the minimum value in the bitmap.
 ---
+
+# BITMAP_MIN
+
 Gets the minimum value in the bitmap.
 
 ## Syntax

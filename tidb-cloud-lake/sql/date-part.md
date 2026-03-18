@@ -2,7 +2,12 @@
 title: DATE_PART
 summary: Retrieves the designated portion of a date or timestamp.
 ---
+
+# DATE_PART
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DATE_PART
 
 <FunctionDescription description="Introduced or updated: v1.2.723"/>
 

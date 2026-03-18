@@ -2,7 +2,12 @@
 title: QUANTILE_TDIGEST
 summary: Computes an approximate quantile of a numeric data sequence using the t-digest algorithm.
 ---
+
+# QUANTILE_TDIGEST
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## QUANTILE_TDIGEST
 
 <FunctionDescription description="Introduced or updated: v1.2.41"/>
 

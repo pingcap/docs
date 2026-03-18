@@ -2,7 +2,12 @@
 title: DESC MASKING POLICY
 summary: Displays detailed information about a specific masking policy in Databend.
 ---
+
+# DESC MASKING POLICY
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DESC MASKING POLICY
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>
 

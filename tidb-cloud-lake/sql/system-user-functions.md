@@ -2,7 +2,12 @@
 title: system.user_functions
 summary: Contains information about user-defined functions and external functions in the system.
 ---
+
+# system.user_functions
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system.user_functions
 
 <FunctionDescription description="Introduced or updated: v1.2.315"/>
 
@@ -12,7 +17,6 @@ See also: [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md).
 
 ```sql
 SELECT * FROM system.user_functions;
-
 
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │      name      │    is_aggregate   │ description │                         arguments                         │ language │                                                 definition                                                │

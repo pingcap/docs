@@ -2,7 +2,12 @@
 title: NTILE
 summary: Divides rows into a specified number of buckets and assigns a bucket number to each row. Rows are distributed as evenly as possible across buckets.
 ---
+
+# NTILE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## NTILE
 
 <FunctionDescription description="Introduced: v1.1.50"/>
 

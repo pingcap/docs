@@ -2,6 +2,9 @@
 title: Privileges
 summary: A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within Databend. For example, when querying a table, a user needs SELECT privileges to the table. Similarly, to read a dataset within a stage, the user must possess READ privileges.
 ---
+
+# Privileges
+
 A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within Databend. For example, when querying a table, a user needs `SELECT` privileges to the table. Similarly, to read a dataset within a stage, the user must possess `READ` privileges.
 
 In Databend, privileges are granted to roles. Users receive privileges through the roles assigned to them.
@@ -54,7 +57,6 @@ REVOKE ALL ON default.* FROM ROLE writer;
 -- Show the granted privileges for the role 'writer'
 SHOW GRANTS FOR ROLE writer;
 ```
-
 
 ## Access Control Privileges
 
@@ -167,7 +169,6 @@ Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-databas
 > Note:
 >
 > 1. If a role owns a database, the role can access all the tables in the database.
- 
 
 ### Session Policy Privileges
 
@@ -198,7 +199,7 @@ Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-databas
 | OWNERSHIP | Grants full control over a UDF.  Only a single role can hold this privilege on a specific object at a time. |
 
 > Note:
-> 
+>
 > 1. Don't check the udf auth if it's already be constantly folded.
 > 2. Don't check the udf auth if it's a value in insert.
 

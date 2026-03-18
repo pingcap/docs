@@ -2,6 +2,9 @@
 title: INTERSECT_COUNT
 summary: Counts the number of intersecting bits between two bitmap columns.
 ---
+
+# INTERSECT_COUNT
+
 Counts the number of intersecting bits between two bitmap columns.
 
 ## Syntax
@@ -22,7 +25,7 @@ VALUES
   (2, 'b', to_bitmap('0, 1, 2')),
   (3, 'c', to_bitmap('1, 3, 4'));
 
-SELECT id, INTERSECT_COUNT('b', 'c')(v, tag) 
+SELECT id, INTERSECT_COUNT('b', 'c')(v, tag)
 FROM agg_bitmap_test GROUP BY id;
 
 ┌─────────────────────────────────────────────────────┐

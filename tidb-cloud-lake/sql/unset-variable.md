@@ -2,7 +2,12 @@
 title: UNSET VARIABLE
 summary: Removes one or more variables from the current session.
 ---
+
+# UNSET VARIABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## UNSET VARIABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.609"/>
 
@@ -24,12 +29,12 @@ The following example unsets a single variable:
 
 ```sql
 -- Remove the variable a from the session
-UNSET VARIABLE a;  
+UNSET VARIABLE a;
 ```
 
 The following example unsets multiple variables:
 
 ```sql
 -- Remove variables x and y from the session
-UNSET VARIABLE (x, y); 
+UNSET VARIABLE (x, y);
 ```

@@ -2,8 +2,13 @@
 title: TiDB Cloud Lake - Dashboard Tour
 summary: In this tutorial, we'll load, analyze, and create a dashboard for a dataset named "Covid-19 Data from New York Times". The dataset comprises daily updated information on Covid-19 cases, deaths, and other pertinent statistics for the entire United States. It offers a comprehensive view of the pandemic's impact at the national, state, and county levels, providing detailed insights into the Covid-19 situation across various regions throughout the year 2022.
 ---
+
+# TiDB Cloud Lake - Dashboard Tour
+
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
+
+## TiDB Cloud Lake - Dashboard Tour
 
 In this tutorial, we'll load, analyze, and create a dashboard for a dataset named "Covid-19 Data from New York Times". The dataset comprises daily updated information on Covid-19 cases, deaths, and other pertinent statistics for the entire United States. It offers a comprehensive view of the pandemic's impact at the national, state, and county levels, providing detailed insights into the Covid-19 situation across various regions throughout the year 2022.
 
@@ -40,7 +45,6 @@ The dataset "Covid-19 Data from New York Times" is a built-in sample dataset tha
 
 <StepContent number="2">
 
-
 ### Handling NULLs
 
 Before the analytics work, it is recommended to check for NULL and duplicate values in the table, as they may impact the results.
@@ -65,7 +69,6 @@ WHERE date IS NULL OR country IS NULL OR state IS NULL OR fips IS NULL OR cases 
 </StepContent>
 
 <StepContent number="2">
-
 
 ### Handling Duplicates
 
@@ -109,7 +112,6 @@ WHERE date = '2022-12-31';
 
 <StepContent number="2">
 
-
 ### Total Deaths by State in 2022
 
 1. Run the following SQL statement in a worksheet:
@@ -147,7 +149,6 @@ WHERE date = '2022-12-31' AND state = 'Virgin Islands';
 </StepContent>
 
 <StepContent number="4">
-
 
 ### Cumulative Cases & Deaths per Month in St. John
 

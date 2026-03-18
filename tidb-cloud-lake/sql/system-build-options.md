@@ -2,6 +2,9 @@
 title: system.build_options
 summary: This system table describes the build options of the current Databend release.
 ---
+
+# system.build_options
+
 This system table describes the build options of the current Databend release.
 
 - `cargo_features`: The package features have been enabled, which are listed in the `[features]` section of `Cargo.toml` .

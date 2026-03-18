@@ -2,6 +2,9 @@
 title: system.tables
 summary: Provides metadata information for all tables. It includes details such as table properties, creation time, number of rows, data size, and more.
 ---
+
+# system.tables
+
 Provides metadata information for all tables. It includes details such as table properties, creation time, number of rows, data size, and more.
 
 See also:

@@ -2,6 +2,9 @@
 title: COS
 summary: Returns the cosine of x, where x is given in radians.
 ---
+
+# COS
+
 Returns the cosine of `x`, where `x` is given in radians.
 
 ## Syntax

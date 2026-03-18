@@ -2,7 +2,12 @@
 title: MAP_INSERT
 summary: Returns a new MAP consisting of the input MAP with a new key-value pair inserted (an existing key updated with a new value).
 ---
+
+# MAP_INSERT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## MAP_INSERT
 
 <FunctionDescription description="Introduced or updated: v1.2.654"/>
 

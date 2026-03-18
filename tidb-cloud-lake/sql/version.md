@@ -2,6 +2,9 @@
 title: VERSION
 summary: Returns the current version of DatabendQuery.
 ---
+
+# VERSION
+
 Returns the current version of DatabendQuery.
 
 ## Syntax

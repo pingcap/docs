@@ -2,7 +2,12 @@
 title: ARRAY_PREPEND
 summary: Prepends an element to the beginning of an array.
 ---
+
+# ARRAY_PREPEND
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_PREPEND
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

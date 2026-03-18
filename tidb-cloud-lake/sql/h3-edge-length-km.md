@@ -2,6 +2,9 @@
 title: H3_EDGE_LENGTH_KM
 summary: Returns the average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
 ---
+
+# H3_EDGE_LENGTH_KM
+
 Returns the average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
 
 ## Syntax

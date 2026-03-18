@@ -2,7 +2,12 @@
 title: DROP FUNCTION
 summary: Drops a user-defined function. Works with all function types Scalar SQL, Tabular SQL, and Embedded functions.
 ---
+
+# DROP FUNCTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP FUNCTION
 
 <FunctionDescription description="Introduced or updated: v1.2.116"/>
 

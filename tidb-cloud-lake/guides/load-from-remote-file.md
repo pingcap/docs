@@ -2,6 +2,9 @@
 title: Loading from Remote File
 summary: To load data from remote files into Databend, the COPY INTO command can be used. This command allows you to copy data from a variety of sources, including remote files, into Databend with ease. With COPY INTO, you can specify the source file location, file format, and other relevant parameters to tailor the import process to your needs. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see Input & Output File Formats.
 ---
+
+# Loading from Remote File
+
 To load data from remote files into Databend, the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command can be used. This command allows you to copy data from a variety of sources, including remote files, into Databend with ease. With COPY INTO, you can specify the source file location, file format, and other relevant parameters to tailor the import process to your needs. Please note that the files must be in a format supported by Databend, otherwise the data cannot be imported. For more information on the file formats supported by Databend, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ## Loading with Glob Patterns
@@ -13,7 +16,7 @@ Databend facilitates the loading of data from remote files through the use of gl
 The set pattern in glob expressions enables matching any one of the characters within a set. For example, consider files named `data_file_a.csv`, `data_file_b.csv`, and `data_file_c.csv`. Utilize the set pattern to load data from all three files:
 
 ```sql
-COPY INTO your_table 
+COPY INTO your_table
 FROM 'https://your-remote-location/data_file_{a,b,c}.csv' ...
 ```
 
@@ -22,7 +25,7 @@ FROM 'https://your-remote-location/data_file_{a,b,c}.csv' ...
 When dealing with files named `data_file_001.csv`, `data_file_002.csv`, and `data_file_003.csv`, the range pattern becomes useful. Load data from this series of files using the range pattern like this:
 
 ```sql
-COPY INTO your_table 
+COPY INTO your_table
 FROM 'https://your-remote-location/data_file_[001-003].csv' ...
 ```
 

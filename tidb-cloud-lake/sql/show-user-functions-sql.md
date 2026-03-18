@@ -2,7 +2,12 @@
 title: SHOW USER FUNCTIONS
 summary: Lists the existing user-defined functions and external functions in the system. Equivalent to SELECT name, is_aggregate, description, arguments, language FROM system.user_functions....
 ---
+
+# SHOW USER FUNCTIONS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW USER FUNCTIONS
 
 <FunctionDescription description="Introduced or updated: v1.2.315"/>
 

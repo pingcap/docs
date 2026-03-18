@@ -2,7 +2,12 @@
 title: Connection Parameters
 summary: Connection parameters are key-value pairs you supply when creating reusable connections with CREATE CONNECTION. After a connection is created, reference it from stages, COPY commands, and other SQL features by using CONNECTION = (CONNECTION_NAME = '<connection-name>'). For full syntax and usage, see CREATE CONNECTION.
 ---
+
+# Connection Parameters
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Connection Parameters
 
 <FunctionDescription description="Introduced or updated: v1.2.294"/>
 
@@ -45,7 +50,7 @@ CREATE CONNECTION my_s3_conn
 CREATE STAGE my_s3_stage
   URL = 's3://my-bucket'
   CONNECTION = (CONNECTION_NAME = 'my_s3_conn');
-  
+
 -- Create a reusable connection for an S3-compatible service such as MinIO
 CREATE CONNECTION my_minio_conn
   STORAGE_TYPE = 's3'

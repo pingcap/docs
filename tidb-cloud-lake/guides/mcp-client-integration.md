@@ -2,10 +2,13 @@
 title: MCP Client Integration
 summary: Databend MCP connects AI assistants to Databend via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients.
 ---
+
+# MCP Client Integration
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# MCP Client Integration
+## MCP Client Integration
 
 ## Overview
 

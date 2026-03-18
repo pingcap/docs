@@ -2,6 +2,9 @@
 title: Connect to TiDB Cloud Lake
 summary: TiDB Cloud Lake supports multiple connection methods to suit different use cases. All options below work with both **TiDB Cloud Lake** and **self-hosted Databend**.
 ---
+
+# Connect to TiDB Cloud Lake
+
 Databend supports multiple connection methods to suit different use cases. All options below work with both **Databend Cloud** and **self-hosted Databend**.
 
 ## Quick Selection
@@ -53,4 +56,3 @@ Databend supports multiple connection methods to suit different use cases. All o
 | [Deepnote](/tidb-cloud-lake/guides/deepnote.md) | Collaborative Notebooks |
 | [MindsDB](/tidb-cloud-lake/guides/mindsdb.md) | ML Platform |
 | [Redash](/tidb-cloud-lake/guides/redash.md) | SQL-Based Dashboards |
-

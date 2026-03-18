@@ -2,7 +2,12 @@
 title: ST_POINTN
 summary: Returns a Point at a specified index in a LineString.
 ---
+
+# ST_POINTN
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_POINTN
 
 <FunctionDescription description="Introduced or updated: v1.2.458"/>
 

@@ -2,7 +2,12 @@
 title: DROP WAREHOUSE
 summary: Removes a warehouse and frees up the resources associated with it.
 ---
+
+# DROP WAREHOUSE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP WAREHOUSE
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>
 

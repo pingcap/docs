@@ -2,6 +2,9 @@
 title: SUBTRACT TIME INTERVAL
 summary: Subtract time interval function.
 ---
+
+# SUBTRACT TIME INTERVAL
+
 Subtract time interval from a date or timestamp, return the result of date or timestamp type.
 ## Syntax
 

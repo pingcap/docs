@@ -2,6 +2,9 @@
 title: BITMAP_UNION
 summary: Counts the number of bits set to 1 in the bitmap by performing a logical UNION operation.
 ---
+
+# BITMAP_UNION
+
 Counts the number of bits set to 1 in the bitmap by performing a logical UNION operation.
 
 ## Syntax

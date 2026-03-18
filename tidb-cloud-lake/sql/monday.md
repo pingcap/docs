@@ -2,6 +2,9 @@
 title: TO_MONDAY
 summary: Round down a date or date with time (timestamp/datetime) to the nearest Monday. Returns the date.
 ---
+
+# TO_MONDAY
+
 Round down a date or date with time (timestamp/datetime) to the nearest Monday.
 Returns the date.
 

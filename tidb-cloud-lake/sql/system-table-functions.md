@@ -2,11 +2,14 @@
 title: system.table_functions
 summary: Get all table functions' names.
 ---
+
+# system.table_functions
+
 Get all table functions' names.
 
 ```sql
 SELECT * FROM system.table_functions;
-``` 
+```
 
 ```text
 +----------------------------+

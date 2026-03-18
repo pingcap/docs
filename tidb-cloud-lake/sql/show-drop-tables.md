@@ -2,7 +2,12 @@
 title: SHOW DROP TABLES
 summary: Lists the dropped tables in the current or a specified database.
 ---
+
+# SHOW DROP TABLES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW DROP TABLES
 
 <FunctionDescription description="Introduced or updated: v1.2.203"/>
 

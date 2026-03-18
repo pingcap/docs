@@ -2,7 +2,12 @@
 title: TO_STRING
 summary: Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see Formatting Date and Time.
 ---
+
+# TO_STRING
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_STRING
 
 <FunctionDescription description="Introduced or updated: v1.2.745"/>
 
@@ -126,7 +131,7 @@ SELECT
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 -- Using Oracle format style (same data as MySQL example above)
-SETTINGS (date_format_style = 'Oracle') 
+SETTINGS (date_format_style = 'Oracle')
 SELECT
   TO_STRING('2022-12-25', 'MM/DD/YYYY'),
   TO_CHAR('2022-12-25', 'MM/DD/YYYY');  -- Using TO_CHAR alias

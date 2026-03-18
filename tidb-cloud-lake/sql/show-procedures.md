@@ -2,7 +2,12 @@
 title: SHOW PROCEDURES
 summary: Returns a list of all stored procedures in the system.
 ---
+
+# SHOW PROCEDURES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW PROCEDURES
 
 <FunctionDescription description="Introduced or updated: v1.2.637"/>
 

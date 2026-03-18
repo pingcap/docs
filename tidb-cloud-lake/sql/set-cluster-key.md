@@ -2,6 +2,9 @@
 title: SET CLUSTER KEY
 summary: Set a cluster key when creating a table.
 ---
+
+# SET CLUSTER KEY
+
 Set a cluster key when creating a table.
 
 Cluster key is intended to improve query performance by physically clustering data together. For example, when you set a column as your cluster key for a table, the table data will be physically sorted by the column you set. This will maximize the query performance if your most queries are filtered by the column.
@@ -10,7 +13,7 @@ Cluster key is intended to improve query performance by physically clustering da
 
 See also:
 
-* [ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md) 
+* [ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md)
 * [DROP CLUSTER KEY](/tidb-cloud-lake/sql/drop-cluster-key.md)
 
 ## Syntax

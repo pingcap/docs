@@ -2,7 +2,12 @@
 title: Apache Hive Tables
 summary: Databend can query data that is cataloged by Apache Hive without copying it. Register the Hive Metastore as a Databend catalog, point to the object storage that holds the table data, and then query the tables as if they were native Databend objects.
 ---
+
+# Apache Hive Tables
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Apache Hive Tables
 
 <FunctionDescription description="Introduced or updated: v1.2.668"/>
 

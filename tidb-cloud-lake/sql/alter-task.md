@@ -2,7 +2,12 @@
 title: ALTER TASK
 summary: The ALTER TASK statement is used to modify an existing task.
 ---
+
+# ALTER TASK
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ALTER TASK
 
 <FunctionDescription description="Introduced or updated: v1.2.371"/>
 
@@ -60,7 +65,7 @@ ALTER TASK IF EXISTS mytask SET
 This example alters the mytask task, changing its warehouse to new_warehouse and updating its schedule to run daily at noon UTC.
 
 ```sql
-ALTER TASK IF EXISTS mytask MODIFY 
+ALTER TASK IF EXISTS mytask MODIFY
 AS
 INSERT INTO new_table SELECT * FROM source_table;
 ```
@@ -80,4 +85,3 @@ In this example, we are adding dependencies to the MyTask1 task. It will now run
 ALTER TASK MyTask1 REMOVE AFTER 'task2';
 ```
 Here, we are removing a specific dependency for the MyTask1 task. It will no longer run after 'task2'. This can be useful if you want to modify the task's dependencies within a DAG of tasks.
-

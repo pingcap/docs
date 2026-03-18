@@ -2,7 +2,12 @@
 title: system.indexes
 summary: Contains information about the created indexes.
 ---
+
+# system.indexes
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system.indexes
 
 <FunctionDescription description="Introduced: v1.1.50"/>
 

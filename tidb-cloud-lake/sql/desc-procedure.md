@@ -2,7 +2,12 @@
 title: DESC PROCEDURE
 summary: Displays detailed information about a specific stored procedure.
 ---
+
+# DESC PROCEDURE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DESC PROCEDURE
 
 <FunctionDescription description="Introduced or updated: v1.2.690"/>
 
@@ -22,10 +27,10 @@ DESC | DESCRIBE PROCEDURE <procedure_name>([<parameter_type1>, <parameter_type2>
 This example creates and then displays a stored procedure named `sum_even_numbers`.
 
 ```sql
-CREATE PROCEDURE sum_even_numbers(start_val UInt8, end_val UInt8) 
-RETURNS UInt8 NOT NULL 
-LANGUAGE SQL 
-COMMENT='Calculate the sum of all even numbers' 
+CREATE PROCEDURE sum_even_numbers(start_val UInt8, end_val UInt8)
+RETURNS UInt8 NOT NULL
+LANGUAGE SQL
+COMMENT='Calculate the sum of all even numbers'
 AS $$
 BEGIN
     LET sum := 0;
@@ -34,7 +39,7 @@ BEGIN
             sum := sum + i;
         END IF;
     END FOR;
-    
+
     RETURN sum;
 END;
 $$;

@@ -2,7 +2,12 @@
 title: Data Types
 summary: Databend stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
 ---
+
+# Data Types
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## Data Types
 
 <FunctionDescription description="Introduced or updated: v1.2.100"/>
 

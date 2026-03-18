@@ -2,7 +2,12 @@
 title: VECTOR_DIMS
 summary: Returns the dimensionality (number of elements) of a vector.
 ---
+
+# VECTOR_DIMS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## VECTOR_DIMS
 
 <FunctionDescription description="Introduced or updated: v1.2.780"/>
 
@@ -38,7 +43,7 @@ The `VECTOR_DIMS` function returns the dimensionality of a vector, which is the 
 ## Examples
 
 ```sql
-SELECT 
+SELECT
     VECTOR_DIMS([1,2]::VECTOR(2)) AS dims_2d,
     VECTOR_DIMS([1,2,3]::VECTOR(3)) AS dims_3d,
     VECTOR_DIMS([1,2,3,4,5]::VECTOR(5)) AS dims_5d;

@@ -2,12 +2,15 @@
 title: RANK
 summary: Assigns a rank to each row within a partition. Rows with equal values receive the same rank, with gaps in subsequent rankings.
 ---
+
+# RANK
+
 Assigns a rank to each row within a partition. Rows with equal values receive the same rank, with gaps in subsequent rankings.
 
 ## Syntax
 
 ```sql
-RANK() 
+RANK()
 OVER (
     [ PARTITION BY partition_expression ]
     ORDER BY sort_expression [ ASC | DESC ]

@@ -2,6 +2,9 @@
 title: Stream
 summary: This page provides a comprehensive overview of stream operations in Databend, organized by functionality for easy reference.
 ---
+
+# Stream
+
 This page provides a comprehensive overview of stream operations in Databend, organized by functionality for easy reference.
 
 ## Stream Management

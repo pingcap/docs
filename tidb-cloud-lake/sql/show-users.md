@@ -2,7 +2,12 @@
 title: SHOW USERS
 summary: Lists all SQL users in the system. If you're using Databend Cloud, this command also shows the user accounts (email addresses) within your organization that are used to log in to Databend Cloud.
 ---
+
+# SHOW USERS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW USERS
 
 <FunctionDescription description="Introduced or updated: v1.2.644"/>
 

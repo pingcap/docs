@@ -2,7 +2,12 @@
 title: DELETE
 summary: Removes one or more rows from a table.
 ---
+
+# DELETE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DELETE
 
 <FunctionDescription description="Introduced or updated: v1.2.174"/>
 
@@ -15,7 +20,7 @@ Removes one or more rows from a table.
 ## Syntax
 
 ```sql
-DELETE FROM <table_name> [AS <table_alias>] 
+DELETE FROM <table_name> [AS <table_alias>]
 [WHERE <condition>]
 ```
 - `AS <table_alias>`: Allows you to set an alias for a table, making it easier to reference the table within a query. This helps simplify and shorten the SQL code, especially when dealing with complex queries involving multiple tables. See an example in [Deleting with subquery using EXISTS / NOT EXISTS clause](#deleting-with-subquery-using-exists--not-exists-clause).

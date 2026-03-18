@@ -2,7 +2,12 @@
 title: COVAR_SAMP
 summary: Returns the sample covariance (Σ((x - x̅)(y - y̅)) / (n - 1)) of two data columns.
 ---
+
+# COVAR_SAMP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## COVAR_SAMP
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>
 

@@ -2,7 +2,12 @@
 title: ARRAY_CONSTRUCT
 summary: Creates a JSON array with specified values.
 ---
+
+# ARRAY_CONSTRUCT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_CONSTRUCT
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

@@ -2,7 +2,12 @@
 title: VARIANCE_SAMP
 summary: Alias for COVAR_SAMP.
 ---
+
+# VARIANCE_SAMP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## VARIANCE_SAMP
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>
 

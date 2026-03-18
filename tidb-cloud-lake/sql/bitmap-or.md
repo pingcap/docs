@@ -2,6 +2,9 @@
 title: BITMAP_OR
 summary: Performs a bitwise OR operation on the two bitmaps.
 ---
+
+# BITMAP_OR
+
 Performs a bitwise OR operation on the two bitmaps.
 
 ## Syntax

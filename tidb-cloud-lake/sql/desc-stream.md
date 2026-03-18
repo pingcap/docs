@@ -2,7 +2,12 @@
 title: DESC STREAM
 summary: Describes the details of a specific stream.
 ---
+
+# DESC STREAM
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DESC STREAM
 
 <FunctionDescription description="Introduced or updated: v1.2.223"/>
 

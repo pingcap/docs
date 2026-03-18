@@ -2,7 +2,12 @@
 title: SHOW TABLE STATUS
 summary: Shows the status of the tables in a database. The status information includes various physical sizes and timestamps about a table, see Examples for details.
 ---
+
+# SHOW TABLE STATUS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW TABLE STATUS
 
 <FunctionDescription description="Introduced or updated: v1.2.131"/>
 

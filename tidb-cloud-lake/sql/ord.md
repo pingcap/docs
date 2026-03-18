@@ -2,6 +2,9 @@
 title: ORD
 summary: If the leftmost character is not a multibyte character, ORD() returns the same value as the ASCII() function.
 ---
+
+# ORD
+
 If the leftmost character is not a multibyte character, ORD() returns the same value as the ASCII() function.
 
 If the leftmost character of the string str is a multibyte character, returns the code for that character,

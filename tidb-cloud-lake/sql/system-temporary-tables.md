@@ -2,7 +2,12 @@
 title: system.temporary_tables
 summary: Provides information about all existing temporary tables in the current session.
 ---
+
+# system.temporary_tables
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## system.temporary_tables
 
 <FunctionDescription description="Introduced or updated: v1.2.666"/>
 

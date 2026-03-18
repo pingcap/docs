@@ -2,6 +2,9 @@
 title: STRING_TO_H3
 summary: Converts the string representation to H3 (uint64) representation.
 ---
+
+# STRING_TO_H3
+
 Converts the string representation to [H3](https://eng.uber.com/h3/) (uint64) representation.
 
 ## Syntax

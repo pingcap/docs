@@ -2,7 +2,12 @@
 title: SHOW SEQUENCES
 summary: Returns a list of the created sequences.
 ---
+
+# SHOW SEQUENCES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW SEQUENCES
 
 <FunctionDescription description="Introduced or updated: v1.2.742"/>
 

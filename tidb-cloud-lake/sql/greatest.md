@@ -2,7 +2,12 @@
 title: GREATEST
 summary: Returns the maximum value from a set of values. If any value in the set is NULL, the function returns NULL.
 ---
+
+# GREATEST
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## GREATEST
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>
 

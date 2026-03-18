@@ -2,7 +2,12 @@
 title: OBJECT_KEYS
 summary: Returns the keys of the outermost JSON object as an array of strings.
 ---
+
+# OBJECT_KEYS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## OBJECT_KEYS
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

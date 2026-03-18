@@ -2,9 +2,12 @@
 title: TRIM_LEADING
 summary: Removes all occurrences of the specified trim string from the beginning of the string.
 ---
+
+# TRIM_LEADING
+
 Removes all occurrences of the specified trim string from the beginning of the string.
 
-See also: 
+See also:
 
 - [LTRIM](/tidb-cloud-lake/sql/ltrim.md)
 - [TRIM_TRAILING](/tidb-cloud-lake/sql/trim-trailing.md)

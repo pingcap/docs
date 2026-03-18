@@ -2,6 +2,9 @@
 title: BITMAP_NOT_COUNT
 summary: Counts the number of bits set to 0 in the bitmap by performing a logical NOT operation.
 ---
+
+# BITMAP_NOT_COUNT
+
 Counts the number of bits set to 0 in the bitmap by performing a logical NOT operation.
 
 ## Syntax

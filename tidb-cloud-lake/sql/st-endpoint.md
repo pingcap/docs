@@ -2,7 +2,12 @@
 title: ST_ENDPOINT
 summary: Returns the last Point in a LineString.
 ---
+
+# ST_ENDPOINT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_ENDPOINT
 
 <FunctionDescription description="Introduced or updated: v1.2.458"/>
 

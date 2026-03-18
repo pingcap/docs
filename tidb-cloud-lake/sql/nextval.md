@@ -2,7 +2,12 @@
 title: NEXTVAL
 summary: Retrieves the next value from a sequence.
 ---
+
+# NEXTVAL
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## NEXTVAL
 
 <FunctionDescription description="Introduced or updated: v1.2.784"/>
 
@@ -24,7 +29,6 @@ Integer.
 |:----------------|:------------|:-------------------|
 | ACCESS SEQUENCE | SEQUENCE    | Access a sequence. |
 
-
 To access a sequence, the user performing the operation or the roles must have the ACCESS SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md).
 
 > **Note:**
@@ -34,7 +38,6 @@ To access a sequence, the user performing the operation or the roles must have t
 > When enabled, granular permission verification is enforced during sequence establishment.
 >
 > This is an experimental feature and may be enabled by default in the future.
-
 
 ## Examples
 

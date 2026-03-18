@@ -2,7 +2,12 @@
 title: DATE
 summary: Alias for TO_DATE.
 ---
+
+# DATE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DATE
 
 <FunctionDescription description="Introduced or updated: v1.2.375"/>
 

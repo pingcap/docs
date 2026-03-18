@@ -2,6 +2,9 @@
 title: Loading Parquet into TiDB Cloud Lake
 summary: Parquet is a columnar storage format commonly used in data analytics. It is designed to support complex data structures, and it is efficient for processing large datasets.
 ---
+
+# Loading Parquet into TiDB Cloud Lake
+
 ## What is Parquet?
 
 Parquet is a columnar storage format commonly used in data analytics. It is designed to support complex data structures, and it is efficient for processing large datasets.

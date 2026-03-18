@@ -2,7 +2,12 @@
 title: TO_GEOGRAPHY
 summary: Parses an input and returns a value of type GEOGRAPHY.
 ---
+
+# TO_GEOGRAPHY
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_GEOGRAPHY
 
 <FunctionDescription description="Introduced or updated: v1.2.431"/>
 

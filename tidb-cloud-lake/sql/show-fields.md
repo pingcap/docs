@@ -2,11 +2,14 @@
 title: SHOW FIELDS
 summary: Shows information about the columns in a given table. Equivalent to DESCRIBE TABLE.
 ---
+
+# SHOW FIELDS
+
 Shows information about the columns in a given table. Equivalent to [DESCRIBE TABLE](/tidb-cloud-lake/sql/describe-table.md).
 
 > **Tip:**
 >
-> [SHOW COLUMNS](/tidb-cloud-lake/sql/show-columns.md) provides similar but more information about the columns of a table. 
+> [SHOW COLUMNS](/tidb-cloud-lake/sql/show-columns.md) provides similar but more information about the columns of a table.
 
 ## Syntax
 
@@ -24,7 +27,7 @@ CREATE TABLE books
      author VARCHAR
   );
 
-SHOW FIELDS FROM books; 
+SHOW FIELDS FROM books;
 
 Field   |Type     |Null|Default                     |Extra|
 --------+---------+----+----------------------------+-----+

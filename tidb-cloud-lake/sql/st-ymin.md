@@ -2,7 +2,12 @@
 title: ST_YMIN
 summary: Returns the minimum latitude (Y coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 ---
+
+# ST_YMIN
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ST_YMIN
 
 <FunctionDescription description="Introduced or updated: v1.2.512"/>
 

@@ -2,7 +2,12 @@
 title: TO_CENTURIES
 summary: Converts a specified number of centuries into an Interval type.
 ---
+
+# TO_CENTURIES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_CENTURIES
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

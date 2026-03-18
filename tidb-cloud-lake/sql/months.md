@@ -2,7 +2,12 @@
 title: TO_MONTHS
 summary: Converts a specified number of months into an Interval type.
 ---
+
+# TO_MONTHS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_MONTHS
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

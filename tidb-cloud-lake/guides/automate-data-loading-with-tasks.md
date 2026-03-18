@@ -2,6 +2,9 @@
 title: Automating Data Loading with Tasks
 summary: Tasks wrap SQL so Databend can run it for you on a schedule or when a condition is met. Keep the following knobs in mind when you define one with CREATE TASK.
 ---
+
+# Automating Data Loading with Tasks
+
 Tasks wrap SQL so Databend can run it for you on a schedule or when a condition is met. Keep the following knobs in mind when you define one with [CREATE TASK](/tidb-cloud-lake/sql/create-task.md):
 
 ![alt text](/media/tidb-cloud-lake/task.png)
@@ -211,4 +214,3 @@ FROM task_history('task_stream_merge', 5);
 ```
 
 The task fires only when `STREAM_STATUS('<database>.<stream_name>')` returns `TRUE`. Always prefix the stream with its database (for example `task_demo.sensor_events_stream`) so the task can resolve it regardless of the current schema, and use your own warehouse name in every `CREATE/ALTER TASK`.
-

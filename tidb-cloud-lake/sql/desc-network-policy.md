@@ -2,7 +2,12 @@
 title: DESC NETWORK POLICY
 summary: Displays detailed information about a specific network policy in Databend. It provides information about the allowed and blocked IP address lists associated with the policy and the comment, if any, that describes the purpose or function of the policy.
 ---
+
+# DESC NETWORK POLICY
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DESC NETWORK POLICY
 
 <FunctionDescription description="Introduced or updated: v1.2.26"/>
 

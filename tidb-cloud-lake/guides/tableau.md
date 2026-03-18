@@ -2,6 +2,9 @@
 title: Tableau
 summary: Tableau is a visual analytics platform transforming the way we use data to solve problems—empowering people and organizations to make the most of their data. By leveraging the databend-jdbc driver (version 0.3.4 or higher), both Databend and Databend Cloud can integrate with Tableau, enabling seamless data access and efficient analysis. It is important to note that for optimal compatibility, it is advisable to use Tableau version 2022.3 or higher to avoid potential compatibility issues.
 ---
+
+# Tableau
+
 [Tableau](https://www.tableau.com/) is a visual analytics platform transforming the way we use data to solve problems—empowering people and organizations to make the most of their data. By leveraging the [databend-jdbc driver](https://github.com/databendcloud/databend-jdbc) (version 0.3.4 or higher), both Databend and Databend Cloud can integrate with Tableau, enabling seamless data access and efficient analysis. It is important to note that for optimal compatibility, it is advisable to use Tableau version 2022.3 or higher to avoid potential compatibility issues.
 
 Databend currently provides two integration methods with Tableau. The first approach utilizes the Other Databases (JDBC) interface within Tableau and is applicable to both Databend and Databend Cloud. The second method recommends using the [databend-tableau-connector-jdbc](https://github.com/databendcloud/databend-tableau-connector-jdbc) connector specifically developed by Databend for optimal connectivity with Databend.

@@ -2,7 +2,12 @@
 title: DROP FUNCTION
 summary: Drops an external function.
 ---
+
+# DROP FUNCTION
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## DROP FUNCTION
 
 <FunctionDescription description="Introduced or updated: v1.2.116"/>
 

@@ -2,6 +2,9 @@
 title: TiDB Cloud Lake - Data Sharing via ATTACH TABLE
 summary: In this tutorial, we'll walk you through how to link a table in Databend Cloud with an existing Databend table stored in an S3 bucket using the ATTACH TABLE command.
 ---
+
+# TiDB Cloud Lake - Data Sharing via ATTACH TABLE
+
 In this tutorial, we'll walk you through how to link a table in Databend Cloud with an existing Databend table stored in an S3 bucket using the [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) command.
 
 ## Before You Start
@@ -23,8 +26,8 @@ docker run \
     -e QUERY_STORAGE_TYPE=s3 \
     -e AWS_S3_ENDPOINT="https://s3.us-east-2.amazonaws.com" \
     -e AWS_S3_BUCKET=databend-doc\
-    -e AWS_ACCESS_KEY_ID=<your-aws-access-key-id> \ 
-    -e AWS_SECRET_ACCESS_KEY=<your-aws-secrect-access-key> \ 
+    -e AWS_ACCESS_KEY_ID=<your-aws-access-key-id> \
+    -e AWS_SECRET_ACCESS_KEY=<your-aws-secrect-access-key> \
     datafuselabs/databend:v1.2.699-nightly
 ```
 
@@ -33,7 +36,7 @@ docker run \
 ```sql
 CREATE TABLE population (
   city VARCHAR(50),
-  province VARCHAR(50),  
+  province VARCHAR(50),
   population INT
 );
 
@@ -113,10 +116,10 @@ WHERE city = 'Toronto';
 After executing the update, you can query both attached tables to verify that the changes are reflected:
 
 ```sql
--- Check the updated population in the attached table with all columns  
+-- Check the updated population in the attached table with all columns
 SELECT population FROM population_all_columns WHERE city = 'Toronto';
 
--- Check the updated population in the attached table with only the population column  
+-- Check the updated population in the attached table with only the population column
 SELECT population FROM population_only WHERE city = 'Toronto';
 ```
 

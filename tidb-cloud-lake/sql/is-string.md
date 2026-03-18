@@ -2,7 +2,12 @@
 title: IS_STRING
 summary: Checks if the input JSON value is a string.
 ---
+
+# IS_STRING
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## IS_STRING
 
 <FunctionDescription description="Introduced or updated: v1.2.368"/>
 

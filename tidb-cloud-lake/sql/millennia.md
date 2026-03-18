@@ -2,7 +2,12 @@
 title: TO_MILLENNIA
 summary: Converts a specified number of millennia into an Interval type.
 ---
+
+# TO_MILLENNIA
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## TO_MILLENNIA
 
 <FunctionDescription description="Introduced or updated: v1.2.677"/>
 

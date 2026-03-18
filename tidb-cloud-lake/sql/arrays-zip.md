@@ -3,7 +3,11 @@ title: ARRAYS_ZIP
 summary: Merges multiple arrays into a single array tuple.
 ---
 
+# ARRAYS_ZIP
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAYS_ZIP
 
 <FunctionDescription description="Introduced or updated: v1.2.690"/>
 

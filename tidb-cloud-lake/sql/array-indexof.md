@@ -2,7 +2,12 @@
 title: ARRAY_INDEXOF
 summary: Returns the index of the first occurrence of an element in an array.
 ---
+
+# ARRAY_INDEXOF
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_INDEXOF
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

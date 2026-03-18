@@ -2,6 +2,9 @@
 title: SQL Variables
 summary: SQL variables allow you to store and manage temporary data within a session, making scripts more dynamic and reusable.
 ---
+
+# SQL Variables
+
 SQL variables allow you to store and manage temporary data within a session, making scripts more dynamic and reusable.
 
 ## Variable Commands

@@ -2,6 +2,9 @@
 title: DML (Data Manipulation Language) Commands
 summary: This page provides reference information for the DML (Data Manipulation Language) commands in Databend.
 ---
+
+# DML (Data Manipulation Language) Commands
+
 This page provides reference information for the DML (Data Manipulation Language) commands in Databend.
 
 ## Data Modification

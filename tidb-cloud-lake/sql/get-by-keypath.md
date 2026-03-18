@@ -2,6 +2,9 @@
 title: GET_BY_KEYPATH
 summary: Extracts a nested value from a VARIANT using a key path string. GET_BY_KEYPATH returns the result as VARIANT, while GET_BY_KEYPATH_STRING returns a STRING.
 ---
+
+# GET_BY_KEYPATH
+
 Extracts a nested value from a `VARIANT` using a **key path** string. `GET_BY_KEYPATH` returns the result as `VARIANT`, while `GET_BY_KEYPATH_STRING` returns a `STRING`.
 
 Key paths follow the Postgres-style braces syntax: each segment is wrapped in `{}` and segments are separated by commas, for example `'{user,profile,name}'`. Array indexes can be specified as numbers, e.g. `'{items,0}'`.

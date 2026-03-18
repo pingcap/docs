@@ -2,7 +2,12 @@
 title: ARRAY_CONTAINS
 summary: Returns true if the array contains the specified element.
 ---
+
+# ARRAY_CONTAINS
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_CONTAINS
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

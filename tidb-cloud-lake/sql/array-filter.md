@@ -2,7 +2,12 @@
 title: ARRAY_FILTER
 summary: Filters elements from a JSON array based on a specified Lambda expression, returning only the elements that satisfy the condition. For more information about Lambda expression, see Lambda Expressions.
 ---
+
+# ARRAY_FILTER
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_FILTER
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

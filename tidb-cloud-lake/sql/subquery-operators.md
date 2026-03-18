@@ -2,6 +2,9 @@
 title: Subquery Operators
 summary: A subquery is a query nested within another one. Databend supports the following subquery types.
 ---
+
+# Subquery Operators
+
 A subquery is a query nested within another one. Databend supports the following subquery types:
 
 - [Scalar Subquery](#scalar-subquery)
@@ -31,10 +34,10 @@ INSERT INTO t2 VALUES (3);
 INSERT INTO t2 VALUES (4);
 INSERT INTO t2 VALUES (5);
 
-SELECT * 
-FROM   t1 
-WHERE  t1.a < (SELECT Min(t2.a) 
-               FROM   t2); 
+SELECT *
+FROM   t1
+WHERE  t1.a < (SELECT Min(t2.a)
+               FROM   t2);
 
 --
 +--------+
@@ -100,7 +103,7 @@ SELECT number FROM numbers(10) WHERE number>5 AND not exists(SELECT number FROM 
 
 By using IN or NOT IN, you can check whether an expression matches any value in a list returned by a subquery.
 
-- When you use IN or NOT IN, the subquery must return a single column of values. 
+- When you use IN or NOT IN, the subquery must return a single column of values.
 
 ### Syntax
 
@@ -123,8 +126,8 @@ INSERT INTO t2 VALUES (4);
 INSERT INTO t2 VALUES (5);
 
 -- IN example
-SELECT * 
-FROM   t1 
+SELECT *
+FROM   t1
 WHERE  t1.a IN (SELECT *
                FROM   t2);
 
@@ -136,8 +139,8 @@ WHERE  t1.a IN (SELECT *
 +--------+
 
 -- NOT IN example
-SELECT * 
-FROM   t1 
+SELECT *
+FROM   t1
 WHERE  t1.a NOT IN (SELECT *
                FROM   t2);
 
@@ -182,9 +185,9 @@ INSERT INTO t2 VALUES (3);
 INSERT INTO t2 VALUES (4);
 INSERT INTO t2 VALUES (5);
 
-SELECT * 
-FROM   t1 
-WHERE  t1.a < ANY (SELECT * 
+SELECT *
+FROM   t1
+WHERE  t1.a < ANY (SELECT *
                    FROM   t2);
 
 --
@@ -224,9 +227,9 @@ INSERT INTO t2 VALUES (3);
 INSERT INTO t2 VALUES (4);
 INSERT INTO t2 VALUES (5);
 
-SELECT * 
-FROM   t1 
-WHERE  t1.a < ALL (SELECT * 
+SELECT *
+FROM   t1
+WHERE  t1.a < ALL (SELECT *
                    FROM   t2);
 
 --

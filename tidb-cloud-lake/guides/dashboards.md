@@ -2,9 +2,14 @@
 title: Dashboards
 summary: Dashboards are employed to present query results through a variety of chart types, including scorecards, pie charts, bar charts, and line charts. These charts are generated from the query results. You have the option to create a chart based on the query result after executing a query in a worksheet. Refreshing a dashboard allows you to re-execute the queries corresponding to the charts, thereby updating the charts with the latest results.
 ---
+
+# Dashboards
+
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
 import EllipsisSVG from '@site/static/img/icon/ellipsis.svg';
+
+## Dashboards
 
 Dashboards are employed to present query results through a variety of chart types, including **scorecards**, **pie charts**, **bar charts**, and **line charts**. These charts are generated from the query results. You have the option to create a chart based on the query result after executing a query in a worksheet. Refreshing a dashboard allows you to re-execute the queries corresponding to the charts, thereby updating the charts with the latest results.
 
@@ -25,7 +30,6 @@ In Databend Cloud, you can create multiple dashboards as needed. A dashboard can
 3. On the **Chart** tab, choose a chart type from the dropdown menu on the right. Next, specify the data and customize the chart's appearance using the options found on the **Data** and **Style** tabs below the dropdown list.
 
 Please note that these aggregation functions assist in summarizing and revealing valuable patterns from the raw data in query results. The available functions for aggregation vary based on the distinct data types and the chart types you select.
-
 
 | Function             | Description                                                    |
 |----------------------|----------------------------------------------------------------|

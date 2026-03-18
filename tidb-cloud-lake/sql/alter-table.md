@@ -2,7 +2,12 @@
 title: ALTER TABLE
 summary: Use ALTER TABLE to modify the structure and properties of an existing table, including its columns, comment, storage options, external connection, or even swapping metadata with another table. The subsections below cover each supported capability.
 ---
+
+# ALTER TABLE
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ALTER TABLE
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>
 
@@ -20,19 +25,19 @@ Modify a table by adding, converting, renaming, changing, or removing columns.
 
 ```sql
 -- Add a column to the end of the table
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 ADD [ COLUMN ] <column_name> <data_type> [ NOT NULL | NULL ] [ DEFAULT <constant_value> ]
 
 -- Add a column to a specified position
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 ADD [ COLUMN ] <column_name> <data_type> [ NOT NULL | NULL ] [ DEFAULT <constant_value> ] [ FIRST | AFTER <column_name> ]
 
 -- Add a virtual computed column
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 ADD [ COLUMN ] <column_name> <data_type> AS (<expr>) VIRTUAL
 
 -- Convert a stored computed column to a regular column
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 MODIFY [ COLUMN ] <column_name> DROP STORED
 
 -- Rename a column
@@ -40,7 +45,7 @@ ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 RENAME [ COLUMN ] <column_name> TO <new_column_name>
 
 -- Change data type
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 MODIFY [ COLUMN ] <column_name> <new_data_type> [ DEFAULT <constant_value> ]
        [ , [ COLUMN ] <column_name> <new_data_type> [ DEFAULT <constant_value> ] ]
        ...
@@ -50,7 +55,7 @@ ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 MODIFY [ COLUMN ] <column_name> [ COMMENT '<comment>' ]
 [ , [ COLUMN ] <column_name> [ COMMENT '<comment>' ] ]
 ...
-    
+
 -- Set / Unset masking policy for a column
 ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 MODIFY [ COLUMN ] <column_name> SET MASKING POLICY <policy_name>
@@ -60,7 +65,7 @@ ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 MODIFY [ COLUMN ] <column_name> UNSET MASKING POLICY
 
 -- Remove a column
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 DROP [ COLUMN ] <column_name>
 ```
 
@@ -190,7 +195,7 @@ Modifies the comment of a table. If the table does not have a comment yet, this 
 ### Syntax
 
 ```sql
-ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name> 
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 COMMENT = '<comment>'
 ```
 

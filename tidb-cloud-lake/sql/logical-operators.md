@@ -2,6 +2,9 @@
 title: Logical Operators
 summary: This page describes Logical Operators in TiDB Cloud Lake.
 ---
+
+# Logical Operators
+
 | Operator | Description                            | Example       | Result |
 |----------|----------------------------------------|---------------|--------|
 | **AND**  | Matches both expressions (`a` and `b`) | **1 AND 1**   | TRUE   |

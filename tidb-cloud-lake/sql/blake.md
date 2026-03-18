@@ -2,6 +2,9 @@
 title: BLAKE3
 summary: Calculates a BLAKE3 256-bit checksum for a string. The value is returned as a string of 64 hexadecimal digits or NULL if the argument was NULL.
 ---
+
+# BLAKE3
+
 Calculates a BLAKE3 256-bit checksum for a string. The value is returned as a string of 64 hexadecimal digits or NULL if the argument was NULL.
 
 ## Syntax

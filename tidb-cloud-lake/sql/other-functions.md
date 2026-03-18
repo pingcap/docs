@@ -2,6 +2,9 @@
 title: Other Functions
 summary: This section collects assorted utilities that do not fit into the major functional groups.
 ---
+
+# Other Functions
+
 This section collects assorted utilities that do not fit into the major functional groups.
 
 | Function | Description |
@@ -14,5 +17,3 @@ This section collects assorted utilities that do not fit into the major function
 | [REMOVE_NULLABLE](/tidb-cloud-lake/sql/remove-nullable.md) | Strip NULLability from a column value |
 | [TO_NULLABLE](/tidb-cloud-lake/sql/nullable.md) | Convert a value to a nullable type |
 | [TYPEOF](/tidb-cloud-lake/sql/typeof.md) | Return the name of a value’s data type |
-
-

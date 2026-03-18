@@ -2,6 +2,9 @@
 title: TO_START_OF_MINUTE
 summary: Rounds down a date with time (timestamp/datetime) to the start of the minute.
 ---
+
+# TO_START_OF_MINUTE
+
 Rounds down a date with time (timestamp/datetime) to the start of the minute.
 
 ## Syntax

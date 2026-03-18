@@ -2,8 +2,13 @@
 title: Tracking and Transforming Data via Streams
 summary: A stream in Databend is an always-on change table every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
 ---
+
+# Tracking and Transforming Data via Streams
+
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
+
+## Tracking and Transforming Data via Streams
 
 A stream in Databend is an always-on change table: every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
 
@@ -237,4 +242,3 @@ Rows stay in each stream until `WITH CONSUME` runs, so inserts that arrive at di
 **Integrations**
 - Pair streams with tasks using `task_history('<name>', <limit>)` for scheduled incremental loads.
 - Use [`WITH CONSUME`](/tidb-cloud-lake/sql/task.md) when you want to drain only the latest delta.
-

@@ -2,6 +2,9 @@
 title: GET
 summary: Returns an element from an array by index (1-based).
 ---
+
+# GET
+
 Returns an element from an array by index (1-based).
 
 ## Syntax

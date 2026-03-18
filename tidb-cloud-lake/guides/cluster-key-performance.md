@@ -2,7 +2,8 @@
 title: Cluster Key
 summary: Cluster keys provide automatic data organization to dramatically improve query performance on large tables. Databend seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and Databend handles the rest.
 ---
-# Cluster Key: Automatic Data Organization for Query Acceleration
+
+# Cluster Key
 
 Cluster keys provide automatic data organization to dramatically improve query performance on large tables. Databend seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and Databend handles the rest.
 

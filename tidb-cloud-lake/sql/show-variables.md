@@ -2,7 +2,12 @@
 title: SHOW VARIABLES
 summary: Displays all session variables and their details, such as names, values, and types.
 ---
+
+# SHOW VARIABLES
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## SHOW VARIABLES
 
 <FunctionDescription description="Introduced or updated: v1.2.634"/>
 

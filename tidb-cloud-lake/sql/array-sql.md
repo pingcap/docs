@@ -2,6 +2,9 @@
 title: ARRAY
 summary: Builds an array literal from the supplied expressions. Each argument is evaluated and stored in order. All elements must be castable to a common type.
 ---
+
+# ARRAY
+
 Builds an array literal from the supplied expressions. Each argument is evaluated and stored in order. All elements must be castable to a common type.
 
 ## Syntax

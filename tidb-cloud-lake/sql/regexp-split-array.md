@@ -2,7 +2,12 @@
 title: REGEXP_SPLIT_TO_ARRAY
 summary: Splits a string using a regular expression pattern and returns the segments as an array.
 ---
+
+# REGEXP_SPLIT_TO_ARRAY
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## REGEXP_SPLIT_TO_ARRAY
 
 <FunctionDescription description="Introduced or updated: v1.2.756"/>
 
@@ -55,7 +60,7 @@ SELECT REGEXP_SPLIT_TO_ARRAY('a,,b,,,c', ',+');
 └───────────────────────────────────┘
 ```
 
-### With flag text 
+### With flag text
 
 ```sql
 SELECT regexp_split_to_array('One_Two_Three', '[_-]', 'i')
@@ -66,9 +71,7 @@ SELECT regexp_split_to_array('One_Two_Three', '[_-]', 'i')
 
 ```
 
-
 ## See Also
 
 - [SPLIT](/tidb-cloud-lake/sql/split.md): For simple string splitting
 - [REGEXP_SPLIT_TO_TABLE](/tidb-cloud-lake/sql/regexp-split-table.md): split string to table
-

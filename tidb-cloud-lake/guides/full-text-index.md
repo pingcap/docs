@@ -3,11 +3,13 @@ title: Full-Text Index
 summary: Full-text indexes (inverted indexes) automatically enable lightning-fast text searches across large document collections by mapping terms to documents, eliminating the need for slow table scans.
 ---
 
+# Full-Text Index
+
 > **Note:**
 >
 > Looking for a hands-on walkthrough? See [JSON & Search Guide](/tidb-cloud-lake/guides/json-search.md).
 
-# Full-Text Index: Automatic Lightning-Fast Text Search
+## Full-Text Index: Automatic Lightning-Fast Text Search
 
 Full-text indexes (inverted indexes) automatically enable lightning-fast text searches across large document collections by mapping terms to documents, eliminating the need for slow table scans.
 
@@ -77,8 +79,8 @@ SELECT * FROM logs WHERE MATCH(message, 'kubernetes', 'fuzziness=1');
 ### Relevance Scoring
 ```sql
 -- Get results with relevance scores, filter by minimum score
-SELECT id, message, SCORE() as relevance 
-FROM logs 
+SELECT id, message, SCORE() as relevance
+FROM logs
 WHERE MATCH(message, 'critical error') AND SCORE() > 0.5
 ORDER BY SCORE() DESC;
 ```

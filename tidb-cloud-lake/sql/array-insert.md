@@ -2,7 +2,12 @@
 title: ARRAY_INSERT
 summary: Inserts a value into a JSON array at the specified index and returns the updated JSON array.
 ---
+
+# ARRAY_INSERT
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
+
+## ARRAY_INSERT
 
 <FunctionDescription description="Introduced or updated: v1.2.762"/>
 

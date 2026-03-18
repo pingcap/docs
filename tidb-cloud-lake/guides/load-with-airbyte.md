@@ -2,6 +2,9 @@
 title: Airbyte
 summary: This guide explains how to use an experimental Airbyte destination that allows you to send data from your Airbyte source to TiDB Cloud Lake.
 ---
+
+# Airbyte
+
 <p align="center">
 <img alt="Airbyte" src="/media/tidb-cloud-lake/integration-airbyte.png"/>
 </p>

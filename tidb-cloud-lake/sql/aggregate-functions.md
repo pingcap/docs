@@ -2,6 +2,9 @@
 title: Aggregate Functions
 summary: This page provides a comprehensive overview of aggregate functions in Databend, organized by functionality for easy reference.
 ---
+
+# Aggregate Functions
+
 This page provides a comprehensive overview of aggregate functions in Databend, organized by functionality for easy reference.
 
 ## Basic Aggregation

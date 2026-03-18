@@ -2,6 +2,9 @@
 title: MD5
 summary: Calculates an MD5 128-bit checksum for a string. The value is returned as a string of 32 hexadecimal digits or NULL if the argument was NULL.
 ---
+
+# MD5
+
 Calculates an MD5 128-bit checksum for a string. The value is returned as a string of 32 hexadecimal digits or NULL if the argument was NULL.
 
 ## Syntax
