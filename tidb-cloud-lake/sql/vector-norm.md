@@ -2,6 +2,7 @@
 title: VECTOR_NORM
 summary: Calculates the L2 norm (Euclidean norm) of a vector, which represents the length or magnitude of the vector.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.780.

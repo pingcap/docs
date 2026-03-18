@@ -2,6 +2,7 @@
 title: MERGE
 summary: Performs INSERT, UPDATE, or DELETE operations on rows within a target table, all in accordance with conditions and matching criteria specified within the statement, using data from a specified source.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.241.

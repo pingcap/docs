@@ -2,6 +2,7 @@
 title: VACUUM TEMPORARY FILES
 summary: Removes temporary files created by Databend, such as spill files.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.348.

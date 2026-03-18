@@ -2,6 +2,7 @@
 title: EXTRACT
 summary: Retrieves the designated portion of a date, timestamp, or interval.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.723.

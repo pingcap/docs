@@ -2,6 +2,7 @@
 title: CREATE WAREHOUSE
 summary: Creates a new warehouse for compute resources.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.687.

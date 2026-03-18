@@ -2,6 +2,7 @@
 title: system.user_functions
 summary: Contains information about user-defined functions and external functions in the system.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.315.

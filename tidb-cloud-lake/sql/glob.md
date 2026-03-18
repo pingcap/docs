@@ -2,6 +2,7 @@
 title: GLOB
 summary: Performs case-sensitive pattern matching using wildcard characters.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.714.

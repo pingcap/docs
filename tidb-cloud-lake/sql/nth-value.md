@@ -2,6 +2,7 @@
 title: NTH_VALUE
 summary: Returns the value at the specified position (N) within the window frame.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.697.

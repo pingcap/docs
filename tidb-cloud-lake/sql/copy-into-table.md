@@ -2,6 +2,7 @@
 title: COPY INTO <table>
 summary: COPY INTO allows you to load data from files located in one of the following locations.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.704.

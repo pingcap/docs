@@ -2,6 +2,7 @@
 title: SHOW SEQUENCES
 summary: Returns a list of the created sequences.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.742.

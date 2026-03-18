@@ -2,6 +2,7 @@
 title: Fuse Engine Tables
 summary: Databend uses the Fuse Engine as its default storage engine, providing a Git-like data management system with.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.736.

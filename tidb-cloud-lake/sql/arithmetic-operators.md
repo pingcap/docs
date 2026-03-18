@@ -2,6 +2,7 @@
 title: Arithmetic Operators
 summary: This page describes Arithmetic Operators in TiDB Cloud Lake.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.53.

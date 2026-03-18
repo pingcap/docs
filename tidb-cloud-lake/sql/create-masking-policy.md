@@ -2,6 +2,7 @@
 title: CREATE MASKING POLICY
 summary: Creates a new masking policy in Databend.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.845.

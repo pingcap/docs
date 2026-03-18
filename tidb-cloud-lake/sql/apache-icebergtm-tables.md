@@ -2,6 +2,7 @@
 title: Apache Iceberg™ Tables
 summary: Databend supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends Databend's capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.725.

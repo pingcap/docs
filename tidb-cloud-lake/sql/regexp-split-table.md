@@ -2,6 +2,7 @@
 title: REGEXP_SPLIT_TO_TABLE
 summary: Splits a string using a regular expression pattern and returns each segment as a table.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.754.

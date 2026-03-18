@@ -2,6 +2,7 @@
 title: CREATE DATABASE
 summary: Create a database.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.339.

@@ -2,6 +2,7 @@
 title: L1_DISTANCE
 summary: Calculates the Manhattan (L1) distance between two vectors, measuring the sum of absolute differences between corresponding elements.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.777.

@@ -2,6 +2,7 @@
 title: ALTER NETWORK POLICY
 summary: Modifies an existing network policy in Databend.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.26.

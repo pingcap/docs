@@ -2,6 +2,7 @@
 title: LAST
 summary: Alias for LAST_VALUE.
 ---
+
 > **Note:**
 >
 > Introduced in v1.1.50.

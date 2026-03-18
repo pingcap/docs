@@ -2,6 +2,7 @@
 title: JSON_ARRAY_AGG
 summary: Converts values into a JSON array while skipping NULLs.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.595.

@@ -2,6 +2,7 @@
 title: CREATE TASK
 summary: The CREATE TASK statement is used to define a new task that executes a specified SQL statement on a scheduled basis or dag based task graph.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.

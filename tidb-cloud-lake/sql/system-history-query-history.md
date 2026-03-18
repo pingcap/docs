@@ -2,6 +2,7 @@
 title: system_history.query_history
 summary: Query the history for a specific query using its query_id.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.764.

@@ -2,6 +2,7 @@
 title: CREATE VIEW
 summary: Creates a new view based on a query; the Logical View does not store any physical data, when we access a logical view, it will convert the sql into the subquery format to finish it.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.339.

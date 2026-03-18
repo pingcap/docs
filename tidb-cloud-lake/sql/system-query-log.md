@@ -2,6 +2,7 @@
 title: system.query_log
 summary: A read-only in-memory table stores all the query logs. For the specific fields available in the query logs, refer to the Examples section.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.696.

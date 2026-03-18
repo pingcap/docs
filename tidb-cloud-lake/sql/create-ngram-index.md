@@ -2,6 +2,7 @@
 title: CREATE NGRAM INDEX
 summary: Creates an Ngram index on a column for a table.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.726.

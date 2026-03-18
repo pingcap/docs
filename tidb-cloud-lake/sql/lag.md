@@ -2,6 +2,7 @@
 title: LAG
 summary: Returns the value from a previous row in the result set.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.45.

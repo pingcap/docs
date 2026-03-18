@@ -2,6 +2,7 @@
 title: INNER_PRODUCT
 summary: Calculates the inner product (dot product) of two vectors, which measures the similarity and projection between vectors.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.780.

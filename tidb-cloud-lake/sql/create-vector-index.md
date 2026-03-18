@@ -2,6 +2,7 @@
 title: CREATE VECTOR INDEX
 summary: Creates a Vector index on a VECTOR column for a table to enable efficient similarity search using the HNSW (Hierarchical Navigable Small World) algorithm.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.777.

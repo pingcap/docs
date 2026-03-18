@@ -2,6 +2,7 @@
 title: ATTACH TABLE
 summary: ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private Databend deployment to Databend Cloud.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.698.

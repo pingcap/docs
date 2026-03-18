@@ -2,6 +2,7 @@
 title: system.locks
 summary: Contains information about the locks in the system.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.262.

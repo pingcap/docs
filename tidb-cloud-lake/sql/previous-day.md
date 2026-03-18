@@ -2,6 +2,7 @@
 title: PREVIOUS_DAY
 summary: Returns the date of the most recent specified day of the week before the given date or timestamp.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.655.

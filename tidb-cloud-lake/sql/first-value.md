@@ -2,6 +2,7 @@
 title: FIRST_VALUE
 summary: Returns the first value in the window frame.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.697.

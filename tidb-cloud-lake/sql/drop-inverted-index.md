@@ -2,6 +2,7 @@
 title: DROP INVERTED INDEX
 summary: Removes an inverted index in Databend.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.405.

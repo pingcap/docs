@@ -2,6 +2,7 @@
 title: DESC SEQUENCE
 summary: Describes the properties of a sequence.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.742.

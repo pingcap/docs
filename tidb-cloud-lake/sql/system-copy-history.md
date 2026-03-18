@@ -2,6 +2,7 @@
 title: system.copy_history
 summary: Contains information about copy history.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.823.

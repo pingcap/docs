@@ -2,6 +2,7 @@
 title: DELETE
 summary: Removes one or more rows from a table.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.174.

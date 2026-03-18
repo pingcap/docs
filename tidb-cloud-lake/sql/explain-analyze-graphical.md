@@ -2,6 +2,7 @@
 title: EXPLAIN ANALYZE GRAPHICAL
 summary: Analyzes query performance with an interactive visual representation in your browser. Available exclusively in BendSQL v0.22.2+.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.647.

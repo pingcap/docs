@@ -2,6 +2,7 @@
 title: system.indexes
 summary: Contains information about the created indexes.
 ---
+
 > **Note:**
 >
 > Introduced in v1.1.50.

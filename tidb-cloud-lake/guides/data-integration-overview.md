@@ -75,4 +75,4 @@ Click on a task to view its execution history. The run history includes:
 
 ## Video Tour
 
-<iframe width="853" height="505" className="iframe-video"  src="https://www.youtube.com/embed/yfYAPVD-oHE?si=m1Gyp3KPinO1JQ17" title="YouTube video player" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allowfullscreen></iframe>
+<iframe width="853" height="505" class="iframe-video" src="https://www.youtube.com/embed/yfYAPVD-oHE?si=m1Gyp3KPinO1JQ17" title="YouTube video player" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allowfullscreen></iframe>

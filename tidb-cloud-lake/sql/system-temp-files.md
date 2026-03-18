@@ -2,6 +2,7 @@
 title: system.temp_files
 summary: Contains information about temporary files created by Databend, such as spill files. To remove the temporary files, use the VACUUM TEMPORARY FILES command.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.348.

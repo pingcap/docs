@@ -2,6 +2,7 @@
 title: system_history.login_history
 summary: Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.764.

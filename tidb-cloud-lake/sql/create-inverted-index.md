@@ -2,6 +2,7 @@
 title: CREATE INVERTED INDEX
 summary: Creates a new inverted index in Databend.
 ---
+
 > **Note:**
 >
 > Introduced or updated in v1.2.405.
