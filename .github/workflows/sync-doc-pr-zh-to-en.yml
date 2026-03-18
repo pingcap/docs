@@ -20,7 +20,8 @@ on:
         options:
           - deepseek
           - gemini
-        default: 'gemini'
+          - openai
+        default: 'openai'
 
 permissions:
   contents: write
@@ -73,10 +74,10 @@ jobs:
           TARGET_PR=$(echo "$TARGET_URL" | cut -d'/' -f7)
 
           if [[ "$SOURCE_OWNER/$SOURCE_REPO" != "pingcap/docs-cn" ]]; then
-            echo "❌ Unsupported source repository: $SOURCE_OWNER/$SOURCE_REPO"; exit 1
+            echo "❌ Unsupported source repository: only pingcap/docs-cn is supported"; exit 1
           fi
           if [[ "$TARGET_OWNER/$TARGET_REPO" != "pingcap/docs" ]]; then
-            echo "❌ Unsupported target repository: $TARGET_OWNER/$TARGET_REPO"; exit 1
+            echo "❌ Unsupported target repository: only pingcap/docs is supported"; exit 1
           fi
           
           {
@@ -125,6 +126,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEEPSEEK_API_TOKEN: ${{ secrets.DEEPSEEK_API_TOKEN }}
           GEMINI_API_TOKEN: ${{ secrets.GEMINI_API_TOKEN }}
+          OPENAI_API_TOKEN: ${{ secrets.OPENAI_API_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
