@@ -34,7 +34,7 @@ TopSQL is not suitable for the following scenarios:
 
 You can access the TopSQL page using either of the following methods:
 
-* After logging in to TiDB Dashboard, click **TopSQL** in the left navigation menu.
+* After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
 
   ![TopSQL](/media/dashboard/top-sql-access.png)
 
