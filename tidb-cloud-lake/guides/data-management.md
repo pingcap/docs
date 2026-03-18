@@ -1,6 +1,6 @@
 ---
 title: Data Management
-summary: This page describes Data Management in TiDB Cloud Lake.
+summary: An overview of data management in TiDB Cloud Lake, covering data lifecycle, recovery, protection, and recycling.
 ---
 # Data Management
 

@@ -1,6 +1,6 @@
 ---
 title: How TiDB Cloud Lake JSON (Variant) Works
-summary: Learn how TiDB Cloud Lake JSON works.
+summary: TiDB Cloud Lake reimagines JSON analytics by pairing a native binary layout with automatic JSON indexing so semi-structured data behaves like first-class columns.
 ---
 See also:
 

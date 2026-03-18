@@ -1,6 +1,6 @@
 ---
 title: AI-Powered Features
-summary: Learn AI-powered features.
+summary: With the inclusion of AI-powered features, TiDB Cloud Lake allows you to engage in natural language conversations to receive help, assistance, and solutions.
 ---
 import SearchSVG from '@site/static/img/icon/search.svg'
 import LanguageFileParse from '@site/src/components/LanguageDocs/file-parse'

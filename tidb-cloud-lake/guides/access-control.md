@@ -1,6 +1,6 @@
 ---
 title: Access Control
-summary: Databend incorporates both Role-Based Access Control (RBAC) and Discretionary Access Control (DAC) models for its access control functionality. When a user accesses a data object in Databend, they must be granted appropriate privileges or roles, or they need to have ownership of the data object. A data object can refer to various elements, such as a database, table, view, stage, or UDF.
+summary: Learn about access control in TiDB Cloud Lake, which uses both Role-Based Access Control (RBAC) and Discretionary Access Control (DAC) to manage permissions for data objects like databases, tables, and views.
 ---
 Databend incorporates both [Role-Based Access Control (RBAC)](https://en.wikipedia.org/wiki/Role-based_access_control) and [Discretionary Access Control (DAC)](https://en.wikipedia.org/wiki/Discretionary_access_control) models for its access control functionality. When a user accesses a data object in Databend, they must be granted appropriate privileges or roles, or they need to have ownership of the data object. A data object can refer to various elements, such as a database, table, view, stage, or UDF.
 
