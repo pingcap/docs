@@ -1,6 +1,6 @@
 ---
 title: _tidb_rowid
-summary: Learn what `_tidb_rowid` is, when TiDB exposes it, and how to use it safely.
+summary: Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
 ---
 
 # _tidb_rowid
