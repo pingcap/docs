@@ -44,7 +44,7 @@ LEFT JOIN LATERAL (SELECT t2.val FROM t2 WHERE t2.id = t1.id LIMIT 1) AS dt(val)
 ON TRUE;
 ```
 
-The derived column list `(val)` renames the columns produced by the subquery.
+The derived column list `(val)` renames the columns that the subquery returns.
 
 ## Comparison with standard derived tables
 
