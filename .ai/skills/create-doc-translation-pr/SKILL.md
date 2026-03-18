@@ -27,7 +27,7 @@ Do not stop to ask whether to run scripts mentioned in the skill.
 
 - `gh auth status` succeeds.
 - `jq` is available.
-- A writable local clone of `docs-cn` exists, for example at `/Users/grcai/Documents/GitHub/docs-cn`.
+- A writable local clone of `docs-cn` exists. Ask the user to provide the path to the clone when they don't have one.
 - In that clone, `origin` points to your fork and `upstream` points to `pingcap/docs-cn`.
 
 ## Use the bundled scripts
@@ -60,7 +60,7 @@ Run:
 ```bash
 python3 .ai/skills/create-doc-translation-pr/scripts/prepare_translation_inputs.py \
   --source-pr-url "<source-pr-url>"
-  --target-repo-dir "/Users/grcai/Documents/GitHub/docs-cn"
+  --target-repo-dir "<the path to the local clone of `docs-cn`>"
 ```
 
 This script writes all intermediate artifacts into a temporary `$WORKDIR`, including:
