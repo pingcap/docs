@@ -188,40 +188,42 @@ Usage example:
 SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
-## `tidb_slow_log_rules` Usage
+## Use `tidb_slow_log_rules`
 
-[`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-introduced-in-v900) is used to define trigger rules for slow query logs, supporting multi-dimensional metric combinations. It is suitable for "targeted sampling" and "problem reproduction" of slow logs, allowing you to filter target statements based on specific metric combinations.
+[`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-introduced-in-v900) is used to define trigger rules for slow query logs, supporting multi-dimensional metric combinations. It is suitable for "targeted sampling" and "problem reproduction" of slow logs, enabling you to filter target statements based on specific metric combinations.
 
 The triggering behavior of slow query logs depends on the configuration of `tidb_slow_log_rules`:
 
 - If `tidb_slow_log_rules` is not set, slow query log triggering still relies on [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (in milliseconds).
 - If `tidb_slow_log_rules` is set, the configured rules take precedence, and [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) will be ignored.
 
+For more information about meanings, diagnostic value, and background information of each field, see the [Fields description](#fields-description).
+
 ### Unified rule syntax and type constraints
 
 - Rule capacity and separation: `SESSION` and `GLOBAL` each support a maximum of 10 rules. A single session can have up to 20 active rules. Rules are separated by `;`.
 - Condition format: each condition uses the format `field_name:value`. Multiple conditions within a single rule are separated by `,`.
-- Field and scope: Field names are case-insensitive (underscores and other characters should be preserved). `Conn_ID` is not supported for `SESSION` rules; only `GLOBAL` supports `Conn_ID`.
+- Field and scope: field names are case-insensitive (underscores and other characters are preserved). `SESSION` rules do not support `Conn_ID`. Only `GLOBAL` rules support `Conn_ID`.
 - Matching semantics:
-    - String and boolean fields are matched using equality (`=`).
-    - `DB` and `Resource_group` matching is case-insensitive.
+    - Numeric fields are matched using `>=`. String and boolean fields are matched using equality (`=`).
+    - Matching for `DB` and `Resource_group` is case-insensitive.
     - Explicit operators such as `>`, `<`, and `!=` are not supported.
 
 Type constraints are as follows:
 
 - Numeric types (`int64`, `uint64`, `float64`) uniformly require `>= 0`. Negative values will result in a parsing error.
-    - `int64`: Maximum value is `2^63-1`.
-    - `uint64`: Maximum value is `2^64-1`.
-    - `float64`: The general upper limit is approximately `1.79e308`. Currently, parsing is done using Go's `ParseFloat`. While `NaN`/`Inf` can be parsed, they may lead to rules that are always true or always false, so their use is not recommended.
-- `bool`: Supports `true`/`false`, `1`/`0`, and `t`/`f` (case-insensitive).
-- `string`: Currently does not support strings containing the separators `,` (condition separator) or `;` (rule separator), even with quotes (single or double). Escaping is not supported.
+    - `int64`: the maximum value is `2^63-1`.
+    - `uint64`: the maximum value is `2^64-1`.
+    - `float64`: the general upper limit is approximately `1.79e308`. Currently, parsing is done using Go's `ParseFloat`. While `NaN`/`Inf` can be parsed, they might lead to rules that are always true or always false. It is not recommended to use them.
+- `bool`: supports `true`/`false`, `1`/`0`, and `t`/`f` (case-insensitive).
+- `string`: currently does not support strings containing the separators `,` (condition separator) or `;` (rule separator), even with quotes (single or double). Escaping is not supported.
 - Duplicate fields: if the same field is specified multiple times in a single rule, the last occurrence takes effect.
 
 ### Supported fields
 
 For detailed field descriptions, diagnostic meanings, and background information, see the [field descriptions in `identify-slow-queries`](/identify-slow-queries.md#fields-description).
 
-Unless otherwise noted, the fields in the following table follow the general matching and type rules described in [Unified Rule Syntax and Type Constraints](#unified-rule-syntax-and-type-constraints). This table lists only the currently supported field names, types, units, and a few rule-specific notes; it does not repeat each field's semantic meaning.
+Unless otherwise noted, the fields in the following table follow the general matching and type rules described in [Unified rule syntax and type constraints](#unified-rule-syntax-and-type-constraints). This table lists only the currently supported field names, types, units, and a few rule-specific notes. It does not repeat each field's semantic meaning.
 
 | Field name                            | Type     | Unit   | Notes                          |
 | -------------------------------------- | -------- | ------ | ------------------------------ |
@@ -270,8 +272,8 @@ Unless otherwise noted, the fields in the following table follow the general mat
 - Rule update behavior: every execution of `SET [SESSION|GLOBAL] tidb_slow_log_rules = '...'` overwrites the existing rules in that scope instead of appending to them.
 - Rule clearing behavior: `SET [SESSION|GLOBAL] tidb_slow_log_rules = ''` clears the rules in the corresponding scope.
 - If the current session has any applicable `tidb_slow_log_rules`, such as `SESSION` rules, `GLOBAL` rules for the current `Conn_ID`, or generic global rules without `Conn_ID`, the output of slow query logs is determined by rule matching results, and `tidb_slow_log_threshold` is no longer used.
-- If the current session has no applicable rules, for example when both `SESSION` and `GLOBAL` rules are empty, or only `GLOBAL` rules that do not match the current `Conn_ID` are configured, slow query logging still depends on `tidb_slow_log_threshold` (whose unit is milliseconds).
-- If you still want to use SQL execution time as a condition for writing slow logs, use `Query_time` in the rule and note that its unit is seconds.
+- If the current session has no applicable rules, for example when both `SESSION` and `GLOBAL` rules are empty, or only `GLOBAL` rules that do not match the current `Conn_ID` are configured, slow query logging still depends on `tidb_slow_log_threshold`. Note that the unit is milliseconds.
+- If you still want to use SQL execution time as a condition for writing slow logs, use `Query_time` in the rule and note that the unit is seconds.
 - Rule matching logic:
     - Multiple rules are combined with `OR`, while multiple field conditions within a single rule are combined with `AND`.
     - `SESSION`-scope rules are matched first. If none matches, TiDB then matches `GLOBAL` rules for the current `Conn_ID`, followed by generic `GLOBAL` rules without `Conn_ID`.
@@ -307,7 +309,7 @@ Unless otherwise noted, the fields in the following table follow the general mat
 
 - `tidb_slow_log_rules` is designed to replace the single-threshold approach. It supports combinations of multi-dimensional metric conditions, enabling more flexible and fine-grained control over slow query logging.
 
-- In a well-provisioned test environment with 1 TiDB node (16 CPU cores, 48 GiB memory) and 3 TiKV nodes (each with 16 CPU cores and 48 GiB memory), repeated sysbench tests showed that performance impact remained small when multi-dimensional slow query log rules generated millions of slow log entries within 30 minutes. However, when the log volume reached tens of millions, TPS dropped significantly and latency increased noticeably. Therefore, if business load is high or CPU and memory resources are close to their limits, configure `tidb_slow_log_rules` carefully to avoid log flooding caused by overly broad rules. If you need to limit the log output rate, use [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-usage) to throttle it and reduce the impact on business performance.
+- In a well-provisioned test environment with 1 TiDB node (16 CPU cores, 48 GiB memory) and 3 TiKV nodes (each with 16 CPU cores and 48 GiB memory), repeated sysbench tests show that performance impact remains small when multi-dimensional slow query log rules generate millions of slow log entries within 30 minutes. However, when the log volume reaches tens of millions, TPS drops significantly and latency increases noticeably. Therefore, if business workload is high or CPU and memory resources are close to their limits, configure `tidb_slow_log_rules` carefully to avoid log flooding caused by overly broad rules. If you need to limit the log output rate, use [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-usage) to throttle it and reduce the impact on business performance.
 
 ## Related system variables
 
