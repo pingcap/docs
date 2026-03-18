@@ -161,10 +161,10 @@ CREATE TABLE t (
 
 ## Related statements and variables
 
-- [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md): shows the next row ID that TiDB will allocate
-- [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md): shards implicit row IDs to reduce hotspots
-- [`Clustered Indexes`](/clustered-indexes.md): explains when a table uses the primary key instead of `_tidb_rowid`
-- [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id): controls whether writes to `_tidb_rowid` are allowed
+- [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md): Shows the next row ID that TiDB will allocate
+- [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md): Shards implicit row IDs to reduce hotspots
+- [`Clustered Indexes`](/clustered-indexes.md): Explains when a table uses the primary key instead of `_tidb_rowid`
+- [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id): Controls whether writes to `_tidb_rowid` are allowed
 
 ## See also
 
