@@ -1,7 +1,7 @@
 ---
 title: Table Engines
+summary: Databend provides several table engines so that you can balance performance and interoperability needs without moving data. Each engine is optimized for a specific scenario—ranging from Databend’s native Fuse storage to external data lake formats.
 ---
-
 Databend provides several table engines so that you can balance performance and interoperability needs without moving data. Each engine is optimized for a specific scenario—ranging from Databend’s native Fuse storage to external data lake formats.
 
 ## Available Engines

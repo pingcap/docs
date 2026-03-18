@@ -1,7 +1,7 @@
 ---
 title: DIV
+summary: Returns the quotient by dividing the first number by the second one, rounding down to the closest smaller integer. Equivalent to the division operator //.
 ---
-
 Returns the quotient by dividing the first number by the second one, rounding down to the closest smaller integer. Equivalent to the division operator `//`.
 
 See also: 

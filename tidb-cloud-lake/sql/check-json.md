@@ -1,7 +1,7 @@
 ---
 title: CHECK_JSON
+summary: Checks the validity of a JSON document. If the input string is a valid JSON document or a NULL, the output is NULL. If the input cannot be translated to a valid JSON value, the output string contains the error message.
 ---
-
 Checks the validity of a JSON document.
 If the input string is a valid JSON document or a `NULL`, the output is `NULL`.
 If the input cannot be translated to a valid JSON value, the output string contains the error message.

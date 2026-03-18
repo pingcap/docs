@@ -1,5 +1,6 @@
 ---
 title: ARRAY_COMPACT
+summary: Removes all NULL values from an array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

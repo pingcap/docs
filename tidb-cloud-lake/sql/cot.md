@@ -1,7 +1,7 @@
 ---
 title: COT
+summary: Returns the cotangent of x, where x is given in radians.
 ---
-
 Returns the cotangent of `x`, where `x` is given in radians.
 
 ## Syntax

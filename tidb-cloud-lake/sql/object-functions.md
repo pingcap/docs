@@ -1,7 +1,7 @@
 ---
 title: Object Functions
+summary: This section provides reference information for object functions in Databend. Object functions enable creation, manipulation, and extraction of information from JSON object data structures.
 ---
-
 This section provides reference information for object functions in Databend. Object functions enable creation, manipulation, and extraction of information from JSON object data structures.
 
 ## Object Construction

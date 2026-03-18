@@ -1,6 +1,6 @@
 ---
 title: CREATE FUNCTION
-sidebar_position: 1
+summary: Creates an external function that calls a remote handler over Flight (typically Python or other services).
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

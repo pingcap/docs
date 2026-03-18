@@ -1,6 +1,6 @@
 ---
 title: ARRAY_OVERLAP
-title_includes: JSON_ARRAY_OVERLAP
+summary: Checks if there is any overlap between two JSON arrays and returns true if there are common elements; otherwise, it returns false.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: TODAY
+summary: Returns current date.
 ---
-
 Returns current date.
 
 ## Syntax

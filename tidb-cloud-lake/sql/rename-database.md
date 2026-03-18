@@ -1,8 +1,7 @@
 ---
 title: RENAME DATABASE
-sidebar_position: 4
+summary: Changes the name of a database.
 ---
-
 Changes the name of a database.
 
 ## Syntax

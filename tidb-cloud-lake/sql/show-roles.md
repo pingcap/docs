@@ -1,8 +1,7 @@
 ---
 title: SHOW ROLES
-sidebar_position: 6
+summary: Lists all the roles assigned to the current user.
 ---
-
 Lists all the roles assigned to the current user.
 
 ## Syntax

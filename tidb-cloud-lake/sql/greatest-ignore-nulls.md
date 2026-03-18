@@ -1,5 +1,6 @@
 ---
 title: GREATEST_IGNORE_NULLS
+summary: Returns the maximum value from a set of values, ignoring any NULL values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

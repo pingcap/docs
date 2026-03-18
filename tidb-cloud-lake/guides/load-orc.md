@@ -1,8 +1,7 @@
 ---
-title: Loading ORC into Databend
-sidebar_label: ORC
+title: Loading ORC into TiDB Cloud Lake
+summary: ORC (Optimized Row Columnar) is a columnar storage format commonly used in data analytics.
 ---
-
 ## What is ORC?
 
 ORC (Optimized Row Columnar) is a columnar storage format commonly used in data analytics.

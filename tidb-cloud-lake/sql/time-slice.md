@@ -1,5 +1,6 @@
 ---
 title: TIME_SLICE
+summary: TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

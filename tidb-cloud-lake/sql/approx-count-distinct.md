@@ -1,7 +1,7 @@
 ---
 title: APPROX_COUNT_DISTINCT
+summary: Estimates the number of distinct values in a data set with the HyperLogLog algorithm.
 ---
-
 Estimates the number of distinct values in a data set with the [HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) algorithm. 
 
 The HyperLogLog algorithm provides an approximation of the number of unique elements using little memory and time. Consider using this function when dealing with large data sets where an estimated result can be accepted. In exchange for some accuracy, this is a fast and efficient method of returning distinct counts.

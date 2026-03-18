@@ -1,9 +1,7 @@
 ---
 title: Binary
-description: Variable-length sequences of raw bytes.
-sidebar_position: 2
+summary: Variable-length sequences of raw bytes.
 ---
-
 ## Overview
 
 `BINARY` (alias `VARBINARY`) stores variable-length byte sequences. Unlike `STRING`, the value is not interpreted as UTF-8 text, making it suitable for payloads such as digests, compressed data, or serialized objects. Use conversion functions like [UNHEX](/tidb-cloud-lake/sql/unhex.md), [FROM_BASE64](/tidb-cloud-lake/sql/from-base64.md), and [TO_HEX](/tidb-cloud-lake/sql/to-hex.md) to encode or decode values when reading or writing the data.

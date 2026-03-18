@@ -1,8 +1,7 @@
 ---
 title: CREATE TABLE
-sidebar_position: 1
+summary: Creating tables is one of the most complicated operations for many databases because you might need to.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.821"/>

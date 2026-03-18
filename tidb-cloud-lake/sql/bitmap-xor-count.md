@@ -1,7 +1,7 @@
 ---
 title: BITMAP_XOR_COUNT
+summary: Counts the number of bits set to 1 in the bitmap by performing a logical XOR (exclusive OR) operation.
 ---
-
 Counts the number of bits set to 1 in the bitmap by performing a logical XOR (exclusive OR) operation.
 
 ## Syntax

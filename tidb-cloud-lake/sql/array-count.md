@@ -1,7 +1,7 @@
 ---
 title: ARRAY_COUNT
+summary: Counts the non-NULL elements in an array.
 ---
-
 Counts the non-`NULL` elements in an array.
 
 ## Syntax

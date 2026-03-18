@@ -1,5 +1,6 @@
 ---
 title: IS_OBJECT
+summary: Checks if the input value is a JSON object.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

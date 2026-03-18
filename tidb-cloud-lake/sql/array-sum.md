@@ -1,7 +1,7 @@
 ---
 title: ARRAY_SUM
+summary: Sums the numeric elements in an array. NULL items are skipped, and non-numeric values raise an error.
 ---
-
 Sums the numeric elements in an array. `NULL` items are skipped, and non-numeric values raise an error.
 
 ## Syntax

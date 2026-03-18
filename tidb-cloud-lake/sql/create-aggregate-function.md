@@ -1,6 +1,6 @@
 ---
 title: CREATE AGGREGATE FUNCTION
-sidebar_position: 1
+summary: Creates a user-defined aggregate function (UDAF) that runs inside Databend's JavaScript or Python runtime.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: ARRAY_APPROX_COUNT_DISTINCT
+summary: Returns an approximate count of distinct elements in an array, ignoring NULL values. This uses the same HyperLogLog-based estimator as APPROX_COUNT_DISTINCT.
 ---
-
 Returns an approximate count of distinct elements in an array, ignoring `NULL` values. This uses the same HyperLogLog-based estimator as [`APPROX_COUNT_DISTINCT`](/tidb-cloud-lake/sql/approx-count-distinct.md).
 
 ## Syntax

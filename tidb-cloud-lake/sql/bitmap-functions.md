@@ -1,7 +1,7 @@
 ---
 title: Bitmap Functions
+summary: This page provides a comprehensive overview of Bitmap functions in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Bitmap functions in Databend, organized by functionality for easy reference.
 
 ## Bitmap Operations

@@ -1,6 +1,6 @@
 ---
 title: STRIP_NULL_VALUE
-title_includes: JSON_STRIP_NULLS
+summary: Removes all properties with null values from a JSON object.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

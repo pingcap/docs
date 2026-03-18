@@ -1,5 +1,6 @@
 ---
 title: ARRAY_REMOVE_LAST
+summary: Removes the last occurrence of an element from an array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

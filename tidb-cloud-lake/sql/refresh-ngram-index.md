@@ -1,8 +1,7 @@
 ---
 title: REFRESH NGRAM INDEX
-sidebar_position: 2
+summary: Databend automatically refreshes NGRAM indexes when data is ingested. Use REFRESH NGRAM INDEX when you need to backfill data that existed before the index was defined.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.726"/>

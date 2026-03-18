@@ -1,7 +1,7 @@
 ---
 title: YEARWEEK
+summary: Returns the year and week number in YYYYWW format, according to ISO week date. Week 1 is the week with the first Thursday of the year.
 ---
-
 Returns the year and week number in `YYYYWW` format, according to ISO week date. Week 1 is the week with the first Thursday of the year.
 
 ## Syntax

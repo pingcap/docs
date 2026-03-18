@@ -1,7 +1,7 @@
 ---
 title: ARRAY_GENERATE_RANGE
+summary: Builds an array of evenly spaced integers between a start and end value. The end bound is exclusive.
 ---
-
 Builds an array of evenly spaced integers between a start and end value. The `end` bound is exclusive.
 
 ## Syntax

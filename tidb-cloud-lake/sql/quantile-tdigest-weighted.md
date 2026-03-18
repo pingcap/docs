@@ -1,5 +1,6 @@
 ---
 title: QUANTILE_TDIGEST_WEIGHTED
+summary: Computes an approximate quantile of a numeric data sequence using the t-digest algorithm. This function takes into account the weight of each sequence member. Memory consumption is log(n), where n is a number of values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

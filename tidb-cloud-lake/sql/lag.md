@@ -1,7 +1,7 @@
 ---
 title: LAG
+summary: Returns the value from a previous row in the result set.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.45"/>

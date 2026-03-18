@@ -1,5 +1,6 @@
 ---
 title: PERCENT_RANK
+summary: Calculates the relative rank of each row as a percentage. Returns values between 0 and 1, where 0 represents the lowest rank and 1 represents the highest rank.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

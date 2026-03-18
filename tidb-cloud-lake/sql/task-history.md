@@ -1,7 +1,7 @@
 ---
 title: TASK_HISTORY
+summary: Displays task running history given variables.
 ---
-
 Displays task running history given variables.
 
 ## Syntax

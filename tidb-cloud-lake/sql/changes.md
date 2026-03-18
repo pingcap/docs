@@ -1,7 +1,7 @@
 ---
 title: CHANGES
+summary: The CHANGES clause allows querying the change tracking metadata for a table within a defined time interval. Please note that the time interval must fall within the data retention period (defaulted to 24 hours). To define a time interval, use the AT keyword to specify a time point as the start of the interval, with the current time being applied as the default end of the interval. If you wish to specify a past time as the end of the interval, use the END keyword in conjunction with the AT keyword to set the interval.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.410"/>

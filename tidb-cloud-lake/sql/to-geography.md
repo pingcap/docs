@@ -1,6 +1,6 @@
 ---
 title: TO_GEOGRAPHY
-title_includes: TRY_TO_GEOGRAPHY
+summary: Parses an input and returns a value of type GEOGRAPHY.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

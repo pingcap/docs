@@ -1,9 +1,7 @@
 ---
 title: ALTER TABLE
-sidebar_position: 4
-slug: /sql-commands/ddl/table/alter-table
+summary: Use ALTER TABLE to modify the structure and properties of an existing table, including its columns, comment, storage options, external connection, or even swapping metadata with another table. The subsections below cover each supported capability.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.845"/>

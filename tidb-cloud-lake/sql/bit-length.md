@@ -1,8 +1,7 @@
 ---
-id: string-bit_length
 title: BIT_LENGTH
+summary: Return the length of a string in bits.
 ---
-
 Return the length of a string in bits.
 
 ## Syntax

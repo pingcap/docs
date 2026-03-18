@@ -1,6 +1,6 @@
 ---
 title: REVOKE
-sidebar_position: 11
+summary: Revokes privileges, roles, and ownership of a specific database object. This includes.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,9 +1,7 @@
 ---
-title: Migrate from Snowflake to Databend
-sidebar_label: Snowflake → Databend
-
+title: Migrate from Snowflake to TiDB Cloud Lake
+summary: Migrates data from Snowflake to TiDB Cloud Lake by exporting data to Amazon S3 and loading it into TiDB Cloud Lake tables.
 ---
-
 > **Capabilities**: Full Load
 
 This tutorial walks you through the process of migrating your data from Snowflake to Databend. The migration involves exporting data from Snowflake to an Amazon S3 bucket and then loading it into Databend. The process is broken down into three main steps:

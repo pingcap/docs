@@ -1,8 +1,7 @@
 ---
 title: ARRAY_STDDEV_SAMP
-title_includes: ARRAY_STDDEV
+summary: Computes the sample standard deviation of numeric array values. NULL items are ignored; non-numeric entries raise an error.
 ---
-
 Computes the sample standard deviation of numeric array values. `NULL` items are ignored; non-numeric entries raise an error.
 
 ## Syntax

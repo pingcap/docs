@@ -1,7 +1,7 @@
 ---
 title: SET_VAR
+summary: SET_VAR is used to specify optimizer hints within a single SQL statement, allowing for finer control over the execution plan of that specific statement. This includes.
 ---
-
 SET_VAR is used to specify optimizer hints within a single SQL statement, allowing for finer control over the execution plan of that specific statement. This includes:
 
 > **Note:**

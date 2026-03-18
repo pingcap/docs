@@ -1,5 +1,6 @@
 ---
 title: ST_ASWKT
+summary: Converts a GEOMETRY or GEOGRAPHY object into a WKT(well-known-text) format representation.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

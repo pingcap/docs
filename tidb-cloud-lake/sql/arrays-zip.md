@@ -1,6 +1,8 @@
 ---
 title: ARRAYS_ZIP
+summary: Merges multiple arrays into a single array tuple.
 ---
+
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.690"/>

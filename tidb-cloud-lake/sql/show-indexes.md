@@ -1,6 +1,6 @@
 ---
 title: SHOW INDEXES
-sidebar_position: 3
+summary: Shows the created indexes. Equivalent to SELECT * FROM system.indexes.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

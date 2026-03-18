@@ -1,5 +1,6 @@
 ---
 title: STREAM_STATUS
+summary: Provides information about the status of a specified stream, yielding a single-column result (has_data) that can take on values of true or false.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON
+summary: Returns all of the unidirectional edges from the provided H3Index.
 ---
-
 Returns all of the unidirectional edges from the provided H3Index.
 
 ## Syntax

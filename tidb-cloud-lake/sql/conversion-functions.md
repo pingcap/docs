@@ -1,7 +1,7 @@
 ---
-title: 'Conversion Functions'
+title: Conversion Functions
+summary: This page provides a comprehensive overview of Conversion functions in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Conversion functions in Databend, organized by functionality for easy reference.
 
 ## Type Conversion Functions

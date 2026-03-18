@@ -1,7 +1,7 @@
 ---
 title: PIVOT
+summary: The PIVOT operation in Databend allows you to transform a table by rotating it and aggregating results based on specified columns.
 ---
-
 The `PIVOT` operation in Databend allows you to transform a table by rotating it and aggregating results based on specified columns. 
 
 It is a useful operation for summarizing and analyzing large amounts of data in a more readable format. In this document, we will explain the syntax and provide an example of how to use the `PIVOT` operation.

@@ -1,7 +1,7 @@
 ---
 title: ASSUME_NOT_NULL
+summary: Results in an equivalent non-Nullable value for a Nullable type. In case the original value is NULL the result is undetermined.
 ---
-
 Results in an equivalent non-`Nullable` value for a Nullable type. In case the original value is `NULL` the result is undetermined. 
 
 ## Syntax

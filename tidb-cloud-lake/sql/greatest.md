@@ -1,5 +1,6 @@
 ---
 title: GREATEST
+summary: Returns the maximum value from a set of values. If any value in the set is NULL, the function returns NULL.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

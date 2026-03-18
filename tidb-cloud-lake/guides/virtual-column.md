@@ -1,7 +1,7 @@
 ---
 title: Virtual Column
+summary: Virtual columns automatically accelerate queries on semi-structured data stored in VARIANT columns. This feature provides zero-configuration performance optimization for JSON data access.
 ---
-
 # Virtual Column: Automatic Acceleration for JSON Data
 
 import EEFeature from '@site/src/components/EEFeature';

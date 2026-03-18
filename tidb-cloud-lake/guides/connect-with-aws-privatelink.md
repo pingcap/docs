@@ -1,8 +1,7 @@
 ---
-title: "Connecting to Databend Cloud with AWS PrivateLink"
-sidebar_label: "AWS PrivateLink"
+title: Connecting to TiDB Cloud Lake with AWS PrivateLink
+summary: PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Azure Private Link, Google Private Service Connect, etc.) let you reach TiDB Cloud Lake through private IP addresses inside your own network boundary, so no traffic has to traverse the public internet. That keeps your datasets, credentials, and admin actions on the provider's backbone and aligned with the network policies you already operate.
 ---
-
 # Connecting to Databend Cloud with AWS PrivateLink
 
 PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Azure Private Link, Google Private Service Connect, etc.) let you reach Databend Cloud through private IP addresses inside your own network boundary, so no traffic has to traverse the public internet. That keeps your datasets, credentials, and admin actions on the provider's backbone and aligned with the network policies you already operate.

@@ -1,7 +1,7 @@
 ---
 title: AS_INTEGER
+summary: Strict casting VARIANT values to BIGINT data type. If the input data type is not VARIANT, the output is NULL. If the type of value in the VARIANT does not match the output value, the output is NULL.
 ---
-
 Strict casting `VARIANT` values to BIGINT data type.
 If the input data type is not `VARIANT`, the output is `NULL`.
 If the type of value in the `VARIANT` does not match the output value, the output is `NULL`.

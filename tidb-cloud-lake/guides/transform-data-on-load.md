@@ -1,7 +1,7 @@
 ---
 title: Transforming Data on Load
+summary: Databend's COPY INTO command allows data transformation during the loading process. This streamlines your ETL pipeline by incorporating basic transformations, eliminating the need for temporary tables.
 ---
-
 Databend's `COPY INTO` command allows data transformation during the loading process. This streamlines your ETL pipeline by incorporating basic transformations, eliminating the need for temporary tables.
 
 See [Querying & Transforming]( /tidb-cloud-lake/guides/query-stage.md) for syntax.

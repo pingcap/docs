@@ -1,8 +1,7 @@
 ---
 title: DROP ROLE
-sidebar_position: 8
+summary: Removes the specified role from the system.
 ---
-
 Removes the specified role from the system.
 
 ## Syntax

@@ -1,7 +1,7 @@
 ---
 title: TO_START_OF_ISO_YEAR
+summary: Returns the first day of the ISO year for a date or a date with time (timestamp/datetime).
 ---
-
 Returns the first day of the ISO year for a date or a date with time (timestamp/datetime).
 
 ## Syntax

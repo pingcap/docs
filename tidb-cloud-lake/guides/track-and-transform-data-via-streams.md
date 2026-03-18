@@ -1,8 +1,7 @@
 ---
 title: Tracking and Transforming Data via Streams
-sidebar_label: Stream
+summary: A stream in Databend is an always-on change table every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
 ---
-
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
 

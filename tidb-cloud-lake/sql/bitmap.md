@@ -1,6 +1,6 @@
 ---
 title: Bitmap
-sidebar_position: 12
+summary: BITMAP stores membership information for unsigned 64-bit integers and supports fast set operations (count, union, intersection, etc.). SELECT statements show a binary blob, so use Bitmap Functions to interpret the values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

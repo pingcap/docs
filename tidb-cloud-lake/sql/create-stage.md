@@ -1,6 +1,6 @@
 ---
 title: CREATE STAGE
-sidebar_position: 1
+summary: Creates an internal or external stage.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,8 +1,7 @@
 ---
-title: "Databend Cloud: AWS Billing"
-sidebar_label: "AWS Billing"
+title: TiDB Cloud Lake - AWS Billing
+summary: In this tutorial, we'll walk you through the process of importing AWS billing data and conducting cost analysis using SQL. You'll learn how to load the AWS billing data into Databend Cloud, query it to find key cost drivers, and gain insights into your AWS usage.
 ---
-
 In this tutorial, we'll walk you through the process of importing AWS billing data and conducting cost analysis using SQL. You'll learn how to load the AWS billing data into Databend Cloud, query it to find key cost drivers, and gain insights into your AWS usage.
 
 AWS billing data provides a comprehensive breakdown of your cloud service usage and associated costs, which can be exported in Parquet format directly from the AWS Cost and Usage Reports (CUR) service in the AWS Billing Console. In this tutorial, we'll be working with a sample dataset in Parquet format, available at [https://datasets.databend.com/aws-billing.parquet](https://datasets.databend.com/aws-billing.parquet). The dataset follows the CUR standards, which include fields like service names, usage types, and pricing details. For a complete schema reference, you can refer to the [AWS Cost and Usage Report Data Dictionary](https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html).

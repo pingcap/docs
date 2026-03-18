@@ -1,7 +1,7 @@
 ---
 title: Network Policy
+summary: This page provides a comprehensive overview of Network Policy operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Network Policy operations in Databend, organized by functionality for easy reference.
 
 ## Network Policy Management

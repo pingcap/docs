@@ -1,7 +1,7 @@
 ---
 title: JSON_OBJECT_AGG
+summary: Converts key-value pairs into a JSON object. For each row in the input, it generates a key-value pair where the key is derived from the <key_expression> and the value is derived from the <value_expression>. These key-value pairs are then combined into a single JSON object.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.611"/>

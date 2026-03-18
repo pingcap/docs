@@ -1,5 +1,6 @@
 ---
 title: QUERY
+summary: Filters rows with a Lucene-style query against columns that have an inverted index and supports dot notation for nested VARIANT fields.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

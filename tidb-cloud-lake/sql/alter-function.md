@@ -1,6 +1,6 @@
 ---
 title: ALTER FUNCTION
-sidebar_position: 5
+summary: Alters a user-defined function. Supports all function types Scalar SQL, Tabular SQL, and Embedded functions.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

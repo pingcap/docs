@@ -1,7 +1,7 @@
 ---
 title: EXPLAIN ANALYZE GRAPHICAL
+summary: Analyzes query performance with an interactive visual representation in your browser. Available exclusively in BendSQL v0.22.2+.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.647"/>

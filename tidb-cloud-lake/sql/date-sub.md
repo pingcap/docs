@@ -1,7 +1,7 @@
 ---
 title: DATE_SUB
+summary: Subtract the time interval or date interval from the provided date or date with time (timestamp/datetime).
 ---
-
 Subtract the time interval or date interval from the provided date or date with time (timestamp/datetime).
 
 ## Syntax

@@ -1,7 +1,7 @@
 ---
 title: GEOHASH_DECODE
+summary: Converts a Geohash-encoded string into latitude/longitude coordinates.
 ---
-
 Converts a [Geohash](https://en.wikipedia.org/wiki/Geohash)-encoded string into latitude/longitude coordinates.
 
 ## Syntax

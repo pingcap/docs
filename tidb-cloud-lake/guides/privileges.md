@@ -1,7 +1,7 @@
 ---
 title: Privileges
+summary: A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within Databend. For example, when querying a table, a user needs SELECT privileges to the table. Similarly, to read a dataset within a stage, the user must possess READ privileges.
 ---
-
 A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within Databend. For example, when querying a table, a user needs `SELECT` privileges to the table. Similarly, to read a dataset within a stage, the user must possess `READ` privileges.
 
 In Databend, privileges are granted to roles. Users receive privileges through the roles assigned to them.

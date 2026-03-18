@@ -1,6 +1,6 @@
 ---
 title: DROP TASK
-sidebar_position: 3
+summary: The DROP TASK statement is used to delete an existing task.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

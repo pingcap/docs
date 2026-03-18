@@ -1,7 +1,7 @@
 ---
 title: SIPHASH64
+summary: Produces a 64-bit SipHash hash value.
 ---
-
 Produces a 64-bit [SipHash](https://en.wikipedia.org/wiki/SipHash) hash value.
 
 ## Syntax

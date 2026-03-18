@@ -1,7 +1,7 @@
 ---
 title: Compliance & Security
+summary: Databend Cloud is built with security at its core, providing comprehensive protection for your data through multiple security layers, encryption standards, and compliance certifications.
 ---
-
 # Databend Security Design
 
 Databend Cloud is built with security at its core, providing comprehensive protection for your data through multiple security layers, encryption standards, and compliance certifications.

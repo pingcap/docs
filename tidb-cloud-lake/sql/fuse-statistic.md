@@ -1,5 +1,6 @@
 ---
 title: FUSE_STATISTIC
+summary: note This function is deprecated. Use SHOW STATISTICS instead to view table statistics..
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

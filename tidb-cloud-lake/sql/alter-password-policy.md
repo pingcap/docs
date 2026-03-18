@@ -1,6 +1,6 @@
 ---
 title: ALTER PASSWORD POLICY
-sidebar_position: 3
+summary: Modifies an existing password policy in Databend.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: Stage
+summary: This page provides a comprehensive overview of stage operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of stage operations in Databend, organized by functionality for easy reference.
 
 ## Stage Management

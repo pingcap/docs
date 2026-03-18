@@ -1,7 +1,7 @@
 ---
 title: H3_LINE
+summary: Returns the line of indexes between the given two H3 indexes.
 ---
-
 Returns the line of indexes between the given two [H3](https://eng.uber.com/h3/) indexes.
 
 ## Syntax

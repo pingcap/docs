@@ -1,7 +1,7 @@
 ---
 title: SYSTEM FLUSH PRIVILEGES
+summary: Broadcasts a privilege metadata refresh to all query nodes so GRANT and REVOKE changes take effect immediately.
 ---
-
 `SYSTEM FLUSH PRIVILEGES` broadcasts a refresh request to every query node so each node immediately reloads privilege and role metadata from the Meta service. Run the command after `GRANT` or `REVOKE` statements when you need the changes to take effect across the cluster without waiting for the default 15-second role-cache interval.
 
 See also:

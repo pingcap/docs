@@ -1,7 +1,7 @@
 ---
 title: BUILD_BITMAP
+summary: Converts an array of positive integers to a BITMAP value.
 ---
-
 Converts an array of positive integers to a BITMAP value.
 
 ## Syntax

@@ -1,6 +1,6 @@
 ---
 title: SHOW CONNECTIONS
-sidebar_position: 2
+summary: Displays a list of all available connections.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

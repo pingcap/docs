@@ -1,7 +1,7 @@
 ---
 title: How Fuse Engine Works
+summary: Fuse Engine is Databend's core storage engine, optimized for managing petabyte-scale data efficiently on cloud object storage. By default, tables created in Databend automatically use this engine (ENGINE=FUSE). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides high query performance through advanced pruning and indexing.
 ---
-
 ## Fuse Engine
 
 Fuse Engine is Databend's core storage engine, optimized for managing **petabyte-scale** data efficiently on **cloud object storage**. By default, tables created in Databend automatically use this engine (`ENGINE=FUSE`). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides **high query performance** through advanced pruning and indexing.

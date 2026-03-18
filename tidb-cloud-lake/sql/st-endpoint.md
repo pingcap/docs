@@ -1,5 +1,6 @@
 ---
 title: ST_ENDPOINT
+summary: Returns the last Point in a LineString.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

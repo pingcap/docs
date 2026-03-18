@@ -1,7 +1,7 @@
 ---
 title: Task
+summary: This page provides a comprehensive overview of task operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of task operations in Databend, organized by functionality for easy reference.
 
 ## Task Management

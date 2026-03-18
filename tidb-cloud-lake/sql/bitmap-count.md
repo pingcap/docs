@@ -1,7 +1,7 @@
 ---
 title: BITMAP_COUNT
+summary: Counts the number of bits set to 1 in the bitmap.
 ---
-
 Counts the number of bits set to 1 in the bitmap.
 
 ## Syntax

@@ -1,7 +1,7 @@
 ---
 title: BITMAP_XOR
+summary: Performs a bitwise XOR (exclusive OR) operation on the two bitmaps.
 ---
-
 Performs a bitwise XOR (exclusive OR) operation on the two bitmaps.
 
 ## Syntax

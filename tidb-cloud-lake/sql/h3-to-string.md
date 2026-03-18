@@ -1,7 +1,7 @@
 ---
 title: H3_TO_STRING
+summary: Converts the representation of the given H3 index to the string representation.
 ---
-
 Converts the representation of the given [H3](https://eng.uber.com/h3/) index to the string representation. 
 
 ## Syntax

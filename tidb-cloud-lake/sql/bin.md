@@ -1,7 +1,7 @@
 ---
 title: BIN
+summary: Returns a string representation of the binary value of N.
 ---
-
 Returns a string representation of the binary value of N.
 
 ## Syntax

@@ -1,7 +1,7 @@
 ---
 title: Query Syntax
+summary: This page provides reference information for the query syntax in Databend. Each component can be used individually or combined to build powerful queries.
 ---
-
 This page provides reference information for the query syntax in Databend. Each component can be used individually or combined to build powerful queries.
 
 ## Core Query Components

@@ -1,5 +1,6 @@
 ---
 title: JSON_TYPEOF
+summary: Returns the type of the main-level of a JSON structure.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

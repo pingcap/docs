@@ -1,7 +1,7 @@
 ---
 title: TO_START_OF_MONTH
+summary: Rounds down a date or date with time (timestamp/datetime) to the first day of the month. Returns the date.
 ---
-
 Rounds down a date or date with time (timestamp/datetime) to the first day of the month.
 Returns the date.
 

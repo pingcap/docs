@@ -1,7 +1,7 @@
 ---
 title: information_schema.schemata
+summary: Provides metadata about all databases in the system.
 ---
-
 Provides metadata about all databases in the system.
 
 ```sql

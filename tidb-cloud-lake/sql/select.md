@@ -1,5 +1,6 @@
 ---
 title: SELECT
+summary: Retrieves data from a table.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

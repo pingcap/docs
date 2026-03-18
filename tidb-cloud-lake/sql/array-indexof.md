@@ -1,5 +1,6 @@
 ---
 title: ARRAY_INDEXOF
+summary: Returns the index of the first occurrence of an element in an array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

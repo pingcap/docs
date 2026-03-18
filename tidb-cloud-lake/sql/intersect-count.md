@@ -1,7 +1,7 @@
 ---
 title: INTERSECT_COUNT
+summary: Counts the number of intersecting bits between two bitmap columns.
 ---
-
 Counts the number of intersecting bits between two bitmap columns.
 
 ## Syntax

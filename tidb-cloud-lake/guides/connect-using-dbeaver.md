@@ -1,7 +1,7 @@
 ---
 title: DBeaver
+summary: DBeaver supports connecting to Databend using a built-in driver categorized under Analytical, available starting from version 24.3.1.
 ---
-
 import StepsWrap from '@site/src/components/StepsWrap';
 import StepContent from '@site/src/components/Steps/step-content';
 

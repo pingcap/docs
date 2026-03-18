@@ -1,5 +1,6 @@
 ---
 title: SET VARIABLE
+summary: Sets the value of one or more SQL variables within a session. The values can be simple constants, expressions, query results, or database objects. Variables persist for the duration of your session and can be used in subsequent queries.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

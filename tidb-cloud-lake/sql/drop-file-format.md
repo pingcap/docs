@@ -1,8 +1,7 @@
 ---
 title: DROP FILE FORMAT
-sidebar_position: 3
+summary: Removes a file format.
 ---
-
 Removes a file format.
 
 ## Syntax

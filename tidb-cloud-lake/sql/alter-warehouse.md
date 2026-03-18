@@ -1,8 +1,7 @@
 ---
 title: ALTER WAREHOUSE
-sidebar_position: 4
+summary: Suspends, resumes, or modifies settings of an existing warehouse.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>

@@ -1,7 +1,7 @@
 ---
 title: Stored Procedure
+summary: This page provides a comprehensive overview of Stored Procedure operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of Stored Procedure operations in Databend, organized by functionality for easy reference.
 
 ## Procedure Management

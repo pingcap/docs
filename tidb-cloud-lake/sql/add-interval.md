@@ -1,9 +1,7 @@
 ---
 title: ADD TIME INTERVAL
-description: Add time interval function
-title_includes: add_years, add_quarters, add_months, add_days, add_hours, add_minutes, add_seconds
+summary: Add a time interval to a date or timestamp, return the result of date or timestamp type.
 ---
-
 Add a time interval to a date or timestamp, return the result of date or timestamp type.
 
 ## Syntax

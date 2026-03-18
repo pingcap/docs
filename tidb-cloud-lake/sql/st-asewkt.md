@@ -1,5 +1,6 @@
 ---
 title: ST_ASEWKT
+summary: Converts a GEOMETRY or GEOGRAPHY object into a EWKT(extended well-known-text) format representation.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

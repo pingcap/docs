@@ -1,7 +1,7 @@
 ---
 title: NULLIF
+summary: Returns NULL if two expressions are equal. Otherwise return expr1. They must have the same data type.
 ---
-
 Returns NULL if two expressions are equal. Otherwise return expr1. They must have the same data type.
 
 ## Syntax

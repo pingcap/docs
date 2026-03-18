@@ -1,5 +1,6 @@
 ---
 title: ST_GEOGRAPHYFROMWKB
+summary: Parses a WKB(well-known-binary) or EWKB(extended well-known-binary) input and returns a value of type GEOGRAPHY.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

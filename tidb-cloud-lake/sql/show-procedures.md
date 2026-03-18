@@ -1,5 +1,6 @@
 ---
 title: SHOW PROCEDURES
+summary: Returns a list of all stored procedures in the system.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

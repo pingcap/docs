@@ -1,7 +1,7 @@
 ---
 title: FLOOR
+summary: Rounds the number down.
 ---
-
 Rounds the number down.
 
 ## Syntax

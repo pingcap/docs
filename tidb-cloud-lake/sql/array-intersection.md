@@ -1,6 +1,6 @@
 ---
 title: ARRAY_INTERSECTION
-title_includes: JSON_ARRAY_INTERSECTION
+summary: Returns the common elements between two JSON arrays.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

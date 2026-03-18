@@ -1,5 +1,6 @@
 ---
 title: INSPECT_PARQUET
+summary: Retrieves a table of comprehensive metadata from a staged Parquet file, including the following columns.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

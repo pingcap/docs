@@ -1,8 +1,7 @@
 ---
 title: DROP VIEW
-sidebar_position: 5
+summary: Drop the view.
 ---
-
 Drop the view.
 
 ## Syntax

@@ -1,10 +1,7 @@
 ---
 title: PARSE_JSON
-description:
-  Interprets input JSON string, producing a VARIANT value
-title_includes: TRY_PARSE_JSON
+summary: Parses a JSON-formatted string and returns a VARIANT value. Use TRY_PARSE_JSON to return NULL instead of an error for invalid input.
 ---
-
 `parse_json` and `try_parse_json` interprets an input string as a JSON document, producing a VARIANT value.
 
 `try_parse_json` returns a NULL value if an error occurs during parsing.

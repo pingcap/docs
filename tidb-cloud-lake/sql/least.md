@@ -1,5 +1,6 @@
 ---
 title: LEAST
+summary: Returns the minimum value from a set of values. If any value in the set is NULL, the function returns NULL.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

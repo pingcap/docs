@@ -1,5 +1,6 @@
 ---
 title: ARRAY_UNIQUE
+summary: Returns the number of unique elements in the array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

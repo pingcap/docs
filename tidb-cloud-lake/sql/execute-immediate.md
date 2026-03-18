@@ -1,5 +1,6 @@
 ---
 title: EXECUTE IMMEDIATE
+summary: Executes a SQL script. For how to write SQL scripts for Databend, see Stored Procedure & SQL Scripting.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

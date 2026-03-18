@@ -1,8 +1,7 @@
 ---
 title: REFRESH AGGREGATING INDEX
-sidebar_position: 2
+summary: Databend automatically maintains aggregating indexes in SYNC mode as new data is ingested. Run REFRESH AGGREGATING INDEX when you introduce an index on a table that already contains data so earlier rows are backfilled.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.151"/>

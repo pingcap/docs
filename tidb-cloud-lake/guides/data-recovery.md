@@ -1,5 +1,6 @@
 ---
 title: Data Recovery
+summary: This topic explains how to back up and restore data in Databend.
 ---
 import EEFeature from '@site/src/components/EEFeature';
 

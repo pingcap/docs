@@ -1,5 +1,6 @@
 ---
 title: SUM
+summary: Calculates the sum of a set of values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

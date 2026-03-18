@@ -1,7 +1,7 @@
 ---
 title: Sequence Functions
+summary: This section provides reference information for the sequence functions in Databend. Sequence functions allow you to work with sequence objects, which generate unique, auto-incrementing numeric values.
 ---
-
 This section provides reference information for the sequence functions in Databend. Sequence functions allow you to work with sequence objects, which generate unique, auto-incrementing numeric values.
 
 ## Available Sequence Functions

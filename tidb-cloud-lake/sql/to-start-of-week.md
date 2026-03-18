@@ -1,7 +1,7 @@
 ---
 title: TO_START_OF_WEEK
+summary: Returns the first day of the week for a date or a date with time (timestamp/datetime). The first day of a week can be Sunday or Monday, which is specified by the argument mode.
 ---
-
 Returns the first day of the week for a date or a date with time (timestamp/datetime).
 The first day of a week can be Sunday or Monday, which is specified by the argument `mode`.
 

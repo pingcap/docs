@@ -1,7 +1,7 @@
 ---
 title: EXPLAIN ANALYZE
+summary: EXPLAIN ANALYZE used to display a query execution plan along with actual run-time performance statistics.
 ---
-
 `EXPLAIN ANALYZE` used to display a query execution plan along with actual run-time performance statistics. 
 
 This is useful for analyzing query performance and identifying bottlenecks in a query.

@@ -1,7 +1,7 @@
 ---
 title: system.metrics
+summary: Contains information about metric events.
 ---
-
 Contains information about metric events.
 
 ```sql

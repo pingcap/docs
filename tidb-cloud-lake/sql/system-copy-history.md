@@ -1,7 +1,7 @@
 ---
 title: system.copy_history
+summary: Contains information about copy history.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.823"/>

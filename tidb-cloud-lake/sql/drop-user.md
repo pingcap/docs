@@ -1,8 +1,7 @@
 ---
 title: DROP USER
-sidebar_position: 4
+summary: Drop the specified user from the system.
 ---
-
 Drop the specified user from the system.
 
 ## Syntax

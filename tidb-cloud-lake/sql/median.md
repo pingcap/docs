@@ -1,5 +1,6 @@
 ---
 title: MEDIAN
+summary: The MEDIAN() function.
 ---
 
 Aggregate function.

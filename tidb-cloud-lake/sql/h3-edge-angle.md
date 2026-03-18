@@ -1,7 +1,7 @@
 ---
 title: H3_EDGE_ANGLE
+summary: Returns the average length of the H3 hexagon edge in grades.
 ---
-
 Returns the average length of the H3 hexagon edge in grades.
 
 ## Syntax

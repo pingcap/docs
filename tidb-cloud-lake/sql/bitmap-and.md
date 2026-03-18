@@ -1,7 +1,7 @@
 ---
 title: BITMAP_AND
+summary: Performs a bitwise AND operation on the two bitmaps.
 ---
-
 Performs a bitwise AND operation on the two bitmaps.
 
 ## Syntax

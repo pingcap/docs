@@ -1,7 +1,7 @@
 ---
 title: CBRT
+summary: Returns the cube root of a nonnegative number x.
 ---
-
 Returns the cube root of a nonnegative number `x`.
 
 ## Syntax

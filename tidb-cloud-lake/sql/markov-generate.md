@@ -1,7 +1,7 @@
 ---
 title: MARKOV_GENERATE
+summary: Using the model trained by MARKOV_TRAIN to anonymize the dataset.
 ---
-
 Using the model trained by [MARKOV_TRAIN](/tidb-cloud-lake/sql/markov-train.md) to anonymize the dataset.
 
 ## Syntax

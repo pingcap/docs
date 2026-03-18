@@ -1,7 +1,7 @@
 ---
 title: LAST_VALUE
+summary: Returns the last value in the window frame.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.697"/>

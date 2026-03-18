@@ -1,7 +1,7 @@
 ---
 title: UUID Functions
+summary: This page provides reference information for the UUID-related functions in Databend. These functions generate and work with Universally Unique Identifiers (UUIDs).
 ---
-
 This page provides reference information for the UUID-related functions in Databend. These functions generate and work with Universally Unique Identifiers (UUIDs).
 
 ## UUID Generation Functions

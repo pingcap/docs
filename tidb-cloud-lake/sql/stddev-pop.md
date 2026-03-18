@@ -1,8 +1,7 @@
 ---
 title: STDDEV_POP
-title_includes: STD, STDDEV
+summary: Aggregate function.
 ---
-
 Aggregate function.
 
 The STDDEV_POP() function returns the population standard deviation(the square root of VAR_POP()) of an expression.

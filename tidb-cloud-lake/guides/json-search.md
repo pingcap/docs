@@ -1,7 +1,7 @@
 ---
 title: JSON & Search
+summary: Scenario CityDrive attaches a metadata JSON payload to every extracted frame. This JSON data is extracted from video keyframes by background tools, containing rich unstructured information like scene recognition and object detection. We need to filter this JSON in Databend with Elasticsearch-style syntax without replicating it to an external system. JSON without copying it out of Databend.
 ---
-
 > **Scenario:** CityDrive attaches a metadata JSON payload to every extracted frame. This JSON data is extracted from video keyframes by background tools, containing rich unstructured information like scene recognition and object detection. We need to filter this JSON in Databend with Elasticsearch-style syntax without replicating it to an external system. JSON without copying it out of Databend.
 
 Databend keeps these heterogeneous signals in one warehouse. Inverted indexes power Elasticsearch-style search on VARIANT columns, bitmap tables summarize label coverage, vector indexes answer similarity lookups, and native GEOMETRY columns support spatial filters.

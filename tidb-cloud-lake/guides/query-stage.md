@@ -1,8 +1,7 @@
 ---
 title: Querying & Transforming
-slug: querying-stage
+summary: Databend enables direct querying of staged files without loading data into tables first. Query files from any stage type (user, internal, external) or directly from object storage and HTTPS URLs. Ideal for data inspection, validation, and transformation before or after loading.
 ---
-
 Databend enables direct querying of staged files without loading data into tables first. Query files from any stage type (user, internal, external) or directly from object storage and HTTPS URLs. Ideal for data inspection, validation, and transformation before or after loading.
 
 ## Syntax

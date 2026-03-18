@@ -1,7 +1,7 @@
 ---
 title: REGEXP_INSTR
+summary: Returns the starting index of the substring of the string expr that matches the regular expression specified by the pattern pat, 0 if there is no match. If expr or pat is NULL, the return value is NULL. Character indexes begin at 1.
 ---
-
 Returns the starting index of the substring of the string `expr` that matches the regular expression specified by the pattern `pat`, `0` if there is no match. If `expr` or `pat` is NULL, the return value is NULL. Character indexes begin at `1`.
 
 ## Syntax

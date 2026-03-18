@@ -1,7 +1,7 @@
 ---
 title: NOT RLIKE
+summary: Returns 1 if the string expr doesn't match the regular expression specified by the pattern pat, 0 otherwise.
 ---
-
 Returns 1 if the string expr doesn't match the regular expression specified by the pattern pat, 0 otherwise.
 
 ## Syntax

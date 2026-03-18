@@ -1,5 +1,6 @@
 ---
 title: Aggregating Index
+summary: This page provides a comprehensive overview of aggregating index operations in Databend, organized by functionality for easy reference.
 ---
 This page provides a comprehensive overview of aggregating index operations in Databend, organized by functionality for easy reference.
 

@@ -1,6 +1,6 @@
 ---
 title: SHOW PASSWORD POLICIES
-sidebar_position: 4
+summary: Displays a list of all existing password policies in Databend.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

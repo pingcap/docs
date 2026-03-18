@@ -1,7 +1,7 @@
 ---
 title: TRY_INET_ATON
+summary: try_inet_aton function is used to take the dotted-quad representation of an IPv4 address as a string and returns the numeric value of the given IP address in form of an integer.
 ---
-
 try_inet_aton function is used to take the dotted-quad representation of an IPv4 address as a string and returns the numeric value of the given IP address in form of an integer.
 
 ## Syntax

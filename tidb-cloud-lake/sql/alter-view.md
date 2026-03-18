@@ -1,8 +1,7 @@
 ---
 title: ALTER VIEW
-sidebar_position: 2
+summary: Alter the existing view by using another QUERY.
 ---
-
 Alter the existing view by using another `QUERY`.
 
 ## Syntax

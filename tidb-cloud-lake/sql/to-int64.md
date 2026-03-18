@@ -1,7 +1,7 @@
 ---
 title: TO_INT64
+summary: Converts a value to INT64 data type.
 ---
-
 Converts a value to INT64 data type.
 
 ## Syntax

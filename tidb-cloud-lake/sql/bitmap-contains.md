@@ -1,7 +1,7 @@
 ---
 title: BITMAP_CONTAINS
+summary: Checks if the bitmap contains a specific value.
 ---
-
 Checks if the bitmap contains a specific value.
 
 ## Syntax

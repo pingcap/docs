@@ -1,7 +1,7 @@
 ---
 title: UNNEST
+summary: Unnests the array and returns the set of elements.
 ---
-
 Unnests the array and returns the set of elements.
 
 ## Syntax

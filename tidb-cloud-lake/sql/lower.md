@@ -1,7 +1,7 @@
 ---
 title: LOWER
+summary: Returns a string with all characters changed to lowercase.
 ---
-
 Returns a string with all characters changed to lowercase.
 
 ## Syntax

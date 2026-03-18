@@ -1,7 +1,7 @@
 ---
 title: system.databases_with_history
+summary: Records all databases, including active and dropped ones. It shows each database's catalog, name, unique ID, owner (if specified), and the deletion timestamp (NULL if still active).
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced: v1.1.658"/>

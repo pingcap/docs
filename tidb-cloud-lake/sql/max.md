@@ -1,7 +1,7 @@
 ---
 title: MAX
+summary: Aggregate function.
 ---
-
 Aggregate function.
 
 The MAX() function returns the maximum value in a set of values.

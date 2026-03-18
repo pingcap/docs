@@ -1,7 +1,7 @@
 ---
 title: ARRAY_MEDIAN
+summary: Returns the median of the numeric values in an array. NULL elements are ignored.
 ---
-
 Returns the median of the numeric values in an array. `NULL` elements are ignored.
 
 ## Syntax

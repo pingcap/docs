@@ -1,7 +1,7 @@
 ---
-title: "LOG(b, x)"
+title: LOG(b, x)
+summary: Returns the base-b logarithm of x. If x is less than or equal to 0.0E0, the function returns NULL.
 ---
-
 Returns the base-b logarithm of `x`. If `x` is less than or equal to 0.0E0, the function returns NULL.
 
 ## Syntax

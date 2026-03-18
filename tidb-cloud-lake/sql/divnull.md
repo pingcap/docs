@@ -1,5 +1,6 @@
 ---
 title: DIVNULL
+summary: Returns the quotient by dividing the first number by the second one. Returns NULL if the second number is 0 or NULL.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

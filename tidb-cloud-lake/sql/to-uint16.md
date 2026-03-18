@@ -1,7 +1,7 @@
 ---
 title: TO_UINT16
+summary: Converts a value to UINT16 data type.
 ---
-
 Converts a value to UINT16 data type.
 
 ## Syntax

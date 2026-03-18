@@ -1,5 +1,6 @@
 ---
 title: ST_ASWKB
+summary: Converts a GEOMETRY or GEOGRAPHY object into a WKB(well-known-binary) format representation.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

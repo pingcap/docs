@@ -1,5 +1,6 @@
 ---
 title: JSON_TO_STRING
+summary: Alias for TO_STRING.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

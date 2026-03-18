@@ -1,8 +1,7 @@
 ---
 title: Querying CSV Files in Stage
-sidebar_label: CSV
+summary: Create an external stage with your own S3 bucket and credentials where your CSV files are stored.
 ---
-
 ## Syntax:
 
 - [Query columns by position](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-position)

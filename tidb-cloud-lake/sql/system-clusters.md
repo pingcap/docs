@@ -1,7 +1,7 @@
 ---
 title: system.clusters
+summary: Contains information about cluster nodes.
 ---
-
 Contains information about cluster nodes.
 
 > **Note:**

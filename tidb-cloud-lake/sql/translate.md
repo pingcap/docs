@@ -1,5 +1,6 @@
 ---
 title: TRANSLATE
+summary: Transforms a given string by replacing specific characters with corresponding replacements, as defined by the provided mapping.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

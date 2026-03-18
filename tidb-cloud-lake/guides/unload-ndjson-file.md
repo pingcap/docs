@@ -1,7 +1,7 @@
 ---
 title: Unloading NDJSON File
+summary: Learn about how to unload NDJSON files.
 ---
-
 ## Unloading TSV File
 
 Syntax:

@@ -1,8 +1,7 @@
 ---
 title: JSON_CONTAINS_IN_LEFT
-title_includes: JSON_CONTAINS_IN_RIGHT
+summary: Tests containment relationships between two VARIANT values.
 ---
-
 Tests containment relationships between two `VARIANT` values:
 
 - `JSON_CONTAINS_IN_LEFT(left, right)` returns `TRUE` when *left* contains *right* (i.e., *left* is a superset).

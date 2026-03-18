@@ -1,8 +1,7 @@
 ---
 title: SQL Reference
-slug: '/'
+summary: Welcome to SQL Reference – your swift-access guide for Databend essentials!
 ---
-
 Welcome to SQL Reference – your swift-access guide for Databend essentials!
 
 - **General Reference:** Provides insights into foundational elements like Data Types, System Tables, and Table Engines, helping you build a solid understanding of Databend's structure.

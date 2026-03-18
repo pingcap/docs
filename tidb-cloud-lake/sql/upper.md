@@ -1,7 +1,7 @@
 ---
 title: UPPER
+summary: Returns a string with all characters changed to uppercase.
 ---
-
 Returns a string with all characters changed to uppercase.
 
 ## Syntax

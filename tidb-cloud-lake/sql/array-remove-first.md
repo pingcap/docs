@@ -1,5 +1,6 @@
 ---
 title: ARRAY_REMOVE_FIRST
+summary: Removes the first occurrence of an element from an array.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

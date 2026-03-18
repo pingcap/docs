@@ -1,7 +1,7 @@
 ---
 title: NTH_VALUE
+summary: Returns the value at the specified position (N) within the window frame.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.697"/>

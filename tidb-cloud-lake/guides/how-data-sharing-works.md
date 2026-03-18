@@ -1,7 +1,7 @@
 ---
-title: How Databend Data Sharing Works
+title: How TiDB Cloud Lake Data Sharing Works
+summary: Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.
 ---
-
 ## What is Data Sharing?
 
 Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.

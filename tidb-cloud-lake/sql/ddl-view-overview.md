@@ -1,7 +1,7 @@
 ---
 title: View
+summary: This page provides a comprehensive overview of view operations in Databend, organized by functionality for easy reference.
 ---
-
 This page provides a comprehensive overview of view operations in Databend, organized by functionality for easy reference.
 
 ## View Management

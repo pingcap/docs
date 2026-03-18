@@ -1,7 +1,7 @@
 ---
 title: SQL Dialects & Conformance
+summary: This page provides details on the SQL dialects supported by Databend, along with its conformity to the SQL standard, particularly focusing on SQL2011 features and their support status within Databend.
 ---
-
 This page provides details on the SQL dialects supported by Databend, along with its conformity to the SQL standard, particularly focusing on SQL:2011 features and their support status within Databend.
 
 ## Supported SQL Dialects

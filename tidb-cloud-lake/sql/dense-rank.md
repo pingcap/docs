@@ -1,7 +1,7 @@
 ---
 title: DENSE_RANK
+summary: Assigns a rank to each row within a partition. Rows with equal values receive the same rank, with no gaps in subsequent rankings.
 ---
-
 Assigns a rank to each row within a partition. Rows with equal values receive the same rank, with no gaps in subsequent rankings.
 
 ## Syntax

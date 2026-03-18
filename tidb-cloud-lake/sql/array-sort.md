@@ -1,8 +1,7 @@
 ---
 title: ARRAY_SORT
-title_includes: ARRAY_SORT_ASC_NULL_FIRST, ARRAY_SORT_ASC_NULL_LAST, ARRAY_SORT_DESC_NULL_FIRST, ARRAY_SORT_DESC_NULL_LAST
+summary: Sorts the elements of an array. By default, ARRAY_SORT orders ascending and places NULL values last. Use the explicit variants to control order and NULL placement.
 ---
-
 Sorts the elements of an array. By default, `ARRAY_SORT` orders ascending and places `NULL` values last. Use the explicit variants to control order and `NULL` placement.
 
 ## Syntax

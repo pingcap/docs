@@ -1,7 +1,7 @@
 ---
 title: Data Anonymization Functions
+summary: Data anonymization is the process of altering or removing personally identifiable information (PII) from data sets to protect individual privacy. Its goal is to transform data so it cannot be linked back to specific individuals, while preserving the data's utility for analysis, research, and testing.
 ---
-
 Data anonymization is the process of altering or removing personally identifiable information (PII) from data sets to protect individual privacy. Its goal is to transform data so it cannot be linked back to specific individuals, while preserving the data's utility for analysis, research, and testing.
 
 ### Common Data Categories for Anonymization

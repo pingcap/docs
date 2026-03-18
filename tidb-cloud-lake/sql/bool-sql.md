@@ -1,5 +1,6 @@
 ---
 title: bool_or
+summary: Returns true if at least one input value is true, otherwise false.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

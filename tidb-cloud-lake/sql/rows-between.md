@@ -1,7 +1,7 @@
 ---
 title: ROWS BETWEEN
+summary: Defines a window frame using row-based boundaries for window functions.
 ---
-
 Defines a window frame using row-based boundaries for window functions.
 
 ## Overview

@@ -1,7 +1,7 @@
 ---
 title: HUMANIZE_SIZE
+summary: Returns the readable size with a suffix(KiB, MiB, etc).
 ---
-
 Returns the readable size with a suffix(KiB, MiB, etc).
 
 ## Syntax

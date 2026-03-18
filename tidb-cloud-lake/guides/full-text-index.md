@@ -1,5 +1,6 @@
 ---
 title: Full-Text Index
+summary: Full-text indexes (inverted indexes) automatically enable lightning-fast text searches across large document collections by mapping terms to documents, eliminating the need for slow table scans.
 ---
 
 > **Note:**

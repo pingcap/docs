@@ -1,8 +1,7 @@
 ---
-title: "COPY INTO <table>"
-sidebar_label: "COPY INTO <table>"
+title: COPY INTO <table>
+summary: COPY INTO allows you to load data from files located in one of the following locations.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

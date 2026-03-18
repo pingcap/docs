@@ -1,7 +1,7 @@
 ---
 title: Logical Operators
+summary: This page describes Logical Operators in TiDB Cloud Lake.
 ---
-
 | Operator | Description                            | Example       | Result |
 |----------|----------------------------------------|---------------|--------|
 | **AND**  | Matches both expressions (`a` and `b`) | **1 AND 1**   | TRUE   |

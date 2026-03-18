@@ -1,5 +1,6 @@
 ---
 title: WITH CONSUME
+summary: Consumes data from a stream within a SELECT query.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

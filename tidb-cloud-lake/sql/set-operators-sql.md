@@ -1,9 +1,7 @@
 ---
 title: Set Operators
-description:
-  Set operators combine the results of two queries into a single result.
+summary: Set operators combine the results of two queries into a single result. Databend supports the following set operators.
 ---
-
 Set operators combine the results of two queries into a single result. Databend supports the following set operators:
 
 - [INTERSECT](#intersect)

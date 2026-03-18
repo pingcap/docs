@@ -1,7 +1,7 @@
 ---
 title: system.user_functions
+summary: Contains information about user-defined functions and external functions in the system.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.315"/>

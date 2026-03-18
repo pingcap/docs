@@ -1,8 +1,7 @@
 ---
-id: string-char
 title: CHAR
+summary: Returns the character(s) for each integer passed. The function converts each integer to its corresponding Unicode character.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.752"/>

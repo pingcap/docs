@@ -1,6 +1,6 @@
 ---
 title: DROP CONNECTION
-sidebar_position: 3
+summary: Deletes an existing connection.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,8 +1,7 @@
 ---
 title: CREATE NGRAM INDEX
-sidebar_position: 1
+summary: Creates an Ngram index on a column for a table.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.726"/>

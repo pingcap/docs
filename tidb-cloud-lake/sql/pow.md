@@ -1,7 +1,7 @@
 ---
 title: POW
+summary: Returns the value of x to the power of y.
 ---
-
 Returns the value of `x` to the power of `y`. 
 
 ## Syntax

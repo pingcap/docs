@@ -1,8 +1,7 @@
 ---
-title: Data Lifecycle in Databend
-sidebar_label: Data Lifecycle
+title: Data Lifecycle in TiDB Cloud Lake
+summary: Databend supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, Databend follows the same industry standards you're accustomed to.
 ---
-
 Databend supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, Databend follows the same industry standards you're accustomed to.
 
 ## Databend Objects

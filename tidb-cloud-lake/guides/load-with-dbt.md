@@ -1,7 +1,7 @@
 ---
 title: dbt
+summary: dbt is a transformation workflow that helps you get more work done while producing higher quality results. You can use dbt to modularize and centralize your analytics code, while also providing your data team with guardrails typically found in software engineering workflows. Collaborate on data models, version them, and test and document your queries before safely deploying them to production, with monitoring and visibility.
 ---
-
 [dbt](https://www.getdbt.com/) is a transformation workflow that helps you get more work done while producing higher quality results. You can use dbt to modularize and centralize your analytics code, while also providing your data team with guardrails typically found in software engineering workflows. Collaborate on data models, version them, and test and document your queries before safely deploying them to production, with monitoring and visibility.
 
 [dbt-databend-cloud](https://github.com/databendcloud/dbt-databend) is a plugin developed by Databend with the primary goal of enabling smooth integration between dbt and Databend. By utilizing this plugin, you can seamlessly perform data modeling, transformation, and cleansing tasks using dbt and conveniently load the output into Databend. The table below illustrates the level of support that the dbt-databend-cloud plugin offers for commonly used features in dbt:

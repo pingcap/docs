@@ -1,7 +1,7 @@
 ---
 title: H3_DISTANCE
+summary: Returns the grid distance between the the given two H3 indexes.
 ---
-
 Returns the grid distance between the the given two [H3](https://eng.uber.com/h3/) indexes.
 
 ## Syntax

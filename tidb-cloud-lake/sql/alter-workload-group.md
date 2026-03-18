@@ -1,5 +1,6 @@
 ---
 title: ALTER WORKLOAD GROUP
+summary: Update a workload group with specified quota settings.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

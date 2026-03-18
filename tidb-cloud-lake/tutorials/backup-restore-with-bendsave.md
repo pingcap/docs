@@ -1,7 +1,7 @@
 ---
 title: Backup & Restore with BendSave
+summary: This tutorial walks you through how to back up and restore data using BendSave. We'll use a local MinIO instance as both the S3-compatible storage backend for Databend and the destination for storing backups.
 ---
-
 This tutorial walks you through how to back up and restore data using BendSave. We'll use a local MinIO instance as both the S3-compatible storage backend for Databend and the destination for storing backups.
 
 ## Before You Start

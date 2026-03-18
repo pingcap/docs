@@ -1,8 +1,7 @@
 ---
 title: SHOW CREATE TABLE
-sidebar_position: 10
+summary: Shows the CREATE TABLE statement for the specified table. To include the Fuse Engine options in the result, set hide_options_in_show_create_table to 0.
 ---
-
 Shows the CREATE TABLE statement for the specified table. To include the Fuse Engine options in the result, set `hide_options_in_show_create_table` to `0`.
 
 ## Syntax

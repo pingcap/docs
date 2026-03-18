@@ -1,5 +1,6 @@
 ---
 title: SHOW WORKLOAD GROUPS
+summary: Returns a list of all existing workload groups along with their quotas.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

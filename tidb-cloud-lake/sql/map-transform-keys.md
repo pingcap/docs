@@ -1,5 +1,6 @@
 ---
 title: MAP_TRANSFORM_KEYS
+summary: Applies a transformation to each key in a JSON object using a lambda expression.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

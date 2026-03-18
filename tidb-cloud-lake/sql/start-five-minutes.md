@@ -1,7 +1,7 @@
 ---
 title: TO_START_OF_FIVE_MINUTES
+summary: Rounds down a date with time (timestamp/datetime) to the start of the five-minute interval. ## Syntax.
 ---
-
 Rounds down a date with time (timestamp/datetime) to the start of the five-minute interval.
 ## Syntax
 

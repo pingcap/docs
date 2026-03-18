@@ -1,7 +1,7 @@
 ---
 title: Performance Optimization
+summary: Databend primarily accelerates query performance through various indexing technologies, including data clustering, result caching, and specialized indexes, helping you significantly improve query response times.
 ---
-
 Databend primarily accelerates query performance through **various indexing technologies**, including data clustering, result caching, and specialized indexes, helping you significantly improve query response times.
 
 ## Optimization Features

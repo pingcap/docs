@@ -1,7 +1,7 @@
 ---
 title: system_history.profile_history
+summary: The profiles field can be used to extract specific information. For example, to get the OutputRows value for every physical plan, the following query can be used sql SELECT jq('[.[] | {id, output_rows.statistics[4]}]', profiles) AS result FROM system_history.profile_history LIMIT 1;.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.764"/>

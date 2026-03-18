@@ -1,5 +1,6 @@
 ---
 title: ST_GEOMPOINTFROMGEOHASH
+summary: Returns a GEOMETRY object for the point that represents center of a geohash.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

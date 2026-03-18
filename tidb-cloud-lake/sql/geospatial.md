@@ -1,8 +1,7 @@
 ---
 title: Geospatial
-sidebar_position: 14
+summary: Databend stores spatial data through two data types.
 ---
-
 Databend stores spatial data through two data types:
 
 - `GEOMETRY` is planar (default SRID 0, or any SRID you assign) and suits local/projected workloads.

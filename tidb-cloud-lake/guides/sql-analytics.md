@@ -1,7 +1,7 @@
 ---
 title: SQL Analytics
+summary: Scenario CityDrive stages all dash-cam records into shared relational tables. This relational data (e.g., video metadata, event tags) is extracted by background processing pipelines from keyframes of the raw dash-cam video.
 ---
-
 > **Scenario:** CityDrive stages all dash-cam records into shared relational tables. This relational data (e.g., video metadata, event tags) is extracted by background processing pipelines from keyframes of the raw dash-cam video. Analysts can then filter, join, and aggregate on the same `video_id` / `frame_id` pairs used by all downstream workloads.
 
 This walkthrough models the relational side of that catalog and highlights practical SQL building blocks. The sample IDs here appear again in the JSON, vector, geo, and ETL guides.

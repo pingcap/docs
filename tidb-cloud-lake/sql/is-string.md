@@ -1,5 +1,6 @@
 ---
 title: IS_STRING
+summary: Checks if the input JSON value is a string.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

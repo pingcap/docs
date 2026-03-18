@@ -1,7 +1,7 @@
 ---
 title: IFNULL
+summary: If <expr1> is NULL, returns <expr2>, otherwise returns <expr1>.
 ---
-
 If `<expr1>` is NULL, returns `<expr2>`, otherwise returns `<expr1>`.
 
 ## Syntax

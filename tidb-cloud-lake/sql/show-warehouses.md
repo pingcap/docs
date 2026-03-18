@@ -1,8 +1,7 @@
 ---
 title: SHOW WAREHOUSES
-sidebar_position: 3
+summary: Lists all warehouses visible to the current tenant.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>

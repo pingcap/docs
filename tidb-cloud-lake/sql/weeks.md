@@ -1,5 +1,6 @@
 ---
 title: TO_WEEKS
+summary: Converts a specified number of weeks into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,5 +1,6 @@
 ---
 title: DATE_ADD
+summary: Adds a specified time interval to a DATE or TIMESTAMP value.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

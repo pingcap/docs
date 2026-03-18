@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLES
-sidebar_position: 15
+summary: Lists the tables in the current or a specified database.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

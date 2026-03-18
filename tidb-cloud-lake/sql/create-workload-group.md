@@ -1,5 +1,6 @@
 ---
 title: CREATE WORKLOAD GROUP
+summary: Creates a workload group with specified quota settings. Workload groups control resource allocation and query concurrency by binding to users. When a user submits queries, the workload group limits are applied based on the user's assigned group.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

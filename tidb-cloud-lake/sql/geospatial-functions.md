@@ -1,7 +1,7 @@
 ---
 title: Geospatial Functions
+summary: Databend ships with two complementary sets of geospatial capabilities PostGIS-style geometry functions for building and analysing shapes, and H3 utilities for global hexagonal indexing. The tables below group the functions by task so you can quickly locate the right tool, similar to the layout used in the Snowflake documentation.
 ---
-
 Databend ships with two complementary sets of geospatial capabilities: PostGIS-style geometry functions for building and analysing shapes, and H3 utilities for global hexagonal indexing. The tables below group the functions by task so you can quickly locate the right tool, similar to the layout used in the Snowflake documentation.
 
 ## Geometry Constructors

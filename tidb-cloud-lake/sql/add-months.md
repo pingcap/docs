@@ -1,5 +1,6 @@
 ---
 title: ADD_MONTHS
+summary: The add_months() function adds a specified number of months to a given date or timestamp.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,6 +1,6 @@
 ---
 title: SHOW DATABASES
-sidebar_position: 5
+summary: Shows the list of databases that exist on the instance.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

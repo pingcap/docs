@@ -1,5 +1,6 @@
 ---
 title: ST_DIMENSION
+summary: Return the dimension for a geometry object. The dimension of a GEOMETRY or GEOGRAPHY object is.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

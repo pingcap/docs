@@ -1,5 +1,6 @@
 ---
 title: RENAME WORKLOAD GROUP
+summary: Renames an existing workload group to a new name.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

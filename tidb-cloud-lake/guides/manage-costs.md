@@ -1,7 +1,7 @@
 ---
 title: Managing Costs
+summary: You can view the current month's consumption and billing history for your organization under Manage > Billing.
 ---
-
 You can view the current month's consumption and billing history for your organization under **Manage** > **Billing**.
 
 ## Limiting Your Costs

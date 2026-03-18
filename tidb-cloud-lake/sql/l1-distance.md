@@ -1,7 +1,7 @@
 ---
-title: 'L1_DISTANCE'
+title: L1_DISTANCE
+summary: Calculates the Manhattan (L1) distance between two vectors, measuring the sum of absolute differences between corresponding elements.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>

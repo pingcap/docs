@@ -1,5 +1,6 @@
 ---
 title: IS_BOOLEAN
+summary: Checks if the input JSON value is a boolean.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

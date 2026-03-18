@@ -1,7 +1,7 @@
 ---
 title: TO_UINT32
+summary: Converts a value to UINT32 data type.
 ---
-
 Converts a value to UINT32 data type.
 
 ## Syntax

@@ -1,8 +1,7 @@
 ---
 title: ARRAY_AGG
-title_includes: LIST
+summary: The ARRAY_AGG function (also known by its alias LIST) transforms all the values, excluding NULL, of a specific column in a query result into an array.
 ---
-
 The ARRAY_AGG function (also known by its alias LIST) transforms all the values, excluding NULL, of a specific column in a query result into an array.
 
 ## Syntax

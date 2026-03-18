@@ -1,7 +1,7 @@
 ---
 title: GET_PATH
+summary: Extracts value from a VARIANT by path_name. The value is returned as a Variant or NULL if either of the arguments is NULL.
 ---
-
 Extracts value from a `VARIANT` by `path_name`.
 The value is returned as a `Variant` or `NULL` if either of the arguments is `NULL`.
 

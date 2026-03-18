@@ -1,7 +1,7 @@
 ---
 title: system.indexes
+summary: Contains information about the created indexes.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced: v1.1.50"/>

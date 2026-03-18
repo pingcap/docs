@@ -1,5 +1,6 @@
 ---
 title: DAY
+summary: Alias for TO_DAY_OF_MONTH.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

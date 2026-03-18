@@ -1,8 +1,7 @@
 ---
 title: ARRAY_SIZE
-title_includes: ARRAY_LENGTH
+summary: Returns the length of an array, counting NULL elements.
 ---
-
 Returns the length of an array, counting `NULL` elements.
 
 Alias: `ARRAY_LENGTH`

@@ -1,5 +1,6 @@
 ---
 title: CALL PROCEDURE
+summary: Executes a stored procedure by calling its name, optionally passing arguments if the procedure requires them.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

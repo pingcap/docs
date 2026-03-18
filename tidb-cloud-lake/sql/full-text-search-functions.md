@@ -1,7 +1,7 @@
 ---
 title: Full-Text Search Functions
+summary: Databend's full-text search functions deliver search-engine-style filtering for semi-structured VARIANT data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets.
 ---
-
 Databend's full-text search functions deliver search-engine-style filtering for semi-structured `VARIANT` data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets.
 
 > **Note:**

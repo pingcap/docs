@@ -1,6 +1,6 @@
 ---
 title: SHOW GRANTS
-sidebar_position: 10
+summary: Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,8 +1,7 @@
 ---
 title: SHOW SEQUENCES
-sidebar_position: 3
+summary: Returns a list of the created sequences.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.742"/>

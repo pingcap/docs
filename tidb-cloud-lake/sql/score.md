@@ -1,5 +1,6 @@
 ---
 title: SCORE
+summary: Returns the relevance score for rows matched by inverted-index search conditions.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

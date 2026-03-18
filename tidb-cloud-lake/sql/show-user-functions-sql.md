@@ -1,6 +1,6 @@
 ---
 title: SHOW USER FUNCTIONS
-sidebar_position: 4
+summary: Lists the existing user-defined functions and external functions in the system. Equivalent to SELECT name, is_aggregate, description, arguments, language FROM system.user_functions....
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

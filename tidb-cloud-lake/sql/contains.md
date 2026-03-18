@@ -1,7 +1,7 @@
 ---
 title: CONTAINS
+summary: Checks if the array contains a specific element.
 ---
-
 Checks if the array contains a specific element.
 
 ## Syntax

@@ -1,8 +1,7 @@
 ---
 title: CREATE VECTOR INDEX
-sidebar_position: 1
+summary: Creates a Vector index on a VECTOR column for a table to enable efficient similarity search using the HNSW (Hierarchical Navigable Small World) algorithm.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.777"/>

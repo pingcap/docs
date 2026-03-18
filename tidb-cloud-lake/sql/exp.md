@@ -1,7 +1,7 @@
 ---
 title: EXP
+summary: Returns the value of e (the base of natural logarithms) raised to the power of x.
 ---
-
 Returns the value of e (the base of natural logarithms) raised to the power of `x`.
 
 ## Syntax

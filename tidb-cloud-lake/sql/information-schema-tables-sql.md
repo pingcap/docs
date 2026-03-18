@@ -1,7 +1,7 @@
 ---
 title: information_schema.tables
+summary: The information_schema.tables system table is a view that provides metadata about all tables across all databases, including their schema, type, engine, and creation details. It also includes storage metrics such as data length, index length, and row count, offering insights into table structure and usage.
 ---
-
 The `information_schema.tables` system table is a view that provides metadata about all tables across all databases, including their schema, type, engine, and creation details. It also includes storage metrics such as data length, index length, and row count, offering insights into table structure and usage.
 
 

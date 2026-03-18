@@ -1,6 +1,6 @@
 ---
 title: DROP TABLE
-sidebar_position: 19
+summary: Deletes a table.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

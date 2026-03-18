@@ -1,8 +1,7 @@
 ---
-title: Unload Data from Databend
-slug: /unload-data
+title: Unload Data from TiDB Cloud Lake
+summary: Databend's COPY INTO command exports data to various file formats and storage locations with flexible formatting options.
 ---
-
 Databend's `COPY INTO` command exports data to various file formats and storage locations with flexible formatting options.
 
 ## Supported File Formats

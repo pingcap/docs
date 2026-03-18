@@ -1,7 +1,7 @@
 ---
 title: FUSE_VIRTUAL_COLUMN
+summary: Returns the virtual column information of the latest or specified snapshot of a table. For details, see Virtual Column.
 ---
-
 Returns the virtual column information of the latest or specified snapshot of a table. For details, see [Virtual Column](/tidb-cloud-lake/guides/virtual-column.md).
 
 ## Syntax

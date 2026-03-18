@@ -1,8 +1,7 @@
 ---
 title: USE WAREHOUSE
-sidebar_position: 2
+summary: Binds the current session to a specific warehouse. Subsequent queries in the session will use this warehouse for execution.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.687"/>

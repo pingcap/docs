@@ -1,7 +1,7 @@
 ---
 title: RADIANS
+summary: Returns the argument x, converted from degrees to radians.
 ---
-
 Returns the argument `x`, converted from degrees to radians.
 
 ## Syntax

@@ -1,5 +1,6 @@
 ---
 title: ST_ASGEOJSON
+summary: Converts a GEOMETRY or GEOGRAPHY object into a GeoJSON representation.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: Password Policy
+summary: Password policies define how strong a Databend password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every CREATE USER and password change. For the full list of attributes, see Password Policy Attributes.
 ---
-
 Password policies define how strong a Databend password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every `CREATE USER` and password change. For the full list of attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
 
 ## How It Works

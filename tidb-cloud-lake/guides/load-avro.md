@@ -1,8 +1,7 @@
 ---
-title: Loading Avro into Databend
-sidebar_label: Avro
+title: Loading Avro into TiDB Cloud Lake
+summary: Apache Avro™ is the leading serialization format for record data, and first choice for streaming data pipelines.
 ---
-
 ## What is Avro?
 
 [Apache Avro™](https://avro.apache.org/) is the leading serialization format for record data, and first choice for streaming data pipelines.

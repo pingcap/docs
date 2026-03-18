@@ -1,9 +1,7 @@
 ---
 title: Numeric
-description: Basic Numeric data type.
-sidebar_position: 4
+summary: Basic Numeric data type.
 ---
-
 ## Integer Data Types
 
 | Name     | Alias | Size    | Min Value            | Max Value           |

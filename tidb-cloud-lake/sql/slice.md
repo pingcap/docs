@@ -1,7 +1,7 @@
 ---
 title: SLICE
+summary: Extracts a slice from the array by index (1-based).
 ---
-
 Extracts a slice from the array by index (1-based).
 
 ## Syntax

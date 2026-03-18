@@ -1,6 +1,6 @@
 ---
 title: SHOW USER FUNCTIONS
-sidebar_position: 4
+summary: Lists all user-defined functions including scalar functions, table functions, embedded functions, and external functions.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

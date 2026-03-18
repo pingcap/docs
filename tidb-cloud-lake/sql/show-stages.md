@@ -1,8 +1,7 @@
 ---
 title: SHOW STAGES
-sidebar_position: 6
+summary: Returns a list of the created stages. The output list does not include the user stage.
 ---
-
 Returns a list of the created stages. The output list does not include the user stage.
 
 ## Syntax

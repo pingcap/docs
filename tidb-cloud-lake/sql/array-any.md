@@ -1,7 +1,7 @@
 ---
 title: ARRAY_ANY
+summary: Returns the first non-NULL element from an array. Equivalent to ARRAY_AGGREGATE(<array>, 'ANY').
 ---
-
 Returns the first non-`NULL` element from an array. Equivalent to `ARRAY_AGGREGATE(<array>, 'ANY')`.
 
 ## Syntax

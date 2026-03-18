@@ -1,7 +1,7 @@
 ---
 title: Audit Trail
+summary: Databend system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
 ---
-
 import EEFeature from '@site/src/components/EEFeature';
 
 <EEFeature featureName='AUDIT TRAIL'/>

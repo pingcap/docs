@@ -1,6 +1,6 @@
 ---
 title: SHOW USERS
-sidebar_position: 3
+summary: Lists all SQL users in the system. If you're using Databend Cloud, this command also shows the user accounts (email addresses) within your organization that are used to log in to Databend Cloud.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

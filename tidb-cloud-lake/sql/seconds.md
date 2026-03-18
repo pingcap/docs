@@ -1,5 +1,6 @@
 ---
 title: TO_SECONDS
+summary: Converts a specified number of seconds into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

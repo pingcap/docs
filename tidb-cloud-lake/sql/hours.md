@@ -1,5 +1,6 @@
 ---
 title: TO_HOURS
+summary: Converts a specified number of hours into an Interval type.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

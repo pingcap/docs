@@ -1,5 +1,6 @@
 ---
 title: MAP_VALUES
+summary: Returns the values in a map.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE STATUS
-sidebar_position: 14
+summary: Shows the status of the tables in a database. The status information includes various physical sizes and timestamps about a table, see Examples for details.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

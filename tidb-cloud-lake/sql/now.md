@@ -1,7 +1,7 @@
 ---
 title: NOW
+summary: Returns the current date and time.
 ---
-
 Returns the current date and time.
 
 ## Syntax

@@ -1,5 +1,6 @@
 ---
 title: ICEBERG_MANIFEST
+summary: Returns metadata about manifest files of an Iceberg table, including file paths, partitioning details, and snapshot associations.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

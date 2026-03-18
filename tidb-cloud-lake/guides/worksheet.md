@@ -1,7 +1,7 @@
 ---
 title: Worksheets
+summary: Worksheets in TiDB Cloud Lake are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
 ---
-
 import DbSVG from '@site/static/img/icon/database.svg'
 import RoleSVG from '@site/static/img/icon/role.svg'
 import WarehouseSVG from '@site/static/img/icon/warehouse.svg'

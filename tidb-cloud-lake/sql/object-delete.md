@@ -1,6 +1,6 @@
 ---
 title: OBJECT_DELETE
-title_includes: JSON_OBJECT_DELETE
+summary: Deletes specified keys from a JSON object and returns the modified object. If a specified key doesn't exist in the object, it is ignored.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,5 +1,6 @@
 ---
 title: EPOCH
+summary: Alias for TO_SECONDS.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

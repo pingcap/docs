@@ -1,6 +1,6 @@
 ---
 title: ALTER USER
-sidebar_position: 2
+summary: Modifies a user account, including.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

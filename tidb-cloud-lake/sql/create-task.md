@@ -1,8 +1,7 @@
 ---
 title: CREATE TASK
-sidebar_position: 1
+summary: The CREATE TASK statement is used to define a new task that executes a specified SQL statement on a scheduled basis or dag based task graph.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.738"/>

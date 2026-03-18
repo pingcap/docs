@@ -1,5 +1,6 @@
 ---
 title: WEEK
+summary: Alias for TO_WEEK_OF_YEAR.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

@@ -1,7 +1,7 @@
 ---
 title: JOIN
+summary: Joins combine columns from two or more tables into one result set. Databend implements both ANSI SQL joins and Databend-specific extensions, allowing you to work with dimensional data, slowly changing facts, and time-series streams using the same syntax.
 ---
-
 ## Overview
 
 Joins combine columns from two or more tables into one result set. Databend implements both ANSI SQL joins and Databend-specific extensions, allowing you to work with dimensional data, slowly changing facts, and time-series streams using the same syntax.

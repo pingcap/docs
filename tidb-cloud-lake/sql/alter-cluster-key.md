@@ -1,8 +1,7 @@
 ---
 title: ALTER CLUSTER KEY
-sidebar_position: 3
+summary: Changes the cluster key for a table.
 ---
-
 Changes the cluster key for a table.
 
 See also:

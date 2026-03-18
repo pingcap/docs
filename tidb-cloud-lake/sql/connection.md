@@ -1,7 +1,7 @@
 ---
 title: Connection
+summary: A connection in Databend refers to a designated configuration that encapsulates the details required to interact with an external storage service. It serves as a centralized and reusable set of parameters, such as access credentials, endpoint URLs, and storage types, facilitating the integration of Databend with various storage services.
 ---
-
 ## What is Connection?
 
 A connection in Databend refers to a designated configuration that encapsulates the details required to interact with an external storage service. It serves as a centralized and reusable set of parameters, such as access credentials, endpoint URLs, and storage types, facilitating the integration of Databend with various storage services.

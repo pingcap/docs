@@ -1,8 +1,7 @@
 ---
 title: JSON_EXISTS_KEY
-title_includes: JSON_EXISTS_ANY_KEYS, JSON_EXISTS_ALL_KEYS
+summary: Checks whether a JSON object contains one or more keys.
 ---
-
 Checks whether a JSON object contains one or more keys.
 
 - `JSON_EXISTS_KEY` tests a single key.

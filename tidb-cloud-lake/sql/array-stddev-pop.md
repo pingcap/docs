@@ -1,8 +1,7 @@
 ---
 title: ARRAY_STDDEV_POP
-title_includes: ARRAY_STD
+summary: Computes the population standard deviation of numeric array values. NULL entries are ignored; non-numeric entries raise an error.
 ---
-
 Computes the population standard deviation of numeric array values. `NULL` entries are ignored; non-numeric entries raise an error.
 
 ## Syntax

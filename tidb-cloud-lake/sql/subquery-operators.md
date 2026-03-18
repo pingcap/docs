@@ -1,7 +1,7 @@
 ---
 title: Subquery Operators
+summary: A subquery is a query nested within another one. Databend supports the following subquery types.
 ---
-
 A subquery is a query nested within another one. Databend supports the following subquery types:
 
 - [Scalar Subquery](#scalar-subquery)

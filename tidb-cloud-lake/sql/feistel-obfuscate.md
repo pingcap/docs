@@ -1,7 +1,7 @@
 ---
 title: FEISTEL_OBFUSCATE
+summary: Deterministically obfuscate integers (e.g. IDs or phone numbers) while preserving bit length and value cardinality so joins still work.
 ---
-
 Deterministically obfuscate integers (e.g. IDs or phone numbers) while preserving bit length and value cardinality so joins still work.
 
 ## Syntax

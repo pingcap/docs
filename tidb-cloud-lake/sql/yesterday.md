@@ -1,7 +1,7 @@
 ---
 title: YESTERDAY
+summary: Returns yesterday date, same as today() - 1.
 ---
-
 Returns yesterday date, same as `today() - 1`.
 
 ## Syntax

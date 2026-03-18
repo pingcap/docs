@@ -1,7 +1,7 @@
 ---
 title: TRIM_LEADING
+summary: Removes all occurrences of the specified trim string from the beginning of the string.
 ---
-
 Removes all occurrences of the specified trim string from the beginning of the string.
 
 See also: 

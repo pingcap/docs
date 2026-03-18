@@ -1,8 +1,7 @@
 ---
 title: DESCRIBE TABLE
-sidebar_position: 2
+summary: Shows information about the columns in a given table. Equivalent to SHOW FIELDS.
 ---
-
 Shows information about the columns in a given table. Equivalent to [SHOW FIELDS](/tidb-cloud-lake/sql/show-fields.md).
 
 > **Tip:**

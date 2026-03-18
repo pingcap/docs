@@ -1,8 +1,7 @@
 ---
-title: Databend Cloud Architecture
-sidebar_label: Architecture
+title: TiDB Cloud Lake Architecture
+summary: TiDB Cloud Lake Architecture.
 ---
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

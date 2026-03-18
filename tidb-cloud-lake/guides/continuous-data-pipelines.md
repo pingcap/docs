@@ -1,7 +1,7 @@
 ---
 title: Continuous Data Pipelines
+summary: Build end-to-end change data capture (CDC) flows in Databend with two primitives.
 ---
-
 Build end-to-end change data capture (CDC) flows in Databend with two primitives:
 
 - **Streams** capture every INSERT/UPDATE/DELETE until you consume them.

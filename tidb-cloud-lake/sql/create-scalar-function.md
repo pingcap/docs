@@ -1,6 +1,6 @@
 ---
 title: CREATE SCALAR FUNCTION
-sidebar_position: 0
+summary: Creates a scalar user-defined function (Scalar UDF). The same CREATE FUNCTION statement supports two implementation styles.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

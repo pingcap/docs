@@ -1,8 +1,7 @@
 ---
 title: SHOW COLUMNS
-sidebar_position: 13
+summary: Shows information about the columns in a given table.
 ---
-
 Shows information about the columns in a given table.
 
 > **Tip:**

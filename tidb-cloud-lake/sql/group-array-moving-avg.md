@@ -1,7 +1,7 @@
 ---
 title: GROUP_ARRAY_MOVING_AVG
+summary: The GROUP_ARRAY_MOVING_AVG function calculates the moving average of input values. The function can take the window size as a parameter. If left unspecified, the function takes the window size equal to the number of input values.
 ---
-
 The GROUP_ARRAY_MOVING_AVG function calculates the moving average of input values. The function can take the window size as a parameter. If left unspecified, the function takes the window size equal to the number of input values.
 
 ## Syntax

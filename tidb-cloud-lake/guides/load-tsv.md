@@ -1,8 +1,7 @@
 ---
-title: Loading TSV into Databend
-sidebar_label: TSV
+title: Loading TSV into TiDB Cloud Lake
+summary: TSV (Tab Separated Values) is a simple file format used to store tabular data, such as a spreadsheet or database. The TSV file format is very similar to CSV, the records are separated by newlines, and each field is separated by a tab. The following example shows a TSV file with two records.
 ---
-
 ## What is TSV?
 
 TSV (Tab Separated Values) is a simple file format used to store tabular data, such as a spreadsheet or database. The TSV file format is very similar to CSV, the records are separated by newlines, and each field is separated by a tab.

@@ -1,7 +1,7 @@
 ---
 title: REPLACE
+summary: REPLACE INTO can either insert multiple new rows into a table or update existing rows if those rows already exist, using the following sources of data.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced: v1.1.55"/>

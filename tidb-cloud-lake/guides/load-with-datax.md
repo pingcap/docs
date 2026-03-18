@@ -1,7 +1,7 @@
 ---
 title: DataX
+summary: DataX is an open-source data integration tool developed by Alibaba. It is designed to efficiently and reliably transfer data between various data storage systems and platforms, such as relational databases, big data platforms, and cloud storage services. DataX supports a wide range of data sources and data sinks, including but not limited to MySQL, Oracle, SQL Server, PostgreSQL, HDFS, Hive, HBase, MongoDB, and more.
 ---
-
 [DataX](https://github.com/alibaba/DataX) is an open-source data integration tool developed by Alibaba. It is designed to efficiently and reliably transfer data between various data storage systems and platforms, such as relational databases, big data platforms, and cloud storage services. DataX supports a wide range of data sources and data sinks, including but not limited to MySQL, Oracle, SQL Server, PostgreSQL, HDFS, Hive, HBase, MongoDB, and more.
 
 > **Tip:**

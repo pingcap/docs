@@ -1,7 +1,7 @@
 ---
 title: Network Policy
+summary: Network policies control who can log in to Databend based on the client IP. Even if the credentials are correct, a connection request is rejected when its IP does not satisfy the policy, giving you an extra security layer beyond username and password.
 ---
-
 Network policies control who can log in to Databend based on the client IP. Even if the credentials are correct, a connection request is rejected when its IP does not satisfy the policy, giving you an extra security layer beyond username and password.
 
 ## How It Works

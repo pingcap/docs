@@ -1,6 +1,6 @@
 ---
 title: SHOW STATISTICS
-sidebar_position: 15
+summary: Displays statistical information about tables and their columns. Statistics help the query optimizer make better decisions about query execution plans by providing information about data distribution, row counts, and distinct values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

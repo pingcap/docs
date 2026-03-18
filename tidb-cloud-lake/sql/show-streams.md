@@ -1,6 +1,6 @@
 ---
 title: SHOW STREAMS
-sidebar_position: 2
+summary: Lists the streams associated with a specific database.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

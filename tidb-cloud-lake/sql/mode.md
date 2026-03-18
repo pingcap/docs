@@ -1,5 +1,6 @@
 ---
 title: MODE
+summary: Returns the value that appears most frequently in a group of values.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

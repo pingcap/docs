@@ -1,5 +1,6 @@
 ---
 title: QUANTILE_DISC
+summary: The QUANTILE_DISC() function computes the exact quantile number of a numeric data sequence.
 ---
 
 Aggregate function.

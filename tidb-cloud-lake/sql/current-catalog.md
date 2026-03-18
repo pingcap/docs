@@ -1,5 +1,6 @@
 ---
 title: CURRENT_CATALOG
+summary: Returns the name of the catalog currently in use for the session.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

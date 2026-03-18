@@ -1,10 +1,7 @@
 ---
-id: delta
 title: Delta Lake Engine
-sidebar_label: Delta Lake Engine
-slug: /sql-reference/table-engines/delta
+summary: Databend's Delta Lake engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in Databend, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within Databend.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.262"/>

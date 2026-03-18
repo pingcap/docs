@@ -1,7 +1,7 @@
 ---
 title: EXTRACT
+summary: Retrieves the designated portion of a date, timestamp, or interval.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.723"/>

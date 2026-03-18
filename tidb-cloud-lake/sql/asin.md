@@ -1,7 +1,7 @@
 ---
 title: ASIN
+summary: Returns the arc sine of x, that is, the value whose sine is x. Returns NULL if x is not in the range -1 to 1.
 ---
-
 Returns the arc sine of `x`, that is, the value whose sine is `x`. Returns NULL if `x` is not in the range -1 to 1.
 
 ## Syntax

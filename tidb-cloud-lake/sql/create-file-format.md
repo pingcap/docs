@@ -1,8 +1,7 @@
 ---
 title: CREATE FILE FORMAT
-sidebar_position: 1
+summary: Create a named file format.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.339"/>

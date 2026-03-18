@@ -1,7 +1,7 @@
 ---
 title: XXHASH32
+summary: Calculates an xxHash32 32-bit hash value for a string. The value is returned as a UInt32 or NULL if the argument was NULL.
 ---
-
 Calculates an xxHash32 32-bit hash value for a string. The value is returned as a UInt32 or NULL if the argument was NULL.
 
 ## Syntax

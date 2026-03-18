@@ -1,7 +1,7 @@
 ---
-title: 'VECTOR_NORM'
+title: VECTOR_NORM
+summary: Calculates the L2 norm (Euclidean norm) of a vector, which represents the length or magnitude of the vector.
 ---
-
 import FunctionDescription from '@site/src/components/FunctionDescription';
 
 <FunctionDescription description="Introduced or updated: v1.2.780"/>

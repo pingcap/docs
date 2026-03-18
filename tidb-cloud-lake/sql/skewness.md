@@ -1,7 +1,7 @@
 ---
 title: SKEWNESS
+summary: Aggregate function.
 ---
-
 Aggregate function.
 
 The `SKEWNESS()` function returns the skewness of all input values.

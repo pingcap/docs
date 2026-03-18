@@ -1,5 +1,6 @@
 ---
 title: NVL
+summary: If <expr1> is NULL, returns <expr2>, otherwise returns <expr1>.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

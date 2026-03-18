@@ -1,6 +1,6 @@
 ---
 title: DROP STREAM
-sidebar_position: 3
+summary: Deletes an existing stream.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

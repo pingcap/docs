@@ -1,8 +1,7 @@
 ---
 title: PRESIGN
-sidebar_position: 3
+summary: Generates the pre-signed URL for a staged file by the stage name and file path you provide. The pre-signed URL enables you to access the file through a web browser or an API request.
 ---
-
 Generates the pre-signed URL for a staged file by the stage name and file path you provide. The pre-signed URL enables you to access the file through a web browser or an API request.
 
 > **Tip:**

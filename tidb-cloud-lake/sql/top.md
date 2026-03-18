@@ -1,5 +1,6 @@
 ---
 title: TOP
+summary: Limits the maximum number of rows returned by a query.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

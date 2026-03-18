@@ -1,6 +1,6 @@
 ---
 title: CREATE CONNECTION
-sidebar_position: 1
+summary: Creates a connection to external storage.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 import Tabs from '@theme/Tabs';

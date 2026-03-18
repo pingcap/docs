@@ -1,5 +1,6 @@
 ---
 title: Fail-Safe
+summary: Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage.
 ---
 import IndexOverviewList from '@site/src/components/IndexOverviewList';
 import EEFeature from '@site/src/components/EEFeature';

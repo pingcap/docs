@@ -1,5 +1,6 @@
 ---
 title: JSON_ARRAY_ELEMENTS
+summary: Extracts the elements from a JSON array, returning them as individual rows in the result set. JSON_ARRAY_ELEMENTS does not recursively expand nested arrays; it treats them as single elements.
 ---
 import FunctionDescription from '@site/src/components/FunctionDescription';
 

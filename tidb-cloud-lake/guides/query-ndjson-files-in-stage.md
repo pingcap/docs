@@ -1,8 +1,7 @@
 ---
 title: Querying NDJSON Files in Stage
-sidebar_label: NDJSON
+summary: In Databend, you can directly query NDJSON files stored in stages without first loading the data into tables. This approach is particularly useful for data exploration, ETL processing, and ad-hoc analysis scenarios.
 ---
-
 In Databend, you can directly query NDJSON files stored in stages without first loading the data into tables. This approach is particularly useful for data exploration, ETL processing, and ad-hoc analysis scenarios.
 
 ## What is NDJSON?
