@@ -22,6 +22,10 @@ on:
           - gemini
         default: 'gemini'
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
@@ -67,6 +71,13 @@ jobs:
           TARGET_OWNER=$(echo "$TARGET_URL" | cut -d'/' -f4)
           TARGET_REPO=$(echo "$TARGET_URL" | cut -d'/' -f5)
           TARGET_PR=$(echo "$TARGET_URL" | cut -d'/' -f7)
+
+          if [[ "$SOURCE_OWNER/$SOURCE_REPO" != "pingcap/docs-cn" ]]; then
+            echo "❌ Unsupported source repository: $SOURCE_OWNER/$SOURCE_REPO"; exit 1
+          fi
+          if [[ "$TARGET_OWNER/$TARGET_REPO" != "pingcap/docs" ]]; then
+            echo "❌ Unsupported target repository: $TARGET_OWNER/$TARGET_REPO"; exit 1
+          fi
           
           {
             echo "source_owner<<EOF"; echo "$SOURCE_OWNER"; echo "EOF"
@@ -109,6 +120,7 @@ jobs:
 
       - name: Run sync script
         id: sync_script
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEEPSEEK_API_TOKEN: ${{ secrets.DEEPSEEK_API_TOKEN }}
@@ -156,9 +168,11 @@ jobs:
           TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
           TARGET_PR: ${{ steps.extract_info.outputs.target_pr }}
         run: |
-          BODY=$(printf '%s\n\n%s\n%s\n%s\n\n%s' "**Auto-sync completed successfully**" \
-            "**Source PR**: ${SOURCE_PR_URL}" "**Target PR**: ${TARGET_PR_URL}" \
-            "English documentation has been updated based on Chinese documentation changes." )
+          BODY=$(printf '%s\n\n%s\n%s\n\n%s' \
+            "**Auto-sync completed successfully**" \
+            "**Source PR**: ${SOURCE_PR_URL}" \
+            "**Target PR**: ${TARGET_PR_URL}" \
+            "English documentation has been updated based on Chinese documentation changes.")
           PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
           curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
             -H "Accept: application/vnd.github.v3+json" \
@@ -166,7 +180,7 @@ jobs:
             -d "$PAYLOAD"
 
       - name: Add failure comment to target PR
-        if: steps.sync_script.outputs.sync_success == 'false'
+        if: always() && steps.sync_script.outputs.sync_success == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
@@ -175,9 +189,32 @@ jobs:
           TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
           TARGET_PR: ${{ steps.extract_info.outputs.target_pr }}
         run: |
-          BODY=$(printf '%s\n\n%s\n%s\n%s\n\n%s' "**Auto-sync failed**" \
-            "**Source PR**: ${SOURCE_PR_URL}" "**Target PR**: ${TARGET_PR_URL}" \
+          BODY=$(printf '%s\n\n%s\n%s\n\n%s' \
+            "**Auto-sync failed**" \
+            "**Source PR**: ${SOURCE_PR_URL}" \
+            "**Target PR**: ${TARGET_PR_URL}" \
             "The sync process encountered an error. Please check the workflow logs for details.")
+          PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
+          curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
+            -d "$PAYLOAD"
+
+      - name: Add failure comment on early step failure
+        if: failure() && steps.extract_info.outputs.target_owner != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
+          TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
+          TARGET_OWNER: ${{ steps.extract_info.outputs.target_owner }}
+          TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
+          TARGET_PR: ${{ steps.extract_info.outputs.target_pr }}
+        run: |
+          BODY=$(printf '%s\n\n%s\n%s\n\n%s' \
+            "**Auto-sync failed (early step failure)**" \
+            "**Source PR**: ${SOURCE_PR_URL}" \
+            "**Target PR**: ${TARGET_PR_URL}" \
+            "A step before the sync script failed. Please check the workflow logs for details.")
           PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
           curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
             -H "Accept: application/vnd.github.v3+json" \
