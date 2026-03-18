@@ -19,9 +19,9 @@ mysql> insert into db.tb01 values(1, 3.1,now(), 'test1'), (1, 4.1,now(), 'test2'
 
 2. In Databend, create a corresponding target table.
 
-:::note
-DataX data types can be converted to Databend's data types when loaded into Databend. For the specific correspondences between DataX data types and Databend's data types, refer to the documentation provided at the following link: https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#33-type-convert
-:::
+> **Note:**
+>
+> DataX data types can be converted to Databend's data types when loaded into Databend. For the specific correspondences between DataX data types and Databend's data types, refer to the documentation provided at the following link: https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#33-type-convert
 
 ```sql title='In Databend:'
 databend> create database migrated_db;
@@ -89,19 +89,19 @@ databend> create table migrated_db.tb01(id int null, d double null, t TIMESTAMP 
 }
 ```
 
-:::tip
-The provided code above configures DatabendWriter to operate in the INSERT mode. To switch to the REPLACE mode, you must include the writeMode and onConflictColumn parameters. For example:
-
-```json title='mysql_demo.json'
-...
-"writer": {
-          "name": "databendwriter",
-          "parameter": {
-            "writeMode": "replace",
-            "onConflictColumn":["id"],
-            "username": ...
-```
-:::
+> **Tip:**
+>
+> The provided code above configures DatabendWriter to operate in the INSERT mode. To switch to the REPLACE mode, you must include the writeMode and onConflictColumn parameters. For example:
+>
+> ```json title='mysql_demo.json'
+> ...
+> "writer": {
+>           "name": "databendwriter",
+>           "parameter": {
+>             "writeMode": "replace",
+>             "onConflictColumn":["id"],
+>             "username": ...
+> ```
 
 4. Run DataX:
 

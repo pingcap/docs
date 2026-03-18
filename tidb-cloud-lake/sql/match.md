@@ -7,9 +7,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 `MATCH` searches for rows that contain the supplied keywords within the listed columns. The function can only appear in a `WHERE` clause.
 
-:::info
-Databend's MATCH function is inspired by Elasticsearch's [MATCH](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-match).
-:::
+> **Note:**
+>
+> Databend's MATCH function is inspired by Elasticsearch's [MATCH](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-match).
 
 ## Syntax
 

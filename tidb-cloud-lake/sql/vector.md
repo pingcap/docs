@@ -23,9 +23,9 @@ Where:
 
 Databend supports creating vector indexes using the HNSW (Hierarchical Navigable Small World) algorithm for fast approximate nearest neighbor search, delivering **23x faster** query performance.
 
-:::note
-To enhance query performance and reduce index file size, HNSW indexes perform quantization on raw vector data. Compared to using unquantized raw vectors, this quantization process may introduce minor errors (typically negligible) when calculating distance values. While this causes slight deviations from the exact true distance, the error is usually sufficiently small to not significantly impact the quality or relevance of search results. This trade-off is a common practice in the field of vector indexes to achieve high performance and efficient storage.
-:::
+> **Note:**
+>
+> To enhance query performance and reduce index file size, HNSW indexes perform quantization on raw vector data. Compared to using unquantized raw vectors, this quantization process may introduce minor errors (typically negligible) when calculating distance values. While this causes slight deviations from the exact true distance, the error is usually sufficiently small to not significantly impact the quality or relevance of search results. This trade-off is a common practice in the field of vector indexes to achieve high performance and efficient storage.
 
 ### Index Syntax
 

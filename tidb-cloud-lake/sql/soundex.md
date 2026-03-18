@@ -10,9 +10,9 @@ Generates the Soundex code for a string.
 - All international alphabetic characters outside the A-Z range are ignored unless they're the first letter.
 
 
-:::tip What is Soundex?
-Soundex converts an alphanumeric string to a four-character code that is based on how the string sounds when spoken in English. For more information, see https://en.wikipedia.org/wiki/Soundex
-:::
+> **Tip:**
+>
+> Soundex converts an alphanumeric string to a four-character code that is based on how the string sounds when spoken in English. For more information, see https://en.wikipedia.org/wiki/Soundex
 
 See also: [SOUNDS LIKE](/tidb-cloud-lake/sql/sounds-like.md)
 

@@ -11,20 +11,20 @@ Automatically detects the file metadata schema and retrieves the column definiti
 
 **Compression Support**: All formats also support compressed files with extensions `.zip`, `.xz`, `.zst`.
 
-:::info File Size Limit
-Each individual file has a maximum size limit of **100MB** for schema inference.
-:::
+> **Note:**
+>
+> Each individual file has a maximum size limit of **100MB** for schema inference.
 
-:::info Schema Merging
-When processing multiple files, `infer_schema` automatically merges different schemas:
-
-- **Compatible types** are promoted (e.g., INT8 + INT16 → INT16)
-- **Incompatible types** fall back to **VARCHAR** (e.g., INT + FLOAT → VARCHAR)
-- **Missing columns** in some files are marked as **nullable**
-- **New columns** from later files are added to the final schema
-
-This ensures all files can be read using the unified schema.
-:::
+> **Note:**
+>
+> When processing multiple files, `infer_schema` automatically merges different schemas:
+>
+> - **Compatible types** are promoted (e.g., INT8 + INT16 → INT16)
+> - **Incompatible types** fall back to **VARCHAR** (e.g., INT + FLOAT → VARCHAR)
+> - **Missing columns** in some files are marked as **nullable**
+> - **New columns** from later files are added to the final schema
+>
+> This ensures all files can be read using the unified schema.
 
 ## Syntax
 

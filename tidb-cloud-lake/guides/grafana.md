@@ -14,9 +14,9 @@ Databend Cloud and Databend can integrate with Grafana in two ways:
 
 Databend Cloud provides a Loki-compatible API that allows you to use Grafana's native Loki data source without installing additional plugins. This is the recommended approach for most use cases.
 
-:::note
-The Loki protocol feature requires activation. Please contact support to enable this feature for your account.
-:::
+> **Note:**
+>
+> The Loki protocol feature requires activation. Please contact support to enable this feature for your account.
 
 ### Step 1. Configure Table
 

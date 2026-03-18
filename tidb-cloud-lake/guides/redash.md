@@ -29,20 +29,19 @@ touch .env && echo REDASH_COOKIE_SECRET=111 > .env
 
 2. Install dependencies and build the frontend project:
 
-:::note
-This requires Node.js version between 14.16.0 and 17.0.0. To install Node.js, for example, version 14.16.1:
-
-```shell
-# Install nvm
-brew install nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# Install and switch to Node.js 14.16.1
-nvm install 14.16.1
-nvm use 14.16.1
-```
-
-:::
+> **Note:**
+>
+> This requires Node.js version between 14.16.0 and 17.0.0. To install Node.js, for example, version 14.16.1:
+>
+> ```shell
+> # Install nvm
+> brew install nvm
+> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+> [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+> # Install and switch to Node.js 14.16.1
+> nvm install 14.16.1
+> nvm use 14.16.1
+> ```
 
 ```shell
 cd viz-lib & yarn install
@@ -108,20 +107,19 @@ touch .env && echo REDASH_COOKIE_SECRET=111 > .env
 
 2. Install dependencies and build the frontend project:
 
-:::note
-This requires Node.js version between 14.16.0 and 17.0.0. To install Node.js, for example, version 14.16.1:
-
-```shell
-# Install nvm
-brew install nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# Install and switch to Node.js 14.16.1
-nvm install 14.16.1
-nvm use 14.16.1
-```
-
-:::
+> **Note:**
+>
+> This requires Node.js version between 14.16.0 and 17.0.0. To install Node.js, for example, version 14.16.1:
+>
+> ```shell
+> # Install nvm
+> brew install nvm
+> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+> [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+> # Install and switch to Node.js 14.16.1
+> nvm install 14.16.1
+> nvm use 14.16.1
+> ```
 
 ```shell
 cd viz-lib & yarn install

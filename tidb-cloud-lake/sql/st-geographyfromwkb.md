@@ -27,9 +27,9 @@ ST_GEOGRAPHYFROMWKB(<binary>)
 | `<string>`  | The argument must be a string expression in WKB or EWKB in hexadecimal format. |
 | `<binary>`  | The argument must be a binary expression in WKB or EWKB format.                |
 
-:::note
-Only SRID 4326 is supported for GEOGRAPHY inputs.
-:::
+> **Note:**
+>
+> Only SRID 4326 is supported for GEOGRAPHY inputs.
 
 ## Return Type
 

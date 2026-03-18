@@ -42,13 +42,13 @@ Note that using double backticks (``) or double quotes (") is equivalent:
 
 Databend stores unquoted identifiers by default in lowercase and double-quoted identifiers as they are entered. In other words, Databend handles object names, such as databases, tables, and columns, as case-insensitive. If you want Databend to handle them as case-sensitive, double-quote them.
 
-:::note
-Databend allows you to have control over the casing sensitivity of identifiers. Two key settings are available:
-
-- unquoted_ident_case_sensitive: When set to 1, this option preserves the case of characters for unquoted identifiers, ensuring they are case-sensitive. If left at the default value of 0, unquoted identifiers remain case-insensitive, converting to lowercase.
-
-- quoted_ident_case_sensitive: By setting this option to 0, you can indicate that double-quoted identifiers should not preserve the case of characters, making them case-insensitive.
-:::
+> **Note:**
+>
+> Databend allows you to have control over the casing sensitivity of identifiers. Two key settings are available:
+>
+> - unquoted_ident_case_sensitive: When set to 1, this option preserves the case of characters for unquoted identifiers, ensuring they are case-sensitive. If left at the default value of 0, unquoted identifiers remain case-insensitive, converting to lowercase.
+>
+> - quoted_ident_case_sensitive: By setting this option to 0, you can indicate that double-quoted identifiers should not preserve the case of characters, making them case-insensitive.
 
 This example demonstrates how Databend treats the casing of identifiers when creating and listing databases:
 

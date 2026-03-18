@@ -34,15 +34,13 @@ CREATE [ OR REPLACE ] SEQUENCE [ IF NOT EXISTS ] <sequence>
 
 To create a sequence, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md).
 
-:::note
-
-The enable_experimental_sequence_rbac_check settings governs sequence-level access control. It is disabled by default.
-sequence creation solely requires the user to possess superuser privileges, bypassing detailed RBAC checks.
-When enabled, granular permission verification is enforced during sequence establishment.
-
-This is an experimental feature and may be enabled by default in the future.
-
-:::
+> **Note:**
+>
+> The enable_experimental_sequence_rbac_check settings governs sequence-level access control. It is disabled by default.
+> sequence creation solely requires the user to possess superuser privileges, bypassing detailed RBAC checks.
+> When enabled, granular permission verification is enforced during sequence establishment.
+>
+> This is an experimental feature and may be enabled by default in the future.
 
 ## Examples
 

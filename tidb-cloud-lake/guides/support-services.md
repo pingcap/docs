@@ -47,12 +47,12 @@ Databend Cloud offers different levels of support based on your subscription tie
 - **Severity 3**: Partial loss of functionality with minor business impact
 - **Severity 4**: General questions, recommendations, or feature requests
 
-:::note
-Please note that only Business and Dedicated customers have a Service Level Agreement (SLA) on Support Incidents. If you are using the Personal edition – while we will try to answer your question as soon as possible, we'd encourage you to also explore our Community resources:
-
-- [Databend Community Slack Channel](https://link.databend.com/join-slack)
-- [GitHub Discussions](https://github.com/databendlabs/databend/discussions)
-  :::
+> **Note:**
+>
+> Please note that only Business and Dedicated customers have a Service Level Agreement (SLA) on Support Incidents. If you are using the Personal edition – while we will try to answer your question as soon as possible, we'd encourage you to also explore our Community resources:
+>
+> - [Databend Community Slack Channel](https://link.databend.com/join-slack)
+> - [GitHub Discussions](https://github.com/databendlabs/databend/discussions)
 
 ## Enterprise Support
 

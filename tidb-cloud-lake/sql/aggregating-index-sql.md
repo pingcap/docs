@@ -15,6 +15,6 @@ This page provides a comprehensive overview of aggregating index operations in D
 
 - [Aggregating Index](/tidb-cloud-lake/guides/aggregating-index.md)
 
-:::note
-Aggregating indexes in Databend are used to improve the performance of aggregate queries by pre-computing and storing aggregate results.
-:::
+> **Note:**
+>
+> Aggregating indexes in Databend are used to improve the performance of aggregate queries by pre-computing and storing aggregate results.

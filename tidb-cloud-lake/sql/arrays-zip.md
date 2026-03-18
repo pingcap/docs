@@ -19,9 +19,9 @@ ARRAYS_ZIP( <array1> [, ...] )
 |------------|-------------------|
 | `<arrayN>` | The input ARRAYs. |
 
-:::note
-- The length of each array must be the same.
-:::
+> **Note:**
+>
+> - The length of each array must be the same.
 
 ## Return Type
 

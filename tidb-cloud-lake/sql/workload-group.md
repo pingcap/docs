@@ -44,6 +44,6 @@ ALTER USER analyst WITH UNSET WORKLOAD GROUP;
 |---------|-------------|
 | [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md) | Lists all workload groups and their settings |
 
-:::tip
-Resource quotas are normalized across all workload groups in a warehouse. For example, if two groups have 60% and 40% CPU quotas, they get 60% and 40% of actual resources respectively.
-:::
+> **Tip:**
+>
+> Resource quotas are normalized across all workload groups in a warehouse. For example, if two groups have 60% and 40% CPU quotas, they get 60% and 40% of actual resources respectively.

@@ -27,11 +27,11 @@ The following table lists connection parameters for accessing an Amazon S3-like 
 | region                    	| No        	| AWS region where the bucket is located.                      	|
 | security_token            	| No        	| Security token for temporary credentials.                    	|
 
-:::note
-- If the **endpoint_url** parameter is not specified in the command, Databend will create the stage on Amazon S3 by default. Therefore, when you create an external stage on an S3-compatible object storage or other object storage solutions, be sure to include the **endpoint_url** parameter.
-
-- The **region** parameter is not required because Databend can automatically detect the region information. You typically don't need to manually specify a value for this parameter. In case automatic detection fails, Databend will default to using 'us-east-1' as the region. When deploying Databend with MinIO and not configuring the region information, it will automatically default to using 'us-east-1', and this will work correctly. However, if you receive error messages such as "region is missing" or "The bucket you are trying to access requires a specific endpoint. Please direct all future requests to this particular endpoint", you need to determine your region name and explicitly assign it to the **region** parameter.
-:::
+> **Note:**
+>
+> - If the **endpoint_url** parameter is not specified in the command, Databend will create the stage on Amazon S3 by default. Therefore, when you create an external stage on an S3-compatible object storage or other object storage solutions, be sure to include the **endpoint_url** parameter.
+>
+> - The **region** parameter is not required because Databend can automatically detect the region information. You typically don't need to manually specify a value for this parameter. In case automatic detection fails, Databend will default to using 'us-east-1' as the region. When deploying Databend with MinIO and not configuring the region information, it will automatically default to using 'us-east-1', and this will work correctly. However, if you receive error messages such as "region is missing" or "The bucket you are trying to access requires a specific endpoint. Please direct all future requests to this particular endpoint", you need to determine your region name and explicitly assign it to the **region** parameter.
 
 ```sql title='Examples'
 -- Create a reusable connection for Amazon S3

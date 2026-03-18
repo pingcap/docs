@@ -41,9 +41,9 @@ Please note that these aggregation functions assist in summarizing and revealing
 
 5. In the new dashboard, click on **Add Chart**. Drag and drop the chart from the left pane onto the dashboard. If you have multiple charts available in the left pane, feel free to drag as many as you need.
 
-:::note
-After generating a chart from the query results in a worksheet, please avoid running other queries in the same worksheet, as doing so might result in the chart becoming unavailable on the dashboard.
-:::
+> **Note:**
+>
+> After generating a chart from the query results in a worksheet, please avoid running other queries in the same worksheet, as doing so might result in the chart becoming unavailable on the dashboard.
 
 ## Sharing a Dashboard
 

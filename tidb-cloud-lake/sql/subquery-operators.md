@@ -57,9 +57,9 @@ An EXISTS subquery is a boolean expression that can appear in a WHERE clause:
 [ NOT ] EXISTS ( <query> )
 ```
 
-:::note
-* Correlated EXISTS subqueries are currently supported only in a WHERE clause.
-:::
+> **Note:**
+>
+> * Correlated EXISTS subqueries are currently supported only in a WHERE clause.
 
 ### Examples
 

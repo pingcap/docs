@@ -7,9 +7,9 @@ Aggregate function.
 The `QUANTILE_DISC()` function computes the exact quantile number of a numeric data sequence.
 The `QUANTILE` alias to `QUANTILE_DISC`
 
-:::caution
-NULL values are not counted.
-:::
+> **Note:**
+>
+> NULL values are not counted.
 
 ## Syntax
 

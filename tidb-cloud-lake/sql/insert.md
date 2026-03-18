@@ -7,9 +7,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 Inserts one or more rows into a table.
 
-:::tip atomic operations
-Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
-:::
+> **Tip:**
+>
+> Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 See also: [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
 
@@ -224,9 +224,9 @@ FILE_FORMAT = (TYPE = PARQUET);
 
 3. Insert data from the staged Parquet file with `INSERT INTO`
 
-:::tip
-You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. When `purge` is set to `true`, the original file will only be deleted if the data update is successful. 
-:::
+> **Tip:**
+>
+> You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. When `purge` is set to `true`, the original file will only be deleted if the data update is successful. 
 
 ```sql
 INSERT INTO sample 

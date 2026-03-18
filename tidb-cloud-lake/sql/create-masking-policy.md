@@ -32,9 +32,9 @@ CREATE [ OR REPLACE ] MASKING POLICY [ IF NOT EXISTS ] <policy_name> AS
 | `expression_on_arg_name` | Expression that determines how the input columns should be treated to generate the masked data. |
 | `comment`              | Optional comment that stores notes about the masking policy. |
 
-:::note
-Ensure that *arg_type_to_mask* matches the data type of the column where the masking policy will be applied. When your policy defines multiple parameters, list each referenced column in the same order within the `USING` clause of `ALTER TABLE ... SET MASKING POLICY`.
-:::
+> **Note:**
+>
+> Ensure that *arg_type_to_mask* matches the data type of the column where the masking policy will be applied. When your policy defines multiple parameters, list each referenced column in the same order within the `USING` clause of `ALTER TABLE ... SET MASKING POLICY`.
 
 ## Access Control Requirements
 

@@ -26,9 +26,9 @@ databend> create table migrated_db.tb01(id int null, col1 String null);
 
 3. Copy and paste the following code to a file, and name the file as _mysql_demo.json_:
 
-:::note
-For the available parameters and their descriptions, refer to the documentation provided at the following link: https://wgzhao.github.io/Addax/develop/writer/databendwriter/#_2
-:::
+> **Note:**
+>
+> For the available parameters and their descriptions, refer to the documentation provided at the following link: https://wgzhao.github.io/Addax/develop/writer/databendwriter/#_2
 
 ```json title='mysql_demo.json'
 {

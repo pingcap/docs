@@ -66,7 +66,8 @@ ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 DROP [ COLUMN ] <column_name>
 ```
 
-:::note
+**Note:**
+
 - Only a constant value can be accepted as a default value when adding or modifying a column. If a non-constant expression is used, an error will occur.
 - Adding a stored computed column with ALTER TABLE is not supported yet.
 - When you change the data type of a table's columns, there's a risk of conversion errors. For example, if you try to convert a column with text (String) to numbers (Float), it might cause problems.
@@ -77,11 +78,10 @@ DROP [ COLUMN ] <column_name>
 - A column can belong to at most one security policy (masking or row-level). Remove the existing policy before attaching a new one.
 - Attaching, detaching, describing, or dropping a masking policy requires the global `APPLY MASKING POLICY` privilege or APPLY/OWNERSHIP on the specific masking policy.
 - Adding, removing, describing, or dropping a row access policy requires the global `APPLY ROW ACCESS POLICY` privilege or APPLY/OWNERSHIP on that policy.
-:::
 
-:::caution
-You must `ALTER TABLE ... MODIFY COLUMN <col> UNSET MASKING POLICY` before changing the column definition or dropping the column; otherwise the statement fails because the column is still protected by a security policy.
-:::
+> **Note:**
+>
+> You must `ALTER TABLE ... MODIFY COLUMN <col> UNSET MASKING POLICY` before changing the column definition or dropping the column; otherwise the statement fails because the column is still protected by a security policy.
 
 ### Examples
 

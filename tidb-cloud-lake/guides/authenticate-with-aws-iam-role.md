@@ -96,6 +96,6 @@ After Databend Cloud support shares the trusted principal information for your o
    SELECT * FROM @databend_test/test.parquet LIMIT 1;
    ```
 
-:::info
-Congratulations! You could now access your own AWS S3 buckets in Databend Cloud with IAM Role.
-:::
+> **Note:**
+>
+> Congratulations! You could now access your own AWS S3 buckets in Databend Cloud with IAM Role.

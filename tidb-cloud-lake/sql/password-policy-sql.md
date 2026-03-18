@@ -23,6 +23,6 @@ This page provides a comprehensive overview of Password Policy operations in Dat
 
 - [Password Policy](/tidb-cloud-lake/guides/password-policy.md)
 
-:::note
-Password policies in Databend allow you to enforce security requirements for user passwords, such as minimum length, complexity, and expiration rules.
-:::
+> **Note:**
+>
+> Password policies in Databend allow you to enforce security requirements for user passwords, such as minimum length, complexity, and expiration rules.

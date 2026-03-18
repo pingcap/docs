@@ -19,10 +19,10 @@ ST_LENGTH(<geometry_or_geography>)
 |--------------|-----------------------------------------------------------------------------|
 | `<geometry_or_geography>` | The argument must be an expression of type GEOMETRY or GEOGRAPHY containing linestrings. |
 
-:::note
-- If `<geometry_or_geography>` is not a `LineString`, `MultiLineString`, or `GeometryCollection` containing linestrings, returns 0.
-- If `<geometry_or_geography>` is a `GeometryCollection`, returns the sum of the lengths of the linestrings in the collection.
-:::
+> **Note:**
+>
+> - If `<geometry_or_geography>` is not a `LineString`, `MultiLineString`, or `GeometryCollection` containing linestrings, returns 0.
+> - If `<geometry_or_geography>` is a `GeometryCollection`, returns the sum of the lengths of the linestrings in the collection.
 
 ## Return Type
 

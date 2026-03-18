@@ -46,16 +46,15 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
        ) ]
 [ copyOptions ]
 ```
-:::info Note
 
-compared the two syntaxes
-- Same `Select List` 
-- Same ` FROM {@<stage_name>[/<path>] | '<uri>'}`
-- diff parameters:
-  - query use `table function parameters`, i.e. `(<key> => <value>, ...)` 
-  - transform use Options at the end of [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md)
-
-:::
+> **Note:**
+>
+> compared the two syntaxes
+> - Same `Select List` 
+> - Same ` FROM {@<stage_name>[/<path>] | '<uri>'}`
+> - diff parameters:
+>   - query use `table function parameters`, i.e. `(<key> => <value>, ...)` 
+>   - transform use Options at the end of [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md)
 
 
 ## FROM Clause
@@ -80,11 +79,9 @@ The select list supports three syntaxes; only one may be used, with no mixing.
 
 - Supported File Formats: NDJSON, AVRO, Parquet, ORC
 
-:::info Note
-
-Currently for Parquet and ORC, `Query rows as Variants` is slower than `Query columns by name`, and the two methods can not be mix used.
-
-:::
+> **Note:**
+>
+> Currently for Parquet and ORC, `Query rows as Variants` is slower than `Query columns by name`, and the two methods can not be mix used.
 
 syntax: 
 

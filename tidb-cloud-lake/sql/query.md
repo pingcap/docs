@@ -7,9 +7,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 `QUERY` filters rows by matching a Lucene-style query expression against columns that have an inverted index. Use dot notation to navigate nested fields inside `VARIANT` columns. The function is valid only in a `WHERE` clause.
 
-:::info
-Databend's QUERY function is inspired by Elasticsearch's [QUERY](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-query).
-:::
+> **Note:**
+>
+> Databend's QUERY function is inspired by Elasticsearch's [QUERY](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-query).
 
 ## Syntax
 

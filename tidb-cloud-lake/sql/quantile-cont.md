@@ -6,9 +6,9 @@ Aggregate function.
 
 The QUANTILE_CONT() function computes the interpolated quantile number of a numeric data sequence.
 
-:::caution
-NULL values are not counted.
-:::
+> **Note:**
+>
+> NULL values are not counted.
 
 ## Syntax
 

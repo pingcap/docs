@@ -7,9 +7,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 `SCORE()` returns the relevance score assigned to the current row by the inverted index search. Use it together with [MATCH](/tidb-cloud-lake/sql/match.md) or [QUERY](/tidb-cloud-lake/sql/query.md) in a `WHERE` clause.
 
-:::info
-Databend's SCORE function is inspired by Elasticsearch's [SCORE](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-score).
-:::
+> **Note:**
+>
+> Databend's SCORE function is inspired by Elasticsearch's [SCORE](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-score).
 
 ## Syntax
 

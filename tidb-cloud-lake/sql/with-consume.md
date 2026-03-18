@@ -17,9 +17,9 @@ FROM <stream_name> WITH CONSUME [ AS <alias> ]
 [ WHERE <conditions> ]
 ```
 
-:::note
-As long as the query executes successfully, the WITH CONSUME clause will consume all data captured by the stream, even if only a portion of it is queried using a WHERE condition.
-:::
+> **Note:**
+>
+> As long as the query executes successfully, the WITH CONSUME clause will consume all data captured by the stream, even if only a portion of it is queried using a WHERE condition.
 
 ## Examples
 

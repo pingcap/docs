@@ -27,10 +27,10 @@ ANY_VALUE(<expr>)
 
 The type of `<expr>`. If all values are NULL, the return value is NULL.
 
-:::note
-- `ANY_VALUE()` is non-deterministic and may return different values across executions.
-- For predictable results, use `MIN()` or `MAX()` instead.
-:::
+> **Note:**
+>
+> - `ANY_VALUE()` is non-deterministic and may return different values across executions.
+> - For predictable results, use `MIN()` or `MAX()` instead.
 
 ## Example
 

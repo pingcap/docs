@@ -61,9 +61,9 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
   - Casts between numeric, string and boolean types.
   - Comparison operators such as equal, not equal, greater than, less than, and others.
  
-   :::note
-  Warning: When using STREAM_STATUS in tasks, you must include the database name when referencing the stream (e.g., `STREAM_STATUS('mydb.stream_name')`).
-   :::
+> **Note:**
+>
+> Warning: When using STREAM_STATUS in tasks, you must include the database name when referencing the stream (e.g., `STREAM_STATUS('mydb.stream_name')`).
 
 - Multiple tasks that consume change data from a single table stream retrieve different deltas. When a task consumes the change data in a stream using a DML statement, the stream advances the offset. The change data is no longer available for the next task to consume. Currently, we recommend that only a single task consumes the change data from a stream. Multiple streams can be created for the same table and consumed by different tasks.
 - Tasks will not retry on each execution; each execution is serial. Each script SQL is executed one by one, with no parallel execution. This ensures that the sequence and dependencies of task execution are maintained.

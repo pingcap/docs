@@ -11,9 +11,9 @@ import FunctionDescription from '@site/src/components/FunctionDescription';
 
 `INTERVAL` represents a duration that can be written in natural-language text (`'1 year 2 months'`, `'3 days ago'`) or as an integer number of microseconds. Databend supports units from millennia down to microseconds and allows arithmetic on intervals, dates, and timestamps.
 
-:::note
-Fractional parts are discarded when parsing numeric intervals. `'1.6 seconds'` becomes a 1-second interval.
-:::
+> **Note:**
+>
+> Fractional parts are discarded when parsing numeric intervals. `'1.6 seconds'` becomes a 1-second interval.
 
 ## Examples
 

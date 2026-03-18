@@ -10,13 +10,13 @@ Provides information about the status of a specified stream, yielding a single-c
 - `true`: Indicates that the stream **might contain** change data capture records.
 - `false`: Indicates that the stream currently does not contain any change data capture records.
 
-:::note
-The presence of a `true` in the result (`has_data`) does **not** ensure the definite existence of change data capture records. Other operations, such as performing a table compact operation, could also lead to a `true` value even when there are no actual change data capture records.
-:::
+> **Note:**
+>
+> The presence of a `true` in the result (`has_data`) does **not** ensure the definite existence of change data capture records. Other operations, such as performing a table compact operation, could also lead to a `true` value even when there are no actual change data capture records.
 
-:::note
-When using `STREAM_STATUS` in tasks, you must include the database name when referencing the stream (e.g., `STREAM_STATUS('mydb.stream_name')`).
-:::
+> **Note:**
+>
+> When using `STREAM_STATUS` in tasks, you must include the database name when referencing the stream (e.g., `STREAM_STATUS('mydb.stream_name')`).
 
 ## Syntax
 

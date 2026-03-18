@@ -80,6 +80,6 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
    Gateway domain is resolved to VPC internal IP address.
 
-:::info
-Congratulations! You have successfully connected to Databend Cloud with AWS PrivateLink.
-:::
+> **Note:**
+>
+> Congratulations! You have successfully connected to Databend Cloud with AWS PrivateLink.

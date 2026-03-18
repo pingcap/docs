@@ -11,6 +11,6 @@ This page provides a comprehensive overview of Ngram index operations in Databen
 | [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md) | Refreshes an Ngram index                                 |
 | [DROP NGRAM INDEX](/tidb-cloud-lake/sql/drop-ngram-index.md)       | Removes an Ngram index                                   |
 
-:::note
-Ngram indexes in Databend enable efficient substring and pattern matching searches within text data, improving performance for LIKE and similar operations.
-:::
+> **Note:**
+>
+> Ngram indexes in Databend enable efficient substring and pattern matching searches within text data, improving performance for LIKE and similar operations.
