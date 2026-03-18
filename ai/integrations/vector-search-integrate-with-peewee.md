@@ -23,8 +23,8 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- (Recommended) [Create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Deploy a local test TiDB Self-Managed cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB Self-Managed cluster](/production-deployment-using-tiup.md).
 
 ## Run the sample app
 
@@ -69,9 +69,9 @@ Configure the environment variables depending on the TiDB deployment option you'
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+For a {{{ .starter }}} or Essential instance, take the following steps to obtain the connection string and configure environment variables:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -94,10 +94,10 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 
 5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
 
-    - `TIDB_HOST`: The host of the TiDB cluster.
-    - `TIDB_PORT`: The port of the TiDB cluster.
-    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
+    - `TIDB_HOST`: The host of the {{{ .starter }}} or Essential instance.
+    - `TIDB_PORT`: The port of the {{{ .starter }}} or Essential instance.
+    - `TIDB_USERNAME`: The username to connect to TiDB.
+    - `TIDB_PASSWORD`: The password to connect to TiDB.
     - `TIDB_DATABASE`: The database name to connect to.
     - `TIDB_CA_PATH`: The path to the root certificate file.
 
@@ -129,10 +129,10 @@ If you are running TiDB on your local machine, `TIDB_HOST` is `127.0.0.1` by def
 
 The following are descriptions for each parameter:
 
-- `TIDB_HOST`: The host of the TiDB cluster.
-- `TIDB_PORT`: The port of the TiDB cluster.
-- `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-- `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
+- `TIDB_HOST`: The host of the TiDB Self-Managed cluster.
+- `TIDB_PORT`: The port of the TiDB Self-Managed cluster.
+- `TIDB_USERNAME`: The username to connect to the TiDB Self-Managed cluster.
+- `TIDB_PASSWORD`: The password to connect to the TiDB Self-Managed cluster.
 - `TIDB_DATABASE`: The name of the database you want to connect to.
 
 </div>
@@ -168,7 +168,7 @@ You can refer to the following sample code snippets to develop your application.
 
 ### Create vector tables
 
-#### Connect to a TiDB cluster
+#### Connect to TiDB
 
 ```python
 import os

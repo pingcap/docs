@@ -111,7 +111,7 @@ For more information, see [Clustered Indexes](/clustered-indexes.md).
 
 ### Secondary index
 
-A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
+A secondary index is a logical object in TiDB. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
 
 For more information about secondary indexes, see [Secondary Indexes](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
 
@@ -125,7 +125,7 @@ In TiDB, you can either [add a secondary index to an existing table](/develop/de
 
 In TiDB, a vector index is a specialized index designed for efficient approximate nearest neighbor (ANN) searches over columns containing vector data. Vector indexes, particularly the HNSW (Hierarchical Navigable Small World) algorithm, allow K-nearest neighbors (KNN) searches to identify the closest data points in a vector space quickly. This significantly speeds up query performance, enabling results in milliseconds compared to brute-force methods.
 
-Vector indexes rely on TiFlash replicas for data storage and search functionality. Before creating and using vector indexes, make sure that TiFlash nodes are available in your cluster.
+Vector indexes rely on TiFlash replicas for data storage and search functionality. If you are using a TiDB Cloud Dedicated cluster, ensure TiFlash nodes are available in your cluster before creating or using vector indexes. For more information, see [Vector Search Index](/ai/reference/vector-search-index.md).
 
 ## Constraints
 

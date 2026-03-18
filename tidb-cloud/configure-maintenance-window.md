@@ -1,6 +1,6 @@
 ---
 title: Configure Maintenance Window
-summary: Learn how to configure maintenance window for your cluster.
+summary: Learn how to configure maintenance window for your TiDB Cloud Dedicated cluster.
 ---
 
 # Configure Maintenance Window

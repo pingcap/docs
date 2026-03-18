@@ -27,7 +27,7 @@ TiDB Cloud now manages Datadog and New Relic integrations at the cluster level, 
 
 Repeat the following steps for each [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in the project.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to the target cluster using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to the target TiDB Cloud Dedicated cluster using the combo box in the upper-left corner.
 
 2. In the left navigation panel, click **Settings** > **Integrations**.
 

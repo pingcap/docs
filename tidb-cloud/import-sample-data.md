@@ -10,15 +10,15 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**.
 
@@ -36,15 +36,15 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 </div>
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**.
 
@@ -55,7 +55,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
     - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
     - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
+    If the region of the bucket is different from your TiDB Cloud Dedicated cluster, confirm the compliance of cross region.
 
 4. Click **Connect** > **Start Import**.
 
@@ -63,15 +63,15 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**.
 
@@ -93,7 +93,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
         - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`.
         - For your own data, you can use a SAS token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
-    If the region of the storage account is different from your cluster, confirm the compliance of cross region.
+    If the region of the storage account is different from your TiDB Cloud Dedicated cluster, confirm the compliance of cross region.
 
 4. Click **Connect**.
 

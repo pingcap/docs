@@ -5,23 +5,23 @@ summary: Learn how to view TiDB Cloud built-in metrics and understand the meanin
 
 # TiDB Cloud Built-in Metrics
 
-TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloud collects and displays a full set of standard metrics of your TiDB resource on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 ## View the Metrics page
 
 To view the metrics on the **Metrics** page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. In the left navigation pane, click **Monitoring** > **Metrics**.
 
 ## Metrics retention policy
 
-For TiDB Cloud clusters, the metrics data is kept for 7 days.
+In TiDB Cloud, the metrics data is kept for 7 days.
 
 ## Metrics for TiDB Cloud Dedicated clusters
 
@@ -86,9 +86,9 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiProxy Throughput | node | The bytes transferred per second on each TiProxy node. |
 | TiProxy Sessions Migration Reasons | reason | The number of session migrations that happen every minute and the reasons for them. |
 
-## Metrics for {{{ .starter }}} and {{{ .essential }}} clusters
+## Metrics for {{{ .starter }}} and {{{ .essential }}} instances
 
-The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .essential }}} clusters:
+The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .essential }}} instances:
 
 - **Cluster Status**: displays the cluster-level main metrics.
 - **Database Status**: displays the database-level main metrics.
@@ -99,16 +99,16 @@ The following table illustrates the cluster-level main metrics under the **Clust
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction in a {{{ .starter }}} cluster. Besides user queries, background activities can also consume RUs, so when QPS is 0, RU usage per second might still be nonzero.|
-| Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The Request Capacity Units (RCUs) and the consumed Request Units (RU) per second in a {{{ .essential }}} cluster. |
+| Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction in a {{{ .starter }}} instance. Besides user queries, background activities can also consume RUs, so when QPS is 0, RU usage per second might still be nonzero.|
+| Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The Request Capacity Units (RCUs) and the consumed Request Units (RU) per second in a {{{ .essential }}} instance. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of row-based storage and columnar storage. This metric is displayed only when each storage type is 50 MiB or larger. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
+| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} instance until the instance executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Transaction Duration | Avg, P99 | The execution duration of transactions. |
 | Lock-wait | P95, P99 | Time spent by transactions waiting to acquire pessimistic locks. High values indicate contention on the same rows or keys. |
-| Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
+| Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} instance. |
 | Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time that connections remain idle while inside an open transaction. Long durations typically indicate slow application logic or long-running transactions. |
 
 ### Database Status
@@ -127,8 +127,8 @@ The following table illustrates the database-level main metrics under the **Data
 
 If a pane does not provide any metrics, the possible reasons are as follows:
 
-- The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
+- The workload of the corresponding TiDB Cloud resource does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The TiDB version of your TiDB Cloud resource is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 

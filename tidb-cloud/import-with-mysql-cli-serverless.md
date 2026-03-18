@@ -11,14 +11,14 @@ This document describes how to import data into {{{ .starter }}} or {{{ .essenti
 
 Before you can import data via MySQL CLI to {{{ .starter }}} or {{{ .essential }}}, you need the following prerequisites:
 
-- You have access to your {{{ .starter }}} or {{{ .essential }}} cluster. If you do not have, create one following the instructions in [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- You have access to your {{{ .starter }}} or {{{ .essential }}} instance. If you do not have, create one following the instructions in [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md).
 - Install MySQL CLI on your local computer.
 
-## Step 1. Connect to your {{{ .starter }}} or {{{ .essential }}} cluster
+## Step 1. Connect to your {{{ .starter }}} or Essential instance
 
-Connect to your TiDB cluster.
+Connect to your {{{ .starter }}} or Essential instance.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

@@ -22,7 +22,7 @@ Before you connect a Data App to GitHub, make sure that you have the following:
 
 > **Note:**
 >
-> The GitHub repository is used to store [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) after you connect a Data App to it. If the information (such as the cluster ID and endpoint URL) in the configuration files is sensitive, make sure to use a private repository instead of a public one.
+> The GitHub repository is used to store [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) after you connect a Data App to it. If the information (such as the ID of your {{{ .starter }}} instance or {{{ .dedicated }}} cluster and the endpoint URL) in the configuration files is sensitive, make sure to use a private repository instead of a public one.
 
 ## Step 1. Connect your Data App to GitHub
 
@@ -63,7 +63,7 @@ After the deployment operation, check your specified GitHub directory. You will 
 ```
 ├── <Your Data App directory on GitHub>
 │   ├── data_sources
-│   │   └── cluster.json  # specifies the linked clusters.
+│   │   └── cluster.json  # specifies the linked {{{ .starter }}} instances or {{{ .dedicated }}} clusters.
 │   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
 │   ├── http_endpoints
 │   │   ├── config.json # specifies the endpoints.
@@ -90,7 +90,7 @@ When updating the configuration files, pay attention to the following:
 
 | File directory  | Notes |
 | ---------|---------|
-| `data_source/cluster.json`     | When updating this file, make sure that you have access to the linked clusters. You can get the cluster ID from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
+| `data_source/cluster.json`     | When updating this file, make sure that you have access to the linked {{{ .starter }}} instances or {{{ .dedicated }}} clusters. You can get the ID of your {{{ .starter }}} instance or {{{ .dedicated }}} cluster from its URL. For example, if the URL is `https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`, the ID is `1234567891234567890`. |
 | `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration).   |
 | `http_endpoints/sql/method-<endpoint-path>.sql`| To add or remove SQL files in the `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well. |
 | `datapp_config.json` | Do not change the `app_id` field in this file unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |

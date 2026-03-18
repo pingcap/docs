@@ -1,32 +1,36 @@
 ---
-title: Delete a TiDB Cluster
-summary: Learn how to delete a TiDB cluster.
+title: Delete a TiDB Cloud Resource
+summary: Learn how to delete a TiDB Cloud Resource.
 ---
 
-# Delete a TiDB Cluster
+# Delete a TiDB Cloud Resource
 
-This document describes how to delete a TiDB cluster on TiDB Cloud.
+This document describes how to delete the following TiDB Cloud resources:
 
-You can delete a cluster at any time by performing the following steps:
+- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instance
+- [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instance
+- [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of your target cluster to be deleted, click **...**.
+You can delete a TiDB Cloud resource at any time by performing the following steps:
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+2. In the row of your target resource to be deleted, click **...**.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of the target cluster to go to its overview page, and then click **...** in the upper-right corner.
+    > Alternatively, you can also click the name of the target resource to go to its overview page, and then click **...** in the upper-right corner.
 
 3. Click **Delete** in the drop-down menu.
-4. In the cluster deleting window, confirm the deletion:
+4. In the deletion confirmation window, confirm the deletion:
 
-    - If you have at least one manual or automatic backup, you can see the number of backups and the charging policy for backups. Click **Continue** and enter `<organization name>/<project name>/<cluster name>`.
-    - If you do not have any backups, just enter `<organization name>/<project name>/<cluster name>`.
+    - If you have at least one manual or automatic backup, you can see the number of backups and the charging policy for backups. Click **Continue** and enter `<organization name>/<project name>/<resource name>`.
+    - If you do not have any backups, just enter `<organization name>/<project name>/<resource name>`.
 
-    If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+    If you want to restore a deleted {{{ .dedicated }}} cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
     > **Note:**
     >
-    > [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters do not support restoring data after the deletion. If you want to delete a {{{ .starter }}} or {{{ .essential }}} cluster and restore its data in the future, see [Export Data from {{{ .starter }}} or Essential](/tidb-cloud/serverless-export.md) to export your data as a backup.
+    > [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances do not support restoring data after the deletion. If you want to delete a {{{ .starter }}} or {{{ .essential }}} instance and restore its data in the future, see [Export Data from {{{ .starter }}} or Essential](/tidb-cloud/serverless-export.md) to export your data as a backup.
 
 5. Click **I understand, delete it**.
 

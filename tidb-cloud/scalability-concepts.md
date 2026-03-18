@@ -40,4 +40,4 @@ TiDB Cloud deploys TiKV nodes evenly to 3 available zones in the region you sele
 
 TiFlash is responsible for storing columnar data. TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. You can configure the node number, vCPU and RAM, and storage for TiFlash.
 
-TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least two replicas of the data for high availability in your production environment.
+TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud Dedicated cluster and create at least two replicas of the data for high availability in your production environment.

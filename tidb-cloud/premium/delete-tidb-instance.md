@@ -9,7 +9,7 @@ This document describes how to delete a {{{ .premium }}} instance.
 
 You can delete an instance at any time by performing the following steps:
 
-1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 2. In the row of your target instance to be deleted, click **...**.
 
     > **Tip:**

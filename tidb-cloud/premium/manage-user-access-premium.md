@@ -5,34 +5,34 @@ summary: Learn how to manage identity access in {{{ .premium }}}.
 
 # Identity Access Management for {{{ .premium }}}
 
-This document describes how to manage user access, roles, and permissions across organizations and TiDB instances in {{{ .premium }}}.
+This document describes how to manage user access, roles, and permissions across organizations and {{{ .premium }}} instances.
 
 Before you can use TiDB Cloud, [sign up for an account](https://tidbcloud.com/free-trial). You can either sign up with email and password to [manage your password in TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
-## Organizations and TiDB instances
+## Organizations and instances
 
-{{{ .premium }}} uses a hierarchical structure of organizations and instances to help you manage users and TiDB instances efficiently. As an `Organization Owner`, you can create and manage multiple instances within your organization.
+{{{ .premium }}} uses a hierarchical structure of organizations and instances to help you manage users and {{{ .premium }}} instances efficiently. As an `Organization Owner`, you can create and manage multiple instances within your organization.
 
 For example:
 
 ```
 - Your organization
-    - TiDB instance 1
-    - TiDB instance 2
-    - TiDB instance 3
+    - {{{ .premium }}} instance 1
+    - {{{ .premium }}} instance 2
+    - {{{ .premium }}} instance 3
     ...
 ```
 
 In this structure:
 
 - Users can access an organization only if they are members of it.
-- To access a TiDB instance, users need at least read permissions for that instance in the organization.
+- To access a {{{ .premium }}} instance, users need at least read permissions for that instance in the organization.
 
 For more information about user roles and permissions, see [User Roles](#user-roles).
 
 ### Organizations
 
-An organization can include multiple TiDB instances.
+An organization can include multiple {{{ .premium }}} instances.
 
 TiDB Cloud calculates billing at the organization level, with the billing details available for each instance.
 
@@ -40,24 +40,24 @@ If you are an `Organization Owner`, you have full administrative privileges in y
 
 For example, you can do the following:
 
-- Create TiDB instances for different purposes.
+- Create {{{ .premium }}} instances for different purposes.
 - Assign organization-level and instance-level roles to different users.
 - Configure organization-wide settings such as time zone.
 
-### TiDB instances
+### {{{ .premium }}} instances
 
-If you are an `Instance Manager`, you can manage settings and operations for a specific TiDB instance.
+If you are an `Instance Manager`, you can manage settings and operations for a specific {{{ .premium }}} instance.
 
 For example, you can do the following:
 
-- Delete a TiDB instance when it is no longer needed.
+- Delete a {{{ .premium }}} instance when it is no longer needed.
 - Modify instance configurations as needed.
 
 ## User roles
 
-TiDB Cloud defines different user roles to control permissions at both the organization and TiDB instance levels.
+TiDB Cloud defines different user roles to control permissions at both the organization and instance levels.
 
-You can grant roles to users at the organization level or at the TiDB instance level. It is recommended to plan your hierarchy carefully to ensure least‑privilege access and maintain security.
+You can grant roles to users at the organization level or at the instance level. It is recommended to plan your hierarchy carefully to ensure least‑privilege access and maintain security.
 
 ### Organization roles
 
@@ -65,9 +65,9 @@ At the organization level, TiDB Cloud defines the following roles, in which `Org
 
 | Permission  | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
 |---|---|---|---|---|---|
-| Manage organization settings, such as TiDB instances, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Manage organization settings, such as {{{ .premium }}} instances, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Add or remove organization members, and edit organization roles. | ✅ | ❌ | ❌ | ❌ | ❌ |
-| `Instance Manager` permissions for all TiDB instances in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `Instance Manager` permissions for all {{{ .premium }}} instances in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Manage payment information for the organization. | ✅ | ✅ | ❌ | ❌ | ❌ |
 | View billing and use [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer). | ✅ | ✅ | ✅ | ❌ | ❌ |
 | Manage [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ❌ | ✅ | ❌ |
@@ -78,25 +78,25 @@ At the organization level, TiDB Cloud defines the following roles, in which `Org
 >
 > - The `Organization Console Audit Manager` role manages audit logging in the TiDB Cloud console only, not database audit logging.
 
-### TiDB instance roles
+### Instance roles
 
-At the TiDB instance level, TiDB Cloud defines two roles: `Instance Manager` and `Instance Viewer`.
+At the instance level, TiDB Cloud defines two roles: `Instance Manager` and `Instance Viewer`.
 
 > **Note:**
 >
 > - The `Organization Owner` automatically inherits all `Instance Manager` permissions for every instance in the organization.
-> - Each TiDB instance role inherits all the permissions of the `Organization Viewer` role by default.
-> - If a member in your organization does not have any TiDB instance roles, the member cannot access any TiDB instances in your organization.
+> - Each instance role inherits all the permissions of the `Organization Viewer` role by default.
+> - If a member in your organization does not have any instance roles, the member cannot access any {{{ .premium }}} instances in your organization.
 
 | Permission  | `Instance Manager` | `Instance Viewer` |
 |---|---|---|
-| Manage TiDB instance settings | ✅ | ❌ |
-| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the TiDB instance. | ✅ | ❌ |
-| Manage TiDB instance operations, such as TiDB instance creation, modification, and deletion. | ✅ | ❌ |
-| Manage TiDB instance data, such as data import, data backup and restore, and data migration. | ✅ | ❌ |
+| Manage instance settings | ✅ | ❌ |
+| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the {{{ .premium }}} instances. | ✅ | ❌ |
+| Manage instance operations, such as {{{ .premium }}} instance creation, modification, and deletion. | ✅ | ❌ |
+| Manage TiDB data, such as data import, data backup and restore, and data migration. | ✅ | ❌ |
 | Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ❌ |
-| Review and reset the root password for the TiDB instance. | ✅ | ❌ |
-| View the overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) of the TiDB instance. | ✅ | ✅ |
+| Review and reset the root password for the {{{ .premium }}} instance. | ✅ | ❌ |
+| View the overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) of the {{{ .premium }}} instance. | ✅ | ✅ |
 
 ## Manage organization access
 
@@ -108,7 +108,7 @@ To view and switch between organizations, take the following steps:
 
     > **Tip:**
     >
-    > - If you are currently on the page of a specific TiDB instance, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization list.
+    > - If you are currently on the page of a specific {{{ .premium }}} instance, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization list.
     > - If you are a member of multiple organizations, you can click the target organization name in the combo box to switch your account between organizations.
 
 2. To view the detailed information of your organization, such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
@@ -133,7 +133,7 @@ If you are in the `Organization Owner` role, you can invite users to your organi
 
 > **Note:**
 >
-> You can also [invite a user to access or manage a TiDB instance](#invite-a-user-to-access-or-manage-a-tidb-instance) directly as needed, which also makes the user your organization member.
+> You can also [invite a user to access or manage a {{{ .premium }}} instance](#invite-a-user-to-access-or-manage-a-premium-instance) directly as needed, which also makes the user your organization member.
 
 To invite a user to an organization, take the following steps:
 
@@ -149,9 +149,9 @@ To invite a user to an organization, take the following steps:
     >
     > - The default role at the organization level is `Organization Viewer`.
     > - If you want to invite multiple users at one time, you can enter multiple email addresses.
-    > - The invited user does not have access to any TiDB instances by default. To grant TiDB instance permissions to the user, see [Invite a user to access or manage a TiDB instance](#invite-a-user-to-access-or-manage-a-tidb-instance).
+    > - The invited user does not have access to any {{{ .premium }}} instances by default. To grant instance permissions to the user, see [Invite a user to access or manage a {{{ .premium }}} instance](#invite-a-user-to-access-or-manage-a-premium-instance).
 
-5. If you only need to assign the user an organization role and do not need to assign any project or TiDB instance roles, disable the **Add access for projects and instances** option.
+5. If you only need to assign the user an organization role and do not need to assign any project or instance roles, disable the **Add access for projects and instances** option.
 
 6. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -183,7 +183,7 @@ To remove a member from an organization, take the following steps:
 
 > **Note:**
 >
-> If a member is removed from an organization, the TiDB instance access for the member is also removed.
+> If a member is removed from an organization, the instance access for the member is also removed.
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
@@ -191,17 +191,17 @@ To remove a member from an organization, take the following steps:
 
 3. On the **Users** page, click **...** > **Delete** in the row of the target member.
 
-## Manage TiDB instance access
+## Manage instance access
 
-### Invite a user to access or manage a TiDB instance
+### Invite a user to access or manage a {{{ .premium }}} instance {#invite-a-user-to-access-or-manage-a-premium-instance}
 
-If you are in the `Organization Owner` role, you can invite users to access or manage your TiDB instances.
+If you are in the `Organization Owner` role, you can invite users to access or manage your {{{ .premium }}} instances.
 
 > **Note:**
 >
-> When you invite a user not in your organization to access or manage your TiDB instance, the user automatically joins your organization as well.
+> When you invite a user not in your organization to access or manage your {{{ .premium }}} instance, the user automatically joins your organization as well.
 
-To invite a user to access or manage a TiDB instance, take the following steps:
+To invite a user to access or manage a {{{ .premium }}} instance, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
@@ -211,7 +211,7 @@ To invite a user to access or manage a TiDB instance, take the following steps:
 
 4. Enter the email address of the user to be invited, and then select an organization role for the user.
 
-5. Make sure the **Add access for projects and instances** option is enabled, click **Add access** in the **Instance access** section, and then select a TiDB instance role for the user.
+5. Make sure the **Add access for projects and instances** option is enabled, click **Add access** in the **Instance access** section, and then select an instance role for the user.
 
 6. Click **Add access**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -223,11 +223,11 @@ To invite a user to access or manage a TiDB instance, take the following steps:
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
-### Modify TiDB instance roles
+### Modify instance roles
 
-If you are in the `Organization Owner` role, you can modify TiDB instance roles of all organization members in your organization.
+If you are in the `Organization Owner` role, you can modify instance roles of all organization members in your organization.
 
-To modify the TiDB instance role of a member, take the following steps:
+To modify the instance role of a member, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 

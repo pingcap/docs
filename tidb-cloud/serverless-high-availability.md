@@ -22,8 +22,8 @@ TiDB Cloud extends these capabilities with zonal high availability and regional 
 
 > **Note:**
 >
-> - For {{{ .starter }}} clusters, only zonal high availability is enabled, and it is not configurable.
-> - For {{{ .essential }}} clusters hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during cluster creation. For {{{ .essential }}} clusters hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
 
 </CustomContent>
 
@@ -31,19 +31,19 @@ TiDB Cloud extends these capabilities with zonal high availability and regional 
 
 > **Note:**
 >
-> - For {{{ .starter }}} clusters, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
 > - For {{{ .premium }}} clusters, only regional high availability is enabled, and it is not configurable.
-> - For {{{ .essential }}} clusters hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during cluster creation. For {{{ .essential }}} clusters hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
 
 </CustomContent>
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
-- **Regional high availability (beta)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in regions with more than three availability zones and can only be enabled during cluster creation. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
+- **Regional high availability (beta)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in regions with more than three availability zones. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
 
 ## Zonal high availability architecture
 
-When you create a cluster with the default zonal high availability, all components, including Gateway, TiDB, TiKV, and TiFlash compute/write nodes, run in the same availability zone. The placement of these components in the data plane offer infrastructure redundancy with virtual machine pools, which minimizes failover time and network latency due to colocation.
+When you create a {{{ .starter }}} or Essential instance with the zonal high availability, all components, including Gateway, TiDB, TiKV, and TiFlash compute/write nodes, run in the same availability zone. The placement of these components in the data plane offer infrastructure redundancy with virtual machine pools, which minimizes failover time and network latency due to colocation.
 
 <CustomContent language="en,zh">
 
@@ -99,7 +99,7 @@ The gateway and computing layers are stateless, so failover involves restarting 
 
 ## Regional high availability architecture
 
-When you create a cluster with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximizing availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
+When you create a {{{ .essential }}} or {{{ .premium }}} instance with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximizing availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
 
 > **Note:**
 >

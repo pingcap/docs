@@ -5,21 +5,21 @@ summary: Learn how to import sample data into {{{ .starter }}} or {{{ .essential
 
 # Import Sample Data (SQL Files) into {{{ .starter }}} or Essential from Cloud Storage
 
-This document describes how to import the sample data (SQL files) into {{{ .starter }}} or {{{ .essential }}} via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+This document describes how to import the sample data (SQL files) into {{{ .starter }}} or {{{ .essential }}} via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one {{{ .starter }}} or Essential instance.
 
 > **Note:**
 >
 > The sample data used in this document is from Amazon S3.
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -41,7 +41,7 @@ This document describes how to import the sample data (SQL files) into {{{ .star
 
 8. When the import progress shows **Completed**, check the imported tables.
 
-After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
+After connecting to the {{{ .starter }}} or Essential instance, you can run some queries in your terminal to check the result, for example:
 
 1. Get the trip records starting at "12th & U St NW":
 

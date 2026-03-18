@@ -5,9 +5,9 @@ summary: Learn how to enable or disable user-controlled log redaction in TiDB Cl
 
 # User-Controlled Log Redaction
 
-User-controlled log redaction lets you manage the visibility of sensitive data in your <CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> logs. By toggling this redaction feature, you can protect your information, balance operational needs with security, and control what appears in your <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> logs.
+User-controlled log redaction lets you manage the visibility of sensitive data in your <CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> logs. By toggling this redaction feature, you can protect your information, balance operational needs with security, and control what appears in your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> logs.
 
-Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> maintenance or SQL tuning, you can disable this feature at any time.
+Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> maintenance or SQL tuning, you can disable this feature at any time.
 
 <CustomContent plan="dedicated">
 
@@ -30,7 +30,7 @@ Log redaction is enabled by default, ensuring that sensitive information in runn
 <CustomContent plan="dedicated">
 
 * You must be in the **Organization Owner** or **Project Owner** role of your organization in TiDB Cloud.
-* Log redaction cannot be enabled or disabled when the cluster is in the `paused` state.
+* Log redaction cannot be enabled or disabled when the {{{ .dedicated }}} cluster is in the `paused` state.
 
 </CustomContent>
 
@@ -49,13 +49,13 @@ Log redaction is enabled by default, ensuring that sensitive information in runn
 To disable log redaction, do the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the <CustomContent plan="dedicated">[**Clusters**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium">[**TiDB Instances**](https://tidbcloud.com/tidbs)</CustomContent> page, and then click the name of your target <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page.
+2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page.
 
     <CustomContent plan="dedicated">
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     </CustomContent>
 
@@ -96,13 +96,13 @@ To check the updated logs after log redaction is disabled, do the following:
 To maintain data security, **enable log redaction** as soon as you complete your diagnostic or maintenance task as follows.
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the <CustomContent plan="dedicated">[**Clusters**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium">[**TiDB Instances**](https://tidbcloud.com/tidbs)</CustomContent> page, and then click the name of your target <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page.
+2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page.
 
     <CustomContent plan="dedicated">
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
     </CustomContent>
 
