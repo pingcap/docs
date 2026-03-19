@@ -1,6 +1,6 @@
 ---
 title: Data Types
-summary: {{{ .lake-short }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
+summary: "{{{ .lake-short }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values."
 ---
 
 # Data Types

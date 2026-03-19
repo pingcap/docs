@@ -1,6 +1,6 @@
 ---
 title: Loading from Stage
-summary: {{{ .lake-short }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using BendSQL, and then employ the COPY INTO command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake-short }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake-short }}}, see Input & Output File Formats.
+summary: "{{{ .lake-short }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using BendSQL, and then employ the COPY INTO command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake-short }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake-short }}}, see Input & Output File Formats."
 ---
 
 # Loading from Stage

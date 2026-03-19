@@ -1,6 +1,6 @@
 ---
 title: Performance Optimization
-summary: {{{ .lake-short }}} primarily accelerates query performance through various indexing technologies, including data clustering, result caching, and specialized indexes, helping you significantly improve query response times.
+summary: "{{{ .lake-short }}} primarily accelerates query performance through various indexing technologies, including data clustering, result caching, and specialized indexes, helping you significantly improve query response times."
 ---
 
 # Performance Optimization

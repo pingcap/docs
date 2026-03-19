@@ -1,6 +1,6 @@
 ---
 title: SHOW SETTINGS
-summary: {{{ .lake-short }}} provides a variety of system settings that enable you to control how {{{ .lake-short }}} works. This command displays the current and default values, as well as the Setting Levels, of available system settings. To update a setting, use the SET or UNSET command.
+summary: "{{{ .lake-short }}} provides a variety of system settings that enable you to control how {{{ .lake-short }}} works. This command displays the current and default values, as well as the Setting Levels, of available system settings. To update a setting, use the SET or UNSET command."
 ---
 
 # SHOW SETTINGS

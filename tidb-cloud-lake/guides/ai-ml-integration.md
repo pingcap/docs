@@ -1,6 +1,6 @@
 ---
 title: AI & ML Integration
-summary: {{{ .lake-short }}} enables powerful AI and ML capabilities through two complementary approaches build custom AI functions with your own infrastructure, or create conversational data experiences using natural language.
+summary: "{{{ .lake-short }}} enables powerful AI and ML capabilities through two complementary approaches build custom AI functions with your own infrastructure, or create conversational data experiences using natural language."
 ---
 
 # AI & ML Integration

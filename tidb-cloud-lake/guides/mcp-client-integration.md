@@ -1,6 +1,6 @@
 ---
 title: MCP Client Integration
-summary: {{{ .lake-short }}} MCP connects AI assistants to {{{ .lake-short }}} via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients.
+summary: "{{{ .lake-short }}} MCP connects AI assistants to {{{ .lake-short }}} via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients."
 ---
 
 # MCP Client Integration

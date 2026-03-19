@@ -1,6 +1,6 @@
 ---
 title: Apache Hive Tables
-summary: {{{ .lake-short }}} can query data that is cataloged by Apache Hive without copying it. Register the Hive Metastore as a {{{ .lake-short }}} catalog, point to the object storage that holds the table data, and then query the tables as if they were native {{{ .lake-short }}} objects.
+summary: "{{{ .lake-short }}} can query data that is cataloged by Apache Hive without copying it. Register the Hive Metastore as a {{{ .lake-short }}} catalog, point to the object storage that holds the table data, and then query the tables as if they were native {{{ .lake-short }}} objects."
 ---
 
 # Apache Hive Tables

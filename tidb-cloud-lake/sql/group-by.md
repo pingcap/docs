@@ -1,6 +1,6 @@
 ---
 title: GROUP BY
-summary: {{{ .lake-short }}} supports GROUP BY with a variety of extensions.
+summary: "{{{ .lake-short }}} supports GROUP BY with a variety of extensions."
 ---
 
 # GROUP BY

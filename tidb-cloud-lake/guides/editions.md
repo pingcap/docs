@@ -1,6 +1,6 @@
 ---
 title: Editions
-summary: {{{ .lake }}} comes in three editions Personal, Business, and Dedicated, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
+summary: "{{{ .lake }}} comes in three editions Personal, Business, and Dedicated, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases."
 ---
 
 # Editions

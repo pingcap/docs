@@ -1,6 +1,6 @@
 ---
 title: Geospatial
-summary: {{{ .lake-short }}} stores spatial data through two data types.
+summary: "{{{ .lake-short }}} stores spatial data through two data types."
 ---
 
 # Geospatial

@@ -1,6 +1,6 @@
 ---
 title: Fuse Engine Tables
-summary: {{{ .lake-short }}} uses the Fuse Engine as its default storage engine, providing a Git-like data management system with.
+summary: "{{{ .lake-short }}} uses the Fuse Engine as its default storage engine, providing a Git-like data management system with."
 ---
 
 # Fuse Engine Tables

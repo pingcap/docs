@@ -1,6 +1,6 @@
 ---
 title: Compliance & Security
-summary: {{{ .lake }}} is built with security at its core, providing comprehensive protection for your data through multiple security layers, encryption standards, and compliance certifications.
+summary: "{{{ .lake }}} is built with security at its core, providing comprehensive protection for your data through multiple security layers, encryption standards, and compliance certifications."
 ---
 
 # Compliance & Security

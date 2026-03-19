@@ -1,6 +1,6 @@
 ---
 title: Date & Time
-summary: {{{ .lake-short }}}'s Date and Time data type supports standardization and compatibility with various SQL standards, making it easier for users migrating from other database systems.
+summary: "{{{ .lake-short }}}'s Date and Time data type supports standardization and compatibility with various SQL standards, making it easier for users migrating from other database systems."
 ---
 
 # Date & Time

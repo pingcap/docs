@@ -1,6 +1,6 @@
 ---
 title: Querying Avro Files in Stage
-summary: {{{ .lake-short }}} provides comprehensive support for querying Avro files directly from stages. This allows for flexible data exploration and transformation without needing to load the data into a table first.
+summary: "{{{ .lake-short }}} provides comprehensive support for querying Avro files directly from stages. This allows for flexible data exploration and transformation without needing to load the data into a table first."
 ---
 
 # Querying Avro Files in Stage

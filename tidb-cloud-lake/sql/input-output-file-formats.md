@@ -1,6 +1,6 @@
 ---
 title: Input & Output File Formats
-summary: {{{ .lake-short }}} accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options.
+summary: "{{{ .lake-short }}} accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options."
 ---
 
 # Input & Output File Formats

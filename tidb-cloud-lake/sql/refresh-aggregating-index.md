@@ -1,6 +1,6 @@
 ---
 title: REFRESH AGGREGATING INDEX
-summary: {{{ .lake-short }}} automatically maintains aggregating indexes in SYNC mode as new data is ingested. Run REFRESH AGGREGATING INDEX when you introduce an index on a table that already contains data so earlier rows are backfilled.
+summary: "{{{ .lake-short }}} automatically maintains aggregating indexes in SYNC mode as new data is ingested. Run REFRESH AGGREGATING INDEX when you introduce an index on a table that already contains data so earlier rows are backfilled."
 ---
 
 # REFRESH AGGREGATING INDEX

@@ -1,6 +1,6 @@
 ---
 title: Delta Lake Engine
-summary: {{{ .lake-short }}}'s Delta Lake engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in {{{ .lake-short }}}, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within {{{ .lake-short }}}.
+summary: "{{{ .lake-short }}}'s Delta Lake engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in {{{ .lake-short }}}, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within {{{ .lake-short }}}."
 ---
 
 # Delta Lake Engine

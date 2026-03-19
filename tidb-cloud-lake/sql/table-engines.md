@@ -1,6 +1,6 @@
 ---
 title: Table Engines
-summary: {{{ .lake-short }}} provides several table engines so that you can balance performance and interoperability needs without moving data. Each engine is optimized for a specific scenario—ranging from {{{ .lake-short }}}’s native Fuse storage to external data lake formats.
+summary: "{{{ .lake-short }}} provides several table engines so that you can balance performance and interoperability needs without moving data. Each engine is optimized for a specific scenario—ranging from {{{ .lake-short }}}’s native Fuse storage to external data lake formats."
 ---
 
 # Table Engines

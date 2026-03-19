@@ -1,6 +1,6 @@
 ---
 title: Uploading to Stage
-summary: {{{ .lake-short }}} recommends two file upload methods for stages PRESIGN and PUT/GET commands. These methods enable direct data transfer between the client and your storage, eliminating intermediaries and resulting in cost savings by reducing traffic between {{{ .lake-short }}} and your storage.
+summary: "{{{ .lake-short }}} recommends two file upload methods for stages PRESIGN and PUT/GET commands. These methods enable direct data transfer between the client and your storage, eliminating intermediaries and resulting in cost savings by reducing traffic between {{{ .lake-short }}} and your storage."
 ---
 
 # Uploading to Stage

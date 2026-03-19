@@ -1,6 +1,6 @@
 ---
 title: Full-Text Search Functions
-summary: {{{ .lake-short }}}'s full-text search functions deliver search-engine-style filtering for semi-structured VARIANT data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets.
+summary: "{{{ .lake-short }}}'s full-text search functions deliver search-engine-style filtering for semi-structured VARIANT data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets."
 ---
 
 # Full-Text Search Functions

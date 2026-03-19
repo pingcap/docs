@@ -1,6 +1,6 @@
 ---
 title: System History Tables
-summary: {{{ .lake-short }}}'s system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
+summary: "{{{ .lake-short }}}'s system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis."
 ---
 
 # System History Tables

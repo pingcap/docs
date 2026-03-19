@@ -1,6 +1,6 @@
 ---
 title: How TiDB Cloud Lake Optimizer Works
-summary: {{{ .lake-short }}}'s query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators.
+summary: "{{{ .lake-short }}}'s query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators."
 ---
 
 # How TiDB Cloud Lake Optimizer Works

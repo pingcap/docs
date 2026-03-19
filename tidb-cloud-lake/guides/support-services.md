@@ -1,6 +1,6 @@
 ---
 title: Support Services
-summary: {{{ .lake-short }}} provides comprehensive Support Services for our {{{ .lake }}} users and customers. Our objective is to deliver exceptional support that reflects the {{{ .lake-short }}} product's core values – high performance, ease of use, and fast, high-quality results.
+summary: "{{{ .lake-short }}} provides comprehensive Support Services for our {{{ .lake }}} users and customers. Our objective is to deliver exceptional support that reflects the {{{ .lake-short }}} product's core values – high performance, ease of use, and fast, high-quality results."
 ---
 
 # Support Services

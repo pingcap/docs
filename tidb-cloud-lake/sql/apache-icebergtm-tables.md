@@ -1,6 +1,6 @@
 ---
 title: Apache Iceberg™ Tables
-summary: {{{ .lake-short }}} supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake-short }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
+summary: "{{{ .lake-short }}} supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake-short }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform."
 ---
 
 # Apache Iceberg™ Tables

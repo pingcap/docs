@@ -1,6 +1,6 @@
 ---
 title: Data Lifecycle in TiDB Cloud Lake
-summary: {{{ .lake-short }}} supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, {{{ .lake-short }}} follows the same industry standards you're accustomed to.
+summary: "{{{ .lake-short }}} supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, {{{ .lake-short }}} follows the same industry standards you're accustomed to."
 ---
 
 # Data Lifecycle in TiDB Cloud Lake

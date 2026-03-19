@@ -1,6 +1,6 @@
 ---
 title: System Tables
-summary: {{{ .lake-short }}} provides a set of system tables that contain metadata about your {{{ .lake-short }}} deployment, databases, tables, queries, and system performance. These tables are read-only and are automatically updated by the system.
+summary: "{{{ .lake-short }}} provides a set of system tables that contain metadata about your {{{ .lake-short }}} deployment, databases, tables, queries, and system performance. These tables are read-only and are automatically updated by the system."
 ---
 
 # System Tables
