@@ -15,7 +15,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/zh/tidb/v8.5/quick-start-with
 
 ### Stability
 
-- The ability to set resource limits for background tasks in Resource Control is now Generally Available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv)
+- The ability to set resource limits for background tasks in Resource Control is now Generally Available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) **tw@hfxsd** <!--1933-->
 
     TiDB Resource Control can identify and lower the priority of background tasks. In some scenarios, even with idle resources, users may want to keep the consumption of background tasks at a very low level. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set the maximum percentage of resources that background tasks under Resource Control can use, controlling the usage of all background tasks on each node below this percentage. This feature allows you to finely control the resource consumption of background tasks, further enhancing cluster stability.
 
