@@ -433,8 +433,8 @@
         - [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md)
     - DML Commands
       - [DML Overview](/tidb-cloud-lake/sql/dml.md)
-      - [COPY INTO <location>](/tidb-cloud-lake/sql/copy-into-location.md)
-      - [COPY INTO <table>](/tidb-cloud-lake/sql/copy-into-table.md)
+      - [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
+      - [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
       - [DELETE](/tidb-cloud-lake/sql/delete.md)
       - [INSERT](/tidb-cloud-lake/sql/insert.md)
       - [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
