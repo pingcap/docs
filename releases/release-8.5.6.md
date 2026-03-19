@@ -25,7 +25,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/zh/tidb/v8.5/quick-start-with
 
 ### Data Migration
 
-- (dup): release-9.0.0.md > # Data Migration * Migrated sync-diff-inspector from the `pingcap/tidb-tools` repository to the `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
+- (dup): release-9.0.0.md > # 数据迁移 * 将 sync-diff-inspector 从 `pingcap/tidb-tools` 迁移至 `pingcap/tiflow` 代码仓库 [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
 
 ## Compatibility Changes
 
@@ -42,15 +42,15 @@ Try it out: [Quick Start](https://docs.pingcap.com/zh/tidb/v8.5/quick-start-with
 
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - (dup): release-8.5.4.md > Improvements > TiKV - Optimized the calculation of the default value for the gRPC thread pool size. The previous fixed value has been adjusted to a dynamic calculation based on the total CPU configuration, preventing performance bottlenecks caused by an insufficient number of gRPC threads [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
-    - (dup): release-8.5.5.md > Improvements > TiKV - Limited the rate of BR log recovery requests when TiKV memory usage is high, preventing TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
+    - (dup): release-8.5.4.md > 改进提升> TiKV - 优化 gRPC 线程池线程数量默认值的计算方式，将原固定值调整为根据总的 CPU 配置动态计算，避免因 gRPC 线程数量过小导致的性能瓶颈 [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
+    - (dup): release-8.5.5.md > 改进提升> TiKV - 在 TiKV 内存占用高时，对 BR 的日志恢复请求进行限流，防止 TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
 
 + PD
 
     - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
     - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - (dup): release-8.5.5.md > Improvements > PD - Optimized high-cardinality metrics, reducing PD's memory consumption and pressure on the monitoring system [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
-    - (dup): release-7.5.7.md > Improvements > PD - Reduced unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    - (dup): release-8.5.5.md > 改进提升> PD - 优化了高基数指标，降低 PD 的内存占用和监控系统压力 [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
+    - (dup): release-7.5.7.md > 改进提升> PD - 减少非必要的错误日志 [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
 
@@ -100,13 +100,13 @@ Try it out: [Quick Start](https://docs.pingcap.com/zh/tidb/v8.5/quick-start-with
 
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - (dup): release-5.1.4.md > Bug Fixes > TiKV - Fixed the risk of data inconsistency in rare cases during prewrite request retries in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
+    - (dup): release-5.1.4.md > Bug 修复> TiKV - 修复悲观事务中 prewrite 请求重试在极少数情况下影响数据一致性的风险 [#11187](https://github.com/tikv/tikv/issues/11187)
 
 + PD
 
     - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
     - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - (dup): release-8.5.4.md > Bug Fixes > PD - Fixed an issue where Resource Manager incorrectly allocated tokens, causing queries to hang [#9455](https://github.com/tikv/pd/issues/9455) @[JmPotato](https://github.com/JmPotato)
+    - (dup): release-8.5.4.md > 错误修复> PD - 修复 Resource Manager 错误分配 token 导致查询卡住的问题 [#9455](https://github.com/tikv/pd/issues/9455) @[JmPotato](https://github.com/JmPotato)
 
 + TiFlash
 
@@ -119,7 +119,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/zh/tidb/v8.5/quick-start-with
 
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - (dup): release-8.5.5.md > Bug Fixes > Tools > Backup & Restore (BR) - Fixed an issue where enabling log backup in a cluster with a large number of Regions led to excessive memory consumption [#18719](https://github.com/tikv/tikv/issues/18719) @[YuJuncen](https://github.com/YuJuncen)
+        - (dup): release-8.5.5.md > 错误修复> Tools> Backup & Restore (BR) - 修复集群中存在大量 Region 时，开启日志备份导致内存占用过高的问题 [#18719](https://github.com/tikv/tikv/issues/18719) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
