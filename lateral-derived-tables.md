@@ -7,7 +7,7 @@ summary: Learn the syntax and current limitations of LATERAL derived tables in T
 
 A **lateral derived table** is a subquery in the `FROM` clause that can reference columns from tables that appear earlier in the same `FROM` clause. This makes it more powerful than a standard derived table, whose subquery cannot reference outer columns in the same `FROM` clause.
 
-TiDB recognizes the `LATERAL` syntax for derived tables, following MySQL 8.0 compatibility ([WL#8652](https://dev.mysql.com/worklog/task/?id=8652)).
+TiDB recognizes the `LATERAL` syntax for derived tables, following the MySQL 8.0 syntax ([WL#8652](https://dev.mysql.com/worklog/task/?id=8652)).
 
 > **Note:**
 >
