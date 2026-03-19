@@ -1,9 +1,9 @@
 ---
 name: create-or-update-zh-translation-pr
-description: Create or update a docs translation PR from pingcap/docs to pingcap/docs-cn by using repo-local scripts to prepare change-unit translation inputs, apply minimal edits to the existing Chinese files, and create or update the target PR with the same branch, title, body, and label rules used in gh-util.user.js.
+description: Create or update a zh translation PR from pingcap/docs to pingcap/docs-cn by using repo-local scripts to prepare change-unit translation inputs, apply minimal edits to the existing Chinese files, and create or update the target PR with the same branch, title, body, and label rules used in gh-util.user.js.
 ---
 
-# Create or Update Doc Translation PR
+# Create or Update ZH Translation PR
 
 Use this skill when the user asks to create a Chinese translation PR in `pingcap/docs-cn` from an English doc change in `pingcap/docs`, or when they want to sync later source-PR updates into an existing translation PR.
 
