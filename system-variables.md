@@ -3126,7 +3126,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether foreign key checks in pessimistic transactions use shared locks instead of exclusive locks. When enabled, foreign key checks acquire shared locks on rows in the parent table, allowing multiple concurrent  transactions to validate the same parent row without blocking each other. This behavior improves the performance of concurrent writes to child tables.
+- This variable controls whether foreign key constraint checks use shared locks instead of exclusive locks when locking rows in the parent table in pessimistic transactions. When enabled, multiple concurrent transactions can perform foreign key checks on the same parent row without blocking each other, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
