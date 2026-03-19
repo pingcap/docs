@@ -67,7 +67,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 +---------------------------------------------------------------------+
 ```
 
-In addition to using `SHOW GRANTS`, you can also view column-level privilege information by querying [`INFORMATION_SCHEMA.COLUMN_PRIVILEGES`](/information-schema/information-schema-columns.md).
+In addition to using `SHOW GRANTS`, you can also view column-level privilege information by querying `INFORMATION_SCHEMA.COLUMN_PRIVILEGES`.
 
 ## Revoke column-level privileges
 

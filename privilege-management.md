@@ -508,7 +508,7 @@ The following [`mysql` system tables](/mysql-schema/mysql-schema.md) are special
 - `mysql.user` (user account, global privilege)
 - `mysql.db` (database-level privilege)
 - `mysql.tables_priv` (table-level privilege)
-- `mysql.columns_priv` (column-level privilege; not currently supported)
+- `mysql.columns_priv` (column-level privilege; supported starting from v8.5.6)
 
 These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
 
