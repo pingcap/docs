@@ -7,6 +7,11 @@ description: Review a TiDB documentation pull request or Markdown diff for factu
 
 Use this skill when the task is to review a documentation PR, a Markdown diff, or changed documentation content in `pingcap/docs`.
 
+## Default behavior
+
+- When the user asks you to review a specific doc PR, post the GitHub-ready committable suggestions and findings to that PR instead of only returning them in chat.
+- For safe line-level fixes, default to GitHub-ready committable suggestions in the PR review.
+
 ## Load this context first
 
 Read only the files that matter for the current review:
@@ -21,6 +26,14 @@ Also inspect the PR description, linked issues, nearby docs, and other relevant 
 ## Review mindset
 
 Review from the user's perspective, not only the author's.
+
+Treat this skill as having two equally important responsibilities:
+
+1. Act as a TiDB expert and check for technical, accuracy, logic, consistency, and user-impact issues.
+2. Act as a senior technical writer, check if the content is clear, concise, and easy to understand, and review the document against the repository writing guidance in `.ai/shared/writing-style.md`.
+
+Do not treat writing-style review as optional after the technical review. Both are part of the default review scope.
+When the original English content does not meet the bar for technical writing quality, improve it so the content becomes more logical, clear, concise, and easy to understand, while preserving technical meaning and scope.
 
 Ask:
 
@@ -45,6 +58,12 @@ Check issues in this order:
 
 ## Review rules
 
+- Highest-priority rule: for any line-level issue that can be fixed safely without changing technical meaning or broadening scope, default to a GitHub-ready committable suggestion instead of a plain review comment.
+- This suggestion-first rule applies to both categories of review findings:
+    - TiDB expert findings such as technical accuracy, logic, terminology, consistency, version fit, and user-impact issues
+    - senior technical writer findings such as clarity, structure, wording, grammar, punctuation, heading style, and writing-style-guide issues
+- When the problem is weak English technical writing and the fix is safe, provide the improved English directly as a GitHub-ready committable suggestion instead of only describing the issue.
+- Use a plain review comment only when the fact is unclear, the issue spans multiple lines or paragraphs in a way that is not safe to suggest inline, or the correct fix depends on product confirmation or broader structural decisions.
 - Do not give praise-only comments.
 - Keep comments actionable and tied to the changed lines, behavior, or user impact.
 - Prefer explaining why the issue matters to the user, not just what wording looks odd.
@@ -194,5 +213,8 @@ Check whether:
 - Include file and line references when available.
 - Explain the user impact or maintenance impact of each finding when possible.
 - Distinguish confirmed issues from clarification questions.
+- For safe line-level fixes, prefer GitHub-ready committable suggestions by default.
+- Apply this default to both technical/correctness findings and writing-style findings.
+- Fall back to plain review comments only for fact-sensitive, cross-paragraph, or structurally ambiguous issues that are not safe to express as inline suggestions.
 - In addition to general review comments, provide ready-to-commit doc suggestions whenever practical, especially for wording, grammar, structure, clarity, and small completeness fixes.
 - If no findings remain, say so explicitly and mention any residual review gap, such as checks not run or product facts not independently verified.
