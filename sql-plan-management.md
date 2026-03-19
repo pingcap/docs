@@ -482,7 +482,7 @@ SHOW binding_cache status;
 
 You can use the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_binding_usage-new-in-v900) system variable (`ON` by default) to control whether to collect the usage statistics of SQL plan bindings. 
 
-When this variable is set to `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
+When this variable is `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
 
 ```sql
 SELECT sql_digest, last_used_date FROM mysql.bind_info LIMIT 1;
