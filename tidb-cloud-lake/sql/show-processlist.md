@@ -5,11 +5,9 @@ summary: The Databend process list indicates the operations currently being perf
 
 # SHOW PROCESSLIST
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW PROCESSLIST
-
-<FunctionDescription description="Introduced or updated: v1.2.190"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.190.
 
 The Databend process list indicates the operations currently being performed by the set of threads executed within the server.
 

@@ -5,11 +5,9 @@ summary: Calculates the time interval between two dates or timestamps, returning
 
 # DATE_BETWEEN
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DATE_BETWEEN
-
-<FunctionDescription description="Introduced or updated: v1.2.725"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.725.
 
 Calculates the time interval between two dates or timestamps, returning the difference as an integer in the specified unit, with positive values indicating the first time is earlier than the second, and negative values indicating the opposite.
 

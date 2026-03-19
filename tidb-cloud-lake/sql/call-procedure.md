@@ -5,11 +5,9 @@ summary: Executes a stored procedure by calling its name, optionally passing arg
 
 # CALL PROCEDURE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CALL PROCEDURE
-
-<FunctionDescription description="Introduced or updated: v1.2.637"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.637.
 
 Executes a stored procedure by calling its name, optionally passing arguments if the procedure requires them.
 

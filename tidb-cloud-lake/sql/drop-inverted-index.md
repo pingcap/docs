@@ -5,11 +5,9 @@ summary: Removes an inverted index in Databend.
 
 # DROP INVERTED INDEX
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP INVERTED INDEX
-
-<FunctionDescription description="Introduced or updated: v1.2.405"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.405.
 
 Removes an inverted index in Databend.
 

@@ -5,11 +5,9 @@ summary: Contains information about copy history.
 
 # system.copy_history
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system.copy_history
-
-<FunctionDescription description="Introduced or updated: v1.2.823"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.823.
 
 Contains information about copy history.
 

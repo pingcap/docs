@@ -5,15 +5,9 @@ summary: Login successful example sql SELECT * FROM system_history.login_history
 
 # system_history.login_history
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system_history.login_history
-
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='LOGIN HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Authentication security audit** - Comprehensive logging of all user login attempts (successful and failed). Critical for:
 

@@ -5,11 +5,9 @@ summary: Creates an internal or external stage.
 
 # CREATE STAGE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE STAGE
-
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Creates an internal or external stage.
 

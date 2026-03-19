@@ -5,8 +5,6 @@ summary: The QUANTILE_DISC() function computes the exact quantile number of a nu
 
 # QUANTILE_DISC
 
-Aggregate function.
-
 The `QUANTILE_DISC()` function computes the exact quantile number of a numeric data sequence.
 The `QUANTILE` alias to `QUANTILE_DISC`
 
@@ -18,7 +16,6 @@ The `QUANTILE` alias to `QUANTILE_DISC`
 
 ```sql
 QUANTILE_DISC(<levels>)(<expr>)
-
 QUANTILE_DISC(level1, level2, ...)(<expr>)
 ```
 

@@ -5,11 +5,9 @@ summary: Constructs a GEOMETRY object that represents a Point with the specified
 
 # ST_MAKEGEOMPOINT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_MAKEGEOMPOINT
-
-<FunctionDescription description="Introduced or updated: v1.2.347"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.347.
 
 Constructs a GEOMETRY object that represents a Point with the specified longitude and latitude.
 

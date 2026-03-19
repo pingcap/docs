@@ -5,15 +5,9 @@ summary: Creates a new masking policy in Databend.
 
 # CREATE MASKING POLICY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE MASKING POLICY
-
-<FunctionDescription description="Introduced or updated: v1.2.845"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='MASKING POLICY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.845.
 
 Creates a new masking policy in Databend.
 

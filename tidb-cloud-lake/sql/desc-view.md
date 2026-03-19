@@ -5,11 +5,9 @@ summary: Returns the list of columns for a view.
 
 # DESC VIEW
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DESC VIEW
-
-<FunctionDescription description="Introduced or updated: v1.2.383"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.383.
 
 Returns the list of columns for a view.
 

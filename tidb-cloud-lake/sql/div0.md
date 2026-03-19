@@ -5,11 +5,9 @@ summary: Returns the quotient by dividing the first number by the second one. Re
 
 # DIV0
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DIV0
-
-<FunctionDescription description="Introduced or updated: v1.2.345"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.345.
 
 Returns the quotient by dividing the first number by the second one. Returns 0 if the second number is 0.
 

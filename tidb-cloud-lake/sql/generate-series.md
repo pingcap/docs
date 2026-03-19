@@ -5,10 +5,6 @@ summary: Generates a dataset starting from a specified point, ending at another 
 
 # GENERATE_SERIES
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## GENERATE_SERIES
-
 Generates a dataset starting from a specified point, ending at another specified point, and optionally with an incrementing value. The GENERATE_SERIES function works with the following data types:
 
 - Integer

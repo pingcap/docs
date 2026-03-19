@@ -5,11 +5,9 @@ summary: Displays a list of all available connections.
 
 # SHOW CONNECTIONS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW CONNECTIONS
-
-<FunctionDescription description="Introduced or updated: v1.2.208"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.208.
 
 Displays a list of all available connections.
 

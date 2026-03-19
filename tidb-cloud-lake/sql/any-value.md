@@ -5,11 +5,9 @@ summary: Aggregate function.
 
 # ANY_VALUE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ANY_VALUE
-
-<FunctionDescription description="Introduced or updated: v1.2.815"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.815.
 
 Aggregate function.
 

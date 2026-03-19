@@ -5,15 +5,9 @@ summary: The REFRESH VIRTUAL COLUMN command in Databend is used to explicitly tr
 
 # REFRESH VIRTUAL COLUMN
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## REFRESH VIRTUAL COLUMN
-
-<FunctionDescription description="Introduced or updated: v1.2.832"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='VIRTUAL COLUMN'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.832.
 
 The `REFRESH VIRTUAL COLUMN` command in Databend is used to explicitly trigger the creation of virtual columns for existing tables. While Databend automatically manages virtual columns for new data, there are specific scenarios where manual refreshing is necessary to take full advantage of this feature.
 

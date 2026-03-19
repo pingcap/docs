@@ -5,11 +5,9 @@ summary: Creates a new network policy in Databend.
 
 # CREATE NETWORK POLICY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE NETWORK POLICY
-
-<FunctionDescription description="Introduced or updated: v1.2.341"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.341.
 
 Creates a new network policy in Databend.
 

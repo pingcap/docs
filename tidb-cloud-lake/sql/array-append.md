@@ -5,11 +5,9 @@ summary: Appends an element to the end of an array.
 
 # ARRAY_APPEND
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_APPEND
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Appends an element to the end of an array.
 

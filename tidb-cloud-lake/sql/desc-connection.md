@@ -5,11 +5,9 @@ summary: Describes the details of a specific connection, providing information a
 
 # DESC CONNECTION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DESC CONNECTION
-
-<FunctionDescription description="Introduced or updated: v1.2.208"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.208.
 
 Describes the details of a specific connection, providing information about its type and configuration.
 

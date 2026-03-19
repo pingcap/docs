@@ -5,11 +5,9 @@ summary: Converts a GEOMETRY or GEOGRAPHY object into a WKT(well-known-text) for
 
 # ST_ASWKT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_ASWKT
-
-<FunctionDescription description="Introduced or updated: v1.2.436"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.436.
 
 Converts a GEOMETRY or GEOGRAPHY object into a [WKT(well-known-text)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) format representation.
 

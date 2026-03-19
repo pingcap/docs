@@ -5,11 +5,9 @@ summary: Returns the first Point in a LineString.
 
 # ST_STARTPOINT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_STARTPOINT
-
-<FunctionDescription description="Introduced or updated: v1.2.458"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.458.
 
 Returns the first Point in a LineString.
 

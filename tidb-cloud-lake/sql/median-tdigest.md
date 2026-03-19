@@ -5,11 +5,9 @@ summary: Computes the median of a numeric data sequence using the t-digest algor
 
 # MEDIAN_TDIGEST
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MEDIAN_TDIGEST
-
-<FunctionDescription description="Introduced or updated: v1.2.41"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.41.
 
 Computes the median of a numeric data sequence using the [t-digest](https://github.com/tdunning/t-digest/blob/master/docs/t-digest-paper/histo.pdf) algorithm.
 

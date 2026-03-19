@@ -5,11 +5,9 @@ summary: Renames an existing workload group to a new name.
 
 # RENAME WORKLOAD GROUP
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## RENAME WORKLOAD GROUP
-
-<FunctionDescription description="Introduced or updated: v1.2.743"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.743.
 
 Renames an existing workload group to a new name.
 

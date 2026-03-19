@@ -5,11 +5,9 @@ summary: Returns the first value in the window frame.
 
 # FIRST_VALUE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## FIRST_VALUE
-
-<FunctionDescription description="Introduced or updated: v1.2.697"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.697.
 
 Returns the first value in the window frame.
 

@@ -5,15 +5,9 @@ summary: Displays detailed information about a specific masking policy in Databe
 
 # DESC MASKING POLICY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DESC MASKING POLICY
-
-<FunctionDescription description="Introduced or updated: v1.2.845"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='MASKING POLICY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.845.
 
 Displays detailed information about a specific masking policy in Databend.
 

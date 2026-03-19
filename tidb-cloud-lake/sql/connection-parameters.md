@@ -5,21 +5,17 @@ summary: Connection parameters are key-value pairs you supply when creating reus
 
 # Connection Parameters
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## Connection Parameters
-
-<FunctionDescription description="Introduced or updated: v1.2.294"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.294.
 
 Connection parameters are key-value pairs you supply when creating reusable connections with `CREATE CONNECTION`. After a connection is created, reference it from stages, COPY commands, and other SQL features by using `CONNECTION = (CONNECTION_NAME = '<connection-name>')`. For full syntax and usage, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md).
 
 For storage-specific connection details, see the tables below.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+<SimpleTab groupId="operating-systems">
 
-<Tabs groupId="operating-systems">
-<TabItem value="Amazon S3" label="Amazon S3">
+<div label="Amazon S3" value="Amazon S3">
 
 The following table lists connection parameters for accessing an Amazon S3-like storage service:
 
@@ -86,9 +82,9 @@ CREATE STAGE my_iam_stage
   CONNECTION = (CONNECTION_NAME = 'my_iam_conn');
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Azure Blob" label="Azure Blob">
+<div label="Azure Blob" value="Azure Blob">
 
 The following table lists connection parameters for accessing Azure Blob Storage:
 
@@ -112,9 +108,9 @@ CREATE STAGE my_azure_stage
   CONNECTION = (CONNECTION_NAME = 'my_azure_conn');
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Google GCS" label="Google GCS">
+<div label="Google GCS" value="Google GCS">
 
 The following table lists connection parameters for accessing Google Cloud Storage:
 
@@ -142,9 +138,9 @@ CREATE STAGE my_gcs_stage
   CONNECTION = (CONNECTION_NAME = 'my_gcs_conn');
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Alibaba OSS" label="Alibaba Cloud OSS">
+<div label="Alibaba Cloud OSS" value="Alibaba OSS">
 
 The following table lists connection parameters for accessing Alibaba Cloud OSS:
 
@@ -169,9 +165,9 @@ CREATE STAGE my_oss_stage
   CONNECTION = (CONNECTION_NAME = 'my_oss_conn');
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Tencent COS" label="Tencent COS">
+<div label="Tencent COS" value="Tencent COS">
 
 The following table lists connection parameters for accessing Tencent Cloud Object Storage (COS):
 
@@ -195,9 +191,9 @@ CREATE STAGE my_cos_stage
   CONNECTION = (CONNECTION_NAME = 'my_cos_conn');
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Hugging Face" label="HuggingFace">
+<div label="HuggingFace" value="Hugging Face">
 
 The following table lists connection parameters for accessing Hugging Face:
 
@@ -220,6 +216,5 @@ CREATE STAGE my_huggingface_stage
   CONNECTION = (CONNECTION_NAME = 'my_hf_conn');
 ```
 
-</TabItem>
-
-</Tabs>
+</div>
+</SimpleTab>

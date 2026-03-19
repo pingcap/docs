@@ -5,11 +5,9 @@ summary: A read-only in-memory table stores all the query logs. For the specific
 
 # system.query_log
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system.query_log
-
-<FunctionDescription description="Introduced or updated: v1.2.696"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.696.
 
 A read-only in-memory table stores all the query logs. For the specific fields available in the query logs, refer to the [Examples](#examples) section.
 

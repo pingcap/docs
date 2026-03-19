@@ -5,11 +5,9 @@ summary: Splits a string using a specified delimiter and returns the resulting p
 
 # SPLIT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SPLIT
-
-<FunctionDescription description="Introduced or updated: v1.2.164"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.164.
 
 Splits a string using a specified delimiter and returns the resulting parts as an array.
 

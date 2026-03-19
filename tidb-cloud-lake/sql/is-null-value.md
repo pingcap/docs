@@ -5,11 +5,9 @@ summary: Checks whether the input value is a JSON null. Please note that this fu
 
 # IS_NULL_VALUE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## IS_NULL_VALUE
-
-<FunctionDescription description="Introduced or updated: v1.2.368"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.368.
 
 Checks whether the input value is a JSON `null`. Please note that this function examines JSON `null`, not SQL NULL. To check if a value is SQL NULL, use [IS_NULL](/tidb-cloud-lake/sql/is-null.md).
 

@@ -5,11 +5,9 @@ summary: Reduces a JSON array to a single value by applying a specified Lambda e
 
 # ARRAY_REDUCE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_REDUCE
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Reduces a JSON array to a single value by applying a specified Lambda expression. For more information about Lambda expression, see [Lambda Expressions](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 

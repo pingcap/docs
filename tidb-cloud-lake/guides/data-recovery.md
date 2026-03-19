@@ -5,12 +5,6 @@ summary: This topic explains how to back up and restore data in Databend.
 
 # Data Recovery
 
-import EEFeature from '@site/src/components/EEFeature';
-
-## Data Recovery
-
-<EEFeature featureName='BendSave'/>
-
 This topic explains how to back up and restore data in Databend.
 
 ## Time Travel: Easy Access to Past Data

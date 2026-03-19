@@ -5,11 +5,9 @@ summary: Drops a user-defined function. Works with all function types Scalar SQL
 
 # DROP FUNCTION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP FUNCTION
-
-<FunctionDescription description="Introduced or updated: v1.2.116"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.116.
 
 Drops a user-defined function. Works with all function types: Scalar SQL, Tabular SQL, and Embedded functions.
 

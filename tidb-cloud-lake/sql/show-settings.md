@@ -5,11 +5,9 @@ summary: Databend provides a variety of system settings that enable you to contr
 
 # SHOW SETTINGS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW SETTINGS
-
-<FunctionDescription description="Introduced or updated: v1.2.314"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.314.
 
 Databend provides a variety of system settings that enable you to control how Databend works. This command displays the current and default values, as well as the [Setting Levels](#setting-levels), of available system settings. To update a setting, use the [SET](/tidb-cloud-lake/sql/set.md) or [UNSET](/tidb-cloud-lake/sql/unset.md) command.
 

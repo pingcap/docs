@@ -5,11 +5,9 @@ summary: Shows the list of databases that exist on the instance.
 
 # SHOW DATABASES
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW DATABASES
-
-<FunctionDescription description="Introduced or updated: v1.2.290"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.290.
 
 Shows the list of databases that exist on the instance.
 

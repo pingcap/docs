@@ -5,11 +5,9 @@ summary: Deletes a table.
 
 # DROP TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP TABLE
-
-<FunctionDescription description="Introduced or updated: v1.2.155"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.155.
 
 Deletes a table.
 

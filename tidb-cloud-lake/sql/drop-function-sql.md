@@ -5,11 +5,9 @@ summary: Drops an external function.
 
 # DROP FUNCTION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP FUNCTION
-
-<FunctionDescription description="Introduced or updated: v1.2.116"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.116.
 
 Drops an external function.
 

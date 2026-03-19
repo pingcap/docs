@@ -5,11 +5,9 @@ summary: Analyzes query performance with an interactive visual representation in
 
 # EXPLAIN ANALYZE GRAPHICAL
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## EXPLAIN ANALYZE GRAPHICAL
-
-<FunctionDescription description="Introduced or updated: v1.2.647"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.647.
 
 Analyzes query performance with an interactive visual representation in your browser. Available exclusively in BendSQL v0.22.2+.
 

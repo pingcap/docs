@@ -5,11 +5,9 @@ summary: Checks whether a specified path exists in JSON data.
 
 # JSON_PATH_EXISTS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## JSON_PATH_EXISTS
-
-<FunctionDescription description="Introduced or updated: v1.2.119"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.119.
 
 Checks whether a specified path exists in JSON data.
 

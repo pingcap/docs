@@ -5,11 +5,9 @@ summary: Deletes an existing connection.
 
 # DROP CONNECTION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP CONNECTION
-
-<FunctionDescription description="Introduced or updated: v1.2.208"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.208.
 
 Deletes an existing connection.
 

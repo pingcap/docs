@@ -5,11 +5,9 @@ summary: Creates an Ngram index on a column for a table.
 
 # CREATE NGRAM INDEX
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE NGRAM INDEX
-
-<FunctionDescription description="Introduced or updated: v1.2.726"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.726.
 
 Creates an Ngram index on a column for a table.
 

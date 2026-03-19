@@ -5,11 +5,9 @@ summary: Deletes an existing stored procedure.
 
 # DROP PROCEDURE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP PROCEDURE
-
-<FunctionDescription description="Introduced or updated: v1.2.637"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.637.
 
 Deletes an existing stored procedure.
 

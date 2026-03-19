@@ -5,11 +5,9 @@ summary: Returns metadata about manifest files of an Iceberg table, including fi
 
 # ICEBERG_MANIFEST
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ICEBERG_MANIFEST
-
-<FunctionDescription description="Introduced or updated: v1.2.709"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.709.
 
 Returns metadata about manifest files of an Iceberg table, including file paths, partitioning details, and snapshot associations.
 

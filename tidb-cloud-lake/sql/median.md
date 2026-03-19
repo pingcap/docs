@@ -5,9 +5,7 @@ summary: The MEDIAN() function.
 
 # MEDIAN
 
-Aggregate function.
-
-The MEDIAN() function computes the median of a numeric data sequence.
+The `MEDIAN()` function computes the median of a numeric data sequence.
 
 > **Note:**
 >
@@ -54,6 +52,7 @@ FROM exam_scores;
 ```
 
 **Result**
+
 ```sql
 |  median_score  |
 |----------------|

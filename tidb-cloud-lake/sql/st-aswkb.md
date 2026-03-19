@@ -5,11 +5,9 @@ summary: Converts a GEOMETRY or GEOGRAPHY object into a WKB(well-known-binary) f
 
 # ST_ASWKB
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_ASWKB
-
-<FunctionDescription description="Introduced or updated: v1.2.436"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.436.
 
 Converts a GEOMETRY or GEOGRAPHY object into a [WKB(well-known-binary)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary) format representation.
 

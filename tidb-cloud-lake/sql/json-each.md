@@ -5,11 +5,9 @@ summary: Extracts key-value pairs from a JSON object, breaking down the structur
 
 # JSON_EACH
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## JSON_EACH
-
-<FunctionDescription description="Introduced or updated: v1.2.152"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.152.
 
 Extracts key-value pairs from a JSON object, breaking down the structure into individual rows in the result set. Each row represents a distinct key-value pair derived from the input JSON expression.
 

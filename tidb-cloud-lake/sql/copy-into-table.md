@@ -5,13 +5,9 @@ summary: COPY INTO allows you to load data from files located in one of the foll
 
 # COPY INTO <table>
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-## COPY INTO <table>
-
-<FunctionDescription description="Introduced or updated: v1.2.704"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.704.
 
 COPY INTO allows you to load data from files located in one of the following locations:
 
@@ -192,8 +188,9 @@ copyOptions ::=
 
 The `FILE_FORMAT` parameter supports different file types, each with specific formatting options. Below are the available options for each supported file format:
 
-<Tabs>
-<TabItem value="common" label="Common Options" default>
+<SimpleTab>
+
+<div label="Common Options" value="common">
 
 These options are available for all file formats:
 
@@ -201,9 +198,9 @@ These options are available for all file formats:
 |--------|-------------|--------|--------|
 | COMPRESSION | Compression algorithm for data files | AUTO, GZIP, BZ2, BROTLI, ZSTD, DEFLATE, RAW_DEFLATE, XZ, NONE | AUTO |
 
-</TabItem>
+</div>
 
-<TabItem value="csv" label="CSV">
+<div label="CSV" value="csv">
 
 | Option | Description | Default |
 |--------|-------------|--------|
@@ -218,18 +215,18 @@ These options are available for all file formats:
 | EMPTY_FIELD_AS | How to handle empty fields | null |
 | BINARY_FORMAT | Encoding format(HEX or BASE64) for binary data | HEX |
 
-</TabItem>
+</div>
 
-<TabItem value="tsv" label="TSV">
+<div label="TSV" value="tsv">
 
 | Option | Description | Default |
 |--------|-------------|--------|
 | RECORD_DELIMITER | Character(s) separating records | newline |
 | FIELD_DELIMITER | Character(s) separating fields | tab (\t) |
 
-</TabItem>
+</div>
 
-<TabItem value="ndjson" label="NDJSON">
+<div label="NDJSON" value="ndjson">
 
 | Option | Description | Default |
 |--------|-------------|--------|
@@ -237,32 +234,32 @@ These options are available for all file formats:
 | MISSING_FIELD_AS | How to handle missing fields | ERROR |
 | ALLOW_DUPLICATE_KEYS | Allow duplicate object keys | FALSE |
 
-</TabItem>
+</div>
 
-<TabItem value="parquet" label="PARQUET">
-
-| Option | Description | Default |
-|--------|-------------|--------|
-| MISSING_FIELD_AS | How to handle missing fields | ERROR |
-
-</TabItem>
-
-<TabItem value="orc" label="ORC">
+<div label="PARQUET" value="parquet">
 
 | Option | Description | Default |
 |--------|-------------|--------|
 | MISSING_FIELD_AS | How to handle missing fields | ERROR |
 
-</TabItem>
+</div>
 
-<TabItem value="avro" label="AVRO">
+<div label="ORC" value="orc">
 
 | Option | Description | Default |
 |--------|-------------|--------|
 | MISSING_FIELD_AS | How to handle missing fields | ERROR |
 
-</TabItem>
-</Tabs>
+</div>
+
+<div label="AVRO" value="avro">
+
+| Option | Description | Default |
+|--------|-------------|--------|
+| MISSING_FIELD_AS | How to handle missing fields | ERROR |
+
+</div>
+</SimpleTab>
 
 ## Copy Options
 
@@ -303,8 +300,9 @@ For external storage sources, it's recommended to use pre-created connections wi
 
 These examples showcase data loading into Databend from various types of stages:
 
-<Tabs>
-  <TabItem value="user" label="User Stage" default>
+<SimpleTab>
+
+<div label="User Stage" value="user">
 
 ```sql
 COPY INTO mytable
@@ -313,8 +311,9 @@ COPY INTO mytable
     FILE_FORMAT = (TYPE = PARQUET);
 ```
 
-  </TabItem>
-  <TabItem value="internal" label="Internal Stage">
+</div>
+
+<div label="Internal Stage" value="internal">
 
 ```sql
 COPY INTO mytable
@@ -323,8 +322,9 @@ COPY INTO mytable
     FILE_FORMAT = (TYPE = PARQUET);
 ```
 
-  </TabItem>
-  <TabItem value="external" label="External Stage">
+</div>
+
+<div label="External Stage" value="external">
 
 ```sql
 COPY INTO mytable
@@ -333,15 +333,16 @@ COPY INTO mytable
     FILE_FORMAT = (TYPE = PARQUET);
 ```
 
-  </TabItem>
-</Tabs>
+</div>
+</SimpleTab>
 
 ### Example 2: Loading from External Locations
 
 These examples showcase data loading into Databend from various types of external sources:
 
-<Tabs groupId="external-example">
-<TabItem value="Amazon S3" label="Amazon S3">
+<SimpleTab groupId="external-example">
+
+<div label="Amazon S3" value="Amazon S3">
 
 This example uses a pre-created connection to load data from Amazon S3:
 
@@ -386,9 +387,9 @@ COPY INTO mytable
     );
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Azure Blob Storage" label="Azure Blob Storage">
+<div label="Azure Blob Storage" value="Azure Blob Storage">
 
 This example connects to Azure Blob Storage and loads data from 'data.csv' into Databend:
 
@@ -407,9 +408,9 @@ COPY INTO mytable
     FILE_FORMAT = (type = CSV);
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Google Cloud Storage" label="Google Cloud Storage">
+<div label="Google Cloud Storage" value="Google Cloud Storage">
 
 This example connects to Google Cloud Storage and loads data:
 
@@ -431,9 +432,9 @@ COPY INTO mytable
     );
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="Remote Files" label="Remote Files">
+<div label="Remote Files" value="Remote Files">
 
 This example loads data from three remote CSV files and skips a file in case of errors.
 
@@ -444,9 +445,9 @@ COPY INTO mytable
     ON_ERROR = continue;
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="IPFS" label="IPFS">
+<div label="IPFS" value="IPFS">
 
 This example loads data from a CSV file on IPFS:
 
@@ -464,8 +465,8 @@ COPY INTO mytable
     );
 ```
 
-</TabItem>
-</Tabs>
+</div>
+</SimpleTab>
 
 ### Example 3: Loading Compressed Data
 

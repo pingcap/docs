@@ -5,11 +5,9 @@ summary: Provides information about the status of a specified stream, yielding a
 
 # STREAM_STATUS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## STREAM_STATUS
-
-<FunctionDescription description="Introduced or updated: v1.2.225"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.225.
 
 Provides information about the status of a specified stream, yielding a single-column result (`has_data`) that can take on values of `true` or `false`:
 

@@ -5,11 +5,9 @@ summary: INTERVAL represents a duration that can be written in natural-language 
 
 # Interval
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## Interval
-
-<FunctionDescription description="Introduced or updated: v1.2.677"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.677.
 
 ## Overview
 

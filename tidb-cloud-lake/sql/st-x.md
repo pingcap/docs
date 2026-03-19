@@ -5,11 +5,9 @@ summary: Returns the longitude (X coordinate) of a Point represented by a GEOMET
 
 # ST_X
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_X
-
-<FunctionDescription description="Introduced or updated: v1.2.458"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.458.
 
 Returns the longitude (X coordinate) of a Point represented by a GEOMETRY or GEOGRAPHY object.
 

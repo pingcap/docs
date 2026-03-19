@@ -5,11 +5,9 @@ summary: Suspends, resumes, or modifies settings of an existing warehouse.
 
 # ALTER WAREHOUSE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ALTER WAREHOUSE
-
-<FunctionDescription description="Introduced or updated: v1.2.687"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.687.
 
 Suspends, resumes, or modifies settings of an existing warehouse.
 

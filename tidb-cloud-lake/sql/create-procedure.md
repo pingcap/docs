@@ -5,11 +5,9 @@ summary: Defines a stored procedure that executes SQL operations and returns a r
 
 # CREATE PROCEDURE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE PROCEDURE
-
-<FunctionDescription description="Introduced or updated: v1.2.816"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.816.
 
 Defines a stored procedure that executes SQL operations and returns a result.
 

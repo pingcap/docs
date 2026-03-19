@@ -5,11 +5,9 @@ summary: Consumes data from a stream within a SELECT query.
 
 # WITH CONSUME
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## WITH CONSUME
-
-<FunctionDescription description="Introduced or updated: v1.2.469"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.469.
 
 Consumes data from a stream within a SELECT query.
 

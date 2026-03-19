@@ -5,11 +5,9 @@ summary: Returns the last value in the window frame.
 
 # LAST_VALUE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## LAST_VALUE
-
-<FunctionDescription description="Introduced or updated: v1.2.697"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.697.
 
 Returns the last value in the window frame.
 

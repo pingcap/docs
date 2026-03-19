@@ -5,11 +5,9 @@ summary: Retrieves the next value from a sequence.
 
 # NEXTVAL
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## NEXTVAL
-
-<FunctionDescription description="Introduced or updated: v1.2.784"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.784.
 
 Retrieves the next value from a sequence.
 

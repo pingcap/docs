@@ -5,12 +5,6 @@ summary: This page provides a comprehensive overview of Masking Policy operation
 
 # Masking Policy
 
-import EEFeature from '@site/src/components/EEFeature';
-
-## Masking Policy
-
-<EEFeature featureName='MASKING POLICY'/>
-
 This page provides a comprehensive overview of Masking Policy operations in Databend, organized by functionality for easy reference.
 
 ## Masking Policy Management

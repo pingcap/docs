@@ -5,11 +5,9 @@ summary: Returns the value that appears most frequently in a group of values.
 
 # MODE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MODE
-
-<FunctionDescription description="Introduced or updated: v1.2.647"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.647.
 
 Returns the value that appears most frequently in a group of values.
 

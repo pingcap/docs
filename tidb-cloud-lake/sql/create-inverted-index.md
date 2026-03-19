@@ -5,11 +5,9 @@ summary: Creates a new inverted index in Databend.
 
 # CREATE INVERTED INDEX
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE INVERTED INDEX
-
-<FunctionDescription description="Introduced or updated: v1.2.405"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.405.
 
 Creates a new inverted index in Databend.
 

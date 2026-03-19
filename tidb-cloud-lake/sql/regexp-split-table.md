@@ -5,11 +5,9 @@ summary: Splits a string using a regular expression pattern and returns each seg
 
 # REGEXP_SPLIT_TO_TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## REGEXP_SPLIT_TO_TABLE
-
-<FunctionDescription description="Introduced or updated: v1.2.754"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.754.
 
 Splits a string using a regular expression pattern and returns each segment as a table.
 

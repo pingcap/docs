@@ -5,11 +5,9 @@ summary: Returns the maximum value from a set of values, ignoring any NULL value
 
 # GREATEST_IGNORE_NULLS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## GREATEST_IGNORE_NULLS
-
-<FunctionDescription description="Introduced or updated: v1.2.738"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.738.
 
 Returns the maximum value from a set of values, ignoring any NULL values.
 

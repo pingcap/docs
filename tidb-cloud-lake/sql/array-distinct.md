@@ -5,11 +5,9 @@ summary: Removes duplicate elements from a JSON array and returns an array with 
 
 # ARRAY_DISTINCT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_DISTINCT
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Removes duplicate elements from a JSON array and returns an array with only distinct elements.
 

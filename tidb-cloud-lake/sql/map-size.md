@@ -5,11 +5,9 @@ summary: Returns the size of a MAP.
 
 # MAP_SIZE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MAP_SIZE
-
-<FunctionDescription description="Introduced or updated: v1.2.459"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.459.
 
 Returns the size of a MAP.
 

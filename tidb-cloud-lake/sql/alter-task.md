@@ -5,11 +5,9 @@ summary: The ALTER TASK statement is used to modify an existing task.
 
 # ALTER TASK
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ALTER TASK
-
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 The ALTER TASK statement is used to modify an existing task.
 

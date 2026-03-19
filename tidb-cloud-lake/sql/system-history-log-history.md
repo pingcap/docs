@@ -5,15 +5,9 @@ summary: Note This table contains raw log data that feeds into other specialized
 
 # system_history.log_history
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system_history.log_history
-
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='LOG HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **System operations audit trail** - Raw log repository from all Databend nodes and components. Foundation for operational intelligence:
 

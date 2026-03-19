@@ -5,11 +5,9 @@ summary: Returns the date of the upcoming specified day of the week after the gi
 
 # NEXT_DAY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## NEXT_DAY
-
-<FunctionDescription description="Introduced or updated: v1.2.655"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.655.
 
 Returns the date of the upcoming specified day of the week after the given date or timestamp.
 

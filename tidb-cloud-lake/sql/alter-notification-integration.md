@@ -5,11 +5,9 @@ summary: Alter the settings of a named notification integration that can be used
 
 # ALTER NOTIFICATION INTEGRATION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ALTER NOTIFICATION INTEGRATION
-
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 Alter the settings of a named notification integration that can be used to send notifications to external messaging services.
 

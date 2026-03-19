@@ -5,11 +5,9 @@ summary: Returns the values in a map.
 
 # MAP_VALUES
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MAP_VALUES
-
-<FunctionDescription description="Introduced or updated: v1.2.429"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.429.
 
 Returns the values in a map.
 

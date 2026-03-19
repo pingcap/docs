@@ -5,11 +5,9 @@ summary: Returns the value from a previous row in the result set.
 
 # LAG
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## LAG
-
-<FunctionDescription description="Introduced or updated: v1.2.45"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.45.
 
 Returns the value from a previous row in the result set.
 

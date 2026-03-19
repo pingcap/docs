@@ -5,15 +5,6 @@ summary: Databend's system history tables provide Data Governance capabilities b
 
 # System History Tables
 
-import EEFeature from '@site/src/components/EEFeature';
-import DetailsWrap from '@site/src/components/DetailsWrap';
-
-## System History Tables
-
-<EEFeature featureName='SYSTEM HISTORY'/>
-
-## System History Tables
-
 Databend's system history tables provide **Data Governance** capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
 
 ## Available Tables
@@ -59,7 +50,6 @@ GRANT ROLE audit_team TO USER compliance_officer;
 
 ### Self-Hosted Databend
 
-<DetailsWrap>
 <details open>
 <summary>📝 **Manual configuration required** - Click to expand configuration details</summary>
 
@@ -129,4 +119,4 @@ table_name = "access_history"
 > ⚠️ **Note:** When changing storage configuration, existing history tables will be dropped and recreated.
 
 </details>
-</DetailsWrap>
+

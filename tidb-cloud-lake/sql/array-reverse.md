@@ -5,11 +5,9 @@ summary: Reverses the order of elements in an array.
 
 # ARRAY_REVERSE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_REVERSE
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Reverses the order of elements in an array.
 

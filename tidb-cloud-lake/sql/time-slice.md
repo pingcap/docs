@@ -5,11 +5,9 @@ summary: TIME_SLICE is a scalar function used to map a single date/timestamp val
 
 # TIME_SLICE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TIME_SLICE
-
-<FunctionDescription description="Introduced or updated: v1.2.799"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.799.
 
 TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
 

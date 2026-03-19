@@ -5,11 +5,9 @@ summary: This page describes Arithmetic Operators in TiDB Cloud Lake.
 
 # Arithmetic Operators
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## Arithmetic Operators
-
-<FunctionDescription description="Introduced or updated: v1.2.53"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.53.
 
 | Operator              | Description                                               | Example                    | Result    |
 | --------------------- | --------------------------------------------------------- | -------------------------- | --------- |

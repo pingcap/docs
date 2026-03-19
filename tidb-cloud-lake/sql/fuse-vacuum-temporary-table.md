@@ -5,11 +5,9 @@ summary: Temporary tables are typically cleaned up automatically at session end 
 
 # FUSE_VACUUM_TEMPORARY_TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## FUSE_VACUUM_TEMPORARY_TABLE
-
-<FunctionDescription description="Introduced or updated: v1.2.666"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.666.
 
 ## Overview
 

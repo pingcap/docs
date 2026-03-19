@@ -5,11 +5,9 @@ summary: Returns the keys of the outermost JSON object as an array of strings.
 
 # OBJECT_KEYS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## OBJECT_KEYS
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Returns the keys of the outermost JSON object as an array of strings.
 

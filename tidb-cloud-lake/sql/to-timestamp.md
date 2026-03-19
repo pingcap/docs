@@ -5,11 +5,9 @@ summary: Converts an expression to a date with time.
 
 # TO_TIMESTAMP
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TO_TIMESTAMP
-
-<FunctionDescription description="Introduced or updated: v1.2.664"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.664.
 
 Converts an expression to a date with time.
 

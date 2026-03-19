@@ -5,11 +5,9 @@ summary: The DROP TASK statement is used to delete an existing task.
 
 # DROP TASK
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP TASK
-
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 The DROP TASK statement is used to delete an existing task.
 

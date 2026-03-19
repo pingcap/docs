@@ -5,11 +5,9 @@ summary: Converts a specified number of milliseconds into an Interval type.
 
 # TO_MILLISECONDS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TO_MILLISECONDS
-
-<FunctionDescription description="Introduced or updated: v1.2.677"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.677.
 
 Converts a specified number of milliseconds into an Interval type.
 

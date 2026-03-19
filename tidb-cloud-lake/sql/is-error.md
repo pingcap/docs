@@ -5,11 +5,9 @@ summary: Returns a Boolean value indicating whether an expression is an error va
 
 # IS_ERROR
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## IS_ERROR
-
-<FunctionDescription description="Introduced or updated: v1.2.379"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.379.
 
 Returns a Boolean value indicating whether an expression is an error value.
 

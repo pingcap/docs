@@ -5,11 +5,9 @@ summary: The AT clause enables you to retrieve previous versions of your data by
 
 # AT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## AT
-
-<FunctionDescription description="Introduced or updated: v1.2.410"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.410.
 
 The AT clause enables you to retrieve previous versions of your data by specifying a snapshot ID, timestamp, stream name, or a time interval.
 

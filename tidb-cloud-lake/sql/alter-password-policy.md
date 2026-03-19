@@ -5,11 +5,9 @@ summary: Modifies an existing password policy in Databend.
 
 # ALTER PASSWORD POLICY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ALTER PASSWORD POLICY
-
-<FunctionDescription description="Introduced or updated: v1.2.283"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.283.
 
 Modifies an existing password policy in Databend.
 

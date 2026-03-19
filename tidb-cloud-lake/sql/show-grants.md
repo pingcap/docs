@@ -5,11 +5,9 @@ summary: Lists privileges granted to roles, role assignments for users, or privi
 
 # SHOW GRANTS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW GRANTS
-
-<FunctionDescription description="Introduced or updated: v1.2.845"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.845.
 
 Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 

@@ -5,15 +5,9 @@ summary: The profiles field can be used to extract specific information. For exa
 
 # system_history.profile_history
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system_history.profile_history
-
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='PROFILE HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Query performance deep-dive analytics** - Detailed execution profiles and statistics for every SQL query. Essential for:
 

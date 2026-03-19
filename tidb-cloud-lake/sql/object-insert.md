@@ -5,11 +5,9 @@ summary: Inserts or updates a key-value pair in a JSON object.
 
 # OBJECT_INSERT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## OBJECT_INSERT
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Inserts or updates a key-value pair in a JSON object.
 

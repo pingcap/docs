@@ -5,11 +5,9 @@ summary: The age() function calculates the difference between two timestamps or 
 
 # AGE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## AGE
-
-<FunctionDescription description="Introduced or updated: v1.2.756"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.756.
 
 The age() function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
 

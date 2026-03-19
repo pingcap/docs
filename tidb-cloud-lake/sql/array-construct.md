@@ -5,11 +5,9 @@ summary: Creates a JSON array with specified values.
 
 # ARRAY_CONSTRUCT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_CONSTRUCT
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Creates a JSON array with specified values.
 

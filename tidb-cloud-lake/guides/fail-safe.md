@@ -5,13 +5,6 @@ summary: Fail-Safe refers to mechanisms aimed at recovering lost or accidentally
 
 # Fail-Safe
 
-import IndexOverviewList from '@site/src/components/IndexOverviewList';
-import EEFeature from '@site/src/components/EEFeature';
-
-## Fail-Safe
-
-<EEFeature featureName='FAIL-SAFE'/>
-
 Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage.
 
 - Storage Compatibility: Currently, Fail-Safe supports only S3-compatible storage types.

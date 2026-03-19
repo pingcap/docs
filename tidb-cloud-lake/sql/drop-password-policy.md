@@ -5,11 +5,9 @@ summary: Deletes an existing password policy from Databend. Please note that, be
 
 # DROP PASSWORD POLICY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP PASSWORD POLICY
-
-<FunctionDescription description="Introduced or updated: v1.2.283"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.283.
 
 Deletes an existing password policy from Databend. Please note that, before dropping a password policy, ensure that this policy is not associated with any users.
 

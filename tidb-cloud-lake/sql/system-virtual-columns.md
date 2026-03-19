@@ -5,11 +5,9 @@ summary: Contains information about the created virtual columns in the system.
 
 # system.virtual_columns
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system.virtual_columns
-
-<FunctionDescription description="Introduced or updated: v1.2.832"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.832.
 
 Contains information about the created virtual columns in the system.
 

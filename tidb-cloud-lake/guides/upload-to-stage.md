@@ -5,11 +5,6 @@ summary: Databend recommends two file upload methods for stages PRESIGN and PUT/
 
 # Uploading to Stage
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-## Uploading to Stage
-
 Databend recommends two file upload methods for stages: [PRESIGN](/tidb-cloud-lake/sql/presign.md) and PUT/GET commands. These methods enable direct data transfer between the client and your storage, eliminating intermediaries and resulting in cost savings by reducing traffic between Databend and your storage.
 
 ![Alt text](/media/tidb-cloud-lake/staging-file.png)
@@ -25,9 +20,9 @@ If you're using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to m
 
 The following examples demonstrate how to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with presigned URLs.
 
-<Tabs groupId="presign">
+<SimpleTab groupId="presign">
 
-<TabItem value="user" label="Upload to User Stage">
+<div label="Upload to User Stage" value="user">
 
 ```sql
 PRESIGN UPLOAD @~/books.parquet;
@@ -65,9 +60,9 @@ Result:
 └───────────────┴──────┴──────────────────────────────────────┴─────────────────────────────────┴─────────┘
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="internal" label="Upload to Internal Stage">
+<div label="Upload to Internal Stage" value="internal">
 
 ```sql
 CREATE STAGE my_internal_stage;
@@ -109,8 +104,9 @@ Result:
 └──────────────────────────────────┴───────┴──────────────────────────────────────┴─────────────────────────────────┴─────────┘
 ```
 
-</TabItem>
-<TabItem value="external" label="Upload to External Stage">
+</div>
+
+<div label="Upload to External Stage" value="external">
 
 ```sql
 CREATE STAGE my_external_stage
@@ -156,16 +152,16 @@ Result:
 └───────────────┴──────┴──────────────────────────────────────┴─────────────────────────────────┴─────────┘
 ```
 
-</TabItem>
-</Tabs>
+</div>
+</SimpleTab>
 
 ### Uploading with PUT Command
 
 The following examples demonstrate how to use BendSQL to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with the PUT command.
 
-<Tabs groupId="PUT">
+<SimpleTab groupId="PUT">
 
-<TabItem value="user" label="Upload to User Stage">
+<div label="Upload to User Stage" value="user">
 
 ```sql
 PUT fs:///Users/eric/Documents/books.parquet @~
@@ -197,9 +193,9 @@ Result:
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="internal" label="Upload to Internal Stage">
+<div label="Upload to Internal Stage" value="internal">
 
 ```sql
 CREATE STAGE my_internal_stage;
@@ -235,8 +231,9 @@ Result:
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-</TabItem>
-<TabItem value="external" label="Upload to External Stage">
+</div>
+
+<div label="Upload to External Stage" value="external">
 
 ```
 CREATE STAGE my_external_stage
@@ -278,8 +275,8 @@ Result:
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-</TabItem>
-</Tabs>
+</div>
+</SimpleTab>
 
 ### Uploading a Directory with PUT Command
 
@@ -305,9 +302,9 @@ Result:
 
 The following examples demonstrate how to use BendSQL to download a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) from the user stage, an internal stage, and an external stage with the GET command.
 
-<Tabs groupId="GET">
+<SimpleTab groupId="GET">
 
-<TabItem value="user" label="Download from User Stage">
+<div label="Download from User Stage" value="user">
 
 ```sql
 LIST @~;
@@ -337,9 +334,9 @@ Result:
 └─────────────────────────────────────────────────────────┘
 ```
 
-</TabItem>
+</div>
 
-<TabItem value="internal" label="Download from Internal Stage">
+<div label="Download from Internal Stage" value="internal">
 
 ```sql
 LIST @my_internal_stage;
@@ -369,8 +366,9 @@ Result:
 └─────────────────────────────────────────────────────────┘
 ```
 
-</TabItem>
-<TabItem value="external" label="Download from External Stage">
+</div>
+
+<div label="Download from External Stage" value="external">
 
 ```sql
 
@@ -402,5 +400,5 @@ Result:
 └─────────────────────────────────────────────────────────┘
 ```
 
-</TabItem>
-</Tabs>
+</div>
+</SimpleTab>

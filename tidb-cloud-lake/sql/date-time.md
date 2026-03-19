@@ -5,11 +5,9 @@ summary: Databend's Date and Time data type supports standardization and compati
 
 # Date & Time
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## Date & Time
-
-<FunctionDescription description="Introduced or updated: v1.2.834"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.834.
 
 ## Overview
 

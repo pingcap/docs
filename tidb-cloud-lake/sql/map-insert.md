@@ -5,11 +5,9 @@ summary: Returns a new MAP consisting of the input MAP with a new key-value pair
 
 # MAP_INSERT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MAP_INSERT
-
-<FunctionDescription description="Introduced or updated: v1.2.654"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.654.
 
 Returns a new MAP consisting of the input MAP with a new key-value pair inserted (an existing key updated with a new value).
 

@@ -5,11 +5,9 @@ summary: Parses a WKB(well-known-binary) or EWKB(extended well-known-binary) inp
 
 # ST_GEOGRAPHYFROMWKB
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_GEOGRAPHYFROMWKB
-
-<FunctionDescription description="Introduced or updated: v1.2.395"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.395.
 
 Parses a [WKB(well-known-binary)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary) or [EWKB(extended well-known-binary)](https://postgis.net/docs/ST_GeomFromEWKB.html) input and returns a value of type GEOGRAPHY.
 

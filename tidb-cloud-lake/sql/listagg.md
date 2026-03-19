@@ -5,11 +5,9 @@ summary: Concatenates values from multiple rows into a single string, separated 
 
 # LISTAGG
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## LISTAGG
-
-<FunctionDescription description="Introduced or updated: v1.2.725"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.725.
 
 Concatenates values from multiple rows into a single string, separated by a specified delimiter. This operation can be performed using two different function types:
 - Aggregate Function: The concatenation happens across all rows in the entire result set.

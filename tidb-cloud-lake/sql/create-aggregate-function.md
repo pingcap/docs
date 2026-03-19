@@ -5,11 +5,9 @@ summary: Creates a user-defined aggregate function (UDAF) that runs inside Datab
 
 # CREATE AGGREGATE FUNCTION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE AGGREGATE FUNCTION
-
-<FunctionDescription description="Introduced or updated: v1.2.799"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.799.
 
 Creates a user-defined aggregate function (UDAF) that runs inside Databend's JavaScript or Python runtime.
 

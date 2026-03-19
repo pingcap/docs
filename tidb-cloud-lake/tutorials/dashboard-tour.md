@@ -5,11 +5,6 @@ summary: In this tutorial, we'll load, analyze, and create a dashboard for a dat
 
 # TiDB Cloud Lake - Dashboard Tour
 
-import StepsWrap from '@site/src/components/StepsWrap';
-import StepContent from '@site/src/components/Steps/step-content';
-
-## TiDB Cloud Lake - Dashboard Tour
-
 In this tutorial, we'll load, analyze, and create a dashboard for a dataset named "Covid-19 Data from New York Times". The dataset comprises daily updated information on Covid-19 cases, deaths, and other pertinent statistics for the entire United States. It offers a comprehensive view of the pandemic's impact at the national, state, and county levels, providing detailed insights into the Covid-19 situation across various regions throughout the year 2022.
 
 | Field    | Description                                       |
@@ -25,10 +20,7 @@ In this tutorial, we'll load, analyze, and create a dashboard for a dataset name
 
 The dataset "Covid-19 Data from New York Times" is a built-in sample dataset that you can load with just a few clicks. The target table is created automatically, so you don't need to create it in advance.
 
-<StepsWrap>
-<StepContent number="1">
-
-### Loading Dataset
+## Step 1: Loading Dataset
 
 1. In Databend Cloud, click the **Load Data** button on the **Overview** page.
 2. On the page that opens, choose the **A new table** radio button, and then select **Covid-19 Data from New York Times.CSV** from the **Load sample data** dropdown menu:
@@ -41,11 +33,7 @@ The dataset "Covid-19 Data from New York Times" is a built-in sample dataset tha
 
 4. Click **Confirm**. Databend Cloud begins creating the target table and loading the dataset. This process may take a few seconds.
 
-</StepContent>
-
-<StepContent number="2">
-
-### Handling NULLs
+## Step 2: Handling NULLs
 
 Before the analytics work, it is recommended to check for NULL and duplicate values in the table, as they may impact the results.
 
@@ -66,11 +54,7 @@ DELETE FROM covid_19_us_2022_3812
 WHERE date IS NULL OR country IS NULL OR state IS NULL OR fips IS NULL OR cases IS NULL OR deaths IS NULL;
 ```
 
-</StepContent>
-
-<StepContent number="2">
-
-### Handling Duplicates
+## Step 3: Handling Duplicates
 
 1. In the same worksheet, check for duplicate values in the table with the following SQL statement:
 
@@ -83,17 +67,11 @@ HAVING COUNT(*) > 1;
 
 This SQL statement returns `0`, indicating there are no duplicate rows in the table, and the data is now ready for analytics.
 
-</StepContent>
-</StepsWrap>
-
 ### Step 2: Creating Charts with Query Results
 
 In this step, we'll run four queries to extract insights from the data and visualize the results through a scorecard, pie chart, bar chart, and line chart. **Please create a separate worksheet for each query**.
 
-<StepsWrap>
-<StepContent number="1">
-
-### US Total Deaths in 2022
+## Step 1: US Total Deaths in 2022
 
 1. Run the following SQL statement in a worksheet:
 
@@ -108,11 +86,7 @@ WHERE date = '2022-12-31';
 
 ![Alt text](/media/tidb-cloud-lake/dashboard-3.gif)
 
-</StepContent>
-
-<StepContent number="2">
-
-### Total Deaths by State in 2022
+## Step 2: Total Deaths by State in 2022
 
 1. Run the following SQL statement in a worksheet:
 
@@ -128,11 +102,7 @@ GROUP BY state;
 
 ![Alt text](/media/tidb-cloud-lake/dashboard-4.gif)
 
-</StepContent>
-
-<StepContent number="3">
-
-### Cases & Deaths in Virgin Islands
+## Step 3: Cases & Deaths in Virgin Islands
 
 1. Run the following SQL statement in a worksheet:
 
@@ -146,11 +116,7 @@ WHERE date = '2022-12-31' AND state = 'Virgin Islands';
 
 ![Alt text](/media/tidb-cloud-lake/dashboard-5.gif)
 
-</StepContent>
-
-<StepContent number="4">
-
-### Cumulative Cases & Deaths per Month in St. John
+## Step 4: Cumulative Cases & Deaths per Month in St. John
 
 1. Run the following SQL statement in a worksheet:
 
@@ -176,9 +142,6 @@ WHERE
 2. Create a line chart within the worksheet using the query result:
 
 ![Alt text](/media/tidb-cloud-lake/dashboard-6.gif)
-
-</StepContent>
-</StepsWrap>
 
 ### Step 3: Adding Charts to Dashboard
 

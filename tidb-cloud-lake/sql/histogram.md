@@ -5,11 +5,9 @@ summary: Generates a data distribution histogram using an "equal height" bucketi
 
 # HISTOGRAM
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## HISTOGRAM
-
-<FunctionDescription description="Introduced or updated: v1.2.377"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.377.
 
 Generates a data distribution histogram using an "equal height" bucketing strategy.
 

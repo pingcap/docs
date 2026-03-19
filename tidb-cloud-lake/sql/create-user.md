@@ -5,11 +5,9 @@ summary: Creates a SQL user for connecting to Databend. Users must be granted ap
 
 # CREATE USER
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE USER
-
-<FunctionDescription description="Introduced or updated: v1.2.703"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.703.
 
 Creates a SQL user for connecting to Databend. Users must be granted appropriate privileges to access databases and perform operations.
 

@@ -5,11 +5,9 @@ summary: Calculates the Euclidean (L2) distance between two vectors, measuring t
 
 # L2_DISTANCE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## L2_DISTANCE
-
-<FunctionDescription description="Introduced or updated: v1.2.777"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.777.
 
 Calculates the Euclidean (L2) distance between two vectors, measuring the straight-line distance between them in vector space.
 

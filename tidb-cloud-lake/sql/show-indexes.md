@@ -5,11 +5,9 @@ summary: Shows the created indexes. Equivalent to SELECT * FROM system.indexes.
 
 # SHOW INDEXES
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW INDEXES
-
-<FunctionDescription description="Introduced or updated: v1.2.190"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.190.
 
 Shows the created indexes. Equivalent to `SELECT * FROM system.indexes`.
 

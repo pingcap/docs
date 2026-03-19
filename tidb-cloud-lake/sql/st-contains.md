@@ -5,11 +5,9 @@ summary: Returns TRUE if the second GEOMETRY object is completely inside the fir
 
 # ST_CONTAINS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_CONTAINS
-
-<FunctionDescription description="Introduced or updated: v1.2.564"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.564.
 
 Returns TRUE if the second GEOMETRY object is completely inside the first GEOMETRY object.
 

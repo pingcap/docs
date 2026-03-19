@@ -5,11 +5,9 @@ summary: Re-clusters a table. For why and when to re-cluster a table, see Re-clu
 
 # RECLUSTER TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## RECLUSTER TABLE
-
-<FunctionDescription description="Introduced: v1.2.25"/>
+> **Note:**
+>
+> Introduced in v1.2.25.
 
 Re-clusters a table. For why and when to re-cluster a table, see [Re-clustering Table](/tidb-cloud-lake/sql/cluster-key.md#cluster-key-management).
 

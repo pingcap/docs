@@ -5,11 +5,9 @@ summary: Formats JSON data, making it more readable and presentable. It automati
 
 # JSON_PRETTY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## JSON_PRETTY
-
-<FunctionDescription description="Introduced or updated: v1.2.77"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.77.
 
 Formats JSON data, making it more readable and presentable. It automatically adds indentation, line breaks, and other formatting to the JSON data for better visual representation.
 

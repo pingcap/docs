@@ -5,11 +5,9 @@ summary: Modifies a user account, including.
 
 # ALTER USER
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ALTER USER
-
-<FunctionDescription description="Introduced or updated: v1.2.566"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.566.
 
 Modifies a user account, including:
 

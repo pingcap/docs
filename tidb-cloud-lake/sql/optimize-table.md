@@ -5,17 +5,11 @@ summary: Optimizing a table in Databend involves compacting or purging historica
 
 # OPTIMIZE TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## OPTIMIZE TABLE
-
-<FunctionDescription description="Introduced or updated: v1.2.395"/>
-
-import DetailsWrap from '@site/src/components/DetailsWrap';
+> **Note:**
+>
+> Introduced or updated in v1.2.395.
 
 Optimizing a table in Databend involves compacting or purging historical data to save storage space and enhance query performance.
-
-<DetailsWrap>
 
 <details>
   <summary>Why Optimize?</summary>
@@ -23,8 +17,6 @@ Optimizing a table in Databend involves compacting or purging historical data to
 
    <div>As a table accumulates more Parquet files over time, it can lead to performance issues and increased storage requirements. To optimize the table's performance, historical Parquet files can be deleted when they are no longer needed. This optimization can help to improve query performance and reduce the amount of storage space used by the table.</div>
 </details>
-
-</DetailsWrap>
 
 ## Databend Data Storage: Snapshot, Segment, and Block
 

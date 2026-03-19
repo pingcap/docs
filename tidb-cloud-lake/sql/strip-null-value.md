@@ -5,11 +5,9 @@ summary: Removes all properties with null values from a JSON object.
 
 # STRIP_NULL_VALUE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## STRIP_NULL_VALUE
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Removes all properties with null values from a JSON object.
 

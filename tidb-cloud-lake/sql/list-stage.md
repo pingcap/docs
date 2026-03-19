@@ -5,11 +5,9 @@ summary: Lists files in a stage. This allows you to filter files in a stage base
 
 # LIST_STAGE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## LIST_STAGE
-
-<FunctionDescription description="Introduced or updated: v1.2.32"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.32.
 
 Lists files in a stage. This allows you to filter files in a stage based on their extensions and obtain comprehensive details about each file. The function is similar to the DDL command [LIST STAGE FILES](/tidb-cloud-lake/sql/list-stage.md), but provides you the flexibility to retrieve specific file information with the SELECT statement, such as file name, size, MD5 hash, last modified timestamp, and creator, rather than all file information.
 

@@ -5,15 +5,9 @@ summary: Query the history for a specific query using its query_id.
 
 # system_history.query_history
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system_history.query_history
-
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='QUERY HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Complete SQL execution audit trail** - Records comprehensive details of all SQL queries executed in Databend. Each query generates two entries (start and finish), providing complete visibility into:
 

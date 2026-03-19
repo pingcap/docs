@@ -5,11 +5,9 @@ summary: Calculates the difference between two timestamps and returns the result
 
 # TIMESTAMP_DIFF
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TIMESTAMP_DIFF
-
-<FunctionDescription description="Introduced or updated: v1.2.690"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.690.
 
 Calculates the difference between two timestamps and returns the result as an INTERVAL.
 

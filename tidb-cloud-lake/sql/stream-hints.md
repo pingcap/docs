@@ -5,11 +5,9 @@ summary: Specifies various stream configuration options using hints to control h
 
 # WITH Stream Hints
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## WITH Stream Hints
-
-<FunctionDescription description="Introduced or updated: v1.2.670"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.670.
 
 Specifies various stream configuration options using hints to control how the stream is processed.
 

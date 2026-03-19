@@ -5,11 +5,9 @@ summary: Converts a specified number of months into an Interval type.
 
 # TO_MONTHS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TO_MONTHS
-
-<FunctionDescription description="Introduced or updated: v1.2.677"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.677.
 
 Converts a specified number of months into an Interval type.
 

@@ -5,11 +5,9 @@ summary: Converts a GEOMETRY or GEOGRAPHY object into a GeoJSON representation.
 
 # ST_ASGEOJSON
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_ASGEOJSON
-
-<FunctionDescription description="Introduced or updated: v1.2.427"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.427.
 
 Converts a GEOMETRY or GEOGRAPHY object into a [GeoJSON](https://geojson.org/) representation.
 

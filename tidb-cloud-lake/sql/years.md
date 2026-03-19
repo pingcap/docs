@@ -5,11 +5,9 @@ summary: Converts a specified number of years into an Interval type.
 
 # TO_YEARS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TO_YEARS
-
-<FunctionDescription description="Introduced or updated: v1.2.677"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.677.
 
 Converts a specified number of years into an Interval type.
 

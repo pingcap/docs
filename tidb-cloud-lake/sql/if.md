@@ -5,11 +5,9 @@ summary: If <cond1> is TRUE, it returns <expr1>. Otherwise if <cond2> is TRUE, i
 
 # IF
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## IF
-
-<FunctionDescription description="Introduced or updated: v1.2.738"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.738.
 
 If `<cond1>` is TRUE, it returns `<expr1>`. Otherwise if `<cond2>` is TRUE, it returns `<expr2>`, and so on.
 

@@ -5,11 +5,9 @@ summary: Displays detailed information about a specific SQL user, including auth
 
 # DESC USER
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DESC USER
-
-<FunctionDescription description="Introduced or updated: v1.2.644"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.644.
 
 Displays detailed information about a specific SQL user, including authentication type, roles, network policy, password policy, and other user-related settings.
 

@@ -5,11 +5,9 @@ summary: Updates rows in a table with new values, optionally using values from o
 
 # UPDATE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## UPDATE
-
-<FunctionDescription description="Introduced or updated: v1.2.705"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.705.
 
 Updates rows in a table with new values, optionally using values from other tables.
 

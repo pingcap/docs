@@ -5,11 +5,9 @@ summary: Inserts one or more rows into a table.
 
 # INSERT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## INSERT
-
-<FunctionDescription description="Introduced or updated: v1.2.738"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.738.
 
 Inserts one or more rows into a table.
 

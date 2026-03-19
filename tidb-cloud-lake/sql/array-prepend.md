@@ -5,11 +5,9 @@ summary: Prepends an element to the beginning of an array.
 
 # ARRAY_PREPEND
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_PREPEND
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Prepends an element to the beginning of an array.
 

@@ -5,11 +5,9 @@ summary: Converts values into a JSON array while skipping NULLs.
 
 # JSON_ARRAY_AGG
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## JSON_ARRAY_AGG
-
-<FunctionDescription description="Introduced or updated: v1.2.595"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.595.
 
 Converts values into a JSON array while skipping NULLs.
 

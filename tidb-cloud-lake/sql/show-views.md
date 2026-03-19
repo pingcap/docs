@@ -5,11 +5,9 @@ summary: Returns a list of view names within the specified database, or within t
 
 # SHOW VIEWS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW VIEWS
-
-<FunctionDescription description="Introduced or updated: v1.2.415"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.415.
 
 Returns a list of view names within the specified database, or within the current database if no database name is provided.
 

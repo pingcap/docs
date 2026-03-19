@@ -5,11 +5,9 @@ summary: Builds a Vector index for existing data that was inserted before the in
 
 # REFRESH VECTOR INDEX
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## REFRESH VECTOR INDEX
-
-<FunctionDescription description="Introduced or updated: v1.2.777"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.777.
 
 Builds a Vector index for existing data that was inserted before the index was created.
 

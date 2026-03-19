@@ -5,11 +5,9 @@ summary: Removes one or more rows from a table.
 
 # DELETE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DELETE
-
-<FunctionDescription description="Introduced or updated: v1.2.174"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.174.
 
 Removes one or more rows from a table.
 

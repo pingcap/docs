@@ -5,11 +5,9 @@ summary: Contains information about user-defined functions and external function
 
 # system.user_functions
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system.user_functions
-
-<FunctionDescription description="Introduced or updated: v1.2.315"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.315.
 
 Contains information about user-defined functions and external functions in the system.
 

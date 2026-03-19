@@ -5,15 +5,9 @@ summary: The fields base_objects_accessed, objects_modified, and object_modified
 
 # system_history.access_history
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## system_history.access_history
-
-<FunctionDescription description="Introduced or updated: v1.2.764"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='ACCESS HISTORY'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.764.
 
 **Data lineage and access control audit** - Tracks all database objects (tables, columns, stages) accessed or modified by queries. Essential for:
 

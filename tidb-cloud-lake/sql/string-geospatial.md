@@ -5,11 +5,9 @@ summary: Converts a GEOMETRY object into a String representation. The display fo
 
 # TO_STRING
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TO_STRING
-
-<FunctionDescription description="Introduced or updated: v1.2.330"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.330.
 
 Converts a GEOMETRY object into a String representation. The display format of the output data is controlled by the `geometry_output_format` setting, which contains the following types:
 

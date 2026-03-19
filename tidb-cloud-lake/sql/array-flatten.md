@@ -5,11 +5,9 @@ summary: Flattens a nested array into a single-dimensional array.
 
 # ARRAY_FLATTEN
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_FLATTEN
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Flattens a nested array into a single-dimensional array.
 

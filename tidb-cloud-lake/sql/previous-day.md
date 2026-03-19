@@ -5,11 +5,9 @@ summary: Returns the date of the most recent specified day of the week before th
 
 # PREVIOUS_DAY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## PREVIOUS_DAY
-
-<FunctionDescription description="Introduced or updated: v1.2.655"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.655.
 
 Returns the date of the most recent specified day of the week before the given date or timestamp.
 

@@ -5,11 +5,9 @@ summary: The SETTINGS clause configures specific settings that influence the exe
 
 # SETTINGS Clause
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SETTINGS Clause
-
-<FunctionDescription description="Introduced or updated: v1.2.652"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.652.
 
 The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 

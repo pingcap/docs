@@ -5,11 +5,9 @@ summary: Performs case-sensitive pattern matching using wildcard characters.
 
 # GLOB
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## GLOB
-
-<FunctionDescription description="Introduced or updated: v1.2.714"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.714.
 
 Performs case-sensitive pattern matching using wildcard characters:
 

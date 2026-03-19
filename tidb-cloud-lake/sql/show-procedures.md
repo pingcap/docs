@@ -5,11 +5,9 @@ summary: Returns a list of all stored procedures in the system.
 
 # SHOW PROCEDURES
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW PROCEDURES
-
-<FunctionDescription description="Introduced or updated: v1.2.637"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.637.
 
 Returns a list of all stored procedures in the system.
 

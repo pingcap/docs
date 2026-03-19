@@ -5,11 +5,9 @@ summary: Return the dimension for a geometry object. The dimension of a GEOMETRY
 
 # ST_DIMENSION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_DIMENSION
-
-<FunctionDescription description="Introduced or updated: v1.2.442"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.442.
 
 Return the dimension for a geometry object. The dimension of a GEOMETRY or GEOGRAPHY object is:
 

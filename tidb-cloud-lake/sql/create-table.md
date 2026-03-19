@@ -5,15 +5,9 @@ summary: Creating tables is one of the most complicated operations for many data
 
 # CREATE TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE TABLE
-
-<FunctionDescription description="Introduced or updated: v1.2.821"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='COMPUTED COLUMN'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.821.
 
 Creating tables is one of the most complicated operations for many databases because you might need to:
 
@@ -122,7 +116,9 @@ By default, **all columns are nullable(NULL)** in Databend. If you need a column
 
 ## Auto-Increment Columns
 
-<FunctionDescription description="Introduced or updated: v1.2.821"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.821.
 
 `AUTOINCREMENT` or `IDENTITY` can be used to create auto-incrementing columns that automatically generate sequential numeric values. This is particularly useful for creating unique identifiers.
 

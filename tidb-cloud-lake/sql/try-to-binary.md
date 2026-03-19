@@ -5,11 +5,9 @@ summary: An enhanced version of TO_BINARY that converts an input expression to a
 
 # TRY_TO_BINARY
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TRY_TO_BINARY
-
-<FunctionDescription description="Introduced or updated: v1.2.673"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.673.
 
 An enhanced version of [TO_BINARY](/tidb-cloud-lake/sql/binary.md) that converts an input expression to a binary value, returning `NULL` if the conversion fails instead of raising an error.
 

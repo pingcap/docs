@@ -5,11 +5,9 @@ summary: Creates a JSON object with keys and values.
 
 # OBJECT_CONSTRUCT_KEEP_NULL
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## OBJECT_CONSTRUCT_KEEP_NULL
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Creates a JSON object with keys and values.
 

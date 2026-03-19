@@ -5,11 +5,9 @@ summary: Checks if the input JSON value is a boolean.
 
 # IS_BOOLEAN
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## IS_BOOLEAN
-
-<FunctionDescription description="Introduced or updated: v1.2.368"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.368.
 
 Checks if the input JSON value is a boolean.
 

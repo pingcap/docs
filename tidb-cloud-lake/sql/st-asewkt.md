@@ -5,11 +5,9 @@ summary: Converts a GEOMETRY or GEOGRAPHY object into a EWKT(extended well-known
 
 # ST_ASEWKT
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ST_ASEWKT
-
-<FunctionDescription description="Introduced or updated: v1.2.436"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.436.
 
 Converts a GEOMETRY or GEOGRAPHY object into a [EWKT(extended well-known-text)](https://postgis.net/docs/ST_GeomFromEWKT.html) format representation.
 

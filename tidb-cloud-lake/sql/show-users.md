@@ -5,11 +5,9 @@ summary: Lists all SQL users in the system. If you're using Databend Cloud, this
 
 # SHOW USERS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW USERS
-
-<FunctionDescription description="Introduced or updated: v1.2.644"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.644.
 
 Lists all SQL users in the system. If you're using Databend Cloud, this command also shows the user accounts (email addresses) within your organization that are used to log in to Databend Cloud.
 

@@ -3,11 +3,6 @@ title: Superset
 summary: Superset is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geospatial charts.
 ---
 
-# Superset
-
-import StepsWrap from '@site/src/components/StepsWrap';
-import StepContent from '@site/src/components/Steps/step-content';
-
 ## Superset
 
 [Superset](https://superset.apache.org/) is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geospatial charts.
@@ -18,10 +13,7 @@ Databend integrates with Superset through two Python libraries: [databend-py](ht
 
 This tutorial guides you through the process of integrating Databend Cloud with Superset.
 
-<StepsWrap>
-<StepContent number="1">
-
-### Building Superset Image
+## Step 1: Building Superset Image
 
 These steps involve creating a customized Superset Docker image with Databend integration:
 
@@ -49,10 +41,7 @@ docker build -t superset-databend:v0.0.1 .
 docker run -d -p 8080:8088 -e "SUPERSET_SECRET_KEY=<your_secret_key>" --name superset --platform linux/x86_64 superset-databend:v0.0.1
 ```
 
-</StepContent>
-<StepContent number="2">
-
-### Setting Up Superset
+## Step 2: Setting Up Superset
 
 1. Create an administrator user.
 
@@ -77,10 +66,7 @@ docker exec -it superset superset db upgrade
 docker exec -it superset superset init
 ```
 
-</StepContent>
-<StepContent number="3">
-
-### Connecting to Databend Cloud
+## Step 3: Connecting to Databend Cloud
 
 1. Navigate to [http://localhost:8080/login/]( http://localhost:8080/login/) and use the credentials `admin/admin` for the username and password to log in.
 
@@ -97,6 +83,3 @@ docker exec -it superset superset init
 ![Alt text](/media/tidb-cloud-lake/superset-uri.png)
 
 5. Click **TEST CONNECTION**, which should result in a popup message saying, "Connection looks good!".
-
-</StepContent>
-</StepsWrap>

@@ -5,11 +5,9 @@ summary: Creates a temporary table that is automatically dropped at the end of t
 
 # CREATE TEMP TABLE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE TEMP TABLE
-
-<FunctionDescription description="Introduced or updated: v1.2.666"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.666.
 
 Creates a temporary table that is automatically dropped at the end of the session.
 

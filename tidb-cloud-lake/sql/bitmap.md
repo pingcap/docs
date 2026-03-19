@@ -5,11 +5,9 @@ summary: BITMAP stores membership information for unsigned 64-bit integers and s
 
 # Bitmap
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## Bitmap
-
-<FunctionDescription description="Introduced: v1.1.45"/>
+> **Note:**
+>
+> Introduced in v1.1.45.
 
 ## Overview
 

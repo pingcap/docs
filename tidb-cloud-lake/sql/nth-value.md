@@ -5,11 +5,9 @@ summary: Returns the value at the specified position (N) within the window frame
 
 # NTH_VALUE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## NTH_VALUE
-
-<FunctionDescription description="Introduced or updated: v1.2.697"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.697.
 
 Returns the value at the specified position (N) within the window frame.
 

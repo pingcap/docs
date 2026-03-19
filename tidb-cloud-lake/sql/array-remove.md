@@ -5,11 +5,9 @@ summary: Removes all occurrences of an element from an array.
 
 # ARRAY_REMOVE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## ARRAY_REMOVE
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Removes all occurrences of an element from an array.
 

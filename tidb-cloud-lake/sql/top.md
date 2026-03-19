@@ -5,11 +5,9 @@ summary: Limits the maximum number of rows returned by a query.
 
 # TOP
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## TOP
-
-<FunctionDescription description="Introduced or updated: v1.2.435"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.435.
 
 Limits the maximum number of rows returned by a query.
 

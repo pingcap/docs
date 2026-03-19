@@ -5,11 +5,9 @@ summary: Shows the status of the tables in a database. The status information in
 
 # SHOW TABLE STATUS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW TABLE STATUS
-
-<FunctionDescription description="Introduced or updated: v1.2.131"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.131.
 
 Shows the status of the tables in a database. The status information includes various physical sizes and timestamps about a table, see [Examples](#examples) for details.
 

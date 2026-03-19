@@ -5,11 +5,9 @@ summary: Creates a Vector index on a VECTOR column for a table to enable efficie
 
 # CREATE VECTOR INDEX
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE VECTOR INDEX
-
-<FunctionDescription description="Introduced or updated: v1.2.777"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.777.
 
 Creates a Vector index on a [VECTOR](/tidb-cloud-lake/sql/vector.md) column for a table to enable efficient similarity search using the HNSW (Hierarchical Navigable Small World) algorithm.
 

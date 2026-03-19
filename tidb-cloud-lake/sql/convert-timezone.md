@@ -5,11 +5,9 @@ summary: Converts a timestamp from one timezone to another and requires a valid 
 
 # CONVERT_TIMEZONE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CONVERT_TIMEZONE
-
-<FunctionDescription description="Introduced or updated: v1.2.680"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.680.
 
 `CONVERT_TIMEZONE()` converts a timestamp from the current session timezone (default `UTC`) to the timezone supplied in the first argument. The destination timezone must be a valid [IANA timezone name](https://docs.rs/chrono-tz/latest/chrono_tz/enum.Tz.html).
 

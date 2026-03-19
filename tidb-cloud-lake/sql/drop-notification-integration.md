@@ -5,11 +5,9 @@ summary: The DROP NOTIFICATION INTEGRATION statement is used to delete an existi
 
 # DROP NOTIFICATION INTEGRATION
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## DROP NOTIFICATION INTEGRATION
-
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 The DROP NOTIFICATION INTEGRATION statement is used to delete an existing notification.
 

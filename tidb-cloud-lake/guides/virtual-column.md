@@ -5,10 +5,6 @@ summary: Virtual columns automatically accelerate queries on semi-structured dat
 
 # Virtual Column
 
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='VIRTUAL COLUMN'/>
-
 Virtual columns automatically accelerate queries on semi-structured data stored in [VARIANT](/tidb-cloud-lake/sql/variant.md) columns. This feature provides **zero-configuration performance optimization** for JSON data access.
 
 ## What Problem Does It Solve?

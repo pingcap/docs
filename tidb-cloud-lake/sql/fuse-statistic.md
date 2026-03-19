@@ -5,11 +5,9 @@ summary: note This function is deprecated. Use SHOW STATISTICS instead to view t
 
 # FUSE_STATISTIC
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## FUSE_STATISTIC
-
-<FunctionDescription description="Introduced or updated: v1.2.587"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.587.
 
 > **Note:**
 >

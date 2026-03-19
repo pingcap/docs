@@ -5,11 +5,9 @@ summary: Applies a transformation to each value in a JSON object using a lambda 
 
 # MAP_TRANSFORM_VALUES
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MAP_TRANSFORM_VALUES
-
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Applies a transformation to each value in a JSON object using a [lambda expression](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 

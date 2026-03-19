@@ -5,11 +5,9 @@ summary: Returns the maximum value from a set of values. If any value in the set
 
 # GREATEST
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## GREATEST
-
-<FunctionDescription description="Introduced or updated: v1.2.738"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.738.
 
 Returns the maximum value from a set of values. If any value in the set is `NULL`, the function returns `NULL`.
 

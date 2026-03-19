@@ -5,11 +5,9 @@ summary: Create a database.
 
 # CREATE DATABASE
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## CREATE DATABASE
-
-<FunctionDescription description="Introduced or updated: v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.339.
 
 Create a database.
 

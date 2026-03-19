@@ -5,11 +5,9 @@ summary: Databend uses the Fuse Engine as its default storage engine, providing 
 
 # Fuse Engine Tables
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## Fuse Engine Tables
-
-<FunctionDescription description="Introduced or updated: v1.2.736"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.736.
 
 ## Overview
 

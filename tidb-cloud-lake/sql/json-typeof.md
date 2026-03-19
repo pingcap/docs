@@ -5,11 +5,9 @@ summary: Returns the type of the main-level of a JSON structure.
 
 # JSON_TYPEOF
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## JSON_TYPEOF
-
-<FunctionDescription description="Introduced or updated: v1.2.91"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.91.
 
 Returns the type of the main-level of a JSON structure.
 

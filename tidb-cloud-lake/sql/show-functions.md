@@ -5,11 +5,9 @@ summary: Lists the currently supported built-in scalar and aggregate functions.
 
 # SHOW FUNCTIONS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## SHOW FUNCTIONS
-
-<FunctionDescription description="Introduced or updated: v1.2.315"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.315.
 
 Lists the currently supported built-in scalar and aggregate functions.
 

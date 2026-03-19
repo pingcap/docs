@@ -5,11 +5,9 @@ summary: Returns the keys in a map.
 
 # MAP_KEYS
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-## MAP_KEYS
-
-<FunctionDescription description="Introduced or updated: v1.2.429"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.429.
 
 Returns the keys in a map.
 
