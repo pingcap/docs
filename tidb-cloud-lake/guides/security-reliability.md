@@ -1,11 +1,11 @@
 ---
 title: Security & Reliability
-summary: Databend offers enterprise-grade security and reliability features that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, Databend's multi-layered security approach helps you maintain data integrity, compliance, and business continuity.
+summary: {{{ .lake-short }}} offers enterprise-grade security and reliability features that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, {{{ .lake-short }}}'s multi-layered security approach helps you maintain data integrity, compliance, and business continuity.
 ---
 
 # Security & Reliability
 
-Databend offers **enterprise-grade security and reliability features** that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, Databend's **multi-layered security approach** helps you maintain data integrity, compliance, and business continuity.
+{{{ .lake-short }}} offers **enterprise-grade security and reliability features** that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, {{{ .lake-short }}}'s **multi-layered security approach** helps you maintain data integrity, compliance, and business continuity.
 
 | Security Feature | Purpose | When to Use |
 |-----------------|---------|------------|

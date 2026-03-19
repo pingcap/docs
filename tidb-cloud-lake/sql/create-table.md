@@ -15,7 +15,7 @@ Creating tables is one of the most complicated operations for many databases bec
 - Manually specify the indexes
 - And even specify the data partitions or data shard
 
-Databend aims to be easy to use by design and does NOT require any of those operations when you create a table. Moreover, the CREATE TABLE statement provides these options to make it much easier for you to create tables in various scenarios:
+{{{ .lake-short }}} aims to be easy to use by design and does NOT require any of those operations when you create a table. Moreover, the CREATE TABLE statement provides these options to make it much easier for you to create tables in various scenarios:
 
 - [CREATE TABLE](#create-table): Creates a table from scratch.
 - [CREATE TABLE ... LIKE](#create-table--like): Creates a table with the same column definitions as an existing one.
@@ -48,11 +48,11 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 > **Note:**
 >
-> - For available data types in Databend, see [Data Types](/tidb-cloud-lake/sql/data-types.md).
+> - For available data types in {{{ .lake-short }}}, see [Data Types](/tidb-cloud-lake/sql/data-types.md).
 >
-> - Databend suggests avoiding special characters as much as possible when naming columns. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: CREATE TABLE price(\`$CA\` int);
+> - {{{ .lake-short }}} suggests avoiding special characters as much as possible when naming columns. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: CREATE TABLE price(\`$CA\` int);
 >
-> - Databend will automatically convert column names into lowercase. For example, if you name a column as _Total_, it will appear as _total_ in the result.
+> - {{{ .lake-short }}} will automatically convert column names into lowercase. For example, if you name a column as _Total_, it will appear as _total_ in the result.
 
 ## CREATE TABLE ... LIKE
 
@@ -102,7 +102,7 @@ This command does not include any attributes (such as CLUSTER BY, TRANSIENT, and
 
 ## Column Nullable
 
-By default, **all columns are nullable(NULL)** in Databend. If you need a column that does not allow NULL values, use the NOT NULL constraint. For more information, see [NULL Values and NOT NULL Constraint](/tidb-cloud-lake/sql/data-types.md).
+By default, **all columns are nullable(NULL)** in {{{ .lake-short }}}. If you need a column that does not allow NULL values, use the NOT NULL constraint. For more information, see [NULL Values and NOT NULL Constraint](/tidb-cloud-lake/sql/data-types.md).
 
 ## Column Default Values
 
@@ -172,7 +172,7 @@ SELECT * FROM users;
 
 ## Computed Columns
 
-Computed columns are generated from other columns using scalar expressions. Databend supports two types:
+Computed columns are generated from other columns using scalar expressions. {{{ .lake-short }}} supports two types:
 
 - **STORED**: Values are physically stored and automatically updated when dependent columns change
 - **VIRTUAL**: Values are calculated on-the-fly during queries, saving storage space
@@ -210,7 +210,7 @@ CREATE TABLE employees (
 
 ## MySQL Compatibility
 
-Databend's syntax is difference from MySQL mainly in the data type and some specific index hints.
+{{{ .lake-short }}}'s syntax is difference from MySQL mainly in the data type and some specific index hints.
 
 ## Access control requirements
 

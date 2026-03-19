@@ -1,11 +1,11 @@
 ---
 title: Database
-summary: This page provides a comprehensive overview of database operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of database operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Database
 
-This page provides a comprehensive overview of database operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of database operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Database Creation & Management
 
@@ -27,4 +27,4 @@ This page provides a comprehensive overview of database operations in Databend, 
 
 > **Note:**
 >
-> Database operations are foundational for organizing your data in Databend. Make sure you have appropriate privileges before executing these commands.
+> Database operations are foundational for organizing your data in {{{ .lake-short }}}. Make sure you have appropriate privileges before executing these commands.

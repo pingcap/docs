@@ -1,11 +1,11 @@
 ---
 title: system.caches
-summary: An overview of various caches being managed in Databend.
+summary: An overview of various caches being managed in {{{ .lake-short }}}.
 ---
 
 # system.caches
 
-An overview of various caches being managed in Databend.
+An overview of various caches being managed in {{{ .lake-short }}}.
 
 The table below shows the cache name, the number of items in the cache, and the size of the cache:
 

@@ -13,7 +13,7 @@ summary: Searches indexed columns for keyword matches and can be used only in a 
 
 > **Note:**
 >
-> Databend's MATCH function is inspired by Elasticsearch's [MATCH](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-match).
+> {{{ .lake-short }}}'s MATCH function is inspired by Elasticsearch's [MATCH](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-match).
 
 ## Syntax
 

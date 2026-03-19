@@ -1,6 +1,6 @@
 ---
 title: VACUUM TEMPORARY FILES
-summary: Removes temporary files created by Databend, such as spill files.
+summary: Removes temporary files created by {{{ .lake-short }}}, such as spill files.
 ---
 
 # VACUUM TEMPORARY FILES
@@ -9,7 +9,7 @@ summary: Removes temporary files created by Databend, such as spill files.
 >
 > Introduced or updated in v1.2.348.
 
-Removes temporary files created by Databend, such as spill files.
+Removes temporary files created by {{{ .lake-short }}}, such as spill files.
 
 See also: [system.temp_files](/tidb-cloud-lake/sql/system-temp-files.md)
 

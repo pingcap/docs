@@ -47,7 +47,7 @@ CREATE [OR REPLACE] TABLE <table_name> (
 
 ## How Vector Index Works
 
-Vector indexes in Databend use the HNSW algorithm to build a multi-layered graph structure:
+Vector indexes in {{{ .lake-short }}} use the HNSW algorithm to build a multi-layered graph structure:
 
 1. **Graph Structure**: Each vector is a node with connections to its nearest neighbors
 2. **Search Process**: Queries navigate through graph layers, from coarse to fine, to find approximate nearest neighbors quickly

@@ -12,7 +12,7 @@ summary: This guide explains how to use an experimental Airbyte destination that
 ## What is [Airbyte](https://airbyte.com/)?
 
 - Airbyte is an open-source data integration platform that syncs data from applications, APIs & databases to data warehouses lakes & DBs.
-- You could load data from any airbyte source to Databend.
+- You could load data from any airbyte source to {{{ .lake-short }}}.
 
 Currently we implemented an experimental airbyte destination allow you to send data from your airbyte source to databend
 
@@ -30,9 +30,9 @@ PRESIGN UPLOAD @airbyte_stage/test.csv;
 
 If you got an error like `Code: 501, Text = Presign is not supported`, then you could not use the integration.
 
-## Create a Databend User
+## Create a {{{ .lake-short }}} User
 
-Connect to Databend server with MySQL client:
+Connect to {{{ .lake-short }}} server with MySQL client:
 
 ```shell
 mysql -h127.0.0.1 -uroot -P3307
@@ -60,7 +60,7 @@ GRANT ROLE airbyte_role TO user1;
 
 ## Configure Airbyte
 
-To use Databend with Airbyte, you should add our customized connector to your Airbyte Instance.
+To use {{{ .lake-short }}} with Airbyte, you should add our customized connector to your Airbyte Instance.
 You could add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page.
 Our custom destination image is `datafuselabs/destination-databend:alpha`
 
@@ -68,7 +68,7 @@ Our custom destination image is `datafuselabs/destination-databend:alpha`
 <img alt="Configure Airbyte" src="/media/tidb-cloud-lake/integration-airbyte-plugins.png"/>
 </p>
 
-## Setup Databend destination
+## Setup {{{ .lake-short }}} destination
 
 **Note**:
 
@@ -77,7 +77,7 @@ For local airbyte, you could not connect docker compose with your localhost netw
 You may take a look at [ngrok](https://ngrok.com/) to tunnel your service(**NEVER** expose it on your production environment).
 
 <p align="center">
-<img alt="Setup Databend destination" src="/media/tidb-cloud-lake/integration-airbyte-destinations.png"/>
+<img alt="Setup {{{ .lake-short }}} destination" src="/media/tidb-cloud-lake/integration-airbyte-destinations.png"/>
 </p>
 
 ## Test your integration

@@ -1,13 +1,13 @@
 ---
 title: Data Purge and Recycle
-summary: In Databend, data is not immediately deleted when you run DROP, TRUNCATE, or DELETE commands. This enables Databend's time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
+summary: In {{{ .lake-short }}}, data is not immediately deleted when you run DROP, TRUNCATE, or DELETE commands. This enables {{{ .lake-short }}}'s time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
 ---
 
 # Data Purge and Recycle
 
 ## Overview
 
-In Databend, data is not immediately deleted when you run `DROP`, `TRUNCATE`, or `DELETE` commands. This enables Databend's time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
+In {{{ .lake-short }}}, data is not immediately deleted when you run `DROP`, `TRUNCATE`, or `DELETE` commands. This enables {{{ .lake-short }}}'s time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
 
 ```
 Before DELETE:                After DELETE:                 After VACUUM:
@@ -23,7 +23,7 @@ Before DELETE:                After DELETE:                 After VACUUM:
 
 ## VACUUM Commands and Cleanup Scope
 
-Databend provides three VACUUM commands with **different cleanup scopes**. Understanding what each command cleans is crucial for data management.
+{{{ .lake-short }}} provides three VACUUM commands with **different cleanup scopes**. Understanding what each command cleans is crucial for data management.
 
 ```
 VACUUM DROP TABLE
@@ -51,7 +51,7 @@ VACUUM TEMPORARY FILES
 
 ## Using VACUUM Commands
 
-The VACUUM command family is the primary method for cleaning data in Databend.
+The VACUUM command family is the primary method for cleaning data in {{{ .lake-short }}}.
 
 ### VACUUM DROP TABLE
 
@@ -116,11 +116,11 @@ Removes temporary spill files created during query execution.
 VACUUM TEMPORARY FILES;
 ```
 
-> **Note**: Rarely needed during normal operation since Databend automatically handles cleanup. Manual cleanup is typically only required when Databend crashes during query execution.
+> **Note**: Rarely needed during normal operation since {{{ .lake-short }}} automatically handles cleanup. Manual cleanup is typically only required when {{{ .lake-short }}} crashes during query execution.
 
 ## Adjusting Data Retention Time
 
-The VACUUM commands remove data files older than the `DATA_RETENTION_TIME_IN_DAYS` setting. By default, Databend retains historical data for 1 day (24 hours). You can adjust this setting:
+The VACUUM commands remove data files older than the `DATA_RETENTION_TIME_IN_DAYS` setting. By default, {{{ .lake-short }}} retains historical data for 1 day (24 hours). You can adjust this setting:
 
 ```sql
 -- Change retention period to 2 days
@@ -132,6 +132,6 @@ SHOW SETTINGS LIKE 'DATA_RETENTION_TIME_IN_DAYS';
 
 | Edition                                  | Default Retention | Maximum Retention |
 | ---------------------------------------- | ----------------- | ---------------- |
-| Databend Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
-| Databend Cloud (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
-| Databend Cloud (Business)                | 1 day (24 hours)  | 90 days          |
+| {{{ .lake-short }}} Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
+| {{{ .lake }}} (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
+| {{{ .lake }}} (Business)                | 1 day (24 hours)  | 90 days          |

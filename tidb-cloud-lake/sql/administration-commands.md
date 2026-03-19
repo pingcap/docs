@@ -1,11 +1,11 @@
 ---
 title: Administration Commands
-summary: This page provides reference information for the system administration commands in Databend.
+summary: This page provides reference information for the system administration commands in {{{ .lake-short }}}.
 ---
 
 # Administration Commands
 
-This page provides reference information for the system administration commands in Databend.
+This page provides reference information for the system administration commands in {{{ .lake-short }}}.
 
 ## System Monitoring
 

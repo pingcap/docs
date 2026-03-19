@@ -10,7 +10,7 @@ Removes files from a stage.
 See also:
 
 - [LIST STAGE FILES](/tidb-cloud-lake/sql/list-stage-files.md): Lists files in a stage.
-- [PRESIGN](/tidb-cloud-lake/sql/presign.md): Databend recommends using the Presigned URL method to upload files to the stage.
+- [PRESIGN](/tidb-cloud-lake/sql/presign.md): {{{ .lake-short }}} recommends using the Presigned URL method to upload files to the stage.
 
 ## Syntax
 

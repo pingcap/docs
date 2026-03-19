@@ -1,11 +1,11 @@
 ---
 title: SQL Statements Overview
-summary: These topics provide reference information for various SQL commands in Databend.
+summary: These topics provide reference information for various SQL commands in {{{ .lake-short }}}.
 ---
 
 # SQL Statements Overview
 
-These topics provide reference information for various SQL commands in Databend.
+These topics provide reference information for various SQL commands in {{{ .lake-short }}}.
 
 ## Command Categories
 

@@ -1,6 +1,6 @@
 ---
 title: CREATE NETWORK POLICY
-summary: Creates a new network policy in Databend.
+summary: Creates a new network policy in {{{ .lake-short }}}.
 ---
 
 # CREATE NETWORK POLICY
@@ -9,7 +9,7 @@ summary: Creates a new network policy in Databend.
 >
 > Introduced or updated in v1.2.341.
 
-Creates a new network policy in Databend.
+Creates a new network policy in {{{ .lake-short }}}.
 
 ## Syntax
 

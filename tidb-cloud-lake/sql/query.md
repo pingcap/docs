@@ -13,7 +13,7 @@ summary: Filters rows with a Lucene-style query against columns that have an inv
 
 > **Note:**
 >
-> Databend's QUERY function is inspired by Elasticsearch's [QUERY](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-query).
+> {{{ .lake-short }}}'s QUERY function is inspired by Elasticsearch's [QUERY](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-query).
 
 ## Syntax
 
@@ -38,7 +38,7 @@ QUERY('<query_expr>'[, '<options>'])
 
 ### Nested `VARIANT` Fields
 
-Use dot notation to address inner fields inside a `VARIANT` column. Databend evaluates the path across objects and arrays.
+Use dot notation to address inner fields inside a `VARIANT` column. {{{ .lake-short }}} evaluates the path across objects and arrays.
 
 | Pattern | Description | Example |
 |---------|-------------|---------|

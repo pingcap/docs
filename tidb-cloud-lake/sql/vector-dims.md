@@ -36,7 +36,7 @@ The `VECTOR_DIMS` function returns the dimensionality of a vector, which is the 
 
 > **Note:**
 >
-> This function performs vector computations within Databend and does not rely on external APIs.
+> This function performs vector computations within {{{ .lake-short }}} and does not rely on external APIs.
 
 ## Examples
 

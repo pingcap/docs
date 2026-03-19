@@ -1,11 +1,11 @@
 ---
 title: Task
-summary: This page provides a comprehensive overview of task operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of task operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Task
 
-This page provides a comprehensive overview of task operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of task operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Task Management
 
@@ -26,4 +26,4 @@ This page provides a comprehensive overview of task operations in Databend, orga
 
 > **Note:**
 >
-> Tasks in Databend allow you to schedule and automate SQL commands for execution at specified intervals.
+> Tasks in {{{ .lake-short }}} allow you to schedule and automate SQL commands for execution at specified intervals.

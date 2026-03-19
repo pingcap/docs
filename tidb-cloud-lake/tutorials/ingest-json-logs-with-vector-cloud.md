@@ -1,11 +1,11 @@
 ---
 title: Ingest JSON Logs with Vector (Cloud)
-summary: In this tutorial, we'll simulate generating logs locally, collect them using Vector, store them in S3, and automate their ingestion into Databend Cloud using scheduled tasks.
+summary: In this tutorial, we'll simulate generating logs locally, collect them using Vector, store them in S3, and automate their ingestion into {{{ .lake }}} using scheduled tasks.
 ---
 
 # Ingest JSON Logs with Vector (Cloud)
 
-In this tutorial, we'll simulate generating logs locally, collect them using [Vector](https://vector.dev/), store them in S3, and automate their ingestion into Databend Cloud using scheduled tasks.
+In this tutorial, we'll simulate generating logs locally, collect them using [Vector](https://vector.dev/), store them in S3, and automate their ingestion into {{{ .lake }}} using scheduled tasks.
 
 ![Automating JSON Log Loading with Vector](/media/tidb-cloud-lake/vector-tutorial.png)
 
@@ -113,7 +113,7 @@ Compared to the original log, the synced log is in NDJSON format, with each reco
 {"log":{"event":"purchase","timestamp":"2024-12-08T10:05:00Z","user_id":2}}
 ```
 
-## Step 4: Create a Task in Databend Cloud
+## Step 4: Create a Task in {{{ .lake }}}
 
 1. Open a worksheet, and create an external stage that links to the `logs` folder in your bucket:
 

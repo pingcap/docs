@@ -1,6 +1,6 @@
 ---
 title: CREATE INVERTED INDEX
-summary: Creates a new inverted index in Databend.
+summary: Creates a new inverted index in {{{ .lake-short }}}.
 ---
 
 # CREATE INVERTED INDEX
@@ -9,7 +9,7 @@ summary: Creates a new inverted index in Databend.
 >
 > Introduced or updated in v1.2.405.
 
-Creates a new inverted index in Databend.
+Creates a new inverted index in {{{ .lake-short }}}.
 
 ## Syntax
 

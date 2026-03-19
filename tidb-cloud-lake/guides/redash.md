@@ -7,15 +7,15 @@ summary: Redash is designed to enable anyone, regardless of the level of technic
 
 [Redash](https://redash.io/) is designed to enable anyone, regardless of the level of technical sophistication, to harness the power of data big and small. SQL users leverage Redash to explore, query, visualize, and share data from any data sources. Their work in turn enables anybody in their organization to use the data. Every day, millions of users at thousands of organizations around the world use Redash to develop insights and make data-driven decisions.
 
-Both Databend and Databend Cloud can integrate with Redash as a data source. The following tutorials guide you through deploying and integrating Redash.
+Both {{{ .lake-short }}} and {{{ .lake }}} can integrate with Redash as a data source. The following tutorials guide you through deploying and integrating Redash.
 
-## Tutorial-1: Integrating Databend with Redash
+## Tutorial-1: Integrating {{{ .lake-short }}} with Redash
 
-In this tutorial, you'll deploy a local Databend and install Redash with Docker. Before you start, ensure that you have Docker installed.
+In this tutorial, you'll deploy a local {{{ .lake-short }}} and install Redash with Docker. Before you start, ensure that you have Docker installed.
 
-### Step 1. Deploy Databend
+### Step 1. Deploy {{{ .lake-short }}}
 
-Deploy a local Databend.
+Deploy a local {{{ .lake-short }}}.
 
 ### Step 2. Deploy Redash
 
@@ -65,7 +65,7 @@ The steps below describe how to deploy Redash with Docker.
 docker-compose up
 ```
 
-### Step 3. Add Databend as a Data Source
+### Step 3. Add {{{ .lake-short }}} as a Data Source
 
 1. Sign up for Redash by completing the initial process at <http://localhost:5000> in your web browser.
 
@@ -73,13 +73,13 @@ docker-compose up
 
     ![Alt text](/media/tidb-cloud-lake/integration-redash-select.png)
 
-3. Configure your Databend data source.
+3. Configure your {{{ .lake-short }}} data source.
 
-   - Username: `root`. No password is required if you log into a local instance of Databend with `root`.
+   - Username: `root`. No password is required if you log into a local instance of {{{ .lake-short }}} with `root`.
    - Host: `host.docker.internal`
    - Port: `8000`
    - Database: `default`
-   - Secure: Enable this option if you enabled HTTPS on your Databend server.
+   - Secure: Enable this option if you enabled HTTPS on your {{{ .lake-short }}} server.
 
     ![Alt text](/media/tidb-cloud-lake/redash-cfg-local.png)
 
@@ -87,13 +87,13 @@ docker-compose up
 
 You're all set! You can now write a query and add your visualizations. For more information, refer to the Redash Getting Started guide: <https://redash.io/help/user-guide/getting-started#2-Write-A-Query>
 
-## Tutorial-2: Integrating Databend Cloud with Redash
+## Tutorial-2: Integrating {{{ .lake }}} with Redash
 
 In this tutorial, you'll install Redash with Docker. Before you start, ensure that you have Docker installed.
 
 ### Step 1. Obtain Connection Information
 
-Obtain the connection information from Databend Cloud. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ### Step 2. Deploy Redash
 
@@ -143,7 +143,7 @@ The steps below describe how to deploy Redash with Docker.
 docker-compose up
 ```
 
-### Step 3. Add Databend Cloud as a Data Source
+### Step 3. Add {{{ .lake }}} as a Data Source
 
 1. Sign up for Redash by completing the initial process at <http://localhost:5000> in your web browser.
 
@@ -151,11 +151,11 @@ docker-compose up
 
     ![Alt text](/media/tidb-cloud-lake/bi-redash-select.png)
 
-3. Configure your Databend data source.
+3. Configure your {{{ .lake-short }}} data source.
 
    - Username: `cloudapp`.
-   - Password: Copy and paste your password generated in Databend Cloud.
-   - Host: Copy and paste your host address generated in Databend Cloud.
+   - Password: Copy and paste your password generated in {{{ .lake }}}.
+   - Host: Copy and paste your host address generated in {{{ .lake }}}.
    - Port: `443`
    - Database: `default`
    - Secure: Enable this option.

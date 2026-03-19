@@ -108,7 +108,7 @@ GRANT OWNERSHIP ON MASKING POLICY <policy_name> TO ROLE '<role_name>'
 - `CREATE MASKING POLICY` allows a role to create new masking policies.
 - `APPLY MASKING POLICY` lets grantees attach, detach, describe, or drop any masking policy when combined with the appropriate `ALTER TABLE` or policy commands.
 - `GRANT APPLY ON MASKING POLICY ...` authorizes the grantee to manage a specific masking policy without granting global access.
-- OWNERSHIP provides full control over the masking policy; Databend automatically grants OWNERSHIP on a new policy to the creator role and revokes it when the policy is dropped.
+- OWNERSHIP provides full control over the masking policy; {{{ .lake-short }}} automatically grants OWNERSHIP on a new policy to the creator role and revokes it when the policy is dropped.
 
 ### Granting Row Access Policy Privileges
 

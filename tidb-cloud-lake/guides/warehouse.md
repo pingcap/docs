@@ -5,7 +5,7 @@ summary: The warehouse is an essential component of TiDB Cloud Lake. A warehouse
 
 # Warehouses
 
-The warehouse is an essential component of Databend Cloud. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks such as:
+The warehouse is an essential component of {{{ .lake }}}. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks such as:
 
 - Querying data with the SELECT statement
 - Modifying data with the INSERT, UPDATE, or DELETE statement
@@ -15,7 +15,7 @@ Running a warehouse incurs expenses. For more information, see [Warehouse Pricin
 
 ## Warehouse Sizes
 
-In Databend Cloud, warehouses are available in various sizes, each defined by the maximum number of concurrent queries it can handle. When creating a warehouse, you can choose from the following sizes:
+In {{{ .lake }}}, warehouses are available in various sizes, each defined by the maximum number of concurrent queries it can handle. When creating a warehouse, you can choose from the following sizes:
 
 | Size                  | Recommended Use Cases                                                                                                                            |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -27,7 +27,7 @@ In Databend Cloud, warehouses are available in various sizes, each defined by th
 | nXLarge               | n=2,3,4,5,6 [Contace Us](https://www.databend.com/contact-us/)                                                                                  |
 | Multi-Cluster Scaling | Automatically scales out and scales in to match your workload, providing the most cost-efficient way to improve concurrency based on your needs. |
 
-To choose the appropriate warehouse size, Databend recommends starting with a smaller size. Smaller warehouses may take longer to execute SQL tasks compared to medium or large ones. If you find that query execution is taking too long (for example, several minutes), consider scaling up to a medium or large warehouse for faster results.
+To choose the appropriate warehouse size, {{{ .lake-short }}} recommends starting with a smaller size. Smaller warehouses may take longer to execute SQL tasks compared to medium or large ones. If you find that query execution is taking too long (for example, several minutes), consider scaling up to a medium or large warehouse for faster results.
 
 ## Managing Warehouses {#managing}
 
@@ -88,7 +88,7 @@ To effectively manage your warehouses and ensure optimal performance and cost-ef
 
 ## Warehouse Access Control
 
-Databend Cloud allows you to manage warehouse access with role-based controls by assigning a specific role to a warehouse, so only users with that role can access the warehouse.
+{{{ .lake }}} allows you to manage warehouse access with role-based controls by assigning a specific role to a warehouse, so only users with that role can access the warehouse.
 
 > **Note:**
 >
@@ -98,9 +98,9 @@ To assign a role to a warehouse, select the desired role in the **Advanced Optio
 
 ![alt text](/media/tidb-cloud-lake/warehouse-role.png)
 
-- The two [Built-in Roles](/tidb-cloud-lake/guides/roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about Databend roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
+- The two [Built-in Roles](/tidb-cloud-lake/guides/roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about {{{ .lake-short }}} roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
 - Warehouses without an assigned role default to the `public` role, allowing access to all users.
-- You can grant a role to a user (Databend Cloud login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](/tidb-cloud-lake/guides/organization-members.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
+- You can grant a role to a user ({{{ .lake }}} login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](/tidb-cloud-lake/guides/organization-members.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
 
   ```sql title='Examples:'
   GRANT ROLE manager to 'name@example.com';
@@ -112,7 +112,7 @@ A multi-cluster warehouse automatically adjusts compute resources by adding or r
 
 > **Note:**
 >
-> Multi-Cluster is only available for Databend Cloud users on the Business and Dedicated plans.
+> Multi-Cluster is only available for {{{ .lake }}} users on the Business and Dedicated plans.
 
 ### How it Works
 
@@ -136,11 +136,11 @@ For example, for an XSmall Warehouse priced at $1 per hour, if one cluster is ac
 
 ## Connecting to a Warehouse {#connecting}
 
-Connecting to a warehouse provides the compute resources required to run queries and analyze data within Databend Cloud. This connection is necessary when accessing Databend Cloud from your applications or SQL clients.
+Connecting to a warehouse provides the compute resources required to run queries and analyze data within {{{ .lake }}}. This connection is necessary when accessing {{{ .lake }}} from your applications or SQL clients.
 
 ### Connection Methods
 
-Databend Cloud supports multiple connection methods to meet your specific needs.
+{{{ .lake }}} supports multiple connection methods to meet your specific needs.
 
 #### SQL Clients & Tools
 
@@ -165,13 +165,13 @@ To obtain the connection information for a warehouse:
 
 1. Click **Connect** on the **Overview** page.
 2. Select the database and warehouse you wish to connect to. The connection information will update based on your selection.
-3. The connection details include a SQL user named `cloudapp` with a randomly generated password. Databend Cloud does not store this password. Be sure to copy and save it securely. If you forget the password, click **Reset** to generate a new one.
+3. The connection details include a SQL user named `cloudapp` with a randomly generated password. {{{ .lake }}} does not store this password. Be sure to copy and save it securely. If you forget the password, click **Reset** to generate a new one.
 
 ![alt text](/media/tidb-cloud-lake/databend_cloud_dsn.gif)
 
 ### Connection String Format
 
-Databend Cloud automatically generates your connection string when you click **Connect**:
+{{{ .lake }}} automatically generates your connection string when you click **Connect**:
 
 ```
 databend://<username>:<password>@<tenant>.gw.<region>.default.databend.com:443/<database>?warehouse=<warehouse_name>
@@ -203,4 +203,4 @@ For more details, see [CREATE USER](/tidb-cloud-lake/sql/create-user.md) and [GR
 
 ### Connection Security
 
-All connections to Databend Cloud warehouses use TLS encryption by default. For enterprise users requiring additional security, [AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) is available to establish private connections between your VPC and Databend Cloud.
+All connections to {{{ .lake }}} warehouses use TLS encryption by default. For enterprise users requiring additional security, [AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) is available to establish private connections between your VPC and {{{ .lake }}}.

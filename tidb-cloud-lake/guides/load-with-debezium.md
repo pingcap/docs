@@ -7,7 +7,7 @@ summary: Debezium is a set of distributed services to capture changes in your da
 
 [Debezium](https://debezium.io/) is a set of distributed services to capture changes in your databases so that your applications can see those changes and respond to them. Debezium records all row-level changes within each database table in a change event stream, and applications simply read these streams to see the change events in the same order in which they occurred.
 
-[debezium-server-databend](https://github.com/databendcloud/debezium-server-databend) is a lightweight CDC tool developed by Databend, based on Debezium Engine. Its purpose is to capture real-time changes in relational databases and deliver them as event streams to ultimately write the data into the target database Databend. This tool provides a simple way to monitor and capture database changes, transforming them into consumable events without the need for large data infrastructures like Flink, Kafka, or Spark.
+[debezium-server-databend](https://github.com/databendcloud/debezium-server-databend) is a lightweight CDC tool developed by {{{ .lake-short }}}, based on Debezium Engine. Its purpose is to capture real-time changes in relational databases and deliver them as event streams to ultimately write the data into the target database {{{ .lake-short }}}. This tool provides a simple way to monitor and capture database changes, transforming them into consumable events without the need for large data infrastructures like Flink, Kafka, or Spark.
 
 ## Installing debezium-server-databend
 
@@ -63,7 +63,7 @@ bash run.sh
 
 Before you start, make sure Docker and Docker Compose are installed on your system.
 
-1. Create a file named _application.properties_ in the _conf_ folder with the content in the sample [here](https://github.com/databendcloud/debezium-server-databend/blob/main/debezium-server-databend-dist/src/main/resources/distro/conf/application.properties.example), and modify the configurations according to your specific requirements. For description of the available Databend parameters, see this [page](https://github.com/databendcloud/debezium-server-databend/blob/main/docs/docs.md).
+1. Create a file named _application.properties_ in the _conf_ folder with the content in the sample [here](https://github.com/databendcloud/debezium-server-databend/blob/main/debezium-server-databend-dist/src/main/resources/distro/conf/application.properties.example), and modify the configurations according to your specific requirements. For description of the available {{{ .lake-short }}} parameters, see this [page](https://github.com/databendcloud/debezium-server-databend/blob/main/docs/docs.md).
 
     ```bash
     nano conf/application.properties

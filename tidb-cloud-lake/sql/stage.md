@@ -1,11 +1,11 @@
 ---
 title: Stage
-summary: This page provides a comprehensive overview of stage operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of stage operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Stage
 
-This page provides a comprehensive overview of stage operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of stage operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Stage Management
 
@@ -37,4 +37,4 @@ This page provides a comprehensive overview of stage operations in Databend, org
 
 > **Note:**
 >
-> Stages in Databend are used as temporary storage locations for data files that you want to load into tables or unload from tables.
+> Stages in {{{ .lake-short }}} are used as temporary storage locations for data files that you want to load into tables or unload from tables.

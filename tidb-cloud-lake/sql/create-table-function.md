@@ -32,7 +32,7 @@ Where:
 
 ## Unified Function Syntax
 
-Databend uses a unified `$$` syntax for both scalar and table functions:
+{{{ .lake-short }}} uses a unified `$$` syntax for both scalar and table functions:
 
 | Function Type | Returns | Usage |
 |---------------|---------|-------|

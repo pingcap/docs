@@ -5,7 +5,7 @@ summary: TiDB Cloud Lake provides monitoring functionality to help you gain a co
 
 # Monitoring Usage
 
-Databend Cloud provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the **Monitor** page, click **Monitor** in the sidebar menu on the homepage. The page includes the following tabs:
+{{{ .lake }}} provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the **Monitor** page, click **Monitor** in the sidebar menu on the homepage. The page includes the following tabs:
 
 - [Metrics](#metrics)
 - [SQL History](#sql-history)
@@ -27,7 +27,7 @@ The **Metrics** tab presents charts that visually illustrate usage statistics fo
 
 The **SQL History** tab displays a list of SQL statements that have been executed by all users within your organization. By clicking **Filter** at the top of the list, you can filter records by multiple dimensions.
 
-Clicking a record on the **SQL History** page reveals detailed information on how Databend Cloud executed the SQL statement, providing access to the following tabs:
+Clicking a record on the **SQL History** page reveals detailed information on how {{{ .lake }}} executed the SQL statement, providing access to the following tabs:
 
 - **Query Details**: Includes Query State (success or failure), Rows Scanned, Warehouse, Bytes Scanned, Start Time, End Time, and Handler Type.
 - **Query Profile**: Illustrates how the SQL statement was executed.

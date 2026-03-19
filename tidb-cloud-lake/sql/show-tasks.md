@@ -11,7 +11,7 @@ summary: Lists the tasks that are visible to the current role.
 
 Lists the tasks that are visible to the current role.
 
-**NOTICE:** This command works out of the box only in Databend Cloud. For self-hosted deployments, configure Cloud Control to query tasks.
+**NOTICE:** This command works out of the box only in {{{ .lake }}}. For self-hosted deployments, configure Cloud Control to query tasks.
 
 ## Syntax
 

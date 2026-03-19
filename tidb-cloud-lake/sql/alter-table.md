@@ -305,7 +305,7 @@ When working with external tables, AWS IAM roles provide significant security ad
 - Automatic rotation: Handles credential rotation automatically
 - Fine-grained control: Allows for more precise access control
 
-To use IAM roles with Databend Cloud, see [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md).
+To use IAM roles with {{{ .lake }}}, see [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md).
 
 ### Examples
 

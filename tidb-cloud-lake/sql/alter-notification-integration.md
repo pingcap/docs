@@ -11,7 +11,7 @@ summary: Alter the settings of a named notification integration that can be used
 
 Alter the settings of a named notification integration that can be used to send notifications to external messaging services.
 
-**NOTICE:** this functionality works out of the box only in Databend Cloud.
+**NOTICE:** this functionality works out of the box only in {{{ .lake }}}.
 
 ## Syntax
 

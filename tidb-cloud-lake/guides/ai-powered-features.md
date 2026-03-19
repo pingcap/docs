@@ -5,7 +5,7 @@ summary: With the inclusion of AI-powered features, TiDB Cloud Lake allows you t
 
 # AI-Powered Features
 
-With the inclusion of AI-powered features, Databend Cloud allows you to engage in natural language conversations to receive help, assistance, and solutions. These AI-powered features are enabled by default, but you can disable them if desired by navigating to **Manage** > **Settings**.
+With the inclusion of AI-powered features, {{{ .lake }}} allows you to engage in natural language conversations to receive help, assistance, and solutions. These AI-powered features are enabled by default, but you can disable them if desired by navigating to **Manage** > **Settings**.
 
 ## AI Chat for Assistance
 

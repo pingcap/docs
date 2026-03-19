@@ -1,6 +1,6 @@
 ---
 title: ATTACH TABLE
-summary: ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private Databend deployment to Databend Cloud.
+summary: ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private {{{ .lake-short }}} deployment to {{{ .lake }}}.
 ---
 
 # ATTACH TABLE
@@ -9,7 +9,7 @@ summary: ATTACH TABLE creates a read-only link to existing table data without co
 >
 > Introduced or updated in v1.2.698.
 
-ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private Databend deployment to [Databend Cloud](https://www.databend.com).
+ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private {{{ .lake-short }}} deployment to [{{{ .lake }}}](https://www.databend.com).
 
 ## Key Features
 
@@ -70,7 +70,7 @@ SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'employees');
 
 ### Key Advantages
 
-| Traditional Approach | Databend ATTACH TABLE |
+| Traditional Approach | {{{ .lake-short }}} ATTACH TABLE |
 |---------------------|----------------------|
 | Multiple data copies | Single copy shared by all |
 | ETL delays, sync issues | Real-time, always current |

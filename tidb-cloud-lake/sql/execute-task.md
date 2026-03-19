@@ -11,7 +11,7 @@ summary: The EXECUTE TASK statement is used to execute an existing task manually
 
 The EXECUTE TASK statement is used to execute an existing task manually
 
-**NOTICE:** this functionality works out of the box only in Databend Cloud.
+**NOTICE:** this functionality works out of the box only in {{{ .lake }}}.
 
 ## Syntax
 

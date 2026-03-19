@@ -1,11 +1,11 @@
 ---
 title: Ingest Kafka with Bend Ingest
-summary: In this tutorial, we'll guide you through setting up a Kafka environment using Docker and loading messages from Kafka into Databend Cloud with bend-ingest-kafka.
+summary: In this tutorial, we'll guide you through setting up a Kafka environment using Docker and loading messages from Kafka into {{{ .lake }}} with bend-ingest-kafka.
 ---
 
 # Ingest Kafka with Bend Ingest
 
-In this tutorial, we'll guide you through setting up a Kafka environment using Docker and loading messages from Kafka into Databend Cloud with [bend-ingest-kafka](https://github.com/databendcloud/bend-ingest-kafka).
+In this tutorial, we'll guide you through setting up a Kafka environment using Docker and loading messages from Kafka into {{{ .lake }}} with [bend-ingest-kafka](https://github.com/databendcloud/bend-ingest-kafka).
 
 ## Step 1: Setting up Kafka Environment
 
@@ -63,9 +63,9 @@ Status: Downloaded newer image for apache/kafka:latest
 
 5. Stop the producer with Ctrl+C once done.
 
-### Step 3: Create Table in Databend Cloud
+### Step 3: Create Table in {{{ .lake }}}
 
-Create the target table in Databend Cloud:
+Create the target table in {{{ .lake }}}:
 
 ```sql
 CREATE DATABASE doc;
@@ -85,7 +85,7 @@ CREATE    TABLE databend_topic (
     go install  github.com/databendcloud/bend-ingest-kafka@latest
     ```
 
-2. Run the following command to ingest messages from the `test-topic` Kafka topic into the target table in Databend Cloud:
+2. Run the following command to ingest messages from the `test-topic` Kafka topic into the target table in {{{ .lake }}}:
 
     ```shell
     MacBook-Air:~ eric$ bend-ingest-kafka \
@@ -99,7 +99,7 @@ CREATE    TABLE databend_topic (
     2024/08/20 15:10:15 ingest 2 rows (1.225576 rows/s), 75 bytes (45.959100 bytes/s)
     ```
 
-3. Connect to Databend Cloud using BendSQL and verify that the data has been successfully loaded:
+3. Connect to {{{ .lake }}} using BendSQL and verify that the data has been successfully loaded:
 
     ```bash
     Welcome to BendSQL 0.19.2-1e338e1(2024-07-17T09:02:28.323121000Z).

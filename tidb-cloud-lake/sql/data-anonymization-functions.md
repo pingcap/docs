@@ -15,9 +15,9 @@ Effective anonymization strategies typically target specific categories of sensi
 * **Indirect Identifiers (Quasi-Identifiers)**: Attributes that can identify individuals when combined with other data sources, such as dates of birth, gender, zip codes, or job titles.
 * **Sensitive Business Data**: Confidential information like financial transactions, salary details, or proprietary internal records that need protection in non-production environments.
 
-### Databend Anonymization Techniques
+### {{{ .lake-short }}} Anonymization Techniques
 
-Databend provides a set of functions to implement various anonymization techniques, including data masking, pseudonymization, and synthetic data generation:
+{{{ .lake-short }}} provides a set of functions to implement various anonymization techniques, including data masking, pseudonymization, and synthetic data generation:
 
 - **Data Masking**: Use the [`OBFUSCATE` table function](/tidb-cloud-lake/sql/obfuscate.md) to automatically apply masking rules to columns, replacing original values with artificial ones that appear genuine.
 - **Pseudonymization**: Use [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md) to replace identifiers with deterministic substitutes. This preserves data integrity and cardinality, making it suitable for maintaining join keys.

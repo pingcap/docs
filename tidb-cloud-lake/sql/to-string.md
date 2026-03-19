@@ -1,6 +1,6 @@
 ---
 title: TO_STRING
-summary: Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see Formatting Date and Time.
+summary: Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in {{{ .lake-short }}}, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see Formatting Date and Time.
 ---
 
 # TO_STRING
@@ -9,7 +9,7 @@ summary: Converts a value to String data type, or converts a Date value to a spe
 >
 > Introduced or updated in v1.2.745.
 
-Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in Databend, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
+Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in {{{ .lake-short }}}, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
 
 ## Syntax
 
@@ -21,7 +21,7 @@ TO_STRING( '<date>', '<format>' )
 
 ## Date Format Styles
 
-Databend supports two date format styles that can be selected using the `date_format_style` setting:
+{{{ .lake-short }}} supports two date format styles that can be selected using the `date_format_style` setting:
 
 - **MySQL** (default): Uses MySQL-compatible format specifiers like `%Y`, `%m`, `%d`, etc.
 - **Oracle**: Uses format specifiers like `YYYY`, `MM`, `DD`, etc., which follow a standardized format commonly used in many database systems.

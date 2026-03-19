@@ -1,11 +1,11 @@
 ---
 title: AI & ML Integration
-summary: Databend enables powerful AI and ML capabilities through two complementary approaches build custom AI functions with your own infrastructure, or create conversational data experiences using natural language.
+summary: {{{ .lake-short }}} enables powerful AI and ML capabilities through two complementary approaches build custom AI functions with your own infrastructure, or create conversational data experiences using natural language.
 ---
 
 # AI & ML Integration
 
-Databend enables powerful AI and ML capabilities through two complementary approaches: build custom AI functions with your own infrastructure, or create conversational data experiences using natural language.
+{{{ .lake-short }}} enables powerful AI and ML capabilities through two complementary approaches: build custom AI functions with your own infrastructure, or create conversational data experiences using natural language.
 
 ## External Functions - The Recommended Approach
 
@@ -21,7 +21,7 @@ External functions enable you to connect your data with custom AI/ML infrastruct
 
 ## MCP Server - Natural Language Data Interaction
 
-The Model Context Protocol (MCP) server enables AI assistants to interact with your Databend database using natural language, perfect for building conversational BI tools.
+The Model Context Protocol (MCP) server enables AI assistants to interact with your {{{ .lake-short }}} database using natural language, perfect for building conversational BI tools.
 
 | Feature | Benefits |
 |---------|----------|
@@ -35,4 +35,4 @@ The Model Context Protocol (MCP) server enables AI assistants to interact with y
 
 **[MCP Server Guide](/tidb-cloud-lake/guides/mcp-server.md)** - Build a conversational BI tool using mcp-databend and natural language queries
 
-**[MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)** - Configure generic MCP clients (like Codex) to connect to Databend
+**[MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)** - Configure generic MCP clients (like Codex) to connect to {{{ .lake-short }}}

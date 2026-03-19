@@ -1,6 +1,6 @@
 ---
 title: DESC MASKING POLICY
-summary: Displays detailed information about a specific masking policy in Databend.
+summary: Displays detailed information about a specific masking policy in {{{ .lake-short }}}.
 ---
 
 # DESC MASKING POLICY
@@ -9,7 +9,7 @@ summary: Displays detailed information about a specific masking policy in Databe
 >
 > Introduced or updated in v1.2.845.
 
-Displays detailed information about a specific masking policy in Databend.
+Displays detailed information about a specific masking policy in {{{ .lake-short }}}.
 
 ## Syntax
 

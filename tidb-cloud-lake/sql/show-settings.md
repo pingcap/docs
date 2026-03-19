@@ -1,6 +1,6 @@
 ---
 title: SHOW SETTINGS
-summary: Databend provides a variety of system settings that enable you to control how Databend works. This command displays the current and default values, as well as the Setting Levels, of available system settings. To update a setting, use the SET or UNSET command.
+summary: {{{ .lake-short }}} provides a variety of system settings that enable you to control how {{{ .lake-short }}} works. This command displays the current and default values, as well as the Setting Levels, of available system settings. To update a setting, use the SET or UNSET command.
 ---
 
 # SHOW SETTINGS
@@ -9,12 +9,12 @@ summary: Databend provides a variety of system settings that enable you to contr
 >
 > Introduced or updated in v1.2.314.
 
-Databend provides a variety of system settings that enable you to control how Databend works. This command displays the current and default values, as well as the [Setting Levels](#setting-levels), of available system settings. To update a setting, use the [SET](/tidb-cloud-lake/sql/set.md) or [UNSET](/tidb-cloud-lake/sql/unset.md) command.
+{{{ .lake-short }}} provides a variety of system settings that enable you to control how {{{ .lake-short }}} works. This command displays the current and default values, as well as the [Setting Levels](#setting-levels), of available system settings. To update a setting, use the [SET](/tidb-cloud-lake/sql/set.md) or [UNSET](/tidb-cloud-lake/sql/unset.md) command.
 
-- Some Databend behaviors cannot be changed through the system settings; you must take them into consideration while working with Databend. For example,
-    - Databend encodes strings to the UTF-8 charset.
-    - Databend uses a 1-based numbering convention for arrays.
-- Databend stores the system settings in the system table [system.settings](/tidb-cloud-lake/sql/system-settings.md).
+- Some {{{ .lake-short }}} behaviors cannot be changed through the system settings; you must take them into consideration while working with {{{ .lake-short }}}. For example,
+    - {{{ .lake-short }}} encodes strings to the UTF-8 charset.
+    - {{{ .lake-short }}} uses a 1-based numbering convention for arrays.
+- {{{ .lake-short }}} stores the system settings in the system table [system.settings](/tidb-cloud-lake/sql/system-settings.md).
 
 ## Syntax
 
@@ -24,7 +24,7 @@ SHOW SETTINGS [LIKE '<pattern>' | WHERE <expr>] | [LIMIT <limit>]
 
 ## Setting Levels
 
-Each Databend setting comes with a level that can be Global, Default, or Session. This table illustrates the distinctions between each level:
+Each {{{ .lake-short }}} setting comes with a level that can be Global, Default, or Session. This table illustrates the distinctions between each level:
 
 |   Level    |   Description                                                                                                                                                                                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -36,7 +36,7 @@ Each Databend setting comes with a level that can be Global, Default, or Session
 
 > **Note:**
 >
-> As Databend updates the system settings every now and then, this example may not show the most recent results. To view the latest system settings in Databend, please execute `SHOW SETTINGS;` within your Databend instance.
+> As {{{ .lake-short }}} updates the system settings every now and then, this example may not show the most recent results. To view the latest system settings in {{{ .lake-short }}}, please execute `SHOW SETTINGS;` within your {{{ .lake-short }}} instance.
 
 ```sql
 SHOW SETTINGS LIMIT 5;

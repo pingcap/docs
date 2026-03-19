@@ -34,7 +34,7 @@ SELECT
     [IGNORE_RESULT]
 ```
 
-- The SELECT statement also allows you to query staged files directly. For syntax and examples, see [Efficient Data Transformation with Databend](/tidb-cloud-lake/sql/stage.md).
+- The SELECT statement also allows you to query staged files directly. For syntax and examples, see [Efficient Data Transformation with {{{ .lake-short }}}](/tidb-cloud-lake/sql/stage.md).
 
 - In the examples on this page, the table `numbers(N)` is used for testing, with a single UInt64 column (named `number`) that contains integers from 0 to N-1.
 
@@ -42,11 +42,11 @@ SELECT
 
 ### AS Keyword
 
-In Databend, you can use the AS keyword to assign an alias to a column. This allows you to provide a more descriptive and easily understandable name for the column in both the SQL statement and the query result:
+In {{{ .lake-short }}}, you can use the AS keyword to assign an alias to a column. This allows you to provide a more descriptive and easily understandable name for the column in both the SQL statement and the query result:
 
-- Databend suggests avoiding special characters as much as possible when creating column aliases. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: SELECT price AS \`$CA\` FROM ...
+- {{{ .lake-short }}} suggests avoiding special characters as much as possible when creating column aliases. However, if special characters are necessary in some cases, the alias should be enclosed in backticks, like this: SELECT price AS \`$CA\` FROM ...
 
-- Databend will automatically convert aliases into lowercase. For example, if you alias a column as *Total*, it will appear as *total* in the result. If the capitalization matters to you, enclose the alias in backticks: \`Total\`.
+- {{{ .lake-short }}} will automatically convert aliases into lowercase. For example, if you alias a column as *Total*, it will appear as *total* in the result. If the capitalization matters to you, enclose the alias in backticks: \`Total\`.
 
 ```sql
 SELECT number AS Total FROM numbers(3);
@@ -231,7 +231,7 @@ This example returns all columns from my_table:
 SELECT * FROM my_table;
 ```
 
-Databend extends SQL syntax by allowing queries to start with `FROM <table>` without explicitly using `SELECT *`:
+{{{ .lake-short }}} extends SQL syntax by allowing queries to start with `FROM <table>` without explicitly using `SELECT *`:
 
 ```sql
 FROM my_table;
@@ -464,7 +464,7 @@ SELECT number FROM numbers(100000) ORDER BY number LIMIT 2 OFFSET 10;
 +--------+
 ```
 
-For optimizing query performance with large result sets, Databend has enabled the lazy_read_threshold option by default with a default value of 1,000. This option is specifically designed for queries that involve a LIMIT clause. When the lazy_read_threshold is enabled, the optimization is activated for queries where the specified LIMIT number is smaller than or equal to the threshold value you set. To disable the option, set it to 0.
+For optimizing query performance with large result sets, {{{ .lake-short }}} has enabled the lazy_read_threshold option by default with a default value of 1,000. This option is specifically designed for queries that involve a LIMIT clause. When the lazy_read_threshold is enabled, the optimization is activated for queries where the specified LIMIT number is smaller than or equal to the threshold value you set. To disable the option, set it to 0.
 
 <details>
   <summary>How it works</summary>

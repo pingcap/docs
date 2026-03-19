@@ -77,7 +77,7 @@ CREATE CONNECTION <connection_name>
 
 | Parameter | Description |
 |-----------|-------------|
-| ROLE_ARN  | The Amazon Resource Name (ARN) of the IAM role that Databend will assume to access your S3 resources. |
+| ROLE_ARN  | The Amazon Resource Name (ARN) of the IAM role that {{{ .lake-short }}} will assume to access your S3 resources. |
 
 </div>
 </SimpleTab>
@@ -176,7 +176,7 @@ CREATE STAGE my_s3_stage
 
 ### Using AWS IAM Role
 
-This example creates a connection to Amazon S3 using an IAM role and then creates a stage that uses this connection. This approach is more secure as it doesn't require storing access keys in Databend.
+This example creates a connection to Amazon S3 using an IAM role and then creates a stage that uses this connection. This approach is more secure as it doesn't require storing access keys in {{{ .lake-short }}}.
 
 ```sql
 CREATE CONNECTION databend_test
@@ -193,4 +193,4 @@ SELECT * FROM @databend_test/test.parquet LIMIT 1;
 
 > **Note:**
 >
-> To use IAM roles with Databend Cloud, you need to set up a trust relationship between your AWS account and Databend Cloud. See [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) for detailed instructions.
+> To use IAM roles with {{{ .lake }}}, you need to set up a trust relationship between your AWS account and {{{ .lake }}}. See [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) for detailed instructions.

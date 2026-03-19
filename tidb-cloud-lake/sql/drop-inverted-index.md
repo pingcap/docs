@@ -1,6 +1,6 @@
 ---
 title: DROP INVERTED INDEX
-summary: Removes an inverted index in Databend.
+summary: Removes an inverted index in {{{ .lake-short }}}.
 ---
 
 # DROP INVERTED INDEX
@@ -9,7 +9,7 @@ summary: Removes an inverted index in Databend.
 >
 > Introduced or updated in v1.2.405.
 
-Removes an inverted index in Databend.
+Removes an inverted index in {{{ .lake-short }}}.
 
 ## Syntax
 

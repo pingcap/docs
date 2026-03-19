@@ -1,13 +1,13 @@
 ---
 title: Privileges
-summary: A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within Databend. For example, when querying a table, a user needs SELECT privileges to the table. Similarly, to read a dataset within a stage, the user must possess READ privileges.
+summary: A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within {{{ .lake-short }}}. For example, when querying a table, a user needs SELECT privileges to the table. Similarly, to read a dataset within a stage, the user must possess READ privileges.
 ---
 
 # Privileges
 
-A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within Databend. For example, when querying a table, a user needs `SELECT` privileges to the table. Similarly, to read a dataset within a stage, the user must possess `READ` privileges.
+A privilege is a permission to perform an action. Users must have specific privileges to execute particular actions within {{{ .lake-short }}}. For example, when querying a table, a user needs `SELECT` privileges to the table. Similarly, to read a dataset within a stage, the user must possess `READ` privileges.
 
-In Databend, privileges are granted to roles. Users receive privileges through the roles assigned to them.
+In {{{ .lake-short }}}, privileges are granted to roles. Users receive privileges through the roles assigned to them.
 
 ![Alt text](/media/tidb-cloud-lake/access-control-2.png)
 
@@ -60,7 +60,7 @@ SHOW GRANTS FOR ROLE writer;
 
 ## Access Control Privileges
 
-Databend offers a range of privileges that allow you to exercise fine-grained control over your database objects. Databend privileges can be categorized into the following types:
+{{{ .lake-short }}} offers a range of privileges that allow you to exercise fine-grained control over your database objects. {{{ .lake-short }}} privileges can be categorized into the following types:
 
 - Global privileges: This set of privileges includes privileges that apply to the entire database management system, rather than specific objects within the system. Global privileges grant actions that affect the overall functionality and administration of the database, such as creating or deleting databases, managing users and roles, and modifying system-level settings. For which privileges are included, see [Global Privileges](#global-privileges).
 
@@ -245,7 +245,7 @@ In addition to the global `CREATE MASKING POLICY` and `APPLY MASKING POLICY` pri
 | Privilege | Description                                                                                                                           |
 |:----------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | APPLY     | Attaches or detaches the masking policy from columns, and allows DESC/DROP operations on the policy.                                  |
-| OWNERSHIP | Grants full control over a masking policy. Databend grants OWNERSHIP to the role that creates the policy and revokes it automatically when the policy is dropped. |
+| OWNERSHIP | Grants full control over a masking policy. {{{ .lake-short }}} grants OWNERSHIP to the role that creates the policy and revokes it automatically when the policy is dropped. |
 
 ### Row Access Policy Privileges
 
@@ -254,4 +254,4 @@ Row access policies share the same governance model. Beyond the global `CREATE R
 | Privilege | Description                                                                                                                                        |
 |:----------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
 | APPLY     | Adds or removes the row access policy from tables and allows DESC/DROP operations on the policy.                                                   |
-| OWNERSHIP | Grants full control over a row access policy. Databend grants OWNERSHIP to the creator role and revokes it automatically when the policy is dropped. |
+| OWNERSHIP | Grants full control over a row access policy. {{{ .lake-short }}} grants OWNERSHIP to the creator role and revokes it automatically when the policy is dropped. |

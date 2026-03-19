@@ -1,11 +1,11 @@
 ---
 title: Notification
-summary: This page provides a comprehensive overview of Notification operations in Databend Cloud, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Notification operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Notification
 
-This page provides a comprehensive overview of Notification operations in Databend Cloud, organized by functionality for easy reference.
+This page provides a comprehensive overview of Notification operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Notification Management
 
@@ -17,4 +17,4 @@ This page provides a comprehensive overview of Notification operations in Databe
 
 > **Note:**
 >
-> Notifications in Databend Cloud allow you to configure integrations with external services like email or Slack to receive alerts about database events and operations.
+> Notifications in {{{ .lake }}} allow you to configure integrations with external services like email or Slack to receive alerts about database events and operations.

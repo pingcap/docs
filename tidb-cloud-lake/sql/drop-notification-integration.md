@@ -11,7 +11,7 @@ summary: The DROP NOTIFICATION INTEGRATION statement is used to delete an existi
 
 The DROP NOTIFICATION INTEGRATION statement is used to delete an existing notification.
 
-**NOTICE:** this functionality works out of the box only in Databend Cloud.
+**NOTICE:** this functionality works out of the box only in {{{ .lake }}}.
 
 ## Syntax
 

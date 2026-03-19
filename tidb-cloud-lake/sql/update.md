@@ -13,7 +13,7 @@ Updates rows in a table with new values, optionally using values from other tabl
 
 > **Tip:**
 >
-> Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
+> {{{ .lake-short }}} ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 ## Syntax
 
@@ -28,7 +28,7 @@ UPDATE <target_table>
 
 The `error_on_nondeterministic_update` setting controls whether an error is returned when an UPDATE statement attempts to update a target row that joins multiple source rows without a deterministic update rule.
 
-- When `error_on_nondeterministic_update` = `true` (default): Databend returns an error if a target row matches multiple source rows and there is no clear rule for selecting which value to use.
+- When `error_on_nondeterministic_update` = `true` (default): {{{ .lake-short }}} returns an error if a target row matches multiple source rows and there is no clear rule for selecting which value to use.
 - When `error_on_nondeterministic_update` = `false`: The UPDATE statement proceeds even if a target row joins multiple source rows, but the final update result may be non-deterministic.
 
 Example:

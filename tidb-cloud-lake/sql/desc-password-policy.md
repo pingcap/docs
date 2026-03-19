@@ -1,6 +1,6 @@
 ---
 title: DESC PASSWORD POLICY
-summary: Displays detailed information about a specific password policy in Databend. For detailed descriptions of the password policy attributes, see Password Policy Attributes.
+summary: Displays detailed information about a specific password policy in {{{ .lake-short }}}. For detailed descriptions of the password policy attributes, see Password Policy Attributes.
 ---
 
 # DESC PASSWORD POLICY
@@ -9,7 +9,7 @@ summary: Displays detailed information about a specific password policy in Datab
 >
 > Introduced or updated in v1.2.283.
 
-Displays detailed information about a specific password policy in Databend. For detailed descriptions of the password policy attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
+Displays detailed information about a specific password policy in {{{ .lake-short }}}. For detailed descriptions of the password policy attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
 
 ## Syntax
 

@@ -1,11 +1,11 @@
 ---
 title: Data Integration
-summary: The Data Integration feature in Databend Cloud enables you to load data from external sources into Databend through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the Databend Cloud console.
+summary: The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake-short }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
 ---
 
 # Data Integration
 
-The Data Integration feature in Databend Cloud enables you to load data from external sources into Databend through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the Databend Cloud console.
+The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake-short }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
 
 ## Supported Data Sources
 
@@ -20,14 +20,14 @@ The Data Integration feature in Databend Cloud enables you to load data from ext
 
 A data source represents a connection to an external system. It stores the credentials and connection details needed to access the source data. Once configured, a data source can be reused across multiple integration tasks.
 
-Databend Cloud currently supports two types of data sources:
+{{{ .lake }}} currently supports two types of data sources:
 
 - **MySQL - Credentials**: Connection to a MySQL database (host, port, username, password, database).
 - **AWS - Credentials**: Connection to Amazon S3 (Access Key and Secret Key).
 
 ### Integration Task
 
-An integration task defines how data flows from a source to a target table in Databend. Each task specifies the source configuration, target warehouse and table, and operational parameters specific to the data source type.
+An integration task defines how data flows from a source to a target table in {{{ .lake-short }}}. Each task specifies the source configuration, target warehouse and table, and operational parameters specific to the data source type.
 
 ## Managing Data Sources
 

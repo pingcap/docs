@@ -1,6 +1,6 @@
 ---
 title: CREATE AGGREGATING INDEX
-summary: Create a new aggregating index in Databend.
+summary: Create a new aggregating index in {{{ .lake-short }}}.
 ---
 
 # CREATE AGGREGATING INDEX
@@ -9,7 +9,7 @@ summary: Create a new aggregating index in Databend.
 >
 > Introduced or updated in v1.2.339.
 
-Create a new aggregating index in Databend.
+Create a new aggregating index in {{{ .lake-short }}}.
 
 ## Syntax
 
