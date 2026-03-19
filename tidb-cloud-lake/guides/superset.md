@@ -3,6 +3,8 @@ title: Superset
 summary: Superset is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geospatial charts.
 ---
 
+# Superset
+
 ## Superset
 
 [Superset](https://superset.apache.org/) is fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geospatial charts.
