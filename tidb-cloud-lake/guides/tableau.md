@@ -29,7 +29,7 @@ GRANT ROLE tableau_role TO tableau;
 
 ### Step 2. Install databend-jdbc
 
-1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at https://repo1.maven.org/maven2/com/databend/databend-jdbc/
+1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/databend-jdbc/>
 
 2. To install the databend-jdbc driver, move the jar file (for example, databend-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 
@@ -77,7 +77,7 @@ GRANT ROLE tableau_role TO tableau;
 
 ### Step 2. Install databend-jdbc
 
-1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at https://repo1.maven.org/maven2/com/databend/databend-jdbc/
+1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/databend-jdbc/>
 
 2. To install the databend-jdbc driver, move the jar file (for example, databend-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 
@@ -125,7 +125,7 @@ Obtain the connection information from Databend Cloud. For how to do that, refer
 
 ### Step 2. Install databend-jdbc
 
-1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at https://repo1.maven.org/maven2/com/databend/databend-jdbc/
+1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/databend-jdbc/>
 
 2. To install the databend-jdbc driver, move the jar file (for example, databend-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 

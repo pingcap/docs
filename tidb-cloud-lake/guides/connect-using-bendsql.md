@@ -460,7 +460,7 @@ root,%,no_password,YES,account_admin,false
 // highlight-next-line
 root@localhost:8000/default> !set output_format tsv
 root@localhost:8000/default> show users;
-root	%	no_password	YES	account_admin	false
+root % no_password YES account_admin false
 1 row read in 0.076 sec. Processed 1 row, 113 B (13.16 rows/s, 1.45 KiB/s)
 
 // highlight-next-line

@@ -32,6 +32,7 @@ ALTER TABLE <table> FLASHBACK TO (TIMESTAMP => '<timestamp>'::TIMESTAMP);
 ## Example
 
 ### Step 1: Create a sample users table and insert data
+
 ```sql
 -- Create a sample users table
 CREATE TABLE users (
@@ -49,6 +50,7 @@ VALUES (1, 'John', 'Doe', 'john.doe@example.com', '2023-01-01 00:00:00'),
 ```
 
 Data:
+
 ```sql
 SELECT * FROM users;
 +------+------------+-----------+----------------------+----------------------------+
@@ -60,6 +62,7 @@ SELECT * FROM users;
 ```
 
 Snapshots:
+
 ```sql
 SELECT * FROM Fuse_snapshot('default', 'users')\G;
 *************************** 1. row ***************************
@@ -84,6 +87,7 @@ DELETE FROM users WHERE id = 1;
 ```
 
 Data:
+
 ```sql
 +------+------------+-----------+----------------------+----------------------------+
 | id   | first_name | last_name | email                | registration_date          |
@@ -93,6 +97,7 @@ Data:
 ```
 
 Snapshots:
+
 ```sql
 SELECT * FROM Fuse_snapshot('default', 'users')\G;
 *************************** 1. row ***************************
@@ -122,6 +127,7 @@ previous_snapshot_id: NULL
 ```
 
 ### Step 3: Find the snapshot ID before the delete operation
+
 ```sql
 -- Assume the snapshot_id from the previous query is 'xxxxxx'
 -- Restore the table to the snapshot before the delete operation
@@ -129,6 +135,7 @@ ALTER TABLE users FLASHBACK TO (SNAPSHOT => 'c5c538d6b8bc42f483eefbddd000af7d');
 ```
 
 Data:
+
 ```sql
 SELECT * FROM users;
 +------+------------+-----------+----------------------+----------------------------+
@@ -140,6 +147,7 @@ SELECT * FROM users;
 ```
 
 Snapshot:
+
 ```sql
 SELECT * FROM Fuse_snapshot('default', 'users')\G;
 *************************** 1. row ***************************

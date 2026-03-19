@@ -20,12 +20,12 @@ ALTER NETWORK POLICY [ IF EXISTS ] <policy_name>
     [ COMMENT = 'comment' ]
 ```
 
-| Parameter       	| Description                                                                                                                                                                                                                                                           	|
-|-----------------	|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| policy_name     	| Specifies the name of the network policy to be modified.                                                                                                                                                                                                              	|
-| ALLOWED_IP_LIST 	| Specifies a comma-separated list of allowed IP address ranges to update for the policy. This overwrites the existing allowed IP address list with the new one provided.                                                                                               	|
-| BLOCKED_IP_LIST 	| Specifies a comma-separated list of blocked IP address ranges to update for the policy. This overwrites the existing blocked IP address list with the new one provided. If this parameter is set to an empty list (), it removes all blocked IP address restrictions. 	|
-| COMMENT         	| An optional parameter used to update the description or comment associated with the network policy.                                                                                                                                                                   	|
+| Parameter        | Description                                                                                                                                                                                                                                                            |
+|----------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| policy_name      | Specifies the name of the network policy to be modified.                                                                                                                                                                                                               |
+| ALLOWED_IP_LIST  | Specifies a comma-separated list of allowed IP address ranges to update for the policy. This overwrites the existing allowed IP address list with the new one provided.                                                                                                |
+| BLOCKED_IP_LIST  | Specifies a comma-separated list of blocked IP address ranges to update for the policy. This overwrites the existing blocked IP address list with the new one provided. If this parameter is set to an empty list (), it removes all blocked IP address restrictions.  |
+| COMMENT          | An optional parameter used to update the description or comment associated with the network policy.                                                                                                                                                                    |
 
 > **Note:**
 >

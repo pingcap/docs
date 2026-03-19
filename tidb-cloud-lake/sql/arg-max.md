@@ -31,6 +31,7 @@ ARG_MAX(<arg>, <val>)
 **Creating a Table and Inserting Sample Data**
 
 Let's create a table named "sales" and insert some sample data:
+
 ```sql
 CREATE TABLE sales (
   id INTEGER,
@@ -49,12 +50,14 @@ VALUES (1, 'Product A', 10.5),
 **Query: Using ARG_MAX() Function**
 
 Now, let's use the ARG_MAX() function to find the product that has the maximum price:
+
 ```sql
 SELECT ARG_MAX(product, price) AS max_price_product
 FROM sales;
 ```
 
 The result should look like this:
+
 ```sql
 | max_price_product |
 | ----------------- |

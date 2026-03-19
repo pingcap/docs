@@ -33,6 +33,7 @@ InputType or array of InputType based on level number.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE salary_data (
   id INT,
@@ -49,12 +50,14 @@ VALUES (1, 1, 50000),
 ```
 
 **Query Demo: Calculate 25th and 75th Percentile of Salaries**
+
 ```sql
 SELECT QUANTILE_DISC(0.25, 0.75)(salary) AS salary_quantiles
 FROM salary_data;
 ```
 
 **Result**
+
 ```sql
 |  salary_quantiles   |
 |---------------------|

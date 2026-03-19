@@ -21,6 +21,7 @@ Removes one or more rows from a table.
 DELETE FROM <table_name> [AS <table_alias>]
 [WHERE <condition>]
 ```
+
 - `AS <table_alias>`: Allows you to set an alias for a table, making it easier to reference the table within a query. This helps simplify and shorten the SQL code, especially when dealing with complex queries involving multiple tables. See an example in [Deleting with subquery using EXISTS / NOT EXISTS clause](#deleting-with-subquery-using-exists--not-exists-clause).
 
 - DELETE does not support the USING clause yet. If you need to use a subquery to identify the rows to be removed, include it within the WHERE clause directly. See examples in [Subquery-Based Deletions](#example-2-subquery-based-deletions).
@@ -96,6 +97,7 @@ WHERE DEPARTMENT IN (
     FROM DEPARTMENTS
 );
 ```
+
 This deletes employees whose department matches any department in the departments table. It would delete employees with IDs 2 and 3.
 
 #### Deleting with subquery using EXISTS / NOT EXISTS clause
@@ -116,6 +118,7 @@ WHERE EXISTS (
     WHERE e.DEPARTMENT = d.DEPARTMENT
 );
 ```
+
 This deletes employees who belong to a department that exists in the departments table. In this case, it would delete employees with IDs 2 and 3.
 
 #### Deleting with subquery using ALL clause
@@ -127,6 +130,7 @@ WHERE DEPARTMENT = ALL (
     FROM DEPARTMENTS
 );
 ```
+
 This deletes employees whose department matches all departments in the department table. In this case, no employees would be deleted.
 
 #### Deleting with subquery using ANY clause
@@ -138,6 +142,7 @@ WHERE DEPARTMENT = ANY (
     FROM DEPARTMENTS
 );
 ```
+
 This deletes employees whose department matches any department in the departments table. In this case, it would delete employees with IDs 2 and 3.
 
 #### Deleting with subquery combining multiple conditions

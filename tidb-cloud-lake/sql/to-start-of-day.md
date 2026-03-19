@@ -6,6 +6,7 @@ summary: Rounds down a date with time (timestamp/datetime) to the start of the d
 # TO_START_OF_DAY
 
 Rounds down a date with time (timestamp/datetime) to the start of the day.
+
 ## Syntax
 
 ```sql

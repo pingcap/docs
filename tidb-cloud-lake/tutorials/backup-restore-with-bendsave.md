@@ -19,6 +19,7 @@ Before you start, ensure you have the following prerequisites in place:
 - BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 - The Databend release package: Download the release from the [Databend GitHub Releases page](https://github.com/databendlabs/databend/releases). The package contains the `databend-bendsave` binary in the `bin` directory, which is the tool we'll use for backup and restore operations in this tutorial.
+
 ```bash
 databend-v1.2.725-nightly-x86_64-unknown-linux-gnu/
 ├── bin

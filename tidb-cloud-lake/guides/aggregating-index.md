@@ -124,12 +124,14 @@ EXPLAIN SELECT MIN(a), MAX(c) FROM agg;
 ## Important Notes
 
 **When to Use Aggregating Indexes:**
+
 - Frequent analytical queries (dashboards, reports)
 - Large datasets with repeated aggregations
 - Stable query patterns
 - Performance-critical applications
 
 **When NOT to Use:**
+
 - Frequently changing data
 - One-time analytical queries
 - Simple queries on small tables

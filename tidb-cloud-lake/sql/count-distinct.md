@@ -13,7 +13,7 @@ To obtain an estimated result from large data sets with little memory and time, 
 
 > **Note:**
 >
->  NULL values are not counted.
+> NULL values are not counted.
 
 ## Syntax
 
@@ -35,6 +35,7 @@ UInt64
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE products (
   id INT,
@@ -59,6 +60,7 @@ FROM products;
 ```
 
 **Result**
+
 ```sql
 | unique_categories |
 |-------------------|

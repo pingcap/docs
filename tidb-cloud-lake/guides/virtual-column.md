@@ -150,6 +150,7 @@ SHOW VIRTUAL COLUMNS WHERE table='test';
 ## Performance Results
 
 Virtual columns typically provide:
+
 - **5-10x faster** JSON field access
 - **Automatic optimization** without query changes
 - **Reduced resource consumption** during query processing

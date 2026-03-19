@@ -35,18 +35,21 @@ Returns a VARIANT containing the modified JSON object with specified keys remove
 ## Examples
 
 Delete a single key:
+
 ```sql
 SELECT OBJECT_DELETE('{"a":1,"b":2,"c":3}'::VARIANT, 'a');
 -- Result: {"b":2,"c":3}
 ```
 
 Delete multiple keys:
+
 ```sql
 SELECT OBJECT_DELETE('{"a":1,"b":2,"d":4}'::VARIANT, 'a', 'c');
 -- Result: {"b":2,"d":4}
 ```
 
 Delete a non-existent key (key is ignored):
+
 ```sql
 SELECT OBJECT_DELETE('{"a":1,"b":2}'::VARIANT, 'x');
 -- Result: {"a":1,"b":2}

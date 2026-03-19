@@ -12,6 +12,7 @@ Subtract the time interval or date interval from the provided date or date with 
 ```sql
 DATE_SUB(<unit>, <value>,  <date_or_time_expr>)
 ```
+
 ## Arguments
 
 | Arguments             | Description                                                                                                       |

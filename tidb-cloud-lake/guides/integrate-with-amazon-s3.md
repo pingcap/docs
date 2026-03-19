@@ -79,6 +79,7 @@ After configuring the basic settings, click **Next** to preview the source data.
 ![S3 Preview Data](/media/tidb-cloud-lake/s3-task-preview-step.png)
 
 The system reads the first matching file and displays:
+
 - Sample data with column names and types
 - A list of matching files (up to 25 files) with their sizes
 

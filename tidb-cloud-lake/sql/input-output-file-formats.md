@@ -24,6 +24,7 @@ To specify a file format in a statement, use the following syntax:
 ```
 
 Databend determines the file format used by a COPY or Select statement in the following order of priority:
+
 1. First, it checks if a FILE_FORMAT is explicitly specified within the statement.
 2. If no FILE_FORMAT is specified in the operation, it uses the file format initially defined for the stage at the time of stage creation.
 3. If no file format was defined for the stage during its creation, Databend defaults to using the PARQUET format.

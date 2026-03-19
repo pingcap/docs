@@ -22,6 +22,7 @@ Based on the actual storage location and accessibility, stages can be categorize
 | **File Upload**      | Must upload files to Databend      | Must upload files to Databend                    | No upload needed; used to read or unload data from/to external storage                                        |
 | **Usage Scenario**   | Personal/private data              | Team/shared data                                 | External data integration or unloading                                                                        |
 | **Path Format**      | `@~/`                              | `@stage_name/`                                   | `@stage_name/`                                                                                                |
+
 ### Internal Stage
 
 Files in an internal stage are actually stored in the object storage where Databend resides. An internal stage is accessible to all users within your organization, allowing each user to utilize the stage for their data loading or export tasks. Similar to creating a folder, specifying a name is necessary when creating a stage. Below is an example of creating an internal stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:

@@ -5,7 +5,8 @@ summary: Converts a date or date with time (timestamp/datetime) to a UInt32 numb
 
 # TO_YYYYMMDD
 
-Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year and month number (YYYY * 10000 + MM * 100 + DD).
+Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year and month number (YYYY *10000 + MM* 100 + DD).
+
 ## Syntax
 
 ```sql

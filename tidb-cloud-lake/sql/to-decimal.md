@@ -32,7 +32,7 @@ TO_DECIMAL
 | 'D'                | Decimal point (accepts '.' or ',', always normalized to '.')                    | "12.34"       |
 | 'G'                | Group (thousands) separator (expects ',' in input)                              | "1,234"       |
 | 'S'                | Sign ('+' or '-', applied as prefix to result)                                  | "-123"        |
-| Literal character	 | Any literal character must appear in the input exactly                          | "NT$123"      |
+| Literal character  | Any literal character must appear in the input exactly                          | "NT$123"      |
 
 ## Examples
 

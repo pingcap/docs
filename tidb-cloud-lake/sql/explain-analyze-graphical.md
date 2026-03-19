@@ -37,6 +37,7 @@ GROUP BY l_returnflag;
 ```
 
 Output:
+
 ```bash
 View graphical online: http://127.0.0.1:8080?perf_id=1
 ```

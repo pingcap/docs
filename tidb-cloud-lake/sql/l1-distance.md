@@ -25,6 +25,7 @@ L1_DISTANCE(vector1, vector2)
 ## Returns
 
 Returns a FLOAT value representing the Manhattan (L1) distance between the two vectors. The value is always non-negative:
+
 - 0: Identical vectors
 - Larger values: Vectors that are farther apart
 
@@ -44,6 +45,7 @@ SELECT L1_DISTANCE([1.0, 2.0, 3.0]::vector(3), [4.0, 5.0, 6.0]::vector(3)) AS di
 ```
 
 Result:
+
 ```
 ╭──────────╮
 │ distance │

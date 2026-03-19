@@ -16,6 +16,7 @@ COUNT_IF(<column>, <cond>)
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE orders (
   id INT,
@@ -33,12 +34,14 @@ VALUES (1, 1, 'completed', 100),
 ```
 
 **Query Demo: Count Completed Orders**
+
 ```sql
 SELECT COUNT_IF(status, status = 'completed') AS completed_orders
 FROM orders;
 ```
 
 **Result**
+
 ```sql
 | completed_orders |
 |------------------|

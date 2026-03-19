@@ -40,10 +40,10 @@ Connection parameters:
 | Parameter                   | Description                                                                                                                                                                                                              | Required   |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
 | `s3://<bucket>/[<path>]`    | Files are in the specified external location (S3-like bucket)                                                                                                                                                            | YES        |
-| ENDPOINT_URL              	 | The bucket endpoint URL starting with "https://". To use a URL starting with "http://", set `allow_insecure` to `true` in the [storage] block of the file `databend-query-node.toml`.                                  	 | Optional 	 |
-| ACCESS_KEY_ID             	 | Your access key ID for connecting the AWS S3 compatible object storage. If not provided, Databend will access the bucket anonymously.    	                                                                               | Optional 	 |
-| SECRET_ACCESS_KEY         	 | Your secret access key for connecting the AWS S3 compatible object storage. 	                                                                                                                                            | Optional 	 |
-| ENABLE_VIRTUAL_HOST_STYLE 	 | If you use virtual hosting to address the bucket, set it to "true".                               	                                                                                                                      | Optional 	 |
+| ENDPOINT_URL                | The bucket endpoint URL starting with "https://". To use a URL starting with "http://", set `allow_insecure` to `true` in the [storage] block of the file `databend-query-node.toml`.                                    | Optional   |
+| ACCESS_KEY_ID               | Your access key ID for connecting the AWS S3 compatible object storage. If not provided, Databend will access the bucket anonymously.                                                                                    | Optional   |
+| SECRET_ACCESS_KEY           | Your secret access key for connecting the AWS S3 compatible object storage.                                                                                                                                              | Optional   |
+| ENABLE_VIRTUAL_HOST_STYLE   | If you use virtual hosting to address the bucket, set it to "true".                                                                                                                                                      | Optional   |
 
 For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
 
@@ -52,12 +52,14 @@ For more information on `CONNECTION_NAME`, see [CREATE CONNECTION](/tidb-cloud-l
 The external location S3 bucket must have the following permissions granted through an S3 bucket policy:
 
 **Read-only Access:**
+
 - `s3:GetObject`: Allows reading objects from the bucket.
 - `s3:ListBucket`: Allows listing objects in the bucket.
 - `s3:ListBucketVersions`: Allows listing object versions in the bucket.
 - `s3:GetObjectVersion`: Allows retrieving a specific version of an object.
 
 **Writable Access:**
+
 - `s3:PutObject`: Allows writing objects to the bucket.
 - `s3:DeleteObject`: Allows deleting objects from the bucket.
 - `s3:AbortMultipartUpload`: Allows aborting multipart uploads.
@@ -67,6 +69,7 @@ The external location S3 bucket must have the following permissions granted thro
 ## Examples
 
 Before using the `SHOW CREATE TABLE` command, you need to set the `hide_options_in_show_create_table` variable to `0`.
+
 ```sql
 SET GLOBAL hide_options_in_show_create_table = 0;
 ```
@@ -102,6 +105,7 @@ LOCATION = 's3 | bucket=testbucket,root=/admin/data/,endpoint=https://s3.amazona
 ### Create a Table Using a Connection
 
 Or you can create a connection and use it to create a table:
+
 ```sql
 -- Create a connection named `s3_connection` for the S3 credentials
 CREATE CONNECTION s3_connection

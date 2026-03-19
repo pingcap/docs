@@ -30,20 +30,20 @@ CREATE [OR REPLACE] TABLE <table_name> (
 ### Parameters
 
 - **`distance`** (required) - Specifies the distance metric(s) to use for similarity search. Multiple metrics can be combined with commas:
-  - `'cosine'` - Cosine distance (best for semantic similarity, text embeddings)
-  - `'l1'` - L1 distance / Manhattan distance (good for feature comparison, sparse data)
-  - `'l2'` - L2 distance / Euclidean distance (best for geometric similarity, image features)
-  - Example: `distance = 'cosine,l1,l2'` supports all three metrics
+    - `'cosine'` - Cosine distance (best for semantic similarity, text embeddings)
+    - `'l1'` - L1 distance / Manhattan distance (good for feature comparison, sparse data)
+    - `'l2'` - L2 distance / Euclidean distance (best for geometric similarity, image features)
+    - Example: `distance = 'cosine,l1,l2'` supports all three metrics
 
 - **`m`** (optional, default: 16) - Controls the number of bidirectional connections each node has in the HNSW graph:
-  - Higher values increase memory usage but can improve search accuracy
-  - Must be greater than 0
-  - Typical range: 8-64
+    - Higher values increase memory usage but can improve search accuracy
+    - Must be greater than 0
+    - Typical range: 8-64
 
 - **`ef_construct`** (optional, default: 100) - Controls the size of the dynamic candidate list during index construction:
-  - Higher values improve index quality but increase construction time and memory
-  - Must be >= 40
-  - Typical range: 40-500
+    - Higher values improve index quality but increase construction time and memory
+    - Must be >= 40
+    - Typical range: 40-500
 
 ## How Vector Index Works
 
@@ -123,6 +123,7 @@ SHOW INDEXES;
 ```
 
 Result:
+
 ```
 ┌──────────────────────┬────────┬──────────┬────────────────────────────┬──────────────────────────┐
 │ name                 │ type   │ original │ definition                 │ created_on               │
@@ -158,6 +159,7 @@ LIMIT 2;
 ```
 
 Result:
+
 ```
 ┌────┬─────────────────┬──────────────┐
 │ id │ title           │ distance     │

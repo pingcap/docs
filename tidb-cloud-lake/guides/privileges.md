@@ -65,17 +65,17 @@ Databend offers a range of privileges that allow you to exercise fine-grained co
 - Global privileges: This set of privileges includes privileges that apply to the entire database management system, rather than specific objects within the system. Global privileges grant actions that affect the overall functionality and administration of the database, such as creating or deleting databases, managing users and roles, and modifying system-level settings. For which privileges are included, see [Global Privileges](#global-privileges).
 
 - Object-specific privileges: Object-specific privileges come with different sets and each one applies to a specific database object. This includes:
-  - [Table Privileges](#table-privileges)
-  - [View Privileges](#view-privileges)
-  - [Database Privileges](#database-privileges)
-  - [Session Policy Privileges](#session-policy-privileges)
-  - [Stage Privileges](#stage-privileges)
-  - [UDF Privileges](#udf-privileges)
-  - [Sequence Privileges](#sequence-privileges)
-  - [Connection Privileges](#connection-privileges)
-  - [Procedure Privileges](#procedure-privileges)
-  - [Catalog Privileges](#catalog-privileges)
-  - [Share Privileges](#share-privileges)
+    - [Table Privileges](#table-privileges)
+    - [View Privileges](#view-privileges)
+    - [Database Privileges](#database-privileges)
+    - [Session Policy Privileges](#session-policy-privileges)
+    - [Stage Privileges](#stage-privileges)
+    - [UDF Privileges](#udf-privileges)
+    - [Sequence Privileges](#sequence-privileges)
+    - [Connection Privileges](#connection-privileges)
+    - [Procedure Privileges](#procedure-privileges)
+    - [Catalog Privileges](#catalog-privileges)
+    - [Share Privileges](#share-privileges)
 
 ### All Privileges
 

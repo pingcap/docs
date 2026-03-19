@@ -24,6 +24,7 @@ FROM ...
 ```
 
 Where:
+
 * `<value_column>`: The column that will store the values extracted from the columns listed in `<column_list>`.
 * `<name_column>`: The column that will store the names of the columns from which the values were extracted.
 * `<column_list>`: The list of columns to be unpivoted, separated by commas. You can optionally provide aliases for the column names using AS or just a string literal.
@@ -60,6 +61,7 @@ FROM unpivoted_monthly_sales
 ```
 
 Output:
+
 ```sql
 ┌──────────────────────────────────────────────────────┐
 │      empid      │       month      │      amount     │

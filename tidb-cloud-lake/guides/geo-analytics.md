@@ -10,6 +10,7 @@ summary: CityDrive records precise GPS positioning and distance-to-signal for ev
 `frame_geo_points` and `signal_contact_points` share the same `video_id`/`frame_id` keys as the rest of the guide, so you can move from SQL metrics to maps without copying data.
 
 ## 1. Create Location Tables
+
 If you followed the JSON guide, these tables already exist. The snippet below shows their structure plus a few Shenzhen samples.
 
 ```sql
@@ -82,6 +83,7 @@ Docs: [Geospatial types](/tidb-cloud-lake/sql/geospatial.md).
 ---
 
 ## 2. Spatial Filters
+
 Measure how far each frame was from a key downtown coordinate or check whether it falls inside a polygon. Convert to SRID 3857 when you need meter-level distances.
 
 ```sql
@@ -141,6 +143,7 @@ FRAME-0102| VID-20250101-001 | pedestrian
 ---
 
 ## 3. Hex Aggregations
+
 Aggregate risky frames into hexagonal buckets for dashboards.
 
 ```sql
@@ -169,6 +172,7 @@ Docs: [H3 functions](/tidb-cloud-lake/sql/geospatial-functions.md#h3-indexing--c
 ---
 
 ## 4. Traffic Context
+
 Join `signal_contact_points` and `frame_geo_points` to validate stored metrics, or blend spatial predicates with JSON search.
 
 ```sql
@@ -223,6 +227,7 @@ This pattern lets you filter by geography first, then apply JSON search to the s
 ---
 
 ## 5. Publish a Heatmap View
+
 Expose the geo heatmap to BI or GIS tools without re-running heavy SQL.
 
 ```sql

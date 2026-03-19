@@ -19,15 +19,15 @@ For storage-specific connection details, see the tables below.
 
 The following table lists connection parameters for accessing an Amazon S3-like storage service:
 
-| Parameter                 	| Required? 	| Description                                                  	|
-|---------------------------	|-----------	|--------------------------------------------------------------	|
-| endpoint_url              	| Yes       	| Endpoint URL for Amazon S3-like storage service.             	|
-| access_key_id             	| Yes       	| Access key ID for identifying the requester.                 	|
-| secret_access_key         	| Yes       	| Secret access key for authentication.                        	|
-| enable_virtual_host_style 	| No        	| Whether to use virtual host-style URLs. Defaults to *false*. 	|
-| master_key                	| No        	| Optional master key for advanced data encryption.            	|
-| region                    	| No        	| AWS region where the bucket is located.                      	|
-| security_token            	| No        	| Security token for temporary credentials.                    	|
+| Parameter                  | Required?  | Description                                                   |
+|--------------------------- |----------- |-------------------------------------------------------------- |
+| endpoint_url               | Yes        | Endpoint URL for Amazon S3-like storage service.              |
+| access_key_id              | Yes        | Access key ID for identifying the requester.                  |
+| secret_access_key          | Yes        | Secret access key for authentication.                         |
+| enable_virtual_host_style  | No         | Whether to use virtual host-style URLs. Defaults to *false*.  |
+| master_key                 | No         | Optional master key for advanced data encryption.             |
+| region                     | No         | AWS region where the bucket is located.                       |
+| security_token             | No         | Security token for temporary credentials.                     |
 
 > **Note:**
 >
@@ -59,15 +59,15 @@ CREATE STAGE my_minio_stage
   CONNECTION = (CONNECTION_NAME = 'my_minio_conn');
 ```
 
-To access your Amazon S3 buckets, you can also specify an AWS IAM role and external ID for authentication. By specifying an AWS IAM role and external ID, you can provide more granular control over which S3 buckets a user can access. This means that if the IAM role has been granted permissions to access only specific S3 buckets, then the user will only be able to access those buckets. An external ID can further enhance security by providing an additional layer of verification. For more information, see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html
+To access your Amazon S3 buckets, you can also specify an AWS IAM role and external ID for authentication. By specifying an AWS IAM role and external ID, you can provide more granular control over which S3 buckets a user can access. This means that if the IAM role has been granted permissions to access only specific S3 buckets, then the user will only be able to access those buckets. An external ID can further enhance security by providing an additional layer of verification. For more information, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html>
 
 The following table lists connection parameters for accessing Amazon S3 storage service using AWS IAM role authentication:
 
-| Parameter    	| Required? 	| Description                                           	|
-|--------------	|-----------	|-------------------------------------------------------	|
-| endpoint_url 	| No        	| Endpoint URL for Amazon S3.                           	|
-| role_arn     	| Yes       	| ARN of the AWS IAM role for authorization to S3.      	|
-| external_id  	| No        	| External ID for enhanced security in role assumption. 	|
+| Parameter     | Required?  | Description                                            |
+|-------------- |----------- |------------------------------------------------------- |
+| endpoint_url  | No         | Endpoint URL for Amazon S3.                            |
+| role_arn      | Yes        | ARN of the AWS IAM role for authorization to S3.       |
+| external_id   | No         | External ID for enhanced security in role assumption.  |
 
 ```sql title='Examples'
 -- Create the connection using IAM role authentication
@@ -88,11 +88,11 @@ CREATE STAGE my_iam_stage
 
 The following table lists connection parameters for accessing Azure Blob Storage:
 
-| Parameter    	 | Required? 	 | Description                                         	 |
+| Parameter      | Required?   | Description                                           |
 |----------------|-------------|-------------------------------------------------------|
-| endpoint_url 	 | Yes       	 | Endpoint URL for Azure Blob Storage.                	 |
-| account_key  	 | Yes       	 | Azure Blob Storage account key for authentication.  	 |
-| account_name 	 | Yes       	 | Azure Blob Storage account name for identification. 	 |
+| endpoint_url   | Yes         | Endpoint URL for Azure Blob Storage.                  |
+| account_key    | Yes         | Azure Blob Storage account key for authentication.    |
+| account_name   | Yes         | Azure Blob Storage account name for identification.   |
 
 ```sql title='Examples'
 -- Create a connection for Azure Blob Storage
@@ -114,9 +114,9 @@ CREATE STAGE my_azure_stage
 
 The following table lists connection parameters for accessing Google Cloud Storage:
 
-| Parameter    	 | Required? 	 | Description                                         	 |
+| Parameter      | Required?   | Description                                           |
 |----------------|-------------|-------------------------------------------------------|
-| credential   	 | Yes       	 | Google Cloud Storage credential for authentication. 	 |
+| credential     | Yes         | Google Cloud Storage credential for authentication.   |
 
 To get the `credential`, you could follow the topic [Create a service account key](https://cloud.google.com/iam/docs/keys-create-delete#creating)
 from the Google documentation to create and download a service account key file. After downloading the service account key file, you could
@@ -144,12 +144,12 @@ CREATE STAGE my_gcs_stage
 
 The following table lists connection parameters for accessing Alibaba Cloud OSS:
 
-| Parameter            	| Required? 	| Description                                             	|
-|----------------------	|-----------	|---------------------------------------------------------	|
-| access_key_id        	| Yes       	| Alibaba Cloud OSS access key ID for authentication.     	|
-| access_key_secret    	| Yes       	| Alibaba Cloud OSS access key secret for authentication. 	|
-| endpoint_url         	| Yes       	| Endpoint URL for Alibaba Cloud OSS.                     	|
-| presign_endpoint_url 	| No        	| Endpoint URL for presigning Alibaba Cloud OSS URLs.     	|
+| Parameter             | Required?  | Description                                              |
+|---------------------- |----------- |--------------------------------------------------------- |
+| access_key_id         | Yes        | Alibaba Cloud OSS access key ID for authentication.      |
+| access_key_secret     | Yes        | Alibaba Cloud OSS access key secret for authentication.  |
+| endpoint_url          | Yes        | Endpoint URL for Alibaba Cloud OSS.                      |
+| presign_endpoint_url  | No         | Endpoint URL for presigning Alibaba Cloud OSS URLs.      |
 
 ```sql title='Examples'
 -- Create a connection for Alibaba Cloud OSS
@@ -171,11 +171,11 @@ CREATE STAGE my_oss_stage
 
 The following table lists connection parameters for accessing Tencent Cloud Object Storage (COS):
 
-| Parameter    	| Required? 	| Description                                                 	|
-|--------------	|-----------	|-------------------------------------------------------------	|
-| endpoint_url 	| Yes       	| Endpoint URL for Tencent Cloud Object Storage.              	|
-| secret_id    	| Yes       	| Tencent Cloud Object Storage secret ID for authentication.  	|
-| secret_key   	| Yes       	| Tencent Cloud Object Storage secret key for authentication. 	|
+| Parameter     | Required?  | Description                                                  |
+|-------------- |----------- |------------------------------------------------------------- |
+| endpoint_url  | Yes        | Endpoint URL for Tencent Cloud Object Storage.               |
+| secret_id     | Yes        | Tencent Cloud Object Storage secret ID for authentication.   |
+| secret_key    | Yes        | Tencent Cloud Object Storage secret key for authentication.  |
 
 ```sql title='Examples'
 -- Create a connection for Tencent COS

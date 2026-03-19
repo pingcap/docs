@@ -38,6 +38,7 @@ double
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE test_scores (
   id INT,
@@ -54,12 +55,14 @@ VALUES (1, 1, 80),
 ```
 
 **Query Demo: Calculate Population Standard Deviation of Test Scores**
+
 ```sql
 SELECT STDDEV_POP(score) AS test_score_stddev_pop
 FROM test_scores;
 ```
 
 **Result**
+
 ```sql
 | test_score_stddev_pop |
 |-----------------------|

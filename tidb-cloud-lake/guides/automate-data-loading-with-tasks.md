@@ -10,33 +10,42 @@ Tasks wrap SQL so Databend can run it for you on a schedule or when a condition 
 ![alt text](/media/tidb-cloud-lake/task.png)
 
 - **Name & warehouse** – every task needs a warehouse.
+
     ```sql
     CREATE TASK ingest_orders
     WAREHOUSE = 'etl_wh'
     AS SELECT 1;
     ```
+
 - **Trigger** – fixed interval, CRON, or `AFTER another_task`.
+
     ```sql
     CREATE TASK mytask
     WAREHOUSE = 'default'
     SCHEDULE = 2 MINUTE
     AS ...;
     ```
+
 - **Guards** – only run when a predicate is true.
+
     ```sql
     CREATE TASK mytask
     WAREHOUSE = 'default'
     WHEN STREAM_STATUS('mystream') = TRUE
     AS ...;
     ```
+
 - **Error handling** – pause after N failures or send notifications.
+
     ```sql
     CREATE TASK mytask
     WAREHOUSE = 'default'
     SUSPEND_TASK_AFTER_NUM_FAILURES = 3
     AS ...;
     ```
+
 - **SQL payload** – whatever you place after `AS` is what the task executes.
+
     ```sql
     CREATE TASK bump_age
     WAREHOUSE = 'default'

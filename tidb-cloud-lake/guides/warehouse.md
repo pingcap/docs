@@ -52,39 +52,39 @@ To effectively manage your warehouses and ensure optimal performance and cost-ef
 
 - **Choose the Right Size**
 
-  - For **development & testing**, use smaller warehouses (XSmall, Small).
-  - For **production**, opt for larger warehouses (Medium, Large, XLarge).
+    - For **development & testing**, use smaller warehouses (XSmall, Small).
+    - For **production**, opt for larger warehouses (Medium, Large, XLarge).
 
 - **Separate Warehouses**
 
-  - Use separate warehouses for **data loading** and **query execution**.
-  - Create distinct warehouses for **development**, **testing**, and **production** environments.
+    - Use separate warehouses for **data loading** and **query execution**.
+    - Create distinct warehouses for **development**, **testing**, and **production** environments.
 
 - **Data Loading Tips**
 
-  - Smaller warehouses (Small, Medium) are suitable for data loading.
-  - Optimize file size and the number of files to enhance performance.
+    - Smaller warehouses (Small, Medium) are suitable for data loading.
+    - Optimize file size and the number of files to enhance performance.
 
 - **Optimize for Cost & Performance**
 
-  - Avoid running simple queries like `SELECT 1` to minimize credit usage.
-  - Use bulk loading (`COPY`) rather than individual `INSERT` statements.
-  - Monitor long-running queries and optimize them to improve performance.
+    - Avoid running simple queries like `SELECT 1` to minimize credit usage.
+    - Use bulk loading (`COPY`) rather than individual `INSERT` statements.
+    - Monitor long-running queries and optimize them to improve performance.
 
 - **Auto-Suspend**
 
-  - Enable auto-suspend to save credits when the warehouse is idle.
+    - Enable auto-suspend to save credits when the warehouse is idle.
 
 - **Disable Auto-Suspend for Frequent Queries**
 
-  - Keep warehouses active for frequent or repetitive queries to maintain cache and avoid delays.
+    - Keep warehouses active for frequent or repetitive queries to maintain cache and avoid delays.
 
 - **Use Auto-Scaling (Business & Dedicated Plans Only)**
 
-  - Multi-cluster scaling automatically adjusts resources based on workload demand.
+    - Multi-cluster scaling automatically adjusts resources based on workload demand.
 
 - **Monitor & Adjust Usage**
-  - Regularly review warehouse usage and resize as needed to balance cost and performance.
+    - Regularly review warehouse usage and resize as needed to balance cost and performance.
 
 ## Warehouse Access Control
 

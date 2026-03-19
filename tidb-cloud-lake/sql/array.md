@@ -28,6 +28,7 @@ FROM array_samples;
 ```
 
 Result:
+
 ```
 ┌────────────┬────────────┬──────────────┐
 │ arr        │ first_elem │ second_elem │
@@ -43,6 +44,7 @@ SELECT arr[0] AS zeroth_elem FROM array_samples;
 ```
 
 Result:
+
 ```
 ┌─────────────┐
 │ zeroth_elem │

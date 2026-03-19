@@ -11,11 +11,11 @@ See [Querying & Transforming]( /tidb-cloud-lake/guides/query-stage.md) for synta
 
 Key transformations you can perform:
 
--   **Loading a subset of data columns**: Selectively import specific columns.
--   **Reordering columns**: Change column order during load.
--   **Converting datatypes**: Ensure consistency and compatibility.
--   **Performing arithmetic operations**: Generate new derived data.
--   **Loading data to a table with additional columns**: Map and insert data into existing structures.
+- **Loading a subset of data columns**: Selectively import specific columns.
+- **Reordering columns**: Change column order during load.
+- **Converting datatypes**: Ensure consistency and compatibility.
+- **Performing arithmetic operations**: Generate new derived data.
+- **Loading data to a table with additional columns**: Map and insert data into existing structures.
 
 ## Tutorials
 
@@ -125,6 +125,7 @@ PATTERN = '.*parquet';
 
 SELECT * FROM employees_new_order;
 ```
+
 Result (first 3 rows):
 
 ```
@@ -163,6 +164,7 @@ PATTERN = '.*parquet';
 
 SELECT * FROM employees_date;
 ```
+
 Result (first 3 rows):
 
 ```
@@ -201,6 +203,7 @@ PATTERN = '.*parquet';
 
 SELECT * FROM employees_new_age;
 ```
+
 Result (first 3 rows):
 
 ```
@@ -240,6 +243,7 @@ PATTERN = '.*parquet';
 
 SELECT * FROM employees_plus;
 ```
+
 Result (first 3 rows):
 
 ```

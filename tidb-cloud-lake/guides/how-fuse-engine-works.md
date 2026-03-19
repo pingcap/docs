@@ -15,9 +15,9 @@ This document explains its core concepts and how it works.
 
 Fuse Engine organizes data using three core structures, mirroring Git:
 
-*   **Snapshots (Like Git Commits):** Immutable references defining the table's state at a point in time by pointing to specific Segments. Enables Time Travel.
-*   **Segments (Like Git Trees):** Collections of Blocks with summary statistics used for fast data skipping (pruning). Can be shared across Snapshots.
-*   **Blocks (Like Git Blobs):** Immutable data files (Parquet format) holding the actual rows and detailed column-level statistics for fine-grained pruning.
+* **Snapshots (Like Git Commits):** Immutable references defining the table's state at a point in time by pointing to specific Segments. Enables Time Travel.
+* **Segments (Like Git Trees):** Collections of Blocks with summary statistics used for fast data skipping (pruning). Can be shared across Snapshots.
+* **Blocks (Like Git Blobs):** Immutable data files (Parquet format) holding the actual rows and detailed column-level statistics for fine-grained pruning.
 
 ```
                          Table HEAD

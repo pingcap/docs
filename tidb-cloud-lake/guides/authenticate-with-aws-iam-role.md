@@ -26,7 +26,7 @@ After Databend Cloud support shares the trusted principal information for your o
 
 2. Goto AWS Console:
 
-   https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/policies
+   <https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/policies>
 
    Click `Create policy`, and select `Custom trust policy`, and input the policy document for S3 bucket access:
 
@@ -52,7 +52,7 @@ After Databend Cloud support shares the trusted principal information for your o
 
 3. Goto AWS Console:
 
-   https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/roles
+   <https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/roles>
 
    Click `Create role`, and select `Custom trust policy` in `Trusted entity type`:
 

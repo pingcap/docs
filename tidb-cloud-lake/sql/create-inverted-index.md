@@ -41,8 +41,8 @@ IndexOptions ::=
 
 - `FILTERS` defines rules for term filtering:
 
-  - Multiple filters can be specified, separated by commas, e.g., `FILTERS = 'english_stop,english_stemmer'`.
-  - A lower case filter is added by default to convert words to lowercase letters.
+    - Multiple filters can be specified, separated by commas, e.g., `FILTERS = 'english_stop,english_stemmer'`.
+    - A lower case filter is added by default to convert words to lowercase letters.
 
 | FILTERS           | Description                                                                                                             |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------|

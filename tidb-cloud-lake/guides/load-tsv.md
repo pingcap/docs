@@ -11,8 +11,8 @@ TSV (Tab Separated Values) is a simple file format used to store tabular data, s
 The following example shows a TSV file with two records:
 
 ```text
-Title_0	Author_0
-Title_1	Author_1
+Title_0 Author_0
+Title_1 Author_1
 ```
 
 ## Loading TSV File

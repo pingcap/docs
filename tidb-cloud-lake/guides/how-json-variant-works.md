@@ -178,9 +178,9 @@ All functions operate directly on JSONB buffers inside the vectorised engine.
 ## Performance Characteristics
 
 - Internal benchmarks vs. raw JSON scanning:
-  - Single-path lookups: **≈3× faster**, **≈26×** less data scanned.
-  - Multi-path projections: **≈1.4× faster**, **≈5.5×** less data read.
-  - Predicate pushdown composes with bloom/inverted indexes to prune blocks.
+    - Single-path lookups: **≈3× faster**, **≈26×** less data scanned.
+    - Multi-path projections: **≈1.4× faster**, **≈5.5×** less data read.
+    - Predicate pushdown composes with bloom/inverted indexes to prune blocks.
 - The steadier the JSON shape, the more paths qualify for indexing.
 
 ## Databend Advantages for Variant Data

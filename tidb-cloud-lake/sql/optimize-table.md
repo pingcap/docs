@@ -45,6 +45,7 @@ Databend creates a unique ID for each database and table for storing the snapsho
 ## Table Optimizations
 
 In Databend, it's advisable to aim for an ideal block size of either 100MB (uncompressed) or 1,000,000 rows, with each segment consisting of 1,000 blocks. To maximize table optimization, it's crucial to gain a clear understanding of when and how to apply various optimization techniques, such as [Segment Compaction](#segment-compaction) and [Block Compaction](#block-compaction).
+
 - When using the COPY INTO or REPLACE INTO command to write data into a table that includes a cluster key, Databend will automatically initiate a re-clustering process, as well as a segment and block compact process.
 
 - Segment & block compactions support distributed execution in cluster environments. You can enable them by setting ENABLE_DISTRIBUTED_COMPACT to 1. This helps enhance data query performance and scalability in cluster environments.
@@ -56,6 +57,7 @@ In Databend, it's advisable to aim for an ideal block size of either 100MB (unco
 ### Segment Compaction
 
 Compact segments when a table has too many small segments (less than `100 blocks` per segment).
+
 ```sql
 SELECT
   block_count,
@@ -151,9 +153,11 @@ FROM
 > We recommend performing segment compaction first, followed by block compaction.
 
 **Syntax**
+
 ```sql
 OPTIMIZE TABLE [database.]table_name COMPACT [LIMIT <segment_count>]
 ```
+
 Compacts the table data by merging small blocks and segments into larger ones.
 
 - This command creates a new snapshot (along with compacted segments and blocks) of the most recent table data without affecting the existing storage files, so the storage space won't be released until you purge the historical data.
@@ -165,6 +169,7 @@ Compacts the table data by merging small blocks and segments into larger ones.
 - Databend will automatically re-cluster a clustered table after the compacting process.
 
 **Example**
+
 ```sql
 OPTIMIZE TABLE my_database.my_table COMPACT LIMIT 50;
 ```

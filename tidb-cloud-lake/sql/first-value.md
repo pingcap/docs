@@ -28,12 +28,14 @@ OVER (
 ```
 
 **Arguments:**
+
 - `expression`: Required. The column or expression to return the first value from.
 - `PARTITION BY`: Optional. Divides rows into partitions.
 - `ORDER BY`: Required. Determines the ordering within the window.
 - `window_frame`: Optional. Defines the window frame. The default is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`.
 
 **Notes:**
+
 - Returns the first value in the ordered window frame.
 - Supports `IGNORE NULLS` to skip null values and `RESPECT NULLS` to keep the default behaviour.
 - Specify an explicit window frame (for example, `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`) when you need row-based semantics instead of the default range frame.
@@ -78,6 +80,7 @@ ORDER BY customer, order_time;
 ```
 
 Result:
+
 ```
 customer | order_id | order_time           | amount | first_order_amount
 ---------+----------+----------------------+--------+--------------------
@@ -106,6 +109,7 @@ ORDER BY customer, order_time;
 ```
 
 Result:
+
 ```
 customer | order_id | order_time           | first_order_in_24h
 ---------+----------+----------------------+--------------------
@@ -137,6 +141,7 @@ ORDER BY customer, order_id;
 ```
 
 Result:
+
 ```
 customer | order_id | sales_rep | first_rep_respect | first_rep_ignore
 ---------+----------+-----------+-------------------+------------------

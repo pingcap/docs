@@ -17,7 +17,7 @@ In this tutorial, we will walk you through the process of downloading the Iris d
 
 ## Step 1: Download Iris Dataset
 
-Download the iris dataset from https://github.com/tensorflow/io/raw/master/tests/test_orc/iris.orc then upload it to your Amazon S3 bucket.
+Download the iris dataset from <https://github.com/tensorflow/io/raw/master/tests/test_orc/iris.orc> then upload it to your Amazon S3 bucket.
 
 The iris dataset contains 3 classes of 50 instances each, where each class refers to a type of iris plant. It has 4 attributes: (1) sepal length, (2) sepal width, (3) petal length, (4) petal width, and the last column contains the class label.
 

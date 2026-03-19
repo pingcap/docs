@@ -18,6 +18,7 @@ EXPLAIN ANALYZE <statement>
 ## Examples
 
 TPC-H Q21:
+
 ```sql
 EXPLAIN ANALYZE SELECT s_name,
     ->        Count(*) AS numwait

@@ -111,8 +111,8 @@ By default, **all columns are nullable(NULL)** in Databend. If you need a column
 - A fixed constant, such as `Marketing` for the `department` column in the example below.
 - An expression with no input arguments and returns a scalar value, such as `1 + 1`, `NOW()` or `UUID()`.
 - A dynamically generated value from a sequence, such as `NEXTVAL(staff_id_seq)` for the `staff_id` column in the example below.
-  - NEXTVAL must be used as a standalone default value; expressions like `NEXTVAL(seq1) + 1` are not supported.
-  - Users must adhere to their granted permissions for sequence utilization, including operations such as [NEXTVAL](/tidb-cloud-lake/sql/nextval.md#access-control-requirements)
+    - NEXTVAL must be used as a standalone default value; expressions like `NEXTVAL(seq1) + 1` are not supported.
+    - Users must adhere to their granted permissions for sequence utilization, including operations such as [NEXTVAL](/tidb-cloud-lake/sql/nextval.md#access-control-requirements)
 
 ## Auto-Increment Columns
 

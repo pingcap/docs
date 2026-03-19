@@ -57,6 +57,7 @@ SELECT ...
 | `SELECT ...`                             | A subquery that provides the data to be inserted into the target table(s).<br/>- You have the option to explicitly assign aliases to columns within the subquery. This allows you to reference the columns by their aliases within WHEN clauses and VALUES clauses.                                                                                   |
 | `WHEN`                                   | Conditional statement to determine when to insert data into specific target tables.<br/>- A conditional multi-table insert requires at least one WHEN clause.<br/>- A WHEN clause can include multiple INTO clauses, and these INTO clauses can target the same table.<br/>- To unconditionally execute a WHEN clause, you can use `WHEN 1 THEN ...`. |
 | `ELSE`                                   | Specifies the action to take if none of the conditions specified in the WHEN clauses are met.                                                                                                                                                                                                                                                        |
+
 ## Important Notes
 
 - Aggregate functions, external UDFs, and window functions are not allowed in the `VALUES(...)` expressions.

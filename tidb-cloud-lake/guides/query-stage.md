@@ -52,11 +52,12 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 > **Note:**
 >
 > compared the two syntaxes
+>
 > - Same `Select List`
-> - Same ` FROM {@<stage_name>[/<path>] | '<uri>'}`
+> - Same `FROM {@<stage_name>[/<path>] | '<uri>'}`
 > - diff parameters:
->   - query use `table function parameters`, i.e. `(<key> => <value>, ...)`
->   - transform use Options at the end of [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md)
+>     - query use `table function parameters`, i.e. `(<key> => <value>, ...)`
+>     - transform use Options at the end of [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md)
 
 ## FROM Clause
 
@@ -93,9 +94,10 @@ SELECT [<alias>.]$1[:<column>] [, [<alias>.]$1[:<column>]  ...] <FROM Clause>
 - Example: `SELECT $1:id, $1:name FROM ...`
 - Table Schema: ($1: Variant). i.e. Single Column with Variant Object Type, each Variant representing a whole row
 - Notes:
-  - The type of path expressions like `$1:column` is Variant too, it can be auto cast to native types when used in expressions or load to dest table column, sometimes you may want to cast manually before for type-specific operations (e.g., `CAST($1:id AS INT)`) to make the semantics more explicit.
+    - The type of path expressions like `$1:column` is Variant too, it can be auto cast to native types when used in expressions or load to dest table column, sometimes you may want to cast manually before for type-specific operations (e.g., `CAST($1:id AS INT)`) to make the semantics more explicit.
 
 ### Query columns by name
+
 - supported File Formats: NDJSON, AVRO, Parquet, ORC
 
 ```sql
@@ -105,18 +107,20 @@ SELECT [<alias>.]<column> [, [<alias>.]<column>  ...] <FROM Clause>
 - Example: `SELECT id, name FROM ...`
 - Table Schema: Columns Mapping from Parquet or ORC file schema
 - Notes:
-  - All files are required to have the same Parquet/ORC schema; otherwise, an error will be returned
+    - All files are required to have the same Parquet/ORC schema; otherwise, an error will be returned
 
 ### Query columns by Position
+
 - supported File Formats: CSV, TSV
 
 ```sql
 SELECT [<alias>.]$<col_position>[, [<alias>.]$<col_position>,  ...] <FROM Clause>
 ```
+
 - Example: `SELECT $1, $2 FROM ...`
 - Table Schema: Columns of type `VARCHAR NULL`
 - Notes
-  - `<col_position>` starts from 1
+    - `<col_position>` starts from 1
 
 ## Query Metadata
 
@@ -138,11 +142,13 @@ The following file-level metadata fields are available for the supported file fo
 | `METADATA$FILE_ROW_NUMBER` | INT     | The row number within the file (starting from 0) |
 
 **Use cases:**
+
 - **Data lineage**: Track which source file contributed each record
 - **Debugging**: Identify problematic records by file and line number
 - **Incremental processing**: Process only specific files or ranges within files
 
 ## Tutorials by File Formats
+
 - [Querying Parquet Files](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)
 - [Querying ORC Files](/tidb-cloud-lake/guides/query-staged-orc-files-in-stage.md)
 - [Querying NDJSON Files](/tidb-cloud-lake/guides/query-ndjson-files-in-stage.md)

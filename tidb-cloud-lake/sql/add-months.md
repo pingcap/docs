@@ -31,6 +31,7 @@ Returns a TIMESTAMP or DATE type
 ## Examples
 
 ### Basic Month Addition
+
 ```sql
 SELECT ADD_MONTHS('2023-01-15'::DATE, 3);
 ├───────────────────────────────────┤
@@ -39,6 +40,7 @@ SELECT ADD_MONTHS('2023-01-15'::DATE, 3);
 ```
 
 ### Subtracting Months
+
 ```sql
 SELECT ADD_MONTHS('2023-06-20'::DATE, -4);
 ├─────────────────────────────────────┤
@@ -47,6 +49,7 @@ SELECT ADD_MONTHS('2023-06-20'::DATE, -4);
 ```
 
 ### Month-End Adjustment
+
 ```sql
 SELECT ADD_MONTHS('2023-01-31'::DATE, 1);
 ├───────────────────────────────────┤
@@ -55,6 +58,7 @@ SELECT ADD_MONTHS('2023-01-31'::DATE, 1);
 ```
 
 ### With Timestamp Preservation
+
 ```sql
 SELECT ADD_MONTHS('2023-03-15 14:30:00'::TIMESTAMP, 5);
 ├─────────────────────────────────────────────────┤
@@ -63,6 +67,7 @@ SELECT ADD_MONTHS('2023-03-15 14:30:00'::TIMESTAMP, 5);
 ```
 
 ### With last day of month
+
 ```sql
 CREATE TABLE contracts (
     id INT,

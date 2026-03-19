@@ -44,6 +44,7 @@ FUNCTION() OVER (
 ## Value Types for RANGE
 
 ### 1. Numeric Values
+
 ```sql
 -- Include rows within ±10 units
 RANGE BETWEEN 10 PRECEDING AND 10 FOLLOWING
@@ -53,6 +54,7 @@ RANGE BETWEEN 50 PRECEDING AND CURRENT ROW
 ```
 
 ### 2. Interval Values (for DATE/TIMESTAMP)
+
 ```sql
 -- 7-day window
 RANGE BETWEEN INTERVAL '7' DAY PRECEDING AND CURRENT ROW
@@ -65,7 +67,9 @@ RANGE BETWEEN INTERVAL '15' MINUTE PRECEDING AND INTERVAL '15' MINUTE FOLLOWING
 ```
 
 ### 3. No Value Specified (Default)
+
 When no value is specified with `PRECEDING` or `FOLLOWING`, it defaults to `CURRENT ROW`:
+
 ```sql
 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW  -- Default behavior
 ```
@@ -150,6 +154,7 @@ ORDER BY sale_date;
 ```
 
 **Result comparison:**
+
 ```
 sale_date   | amount | running_total_range | running_total_rows
 ------------+--------+---------------------+--------------------
@@ -177,7 +182,9 @@ ORDER BY sensor_id, reading_time;
 ## Common Patterns
 
 ### Time-Based Windows
+
 **Syntax examples:**
+
 ```sql
 -- 7-day rolling window
 RANGE BETWEEN INTERVAL '7' DAY PRECEDING AND CURRENT ROW
@@ -190,6 +197,7 @@ RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
 ```
 
 **Complete example:**
+
 ```sql
 -- 7-day rolling average
 SELECT sale_date, amount,
@@ -202,7 +210,9 @@ ORDER BY sale_date;
 ```
 
 ### Value-Based Windows
+
 **Syntax examples:**
+
 ```sql
 -- Within ±10 units
 RANGE BETWEEN 10 PRECEDING AND 10 FOLLOWING
@@ -215,6 +225,7 @@ RANGE BETWEEN 100 PRECEDING AND CURRENT ROW
 ```
 
 **Complete example:**
+
 ```sql
 -- Include rows within ±0.5 units
 SELECT temperature, reading_time,
@@ -227,7 +238,9 @@ ORDER BY temperature;
 ```
 
 ### Handling Duplicates
+
 **Syntax examples:**
+
 ```sql
 -- Include all duplicate values in same window
 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
@@ -237,6 +250,7 @@ RANGE BETWEEN 0 PRECEDING AND 0 FOLLOWING
 ```
 
 **Complete example:**
+
 ```sql
 -- RANGE treats duplicate dates as same window
 SELECT sale_date, amount,

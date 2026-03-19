@@ -8,6 +8,7 @@ summary: Changes the value of a system setting for the current session. To show 
 Changes the value of a system setting for the current session. To show all the current settings, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 
 See also:
+
 - [SETTINGS Clause](/tidb-cloud-lake/sql/settings-clause.md)
 - [SET_VAR](/tidb-cloud-lake/sql/set-var.md)
 - [UNSET](/tidb-cloud-lake/sql/unset.md)

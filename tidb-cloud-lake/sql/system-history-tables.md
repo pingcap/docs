@@ -119,4 +119,3 @@ table_name = "access_history"
 > ⚠️ **Note:** When changing storage configuration, existing history tables will be dropped and recreated.
 
 </details>
-

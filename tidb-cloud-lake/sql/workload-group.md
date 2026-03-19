@@ -35,6 +35,7 @@ ALTER USER analyst WITH UNSET WORKLOAD GROUP;
 ## Command Reference
 
 ### Management
+
 | Command | Description |
 |---------|-------------|
 | [CREATE WORKLOAD GROUP](/tidb-cloud-lake/sql/create-workload-group.md) | Creates a new workload group with resource quotas |
@@ -43,6 +44,7 @@ ALTER USER analyst WITH UNSET WORKLOAD GROUP;
 | [RENAME WORKLOAD GROUP](/tidb-cloud-lake/sql/rename-workload-group.md) | Renames a workload group |
 
 ### Information
+
 | Command | Description |
 |---------|-------------|
 | [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md) | Lists all workload groups and their settings |

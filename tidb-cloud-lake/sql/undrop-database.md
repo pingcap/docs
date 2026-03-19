@@ -32,6 +32,7 @@ UNDROP DATABASE <database_name>
     root@localhost:8000/default> UNDROP DATABASE doc;
     error: APIError: QueryFailed: [2301]Database 'doc' already exists
     ```
+
 - Undropping a database does not automatically restore ownership to the original role. After undropping, ownership must be manually granted to the previous role or another role. Until then, the database will be accessible only to the `account-admin` role.
 
     ```sql title='Examples:'

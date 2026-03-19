@@ -115,6 +115,7 @@ conn.close();
 ## Configuration Reference
 
 For complete databend-jdbc driver configuration options including:
+
 - Connection string parameters
 - SSL/TLS configuration
 - Authentication methods

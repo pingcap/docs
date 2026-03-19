@@ -18,11 +18,13 @@ OVER (
 ```
 
 **Arguments:**
+
 - `PARTITION BY`: Optional. Divides rows into partitions
 - `ORDER BY`: Required. Determines the row numbering order
 - `ASC | DESC`: Optional. Sort direction (default: ASC)
 
 **Notes:**
+
 - Returns sequential integers starting from 1
 - Each partition restarts numbering from 1
 - Commonly used for ranking and pagination
@@ -59,6 +61,7 @@ ORDER BY score DESC, student, subject;
 ```
 
 Result:
+
 ```
 student | subject | score | row_num
 --------+---------+-------+--------
@@ -83,6 +86,7 @@ ORDER BY student, score DESC;
 ```
 
 Result:
+
 ```
 student | subject | score | subject_rank
 --------+---------+-------+-------------

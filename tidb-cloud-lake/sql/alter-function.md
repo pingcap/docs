@@ -14,6 +14,7 @@ Alters a user-defined function. Supports all function types: Scalar SQL, Tabular
 ## Syntax
 
 ### For Scalar SQL Functions
+
 ```sql
 ALTER FUNCTION [ IF EXISTS ] <function_name>
     ( [<parameter_list>] )
@@ -23,6 +24,7 @@ ALTER FUNCTION [ IF EXISTS ] <function_name>
 ```
 
 ### For Tabular SQL Functions
+
 ```sql
 ALTER FUNCTION [ IF EXISTS ] <function_name>
     ( [<parameter_list>] )
@@ -32,6 +34,7 @@ ALTER FUNCTION [ IF EXISTS ] <function_name>
 ```
 
 ### For Embedded Functions
+
 ```sql
 ALTER FUNCTION [ IF EXISTS ] <function_name>
     ( [<parameter_list>] )
@@ -47,6 +50,7 @@ ALTER FUNCTION [ IF EXISTS ] <function_name>
 ## Examples
 
 ### Altering Scalar SQL Function
+
 ```sql
 -- Create a scalar function
 CREATE FUNCTION calculate_tax(income DECIMAL)
@@ -65,6 +69,7 @@ $$;
 ```
 
 ### Altering Tabular SQL Function
+
 ```sql
 -- Create a table function
 CREATE FUNCTION get_employees()
@@ -78,6 +83,7 @@ AS $$ SELECT id, name, department, salary FROM employees $$;
 ```
 
 ### Altering Embedded Function
+
 ```sql
 -- Create a Python function
 CREATE FUNCTION simple_calc(x INT)

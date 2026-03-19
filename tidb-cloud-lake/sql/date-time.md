@@ -30,6 +30,7 @@ SELECT * FROM events;
 ```
 
 Result:
+
 ```
 ┌────────────┐
 │ event_date │
@@ -57,6 +58,7 @@ SELECT meeting_id, meeting_time FROM meetings;
 ```
 
 Result (timezone = 'UTC'):
+
 ```
 ┌────────────┬──────────────────────┐
 │ meeting_id │ meeting_time         │
@@ -66,6 +68,7 @@ Result (timezone = 'UTC'):
 ```
 
 Result (timezone = 'America/New_York'):
+
 ```
 ┌────────────┬──────────────────────┐
 │ meeting_id │ meeting_time         │
@@ -95,6 +98,7 @@ SELECT log_id, TO_STRING(log_time) AS log_time FROM system_logs;
 ```
 
 Result (timezone = 'UTC'):
+
 ```
 ┌────────┬────────────────────────────────────────────┐
 │ log_id │ log_time                                   │
@@ -106,6 +110,7 @@ Result (timezone = 'UTC'):
 ```
 
 Result (timezone = 'Asia/Shanghai'):
+
 ```
 ┌────────┬────────────────────────────────────────────┐
 │ log_id │ log_time                                   │
@@ -136,6 +141,7 @@ SELECT to_datetime('2024-03-10 02:01:00');
 ```
 
 Result:
+
 ```
 ┌────────────────────────────────────┐
 │ to_datetime('2024-03-10 02:01:00') │
@@ -157,6 +163,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌───────────────┬──────────────────────────┐
 │ overflow_date │ underflow_timestamp      │
@@ -164,7 +171,9 @@ Result:
 │ 0001-01-01    │ 0999-12-31T18:41:28      │
 └───────────────┴──────────────────────────┘
 ```
+
 The values wrap to the minimum representable date or timestamp instead of raising an error.
+
 ## Formatting Date and Time
 
 Functions such as [TO_DATE](/tidb-cloud-lake/sql/to-date.md) and [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) accept explicit format strings. Control how they parse or render values by adjusting `date_format_style` and `week_start`.
@@ -183,6 +192,7 @@ SELECT to_string('2024-04-05'::DATE, 'YYYY-MM-DD');
 ```
 
 Result (Oracle):
+
 ```
 ┌──────────────────────────────────────┐
 │ to_string('2024-04-05'::DATE, 'YYYY-MM-DD') │
@@ -198,6 +208,7 @@ SELECT to_string('2024-04-05'::DATE, '%Y-%m-%d');
 ```
 
 Result (MySQL):
+
 ```
 ┌──────────────────────────────────────┐
 │ to_string('2024-04-05'::DATE, '%Y-%m-%d') │
@@ -216,6 +227,7 @@ SETTINGS (week_start = 1) SELECT DATE_TRUNC(WEEK, to_date('2024-04-05')); -- Mon
 ```
 
 Result (week_start = 0):
+
 ```
 ┌────────────────────────────────┐
 │ DATE_TRUNC(WEEK, TO_DATE('2024-04-05')) │
@@ -225,6 +237,7 @@ Result (week_start = 0):
 ```
 
 Result (week_start = 1):
+
 ```
 ┌────────────────────────────────┐
 │ DATE_TRUNC(WEEK, TO_DATE('2024-04-05')) │

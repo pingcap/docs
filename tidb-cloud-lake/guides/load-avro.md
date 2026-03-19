@@ -27,7 +27,7 @@ FILE_FORMAT = (TYPE = AVRO)
 
 In this tutorial, you will create a table in Databend using an Avro schema and load Avro data directly from a GitHub-hosted `.avro` file via HTTPS.
 
-###  Step 1: Review the Avro Schema
+### Step 1: Review the Avro Schema
 
 Before creating a table in Databend, let’s take a quick look at the Avro schema we’re working with: [userdata.avsc](https://github.com/Teradata/kylo/blob/master/samples/sample-data/avro/userdata.avsc). This schema defines a record named `User` with 13 fields, mostly of type string, along with `int` and `float`.
 
@@ -53,7 +53,7 @@ Before creating a table in Databend, let’s take a quick look at the Avro schem
 }
 ```
 
-###  Step 2: Create a Table in Databend
+### Step 2: Create a Table in Databend
 
 Create a table that matches the structure defined in the schema:
 
@@ -75,7 +75,7 @@ CREATE TABLE userdata (
 );
 ```
 
-###  Step 3: Load Data from a Remote HTTPS URL
+### Step 3: Load Data from a Remote HTTPS URL
 
 ```sql
 COPY INTO userdata

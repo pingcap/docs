@@ -19,11 +19,11 @@ GENERATE_SERIES(<start>, <stop>[, <step_interval>])
 
 ## Arguments
 
-| Argument      	| Description                                                                                                                                                                                                	|
-|---------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| start         	| The starting value, representing the first number, date, or timestamp in the sequence.                                                                                                                            	|
-| stop          	| The ending value, representing the last number, date, or timestamp in the sequence.                                                                                                                               	|
-| step_interval 	| The step interval, determining the difference between adjacent values in the sequence. For integer sequences, the default value is 1. For date sequences, the default step interval is 1 day. For timestamp sequences, the default step interval is 1 microsecond. 	|
+| Argument       | Description                                                                                                                                                                                                 |
+|--------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| start          | The starting value, representing the first number, date, or timestamp in the sequence.                                                                                                                             |
+| stop           | The ending value, representing the last number, date, or timestamp in the sequence.                                                                                                                                |
+| step_interval  | The step interval, determining the difference between adjacent values in the sequence. For integer sequences, the default value is 1. For date sequences, the default step interval is 1 day. For timestamp sequences, the default step interval is 1 microsecond.  |
 
 > **Note:**
 >

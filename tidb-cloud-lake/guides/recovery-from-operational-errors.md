@@ -5,15 +5,12 @@ summary: This guide provides step-by-step instructions for recovering from commo
 
 # Recovery from Operational Errors
 
-import IndexOverviewList from '@site/src/components/IndexOverviewList';
-
-## Recovery from Operational Errors
-
 This guide provides step-by-step instructions for recovering from common operational errors in Databend.
 
 ## Introduction
 
 Databend can help you recover from these common operational errors:
+
 - **Accidentally dropped databases**
 - **Accidentally dropped tables**
 - **Incorrect data modifications (UPDATE/DELETE operations)**
@@ -130,6 +127,7 @@ If you've accidentally modified or deleted data in a table, you can restore it t
 For more details, see [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md).
 
 ### Scenario: Schema Evolution Rollbacks
+
 If you've made unwanted changes to a table's structure, you can revert to the previous schema:
 
 1. Create a table and add some data:
@@ -147,6 +145,7 @@ If you've made unwanted changes to a table's structure, you can revert to the pr
     ```
 
 Output:
+
 ```text
 ┌─────────┬─────────┬──────┬─────────┬─────────┐
 │ Field   │ Type    │ Null │ Default │ Extra   │
@@ -184,6 +183,7 @@ Output:
     ```
 
     Output:
+
     ```text
     ┌─────────┬─────────┬──────┬─────────┬─────────┐
     │ Field   │ Type    │ Null │ Default │ Extra   │

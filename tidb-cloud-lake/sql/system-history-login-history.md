@@ -35,6 +35,7 @@ summary: Login successful example sql SELECT * FROM system_history.login_history
 ## Examples
 
 Login successful example:
+
 ```sql
 SELECT * FROM system_history.login_history LIMIT 1;
 
@@ -53,6 +54,7 @@ connection_uri: /session/login?disable_session_token=true
 ```
 
 Login failed example:
+
 ```sql
 SELECT * FROM system_history.login_history LIMIT 1;
 

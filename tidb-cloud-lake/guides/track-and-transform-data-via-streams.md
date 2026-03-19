@@ -223,17 +223,21 @@ Rows stay in each stream until `WITH CONSUME` runs, so inserts that arrive at di
 ## Stream Workflow Notes
 
 **Consumption**
+
 - Streams are drained inside a transaction: `INSERT INTO target SELECT ... FROM stream` empties the stream only when the statement commits.
 - Only one consumer can succeed at a time; other concurrent statements roll back.
 
 **Modes**
+
 - Append-Only streams capture INSERTs only and are ideal for append-heavy workloads.
 - Standard streams emit updates and deletes as long as you consume them; late-arriving updates remain until the next run.
 
 **Hidden Columns**
+
 - Streams expose `change$action`, `change$is_update`, and `change$row_id`; use them to understand how Databend recorded each row.
 - Base tables gain `_origin_version`, `_origin_block_id`, `_origin_block_row_num` for debugging row provenance.
 
 **Integrations**
+
 - Pair streams with tasks using `task_history('<name>', <limit>)` for scheduled incremental loads.
 - Use [`WITH CONSUME`](/tidb-cloud-lake/sql/task.md) when you want to drain only the latest delta.

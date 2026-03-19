@@ -28,6 +28,7 @@ The minimum value, in the type of the value.
 ## Example
 
 ---
+
 title: MIN
 ---
 
@@ -54,6 +55,7 @@ The minimum value, in the type of the value.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE gas_prices (
   id INT,
@@ -70,6 +72,7 @@ VALUES (1, 1, 3.50),
 ```
 
 **Query Demo: Find Minimum Gas Price for Station 1**
+
 ```sql
 SELECT station_id, MIN(price) AS min_price
 FROM gas_prices
@@ -78,6 +81,7 @@ GROUP BY station_id;
 ```
 
 **Result**
+
 ```sql
 | station_id | min_price |
 |------------|-----------|

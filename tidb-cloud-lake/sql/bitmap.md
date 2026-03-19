@@ -27,6 +27,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌────────────────────────────────┬──────────────────────────────────┬────────────────┐
 │ str_input                      │ round_tripped                    │ from_uint64    │
@@ -58,6 +59,7 @@ FROM user_visits;
 ```
 
 Result:
+
 ```
 ┌────────┬────────────────┬─────────────┐
 │ user_id │ distinct_pages │ saw_page_10 │

@@ -43,6 +43,7 @@ inner_product(v1, v2) = Σ(v1ᵢ * v2ᵢ)
 Where v1ᵢ and v2ᵢ are the elements of the input vectors.
 
 The inner product is fundamental in:
+
 - Measuring vector similarity (higher values indicate more similar directions)
 - Computing projections of one vector onto another
 - Machine learning algorithms (neural networks, SVM, etc.)
@@ -61,6 +62,7 @@ SELECT INNER_PRODUCT([1,2,3]::VECTOR(3), [4,5,6]::VECTOR(3)) AS inner_product;
 ```
 
 Result:
+
 ```
 ┌───────────────┐
 │ inner_product │
@@ -98,6 +100,7 @@ FROM vector_examples;
 ```
 
 Result:
+
 ```
 ┌────┬───────────────┬───────────────┬───────────────┐
 │ id │   vector_a    │   vector_b    │ inner_product │
@@ -119,6 +122,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌────────────────┬─────────────┬──────────┐
 │ same_direction │ orthogonal  │ opposite │

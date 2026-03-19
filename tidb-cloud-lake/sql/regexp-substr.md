@@ -7,7 +7,7 @@ summary: Returns the substring of the string expr that matches the regular expre
 
 Returns the substring of the string `expr` that matches the regular expression specified by the pattern `pat`, NULL if there is no match. If expr or pat is NULL, the return value is NULL.
 
--  REGEXP_SUBSTR does not support extracting capture groups (subpatterns defined by parentheses `()`). It returns the entire matched substring instead of specific captured groups.
+- REGEXP_SUBSTR does not support extracting capture groups (subpatterns defined by parentheses `()`). It returns the entire matched substring instead of specific captured groups.
 
 ```sql
 SELECT REGEXP_SUBSTR('abc123', '(\w+)(\d+)');

@@ -12,6 +12,7 @@ summary: Creates a SQL user for connecting to Databend. Users must be granted ap
 Creates a SQL user for connecting to Databend. Users must be granted appropriate privileges to access databases and perform operations.
 
 See also:
+
 - [GRANT](/tidb-cloud-lake/sql/grant.md)
 - [ALTER USER](/tidb-cloud-lake/sql/alter-user.md)
 - [DROP USER](/tidb-cloud-lake/sql/drop-user.md)
@@ -28,6 +29,7 @@ CREATE [ OR REPLACE ] USER <name> IDENTIFIED [ WITH <auth_type> ] BY '<password>
 ```
 
 **Parameters:**
+
 - `<name>`: Username (cannot contain single quotes, double quotes, backspace, or form feed characters)
 - `<auth_type>`: Authentication type - `double_sha1_password` (default), `sha256_password`, or `no_password`
 - `MUST_CHANGE_PASSWORD`: When `true`, user must change password at first login
@@ -51,6 +53,7 @@ GRANT ROLE data_analyst_role TO data_analyst;
 ```
 
 Verify the role and permissions:
+
 ```sql
 SHOW GRANTS FOR ROLE data_analyst_role;
 +-----------------------------------------------------------------+
@@ -76,6 +79,7 @@ GRANT ROLE analyst_role TO john_analyst;
 ```
 
 Verify the role assignment:
+
 ```sql
 SHOW GRANTS FOR john_analyst;
 +------------------------------------------+

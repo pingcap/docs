@@ -105,6 +105,7 @@ REVOKE ROLE <role_name> FROM ROLE <role_name>
 ### Example 1: Revoking Privileges from a Role
 
 Create a role:
+
 ```sql
 CREATE ROLE user1_role;
 ```
@@ -114,6 +115,7 @@ Grant the `SELECT,INSERT` privilege on all existing tables in the `default` data
 ```sql
 GRANT SELECT,INSERT ON default.* TO ROLE user1_role;
 ```
+
 ```sql
 SHOW GRANTS FOR ROLE user1_role;
 +---------------------------------------------------------+
@@ -124,6 +126,7 @@ SHOW GRANTS FOR ROLE user1_role;
 ```
 
 Revoke `INSERT` privilege from role `user1_role`:
+
 ```sql
 REVOKE INSERT ON default.* FROM ROLE user1_role;
 ```
@@ -142,16 +145,19 @@ SHOW GRANTS FOR ROLE user1_role;
 Grant the `SELECT,INSERT` privilege on all existing tables in the `mydb` database to the role `role1`:
 
 Create role:
+
 ```sql
 CREATE ROLE role1;
 ```
 
 Grant privileges to the role:
+
 ```sql
 GRANT SELECT,INSERT ON mydb.* TO ROLE role1;
 ```
 
 Show the grants for the role:
+
 ```sql
 SHOW GRANTS FOR ROLE role1;
 +--------------------------------------------+
@@ -162,6 +168,7 @@ SHOW GRANTS FOR ROLE role1;
 ```
 
 Revoke `INSERT` privilege from role `role1`:
+
 ```sql
 REVOKE INSERT ON mydb.* FROM ROLE role1;
 ```

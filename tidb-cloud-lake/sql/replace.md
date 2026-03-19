@@ -123,6 +123,7 @@ VALUES
 2. Set up an internal stage with sample data
 
 Firstly, we create a stage named `mystage`. Then, we load sample data into this stage.
+
 ```sql
 CREATE STAGE mystage;
 
@@ -163,11 +164,13 @@ FROM
 4. Verify the data replacement
 
 Now, we can query the sample table to see the changes:
+
 ```sql
 SELECT * FROM sample;
 ```
 
 The results should be:
+
 ```sql
 ┌─────────────────────────────────────────────────────────────────────────┐
 │        id       │       city       │      score      │      country     │

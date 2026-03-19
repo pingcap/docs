@@ -22,12 +22,14 @@ OVER (
 ```
 
 **Arguments:**
+
 - `bucket_count`: Required. Number of buckets to create (must be positive integer)
 - `PARTITION BY`: Optional. Divides rows into partitions
 - `ORDER BY`: Required. Determines the distribution order
 - `ASC | DESC`: Optional. Sort direction (default: ASC)
 
 **Notes:**
+
 - Bucket numbers range from 1 to `bucket_count`
 - Rows are distributed as evenly as possible
 - If rows don't divide evenly, earlier buckets get one extra row
@@ -65,6 +67,7 @@ ORDER BY score DESC, student, subject;
 ```
 
 Result:
+
 ```
 student | subject | score | score_bucket
 --------+---------+-------+-------------
@@ -89,6 +92,7 @@ ORDER BY student, score DESC, subject;
 ```
 
 Result:
+
 ```
 student | subject | score | performance_half
 --------+---------+-------+-----------------

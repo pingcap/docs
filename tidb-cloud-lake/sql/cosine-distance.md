@@ -21,6 +21,7 @@ COSINE_DISTANCE(vector1, vector2)
 ## Returns
 
 Returns a FLOAT value between 0 and 1:
+
 - 0: Identical vectors (completely similar)
 - 1: Orthogonal vectors (completely dissimilar)
 
@@ -55,6 +56,7 @@ SELECT COSINE_DISTANCE([1.0, 2.0, 3.0]::vector(3), [4.0, 5.0, 6.0]::vector(3)) A
 ```
 
 Result:
+
 ```
 ╭─────────────╮
 │   distance  │

@@ -17,6 +17,7 @@ See also:
 ```sql
 REMOVE { userStage | internalStage | externalStage } [ PATTERN = '<regex_pattern>' ]
 ```
+
 Where:
 
 ### internalStage

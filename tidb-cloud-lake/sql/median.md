@@ -30,6 +30,7 @@ the type of the value.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE exam_scores (
   id INT,
@@ -46,6 +47,7 @@ VALUES (1, 1, 80),
 ```
 
 **Query Demo: Calculate Median Exam Score**
+
 ```sql
 SELECT MEDIAN(score) AS median_score
 FROM exam_scores;

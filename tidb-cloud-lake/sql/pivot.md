@@ -24,6 +24,7 @@ FROM ...
 ```
 
 Where:
+
 * `<aggregate_function>`: The aggregate function for combining the grouped values from `pivot_column`.
 * `<pivot_column>`: The column that will be aggregated using the specified `<aggregate_function>`.
 * `<value_column>`: The column whose unique values will become new columns in the pivoted result set.
@@ -75,6 +76,7 @@ ORDER BY EMPID;
 ```
 
 Output:
+
 ```sql
 +-------+-------+-------+-------+-------+
 | empid | jan   | feb   | mar   | apr   |

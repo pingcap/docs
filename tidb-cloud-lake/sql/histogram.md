@@ -31,11 +31,11 @@ HISTOGRAM(<expr> [, <max_num_buckets>])
 Returns either an empty string or a JSON object with the following structure:
 
 - **buckets**: List of buckets with detailed information:
-  - **lower**: Lower bound of the bucket.
-  - **upper**: Upper bound of the bucket.
-  - **count**: Number of elements in the bucket.
-  - **pre_sum**: Cumulative count of elements up to the current bucket.
-  - **ndv**: Number of distinct values in the bucket.
+    - **lower**: Lower bound of the bucket.
+    - **upper**: Upper bound of the bucket.
+    - **count**: Number of elements in the bucket.
+    - **pre_sum**: Cumulative count of elements up to the current bucket.
+    - **ndv**: Number of distinct values in the bucket.
 
 ## Examples
 

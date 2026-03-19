@@ -56,6 +56,7 @@ DESC test_numeric;
 ```
 
 Result:
+
 ```
 ┌───────────────────────────────────────────────────────────────────┐
 │       Field       │        Type       │  Null  │ Default │  Extra │

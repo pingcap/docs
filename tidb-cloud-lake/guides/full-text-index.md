@@ -56,6 +56,7 @@ SELECT * FROM logs WHERE MATCH(message, 'error kubernetes');
 ```
 
 **Automatic Index Management**:
+
 - **New Data**: Automatically indexed as it's inserted - no manual action needed
 - **Existing Data**: One-time refresh required only for data that existed before index creation
 - **Ongoing Maintenance**: Databend automatically maintains optimal search performance
@@ -71,12 +72,14 @@ SELECT * FROM logs WHERE MATCH(message, 'error kubernetes');
 ## Advanced Search Features
 
 ### Fuzzy Search
+
 ```sql
 -- Find documents even with typos (fuzziness=1 allows 1 character difference)
 SELECT * FROM logs WHERE MATCH(message, 'kubernetes', 'fuzziness=1');
 ```
 
 ### Relevance Scoring
+
 ```sql
 -- Get results with relevance scores, filter by minimum score
 SELECT id, message, SCORE() as relevance
@@ -86,6 +89,7 @@ ORDER BY SCORE() DESC;
 ```
 
 ### Complex Queries
+
 ```sql
 -- Advanced query syntax with boolean operators
 SELECT * FROM docs WHERE QUERY('title:"user guide" AND content:(tutorial OR example)');
@@ -235,6 +239,7 @@ event_timestamp: 2024-04-08 12:00:00
 ```
 
 **Key Points from the Example:**
+
 - `inverted pruning: 5 to 1` shows the index reduced blocks scanned from 5 to 1
 - Relevance scoring helps rank results by match quality
 - Fuzzy search finds results even with typos ("create" vs "created")
@@ -259,12 +264,14 @@ event_timestamp: 2024-04-08 12:00:00
 ## Important Notes
 
 **When to Use Full-Text Indexes:**
+
 - Large text datasets (documents, logs, comments)
 - Frequent text search operations
 - Need for advanced search features (fuzzy, scoring)
 - Performance-critical search applications
 
 **When NOT to Use:**
+
 - Small text datasets
 - Exact string matching only
 - Infrequent search operations

@@ -12,6 +12,7 @@ In Databend, you can directly query NDJSON files stored in stages without first 
 NDJSON (Newline Delimited JSON) is a JSON-based file format where each line contains a complete and valid JSON object. This format is especially well-suited for streaming data processing and big data analytics.
 
 **Example NDJSON file content:**
+
 ```json
 {"id": 1, "title": "Database Fundamentals", "author": "John Doe", "price": 45.50, "category": "Technology"}
 {"id": 2, "title": "Machine Learning in Practice", "author": "Jane Smith", "price": 68.00, "category": "AI"}
@@ -19,6 +20,7 @@ NDJSON (Newline Delimited JSON) is a JSON-based file format where each line cont
 ```
 
 **Advantages of NDJSON:**
+
 - **Stream-friendly**: Can be parsed line by line without loading entire file into memory
 - **Big data compatible**: Widely used in log files, data exports, and ETL pipelines
 - **Easy to process**: Each line is an independent JSON object, enabling parallel processing
@@ -33,6 +35,7 @@ NDJSON (Newline Delimited JSON) is a JSON-based file format where each line cont
 ### Step 1. Create an External Stage
 
 Create an external stage with your own S3 bucket and credentials where your NDJSON files are stored.
+
 ```sql
 CREATE STAGE ndjson_query_stage
 URL = 's3://load/ndjson/'
@@ -66,6 +69,7 @@ FROM @ndjson_query_stage
 ```
 
 **Explanation:**
+
 - `$1:title` and `$1:author`: Extract specific fields from the JSON object. The `$1` represents the entire JSON object as a variant, and `:field_name` accesses individual fields
 - `@ndjson_query_stage`: References the external stage created in Step 1
 - `FILE_FORMAT => 'ndjson_query_format'`: Uses the custom file format defined in Step 2

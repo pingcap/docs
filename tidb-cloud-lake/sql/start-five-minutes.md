@@ -6,6 +6,7 @@ summary: Rounds down a date with time (timestamp/datetime) to the start of the f
 # TO_START_OF_FIVE_MINUTES
 
 Rounds down a date with time (timestamp/datetime) to the start of the five-minute interval.
+
 ## Syntax
 
 ```sql

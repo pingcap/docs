@@ -25,6 +25,7 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 ```
 
 Where:
+
 - `<parameter_list>`: Optional comma-separated list of input parameters with their types (e.g., `x INT, name VARCHAR`)
 - `<column_definition_list>`: Comma-separated list of column names and their types that the function returns
 - `<sql_statement>`: The SQL query that defines the function logic

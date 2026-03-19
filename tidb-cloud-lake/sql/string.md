@@ -26,7 +26,9 @@ CREATE TABLE string_table(text VARCHAR);
 ```
 DESC string_table;
 ```
+
 Result:
+
 ```
 ┌──────────────────────────────────────────────┐
 │  Field │   Type  │  Null  │ Default │  Extra │
@@ -42,7 +44,9 @@ INSERT INTO string_table VALUES('databend');
 ```
 SELECT * FROM string_table;
 ```
+
 Result:
+
 ```
 ┌──────────────────┐
 │       text       │
