@@ -484,6 +484,8 @@ You can use the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_b
 
 When this variable is `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
 
+For example, you can check the last usage time of a binding by executing the following SQL statement:
+
 ```sql
 SELECT sql_digest, last_used_date FROM mysql.bind_info LIMIT 1;
 
