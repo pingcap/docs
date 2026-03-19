@@ -2,9 +2,10 @@
 title: ICEBERG_SNAPSHOT
 summary: Returns metadata about snapshots of an Iceberg table, including information about data changes, operations, and summary statistics.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.709"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.709.
 
 Returns metadata about snapshots of an Iceberg table, including information about data changes, operations, and summary statistics.
 

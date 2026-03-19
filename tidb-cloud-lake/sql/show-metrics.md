@@ -2,9 +2,10 @@
 title: SHOW METRICS
 summary: Shows the list of system metrics.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.190"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.190.
 
 Shows the list of [system metrics](/tidb-cloud-lake/sql/system-metrics.md).
 

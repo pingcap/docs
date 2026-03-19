@@ -2,9 +2,10 @@
 title: CREATE NOTIFICATION INTEGRATION
 summary: Creates a named notification integration that can be used to send notifications to external messaging services.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 Creates a named notification integration that can be used to send notifications to external messaging services.
 

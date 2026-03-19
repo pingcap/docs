@@ -2,9 +2,10 @@
 title: TO_DAYS
 summary: Converts a specified number of days into an Interval type.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.677"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.677.
 
 Converts a specified number of days into an Interval type.
 

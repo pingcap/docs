@@ -2,9 +2,10 @@
 title: SUM
 summary: Calculates the sum of a set of values.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.697"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.697.
 
 Calculates the sum of a set of values.
 

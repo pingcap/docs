@@ -2,9 +2,10 @@
 title: QUALIFY
 summary: QUALIFY is a clause used to filter the results of a window function. Therefore, to successfully utilize the QUALIFY clause, there must be at least one window function in the SELECT list or the QUALIFY clause (See Examples for each case). In other words, QUALIFY is evaluated after window functions are computed. Here’s the typical order of execution for a query with a QUALIFY statement clause.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.262"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.262.
 
 QUALIFY is a clause used to filter the results of a window function. Therefore, to successfully utilize the QUALIFY clause, there must be at least one window function in the SELECT list or the QUALIFY clause (See [Examples](#examples) for each case). In other words, QUALIFY is evaluated after window functions are computed. Here’s the typical order of execution for a query with a QUALIFY statement clause:
 

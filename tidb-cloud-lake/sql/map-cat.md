@@ -2,9 +2,10 @@
 title: MAP_CAT
 summary: Returns the concatenatation of two MAPs.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.459"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.459.
 
 Returns the concatenatation of two MAPs.
 

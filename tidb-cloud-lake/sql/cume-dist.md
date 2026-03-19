@@ -2,9 +2,10 @@
 title: CUME_DIST
 summary: Calculates the cumulative distribution of each row's value. Returns the fraction of rows with values less than or equal to the current row's value.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced: v1.2.7"/>
+> **Note:**
+>
+> Introduced in v1.2.7.
 
 Calculates the cumulative distribution of each row's value. Returns the fraction of rows with values less than or equal to the current row's value.
 

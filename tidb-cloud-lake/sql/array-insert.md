@@ -2,9 +2,10 @@
 title: ARRAY_INSERT
 summary: Inserts a value into a JSON array at the specified index and returns the updated JSON array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Inserts a value into a JSON array at the specified index and returns the updated JSON array.
 

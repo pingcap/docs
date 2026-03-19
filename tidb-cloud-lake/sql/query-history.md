@@ -2,9 +2,9 @@
 title: QUERY_HISTORY
 summary: Retrieves query execution logs for analysis and monitoring purposes.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-<FunctionDescription description="Introduced or updated: v1.2.687"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.687.
 
 Retrieves query execution logs for analysis and monitoring purposes.
 

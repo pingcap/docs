@@ -2,9 +2,10 @@
 title: ST_ASEWKB
 summary: Converts a GEOMETRY or GEOGRAPHY object into a EWKB(extended well-known-binary) format representation.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.436"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.436.
 
 Converts a GEOMETRY or GEOGRAPHY object into a [EWKB(extended well-known-binary)](https://postgis.net/docs/ST_GeomFromEWKB.html) format representation.
 

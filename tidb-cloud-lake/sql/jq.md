@@ -2,9 +2,10 @@
 title: JQ
 summary: The JQ function is a set-returning SQL function that allows you to apply jq filters to JSON data stored in Variant columns. With this function, you can process JSON data by applying a specified jq filter, returning the results as a set of rows.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.622"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.622.
 
 The JQ function is a set-returning SQL function that allows you to apply [jq](https://jqlang.github.io/jq/) filters to JSON data stored in Variant columns. With this function, you can process JSON data by applying a specified jq filter, returning the results as a set of rows.
 

@@ -2,9 +2,10 @@
 title: EXECUTE TASK
 summary: The EXECUTE TASK statement is used to execute an existing task manually.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 The EXECUTE TASK statement is used to execute an existing task manually
 

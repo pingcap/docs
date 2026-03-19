@@ -2,9 +2,10 @@
 title: ANY_VALUE
 summary: Aggregate function.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.815"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.815.
 
 Aggregate function.
 

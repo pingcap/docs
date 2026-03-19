@@ -2,9 +2,10 @@
 title: ST_MAKEPOINT
 summary: Constructs a GEOGRAPHY object that represents a Point with the specified longitude and latitude.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.347"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.347.
 
 Constructs a GEOGRAPHY object that represents a Point with the specified longitude and latitude.
 

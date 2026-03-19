@@ -2,9 +2,10 @@
 title: SHOW GRANTS
 summary: Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.845"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.845.
 
 Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 
@@ -53,7 +54,6 @@ GRANT OWNERSHIP ON my_db.* TO ROLE analyst;
 
 -- List privileges granted to the user
 SHOW GRANTS FOR user1;
-
 
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ privileges │ object_name │     object_id    │ grant_to │  name  │                       grants                         │

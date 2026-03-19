@@ -2,9 +2,10 @@
 title: ARRAY_SLICE
 summary: Extracts a sub-array using slice between start and end arguments.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Extracts a sub-array using slice between start and end arguments.
 

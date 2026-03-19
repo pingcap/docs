@@ -2,9 +2,10 @@
 title: CREATE SCALAR FUNCTION
 summary: Creates a scalar user-defined function (Scalar UDF). The same CREATE FUNCTION statement supports two implementation styles.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: SQL v1.2.799; Python/JavaScript v1.2.339"/>
+> **Note:**
+>
+> Introduced or updated in SQL v1.2.799; Python/JavaScript v1.2.339.
 
 Creates a scalar user-defined function (Scalar UDF). The same `CREATE FUNCTION` statement supports two implementation styles:
 

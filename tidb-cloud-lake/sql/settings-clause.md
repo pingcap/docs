@@ -2,9 +2,10 @@
 title: SETTINGS Clause
 summary: The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use SHOW SETTINGS.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.652"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.652.
 
 The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 

@@ -2,9 +2,10 @@
 title: WITH Stream Hints
 summary: Specifies various stream configuration options using hints to control how the stream is processed.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.670"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.670.
 
 Specifies various stream configuration options using hints to control how the stream is processed.
 

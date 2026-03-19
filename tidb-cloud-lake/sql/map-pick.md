@@ -2,9 +2,10 @@
 title: MAP_PICK
 summary: Returns a new MAP containing the specified key-value pairs from an existing MAP.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.654"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.654.
 
 Returns a new MAP containing the specified key-value pairs from an existing MAP.
 

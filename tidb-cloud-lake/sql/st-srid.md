@@ -2,9 +2,10 @@
 title: ST_SRID
 summary: Returns the SRID (spatial reference system identifier) of a GEOMETRY or GEOGRAPHY object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.458"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.458.
 
 Returns the SRID (spatial reference system identifier) of a GEOMETRY or GEOGRAPHY object.
 

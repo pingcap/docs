@@ -2,9 +2,10 @@
 title: ALTER USER
 summary: Modifies a user account, including.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.566"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.566.
 
 Modifies a user account, including:
 
@@ -54,7 +55,6 @@ ALTER USER <name> WITH UNSET WORKLOAD GROUP
 - When `MUST_CHANGE_PASSWORD` is set to `true`, the user must change their password at the next login. Please note that this takes effect only for users who have never changed their password since their account was created. If a user has ever changed their password themselves, then they do not need to change it again.
 - When you set a default role for a user using [CREATE USER](/tidb-cloud-lake/sql/create-user.md) or ALTER USER, Databend does not verify the role's existence or automatically grant the role to the user. You must explicitly grant the role to the user for the role to take effect.
 - `DISABLED` allows you to enable or disable a user. Disabled users cannot log in to Databend until they are enabled. Click [here](/tidb-cloud-lake/sql/create-user.md#example-4-create-users-with-special-configurations) to see an example.
-
 
 ## Examples
 

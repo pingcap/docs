@@ -2,9 +2,10 @@
 title: DESC PROCEDURE
 summary: Displays detailed information about a specific stored procedure.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.690"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.690.
 
 Displays detailed information about a specific stored procedure.
 

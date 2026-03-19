@@ -2,9 +2,10 @@
 title: JSON_TYPEOF
 summary: Returns the type of the main-level of a JSON structure.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.91"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.91.
 
 Returns the type of the main-level of a JSON structure.
 
@@ -50,7 +51,6 @@ SELECT JSON_TYPEOF(PARSE_JSON('"Databend"'));
 json_typeof(parse_json('"databend"'))|
 -------------------------------------+
 string                               |
-
 
 SELECT JSON_TYPEOF(PARSE_JSON('-1.23'));
 

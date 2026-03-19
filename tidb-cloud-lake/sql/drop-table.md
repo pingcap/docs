@@ -2,9 +2,10 @@
 title: DROP TABLE
 summary: Deletes a table.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.155"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.155.
 
 Deletes a table.
 
@@ -23,7 +24,6 @@ DROP TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 This command only marks the table schema as deleted in the metadata service, ensuring that the actual data remains intact. If you need to recover the deleted table schema, you can use the [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) command.
 
 For completely removing a table along with its data files, consider using the [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) command.
-
 
 ## Examples
 

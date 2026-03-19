@@ -2,9 +2,10 @@
 title: TO_DATE
 summary: Converts an expression to a date, including.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.1.39"/>
+> **Note:**
+>
+> Introduced or updated in v1.1.39.
 
 Converts an expression to a date, including:
 

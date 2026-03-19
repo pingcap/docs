@@ -2,9 +2,10 @@
 title: ST_LENGTH
 summary: Returns the Euclidean length of the LineString(s) in a GEOMETRY or GEOGRAPHY object.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.555"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.555.
 
 Returns the Euclidean length of the LineString(s) in a GEOMETRY or GEOGRAPHY object.
 

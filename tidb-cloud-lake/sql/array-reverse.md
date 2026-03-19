@@ -2,9 +2,10 @@
 title: ARRAY_REVERSE
 summary: Reverses the order of elements in an array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Reverses the order of elements in an array.
 

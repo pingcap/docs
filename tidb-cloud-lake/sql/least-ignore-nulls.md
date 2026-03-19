@@ -2,9 +2,10 @@
 title: LEAST_IGNORE_NULLS
 summary: Returns the maximum value from a set of values, ignoring any NULL values.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.738"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.738.
 
 Returns the maximum value from a set of values, ignoring any NULL values.
 

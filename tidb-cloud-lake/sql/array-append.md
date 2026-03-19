@@ -2,9 +2,10 @@
 title: ARRAY_APPEND
 summary: Appends an element to the end of an array.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Appends an element to the end of an array.
 

@@ -2,7 +2,6 @@
 title: MCP Server for TiDB Cloud Lake
 summary: mcp-databend is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your TiDB Cloud Lake database using natural language.
 ---
-import DetailsWrap from '@site/src/components/DetailsWrap';
 
 # MCP Server for Databend
 

@@ -2,9 +2,10 @@
 title: ALTER FUNCTION
 summary: Alters an external function.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.116"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.116.
 
 Alters an external function.
 

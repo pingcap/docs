@@ -2,9 +2,10 @@
 title: system.temporary_tables
 summary: Provides information about all existing temporary tables in the current session.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.666"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.666.
 
 Provides information about all existing temporary tables in the current session.
 

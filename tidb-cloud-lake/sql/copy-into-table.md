@@ -2,9 +2,9 @@
 title: COPY INTO <table>
 summary: COPY INTO allows you to load data from files located in one of the following locations.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-<FunctionDescription description="Introduced or updated: v1.2.704"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.704.
 
 COPY INTO allows you to load data from files located in one of the following locations:
 

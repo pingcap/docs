@@ -2,13 +2,10 @@
 title: SHOW VIRTUAL COLUMNS
 summary: Shows the created virtual columns in the system. Equivalent to SELECT * FROM system.virtual_columns.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.832"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='VIRTUAL COLUMN'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.832.
 
 Shows the created virtual columns in the system. Equivalent to `SELECT * FROM system.virtual_columns`.
 

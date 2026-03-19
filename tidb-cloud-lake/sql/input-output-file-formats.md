@@ -2,9 +2,10 @@
 title: Input & Output File Formats
 summary: Databend accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.713"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.713.
 
 Databend accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options.
 
@@ -296,7 +297,6 @@ The value that missing field is converted to.
 |------------------|----------------------------------------------------------|
 | `ERROR` (Default)| Error.                                                   |
 | `FIELD_DEFAULT`  | The default value of the field.                          |
-
 
 ## AVRO Options
 

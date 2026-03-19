@@ -2,9 +2,10 @@
 title: ARRAY_CONTAINS
 summary: Returns true if the array contains the specified element.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.762"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.762.
 
 Returns true if the array contains the specified element.
 

@@ -3,13 +3,9 @@ title: VACUUM TABLE
 summary: This page describes VACUUM TABLE in TiDB Cloud Lake.
 ---
 
-import FunctionDescription from '@site/src/components/FunctionDescription';
-
-<FunctionDescription description="Introduced or updated: v1.2.368"/>
-
-import EEFeature from '@site/src/components/EEFeature';
-
-<EEFeature featureName='VACUUM TABLE'/>
+> **Note:**
+>
+> Introduced or updated in v1.2.368.
 
 The VACUUM TABLE command helps optimize system performance by freeing up storage space through the permanent removal of historical data files from a table. This includes:
 

@@ -2,12 +2,6 @@
 title: Warehouses
 summary: The warehouse is an essential component of TiDB Cloud Lake. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks.
 ---
-import PlaySVG from '@site/static/img/icon/play.svg'
-import SuspendSVG from '@site/static/img/icon/suspend.svg'
-import CheckboxSVG from '@site/static/img/icon/checkbox.svg'
-import EllipsisSVG from '@site/static/img/icon/ellipsis.svg'
-import { Button } from 'antd'
-
 The warehouse is an essential component of Databend Cloud. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks such as:
 
 - Querying data with the SELECT statement
@@ -38,14 +32,14 @@ An organization can have as many warehouses as needed. The **Warehouses** page d
 
 ### Suspending / Resuming Warehouses
 
-A suspended warehouse does not consume any credits. You can manually suspend or resume a warehouse by clicking the <SuspendSVG/> or <PlaySVG/> button on the warehouse. However, a warehouse can automatically suspend or resume in the following scenarios:
+A suspended warehouse does not consume any credits. You can manually suspend or resume a warehouse by clicking the <svg t="1725236862433" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5243" width="16" height="16"><path d="M350 148h-56c-8.8 0-16 6.5-16 14.6v698.9c0 8 7.2 14.6 16 14.6h56c8.8 0 16-6.5 16-14.6V162.6c0-8.1-7.2-14.6-16-14.6zM730 148h-56c-8.8 0-16 6.5-16 14.6v698.9c0 8 7.2 14.6 16 14.6h56c8.8 0 16-6.5 16-14.6V162.6c0-8.1-7.2-14.6-16-14.6z" p-id="5244" fill="#1677FF"></path></svg> or <svg t="1725236570258" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4267" width="16" height="16"><path d="M213.333333 65.386667a85.333333 85.333333 0 0 1 43.904 12.16L859.370667 438.826667a85.333333 85.333333 0 0 1 0 146.346666L257.237333 946.453333A85.333333 85.333333 0 0 1 128 873.28V150.72a85.333333 85.333333 0 0 1 85.333333-85.333333z m0 64a21.333333 21.333333 0 0 0-21.184 18.837333L192 150.72v722.56a21.333333 21.333333 0 0 0 30.101333 19.456l2.197334-1.152L826.453333 530.282667a21.333333 21.333333 0 0 0 2.048-35.178667l-2.048-1.386667L224.298667 132.416A21.333333 21.333333 0 0 0 213.333333 129.386667z" fill="#1677FF" p-id="4268"></path></svg> button on the warehouse. However, a warehouse can automatically suspend or resume in the following scenarios:
 
 - A warehouse can automatically suspend if there is no activity, based on its auto-suspend setting.
 - When you select a suspended warehouse to perform a SQL task, the warehouse will automatically resume.
 
 ### Performing Bulk Operations
 
-You can perform bulk operations on warehouses, including bulk restart, bulk suspend, bulk resume, and bulk delete. To do so, select the warehouses for bulk operations by checking the checkboxes <CheckboxSVG/> in the warehouse list, and then click the ellipse button <EllipsisSVG/> for the desired operation.
+You can perform bulk operations on warehouses, including bulk restart, bulk suspend, bulk resume, and bulk delete. To do so, select the warehouses for bulk operations by checking the checkboxes <svg t="1725248447975" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4292" width="16" height="16"><path d="M896 0H128C57.6 0 0 57.6 0 128v768c0 70.4 57.6 128 128 128h768c70.4 0 128-57.6 128-128V128c0-70.4-57.6-128-128-128z m0 896H128V128h768v768z" p-id="4293" fill="#1677FF"></path></svg> in the warehouse list, and then click the ellipse button <svg t="1722479222306" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2315" width="16" height="16"><path d="M213.333333 512a85.333333 85.333333 0 1 1-85.333333-85.333333 85.333333 85.333333 0 0 1 85.333333 85.333333z m298.666667-85.333333a85.333333 85.333333 0 1 0 85.333333 85.333333 85.333333 85.333333 0 0 0-85.333333-85.333333z m384 0a85.333333 85.333333 0 1 0 85.333333 85.333333 85.333333 85.333333 0 0 0-85.333333-85.333333z" fill="#1677FF" p-id="2316"></path></svg> for the desired operation.
 
 ![alt text](/media/tidb-cloud-lake/bulk.gif)
 

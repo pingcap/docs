@@ -2,9 +2,10 @@
 title: TIME_SLICE
 summary: TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.799"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.799.
 
 TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket). 
 
@@ -22,7 +23,6 @@ TIME_SLICE(<date_or_time_expr>, <slice_length>, <IntervalKind> [, <start_or_end>
 | `<slice_length>`      | INTEGER >= 1. The number of contiguous IntervalKind units in a slice (e.g., 2 for 2-week slices).           |
 | `<IntervalKind>`      | One of the following (case-insensitive): YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND.             |
 | `<start_or_end>`      | String 'START' or 'END' (case-insensitive). If omitted, defaults to 'START'.                                |
-
 
 ## Semantics
 
@@ -47,7 +47,6 @@ TIME_SLICE(<date_or_time_expr>, <slice_length>, <IntervalKind> [, <start_or_end>
 
 - DATE input → returns DATE.
 - TIMESTAMP input → returns TIMESTAMP.
-
 
 ## Examples
 

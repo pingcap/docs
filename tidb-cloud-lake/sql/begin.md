@@ -2,9 +2,10 @@
 title: BEGIN
 summary: Starts a new transaction. BEGIN and COMMIT/ROLLBACK must be used together to start and then either save or undo a transaction.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.371"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.371.
 
 Starts a new transaction. BEGIN and [COMMIT](/tidb-cloud-lake/sql/commit.md)/[ROLLBACK](/tidb-cloud-lake/sql/rollback.md) must be used together to start and then either save or undo a transaction.
 
@@ -51,7 +52,6 @@ Starts a new transaction. BEGIN and [COMMIT](/tidb-cloud-lake/sql/commit.md)/[RO
 
     COMMIT; -- End the new transaction
     ```
-
 
 ## Syntax
 

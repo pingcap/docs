@@ -2,9 +2,10 @@
 title: CREATE CONNECTION
 summary: Creates a connection to external storage.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.780"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.780.
 
 Creates a connection to external storage.
 
@@ -142,13 +143,11 @@ Omit `TOKEN` for public repositories; include it for private or rate-limited ass
 </div>
 </SimpleTab>
 
-
 ## Access control requirements
 
 | Privilege         | Object Type | Description           |
 |:------------------|:------------|:----------------------|
 | CREATE CONNECTION | Global      | Creates a connection. |
-
 
 To create a connection, the user performing the operation or the [current_role](/tidb-cloud-lake/guides/roles.md) must have the CREATE CONNECTION [privilege](/tidb-cloud-lake/guides/privileges.md).
 

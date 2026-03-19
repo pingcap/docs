@@ -2,9 +2,10 @@
 title: EXECUTE IMMEDIATE
 summary: Executes a SQL script. For how to write SQL scripts for Databend, see Stored Procedure & SQL Scripting.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.452"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.452.
 
 Executes a SQL script. For how to write SQL scripts for Databend, see [Stored Procedure & SQL Scripting](/tidb-cloud-lake/sql/stored-procedure-scripting.md).
 

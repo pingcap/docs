@@ -2,9 +2,10 @@
 title: SPLIT_PART
 summary: Splits a string using a specified delimiter and returns the specified part.
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.164"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.164.
 
 Splits a string using a specified delimiter and returns the specified part.
 

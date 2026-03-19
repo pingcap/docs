@@ -2,9 +2,10 @@
 title: TO_BINARY
 summary: Converts supported data types, including string, variant, bitmap, geometry, and geography, into their binary representation (hex format).
 ---
-import FunctionDescription from '@site/src/components/FunctionDescription';
 
-<FunctionDescription description="Introduced or updated: v1.2.673"/>
+> **Note:**
+>
+> Introduced or updated in v1.2.673.
 
 Converts supported data types, including string, variant, bitmap, geometry, and geography, into their binary representation (hex format).
 
