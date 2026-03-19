@@ -11,19 +11,20 @@ In the current implementation, `_tidb_rowid` is an extra `BIGINT NOT NULL` handl
 
 > **Warning:**
 >
-> Do not assume `_tidb_rowid` is globally unique in all cases. For partitioned tables that do not use clustered indexes, `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value. If you need a stable unique identifier, define and use an explicit primary key instead of relying on `_tidb_rowid`.
+> - Do not assume `_tidb_rowid` is globally unique in all cases. For partitioned tables that do not use clustered indexes, `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value.
+> - If you need a stable unique identifier, define and use an explicit primary key instead of relying on `_tidb_rowid`.
 
 ## When `_tidb_rowid` is available
 
 `_tidb_rowid` is available for tables whose row handle is not a clustered primary key. In practice, this means the following table types use `_tidb_rowid`:
 
-- Tables without a primary key
-- Tables whose primary key is explicitly defined as `NONCLUSTERED`
+- Tables without primary keys
+- Tables with primary keys that are explicitly defined as `NONCLUSTERED`
 
 `_tidb_rowid` is not available for tables that use a clustered index, including the following:
 
-- Tables whose integer primary key is the clustered row handle
-- Tables with a clustered index on a composite primary key
+- Tables with integer primary keys that are clustered row handles
+- Tables with clustered indexes on composite primary keys
 
 The following example shows the difference:
 
@@ -98,7 +99,7 @@ INSERT INTO t(_tidb_rowid, a, b) VALUES (101, 4, 'w');
 ERROR 1105 (HY000): insert, update and replace statements for _tidb_rowid are not supported
 ```
 
-If you need to preserve row IDs during data import or migration, enable the session variable `tidb_opt_write_row_id` first:
+If you need to preserve row IDs during data import or migration, enable the system variable [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id) first:
 
 ```sql
 SET @@tidb_opt_write_row_id = ON;
@@ -125,7 +126,7 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 - You cannot create a user column named `_tidb_rowid`.
 - You cannot rename an existing user column to `_tidb_rowid`.
 - `_tidb_rowid` is an internal row handle. Do not treat it as a long-term business key.
-- On partitioned non-clustered tables, `_tidb_rowid` values are not guaranteed to be unique across partitions. After `EXCHANGE PARTITION`, different partitions can contain rows with the same `_tidb_rowid` value.
+- On partitioned non-clustered tables, `_tidb_rowid` values are not guaranteed to be unique across partitions. After you execute `EXCHANGE PARTITION`, different partitions can contain rows with the same `_tidb_rowid` value.
 - Whether `_tidb_rowid` exists depends on the table layout. If a table uses a clustered index, use the primary key instead.
 
 ## Hotspot considerations
