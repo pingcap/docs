@@ -1,6 +1,6 @@
 ---
 title: LATERAL Derived Tables
-summary: Learn how to use LATERAL derived tables in TiDB.
+summary: Learn the syntax and current limitations of LATERAL derived tables in TiDB.
 ---
 
 # LATERAL Derived Tables
