@@ -56,7 +56,7 @@ The derived column list `(val)` renames the columns that the subquery returns.
 
 ## MySQL compatibility
 
-TiDB's LATERAL derived table syntax is compatible with MySQL 8.0. Once full execution support is available, queries that use `LATERAL` in MySQL should also work in TiDB.
+TiDB's LATERAL derived table syntax is compatible with MySQL 8.0 at the syntax level.
 
 ## See also
 
