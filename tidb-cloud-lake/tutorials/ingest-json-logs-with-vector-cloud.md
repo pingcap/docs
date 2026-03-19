@@ -43,49 +43,49 @@ Add the following JSON lines to the file to represent sample log events:
 
 1. Create a Vector configuration file named `vector.yaml` on your local machine. In this tutorial, we create it at `/Users/eric/Documents/vector.yaml` with the following content:
 
-```yaml title='vector.yaml'
-sources:
-  logs:
-    type: file
-    include:
-      - "/logs/app.log"
-    read_from: beginning
-
-transforms:
-  extract_message:
-    type: remap
-    inputs:
-      - "logs"
-    source: |
-      . = parse_json(.message) ?? {}
-
-sinks:
-  s3:
-    type: aws_s3
-    inputs:
-      - "extract_message"
-    bucket: databend-doc
-    region: us-east-2
-    key_prefix: "logs/"
-    content_type: "text/plain"
-    encoding:
-      codec: "native_json"
-    auth:
-      access_key_id: "<your-access-key-id>"
-      secret_access_key: "<your-secret-access-key>"
-```
+    ```yaml title='vector.yaml'
+    sources:
+      logs:
+        type: file
+        include:
+          - "/logs/app.log"
+        read_from: beginning
+    
+    transforms:
+      extract_message:
+        type: remap
+        inputs:
+          - "logs"
+        source: |
+          . = parse_json(.message) ?? {}
+    
+    sinks:
+      s3:
+        type: aws_s3
+        inputs:
+          - "extract_message"
+        bucket: databend-doc
+        region: us-east-2
+        key_prefix: "logs/"
+        content_type: "text/plain"
+        encoding:
+          codec: "native_json"
+        auth:
+          access_key_id: "<your-access-key-id>"
+          secret_access_key: "<your-secret-access-key>"
+    ```
 
 2. Start Vector using Docker, mapping the configuration file and local logs directory:
 
-```bash
-docker run \
-  -d \
-  -v /Users/eric/Documents/vector.yaml:/etc/vector/vector.yaml:ro \
-  -v /Users/eric/Documents/logs:/logs \
-  -p 8686:8686 \
-  --name vector \
-  timberio/vector:nightly-alpine
-```
+    ```bash
+    docker run \
+      -d \
+      -v /Users/eric/Documents/vector.yaml:/etc/vector/vector.yaml:ro \
+      -v /Users/eric/Documents/logs:/logs \
+      -p 8686:8686 \
+      --name vector \
+      timberio/vector:nightly-alpine
+    ```
 
 3. Wait for a moment, then check if any logs have been synced to the `logs` folder on S3:
 
@@ -117,52 +117,52 @@ Compared to the original log, the synced log is in NDJSON format, with each reco
 
 1. Open a worksheet, and create an external stage that links to the `logs` folder in your bucket:
 
-```sql
-CREATE STAGE mylog 's3://databend-doc/logs/' CONNECTION=(
-    ACCESS_KEY_ID = '<your-access-key-id>',
-    SECRET_ACCESS_KEY = '<your-secret-access-key>'
-);
-```
+    ```sql
+    CREATE STAGE mylog 's3://databend-doc/logs/' CONNECTION=(
+        ACCESS_KEY_ID = '<your-access-key-id>',
+        SECRET_ACCESS_KEY = '<your-secret-access-key>'
+    );
+    ```
 
-Once the stage is successfully created, you can list the files in it:
+    Once the stage is successfully created, you can list the files in it:
 
-```sql
-LIST @mylog;
-
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                          name                          │  size  │                 md5                │         last_modified         │      creator     │
-├────────────────────────────────────────────────────────┼────────┼────────────────────────────────────┼───────────────────────────────┼──────────────────┤
-│ 1733871161-7b89e50a-6eb4-4531-8479-dd46981e4674.log.gz │    112 │ "231ddcc590222bfaabd296b151154844" │ 2024-12-10 22:52:42.000 +0000 │ NULL             │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+    ```sql
+    LIST @mylog;
+    
+    ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │                          name                          │  size  │                 md5                │         last_modified         │      creator     │
+    ├────────────────────────────────────────────────────────┼────────┼────────────────────────────────────┼───────────────────────────────┼──────────────────┤
+    │ 1733871161-7b89e50a-6eb4-4531-8479-dd46981e4674.log.gz │    112 │ "231ddcc590222bfaabd296b151154844" │ 2024-12-10 22:52:42.000 +0000 │ NULL             │
+    └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ```
 
 2. Create a table with columns mapped to the fields in the log:
 
-```sql
-CREATE TABLE logs (
-    event String,
-    timestamp Timestamp,
-    user_id Int32
-);
-```
+    ```sql
+    CREATE TABLE logs (
+        event String,
+        timestamp Timestamp,
+        user_id Int32
+    );
+    ```
 
 3. Create a scheduled task to load logs from the external stage into the `logs` table:
 
-```sql
-CREATE TASK IF NOT EXISTS myvectortask
-    WAREHOUSE = 'eric'
-    SCHEDULE = 1 MINUTE
-    SUSPEND_TASK_AFTER_NUM_FAILURES = 3
-AS
-COPY INTO logs
-FROM (
-    SELECT $1:log:event, $1:log:timestamp, $1:log:user_id
-    FROM @mylog/
-)
-FILE_FORMAT = (TYPE = NDJSON, COMPRESSION = AUTO)
-MAX_FILES = 10000
-PURGE = TRUE;
-```
+    ```sql
+    CREATE TASK IF NOT EXISTS myvectortask
+        WAREHOUSE = 'eric'
+        SCHEDULE = 1 MINUTE
+        SUSPEND_TASK_AFTER_NUM_FAILURES = 3
+    AS
+    COPY INTO logs
+    FROM (
+        SELECT $1:log:event, $1:log:timestamp, $1:log:user_id
+        FROM @mylog/
+    )
+    FILE_FORMAT = (TYPE = NDJSON, COMPRESSION = AUTO)
+    MAX_FILES = 10000
+    PURGE = TRUE;
+    ```
 
 4. Start the task:
 

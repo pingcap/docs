@@ -11,7 +11,7 @@ summary: Creates an external function that calls a remote handler over Flight (t
 
 Creates an external function that calls a remote handler over Flight (typically Python or other services).
 
-### Supported Languages
+## Supported Languages
 
 - Determined by the remote server (commonly Python, but any language can be used as long as it implements the Flight endpoint)
 

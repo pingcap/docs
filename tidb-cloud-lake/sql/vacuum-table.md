@@ -17,7 +17,7 @@ The VACUUM TABLE command helps optimize system performance by freeing up storage
 
 See also: [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md)
 
-### Syntax and Examples
+## Syntax and Examples
 
 ```sql
 VACUUM TABLE <table_name> [ DRY RUN [SUMMARY] ]

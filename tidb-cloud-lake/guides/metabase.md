@@ -15,11 +15,11 @@ To download and install the Metabase Databend Driver:
 
 1. Create a folder named **plugins** in the directory where the file **metabase.jar** is stored.
 
-```bash
-$ ls
-metabase.jar
-$ mkdir plugins
-```
+    ```bash
+    $ ls
+    metabase.jar
+    $ mkdir plugins
+    ```
 
 2. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase Databend Driver, then save it in the **plugins** folder.
 
@@ -48,19 +48,19 @@ Follow these steps to install and deploy Metabase with Docker:
 
 1. Pull the latest Docker image of Metabase from the Docker Hub registry.
 
-```bash
-docker pull metabase/metabase
-```
+    ```bash
+    docker pull metabase/metabase
+    ```
 
 2. Deploy Metabase.
 
-```bash
-docker run  -d -p 3000:3000 --name metabase metabase/metabase
-```
+    ```bash
+    docker run  -d -p 3000:3000 --name metabase metabase/metabase
+    ```
 
 3. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase Databend Driver, then import it to the **plugins** folder of the Metabase container in Docker.
 
-![Alt text](/media/tidb-cloud-lake/add2plugins.gif)
+    ![Alt text](/media/tidb-cloud-lake/add2plugins.gif)
 
 4. Restart the Metabase container.
 
@@ -70,18 +70,18 @@ docker run  -d -p 3000:3000 --name metabase metabase/metabase
 
 2. Complete the initial sign-up process. Select **I'll add my data later** in step 3.
 
-![Alt text](/media/tidb-cloud-lake/add-later.png)
+    ![Alt text](/media/tidb-cloud-lake/add-later.png)
 
 3. Click on the **gear** icon in the top right, and navigate to **Admin settings** > **Databases** > **Add a database** to create a connection:
 
-| Parameter                     | Databend               | Databend Cloud                     |
-| ----------------------------- | ---------------------- | ---------------------------------- |
-| Database type                 | `Databend`             | `Databend`                         |
-| Host                          | `host.docker.internal` | Obtain from connection information |
-| Port                          | `8000`                 | `443`                              |
-| Username                      | For example, `root`    | `cloudapp`                         |
-| Password                      | Enter your password    | Obtain from connection information |
-| Use a secure connection (SSL) | Toggle off             | Toggle on                          |
+    | Parameter                     | Databend               | Databend Cloud                     |
+    | ----------------------------- | ---------------------- | ---------------------------------- |
+    | Database type                 | `Databend`             | `Databend`                         |
+    | Host                          | `host.docker.internal` | Obtain from connection information |
+    | Port                          | `8000`                 | `443`                              |
+    | Username                      | For example, `root`    | `cloudapp`                         |
+    | Password                      | Enter your password    | Obtain from connection information |
+    | Use a secure connection (SSL) | Toggle off             | Toggle on                          |
 
 4. Click **Save changes**, then click **Exit admin**.
 

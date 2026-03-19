@@ -144,18 +144,18 @@ If you've made unwanted changes to a table's structure, you can revert to the pr
     DESC customers;
     ```
 
-Output:
+    Output:
 
-```text
-┌─────────┬─────────┬──────┬─────────┬─────────┐
-│ Field   │ Type    │ Null │ Default │ Extra   │
-├─────────┼─────────┼──────┼─────────┼─────────┤
-│ id      │ INT     │ YES  │ NULL    │         │
-│ name    │ VARCHAR │ YES  │ NULL    │         │
-│ email   │ VARCHAR │ YES  │ NULL    │         │
-│ phone   │ VARCHAR │ YES  │ NULL    │         │
-└─────────┴─────────┴──────┴─────────┴─────────┘
-```
+    ```text
+    ┌─────────┬─────────┬──────┬─────────┬─────────┐
+    │ Field   │ Type    │ Null │ Default │ Extra   │
+    ├─────────┼─────────┼──────┼─────────┼─────────┤
+    │ id      │ INT     │ YES  │ NULL    │         │
+    │ name    │ VARCHAR │ YES  │ NULL    │         │
+    │ email   │ VARCHAR │ YES  │ NULL    │         │
+    │ phone   │ VARCHAR │ YES  │ NULL    │         │
+    └─────────┴─────────┴──────┴─────────┴─────────┘
+    ```
 
 3. Find the snapshot ID from before the schema change:
 

@@ -27,33 +27,6 @@ The minimum value, in the type of the value.
 
 ## Example
 
----
-
-title: MIN
----
-
-Aggregate function.
-
-The MIN() function returns the minimum value in a set of values.
-
-## Syntax
-
-```
-MIN(expression)
-```
-
-## Arguments
-
-| Arguments   | Description |
-| ----------- | ----------- |
-| expression  | Any expression |
-
-## Return Type
-
-The minimum value, in the type of the value.
-
-## Example
-
 **Create a Table and Insert Sample Data**
 
 ```sql

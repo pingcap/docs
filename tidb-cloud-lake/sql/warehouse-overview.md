@@ -50,7 +50,7 @@ Tags are returned in API responses and visible through `SHOW WAREHOUSES`.
 | `SHOW WAREHOUSES`  | List warehouses              | Optional `LIKE` filter                                     |
 | `QUERY_HISTORY`    | Inspect query logs           | Filter by warehouse, time range, limit                     |
 
-## Warehouse Management
+## Warehouse SQL Commands
 
 | Command                                 | Description                                       |
 | --------------------------------------- | ------------------------------------------------- |

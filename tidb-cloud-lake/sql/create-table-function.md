@@ -11,7 +11,7 @@ summary: Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a tab
 
 Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a table function. Table functions are written in SQL; no external languages are involved.
 
-### Supported Languages
+## Supported Languages
 
 - SQL queries only (no external runtimes)
 

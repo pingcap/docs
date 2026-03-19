@@ -36,9 +36,9 @@ GRANT ROLE user1_role TO user1;
 
 1. Install Jupyter Notebook with pip:
 
-```shell
-pip install notebook
-```
+    ```shell
+    pip install notebook
+    ```
 
 2. Install dependencies with pip:
 
@@ -88,9 +88,9 @@ GRANT ROLE user1_role TO user1;
 
 1. Install Jupyter Notebook with pip:
 
-```shell
-pip install notebook
-```
+    ```shell
+    pip install notebook
+    ```
 
 2. Install dependencies with pip:
 
@@ -107,13 +107,13 @@ pip install sqlalchemy
 
 1. Run the command below to start Jupyter Notebook:
 
-```shell
-jupyter notebook
-```
+    ```shell
+    jupyter notebook
+    ```
 
-This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
+    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
 
-![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
+    ![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
 
 2. Select **New** > **Python 3** to create a notebook.
 
@@ -159,9 +159,9 @@ Before you start, ensure that you have [Python](https://www.python.org/) install
 
 1. Install Jupyter Notebook with pip:
 
-```shell
-pip install notebook
-```
+    ```shell
+    pip install notebook
+    ```
 
 2. Install dependencies with pip:
 
@@ -174,13 +174,13 @@ pip install matplotlib
 
 1. Run the command below to start Jupyter Notebook:
 
-```shell
-jupyter notebook
-```
+    ```shell
+    jupyter notebook
+    ```
 
-This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
+    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
 
-![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
+    ![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
 
 2. Select **New** > **Python 3** to create a notebook.
 
@@ -244,9 +244,9 @@ Obtain the connection information from Databend Cloud. For how to do that, refer
 
 1. Install Jupyter Notebook with pip:
 
-```shell
-pip install notebook
-```
+    ```shell
+    pip install notebook
+    ```
 
 2. Install dependencies with pip:
 
@@ -259,13 +259,13 @@ pip install sqlalchemy
 
 1. Run the command below to start Jupyter Notebook:
 
-```shell
-jupyter notebook
-```
+    ```shell
+    jupyter notebook
+    ```
 
-This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
+    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
 
-![Alt text](/media/tidb-cloud-lake/pricing-billing-notebook-tree.png)
+    ![Alt text](/media/tidb-cloud-lake/pricing-billing-notebook-tree.png)
 
 2. Select **New** > **Python 3** to create a notebook.
 

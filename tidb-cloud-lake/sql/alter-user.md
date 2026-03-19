@@ -114,16 +114,16 @@ ALTER USER user1 WITH UNSET NETWORK POLICY;
 
 1. Create a user named "user1" and set the default role as "writer":
 
-```sql title='Connect as user "root":'
-
-CREATE USER user1 IDENTIFIED BY 'abc123';
-
-GRANT ROLE developer TO user1;
-
-GRANT ROLE writer TO user1;
-
-ALTER USER user1 WITH DEFAULT_ROLE = 'writer';
-```
+    ```sql title='Connect as user "root":'
+    
+    CREATE USER user1 IDENTIFIED BY 'abc123';
+    
+    GRANT ROLE developer TO user1;
+    
+    GRANT ROLE writer TO user1;
+    
+    ALTER USER user1 WITH DEFAULT_ROLE = 'writer';
+    ```
 
 2. Verify the default role of user "user1" using the [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) command:
 

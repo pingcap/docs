@@ -109,67 +109,67 @@ Once the TPC-H tables are loaded, you can query the data in Databend:
 
 1. Launch Databend in Docker:
 
-```bash
-docker network create iceberg_net
-```
+    ```bash
+    docker network create iceberg_net
+    ```
 
-```bash
-docker run -d \
-  --name databend \
-  --network iceberg_net \
-  -p 3307:3307 \
-  -p 8000:8000 \
-  -p 8124:8124 \
-  -p 8900:8900 \
-  datafuselabs/databend
-```
+    ```bash
+    docker run -d \
+      --name databend \
+      --network iceberg_net \
+      -p 3307:3307 \
+      -p 8000:8000 \
+      -p 8124:8124 \
+      -p 8900:8900 \
+      datafuselabs/databend
+    ```
 
 2. Connect to Databend using BendSQL first, and then create an Iceberg catalog:
 
-```bash
-bendsql
-```
+    ```bash
+    bendsql
+    ```
 
-```bash
-Welcome to BendSQL 0.24.1-f1f7de0(2024-12-04T12:31:18.526234000Z).
-Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.725-8d073f6b7a(rust-1.88.0-nightly-2025-04-21T11:49:03.577976082Z)
-Loaded 1436 auto complete keywords from server.
-Started web server at 127.0.0.1:8080
-```
+    ```bash
+    Welcome to BendSQL 0.24.1-f1f7de0(2024-12-04T12:31:18.526234000Z).
+    Connecting to localhost:8000 as user root.
+    Connected to Databend Query v1.2.725-8d073f6b7a(rust-1.88.0-nightly-2025-04-21T11:49:03.577976082Z)
+    Loaded 1436 auto complete keywords from server.
+    Started web server at 127.0.0.1:8080
+    ```
 
-```sql
-CREATE CATALOG iceberg TYPE = ICEBERG CONNECTION = (
-    TYPE = 'rest'
-    ADDRESS = 'http://host.docker.internal:8181'
-    warehouse = 's3://warehouse/wh/'
-    "s3.endpoint" = 'http://host.docker.internal:9000'
-    "s3.access-key-id" = 'admin'
-    "s3.secret-access-key" = 'password'
-    "s3.region" = 'us-east-1'
-);
-```
+    ```sql
+    CREATE CATALOG iceberg TYPE = ICEBERG CONNECTION = (
+        TYPE = 'rest'
+        ADDRESS = 'http://host.docker.internal:8181'
+        warehouse = 's3://warehouse/wh/'
+        "s3.endpoint" = 'http://host.docker.internal:9000'
+        "s3.access-key-id" = 'admin'
+        "s3.secret-access-key" = 'password'
+        "s3.region" = 'us-east-1'
+    );
+    ```
 
 3. Use the newly created catalog:
 
-```sql
-USE CATALOG iceberg;
-```
+    ```sql
+    USE CATALOG iceberg;
+    ```
 
 4. Show available databases:
 
-```sql
-SHOW DATABASES;
-```
+    ```sql
+    SHOW DATABASES;
+    ```
 
-```sql
-╭──────────────────────╮
-│ databases_in_iceberg │
-│        String        │
-├──────────────────────┤
-│ tpch                 │
-╰──────────────────────╯
-```
+    ```sql
+    ╭──────────────────────╮
+    │ databases_in_iceberg │
+    │        String        │
+    ├──────────────────────┤
+    │ tpch                 │
+    ╰──────────────────────╯
+    ```
 
 5. Run a sample query to aggregate TPC-H data:
 
@@ -302,8 +302,10 @@ CREATE CATALOG iceberg_rest TYPE = ICEBERG CONNECTION = (
     "s3.secret-access-key" = 'password'
     "s3.region" = 'us-east-1'
 )
+```
 
 - AWS Glue Catalog
+
 For Glue catalogs, the configuration includes both Glue service parameters and storage (S3) parameters. The Glue service parameters appear first, followed by the S3 storage parameters (prefixed with "s3.").
 
 ```sql
@@ -326,6 +328,7 @@ CREATE CATALOG iceberg_glue TYPE = ICEBERG CONNECTION = (
 The Storage catalog requires a table_bucket_arn parameter. Unlike other buckets, S3Tables bucket is not a physical bucket, but a virtual bucket that is managed by S3Tables. You cannot directly access the bucket with a path like `s3://{bucket_name}/{file_path}`. All operations are performed with respect to the bucket ARN.
 
 Properties Parameters
+
 The following properties are available for the catalog:
 
 ```

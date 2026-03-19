@@ -44,115 +44,70 @@ For more details about the `CREATE TABLE` syntax, see [CREATE TABLE](/tidb-cloud
 
 Below are the main parameters for creating a Fuse Engine table:
 
-#### `ENGINE`
+### `ENGINE`
 
-- **Description:**
-  If an engine is not explicitly specified, Databend will automatically default to using the Fuse Engine to create tables, which is equivalent to `ENGINE = FUSE`.
+- **Description:** If an engine is not explicitly specified, Databend will automatically default to using the Fuse Engine to create tables, which is equivalent to `ENGINE = FUSE`.
 
----
+### `CLUSTER BY`
 
-#### `CLUSTER BY`
+- **Description:** Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md).
 
-- **Description:**
-  Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md).
+### `<Options>`
 
----
-
-#### `<Options>`
-
-- **Description:**
-  The Fuse Engine offers various options (case-insensitive) that allow you to customize the table's properties.
+- **Description:** The Fuse Engine offers various options (case-insensitive) that allow you to customize the table's properties.
     - See [Fuse Engine Options](#fuse-engine-options) for details.
     - Separate multiple options with a space.
     - Use [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#fuse-engine-options) to modify a table's options.
     - Use [SHOW CREATE TABLE](/tidb-cloud-lake/sql/show-create-table.md) to show a table's options.
 
----
-
 ## Fuse Engine Options
 
 Below are the available Fuse Engine options, grouped by their purpose:
 
----
-
 ### `compression`
 
-- **Syntax:**
-  `compression = '<compression>'`
-- **Description:**
-  Specifies the compression method for the engine. Compression options include lz4, zstd, snappy, or none. The compression method defaults to zstd in object storage and lz4 in file system (fs) storage.
-
----
+- **Syntax:** `compression = '<compression>'`
+- **Description:** Specifies the compression method for the engine. Compression options include lz4, zstd, snappy, or none. The compression method defaults to zstd in object storage and lz4 in file system (fs) storage.
 
 ### `snapshot_loc`
 
-- **Syntax:**
-  `snapshot_loc = '<snapshot_loc>'`
-- **Description:**
-  Specifies a location parameter in string format, allowing easy sharing of a table without data copy.
-
----
+- **Syntax:** `snapshot_loc = '<snapshot_loc>'`
+- **Description:** Specifies a location parameter in string format, allowing easy sharing of a table without data copy.
 
 ### `block_size_threshold`
 
-- **Syntax:**
-  `block_size_threshold = <n>`
-- **Description:**
-  Specifies the maximum block size in bytes. Defaults to 104,857,600 bytes.
-
----
+- **Syntax:** `block_size_threshold = <n>`
+- **Description:** Specifies the maximum block size in bytes. Defaults to 104,857,600 bytes.
 
 ### `block_per_segment`
 
-- **Syntax:**
-  `block_per_segment = <n>`
-- **Description:**
-  Specifies the maximum number of blocks in a segment. Defaults to 1,000.
-
----
+- **Syntax:** `block_per_segment = <n>`
+- **Description:** Specifies the maximum number of blocks in a segment. Defaults to 1,000.
 
 ### `row_per_block`
 
-- **Syntax:**
-  `row_per_block = <n>`
-- **Description:**
-  Specifies the maximum number of rows in a file. Defaults to 1,000,000.
-
----
+- **Syntax:** `row_per_block = <n>`
+- **Description:** Specifies the maximum number of rows in a file. Defaults to 1,000,000.
 
 ### `bloom_index_columns`
 
-- **Syntax:**
-  `bloom_index_columns = '<column> [, <column> ...]'`
-- **Description:**
-  Specifies the columns to be used for the bloom index. The data type of these columns can be Map, Number, String, Date, or Timestamp. If no specific columns are specified, the bloom index is created by default on all supported columns. `bloom_index_columns=''` disables the bloom indexing.
-
----
+- **Syntax:** `bloom_index_columns = '<column> [, <column> ...]'`
+- **Description:** Specifies the columns to be used for the bloom index. The data type of these columns can be Map, Number, String, Date, or Timestamp. If no specific columns are specified, the bloom index is created by default on all supported columns. `bloom_index_columns=''` disables the bloom indexing.
 
 ### `change_tracking`
 
-- **Syntax:**
-  `change_tracking = True / False`
-- **Description:**
-  Setting this option to `True` in the Fuse Engine allows for tracking changes for a table. Creating a stream for a table will automatically set `change_tracking` to `True` and introduce additional hidden columns to the table as change tracking metadata. For more information, see [How Stream Works](/tidb-cloud-lake/sql/stream.md#stream-management).
-
----
+- **Syntax:** `change_tracking = True / False`
+- **Description:** Setting this option to `True` in the Fuse Engine allows for tracking changes for a table. Creating a stream for a table will automatically set `change_tracking` to `True` and introduce additional hidden columns to the table as change tracking metadata. For more information, see [How Stream Works](/tidb-cloud-lake/sql/stream.md#stream-management).
 
 ### `data_retention_period_in_hours`
 
-- **Syntax:**
-  `data_retention_period_in_hours = <n>`
-- **Description:**
-  Specifies the number of hours to retain table data. The minimum value is 1 hour. The maximum value is defined by the `data_retention_time_in_days_max` setting in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or defaults to 2,160 hours (90 days x 24 hours) if not specified.
-
----
+- **Syntax:** `data_retention_period_in_hours = <n>`
+- **Description:** Specifies the number of hours to retain table data. The minimum value is 1 hour. The maximum value is defined by the `data_retention_time_in_days_max` setting in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or defaults to 2,160 hours (90 days x 24 hours) if not specified.
 
 ### `enable_auto_vacuum`
 
-- **Syntax:**
-  `enable_auto_vacuum = 0 / 1`
-- **Description:**
-  Controls whether a table automatically triggers vacuum operations during mutations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When enabled (set to 1), vacuum operations will be automatically triggered after mutations like INSERT or ALTER TABLE, cleaning up the table data according to the configured retention policy.
+- **Syntax:** `enable_auto_vacuum = 0 / 1`
+- **Description:** Controls whether a table automatically triggers vacuum operations during mutations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When enabled (set to 1), vacuum operations will be automatically triggered after mutations like INSERT or ALTER TABLE, cleaning up the table data according to the configured retention policy.
 
   **Examples:**
 
@@ -179,14 +134,10 @@ Below are the available Fuse Engine options, grouped by their purpose:
   INSERT INTO t2 VALUES(2); -- Won't trigger vacuum anymore
   ```
 
----
-
 ### `data_retention_num_snapshots_to_keep`
 
-- **Syntax:**
-  `data_retention_num_snapshots_to_keep = <n>`
-- **Description:**
-  Specifies the number of snapshots to retain during vacuum operations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When set, only the specified number of most recent snapshots will be kept after vacuum operations. Overrides the `data_retention_time_in_days` setting. If set to 0, this setting will be ignored. This option works in conjunction with the `enable_auto_vacuum` setting to provide granular control over snapshot retention policies.
+- **Syntax:** `data_retention_num_snapshots_to_keep = <n>`
+- **Description:** Specifies the number of snapshots to retain during vacuum operations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When set, only the specified number of most recent snapshots will be kept after vacuum operations. Overrides the `data_retention_time_in_days` setting. If set to 0, this setting will be ignored. This option works in conjunction with the `enable_auto_vacuum` setting to provide granular control over snapshot retention policies.
 
   **Examples:**
 
@@ -217,5 +168,3 @@ Below are the available Fuse Engine options, grouped by their purpose:
   ALTER TABLE t1 SET OPTIONS(data_retention_num_snapshots_to_keep = 3);
   -- Now t1 will keep 3 snapshots when vacuum is triggered
   ```
-
----

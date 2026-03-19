@@ -42,16 +42,16 @@ GRANT ROLE tableau_role TO tableau;
 
 1. Launch Tableau Desktop and select **Other Database (JDBC)** in the sidebar. This opens a window as follows:
 
-![Alt text](/media/tidb-cloud-lake/integration-tableau-1.png)
+    ![Alt text](/media/tidb-cloud-lake/integration-tableau-1.png)
 
 2. In the window that opens, provide the connection information and click **Sign In**.
 
-| Parameter | Description                                                          | For This Tutorial                                        |
-| --------- | -------------------------------------------------------------------- | -------------------------------------------------------- |
-| URL       | Format: `jdbc:databend://{user}:{password}@{host}:{port}/{database}` | `jdbc:databend://tableau:tableau@127.0.0.1:8000/default` |
-| Dialect   | Select "MySQL" for SQL dialect.                                      | MySQL                                                    |
-| Username  | SQL user for connecting to Databend                                  | tableau                                                  |
-| Password  | SQL user for connecting to Databend                                  | tableau                                                  |
+    | Parameter | Description                                                          | For This Tutorial                                        |
+    | --------- | -------------------------------------------------------------------- | -------------------------------------------------------- |
+    | URL       | Format: `jdbc:databend://{user}:{password}@{host}:{port}/{database}` | `jdbc:databend://tableau:tableau@127.0.0.1:8000/default` |
+    | Dialect   | Select "MySQL" for SQL dialect.                                      | MySQL                                                    |
+    | Username  | SQL user for connecting to Databend                                  | tableau                                                  |
+    | Password  | SQL user for connecting to Databend                                  | tableau                                                  |
 
 3. When the Tableau workbook opens, select the database, schema, and tables that you want to query. For this tutorial, select _default_ for both **Database** and **Schema**.
 
@@ -90,10 +90,10 @@ GRANT ROLE tableau_role TO tableau;
 
 1. Download the latest **databend_jdbc.taco** file from the connector's [Releases](https://github.com/databendcloud/databend-tableau-connector-jdbc/releases) page, and save it to the Tableau's connector folder:
 
-| Operating System | Tableau's Connector Folder                                         |
-| ---------------- | ------------------------------------------------------------------ |
-| MacOS            | ~/Documents/My Tableau Repository/Connectors                       |
-| Windows          | C:\Users\[Windows User]\Documents\My Tableau Repository\Connectors |
+    | Operating System | Tableau's Connector Folder                                         |
+    | ---------------- | ------------------------------------------------------------------ |
+    | MacOS            | ~/Documents/My Tableau Repository/Connectors                       |
+    | Windows          | C:\Users\[Windows User]\Documents\My Tableau Repository\Connectors |
 
 2. Start Tableau Desktop with signature verification disabled. If you are on macOS, open Terminal and enter the following command:
 
@@ -105,11 +105,11 @@ GRANT ROLE tableau_role TO tableau;
 
 1. In Tableau Desktop, select **Databend JDBC by Databend, Inc.** on **To a Server** > **More...**.
 
-![Alt text](/media/tidb-cloud-lake/tableau-connector-1.png)
+    ![Alt text](/media/tidb-cloud-lake/tableau-connector-1.png)
 
 2. In the window that opens, provide the connection information and click **Sign In**.
 
-![Alt text](/media/tidb-cloud-lake/tableau-connector-2.png)
+    ![Alt text](/media/tidb-cloud-lake/tableau-connector-2.png)
 
 3. Select a database, then you can drag tables to the work area to start your query and further analysis.
 
@@ -139,16 +139,16 @@ Obtain the connection information from Databend Cloud. For how to do that, refer
 
 1. Launch Tableau Desktop and select **Other Database (JDBC)** in the sidebar. This opens a window as follows:
 
-![Alt text](/media/tidb-cloud-lake/bi-tableau-1.png)
+    ![Alt text](/media/tidb-cloud-lake/bi-tableau-1.png)
 
 2. In the window, provide the connection information you obtained in [Step 1](#step-1-obtain-connection-information) and click **Sign In**.
 
-| Parameter | Description                                                          | For This Tutorial                                                          |
-| --------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| URL       | Format: `jdbc:databend://{user}:{password}@{host}:{port}/{database}` | `jdbc:databend://cloudapp:<your-password>@https://<your-host>:443/default` |
-| Dialect   | Select "MySQL" for SQL dialect.                                      | MySQL                                                                      |
-| Username  | SQL user for connecting to Databend Cloud                            | cloudapp                                                                   |
-| Password  | SQL user for connecting to Databend Cloud                            | Your password                                                              |
+    | Parameter | Description                                                          | For This Tutorial                                                          |
+    | --------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+    | URL       | Format: `jdbc:databend://{user}:{password}@{host}:{port}/{database}` | `jdbc:databend://cloudapp:<your-password>@https://<your-host>:443/default` |
+    | Dialect   | Select "MySQL" for SQL dialect.                                      | MySQL                                                                      |
+    | Username  | SQL user for connecting to Databend Cloud                            | cloudapp                                                                   |
+    | Password  | SQL user for connecting to Databend Cloud                            | Your password                                                              |
 
 3. When the Tableau workbook opens, select the database, schema, and tables that you want to query. For this tutorial, select _default_ for both **Database** and **Schema**.
 

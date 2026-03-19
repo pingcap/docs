@@ -13,13 +13,13 @@ For the pricing information, see [Pricing & Billing](/tidb-cloud-lake/guides/pri
 
 The following are feature lists of Databend Cloud among editions:
 
-#### Release Management
+### Release Management
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
 | Early access to weekly new releases, which can be used for additional testing/validation before each release is deployed to your production accounts. | | ✓ | ✓ |
 
-#### Security & Governance
+### Security & Governance
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -35,7 +35,7 @@ The following are feature lists of Databend Cloud among editions:
 | **Support for private connectivity to the Databend Cloud service using AWS PrivateLink**. | | ✓ | ✓ |
 | **Dedicated metadata store and pool of compute resources (used in virtual warehouses)**. | | | ✓ |
 
-#### Compute Resource
+### Compute Resource
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -43,7 +43,7 @@ The following are feature lists of Databend Cloud among editions:
 | Multi-cluster scaling | | ✓ | ✓ |
 | Resource monitors for monitoring virtual warehouse credit usage. | ✓ | ✓ | ✓ |
 
-#### SQL Support
+### SQL Support
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -68,7 +68,7 @@ The following are feature lists of Databend Cloud among editions:
 | Support for <a href="/sql/sql-commands/ddl/table/ddl-create-table-external-location" target="_self">creating table with external location</a>. | ✓ | ✓ | ✓ |
 | Supports for <a href="/sql/sql-commands/ddl/table/attach-table" target="_self">ATTACH TABLE</a>. | ✓ | ✓ | ✓ |
 
-#### Interfaces & Tools
+### Interfaces & Tools
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -78,7 +78,7 @@ The following are feature lists of Databend Cloud among editions:
 | Native support for JDBC. | ✓ | ✓ | ✓ |
 | Extensive ecosystem for connecting to ETL, BI, and other third-party vendors and technologies. | ✓ | ✓ | ✓ |
 
-#### Data Import & Export
+### Data Import & Export
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -88,14 +88,14 @@ The following are feature lists of Databend Cloud among editions:
 | Streaming for low-latency loading of streaming data. | ✓ | ✓ | ✓ |
 | Databend Cloud Connector for Kafka for loading data from Apache Kafka topics. | ✓ | ✓ | ✓ |
 
-#### Data Pipelines
+### Data Pipelines
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
 | Streams for tracking table changes. | ✓ | ✓ | ✓ |
 | Tasks for scheduling the execution of SQL statements, often in conjunction with table streams. | ✓ | ✓ | ✓ |
 
-#### Customer Support
+### Customer Support
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|

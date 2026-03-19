@@ -33,43 +33,43 @@ CREATE USER metrics IDENTIFIED BY 'metrics_password';
 
 1. On your local machine, create a file named **prometheus.yml** to configure Prometheus for scraping metrics from Databend Cloud. Use the following template:
 
-```yaml title='prometheus.yml'
-scrape_configs:
-  - job_name: databend-cloud
-    scheme: https
-    metrics_path: /metrics
-    basic_auth:
-      username: <USERNAME>
-      password: <PASSWORD>
-    scrape_interval: 10s
-    scrape_timeout: 3s
-    static_configs:
-      - targets:
-          - <TENANT_ENDPOINT>
-        labels: # Optional
-          tenant: <TENANT_ID>
-          platform: <PLATFORM>
-          region: <REGION>
-```
+    ```yaml title='prometheus.yml'
+    scrape_configs:
+      - job_name: databend-cloud
+        scheme: https
+        metrics_path: /metrics
+        basic_auth:
+          username: <USERNAME>
+          password: <PASSWORD>
+        scrape_interval: 10s
+        scrape_timeout: 3s
+        static_configs:
+          - targets:
+              - <TENANT_ENDPOINT>
+            labels: # Optional
+              tenant: <TENANT_ID>
+              platform: <PLATFORM>
+              region: <REGION>
+    ```
 
-| Placeholder         | Description                                      | Example                                           |
-| ------------------- | ------------------------------------------------ | ------------------------------------------------- |
-| `<USERNAME>`        | The username for the SQL user.                   | `metrics`                                         |
-| `<PASSWORD>`        | The secure password for the SQL user.            | `metrics_password`                                |
-| `<TENANT_ENDPOINT>` | The endpoint URL for your Databend Cloud tenant. | `tnxxxxxxx.gw.aws-us-east-2.default.databend.com` |
-| `<TENANT_ID>`       | Your tenant's unique identifier.                 | `tnxxxxxxx`                                       |
-| `<PLATFORM>`        | The cloud platform hosting the tenant.           | `aws`                                             |
-| `<REGION>`          | The region where the tenant is hosted.           | `us-east-2`                                       |
+    | Placeholder         | Description                                      | Example                                           |
+    | ------------------- | ------------------------------------------------ | ------------------------------------------------- |
+    | `<USERNAME>`        | The username for the SQL user.                   | `metrics`                                         |
+    | `<PASSWORD>`        | The secure password for the SQL user.            | `metrics_password`                                |
+    | `<TENANT_ENDPOINT>` | The endpoint URL for your Databend Cloud tenant. | `tnxxxxxxx.gw.aws-us-east-2.default.databend.com` |
+    | `<TENANT_ID>`       | Your tenant's unique identifier.                 | `tnxxxxxxx`                                       |
+    | `<PLATFORM>`        | The cloud platform hosting the tenant.           | `aws`                                             |
+    | `<REGION>`          | The region where the tenant is hosted.           | `us-east-2`                                       |
 
 2. Start Prometheus with the following command (replace `</path/to/prometheus.yml>` with the full path to your **prometheus.yml** file):
 
-```bash
-docker run -d \
-  --name prometheus \
-  -p 9090:9090 \
-  -v </path/to/prometheus.yml>:/etc/prometheus/prometheus.yml \
-  prom/prometheus
-```
+    ```bash
+    docker run -d \
+      --name prometheus \
+      -p 9090:9090 \
+      -v </path/to/prometheus.yml>:/etc/prometheus/prometheus.yml \
+      prom/prometheus
+    ```
 
 3. Open Prometheus in your browser at `http://localhost:9090`, navigate to **Status** > **Target health**, and confirm that the `databend-cloud` target is listed with a status of `UP`.
 

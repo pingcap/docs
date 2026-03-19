@@ -263,7 +263,7 @@ BendSQL provides a range of settings that allow you to define how query results 
 
 For details of each setting, please refer to the reference information below:
 
-#### `display_pretty_sql`
+### `display_pretty_sql`
 
 The `display_pretty_sql` setting controls whether SQL queries are displayed in a visually formatted manner or not. When set to `false`, as in the first query below, SQL queries are not formatted for visual appeal. In contrast, when set to `true`, as in the second query, SQL queries are formatted in a visually appealing manner, making them easier to read and understand.
 
@@ -301,7 +301,7 @@ SELECT
 1 row read in 0.087 sec. Processed 1 row, 1 B (11.44 rows/s, 11 B/s)
 ```
 
-#### `prompt`
+### `prompt`
 
 The `prompt` setting controls the format of the command line interface prompt. In the example below, it was initially set to display the user and warehouse (`{user}@{warehouse}`). After updating it to `{user}@{warehouse}/{database}`, the prompt now includes the user, warehouse, and database.
 
@@ -330,7 +330,7 @@ root@localhost:8000 !set prompt {user}@{warehouse}/{database}
 root@localhost:8000/default
 ```
 
-#### `progress_color`
+### `progress_color`
 
 The `progress_color` setting controls the color used for progress indicators during query execution. In this example, the color has been set to `blue`:
 
@@ -339,7 +339,7 @@ The `progress_color` setting controls the color used for progress indicators dur
 root@localhost:8000/default> !set progress_color blue
 ```
 
-#### `show_progress`
+### `show_progress`
 
 When set to `true`, progress information is displayed during the execution of a query. The progress information includes the number of rows processed, the total number of rows in the query, the processing speed in rows per second, the amount of memory processed, and the processing speed in memory per second.
 
@@ -350,7 +350,7 @@ root@localhost:8000/default> select * from numbers(1000000000000000);
 ⠁ [00:00:08] Processing 18.02 million/1 quadrillion (2.21 million rows/s), 137.50 MiB/7.11 PiB (16.88 MiB/s) ░
 ```
 
-#### `show_stats`
+### `show_stats`
 
 The `show_stats` setting controls whether query statistics are displayed after executing each query. When set to `false`, as the first query in the example below, query statistics are not displayed. In contrast, when set to `true`, as in the second query, query statistics such as execution time, rows read, and bytes processed are displayed after executing each query.
 
@@ -376,7 +376,7 @@ root@localhost:8000/default> select now();
 1 row read in 0.045 sec. Processed 1 row, 1 B (22.26 rows/s, 22 B/s)
 ```
 
-#### `max_display_rows`
+### `max_display_rows`
 
 The `max_display_rows` setting controls the maximum number of rows displayed in the output of a query result. When set to `5` in the example below, only up to 5 rows are displayed in the query result. The remaining rows are indicated with (5 shown).
 
@@ -402,7 +402,7 @@ root@localhost:8000/default> SELECT * FROM system.configs;
 176 rows read in 0.059 sec. Processed 176 rows, 10.36 KiB (2.98 thousand rows/s, 175.46 KiB/s)
 ```
 
-#### `max_col_width` & `max_width`
+### `max_col_width` & `max_width`
 
 The settings `max_col_width` and `max_width` specify the maximum permitted width in characters for individual columns and the entire display output, respectively. The following example sets column display width to 10 characters and the entire display width to 100 characters:
 
@@ -435,7 +435,7 @@ root@localhost:8000/default> select * from system.settings;
 96 rows read in 0.040 sec. Processed 96 rows, 16.52 KiB (2.38 thousand rows/s, 410.18 KiB/s)
 ```
 
-#### `output_format`
+### `output_format`
 
 By setting the `output_format` to `table`, `csv`, `tsv`, or `null`, you can control the format of the query result. The `table` format presents the result in a tabular format with column headers, while the `csv` and `tsv` formats provide comma-separated values and tab-separated values respectively, and the `null` format suppresses the output formatting altogether.
 
@@ -469,7 +469,7 @@ root@localhost:8000/default> show users;
 1 row read in 0.036 sec. Processed 1 row, 113 B (28.1 rows/s, 3.10 KiB/s)
 ```
 
-#### `expand`
+### `expand`
 
 The `expand` setting controls whether the output of a query is displayed as individual records or in a tabular format. When the `expand` setting is set to `auto`, the system automatically determines how to display the output based on the number of rows returned by the query. If the query returns only one row, the output is displayed as a single record.
 
@@ -512,7 +512,7 @@ is_configured: YES
 1 row read in 0.037 sec. Processed 1 row, 113 B (26.75 rows/s, 2.95 KiB/s)
 ```
 
-#### `multi_line`
+### `multi_line`
 
 When the `multi_line` setting is set to `true`, allowing input to be entered across multiple lines. As a result, the SQL query is entered with each clause on a separate line for improved readability and organization.
 
@@ -539,7 +539,7 @@ root@localhost:8000/default> SELECT *
 176 rows read in 0.060 sec. Processed 176 rows, 10.36 KiB (2.91 thousand rows/s, 171.39 KiB/s)
 ```
 
-#### `replace_newline`
+### `replace_newline`
 
 The `replace_newline` setting determines whether newline characters (\n) are replaced with the literal string (\\n) in the output. In the example below, the `replace_newline` setting is set to `true`. As a result, when the string 'Hello\nWorld' is selected, the newline character (\n) is replaced with the literal string (\\n). So, instead of displaying the newline character, the output displays 'Hello\nWorld' as 'Hello\\nWorld':
 
@@ -605,7 +605,7 @@ BendSQL provides users with a variety of commands to streamline their workflow a
 
 For examples of each command, please refer to the reference information below:
 
-#### `!exit`
+### `!exit`
 
 Disconnects from Databend and exits BendSQL.
 
@@ -620,7 +620,7 @@ root@localhost:8000/default> !exit
 Bye~
 ```
 
-#### `!quit`
+### `!quit`
 
 Disconnects from Databend and exits BendSQL.
 
@@ -636,7 +636,7 @@ Bye~
 ➜  ~
 ```
 
-#### `!configs`
+### `!configs`
 
 Displays the current BendSQL settings.
 
@@ -661,7 +661,7 @@ Settings {
 }
 ```
 
-#### `!set <setting> <value>`
+### `!set <setting> <value>`
 
 Modifies a BendSQL setting.
 
@@ -669,7 +669,7 @@ Modifies a BendSQL setting.
 root@localhost:8000/default> !set display_pretty_sql false
 ```
 
-#### `!source <sql_file>`
+### `!source <sql_file>`
 
 Executes a SQL file.
 

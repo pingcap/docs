@@ -93,7 +93,7 @@ For detailed information on obtaining connection details, see [Connecting to a W
    - **Name**: Give your data source a descriptive name (e.g., "Databend Cloud Logs")
    - **URL**: Enter `https://<host>` using the host from Step 2
 
-![Configure Loki Data Source - Basic](/media/tidb-cloud-lake/grafana-configure-loki-datasource-basic.png)
+    ![Configure Loki Data Source - Basic](/media/tidb-cloud-lake/grafana-configure-loki-datasource-basic.png)
 
 4. Configure authentication:
    - Enable **Basic auth** under the Authentication section
@@ -105,7 +105,7 @@ For detailed information on obtaining connection details, see [Connecting to a W
    - **Header**: `X-Databend-Database`, **Value**: Your database name
    - **Header**: `X-Databend-Table`, **Value**: Your table name
 
-![Configure Loki Data Source - Headers](/media/tidb-cloud-lake/grafana-configure-loki-datasource-header.png)
+    ![Configure Loki Data Source - Headers](/media/tidb-cloud-lake/grafana-configure-loki-datasource-header.png)
 
 6. Click **Save & test** to verify the connection.
 
@@ -155,11 +155,11 @@ allow_loading_unsigned_plugins = databend-datasource
 
 3. Get the Grafana plugins folder and unzip the downloaded zip package into it:
 
-```shell
-curl -fLo /tmp/grafana-databend-datasource.zip https://github.com/databendlabs/grafana-databend-datasource/releases/download/v1.0.2/databend-datasource-1.0.2.zip
-unzip /tmp/grafana-databend-datasource.zip -d /var/lib/grafana/plugins
-rm /tmp/grafana-databend-datasource.zip
-```
+    ```shell
+    curl -fLo /tmp/grafana-databend-datasource.zip https://github.com/databendlabs/grafana-databend-datasource/releases/download/v1.0.2/databend-datasource-1.0.2.zip
+    unzip /tmp/grafana-databend-datasource.zip -d /var/lib/grafana/plugins
+    rm /tmp/grafana-databend-datasource.zip
+    ```
 
 4. Restart Grafana to load the plugin.
 
