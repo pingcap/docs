@@ -1,6 +1,6 @@
 ---
 title: DROP SEQUENCE
-summary: Deletes an existing sequence from Databend.
+summary: Deletes an existing sequence from {{{ .lake-short }}}.
 ---
 
 # DROP SEQUENCE
@@ -9,7 +9,7 @@ summary: Deletes an existing sequence from Databend.
 >
 > Introduced or updated in v1.2.426.
 
-Deletes an existing sequence from Databend.
+Deletes an existing sequence from {{{ .lake-short }}}.
 
 ## Syntax
 

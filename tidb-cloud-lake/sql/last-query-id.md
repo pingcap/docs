@@ -9,7 +9,7 @@ Returns the ID of a query in the current session based on its order.
 
 > **Note:**
 >
-> This function is currently supported only through the MySQL protocol, meaning you must connect to Databend using a MySQL protocol-compatible client for it to work.
+> This function is currently supported only through the MySQL protocol, meaning you must connect to {{{ .lake-short }}} using a MySQL protocol-compatible client for it to work.
 
 ## Syntax
 

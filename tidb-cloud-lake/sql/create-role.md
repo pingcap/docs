@@ -1,6 +1,6 @@
 ---
 title: CREATE ROLE
-summary: Creates a new role for access control. Roles are used to group privileges and can be assigned to users or other roles, providing a flexible way to manage permissions in Databend.
+summary: Creates a new role for access control. Roles are used to group privileges and can be assigned to users or other roles, providing a flexible way to manage permissions in {{{ .lake-short }}}.
 ---
 
 # CREATE ROLE
@@ -9,7 +9,7 @@ summary: Creates a new role for access control. Roles are used to group privileg
 >
 > Introduced or updated in v1.2.703.
 
-Creates a new role for access control. Roles are used to group privileges and can be assigned to users or other roles, providing a flexible way to manage permissions in Databend.
+Creates a new role for access control. Roles are used to group privileges and can be assigned to users or other roles, providing a flexible way to manage permissions in {{{ .lake-short }}}.
 
 ## Syntax
 

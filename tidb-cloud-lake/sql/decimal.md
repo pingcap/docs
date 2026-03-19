@@ -63,4 +63,4 @@ Result:
 └─────────────┴───────────┴────────────────┴──────────┘
 ```
 
-If an operation would overflow the integer part, Databend raises an error; extra fractional digits are truncated rather than rounded. Adjust `P`/`S` or cast the result to control both behaviors.
+If an operation would overflow the integer part, {{{ .lake-short }}} raises an error; extra fractional digits are truncated rather than rounded. Adjust `P`/`S` or cast the result to control both behaviors.

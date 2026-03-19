@@ -1,6 +1,6 @@
 ---
 title: CREATE PASSWORD POLICY
-summary: Creates a new password policy in Databend.
+summary: Creates a new password policy in {{{ .lake-short }}}.
 ---
 
 # CREATE PASSWORD POLICY
@@ -9,7 +9,7 @@ summary: Creates a new password policy in Databend.
 >
 > Introduced or updated in v1.2.339.
 
-Creates a new password policy in Databend.
+Creates a new password policy in {{{ .lake-short }}}.
 
 ## Syntax
 

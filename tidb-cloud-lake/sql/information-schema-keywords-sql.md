@@ -1,11 +1,11 @@
 ---
 title: information_schema.keywords
-summary: The information_schema.keywords system table is a view that provides all keywords in Databend.
+summary: The information_schema.keywords system table is a view that provides all keywords in {{{ .lake-short }}}.
 ---
 
 # information_schema.keywords
 
-The `information_schema.keywords` system table is a view that provides all keywords in Databend
+The `information_schema.keywords` system table is a view that provides all keywords in {{{ .lake-short }}}
 
 ```sql
 DESCRIBE information_schema.keywords

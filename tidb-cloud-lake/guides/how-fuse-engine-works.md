@@ -1,13 +1,13 @@
 ---
 title: How Fuse Engine Works
-summary: Fuse Engine is Databend's core storage engine, optimized for managing petabyte-scale data efficiently on cloud object storage. By default, tables created in Databend automatically use this engine (ENGINE=FUSE). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides high query performance through advanced pruning and indexing.
+summary: Fuse Engine is {{{ .lake-short }}}'s core storage engine, optimized for managing petabyte-scale data efficiently on cloud object storage. By default, tables created in {{{ .lake-short }}} automatically use this engine (ENGINE=FUSE). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides high query performance through advanced pruning and indexing.
 ---
 
 # How Fuse Engine Works
 
 ## Fuse Engine
 
-Fuse Engine is Databend's core storage engine, optimized for managing **petabyte-scale** data efficiently on **cloud object storage**. By default, tables created in Databend automatically use this engine (`ENGINE=FUSE`). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides **high query performance** through advanced pruning and indexing.
+Fuse Engine is {{{ .lake-short }}}'s core storage engine, optimized for managing **petabyte-scale** data efficiently on **cloud object storage**. By default, tables created in {{{ .lake-short }}} automatically use this engine (`ENGINE=FUSE`). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides **high query performance** through advanced pruning and indexing.
 
 This document explains its core concepts and how it works.
 
@@ -213,11 +213,11 @@ Beyond basic block/segment pruning using statistics, Fuse Engine offers speciali
 | **JSON Index**      | Indexes specific paths/keys within JSON documents       | Filtering on specific JSON paths/values             | `WHERE event_data:user.id = 123`      |
 | **Bloom Filter Index** | Probabilistic check to quickly skip non-matching blocks | Fast point lookups (`=`) & `IN` list filtering      | `WHERE user_id = 'xyz'` |
 
-## Comparison: Databend Fuse Engine vs. Apache Iceberg
+## Comparison: {{{ .lake-short }}} Fuse Engine vs. Apache Iceberg
 
-_**Note:** This comparison focuses specifically on **table format features**. As Databend's native table format, Fuse evolves, aiming to improve **usability and performance**. Features shown are current; expect changes._
+_**Note:** This comparison focuses specifically on **table format features**. As {{{ .lake-short }}}'s native table format, Fuse evolves, aiming to improve **usability and performance**. Features shown are current; expect changes._
 
-| Feature                 | Apache Iceberg                     | Databend Fuse Engine                 |
+| Feature                 | Apache Iceberg                     | {{{ .lake-short }}} Fuse Engine                 |
 | :---------------------- | :--------------------------------- | :----------------------------------- |
 | **Metadata Structure**  | Manifest Lists -> Manifest Files -> Data Files | **Snapshot** -> Segments -> Blocks   |
 | **Statistics Levels**   | File-level (+Partition)            | **Multi-level** (Snapshot, Segment, Block) → Finer pruning |

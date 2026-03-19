@@ -1,11 +1,11 @@
 ---
 title: SQL Identifiers
-summary: SQL identifiers are names used for different elements within Databend, such as tables, views, and databases.
+summary: SQL identifiers are names used for different elements within {{{ .lake-short }}}, such as tables, views, and databases.
 ---
 
 # SQL Identifiers
 
-SQL identifiers are names used for different elements within Databend, such as tables, views, and databases.
+SQL identifiers are names used for different elements within {{{ .lake-short }}}, such as tables, views, and databases.
 
 ## Unquoted & Double-quoted Identifiers
 
@@ -42,17 +42,17 @@ Note that using double backticks (``) or double quotes (") is equivalent:
 
 ## Identifier Casing Rules
 
-Databend stores unquoted identifiers by default in lowercase and double-quoted identifiers as they are entered. In other words, Databend handles object names, such as databases, tables, and columns, as case-insensitive. If you want Databend to handle them as case-sensitive, double-quote them.
+{{{ .lake-short }}} stores unquoted identifiers by default in lowercase and double-quoted identifiers as they are entered. In other words, {{{ .lake-short }}} handles object names, such as databases, tables, and columns, as case-insensitive. If you want {{{ .lake-short }}} to handle them as case-sensitive, double-quote them.
 
 > **Note:**
 >
-> Databend allows you to have control over the casing sensitivity of identifiers. Two key settings are available:
+> {{{ .lake-short }}} allows you to have control over the casing sensitivity of identifiers. Two key settings are available:
 >
 > - unquoted_ident_case_sensitive: When set to 1, this option preserves the case of characters for unquoted identifiers, ensuring they are case-sensitive. If left at the default value of 0, unquoted identifiers remain case-insensitive, converting to lowercase.
 >
 > - quoted_ident_case_sensitive: By setting this option to 0, you can indicate that double-quoted identifiers should not preserve the case of characters, making them case-insensitive.
 
-This example demonstrates how Databend treats the casing of identifiers when creating and listing databases:
+This example demonstrates how {{{ .lake-short }}} treats the casing of identifiers when creating and listing databases:
 
 ```sql
 -- Create a database named "databend"
@@ -78,7 +78,7 @@ information_schema  |
 system              |
 ```
 
-This example demonstrates how Databend handles identifier casing for table and column names, highlighting its case-sensitivity by default and the use of double quotes to differentiate between identifiers with varying casing:
+This example demonstrates how {{{ .lake-short }}} handles identifier casing for table and column names, highlighting its case-sensitivity by default and the use of double quotes to differentiate between identifiers with varying casing:
 
 ```sql
 -- Create a table named "databend"
@@ -111,7 +111,7 @@ A    |INT |YES |NULL   |     |
 
 ## String Identifiers
 
-In Databend, when managing string items like text and dates, it is essential to enclose them within single quotes (') as a standard practice.
+In {{{ .lake-short }}}, when managing string items like text and dates, it is essential to enclose them within single quotes (') as a standard practice.
 
 ```sql
 INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
@@ -131,7 +131,7 @@ SELECT "Databend";
   |                                                                         ^^^^^^^^^^ column Databend doesn't exist, do you mean 'Databend'?
 ```
 
-By default, Databend SQL dialect is `PostgreSQL`:
+By default, {{{ .lake-short }}} SQL dialect is `PostgreSQL`:
 
 ```sql
 SHOW SETTINGS LIKE '%sql_dialect%';

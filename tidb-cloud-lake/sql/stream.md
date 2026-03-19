@@ -1,11 +1,11 @@
 ---
 title: Stream
-summary: This page provides a comprehensive overview of stream operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of stream operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Stream
 
-This page provides a comprehensive overview of stream operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of stream operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Stream Management
 
@@ -27,4 +27,4 @@ This page provides a comprehensive overview of stream operations in Databend, or
 
 > **Note:**
 >
-> Streams in Databend are used to track and capture changes to tables, enabling continuous data pipelines and real-time data processing.
+> Streams in {{{ .lake-short }}} are used to track and capture changes to tables, enabling continuous data pipelines and real-time data processing.

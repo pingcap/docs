@@ -7,17 +7,17 @@ summary: Deepnote allows you to easily work on your data science projects, toget
 
 [Deepnote](https://deepnote.com) allows you to easily work on your data science projects, together in real-time and in one place with your friends and colleagues; helping you turn your ideas and analyses into products faster. Deepnote is built for the browser so you can use it across any platform (Windows, Mac, Linux or Chromebook). No downloads required, with updates shipped to you daily. All changes are instantly saved.
 
-Both Databend and Databend Cloud support integration with Deepnote, requiring a secure connection. When integrating with Databend, please note that the default port is `8124`.
+Both {{{ .lake-short }}} and {{{ .lake }}} support integration with Deepnote, requiring a secure connection. When integrating with {{{ .lake-short }}}, please note that the default port is `8124`.
 
 ## Tutorial: Integrating with Deepnote
 
-This tutorial guides you through the process of integrating Databend Cloud with Deepnote.
+This tutorial guides you through the process of integrating {{{ .lake }}} with Deepnote.
 
 ### Step 1. Set up Environment
 
-Make sure you can log in to your Databend Cloud account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+Make sure you can log in to your {{{ .lake }}} account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
-### Step 2. Connect to Databend Cloud
+### Step 2. Connect to {{{ .lake }}}
 
 1. Sign in to Deepnote, or create an account if you don't have one.
 

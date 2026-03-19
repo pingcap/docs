@@ -5,7 +5,7 @@ summary: mcp-databend is an MCP (Model Context Protocol) server that enables AI 
 
 # MCP Server for TiDB Cloud Lake
 
-[mcp-databend](https://github.com/databendlabs/mcp-databend) is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your Databend database using natural language.
+[mcp-databend](https://github.com/databendlabs/mcp-databend) is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your {{{ .lake-short }}} database using natural language.
 
 ## What mcp-databend Can Do
 
@@ -18,22 +18,22 @@ summary: mcp-databend is an MCP (Model Context Protocol) server that enables AI 
 
 This tutorial shows you how to build a conversational Business Intelligence tool using mcp-databend and the Agno framework. You'll create a local agent that can answer data questions in natural language.
 
-![Databend MCP ChatBI](/media/tidb-cloud-lake/databend-mcp-chatbi.png)
+![{{{ .lake-short }}} MCP ChatBI](/media/tidb-cloud-lake/databend-mcp-chatbi.png)
 
 ## Prerequisites
 
 Before getting started, you'll need:
 
-1. **Databend Database** - Either [Databend Cloud](https://app.databend.com) (free tier available) or a self-hosted instance
+1. **{{{ .lake-short }}} Database** - Either [{{{ .lake }}}](https://app.databend.com) (free tier available) or a self-hosted instance
 2. **DeepSeek API Key** - Get your key from [https://platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
 
 ## Step-by-Step Tutorial
 
-### Step 1: Setup Databend Connection
+### Step 1: Setup {{{ .lake-short }}} Connection
 
-If you don't already have a Databend database:
+If you don't already have a {{{ .lake-short }}} database:
 
-1. **Sign up for [Databend Cloud](https://app.databend.com)** (free tier available)
+1. **Sign up for [{{{ .lake }}}](https://app.databend.com)** (free tier available)
 2. **Create a warehouse and database**
 3. **Get your connection string** from the console
 
@@ -41,7 +41,7 @@ For detailed DSN format and examples, see [Connection String Documentation](http
 
 | Deployment         | Connection String Example                                     |
 | ------------------ | ------------------------------------------------------------- |
-| **Databend Cloud** | `databend://user:pwd@host:443/database?warehouse=wh`          |
+| **{{{ .lake }}}** | `databend://user:pwd@host:443/database?warehouse=wh`          |
 | **Self-hosted**    | `databend://user:pwd@localhost:8000/database?sslmode=disable` |
 
 ### Step 2: Setup API Keys and Environment

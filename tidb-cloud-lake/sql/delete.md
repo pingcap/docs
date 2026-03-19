@@ -13,7 +13,7 @@ Removes one or more rows from a table.
 
 > **Tip:**
 >
-> Databend ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
+> {{{ .lake-short }}} ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 ## Syntax
 

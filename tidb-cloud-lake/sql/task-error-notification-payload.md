@@ -11,7 +11,7 @@ summary: The payload body for task error notification.
 
 The payload body for task error notification.
 
-**NOTICE:** this functionality works out of the box only in Databend Cloud.
+**NOTICE:** this functionality works out of the box only in {{{ .lake }}}.
 
 The following is a sample message payload describing a task error. The payload can include one or more error messages.
 

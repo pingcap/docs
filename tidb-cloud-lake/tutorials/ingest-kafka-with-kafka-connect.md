@@ -1,11 +1,11 @@
 ---
 title: Ingest Kafka with Kafka Connect
-summary: In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, databend-kafka-connect. Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
+summary: In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and {{{ .lake }}} using the Kafka Connect sink connector plugin, databend-kafka-connect. Then, we'll demonstrate how to produce messages and load them into {{{ .lake }}}.
 ---
 
 # Ingest Kafka with Kafka Connect
 
-In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, [databend-kafka-connect](https://github.com/databendcloud/databend-kafka-connect). Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
+In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and {{{ .lake }}} using the Kafka Connect sink connector plugin, [databend-kafka-connect](https://github.com/databendcloud/databend-kafka-connect). Then, we'll demonstrate how to produce messages and load them into {{{ .lake }}}.
 
 ## Step 1: Setting up Kafka Environment
 
@@ -101,7 +101,7 @@ In this step, you will create a Kafka topic in Confluent Cloud.
 
 ### Step 4: Add a Connector
 
-In this step, you will set up a connector that connects to Databend Cloud.
+In this step, you will set up a connector that connects to {{{ .lake }}}.
 
 1. In Confluent Cloud, from the navigation menu, click **Connectors** > **Add Connector**. Search for then select the plugin you uploaded.
 
@@ -137,7 +137,7 @@ In this step, you will set up a connector that connects to Databend Cloud.
     }
     ```
 
-4. In the **Networking** step, enter your Databend Cloud warehouse endpoint, such as `xxxxxxxxx--xxx.gw.aws-us-east-2.default.databend.com`.
+4. In the **Networking** step, enter your {{{ .lake }}} warehouse endpoint, such as `xxxxxxxxx--xxx.gw.aws-us-east-2.default.databend.com`.
 
 5. In the **Sizing** step, set it to **1 task**.
 
@@ -145,7 +145,7 @@ In this step, you will set up a connector that connects to Databend Cloud.
 
 ### Step 5: Produce Messages
 
-In this step, you will produce messages using the Confluent CLI and verify that they are loaded into Databend Cloud.
+In this step, you will produce messages using the Confluent CLI and verify that they are loaded into {{{ .lake }}}.
 
 1. On your local machine, save the schema used to create the topic as a JSON file, such as `schema.json`.
 
@@ -186,6 +186,6 @@ In this step, you will produce messages using the Confluent CLI and verify that 
     {"id":3, "name":"Charlie", "age":35}
     ```
 
-3. In Databend Cloud, verify that the data has been successfully loaded:
+3. In {{{ .lake }}}, verify that the data has been successfully loaded:
 
 ![alt text](/media/tidb-cloud-lake/kafka-5.png)

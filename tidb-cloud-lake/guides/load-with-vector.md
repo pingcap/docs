@@ -11,15 +11,15 @@ summary: Vector is a high-performance observability data pipeline that puts orga
 
 [Vector](https://vector.dev/) is a high-performance observability data pipeline that puts organizations in control of their observability data. Collect, transform, and route all your logs, metrics, and traces to any vendors you want today and any other vendors you may want tomorrow. Vector enables dramatic cost reduction, novel data enrichment, and data security where you need it, not where is most convenient for your vendors. Open source and up to 10x faster than every alternative.
 
-Vector natively supports delivering data to [Databend as a sink](https://vector.dev/docs/reference/configuration/sinks/databend/), this means that Vector can send data to Databend for storage or further processing. Databend acts as the destination for the data collected and processed by Vector. By configuring Vector to use Databend as a sink, you can seamlessly transfer data from Vector to Databend, enabling efficient data analysis, storage, and retrieval.
+Vector natively supports delivering data to [{{{ .lake-short }}} as a sink](https://vector.dev/docs/reference/configuration/sinks/databend/), this means that Vector can send data to {{{ .lake-short }}} for storage or further processing. {{{ .lake-short }}} acts as the destination for the data collected and processed by Vector. By configuring Vector to use {{{ .lake-short }}} as a sink, you can seamlessly transfer data from Vector to {{{ .lake-short }}}, enabling efficient data analysis, storage, and retrieval.
 
 ## Integrating with Vector
 
-To integrate Databend with Vector, start by creating an SQL account in Databend and assigning appropriate permissions. This account will be used for communication and data transfer between Vector and Databend. Then, in the Vector configuration, set up Databend as a Sink.
+To integrate {{{ .lake-short }}} with Vector, start by creating an SQL account in {{{ .lake-short }}} and assigning appropriate permissions. This account will be used for communication and data transfer between Vector and {{{ .lake-short }}}. Then, in the Vector configuration, set up {{{ .lake-short }}} as a Sink.
 
-### Step 1: Creating an SQL User in Databend
+### Step 1: Creating an SQL User in {{{ .lake-short }}}
 
-For instructions on how to create a SQL user in Databend and grant appropriate privileges, see [Create User](/tidb-cloud-lake/sql/create-user.md). Here's an example of creating a user named *user1* with the password *abc123*:
+For instructions on how to create a SQL user in {{{ .lake-short }}} and grant appropriate privileges, see [Create User](/tidb-cloud-lake/sql/create-user.md). Here's an example of creating a user named *user1* with the password *abc123*:
 
 ```sql
 CREATE ROLE vector_role;
@@ -31,9 +31,9 @@ GRANT INSERT ON nginx.* TO ROLE vector_role;
 GRANT ROLE vector_role TO user1;
 ```
 
-### Step 2: Configure Databend as a Sink in Vector
+### Step 2: Configure {{{ .lake-short }}} as a Sink in Vector
 
-In this step, configure Databend as a sink in Vector by specifying the necessary settings such as the input source, compression, database, endpoint, table, and authentication credentials (username and password) for Databend integration. The following is a simple example of configuring Databend as a sink. For a comprehensive list of configuration parameters, refer to the Vector documentation at <https://vector.dev/docs/reference/configuration/sinks/databend/>
+In this step, configure {{{ .lake-short }}} as a sink in Vector by specifying the necessary settings such as the input source, compression, database, endpoint, table, and authentication credentials (username and password) for {{{ .lake-short }}} integration. The following is a simple example of configuring {{{ .lake-short }}} as a sink. For a comprehensive list of configuration parameters, refer to the Vector documentation at <https://vector.dev/docs/reference/configuration/sinks/databend/>
 
 ```toml title='vector.toml'
 ...
@@ -60,11 +60,11 @@ password = "abc123" #Databend password
 
 ## Nginx Access Log Example
 
-### Step 1. Deploy Databend
+### Step 1. Deploy {{{ .lake-short }}}
 
-#### 1.1 Install Databend
+#### 1.1 Install {{{ .lake-short }}}
 
-Deploy a warehouse in the Databend Cloud.
+Deploy a warehouse in the {{{ .lake }}}.
 
 #### 1.2 Create a Database and a Table
 
@@ -324,7 +324,7 @@ test no event from wrong access log ... passed
 vector -c ./vector.toml
 ```
 
-### Step 4. Analyze Nginx Log in Databend
+### Step 4. Analyze Nginx Log in {{{ .lake-short }}}
 
 #### 4.1 Generate logs
 
@@ -334,7 +334,7 @@ Reload the home page at `http://localhost/xx/yy?mm=nn` many times, or using the 
 wrk -t12 -c400 -d30s http://localhost
 ```
 
-#### 4.2 Analyze Nginx Access Logs in Databend
+#### 4.2 Analyze Nginx Access Logs in {{{ .lake-short }}}
 
 - __Top 10 Request Status__
 

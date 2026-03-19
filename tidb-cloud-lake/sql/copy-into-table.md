@@ -1,5 +1,5 @@
 ---
-title: COPY INTO <table>
+title: "COPY INTO <table>"
 summary: COPY INTO allows you to load data from files located in one of the following locations.
 ---
 
@@ -11,9 +11,9 @@ summary: COPY INTO allows you to load data from files located in one of the foll
 
 COPY INTO allows you to load data from files located in one of the following locations:
 
-- User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) to learn about stages in Databend.
+- User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) to learn about stages in {{{ .lake-short }}}.
 - Buckets or containers created in a storage service.
-- Remote servers from where you can access the files by their URL (starting with "https://...").
+- Remote servers from where you can access the files by their URL (starting with `https://`).
 - [IPFS](https://ipfs.tech) and Hugging Face repositories.
 
 See also: [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
@@ -299,7 +299,7 @@ For external storage sources, it's recommended to use pre-created connections wi
 
 ### Example 1: Loading from Stages
 
-These examples showcase data loading into Databend from various types of stages:
+These examples showcase data loading into {{{ .lake-short }}} from various types of stages:
 
 <SimpleTab>
 
@@ -339,7 +339,7 @@ COPY INTO mytable
 
 ### Example 2: Loading from External Locations
 
-These examples showcase data loading into Databend from various types of external sources:
+These examples showcase data loading into {{{ .lake-short }}} from various types of external sources:
 
 <SimpleTab groupId="external-example">
 
@@ -392,7 +392,7 @@ COPY INTO mytable
 
 <div label="Azure Blob Storage" value="Azure Blob Storage">
 
-This example connects to Azure Blob Storage and loads data from 'data.csv' into Databend:
+This example connects to Azure Blob Storage and loads data from 'data.csv' into {{{ .lake-short }}}:
 
 ```sql
 -- Create connection for Azure Blob Storage
@@ -471,7 +471,7 @@ COPY INTO mytable
 
 ### Example 3: Loading Compressed Data
 
-This example loads a GZIP-compressed CSV file on Amazon S3 into Databend:
+This example loads a GZIP-compressed CSV file on Amazon S3 into {{{ .lake-short }}}:
 
 ```sql
 -- Create connection for compressed data loading
@@ -653,7 +653,7 @@ FILE_FORMAT=(FORMAT_NAME='my_csv_format');
 
 ### Example 7: Loading Invalid JSON
 
-When loading data into a Variant column, Databend automatically checks the data's validity and throws an error in case of any invalid data. For example, if you have a Parquet file named `invalid_json_string.parquet` in the user stage that contains invalid JSON data, like this:
+When loading data into a Variant column, {{{ .lake-short }}} automatically checks the data's validity and throws an error in case of any invalid data. For example, if you have a Parquet file named `invalid_json_string.parquet` in the user stage that contains invalid JSON data, like this:
 
 ```sql
 SELECT *

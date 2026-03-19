@@ -24,7 +24,7 @@ Where:
 
 ## Vector Indexing
 
-Databend supports creating vector indexes using the HNSW (Hierarchical Navigable Small World) algorithm for fast approximate nearest neighbor search, delivering **23x faster** query performance.
+{{{ .lake-short }}} supports creating vector indexes using the HNSW (Hierarchical Navigable Small World) algorithm for fast approximate nearest neighbor search, delivering **23x faster** query performance.
 
 > **Note:**
 >

@@ -1,17 +1,17 @@
 ---
 title: Password Policy
-summary: Password policies define how strong a Databend password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every CREATE USER and password change. For the full list of attributes, see Password Policy Attributes.
+summary: Password policies define how strong a {{{ .lake-short }}} password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every CREATE USER and password change. For the full list of attributes, see Password Policy Attributes.
 ---
 
 # Password Policy
 
-Password policies define how strong a Databend password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every `CREATE USER` and password change. For the full list of attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
+Password policies define how strong a {{{ .lake-short }}} password must be (length, characters, history, retry limits, and more) and how often it can change. They add predictable guardrails around every `CREATE USER` and password change. For the full list of attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
 
 ## How It Works
 
 - SQL users start with no password policy. Assign one either when creating the user (`CREATE USER ... WITH SET PASSWORD POLICY`) or later via [ALTER USER](/tidb-cloud-lake/sql/alter-user.md). Policies do **not** apply to admin accounts declared in [`databend-query.toml`](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml).
-- Whenever a managed user sets or changes a password, Databend validates the complexity rules (length and character mix) and, for password changes, enforces minimum age and password history.
-- On login, Databend also tracks failed attempts and lockouts based on `PASSWORD_MAX_RETRIES`/`PASSWORD_LOCKOUT_TIME_MINS`, and it flags expired passwords after `PASSWORD_MAX_AGE_DAYS`. Expired users can log in only to change their password.
+- Whenever a managed user sets or changes a password, {{{ .lake-short }}} validates the complexity rules (length and character mix) and, for password changes, enforces minimum age and password history.
+- On login, {{{ .lake-short }}} also tracks failed attempts and lockouts based on `PASSWORD_MAX_RETRIES`/`PASSWORD_LOCKOUT_TIME_MINS`, and it flags expired passwords after `PASSWORD_MAX_AGE_DAYS`. Expired users can log in only to change their password.
 
 > **Note:**
 >
@@ -107,7 +107,7 @@ ALTER USER analyst_zoe WITH UNSET PASSWORD POLICY;
 DROP PASSWORD POLICY analyst_policy;
 ```
 
-Databend prevents you from dropping a policy that is still in use; unset it from all users before running `DROP PASSWORD POLICY`.
+{{{ .lake-short }}} prevents you from dropping a policy that is still in use; unset it from all users before running `DROP PASSWORD POLICY`.
 
 ---
 

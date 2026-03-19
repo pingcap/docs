@@ -1,11 +1,11 @@
 ---
 title: Query Operators
-summary: This page provides reference information for the query operators in Databend.
+summary: This page provides reference information for the query operators in {{{ .lake-short }}}.
 ---
 
 # Query Operators
 
-This page provides reference information for the query operators in Databend.
+This page provides reference information for the query operators in {{{ .lake-short }}}.
 
 ## Operator Types
 

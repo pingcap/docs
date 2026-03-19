@@ -11,7 +11,7 @@ For information about the system requirements, download, and deployment steps fo
 
 ## DatabendReader & DatabendWriter
 
-DatabendReader and DatabendWriter are integrated plugins of Addax, allowing seamless integration with Databend. The DatabendReader plugin enables reading data from Databend. Databend provides compatibility with the MySQL client protocol, so you can also use the [MySQLReader](https://wgzhao.github.io/Addax/develop/reader/mysqlreader/) plugin to retrieve data from Databend. For more information about DatabendReader, see <https://wgzhao.github.io/Addax/develop/reader/databendreader/>
+DatabendReader and DatabendWriter are integrated plugins of Addax, allowing seamless integration with {{{ .lake-short }}}. The DatabendReader plugin enables reading data from {{{ .lake-short }}}. {{{ .lake-short }}} provides compatibility with the MySQL client protocol, so you can also use the [MySQLReader](https://wgzhao.github.io/Addax/develop/reader/mysqlreader/) plugin to retrieve data from {{{ .lake-short }}}. For more information about DatabendReader, see <https://wgzhao.github.io/Addax/develop/reader/databendreader/>
 
 ## Tutorials
 

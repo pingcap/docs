@@ -1,11 +1,11 @@
 ---
 title: Geospatial
-summary: Databend stores spatial data through two data types.
+summary: "{{{ .lake-short }}} stores spatial data through two data types."
 ---
 
 # Geospatial
 
-Databend stores spatial data through two data types:
+{{{ .lake-short }}} stores spatial data through two data types:
 
 - `GEOMETRY` is planar (default SRID 0, or any SRID you assign) and suits local/projected workloads.
 - `GEOGRAPHY` is spherical (WGS 84, SRID 4326) with latitude/longitude validation for global workloads.
@@ -55,7 +55,7 @@ Both types persist coordinates as IEEE 754 `Float64` values in EWKB, cover every
 
 ## Output Formats
 
-Databend persists spatial values as EWKB but exposes several output formats. Set the `geometry_output_format` session setting (default: `WKT`) or call explicit conversion functions:
+{{{ .lake-short }}} persists spatial values as EWKB but exposes several output formats. Set the `geometry_output_format` session setting (default: `WKT`) or call explicit conversion functions:
 
 - **WKT / EWKT** – Text representation; EWKT prefixes an SRID (for example, `SRID=4326;POINT(-44.3 60.1)`).
 - **WKB / EWKB** – Compact binary, useful for interop with other GIS runtimes.

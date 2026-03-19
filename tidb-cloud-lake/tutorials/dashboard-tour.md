@@ -22,7 +22,7 @@ The dataset "Covid-19 Data from New York Times" is a built-in sample dataset tha
 
 ## Step 1: Loading Dataset
 
-1. In Databend Cloud, click the **Load Data** button on the **Overview** page.
+1. In {{{ .lake }}}, click the **Load Data** button on the **Overview** page.
 2. On the page that opens, choose the **A new table** radio button, and then select **Covid-19 Data from New York Times.CSV** from the **Load sample data** dropdown menu:
 
     ![Alt text](/media/tidb-cloud-lake/dashboard-1.png)
@@ -31,7 +31,7 @@ The dataset "Covid-19 Data from New York Times" is a built-in sample dataset tha
 
     ![Alt text](/media/tidb-cloud-lake/dashboard-2.png)
 
-4. Click **Confirm**. Databend Cloud begins creating the target table and loading the dataset. This process may take a few seconds.
+4. Click **Confirm**. {{{ .lake }}} begins creating the target table and loading the dataset. This process may take a few seconds.
 
 ## Step 2: Handling NULLs
 
@@ -145,7 +145,7 @@ In this step, we'll run four queries to extract insights from the data and visua
 
 ### Step 3: Adding Charts to Dashboard
 
-1. In Databend Cloud, create a dashboard on **Dashboards** > **New Dashboard**, then click **Add Chart** on the dashboard.
+1. In {{{ .lake }}}, create a dashboard on **Dashboards** > **New Dashboard**, then click **Add Chart** on the dashboard.
 
 2. Drag and drop the charts from the left onto the dashboard. You can resize or reposition a chart as needed.
 

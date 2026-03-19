@@ -23,13 +23,13 @@ FILE_FORMAT = (TYPE = AVRO)
 - For more Avro file format options, refer to [Avro File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#avro-options).
 - For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
 
-## Tutorial: Loading Avro Data into Databend from Remote HTTP URL
+## Tutorial: Loading Avro Data into {{{ .lake-short }}} from Remote HTTP URL
 
-In this tutorial, you will create a table in Databend using an Avro schema and load Avro data directly from a GitHub-hosted `.avro` file via HTTPS.
+In this tutorial, you will create a table in {{{ .lake-short }}} using an Avro schema and load Avro data directly from a GitHub-hosted `.avro` file via HTTPS.
 
 ### Step 1: Review the Avro Schema
 
-Before creating a table in Databend, let’s take a quick look at the Avro schema we’re working with: [userdata.avsc](https://github.com/Teradata/kylo/blob/master/samples/sample-data/avro/userdata.avsc). This schema defines a record named `User` with 13 fields, mostly of type string, along with `int` and `float`.
+Before creating a table in {{{ .lake-short }}}, let’s take a quick look at the Avro schema we’re working with: [userdata.avsc](https://github.com/Teradata/kylo/blob/master/samples/sample-data/avro/userdata.avsc). This schema defines a record named `User` with 13 fields, mostly of type string, along with `int` and `float`.
 
 ```json
 {
@@ -53,7 +53,7 @@ Before creating a table in Databend, let’s take a quick look at the Avro schem
 }
 ```
 
-### Step 2: Create a Table in Databend
+### Step 2: Create a Table in {{{ .lake-short }}}
 
 Create a table that matches the structure defined in the schema:
 

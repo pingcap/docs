@@ -11,7 +11,7 @@ Dashboards are employed to present query results through a variety of chart type
 
 ## Creating a Dashboard
 
-In Databend Cloud, you can create multiple dashboards as needed. A dashboard can contain one or multiple charts. Each individual chart corresponds to a specific query result, yet it can be integrated into multiple dashboards.
+In {{{ .lake }}}, you can create multiple dashboards as needed. A dashboard can contain one or multiple charts. Each individual chart corresponds to a specific query result, yet it can be integrated into multiple dashboards.
 
 **To create a dashboard**:
 
@@ -36,7 +36,7 @@ In Databend Cloud, you can create multiple dashboards as needed. A dashboard can
     | Average              | Computes the average value of numerical data within the query results. |
     | Mode                 | Identifies the most frequently occurring value within the query results. |
 
-4. Return to the Databend Cloud homepage and select **Dashboards** in the left navigation menu, then click **New Dashboard**.
+4. Return to the {{{ .lake }}} homepage and select **Dashboards** in the left navigation menu, then click **New Dashboard**.
 
 5. In the new dashboard, click on **Add Chart**. Drag and drop the chart from the left pane onto the dashboard. If you have multiple charts available in the left pane, feel free to drag as many as you need.
 

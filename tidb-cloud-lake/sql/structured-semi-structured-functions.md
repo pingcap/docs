@@ -1,11 +1,11 @@
 ---
 title: Structured & Semi-Structured Functions
-summary: Structured and semi-structured functions in Databend enable efficient processing of arrays, objects, maps, JSON, and other structured data formats. These functions provide comprehensive capabilities for creating, parsing, querying, transforming, and manipulating structured and semi-structured data.
+summary: Structured and semi-structured functions in {{{ .lake-short }}} enable efficient processing of arrays, objects, maps, JSON, and other structured data formats. These functions provide comprehensive capabilities for creating, parsing, querying, transforming, and manipulating structured and semi-structured data.
 ---
 
 # Structured & Semi-Structured Functions
 
-Structured and semi-structured functions in Databend enable efficient processing of arrays, objects, maps, JSON, and other structured data formats. These functions provide comprehensive capabilities for creating, parsing, querying, transforming, and manipulating structured and semi-structured data.
+Structured and semi-structured functions in {{{ .lake-short }}} enable efficient processing of arrays, objects, maps, JSON, and other structured data formats. These functions provide comprehensive capabilities for creating, parsing, querying, transforming, and manipulating structured and semi-structured data.
 
 ## JSON Functions
 

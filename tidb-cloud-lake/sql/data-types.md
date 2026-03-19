@@ -1,6 +1,6 @@
 ---
 title: Data Types
-summary: Databend stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
+summary: "{{{ .lake-short }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values."
 ---
 
 # Data Types
@@ -9,7 +9,7 @@ summary: Databend stores data in strongly typed columns. This page summarizes th
 >
 > Introduced or updated in v1.2.100.
 
-Databend stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
+{{{ .lake-short }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
 
 ## Foundational Types
 
@@ -62,7 +62,7 @@ Databend stores data in strongly typed columns. This page summarizes the support
 
 ### Implicit Casting (Coercion)
 
-Databend performs automatic conversions in well-defined situations:
+{{{ .lake-short }}} performs automatic conversions in well-defined situations:
 
 1. Integers upcast to `INT64`. Example: `UInt8 -> INT64`.
 2. Numeric values upcast to `FLOAT64` when necessary.
@@ -79,7 +79,7 @@ SELECT CONCAT(1, col);        -- may fail if `col` can't coerce to number
 
 ## NULL Handling and Defaults
 
-Columns allow NULL values unless declared `NOT NULL`. When a `NOT NULL` column is omitted during INSERT, Databend writes a type-specific default value:
+Columns allow NULL values unless declared `NOT NULL`. When a `NOT NULL` column is omitted during INSERT, {{{ .lake-short }}} writes a type-specific default value:
 
 | Type Category            | Default |
 |--------------------------|---------|

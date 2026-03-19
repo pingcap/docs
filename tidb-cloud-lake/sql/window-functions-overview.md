@@ -18,14 +18,14 @@ Window functions perform calculations across a set of related rows while returni
 
 **Note on SQL examples in this documentation:**
 
-- ✅ **Complete SQL statements** have been validated against Databend
+- ✅ **Complete SQL statements** have been validated against {{{ .lake-short }}}
 - ⚠️ **Syntax examples** show window frame patterns (not complete statements)
-- 📋 All examples use standard SQL syntax supported by Databend
+- 📋 All examples use standard SQL syntax supported by {{{ .lake-short }}}
 - 🔍 Examples marked as "Complete example" are fully executable
 
 ## Window Function Categories
 
-Databend supports two main categories of window functions:
+{{{ .lake-short }}} supports two main categories of window functions:
 
 ### 1. Dedicated Window Functions
 
@@ -108,7 +108,7 @@ FUNCTION() OVER (
 
 ## Window Frame Specification
 
-The window frame defines which rows are included in the calculation for each row. Databend supports two types of window frames:
+The window frame defines which rows are included in the calculation for each row. {{{ .lake-short }}} supports two types of window frames:
 
 ### 1. ROWS BETWEEN
 

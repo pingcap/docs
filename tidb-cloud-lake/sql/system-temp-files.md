@@ -1,6 +1,6 @@
 ---
 title: system.temp_files
-summary: Contains information about temporary files created by Databend, such as spill files. To remove the temporary files, use the VACUUM TEMPORARY FILES command.
+summary: Contains information about temporary files created by {{{ .lake-short }}}, such as spill files. To remove the temporary files, use the VACUUM TEMPORARY FILES command.
 ---
 
 # system.temp_files
@@ -9,7 +9,7 @@ summary: Contains information about temporary files created by Databend, such as
 >
 > Introduced or updated in v1.2.348.
 
-Contains information about temporary files created by Databend, such as spill files. To remove the temporary files, use the [VACUUM TEMPORARY FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md) command.
+Contains information about temporary files created by {{{ .lake-short }}}, such as spill files. To remove the temporary files, use the [VACUUM TEMPORARY FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md) command.
 
 ```sql
 SELECT * FROM system.temp_files;

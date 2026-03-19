@@ -14,7 +14,7 @@ TiDB Cloud Lake is cloud-native data warehouse service focused on analytics work
 | ⚡ **< 500ms** cold start | 🔐 **SOC 2 Type II** certified |
 | 💰 **> 50%** cost savings vs Snowflake | 📊 **99.95%** uptime SLA |
 
-## Why Databend Cloud?
+## Why {{{ .lake }}}?
 
 | | |
 |---|---|

@@ -1,11 +1,11 @@
 ---
 title: Subquery Operators
-summary: A subquery is a query nested within another one. Databend supports the following subquery types.
+summary: A subquery is a query nested within another one. {{{ .lake-short }}} supports the following subquery types.
 ---
 
 # Subquery Operators
 
-A subquery is a query nested within another one. Databend supports the following subquery types:
+A subquery is a query nested within another one. {{{ .lake-short }}} supports the following subquery types:
 
 - [Scalar Subquery](#scalar-subquery)
 - [EXISTS / NOT EXISTS](#exists--not-exists)
@@ -17,8 +17,8 @@ A subquery is a query nested within another one. Databend supports the following
 
 A scalar subquery selects only one column or expression and returns only one row at most. An SQL query can have scalar sub queries in any places where a column or expression is expected.
 
-- If a scalar subquery returns 0 rows, Databend will use NULL as the subquery output.
-- If a scalar subquery returns more than one row, Databend will throw an error.
+- If a scalar subquery returns 0 rows, {{{ .lake-short }}} will use NULL as the subquery output.
+- If a scalar subquery returns more than one row, {{{ .lake-short }}} will throw an error.
 
 ### Examples
 

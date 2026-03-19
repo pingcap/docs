@@ -1,11 +1,11 @@
 ---
 title: Stored Procedure
-summary: This page provides a comprehensive overview of Stored Procedure operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Stored Procedure operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Stored Procedure
 
-This page provides a comprehensive overview of Stored Procedure operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of Stored Procedure operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Procedure Management
 
@@ -24,7 +24,7 @@ This page provides a comprehensive overview of Stored Procedure operations in Da
 
 > **Note:**
 >
-> Stored procedures in Databend allow you to encapsulate a series of SQL statements into a reusable unit that can be executed as a single command, improving code organization and maintainability.
+> Stored procedures in {{{ .lake-short }}} allow you to encapsulate a series of SQL statements into a reusable unit that can be executed as a single command, improving code organization and maintainability.
 
 ## Further Reading
 

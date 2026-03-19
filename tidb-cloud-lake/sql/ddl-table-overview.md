@@ -1,11 +1,11 @@
 ---
 title: Table
-summary: This page provides a comprehensive overview of table operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of table operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Table
 
-This page provides a comprehensive overview of table operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of table operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Table Creation
 

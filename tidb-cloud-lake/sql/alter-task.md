@@ -11,7 +11,7 @@ summary: The ALTER TASK statement is used to modify an existing task.
 
 The ALTER TASK statement is used to modify an existing task.
 
-**NOTICE:** this functionality works out of the box only in Databend Cloud.
+**NOTICE:** this functionality works out of the box only in {{{ .lake }}}.
 
 ## Syntax
 

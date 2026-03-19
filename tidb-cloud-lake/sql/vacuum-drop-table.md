@@ -90,13 +90,13 @@ The VACUUM DROP TABLE command removes data files older than the `DATA_RETENTION_
 SET GLOBAL DATA_RETENTION_TIME_IN_DAYS = 2;
 ```
 
-`DATA_RETENTION_TIME_IN_DAYS` defaults to 1 day (24 hours), and the maximum value varies across Databend editions:
+`DATA_RETENTION_TIME_IN_DAYS` defaults to 1 day (24 hours), and the maximum value varies across {{{ .lake-short }}} editions:
 
 | Edition                                  | Default Retention | Max. Retention   |
 | ---------------------------------------- | ----------------- | ---------------- |
-| Databend Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
-| Databend Cloud (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
-| Databend Cloud (Business)                | 1 day (24 hours)  | 90 days          |
+| {{{ .lake-short }}} Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
+| {{{ .lake }}} (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
+| {{{ .lake }}} (Business)                | 1 day (24 hours)  | 90 days          |
 
 To check the current value of `DATA_RETENTION_TIME_IN_DAYS`:
 

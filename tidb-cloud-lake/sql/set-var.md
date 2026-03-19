@@ -16,7 +16,7 @@ SET_VAR is used to specify optimizer hints within a single SQL statement, allowi
     - [Example 1. Temporarily Set Timezone](#example-1-temporarily-set-timezone)
     - [Example 2: Control Parallel Processing for COPY INTO](#example-2-control-parallel-processing-for-copy-into)
 
-- Control the deduplication behavior on [INSERT](/tidb-cloud-lake/sql/insert.md), [UPDATE](/tidb-cloud-lake/sql/update.md), or [REPLACE](/tidb-cloud-lake/sql/replace.md) operations with the label *deduplicate_label*. For those operations with a deduplicate_label in the SQL statements, Databend executes only the first statement, and subsequent statements with the same deduplicate_label value are ignored, regardless of their intended data modifications. Please note that once you set a deduplicate_label, it will remain in effect for a period of 24 hours. To understand how the deduplicate_label assists in deduplication, see [Example 3: Set Deduplicate Label](#example-3-set-deduplicate-label).
+- Control the deduplication behavior on [INSERT](/tidb-cloud-lake/sql/insert.md), [UPDATE](/tidb-cloud-lake/sql/update.md), or [REPLACE](/tidb-cloud-lake/sql/replace.md) operations with the label *deduplicate_label*. For those operations with a deduplicate_label in the SQL statements, {{{ .lake-short }}} executes only the first statement, and subsequent statements with the same deduplicate_label value are ignored, regardless of their intended data modifications. Please note that once you set a deduplicate_label, it will remain in effect for a period of 24 hours. To understand how the deduplicate_label assists in deduplication, see [Example 3: Set Deduplicate Label](#example-3-set-deduplicate-label).
 
 See also:
 
@@ -85,9 +85,9 @@ SELECT
 
 ### Example 2: Control Parallel Processing for COPY INTO
 
-In Databend, the *max_threads* setting specifies the maximum number of threads that can be utilized to execute a request. By default, this value is typically set to match the number of CPU cores available on the machine.
+In {{{ .lake-short }}}, the *max_threads* setting specifies the maximum number of threads that can be utilized to execute a request. By default, this value is typically set to match the number of CPU cores available on the machine.
 
-When loading data into Databend with COPY INTO, you can control the parallel processing capabilities by injecting hints into the COPY INTO command and setting the *max_threads* parameter. For example:
+When loading data into {{{ .lake-short }}} with COPY INTO, you can control the parallel processing capabilities by injecting hints into the COPY INTO command and setting the *max_threads* parameter. For example:
 
 ```sql
 COPY /*+ set_var(max_threads=6) */ INTO mytable FROM @mystage/ pattern='.*[.]parq' FILE_FORMAT=(TYPE=parquet);

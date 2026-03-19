@@ -12,7 +12,7 @@ summary: Lists all databases along with their deletion timestamps if they have b
 Lists all databases along with their deletion timestamps if they have been dropped, allowing users to review deleted databases and their details.
 
 - Dropped databases can only be retrieved if they are within the data retention period.
-- It is recommended to use an admin user, such as `root`. If you are using Databend Cloud, use a user with the `account_admin` role to query dropped databases.
+- It is recommended to use an admin user, such as `root`. If you are using {{{ .lake }}}, use a user with the `account_admin` role to query dropped databases.
 
 See also: [system.databases_with_history](/tidb-cloud-lake/sql/system-databases-with-history.md)
 

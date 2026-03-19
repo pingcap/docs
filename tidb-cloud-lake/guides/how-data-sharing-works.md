@@ -9,7 +9,7 @@ summary: Different teams need different parts of the same data. Traditional solu
 
 Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.
 
-Databend's **[ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md)** solves this elegantly: create multiple "views" of the same data without copying it. This leverages Databend's **true compute-storage separation** - whether using cloud storage or on-premise object storage: **store once, access everywhere**.
+{{{ .lake-short }}}'s **[ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md)** solves this elegantly: create multiple "views" of the same data without copying it. This leverages {{{ .lake-short }}}'s **true compute-storage separation** - whether using cloud storage or on-premise object storage: **store once, access everywhere**.
 
 Think of ATTACH TABLE like computer shortcuts - they point to the original file without duplicating it.
 
@@ -84,7 +84,7 @@ SELECT COUNT(*) FROM marketing_view WHERE order_date = '2024-01-20'; -- Returns:
 
 ## Why This Matters
 
-| Traditional Approach | Databend ATTACH TABLE |
+| Traditional Approach | {{{ .lake-short }}} ATTACH TABLE |
 |---------------------|----------------------|
 | Multiple data copies | Single copy shared by all |
 | ETL delays, sync issues | Real-time, always current |
@@ -137,6 +137,6 @@ Query: SELECT product, SUM(amount) FROM marketing_view GROUP BY product
     Results: Product sales summary
 ```
 
-Multiple Databend clusters can execute this flow simultaneously without coordination - true compute-storage separation in action.
+Multiple {{{ .lake-short }}} clusters can execute this flow simultaneously without coordination - true compute-storage separation in action.
 
-ATTACH TABLE represents a fundamental shift: **from copying data for each use case to one copy with many views**. Whether in cloud or on-premise environments, Databend's architecture enables powerful, efficient data sharing while maintaining enterprise-grade consistency and security.
+ATTACH TABLE represents a fundamental shift: **from copying data for each use case to one copy with many views**. Whether in cloud or on-premise environments, {{{ .lake-short }}}'s architecture enables powerful, efficient data sharing while maintaining enterprise-grade consistency and security.

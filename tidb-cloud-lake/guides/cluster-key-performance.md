@@ -1,11 +1,11 @@
 ---
 title: Cluster Key
-summary: Cluster keys provide automatic data organization to dramatically improve query performance on large tables. Databend seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and Databend handles the rest.
+summary: Cluster keys provide automatic data organization to dramatically improve query performance on large tables. {{{ .lake-short }}} seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and {{{ .lake-short }}} handles the rest.
 ---
 
 # Cluster Key
 
-Cluster keys provide automatic data organization to dramatically improve query performance on large tables. Databend seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and Databend handles the rest.
+Cluster keys provide automatic data organization to dramatically improve query performance on large tables. {{{ .lake-short }}} seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and {{{ .lake-short }}} handles the rest.
 
 ## What Problem Does It Solve?
 
@@ -18,27 +18,27 @@ Large tables without proper organization create significant performance and main
 | **Slow Filter Queries** | WHERE clauses scan unnecessary rows | Auto-skip irrelevant blocks entirely |
 | **High I/O Costs** | Reading massive amounts of unused data | Minimize data transfer automatically |
 | **Manual Maintenance** | Need to monitor and manually re-cluster tables | Zero maintenance - automatic background optimization |
-| **Resource Management** | Must allocate compute for clustering operations | Databend handles all clustering resources automatically |
+| **Resource Management** | Must allocate compute for clustering operations | {{{ .lake-short }}} handles all clustering resources automatically |
 
-**Example**: An e-commerce table with millions of products. Without clustering, querying `WHERE category IN ('Electronics', 'Computers')` must scan all product categories. With automatic clustering by category, Databend continuously groups Electronics and Computers products together, scanning only 2 blocks instead of 1000+ blocks.
+**Example**: An e-commerce table with millions of products. Without clustering, querying `WHERE category IN ('Electronics', 'Computers')` must scan all product categories. With automatic clustering by category, {{{ .lake-short }}} continuously groups Electronics and Computers products together, scanning only 2 blocks instead of 1000+ blocks.
 
 ## Benefits of Automatic Clustering
 
-**Ease-of-Maintenance**: Databend eliminates the need for:
+**Ease-of-Maintenance**: {{{ .lake-short }}} eliminates the need for:
 
 - Monitoring the state of clustered tables
 - Manually triggering re-clustering operations
 - Designating compute resources for clustering
 - Scheduling maintenance windows
 
-**How it Works**: After you define a cluster key, Databend automatically:
+**How it Works**: After you define a cluster key, {{{ .lake-short }}} automatically:
 
 - Monitors table changes from DML operations
 - Evaluates when tables would benefit from re-clustering
 - Performs background clustering optimization
 - Maintains optimal data organization continuously
 
-All you need to do is define a clustering key for each table (if appropriate) and Databend manages all future maintenance automatically.
+All you need to do is define a clustering key for each table (if appropriate) and {{{ .lake-short }}} manages all future maintenance automatically.
 
 ## How It Works
 

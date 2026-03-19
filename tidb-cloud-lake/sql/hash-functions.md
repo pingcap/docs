@@ -1,11 +1,11 @@
 ---
 title: Hash Functions
-summary: This page provides a comprehensive overview of Hash functions in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Hash functions in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Hash Functions
 
-This page provides a comprehensive overview of Hash functions in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of Hash functions in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Cryptographic Hash Functions
 

@@ -1,11 +1,11 @@
 ---
 title: Warehouse
-summary: Warehouse-related SQL commands for Databend Cloud.
+summary: Warehouse-related SQL commands for {{{ .lake }}}.
 ---
 
 # Warehouse
 
-Warehouse-related SQL commands for Databend Cloud.
+Warehouse-related SQL commands for {{{ .lake }}}.
 
 ## General Rules
 
@@ -63,4 +63,4 @@ Tags are returned in API responses and visible through `SHOW WAREHOUSES`.
 
 > **Note:**
 >
-> A warehouse represents compute resources used to run queries in Databend Cloud.
+> A warehouse represents compute resources used to run queries in {{{ .lake }}}.

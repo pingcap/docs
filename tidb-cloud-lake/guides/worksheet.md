@@ -5,7 +5,7 @@ summary: Worksheets in TiDB Cloud Lake are used to organize, run, and save SQL s
 
 # Worksheets
 
-Worksheets in Databend Cloud are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
+Worksheets in {{{ .lake }}} are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
 
 ## Creating a Worksheet
 
@@ -31,7 +31,7 @@ The query result shows in the output area. You can click **Export** to save the 
 > - Multiple SQL statements in a single API call are not supported. Ensure that each SQL query in the worksheet ends with a single semicolon (;).
 > - To make it easier for you to edit SQL statements, you can select a table in the database list and click the "..." button next to it. Then, follow the menu prompts to choose to copy the table name or all column names to the SQL input area on the right in one click.
 >
-> - If you enter multiple statements in the SQL input area, Databend Cloud will only execute the statement where the cursor is located. You can move the cursor to execute other statements. Additionally, you can use keyboard shortcuts: Ctrl + Enter (Windows) or Command + Enter (Mac) to execute the current statement, and Ctrl + Shift + Enter (Windows) or Command + Shift + Enter (Mac) to execute all statements.
+> - If you enter multiple statements in the SQL input area, {{{ .lake }}} will only execute the statement where the cursor is located. You can move the cursor to execute other statements. Additionally, you can use keyboard shortcuts: Ctrl + Enter (Windows) or Command + Enter (Mac) to execute the current statement, and Ctrl + Shift + Enter (Windows) or Command + Shift + Enter (Mac) to execute all statements.
 
 ## Sharing a Worksheet
 
@@ -46,7 +46,7 @@ In the dialog box that appears, select the sharing scope. You can copy and share
 
 ## Exporting Query Results
 
-Databend Cloud provides the ability to export query results. However, this feature requires the organization Owner to grant the **EXPORT** permission to team members. For data security purposes, this feature is disabled by default.
+{{{ .lake }}} provides the ability to export query results. However, this feature requires the organization Owner to grant the **EXPORT** permission to team members. For data security purposes, this feature is disabled by default.
 
 ![Alt text](/media/tidb-cloud-lake/download.png)
 

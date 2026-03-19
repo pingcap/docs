@@ -11,7 +11,7 @@ summary: The DROP TASK statement is used to delete an existing task.
 
 The DROP TASK statement is used to delete an existing task.
 
-**NOTICE:** this functionality works out of the box only in Databend Cloud.
+**NOTICE:** this functionality works out of the box only in {{{ .lake }}}.
 
 ## Syntax
 

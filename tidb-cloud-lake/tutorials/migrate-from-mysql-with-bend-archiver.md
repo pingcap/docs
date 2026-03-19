@@ -8,7 +8,7 @@ summary: Migrates MySQL historical data to TiDB Cloud Lake with bend-archiver us
 > **Capabilities**: Full Load, Incremental
 > **✅ Recommended** for batch migration of historical data
 
-In this tutorial, we'll walk you through the process of migrating from MySQL to Databend Cloud using bend-archiver.
+In this tutorial, we'll walk you through the process of migrating from MySQL to {{{ .lake }}} using bend-archiver.
 
 ## Before You Start
 
@@ -109,9 +109,9 @@ mysql> quit
 Bye
 ```
 
-## Step 3: Set Up Target in Databend Cloud
+## Step 3: Set Up Target in {{{ .lake }}}
 
-1. Connect to Databend Cloud using BendSQL. If you're unfamiliar with BendSQL, refer to this tutorial: [Connecting to Databend Cloud using BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md).
+1. Connect to {{{ .lake }}} using BendSQL. If you're unfamiliar with BendSQL, refer to this tutorial: [Connecting to {{{ .lake }}} using BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md).
 2. Copy and paste the following SQL to create a target table named **my_table**:
 
 ```sql

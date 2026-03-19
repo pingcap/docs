@@ -1,17 +1,17 @@
 ---
 title: Editions
-summary: Databend Cloud comes in three editions Personal, Business, and Dedicated, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
+summary: "{{{ .lake }}} comes in three editions Personal, Business, and Dedicated, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases."
 ---
 
 # Editions
 
-Databend Cloud comes in three editions: **Personal**, **Business**, and **Dedicated**, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
+{{{ .lake }}} comes in three editions: **Personal**, **Business**, and **Dedicated**, that you can choose from to serve a wide range of needs and ensure optimal performance for different use cases.
 
 For the pricing information, see [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md). For the detailed feature list among these editions, see [Feature Lists](#feature-lists).
 
 ## Feature Lists
 
-The following are feature lists of Databend Cloud among editions:
+The following are feature lists of {{{ .lake }}} among editions:
 
 ### Release Management
 
@@ -32,7 +32,7 @@ The following are feature lists of Databend Cloud among editions:
 | **Extended Time Travel**. | | 90 days | 90 days |
 | Column-level Security to apply masking policies to columns in tables or views. | ✓ | ✓ | ✓ |
 | Audit the user access history through the Account Usage ACCESS_HISTORY view. | ✓ | ✓ | ✓ |
-| **Support for private connectivity to the Databend Cloud service using AWS PrivateLink**. | | ✓ | ✓ |
+| **Support for private connectivity to the {{{ .lake }}} service using AWS PrivateLink**. | | ✓ | ✓ |
 | **Dedicated metadata store and pool of compute resources (used in virtual warehouses)**. | | | ✓ |
 
 ### Compute Resource
@@ -56,7 +56,7 @@ The following are feature lists of Databend Cloud among editions:
 | Collation rules for string/text data in table columns. | ✓ | ✓ | ✓ |
 | Multi-statement transactions. | ✓ | ✓ | ✓ |
 | User-defined functions (UDFs) with support for JavaScript, Python, and WebAssembly. | | ✓ | ✓ |
-| External functions for extending Databend Cloud to other development platforms. | ✓ | ✓ | ✓ |
+| External functions for extending {{{ .lake }}} to other development platforms. | ✓ | ✓ | ✓ |
 | Amazon API Gateway private endpoints for external functions. | ✓ | ✓ | ✓ |
 | External tables for referencing data in a cloud storage data lake. | ✓ | ✓ | ✓ |
 | Support for clustering data in very large tables to improve query performance, with automatic maintenance of clustering. | ✓ | ✓ | ✓ |
@@ -86,7 +86,7 @@ The following are feature lists of Databend Cloud among editions:
 | Bulk unloading to delimited flat files and JSON files. | ✓ | ✓ | ✓ |
 | Continuous micro-batch loading. | ✓ | ✓ | ✓ |
 | Streaming for low-latency loading of streaming data. | ✓ | ✓ | ✓ |
-| Databend Cloud Connector for Kafka for loading data from Apache Kafka topics. | ✓ | ✓ | ✓ |
+| {{{ .lake }}} Connector for Kafka for loading data from Apache Kafka topics. | ✓ | ✓ | ✓ |
 
 ### Data Pipelines
 

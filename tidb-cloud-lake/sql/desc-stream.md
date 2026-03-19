@@ -3,7 +3,7 @@ title: DESC STREAM
 summary: Describes the details of a specific stream.
 ---
 
-# DESC SEQUENCE
+# DESC STREAM
 
 > **Note:**
 >

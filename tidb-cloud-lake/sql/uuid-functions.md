@@ -1,11 +1,11 @@
 ---
 title: UUID Functions
-summary: This page provides reference information for the UUID-related functions in Databend. These functions generate and work with Universally Unique Identifiers (UUIDs).
+summary: This page provides reference information for the UUID-related functions in {{{ .lake-short }}}. These functions generate and work with Universally Unique Identifiers (UUIDs).
 ---
 
 # UUID Functions
 
-This page provides reference information for the UUID-related functions in Databend. These functions generate and work with Universally Unique Identifiers (UUIDs).
+This page provides reference information for the UUID-related functions in {{{ .lake-short }}}. These functions generate and work with Universally Unique Identifiers (UUIDs).
 
 ## UUID Generation Functions
 
@@ -48,7 +48,7 @@ FROM numbers(5);
 
 ### UUID Version Information
 
-Databend's UUID implementation has evolved:
+{{{ .lake-short }}}'s UUID implementation has evolved:
 
 - **Version 1.2.658 and later**: Uses UUID version 7, which includes timestamp information for chronological sorting
 - **Prior to version 1.2.658**: Used UUID version 4, which was purely random

@@ -1,6 +1,6 @@
 ---
 title: TRY_TO_TIMESTAMP
-summary: A variant of TO_TIMESTAMP in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
+summary: A variant of TO_TIMESTAMP in {{{ .lake-short }}} that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
 ---
 
 # TRY_TO_TIMESTAMP
@@ -9,7 +9,7 @@ summary: A variant of TO_TIMESTAMP in Databend that, while performing the same c
 >
 > Introduced or updated in v1.2.528.
 
-A variant of [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) in Databend that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
+A variant of [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) in {{{ .lake-short }}} that, while performing the same conversion of an input expression to a timestamp, incorporates error-handling support by returning NULL if the conversion fails instead of raising an error.
 
 See also: [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)
 

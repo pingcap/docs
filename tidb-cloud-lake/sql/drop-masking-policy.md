@@ -1,6 +1,6 @@
 ---
 title: DROP MASKING POLICY
-summary: Deletes an existing masking policy from Databend. When you drop a masking policy, it is removed from Databend, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
+summary: Deletes an existing masking policy from {{{ .lake-short }}}. When you drop a masking policy, it is removed from {{{ .lake-short }}}, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
 ---
 
 # DROP MASKING POLICY
@@ -9,7 +9,7 @@ summary: Deletes an existing masking policy from Databend. When you drop a maski
 >
 > Introduced or updated in v1.2.845.
 
-Deletes an existing masking policy from Databend. When you drop a masking policy, it is removed from Databend, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
+Deletes an existing masking policy from {{{ .lake-short }}}. When you drop a masking policy, it is removed from {{{ .lake-short }}}, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
 
 ## Syntax
 
@@ -23,7 +23,7 @@ DROP MASKING POLICY [ IF EXISTS ] <policy_name>
 |:----------|:------------|
 | APPLY MASKING POLICY | Required to drop a masking policy unless you own that policy. |
 
-You must have the global `APPLY MASKING POLICY` privilege or APPLY/OWNERSHIP on the target policy. Databend automatically revokes OWNERSHIP from the creator role after the policy is dropped.
+You must have the global `APPLY MASKING POLICY` privilege or APPLY/OWNERSHIP on the target policy. {{{ .lake-short }}} automatically revokes OWNERSHIP from the creator role after the policy is dropped.
 
 ## Examples
 

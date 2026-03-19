@@ -13,7 +13,7 @@ summary: Returns the relevance score for rows matched by inverted-index search c
 
 > **Note:**
 >
-> Databend's SCORE function is inspired by Elasticsearch's [SCORE](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-score).
+> {{{ .lake-short }}}'s SCORE function is inspired by Elasticsearch's [SCORE](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html#sql-functions-search-score).
 
 ## Syntax
 

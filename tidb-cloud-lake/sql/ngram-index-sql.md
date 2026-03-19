@@ -1,11 +1,11 @@
 ---
 title: Ngram Index
-summary: This page provides a comprehensive overview of Ngram index operations in Databend, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Ngram index operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 ---
 
 # Ngram Index
 
-This page provides a comprehensive overview of Ngram index operations in Databend, organized by functionality for easy reference.
+This page provides a comprehensive overview of Ngram index operations in {{{ .lake-short }}}, organized by functionality for easy reference.
 
 ## Ngram Index Management
 
@@ -17,4 +17,4 @@ This page provides a comprehensive overview of Ngram index operations in Databen
 
 > **Note:**
 >
-> Ngram indexes in Databend enable efficient substring and pattern matching searches within text data, improving performance for LIKE and similar operations.
+> Ngram indexes in {{{ .lake-short }}} enable efficient substring and pattern matching searches within text data, improving performance for LIKE and similar operations.

@@ -15,7 +15,7 @@ DROP ROLE [ IF EXISTS ] <role_name>
 
 ## Usage Notes
 
-* If a role is a grant to users, Databend can't drop the grants from the role automatically.
+* If a role is a grant to users, {{{ .lake-short }}} can't drop the grants from the role automatically.
 
 ## Examples
 

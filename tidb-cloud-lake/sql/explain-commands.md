@@ -1,11 +1,11 @@
 ---
 title: Explain Commands
-summary: This page provides reference information for the explain-related commands in Databend.
+summary: This page provides reference information for the explain-related commands in {{{ .lake-short }}}.
 ---
 
 # Explain Commands
 
-This page provides reference information for the explain-related commands in Databend.
+This page provides reference information for the explain-related commands in {{{ .lake-short }}}.
 
 ## Commands Overview
 

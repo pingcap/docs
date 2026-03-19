@@ -12,7 +12,7 @@ Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted 
 
 ## Implementing Fail-Safe
 
-Databend offers the [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md) table function to enable Fail-Safe recovery. This function lets you restore data from an S3-compatible storage bucket when bucket versioning is enabled.
+{{{ .lake-short }}} offers the [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md) table function to enable Fail-Safe recovery. This function lets you restore data from an S3-compatible storage bucket when bucket versioning is enabled.
 
 ## Usage Example
 

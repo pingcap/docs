@@ -5,7 +5,7 @@ summary: PrivateLink-style private endpoints offered by major clouds (AWS Privat
 
 # Connecting to TiDB Cloud Lake with AWS PrivateLink
 
-PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Azure Private Link, Google Private Service Connect, etc.) let you reach Databend Cloud through private IP addresses inside your own network boundary, so no traffic has to traverse the public internet. That keeps your datasets, credentials, and admin actions on the provider's backbone and aligned with the network policies you already operate.
+PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Azure Private Link, Google Private Service Connect, etc.) let you reach {{{ .lake }}} through private IP addresses inside your own network boundary, so no traffic has to traverse the public internet. That keeps your datasets, credentials, and admin actions on the provider's backbone and aligned with the network policies you already operate.
 
 ## Benefits
 
@@ -16,11 +16,11 @@ PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Az
 
 ## How it works
 
-After Databend Cloud approves the cloud account or project you plan to connect, you create a private endpoint that points to the Databend PrivateLink service for your region. The cloud provider automatically allocates private IP addresses and, once private DNS is enabled, your Databend Cloud domains resolve to those addresses so every session stays on the secure, private path.
+After {{{ .lake }}} approves the cloud account or project you plan to connect, you create a private endpoint that points to the {{{ .lake-short }}} PrivateLink service for your region. The cloud provider automatically allocates private IP addresses and, once private DNS is enabled, your {{{ .lake }}} domains resolve to those addresses so every session stays on the secure, private path.
 
 ## How to setup AWS PrivateLink
 
-1. Provide the AWS account ID you are planning to connect to Databend Cloud:
+1. Provide the AWS account ID you are planning to connect to {{{ .lake }}}:
 
    For example: `123456789012`
 
@@ -72,7 +72,7 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
    Wait for changes to apply.
 
-9. Verify accessing Databend Cloud via PrivateLink:
+9. Verify accessing {{{ .lake }}} via PrivateLink:
 
    ![Verify DNS](/media/tidb-cloud-lake/verify-1.png)
 
@@ -82,4 +82,4 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
 > **Note:**
 >
-> Congratulations! You have successfully connected to Databend Cloud with AWS PrivateLink.
+> Congratulations! You have successfully connected to {{{ .lake }}} with AWS PrivateLink.

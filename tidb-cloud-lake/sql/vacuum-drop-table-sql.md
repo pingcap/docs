@@ -9,9 +9,9 @@ summary: This page describes VACUUM DROP TABLE in TiDB Cloud Lake.
 >
 > Introduced or updated in v1.2.368.
 
-The VACUUM DROP TABLE command helps save storage space by permanently removing data files of dropped tables, freeing up storage space, and enabling you to manage the process efficiently. It offers optional parameters to target specific databases, preview, and limit the number of data files to be vacuumed. To list the dropped tables of a database, use [SHOW DROP TABLES](show-drop-databases.md).
+The VACUUM DROP TABLE command helps save storage space by permanently removing data files of dropped tables, freeing up storage space, and enabling you to manage the process efficiently. It offers optional parameters to target specific databases, preview, and limit the number of data files to be vacuumed. To list the dropped tables of a database, use [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-databases.md).
 
-See also: [VACUUM TABLE](vacuum-table-sql.md)
+See also: [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table-sql.md)
 
 ## Syntax
 
@@ -90,13 +90,13 @@ The VACUUM DROP TABLE command removes data files older than the `DATA_RETENTION_
 SET GLOBAL DATA_RETENTION_TIME_IN_DAYS = 2;
 ```
 
-`DATA_RETENTION_TIME_IN_DAYS` defaults to 1 day (24 hours), and the maximum value varies across Databend editions:
+`DATA_RETENTION_TIME_IN_DAYS` defaults to 1 day (24 hours), and the maximum value varies across {{{ .lake-short }}} editions:
 
 | Edition                                  | Default Retention | Max. Retention   |
 | ---------------------------------------- | ----------------- | ---------------- |
-| Databend Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
-| Databend Cloud (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
-| Databend Cloud (Business)                | 1 day (24 hours)  | 90 days          |
+| {{{ .lake-short }}} Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
+| {{{ .lake }}} (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
+| {{{ .lake }}} (Business)                | 1 day (24 hours)  | 90 days          |
 
 To check the current value of `DATA_RETENTION_TIME_IN_DAYS`:
 
