@@ -11,7 +11,7 @@ In the current implementation, `_tidb_rowid` is an extra `BIGINT NOT NULL` handl
 
 > **Warning:**
 >
-> - Do not assume `_tidb_rowid` is globally unique in all cases. For partitioned tables that do not use clustered indexes, `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value.
+> - Do not assume `_tidb_rowid` is globally unique in all cases. For partitioned tables that do not use clustered indexes, executing `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value.
 > - If you need a stable unique identifier, define and use an explicit primary key instead of relying on `_tidb_rowid`.
 
 ## When `_tidb_rowid` is available
@@ -155,6 +155,6 @@ CREATE TABLE t (
 
 ## See also
 
-- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-- [AUTO_INCREMENT](/auto-increment.md)
+- [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
+- [`AUTO_INCREMENT`](/auto-increment.md)
 - [Non-transactional DML](/non-transactional-dml.md)
