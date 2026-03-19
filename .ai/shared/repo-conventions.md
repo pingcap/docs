@@ -50,7 +50,6 @@ Follow the repository's affected-version model when proposing or reviewing chang
 - Be careful with `CustomContent` tags such as `<CustomContent platform="tidb">` and `<CustomContent platform="tidb-cloud">`. Do not change, remove, or expand them casually, because they control platform-specific rendering behavior.
 - When editing shared TiDB and TiDB Cloud content, verify whether the change applies to both platforms or only one.
 
-
 ## Contribution model
 
 - New documents should follow the templates in `resources/doc-templates/` when applicable.
