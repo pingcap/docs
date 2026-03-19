@@ -1,5 +1,5 @@
 ---
-name: create-doc-translation-pr
+name: create-or-update-doc-translation-pr
 description: Create or update a docs translation PR from pingcap/docs to pingcap/docs-cn by using repo-local scripts to prepare change-unit translation inputs, apply minimal edits to the existing Chinese files, and create or update the target PR with the same branch, title, body, and label rules used in gh-util.user.js.
 ---
 
@@ -78,7 +78,7 @@ Please sync https://github.com/pingcap/docs-cn/pull/12345 with source update ran
 
 ## Use the bundled scripts
 
-Prefer the scripts in `.ai/skills/create-doc-translation-pr/scripts/` over retyping long commands:
+Prefer the scripts in `.ai/skills/create-or-update-doc-translation-pr/scripts/` over retyping long commands:
 
 - `prepare_translation_inputs.py`: fetch PR and commit metadata with `gh`, apply the `gh-util.user.js` title/body/label rules, and generate `translation-input.json` plus `translation-meta.env`
 - `create_translation_branch.sh`: sync the fork base branch with upstream, create or reuse the translation branch with `gh`, and check it out locally
@@ -106,7 +106,7 @@ Do not process every changed file the same way.
 Run:
 
 ```bash
-python3 .ai/skills/create-doc-translation-pr/scripts/prepare_translation_inputs.py \
+python3 .ai/skills/create-or-update-doc-translation-pr/scripts/prepare_translation_inputs.py \
   --mode create \
   --source-pr-url "<source-pr-url>" \
   --target-repo-dir "<path-to-docs-cn>"
@@ -117,7 +117,7 @@ python3 .ai/skills/create-doc-translation-pr/scripts/prepare_translation_inputs.
 Run:
 
 ```bash
-python3 .ai/skills/create-doc-translation-pr/scripts/prepare_translation_inputs.py \
+python3 .ai/skills/create-or-update-doc-translation-pr/scripts/prepare_translation_inputs.py \
   --mode update \
   --target-translation-pr-url "<target-translation-pr-url>" \
   --source-update-range "<commit-sha-or-base..head>" \
@@ -161,7 +161,7 @@ Script behavior in `update` mode:
 Run:
 
 ```bash
-bash .ai/skills/create-doc-translation-pr/scripts/create_translation_branch.sh \
+bash .ai/skills/create-or-update-doc-translation-pr/scripts/create_translation_branch.sh \
   "$WORKDIR/translation-meta.env"
 ```
 
@@ -176,7 +176,7 @@ This script uses `gh` for the remote branch operations and then prepares the loc
 Run:
 
 ```bash
-python3 .ai/skills/create-doc-translation-pr/scripts/apply_translation_units.py \
+python3 .ai/skills/create-or-update-doc-translation-pr/scripts/apply_translation_units.py \
   --meta-env "$WORKDIR/translation-meta.env" \
   --write
 ```
@@ -233,7 +233,7 @@ Start from the deterministic script output:
 Run this only after the translated target files are ready:
 
 ```bash
-bash .ai/skills/create-doc-translation-pr/scripts/create_translation_pr.sh \
+bash .ai/skills/create-or-update-doc-translation-pr/scripts/create_translation_pr.sh \
   "$WORKDIR/translation-meta.env"
 ```
 

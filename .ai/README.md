@@ -21,9 +21,9 @@ Use `resources/terms.md` when terminology is uncertain or not covered by the qui
 ## Current skills
 
 - `.ai/skills/review-doc-pr/`: review documentation PRs and Markdown diffs for factual accuracy, user usefulness, completeness, version fit, related-doc impact, links, and style
-- `.ai/skills/create-doc-translation-pr/`: create a new docs translation PR or update an existing one by combining repo-local scripts with minimal-edit translation rules and incremental source-diff handling
+- `.ai/skills/create-or-update-doc-translation-pr/`: create a new docs translation PR or update an existing one by combining repo-local scripts with minimal-edit translation rules and incremental source-diff handling
 
-The translation skill includes bundled scripts under `.ai/skills/create-doc-translation-pr/scripts/` for:
+The translation skill includes bundled scripts under `.ai/skills/create-or-update-doc-translation-pr/scripts/` for:
 
 - preparing structured translation inputs from a source PR
 - preparing structured translation inputs from either a full source PR or an update commit range
