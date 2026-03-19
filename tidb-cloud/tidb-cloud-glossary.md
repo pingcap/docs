@@ -77,9 +77,7 @@ For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/d
 
 ### Instance
 
-An instance is a [TiDB X](/tidb-cloud/tidb-x-architecture.md) cloud deployment that represents a service-oriented TiDB offering. With this deployment model, users do not need to manage or understand the underlying cluster topology.
-In TiDB Cloud product options, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment method.
-
+An instance is a [TiDB X](/tidb-cloud/tidb-x-architecture.md) cloud deployment that represents a service-oriented TiDB offering. With this deployment model, you do not need to manage or understand the underlying cluster topology.
 Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment model.
 
 ## M
@@ -133,7 +131,7 @@ The function of a project varies by project type. Currently, there are three typ
 
 - TiDB X project: this is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page. In this type of project, you can only add {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
 - TiDB Dedicated project: this project type is used only for {{{ .dedicated }}} clusters. In this type of project, you can only add {{{ .dedicated }}} clusters. Within your organization, settings and access controls such as networks, maintenance, alert subscriptions, and encryption access can be managed separately by project, and configurations in different projects do not affect each other.
-- TiDB virtual project: this is a virtual project. It is not displayed in the [TiDB Cloud console](https://tidbcloud.com/) and does not provide any management capabilities. Its acts a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID.
+- TiDB virtual project: this is a virtual project. It is not displayed in the [TiDB Cloud console](https://tidbcloud.com/) and does not provide any management capabilities. It acts as a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID.
 
 For more information about the differences between these project types, see [Project types](/tidb-cloud/manage-user-access.md#project-types).
 
@@ -169,7 +167,7 @@ TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overvie
 
 A TiDB resource is a manageable TiDB deployment unit. It can be one of the following:
 
-- A {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium  }}} [instance](#instance)
+- A {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} [instance](#instance)
 - A {{{ .dedicated }}} [cluster](#cluster)
 
 ### Request Capacity Unit (RCU)

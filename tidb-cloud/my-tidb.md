@@ -9,14 +9,14 @@ In the [TiDB Cloud console](https://tidbcloud.com/), [**My TiDB**](https://tidbc
 
 ## What are TiDB resources and projects?
 
-## TiDB resources
+### TiDB resources
 
 In TiDB Cloud, a TiDB resource is a manageable TiDB deployment unit. It can be one of the following:
 
 - A {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium  }}} [instance](/tidb-cloud/tidb-cloud-glossary.md#instance)
 - A {{{ .dedicated }}} [cluster](/tidb-cloud/tidb-cloud-glossary.md#cluster)
 
-## TiDB projects
+### TiDB projects
 
 In TiDB Cloud, you can use [projects](/tidb-cloud/tidb-cloud-glossary.md#project) to group and manage your TiDB resources.
 
@@ -41,7 +41,7 @@ By default, the [**My TiDB**](https://tidbcloud.com/tidbs) page shows a list of 
 - To perform quick actions on a TiDB resource, such as deleting, renaming, and importing data, click **...** in the row of the target resource.
 - If your organization has many instances or clusters, you can use the filters at the top of the page to quickly find what you need.
 
-If you want to view your resources hierarchically by project, click the folder icon above the resource list to switch to the Project view
+If you want to view your resources hierarchically by project, click the folder icon above the resource list to switch to the **Project view**.
 
 - TiDB instances that do not belong to any project are displayed in a default folder named `Global instances - in [Your Org Name]`.
 - TiDB instances that belong to specific projects are displayed in their corresponding project folders.
@@ -61,7 +61,7 @@ You can also create a project when creating TiDB resources. For more information
 
 ## Manage TiDB projects
 
-In the Project view, you can click **...** in the row of the target project to perform quick actions on the project, such as renaming the project or inviting members to the project.
+In the **Project view**, you can click **...** in the row of the target project to perform quick actions on the project, such as renaming the project or inviting members to the project.
 
 For **Dedicated** projects, you can also click the gear icon in the row of the target project to access more project management operations, such as managing networks, alert subscriptions, and project members.
 
