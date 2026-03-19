@@ -11,7 +11,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-- ✅: **Generally available** or in **public preview**.
+- ✅: **Generally available** or **in public preview**.
 - 🔒: **In private preview**.
 - 🚧: **Under development**.
 - ❌: **Currently not available**.
