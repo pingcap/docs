@@ -1,9 +1,9 @@
 ---
-title: CAST::
+title: CAST
 summary: Converts a value from one data type to another. is an alias for CAST.
 ---
 
-# CAST::
+# CAST
 
 Converts a value from one data type to another. `::` is an alias for CAST.
 
