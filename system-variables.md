@@ -3888,7 +3888,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[100, 16384]`
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
-### tidb_max_dist_task_nodes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### tidb_max_dist_task_nodes <span class="version-mark">New in v8.5.6</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
