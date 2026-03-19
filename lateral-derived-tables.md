@@ -11,7 +11,7 @@ TiDB recognizes the `LATERAL` syntax for derived tables, following MySQL 8.0 com
 
 > **Note:**
 >
-Currently, TiDB supports parsing the `LATERAL` derived table syntax, but its execution is not yet supported and will return an error. You can track the progress for full execution support in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+> Currently, TiDB supports parsing the `LATERAL` derived table syntax, but its execution is not yet supported and will return an error. You can track the progress for full execution support in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
 
 ## Syntax
 
