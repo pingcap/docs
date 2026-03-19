@@ -10,6 +10,7 @@ summary: Scenario CityDrive stages all dash-cam records into shared relational t
 This walkthrough models the relational side of that catalog and highlights practical SQL building blocks. The sample IDs here appear again in the JSON, vector, geo, and ETL guides.
 
 ## 1. Create the Base Tables
+
 `citydrive_videos` stores clip metadata, while `frame_events` records the interesting frames pulled from each clip.
 
 ```sql
@@ -69,6 +70,7 @@ Docs: [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md), [INSERT](/tidb-cloud
 ---
 
 ## 2. Filter the Working Set
+
 Keep investigations focused on the Jan 1–3 snapshot from the seed data so the demo always returns rows.
 
 ```sql
@@ -103,7 +105,9 @@ VID-20250103-001| CBD Night Sweep    | LightFog  | 1
 ---
 
 ## 3. JOIN Patterns
+
 ### INNER JOIN for frame context
+
 ```sql
 SELECT f.frame_id,
        f.event_tag,
@@ -127,6 +131,7 @@ FRAME-0401| night_lowlight | 0.63       | CBD Night Sweep   | rear_cam
 ```
 
 ### Anti join QA
+
 ```sql
 SELECT frame_id
 FROM frame_events f
@@ -145,6 +150,7 @@ FRAME-0501
 ```
 
 ### LATERAL FLATTEN for nested detections
+
 ```sql
 SELECT f.frame_id,
        obj.value['type']::STRING AS detected_type,
@@ -169,7 +175,9 @@ Docs: [JOIN](/tidb-cloud-lake/sql/join.md), [FLATTEN](/tidb-cloud-lake/sql/flatt
 ---
 
 ## 4. Aggregations for Fleet KPIs
+
 ### Behaviour by route
+
 ```sql
 SELECT v.route_name,
        f.event_tag,
@@ -193,6 +201,7 @@ Airport Connector  | hard_brake     | 1           | 0.59
 ```
 
 ### ROLLUP totals
+
 ```sql
 SELECT v.route_name,
        f.event_tag,
@@ -217,6 +226,7 @@ Downtown Loop      | pedestrian     | 1
 ```
 
 ### CUBE for route × weather coverage
+
 ```sql
 SELECT v.route_name,
        v.weather,
@@ -242,7 +252,9 @@ Downtown Loop      | NULL     | 1
 ---
 
 ## 5. Window Functions
+
 ### Running risk per video
+
 ```sql
 WITH ordered_events AS (
     SELECT video_id, collected_at, risk_score
@@ -273,6 +285,7 @@ VID-MISSING-001 | 2025-01-04 10:00:00  | 0.25       | 0.25
 ```
 
 ### Rolling average over recent frames
+
 ```sql
 SELECT video_id,
        frame_id,
@@ -304,6 +317,7 @@ Docs: [Window functions](/tidb-cloud-lake/sql/window-functions-overview.md).
 ---
 
 ## 6. Aggregating Index Boost
+
 Persist frequently used summaries for dashboards.
 
 ```sql
@@ -347,6 +361,7 @@ Docs: [Aggregating Index](/tidb-cloud-lake/guides/aggregating-index.md) and [EXP
 ---
 
 ## 7. Stored Procedure Automation
+
 Wrap the logic so scheduled jobs always produce the same report.
 
 ```sql

@@ -28,11 +28,13 @@ OVER (
 ```
 
 **Arguments:**
+
 - `expression`: The column or expression to evaluate
 - `offset`: Number of rows before the current row (default: 1)
 - `default`: Value to return when no previous row exists (default: NULL)
 
 **Notes:**
+
 - Negative offset values work like LEAD function
 - Returns NULL if the offset goes beyond partition boundaries
 
@@ -65,6 +67,7 @@ ORDER BY student, test_date;
 ```
 
 Result:
+
 ```
 student | test_date  | score | previous_score
 --------+------------+-------+---------------
@@ -86,6 +89,7 @@ ORDER BY student, test_date;
 ```
 
 Result:
+
 ```
 student | test_date  | score | score_2_tests_ago
 --------+------------+-------+------------------

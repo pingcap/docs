@@ -10,11 +10,13 @@ A VARIANT can store a value of any other type, including NULL, BOOLEAN, NUMBER, 
 Here's an example of inserting and querying Variant data in Databend:
 
 Create a table:
+
 ```sql
 CREATE TABLE customer_orders(id INT64, order_data VARIANT);
 ```
 
 Insert a value with different type into the table:
+
 ```sql
 INSERT INTO
   customer_orders
@@ -34,11 +36,13 @@ VALUES
 ```
 
 Query the result:
+
 ```sql
 SELECT * FROM customer_orders;
 ```
 
 Result:
+
 ```sql
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │        id       │                                                   order_data                                                  │
@@ -58,12 +62,14 @@ The VARIANT type contains an array, which is a zero-based array like many other 
 #### Example
 
 Create a table:
+
 ```sql
 -- Create a table to store user hobbies
 CREATE TABLE user_hobbies(user_id INT64, hobbies VARIANT NULL);
 ```
 
 Insert sample data into the table:
+
 ```sql
 INSERT INTO user_hobbies
 VALUES
@@ -72,6 +78,7 @@ VALUES
 ```
 
 Retrieve the first hobby for each user:
+
 ```sql
 SELECT
   user_id,
@@ -79,7 +86,9 @@ SELECT
 FROM
   user_hobbies;
 ```
+
 Result:
+
 ```sql
 ┌─────────────────────────────────────┐
 │     user_id     │    first_hobby    │
@@ -90,6 +99,7 @@ Result:
 ```
 
 Retrieve the third hobby for each user:
+
 ```sql
 SELECT
   hobbies [2],
@@ -101,6 +111,7 @@ GROUP BY
 ```
 
 Result:
+
 ```sql
 ┌─────────────────────────────────┐
 │     hobbies[2]    │ third_hobby │
@@ -111,6 +122,7 @@ Result:
 ```
 
 Retrieve hobbies with a group by:
+
 ```sql
 SELECT
   hobbies [2],
@@ -120,7 +132,9 @@ FROM
 GROUP BY
   hobbies [2];
 ```
+
 Result:
+
 ```sql
 ┌────────────┬─────────────┐
 │ hobbies[2] │ third_hobby │
@@ -137,6 +151,7 @@ The VARIANT type contains key-value pairs represented as objects, where each key
 #### Example
 
 Create a table to store user preferences with VARIANT type:
+
 ```sql
 CREATE TABLE user_preferences(
   user_id INT64,
@@ -146,6 +161,7 @@ CREATE TABLE user_preferences(
 ```
 
 Insert sample data into the table:
+
 ```sql
 INSERT INTO
   user_preferences
@@ -163,6 +179,7 @@ VALUES
 ```
 
 Retrieve the preferred color for each user:
+
 ```sql
 SELECT
   preferences['settings']['color'],
@@ -176,6 +193,7 @@ FROM
 ```
 
 Result:
+
 ```sql
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ preferences['settings']['color'] │ preferences['settings']:color │ preferences['settings']:color │ preferences:settings['color'] │ preferences:settings:color │ preferences:settings:color │
@@ -228,11 +246,13 @@ FROM user_preferences;
 By default, elements retrieved from a VARIANT column are returned. To convert a returned element to a specific type, add the `::` operator and the target data type (e.g. expression::type).
 
 Create a table to store user preferences with a VARIANT column:
+
 ```sql
 CREATE TABLE user_pref(user_id INT64, pref VARIANT NULL);
 ```
 
 Insert sample data into the table:
+
 ```sql
 INSERT INTO user_pref
 VALUES
@@ -241,10 +261,13 @@ VALUES
 ```
 
 Convert the age to an INT64:
+
 ```sql
 SELECT user_id, pref:age::INT64 as age FROM user_pref;
 ```
+
 Result:
+
 ```sql
 ┌─────────┬─────┐
 │ user_id │ age │

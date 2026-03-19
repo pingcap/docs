@@ -42,6 +42,7 @@ vector_norm(v) = √(Σ(vᵢ²))
 Where vᵢ are the elements of the input vector.
 
 The vector norm is fundamental in:
+
 - Normalizing vectors to unit length
 - Measuring vector magnitude in machine learning
 - Computing distances and similarities
@@ -63,6 +64,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌─────────┬───────────┬─────────────┐
 │ norm_2d │  norm_3d  │ zero_vector │

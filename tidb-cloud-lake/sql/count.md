@@ -30,6 +30,7 @@ An integer.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE students (
   id INT,
@@ -48,12 +49,14 @@ VALUES (1, 'John', 21, 85),
 ```
 
 **Query Demo: Count Students with Valid Grades**
+
 ```sql
 SELECT COUNT(grade) AS count_valid_grades
 FROM students;
 ```
 
 **Result**
+
 ```sql
 | count_valid_grades |
 |--------------------|

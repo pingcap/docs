@@ -40,6 +40,7 @@ The JARO_WINKLER function returns a FLOAT64 value representing the similarity be
     │        0.9 │
     └────────────┘
     ```
+
 - NULL Handling: If either string1 or string2 is NULL, the result is NULL.
 
     ```sql title='Examples:'
@@ -51,6 +52,7 @@ The JARO_WINKLER function returns a FLOAT64 value representing the similarity be
     │ NULL       │
     └────────────┘
     ```
+
 - Empty Strings:
     - Comparing two empty strings returns 1.0.
 
@@ -63,6 +65,7 @@ The JARO_WINKLER function returns a FLOAT64 value representing the similarity be
     │          1 │
     └────────────┘
     ```
+
     - Comparing an empty string with a non-empty string returns 0.0.
 
     ```sql title='Examples:'

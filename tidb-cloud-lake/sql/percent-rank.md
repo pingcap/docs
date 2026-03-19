@@ -24,11 +24,13 @@ OVER (
 ```
 
 **Arguments:**
+
 - `PARTITION BY`: Optional. Divides rows into partitions
 - `ORDER BY`: Required. Determines the ranking order
 - `ASC | DESC`: Optional. Sort direction (default: ASC)
 
 **Notes:**
+
 - Returns values between 0 and 1 (inclusive)
 - First row always has PERCENT_RANK of 0
 - Last row always has PERCENT_RANK of 1
@@ -63,6 +65,7 @@ ORDER BY score DESC, student;
 ```
 
 Result:
+
 ```
 student | score | percent_rank | percentile
 --------+-------+--------------+-----------

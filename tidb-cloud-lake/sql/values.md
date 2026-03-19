@@ -20,6 +20,7 @@ FROM ( VALUES ( <expr> [ , <expr> [ , ... ] ] ) [ , ( ... ) ] ) [ [ AS ] <table_
 ```
 
 **Key Points:**
+
 - The VALUES clause must be enclosed in parentheses when used in a FROM clause: `FROM (VALUES ...)`
 - Each parenthesized group of expressions represents one row
 - Column names are automatically assigned as **col0**, **col1**, etc. (zero-based indexing)

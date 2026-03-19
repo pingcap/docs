@@ -31,6 +31,7 @@ To understand what a privilege is and how it works, see [Privileges](/tidb-cloud
 > **Note:**
 >
 > CREATE-like privileges that create ownership objects cannot be granted directly to a user. These privileges must be granted to a role first, and then the role can be assigned to users. This includes:
+>
 > - CREATE
 > - CREATE DATABASE
 > - CREATE WAREHOUSE
@@ -41,6 +42,7 @@ To understand what a privilege is and how it works, see [Privileges](/tidb-cloud
 > - CREATE ROW ACCESS POLICY
 >
 > Since `ALL` includes these CREATE privileges, `GRANT ALL ... TO USER` will also fail. For example, `GRANT ALL ON *.* TO USER u1` or `GRANT CREATE DATABASE ON *.* TO USER u1` will fail. Instead, use:
+>
 > ```sql
 > GRANT ALL ON *.* TO ROLE r1;
 > GRANT ROLE r1 TO USER u1;
@@ -155,6 +157,7 @@ GRANT OWNERSHIP ON UDF <udf_name> TO ROLE '<role_name>'
 ### Example 1: Granting Privileges to a Role
 
 Create a role:
+
 ```sql
 CREATE ROLE user1_role;
 ```
@@ -179,6 +182,7 @@ Grant the `ALL` privilege on all databases to the role `user1_role`:
 ```sql
 GRANT ALL ON *.* TO ROLE user1_role;
 ```
+
 ```sql
 SHOW GRANTS FOR ROLE user1_role;
 +--------------------------------------------------+
@@ -194,6 +198,7 @@ Grant the `ALL` privilege on the stage named `s1` to the role `user1_role`:
 ```sql
 GRANT ALL ON STAGE s1 TO ROLE user1_role;
 ```
+
 ```sql
 SHOW GRANTS FOR ROLE user1_role;
 +--------------------------------------------------+
@@ -208,6 +213,7 @@ Grant the `ALL` privilege on the UDF named `f1` to the role `user1_role`:
 ```sql
 GRANT ALL ON UDF f1 TO ROLE user1_role;
 ```
+
 ```sql
 SHOW GRANTS FOR ROLE user1_role;
 +--------------------------------------------------+
@@ -222,16 +228,19 @@ SHOW GRANTS FOR ROLE user1_role;
 Grant the `SELECT` privilege on all existing tables in the `mydb` database to the role `role1`:
 
 Create role:
+
 ```sql
 CREATE ROLE role1;
 ```
 
 Grant privileges to the role:
+
 ```sql
 GRANT SELECT ON mydb.* TO ROLE role1;
 ```
 
 Show the grants for the role:
+
 ```sql
 SHOW GRANTS FOR ROLE role1;
 +-------------------------------------+
@@ -244,11 +253,13 @@ SHOW GRANTS FOR ROLE role1;
 ### Example 3: Granting a Role to a User
 
 Create a user:
+
 ```sql
 CREATE USER user1 IDENTIFIED BY 'abc123' WITH DEFAULT_ROLE = 'role1';
 ```
 
 Role `role1` grants are:
+
 ```sql
 SHOW GRANTS FOR ROLE role1;
 +-------------------------------------+
@@ -259,11 +270,13 @@ SHOW GRANTS FOR ROLE role1;
 ```
 
 Grant role `role1` to user `user1`:
+
 ```sql
  GRANT ROLE role1 TO user1;
 ```
 
 Now, user `user1` grants are:
+
 ```sql
 SHOW GRANTS FOR user1;
 +-------------------------------------+

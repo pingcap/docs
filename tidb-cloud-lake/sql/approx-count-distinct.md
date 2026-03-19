@@ -24,6 +24,7 @@ Integer.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE user_events (
   id INT,
@@ -42,12 +43,14 @@ VALUES (1, 1, 'Login'),
 ```
 
 **Query Demo: Estimate the Number of Distinct User IDs**
+
 ```sql
 SELECT APPROX_COUNT_DISTINCT(user_id) AS approx_distinct_user_count
 FROM user_events;
 ```
 
 **Result**
+
 ```sql
 | approx_distinct_user_count |
 |----------------------------|

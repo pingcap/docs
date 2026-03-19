@@ -25,16 +25,18 @@ REGEXP_SPLIT_TO_TABLE(string, pattern [, flags text])
 
 **Supported `flags` Parameter:**
 Provides flexible regular expression configuration options, controlling matching behavior by combining the following characters:
-*   `i` (case-insensitive): Pattern matching ignores case.
-*   `c` (case-sensitive): Pattern matching is case-sensitive (default behavior).
-*   `n` or `m` (multi-line): Enables multi-line mode. In this mode, `^` and `$` match the beginning and end of the string, respectively, as well as the beginning and end of each line; the dot `.` does not match newline characters.
-*   `s` (single-line): Enables single-line mode (also known as dot-matches-newline). In this mode, the dot `.` matches any character, including newline characters.
-*   `x` (ignore-whitespace): Ignores whitespace characters in the pattern (improves pattern readability).
-*   `q` (literal): Treats the `pattern` as a literal string rather than a regular expression.
+
+* `i` (case-insensitive): Pattern matching ignores case.
+* `c` (case-sensitive): Pattern matching is case-sensitive (default behavior).
+* `n` or `m` (multi-line): Enables multi-line mode. In this mode, `^` and `$` match the beginning and end of the string, respectively, as well as the beginning and end of each line; the dot `.` does not match newline characters.
+* `s` (single-line): Enables single-line mode (also known as dot-matches-newline). In this mode, the dot `.` matches any character, including newline characters.
+* `x` (ignore-whitespace): Ignores whitespace characters in the pattern (improves pattern readability).
+* `q` (literal): Treats the `pattern` as a literal string rather than a regular expression.
 
 ## Examples
 
 ### Basic Row Generation
+
 ```sql
 SELECT REGEXP_SPLIT_TO_TABLE('one,two,three', ',');
 ┌─────────┐
@@ -45,6 +47,7 @@ SELECT REGEXP_SPLIT_TO_TABLE('one,two,three', ',');
 ```
 
 ### Log Parsing
+
 ```sql
 SELECT REGEXP_SPLIT_TO_TABLE('ERR:404:File Not Found', ':');
 ┌──────────────────┐

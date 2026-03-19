@@ -8,6 +8,7 @@ summary: Displays task running history given variables.
 Displays task running history given variables.
 
 ## Syntax
+
 ```sql
 TASK_HISTORY(
       [ SCHEDULED_TIME_RANGE_START => <constant_expr> ]
@@ -55,6 +56,7 @@ When set to TRUE, this function returns only task runs that failed or were cance
 Unique identifier for the root task in a task graph. This ID matches the ID column value in the SHOW TASKS output for the same task. Specify the ROOT_TASK_ID to show the history of the root task and any child tasks that are part of the task graph.
 
 ## Usage Notes
+
 * This function returns a maximum of 10,000 rows, set in the RESULT_LIMIT argument value. The default value is 100.
 * This function returns results only for the ACCOUNTADMIN role.
 
@@ -65,6 +67,7 @@ SELECT
   *
 FROM TASK_HISTORY() order by scheduled_time;
 ```
+
 The above SQL query retrieves all task history records from the TASK_HISTORY function, ordered by the scheduled_time column.(maximum 10,000)
 
 ```sql

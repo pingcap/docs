@@ -62,6 +62,7 @@ VACUUM DROP TABLE [FROM <database_name>] [DRY RUN [SUMMARY]] [LIMIT <file_count>
 ```
 
 **Options:**
+
 - `FROM <database_name>`: Restrict to a specific database
 - `DRY RUN [SUMMARY]`: Preview files to be removed without actually deleting them
 - `LIMIT <file_count>`: Limit the number of files to be vacuumed
@@ -91,6 +92,7 @@ VACUUM TABLE <table_name> [DRY RUN [SUMMARY]];
 ```
 
 **Options:**
+
 - `DRY RUN [SUMMARY]`: Preview files to be removed without actually deleting them
 
 **Examples:**

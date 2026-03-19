@@ -35,9 +35,9 @@ CREATE [OR REPLACE] TABLE <table_name> (
 
 - `bloom_size` specifies the size in bytes of the Bloom filter bitmap used to accelerate string matching within each block of data. It controls the trade-off between index accuracy and memory usage:
 
-  - A larger `bloom_size` reduces false positives in string lookups, improving query precision at the cost of more memory.
-  - A smaller `bloom_size` saves memory but may increase false positives.
-  - If not explicitly set, the default is 1,048,576 bytes (1m) per indexed column per block. The valid range is from 512 bytes to 10,485,760 bytes (10m).
+    - A larger `bloom_size` reduces false positives in string lookups, improving query precision at the cost of more memory.
+    - A smaller `bloom_size` saves memory but may increase false positives.
+    - If not explicitly set, the default is 1,048,576 bytes (1m) per indexed column per block. The valid range is from 512 bytes to 10,485,760 bytes (10m).
 
 ## Examples
 
@@ -72,6 +72,7 @@ SHOW INDEXES;
 ```
 
 Result:
+
 ```
 ┌─────────────────┬───────┬──────────┬─────────────────────────┬──────────────────────────┐
 │ name            │ type  │ original │ definition              │ created_on               │
@@ -103,6 +104,7 @@ SELECT * FROM phrases WHERE text LIKE '%banana%';
 ```
 
 Result:
+
 ```
 ┌────┬─────────────────────┐
 │ id │ text                │

@@ -32,6 +32,7 @@ Float64 or float64 array based on level number.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE sales_data (
   id INT,
@@ -48,12 +49,14 @@ VALUES (1, 1, 5000),
 ```
 
 **Query Demo: Calculate 50th Percentile (Median) of Sales Amount using Interpolation**
+
 ```sql
 SELECT QUANTILE_CONT(0.5)(sales_amount) AS median_sales_amount
 FROM sales_data;
 ```
 
 **Result**
+
 ```sql
 |  median_sales_amount  |
 |-----------------------|

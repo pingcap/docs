@@ -16,6 +16,7 @@ MAX_IF(<column>, <cond>)
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE sales (
   id INT,
@@ -40,6 +41,7 @@ FROM sales;
 ```
 
 **Result**
+
 ```sql
 | max_revenue_salesperson_1 |
 |---------------------------|

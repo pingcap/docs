@@ -28,12 +28,14 @@ OVER (
 ```
 
 **Arguments:**
+
 - `expression`: Required. The column or expression to return the last value from.
 - `PARTITION BY`: Optional. Divides rows into partitions.
 - `ORDER BY`: Required. Determines the ordering within the window.
 - `window_frame`: Optional. Defines the window frame. The default is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`.
 
 **Notes:**
+
 - Returns the last value in the ordered window frame.
 - Supports `IGNORE NULLS` to skip null values and `RESPECT NULLS` to keep the default behaviour.
 - Use a frame that ends after the current row (for example, `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`) when you need the true last row of a partition.
@@ -77,6 +79,7 @@ ORDER BY customer, order_time;
 ```
 
 Result:
+
 ```
 customer | order_id | order_time           | last_order_for_customer
 ---------+----------+----------------------+-------------------------
@@ -106,6 +109,7 @@ ORDER BY customer, order_time;
 ```
 
 Result:
+
 ```
 customer | order_id | order_time           | amount | last_amount_next_12h
 ---------+----------+----------------------+--------+----------------------
@@ -139,6 +143,7 @@ ORDER BY customer, order_id;
 ```
 
 Result:
+
 ```
 customer | order_id | sales_rep | last_rep_respect | last_rep_ignore
 ---------+----------+-----------+------------------+-----------------

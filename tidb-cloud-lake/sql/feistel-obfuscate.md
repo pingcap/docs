@@ -36,6 +36,7 @@ SELECT feistel_obfuscate(10000,1561819567875);
 ```
 
 feistel_obfuscate preserves the number of bits in the original input. If mapping to a larger range is required, an offset can be added to the original input, e.g. feistel_obfuscate(n+10000,50)
+
 ```sql
 SELECT feistel_obfuscate(10,1561819567875);
 +------------------------------------------+

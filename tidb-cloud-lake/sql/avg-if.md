@@ -16,6 +16,7 @@ AVG_IF(<column>, <cond>)
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE employees (
   id INT,
@@ -39,6 +40,7 @@ FROM employees;
 ```
 
 **Result**
+
 ```sql
 | avg_salary_it   |
 |-----------------|

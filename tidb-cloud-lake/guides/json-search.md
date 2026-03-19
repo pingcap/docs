@@ -10,6 +10,7 @@ summary: Scenario CityDrive attaches a metadata JSON payload to every extracted 
 Databend keeps these heterogeneous signals in one warehouse. Inverted indexes power Elasticsearch-style search on VARIANT columns, bitmap tables summarize label coverage, vector indexes answer similarity lookups, and native GEOMETRY columns support spatial filters.
 
 ## 1. Create the Metadata Table
+
 Store one JSON payload per frame so every search runs against the same structure.
 
 ```sql
@@ -35,7 +36,9 @@ INSERT INTO frame_metadata_catalog VALUES
 > Need multimodal data (vector embeddings, GPS trails, tag bitmaps)? Grab the schemas from the [Vector](/tidb-cloud-lake/guides/vector-search-guide.md) and [Geo](/tidb-cloud-lake/guides/geo-analytics.md) guides so you can combine them with the search results shown here.
 
 ## 2. Search Patterns with `QUERY()`
+
 ### Array Match
+
 ```sql
 SELECT doc_id,
        captured_at,
@@ -54,6 +57,7 @@ FRAME-0102 | 2025-01-01 08:33:54 | {"objects":[{"confidence":0.92,"type":"pedest
 ```
 
 ### Boolean AND
+
 ```sql
 SELECT doc_id, captured_at
 FROM frame_metadata_catalog
@@ -71,6 +75,7 @@ FRAME-0102 | 2025-01-01 08:33:54
 ```
 
 ### Boolean OR / List
+
 ```sql
 SELECT doc_id,
        meta_json['media_meta']['tagging']['labels'] AS labels
@@ -91,6 +96,7 @@ FRAME-0101 | ["hard_brake","rain","downtown_loop"]
 ```
 
 ### Numeric Ranges
+
 ```sql
 SELECT doc_id,
        meta_json['vehicle']['speed_kmh']::DOUBLE AS speed
@@ -111,6 +117,7 @@ FRAME-0101 | 32.4
 ```
 
 ### Boosting
+
 ```sql
 SELECT doc_id,
        SCORE() AS relevance

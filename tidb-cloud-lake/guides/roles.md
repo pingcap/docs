@@ -75,6 +75,7 @@ To set up and use the role `billing`, you can create it using the following comm
 ```sql
 CREATE ROLE billing;
 ```
+
 The role name is case-insensitive, so `billing` and `Billing` are considered the same. For detailed steps on setting and assigning the role `billing`, see [Granting Access to Finance Personnel](/tidb-cloud-lake/guides/manage-costs.md#granting-access-to-finance-personnel).
 
 ## Usage Examples (Basic)

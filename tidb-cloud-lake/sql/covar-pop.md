@@ -36,6 +36,7 @@ float64
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE product_sales (
   id INT,
@@ -60,6 +61,7 @@ FROM product_sales;
 ```
 
 **Result**
+
 ```sql
 | covar_pop_units_revenue |
 |-------------------------|

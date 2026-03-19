@@ -32,6 +32,7 @@ double
 **Creating a Table and Inserting Sample Data**
 
 Let's create a table named "sales" and insert some sample data:
+
 ```sql
 CREATE TABLE sales (
   id INTEGER,
@@ -50,12 +51,14 @@ VALUES (1, 'Product A', 10.5),
 **Query: Using AVG() Function**
 
 Now, let's use the AVG() function to find the average price of all products in the "sales" table:
+
 ```sql
 SELECT AVG(price) AS avg_price
 FROM sales;
 ```
 
 The result should look like this:
+
 ```sql
 | avg_price |
 | --------- |

@@ -7,7 +7,7 @@ summary: Metabase is an open-source business intelligence platform. You can use 
 
 [Metabase](https://www.metabase.com/) is an open-source business intelligence platform. You can use Metabase to ask questions about your data, or embed Metabase in your app to let your customers explore their data on their own.
 
-Databend provides a JDBC driver named [Metabase Databend Driver](https://github.com/databendcloud/metabase-databend-driver/releases/latest), enabling you to connect to Metabase and dashboard your data in Databend / Databend Cloud. For more information about the Metabase Databend Driver, refer to https://github.com/databendcloud/metabase-databend-driver
+Databend provides a JDBC driver named [Metabase Databend Driver](https://github.com/databendcloud/metabase-databend-driver/releases/latest), enabling you to connect to Metabase and dashboard your data in Databend / Databend Cloud. For more information about the Metabase Databend Driver, refer to <https://github.com/databendcloud/metabase-databend-driver>
 
 ## Downloading & Installing Metabase Databend Driver
 
@@ -66,7 +66,7 @@ docker run  -d -p 3000:3000 --name metabase metabase/metabase
 
 ### Step 3. Connect to Metabase
 
-1. Open your web browser, and go to http://localhost:3000/.
+1. Open your web browser, and go to <http://localhost:3000/>.
 
 2. Complete the initial sign-up process. Select **I'll add my data later** in step 3.
 
@@ -85,6 +85,6 @@ docker run  -d -p 3000:3000 --name metabase metabase/metabase
 
 4. Click **Save changes**, then click **Exit admin**.
 
-You're all set! You can now start creating a query and building a dashboard. For more information, please refer to the Metabase documentation: https://www.metabase.com/docs/latest/index.html
+You're all set! You can now start creating a query and building a dashboard. For more information, please refer to the Metabase documentation: <https://www.metabase.com/docs/latest/index.html>
 
 ![Alt text](/media/tidb-cloud-lake/allset.png)

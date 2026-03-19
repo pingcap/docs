@@ -16,6 +16,7 @@ MIN_IF(<column>, <cond>)
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE project_budgets (
   id INT,
@@ -40,6 +41,7 @@ FROM project_budgets;
 ```
 
 **Result**
+
 ```sql
 | min_it_budget |
 |---------------|

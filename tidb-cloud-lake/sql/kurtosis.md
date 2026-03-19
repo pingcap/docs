@@ -28,6 +28,7 @@ Nullable Float64.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE stock_prices (
   id INT,

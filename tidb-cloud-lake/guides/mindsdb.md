@@ -11,7 +11,7 @@ Both Databend and Databend Cloud can integrate with MindsDB as a data source, wh
 
 ## Tutorial-1: Integrating Databend with MindsDB
 
-Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to https://docs.mindsdb.com/quickstart#1-create-a-mindsdb-cloud-account-or-install-mindsdb-locally
+Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart#1-create-a-mindsdb-cloud-account-or-install-mindsdb-locally>
 
 ### Step 1. Load Dataset into Databend
 
@@ -53,7 +53,7 @@ parameters={
 
 > **Tip:**
 >
-> The SQL statements above connect the database `default` in Databend to your MindsDB Cloud account. For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
+> The SQL statements above connect the database `default` in Databend to your MindsDB Cloud account. For explanations about the parameters, refer to <https://docs.mindsdb.com/data-integrations/all-data-integrations#databend>
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
@@ -106,7 +106,7 @@ Output:
 
 ## Tutorial-2: Integrating Databend Cloud with MindsDB
 
-Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to https://docs.mindsdb.com/quickstart#1-create-a-mindsdb-cloud-account-or-install-mindsdb-locally
+Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart#1-create-a-mindsdb-cloud-account-or-install-mindsdb-locally>
 
 ### Step 1. Load Dataset into Databend Cloud
 
@@ -149,7 +149,7 @@ parameters={
 
 > **Tip:**
 >
-> The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to https://docs.mindsdb.com/data-integrations/all-data-integrations#databend
+> The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to <https://docs.mindsdb.com/data-integrations/all-data-integrations#databend>
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 

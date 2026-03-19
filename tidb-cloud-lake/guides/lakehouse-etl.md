@@ -18,6 +18,7 @@ Adjust the bucket path or format to match your environment, then paste the comma
 ---
 
 ## 1. Create a Stage
+
 Point a reusable stage at the bucket that holds the CityDrive exports. Swap the credentials/URL for your own account; Parquet is used here, but any supported format works with a different `FILE_FORMAT`.
 
 ```sql
@@ -49,6 +50,7 @@ LIST @citydrive_stage/traffic-lights/;
 ---
 
 ## 2. Peek at the Files
+
 Use a `SELECT` against the stage to confirm schema and sample rows before loading.
 
 ```sql
@@ -66,9 +68,11 @@ Databend infers the format from the stage definition, so no extra options are re
 ---
 
 ## 3. COPY INTO the Unified Tables
+
 Each export maps to one of the shared tables used across the guides. Inline casts keep schemas consistent even if upstream ordering changes.
 
 ### `citydrive_videos`
+
 ```sql
 COPY INTO citydrive_videos (video_id, vehicle_id, capture_date, route_name, weather, camera_source, duration_sec)
 FROM (
@@ -85,6 +89,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
 ### `frame_events`
+
 ```sql
 COPY INTO frame_events (frame_id, video_id, frame_index, collected_at, event_tag, risk_score, speed_kmh)
 FROM (
@@ -101,6 +106,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
 ### `frame_metadata_catalog`
+
 ```sql
 COPY INTO frame_metadata_catalog (doc_id, meta_json, captured_at)
 FROM (
@@ -113,6 +119,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
 ### `frame_embeddings`
+
 ```sql
 COPY INTO frame_embeddings (frame_id, video_id, sensor_view, embedding, encoder_build, created_at)
 FROM (
@@ -128,6 +135,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
 ### `frame_geo_points`
+
 ```sql
 COPY INTO frame_geo_points (video_id, frame_id, position_wgs84, solution_grade, source_system, created_at)
 FROM (
@@ -143,6 +151,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
 ### `signal_contact_points`
+
 ```sql
 COPY INTO signal_contact_points (node_id, signal_position, video_id, frame_id, frame_position, distance_m, created_at)
 FROM (
@@ -163,6 +172,7 @@ After this step, every downstream workload—SQL analytics, Elasticsearch `QUERY
 ---
 
 ## 4. Streams for Incremental Reactions (Optional)
+
 Use streams when you want downstream jobs to consume only the rows added since the last batch.
 
 ```sql
@@ -178,6 +188,7 @@ SELECT * FROM frame_events_stream WITH CONSUME;  -- advance the offset
 ---
 
 ## 5. Tasks for Scheduled Loads (Optional)
+
 Tasks run **one SQL statement** on a schedule. Create lightweight tasks per table or wrap the logic in a stored procedure if you prefer one entry point.
 
 ```sql

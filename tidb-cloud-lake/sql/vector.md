@@ -18,6 +18,7 @@ column_name VECTOR(<dimension>)
 ```
 
 Where:
+
 - `dimension`: The dimension (length) of the vector. Must be a positive integer with a maximum value of 4096.
 - Elements are 32-bit floating-point numbers.
 
@@ -36,6 +37,7 @@ VECTOR INDEX index_name(column_name) distance='cosine,l1,l2'
 ```
 
 Where:
+
 - `index_name`: Name of the vector index
 - `column_name`: Name of the VECTOR column to index
 - `distance`: Distance functions to support. Can be `'cosine'`, `'l1'`, `'l2'`, or combinations like `'cosine,l1,l2'`
@@ -90,6 +92,7 @@ LIMIT 3;
 ```
 
 Result:
+
 ```
 ╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                           content                                                                           │   distance   │

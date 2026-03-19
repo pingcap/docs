@@ -16,7 +16,9 @@ Returns the ID of a query in the current session based on its order.
 ```sql
 LAST_QUERY_ID(<index>)
 ```
+
 `index` specifies the query order in the current session, accepting positive and negative numbers, with a default value of `-1`.
+
 - Positive indexes (starting from `1`) retrieve the nth query from the session start.
 - Negative indexes retrieve the nth query backward from the current query.
     - When `index` is `-1`, it returns the query ID of the current query.

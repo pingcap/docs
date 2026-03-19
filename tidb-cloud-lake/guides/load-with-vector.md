@@ -33,7 +33,7 @@ GRANT ROLE vector_role TO user1;
 
 ### Step 2: Configure Databend as a Sink in Vector
 
-In this step, configure Databend as a sink in Vector by specifying the necessary settings such as the input source, compression, database, endpoint, table, and authentication credentials (username and password) for Databend integration. The following is a simple example of configuring Databend as a sink. For a comprehensive list of configuration parameters, refer to the Vector documentation at https://vector.dev/docs/reference/configuration/sinks/databend/
+In this step, configure Databend as a sink in Vector by specifying the necessary settings such as the input source, compression, database, endpoint, table, and authentication credentials (username and password) for Databend integration. The following is a simple example of configuring Databend as a sink. For a comprehensive list of configuration parameters, refer to the Vector documentation at <https://vector.dev/docs/reference/configuration/sinks/databend/>
 
 ```toml title='vector.toml'
 ...
@@ -131,7 +131,7 @@ http {
         ##
         # Logging Settings
         ##
-	    log_format upstream '$remote_addr "$time_local" $host "$request_method $request_uri $server_protocol" $status $bytes_sent "$http_referrer" "$http_user_agent" $remote_port $upstream_addr $scheme $gzip_ratio $request_length $request_time $ssl_protocol "$upstream_response_time"';
+     log_format upstream '$remote_addr "$time_local" $host "$request_method $request_uri $server_protocol" $status $bytes_sent "$http_referrer" "$http_user_agent" $remote_port $upstream_addr $scheme $gzip_ratio $request_length $request_time $ssl_protocol "$upstream_response_time"';
 
         access_log /var/log/nginx/access.log upstream;
         error_log /var/log/nginx/error.log;
@@ -140,7 +140,9 @@ http {
         include /etc/nginx/sites-enabled/*;
 }
 ```
+
 This is how the log message looks:
+
 ```text
 ::1 "09/Apr/2022:11:13:39 +0800" localhost "GET /?xx HTTP/1.1" 304 189 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" 50758 - http - 1202 0.000 - "-"
 ```

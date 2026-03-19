@@ -48,10 +48,10 @@ split('databend cloud', ',')|
 ----------------------------+
 ['Databend Cloud']          |
 
--- Use '	' (tab) as the delimiter
+-- Use ' ' (tab) as the delimiter
 -- SPLIT returns an array with timestamp, log level, and message.
 
-SELECT SPLIT('2023-10-19 15:30:45	INFO	Log message goes here', '	');
+SELECT SPLIT('2023-10-19 15:30:45 INFO Log message goes here', ' ');
 
 split('2023-10-19 15:30:45\tinfo\tlog message goes here', '\t')|
 ---------------------------------------------------------------+

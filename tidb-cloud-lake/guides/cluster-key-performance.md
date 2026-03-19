@@ -25,12 +25,14 @@ Large tables without proper organization create significant performance and main
 ## Benefits of Automatic Clustering
 
 **Ease-of-Maintenance**: Databend eliminates the need for:
+
 - Monitoring the state of clustered tables
 - Manually triggering re-clustering operations
 - Designating compute resources for clustering
 - Scheduling maintenance windows
 
 **How it Works**: After you define a cluster key, Databend automatically:
+
 - Monitors table changes from DML operations
 - Evaluates when tables would benefit from re-clustering
 - Performs background clustering optimization
@@ -114,6 +116,7 @@ ALTER TABLE your_table RECLUSTER;
 ## Performance Tuning
 
 ### Custom Block Size
+
 Adjust block size for better performance:
 
 ```sql
@@ -125,6 +128,7 @@ ALTER TABLE sales SET OPTIONS(
 ```
 
 ### Automatic Re-clustering
+
 - `COPY INTO` and `REPLACE INTO` automatically trigger re-clustering
 - Monitor clustering metrics regularly
 - Re-cluster when `average_depth` becomes too high
@@ -142,12 +146,14 @@ ALTER TABLE sales SET OPTIONS(
 ## Important Notes
 
 **When to Use Cluster Keys:**
+
 - Large tables (millions+ rows)
 - Slow query performance
 - Frequent filter-based queries
 - Analytical workloads
 
 **When NOT to Use:**
+
 - Small tables
 - Random access patterns
 - Frequently changing data

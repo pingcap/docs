@@ -31,6 +31,7 @@ SELECT CAST(1 AS VARCHAR), 1::VARCHAR;
 
 Cast String to
 Variant and Cast Variant to `Map<String, Variant>`
+
 ```sql
 select '{"k1":"v1","k2":"v2"}'::Variant a, a::Map(String, String) b, b::Variant = a;
 ┌──────────────────────┬──────────────────────┬────────────────┐

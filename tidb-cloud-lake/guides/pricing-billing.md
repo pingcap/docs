@@ -50,7 +50,7 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 | Personal Edition | $1.00                        |
 | Business Edition | $2.00                        |
 
-## Example-1:
+## Example-1
 
 **Usage Scenario:** A user is using an XSmall warehouse (Business) and occasionally queries data. This specific query took 5 minutes and 20 seconds, and the data storage size is 100GB.
 
@@ -61,7 +61,7 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 | **Daily Total** | | **$0.88** |
 | **Monthly Total** | | **$26.40** |
 
-## Example-2:
+## Example-2
 
 **Usage Scenario:** A user is using an XSmall warehouse (Business) to continuously import data into Databend Cloud. The warehouse runs 24 hours a day with 1TB storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
 

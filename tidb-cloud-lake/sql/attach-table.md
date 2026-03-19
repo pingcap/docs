@@ -30,13 +30,13 @@ CONNECTION = ( CONNECTION_NAME = '<connection_name>' )
 - **`<target_table_name>`**: Name of the new attached table to create
 
 - **`<column_list>`**: Optional list of columns to include from the source table
-  - When omitted, all columns are included
-  - Provides column-level security and access control
-  - Example: `(customer_id, product, amount)`
+    - When omitted, all columns are included
+    - Provides column-level security and access control
+    - Example: `(customer_id, product, amount)`
 
 - **`<source_table_data_URI>`**: Path to the source table data in object storage
-  - Format: `s3://<bucket-name>/<database_ID>/<table_ID>/`
-  - Example: `s3://databend-toronto/1/23351/`
+    - Format: `s3://<bucket-name>/<database_ID>/<table_ID>/`
+    - Example: `s3://databend-toronto/1/23351/`
 
 - **`CONNECTION_NAME`**: References a connection created with [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
 

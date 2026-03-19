@@ -52,12 +52,14 @@ SET query_result_cache_min_execute_secs = 0;
 This example demonstrates caching a TPC-H Q1 query:
 
 ### 1. Enable Caching
+
 ```sql
 SET enable_query_result_cache = 1;
 SET query_result_cache_min_execute_secs = 0;
 ```
 
 ### 2. First Execution (No Cache)
+
 ```sql
 SELECT
     l_returnflag,
@@ -79,11 +81,13 @@ ORDER BY l_returnflag, l_linestatus;
 **Result**: 4 rows in **21.492 seconds** (600M rows processed)
 
 ### 3. Verify Cache Entry
+
 ```sql
 SELECT sql, query_id, result_size, num_rows FROM system.query_cache;
 ```
 
 ### 4. Second Execution (From Cache)
+
 Run the same query again.
 
 **Result**: 4 rows in **0.164 seconds** (0 rows processed)
@@ -91,17 +95,21 @@ Run the same query again.
 ## Cache Management
 
 ### Monitor Cache Usage
+
 ```sql
 SELECT * FROM system.query_cache;
 ```
 
 ### Access Cached Results
+
 ```sql
 SELECT * FROM RESULT_SCAN(LAST_QUERY_ID());
 ```
 
 ### Cache Lifecycle
+
 Cached results are automatically removed when:
+
 - **TTL expires** (default: 5 minutes)
 - **Result size exceeds limit** (default: 1MB)
 - **Session ends** (cache is session-scoped)

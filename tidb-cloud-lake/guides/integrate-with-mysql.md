@@ -146,11 +146,13 @@ For CDC tasks, the current binlog position is saved as a checkpoint when stopped
 Snapshot mode performs a one-time full read of the source table and loads all data into the target table in Databend.
 
 **Use cases:**
+
 - Initial data migration from MySQL to Databend
 - Periodic full data refresh
 - One-time data imports with WHERE condition filtering
 
 **Features:**
+
 - Supports WHERE condition filtering to load a subset of data
 - Supports periodic archive scheduling for recurring snapshots
 - Task automatically stops after completion
@@ -160,6 +162,7 @@ Snapshot mode performs a one-time full read of the source table and loads all da
 CDC mode continuously monitors the MySQL binlog and captures real-time row-level changes (INSERT, UPDATE, DELETE) from the source table.
 
 **Use cases:**
+
 - Real-time data replication
 - Keeping Databend in sync with operational MySQL databases
 - Event-driven data pipelines

@@ -5,7 +5,7 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 
 # Querying CSV Files in Stage
 
-## Syntax:
+## Syntax
 
 - [Query columns by position](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-position)
 - [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
@@ -15,6 +15,7 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 ### Step 1. Create an External Stage
 
 Create an external stage with your own S3 bucket and credentials where your CSV files are stored.
+
 ```sql
 CREATE STAGE csv_query_stage
 URL = 's3://load/csv/'
@@ -58,6 +59,7 @@ FROM @csv_query_stage
     PATTERN => '.*[.]csv[.]gz'
 );
 ```
+
 ### Query with Metadata
 
 Query CSV files directly from a stage, including metadata columns like `METADATA$FILENAME` and `METADATA$FILE_ROW_NUMBER`:

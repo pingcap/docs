@@ -20,6 +20,7 @@ DROP FUNCTION [ IF EXISTS ] <function_name>
 ## Examples
 
 ### Dropping Scalar SQL Function
+
 ```sql
 -- Create a scalar function
 CREATE FUNCTION calculate_bmi(weight FLOAT, height FLOAT)
@@ -31,6 +32,7 @@ DROP FUNCTION calculate_bmi;
 ```
 
 ### Dropping Tabular SQL Function
+
 ```sql
 -- Create a table function
 CREATE FUNCTION get_employees_by_dept(dept_name VARCHAR)
@@ -42,6 +44,7 @@ DROP FUNCTION get_employees_by_dept;
 ```
 
 ### Dropping Embedded Function
+
 ```sql
 -- Create a Python function
 CREATE FUNCTION custom_hash(input_str VARCHAR)
@@ -59,6 +62,7 @@ DROP FUNCTION custom_hash;
 ```
 
 ### Using IF EXISTS
+
 ```sql
 -- Safe drop - won't error if function doesn't exist
 DROP FUNCTION IF EXISTS non_existent_function;

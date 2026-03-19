@@ -32,6 +32,7 @@ The array of 1 or 0.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE user_events (
   id INT,
@@ -50,6 +51,7 @@ VALUES (1, 1, '2022-01-01', 'signup'),
 ```
 
 **Query Demo: Calculate User Retention Based on Signup, Login, and Purchase Events**
+
 ```sql
 SELECT
   user_id,
@@ -59,6 +61,7 @@ GROUP BY user_id;
 ```
 
 **Result**
+
 ```sql
 | user_id | retention |
 |---------|-----------|

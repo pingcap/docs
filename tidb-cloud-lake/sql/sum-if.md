@@ -16,6 +16,7 @@ SUM_IF(<column>, <cond>)
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE order_data (
   id INT,
@@ -33,12 +34,14 @@ VALUES (1, 1, 100, 'Completed'),
 ```
 
 **Query Demo: Calculate the Total Amount of Completed Orders**
+
 ```sql
 SELECT SUM_IF(amount, status = 'Completed') AS total_amount_completed
 FROM order_data;
 ```
 
 **Result**
+
 ```sql
 | total_amount_completed |
 |------------------------|

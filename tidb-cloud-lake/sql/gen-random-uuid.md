@@ -41,6 +41,7 @@ SELECT GEN_RANDOM_UUID(), 'User made a purchase' AS event, CURRENT_TIMESTAMP AS 
 ```
 
 The results from these queries might look like this:
+
 ```sql
 ┌──────────────────────────────────────────────────────────────────────────────────────────┐
 │           gen_random_uuid()          │         event        │         event_time         │

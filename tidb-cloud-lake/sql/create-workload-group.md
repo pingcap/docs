@@ -68,6 +68,7 @@ DESC USER analytics_user;
 ## Resource Quota Normalization
 
 ### Quota Limits
+
 - Each workload group's `cpu_quota` and `memory_quota` can be set up to `100%` (1.0)
 - The total sum of all quotas across workload groups can exceed 100%
 - Actual resource allocation is **normalized** based on relative proportions
@@ -81,15 +82,18 @@ Actual Allocation = (Group Quota) / (Sum of All Group Quotas) × 100%
 ```
 
 **Example 1: Total quotas = 100%**
+
 - Group A: 30% quota → Gets 30% of resources (30/100)
 - Group B: 70% quota → Gets 70% of resources (70/100)
 
 **Example 2: Total quotas > 100%**
+
 - Group A: 60% quota → Gets 40% of resources (60/150)
 - Group B: 90% quota → Gets 60% of resources (90/150)
 - Total quotas: 150%
 
 **Example 3: Total quotas < 100%**
+
 - Group A: 20% quota → Gets 67% of resources (20/30)
 - Group B: 10% quota → Gets 33% of resources (10/30)
 - Total quotas: 30%

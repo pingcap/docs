@@ -45,7 +45,7 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 | SUSPEND_TASK_AFTER_NUM_FAILURES                  | Optional. The number of consecutive failures after which the task will be automatically suspended.                                                                           |
 | AFTER                                            | List task that must be completed before this task starts.                                                                                                                  |
 | WHEN boolean_expr                                | A condition that must be true for the task to run.                                                                                                                           |
-| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | Optional. The name of the notification integration to use for the task error notification with specific [task error payload ](/tidb-cloud-lake/sql/task-error-notification-payload.md)applied |
+| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | Optional. The name of the notification integration to use for the task error notification with specific [task error payload](/tidb-cloud-lake/sql/task-error-notification-payload.md)applied |
 | COMMENT                                          | Optional. A string literal that serves as a comment or description for the task.                                                                                             |
 | session_parameter                                | Optional. Specifies session parameters to use for the task during task run. Note that session parameters must be placed after all other task parameters in the CREATE TASK statement. |
 | sql                                              | The SQL statement that the task will execute. It can be a single statement or a script wrapped in `BEGIN ... END;`. This is a mandatory field.                                |
@@ -58,10 +58,10 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 - When Condition only support a subset of `<boolean_expression>`
   The following are supported in a task WHEN clause:
 
-  - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) is supported for evaluation in the SQL expression. This function indicates whether a specified stream contains change tracking data. You can use this function to evaluate whether the specified stream contains change data before starting the current run. If the result is FALSE, then the task does not run.
-  - Boolean operators such as AND, OR, NOT, and others.
-  - Casts between numeric, string and boolean types.
-  - Comparison operators such as equal, not equal, greater than, less than, and others.
+    - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) is supported for evaluation in the SQL expression. This function indicates whether a specified stream contains change tracking data. You can use this function to evaluate whether the specified stream contains change data before starting the current run. If the result is FALSE, then the task does not run.
+    - Boolean operators such as AND, OR, NOT, and others.
+    - Casts between numeric, string and boolean types.
+    - Comparison operators such as equal, not equal, greater than, less than, and others.
 
 > **Note:**
 >
@@ -71,6 +71,7 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 - Tasks will not retry on each execution; each execution is serial. Each script SQL is executed one by one, with no parallel execution. This ensures that the sequence and dependencies of task execution are maintained.
 - Interval-based tasks follow a fixed interval spot in a tight way. This means that if the current task execution time exceeds the interval unit, the next task will execute immediately. Otherwise, the next task will wait until the next interval unit is triggered. For example, if a task is defined with a 1-second interval and one task execution takes 1.5 seconds, the next task will execute immediately. If one task execution takes 0.5 seconds, the next task will wait until the next 1-second interval tick starts.
 - While session parameters can be specified during task creation, you can also modify them later using the ALTER TASK statement. For example:
+
   ```sql
   ALTER TASK simple_task SET
       enable_query_result_cache = 1,
@@ -88,30 +89,30 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
   5. **Month** (1-12 or JAN-DEC)
   6. **Day of the Week** (0-6, where 0 is Sunday, or SUN-SAT)
 
- #### Example Cron Expressions:
+#### Example Cron Expressions
 
 - **Daily at 9:00:00 AM Pacific Time:**
-  - `USING CRON '0 0 9 * * *' 'America/Los_Angeles'`
+    - `USING CRON '0 0 9 * * *' 'America/Los_Angeles'`
 
 - **Every minute:**
-  - `USING CRON '0 * * * * *' 'UTC'`
-  - This runs the task every minute at the start of the minute.
+    - `USING CRON '0 * * * * *' 'UTC'`
+    - This runs the task every minute at the start of the minute.
 
 - **Every hour at the 15th minute:**
-  - `USING CRON '0 15 * * * *' 'UTC'`
-  - This runs the task every hour at 15 minutes past the hour.
+    - `USING CRON '0 15 * * * *' 'UTC'`
+    - This runs the task every hour at 15 minutes past the hour.
 
 - **Every Monday at 12:00:00 PM:**
-  - `USING CRON '0 0 12 * * 1' 'UTC'`
-  - This runs the task every Monday at noon.
+    - `USING CRON '0 0 12 * * 1' 'UTC'`
+    - This runs the task every Monday at noon.
 
 - **On the first day of every month at midnight:**
-  - `USING CRON '0 0 0 1 * *' 'UTC'`
-  - This runs the task at midnight on the first day of every month.
+    - `USING CRON '0 0 0 1 * *' 'UTC'`
+    - This runs the task at midnight on the first day of every month.
 
 - **Every weekday at 8:30:00 AM:**
-  - `USING CRON '0 30 8 * * 1-5' 'UTC'`
-  - This runs the task every weekday (Monday to Friday) at 8:30 AM.
+    - `USING CRON '0 30 8 * * 1-5' 'UTC'`
+    - This runs the task every weekday (Monday to Friday) at 8:30 AM.
 
 ## Usage Examples
 

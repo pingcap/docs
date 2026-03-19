@@ -25,6 +25,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌───────────────┬──────────────────┬───────────────┬────────────────┐
 │ zero_is_false │ nonzero_is_true  │ string_true   │ string_false   │
@@ -39,6 +40,7 @@ SELECT 'yes'::BOOLEAN;
 ```
 
 Result:
+
 ```
 ERROR 1105 (HY000): QueryFailed: [1006]cannot parse to type `BOOLEAN` while evaluating function `to_boolean('yes')` in expr `CAST('yes' AS Boolean)`
 ```

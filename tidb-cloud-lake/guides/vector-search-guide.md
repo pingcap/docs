@@ -10,6 +10,7 @@ summary: Scenario CityDrive keeps embeddings for every frame directly in Databen
 The `frame_embeddings` table shares the same `frame_id` keys as `frame_events`, `frame_metadata_catalog`, and `frame_geo_points`, which keeps semantic search and classic SQL glued together.
 
 ## 1. Prepare the Embedding Table
+
 Production models tend to emit 512–1536 dimensions. The example below uses 512 so you can copy it straight into a demo cluster without changing the DDL.
 
 ```sql
@@ -87,6 +88,7 @@ Docs: [Vector type](/tidb-cloud-lake/sql/vector.md) and [Vector index](/tidb-clo
 ---
 
 ## 2. Run Cosine Search
+
 Pull the embedding from one frame and let the HNSW index return the closest neighbours.
 
 ```sql
@@ -145,6 +147,7 @@ The optimizer still uses the vector index while honoring the `sensor_view` filte
 ---
 
 ## 3. Enrich Similar Frames
+
 Materialize the top matches, then enrich them with `frame_events` for downstream analytics.
 
 ```sql

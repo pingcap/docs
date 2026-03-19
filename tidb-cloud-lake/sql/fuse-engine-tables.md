@@ -22,6 +22,7 @@ Databend uses the Fuse Engine as its default storage engine, providing a Git-lik
 ## When to Use Fuse Engine
 
 Ideal for:
+
 - **Analytics**: OLAP queries with columnar storage
 - **Data Warehousing**: Large volumes of historical data
 - **Time-Travel**: Access to historical data versions
@@ -44,24 +45,27 @@ For more details about the `CREATE TABLE` syntax, see [CREATE TABLE](/tidb-cloud
 Below are the main parameters for creating a Fuse Engine table:
 
 #### `ENGINE`
+
 - **Description:**
   If an engine is not explicitly specified, Databend will automatically default to using the Fuse Engine to create tables, which is equivalent to `ENGINE = FUSE`.
 
 ---
 
 #### `CLUSTER BY`
+
 - **Description:**
   Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md).
 
 ---
 
 #### `<Options>`
+
 - **Description:**
   The Fuse Engine offers various options (case-insensitive) that allow you to customize the table's properties.
-  - See [Fuse Engine Options](#fuse-engine-options) for details.
-  - Separate multiple options with a space.
-  - Use [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#fuse-engine-options) to modify a table's options.
-  - Use [SHOW CREATE TABLE](/tidb-cloud-lake/sql/show-create-table.md) to show a table's options.
+    - See [Fuse Engine Options](#fuse-engine-options) for details.
+    - Separate multiple options with a space.
+    - Use [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#fuse-engine-options) to modify a table's options.
+    - Use [SHOW CREATE TABLE](/tidb-cloud-lake/sql/show-create-table.md) to show a table's options.
 
 ---
 
@@ -72,6 +76,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `compression`
+
 - **Syntax:**
   `compression = '<compression>'`
 - **Description:**
@@ -80,6 +85,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `snapshot_loc`
+
 - **Syntax:**
   `snapshot_loc = '<snapshot_loc>'`
 - **Description:**
@@ -88,6 +94,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `block_size_threshold`
+
 - **Syntax:**
   `block_size_threshold = <n>`
 - **Description:**
@@ -96,6 +103,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `block_per_segment`
+
 - **Syntax:**
   `block_per_segment = <n>`
 - **Description:**
@@ -104,6 +112,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `row_per_block`
+
 - **Syntax:**
   `row_per_block = <n>`
 - **Description:**
@@ -112,6 +121,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `bloom_index_columns`
+
 - **Syntax:**
   `bloom_index_columns = '<column> [, <column> ...]'`
 - **Description:**
@@ -120,6 +130,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `change_tracking`
+
 - **Syntax:**
   `change_tracking = True / False`
 - **Description:**
@@ -128,6 +139,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `data_retention_period_in_hours`
+
 - **Syntax:**
   `data_retention_period_in_hours = <n>`
 - **Description:**
@@ -136,12 +148,14 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `enable_auto_vacuum`
+
 - **Syntax:**
   `enable_auto_vacuum = 0 / 1`
 - **Description:**
   Controls whether a table automatically triggers vacuum operations during mutations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When enabled (set to 1), vacuum operations will be automatically triggered after mutations like INSERT or ALTER TABLE, cleaning up the table data according to the configured retention policy.
 
   **Examples:**
+
   ```sql
   -- Set enable_auto_vacuum globally for all tables across all sessions
   SET GLOBAL enable_auto_vacuum = 1;
@@ -168,12 +182,14 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ---
 
 ### `data_retention_num_snapshots_to_keep`
+
 - **Syntax:**
   `data_retention_num_snapshots_to_keep = <n>`
 - **Description:**
   Specifies the number of snapshots to retain during vacuum operations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When set, only the specified number of most recent snapshots will be kept after vacuum operations. Overrides the `data_retention_time_in_days` setting. If set to 0, this setting will be ignored. This option works in conjunction with the `enable_auto_vacuum` setting to provide granular control over snapshot retention policies.
 
   **Examples:**
+
   ```sql
   -- Set global retention to 10 snapshots for all tables across all sessions
   SET GLOBAL data_retention_num_snapshots_to_keep = 10;

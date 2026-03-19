@@ -24,11 +24,13 @@ OVER (
 ```
 
 **Arguments:**
+
 - `PARTITION BY`: Optional. Divides rows into partitions
 - `ORDER BY`: Required. Determines the distribution order
 - `ASC | DESC`: Optional. Sort direction (default: ASC)
 
 **Notes:**
+
 - Returns values between 0 and 1 (exclusive of 0, inclusive of 1)
 - Formula: (number of rows ≤ current value) / (total rows)
 - Always returns 1.0 for the highest value(s)
@@ -62,6 +64,7 @@ ORDER BY score;
 ```
 
 Result:
+
 ```
 student | score | cume_dist | cumulative_percent
 --------+-------+-----------+-------------------

@@ -6,6 +6,7 @@ summary: Rounds down a date with time (timestamp/datetime) to the start of the h
 # TO_START_OF_HOUR
 
 Rounds down a date with time (timestamp/datetime) to the start of the hour.
+
 ## Syntax
 
 ```sql

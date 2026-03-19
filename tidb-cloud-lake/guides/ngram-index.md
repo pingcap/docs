@@ -32,12 +32,14 @@ Pattern matching with `LIKE` queries faces significant performance challenges on
 | **Best For** | Log analysis, code search, exact pattern matching | Document search, content discovery, search engines |
 
 **Choose Ngram Index when:**
+
 - You have existing `LIKE '%pattern%'` queries to optimize
 - Need exact substring matching (case-insensitive)
 - Working with structured data like logs, codes, or IDs
 - Want to improve performance without changing query syntax
 
 **Choose Full-Text Index when:**
+
 - Building search functionality for documents or content
 - Need fuzzy search, relevance scoring, or complex queries
 - Working with natural language text
@@ -48,15 +50,18 @@ Pattern matching with `LIKE` queries faces significant performance challenges on
 Ngram indexes break text into overlapping character substrings (n-grams) for fast pattern lookup:
 
 **Example with `gram_size = 3`:**
+
 ```text
 Input: "The quick brown"
 N-grams: "The", "he ", "e q", " qu", "qui", "uic", "ick", "ck ", "k b", " br", "bro", "row", "own"
 ```
 
 **Query Processing:**
+
 ```sql
 SELECT * FROM t WHERE content LIKE '%quick br%'
 ```
+
 1. Pattern `'quick br'` is tokenized into n-grams: "qui", "uic", "ick", "ck ", "k b", " br"
 2. Index filters data blocks containing these n-grams
 3. Full `LIKE` filter applied only to pre-filtered blocks
@@ -132,6 +137,7 @@ EXPLAIN SELECT id, content FROM t_articles WHERE content LIKE '%silence%';
 ```
 
 **Performance Results:**
+
 ```sql
 -[ EXPLAIN ]-----------------------------------
 TableScan
@@ -171,12 +177,14 @@ For complete command reference, see [Ngram Index](/tidb-cloud-lake/sql/ngram-ind
 **When to Use Ngram Indexes**
 
 **Ideal for:**
+
 - Log analysis and monitoring systems
 - Code search and pattern matching
 - Product catalog searches
 - Any application with frequent `LIKE '%pattern%'` queries
 
 **Not recommended for:**
+
 - Short pattern searches (less than `gram_size` characters)
 - Exact string matching (use equality comparison instead)
 - Complex text search requirements (use Full-Text Index instead)

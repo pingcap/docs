@@ -27,6 +27,7 @@ See also:
 ```sql
 PRESIGN [ { DOWNLOAD | UPLOAD }] @<stage_name>/.../<file_name> [ EXPIRE = <expire_in_seconds> ]
 ```
+
 Where：
 
 `[ { DOWNLOAD | UPLOAD }]`: Specifies that the pre-signed URL is used for download or upload. The default value is `DOWNLOAD`.

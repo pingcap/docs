@@ -67,7 +67,7 @@ docker-compose up
 
 ### Step 3. Add Databend as a Data Source
 
-1. Sign up for Redash by completing the initial process at http://localhost:5000 in your web browser.
+1. Sign up for Redash by completing the initial process at <http://localhost:5000> in your web browser.
 
 2. Select `Databend` from the list on **Settings** > **New Data Source**.
 
@@ -85,7 +85,7 @@ docker-compose up
 
 4. Click **Create**, then **Test Connection** to see check if the connection is successful.
 
-You're all set! You can now write a query and add your visualizations. For more information, refer to the Redash Getting Started guide: https://redash.io/help/user-guide/getting-started#2-Write-A-Query
+You're all set! You can now write a query and add your visualizations. For more information, refer to the Redash Getting Started guide: <https://redash.io/help/user-guide/getting-started#2-Write-A-Query>
 
 ## Tutorial-2: Integrating Databend Cloud with Redash
 
@@ -145,7 +145,7 @@ docker-compose up
 
 ### Step 3. Add Databend Cloud as a Data Source
 
-1. Sign up for Redash by completing the initial process at http://localhost:5000 in your web browser.
+1. Sign up for Redash by completing the initial process at <http://localhost:5000> in your web browser.
 
 2. Select `Databend` from the list on **Settings** > **New Data Source**.
 
@@ -164,4 +164,4 @@ docker-compose up
 
 4. Click **Create**, then **Test Connection** to see check if the connection is successful.
 
-You're all set! You can now write a query and add your visualizations. For more information, refer to the Redash Getting Started guide: https://redash.io/help/user-guide/getting-started#2-Write-A-Query
+You're all set! You can now write a query and add your visualizations. For more information, refer to the Redash Getting Started guide: <https://redash.io/help/user-guide/getting-started#2-Write-A-Query>

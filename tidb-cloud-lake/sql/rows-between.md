@@ -79,6 +79,7 @@ ORDER BY product, sale_date;
 ```
 
 Result:
+
 ```
 sale_date   | product | amount | running_total
 ------------+---------+--------+--------------
@@ -108,6 +109,7 @@ ORDER BY product, sale_date;
 ```
 
 Result:
+
 ```
 sale_date   | product | amount | moving_avg_3day
 ------------+---------+--------+----------------
@@ -132,6 +134,7 @@ ORDER BY product, sale_date;
 ```
 
 Result:
+
 ```
 sale_date   | product | amount | centered_sum
 ------------+---------+--------+-------------
@@ -156,6 +159,7 @@ ORDER BY product, sale_date;
 ```
 
 Result:
+
 ```
 sale_date   | product | amount | min_next_3days
 ------------+---------+--------+---------------
@@ -185,6 +189,7 @@ ORDER BY product, sale_date;
 ```
 
 Result:
+
 ```
 sale_date   | product | amount | max_in_partition | min_in_partition
 ------------+---------+--------+------------------+-----------------
@@ -198,7 +203,9 @@ sale_date   | product | amount | max_in_partition | min_in_partition
 ## Common Patterns
 
 ### Running Calculations
+
 **Syntax examples (not complete statements):**
+
 ```sql
 -- Running total
 SUM(column) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
@@ -211,6 +218,7 @@ COUNT(*) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT RO
 ```
 
 **Complete example:**
+
 ```sql
 -- Running total with actual table
 SELECT sale_date, product, amount,
@@ -223,7 +231,9 @@ ORDER BY sale_date;
 ```
 
 ### Moving Windows
+
 **Syntax examples:**
+
 ```sql
 -- 3-period moving average
 AVG(column) OVER (ORDER BY sort_col ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
@@ -236,6 +246,7 @@ AVG(column) OVER (ORDER BY sort_col ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)
 ```
 
 **Complete example:**
+
 ```sql
 -- 3-day moving average
 SELECT sale_date, amount,
@@ -248,7 +259,9 @@ ORDER BY sale_date;
 ```
 
 ### Bounded Windows
+
 **Syntax examples:**
+
 ```sql
 -- First 3 rows of partition
 SUM(column) OVER (ORDER BY sort_col ROWS BETWEEN UNBOUNDED PRECEDING AND 2 FOLLOWING)
@@ -261,6 +274,7 @@ AVG(column) OVER (ORDER BY sort_col ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
 ```
 
 **Complete example:**
+
 ```sql
 -- Fixed 5-row window average
 SELECT sale_date, amount,
@@ -284,6 +298,7 @@ ORDER BY sale_date;
 ### Boundary Behavior Examples
 
 **Centered window at partition edges:**
+
 ```sql
 -- For row 1: ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
 -- Actual window: CURRENT ROW AND 1 FOLLOWING (no preceding row exists)
@@ -293,6 +308,7 @@ ORDER BY sale_date;
 ```
 
 **Moving average at start:**
+
 ```sql
 -- For row 1: ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
 -- Actual window: CURRENT ROW only (no preceding rows)

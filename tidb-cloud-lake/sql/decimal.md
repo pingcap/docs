@@ -32,6 +32,7 @@ FROM invoices;
 ```
 
 Result:
+
 ```
 ┌─────────────┬──────────┬──────────┬────────────┬────────────┐
 │ description │ amount   │ tax_rate │ tax_value  │ total_due  │
@@ -53,6 +54,7 @@ FROM invoices;
 ```
 
 Result:
+
 ```
 ┌─────────────┬───────────┬────────────────┬──────────┐
 │ sum_default │ sum_cast  │ avg_default    │ avg_cast │

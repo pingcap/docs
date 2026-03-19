@@ -8,6 +8,7 @@ summary: Databend system history tables automatically capture detailed records o
 Databend system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
 
 Allows the auditing of the user:
+
 - **Query execution** - Complete SQL execution audit trail (`query_history`)
 - **Data access** - Database object access and modifications (`access_history`)
 - **Authentication** - Login attempts and session tracking (`login_history`)
@@ -39,6 +40,7 @@ ORDER BY event_time DESC;
 ```
 
 Example output:
+
 ```
 event_time: 2025-06-03 06:07:32.512021
 user_name: root1
@@ -61,6 +63,7 @@ ORDER BY query_start DESC;
 ```
 
 Example for `CREATE TABLE` operation:
+
 ```
 query_id: c2c1c7be-cee4-4868-a28e-8862b122c365
 query_start: 2025-06-12 03:31:19.042128
@@ -95,6 +98,7 @@ ORDER BY query_start_time DESC;
 ```
 
 Example output:
+
 ```
 query_id: 4e1f50a9-bce2-45cc-86e4-c7a36b9b8d43
 sql_user: root

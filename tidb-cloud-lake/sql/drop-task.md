@@ -24,7 +24,7 @@ DROP TASK [ IF EXISTS ] <name>
 | IF EXISTS                        | Optional. If specified, the task will only be dropped if a task of the same name already exists. |
 | name                             | The name of the task. This is a mandatory field.                                                       |
 
-## Usage Notes:
+## Usage Notes
 
 - If a predecessor task in a DAG is dropped, then all former child tasks that identified this task as the predecessor become either standalone tasks or root tasks, depending on whether other tasks identify these former child tasks as their predecessor. These former child tasks are suspended by default and must be resumed manually.
 - Root Task must be suspended before DROP

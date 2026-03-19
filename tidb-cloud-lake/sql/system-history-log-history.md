@@ -37,11 +37,13 @@ summary: Note This table contains raw log data that feeds into other specialized
 Note: The `message` field stores plain text logs, while the `fields` field stores logs in JSON format.
 
 For example, the `fields` field of a log entry might look like:
+
 ```
 fields: {"node_id":"8R5ZMF8q0HHE6x9H7U1gr4","query_id":"72d2319a-b6d6-4b1d-8694-670137a40d87","session_id":"189fd3e2-e6ac-48c3-97ef-73094c141312","sql":"select * from system_history.log_history"}
 ```
 
 the `message` field of another log entry might appear as follows:
+
 ```
 message: [HTTP-QUERY] Preparing to plan SQL query
 ```

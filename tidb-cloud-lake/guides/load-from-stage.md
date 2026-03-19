@@ -94,6 +94,7 @@ Follow this tutorial to upload the sample file to an internal stage and load dat
 ```sql
 CREATE STAGE my_internal_stage;
 ```
+
 2. Verify the created stage:
 
 ```sql
@@ -143,6 +144,7 @@ FILE_FORMAT = (
     TYPE = 'PARQUET'
 );
 ```
+
 2. Verify the loaded data:
 
 ```sql
@@ -220,6 +222,7 @@ FILE_FORMAT = (
     TYPE = 'PARQUET'
 );
 ```
+
 2. Verify the loaded data:
 
 ```sql

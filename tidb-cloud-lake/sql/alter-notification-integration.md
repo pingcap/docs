@@ -14,6 +14,7 @@ Alter the settings of a named notification integration that can be used to send 
 **NOTICE:** this functionality works out of the box only in Databend Cloud.
 
 ## Syntax
+
 ### Webhook Notification
 
 ```sql

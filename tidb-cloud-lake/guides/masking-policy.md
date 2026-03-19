@@ -12,6 +12,7 @@ Masking policies protect sensitive data by dynamically transforming column value
 Policies transform column data at query time, usually based on the caller’s role.
 
 **Managers see actual values**
+
 ```sql
 id | email           |
 ---|-----------------|
@@ -20,6 +21,7 @@ id | email           |
 ```
 
 **Other roles see masked values**
+
 ```sql
 id | email    |
 ---|----------|
@@ -163,7 +165,7 @@ id | email              | is_vip
 - Grant the global `APPLY MASKING POLICY` privilege or `APPLY ON MASKING POLICY <policy_name>` to roles that attach or detach policies via `ALTER TABLE`.
 - Audit access with `SHOW GRANTS ON MASKING POLICY <policy_name>`.
 - Additional references:
-  - [User & Role](/tidb-cloud-lake/sql/user-role.md)
-  - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
-  - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
-  - [Masking Policy Commands](/tidb-cloud-lake/sql/masking-policy-sql.md)
+    - [User & Role](/tidb-cloud-lake/sql/user-role.md)
+    - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
+    - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
+    - [Masking Policy Commands](/tidb-cloud-lake/sql/masking-policy-sql.md)

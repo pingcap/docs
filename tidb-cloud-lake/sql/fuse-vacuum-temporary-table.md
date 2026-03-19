@@ -16,6 +16,7 @@ Temporary tables are typically cleaned up automatically at session end (details 
 `FUSE_VACUUM_TEMPORARY_TABLE()` manually removes these leftover files to reclaim storage.
 
 **When to use this function:**
+
 - After known system failures or abnormal session terminations.
 - If you suspect orphaned temporary data is consuming storage.
 - As a periodic maintenance task in environments prone to such issues.
@@ -23,6 +24,7 @@ Temporary tables are typically cleaned up automatically at session end (details 
 ## Operational Safety
 
 The `FUSE_VACUUM_TEMPORARY_TABLE()` function is designed to be a safe and reliable operation.
+
 - **Targets Only Temporary Data:** It specifically identifies and removes only orphaned data and metadata files that belong to temporary tables.
 - **No Impact on Regular Tables:** The function will not affect any regular, persistent tables or their data. Its scope is strictly limited to the cleanup of unreferenced temporary table remnants.
 

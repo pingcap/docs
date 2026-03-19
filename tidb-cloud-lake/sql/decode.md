@@ -49,6 +49,7 @@ SELECT a, decode(a,
 ```
 
 result:
+
 ```
 ┌─a─┬─decode_result─┐
 │ 1 │ one           │

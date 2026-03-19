@@ -8,6 +8,7 @@ summary: Automatically detects the file metadata schema and retrieves the column
 Automatically detects the file metadata schema and retrieves the column definitions.
 
 `infer_schema` currently supports the following file formats:
+
 - **Parquet** - Native support for schema inference
 - **CSV** - With customizable delimiters and header detection
 - **NDJSON** - Newline-delimited JSON files
@@ -68,6 +69,7 @@ SELECT * FROM INFER_SCHEMA(
 ```
 
 Result:
+
 ```
 +-------------+-----------------+----------+----------+----------+
 | column_name | type            | nullable | filenames| order_id |
@@ -95,6 +97,7 @@ SELECT * FROM INFER_SCHEMA(
 ```
 
 Result:
+
 ```
 +-------------+---------+----------+----------+----------+
 | column_name | type    | nullable | filenames| order_id |
@@ -154,6 +157,7 @@ SELECT * FROM INFER_SCHEMA(
 ```
 
 Result:
+
 ```
 +-------------+---------+----------+----------+----------+
 | column_name | type    | nullable | filenames| order_id |
@@ -192,6 +196,7 @@ SELECT * FROM INFER_SCHEMA(
 ```
 
 Result shows merged schema:
+
 ```
 +-------------+---------+----------+-----------+----------+
 | column_name | type    | nullable | filenames | order_id |

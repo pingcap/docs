@@ -59,7 +59,7 @@ SELECT * FROM s WITH (CONSUME = FALSE, MAX_BATCH_SIZE = 2);
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-The following shows how the `CONSUME` hint operates when querying a stream. With `CONSUME = TRUE` and ` MAX_BATCH_SIZE = 1`, each query consumes one row from the stream.
+The following shows how the `CONSUME` hint operates when querying a stream. With `CONSUME = TRUE` and `MAX_BATCH_SIZE = 1`, each query consumes one row from the stream.
 
 ```sql
 SELECT * FROM s WITH (CONSUME = TRUE, MAX_BATCH_SIZE = 1);

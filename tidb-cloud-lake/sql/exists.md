@@ -14,6 +14,7 @@ WHERE EXISTS ( <subquery> );
 ```
 
 ## Examples
+
 ```sql
 SELECT number FROM numbers(5) AS A WHERE exists (SELECT * FROM numbers(3) WHERE number=1);
 +--------+

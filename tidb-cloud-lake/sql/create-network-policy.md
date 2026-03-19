@@ -20,12 +20,12 @@ CREATE [ OR REPLACE ] NETWORK POLICY [ IF NOT EXISTS ] <policy_name>
     [ COMMENT = 'comment' ]
 ```
 
-| Parameter       	| Description                                                                                                                                                                                      	|
-|-----------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| policy_name     	| Specifies the name of the network policy to be created.                                                                                                                                          	|
-| ALLOWED_IP_LIST 	| Specifies a comma-separated list of allowed IP address ranges for the policy. Users associated with this policy can access the network using the specified IP ranges.                    	|
-| BLOCKED_IP_LIST 	| Specifies a comma-separated list of blocked IP address ranges for the policy. Users associated with this policy can still access the network from ALLOWED_IP_LIST, except for the IPs specified in BLOCKED_IP_LIST, which will be restricted from access. 	|
-| COMMENT         	| An optional parameter used to add a description or comment for the network policy.                                                                                                               	|
+| Parameter        | Description                                                                                                                                                                                       |
+|----------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| policy_name      | Specifies the name of the network policy to be created.                                                                                                                                           |
+| ALLOWED_IP_LIST  | Specifies a comma-separated list of allowed IP address ranges for the policy. Users associated with this policy can access the network using the specified IP ranges.                     |
+| BLOCKED_IP_LIST  | Specifies a comma-separated list of blocked IP address ranges for the policy. Users associated with this policy can still access the network from ALLOWED_IP_LIST, except for the IPs specified in BLOCKED_IP_LIST, which will be restricted from access.  |
+| COMMENT          | An optional parameter used to add a description or comment for the network policy.                                                                                                                |
 
 ## Examples
 

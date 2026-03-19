@@ -39,6 +39,7 @@ The type of `<expr>`. If all values are NULL, the return value is NULL.
 ## Example
 
 **Sample Data:**
+
 ```sql
 CREATE TABLE sales (
   region VARCHAR,
@@ -53,18 +54,21 @@ INSERT INTO sales VALUES
 ```
 
 **Problem:** This query fails because `manager` isn't in GROUP BY:
+
 ```sql
 SELECT region, manager, SUM(sales_amount)  -- ❌ Error
 FROM sales GROUP BY region;
 ```
 
 **Old approach:** Add `manager` to GROUP BY, but this creates more groups than needed and hurts performance:
+
 ```sql
 SELECT region, manager, SUM(sales_amount)
 FROM sales GROUP BY region, manager;  -- ❌ Poor performance due to extra grouping
 ```
 
 **Better solution:** Use `ANY_VALUE()` to select the manager:
+
 ```sql
 SELECT
   region,
@@ -75,6 +79,7 @@ GROUP BY region;
 ```
 
 **Result:**
+
 ```text
 | region | manager | total_sales |
 |--------|---------|-------------|

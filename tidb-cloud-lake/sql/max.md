@@ -28,6 +28,7 @@ The maximum value, in the type of the value.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE temperatures (
   id INT,
@@ -53,6 +54,7 @@ GROUP BY city;
 ```
 
 **Result**
+
 ```sql
 |    city    | max_temperature |
 |------------|-----------------|

@@ -11,9 +11,9 @@ Data anonymization is the process of altering or removing personally identifiabl
 
 Effective anonymization strategies typically target specific categories of sensitive data:
 
-*   **Direct Identifiers (PII)**: Information that explicitly identifies a person, such as full names, email addresses, phone numbers, and government IDs.
-*   **Indirect Identifiers (Quasi-Identifiers)**: Attributes that can identify individuals when combined with other data sources, such as dates of birth, gender, zip codes, or job titles.
-*   **Sensitive Business Data**: Confidential information like financial transactions, salary details, or proprietary internal records that need protection in non-production environments.
+* **Direct Identifiers (PII)**: Information that explicitly identifies a person, such as full names, email addresses, phone numbers, and government IDs.
+* **Indirect Identifiers (Quasi-Identifiers)**: Attributes that can identify individuals when combined with other data sources, such as dates of birth, gender, zip codes, or job titles.
+* **Sensitive Business Data**: Confidential information like financial transactions, salary details, or proprietary internal records that need protection in non-production environments.
 
 ### Databend Anonymization Techniques
 

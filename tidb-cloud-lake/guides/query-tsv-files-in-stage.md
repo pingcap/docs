@@ -5,7 +5,7 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 
 # Querying TSV Files in Stage
 
-## Syntax:
+## Syntax
 
 - [Query columns by position](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-position)
 - [Query Metadata](/tidb-cloud-lake/guides/query-stage.md#query-metadata)
@@ -15,6 +15,7 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 ### Step 1. Create an External Stage
 
 Create an external stage with your own S3 bucket and credentials where your TSV files are stored.
+
 ```sql
 CREATE STAGE tsv_query_stage
 URL = 's3://load/tsv/'
@@ -57,6 +58,7 @@ FROM @tsv_query_stage
     PATTERN => '.*[.]tsv[.]gz'
 );
 ```
+
 ### Query with Metadata
 
 Query TSV files directly from a stage, including metadata columns like `METADATA$FILENAME` and `METADATA$FILE_ROW_NUMBER`:

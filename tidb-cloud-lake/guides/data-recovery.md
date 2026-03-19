@@ -31,8 +31,8 @@ With Databend Time Travel, you can revisit and retrieve data from the past, even
 
 - **Personal Edition**: Choose between no retention (0 days) or the default of **1 day**.
 - **Business Edition and Higher**:
-  - For temporary data: Set to 0 or the default of **1 day**.
-  - For permanent data: Choose any period from **0 to 90 days**.
+    - For temporary data: Set to 0 or the default of **1 day**.
+    - For permanent data: Choose any period from **0 to 90 days**.
 
 > **Note:**
 >

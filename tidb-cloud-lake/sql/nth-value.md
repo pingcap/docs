@@ -32,6 +32,7 @@ OVER (
 ```
 
 **Arguments:**
+
 - `expression`: Required. The column or expression to evaluate.
 - `n`: Required. Position number (1-based) of the value to return.
 - `IGNORE NULLS`: Optional. Skips null values when counting positions.
@@ -39,6 +40,7 @@ OVER (
 - `window_frame`: Optional. Defines the window frame. The default is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`.
 
 **Notes:**
+
 - `n` must be a positive integer; `n = 1` is equivalent to `FIRST_VALUE`.
 - Returns `NULL` if the specified position does not exist in the frame.
 - Combine with `ROWS BETWEEN ...` to control whether the position is evaluated over the whole partition or the rows seen so far.
@@ -92,6 +94,7 @@ ORDER BY customer, order_time;
 ```
 
 Result:
+
 ```
 customer | order_id | order_time           | second_order_so_far | second_rep_respect | second_rep_ignore
 ---------+----------+----------------------+---------------------+--------------------+-------------------

@@ -33,6 +33,7 @@ SELECT
     [OFFSET <row_count>]
     [IGNORE_RESULT]
 ```
+
 - The SELECT statement also allows you to query staged files directly. For syntax and examples, see [Efficient Data Transformation with Databend](/tidb-cloud-lake/sql/stage.md).
 
 - In the examples on this page, the table `numbers(N)` is used for testing, with a single UInt64 column (named `number`) that contains integers from 0 to N-1.

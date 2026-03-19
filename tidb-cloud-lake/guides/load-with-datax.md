@@ -19,7 +19,7 @@ DatabendWriter is an integrated plugin of DataX, which means it comes pre-instal
 
 DatabendWriter supports two operational modes: INSERT (default) and REPLACE. In INSERT Mode, new data is added while conflicts with existing records are prevented to maintain data integrity. On the other hand, the REPLACE Mode prioritizes data consistency by replacing existing records with newer data in case of conflicts.
 
-If you need more information about DatabendWriter and its functionalities, you can refer to the documentation available at https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md
+If you need more information about DatabendWriter and its functionalities, you can refer to the documentation available at <https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md>
 
 ### Tutorials
 

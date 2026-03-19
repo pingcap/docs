@@ -28,6 +28,7 @@ Nullable Float64.
 ## Example
 
 **Create a Table and Insert Sample Data**
+
 ```sql
 CREATE TABLE temperature_data (
                                   id INT,
@@ -51,6 +52,7 @@ FROM temperature_data;
 ```
 
 **Result**
+
 ```sql
 | temperature_skewness |
 |----------------------|

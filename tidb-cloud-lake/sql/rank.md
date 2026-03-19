@@ -18,11 +18,13 @@ OVER (
 ```
 
 **Arguments:**
+
 - `PARTITION BY`: Optional. Divides rows into partitions
 - `ORDER BY`: Required. Determines the ranking order
 - `ASC | DESC`: Optional. Sort direction (default: ASC)
 
 **Notes:**
+
 - Ranks start from 1
 - Equal values get the same rank
 - Creates gaps in ranking sequence after ties
@@ -60,6 +62,7 @@ ORDER BY score DESC, student, subject;
 ```
 
 Result:
+
 ```
 student | subject | score | score_rank
 --------+---------+-------+-----------
@@ -84,6 +87,7 @@ ORDER BY student, score DESC, subject;
 ```
 
 Result:
+
 ```
 student | subject | score | subject_rank
 --------+---------+-------+-------------

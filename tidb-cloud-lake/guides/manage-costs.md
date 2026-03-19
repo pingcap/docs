@@ -23,11 +23,11 @@ When you set up a spending limit, you need to decide what action Databend Cloud 
 
 For the "Send Notifications Only" option, Databend Cloud will send email notifications to administrators based on the following frequency cycle:
 
-| Spending Range 	| Notification Frequency 	|
-|----------------	|------------------------	|
-| 80% - 90%      	| Every three days       	|
-| 90% - 100%     	| Every three days       	|
-| 100% or above     | Every three days       	|
+| Spending Range  | Notification Frequency  |
+|---------------- |------------------------ |
+| 80% - 90%       | Every three days        |
+| 90% - 100%      | Every three days        |
+| 100% or above     | Every three days        |
 
 ## Granting Access to Finance Personnel
 

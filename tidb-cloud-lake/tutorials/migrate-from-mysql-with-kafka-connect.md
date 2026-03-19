@@ -82,6 +82,7 @@ poll.interval.ms=5000
 ```
 
 Replace the following values with your actual MySQL configuration:
+
 - `your_database`: Your MySQL database name
 - `your_username`: MySQL username
 - `your_password`: MySQL password
@@ -92,18 +93,21 @@ Replace the following values with your actual MySQL configuration:
 The MySQL Source Connector supports three synchronization modes:
 
 1. **Incrementing Mode**: Best for tables with an auto-incrementing ID column
+
    ```properties
    mode=incrementing
    incrementing.column.name=id
    ```
 
 2. **Timestamp Mode**: Best for capturing both inserts and updates
+
    ```properties
    mode=timestamp
    timestamp.column.name=updated_at
    ```
 
 3. **Timestamp+Incrementing Mode**: Most reliable for all changes
+
    ```properties
    mode=timestamp+incrementing
    incrementing.column.name=id

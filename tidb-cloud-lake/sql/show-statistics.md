@@ -56,6 +56,7 @@ SHOW STATISTICS;
 ```
 
 Output:
+
 ```
 database  table  column_name  stats_row_count  actual_row_count  distinct_count  null_count  avg_size
 test_db   t1     id           2                2                 2               0           4
@@ -72,6 +73,7 @@ SHOW STATISTICS FROM TABLE test_db.t2;
 ```
 
 Output:
+
 ```
 database  table  column_name  stats_row_count  actual_row_count  distinct_count  null_count  avg_size
 test_db   t2     age          2                2                 2               0           4

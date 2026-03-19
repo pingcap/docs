@@ -23,14 +23,14 @@ mysql> insert into db.tb01 values(1, 3.1,now(), 'test1'), (1, 4.1,now(), 'test2'
 
 > **Note:**
 >
-> DataX data types can be converted to Databend's data types when loaded into Databend. For the specific correspondences between DataX data types and Databend's data types, refer to the documentation provided at the following link: https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#33-type-convert
+> DataX data types can be converted to Databend's data types when loaded into Databend. For the specific correspondences between DataX data types and Databend's data types, refer to the documentation provided at the following link: <https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#33-type-convert>
 
 ```sql title='In Databend:'
 databend> create database migrated_db;
 databend> create table migrated_db.tb01(id int null, d double null, t TIMESTAMP null,  col1 varchar(10) null);
 ```
 
-3. Copy and paste the following code to a file, and name the file as *mysql_demo.json*. For the available parameters and their descriptions, refer to the documentation provided at the following link: https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#32-configuration-description
+3. Copy and paste the following code to a file, and name the file as *mysql_demo.json*. For the available parameters and their descriptions, refer to the documentation provided at the following link: <https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#32-configuration-description>
 
 ```json title='mysql_demo.json'
 {

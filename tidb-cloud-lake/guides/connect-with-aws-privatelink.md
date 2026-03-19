@@ -40,7 +40,7 @@ After Databend Cloud approves the cloud account or project you plan to connect, 
 
 5. Goto AWS Console:
 
-   https://us-east-2.console.aws.amazon.com/vpcconsole/home?region=us-east-2#Endpoints:
+   <https://us-east-2.console.aws.amazon.com/vpcconsole/home?region=us-east-2#Endpoints>:
 
    Click `Create endpoint`:
 

@@ -39,6 +39,7 @@ SHOW TABLE_FUNCTIONS;
 ```
 
 Showing the table functions begin with `"number"`:
+
 ```sql
 SHOW TABLE_FUNCTIONS LIKE 'number%';
 +---------------+
@@ -51,6 +52,7 @@ SHOW TABLE_FUNCTIONS LIKE 'number%';
 ```
 
 Showing the table functions begin with `"number"` with `WHERE`:
+
 ```sql
 SHOW TABLE_FUNCTIONS WHERE name LIKE 'number%';
 +---------------+

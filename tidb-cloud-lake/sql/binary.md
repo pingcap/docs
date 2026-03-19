@@ -34,6 +34,7 @@ ORDER BY id;
 ```
 
 Result:
+
 ```
 ┌────┬──────────────┬──────────┐
 │ id │ hex_value    │ byte_len │
@@ -56,6 +57,7 @@ ORDER BY id;
 ```
 
 Result:
+
 ```
 ┌────┬─────────────┐
 │ id │ text_value  │

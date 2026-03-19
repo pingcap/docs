@@ -26,6 +26,7 @@ SELECT event_info FROM events_tuple;
 ```
 
 Result:
+
 ```
 ┌──────────────────────────────────────────────────────┐
 │ event_info                                           │
@@ -48,6 +49,7 @@ FROM events_tuple;
 ```
 
 Result:
+
 ```
 ┌──────────────────────────┬──────────────────┐
 │ event_time               │ description      │

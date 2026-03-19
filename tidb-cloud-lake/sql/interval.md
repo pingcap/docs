@@ -34,6 +34,7 @@ SELECT TO_STRING(duration) AS duration_text FROM intervals;
 ```
 
 Result:
+
 ```
 ┌──────────────────────┐
 │ duration_text        │
@@ -52,6 +53,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌────────┬────────────┐
 │ whole  │ fractional │
@@ -69,6 +71,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌──────────────┬──────────────────┐
 │ add_interval │ subtract_interval │
@@ -88,6 +91,7 @@ SELECT
 ```
 
 Result:
+
 ```
 ┌────────────────────┬────────────────────┬────────────────────┬────────────────────┐
 │ add_days           │ subtract_days      │ add_hours          │ subtract_hours     │

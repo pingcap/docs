@@ -51,6 +51,7 @@ WHERE  t1.a < (SELECT Min(t2.a)
 ## EXISTS / NOT EXISTS
 
 An EXISTS subquery is a boolean expression that can appear in a WHERE clause:
+
 * An EXISTS expression evaluates to TRUE if any rows are produced by the subquery.
 * A NOT EXISTS expression evaluates to TRUE if no rows are produced by the subquery.
 
@@ -69,6 +70,7 @@ An EXISTS subquery is a boolean expression that can appear in a WHERE clause:
 ```sql
 SELECT number FROM numbers(10) WHERE number>5 AND exists(SELECT number FROM numbers(5) WHERE number>4);
 ```
+
 `SELECT number FROM numbers(5) WHERE number>4` no rows are produced, `exists(SELECT number FROM numbers(5) WHERE number>4)` is FALSE.
 
 ```sql

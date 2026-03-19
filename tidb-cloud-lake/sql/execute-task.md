@@ -23,7 +23,8 @@ EXECUTE TASK  <name>
 |----------------------------------|------------------------------------------------------------------------------------------------------|
 | name                             | The name of the task. This is a mandatory field.                                                       |
 
-## Usage Notes:
+## Usage Notes
+
 - The SQL command can only execute a standalone task or the root task in a DAG. If a child task is input, the command returns a user error.
 
 ## Usage Examples

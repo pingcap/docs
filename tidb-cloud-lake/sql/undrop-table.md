@@ -8,6 +8,7 @@ summary: Restores the recent version of a dropped table. This leverages the Data
 Restores the recent version of a dropped table. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**
+
 - [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md)
 - [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md)
 - [SHOW TABLES](/tidb-cloud-lake/sql/show-tables.md)

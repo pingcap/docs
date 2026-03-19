@@ -23,6 +23,7 @@ Choose your preferred approach:
 ## databend-driver (Recommended)
 
 ### Features
+
 - ✅ **Native Performance**: Direct connection to Databend
 - ✅ **Async/Sync Support**: Choose your programming style
 - ✅ **PEP 249 Compatible**: Standard Python DB API

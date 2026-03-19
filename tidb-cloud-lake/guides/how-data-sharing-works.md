@@ -31,12 +31,14 @@ Think of ATTACH TABLE like computer shortcuts - they point to the original file 
 ## How to Use ATTACH TABLE
 
 **Step 1: Find your data location**
+
 ```sql
 SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'company_sales');
 -- Result: 1/23351/_ss/... → Data at s3://your-bucket/1/23351/
 ```
 
 **Step 2: Create team-specific views**
+
 ```sql
 -- Marketing: Customer behavior analysis
 ATTACH TABLE marketing_view (customer_id, product, amount, order_date)
@@ -56,6 +58,7 @@ ATTACH TABLE dev_customers (customer_id, country, created_date)
 ```
 
 **Step 3: Query independently**
+
 ```sql
 -- Marketing analyzes trends
 SELECT product, COUNT(*) FROM marketing_view GROUP BY product;
@@ -67,6 +70,7 @@ SELECT order_date, SUM(profit) FROM finance_view GROUP BY order_date;
 ## Key Benefits
 
 **Real-Time Updates**: When source data changes, all attached tables see it instantly
+
 ```sql
 INSERT INTO company_sales VALUES (1001, 501, 'Laptop', 1299.99, 299.99, 'user@email.com', '2025-01-20');
 SELECT COUNT(*) FROM marketing_view WHERE order_date = '2024-01-20'; -- Returns: 1

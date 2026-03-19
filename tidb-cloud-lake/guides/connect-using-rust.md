@@ -32,6 +32,7 @@ tokio = { version = "1", features = ["full"] }
 ## Data Type Mappings
 
 ### Basic Types
+
 | Databend  | Rust                  | Notes                    |
 | --------- | --------------------- | ------------------------ |
 | BOOLEAN   | bool                  |                          |
@@ -46,12 +47,14 @@ tokio = { version = "1", features = ["full"] }
 | BINARY    | `Vec<u8>`             |                          |
 
 ### Date/Time Types
+
 | Databend  | Rust                  | Notes                    |
 | --------- | --------------------- | ------------------------ |
 | DATE      | chrono::NaiveDate     | Requires chrono crate    |
 | TIMESTAMP | chrono::NaiveDateTime | Requires chrono crate    |
 
 ### Complex Types
+
 | Databend    | Rust            | Notes                    |
 | ----------- | --------------- | ------------------------ |
 | ARRAY[T]    | `Vec<T>`        | Nested arrays supported  |

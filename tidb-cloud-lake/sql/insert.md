@@ -251,6 +251,7 @@ SELECT * FROM sample;
 ```
 
 The results should be:
+
 ```sql
 ┌─────────────────────────────────────────────────────────────────────────┐
 │        id       │       city       │      score      │      country     │

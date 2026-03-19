@@ -26,8 +26,8 @@ Readings in Database Systems,Michael Stonebraker,2004
 
 2. Create a bucket in Amazon S3 and upload the sample file to the bucket. For how to do that, refer to these links:
 
-- Creating a bucket: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
-- Uploading objects: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+- Creating a bucket: <https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html>
+- Uploading objects: <https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html>
 
 For this tutorial, a bucket named **databend-toronto** was created in the region **US East (Ohio)** (ID: us-east-2).
 
