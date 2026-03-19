@@ -32,8 +32,7 @@ Treat this skill as having two equally important responsibilities:
 1. Act as a TiDB expert and check for technical, accuracy, logic, consistency, and user-impact issues.
 2. Act as a senior technical writer, check if the content is clear, concise, and easy to understand, and review the document against the repository writing guidance in `.ai/shared/writing-style.md`.
 
-Do not treat writing-style review as optional after the technical review. Both are part of the default review scope.
-When the original English content does not meet the bar for technical writing quality, improve it so the content becomes more logical, clear, concise, and easy to understand, while preserving technical meaning and scope.
+Do not treat writing-style review as optional after the technical review. Both are part of the default review scope. When the original English content does not meet the bar for technical writing quality, improve it so the content becomes more logical, clear, concise, and easy to understand, while preserving technical meaning and scope.
 
 Ask:
 
