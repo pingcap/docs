@@ -283,7 +283,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.001 sec)
 ```
 
-MariaDB has special handling for unique indexes that are over the maximum length as shown below. TiDB does not provide this feature.
+MariaDB also has special handling for unique indexes that exceed the maximum key length, as shown below. TiDB does not provide this feature.
 
 ```
 MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
@@ -311,10 +311,10 @@ Create Table: CREATE TABLE `t2` (
 1 row in set (0.001 sec)
 ```
 
-You can emulate the behavior like this:
+To enforce uniqueness on a long text column in TiDB, you can add a generated hash column and create a unique index on that generated hash column as follows:
 
 ```
-tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT);
+tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT NOT NULL);
 Query OK, 0 rows affected (0.102 sec)
 
 tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
