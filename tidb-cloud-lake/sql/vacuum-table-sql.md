@@ -13,9 +13,9 @@ The VACUUM TABLE command helps optimize system performance by freeing up storage
 
 - Snapshots associated with the table, as well as their relevant segments and blocks.
 
-- Orphan files. Orphan files in Databend refer to snapshots, segments, and blocks that are no longer associated with the table. Orphan files might be generated from various operations and errors, such as during data backups and restores, and can take up valuable disk space and degrade the system performance over time.
+- Orphan files. Orphan files in {{{ .lake-short }}} refer to snapshots, segments, and blocks that are no longer associated with the table. Orphan files might be generated from various operations and errors, such as during data backups and restores, and can take up valuable disk space and degrade the system performance over time.
 
-See also: [VACUUM DROP TABLE](vacuum-drop-table-sql.md)
+See also: [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table-sql.md)
 
 ## Syntax and Examples
 
@@ -87,13 +87,13 @@ The VACUUM TABLE command removes data files older than the `data_retention_time_
 SET GLOBAL data_retention_time_in_days = 2;
 ```
 
-`data_retention_time_in_days` defaults to 1 day (24 hours), and the maximum value varies across Databend editions:
+`data_retention_time_in_days` defaults to 1 day (24 hours), and the maximum value varies across {{{ .lake-short }}} editions:
 
 | Edition                                  | Default Retention | Max. Retention   |
 | ---------------------------------------- | ----------------- | ---------------- |
-| Databend Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
-| Databend Cloud (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
-| Databend Cloud (Business)                | 1 day (24 hours)  | 90 days          |
+| {{{ .lake-short }}} Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
+| {{{ .lake }}} (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
+| {{{ .lake }}} (Business)                | 1 day (24 hours)  | 90 days          |
 
 To check the current value of `data_retention_time_in_days`:
 
@@ -103,7 +103,7 @@ SHOW SETTINGS LIKE 'data_retention_time_in_days';
 
 ### VACUUM TABLE vs. OPTIMIZE TABLE
 
-Databend provides two commands for removing historical data files from a table: VACUUM TABLE and [OPTIMIZE TABLE](60-optimize-table.md) (with the PURGE option). Although both commands are capable of permanently deleting data files, they differ in how they handle orphan files: OPTIMIZE TABLE is able to remove orphan snapshots, as well as the corresponding segments and blocks. However, there is a possibility of orphan segments and blocks existing without any associated snapshots. In such a scenario, only VACUUM TABLE can help clean them up.
+{{{ .lake-short }}} provides two commands for removing historical data files from a table: VACUUM TABLE and [OPTIMIZE TABLE](/tidb-cloud-lake/sql/optimize-table.md) (with the PURGE option). Although both commands are capable of permanently deleting data files, they differ in how they handle orphan files: OPTIMIZE TABLE is able to remove orphan snapshots, as well as the corresponding segments and blocks. However, there is a possibility of orphan segments and blocks existing without any associated snapshots. In such a scenario, only VACUUM TABLE can help clean them up.
 
 Both VACUUM TABLE and OPTIMIZE TABLE allow you to specify a period to determine which historical data files to remove. However, OPTIMIZE TABLE requires you to obtain the snapshot ID or timestamp from a query beforehand, whereas VACUUM TABLE allows you to specify the number of hours to retain the data files directly. VACUUM TABLE provides enhanced control over your historical data files both before their removal with the DRY RUN option, which allows you to preview the data files to be removed before applying the command. This provides a safe removal experience and helps you avoid unintended data loss.
 

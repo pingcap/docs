@@ -5,9 +5,9 @@ summary: Understand the pricing model and billing details for TiDB Cloud Lake.
 
 # Pricing & Billing
 
-Your costs on Databend Cloud consist of the following components: warehouses, storage, and cloud service fees. This page contains information about the pricing of each component and how the billing works.
+Your costs on {{{ .lake }}} consist of the following components: warehouses, storage, and cloud service fees. This page contains information about the pricing of each component and how the billing works.
 
-## Databend Cloud Pricing
+## {{{ .lake }}} Pricing
 
 This section provides pricing information on warehouse, storage, and cloud service.
 
@@ -15,7 +15,7 @@ This section provides pricing information on warehouse, storage, and cloud servi
 
 Your warehouses incur costs when they are running (specifically, when in the Running state). The cost depends on the warehouse\'s size and running time. **Billing is calculated on a per-second basis**. For example, if you have a warehouse running for three seconds, you will be charged for that exact duration.
 
-The size of a warehouse refers to the maximum number of concurrent queries it can handle, and prices vary based on the different sizes available and the Databend Cloud edition you use.
+The size of a warehouse refers to the maximum number of concurrent queries it can handle, and prices vary based on the different sizes available and the {{{ .lake }}} edition you use.
 
 | Size    | Hourly Cost (Personal) | Hourly Cost (Business) | Per-Second Cost (Personal) | Per-Second Cost (Business) |
 | ------- | ---------------------- | ---------------------- | -------------------------- | -------------------------- |
@@ -30,11 +30,11 @@ The size of a warehouse refers to the maximum number of concurrent queries it ca
 | 5XLarge | $256.00                | $384.00                | $0.071111111               | $0.106666667               |
 | 6XLarge | $512.00                | $768.00                | $0.142222222               | $0.213333333               |
 
-A suspended warehouse does not consume any resources. By default, Databend Cloud automatically suspends a warehouse after five minutes of inactivity to save resources and costs. You can adjust or disable this automatic suspension feature according to your preferences.
+A suspended warehouse does not consume any resources. By default, {{{ .lake }}} automatically suspends a warehouse after five minutes of inactivity to save resources and costs. You can adjust or disable this automatic suspension feature according to your preferences.
 
 ### Storage Pricing
 
-Your data in Databend Cloud is physically stored in Amazon S3. Storage costs in Databend Cloud are based on Amazon S3's pricing. Currently, both the Personal Edition and Business Edition are priced at $23.00 per month per terabyte (TB).
+Your data in {{{ .lake }}} is physically stored in Amazon S3. Storage costs in {{{ .lake }}} are based on Amazon S3's pricing. Currently, both the Personal Edition and Business Edition are priced at $23.00 per month per terabyte (TB).
 
 | Edition          | Price per TB per Month |
 | ---------------- | ---------------------- |
@@ -43,7 +43,7 @@ Your data in Databend Cloud is physically stored in Amazon S3. Storage costs in 
 
 ### Cloud Service Pricing
 
-The cloud service fee currently includes fees for the API requests. Each time you run a SQL query with Databend Cloud, a REST API request is sent to the `databend-query` through the [Databend HTTP handler](/developer/apis/http). In the Personal Edition, you are billed $1 for every 10,000 API requests, while in the Business Edition, the cost is $2 for every 10,000 API requests.
+The cloud service fee currently includes fees for the API requests. Each time you run a SQL query with {{{ .lake }}}, a REST API request is sent to the `databend-query` through the {{{ .lake-short }}} HTTP handler. In the Personal Edition, you are billed $1 for every 10,000 API requests, while in the Business Edition, the cost is $2 for every 10,000 API requests.
 
 | Edition          | Cost per 10,000 API Requests |
 | ---------------- | ---------------------------- |
@@ -63,7 +63,7 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 ## Example-2
 
-**Usage Scenario:** A user is using an XSmall warehouse (Business) to continuously import data into Databend Cloud. The warehouse runs 24 hours a day with 1TB storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
+**Usage Scenario:** A user is using an XSmall warehouse (Business) to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1TB storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
 
 | Cost | Formula | Amount |
 |------|---------|--------|
@@ -73,10 +73,10 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 | **Daily Total** | | **$46.77** |
 | **Monthly Total** | | **$1,403.10** |
 
-## Databend Cloud Billing
+## {{{ .lake }}} Billing
 
 The billing period is set for every calendar month, starting from the 1st day to the last day of the month. For your first month, the billing period will begin on the day your organization was created.
 
 To check your billing details, go to **Manage** and then click on **Billing**. From there, you can review your bills and link a credit card for payment.
 
-When billing users, Databend Cloud applies vouchers first. If multiple vouchers are available, the system prioritizes deduction from the voucher with the earliest expiration date. Please ensure vouchers are used before their expiration date.
+When billing users, {{{ .lake }}} applies vouchers first. If multiple vouchers are available, the system prioritizes deduction from the voucher with the earliest expiration date. Please ensure vouchers are used before their expiration date.

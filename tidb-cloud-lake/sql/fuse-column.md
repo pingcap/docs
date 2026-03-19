@@ -1,11 +1,11 @@
 ---
 title: FUSE_COLUMN
-summary: Returns the column information of the latest or specified snapshot of a table. For more information about what is block in Databend, see What are Snapshot, Segment, and Block?.
+summary: Returns the column information of the latest or specified snapshot of a table. For more information about what is block in {{{ .lake-short }}}, see What are Snapshot, Segment, and Block?.
 ---
 
 # FUSE_COLUMN
 
-Returns the column information of the latest or specified snapshot of a table. For more information about what is block in Databend, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#databend-data-storage-snapshot-segment-and-block).
+Returns the column information of the latest or specified snapshot of a table. For more information about what is block in {{{ .lake-short }}}, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#-lake-short--data-storage-snapshot-segment-and-block).
 
 See Also:
 
