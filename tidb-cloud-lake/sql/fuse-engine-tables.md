@@ -44,21 +44,21 @@ For more details about the `CREATE TABLE` syntax, see [CREATE TABLE](/tidb-cloud
 
 Below are the main parameters for creating a Fuse Engine table:
 
-#### `ENGINE`
+### `ENGINE`
 
 - **Description:**
   If an engine is not explicitly specified, Databend will automatically default to using the Fuse Engine to create tables, which is equivalent to `ENGINE = FUSE`.
 
 ---
 
-#### `CLUSTER BY`
+### `CLUSTER BY`
 
 - **Description:**
   Specifies the sorting method for data that consists of multiple expressions. For more information, see [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md).
 
 ---
 
-#### `<Options>`
+### `<Options>`
 
 - **Description:**
   The Fuse Engine offers various options (case-insensitive) that allow you to customize the table's properties.

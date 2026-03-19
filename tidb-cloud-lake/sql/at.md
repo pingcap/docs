@@ -51,20 +51,20 @@ This example demonstrates the AT clause, allowing retrieval of previous data ver
 
 1. Create a table named `t` with a single column `a`, and insert two rows with values 1 and 2 into the table.
 
-```sql
-CREATE TABLE t(a INT);
-
-INSERT INTO t VALUES(1);
-INSERT INTO t VALUES(2);
-```
+    ```sql
+    CREATE TABLE t(a INT);
+    
+    INSERT INTO t VALUES(1);
+    INSERT INTO t VALUES(2);
+    ```
 
 2. Create a stream named `s` on the table `t`, and add an additional row with value 3 into the table.
 
-```sql
-CREATE STREAM s ON TABLE t;
-
-INSERT INTO t VALUES(3);
-```
+    ```sql
+    CREATE STREAM s ON TABLE t;
+    
+    INSERT INTO t VALUES(3);
+    ```
 
 3. Run time travel queries to retrieve previous data versions.
 

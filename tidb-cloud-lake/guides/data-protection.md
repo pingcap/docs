@@ -7,7 +7,7 @@ summary: TiDB Cloud Lake's Continuous Data Protection (CDP) offers easy-to-use f
 
 Databend Cloud's Continuous Data Protection (CDP) offers easy-to-use features to keep your data safe from mistakes, harmful actions, and software problems. It makes sure your data can always be gotten back, even if it's changed, lost, or damaged by accident or on purpose.
 
-### CDP Features in Databend Cloud
+## CDP Features in Databend Cloud
 
 - [Network Policies](/tidb-cloud-lake/guides/network-policy.md)
     - Set who can access Databend Cloud based on their internet address. Helps keep your data safe.

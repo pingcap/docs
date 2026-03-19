@@ -193,56 +193,56 @@ Databend enables you to insert data into a table from staged files with the INSE
 
 1. Create a table called `sample`:
 
-```sql
-CREATE TABLE sample
-(
-    id      INT,
-    city    VARCHAR,
-    score   INT,
-    country VARCHAR DEFAULT 'China'
-);
-```
+    ```sql
+    CREATE TABLE sample
+    (
+        id      INT,
+        city    VARCHAR,
+        score   INT,
+        country VARCHAR DEFAULT 'China'
+    );
+    ```
 
 2. Set up an internal stage with sample data
 
-We'll establish an internal stage named `mystage` and then populate it with sample data.
+    We'll establish an internal stage named `mystage` and then populate it with sample data.
 
-```sql
-CREATE STAGE mystage;
-
-COPY INTO @mystage
-FROM
-(
-    SELECT *
+    ```sql
+    CREATE STAGE mystage;
+    
+    COPY INTO @mystage
     FROM
     (
-        VALUES
-        (1, 'Chengdu', 80),
-        (3, 'Chongqing', 90),
-        (6, 'Hangzhou', 92),
-        (9, 'Hong Kong', 88)
+        SELECT *
+        FROM
+        (
+            VALUES
+            (1, 'Chengdu', 80),
+            (3, 'Chongqing', 90),
+            (6, 'Hangzhou', 92),
+            (9, 'Hong Kong', 88)
+        )
     )
-)
-FILE_FORMAT = (TYPE = PARQUET);
-```
+    FILE_FORMAT = (TYPE = PARQUET);
+    ```
 
 3. Insert data from the staged Parquet file with `INSERT INTO`
 
-> **Tip:**
->
-> You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. When `purge` is set to `true`, the original file will only be deleted if the data update is successful.
+    > **Tip:**
+    >
+    > You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. When `purge` is set to `true`, the original file will only be deleted if the data update is successful.
 
-```sql
-INSERT INTO sample
-    (id, city, score)
-ON
-    (Id)
-SELECT
-    $1, $2, $3
-FROM
-    @mystage
-    (FILE_FORMAT => 'parquet');
-```
+    ```sql
+    INSERT INTO sample
+        (id, city, score)
+    ON
+        (Id)
+    SELECT
+        $1, $2, $3
+    FROM
+        @mystage
+        (FILE_FORMAT => 'parquet');
+    ```
 
 4. Verify the data insert
 

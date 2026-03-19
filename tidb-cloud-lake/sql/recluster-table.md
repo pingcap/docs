@@ -11,7 +11,7 @@ summary: Re-clusters a table. For why and when to re-cluster a table, see Re-clu
 
 Re-clusters a table. For why and when to re-cluster a table, see [Re-clustering Table](/tidb-cloud-lake/sql/cluster-key.md#cluster-key-management).
 
-### Syntax
+## Syntax
 
 ```sql
 ALTER TABLE [ IF EXISTS ] <table_name> RECLUSTER [ FINAL ] [ WHERE condition ] [ LIMIT <segment_count> ]

@@ -19,22 +19,22 @@ In Databend Cloud, you can create multiple dashboards as needed. A dashboard can
 
 2. In the result area, click on the **Chart** tab.
 
-![Alt text](/media/tidb-cloud-lake/chart-btn.png)
+    ![Alt text](/media/tidb-cloud-lake/chart-btn.png)
 
 3. On the **Chart** tab, choose a chart type from the dropdown menu on the right. Next, specify the data and customize the chart's appearance using the options found on the **Data** and **Style** tabs below the dropdown list.
 
-Please note that these aggregation functions assist in summarizing and revealing valuable patterns from the raw data in query results. The available functions for aggregation vary based on the distinct data types and the chart types you select.
+    Please note that these aggregation functions assist in summarizing and revealing valuable patterns from the raw data in query results. The available functions for aggregation vary based on the distinct data types and the chart types you select.
 
-| Function             | Description                                                    |
-|----------------------|----------------------------------------------------------------|
-| None                 | No alteration is applied to the data.                          |
-| Count                | Calculates the number of records for the field in the query results (except the records containing NULL and '' values). |
-| Min                  | Computes the minimum value within the query results.           |
-| Max                  | Computes the maximum value within the query results.           |
-| Median               | Calculates the median value within the query results.          |
-| Sum                  | Calculates the sum of numerical values within the query results. |
-| Average              | Computes the average value of numerical data within the query results. |
-| Mode                 | Identifies the most frequently occurring value within the query results. |
+    | Function             | Description                                                    |
+    |----------------------|----------------------------------------------------------------|
+    | None                 | No alteration is applied to the data.                          |
+    | Count                | Calculates the number of records for the field in the query results (except the records containing NULL and '' values). |
+    | Min                  | Computes the minimum value within the query results.           |
+    | Max                  | Computes the maximum value within the query results.           |
+    | Median               | Calculates the median value within the query results.          |
+    | Sum                  | Calculates the sum of numerical values within the query results. |
+    | Average              | Computes the average value of numerical data within the query results. |
+    | Mode                 | Identifies the most frequently occurring value within the query results. |
 
 4. Return to the Databend Cloud homepage and select **Dashboards** in the left navigation menu, then click **New Dashboard**.
 

@@ -13,7 +13,7 @@ The VACUUM DROP TABLE command helps save storage space by permanently removing d
 
 See also: [VACUUM TABLE](vacuum-table-sql.md)
 
-### Syntax
+## Syntax
 
 ```sql
 VACUUM DROP TABLE

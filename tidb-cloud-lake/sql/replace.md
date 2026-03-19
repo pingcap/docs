@@ -105,61 +105,61 @@ This example demonstrates how to replace existing data in a table with data from
 
 1. Create a table called `sample`
 
-```sql
-CREATE TABLE sample
-(
-    id      INT,
-    city    VARCHAR,
-    score   INT,
-    country VARCHAR DEFAULT 'China'
-);
-
-INSERT INTO sample
-    (id, city, score)
-VALUES
-    (1, 'Chengdu', 66);
-```
+    ```sql
+    CREATE TABLE sample
+    (
+        id      INT,
+        city    VARCHAR,
+        score   INT,
+        country VARCHAR DEFAULT 'China'
+    );
+    
+    INSERT INTO sample
+        (id, city, score)
+    VALUES
+        (1, 'Chengdu', 66);
+    ```
 
 2. Set up an internal stage with sample data
 
-Firstly, we create a stage named `mystage`. Then, we load sample data into this stage.
+    Firstly, we create a stage named `mystage`. Then, we load sample data into this stage.
 
-```sql
-CREATE STAGE mystage;
-
-COPY INTO @mystage
-FROM
-(
-    SELECT *
+    ```sql
+    CREATE STAGE mystage;
+    
+    COPY INTO @mystage
     FROM
     (
-        VALUES
-        (1, 'Chengdu', 80),
-        (3, 'Chongqing', 90),
-        (6, 'Hangzhou', 92),
-        (9, 'Hong Kong', 88)
+        SELECT *
+        FROM
+        (
+            VALUES
+            (1, 'Chengdu', 80),
+            (3, 'Chongqing', 90),
+            (6, 'Hangzhou', 92),
+            (9, 'Hong Kong', 88)
+        )
     )
-)
-FILE_FORMAT = (TYPE = PARQUET);
-```
+    FILE_FORMAT = (TYPE = PARQUET);
+    ```
 
 3. Replace existing data using the staged Parquet file with `REPLACE INTO`
 
-> **Tip:**
->
-> You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command.
+    > **Tip:**
+    >
+    > You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command.
 
-```sql
-REPLACE INTO sample
-    (id, city, score)
-ON
-    (Id)
-SELECT
-    $1, $2, $3
-FROM
-    @mystage
-    (FILE_FORMAT => 'parquet');
-```
+    ```sql
+    REPLACE INTO sample
+        (id, city, score)
+    ON
+        (Id)
+    SELECT
+        $1, $2, $3
+    FROM
+        @mystage
+        (FILE_FORMAT => 'parquet');
+    ```
 
 4. Verify the data replacement
 

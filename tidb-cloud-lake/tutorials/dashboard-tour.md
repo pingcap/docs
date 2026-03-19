@@ -16,7 +16,7 @@ In this tutorial, we'll load, analyze, and create a dashboard for a dataset name
 | cases    | The cumulative number of confirmed Covid-19 cases.|
 | deaths   | The cumulative number of deaths due to Covid-19.  |
 
-### Step 1: Preparing Data
+## Step 1: Preparing Data
 
 The dataset "Covid-19 Data from New York Times" is a built-in sample dataset that you can load with just a few clicks. The target table is created automatically, so you don't need to create it in advance.
 
@@ -25,11 +25,11 @@ The dataset "Covid-19 Data from New York Times" is a built-in sample dataset tha
 1. In Databend Cloud, click the **Load Data** button on the **Overview** page.
 2. On the page that opens, choose the **A new table** radio button, and then select **Covid-19 Data from New York Times.CSV** from the **Load sample data** dropdown menu:
 
-![Alt text](/media/tidb-cloud-lake/dashboard-1.png)
+    ![Alt text](/media/tidb-cloud-lake/dashboard-1.png)
 
 3. On the next page, select a database and set a name for the target table to be created.
 
-![Alt text](/media/tidb-cloud-lake/dashboard-2.png)
+    ![Alt text](/media/tidb-cloud-lake/dashboard-2.png)
 
 4. Click **Confirm**. Databend Cloud begins creating the target table and loading the dataset. This process may take a few seconds.
 
@@ -39,13 +39,13 @@ Before the analytics work, it is recommended to check for NULL and duplicate val
 
 1. Create a worksheet and check the existence of NULLs in the table with the following SQL statement:
 
-```sql
-SELECT COUNT(*)
-FROM covid_19_us_2022_3812
-WHERE date IS NULL OR country IS NULL OR state IS NULL OR fips IS NULL OR cases IS NULL OR deaths IS NULL;
-```
+    ```sql
+    SELECT COUNT(*)
+    FROM covid_19_us_2022_3812
+    WHERE date IS NULL OR country IS NULL OR state IS NULL OR fips IS NULL OR cases IS NULL OR deaths IS NULL;
+    ```
 
-This SQL statement returns `41571`, indicating the number of rows that contain at least one NULL value.
+    This SQL statement returns `41571`, indicating the number of rows that contain at least one NULL value.
 
 2. Remove the rows that contain at least one NULL value from the table:
 
@@ -75,12 +75,12 @@ In this step, we'll run four queries to extract insights from the data and visua
 
 1. Run the following SQL statement in a worksheet:
 
-```sql
--- Calculate the total number of deaths in the US on December 31, 2022
-SELECT SUM(deaths)
-FROM covid_19_us_2022_3812
-WHERE date = '2022-12-31';
-```
+    ```sql
+    -- Calculate the total number of deaths in the US on December 31, 2022
+    SELECT SUM(deaths)
+    FROM covid_19_us_2022_3812
+    WHERE date = '2022-12-31';
+    ```
 
 2. Create a scorecard within the worksheet using the query result:
 
@@ -90,13 +90,13 @@ WHERE date = '2022-12-31';
 
 1. Run the following SQL statement in a worksheet:
 
-```sql
--- Calculate the total number of deaths by state on December 31, 2022
-SELECT state, SUM(deaths)
-FROM covid_19_us_2022_3812
-WHERE date = '2022-12-31'
-GROUP BY state;
-```
+    ```sql
+    -- Calculate the total number of deaths by state on December 31, 2022
+    SELECT state, SUM(deaths)
+    FROM covid_19_us_2022_3812
+    WHERE date = '2022-12-31'
+    GROUP BY state;
+    ```
 
 2. Create a pie chart within the worksheet using the query result:
 
@@ -106,11 +106,11 @@ GROUP BY state;
 
 1. Run the following SQL statement in a worksheet:
 
-```sql
--- Retrieve all data for the state of Virgin Islands on December 31, 2022
-SELECT * FROM covid_19_us_2022_3812
-WHERE date = '2022-12-31' AND state = 'Virgin Islands';
-```
+    ```sql
+    -- Retrieve all data for the state of Virgin Islands on December 31, 2022
+    SELECT * FROM covid_19_us_2022_3812
+    WHERE date = '2022-12-31' AND state = 'Virgin Islands';
+    ```
 
 2. Create a bar chart within the worksheet using the query result:
 
@@ -120,24 +120,24 @@ WHERE date = '2022-12-31' AND state = 'Virgin Islands';
 
 1. Run the following SQL statement in a worksheet:
 
-```sql
--- Retrieve data for St. John at the end of each month
-SELECT * FROM covid_19_us_2022_3812
-WHERE
-    (date = '2022-01-31'
-    OR date = '2022-02-28'
-    OR date = '2022-03-31'
-    OR date = '2022-04-30'
-    OR date = '2022-05-31'
-    OR date = '2022-06-30'
-    OR date = '2022-07-31'
-    OR date = '2022-08-31'
-    OR date = '2022-09-30'
-    OR date = '2022-10-31'
-    OR date = '2022-11-30'
-    OR date = '2022-12-31')
-    AND country = 'St. John' ORDER BY date;
-```
+    ```sql
+    -- Retrieve data for St. John at the end of each month
+    SELECT * FROM covid_19_us_2022_3812
+    WHERE
+        (date = '2022-01-31'
+        OR date = '2022-02-28'
+        OR date = '2022-03-31'
+        OR date = '2022-04-30'
+        OR date = '2022-05-31'
+        OR date = '2022-06-30'
+        OR date = '2022-07-31'
+        OR date = '2022-08-31'
+        OR date = '2022-09-30'
+        OR date = '2022-10-31'
+        OR date = '2022-11-30'
+        OR date = '2022-12-31')
+        AND country = 'St. John' ORDER BY date;
+    ```
 
 2. Create a line chart within the worksheet using the query result:
 

@@ -53,18 +53,18 @@ Ensure the MySQL instance is accessible from Databend Cloud. Check your firewall
 
 2. Select **MySQL - Credentials** as the service type, and fill in the connection details:
 
-| Field           | Required | Description                                                                 |
-|-----------------|----------|-----------------------------------------------------------------------------|
-| **Name**        | Yes      | A descriptive name for this data source                                     |
-| **Hostname**    | Yes      | MySQL server hostname or IP address                                         |
-| **Port Number** | Yes      | MySQL server port (default: 3306)                                           |
-| **DB Username** | Yes      | MySQL user with replication permissions                                     |
-| **DB Password** | Yes      | Password for the MySQL user                                                 |
-| **Database Name** | Yes    | The source database name                                                    |
-| **DB Charset**  | No       | Character set (default: utf8mb4)                                            |
-| **Server ID**   | No       | Unique binlog replication identifier. Auto-generated if not provided        |
+    | Field           | Required | Description                                                                 |
+    |-----------------|----------|-----------------------------------------------------------------------------|
+    | **Name**        | Yes      | A descriptive name for this data source                                     |
+    | **Hostname**    | Yes      | MySQL server hostname or IP address                                         |
+    | **Port Number** | Yes      | MySQL server port (default: 3306)                                           |
+    | **DB Username** | Yes      | MySQL user with replication permissions                                     |
+    | **DB Password** | Yes      | Password for the MySQL user                                                 |
+    | **Database Name** | Yes    | The source database name                                                    |
+    | **DB Charset**  | No       | Character set (default: utf8mb4)                                            |
+    | **Server ID**   | No       | Unique binlog replication identifier. Auto-generated if not provided        |
 
-![Create MySQL Data Source](/media/tidb-cloud-lake/databendcloud-dataintegration-create-mysql-source.png)
+    ![Create MySQL Data Source](/media/tidb-cloud-lake/databendcloud-dataintegration-create-mysql-source.png)
 
 3. Click **Test Connectivity** to verify the connection. If the test succeeds, click **OK** to save the data source.
 
@@ -74,7 +74,7 @@ Ensure the MySQL instance is accessible from Databend Cloud. Check your firewall
 
 1. Navigate to **Data** > **Data Integration** and click **Create Task**.
 
-![Data Integration Page](/media/tidb-cloud-lake/dataintegration-page-with-create-button.png)
+    ![Data Integration Page](/media/tidb-cloud-lake/dataintegration-page-with-create-button.png)
 
 2. Configure the basic settings:
 

@@ -19,7 +19,7 @@ Please note that data is not shared across organizations, and organizations cann
 
 When you provide an organization name during the signup process, you create an organization in Databend Cloud with your account as an Admin account. You will also need to select a pricing plan, a cloud provider, and a region for the new organization. For more information, see [Getting Started](/tidb-cloud-lake/lake-quick-start.md).
 
-![](/media/tidb-cloud-lake/sign-up.jpg)
+![Sign up for Databend Cloud](/media/tidb-cloud-lake/sign-up.jpg)
 
 > **Tip:**
 >

@@ -109,67 +109,67 @@ Once the TPC-H tables are loaded, you can query the data in Databend:
 
 1. Launch Databend in Docker:
 
-```bash
-docker network create iceberg_net
-```
+    ```bash
+    docker network create iceberg_net
+    ```
 
-```bash
-docker run -d \
-  --name databend \
-  --network iceberg_net \
-  -p 3307:3307 \
-  -p 8000:8000 \
-  -p 8124:8124 \
-  -p 8900:8900 \
-  datafuselabs/databend
-```
+    ```bash
+    docker run -d \
+      --name databend \
+      --network iceberg_net \
+      -p 3307:3307 \
+      -p 8000:8000 \
+      -p 8124:8124 \
+      -p 8900:8900 \
+      datafuselabs/databend
+    ```
 
 2. Connect to Databend using BendSQL first, and then create an Iceberg catalog:
 
-```bash
-bendsql
-```
+    ```bash
+    bendsql
+    ```
 
-```bash
-Welcome to BendSQL 0.24.1-f1f7de0(2024-12-04T12:31:18.526234000Z).
-Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.725-8d073f6b7a(rust-1.88.0-nightly-2025-04-21T11:49:03.577976082Z)
-Loaded 1436 auto complete keywords from server.
-Started web server at 127.0.0.1:8080
-```
+    ```bash
+    Welcome to BendSQL 0.24.1-f1f7de0(2024-12-04T12:31:18.526234000Z).
+    Connecting to localhost:8000 as user root.
+    Connected to Databend Query v1.2.725-8d073f6b7a(rust-1.88.0-nightly-2025-04-21T11:49:03.577976082Z)
+    Loaded 1436 auto complete keywords from server.
+    Started web server at 127.0.0.1:8080
+    ```
 
-```sql
-CREATE CATALOG iceberg TYPE = ICEBERG CONNECTION = (
-    TYPE = 'rest'
-    ADDRESS = 'http://host.docker.internal:8181'
-    warehouse = 's3://warehouse/wh/'
-    "s3.endpoint" = 'http://host.docker.internal:9000'
-    "s3.access-key-id" = 'admin'
-    "s3.secret-access-key" = 'password'
-    "s3.region" = 'us-east-1'
-);
-```
+    ```sql
+    CREATE CATALOG iceberg TYPE = ICEBERG CONNECTION = (
+        TYPE = 'rest'
+        ADDRESS = 'http://host.docker.internal:8181'
+        warehouse = 's3://warehouse/wh/'
+        "s3.endpoint" = 'http://host.docker.internal:9000'
+        "s3.access-key-id" = 'admin'
+        "s3.secret-access-key" = 'password'
+        "s3.region" = 'us-east-1'
+    );
+    ```
 
 3. Use the newly created catalog:
 
-```sql
-USE CATALOG iceberg;
-```
+    ```sql
+    USE CATALOG iceberg;
+    ```
 
 4. Show available databases:
 
-```sql
-SHOW DATABASES;
-```
+    ```sql
+    SHOW DATABASES;
+    ```
 
-```sql
-╭──────────────────────╮
-│ databases_in_iceberg │
-│        String        │
-├──────────────────────┤
-│ tpch                 │
-╰──────────────────────╯
-```
+    ```sql
+    ╭──────────────────────╮
+    │ databases_in_iceberg │
+    │        String        │
+    ├──────────────────────┤
+    │ tpch                 │
+    ╰──────────────────────╯
+    ```
 
 5. Run a sample query to aggregate TPC-H data:
 

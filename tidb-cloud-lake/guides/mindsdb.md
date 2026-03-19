@@ -38,22 +38,22 @@ COPY INTO pollution_measurement FROM 'https://datasets.databend.org/AirPolutionS
 
 1. Copy and paste the following SQL statements to the MindsDB Cloud Editor, and click **Run**:
 
-```sql
-CREATE DATABASE databend_datasource
-WITH engine='databend',
-parameters={
-    "protocol": "https",
-    "user": "<YOUR-USERNAME>",
-    "port": 8000,
-    "password": "<YOUR-PASSWORD>",
-    "host": "<YOUR-HOST>",
-    "database": "default"
-};
-```
+    ```sql
+    CREATE DATABASE databend_datasource
+    WITH engine='databend',
+    parameters={
+        "protocol": "https",
+        "user": "<YOUR-USERNAME>",
+        "port": 8000,
+        "password": "<YOUR-PASSWORD>",
+        "host": "<YOUR-HOST>",
+        "database": "default"
+    };
+    ```
 
-> **Tip:**
->
-> The SQL statements above connect the database `default` in Databend to your MindsDB Cloud account. For explanations about the parameters, refer to <https://docs.mindsdb.com/data-integrations/all-data-integrations#databend>
+    > **Tip:**
+    >
+    > The SQL statements above connect the database `default` in Databend to your MindsDB Cloud account. For explanations about the parameters, refer to <https://docs.mindsdb.com/data-integrations/all-data-integrations#databend>
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
@@ -134,22 +134,22 @@ COPY INTO pollution_measurement FROM 'https://repo.databend.com/AirPolutionSeoul
 
 1. Copy and paste the following SQL statements to the MindsDB Cloud Editor, and click **Run**:
 
-```sql
-CREATE DATABASE databend_datasource
-WITH engine='databend',
-parameters={
-    "protocol": "https",
-    "user": "cloudapp",
-    "port": 443,
-    "password": "<YOUR-PASSWORD>",
-    "host": "<YOUR-HOST>",
-    "database": "default"
-};
-```
+    ```sql
+    CREATE DATABASE databend_datasource
+    WITH engine='databend',
+    parameters={
+        "protocol": "https",
+        "user": "cloudapp",
+        "port": 443,
+        "password": "<YOUR-PASSWORD>",
+        "host": "<YOUR-HOST>",
+        "database": "default"
+    };
+    ```
 
-> **Tip:**
->
-> The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to <https://docs.mindsdb.com/data-integrations/all-data-integrations#databend>
+    > **Tip:**
+    >
+    > The SQL statements above connect the database `default` in Databend Cloud to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting). For explanations about the parameters, refer to <https://docs.mindsdb.com/data-integrations/all-data-integrations#databend>
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 

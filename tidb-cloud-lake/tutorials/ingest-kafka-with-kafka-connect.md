@@ -7,7 +7,7 @@ summary: In this tutorial, we'll establish a connection between Kafka in Conflue
 
 In this tutorial, we'll establish a connection between Kafka in Confluent Cloud and Databend Cloud using the Kafka Connect sink connector plugin, [databend-kafka-connect](https://github.com/databendcloud/databend-kafka-connect). Then, we'll demonstrate how to produce messages and load them into Databend Cloud.
 
-### Step 1: Setting up Kafka Environment
+## Step 1: Setting up Kafka Environment
 
 Before you begin, ensure that your Kafka environment is properly set up in Confluent Cloud.
 
@@ -17,9 +17,9 @@ Before you begin, ensure that your Kafka environment is properly set up in Confl
 
 3. Follow the [Install Confluent CLI](https://docs.confluent.io/confluent-cli/current/install.html) guide to install the Confluent CLI on your local machine. After installation, log in to your Confluent Cloud account to connect to Confluent Cloud:
 
-```shell
-confluent login --save
-```
+    ```shell
+    confluent login --save
+    ```
 
 4. Create an API key using the Confluent CLI and set it as the active API key.
 
@@ -68,7 +68,7 @@ In this step, you will create a Kafka topic in Confluent Cloud.
 
 3. Select **Create a schema for message values**, then click **Create Schema**.
 
-![alt text](/media/tidb-cloud-lake/kafka-2.png)
+    ![alt text](/media/tidb-cloud-lake/kafka-2.png)
 
 4. On the **Add new schema** page, select the **Avro** tab, then copy and paste the following schema to the editor:
 
@@ -105,37 +105,37 @@ In this step, you will set up a connector that connects to Databend Cloud.
 
 1. In Confluent Cloud, from the navigation menu, click **Connectors** > **Add Connector**. Search for then select the plugin you uploaded.
 
-![alt text](/media/tidb-cloud-lake/kafka-3.png)
+    ![alt text](/media/tidb-cloud-lake/kafka-3.png)
 
 2. In the **Kafka credentials** step, select **Use an existing API key**, then enter the API key & secret you created with the Confluent CLI.
 
-![alt text](/media/tidb-cloud-lake/kafka-4.png)
+    ![alt text](/media/tidb-cloud-lake/kafka-4.png)
 
 3. In the **Configuration** step, select the **JSON** tab, then copy and paste the following configuration to the editor, replacing the placeholders with your actual values:
 
-```json
-{
-  "auto.create": "true",
-  "auto.evolve": "true",
-  "batch.size": "1",
-  "confluent.custom.schema.registry.auto": "true",
-  "connection.attempts": "3",
-  "connection.backoff.ms": "10000",
-  "connection.database": "<your-value>",
-  "connection.password": "<your-value>",
-  "connection.url": "jdbc:databend://<your-value>",
-  "connection.user": "cloudapp",
-  "errors.tolerance": "none",
-  "insert.mode": "upsert",
-  "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-  "max.retries": "10",
-  "pk.fields": "id",
-  "pk.mode": "record_value",
-  "table.name.format": "<your-value>.${topic}",
-  "topics": "databend_topic",
-  "value.converter": "io.confluent.connect.avro.AvroConverter"
-}
-```
+    ```json
+    {
+      "auto.create": "true",
+      "auto.evolve": "true",
+      "batch.size": "1",
+      "confluent.custom.schema.registry.auto": "true",
+      "connection.attempts": "3",
+      "connection.backoff.ms": "10000",
+      "connection.database": "<your-value>",
+      "connection.password": "<your-value>",
+      "connection.url": "jdbc:databend://<your-value>",
+      "connection.user": "cloudapp",
+      "errors.tolerance": "none",
+      "insert.mode": "upsert",
+      "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+      "max.retries": "10",
+      "pk.fields": "id",
+      "pk.mode": "record_value",
+      "table.name.format": "<your-value>.${topic}",
+      "topics": "databend_topic",
+      "value.converter": "io.confluent.connect.avro.AvroConverter"
+    }
+    ```
 
 4. In the **Networking** step, enter your Databend Cloud warehouse endpoint, such as `xxxxxxxxx--xxx.gw.aws-us-east-2.default.databend.com`.
 
@@ -149,42 +149,42 @@ In this step, you will produce messages using the Confluent CLI and verify that 
 
 1. On your local machine, save the schema used to create the topic as a JSON file, such as `schema.json`.
 
-```json
-{
-    "doc": "Sample schema to help you get started.",
-    "fields": [
-        {
-            "doc": "The int type is a 32-bit signed integer.",
-            "name": "id",
-            "type": "int"
-        },
-        {
-            "doc": "The string is a unicode character sequence.",
-            "name": "name",
-            "type": "string"
-        },
-        {
-            "doc": "The string is a unicode character sequence.",
-            "name": "age",
-            "type": "int"
-        }
-    ],
-    "name": "sampleRecord",
-    "type": "record"
-}
-```
+    ```json
+    {
+        "doc": "Sample schema to help you get started.",
+        "fields": [
+            {
+                "doc": "The int type is a 32-bit signed integer.",
+                "name": "id",
+                "type": "int"
+            },
+            {
+                "doc": "The string is a unicode character sequence.",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "doc": "The string is a unicode character sequence.",
+                "name": "age",
+                "type": "int"
+            }
+        ],
+        "name": "sampleRecord",
+        "type": "record"
+    }
+    ```
 
 2. In the Confluent CLI, start the Kafka producer with the `confluent kafka topic produce <topic_name>` command to send messages to your Kafka topic.
 
-```shell
-confluent kafka topic produce databend_topic --value-format avro --schema schema.json
-Successfully registered schema with ID "100001".
-Starting Kafka Producer. Use Ctrl-C or Ctrl-D to exit.
-
-{"id":1, "name":"Alice", "age":30}
-{"id":2, "name":"Bob", "age":25}
-{"id":3, "name":"Charlie", "age":35}
-```
+    ```shell
+    confluent kafka topic produce databend_topic --value-format avro --schema schema.json
+    Successfully registered schema with ID "100001".
+    Starting Kafka Producer. Use Ctrl-C or Ctrl-D to exit.
+    
+    {"id":1, "name":"Alice", "age":30}
+    {"id":2, "name":"Bob", "age":25}
+    {"id":3, "name":"Charlie", "age":35}
+    ```
 
 3. In Databend Cloud, verify that the data has been successfully loaded:
 

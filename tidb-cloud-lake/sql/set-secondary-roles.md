@@ -26,55 +26,55 @@ This example shows how secondary roles work and how to active/deactivate them.
 
 1. Creating roles as user root.
 
-First, let's create two roles, `admin` and `analyst`:
+    First, let's create two roles, `admin` and `analyst`:
 
-```sql
-CREATE ROLE admin;
-
-CREATE ROLE analyst;
-```
+    ```sql
+    CREATE ROLE admin;
+    
+    CREATE ROLE analyst;
+    ```
 
 2. Granting privileges.
 
-Next, let's grant some privileges to each role. For example, we'll grant the `admin` role the ability to create databases, and the `analyst` role the ability to select from tables:
+    Next, let's grant some privileges to each role. For example, we'll grant the `admin` role the ability to create databases, and the `analyst` role the ability to select from tables:
 
-```sql
-GRANT CREATE DATABASE ON *.* TO ROLE admin;
-
-GRANT SELECT ON *.* TO ROLE analyst;
-```
+    ```sql
+    GRANT CREATE DATABASE ON *.* TO ROLE admin;
+    
+    GRANT SELECT ON *.* TO ROLE analyst;
+    ```
 
 3. Creating a user.
 
-Now, let's create a user:
+    Now, let's create a user:
 
-```sql
-CREATE USER 'user1' IDENTIFIED BY 'password';
-```
+    ```sql
+    CREATE USER 'user1' IDENTIFIED BY 'password';
+    ```
 
 4. Assigning roles.
 
-Assign both roles to the user:
+    Assign both roles to the user:
 
-```sql
-GRANT ROLE admin TO 'user1';
-
-GRANT ROLE analyst TO 'user1';
-```
+    ```sql
+    GRANT ROLE admin TO 'user1';
+    
+    GRANT ROLE analyst TO 'user1';
+    ```
 
 5. Setting active role.
 
-Now, let's log in to Databend as `user1`, the set the active role to `analyst`.
+    Now, let's log in to Databend as `user1`, the set the active role to `analyst`.
 
-```sql
-SET ROLE analyst;
-```
+    ```sql
+    SET ROLE analyst;
+    ```
 
-All secondary roles are activated by default, so we can create a new database:
+    All secondary roles are activated by default, so we can create a new database:
 
-```sql
-CREATE DATABASE my_db;
-```
+    ```sql
+    CREATE DATABASE my_db;
+    ```
 
 6. Deactivate secondary roles.
 

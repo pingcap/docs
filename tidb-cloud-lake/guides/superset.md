@@ -19,21 +19,21 @@ These steps involve creating a customized Superset Docker image with Databend in
 
 1. Starts with the official Superset Docker image as the foundational base. Edit the Dockerfile, permissions are elevated to install essential packages.
 
-```shell title='Dockerfile'
-FROM apache/superset
-# Switching to root to install the required packages
-USER root
-RUN pip install databend-py
-RUN pip install databend-sqlalchemy
-# Switching back to using the `superset` user
-USER superset
-```
+    ```shell title='Dockerfile'
+    FROM apache/superset
+    # Switching to root to install the required packages
+    USER root
+    RUN pip install databend-py
+    RUN pip install databend-sqlalchemy
+    # Switching back to using the `superset` user
+    USER superset
+    ```
 
 2. Build a Docker image with the tag "superset-databend:v0.0.1" using the current directory as the build context.
 
-```shell
-docker build -t superset-databend:v0.0.1 .
-```
+    ```shell
+    docker build -t superset-databend:v0.0.1 .
+    ```
 
 3. Run a Docker container using the "superset-databend:v0.0.1" image.
 
@@ -45,20 +45,20 @@ docker run -d -p 8080:8088 -e "SUPERSET_SECRET_KEY=<your_secret_key>" --name sup
 
 1. Create an administrator user.
 
-```shell
-docker exec -it superset superset fab create-admin \
-           --username admin \
-           --firstname Superset \
-           --lastname Admin \
-           --email admin@superset.com \
-           --password admin
-```
+    ```shell
+    docker exec -it superset superset fab create-admin \
+               --username admin \
+               --firstname Superset \
+               --lastname Admin \
+               --email admin@superset.com \
+               --password admin
+    ```
 
 2. Apply any necessary database migrations to ensure that the Superset database schema is up to date.
 
-```shell
-docker exec -it superset superset db upgrade
-```
+    ```shell
+    docker exec -it superset superset db upgrade
+    ```
 
 3. Initializes Superset.
 
@@ -72,14 +72,14 @@ docker exec -it superset superset init
 
 2. Select **Settings** > **Data** > **Connect Database** to open the connection wizard.
 
-![Alt text](/media/tidb-cloud-lake/superset-connect-db.png)
+    ![Alt text](/media/tidb-cloud-lake/superset-connect-db.png)
 
 3. Select `Other` from the list of supported databases.
 
-![Alt text](/media/tidb-cloud-lake/superset-select-other.png)
+    ![Alt text](/media/tidb-cloud-lake/superset-select-other.png)
 
 4. On the **BASIC** tab, set a display name, for example, `Databend`, and then enter the URI to connect to Databend Cloud. The URI follows the format: `databend://<host>`, where`<host>` corresponds to the host field in your warehouse's connection information. For information on how to obtain the connection details, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
-![Alt text](/media/tidb-cloud-lake/superset-uri.png)
+    ![Alt text](/media/tidb-cloud-lake/superset-uri.png)
 
 5. Click **TEST CONNECTION**, which should result in a popup message saying, "Connection looks good!".

@@ -42,16 +42,16 @@ Follow this tutorial to upload the sample file to the user stage and load data f
 
 1. Upload the sample file using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md):
 
-```sql
-root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @~
-
-┌───────────────────────────────────────────────┐
-│                 file                │  status │
-│                String               │  String │
-├─────────────────────────────────────┼─────────┤
-│ /Users/eric/Documents/books.parquet │ SUCCESS │
-└───────────────────────────────────────────────┘
-```
+    ```sql
+    root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @~
+    
+    ┌───────────────────────────────────────────────┐
+    │                 file                │  status │
+    │                String               │  String │
+    ├─────────────────────────────────────┼─────────┤
+    │ /Users/eric/Documents/books.parquet │ SUCCESS │
+    └───────────────────────────────────────────────┘
+    ```
 
 2. Verify the staged file:
 
@@ -67,9 +67,9 @@ books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-27 16:03:51.000 +0
 
 1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
-```sql
-COPY INTO books FROM @~ files=('books.parquet') FILE_FORMAT = (TYPE = PARQUET);
-```
+    ```sql
+    COPY INTO books FROM @~ files=('books.parquet') FILE_FORMAT = (TYPE = PARQUET);
+    ```
 
 2. Verify the loaded data:
 
@@ -91,9 +91,9 @@ Follow this tutorial to upload the sample file to an internal stage and load dat
 
 1. Create an internal stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
 
-```sql
-CREATE STAGE my_internal_stage;
-```
+    ```sql
+    CREATE STAGE my_internal_stage;
+    ```
 
 2. Verify the created stage:
 
@@ -109,18 +109,18 @@ my_internal_stage|Internal  |              0|'root'@'%'|       |
 
 1. Upload the sample file using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md):
 
-```sql
-root@localhost:8000/default> CREATE STAGE my_internal_stage;
-
-root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_internal_stage
-
-┌───────────────────────────────────────────────┐
-│                 file                │  status │
-│                String               │  String │
-├─────────────────────────────────────┼─────────┤
-│ /Users/eric/Documents/books.parquet │ SUCCESS │
-└───────────────────────────────────────────────┘
-```
+    ```sql
+    root@localhost:8000/default> CREATE STAGE my_internal_stage;
+    
+    root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_internal_stage
+    
+    ┌───────────────────────────────────────────────┐
+    │                 file                │  status │
+    │                String               │  String │
+    ├─────────────────────────────────────┼─────────┤
+    │ /Users/eric/Documents/books.parquet │ SUCCESS │
+    └───────────────────────────────────────────────┘
+    ```
 
 2. Verify the staged file:
 
@@ -136,14 +136,14 @@ books.parquet                      |   998|"88432bf90aadb79073682988b39d461c"|20
 
 1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
-```sql
-COPY INTO books
-FROM @my_internal_stage
-FILES = ('books.parquet')
-FILE_FORMAT = (
-    TYPE = 'PARQUET'
-);
-```
+    ```sql
+    COPY INTO books
+    FROM @my_internal_stage
+    FILES = ('books.parquet')
+    FILE_FORMAT = (
+        TYPE = 'PARQUET'
+    );
+    ```
 
 2. Verify the loaded data:
 
@@ -165,15 +165,15 @@ Follow this tutorial to upload the sample file to an external stage and load dat
 
 1. Create an external stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
 
-```sql
-CREATE STAGE my_external_stage
-    URL = 's3://databend'
-    CONNECTION = (
-        ENDPOINT_URL = 'http://127.0.0.1:9000',
-        ACCESS_KEY_ID = 'ROOTUSER',
-        SECRET_ACCESS_KEY = 'CHANGEME123'
-    );
-```
+    ```sql
+    CREATE STAGE my_external_stage
+        URL = 's3://databend'
+        CONNECTION = (
+            ENDPOINT_URL = 'http://127.0.0.1:9000',
+            ACCESS_KEY_ID = 'ROOTUSER',
+            SECRET_ACCESS_KEY = 'CHANGEME123'
+        );
+    ```
 
 2. Verify the created stage:
 
@@ -189,16 +189,16 @@ my_external_stage|External  |               |'root'@'%'|       |
 
 1. Upload the sample file using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md):
 
-```sql
-root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_external_stage
-
-┌───────────────────────────────────────────────┐
-│                 file                │  status │
-│                String               │  String │
-├─────────────────────────────────────┼─────────┤
-│ /Users/eric/Documents/books.parquet │ SUCCESS │
-└───────────────────────────────────────────────┘
-```
+    ```sql
+    root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_external_stage
+    
+    ┌───────────────────────────────────────────────┐
+    │                 file                │  status │
+    │                String               │  String │
+    ├─────────────────────────────────────┼─────────┤
+    │ /Users/eric/Documents/books.parquet │ SUCCESS │
+    └───────────────────────────────────────────────┘
+    ```
 
 2. Verify the staged file:
 
@@ -214,14 +214,14 @@ books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-28 04:13:15.178 +0
 
 1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
-```sql
-COPY INTO books
-FROM @my_external_stage
-FILES = ('books.parquet')
-FILE_FORMAT = (
-    TYPE = 'PARQUET'
-);
-```
+    ```sql
+    COPY INTO books
+    FROM @my_external_stage
+    FILES = ('books.parquet')
+    FILE_FORMAT = (
+        TYPE = 'PARQUET'
+    );
+    ```
 
 2. Verify the loaded data:
 

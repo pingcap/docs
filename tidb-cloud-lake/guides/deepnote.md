@@ -27,13 +27,13 @@ Make sure you can log in to your Databend Cloud account and obtain the connectio
 
 3. Complete the fields with your connection information.
 
-| Parameter        | Description                        |
-| ---------------- | ---------------------------------- |
-| Integration name | For example, `Databend`            |
-| Host name        | Obtain from connection information |
-| Port             | `443`                              |
-| Username         | `cloudapp`                         |
-| Password         | Obtain from connection information |
+    | Parameter        | Description                        |
+    | ---------------- | ---------------------------------- |
+    | Integration name | For example, `Databend`            |
+    | Host name        | Obtain from connection information |
+    | Port             | `443`                              |
+    | Username         | `cloudapp`                         |
+    | Password         | Obtain from connection information |
 
 4. Create a notebook.
 

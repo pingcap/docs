@@ -187,11 +187,11 @@ In this step, you'll load the AWS billing dataset into Databend Cloud with just 
 
 2. Select to load data into **An existing table**, then choose **Load from a URL** and enter the dataset URL: `https://datasets.databend.com/aws-billing.parquet`.
 
-![alt text](/media/tidb-cloud-lake/aws-billing-1.png)
+    ![alt text](/media/tidb-cloud-lake/aws-billing-1.png)
 
 3. Select the database and table you created, then choose a warehouse.
 
-![alt text](/media/tidb-cloud-lake/aws-billing-2.png)
+    ![alt text](/media/tidb-cloud-lake/aws-billing-2.png)
 
 4. Click **Confirm** to start the data loading.
 

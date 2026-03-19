@@ -54,55 +54,55 @@ This example demonstrates the use of the CHANGES clause, allowing for the tracki
 
 1. Create a table to store user profile information and enable change tracking.
 
-```sql
-CREATE TABLE user_profiles (
-    user_id INT,
-    username VARCHAR(255),
-    bio TEXT
-) change_tracking = true;
-
-INSERT INTO user_profiles VALUES (1, 'john_doe', 'Software Engineer');
-INSERT INTO user_profiles VALUES (2, 'jane_smith', 'Marketing Specialist');
-```
+    ```sql
+    CREATE TABLE user_profiles (
+        user_id INT,
+        username VARCHAR(255),
+        bio TEXT
+    ) change_tracking = true;
+    
+    INSERT INTO user_profiles VALUES (1, 'john_doe', 'Software Engineer');
+    INSERT INTO user_profiles VALUES (2, 'jane_smith', 'Marketing Specialist');
+    ```
 
 2. Create a stream to capture profile updates, then update an exiting profile and insert a new one.
 
-```sql
-CREATE STREAM profile_updates ON TABLE user_profiles APPEND_ONLY = TRUE;
-
-UPDATE user_profiles SET bio = 'Data Scientist' WHERE user_id = 1;
-INSERT INTO user_profiles VALUES (3, 'alex_wong', 'Data Analyst');
-```
+    ```sql
+    CREATE STREAM profile_updates ON TABLE user_profiles APPEND_ONLY = TRUE;
+    
+    UPDATE user_profiles SET bio = 'Data Scientist' WHERE user_id = 1;
+    INSERT INTO user_profiles VALUES (3, 'alex_wong', 'Data Analyst');
+    ```
 
 3. Query changes in user profiles by the stream.
 
-```sql
--- Return all changes in user profiles captured in the stream
-SELECT *
-FROM user_profiles
-CHANGES (INFORMATION => DEFAULT)
-AT (STREAM => profile_updates);
-
-┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│     user_id     │     username     │        bio        │   change$action  │              change$row_id             │ change$is_update │
-├─────────────────┼──────────────────┼───────────────────┼──────────────────┼────────────────────────────────────────┼──────────────────┤
-│               1 │ john_doe         │ Data Scientist    │ INSERT           │ 69cffb02264144c384d56f7b6cedee41000000 │ true             │
-│               3 │ alex_wong        │ Data Analyst      │ INSERT           │ 59f315c8655c49eab35ba1959e269430000000 │ false            │
-│               1 │ john_doe         │ Software Engineer │ DELETE           │ 69cffb02264144c384d56f7b6cedee41000000 │ true             │
-└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
--- Return appended rows in user profiles captured in the stream
-SELECT *
-FROM user_profiles
-CHANGES (INFORMATION => APPEND_ONLY)
-AT (STREAM => profile_updates);
-
-┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│     user_id     │     username     │        bio       │ change$action │ change$is_update │              change$row_id             │
-├─────────────────┼──────────────────┼──────────────────┼───────────────┼──────────────────┼────────────────────────────────────────┤
-│               3 │ alex_wong        │ Data Analyst     │ INSERT        │ false            │ 59f315c8655c49eab35ba1959e269430000000 │
-└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+    ```sql
+    -- Return all changes in user profiles captured in the stream
+    SELECT *
+    FROM user_profiles
+    CHANGES (INFORMATION => DEFAULT)
+    AT (STREAM => profile_updates);
+    
+    ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │     user_id     │     username     │        bio        │   change$action  │              change$row_id             │ change$is_update │
+    ├─────────────────┼──────────────────┼───────────────────┼──────────────────┼────────────────────────────────────────┼──────────────────┤
+    │               1 │ john_doe         │ Data Scientist    │ INSERT           │ 69cffb02264144c384d56f7b6cedee41000000 │ true             │
+    │               3 │ alex_wong        │ Data Analyst      │ INSERT           │ 59f315c8655c49eab35ba1959e269430000000 │ false            │
+    │               1 │ john_doe         │ Software Engineer │ DELETE           │ 69cffb02264144c384d56f7b6cedee41000000 │ true             │
+    └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    
+    -- Return appended rows in user profiles captured in the stream
+    SELECT *
+    FROM user_profiles
+    CHANGES (INFORMATION => APPEND_ONLY)
+    AT (STREAM => profile_updates);
+    
+    ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │     user_id     │     username     │        bio       │ change$action │ change$is_update │              change$row_id             │
+    ├─────────────────┼──────────────────┼──────────────────┼───────────────┼──────────────────┼────────────────────────────────────────┤
+    │               3 │ alex_wong        │ Data Analyst     │ INSERT        │ false            │ 59f315c8655c49eab35ba1959e269430000000 │
+    └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ```
 
 4. Query changes between a snapshot and a timestamp with both the `AT` and `END` keywords.
 

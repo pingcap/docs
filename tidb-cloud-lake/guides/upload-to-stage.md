@@ -16,7 +16,7 @@ If you're using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to m
 - The GET command currently can only download all files in a stage, not individual ones.
 - These commands are exclusive to BendSQL and the GET command will not function when Databend uses the file system as the storage backend.
 
-### Uploading with Presigned URL
+## Uploading with Presigned URL
 
 The following examples demonstrate how to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with presigned URLs.
 

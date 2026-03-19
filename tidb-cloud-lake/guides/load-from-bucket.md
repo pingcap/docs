@@ -19,10 +19,10 @@ Before you start, make sure you have completed the following tasks:
 
 1. Download and save the sample file [books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet) to a local folder. The file contains two records:
 
-```text title='books.parquet'
-Transaction Processing,Jim Gray,1992
-Readings in Database Systems,Michael Stonebraker,2004
-```
+    ```text title='books.parquet'
+    Transaction Processing,Jim Gray,1992
+    Readings in Database Systems,Michael Stonebraker,2004
+    ```
 
 2. Create a bucket in Amazon S3 and upload the sample file to the bucket. For how to do that, refer to these links:
 
@@ -51,18 +51,18 @@ CREATE TABLE books
 
 1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
 
-```sql
-COPY INTO books
-FROM 's3://databend-toronto/'
-CONNECTION = (
-    ACCESS_KEY_ID = '<your-access-key-id>',
-    SECRET_ACCESS_KEY = '<your-secret-access-key>'
-)
-PATTERN = '.*[.]parquet'
-FILE_FORMAT = (
-    TYPE = 'PARQUET'
-);
-```
+    ```sql
+    COPY INTO books
+    FROM 's3://databend-toronto/'
+    CONNECTION = (
+        ACCESS_KEY_ID = '<your-access-key-id>',
+        SECRET_ACCESS_KEY = '<your-secret-access-key>'
+    )
+    PATTERN = '.*[.]parquet'
+    FILE_FORMAT = (
+        TYPE = 'PARQUET'
+    );
+    ```
 
 2. Check the loaded data:
 

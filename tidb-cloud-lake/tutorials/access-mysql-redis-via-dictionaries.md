@@ -17,43 +17,43 @@ In this step, we’ll launch instances of Databend, MySQL, and Redis using Docke
 
 1. Create a Docker network named `mynetwork` to enable communication between your Databend, MySQL, and Redis containers:
 
-```bash
-docker network create mynetwork
-```
+    ```bash
+    docker network create mynetwork
+    ```
 
 2. Run the following command to start a MySQL container named `mysql` within the `mynetwork` network:
 
-```bash
-docker run -d \
-  --name=mysql \
-  --network=mynetwork \
-  -e MYSQL_ROOT_PASSWORD=admin \
-  -p 3306:3306 \
-  mysql:latest
-```
+    ```bash
+    docker run -d \
+      --name=mysql \
+      --network=mynetwork \
+      -e MYSQL_ROOT_PASSWORD=admin \
+      -p 3306:3306 \
+      mysql:latest
+    ```
 
 3. Run the following command to start a Databend container named `databend` within the `mynetwork` network:
 
-```bash
-docker run -d \
-  --name=databend \
-  --network=mynetwork \
-  -p 3307:3307 \
-  -p 8000:8000 \
-  -p 8124:8124 \
-  -p 8900:8900 \
-  datafuselabs/databend:nightly
-```
+    ```bash
+    docker run -d \
+      --name=databend \
+      --network=mynetwork \
+      -p 3307:3307 \
+      -p 8000:8000 \
+      -p 8124:8124 \
+      -p 8900:8900 \
+      datafuselabs/databend:nightly
+    ```
 
 4. Run the following command to start a Redis container named `redis` within the `mynetwork` network:
 
-```bash
-docker run -d \
-  --name=redis \
-  --network=mynetwork \
-  -p 6379:6379 \
-  redis:latest
-```
+    ```bash
+    docker run -d \
+      --name=redis \
+      --network=mynetwork \
+      -p 6379:6379 \
+      redis:latest
+    ```
 
 5. Verify that the Databend, MySQL, and Redis containers are connected to the same network by inspecting the `mynetwork` Docker network:
 
@@ -120,45 +120,45 @@ In this step, we’ll add sample data to MySQL and Redis, and Databend.
 
 1. In Databend, create a table named `users_databend` and insert sample user data:
 
-```sql
-CREATE TABLE users_databend (
-    id INT,
-    name VARCHAR(100) NOT NULL
-);
-
-INSERT INTO users_databend (id, name) VALUES
-(1, 'Alice'),
-(2, 'Bob'),
-(3, 'Charlie');
-```
+    ```sql
+    CREATE TABLE users_databend (
+        id INT,
+        name VARCHAR(100) NOT NULL
+    );
+    
+    INSERT INTO users_databend (id, name) VALUES
+    (1, 'Alice'),
+    (2, 'Bob'),
+    (3, 'Charlie');
+    ```
 
 2. In MySQL, create a database named `dict`, create a `users` table, and insert sample data:
 
-```sql
-CREATE DATABASE dict;
-USE dict;
-
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL
-);
-
-INSERT INTO users (name, email) VALUES
-('Alice', 'alice@example.com'),
-('Bob', 'bob@example.com'),
-('Charlie', 'charlie@example.com');
-```
+    ```sql
+    CREATE DATABASE dict;
+    USE dict;
+    
+    CREATE TABLE users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL
+    );
+    
+    INSERT INTO users (name, email) VALUES
+    ('Alice', 'alice@example.com'),
+    ('Bob', 'bob@example.com'),
+    ('Charlie', 'charlie@example.com');
+    ```
 
 3. Find your Redis container ID on Docker Desktop or by running `docker ps` in the terminal:
 
-![alt text](/media/tidb-cloud-lake/redis-container-id.png)
+    ![alt text](/media/tidb-cloud-lake/redis-container-id.png)
 
 4. Access the Redis CLI using your Redis container ID (replace `14d50cc4d075` with your actual container ID):
 
-```bash
-docker exec -it 14d50cc4d075 redis-cli
-```
+    ```bash
+    docker exec -it 14d50cc4d075 redis-cli
+    ```
 
 5. Insert sample user data into Redis by running the following commands in the Redis CLI:
 
@@ -174,38 +174,38 @@ In this step, we'll create dictionaries for MySQL and Redis in Databend and then
 
 1. In Databend, create a dictionary named `mysql_users` in Databend that connects to the MySQL instance:
 
-```sql
-CREATE DICTIONARY mysql_users
-(
-    id INT,
-    name STRING,
-    email STRING
-)
-PRIMARY KEY id
-SOURCE(MySQL(
-    host='mysql'
-    port=3306
-    username='root'
-    password='admin'
-    db='dict'
-    table='users'
-));
-```
+    ```sql
+    CREATE DICTIONARY mysql_users
+    (
+        id INT,
+        name STRING,
+        email STRING
+    )
+    PRIMARY KEY id
+    SOURCE(MySQL(
+        host='mysql'
+        port=3306
+        username='root'
+        password='admin'
+        db='dict'
+        table='users'
+    ));
+    ```
 
 2. Create a dictionary named `redis_user_preferences` in Databend that connects to the Redis instance:
 
-```sql
-CREATE DICTIONARY redis_user_preferences
-(
-    user_id STRING,
-    preferences STRING
-)
-PRIMARY KEY user_id
-SOURCE(Redis(
-    host='redis'
-    port=6379
-));
-```
+    ```sql
+    CREATE DICTIONARY redis_user_preferences
+    (
+        user_id STRING,
+        preferences STRING
+    )
+    PRIMARY KEY user_id
+    SOURCE(Redis(
+        host='redis'
+        port=6379
+    ));
+    ```
 
 3. Query data from the MySQL and Redis dictionaries we created earlier.
 
