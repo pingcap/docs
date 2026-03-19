@@ -5,7 +5,7 @@ summary: Learn what `_tidb_rowid` is, when it is available, and how to use it sa
 
 # _tidb_rowid
 
-`_tidb_rowid` is a hidden system column that TiDB uses as the row handle for tables that do not use a clustered index. You do not declare this column in the table schema, but you can reference it in SQL when the table uses `_tidb_rowid` as its handle.
+`_tidb_rowid` is a hidden system column that TiDB uses as the row handle for tables that do not use a clustered index. You cannot declare this column in the table schema, but you can reference it in SQL when the table uses `_tidb_rowid` as its handle.
 
 In the current implementation, `_tidb_rowid` is an extra `BIGINT NOT NULL` handle column managed by TiDB.
 
