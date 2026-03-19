@@ -9,7 +9,7 @@ Release Date: 2026-xx-xx
 
 TiDB Version: 8.5.6
 
-Try it out: [Quick Start](https://docs.pingcap.com/zh/tidb/v8.5/quick-start-with-tidb) | [Production Deployment](https://docs.pingcap.com/zh/tidb/v8.5/production-deployment-using-tiup) | [Download Offline Package](https://pingkai.cn/download#tidb-community)
+Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production Deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup) | [Download Offline Package](https://pingkai.cn/download#tidb-community)
 
 ## Feature Details
 
