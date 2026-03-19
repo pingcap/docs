@@ -51,6 +51,52 @@ def parse_pr_url(url):
     return parts[3], parts[4], parts[6]
 
 
+def normalize_sha(value):
+    sha = value.strip()
+    if not re.fullmatch(r"[a-f0-9]{7,40}", sha):
+        raise SystemExit(f"Invalid commit SHA: {value}")
+    return sha
+
+
+def parse_update_range(value):
+    raw = value.strip()
+    commit_url_match = re.fullmatch(
+        r"https://github\.com/([^/\s]+)/([^/\s]+)/pull/(\d+)/commits/([a-f0-9]{7,40})/?",
+        raw,
+    )
+    if commit_url_match:
+        owner, repo, pr_number, commit_sha = commit_url_match.groups()
+        return {
+            "mode": "single_commit",
+            "raw": raw,
+            "commit_sha": normalize_sha(commit_sha),
+            "source_pr_url": f"https://github.com/{owner}/{repo}/pull/{pr_number}",
+        }
+    if ".." in raw:
+        parts = [part.strip() for part in raw.split("..", 1)]
+        if len(parts) != 2 or not parts[0] or not parts[1]:
+            raise SystemExit(f"Invalid commit range: {value}")
+        return {
+            "mode": "commit_range",
+            "raw": raw,
+            "base_sha": normalize_sha(parts[0]),
+            "head_sha": normalize_sha(parts[1]),
+        }
+    return {
+        "mode": "single_commit",
+        "raw": raw,
+        "commit_sha": normalize_sha(raw),
+    }
+
+
+def extract_source_pr_url_from_translation_body(body):
+    line_match = re.search(r"(?im)^\s*(?:[-*]\s+)?This PR is translated from:\s*(.+)$", body or "")
+    if not line_match:
+        return None
+    url_match = re.search(r"https://github\.com/[^/\s,]+/[^/\s,]+/pull/\d+", line_match.group(1))
+    return normalize_pr_url(url_match.group(0)) if url_match else None
+
+
 def encode_repo_path(path):
     return "/".join(quote(part, safe="") for part in path.split("/"))
 
@@ -64,6 +110,10 @@ def load_content(owner, repo, file_path, ref):
     if data.get("encoding") != "base64":
         return None
     return base64.b64decode(data["content"]).decode("utf-8")
+
+
+def load_target_content(owner, repo, file_path, ref):
+    return load_content(owner, repo, file_path, ref)
 
 
 def parse_sections(content):
@@ -413,14 +463,84 @@ def processing_strategy(file_path, status):
     return "markdown-minimal-edit"
 
 
+def list_pr_files(owner, repo, pr_number):
+    pages = json.loads(
+        run(
+            [
+                "gh",
+                "api",
+                "--paginate",
+                "--slurp",
+                f"repos/{owner}/{repo}/pulls/{pr_number}/files?per_page=100",
+            ]
+        )
+    )
+    pr_files = []
+    for page in pages:
+        pr_files.extend(page)
+    return pr_files
+
+
+def list_update_files(owner, repo, update_range):
+    if update_range["mode"] == "single_commit":
+        commit_data = json.loads(gh_api(f"repos/{owner}/{repo}/commits/{update_range['commit_sha']}"))
+        return {
+            "files": commit_data.get("files", []),
+            "base_sha": commit_data["parents"][0]["sha"] if commit_data.get("parents") else "",
+            "head_sha": commit_data["sha"],
+            "single_commit_sha": commit_data["sha"],
+        }
+
+    compare_data = json.loads(gh_api(f"repos/{owner}/{repo}/compare/{update_range['base_sha']}...{update_range['head_sha']}"))
+    return {
+        "files": compare_data.get("files", []),
+        "base_sha": update_range["base_sha"],
+        "head_sha": update_range["head_sha"],
+        "single_commit_sha": "",
+    }
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-pr-url", required=True)
+    parser.add_argument("--mode", choices=("create", "update"), default="create")
+    parser.add_argument("--source-pr-url")
+    parser.add_argument("--target-translation-pr-url")
+    parser.add_argument("--source-update-range")
     parser.add_argument("--target-repo-dir", required=True)
     parser.add_argument("--workdir")
     args = parser.parse_args()
 
-    source_pr_url = normalize_pr_url(args.source_pr_url)
+    if args.mode == "create":
+        if not args.source_pr_url:
+            raise SystemExit("--source-pr-url is required in create mode.")
+        if args.source_update_range:
+            raise SystemExit("--source-update-range is only supported in update mode.")
+    else:
+        if not args.target_translation_pr_url:
+            raise SystemExit("--target-translation-pr-url is required in update mode.")
+        if not args.source_update_range:
+            raise SystemExit("--source-update-range is required in update mode.")
+
+    source_pr_url = normalize_pr_url(args.source_pr_url) if args.source_pr_url else None
+    target_translation_pr_url = (
+        normalize_pr_url(args.target_translation_pr_url) if args.target_translation_pr_url else None
+    )
+    update_range = parse_update_range(args.source_update_range) if args.source_update_range else None
+    if source_pr_url is None and update_range and update_range.get("source_pr_url"):
+        source_pr_url = normalize_pr_url(update_range["source_pr_url"])
+
+    target_pr_data = None
+    if args.mode == "update":
+        target_owner, target_repo, target_pr_number = parse_pr_url(target_translation_pr_url)
+        target_pr_data = json.loads(gh_api(f"repos/{target_owner}/{target_repo}/pulls/{target_pr_number}"))
+        if source_pr_url is None:
+            source_pr_url = extract_source_pr_url_from_translation_body(target_pr_data.get("body", ""))
+        if source_pr_url is None:
+            raise SystemExit(
+                "Could not infer the source PR URL from the target translation PR body. "
+                "Add a 'This PR is translated from: <source-pr-url>' line or rerun with --source-pr-url."
+            )
+
     source_owner, source_repo, source_pr_number = parse_pr_url(source_pr_url)
 
     if source_owner != "pingcap" or source_repo != "docs":
@@ -433,26 +553,34 @@ def main():
     workdir.mkdir(parents=True, exist_ok=True)
 
     pr_data = json.loads(gh_api(f"repos/{source_owner}/{source_repo}/pulls/{source_pr_number}"))
-    if any(label["name"] == "translation/done" for label in pr_data.get("labels", [])):
+    if args.mode == "create" and any(label["name"] == "translation/done" for label in pr_data.get("labels", [])):
         raise SystemExit("The source PR already has translation/done.")
-
-    files = json.loads(
-        run(
-            [
-                "gh",
-                "api",
-                "--paginate",
-                "--slurp",
-                f"repos/{source_owner}/{source_repo}/pulls/{source_pr_number}/files?per_page=100",
-            ]
-        )
-    )
-    pr_files = []
-    for page in files:
-        pr_files.extend(page)
 
     my_login = json.loads(gh_api("user"))["login"]
     source_body = pr_data.get("body") or ""
+    if args.mode == "create":
+        pr_files = list_pr_files(source_owner, source_repo, source_pr_number)
+        base_sha = pr_data["base"]["sha"]
+        head_sha = pr_data["head"]["sha"]
+        source_update = {
+            "mode": "pull_request",
+            "range": "",
+            "base_sha": base_sha,
+            "head_sha": head_sha,
+        }
+    else:
+        update_files = list_update_files(source_owner, source_repo, update_range)
+        pr_files = update_files["files"]
+        base_sha = update_files["base_sha"]
+        head_sha = update_files["head_sha"]
+        source_update = {
+            "mode": update_range["mode"],
+            "range": update_range["raw"],
+            "base_sha": base_sha,
+            "head_sha": head_sha,
+        }
+        if update_range["mode"] == "single_commit":
+            source_update["commit_sha"] = update_files["single_commit_sha"]
 
     translation_body = build_translation_body(source_body, source_pr_url)
     labels = sorted(
@@ -465,6 +593,7 @@ def main():
     )
 
     translation_input = {
+        "mode": args.mode,
         "source_pr": {
             "url": source_pr_url,
             "number": int(source_pr_number),
@@ -474,12 +603,30 @@ def main():
             "head_branch": pr_data["head"]["ref"],
             "head_sha": pr_data["head"]["sha"],
         },
+        "source_update": source_update,
         "files": [],
     }
+    if target_pr_data is not None:
+        translation_input["target_translation_pr"] = {
+            "url": target_translation_pr_url,
+            "number": target_pr_data["number"],
+            "base_branch": target_pr_data["base"]["ref"],
+            "head_branch": target_pr_data["head"]["ref"],
+            "head_repo_owner": target_pr_data["head"]["repo"]["owner"]["login"],
+            "head_repo_name": target_pr_data["head"]["repo"]["name"],
+        }
 
     target_files = []
-    base_sha = pr_data["base"]["sha"]
-    head_sha = pr_data["head"]["sha"]
+    if target_pr_data is not None:
+        target_content_owner = target_pr_data["head"]["repo"]["owner"]["login"]
+        target_content_repo = target_pr_data["head"]["repo"]["name"]
+        target_content_ref = target_pr_data["head"]["ref"]
+        new_branch_name = target_pr_data["head"]["ref"]
+    else:
+        target_content_owner = "pingcap"
+        target_content_repo = "docs-cn"
+        target_content_ref = pr_data["base"]["ref"]
+        new_branch_name = f"translate/{pr_data['head']['ref']}"
 
     for file_info in pr_files:
         source_file = file_info["filename"]
@@ -503,8 +650,7 @@ def main():
 
         head_content = load_content(source_owner, source_repo, source_file, head_sha)
         base_content = None if file_info["status"] == "added" else load_content(source_owner, source_repo, source_file, base_sha)
-        target_full_path = target_repo_dir / target_file_path
-        target_content = target_full_path.read_text(encoding="utf-8") if target_full_path.exists() else None
+        target_content = load_target_content(target_content_owner, target_content_repo, target_file_path, target_content_ref)
 
         head_sections = parse_sections(head_content) if head_content else []
         base_sections = parse_sections(base_content) if base_content else []
@@ -553,11 +699,10 @@ def main():
     translation_labels_txt.write_text("".join(f"{label}\n" for label in labels), encoding="utf-8")
     target_files_txt.write_text("".join(f"{path}\n" for path in sorted(set(target_files))), encoding="utf-8")
 
-    new_branch_name = f"translate/{pr_data['head']['ref']}"
-
     write_meta_env(
         translation_meta_env,
         {
+            "MODE": args.mode,
             "SOURCE_PR_URL": source_pr_url,
             "SOURCE_OWNER": source_owner,
             "SOURCE_REPO": source_repo,
@@ -572,6 +717,9 @@ def main():
             "TARGET_REPO_NAME": "docs-cn",
             "TRANSLATION_LABEL": "translation/from-docs",
             "NEW_BRANCH_NAME": new_branch_name,
+            "TARGET_TRANSLATION_PR_URL": target_translation_pr_url or "",
+            "SOURCE_UPDATE_RANGE": source_update["range"],
+            "SOURCE_UPDATE_MODE": source_update["mode"],
             "TARGET_REPO_DIR": str(target_repo_dir),
             "WORKDIR": str(workdir),
             "TRANSLATION_INPUT_JSON": str(translation_input_json),

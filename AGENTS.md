@@ -41,7 +41,7 @@ Use `resources/terms.md` when additional product terminology context is needed.
 Use the workflow-specific skills in `.ai/skills/` when they match the task:
 
 - `review-doc-pr`: review Markdown diffs, doc PRs, wording, structure, factual accuracy, and possible cross-file impact
-- `create-doc-translation-pr`: prepare or create an EN -> ZH translation PR that maps an English docs change to `pingcap/docs-cn`, using the bundled scripts in `.ai/skills/create-doc-translation-pr/scripts/` when applicable
+- `create-doc-translation-pr`: create or update an EN -> ZH translation PR that maps an English docs change or incremental source update to `pingcap/docs-cn`, using the bundled scripts in `.ai/skills/create-doc-translation-pr/scripts/` when applicable
 
 If no existing skill matches the task, follow this file plus the shared guidance and keep the change narrowly scoped.
 
@@ -69,7 +69,7 @@ If no existing skill matches the task, follow this file plus the shared guidance
 When the task involves translation or translation review:
 
 - Follow `.ai/shared/translation-rules.md` and `.ai/shared/translation-terms.md`.
-- For translation PR creation workflows, prefer the script-backed process in `.ai/skills/create-doc-translation-pr/`.
+- For translation PR creation or update workflows, prefer the script-backed process in `.ai/skills/create-doc-translation-pr/`.
 - Prefer updating the existing translation with the smallest necessary change instead of retranslating entire sections.
 - Preserve structure, headings, lists, code blocks, links, and note/admonition semantics.
 - Reuse existing translated terminology when it is still correct.
