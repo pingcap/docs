@@ -160,7 +160,7 @@ TiDB Cloud provides role-based access control to manage permissions across organ
 
 ## Network access control
 
-TiDB Cloud ensures secure cluster connectivity and data transmission through robust network access controls. Key features include:
+TiDB Cloud ensures secure connectivity and data transmission through robust network access controls. Key features include:
 
 ### Private endpoints
 
@@ -219,7 +219,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Encrypts static data and backups with CMEK keys when enabled.
 
-- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} clusters rely exclusively on escrow keys.
+- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} instances rely exclusively on escrow keys.
 
 **Best practices:**
 
@@ -237,7 +237,7 @@ TiDB Cloud provides comprehensive audit logging to monitor user activities and d
 
 ### Console audit logging
 
-Tracks key actions on the TiDB Cloud console, such as inviting users or managing clusters.
+Tracks key actions on the TiDB Cloud console, such as inviting users or importing data.
 
 **Best practices:**
 

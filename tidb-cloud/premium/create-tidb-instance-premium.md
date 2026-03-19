@@ -39,13 +39,8 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 If you have the `Organization Owner` role, you can create a {{{ .premium }}} instance as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click **Switch to Private Preview** in the lower-left corner to open the **TiDB Instances** page for {{{ .premium }}}.
-
-    > **Note:**
-    >
-    > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of {{{ .premium }}}. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for the private preview of {{{ .premium }}}" in the **Description** field, and then click **Submit**.
-
-2. On the **TiDB Instances** page, click **Create Instance**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click **Create Resource** in the upper-right corner.
+2. On the **Create Resource** page, select **Premium** as your plan.
 3. Enter a name for your {{{ .premium }}} instance.
 4. Choose a cloud provider and a region where you want to host your instance.
 5. In the **Capacity** area, set the maximum number of the Request Capacity Units (RCUs) for your instance.

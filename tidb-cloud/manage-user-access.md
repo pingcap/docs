@@ -103,9 +103,9 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 | Manage project settings | ✅ | ❌ | ❌ | ❌ |
 | Invite users to or remove users from a project, and edit project roles of users. | ✅ | ❌ | ❌ | ❌ |
 | Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ | ❌ |
-| Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all {{{ .starter }}} clusters in the project. | ✅ | ❌ | ❌ | ❌ |
+| Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all {{{ .starter }}} instances in the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
-| Manage branches for {{{ .starter }}} and {{{ .essential }}} clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
+| Manage branches for {{{ .starter }}} and {{{ .essential }}} instances in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ | ❌ |
@@ -125,7 +125,7 @@ To view and switch between organizations, take the following steps:
 
     > **Tip:**
     >
-    > - If you are currently on the page of a specific cluster, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are currently on the page of a specific TiDB Cloud resource, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
     > - If you are a member of multiple organizations, you can click the target organization name in the combo box to switch your account between organizations.
 
 2. To view the detailed information of your organization such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
@@ -221,7 +221,7 @@ To view and switch between projects, take the following steps:
 
     > **Tip:**
     >
-    > - If you are currently on the page of a specific cluster, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are currently on the page of a specific TiDB Cloud resource, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
     > - If you are a member of multiple projects, you can click the target project name in the combo box to switch between projects.
 
 2. To view the detailed information of your project, click the project name, and then click **Project Settings** in the left navigation pane.

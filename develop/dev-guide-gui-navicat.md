@@ -8,7 +8,7 @@ aliases: ['/tidb/stable/dev-guide-gui-navicat/','/tidb/dev/dev-guide-gui-navicat
 
 TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a GUI tool set for database users. This tutorial uses the [Navicat Premium](https://www.navicat.com/en/products/navicat-premium) tool to connect to TiDB.
 
-In this tutorial, you can learn how to connect to your TiDB cluster using Navicat.
+In this tutorial, you can learn how to connect to TiDB using Navicat.
 
 > **Note:**
 >
@@ -24,17 +24,17 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- (Recommended) [Create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Deploy a local test TiDB Self-Managed cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB Self-Managed cluster](/production-deployment-using-tiup.md).
 
 ## Connect to TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+Connect to TiDB depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -61,7 +61,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the {{{ .starter }}} cluster.
+    - **Password**: enter the password of the {{{ .starter }}} instance.
 
     ![Navicat: configure connection general panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
@@ -69,14 +69,14 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     ![Navicat: configure connection SSL panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
+8. Click **Test Connection** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

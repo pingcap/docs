@@ -81,15 +81,15 @@ Because Parquet files do not contain schema information, before importing data f
 
 To allow TiDB Cloud to access the Parquet files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
-- If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your cluster.
+- If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your {{{ .starter }}} or Essential instance.
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files).
 
-- If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) for your cluster.
+- If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) for your {{{ .starter }}} or Essential instance.
 
-- If your Parquet files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) for your cluster.
+- If your Parquet files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) for your {{{ .starter }}} or Essential instance.
 
-- If your Parquet files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your cluster.
+- If your Parquet files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .starter }}} or Essential instance.
 
 ## Step 4. Import Parquet files
 
@@ -98,15 +98,15 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -151,15 +151,15 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -202,15 +202,15 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -253,15 +253,15 @@ To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the 
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 

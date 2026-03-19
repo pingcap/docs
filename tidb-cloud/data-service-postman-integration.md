@@ -19,7 +19,7 @@ Before importing a Data App to Postman, make sure that you have the following:
 - A [Postman desktop app](https://www.postman.com/downloads) (optional). Alternatively, you can use the Postman web version without downloading the app.
 - A [Data App](/tidb-cloud/data-service-manage-data-app.md) with at least one well-defined [endpoint](/tidb-cloud/data-service-manage-endpoint.md). Only endpoints that meet the following requirements can be imported to Postman:
 
-    - The target cluster is selected.
+    - The target {{{ .starter }}} instance is selected.
     - The endpoint path and request method are configured.
     - The SQL statements are written.
 
@@ -35,7 +35,7 @@ To import your Data App to Postman, take the following steps:
 
     > **Note:**
     >
-    > - If a Data App lacks a well-defined endpoint (the target cluster, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
+    > - If a Data App lacks a well-defined endpoint (the target {{{ .starter }}} instance, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
     > - For a Chat2Query Data App, **Run in Postman** is not available.
 
 4. Follow the steps provided in the dialog for the Data App import:

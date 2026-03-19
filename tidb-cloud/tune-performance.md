@@ -18,7 +18,7 @@ TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#sql-statement
 
 </CustomContent>
 
-- Slow Query lets you search and view all slow queries in your TiDB <CustomContent plan="starter,essential,dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, and explore the bottlenecks of each slow query by viewing its execution plan, SQL execution information, and other details.
+- Slow Query lets you search and view all slow queries in your <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, and explore the bottlenecks of each slow query by viewing its execution plan, SQL execution information, and other details.
 
 - <CustomContent plan="starter,essential,dedicated">Statement Analysis</CustomContent><CustomContent plan="premium">SQL Statement</CustomContent> enables you to directly observe the SQL execution on the page, and easily locate performance problems without querying the system tables.
 
@@ -34,39 +34,23 @@ TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#sql-statement
 
 ## View the Diagnosis page
 
-<CustomContent plan="starter,essential,dedicated">
-
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
 2. In the left navigation pane, click **Monitoring** > **Diagnosis**.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target instance to go to its overview page.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations and instances.
-
-2. In the left navigation pane, click **Monitoring**.
-
-</CustomContent>
 
 ## Slow Query
 
 By default, SQL queries that take more than 300 milliseconds are considered as slow queries.
 
-To view slow queries in a TiDB <CustomContent plan="starter,essential,dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, perform the following steps:
+To view slow queries in a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, perform the following steps:
 
 <CustomContent plan="starter,essential,dedicated">
 
-1. Navigate to the [**Diagnosis**](#view-the-diagnosis-page) page of a cluster.
+1. [Navigate to the **Diagnosis** page](#view-the-diagnosis-page).
 
 2. Click the **Slow Query** tab.
 
@@ -78,7 +62,7 @@ To view slow queries in a TiDB <CustomContent plan="starter,essential,dedicated"
 
 <CustomContent plan="premium">
 
-1. Navigate to the overview page of the TiDB instance, and then click **Monitoring** > **Slow Query** in the left navigation pane.
+1. Navigate to the overview page of the {{{ .premium }}} instance, and then click **Monitoring** > **Slow Query** in the left navigation pane.
 
 2. Select a slow query from the list to view its detailed execution information.
 
@@ -107,7 +91,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 To use the statement analysis, perform the following steps:
 
-1. Navigate to the [**Diagnosis**](#view-the-diagnosis-page) page of a cluster.
+1. [Navigate to the **Diagnosis** page](#view-the-diagnosis-page).
 
 2. Click the **SQL Statement** tab.
 
@@ -123,7 +107,7 @@ To use the statement analysis, perform the following steps:
 
 To use the **SQL Statement** page, perform the following steps:
 
-1. Navigate to the overview page of the TiDB instance, and then click **Monitoring** > **SQL Statement** in the left navigation pane.
+1. Navigate to the overview page of the {{{ .premium }}} instance, and then click **Monitoring** > **SQL Statement** in the left navigation pane.
 
 2. Click a SQL statement in the list to view its detailed execution information.
 
@@ -147,7 +131,7 @@ For more information, see [Statement Execution Details in TiDB Dashboard](https:
 
 To view the key analytics, perform the following steps:
 
-1. Navigate to the [**Diagnosis**](#view-the-diagnosis-page) page of a cluster.
+1. Navigate to the [**Diagnosis**](#view-the-diagnosis-page) page of a {{{ .dedicated }}} cluster.
 
 2. Click the **Key Visualizer** tab.
 

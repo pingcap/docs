@@ -90,7 +90,7 @@ To configure the project, take the following steps:
           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    You can get the values of `server`, `port`, and `username` from the connection dialog of your cluster. To open this dialog, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the values of `server`, `port`, and `username` from the connection dialog in the TiDB Cloud console. To open the dialog, go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page, and then click **Connect** in the upper-right corner.
 
 2. Complete the project configuration.
 
@@ -322,7 +322,7 @@ To generate visual documents, take the following steps:
 | Option           | Description                                                             | Required? | Example                                           |
 |------------------|-------------------------------------------------------------------------|-----------|---------------------------------------------------|
 | `type`             | The specific adapter to use                                             | Required  | `tidb`                                            |
-| `server`           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `server`           | The TiDB endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
 | `port`             | The port to use                                                         | Required  | `4000`                                            |
 | `schema`           | The schema (database) to normalize data into                      | Required  | `analytics`                                       |
 | `username`         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |

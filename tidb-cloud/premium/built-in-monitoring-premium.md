@@ -5,13 +5,13 @@ summary: Learn how to view {{{ .premium }}} built-in metrics and understand the 
 
 # {{{ .premium }}} Built-in Metrics
 
-TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloud collects and displays a full set of standard metrics of your {{{ .premium }}} instance on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 ## View the Metrics page
 
 To view the metrics on the **Metrics** page, take the following steps:
 
-1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click the name of your target instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
 
     > **Tip:**
     >
@@ -21,7 +21,7 @@ To view the metrics on the **Metrics** page, take the following steps:
 
 ## Metrics retention policy
 
-For TiDB Cloud instances, the metrics data is kept for 7 days.
+For {{{ .premium }}} instances, the metrics data is kept for 7 days.
 
 ## Metrics for {{{ .premium }}} Instances
 
@@ -70,8 +70,8 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 
 If a pane does not provide any metrics, the possible reasons are as follows:
 
-- The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
+- The workload of the corresponding {{{ .premium }}} instance does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The TiDB version of the {{{ .premium }}} instance is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 

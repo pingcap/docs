@@ -9,7 +9,7 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 > **Tip:**
 >
-> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+> TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
 >
 > For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
@@ -17,11 +17,11 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) cluster hosted on AWS. If you do not have one, follow the steps in [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before creating a Data App, make sure that you have created a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) instance hosted on AWS. If you do not have one, follow the steps in [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 > **Note:**
 >
-> Data Service is available only for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) clusters hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Data Service is available only for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) instances hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Get started with a sample Data App
 
@@ -31,13 +31,13 @@ Creating a sample Data App is the best way to get started with Data Service. If 
 
 2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
 
-3. In the dialog, update the App name if necessary, select clusters that you want the Data App to access, and then click **Create**.
+3. In the dialog, update the App name if necessary, select {{{ .starter }}} instances that you want the Data App to access, and then click **Create**.
 
     The creation process takes a few seconds.
 
     > **Note:**
     >
-    > If there is no cluster in your current project, you can click **Create New Cluster** in the **Link Data Sources** drop-down list to create one first.
+    > If there is no {{{ .starter }}} instance in your current project, you can click **Create New Resource** in the **Link Data Sources** drop-down list to create one first.
 
 4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of an endpoint in the middle pane, and instructions about using the sample Data App on the right side.
 
@@ -59,7 +59,7 @@ To get started with Data Service, you can also create your own Data App, and the
     >
     > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
-3. In the **Create Data App** dialog, enter a name, a description, and select clusters that you want the Data App to access.
+3. In the **Create Data App** dialog, enter a name, a description, and select {{{ .starter }}} instances that you want the Data App to access.
 
     > **Note:**
     >
@@ -94,7 +94,7 @@ On the right pane, click the **Properties** tab and set properties for the endpo
 
 - **Path**: the path that users use to access the endpoint. The combination of the request method and the path must be unique within a Data App.
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding {{{ .starter }}} instance is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
 
@@ -104,13 +104,13 @@ For more information about endpoint properties, see [Configure properties](/tidb
 
 You can customize SQL statements for the endpoint in the SQL editor, which is the middle pane on the **Data Service** page.
 
-1. Select a cluster.
+1. Select a {{{ .starter }}} instance.
 
     > **Note:**
     >
-    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
+    > Only {{{ .starter }}} instances that are linked to the Data App are displayed in the drop-down list. To manage the linked {{{ .starter }}} instances, see [Manage linked data sources](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
 
-    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    On the upper part of the SQL editor, select a {{{ .starter }}} instance on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this {{{ .starter }}} instance in the **Schema** tab on the right pane.
 
 2. Write SQL statements.
 
@@ -196,7 +196,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
     1. (Optional) Enter a description for your API key.
     2. Select a role for your API key.
 
-        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+        The role is used to control whether the API key can read or write data to the {{{ .starter }}} instances linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
 
         - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
         - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
@@ -217,7 +217,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/project/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
-2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
+2. In the dialog box, select the {{{ .starter }}} instance and database that you want to use to call the endpoint, and then copy the code example.
 
     An example of the curl code example is as follows:
 
@@ -250,7 +250,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     > **Note:**
     >
-    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the {{{ .starter }}} instance is located.
     > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
 #### 3. Use the code example

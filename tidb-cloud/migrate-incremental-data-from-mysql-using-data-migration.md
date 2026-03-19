@@ -142,13 +142,13 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
 ## Step 1: Go to the Data Migration page
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -187,7 +187,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-   - **Username**: enter the username of the target cluster in TiDB Cloud.
+   - **Username**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
    - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.

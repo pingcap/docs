@@ -27,7 +27,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 ### Cluster
 
@@ -37,7 +37,7 @@ Among TiDB Cloud plans, only TiDB Cloud Dedicated clusters use this deployment m
 
 ### Credit
 
-TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay fees before the credits become expired.
 
 ## D
 
@@ -84,7 +84,7 @@ Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }
 
 ### member
 
-A user that has been invited to an organization, with access to the organization and the clusters of this organization.
+A user that has been invited to an [organization](#organization) in TiDB Cloud.
 
 ### MPP
 
@@ -137,19 +137,21 @@ For more information about the differences between these project types, see [Pro
 
 ### project members
 
-Project members are users who are invited to join one or more projects of the organization. Project members can manage clusters, network access, backups, and other resources.
+Project members are users who are invited to join one or more projects of the organization.
 
 ## R
 
 ### Recycle Bin
 
-The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+The place where the data of deleted {{{ .dedicated }}} clusters and {{{ .premium }}} instances with valid backups is stored.
+
+Once a backed-up {{{ .dedicated }}} cluster or {{{ .premium }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster or {{{ .premium }}} instance in time. Note that if a {{{ .dedicated }}} cluster or {{{ .premium }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
 
 ### region
 
 - TiDB Cloud region
 
-    A geographical area in which a TiDB Cloud cluster is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster is deployed across these zones.
+    A geographical area in which a TiDB Cloud resource is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster or instance is deployed across these zones.
 
 - TiDB Region
 
@@ -161,7 +163,7 @@ A separate database that can be located in the same or different region and cont
 
 ### Replication Capacity Unit (RCU)
 
-TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
+TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
 
 ### Resource
 
@@ -172,7 +174,7 @@ A TiDB resource is a manageable TiDB deployment unit. It can be one of the follo
 
 ### Request Capacity Unit (RCU)
 
-A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your {{{ .essential }}} instance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 ### Request Unit (RU)
 
@@ -187,7 +189,7 @@ For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resourc
 
 ### Spending limit
 
-[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card.
+[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} instances. If the spending limit is set to 0, the {{{ .starter }}} instance remains free. If the spending limit is greater than 0, you need to add a credit card.
 
 ## T
 
@@ -197,7 +199,7 @@ The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [
 
 ### TiDB node
 
-The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the cluster can handle.
+The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the {{{ .dedicated }}} cluster can handle.
 
 ### TiDB X
 
@@ -215,7 +217,7 @@ The storage node that stores the online transactional processing (OLTP) data. It
 
 ### traffic filter
 
-A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster via a SQL client. The traffic filter is empty by default.
+A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud resource via a SQL client. The traffic filter is empty by default.
 
 ## V
 

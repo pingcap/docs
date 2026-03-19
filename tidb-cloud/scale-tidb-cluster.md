@@ -7,7 +7,7 @@ summary: Learn how to scale your TiDB Cloud cluster.
 
 > **Note:**
 >
-> - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) scale automatically based on your application's workload changes. However, you cannot manually scale a {{{ .starter }}} or {{{ .essential }}} cluster.
+> - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) scale automatically based on your application's workload changes. However, you cannot manually scale a {{{ .starter }}} or {{{ .essential }}} instance.
 > - When a cluster is in the **MODIFYING** status, you cannot perform any new scaling operations on it.
 
 You can scale a TiDB cluster in the following dimensions:
@@ -36,12 +36,12 @@ You can increase or decrease the number of TiDB, TiKV, or TiFlash nodes.
 
 To change the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of the cluster that you want to scale, click **...**.
+1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+2. In the row of the TiDB Cloud Dedicated cluster that you want to scale, click **...**.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
+    > Alternatively, you can also click the name of the TiDB Cloud Dedicated cluster that you want to scale on the **My TiDB** page and click **...** in the upper-right corner.
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, change the number of TiDB, TiKV, or TiFlash nodes.
@@ -64,12 +64,12 @@ You can increase or decrease vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
 
 To change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of the cluster that you want to scale, click **...**.
+1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+2. In the row of the TiDB Cloud Dedicated cluster that you want to scale, click **...**.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
+    > Alternatively, you can also click the name of the TiDB Cloud Dedicated cluster that you want to scale on the **My TiDB** page and click **...** in the upper-right corner.
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
@@ -88,12 +88,12 @@ You can increase the storage of TiKV or TiFlash.
 
 To change the storage of TiKV or TiFlash, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of the cluster that you want to scale, click **...**.
+1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+2. In the row of the TiDB Cloud Dedicated cluster that you want to scale, click **...**.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
+    > Alternatively, you can also click the name of the TiDB Cloud Dedicated cluster that you want to scale on the **My TiDB** page and click **...** in the upper-right corner.
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, change the storage of each TiKV or TiFlash node.

@@ -1,6 +1,6 @@
 ---
 title: Database Audit Logging (Beta) for {{{ .essential }}}
-summary: Learn about how to audit a {{{ .essential }}} cluster in TiDB Cloud.
+summary: Learn about how to audit a {{{ .essential }}} instance in TiDB Cloud.
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is **disabled by default**. To audit a TiDB cluster, you need to enable audit logging for it.
+The audit logging feature is **disabled by default**. To audit a {{{ .essential }}} instance, you need to enable audit logging for it.
 
 ## Audit logging configurations
 
@@ -137,7 +137,7 @@ You can enable, edit, and disable audit logging.
 
 ### Enable audit logging
 
-You can enable audit logging for a {{{ .essential }}} cluster using the TiDB Cloud console or the TiDB Cloud CLI.
+You can enable audit logging for a {{{ .essential }}} instance using the TiDB Cloud console or the TiDB Cloud CLI.
 
 > **Note:**
 >
@@ -146,13 +146,13 @@ You can enable audit logging for a {{{ .essential }}} cluster using the TiDB Clo
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Enable**.
 
@@ -177,18 +177,18 @@ The `--rotation-size-mib`, `--rotation-interval-minutes`, and `--unredacted` par
 
 ### Edit audit logging
 
-You can edit the audit logging for a {{{ .essential }}} cluster after enabling it.
+You can edit the audit logging for a {{{ .essential }}} instance after enabling it.
 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Settings**.
 
@@ -209,18 +209,18 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### Disable audit logging
 
-You can disable audit logging for a {{{ .essential }}} cluster.
+You can disable audit logging for a {{{ .essential }}} instance.
 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **...** in the upper-right corner, and then click **Disable**.
 
@@ -250,13 +250,13 @@ To create a filter rule, define which users and events you want to capture in th
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Add Filter Rule**.
 
@@ -280,13 +280,13 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, locate the filter rule you want to edit, click **...** in its row, and then click **Edit**.
 
@@ -310,13 +310,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, locate the filter rule you want to disable, and turn off the toggle to disable the filter rule.
 
@@ -338,13 +338,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, locate the filter rule you want to delete and click **...**.
 
@@ -373,13 +373,13 @@ When you store audit logs in TiDB Cloud, {{{ .essential }}} saves them as readab
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, you can view the list of audit logs under **TiDB Cloud Storage**.
 
@@ -420,9 +420,9 @@ All classes of audit logs contain the following information:
 | `TABLES`        | The accessed tables related to this audit record.                                              |
 | `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
 | `KEYSPACE_NAME` | The keyspace name of the audit record.                                                        |
-| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the cluster belongs to.                 |
-| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the cluster belongs to.                |
-| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless cluster that the audit record belongs to.           |
+| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the {{{ .essential }}} instance belongs to.                 |
+| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the {{{ .essential }}} instance belongs to.                |
+| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless {{{ .essential }}} instance that the audit record belongs to.           |
 | `REASON`        | The error message of the audit record. Only recorded when an error occurs during the operation.|
 
 ### SQL statement information

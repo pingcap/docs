@@ -101,15 +101,15 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**.
 
@@ -144,15 +144,15 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**.
 
@@ -184,15 +184,15 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**.
 
