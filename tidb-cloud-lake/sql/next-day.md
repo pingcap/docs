@@ -3,6 +3,8 @@ title: NEXT_DAY
 summary: Returns the date of the upcoming specified day of the week after the given date or timestamp.
 ---
 
+# NEXT_DAY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.655.

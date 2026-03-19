@@ -2,6 +2,9 @@
 title: Monitoring Usage
 summary: TiDB Cloud Lake provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the Monitor page, click Monitor in the sidebar menu on the homepage. The page includes the following tabs.
 ---
+
+# Monitoring Usage
+
 Databend Cloud provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the **Monitor** page, click **Monitor** in the sidebar menu on the homepage. The page includes the following tabs:
 
 - [Metrics](#metrics)

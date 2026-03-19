@@ -2,6 +2,9 @@
 title: TO_YYYYMM
 summary: Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year and month number.
 ---
+
+# TO_YYYYMM
+
 Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year and month number.
 
 ## Syntax

@@ -3,6 +3,8 @@ title: SCORE
 summary: Returns the relevance score for rows matched by inverted-index search conditions.
 ---
 
+# SCORE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.425.

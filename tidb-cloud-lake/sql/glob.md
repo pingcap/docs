@@ -3,11 +3,13 @@ title: GLOB
 summary: Performs case-sensitive pattern matching using wildcard characters.
 ---
 
+# GLOB
+
 > **Note:**
 >
 > Introduced or updated in v1.2.714.
 
-Performs case-sensitive pattern matching using wildcard characters:  
+Performs case-sensitive pattern matching using wildcard characters:
 
 - `?` matches any single character.
 - `*` matches zero or more characters.

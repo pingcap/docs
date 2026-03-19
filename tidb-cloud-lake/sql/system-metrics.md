@@ -2,6 +2,9 @@
 title: system.metrics
 summary: Contains information about metric events.
 ---
+
+# system.metrics
+
 Contains information about metric events.
 
 ```sql

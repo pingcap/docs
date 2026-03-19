@@ -3,11 +3,13 @@ title: STREAM_STATUS
 summary: Provides information about the status of a specified stream, yielding a single-column result (has_data) that can take on values of true or false.
 ---
 
+# STREAM_STATUS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.225.
 
-Provides information about the status of a specified stream, yielding a single-column result (`has_data`) that can take on values of `true` or `false`: 
+Provides information about the status of a specified stream, yielding a single-column result (`has_data`) that can take on values of `true` or `false`:
 
 - `true`: Indicates that the stream **might contain** change data capture records.
 - `false`: Indicates that the stream currently does not contain any change data capture records.

@@ -2,6 +2,9 @@
 title: Querying & Transforming
 summary: Databend enables direct querying of staged files without loading data into tables first. Query files from any stage type (user, internal, external) or directly from object storage and HTTPS URLs. Ideal for data inspection, validation, and transformation before or after loading.
 ---
+
+# Querying & Transforming
+
 Databend enables direct querying of staged files without loading data into tables first. Query files from any stage type (user, internal, external) or directly from object storage and HTTPS URLs. Ideal for data inspection, validation, and transformation before or after loading.
 
 ## Syntax
@@ -35,7 +38,7 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
             | [<alias>.]$<col_position> [, [<alias>.]$<col_position> ...] -- Query columns by position
             | [<alias>.]$1[:<column>] [, [<alias>.]$1[:<column>]  ...] -- Query rows as Variants
             } ]
-        FROM {@<stage_name>[/<path>] | '<uri>'} 
+        FROM {@<stage_name>[/<path>] | '<uri>'}
     )
 [ FILES = ( '<file_name>' [ , '<file_name>' ] [ , ... ] ) ]
 [ PATTERN = '<regex_pattern>' ]
@@ -49,12 +52,11 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 > **Note:**
 >
 > compared the two syntaxes
-> - Same `Select List` 
+> - Same `Select List`
 > - Same ` FROM {@<stage_name>[/<path>] | '<uri>'}`
 > - diff parameters:
->   - query use `table function parameters`, i.e. `(<key> => <value>, ...)` 
+>   - query use `table function parameters`, i.e. `(<key> => <value>, ...)`
 >   - transform use Options at the end of [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md)
-
 
 ## FROM Clause
 
@@ -82,7 +84,7 @@ The select list supports three syntaxes; only one may be used, with no mixing.
 >
 > Currently for Parquet and ORC, `Query rows as Variants` is slower than `Query columns by name`, and the two methods can not be mix used.
 
-syntax: 
+syntax:
 
 ```sql
 SELECT [<alias>.]$1[:<column>] [, [<alias>.]$1[:<column>]  ...] <FROM Clause>
@@ -92,7 +94,6 @@ SELECT [<alias>.]$1[:<column>] [, [<alias>.]$1[:<column>]  ...] <FROM Clause>
 - Table Schema: ($1: Variant). i.e. Single Column with Variant Object Type, each Variant representing a whole row
 - Notes:
   - The type of path expressions like `$1:column` is Variant too, it can be auto cast to native types when used in expressions or load to dest table column, sometimes you may want to cast manually before for type-specific operations (e.g., `CAST($1:id AS INT)`) to make the semantics more explicit.
-
 
 ### Query columns by name
 - supported File Formats: NDJSON, AVRO, Parquet, ORC
@@ -106,8 +107,7 @@ SELECT [<alias>.]<column> [, [<alias>.]<column>  ...] <FROM Clause>
 - Notes:
   - All files are required to have the same Parquet/ORC schema; otherwise, an error will be returned
 
-
-### Query columns by Position 
+### Query columns by Position
 - supported File Formats: CSV, TSV
 
 ```sql
@@ -118,7 +118,7 @@ SELECT [<alias>.]$<col_position>[, [<alias>.]$<col_position>,  ...] <FROM Clause
 - Notes
   - `<col_position>` starts from 1
 
-## Query Metadata 
+## Query Metadata
 
 You can also include file metadata in your queries, which is useful for tracking data lineage and debugging:
 
@@ -136,7 +136,6 @@ The following file-level metadata fields are available for the supported file fo
 | -------------------------- | ------- |--------------------------------------------------|
 | `METADATA$FILENAME`        | VARCHAR | The path of the file from which the row was read |
 | `METADATA$FILE_ROW_NUMBER` | INT     | The row number within the file (starting from 0) |
-
 
 **Use cases:**
 - **Data lineage**: Track which source file contributed each record

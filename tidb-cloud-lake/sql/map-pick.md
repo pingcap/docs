@@ -3,6 +3,8 @@ title: MAP_PICK
 summary: Returns a new MAP containing the specified key-value pairs from an existing MAP.
 ---
 
+# MAP_PICK
+
 > **Note:**
 >
 > Introduced or updated in v1.2.654.

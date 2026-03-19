@@ -3,6 +3,8 @@ title: CREATE STAGE
 summary: Creates an internal or external stage.
 ---
 
+# CREATE STAGE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.339.
@@ -108,8 +110,8 @@ CREATE CONNECTION my_s3_connection
   SECRET_ACCESS_KEY = '<your-secret-access-key>';
 
 -- Create stage using the connection
-CREATE STAGE my_s3_stage 
-  URL='s3://load/files/' 
+CREATE STAGE my_s3_stage
+  URL='s3://load/files/'
   CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 
 DESC STAGE my_s3_stage;
@@ -182,8 +184,8 @@ CREATE CONNECTION iam_s3_connection
   EXTERNAL_ID = 'my-external-id-123';
 
 -- Create stage using the connection
-CREATE STAGE iam_external_stage 
-  URL = 's3://databend-toronto' 
+CREATE STAGE iam_external_stage
+  URL = 's3://databend-toronto'
   CONNECTION = (CONNECTION_NAME = 'iam_s3_connection');
 ```
 

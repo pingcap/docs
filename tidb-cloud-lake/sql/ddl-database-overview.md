@@ -2,6 +2,9 @@
 title: Database
 summary: This page provides a comprehensive overview of database operations in Databend, organized by functionality for easy reference.
 ---
+
+# Database
+
 This page provides a comprehensive overview of database operations in Databend, organized by functionality for easy reference.
 
 ## Database Creation & Management

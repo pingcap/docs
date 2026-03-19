@@ -3,6 +3,8 @@ title: ALTER NOTIFICATION INTEGRATION
 summary: Alter the settings of a named notification integration that can be used to send notifications to external messaging services.
 ---
 
+# ALTER NOTIFICATION INTEGRATION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.371.
@@ -42,4 +44,3 @@ ALTER NOTIFICATION INTEGRATION SampleNotification SET enabled = true
 ```
 
 This example enables the notification integration named `SampleNotification`.
-

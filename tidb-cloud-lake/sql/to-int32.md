@@ -2,6 +2,9 @@
 title: TO_INT32
 summary: Converts a value to INT32 data type.
 ---
+
+# TO_INT32
+
 Converts a value to INT32 data type.
 
 ## Syntax

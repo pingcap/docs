@@ -3,6 +3,8 @@ title: SHOW TASKS
 summary: Lists the tasks that are visible to the current role.
 ---
 
+# SHOW TASKS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.900.

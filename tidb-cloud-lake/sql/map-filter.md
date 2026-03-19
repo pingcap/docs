@@ -3,6 +3,8 @@ title: MAP_FILTER
 summary: Filters key-value pairs in a JSON object based on a specified condition, defined using a lambda expression.
 ---
 
+# MAP_FILTER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

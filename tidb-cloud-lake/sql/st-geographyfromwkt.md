@@ -3,6 +3,8 @@ title: ST_GEOGRAPHYFROMWKT
 summary: Parses a WKT(well-known-text) or EWKT(extended well-known-text) input and returns a value of type GEOGRAPHY.
 ---
 
+# ST_GEOGRAPHYFROMWKT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.347.

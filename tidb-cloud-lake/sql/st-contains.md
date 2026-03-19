@@ -3,6 +3,8 @@ title: ST_CONTAINS
 summary: Returns TRUE if the second GEOMETRY object is completely inside the first GEOMETRY object.
 ---
 
+# ST_CONTAINS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.564.

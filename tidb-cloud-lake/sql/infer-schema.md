@@ -2,6 +2,9 @@
 title: INFER_SCHEMA
 summary: Automatically detects the file metadata schema and retrieves the column definitions.
 ---
+
+# INFER_SCHEMA
+
 Automatically detects the file metadata schema and retrieves the column definitions.
 
 `infer_schema` currently supports the following file formats:

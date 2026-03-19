@@ -2,6 +2,9 @@
 title: BITMAP_SUBSET_LIMIT
 summary: Generates a sub-bitmap of the source bitmap, beginning with a range from the start value, with a size limit.
 ---
+
+# BITMAP_SUBSET_LIMIT
+
 Generates a sub-bitmap of the source bitmap, beginning with a range from the start value, with a size limit.
 
 ## Syntax

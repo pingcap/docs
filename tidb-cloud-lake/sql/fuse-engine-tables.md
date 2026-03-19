@@ -3,6 +3,8 @@ title: Fuse Engine Tables
 summary: Databend uses the Fuse Engine as its default storage engine, providing a Git-like data management system with.
 ---
 
+# Fuse Engine Tables
+
 > **Note:**
 >
 > Introduced or updated in v1.2.736.
@@ -143,19 +145,19 @@ Below are the available Fuse Engine options, grouped by their purpose:
   ```sql
   -- Set enable_auto_vacuum globally for all tables across all sessions
   SET GLOBAL enable_auto_vacuum = 1;
-  
+
   -- Create a table with auto vacuum disabled (overrides global setting)
   CREATE OR REPLACE TABLE t1 (id INT) ENABLE_AUTO_VACUUM = 0;
   INSERT INTO t1 VALUES(1); -- Won't trigger vacuum despite global setting
-  
+
   -- Create another table that inherits the global setting
   CREATE OR REPLACE TABLE t2 (id INT);
   INSERT INTO t2 VALUES(1); -- Will trigger vacuum due to global setting
-  
+
   -- Enable auto vacuum for an existing table
   ALTER TABLE t1 SET OPTIONS(ENABLE_AUTO_VACUUM = 1);
   INSERT INTO t1 VALUES(2); -- Now will trigger vacuum
-  
+
   -- Table option takes precedence over global settings
   SET GLOBAL enable_auto_vacuum = 0; -- Turn off globally
   -- t1 will still vacuum because table setting overrides global
@@ -170,31 +172,31 @@ Below are the available Fuse Engine options, grouped by their purpose:
   `data_retention_num_snapshots_to_keep = <n>`
 - **Description:**
   Specifies the number of snapshots to retain during vacuum operations. This can be set globally as a setting for all tables or configured at the table level. The table-level option has a higher priority than the session/global setting of the same name. When set, only the specified number of most recent snapshots will be kept after vacuum operations. Overrides the `data_retention_time_in_days` setting. If set to 0, this setting will be ignored. This option works in conjunction with the `enable_auto_vacuum` setting to provide granular control over snapshot retention policies.
-  
+
   **Examples:**
   ```sql
   -- Set global retention to 10 snapshots for all tables across all sessions
   SET GLOBAL data_retention_num_snapshots_to_keep = 10;
-  
+
   -- Create a table with custom snapshot retention (overrides global setting)
-  CREATE OR REPLACE TABLE t1 (id INT) 
+  CREATE OR REPLACE TABLE t1 (id INT)
     enable_auto_vacuum = 1
     data_retention_num_snapshots_to_keep = 5;
-  
+
   -- Create another table that inherits the global setting
   CREATE OR REPLACE TABLE t2 (id INT) enable_auto_vacuum = 1;
-  
+
   -- When vacuum is triggered:
   -- t1 will keep 5 snapshots (table setting)
   -- t2 will keep 10 snapshots (global setting)
-  
+
   -- Change global setting
   SET GLOBAL data_retention_num_snapshots_to_keep = 20;
-  
+
   -- Table options still take precedence:
   -- t1 will still keep only 5 snapshots
   -- t2 will now keep 20 snapshots
-  
+
   -- Modify snapshot retention for an existing table
   ALTER TABLE t1 SET OPTIONS(data_retention_num_snapshots_to_keep = 3);
   -- Now t1 will keep 3 snapshots when vacuum is triggered

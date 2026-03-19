@@ -3,6 +3,8 @@ title: SHOW STREAMS
 summary: Lists the streams associated with a specific database.
 ---
 
+# SHOW STREAMS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.460.
@@ -12,8 +14,8 @@ Lists the streams associated with a specific database.
 ## Syntax
 
 ```sql
-SHOW [ FULL ] STREAMS 
-     [ { FROM | IN } <database_name> ]  
+SHOW [ FULL ] STREAMS
+     [ { FROM | IN } <database_name> ]
      [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 

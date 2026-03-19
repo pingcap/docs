@@ -3,6 +3,8 @@ title: SPLIT
 summary: Splits a string using a specified delimiter and returns the resulting parts as an array.
 ---
 
+# SPLIT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.164.

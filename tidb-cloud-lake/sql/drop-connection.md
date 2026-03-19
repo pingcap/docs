@@ -3,6 +3,8 @@ title: DROP CONNECTION
 summary: Deletes an existing connection.
 ---
 
+# DROP CONNECTION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.208.

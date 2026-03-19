@@ -3,6 +3,8 @@ title: SHOW TABLES
 summary: Lists the tables in the current or a specified database.
 ---
 
+# SHOW TABLES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.415.
@@ -18,9 +20,9 @@ See also: [system.tables](/tidb-cloud-lake/sql/system-tables.md)
 ## Syntax
 
 ```sql
-SHOW [ FULL ] TABLES 
-     [ {FROM | IN} <database_name> ] 
-     [ HISTORY ] 
+SHOW [ FULL ] TABLES
+     [ {FROM | IN} <database_name> ]
+     [ HISTORY ]
      [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 
@@ -102,8 +104,8 @@ SHOW TABLES LIKE '%time';
 │ ontime            │
 └───────────────────┘
 
--- CASE-SENSITIVE pattern matching. 
--- No results will be returned if you code the previous statement like this: 
+-- CASE-SENSITIVE pattern matching.
+-- No results will be returned if you code the previous statement like this:
 SHOW TABLES LIKE '%TIME';
 ```
 

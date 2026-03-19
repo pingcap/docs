@@ -3,6 +3,8 @@ title: SHOW DROP TABLES
 summary: Lists the dropped tables in the current or a specified database.
 ---
 
+# SHOW DROP TABLES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.203.

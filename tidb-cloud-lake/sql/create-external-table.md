@@ -2,6 +2,9 @@
 title: CREATE EXTERNAL TABLE
 summary: The CREATE TABLE... CONNECTION = (...) statement creates a table and specifies an S3-compatible storage bucket for data storage instead of using the default local storage.
 ---
+
+# CREATE EXTERNAL TABLE
+
 The `CREATE TABLE ... CONNECTION = (...)` statement creates a table and specifies an S3-compatible storage bucket for data storage instead of using the default local storage.
 
 Then the fuse table engine table will be stored in the specified S3-compatible bucket.
@@ -62,7 +65,6 @@ The external location S3 bucket must have the following permissions granted thro
 :::
 
 ## Examples
-
 
 Before using the `SHOW CREATE TABLE` command, you need to set the `hide_options_in_show_create_table` variable to `0`.
 ```sql

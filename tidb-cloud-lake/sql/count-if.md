@@ -2,7 +2,10 @@
 title: COUNT_IF
 summary: The suffix _IF can be appended to the name of any aggregate function. In this case, the aggregate function accepts an extra argument – a condition.
 ---
-## COUNT_IF 
+
+# COUNT_IF
+
+## COUNT_IF
 
 The suffix `_IF` can be appended to the name of any aggregate function. In this case, the aggregate function accepts an extra argument – a condition.
 
@@ -41,4 +44,3 @@ FROM orders;
 |------------------|
 |        3         |
 ```
-

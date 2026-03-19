@@ -3,6 +3,8 @@ title: system.copy_history
 summary: Contains information about copy history.
 ---
 
+# system.copy_history
+
 > **Note:**
 >
 > Introduced or updated in v1.2.823.
@@ -29,4 +31,3 @@ select * from copy_history('my_table');
 ```
 
 Note that, the results of `system.copy_history` is respected by settings `load_file_metadata_expire_hours` which is 24 hours by default.
-

@@ -3,6 +3,8 @@ title: DATE_PART
 summary: Retrieves the designated portion of a date or timestamp.
 ---
 
+# DATE_PART
+
 > **Note:**
 >
 > Introduced or updated in v1.2.723.

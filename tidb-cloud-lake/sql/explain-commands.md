@@ -2,6 +2,9 @@
 title: Explain Commands
 summary: This page provides reference information for the explain-related commands in Databend.
 ---
+
+# Explain Commands
+
 This page provides reference information for the explain-related commands in Databend.
 
 ## Commands Overview

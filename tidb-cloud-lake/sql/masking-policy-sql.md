@@ -3,6 +3,8 @@ title: Masking Policy
 summary: This page provides a comprehensive overview of Masking Policy operations in Databend, organized by functionality for easy reference.
 ---
 
+# Masking Policy
+
 This page provides a comprehensive overview of Masking Policy operations in Databend, organized by functionality for easy reference.
 
 ## Masking Policy Management

@@ -2,13 +2,15 @@
 title: PIVOT
 summary: The PIVOT operation in Databend allows you to transform a table by rotating it and aggregating results based on specified columns.
 ---
-The `PIVOT` operation in Databend allows you to transform a table by rotating it and aggregating results based on specified columns. 
+
+# PIVOT
+
+The `PIVOT` operation in Databend allows you to transform a table by rotating it and aggregating results based on specified columns.
 
 It is a useful operation for summarizing and analyzing large amounts of data in a more readable format. In this document, we will explain the syntax and provide an example of how to use the `PIVOT` operation.
 
 **See also:**
 [UNPIVOT](/tidb-cloud-lake/sql/unpivot.md)
-
 
 ## Syntax
 
@@ -27,19 +29,17 @@ Where:
 * `<value_column>`: The column whose unique values will become new columns in the pivoted result set.
 * `<pivot_value_N>`: A unique value from the `<value_column>` that will become a new column in the pivoted result set.
 
-
 ## Examples
 
 Let's say we have a table called monthly_sales that contains sales data for different employees across different months. We can use the `PIVOT` operation to summarize the data and calculate the total sales for each employee in each month.
 
 ### Creating and Inserting Data
 
-
 ```sql
 -- Create the monthly_sales table
 CREATE TABLE monthly_sales(
-  empid INT, 
-  amount INT, 
+  empid INT,
+  amount INT,
   month VARCHAR
 );
 
@@ -68,7 +68,7 @@ INSERT INTO monthly_sales VALUES
 Now, we can use the `PIVOT` operation to calculate the total sales for each employee in each month. We will use the `SUM` aggregate function to calculate the total sales, and the MONTH column will be pivoted to create new columns for each month.
 
 ```sql
-SELECT * 
+SELECT *
 FROM monthly_sales
 PIVOT(SUM(amount) FOR MONTH IN ('JAN', 'FEB', 'MAR', 'APR'))
 ORDER BY EMPID;

@@ -2,6 +2,9 @@
 title: H3_TO_CENTER_CHILD
 summary: Returns the center child index at the specified resolution.
 ---
+
+# H3_TO_CENTER_CHILD
+
 Returns the center child index at the specified resolution.
 
 ## Syntax

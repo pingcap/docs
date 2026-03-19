@@ -3,6 +3,8 @@ title: INSERT
 summary: Inserts one or more rows into a table.
 ---
 
+# INSERT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.
@@ -130,13 +132,13 @@ CREATE TABLE sales_summary (
 
 -- Inserting aggregated sales data into the summary table
 INSERT INTO sales_summary (product_id, total_quantity_sold, total_revenue)
-SELECT 
+SELECT
     product_id,
     SUM(quantity_sold) AS total_quantity_sold,
     SUM(revenue) AS total_revenue
-FROM 
+FROM
     sales
-GROUP BY 
+GROUP BY
     product_id;
 
 -- Displaying the contents of the sales_summary table
@@ -187,7 +189,7 @@ SELECT * FROM staff_records;
 
 ### Example-4: Insert with Staged Files
 
-Databend enables you to insert data into a table from staged files with the INSERT INTO statement. This is achieved through Databend's capacity to [Query Staged Files](/tidb-cloud-lake/sql/stage.md) and subsequently incorporate the query result into the table. 
+Databend enables you to insert data into a table from staged files with the INSERT INTO statement. This is achieved through Databend's capacity to [Query Staged Files](/tidb-cloud-lake/sql/stage.md) and subsequently incorporate the query result into the table.
 
 1. Create a table called `sample`:
 
@@ -207,14 +209,14 @@ We'll establish an internal stage named `mystage` and then populate it with samp
 
 ```sql
 CREATE STAGE mystage;
-       
+
 COPY INTO @mystage
-FROM 
+FROM
 (
-    SELECT * 
-    FROM 
+    SELECT *
+    FROM
     (
-        VALUES 
+        VALUES
         (1, 'Chengdu', 80),
         (3, 'Chongqing', 90),
         (6, 'Hangzhou', 92),
@@ -228,11 +230,11 @@ FILE_FORMAT = (TYPE = PARQUET);
 
 > **Tip:**
 >
-> You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. When `purge` is set to `true`, the original file will only be deleted if the data update is successful. 
+> You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. When `purge` is set to `true`, the original file will only be deleted if the data update is successful.
 
 ```sql
-INSERT INTO sample 
-    (id, city, score) 
+INSERT INTO sample
+    (id, city, score)
 ON
     (Id)
 SELECT

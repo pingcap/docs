@@ -2,12 +2,15 @@
 title: DENSE_RANK
 summary: Assigns a rank to each row within a partition. Rows with equal values receive the same rank, with no gaps in subsequent rankings.
 ---
+
+# DENSE_RANK
+
 Assigns a rank to each row within a partition. Rows with equal values receive the same rank, with no gaps in subsequent rankings.
 
 ## Syntax
 
 ```sql
-DENSE_RANK() 
+DENSE_RANK()
 OVER (
     [ PARTITION BY partition_expression ]
     ORDER BY sort_expression [ ASC | DESC ]
@@ -94,4 +97,3 @@ Charlie | Math    |    88 | 1
 Charlie | English |    85 | 2
 Charlie | Science |    85 | 2
 ```
-

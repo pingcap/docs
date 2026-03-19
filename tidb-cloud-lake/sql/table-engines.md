@@ -2,6 +2,9 @@
 title: Table Engines
 summary: Databend provides several table engines so that you can balance performance and interoperability needs without moving data. Each engine is optimized for a specific scenario—ranging from Databend’s native Fuse storage to external data lake formats.
 ---
+
+# Table Engines
+
 Databend provides several table engines so that you can balance performance and interoperability needs without moving data. Each engine is optimized for a specific scenario—ranging from Databend’s native Fuse storage to external data lake formats.
 
 ## Available Engines
@@ -19,4 +22,3 @@ Databend provides several table engines so that you can balance performance and 
 - Choose **Iceberg** when you already manage datasets through Iceberg catalogs and need tight lakehouse integration.
 - Configure **Hive** when you rely on an existing Hive Metastore but want Databend’s query engine.
 - Select **Delta** to analyse Delta Lake tables in place without ingesting them into Fuse.
-

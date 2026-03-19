@@ -3,6 +3,8 @@ title: ARRAY_REVERSE
 summary: Reverses the order of elements in an array.
 ---
 
+# ARRAY_REVERSE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

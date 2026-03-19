@@ -3,6 +3,8 @@ title: Delta Lake Engine
 summary: Databend's Delta Lake engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in Databend, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within Databend.
 ---
 
+# Delta Lake Engine
+
 > **Note:**
 >
 > Introduced or updated in v1.2.262.
@@ -16,9 +18,9 @@ Databend's [Delta Lake](https://delta.io/) engine allows you to seamlessly query
 ## Syntax
 
 ```sql
-CREATE TABLE <table_name> 
-ENGINE = Delta 
-LOCATION = 's3://<path_to_table>' 
+CREATE TABLE <table_name>
+ENGINE = Delta
+LOCATION = 's3://<path_to_table>'
 CONNECTION_NAME = '<connection_name>'
 ```
 
@@ -28,13 +30,13 @@ Before creating a table with the Delta Lake engine, you need to create a connect
 
 ```sql
 --Set up connection
-CREATE CONNECTION my_s3_conn 
-STORAGE_TYPE = 's3' 
+CREATE CONNECTION my_s3_conn
+STORAGE_TYPE = 's3'
 ACCESS_KEY_ID ='your-ak' SECRET_ACCESS_KEY ='your-sk';
 
 -- Create table with Delta Lake engine
-CREATE TABLE test_delta 
-ENGINE = Delta 
-LOCATION = 's3://testbucket/admin/data/delta/delta-table/' 
+CREATE TABLE test_delta
+ENGINE = Delta
+LOCATION = 's3://testbucket/admin/data/delta/delta-table/'
 CONNECTION_NAME = 'my_s3_conn';
 ```

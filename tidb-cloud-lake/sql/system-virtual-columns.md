@@ -3,6 +3,8 @@ title: system.virtual_columns
 summary: Contains information about the created virtual columns in the system.
 ---
 
+# system.virtual_columns
+
 > **Note:**
 >
 > Introduced or updated in v1.2.832.

@@ -2,6 +2,9 @@
 title: COSINE_DISTANCE
 summary: Measuring similarity using the cosine_distance function in Databend.
 ---
+
+# COSINE_DISTANCE
+
 Calculates the cosine distance between two vectors, measuring how dissimilar they are.
 
 ## Syntax
@@ -42,7 +45,6 @@ Where v1ᵢ and v2ᵢ are the elements of the input vectors.
 >
 > This function performs vector computations within Databend and does not rely on external APIs.
 
-
 ## Examples
 
 ### Basic Usage
@@ -79,12 +81,12 @@ Find the vector most similar to [1, 2, 3]:
 
 ```sql
 SELECT
-    id, 
-    vec, 
+    id,
+    vec,
     COSINE_DISTANCE(vec, [1.0000, 2.0000, 3.0000]::VECTOR(3)) AS distance
-FROM 
+FROM
     vectors
-ORDER BY 
+ORDER BY
     distance ASC;
 ```
 

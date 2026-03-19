@@ -3,6 +3,8 @@ title: L2_DISTANCE
 summary: Calculates the Euclidean (L2) distance between two vectors, measuring the straight-line distance between them in vector space.
 ---
 
+# L2_DISTANCE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.777.
@@ -83,13 +85,13 @@ INSERT INTO vectors VALUES
 Find the vector closest to [1, 2, 3] using L2 distance:
 
 ```sql
-SELECT 
+SELECT
     id,
-    vec, 
+    vec,
     L2_DISTANCE(vec, [1.0000, 2.0000, 3.0000]::VECTOR(3)) AS distance
-FROM 
+FROM
     vectors
-ORDER BY 
+ORDER BY
     distance ASC;
 ```
 
@@ -102,4 +104,3 @@ ORDER BY
 │  3 │ [4,5,6]   │   5.196152 │
 ╰─────────────────────────────╯
 ```
-

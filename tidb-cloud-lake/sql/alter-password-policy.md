@@ -3,6 +3,8 @@ title: ALTER PASSWORD POLICY
 summary: Modifies an existing password policy in Databend.
 ---
 
+# ALTER PASSWORD POLICY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.283.

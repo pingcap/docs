@@ -3,6 +3,8 @@ title: JSON_PATH_MATCH
 summary: Checks whether a specified JSON path expression matches certain conditions within a JSON data. Please note that the @@ operator is synonymous with this function. For more information, see JSON Operators.
 ---
 
+# JSON_PATH_MATCH
+
 > **Note:**
 >
 > Introduced or updated in v1.2.241.

@@ -2,6 +2,9 @@
 title: Conversion Functions
 summary: This page provides a comprehensive overview of Conversion functions in Databend, organized by functionality for easy reference.
 ---
+
+# Conversion Functions
+
 This page provides a comprehensive overview of Conversion functions in Databend, organized by functionality for easy reference.
 
 ## Type Conversion Functions
@@ -75,6 +78,5 @@ Please note the following when converting a value from one type to another:
     | Float          | Int         |
     | Decimal        | Int         |
     | String (Int)   | Int         |
-
 
 - Databend also offers a variety of functions for converting expressions into different date and time formats. For more information, see [Date & Time Functions](/tidb-cloud-lake/sql/date-time-functions.md).

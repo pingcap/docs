@@ -2,6 +2,9 @@
 title: TOMORROW
 summary: Returns tomorrow date, same as today() + 1.
 ---
+
+# TOMORROW
+
 Returns tomorrow date, same as `today() + 1`.
 
 ## Syntax

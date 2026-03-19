@@ -3,6 +3,8 @@ title: DESC USER
 summary: Displays detailed information about a specific SQL user, including authentication type, roles, network policy, password policy, and other user-related settings.
 ---
 
+# DESC USER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.644.

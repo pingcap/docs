@@ -3,6 +3,8 @@ title: DROP TASK
 summary: The DROP TASK statement is used to delete an existing task.
 ---
 
+# DROP TASK
+
 > **Note:**
 >
 > Introduced or updated in v1.2.371.

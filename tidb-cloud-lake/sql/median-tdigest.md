@@ -3,6 +3,8 @@ title: MEDIAN_TDIGEST
 summary: Computes the median of a numeric data sequence using the t-digest algorithm.
 ---
 
+# MEDIAN_TDIGEST
+
 > **Note:**
 >
 > Introduced or updated in v1.2.41.
@@ -22,8 +24,8 @@ MEDIAN_TDIGEST(<expr>)
 ## Arguments
 
 | Arguments | Description              |
-|-----------|--------------------------|                                                                                                                 
-| `<expr>`  | Any numerical expression |                                                                                                     
+|-----------|--------------------------|
+| `<expr>`  | Any numerical expression |
 
 ## Return Type
 

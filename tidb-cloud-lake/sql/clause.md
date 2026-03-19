@@ -2,8 +2,10 @@
 title: WITH Clause
 summary: The WITH clause is an optional clause that precedes the body of the SELECT statement, and defines one or more CTEs (common table expressions) that can be referenced later in the statement.
 ---
-The WITH clause is an optional clause that precedes the body of the SELECT statement, and defines one or more CTEs (common table expressions) that can be referenced later in the statement.
 
+# WITH Clause
+
+The WITH clause is an optional clause that precedes the body of the SELECT statement, and defines one or more CTEs (common table expressions) that can be referenced later in the statement.
 
 ## Syntax
 
@@ -49,7 +51,7 @@ Where:
 ```sql
 WITH high_value_customers AS (
     SELECT customer_id, customer_name, total_spent
-    FROM customers 
+    FROM customers
     WHERE total_spent > 10000
 )
 SELECT c.customer_name, o.order_date, o.order_amount
@@ -83,15 +85,15 @@ ORDER BY r.total_sales DESC;
 WITH RECURSIVE countdown AS (
     -- Anchor clause: starting point
     SELECT 10 as num
-    
+
     UNION ALL
-    
+
     -- Recursive clause: repeat until condition
     SELECT num - 1
-    FROM countdown 
+    FROM countdown
     WHERE num > 1  -- Stop condition
 )
-SELECT num FROM countdown 
+SELECT num FROM countdown
 ORDER BY num DESC;
 ```
 

@@ -3,6 +3,8 @@ title: TRY_TO_BINARY
 summary: An enhanced version of TO_BINARY that converts an input expression to a binary value, returning NULL if the conversion fails instead of raising an error.
 ---
 
+# TRY_TO_BINARY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.673.

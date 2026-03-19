@@ -3,6 +3,8 @@ title: FUSE_STATISTIC
 summary: note This function is deprecated. Use SHOW STATISTICS instead to view table statistics..
 ---
 
+# FUSE_STATISTIC
+
 > **Note:**
 >
 > Introduced or updated in v1.2.587.

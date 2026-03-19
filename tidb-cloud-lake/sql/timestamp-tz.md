@@ -2,6 +2,9 @@
 title: TO_TIMESTAMP_TZ
 summary: Converts a value to TIMESTAMP_TZ, keeping both the UTC moment and the timezone offset. Use TRY_TO_TIMESTAMP_TZ if you prefer NULL instead of an error.
 ---
+
+# TO_TIMESTAMP_TZ
+
 Converts a value to [`TIMESTAMP_TZ`](/tidb-cloud-lake/sql/date-time.md#timestamp_tz), keeping both the UTC moment and the timezone offset. Use `TRY_TO_TIMESTAMP_TZ` if you prefer `NULL` instead of an error.
 
 ## Syntax

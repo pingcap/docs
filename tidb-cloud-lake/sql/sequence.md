@@ -2,6 +2,9 @@
 title: Sequence
 summary: This page provides a comprehensive overview of sequence operations in Databend, organized by functionality for easy reference.
 ---
+
+# Sequence
+
 This page provides a comprehensive overview of sequence operations in Databend, organized by functionality for easy reference.
 
 ## Sequence Management

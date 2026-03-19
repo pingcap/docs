@@ -2,6 +2,9 @@
 title: MULTIPLY
 summary: The MULTIPLY function performs multiplication between two numbers. It is equivalent to using the * operator.
 ---
+
+# MULTIPLY
+
 The MULTIPLY function performs multiplication between two numbers. It is equivalent to using the `*` operator.
 
 ## Syntax
@@ -50,7 +53,7 @@ SELECT MULTIPLY(2.5, 4);
 +------------------+
 
 -- With column references
-SELECT number, MULTIPLY(number, 10) AS multiplied 
+SELECT number, MULTIPLY(number, 10) AS multiplied
 FROM numbers(5);
 +--------+------------+
 | number | multiplied |

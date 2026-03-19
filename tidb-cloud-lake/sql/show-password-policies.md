@@ -3,6 +3,8 @@ title: SHOW PASSWORD POLICIES
 summary: Displays a list of all existing password policies in Databend.
 ---
 
+# SHOW PASSWORD POLICIES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.283.

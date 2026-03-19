@@ -2,6 +2,9 @@
 title: AS_OBJECT
 summary: Strict casting VARIANT values to OBJECT data type. If the input data type is not VARIANT, the output is NULL. If the type of value in the VARIANT does not match the output value, the output is NULL.
 ---
+
+# AS_OBJECT
+
 Strict casting `VARIANT` values to OBJECT data type.
 If the input data type is not `VARIANT`, the output is `NULL`.
 If the type of value in the `VARIANT` does not match the output value, the output is `NULL`.

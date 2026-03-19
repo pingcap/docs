@@ -3,6 +3,8 @@ title: NTILE
 summary: Divides rows into a specified number of buckets and assigns a bucket number to each row. Rows are distributed as evenly as possible across buckets.
 ---
 
+# NTILE
+
 > **Note:**
 >
 > Introduced in v1.1.50.

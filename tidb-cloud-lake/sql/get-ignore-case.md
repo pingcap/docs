@@ -2,6 +2,9 @@
 title: GET_IGNORE_CASE
 summary: Extracts value from a VARIANT that contains OBJECT by the field_name. The value is returned as a Variant or NULL if either of the arguments is NULL.
 ---
+
+# GET_IGNORE_CASE
+
 Extracts value from a `VARIANT` that contains `OBJECT` by the field_name.
 The value is returned as a `Variant` or `NULL` if either of the arguments is `NULL`.
 

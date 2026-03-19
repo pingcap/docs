@@ -2,6 +2,9 @@
 title: TRY_CAST
 summary: Converts a value from one data type to another. Returns NULL on error.
 ---
+
+# TRY_CAST
+
 Converts a value from one data type to another. Returns NULL on error.
 
 See also: [CAST](/tidb-cloud-lake/sql/cast.md)

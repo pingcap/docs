@@ -3,6 +3,8 @@ title: DESC CONNECTION
 summary: Describes the details of a specific connection, providing information about its type and configuration.
 ---
 
+# DESC CONNECTION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.208.

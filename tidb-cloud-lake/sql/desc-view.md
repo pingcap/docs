@@ -3,6 +3,8 @@ title: DESC VIEW
 summary: Returns the list of columns for a view.
 ---
 
+# DESC VIEW
+
 > **Note:**
 >
 > Introduced or updated in v1.2.383.

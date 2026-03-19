@@ -2,6 +2,9 @@
 title: KURTOSIS
 summary: Aggregate function.
 ---
+
+# KURTOSIS
+
 Aggregate function.
 
 The `KURTOSIS()` function returns the excess kurtosis of all input values.

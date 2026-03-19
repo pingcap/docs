@@ -2,6 +2,9 @@
 title: REPLACE
 summary: Returns the string str with all occurrences of the string from_str replaced by the string to_str.
 ---
+
+# REPLACE
+
 Returns the string str with all occurrences of the string from_str replaced by the string to_str.
 
 ## Syntax

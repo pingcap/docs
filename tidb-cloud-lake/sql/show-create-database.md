@@ -2,6 +2,9 @@
 title: SHOW CREATE DATABASE
 summary: Shows the CREATE DATABASE statement that creates the named database.
 ---
+
+# SHOW CREATE DATABASE
+
 Shows the CREATE DATABASE statement that creates the named database.
 
 ## Syntax

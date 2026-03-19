@@ -3,6 +3,8 @@ title: GREATEST
 summary: Returns the maximum value from a set of values. If any value in the set is NULL, the function returns NULL.
 ---
 
+# GREATEST
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.

@@ -3,6 +3,8 @@ title: OBJECT_PICK
 summary: Creates a new JSON object containing only the specified keys from the input JSON object. If a specified key doesn't exist in the input object, it is omitted from the result.
 ---
 
+# OBJECT_PICK
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

@@ -2,6 +2,9 @@
 title: ARRAY_SUM
 summary: Sums the numeric elements in an array. NULL items are skipped, and non-numeric values raise an error.
 ---
+
+# ARRAY_SUM
+
 Sums the numeric elements in an array. `NULL` items are skipped, and non-numeric values raise an error.
 
 ## Syntax

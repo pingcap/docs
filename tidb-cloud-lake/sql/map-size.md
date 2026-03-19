@@ -3,6 +3,8 @@ title: MAP_SIZE
 summary: Returns the size of a MAP.
 ---
 
+# MAP_SIZE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.459.

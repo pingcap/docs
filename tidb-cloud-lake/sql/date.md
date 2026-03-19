@@ -3,6 +3,8 @@ title: DATE
 summary: Alias for TO_DATE.
 ---
 
+# DATE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.375.

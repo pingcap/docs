@@ -2,7 +2,10 @@
 title: system.views
 summary: Provides metadata information for all views.
 ---
-Provides metadata information for all views. 
+
+# system.views
+
+Provides metadata information for all views.
 
 See also:
 

@@ -3,6 +3,8 @@ title: ST_GEOGFROMGEOHASH
 summary: Returns a GEOGRAPHY object for the polygon that represents the boundaries of a geohash.
 ---
 
+# ST_GEOGFROMGEOHASH
+
 > **Note:**
 >
 > Introduced or updated in v1.2.402.

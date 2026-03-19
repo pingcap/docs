@@ -3,6 +3,8 @@ title: SHOW METRICS
 summary: Shows the list of system metrics.
 ---
 
+# SHOW METRICS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.190.

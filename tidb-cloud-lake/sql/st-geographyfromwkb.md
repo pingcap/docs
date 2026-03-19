@@ -3,6 +3,8 @@ title: ST_GEOGRAPHYFROMWKB
 summary: Parses a WKB(well-known-binary) or EWKB(extended well-known-binary) input and returns a value of type GEOGRAPHY.
 ---
 
+# ST_GEOGRAPHYFROMWKB
+
 > **Note:**
 >
 > Introduced or updated in v1.2.395.

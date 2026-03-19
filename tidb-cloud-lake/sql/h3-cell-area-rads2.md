@@ -2,6 +2,9 @@
 title: H3_CELL_AREA_RADS2
 summary: Returns the exact area of specific cell in square radians.
 ---
+
+# H3_CELL_AREA_RADS2
+
 Returns the exact area of specific cell in square radians.
 
 ## Syntax

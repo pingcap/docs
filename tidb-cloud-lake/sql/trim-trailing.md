@@ -2,9 +2,12 @@
 title: TRIM_TRAILING
 summary: Removes all occurrences of the specified trim string from the end of the string.
 ---
+
+# TRIM_TRAILING
+
 Removes all occurrences of the specified trim string from the end of the string.
 
-See also: 
+See also:
 
 - [RTRIM](/tidb-cloud-lake/sql/rtrim.md)
 - [TRIM_LEADING](/tidb-cloud-lake/sql/trim-leading.md)

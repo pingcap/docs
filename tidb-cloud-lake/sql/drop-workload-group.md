@@ -3,11 +3,13 @@ title: DROP WORKLOAD GROUP
 summary: Removes the specified workload group.
 ---
 
+# DROP WORKLOAD GROUP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.743.
 
-Removes the specified workload group. 
+Removes the specified workload group.
 
 ## Syntax
 

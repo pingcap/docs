@@ -2,6 +2,9 @@
 title: TO_FLOAT64
 summary: Converts a value to FLOAT64 data type.
 ---
+
+# TO_FLOAT64
+
 Converts a value to FLOAT64 data type.
 
 ## Syntax

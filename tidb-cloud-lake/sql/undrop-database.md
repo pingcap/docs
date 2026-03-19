@@ -2,6 +2,9 @@
 title: UNDROP DATABASE
 summary: Restores the most recent version of a dropped database. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 ---
+
+# UNDROP DATABASE
+
 Restores the most recent version of a dropped database. This leverages the Databend Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**

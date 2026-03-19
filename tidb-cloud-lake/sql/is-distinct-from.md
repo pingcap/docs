@@ -2,6 +2,9 @@
 title: IS [ NOT ] DISTINCT FROM
 summary: Compares whether two expressions are equal (or not equal) with awareness of nullability, meaning it treats NULLs as known values for comparing equality.
 ---
+
+# IS [ NOT ] DISTINCT FROM
+
 Compares whether two expressions are equal (or not equal) with awareness of nullability, meaning it treats NULLs as known values for comparing equality.
 
 ## Syntax

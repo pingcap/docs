@@ -3,6 +3,8 @@ title: system.temporary_tables
 summary: Provides information about all existing temporary tables in the current session.
 ---
 
+# system.temporary_tables
+
 > **Note:**
 >
 > Introduced or updated in v1.2.666.

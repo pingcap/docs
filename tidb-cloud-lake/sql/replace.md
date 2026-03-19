@@ -3,6 +3,8 @@ title: REPLACE
 summary: REPLACE INTO can either insert multiple new rows into a table or update existing rows if those rows already exist, using the following sources of data.
 ---
 
+# REPLACE
+
 > **Note:**
 >
 > Introduced in v1.1.55.
@@ -37,12 +39,12 @@ CREATE TABLE employees (
 );
 
 -- This REPLACE INTO inserts a new row
-REPLACE INTO employees (employee_id, employee_name, employee_salary, employee_email) 
+REPLACE INTO employees (employee_id, employee_name, employee_salary, employee_email)
 ON (employee_email)
 VALUES (123, 'John Doe', 50000, 'john.doe@example.com');
 
 -- This REPLACE INTO updates the inserted row
-REPLACE INTO employees (employee_id, employee_name, employee_salary, employee_email) 
+REPLACE INTO employees (employee_id, employee_name, employee_salary, employee_email)
 ON (employee_email)
 VALUES (123, 'John Doe', 60000, 'john.doe@example.com');
 ```
@@ -123,14 +125,14 @@ VALUES
 Firstly, we create a stage named `mystage`. Then, we load sample data into this stage.
 ```sql
 CREATE STAGE mystage;
-       
+
 COPY INTO @mystage
-FROM 
+FROM
 (
-    SELECT * 
-    FROM 
+    SELECT *
+    FROM
     (
-        VALUES 
+        VALUES
         (1, 'Chengdu', 80),
         (3, 'Chongqing', 90),
         (6, 'Hangzhou', 92),
@@ -147,8 +149,8 @@ FILE_FORMAT = (TYPE = PARQUET);
 > You can specify the file format and various copy-related settings with the FILE_FORMAT and COPY_OPTIONS available in the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command.
 
 ```sql
-REPLACE INTO sample 
-    (id, city, score) 
+REPLACE INTO sample
+    (id, city, score)
 ON
     (Id)
 SELECT

@@ -3,6 +3,8 @@ title: RECLUSTER TABLE
 summary: Re-clusters a table. For why and when to re-cluster a table, see Re-clustering Table.
 ---
 
+# RECLUSTER TABLE
+
 > **Note:**
 >
 > Introduced in v1.2.25.

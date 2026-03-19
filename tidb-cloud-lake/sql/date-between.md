@@ -3,6 +3,8 @@ title: DATE_BETWEEN
 summary: Calculates the time interval between two dates or timestamps, returning the difference as an integer in the specified unit, with positive values indicating the first time is earlier than the second, and negative values indicating the opposite.
 ---
 
+# DATE_BETWEEN
+
 > **Note:**
 >
 > Introduced or updated in v1.2.725.

@@ -2,6 +2,9 @@
 title: system.numbers
 summary: This table contains a single UInt64 column named number that contains almost all the natural numbers starting from zero.
 ---
+
+# system.numbers
+
 This table contains a single UInt64 column named number that contains almost all the natural numbers starting from zero.
 
 You can use this table for tests, or if you need to do a brute force search.

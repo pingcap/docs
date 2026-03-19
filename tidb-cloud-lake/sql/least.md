@@ -3,6 +3,8 @@ title: LEAST
 summary: Returns the minimum value from a set of values. If any value in the set is NULL, the function returns NULL.
 ---
 
+# LEAST
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.

@@ -3,6 +3,8 @@ title: ST_AREA
 summary: Returns the area of a GEOMETRY or GEOGRAPHY object. For GEOMETRY inputs, the function uses planar area based on the shoelace formula. For GEOGRAPHY inputs, the function measures geodesic area on an ellipsoidal model of the earth using the method described in Karney (2013).
 ---
 
+# ST_AREA
+
 > **Note:**
 >
 > Introduced or updated in v1.2.555.

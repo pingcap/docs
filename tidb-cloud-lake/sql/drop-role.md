@@ -2,6 +2,9 @@
 title: DROP ROLE
 summary: Removes the specified role from the system.
 ---
+
+# DROP ROLE
+
 Removes the specified role from the system.
 
 ## Syntax

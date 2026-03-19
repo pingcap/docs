@@ -3,6 +3,8 @@ title: IS_INTEGER
 summary: Checks if the input JSON value is an integer.
 ---
 
+# IS_INTEGER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

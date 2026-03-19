@@ -2,6 +2,9 @@
 title: REVERSE
 summary: Returns the string str with the order of the characters reversed.
 ---
+
+# REVERSE
+
 Returns the string str with the order of the characters reversed.
 
 ## Syntax

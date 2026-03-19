@@ -2,6 +2,9 @@
 title: GEOHASH_ENCODE
 summary: Converts a pair of latitude and longitude coordinates into a Geohash-encoded string.
 ---
+
+# GEOHASH_ENCODE
+
 Converts a pair of latitude and longitude coordinates into a [Geohash](https://en.wikipedia.org/wiki/Geohash)-encoded string.
 
 ## Syntax

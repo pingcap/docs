@@ -3,6 +3,8 @@ title: system_history.query_history
 summary: Query the history for a specific query using its query_id.
 ---
 
+# system_history.query_history
+
 > **Note:**
 >
 > Introduced or updated in v1.2.764.
@@ -121,9 +123,9 @@ written_io_bytes_cost_ms: 0
           client_address: 127.0.0.1
               user_agent: bendsql/0.26.2-unknown
           exception_code: 0
-          exception_text: 
+          exception_text:
           server_version: v1.2.753-nightly-c3d5fabb79(rust-1.88.0-nightly-2025-06-12T01:48:36.733925000Z)
-               query_tag: 
+               query_tag:
              has_profile: NULL
        peek_memory_usage: {"jxSgvulZFAq1sDckR1bu85":223840}
               session_id: e3c54c32-f3c0-4ea9-bdd2-65701aa3f2a6

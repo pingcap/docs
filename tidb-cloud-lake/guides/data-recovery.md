@@ -3,6 +3,8 @@ title: Data Recovery
 summary: This topic explains how to back up and restore data in Databend.
 ---
 
+# Data Recovery
+
 This topic explains how to back up and restore data in Databend.
 
 ## Time Travel: Easy Access to Past Data

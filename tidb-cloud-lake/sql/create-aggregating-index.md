@@ -3,6 +3,8 @@ title: CREATE AGGREGATING INDEX
 summary: Create a new aggregating index in Databend.
 ---
 
+# CREATE AGGREGATING INDEX
+
 > **Note:**
 >
 > Introduced or updated in v1.2.339.

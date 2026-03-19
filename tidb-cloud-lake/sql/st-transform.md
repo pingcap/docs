@@ -3,6 +3,8 @@ title: ST_TRANSFORM
 summary: Converts a GEOMETRY object from one spatial reference system (SRS) to another. If you just need to change the SRID without changing the coordinates (e.g. if the SRID was incorrect), use ST_SETSRID instead.
 ---
 
+# ST_TRANSFORM
+
 > **Note:**
 >
 > Introduced or updated in v1.2.606.

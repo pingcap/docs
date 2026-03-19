@@ -3,6 +3,8 @@ title: TO_DATE
 summary: Converts an expression to a date, including.
 ---
 
+# TO_DATE
+
 > **Note:**
 >
 > Introduced or updated in v1.1.39.

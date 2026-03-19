@@ -3,6 +3,8 @@ title: ARRAY_CONSTRUCT
 summary: Creates a JSON array with specified values.
 ---
 
+# ARRAY_CONSTRUCT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

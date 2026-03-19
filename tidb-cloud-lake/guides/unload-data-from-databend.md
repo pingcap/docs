@@ -2,10 +2,12 @@
 title: Unload Data from TiDB Cloud Lake
 summary: Databend's COPY INTO command exports data to various file formats and storage locations with flexible formatting options.
 ---
+
+# Unload Data from TiDB Cloud Lake
+
 Databend's `COPY INTO` command exports data to various file formats and storage locations with flexible formatting options.
 
 ## Supported File Formats
-
 
 | Format | Example Syntax | Primary Use Case |
 |--------|---------------|------------------|
@@ -16,9 +18,7 @@ Databend's `COPY INTO` command exports data to various file formats and storage 
 
 ## Storage Destinations
 
-
 | Destination | Example | When to Use |
 |-------------|---------|-------------|
 | **Named Stage** | `COPY INTO my_stage FROM my_table` | For repeated exports to the same location |
 | **S3-Compatible Storage** | `COPY INTO 's3://bucket/path/' FROM my_table` | Cloud object storage with Amazon S3 |
-

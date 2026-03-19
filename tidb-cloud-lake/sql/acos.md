@@ -2,6 +2,9 @@
 title: ACOS
 summary: Returns the arc cosine of x, that is, the value whose cosine is x. Returns NULL if x is not in the range -1 to 1.
 ---
+
+# ACOS
+
 Returns the arc cosine of `x`, that is, the value whose cosine is `x`. Returns NULL if `x` is not in the range -1 to 1.
 
 ## Syntax

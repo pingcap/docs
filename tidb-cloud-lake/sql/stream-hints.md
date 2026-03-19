@@ -3,6 +3,8 @@ title: WITH Stream Hints
 summary: Specifies various stream configuration options using hints to control how the stream is processed.
 ---
 
+# WITH Stream Hints
+
 > **Note:**
 >
 > Introduced or updated in v1.2.670.

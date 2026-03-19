@@ -3,6 +3,8 @@ title: CREATE USER
 summary: Creates a SQL user for connecting to Databend. Users must be granted appropriate privileges to access databases and perform operations.
 ---
 
+# CREATE USER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.703.
@@ -17,7 +19,7 @@ See also:
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] USER <name> IDENTIFIED [ WITH <auth_type> ] BY '<password>' 
+CREATE [ OR REPLACE ] USER <name> IDENTIFIED [ WITH <auth_type> ] BY '<password>'
 [ WITH MUST_CHANGE_PASSWORD = true | false ]
 [ WITH SET PASSWORD POLICY = '<policy_name>' ]
 [ WITH SET NETWORK POLICY = '<policy_name>' ]

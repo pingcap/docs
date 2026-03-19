@@ -2,6 +2,9 @@
 title: ALTER VIEW
 summary: Alter the existing view by using another QUERY.
 ---
+
+# ALTER VIEW
+
 Alter the existing view by using another `QUERY`.
 
 ## Syntax

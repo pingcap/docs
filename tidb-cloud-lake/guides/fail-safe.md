@@ -3,6 +3,8 @@ title: Fail-Safe
 summary: Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage.
 ---
 
+# Fail-Safe
+
 Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage.
 
 - Storage Compatibility: Currently, Fail-Safe supports only S3-compatible storage types.
@@ -23,8 +25,8 @@ Below is a step-by-step example of using the [SYSTEM$FUSE_AMEND](/tidb-cloud-lak
 2. Create an external table, storing the table data in the `fail-safe` folder in the `databend-doc` bucket.
 
 ```sql
-CREATE TABLE t(a INT) 
-'s3://databend-doc/fail-safe/' 
+CREATE TABLE t(a INT)
+'s3://databend-doc/fail-safe/'
 CONNECTION = (access_key_id ='<your-access-key-id>' secret_access_key ='<your-secret-accesskey>');
 
 -- Insert sample data

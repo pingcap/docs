@@ -2,6 +2,9 @@
 title: BITMAP_TO_ARRAY
 summary: Converts a Bitmap into an Array.
 ---
+
+# BITMAP_TO_ARRAY
+
 Converts a Bitmap into an Array.
 
 ## Syntax

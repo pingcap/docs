@@ -3,6 +3,8 @@ title: ST_GEOGPOINTFROMGEOHASH
 summary: Returns a GEOGRAPHY object for the point that represents center of a geohash.
 ---
 
+# ST_GEOGPOINTFROMGEOHASH
+
 > **Note:**
 >
 > Introduced or updated in v1.2.413.

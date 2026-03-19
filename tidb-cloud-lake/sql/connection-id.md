@@ -2,6 +2,9 @@
 title: CONNECTION_ID
 summary: Returns the connection ID for the current connection.
 ---
+
+# CONNECTION_ID
+
 Returns the connection ID for the current connection.
 
 ## Syntax

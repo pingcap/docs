@@ -2,6 +2,9 @@
 title: TIME_SLOT
 summary: Rounds the time to the half-hour. ## Syntax.
 ---
+
+# TIME_SLOT
+
 Rounds the time to the half-hour.
 ## Syntax
 

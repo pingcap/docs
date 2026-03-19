@@ -3,6 +3,8 @@ title: GREATEST_IGNORE_NULLS
 summary: Returns the maximum value from a set of values, ignoring any NULL values.
 ---
 
+# GREATEST_IGNORE_NULLS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.

@@ -3,6 +3,8 @@ title: SHOW DROP DATABASES
 summary: Lists all databases along with their deletion timestamps if they have been dropped, allowing users to review deleted databases and their details.
 ---
 
+# SHOW DROP DATABASES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.658.
@@ -17,7 +19,7 @@ See also: [system.databases_with_history](/tidb-cloud-lake/sql/system-databases-
 ## Syntax
 
 ```sql
-SHOW DROP DATABASES 
+SHOW DROP DATABASES
     [ FROM <catalog> ]
     [ LIKE '<pattern>' | WHERE <expr> ]
 ```
@@ -31,7 +33,7 @@ CREATE DATABASE my_db;
 -- Drop the database my_db
 DROP DATABASE my_db;
 
--- If a database has been dropped, dropped_on shows the deletion time; 
+-- If a database has been dropped, dropped_on shows the deletion time;
 -- If it is still active, dropped_on is NULL.
 SHOW DROP DATABASES;
 

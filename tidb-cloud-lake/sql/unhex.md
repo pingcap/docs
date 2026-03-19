@@ -2,6 +2,9 @@
 title: UNHEX
 summary: For a string argument str, UNHEX(str) interprets each pair of characters in the argument as a hexadecimal number and converts it to the byte represented by the number. The return value is a binary string.
 ---
+
+# UNHEX
+
 For a string argument str, UNHEX(str) interprets each pair of characters in the argument as a hexadecimal number and converts it to the byte represented by the number. The return value is a binary string.
 
 ## Syntax

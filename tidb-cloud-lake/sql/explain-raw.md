@@ -2,6 +2,9 @@
 title: EXPLAIN RAW
 summary: Shows the logical execution plan of an SQL statement that you can use to analyze, troubleshoot, and improve the efficiency of your queries.
 ---
+
+# EXPLAIN RAW
+
 Shows the logical execution plan of an SQL statement that you can use to analyze, troubleshoot, and improve the efficiency of your queries.
 
 ## Syntax

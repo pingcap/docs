@@ -3,6 +3,8 @@ title: DROP FUNCTION
 summary: Drops an external function.
 ---
 
+# DROP FUNCTION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.116.

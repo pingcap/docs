@@ -3,6 +3,8 @@ title: ST_DISTANCE
 summary: Returns the minimum distance between two objects. For GEOMETRY inputs, the function uses Euclidean distance. For GEOGRAPHY inputs, the function uses haversine distance.
 ---
 
+# ST_DISTANCE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.555.

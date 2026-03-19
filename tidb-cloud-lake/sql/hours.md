@@ -3,6 +3,8 @@ title: TO_HOURS
 summary: Converts a specified number of hours into an Interval type.
 ---
 
+# TO_HOURS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.677.

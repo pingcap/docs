@@ -3,6 +3,8 @@ title: ARRAY_COMPACT
 summary: Removes all NULL values from an array.
 ---
 
+# ARRAY_COMPACT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

@@ -2,6 +2,9 @@
 title: Comparison Operators
 summary: This page describes Comparison Operators in TiDB Cloud Lake.
 ---
+
+# Comparison Operators
+
 | Operator      | Description                                 | Example                   | Result |
 | ------------- | ------------------------------------------- | ------------------------- | ------ |
 | `=`           | a is equal to b                             | `2 = 2`                   | TRUE   |

@@ -3,6 +3,8 @@ title: ATTACH TABLE
 summary: ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private Databend deployment to Databend Cloud.
 ---
 
+# ATTACH TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.698.
@@ -89,13 +91,13 @@ SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'employees');
 
 ```sql
 -- Step 1: Create a connection to your storage
-CREATE CONNECTION my_s3_connection 
-    STORAGE_TYPE = 's3' 
+CREATE CONNECTION my_s3_connection
+    STORAGE_TYPE = 's3'
     ACCESS_KEY_ID = '<your_aws_key_id>'
     SECRET_ACCESS_KEY = '<your_aws_secret_key>';
 
 -- Step 2: Attach a table with all columns
-ATTACH TABLE population_all_columns 's3://databend-doc/1/16/' 
+ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
     CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
 
@@ -103,7 +105,7 @@ ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
 
 ```sql
 -- Attach only specific columns for data security
-ATTACH TABLE population_selected (city, population) 's3://databend-doc/1/16/' 
+ATTACH TABLE population_selected (city, population) 's3://databend-doc/1/16/'
     CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
 
@@ -111,12 +113,12 @@ ATTACH TABLE population_selected (city, population) 's3://databend-doc/1/16/'
 
 ```sql
 -- Create a connection using IAM role (more secure than access keys)
-CREATE CONNECTION s3_role_connection 
-    STORAGE_TYPE = 's3' 
+CREATE CONNECTION s3_role_connection
+    STORAGE_TYPE = 's3'
     ROLE_ARN = 'arn:aws:iam::123456789012:role/databend-role';
 
 -- Attach table using the IAM role connection
-ATTACH TABLE population_all_columns 's3://databend-doc/1/16/' 
+ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
     CONNECTION = (CONNECTION_NAME = 's3_role_connection');
 ```
 
@@ -124,13 +126,13 @@ ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
 
 ```sql
 -- Marketing: Customer behavior analysis
-ATTACH TABLE marketing_view (customer_id, product, amount, order_date) 
-'s3://your-bucket/1/23351/' 
+ATTACH TABLE marketing_view (customer_id, product, amount, order_date)
+'s3://your-bucket/1/23351/'
 CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 
 -- Finance: Revenue tracking (different columns)
-ATTACH TABLE finance_view (order_id, amount, profit, order_date) 
-'s3://your-bucket/1/23351/' 
+ATTACH TABLE finance_view (order_id, amount, profit, order_date)
+'s3://your-bucket/1/23351/'
 CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
 

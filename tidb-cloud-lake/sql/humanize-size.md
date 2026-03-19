@@ -2,6 +2,9 @@
 title: HUMANIZE_SIZE
 summary: Returns the readable size with a suffix(KiB, MiB, etc).
 ---
+
+# HUMANIZE_SIZE
+
 Returns the readable size with a suffix(KiB, MiB, etc).
 
 ## Syntax
@@ -15,7 +18,6 @@ HUMANIZE_SIZE(x);
 | Arguments | Description                |
 |-----------|----------------------------|
 | x         | The numerical size.        |
-
 
 ## Return Type
 

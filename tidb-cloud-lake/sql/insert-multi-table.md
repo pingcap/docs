@@ -3,6 +3,8 @@ title: INSERT (multi-table)
 summary: Inserts rows into multiple tables in a single transaction, with the option for the insertion to be dependent on certain conditions (conditionally) or to occur regardless of any conditions (unconditionally).
 ---
 
+# INSERT (multi-table)
+
 > **Note:**
 >
 > Introduced or updated in v1.2.396.

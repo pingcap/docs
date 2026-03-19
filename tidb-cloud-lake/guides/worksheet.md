@@ -2,6 +2,9 @@
 title: Worksheets
 summary: Worksheets in TiDB Cloud Lake are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
 ---
+
+# Worksheets
+
 Worksheets in Databend Cloud are used to organize, run, and save SQL statements. They can also be shared with others in your organization.
 
 ## Creating a Worksheet

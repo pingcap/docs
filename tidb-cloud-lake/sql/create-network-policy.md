@@ -3,6 +3,8 @@ title: CREATE NETWORK POLICY
 summary: Creates a new network policy in Databend.
 ---
 
+# CREATE NETWORK POLICY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.341.

@@ -3,6 +3,8 @@ title: LAST_VALUE
 summary: Returns the last value in the window frame.
 ---
 
+# LAST_VALUE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.697.

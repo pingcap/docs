@@ -3,6 +3,8 @@ title: CREATE WORKLOAD GROUP
 summary: Creates a workload group with specified quota settings. Workload groups control resource allocation and query concurrency by binding to users. When a user submits queries, the workload group limits are applied based on the user's assigned group.
 ---
 
+# CREATE WORKLOAD GROUP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.743.
@@ -32,10 +34,10 @@ CREATE WORKLOAD GROUP [IF NOT EXISTS] <group_name>
 
 ```sql
 -- Create workload groups
-CREATE WORKLOAD GROUP IF NOT EXISTS interactive_queries 
+CREATE WORKLOAD GROUP IF NOT EXISTS interactive_queries
 WITH cpu_quota = '30%', memory_quota = '20%', max_concurrency = 2;
 
-CREATE WORKLOAD GROUP IF NOT EXISTS batch_processing 
+CREATE WORKLOAD GROUP IF NOT EXISTS batch_processing
 WITH cpu_quota = '70%', memory_quota = '80%', max_concurrency = 10;
 ```
 

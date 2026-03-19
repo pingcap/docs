@@ -3,6 +3,8 @@ title: VACUUM DROP TABLE
 summary: This page describes VACUUM DROP TABLE in TiDB Cloud Lake.
 ---
 
+# VACUUM DROP TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

@@ -3,6 +3,8 @@ title: CREATE VIEW
 summary: Creates a new view based on a query; the Logical View does not store any physical data, when we access a logical view, it will convert the sql into the subquery format to finish it.
 ---
 
+# CREATE VIEW
+
 > **Note:**
 >
 > Introduced or updated in v1.2.339.
@@ -33,7 +35,7 @@ CREATE [ OR REPLACE ] VIEW [ IF NOT EXISTS ] [ db. ]view_name [ (<column>, ...) 
 
 ## Access control requirements
 
-To access a view, users only require the SELECT privilege on the view itself. 
+To access a view, users only require the SELECT privilege on the view itself.
 
 Separate permissions are not required on the view’s underlying tables. This mechanism simplifies access control and enhances data security.
 

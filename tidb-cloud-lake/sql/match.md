@@ -3,6 +3,8 @@ title: MATCH
 summary: Searches indexed columns for keyword matches and can be used only in a WHERE clause.
 ---
 
+# MATCH
+
 > **Note:**
 >
 > Introduced or updated in v1.2.619.

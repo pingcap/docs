@@ -3,6 +3,8 @@ title: DROP PROCEDURE
 summary: Deletes an existing stored procedure.
 ---
 
+# DROP PROCEDURE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.637.
@@ -23,9 +25,9 @@ DROP PROCEDURE <procedure_name>([<parameter_type1>, <parameter_type2>, ...])
 This example creates and then drops a stored procedure:
 
 ```sql
-CREATE PROCEDURE convert_kg_to_lb(kg DECIMAL(4, 2)) 
-RETURNS DECIMAL(10, 2) 
-LANGUAGE SQL 
+CREATE PROCEDURE convert_kg_to_lb(kg DECIMAL(4, 2))
+RETURNS DECIMAL(10, 2)
+LANGUAGE SQL
 COMMENT = 'Converts kilograms to pounds'
 AS $$
 BEGIN

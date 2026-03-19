@@ -3,6 +3,8 @@ title: SHOW TABLE FUNCTIONS
 summary: Shows the list of supported table functions currently.
 ---
 
+# SHOW TABLE FUNCTIONS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.190.

@@ -2,6 +2,9 @@
 title: Vector Index
 summary: Vector indexes in Databend enable efficient similarity search on high-dimensional vector data using the HNSW (Hierarchical Navigable Small World) algorithm. They support use cases like semantic search, recommendation systems, and AI applications.
 ---
+
+# Vector Index
+
 Vector indexes in Databend enable efficient similarity search on high-dimensional vector data using the HNSW (Hierarchical Navigable Small World) algorithm. They support use cases like semantic search, recommendation systems, and AI applications.
 
 > **Tip:**

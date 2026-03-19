@@ -3,6 +3,8 @@ title: Connection Parameters
 summary: Connection parameters are key-value pairs you supply when creating reusable connections with CREATE CONNECTION. After a connection is created, reference it from stages, COPY commands, and other SQL features by using CONNECTION = (CONNECTION_NAME = '<connection-name>'). For full syntax and usage, see CREATE CONNECTION.
 ---
 
+# Connection Parameters
+
 > **Note:**
 >
 > Introduced or updated in v1.2.294.

@@ -2,6 +2,9 @@
 title: IS_NULL
 summary: Checks whether a value is NULL.
 ---
+
+# IS_NULL
+
 Checks whether a value is NULL.
 
 ## Syntax

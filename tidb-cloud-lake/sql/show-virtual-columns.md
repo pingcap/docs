@@ -3,6 +3,8 @@ title: SHOW VIRTUAL COLUMNS
 summary: Shows the created virtual columns in the system. Equivalent to SELECT * FROM system.virtual_columns.
 ---
 
+# SHOW VIRTUAL COLUMNS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.832.

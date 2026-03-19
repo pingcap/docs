@@ -3,6 +3,8 @@ title: ARRAY_INTERSECTION
 summary: Returns the common elements between two JSON arrays.
 ---
 
+# ARRAY_INTERSECTION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

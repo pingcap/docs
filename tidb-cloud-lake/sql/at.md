@@ -3,6 +3,8 @@ title: AT
 summary: The AT clause enables you to retrieve previous versions of your data by specifying a snapshot ID, timestamp, stream name, or a time interval.
 ---
 
+# AT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.410.
@@ -15,15 +17,15 @@ This is part of the Databend's Time Travel feature that allows you to query, bac
 
 ## Syntax
 
-```sql    
+```sql
 SELECT ...
 FROM ...
 AT (
        SNAPSHOT => '<snapshot_id>' |
-       TIMESTAMP => <timestamp> | 
+       TIMESTAMP => <timestamp> |
        STREAM => <stream_name> |
-       OFFSET => <time_interval> 
-   )   
+       OFFSET => <time_interval>
+   )
 ```
 
 | Parameter | Description                                                                                                                                                                                                                                                                                                      |
@@ -38,9 +40,9 @@ AT (
 To return the snapshot IDs and timestamps of all the snapshots of a table, use the [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md) function:
 
 ```sql
-SELECT snapshot_id, 
-       timestamp 
-FROM   FUSE_SNAPSHOT('<database_name>', '<table_name>'); 
+SELECT snapshot_id,
+       timestamp
+FROM   FUSE_SNAPSHOT('<database_name>', '<table_name>');
 ```
 
 ## Examples
@@ -64,7 +66,7 @@ CREATE STREAM s ON TABLE t;
 INSERT INTO t VALUES(3);
 ```
 
-3. Run time travel queries to retrieve previous data versions. 
+3. Run time travel queries to retrieve previous data versions.
 
 ```sql
 -- Return snapshot IDs and corresponding timestamps for table 't'

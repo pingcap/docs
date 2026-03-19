@@ -2,6 +2,9 @@
 title: Cluster Key
 summary: This page provides a comprehensive overview of cluster key operations in Databend, organized by functionality for easy reference.
 ---
+
+# Cluster Key
+
 This page provides a comprehensive overview of cluster key operations in Databend, organized by functionality for easy reference.
 
 ## Cluster Key Management

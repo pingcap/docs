@@ -3,6 +3,8 @@ title: ARRAY_APPEND
 summary: Appends an element to the end of an array.
 ---
 
+# ARRAY_APPEND
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

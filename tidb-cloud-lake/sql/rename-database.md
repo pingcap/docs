@@ -2,6 +2,9 @@
 title: RENAME DATABASE
 summary: Changes the name of a database.
 ---
+
+# RENAME DATABASE
+
 Changes the name of a database.
 
 ## Syntax

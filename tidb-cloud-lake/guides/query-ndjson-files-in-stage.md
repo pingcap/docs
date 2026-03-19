@@ -2,6 +2,9 @@
 title: Querying NDJSON Files in Stage
 summary: In Databend, you can directly query NDJSON files stored in stages without first loading the data into tables. This approach is particularly useful for data exploration, ETL processing, and ad-hoc analysis scenarios.
 ---
+
+# Querying NDJSON Files in Stage
+
 In Databend, you can directly query NDJSON files stored in stages without first loading the data into tables. This approach is particularly useful for data exploration, ETL processing, and ad-hoc analysis scenarios.
 
 ## What is NDJSON?
@@ -31,10 +34,10 @@ NDJSON (Newline Delimited JSON) is a JSON-based file format where each line cont
 
 Create an external stage with your own S3 bucket and credentials where your NDJSON files are stored.
 ```sql
-CREATE STAGE ndjson_query_stage 
-URL = 's3://load/ndjson/' 
+CREATE STAGE ndjson_query_stage
+URL = 's3://load/ndjson/'
 CONNECTION = (
-    ACCESS_KEY_ID = '<your-access-key-id>' 
+    ACCESS_KEY_ID = '<your-access-key-id>'
     SECRET_ACCESS_KEY = '<your-secret-access-key>'
 );
 ```
@@ -42,7 +45,7 @@ CONNECTION = (
 ### Step 2. Create Custom NDJSON File Format
 
 ```sql
-CREATE FILE FORMAT ndjson_query_format 
+CREATE FILE FORMAT ndjson_query_format
     TYPE = NDJSON,
     COMPRESSION = AUTO;
 ```

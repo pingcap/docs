@@ -2,6 +2,9 @@
 title: information_schema.keywords
 summary: The information_schema.keywords system table is a view that provides all keywords in Databend.
 ---
+
+# information_schema.keywords
+
 The `information_schema.keywords` system table is a view that provides all keywords in Databend
 
 ```sql

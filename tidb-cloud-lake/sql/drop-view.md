@@ -2,6 +2,9 @@
 title: DROP VIEW
 summary: Drop the view.
 ---
+
+# DROP VIEW
+
 Drop the view.
 
 ## Syntax

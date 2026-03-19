@@ -3,6 +3,8 @@ title: system.functions
 summary: Contains information about the supported built-in scalar and aggregate.
 ---
 
+# system.functions
+
 > **Note:**
 >
 > Introduced or updated in v1.2.315.

@@ -3,6 +3,8 @@ title: JSON Operators
 summary: This page describes JSON Operators in TiDB Cloud Lake.
 ---
 
+# JSON Operators
+
 > **Note:**
 >
 > Introduced or updated in v1.2.644.

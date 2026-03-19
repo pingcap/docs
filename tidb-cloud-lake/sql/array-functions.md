@@ -2,6 +2,9 @@
 title: Array Functions
 summary: This section provides reference information for array functions in Databend. Array functions enable creation, manipulation, searching, and transformation of array data structures.
 ---
+
+# Array Functions
+
 This section provides reference information for array functions in Databend. Array functions enable creation, manipulation, searching, and transformation of array data structures.
 
 ## Array Creation & Construction

@@ -3,6 +3,8 @@ title: QUERY
 summary: Filters rows with a Lucene-style query against columns that have an inverted index and supports dot notation for nested VARIANT fields.
 ---
 
+# QUERY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.830.

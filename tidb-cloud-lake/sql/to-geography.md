@@ -3,6 +3,8 @@ title: TO_GEOGRAPHY
 summary: Parses an input and returns a value of type GEOGRAPHY.
 ---
 
+# TO_GEOGRAPHY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.431.

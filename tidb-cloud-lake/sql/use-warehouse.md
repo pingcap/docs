@@ -3,6 +3,8 @@ title: USE WAREHOUSE
 summary: Binds the current session to a specific warehouse. Subsequent queries in the session will use this warehouse for execution.
 ---
 
+# USE WAREHOUSE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.687.

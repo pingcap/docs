@@ -2,6 +2,9 @@
 title: system.contributors
 summary: Contains information about contributors.
 ---
+
+# system.contributors
+
 Contains information about contributors.
 
 ```sql

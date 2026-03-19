@@ -2,10 +2,13 @@
 title: DROP CLUSTER KEY
 summary: Deletes the cluster key for a table.
 ---
+
+# DROP CLUSTER KEY
+
 Deletes the cluster key for a table.
 
 See also:
-[ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md) 
+[ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md)
 
 ## Syntax
 

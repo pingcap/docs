@@ -3,6 +3,8 @@ title: DROP WAREHOUSE
 summary: Removes a warehouse and frees up the resources associated with it.
 ---
 
+# DROP WAREHOUSE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.687.

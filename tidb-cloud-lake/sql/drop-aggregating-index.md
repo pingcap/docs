@@ -3,6 +3,8 @@ title: DROP AGGREGATING INDEX
 summary: Deletes an existing aggregating index. Please note that deleting an aggregating index does NOT remove the associated storage blocks. To delete the blocks as well, use the VACUUM TABLE command. To disable the aggregating indexing feature, set enable_aggregating_index_scan to 0.
 ---
 
+# DROP AGGREGATING INDEX
+
 > **Note:**
 >
 > Introduced or updated in v1.2.151.

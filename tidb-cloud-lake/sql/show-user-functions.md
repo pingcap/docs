@@ -3,6 +3,8 @@ title: SHOW USER FUNCTIONS
 summary: Lists all user-defined functions including scalar functions, table functions, embedded functions, and external functions.
 ---
 
+# SHOW USER FUNCTIONS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.558.

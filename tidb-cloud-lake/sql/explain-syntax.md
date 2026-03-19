@@ -2,6 +2,9 @@
 title: EXPLAIN SYNTAX
 summary: Outputs formatted SQL code. This command works as an SQL formatter that makes your code easy to read.
 ---
+
+# EXPLAIN SYNTAX
+
 Outputs formatted SQL code. This command works as an SQL formatter that makes your code easy to read.
 
 ## Syntax

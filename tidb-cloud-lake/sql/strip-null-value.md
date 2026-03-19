@@ -3,11 +3,13 @@ title: STRIP_NULL_VALUE
 summary: Removes all properties with null values from a JSON object.
 ---
 
+# STRIP_NULL_VALUE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.
 
-Removes all properties with null values from a JSON object. 
+Removes all properties with null values from a JSON object.
 
 ## Syntax
 

@@ -3,6 +3,8 @@ title: COPY INTO <table>
 summary: COPY INTO allows you to load data from files located in one of the following locations.
 ---
 
+# COPY INTO <table>
+
 > **Note:**
 >
 > Introduced or updated in v1.2.704.
@@ -38,7 +40,7 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
             | [<alias>.]$<col_position> [, [<alias>.]$<col_position> ...] -- Query columns by position
             | [<alias>.]$1[:<column>] [, [<alias>.]$1[:<column>]  ...] -- Query rows as Variants
             } ]
-        FROM {@<stage_name>[/<path>] | '<uri>'} 
+        FROM {@<stage_name>[/<path>] | '<uri>'}
     )
 [ FILES = ( '<file_name>' [ , '<file_name>' ] [ , ... ] ) ]
 [ PATTERN = '<regex_pattern>' ]
@@ -73,7 +75,7 @@ externalLocation ::=
     [ ROLE_ARN = '<role-arn>' ]
     [ EXTERNAL_ID = '<external-id>' ]
   )
-  
+
   /* Azure Blob Storage */
   | 'azblob://<container>[/<path>]'
     CONNECTION = (
@@ -82,14 +84,14 @@ externalLocation ::=
       ACCOUNT_NAME = '<account-name>'
       ACCOUNT_KEY = '<account-key>'
     )
-  
+
   /* Google Cloud Storage */
   | 'gcs://<bucket>[/<path>]'
     CONNECTION = (
       [ CONNECTION_NAME = '<connection-name>' ]
       | CREDENTIAL = '<your-base64-encoded-credential>'
     )
-  
+
   /* Alibaba Cloud OSS */
   | 'oss://<bucket>[/<path>]'
     CONNECTION = (
@@ -99,7 +101,7 @@ externalLocation ::=
       ENDPOINT_URL = '<endpoint-url>'
       [ PRESIGN_ENDPOINT_URL = '<presign-endpoint-url>' ]
     )
-  
+
   /* Tencent Cloud Object Storage */
   | 'cos://<bucket>[/<path>]'
     CONNECTION = (
@@ -108,14 +110,14 @@ externalLocation ::=
       SECRET_KEY = '<your-secret-key>'
       ENDPOINT_URL = '<endpoint-url>'
     )
-  
+
   /* Remote Files */
   | 'https://<url>'
-  
+
   /* IPFS */
   | 'ipfs://<your-ipfs-hash>'
     CONNECTION = (ENDPOINT_URL = 'https://<your-ipfs-gateway>')
-  
+
   /* Hugging Face */
   | 'hf://<repo-id>[/<path>]'
     CONNECTION = (
@@ -127,7 +129,7 @@ externalLocation ::=
 formatTypeOptions ::=
   /* Common options for all formats */
   [ COMPRESSION = AUTO | GZIP | BZ2 | BROTLI | ZSTD | DEFLATE | RAW_DEFLATE | XZ | NONE ]
-  
+
   /* CSV specific options */
   [ RECORD_DELIMITER = '<character>' ]
   [ FIELD_DELIMITER = '<character>' ]
@@ -139,22 +141,22 @@ formatTypeOptions ::=
   [ ERROR_ON_COLUMN_COUNT_MISMATCH = TRUE | FALSE ]
   [ EMPTY_FIELD_AS = null | string | field_default ]
   [ BINARY_FORMAT = HEX | BASE64 ]
-  
+
   /* TSV specific options */
   [ RECORD_DELIMITER = '<character>' ]
   [ FIELD_DELIMITER = '<character>' ]
-  
+
   /* NDJSON specific options */
   [ NULL_FIELD_AS = NULL | FIELD_DEFAULT ]
   [ MISSING_FIELD_AS = ERROR | NULL | FIELD_DEFAULT ]
   [ ALLOW_DUPLICATE_KEYS = TRUE | FALSE ]
-  
+
   /* PARQUET specific options */
   [ MISSING_FIELD_AS = ERROR | FIELD_DEFAULT ]
-  
+
   /* ORC specific options */
   [ MISSING_FIELD_AS = ERROR | FIELD_DEFAULT ]
-  
+
   /* AVRO specific options */
   [ MISSING_FIELD_AS = ERROR | FIELD_DEFAULT ]
 
@@ -472,8 +474,8 @@ This example loads a GZIP-compressed CSV file on Amazon S3 into Databend:
 
 ```sql
 -- Create connection for compressed data loading
-CREATE CONNECTION compressed_s3_conn 
-    STORAGE_TYPE = 's3' 
+CREATE CONNECTION compressed_s3_conn
+    STORAGE_TYPE = 's3'
     ACCESS_KEY_ID = '<your-access-key-ID>'
     SECRET_ACCESS_KEY = '<your-secret-access-key>';
 
@@ -496,8 +498,8 @@ This example demonstrates how to load CSV files from Amazon S3 using pattern mat
 
 ```sql
 -- Create connection for pattern-based file loading
-CREATE CONNECTION pattern_s3_conn 
-    STORAGE_TYPE = 's3' 
+CREATE CONNECTION pattern_s3_conn
+    STORAGE_TYPE = 's3'
     ACCESS_KEY_ID = '<your-access-key-ID>'
     SECRET_ACCESS_KEY = '<your-secret-access-key>';
 

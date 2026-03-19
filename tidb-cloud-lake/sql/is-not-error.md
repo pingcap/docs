@@ -3,6 +3,8 @@ title: IS_NOT_ERROR
 summary: Returns a Boolean value indicating whether an expression is an error value.
 ---
 
+# IS_NOT_ERROR
+
 > **Note:**
 >
 > Introduced or updated in v1.2.379.

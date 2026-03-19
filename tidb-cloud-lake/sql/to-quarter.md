@@ -3,6 +3,8 @@ title: TO_QUARTER
 summary: Retrieves the quarter (1, 2, 3, or 4) from a given date or timestamp.
 ---
 
+# TO_QUARTER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.153.

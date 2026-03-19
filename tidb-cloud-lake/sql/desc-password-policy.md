@@ -3,6 +3,8 @@ title: DESC PASSWORD POLICY
 summary: Displays detailed information about a specific password policy in Databend. For detailed descriptions of the password policy attributes, see Password Policy Attributes.
 ---
 
+# DESC PASSWORD POLICY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.283.

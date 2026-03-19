@@ -3,6 +3,8 @@ title: TO_BINARY
 summary: Converts supported data types, including string, variant, bitmap, geometry, and geography, into their binary representation (hex format).
 ---
 
+# TO_BINARY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.673.

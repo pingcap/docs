@@ -2,6 +2,9 @@
 title: BITMAP_AND
 summary: Performs a bitwise AND operation on the two bitmaps.
 ---
+
+# BITMAP_AND
+
 Performs a bitwise AND operation on the two bitmaps.
 
 ## Syntax

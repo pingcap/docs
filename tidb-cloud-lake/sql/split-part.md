@@ -3,6 +3,8 @@ title: SPLIT_PART
 summary: Splits a string using a specified delimiter and returns the specified part.
 ---
 
+# SPLIT_PART
+
 > **Note:**
 >
 > Introduced or updated in v1.2.164.

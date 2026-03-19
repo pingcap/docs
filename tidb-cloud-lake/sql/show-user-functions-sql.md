@@ -3,6 +3,8 @@ title: SHOW USER FUNCTIONS
 summary: Lists the existing user-defined functions and external functions in the system. Equivalent to SELECT name, is_aggregate, description, arguments, language FROM system.user_functions....
 ---
 
+# SHOW USER FUNCTIONS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.315.

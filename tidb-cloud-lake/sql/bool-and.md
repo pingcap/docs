@@ -1,13 +1,15 @@
 ---
-title: bool_or
-summary: Returns true if at least one input value is true, otherwise false.
+title: bool_and
+summary: Returns true if all input values are true, otherwise false.
 ---
+
+# bool_and
 
 > **Note:**
 >
 > Introduced or updated in v1.2.756.
 
-Returns true if at least one input value is true, otherwise false
+Returns true if all input values are true, otherwise false.
 
 - NULL values are ignored.
 - If all input values are null, the result is null.
@@ -16,7 +18,7 @@ Returns true if at least one input value is true, otherwise false
 ## Syntax
 
 ```sql
-bool_or(<expr>)
+bool_and(<expr>)
 ```
 
 ## Return Type
@@ -26,25 +28,26 @@ Same as the input type.
 ## Examples
 
 ```sql
-select bool_or(t) from (values (true), (true), (null)) a(t);
+select bool_and(t) from (values (true), (true), (null)) a(t);
 ╭───────────────────╮
-│    bool_or(t)     │
+│    bool_and(t)    │
 │ Nullable(Boolean) │
 ├───────────────────┤
 │ true              │
 ╰───────────────────╯
 
-select bool_or(t) from (values (true), (true), (false)) a(t);
+select bool_and(t) from (values (true), (true), (true)) a(t);
+
 ╭───────────────────╮
-│    bool_or(t)     │
+│    bool_and(t)    │
 │ Nullable(Boolean) │
 ├───────────────────┤
 │ true              │
 ╰───────────────────╯
 
-select bool_or(t) from (values (false), (false), (false)) a(t);
+select bool_and(t) from (values (true), (true), (false)) a(t);
 ╭───────────────────╮
-│    bool_or(t)    │
+│    bool_and(t)    │
 │ Nullable(Boolean) │
 ├───────────────────┤
 │ false             │

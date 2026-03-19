@@ -3,6 +3,8 @@ title: CALL PROCEDURE
 summary: Executes a stored procedure by calling its name, optionally passing arguments if the procedure requires them.
 ---
 
+# CALL PROCEDURE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.637.
@@ -20,9 +22,9 @@ CALL PROCEDURE <procedure_name>([<argument1>, <argument2>, ...])
 This example demonstrates how to create and call a stored procedure that converts a weight from kilograms (kg) to pounds (lb):
 
 ```sql
-CREATE PROCEDURE convert_kg_to_lb(kg DECIMAL(4, 2)) 
-RETURNS DECIMAL(10, 2) 
-LANGUAGE SQL 
+CREATE PROCEDURE convert_kg_to_lb(kg DECIMAL(4, 2))
+RETURNS DECIMAL(10, 2)
+LANGUAGE SQL
 COMMENT = 'Converts kilograms to pounds'
 AS $$
 BEGIN

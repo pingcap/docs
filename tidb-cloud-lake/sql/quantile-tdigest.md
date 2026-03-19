@@ -3,6 +3,8 @@ title: QUANTILE_TDIGEST
 summary: Computes an approximate quantile of a numeric data sequence using the t-digest algorithm.
 ---
 
+# QUANTILE_TDIGEST
+
 > **Note:**
 >
 > Introduced or updated in v1.2.41.

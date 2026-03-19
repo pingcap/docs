@@ -3,6 +3,8 @@ title: ST_SRID
 summary: Returns the SRID (spatial reference system identifier) of a GEOMETRY or GEOGRAPHY object.
 ---
 
+# ST_SRID
+
 > **Note:**
 >
 > Introduced or updated in v1.2.458.

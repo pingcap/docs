@@ -2,6 +2,9 @@
 title: SIN
 summary: Returns the sine of x, where x is given in radians.
 ---
+
+# SIN
+
 Returns the sine of `x`, where `x` is given in radians.
 
 ## Syntax

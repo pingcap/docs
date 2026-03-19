@@ -3,6 +3,8 @@ title: CREATE STREAM
 summary: Creates a stream.
 ---
 
+# CREATE STREAM
+
 > **Note:**
 >
 > Introduced or updated in v1.2.391.
@@ -12,8 +14,8 @@ Creates a stream.
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] STREAM [ IF NOT EXISTS ] [ <database_name>. ]<stream_name> 
-  ON TABLE [ <database_name>. ]<table_name> 
+CREATE [ OR REPLACE ] STREAM [ IF NOT EXISTS ] [ <database_name>. ]<stream_name>
+  ON TABLE [ <database_name>. ]<table_name>
   [ AT ( { TIMESTAMP => <timestamp> | SNAPSHOT => '<snapshot_id>' | STREAM => <existing_stream_name> } ) ]
   [ APPEND_ONLY = true | false ]
   [ COMMENT = '<comment>' ]

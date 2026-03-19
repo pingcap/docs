@@ -2,6 +2,9 @@
 title: BITMAP_MAX
 summary: Gets the maximum value in the bitmap.
 ---
+
+# BITMAP_MAX
+
 Gets the maximum value in the bitmap.
 
 ## Syntax

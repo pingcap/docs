@@ -3,6 +3,8 @@ title: AGE
 summary: The age() function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
 ---
 
+# AGE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.756.
@@ -71,7 +73,7 @@ INSERT INTO projects VALUES
     ('Alpha', '2020-06-01', '2023-09-30'),
     ('Beta', '2022-01-15', '2022-11-01');
 
-SELECT 
+SELECT
     name,
     AGE(end_date, start_date) AS duration
 FROM projects;
@@ -87,4 +89,3 @@ FROM projects;
 ## See Also
 
 - [DATE_DIFF](/tidb-cloud-lake/sql/date-diff.md): Alternative function for calculating specific time unit differences
-

@@ -2,6 +2,9 @@
 title: TO_YYYYMMDDHH
 summary: Formats a given date or timestamp into a string representation in the format "YYYYMMDDHH" (Year, Month, Day, Hour).
 ---
+
+# TO_YYYYMMDDHH
+
 Formats a given date or timestamp into a string representation in the format "YYYYMMDDHH" (Year, Month, Day, Hour).
 
 ## Syntax
@@ -28,16 +31,16 @@ SELECT to_yyyymmddhh('2023-11-12 09:38:18.165575'), to_yyyymmddhh(to_date('2023-
 │ to_yyyymmddhh('2023-11-12 09:38:18.165575') │to_yyyymmddhh(to_date('2023-11-12 09:38:18.165575')  │
 │                    UInt32                   │                    UInt32                           │
 ├─────────────────────────────────────────────┤─────────────────────────────────────────────────────┤
-│                    2023111200               │                 2023111200                          │    
+│                    2023111200               │                 2023111200                          │
 └─────────────────────────────────────────────┘─────────────────────────────────────────────────────┘
 
 SELECT to_yyyymmddhh(to_timestamp('2023-11-12 09:38:18.165575'));
 
 ┌───────────────────────────────────────────────────────────┐
 │ to_yyyymmddhh(to_timestamp('2023-11-12 09:38:18.165575')) │
-│                    UInt32                                 │  
+│                    UInt32                                 │
 ├───────────────────────────────────────────────────────────┤
-│                    2023111209                             │     
+│                    2023111209                             │
 └───────────────────────────────────────────────────────────┘
 
 ```

@@ -3,11 +3,13 @@ title: system.databases_with_history
 summary: Records all databases, including active and dropped ones. It shows each database's catalog, name, unique ID, owner (if specified), and the deletion timestamp (NULL if still active).
 ---
 
+# system.databases_with_history
+
 > **Note:**
 >
 > Introduced in v1.1.658.
 
-Records all databases, including active and dropped ones. It shows each database's catalog, name, unique ID, owner (if specified), and the deletion timestamp (NULL if still active). 
+Records all databases, including active and dropped ones. It shows each database's catalog, name, unique ID, owner (if specified), and the deletion timestamp (NULL if still active).
 
 See also: [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
 

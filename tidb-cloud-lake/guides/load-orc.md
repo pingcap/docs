@@ -2,6 +2,9 @@
 title: Loading ORC into TiDB Cloud Lake
 summary: ORC (Optimized Row Columnar) is a columnar storage format commonly used in data analytics.
 ---
+
+# Loading ORC into TiDB Cloud Lake
+
 ## What is ORC?
 
 ORC (Optimized Row Columnar) is a columnar storage format commonly used in data analytics.
@@ -68,7 +71,6 @@ Create a file format for ORC and query the stage to view the data and schema.
 ```sql
 -- Create a ORC file format
 CREATE OR REPLACE FILE FORMAT orc_ff TYPE = 'ORC';
-
 
 SELECT *
 FROM @orc_data_stage (

@@ -3,6 +3,8 @@ title: DROP FUNCTION
 summary: Drops a user-defined function. Works with all function types Scalar SQL, Tabular SQL, and Embedded functions.
 ---
 
+# DROP FUNCTION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.116.

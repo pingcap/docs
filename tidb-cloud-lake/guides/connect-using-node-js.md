@@ -3,9 +3,9 @@ title: Connect to TiDB Cloud Lake Using Node.js
 summary: This page describes how to connect to TiDB Cloud Lake using Node.js.
 ---
 
-# Node.js Driver for Databend
+# Connect to TiDB Cloud Lake Using Node.js
 
-The official Node.js driver providing TypeScript support and Promise-based API for modern JavaScript applications.
+The official Node.js driver provides TypeScript support and Promise-based API for modern JavaScript applications.
 
 ## Installation
 
@@ -13,7 +13,7 @@ The official Node.js driver providing TypeScript support and Promise-based API f
 npm install databend-driver
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 

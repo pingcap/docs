@@ -3,6 +3,8 @@ title: VECTOR_NORM
 summary: Calculates the L2 norm (Euclidean norm) of a vector, which represents the length or magnitude of the vector.
 ---
 
+# VECTOR_NORM
+
 > **Note:**
 >
 > Introduced or updated in v1.2.780.
@@ -54,7 +56,7 @@ The vector norm is fundamental in:
 
 ```sql
 -- Calculate vector magnitude (length)
-SELECT 
+SELECT
     VECTOR_NORM([3,4]::VECTOR(2)) AS norm_2d,
     VECTOR_NORM([1,2,3]::VECTOR(3)) AS norm_3d,
     VECTOR_NORM([0,0,0]::VECTOR(3)) AS zero_vector;

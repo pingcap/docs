@@ -3,6 +3,8 @@ title: CREATE TEMP TABLE
 summary: Creates a temporary table that is automatically dropped at the end of the session.
 ---
 
+# CREATE TEMP TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.666.
@@ -20,8 +22,8 @@ Creates a temporary table that is automatically dropped at the end of the sessio
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] { TEMPORARY | TEMP } TABLE 
-       [ IF NOT EXISTS ] 
+CREATE [ OR REPLACE ] { TEMPORARY | TEMP } TABLE
+       [ IF NOT EXISTS ]
        [ <database_name>. ]<table_name>
        ...
 ```

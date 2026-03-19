@@ -2,6 +2,9 @@
 title: BendSQL
 summary: BendSQL is a command line tool that has been designed specifically for Databend. It allows users to establish a connection with Databend and execute queries directly from a CLI window.
 ---
+
+# BendSQL
+
 [BendSQL](https://github.com/databendlabs/bendsql) is a command line tool that has been designed specifically for Databend. It allows users to establish a connection with Databend and execute queries directly from a CLI window.
 
 BendSQL is particularly useful for those who prefer a command line interface and need to work with Databend on a regular basis. With BendSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
@@ -151,7 +154,7 @@ For connections to Databend Cloud, you can use the default `cloudapp` user or an
 
 BendSQL allows you to connect to both Databend Cloud and self-hosted Databend instances.
 
-### Customize Connections with a DSN 
+### Customize Connections with a DSN
 
 A DSN (Data Source Name) is a simple yet powerful way to configure and manage your Databend connection in BendSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
 

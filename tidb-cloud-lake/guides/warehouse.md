@@ -2,6 +2,9 @@
 title: Warehouses
 summary: The warehouse is an essential component of TiDB Cloud Lake. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks.
 ---
+
+# Warehouses
+
 The warehouse is an essential component of Databend Cloud. A warehouse represents a set of compute resources including CPU, memory, and local caches. You must run a warehouse to perform SQL tasks such as:
 
 - Querying data with the SELECT statement

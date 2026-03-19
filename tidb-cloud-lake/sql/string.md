@@ -2,6 +2,9 @@
 title: String
 summary: Basic String data type.
 ---
+
+# String
+
 ## String Data Types
 
 In Databend, strings can be stored in the `VARCHAR` field, the storage size is variable.
@@ -13,7 +16,6 @@ In Databend, strings can be stored in the `VARCHAR` field, the storage size is v
 ## Functions
 
 See [String Functions](/tidb-cloud-lake/sql/string-functions-overview.md).
-
 
 ## Example
 

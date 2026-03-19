@@ -1,7 +1,10 @@
 ---
-title: CAST::
+title: CAST
 summary: Converts a value from one data type to another. is an alias for CAST.
 ---
+
+# CAST
+
 Converts a value from one data type to another. `::` is an alias for CAST.
 
 See also: [TRY_CAST](/tidb-cloud-lake/sql/try-cast.md)
@@ -25,7 +28,6 @@ SELECT CAST(1 AS VARCHAR), 1::VARCHAR;
 │ 1                 │ 1         │
 └───────────────────────────────┘
 ```
-
 
 Cast String to
 Variant and Cast Variant to `Map<String, Variant>`

@@ -3,6 +3,8 @@ title: IS_FLOAT
 summary: Checks if the input JSON value is a float.
 ---
 
+# IS_FLOAT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

@@ -3,6 +3,8 @@ title: NVL2
 summary: Returns <expr2> if <expr1> is not NULL; otherwise, it returns <expr3>.
 ---
 
+# NVL2
+
 > **Note:**
 >
 > Introduced or updated in v1.2.312.

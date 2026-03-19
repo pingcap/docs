@@ -3,6 +3,8 @@ title: SHOW DATABASES
 summary: Shows the list of databases that exist on the instance.
 ---
 
+# SHOW DATABASES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.290.
@@ -14,7 +16,7 @@ See also: [system.databases](/tidb-cloud-lake/sql/system-databases.md)
 ## Syntax
 
 ```sql
-SHOW [ FULL ] DATABASES 
+SHOW [ FULL ] DATABASES
     [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 

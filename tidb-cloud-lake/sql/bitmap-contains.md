@@ -2,6 +2,9 @@
 title: BITMAP_CONTAINS
 summary: Checks if the bitmap contains a specific value.
 ---
+
+# BITMAP_CONTAINS
+
 Checks if the bitmap contains a specific value.
 
 ## Syntax

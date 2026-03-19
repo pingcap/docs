@@ -3,6 +3,8 @@ title: SYSTEM ENABLE / DISABLE EXCEPTION_BACKTRACE
 summary: Controls the generation of Rust backtraces in Databend. SYSTEM ENABLE EXCEPTION_BACKTRACE enables backtraces for debugging purposes when a panic occurs, while SYSTEM DISABLE EXCEPTION_BACKTRACE disables them to avoid additional overhead or exposure of sensitive information.
 ---
 
+# SYSTEM ENABLE / DISABLE EXCEPTION_BACKTRACE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.530.

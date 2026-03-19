@@ -3,6 +3,8 @@ title: Apache Iceberg™ Tables
 summary: Databend supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends Databend's capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
 ---
 
+# Apache Iceberg™ Tables
+
 > **Note:**
 >
 > Introduced or updated in v1.2.725.
@@ -405,7 +407,7 @@ If you prefer not to use the metadata cache, you can disable it entirely by conf
 
 ```toml
 ...
-# Cache config.
+## Cache config.
 [cache]
 ...
 iceberg_table_meta_count = 0

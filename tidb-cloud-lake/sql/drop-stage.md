@@ -2,6 +2,9 @@
 title: DROP STAGE
 summary: Removes a stage.
 ---
+
+# DROP STAGE
+
 Removes a stage.
 
 ## Syntax

@@ -3,9 +3,9 @@ title: Connect to TiDB Cloud Lake Using Rust
 summary: This page describes how to connect to TiDB Cloud Lake using Rust.
 ---
 
-# Rust Driver for Databend
+# Connect to TiDB Cloud Lake Using Rust
 
-The official Rust driver providing native connectivity with async/await support and comprehensive type safety for Rust applications.
+The official Rust driver provides native connectivity with async/await support and comprehensive type safety for Rust applications.
 
 ## Installation
 
@@ -17,7 +17,7 @@ databend-driver = "0.30"
 tokio = { version = "1", features = ["full"] }
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 

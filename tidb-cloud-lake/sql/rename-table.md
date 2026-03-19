@@ -2,6 +2,9 @@
 title: RENAME TABLE
 summary: Changes the name of a table.
 ---
+
+# RENAME TABLE
+
 Changes the name of a table.
 
 ## Syntax

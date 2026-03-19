@@ -2,6 +2,9 @@
 title: TO_YEAR
 summary: Converts a date or date with time (timestamp/datetime) to a UInt16 number containing the year number (AD).
 ---
+
+# TO_YEAR
+
 Converts a date or date with time (timestamp/datetime) to a UInt16 number containing the year number (AD).
 
 ## Syntax

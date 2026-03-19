@@ -3,6 +3,8 @@ title: IS_NULL_VALUE
 summary: Checks whether the input value is a JSON null. Please note that this function examines JSON null, not SQL NULL. To check if a value is SQL NULL, use IS_NULL.
 ---
 
+# IS_NULL_VALUE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.
@@ -13,7 +15,7 @@ Checks whether the input value is a JSON `null`. Please note that this function 
 {
   "name": "John",
   "age": null
-}   
+}
 ```
 
 ## Syntax

@@ -3,6 +3,8 @@ title: CREATE PASSWORD POLICY
 summary: Creates a new password policy in Databend.
 ---
 
+# CREATE PASSWORD POLICY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.339.

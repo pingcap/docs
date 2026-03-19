@@ -3,6 +3,8 @@ title: Querying Staged ORC Files in Stage
 summary: In this tutorial, we will walk you through the process of downloading the Iris dataset in ORC format, uploading it to an Amazon S3 bucket, creating an external stage, and querying the data directly from the ORC file.
 ---
 
+# Querying Staged ORC Files in Stage
+
 ## Syntax
 
 - [Query rows as Variants](/tidb-cloud-lake/guides/query-stage.md#query-rows-as-variants)

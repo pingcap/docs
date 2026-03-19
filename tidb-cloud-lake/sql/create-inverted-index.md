@@ -3,6 +3,8 @@ title: CREATE INVERTED INDEX
 summary: Creates a new inverted index in Databend.
 ---
 
+# CREATE INVERTED INDEX
+
 > **Note:**
 >
 > Introduced or updated in v1.2.405.
@@ -32,14 +34,14 @@ CREATE [ OR REPLACE ] INVERTED INDEX [IF NOT EXISTS] <index>
 IndexOptions ::=
   TOKENIZER = 'english' | 'chinese'
   FILTERS = 'english_stop' | 'english_stemmer' | 'chinese_stop'
-  INDEX_RECORD = 'position' | 'basic' | 'freq' 
+  INDEX_RECORD = 'position' | 'basic' | 'freq'
 ```
 
 - `TOKENIZER` specifies how text is segmented for indexing. It supports `english` (default) and `chinese` tokenizers.
 
 - `FILTERS` defines rules for term filtering:
 
-  - Multiple filters can be specified, separated by commas, e.g., `FILTERS = 'english_stop,english_stemmer'`. 
+  - Multiple filters can be specified, separated by commas, e.g., `FILTERS = 'english_stop,english_stemmer'`.
   - A lower case filter is added by default to convert words to lowercase letters.
 
 | FILTERS           | Description                                                                                                             |

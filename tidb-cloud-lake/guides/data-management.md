@@ -2,6 +2,7 @@
 title: Data Management
 summary: An overview of data management in TiDB Cloud Lake, covering data lifecycle, recovery, protection, and recycling.
 ---
+
 # Data Management
 
 | Category | Description | Key Features | Common Operations |

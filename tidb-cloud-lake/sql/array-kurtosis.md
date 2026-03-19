@@ -2,6 +2,9 @@
 title: ARRAY_KURTOSIS
 summary: Returns the excess kurtosis of the numeric values in an array. NULL elements are ignored; non-numeric elements raise an error.
 ---
+
+# ARRAY_KURTOSIS
+
 Returns the excess kurtosis of the numeric values in an array. `NULL` elements are ignored; non-numeric elements raise an error.
 
 ## Syntax

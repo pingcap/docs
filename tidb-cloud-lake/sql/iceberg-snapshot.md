@@ -3,6 +3,8 @@ title: ICEBERG_SNAPSHOT
 summary: Returns metadata about snapshots of an Iceberg table, including information about data changes, operations, and summary statistics.
 ---
 
+# ICEBERG_SNAPSHOT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.709.
@@ -36,7 +38,7 @@ The function returns a table with the following columns:
 
 ```sql
 SELECT * FROM ICEBERG_SNAPSHOT('tpcds', 'catalog_returns');
- 
+
 ╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │        committed_at        │     snapshot_id     │ parent_id │ operation │                     manifest_list                    │                       summary                       │
 ├────────────────────────────┼─────────────────────┼───────────┼───────────┼──────────────────────────────────────────────────────┼─────────────────────────────────────────────────────┤

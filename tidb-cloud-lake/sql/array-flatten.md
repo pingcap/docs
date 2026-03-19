@@ -3,6 +3,8 @@ title: ARRAY_FLATTEN
 summary: Flattens a nested array into a single-dimensional array.
 ---
 
+# ARRAY_FLATTEN
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

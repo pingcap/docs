@@ -2,6 +2,9 @@
 title: ASCII
 summary: Returns the numeric value of the leftmost character of the string str.
 ---
+
+# ASCII
+
 Returns the numeric value of the leftmost character of the string str.
 
 ## Syntax

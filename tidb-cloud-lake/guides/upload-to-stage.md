@@ -3,6 +3,8 @@ title: Uploading to Stage
 summary: Databend recommends two file upload methods for stages PRESIGN and PUT/GET commands. These methods enable direct data transfer between the client and your storage, eliminating intermediaries and resulting in cost savings by reducing traffic between Databend and your storage.
 ---
 
+# Uploading to Stage
+
 Databend recommends two file upload methods for stages: [PRESIGN](/tidb-cloud-lake/sql/presign.md) and PUT/GET commands. These methods enable direct data transfer between the client and your storage, eliminating intermediaries and resulting in cost savings by reducing traffic between Databend and your storage.
 
 ![Alt text](/media/tidb-cloud-lake/staging-file.png)

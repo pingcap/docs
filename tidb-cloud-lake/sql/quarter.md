@@ -3,6 +3,8 @@ title: QUARTER
 summary: Alias for TO_QUARTER.
 ---
 
+# QUARTER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.375.

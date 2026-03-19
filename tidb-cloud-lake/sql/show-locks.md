@@ -3,11 +3,13 @@ title: SHOW LOCKS
 summary: Provides a list of active transactions currently holding locks on tables, either for the current user across all their sessions or for all users within the Databend system. A lock is a synchronization mechanism that restricts access to shared resources, such as tables, ensuring orderly and controlled interactions among processes or threads within the Databend system to maintain data consistency and prevent conflicts.
 ---
 
+# SHOW LOCKS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.262.
 
-Provides a list of active transactions currently holding locks on tables, either for the current user across all their sessions or for all users within the Databend system. A lock is a synchronization mechanism that restricts access to shared resources, such as tables, ensuring orderly and controlled interactions among processes or threads within the Databend system to maintain data consistency and prevent conflicts. 
+Provides a list of active transactions currently holding locks on tables, either for the current user across all their sessions or for all users within the Databend system. A lock is a synchronization mechanism that restricts access to shared resources, such as tables, ensuring orderly and controlled interactions among processes or threads within the Databend system to maintain data consistency and prevent conflicts.
 
 The operations, such as [UPDATE](/tidb-cloud-lake/sql/update.md), [DELETE](/tidb-cloud-lake/sql/delete.md), [OPTIMIZE TABLE](/tidb-cloud-lake/sql/optimize-table.md), [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md), and [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations), can result in table locks in the system. The table lock feature is enabled by default. In case of resource conflicts, you can examine specific details using the command. To disable this feature, execute `set enable_table_lock=0;`.
 

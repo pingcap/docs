@@ -2,6 +2,9 @@
 title: ATAN
 summary: Returns the arc tangent of x, that is, the value whose tangent is x.
 ---
+
+# ATAN
+
 Returns the arc tangent of `x`, that is, the value whose tangent is `x`.
 
 ## Syntax

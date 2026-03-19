@@ -3,6 +3,8 @@ title: TO_SECONDS
 summary: Converts a specified number of seconds into an Interval type.
 ---
 
+# TO_SECONDS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.677.

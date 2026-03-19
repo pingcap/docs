@@ -2,6 +2,9 @@
 title: TO_UNIX_TIMESTAMP
 summary: Converts a timestamp in a date/time format to a Unix timestamp format. A Unix timestamp represents the number of seconds that have elapsed since January 1, 1970, at 000000 UTC.
 ---
+
+# TO_UNIX_TIMESTAMP
+
 Converts a timestamp in a date/time format to a Unix timestamp format. A Unix timestamp represents the number of seconds that have elapsed since January 1, 1970, at 00:00:00 UTC.
 
 ## Syntax

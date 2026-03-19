@@ -3,6 +3,8 @@ title: SHOW CONNECTIONS
 summary: Displays a list of all available connections.
 ---
 
+# SHOW CONNECTIONS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.208.

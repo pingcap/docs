@@ -3,11 +3,13 @@ title: SELECT
 summary: Retrieves data from a table.
 ---
 
+# SELECT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.690.
 
-Retrieves data from a table. 
+Retrieves data from a table.
 
 ## Syntax
 
@@ -16,13 +18,13 @@ Retrieves data from a table.
 SELECT
     [ALL | DISTINCT]
     [ TOP <n> ]
-    <select_expr> | <col_name> [[AS] <alias>] | $<col_position> [, ...] | * 
+    <select_expr> | <col_name> [[AS] <alias>] | $<col_position> [, ...] | *
     COLUMNS <expr>
     [EXCLUDE (<col_name1> [, <col_name2>, <col_name3>, ...] ) ]
     [FROM table_references]
     [AT ...]
     [WHERE <expr>]
-    [GROUP BY {{<col_name> | <expr> | <col_alias> | <col_position>}, 
+    [GROUP BY {{<col_name> | <expr> | <col_alias> | <col_position>},
          ... | <extended_grouping_expr>}]
     [HAVING <expr>]
     [ORDER BY {<col_name> | <expr> | <col_alias> | <col_position>} [ASC | DESC],
@@ -37,7 +39,7 @@ SELECT
 
 ## SELECT Clause
 
-### AS Keyword 
+### AS Keyword
 
 In Databend, you can use the AS keyword to assign an alias to a column. This allows you to provide a more descriptive and easily understandable name for the column in both the SQL statement and the query result:
 
@@ -314,8 +316,8 @@ SELECT number%2 as c1, number%3 as c2, MAX(number) FROM numbers(10000) GROUP BY 
 
 ```sql
 SELECT
-    number % 2 as c1, 
-    number % 3 as c2, 
+    number % 2 as c1,
+    number % 3 as c2,
     MAX(number) as max
 FROM
     numbers(10000)

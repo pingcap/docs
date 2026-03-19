@@ -2,6 +2,9 @@
 title: POLICY_REFERENCES
 summary: Returns the associations between security policies (Masking Policy or Row Access Policy) and tables/views. You can query by policy name to find all tables using it, or by table name to find all policies applied to it.
 ---
+
+# POLICY_REFERENCES
+
 Returns the associations between security policies (Masking Policy or Row Access Policy) and tables/views. You can query by policy name to find all tables using it, or by table name to find all policies applied to it.
 
 See also:

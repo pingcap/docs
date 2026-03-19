@@ -3,6 +3,8 @@ title: VACUUM TABLE
 summary: The VACUUM TABLE command helps optimize system performance by freeing up storage space through the permanent removal of historical data files from a table. This includes.
 ---
 
+# VACUUM TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

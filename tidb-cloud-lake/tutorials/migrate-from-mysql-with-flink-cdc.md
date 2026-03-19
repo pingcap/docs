@@ -2,6 +2,9 @@
 title: Migrate MySQL with Flink CDC
 summary: Uses Flink CDC to migrate MySQL data to TiDB Cloud Lake with full-load bootstrap, continuous CDC sync, and optional transformations.
 ---
+
+# Migrate MySQL with Flink CDC
+
 > **Capabilities**: CDC, Full Load, Transformation
 
 In this tutorial, we'll walk you through the process of migrating from MySQL to Databend Cloud using Apache Flink CDC.
@@ -57,7 +60,7 @@ docker ps
 
 Check the output for a container named **mysql-server**:
 
-```bash 
+```bash
 CONTAINER ID   IMAGE       COMMAND                  CREATED        STATUS        PORTS                               NAMES
 aac4c28be56e   mysql:5.7   "docker-entrypoint.s…"   17 hours ago   Up 17 hours   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql-server
 ```

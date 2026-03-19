@@ -2,6 +2,9 @@
 title: LENGTH
 summary: Returns the length of a given input string or binary value. In the case of strings, the length represents the count of characters, with each UTF-8 character considered as a single character. For binary data, the length corresponds to the number of bytes.
 ---
+
+# LENGTH
+
 Returns the length of a given input string or binary value. In the case of strings, the length represents the count of characters, with each UTF-8 character considered as a single character. For binary data, the length corresponds to the number of bytes.
 
 ## Syntax

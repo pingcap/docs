@@ -2,6 +2,9 @@
 title: TO_NULLABLE
 summary: Converts a value to its nullable equivalent.
 ---
+
+# TO_NULLABLE
+
 Converts a value to its nullable equivalent.
 
 When you apply this function to a value, it checks if the value is already able to hold NULL values or not. If the value is already able to hold NULL values, the function will return the value without making any changes.
@@ -19,7 +22,6 @@ TO_NULLABLE(x);
 | Arguments | Description                |
 |-----------|----------------------------|
 | x         | The original value.        |
-
 
 ## Return Type
 

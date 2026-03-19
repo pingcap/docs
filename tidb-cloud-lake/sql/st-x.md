@@ -3,6 +3,8 @@ title: ST_X
 summary: Returns the longitude (X coordinate) of a Point represented by a GEOMETRY or GEOGRAPHY object.
 ---
 
+# ST_X
+
 > **Note:**
 >
 > Introduced or updated in v1.2.458.

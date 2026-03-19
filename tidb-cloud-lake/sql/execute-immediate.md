@@ -3,6 +3,8 @@ title: EXECUTE IMMEDIATE
 summary: Executes a SQL script. For how to write SQL scripts for Databend, see Stored Procedure & SQL Scripting.
 ---
 
+# EXECUTE IMMEDIATE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.452.

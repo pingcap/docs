@@ -3,6 +3,8 @@ title: SHOW_VARIABLES
 summary: Displays all session variables and their details, such as names, values, and types.
 ---
 
+# SHOW_VARIABLES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.634.

@@ -3,6 +3,8 @@ title: TO_MONTHS
 summary: Converts a specified number of months into an Interval type.
 ---
 
+# TO_MONTHS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.677.

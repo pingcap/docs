@@ -3,6 +3,8 @@ title: IS_OBJECT
 summary: Checks if the input value is a JSON object.
 ---
 
+# IS_OBJECT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

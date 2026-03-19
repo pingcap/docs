@@ -3,6 +3,8 @@ title: JSON_OBJECT_AGG
 summary: Converts key-value pairs into a JSON object. For each row in the input, it generates a key-value pair where the key is derived from the <key_expression> and the value is derived from the <value_expression>. These key-value pairs are then combined into a single JSON object.
 ---
 
+# JSON_OBJECT_AGG
+
 > **Note:**
 >
 > Introduced or updated in v1.2.611.
@@ -32,10 +34,10 @@ This example demonstrates how JSON_OBJECT_AGG can be used to aggregate different
 
 ```sql
 CREATE TABLE d (
-    a DECIMAL(10, 2), 
-    b STRING, 
-    c INT, 
-    d VARIANT, 
+    a DECIMAL(10, 2),
+    b STRING,
+    c INT,
+    d VARIANT,
     e ARRAY(STRING)
 );
 

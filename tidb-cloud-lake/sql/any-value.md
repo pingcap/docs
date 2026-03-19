@@ -3,6 +3,8 @@ title: ANY_VALUE
 summary: Aggregate function.
 ---
 
+# ANY_VALUE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.815.

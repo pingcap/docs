@@ -3,6 +3,8 @@ title: TO_TIMESTAMP
 summary: Converts an expression to a date with time.
 ---
 
+# TO_TIMESTAMP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.664.
@@ -48,7 +50,7 @@ The function converts an integer value to a timestamp, interpreting the integer 
 
 ## Return Type
 
-Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`: 
+Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
 
 - The returned timestamp always reflects your Databend timezone.
     - When timezone information is present in the given string, it converts the timestamp to the time corresponding to the timezone configured in Databend. In other words, it adjusts the timestamp to reflect the timezone set in Databend.
@@ -71,7 +73,7 @@ Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
     ```sql
     -- Set timezone to 'America/Toronto' (UTC-5:00, Eastern Standard Time)
     SET timezone = 'America/Toronto';
-    
+
     SELECT TO_TIMESTAMP('2022-01-02T01:12:00'), TO_TIMESTAMP('2022/01/02T01:12:00', '%Y/%m/%dT%H:%M:%S');
 
     ┌────────────────────────────────────────────────────────────────────────────────────────────────┐

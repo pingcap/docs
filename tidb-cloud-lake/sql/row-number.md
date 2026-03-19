@@ -2,12 +2,15 @@
 title: ROW_NUMBER
 summary: Assigns a sequential number to each row within a partition, starting from 1.
 ---
+
+# ROW_NUMBER
+
 Assigns a sequential number to each row within a partition, starting from 1.
 
 ## Syntax
 
 ```sql
-ROW_NUMBER() 
+ROW_NUMBER()
 OVER (
     [ PARTITION BY partition_expression ]
     ORDER BY sort_expression [ ASC | DESC ]

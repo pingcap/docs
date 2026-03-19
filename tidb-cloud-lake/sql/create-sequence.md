@@ -3,6 +3,8 @@ title: CREATE SEQUENCE
 summary: Creates a new sequence in Databend.
 ---
 
+# CREATE SEQUENCE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.807.

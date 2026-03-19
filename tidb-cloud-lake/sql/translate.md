@@ -3,6 +3,8 @@ title: TRANSLATE
 summary: Transforms a given string by replacing specific characters with corresponding replacements, as defined by the provided mapping.
 ---
 
+# TRANSLATE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.203.

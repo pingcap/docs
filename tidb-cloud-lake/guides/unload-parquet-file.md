@@ -2,6 +2,9 @@
 title: Unloading Parquet File
 summary: Learn about how to unload parquet files.
 ---
+
+# Unloading Parquet File
+
 ## Unloading Parquet File
 
 Syntax:

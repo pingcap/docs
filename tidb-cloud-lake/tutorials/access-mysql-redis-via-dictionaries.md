@@ -2,6 +2,9 @@
 title: Access MySQL & Redis via Dictionaries
 summary: In this tutorial, we’ll guide you through accessing MySQL and Redis data using dictionaries in Databend. You’ll learn how to create dictionaries that map to these external data sources, enabling seamless data querying and integration.
 ---
+
+# Access MySQL & Redis via Dictionaries
+
 In this tutorial, we’ll guide you through accessing MySQL and Redis data using dictionaries in Databend. You’ll learn how to create dictionaries that map to these external data sources, enabling seamless data querying and integration.
 
 ## Before You Start
@@ -204,15 +207,15 @@ SOURCE(Redis(
 ));
 ```
 
-3. Query data from the MySQL and Redis dictionaries we created earlier. 
+3. Query data from the MySQL and Redis dictionaries we created earlier.
 
 ```sql
-SELECT 
+SELECT
     u.id,
     u.name,
     DICT_GET(mysql_users, 'email', u.id) AS email,
     DICT_GET(redis_user_preferences, 'preferences', CONCAT('user:', TO_STRING(u.id))) AS user_preferences
-FROM 
+FROM
     users_databend AS u;
 ```
 

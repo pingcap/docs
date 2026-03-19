@@ -3,6 +3,8 @@ title: TO_MICROSECONDS
 summary: Converts a specified number of microseconds into an Interval type.
 ---
 
+# TO_MICROSECONDS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.677.

@@ -2,6 +2,9 @@
 title: information_schema.views
 summary: Provides metadata information for all views.
 ---
+
+# information_schema.views
+
 Provides metadata information for all views.
 
 See also:

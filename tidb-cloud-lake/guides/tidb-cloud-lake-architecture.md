@@ -3,6 +3,10 @@ title: TiDB Cloud Lake Architecture
 summary: TiDB Cloud Lake Architecture.
 ---
 
+# TiDB Cloud Lake Architecture
+
+This document introduces the architecture of TiDB Cloud Lake.
+
 ![TiDB Cloud Lake Architecture](/media/tidb-cloud-lake/architecture.png)
 
 <SimpleTab groupId="databendlay">

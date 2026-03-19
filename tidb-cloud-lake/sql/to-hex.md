@@ -2,9 +2,12 @@
 title: TO_HEX
 summary: For a string argument str, TO_HEX() returns a hexadecimal string representation of str where each byte of each character in str is converted to two hexadecimal digits. The inverse of this operation is performed by the UNHEX() function.
 ---
+
+# TO_HEX
+
 For a string argument str, TO_HEX() returns a hexadecimal string representation of str where each byte of each character in str is converted to two hexadecimal digits. The inverse of this operation is performed by the UNHEX() function.
 
-For a numeric argument N, TO_HEX() returns a hexadecimal string representation of the value of N treated as a longlong (BIGINT) number. 
+For a numeric argument N, TO_HEX() returns a hexadecimal string representation of the value of N treated as a longlong (BIGINT) number.
 
 ## Syntax
 

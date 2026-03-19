@@ -3,6 +3,8 @@ title: DROP NGRAM INDEX
 summary: Drops an existing NGRAM index from a table.
 ---
 
+# DROP NGRAM INDEX
+
 > **Note:**
 >
 > Introduced or updated in v1.2.726.

@@ -3,6 +3,8 @@ title: TRIM
 summary: Removes spaces, specific characters, or substrings from the start, end, or both sides of a string.
 ---
 
+# TRIM
+
 > **Note:**
 >
 > Introduced or updated in v1.2.694.

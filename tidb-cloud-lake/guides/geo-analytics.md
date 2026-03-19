@@ -2,6 +2,9 @@
 title: Geo Analytics
 summary: CityDrive records precise GPS positioning and distance-to-signal for every flagged frame. This geospatial data originates from the dash-cam's GPS module and is precisely aligned with the timestamps of video keyframes. Ops teams can answer "where did this happen?" purely in SQL.
 ---
+
+# Geo Analytics
+
 > **Scenario:** CityDrive records precise GPS positioning and distance-to-signal for every flagged frame. This geospatial data originates from the dash-cam's GPS module and is precisely aligned with the timestamps of video keyframes. Ops teams can answer "where did this happen?" purely in SQL.
 
 `frame_geo_points` and `signal_contact_points` share the same `video_id`/`frame_id` keys as the rest of the guide, so you can move from SQL metrics to maps without copying data.

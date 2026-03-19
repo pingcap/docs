@@ -3,6 +3,8 @@ title: SHOW STATISTICS
 summary: Displays statistical information about tables and their columns. Statistics help the query optimizer make better decisions about query execution plans by providing information about data distribution, row counts, and distinct values.
 ---
 
+# SHOW STATISTICS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.802.

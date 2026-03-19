@@ -3,6 +3,8 @@ title: ST_GEOHASH
 summary: Returns the geohash string for a GEOMETRY or GEOGRAPHY value and supports optional precision to control result granularity.
 ---
 
+# ST_GEOHASH
+
 > **Note:**
 >
 > Introduced or updated in v1.2.436.

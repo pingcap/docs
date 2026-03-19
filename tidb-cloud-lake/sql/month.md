@@ -3,6 +3,8 @@ title: MONTH
 summary: Alias for TO_MONTH.
 ---
 
+# MONTH
+
 > **Note:**
 >
 > Introduced or updated in v1.2.375.

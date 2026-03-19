@@ -3,6 +3,8 @@ title: EXTRACT
 summary: Retrieves the designated portion of a date, timestamp, or interval.
 ---
 
+# EXTRACT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.723.
@@ -56,13 +58,13 @@ The return type depends on the field being extracted:
 This example extracts various fields from the current timestamp:
 
 ```sql
-SELECT 
-  NOW(), 
-  EXTRACT(DAY FROM NOW()), 
-  EXTRACT(DOY FROM NOW()), 
-  EXTRACT(EPOCH FROM NOW()), 
-  EXTRACT(ISODOW FROM NOW()), 
-  EXTRACT(YEARWEEK FROM NOW()), 
+SELECT
+  NOW(),
+  EXTRACT(DAY FROM NOW()),
+  EXTRACT(DOY FROM NOW()),
+  EXTRACT(EPOCH FROM NOW()),
+  EXTRACT(ISODOW FROM NOW()),
+  EXTRACT(YEARWEEK FROM NOW()),
   EXTRACT(MILLENNIUM FROM NOW());
 
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

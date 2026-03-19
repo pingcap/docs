@@ -3,6 +3,8 @@ title: LAG
 summary: Returns the value from a previous row in the result set.
 ---
 
+# LAG
+
 > **Note:**
 >
 > Introduced or updated in v1.2.45.
@@ -15,12 +17,12 @@ See also: [LEAD](/tidb-cloud-lake/sql/lead.md)
 
 ```sql
 LAG(
-    expression 
+    expression
     [, offset ]
     [, default ]
-) 
+)
 OVER (
-    [ PARTITION BY partition_expression ] 
+    [ PARTITION BY partition_expression ]
     ORDER BY sort_expression
 )
 ```

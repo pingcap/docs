@@ -2,6 +2,9 @@
 title: Map
 summary: MAP(K, V) stores key-value pairs internally as ARRAY(TUPLE(key, value)). Define the key type K up front (Boolean, numeric, decimal, string, date, or timestamp). Keys must be non-null and unique; values can be any type, including nested structures. Use map literals ({key value}) or the MAP(keys, values) function to build a map expression.
 ---
+
+# Map
+
 ## Overview
 
 `MAP(K, V)` stores key-value pairs internally as `ARRAY(TUPLE(key, value))`. Define the key type `K` up front (Boolean, numeric, decimal, string, date, or timestamp). Keys must be non-null and unique; values can be any type, including nested structures. Use map literals (`{key: value}`) or the `MAP(keys, values)` function to build a map expression.

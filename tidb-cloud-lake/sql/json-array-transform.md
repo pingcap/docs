@@ -3,6 +3,8 @@ title: JSON_ARRAY_TRANSFORM
 summary: Transforms each element of a JSON array using a specified transformation Lambda expression. For more information about Lambda expression, see Lambda Expressions.
 ---
 
+# JSON_ARRAY_TRANSFORM
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

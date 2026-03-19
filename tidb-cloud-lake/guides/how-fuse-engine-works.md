@@ -2,12 +2,14 @@
 title: How Fuse Engine Works
 summary: Fuse Engine is Databend's core storage engine, optimized for managing petabyte-scale data efficiently on cloud object storage. By default, tables created in Databend automatically use this engine (ENGINE=FUSE). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides high query performance through advanced pruning and indexing.
 ---
+
+# How Fuse Engine Works
+
 ## Fuse Engine
 
 Fuse Engine is Databend's core storage engine, optimized for managing **petabyte-scale** data efficiently on **cloud object storage**. By default, tables created in Databend automatically use this engine (`ENGINE=FUSE`). Inspired by Git, its snapshot-based design enables powerful data versioning (like Time Travel) and provides **high query performance** through advanced pruning and indexing.
 
 This document explains its core concepts and how it works.
-
 
 ## Core Concepts
 
@@ -16,7 +18,6 @@ Fuse Engine organizes data using three core structures, mirroring Git:
 *   **Snapshots (Like Git Commits):** Immutable references defining the table's state at a point in time by pointing to specific Segments. Enables Time Travel.
 *   **Segments (Like Git Trees):** Collections of Blocks with summary statistics used for fast data skipping (pruning). Can be shared across Snapshots.
 *   **Blocks (Like Git Blobs):** Immutable data files (Parquet format) holding the actual rows and detailed column-level statistics for fine-grained pruning.
-
 
 ```
                          Table HEAD
@@ -40,8 +41,6 @@ Fuse Engine organizes data using three core structures, mirroring Git:
      │ (cloud.txt)   │                           │(warehouse.txt)│
      └───────────────┘                           └───────────────┘
 ```
-
-
 
 ## How Writing Works
 
@@ -203,7 +202,6 @@ Modify your table's structure (add columns, drop columns, rename, change types) 
 - Changes are metadata-only operations recorded in new Snapshots.
 - This is instantaneous, requires no downtime, and avoids costly data migration tasks. Older data remains accessible with its original schema.
 
-
 ## Advanced Indexing for Query Acceleration (Fuse Engine)
 
 Beyond basic block/segment pruning using statistics, Fuse Engine offers specialized secondary indexes to further accelerate specific query patterns:
@@ -214,8 +212,6 @@ Beyond basic block/segment pruning using statistics, Fuse Engine offers speciali
 | **Full-Text Index** | Inverted index for fast keyword search within text        | Text search using `MATCH` (e.g., logs)              | `WHERE MATCH(log_entry, 'error')`     |
 | **JSON Index**      | Indexes specific paths/keys within JSON documents       | Filtering on specific JSON paths/values             | `WHERE event_data:user.id = 123`      |
 | **Bloom Filter Index** | Probabilistic check to quickly skip non-matching blocks | Fast point lookups (`=`) & `IN` list filtering      | `WHERE user_id = 'xyz'` |
-
-
 
 ## Comparison: Databend Fuse Engine vs. Apache Iceberg
 

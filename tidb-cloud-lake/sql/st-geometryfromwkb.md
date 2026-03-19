@@ -3,6 +3,8 @@ title: ST_GEOMETRYFROMWKB
 summary: Parses a WKB(well-known-binary) or EWKB(extended well-known-binary) input and returns a value of type GEOMETRY.
 ---
 
+# ST_GEOMETRYFROMWKB
+
 > **Note:**
 >
 > Introduced or updated in v1.2.395.

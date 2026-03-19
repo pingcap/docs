@@ -2,6 +2,9 @@
 title: Loading Semi-structured Formats
 summary: Semi-structured data contains tags or markers to separate semantic elements while not conforming to rigid database structures. Databend efficiently loads these formats using the COPY INTO command, with optional on-the-fly data transformation.
 ---
+
+# Loading Semi-structured Formats
+
 ## What is Semi-structured Data?
 
 Semi-structured data contains tags or markers to separate semantic elements while not conforming to rigid database structures. Databend efficiently loads these formats using the `COPY INTO` command, with optional on-the-fly data transformation.

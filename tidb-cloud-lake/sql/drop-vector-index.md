@@ -3,6 +3,8 @@ title: DROP VECTOR INDEX
 summary: Removes a Vector index from a table.
 ---
 
+# DROP VECTOR INDEX
+
 > **Note:**
 >
 > Introduced or updated in v1.2.777.

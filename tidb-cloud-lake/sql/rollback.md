@@ -3,6 +3,8 @@ title: ROLLBACK
 summary: Undoes all changes made during a transaction. BEGIN and COMMIT/ROLLBACK must be used together to start and then either save or undo a transaction.
 ---
 
+# ROLLBACK
+
 > **Note:**
 >
 > Introduced or updated in v1.2.371.

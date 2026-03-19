@@ -3,11 +3,13 @@ title: IS_ARRAY
 summary: Checks if the input value is a JSON array. Please note that a JSON array is not the same as the ARRAY data type. A JSON array is a data structure commonly used in JSON, representing an ordered collection of values enclosed within square brackets []. It is a flexible format for organizing and exchanging various data types, including strings, numbers, booleans, objects, and nulls.
 ---
 
+# IS_ARRAY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.
 
-Checks if the input value is a JSON array. Please note that a JSON array is not the same as the [ARRAY](/tidb-cloud-lake/sql/array.md) data type. A JSON array is a data structure commonly used in JSON, representing an ordered collection of values enclosed within square brackets `[ ]`. It is a flexible format for organizing and exchanging various data types, including strings, numbers, booleans, objects, and nulls. 
+Checks if the input value is a JSON array. Please note that a JSON array is not the same as the [ARRAY](/tidb-cloud-lake/sql/array.md) data type. A JSON array is a data structure commonly used in JSON, representing an ordered collection of values enclosed within square brackets `[ ]`. It is a flexible format for organizing and exchanging various data types, including strings, numbers, booleans, objects, and nulls.
 
 ```json title='JSON Array Example:'
 [

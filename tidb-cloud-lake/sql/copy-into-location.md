@@ -3,6 +3,8 @@ title: COPY INTO <location>
 summary: COPY INTO allows you to unload data from a table or query into one or more files in one of the following locations.
 ---
 
+# COPY INTO <location>
+
 > **Note:**
 >
 > Introduced or updated in v1.2.881.

@@ -3,6 +3,8 @@ title: REGEXP_SPLIT_TO_TABLE
 summary: Splits a string using a regular expression pattern and returns each segment as a table.
 ---
 
+# REGEXP_SPLIT_TO_TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.754.
@@ -71,7 +73,7 @@ SELECT regexp_split_to_table('One_Two_Three', '[_-]', 'i')
 WITH data AS (
   SELECT 'id=123,name=John' AS kv_pairs
 )
-SELECT 
+SELECT
   REGEXP_SPLIT_TO_TABLE(kv_pairs, ',') AS pair
 FROM data;
 ┌──────────────┐

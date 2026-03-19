@@ -3,6 +3,8 @@ title: SHOW WAREHOUSES
 summary: Lists all warehouses visible to the current tenant.
 ---
 
+# SHOW WAREHOUSES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.687.

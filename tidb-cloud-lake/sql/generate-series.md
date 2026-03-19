@@ -2,7 +2,10 @@
 title: GENERATE_SERIES
 summary: Generates a dataset starting from a specified point, ending at another specified point, and optionally with an incrementing value. The GENERATE_SERIES function works with the following data types.
 ---
-Generates a dataset starting from a specified point, ending at another specified point, and optionally with an incrementing value. The GENERATE_SERIES function works with the following data types: 
+
+# GENERATE_SERIES
+
+Generates a dataset starting from a specified point, ending at another specified point, and optionally with an incrementing value. The GENERATE_SERIES function works with the following data types:
 
 - Integer
 - Date
@@ -21,7 +24,6 @@ GENERATE_SERIES(<start>, <stop>[, <step_interval>])
 | start         	| The starting value, representing the first number, date, or timestamp in the sequence.                                                                                                                            	|
 | stop          	| The ending value, representing the last number, date, or timestamp in the sequence.                                                                                                                               	|
 | step_interval 	| The step interval, determining the difference between adjacent values in the sequence. For integer sequences, the default value is 1. For date sequences, the default step interval is 1 day. For timestamp sequences, the default step interval is 1 microsecond. 	|
-
 
 > **Note:**
 >
@@ -67,7 +69,7 @@ generate_series    |
 2023-03-27 00:00:00|
 ```
 
-### Example 2: Filling Query Result Gaps 
+### Example 2: Filling Query Result Gaps
 
 This example uses the GENERATE_SERIES function and left join operator to handle gaps in query results caused by missing information in specific ranges.
 

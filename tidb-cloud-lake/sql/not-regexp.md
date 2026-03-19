@@ -2,6 +2,9 @@
 title: NOT REGEXP
 summary: Returns 1 if the string expr doesn't match the regular expression specified by the pattern pat, 0 otherwise.
 ---
+
+# NOT REGEXP
+
 Returns 1 if the string expr doesn't match the regular expression specified by the pattern pat, 0 otherwise.
 
 ## Syntax

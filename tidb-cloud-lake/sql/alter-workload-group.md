@@ -3,6 +3,8 @@ title: ALTER WORKLOAD GROUP
 summary: Update a workload group with specified quota settings.
 ---
 
+# ALTER WORKLOAD GROUP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.743.
@@ -31,4 +33,3 @@ ALTER WORKLOAD GROUP <group_name>
 ```sql
 ALTER WORKLOAD GROUP analytics SET cpu_quota = '20%', query_timeout = '10m';
 ```
-

@@ -3,6 +3,8 @@ title: INNER_PRODUCT
 summary: Calculates the inner product (dot product) of two vectors, which measures the similarity and projection between vectors.
 ---
 
+# INNER_PRODUCT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.780.
@@ -87,7 +89,7 @@ INSERT INTO vector_examples VALUES
 Calculate inner products:
 
 ```sql
-SELECT 
+SELECT
     id,
     vector_a,
     vector_b,
@@ -110,7 +112,7 @@ Result:
 
 ```sql
 -- Calculate inner products to measure vector similarity
-SELECT 
+SELECT
     INNER_PRODUCT([1,0,0]::VECTOR(3), [1,0,0]::VECTOR(3)) AS same_direction,
     INNER_PRODUCT([1,0,0]::VECTOR(3), [0,1,0]::VECTOR(3)) AS orthogonal,
     INNER_PRODUCT([1,0,0]::VECTOR(3), [-1,0,0]::VECTOR(3)) AS opposite;

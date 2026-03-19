@@ -3,6 +3,8 @@ title: ALTER USER
 summary: Modifies a user account, including.
 ---
 
+# ALTER USER
+
 > **Note:**
 >
 > Introduced or updated in v1.2.566.
@@ -48,7 +50,7 @@ ALTER USER <name> WITH DISABLED = true | false
 ALTER USER <name> WITH SET WORKLOAD GROUP = '<workload_group_name>'
 
 -- Unset workload group
-ALTER USER <name> WITH UNSET WORKLOAD GROUP      
+ALTER USER <name> WITH UNSET WORKLOAD GROUP
 ```
 
 - *auth_type* can be `double_sha1_password` (default), `sha256_password` or `no_password`.

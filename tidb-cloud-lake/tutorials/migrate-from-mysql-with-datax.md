@@ -2,6 +2,9 @@
 title: Migrate MySQL with DataX (Batch)
 summary: Loads MySQL data into TiDB Cloud Lake with DataX for batch full-load and incremental migration workflows.
 ---
+
+# Migrate MySQL with DataX (Batch)
+
 > **Capabilities**: Full Load, Incremental
 
 In this tutorial, you will load data from MySQL to Databend with DataX. Before you start, make sure you have successfully set up Databend, MySQL, and DataX in your environment.
@@ -106,7 +109,7 @@ databend> create table migrated_db.tb01(id int null, d double null, t TIMESTAMP 
 
 ```shell
 cd {YOUR_DATAX_DIR_BIN}
-python datax.py ./mysql_demo.json 
+python datax.py ./mysql_demo.json
 ```
 
 You're all set! To verify the data loading, execute the query in Databend:

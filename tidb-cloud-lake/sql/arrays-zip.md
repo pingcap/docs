@@ -3,6 +3,8 @@ title: ARRAYS_ZIP
 summary: Merges multiple arrays into a single array tuple.
 ---
 
+# ARRAYS_ZIP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.690.

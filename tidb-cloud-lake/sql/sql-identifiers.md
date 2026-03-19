@@ -2,6 +2,9 @@
 title: SQL Identifiers
 summary: SQL identifiers are names used for different elements within Databend, such as tables, views, and databases.
 ---
+
+# SQL Identifiers
+
 SQL identifiers are names used for different elements within Databend, such as tables, views, and databases.
 
 ## Unquoted & Double-quoted Identifiers
@@ -121,7 +124,7 @@ Databend  |
 
 SELECT "Databend";
 
->> SQL Error [1105] [HY000]: SemanticError. Code: 1065, Text = error: 
+>> SQL Error [1105] [HY000]: SemanticError. Code: 1065, Text = error:
   --> SQL:1:73
   |
 1 | /* ApplicationName=DBeaver 23.2.0 - SQLEditor <Script-12.sql> */ SELECT "Databend"

@@ -3,6 +3,8 @@ title: DESC MASKING POLICY
 summary: Displays detailed information about a specific masking policy in Databend.
 ---
 
+# DESC MASKING POLICY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.845.

@@ -3,6 +3,8 @@ title: WEEKOFYEAR
 summary: Alias for TO_WEEK_OF_YEAR.
 ---
 
+# WEEKOFYEAR
+
 > **Note:**
 >
 > Introduced or updated in v1.2.375.

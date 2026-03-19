@@ -2,6 +2,9 @@
 title: LOG(x)
 summary: Returns the natural logarithm of x. If x is less than or equal to 0.0E0, the function returns NULL.
 ---
+
+# LOG(x)
+
 Returns the natural logarithm of `x`. If x is less than or equal to 0.0E0, the function returns NULL.
 
 ## Syntax

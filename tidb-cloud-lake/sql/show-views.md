@@ -3,6 +3,8 @@ title: SHOW VIEWS
 summary: Returns a list of view names within the specified database, or within the current database if no database name is provided.
 ---
 
+# SHOW VIEWS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.415.
@@ -12,9 +14,9 @@ Returns a list of view names within the specified database, or within the curren
 ## Syntax
 
 ```sql
-SHOW [ FULL ] VIEWS 
-     [ { FROM | IN } <database_name> ] 
-     [ HISTORY ] 
+SHOW [ FULL ] VIEWS
+     [ { FROM | IN } <database_name> ]
+     [ HISTORY ]
      [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 

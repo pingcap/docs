@@ -3,6 +3,8 @@ title: JSON_ARRAY_AGG
 summary: Converts values into a JSON array while skipping NULLs.
 ---
 
+# JSON_ARRAY_AGG
+
 > **Note:**
 >
 > Introduced or updated in v1.2.595.
@@ -27,10 +29,10 @@ This example demonstrates how JSON_ARRAY_AGG aggregates values from each column 
 
 ```sql
 CREATE TABLE d (
-    a DECIMAL(10, 2), 
-    b STRING, 
-    c INT, 
-    d VARIANT, 
+    a DECIMAL(10, 2),
+    b STRING,
+    c INT,
+    d VARIANT,
     e ARRAY(STRING)
 );
 
@@ -40,11 +42,11 @@ INSERT INTO d VALUES
     (4.23, NULL, 200, '"uvw"', ['x','y']),
     (5.99, 'xyz', 300, '[1,2,3]', ['z']);
 
-SELECT 
-    json_array_agg(a) AS aggregated_a, 
-    json_array_agg(b) AS aggregated_b, 
-    json_array_agg(c) AS aggregated_c, 
-    json_array_agg(d) AS aggregated_d, 
+SELECT
+    json_array_agg(a) AS aggregated_a,
+    json_array_agg(b) AS aggregated_b,
+    json_array_agg(c) AS aggregated_c,
+    json_array_agg(d) AS aggregated_d,
     json_array_agg(e) AS aggregated_e
 FROM d;
 

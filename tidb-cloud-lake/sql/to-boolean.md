@@ -2,6 +2,9 @@
 title: TO_BOOLEAN
 summary: Converts a value to BOOLEAN data type.
 ---
+
+# TO_BOOLEAN
+
 Converts a value to BOOLEAN data type.
 
 ## Syntax

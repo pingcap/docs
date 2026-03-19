@@ -3,6 +3,8 @@ title: SHOW TABLE STATUS
 summary: Shows the status of the tables in a database. The status information includes various physical sizes and timestamps about a table, see Examples for details.
 ---
 
+# SHOW TABLE STATUS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.131.

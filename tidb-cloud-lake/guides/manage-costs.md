@@ -2,6 +2,9 @@
 title: Managing Costs
 summary: You can view the current month's consumption and billing history for your organization under Manage > Billing.
 ---
+
+# Managing Costs
+
 You can view the current month's consumption and billing history for your organization under **Manage** > **Billing**.
 
 ## Limiting Your Costs
@@ -34,7 +37,7 @@ To facilitate the work of your finance team while ensuring data security, you ca
 CREATE ROLE billing;
 ```
 
-When inviting finance personnel to your organization, assign them this `billing` role. 
+When inviting finance personnel to your organization, assign them this `billing` role.
 
 ![alt text](/media/tidb-cloud-lake/billing-role.png)
 

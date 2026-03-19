@@ -2,6 +2,9 @@
 title: CEIL
 summary: Rounds the number up.
 ---
+
+# CEIL
+
 Rounds the number up.
 
 ## Syntax

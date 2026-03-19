@@ -2,6 +2,9 @@
 title: OCT
 summary: Returns a string representation of the octal value of N.
 ---
+
+# OCT
+
 Returns a string representation of the octal value of N.
 
 ## Syntax
@@ -20,5 +23,3 @@ SELECT OCT(12);
 | 014     |
 +---------+
 ```
-
-

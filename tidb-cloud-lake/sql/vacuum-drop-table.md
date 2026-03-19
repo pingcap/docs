@@ -3,6 +3,8 @@ title: VACUUM DROP TABLE
 summary: The VACUUM DROP TABLE command helps save storage space by permanently removing data files of dropped tables, freeing up storage space, and enabling you to manage the process efficiently. It offers optional parameters to target specific databases, preview, and limit the number of data files to be vacuumed. To list the dropped tables of a database, use SHOW DROP TABLES.
 ---
 
+# VACUUM DROP TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

@@ -3,6 +3,8 @@ title: CREATE NOTIFICATION INTEGRATION
 summary: Creates a named notification integration that can be used to send notifications to external messaging services.
 ---
 
+# CREATE NOTIFICATION INTEGRATION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.371.
@@ -43,4 +45,3 @@ CREATE NOTIFICATION INTEGRATION IF NOT EXISTS SampleNotification type = webhook 
 ```
 
 This example creates a notification integration named `SampleNotification` of type `webhook` that is enabled and sends notifications to the `https://example.com` URL using the `GET` method and the `bearer auth` authorization header.
-

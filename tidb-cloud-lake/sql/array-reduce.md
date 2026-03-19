@@ -3,6 +3,8 @@ title: ARRAY_REDUCE
 summary: Reduces a JSON array to a single value by applying a specified Lambda expression. For more information about Lambda expression, see Lambda Expressions.
 ---
 
+# ARRAY_REDUCE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

@@ -2,6 +2,9 @@
 title: Warehouse
 summary: Warehouse-related SQL commands for Databend Cloud.
 ---
+
+# Warehouse
+
 Warehouse-related SQL commands for Databend Cloud.
 
 ## General Rules

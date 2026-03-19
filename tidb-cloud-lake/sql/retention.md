@@ -2,6 +2,9 @@
 title: RETENTION
 summary: Aggregate function.
 ---
+
+# RETENTION
+
 Aggregate function
 
 The RETENTION() function takes as arguments a set of conditions from 1 to 32 arguments of type UInt8 that indicate whether a certain condition was met for the event.

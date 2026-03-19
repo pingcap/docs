@@ -3,6 +3,8 @@ title: VACUUM TABLE
 summary: This page describes VACUUM TABLE in TiDB Cloud Lake.
 ---
 
+# VACUUM TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

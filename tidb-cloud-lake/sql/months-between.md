@@ -3,6 +3,8 @@ title: MONTHS_BETWEEN
 summary: Returns the number of months between *date1* and *date2*.
 ---
 
+# MONTHS_BETWEEN
+
 > **Note:**
 >
 > Introduced or updated in v1.2.307.

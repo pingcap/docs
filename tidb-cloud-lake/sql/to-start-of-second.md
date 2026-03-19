@@ -2,6 +2,9 @@
 title: TO_START_OF_SECOND
 summary: Rounds down a date with time (timestamp/datetime) to the start of the second.
 ---
+
+# TO_START_OF_SECOND
+
 Rounds down a date with time (timestamp/datetime) to the start of the second.
 
 ## Syntax

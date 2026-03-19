@@ -3,6 +3,8 @@ title: SHOW GRANTS
 summary: Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 ---
 
+# SHOW GRANTS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.845.
@@ -29,7 +31,7 @@ SHOW GRANTS ON { STAGE | TABLE | DATABASE | UDF | MASKING POLICY | ROW ACCESS PO
 
 -- Lists all users and roles that have been directly granted role_name.
 SHOW GRANTS OF ROLE <role_name>
-     
+
 ```
 
 ## Examples
@@ -77,9 +79,9 @@ SHOW GRANTS ON DATABASE my_db;
 │ OWNERSHIP  │ my_db       │               16 │ ROLE     │ analyst │                  │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 
--- Lists all users and roles that have been directly granted role_name.  
--- This command displays only the direct grantees of role_name. 
--- This means it lists users and roles that have explicitly received the role through a GRANT ROLE role_name TO <user_or_role> statement. 
+-- Lists all users and roles that have been directly granted role_name.
+-- This command displays only the direct grantees of role_name.
+-- This means it lists users and roles that have explicitly received the role through a GRANT ROLE role_name TO <user_or_role> statement.
 -- It does not show users or roles that acquire role_name indirectly via role hierarchies or inheritance.
 SHOW GRANTS OF ROLE analyst
 

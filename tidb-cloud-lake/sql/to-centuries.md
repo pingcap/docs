@@ -3,6 +3,8 @@ title: TO_CENTURIES
 summary: Converts a specified number of centuries into an Interval type.
 ---
 
+# TO_CENTURIES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.677.

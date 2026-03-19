@@ -3,6 +3,8 @@ title: ST_ASWKT
 summary: Converts a GEOMETRY or GEOGRAPHY object into a WKT(well-known-text) format representation.
 ---
 
+# ST_ASWKT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.436.

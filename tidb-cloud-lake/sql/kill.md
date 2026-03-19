@@ -2,6 +2,9 @@
 title: KILL
 summary: Forcibly terminates the currently running queries.
 ---
+
+# KILL
+
 Forcibly terminates the currently running queries.
 
 See also: [SHOW PROCESSLIST](/tidb-cloud-lake/sql/show-processlist.md)

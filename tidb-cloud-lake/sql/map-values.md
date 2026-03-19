@@ -3,6 +3,8 @@ title: MAP_VALUES
 summary: Returns the values in a map.
 ---
 
+# MAP_VALUES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.429.

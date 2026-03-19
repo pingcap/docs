@@ -3,6 +3,8 @@ title: TOP
 summary: Limits the maximum number of rows returned by a query.
 ---
 
+# TOP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.435.
@@ -14,7 +16,7 @@ See also: [Limit Clause](/tidb-cloud-lake/sql/select.md#limit-clause)
 ## Syntax
 
 ```sql
-SELECT 
+SELECT
     [ TOP <n> ] <column1>, <column2>, ...
 FROM ...
 [ ORDER BY ... ]
@@ -25,7 +27,7 @@ FROM ...
 | n         | Represents the maximum limit of rows to be returned in the result, and it must be a non-negative integer.                                                                      |
 
 - `TOP` and `LIMIT` are equivalent keywords for limiting the number of rows returned by a query, but they cannot be used together in the same query.
-- If `TOP` is used without the `ORDER BY` clause, the query lacks a meaningful sequence for selecting the top rows, potentially resulting in inconsistent or unexpected results. 
+- If `TOP` is used without the `ORDER BY` clause, the query lacks a meaningful sequence for selecting the top rows, potentially resulting in inconsistent or unexpected results.
 
 ## Examples
 
@@ -61,7 +63,7 @@ SELECT TOP 3 * FROM Students ORDER BY Score DESC;
 └──────────────────────────────────────────────────────┘
 ```
 
-The query above is equivalent to: 
+The query above is equivalent to:
 
 ```sql
 SELECT * FROM Students ORDER BY Score DESC LIMIT 3;

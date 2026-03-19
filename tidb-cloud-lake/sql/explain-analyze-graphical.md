@@ -3,6 +3,8 @@ title: EXPLAIN ANALYZE GRAPHICAL
 summary: Analyzes query performance with an interactive visual representation in your browser. Available exclusively in BendSQL v0.22.2+.
 ---
 
+# EXPLAIN ANALYZE GRAPHICAL
+
 > **Note:**
 >
 > Introduced or updated in v1.2.647.
@@ -21,16 +23,16 @@ Add to your BendSQL config file `~/.config/bendsql/config.toml`:
 
 ```toml
 [server]
-bind_address = "127.0.0.1"        
-auto_open_browser = true      
+bind_address = "127.0.0.1"
+auto_open_browser = true
 ```
 
 ## Example
 
 ```sql
-EXPLAIN ANALYZE GRAPHICAL SELECT l_returnflag, COUNT(*) 
-FROM lineitem 
-WHERE l_shipdate <= '1998-09-01' 
+EXPLAIN ANALYZE GRAPHICAL SELECT l_returnflag, COUNT(*)
+FROM lineitem
+WHERE l_shipdate <= '1998-09-01'
 GROUP BY l_returnflag;
 ```
 

@@ -3,9 +3,9 @@ title: Connect to TiDB Cloud Lake Using Java
 summary: This page describes how to connect to TiDB Cloud Lake using Java.
 ---
 
-# Java JDBC Driver for Databend
+# Connect to TiDB Cloud Lake Using Java
 
-The official JDBC driver providing standard JDBC 4.0 compatibility for seamless integration with Java applications.
+The official JDBC driver provides standard JDBC 4.0 compatibility for seamless integration with Java applications.
 
 ## Installation
 
@@ -25,7 +25,7 @@ The official JDBC driver providing standard JDBC 4.0 compatibility for seamless 
 implementation 'com.databend:databend-jdbc:0.4.1'
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 

@@ -3,6 +3,8 @@ title: CREATE TABLE
 summary: Creating tables is one of the most complicated operations for many databases because you might need to.
 ---
 
+# CREATE TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.821.

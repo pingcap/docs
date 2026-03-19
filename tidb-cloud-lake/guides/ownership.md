@@ -2,7 +2,10 @@
 title: Ownership
 summary: Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within Databend.
 ---
-Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within Databend. 
+
+# Ownership
+
+Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within Databend.
 
 ## Granting Ownership
 
@@ -14,7 +17,7 @@ An object's ownership is automatically granted to the role of the user who creat
 
 ## Revoking Ownership Not Allowed
 
-Revoking ownership is *not* supported because every object must have an owner. 
+Revoking ownership is *not* supported because every object must have an owner.
 
 - If an object is dropped, it will not retain its ownership by the original role. If the object is restored (if possible), ownership will not be automatically reassigned, and an `account_admin` will need to manually reassign ownership to a role.
 - If a role that owns an object is deleted, an `account_admin` can transfer ownership of the object to another role.

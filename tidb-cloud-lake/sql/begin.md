@@ -3,6 +3,8 @@ title: BEGIN
 summary: Starts a new transaction. BEGIN and COMMIT/ROLLBACK must be used together to start and then either save or undo a transaction.
 ---
 
+# BEGIN
+
 > **Note:**
 >
 > Introduced or updated in v1.2.371.
@@ -27,7 +29,7 @@ Starts a new transaction. BEGIN and [COMMIT](/tidb-cloud-lake/sql/commit.md)/[RO
     COMMIT; -- Executing COMMIT outside of a multi-statement transaction is ignored, no commit operation is performed, no error is raised
 
     BEGIN; -- Start another transaction
-    ... 
+    ...
     ```
 
 - When a DDL statement is executed within a multi-statement transaction, it will commit the current multi-statement transaction and execute subsequent statements as single-statement transactions until another BEGIN is issued.
@@ -39,7 +41,7 @@ Starts a new transaction. BEGIN and [COMMIT](/tidb-cloud-lake/sql/commit.md)/[RO
     INSERT INTO table_name (column1, column2) VALUES (value1, value2);
 
     -- Executing a DDL statement within the transaction
-    CREATE TABLE new_table (column1 data_type, column2 data_type); 
+    CREATE TABLE new_table (column1 data_type, column2 data_type);
     -- This will commit the current transaction
 
     -- Subsequent statements are executed as single-statement transactions
@@ -163,24 +165,24 @@ CREATE TABLE target_table_2 (
 
 CREATE STREAM source_stream ON TABLE source_table;
 
-INSERT INTO source_table VALUES 
+INSERT INTO source_table VALUES
 (1, 'source1', 'value1'),
 (2, 'source2', 'value2'),
 (3, 'source3', 'value3'),
 (4, 'source4', 'value4');
 
 CREATE TASK insert_task
-WAREHOUSE = 'system' 
-SCHEDULE = 1 SECOND AS 
+WAREHOUSE = 'system'
+SCHEDULE = 1 SECOND AS
 BEGIN
     BEGIN;
-    INSERT INTO my_db.target_table_1 
-    SELECT id, value 
-    FROM my_db.source_stream; 
+    INSERT INTO my_db.target_table_1
+    SELECT id, value
+    FROM my_db.source_stream;
 
-    INSERT INTO my_db.target_table_2 
-    SELECT id, value 
-    FROM my_db.source_stream; 
+    INSERT INTO my_db.target_table_2
+    SELECT id, value
+    FROM my_db.source_stream;
     COMMIT;
 END;
 

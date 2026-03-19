@@ -2,6 +2,9 @@
 title: ARRAY_SIZE
 summary: Returns the length of an array, counting NULL elements.
 ---
+
+# ARRAY_SIZE
+
 Returns the length of an array, counting `NULL` elements.
 
 Alias: `ARRAY_LENGTH`

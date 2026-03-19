@@ -2,7 +2,8 @@
 title: Aggregating Index
 summary: Aggregating indexes dramatically accelerate analytical queries by precomputing and storing aggregation results, eliminating the need to scan entire tables for common analytics operations.
 ---
-# Aggregating Index: Precomputed Results for Instant Analytics
+
+# Aggregating Index
 
 Aggregating indexes dramatically accelerate analytical queries by precomputing and storing aggregation results, eliminating the need to scan entire tables for common analytics operations.
 
@@ -34,9 +35,9 @@ Analytical queries on large datasets face significant performance challenges:
 CREATE TABLE sales(region VARCHAR, product VARCHAR, revenue DECIMAL, quantity INT);
 
 -- Create aggregating index for common analytics
-CREATE AGGREGATING INDEX sales_summary AS 
-SELECT region, SUM(revenue), COUNT(*), AVG(quantity) 
-FROM sales 
+CREATE AGGREGATING INDEX sales_summary AS
+SELECT region, SUM(revenue), COUNT(*), AVG(quantity)
+FROM sales
 GROUP BY region;
 
 -- Refresh the index (manual mode)
@@ -67,11 +68,11 @@ EXPLAIN SELECT region, SUM(revenue) FROM sales GROUP BY region;
 
 ```sql
 -- Automatic refresh (updates with every data change)
-CREATE AGGREGATING INDEX auto_summary AS 
+CREATE AGGREGATING INDEX auto_summary AS
 SELECT region, SUM(revenue) FROM sales GROUP BY region SYNC;
 
 -- Manual refresh (update on demand)
-CREATE AGGREGATING INDEX manual_summary AS 
+CREATE AGGREGATING INDEX manual_summary AS
 SELECT region, SUM(revenue) FROM sales GROUP BY region;
 
 REFRESH AGGREGATING INDEX manual_summary;

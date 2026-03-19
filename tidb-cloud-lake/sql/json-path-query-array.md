@@ -2,6 +2,9 @@
 title: JSON_PATH_QUERY_ARRAY
 summary: Get all JSON items returned by JSON path for the specified JSON value and wrap a result into an array.
 ---
+
+# JSON_PATH_QUERY_ARRAY
+
 Get all JSON items returned by JSON path for the specified JSON value and wrap a result into an array.
 
 ## Syntax
@@ -9,7 +12,6 @@ Get all JSON items returned by JSON path for the specified JSON value and wrap a
 ```sql
 JSON_PATH_QUERY_ARRAY(<variant>, '<path_name>')
 ```
-
 
 ## Return Type
 

@@ -3,6 +3,8 @@ title: DROP TABLE
 summary: Deletes a table.
 ---
 
+# DROP TABLE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.155.
@@ -43,7 +45,7 @@ a|b      |
 -- Delete the table
 DROP TABLE test;
 SELECT * FROM test;
->> SQL Error [1105] [HY000]: UnknownTable. Code: 1025, Text = error: 
+>> SQL Error [1105] [HY000]: UnknownTable. Code: 1025, Text = error:
   --> SQL:1:80
   |
 1 | /* ApplicationName=DBeaver 23.2.0 - SQLEditor <Script-12.sql> */ SELECT * FROM test

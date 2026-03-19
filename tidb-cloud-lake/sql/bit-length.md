@@ -2,6 +2,9 @@
 title: BIT_LENGTH
 summary: Return the length of a string in bits.
 ---
+
+# BIT_LENGTH
+
 Return the length of a string in bits.
 
 ## Syntax

@@ -2,6 +2,9 @@
 title: H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE
 summary: Returns the origin and destination hexagon indexes from the given unidirectional edge H3Index.
 ---
+
+# H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE
+
 Returns the origin and destination hexagon indexes from the given unidirectional edge H3Index.
 
 ## Syntax

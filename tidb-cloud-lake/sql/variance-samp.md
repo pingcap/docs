@@ -3,6 +3,8 @@ title: VARIANCE_SAMP
 summary: Alias for COVAR_SAMP.
 ---
 
+# VARIANCE_SAMP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.

@@ -3,6 +3,8 @@ title: IS_BOOLEAN
 summary: Checks if the input JSON value is a boolean.
 ---
 
+# IS_BOOLEAN
+
 > **Note:**
 >
 > Introduced or updated in v1.2.368.

@@ -2,6 +2,9 @@
 title: system.columns
 summary: Contains information about columns of tables.
 ---
+
+# system.columns
+
 Contains information about columns of tables.
 
 ```sql

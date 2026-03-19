@@ -3,9 +3,9 @@ title: QUANTILE_CONT
 summary: The QUANTILE_CONT() function computes the interpolated quantile number of a numeric data sequence.
 ---
 
-Aggregate function.
+# QUANTILE_CONT
 
-The QUANTILE_CONT() function computes the interpolated quantile number of a numeric data sequence.
+The `QUANTILE_CONT()` function computes the interpolated quantile number of a numeric data sequence.
 
 > **Note:**
 >
@@ -15,7 +15,6 @@ The QUANTILE_CONT() function computes the interpolated quantile number of a nume
 
 ```sql
 QUANTILE_CONT(<levels>)(<expr>)
-    
 QUANTILE_CONT(level1, level2, ...)(<expr>)
 ```
 
@@ -60,4 +59,3 @@ FROM sales_data;
 |-----------------------|
 |        6000.0         |
 ```
-

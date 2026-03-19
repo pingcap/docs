@@ -2,6 +2,9 @@
 title: CITY64WITHSEED
 summary: Calculates a City64WithSeed 64-bit hash for a string.
 ---
+
+# CITY64WITHSEED
+
 Calculates a City64WithSeed 64-bit hash for a string.
 
 ## Syntax

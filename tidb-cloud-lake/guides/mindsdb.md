@@ -2,6 +2,9 @@
 title: MindsDB
 summary: Data that lives in your database is a valuable asset. MindsDB enables you to use your data and make forecasts. It speeds up the ML development process by bringing machine learning into the database. With MindsDB, you can build, train, optimize, and deploy your ML models without the need for other platforms.
 ---
+
+# MindsDB
+
 Data that lives in your database is a valuable asset. [MindsDB](https://mindsdb.com/) enables you to use your data and make forecasts. It speeds up the ML development process by bringing machine learning into the database. With MindsDB, you can build, train, optimize, and deploy your ML models without the need for other platforms.
 
 Both Databend and Databend Cloud can integrate with MindsDB as a data source, which brings Machine Learning capabilities into Databend. The following tutorials show you how to integrate with MindsDB and make data forecasts, using the [Air Pollution in Seoul](https://www.kaggle.com/datasets/bappekim/air-pollution-in-seoul) dataset as an example.

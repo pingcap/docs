@@ -2,6 +2,9 @@
 title: TYPEOF
 summary: TYPEOF function is used to return the name of a data type.
 ---
+
+# TYPEOF
+
 TYPEOF function is used to return the name of a data type.
 
 ## Syntax

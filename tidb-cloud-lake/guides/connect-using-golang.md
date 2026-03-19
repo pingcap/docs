@@ -3,9 +3,9 @@ title: Connect to TiDB Cloud Lake Using Golang
 summary: This page describes how to connect to TiDB Cloud Lake using Golang.
 ---
 
-# Go Driver for Databend
+# Connect to TiDB Cloud Lake Using Golang
 
-The official Go driver providing a standard `database/sql` interface for seamless integration with existing Go applications.
+The official Go driver provides a standard `database/sql` interface for seamless integration with existing Go applications.
 
 ## Installation
 
@@ -13,7 +13,7 @@ The official Go driver providing a standard `database/sql` interface for seamles
 go get github.com/databendlabs/databend-go
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 

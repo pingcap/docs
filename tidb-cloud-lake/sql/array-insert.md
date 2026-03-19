@@ -3,6 +3,8 @@ title: ARRAY_INSERT
 summary: Inserts a value into a JSON array at the specified index and returns the updated JSON array.
 ---
 
+# ARRAY_INSERT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.762.

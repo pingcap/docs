@@ -3,6 +3,8 @@ title: TO_GEOMETRY
 summary: Parses an input and returns a value of type GEOMETRY.
 ---
 
+# TO_GEOMETRY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.431.

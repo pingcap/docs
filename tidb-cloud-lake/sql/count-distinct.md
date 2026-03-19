@@ -2,6 +2,9 @@
 title: COUNT_DISTINCT
 summary: Aggregate function.
 ---
+
+# COUNT_DISTINCT
+
 Aggregate function.
 
 The count(distinct ...) function calculates the uniq value of a set of values.

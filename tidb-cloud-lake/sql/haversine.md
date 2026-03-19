@@ -3,6 +3,8 @@ title: HAVERSINE
 summary: Calculates the great circle distance in kilometers between two points on the Earth’s surface, using the Haversine formula. The two points are specified by their latitude and longitude in degrees.
 ---
 
+# HAVERSINE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.555.

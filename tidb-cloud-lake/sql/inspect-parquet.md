@@ -3,6 +3,8 @@ title: INSPECT_PARQUET
 summary: Retrieves a table of comprehensive metadata from a staged Parquet file, including the following columns.
 ---
 
+# INSPECT_PARQUET
+
 > **Note:**
 >
 > Introduced or updated in v1.2.180.

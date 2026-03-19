@@ -2,6 +2,9 @@
 title: Migrate MySQL with Kafka Connect (CDC)
 summary: Builds a MySQL-to-TiDB Cloud Lake pipeline with Kafka Connect to support full-load bootstrap and ongoing CDC replication.
 ---
+
+# Migrate MySQL with Kafka Connect (CDC)
+
 > **Capabilities**: CDC, Incremental, Full Load
 
 This tutorial shows how to build a real-time data pipeline from MySQL to Databend using Kafka Connect.

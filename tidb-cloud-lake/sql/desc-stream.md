@@ -3,6 +3,8 @@ title: DESC STREAM
 summary: Describes the details of a specific stream.
 ---
 
+# DESC SEQUENCE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.223.

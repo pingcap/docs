@@ -3,6 +3,8 @@ title: SHOW NETWORK POLICIES
 summary: Displays a list of all existing network policies in Databend. It provides information about the available network policies, including their names and whether they have any allowed or blocked IP address lists configured.
 ---
 
+# SHOW NETWORK POLICIES
+
 > **Note:**
 >
 > Introduced or updated in v1.2.26.

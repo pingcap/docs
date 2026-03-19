@@ -2,6 +2,9 @@
 title: JSON_PATH_QUERY
 summary: Get all JSON items returned by JSON path for the specified JSON value.
 ---
+
+# JSON_PATH_QUERY
+
 Get all JSON items returned by JSON path for the specified JSON value.
 
 ## Syntax
@@ -9,7 +12,6 @@ Get all JSON items returned by JSON path for the specified JSON value.
 ```sql
 JSON_PATH_QUERY(<variant>, '<path_name>')
 ```
-
 
 ## Return Type
 

@@ -2,7 +2,10 @@
 title: MIN_IF
 summary: The suffix _IF can be appended to the name of any aggregate function. In this case, the aggregate function accepts an extra argument – a condition.
 ---
-## MIN_IF 
+
+# MIN_IF
+
+## MIN_IF
 
 The suffix `_IF` can be appended to the name of any aggregate function. In this case, the aggregate function accepts an extra argument – a condition.
 

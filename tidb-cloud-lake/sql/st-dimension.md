@@ -3,6 +3,8 @@ title: ST_DIMENSION
 summary: Return the dimension for a geometry object. The dimension of a GEOMETRY or GEOGRAPHY object is.
 ---
 
+# ST_DIMENSION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.442.

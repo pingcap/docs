@@ -2,6 +2,9 @@
 title: Numeric
 summary: Basic Numeric data type.
 ---
+
+# Numeric
+
 ## Integer Data Types
 
 | Name     | Alias | Size    | Min Value            | Max Value           |

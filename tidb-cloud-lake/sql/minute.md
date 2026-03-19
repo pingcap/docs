@@ -2,6 +2,9 @@
 title: TO_MINUTE
 summary: Converts a date with time (timestamp/datetime) to a UInt8 number containing the number of the minute of the hour (0-59).
 ---
+
+# TO_MINUTE
+
 Converts a date with time (timestamp/datetime) to a UInt8 number containing the number of the minute of the hour (0-59).
 
 ## Syntax

@@ -3,6 +3,8 @@ title: ALTER FUNCTION
 summary: Alters an external function.
 ---
 
+# ALTER FUNCTION
+
 > **Note:**
 >
 > Introduced or updated in v1.2.116.
@@ -12,9 +14,9 @@ Alters an external function.
 ## Syntax
 
 ```sql
-ALTER FUNCTION [ IF NOT EXISTS ] <function_name> 
-    AS ( <input_param_types> ) RETURNS <return_type> LANGUAGE <language_name> 
-    HANDLER = '<handler_name>' ADDRESS = '<udf_server_address>' 
+ALTER FUNCTION [ IF NOT EXISTS ] <function_name>
+    AS ( <input_param_types> ) RETURNS <return_type> LANGUAGE <language_name>
+    HANDLER = '<handler_name>' ADDRESS = '<udf_server_address>'
     [DESC='<description>']
 ```
 

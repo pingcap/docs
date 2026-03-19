@@ -3,6 +3,8 @@ title: DROP SEQUENCE
 summary: Deletes an existing sequence from Databend.
 ---
 
+# DROP SEQUENCE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.426.

@@ -3,6 +3,8 @@ title: SHOW_GRANTS
 summary: Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 ---
 
+# SHOW_GRANTS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.704.

@@ -3,6 +3,8 @@ title: UPDATE
 summary: Updates rows in a table with new values, optionally using values from other tables.
 ---
 
+# UPDATE
+
 > **Note:**
 >
 > Introduced or updated in v1.2.705.
@@ -17,8 +19,8 @@ Updates rows in a table with new values, optionally using values from other tabl
 
 ```sql
 UPDATE <target_table>
-       SET <col_name> = <value> [ , <col_name> = <value> , ... ] -- Set new values  
-        [ FROM <additional_tables> ] -- Use values from other tables  
+       SET <col_name> = <value> [ , <col_name> = <value> , ... ] -- Set new values
+        [ FROM <additional_tables> ] -- Use values from other tables
         [ WHERE <condition> ] -- Filter rows
 ```
 
@@ -104,7 +106,7 @@ WHERE target.id = source.id;
 
 ## Examples
 
-The following example demonstrates how to update rows in a table, both directly and using values from another table. 
+The following example demonstrates how to update rows in a table, both directly and using values from another table.
 
 We will first create a **bookstore** table and insert some sample data, then update a specific row directly. After that, we will use a second table, **book_updates**, to update rows in the **bookstore** table based on the values from **book_updates**.
 
@@ -148,8 +150,8 @@ SELECT * FROM bookstore;
 Next, let's update the book with book_id `103` to change its name.
 
 ```sql
-UPDATE bookstore 
-SET book_name = 'The long answer (2nd)' 
+UPDATE bookstore
+SET book_name = 'The long answer (2nd)'
 WHERE book_id = 103;
 ```
 

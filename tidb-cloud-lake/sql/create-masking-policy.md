@@ -3,6 +3,8 @@ title: CREATE MASKING POLICY
 summary: Creates a new masking policy in Databend.
 ---
 
+# CREATE MASKING POLICY
+
 > **Note:**
 >
 > Introduced or updated in v1.2.845.
@@ -12,7 +14,7 @@ Creates a new masking policy in Databend.
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] MASKING POLICY [ IF NOT EXISTS ] <policy_name> AS 
+CREATE [ OR REPLACE ] MASKING POLICY [ IF NOT EXISTS ] <policy_name> AS
     ( <arg_name_to_mask> <arg_type_to_mask> [ , <arg_1> <arg_type_1> ... ] )
     RETURNS <arg_type_to_mask> -> <expression_on_arg_name>
     [ COMMENT = '<comment>' ]

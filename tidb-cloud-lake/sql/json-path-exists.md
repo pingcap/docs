@@ -3,6 +3,8 @@ title: JSON_PATH_EXISTS
 summary: Checks whether a specified path exists in JSON data.
 ---
 
+# JSON_PATH_EXISTS
+
 > **Note:**
 >
 > Introduced or updated in v1.2.119.

@@ -3,6 +3,8 @@ title: MAP_CAT
 summary: Returns the concatenatation of two MAPs.
 ---
 
+# MAP_CAT
+
 > **Note:**
 >
 > Introduced or updated in v1.2.459.

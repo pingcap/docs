@@ -2,6 +2,9 @@
 title: OCTET_LENGTH
 summary: OCTET_LENGTH() is a synonym for LENGTH().
 ---
+
+# OCTET_LENGTH
+
 OCTET_LENGTH() is a synonym for LENGTH().
 
 ## Syntax
@@ -20,5 +23,3 @@ SELECT OCTET_LENGTH('databend');
 |                        8 |
 +--------------------------+
 ```
-
-

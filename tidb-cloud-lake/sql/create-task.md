@@ -3,6 +3,8 @@ title: CREATE TASK
 summary: The CREATE TASK statement is used to define a new task that executes a specified SQL statement on a scheduled basis or dag based task graph.
 ---
 
+# CREATE TASK
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.
@@ -60,7 +62,7 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
   - Boolean operators such as AND, OR, NOT, and others.
   - Casts between numeric, string and boolean types.
   - Comparison operators such as equal, not equal, greater than, less than, and others.
- 
+
 > **Note:**
 >
 > Warning: When using STREAM_STATUS in tasks, you must include the database name when referencing the stream (e.g., `STREAM_STATUS('mydb.stream_name')`).
@@ -70,8 +72,8 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 - Interval-based tasks follow a fixed interval spot in a tight way. This means that if the current task execution time exceeds the interval unit, the next task will execute immediately. Otherwise, the next task will wait until the next interval unit is triggered. For example, if a task is defined with a 1-second interval and one task execution takes 1.5 seconds, the next task will execute immediately. If one task execution takes 0.5 seconds, the next task will wait until the next 1-second interval tick starts.
 - While session parameters can be specified during task creation, you can also modify them later using the ALTER TASK statement. For example:
   ```sql
-  ALTER TASK simple_task SET 
-      enable_query_result_cache = 1, 
+  ALTER TASK simple_task SET
+      enable_query_result_cache = 1,
       query_result_cache_min_execute_secs = 5;
   ```
 

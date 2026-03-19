@@ -2,6 +2,9 @@
 title: Vector Functions
 summary: Vector functions in Databend for vector operations and analysis.
 ---
+
+# Vector Functions
+
 This section provides reference information for vector functions in Databend. These functions enable comprehensive vector operations including distance calculations, similarity measurements, and vector analysis for machine learning applications, vector search, and AI-powered analytics.
 
 ## Distance Functions

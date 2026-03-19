@@ -2,6 +2,9 @@
 title: REGEXP
 summary: Returns true if the string <expr> matches the regular expression specified by the <pattern>, false otherwise.
 ---
+
+# REGEXP
+
 Returns `true` if the string `<expr>` matches the regular expression specified by the `<pattern>`, `false` otherwise.
 
 ## Syntax

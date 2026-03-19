@@ -2,6 +2,9 @@
 title: Date & Time Functions
 summary: This page provides a comprehensive overview of Date & Time functions in Databend, organized by functionality for easy reference.
 ---
+
+# Date & Time Functions
+
 This page provides a comprehensive overview of Date & Time functions in Databend, organized by functionality for easy reference.
 
 ## Current Date & Time Functions

@@ -2,6 +2,9 @@
 title: Audit Trail
 summary: Databend system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
 ---
+
+# Audit Trail
+
 Databend system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
 
 Allows the auditing of the user:
@@ -29,8 +32,8 @@ Track authentication failures to identify potential security threats and unautho
 
 ```sql
 -- Check for failed login attempts (security audit)
-SELECT event_time, user_name, client_ip, error_message 
-FROM system_history.login_history 
+SELECT event_time, user_name, client_ip, error_message
+FROM system_history.login_history
 WHERE event_type = 'LoginFailed'
 ORDER BY event_time DESC;
 ```
@@ -52,7 +55,7 @@ Monitor DDL operations for compliance and change management requirements.
 ```sql
 -- Audit DDL operations (compliance tracking)
 SELECT query_id, query_start, user_name, object_modified_by_ddl
-FROM system_history.access_history 
+FROM system_history.access_history
 WHERE object_modified_by_ddl != '[]'
 ORDER BY query_start DESC;
 ```
@@ -72,7 +75,7 @@ Track who accessed what data and when for compliance and data governance.
 ```sql
 -- Track data access for compliance
 SELECT query_id, query_start, user_name, base_objects_accessed
-FROM system_history.access_history 
+FROM system_history.access_history
 WHERE base_objects_accessed != '[]'
 ORDER BY query_start DESC;
 ```
@@ -86,7 +89,7 @@ Maintain comprehensive records of all SQL operations with user and timing inform
 ```sql
 -- Complete query audit with user and timing information
 SELECT query_id, sql_user, query_text, query_start_time, query_duration_ms, client_address
-FROM system_history.query_history 
+FROM system_history.query_history
 WHERE event_date >= TODAY() - INTERVAL 7 DAY
 ORDER BY query_start_time DESC;
 ```

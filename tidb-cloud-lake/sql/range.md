@@ -2,6 +2,9 @@
 title: RANGE
 summary: Returns an array collected by [start, end).
 ---
+
+# RANGE
+
 Returns an array collected by [start, end).
 
 ## Syntax

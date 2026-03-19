@@ -3,6 +3,8 @@ title: SETTINGS Clause
 summary: The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in Databend and their values, use SHOW SETTINGS.
 ---
 
+# SETTINGS Clause
+
 > **Note:**
 >
 > Introduced or updated in v1.2.652.

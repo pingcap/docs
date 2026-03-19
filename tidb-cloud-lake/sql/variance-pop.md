@@ -3,6 +3,8 @@ title: VARIANCE_POP
 summary: Alias for COVAR_POP.
 ---
 
+# VARIANCE_POP
+
 > **Note:**
 >
 > Introduced or updated in v1.2.738.

@@ -2,6 +2,9 @@
 title: Roles
 summary: Roles in Databend play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
 ---
+
+# Roles
+
 Roles in Databend play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
 
 ![Alt text](/media/tidb-cloud-lake/access-control-3.png)
@@ -59,7 +62,7 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 
 A user can be granted multiple roles in Databend. These roles are categorized into an active role and secondary roles:
 
-- The active role is the user's currently active primary role for the session, which can be set using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command. 
+- The active role is the user's currently active primary role for the session, which can be set using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command.
 
 - Secondary roles are additional roles that provide extra permissions and are active by default. Users can activate or deactivate secondary roles with the [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md) command to temporarily adjust their permission scope.
 

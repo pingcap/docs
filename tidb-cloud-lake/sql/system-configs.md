@@ -2,6 +2,9 @@
 title: system.configs
 summary: Contains information about Databend server configs.
 ---
+
+# system.configs
+
 Contains information about Databend server configs.
 
 > **Note:**

@@ -2,6 +2,9 @@
 title: LOWER
 summary: Returns a string with all characters changed to lowercase.
 ---
+
+# LOWER
+
 Returns a string with all characters changed to lowercase.
 
 ## Syntax

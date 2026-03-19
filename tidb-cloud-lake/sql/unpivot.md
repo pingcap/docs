@@ -2,13 +2,15 @@
 title: UNPIVOT
 summary: The UNPIVOT operation rotates a table by transforming columns into rows.
 ---
-The `UNPIVOT` operation rotates a table by transforming columns into rows. 
+
+# UNPIVOT
+
+The `UNPIVOT` operation rotates a table by transforming columns into rows.
 
 It is a relational operator that accepts two columns (from a table or subquery), along with a list of columns, and generates a row for each column specified in the list. In a query, it is specified in the FROM clause after the table name or subquery.
 
 **See also:**
 [PIVOT](/tidb-cloud-lake/sql/pivot.md)
-
 
 ## Syntax
 
@@ -26,19 +28,16 @@ Where:
 * `<name_column>`: The column that will store the names of the columns from which the values were extracted.
 * `<column_list>`: The list of columns to be unpivoted, separated by commas. You can optionally provide aliases for the column names using AS or just a string literal.
 
-
-
 ## Examples
 
 Let's unpivot the individual month columns to return a single sales value by month for each employee:
 
 ### Creating and Inserting Data
 
-
 ```sql
 -- Create the unpivoted_monthly_sales table
 CREATE TABLE unpivoted_monthly_sales(
-  empid INT, 
+  empid INT,
   jan INT,
   feb INT,
   mar INT,
@@ -52,7 +51,6 @@ INSERT INTO unpivoted_monthly_sales VALUES
 ```
 
 ### Using UNPIVOT
-
 
 ```sql
 SELECT *

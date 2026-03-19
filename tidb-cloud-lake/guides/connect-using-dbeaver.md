@@ -3,6 +3,8 @@ title: DBeaver
 summary: DBeaver supports connecting to Databend using a built-in driver categorized under Analytical, available starting from version 24.3.1.
 ---
 
+# DBeaver
+
 [DBeaver](https://dbeaver.com/) supports connecting to Databend using a built-in driver categorized under **Analytical**, available starting from **version 24.3.1**.
 
 ![Connect from DBeaver](/media/tidb-cloud-lake/dbeaver.png)

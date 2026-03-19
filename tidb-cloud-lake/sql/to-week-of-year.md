@@ -3,6 +3,8 @@ title: TO_WEEK_OF_YEAR
 summary: Calculates the week number within a year for a given date.
 ---
 
+# TO_WEEK_OF_YEAR
+
 > **Note:**
 >
 > Introduced or updated in v1.2.151.

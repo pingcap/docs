@@ -2,6 +2,9 @@
 title: BITMAP_AND_COUNT
 summary: Counts the number of bits set to 1 in the bitmap by performing a logical AND operation.
 ---
+
+# BITMAP_AND_COUNT
+
 Counts the number of bits set to 1 in the bitmap by performing a logical AND operation.
 
 ## Syntax

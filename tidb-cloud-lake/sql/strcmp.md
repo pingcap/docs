@@ -2,6 +2,9 @@
 title: STRCMP
 summary: Returns 0 if the strings are the same, -1 if the first argument is smaller than the second, and 1 otherwise.
 ---
+
+# STRCMP
+
 Returns 0 if the strings are the same, -1 if the first argument is smaller than the second, and 1 otherwise.
 
 ## Syntax

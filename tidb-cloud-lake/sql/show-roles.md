@@ -2,6 +2,9 @@
 title: SHOW ROLES
 summary: Lists all the roles assigned to the current user.
 ---
+
+# SHOW ROLES
+
 Lists all the roles assigned to the current user.
 
 ## Syntax

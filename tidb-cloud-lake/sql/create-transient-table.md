@@ -2,6 +2,9 @@
 title: CREATE TRANSIENT TABLE
 summary: Creates a table without storing its historical data for Time Travel.
 ---
+
+# CREATE TRANSIENT TABLE
+
 Creates a table without storing its historical data for Time Travel.
 
 Transient tables are used to hold transitory data that does not require a data protection or recovery mechanism. Dataebend does not hold historical data for a transient table so you will not be able to query from a previous version of the transient table with the Time Travel feature, for example, the [AT](/tidb-cloud-lake/sql/at.md) clause in the SELECT statement will not work for transient tables. Please note that you can still [drop](/tidb-cloud-lake/sql/drop-table.md) and [undrop](/tidb-cloud-lake/sql/undrop-table.md) a transient table.
@@ -13,8 +16,8 @@ Transient tables are used to hold transitory data that does not require a data p
 ## Syntax
 
 ```sql
-CREATE [ OR REPLACE ] TRANSIENT TABLE 
-       [ IF NOT EXISTS ] 
+CREATE [ OR REPLACE ] TRANSIENT TABLE
+       [ IF NOT EXISTS ]
        [ <database_name>. ]<table_name>
        ...
 ```
