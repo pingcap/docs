@@ -2,8 +2,6 @@
 title: Tracking Metrics with Prometheus
 summary: Prometheus offers a robust solution for real-time monitoring, empowering you to track critical metrics and maintain system stability effectively. This topic guides you through the steps to integrate Prometheus with Databend Cloud and provides an overview of the available metrics.
 ---
-import StepsWrap from '@site/src/components/StepsWrap';
-import StepContent from '@site/src/components/Steps/step-content';
 
 [Prometheus](https://prometheus.io/) offers a robust solution for real-time monitoring, empowering you to track critical metrics and maintain system stability effectively. This topic guides you through the steps to integrate Prometheus with Databend Cloud and provides an overview of the available metrics.
 
@@ -15,19 +13,13 @@ import StepContent from '@site/src/components/Steps/step-content';
 
 Follow these steps to set up a Prometheus instance with Docker and integrate it with Databend Cloud:
 
-<StepsWrap>
-<StepContent number="1">
-
-### Prerequisites
+## Step 1: Prerequisites
 
 - To start tracking metrics, ensure that metrics are enabled for your Databend Cloud tenant. To enable this feature, submit a support ticket in Databend Cloud by navigating to **Support** > **Create New Ticket** and requesting metrics activation for your tenant.
 
 - This procedure explains how to set up a Prometheus instance using Docker. Ensure that the Docker Engine is installed on your machine before proceeding.
 
-</StepContent>
-<StepContent number="2">
-
-### Prepare a SQL User
+## Step 2: Prepare a SQL User
 
 Create a dedicated SQL user in Databend Cloud for Prometheus to access metrics. For example, you can create a SQL user named `metrics` with the password `metrics_password` using the following SQL statement:
 
@@ -35,10 +27,7 @@ Create a dedicated SQL user in Databend Cloud for Prometheus to access metrics. 
 CREATE USER metrics IDENTIFIED BY 'metrics_password';
 ```
 
-</StepContent>
-<StepContent number="3">
-
-### Start Prometheus Using Docker
+## Step 3: Start Prometheus Using Docker
 
 1. On your local machine, create a file named **prometheus.yml** to configure Prometheus for scraping metrics from Databend Cloud. Use the following template:
 
@@ -83,9 +72,6 @@ docker run -d \
 3. Open Prometheus in your browser at `http://localhost:9090`, navigate to **Status** > **Target health**, and confirm that the `databend-cloud` target is listed with a status of `UP`.
 
 ![alt text](/media/tidb-cloud-lake/metrics-1.png)
-
-</StepContent>
-</StepsWrap>
 
 You're all set! You can now query your tenant metrics directly from Prometheus. For example, try querying `databend_cloud_warehouse_status`:
 

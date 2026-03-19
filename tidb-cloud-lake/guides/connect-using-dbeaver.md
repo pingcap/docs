@@ -2,8 +2,6 @@
 title: DBeaver
 summary: DBeaver supports connecting to Databend using a built-in driver categorized under Analytical, available starting from version 24.3.1.
 ---
-import StepsWrap from '@site/src/components/StepsWrap';
-import StepContent from '@site/src/components/Steps/step-content';
 
 [DBeaver](https://dbeaver.com/) supports connecting to Databend using a built-in driver categorized under **Analytical**, available starting from **version 24.3.1**.
 
@@ -22,10 +20,7 @@ For connections to Databend Cloud, you can use the default `cloudapp` user or an
 
 ## Connecting to Self-Hosted Databend
 
-<StepsWrap>
-<StepContent number="1">
-
-### Start Databend (Docker)
+## Step 1: Start Databend (Docker)
 
 Run the following command to launch a Databend instance:
 
@@ -39,10 +34,7 @@ docker run -d --name databend \
   datafuselabs/databend:nightly
 ```
 
-</StepContent>
-<StepContent number="2">
-
-### Configure Connection
+## Step 2: Configure Connection
 
 1. In DBeaver, go to **Database** > **New Database Connection** to open the connection wizard, then select **Databend** under the **Analytical** category.
 
@@ -60,15 +52,9 @@ Once the download is complete, the test connection should succeed:
 
 ![alt text](/media/tidb-cloud-lake/dbeaver-success.png)
 
-</StepContent>
-</StepsWrap>
-
 ## Connecting to Databend Cloud
 
-<StepsWrap>
-<StepContent number="1">
-
-### Obtain Connection Information
+## Step 1: Obtain Connection Information
 
 Log in to Databend Cloud to obtain connection information. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
@@ -78,10 +64,7 @@ Log in to Databend Cloud to obtain connection information. For more information,
 >
 > If your `user` or `password` contains special characters, you need to provide them separately in the corresponding fields (e.g., the `Username` and `Password` fields in DBeaver). In this case, Databend will handle the necessary encoding for you. However, if you're providing the credentials together (e.g., as `user:password`), you must ensure that the entire string is properly encoded before use.
 
-</StepContent>
-<StepContent number="2">
-
-### Configure Connection
+## Step 2: Configure Connection
 
 1. In DBeaver, go to **Database** > **New Database Connection** to open the connection wizard, then select **Databend** under the **Analytical** category.
 
@@ -102,6 +85,3 @@ Log in to Databend Cloud to obtain connection information. For more information,
 5. Click **Test Connection** to verify the connection. If this is your first time connecting to Databend, you will be prompted to download the driver. Click **Download** to proceed. Once the download is complete, the test connection should succeed:
 
 ![alt text](/media/tidb-cloud-lake/dbeaver-cloud-success.png)
-
-</StepContent>
-</StepsWrap>

@@ -42,12 +42,9 @@ externalStage ::= @<external_stage_name>[/<path>]
 
 ### externalLocation
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+<SimpleTab groupId="externallocation">
 
-<Tabs groupId="externallocation">
-
-<TabItem value="Amazon S3-like Storage Services" label="Amazon S3-like Storage Services">
+<div label="Amazon S3-like Storage Services" value="Amazon S3-like Storage Services">
 
 ```sql
 externalLocation ::=
@@ -58,9 +55,10 @@ externalLocation ::=
 ```
 
 For the connection parameters available for accessing Amazon S3-like storage services, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
-</TabItem>
 
-<TabItem value="Azure Blob Storage" label="Azure Blob Storage">
+</div>
+
+<div label="Azure Blob Storage" value="Azure Blob Storage">
 
 ```sql
 externalLocation ::=
@@ -71,9 +69,10 @@ externalLocation ::=
 ```
 
 For the connection parameters available for accessing Azure Blob Storage, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
-</TabItem>
 
-<TabItem value="Google Cloud Storage" label="Google Cloud Storage">
+</div>
+
+<div label="Google Cloud Storage" value="Google Cloud Storage">
 
 ```sql
 externalLocation ::=
@@ -84,9 +83,10 @@ externalLocation ::=
 ```
 
 For the connection parameters available for accessing Google Cloud Storage, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
-</TabItem>
 
-<TabItem value="Alibaba Cloud OSS" label="Alibaba Cloud OSS">
+</div>
+
+<div label="Alibaba Cloud OSS" value="Alibaba Cloud OSS">
 
 ```sql
 externalLocation ::=
@@ -97,9 +97,10 @@ externalLocation ::=
 ```
 
 For the connection parameters available for accessing Alibaba Cloud OSS, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
-</TabItem>
 
-<TabItem value="Tencent Cloud Object Storage" label="Tencent Cloud Object Storage">
+</div>
+
+<div label="Tencent Cloud Object Storage" value="Tencent Cloud Object Storage">
 
 ```sql
 externalLocation ::=
@@ -110,9 +111,9 @@ externalLocation ::=
 ```
 
 For the connection parameters available for accessing Tencent Cloud Object Storage, see [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md).
-</TabItem>
 
-</Tabs>
+</div>
+</SimpleTab>
 
 ### FILE_FORMAT
 

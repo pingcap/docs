@@ -2,8 +2,6 @@
 title: Querying Staged ORC Files in Stage
 summary: In this tutorial, we will walk you through the process of downloading the Iris dataset in ORC format, uploading it to an Amazon S3 bucket, creating an external stage, and querying the data directly from the ORC file.
 ---
-import StepsWrap from '@site/src/components/StepsWrap';
-import StepContent from '@site/src/components/Steps/step-content';
 
 ## Syntax
 
@@ -15,19 +13,13 @@ import StepContent from '@site/src/components/Steps/step-content';
 
 In this tutorial, we will walk you through the process of downloading the Iris dataset in ORC format, uploading it to an Amazon S3 bucket, creating an external stage, and querying the data directly from the ORC file.
 
-<StepsWrap>
-<StepContent number="1">
-
-### Download Iris Dataset
+## Step 1: Download Iris Dataset
 
 Download the iris dataset from https://github.com/tensorflow/io/raw/master/tests/test_orc/iris.orc then upload it to your Amazon S3 bucket.
 
 The iris dataset contains 3 classes of 50 instances each, where each class refers to a type of iris plant. It has 4 attributes: (1) sepal length, (2) sepal width, (3) petal length, (4) petal width, and the last column contains the class label.
 
-</StepContent>
-<StepContent number="2">
-
-### Create External Stage
+## Step 2: Create External Stage
 
 Create an external stage with your Amazon S3 bucket where your iris dataset file is stored.
 
@@ -40,10 +32,7 @@ CREATE STAGE orc_query_stage
     );
 ```
 
-</StepContent>
-<StepContent number="3">
-
-### Query ORC File
+## Step 3: Query ORC File
 
 query with columns
 
@@ -72,7 +61,7 @@ FROM @orc_query_stage
 (
     FILE_FORMAT => 'orc',
     PATTERN => '.*[.]orc'
-    
+
 );
 ```
 
@@ -85,14 +74,9 @@ FROM
   'https://github.com/tensorflow/io/raw/master/tests/test_orc/iris.orc' (file_format => 'orc');
 ```
 
-</StepContent>
-<StepContent number="4">
-
-### Query with Metadata
+## Step 4: Query with Metadata
 
 Query ORC files directly from a stage, including metadata columns like `METADATA$FILENAME` and `METADATA$FILE_ROW_NUMBER`:
-
-
 
 ```sql
 SELECT
@@ -105,6 +89,3 @@ FROM @orc_query_stage
     PATTERN => '.*[.]orc'
 );
 ```
-
-</StepContent>
-</StepsWrap>
