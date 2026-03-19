@@ -25,7 +25,7 @@ The official JDBC driver provides standard JDBC 4.0 compatibility for seamless i
 implementation 'com.databend:databend-jdbc:0.4.1'
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 

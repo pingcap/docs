@@ -13,7 +13,7 @@ The official Go driver provides a standard `database/sql` interface for seamless
 go get github.com/databendlabs/databend-go
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 

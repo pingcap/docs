@@ -13,7 +13,7 @@ The official Node.js driver provides TypeScript support and Promise-based API fo
 npm install databend-driver
 ```
 
-**Connection String**: See [Drivers Overview](./index.md#connection-string-dsn) for DSN format and connection examples.
+**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
 
 ---
 
