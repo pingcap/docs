@@ -302,8 +302,10 @@ CREATE CATALOG iceberg_rest TYPE = ICEBERG CONNECTION = (
     "s3.secret-access-key" = 'password'
     "s3.region" = 'us-east-1'
 )
+```
 
 - AWS Glue Catalog
+
 For Glue catalogs, the configuration includes both Glue service parameters and storage (S3) parameters. The Glue service parameters appear first, followed by the S3 storage parameters (prefixed with "s3.").
 
 ```sql
@@ -326,6 +328,7 @@ CREATE CATALOG iceberg_glue TYPE = ICEBERG CONNECTION = (
 The Storage catalog requires a table_bucket_arn parameter. Unlike other buckets, S3Tables bucket is not a physical bucket, but a virtual bucket that is managed by S3Tables. You cannot directly access the bucket with a path like `s3://{bucket_name}/{file_path}`. All operations are performed with respect to the bucket ARN.
 
 Properties Parameters
+
 The following properties are available for the catalog:
 
 ```
