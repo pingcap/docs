@@ -73,13 +73,6 @@ Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on
 
 For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/developer/vector-search-full-text-search-sql) and [Full-Text Search with Python](https://docs.pingcap.com/developer/vector-search-full-text-search-python).
 
-## I
-
-### Instance
-
-An instance is a [TiDB X](/tidb-cloud/tidb-x-architecture.md) cloud deployment that represents a service-oriented TiDB offering. With this deployment model, you do not need to manage or understand the underlying cluster topology.
-Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment model.
-
 ## M
 
 ### member
@@ -108,7 +101,7 @@ Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analy
 
 ### organization
 
-An entity that you create to manage your TiDB Cloud accounts, including a management account with any number of multiple member accounts.
+An top level container to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#resource).
 
 ### organization members
 
@@ -206,6 +199,11 @@ The computing node that aggregates data from queries returned from transactional
 A new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. By decoupling compute and storage, TiDB X enables TiDB to scale intelligently, adapting in real time to workload patterns, business cycles, and data characteristics.
 
 The TiDB X architecture is now available in <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>. For more information, see [Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/) and [PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/).
+
+### TiDB X Instance
+
+A TiDB X instance is a [TiDB X](/tidb-cloud/tidb-x-architecture.md) cloud deployment that represents a service-oriented TiDB offering. With this deployment model, you do not need to manage or understand the underlying cluster topology.
+Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment model.
 
 ### TiFlash node
 

@@ -46,9 +46,9 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     You can start with a **Starter** instance and later upgrade to an **Essential** instance as your needs grow. For more information, see [Select a Plan](/tidb-cloud/select-cluster-tier.md).
 
-4. Choose a cloud provider and a region where you want to host your instance.
+4. Enter a name for your instance, and then choose a cloud provider and a region where you want to host your instance.
 
-5. Update the default instance name if necessary.
+5. (Optional) To group this instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
 
 6. Update the capacity of the instance.
 

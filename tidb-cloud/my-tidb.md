@@ -43,9 +43,9 @@ By default, the [**My TiDB**](https://tidbcloud.com/tidbs) page shows a list of 
 
 If you want to view your resources hierarchically by project, click the <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Folder " style="width: calc(1.125rem * var(--mantine-scale)); height: calc(1.125rem * var(--mantine-scale));"><path d="M8.66671 4.66667L7.92301 3.17928C7.70898 2.7512 7.60195 2.53715 7.44229 2.38078C7.30109 2.24249 7.13092 2.13732 6.94409 2.07287C6.73282 2 6.49351 2 6.0149 2H3.46671C2.71997 2 2.3466 2 2.06139 2.14532C1.8105 2.27316 1.60653 2.47713 1.4787 2.72801C1.33337 3.01323 1.33337 3.3866 1.33337 4.13333V4.66667M1.33337 4.66667H11.4667C12.5868 4.66667 13.1469 4.66667 13.5747 4.88465C13.951 5.0764 14.257 5.38236 14.4487 5.75869C14.6667 6.18651 14.6667 6.74656 14.6667 7.86667V10.8C14.6667 11.9201 14.6667 12.4802 14.4487 12.908C14.257 13.2843 13.951 13.5903 13.5747 13.782C13.1469 14 12.5868 14 11.4667 14H4.53337C3.41327 14 2.85322 14 2.42539 13.782C2.04907 13.5903 1.74311 13.2843 1.55136 12.908C1.33337 12.4802 1.33337 11.9201 1.33337 10.8V4.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg> icon above the resource list to switch to the project view.
 
-- TiDB instances that do not belong to any project are displayed in a default folder named `Global instances - in [Your Org Name]`.
-- TiDB instances that belong to specific projects are displayed in their corresponding project folders.
-- TiDB Cloud Dedicated clusters are displayed in their corresponding project folders. These folders have a **D** in the folder icon to identify the **Dedicated** project type.
+- TiDB X instances that do not belong to any project are displayed in a table named `Out of project`.
+- TiDB X instances that belong to specific projects are displayed in their corresponding TiDB X project tables.
+- TiDB Cloud Dedicated clusters are displayed in their corresponding Dedicated project tables. These tables have a **D** in the folder icon to identify the **Dedicated** project type.
 
 For more information about project types, see [Project types](/tidb-cloud/tidb-cloud-glossary.md#project-types).
 
