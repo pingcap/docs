@@ -72,7 +72,7 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
     > **Note:**
     >
-    > When `consistency=auto` (the default), DM first attempts `FLUSH TABLES WITH READ LOCK` and falls back to `LOCK TABLES` if FTWRL is unavailable. This fallback commonly occurs on managed MySQL services (such as Amazon RDS, Aurora, Azure Database for MySQL, or Google Cloud SQL) where FTWRL is not permitted. In this case, the `LOCK TABLES` privilege is required at runtime, but the precheck does not currently validate it. See [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) for the full privilege list.
+    > When `consistency=auto` (the default), DM first attempts `FLUSH TABLES WITH READ LOCK` and falls back to `LOCK TABLES` if FTWRL is unavailable. This fallback commonly occurs on managed MySQL services (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where FTWRL is not permitted. In this case, the `LOCK TABLES` privilege is required at runtime, but the precheck does not currently validate it. See [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) for the full privilege list.
 
 * (Mandatory) Consistency of upstream MySQL multi-instance sharding tables
 
