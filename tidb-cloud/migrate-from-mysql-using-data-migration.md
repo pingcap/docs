@@ -436,13 +436,17 @@ For production workloads, it is recommended to have a dedicated user for data du
 |:----------|:------|:--------|
 | `SELECT` | Tables | Allows reading data from all tables |
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
-| `LOCK TABLES` | Tables | Required for table-level locking during full data export |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
+| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS or Aurora) where `FLUSH TABLES WITH READ LOCK` is restricted. In this case, DM falls back to `LOCK TABLES` for consistency during full data export. Not required for self-managed MySQL instances. |
 
 For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
 ```sql
+-- For self-managed MySQL:
+GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
+
+-- For managed MySQL (Amazon RDS, Aurora, etc.), also grant LOCK TABLES:
 GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 

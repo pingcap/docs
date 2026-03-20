@@ -96,7 +96,9 @@ To resolve this issue, you can create a schema in the TiDB cluster based on a [s
 
 ### Error message: "LOCK TABLES ... Access denied"
 
-The full data export failed because the source database user does not have the `LOCK TABLES` privilege. During full data migration, DM might fall back to locking individual tables when the global flush lock is unavailable, which requires this privilege.
+The full data export failed because the source database user does not have the `LOCK TABLES` privilege. This error typically occurs when migrating from a managed MySQL service (such as Amazon RDS or Aurora) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is restricted by the cloud provider. In this case, DM's default `consistency=auto` mode falls back to `LOCK TABLES` for data consistency during full export, which requires this privilege.
+
+> **Note:** This error does not occur on self-managed MySQL instances where FTWRL is available.
 
 To resolve this issue, grant the missing privilege to the migration user in the source MySQL database:
 
