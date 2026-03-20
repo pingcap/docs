@@ -438,7 +438,7 @@ For production workloads, it is recommended to have a dedicated user for data du
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
-| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS or Aurora) where `FLUSH TABLES WITH READ LOCK` is restricted. In this case, DM falls back to `LOCK TABLES` for consistency during full data export. Not required for self-managed MySQL instances. |
+| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS, Aurora, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` is not permitted. In this case, DM falls back to `LOCK TABLES` for consistency during full data export. Not required for self-managed MySQL instances where FTWRL is available. |
 
 For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
