@@ -68,7 +68,7 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
     - SELECT permission on INFORMATION_SCHEMA and dump tables
     - RELOAD permission if `consistency=flush`
-    - LOCK TABLES permission on the dump tables if `consistency=flush/lock`
+    - LOCK TABLES permission on the dump tables if `consistency=lock`, or if `consistency=auto` and the source is a managed MySQL service (such as Amazon RDS or Aurora) where `FLUSH TABLES WITH READ LOCK` is restricted
 
 * (Mandatory) Consistency of upstream MySQL multi-instance sharding tables
 
