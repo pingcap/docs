@@ -160,7 +160,7 @@ In addition, with the default implementation of MySQL Connector/J, only client-s
 
 #### Use Batch API
 
-For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing). The `addBatch()` method is used to cache multiple SQL statements first on the client, and then send them to the database server together when calling the `executeBatch` method.
+For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch()). The `addBatch()` method is used to cache multiple SQL statements first on the client, and then send them to the database server together when calling the `executeBatch` method.
 
 > **Note:**
 >
