@@ -128,7 +128,7 @@ To verify that this setting already takes effect, you can do:
 
 #### `readOnlyPropagatesToServer`
 
-Disable the readOnlyPropagatesToServer property. When this property is enabled, the JDBC driver sends the `SET SESSION TRANSACTION READ ONLY` statement to the server. TiDB does not support this statement, and it is unnecessary because all TiDB nodes accept both read and write connections.
+Disable the `readOnlyPropagatesToServer` property. When this property is enabled, the JDBC driver sends a `SET SESSION TRANSACTION READ ONLY` statement to the server. TiDB does not support this statement, and sending this statement is unnecessary because all TiDB nodes accept both read and write connections.
 
 #### Batch-related parameters
 
