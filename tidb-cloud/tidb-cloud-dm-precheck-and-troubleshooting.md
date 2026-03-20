@@ -96,7 +96,7 @@ To resolve this issue, you can create a schema in the TiDB cluster based on a [s
 
 ### Error message: "LOCK TABLES ... Access denied"
 
-This error indicates that the user for your source database lacks the `LOCK TABLES` privilege. Data Migration uses `consistency=flush` for full data migration, which requires this privilege to ensure a consistent snapshot.
+The full data export failed because the source database user does not have the `LOCK TABLES` privilege. During full data migration, DM might fall back to locking individual tables when the global flush lock is unavailable, which requires this privilege.
 
 To resolve this issue, grant the missing privilege to the migration user in the source MySQL database:
 

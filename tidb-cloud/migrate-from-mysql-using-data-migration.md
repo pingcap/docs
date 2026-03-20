@@ -436,7 +436,7 @@ For production workloads, it is recommended to have a dedicated user for data du
 |:----------|:------|:--------|
 | `SELECT` | Tables | Allows reading data from all tables |
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
-| `LOCK TABLES` | Tables | Required for consistent full data export (`consistency=flush`) |
+| `LOCK TABLES` | Tables | Required for table-level locking during full data export |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
 
