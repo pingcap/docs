@@ -4507,7 +4507,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization.
 - Enabling this variable changes execution plans. If you observe performance regression or plan instability after enabling it, set the variable to `OFF`.
-- For filters that are non-deterministic or have side effects (for example, `rand()`), the optimizer skips this transformation even when the variable is enabled. This behavior preserves the original expression evaluation semantics.
+- For filters that are non-deterministic or have side effects (for example, `RAND()`), the optimizer skips this transformation even when the variable is enabled. This behavior preserves the original expression evaluation semantics.
 
 ### tidb_opt_limit_push_down_threshold
 
