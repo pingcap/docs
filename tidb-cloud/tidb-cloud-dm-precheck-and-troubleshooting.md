@@ -94,6 +94,18 @@ Failed to create a schema in the downstream TiDB cluster. This error means that 
 
 To resolve this issue, you can create a schema in the TiDB cluster based on a [supported collation](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb), and then resume the task by clicking **Restart**.
 
+### Error message: "LOCK TABLES ... Access denied"
+
+The full data export failed because the source database user does not have the `LOCK TABLES` privilege. Cloud DM uses `consistency=flush` for full data migration, which requires this privilege to ensure a consistent snapshot.
+
+To resolve this issue, grant the missing privilege to the migration user in the source MySQL database:
+
+```sql
+GRANT LOCK TABLES ON *.* TO 'dm_source_user'@'%';
+```
+
+Then resume the task by clicking **Restart**.
+
 ## Alerts
 
 You can subscribe to TiDB Cloud alert emails to be informed in time when an alert occurs.

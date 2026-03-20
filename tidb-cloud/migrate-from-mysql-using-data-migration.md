@@ -436,13 +436,14 @@ For production workloads, it is recommended to have a dedicated user for data du
 |:----------|:------|:--------|
 | `SELECT` | Tables | Allows reading data from all tables |
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
+| `LOCK TABLES` | Tables | Required for consistent full data export (`consistency=flush`) |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
 
 For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
 ```sql
-GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
+GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
 #### Grant required privileges in the target TiDB Cloud cluster
