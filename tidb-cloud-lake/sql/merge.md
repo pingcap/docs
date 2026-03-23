@@ -15,7 +15,7 @@ The data source, which can be a subquery, is linked to the target data via a JOI
 
 ![Alt text](/media/tidb-cloud-lake/merge-into-single-clause.jpeg)
 
-A MERGE statement usually contains a MATCHED and / or a NOT MATCHED clause, instructing {{{ .lake-short }}} on how to handle matched and unmatched scenarios. For a MATCHED clause, you have the option to choose between performing an **UPDATE** or **DELETE** operation on the target table. Conversely, in the case of a NOT MATCHED clause, the available choice is **INSERT**.
+A MERGE statement usually contains a MATCHED and / or a NOT MATCHED clause, instructing {{{ .lake }}} on how to handle matched and unmatched scenarios. For a MATCHED clause, you have the option to choose between performing an **UPDATE** or **DELETE** operation on the target table. Conversely, in the case of a NOT MATCHED clause, the available choice is **INSERT**.
 
 ## Multiple MATCHED & NOT MATCHED Clauses
 
@@ -23,7 +23,7 @@ A MERGE statement can include multiple MATCHED and / or NOT MATCHED clauses, giv
 
 ![Alt text](/media/tidb-cloud-lake/merge-into-multi-clause.jpeg)
 
-If a MERGE statement includes multiple MATCHED clauses, a condition needs to be specified for each clause EXCEPT the last one. These conditions determine the criteria under which the associated operations are executed. {{{ .lake-short }}} evaluates the conditions in the specified order. Once a condition is met, it triggers the specified operation, skips any remaining MATCHED clauses, then moves on to the next row in the source. If the MERGE statement also includes multiple NOT MATCHED clauses, {{{ .lake-short }}} handles them in a similar way.
+If a MERGE statement includes multiple MATCHED clauses, a condition needs to be specified for each clause EXCEPT the last one. These conditions determine the criteria under which the associated operations are executed. {{{ .lake }}} evaluates the conditions in the specified order. Once a condition is met, it triggers the specified operation, skips any remaining MATCHED clauses, then moves on to the next row in the source. If the MERGE statement also includes multiple NOT MATCHED clauses, {{{ .lake }}} handles them in a similar way.
 
 ## Syntax
 

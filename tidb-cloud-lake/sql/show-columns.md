@@ -20,7 +20,7 @@ SHOW  [ FULL ] COLUMNS
     [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 
-When the optional keyword FULL is included, {{{ .lake-short }}} will add the collation, privileges, and comment information for each column in the table to the result.
+When the optional keyword FULL is included, {{{ .lake }}} will add the collation, privileges, and comment information for each column in the table to the result.
 
 ## Examples
 

@@ -1,11 +1,11 @@
 ---
 title: Context Functions
-summary: This page provides reference information for the context-related functions in {{{ .lake-short }}}. These functions return information about the current session, database, or system context.
+summary: This page provides reference information for the context-related functions in {{{ .lake }}}. These functions return information about the current session, database, or system context.
 ---
 
 # Context Functions
 
-This page provides reference information for the context-related functions in {{{ .lake-short }}}. These functions return information about the current session, database, or system context.
+This page provides reference information for the context-related functions in {{{ .lake }}}. These functions return information about the current session, database, or system context.
 
 ## Session Information Functions
 
@@ -26,4 +26,4 @@ This page provides reference information for the context-related functions in {{
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [VERSION](/tidb-cloud-lake/sql/version.md) | Returns the current version of {{{ .lake-short }}} | `VERSION()` → `'DatabendQuery v1.2.252-nightly-193ed56304'` |
+| [VERSION](/tidb-cloud-lake/sql/version.md) | Returns the current version of {{{ .lake }}} | `VERSION()` → `'DatabendQuery v1.2.252-nightly-193ed56304'` |

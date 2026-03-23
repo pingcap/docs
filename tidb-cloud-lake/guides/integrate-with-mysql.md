@@ -1,11 +1,11 @@
 ---
 title: MySQL
-summary: The MySQL data integration enables you to sync data from MySQL databases into {{{ .lake-short }}} in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
+summary: The MySQL data integration enables you to sync data from MySQL databases into {{{ .lake }}} in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
 ---
 
 # MySQL
 
-The MySQL data integration enables you to sync data from MySQL databases into {{{ .lake-short }}} in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
+The MySQL data integration enables you to sync data from MySQL databases into {{{ .lake }}} in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
 
 ## Sync Modes
 
@@ -117,13 +117,13 @@ The system fetches a sample row from the selected MySQL table and displays the c
 
 ### Step 3: Set Target Table
 
-Configure the destination in {{{ .lake-short }}}:
+Configure the destination in {{{ .lake }}}:
 
 | Field               | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
 | **Warehouse**       | Select the target {{{ .lake }}} warehouse for running the sync    |
-| **Target Database** | Choose the target database in {{{ .lake-short }}}                             |
-| **Target Table**    | The table name in {{{ .lake-short }}} (defaults to the source table name)     |
+| **Target Database** | Choose the target database in {{{ .lake }}}                             |
+| **Target Table**    | The table name in {{{ .lake }}} (defaults to the source table name)     |
 
 ![Set Target Table](/media/tidb-cloud-lake/dataintegration-mysql-set-target-table.png)
 
@@ -143,11 +143,11 @@ For CDC tasks, the current binlog position is saved as a checkpoint when stopped
 
 ### Snapshot
 
-Snapshot mode performs a one-time full read of the source table and loads all data into the target table in {{{ .lake-short }}}.
+Snapshot mode performs a one-time full read of the source table and loads all data into the target table in {{{ .lake }}}.
 
 **Use cases:**
 
-- Initial data migration from MySQL to {{{ .lake-short }}}
+- Initial data migration from MySQL to {{{ .lake }}}
 - Periodic full data refresh
 - One-time data imports with WHERE condition filtering
 
@@ -164,14 +164,14 @@ CDC mode continuously monitors the MySQL binlog and captures real-time row-level
 **Use cases:**
 
 - Real-time data replication
-- Keeping {{{ .lake-short }}} in sync with operational MySQL databases
+- Keeping {{{ .lake }}} in sync with operational MySQL databases
 - Event-driven data pipelines
 
 **How it works:**
 
 1. Connects to MySQL binlog using a unique server ID
 2. Captures row-level changes in real-time
-3. Writes changes to a raw staging table in {{{ .lake-short }}}
+3. Writes changes to a raw staging table in {{{ .lake }}}
 4. Periodically merges changes into the target table using the primary key
 5. Saves checkpoint (binlog position) for crash recovery
 
@@ -187,7 +187,7 @@ This mode combines both approaches: it first performs a full snapshot of the sou
 
 ### Primary Key
 
-The primary key specifies the unique identifier column used for MERGE operations during CDC. When a change event is captured, {{{ .lake-short }}} uses this key to determine whether to insert a new row or update an existing one. Typically, this should be the primary key of the source table.
+The primary key specifies the unique identifier column used for MERGE operations during CDC. When a change event is captured, {{{ .lake }}} uses this key to determine whether to insert a new row or update an existing one. Typically, this should be the primary key of the source table.
 
 ### Sync Interval
 
@@ -199,7 +199,7 @@ Controls the number of rows processed per batch during data loading. Adjusting t
 
 ### Allow Delete
 
-When enabled (default for CDC modes), DELETE operations captured from MySQL binlog are applied to the target table in {{{ .lake-short }}}. When disabled, deletes are ignored, and the target table retains all historical records. This is useful for scenarios where you want to maintain a complete audit trail.
+When enabled (default for CDC modes), DELETE operations captured from MySQL binlog are applied to the target table in {{{ .lake }}}. When disabled, deletes are ignored, and the target table retains all historical records. This is useful for scenarios where you want to maintain a complete audit trail.
 
 ### Archive Schedule
 

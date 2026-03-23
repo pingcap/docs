@@ -1,11 +1,11 @@
 ---
 title: MCP Client Integration
-summary: "{{{ .lake-short }}} MCP connects AI assistants to {{{ .lake-short }}} via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients."
+summary: "{{{ .lake }}} MCP connects AI assistants to {{{ .lake }}} via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients."
 ---
 
 # MCP Client Integration
 
-[{{{ .lake-short }}} MCP](https://github.com/databendlabs/mcp-databend) connects AI assistants to {{{ .lake-short }}} via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients.
+[{{{ .lake }}} MCP](https://github.com/databendlabs/mcp-databend) connects AI assistants to {{{ .lake }}} via Model Context Protocol. Works with Claude Code, Codex, Cursor, Claude Desktop, VS Code, and other MCP-compatible clients.
 
 **What you can do:**
 
@@ -18,7 +18,7 @@ For example: _"Create a scheduled task that copies parquet files from @my_stage 
 
 ## Installation
 
-### 1. Get {{{ .lake-short }}} Connection
+### 1. Get {{{ .lake }}} Connection
 
 We recommend using **{{{ .lake }}}** for the best experience.
 

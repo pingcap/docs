@@ -1,6 +1,6 @@
 ---
 title: Stored Procedure & SQL Scripting
-summary: Stored procedures in {{{ .lake-short }}} let you package SQL logic that runs on the server with access to control flow, variables, cursors, and dynamic statements. This page explains how to create procedures and write the inline scripting that powers them.
+summary: Stored procedures in {{{ .lake }}} let you package SQL logic that runs on the server with access to control flow, variables, cursors, and dynamic statements. This page explains how to create procedures and write the inline scripting that powers them.
 ---
 
 # Stored Procedure & SQL Scripting
@@ -9,7 +9,7 @@ summary: Stored procedures in {{{ .lake-short }}} let you package SQL logic that
 >
 > Introduced or updated in v1.2.833.
 
-Stored procedures in {{{ .lake-short }}} let you package SQL logic that runs on the server with access to control flow, variables, cursors, and dynamic statements. This page explains how to create procedures and write the inline scripting that powers them.
+Stored procedures in {{{ .lake }}} let you package SQL logic that runs on the server with access to control flow, variables, cursors, and dynamic statements. This page explains how to create procedures and write the inline scripting that powers them.
 
 ## Defining a Procedure
 
@@ -31,9 +31,9 @@ $$;
 | Component | Description |
 |-----------|-------------|
 | `<name>` | Identifier for the procedure. Schema qualification is optional. |
-| `<param_name> <data_type>` | Input parameters typed with {{{ .lake-short }}} scalar types. Parameters are passed by value. |
+| `<param_name> <data_type>` | Input parameters typed with {{{ .lake }}} scalar types. Parameters are passed by value. |
 | `RETURNS <return_type> [NOT NULL]` | Declares the logical return type. `NOT NULL` enforces a non-nullable response. |
-| `LANGUAGE SQL` | {{{ .lake-short }}} currently accepts `SQL` only. |
+| `LANGUAGE SQL` | {{{ .lake }}} currently accepts `SQL` only. |
 | `RETURN` / `RETURN TABLE` | Ends execution and provides either a scalar or tabular result. |
 
 Use [`CREATE PROCEDURE`](/tidb-cloud-lake/sql/create-procedure.md) to persist the definition, [`CALL`](/tidb-cloud-lake/sql/call-procedure.md) to run it, and [`DROP PROCEDURE`](/tidb-cloud-lake/sql/drop-procedure.md) to remove it.

@@ -1,11 +1,11 @@
 ---
 title: Security & Reliability
-summary: "{{{ .lake-short }}} offers enterprise-grade security and reliability features that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, {{{ .lake-short }}}'s multi-layered security approach helps you maintain data integrity, compliance, and business continuity."
+summary: "{{{ .lake }}} offers enterprise-grade security and reliability features that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, {{{ .lake }}}'s multi-layered security approach helps you maintain data integrity, compliance, and business continuity."
 ---
 
 # Security & Reliability
 
-{{{ .lake-short }}} offers **enterprise-grade security and reliability features** that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, {{{ .lake-short }}}'s **multi-layered security approach** helps you maintain data integrity, compliance, and business continuity.
+{{{ .lake }}} offers **enterprise-grade security and reliability features** that safeguard your data throughout its lifecycle. From controlling who can access your data to protecting against network threats and recovering from operational errors, {{{ .lake }}}'s **multi-layered security approach** helps you maintain data integrity, compliance, and business continuity.
 
 | Security Feature | Purpose | When to Use |
 |-----------------|---------|------------|

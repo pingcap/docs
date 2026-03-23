@@ -1,11 +1,11 @@
 ---
 title: Cluster Key
-summary: This page provides a comprehensive overview of cluster key operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of cluster key operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Cluster Key
 
-This page provides a comprehensive overview of cluster key operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of cluster key operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Cluster Key Management
 
@@ -22,4 +22,4 @@ This page provides a comprehensive overview of cluster key operations in {{{ .la
 
 > **Note:**
 >
-> Cluster keys in {{{ .lake-short }}} are used to physically organize data in tables to improve query performance by co-locating related data.
+> Cluster keys in {{{ .lake }}} are used to physically organize data in tables to improve query performance by co-locating related data.

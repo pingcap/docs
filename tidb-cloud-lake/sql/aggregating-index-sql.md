@@ -1,11 +1,11 @@
 ---
 title: Aggregating Index
-summary: This page provides a comprehensive overview of aggregating index operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of aggregating index operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Aggregating Index
 
-This page provides a comprehensive overview of aggregating index operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of aggregating index operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Aggregating Index Management
 
@@ -21,4 +21,4 @@ This page provides a comprehensive overview of aggregating index operations in {
 
 > **Note:**
 >
-> Aggregating indexes in {{{ .lake-short }}} are used to improve the performance of aggregate queries by pre-computing and storing aggregate results.
+> Aggregating indexes in {{{ .lake }}} are used to improve the performance of aggregate queries by pre-computing and storing aggregate results.

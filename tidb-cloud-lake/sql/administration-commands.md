@@ -1,11 +1,11 @@
 ---
 title: Administration Commands
-summary: This page provides reference information for the system administration commands in {{{ .lake-short }}}.
+summary: This page provides reference information for the system administration commands in {{{ .lake }}}.
 ---
 
 # Administration Commands
 
-This page provides reference information for the system administration commands in {{{ .lake-short }}}.
+This page provides reference information for the system administration commands in {{{ .lake }}}.
 
 ## System Monitoring
 

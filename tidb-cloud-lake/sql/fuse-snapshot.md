@@ -1,11 +1,11 @@
 ---
 title: FUSE_SNAPSHOT
-summary: Returns the snapshot information of a table. For more information about what is snapshot in {{{ .lake-short }}}, see What are Snapshot, Segment, and Block?.
+summary: Returns the snapshot information of a table. For more information about what is snapshot in {{{ .lake }}}, see What are Snapshot, Segment, and Block?.
 ---
 
 # FUSE_SNAPSHOT
 
-Returns the snapshot information of a table. For more information about what is snapshot in {{{ .lake-short }}}, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#-lake-short--data-storage-snapshot-segment-and-block).
+Returns the snapshot information of a table. For more information about what is snapshot in {{{ .lake }}}, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block).
 
 See Also:
 

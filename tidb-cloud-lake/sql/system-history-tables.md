@@ -1,11 +1,11 @@
 ---
 title: System History Tables
-summary: "{{{ .lake-short }}}'s system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis."
+summary: "{{{ .lake }}}'s system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis."
 ---
 
 # System History Tables
 
-{{{ .lake-short }}}'s system history tables provide **Data Governance** capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
+{{{ .lake }}}'s system history tables provide **Data Governance** capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
 
 ## Available Tables
 
@@ -48,7 +48,7 @@ GRANT ROLE audit_team TO USER compliance_officer;
 
 ✅ **Automatically enabled** - All system history tables are ready to use without any configuration.
 
-### Self-Hosted {{{ .lake-short }}}
+### Self-Hosted {{{ .lake }}}
 
 <details open>
 <summary>📝 **Manual configuration required** - Click to expand configuration details</summary>

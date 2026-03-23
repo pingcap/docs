@@ -1,11 +1,11 @@
 ---
 title: Object Functions
-summary: This section provides reference information for object functions in {{{ .lake-short }}}. Object functions enable creation, manipulation, and extraction of information from JSON object data structures.
+summary: This section provides reference information for object functions in {{{ .lake }}}. Object functions enable creation, manipulation, and extraction of information from JSON object data structures.
 ---
 
 # Object Functions
 
-This section provides reference information for object functions in {{{ .lake-short }}}. Object functions enable creation, manipulation, and extraction of information from JSON object data structures.
+This section provides reference information for object functions in {{{ .lake }}}. Object functions enable creation, manipulation, and extraction of information from JSON object data structures.
 
 ## Object Construction
 

@@ -32,7 +32,7 @@ Where:
 
 ## Unified Function Syntax
 
-{{{ .lake-short }}} uses a unified `$$` syntax for both scalar and table functions:
+{{{ .lake }}} uses a unified `$$` syntax for both scalar and table functions:
 
 | Function Type | Returns | Usage |
 |---------------|---------|-------|

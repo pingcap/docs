@@ -52,8 +52,8 @@ The function converts an integer value to a timestamp, interpreting the integer 
 
 Returns a timestamp in the format `YYYY-MM-DD hh:mm:ss.ffffff`:
 
-- The returned timestamp always reflects your {{{ .lake-short }}} timezone.
-    - When timezone information is present in the given string, it converts the timestamp to the time corresponding to the timezone configured in {{{ .lake-short }}}. In other words, it adjusts the timestamp to reflect the timezone set in {{{ .lake-short }}}.
+- The returned timestamp always reflects your {{{ .lake }}} timezone.
+    - When timezone information is present in the given string, it converts the timestamp to the time corresponding to the timezone configured in {{{ .lake }}}. In other words, it adjusts the timestamp to reflect the timezone set in {{{ .lake }}}.
 
     ```sql
     -- Set timezone to 'America/Toronto' (UTC-5:00, Eastern Standard Time)
@@ -164,9 +164,9 @@ SELECT TO_TIMESTAMP(TO_INT64('994518299'));
 └─────────────────────────────────────┘
 ```
 
-- You can use `SELECT TO_TIMESTAMP('994518299', '%s')` for the conversion as well, but it is not recommended. For such conversions, {{{ .lake-short }}} recommends using the method in the example above for better performance.
+- You can use `SELECT TO_TIMESTAMP('994518299', '%s')` for the conversion as well, but it is not recommended. For such conversions, {{{ .lake }}} recommends using the method in the example above for better performance.
 
-- A Timestamp value ranges from 1000-01-01 00:00:00.000000 to 9999-12-31 23:59:59.999999. {{{ .lake-short }}} would return an error if you run the following statement:
+- A Timestamp value ranges from 1000-01-01 00:00:00.000000 to 9999-12-31 23:59:59.999999. {{{ .lake }}} would return an error if you run the following statement:
 
 ```bash
 root@localhost:8000/default> SELECT TO_TIMESTAMP(9999999999999999999);

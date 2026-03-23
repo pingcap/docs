@@ -1,11 +1,11 @@
 ---
 title: External AI Functions
-summary: Build powerful AI/ML capabilities by connecting {{{ .lake-short }}} with your own infrastructure. External functions let you deploy custom models, leverage GPU acceleration, and integrate with any ML framework while keeping your data secure.
+summary: Build powerful AI/ML capabilities by connecting {{{ .lake }}} with your own infrastructure. External functions let you deploy custom models, leverage GPU acceleration, and integrate with any ML framework while keeping your data secure.
 ---
 
 # External AI Functions
 
-Build powerful AI/ML capabilities by connecting {{{ .lake-short }}} with your own infrastructure. External functions let you deploy custom models, leverage GPU acceleration, and integrate with any ML framework while keeping your data secure.
+Build powerful AI/ML capabilities by connecting {{{ .lake }}} with your own infrastructure. External functions let you deploy custom models, leverage GPU acceleration, and integrate with any ML framework while keeping your data secure.
 
 ## Key Capabilities
 
@@ -20,7 +20,7 @@ Build powerful AI/ML capabilities by connecting {{{ .lake-short }}} with your ow
 ## How It Works
 
 1. **Create AI Server**: Build your AI/ML server using Python and [databend-udf](https://pypi.org/project/databend-udf)
-2. **Register Function**: Connect your server to {{{ .lake-short }}} with `CREATE FUNCTION`
+2. **Register Function**: Connect your server to {{{ .lake }}} with `CREATE FUNCTION`
 3. **Use in SQL**: Call your custom AI functions directly in SQL queries
 
 ## Example: Text Embedding Function

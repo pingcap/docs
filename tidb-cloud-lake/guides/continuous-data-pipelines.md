@@ -1,11 +1,11 @@
 ---
 title: Continuous Data Pipelines
-summary: Build end-to-end change data capture (CDC) flows in {{{ .lake-short }}} with two primitives.
+summary: Build end-to-end change data capture (CDC) flows in {{{ .lake }}} with two primitives.
 ---
 
 # Continuous Data Pipelines
 
-Build end-to-end change data capture (CDC) flows in {{{ .lake-short }}} with two primitives:
+Build end-to-end change data capture (CDC) flows in {{{ .lake }}} with two primitives:
 
 - **Streams** capture every INSERT/UPDATE/DELETE until you consume them.
 - **Tasks** run SQL on a schedule or when a stream reports new rows.
@@ -18,7 +18,7 @@ Build end-to-end change data capture (CDC) flows in {{{ .lake-short }}} with two
 - [Example 1: Scheduled Copy Task](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-1-scheduled-copy) – generate and load files with two recurring tasks.
 - [Example 2: Stream-Triggered Merge](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-2-stream-triggered-merge) – fire a task only when `STREAM_STATUS` is true.
 
-## Why CDC in {{{ .lake-short }}}
+## Why CDC in {{{ .lake }}}
 
 - **Lightweight** – streams keep the latest change set without duplicating full tables.
 - **Transactional** – stream consumption succeeds or rolls back with your SQL statement.

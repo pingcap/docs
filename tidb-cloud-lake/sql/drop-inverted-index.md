@@ -1,6 +1,6 @@
 ---
 title: DROP INVERTED INDEX
-summary: Removes an inverted index in {{{ .lake-short }}}.
+summary: Removes an inverted index in {{{ .lake }}}.
 ---
 
 # DROP INVERTED INDEX
@@ -9,7 +9,7 @@ summary: Removes an inverted index in {{{ .lake-short }}}.
 >
 > Introduced or updated in v1.2.405.
 
-Removes an inverted index in {{{ .lake-short }}}.
+Removes an inverted index in {{{ .lake }}}.
 
 ## Syntax
 

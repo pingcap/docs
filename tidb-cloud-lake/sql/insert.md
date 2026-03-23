@@ -13,7 +13,7 @@ Inserts one or more rows into a table.
 
 > **Tip:**
 >
-> {{{ .lake-short }}} ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
+> {{{ .lake }}} ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 See also: [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
 
@@ -189,7 +189,7 @@ SELECT * FROM staff_records;
 
 ### Example-4: Insert with Staged Files
 
-{{{ .lake-short }}} enables you to insert data into a table from staged files with the INSERT INTO statement. This is achieved through {{{ .lake-short }}}'s capacity to [Query Staged Files](/tidb-cloud-lake/sql/stage.md) and subsequently incorporate the query result into the table.
+{{{ .lake }}} enables you to insert data into a table from staged files with the INSERT INTO statement. This is achieved through {{{ .lake }}}'s capacity to [Query Staged Files](/tidb-cloud-lake/sql/stage.md) and subsequently incorporate the query result into the table.
 
 1. Create a table called `sample`:
 

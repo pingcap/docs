@@ -1,11 +1,11 @@
 ---
 title: Numeric Functions
-summary: This page provides a comprehensive overview of Numeric functions in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Numeric functions in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Numeric Functions
 
-This page provides a comprehensive overview of Numeric functions in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of Numeric functions in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Basic Arithmetic Functions
 

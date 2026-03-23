@@ -13,7 +13,7 @@ summary: "{{{ .lake }}} is built with security at its core, providing comprehens
 
 ### Access Control
 
-{{{ .lake-short }}} uses a comprehensive access control system that combines:
+{{{ .lake }}} uses a comprehensive access control system that combines:
 
 - **Role-Based Access Control (RBAC)**: Manages permissions through roles assigned to users
 - **Discretionary Access Control (DAC)**: Allows resource owners to directly grant permissions
@@ -24,7 +24,7 @@ summary: "{{{ .lake }}} is built with security at its core, providing comprehens
 Protects sensitive data by controlling how it's displayed to different users, helping you comply with privacy regulations while still allowing authorized access.
 
 **Network Policy**
-Controls which IP addresses can connect to your {{{ .lake-short }}} resources, allowing you to restrict access to specific networks or locations.
+Controls which IP addresses can connect to your {{{ .lake }}} resources, allowing you to restrict access to specific networks or locations.
 
 **Password Policy**
 Enforces strong passwords with customizable requirements for length, complexity, and rotation to prevent unauthorized access.
@@ -38,7 +38,7 @@ Enables private connections between your VPC and {{{ .lake }}} without exposing 
 
 ### TLS 1.2
 
-We provide end-to-end encryption for all communication. All customer data flows are solely over HTTPS. Connections are encrypted using TLS 1.2 from clients through to the {{{ .lake-short }}} API gateway, ensuring:
+We provide end-to-end encryption for all communication. All customer data flows are solely over HTTPS. Connections are encrypted using TLS 1.2 from clients through to the {{{ .lake }}} API gateway, ensuring:
 
 - Data confidentiality during transit
 - Protection against man-in-the-middle attacks
@@ -46,7 +46,7 @@ We provide end-to-end encryption for all communication. All customer data flows 
 
 ### Storage Encryption
 
-{{{ .lake-short }}} Enterprise supports server-side encryption in Object Storage Service (OSS). This feature enables you to enhance data security and privacy by activating server-side encryption for data stored in OSS. You can choose the encryption method that best suits your needs:
+{{{ .lake }}} Enterprise supports server-side encryption in Object Storage Service (OSS). This feature enables you to enhance data security and privacy by activating server-side encryption for data stored in OSS. You can choose the encryption method that best suits your needs:
 
 - AES-256 encryption
 - Customer-managed keys (CMK)
@@ -54,7 +54,7 @@ We provide end-to-end encryption for all communication. All customer data flows 
 
 ## Compliance
 
-At {{{ .lake-short }}}, we prioritize data security and privacy, and have achieved key compliances that validate our commitment to protecting your data. Our security practices are regularly audited by independent third parties to ensure we meet the highest industry standards.
+At {{{ .lake }}}, we prioritize data security and privacy, and have achieved key compliances that validate our commitment to protecting your data. Our security practices are regularly audited by independent third parties to ensure we meet the highest industry standards.
 
 ### SOC 2 Type II
 
@@ -62,4 +62,4 @@ We have successfully attained SOC 2 Type II compliance, validated by independent
 
 ### GDPR
 
-{{{ .lake-short }}} adheres to the General Data Protection Regulation (GDPR), the European Union's regulation designed to protect individuals' privacy and personal data. Our compliance includes strict data privacy enforcement, robust encryption, and regular privacy audits to ensure the rights and data privacy of our users across the EU are protected.
+{{{ .lake }}} adheres to the General Data Protection Regulation (GDPR), the European Union's regulation designed to protect individuals' privacy and personal data. Our compliance includes strict data privacy enforcement, robust encryption, and regular privacy audits to ensure the rights and data privacy of our users across the EU are protected.

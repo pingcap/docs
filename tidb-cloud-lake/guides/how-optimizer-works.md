@@ -1,17 +1,17 @@
 ---
 title: How TiDB Cloud Lake Optimizer Works
-summary: "{{{ .lake-short }}}'s query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators."
+summary: "{{{ .lake }}}'s query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators."
 ---
 
 # How TiDB Cloud Lake Optimizer Works
 
-{{{ .lake-short }}}'s query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators.
+{{{ .lake }}}'s query optimizer orchestrates a series of transformations that turn SQL text into an executable plan. The optimizer builds an abstract representation of the query, enriches it with real-time statistics, applies rule-based rewrites, explores join alternatives, and finally picks the cheapest physical operators.
 
-The same optimizer pipeline powers analytic reporting, JSON search, vector retrieval, and geospatial search—**{{{ .lake-short }}} maintains one optimizer that understands every data type it stores.**
+The same optimizer pipeline powers analytic reporting, JSON search, vector retrieval, and geospatial search—**{{{ .lake }}} maintains one optimizer that understands every data type it stores.**
 
-## What Makes {{{ .lake-short }}}’s Optimizer Tick
+## What Makes {{{ .lake }}}’s Optimizer Tick
 
-- Statistics stay up to date automatically: when data is written, {{{ .lake-short }}} immediately maintains row counts, value ranges, and NDVs, so the optimizer can use fresh information for selectivity, join ordering, and costing without any manual maintenance.
+- Statistics stay up to date automatically: when data is written, {{{ .lake }}} immediately maintains row counts, value ranges, and NDVs, so the optimizer can use fresh information for selectivity, join ordering, and costing without any manual maintenance.
 - Shape first, cost second: the pipeline decorrelates, pushes predicates/limits, and splits aggregates before global search, shrinking the space and moving work to storage.
 - DP + Cascades together: DPhpy finds good join orders; a memo‑driven Cascades pass selects the cheapest physical operators over the same SExpr memo.
 - Distribution‑aware by design: planning decides local vs distributed and rewrites broadcasts into key‑based shuffles to avoid hotspots.
@@ -107,7 +107,7 @@ In our query filters apply, so we keep the real computation.
 
 ### 3. Attach statistics
 
-During planning, {{{ .lake-short }}} collects row counts, value ranges, and distinct counts for the scanned tables. No SQL changes, but later selectivity and cost estimates stay accurate without any `ANALYZE` jobs.
+During planning, {{{ .lake }}} collects row counts, value ranges, and distinct counts for the scanned tables. No SQL changes, but later selectivity and cost estimates stay accurate without any `ANALYZE` jobs.
 
 ### 4. Normalize aggregates
 
@@ -243,7 +243,7 @@ customers ──⋈── recent_orders   recent_orders ──⋈── customer
 
 ### 3. Pick the physical plan and distribution
 
-`CascadesOptimizer` picks between hash, merge, or nested-loop implementations using {{{ .lake-short }}}’s cost model. The pipeline also decides whether the plan should remain local; if a warehouse cluster is available and joins are large, broadcast exchanges are rewritten into hash shuffles so work spreads evenly. Final cleanups drop redundant projections and unused CTEs.
+`CascadesOptimizer` picks between hash, merge, or nested-loop implementations using {{{ .lake }}}’s cost model. The pipeline also decides whether the plan should remain local; if a warehouse cluster is available and joins are large, broadcast exchanges are rewritten into hash shuffles so work spreads evenly. Final cleanups drop redundant projections and unused CTEs.
 
 ## Observability
 

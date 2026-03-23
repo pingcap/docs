@@ -1,15 +1,15 @@
 ---
 title: SQL Dialects & Conformance
-summary: This page provides details on the SQL dialects supported by {{{ .lake-short }}}, along with its conformity to the SQL standard, particularly focusing on SQL2011 features and their support status within {{{ .lake-short }}}.
+summary: This page provides details on the SQL dialects supported by {{{ .lake }}}, along with its conformity to the SQL standard, particularly focusing on SQL2011 features and their support status within {{{ .lake }}}.
 ---
 
 # SQL Dialects & Conformance
 
-This page provides details on the SQL dialects supported by {{{ .lake-short }}}, along with its conformity to the SQL standard, particularly focusing on SQL:2011 features and their support status within {{{ .lake-short }}}.
+This page provides details on the SQL dialects supported by {{{ .lake }}}, along with its conformity to the SQL standard, particularly focusing on SQL:2011 features and their support status within {{{ .lake }}}.
 
 ## Supported SQL Dialects
 
-A SQL dialect refers to a particular variation or flavor of the Structured Query Language. {{{ .lake-short }}} supports the `PostgreSQL` dialect by default and offers the flexibility to switch to other supported dialects. Please refer to the table below for details on the supported dialects and their respective brief descriptions:
+A SQL dialect refers to a particular variation or flavor of the Structured Query Language. {{{ .lake }}} supports the `PostgreSQL` dialect by default and offers the flexibility to switch to other supported dialects. Please refer to the table below for details on the supported dialects and their respective brief descriptions:
 
 | Dialect       | Introduction                                                                                    | Learn More                   |
 |---------------|-------------------------------------------------------------------------------------------------|------------------------------|
@@ -31,7 +31,7 @@ SHOW SETTINGS LIKE 'sql_dialect';
 
 ## SQL Conformance Summary
 
-{{{ .lake-short }}} aims to conform to the SQL standard, with particular support for ISO/IEC 9075:2011, also known as SQL:2011. While not an exhaustive statement of conformance, {{{ .lake-short }}} incorporates many features required by the SQL standard, often with slight differences in syntax or function. This page outlines the level of conformity of {{{ .lake-short }}} to the SQL:2011 standard.
+{{{ .lake }}} aims to conform to the SQL standard, with particular support for ISO/IEC 9075:2011, also known as SQL:2011. While not an exhaustive statement of conformance, {{{ .lake }}} incorporates many features required by the SQL standard, often with slight differences in syntax or function. This page outlines the level of conformity of {{{ .lake }}} to the SQL:2011 standard.
 
 | Feature ID  |                                                       Feature Name                                                        | Supported?  |                                                     Note                                                      |
 |:----------: |:------------------------------------------------------------------------------------------------------------------------: |:----------: |:------------------------------------------------------------------------------------------------------------: |
@@ -106,7 +106,7 @@ SHOW SETTINGS LIKE 'sql_dialect';
 | E091-04     | MIN                                                                                                                       | <span class="text-blue">Yes</span>         |                                                                                                               |
 | E091-05     | SUM                                                                                                                       | <span class="text-blue">Yes</span>         |                                                                                                               |
 | E091-06     | ALL quantifier                                                                                                            | <span class="text-blue">Yes</span>         |                                                                                                               |
-| E091-07     | DISTINCT quantifier                                                                                                       | <span class="text-orange">Partial</span>     | Currently, {{{ .lake-short }}} supports COUNT(DISTINCT ...) and SELECT DISTINCT ... queries.                             |
+| E091-07     | DISTINCT quantifier                                                                                                       | <span class="text-orange">Partial</span>     | Currently, {{{ .lake }}} supports COUNT(DISTINCT ...) and SELECT DISTINCT ... queries.                             |
 | **E101**    | **Basic data manipulation**                                                                                               | <span class="text-orange">Partial</span>     |                                                                                                               |
 | E101-01     | INSERT statement                                                                                                          | <span class="text-blue">Yes</span>         |                                                                                                               |
 | E101-03     | Searched UPDATE statement                                                                                                 | <span class="text-blue">Yes</span>         |                                                                                                               |
@@ -124,7 +124,7 @@ SHOW SETTINGS LIKE 'sql_dialect';
 | E121-17     | WITH HOLD cursors                                                                                                         | <span class="text-red">No</span>          |                                                                                                               |
 | **E131**    | **Null value support (nulls in lieu of values)**                                                                          | <span class="text-blue">Yes</span>         |                                                                                                               |
 | **E141**    | **Basic integrity constraints**                                                                                           | <span class="text-red">No</span>          |                                                                                                               |
-| E141-01     | NOT NULL constraints                                                                                                      | <span class="text-blue">Yes</span>         | Default in {{{ .lake-short }}}: All columns are nullable.                                                 |
+| E141-01     | NOT NULL constraints                                                                                                      | <span class="text-blue">Yes</span>         | Default in {{{ .lake }}}: All columns are nullable.                                                 |
 | E141-02     | UNIQUE constraint of NOT NULL columns                                                                                     | <span class="text-red">No</span>          |                                                                                                               |
 | E141-03     | PRIMARY KEY constraints                                                                                                   | <span class="text-red">No</span>          |                                                                                                               |
 | E141-04     | Basic FOREIGN KEY constraint with the NO ACTION default for both referential delete action and referential update action  | <span class="text-red">No</span>          |                                                                                                               |
@@ -133,7 +133,7 @@ SHOW SETTINGS LIKE 'sql_dialect';
 | E141-08     | NOT NULL inferred on PRIMARY KEY                                                                                          | <span class="text-red">No</span>          |                                                                                                               |
 | E141-10     | Names in a foreign key can be specified in any order                                                                      | <span class="text-red">No</span>          |                                                                                                               |
 | **E151**    | **Transaction support**                                                                                                   | <span class="text-orange">Partial</span>     |                                                                                                               |
-| E151-01     | COMMIT statement                                                                                                          | <span class="text-orange">Partial</span>     | {{{ .lake-short }}} only supports implicit transactions for every individual DML statement.                              |
+| E151-01     | COMMIT statement                                                                                                          | <span class="text-orange">Partial</span>     | {{{ .lake }}} only supports implicit transactions for every individual DML statement.                              |
 | E151-02     | ROLLBACK statement                                                                                                        | <span class="text-red">No</span>          |                                                                                                               |
 | **E152**    | **Basic SET TRANSACTION statement**                                                                                       | <span class="text-red">No</span>          |                                                                                                               |
 | E152-01     | SET TRANSACTION statement: ISOLATION LEVEL SERIALIZABLE clause                                                            | <span class="text-red">No</span>          |                                                                                                               |

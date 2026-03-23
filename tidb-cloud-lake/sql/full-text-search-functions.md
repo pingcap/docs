@@ -1,15 +1,15 @@
 ---
 title: Full-Text Search Functions
-summary: "{{{ .lake-short }}}'s full-text search functions deliver search-engine-style filtering for semi-structured VARIANT data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets."
+summary: "{{{ .lake }}}'s full-text search functions deliver search-engine-style filtering for semi-structured VARIANT data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets."
 ---
 
 # Full-Text Search Functions
 
-{{{ .lake-short }}}'s full-text search functions deliver search-engine-style filtering for semi-structured `VARIANT` data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets.
+{{{ .lake }}}'s full-text search functions deliver search-engine-style filtering for semi-structured `VARIANT` data and plain text columns that are indexed with an inverted index. They are ideal for AI-generated metadata—such as perception results from autonomous-driving video frames—stored alongside your assets.
 
 > **Note:**
 >
-> {{{ .lake-short }}}'s search functions are inspired by [Elasticsearch Full-Text Search Functions](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html).
+> {{{ .lake }}}'s search functions are inspired by [Elasticsearch Full-Text Search Functions](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-functions-search.html).
 
 Include an inverted index in the table definition for the columns you plan to search:
 

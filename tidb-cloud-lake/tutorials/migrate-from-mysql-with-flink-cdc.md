@@ -14,7 +14,7 @@ In this tutorial, we'll walk you through the process of migrating from MySQL to 
 Before you start, ensure you have the following prerequisites in place:
 
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch MySQL.
-- Java 8 or 11 is installed on your local machine, as it is required by the [Flink {{{ .lake-short }}} Connector](https://github.com/databendcloud/flink-connector-databend).
+- Java 8 or 11 is installed on your local machine, as it is required by the [Flink {{{ .lake }}} Connector](https://github.com/databendcloud/flink-connector-databend).
 - BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
 
 ## Step 1: Launch MySQL in Docker
@@ -159,7 +159,7 @@ CREATE    TABLE products (
     cd flink-1.17.1
     ```
 
-2. Download the {{{ .lake-short }}} and MySQL connectors into the **lib** folder:
+2. Download the {{{ .lake }}} and MySQL connectors into the **lib** folder:
 
     ```bash
     curl -Lo lib/flink-connector-databend.jar https://github.com/databendcloud/flink-connector-databend/releases/latest/download/flink-connector-databend.jar
@@ -244,7 +244,7 @@ You can now open the Apache Flink Dashboard if you go to [http://localhost:8081]
     Flink SQL> SET execution.checkpointing.interval = 3s;
     ```
 
-3. Create corresponding tables with MySQL and {{{ .lake-short }}} connectors in the Flink SQL Client (replace the placeholders with your actual values):
+3. Create corresponding tables with MySQL and {{{ .lake }}} connectors in the Flink SQL Client (replace the placeholders with your actual values):
 
     ```sql
     CREATE TABLE mysql_products (id INT,name STRING,description STRING,PRIMARY KEY (id) NOT ENFORCED)

@@ -1,6 +1,6 @@
 ---
 title: Delta Lake Engine
-summary: "{{{ .lake-short }}}'s Delta Lake engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in {{{ .lake-short }}}, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within {{{ .lake-short }}}."
+summary: "{{{ .lake }}}'s Delta Lake engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in {{{ .lake }}}, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within {{{ .lake }}}."
 ---
 
 # Delta Lake Engine
@@ -9,11 +9,11 @@ summary: "{{{ .lake-short }}}'s Delta Lake engine allows you to seamlessly query
 >
 > Introduced or updated in v1.2.262.
 
-{{{ .lake-short }}}'s [Delta Lake](https://delta.io/) engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in {{{ .lake-short }}}, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within {{{ .lake-short }}}.
+{{{ .lake }}}'s [Delta Lake](https://delta.io/) engine allows you to seamlessly query and analyze data in Delta Lake tables stored in your object storage. When you create a table with the Delta Lake engine in {{{ .lake }}}, you specify a location where the data files of a Delta Lake table are stored. This setup allows you to gain direct access to the table and perform queries seamlessly from within {{{ .lake }}}.
 
-- {{{ .lake-short }}}'s Delta Lake engine currently supported read-only operations. This means that querying data from your Delta Lake tables is supported, while writing to the tables is not.
-- The schema for a table created with the Delta Lake engine is set at the time of its creation. Any modifications to the schema of the original Delta Lake table require the recreation of the corresponding table in {{{ .lake-short }}} to ensure synchronization.
-- The Delta Lake engine in {{{ .lake-short }}} is built upon the official [delta-rs](https://github.com/delta-io/delta-rs) library. It is important to note that certain features defined in the delta-protocol, including Deletion Vector, Change Data Feed, Generated Columns, and Identity Columns, are NOT currently supported by this engine.
+- {{{ .lake }}}'s Delta Lake engine currently supported read-only operations. This means that querying data from your Delta Lake tables is supported, while writing to the tables is not.
+- The schema for a table created with the Delta Lake engine is set at the time of its creation. Any modifications to the schema of the original Delta Lake table require the recreation of the corresponding table in {{{ .lake }}} to ensure synchronization.
+- The Delta Lake engine in {{{ .lake }}} is built upon the official [delta-rs](https://github.com/delta-io/delta-rs) library. It is important to note that certain features defined in the delta-protocol, including Deletion Vector, Change Data Feed, Generated Columns, and Identity Columns, are NOT currently supported by this engine.
 
 ## Syntax
 
@@ -24,7 +24,7 @@ LOCATION = 's3://<path_to_table>'
 CONNECTION_NAME = '<connection_name>'
 ```
 
-Before creating a table with the Delta Lake engine, you need to create a connection object used to establish a connection with your S3 storage. To create a connection in {{{ .lake-short }}}, use the [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) command.
+Before creating a table with the Delta Lake engine, you need to create a connection object used to establish a connection with your S3 storage. To create a connection in {{{ .lake }}}, use the [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) command.
 
 ## Examples
 

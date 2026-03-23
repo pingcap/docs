@@ -1,11 +1,11 @@
 ---
 title: Loading from Bucket
-summary: When data files are stored in an object storage bucket, such as Amazon S3, it is possible to load them directly into {{{ .lake-short }}} using the COPY INTO command. Please note that the files must be in a format supported by {{{ .lake-short }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake-short }}}, see Input & Output File Formats.
+summary: When data files are stored in an object storage bucket, such as Amazon S3, it is possible to load them directly into {{{ .lake }}} using the COPY INTO command. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see Input & Output File Formats.
 ---
 
 # Loading from Bucket
 
-When data files are stored in an object storage bucket, such as Amazon S3, it is possible to load them directly into {{{ .lake-short }}} using the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. Please note that the files must be in a format supported by {{{ .lake-short }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake-short }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
+When data files are stored in an object storage bucket, such as Amazon S3, it is possible to load them directly into {{{ .lake }}} using the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ![image](/media/tidb-cloud-lake/load-data-from-s3.jpeg)
 
@@ -35,7 +35,7 @@ For this tutorial, a bucket named **databend-toronto** was created in the region
 
 ### Step 1. Create Target Table
 
-Create a table with the following SQL statements in {{{ .lake-short }}}:
+Create a table with the following SQL statements in {{{ .lake }}}:
 
 ```sql
 USE default;

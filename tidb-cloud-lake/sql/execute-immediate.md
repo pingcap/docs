@@ -1,6 +1,6 @@
 ---
 title: EXECUTE IMMEDIATE
-summary: Executes a SQL script. For how to write SQL scripts for {{{ .lake-short }}}, see Stored Procedure & SQL Scripting.
+summary: Executes a SQL script. For how to write SQL scripts for {{{ .lake }}}, see Stored Procedure & SQL Scripting.
 ---
 
 # EXECUTE IMMEDIATE
@@ -9,7 +9,7 @@ summary: Executes a SQL script. For how to write SQL scripts for {{{ .lake-short
 >
 > Introduced or updated in v1.2.452.
 
-Executes a SQL script. For how to write SQL scripts for {{{ .lake-short }}}, see [Stored Procedure & SQL Scripting](/tidb-cloud-lake/sql/stored-procedure-scripting.md).
+Executes a SQL script. For how to write SQL scripts for {{{ .lake }}}, see [Stored Procedure & SQL Scripting](/tidb-cloud-lake/sql/stored-procedure-scripting.md).
 
 ## Syntax
 

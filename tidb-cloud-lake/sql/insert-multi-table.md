@@ -13,7 +13,7 @@ Inserts rows into multiple tables in a single transaction, with the option for t
 
 > **Tip:**
 >
-> {{{ .lake-short }}} ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
+> {{{ .lake }}} ensures data integrity with atomic operations. Inserts, updates, replaces, and deletes either succeed completely or fail entirely.
 
 See also: [INSERT](/tidb-cloud-lake/sql/insert.md)
 

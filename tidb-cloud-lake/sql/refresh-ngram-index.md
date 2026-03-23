@@ -1,6 +1,6 @@
 ---
 title: REFRESH NGRAM INDEX
-summary: "{{{ .lake-short }}} automatically refreshes NGRAM indexes when data is ingested. Use REFRESH NGRAM INDEX when you need to backfill data that existed before the index was defined."
+summary: "{{{ .lake }}} automatically refreshes NGRAM indexes when data is ingested. Use REFRESH NGRAM INDEX when you need to backfill data that existed before the index was defined."
 ---
 
 # REFRESH NGRAM INDEX
@@ -9,7 +9,7 @@ summary: "{{{ .lake-short }}} automatically refreshes NGRAM indexes when data is
 >
 > Introduced or updated in v1.2.726.
 
-{{{ .lake-short }}} automatically refreshes NGRAM indexes when data is ingested. Use `REFRESH NGRAM INDEX` when you need to backfill data that existed before the index was defined.
+{{{ .lake }}} automatically refreshes NGRAM indexes when data is ingested. Use `REFRESH NGRAM INDEX` when you need to backfill data that existed before the index was defined.
 
 ## Syntax
 

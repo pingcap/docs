@@ -77,7 +77,7 @@ CREATE CONNECTION <connection_name>
 
 | Parameter | Description |
 |-----------|-------------|
-| ROLE_ARN  | The Amazon Resource Name (ARN) of the IAM role that {{{ .lake-short }}} will assume to access your S3 resources. |
+| ROLE_ARN  | The Amazon Resource Name (ARN) of the IAM role that {{{ .lake }}} will assume to access your S3 resources. |
 
 </div>
 </SimpleTab>
@@ -176,7 +176,7 @@ CREATE STAGE my_s3_stage
 
 ### Using AWS IAM Role
 
-This example creates a connection to Amazon S3 using an IAM role and then creates a stage that uses this connection. This approach is more secure as it doesn't require storing access keys in {{{ .lake-short }}}.
+This example creates a connection to Amazon S3 using an IAM role and then creates a stage that uses this connection. This approach is more secure as it doesn't require storing access keys in {{{ .lake }}}.
 
 ```sql
 CREATE CONNECTION databend_test

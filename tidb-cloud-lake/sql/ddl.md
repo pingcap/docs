@@ -1,11 +1,11 @@
 ---
 title: DDL (Data Definition Language) Commands
-summary: These topics provide reference information for the DDL (Data Definition Language) commands in {{{ .lake-short }}}.
+summary: These topics provide reference information for the DDL (Data Definition Language) commands in {{{ .lake }}}.
 ---
 
 # DDL (Data Definition Language) Commands
 
-These topics provide reference information for the DDL (Data Definition Language) commands in {{{ .lake-short }}}.
+These topics provide reference information for the DDL (Data Definition Language) commands in {{{ .lake }}}.
 
 ## Database & Table Management
 

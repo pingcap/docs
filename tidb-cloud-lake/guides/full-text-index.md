@@ -59,7 +59,7 @@ SELECT * FROM logs WHERE MATCH(message, 'error kubernetes');
 
 - **New Data**: Automatically indexed as it's inserted - no manual action needed
 - **Existing Data**: One-time refresh required only for data that existed before index creation
-- **Ongoing Maintenance**: {{{ .lake-short }}} automatically maintains optimal search performance
+- **Ongoing Maintenance**: {{{ .lake }}} automatically maintains optimal search performance
 
 ## Search Functions
 

@@ -7,7 +7,7 @@ summary: Loads MySQL data into TiDB Cloud Lake with DataX for batch full-load an
 
 > **Capabilities**: Full Load, Incremental
 
-In this tutorial, you will load data from MySQL to {{{ .lake-short }}} with DataX. Before you start, make sure you have successfully set up {{{ .lake-short }}}, MySQL, and DataX in your environment.
+In this tutorial, you will load data from MySQL to {{{ .lake }}} with DataX. Before you start, make sure you have successfully set up {{{ .lake }}}, MySQL, and DataX in your environment.
 
 1. In MySQL, create a SQL user that you will use for data loading and then create a table and populate it with sample data.
 
@@ -19,11 +19,11 @@ In this tutorial, you will load data from MySQL to {{{ .lake-short }}} with Data
     mysql> insert into db.tb01 values(1, 3.1,now(), 'test1'), (1, 4.1,now(), 'test2'), (1, 4.1,now(), 'test2');
     ```
 
-2. In {{{ .lake-short }}}, create a corresponding target table.
+2. In {{{ .lake }}}, create a corresponding target table.
 
     > **Note:**
     >
-    > DataX data types can be converted to {{{ .lake-short }}}'s data types when loaded into {{{ .lake-short }}}. For the specific correspondences between DataX data types and {{{ .lake-short }}}'s data types, refer to the documentation provided at the following link: <https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#33-type-convert>
+    > DataX data types can be converted to {{{ .lake }}}'s data types when loaded into {{{ .lake }}}. For the specific correspondences between DataX data types and {{{ .lake }}}'s data types, refer to the documentation provided at the following link: <https://github.com/alibaba/DataX/blob/master/databendwriter/doc/databendwriter.md#33-type-convert>
 
     ```sql title='In Databend:'
     databend> create database migrated_db;
@@ -112,7 +112,7 @@ cd {YOUR_DATAX_DIR_BIN}
 python datax.py ./mysql_demo.json
 ```
 
-You're all set! To verify the data loading, execute the query in {{{ .lake-short }}}:
+You're all set! To verify the data loading, execute the query in {{{ .lake }}}:
 
 ```sql
 databend> select * from migrated_db.tb01;

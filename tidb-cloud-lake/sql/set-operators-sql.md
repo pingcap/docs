@@ -1,11 +1,11 @@
 ---
 title: Set Operators
-summary: Set operators combine the results of two queries into a single result. {{{ .lake-short }}} supports the following set operators.
+summary: Set operators combine the results of two queries into a single result. {{{ .lake }}} supports the following set operators.
 ---
 
 # Set Operators
 
-Set operators combine the results of two queries into a single result. {{{ .lake-short }}} supports the following set operators:
+Set operators combine the results of two queries into a single result. {{{ .lake }}} supports the following set operators:
 
 - [INTERSECT](#intersect)
 - [EXCEPT](#except)

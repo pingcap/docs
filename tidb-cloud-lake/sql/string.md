@@ -7,7 +7,7 @@ summary: Basic String data type.
 
 ## String Data Types
 
-In {{{ .lake-short }}}, strings can be stored in the `VARCHAR` field, the storage size is variable.
+In {{{ .lake }}}, strings can be stored in the `VARCHAR` field, the storage size is variable.
 
 | Name    | Aliases | Storage Size |
 |---------|---------|--------------|

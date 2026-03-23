@@ -1,15 +1,15 @@
 ---
 title: Data Lifecycle in TiDB Cloud Lake
-summary: "{{{ .lake-short }}} supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, {{{ .lake-short }}} follows the same industry standards you're accustomed to."
+summary: "{{{ .lake }}} supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, {{{ .lake }}} follows the same industry standards you're accustomed to."
 ---
 
 # Data Lifecycle in TiDB Cloud Lake
 
-{{{ .lake-short }}} supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, {{{ .lake-short }}} follows the same industry standards you're accustomed to.
+{{{ .lake }}} supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, {{{ .lake }}} follows the same industry standards you're accustomed to.
 
-## {{{ .lake-short }}} Objects
+## {{{ .lake }}} Objects
 
-{{{ .lake-short }}} supports the following objects to create and modify them:
+{{{ .lake }}} supports the following objects to create and modify them:
 
 - Database
 - Table
@@ -41,7 +41,7 @@ Key Commands:
 
 ## Storing Data
 
-Directly add data to your tables. {{{ .lake-short }}} also allows importing data from external files into its tables.
+Directly add data to your tables. {{{ .lake }}} also allows importing data from external files into its tables.
 
 Key Commands:
 
@@ -58,7 +58,7 @@ Key Command:
 
 ## Working with Data
 
-Once your data is in {{{ .lake-short }}}, you can update, replace, merge, or delete it as needed.
+Once your data is in {{{ .lake }}}, you can update, replace, merge, or delete it as needed.
 
 Key Commands:
 
@@ -69,7 +69,7 @@ Key Commands:
 
 ## Removing Data
 
-{{{ .lake-short }}} allows you to delete specific data or entire tables and databases.
+{{{ .lake }}} allows you to delete specific data or entire tables and databases.
 
 Key Commands:
 

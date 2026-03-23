@@ -7,7 +7,7 @@ summary: Generates the Soundex code for a string.
 
 Generates the Soundex code for a string.
 
-- A Soundex code consists of a letter followed by three numerical digits. {{{ .lake-short }}}'s implementation returns more than 4 digits, but you can [SUBSTR](/tidb-cloud-lake/sql/substr.md) the result to get a standard Soundex code.
+- A Soundex code consists of a letter followed by three numerical digits. {{{ .lake }}}'s implementation returns more than 4 digits, but you can [SUBSTR](/tidb-cloud-lake/sql/substr.md) the result to get a standard Soundex code.
 - All non-alphabetic characters in the string are ignored.
 - All international alphabetic characters outside the A-Z range are ignored unless they're the first letter.
 

@@ -51,7 +51,7 @@ The inner product is fundamental in:
 
 > **Note:**
 >
-> This function performs vector computations within {{{ .lake-short }}} and does not rely on external APIs.
+> This function performs vector computations within {{{ .lake }}} and does not rely on external APIs.
 
 ## Examples
 

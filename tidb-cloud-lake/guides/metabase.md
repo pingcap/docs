@@ -7,11 +7,11 @@ summary: Metabase is an open-source business intelligence platform. You can use 
 
 [Metabase](https://www.metabase.com/) is an open-source business intelligence platform. You can use Metabase to ask questions about your data, or embed Metabase in your app to let your customers explore their data on their own.
 
-{{{ .lake-short }}} provides a JDBC driver named [Metabase {{{ .lake-short }}} Driver](https://github.com/databendcloud/metabase-databend-driver/releases/latest), enabling you to connect to Metabase and dashboard your data in {{{ .lake-short }}} / {{{ .lake }}}. For more information about the Metabase {{{ .lake-short }}} Driver, refer to <https://github.com/databendcloud/metabase-databend-driver>
+{{{ .lake }}} provides a JDBC driver named [Metabase {{{ .lake }}} Driver](https://github.com/databendcloud/metabase-databend-driver/releases/latest), enabling you to connect to Metabase and dashboard your data in {{{ .lake }}} / {{{ .lake }}}. For more information about the Metabase {{{ .lake }}} Driver, refer to <https://github.com/databendcloud/metabase-databend-driver>
 
-## Downloading & Installing Metabase {{{ .lake-short }}} Driver
+## Downloading & Installing Metabase {{{ .lake }}} Driver
 
-To download and install the Metabase {{{ .lake-short }}} Driver:
+To download and install the Metabase {{{ .lake }}} Driver:
 
 1. Create a folder named **plugins** in the directory where the file **metabase.jar** is stored.
 
@@ -21,7 +21,7 @@ To download and install the Metabase {{{ .lake-short }}} Driver:
     $ mkdir plugins
     ```
 
-2. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase {{{ .lake-short }}} Driver, then save it in the **plugins** folder.
+2. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase {{{ .lake }}} Driver, then save it in the **plugins** folder.
 
 3. To start Metabase, run the following command:
 
@@ -31,15 +31,15 @@ java -jar metabase.jar
 
 ## Tutorial: Integrating with Metabase
 
-This tutorial guides you through the process of integrating {{{ .lake-short }}} / {{{ .lake }}} with Metabase using the Metabase {{{ .lake-short }}} Driver.
+This tutorial guides you through the process of integrating {{{ .lake }}} / {{{ .lake }}} with Metabase using the Metabase {{{ .lake }}} Driver.
 
 ### Step 1. Set up Environment
 
 To follow along, you'll need to install Metabase with Docker. Before you begin, make sure that Docker is installed on your system.
 
-For this tutorial, you can integrate either with {{{ .lake-short }}} or {{{ .lake }}}:
+For this tutorial, you can integrate either with {{{ .lake }}} or {{{ .lake }}}:
 
-- If you choose to integrate with a local {{{ .lake-short }}} instance, deploy it if you don't have one already.
+- If you choose to integrate with a local {{{ .lake }}} instance, deploy it if you don't have one already.
 - If you prefer to integrate with {{{ .lake }}}, make sure you can log in to your account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ### Step 2. Deploy Metabase
@@ -58,7 +58,7 @@ Follow these steps to install and deploy Metabase with Docker:
     docker run  -d -p 3000:3000 --name metabase metabase/metabase
     ```
 
-3. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase {{{ .lake-short }}} Driver, then import it to the **plugins** folder of the Metabase container in Docker.
+3. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase {{{ .lake }}} Driver, then import it to the **plugins** folder of the Metabase container in Docker.
 
     ![Alt text](/media/tidb-cloud-lake/add2plugins.gif)
 
@@ -74,7 +74,7 @@ Follow these steps to install and deploy Metabase with Docker:
 
 3. Click on the **gear** icon in the top right, and navigate to **Admin settings** > **Databases** > **Add a database** to create a connection:
 
-    | Parameter                     | {{{ .lake-short }}}               | {{{ .lake }}}                     |
+    | Parameter                     | {{{ .lake }}}               | {{{ .lake }}}                     |
     | ----------------------------- | ---------------------- | ---------------------------------- |
     | Database type                 | `Databend`             | `Databend`                         |
     | Host                          | `host.docker.internal` | Obtain from connection information |

@@ -30,7 +30,7 @@ Returns a TIMESTAMP value that represents the same instant in the target timezon
 
 - The source timezone always equals the current session timezone (default `UTC`). Configure the session or connection to match the data you are converting.
 - Invalid timezone names raise an error. If either argument is `NULL`, the result is `NULL`.
-- Daylight-saving gaps can make some timestamps invalid. Turn on `enable_dst_hour_fix = 1` (session or tenant level) so {{{ .lake-short }}} adjusts such values automatically.
+- Daylight-saving gaps can make some timestamps invalid. Turn on `enable_dst_hour_fix = 1` (session or tenant level) so {{{ .lake }}} adjusts such values automatically.
 
 ## Examples
 
@@ -76,7 +76,7 @@ ORDER BY user_tz NULLS LAST;
 
 ### Handle timestamps inside DST gaps
 
-In this session the timezone is configured as Asia/Shanghai and `enable_dst_hour_fix = 1`. The timestamp `1947-04-15 00:00:00` never existed there because clocks jumped forward, so {{{ .lake-short }}} adjusts it before returning the UTC value.
+In this session the timezone is configured as Asia/Shanghai and `enable_dst_hour_fix = 1`. The timestamp `1947-04-15 00:00:00` never existed there because clocks jumped forward, so {{{ .lake }}} adjusts it before returning the UTC value.
 
 ```sql
 SELECT CONVERT_TIMEZONE('UTC', '1947-04-15 00:00:00');

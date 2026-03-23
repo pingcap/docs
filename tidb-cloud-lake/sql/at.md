@@ -11,9 +11,9 @@ summary: The AT clause enables you to retrieve previous versions of your data by
 
 The AT clause enables you to retrieve previous versions of your data by specifying a snapshot ID, timestamp, stream name, or a time interval.
 
-{{{ .lake-short }}} automatically creates snapshots when data updates occur, so a snapshot can be considered as a view of your data at a time point in the past. You can access a snapshot by the snapshot ID or the timestamp at which the snapshot was created. For how to obtain the snapshot ID and timestamp, see [Obtaining Snapshot ID and Timestamp](#obtaining-snapshot-id-and-timestamp).
+{{{ .lake }}} automatically creates snapshots when data updates occur, so a snapshot can be considered as a view of your data at a time point in the past. You can access a snapshot by the snapshot ID or the timestamp at which the snapshot was created. For how to obtain the snapshot ID and timestamp, see [Obtaining Snapshot ID and Timestamp](#obtaining-snapshot-id-and-timestamp).
 
-This is part of the {{{ .lake-short }}}'s Time Travel feature that allows you to query, back up, and restore from a previous version of your data within the retention period (24 hours by default).
+This is part of the {{{ .lake }}}'s Time Travel feature that allows you to query, back up, and restore from a previous version of your data within the retention period (24 hours by default).
 
 ## Syntax
 

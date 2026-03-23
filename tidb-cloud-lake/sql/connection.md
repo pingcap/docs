@@ -1,15 +1,15 @@
 ---
 title: Connection
-summary: A connection in {{{ .lake-short }}} refers to a designated configuration that encapsulates the details required to interact with an external storage service. It serves as a centralized and reusable set of parameters, such as access credentials, endpoint URLs, and storage types, facilitating the integration of {{{ .lake-short }}} with various storage services.
+summary: A connection in {{{ .lake }}} refers to a designated configuration that encapsulates the details required to interact with an external storage service. It serves as a centralized and reusable set of parameters, such as access credentials, endpoint URLs, and storage types, facilitating the integration of {{{ .lake }}} with various storage services.
 ---
 
 # Connection
 
 ## What is Connection?
 
-A connection in {{{ .lake-short }}} refers to a designated configuration that encapsulates the details required to interact with an external storage service. It serves as a centralized and reusable set of parameters, such as access credentials, endpoint URLs, and storage types, facilitating the integration of {{{ .lake-short }}} with various storage services.
+A connection in {{{ .lake }}} refers to a designated configuration that encapsulates the details required to interact with an external storage service. It serves as a centralized and reusable set of parameters, such as access credentials, endpoint URLs, and storage types, facilitating the integration of {{{ .lake }}} with various storage services.
 
-Connection can be utilized for creating external stages, external tables, and attaching tables, offering a streamlined and modular approach to managing and accessing data stored in external storage services through {{{ .lake-short }}}.
+Connection can be utilized for creating external stages, external tables, and attaching tables, offering a streamlined and modular approach to managing and accessing data stored in external storage services through {{{ .lake }}}.
 
 ## Connection Management
 
@@ -61,7 +61,7 @@ CREATE STAGE my_s3_stage
 
 #### Example 2: Attaching Table with Connection
 
-The [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) page offers [Examples](/tidb-cloud-lake/sql/attach-table.md#examples) demonstrating how to connect a new table in {{{ .lake }}} with an existing table in {{{ .lake-short }}}, where data is stored within an Amazon S3 bucket named "databend-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
+The [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) page offers [Examples](/tidb-cloud-lake/sql/attach-table.md#examples) demonstrating how to connect a new table in {{{ .lake }}} with an existing table in {{{ .lake }}}, where data is stored within an Amazon S3 bucket named "databend-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
 
 ```sql title='Databend Cloud:'
 ATTACH TABLE employees_backup

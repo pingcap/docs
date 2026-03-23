@@ -1,11 +1,11 @@
 ---
 title: system.configs
-summary: Contains information about {{{ .lake-short }}} server configs.
+summary: Contains information about {{{ .lake }}} server configs.
 ---
 
 # system.configs
 
-Contains information about {{{ .lake-short }}} server configs.
+Contains information about {{{ .lake }}} server configs.
 
 > **Note:**
 >

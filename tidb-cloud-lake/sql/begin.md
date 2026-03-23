@@ -11,7 +11,7 @@ summary: Starts a new transaction. BEGIN and COMMIT/ROLLBACK must be used togeth
 
 Starts a new transaction. BEGIN and [COMMIT](/tidb-cloud-lake/sql/commit.md)/[ROLLBACK](/tidb-cloud-lake/sql/rollback.md) must be used together to start and then either save or undo a transaction.
 
-- {{{ .lake-short }}} does *not* support nested transactions, so unmatched transaction statements will be ignored.
+- {{{ .lake }}} does *not* support nested transactions, so unmatched transaction statements will be ignored.
 
     ```sql title="Example:"
     BEGIN; -- Start a transaction
@@ -63,7 +63,7 @@ BEGIN [ TRANSACTION ]
 
 ## Transaction IDs & Statuses
 
-{{{ .lake-short }}} automatically generates a transaction ID for each transaction. This ID allows users to identify which statements belong to the same transaction, facilitating issue troubleshooting.
+{{{ .lake }}} automatically generates a transaction ID for each transaction. This ID allows users to identify which statements belong to the same transaction, facilitating issue troubleshooting.
 
 If you're on {{{ .lake }}}, you can find the transaction IDs on **Monitor** > **SQL History**:
 

@@ -1,11 +1,11 @@
 ---
 title: system.caches
-summary: An overview of various caches being managed in {{{ .lake-short }}}.
+summary: An overview of various caches being managed in {{{ .lake }}}.
 ---
 
 # system.caches
 
-An overview of various caches being managed in {{{ .lake-short }}}.
+An overview of various caches being managed in {{{ .lake }}}.
 
 The table below shows the cache name, the number of items in the cache, and the size of the cache:
 

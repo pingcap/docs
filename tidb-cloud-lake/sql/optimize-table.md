@@ -1,6 +1,6 @@
 ---
 title: OPTIMIZE TABLE
-summary: Optimizing a table in {{{ .lake-short }}} involves compacting or purging historical data to save storage space and enhance query performance.
+summary: Optimizing a table in {{{ .lake }}} involves compacting or purging historical data to save storage space and enhance query performance.
 ---
 
 # OPTIMIZE TABLE
@@ -9,24 +9,24 @@ summary: Optimizing a table in {{{ .lake-short }}} involves compacting or purgin
 >
 > Introduced or updated in v1.2.395.
 
-Optimizing a table in {{{ .lake-short }}} involves compacting or purging historical data to save storage space and enhance query performance.
+Optimizing a table in {{{ .lake }}} involves compacting or purging historical data to save storage space and enhance query performance.
 
 <details>
   <summary>Why Optimize?</summary>
-    <div>{{{ .lake-short }}} stores data in tables using the Parquet format, which is organized into blocks. Additionally, {{{ .lake-short }}} supports time travel functionality, where each operation that modifies a table generates a Parquet file that captures and reflects the changes made to the table.</div><br/>
+    <div>{{{ .lake }}} stores data in tables using the Parquet format, which is organized into blocks. Additionally, {{{ .lake }}} supports time travel functionality, where each operation that modifies a table generates a Parquet file that captures and reflects the changes made to the table.</div><br/>
 
    <div>As a table accumulates more Parquet files over time, it can lead to performance issues and increased storage requirements. To optimize the table's performance, historical Parquet files can be deleted when they are no longer needed. This optimization can help to improve query performance and reduce the amount of storage space used by the table.</div>
 </details>
 
-## {{{ .lake-short }}} Data Storage: Snapshot, Segment, and Block
+## {{{ .lake }}} Data Storage: Snapshot, Segment, and Block
 
-Snapshot, segment, and block are the concepts {{{ .lake-short }}} uses for data storage. {{{ .lake-short }}} uses them to construct a hierarchical structure for storing table data.
+Snapshot, segment, and block are the concepts {{{ .lake }}} uses for data storage. {{{ .lake }}} uses them to construct a hierarchical structure for storing table data.
 
 ![Data storage structure](/media/tidb-cloud-lake/storage-structure.PNG)
 
-{{{ .lake-short }}} automatically creates table snapshots upon data updates. A snapshot represents a version of the table's segment metadata.
+{{{ .lake }}} automatically creates table snapshots upon data updates. A snapshot represents a version of the table's segment metadata.
 
-When working with {{{ .lake-short }}}, you're most likely to access a snapshot with the snapshot ID when you retrieve and query a previous version of the table's data with the [AT](/tidb-cloud-lake/sql/at.md) clause.
+When working with {{{ .lake }}}, you're most likely to access a snapshot with the snapshot ID when you retrieve and query a previous version of the table's data with the [AT](/tidb-cloud-lake/sql/at.md) clause.
 
 A snapshot is a JSON file that does not save the table's data but indicate the segments the snapshot links to. If you run [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md) against a table, you can find the saved snapshots for the table.
 
@@ -34,7 +34,7 @@ A segment is a JSON file that organizes the storage blocks (at least 1, at most 
 
 Databends saves actual table data in parquet files and considers each parquet file as a block. If you run [FUSE_BLOCK](/tidb-cloud-lake/sql/fuse-block.md) against a snapshot with the snapshot ID, you can find which blocks are referenced by the snapshot.
 
-{{{ .lake-short }}} creates a unique ID for each database and table for storing the snapshot, segment, and block files and saves them to your object storage in the path `<bucket_name>/<tenant_id>/<db_id>/<table_id>/`. Each snapshot, segment, and block file is named with a UUID (32-character lowercase hexadecimal string).
+{{{ .lake }}} creates a unique ID for each database and table for storing the snapshot, segment, and block files and saves them to your object storage in the path `<bucket_name>/<tenant_id>/<db_id>/<table_id>/`. Each snapshot, segment, and block file is named with a UUID (32-character lowercase hexadecimal string).
 
 | File     | Format  | Filename                        | Storage Folder                                      |
 |----------|---------|---------------------------------|-----------------------------------------------------|
@@ -44,9 +44,9 @@ Databends saves actual table data in parquet files and considers each parquet fi
 
 ## Table Optimizations
 
-In {{{ .lake-short }}}, it's advisable to aim for an ideal block size of either 100MB (uncompressed) or 1,000,000 rows, with each segment consisting of 1,000 blocks. To maximize table optimization, it's crucial to gain a clear understanding of when and how to apply various optimization techniques, such as [Segment Compaction](#segment-compaction) and [Block Compaction](#block-compaction).
+In {{{ .lake }}}, it's advisable to aim for an ideal block size of either 100MB (uncompressed) or 1,000,000 rows, with each segment consisting of 1,000 blocks. To maximize table optimization, it's crucial to gain a clear understanding of when and how to apply various optimization techniques, such as [Segment Compaction](#segment-compaction) and [Block Compaction](#block-compaction).
 
-- When using the COPY INTO or REPLACE INTO command to write data into a table that includes a cluster key, {{{ .lake-short }}} will automatically initiate a re-clustering process, as well as a segment and block compact process.
+- When using the COPY INTO or REPLACE INTO command to write data into a table that includes a cluster key, {{{ .lake }}} will automatically initiate a re-clustering process, as well as a segment and block compact process.
 
 - Segment & block compactions support distributed execution in cluster environments. You can enable them by setting ENABLE_DISTRIBUTED_COMPACT to 1. This helps enhance data query performance and scalability in cluster environments.
 
@@ -80,7 +80,7 @@ OPTIMIZE TABLE [database.]table_name COMPACT SEGMENT [LIMIT <segment_count>]
 
 Compacts the table data by merging small segments into larger ones.
 
-- The option LIMIT sets the maximum number of segments to be compacted. In this case, {{{ .lake-short }}} will select and compact the latest segments.
+- The option LIMIT sets the maximum number of segments to be compacted. In this case, {{{ .lake }}} will select and compact the latest segments.
 
 **Example**
 
@@ -164,9 +164,9 @@ Compacts the table data by merging small blocks and segments into larger ones.
 
 - Depending on the size of the given table, it may take quite a while to complete the execution.
 
-- The option LIMIT sets the maximum number of segments to be compacted. In this case, {{{ .lake-short }}} will select and compact the latest segments.
+- The option LIMIT sets the maximum number of segments to be compacted. In this case, {{{ .lake }}} will select and compact the latest segments.
 
-- {{{ .lake-short }}} will automatically re-cluster a clustered table after the compacting process.
+- {{{ .lake }}} will automatically re-cluster a clustered table after the compacting process.
 
 **Example**
 

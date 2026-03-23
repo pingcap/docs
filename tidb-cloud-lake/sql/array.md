@@ -11,7 +11,7 @@ summary: Array of defined data type.
 
 > **Note:**
 >
-> {{{ .lake-short }}} arrays are 1-based. `arr[1]` returns the first element and `arr[n]` the last.
+> {{{ .lake }}} arrays are 1-based. `arr[1]` returns the first element and `arr[n]` the last.
 
 ## Examples
 

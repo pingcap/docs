@@ -1,11 +1,11 @@
 ---
 title: Aggregate Functions
-summary: This page provides a comprehensive overview of aggregate functions in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of aggregate functions in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Aggregate Functions
 
-This page provides a comprehensive overview of aggregate functions in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of aggregate functions in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Basic Aggregation
 

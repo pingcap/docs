@@ -8,7 +8,7 @@ summary: Use Debezium CDC to migrate MySQL data to TiDB Cloud Lake with continuo
 > **Capabilities**: CDC, Full Load
 > **✅ Recommended** for real-time migration with complete change data capture
 
-In this tutorial, you will load data from MySQL to {{{ .lake-short }}} with Debezium. Before you start, make sure you have successfully set up {{{ .lake-short }}}, MySQL, and Debezium in your environment.
+In this tutorial, you will load data from MySQL to {{{ .lake }}} with Debezium. Before you start, make sure you have successfully set up {{{ .lake }}}, MySQL, and Debezium in your environment.
 
 ## Step 1. Prepare Data in MySQL
 
@@ -33,9 +33,9 @@ INSERT INTO products VALUES (default,"scooter","Small 2-wheel scooter"),
 (default,"spare tire","24 inch spare tire");
 ```
 
-## Step 2. Create database in {{{ .lake-short }}}
+## Step 2. Create database in {{{ .lake }}}
 
-Create the corresponding database in {{{ .lake-short }}}. Please note that you don't need to create a table that corresponds to the one in MySQL.
+Create the corresponding database in {{{ .lake }}}. Please note that you don't need to create a table that corresponds to the one in MySQL.
 
 ```sql
 CREATE DATABASE debezium;
@@ -45,7 +45,7 @@ CREATE DATABASE debezium;
 
 Create the file _application.properties_, then start debezium-server-databend. For how to install and start the tool, see [Installing debezium-server-databend](/tidb-cloud-lake/guides/load-with-debezium.md#installing-debezium-server-databend).
 
-When started for the first time, the tool performs a full synchronization of data from MySQL to {{{ .lake-short }}} using the specified Batch Size. As a result, the data from MySQL is now visible in {{{ .lake-short }}} after successful replication.
+When started for the first time, the tool performs a full synchronization of data from MySQL to {{{ .lake }}} using the specified Batch Size. As a result, the data from MySQL is now visible in {{{ .lake }}} after successful replication.
 
 ```text title='application.properties'
 debezium.sink.type=databend
@@ -94,4 +94,4 @@ quarkus.log.level=INFO
 quarkus.log.category."org.eclipse.jetty".level=WARN
 ```
 
-You're all set! If you query the products table in {{{ .lake-short }}}, you will see that the data from MySQL has been successfully synchronized. Feel free to perform insertions, updates, or deletions in MySQL, and you will observe the corresponding changes reflected in {{{ .lake-short }}} as well.
+You're all set! If you query the products table in {{{ .lake }}}, you will see that the data from MySQL has been successfully synchronized. Feel free to perform insertions, updates, or deletions in MySQL, and you will observe the corresponding changes reflected in {{{ .lake }}} as well.

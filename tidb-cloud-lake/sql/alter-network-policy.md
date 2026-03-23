@@ -1,6 +1,6 @@
 ---
 title: ALTER NETWORK POLICY
-summary: Modifies an existing network policy in {{{ .lake-short }}}.
+summary: Modifies an existing network policy in {{{ .lake }}}.
 ---
 
 # ALTER NETWORK POLICY
@@ -9,7 +9,7 @@ summary: Modifies an existing network policy in {{{ .lake-short }}}.
 >
 > Introduced or updated in v1.2.26.
 
-Modifies an existing network policy in {{{ .lake-short }}}.
+Modifies an existing network policy in {{{ .lake }}}.
 
 ## Syntax
 

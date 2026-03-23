@@ -9,7 +9,7 @@ summary: Query the history for a specific query using its query_id.
 >
 > Introduced or updated in v1.2.764.
 
-**Complete SQL execution audit trail** - Records comprehensive details of all SQL queries executed in {{{ .lake-short }}}. Each query generates two entries (start and finish), providing complete visibility into:
+**Complete SQL execution audit trail** - Records comprehensive details of all SQL queries executed in {{{ .lake }}}. Each query generates two entries (start and finish), providing complete visibility into:
 
 - **Performance Analysis**: Query duration, resource usage, and optimization opportunities
 - **Security Auditing**: Who executed what queries, when, and from where

@@ -7,17 +7,17 @@ summary: Flashback a table to an earlier version with a snapshot ID or timestamp
 
 Flashback a table to an earlier version with a snapshot ID or timestamp, only involving metadata operations, making it a fast process.
 
-By the snapshot ID or timestamp you specify in the command, {{{ .lake-short }}} flashback the table to a prior state where the snapshot was created. To retrieve snapshot IDs and timestamps of a table, use [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md).
+By the snapshot ID or timestamp you specify in the command, {{{ .lake }}} flashback the table to a prior state where the snapshot was created. To retrieve snapshot IDs and timestamps of a table, use [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md).
 
 The capability to flash back a table is subject to these conditions:
 
 - The command only existing tables to their prior states. To recover a dropped table, use [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md).
 
-- Flashback a table is part of {{{ .lake-short }}}'s time travel feature. Before using the command, make sure the table you want to flashback is eligible for time travel. For example, the command doesn't work for transient tables because {{{ .lake-short }}} does not create or store snapshots for such tables.
+- Flashback a table is part of {{{ .lake }}}'s time travel feature. Before using the command, make sure the table you want to flashback is eligible for time travel. For example, the command doesn't work for transient tables because {{{ .lake }}} does not create or store snapshots for such tables.
 
 - You cannot roll back after flashback a table to a prior state, but you can flash back the table again to an earlier state.
 
-- {{{ .lake-short }}} recommends this command for emergency recovery only. To query the history data of a table, use the [AT](/tidb-cloud-lake/sql/at.md) clause.
+- {{{ .lake }}} recommends this command for emergency recovery only. To query the history data of a table, use the [AT](/tidb-cloud-lake/sql/at.md) clause.
 
 ## Syntax
 

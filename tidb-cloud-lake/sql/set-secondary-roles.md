@@ -64,7 +64,7 @@ This example shows how secondary roles work and how to active/deactivate them.
 
 5. Setting active role.
 
-    Now, let's log in to {{{ .lake-short }}} as `user1`, the set the active role to `analyst`.
+    Now, let's log in to {{{ .lake }}} as `user1`, the set the active role to `analyst`.
 
     ```sql
     SET ROLE analyst;

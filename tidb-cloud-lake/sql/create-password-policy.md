@@ -1,6 +1,6 @@
 ---
 title: CREATE PASSWORD POLICY
-summary: Creates a new password policy in {{{ .lake-short }}}.
+summary: Creates a new password policy in {{{ .lake }}}.
 ---
 
 # CREATE PASSWORD POLICY
@@ -9,7 +9,7 @@ summary: Creates a new password policy in {{{ .lake-short }}}.
 >
 > Introduced or updated in v1.2.339.
 
-Creates a new password policy in {{{ .lake-short }}}.
+Creates a new password policy in {{{ .lake }}}.
 
 ## Syntax
 
