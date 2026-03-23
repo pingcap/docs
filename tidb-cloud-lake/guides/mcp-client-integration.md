@@ -26,7 +26,7 @@ We recommend using **{{{ .lake }}}** for the best experience.
 2. Click **Use with AI Tools** in the navigation bar.
 3. Select regular connection information (Host, User, Password, etc.).
 4. Copy your DSN, which looks like:
-    `databend://user:pwd@host:443/database?warehouse=warehouse_name`
+    `lake://user:pwd@host:443/database?warehouse=warehouse_name`
 
 ![Use with AI Tools](/media/tidb-cloud-lake/ai-tools.png)
 
@@ -38,7 +38,7 @@ We recommend using **{{{ .lake }}}** for the best experience.
 
 ```bash
 codex mcp add databend \
-  --env DATABEND_DSN='databend://user:password@host:port/database?warehouse=your_warehouse' \
+  --env DATABEND_DSN='lake://user:password@host:port/database?warehouse=your_warehouse' \
   --env SAFE_MODE='false' \
   -- uv tool run mcp-databend
 ```
@@ -51,7 +51,7 @@ command = "uv"
 args = ["tool", "run", "mcp-databend"]
 
 [mcp_servers.databend.env]
-DATABEND_DSN = "databend://user:password@host:port/database?warehouse=your_warehouse"
+DATABEND_DSN = "lake://user:password@host:port/database?warehouse=your_warehouse"
 SAFE_MODE = "false"
 ```
 
@@ -61,7 +61,7 @@ SAFE_MODE = "false"
 
 ```bash
 claude mcp add databend \
-  --env DATABEND_DSN='databend://user:password@host:port/database?warehouse=your_warehouse' \
+  --env DATABEND_DSN='lake://user:password@host:port/database?warehouse=your_warehouse' \
   --env SAFE_MODE='false' \
   -- uv tool run mcp-databend
 ```
@@ -79,7 +79,7 @@ Add to `~/.gemini/settings.json`:
       "command": "uv",
       "args": ["tool", "run", "mcp-databend"],
       "env": {
-        "DATABEND_DSN": "databend://user:password@host:port/database?warehouse=your_warehouse",
+        "DATABEND_DSN": "lake://user:password@host:port/database?warehouse=your_warehouse",
         "SAFE_MODE": "false"
       }
     }
@@ -100,7 +100,7 @@ Add to `~/.cursor/mcp.json`:
       "command": "uv",
       "args": ["tool", "run", "mcp-databend"],
       "env": {
-        "DATABEND_DSN": "databend://user:password@host:port/database?warehouse=your_warehouse",
+        "DATABEND_DSN": "lake://user:password@host:port/database?warehouse=your_warehouse",
         "SAFE_MODE": "false"
       }
     }
@@ -121,7 +121,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
       "command": "uv",
       "args": ["tool", "run", "mcp-databend"],
       "env": {
-        "DATABEND_DSN": "databend://user:password@host:port/database?warehouse=your_warehouse",
+        "DATABEND_DSN": "lake://user:password@host:port/database?warehouse=your_warehouse",
         "SAFE_MODE": "false"
       }
     }
@@ -142,7 +142,7 @@ Add to `.vscode/mcp.json`:
       "command": "uv",
       "args": ["tool", "run", "mcp-databend"],
       "env": {
-        "DATABEND_DSN": "databend://user:password@host:port/database?warehouse=your_warehouse",
+        "DATABEND_DSN": "lake://user:password@host:port/database?warehouse=your_warehouse",
         "SAFE_MODE": "false"
       }
     }
@@ -155,7 +155,7 @@ Add to `.vscode/mcp.json`:
 <div label="Manual" value="manual">
 
 ```bash
-export DATABEND_DSN="databend://user:password@host:port/database?warehouse=your_warehouse"
+export DATABEND_DSN="lake://user:password@host:port/database?warehouse=your_warehouse"
 export SAFE_MODE="false"
 
 uv tool run mcp-databend

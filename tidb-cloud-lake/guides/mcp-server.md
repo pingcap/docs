@@ -37,12 +37,9 @@ If you don't already have a {{{ .lake }}} database:
 2. **Create a warehouse and database**
 3. **Get your connection string** from the console
 
-For detailed DSN format and examples, see [Connection String Documentation](https://docs.databend.com/developer/drivers/#connection-string-dsn).
-
 | Deployment         | Connection String Example                                     |
 | ------------------ | ------------------------------------------------------------- |
-| **{{{ .lake }}}** | `databend://user:pwd@host:443/database?warehouse=wh`          |
-| **Self-hosted**    | `databend://user:pwd@localhost:8000/database?sslmode=disable` |
+| **{{{ .lake }}}** | `lake://user:pwd@host:443/database?warehouse=wh`          |
 
 ### Step 2: Setup API Keys and Environment
 
@@ -53,7 +50,7 @@ Set up your API key and database connection:
 export DEEPSEEK_API_KEY="your-deepseek-api-key"
 
 # Set your Databend connection string
-export DATABEND_DSN="your-databend-connection-string"
+export DATABEND_DSN="your-lake-connection-string"
 ```
 
 ### Step 3: Install Dependencies
@@ -93,7 +90,7 @@ logger = logging.getLogger(__name__)
 
 def check_env_vars():
     required = {
-        "DATABEND_DSN": "https://docs.databend.com/developer/drivers/#connection-string-dsn",
+        "DATABEND_DSN": "https://docs.tidb.io/tidbcloudlake/driver-overview/#connection-string-dsn",
         "DEEPSEEK_API_KEY": "https://platform.deepseek.com/api_keys"
     }
 

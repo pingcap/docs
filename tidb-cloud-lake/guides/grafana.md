@@ -175,8 +175,8 @@ allow_loading_unsigned_plugins = databend-datasource
 2. Click **Add new data source** on the top right corner of the page.
 
 3. Input the `DSN` field for your {{{ .lake }}} instance. For example:
-   - Self-hosted: `databend://root:@localhost:8000?sslmode=disable`
-   - {{{ .lake }}}: `databend://cloudapp:******@tnxxxxxxx.gw.aws-us-east-2.default.databend.com:443/default?warehouse=xsmall-fsta`
+
+    {{{ .lake }}}: `lake://cloudapp:******@tnxxxxxxx.gw.aws-us-east-2.default.databend.com:443/default?warehouse=xsmall-fsta`
 
 4. Optionally, input the `SQL User Password` field to override the password in the `DSN` field.
 

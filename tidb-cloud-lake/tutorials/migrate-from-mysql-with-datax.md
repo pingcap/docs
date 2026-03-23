@@ -72,7 +72,7 @@ In this tutorial, you will load data from MySQL to {{{ .lake }}} with DataX. Bef
                 ],
                 "connection": [
                   {
-                    "jdbcUrl": "jdbc:databend://localhost:8000/migrated_db",
+                    "jdbcUrl": "jdbc:lake://localhost:8000/migrated_db",
                     "table": [
                       "tb01"
                     ]

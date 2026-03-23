@@ -7,15 +7,15 @@ summary: Redash is designed to enable anyone, regardless of the level of technic
 
 [Redash](https://redash.io/) is designed to enable anyone, regardless of the level of technical sophistication, to harness the power of data big and small. SQL users leverage Redash to explore, query, visualize, and share data from any data sources. Their work in turn enables anybody in their organization to use the data. Every day, millions of users at thousands of organizations around the world use Redash to develop insights and make data-driven decisions.
 
-Both {{{ .lake }}} and {{{ .lake }}} can integrate with Redash as a data source. The following tutorials guide you through deploying and integrating Redash.
+{{{ .lake }}} can integrate with Redash as a data source. The following tutorials guide you through deploying and integrating Redash.
 
 ## Tutorial-1: Integrating {{{ .lake }}} with Redash
 
-In this tutorial, you'll deploy a local {{{ .lake }}} and install Redash with Docker. Before you start, ensure that you have Docker installed.
+In this tutorial, you'll deploy a {{{ .lake }}} instance and install Redash with Docker. Before you start, ensure that you have Docker installed.
 
 ### Step 1. Deploy {{{ .lake }}}
 
-Deploy a local {{{ .lake }}}.
+Deploy a {{{ .lake }}} instance.
 
 ### Step 2. Deploy Redash
 

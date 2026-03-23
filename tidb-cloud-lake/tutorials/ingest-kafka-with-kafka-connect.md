@@ -123,7 +123,7 @@ In this step, you will set up a connector that connects to {{{ .lake }}}.
       "connection.backoff.ms": "10000",
       "connection.database": "<your-value>",
       "connection.password": "<your-value>",
-      "connection.url": "jdbc:databend://<your-value>",
+      "connection.url": "jdbc:lake://<your-value>",
       "connection.user": "cloudapp",
       "errors.tolerance": "none",
       "insert.mode": "upsert",

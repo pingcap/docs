@@ -25,7 +25,7 @@ LIST(<expr>)
 
 | Optional                            | Description                                           |
 |-------------------------------------|-------------------------------------------------------|
-| WITHIN GROUP [&lt;orderby_clause&gt;](https://docs.databend.com/sql/sql-commands/query-syntax/query-select#order-by-clause) | Defines the order of values in ordered set aggregates        |
+| WITHIN GROUP [&lt;orderby_clause&gt;](https://docs.tidb.io/tidbcloudlake/select/#order-by-clause) | Defines the order of values in ordered set aggregates        |
 
 ## Return Type
 

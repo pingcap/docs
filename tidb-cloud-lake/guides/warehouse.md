@@ -174,7 +174,7 @@ To obtain the connection information for a warehouse:
 {{{ .lake }}} automatically generates your connection string when you click **Connect**:
 
 ```
-databend://<username>:<password>@<tenant>.gw.<region>.default.databend.com:443/<database>?warehouse=<warehouse_name>
+lake://<username>:<password>@<tenant>.gw.<region>.default.databend.com:443/<database>?warehouse=<warehouse_name>
 ```
 
 Where:

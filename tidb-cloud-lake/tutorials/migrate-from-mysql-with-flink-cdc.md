@@ -260,7 +260,7 @@ You can now open the Apache Flink Dashboard if you go to [http://localhost:8081]
     
     CREATE TABLE databend_products (id INT,name String,description String, PRIMARY KEY (`id`) NOT ENFORCED)
     WITH ('connector' = 'databend',
-    'url'='databend://cloudapp:{password}@{host}:443/{database}?warehouse={warehouse_name}&ssl=true',
+    'url'='lake://cloudapp:{password}@{host}:443/{database}?warehouse={warehouse_name}&ssl=true',
     'database-name'='{database}',
     'table-name'='products',
     'sink.batch-size' = '1',
