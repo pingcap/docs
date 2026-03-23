@@ -10,7 +10,7 @@ summary: This guide explains how to use an experimental Airbyte destination that
 ## What is Airbyte
 
 - [Airbyte](https://airbyte.com/) is an open-source data integration platform that syncs data from applications, APIs & databases to data warehouses lakes & DBs.
-- You could load data from any Airbyte source to {{{ .lake }}}.
+- You can load data from any Airbyte source to {{{ .lake }}}.
 
 Currently we implemented an experimental Airbyte destination allow you to send data from your Airbyte source to {{{ .lake }}}.
 
@@ -57,8 +57,7 @@ GRANT ROLE airbyte_role TO user1;
 
 ## Configure Airbyte
 
-To use {{{ .lake }}} with Airbyte, you should add our customized connector to your Airbyte Instance.
-You could add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page. Our custom destination image is `datafuselabs/destination-databend:alpha`.
+To use {{{ .lake }}} with Airbyte, you should add our customized connector to your Airbyte Instance. You can add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page. Our custom destination image is `datafuselabs/destination-databend:alpha`.
 
 ![Configure Airbyte](/media/tidb-cloud-lake/integration-airbyte-plugins.png)
 
