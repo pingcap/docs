@@ -246,15 +246,15 @@ This section gives the alert rules for the PD component.
 
 #### `PD_cluster_unhealthy_store_nums`
 
-* Alarm Rule:
+* Alert Rule:
 
     `(sum(pd_cluster_status{type="store_unhealth_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Rule Description:
+* Description:
 
-    Indicates that there are stores in an abnormal state. If this state persists for a period of time (depending on the configured [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time), which defaults to `30m`), the store may enter the `Offline` state and trigger the [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums) alarm.
+    Indicates that there are stores in an abnormal state. If this state persists for a period of time (depending on the configured [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time), which defaults to `30m`), the store might enter the `Offline` state and trigger the [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums) alarm.
 
-* Handling Suggestions:
+* Suggestion:
 
     Check the status of TiKV/TiFlash.
 
@@ -357,18 +357,18 @@ This section gives the alert rules for the PD component.
 
 #### `PD_cluster_store_space_used_more_than_80%`
 
-* Alarm Rule:
+* Alert Rule:
 
     `sum(pd_cluster_status{type="storage_size"}) / sum(pd_cluster_status{type="storage_capacity"}) * 100 > 80`
 
-* Rule Description:
+* Description:
 
     The cluster space utilization exceeds 80%.
 
-* Handling Suggestions:
+* Suggestion:
 
-    * Confirm if capacity expansion is needed.
-    * Investigate if any files are occupying a large amount of disk space, such as log files, snapshots, or core dump files.
+    * Check whether it is needed to increase capacity.
+    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, and core dump.
 
 #### `PD_system_time_slow`
 
