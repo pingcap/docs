@@ -33,6 +33,7 @@
     - [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md)
     - [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md)
   - Drivers
+    - [Overview](/tidb-cloud-lake/guides/driver-overview.md)
     - [Golang](/tidb-cloud-lake/guides/connect-using-golang.md)
     - [Java](/tidb-cloud-lake/guides/connect-using-java.md)
     - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)

@@ -25,7 +25,7 @@ The official JDBC driver provides standard JDBC 4.0 compatibility for seamless i
 implementation 'com.databend:databend-jdbc:0.4.1'
 ```
 
-**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
+**Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
@@ -38,7 +38,7 @@ implementation 'com.databend:databend-jdbc:0.4.1'
 
 ## Data Type Mappings
 
-| Databend | Java | Notes |
+| {{{ .lake }}} | Java | Notes |
 |----------|------|---------|
 | **Integers** | | |
 | `TINYINT` | `Byte` | |
@@ -71,7 +71,7 @@ implementation 'com.databend:databend-jdbc:0.4.1'
 ```java
 import java.sql.*;
 
-// Connect to Databend
+// Connect to {{{ .lake }}}
 Connection conn = DriverManager.getConnection("<your-dsn>");
 
 // DDL: Create table

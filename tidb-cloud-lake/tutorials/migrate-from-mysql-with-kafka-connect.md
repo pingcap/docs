@@ -131,7 +131,7 @@ name=databend-sink
 connector.class=com.databend.kafka.connect.DatabendSinkConnector
 
 # Connection settings
-connection.url=jdbc:databend://localhost:8000
+connection.url=jdbc:lake://<your-lake-host>:<port>
 connection.user=databend
 connection.password=databend
 connection.database=default

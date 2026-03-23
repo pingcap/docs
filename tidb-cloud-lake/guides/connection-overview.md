@@ -19,13 +19,11 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 
 | Deployment | Format |
 |------------|--------|
-| **{{{ .lake }}}** | `databend://<user>:<pass>@<tenant>.gw.<region>.default.databend.com:443/<db>?warehouse=<name>` |
-| **Self-Hosted** | `databend://<user>:<pass>@<host>:<port>/<db>` |
+| **{{{ .lake }}}** | `lake://<user>:<pass>@<tenant>.gw.<region>.default.databend.com:443/<db>?warehouse=<name>` |
 
 > **Tip:**
 >
-> - **{{{ .lake }}}**: Log in → Click **Connect** → Copy the generated DSN
-> - **Self-Hosted**: Use your server address with the configured user credentials
+> **{{{ .lake }}}**: Log in → Click **Connect** → Copy the generated DSN
 
 ## SQL Clients
 

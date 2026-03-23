@@ -68,7 +68,7 @@ Alternatively, use a Python script:
 
 ```python
     import databend_driver
-    dsn = "databend://root:@localhost:8000/?sslmode=disable",
+    dsn = "lake://root:@localhost:8000/?sslmode=disable",
     client = databend_driver.BlockingDatabendClient(dsn)
     conn = client.get_conn()
     query = "INSERT INTO book_db.books from @_databend_load file_format=(type=csv)"
@@ -84,7 +84,7 @@ import java.sql.Statement;
 import java.io.FileInputStream;
 import java.nio.file.Files;
 import com.databend.jdbc.DatabendConnection;
-String url = "jdbc:databend://localhost:8000";
+String url = "jdbc:lake://localhost:8000";
 try (FileInputStream fileInputStream = new FileInputStream(new File("book.csv")));
      Connection connection = DriverManager.getConnection(url, "databend", "databend");
       Statement statement = connection.createStatement()) {

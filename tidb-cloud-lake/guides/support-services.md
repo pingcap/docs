@@ -15,7 +15,7 @@ You can access support through multiple channels:
 
 - **Cloud Console**: Log in to the {{{ .lake }}} console and select **Support → Create New Ticket** from the menu options to open a new support case and view the status of your submitted cases.
 - **Status Page**: Subscribe to our [status page](https://status.databend.com) to get notified quickly about any incidents affecting our platform.
-- **Documentation**: Browse our comprehensive [documentation](https://docs.databend.com) for guides, tutorials, and reference materials.
+- **Documentation**: Browse our comprehensive [documentation](https://docs.tidb.io/tidbcloudlake/) for guides, tutorials, and reference materials.
 
 ## Support Service Levels
 

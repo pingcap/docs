@@ -13,7 +13,7 @@ The official Node.js driver provides TypeScript support and Promise-based API fo
 npm install databend-driver
 ```
 
-**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
+**Connection String**: See [driver overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
@@ -26,7 +26,7 @@ npm install databend-driver
 
 ## Data Type Mappings
 
-| Databend | Node.js | Notes |
+| {{{ .lake }}} | Node.js | Notes |
 |----------|---------|-------|
 | **Basic Types** | | |
 | `BOOLEAN` | `boolean` | |
@@ -56,7 +56,7 @@ npm install databend-driver
 ```javascript
 const { Client } = require('databend-driver');
 
-// Connect to Databend
+// Connect to {{{ .lake }}}
 const client = new Client('<your-dsn>');
 const conn = await client.getConn();
 

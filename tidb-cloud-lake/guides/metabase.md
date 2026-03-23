@@ -37,10 +37,7 @@ This tutorial guides you through the process of integrating {{{ .lake }}} / {{{ 
 
 To follow along, you'll need to install Metabase with Docker. Before you begin, make sure that Docker is installed on your system.
 
-For this tutorial, you can integrate either with {{{ .lake }}} or {{{ .lake }}}:
-
-- If you choose to integrate with a local {{{ .lake }}} instance, deploy it if you don't have one already.
-- If you prefer to integrate with {{{ .lake }}}, make sure you can log in to your account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+For this tutorial, you will integrate with {{{ .lake }}}. Make sure you can log in to your TiDB Cloud account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
 ### Step 2. Deploy Metabase
 

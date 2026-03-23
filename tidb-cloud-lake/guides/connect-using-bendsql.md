@@ -1,13 +1,13 @@
 ---
 title: BendSQL
-summary: BendSQL is a command line tool that has been designed specifically for Databend. It allows users to establish a connection with Databend and execute queries directly from a CLI window.
+summary: BendSQL is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 ---
 
 # BendSQL
 
-[BendSQL](https://github.com/databendlabs/bendsql) is a command line tool that has been designed specifically for Databend. It allows users to establish a connection with Databend and execute queries directly from a CLI window.
+[BendSQL](https://github.com/databendlabs/bendsql) is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 
-BendSQL is particularly useful for those who prefer a command line interface and need to work with Databend on a regular basis. With BendSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
+BendSQL is particularly useful for those who prefer a command line interface and need to work with {{{ .lake }}} on a regular basis. With BendSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
 
 ## Installing BendSQL
 
@@ -33,8 +33,8 @@ curl -fsSL https://repo.databend.com/install/bendsql.sh | bash
                                     Installer
 
 --------------------------------------------------------------------------------
-Website: https://databend.com
-Docs: https://docs.databend.com
+Website: https://tidbcloud.com
+Docs: https://docs.tidb.io/tidbcloudlake/
 Github: https://github.com/databendlabs/bendsql
 --------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ curl -fsSL https://repo.databend.com/install/bendsql.sh | bash -s -- -y --prefix
                                     Installer
 
 --------------------------------------------------------------------------------
-Website: https://databend.com
+Website: https://tidbcloud.com
 Docs: https://docs.databend.com
 Github: https://github.com/databendlabs/bendsql
 --------------------------------------------------------------------------------
@@ -146,17 +146,15 @@ cargo install bendsql
 
 ## User Authentication
 
-If you are connecting to a self-hosted Databend instance, you can use the admin users specified in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or you can connect using an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command.
-
-For connections to Databend Cloud, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Please note that the user account you use to log in to the [Databend Cloud console](https://app.databend.com) cannot be used for connecting to Databend Cloud.
+For connections to {{{ .lake }}}, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Note that the user account you use to log in to the [{{{ .lake }}} console](https://app.lake.tidbcloud.com) cannot be used for connecting to {{{ .lake }}}.
 
 ## Connecting with BendSQL
 
-BendSQL allows you to connect to both Databend Cloud and self-hosted Databend instances.
+BendSQL allows you to connect to both {{{ .lake }}} instances.
 
 ### Customize Connections with a DSN
 
-A DSN (Data Source Name) is a simple yet powerful way to configure and manage your Databend connection in BendSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
+A DSN (Data Source Name) is a simple yet powerful way to configure and manage your {{{ .lake }}} connection in BendSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
 
 #### DSN Format and Parameters
 
@@ -166,8 +164,8 @@ databend[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&ar
 
 | Common DSN Parameters | Description                          |
 |-----------------------|--------------------------------------|
-| `tenant`              | Tenant ID, Databend Cloud only.      |
-| `warehouse`           | Warehouse name, Databend Cloud only. |
+| `tenant`              | Tenant ID, {{{ .lake }}} only.      |
+| `warehouse`           | Warehouse name, {{{ .lake }}} only. |
 | `sslmode`             | Set to `disable` if not using TLS.   |
 | `tls_ca_file`         | Custom root CA certificate path.     |
 | `connect_timeout`     | Connect timeout in seconds.          |
@@ -178,7 +176,7 @@ databend[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&ar
 | `max_rows_in_buffer`        | Maximum rows for page buffer.                                                                                                 |
 | `max_rows_per_page`         | Maximum response rows for a single page.                                                                                      |
 | `page_request_timeout_secs` | Timeout for a single page request, default is `30`.                                                                           |
-| `presign`                   | Enable presign for data loading. Options: `auto`, `detect`, `on`, `off`. Default is `auto` (only enabled for Databend Cloud). |
+| `presign`                   | Enable presign for data loading. Options: `auto`, `detect`, `on`, `off`. Default is `auto` (only enabled for {{{ .lake }}}). |
 
 | FlightSQL Client Parameters | Description                                                          |
 |-----------------------------|----------------------------------------------------------------------|
@@ -193,54 +191,29 @@ databend[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&ar
 
 ```bash
 # Local connection using HTTP API with presign detection
-databend://root:@localhost:8000/?sslmode=disable&presign=detect
+lake://root:@localhost:8000/?sslmode=disable&presign=detect
 
-# Databend Cloud connection with tenant and warehouse info
-databend://user1:password1@tnxxxx--default.gw.aws-us-east-2.default.databend.com:443/benchmark?enable_dphyp=1
+# {{{ .lake }}} connection with tenant and warehouse info
+lake://user1:password1@tnxxxx--default.gw.aws-us-east-2.default.databend.com:443/benchmark?enable_dphyp=1
 
 # Local connection using FlightSQL API
-databend+flight://root:@localhost:8900/database1?connect_timeout=10
+lake+flight://root:@localhost:8900/database1?connect_timeout=10
 ```
 
-### Connect to Databend Cloud
+### Connect to {{{ .lake }}}
 
-The best practice for connecting to Databend Cloud is to obtain your DSN from Databend Cloud and export it as an environment variable. To obtain your DSN:
+The best practice for connecting to {{{ .lake }}} is to obtain your DSN from {{{ .lake }}} and export it as an environment variable. To obtain your DSN:
 
-1. Log in to Databend Cloud and click **Connect** on the **Overview** page.
+1. Log in to {{{ .lake }}} and click **Connect** on the **Overview** page.
 
 2. Select the database and warehouse you want to connect to.
 
 3. Your DSN will be automatically generated in the **Examples** section. Below the DSN, you'll find a BendSQL snippet that exports the DSN as an environment variable named `BENDSQL_DSN` and launches BendSQL with the correct configuration. You can copy and paste it directly into your terminal.
 
-  ```bash title='Example'
-  export BENDSQL_DSN="databend://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.databend.com:443/information_schema?warehouse=small-xy2t"
-  bendsql
-  ```
-
-### Connect to Self-hosted Databend
-
-You can connect to a self-hosted Databend instance using either BendSQL command-line arguments or a DSN.
-
-#### Option 1: Use BendSQL Arguments
-
-```bash
-bendsql --host <HOST> --port <PORT> --user <USER> --password <PASSWORD> --database <DATABASE>
-```
-
-This example connects to a Databend instance running locally on port `8000` using `eric` as the user:
-
-```bash title='Example'
-bendsql --host 127.0.0.1 --port 8000 --user eric --password abc123
-```
-
-#### Option 2: Use a DSN
-
-You can also define the connection using a DSN and export it as the `BENDSQL_DSN` environment variable:
-
-```bash title='Example'
-export BENDSQL_DSN="databend://eric:abc123@localhost:8000/?sslmode=disable"
-bendsql
-```
+    ```bash title='Example'
+    export BENDSQL_DSN="lake://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.databend.com:443/information_schema?warehouse=small-xy2t"
+    bendsql
+    ```
 
 ## BendSQL Settings
 
@@ -427,7 +400,7 @@ root@localhost:8000/default> select * from system.settings;
 │ storage... │ 1048576 │ 1048576 │ None     │ DEFAULT │ Sets the byte size of the buff... │ UInt64 │
 │ table_l... │ 10      │ 10      │ None     │ DEFAULT │ Sets the seconds that the tabl... │ UInt64 │
 │ timezone   │ UTC     │ UTC     │ None     │ DEFAULT │ Sets the timezone.                │ String │
-│ unquote... │ 0       │ 0       │ None     │ DEFAULT │ Determines whether Databend tr... │ UInt64 │
+│ unquote... │ 0       │ 0       │ None     │ DEFAULT │ Determines whether {{{ .lake }}} tr... │ UInt64 │
 │ use_par... │ 0       │ 0       │ [0, 1]   │ DEFAULT │ This setting is deprecated        │ UInt64 │
 │ 96 rows    │         │         │          │         │                                   │        │
 │ (10 shown) │         │         │          │         │                                   │        │
@@ -607,13 +580,13 @@ For examples of each command, please refer to the reference information below:
 
 ### `!exit`
 
-Disconnects from Databend and exits BendSQL.
+Disconnects from {{{ .lake }}} and exits BendSQL.
 
 ```shell title='Example:'
 ➜  ~ bendsql
 Welcome to BendSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
+Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
 // highlight-next-line
 root@localhost:8000/default> !exit
@@ -622,13 +595,13 @@ Bye~
 
 ### `!quit`
 
-Disconnects from Databend and exits BendSQL.
+Disconnects from {{{ .lake }}} and exits BendSQL.
 
 ```shell title='Example:'
 ➜  ~ bendsql
 Welcome to BendSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
+Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
 // highlight-next-line
 root@localhost:8000/default> !quit
@@ -686,7 +659,7 @@ INSERT INTO test_table (id, name) VALUES (3, 'Charlie');
 ➜  ~ bendsql
 Welcome to BendSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
+Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
 // highlight-next-line
 root@localhost:8000/default> !source ./desktop/test.sql
