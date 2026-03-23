@@ -356,6 +356,7 @@ If you are in the `Organization Owner` or `Project Owner` role, you can move a T
 
 To move a TiDB X instance, take the following steps:
 
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
 
 2. In the project view, expand the project folder that contains the TiDB X instance to be moved, click **...** for the target TiDB X instance, and then click **Move**.
 
