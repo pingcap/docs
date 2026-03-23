@@ -1,11 +1,11 @@
 ---
 title: DML (Data Manipulation Language) Commands
-summary: This page provides reference information for the DML (Data Manipulation Language) commands in {{{ .lake-short }}}.
+summary: This page provides reference information for the DML (Data Manipulation Language) commands in {{{ .lake }}}.
 ---
 
 # DML (Data Manipulation Language) Commands
 
-This page provides reference information for the DML (Data Manipulation Language) commands in {{{ .lake-short }}}.
+This page provides reference information for the DML (Data Manipulation Language) commands in {{{ .lake }}}.
 
 ## Data Modification
 

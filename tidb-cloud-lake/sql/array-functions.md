@@ -1,11 +1,11 @@
 ---
 title: Array Functions
-summary: This section provides reference information for array functions in {{{ .lake-short }}}. Array functions enable creation, manipulation, searching, and transformation of array data structures.
+summary: This section provides reference information for array functions in {{{ .lake }}}. Array functions enable creation, manipulation, searching, and transformation of array data structures.
 ---
 
 # Array Functions
 
-This section provides reference information for array functions in {{{ .lake-short }}}. Array functions enable creation, manipulation, searching, and transformation of array data structures.
+This section provides reference information for array functions in {{{ .lake }}}. Array functions enable creation, manipulation, searching, and transformation of array data structures.
 
 ## Array Creation & Construction
 

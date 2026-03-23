@@ -1,11 +1,11 @@
 ---
 title: Query Syntax
-summary: This page provides reference information for the query syntax in {{{ .lake-short }}}. Each component can be used individually or combined to build powerful queries.
+summary: This page provides reference information for the query syntax in {{{ .lake }}}. Each component can be used individually or combined to build powerful queries.
 ---
 
 # Query Syntax
 
-This page provides reference information for the query syntax in {{{ .lake-short }}}. Each component can be used individually or combined to build powerful queries.
+This page provides reference information for the query syntax in {{{ .lake }}}. Each component can be used individually or combined to build powerful queries.
 
 ## Core Query Components
 
@@ -46,7 +46,7 @@ This page provides reference information for the query syntax in {{{ .lake-short
 
 ## Query Structure
 
-A typical {{{ .lake-short }}} query follows this structure:
+A typical {{{ .lake }}} query follows this structure:
 
 ```sql
 [WITH cte_expressions]

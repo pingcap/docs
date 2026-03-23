@@ -1,11 +1,11 @@
 ---
 title: Network Policy
-summary: This page provides a comprehensive overview of Network Policy operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Network Policy operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Network Policy
 
-This page provides a comprehensive overview of Network Policy operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of Network Policy operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Network Policy Management
 
@@ -28,4 +28,4 @@ This page provides a comprehensive overview of Network Policy operations in {{{ 
 
 > **Note:**
 >
-> Network policies in {{{ .lake-short }}} allow you to control access to your database by specifying allowed or blocked IP addresses and ranges.
+> Network policies in {{{ .lake }}} allow you to control access to your database by specifying allowed or blocked IP addresses and ranges.

@@ -1,6 +1,6 @@
 ---
 title: DESC MASKING POLICY
-summary: Displays detailed information about a specific masking policy in {{{ .lake-short }}}.
+summary: Displays detailed information about a specific masking policy in {{{ .lake }}}.
 ---
 
 # DESC MASKING POLICY
@@ -9,7 +9,7 @@ summary: Displays detailed information about a specific masking policy in {{{ .l
 >
 > Introduced or updated in v1.2.845.
 
-Displays detailed information about a specific masking policy in {{{ .lake-short }}}.
+Displays detailed information about a specific masking policy in {{{ .lake }}}.
 
 ## Syntax
 

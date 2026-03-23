@@ -24,7 +24,7 @@ Analytical queries on large datasets face significant performance challenges:
 ## How It Works
 
 1. **Index Creation** → Define aggregation queries to precompute
-2. **Result Storage** → {{{ .lake-short }}} stores aggregated results in optimized blocks
+2. **Result Storage** → {{{ .lake }}} stores aggregated results in optimized blocks
 3. **Query Matching** → Incoming queries automatically use precomputed results
 4. **Automatic Updates** → Results refresh when underlying data changes
 

@@ -1,11 +1,11 @@
 ---
 title: Data Integration
-summary: The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake-short }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
+summary: The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
 ---
 
 # Data Integration
 
-The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake-short }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
+The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
 
 ## Supported Data Sources
 
@@ -27,7 +27,7 @@ A data source represents a connection to an external system. It stores the crede
 
 ### Integration Task
 
-An integration task defines how data flows from a source to a target table in {{{ .lake-short }}}. Each task specifies the source configuration, target warehouse and table, and operational parameters specific to the data source type.
+An integration task defines how data flows from a source to a target table in {{{ .lake }}}. Each task specifies the source configuration, target warehouse and table, and operational parameters specific to the data source type.
 
 ## Managing Data Sources
 

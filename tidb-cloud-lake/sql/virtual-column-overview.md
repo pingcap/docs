@@ -1,11 +1,11 @@
 ---
 title: Virtual Column
-summary: This page provides a comprehensive overview of virtual column operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of virtual column operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Virtual Column
 
-This page provides a comprehensive overview of virtual column operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of virtual column operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Virtual Column Management
 

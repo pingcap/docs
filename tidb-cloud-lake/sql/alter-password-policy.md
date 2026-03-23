@@ -1,6 +1,6 @@
 ---
 title: ALTER PASSWORD POLICY
-summary: Modifies an existing password policy in {{{ .lake-short }}}.
+summary: Modifies an existing password policy in {{{ .lake }}}.
 ---
 
 # ALTER PASSWORD POLICY
@@ -9,7 +9,7 @@ summary: Modifies an existing password policy in {{{ .lake-short }}}.
 >
 > Introduced or updated in v1.2.283.
 
-Modifies an existing password policy in {{{ .lake-short }}}.
+Modifies an existing password policy in {{{ .lake }}}.
 
 ## Syntax
 

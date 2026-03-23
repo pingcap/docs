@@ -1,6 +1,6 @@
 ---
 title: CREATE MASKING POLICY
-summary: Creates a new masking policy in {{{ .lake-short }}}.
+summary: Creates a new masking policy in {{{ .lake }}}.
 ---
 
 # CREATE MASKING POLICY
@@ -9,7 +9,7 @@ summary: Creates a new masking policy in {{{ .lake-short }}}.
 >
 > Introduced or updated in v1.2.845.
 
-Creates a new masking policy in {{{ .lake-short }}}.
+Creates a new masking policy in {{{ .lake }}}.
 
 ## Syntax
 
@@ -40,7 +40,7 @@ CREATE [ OR REPLACE ] MASKING POLICY [ IF NOT EXISTS ] <policy_name> AS
 |:----------|:------------|
 | CREATE MASKING POLICY | Required to create or replace a masking policy. Typically granted on `*.*`. |
 
-{{{ .lake-short }}} automatically grants OWNERSHIP on the new masking policy to the current role so that it can manage the policy with others.
+{{{ .lake }}} automatically grants OWNERSHIP on the new masking policy to the current role so that it can manage the policy with others.
 
 ## Examples
 

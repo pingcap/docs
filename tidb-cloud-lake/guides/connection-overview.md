@@ -1,11 +1,11 @@
 ---
 title: Connect to TiDB Cloud Lake
-summary: TiDB Cloud Lake supports multiple connection methods to suit different use cases. All options below work with both **TiDB Cloud Lake** and **self-hosted {{{ .lake-short }}}**.
+summary: TiDB Cloud Lake supports multiple connection methods to suit different use cases. All options below work with both **TiDB Cloud Lake** and **self-hosted {{{ .lake }}}**.
 ---
 
 # Connect to TiDB Cloud Lake
 
-{{{ .lake-short }}} supports multiple connection methods to suit different use cases. All options below work with both **{{{ .lake }}}** and **self-hosted {{{ .lake-short }}}**.
+{{{ .lake }}} supports multiple connection methods to suit different use cases. All options below work with both **{{{ .lake }}}** and **self-hosted {{{ .lake }}}**.
 
 ## Quick Selection
 

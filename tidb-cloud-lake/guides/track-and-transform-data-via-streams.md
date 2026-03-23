@@ -1,11 +1,11 @@
 ---
 title: Tracking and Transforming Data via Streams
-summary: A stream in {{{ .lake-short }}} is an always-on change table every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
+summary: A stream in {{{ .lake }}} is an always-on change table every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
 ---
 
 # Tracking and Transforming Data via Streams
 
-A stream in {{{ .lake-short }}} is an always-on change table: every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
+A stream in {{{ .lake }}} is an always-on change table: every committed INSERT, UPDATE, or DELETE is captured until you consume it. This page stays lean—first a quick overview, then one lab with real outputs so you can see streams in action.
 
 ## Stream Overview
 
@@ -20,7 +20,7 @@ A stream in {{{ .lake-short }}} is an always-on change table: every committed IN
 
 ## Example 1: Append-Only Stream
 
-Run the statements below in any {{{ .lake-short }}} deployment (Cloud worksheet or local) to see how the default append-only mode captures and consumes inserts.
+Run the statements below in any {{{ .lake }}} deployment (Cloud worksheet or local) to see how the default append-only mode captures and consumes inserts.
 
 ### 1. Create table and stream
 
@@ -110,7 +110,7 @@ Output:
 
 ## Example 3: Incremental Stream Join
 
-Join multiple append-only streams to produce incremental KPIs. Because {{{ .lake-short }}} streams keep new rows until they are consumed, you can run the same query after each load. Every execution drains only the new rows via [`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md), so updates that arrive at different times are still matched on the next iteration.
+Join multiple append-only streams to produce incremental KPIs. Because {{{ .lake }}} streams keep new rows until they are consumed, you can run the same query after each load. Every execution drains only the new rows via [`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md), so updates that arrive at different times are still matched on the next iteration.
 
 ### 1. Create tables and streams
 
@@ -234,7 +234,7 @@ Rows stay in each stream until `WITH CONSUME` runs, so inserts that arrive at di
 
 **Hidden Columns**
 
-- Streams expose `change$action`, `change$is_update`, and `change$row_id`; use them to understand how {{{ .lake-short }}} recorded each row.
+- Streams expose `change$action`, `change$is_update`, and `change$row_id`; use them to understand how {{{ .lake }}} recorded each row.
 - Base tables gain `_origin_version`, `_origin_block_id`, `_origin_block_row_num` for debugging row provenance.
 
 **Integrations**

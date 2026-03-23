@@ -16,7 +16,7 @@ PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Az
 
 ## How it works
 
-After {{{ .lake }}} approves the cloud account or project you plan to connect, you create a private endpoint that points to the {{{ .lake-short }}} PrivateLink service for your region. The cloud provider automatically allocates private IP addresses and, once private DNS is enabled, your {{{ .lake }}} domains resolve to those addresses so every session stays on the secure, private path.
+After {{{ .lake }}} approves the cloud account or project you plan to connect, you create a private endpoint that points to the {{{ .lake }}} PrivateLink service for your region. The cloud provider automatically allocates private IP addresses and, once private DNS is enabled, your {{{ .lake }}} domains resolve to those addresses so every session stays on the secure, private path.
 
 ## How to setup AWS PrivateLink
 

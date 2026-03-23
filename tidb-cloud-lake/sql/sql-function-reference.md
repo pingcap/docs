@@ -1,11 +1,11 @@
 ---
 title: SQL Function Reference
-summary: "{{{ .lake-short }}} provides comprehensive SQL functions for all types of data processing. Functions are organized by importance and usage frequency."
+summary: "{{{ .lake }}} provides comprehensive SQL functions for all types of data processing. Functions are organized by importance and usage frequency."
 ---
 
 # SQL Function Reference
 
-{{{ .lake-short }}} provides comprehensive SQL functions for all types of data processing. Functions are organized by importance and usage frequency.
+{{{ .lake }}} provides comprehensive SQL functions for all types of data processing. Functions are organized by importance and usage frequency.
 
 ## Core Data Functions
 

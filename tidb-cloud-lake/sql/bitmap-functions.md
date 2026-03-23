@@ -1,11 +1,11 @@
 ---
 title: Bitmap Functions
-summary: This page provides a comprehensive overview of Bitmap functions in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of Bitmap functions in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Bitmap Functions
 
-This page provides a comprehensive overview of Bitmap functions in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of Bitmap functions in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Bitmap Operations
 

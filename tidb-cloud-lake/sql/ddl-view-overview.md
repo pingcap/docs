@@ -1,11 +1,11 @@
 ---
 title: View
-summary: This page provides a comprehensive overview of view operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of view operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # View
 
-This page provides a comprehensive overview of view operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of view operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## View Management
 
@@ -24,4 +24,4 @@ This page provides a comprehensive overview of view operations in {{{ .lake-shor
 
 > **Note:**
 >
-> Views in {{{ .lake-short }}} are named queries stored in the database that can be referenced like tables. They provide a way to simplify complex queries and control access to underlying data.
+> Views in {{{ .lake }}} are named queries stored in the database that can be referenced like tables. They provide a way to simplify complex queries and control access to underlying data.

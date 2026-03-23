@@ -1,6 +1,6 @@
 ---
 title: SHOW PROCESSLIST
-summary: The {{{ .lake-short }}} process list indicates the operations currently being performed by the set of threads executed within the server.
+summary: The {{{ .lake }}} process list indicates the operations currently being performed by the set of threads executed within the server.
 ---
 
 # SHOW PROCESSLIST
@@ -9,7 +9,7 @@ summary: The {{{ .lake-short }}} process list indicates the operations currently
 >
 > Introduced or updated in v1.2.190.
 
-The {{{ .lake-short }}} process list indicates the operations currently being performed by the set of threads executed within the server.
+The {{{ .lake }}} process list indicates the operations currently being performed by the set of threads executed within the server.
 
 See also: [KILL](/tidb-cloud-lake/sql/kill.md)
 

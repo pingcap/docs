@@ -1,11 +1,11 @@
 ---
 title: Inverted Index
-summary: This page provides a comprehensive overview of inverted index operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+summary: This page provides a comprehensive overview of inverted index operations in {{{ .lake }}}, organized by functionality for easy reference.
 ---
 
 # Inverted Index
 
-This page provides a comprehensive overview of inverted index operations in {{{ .lake-short }}}, organized by functionality for easy reference.
+This page provides a comprehensive overview of inverted index operations in {{{ .lake }}}, organized by functionality for easy reference.
 
 ## Inverted Index Management
 
@@ -21,4 +21,4 @@ This page provides a comprehensive overview of inverted index operations in {{{ 
 
 > **Note:**
 >
-> Inverted indexes in {{{ .lake-short }}} enable efficient full-text search capabilities for text data, allowing for fast keyword searches across large text columns.
+> Inverted indexes in {{{ .lake }}} enable efficient full-text search capabilities for text data, allowing for fast keyword searches across large text columns.

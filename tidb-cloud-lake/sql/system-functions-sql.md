@@ -1,11 +1,11 @@
 ---
 title: System Functions
-summary: This page provides reference information for the system-related functions in {{{ .lake-short }}}. These functions help you analyze and monitor the internal storage and performance aspects of your {{{ .lake-short }}} deployment.
+summary: This page provides reference information for the system-related functions in {{{ .lake }}}. These functions help you analyze and monitor the internal storage and performance aspects of your {{{ .lake }}} deployment.
 ---
 
 # System Functions
 
-This page provides reference information for the system-related functions in {{{ .lake-short }}}. These functions help you analyze and monitor the internal storage and performance aspects of your {{{ .lake-short }}} deployment.
+This page provides reference information for the system-related functions in {{{ .lake }}}. These functions help you analyze and monitor the internal storage and performance aspects of your {{{ .lake }}} deployment.
 
 ## Table Metadata Functions
 

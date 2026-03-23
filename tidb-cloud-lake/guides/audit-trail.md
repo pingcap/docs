@@ -1,11 +1,11 @@
 ---
 title: Audit Trail
-summary: "{{{ .lake-short }}} system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring."
+summary: "{{{ .lake }}} system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring."
 ---
 
 # Audit Trail
 
-{{{ .lake-short }}} system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
+{{{ .lake }}} system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring.
 
 Allows the auditing of the user:
 
@@ -15,7 +15,7 @@ Allows the auditing of the user:
 
 ## Available Audit Tables
 
-{{{ .lake-short }}} provides five system history tables that capture different aspects of database activity:
+{{{ .lake }}} provides five system history tables that capture different aspects of database activity:
 
 | Table | Purpose | Key Use Cases |
 |-------|---------|---------------|

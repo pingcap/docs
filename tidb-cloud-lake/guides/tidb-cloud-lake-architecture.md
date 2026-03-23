@@ -27,11 +27,11 @@ The architecture of complete separation of storage and compute gives {{{ .lake }
 
 Each tenant in {{{ .lake }}} can have multiple compute clusters (Warehouse), each with exclusive computing resources, and can automatically release them when inactive for more than 1 minute to reduce usage costs.
 
-In the compute cluster, queries are executed through the high-performance {{{ .lake-short }}} engine. Each query will go through multiple different submodules:
+In the compute cluster, queries are executed through the high-performance {{{ .lake }}} engine. Each query will go through multiple different submodules:
 
 - Planner: After parsing the SQL statement, it will combine different operators (such as Projection, Filter, Limit, etc.) into a query plan based on different query types.
-- Optimizer: The {{{ .lake-short }}} engine provides a rule-based and cost-based optimizer framework, which implements a series of optimization mechanisms such as predicate pushdown, join reorder, and scan pruning, greatly accelerating queries.
-- Processors: {{{ .lake-short }}} implements a push-pull combination of pipeline execution engines. It composes the physical execution of queries into a series of pipelines in the Processor and can dynamically adapt the pipeline configuration based on the runtime information of the query task, combining the vectorized expression calculation framework to maximize the computing power of the CPU.
+- Optimizer: The {{{ .lake }}} engine provides a rule-based and cost-based optimizer framework, which implements a series of optimization mechanisms such as predicate pushdown, join reorder, and scan pruning, greatly accelerating queries.
+- Processors: {{{ .lake }}} implements a push-pull combination of pipeline execution engines. It composes the physical execution of queries into a series of pipelines in the Processor and can dynamically adapt the pipeline configuration based on the runtime information of the query task, combining the vectorized expression calculation framework to maximize the computing power of the CPU.
 
 In addition, {{{ .lake }}} can dynamically increase or decrease nodes in the cluster with the change of query workload, making computing faster and more cost-effective.
 

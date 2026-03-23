@@ -1,18 +1,18 @@
 ---
 title: Ownership
-summary: Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within {{{ .lake-short }}}.
+summary: Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within {{{ .lake }}}.
 ---
 
 # Ownership
 
-Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within {{{ .lake-short }}}.
+Ownership is a specialized privilege that signifies the exclusive rights and responsibilities a role holds over a specific data object (currently including a database, table, UDF, and stage) within {{{ .lake }}}.
 
 ## Granting Ownership
 
 An object's ownership is automatically granted to the role of the user who creates it and can be transferred between roles using the [GRANT](/tidb-cloud-lake/sql/grant.md) command:
 
 - Granting ownership of an object to a new role transfers full ownership to the new role, removing it from the previous role. For example, if Role A initially owns a table and you grant ownership to Role B, Role B will become the new owner, and Role A will no longer have ownership rights to that table.
-- Granting ownership to the built-in role `public` is not recommended for security reasons. If a user is in the `public` role when creating a object, then all users will have ownership of the object because each user has the `public` role by default. {{{ .lake-short }}} recommends creating and assigning customized roles to users instead of using the `public` role for clarified ownership management. For information about the built-in roles, see [Built-in Roles](/tidb-cloud-lake/guides/roles.md).
+- Granting ownership to the built-in role `public` is not recommended for security reasons. If a user is in the `public` role when creating a object, then all users will have ownership of the object because each user has the `public` role by default. {{{ .lake }}} recommends creating and assigning customized roles to users instead of using the `public` role for clarified ownership management. For information about the built-in roles, see [Built-in Roles](/tidb-cloud-lake/guides/roles.md).
 - Ownership cannot be granted for tables in the `default` database, as it is owned by the built-in role `account_admin`.
 
 ## Revoking Ownership Not Allowed
@@ -40,7 +40,7 @@ GRANT OWNERSHIP ON STAGE ingestion_stage TO ROLE 'data_owner';
 GRANT OWNERSHIP ON UDF calculate_profit TO ROLE 'data_owner';
 ```
 
-This example demonstrates the establishment of role-based ownership in {{{ .lake-short }}}. Administrators create a role 'role1' and assign it to user 'u1'. Permissions to create tables in the 'db' schema are granted to 'role1'. Consequently, when 'u1' logs in, they possess the privileges of 'role1', allowing them to create and own tables under 'db'. However, access to tables not owned by 'role1' is restricted, as evidenced by the failed query on 'db.t_old_exists'.
+This example demonstrates the establishment of role-based ownership in {{{ .lake }}}. Administrators create a role 'role1' and assign it to user 'u1'. Permissions to create tables in the 'db' schema are granted to 'role1'. Consequently, when 'u1' logs in, they possess the privileges of 'role1', allowing them to create and own tables under 'db'. However, access to tables not owned by 'role1' is restricted, as evidenced by the failed query on 'db.t_old_exists'.
 
 ```sql
 -- Admin creates roles and assigns roles to corresponding users

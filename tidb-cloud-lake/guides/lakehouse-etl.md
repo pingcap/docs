@@ -1,11 +1,11 @@
 ---
 title: Lakehouse ETL
-summary: Scenario CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to update {{{ .lake-short }}}'s shared tables via a single COPY pipeline. to refresh the shared tables in {{{ .lake-short }}}.
+summary: Scenario CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to update {{{ .lake }}}'s shared tables via a single COPY pipeline. to refresh the shared tables in {{{ .lake }}}.
 ---
 
 # Lakehouse ETL
 
-> **Scenario:** CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to update {{{ .lake-short }}}'s shared tables via a single COPY pipeline. to refresh the shared tables in {{{ .lake-short }}}.
+> **Scenario:** CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to update {{{ .lake }}}'s shared tables via a single COPY pipeline. to refresh the shared tables in {{{ .lake }}}.
 
 The loading loop is straightforward:
 
@@ -63,7 +63,7 @@ FROM @citydrive_stage/frame-events/batch_2025_01_01.parquet
 LIMIT 5;
 ```
 
-{{{ .lake-short }}} infers the format from the stage definition, so no extra options are required here.
+{{{ .lake }}} infers the format from the stage definition, so no extra options are required here.
 
 ---
 

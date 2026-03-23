@@ -1,11 +1,11 @@
 ---
 title: FUSE_BLOCK
-summary: Returns the block information of the latest or specified snapshot of a table. For more information about what is block in {{{ .lake-short }}}, see What are Snapshot, Segment, and Block?.
+summary: Returns the block information of the latest or specified snapshot of a table. For more information about what is block in {{{ .lake }}}, see What are Snapshot, Segment, and Block?.
 ---
 
 # FUSE_BLOCK
 
-Returns the block information of the latest or specified snapshot of a table. For more information about what is block in {{{ .lake-short }}}, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#-lake-short--data-storage-snapshot-segment-and-block).
+Returns the block information of the latest or specified snapshot of a table. For more information about what is block in {{{ .lake }}}, see [What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block).
 
 The command returns the location information of each parquet file referenced by a snapshot. This enables downstream applications to access and consume the data stored in the files.
 

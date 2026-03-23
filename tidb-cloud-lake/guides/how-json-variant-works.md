@@ -10,34 +10,34 @@ See also:
 - [Variant Data Type](/tidb-cloud-lake/sql/variant.md)
 - [Semi-Structured Functions](/tidb-cloud-lake/guides/load-semi-structured-formats.md)
 
-{{{ .lake-short }}} reimagines JSON analytics by pairing a native binary layout with automatic JSON indexing so semi-structured data behaves like first-class columns.
+{{{ .lake }}} reimagines JSON analytics by pairing a native binary layout with automatic JSON indexing so semi-structured data behaves like first-class columns.
 
 ## Why Variant Matters
 
-{{{ .lake-short }}} keeps JSON flexible while delivering MPP speed: you ingest documents as-is, query with familiar SQL, and the engine stitches together the performance story behind the scenes. Two pillars make it possible:
+{{{ .lake }}} keeps JSON flexible while delivering MPP speed: you ingest documents as-is, query with familiar SQL, and the engine stitches together the performance story behind the scenes. Two pillars make it possible:
 
 - A compact **JSONB** layout keeps types visible to the execution engine.
-- Automatic **virtual columns**—{{{ .lake-short }}}’s JSON indexes—surface hot paths without manual work.
+- Automatic **virtual columns**—{{{ .lake }}}’s JSON indexes—surface hot paths without manual work.
 
 From storage to queries, the rest of this guide follows how those two ideas turn a raw JSON payload (think `orders.data`) into optimised, typed columns.
 
 ## JSON Storage Layout
 
-{{{ .lake-short }}} stores Variant values in JSONB, a binary format optimised for analytics. In practice this means:
+{{{ .lake }}} stores Variant values in JSONB, a binary format optimised for analytics. In practice this means:
 
 - **Typed storage** – numbers, booleans, timestamps, and decimals remain native, so comparisons stay binary-safe.
 - **Predictable layout** – fields carry length prefixes and canonical key order, eliminating reparsing overhead.
 - **Zero-copy access** – operators read JSONB buffers directly during scans and sorts instead of rebuilding JSON text.
 
-Every Variant column keeps the raw JSONB document for fidelity. When paths like `data['user']['id']` show up repeatedly, {{{ .lake-short }}} tucks them into typed sidecar columns ready for pushdown.
+Every Variant column keeps the raw JSONB document for fidelity. When paths like `data['user']['id']` show up repeatedly, {{{ .lake }}} tucks them into typed sidecar columns ready for pushdown.
 
 ## Automatic JSON Index Generation
 
-When new data lands in {{{ .lake-short }}}, a lightweight indexing pipeline immediately scans the JSON blocks to discover hot paths worth materialising as virtual columns—{{{ .lake-short }}}’s built-in JSON indexes.
+When new data lands in {{{ .lake }}}, a lightweight indexing pipeline immediately scans the JSON blocks to discover hot paths worth materialising as virtual columns—{{{ .lake }}}’s built-in JSON indexes.
 
 ### Ingestion Flow
 
-{{{ .lake-short }}} inspects the incoming batch and converts recurring access patterns into typed columns:
+{{{ .lake }}} inspects the incoming batch and converts recurring access patterns into typed columns:
 
 ```
 ┌───────────────────────────────────────────────┐
@@ -75,13 +75,13 @@ The result: you load JSON once, and recurring patterns quietly turn into optimis
 
 ### Virtual Columns Are Automatic JSON Indexes
 
-In this context, a “virtual column” is simply **{{{ .lake-short }}}’s JSON index**. The ingestion flow decides whether a path such as `data['items'][0]['price']` is stable enough, infers a native type, and writes those values to a columnar sidecar with metadata—no DDL, no knobs. Nested JSON remains in compact JSONB form, while primitive paths become native numbers, strings, or booleans.
+In this context, a “virtual column” is simply **{{{ .lake }}}’s JSON index**. The ingestion flow decides whether a path such as `data['items'][0]['price']` is stable enough, infers a native type, and writes those values to a columnar sidecar with metadata—no DDL, no knobs. Nested JSON remains in compact JSONB form, while primitive paths become native numbers, strings, or booleans.
 
 ```
 Raw JSON block ──(auto sampling)──▶ Candidate paths ──(stable?)──▶ JSON index
 ```
 
-Instead of building a separate B-tree, {{{ .lake-short }}} snapshots the values for a JSON path into a columnar structure:
+Instead of building a separate B-tree, {{{ .lake }}} snapshots the values for a JSON path into a columnar structure:
 
 ```
 JSON Path    ───────────▶  Virtual Column (typed values + stats + location)
@@ -105,7 +105,7 @@ Metadata stored alongside each block summarises the extra columns:
 └────────────────────────────┴───────────────────────┘
 ```
 
-The writer packages these details into the table snapshot and stores the sidecar alongside the main block. Each entry remembers the JSON path, native type, byte offsets, and statistics so {{{ .lake-short }}} can jump straight to the extracted values—or fall back to the original JSON—on demand.
+The writer packages these details into the table snapshot and stores the sidecar alongside the main block. Each entry remembers the JSON path, native type, byte offsets, and statistics so {{{ .lake }}} can jump straight to the extracted values—or fall back to the original JSON—on demand.
 
 ## Query Execution with JSON Indexes
 
@@ -131,12 +131,12 @@ Once the indexes exist, the read path reduces to three quick decisions:
 └──────────────┘
 ```
 
-- During planning, {{{ .lake-short }}} rewrites calls such as `get_by_keypath` into direct virtual-column reads whenever metadata says an index exists.
+- During planning, {{{ .lake }}} rewrites calls such as `get_by_keypath` into direct virtual-column reads whenever metadata says an index exists.
 - Storage hits the virtual column when it exists and reads only that Parquet slice, and it can even skip the original JSON column when every requested path is indexed.
 - Otherwise it falls back to evaluating `get_by_keypath` on the JSONB column, keeping semantics intact.
 - Filters, projections, and statistics operate on native types instead of reparsing JSON strings.
 
-Behind the scenes {{{ .lake-short }}} keeps track of which JSON path produced each virtual column, so it knows exactly when the raw document can be skipped and when it needs to re-open it.
+Behind the scenes {{{ .lake }}} keeps track of which JSON path produced each virtual column, so it knows exactly when the raw document can be skipped and when it needs to re-open it.
 
 ## Working with Variant Data
 
@@ -144,11 +144,11 @@ With indexing handled behind the scenes, you interact with Variant columns using
 
 ### Inspect Virtual Columns
 
-Use [`SHOW VIRTUAL COLUMNS`](/tidb-cloud-lake/sql/show-virtual-columns.md) to list the automatically generated virtual columns for a table when you want to verify what JSON paths {{{ .lake-short }}} has materialised.
+Use [`SHOW VIRTUAL COLUMNS`](/tidb-cloud-lake/sql/show-virtual-columns.md) to list the automatically generated virtual columns for a table when you want to verify what JSON paths {{{ .lake }}} has materialised.
 
 ### Access Syntax
 
-{{{ .lake-short }}} understands both Snowflake-style and PostgreSQL-style selectors; whichever style you prefer, the engine routes them through the same key-path parser and reuses the JSON indexes. Continuing with an `orders` example, you can reach nested fields like this:
+{{{ .lake }}} understands both Snowflake-style and PostgreSQL-style selectors; whichever style you prefer, the engine routes them through the same key-path parser and reuses the JSON indexes. Continuing with an `orders` example, you can reach nested fields like this:
 
 ```sql title="Snowflake-style examples"
 SELECT data['user']['profile']['name'],
@@ -166,7 +166,7 @@ FROM orders;
 
 ### Function Highlights
 
-Beyond path accessors, {{{ .lake-short }}} ships a rich Variant toolkit:
+Beyond path accessors, {{{ .lake }}} ships a rich Variant toolkit:
 
 - **Parsing & casting**: `parse_json`, `try_parse_json`, `to_variant`, `to_jsonb_binary`
 - **Navigation & projection**: `get_path`, `get_by_keypath`, `flatten`, arrow (`->`, `->>`), path (`#>`, `#>>`) and containment operators (`@>`, `?`)
@@ -183,11 +183,11 @@ All functions operate directly on JSONB buffers inside the vectorised engine.
     - Predicate pushdown composes with bloom/inverted indexes to prune blocks.
 - The steadier the JSON shape, the more paths qualify for indexing.
 
-## {{{ .lake-short }}} Advantages for Variant Data
+## {{{ .lake }}} Advantages for Variant Data
 
 - **Snowflake-compatible surface area** – Bring existing queries and UDFs over intact.
 - **Native JSONB execution** – Typed encoding plus vectorised operators avoid string shuffling.
 - **Automatic JSON indexes** – Sampling, metadata, and pushdown make semi-structured data feel structured.
 - **Operational efficiency** – Virtual blocks share lifecycle tooling with regular Fuse blocks, keeping storage and compute predictable.
 
-With automatic JSON indexing, {{{ .lake-short }}} narrows the gap between flexible documents and high-performance analytics—semi-structured data becomes a first-class citizen in your warehouse.
+With automatic JSON indexing, {{{ .lake }}} narrows the gap between flexible documents and high-performance analytics—semi-structured data becomes a first-class citizen in your warehouse.

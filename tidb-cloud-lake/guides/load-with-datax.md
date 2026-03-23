@@ -9,13 +9,13 @@ summary: DataX is an open-source data integration tool developed by Alibaba. It 
 
 > **Tip:**
 >
-> [Apache DolphinScheduler](https://dolphinscheduler.apache.org/) now has added support for {{{ .lake-short }}} as a data source. This enhancement enables you to leverage DolphinScheduler for managing DataX tasks and effortlessly load data from MySQL to {{{ .lake-short }}}.
+> [Apache DolphinScheduler](https://dolphinscheduler.apache.org/) now has added support for {{{ .lake }}} as a data source. This enhancement enables you to leverage DolphinScheduler for managing DataX tasks and effortlessly load data from MySQL to {{{ .lake }}}.
 
 For information about the system requirements, download, and deployment steps for DataX, refer to DataX's [Quick Start Guide](https://github.com/alibaba/DataX/blob/master/userGuid.md). The guide provides detailed instructions and guidelines for setting up and using DataX.
 
 ## DatabendWriter
 
-DatabendWriter is an integrated plugin of DataX, which means it comes pre-installed and does not require any manual installation. It acts as a seamless connector that enables the effortless transfer of data from other databases to {{{ .lake-short }}}. With DatabendWriter, you can leverage the capabilities of DataX to efficiently load data from various databases into {{{ .lake-short }}}.
+DatabendWriter is an integrated plugin of DataX, which means it comes pre-installed and does not require any manual installation. It acts as a seamless connector that enables the effortless transfer of data from other databases to {{{ .lake }}}. With DatabendWriter, you can leverage the capabilities of DataX to efficiently load data from various databases into {{{ .lake }}}.
 
 DatabendWriter supports two operational modes: INSERT (default) and REPLACE. In INSERT Mode, new data is added while conflicts with existing records are prevented to maintain data integrity. On the other hand, the REPLACE Mode prioritizes data consistency by replacing existing records with newer data in case of conflicts.
 

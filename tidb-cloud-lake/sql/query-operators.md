@@ -1,11 +1,11 @@
 ---
 title: Query Operators
-summary: This page provides reference information for the query operators in {{{ .lake-short }}}.
+summary: This page provides reference information for the query operators in {{{ .lake }}}.
 ---
 
 # Query Operators
 
-This page provides reference information for the query operators in {{{ .lake-short }}}.
+This page provides reference information for the query operators in {{{ .lake }}}.
 
 ## Operator Types
 

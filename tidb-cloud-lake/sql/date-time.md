@@ -1,6 +1,6 @@
 ---
 title: Date & Time
-summary: "{{{ .lake-short }}}'s Date and Time data type supports standardization and compatibility with various SQL standards, making it easier for users migrating from other database systems."
+summary: "{{{ .lake }}}'s Date and Time data type supports standardization and compatibility with various SQL standards, making it easier for users migrating from other database systems."
 ---
 
 # Date & Time
@@ -131,7 +131,7 @@ The offset is part of the stored value, so the display never changes.
 
 ## Daylight Saving Time Adjustments
 
-Enable `enable_dst_hour_fix` to make {{{ .lake-short }}} automatically roll missing hours forward when daylight saving time skips part of the day.
+Enable `enable_dst_hour_fix` to make {{{ .lake }}} automatically roll missing hours forward when daylight saving time skips part of the day.
 
 ```sql
 SET enable_dst_hour_fix = 1;
@@ -248,7 +248,7 @@ Result (week_start = 1):
 
 ### MySQL Format Specifiers
 
-To handle date and time formatting, {{{ .lake-short }}} makes use of the chrono::format::strftime module, which is a standard module provided by the chrono library in Rust. This module enables precise control over the formatting of dates and times. The following content is excerpted from [https://docs.rs/chrono/latest/chrono/format/strftime/index.html](https://docs.rs/chrono/latest/chrono/format/strftime/index.html):
+To handle date and time formatting, {{{ .lake }}} makes use of the chrono::format::strftime module, which is a standard module provided by the chrono library in Rust. This module enables precise control over the formatting of dates and times. The following content is excerpted from [https://docs.rs/chrono/latest/chrono/format/strftime/index.html](https://docs.rs/chrono/latest/chrono/format/strftime/index.html):
 
 | Spec. | Example                          | Description                                                                                                                                                                                                                                                                                                                     |
 | ----- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -285,7 +285,7 @@ To handle date and time formatting, {{{ .lake-short }}} makes use of the chrono:
 | %p    | AM                               | AM or PM in 12-hour clocks.                                                                                                                                                                                                                                                                                                     |
 | %M    | 34                               | Minute number (00–59), zero-padded to 2 digits.                                                                                                                                                                                                                                                                                 |
 | %S    | 60                               | Second number (00–60), zero-padded to 2 digits.                                                                                                                                                                                                                                                                                 |
-| %f    | 026490000                        | The fractional seconds (in nanoseconds) since last whole second. {{{ .lake-short }}} recommends converting the Integer string into an Integer first, other than using this specifier. See [Converting Integer to Timestamp](/tidb-cloud-lake/sql/to-timestamp.md#example-2-converting-integer-to-timestamp) for an example. |
+| %f    | 026490000                        | The fractional seconds (in nanoseconds) since last whole second. {{{ .lake }}} recommends converting the Integer string into an Integer first, other than using this specifier. See [Converting Integer to Timestamp](/tidb-cloud-lake/sql/to-timestamp.md#example-2-converting-integer-to-timestamp) for an example. |
 | %.f   | .026490                          | Similar to .%f but left-aligned. These all consume the leading dot.                                                                                                                                                                                                                                                             |
 | %.3f  | .026                             | Similar to .%f but left-aligned but fixed to a length of 3.                                                                                                                                                                                                                                                                     |
 | %.6f  | .026490                          | Similar to .%f but left-aligned but fixed to a length of 6.                                                                                                                                                                                                                                                                     |
@@ -307,7 +307,7 @@ To handle date and time formatting, {{{ .lake-short }}} makes use of the chrono:
 |       |                                  | DATE & TIME SPECIFIERS:                                                                                                                                                                                                                                                                                                         |
 | %c    | Sun Jul 8 00:34:60 2001          | Locale’s date and time (e.g., Thu Mar 3 23:05:25 2005).                                                                                                                                                                                                                                                                         |
 | %+    | 2001-07-08T00:34:60.026490+09:30 | ISO 8601 / RFC 3339 date & time format.                                                                                                                                                                                                                                                                                         |
-| %s    | 994518299                        | UNIX timestamp, the number of seconds since 1970-01-01 00:00 UTC. {{{ .lake-short }}} recommends converting the Integer string into an Integer first, other than using this specifier. See [Converting Integer to Timestamp](/tidb-cloud-lake/sql/to-timestamp.md#example-2-converting-integer-to-timestamp) for an example. |
+| %s    | 994518299                        | UNIX timestamp, the number of seconds since 1970-01-01 00:00 UTC. {{{ .lake }}} recommends converting the Integer string into an Integer first, other than using this specifier. See [Converting Integer to Timestamp](/tidb-cloud-lake/sql/to-timestamp.md#example-2-converting-integer-to-timestamp) for an example. |
 |       |                                  | SPECIAL SPECIFIERS:                                                                                                                                                                                                                                                                                                             |
 | %t    |                                  | Literal tab (\t).                                                                                                                                                                                                                                                                                                               |
 | %n    |                                  | Literal newline (\n).                                                                                                                                                                                                                                                                                                           |

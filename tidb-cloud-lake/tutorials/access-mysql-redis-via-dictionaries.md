@@ -1,21 +1,21 @@
 ---
 title: Access MySQL & Redis via Dictionaries
-summary: In this tutorial, we’ll guide you through accessing MySQL and Redis data using dictionaries in {{{ .lake-short }}}. You’ll learn how to create dictionaries that map to these external data sources, enabling seamless data querying and integration.
+summary: In this tutorial, we’ll guide you through accessing MySQL and Redis data using dictionaries in {{{ .lake }}}. You’ll learn how to create dictionaries that map to these external data sources, enabling seamless data querying and integration.
 ---
 
 # Access MySQL & Redis via Dictionaries
 
-In this tutorial, we’ll guide you through accessing MySQL and Redis data using dictionaries in {{{ .lake-short }}}. You’ll learn how to create dictionaries that map to these external data sources, enabling seamless data querying and integration.
+In this tutorial, we’ll guide you through accessing MySQL and Redis data using dictionaries in {{{ .lake }}}. You’ll learn how to create dictionaries that map to these external data sources, enabling seamless data querying and integration.
 
 ## Before You Start
 
-Before you start, ensure that [Docker](https://www.docker.com/) is installed on your local machine. We need Docker to set up the necessary containers for {{{ .lake-short }}}, MySQL, and Redis. You will also need a SQL client to connect to MySQL; we recommend using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to connect to {{{ .lake-short }}}.
+Before you start, ensure that [Docker](https://www.docker.com/) is installed on your local machine. We need Docker to set up the necessary containers for {{{ .lake }}}, MySQL, and Redis. You will also need a SQL client to connect to MySQL; we recommend using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to connect to {{{ .lake }}}.
 
 ## Step 1: Setting up Environment
 
-In this step, we’ll launch instances of {{{ .lake-short }}}, MySQL, and Redis using Docker on your local machine.
+In this step, we’ll launch instances of {{{ .lake }}}, MySQL, and Redis using Docker on your local machine.
 
-1. Create a Docker network named `mynetwork` to enable communication between your {{{ .lake-short }}}, MySQL, and Redis containers:
+1. Create a Docker network named `mynetwork` to enable communication between your {{{ .lake }}}, MySQL, and Redis containers:
 
     ```bash
     docker network create mynetwork
@@ -32,7 +32,7 @@ In this step, we’ll launch instances of {{{ .lake-short }}}, MySQL, and Redis 
       mysql:latest
     ```
 
-3. Run the following command to start a {{{ .lake-short }}} container named `databend` within the `mynetwork` network:
+3. Run the following command to start a {{{ .lake }}} container named `databend` within the `mynetwork` network:
 
     ```bash
     docker run -d \
@@ -55,7 +55,7 @@ In this step, we’ll launch instances of {{{ .lake-short }}}, MySQL, and Redis 
       redis:latest
     ```
 
-5. Verify that the {{{ .lake-short }}}, MySQL, and Redis containers are connected to the same network by inspecting the `mynetwork` Docker network:
+5. Verify that the {{{ .lake }}}, MySQL, and Redis containers are connected to the same network by inspecting the `mynetwork` Docker network:
 
 ```bash
 docker network inspect mynetwork
@@ -116,9 +116,9 @@ docker network inspect mynetwork
 
 ## Step 2: Populating Sample Data
 
-In this step, we’ll add sample data to MySQL and Redis, and {{{ .lake-short }}}.
+In this step, we’ll add sample data to MySQL and Redis, and {{{ .lake }}}.
 
-1. In {{{ .lake-short }}}, create a table named `users_databend` and insert sample user data:
+1. In {{{ .lake }}}, create a table named `users_databend` and insert sample user data:
 
     ```sql
     CREATE TABLE users_databend (
@@ -170,9 +170,9 @@ SET user:3 '{"notifications": "enabled", "theme": "dark"}'
 
 ## Step 3: Creating Dictionaries
 
-In this step, we'll create dictionaries for MySQL and Redis in {{{ .lake-short }}} and then query data from these external sources.
+In this step, we'll create dictionaries for MySQL and Redis in {{{ .lake }}} and then query data from these external sources.
 
-1. In {{{ .lake-short }}}, create a dictionary named `mysql_users` in {{{ .lake-short }}} that connects to the MySQL instance:
+1. In {{{ .lake }}}, create a dictionary named `mysql_users` in {{{ .lake }}} that connects to the MySQL instance:
 
     ```sql
     CREATE DICTIONARY mysql_users
@@ -192,7 +192,7 @@ In this step, we'll create dictionaries for MySQL and Redis in {{{ .lake-short }
     ));
     ```
 
-2. Create a dictionary named `redis_user_preferences` in {{{ .lake-short }}} that connects to the Redis instance:
+2. Create a dictionary named `redis_user_preferences` in {{{ .lake }}} that connects to the Redis instance:
 
     ```sql
     CREATE DICTIONARY redis_user_preferences

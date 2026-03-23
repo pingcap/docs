@@ -1,6 +1,6 @@
 ---
 title: Data Types
-summary: "{{{ .lake-short }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values."
+summary: "{{{ .lake }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values."
 ---
 
 # Data Types
@@ -9,7 +9,7 @@ summary: "{{{ .lake-short }}} stores data in strongly typed columns. This page s
 >
 > Introduced or updated in v1.2.100.
 
-{{{ .lake-short }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
+{{{ .lake }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
 
 ## Foundational Types
 
@@ -62,7 +62,7 @@ summary: "{{{ .lake-short }}} stores data in strongly typed columns. This page s
 
 ### Implicit Casting (Coercion)
 
-{{{ .lake-short }}} performs automatic conversions in well-defined situations:
+{{{ .lake }}} performs automatic conversions in well-defined situations:
 
 1. Integers upcast to `INT64`. Example: `UInt8 -> INT64`.
 2. Numeric values upcast to `FLOAT64` when necessary.
@@ -79,7 +79,7 @@ SELECT CONCAT(1, col);        -- may fail if `col` can't coerce to number
 
 ## NULL Handling and Defaults
 
-Columns allow NULL values unless declared `NOT NULL`. When a `NOT NULL` column is omitted during INSERT, {{{ .lake-short }}} writes a type-specific default value:
+Columns allow NULL values unless declared `NOT NULL`. When a `NOT NULL` column is omitted during INSERT, {{{ .lake }}} writes a type-specific default value:
 
 | Type Category            | Default |
 |--------------------------|---------|

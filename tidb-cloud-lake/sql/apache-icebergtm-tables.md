@@ -1,6 +1,6 @@
 ---
 title: Apache Iceberg™ Tables
-summary: "{{{ .lake-short }}} supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake-short }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform."
+summary: "{{{ .lake }}} supports the integration of an Apache Iceberg™ catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform."
 ---
 
 # Apache Iceberg™ Tables
@@ -9,7 +9,7 @@ summary: "{{{ .lake-short }}} supports the integration of an Apache Iceberg™ c
 >
 > Introduced or updated in v1.2.725.
 
-{{{ .lake-short }}} supports the integration of an [Apache Iceberg™](https://iceberg.apache.org/) catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake-short }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
+{{{ .lake }}} supports the integration of an [Apache Iceberg™](https://iceberg.apache.org/) catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
 
 ## Quick Start with Iceberg
 
@@ -103,11 +103,11 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 [2025-05-07 12:17:42] [SUCCESS] TPCH data generation and loading completed successfully
 ```
 
-### Query Data in {{{ .lake-short }}}
+### Query Data in {{{ .lake }}}
 
-Once the TPC-H tables are loaded, you can query the data in {{{ .lake-short }}}:
+Once the TPC-H tables are loaded, you can query the data in {{{ .lake }}}:
 
-1. Launch {{{ .lake-short }}} in Docker:
+1. Launch {{{ .lake }}} in Docker:
 
     ```bash
     docker network create iceberg_net
@@ -124,7 +124,7 @@ Once the TPC-H tables are loaded, you can query the data in {{{ .lake-short }}}:
       datafuselabs/databend
     ```
 
-2. Connect to {{{ .lake-short }}} using BendSQL first, and then create an Iceberg catalog:
+2. Connect to {{{ .lake }}} using BendSQL first, and then create an Iceberg catalog:
 
     ```bash
     bendsql
@@ -209,9 +209,9 @@ ORDER BY
 
 ## Datatype Mapping
 
-This table maps data types between Apache Iceberg™ and {{{ .lake-short }}}. Please note that {{{ .lake-short }}} does not currently support Iceberg data types that are not listed in the table.
+This table maps data types between Apache Iceberg™ and {{{ .lake }}}. Please note that {{{ .lake }}} does not currently support Iceberg data types that are not listed in the table.
 
-| Apache Iceberg™                             | {{{ .lake-short }}}                                                                 |
+| Apache Iceberg™                             | {{{ .lake }}}                                                                 |
 | ------------------------------------------- | ------------------------------------------------------------------------ |
 | BOOLEAN                                     | [BOOLEAN](/tidb-cloud-lake/sql/boolean.md)                         |
 | INT                                         | [INT32](/tidb-cloud-lake/sql/numeric.md#integer-data-types)        |
@@ -229,7 +229,7 @@ This table maps data types between Apache Iceberg™ and {{{ .lake-short }}}. Pl
 
 ## Managing Catalogs
 
-{{{ .lake-short }}} provides you the following commands to manage catalogs:
+{{{ .lake }}} provides you the following commands to manage catalogs:
 
 - [CREATE CATALOG](#create-catalog)
 - [SHOW CREATE CATALOG](#show-create-catalog)
@@ -238,7 +238,7 @@ This table maps data types between Apache Iceberg™ and {{{ .lake-short }}}. Pl
 
 ### CREATE CATALOG
 
-Defines and establishes a new catalog in the {{{ .lake-short }}} query engine.
+Defines and establishes a new catalog in the {{{ .lake }}} query engine.
 
 #### Syntax
 
@@ -286,7 +286,7 @@ CONNECTION=(
 
 ### Catalog Types
 
-{{{ .lake-short }}} supports four types of Iceberg catalogs:
+{{{ .lake }}} supports four types of Iceberg catalogs:
 
 - REST Catalog
 
@@ -396,7 +396,7 @@ USE CATALOG <catalog_name>
 
 ## Caching Iceberg Catalog
 
-{{{ .lake-short }}} offers a Catalog Metadata Cache specifically designed for Iceberg catalogs. When a query is executed on an Iceberg table for the first time, the metadata is cached in memory. By default, this cache remains valid for 10 minutes, after which it is asynchronously refreshed. This ensures that queries on Iceberg tables are faster by avoiding repeated metadata retrieval.
+{{{ .lake }}} offers a Catalog Metadata Cache specifically designed for Iceberg catalogs. When a query is executed on an Iceberg table for the first time, the metadata is cached in memory. By default, this cache remains valid for 10 minutes, after which it is asynchronously refreshed. This ensures that queries on Iceberg tables are faster by avoiding repeated metadata retrieval.
 
 If you need fresh metadata, you can manually refresh the cache using the following commands:
 
@@ -417,11 +417,11 @@ iceberg_table_meta_count = 0
 ...
 ```
 
-In addition to metadata caching, {{{ .lake-short }}} also supports table data caching for Iceberg catalog tables, similar to Fuse tables.
+In addition to metadata caching, {{{ .lake }}} also supports table data caching for Iceberg catalog tables, similar to Fuse tables.
 
 ## Writing to Iceberg Tables
 
-{{{ .lake-short }}} supports writing data to Iceberg tables using `INSERT INTO`. You can create Iceberg tables directly with the `ENGINE = ICEBERG` clause and optionally define partition columns using `PARTITION BY`.
+{{{ .lake }}} supports writing data to Iceberg tables using `INSERT INTO`. You can create Iceberg tables directly with the `ENGINE = ICEBERG` clause and optionally define partition columns using `PARTITION BY`.
 
 ### Creating Iceberg Tables
 
@@ -439,9 +439,9 @@ CREATE TABLE <table_name> (
 
 #### Supported Data Types
 
-The following {{{ .lake-short }}} data types are supported for writing to Iceberg tables:
+The following {{{ .lake }}} data types are supported for writing to Iceberg tables:
 
-| {{{ .lake-short }}} Type | Iceberg Type |
+| {{{ .lake }}} Type | Iceberg Type |
 |---------------|-------------|
 | BOOLEAN       | Boolean     |
 | INT           | Int         |
@@ -460,7 +460,7 @@ Use standard `INSERT INTO` statements to write data into Iceberg tables:
 INSERT INTO <table_name> VALUES (...), (...);
 ```
 
-Both partitioned and non-partitioned tables support single-row and multi-row inserts. For partitioned tables, {{{ .lake-short }}} automatically routes rows to the correct partitions. Null values in partition columns are also supported.
+Both partitioned and non-partitioned tables support single-row and multi-row inserts. For partitioned tables, {{{ .lake }}} automatically routes rows to the correct partitions. Null values in partition columns are also supported.
 
 ### Examples
 
@@ -544,7 +544,7 @@ SELECT * FROM t_multi_part;
 
 ## Apache Iceberg™ Table Functions
 
-{{{ .lake-short }}} provides the following table functions for querying Iceberg metadata, allowing users to inspect snapshots and manifests efficiently:
+{{{ .lake }}} provides the following table functions for querying Iceberg metadata, allowing users to inspect snapshots and manifests efficiently:
 
 - [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md)
 - [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md)

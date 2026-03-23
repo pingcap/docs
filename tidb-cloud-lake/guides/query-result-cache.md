@@ -1,11 +1,11 @@
 ---
 title: Query Result Cache
-summary: "{{{ .lake-short }}} caches and persists the query results for every executed query when enabled. This can be used to great effect to dramatically reduce the time it takes to get an answer."
+summary: "{{{ .lake }}} caches and persists the query results for every executed query when enabled. This can be used to great effect to dramatically reduce the time it takes to get an answer."
 ---
 
 # Query Result Cache
 
-{{{ .lake-short }}} caches and persists the query results for every executed query when enabled. This can be used to great effect to dramatically reduce the time it takes to get an answer.
+{{{ .lake }}} caches and persists the query results for every executed query when enabled. This can be used to great effect to dramatically reduce the time it takes to get an answer.
 
 ## Cache Usage Conditions
 

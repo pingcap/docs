@@ -1,15 +1,15 @@
 ---
 title: Loading from Remote File
-summary: To load data from remote files into {{{ .lake-short }}}, the COPY INTO command can be used. This command allows you to copy data from a variety of sources, including remote files, into {{{ .lake-short }}} with ease. With COPY INTO, you can specify the source file location, file format, and other relevant parameters to tailor the import process to your needs. Please note that the files must be in a format supported by {{{ .lake-short }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake-short }}}, see Input & Output File Formats.
+summary: To load data from remote files into {{{ .lake }}}, the COPY INTO command can be used. This command allows you to copy data from a variety of sources, including remote files, into {{{ .lake }}} with ease. With COPY INTO, you can specify the source file location, file format, and other relevant parameters to tailor the import process to your needs. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see Input & Output File Formats.
 ---
 
 # Loading from Remote File
 
-To load data from remote files into {{{ .lake-short }}}, the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command can be used. This command allows you to copy data from a variety of sources, including remote files, into {{{ .lake-short }}} with ease. With COPY INTO, you can specify the source file location, file format, and other relevant parameters to tailor the import process to your needs. Please note that the files must be in a format supported by {{{ .lake-short }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake-short }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
+To load data from remote files into {{{ .lake }}}, the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command can be used. This command allows you to copy data from a variety of sources, including remote files, into {{{ .lake }}} with ease. With COPY INTO, you can specify the source file location, file format, and other relevant parameters to tailor the import process to your needs. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ## Loading with Glob Patterns
 
-{{{ .lake-short }}} facilitates the loading of data from remote files through the use of glob patterns. These patterns allow for efficient and flexible data import from multiple files that follow a specific naming convention. {{{ .lake-short }}} supports the following glob patterns:
+{{{ .lake }}} facilitates the loading of data from remote files through the use of glob patterns. These patterns allow for efficient and flexible data import from multiple files that follow a specific naming convention. {{{ .lake }}} supports the following glob patterns:
 
 ### Set Pattern
 
@@ -31,7 +31,7 @@ FROM 'https://your-remote-location/data_file_[001-003].csv' ...
 
 ## Tutorial - Load from a Remote File
 
-This tutorial demonstrates how to import data into {{{ .lake-short }}} from a remote CSV file. The sample file [books.csv](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv) contains two records:
+This tutorial demonstrates how to import data into {{{ .lake }}} from a remote CSV file. The sample file [books.csv](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv) contains two records:
 
 ```text title='books.csv'
 Transaction Processing,Jim Gray,1992

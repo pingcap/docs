@@ -25,7 +25,7 @@ FILE_FORMAT = (TYPE = ORC)
 
 ## Tutorial: Loading Data from ORC Files
 
-This tutorial demonstrates how to load data from ORC files stored in an S3 bucket into a {{{ .lake-short }}} table.
+This tutorial demonstrates how to load data from ORC files stored in an S3 bucket into a {{{ .lake }}} table.
 
 ### Step 1. Create an External Stage
 
@@ -101,7 +101,7 @@ Result:
 
 ### Step 4: Create Target Table
 
-Create a target table in {{{ .lake-short }}} to store the data from the ORC files. We choose some of the columns from the ORC files to create the table.
+Create a target table in {{{ .lake }}} to store the data from the ORC files. We choose some of the columns from the ORC files to create the table.
 
 ```sql
 CREATE OR REPLACE TABLE orc_test_table (

@@ -9,6 +9,5 @@
   "dedicated": "TiDB Cloud Dedicated",
   "premium": "TiDB Cloud Premium",
   "console-url": "tidbcloud.com",
-  "lake": "TiDB Cloud Lake",
-  "lake-short": "TiDB Lake"
+  "lake": "TiDB Cloud Lake"
 }

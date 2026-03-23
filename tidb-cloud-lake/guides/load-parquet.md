@@ -9,7 +9,7 @@ summary: Parquet is a columnar storage format commonly used in data analytics. I
 
 Parquet is a columnar storage format commonly used in data analytics. It is designed to support complex data structures, and it is efficient for processing large datasets.
 
-Parquet file is most friendly to {{{ .lake-short }}}. It is recommended to use Parquet file as the data source for {{{ .lake-short }}}.
+Parquet file is most friendly to {{{ .lake }}}. It is recommended to use Parquet file as the data source for {{{ .lake }}}.
 
 ## Loading Parquet File
 

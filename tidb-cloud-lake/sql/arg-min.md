@@ -17,8 +17,8 @@ ARG_MIN(<arg>, <val>)
 
 | Arguments | Description                                                                                       |
 | --------- | ------------------------------------------------------------------------------------------------- |
-| `<arg>`   | Argument of [any data type that {{{ .lake-short }}} supports](/tidb-cloud-lake/sql/data-types.md) |
-| `<val>`   | Value of [any data type that {{{ .lake-short }}} supports](/tidb-cloud-lake/sql/data-types.md)    |
+| `<arg>`   | Argument of [any data type that {{{ .lake }}} supports](/tidb-cloud-lake/sql/data-types.md) |
+| `<val>`   | Value of [any data type that {{{ .lake }}} supports](/tidb-cloud-lake/sql/data-types.md)    |
 
 ## Return Type
 

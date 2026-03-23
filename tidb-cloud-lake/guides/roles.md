@@ -1,11 +1,11 @@
 ---
 title: Roles
-summary: Roles in {{{ .lake-short }}} play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
+summary: Roles in {{{ .lake }}} play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
 ---
 
 # Roles
 
-Roles in {{{ .lake-short }}} play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
+Roles in {{{ .lake }}} play a pivotal role in simplifying the management of permissions. When multiple users require the same set of privileges, granting privileges individually can be cumbersome. Roles provide a solution by allowing the assignment of a set of privileges to a role, which can then be easily assigned to multiple users.
 
 ![Alt text](/media/tidb-cloud-lake/access-control-3.png)
 
@@ -19,14 +19,14 @@ Consider the scenario where three roles are created: *manager*, *engineer*, and 
 
 ## Built-in Roles
 
-{{{ .lake-short }}} comes with the following built-in roles:
+{{{ .lake }}} comes with the following built-in roles:
 
 | Built-in Role | Description                                                                                                                            |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | account-admin | Possesses all privileges, serves as the parent role for all other roles, and enables seamless switching to any role within the tenant. |
 | public        | Inherits no permissions, considers all roles as its parent roles, and allows any role to switch to the public role.                    |
 
-To assign the `account-admin` role to a user in {{{ .lake }}}, select the role when inviting the user. You can also assign the role to a user after they join. If you're using {{{ .lake-short }}} Community Edition or Enterprise Edition, configure an `account-admin` user during deployment first, and then assign the role to other users if needed.
+To assign the `account-admin` role to a user in {{{ .lake }}}, select the role when inviting the user. You can also assign the role to a user after they join. If you're using {{{ .lake }}} Community Edition or Enterprise Edition, configure an `account-admin` user during deployment first, and then assign the role to other users if needed.
 
 ## Setting Default Role
 
@@ -56,11 +56,11 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 
 - Users have the flexibility to switch to other roles within a session using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command.
 - A user can examine their current role and view all the roles granted to them by using the [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) command.
-- If you don't explicitly set a default role for a user, {{{ .lake-short }}} will default to using the built-in role `public` as the default role.
+- If you don't explicitly set a default role for a user, {{{ .lake }}} will default to using the built-in role `public` as the default role.
 
 ## Active Role & Secondary Roles
 
-A user can be granted multiple roles in {{{ .lake-short }}}. These roles are categorized into an active role and secondary roles:
+A user can be granted multiple roles in {{{ .lake }}}. These roles are categorized into an active role and secondary roles:
 
 - The active role is the user's currently active primary role for the session, which can be set using the [SET ROLE](/tidb-cloud-lake/sql/set-role.md) command.
 

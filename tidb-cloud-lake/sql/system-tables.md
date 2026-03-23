@@ -1,13 +1,13 @@
 ---
 title: System Tables
-summary: "{{{ .lake-short }}} provides a set of system tables that contain metadata about your {{{ .lake-short }}} deployment, databases, tables, queries, and system performance. These tables are read-only and are automatically updated by the system."
+summary: "{{{ .lake }}} provides a set of system tables that contain metadata about your {{{ .lake }}} deployment, databases, tables, queries, and system performance. These tables are read-only and are automatically updated by the system."
 ---
 
 # System Tables
 
-{{{ .lake-short }}} provides a set of system tables that contain metadata about your {{{ .lake-short }}} deployment, databases, tables, queries, and system performance. These tables are read-only and are automatically updated by the system.
+{{{ .lake }}} provides a set of system tables that contain metadata about your {{{ .lake }}} deployment, databases, tables, queries, and system performance. These tables are read-only and are automatically updated by the system.
 
-System tables are organized in the `system` schema and can be queried using standard SQL. They provide valuable information for monitoring, troubleshooting, and understanding your {{{ .lake-short }}} environment.
+System tables are organized in the `system` schema and can be queried using standard SQL. They provide valuable information for monitoring, troubleshooting, and understanding your {{{ .lake }}} environment.
 
 ## Available System Tables
 
@@ -41,16 +41,16 @@ System tables are organized in the `system` schema and can be queried using stan
 | [system.table_functions](/tidb-cloud-lake/sql/system-table-functions.md) | Lists all available table functions. |
 | [system.user_functions](/tidb-cloud-lake/sql/system-user-functions.md) | Contains information about user-defined functions. |
 | [system.settings](/tidb-cloud-lake/sql/system-settings.md) | Contains information about system settings. |
-| [system.configs](/tidb-cloud-lake/sql/system-configs.md) | Contains configuration information for the {{{ .lake-short }}} deployment. |
+| [system.configs](/tidb-cloud-lake/sql/system-configs.md) | Contains configuration information for the {{{ .lake }}} deployment. |
 
 ### System Information
 
 | Table | Description |
 |-------|-------------|
-| [system.build_options](/tidb-cloud-lake/sql/system-build-options.md) | Contains information about build options used to compile {{{ .lake-short }}}. |
+| [system.build_options](/tidb-cloud-lake/sql/system-build-options.md) | Contains information about build options used to compile {{{ .lake }}}. |
 | [system.clusters](/tidb-cloud-lake/sql/system-clusters.md) | Contains information about clusters in the system. |
-| [system.contributors](/tidb-cloud-lake/sql/system-contributors.md) | Lists contributors to the {{{ .lake-short }}} project. |
-| [system.credits](/tidb-cloud-lake/sql/system-credits.md) | Contains information about third-party libraries used in {{{ .lake-short }}}. |
+| [system.contributors](/tidb-cloud-lake/sql/system-contributors.md) | Lists contributors to the {{{ .lake }}} project. |
+| [system.credits](/tidb-cloud-lake/sql/system-credits.md) | Contains information about third-party libraries used in {{{ .lake }}}. |
 | [system.caches](/tidb-cloud-lake/sql/system-caches.md) | Provides information about system caches. |
 
 ### Utility Tables

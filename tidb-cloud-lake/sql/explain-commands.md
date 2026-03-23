@@ -1,11 +1,11 @@
 ---
 title: Explain Commands
-summary: This page provides reference information for the explain-related commands in {{{ .lake-short }}}.
+summary: This page provides reference information for the explain-related commands in {{{ .lake }}}.
 ---
 
 # Explain Commands
 
-This page provides reference information for the explain-related commands in {{{ .lake-short }}}.
+This page provides reference information for the explain-related commands in {{{ .lake }}}.
 
 ## Commands Overview
 

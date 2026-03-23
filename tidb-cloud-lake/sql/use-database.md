@@ -19,7 +19,7 @@ USE <database_name>
 
 ## Important Notes
 
-In some cases, executing `USE <database>` can be slow—for example, when the user has ownership of only a subset of tables, and {{{ .lake-short }}} needs to scan metadata to determine access rights.
+In some cases, executing `USE <database>` can be slow—for example, when the user has ownership of only a subset of tables, and {{{ .lake }}} needs to scan metadata to determine access rights.
 
 To improve the performance of the `USE <database>` statement—especially in databases with many tables or complex permissions—you can grant the `USAGE` privilege on the database to a role, and then assign that role to users.
 

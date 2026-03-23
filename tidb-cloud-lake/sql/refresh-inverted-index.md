@@ -1,6 +1,6 @@
 ---
 title: REFRESH INVERTED INDEX
-summary: "{{{ .lake-short }}} automatically refreshes inverted indexes in SYNC mode whenever new data is written. Use REFRESH INVERTED INDEX primarily to backfill rows that existed before the index was declared."
+summary: "{{{ .lake }}} automatically refreshes inverted indexes in SYNC mode whenever new data is written. Use REFRESH INVERTED INDEX primarily to backfill rows that existed before the index was declared."
 ---
 
 # REFRESH INVERTED INDEX
@@ -9,7 +9,7 @@ summary: "{{{ .lake-short }}} automatically refreshes inverted indexes in SYNC m
 >
 > Introduced or updated in v1.2.405.
 
-{{{ .lake-short }}} automatically refreshes inverted indexes in `SYNC` mode whenever new data is written. Use `REFRESH INVERTED INDEX` primarily to backfill rows that existed before the index was declared.
+{{{ .lake }}} automatically refreshes inverted indexes in `SYNC` mode whenever new data is written. Use `REFRESH INVERTED INDEX` primarily to backfill rows that existed before the index was declared.
 
 ## Syntax
 

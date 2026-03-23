@@ -1,6 +1,6 @@
 ---
 title: CREATE AGGREGATE FUNCTION
-summary: Creates a user-defined aggregate function (UDAF) that runs inside {{{ .lake-short }}}'s JavaScript or Python runtime.
+summary: Creates a user-defined aggregate function (UDAF) that runs inside {{{ .lake }}}'s JavaScript or Python runtime.
 ---
 
 # CREATE AGGREGATE FUNCTION
@@ -9,7 +9,7 @@ summary: Creates a user-defined aggregate function (UDAF) that runs inside {{{ .
 >
 > Introduced or updated in v1.2.799.
 
-Creates a user-defined aggregate function (UDAF) that runs inside {{{ .lake-short }}}'s JavaScript or Python runtime.
+Creates a user-defined aggregate function (UDAF) that runs inside {{{ .lake }}}'s JavaScript or Python runtime.
 
 ## Supported Languages
 
@@ -36,7 +36,7 @@ $$
 | --- | --- |
 | `<function_name>` | Name of the aggregate function. |
 | `<parameter_list>` | Optional comma-separated list of input parameters and types (for example `value DOUBLE`). |
-| `STATE { <state_field_list> }` | Struct definition that {{{ .lake-short }}} stores between partial/final aggregation steps (for example `STATE { sum DOUBLE, count DOUBLE }`). |
+| `STATE { <state_field_list> }` | Struct definition that {{{ .lake }}} stores between partial/final aggregation steps (for example `STATE { sum DOUBLE, count DOUBLE }`). |
 | `<return_type>` | Data type returned by the aggregate (`DOUBLE`, `INT`, etc.). |
 | `LANGUAGE` | Runtime used to execute the script. Supported values: `javascript`, `python`. |
 | `IMPORTS` / `PACKAGES` | Optional lists for shipping extra files (imports) or PyPI packages (Python only). |

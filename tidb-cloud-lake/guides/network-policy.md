@@ -1,18 +1,18 @@
 ---
 title: Network Policy
-summary: Network policies control who can log in to {{{ .lake-short }}} based on the client IP. Even if the credentials are correct, a connection request is rejected when its IP does not satisfy the policy, giving you an extra security layer beyond username and password.
+summary: Network policies control who can log in to {{{ .lake }}} based on the client IP. Even if the credentials are correct, a connection request is rejected when its IP does not satisfy the policy, giving you an extra security layer beyond username and password.
 ---
 
 # Network Policy
 
-Network policies control who can log in to {{{ .lake-short }}} based on the client IP. Even if the credentials are correct, a connection request is rejected when its IP does not satisfy the policy, giving you an extra security layer beyond username and password.
+Network policies control who can log in to {{{ .lake }}} based on the client IP. Even if the credentials are correct, a connection request is rejected when its IP does not satisfy the policy, giving you an extra security layer beyond username and password.
 
 ## How It Works
 
 - `ALLOWED_IP_LIST` accepts single IPv4 addresses or CIDR blocks such as `10.0.0.0/24`. Only addresses in the list are allowed to log in.
-- `BLOCKED_IP_LIST` (optional) lets you carve out explicit deny rules from the allowed ranges. {{{ .lake-short }}} checks the blocked list first, so an IP that exists in both lists is still denied.
+- `BLOCKED_IP_LIST` (optional) lets you carve out explicit deny rules from the allowed ranges. {{{ .lake }}} checks the blocked list first, so an IP that exists in both lists is still denied.
 - A user can reference at most one network policy at a time, but the same policy can be shared across many users for easier management.
-- If the server cannot determine a client IP or the IP does not match the allowed list, {{{ .lake-short }}} immediately returns `AuthenticateFailure`.
+- If the server cannot determine a client IP or the IP does not match the allowed list, {{{ .lake }}} immediately returns `AuthenticateFailure`.
 
 ## End-to-End Example
 

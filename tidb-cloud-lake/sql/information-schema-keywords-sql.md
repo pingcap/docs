@@ -1,11 +1,11 @@
 ---
 title: information_schema.keywords
-summary: The information_schema.keywords system table is a view that provides all keywords in {{{ .lake-short }}}.
+summary: The information_schema.keywords system table is a view that provides all keywords in {{{ .lake }}}.
 ---
 
 # information_schema.keywords
 
-The `information_schema.keywords` system table is a view that provides all keywords in {{{ .lake-short }}}
+The `information_schema.keywords` system table is a view that provides all keywords in {{{ .lake }}}
 
 ```sql
 DESCRIBE information_schema.keywords

@@ -1,11 +1,11 @@
 ---
 title: UNDROP DATABASE
-summary: Restores the most recent version of a dropped database. This leverages the {{{ .lake-short }}} Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
+summary: Restores the most recent version of a dropped database. This leverages the {{{ .lake }}} Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 ---
 
 # UNDROP DATABASE
 
-Restores the most recent version of a dropped database. This leverages the {{{ .lake-short }}} Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
+Restores the most recent version of a dropped database. This leverages the {{{ .lake }}} Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**
 [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)

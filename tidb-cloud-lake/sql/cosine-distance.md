@@ -1,6 +1,6 @@
 ---
 title: COSINE_DISTANCE
-summary: Measuring similarity using the cosine_distance function in {{{ .lake-short }}}.
+summary: Measuring similarity using the cosine_distance function in {{{ .lake }}}.
 ---
 
 # COSINE_DISTANCE
@@ -44,7 +44,7 @@ Where v1ᵢ and v2ᵢ are the elements of the input vectors.
 
 > **Note:**
 >
-> This function performs vector computations within {{{ .lake-short }}} and does not rely on external APIs.
+> This function performs vector computations within {{{ .lake }}} and does not rely on external APIs.
 
 ## Examples
 

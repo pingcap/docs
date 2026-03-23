@@ -14,7 +14,7 @@ Modifies a user account, including:
 - Changing the user's password and authentication type.
 - Setting or unsetting a password policy.
 - Setting or unsetting a network policy.
-- Setting or modifying the default role. If it is not explicitly set, {{{ .lake-short }}} will default to using the built-in role `public` as the default role.
+- Setting or modifying the default role. If it is not explicitly set, {{{ .lake }}} will default to using the built-in role `public` as the default role.
 
 ## Syntax
 
@@ -55,8 +55,8 @@ ALTER USER <name> WITH UNSET WORKLOAD GROUP
 
 - *auth_type* can be `double_sha1_password` (default), `sha256_password` or `no_password`.
 - When `MUST_CHANGE_PASSWORD` is set to `true`, the user must change their password at the next login. Please note that this takes effect only for users who have never changed their password since their account was created. If a user has ever changed their password themselves, then they do not need to change it again.
-- When you set a default role for a user using [CREATE USER](/tidb-cloud-lake/sql/create-user.md) or ALTER USER, {{{ .lake-short }}} does not verify the role's existence or automatically grant the role to the user. You must explicitly grant the role to the user for the role to take effect.
-- `DISABLED` allows you to enable or disable a user. Disabled users cannot log in to {{{ .lake-short }}} until they are enabled. Click [here](/tidb-cloud-lake/sql/create-user.md#example-4-create-users-with-special-configurations) to see an example.
+- When you set a default role for a user using [CREATE USER](/tidb-cloud-lake/sql/create-user.md) or ALTER USER, {{{ .lake }}} does not verify the role's existence or automatically grant the role to the user. You must explicitly grant the role to the user for the role to take effect.
+- `DISABLED` allows you to enable or disable a user. Disabled users cannot log in to {{{ .lake }}} until they are enabled. Click [here](/tidb-cloud-lake/sql/create-user.md#example-4-create-users-with-special-configurations) to see an example.
 
 ## Examples
 
