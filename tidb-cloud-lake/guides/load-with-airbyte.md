@@ -57,7 +57,11 @@ GRANT ROLE airbyte_role TO user1;
 
 ## Configure Airbyte
 
-To use {{{ .lake }}} with Airbyte, you should add our customized connector to your Airbyte Instance. You can add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page. Our custom destination image is `datafuselabs/destination-databend:alpha`.
+To use {{{ .lake }}} with Airbyte, add our customized connector to your Airbyte Instance.
+
+You can add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page.
+
+The custom destination image is `datafuselabs/destination-databend:alpha`.
 
 ![Configure Airbyte](/media/tidb-cloud-lake/integration-airbyte-plugins.png)
 
