@@ -10,9 +10,9 @@ summary: This guide explains how to use an experimental Airbyte destination that
 ## What is Airbyte
 
 - [Airbyte](https://airbyte.com/) is an open-source data integration platform that syncs data from applications, APIs & databases to data warehouses lakes & DBs.
-- You could load data from any airbyte source to {{{ .lake }}}.
+- You can load data from any Airbyte source to {{{ .lake }}}.
 
-Currently we implemented an experimental airbyte destination allow you to send data from your airbyte source to databend
+Currently we implemented an experimental Airbyte destination allow you to send data from your Airbyte source to {{{ .lake }}}.
 
 > **Note:**
 >
@@ -57,9 +57,11 @@ GRANT ROLE airbyte_role TO user1;
 
 ## Configure Airbyte
 
-To use {{{ .lake }}} with Airbyte, you should add our customized connector to your Airbyte Instance.
-You could add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page.
-Our custom destination image is `datafuselabs/destination-databend:alpha`
+To use {{{ .lake }}} with Airbyte, add our customized connector to your Airbyte Instance.
+
+You can add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page.
+
+The custom destination image is `datafuselabs/destination-databend:alpha`.
 
 ![Configure Airbyte](/media/tidb-cloud-lake/integration-airbyte-plugins.png)
 
@@ -67,9 +69,8 @@ Our custom destination image is `datafuselabs/destination-databend:alpha`
 
 > **Note:**
 >
-> You should have a databend instance running and accessible from your airbyte instance.
-For local airbyte, you could not connect docker compose with your localhost network.
-You may take a look at [ngrok](https://ngrok.com/) to tunnel your service(**NEVER** expose it on your production environment).
+> You should have a {{{ .lake }}} instance running and accessible from your Airbyte instance.
+For local Airbyte, you could not connect docker compose with your localhost network. You may take a look at [ngrok](https://ngrok.com/) to tunnel your service (**NEVER** expose it on your production environment).
 
 ![Setup TiDB Cloud Lake destination](/media/tidb-cloud-lake/integration-airbyte-destinations.png)
 
