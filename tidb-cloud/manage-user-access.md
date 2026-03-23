@@ -281,7 +281,7 @@ If you are in the `Organization Owner` role, you can create projects in your org
 
 To create a new project, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com),  click **...** in the upper-right corner, and then click **Create Project**
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click **Create Project**.
 
     > **Tip:**
     >

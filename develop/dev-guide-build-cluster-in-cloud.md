@@ -20,7 +20,7 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
 3. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **Create Resource**.
 
-4. On the **Create** page, **Starter** is selected by default. Enter a name for your {{{ .starter }}} instance, and then select the cloud provider and region where you want to create it.
+4. On the **Create Resource** page, **Starter** is selected by default. Enter a name for your {{{ .starter }}} instance, and then select the cloud provider and region where you want to create it.
 
 5. Click **Create** to create a {{{ .starter }}} instance.
 

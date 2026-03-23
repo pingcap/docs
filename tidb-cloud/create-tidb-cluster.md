@@ -20,24 +20,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 - For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
-## (Optional) Step 1. Use your default project or create a new project
-
-Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a default [project](/tidb-cloud/tidb-cloud-glossary.md#project). When there is only one project in your organization, your TiDB Cloud Dedicated cluster will be created in that project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
-
-If you are an organization owner, you can rename the default project or create a new project for the TiDB Cloud Dedicated cluster according to your need as follows:
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click the combo box in the upper-left corner. Your default organization and project are displayed.
-
-2. Click the name of your organization, and then click **Projects** in the left navigation pane.
-
-3. On the **Projects** page, do one of the following:
-
-    - To rename the default project, click **...** > **Rename** in the **Actions** column.
-    - To create a project, click **Create New Project**, enter a name for your project, and then click **Confirm**.
-
-4. To go to the cluster list page of your project, click the project name on the **Projects** page.
-
-## Step 2. Create a TiDB Cloud Dedicated cluster
+## Step 1. Create a TiDB Cloud Dedicated cluster
 
 If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Dedicated cluster as follows:
 
@@ -49,9 +32,11 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 2. Click **Create Resource**.
 
-3. On the **Create** page, select **Dedicated**, and then configure the cluster information as follows:
+3. On the **Create Resource** page, select **Dedicated**, and then configure the cluster information as follows:
 
-    1. Choose a cloud provider and a region.
+    1. Select a project for your TiDB Cloud Dedicated cluster. If there is no project in your organization, you can create one by clicking **Create a Project**.
+    2. Enter a name for your TiDB Cloud Dedicated cluster.
+    3. Choose a cloud provider and a region.
 
         > **Note:**
         >
@@ -60,9 +45,9 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
         > - If you signed up for TiDB Cloud through [Azure Marketplace](https://azuremarketplace.microsoft.com), the cloud provider is Azure Cloud, and you cannot change it in TiDB Cloud.
         > - If you signed up for TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is Google Cloud, and you cannot change it in TiDB Cloud.
 
-    2. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
-    3. Update the default cluster name and port number if necessary.
-    4. If CIDR has not been configured for this region, you need to set the CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this region.
+    4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
+    5. Update the default port number if necessary.
+    6. If CIDR has not been configured for this region, you need to set the CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this region.
 
         > **Note:**
         >
@@ -85,7 +70,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
     >
     > The cluster creation time can vary by region and might take longer than 30 minutes. If the process takes significantly longer than expected, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-## Step 3. Set the root password
+## Step 2. Set the root password
 
 After your TiDB Cloud Dedicated cluster is created, take the following steps to set the root password:
 

@@ -200,10 +200,11 @@ A new distributed SQL architecture that makes cloud-native object storage the ba
 
 The TiDB X architecture is now available in <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>. For more information, see [Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/) and [PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/).
 
-### TiDB X Instance
+### TiDB X instance
 
-A TiDB X instance is a [TiDB X](/tidb-cloud/tidb-x-architecture.md) cloud deployment that represents a service-oriented TiDB offering. With this deployment model, you do not need to manage or understand the underlying cluster topology.
-Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances use this deployment model.
+A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md). It does not require you to manage or understand the underlying cluster topology.
+
+Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} are using the TiDB X architecture. Therefore, when "TiDB X instance" is mentioned, it refers to a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance.
 
 ### TiFlash node
 
