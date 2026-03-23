@@ -5,7 +5,7 @@ summary: This page describes how to connect to TiDB Cloud Lake using Python.
 
 # Connect to TiDB Cloud Lake Using Python
 
-Connect to Databend using Python with our official drivers supporting both synchronous and asynchronous operations.
+Connect to {{{ .lake }}} using Python with our official drivers supporting both synchronous and asynchronous operations.
 
 ## Quick Start
 
@@ -16,7 +16,7 @@ Choose your preferred approach:
 | **databend-driver** | Direct database operations, async/await | `pip install databend-driver` |
 | **databend-sqlalchemy** | ORM integration, existing SQLAlchemy apps | `pip install databend-sqlalchemy` |
 
-**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
+**Connection String**: See [driver overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
@@ -24,7 +24,7 @@ Choose your preferred approach:
 
 ### Features
 
-- ✅ **Native Performance**: Direct connection to Databend
+- ✅ **Native Performance**: Direct connection to {{{ .lake }}}
 - ✅ **Async/Sync Support**: Choose your programming style
 - ✅ **PEP 249 Compatible**: Standard Python DB API
 - ✅ **Type Safety**: Full Python type mapping
@@ -125,7 +125,7 @@ with engine.connect() as conn:
 
 ## Data Type Mappings
 
-| Databend | Python | Notes |
+| {{{ .lake }}} | Python | Notes |
 |----------|--------|-------|
 | **Numeric Types** | | |
 | `BOOLEAN` | `bool` | |

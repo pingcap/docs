@@ -22,7 +22,7 @@ For example: _"Create a scheduled task that copies parquet files from @my_stage 
 
 We recommend using **{{{ .lake }}}** for the best experience.
 
-1. Log in to [{{{ .lake }}}](https://app.databend.com).
+1. Log in to [{{{ .lake }}}](https://app.lake.tidbcloud.com).
 2. Click **Use with AI Tools** in the navigation bar.
 3. Select regular connection information (Host, User, Password, etc.).
 4. Copy your DSN, which looks like:

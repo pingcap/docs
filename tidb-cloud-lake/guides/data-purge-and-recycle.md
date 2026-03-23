@@ -116,7 +116,9 @@ Removes temporary spill files created during query execution.
 VACUUM TEMPORARY FILES;
 ```
 
-> **Note**: Rarely needed during normal operation since {{{ .lake }}} automatically handles cleanup. Manual cleanup is typically only required when {{{ .lake }}} crashes during query execution.
+> **Note:**
+>
+> Rarely needed during normal operation since {{{ .lake }}} automatically handles cleanup. Manual cleanup is typically only required when {{{ .lake }}} crashes during query execution.
 
 ## Adjusting Data Retention Time
 

@@ -17,7 +17,7 @@ databend-driver = "0.30"
 tokio = { version = "1", features = ["full"] }
 ```
 
-**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
+**Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 

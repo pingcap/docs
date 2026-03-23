@@ -13,7 +13,7 @@ The official Go driver provides a standard `database/sql` interface for seamless
 go get github.com/databendlabs/databend-go
 ```
 
-**Connection String**: See [connection strings](/tidb-cloud-lake/guides/connection-overview.md#connection-strings).
+**Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
@@ -26,7 +26,7 @@ go get github.com/databendlabs/databend-go
 
 ## Data Type Mappings
 
-| Databend | Go | Notes |
+| {{{ .lake }}} | Go | Notes |
 |----------|----|---------|
 | **Integers** | | |
 | `TINYINT` | `int8` | |
@@ -63,7 +63,7 @@ import (
     _ "github.com/databendlabs/databend-go"
 )
 
-// Connect to Databend
+// Connect to {{{ .lake }}}
 db, err := sql.Open("databend", "<your-dsn>")
 if err != nil {
     log.Fatal(err)

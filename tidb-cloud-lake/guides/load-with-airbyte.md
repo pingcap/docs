@@ -65,7 +65,7 @@ Our custom destination image is `datafuselabs/destination-databend:alpha`
 
 ## Setup {{{ .lake }}} destination
 
-> **Note**:
+> **Note:**
 >
 > You should have a databend instance running and accessible from your airbyte instance.
 For local airbyte, you could not connect docker compose with your localhost network.

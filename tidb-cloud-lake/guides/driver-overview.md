@@ -21,6 +21,8 @@ All {{{ .lake }}} drivers use the same DSN (Data Source Name) format:
 lake://user:pwd@host[:port]/[database][?sslmode=disable][&arg1=value1]
 ```
 
+> **Note:**
+>
 > The `user:pwd` refers to SQL users in {{{ .lake }}}. See [CREATE USER](/tidb-cloud-lake/sql/create-user.md) to create users and grant privileges.
 
 ### Connection Examples

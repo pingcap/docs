@@ -1,13 +1,13 @@
 ---
 title: BendSQL
-summary: BendSQL is a command line tool that has been designed specifically for Databend. It allows users to establish a connection with Databend and execute queries directly from a CLI window.
+summary: BendSQL is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 ---
 
 # BendSQL
 
-[BendSQL](https://github.com/databendlabs/bendsql) is a command line tool that has been designed specifically for Databend. It allows users to establish a connection with Databend and execute queries directly from a CLI window.
+[BendSQL](https://github.com/databendlabs/bendsql) is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 
-BendSQL is particularly useful for those who prefer a command line interface and need to work with Databend on a regular basis. With BendSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
+BendSQL is particularly useful for those who prefer a command line interface and need to work with {{{ .lake }}} on a regular basis. With BendSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
 
 ## Installing BendSQL
 
@@ -146,15 +146,15 @@ cargo install bendsql
 
 ## User Authentication
 
-For connections to {{{ .lake }}}, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Please note that the user account you use to log in to the [{{{ .lake }}} console](https://app.databend.com) cannot be used for connecting to {{{ .lake }}}.
+For connections to {{{ .lake }}}, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Note that the user account you use to log in to the [{{{ .lake }}} console](https://app.lake.tidbcloud.com) cannot be used for connecting to {{{ .lake }}}.
 
 ## Connecting with BendSQL
 
-BendSQL allows you to connect to both {{{ .lake }}} and self-hosted Databend instances.
+BendSQL allows you to connect to both {{{ .lake }}} instances.
 
 ### Customize Connections with a DSN
 
-A DSN (Data Source Name) is a simple yet powerful way to configure and manage your Databend connection in BendSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
+A DSN (Data Source Name) is a simple yet powerful way to configure and manage your {{{ .lake }}} connection in BendSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
 
 #### DSN Format and Parameters
 
@@ -400,7 +400,7 @@ root@localhost:8000/default> select * from system.settings;
 │ storage... │ 1048576 │ 1048576 │ None     │ DEFAULT │ Sets the byte size of the buff... │ UInt64 │
 │ table_l... │ 10      │ 10      │ None     │ DEFAULT │ Sets the seconds that the tabl... │ UInt64 │
 │ timezone   │ UTC     │ UTC     │ None     │ DEFAULT │ Sets the timezone.                │ String │
-│ unquote... │ 0       │ 0       │ None     │ DEFAULT │ Determines whether Databend tr... │ UInt64 │
+│ unquote... │ 0       │ 0       │ None     │ DEFAULT │ Determines whether {{{ .lake }}} tr... │ UInt64 │
 │ use_par... │ 0       │ 0       │ [0, 1]   │ DEFAULT │ This setting is deprecated        │ UInt64 │
 │ 96 rows    │         │         │          │         │                                   │        │
 │ (10 shown) │         │         │          │         │                                   │        │
@@ -580,13 +580,13 @@ For examples of each command, please refer to the reference information below:
 
 ### `!exit`
 
-Disconnects from Databend and exits BendSQL.
+Disconnects from {{{ .lake }}} and exits BendSQL.
 
 ```shell title='Example:'
 ➜  ~ bendsql
 Welcome to BendSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
+Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
 // highlight-next-line
 root@localhost:8000/default> !exit
@@ -595,13 +595,13 @@ Bye~
 
 ### `!quit`
 
-Disconnects from Databend and exits BendSQL.
+Disconnects from {{{ .lake }}} and exits BendSQL.
 
 ```shell title='Example:'
 ➜  ~ bendsql
 Welcome to BendSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
+Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
 // highlight-next-line
 root@localhost:8000/default> !quit
@@ -659,7 +659,7 @@ INSERT INTO test_table (id, name) VALUES (3, 'Charlie');
 ➜  ~ bendsql
 Welcome to BendSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
-Connected to Databend Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
+Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
 // highlight-next-line
 root@localhost:8000/default> !source ./desktop/test.sql

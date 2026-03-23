@@ -24,7 +24,7 @@ This tutorial shows you how to build a conversational Business Intelligence tool
 
 Before getting started, you'll need:
 
-1. **{{{ .lake }}} Database** - Either [{{{ .lake }}}](https://app.databend.com) (free tier available) or a self-hosted instance
+1. **{{{ .lake }}} Database** - Either [{{{ .lake }}}](https://app.lake.tidbcloud.com) (free tier available) or a self-hosted instance
 2. **DeepSeek API Key** - Get your key from [https://platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
 
 ## Step-by-Step Tutorial
@@ -33,7 +33,7 @@ Before getting started, you'll need:
 
 If you don't already have a {{{ .lake }}} database:
 
-1. **Sign up for [{{{ .lake }}}](https://app.databend.com)** (free tier available)
+1. **Sign up for [{{{ .lake }}}](https://app.lake.tidbcloud.com)** (free tier available)
 2. **Create a warehouse and database**
 3. **Get your connection string** from the console
 
