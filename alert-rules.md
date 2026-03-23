@@ -244,19 +244,19 @@ This section gives the alert rules for the PD component.
     * If you confirm that the TiKV/TiFlash instance cannot be recovered, you can make it offline.
     * If you confirm that the TiKV/TiFlash instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV/TiFlash instance from being considered as irrecoverable and the data from being removed from the TiKV/TiFlash.
 
-#### `PD_cluster_unhealthy_tikv_nums`
+#### `PD_cluster_unhealthy_store_nums`
 
-* Alert rule:
+* Alarm Rule:
 
     `(sum(pd_cluster_status{type="store_unhealth_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+* Rule Description:
 
-    Indicates that there are unhealthy stores. If the situation persists for some time (configured by [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time), defaults to `30m`), the store is likely to change to `Offline` state, which triggers the [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums) alert.
+    Indicates that there are stores in an abnormal state. If this state persists for a period of time (depending on the configured [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time), which defaults to `30m`), the store may enter the `Offline` state and trigger the [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums) alarm.
 
-* Solution:
+* Handling Suggestions:
 
-    Check the state of the TiKV stores.
+    Check the status of TiKV/TiFlash.
 
 #### `PD_cluster_low_space`
 
@@ -355,20 +355,20 @@ This section gives the alert rules for the PD component.
     * Check the network and system load status.
     * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
-#### `TiKV_space_used_more_than_80%`
+#### `PD_cluster_store_space_used_more_than_80%`
 
-* Alert rule:
+* Alarm Rule:
 
     `sum(pd_cluster_status{type="storage_size"}) / sum(pd_cluster_status{type="storage_capacity"}) * 100 > 80`
 
-* Description:
+* Rule Description:
 
-    Over 80% of the cluster space is occupied.
+    The cluster space utilization exceeds 80%.
 
-* Solution:
+* Handling Suggestions:
 
-    * Check whether it is needed to increase capacity.
-    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, and core dump.
+    * Confirm if capacity expansion is needed.
+    * Investigate if any files are occupying a large amount of disk space, such as log files, snapshots, or core dump files.
 
 #### `PD_system_time_slow`
 
@@ -383,21 +383,6 @@ This section gives the alert rules for the PD component.
 * Solution:
 
     Check whether the system time is configured correctly.
-
-#### `PD_no_store_for_making_replica`
-
-* Alert rule:
-
-    `increase(pd_checker_event_count{type="replica_checker", name="no_target_store"}[1m]) > 0`
-
-* Description:
-
-    There is no appropriate store for additional replicas.
-
-* Solution:
-
-    * Check whether there is enough space in the store.
-    * Check whether there is any store for additional replicas according to the label configuration if it is configured.
 
 #### `PD_cluster_slow_tikv_nums`
 
