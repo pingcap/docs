@@ -15,7 +15,7 @@ This tutorial demonstrates how to integrate [TiDB Vector Search](/ai/concepts/ve
 
 > **Tip**
 >
-> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) in Jupyter Notebook, or run it directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> You can view the complete [sample code](https://docs.langchain.com/oss/python/integrations/vectorstores/tidb_vector) in LangChain documentation.
 
 ## Prerequisites
 
@@ -148,11 +148,11 @@ The following are descriptions for each parameter:
 
 #### Step 4.1 Download the sample document
 
-In your project directory, create a directory named `data/how_to/` and download the sample document [`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt) from the [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub repository.
+In your project directory, create a directory named `data/how_to/` and download the sample document [`state_of_the_union.txt`](https://github.com/langchain-ai/langchainjs/blob/main/examples/state_of_the_union.txt) from the [langchain-ai/langchainjs](https://github.com/langchain-ai/langchainjs) GitHub repository.
 
 ```shell
 !mkdir -p 'data/how_to/'
-!wget 'https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/docs/how_to/state_of_the_union.txt' -O 'data/how_to/state_of_the_union.txt'
+!wget 'https://raw.githubusercontent.com/langchain-ai/langchainjs/refs/heads/main/examples/state_of_the_union.txt' -O 'data/how_to/state_of_the_union.txt'
 ```
 
 #### Step 4.2 Load and split the document
