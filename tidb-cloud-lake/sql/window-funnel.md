@@ -5,9 +5,7 @@ summary: Funnel Analysis.
 
 # WINDOW_FUNNEL
 
-<p align="center">
-<img alt="{{{ .lake-short }}} Funnel Analysis" src="/media/tidb-cloud-lake/remote-7db0f18fbe80-databend-funnel.png" width="550"/>
-</p>
+![Funnel Analysis](/media/tidb-cloud-lake/remote-7db0f18fbe80-databend-funnel.png)
 
 ## WINDOW_FUNNEL
 
