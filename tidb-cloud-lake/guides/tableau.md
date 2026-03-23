@@ -147,7 +147,7 @@ Obtain the connection information from {{{ .lake }}}. For how to do that, refer 
 
     | Parameter | Description                                                          | For This Tutorial                                                          |
     | --------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-    | URL       | Format: `jdbc:lake://{user}:{password}@{host}:{port}/{database}` | `jdbc:lake://cloudapp:<your-password>@https://<your-host>:443/default` |
+    | URL       | Format: `jdbc:lake://{user}:{password}@{host}:{port}/{database}` | `jdbc:lake://cloudapp:<your-password>@<your-host>:443/default` |
     | Dialect   | Select "MySQL" for SQL dialect.                                      | MySQL                                                                      |
     | Username  | SQL user for connecting to {{{ .lake }}}                            | cloudapp                                                                   |
     | Password  | SQL user for connecting to {{{ .lake }}}                            | Your password                                                              |

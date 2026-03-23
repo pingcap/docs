@@ -64,7 +64,7 @@ import (
 )
 
 // Connect to {{{ .lake }}}
-db, err := sql.Open("databend", "<your-dsn>")
+db, err := sql.Open("lake", "<your-dsn>")
 if err != nil {
     log.Fatal(err)
 }
