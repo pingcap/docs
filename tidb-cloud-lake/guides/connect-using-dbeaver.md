@@ -31,7 +31,7 @@ Log in to {{{ .lake }}} to obtain connection information. For more information, 
 
 ### Step 2: Configure {{{ .lake }}} Connection
 
-1. In DBeaver, go to **Database** > **New Database Connection** to open the connection wizard, then select **{{{ .lake }}}** under the **Analytical** category.
+1. In DBeaver, go to **Database** > **New Database Connection** to open the connection wizard, then select **Databend** under the **Analytical** category.
 
     ![alt text](/media/tidb-cloud-lake/dbeaver-analytical.png)
 
