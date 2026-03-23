@@ -91,7 +91,7 @@ To view the billing details, perform the following steps:
 
 On the **Billing** page, the **Bills** tab is displayed by default.
 
-The **Bills** tab shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+The **Bills** tab shows the billing summary by projects & instances and the billing summary by service. You can also see the usage details and download the data in CSV format.
 
 > **Note:**
 >
