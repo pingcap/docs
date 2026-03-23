@@ -134,7 +134,7 @@ To restore a deleted instance from the Recycle Bin, take the following steps:
 
     >**Tip:**
     >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. On the **Recycle Bin** page, click the **Premium** tab to go to the recycle bin of {{{ .premium }}} instances.
 
