@@ -9,34 +9,22 @@ TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you 
 
 This document describes how to configure your Prometheus service to read key metrics from the TiDB Cloud endpoint and how to view the metrics using [Grafana](https://grafana.com/).
 
-## Prometheus integration versions
-
-TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 15, 2022. Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview). Starting from December 2, 2025, the cluster-level Prometheus integration becomes generally available (GA).
-
-- **Cluster-level Prometheus integration**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration for your organization to experience the latest enhancements.
-
-- **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. 
-
-    > **Note**
-    >
-    > The legacy project-level Prometheus integrations will be deprecated on January 9, 2026. If your organization is still using these legacy integrations, follow [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
-
 ## Prerequisites
 
 - To integrate TiDB Cloud with Prometheus, you must have a self-hosted or managed Prometheus service.
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` role to access the target clusters under your project in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Instance Viewer` role to access the target Premium Instances under your Organization in TiDB Cloud.
 
 ## Limitation
 
-- Prometheus and Grafana integrations now are only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
-- Prometheus and Grafana integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
+- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essential) instances, [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#tidb-cloud-premium) instances.
+- Prometheus and Grafana integrations are not available when the cluster/instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 ## Steps
 
 ### Step 1. Get a scrape_config file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters/instances.
 
 Depending on your [Prometheus integration version](#prometheus-integration-versions), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
 
