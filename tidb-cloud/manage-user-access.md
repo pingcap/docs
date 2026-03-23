@@ -29,15 +29,15 @@ The following is an example of the hierarchical structure:
 
 ```
 - Your organization
+    - TiDB X instances out of any project
+        - {{{ .starter }}} instance 1
     - TiDB X project 1
-        - Starter instance 1
-        - Starter instance 2
-        - Essential instance 2
+        - {{{ .starter }}} instance 2
+        - {{{ .essential }}} instance 3
+        - {{{ .premium }}} instance 4
     - TiDB Dedicated project 1
-        - Dedicated cluster 1
-        - Dedicated cluster 2
-    - Instances without a project
-        - Starter instance 3
+        - {{{ .dedicated }}} cluster 1
+        - {{{ .dedicated }}} cluster 2
 ```
 
 Under this structure:
