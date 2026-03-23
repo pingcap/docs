@@ -363,7 +363,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    The cluster space utilization exceeds 80%.
+    Over 80% of the cluster space is occupied.
 
 * Solution:
 
