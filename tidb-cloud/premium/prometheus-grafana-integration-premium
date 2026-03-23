@@ -22,11 +22,11 @@ This document describes how to configure your Prometheus service to read key met
 
 ## Steps
 
-### Step 1. Get a scrape_config file for Prometheus
+### Step 1. Get a `scrape_config` file for Prometheus
 
 Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters/instances.
 
-Depending on your [Prometheus integration version](#prometheus-integration-versions), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
+The steps to get the `scrape_config` file and access the integration page vary depending on your [Prometheus integration version](#prometheus-integration-versions).
 
 <SimpleTab>
 <div label="Cluster-level Prometheus integration">
@@ -43,7 +43,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Prometheus (BETA)**.
-4. Click **Add File** to generate and show the scrape_config file for the current project.
+4. Click **Add File** to generate and show the `scrape_config` file for the current project.
 5. Make a copy of the `scrape_config` file content for later use.
 
 </div>
@@ -51,7 +51,8 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 
 > **Note:**
 >
-> For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window. If you forget to do so, you need to delete the `scrape_config` file in TiDB Cloud and generate a new one. To delete a `scrape_config` file, select the file, click **...**, and then click **Delete**.
+> - For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window. 
+> - If you forget, delete the `scrape_config` file in TiDB Cloud and generate a new one. To delete a `scrape_config` file, select the file, click **...**, and then click **Delete**.
 
 ### Step 2. Integrate with Prometheus
 
@@ -61,13 +62,13 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 
 2. In the Prometheus configuration file, locate the `scrape_configs` section, and then copy the `scrape_config` file content obtained from TiDB Cloud to the section.
 
-3. In your Prometheus service, check **Status** > **Targets** to confirm that the new `scrape_config` file has been read. If not, you might need to restart the Prometheus service.
+3. In your Prometheus service, check **Status** > **Targets** to verify that the new `scrape_config` file has been read. If not, you might need to restart the Prometheus service.
 
 ### Step 3. Use Grafana GUI dashboards to visualize the metrics
 
-After your Prometheus service is reading metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics as follows:
+After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics as follows:
 
-1. Depending on your [Prometheus integration version](#prometheus-integration-versions), the link to download the Grafana dashboard JSON of TiDB Cloud for Prometheus is different.
+1. The link to download the Grafana dashboard JSON of TiDB Cloud for Prometheus differs depending on your [Prometheus integration version](#prometheus-integration-versions).
 
     - For cluster-level Prometheus integration, download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json).
     - For legacy project-level Prometheus integration (Beta), download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
@@ -82,13 +83,13 @@ After your Prometheus service is reading metrics from TiDB Cloud, you can use Gr
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
-## Best practice of rotating scrape_config
+## Best practice of rotating `scrape_config`
 
-To improve data security, it is a general best practice to periodically rotate `scrape_config` file bearer tokens.
+To improve data security, periodically rotate `scrape_config` file bearer tokens.
 
 1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new `scrape_config` file for Prometheus.
 2. Add the content of the new file to your Prometheus configuration file.
-3. Once you have confirmed that your Prometheus service is still able to read from TiDB Cloud, remove the content of the old `scrape_config` file from your Prometheus configuration file.
+3. Once you confirm that your Prometheus service can read from TiDB Cloud, remove the content of the old `scrape_config` file from your Prometheus configuration file.
 4. On the **Integrations** page of your project or cluster, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
 
 ## Metrics available to Prometheus
@@ -104,7 +105,7 @@ Prometheus tracks the following metric data for your TiDB clusters.
 | tidbcloud_changefeed_latency | gauge | changefeed_id | The data replication latency between the upstream and the downstream of a changefeed |
 | tidbcloud_changefeed_checkpoint_ts | gauge | changefeed_id | The checkpoint timestamp of a changefeed, representing the largest TSO (Timestamp Oracle) successfully written to the downstream |
 | tidbcloud_changefeed_replica_rows | gauge | changefeed_id | The number of replicated rows that a changefeed writes to the downstream per second |
-| tidbcloud_node_storage_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk usage, in bytes, for TiKV or TiFlash nodes. This metric primarily represents the logical data size in the storage engine, and excludes WAL files and temporary files. To calculate the actual disk usage rate, use `(capacity - available) / capacity` instead. When the storage usage of TiKV exceeds 80%, latency spikes might occur, and higher usage might cause requests to fail. When the storage usage of all TiFlash nodes reaches 80%, any DDL statement that adds a TiFlash replica hangs indefinitely. |
+| tidbcloud_node_storage_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk usage, in bytes, for TiKV or TiFlash nodes. This metric primarily represents the logical data size in the storage engine, and excludes WAL files and temporary files. To calculate the actual disk usage rate, use `(capacity - available) / capacity` instead. <ul><li>When the storage usage of TiKV exceeds 80%, latency spikes might occur, and higher usage might cause requests to fail. </li><li>When the storage usage of all TiFlash nodes reaches 80%, any DDL statement that adds a TiFlash replica hangs indefinitely.</li></ul> |
 | tidbcloud_node_storage_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk capacity bytes of TiKV/TiFlash nodes |
 | tidbcloud_node_cpu_seconds_total | count | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU usage of TiDB/TiKV/TiFlash nodes |
 | tidbcloud_node_cpu_capacity_cores | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU limit cores of TiDB/TiKV/TiFlash nodes |
@@ -133,4 +134,4 @@ For cluster-level Prometheus integration, the following additional metrics are a
 
 - Why does the same metric have different values on Grafana and the TiDB Cloud console at the same time?
 
-    The aggregation calculation logic is different between Grafana and TiDB Cloud, so the displayed aggregated values might differ. You can adjust the `mini step` configuration in Grafana to get more fine-grained metric values.
+    Grafana and TiDB Cloud use different aggregation calculation logic, so the displayed aggregated values might differ. You can adjust the `mini step` configuration in Grafana to get more fine-grained metric values.
