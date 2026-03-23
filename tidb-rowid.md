@@ -129,7 +129,7 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 - On partitioned non-clustered tables, `_tidb_rowid` values are not guaranteed to be unique across partitions. After you execute `EXCHANGE PARTITION`, different partitions can contain rows with the same `_tidb_rowid` value.
 - Whether `_tidb_rowid` exists depends on the table layout. If a table uses a clustered index, use the primary key instead.
 
-## Hotspot considerations
+## Address hotspot issues
 
 For tables that use `_tidb_rowid`, TiDB allocates row IDs in increasing order by default. In write-intensive workloads, this can create write hotspots.
 
