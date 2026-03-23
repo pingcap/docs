@@ -346,6 +346,30 @@ To invite a member to a project, take the following steps:
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
+### Move a TiDB X instance
+
+If you are in the `Organization Owner` or `Project Owner` role, you can move a TiDB X instance to a project or out of any project.
+
+> **Note:**
+>
+> Only TiDB X instances support moving between TiDB X projects and out of any TiDB X project. TiDB Cloud Dedicated clusters do not support moving between projects.
+
+To move a TiDB X instance, take the following steps:
+
+
+2. In the project view, expand the project folder that contains the TiDB X instance to be moved, click **...** for the target TiDB X instance, and then click **Move**.
+
+    > **Tip:**
+    >
+    > If the TiDB X instance is not in any project, it is displayed in the **Out of project** folder.
+
+3. In the displayed dialog, do one of the following:
+
+    - To move the TiDB X instance to a project, select **To a project**, and then select the target project from the drop-down list.
+    - To move the TiDB X instance out of any project, select **Outside any project**.
+
+4. Click **Move**.
+
 ### Remove project access for a user
 
 If you are in the `Organization Owner` or `Project Owner` role, you can remove project members.
