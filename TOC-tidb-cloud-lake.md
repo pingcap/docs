@@ -52,6 +52,7 @@
     - [Stage Overview](/tidb-cloud-lake/guides/stage-overview.md)
     - [Upload to Stage](/tidb-cloud-lake/guides/upload-to-stage.md)
   - Load from Files
+    - [Overview](/tidb-cloud-lake/guides/load-from-files.md)
     - [Load from Stage](/tidb-cloud-lake/guides/load-from-stage.md)
     - [Load from Bucket](/tidb-cloud-lake/guides/load-from-bucket.md)
     - [Load from Local File](/tidb-cloud-lake/guides/load-from-local-file.md)

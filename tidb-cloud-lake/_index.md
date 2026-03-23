@@ -13,17 +13,27 @@ summary: TiDB Cloud Lake is cloud-native data warehouse service focused on analy
 
 [Architecture](https://docs.tidb.io/tidbcloudlake/tidb-cloud-lake-architecture/)
 
+[Warehouse](https://docs.tidb.io/tidbcloudlake/warehouse/)
+
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
 [Quick Start](https://docs.tidb.io/tidbcloudlake/lake-quick-start/)
 
+[Ingest JSON Logs with Vector](https://docs.tidb.io/tidbcloudlake/ingest-json-logs-with-vector-cloud/)
+
+[Ingest Kafka with Kafka Connect](https://docs.tidb.io/tidbcloudlake/ingest-kafka-with-kafka-connect/)
+
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Connect to TiDB Cloud Lake](https://docs.tidb.io/tidbcloudlake/connection-overview/)
+[Connection Overview](https://docs.tidb.io/tidbcloudlake/connection-overview/)
+
+[Connect to TiDB Cloud Lake Using DBeaver](https://docs.tidb.io/tidbcloudlake/connect-using-dbeaver/)
+
+[Connect to TiDB Cloud Lake Using Golang](https://docs.tidb.io/tidbcloudlake/connect-using-golang/)
 
 </LearningPath>
 
@@ -33,7 +43,7 @@ summary: TiDB Cloud Lake is cloud-native data warehouse service focused on analy
 
 [Load from Stage](https://docs.tidb.io/tidbcloudlake/load-from-stage/)
 
-[Loading Semi-structured Formats](https://docs.tidb.io/tidbcloudlake/load-semi-structured-formats/)
+[Load Semi-structured Formats](https://docs.tidb.io/tidbcloudlake/load-semi-structured-formats/)
 
 </LearningPath>
 

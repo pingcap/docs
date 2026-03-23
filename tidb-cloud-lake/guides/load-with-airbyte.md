@@ -5,21 +5,18 @@ summary: This guide explains how to use an experimental Airbyte destination that
 
 # Airbyte
 
-<p align="center">
-<img alt="Airbyte" src="/media/tidb-cloud-lake/integration-airbyte.png"/>
-</p>
+![Loading data with Airbyte](/media/tidb-cloud-lake/integration-airbyte.png)
 
-## What is [Airbyte](https://airbyte.com/)?
+## What is Airbyte
 
-- Airbyte is an open-source data integration platform that syncs data from applications, APIs & databases to data warehouses lakes & DBs.
+- [Airbyte](https://airbyte.com/) is an open-source data integration platform that syncs data from applications, APIs & databases to data warehouses lakes & DBs.
 - You could load data from any airbyte source to {{{ .lake-short }}}.
 
 Currently we implemented an experimental airbyte destination allow you to send data from your airbyte source to databend
 
-**NOTE**:
-
-currently we only implemented the `append` mode, which means the destination will only append data to the table, and will not overwrite, update or delete any data.
-Plus, we assume that your databend destination is **S3 Compatible** since we used presign to copy data from databend stage to table.
+> **Note:**
+>
+> currently we only implemented the `append` mode, which means the destination will only append data to the table, and will not overwrite, update or delete any data. Plus, we assume that your databend destination is **S3 Compatible** since we used presign to copy data from databend stage to table.
 
 To check whether your backend support the integration, you could simply run the following command
 
@@ -64,21 +61,17 @@ To use {{{ .lake-short }}} with Airbyte, you should add our customized connector
 You could add the destination in Settings -> Destinations -> Custom Destinations -> Add a Custom Destination Page.
 Our custom destination image is `datafuselabs/destination-databend:alpha`
 
-<p align="center">
-<img alt="Configure Airbyte" src="/media/tidb-cloud-lake/integration-airbyte-plugins.png"/>
-</p>
+![Configure Airbyte](/media/tidb-cloud-lake/integration-airbyte-plugins.png)
 
 ## Setup {{{ .lake-short }}} destination
 
-**Note**:
-
-You should have a databend instance running and accessible from your airbyte instance.
+> **Note**:
+>
+> You should have a databend instance running and accessible from your airbyte instance.
 For local airbyte, you could not connect docker compose with your localhost network.
 You may take a look at [ngrok](https://ngrok.com/) to tunnel your service(**NEVER** expose it on your production environment).
 
-<p align="center">
-<img alt="Setup {{{ .lake-short }}} destination" src="/media/tidb-cloud-lake/integration-airbyte-destinations.png"/>
-</p>
+![Setup TiDB Cloud Lake destination](/media/tidb-cloud-lake/integration-airbyte-destinations.png)
 
 ## Test your integration
 
