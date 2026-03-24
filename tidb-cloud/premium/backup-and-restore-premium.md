@@ -69,19 +69,19 @@ To delete an existing backup file for your {{{ .premium }}} instance, perform th
 
 ## Manual backups
 
-In addition to automatic backups, {{{ .premium }}} supports manual backups. Manual backups provide a user-controlled, guaranteed restore point, which is highly recommended before performing high-risk actions such as system upgrades, critical data deletion, and irreversible schema or configuration changes.
+In addition to automatic backups, {{{ .premium }}} supports manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
 
-### Key characteristics of manual backups:
+### Key characteristics
 
-- **Retention and deletion**: unlike automatic backups, manual backups are not automatically deleted based on retention rules. They are retained indefinitely until you explicitly delete them. If the instance is deleted, its manual backups are moved to the Recycle Bin and will remain there permanently until manual deletion.
+- **Retention and deletion**: unlike automatic backups, manual backups are not automatically deleted based on retention policies. They are retained until you explicitly delete them. If you delete the instance, its manual backups move to the recycle bin and remain there until you manually delete them.
 
 - **Storage location**: manual backups are stored in cloud storage managed by TiDB.
 
-- **Cost**: due to their long-term retention, manual backups are subject to additional charges.
+- **Cost**: because manual backups are retained long term and incur additional charges.
 
-- **Limitations**: manual backups do not support Point-in-Time Recovery (PITR) or partial backups (for example, table-level or database-level). Restoring a manual backup into an existing or running instance is not supported. Each restore requires a new instance.
+- **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
 
-- **Permissions**: both **Organization owners** and **Instance managers** can perform manual backups. However, only **Organization owners** can perform restore actions for system-managed manual backups.
+- **Permissions**: both `Organization Owner` and `Instance Manager` can create manual backups. Only `Organization Owner` can restore system-managed manual backups.
 
 ### Create a manual backup
 
@@ -91,7 +91,7 @@ In addition to automatic backups, {{{ .premium }}} supports manual backups. Manu
 
 3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**. 
 
-You can restore the manual backup directly through the UI without requiring external storage credentials.
+You can restore a manual backup directly in the TiDB Cloud console without providing external storage credentials.
 
 ## Restore
 
@@ -101,7 +101,7 @@ TiDB Cloud provides restore functionality to help recover data in case of accide
 
 TiDB Cloud supports snapshot restore and point-in-time restore for your instance.
 
-- **Snapshot Restore**: restores your instance from a specific backup snapshot. Both automatic and manual backups can be restored this way. Manual backups are displayed in the **Backup List** with a **Manual** backup type and a **Permanent** expiration status.
+- **Snapshot Restore**: restores your instance from a specific backup snapshot. You can use this method to restore both automatic and manual backups. In the **Backup List**, manual backups are labeled with the **Manual** type and a **Permanent** expiration status.
 
 - **Point-in-Time Restore**: restores your instance to a specific point in time.
 
