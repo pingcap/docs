@@ -44,10 +44,10 @@ Premium supports two layers of data-at-rest encryption to ensure data security. 
 #### Backup & Restore Description
 When Dual-layer Data Encryption is enabled for Premium TiDB, the backup data for that Premium TiDB instance is also encrypted. For a new Premium TiDB instance restored from backup data, its encryption attributes and KMS master key will remain consistent with the original Premium TiDB instance.
 
-Access to backup data also relies on the KMS master key configured on the Dual-layer Data Encryption. To ensure backup data availability, the following aspects need attention:
+Access to backup data also relies on the KMS master key configured for Dual-layer Data Encryption. To ensure backup data availability, you need to pay attention to the following:
 
-- Customers need to maintain the availability of the KMS master key associated with the backup data. Even if Premium TiDB is deleted, customers still need to ensure the availability of the associated KMS master key to ensure backup data can be recovered.
-- When performing backup data recovery operations, customers need to configure the same KMS master key (the KMS master key associated with the backup data) in the process. Customers need to ensure that the key is correctly authorized to guarantee that the backup data can be accessed normally.
+- You need to maintain the availability of the KMS master key associated with the backup data. Even if the Premium TiDB instance is deleted, you must ensure the availability of the associated KMS master key so that the backup data can be recovered.
+- When you perform backup data recovery operations, you need to configure the same KMS master key (the one associated with the backup data). You must ensure that the key is correctly authorized to guarantee that the backup data can be accessed normally.
 
 ### Key Management Mechanism
 
