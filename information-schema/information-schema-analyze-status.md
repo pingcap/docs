@@ -7,10 +7,6 @@ summary: Learn the `ANALYZE_STATUS` information_schema table.
 
 The `ANALYZE_STATUS` table provides information about the running tasks that collect statistics and a limited number of history tasks.
 
-> **Warning:**
->
-> Statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`).
-
 Starting from TiDB v6.1.0, the `ANALYZE_STATUS` table supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this table. Before TiDB v6.1.0, the `ANALYZE_STATUS` table can only show instance-level tasks, and task records are cleared after a TiDB restart.
 
 Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
