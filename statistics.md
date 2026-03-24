@@ -365,7 +365,7 @@ The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v5
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
 - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 
-Version 2 is the recommended statistics version. Compared to Version 1, Version 2 improves the accuracy of many statistics for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and it supports automated collection only on selected columns (see [Collecting statistics on some columns](#collect-statistics-on-some-columns)).
+Version 2 is the recommended statistics version. Compared to Version 1, Version 2 improves the accuracy of many statistics for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation. In addition, Version 2 lets you limit column statistics collection to specific columns or `PREDICATE COLUMNS` to reduce collection overhead, but it still collects statistics on the indexed columns and all indexes together. For details, see [Collect statistics on some columns](#collect-statistics-on-some-columns).
 
 The following table lists the information collected by each version for usage in the optimizer estimates:
 
