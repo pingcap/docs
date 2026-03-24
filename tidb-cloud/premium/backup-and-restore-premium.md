@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back Up and Restore {{{ .premium }}} Data
 
-This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports both automatic backups and manual backups, and lets you restore backup data to a new instance as needed
+This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports both automatic backups and manual backups, and lets you restore backup data to a new instance as needed.
 
 Backup files can originate from the following sources:
 
@@ -88,7 +88,7 @@ In addition to automatic backups, {{{ .premium }}} supports manual backups. Manu
 
 2. In the upper-right corner, click **...**, and then click **Manual Backup**.
 
-3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the Backup List. It can be restored directly through the UI without requiring external storage credentials.
+3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**. You can restore it directly through the UI without requiring external storage credentials.
 
 ## Restore
 
@@ -102,7 +102,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your instance
 
 - **Point-in-Time Restore**: restores your instance to a specific point in time.
 
-    - Premium instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. (Note: PITR is not supported for manual backups)
+    - Premium instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
 
 ### Restore destination
 
