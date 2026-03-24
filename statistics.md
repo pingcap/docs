@@ -380,7 +380,7 @@ The following table lists the information collected by each version for usage in
 
 ### Switch between statistics versions
 
-It is recommended to ensure that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible.
+It is recommended to ensure that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Before Statistics Version 2 is collected for an object, TiDB can continue to use its existing Statistics Version 1.
 
 One common reason to migrate is that Version 1 might produce inaccurate equal/IN predicate estimates because Count-Min sketch can have hash collisions. For details, see [Count-Min Sketch](#count-min-sketch). Setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects avoids this issue.
 
@@ -395,14 +395,7 @@ To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Versi
     WHERE stats_ver = 1;
     ```
 
-- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
-
-    ```sql
-    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
-    FROM information_schema.tables JOIN mysql.stats_histograms
-    ON table_id = tidb_table_id
-    WHERE stats_ver = 1;
-    ```
+- If TiDB automatically executes the `ANALYZE` statement because auto-analysis is enabled, after you set `tidb_analyze_version = 2`, TiDB gradually refreshes statistics to Version 2 through subsequent auto-analysis. Before Statistics Version 2 is collected for an object, TiDB can continue to use its existing Statistics Version 1. If you need to speed up the migration for important objects, run `ANALYZE` on them manually.
 
 - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
 
