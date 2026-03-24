@@ -9,10 +9,6 @@ This statement updates the statistics that TiDB builds on tables and indexes. It
 
 TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
 
-> **Warning:**
->
-> Statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`). For details, see [Introduction to Statistics](/statistics.md#versions-of-statistics).
-
 Currently, TiDB collects statistical information as a full collection by using the `ANALYZE TABLE` statement. For more information, see [Introduction to statistics](/statistics.md).
 
 ## Synopsis
