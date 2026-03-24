@@ -19,6 +19,7 @@ args = aparser.parse_args()
 
 if args.download_from_url:
     try:
+        print(f"Fetching {args.parser_url}")
         r = requests.get(args.parser_url, timeout=30)
         r.raise_for_status()
         lines = r.text.splitlines()
