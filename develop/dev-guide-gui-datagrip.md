@@ -78,46 +78,44 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 <div label="{{{ .premium }}}">
 
-1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
 
-2. In the left panel, click **Settings**, and then click **Networking**.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. In the **Public Endpoint** section, click **Enable**. Wait a few minutes until the public endpoint is enabled.
-
-4. Click **Overview** in the left panel to return to the overview page.
-
-5. Click **Connect** in the upper-right corner. A connection dialog is displayed. In the connection dialog, select `Public` from the **Connection Type** drop-down list.
-
-    If you see a message indicating that the public endpoint is still being enabled, wait until it is enabled.
-
-6. Click **Configure IP Access List** to configure an IP access list.
+3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
 
     Ensure that your client IP address is in the access list.
 
-7. (Optional) If you need to verify the server certificate or if the connection fails and you are prompted for a CA certificate, click **CA cert** to download the CA certificate.
+4. In the left navigation pane, click **Overview** to return to the instance overview page.
 
-    If you have not set the password yet, click **Set Root Password** in the dialog.
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-    In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connection types. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+6. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
 
-8. Launch DataGrip and create a project to manage your connections.
+    - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
+    - If you have not set a password yet, click **Set Root Password** in the dialog.
+    - If you need to verify the server certificate or if the connection fails and a CA certificate is required, click **CA cert** to download it.
+    - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
 
-9. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+7. Launch DataGrip and create a project to manage your connections.
 
-10. Configure the following connection parameters based on the connection dialog:
+8. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    - **Host**: `{host}`
-    - **Port**: `{port}`
-    - **User**: `{user}`
-    - **Password**: `{password}`
+9. Copy and paste the appropriate connection string into the **Data Source and Drivers** window in DataGrip. The mappings between DataGrip fields and {{{ .premium }}} connection string are as follows:
 
-    Keep **Use SSL** cleared.
+    | DataGrip field | {{{ .premium }}} connection string |
+    | -------------- | ------------------------------- |
+    | Host           | `{host}`                        |
+    | Port           | `{port}`                        |
+    | User           | `{user}`                        |
+    | Password       | `{password}`                    |
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    - On the **SSH/SSL** tab, clear the **Use SSL** checkbox.
+    - If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
-11. Click **Test Connection** to validate the connection to the {{{ .premium }}} instance.
+10. Click **Test Connection** to validate the connection to the {{{ .premium }}} instance.
 
-12. Click **OK** to save the connection configuration.
+11. Click **OK** to save the connection configuration.
 
 </div>
 <div label="TiDB Cloud Dedicated">
