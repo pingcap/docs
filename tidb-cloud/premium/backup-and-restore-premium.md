@@ -89,7 +89,9 @@ In addition to automatic backups, {{{ .premium }}} supports manual backups. Manu
 
 2. In the upper-right corner, click **...**, and then click **Manual Backup**.
 
-3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**. You can restore it directly through the UI without requiring external storage credentials.
+3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**. 
+
+You can restore the manual backup directly through the UI without requiring external storage credentials.
 
 ## Restore
 
