@@ -22,7 +22,7 @@ In safe mode, DM can rewrite SQL statements to resolve the preceding issues.
 In safe mode, DM guarantees the idempotency of binlog events by rewriting SQL statements. Specifically, the following SQL statements are rewritten:
 
 * `INSERT` statements are rewritten to `REPLACE` statements.
-* `UPDATE` statements are analyzed to obtain the value of the primary key or the unique index of the row updated. `UPDATE` statements are then rewritten to `DELETE` + `REPLACE` statements in the following two steps: DM deletes the old record using the primary key or unique index, and inserts the new record using the `REPLACE` statement. Starting from v8.5.6, when the task session sets `foreign_key_checks=1`, DM skips the `DELETE` step for `UPDATE` statements that do not change any primary key or unique key value. See [Foreign key handling](#foreign-key-handling-experimental) for details.
+* `UPDATE` statements are analyzed to obtain the value of the primary key or the unique index of the row updated. `UPDATE` statements are then rewritten to `DELETE` + `REPLACE` statements in the following two steps: DM deletes the old record using the primary key or unique index, and inserts the new record using the `REPLACE` statement. Starting from v8.5.6, when you set `foreign_key_checks=1` in the task session, DM skips the `DELETE` step for `UPDATE` statements that do not change any primary key or unique key value. See [Foreign key handling](#foreign-key-handling-experimental) for details.
 
 `REPLACE` is a MySQL-specific syntax for inserting data. When you insert data using `REPLACE`, and the new data and existing data have a primary key or unique constraint conflict, MySQL deletes all the conflicting records and executes the insert operation, which is equivalent to "force insert". For details, see [`REPLACE` statement](https://dev.mysql.com/doc/refman/8.0/en/replace.html) in MySQL documentation.
 
@@ -97,9 +97,9 @@ mysql-instances:
 >
 > This feature is available starting from v8.5.6 and is experimental.
 
-When safe mode is enabled and the downstream task session sets `foreign_key_checks=1`, the standard `DELETE` + `REPLACE` rewrite for `UPDATE` statements can trigger unintended `ON DELETE CASCADE` side effects on child rows. Starting from v8.5.6, DM includes two improvements to address this:
+When you enable safe mode and set `foreign_key_checks=1` in the downstream task session, the standard `DELETE` + `REPLACE` rewrite for `UPDATE` statements can trigger unintended `ON DELETE CASCADE` side effects on child rows. Starting from v8.5.6, DM includes two improvements to address this:
 
-### Non-key UPDATE optimization
+### Non-key `UPDATE` optimization
 
 For `UPDATE` statements that do not change any primary key or unique key value, DM skips the `DELETE` step and emits only `REPLACE INTO`. Because the primary key is unchanged, `REPLACE INTO` overwrites the existing row without triggering a cascade delete. This optimization applies automatically in safe mode.
 
@@ -126,7 +126,7 @@ REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);  -
 >
 > `UPDATE` statements that change primary key or unique key values are rejected by a guardrail when `foreign_key_checks=1`. The task pauses with the error: `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate PK/UK-changing UPDATEs on tables with foreign keys, use `safe-mode: false`.
 
-### Session-level foreign_key_checks
+### Session-level `foreign_key_checks`
 
 During safe mode batch execution, DM sets `SET SESSION foreign_key_checks=0` before executing `INSERT` and `UPDATE` batches, and restores the original value afterward. This prevents `REPLACE INTO` (internally `DELETE` + `INSERT`) from triggering cascade operations in the downstream.
 
