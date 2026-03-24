@@ -3,7 +3,7 @@
     "id": "data-branch",
     "definition": {
       "en": "A branch of your TiDB Cloud Starter or Essential instance that contains a copy of its data, allowing you to experiment without affecting the original instance.",
-      "zh": "Data Branch 是 TiDB Cloud Starter 或 Essential 实例的一个分支，包含基于实例数据的副本，可以让你在该副本上进行实验而不影响原始实例。",
+      "zh": "基于当前 TiDB Cloud Starter 或 Essential 实例的一个分支，包含该实例数据的副本，可以让你在该分支上进行实验而不影响原始实例。",
       "ja": "Data Branch は、TiDB Cloud Starter または Essential インスタンスのブランチであり、元のインスタンスのデータから分岐したコピーを含むため、元のインスタンスに影響を与えることなく試すことができます。"
     }
   },
