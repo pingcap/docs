@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## March 24, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Add a **Public Endpoint** status to [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md) in TiDB Cloud to improve security tracking.
+
+**Console changes**
+
+- Support a logarithmic Y-axis to improve visualization for metrics with large value disparities. High-range and low-range fluctuations are clearly visible, making anomalies easier to identify.
+
 ## March 10, 2026
 
 **General changes**
