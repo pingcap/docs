@@ -10,6 +10,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## March 24, 2026
 
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Add a **Public Endpoint** status to Console Audit Logging in TiDB Cloud to improve security tracking.
+
 **Console changes**
 
 - Support a logarithmic Y-axis to improve visualization for metrics with large value disparities. High-range and low-range fluctuations are clearly visible, making anomalies easier to identify.
