@@ -30,7 +30,7 @@ Premium enables data encryption at rest by default on TiDB service instance stor
 
 ### Encryption mechanism
 
-Premium supports two layers of data-at-rest encryption to ensure data security. These two layers are Dual-layer Data Encryption and Storage-layer Data Encryption. Customers can manage Premium's Dual-layer Data Encryption themselves. Premium's Storage-layer Data Encryption is enabled by default and cannot be disabled by the customer.
+Premium supports two layers of data-at-rest encryption to ensure data security. These two layers are Dual-layer Data Encryption and Storage-layer Data Encryption. You can manage Premium's Dual-layer Data Encryption yourself. Premium's Storage-layer Data Encryption is enabled by default, and you cannot disable it.
 
 - Dual-layer Data Encryption
   - This is a layer of data encryption added by TiDB Cloud on top of the storage layer data encryption. 
