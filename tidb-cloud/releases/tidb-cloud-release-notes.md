@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Support a logarithmic Y-axis to improve visualization for metrics with large value disparities. Both high-range and low-range fluctuations appear clearly, enabling anomaly detection.
+- Support a logarithmic Y-axis to improve visualization for metrics with large value disparities. High-range and low-range fluctuations are clearly visible, making anomalies easier to identify.
 
 ## March 10, 2026
 
