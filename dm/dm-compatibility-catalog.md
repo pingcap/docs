@@ -27,10 +27,25 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 | MariaDB 10.1.2 ~ 10.5.10 | Experimental | |
 | MariaDB > 10.5.10 | Not tested | Expected to work in most cases after bypassing the [precheck](/dm/dm-precheck.md). See [MariaDB notes](#mariadb-notes). |
 
-### Incompatibility with foreign key CASCADE operations
+### Foreign key CASCADE operations
 
-- DM creates foreign key **constraints** on the target, but they are not enforced while applying transactions because DM sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks).
-- DM does **not** support `ON DELETE CASCADE` or `ON UPDATE CASCADE` behavior by default, and enabling `foreign_key_checks` via a DM task session variable is not recommended. If your workload relies on cascades, **do not assume** that cascade effects will be replicated.
+Starting from v8.5.6, DM has **experimental** support for replicating tables with foreign key constraints. This includes two improvements:
+
+- **Safe mode**: DM sets `foreign_key_checks=0` per batch during safe mode execution and skips the redundant `DELETE` for `UPDATE` statements that do not change primary key or unique key values. This prevents `REPLACE INTO` (internally `DELETE` + `INSERT`) from triggering unintended `ON DELETE CASCADE` side effects on child rows. For details, see [DM Safe Mode](/dm/dm-safe-mode.md#foreign-key-handling-experimental).
+- **Multi-worker causality**: When `worker-count > 1`, DM discovers foreign key relations from the downstream schema at task start and injects causality keys so that parent row DML operations complete before dependent child row operations, preserving binlog order across workers.
+
+> **Warning:**
+>
+> This feature is experimental. The following constraints apply:
+>
+> - `UPDATE` statements that change primary key or unique key values in safe mode are rejected. The task pauses with the error: `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate these UPDATEs, use `safe-mode: false`.
+> - DDL operations that create, alter, or drop foreign key constraints during replication are rejected when `foreign_key_checks=1`.
+> - Table routing combined with `worker-count > 1` is not supported. Set `worker-count=1` when using routing with foreign key tables.
+> - The block-allow-list must include all ancestor tables in the foreign key chain. Filtered ancestor tables cause the task to pause with an error during incremental sync.
+> - Source and downstream foreign key metadata must match. If a mismatch is detected, use `binlog-schema update --from-target` to resync.
+> - `ON UPDATE CASCADE` is not replicated correctly in safe mode when the `UPDATE` changes a primary key or unique key value. DM rewrites such UPDATEs as `DELETE` + `REPLACE`, which would trigger `ON DELETE` actions instead of `ON UPDATE` actions. The guardrail rejects the PK/UK change and pauses the task. Non-key `UPDATE` statements on tables with `ON UPDATE CASCADE` replicate without issues.
+
+In versions earlier than v8.5.6, DM creates foreign key constraints on the target but does not enforce them because it sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks). Cascading operations are not replicated, so do not assume that cascade effects will be applied in the downstream.
 
 ### MariaDB notes
 
