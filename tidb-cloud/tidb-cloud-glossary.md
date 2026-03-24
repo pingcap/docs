@@ -126,7 +126,7 @@ The function of a project varies by project type. Currently, there are three typ
 - TiDB Dedicated project: this project type is used only for {{{ .dedicated }}} clusters. In this type of project, you can only add {{{ .dedicated }}} clusters. Within your organization, settings and access controls such as networks, maintenance, alert subscriptions, and encryption access can be managed separately by project, and configurations in different projects do not affect each other.
 - TiDB virtual project: this is a virtual project. It is not displayed in the [TiDB Cloud console](https://tidbcloud.com/) and does not provide any management capabilities. It acts as a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID.
 
-For more information about the differences between these project types, see [Project types](/tidb-cloud/manage-user-access.md#project-types).
+For more information about the differences between these project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 
 ### project members
 
@@ -158,13 +158,6 @@ A separate database that can be located in the same or different region and cont
 
 TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
 
-### Resource
-
-A TiDB resource is a manageable TiDB deployment unit. It can be one of the following:
-
-- A {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} [instance](#instance)
-- A {{{ .dedicated }}} [cluster](#cluster)
-
 ### Request Capacity Unit (RCU)
 
 A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your {{{ .essential }}} instance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
@@ -188,11 +181,18 @@ For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resourc
 
 ### TiDB cluster
 
-The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage), [the Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) nodes that form a functional working database.
+In TiDB Cloud, a cluster is a dedicated cloud deployment of TiDB that includes explicit infrastructure details such as node topology (where you can specify the number of [TiDB](/tidb-computing.md) nodes, [TiKV](/tidb-storage.md) nodes, and [TiFlash](/tiflash-overview.md) nodes), storage configuration, and scaling model.
 
 ### TiDB node
 
 The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the {{{ .dedicated }}} cluster can handle.
+
+### TiDB Cloud resource
+
+A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
+
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium  }}} instance
+- A {{{ .dedicated }}} cluster
 
 ### TiDB X
 

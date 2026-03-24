@@ -31,7 +31,7 @@ To create a TiDB Cloud resource, navigate to the [**My TiDB**](https://tidbcloud
 
 For more information, see the following documents:
 
-- [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/starter/create-tidb-cluster-serverless.md)
+- [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
 - [Create a {{{ .dedicated }}} Cluster](/tidb-cloud/create-tidb-cluster.md)
 
@@ -41,7 +41,7 @@ To create a new project, navigate to the [**My TiDB**](https://tidbcloud.com/tid
 
 You can also create a project when creating TiDB Cloud resources. For more information, see the following documents:
 
-- [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/starter/create-tidb-cluster-serverless.md)
+- [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
 - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
 
@@ -59,7 +59,7 @@ To view your resources grouped by projects, click the **Project view** tab on th
 - TiDB X instances that belong to specific projects are displayed in their corresponding TiDB X projects.
 - TiDB Cloud Dedicated clusters are displayed in their corresponding Dedicated projects. These projects have a **D** embedded in the folder icon to identify the **Dedicated** project type.
 
-For more information about project types, see [Project types](/tidb-cloud/tidb-cloud-glossary.md#project-types).
+For more information about project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 
 To perform quick actions on a project, such as renaming the project or inviting members to the project, click **...** in the row of the target project name.
 

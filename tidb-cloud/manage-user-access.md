@@ -13,7 +13,7 @@ Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com
 
 TiDB Cloud uses a hierarchical structure based on organizations, projects, and resources to help you manage users and TiDB deployments.
 
-- An organization is a top level entity (such as a company or a customer) you created to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#resource).
+- An organization is a top level entity (such as a company or a customer) you created to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#projects), and [resources](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource).
 - A project is a container for TiDB Cloud resources.
 
     - For {{{ .starter }}} and Essential instances, a project is logical container and optional, which means you can either group these instances in a project or keep these instances at the organization level.
