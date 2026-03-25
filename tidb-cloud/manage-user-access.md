@@ -123,7 +123,7 @@ At the project level, TiDB Cloud defines four roles, in which `Project Owner` ca
 > - Each project role has all the permissions of `Organization Viewer` by default.
 > - If a user in your organization does not belong to any projects, the user does not have any project permissions.
 > - For both TiDB X projects and TiDB Dedicated projects, project roles control access to resources in the project. For TiDB Dedicated projects, project roles also control Dedicated-specific project settings.
-> - Project roles do not apply to the TiDB X virtual project because TiDB X virtual project does not provide any management capacities. To manage RBAC for a specific TiDB X instance that are not grouped in any TiDB X project, use [instance roles](#instance-roles).
+> - Project roles do not apply to the TiDB X virtual project because TiDB X virtual project does not provide any management capabilities. To manage RBAC for a specific TiDB X instance that are not grouped in any TiDB X project, use [instance roles](#instance-roles).
 
 | Permission  | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` | `Project Viewer` |
 |---|---|---|---|---|
@@ -150,7 +150,7 @@ TiDB X instances support instance-level roles so that you can grant access to a 
 >
 > - Instance roles apply only to TiDB X instances, including {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}. TiDB Cloud Dedicated clusters do not support instance roles.
 > - `Organization Owner` automatically has all permissions for all TiDB X instances in the organization.
-> - Each instance role inherits all the permissions of the <code>Organization Viewer</code> role by default.
+> - Each instance role inherits all the permissions of the `Organization Viewer` role by default.
 > - Project roles and instance roles are additive. A user can inherit access from a project role and also have a more specific role on an individual instance.
 
 | Permission  | `Instance Manager` | `TiDB X Instance Data Access Read-Write` | `TiDB X Instance Data Access Read-Only` | `TiDB X Instance Viewer` |
@@ -391,7 +391,7 @@ To remove a member from a project, take the following steps:
 
 ### Grant access to a TiDB X instance {#grant-access-to-a-tidb-x-instance}
 
-If you are in the `Organization Owner` or `Project Owner` role, you can grant a instance role for a specific TiDB X instance to a user.
+If you are in the `Organization Owner` or `Project Owner` role, you can grant an instance role for a specific TiDB X instance to a user.
 
 > **Note:**
 >
