@@ -101,7 +101,7 @@ Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analy
 
 ### organization
 
-An top level container to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#resource).
+An top level container to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#tidb-cloud-resource).
 
 ### organization members
 
@@ -181,7 +181,7 @@ For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resourc
 
 ### TiDB cluster
 
-In TiDB Cloud, a cluster is a dedicated cloud deployment of TiDB that includes explicit infrastructure details such as node topology (where you can specify the number of [TiDB](/tidb-computing.md) nodes, [TiKV](/tidb-storage.md) nodes, and [TiFlash](/tiflash-overview.md) nodes), storage configuration, and scaling model.
+In TiDB Cloud, a cluster is a dedicated cloud deployment of TiDB that includes explicit infrastructure details such as node topology (where you can specify the number of [TiDB](/tidb-computing.md) nodes, [TiKV](/tidb-storage.md) nodes, and [TiFlash](/tiflash/tiflash-overview.md) nodes), storage configuration, and scaling model.
 
 ### TiDB node
 
