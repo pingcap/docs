@@ -49,7 +49,7 @@ Ensure the MySQL instance is accessible from {{{ .lake }}}. Check your firewall 
 
 ## Creating a MySQL Data Source
 
-1. Navigate to **Data** > **Data Sources** and click **Create Data Source**.
+1. Navigate to **Data** > **Data Sources**, and click **Create Data Source**.
 
 2. Select **MySQL - Credentials** as the service type, and fill in the connection details:
 
@@ -63,8 +63,6 @@ Ensure the MySQL instance is accessible from {{{ .lake }}}. Check your firewall 
     | **Database Name** | Yes    | The source database name                                                    |
     | **DB Charset**  | No       | Character set (default: utf8mb4)                                            |
     | **Server ID**   | No       | Unique binlog replication identifier. Auto-generated if not provided        |
-
-    ![Create MySQL Data Source](/media/tidb-cloud-lake/databendcloud-dataintegration-create-mysql-source.png)
 
 3. Click **Test Connectivity** to verify the connection. If the test succeeds, click **OK** to save the data source.
 

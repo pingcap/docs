@@ -163,11 +163,9 @@ Connecting to a warehouse provides the compute resources required to run queries
 
 To obtain the connection information for a warehouse:
 
-1. Click **Connect** on the **Overview** page.
-2. Select the database and warehouse you wish to connect to. The connection information will update based on your selection.
+1. Click **Overview** > **Connect**.
+2. Select the **Database** and **Warehouse** you wish to connect to. The connection information will update based on your selection.
 3. The connection details include a SQL user named `cloudapp` with a randomly generated password. {{{ .lake }}} does not store this password. Be sure to copy and save it securely. If you forget the password, click **Reset** to generate a new one.
-
-![alt text](/media/tidb-cloud-lake/databend_cloud_dsn.gif)
 
 ### Connection String Format
 

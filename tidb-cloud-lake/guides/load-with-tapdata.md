@@ -9,8 +9,6 @@ summary: Tapdata is a platform-oriented product designed for data services, aime
 
 {{{ .lake }}} is one of the data sources supported by Tapdata. You can use Tapdata to synchronize data from other platforms to {{{ .lake }}}, using {{{ .lake }}} as the **destination** for data migration/synchronization.
 
-![Alt text](/media/tidb-cloud-lake/tapdata-databend.png)
-
 ## Integrating with Tapdata Cloud
 
 To establish a connection with {{{ .lake }}} and set it as the synchronization destination in [Tapdata Cloud](https://tapdata.net/tapdata-cloud.html), you need to complete the following steps:

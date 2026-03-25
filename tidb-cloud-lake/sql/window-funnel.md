@@ -5,11 +5,9 @@ summary: Funnel Analysis.
 
 # WINDOW_FUNNEL
 
-![Funnel Analysis](/media/tidb-cloud-lake/remote-7db0f18fbe80-databend-funnel.png)
+![Funnel Analysis](/media/tidb-cloud-lake/window-funnel.png)
 
-## WINDOW_FUNNEL
-
-Similar to `windowFunnel` in ClickHouse (they were created by the same author), it searches for event chains in a sliding time window and calculates the maximum number of events from the chain.
+Similar to `windowFunnel` in ClickHouse (they were created by the same author), the `WINDOW_FUNNEL` function searches for event chains in a sliding time window and calculates the maximum number of events from the chain.
 
 The function works according to the algorithm:
 
