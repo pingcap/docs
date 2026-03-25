@@ -5,11 +5,11 @@ summary: キーワードと予約語
 
 # キーワード {#keywords}
 
-この記事では、TiDB のキーワード、予約語と非予約語の違いを紹介し、クエリのすべてのキーワードをまとめます。
+この記事では、TiDBのキーワード、予約語と非予約語の違いを紹介し、クエリに使用するすべてのキーワードをまとめます。
 
-キーワードとは、SQL文において特別な意味を持つ単語のことです（例： [`SELECT`](/sql-statements/sql-statement-select.md) [`DELETE`](/sql-statements/sql-statement-delete.md) 。キーワードの中には、直接識別子として使用できるもの[`UPDATE`](/sql-statements/sql-statement-update.md)あり、これらは**非予約キーワード**と呼ばれます。また、識別子として使用する前に特別な処理が必要なものもあり、これらは**予約キーワード**と呼ばれます。
+キーワードとは、SQL文において特別な意味を持つ単語のことで、例えば[`SELECT`](/sql-statements/sql-statement-select.md)などが挙げ[`UPDATE`](/sql-statements/sql-statement-update.md)ます。これらの[`DELETE`](/sql-statements/sql-statement-delete.md)の中には、識別子として直接使用できるものがあり、これらは**非予約キーワード**と呼ばれます。一方、識別子として使用する前に特別な処理が必要なものもあり、これらは**予約キーワード**と呼ばれます。
 
-予約語を識別子として使用するには、バッククォート`` ` ``で囲む必要があります。
+予約語を識別子として使用するには、バッククォートで囲む必要があります`` ` `` :
 
 ```sql
 CREATE TABLE select (a INT);
@@ -23,7 +23,7 @@ CREATE TABLE `select` (a INT);
 
     Query OK, 0 rows affected (0.09 sec)
 
-予約されていないキーワードにはバックティックは必要ありません ( `BEGIN`や`END`など)。これらは次のステートメントで識別子として正常に使用できます。
+予約語ではないキーワードはバッククォートを必要としません。例えば、 `BEGIN`や`END`は、次の文で識別子として使用できます。
 
 ```sql
 CREATE TABLE `select` (BEGIN int, END int);
@@ -31,7 +31,7 @@ CREATE TABLE `select` (BEGIN int, END int);
 
     Query OK, 0 rows affected (0.09 sec)
 
-特別なケースでは、予約キーワードを`.`区切り文字とともに使用する場合はバッククォートは必要ありません。
+特別な場合として、予約語を区切り文字`.`とともに使用する場合は、バッククォートは不要です。
 
 ```sql
 CREATE TABLE test.select (BEGIN int, END int);
@@ -39,17 +39,17 @@ CREATE TABLE test.select (BEGIN int, END int);
 
     Query OK, 0 rows affected (0.08 sec)
 
-v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)テーブルにキーワードの完全なリストを提供します。
+バージョン7.5.3および7.6.0以降、TiDBは[`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md)テーブルにキーワードの完全なリストを提供します。
 
-システム変数[`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function)を使用すると、 [ウィンドウ関数](/functions-and-operators/window-functions.md)内のキーワードが構文ツリーで有効になるかどうかを制御できます。 `tidb_enable_window_function`を`OFF`に設定すると、ウィンドウ関数内の単語はキーワードとして扱われなくなります。
+システム変数[`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function)を使用すると、構文ツリー内で[ウィンドウ関数](/functions-and-operators/window-functions.md)キーワードが有効になるかどうかを制御できます`tidb_enable_window_function`を`OFF`に設定すると、ウィンドウ関数内の単語はキーワードとして扱われなくなります。
 
 ## キーワードリスト {#keyword-list}
 
-以下のリストはTiDBのキーワードを示しています。予約語には`(R)`が付きます。3 [ウィンドウ関数](/functions-and-operators/window-functions.md)予約語には`(R-Window)`が付きます。
+以下のリストは、TiDB のキーワードを示しています。予約語には`(R)`が付いています。3 [ウィンドウ関数](/functions-and-operators/window-functions.md)予約語には`(R-Window)`が付いています。
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
-<a id="A" class="letter" href="#A">あ</a>
+<a id="A" class="letter" href="#A">A</a>
 
 -   アカウント
 -   アクション
@@ -61,25 +61,25 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   に対して
 -   前
 -   アルゴリズム
--   オール（R）
--   アルター（R）
+-   すべて（R）
+-   ALTER (R)
 -   いつも
--   分析（R）
--   そして（R）
+-   ANALYZE (R)
+-   および（R）
 -   どれでも
 -   適用する
 -   アレイ（R）
 -   AS（R）
 -   ASC（R）
--   アスキー
+-   ASCII
 -   属性
 -   属性
--   自動IDキャッシュ
+-   AUTO_ID_CACHE
 -   自動インクリメント
--   自動ランダム
--   自動ランダムベース
+-   自動乱数
+-   自動乱数ベース
 -   平均
--   平均行の長さ
+-   平均行長
 
 <a id="B" class="letter" href="#B">B</a>
 
@@ -91,96 +91,96 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   始める
 -   ベルヌーイ
 -   間（R）
--   ビッグイント（R）
+-   BIGINT (R)
 -   バイナリ（R）
--   拘束力
 -   バインディング
--   バインドキャッシュ
--   ビンログ
+-   バインディング
+-   バインディングキャッシュ
+-   バイナリログ
 -   少し
--   ブロブ（R）
+-   BLOB（R）
 -   ブロック
 -   ブール
--   ブール値
+-   ブール論理
 -   両方（R）
--   Bツリー
+-   BTREE
 -   バケツ
 -   ビルトイン
--   BY（R）
+-   BY (R)
 -   バイト
 
 <a id="C" class="letter" href="#C">C</a>
 
 -   キャッシュ
--   調整
+-   校正
 -   コール（R）
 -   キャンセル
 -   捕獲
--   カーディナリティ
+-   基数
 -   カスケード（R）
 -   カスケード
 -   ケース（R）
 -   因果関係
 -   鎖
 -   チェンジ（R）
--   チャー（R）
+-   CHAR (R)
 -   キャラクター（R）
 -   文字セット
 -   チェック（R）
 -   チェックポイント
 -   チェックサム
--   CHECKSUM_CONCURRENCY
+-   チェックサムの同時性
 -   暗号
 -   掃除
 -   クライアント
 -   クライアントエラーの概要
 -   近い
 -   クラスタ
--   クラスター化
--   CMスケッチ
--   合体
--   収集（R）
+-   クラスター化された
+-   CMSKETCH
+-   合体する
+-   COLLATE (R)
 -   照合
--   コラム（右）
--   列フォーマット
--   列統計使用状況
+-   列（右）
+-   列形式
+-   列統計情報の使用状況
 -   コラム
 -   コメント
 -   専念
--   コミット
+-   コミット済み
 -   コンパクト
--   圧縮された
+-   圧縮
 -   圧縮
 -   圧縮レベル
 -   圧縮タイプ
--   同時実行
+-   並行処理
 -   設定
 -   繋がり
 -   一貫性
 -   一貫性のある
 -   制約（R）
 -   コンテクスト
--   続行 (R)
--   変換 (R)
+-   続ける（R）
+-   CONVERT (R)
 -   相関
 -   CPU
--   クリエイト（R）
--   クロス（R）
+-   CREATE (R)
+-   クロス（右）
 -   CSV_バックスラッシュ_エスケープ
 -   CSV_DELIMITER
--   CSV_ヘッダー
+-   CSVヘッダー
 -   CSV_NOT_NULL
 -   CSV_NULL
--   CSV_セパレーター
--   CSV_TRIM_LAST_SEPARATORS
+-   CSV区切り文字
+-   CSV_最後の区切り文字を削除
 -   CUME_DIST (Rウィンドウ)
 -   現在
--   現在の日付（R）
--   現在の役割（R）
--   現在の時間（R）
+-   CURRENT_DATE (R)
+-   現在の役割 (R)
+-   現在時刻 (R)
 -   CURRENT_TIMESTAMP (R)
 -   現在のユーザー (R)
--   カーソル（R）
+-   カーソル（右）
 -   サイクル
 
 <a id="D" class="letter" href="#D">D</a>
@@ -191,37 +191,40 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   日付
 -   日時
 -   日
--   曜日_時間（R）
--   DAY_MICROSECOND (R)
--   曜日_分（R）
--   DAY_SECOND（R）
+-   日時（R）
+-   日数マイクロ秒 (R)
+-   日_分 (R)
+-   DAY_SECOND (R)
 -   DDL
 -   割り当て解除
--   小数点（R）
+-   十進法（R）
 -   宣言する
 -   デフォルト（R）
 -   定義者
--   DELAY_KEY_WRITE
+-   キー書き込み遅延
 -   遅延（R）
 -   削除（R）
 -   DENSE_RANK (Rウィンドウ)
 -   依存
 -   深さ
--   説明 (R)
--   記述する (R)
+-   説明（R）
+-   説明（R）
 -   ダイジェスト
 -   ディレクトリ
 -   無効にする
 -   無効
 -   破棄
 -   ディスク
--   ディスティンクト（R）
--   ディスティンクトロウ（R）
--   DIV（右）
+-   独特な（R）
+-   ディスティンクトロウ（共和党）
+-   配布する
+-   分布
+-   分布
+-   DIV（R）
 -   する
 -   ダブル（R）
--   ドレイナー
--   ドロップ（R）
+-   排水口
+-   ドロップ（右）
 -   ドライ
 -   デュアル（R）
 -   重複
@@ -229,61 +232,61 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 
 <a id="E" class="letter" href="#E">E</a>
 
--   そうでなければ（R）
--   エルセイフ（R）
+-   それ以外の場合（R）
+-   ELSEIF (R)
 -   有効にする
 -   有効
--   封入（R）
+-   同封（R）
 -   暗号化
 -   暗号化キーファイル
--   暗号化方法
+-   暗号化方式
 -   終わり
--   強制執行
+-   強制
 -   エンジン
 -   エンジン
 -   列挙型
 -   エラー
 -   エラー
 -   逃げる
--   エスケープド（R）
+-   脱出（R指定）
 -   イベント
 -   イベント
 -   進化
--   （R）を除く
+-   ただし（R）
 -   交換
 -   エクスクルーシブ
 -   実行する
 -   存在する（R）
--   出口（右）
+-   終了（R）
 -   拡大
 -   期限切れ
--   EXPLAIN（R）
--   拡張
+-   EXPLAIN (R)
+-   拡張版
 
 <a id="F" class="letter" href="#F">F</a>
 
 -   ログイン試行失敗
--   誤り（R）
+-   偽（R）
 -   欠陥
--   フェッチ（R）
--   フィールド
+-   FETCH（R）
+-   分野
 -   ファイル
 -   初め
--   FIRST_VALUE (Rウィンドウ)
+-   最初の値（Rウィンドウ）
 -   修理済み
 -   フロート（R）
--   フロート4（R）
--   フロート8（R）
+-   FLOAT4 (R)
+-   FLOAT8 (R)
 -   フラッシュ
 -   続く
--   賛成（R）
+-   (R)のために
 -   フォース（R）
 -   外国語（R）
 -   形式
 -   見つかった
--   （R）から
+-   (R)より
 -   満杯
--   フルテキスト（R）
+-   全文（R）
 -   関数
 
 <a id="G" class="letter" href="#G">G</a>
@@ -308,55 +311,55 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   歴史
 -   ホスト
 -   時間
--   時間_マイクロ秒 (R)
--   時_分（R）
--   時間_秒（R）
--   ヒポ
+-   時_秒 (R)
+-   時分（R）
+-   時_秒 (R)
+-   低酸素
 
 <a id="I" class="letter" href="#I">私</a>
 
 -   特定された
--   IF（R）
+-   IF (R)
 -   無視（R）
--   統計を無視
--   ILIKE（R）
+-   IGNORE_STATS
+-   ILIKE (R)
 -   輸入
 -   輸入品
--   IN（R）
+-   IN (R)
 -   インクリメント
 -   増分
 -   インデックス（R）
--   インデックス
--   インファイル（R）
--   インナー（右）
--   INOUT（右）
--   インサート（R）
--   挿入メソッド
+-   索引
+-   INFILE (R)
+-   内側（右）
+-   INOUT (R)
+-   挿入（R）
+-   挿入方法
 -   実例
--   INT（R）
--   INT1（R）
--   INT2（R）
--   INT3（R）
--   INT4（R）
--   INT8（R）
--   整数（R）
--   インターセクト（R）
--   インターバル（R）
--   イントゥ（R）
+-   INT (R)
+-   INT1 (R)
+-   INT2 (R)
+-   INT3 (R)
+-   INT4 (R)
+-   INT8 (R)
+-   INTEGER (R)
+-   交差（R）
+-   間隔（R）
+-   （右へ）
 -   見えない
--   召喚者
+-   呼び出し元
 -   IO
 -   IPC
 -   IS（R）
 -   分離
 -   発行者
--   反復（R）
+-   ITERATE (R)
 
 <a id="J" class="letter" href="#J">J</a>
 
 -   仕事
--   求人
--   参加（R）
+-   求人情報
+-   参加する（R）
 -   JSON
 
 <a id="K" class="letter" href="#K">K</a>
@@ -373,118 +376,118 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   言語
 -   最後
 -   最終バックアップ
--   LAST_VALUE (Rウィンドウ)
+-   最終値（Rウィンドウ）
 -   ラストバル
--   LEAD（Rウィンドウ）
--   リーディング（右）
--   離脱（R）
+-   リード（右窓）
+-   リーディング（R）
+-   退出（右）
 -   左（右）
 -   少ない
 -   レベル
--   いいね（R）
--   リミット（R）
+-   いいね！(R)
+-   制限（R）
 -   リニア（R）
 -   ラインズ（R）
 -   リスト
--   ロード（R）
+-   負荷（R）
 -   ロード統計
 -   地元
 -   現地時間（R）
 -   ローカルタイムスタンプ (R)
 -   位置
 -   ロック（R）
--   ロックされています
+-   ロック済み
 -   ログ
--   ロング（右）
+-   ロング（R）
 -   ロングブロブ（R）
--   ロングテキスト（R）
--   低優先度（R）
+-   ロングテキスト(R)
+-   優先度低（R）
 
 <a id="M" class="letter" href="#M">M</a>
 
 -   マスキング
 -   マスター
 -   マッチ（R）
--   マックスバリュー（R）
+-   最大値（R）
 -   1時間あたりの最大接続数
--   最大IDXNUM
--   最大分
+-   MAX_IDXNUM
+-   最大分数
 -   1時間あたりの最大クエリ数
 -   最大行数
 -   1時間あたりの最大更新回数
 -   最大ユーザー接続数
 -   MB
--   ミディアムブロブ（R）
--   ミディアムミント（R）
--   中テキスト（R）
+-   MEDIUMBLOB (R)
+-   ミディアミント（R）
+-   中文テキスト（R）
 -   メンバー
 -   メモリ
 -   マージ
 -   マイクロ秒
--   ミドルイント（R）
+-   ミドルネット（右）
 -   分
 -   分_マイクロ秒 (R)
--   分_秒（R）
+-   分_秒 (R)
 -   最小値
--   MIN_ROWS
--   MOD（R）
+-   最小行数
+-   MOD (R)
 -   モード
 -   修正する
 -   月
 
-<a id="N" class="letter" href="#N">北</a>
+<a id="N" class="letter" href="#N">N</a>
 
 -   名前
 -   全国
 -   ナチュラル（R）
--   ンチャー
+-   NCHAR
 -   一度もない
 -   次
 -   ネクストバル
 -   いいえ
--   ノキャッシュ
+-   キャッシュなし
 -   ノーサイクル
 -   ノードグループ
 -   ノードID
 -   ノード状態
 -   最大値なし
--   公称値
+-   名目値
 -   非クラスター化
 -   なし
--   いいえ（R）
--   待ってください
--   バイナリログへの書き込みなし (R)
--   NTH_VALUE (Rウィンドウ)
--   NTILE (R-ウィンドウ)
--   ヌル（R）
--   NULLS
+-   （R）ではありません
+-   待って
+-   NO_WRITE_TO_BINLOG (R)
+-   NTH_VALUE (R-Window)
+-   タイル（Rウィンドウ）
+-   NULL（R）
+-   NULL
 -   数値（R）
 -   NVARCHAR
 
-<a id="O" class="letter" href="#O">お</a>
+<a id="O" class="letter" href="#O">O</a>
 
--   の（R）
+-   （R）の
 -   オフ
 -   オフセット
 -   OLTP_読み取り専用
--   OLTP_読み取り_書き込み
+-   OLTP_READ_WRITE
 -   OLTP_書き込み専用
--   オン（右）
--   複製オン
+-   オン（R）
+-   重複なし
 -   オンライン
 -   のみ
 -   開ける
 -   楽観的
--   最適化（R）
+-   オプティマイズ（R）
 -   オプション（R）
 -   オプション
 -   オプション（R）
 -   または（R）
--   オーダー（R）
--   アウト（右）
--   アウター（右）
--   アウトファイル（R）
--   OVER（右ウィンドウ）
+-   命令（R）
+-   アウト（R）
+-   外側（右）
+-   OUTFILE (R)
+-   オーバー（Rウィンドウ）
 
 <a id="P" class="letter" href="#P">P</a>
 
@@ -499,20 +502,20 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   パスワードロック時間
 -   一時停止
 -   パーセント
--   PERCENT_RANK（Rウィンドウ）
+-   パーセントランク（Rウィンドウ）
 -   PER_DB
--   テーブルごと
+-   PER_TABLE
 -   悲観的
 -   プラグイン
 -   ポイント
 -   ポリシー
 -   ポリシー
--   前項
+-   前の
 -   プレシジョン（R）
 -   準備する
 -   保存する
--   事前分割領域
--   プライマリー（R）
+-   分割前リージョン
+-   予備選挙（共和党）
 -   特権
 -   手順（R）
 -   プロセス
@@ -523,25 +526,25 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   ポンプ
 -   パージ
 
-<a id="Q" class="letter" href="#Q">質問</a>
+<a id="Q" class="letter" href="#Q">Q</a>
 
 -   四半期
--   クエリ
+-   お問い合わせ
 -   クエリ
 -   素早い
 
 <a id="R" class="letter" href="#R">R</a>
 
 -   レンジ（R）
--   RANK（Rウィンドウ）
+-   ランク（Rウィンドウ）
 -   レート制限
 -   読む（R）
 -   リアル（R）
--   再構築
+-   再建する
 -   推薦する
 -   回復する
--   再帰的（R）
--   冗長
+-   再帰的 (R)
+-   重複
 -   参考文献（R）
 -   正規表現（R）
 -   地域
@@ -549,40 +552,41 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   リリース（R）
 -   リロード
 -   取り除く
--   名前を変更 (R)
--   再編成
+-   名前変更（R）
+-   再編成する
 -   修理
--   リピート（R）
+-   繰り返し（R）
 -   繰り返し可能
--   交換（R）
+-   置換（R）
 -   レプリカ
 -   レプリカ
 -   複製
--   必要 (R)
+-   要求する（R）
 -   必須
 -   リセット
 -   リソース
 -   尊敬
 -   再起動
 -   復元する
--   復元
+-   修復する
 -   制限（R）
 -   再開する
 -   再利用
 -   逆行する
--   取り消し（R）
+-   取り消す（R）
 -   右（R）
--   RLIKE（R）
+-   RLIKE (R)
 -   役割
 -   ロールバック
 -   ロールアップ
 -   ルーティーン
--   ROW（右）
+-   ROW（R）
 -   行数
--   ROW_FORMAT
--   ROW_NUMBER (Rウィンドウ)
--   ROWS (Rウィンドウ)
+-   行形式
+-   行番号（Rウィンドウ）
+-   行（右ウィンドウ）
 -   RTREE
+-   ルール
 -   走る
 
 <a id="S" class="letter" href="#S">S</a>
@@ -592,38 +596,38 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   サン
 -   セーブポイント
 -   2番
--   秒_マイクロ秒 (R)
--   セカンダリー
--   セカンダリエンジン
--   セカンダリロード
--   セカンダリアンロード
+-   秒マイクロ秒 (R)
+-   中等教育
+-   セカンダリーエンジン
+-   セカンダリーロード
+-   二次荷降ろし
 -   安全
--   セレクト（R）
--   TIKVに資格情報を送信
--   セパレーター
+-   選択（R）
+-   TIKVに認証情報を送信
+-   分離器
 -   順序
 -   シリアル
 -   SERIALIZABLE
 -   セッション
 -   セッション状態
 -   セット（R）
--   設定値
--   シャード行IDビット
+-   SETVAL
+-   SHARD_ROW_ID_BITS
 -   共有
--   共有
+-   共有済み
 -   ショー（R）
 -   シャットダウン
--   署名
+-   署名済み
 -   単純
 -   スキップ
--   SKIP_SCHEMA_FILES
+-   スキーマファイルをスキップする
 -   奴隷
 -   遅い
 -   スモールイント（R）
 -   スナップショット
 -   いくつかの
 -   ソース
--   空間（R）
+-   SPATIAL (R)
 -   スプリット
 -   SQL（R）
 -   SQL_BIG_RESULT (R)
@@ -633,40 +637,40 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   SQL_NO_CACHE
 -   SQL_SMALL_RESULT (R)
 -   SQL_TSI_DAY
--   SQL_TSI_時間
+-   SQL_TSI_HOUR
 -   SQL_TSI_分
--   SQL_TSI_MONTH
--   SQL_TSI_QUARTER
+-   SQL_TSI_月
+-   SQL_TSI_四半期
 -   SQL_TSI_SECOND
 -   SQL_TSI_WEEK
 -   SQL_TSI_YEAR
--   SQL例外（R）
--   SQL状態（R）
--   SQL警告（R）
+-   SQLEXCEPTION (R)
+-   SQLSTATE (R)
+-   SQL警告 (R)
 -   SSL（R）
 -   始める
--   スターティング（R）
+-   スタート（R）
 -   統計
 -   統計
--   STATS_AUTO_RECALC
--   統計バケット
--   統計列選択
+-   統計_自動再計算
+-   統計_バケツ
+-   統計_色選択
 -   統計列リスト
--   統計_拡張
--   健康状態
+-   統計情報（拡張版）
+-   統計_健康
 -   統計ヒストグラム
--   統計がロックされています
--   統計メタ
+-   統計ロック済み
+-   統計情報
 -   統計オプション
--   統計_永続
+-   統計情報_永続的
 -   統計サンプルページ
--   統計サンプルレート
--   統計_TOPN
+-   統計サンプル率
+-   統計トップ
 -   状態
 -   ストレージ
--   保管済み（R）
--   ストレート結合（R）
--   厳格なフォーマット
+-   保存済み（R）
+-   STRAIGHT_JOIN (R)
+-   厳密な形式
 -   主題
 -   サブパーティション
 -   サブパーティション
@@ -674,17 +678,17 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   スワップ
 -   スイッチ
 -   システム
--   システム時間
+-   システム時刻
 
 <a id="T" class="letter" href="#T">T</a>
 
 -   表（R）
--   テーブル
+-   表
 -   テーブルサンプル（R）
 -   テーブルスペース
 -   テーブルチェックサム
 -   一時的
--   誘惑的
+-   一時的なもの
 -   終了（R）
 -   TEXT
 -   よりも
@@ -692,15 +696,16 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   TIDB
 -   TIDB_CURRENT_TSO (R)
 -   ティフラッシュ
--   TIKV_インポーター
+-   TIKV_IMPORTER
 -   時間
+-   タイムアウト
 -   タイムスタンプ
 -   タイニーブロブ（R）
--   タイニーント（R）
--   タイニーテキスト（R）
--   宛先（右）
+-   TINYINT (R)
+-   TINYTEXT (R)
+-   （R）へ
 -   トークン発行者
--   トップン
+-   トポン
 -   TPCC
 -   TPCH_10
 -   トレース
@@ -709,32 +714,32 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   取引
 -   トリガー（R）
 -   トリガー
--   トゥルー（R）
--   切り捨て
+-   真（R）
+-   切り捨てる
 -   TSO
 -   TTL
 -   TTL_ENABLE
--   TTL_ジョブ間隔
+-   TTL_JOB_INTERVAL
 -   タイプ
 
-<a id="U" class="letter" href="#U">あなた</a>
+<a id="U" class="letter" href="#U">U</a>
 
--   無制限
--   未確定
+-   無限
+-   未決定
 -   未定義
 -   ユニコード
--   ユニオン（R）
+-   ユニオン（共和党）
 -   ユニーク（R）
 -   未知
--   アンロック（R）
--   設定解除
+-   ロック解除（R）
+-   未設定
 -   署名なし（R）
--   アンティル（R）
+-   まで（R）
 -   アップデート（R）
--   使用法（R）
--   使用（R）
+-   USAGE (R)
+-   USE (R)
 -   ユーザー
--   (R) の使用
+-   使用（R）
 -   UTC_DATE (R)
 -   UTC_TIME (R)
 -   UTC_TIMESTAMP (R)
@@ -743,12 +748,12 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 
 -   検証
 -   価値
--   価値観（R）
--   ヴァービナリー（R）
--   ヴァルチャー（R）
--   ヴァーチャルキャラクター（R）
+-   値（R）
+-   VARBINARY (R)
+-   VARCHAR (R)
+-   VARCHARACTER (R)
 -   変数
--   変化する（R）
+-   可変（R）
 -   ベクター
 -   ビュー
 -   バーチャル（R）
@@ -761,15 +766,15 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 -   警告
 -   週
 -   重量文字列
--   いつ（R）
--   どこ（R）
--   （R）の間
+-   （R）
+-   場所（R）
+-   一方（R）
 -   幅
--   WINDOW（R-Window）
--   ウィズ（R）
+-   ウィンドウ（Rウィンドウ）
+-   （R）付き
 -   WITH_SYS_TABLE
 -   それなし
--   ワークロード
+-   作業負荷
 -   書き込み（R）
 
 <a id="X" class="letter" href="#X">X</a>
@@ -780,7 +785,7 @@ v7.5.3 および v7.6.0 以降、TiDB は[`INFORMATION_SCHEMA.KEYWORDS`](/inform
 <a id="Y" class="letter" href="#Y">Y</a>
 
 -   年
--   年_月（R）
+-   年月（R）
 
 <a id="Z" class="letter" href="#Z">Z</a>
 
