@@ -118,8 +118,10 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     + TiCDC
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+        - Fixed an issue where changefeed might repeatedly create invalid dispatchers when the server restarts. [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fixed an issue where table renaming operations could not be performed normally when the upstream TiDB version was <= v8.1.x. [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
+        - Fixed a bug during data scanning to avoid potential abnormal crashes of TiKV when CDC is enabled. [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
+        - Supported Azure Managed Identity authentication for azblob sinks and fixed a potential stuck issue during cloud storage uploads. [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
     + TiDB Data Migration (DM)
 
