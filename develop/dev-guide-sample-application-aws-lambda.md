@@ -117,7 +117,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
 3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
 
-    Ensure that your client IP address is in the access list.
+    Ensure that your client IP address is added to the access list.
 
 4. In the left navigation pane, click **Overview** to return to the instance overview page.
 
@@ -127,7 +127,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
     - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
     - If you have not set a password yet, click **Set Root Password** in the dialog.
-    - If you need to verify the server certificate or if the connection fails and a CA certificate is required, click **CA cert** to download it.
+    - If you need to verify the server certificate or if the connection fails and requires a CA certificate, click **CA cert** to download it.
     - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
 
 7. Copy and paste the corresponding connection string into `env.json`. The following is an example:
