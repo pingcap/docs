@@ -101,7 +101,7 @@ Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analy
 
 ### organization
 
-An top level container to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#tidb-cloud-resource).
+A top level container to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#tidb-cloud-resource).
 
 ### organization members
 
