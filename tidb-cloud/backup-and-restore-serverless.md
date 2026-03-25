@@ -85,7 +85,7 @@ The restore process typically completes within a few minutes. If the restore tak
 
 If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-### Perform the restore
+### Restore to a new instance
 
 > **Note:**
 >
@@ -127,6 +127,28 @@ To restore your data to a new {{{ .starter }}} or Essential instance, take the f
 6. Click **Restore** to begin the restore process.
 
 Once the restore process begins, the {{{ .starter }}} or Essential instance status changes to **Restoring**. The {{{ .starter }}} or Essential instance will remain unavailable until the restore is complete and the status changes to **Available**.
+
+### Restore from Recycle Bin
+
+> **Note:**
+>
+> {{{ .starter }}} does not support restoring from Recycle Bin.
+
+To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the following steps:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
+
+    >**Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+2. On the **Recycle Bin** page, click the **Essential** tab to go to the recycle bin of {{{ .essential }}} instances.
+
+3. Locate the {{{ .essential }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance.
+
+4. In the row of your desired backup, click **...**, and then select **Restore**.
+
+5. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
 
 ## Limitations
 

@@ -119,9 +119,19 @@ Project members are users who are invited to join one or more projects of the or
 
 ### Recycle Bin
 
-The place where the data of deleted {{{ .dedicated }}} clusters and {{{ .premium }}} instances with valid backups is stored.
+The place where the data of deleted TiDB Cloud resources with valid backups is stored.
 
-Once a backed-up {{{ .dedicated }}} cluster or {{{ .premium }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster or {{{ .premium }}} instance in time. Note that if a {{{ .dedicated }}} cluster or {{{ .premium }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
+Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it are moved to the Recycle Bin. For backup files from automatic backups, the Recycle Bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new TiDB Cloud resource in time. Note that if a TiDB Cloud resource **has no backup**, the deleted resource will not be displayed in the Recycle Bin.
+
+Currently, only the following types of TiDB Cloud resources support the Recycle Bin feature:
+
+- {{{ .essential }}} instances
+
+<CustomContent plan="premium">
+- {{{ .premium }}} instances
+</CustomContent>
+
+- {{{ .dedicated }}} clusters
 
 ### region
 

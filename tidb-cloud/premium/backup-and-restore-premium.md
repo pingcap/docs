@@ -128,7 +128,7 @@ To restore your data to a new instance, take the following steps:
 
 ### Restore from Recycle Bin
 
-To restore a deleted instance from the Recycle Bin, take the following steps:
+To restore a deleted {{{ .premium }}} instance from the Recycle Bin, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
