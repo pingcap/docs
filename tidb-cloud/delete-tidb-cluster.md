@@ -26,7 +26,7 @@ You can delete a TiDB Cloud resource at any time by performing the following ste
     - If you have at least one manual or automatic backup, you can see the number of backups and the charging policy for backups. Click **Continue** and enter `<organization name>/<project name>/<resource name>`.
     - If you do not have any backups, just enter `<organization name>/<project name>/<resource name>`.
 
-    If you want to restore a deleted {{{ .essential}}} instance or {{{ .dedicated }}} cluster sometime in the future, make sure that you have a backup of it. Otherwise, you cannot restore it anymore.
+    If you want to restore a deleted {{{ .essential }}} instance or {{{ .dedicated }}} cluster sometime in the future, make sure that you have a backup of it. Otherwise, you cannot restore it anymore.
 
     - For more information about how to back up {{{ .essential }}} instances, see [Back Up and Restore {{{ .essential }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
     - For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
