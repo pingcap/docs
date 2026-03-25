@@ -1207,7 +1207,7 @@ mysql> SELECT @@tidb_analyze_skip_column_types;
 +----------------------------------+
 | @@tidb_analyze_skip_column_types |
 +----------------------------------+
-| json,blob,mediumblob,longblob,text,mediumtext,longtext        |
+| json,blob,mediumblob,longblob,mediumtext,longtext        |
 +----------------------------------+
 1 row in set (0.00 sec)
 
