@@ -24,30 +24,12 @@ This document describes how to configure your Prometheus service to read key met
 
 ### Step 1. Get a `scrape_config` file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters/instances.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target Premium Instances.
 
-The steps to get the `scrape_config` file and access the integration page vary depending on your [Prometheus integration version](#prometheus-integration-versions).
-
-<SimpleTab>
-<div label="Cluster-level Prometheus integration">
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Prometheus**.
-4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
-5. Make a copy of the `scrape_config` file content for later use.
-
-</div>
-<div label="Legacy project-level Prometheus integration (Beta)">
-
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Prometheus (BETA)**.
-4. Click **Add File** to generate and show the `scrape_config` file for the current project.
-5. Make a copy of the `scrape_config` file content for later use.
-
-</div>
-</SimpleTab>
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+2. In the left navigation pane, click **Integrations**>>**Integration to Prometheus**.
+3. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
+4. Make a copy of the `scrape_config` file content for later use.
 
 > **Note:**
 >
@@ -68,16 +50,13 @@ The steps to get the `scrape_config` file and access the integration page vary d
 
 After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics as follows:
 
-1. The link to download the Grafana dashboard JSON of TiDB Cloud for Prometheus differs depending on your [Prometheus integration version](#prometheus-integration-versions).
-
-    - For cluster-level Prometheus integration, download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json).
-    - For legacy project-level Prometheus integration (Beta), download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
+1. The link to download the Grafana dashboard JSON file of TiDB Cloud for Prometheus:[here, need to be updated by dev](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json)
 
 2. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
 
     > **Note:**
     >
-    > If you are already using Prometheus and Grafana to monitor TiDB Cloud and want to incorporate the newly available metrics, it is recommended that you create a new dashboard instead of directly updating the JSON of the existing one.
+    > If you are already using Prometheus and Grafana to monitor TiDB Cloud Premium instances and want to incorporate the newly available metrics, it is recommended that you create a new dashboard instead of directly updating the JSON of the existing one.
 
 3. (Optional) Customize the dashboard as needed by adding or removing panels, changing data sources, and modifying display options.
 
@@ -90,11 +69,11 @@ To improve data security, periodically rotate `scrape_config` file bearer tokens
 1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new `scrape_config` file for Prometheus.
 2. Add the content of the new file to your Prometheus configuration file.
 3. Once you confirm that your Prometheus service can read from TiDB Cloud, remove the content of the old `scrape_config` file from your Prometheus configuration file.
-4. On the **Integrations** page of your project or cluster, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
+4. On the **Integrations** page of your Premium Instance, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
 
 ## Metrics available to Prometheus
 
-Prometheus tracks the following metric data for your TiDB clusters.
+Prometheus tracks the following metric data for your Premium Instance. This module need to be updated by dev @guohu.
 
 | Metric name |  Metric type  | Labels | Description |
 |:--- |:--- |:--- |:--- |
@@ -120,15 +99,6 @@ Prometheus tracks the following metric data for your TiDB clusters.
 | tidbcloud_changefeed_status | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
 | tidbcloud_resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The read request units consumed by Resource Manager |
 | tidbcloud_resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The write request units consumed by Resource Manager |
-
-For cluster-level Prometheus integration, the following additional metrics are also available:
-
-| Metric name |  Metric type  | Labels | Description |
-|:--- |:--- |:--- |:--- |
-| tidbcloud_dm_task_status | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Task state of Data Migration:<br/>0: Invalid<br/>1: New<br/>2: Running<br/>3: Paused<br/>4: Stopped<br/>5: Finished<br/>15: Error |
-| tidbcloud_dm_syncer_replication_lag_bucket | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Replicate lag (bucket) of Data Migration. |
-| tidbcloud_dm_syncer_replication_lag_gauge | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Replicate lag (gauge) of Data Migration. |
-| tidbcloud_dm_relay_read_error_count | count | instance: `instance`<br/>cluster_name: `<cluster name>` | The number of failed attempts to read binlog from the master. |
 
 ## FAQ
 
