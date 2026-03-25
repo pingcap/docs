@@ -101,7 +101,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   BLOB（R）
 -   ブロック
 -   ブール
--   ブール論理
+-   ブール値
 -   両方（R）
 -   BTREE
 -   バケツ
@@ -129,7 +129,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   チェック（R）
 -   チェックポイント
 -   チェックサム
--   チェックサムの同時性
+-   チェックサム同時実行
 -   暗号
 -   掃除
 -   クライアント
@@ -224,7 +224,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   する
 -   ダブル（R）
 -   排水口
--   ドロップ（右）
+-   ドロップ（R）
 -   ドライ
 -   デュアル（R）
 -   重複
@@ -311,7 +311,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   歴史
 -   ホスト
 -   時間
--   時_秒 (R)
+-   時・秒 (R)
 -   時分（R）
 -   時_秒 (R)
 -   低酸素
@@ -433,6 +433,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   MOD (R)
 -   モード
 -   修正する
+-   モニター
 -   月
 
 <a id="N" class="letter" href="#N">N</a>
@@ -580,9 +581,9 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   ロールバック
 -   ロールアップ
 -   ルーティーン
--   ROW（R）
+-   ROW (R)
 -   行数
--   行形式
+-   行フォーマット
 -   行番号（Rウィンドウ）
 -   行（右ウィンドウ）
 -   RTREE
@@ -593,7 +594,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 
 -   サンプルレート
 -   サンプル
--   サン
+-   SAN
 -   セーブポイント
 -   2番
 -   秒マイクロ秒 (R)
