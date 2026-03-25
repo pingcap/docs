@@ -1,20 +1,20 @@
 ---
 title: 功能特性
-summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
+summary: 了解不同 TiDB Cloud 方案的功能支持状态。
 ---
 
 # 功能特性
 
-本文档列出了不同 TiDB Cloud 套餐（包括 TiDB Cloud Starter、Essential 和 Dedicated）的功能支持状态。
+本文档列出了不同 TiDB Cloud 方案（包括 TiDB Cloud Starter、Essential 和 Dedicated）的功能支持状态。
 
 > **提示：**
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始体验 TiDB Cloud 的最佳方式。此外，你还可以在 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start) 上试用 TiDB Cloud 的功能。
 
-- ✅：该功能已**全面可用**或处于**公测**阶段。
-- 🔒：该功能处于**私测**阶段。
-- 🚧：该功能**开发中**。
-- ❌：该功能**当前不可用**。
+- ✅：**普遍可用** 或 **公测中**。
+- 🔒：**私测中**。
+- 🚧：**开发中**。
+- ❌：**当前不可用**。
 
 <table><thead>
   <tr>
@@ -26,7 +26,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="4" style="background-color: white;">基础</td>
+    <td rowspan="4" style="background-color: white;">基础能力</td>
     <td>可扩展的事务处理</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -39,16 +39,16 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>向量存储 &amp; 向量检索</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td>向量存储 &amp; 向量搜索</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
   </tr>
   <tr>
     <td>API</td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">开发者体验</td>
@@ -116,19 +116,19 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   <tr>
     <td>从 MySQL 兼容数据库迁移数据到 TiDB Cloud</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>通过 CSV、Parquet 和 SQL 文件导出数据到本地或对象存储</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>通过变更数据流（changefeed）将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
+    <td>通过 changefeed 将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公测）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -164,7 +164,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   </tr>
   <tr>
     <td rowspan="7" style="background-color: white;">可观测性</td>
-    <td>内置指标</td>
+    <td>内置统计/指标（信息）</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -245,7 +245,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="6" style="background-color: white;">安全</td>
+    <td rowspan="6" style="background-color: white;">安全性</td>
     <td>数据库审计日志</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
