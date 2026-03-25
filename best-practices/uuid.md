@@ -1,0 +1,64 @@
+---
+title: Best Practices for Using UUIDs as Primary Keys
+summary: UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
+aliases: ['/tidb/stable/uuid/','/tidb/dev/uuid/','/tidbcloud/uuid/']
+---
+
+# Best Practices for Using UUIDs as Primary Keys
+
+UUIDs (Universally Unique Identifiers) are a popular alternative to auto-incrementing integers for primary keys in distributed databases. This document outlines the benefits of using UUIDs in TiDB, and offers best practices for storing and indexing them efficiently.
+
+## Overview of UUIDs
+
+When used as a primary key, a UUID offers the following advantages compared with an [`AUTO_INCREMENT`](/auto-increment.md) integer:
+
+- UUIDs can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
+- UUIDs are supported by most programming languages and database systems.
+- When used as a part of a URL, a UUID is not vulnerable to enumeration attacks. In comparison, with an `AUTO_INCREMENT` number, it is possible to guess the invoice IDs or user IDs.
+
+## Best practices
+
+This section describes best practices for storing and indexing UUIDs in TiDB.
+
+### Store as binary
+
+The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin), the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a [`BINARY(16)`](/data-type-string.md#binary-type) column. When retrieving the UUID, you can use the [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid) function to get back to the textual format.
+
+### UUID format binary order and clustered primary keys
+
+The `UUID_TO_BIN()` function can be used with one argument, the UUID or with two arguments where the second argument is a `swap_flag`.
+
+It is recommended to not set the `swap_flag` with TiDB to avoid [hotspots](/best-practices/high-concurrency-best-practices.md).
+
+You can also explicitly set the [`CLUSTERED` option](/clustered-indexes.md) for UUID based primary keys to avoid hotspots.
+
+To demonstrate the effect of the `swap_flag`, here are two tables with an identical structure. The difference is that the data inserted into `uuid_demo_1` uses `UUID_TO_BIN(?, 0)` and `uuid_demo_2` uses `UUID_TO_BIN(?, 1)`.
+
+In the screenshot of the Key Visualizer below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
+
+![Key Visualizer](/media/best-practices/uuid_keyviz.png)
+
+```sql
+CREATE TABLE `uuid_demo_1` (
+  `uuid` varbinary(16) NOT NULL,
+  `c1` varchar(255) NOT NULL,
+  PRIMARY KEY (`uuid`) CLUSTERED
+)
+```
+
+```sql
+CREATE TABLE `uuid_demo_2` (
+  `uuid` varbinary(16) NOT NULL,
+  `c1` varchar(255) NOT NULL,
+  PRIMARY KEY (`uuid`) CLUSTERED
+)
+```
+
+For more information about Key Visualizer, see the following documentation:
+
+- [Key Visualizer](/dashboard/dashboard-key-visualizer.md) for TiDB Self-Managed
+- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) for TiDB Cloud
+
+## MySQL compatibility
+
+UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.

@@ -1,0 +1,13 @@
+extends: existence
+message: Consider using a clearer word than '%s' because it may cause confusion.
+level: suggestion
+ignorecase: true
+tokens:
+    - a lot
+    - lots of
+    - many
+    - much
+    - enough
+    - sufficient
+    - a large number of
+    - a large volume of
