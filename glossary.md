@@ -1,4 +1,4 @@
-﻿---
+---
 title: Glossary
 summary: Glossaries about TiDB.
 ---
