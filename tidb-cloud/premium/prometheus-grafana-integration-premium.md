@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Prometheus and Grafana
-summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
+summary: Learn how to monitor your Premium Instances with the Prometheus and Grafana integration.
 ---
 
 # Integrate TiDB Cloud with Prometheus and Grafana
@@ -28,7 +28,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
 2. In the left navigation pane, click **Integrations**>>**Integration to Prometheus**.
-3. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
+3. Click **Add File** to generate and show the `scrape_config` file for the current Premium Instance.
 4. Make a copy of the `scrape_config` file content for later use.
 
 > **Note:**
