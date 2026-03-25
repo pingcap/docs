@@ -123,7 +123,7 @@ TiDB Cloud manages users and resources with a hierarchical structure: organizati
 
     - **TiDB Dedicated project**: a project type for {{{ .dedicated }}} clusters only. Dedicated projects manage project-scoped settings such as networking, maintenance, alert subscriptions, integrations, and encryption-related access.
     - **TiDB X project**: a logical container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances. TiDB X projects are used for grouping resources and applying project-level RBAC, but they do not carry Dedicated-only infrastructure settings.
-    - **TiDB X virtual project**: a virtual project for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that are not grouped in any TiDB X project project. This project type is used only for API compatibility, so it is not displayed in the [TiDB Cloud console](https://tidbcloud.com/) and does not provide any management capabilities.
+    - **TiDB X virtual project**: a virtual project for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that are not grouped in any TiDB X project. This project type is used only for API compatibility and does not provide any management capabilities.
 
 **Resources**
 

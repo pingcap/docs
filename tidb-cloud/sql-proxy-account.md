@@ -40,7 +40,7 @@ The SQL proxy account is automatically created during initialization of a {{{ .s
 
 When a user is removed from [an organization](/tidb-cloud/manage-user-access.md#remove-an-organization-member) or [a project](/tidb-cloud/manage-user-access.md#remove-project-access-for-a-user), or their role changes to one that does not have access to the {{{ .starter }}} instance or {{{ .dedicated }}} cluster, the SQL proxy account is automatically deleted.
 
-Note that if a SQL proxy account is manually deleted, it will be automatically recreated when the user log in to the TiDB Cloud console next time.
+Note that if a SQL proxy account is manually deleted, it will be automatically recreated when the user logs in to the TiDB Cloud console next time.
 
 ## SQL proxy account username
 

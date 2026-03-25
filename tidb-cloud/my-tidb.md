@@ -15,7 +15,7 @@ In this document, you will learn how to use the [**My TiDB**](https://tidbcloud.
 
 A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
 
-- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium  }}} instance
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB Cloud projects

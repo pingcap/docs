@@ -124,7 +124,7 @@ The function of a project varies by project type. Currently, there are three typ
 
 - TiDB X project: this is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page. In this type of project, you can only add {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
 - TiDB Dedicated project: this project type is used only for {{{ .dedicated }}} clusters. In this type of project, you can only add {{{ .dedicated }}} clusters. Within your organization, settings and access controls such as networks, maintenance, alert subscriptions, and encryption access can be managed separately by project, and configurations in different projects do not affect each other.
-- TiDB virtual project: this is a virtual project. It is not displayed in the [TiDB Cloud console](https://tidbcloud.com/) and does not provide any management capabilities. It acts as a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID.
+- TiDB X virtual project: this is a virtual project that does not provide any management capabilities. It acts as a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get the ID from the project view of the [My TiDB](/tidb-cloud/my-tidb.md) page.
 
 For more information about the differences between these project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 
@@ -191,7 +191,7 @@ The computing node that aggregates data from queries returned from transactional
 
 A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
 
-- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium  }}} instance
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB X
