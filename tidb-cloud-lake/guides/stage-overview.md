@@ -36,9 +36,7 @@ CREATE STAGE my_internal_stage;
 
 An external stage enables you to specify an object storage location outside of where {{{ .lake }}} resides. For instance, if you have datasets in a Google Cloud Storage container, you can create an external stage using that container. When creating an external stage, you must provide connection information for {{{ .lake }}} to connect to the external location.
 
-Below is an example of creating an external stage. Let's say you have datasets in an Amazon S3 bucket named `databend-doc`:
-
-![alt text](/media/tidb-cloud-lake/external-stage.png)
+Below is an example of creating an external stage. Let's say you have datasets in an Amazon S3 bucket named `databend-doc`.
 
 You can create an external stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command to connect {{{ .lake }}} to that bucket:
 

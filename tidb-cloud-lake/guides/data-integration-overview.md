@@ -48,8 +48,6 @@ To manage data sources, navigate to **Data** > **Data Sources** from the left si
 
 After creation, a task is in a **Stopped** state. To begin data synchronization, click the **Start** button on the task.
 
-![Task List](/media/tidb-cloud-lake/dataintegration-task-list-with-action-button.png)
-
 To stop a running task, click the **Stop** button. The task will gracefully shut down and save its progress.
 
 ### Task Status
