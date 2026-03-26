@@ -149,7 +149,7 @@ The ARN `arn:aws:iam::123456789012:user/example` is the IAM user ARN for the Sno
     FILE_FORMAT = (TYPE = 'PARQUET') HEADER=true;
     ```
 
-    If you open the bucket `databend-doc` now, you see a Parquet file in the `snowflake` folder.
+    If you open the `databend-doc` bucket, you will see a Parquet file in the `snowflake` folder.
 
 ## Step 3: Loading Data into {{{ .lake }}}
 
