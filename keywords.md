@@ -449,7 +449,6 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MOD (R)
 - MODE
 - MODIFY
-- MONITOR
 - MONTH
 
 <a id="N" class="letter" href="#N">N</a>
