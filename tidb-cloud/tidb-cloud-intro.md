@@ -108,7 +108,7 @@ TiDB Cloud provides the following deployment options:
 
     {{{ .premium }}} is designed for mission-critical businesses that demand unlimited real-time scalability. It delivers workload-aware auto-scaling and comprehensive enterprise capabilities.
 
-    Currently, {{{ .premium }}} is in private preview on AWS and Alibaba Cloud. 
+    Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud. 
 
 </CustomContent>
 
