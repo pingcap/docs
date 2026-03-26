@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: b7469123c65aa8409bf754e4a7909e16d8ed3082-->
+# 目录 <!--Corresponding EN commit: 6ccc2f89416e3b4db97935acdaad9e265e06f41c-->
 
 ## 快速开始
 
@@ -467,7 +467,6 @@
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
   - serverless
-    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - [create](/tidb-cloud/ticloud-cluster-create.md)
     - [delete](/tidb-cloud/ticloud-cluster-delete.md)
     - [describe](/tidb-cloud/ticloud-cluster-describe.md)

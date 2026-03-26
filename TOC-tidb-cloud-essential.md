@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: b7469123c65aa8409bf754e4a7909e16d8ed3082-->
+# 目录 <!--Corresponding EN commit: ee782aa621ec9d9822363050f42d235716c43ee6-->
 
 ## 快速开始
 
@@ -160,6 +160,7 @@
     - [连接到 Amazon RDS](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
     - [连接到阿里云 RDS](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
     - [连接到 AWS 上的 Confluent Cloud](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+    - [连接到 Amazon MSK Provisioned](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
     - [连接到阿里云上的自建 Kafka](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
     - [连接到 AWS 上的自建 Kafka](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
   - 审计管理
