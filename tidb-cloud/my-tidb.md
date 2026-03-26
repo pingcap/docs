@@ -15,14 +15,14 @@ In this document, you will learn how to use the [**My TiDB**](https://tidbcloud.
 
 A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
 
-- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or {{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}}</CustomContent> instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB Cloud projects
 
 In TiDB Cloud, you can use [projects](/tidb-cloud/tidb-cloud-glossary.md#project) to group and manage your TiDB resources.
 
-- For {{{ .starter }}}, Essential, and Premium instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
+- For TiDB X instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
 - For {{{ .dedicated }}} clusters, projects are required.
 
 ## Create TiDB Cloud resources
@@ -32,18 +32,18 @@ To create a TiDB Cloud resource, navigate to the [**My TiDB**](https://tidbcloud
 For more information, see the following documents:
 
 - [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
+
+<CustomContent plan="premium">
 - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
+</CustomContent>
+
 - [Create a {{{ .dedicated }}} Cluster](/tidb-cloud/create-tidb-cluster.md)
 
 ## Create TiDB Cloud projects
 
 To create a new project, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click **Create Project**. For more information, see [Create a project](/tidb-cloud/manage-user-access.md#create-a-project).
 
-You can also create a project when creating TiDB Cloud resources. For more information, see the following documents:
-
-- [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
-- [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
+You can also create a project when creating TiDB Cloud resources. For more information, see [Create a project](/tidb-cloud/manage-user-access.md#create-a-project).
 
 ## View and manage TiDB Cloud resources
 

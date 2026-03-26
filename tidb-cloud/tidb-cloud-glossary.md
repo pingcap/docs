@@ -122,9 +122,9 @@ In TiDB Cloud, you can use projects to group and manage your TiDB resources.
 
 The function of a project varies by project type. Currently, there are three types of projects:
 
-- TiDB X project: this is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page. In this type of project, you can only add {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
-- TiDB Dedicated project: this project type is used only for {{{ .dedicated }}} clusters. In this type of project, you can only add {{{ .dedicated }}} clusters. Within your organization, settings and access controls such as networks, maintenance, alert subscriptions, and encryption access can be managed separately by project, and configurations in different projects do not affect each other.
-- TiDB X virtual project: this is a virtual project that does not provide any management capabilities. It acts as a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get the ID from the project view of the [My TiDB](/tidb-cloud/my-tidb.md) page.
+- **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
+- **TiDB X project**: This project type is used only for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [My TiDB](/tidb-cloud/my-tidb.md) page.
 
 For more information about the differences between these project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 

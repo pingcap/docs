@@ -31,10 +31,11 @@ The following is an example of the hierarchical structure:
 - Your organization
     - TiDB X instances out of any project
         - {{{ .starter }}} instance 1
+        - {{{ .essential }}} instance 1
     - TiDB X project 1
         - {{{ .starter }}} instance 2
-        - {{{ .essential }}} instance 3
-        - {{{ .premium }}} instance 4
+        - {{{ .starter }}} instance 3
+        - {{{ .essential }}} instance 2
     - TiDB Dedicated project 1
         - {{{ .dedicated }}} cluster 1
         - {{{ .dedicated }}} cluster 2
@@ -69,9 +70,9 @@ A project groups and manages TiDB Cloud resources.
 
 In the TiDB Cloud console, there are three types of projects:
 
-- **TiDB Dedicated project**: this project type is used only for {{{ .dedicated }}} clusters. In this type of project, you can only add {{{ .dedicated }}} clusters. Within your organization, settings and access controls such as networks, maintenance, alert subscriptions, and encryption access can be managed separately by project, and configurations in different projects do not affect each other.
-- **TiDB X project**: this is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page. In this type of project, you can only add {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
-- **TiDB X virtual project**: this project is virtual and it does not provide any management capabilities. It acts as a virtual container for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances that do not belong to any project, so that these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get the ID from the project view of the [My TiDB](/tidb-cloud/my-tidb.md) page.
+- **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
+- **TiDB X project**: This project type is used only for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [My TiDB](/tidb-cloud/my-tidb.md) page.
 
 The following table lists the differences between these project types:
 
@@ -148,7 +149,7 @@ TiDB X instances support instance-level roles so that you can grant access to a 
 
 > **Note:**
 >
-> - Instance roles apply only to TiDB X instances, including {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}. TiDB Cloud Dedicated clusters do not support instance roles.
+> - Instance roles apply only to {{{ .starter }}} and {{{ .essential }}}. TiDB Cloud Dedicated clusters do not support instance roles.
 > - `Organization Owner` automatically has all permissions for all TiDB X instances in the organization.
 > - Each instance role inherits all the permissions of the `Organization Viewer` role by default.
 > - Project roles and instance roles are additive. A user can inherit access from a project role and also have a more specific role on an individual instance.
