@@ -100,11 +100,11 @@ To assign a role to a warehouse, select the desired role in the **Advanced Optio
 
 - The two [Built-in Roles](/tidb-cloud-lake/guides/roles.md#built-in-roles) are available for selection, and you can also create additional roles using the [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) command. For more information about {{{ .lake }}} roles, see [Roles](/tidb-cloud-lake/guides/roles.md).
 - Warehouses without an assigned role default to the `public` role, allowing access to all users.
-- You can grant a role to a user ({{{ .lake }}} login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command, or, alternatively, assign a role when inviting the user to your organization. For more information, see [Inviting New Members](/tidb-cloud-lake/guides/organization-members.md#inviting-new-members). This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
+- You can grant a role to a user ({{{ .lake }}} login email or SQL user) using the [GRANT](/tidb-cloud-lake/sql/grant.md) command. This example grants the role `manager` to the user with the email `name@example.com`, allowing access to any warehouse assigned to the `manager` role:
 
-  ```sql title='Examples:'
-  GRANT ROLE manager to 'name@example.com';
-  ```
+    ```sql title='Examples:'
+    GRANT ROLE manager to 'name@example.com';
+    ```
 
 ## Multi-Cluster Warehouses
 

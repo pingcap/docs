@@ -71,17 +71,13 @@ docker-compose up
 
 2. Select `Databend` from the list on **Settings** > **New Data Source**.
 
-    ![Alt text](/media/tidb-cloud-lake/integration-redash-select.png)
-
 3. Configure your {{{ .lake }}} data source.
 
-   - Username: `root`. No password is required if you log into a local instance of {{{ .lake }}} with `root`.
-   - Host: `host.docker.internal`
-   - Port: `8000`
-   - Database: `default`
-   - Secure: Enable this option if you enabled HTTPS on your {{{ .lake }}} server.
-
-    ![Alt text](/media/tidb-cloud-lake/redash-cfg-local.png)
+    - Username: `root`. No password is required if you log into a local instance of {{{ .lake }}} with `root`.
+    - Host: `host.docker.internal`
+    - Port: `8000`
+    - Database: `default`
+    - Secure: Enable this option if you enabled HTTPS on your {{{ .lake }}} server.
 
 4. Click **Create**, then **Test Connection** to see check if the connection is successful.
 
@@ -149,8 +145,6 @@ docker-compose up
 
 2. Select `Databend` from the list on **Settings** > **New Data Source**.
 
-    ![Alt text](/media/tidb-cloud-lake/bi-redash-select.png)
-
 3. Configure your {{{ .lake }}} data source.
 
    - Username: `cloudapp`.
@@ -159,8 +153,6 @@ docker-compose up
    - Port: `443`
    - Database: `default`
    - Secure: Enable this option.
-
-    ![Alt text](/media/tidb-cloud-lake/redash-cfg-cloud.png)
 
 4. Click **Create**, then **Test Connection** to see check if the connection is successful.
 

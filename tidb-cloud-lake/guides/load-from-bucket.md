@@ -31,8 +31,6 @@ Before you start, make sure you have completed the following tasks:
 
 For this tutorial, a bucket named **databend-toronto** was created in the region **US East (Ohio)** (ID: us-east-2).
 
-![Alt text](/media/tidb-cloud-lake/toronto-bucket.png)
-
 ### Step 1. Create Target Table
 
 Create a table with the following SQL statements in {{{ .lake }}}:

@@ -42,5 +42,3 @@ When inviting finance personnel to your organization, assign them this `billing`
 ![alt text](/media/tidb-cloud-lake/billing-role.png)
 
 Once they log in to {{{ .lake }}}, they will have restricted access, limited to only the billing page, with all other business-related pages hidden from view. This approach helps to safeguard sensitive data by restricting unnecessary access to other parts of your {{{ .lake }}} environment.
-
-![alt text](/media/tidb-cloud-lake/billing-only-view.png)

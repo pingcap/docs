@@ -56,9 +56,7 @@ GRANT ROLE tableau_role TO tableau;
 
 3. When the Tableau workbook opens, select the database, schema, and tables that you want to query. For this tutorial, select _default_ for both **Database** and **Schema**.
 
-![Alt text](/media/tidb-cloud-lake/integration-tableau-2.png)
-
-You're all set! You can now drag tables to the work area to start your query and further analysis.
+    You're all set! You can now drag tables to the work area to start your query and further analysis.
 
 ## Tutorial-2: Integrating with {{{ .lake }}} (through databend-tableau-connector-jdbc Connector)
 
@@ -107,11 +105,7 @@ GRANT ROLE tableau_role TO tableau;
 
 1. In Tableau Desktop, select **{{{ .lake }}} JDBC by {{{ .lake }}}, Inc.** on **To a Server** > **More...**.
 
-    ![Alt text](/media/tidb-cloud-lake/tableau-connector-1.png)
-
 2. In the window that opens, provide the connection information and click **Sign In**.
-
-    ![Alt text](/media/tidb-cloud-lake/tableau-connector-2.png)
 
 3. Select a database, then you can drag tables to the work area to start your query and further analysis.
 
@@ -154,6 +148,4 @@ Obtain the connection information from {{{ .lake }}}. For how to do that, refer 
 
 3. When the Tableau workbook opens, select the database, schema, and tables that you want to query. For this tutorial, select _default_ for both **Database** and **Schema**.
 
-![Alt text](/media/tidb-cloud-lake/bi-tableau-2.png)
-
-You're all set! You can now drag tables to the work area to start your query and further analysis.
+    You're all set! You can now drag tables to the work area to start your query and further analysis.

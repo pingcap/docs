@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} enables you to easily import data from files uploaded to
 
 {{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md), and then employ the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
-![image](/media/tidb-cloud-lake/load-data-from-stage.jpeg)
+![image](/media/tidb-cloud-lake/load-data-from-stage.png)
 
 The following tutorials offer a detailed, step-by-step guide to help you effectively navigate the process of loading data from files in a stage.
 

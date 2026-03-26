@@ -279,15 +279,13 @@ You can now open the Apache Flink Dashboard if you go to [http://localhost:8081]
     Job ID: 5b505d752b7c211cbdcb5566175b9182
     ```
 
-    You can now see a running job in the Apache Flink Dashboard:
-
-    ![Alt text](/media/tidb-cloud-lake/cdc-job.png)
+    You can now see a running job in the Apache Flink Dashboard.
 
     You're all set! If you go back to the BendSQL terminal and query the **products** table in {{{ .lake }}}, you will see that the data from MySQL has been successfully synchronized:
 
     ```sql
     SELECT * FROM products;
-    
+
     ┌──────────────────────────────────────────────────────────────────────────────────────┐
     │   id  │        name        │                       description                       │
     │ Int32 │       String       │                     Nullable(String)                    │

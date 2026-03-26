@@ -5,8 +5,6 @@ summary: Funnel Analysis.
 
 # WINDOW_FUNNEL
 
-![Funnel Analysis](/media/tidb-cloud-lake/window-funnel.png)
-
 Similar to `windowFunnel` in ClickHouse (they were created by the same author), the `WINDOW_FUNNEL` function searches for event chains in a sliding time window and calculates the maximum number of events from the chain.
 
 The function works according to the algorithm:
@@ -32,8 +30,7 @@ WINDOW_FUNNEL( <window> )( <timestamp>, <cond1>, <cond2>, ..., <condN> )
 
 **Returned value**
 
-The maximum number of consecutive triggered conditions from the chain within the sliding time window.
-All the chains in the selection are analyzed.
+The maximum number of consecutive triggered conditions from the chain within the sliding time window. All the chains in the selection are analyzed.
 
 Type: `UInt8`.
 

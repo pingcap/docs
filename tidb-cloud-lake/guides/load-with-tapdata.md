@@ -23,10 +23,6 @@ For Tapdata Agent download and installation instructions, please refer to [Step 
 
 You need to establish a connection for each of the data source and data destination for data synchronization. For example, if you want to synchronize data from MySQL to {{{ .lake }}}, you need to create two connections on Tapdata Cloud—one connecting to MySQL and the other to {{{ .lake }}}. Follow the steps outlined in [Step 2: Connect Data Sources](https://docs.tapdata.io/connectors/) for creating connections.
 
-Here is an example of connecting to {{{ .lake }}}:
-
-![Alt text](/media/tidb-cloud-lake/tapdata-connect.png)
-
 ### Step 3: Create Data Replication Tasks
 
 Once connections to the data source and {{{ .lake }}} are established, you can begin data synchronization by creating data replication tasks. Refer to [Create a Data Replication Task](https://docs.tapdata.io/data-replication/create-task/) for the operational steps.
