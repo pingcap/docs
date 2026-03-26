@@ -5,11 +5,11 @@ summary: 关键字与保留字
 
 # 关键字
 
-本文介绍了 TiDB 中的关键字、保留字与非保留字的区别，并汇总了所有可用于查询的关键字。
+本文介绍了 TiDB 中的关键字、保留字与非保留字的区别，并总结了所有可用于查询的关键字。
 
-关键字是在 SQL 语句中具有特殊含义的单词，例如 [`SELECT`](/sql-statements/sql-statement-select.md)、[`UPDATE`](/sql-statements/sql-statement-update.md) 和 [`DELETE`](/sql-statements/sql-statement-delete.md)。其中有些可以直接作为标识符使用，称为**非保留关键字**。有些则需要特殊处理后才能作为标识符使用，称为**保留关键字**。
+关键字是在 SQL 语句中具有特殊含义的单词，例如 [`SELECT`](/sql-statements/sql-statement-select.md)、[`UPDATE`](/sql-statements/sql-statement-update.md) 和 [`DELETE`](/sql-statements/sql-statement-delete.md)。其中有些可以直接作为标识符使用，称为**非保留关键字**。有些则在作为标识符使用时需要特殊处理，称为**保留关键字**。
 
-要将保留关键字作为标识符使用，必须用反引号 `` ` `` 包裹：
+如果要将保留关键字作为标识符使用，必须用反引号 `` ` `` 包裹：
 
 ```sql
 CREATE TABLE select (a INT);
@@ -27,7 +27,7 @@ CREATE TABLE `select` (a INT);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-非保留关键字无需使用反引号，例如 `BEGIN` 和 `END`，可以在如下语句中直接作为标识符使用：
+非保留关键字无需使用反引号，例如 `BEGIN` 和 `END`，可以在如下语句中作为标识符成功使用：
 
 ```sql
 CREATE TABLE `select` (BEGIN int, END int);
@@ -441,6 +441,7 @@ Query OK, 0 rows affected (0.08 sec)
 - MOD (R)
 - MODE
 - MODIFY
+- MONITOR
 - MONTH
 
 <a id="N" class="letter" href="#N">N</a>
