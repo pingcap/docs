@@ -38,6 +38,8 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
     - Enhanced slow query log control by supporting [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) for targeted slow query log output based on combinations of multiple metrics, [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) for limiting the number of slow query log entries per second, and the [`WRITE_SLOW_LOG`](/identify-slow-queries.md#related-hint) hint for forcing specified SQL statements to be recorded in the slow query log [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
     - Enhanced [Top SQL](/dashboard/top-sql.md) for resource analysis by supporting Top `5`, `20`, or `100` queries, hotspot analysis sorted by CPU, network traffic, or logical I/O, and aggregated analysis by `Query`, `Table`, `DB`, or `Region` on TiKV instances [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
     - 新增 DXF 的 max_node_count 配置项支持 [#66376](https://github.com/pingcap/tidb/pull/66376)@[D3Hunter](https://github.com/D3Hunter)
+    - 调整部分 stats 相关日志为 warning 级别 [#58315](https://github.com/pingcap/tidb/pull/58315)@[hawkingrei](https://github.com/hawkingrei)
+    - 调整 tidb_analyze_column_options 默认值为 all [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
 
 + TiKV
 
@@ -105,6 +107,8 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
     - 修复 tidb_service_scope 设置时未统一转换为小写的问题 [#66835](https://github.com/pingcap/tidb/pull/66835)@[D3Hunter](https://github.com/D3Hunter)
     - 修复 TiDB 重启后无法展示亲和力表的问题 [#66284](https://github.com/pingcap/tidb/issues/66284) @[lcwangchao](https://github.com/lcwangchao)
     - 修复可能出现的内存泄漏 [#65522](https://github.com/pingcap/tidb/issues/65522) @[bufferflies](https://github.com/bufferflies)
+    - 修复系统表可能影响 stats healthy 监控的问题 [#64080](https://github.com/pingcap/tidb/issues/64080) @[ti-chi-bot](https://github.com/ti-chi-bot)
+    - 修复 stats delta 数据可能刷新不及时的问题 [#65426](https://github.com/pingcap/tidb/issues/65426) @[ti-chi-bot](https://github.com/ti-chi-bot)
 
 + TiKV
 
