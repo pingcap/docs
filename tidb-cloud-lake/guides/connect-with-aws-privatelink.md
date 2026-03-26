@@ -50,9 +50,9 @@ After {{{ .lake }}} approves the cloud account or project you plan to connect, y
 
    ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 
-6. Wait for cloud admin approving your connect request.
+6. Wait for the cloud admin to approve your connection request.
 
-7. Wait for the PrivateLink creation.
+7. Wait for the PrivateLink creation to complete.
 
 8. Modify private DNS name setting:
 
