@@ -128,30 +128,28 @@ The ARN `arn:aws:iam::123456789012:user/example` is the IAM user ARN for the Sno
     ```sql
     CREATE DATABASE doc;
     USE DATABASE doc;
-    
+
     CREATE TABLE my_table (
         id INT,
         name STRING,
         age INT
     );
-    
+
     INSERT INTO my_table (id, name, age) VALUES
     (1, 'Alice', 30),
     (2, 'Bob', 25),
     (3, 'Charlie', 35);
     ```
 
-3. Export the table data to the external stage using COPY INTO:
+3. Export the table data to the external stage using `COPY INTO`:
 
-```sql
-COPY INTO @my_external_stage/my_table_data_
-  FROM my_table
-  FILE_FORMAT = (TYPE = 'PARQUET') HEADER=true;
-```
+    ```sql
+    COPY INTO @my_external_stage/my_table_data_
+    FROM my_table
+    FILE_FORMAT = (TYPE = 'PARQUET') HEADER=true;
+    ```
 
-If you open the bucket `databend-doc` now, you should see a Parquet file in the `snowflake` folder:
-
-![alt text](/media/tidb-cloud-lake/bucket-folder.png)
+    If you open the bucket `databend-doc` now, you see a Parquet file in the `snowflake` folder.
 
 ## Step 3: Loading Data into {{{ .lake }}}
 
@@ -160,7 +158,7 @@ If you open the bucket `databend-doc` now, you should see a Parquet file in the 
     ```sql
     CREATE DATABASE doc;
     USE DATABASE doc;
-    
+
     CREATE TABLE my_target_table (
         id INT,
         name STRING,

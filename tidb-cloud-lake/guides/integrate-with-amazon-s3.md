@@ -27,8 +27,6 @@ The Amazon S3 data integration enables you to import files from S3 buckets into 
     | **Access Key** | Yes      | AWS Access Key ID                    |
     | **Secret Key** | Yes      | AWS Secret Access Key                |
 
-    ![Create S3 Data Source](/media/tidb-cloud-lake/create-s3-datasource.png)
-
 3. Click **Test Connectivity** to verify the credentials. If the test succeeds, click **OK** to save the data source.
 
 > **Tip:**

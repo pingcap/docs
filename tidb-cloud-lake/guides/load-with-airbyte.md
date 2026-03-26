@@ -63,16 +63,12 @@ You can add the destination in Settings -> Destinations -> Custom Destinations -
 
 The custom destination image is `datafuselabs/destination-databend:alpha`.
 
-![Configure Airbyte](/media/tidb-cloud-lake/integration-airbyte-plugins.png)
-
 ## Setup {{{ .lake }}} destination
 
 > **Note:**
 >
 > You should have a {{{ .lake }}} instance running and accessible from your Airbyte instance.
 For local Airbyte, you could not connect docker compose with your localhost network. You may take a look at [ngrok](https://ngrok.com/) to tunnel your service (**NEVER** expose it on your production environment).
-
-![Setup TiDB Cloud Lake destination](/media/tidb-cloud-lake/integration-airbyte-destinations.png)
 
 ## Test your integration
 

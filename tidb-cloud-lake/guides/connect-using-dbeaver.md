@@ -7,8 +7,6 @@ summary: DBeaver supports connecting to {{{ .lake }}} using a built-in driver ca
 
 [DBeaver](https://dbeaver.com/) supports connecting to {{{ .lake }}} using a built-in driver categorized under **Analytical**, available starting from **version 24.3.1**.
 
-![Connect from DBeaver](/media/tidb-cloud-lake/dbeaver.png)
-
 ## Prerequisites
 
 - DBeaver 24.3.1 or later version installed
@@ -33,20 +31,10 @@ Log in to {{{ .lake }}} to obtain connection information. For more information, 
 
 1. In DBeaver, go to **Database** > **New Database Connection** to open the connection wizard, then select **Databend** under the **Analytical** category.
 
-    ![alt text](/media/tidb-cloud-lake/dbeaver-analytical.png)
-
 2. In the **Main** tab, enter the **Host**, **Port**, **Username**, and **Password** based on the connection information obtained in the previous step.
-
-    ![alt text](/media/tidb-cloud-lake/dbeaver-main-tab.png)
 
 3. In the **Driver properties** tab, enter the **Warehouse** name based on the connection information obtained in the previous step.
 
-    ![alt text](/media/tidb-cloud-lake/dbeaver-driver-properties.png)
-
 4. In the **SSL** tab, select the **Use SSL** checkbox.
 
-    ![alt text](/media/tidb-cloud-lake/dbeaver-use-ssl.png)
-
-5. Click **Test Connection** to verify the connection. If this is your first time connecting to {{{ .lake }}}, you will be prompted to download the driver. Click **Download** to proceed. Once the download is complete, the test connection should succeed:
-
-    ![alt text](/media/tidb-cloud-lake/dbeaver-cloud-success.png)
+5. Click **Test Connection** to verify the connection. If this is your first time connecting to {{{ .lake }}}, you will be prompted to download the driver. Click **Download** to proceed. Once the download is complete, the test connection should succeed.

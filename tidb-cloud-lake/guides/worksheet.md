@@ -48,8 +48,4 @@ In the dialog box that appears, select the sharing scope. You can copy and share
 
 {{{ .lake }}} provides the ability to export query results. However, this feature requires the organization Owner to grant the **EXPORT** permission to team members. For data security purposes, this feature is disabled by default.
 
-![Alt text](/media/tidb-cloud-lake/download.png)
-
-If you need to use this feature, please contact your organization Owner to enable the permission(**Admin** > **Users & Roles**):
-
-![Alt text](/media/tidb-cloud-lake/export.png)
+If you need to use this feature, please contact your organization Owner to enable the permission(**Admin** > **Users & Roles**).

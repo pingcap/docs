@@ -308,8 +308,6 @@ COPY INTO 's3://databend'
 └────────────────────────────────────────────┘
 ```
 
-![Alt text](/media/tidb-cloud-lake/copy-into-bucket.png)
-
 ### Example 4: Unloading with PARTITION BY
 
 This example unloads data into partitioned folders based on a derived expression:

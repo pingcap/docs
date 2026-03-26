@@ -7,7 +7,7 @@ summary: TiDB Cloud Lake offers simple, powerful commands to load data files int
 
 {{{ .lake }}} offers simple, powerful commands to load data files into tables. Most operations require just a single command. Your data must be in a [supported format](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
-![Data Loading and Unloading Overview](/media/tidb-cloud-lake/load-unload.jpeg)
+![Data Loading and Unloading Overview](/media/tidb-cloud-lake/load-unload.png)
 
 ## Supported File Formats
 

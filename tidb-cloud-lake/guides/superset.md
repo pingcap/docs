@@ -80,6 +80,4 @@ docker exec -it superset superset init
 
 4. On the **BASIC** tab, set a display name, for example, `TiDB Cloud Lake`, and then enter the URI to connect to {{{ .lake }}}. The URI follows the format: `lake://<host>`, where`<host>` corresponds to the host field in your warehouse's connection information. For information on how to obtain the connection details, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
 
-    ![Alt text](/media/tidb-cloud-lake/superset-uri.png)
-
 5. Click **TEST CONNECTION**, which should result in a popup message saying, "Connection looks good!".

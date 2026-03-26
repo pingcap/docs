@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} recommends two file upload methods for stages PRESIGN an
 
 {{{ .lake }}} recommends two file upload methods for stages: [PRESIGN](/tidb-cloud-lake/sql/presign.md) and PUT/GET commands. These methods enable direct data transfer between the client and your storage, eliminating intermediaries and resulting in cost savings by reducing traffic between {{{ .lake }}} and your storage.
 
-![Alt text](/media/tidb-cloud-lake/staging-file.png)
+![Uploading to Stage](/media/tidb-cloud-lake/staging-file.png)
 
 The PRESIGN method generates a time-limited URL with a signature, which clients can use to securely initiate file uploads. This URL grants temporary access to the designated stage, allowing clients to directly transfer data without relying on {{{ .lake }}} servers for the entire process, enhancing both security and efficiency.
 

@@ -73,11 +73,7 @@ CREATE USER metrics IDENTIFIED BY 'metrics_password';
 
 3. Open Prometheus in your browser at `http://localhost:9090`, navigate to **Status** > **Target health**, and confirm that the `databend-cloud` target is listed with a status of `UP`.
 
-![alt text](/media/tidb-cloud-lake/metrics-1.png)
-
-You're all set! You can now query your tenant metrics directly from Prometheus. For example, try querying `databend_cloud_warehouse_status`:
-
-![alt text](/media/tidb-cloud-lake/metrics-2.png)
+    You're all set! You can now query your tenant metrics directly from Prometheus. For example, try querying `databend_cloud_warehouse_status`.
 
 ## Available Metrics List
 

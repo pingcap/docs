@@ -46,40 +46,28 @@ After {{{ .lake }}} approves the cloud account or project you plan to connect, y
 
    ![Create Endpoint Button](/media/tidb-cloud-lake/create-endpoint-1.png)
 
-   ![Create Endpoint Sheet](/media/tidb-cloud-lake/create-endpoint-2.png)
-
    Select the previously created security group `HTTPS`
 
    ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 
-   ![Create Endpoint Done](/media/tidb-cloud-lake/create-endpoint-4.png)
+6. Wait for cloud admin approving your connect request.
 
-6. Wait for cloud admin approving your connect request:
-
-   ![Request](/media/tidb-cloud-lake/request.png)
-
-7. Wait for the PrivateLink creation:
-
-   ![Creation](/media/tidb-cloud-lake/creation.png)
+7. Wait for the PrivateLink creation.
 
 8. Modify private DNS name setting:
 
-   ![DNS Menu](/media/tidb-cloud-lake/dns-1.png)
+    ![DNS Menu](/media/tidb-cloud-lake/dns-1.png)
 
-   Enable private DNS names:
+    Enable private DNS names:
 
-   ![DNS Sheet](/media/tidb-cloud-lake/dns-2.png)
+    ![DNS Sheet](/media/tidb-cloud-lake/dns-2.png)
 
-   Wait for changes to apply.
+    Wait for changes to apply.
 
 9. Verify accessing {{{ .lake }}} via PrivateLink:
 
-   ![Verify DNS](/media/tidb-cloud-lake/verify-1.png)
+    Gateway domain is resolved to VPC internal IP address.
 
-   ![Verify Response](/media/tidb-cloud-lake/verify-2.png)
-
-   Gateway domain is resolved to VPC internal IP address.
-
-> **Note:**
->
-> Congratulations! You have successfully connected to {{{ .lake }}} with AWS PrivateLink.
+    > **Note:**
+    >
+    > Congratulations! You have successfully connected to {{{ .lake }}} with AWS PrivateLink.

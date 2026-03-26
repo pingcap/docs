@@ -57,11 +57,9 @@ COPY INTO pollution_measurement FROM 'https://datasets.databend.org/AirPolutionS
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
-```sql
-SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
-```
-
-![Alt text](/media/tidb-cloud-lake/integration-mindsdb-verify.png)
+    ```sql
+    SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
+    ```
 
 ### Step 3. Create a Predictor
 
@@ -99,10 +97,6 @@ WHERE (NO2 = 0.005)
     AND (CO = 1.2)
     AND (PM10 = 5)
 ```
-
-Output:
-
-![Alt text](/media/tidb-cloud-lake/integration-mindsdb-predict.png)
 
 ## Tutorial-2: Integrating {{{ .lake }}} with MindsDB
 
@@ -153,11 +147,9 @@ COPY INTO pollution_measurement FROM 'https://repo.databend.com/AirPolutionSeoul
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
-```sql
-SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
-```
-
-![Alt text](/media/tidb-cloud-lake/bi-mindsdb-verify.png)
+    ```sql
+    SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
+    ```
 
 ### Step 3. Create a Predictor
 
@@ -195,7 +187,3 @@ WHERE (NO2 = 0.005)
     AND (CO = 1.2)
     AND (PM10 = 5)
 ```
-
-Output:
-
-![Alt text](/media/tidb-cloud-lake/bi-mindsdb-predict.png)
