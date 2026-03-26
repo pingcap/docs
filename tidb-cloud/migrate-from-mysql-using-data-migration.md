@@ -438,7 +438,7 @@ For production workloads, it is recommended to have a dedicated user for data du
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
-| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` is not permitted. In this case, DM falls back to `LOCK TABLES` for consistency during full data export. Not required for self-managed MySQL instances where FTWRL is available. |
+| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted. In this case, DM falls back to `LOCK TABLES` to ensure consistency during full data export. Not required for self-managed MySQL instances where FTWRL is available. |
 
 For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
@@ -446,7 +446,7 @@ For example, you can use the following `GRANT` statement in your source MySQL in
 -- For self-managed MySQL:
 GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 
--- For managed MySQL (Amazon RDS, Aurora, etc.), also grant LOCK TABLES:
+-- For managed MySQL services (such as Amazon RDS and Aurora), also grant the LOCK TABLES privilege:
 GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
