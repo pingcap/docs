@@ -53,7 +53,7 @@ The upstream database (MySQL/MariaDB) user must have the following privileges:
 
 > **Note:**
 >
-> If migrating from a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` is not permitted, the user also needs the `LOCK TABLES` privilege. DM's default `consistency=auto` mode falls back to `LOCK TABLES` for data consistency when FTWRL is unavailable.
+> If you migrate from a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted, also grant the `LOCK TABLES` privilege. With the default `consistency=auto` setting, DM falls back to `LOCK TABLES` when FTWRL is unavailable.
 
 If you need to migrate the data from `db1` to TiDB, execute the following `GRANT` statement:
 
@@ -62,7 +62,7 @@ GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_w
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
-For managed MySQL services where FTWRL is not permitted, also grant `LOCK TABLES`:
+For managed MySQL services where FTWRL is not permitted, also grant the `LOCK TABLES` privilege:
 
 ```sql
 GRANT LOCK TABLES ON db1.* TO 'your_user'@'your_wildcard_of_host';
