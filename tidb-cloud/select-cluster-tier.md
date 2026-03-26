@@ -83,6 +83,16 @@ To get the prefix for your {{{ .starter }}} or {{{ .essential }}} instance, take
 2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the dialog, get the prefix from the connection string.
 
+## {{{ .premium }}} {#premium}
+
+For mission-critical enterprise workloads requiring hyper-scale and the highest levels of performance, the Premium plan delivers a true cloud-native experience with the following features:
+
+- **Instant elasticity**: handles massive and unpredictable traffic spikes by scaling computing resources automatically, ensuring zero performance bottlenecks during peak demands.
+- **Unlimited growth**: architected for virtually unlimited expansion in both storage and throughput, allowing your database to scale seamlessly alongside your business without physical infrastructure constraints.
+- **Zero-infrastructure management**: provides a fully managed, "zero-touch" operational experience, eliminating the complexity of manual scaling, patching, or capacity planning.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+- **Advanced security and compliance**: incorporates our most stringent security standards, including advanced encryption, CMEK, private networking options, and comprehensive compliance certifications to protect your most sensitive data.
+
 ## TiDB Cloud Dedicated
 
 TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
