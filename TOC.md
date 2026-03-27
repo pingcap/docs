@@ -643,6 +643,7 @@
       - Attributes
         - [AUTO_INCREMENT](/auto-increment.md)
         - [AUTO_RANDOM](/auto-random.md)
+        - [_tidb_rowid](/tidb-rowid.md)
         - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
       - [Literal Values](/literal-values.md)
       - [Schema Object Names](/schema-object-names.md)
