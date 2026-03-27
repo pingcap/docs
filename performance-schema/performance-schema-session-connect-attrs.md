@@ -77,6 +77,6 @@ TiDB uses the [`performance_schema_session_connect_attrs_size`](/system-variable
 
 When the total size exceeds this limit, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes.
 
-The accepted connection attributes are also written to the `Session_connect_attrs` field in the slow log and can be queried from `INFORMATION_SCHEMA.SLOW_QUERY` and `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`. To control the payload size written to the slow log, adjust `performance_schema_session_connect_attrs_size`.
+The accepted connection attributes are also written to the `Session_connect_attrs` field in the slow log and can be queried from [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) and `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`. To control the payload size written to the slow log, adjust `performance_schema_session_connect_attrs_size`.
 
 TiDB also enforces a hard limit of 1 MiB on connection attribute payload in handshake packets. If this hard limit is exceeded, the connection is rejected.
