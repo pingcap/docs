@@ -70,4 +70,4 @@ This statement is a TiDB extension to MySQL syntax.
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [AUTO_RANDOM](/auto-random.md)
 * [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
-* [_tidb_rowid](/tidb-rowid.md)
+* [_tidb_rowid](https://docs.pingcap.com/tidb/v7.5/tidb-rowid/)
