@@ -5,11 +5,11 @@ summary: Learn the SHARD_ROW_ID_BITS attribute.
 
 # SHARD_ROW_ID_BITS
 
-This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the shards after the implicit `_tidb_rowid` is sharded.
+This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the shards after the implicit [`_tidb_rowid`](https://docs.pingcap.com/tidb/v6.5/tidb-rowid/) is sharded.
 
 ## Concept
 
-For the tables with a non-clustered primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+For tables with a non-clustered primary key or no primary key, TiDB uses the automatically generated [`_tidb_rowid`](https://docs.pingcap.com/tidb/v6.5/tidb-rowid/) as an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
 
 To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions.
 
@@ -23,8 +23,12 @@ When you set `SHARD_ROW_ID_BITS = S`, the structure of `_tidb_rowid` is as follo
 |--------|--------|--------------|
 | 1 bit | `S` bits | `63-S` bits |
 
-- The values of the auto-increment bits are stored in TiKV and allocated sequentially. Each time a value is allocated, the next value is incremented by 1. The auto-increment bits ensure that the column values of `_tidb_rowid` are unique globally. When the value of the auto-increment bits is exhausted (that is, when the maximum value is reached), subsequent automatic allocations fail with the error `Failed to read auto-increment value from storage engine`.
+- The values of the auto-increment bits are stored in TiKV and allocated sequentially. Each time a value is allocated, the next value is incremented by 1. When the value of the auto-increment bits is exhausted (that is, when the maximum value is reached), subsequent automatic allocations fail with the error `Failed to read auto-increment value from storage engine`.
 - The value range of `_tidb_rowid`: the maximum number of bits for the final generated value = shard bits + auto-increment bits, so the maximum value is `(2^63)-1`.
+
+> **Warning:**
+>
+> `_tidb_rowid` is an internal row ID implicitly assigned by TiDB. Do not assume it is globally unique in all cases. For partitioned tables that do not use clustered indexes, `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value. For details, see [`_tidb_rowid`](https://docs.pingcap.com/tidb/v6.5/tidb-rowid/).
 
 > **Note:**
 >

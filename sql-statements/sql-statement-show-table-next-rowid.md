@@ -7,7 +7,7 @@ summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
 
 `SHOW TABLE NEXT_ROW_ID` is used to show the details of some special columns of a table, including:
 
-* `AUTO_INCREMENT` column automatically created by TiDB, namely, `_tidb_rowid` column.
+* [`_tidb_rowid`](https://docs.pingcap.com/tidb/v6.5/tidb-rowid/), the hidden row ID column automatically managed by TiDB for supported tables.
 * `AUTO_INCREMENT` column created by users.
 * [`AUTO_RANDOM`](/auto-random.md) column created by users.
 * [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) created by users.
@@ -70,3 +70,4 @@ This statement is a TiDB extension to MySQL syntax.
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [AUTO_RANDOM](/auto-random.md)
 * [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+* [_tidb_rowid](https://docs.pingcap.com/tidb/v6.5/tidb-rowid/)
