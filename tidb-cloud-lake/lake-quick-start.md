@@ -7,17 +7,15 @@ summary: Get started with TiDB Cloud Lake in three steps — sign up, create a w
 
 This tutorial guides you through an easy way to get started with TiDB Cloud Lake.
 
-
-
 ## Step 1. Sign up for TiDB Cloud
 
 1. Go to <https://tidbcloud.com>.
+
 2. Sign up for a TiDB Cloud account or log in with your existing account.
 
 ## Step 2. Create a warehouse
 
 1. In the left navigation bar, click **My Lake**.
-
 
 2. In the upper-right corner, click **Create Warehouse**.
 
@@ -26,7 +24,6 @@ This tutorial guides you through an easy way to get started with TiDB Cloud Lake
     - **Warehouse Name**: enter a name for your warehouse.
     - **Warehouse Size**: select a size that fits your workload. You can start with **Small** and scale later.
     - **Auto Suspend**: choose how long the warehouse can stay idle before it is automatically suspended.
-
 
 4. Click **Create**. The warehouse will be ready in a few moments.
 
@@ -38,6 +35,6 @@ This tutorial guides you through an easy way to get started with TiDB Cloud Lake
 
 ## What's next
 
-- [**Connect to TiDB Cloud Lake**](/tidb-cloud-lake/guides/connection-overview.md) - Choose the right client or driver for your workflow.
-- [**Learn the architecture**](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md) - Understand the metadata, compute, and storage layers.
-- [**Explore product features**](/tidb-cloud-lake/guides/vector-search-guide.md) - Start with analytics, vector, search, and geo capabilities.
+- [**Connect to TiDB Cloud Lake**](/tidb-cloud-lake/guides/connection-overview.md): Choose the right client or driver for your workflow.
+- [**Learn the architecture**](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md): Understand the metadata, compute, and storage layers.
+- [**Explore product features**](/tidb-cloud-lake/guides/vector-search-guide.md): Start with analytics, vector, search, and geo capabilities.
