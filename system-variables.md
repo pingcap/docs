@@ -1131,7 +1131,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> Statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use `tidb_analyze_version = 2`.
+> Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use `tidb_analyze_version = 2`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
