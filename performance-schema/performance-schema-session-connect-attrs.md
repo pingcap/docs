@@ -5,10 +5,6 @@ summary: Learn the `SESSION_CONNECT_ATTRS` performance_schema table.
 
 # SESSION\_CONNECT\_ATTRS
 
-![storage-architecture](/media/tidb-storage-architecture-1.png)
-
-![TiDB Storage](/media/tidb-storage-3.png)
-
 The `SESSION_CONNECT_ATTRS` table provides information about connection attributes. Session attributes are key-value pairs that are sent by the client when establishing a connection.
 
 Common attributes:
