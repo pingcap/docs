@@ -8,7 +8,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-table-next-rowid/']
 
 `SHOW TABLE NEXT_ROW_ID` is used to show the details of some special columns of a table, including:
 
-* [`_tidb_rowid`](/tidb-rowid.md), the hidden row-handle column automatically managed by TiDB for supported tables.
+* [`_tidb_rowid`](/tidb-rowid.md), the hidden row ID column automatically managed by TiDB for supported tables.
 * `AUTO_INCREMENT` column created by users.
 * [`AUTO_RANDOM`](/auto-random.md) column created by users.
 * [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) created by users.

@@ -9,7 +9,7 @@ This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used 
 
 ## Concept
 
-For tables with a non-clustered primary key or no primary key, TiDB uses the hidden [`_tidb_rowid`](/tidb-rowid.md) as an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+For tables with a non-clustered primary key or no primary key, TiDB uses the automatically generated [`_tidb_rowid`](/tidb-rowid.md) as an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
 
 To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions.
 
@@ -28,7 +28,7 @@ When you set `SHARD_ROW_ID_BITS = S`, the structure of `_tidb_rowid` is as follo
 
 > **Warning:**
 >
-> `_tidb_rowid` is an internal row handle. Do not assume it is globally unique in all cases. For partitioned tables that do not use clustered indexes, `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value. For details, see [`_tidb_rowid`](/tidb-rowid.md).
+> `_tidb_rowid` is an internal row ID implicitly assigned by TiDB. Do not assume it is globally unique in all cases. For partitioned tables that do not use clustered indexes, `ALTER TABLE ... EXCHANGE PARTITION` can leave different partitions with the same `_tidb_rowid` value. For details, see [`_tidb_rowid`](/tidb-rowid.md).
 
 > **Note:**
 >
