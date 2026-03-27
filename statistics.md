@@ -380,9 +380,9 @@ The following table lists the information collected by each version for usage in
 
 ### Switch between statistics versions
 
-It is recommended to ensure that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Before Version 2 statistics are collected for an object, TiDB can continue to use its existing Version 1 statistics.
+It is recommended that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Before Version 2 statistics are collected for an object, TiDB continues to use its existing Version 1 statistics.
 
-One common reason to migrate is that Version 1 might produce inaccurate equal/IN predicate estimates because Count-Min sketch can have hash collisions. For details, see [Count-Min Sketch](#count-min-sketch). Setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects avoids this issue.
+One major reason to migrate is that Version 1 might produce inaccurate estimates for equal/IN predicates because the Count-Min sketch can have hash collisions. For more information, see [Count-Min Sketch](#count-min-sketch). To avoid this issue, set `tidb_analyze_version = 2` and rerun `ANALYZE` on all objects.
 
 To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Version 2:
 
@@ -395,7 +395,7 @@ To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Versi
     WHERE stats_ver = 1;
     ```
 
-- If TiDB automatically executes the `ANALYZE` statement because auto-analysis is enabled, after you set `tidb_analyze_version = 2`, TiDB gradually refreshes statistics to Version 2 through subsequent auto-analysis. Before Version 2 statistics are collected for an object, TiDB can continue to use its existing Version 1 statistics. If you need to speed up the migration for important objects, run `ANALYZE` on them manually.
+- If TiDB automatically executes the `ANALYZE` statement because auto-analysis is enabled, after you set `tidb_analyze_version = 2`, TiDB gradually refreshes statistics to Version 2 through subsequent auto-analysis. Before Version 2 statistics are collected for an object, TiDB can continue to use its existing Version 1 statistics. To speed up the migration for important objects, run `ANALYZE` on them manually.
 
 - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
 
