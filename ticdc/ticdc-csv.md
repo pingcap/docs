@@ -28,7 +28,7 @@ quote = '"'
 null = '\N'
 include-commit-ts = true
 output-old-value = false
-output-field-header = false # New in v8.5.6
+output-field-header = false # New in v8.5.6 (only available in the TiCDC new architecture)
 ```
 
 ## Transactional constraints
@@ -52,7 +52,7 @@ In the CSV file, each column is defined as follows:
 - Column 5: The `is-update` column only exists when the value of `output-old-value` is true, which is used to identify whether the row data change comes from the UPDATE event (the value of the column is true) or the INSERT/DELETE event (the value is false).
 - Column 6 to the last column: One or more columns with data changes.
 
-When `output-field-header = true`, the CSV file includes a header row. The column names in the header row are as follows:
+For the [TiCDC new architecture](/ticdc/ticdc-architecture.md), when `output-field-header = true`, the CSV file includes a header row. The column names in the header row are as follows:
 
 | Column 1 | Column 2 | Column 3 | Column 4 (optional) | Column 5 (optional) | Column 6 | ... | Last column |
 | --- | --- | --- | --- | --- | --- | --- | --- |
