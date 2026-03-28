@@ -380,7 +380,7 @@ The following table lists the information collected by each version for usage in
 
 ### Switch between statistics versions
 
-It is recommended that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Before Version 2 statistics are collected for an object, TiDB continues to use its existing Version 1 statistics.
+It is recommended that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Until Version 2 statistics are collected for an object (such as a table, an index, or a partition), TiDB continues to use the existing Version 1 statistics for that object.
 
 One major reason to migrate is that Version 1 might produce inaccurate estimates for equal/IN predicates because the Count-Min sketch can have hash collisions. For more information, see [Count-Min Sketch](#count-min-sketch). To avoid this issue, set `tidb_analyze_version = 2` and rerun `ANALYZE` on all objects.
 
