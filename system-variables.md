@@ -7123,10 +7123,10 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the [window functions](/functions-and-operators/window-functions.md).
 
-### InPacketBytes
+### InPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-- This variable is only used for internal metering, not visible to users.
+- This variable is used only for internal statistics and is not visible to users.
 
-### OutPacketBytes
+### OutPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-- This variable is only used for internal metering, not visible to users.
+- This variable is used only for internal statistics and is not visible to users.
