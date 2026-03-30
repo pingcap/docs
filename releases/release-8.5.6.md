@@ -55,9 +55,9 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     更多信息，请参考 [用户文档](/dashboard/top-sql.md)。
 
-### **SQL**
+### SQL
 
-- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) [@CbcWestwolf](https://github.com/CbcWestwolf),[@fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
+- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
 
     Before v8.5.6, TiDB privilege control covers the database and table levels and does not support granting or revoking privileges on specific columns, unlike MySQL. As a result, you cannot restrict users to access only a subset of sensitive columns in a table.
 
@@ -65,7 +65,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see the [user documentation](/column-privilege-management.md).
   
- - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) [@cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
+ - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
 
     Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement referenced a table alias in the locking clause, TiDB could fail to resolve the alias correctly and return a `table not exists` error even though the alias was valid.
 
@@ -73,9 +73,9 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see the user documentation. 
   
-### **DB operations**
+### DB operations
 
-- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58937](https://github.com/pingcap/tidb/pull/58937) [@tangenta](https://github.com/tangenta), [@D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
+- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58937](https://github.com/pingcap/tidb/pull/58937) @[tangenta](https://github.com/tangenta) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
 
     Before v8.5.6, TiDB does not provide a way to limit the number of nodes used by a distributed execution task. When you want to control resource usage for DXF, TiDB does not provide a dedicated option to constrain the maximum node count.
 
@@ -115,7 +115,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + TiDB <!--tw@qiancai: 5 notes-->
 
-    - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) [@time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--2414-->
+    - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--2414-->
     - Enhanced slow query log control by supporting [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) for targeted slow query log output based on combinations of multiple metrics, [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) for limiting the number of slow query log entries per second, and the [`WRITE_SLOW_LOG`](/identify-slow-queries.md#related-hint) hint for forcing specified SQL statements to be recorded in the slow query log [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
     - Enhanced [Top SQL](/dashboard/top-sql.md) for resource analysis by supporting Top `5`, `20`, or `100` queries, hotspot analysis sorted by CPU, network traffic, or logical I/O, and aggregated analysis by `Query`, `Table`, `DB`, or `Region` on TiKV instances [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
     - 新增 DXF 的 max_node_count 配置项支持 [#66376](https://github.com/pingcap/tidb/pull/66376)@[D3Hunter](https://github.com/D3Hunter)
