@@ -31,8 +31,8 @@ To export data to Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
-    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. Note that only instances hosted on AWS support the role ARN.
+    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` permissions.
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permissions. Note that only instances hosted on AWS support the role ARN.
 
 For more information, see [Configure External Storage Access](/tidb-cloud/premium/external-storage.md#configure-amazon-s3-access).
 
