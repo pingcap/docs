@@ -814,10 +814,10 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Unit: Bytes
 - Controls the maximum total size of connection attributes for each session.
 - If the total size of connection attributes exceeds this value, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes.
-- If the value is set to `0`, TiDB does not retain client-provided session connection attributes, which effectively disables recording session attributes.
 - Connection attributes accepted within this limit are written to the `Session_connect_attrs` field in the slow log and can be queried from [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) and `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`.
 - You can control the size of `Session_connect_attrs` recorded in the slow log by adjusting this variable.
-- The value `-1` means no configured limit and is treated as up to `65536` bytes in TiDB.
+- If the value is set to `-1`, this means the limit is not configured and TiDB treats it as up to `65536` bytes.
+- If the value is set to `0`, TiDB does not retain client-provided session connection attributes, which effectively disables recording session attributes.
 
 > **Note:**
 >
