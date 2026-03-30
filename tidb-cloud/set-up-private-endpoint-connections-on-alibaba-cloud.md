@@ -22,8 +22,8 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a private 
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
 2. [Create a private endpoint on Alibaba Cloud](#step-2-create-a-private-endpoint-on-alibaba-cloud)
-3. [Authorize your private endpoint in TiDB](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
-4. [Connect to your TiDB cluster using the private endpoint](#step-3-connect-to-your-tidb-cluster-using-the-private-endpoint)
+3. [Authorize your private endpoint in TiDB Cloud](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+4. [Connect to your TiDB cluster using the private endpoint](#step-4-connect-to-your-tidb-cluster-using-the-private-endpoint)
 
 ### Step 1. Choose a TiDB cluster
 
@@ -53,7 +53,7 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 
 ### Step 3. Authorize your private endpoint in TiDB Cloud
 
-After creating the interface endpoint in AWS, you must add it to your cluster's allowlist.
+After creating the interface endpoint in Alibaba Cloud, you must add it to your cluster's allowlist.
 
 1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
@@ -70,7 +70,7 @@ After creating the interface endpoint in AWS, you must add it to your cluster's 
 
 5. Click **Submit**.
 
-### Step 4: Connect to your TiDB cluster using the private endpoint
+### Step 4. Connect to your TiDB cluster using the private endpoint
 
 After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
 
