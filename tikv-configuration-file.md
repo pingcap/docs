@@ -2676,7 +2676,7 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 
 Configuration items related to resource metering.
 
-### `enable-network-io-collection` <span class="version-mark">New in v8.5.6</span>
+### `enable-network-io-collection` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
 + Whether to additionally collect TiKV network traffic and logical I/O information in [Top SQL](/dashboard/top-sql.md).
 + When enabled, TiKV additionally records inbound network bytes, outbound network bytes, logical read bytes, and logical write bytes during request processing.

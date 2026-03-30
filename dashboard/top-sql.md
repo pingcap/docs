@@ -8,7 +8,7 @@ summary: Use Top SQL to identify queries that consume the most CPU, network, and
 On the Top SQL page of TiDB Dashboard, you can view and analyze the most resource-consuming SQL queries on a specified TiDB or TiKV node over a period of time.
 
 - After you enable Top SQL, this feature continuously collects CPU workload data from existing TiDB and TiKV nodes and retains the data for up to 30 days.
-- Starting from v8.5.6, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
+- Starting from v8.5.6 and v9.0.0, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
 
 Top SQL provides the following features:
 
@@ -65,7 +65,7 @@ In addition to the UI, you can also enable the Top SQL feature by setting the Ti
 SET GLOBAL tidb_enable_top_sql = 1;
 ```
 
-### (Optional) Enable TiKV Network IO collection <span class="version-mark">New in v8.5.6</span>
+### (Optional) Enable TiKV Network IO collection <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
 To view Top SQL by `Order By Network` or `Order By Logical IO` for TiKV nodes, or to use the `By Region` aggregation, you can enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in Top SQL settings and save the changes.
 
