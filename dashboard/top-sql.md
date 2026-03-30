@@ -5,25 +5,25 @@ summary: Use Top SQL to identify queries that consume the most CPU, network, and
 
 # TiDB Dashboard Top SQL Page
 
-On the Top SQL page of TiDB Dashboard, you can view and analyze the most resource-consuming SQL queries on a specified TiDB or TiKV instance over a period of time.
+On the Top SQL page of TiDB Dashboard, you can view and analyze the most resource-consuming SQL queries on a specified TiDB or TiKV node over a period of time.
 
-- After you enable Top SQL, this feature continuously collects CPU workload data from each TiDB instance and TiKV instance and retains it for up to 30 days.
-- Starting from v8.5.6, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV instances, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
+- After you enable Top SQL, this feature continuously collects CPU workload data from existing TiDB and TiKV nodes and retains the data for up to 30 days.
+- Starting from v8.5.6, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
 
 Top SQL provides the following features:
 
 * Visualize the top `5`, `20`, or `100` SQL queries with the most resource consumption in the current time range through charts and tables, with the remaining records automatically summarized as `Others`.
-* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV instance, you can also sort by logical IO bytes.
-* Display SQL and execution plan details by query. When selecting a TiKV instance, you can also aggregate analysis in dimensions of `By Table`, `By DB`, and `By Region`.
+* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical IO bytes.
+* Display SQL and execution plan details by query. When selecting a TiKV node, you can also aggregate analysis in dimensions of `By Table`, `By DB`, and `By Region`.
 * Support zooming the chart by selecting a time range, manual refresh, auto refresh, and exporting to CSV.
 * Collect all SQL statements that are executed, including those that are still running.
-* Allow you to view data of a specific TiDB and TiKV instance.
+* Allow you to view data of a specific TiDB and TiKV node.
 
 ## Recommended scenarios
 
 Top SQL is suitable for analyzing performance issues. The following are some typical Top SQL scenarios:
 
-* You discovered that an individual TiDB or TiKV instance in the cluster has a very high CPU usage. You want to quickly locate which type of SQL is consuming a lot of CPU resources.
+* You discovered that an individual TiDB or TiKV node in the cluster has a very high CPU usage. You want to quickly locate which type of SQL is consuming a lot of CPU resources.
 * The overall cluster queries become slow. You want to find out which SQL is currently consuming the most resources, or compare the main query differences before and after the workload changes.
 * You need to locate hotspots from a higher dimension and want to aggregate and view resource consumption on the TiKV side by `Table`, `DB`, or `Region`.
 * You need to troubleshoot TiKV hotspots from the perspective of network traffic or logical IO, not just limited to the CPU dimension.
@@ -41,7 +41,7 @@ You can access the Top SQL page using either of the following methods:
 
   ![Top SQL](/media/dashboard/top-sql-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD node address and port.
 
 ## Enable Top SQL
 
@@ -67,7 +67,7 @@ SET GLOBAL tidb_enable_top_sql = 1;
 
 ### (Optional) Enable TiKV Network IO collection <span class="version-mark">New in v8.5.6</span>
 
-To view Top SQL by `Order By Network` or `Order By Logical IO` for TiKV instances, or to use the `By Region` aggregation, you can enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in Top SQL settings and save the changes.
+To view Top SQL by `Order By Network` or `Order By Logical IO` for TiKV nodes, or to use the `By Region` aggregation, you can enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in Top SQL settings and save the changes.
 
 - **Order By Network**: Sorts by the number of network bytes generated during TiKV request processing.
 - **Order By Logical IO**: Sorts by the amount of logical data (in bytes) processed by TiKV at the storage layer for TiKV requests, such as the data scanned or processed during reads and the data written by write requests.
@@ -94,11 +94,11 @@ The following are the common steps to use Top SQL.
 
 1. Visit the [Top SQL page](#access-the-page).
 
-2. Select a particular TiDB or TiKV instance that you want to observe the workload.
+2. Select a particular TiDB or TiKV node that you want to observe the workload.
 
-    ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
+    ![Select a TiDB or TiKV node](/media/dashboard/top-sql-usage-select-instance.png)
 
-    If you are not sure which instance to observe, you can first locate the node with abnormal workload from Grafana or the [TiDB Dashboard Overview page](/dashboard/dashboard-overview.md), and then return to the Top SQL page for further analysis.
+    If you are not sure which node to observe, you can first locate the node with abnormal workload from Grafana or the [TiDB Dashboard Overview page](/dashboard/dashboard-overview.md), and then return to the Top SQL page for further analysis.
 
 3. Set the time range and refresh data as needed.
 
@@ -113,11 +113,11 @@ The following are the common steps to use Top SQL.
 4. Select the observation mode.
 
     - Use `Limit` to select the Top `5`, `20`, or `100` SQL queries to display.
-    - The default aggregation dimension is `By Query`. If you select a TiKV instance, you can also aggregate in dimensions of `By Table`, `By DB`, or `By Region`.
+    - The default aggregation dimension is `By Query`. If you select a TiKV node, you can also aggregate in dimensions of `By Table`, `By DB`, or `By Region`.
 
         ![Select aggregation dimension](/media/dashboard/top-sql-usage-select-agg-by.png)
 
-    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV instance and have [enabled TiKV Network IO collection (multi-dimensional)](#enable-tikv-network-io-collection-optional), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
+    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#enable-tikv-network-io-collection-optional), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
 
         ![Select order by](/media/dashboard/top-sql-usage-select-order-by.png)
 
@@ -135,10 +135,10 @@ The following are the common steps to use Top SQL.
 
     ![Details](/media/dashboard/top-sql-details.png)
 
-    In the SQL statement details, you can view the corresponding SQL template, Query template ID, Plan template ID, and execution plan text. The SQL statement details table displays different metrics depending on the instance type:
+    In the SQL statement details, you can view the corresponding SQL template, Query template ID, Plan template ID, and execution plan text. The SQL statement details table displays different metrics depending on the node type:
 
-    - TiDB instances usually show `Call/sec` and `Latency/call`.
-    - TiKV instances usually show `Call/sec`, `Scan Rows/sec`, and `Scan Indexes/sec`.
+    - TiDB nodes usually show `Call/sec` and `Latency/call`.
+    - TiKV nodes usually show `Call/sec`, `Scan Rows/sec`, and `Scan Indexes/sec`.
 
     > **Note**
     >
@@ -146,7 +146,7 @@ The following are the common steps to use Top SQL.
 
     In the `By Query` view, you can also click **Search in SQL Statements** in the Top SQL table to jump to the corresponding SQL Statement Analysis page. If you need to analyze the current table results offline, you can click **Download to CSV** above the table to export the current table data.
 
-7. On TiKV instances, if you need to locate hotspots from a higher dimension, you can switch to `By Table`, `By DB`, or `By Region` to view the aggregated results.
+7. On TiKV nodes, if you need to locate hotspots from a higher dimension, you can switch to `By Table`, `By DB`, or `By Region` to view the aggregated results.
 
     ![Aggregated results at DB level](/media/dashboard/top-sql-usage-agg-by-db-detail.png)
 
@@ -218,7 +218,7 @@ Yes. TiDB Dashboard collects the resource consumption of all running or complete
 
 These views depend on TiKV Network IO collection (multi-dimensional). You can check the following items:
 
-- You have selected a TiKV instance.
+- You have selected a TiKV node.
 - The **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel is enabled.
 - The relevant TiKV nodes in the cluster have all successfully enabled this configuration. If only some nodes enable this configuration, the Top SQL page prompts that new data might be incomplete.
 - For newly added TiKV nodes, you need to manually enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel and save again. To make this setting automatically enabled for newly added nodes, also enable `resource-metering.enable-network-io-collection` in the TiKV default configuration of TiUP.
