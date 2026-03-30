@@ -5889,10 +5889,12 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Default value: ""
 - Type: String
 - This variable defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging.
+- For more information about how to use this system variable, see [Use `tidb_slow_log_rules`](/identify-slow-queries.md#use-tidb_slow_log_rules).
 
 > **Tip:**
 >
-> After enabling `tidb_slow_log_rules`, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v900) to limit the slow query log output rate and prevent rule-based slow query logging from being triggered too frequently.
+> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v900) to avoid excessively frequent slow query log printing.
+> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
 
 ### tidb_slow_log_threshold
 
