@@ -41,8 +41,8 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a private 
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Authorize your private endpoint in TiDB](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
-4. [Connect to your TiDB cluster](#step-3-connect-to-your-tidb-cluster)
+3. [Authorize your private endpoint in TiDB Cloud](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
 
 ### Step 1. Choose a TiDB cluster
 
@@ -122,7 +122,7 @@ After creating the interface endpoint in AWS, you must add it to your cluster's 
 
 5. Click **Submit**.
 
-### Step 4: Connect to your TiDB cluster
+### Step 4. Connect to your TiDB cluster
 
 After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
 
