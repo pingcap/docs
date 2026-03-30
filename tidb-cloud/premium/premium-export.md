@@ -182,11 +182,3 @@ To cancel an ongoing export task, take the following steps:
 4. Choose the export task you want to cancel, and then click **Action**.
 
 5. Choose **Cancel** in the drop-down list. Note that you can only cancel the export task that is in the **Running** status.
-
-## Export speed
-
-The export speed for **{{{ .premium }}}** is up to 200 MiB/s.
-
-## Pricing
-
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
