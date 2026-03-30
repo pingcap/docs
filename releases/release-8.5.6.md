@@ -187,14 +187,14 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + PD <!--tw@hfxsd: 2 notes-->
 
-    - 修复 distribute table sql panic 问题，特别是 merge region operator 比较多的场景容易触发这个 bug。 [#10292](https://github.com/tikv/pd/pull/10292) @[bufferflies](https://github.com/bufferflies)
-    - 修复设置 store limit 后可能不马上生效的问题 [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
+    - Fix a panic issue that might occur when executing `DISTRIBUTE TABLE` in scenarios with a large number of Merge Region operators [#10292](https://github.com/tikv/pd/pull/10292) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that configuring Store Limit might not take effect immediately [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
 
 + TiFlash <!--tw@hfxsd: 3 notes-->
 
-    - 修复当一个列执行将列属性 `NOT NULL` 转为 `NULL` 的 DDL 之后，TiFlash 与 TiKV 之间可能产生不一致数据的问题 [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复 Grafana 面板中 Raft throughput 可能会错误地显示一个非常大的数值的问题 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
-    - 修复 runtime filter 开启情况下，如果 join key 数据类型不一致时，join 结果可能出错的问题 [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    - Fix a potential data inconsistency issue between TiFlash and TiKV after executing a DDL statement to remove the `NOT NULL` constraint of a column [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that the Raft throughput metric in the Grafana dashboard might display an abnormally large value [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
+    - Fix an issue that the Join result might be incorrect when the Runtime Filter is enabled and the Join Keys have inconsistent data types [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 + Tools
 
