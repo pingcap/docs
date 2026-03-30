@@ -1,7 +1,6 @@
 ---
 title: Configure External Storage Access
 summary: Learn how to configure cross-account access to an external storage such as Amazon Simple Storage Service (Amazon S3).
-aliases: ['/tidbcloud/serverless-external-storage']
 ---
 
 # Configure External Storage Access
@@ -219,7 +218,6 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
     1. In the **Allowed services** section, choose the **Blob** service.
     2. In the **Allowed Resource types** section, choose **Container** and **Object**.
     3. In the **Allowed permissions** section, choose the **Read** and **Write** permissions.
-
     4. Adjust **Start and expiry date/time** as needed.
     5. You can keep the default values for other settings.
 
