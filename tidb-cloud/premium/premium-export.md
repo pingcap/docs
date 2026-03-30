@@ -15,7 +15,7 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 > **Note:**
 >
-> Please export data smaller than 100 GiB; otherwise, the process may fail. If you need to export larger datasets, please [contact Us](https://www.pingcap.com/contact-us)
+> Please export data smaller than 100 GiB; otherwise, the process may fail. If you need to export larger datasets, please [contact us](https://www.pingcap.com/contact-us)
 
 ## Export locations
 
@@ -87,7 +87,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 - `gzip` (default): compress the exported data with `gzip`.
 - `snappy`: compress the exported data with `snappy`.
 - `zstd`: compress the exported data with `zstd`.
-- `none`: do not compress the exported `data`.
+- `none`: do not compress the exported data.
 
 ## Examples
 
@@ -101,14 +101,14 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
-3. On the **Export** page, click **Export Data** in the upper-right corner：
+3. On the **Export** page, click **Export Data** in the upper-right corner and configure the following settings:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter Username and Password of your TiDB Instance, and then click **Test Connection** to check them.
+    - **Source Connection**: enter the username and password of your TiDB instance, and then click **Test Connection** to check them.
     - **Target Connection**: 
         - **Storage Provider**: choose Amazon S3
         - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
-         - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
+        - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
             - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access](/tidb-cloud/premium/external-storage.md#configure-amazon-s3-access).
             - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
     - **Exported Data**: choose the databases or tables you want to export.
@@ -175,9 +175,9 @@ To cancel an ongoing export task, take the following steps:
    >
    > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
 
-2. Click the name of your target instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
-3. On the **Import** page, click **Export** to view the export task list.
+3. On the **Export** page, view the export task list.
 
 4. Choose the export task you want to cancel, and then click **Action**.
 

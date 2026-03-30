@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 # Configure External Storage Access
 
-If you want to export data to an external storage in a TiDB Cloud instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .premium }}} instances.
+If you want to export data from a TiDB Cloud instance to an external storage, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .premium }}} instances.
 
 ## Configure Amazon S3 access
 
@@ -17,7 +17,7 @@ To allow a TiDB Cloud instance to export data to your Amazon S3 bucket, configur
 
 ### Configure Amazon S3 access using a Role ARN
 
-It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
+We recommend that you use [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
 
 > **Note:**
 >
@@ -34,7 +34,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
     1. Click **Export data**.
     2. Choose **Amazon S3** in **Target Connection**.
     3. Fill in the **Folder URI** field.
-    3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
+    4. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
 3. Create a role ARN with an AWS CloudFormation template.
 
@@ -61,7 +61,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) and open the [Amazon S3 console](https://console.aws.amazon.com/s3/).
 
-    2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
+    2. In the **Buckets** list, choose the name of your target bucket, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
@@ -85,7 +85,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
                     "Action": [
                         "s3:PutObject"
                     ],
-                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
+                    "Resource": "<Your S3 bucket ARN>/<Directory of your exported data>/*"
                 },
                 {
                     "Sid": "VisualEditor1",
@@ -101,10 +101,10 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
         In the policy text field, replace the following configurations with your own values.
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example:
+        - `"Resource": "<Your S3 bucket ARN>/<Directory of the exported data>/*"`. For example:
 
-            - If your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`.
-            - If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
+            - If you want to export data to the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`.
+            - If you want to export data to the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
 
           Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
 
@@ -165,7 +165,7 @@ Take the following steps to configure an access key:
 
 > **Note:**
 >
-> TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
+> TiDB Cloud does not store your access keys. For security, we recommend that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
 
 ## Configure Azure Blob Storage access
 
@@ -187,7 +187,7 @@ To create a SAS token using an Azure ARM template, take the following steps:
     
     2. Choose **Azure Blob Storage** in **Target Connection**.
 
-    2. Click **Click here to create a new one with Azure ARM template** under the SAS Token field.
+    3. Click **Click here to create a new one with Azure ARM template** under the SAS Token field.
 
 3. Create a SAS token with the Azure ARM template.
 
@@ -214,7 +214,7 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 
    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
-3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
+3. On the **Shared access signature** page, create a service SAS token with the required permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
     1. In the **Allowed services** section, choose the **Blob** service.
     2. In the **Allowed Resource types** section, choose **Container** and **Object**.
