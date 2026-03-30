@@ -319,4 +319,3 @@ For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions 
         - Fix the connection errors that might occur when using Glue Schema Registry by upgrading the `aws-sdk-go-v2` dependency version [#12424](https://github.com/pingcap/tiflow/issues/12424) @[wk989898](https://github.com/wk989898)
         - Fix the issue that changefeed tasks might get stuck because the TiKV CDC component fails to release memory quotas correctly after a restart [#18169](https://github.com/tikv/tikv/issues/18169) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that gRPC connections might be unexpectedly closed due to being misjudged as idle when incremental scan tasks accumulate in TiKV CDC [#18915](https://github.com/tikv/tikv/issues/18915) @[asddongmen](https://github.com/asddongmen)
-
