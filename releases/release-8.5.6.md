@@ -25,13 +25,13 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### Stability
 
-- The ability to set resource limits for background tasks in Resource Control is now Generally Available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) **tw@hfxsd** <!--1933-->
+- Support setting the maximum limit on resource usage for background tasks of resource control (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) **tw@hfxsd** <!--1933-->
 
-    TiDB Resource Control can identify and lower the priority of background tasks. In some scenarios, even with idle resources, users may want to keep the consumption of background tasks at a very low level. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set the maximum percentage of resources that background tasks under Resource Control can use, controlling the usage of all background tasks on each node below this percentage. This feature allows you to finely control the resource consumption of background tasks, further enhancing cluster stability.
+    TiDB resource control can identify and lower the priority of background tasks. In certain scenarios, you might want to limit the resource consumption of background tasks, even when resources are available. Starting from v8.4.0, you can use the UTILIZATION_LIMIT parameter to set the maximum percentage of resources that background tasks can consume. Each node will keep the resource usage of all background tasks below this percentage. This feature enables precise control over resource consumption for background tasks, further enhancing cluster stability.
 
-    In v8.5.6, this feature is Generally Available (GA).
+    In v8.5.6, this feature is generally available (GA).
 
-    For more information, please refer to the [User Documentation](/tidb-resource-control-background-tasks.md).
+    For more information, see [User Documentation](/tidb-resource-control-background-tasks.md).
 
 ### 可观测性
 
@@ -59,9 +59,9 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 - Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) [@CbcWestwolf](https://github.com/CbcWestwolf),[@fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
 
-    Before v8.5.6, TiDB privilege control mainly covered the database, and table levels, and did not support granting or revoking privileges on specific columns as MySQL does. As a result, when you needed to restrict users to accessing only a subset of sensitive columns in a table, TiDB could not provide sufficiently fine-grained access control.
+    Before v8.5.6, TiDB privilege control covers the database and table levels and does not support granting or revoking privileges on specific columns, unlike MySQL. As a result, you cannot restrict users to access only a subset of sensitive columns in a table.
 
-    Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to grant or revoke privileges on specific columns, and TiDB performs privilege checks based on column privileges during query processing and execution plan construction. This enables more fine-grained access control and better supports sensitive data isolation and the principle of least privilege.
+    Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to manage privileges on specific columns. TiDB performs privilege checks based on column-level privileges during query processing and execution plan construction, enabling finer-grained access control and better support for sensitive data isolation and the principle of least privilege.
 
     For more information, see the [user documentation](/column-privilege-management.md).
   
@@ -75,11 +75,11 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
   
 ### **DB operations**
 
-- Support specifying the maximum number of nodes for distributed execution tasks [#58937](https://github.com/pingcap/tidb/pull/58937) [@tangenta](https://github.com/tangenta), [@D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
+- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58937](https://github.com/pingcap/tidb/pull/58937) [@tangenta](https://github.com/tangenta), [@D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
 
-    Before v8.5.6, TiDB did not support efficiently limiting how many nodes a distributed execution task could use. When you wanted to control resource usage for distributed task execution, TiDB did not provide a dedicated option to constrain the maximum node count.
+    Before v8.5.6, TiDB does not provide a way to limit the number of nodes used by a distributed execution task. When you want to control resource usage for DXF, TiDB does not provide a dedicated option to constrain the maximum node count.
 
-    Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variable, which lets you specify the maximum number of TiDB nodes used by a distributed execution task. This gives you more flexibility to manage resource usage and tune distributed task execution based on workload and cluster conditions.
+    Starting from v8.5.6, TiDB introduces the `tidb_max_dist_task_nodes` system variable to specify the maximum number of TiDB nodes used by a DXF task, enabling better resource control and workload-based tuning.
 
     For more information, see the [user documentation](/system-variables.md#tidb_max_dist_task_nodes-new-in-v856).
 
