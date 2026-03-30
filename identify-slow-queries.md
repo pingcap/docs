@@ -297,12 +297,6 @@ Unless otherwise noted, the fields in the following table follow the general mat
 
 ## Related system variables
 
-<<<<<<< HEAD
-* [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): Sets the threshold for the slow log. The SQL statement whose execution time exceeds this threshold is recorded in the slow log. The default value is 300 (ms).
-* [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow log. The default value is 4096 (byte).
-* [tidb_redact_log](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow log. The default value is `0`, which means to disable the feature.
-* [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): Determines whether to record the physical execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
-=======
 * [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900): see [`tidb_slow_log_rules` recommendations](#recommendations)
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for slow query logging. SQL statements whose execution time exceeds this threshold are recorded in the slow query log. The default value is `300ms` (milliseconds).
@@ -321,7 +315,6 @@ Unless otherwise noted, the fields in the following table follow the general mat
 * [`tidb_redact_log`](/system-variables.md#tidb_redact_log): controls whether user data in SQL statements recorded in the slow query log is redacted and replaced with `?`. The default value is `0`, which means this feature is disabled.
 
 * [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): controls whether to record the physical execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
->>>>>>> 6d6ae318cc (sys-var: clarify `tidb_slow_log_rules` syntax/behavior and de-duplicate slow log docs (#22567))
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
