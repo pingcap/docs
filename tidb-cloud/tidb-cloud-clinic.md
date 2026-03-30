@@ -29,7 +29,7 @@ To view the **Cluster** page, take the following steps:
 
     - Advanced Metrics
     - Top Slow Queries (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
-    - TopSQL (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
+    - Top SQL (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
     - Benchmark Report
 
 ## Monitor advanced metrics
@@ -91,21 +91,21 @@ The retention policy for slow queries is 7 days.
 
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
-## Monitor TopSQL
+## Monitor Top SQL
 
-TiDB Cloud Clinic provides TopSQL information to help you visually analyze the most resource-intensive queries on a specific TiDB or TiKV instance over a period of time. By default, TopSQL continuously collects CPU load data. For TiKV instances, if TiKV network IO collection is enabled, you can also inspect `Network Bytes` and `Logical IO Bytes`, and analyze hotspots by `Query`, `Table`, `DB`, or `Region`. This helps you identify and troubleshoot performance issues from multiple resource dimensions instead of CPU alone.
+TiDB Cloud Clinic provides Top SQL information to help you visually analyze the most resource-intensive queries on a specific TiDB or TiKV instance over a period of time. By default, Top SQL continuously collects CPU load data. For TiKV instances, if TiKV network IO collection is enabled, you can also inspect `Network Bytes` and `Logical IO Bytes`, and analyze hotspots by `Query`, `Table`, `DB`, or `Region`. This helps you identify and troubleshoot performance issues across multiple resource dimensions, not just CPU.
 
-To view TopSQL, take the following steps:
+To view Top SQL, take the following steps:
 
 1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
 
-2. Click **TopSQL**.
+2. Click **Top SQL**.
 
 3. Select a specific TiDB or TiKV instance to observe its load. You can use the time picker or select a time range in the chart to refine your analysis.
 
-4. Analyze the charts and tables displayed by TopSQL. Depending on the selected instance and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical IO hotspots.
+4. Analyze the charts and tables displayed by Top SQL. Depending on the selected instance and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical I/O hotspots.
 
-For more information, see [TopSQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql).
+For more information, see [Top SQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql).
 
 ## Generate benchmark reports
 
