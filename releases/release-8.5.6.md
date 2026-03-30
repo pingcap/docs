@@ -12,7 +12,32 @@ TiDB Version: 8.5.6
 Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production Deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup) | [Download Offline Package](https://pingkai.cn/download#tidb-community)
 
 ## Feature Details
+- 
+### **SQL**
+- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) [@CbcWestwolf](https://github.com/CbcWestwolf),[@fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
 
+Before v8.5.6, TiDB privilege control mainly covered the database, and table levels, and did not support granting or revoking privileges on specific columns as MySQL does. As a result, when you needed to restrict users to accessing only a subset of sensitive columns in a table, TiDB could not provide sufficiently fine-grained access control.
+
+Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to grant or revoke privileges on specific columns, and TiDB performs privilege checks based on column privileges during query processing and execution plan construction. This enables more fine-grained access control and better supports sensitive data isolation and the principle of least privilege.
+
+  For more information, see the user documentation.
+  
+ - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) [@cryo-zd](https://github.com/cryo-zd)**tw@lilin90** <!--2350-->
+
+Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement referenced a table alias in the locking clause, TiDB could fail to resolve the alias correctly and return a `table not exists` error even though the alias was valid.
+
+Starting from v8.5.6, TiDB supports table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve the locking target from the `FROM` clause, including aliased tables, so that row locks are applied as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more reliable in queries that use table aliases.
+
+  For more information, see the user documentation. 
+  
+### **DB operations**
+- Support specifying the maximum number of nodes for distributed execution tasks [#58937](https://github.com/pingcap/tidb/pull/58937) [@tangenta](https://github.com/tangenta), [@D3Hunter](https://github.com/D3Hunter)
+
+Before v8.5.6, TiDB did not support efficiently limiting how many nodes a distributed execution task could use. When you wanted to control resource usage for distributed task execution, TiDB did not provide a dedicated option to constrain the maximum node count.
+
+Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variable, which lets you specify the maximum number of TiDB nodes used by a distributed execution task. This gives you more flexibility to manage resource usage and tune distributed task execution based on workload and cluster conditions.
+
+  For more information, see the user documentation.
 ### Stability
 
 - The ability to set resource limits for background tasks in Resource Control is now Generally Available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) **tw@hfxsd** <!--1933-->
@@ -56,7 +81,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 ## Improvements
 
 + TiDB
-
+- Improve plan selection for queries with IN predicates on index prefix columns. TiDB can now leverage merge sort to preserve order in ORDER BY ... LIMIT queries, reducing unnecessary scans and improving performance.[#62694](https://github.com/pingcap/tidb/pull/62694) [@time-and-fate](https://github.com/time-and-fate)**tw@hfxsd** <!--2414-->
     - Enhanced slow query log control by supporting [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) for targeted slow query log output based on combinations of multiple metrics, [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) for limiting the number of slow query log entries per second, and the [`WRITE_SLOW_LOG`](/identify-slow-queries.md#related-hint) hint for forcing specified SQL statements to be recorded in the slow query log [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
     - Enhanced [Top SQL](/dashboard/top-sql.md) for resource analysis by supporting Top `5`, `20`, or `100` queries, hotspot analysis sorted by CPU, network traffic, or logical I/O, and aggregated analysis by `Query`, `Table`, `DB`, or `Region` on TiKV instances [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
     - 新增 DXF 的 max_node_count 配置项支持 [#66376](https://github.com/pingcap/tidb/pull/66376)@[D3Hunter](https://github.com/D3Hunter)
@@ -137,6 +162,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 + TiKV
 
+    - Fix a memory leak in crossbeam skiplist. [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     - Fix the issue that global indexes on non-unique columns of partitioned tables might become inconsistent and return incorrect results in some cases. [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
     - Fix the issue that stalled coprocessor snapshot retrieval could occupy unified read pool workers until request deadlines expired, delaying other read requests. [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
     - Fix the issue that follower replica reads could remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers. [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
