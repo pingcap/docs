@@ -109,7 +109,7 @@ After creating the interface endpoint in AWS, you must add it to your cluster's 
 
 1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
-3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table. 
+3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table.
 4. Click **Add Rule** to add a firewall rule.
 
     - **Endpoint Service Name**: paste your service name.
