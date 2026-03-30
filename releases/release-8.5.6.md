@@ -166,14 +166,13 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Fix the issue that KILL QUERY incorrectly kills idle connections. [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)
     - Fix the issue that column-level privilege checks can be incorrect for JOIN ... USING, NATURAL JOIN, and INSERT ... ON DUPLICATE KEY UPDATE. [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve privilege-check performance for deployments with many column-level privilege entries. [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) <!--tw@hfxsd: the following 8 notes-->
-    - Add cluster_id to mysql.tidb so external tools can determine whether two TiDB instances belong to the same cluster. [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
-    - Improve the slow query log by printing non-printable prepared-statement arguments as hexadecimal literals. [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
-    - 修复 tidb_service_scope 设置时未统一转换为小写的问题 [#66835](https://github.com/pingcap/tidb/pull/66835)@[D3Hunter](https://github.com/D3Hunter)
-    - 修复 TiDB 重启后无法展示亲和力表的问题 [#66284](https://github.com/pingcap/tidb/issues/66284) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复可能出现的内存泄漏 [#65522](https://github.com/pingcap/tidb/issues/65522) @[bufferflies](https://github.com/bufferflies)
-    - 修复系统表可能影响 stats healthy 监控的问题 [#64080](https://github.com/pingcap/tidb/issues/64080) @[ti-chi-bot](https://github.com/ti-chi-bot)
-    - 修复 stats delta 数据可能刷新不及时的问题 [#65426](https://github.com/pingcap/tidb/issues/65426) @[ti-chi-bot](https://github.com/ti-chi-bot)
-    - 修复事务中第一条语句使用 fair locking 模式上锁时，有时可能使事务 keep alive 失效、并被意外回滚的问题  [#66571](https://github.com/pingcap/tidb/issues/66571) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
+    - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
+    - Fix the issue that the value of `tidb_service_scope` is not converted to lowercase when set [#66749](https://github.com/pingcap/tidb/issues/66749) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that affinity tables are not displayed after TiDB restarts [#66284](https://github.com/pingcap/tidb/issues/66284) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that the Stats Healthy metric displays inaccurately because system tables are not excluded from the stats cache [#64080](https://github.com/pingcap/tidb/issues/64080) @[ti-chi-bot](https://github.com/ti-chi-bot)
+    - Fix the issue that statistics might not be updated due to abnormal updates of `modify_count` [#65426](https://github.com/pingcap/tidb/issues/65426) @[ti-chi-bot](https://github.com/ti-chi-bot)
+    - Fix the issue that a pessimistic transaction might be unexpectedly rolled back due to a keep-alive mechanism failure when its first statement acquires locks in fair locking mode [#66571](https://github.com/pingcap/tidb/issues/66571) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiKV <!--tw@Oreoxmt: 7 notes-->
 
