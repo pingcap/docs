@@ -108,18 +108,19 @@ Then you can connect to the endpoint service with the private DNS name.
 After creating the interface endpoint in AWS, you must add it to your cluster's allowlist.
 
 1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
-2. Click **Settings** > **Networking** in the left navigation menu.
-3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table. Click **Add Rule** to add a firewall rule.
+2. Click **Settings** > **Networking** in the left navigation pane.
+3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table. 
+4. Click **Add Rule** to add a firewall rule.
 
-    - In the **Endpoint Service Name** field, paste your Service Name.
-    - In the **Firewall Rule Name** field, enter a name to identify this connection.
-    - In the **Your VPC Endpoint ID** field, paste your 22-character VPC Endpoint ID from the AWS console (starts with `vpce-`).
+    - **Endpoint Service Name**: paste your service name.
+    - **Firewall Rule Name**: enter a name to identify this connection.
+    - **Your VPC Endpoint ID**: paste your 22-character VPC Endpoint ID from the AWS console (starts with `vpce-`).
 
     > **Tip:**
     > 
     > If you want to allow all Private Endpoint connections from your cloud region (for testing or open access), you can enter a single asterisk (`*`) in the **Your VPC Endpoint ID** field.
 
-4. Click **Submit**.
+5. Click **Submit**.
 
 ### Step 4: Connect to your TiDB cluster
 
