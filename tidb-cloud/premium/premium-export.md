@@ -127,7 +127,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
-3. On the **Export** page, click **Export Data** in the upper-right corner：
+3. On the **Export** page, click **Export Data** in the upper-right corner:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Source Connection**: enter Username and Password of your TiDB Instance, and then click **Test Connection** to check them.

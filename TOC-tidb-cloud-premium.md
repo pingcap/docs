@@ -211,7 +211,7 @@
     - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files-serverless.md)
     - [Import Data Using MySQL CLI](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
   - Export Data from TiDB Cloud Premium
-    - [Export Data from Premium](/tidb-cloud/premium/premium-export.md)
+    - [Export Data from TiDB Cloud Premium](/tidb-cloud/premium/premium-export.md)
     - [Configure External Storage Access](/tidb-cloud/premium/external-storage.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/configure-external-storage-access.md)

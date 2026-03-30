@@ -31,7 +31,7 @@ We recommend that you use [AWS CloudFormation](https://docs.aws.amazon.com/AWSCl
 
 2. Open the **Add New ARN** dialog.
 
-    1. Click **Export data**.
+    1. Click **Export Data**.
     2. Choose **Amazon S3** in **Target Connection**.
     3. Fill in the **Folder URI** field.
     4. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
