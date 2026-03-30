@@ -50,7 +50,7 @@ In addition, with the default implementation of MySQL Connector/J, only client-s
 
 #### Use Batch API
 
-For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing). The `addBatch()` method is used to cache multiple SQL statements first on the client, and then send them to the database server together when calling the `executeBatch` method.
+For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch()). The `addBatch()` method is used to cache multiple SQL statements first on the client, and then send them to the database server together when calling the `executeBatch` method.
 
 > **Note:**
 >
@@ -126,6 +126,10 @@ To verify that this setting already takes effect, you can do:
 - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
 - If the number of `COM_STMT_EXECUTE` in the request is far more than the number of `COM_STMT_PREPARE`, it means this setting already takes effect.
 
+#### `readOnlyPropagatesToServer`
+
+Disable the `readOnlyPropagatesToServer` property. When this property is enabled, the JDBC driver sends a `SET SESSION TRANSACTION READ ONLY` statement to the server. TiDB does not support this statement, and sending this statement is unnecessary because all TiDB nodes accept both read and write connections.
+
 #### Batch-related parameters
 
 While processing batch writes, it is recommended to configure `rewriteBatchedStatements=true`. After using `addBatch()` or `executeBatch()`, JDBC still sends SQL one by one by default, for example:
@@ -142,8 +146,6 @@ pstmt.executeBatch();
 
 Although `Batch` methods are used, the SQL statements sent to TiDB are still individual `INSERT` statements:
 
-{{< copyable "sql" >}}
-
 ```sql
 insert into t(a) values(10);
 insert into t(a) values(11);
@@ -152,15 +154,11 @@ insert into t(a) values(12);
 
 But if you set `rewriteBatchedStatements=true`, the SQL statements sent to TiDB will be a single `INSERT` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 insert into t(a) values(10),(11),(12);
 ```
 
 Note that the rewrite of the `INSERT` statements is to concatenate the values after multiple "values" keywords into a whole SQL statement. If the `INSERT` statements have other differences, they cannot be rewritten, for example:
-
-{{< copyable "sql" >}}
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = 10;
@@ -170,8 +168,6 @@ insert into t (a) values (12) on duplicate key update a = 12;
 
 The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements into the following ones:
 
-{{< copyable "sql" >}}
-
 ```sql
 insert into t (a) values (10) on duplicate key update a = values(a);
 insert into t (a) values (11) on duplicate key update a = values(a);
@@ -180,15 +176,11 @@ insert into t (a) values (12) on duplicate key update a = values(a);
 
 Then they meet the rewrite requirement. The above `INSERT` statements will be rewritten into the following one statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
 ```
 
 If there are three or more updates during the batch update, the SQL statements will be rewritten and sent as multiple queries. This effectively reduces the client-to-server request overhead, but the side effect is that a larger SQL statement is generated. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set a = 12 where id = 3;

@@ -23,7 +23,7 @@ To receive alert notifications of clusters, take the following steps:
 
 ### Step 1. Generate a Flashduty webhook URL
 
-1. Generate a webhook URL by following the instructions in [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/flashduty/prometheus-integration-guide).
+1. Generate a webhook URL by following the instructions in [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/on-call/integration/alert-integration/alert-sources/prometheus).
 2. Save the generated webhook URL to use in the next step.
 
 ### Step 2. Subscribe from TiDB Cloud

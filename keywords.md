@@ -393,6 +393,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LAST_BACKUP
 - LAST_VALUE (R-Window)
 - LASTVAL
+- LATERAL (R)
 - LEAD (R-Window)
 - LEADING (R)
 - LEAVE (R)
@@ -449,6 +450,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MOD (R)
 - MODE
 - MODIFY
+- MONITOR
 - MONTH
 
 <a id="N" class="letter" href="#N">N</a>

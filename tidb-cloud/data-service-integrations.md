@@ -35,6 +35,6 @@ To integrate your Data App with GPTs, perform the following steps:
 
 ## Integrate your Data App with Dify
 
-You can integrate your Data App with [Dify](https://docs.dify.ai/guides/tools) to enhance your applications with intelligent capabilities, such as vector distance calculations, advanced similarity searches, and vector analysis.
+You can integrate your Data App with [Dify](https://docs.dify.ai/en/use-dify/nodes/tools) to enhance your applications with intelligent capabilities, such as vector distance calculations, advanced similarity searches, and vector analysis.
 
 To integrate your Data App with Dify, follow the same steps as for [GPTs integration](#integrate-your-data-app-with-gpts). The only difference is that on the **Integrations** tab, you need to click **Get Configuration** in the **Integrate with Dify** area.
