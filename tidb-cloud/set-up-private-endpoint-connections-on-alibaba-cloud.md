@@ -60,13 +60,13 @@ After creating the interface endpoint in Alibaba Cloud, you must add it to your 
 3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table.
 4. Click **Add Rule** to add a firewall rule.
 
-    - **Endpoint Service Name**: paste your service name.
+    - **Endpoint Service Name**: paste the service name you got from [Step 1](#step-1-choose-a-tidb-cluster).
     - **Firewall Rule Name**: enter a name to identify this connection.
-    - **Your Endpoint ID**: paste your 23-character endpoint ID from the Alibaba Cloud console (starts with `ep-`).
+    - **Your Endpoint ID**: paste your 23-character endpoint ID from the Alibaba Cloud Management Console (starts with `ep-`).
 
     > **Tip:**
     > 
-    > If you want to allow all Private Endpoint connections from your cloud region (for testing or open access), you can enter a single asterisk (`*`) in the **Your Endpoint ID** field.
+    > To allow all Private Endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your Endpoint ID** field.
 
 5. Click **Submit**.
 
