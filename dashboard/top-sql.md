@@ -1,13 +1,13 @@
 ---
-title: TiDB Dashboard TopSQL page
-summary: Use TopSQL to identify queries that consume high CPU, network, and logical IO resources
+title: TiDB Dashboard Top SQL page
+summary: Use Top SQL to identify queries that consume high CPU, network, and logical IO resources
 ---
 
-# TiDB Dashboard TopSQL Page
+# TiDB Dashboard Top SQL Page
 
-TiDB Dashboard TopSQL helps you visually analyze the most resource-intensive queries on a specific TiDB or TiKV instance over a period of time. By default, TopSQL continuously collects CPU load data from each TiDB and TiKV instance and retains the data for up to 30 days. For TiKV instances, you can also enable **TiKV Network IO collection (multi-dimensional)** in the settings panel to view metrics such as `Network Bytes` and `Logical IO Bytes`, and analyze the results by `Query`, `Table`, `DB`, or `Region`.
+TiDB Dashboard Top SQL helps you visually analyze the most resource-intensive queries on a specific TiDB or TiKV instance over a period of time. By default, Top SQL continuously collects CPU load data from each TiDB and TiKV instance and retains the data for up to 30 days. For TiKV instances, you can also enable **TiKV Network IO collection (multi-dimensional)** in the settings panel to view metrics such as `Network Bytes` and `Logical IO Bytes`, and analyze the results by `Query`, `Table`, `DB`, or `Region`.
 
-TopSQL provides the following features:
+Top SQL provides the following features:
 
 * Show the top `5`, `20`, or `100` records with the highest load in the selected time range, and automatically aggregate the rest into `Others`.
 * Sort hotspots by `CPU Time` or `Network Bytes`, and when a TiKV instance is selected, by `Logical IO Bytes` as well.
@@ -18,43 +18,43 @@ TopSQL provides the following features:
 
 ## Recommended scenarios
 
-TopSQL is suitable for analyzing performance issues in scenarios such as the following:
+Top SQL is suitable for analyzing performance issues in scenarios such as the following:
 
 * You find that one TiDB or TiKV instance has very high CPU usage and want to quickly identify which queries are consuming the most CPU resources.
 * The overall cluster becomes slower and you want to identify the queries that currently consume the most resources, or compare the major query changes before and after a workload shift.
 * You want to locate hotspots at a higher level and analyze TiKV-side resource usage by `Table`, `DB`, or `Region`.
 * You want to troubleshoot TiKV hotspots from the perspective of network traffic or logical IO instead of CPU alone.
 
-TopSQL is not suitable for the following scenarios:
+Top SQL is not suitable for the following scenarios:
 
 - It cannot answer non-performance questions such as data correctness issues or abnormal crashes.
 - It is not designed to directly analyze issues such as lock conflicts or transaction semantic errors that are not caused by resource consumption.
 
 ## Access the page
 
-You can access the TopSQL page using either of the following methods:
+You can access the Top SQL page using either of the following methods:
 
-* After logging in to TiDB Dashboard, click **TopSQL** in the left navigation menu.
+* After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
 
-  ![TopSQL](/media/dashboard/top-sql-access.png)
+  ![Top SQL](/media/dashboard/top-sql-access.png)
 
 * Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
-## Enable TopSQL
+## Enable Top SQL
 
 > **Note:**
 >
-> To use TopSQL, your cluster should be deployed or upgraded with a recent version of TiUP (v1.9.0 or above) or TiDB Operator (v1.3.0 or above). If your cluster was upgraded using an earlier version of TiUP or TiDB Operator, see [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown) for instructions.
+> To use Top SQL, your cluster should be deployed or upgraded with a recent version of TiUP (v1.9.0 or above) or TiDB Operator (v1.3.0 or above). If your cluster was upgraded using an earlier version of TiUP or TiDB Operator, see [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown) for instructions.
 
-TopSQL is disabled by default because it has a slight impact on cluster performance, usually less than 3%. You can enable TopSQL as follows:
+Top SQL is disabled by default because it has a slight impact on cluster performance, usually less than 3%. You can enable Top SQL as follows:
 
-1. Visit the [TopSQL page](#access-the-page).
+1. Visit the [Top SQL page](#access-the-page).
 2. Click **Open Settings**. In the **Settings** panel on the right, turn on **Enable Feature**.
 3. Click **Save**.
 
-After TopSQL is enabled, only data collected from that point forward is available. Historical fine-grained data before enabling TopSQL is not backfilled. New data is usually visible after about 1 minute. After TopSQL is disabled, existing historical data remains queryable until it expires, but no new TopSQL data is collected.
+After Top SQL is enabled, only data collected from that point forward is available. Historical fine-grained data before enabling Top SQL is not backfilled. New data is usually visible after about 1 minute. After Top SQL is disabled, existing historical data remains queryable until it expires, but no new Top SQL data is collected.
 
-In addition to the UI, you can also enable the TopSQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
+In addition to the UI, you can also enable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
 {{< copyable "sql" >}}
 
@@ -82,17 +82,17 @@ server_configs:
 
 For more information about TiUP topology configuration, see [TiDB Cluster Topology Reference](/tiup/tiup-cluster-topology-reference.md).
 
-## Use TopSQL {#use-top-sql}
+## Use Top SQL {#use-top-sql}
 
-The following are the common steps to use TopSQL:
+The following are the common steps to use Top SQL:
 
-1. Visit the [TopSQL page](#access-the-page).
+1. Visit the [Top SQL page](#access-the-page).
 
 2. Select the TiDB or TiKV instance that you want to observe.
 
     ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
 
-    If you are not sure which instance to inspect, you can first identify the busy node from Grafana or the Overview page, and then return to TopSQL for deeper analysis.
+    If you are not sure which instance to inspect, you can first identify the busy node from Grafana or the Overview page, and then return to Top SQL for deeper analysis.
 
 3. Set the time range, and use **Refresh** or auto refresh when needed.
 
@@ -143,18 +143,18 @@ The following are the common steps to use TopSQL:
 
     In the `By Query` view, you can also click **Search in SQL Statements** in the table to jump to the corresponding SQL Statements page. If you need to analyze the current table data offline, use `Download to CSV`.
 
-## Disable TopSQL
+## Disable Top SQL
 
-You can disable TopSQL by following these steps:
+You can disable Top SQL by following these steps:
 
-1. Visit the [TopSQL page](#access-the-page).
+1. Visit the [Top SQL page](#access-the-page).
 2. Click the settings icon in the upper-right corner, and turn off **Enable Feature**.
 3. Click **Save**.
 4. In the confirmation dialog, click **Disable**.
 
-After TopSQL is disabled, no new TopSQL data is collected. Existing historical data remains available until it expires.
+After Top SQL is disabled, no new Top SQL data is collected. Existing historical data remains available until it expires.
 
-In addition to the UI, you can also disable the TopSQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
+In addition to the UI, you can also disable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
 {{< copyable "sql" >}}
 
@@ -164,7 +164,7 @@ SET GLOBAL tidb_enable_top_sql = 0;
 
 ### Disable TiKV Network IO collection
 
-If you want to stop collecting TiKV `Network Bytes`, `Logical IO Bytes`, and related multi-dimensional data while keeping TopSQL CPU analysis enabled, turn off **Enable TiKV Network IO collection (multi-dimensional)** in the settings panel.
+If you want to stop collecting TiKV `Network Bytes`, `Logical IO Bytes`, and related multi-dimensional data while keeping Top SQL CPU analysis enabled, turn off **Enable TiKV Network IO collection (multi-dimensional)** in the settings panel.
 
 After this setting is disabled:
 
@@ -173,13 +173,13 @@ After this setting is disabled:
 
 ## Frequently asked questions
 
-**1. TopSQL cannot be enabled and the UI displays "required component NgMonitoring is not started".**
+**1. Top SQL cannot be enabled and the UI displays "required component NgMonitoring is not started".**
 
 See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown).
 
-**2. Will performance be affected after enabling TopSQL?**
+**2. Will performance be affected after enabling Top SQL?**
 
-TopSQL itself has a slight impact on cluster performance. According to our benchmark, the average performance impact is usually less than 3%. If you also enable **TiKV Network IO collection (multi-dimensional)**, there is additional storage and query overhead.
+Top SQL itself has a slight impact on cluster performance. According to our benchmark, the average performance impact is usually less than 3%. If you also enable **TiKV Network IO collection (multi-dimensional)**, there is additional storage and query overhead.
 
 **3. What is the status of this feature?**
 
@@ -189,17 +189,17 @@ It is now a generally available (GA) feature and can be used in production envir
 
 `Others` represents the aggregated result of all non-Top N records under the current sort dimension. You can use it to understand how much of the total load comes from the Top N records.
 
-**5. What is the relationship between the CPU overhead displayed by TopSQL and the actual CPU usage of the process?**
+**5. What is the relationship between the CPU overhead displayed by Top SQL and the actual CPU usage of the process?**
 
-Their correlation is strong but they are not exactly the same thing. For example, the cost of writing multiple replicas is not counted in the TiKV CPU overhead displayed by TopSQL. In general, SQL statements with higher CPU usage result in higher CPU overhead displayed in TopSQL.
+Their correlation is strong but they are not exactly the same thing. For example, the cost of writing multiple replicas is not counted in the TiKV CPU overhead displayed by Top SQL. In general, SQL statements with higher CPU usage result in higher CPU overhead displayed in Top SQL.
 
-**6. What does the Y-axis of the TopSQL chart mean?**
+**6. What does the Y-axis of the Top SQL chart mean?**
 
 The Y-axis represents resource consumption under the currently selected sort dimension. When `Order By CPU` is selected, it represents CPU time. When `Order By Network` is selected, it represents network bytes. When `Order By Logical IO` is selected, it represents logical IO bytes.
 
-**7. Does TopSQL collect running (unfinished) SQL statements?**
+**7. Does Top SQL collect running (unfinished) SQL statements?**
 
-Yes. At each point in time, the TopSQL chart shows the load of all currently running SQL statements under the selected dimension, so unfinished SQL statements are included as well.
+Yes. At each point in time, the Top SQL chart shows the load of all currently running SQL statements under the selected dimension, so unfinished SQL statements are included as well.
 
 **8. Why can't I see new `Order By Network`, `Order By Logical IO`, or `By Region` data?**
 
