@@ -12,32 +12,17 @@ TiDB Version: 8.5.6
 Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production Deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup) | [Download Offline Package](https://pingkai.cn/download#tidb-community)
 
 ## Feature Details
-- 
-### **SQL**
-- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) [@CbcWestwolf](https://github.com/CbcWestwolf),[@fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
 
-Before v8.5.6, TiDB privilege control mainly covered the database, and table levels, and did not support granting or revoking privileges on specific columns as MySQL does. As a result, when you needed to restrict users to accessing only a subset of sensitive columns in a table, TiDB could not provide sufficiently fine-grained access control.
+### 性能
 
-Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to grant or revoke privileges on specific columns, and TiDB performs privilege checks based on column privileges during query processing and execution plan construction. This enables more fine-grained access control and better supports sensitive data isolation and the principle of least privilege.
+- 外键检查支持共享锁（GA） [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/glorv) **tw@qiancai** <!--2085-->
 
-  For more information, see the user documentation.
-  
- - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) [@cryo-zd](https://github.com/cryo-zd)**tw@lilin90** <!--2350-->
+    对子表进行写入时，支持用户通过设置参数 tidb_foreign_key_check_in_shared_lock 来指定在父表加共享锁实现外键约束检查，相比以前仅支持排它锁，现方案可降低锁冲突提升子表并发写入性能。
 
-Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement referenced a table alias in the locking clause, TiDB could fail to resolve the alias correctly and return a `table not exists` error even though the alias was valid.
+    在V8.5.6 中，该功能成为正式功能 (GA)。
 
-Starting from v8.5.6, TiDB supports table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve the locking target from the `FROM` clause, including aliased tables, so that row locks are applied as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more reliable in queries that use table aliases.
+    更多信息，请参考[用户文档](/foreign-key.md)。
 
-  For more information, see the user documentation. 
-  
-### **DB operations**
-- Support specifying the maximum number of nodes for distributed execution tasks [#58937](https://github.com/pingcap/tidb/pull/58937) [@tangenta](https://github.com/tangenta), [@D3Hunter](https://github.com/D3Hunter)
-
-Before v8.5.6, TiDB did not support efficiently limiting how many nodes a distributed execution task could use. When you wanted to control resource usage for distributed task execution, TiDB did not provide a dedicated option to constrain the maximum node count.
-
-Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variable, which lets you specify the maximum number of TiDB nodes used by a distributed execution task. This gives you more flexibility to manage resource usage and tune distributed task execution based on workload and cluster conditions.
-
-  For more information, see the user documentation.
 ### Stability
 
 - The ability to set resource limits for background tasks in Resource Control is now Generally Available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) **tw@hfxsd** <!--1933-->
@@ -69,19 +54,68 @@ Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variab
 	在 v8.5.6 中，该功能成为正式功能（GA）。
 
     更多信息，请参考 [用户文档](/dashboard/top-sql.md)。
-	
+
+### **SQL**
+
+- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) [@CbcWestwolf](https://github.com/CbcWestwolf),[@fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
+
+    Before v8.5.6, TiDB privilege control mainly covered the database, and table levels, and did not support granting or revoking privileges on specific columns as MySQL does. As a result, when you needed to restrict users to accessing only a subset of sensitive columns in a table, TiDB could not provide sufficiently fine-grained access control.
+
+    Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to grant or revoke privileges on specific columns, and TiDB performs privilege checks based on column privileges during query processing and execution plan construction. This enables more fine-grained access control and better supports sensitive data isolation and the principle of least privilege.
+
+    For more information, see the [user documentation](/column-privilege-management.md).
+  
+ - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) [@cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
+
+    Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement referenced a table alias in the locking clause, TiDB could fail to resolve the alias correctly and return a `table not exists` error even though the alias was valid.
+
+    Starting from v8.5.6, TiDB supports table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve the locking target from the `FROM` clause, including aliased tables, so that row locks are applied as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more reliable in queries that use table aliases.
+
+    For more information, see the user documentation. 
+  
+### **DB operations**
+
+- Support specifying the maximum number of nodes for distributed execution tasks [#58937](https://github.com/pingcap/tidb/pull/58937) [@tangenta](https://github.com/tangenta), [@D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
+
+    Before v8.5.6, TiDB did not support efficiently limiting how many nodes a distributed execution task could use. When you wanted to control resource usage for distributed task execution, TiDB did not provide a dedicated option to constrain the maximum node count.
+
+    Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variable, which lets you specify the maximum number of TiDB nodes used by a distributed execution task. This gives you more flexibility to manage resource usage and tune distributed task execution based on workload and cluster conditions.
+
+    For more information, see the [user documentation](/system-variables.md#tidb_max_dist_task_nodes-new-in-v856).
+
 ### Data Migration
 
 - (dup): release-9.0.0.md > # Data migration * Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
 
 ## Compatibility Changes
 
-- note [#issue](https://github.com/pingcap/${repo-name}/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.6. Most changes in v8.5.6 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility adjustments, system variable updates, configuration parameter updates, and system table changes. Before upgrading, make sure to carefully review this section.
+
+### Behavior changes
+
+### MySQL compatibility
+
+### System variables
+
+| Variable name | Change type | Description |
+|--------|------------------------------|------|
+|   |   |   |
+|   |   |   |
+|   |   |   |
+
+### Configuration parameters
+
+| Configuration file or component | Configuration parameter | Change type | Description |
+| -------- | -------- | -------- | -------- |
+|  | |  |
+|  | |  |
+|  | |  |
 
 ## Improvements
 
 + TiDB
-- Improve plan selection for queries with IN predicates on index prefix columns. TiDB can now leverage merge sort to preserve order in ORDER BY ... LIMIT queries, reducing unnecessary scans and improving performance.[#62694](https://github.com/pingcap/tidb/pull/62694) [@time-and-fate](https://github.com/time-and-fate)**tw@hfxsd** <!--2414-->
+
+    - Improve plan selection for queries with IN predicates on index prefix columns. TiDB can now leverage merge sort to preserve order in ORDER BY ... LIMIT queries, reducing unnecessary scans and improving performance.[#62694](https://github.com/pingcap/tidb/pull/62694) [@time-and-fate](https://github.com/time-and-fate)**tw@hfxsd** <!--2414-->
     - Enhanced slow query log control by supporting [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) for targeted slow query log output based on combinations of multiple metrics, [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) for limiting the number of slow query log entries per second, and the [`WRITE_SLOW_LOG`](/identify-slow-queries.md#related-hint) hint for forcing specified SQL statements to be recorded in the slow query log [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
     - Enhanced [Top SQL](/dashboard/top-sql.md) for resource analysis by supporting Top `5`, `20`, or `100` queries, hotspot analysis sorted by CPU, network traffic, or logical I/O, and aggregated analysis by `Query`, `Table`, `DB`, or `Region` on TiKV instances [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
     - 新增 DXF 的 max_node_count 配置项支持 [#66376](https://github.com/pingcap/tidb/pull/66376)@[D3Hunter](https://github.com/D3Hunter)
@@ -97,48 +131,29 @@ Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variab
 
 + PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+    - 删除不存在的 label 时，现在会返回 404 [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
     - (dup): release-7.5.7.md > Improvements> PD - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
-
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-
     + TiCDC
-
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
         - Support migrating data from MySQL 8.4 as a data source. The compatibility level for MySQL 8.4 is upgraded from "Incompatible" to "Experimental" [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
+        - 在 DM syncer 中新增外键因果依赖支持，确保多 worker 场景下行变更按照父表至子表的外键顺序执行 [#12552](https://github.com/pingcap/tiflow/pull/12552) @[OliverS929](https://github.com/OliverS929)
 
     + TiDB Lightning
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-
     + Dumpling
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
         - Support exporting data from MySQL 8.4 by adopting the updated MySQL binary log terminology [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
 
     + TiUP
-
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
 
 ## Bug Fixes
 
@@ -173,8 +188,8 @@ Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variab
 
 + PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+    - 修复 distribute table sql panic 问题，特别是 merge region operator 比较多的场景容易触发这个 bug。 [#10292](https://github.com/tikv/pd/pull/10292) @[bufferflies](https://github.com/bufferflies)
+    - 修复设置 store limit 后可能不马上生效的问题 [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
 
 + TiFlash
 
@@ -186,7 +201,7 @@ Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variab
 
     + Backup & Restore (BR)
 
-        - 修复了 log backup 的 flush_ts 可能为 0 的问题 [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
+        - 修复 log backup 的 flush_ts 可能为 0 的问题 [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
         - 修复 BR 在使用 GCP S3 API server 进行 multipart upload 时因缺少 `Content-Length` 头而失败的问题 [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
         - 修复 BR `restore point` 可能长时间卡在 `waiting for schema info finishes reloading` 并在 15 分钟后超时失败的问题 [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
         - 修复 BR 在恢复带有 `SHARD_ROW_ID_BITS`、`PRE_SPLIT_REGIONS` 和 `merge_option` 属性的表时无法正确预分裂 Region 的问题 [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
@@ -200,20 +215,12 @@ Starting from v8.5.6, TiDB supports the `tidb_max_dist_task_nodes` system variab
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+        - 修复 DM 在 binlog rotate 事件时全局 checkpoint 位置未推进的问题 [#12525](https://github.com/pingcap/tiflow/pull/12525) @[OliverS929](https://github.com/OliverS929)
+        - 修复含外键约束的表在 DM safe-mode 下的异常行为，移除 UPDATE 改写中多余的 DELETE 操作并避免触发外键级联 [#12541](https://github.com/pingcap/tiflow/pull/12541) @[OliverS929](https://github.com/OliverS929)
+        - 修复 DM validator 对 UNSIGNED 列误报校验错误的问题 [#12555](https://github.com/pingcap/tiflow/pull/12555) @[OliverS929](https://github.com/OliverS929)
 
     + TiDB Lightning
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-
     + Dumpling
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-
-    + TiUP
-
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+        - 修复 Dumpling 与 MySQL 8.4 的兼容性问题 [#65131](https://github.com/pingcap/tidb/pull/65131) @[dveeden](https://github.com/dveeden)
