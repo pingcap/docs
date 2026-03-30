@@ -130,7 +130,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 3. On the **Export** page, click **Export Data** in the upper-right corner:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter Username and Password of your TiDB Instance, and then click **Test Connection** to check them.
+    - **Source Connection**: enter **Username** and **Password** of your TiDB Instance, and then click **Test Connection** to check them.
     - **Target Connection**: 
         - **Storage Provider**: choose Azure Blob Storage
         - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
@@ -154,7 +154,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 3. On the **Export** page, click **Export Data** in the upper-right corner：
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter Username and Password of your TiDB Instance, and then click **Test Connection** to check them.
+    - **Source Connection**: enter **Username** and **Password** of your TiDB Instance, and then click **Test Connection** to check them.
     - **Target Connection**: 
         - **Storage Provider**: choose Alibaba Cloud OSS
         - **Folder URI**: enter the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
