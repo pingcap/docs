@@ -1181,16 +1181,21 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
+> **Warning:**
+>
+> Statistics Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. TiDB keeps reading existing Version 1 statistics for upgrade compatibility, but all new `ANALYZE` operations use Statistics Version 2 (`tidb_analyze_version = 2`). It is recommended that you use `tidb_analyze_version = 2`.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `2`
-- Range: `[1, 2]`
+- Range: `[1, 2]`. Only `2` is supported for new statistics collection.
 - Controls how TiDB collects statistics.
-    - For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
-    - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
-    - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+    - If you try to set this variable to `1`, TiDB returns an error.
+    - For TiDB Self-Managed, the default value of this variable changed from `1` to `2` starting from v5.3.0.
+    - For TiDB Cloud, the default value of this variable changed from `1` to `2` starting from v6.5.0.
+    - When you upgrade a cluster that still persists `tidb_analyze_version = 1`, TiDB rewrites the persisted global value to `2` during upgrade.
 - For detailed introduction about this variable, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
