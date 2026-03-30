@@ -283,27 +283,27 @@ Unless otherwise noted, the fields in the following table follow the general mat
 
 - Standard format (`SESSION` scope):
 
-  ```sql
-  SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
-  ```
+    ```sql
+    SET SESSION tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+    ```
 
 - Invalid format (`SESSION` scope does not support `Conn_ID`):
 
-  ```sql
-  SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
-  ```
+    ```sql
+    SET SESSION tidb_slow_log_rules = 'Conn_ID: 12, Query_time: 0.5, Is_internal: false';
+    ```
 
 - Global rule (applies to all connections):
 
-  ```sql
-  SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
-  ```
+    ```sql
+    SET GLOBAL tidb_slow_log_rules = 'Query_time: 0.5, Is_internal: false';
+    ```
 
 - Global rules for specific connections (applied separately to the two connections `Conn_ID:11` and `Conn_ID:12`):
 
-  ```sql
-  SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
-  ```
+    ```sql
+    SET GLOBAL tidb_slow_log_rules = 'Conn_ID: 11, Query_time: 0.5, Is_internal: false; Conn_ID: 12, Query_time: 0.6, Process_time: 0.3, DB: db1';
+    ```
 
 ### Recommendations
 
