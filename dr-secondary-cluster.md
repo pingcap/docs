@@ -231,9 +231,7 @@ After migrating data as described in the preceding section, you can replicate in
     In the primary cluster, run the following command to create a changefeed from the primary to the secondary cluster:
 
     ```shell
-    tiup cdc cli changefeed create --server=http://10.1.1.9:8300 \
-    --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" \
-    --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://10.1.1.9:8300 --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561" --config changefeed.toml
     ```
 
     For more information about the changefeed configurations, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md).
