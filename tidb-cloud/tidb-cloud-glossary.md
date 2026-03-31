@@ -127,9 +127,7 @@ Currently, only the following types of TiDB Cloud resources support the Recycle 
 
 - {{{ .essential }}} instances
 
-<CustomContent plan="premium">
 - {{{ .premium }}} instances
-</CustomContent>
 
 - {{{ .dedicated }}} clusters
 
