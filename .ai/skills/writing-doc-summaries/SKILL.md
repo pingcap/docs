@@ -82,16 +82,19 @@ summary: This document explains the auto-tune feature of Backup & Restore.
 ```
 
 **After** (reader-focused, specific, includes outcome):
+
 ```yaml
 summary: Learn how the BR auto-tune feature automatically limits backup resource usage to reduce impact on online TiDB cluster performance.
 ```
 
 **Before** (generic, no user intent):
+
 ```yaml
 summary: An introduction to metadata lock in TiDB.
 ```
 
 **After** (introduces concept and explains why it matters):
+
 ```yaml
 summary: Introduce the concept, principles, and implementation of metadata lock in TiDB, and learn how it prevents DDL and DML conflicts.
 ```
@@ -114,12 +117,14 @@ summary: Introduce the concept, principles, and implementation of metadata lock 
 5. **Apply** the best candidate:
    - If front matter exists, update the `summary` line in place.
    - If front matter is missing, add it at the top:
+
      ```yaml
      ---
      title: <existing H1 text, in title case>
      summary: <new summary>
      ---
      ```
+
    - Preserve all other front matter fields. Do not change the document body.
 
 6. **Final check**: Re-count characters one more time after editing. Confirm `title` matches the H1. Confirm no special leading character without wrapping quotes.
