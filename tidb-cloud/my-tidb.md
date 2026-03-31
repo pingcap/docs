@@ -1,28 +1,28 @@
 ---
-title: Use the My TiDB Page
-summary: Learn how to use the My TiDB Page to manage your TiDB resources and projects.
+title: Manage TiDB Cloud Resources and Projects
+summary: Learn how to manage your TiDB Cloud resources and projects on the My TiDB page.
 ---
 
-# Use the My TiDB Page
+# Manage TiDB Cloud Resources and Projects
 
-In the [TiDB Cloud console](https://tidbcloud.com/), [**My TiDB**](https://tidbcloud.com/tidbs) is a centralized page for all TiDB Cloud resources and projects that you can access within the current organization, helping you easily discover, access, and manage your TiDB resources.
+In the [TiDB Cloud console](https://tidbcloud.com/), you can discover, access, and manage all TiDB Cloud resources and projects within your organization on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-In this document, you will learn how to use the [**My TiDB**](https://tidbcloud.com/tidbs) page to manage your TiDB Cloud resources and projects.
+This document describes TiDB Cloud resources and projects, and explains how to create, view, and manage them.
 
 ## What are TiDB Cloud resources and projects?
 
 ### TiDB Cloud resources
 
-A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
+A TiDB Cloud resource is a deployable unit that you can manage. It can be one of the following:
 
-- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or {{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}}</CustomContent> instance
+- A TiDB X instance, which is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB Cloud projects
 
-In TiDB Cloud, you can use [projects](/tidb-cloud/tidb-cloud-glossary.md#project) to group and manage your TiDB resources.
+In TiDB Cloud, you can use [projects](/tidb-cloud/tidb-cloud-glossary.md#project) to organize and manage your TiDB Cloud resources.
 
-- For TiDB X instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
+- For TiDB X instances, projects are optional, which means you can either group these instances in a project or keep them at the organization level.
 - For {{{ .dedicated }}} clusters, projects are required.
 
 ## Create TiDB Cloud resources
@@ -41,7 +41,7 @@ For more information, see the following documents:
 
 ## Create TiDB Cloud projects
 
-To create a new project, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click **Create Project**. For more information, see [Create a project](/tidb-cloud/manage-user-access.md#create-a-project).
+To create a new project, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click **Create Project**.
 
 You can also create a project when creating TiDB Cloud resources. For more information, see [Create a project](/tidb-cloud/manage-user-access.md#create-a-project).
 
