@@ -232,8 +232,6 @@ After migrating data as described in the preceding section, you can replicate in
 
     ```shell
     tiup cdc cli changefeed create --server=http://10.1.1.9:8300 --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561" --config changefeed.toml
-    --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" \
-    --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561"
     ```
 
     For more information about the changefeed configurations, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md).
