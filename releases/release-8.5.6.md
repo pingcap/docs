@@ -31,7 +31,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     In v8.5.6, this feature is generally available (GA).
 
-    For more information, see [User Documentation](/tidb-resource-control-background-tasks.md).
+    For more information, see [User Documentation](https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks).
 
 ### 可观测性
 
@@ -63,7 +63,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to manage privileges on specific columns. TiDB performs privilege checks based on column-level privileges during query processing and execution plan construction, enabling finer-grained access control and better support for sensitive data isolation and the principle of least privilege.
 
-    For more information, see the [user documentation](/column-privilege-management.md).
+    For more information, see the [user documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
   
  - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
 
@@ -81,7 +81,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     Starting from v8.5.6, TiDB introduces the `tidb_max_dist_task_nodes` system variable to specify the maximum number of TiDB nodes used by a DXF task, enabling better resource control and workload-based tuning.
 
-    For more information, see the [user documentation](/system-variables.md#tidb_max_dist_task_nodes-new-in-v856).
+    For more information, see the [user documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856).
 
 ### Data Migration
 
@@ -95,17 +95,17 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 ### MySQL compatibility
 
-- Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](/column-privilege-management.md).
+- Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 
 ### System variables
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)   | Modified  | Starting from v8.5.6 and v9.0.0, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison. |
-| [`tidb_max_dist_task_nodes`](/system-variables.md#tidb_max_dist_task_nodes-new-in-v856-and-v900)  | Newly added  | defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.  |
-| [`tidb_opt_join_reorder_through_sel`](/system-variables.md#tidb_opt_join_reorder_through_sel-new-in-v856-and-v900)  | Newly added | improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization.  |
-| [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856-and-v900)  | Newly added | controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` means there is no limit on the number of slow query log entries written per second. </li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul>|
-| [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856-and-v900)  | Newly added | defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
+| [`tidb_service_scope`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_service_scope-new-in-v740)   | Modified  | Starting from v8.5.6 and v9.0.0, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison. |
+| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)  | Newly added  | defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.  |
+| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)  | Newly added | improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization.  |
+| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)  | Newly added | controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` means there is no limit on the number of slow query log entries written per second. </li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul>|
+| [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)  | Newly added | defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
 |   |   |   |
 |   |   |   |
 
