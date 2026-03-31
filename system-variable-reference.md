@@ -2678,7 +2678,7 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_max_dist_task_nodes-new-in-v900)
+- [System Variables](/system-variables.md#tidb_max_dist_task_nodes-new-in-v856-and-v900)
 
 ### tidb_max_paging_size
 
