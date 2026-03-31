@@ -29,7 +29,7 @@
 ## GUIDES
 
 - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
-- [Use the My TiDB Page](/tidb-cloud/my-tidb.md)
+- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
 - Manage {{{ .essential }}} Instances
   - [Create a {{{ .essential }}} Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
   - Connect to Your {{{ .essential }}} Instance

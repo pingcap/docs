@@ -68,11 +68,11 @@ For example, you can do the following:
 
 A project groups and manages TiDB Cloud resources.
 
-In the TiDB Cloud console, there are three types of projects:
+In TiDB Cloud, there are three types of projects:
 
 - **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
-- **TiDB X project**: This project type is used only for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [My TiDB](/tidb-cloud/my-tidb.md) page.
-- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [My TiDB](/tidb-cloud/my-tidb.md) page.
+- **TiDB X project**: This project type is used only for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
 The following table lists the differences between these project types:
 
@@ -255,45 +255,7 @@ To remove a member from an organization, take the following steps:
 
 ## Manage project access
 
-### View projects
-
-To view projects in your organization, take the following steps:
-
-1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Folder " style="width: calc(1.125rem * var(--mantine-scale)); height: calc(1.125rem * var(--mantine-scale));"><path d="M8.66671 4.66667L7.92301 3.17928C7.70898 2.7512 7.60195 2.53715 7.44229 2.38078C7.30109 2.24249 7.13092 2.13732 6.94409 2.07287C6.73282 2 6.49351 2 6.0149 2H3.46671C2.71997 2 2.3466 2 2.06139 2.14532C1.8105 2.27316 1.60653 2.47713 1.4787 2.72801C1.33337 3.01323 1.33337 3.3866 1.33337 4.13333V4.66667M1.33337 4.66667H11.4667C12.5868 4.66667 13.1469 4.66667 13.5747 4.88465C13.951 5.0764 14.257 5.38236 14.4487 5.75869C14.6667 6.18651 14.6667 6.74656 14.6667 7.86667V10.8C14.6667 11.9201 14.6667 12.4802 14.4487 12.908C14.257 13.2843 13.951 13.5903 13.5747 13.782C13.1469 14 12.5868 14 11.4667 14H4.53337C3.41327 14 2.85322 14 2.42539 13.782C2.04907 13.5903 1.74311 13.2843 1.55136 12.908C1.33337 12.4802 1.33337 11.9201 1.33337 10.8V4.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg> icon to go to the project view.
-
-    > **Tip:**
-    >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
-
-2. In the project view, you can see the projects you belong to in the organization:
-
-    - TiDB X instances that do not belong to any project are displayed in a table named `Out of project`.
-    - TiDB X instances that belong to specific projects are displayed in their corresponding TiDB X project tables.
-    - TiDB Cloud Dedicated clusters are displayed in their corresponding Dedicated project tables. These tables have a **D** in the folder icon to identify the **Dedicated** project type.
-
-### Create a project
-
-> **Note:**
->
-> - For free trial users, you cannot create a new project.
-> - For TiDB X instances, creating a project is optional. For TiDB Cloud Dedicated clusters, you must use the default project or create new projects to manage them.
-
-If you are in the `Organization Owner` role, you can create projects in your organization.
-
-To create a new project, take the following steps:
-
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click **Create Project**.
-
-    > **Tip:**
-    >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
-
-2. In the displayed dialog, enter a project name.
-
-3. Depending on which type of TiDB Cloud resources you are creating the project for, do one of the following:
-
-    - If the project is created for TiDB X instances, click **Confirm**.
-    - If the project is created for {{{ .dedicated }}} clusters, select the **Create for Dedicated Cluster** option, configure [Customer-Managed Encryption Keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [maintenance window](/tidb-cloud/configure-maintenance-window.md) for the project, and then click **Confirm**.
+This section describes how to rename a project and how to invite and remove project members. To learn how to create or manage a project, see [Manage projects](/tidb-cloud/manage-projects-and-resources.md#manage-projects).
 
 ### Rename a project
 
@@ -301,7 +263,7 @@ If you are in the `Organization Owner` role, you can rename any projects in your
 
 To rename a project, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Folder " style="width: calc(1.125rem * var(--mantine-scale)); height: calc(1.125rem * var(--mantine-scale));"><path d="M8.66671 4.66667L7.92301 3.17928C7.70898 2.7512 7.60195 2.53715 7.44229 2.38078C7.30109 2.24249 7.13092 2.13732 6.94409 2.07287C6.73282 2 6.49351 2 6.0149 2H3.46671C2.71997 2 2.3466 2 2.06139 2.14532C1.8105 2.27316 1.60653 2.47713 1.4787 2.72801C1.33337 3.01323 1.33337 3.3866 1.33337 4.13333V4.66667M1.33337 4.66667H11.4667C12.5868 4.66667 13.1469 4.66667 13.5747 4.88465C13.951 5.0764 14.257 5.38236 14.4487 5.75869C14.6667 6.18651 14.6667 6.74656 14.6667 7.86667V10.8C14.6667 11.9201 14.6667 12.4802 14.4487 12.908C14.257 13.2843 13.951 13.5903 13.5747 13.782C13.1469 14 12.5868 14 11.4667 14H4.53337C3.41327 14 2.85322 14 2.42539 13.782C2.04907 13.5903 1.74311 13.2843 1.55136 12.908C1.33337 12.4802 1.33337 11.9201 1.33337 10.8V4.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg> icon to go to the project view.
+1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
 
     > **Tip:**
     >
@@ -346,31 +308,6 @@ To invite a member to a project, take the following steps:
 > **Note:**
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
-
-### Move a TiDB X instance
-
-If you are in the `Organization Owner` or `Project Owner` role, you can move a TiDB X instance to a project or out of any project.
-
-> **Note:**
->
-> Only TiDB X instances support moving between TiDB X projects and out of any TiDB X project. TiDB Cloud Dedicated clusters do not support moving between projects.
-
-To move a TiDB X instance, take the following steps:
-
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-
-2. In the project view, expand the project folder that contains the TiDB X instance to be moved, click **...** for the target TiDB X instance, and then click **Move**.
-
-    > **Tip:**
-    >
-    > If the TiDB X instance is not in any project, it is displayed in the **Out of project** folder.
-
-3. In the displayed dialog, do one of the following:
-
-    - To move the TiDB X instance to a project, select **To a project**, and then select the target project from the drop-down list.
-    - To move the TiDB X instance out of any project, select **Outside any project**.
-
-4. Click **Move**.
 
 ### Remove project access for a user
 
