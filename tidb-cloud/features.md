@@ -11,10 +11,10 @@ This document lists the feature support status for different TiDB Cloud plans, i
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-- ✅: The feature is **generally available** or in **public preview**.
-- 🔒: The feature is in **private preview**.
-- 🚧: The feature is **under development**.
-- ❌: The feature is **currently not available**.
+- ✅: **Generally available** or **in public preview**.
+- 🔒: **In private preview**.
+- 🚧: **Under development**.
+- ❌: **Currently not available**.
 
 <table><thead>
   <tr>
@@ -52,13 +52,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">Developer experience</td>
-    <td>Data branch</td>
+    <td><Tooltip id="data-branch">Data Branch</Tooltip></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>SQL editor</td>
+    <td><Tooltip id="sql-editor">SQL Editor</Tooltip></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>

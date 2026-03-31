@@ -102,7 +102,7 @@ For more information about endpoint properties, see [Configure properties](/tidb
 
 #### Write SQL statements
 
-You can customize SQL statements for the endpoint in the SQL editor, which is the middle pane on the **Data Service** page.
+You can customize SQL statements for the endpoint in the <Tooltip id="sql-editor">SQL Editor</Tooltip>, which is the middle pane on the **Data Service** page.
 
 1. Select a cluster.
 

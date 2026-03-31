@@ -6,12 +6,12 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back Up and Restore {{{ .premium }}} Data
 
-This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports automatic backup and lets you restore backup data to a new instance as needed.
+This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports both automatic backups and manual backups, and lets you restore backup data to a new instance as needed.
 
 Backup files can originate from the following sources:
 
 - Active {{{ .premium }}} instances
-- The Recycle Bin for backups from deleted Premium instances
+- The Recycle Bin for backups from deleted {{{ .premium }}} instances
 
 > **Tip:**
 >
@@ -67,6 +67,32 @@ To delete an existing backup file for your {{{ .premium }}} instance, perform th
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
+## Manual backups
+
+In addition to automatic backups, {{{ .premium }}} supports manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
+
+### Key characteristics
+
+- **Retention and deletion**: unlike automatic backups, manual backups are not automatically deleted based on retention policies. They are retained until you explicitly delete them. If you delete the instance, its manual backups move to the recycle bin and remain there until you manually delete them.
+
+- **Storage location**: manual backups are stored in cloud storage managed by TiDB.
+
+- **Cost**: because manual backups are retained long term and incur additional charges.
+
+- **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
+
+- **Permissions**: both `Organization Owner` and `Instance Manager` can create manual backups. Only `Organization Owner` can restore system-managed manual backups.
+
+### Create a manual backup
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
+
+2. In the upper-right corner, click **...**, and then click **Manual Backup**.
+
+3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**. 
+
+You can restore a manual backup directly in the TiDB Cloud console without providing external storage credentials.
+
 ## Restore
 
 TiDB Cloud provides restore functionality to help recover data in case of accidental loss or corruption. You can restore from backups of active instances or from deleted instances in the Recycle Bin.
@@ -75,11 +101,11 @@ TiDB Cloud provides restore functionality to help recover data in case of accide
 
 TiDB Cloud supports snapshot restore and point-in-time restore for your instance.
 
-- **Snapshot Restore**: restores your instance from a specific backup snapshot.
+- **Snapshot Restore**: restores your instance from a specific backup snapshot. You can use this method to restore both automatic and manual backups. In the **Backup List**, manual backups are labeled with the **Manual** type and a **Permanent** expiration status.
 
 - **Point-in-Time Restore**: restores your instance to a specific point in time.
 
-    - Premium instances: can be restored to any time within the last 33 days, but not earlier than the instance creation time or later than one minute before the current time.
+    - Premium instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
 
 ### Restore destination
 
@@ -193,10 +219,6 @@ To restore backups from cloud storage, do the following:
     If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
 
 5. Click **Restore** to restore the backup.
-
-## Limitations
-
-Currently, manual backups are not supported for {{{ .premium }}} instances.
 
 ## References
 
