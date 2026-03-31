@@ -85,7 +85,7 @@ The restore process typically completes within a few minutes. If the restore tak
 
 If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-### Restore to a new instance
+### Restore to a new {{{ .starter }}} or Essential instance {#restore-to-a-new-instance}
 
 > **Note:**
 >
