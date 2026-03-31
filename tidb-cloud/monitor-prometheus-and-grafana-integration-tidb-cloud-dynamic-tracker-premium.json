@@ -52,7 +52,7 @@
             }
         ]
     },
-    "description": "TiDB X Premium dashboard for Grafana. Built from the current TiDB X support matrix: 10 DB metrics, 2 storage metrics, and 5 CDC metrics.",
+    "description": "TiDB X Premium dashboard for Grafana. Built from the current TiDB X support matrix: 10 DB metrics, 3 storage metrics, and 2 CDC metrics.",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
