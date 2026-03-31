@@ -94,7 +94,7 @@ To improve data security, periodically rotate `scrape_config` file bearer tokens
 
 ## Metrics available to Prometheus
 
-Prometheus tracks the following metric data for your TiDB Cloud instance. This module need to be updated by dev @guohu.
+Prometheus tracks the following metric data for your TiDB Cloud instance. 
 
 | Metric name |  Metric type  | Labels | Description |
 |:--- |:--- |:--- |:--- |
