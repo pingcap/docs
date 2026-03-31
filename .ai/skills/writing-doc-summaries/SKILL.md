@@ -1,13 +1,13 @@
 ---
 name: writing-doc-summaries
-description: Writes or updates the frontmatter `summary` field in pingcap/docs and pingcap/docs-cn Markdown files. The summary is an SEO-friendly sentence of 115-145 characters. Use when a document is missing a summary, when a reviewer or CI check flags a low-quality summary, or when an existing summary is outdated, inaccurate, or the wrong length.
+description: Writes or updates the front matter `summary` field in pingcap/docs and pingcap/docs-cn Markdown files. The summary is an SEO-friendly sentence of 115-145 characters. Use when a document is missing a summary, when a reviewer or CI check flags a low-quality summary, or when an existing summary is outdated, inaccurate, or the wrong length.
 ---
 
 # Writing Doc Summaries
 
-Write or improve the `summary` field in the YAML frontmatter of Markdown files in `pingcap/docs` and `pingcap/docs-cn`.
+Write or improve the `summary` field in the YAML front matter of Markdown files in `pingcap/docs` and `pingcap/docs-cn`.
 
-## frontmatter example
+## Front matter example
 
 ```yaml
 ---
@@ -112,15 +112,15 @@ summary: Introduce the concept, principles, and implementation of metadata lock 
 4. **If validation fails** → revise and re-validate. Repeat until all checks pass.
 
 5. **Apply** the best candidate:
-   - If frontmatter exists, update the `summary` line in place.
-   - If frontmatter is missing, add it at the top:
+   - If front matter exists, update the `summary` line in place.
+   - If front matter is missing, add it at the top:
      ```yaml
      ---
      title: <existing H1 text, in title case>
      summary: <new summary>
      ---
      ```
-   - Preserve all other frontmatter fields. Do not change the document body.
+   - Preserve all other front matter fields. Do not change the document body.
 
 6. **Final check**: Re-count characters one more time after editing. Confirm `title` matches the H1. Confirm no special leading character without wrapping quotes.
 
