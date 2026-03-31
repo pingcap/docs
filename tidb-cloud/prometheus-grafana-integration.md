@@ -61,7 +61,17 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 
 After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics as follows:
 
-1. The link to download the Grafana dashboard JSON file of TiDB Cloud for Prometheus:[here, need to be updated by dev](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json)
+<CustomContent plan="essential">
+
+1. The link to download the Grafana dashboard JSON file of {{{ .essential }}} for Prometheus:[here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+1. The link to download the Grafana dashboard JSON file of {{{ .premium }}} for Prometheus:[here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json).
+
+</CustomContent>
 
 2. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
 
