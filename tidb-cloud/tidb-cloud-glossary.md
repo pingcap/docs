@@ -126,8 +126,8 @@ Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it
 Currently, only the following types of TiDB Cloud resources support the Recycle Bin feature:
 
 - {{{ .essential }}} instances
-
 - {{{ .premium }}} instances
+- {{{ .dedicated }}} clusters
 
 ### region
 
