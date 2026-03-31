@@ -600,6 +600,13 @@ Referenced in:
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
+### performance_schema_session_connect_attrs_size
+
+Referenced in:
+
+- [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
+- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900)
+
 ### plugin_dir
 
 Referenced in:
