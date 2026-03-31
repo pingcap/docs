@@ -180,7 +180,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Fix the issue that follower replica reads might remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
     - Fix the issue that resolved-ts task backlogs might cause OOM when the resolved-ts worker is busy [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
     - Fix the issue that long-tail follower read latency might occur during leader transfer by retrying read-index requests sooner and adding a dedicated retry interval setting [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue that ingest latency spikes might occur in large clusters by increasing the default value of `rocksdb.max-manifest-file-size` from 128 MiB to 256 MiB [#18996](https://github.com/tikv/tikv/issues/18996) @[glorv](https://github.com/glorv)
     - (dup): release-5.1.4.md > Bug fixes> TiKV - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
 
 + PD <!--tw@hfxsd: 2 notes-->
