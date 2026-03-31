@@ -31,7 +31,9 @@ This document describes how to configure your Prometheus service to read key met
 
 </CustomContent>
 
-## Step 1. Get a `scrape_config` file for Prometheus
+## Steps
+
+### Step 1. Get a `scrape_config` file for Prometheus
 
 Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target TiDB Cloud instances.
 
@@ -45,7 +47,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 > - For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window. 
 > - If you forget, delete the `scrape_config` file in TiDB Cloud and generate a new one. To delete a `scrape_config` file, select the file, click **...**, and then click **Delete**.
 
-## Step 2. Integrate with Prometheus
+### Step 2. Integrate with Prometheus
 
 1. In the monitoring directory specified by your Prometheus service, locate the Prometheus configuration file.
 
@@ -55,7 +57,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 
 3. In your Prometheus service, check **Status** > **Targets** to verify that the new `scrape_config` file has been read. If not, you might need to restart the Prometheus service.
 
-## Step 3. Use Grafana GUI dashboards to visualize the metrics
+### Step 3. Use Grafana GUI dashboards to visualize the metrics
 
 After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics as follows:
 
@@ -71,7 +73,7 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
-## Best practices of rotating `scrape_config`
+## Best practice of rotating `scrape_config`
 
 To improve data security, periodically rotate `scrape_config` file bearer tokens.
 
@@ -111,8 +113,6 @@ Prometheus tracks the following metric data for your TiDB Cloud instance. This m
 
 ## FAQ
 
-### Why does the same metric have different values on Grafana and the TiDB Cloud console at the same time?
+- Why does the same metric have different values on Grafana and the TiDB Cloud console at the same time?
 
-Grafana and TiDB Cloud use different aggregation calculation logic, so the displayed aggregated values might differ. 
-
-You can adjust the `mini step` configuration in Grafana to get more fine-grained metric values.
+    Grafana and TiDB Cloud use different aggregation calculation logic, so the displayed aggregated values might differ. You can adjust the `mini step` configuration in Grafana to get more fine-grained metric values.
