@@ -137,7 +137,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + PD <!--tw@Oreoxmt: 1 note-->
 
-    - 删除不存在的 label 时，现在会返回 404 [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
+    - Return `404` instead of `200` when deleting a non-existent label [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
     - (dup): release-7.5.7.md > Improvements> PD - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
@@ -182,13 +182,13 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + TiKV <!--tw@Oreoxmt: 7 notes-->
 
-    - Fix a memory leak in crossbeam skiplist. [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
-    - Fix the issue that global indexes on non-unique columns of partitioned tables might become inconsistent and return incorrect results in some cases. [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that stalled coprocessor snapshot retrieval could occupy unified read pool workers until request deadlines expired, delaying other read requests. [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
-    - Fix the issue that follower replica reads could remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers. [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
-    - Fix the issue that resolved-ts task backlogs could cause OOM when the resolved-ts worker is busy. [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
-    - Fix long-tail follower-read latency during leader transfer by retrying read-index requests sooner and adding a dedicated retry interval setting. [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
-    - Fix ingest latency spikes in large clusters by increasing the default `rocksdb.max-manifest-file-size` from 128 MiB to 256 MiB. [#18996](https://github.com/tikv/tikv/issues/18996) @[glorv](https://github.com/glorv)
+    - Fix the issue that a memory leak occurs in crossbeam skiplist [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that global indexes on non-unique columns of partitioned tables might become inconsistent and return incorrect results in some cases [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that stalled coprocessor snapshot retrieval might occupy unified read pool workers until request deadlines expire, delaying other read requests [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
+    - Fix the issue that follower replica reads might remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
+    - Fix the issue that resolved-ts task backlogs might cause OOM when the resolved-ts worker is busy [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that long-tail follower read latency might occur during leader transfer by retrying read-index requests sooner and adding a dedicated retry interval setting [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that ingest latency spikes might occur in large clusters by increasing the default value of `rocksdb.max-manifest-file-size` from 128 MiB to 256 MiB [#18996](https://github.com/tikv/tikv/issues/18996) @[glorv](https://github.com/glorv)
     - (dup): release-5.1.4.md > Bug fixes> TiKV - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
 
 + PD <!--tw@hfxsd: 2 notes-->
@@ -213,10 +213,10 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     + TiCDC <!--tw@Oreoxmt: 4 notes-->
 
-        - Fixed an issue where changefeed might repeatedly create invalid dispatchers when the server restarts. [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
-        - Fixed an issue where table renaming operations could not be performed normally when the upstream TiDB version was <= v8.1.x. [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
-        - Fixed a bug during data scanning to avoid potential abnormal crashes of TiKV when CDC is enabled. [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
-        - Supported Azure Managed Identity authentication for azblob sinks and fixed a potential stuck issue during cloud storage uploads. [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fix the issue that changefeeds might repeatedly create invalid dispatchers after the server restarts [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fix the issue that table renaming operations cannot be performed normally when the upstream TiDB version is v8.1.x or earlier [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiKV might crash during data scanning when CDC is enabled [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
+        - Support Azure Managed Identity authentication for azblob sinks and fix the issue that uploads to cloud storage might get stuck [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
     + TiDB Data Migration (DM) <!--tw@qiancai: 3 notes-->
 
