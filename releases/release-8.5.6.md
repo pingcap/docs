@@ -13,15 +13,15 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ## Feature Details
 
-### 性能
+### Performance
 
-- 外键检查支持共享锁（GA） [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/glorv) **tw@qiancai** <!--2085-->
+- Foreign key checks now support shared locks [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/glorv) **tw@qiancai** <!--2085-->
 
-    对子表进行写入时，支持用户通过设置参数 tidb_foreign_key_check_in_shared_lock 来指定在父表加共享锁实现外键约束检查，相比以前仅支持排它锁，现方案可降低锁冲突提升子表并发写入性能。
+    In pessimistic transactions, when you run `INSERT` or `UPDATE` on a child table with foreign key constraints, foreign key checks lock the corresponding parent table rows with exclusive locks by default. In high-concurrency write scenarios on the child table, if many transactions access the same parent table rows, severe lock contention can occur.
 
-    在V8.5.6 中，该功能成为正式功能 (GA)。
+    Starting from v8.5.6, you can set the [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856) system variable to `ON` to let foreign key checks use shared locks on the parent table, thereby reducing lock contention and improving concurrent write performance on the child table.
 
-    更多信息，请参考[用户文档](/foreign-key.md)。
+    For more information, see the [documentation](https://docs.pingcap.com/tidb/v8.5/foreign-key#locking).
 
 ### Stability
 
@@ -43,15 +43,13 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     更多信息，请参考[用户文档](/identify-slow-queries.md)。
 
-- TOP SQL 增加网络流量和逻辑IO 数据（GA）[#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--2398-->
+- The TOP SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--2398-->
 
-	当前 TiDB TOP SQL 中仅包含 CPU 的相关指标数据，在遇到复杂情况时不利于排查问题。
-	
-	本功能在 Top SQL 设置中增加开启 **TiKV 网络I0 采集（多维度）**，方便用户进一步查看指定 TiKV 实例的 Network Bytes、Logical IO Bytes 等指标，并按 By Query、By Table、By DB 或 By Region 维度进行聚合分析。
+    In earlier versions, TiDB Dashboard identified TOP SQL based only on CPU-related metrics, making it difficult to identify performance bottlenecks from the perspective of network or storage access in complex scenarios.
 
-	在 v8.5.6 中，该功能成为正式功能（GA）。
+    Starting from v8.5.6, you can enable **Enable TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to view metrics such as `Network Bytes` and `Logical IO Bytes` for TiKV nodes. You can also analyze these metrics in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`, helping you identify resource hotspots more comprehensively.
 
-    更多信息，请参考 [用户文档](/dashboard/top-sql.md)。
+    For more information, see the [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
 
 ### SQL
 
@@ -123,9 +121,9 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + TiKV <!--tw@qiancai: 4 notes-->
 
-    - Add MVCC-read-aware load-based compaction to prioritize regions with heavy MVCC read overhead. [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
-    - Optimize stale-range cleanup during scaling by deleting stale keys directly instead of ingesting SST files, reducing latency impact. [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Add Top SQL support for collecting network traffic and logical I/O information to help diagnose SQL performance issues. [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
+    - Introduce a load-based compaction mechanism, which detects MVCC read overhead and prioritizes compaction for Regions with higher read cost to improve query performance [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Optimize the stale range cleanup logic during cluster scale-out and scale-in operations by deleting stale keys directly instead of cleaning them up through SST file ingestion, thereby reducing the impact on online request latency [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Support collecting TiKV network traffic and logical I/O metrics for Top SQL, which helps users diagnose SQL performance issues more accurately [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
 
 + PD <!--tw@Oreoxmt: 1 note-->
 
@@ -211,9 +209,9 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     + TiDB Data Migration (DM) <!--tw@qiancai: 3 notes-->
 
-        - 修复 DM 在 binlog rotate 事件时全局 checkpoint 位置未推进的问题 [#12525](https://github.com/pingcap/tiflow/pull/12525) @[OliverS929](https://github.com/OliverS929)
-        - 修复含外键约束的表在 DM safe-mode 下的异常行为，移除 UPDATE 改写中多余的 DELETE 操作并避免触发外键级联 [#12541](https://github.com/pingcap/tiflow/pull/12541) @[OliverS929](https://github.com/OliverS929)
-        - 修复 DM validator 对 UNSIGNED 列误报校验错误的问题 [#12555](https://github.com/pingcap/tiflow/pull/12555) @[OliverS929](https://github.com/OliverS929)
+        - Fix the issue that DM does not advance the global checkpoint position after an upstream binlog file rotation [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929
+        - Fix the issue that, when processing updates on tables with foreign key constraints in safe mode, DM might still incorrectly trigger foreign key cascades and cause unintended data deletion even if the primary key or unique key is not modified [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
+        - Fix the issue that DM validator incorrectly returns validation errors when processing `UNSIGNED` columns [#12178](https://github.com/pingcap/tiflow/issues/12178) @[OliverS929](https://github.com/OliverS929)
 
     + TiDB Lightning
 
