@@ -165,8 +165,8 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `region-count-per-span` <span class="version-mark">New in v8.5.4</span>
 
-- Introduced in the [TiCDC new architecture](/ticdc/ticdc-architecture.md). During changefeed initialization, tables that meet the split conditions are split according to this parameter. After splitting, each split sub-table contains at most `region-count-per-span` Regions.
-- Default value: `100` 
+- Introduced in the [TiCDC new architecture](/ticdc/ticdc-architecture.md). During changefeed initialization, TiCDC splits tables that meet the split conditions according to this parameter. After splitting, each sub-table contains at most `region-count-per-span` Regions.
+- Default value: `100`
 
 #### `region-threshold`
 
