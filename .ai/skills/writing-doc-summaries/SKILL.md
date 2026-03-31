@@ -1,6 +1,6 @@
 ---
 name: writing-doc-summaries
-description: Writes or updates the frontmatter `summary` field in pingcap/docs and pingcap/docs-cn Markdown files. The summary is an SEO-friendly sentence of 115–145 characters. Use when a document is missing a summary, when a reviewer or CI check flags a low-quality summary, or when an existing summary is outdated, inaccurate, or the wrong length.
+description: Writes or updates the frontmatter `summary` field in pingcap/docs and pingcap/docs-cn Markdown files. The summary is an SEO-friendly sentence of 115-145 characters. Use when a document is missing a summary, when a reviewer or CI check flags a low-quality summary, or when an existing summary is outdated, inaccurate, or the wrong length.
 ---
 
 # Writing Doc Summaries
@@ -18,7 +18,7 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 
 ## Summary rules
 
-1. **Length**: 115–145 characters including spaces.
+1. **Length**: 115-145 characters including spaces.
 2. **Opening verb**: Start with an SEO-friendly verb phrase (see table below) that tells the reader what they will get from this document. Never start with the document title, a product name alone, or a noun phrase.
 3. **Perspective**: Reader-focused — tell them what they will learn or do.
 4. **No special leading characters**: Do not start with `>`, `*`, `#`, `-`, or `[`.
@@ -100,10 +100,10 @@ summary: Introduce the concept, principles, and implementation of metadata lock 
 
 1. **Read** the target Markdown file fully. Note the title, opening paragraph, main sections, scope, and any existing `summary`.
 
-2. **Draft** 2–3 candidate sentences using the structure formula and the opening-verb table.
+2. **Draft** 2-3 candidate sentences using the structure formula and the opening-verb table.
 
 3. **Validate** each candidate:
-   - Count characters. Must be 115–145.
+   - Count characters. Must be 115-145.
    - Confirm opening verb fits the document type.
    - Confirm it does not promise content the document lacks.
    - Confirm language matches the document body.
