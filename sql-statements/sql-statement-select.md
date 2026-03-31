@@ -110,7 +110,7 @@ TableSample ::=
 
 > **Note:**
 >
-> Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, referencing the base table name when an alias is defined is still allowed, but it will trigger a warning advising you to use the explicit alias. When a query involves multiple tables with the same name across different databases (for example, `FROM db1.t, db2.t FOR UPDATE OF t`), TiDB now matches the target table from left to right based on the order in the `FROM` clause, rather than the current database context. To avoid ambiguity, it is recommended to specify the database name or use aliases in the `FOR UPDATE OF` clause.
+> Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, you can still reference the base table name when an alias is defined, but this triggers a warning that recommends using the explicit alias. When a query involves multiple tables with the same name across different databases (for example, `FROM db1.t, db2.t FOR UPDATE OF t`), TiDB now matches the target table from left to right based on the order in the `FROM` clause, rather than the current database context. To avoid ambiguity, it is recommended that you specify the database name or use aliases in the `FOR UPDATE OF` clause.
 
 ## Examples
 
