@@ -93,7 +93,7 @@ SELECT @@tidb_last_plan_replayer_token;
 1 row in set (0.00 sec)
 ```
 
-If the configured storage backend supports presigned URLs, the result returned by `PLAN REPLAYER DUMP` or `@@tidb_last_plan_replayer_token` is a presigned URL instead of a file token. For example:
+If the configured storage backend supports presigned URLs, the result returned by `PLAN REPLAYER DUMP` or `tidb_last_plan_replayer_token` is a presigned URL instead of a file token. For example:
 
 ```sql
 +----------------------------------------------------------------------------------------------------------------------+
