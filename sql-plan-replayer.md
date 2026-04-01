@@ -127,7 +127,7 @@ SELECT @@tidb_last_plan_replayer_token;
 1 row in set (0.00 sec)
 ```
 
-If `PLAN REPLAYER DUMP` returns a presigned URL, you can use the URL directly to download the file:
+If `PLAN REPLAYER DUMP` returns a presigned URL, you can use the URL directly to download the file. The presigned URL is valid for up to one hour.
 
 {{< copyable "shell-regular" >}}
 
