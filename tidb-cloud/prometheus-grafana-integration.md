@@ -13,20 +13,20 @@ This document describes how to configure your Prometheus service to read key met
 
 - To integrate TiDB Cloud with Prometheus, you must have a self-hosted or managed Prometheus service.
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Instance Viewer` role to access the target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> under your Organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> under your Organization in TiDB Cloud.
 
 ## Limitation
 
 <CustomContent plan="essential">
 
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
-- Prometheus and Grafana integrations are not available when the cluster or instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
+- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+- Prometheus and Grafana integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances, and [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options) instances.
+- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters, and [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options) instances.
 - Prometheus and Grafana integrations are not available when the cluster or instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 </CustomContent>
@@ -37,10 +37,19 @@ This document describes how to configure your Prometheus service to read key met
 
 Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page.
-2. In the left navigation pane, click **Integrations**>>**Integration to Prometheus**.
-3. Click **Add File** to generate and show the `scrape_config` file for the current <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
+<CustomContent plan="essential">
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the Clusters page of your project, and then click the name of your target cluster to go to its overview page.
+2. In the left navigation pane, click **Integrations**>>**Integration to Prometheus(Preview)**.
+3. Click **Add File** to generate and show the `scrape_config` file for the current essential cluster.
 4. Make a copy of the `scrape_config` file content for later use.
+</CustomContent>
+
+<CustomContent plan="premium">
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target premium instance to go to its overview page.
+2. In the left navigation pane, click **Settings**>>**Integrations**>>**Integration to Prometheus(Preview)**.
+3. Click **Add File** to generate and show the `scrape_config` file for the current premium instance.
+4. Make a copy of the `scrape_config` file content for later use.
+</CustomContent>
 
 > **Note:**
 >
@@ -100,7 +109,7 @@ Prometheus tracks the following metric data for your <CustomContent plan="essent
 
 > **Note:**
 >
-> {{{ .essential }}} does not support TiCDC components, so the `tidbcloud_changefeed_*` metrics are not available.
+> {{{ .essential }}} does not support TiCDC components, so the `tidbcloud_changefeed_*` metrics are currently not available.
 
 | Metric name | Metric type | Labels | Description |
 |:--- |:--- |:--- |:--- |
@@ -114,9 +123,9 @@ Prometheus tracks the following metric data for your <CustomContent plan="essent
 | `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
 | `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
 | `tidbcloud_db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
-| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based (TiKV) storage size of the cluster in bytes |
-| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar (TiFlash) storage size of the cluster in bytes. Returns 0 if TiFlash is not enabled. |
-| `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Resource Units (RU) consumed (Combined Read and Write RUs) |
+| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based storage size of the cluster in bytes |
+| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar storage size of the cluster in bytes. Returns 0 if TiFlash is not enabled. |
+| `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Request Units (RU) consumed.|
 
 </CustomContent>
 
@@ -134,9 +143,9 @@ Prometheus tracks the following metric data for your <CustomContent plan="essent
 | `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
 | `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
 | `tidbcloud_db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
-| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based (TiKV) storage size of the cluster in bytes |
-| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar (TiFlash) storage size of the cluster in bytes. Returns 0 if TiFlash is not enabled. |
-| `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Resource Units (RU) consumed (Combined Read and Write RUs) |
+| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based storage size of the cluster in bytes |
+| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar storage size of the cluster in bytes. |
+| `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Request Units (RU) consumed. |
 | `tidbcloud_changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The data replication latency between the upstream and the downstream of a changefeed |
 | `tidbcloud_changefeed_status` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
 
