@@ -96,30 +96,51 @@ To improve data security, periodically rotate `scrape_config` file bearer tokens
 
 Prometheus tracks the following metric data for your <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>. 
 
-| Metric name |  Metric type  | Labels | Description |
+<CustomContent plan="essential">
+
+> **Note:**
+>
+> {{{ .essential }}} does not support TiCDC components, so the `tidbcloud_changefeed_*` metrics are not available.
+
+| Metric name | Metric type | Labels | Description |
 |:--- |:--- |:--- |:--- |
-| tidbcloud_db_queries_total| count | sql_type: `Select\|Insert\|...`<br/>cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | The total number of statements executed |
-| tidbcloud_db_failed_queries_total | count | type: `planner:xxx\|executor:2345\|...`<br/>cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | The total number of execution errors |
-| tidbcloud_db_connections | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | Current number of connections in your TiDB server |
-| tidbcloud_db_query_duration_seconds | histogram | sql_type: `Select\|Insert\|...`<br/>cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | The duration histogram of statements |
-| tidbcloud_changefeed_latency | gauge | changefeed_id | The data replication latency between the upstream and the downstream of a changefeed |
-| tidbcloud_changefeed_checkpoint_ts | gauge | changefeed_id | The checkpoint timestamp of a changefeed, representing the largest TSO (Timestamp Oracle) successfully written to the downstream |
-| tidbcloud_changefeed_replica_rows | gauge | changefeed_id | The number of replicated rows that a changefeed writes to the downstream per second |
-| tidbcloud_node_storage_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk usage, in bytes, for TiKV or TiFlash nodes. This metric primarily represents the logical data size in the storage engine, and excludes WAL files and temporary files. To calculate the actual disk usage rate, use `(capacity - available) / capacity` instead. <ul><li>When the storage usage of TiKV exceeds 80%, latency spikes might occur, and higher usage might cause requests to fail. </li><li>When the storage usage of all TiFlash nodes reaches 80%, any DDL statement that adds a TiFlash replica hangs indefinitely.</li></ul> |
-| tidbcloud_node_storage_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk capacity bytes of TiKV/TiFlash nodes |
-| tidbcloud_node_cpu_seconds_total | count | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU usage of TiDB/TiKV/TiFlash nodes |
-| tidbcloud_node_cpu_capacity_cores | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU limit cores of TiDB/TiKV/TiFlash nodes |
-| tidbcloud_node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The used memory bytes of TiDB/TiKV/TiFlash nodes |
-| tidbcloud_node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The memory capacity bytes of TiDB/TiKV/TiFlash nodes |
-| tidbcloud_node_storage_available_bytes | gauge | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>` | The available disk space in bytes for TiKV/TiFlash nodes |
-| tidbcloud_disk_read_latency | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | The read latency in seconds per storage device |
-| tidbcloud_disk_write_latency | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | The write latency in seconds per storage device |
-| tidbcloud_kv_request_duration | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv`<br/>cluster_name: `<cluster name>`<br/>`type`: `BatchGet\|Commit\|Prewrite\|...` | The duration in seconds of TiKV requests by type |
-| tidbcloud_component_uptime | histogram | instance: `tidb-0\|tidb-1\|...`<br/>component: `tidb\|tikv\|tiflash`<br/>cluster_name: `<cluster name>` | The uptime in seconds of TiDB components |
-| tidbcloud_ticdc_owner_resolved_ts_lag | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | The resolved timestamp lag in seconds for changefeed owner |
-| tidbcloud_changefeed_status | gauge | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
-| tidbcloud_resource_manager_resource_unit_read_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The read request units consumed by Resource Manager |
-| tidbcloud_resource_manager_resource_unit_write_request_unit | gauge | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | The write request units consumed by Resource Manager |
+| `tidbcloud_db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of current connections in your TiDB server |
+| `tidbcloud_db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of active connections |
+| `tidbcloud_db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of clients disconnected by connection result |
+| `tidbcloud_db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | A time model statistic that represents the sum of all process's CPU consumption plus the sum of non-idle wait time |
+| `tidbcloud_db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of SQL statements executed per second, counted according to statement types |
+| `tidbcloud_db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (e.g., syntax errors, primary key conflicts) occurred when executing SQL statements per second |
+| `tidbcloud_db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of commands processed by TiDB per second |
+| `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
+| `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
+| `tidbcloud_db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
+| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based (TiKV) storage size of the cluster in bytes |
+| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar (TiFlash) storage size of the cluster in bytes. Returns 0 if TiFlash is not enabled. |
+| `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Resource Units (RU) consumed (Combined Read and Write RUs) |
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+| Metric name | Metric type | Labels | Description |
+|:--- |:--- |:--- |:--- |
+| `tidbcloud_db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of current connections in your TiDB server |
+| `tidbcloud_db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of active connections |
+| `tidbcloud_db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of clients disconnected by connection result |
+| `tidbcloud_db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | A time model statistic that represents the sum of all process's CPU consumption plus the sum of non-idle wait time |
+| `tidbcloud_db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of SQL statements executed per second, counted according to statement types |
+| `tidbcloud_db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (e.g., syntax errors, primary key conflicts) occurred when executing SQL statements per second |
+| `tidbcloud_db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of commands processed by TiDB per second |
+| `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
+| `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
+| `tidbcloud_db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
+| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based (TiKV) storage size of the cluster in bytes |
+| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar (TiFlash) storage size of the cluster in bytes. Returns 0 if TiFlash is not enabled. |
+| `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Resource Units (RU) consumed (Combined Read and Write RUs) |
+| `tidbcloud_changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The data replication latency between the upstream and the downstream of a changefeed |
+| `tidbcloud_changefeed_status` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
+
+</CustomContent>
 
 ## FAQ
 
