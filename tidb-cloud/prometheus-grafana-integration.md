@@ -1,9 +1,9 @@
 ---
-title: Integrate TiDB Cloud with Prometheus and Grafana (Public Preview)
+title: Integrate TiDB Cloud with Prometheus and Grafana (Preview)
 summary: Learn how to monitor your TiDB Cloud instances with the Prometheus and Grafana integration.
 ---
 
-# Integrate TiDB Cloud with Prometheus and Grafana (Public Preview)
+# Integrate TiDB Cloud with Prometheus and Grafana (Preview)
 
 TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
@@ -13,7 +13,7 @@ This document describes how to configure your Prometheus service to read key met
 
 - To integrate TiDB Cloud with Prometheus, you must have a self-hosted or managed Prometheus service.
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Instance Viewer` role to access the target TiDB Cloud instances under your Organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Instance Viewer` role to access the target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> under your Organization in TiDB Cloud.
 
 ## Limitation
 
@@ -26,7 +26,7 @@ This document describes how to configure your Prometheus service to read key met
 
 <CustomContent plan="premium">
 
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essential) instances, [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-premium) instances.
+- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essential) instances, and [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-premium) instances.
 - Prometheus and Grafana integrations are not available when the cluster or instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 </CustomContent>
@@ -35,11 +35,11 @@ This document describes how to configure your Prometheus service to read key met
 
 ### Step 1. Get a `scrape_config` file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target TiDB Cloud instances.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud instance to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page.
 2. In the left navigation pane, click **Integrations**>>**Integration to Prometheus**.
-3. Click **Add File** to generate and show the `scrape_config` file for the current instance.
+3. Click **Add File** to generate and show the `scrape_config` file for the current <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 4. Make a copy of the `scrape_config` file content for later use.
 
 > **Note:**
@@ -69,7 +69,7 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
 <CustomContent plan="premium">
 
-1. The link to download the Grafana dashboard JSON file of {{{ .premium }}} for Prometheus:[here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-premiuml.json).
+1. The link to download the Grafana dashboard JSON file of {{{ .premium }}} for Prometheus:[here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-premium.json).
 
 </CustomContent>
 
@@ -77,7 +77,7 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
     > **Note:**
     >
-    > If you are already using Prometheus and Grafana to monitor TiDB Cloud instances and want to incorporate the newly available metrics, it is recommended that you create a new dashboard instead of directly updating the JSON of the existing one.
+    > If you are already using Prometheus and Grafana to monitor <CustomContent plan="essential">clusters</CustomContent><CustomContent plan="premium">instances</CustomContent> and want to incorporate the newly available metrics, it is recommended that you create a new dashboard instead of directly updating the JSON of the existing one.
 
 3. (Optional) Customize the dashboard as needed by adding or removing panels, changing data sources, and modifying display options.
 
@@ -90,11 +90,11 @@ To improve data security, periodically rotate `scrape_config` file bearer tokens
 1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new `scrape_config` file for Prometheus.
 2. Add the content of the new file to your Prometheus configuration file.
 3. Once you confirm that your Prometheus service can read from TiDB Cloud, remove the content of the old `scrape_config` file from your Prometheus configuration file.
-4. On the **Integrations** page of your TiDB Cloud instance, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
+4. On the **Integrations** page of your <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
 
 ## Metrics available to Prometheus
 
-Prometheus tracks the following metric data for your TiDB Cloud instance. 
+Prometheus tracks the following metric data for your <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>. 
 
 | Metric name |  Metric type  | Labels | Description |
 |:--- |:--- |:--- |:--- |
