@@ -31,7 +31,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     In v8.5.6, this feature is generally available (GA).
 
-    For more information, see [User Documentation](https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks).
 
 ### 可观测性
 
@@ -59,16 +59,16 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to manage privileges on specific columns. TiDB performs privilege checks based on column-level privileges during query processing and execution plan construction, enabling finer-grained access control and better support for sensitive data isolation and the principle of least privilege.
 
-    For more information, see the [user documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
-  
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
+
  - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
 
     Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement referenced a table alias in the locking clause, TiDB could fail to resolve the alias correctly and return a `table not exists` error even though the alias was valid.
 
     Starting from v8.5.6, TiDB supports table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve the locking target from the `FROM` clause, including aliased tables, so that row locks are applied as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more reliable in queries that use table aliases.
 
-    For more information, see the user documentation. 
-  
+    For more information, see documentation.
+
 ### DB operations
 
 - Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58937](https://github.com/pingcap/tidb/pull/58937) @[tangenta](https://github.com/tangenta) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
@@ -77,7 +77,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     Starting from v8.5.6, TiDB introduces the `tidb_max_dist_task_nodes` system variable to specify the maximum number of TiDB nodes used by a DXF task, enabling better resource control and workload-based tuning.
 
-    For more information, see the [user documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856).
 
 ### Data Migration
 
