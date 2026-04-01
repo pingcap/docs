@@ -119,10 +119,10 @@ To restore your data to a new {{{ .starter }}} or Essential instance, take the f
     </SimpleTab>
 
 4. Enter a name for the new instance.
-5. Choose a plan for the new instance and update the capacity as needed.
+5. Update the capacity as needed.
 
-    - If you choose a {{{ .starter }}} instance and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
-    - If you choose a {{{ .essential }}} instance, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
+    - For a {{{ .starter }}} instance, if you need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
+    - For a {{{ .essential }}} instance, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
 6. Click **Restore** to begin the restore process.
 
