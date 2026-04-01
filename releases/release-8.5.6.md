@@ -177,12 +177,12 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + TiKV <!--tw@Oreoxmt: 7 notes-->
 
-    - Fix the issue that a memory leak occurs in crossbeam skiplist [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
+    - Fix the memory leak issue in crossbeam skiplist [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     - Fix the issue that global indexes on non-unique columns of partitioned tables might become inconsistent and return incorrect results in some cases [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
     - Fix the issue that stalled coprocessor snapshot retrieval might occupy unified read pool workers until request deadlines expire, delaying other read requests [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
-    - Fix the issue that follower replica reads might remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
+    - Fix the issue that follower reads might remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
     - Fix the issue that resolved-ts task backlogs might cause OOM when the resolved-ts worker is busy [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
-    - Fix the issue that long-tail follower read latency might occur during leader transfer by retrying read-index requests sooner and adding a dedicated retry interval setting [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that long-tail follower read latency might occur during leader transfer by retrying read-index requests earlier and adding a dedicated retry interval setting [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
     - (dup): release-5.1.4.md > Bug fixes> TiKV - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
 
 + PD <!--tw@hfxsd: 2 notes-->
@@ -208,7 +208,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     + TiCDC <!--tw@Oreoxmt: 4 notes-->
 
         - Fix the issue that changefeeds might repeatedly create invalid dispatchers after the server restarts [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
-        - Fix the issue that table renaming operations cannot be performed normally when the upstream TiDB version is v8.1.x or earlier [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC fails to replicate table renaming operations correctly when the upstream TiDB version is v8.1.x or earlier [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
         - Fix the issue that TiKV might crash during data scanning when CDC is enabled [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         - Support Azure Managed Identity authentication for azblob sinks and fix the issue that uploads to cloud storage might get stuck [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
