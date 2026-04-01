@@ -7,29 +7,18 @@ summary: Learn how to monitor your TiDB Cloud instances with the Prometheus and 
 
 TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
-This document describes how to configure your Prometheus service to read key metrics from the TiDB Cloud endpoint and how to view the metrics using [Grafana](https://grafana.com/).
+This document describes how to configure your Prometheus service to read key metrics from the <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> endpoint and how to view the metrics using [Grafana](https://grafana.com/).
 
 ## Prerequisites
 
 - To integrate TiDB Cloud with Prometheus, you must have a self-hosted or managed Prometheus service.
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> under your Organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">{{{ .essential }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> under your Organization in TiDB Cloud.
 
 ## Limitation
 
-<CustomContent plan="essential">
-
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+- Prometheus and Grafana integrations are not available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 - Prometheus and Grafana integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters, and [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options) instances.
-- Prometheus and Grafana integrations are not available when the cluster or instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
-
-</CustomContent>
 
 ## Steps
 
@@ -76,13 +65,13 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
 <CustomContent plan="essential">
 
-1. The link to download the Grafana dashboard JSON file of {{{ .essential }}} for Prometheus:[here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json).
+1. The link to download the Grafana dashboard JSON file of {{{ .essential }}} for Prometheus: [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json).
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-1. The link to download the Grafana dashboard JSON file of {{{ .premium }}} for Prometheus:[here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-premium.json).
+1. The link to download the Grafana dashboard JSON file of {{{ .premium }}} for Prometheus: [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-premium.json).
 
 </CustomContent>
 
@@ -96,7 +85,7 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
-## Best practice of rotating `scrape_config`
+## Best practice for rotating `scrape_config`
 
 To improve data security, periodically rotate `scrape_config` file bearer tokens.
 
@@ -120,7 +109,7 @@ Prometheus tracks the following metric data for your <CustomContent plan="essent
 | `tidbcloud_db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of current connections in your TiDB server |
 | `tidbcloud_db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of active connections |
 | `tidbcloud_db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of clients disconnected by connection result |
-| `tidbcloud_db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | A time model statistic that represents the sum of all process's CPU consumption plus the sum of non-idle wait time |
+| `tidbcloud_db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | A time model statistic that represents the sum of all processes' CPU consumption plus the sum of non-idle wait time |
 | `tidbcloud_db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of SQL statements executed per second, counted according to statement types |
 | `tidbcloud_db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (for example, syntax errors, primary key conflicts) occurred when executing SQL statements per second |
 | `tidbcloud_db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of commands processed by TiDB per second |
@@ -140,9 +129,9 @@ Prometheus tracks the following metric data for your <CustomContent plan="essent
 | `tidbcloud_db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of current connections in your TiDB server |
 | `tidbcloud_db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of active connections |
 | `tidbcloud_db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of clients disconnected by connection result |
-| `tidbcloud_db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | A time model statistic that represents the sum of all process's CPU consumption plus the sum of non-idle wait time |
+| `tidbcloud_db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | A time model statistic that represents the sum of all processes' CPU consumption plus the sum of non-idle wait time |
 | `tidbcloud_db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of SQL statements executed per second, counted according to statement types |
-| `tidbcloud_db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (for example., syntax errors, primary key conflicts) occurred when executing SQL statements per second |
+| `tidbcloud_db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (for example, syntax errors, primary key conflicts) occurred when executing SQL statements per second |
 | `tidbcloud_db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of commands processed by TiDB per second |
 | `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
 | `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
