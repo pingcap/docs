@@ -35,19 +35,17 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 
 Starting from v8.5.6, DM provides **experimental** support for replicating tables that use foreign key constraints. This support includes the following improvements:
 
-- **Safe mode**: during safe mode execution, DM sets `foreign_key_checks=0` for each batch and skips the redundant `DELETE` step for `UPDATE` statements that do not modify primary key or unique key values. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering unintended `ON DELETE CASCADE` effects on child rows. For details, see [DM Safe Mode](/dm/dm-safe-mode.md#foreign-key-handling).
+- **Safe mode**: during safe mode execution, DM sets `foreign_key_checks=0` for each batch and skips the redundant `DELETE` step for `UPDATE` statements that do not modify primary key or unique key values. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering unintended `ON DELETE CASCADE` effects on child rows. For details, see [DM Safe Mode](/dm/dm-safe-mode.md#foreign-key-handling-new-in-v856).
 - **Multi-worker causality**: when `worker-count > 1`, DM reads foreign key relationships from the downstream schema at task start and injects causality keys. This ensures that DML operations on parent rows complete before operations on dependent child rows, preserving binlog order across workers.
 
-> **Warning:**
->
-> This feature is experimental. The following constraints apply:
->
-> - `UPDATE` statements that change primary key or unique key values in safe mode are rejected. The task pauses with the error: `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate these UPDATEs, use `safe-mode: false`.
-> - DDL operations that create, alter, or drop foreign key constraints during replication are rejected when `foreign_key_checks=1`.
-> - Table routing combined with `worker-count > 1` is not supported. When using table routing with foreign key tables, you must set `worker-count` to `1`.
-> - Your block-allow-list must include all ancestor tables in the foreign key chain. If you filter out ancestor tables, the task pauses with an error during incremental sync.
-> - Your source and downstream foreign key metadata must match. If you detect a mismatch, use `binlog-schema update --from-target` to resync.
-> - `ON UPDATE CASCADE` is not replicated correctly in safe mode when the `UPDATE` changes a primary key or unique key value. DM rewrites such UPDATEs as `DELETE` + `REPLACE`, which would trigger `ON DELETE` actions instead of `ON UPDATE` actions. The guardrail rejects the PK/UK change and pauses the task. Non-key `UPDATE` statements on tables with `ON UPDATE CASCADE` replicate without issues.
+The following limitations apply to foreign key replication:
+
+- In safe mode, DM does not support `UPDATE` statements that modify primary key or unique key values. The task is paused with the error `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate such statements, set `safe-mode: false`.
+- When `foreign_key_checks=1`, DM does not support DDL statements that create, modify, or drop foreign key constraints during replication.
+- Table routing is not supported when `worker-count > 1`. If you use table routing with tables that include foreign keys, set `worker-count` to `1`.
+- The block-allow list must include all ancestor tables in the foreign key dependency chain. If ancestor tables are filtered out, the task is paused with an error during incremental replication.
+- Foreign key metadata must be consistent between the source and downstream. If inconsistencies are detected, run `binlog-schema update --from-target` to resynchronize metadata.
+- `ON UPDATE CASCADE` is not correctly replicated in safe mode when an `UPDATE` modifies primary key or unique key values. DM rewrites such statements as `DELETE` + `REPLACE`, which triggers `ON DELETE` actions instead of `ON UPDATE` actions. In this case, DM rejects the statement and pauses the task. `UPDATE` statements that do not modify key values are replicated correctly.
 
 In versions earlier than v8.5.6, DM creates foreign key constraints in the downstream but does not enforce them because it sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks). As a result, cascading operations are not replicated to the downstream.
 

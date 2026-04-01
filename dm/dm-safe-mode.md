@@ -24,7 +24,7 @@ In safe mode, DM guarantees the idempotency of binlog events by rewriting SQL st
 * `INSERT` statements are rewritten to `REPLACE` statements.
 * `UPDATE` statements are analyzed to obtain the value of the primary key or the unique index of the row updated. `UPDATE` statements are then rewritten to `DELETE` + `REPLACE` statements in the following two steps: DM deletes the old record using the primary key or unique index, and inserts the new record using the `REPLACE` statement.
 
-    Starting from v8.5.6, when you set `foreign_key_checks=1` in the task session, DM skips the `DELETE` step for `UPDATE` statements that do not modify primary key or unique key values. For more information, see [Foreign key handling](#foreign-key-handling).
+    Starting from v8.5.6, when you set `foreign_key_checks=1` in the task session, DM skips the `DELETE` step for `UPDATE` statements that do not modify primary key or unique index values. For more information, see [Foreign key handling](#foreign-key-handling-new-in-v856).
 
 `REPLACE` is a MySQL-specific syntax for inserting data. When you insert data using `REPLACE`, and the new data and existing data have a primary key or unique constraint conflict, MySQL deletes all the conflicting records and executes the insert operation, which is equivalent to "force insert". For details, see [`REPLACE` statement](https://dev.mysql.com/doc/refman/8.0/en/replace.html) in MySQL documentation.
 
