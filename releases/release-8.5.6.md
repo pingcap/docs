@@ -33,15 +33,15 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks).
 
-### 可观测性
+### Observability
 
-- 支持多维度、多粒度定义慢查询日志的触发规则 [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) **tw@lilin90** <!--2068-->
+- Support defining multi-dimensional, fine-grained trigger rules for slow query logs [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) **tw@lilin90** <!--2068-->
 
-    在之前的版本中， TiDB 定位慢查询语句的主要方法是设置系统变量 tidb_slow_log_threshold，该机制触发慢日志控制粒度粗（整个实例级别全局控制，不支持会话和SQL级别精细化控制）、触发条件仅执行时间（Query_time）一种，无法满足复杂场景慢日志抓取以精细化定位问题的需求。
+    Before v8.5.6, the main way to identify slow queries in TiDB is to set the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) system variable. This mechanism provides only coarse-grained control over slow query log triggering because it applies globally at the instance level and does not support fine-grained control at the session or SQL level. In addition, it supports only one trigger condition, execution time (`Query_time`), which cannot meet the need to capture slow query logs more precisely in complex scenarios.
 
-    从 v8.5.6 起，TiDB 增强慢查询日志的控制能力。你可以使用  [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-从-v900-版本开始引入) 系统变量在实例、会话、SQL级别定义多维度（如 Query_time、Digest、Mem_max、KV_total 等等）的慢查询日志输出规则，使用 [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-从-v900-版本开始引入) 限制每秒日志输出数量，并通过 [`WRITE_SLOW_LOG`](/optimizer-hints.md) Hint 强制记录指定 SQL 的慢查询日志，从而实现对慢查询日志更灵活的精细化控制。
+    Starting from v8.5.6, TiDB enhances slow query log control. You can use the [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) to limit the number of log entries written per second, and use the [`WRITE_SLOW_LOG`](/optimizer-hints.md) hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
 
-    更多信息，请参考[用户文档](/identify-slow-queries.md)。
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries).
 
 - The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--2398-->
 
@@ -61,13 +61,13 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 
- - Support table aliases referenced in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
+- Support using table aliases in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
 
-    Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement referenced a table alias in the locking clause, TiDB could fail to resolve the alias correctly and return a `table not exists` error even though the alias was valid.
+    Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement references a table alias in the locking clause, TiDB might fail to resolve the alias correctly and return the `table not exists` error even if the alias is valid.
 
-    Starting from v8.5.6, TiDB supports table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve the locking target from the `FROM` clause, including aliased tables, so that row locks are applied as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more reliable in queries that use table aliases.
+    Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve locking targets from the `FROM` clause, including aliased tables, ensuring that row locks take effect as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more stable and reliable in queries that use table aliases.
 
-    For more information, see documentation.
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
 
 ### DB operations
 
@@ -124,6 +124,8 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 + TiDB <!--tw@qiancai: 5 notes-->
 
     - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--2414-->
+    - Support column-level privileges in `GRANT` and `REVOKE` [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Improve the performance of privilege update operations such as `GRANT` and `REVOKE` in deployments with a large number of column-level privilege entries [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
 + TiKV <!--tw@qiancai: 4 notes-->
 
@@ -146,8 +148,8 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 2 notes-->
 
-        - Support migrating data from MySQL 8.4 as a data source. The compatibility level for MySQL 8.4 is upgraded from "Incompatible" to "Experimental" [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
-        - 在 DM syncer 中新增外键因果依赖支持，确保多 worker 场景下行变更按照父表至子表的外键顺序执行 [#12552](https://github.com/pingcap/tiflow/pull/12552) @[OliverS929](https://github.com/OliverS929)
+        - Support MySQL 8.4 as an upstream data source for DM by adapting to the new terminology and version detection logic introduced in this version [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
+        - Add support for foreign key causal dependencies in DM syncer to ensure that row changes are executed in parent-to-child foreign key order in multi-worker scenarios [#12552](https://github.com/pingcap/tiflow/pull/12552) @[OliverS929](https://github.com/OliverS929)
 
     + TiDB Lightning
 
@@ -161,13 +163,10 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + TiDB <!--tw@lilin90: the following 7 notes-->
 
-    - Fix the issue that upgrading from release-8.5-20250606-v8.5.2 to upstream release-8.5 can skip PITR metadata upgrades and cause PITR operations to fail. [#66994](https://github.com/pingcap/tidb/issues/66994) @[fzzf678](https://github.com/fzzf678)
-    - Fix the issue that after EXCHANGE PARTITION, non-unique or nullable unique global indexes on non-clustered partitioned tables can become inconsistent and return incomplete results. [#65289](https://github.com/pingcap/tidb/issues/65289) @[mjonss](https://github.com/mjonss)
-    - Support column-level privileges in GRANT and REVOKE. [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Improve the performance of privilege updates such as GRANT and REVOKE in deployments with large numbers of privilege entries. [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Fix the issue that KILL QUERY incorrectly kills idle connections. [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue that column-level privilege checks can be incorrect for JOIN ... USING, NATURAL JOIN, and INSERT ... ON DUPLICATE KEY UPDATE. [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - Improve privilege-check performance for deployments with many column-level privilege entries. [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) <!--tw@hfxsd: the following 8 notes-->
+    - Fix the issue that upgrading from `release-8.5-20250606-v8.5.2` to the upstream `release-8.5` might skip the PITR metadata upgrade and cause PITR operations to fail [#66994](https://github.com/pingcap/tidb/issues/66994) @[fzzf678](https://github.com/fzzf678)
+    - Fix the issue that after executing `EXCHANGE PARTITION`, non-unique global indexes or nullable unique global indexes on non-clustered partitioned tables might become inconsistent and return incomplete results [#65289](https://github.com/pingcap/tidb/issues/65289) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that `KILL QUERY` might incorrectly terminate idle connections [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that column-level privilege checks might be incorrect in `JOIN ... USING`, `NATURAL JOIN`, and `INSERT ... ON DUPLICATE KEY UPDATE` scenarios [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) <!--tw@hfxsd: the following 8 notes-->
     - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
     - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
     - Fix the issue that the value of `tidb_service_scope` is not converted to lowercase when set [#66749](https://github.com/pingcap/tidb/issues/66749) @[D3Hunter](https://github.com/D3Hunter)
@@ -201,10 +200,10 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     + Backup & Restore (BR) <!--tw@lilin90: 4 notes-->
 
-        - 修复 log backup 的 flush_ts 可能为 0 的问题 [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
-        - 修复 BR 在使用 GCP S3 API server 进行 multipart upload 时因缺少 `Content-Length` 头而失败的问题 [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
-        - 修复 BR `restore point` 可能长时间卡在 `waiting for schema info finishes reloading` 并在 15 分钟后超时失败的问题 [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
-        - 修复 BR 在恢复带有 `SHARD_ROW_ID_BITS`、`PRE_SPLIT_REGIONS` 和 `merge_option` 属性的表时无法正确预分裂 Region 的问题 [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
+        - Fix the issue that `flush_ts` might be `0` in log backup [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that BR might fail during multipart uploads through GCP S3 API Server because the `Content-Length` request header is missing [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that the BR `restore point` might remain stuck in the `waiting for schema info finishes reloading` state for a long time and then fail due to timeout after 15 minutes [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that BR cannot correctly pre-split Regions when restoring tables with the `SHARD_ROW_ID_BITS`, `PRE_SPLIT_REGIONS`, and `merge_option` attributes [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
 
     + TiCDC <!--tw@Oreoxmt: 4 notes-->
 
