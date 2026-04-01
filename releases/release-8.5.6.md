@@ -15,13 +15,13 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### Performance
 
-- Foreign key checks now support shared locks [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/glorv) **tw@qiancai** <!--2085-->
+- Foreign key checks now support shared locks [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/you06) **tw@qiancai** <!--2085-->
 
     In pessimistic transactions, when you run `INSERT` or `UPDATE` on a child table with foreign key constraints, foreign key checks lock the corresponding parent table rows with exclusive locks by default. In high-concurrency write scenarios on the child table, if many transactions access the same parent table rows, severe lock contention can occur.
 
     Starting from v8.5.6, you can set the [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856) system variable to `ON` to let foreign key checks use shared locks on the parent table, thereby reducing lock contention and improving concurrent write performance on the child table.
 
-    For more information, see the [documentation](https://docs.pingcap.com/tidb/v8.5/foreign-key#locking).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/foreign-key#locking).
 
 ### Stability
 
@@ -49,7 +49,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     Starting from v8.5.6, you can enable **Enable TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to view metrics such as `Network Bytes` and `Logical IO Bytes` for TiKV nodes. You can also analyze these metrics in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`, helping you identify resource hotspots more comprehensively.
 
-    For more information, see the [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
 
 ### SQL
 
