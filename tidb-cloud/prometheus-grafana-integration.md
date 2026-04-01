@@ -74,7 +74,7 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
     <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-premium.json>
 
-    </CustomContent>.
+    </CustomContent>
 
 2. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
 
