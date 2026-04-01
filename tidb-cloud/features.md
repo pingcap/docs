@@ -202,7 +202,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Third-party integrations, such as Datadog, Prometheus, and New Relic</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
