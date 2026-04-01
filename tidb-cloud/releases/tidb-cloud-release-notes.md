@@ -8,6 +8,27 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## March 31, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support configuring a private endpoint allowlist.
+
+        You can now secure and manage private endpoint access more easily by configuring an allowlist in the [TiDB Cloud console](https://tidbcloud.com). In the allowlist, you can specify the AWS VPC Endpoint IDs and Alibaba Cloud endpoint IDs that are allowed to connect.
+
+        For more information, see the following documents:
+
+        - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 
+        - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+    - Enable Prometheus metrics integration (Preview).
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) manages Prometheus integrations at the cluster level. This feature lets you seamlessly ship metrics from your TiDB Cloud Essential cluster to Prometheus, enabling advanced alerting on a unified platform. 
+
+        For integration steps, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md).
+
 ## March 24, 2026
 
 **General changes**
