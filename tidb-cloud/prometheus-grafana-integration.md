@@ -19,14 +19,14 @@ This document describes how to configure your Prometheus service to read key met
 
 <CustomContent plan="essential">
 
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essential) instances.
+- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 - Prometheus and Grafana integrations are not available when the cluster or instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essential) instances, and [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-premium) instances.
+- Prometheus and Grafana integrations now are available for [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters, [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances, and [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options) instances.
 - Prometheus and Grafana integrations are not available when the cluster or instance status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 </CustomContent>
