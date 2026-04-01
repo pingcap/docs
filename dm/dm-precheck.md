@@ -52,7 +52,7 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
 - Compatibility of the upstream MySQL table schema
 
-    - Checks whether the upstream tables have foreign keys. TiDB supports foreign keys (GA since v8.5.0), and DM has experimental support for replicating tables with foreign key constraints starting from v8.5.6. DM returns a warning if it finds a foreign key in the precheck. For details on supported scenarios and limitations, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
+    - Check whether the upstream tables have foreign keys. TiDB supports foreign keys (GA since v8.5.0), and DM provides experimental support for replicating tables with foreign key constraints starting from v8.5.6. During the precheck, DM returns a warning if foreign keys are detected. For supported scenarios and limitations, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
     - Check whether the upstream tables use character sets that are incompatible with TiDB. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
     - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7).
 
