@@ -1356,7 +1356,7 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
-                    "expr": "tidbcloud_resource_manager_resource_request_unit_total",
+                    "expr": "tidbcloud_resource_manager_resource_request_unit_total{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"}",
                     "legendFormat": "{{resource_group}}",
                     "range": true,
                     "refId": "A"
