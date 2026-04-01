@@ -8,6 +8,27 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年版[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年3月31日 {#march-31-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloud Essential**
+
+    -   プライベートエンドポイントの許可リストの設定をサポートします。
+
+        [TiDB Cloudコンソール](https://tidbcloud.com)で許可リストを設定することで、プライベートエンドポイントへのアクセスをより簡単に保護および管理できるようになりました。許可リストでは、接続を許可する AWS VPC エンドポイント ID と Alibaba Cloud エンドポイント ID を指定できます。
+
+        詳細については、以下の資料を参照してください。
+
+        -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+    -   Prometheusメトリクス統合を有効にする（プレビュー）。
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターレベルでの Prometheus 統合を管理します。この機能により、 TiDB Cloud Essentialクラスターから Prometheus へメトリクスをシームレスに送信でき、統合プラットフォーム上で高度なアラート機能を実現できます。
+
+        統合手順については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)参照してください。
+
 ## 2026年3月24日 {#march-24-2026}
 
 **全般的な変更**
@@ -28,7 +49,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   データフローシナリオにおけるプライベートリンク接続でのAmazon MSK Provisionedをサポートします。
 
-        バージョン[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)では、バージョン[Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成がサポートされるようになりました。この機能により、変更フィードをAmazon MSKプロビジョニング済みクラスターにプライベートネットワーク接続することが可能になり、トラフィックをパブリックインターネットに公開することなく利用できます。
+        バージョン[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)では、バージョン[Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成がサポートされるようになりました。この機能により、トラフィックをパブリックインターネットに公開することなく、変更フィードをAmazon MSKプロビジョニング済みクラスターにプライベートネットワーク接続できます。
 
         詳細については、 [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)参照してください。
 
@@ -38,7 +59,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Dedicated**
 
-    -   Amazon S3シンクのChangefeedsは、認証にAWSロールARNを使用することをサポートしています。
+    -   Amazon S3シンクの変更フィードは、認証にAWSロールARNを使用することをサポートしています。
 
         Amazon S3 シンクの変更フィードを、既存の AK/SK 認証方法に加え、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでIAMロール ARN を使用して設定できるようになりました。この機能により、有効期限の短い認証情報と自動ローテーションが可能になり、セキュリティが強化されるとともに、シークレット管理が簡素化され、最小権限の原則がサポートされます。
 

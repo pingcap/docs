@@ -4,22 +4,22 @@
 
 # 目次 {#table-of-contents}
 
-## 始める {#get-started}
+## さあ始めましょう {#get-started}
 
 -   TiDB Cloudを選ぶ理由
-    -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
-    -   [MySQLの互換性](/mysql-compatibility.md)
+    -   [TiDB Cloudの概要](/tidb-cloud/tidb-cloud-intro.md)
+    -   [MySQLとの互換性](/mysql-compatibility.md)
 -   TiDB Cloudを使い始める
-    -   [TiDB Cloudを試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
-    -   [HTAPを試してみる](/tidb-cloud/tidb-cloud-htap-quickstart.md)
--   重要な概念
+    -   [TiDB Cloudをお試しください](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [HTAPを試してみてください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+-   主要概念
     -   [概要](/tidb-cloud/key-concepts.md)
     -   [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
     -   [データベーススキーマ](/tidb-cloud/database-schema-concepts.md)
     -   [取引](/tidb-cloud/transaction-concepts.md)
     -   [SQL](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
-    -   [スケーラビリティ](/tidb-cloud/scalability-concepts.md)
+    -   [拡張性](/tidb-cloud/scalability-concepts.md)
     -   [高可用性](/tidb-cloud/serverless-high-availability.md)
     -   [監視](/tidb-cloud/monitoring-concepts.md)
     -   [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
@@ -29,68 +29,68 @@
 
 -   開発クイックスタート
     -   [TiDB Cloudクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
-    -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
--   TiDB Cloudに接続する
+    -   [TiDBにおけるCRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
+-   TiDB Cloudに接続
     -   GUIデータベースツール
-        -   [ジェットブレインズ データグリップ](/develop/dev-guide-gui-datagrip.md)
+        -   [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
         -   [DBeaver](/develop/dev-guide-gui-dbeaver.md)
-        -   [VSコード](/develop/dev-guide-gui-vscode-sqltools.md)
-        -   [MySQLワークベンチ](/develop/dev-guide-gui-mysql-workbench.md)
+        -   [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
+        -   [MySQL Workchen](/develop/dev-guide-gui-mysql-workbench.md)
         -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
-    -   [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
+    -   [DriverまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)
     -   Java
         -   [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
-        -   [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md)
-        -   [休止状態](/develop/dev-guide-sample-application-java-hibernate.md)
-        -   [スプリングブート](/develop/dev-guide-sample-application-java-spring-boot.md)
+        -   [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
+        -   [ハイバネイト](/develop/dev-guide-sample-application-java-hibernate.md)
+        -   [スプリングブーツ](/develop/dev-guide-sample-application-java-spring-boot.md)
         -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
     -   行く
-        -   [Go-MySQL-ドライバー](/develop/dev-guide-sample-application-golang-sql-driver.md)
+        -   [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
         -   [ゴーム](/develop/dev-guide-sample-application-golang-gorm.md)
-    -   パイソン
-        -   [mysqlクライアント](/develop/dev-guide-sample-application-python-mysqlclient.md)
-        -   [MySQL コネクタ/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-        -   [パイMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
-        -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+    -   Python
+        -   [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
+        -   [MySQLコネクタ/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+        -   [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+        -   [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
     -   Node.js
-        -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+        -   [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
-        -   [続編](/develop/dev-guide-sample-application-nodejs-sequelize.md)
-        -   [タイプORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-        -   [ネクスト.js](/develop/dev-guide-sample-application-nextjs.md)
+        -   [シークエライズ](/develop/dev-guide-sample-application-nodejs-sequelize.md)
+        -   [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
+        -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
     -   ルビー
-        -   [MySQL2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-        -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
+        -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+        -   [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
     -   C#
         -   [C#](/develop/dev-guide-sample-application-cs.md)
-    -   [ワードプレス](/develop/dev-guide-wordpress.md)
+    -   [WordPress](/develop/dev-guide-wordpress.md)
     -   サーバーレスDriver![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)<!--TBD, ToDo: Not sure if we need to update the driver name-->
         -   [TiDB CloudサーバーレスDriver](/develop/serverless-driver.md)
-        -   [Node.jsの例](/develop/serverless-driver-node-example.md)
+        -   [Node.js の例](/develop/serverless-driver-node-example.md)
         -   [Prismaの例](/develop/serverless-driver-prisma-example.md)
-        -   [Kyselyの例](/develop/serverless-driver-kysely-example.md)
+        -   [キセリーの例](/develop/serverless-driver-kysely-example.md)
         -   [霧雨の例](/develop/serverless-driver-drizzle-example.md)
 -   開発リファレンス
     -   データベーススキーマの設計
         -   [概要](/develop/dev-guide-schema-design-overview.md)
         -   [データベースを作成する](/develop/dev-guide-create-database.md)
         -   [テーブルを作成する](/develop/dev-guide-create-table.md)
-        -   [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
-    -   データの書き込み
-        -   [データの挿入](/develop/dev-guide-insert-data.md)
+        -   [セカンダリーインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
+    -   データを書き込む
+        -   [データを挿入する](/develop/dev-guide-insert-data.md)
         -   [データの更新](/develop/dev-guide-update-data.md)
-        -   [データを削除](/develop/dev-guide-delete-data.md)
-        -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
+        -   [データ削除](/develop/dev-guide-delete-data.md)
+        -   [TTL（有効期限）を使用して、期限切れのデータを定期的に削除する](/time-to-live.md)
         -   [準備された声明](/develop/dev-guide-prepared-statement.md)
-    -   データの読み取り
-        -   [単一のテーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)
-        -   [複数テーブルの結合クエリ](/develop/dev-guide-join-tables.md)
+    -   データ読み取り
+        -   [単一テーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)
+        -   [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)
         -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
-        -   [結果をページ付けする](/develop/dev-guide-paginate-results.md)
-        -   [ビュー](/develop/dev-guide-use-views.md)
+        -   [結果のページ分割](/develop/dev-guide-paginate-results.md)
+        -   [閲覧数](/develop/dev-guide-use-views.md)
         -   [一時テーブル](/develop/dev-guide-use-temporary-tables.md)
         -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
         -   レプリカデータの読み取り
@@ -109,30 +109,30 @@
         -   [インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)
         -   その他の最適化手法
             -   [暗黙的な型変換を避ける](/develop/dev-guide-implicit-type-conversion.md)
-            -   [一意のシリアル番号の生成](/develop/dev-guide-unique-serial-number-generation.md)
+            -   [固有シリアル番号生成](/develop/dev-guide-unique-serial-number-generation.md)
     -   トラブルシューティング
         -   [SQLまたはトランザクションの問題](/develop/dev-guide-troubleshoot-overview.md)
         -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
         -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
     -   開発ガイドライン
-        -   [オブジェクトの命名規則](/develop/dev-guide-object-naming-guidelines.md)
+        -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)
         -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
-    -   [書店のサンプルアプリケーション](/develop/dev-guide-bookshop-schema-design.md)
+    -   [書店向けアプリケーション例](/develop/dev-guide-bookshop-schema-design.md)
     -   サードパーティサポート
-        -   [TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)
-        -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
+        -   [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md)
+        -   [サードパーティ製ツールとの互換性に関する既知の問題](/develop/dev-guide-third-party-tools-compatibility.md)
 
 ## ガイド {#guides}
 
 -   インスタンスの管理
-    -   [クラスタプランを選択](/tidb-cloud/select-cluster-tier.md)
+    -   [クラスタプランを選択してください](/tidb-cloud/select-cluster-tier.md)
     -   TiDB Cloudインスタンスの管理
         -   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
-        -   TiDB Cloudインスタンスに接続する
-            -   [接続の概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
+        -   TiDB Cloudインスタンスに接続します
+            -   [接続概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
-            -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+            -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+            -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
     -   TiFlashでHTAPクラスタを使用する
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
@@ -141,129 +141,130 @@
         -   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
-        -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md)
+        -   [TiFlashの遅延発生](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
         -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
-        -   [組み込みメトリック](/tidb-cloud/premium/built-in-monitoring-premium.md)
-    -   パフォーマンスの調整
+        -   [組み込みの指標](/tidb-cloud/premium/built-in-monitoring-premium.md)
+        -   [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)
+    -   チューニングパフォーマンス
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
         -   SQLチューニング
             -   [概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
-            -   クエリ実行プランを理解する
+            -   クエリ実行プランの理解
                 -   [概要](/explain-overview.md)
                 -   [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
-                -   [インデックス](/explain-indexes.md)
+                -   [索引](/explain-indexes.md)
                 -   [テーブル結合](/explain-joins.md)
-                -   [MPPクエリ](/explain-mpp.md)
+                -   [MPPに関する質問](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
-                -   [ビュー](/explain-views.md)
+                -   [閲覧数](/explain-views.md)
                 -   [パーティション](/explain-partitions.md)
-                -   [インデックスの結合](/explain-index-merge.md)
+                -   [インデックスマージ](/explain-index-merge.md)
             -   SQL最適化プロセス
                 -   [概要](/sql-optimization-concepts.md)
-                -   ロジックの最適化
+                -   ロジック最適化
                     -   [概要](/sql-logical-optimization.md)
                     -   [サブクエリ関連の最適化](/subquery-optimization.md)
                     -   [カラムの剪定](/column-pruning.md)
-                    -   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
-                    -   [最大値/最小値を排除](/max-min-eliminate.md)
+                    -   [相関サブクエリのデコヒーレンス](/correlated-subquery-optimization.md)
+                    -   [最大値/最小値を削除する](/max-min-eliminate.md)
                     -   [Predicate Push Down](/predicate-push-down.md)
-                    -   [パーティションプルーニング](/partition-pruning.md)
-                    -   [TopNとLimit Push Down](/topn-limit-push-down.md)
+                    -   [パーティション剪定](/partition-pruning.md)
+                    -   [トップNとリミットプッシュダウン](/topn-limit-push-down.md)
                     -   [結合したテーブルの再配置](/join-reorder.md)
                     -   [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)
-                -   物理的な最適化
+                -   物理的最適化
                     -   [概要](/sql-physical-optimization.md)
-                    -   [インデックスの選択](/choose-index.md)
+                    -   [インデックス選択](/choose-index.md)
                     -   [統計](/statistics.md)
                     -   [拡張統計](/extended-statistics.md)
                     -   [インデックス問題の解決方法](/wrong-index-solution.md)
                     -   [クエリの最適化](/agg-distinct-optimization.md)
                     -   [コストモデル](/cost-model.md)
-                    -   [ランタイムフィルター](/runtime-filter.md)
-                -   [準備された実行プランのキャッシュ](/sql-prepared-plan-cache.md)
-                -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
-            -   制御実行計画
+                    -   [ランタイムフィルタ](/runtime-filter.md)
+                -   [準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)
+                -   [未準備実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
+            -   実行計画の制御
                 -   [概要](/control-execution-plan.md)
-                -   [オプティマイザヒント](/optimizer-hints.md)
+                -   [オプティマイザのヒント](/optimizer-hints.md)
                 -   [SQLプラン管理](/sql-plan-management.md)
-                -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
+                -   [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
         -   [TiKV Follower Readの調整](/follower-read.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
-        -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
+        -   [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
     -   [TiDBインスタンスを削除する](/tidb-cloud/premium/delete-tidb-instance.md)
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
-        -   [TiDBセルフマネージドからTiDB Cloudプレミアムへの移行](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
-        -   [大規模データセットの MySQL シャードの移行とマージ](/tidb-cloud/migrate-sql-shards.md)
-        -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-    -   TiDB Cloudへのデータのインポート
-        -   [Cloud Storage からサンプルデータ (SQL ファイル) をインポートする](/tidb-cloud/import-sample-data-serverless.md)
+        -   [TiDB Self-ManagedからTiDB Cloud Premiumへの移行](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
+        -   [大規模データセットのMySQLシャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
+        -   [AWS DMSを使用してAmazon RDS for Oracleから移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
+    -   TiDB Cloudにデータをインポートする
+        -   [クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data-serverless.md)
         -   [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/premium/import-csv-files-premium.md)
         -   [Amazon S3からCSVファイルをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)
         -   [クラウドストレージからParquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
         -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
-        -   [MySQL CLI を使用してデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
+        -   [MySQL CLI を使用したデータのインポート](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
     -   参照
-        -   [TiDB Cloudの外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)
+        -   [TiDB Cloudの外部ストレージアクセスを設定する](/tidb-cloud/configure-external-storage-access.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
-        -   [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)
-        -   [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-        -   [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+        -   [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
+        -   [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+        -   [AWS DMSをTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 -   ストリームデータ
-    -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
+    -   [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
     -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
     -   参照
-        -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
-        -   [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
+        -   [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
+        -   [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
 -   Security
-    -   [Securityの概要](/tidb-cloud/security-overview.md)
-    -   アイデンティティアクセス制御
+    -   [Security概要](/tidb-cloud/security-overview.md)
+    -   IDアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
         -   [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-        -   [アイデンティティアクセス管理](/tidb-cloud/premium/manage-user-access-premium.md)
+        -   [IDアクセス管理](/tidb-cloud/premium/manage-user-access-premium.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを構成する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
-        -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-        -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-        -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
+        -   [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
+        -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+        -   [パブリックエンドポイントのファイアウォールルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
-        -   [ユーザー制御のログ編集](/tidb-cloud/tidb-cloud-log-redaction.md)
+        -   [ユーザーによるログの編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   監査管理
         -   [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
-    -   [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+    -   [請求明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
     -   [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
     -   [請求プロファイル](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
-    -   [Changefeedの請求](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
-    -   [予算を管理する](/tidb-cloud/tidb-cloud-budget.md)
+    -   [Changefeedの課金](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
+    -   [予算管理](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
     -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
     -   [クラウドフレア](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
-    -   [ギットポッド](/develop/dev-guide-playground-gitpod.md)
+    -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
     -   [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
-    -   [ネットリファイ](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
-    -   [プロキシSQL](/develop/dev-guide-proxysql-integration.md)
+    -   [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
+    -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
     -   テラフォーム
-        -   [Terraform 統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-        -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+        -   [Terraform統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
+        -   [TiDB Cloud Terraform プロバイダーを取得する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
         -   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
         -   [`tidbcloud_serverless_branch`リソースを使用する](/tidb-cloud/terraform-use-serverless-branch-resource.md)
         -   [`tidbcloud_serverless_export`リソースを使用する](/tidb-cloud/terraform-use-serverless-export-resource.md)
@@ -271,24 +272,25 @@
         -   [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
         -   [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
     -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-    -   [ザピエール](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
+    -   [ザピアー](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
 ## 参照 {#reference}
 
 -   SQLリファレンス
-    -   [TiDB で SQL を探索する](/basic-sql-operations.md)
+    -   [TiDBでSQLを探求しよう](/basic-sql-operations.md)
     -   SQL言語の構造と構文
         -   属性
             -   [自動インクリメント](/auto-increment.md)
-            -   [自動ランダム](/auto-random.md)
-            -   [シャード行IDビット](/shard-row-id-bits.md)
-        -   [リテラル値](/literal-values.md)
+            -   [自動乱数](/auto-random.md)
+            -   [_tidb_rowid](/tidb-rowid.md)
+            -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
+        -   [文字通りの値](/literal-values.md)
         -   [スキーマオブジェクト名](/schema-object-names.md)
         -   [キーワードと予約語](/keywords.md)
         -   [ユーザー定義変数](/user-defined-variables.md)
         -   [式の構文](/expression-syntax.md)
         -   [コメント構文](/comment-syntax.md)
-    -   SQL文
+    -   SQLステートメント
         -   [概要](/sql-statements/sql-statement-overview.md)
         -   [`ADMIN`](/sql-statements/sql-statement-admin.md)
         -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
@@ -421,9 +423,9 @@
         -   [概要](/data-type-overview.md)
         -   [デフォルト値](/data-type-default-values.md)
         -   [数値型](/data-type-numeric.md)
-        -   [日付と時刻の型](/data-type-date-and-time.md)
+        -   [日付と時刻の種類](/data-type-date-and-time.md)
         -   [文字列型](/data-type-string.md)
-        -   [JSON型](/data-type-json.md)
+        -   [JSONタイプ](/data-type-json.md)
     -   関数と演算子
         -   [概要](/functions-and-operators/functions-and-operators-overview.md)
         -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -431,10 +433,10 @@
         -   [制御フロー関数](/functions-and-operators/control-flow-functions.md)
         -   [文字列関数](/functions-and-operators/string-functions.md)
         -   [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)
-        -   [日付と時刻関数](/functions-and-operators/date-and-time-functions.md)
-        -   [ビット関数と演算子](/functions-and-operators/bit-functions-and-operators.md)
+        -   [日付と時刻の機能](/functions-and-operators/date-and-time-functions.md)
+        -   [ビット関数とビット演算子](/functions-and-operators/bit-functions-and-operators.md)
         -   [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
-        -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
+        -   [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
         -   [ロック機能](/functions-and-operators/locking-functions.md)
         -   [情報機能](/functions-and-operators/information-functions.md)
         -   JSON関数
@@ -446,13 +448,13 @@
             -   [JSONユーティリティ関数](/functions-and-operators/json-functions/json-functions-utility.md)
             -   [JSONを集約する関数](/functions-and-operators/json-functions/json-functions-aggregate.md)
         -   [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)
-        -   [GROUP BY 修飾子](/functions-and-operators/group-by-modifier.md)
+        -   [GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)
         -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
         -   [その他の機能](/functions-and-operators/miscellaneous-functions.md)
         -   [精密計算](/functions-and-operators/precision-math.md)
-        -   [集合演算](/functions-and-operators/set-operators.md)
+        -   [セット演算](/functions-and-operators/set-operators.md)
         -   [シーケンス関数](/functions-and-operators/sequence-functions.md)
-        -   [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)
+        -   [プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md)
         -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
     -   [クラスター化インデックス](/clustered-indexes.md)
     -   [グローバルインデックス](/global-indexes.md)
@@ -462,16 +464,16 @@
     -   [テーブル属性](/table-attributes.md)
     -   取引
         -   [概要](/transaction-overview.md)
-        -   [分離レベル](/transaction-isolation-levels.md)
-        -   [楽観的トランザクション](/optimistic-transaction.md)
+        -   [隔離レベル](/transaction-isolation-levels.md)
+        -   [楽観的な取引](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
         -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
-    -   [ビュー](/views.md)
+    -   [閲覧数](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
-    -   [FOREIGN KEY制約](/foreign-key.md)
-    -   文字セットと照合順序
+    -   [外部キー制約](/foreign-key.md)
+    -   文字セットと照合
         -   [概要](/character-set-and-collation.md)
         -   [GBK](/character-set-gbk.md)
     -   履歴データを読む
@@ -479,7 +481,7 @@
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
             -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
             -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
-            -   [`tidb_external_ts`を使用してステイル読み取り](/tidb-external-ts.md)
+            -   [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   システムテーブル
         -   `mysql`スキーマ
@@ -532,9 +534,9 @@
             -   [概要](/sys-schema/sys-schema.md)
             -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     -   [メタデータロック](/metadata-lock.md)
-    -   [TiDB 高速テーブル作成](/accelerated-table-creation.md)
--   一般的な参考資料
-    -   TiDB クラシックアーキテクチャ
+    -   [TiDB高速テーブル作成](/accelerated-table-creation.md)
+-   一般参考資料
+    -   TiDBクラシックアーキテクチャ
         -   [概要](/tidb-architecture.md)
         -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
@@ -542,20 +544,20 @@
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクヴ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
             -   [TiFlashの概要](/tiflash/tiflash-overview.md)
-            -   [ディスクへのスピル](/tiflash/tiflash-spill-disk.md)
-    -   TiDB Cloudパートナー Web コンソール
+            -   [ディスクに書き出す](/tiflash/tiflash-spill-disk.md)
+    -   TiDB CloudパートナーWebコンソール
         -   [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
         -   [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
         -   [再販業者の顧客](/tidb-cloud/cppo-customer.md)
-    -   [TiDB Cloudの SQL 機能が制限されている](/tidb-cloud/limited-sql-features.md)
-    -   [TiDB の制限](/tidb-limitations.md)
+    -   [TiDB CloudにおけるSQL機能の制限](/tidb-cloud/limited-sql-features.md)
+    -   [TiDBの制限事項](/tidb-limitations.md)
     -   [システム変数](/system-variables.md)
-    -   [サーバーステータス変数](/status-variables.md)
+    -   [サーバー状態変数](/status-variables.md)
     -   [テーブルフィルター](/table-filter.md)
     -   [外部ストレージサービスのURI形式](/external-storage-uri.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
@@ -564,13 +566,13 @@
     -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
     -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
     -   コネクテッドケアサポートサービスの特長
-        -   [接続：IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
-        -   接続: IMチケットの作成とサブスクリプションの更新
-            -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
-            -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットの IM 対話
-            -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
-            -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
+        -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
+        -   接続済み：IMチケットの作成と更新のサブスクリプション
+            -   [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
+            -   [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
+        -   接続済み：サポートチケットのためのインスタントメッセージングによるやり取り
+            -   [Slack経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
+            -   [Lark経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
     -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)

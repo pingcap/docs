@@ -1,18 +1,18 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
-summary: TiDB での SHOW TABLE NEXT_ROW_ID` の使用方法を学びます。
+summary: TiDBにおけるSHOW TABLE NEXT_ROW_ID`の使い方を学びましょう。
 ---
 
-# テーブルの次の行IDを表示 {#show-table-next-row-id}
+# SHOW TABLE NEXT_ROW_ID {#show-table-next-row-id}
 
-`SHOW TABLE NEXT_ROW_ID` 、次のようなテーブルの特殊な列の詳細を表示するために使用されます。
+`SHOW TABLE NEXT_ROW_ID`は、以下のようなテーブルの特定の列の詳細を表示するために使用されます。
 
--   TiDB によって自動的に作成された[`AUTO_INCREMENT`](/auto-increment.md)列、つまり`_tidb_rowid`列。
--   ユーザーが作成した列は`AUTO_INCREMENT` 。
--   ユーザーが作成した列は[`AUTO_RANDOM`](/auto-random.md) 。
--   ユーザーが作成したものは[`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) 。
+-   [`_tidb_rowid`](/tidb-rowid.md) 、サポートされているテーブルの場合、TiDB によって自動的に管理される非表示の行 ID 列です。
+-   ユーザーによって作成された列は`AUTO_INCREMENT` 。
+-   ユーザーによって作成された列は[`AUTO_RANDOM`](/auto-random.md) 。
+-   ユーザーによって作成されたファイル数は[`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) 。
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowTableNextRowIDStmt ::=
@@ -21,7 +21,7 @@ ShowTableNextRowIDStmt ::=
 
 ## 例 {#examples}
 
-新しく作成されたテーブルの場合、行 ID が割り当てられていないため、 `NEXT_GLOBAL_ROW_ID` `1`なります。
+新しく作成されたテーブルの場合、行IDが割り当てられないため、 `NEXT_GLOBAL_ROW_ID`は`1`になります。
 
 ```sql
 CREATE TABLE t(a int);
@@ -38,7 +38,7 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-テーブルにデータが書き込まれました。データを挿入するTiDBサーバーは、一度に30000個のIDを割り当ててキャッシュします。そのため、NEXT_GLOBAL_ROW_IDは現在30001です。IDの数は[`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)で制御されます。
+データがテーブルに書き込まれました。データを挿入する TiDBサーバーは、一度に 30000 個の ID を割り当ててキャッシュします。したがって、NEXT_GLOBAL_ROW_ID は現在 30001 です。ID の数は[`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)で制御されます。
 
 ```sql
 INSERT INTO t VALUES (), (), ();
@@ -56,12 +56,13 @@ SHOW TABLE t NEXT_ROW_ID;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張です。
+このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [自動ランダム](/auto-random.md)
--   [シーケンスの作成](/sql-statements/sql-statement-create-sequence.md)
+-   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+-   [自動乱数](/auto-random.md)
+-   [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+-   [_tidb_rowid](/tidb-rowid.md)
