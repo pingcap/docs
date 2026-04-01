@@ -97,21 +97,27 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`tidb_service_scope`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_service_scope-new-in-v740)   | Modified  | Starting from v8.5.6 and v9.0.0, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison. |
-| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)  | Newly added  | defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.  |
-| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)  | Newly added | improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization.  |
-| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)  | Newly added | controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` means there is no limit on the number of slow query log entries written per second. </li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul>|
-| [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)  | Newly added | defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
-|   |   |   |
-|   |   |   |
+| [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_analyze_version-new-in-v510) | Modified | Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended to use statistics Version 2 (`tidb_analyze_version = 2`). |
+| [`tidb_service_scope`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_service_scope-new-in-v740) | Modified | Starting from v8.5.6, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison. |
+| [`InPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#inpacketbytes-new-in-v856) | Newly added | Starting from v8.5.6, this internal variable is used for statistics only and is not visible to users. |
+| [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856) | Newly added | Starting from v8.5.6, this internal variable is used for statistics only and is not visible to users. |
+| [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856) | Newly added | Controls whether TiDB uses shared locks (instead of exclusive locks) on parent table rows during foreign key checks in pessimistic transactions. The default value is `OFF`, which means TiDB uses exclusive locks by default. |
+| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856) | Newly added | Defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster. |
+| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856) | Newly added | Improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization. |
+| [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v856) | Newly added | Controls whether the optimizer can leverage the partial ordering of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. The default value is `DISABLE`, which means the optimization is disabled. |
+| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) | Newly added | Controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` means there is no limit on the number of slow query log entries written per second.</li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul> |
+| [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) | Newly added | defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
 
 ### Configuration parameters
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|  | |  |
-|  | |  |
-|  | |  |
+| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file) | Newly added | Controls whether TiKV collects network I/O and logical I/O metrics for Top SQL. The default value is `false`. |
+| TiCDC | [`output-field-header`](/ticdc/ticdc-csv.md) | Newly added | Controls whether TiCDC outputs a header row in CSV files. This parameter is only applicable to the TiCDC new architecture. The default value is `false`. |
+
+## Deprecated features
+
+- Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future version. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) for more accurate statistics and [migrate existing objects that use Statistics Version 1 to Version 2](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions).
 
 ## Improvements
 
@@ -209,9 +215,8 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     + TiDB Data Migration (DM) <!--tw@qiancai: 3 notes-->
 
-        - Fix the issue that DM does not advance the global checkpoint position after an upstream binlog file rotation [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929
+        - Fix the issue that DM does not advance the global checkpoint position after an upstream binlog file rotation [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929)
         - Fix the issue that, when processing updates on tables with foreign key constraints in safe mode, DM might still incorrectly trigger foreign key cascades and cause unintended data deletion even if the primary key or unique key is not modified [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
         - Fix the issue that DM validator incorrectly returns validation errors when processing `UNSIGNED` columns [#12178](https://github.com/pingcap/tiflow/issues/12178) @[OliverS929](https://github.com/OliverS929)
 
     + TiDB Lightning
-
