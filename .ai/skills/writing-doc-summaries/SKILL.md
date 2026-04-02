@@ -11,8 +11,8 @@ Write or improve the `summary` field in the YAML front matter of Markdown files 
 
 ```yaml
 ---
-title: Back up and Restore Data Using Dumpling and TiDB Lightning
-summary: Learn how to use Dumpling and TiDB Lightning to back up and restore full data of TiDB.
+title: Performance Analysis and Tuning
+summary: Learn how to optimize database system based on database time and how to utilize the TiDB Performance Overview dashboard for performance analysis and tuning.
 ---
 ```
 
@@ -21,7 +21,7 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 1. **Length**: 115-145 characters including spaces.
 2. **Opening verb**: Start with an SEO-friendly verb phrase (see table below) that tells the reader what they will get from this document. Never start with the document title, a product name alone, or a noun phrase.
 3. **Perspective**: Reader-focused — tell them what they will learn or do.
-4. **No special leading characters**: Do not start with `>`, `*`, `#`, `-`, or `[`.
+4. **No special leading characters**: Do not start with `>`, `*`, `#`, `-`, or `[`. If the summary must begin with a special character, wrap the entire value in quotation marks.
 5. **YAML quoting**: Wrap the value in double quotes if it contains `:` or other YAML special characters.
 6. **No redundancy**: Do not repeat the document title word-for-word. Rephrase to add value.
 7. **Language**: Match the document body language. Chinese body → Chinese summary.
@@ -96,7 +96,7 @@ summary: An introduction to metadata lock in TiDB.
 **After** (introduces concept and explains why it matters):
 
 ```yaml
-summary: Introduce the concept, principles, and implementation of metadata lock in TiDB, and learn how it prevents DDL and DML conflicts.
+summary: Learn about the concept, principles, and implementation of metadata lock in TiDB, and understand how it prevents DDL and DML conflicts.
 ```
 
 ## Workflow
