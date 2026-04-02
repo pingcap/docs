@@ -56,7 +56,7 @@ plan replayer dump with stats as of timestamp '2023-07-17 12:00:00' explain sele
 plan replayer dump with stats as of timestamp '442012134592479233' explain select * from t;
 ```
 
-`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the download information as the execution result:
+`PLAN REPLAYER DUMP` packages the preceding table information into a `ZIP` file and returns the download information as the execution result:
 
 - If the configured storage backend supports presigned URLs, TiDB returns a presigned URL.
 - Otherwise, TiDB returns a file token.
