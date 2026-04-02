@@ -9,15 +9,25 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential), [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
 - The subscribing via Zoom feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
+- To add and configure the Incoming Webhook Chatbot in Zoom, you need to have admin permissions on your Zoom account.
+
+<CustomContent plan="essential,dedicated">
+
 - To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
-- To add and configure the Incoming Webhook Chatbot in Zoom, you need to have admin permissions on your Zoom account.
+</CustomContent>
+
+<CustomContent plan="premium">
+
+- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Instance Manager` access to the target {{{ .premium }}} instance in TiDB Cloud.
+
+</CustomContent>
 
 ## Subscribe to alert notifications
 
@@ -65,6 +75,8 @@ Alert notification subscriptions vary by cluster plan.
 
 7. Click **Save** to complete the subscription.
 
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscription** page.
+
 </CustomContent>
 
 <CustomContent plan="essential">
@@ -85,9 +97,31 @@ Alert notification subscriptions vary by cluster plan.
 
 7. Click **Save** to complete the subscription.
 
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscription** page.
+
 </CustomContent>
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscription** page.
+<CustomContent plan="premium">
+
+> **Tip:**
+>
+> The alert subscription is for all alerts in the current {{{ .premium }}} instance. If you have multiple {{{ .premium }}} instances, you need to subscribe to each {{{ .premium }}} instance individually.
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target {{{ .premium }}} instance using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+4. Select **Zoom** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field, your Zoom webhook URL in the **URL** field, and the verification token in the **Token** field.
+6. Click **Test Connection**.
+
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
+
+7. Click **Save** to complete the subscription.
+
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
+
+</CustomContent>
 
 If an alert condition remains unchanged, the alert sends notifications every three hours.
 
@@ -107,6 +141,15 @@ If you no longer want to receive alert notifications, take the following steps. 
 <CustomContent plan="essential">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target cluster using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target {{{ .premium }}} instance using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.
