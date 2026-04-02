@@ -210,7 +210,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
         - Fix the issue that changefeeds might repeatedly create invalid dispatchers after the server restarts [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
         - Fix the issue that TiCDC fails to replicate table renaming operations correctly when the upstream TiDB version is v8.1.x or earlier [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
         - Fix the issue that TiKV might crash during data scanning when CDC is enabled [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
-        - Support Azure Managed Identity authentication for azblob sinks and fix the issue that uploads to cloud storage might get stuck [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Support Azure Managed Identity authentication for Azure Blob Storage and fix the issue that uploads to cloud storage might get stuck [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
     + TiDB Data Migration (DM) <!--tw@qiancai: 3 notes-->
 
