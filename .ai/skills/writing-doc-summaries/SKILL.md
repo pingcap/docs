@@ -54,16 +54,16 @@ Scan a few existing summaries in the same subdirectory first to match local conv
 
 ### Preferred patterns
 
-| Document type | Preferred opening |
-|---|---|
-| Concept / overview | Learn what, Learn how X works, Learn about, Introduce the concept of |
-| Feature introduction | Introduce, Introduce the, Learn about |
-| Task / procedure | Learn how to |
-| Quick start | Learn how to quickly get started with |
-| Configuration | Learn all the configuration options for, Learn how to configure |
-| Troubleshooting | Learn how to troubleshoot, Learn how to diagnose |
-| SQL statement reference | An overview of the usage of `<STATEMENT>` for the TiDB database |
-| Release notes | Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB `<version>` |
+| Document type | Preferred opening (English) | Preferred opening (Chinese) |
+|---|---|---|
+| Concept / overview | Learn what, Learn how X works, Learn about, Introduce the concept of | 介绍 X 的概念、了解 X 的原理、本文介绍 |
+| Feature introduction | Introduce, Introduce the, Learn about | 介绍、了解 |
+| Task / procedure | Learn how to | 了解如何、学习如何 |
+| Quick start | Learn how to quickly get started with | 了解如何快速上手 |
+| Configuration | Learn all the configuration options for, Learn how to configure | 介绍 X 的配置、了解 X 的配置项 |
+| Troubleshooting | Learn how to troubleshoot, Learn how to diagnose | 了解如何定位和处理 X、介绍 X 的排查思路 |
+| SQL statement reference | An overview of the usage of `<STATEMENT>` for the TiDB database | TiDB 数据库中 `<STATEMENT>` 的使用概况 |
+| Release notes | Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB `<version>` | 了解 TiDB `<version>` 版本的新功能、兼容性变更、改进提升，以及错误修复 |
 
 ### Patterns to avoid
 
