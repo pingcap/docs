@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
-TiDB Cloud [TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッドトランザクションおよび分析処理 (HTAP) データベースである TiDB [TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージド型のクラウドネイティブなデータベース・アズ・ア・サービス (DBaaS) です。TiDB Cloud は、データベースのデプロイと管理を容易にし、データベースの複雑さではなく、アプリケーションの開発に集中できるようにします。<customcontent language="en,zh"> TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</customcontent><customcontent language="ja"> TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</customcontent>
+TiDB Cloud [TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッドトランザクションおよび分析処理 (HTAP) データベースである TiDB [TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージド型のクラウドネイティブなデータベース・アズ・ア・サービス (DBaaS) です。TiDB Cloud は、データベースのデプロイと管理を容易にし、データベースの複雑さではなく、アプリケーションの開発に集中できるようにします。<CustomContent language="en,zh"> TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent><CustomContent language="ja"> TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
