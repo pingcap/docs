@@ -3391,7 +3391,6 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
-
 ### tidb_plan_replayer_external_storage_uri
 
 Referenced in:
