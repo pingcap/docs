@@ -71,4 +71,4 @@ if __name__ == "__main__":
     #upload_to_aws(local_file, remote_name)
     upload_to_qiniu(local_file, remote_name)
 
-    print("https://download.pingcap.org/{}".format(remote_name))
+    print("https://download.pingcap.com/{}".format(remote_name))
