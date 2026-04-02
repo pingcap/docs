@@ -129,8 +129,6 @@ SELECT @@tidb_last_plan_replayer_token;
 
 If `PLAN REPLAYER DUMP` returns a presigned URL, you can use the URL directly to download the file. The presigned URL is valid for up to one hour.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 curl "${presigned_url}" > plan_replayer.zip
 ```
