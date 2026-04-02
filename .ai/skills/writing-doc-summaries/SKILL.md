@@ -1,6 +1,6 @@
 ---
 name: writing-doc-summaries
-description: Writes or updates the front matter `summary` field in pingcap/docs and pingcap/docs-cn Markdown files. The summary is an SEO-friendly sentence of 115-145 characters. Use when a document is missing a summary, when a reviewer or CI check flags a low-quality summary, or when an existing summary is outdated, inaccurate, or the wrong length.
+description: Writes or updates the front matter `summary` field in pingcap/docs and pingcap/docs-cn Markdown files. The summary targets 115-145 characters, with a 45-character absolute minimum. Use when a document is missing a summary, when a reviewer or CI check flags a low-quality summary, or when an existing summary is outdated, inaccurate, or the wrong length.
 ---
 
 # Writing Doc Summaries
@@ -18,8 +18,8 @@ summary: Learn how to optimize database system based on database time and how to
 
 ## Summary rules
 
-1. **Length**: 115-145 characters including spaces.
-2. **Opening verb**: Start with an SEO-friendly verb phrase (see table below) that tells the reader what they will get from this document. Never start with the document title, a product name alone, or a noun phrase.
+1. **Length**: Target 115-145 characters including spaces; 45 characters is the absolute minimum.
+2. **Opening verb**: Start with an SEO-friendly verb phrase (see [Opening verb guidance](#opening-verb-guidance)) that tells the reader what they will get from this document. Never start with the document title, a product name alone, or a noun phrase.
 3. **Perspective**: Reader-focused — tell them what they will learn or do.
 4. **No special leading characters**: Do not start with `>`, `*`, `#`, `-`, or `[`. If the summary must begin with a special character, wrap the entire value in quotation marks.
 5. **YAML quoting**: Wrap the value in double quotes if it contains `:` or other YAML special characters.
@@ -45,7 +45,7 @@ Full example: `Learn how to configure TLS encryption between TiDB components to 
 
 **Exceptions:**
 
-- **SQL statement reference**: Use fixed template — `An overview of the usage of <STATEMENT> for the TiDB database`. No outcome clause needed.
+- **SQL statement reference**: Use fixed template — `An overview of the usage of <STATEMENT> for the TiDB database`. No outcome clause needed. This template falls below the 115-character target; the 45-character absolute minimum still applies.
 - **Focused task docs**: Omit the outcome clause if the action and object already imply it and the sentence meets minimum length.
 
 ## Opening verb guidance
@@ -97,6 +97,30 @@ summary: An introduction to metadata lock in TiDB.
 
 ```yaml
 summary: Learn about the concept, principles, and implementation of metadata lock in TiDB, and understand how it prevents DDL and DML conflicts.
+```
+
+**Before** (filler opening, no outcome):
+
+```yaml
+summary: 本文介绍了 TiDB 的元数据锁功能。
+```
+
+**After** (reader-focused, includes concept and value):
+
+```yaml
+summary: 介绍 TiDB 元数据锁的概念、原理和实现，了解它如何防止 DDL 与 DML 操作之间的冲突。
+```
+
+**Before** (generic, no user intent):
+
+```yaml
+summary: BR 自动调节功能说明。
+```
+
+**After** (specific, includes outcome):
+
+```yaml
+summary: 了解 BR 自动调节功能如何自动限制备份资源用量，从而降低对 TiDB 在线集群性能的影响。
 ```
 
 ## Workflow
