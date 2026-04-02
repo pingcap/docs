@@ -3896,13 +3896,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `-1`
 - Range: `-1` or `[1, 128]`
-- This variable defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
+- This variable defines the maximum number of TiDB nodes that Distributed eXecution Framework (DXF) tasks can use. The default value `-1` indicates that automatic mode is enabled. In this mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` is the number of TiKV nodes in the cluster.
 
 > **Note:**
 > 
-> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, the Distributed eXecution Framework schedules tasks only to these nodes. In this case, even if you set `tidb_max_dist_task_nodes` to a larger value, the framework uses no more than the number of nodes explicitly configured with `tidb_service_scope`.
+> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, DXF schedules tasks only to these nodes. In this case, even if you set `tidb_max_dist_task_nodes` to a larger value, DXF uses at most the number of nodes you explicitly configured with `tidb_service_scope`.
 >
-> For example, if the cluster has 10 TiDB nodes, and 4 of them are configured with `tidb_service_scope = group1`, then even if you set `tidb_max_dist_task_nodes = 5`, only 4 nodes participate in task execution.
+> For example, if the cluster has 10 TiDB nodes and 4 of them are configured with `tidb_service_scope = group1`, then even if you set `tidb_max_dist_task_nodes = 5`, only 4 nodes participate in the task execution.
 
 ### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
 
