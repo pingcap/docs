@@ -71,7 +71,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### DB operations
 
-- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58937](https://github.com/pingcap/tidb/pull/58937) @[tangenta](https://github.com/tangenta) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
+- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58944](https://github.com/pingcap/tidb/issues/58944) @[tangenta](https://github.com/tangenta) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
 
     Before v8.5.6, TiDB does not provide a way to limit the number of nodes used by a distributed execution task. When you want to control resource usage for DXF, TiDB does not provide a dedicated option to constrain the maximum node count.
 
@@ -187,7 +187,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + PD <!--tw@hfxsd: 2 notes-->
 
-    - Fix a panic issue that might occur when executing `DISTRIBUTE TABLE` in scenarios with a large number of Merge Region operators [#10292](https://github.com/tikv/pd/pull/10292) @[bufferflies](https://github.com/bufferflies)
+    - Fix a panic issue that might occur when executing `DISTRIBUTE TABLE` in scenarios with a large number of Merge Region operators [#10293](https://github.com/tikv/pd/issues/10293) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that configuring Store Limit might not take effect immediately [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
 
 + TiFlash <!--tw@hfxsd: 3 notes-->
