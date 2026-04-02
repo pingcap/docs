@@ -1,11 +1,11 @@
 ---
 title: 功能特性
-summary: 了解不同 TiDB Cloud 方案的功能支持状态。
+summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
 ---
 
 # 功能特性
 
-本文档列出了不同 TiDB Cloud 方案（包括 TiDB Cloud Starter、Essential 和 Dedicated）的功能支持状态。
+本文档列出了不同 TiDB Cloud 套餐（包括 TiDB Cloud Starter、Essential 和 Dedicated）的功能支持状态。
 
 > **提示：**
 >
@@ -26,7 +26,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="4" style="background-color: white;">基础能力</td>
+    <td rowspan="4" style="background-color: white;">基础</td>
     <td>可扩展的事务处理</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -52,13 +52,13 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">开发者体验</td>
-    <td>数据分支</td>
+    <td><Tooltip id="data-branch">数据分支</Tooltip></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>SQL 编辑器</td>
+    <td><Tooltip id="sql-editor">SQL 编辑器</Tooltip></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
@@ -126,7 +126,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>通过 changefeed 将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
+    <td>使用 changefeed 将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
     <td style="text-align:center;">✅</td>
@@ -164,7 +164,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td rowspan="7" style="background-color: white;">可观测性</td>
-    <td>内置统计/指标（信息）</td>
+    <td>内置指标</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -202,7 +202,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   <tr>
     <td>第三方集成，如 Datadog、Prometheus 和 New Relic</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -227,13 +227,13 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td rowspan="3" style="background-color: white;">网络连接</td>
-    <td>私有端点</td>
+    <td>私有端口</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>公网端点</td>
+    <td>公网端口</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -245,7 +245,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="6" style="background-color: white;">安全性</td>
+    <td rowspan="6" style="background-color: white;">安全</td>
     <td>数据库审计日志</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
@@ -333,4 +333,4 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
 
 > **提示：**
 >
-> 如需申请私测功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Support Tickets** 跳转到 [帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)。创建工单，在 **Description** 字段填写 “Apply for `<feature_name>`”，然后点击 **Submit**。
+> 如需申请私测功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Support Tickets** 跳转到 [帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)。创建工单，在 **Description** 字段填写 “申请 `<feature_name>`”，然后点击 **Submit**。
