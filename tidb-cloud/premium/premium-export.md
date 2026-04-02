@@ -7,15 +7,15 @@ summary: Learn how to export data from {{{ .premium }}} instances.
 
 TiDB Cloud enables you to export data from a {{{ .premium }}} instance to an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from an instance. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a {{{ .premium }}} instance. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from an instance, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .premium }}} instance, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
 > **Note:**
 >
-> Please export data smaller than 100 GiB; otherwise, the process may fail. If you need to export larger datasets, please [contact us](https://www.pingcap.com/contact-us)
+> The maximum export size is 100 GiB. Exports larger than this limit might fail. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Export locations
 
@@ -31,8 +31,8 @@ To export data to Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
-    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permissions. Note that only instances hosted on AWS support the role ARN.
+    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` permission.
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permission. Note that only {{{ .premium }}} instances hosted on AWS support the role ARN.
 
 For more information, see [Configure External Storage Access](/tidb-cloud/premium/external-storage.md#configure-amazon-s3-access).
 
@@ -99,14 +99,14 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
 
-2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
-3. On the **Export** page, click **Export Data** in the upper-right corner and configure the following settings:
+3. On the **Export** page, click **Export Data** in the upper-right corner. Then configure the following settings:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter the username and password of your TiDB instance, and then click **Test Connection** to check them.
-    - **Target Connection**: 
-        - **Storage Provider**: choose Amazon S3
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Target Connection**:
+        - **Storage Provider**: choose Amazon S3.
         - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
         - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
             - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access](/tidb-cloud/premium/external-storage.md#configure-amazon-s3-access).
@@ -125,14 +125,14 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
 
-2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
-3. On the **Export** page, click **Export Data** in the upper-right corner:
+3. On the **Export** page, click **Export Data** in the upper-right corner. Then configure the following settings:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your TiDB Instance, and then click **Test Connection** to check them.
-    - **Target Connection**: 
-        - **Storage Provider**: choose Azure Blob Storage
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Target Connection**:
+        - **Storage Provider**: choose Azure Blob Storage.
         - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
         - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access](/tidb-cloud/premium/external-storage.md#configure-azure-blob-storage-access).
     - **Exported Data**: choose the databases or tables you want to export.
@@ -149,14 +149,14 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
 
-2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
-3. On the **Export** page, click **Export Data** in the upper-right corner：
+3. On the **Export** page, click **Export Data** in the upper-right corner:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your TiDB Instance, and then click **Test Connection** to check them.
-    - **Target Connection**: 
-        - **Storage Provider**: choose Alibaba Cloud OSS
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Target Connection**:
+        - **Storage Provider**: choose Alibaba Cloud OSS.
         - **Folder URI**: enter the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
         - **AccessKey ID** and **AccessKey Secret**: enter the AccessKey ID and AccessKey Secret that have the permission to access the bucket.
     - **Exported Data**: choose the databases or tables you want to export.
@@ -175,7 +175,7 @@ To cancel an ongoing export task, take the following steps:
    >
    > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
 
-2. Click the name of your target instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, view the export task list.
 
