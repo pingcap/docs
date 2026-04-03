@@ -92,12 +92,14 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 ### MySQL compatibility
 
 - Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
+- Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, you can still reference the base table name when an alias is defined, but this triggers a warning that recommends using the explicit alias. For more information, see [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
 
 ### System variables
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_analyze_version-new-in-v510) | Modified | Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended to use statistics Version 2 (`tidb_analyze_version = 2`). |
+| [`tidb_ignore_inlist_plan_digest`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_ignore_inlist_plan_digest-new-in-v760) | Modified | Changes the default value from `OFF` to `ON`. The default value `ON` means that TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. |
 | [`tidb_service_scope`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_service_scope-new-in-v740) | Modified | Starting from v8.5.6, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison. |
 | [`InPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#inpacketbytes-new-in-v856) | Newly added | Starting from v8.5.6, this internal variable is used for statistics only and is not visible to users. |
 | [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856) | Newly added | Starting from v8.5.6, this internal variable is used for statistics only and is not visible to users. |
