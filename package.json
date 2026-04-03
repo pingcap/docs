@@ -4,6 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "docs-api:build": "node scripts/build-docs-api-index.js",
+    "docs-api:serve": "node scripts/docs-api-server.js"
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "glob": "^8.0.3",

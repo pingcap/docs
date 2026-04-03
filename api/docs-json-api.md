@@ -1,0 +1,68 @@
+---
+title: Docs JSON API (Experimental)
+summary: Provide a structured JSON API for TiDB docs with topic and feature filters.
+---
+
+# Docs JSON API (Experimental)
+
+This API layer exposes structured metadata for markdown docs.
+
+## Why
+
+- Query docs by feature token (for example, `tidb_max_dist_task_nodes`)
+- Query docs by topic/category
+- Return structured schema instead of raw markdown only
+
+## Data schema
+
+Each doc record includes:
+
+- `id`
+- `path`
+- `title`
+- `summary`
+- `product`
+- `topics`
+- `features`
+- `headings`
+- `frontMatter`
+- `frontMatterRaw`
+- `updatedAt`
+
+## Build index
+
+```bash
+npm run docs-api:build
+```
+
+Default output file: `tmp/docs-api-index.json`
+
+## Run API server
+
+```bash
+npm run docs-api:serve
+```
+
+Default host and port: `127.0.0.1:3000`
+
+## Endpoints
+
+- `GET /healthz`
+- `GET /schema`
+- `GET /topics`
+- `GET /features`
+- `GET /features?prefix=tidb_`
+- `GET /docs`
+- `GET /docs?feature=tidb_max_dist_task_nodes`
+- `GET /docs?topic=tidb-cloud`
+- `GET /docs?q=resource control`
+- `GET /docs?feature=tidb_max_dist_task_nodes&limit=10&offset=0`
+- `GET /reload` (reload in-memory index)
+
+## Environment variables
+
+- `DOCS_API_HOST` (default `127.0.0.1`)
+- `DOCS_API_PORT` (default `3000`)
+- `DOCS_API_ROOT` (default current working directory)
+- `DOCS_API_INDEX_FILE` (optional prebuilt JSON index path)
+
