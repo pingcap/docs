@@ -2,7 +2,7 @@ import * as fs from "fs";
 import path from "path";
 
 const DOC_IGNORE_DIRS = new Set(["node_modules", ".git", "media", "tmp"]);
-const DOC_IGNORE_FILES = new Set(["api/docs-json-api.md"]);
+const DOC_IGNORE_FILES = new Set(["api/docs-json-api.md", "api/docs-mcp-server.md"]);
 
 const MAX_SUMMARY_LENGTH = 220;
 
