@@ -4750,10 +4750,10 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Enum
 - Default value: `DISABLE`
 - Possible values: `DISABLE`, `COST`
-- Controls whether the optimizer can leverage the partial ordering of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. When the sort column matches the index order (for example, when the sort column itself is an index column, or when a prefix index is defined on that column), the data returned by the index scan is already partially ordered on that column. In such cases, the optimizer can incrementally build the TopN results during the scan and stop scanning early once the `LIMIT` is satisfied, thereby reducing sorting overhead.
+- Controls whether the optimizer can leverage the partial order of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. When the sort column matches the index order (for example, the sort column is an index column or has a prefix index), the data returned by the index scan is already partially ordered on that column. In this case, the optimizer can incrementally build the TopN result during the scan and stop early once the `LIMIT` is satisfied, thereby reducing sorting overhead.
 - Usage scenarios: When the sort column in an `ORDER BY ... LIMIT` clause is a long string with only a prefix index, to reduce the TopN sorting overhead, you can set this variable to `COST` and specify a `USE INDEX` or `FORCE INDEX` hint in the query to enable the partial order TopN optimization.
 
-    - The default value is `DISABLE`, which means the partial order TopN optimization is disabled. In this case, the optimizer uses the conventional global sorting approach for TopN.
+    - The default value is `DISABLE`, which means the partial order TopN optimization is disabled. In this case, the optimizer uses the standard global sorting approach for TopN.
     - To force the use of the partial order TopN optimization, set this variable to `COST` and specify a qualifying index in the query using `USE INDEX` or `FORCE INDEX`. If the specified index does not meet the prerequisites for this optimization (for example, the `ORDER BY` clause does not match the index prefix, or the query contains unsupported ordering patterns), the optimization might not be applied even when the variable is set to `COST`, and the execution plan falls back to the standard TopN approach.
 
     > **Note:**
