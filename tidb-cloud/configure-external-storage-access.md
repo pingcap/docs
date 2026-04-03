@@ -22,7 +22,7 @@ If you need to configure these external storages for a TiDB Cloud Dedicated clus
 
 ## Configure Amazon S3 access
 
-To allow a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to access the source data in your Amazon S3 bucket, configure the bucket access for the <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> using either of the following methods:
+To allow a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to access your Amazon S3 bucket, configure the bucket access for the <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> using either of the following methods:
 
 - [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
 - [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
@@ -35,11 +35,11 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 >
 > Role ARN access to Amazon S3 is only supported for <CustomContent plan="starter,essential">clusters</CustomContent><CustomContent plan="premium">instances</CustomContent> with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
 
-1. Open the **Import** page for your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
+1. Open the **Import** or **Export** page for your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and <CustomContent plan="starter,essential">navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.</CustomContent><CustomContent plan="premium">navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.</CustomContent>
 
-    2. Click the name of your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page, and then click **Data** > **Import** or **Data** > **Export** in the left navigation pane.
 
 2. Open the **Add New ARN** dialog.
 
@@ -51,9 +51,22 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
     - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
 
-        1. Click **Export data to...**  > **Amazon S3**. If your <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
+        <CustomContent plan="starter,essential">
+
+        1. Click **Export data to...**  > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
         2. Fill in the **Folder URI** field.
         3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
+
+        </CustomContent>
+
+        <CustomContent plan="premium">
+
+        1. Click **Export Data**.
+        2. Choose **Amazon S3** in **Target Connection**.
+        3. Fill in the **Folder URI** field.
+        4. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
+
+        </CustomContent>
 
 3. Create a role ARN with an AWS CloudFormation template.
 
@@ -80,7 +93,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) and open the [Amazon S3 console](https://console.aws.amazon.com/s3/).
 
-    2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
+    2. In the **Buckets** list, choose the name of your target bucket, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
@@ -107,7 +120,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
                         "s3:GetObjectVersion",
                         "s3:PutObject"
                     ],
-                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
+                    "Resource": "<Your S3 bucket ARN>/<Your data directory>/*"
                 },
                 {
                     "Sid": "VisualEditor1",
@@ -123,10 +136,10 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
         In the policy text field, replace the following configurations with your own values.
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example:
+        - `"Resource": "<Your S3 bucket ARN>/<Your data directory>/*"`, where `<Your data directory>` is the target directory for exported data or the source directory for imported data. For example:
 
-            - If your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`.
-            - If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
+            - If your data for import or export is in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`.
+            - If your data for import or export is in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
 
           Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
 
@@ -221,7 +234,7 @@ Take the following steps to configure a service account key:
 
 </CustomContent>
 
-<CustomContent plan="starter,essential">
+<CustomContent plan="starter,essential,premium">
 
 ## Configure Azure Blob Storage access
 
@@ -231,17 +244,36 @@ You can create a SAS token either using an [Azure ARM template](https://learn.mi
 
 To create a SAS token using an Azure ARM template, take the following steps:
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** or **Export** page for your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and <CustomContent plan="starter,essential">navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.</CustomContent><CustomContent plan="premium">navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.</CustomContent>
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page, and then click **Data** > **Import** or **Data** > **Export** in the left navigation pane.
 
 2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
 
-    1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
+    - If you want to import data from Azure Blob Storage:
 
-    2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field.
+        1. Click **Import from Azure Blob Storage**.
+        2. Fill in the **Folder URI** field.
+        3. In the **SAS Token** field, click **Click here to create a new one with Azure ARM template**.
+
+    - If you want to export data to Azure Blob Storage:
+
+        <CustomContent plan="starter,essential">
+
+        1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
+        2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field.
+
+        </CustomContent>
+
+        <CustomContent plan="premium">
+
+        1. Click **Export Data**.
+        2. Choose **Azure Blob Storage** in **Target Connection**.
+        3. Click **Click here to create a new one with Azure ARM template** under the SAS Token field.
+
+        </CustomContent>
 
 3. Create a SAS token with the Azure ARM template.
 
