@@ -111,6 +111,18 @@ const stripInlineMarkdown = (text) =>
     .replace(/\s+/g, " ")
     .trim();
 
+const markdownToSearchText = (content) => {
+  const withoutFrontMatter = stripFrontMatter(content);
+  return stripInlineMarkdown(
+    withoutFrontMatter
+      .replace(/```[\s\S]*?```/g, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/{{<[^>]+>}}/g, " ")
+      .replace(/\|/g, " ")
+      .replace(/\r?\n/g, " ")
+  );
+};
+
 const collectMarkdownFiles = (rootDir) => {
   const results = [];
   const walk = (dir) => {
@@ -292,6 +304,7 @@ const parseMarkdownDoc = (rootDir, absPath, variables) => {
   const docStat = fs.statSync(absPath);
   const features = extractFeatures(raw, frontMatter).sort();
   const topics = normalizeTopics(relativePath, frontMatter).sort();
+  const searchText = markdownToSearchText(raw).toLowerCase();
 
   return {
     id: relativePath.replace(/\.md$/, ""),
@@ -305,10 +318,11 @@ const parseMarkdownDoc = (rootDir, absPath, variables) => {
     frontMatter,
     frontMatterRaw,
     updatedAt: docStat.mtime.toISOString(),
+    _searchText: searchText,
   };
 };
 
-export const buildDocsIndex = (rootDir = process.cwd()) => {
+export const loadTemplateVariables = (rootDir = process.cwd()) => {
   const normalizedRoot = path.resolve(rootDir);
   const variablesPath = path.join(normalizedRoot, "variables.json");
   let variables = {};
@@ -321,6 +335,26 @@ export const buildDocsIndex = (rootDir = process.cwd()) => {
       );
     }
   }
+  return variables;
+};
+
+export const loadDocContentByPath = (rootDir, docPath, variables) => {
+  const normalizedRoot = path.resolve(rootDir);
+  const normalizedDocPath = docPath.replaceAll("\\", "/").replace(/^\/+/, "");
+  const absPath = path.join(normalizedRoot, normalizedDocPath);
+  if (!absPath.startsWith(normalizedRoot)) {
+    throw new Error("Invalid path.");
+  }
+  if (!fs.existsSync(absPath)) {
+    throw new Error("Document not found.");
+  }
+  const raw = fs.readFileSync(absPath, "utf8");
+  return replaceTemplateVariables(raw, variables);
+};
+
+export const buildDocsIndex = (rootDir = process.cwd()) => {
+  const normalizedRoot = path.resolve(rootDir);
+  const variables = loadTemplateVariables(normalizedRoot);
 
   const mdFiles = collectMarkdownFiles(normalizedRoot);
 
@@ -362,7 +396,8 @@ export const docsApiSchema = {
       query: {
         feature: "Exact feature token filter, case-insensitive.",
         topic: "Topic/category filter, case-insensitive.",
-        q: "Keyword match in path/title/summary, case-insensitive.",
+        q: "Keyword match in path/title/summary/full-text, case-insensitive.",
+        includeContent: "Whether to include markdown content in list results. Default false.",
         path: "Exact document path filter, case-insensitive.",
         limit: "Page size. Default 20, max 100.",
         offset: "Pagination offset. Default 0.",
@@ -391,6 +426,14 @@ export const docsApiSchema = {
     "/schema": {
       method: "GET",
       response: "This schema document.",
+    },
+    "/docs/content": {
+      method: "GET",
+      query: {
+        path: "Exact document path, e.g. tidb-cloud/backup-and-restore.md",
+        id: "Document id, e.g. tidb-cloud/backup-and-restore",
+      },
+      response: "Single DocRecord with markdown content.",
     },
     "/healthz": {
       method: "GET",

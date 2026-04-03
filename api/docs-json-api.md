@@ -12,6 +12,7 @@ This API layer exposes structured metadata for markdown docs.
 - Query docs by feature token (for example, `tidb_max_dist_task_nodes`)
 - Query docs by topic/category
 - Return structured schema instead of raw markdown only
+- Keep list APIs fast by default, and fetch full content on demand
 
 ## Data schema
 
@@ -57,7 +58,17 @@ Default host and port: `127.0.0.1:3000`
 - `GET /docs?topic=tidb-cloud`
 - `GET /docs?q=resource control`
 - `GET /docs?feature=tidb_max_dist_task_nodes&limit=10&offset=0`
+- `GET /docs?topic=tidb-cloud&includeContent=true` (returns markdown content in list response)
+- `GET /docs/content?path=tidb-cloud/backup-and-restore.md`
+- `GET /docs/content?id=tidb-cloud/backup-and-restore`
 - `GET /reload` (reload in-memory index)
+
+## Search and performance behavior
+
+- `q` uses path, title, summary, and full-text matching.
+- `/docs` does **not** return full markdown content by default.
+- Use `/docs/content` to fetch full markdown content for a single document.
+- If needed, set `includeContent=true` on `/docs` for small result sets.
 
 ## Environment variables
 
