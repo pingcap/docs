@@ -5100,6 +5100,7 @@ SHOW WARNINGS;
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable controls the size of the schema cache in TiDB. The unit is byte. The default value is `0`, which means that the cache limit feature is not enabled. When this feature is enabled, TiDB uses the value you set as the maximum available memory limit, and uses the Least Recently Used (LRU) algorithm to cache the required tables, effectively reducing the memory occupied by the schema information.
+- If your cluster contains a large number of partitioned tables, or if you frequently perform DDL operations on partitioned tables (such as `TRUNCATE` or `DROP PARTITION`), it is recommended that you set this variable to `0`.
 
 ### tidb_schema_version_cache_limit <span class="version-mark">New in v7.4.0</span>
 
