@@ -1,11 +1,17 @@
 import * as fs from "fs";
 import http from "http";
 import path from "path";
-import { buildDocsIndex, docsApiSchema } from "./docs-api-lib.js";
+import {
+  buildDocsIndex,
+  docsApiSchema,
+  resolveDefaultSourceDir,
+} from "./docs-api-lib.js";
 
 const PORT = Number.parseInt(process.env.DOCS_API_PORT || "3000", 10);
 const HOST = process.env.DOCS_API_HOST || "127.0.0.1";
-const ROOT_DIR = path.resolve(process.env.DOCS_API_ROOT || process.cwd());
+const SOURCE_DIR = path.resolve(
+  process.env.DOCS_API_SOURCE_DIR || resolveDefaultSourceDir(process.cwd())
+);
 const PREBUILT_INDEX = process.env.DOCS_API_INDEX_FILE;
 
 const loadIndex = () => {
@@ -15,7 +21,7 @@ const loadIndex = () => {
       return JSON.parse(fs.readFileSync(filePath, "utf8"));
     }
   }
-  return buildDocsIndex(ROOT_DIR);
+  return buildDocsIndex(SOURCE_DIR);
 };
 
 let docsIndex = loadIndex();
@@ -128,7 +134,6 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(
-    `Docs API server running at http://${HOST}:${PORT} (docs: ${docsIndex.totalDocs})`
+    `Docs API server running at http://${HOST}:${PORT} (docs: ${docsIndex.totalDocs}, source: ${SOURCE_DIR})`
   );
 });
-

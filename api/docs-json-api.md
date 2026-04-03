@@ -63,6 +63,15 @@ Default host and port: `127.0.0.1:3000`
 
 - `DOCS_API_HOST` (default `127.0.0.1`)
 - `DOCS_API_PORT` (default `3000`)
-- `DOCS_API_ROOT` (default current working directory)
+- `DOCS_API_SOURCE_DIR` (default: if `../docs-staging` exists, use it; otherwise current working directory)
 - `DOCS_API_INDEX_FILE` (optional prebuilt JSON index path)
 
+## Source priority
+
+The API loads markdown files from the source directory in this order:
+
+1. `DOCS_API_SOURCE_DIR` (if set)
+2. `../docs-staging` (if exists)
+3. current working directory
+
+Template variables in markdown such as `{{{ .starter }}}` are replaced using `variables.json` in the selected source directory.

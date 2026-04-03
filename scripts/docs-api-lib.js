@@ -2,6 +2,7 @@ import * as fs from "fs";
 import path from "path";
 
 const DOC_IGNORE_DIRS = new Set(["node_modules", ".git", "media", "tmp"]);
+const DOC_IGNORE_FILES = new Set(["api/docs-json-api.md"]);
 
 const MAX_SUMMARY_LENGTH = 220;
 
@@ -15,6 +16,25 @@ const slugify = (input = "") =>
     .trim()
     .replace(/[`~!@#$%^&*()+=[\]{}|\\:;"'<>,.?/]+/g, "")
     .replace(/\s+/g, "-");
+
+const getValueByPath = (obj, keyPath) => {
+  return (
+    keyPath
+      .split(".")
+      .reduce((acc, key) => (acc !== undefined && acc !== null ? acc[key] : ""), obj) ?? ""
+  );
+};
+
+const replaceTemplateVariables = (content, variables = {}) => {
+  const variablePattern = /{{{\s*\.(.+?)\s*}}}/g;
+  return content.replace(variablePattern, (match, variablePath) => {
+    const value = getValueByPath(variables, variablePath.trim());
+    if (value === undefined || value === null || value === "") {
+      return match;
+    }
+    return String(value);
+  });
+};
 
 const parseScalar = (raw) => {
   const value = raw.trim();
@@ -97,13 +117,16 @@ const collectMarkdownFiles = (rootDir) => {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       if (entry.isDirectory()) {
-        if (DOC_IGNORE_DIRS.has(entry.name)) continue;
+        if (entry.name.startsWith(".") || DOC_IGNORE_DIRS.has(entry.name)) continue;
         walk(path.join(dir, entry.name));
         continue;
       }
       if (!entry.isFile()) continue;
       if (!entry.name.endsWith(".md")) continue;
-      results.push(path.join(dir, entry.name));
+      const absPath = path.join(dir, entry.name);
+      const relativePath = toPosixPath(path.relative(rootDir, absPath));
+      if (DOC_IGNORE_FILES.has(relativePath)) continue;
+      results.push(absPath);
     }
   };
   walk(rootDir);
@@ -250,9 +273,10 @@ const normalizeTopics = (docPath, frontMatterData) => {
   return [...topics];
 };
 
-const parseMarkdownDoc = (rootDir, absPath) => {
+const parseMarkdownDoc = (rootDir, absPath, variables) => {
   const relativePath = toPosixPath(path.relative(rootDir, absPath));
-  const raw = fs.readFileSync(absPath, "utf8");
+  const originalRaw = fs.readFileSync(absPath, "utf8");
+  const raw = replaceTemplateVariables(originalRaw, variables);
   const { data: frontMatter, raw: frontMatterRaw } = extractFrontMatter(raw);
   const { headings, summary } = parseHeadingsAndSummary(raw);
   let title = safeString(frontMatter.title);
@@ -286,10 +310,22 @@ const parseMarkdownDoc = (rootDir, absPath) => {
 
 export const buildDocsIndex = (rootDir = process.cwd()) => {
   const normalizedRoot = path.resolve(rootDir);
+  const variablesPath = path.join(normalizedRoot, "variables.json");
+  let variables = {};
+  if (fs.existsSync(variablesPath)) {
+    try {
+      variables = JSON.parse(fs.readFileSync(variablesPath, "utf8"));
+    } catch (error) {
+      console.warn(
+        `Warning: failed to parse variables.json at ${variablesPath}, continuing without variable replacement.`
+      );
+    }
+  }
+
   const mdFiles = collectMarkdownFiles(normalizedRoot);
 
   const docs = mdFiles
-    .map((absPath) => parseMarkdownDoc(normalizedRoot, absPath))
+    .map((absPath) => parseMarkdownDoc(normalizedRoot, absPath, variables))
     .sort((a, b) => a.path.localeCompare(b.path));
 
   const topicSet = new Set();
@@ -307,6 +343,15 @@ export const buildDocsIndex = (rootDir = process.cwd()) => {
     features: [...featureSet].sort(),
     docs,
   };
+};
+
+export const resolveDefaultSourceDir = (baseDir = process.cwd()) => {
+  const normalizedBase = path.resolve(baseDir);
+  const siblingDocsStaging = path.resolve(normalizedBase, "..", "docs-staging");
+  if (fs.existsSync(siblingDocsStaging) && fs.statSync(siblingDocsStaging).isDirectory()) {
+    return siblingDocsStaging;
+  }
+  return normalizedBase;
 };
 
 export const docsApiSchema = {
