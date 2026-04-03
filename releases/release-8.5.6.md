@@ -39,7 +39,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     Before v8.5.6, the main way to identify slow queries in TiDB is to set the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) system variable. This mechanism provides only coarse-grained control over slow query log triggering because it applies globally at the instance level and does not support fine-grained control at the session or SQL level. In addition, it supports only one trigger condition, execution time (`Query_time`), which cannot meet the need to capture slow query logs more precisely in complex scenarios.
 
-    Starting from v8.5.6, TiDB enhances slow query log control. You can use the [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) to limit the number of log entries written per second, and use the [`WRITE_SLOW_LOG`](/optimizer-hints.md) hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
+    Starting from v8.5.6, TiDB enhances slow query log control. You can use the [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) to limit the number of log entries written per second, and use the [`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries).
 
@@ -61,7 +61,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 
-- Support using table aliases in the `FOR UPDATE OF` clause [#65532](https://github.com/pingcap/tidb/pull/65532) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
+- Support using table aliases in the `FOR UPDATE OF` clause [#63035](https://github.com/pingcap/tidb/issues/63035) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
 
     Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement references a table alias in the locking clause, TiDB might fail to resolve the alias correctly and return the `table not exists` error even if the alias is valid.
 
@@ -149,7 +149,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     + TiDB Data Migration (DM) <!--tw@lilin90: 2 notes-->
 
         - Support MySQL 8.4 as an upstream data source for DM by adapting to the new terminology and version detection logic introduced in this version [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
-        - Add support for foreign key causal dependencies in DM syncer to ensure that row changes are executed in parent-to-child foreign key order in multi-worker scenarios [#12552](https://github.com/pingcap/tiflow/pull/12552) @[OliverS929](https://github.com/OliverS929)
+        - Add foreign key causal dependency support in DM syncer to ensure parent-to-child execution order of row changes in multi-worker scenarios [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
 
     + TiDB Lightning
 
@@ -165,8 +165,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     - Fix the issue that upgrading from `release-8.5-20250606-v8.5.2` to the upstream `release-8.5` might skip the PITR metadata upgrade and cause PITR operations to fail [#66994](https://github.com/pingcap/tidb/issues/66994) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that after executing `EXCHANGE PARTITION`, non-unique global indexes or nullable unique global indexes on non-clustered partitioned tables might become inconsistent and return incomplete results [#65289](https://github.com/pingcap/tidb/issues/65289) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that `KILL QUERY` might incorrectly terminate idle connections [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue that column-level privilege checks might be incorrect in `JOIN ... USING`, `NATURAL JOIN`, and `INSERT ... ON DUPLICATE KEY UPDATE` scenarios [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) <!--tw@hfxsd: the following 8 notes-->
+    - Fix the issue that `KILL QUERY` might incorrectly terminate idle connections [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)(https://github.com/CbcWestwolf) <!--tw@hfxsd: the following 8 notes-->
     - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
     - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
     - Fix the issue that the value of `tidb_service_scope` is not converted to lowercase when set [#66749](https://github.com/pingcap/tidb/issues/66749) @[D3Hunter](https://github.com/D3Hunter)
@@ -201,7 +200,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     + Backup & Restore (BR) <!--tw@lilin90: 4 notes-->
 
         - Fix the issue that `flush_ts` might be `0` in log backup [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
-        - Fix the issue that BR might fail during multipart uploads through GCP S3 API Server because the `Content-Length` request header is missing [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that BR might fail during multipart uploads when accessing Google Cloud Storage via Amazon S3-compatible APIs with S3-style credentials, due to a missing Content-Length header [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that the BR `restore point` might remain stuck in the `waiting for schema info finishes reloading` state for a long time and then fail due to timeout after 15 minutes [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
         - Fix the issue that BR cannot correctly pre-split Regions when restoring tables with the `SHARD_ROW_ID_BITS`, `PRE_SPLIT_REGIONS`, and `merge_option` attributes [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
 
