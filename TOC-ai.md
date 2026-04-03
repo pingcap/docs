@@ -70,6 +70,7 @@
   - [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
 - MCP Server
   - [Overview](/ai/integrations/tidb-mcp-server.md)
+  - [TiDB Docs MCP Server](/ai/integrations/tidb-docs-mcp-server.md)
   - [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
   - [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
   - [Cursor](/ai/integrations/tidb-mcp-cursor.md)
