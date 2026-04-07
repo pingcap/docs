@@ -8,6 +8,11 @@ aliases: ['/tidbcloud/migrate-from-amazon-s3-or-gcs','/tidbcloud/migrate-from-au
 
 This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Dedicated.
 
+> **Tip:**
+>
+> - For TiDB Cloud Starter or TiDB Cloud Essential, see [Import CSV Files from Cloud Storage into TiDB Cloud Starter or Essential](/tidb-cloud/import-csv-files-serverless.md).
+> - For TiDB Cloud Premium, see [Import CSV Files from Cloud Storage into TiDB Cloud Premium](/tidb-cloud/premium/import-csv-files-premium.md).
+
 ## Limitations
 
 - To ensure data consistency, TiDB Cloud allows importing CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
