@@ -114,7 +114,10 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file) | Newly added | Controls whether TiKV collects network I/O and logical I/O metrics for Top SQL. The default value is `false`. |
+| TiKV | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | Newly added | Controls whether to enable MVCC-read-aware compaction. The default value is `false`. |
+| TiKV | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856) | Newly added | The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. The default value is `3.0`. |
+| TiKV | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856) | Newly added | The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. The default value is `1000`. |
+| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | Newly added | Controls whether TiKV collects network I/O and logical I/O metrics for Top SQL. The default value is `false`. |
 | TiCDC | [`output-field-header`](/ticdc/ticdc-csv.md) | Newly added | Controls whether TiCDC outputs a header row in CSV files. This parameter is only applicable to the TiCDC new architecture. The default value is `false`. |
 
 ## Deprecated features
