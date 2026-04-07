@@ -17,7 +17,28 @@ The TiDB snapshot backup and restore architecture is as follows:
 
 The process of a cluster snapshot backup is as follows:
 
-![snapshot backup process design](/media/br/br-snapshot-backup-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant PD
+    participant TiKV
+    participant Storage
+
+    User->>BR: Run `br backup full`
+    BR->>PD: Pause GC
+    BR->>PD: Fetch TiKV and Region info
+    BR->>TiKV: Request TiKV to back up data
+    loop TiKV handle the local snapshot backup task
+        TiKV->>TiKV: Scan KVs
+        TiKV->>TiKV: Generate SST
+        TiKV->>Storage: Upload SST
+    end
+    TiKV-->>BR: Report backup result
+    BR->>BR: Handle all backup results
+    BR->>TiKV: Back up schemas
+    BR->>Storage: Upload backup metadata
+```
 
 The complete backup process is as follows:
 
@@ -54,7 +75,27 @@ The complete backup process is as follows:
 
 The process of a cluster snapshot restore is as follows:
 
-![snapshot restore process design](/media/br/br-snapshot-restore-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant PD
+    participant TiKV
+    participant Storage
+
+    User->>BR: Run `br restore`
+    BR->>PD: Pause Region schedule
+    BR->>TiKV: Restore schema
+    BR->>PD: Split and scatter Regions
+    BR->>TiKV: Request TiKV to restore data
+    loop TiKV handle restore request
+        TiKV->>Storage: Download SST
+        TiKV->>TiKV: Rewrite KVs
+        TiKV->>TiKV: Ingest SST
+    end
+    TiKV-->>BR: Report restore result
+    BR->>BR: Handle all restore results
+```
 
 The complete restore process is as follows:
 

@@ -17,7 +17,35 @@ The log backup and PITR architecture is as follows:
 
 The process of a cluster log backup is as follows:
 
-![BR log backup process design](/media/br/br-log-backup-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant PD
+    participant TiKV
+    participant TiDB
+    participant Storage
+
+    User->>BR: Run `br log start`
+    BR->>PD: Register log backup task
+    TiKV->>PD: Fetch log backup task
+    par TiKV handle the local log backup task
+        loop
+            TiKV->>TiKV: Read kv change data
+            TiKV->>PD: Fetch global checkpoint ts
+            TiKV->>TiKV: Generate local metadata
+            TiKV->>Storage: Upload log data & metadata
+            TiKV->>PD: Configure GC
+        end
+    and
+        loop
+            TiDB->>TiKV: Watch backup progress
+            TiDB->>PD: Report global checkpoint ts
+        end
+    end
+    User->>BR: Run `br log status`
+    BR->>PD: Fetch status of log backup task
+```
 
 System components and key concepts involved in the log backup process:
 
@@ -57,7 +85,29 @@ The complete backup process is as follows:
 
 The process of PITR is as follows:
 
-![Point-in-time recovery process design](/media/br/pitr-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant TiKV
+    participant PD
+    participant Storage
+
+    User->>BR: Run `br restore point`
+    BR->>TiKV: Restore full data
+    loop restore log data
+        BR->>Storage: Read backup data
+        BR->>PD: Fetch Region info
+        BR->>TiKV: Request TiKV to restore data
+        loop TiKV handle restore request
+            TiKV->>Storage: Download KVs
+            TiKV->>TiKV: Rewrite KVs
+            TiKV->>TiKV: Apply KVs
+        end
+        TiKV-->>BR: Report restore result
+        BR->>BR: Handle all restore results
+    end
+```
 
 The complete PITR process is as follows:
 
