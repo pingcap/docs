@@ -108,7 +108,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 </div>
 <div label="{{{ .premium }}}">
 
-1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
