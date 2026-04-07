@@ -36,7 +36,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     1. Select a project for your TiDB Cloud Dedicated cluster. If there is no project in your organization, you can create one by clicking **Create a Project**.
     2. Enter a name for your TiDB Cloud Dedicated cluster.
-    3. Choose a cloud provider and a region.
+    3. Choose a cloud provider and a region where you want to host your cluster.
 
         > **Note:**
         >

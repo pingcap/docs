@@ -13,10 +13,10 @@ Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com
 
 TiDB Cloud uses a hierarchical structure based on organizations, projects, and resources to help you manage users and TiDB deployments.
 
-- An organization is a top level entity (such as a company or a customer) you created to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#projects), and [resources](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource).
+- An organization is a top-level entity (such as a company or a customer) that you use to manage your TiDB Cloud accounts (including a management account with any number of member accounts), [projects](#projects), and [resources](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource).
 - A project is a container for TiDB Cloud resources.
 
-    - For {{{ .starter }}} and Essential instances, a project is a logical container and optional, which means you can either group these instances in a project or keep these instances at the organization level.
+    - For {{{ .starter }}} and Essential instances, a project is an optional logical container, which means you can either group these instances in a project or keep these instances at the organization level.
     - For {{{ .dedicated }}} clusters, a project is infrastructure-bound and required, which means {{{ .dedicated }}} clusters must be grouped in projects for management purposes.
 - A resource in TiDB Cloud can be either a TiDB X instance (for example, {{{ .starter }}} or {{{ .essential }}}) or a {{{ .dedicated }}} cluster.
 
@@ -267,7 +267,7 @@ To rename a project, take the following steps:
 
     > **Tip:**
     >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the project view, locate the table of your target project, click **...** in the upper-right corner of the table, and then click **Rename**.
 
@@ -289,7 +289,7 @@ To invite a member to a project, take the following steps:
 
     > **Tip:**
     >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the project view, locate the table of your target project, click **...** in the upper-right corner of the table, and then click **Invite**.
 
@@ -307,7 +307,7 @@ To invite a member to a project, take the following steps:
 
 > **Note:**
 >
-> The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
+> The verification link in the email will expire in 24 hours. If the invited user doesn't receive the email, click **Resend**.
 
 ### Remove project access for a user
 

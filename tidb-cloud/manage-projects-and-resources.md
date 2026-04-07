@@ -61,7 +61,7 @@ To view your TiDB Cloud resources grouped by projects, click the **Project view*
 
 > **Tip:**
 >
-> If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
+> If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 In the project view, you can see the projects you belong to in the organization:
 
@@ -73,7 +73,7 @@ In the project view, you can see the projects you belong to in the organization:
 
 > **Note:**
 >
-> - For free trial users, you cannot create a new project.
+> - Free trial users cannot create new projects.
 > - For TiDB X instances, creating a project is optional. For TiDB Cloud Dedicated clusters, you must use the default project or create new projects to manage them.
 
 If you are in the `Organization Owner` role, you can create projects in your organization.
@@ -84,7 +84,7 @@ To create a new project, take the following steps:
 
     > **Tip:**
     >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the displayed dialog, enter a project name.
 
@@ -103,7 +103,7 @@ To manage a project, take the following steps:
 
     > **Tip:**
     >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organizations first.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the project view, locate your target project, and then manage it as follows:
 

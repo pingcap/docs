@@ -89,7 +89,7 @@ To create an API key for a Data App, perform the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, to navigate to the **Data Service** page of your target project, click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click ... for your target project, and then click **Data Service**.
+    > If you have multiple projects, to navigate to the **Data Service** page of your target project, click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your target project, and then click **Data Service**.
 
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, click **Create API Key**.

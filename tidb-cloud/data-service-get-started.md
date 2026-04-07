@@ -27,7 +27,7 @@ Before creating a Data App, make sure that you have created a [{{{ .starter }}}]
 
 Creating a sample Data App is the best way to get started with Data Service. If your project does not have any Data App yet, you can follow the on-screen instructions on the **Data Service** page to create a sample Data App and use this App to explore Data Service features.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click ... for your project, and then click **Data Service**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your project, and then click **Data Service**.
 
 2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
 
@@ -51,7 +51,7 @@ To get started with Data Service, you can also create your own Data App, and the
 
  To create a Data App, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click ... for your project, and then click **Data Service**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your project, and then click **Data Service**.
 
 2. On the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 
