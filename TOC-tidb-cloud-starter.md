@@ -208,6 +208,7 @@
     - Attributes
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
+      - [_tidb_rowid](/tidb-rowid.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
     - [Literal Values](/literal-values.md)
     - [Schema Object Names](/schema-object-names.md)
@@ -467,7 +468,6 @@
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
   - serverless
-    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - [create](/tidb-cloud/ticloud-cluster-create.md)
     - [delete](/tidb-cloud/ticloud-cluster-delete.md)
     - [describe](/tidb-cloud/ticloud-cluster-describe.md)

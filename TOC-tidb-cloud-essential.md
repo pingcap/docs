@@ -58,6 +58,7 @@
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+    - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
     - Subscribe to Alert Notifications
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
@@ -160,6 +161,7 @@
     - [Connect to Amazon RDS](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
     - [Connect to Alibaba Cloud RDS](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
     - [Connect to Confluent Cloud on AWS](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+    - [Connect to Amazon MSK Provisioned](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
     - [Connect to Self-Hosted Kafka on Alibaba Cloud](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
     - [Connect to Self-Hosted Kafka on AWS](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
   - Audit Management
@@ -202,6 +204,7 @@
     - Attributes
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
+      - [_tidb_rowid](/tidb-rowid.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
     - [Literal Values](/literal-values.md)
     - [Schema Object Names](/schema-object-names.md)

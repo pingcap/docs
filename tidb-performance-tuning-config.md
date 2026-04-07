@@ -91,10 +91,6 @@ concurrent-send-snap-limit = 64
 concurrent-recv-snap-limit = 64
 snap-io-max-bytes-per-sec = "400MiB"
 
-[pessimistic-txn]
-in-memory-peer-size-limit = "32MiB"
-in-memory-instance-size-limit = "512MiB"
-
 [rocksdb]
 max-manifest-file-size = "256MiB"
 [rocksdb.titan]
@@ -123,7 +119,6 @@ soft-pending-compaction-bytes-limit = "192GiB"
 | Configuration item | Description | Note |
 | ---------| ---- | ----|
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
-| [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
 | [`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size) | Set the maximum size of the RocksDB Manifest file, which logs the metadata about SST files and database state changes. Increasing this size reduces the frequency of Manifest file rewrites, thereby minimizing their impact on foreground write performance. | The default value is `128MiB`. In environments with a large number of SST files (for example, hundreds of thousands), frequent Manifest rewrites can degrade write performance. Adjusting this parameter to a higher value, such as `256MiB` or larger, can help maintain optimal performance. |
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable it when write amplification is the primary bottleneck. Trade-offs include: <ul><li>Potential performance impact on primary key range scans.</li><li>Increased space amplification (up to 2x in the worst case).</li><li>Additional memory usage for blob cache.</li></ul>|
 | [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold) | Set the maximum size of the write queue in the TiKV scheduler. When the total size of pending write tasks exceeds this threshold, TiKV returns a `Server Is Busy` error for new write requests. | The default value is `100MiB`. In scenarios with high write concurrency or temporary write spikes, increasing this threshold (for example, to `512MiB`) can help accommodate the load. However, if the write queue continues to accumulate and exceeds this threshold persistently, it might indicate underlying performance issues that require further investigation. |

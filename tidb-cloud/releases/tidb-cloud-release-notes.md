@@ -8,6 +8,51 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## March 31, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support configuring a private endpoint allowlist.
+
+        You can now secure and manage private endpoint access more easily by configuring an allowlist in the [TiDB Cloud console](https://tidbcloud.com). In the allowlist, you can specify the AWS VPC Endpoint IDs and Alibaba Cloud endpoint IDs that are allowed to connect.
+
+        For more information, see the following documents:
+
+        - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 
+        - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+    - Enable Prometheus metrics integration (Preview).
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) manages Prometheus integrations at the cluster level. This feature lets you seamlessly ship metrics from your TiDB Cloud Essential cluster to Prometheus, enabling advanced alerting on a unified platform. 
+
+        For integration steps, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md).
+
+## March 24, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Add a **Public Endpoint** status to [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md) in TiDB Cloud to improve security tracking.
+
+**Console changes**
+
+- Support a logarithmic Y-axis to improve visualization for metrics with large value disparities. High-range and low-range fluctuations are clearly visible, making anomalies easier to identify.
+
+## March 10, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support Amazon MSK Provisioned in private link connections for dataflow scenarios.
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports creating private link connections to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster. This feature enables private network connectivity for changefeeds to Amazon MSK Provisioned clusters, without exposing traffic to the public internet.
+
+        For more information, see [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md).
+
 ## March 3, 2026
 
 **General changes**
