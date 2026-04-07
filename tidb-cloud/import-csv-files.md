@@ -110,7 +110,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Amazon S3**.
-    - **Source Files URI**:
+    - **Source URI**:
         - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://mybucket/myfolder/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://mybucket/myfolder/`.
     - **Credentials**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
@@ -121,11 +121,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
@@ -165,7 +165,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Google Cloud Storage**.
-    - **Source Files URI**:
+    - **Source URI**:
         - When importing one file, enter the source file URI in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `gs://mybucket/myfolder/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `gs://[bucket_name]/[data_source_folder]/`. For example, `gs://mybucket/myfolder/`.
     - **Credentials**: TiDB Cloud provides a unique Google Cloud Service Account ID on this page (such as `example-service-account@your-project.iam.gserviceaccount.com`). Grant this Service Account ID the necessary IAM permissions (such as `Storage Object Viewer`) on your GCS bucket within your Google Cloud project. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
@@ -174,11 +174,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
@@ -218,7 +218,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Azure Blob Storage**.
-    - **Source Files URI**:
+    - **Source URI**:
         - When importing one file, enter the source file URI in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`. For example, `https://myaccount.blob.core.windows.net/mycontainer/myfolder/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/`. For example, `https://myaccount.blob.core.windows.net/mycontainer/myfolder/`.
     - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage:
@@ -247,11 +247,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
