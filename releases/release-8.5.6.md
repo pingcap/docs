@@ -87,8 +87,6 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.6. Most changes in v8.5.6 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility adjustments, system variable updates, configuration parameter updates, and system table changes. Before upgrading, make sure to carefully review this section.
 
-### Behavior changes
-
 ### MySQL compatibility
 
 - Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
@@ -141,26 +139,16 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Return `404` instead of `200` when deleting a non-existent label [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
     - (dup): release-7.5.7.md > Improvements> PD - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
-+ TiFlash
-
 + Tools
-
-    + Backup & Restore (BR)
-
-    + TiCDC
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 2 notes-->
 
         - Support MySQL 8.4 as an upstream data source for DM by adapting to the new terminology and version detection logic introduced in this version [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
         - Add foreign key causal dependency support in DM syncer to ensure parent-to-child execution order of row changes in multi-worker scenarios [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
 
-    + TiDB Lightning
-
     + Dumpling <!--tw@Oreoxmt: 1 note-->
 
         - Support exporting data from MySQL 8.4 by adopting the updated MySQL binary log terminology [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
-
-    + TiUP
 
 ## Bug Fixes
 
@@ -218,5 +206,3 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
         - Fix the issue that DM does not advance the global checkpoint position after an upstream binlog file rotation [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929)
         - Fix the issue that, when processing updates on tables with foreign key constraints in safe mode, DM might still incorrectly trigger foreign key cascades and cause unintended data deletion even if the primary key or unique key is not modified [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
         - Fix the issue that DM validator incorrectly returns validation errors when processing `UNSIGNED` columns [#12178](https://github.com/pingcap/tiflow/issues/12178) @[OliverS929](https://github.com/OliverS929)
-
-    + TiDB Lightning
