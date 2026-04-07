@@ -127,24 +127,24 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When you specify a directory in **Source URI**, TiDB Cloud selects the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When you specify a single file in **Source URI**, TiDB Cloud does not display the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option and automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
-    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
 
             - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
@@ -178,24 +178,24 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When you specify a directory in **Source URI**, TiDB Cloud selects the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When you specify a single file in **Source URI**, TiDB Cloud does not display the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option and automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
-    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
 
             - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
@@ -249,24 +249,24 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When you specify a directory in **Source URI**, TiDB Cloud selects the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When you specify a single file in **Source URI**, TiDB Cloud does not display the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option and automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **Parquet** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
-    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, unselect this option, and then fill in the following fields:
+    - To manually configure the mapping rules to associate your source Parquet files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].parquet` format. For example, `TableName.01.parquet`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
 
             - `my-data?.parquet`: matches all Parquet files that start with `my-data` followed by a single character, such as `my-data1.parquet` and `my-data2.parquet`.
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 

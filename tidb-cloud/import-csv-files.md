@@ -31,7 +31,7 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
     > - You only need to compress the data files, not the database or table schema files.
     > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
     > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and unselect **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** in the **Destination Mapping** step of [Step 4](#step-4-import-csv-files-to-tidb-cloud) to manually map your source files to a single target table.
+    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and deselect **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** in the **Destination Mapping** step of [Step 4](#step-4-import-csv-files-to-tidb-cloud) to manually map your source files to a single target table.
 
 ## Step 2. Create the target table schemas
 
@@ -121,17 +121,17 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When you specify a directory in **Source URI**, TiDB Cloud selects the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When you specify a single file in **Source URI**, TiDB Cloud does not display the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option and automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    - To manually configure the mapping rules to associate your source CSV files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
@@ -140,7 +140,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     If necessary, click **Edit CSV Configuration** to configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters, and specify whether your files contain a header row.
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
@@ -174,17 +174,17 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When you specify a directory in **Source URI**, TiDB Cloud selects the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When you specify a single file in **Source URI**, TiDB Cloud does not display the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option and automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    - To manually configure the mapping rules to associate your source CSV files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
@@ -193,7 +193,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     If necessary, click **Edit CSV Configuration** to configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters, and specify whether your files contain a header row.
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
@@ -247,17 +247,17 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    When you specify a directory in **Source URI**, TiDB Cloud selects the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option by default.
 
     > **Note:**
     >
-    > When a single file is specified in **Source URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
+    > When you specify a single file in **Source URI**, TiDB Cloud does not display the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option and automatically populates the **Source** field with the file name. In this case, you only need to enter the target database and table for data import.
 
     - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format. If your source folder includes schema files (such as `${db_name}-schema-create.sql` and `${db_name}.${table_name}-schema.sql`), TiDB Cloud uses them to create the target databases and tables when they do not already exist.
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    - To manually configure the mapping rules to associate your source CSV files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
@@ -266,7 +266,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     If necessary, click **Edit CSV Configuration** to configure the options according to your CSV files. You can set the separator and delimiter characters, specify whether to use backslashes for escaped characters, and specify whether your files contain a header row.
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
