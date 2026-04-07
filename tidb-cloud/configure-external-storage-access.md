@@ -49,24 +49,26 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
         2. Fill in the **File URI** field.
         3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
+    <CustomContent plan="starter,essential">
+
     - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
 
-        <CustomContent plan="starter,essential">
-
-        1. Click **Export data to...**  > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
+        1. Click **Export data to...** > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
         2. Fill in the **Folder URI** field.
         3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
-        </CustomContent>
+    </CustomContent>
 
-        <CustomContent plan="premium">
+    <CustomContent plan="premium">
+
+    - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
 
         1. Click **Export Data**.
         2. Choose **Amazon S3** in **Target Connection**.
         3. Fill in the **Folder URI** field.
         4. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
-        </CustomContent>
+    </CustomContent>
 
 3. Create a role ARN with an AWS CloudFormation template.
 
@@ -258,22 +260,24 @@ To create a SAS token using an Azure ARM template, take the following steps:
         2. Fill in the **Folder URI** field.
         3. In the **SAS Token** field, click **Click here to create a new one with Azure ARM template**.
 
+    <CustomContent plan="starter,essential">
+
     - If you want to export data to Azure Blob Storage:
 
-        <CustomContent plan="starter,essential">
-
-        1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
+        1. Click **Export data to...** > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
         2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field.
 
-        </CustomContent>
+    </CustomContent>
 
-        <CustomContent plan="premium">
+    <CustomContent plan="premium">
+
+    - If you want to export data to Azure Blob Storage:
 
         1. Click **Export Data**.
         2. Choose **Azure Blob Storage** in **Target Connection**.
         3. Click **Click here to create a new one with Azure ARM template** under the SAS Token field.
 
-        </CustomContent>
+    </CustomContent>
 
 3. Create a SAS token with the Azure ARM template.
 
