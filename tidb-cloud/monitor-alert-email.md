@@ -95,7 +95,6 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 
 </CustomContent>
 
-
 If an alert condition remains unchanged, the alert sends email notifications every three hours.
 
 ## Unsubscribe from alert notifications
