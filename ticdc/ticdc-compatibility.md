@@ -95,7 +95,7 @@ tiup cdc:v8.5.5 cli changefeed resume \
 
 ### Upgrade recommendations for the TiCDC new architecture
 
-The TiCDC new architecture can keep changefeeds running during a TiDB rolling upgrade, but only if TiCDC was already using the new architecture before the upgrade.
+The TiCDC new architecture can keep changefeeds running during a TiDB rolling upgrade, but only if TiCDC has already been using the new architecture before the upgrade.
 
 If you need to upgrade or switch between the TiCDC classic and new architectures, see [Upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
 
