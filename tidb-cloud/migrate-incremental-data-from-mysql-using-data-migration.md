@@ -5,7 +5,7 @@ summary: Data Migration を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 # データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、クラウドプロバイダー（Amazon Aurora MySQL、Amazon Relational Database Service（RDS）、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS）上のMySQL互換データベースまたはセルフホストソースデータベースから増分データを移行する方法について説明します。<customcontent plan="dedicated"> TiDB Cloud専用</customcontent><customcontent plan="essential">TiDB Cloudエッセンシャル</customcontent>TiDB Cloudコンソールのデータ移行機能を使用します。
+このドキュメントでは、クラウドプロバイダー（Amazon Aurora MySQL、Amazon Relational Database Service（RDS）、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS）上のMySQL互換データベースまたはセルフホストソースデータベースから増分データを移行する方法について説明します。<CustomContent plan="dedicated"> TiDB Cloud専用</CustomContent><CustomContent plan="essential">TiDB Cloudエッセンシャル</CustomContent>TiDB Cloudコンソールのデータ移行機能を使用します。
 
 <CustomContent plan="essential">
 
@@ -162,7 +162,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     -   **データ ソース**: データ ソースの種類。
     -   **リージョン**: データ ソースのリージョン。クラウド データベースにのみ必要です。
-    -   **接続方法**: データ ソースの接続方法。<customcontent plan="dedicated">現在、接続方法に応じて、パブリック IP、VPC ピアリング、またはプライベート リンクを選択できます。</customcontent><customcontent plan="essential">接続方法に応じて、パブリック IP またはプライベート リンクを選択できます。</customcontent>
+    -   **接続方法**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリック IP、VPC ピアリング、またはプライベート リンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリック IP またはプライベート リンクを選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
 

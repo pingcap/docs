@@ -5,7 +5,7 @@ summary: TiDB Cloudを使用して概念実証 (PoC) を実行する方法につ
 
 # TiDB Cloudで概念実証 (PoC) を実行する {#perform-a-proof-of-concept-poc-with-tidb-cloud}
 
-TiDB Cloudは、 TiDBの優れた機能をすべて備えたフルマネージドクラウドデータベースを提供する、Database-as-a-Service（DBaaS）製品です。データベースの複雑な管理に煩わされることなく、アプリケーション開発に集中できます。<customcontent language="en,zh"> TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、Alibaba Cloud で利用できます。</customcontent><customcontent language="ja"> TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure で利用できます。</customcontent>
+TiDB Cloudは、 TiDBの優れた機能をすべて備えたフルマネージドクラウドデータベースを提供する、Database-as-a-Service（DBaaS）製品です。データベースの複雑な管理に煩わされることなく、アプリケーション開発に集中できます。<CustomContent language="en,zh"> TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、Alibaba Cloud で利用できます。</CustomContent><CustomContent language="ja"> TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure で利用できます。</CustomContent>
 
 TiDB Cloud がお客様のビジネスニーズに最適かどうかを判断するには、概念実証（PoC）を開始することが最適な方法です。また、短期間でTiDB Cloudの主要な機能に慣れることができます。パフォーマンステストを実行することで、ワークロードがTiDB Cloud上で効率的に実行できるかどうかを確認できます。さらに、データの移行や構成の調整に必要な労力を評価することもできます。
 
