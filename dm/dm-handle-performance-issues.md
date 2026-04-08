@@ -115,10 +115,4 @@ If the bottleneck exists in downstream execution, check the TiDB or TiKV cluster
 - If TiKV write path metrics such as write RPC latency, scheduler CPU usage, apply CPU usage, write stall, or PD TSO latency are high, check TiKV or PD before tuning DM.
 - If the network latency between DM and the downstream database is large, resolve the network issue first.
 
-After confirming that the downstream TiDB or TiKV cluster is not saturated, adjust the task configuration according to the actual scenario:
-
-- If the DM-worker still has enough CPU resources, increase `worker-count` appropriately.
-- If the upstream workload contains many bulk `INSERT`, `UPDATE`, or `DELETE` statements, consider enabling `multiple-rows` in the task configuration.
-- If `multiple-rows` is already enabled but `transaction execution latency` is still high, check `replication transaction batch` and reduce `batch` appropriately.
-
 For more information about configuration optimization, refer to [Optimize Configuration of DM](/dm/dm-tune-configuration.md).
