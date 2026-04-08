@@ -84,7 +84,7 @@ The Binlog replication unit reads binlog events either from the upstream MySQL/M
 
 The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-table-routing.md) conversion from binlog event data. The related metric is `transform binlog event duration`.
 
-This metric is mainly affected by the number of rows and the complexity of the upstream write operations. Take the `INSERT INTO` statement as an example. Converting a single `VALUES` clause and converting many `VALUES` clauses consume different amounts of time. If `transform binlog event duration` is high for a period of time while `read binlog event duration` and `transaction execution latency` stay low, check the conversion path first.
+This metric is affected by the number of rows and the complexity of the upstream write operations. Take the `INSERT INTO` statement as an example. Converting a single `VALUES` clause and converting many `VALUES` clauses consume different amounts of time. If `transform binlog event duration` is high for a period of time, combine it with `transaction execution latency`, task state, and DM logs before determining whether the bottleneck is in event conversion or execution.
 
 ### Write SQL statements to downstream
 
@@ -106,7 +106,7 @@ If `transaction execution latency` is high for a period of time, check the downs
 
 To view the time consumed to write a single statement such as `BEGIN`, `INSERT`, `UPDATE`, `DELETE`, or `COMMIT` to the downstream, you can also check `statement execution latency`.
 
-If `ideal QPS` decreases and `transaction execution latency` increases, the downstream execution capacity seen by DM is decreasing. In this case, check the downstream execution path first.
+`ideal QPS` is affected by transaction execution time and SQL batching. Use it together with `transaction execution latency`, `replication transaction batch`, and the throughput trend. Do not use `ideal QPS` alone to determine whether the downstream execution path is the bottleneck.
 
 If the bottleneck exists in downstream execution, check the TiDB or TiKV cluster before changing DM configurations:
 
