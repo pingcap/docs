@@ -68,6 +68,8 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 
 ## Compatibility
 
+Except as described in the following special cases, the TiCDC new architecture is fully compatible with the classic architecture.
+
 ### DDL progress tracking table
 
 In the TiCDC classic architecture, DDL replication operations are strictly serial, thus the replication progress can be tracked only using the changefeed's `CheckpointTs`. In the new architecture, however, TiCDC replicates DDL changes for different tables in parallel whenever possible to improve DDL replication efficiency. To accurately record the DDL replication progress of each table in a downstream MySQL-compatible database, the TiCDC new architecture creates a table named `tidb_cdc.ddl_ts_v1` in the downstream database, specifically storing the DDL replication progress information of the changefeed.
