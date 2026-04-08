@@ -31,7 +31,6 @@ You can delete a TiDB Cloud resource at any time by performing the following ste
     - For more information about how to back up {{{ .essential }}} instances, see [Back Up and Restore {{{ .essential }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
     - For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
-
     > **Note:**
     >
     > [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances do not support restoring data after the deletion. If you want to delete a {{{ .starter }}} instance and restore its data in the future, see [Export Data from {{{ .starter }}}](/tidb-cloud/serverless-export.md) to export your data as a backup.
