@@ -173,7 +173,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Source URI**:
         - When importing one file, enter the source file URI in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `gs://mybucket/myfolder/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `gs://[bucket_name]/[data_source_folder]/`. For example, `gs://mybucket/myfolder/`.
-    - **Credentials**: TiDB Cloud provides a unique Google Cloud Service Account ID on this page (such as `example-service-account@your-project.iam.gserviceaccount.com`). Grant this Service Account ID the necessary IAM permissions (such as `Storage Object Viewer`) on your GCS bucket within your Google Cloud project. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
+    - **Google Cloud Service Account ID**: TiDB Cloud provides a unique Google Cloud Service Account ID on this page (such as `example-service-account@your-project.iam.gserviceaccount.com`). Grant this Service Account ID the necessary IAM permissions (such as `Storage Object Viewer`) on your GCS bucket within your Google Cloud project. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
 
 4. Click **Next**.
 
@@ -235,7 +235,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
             2. Navigate to your storage account and click **Overview** > **JSON View**.
             3. Copy the value of the `id` property. The resource ID is in the format `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`.
 
-    - **Credentials**: enter an account SAS token to allow TiDB Cloud to access the source files in your Azure Blob Storage container. If you do not have one yet, click **Click here to create a new one with Azure ARM template** and follow the instructions on the screen, or manually create an account SAS token. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+    - **SAS Token**: enter an account SAS token to allow TiDB Cloud to access the source files in your Azure Blob Storage container. If you do not have one yet, click **Click here to create a new one with Azure ARM template** and follow the instructions on the screen, or manually create an account SAS token. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Next**.
 

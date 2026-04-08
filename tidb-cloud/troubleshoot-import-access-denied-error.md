@@ -21,7 +21,8 @@ The TiDB Cloud Account ID and TiDB Cloud External ID are environment-specific an
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), go to your target cluster, and then click **Data** > **Import** in the left navigation pane.
 2. Click **Import data from Cloud Storage**.
-3. In the **Credentials** section, click **Click here to create new one with AWS CloudFormation** to open the **Add New Role ARN** dialog, and then expand **Having trouble? Create Role ARN manually** to display the **TiDB Cloud Account ID** and **TiDB Cloud External ID** for this cluster.
+3. On the **Import Data from Cloud Storage** page, select **Amazon S3** as the cloud provider.
+4. In the **Credentials** section, click **Click here to create new one with AWS CloudFormation** to open the **Add New Role ARN** dialog, and then expand **Having trouble? Create Role ARN manually** to display the **TiDB Cloud Account ID** and **TiDB Cloud External ID** for this cluster.
 
 Then verify the trust entity on your IAM role:
 

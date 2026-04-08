@@ -163,7 +163,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     3. Click **Import data from Cloud Storage**.
 
-    4. On the **Import Data from Cloud Storage** page, set **Storage Provider** to **Google Cloud Storage**, and then copy the Google Cloud Service Account ID displayed under **Credentials** for later use.
+    4. On the **Import Data from Cloud Storage** page, set **Storage Provider** to **Google Cloud Storage**, and then copy the Google Cloud Service Account ID for later use.
 
 2. In the Google Cloud console, create an IAM role for your GCS bucket.
 
