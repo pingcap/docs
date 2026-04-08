@@ -15,7 +15,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### Performance
 
-- Foreign key checks now support shared locks [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/you06) **tw@qiancai** <!--2085-->
+- Foreign key checks now support shared locks [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/you06)
 
     In pessimistic transactions, when you run `INSERT` or `UPDATE` on a child table with foreign key constraints, foreign key checks lock the corresponding parent table rows with exclusive locks by default. In high-concurrency write scenarios on the child table, if many transactions access the same parent table rows, severe lock contention can occur.
 
@@ -25,7 +25,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### Stability
 
-- The feature of setting the maximum limit on resource usage for background tasks of resource control becomes generally available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv) **tw@hfxsd** <!--1933-->
+- The feature of setting the maximum limit on resource usage for background tasks of resource control becomes generally available (GA) [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv)
 
     TiDB resource control can identify and lower the priority of background tasks. In certain scenarios, you might want to limit the resource consumption of background tasks, even when resources are available. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set the maximum percentage of resources that background tasks can consume. Each node will keep the resource usage of all background tasks below this percentage. This feature enables precise control over resource consumption for background tasks, further enhancing cluster stability.
 
@@ -35,7 +35,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### Observability
 
-- Support defining multi-dimensional, fine-grained trigger rules for slow query logs [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) **tw@lilin90** <!--2068-->
+- Support defining multi-dimensional, fine-grained trigger rules for slow query logs [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
 
     Before v8.5.6, the main way to identify slow queries in TiDB is to set the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) system variable. This mechanism provides only coarse-grained control over slow query log triggering because it applies globally at the instance level and does not support fine-grained control at the session or SQL level. In addition, it supports only one trigger condition, execution time (`Query_time`), which cannot meet the need to capture slow query logs more precisely in complex scenarios.
 
@@ -43,7 +43,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries).
 
-- The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87) **tw@qiancai** <!--2398-->
+- The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
 
     In earlier versions, TiDB Dashboard identified Top SQL queries based only on CPU-related metrics, making it difficult to identify performance bottlenecks related to network or storage access in complex scenarios.
 
@@ -61,7 +61,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 
-- Support using table aliases in the `FOR UPDATE OF` clause [#63035](https://github.com/pingcap/tidb/issues/63035) @[cryo-zd](https://github.com/cryo-zd) **tw@lilin90** <!--2350-->
+- Support using table aliases in the `FOR UPDATE OF` clause [#63035](https://github.com/pingcap/tidb/issues/63035) @[cryo-zd](https://github.com/cryo-zd)
 
     Before v8.5.6, when a `SELECT ... FOR UPDATE OF <table>` statement references a table alias in the locking clause, TiDB might fail to resolve the alias correctly and return the `table not exists` error even if the alias is valid.
 
@@ -71,7 +71,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### DB operations
 
-- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58944](https://github.com/pingcap/tidb/issues/58944) @[tangenta](https://github.com/tangenta) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--2406-->
+- Support specifying the maximum number of nodes for Distributed eXecution Framework (DXF) tasks [#58944](https://github.com/pingcap/tidb/issues/58944) @[tangenta](https://github.com/tangenta) @[D3Hunter](https://github.com/D3Hunter)
 
     Before v8.5.6, TiDB does not provide a way to limit the number of nodes used by a distributed execution task. When you want to control resource usage for DXF, TiDB does not provide a dedicated option to constrain the maximum node count.
 
@@ -81,7 +81,7 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 ### Data Migration
 
-- (dup): release-9.0.0.md > # Data migration * Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
+- Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
 
 ## Compatibility changes
 
@@ -126,37 +126,37 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 ## Improvements
 
-+ TiDB <!--tw@qiancai: 5 notes-->
++ TiDB
 
     - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--2414-->
     - Support column-level privileges in `GRANT` and `REVOKE` [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve the performance of privilege update operations such as `GRANT` and `REVOKE` in deployments with a large number of column-level privilege entries [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
 
-+ TiKV <!--tw@qiancai: 4 notes-->
++ TiKV
 
     - Introduce a load-based compaction mechanism, which detects MVCC read overhead and prioritizes compaction for Regions with higher read cost to improve query performance [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     - Optimize the stale range cleanup logic during cluster scale-out and scale-in operations by deleting stale keys directly instead of cleaning them up through SST file ingestion, thereby reducing the impact on online request latency [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
     - Support collecting TiKV network traffic and logical I/O metrics for Top SQL, which helps users diagnose SQL performance issues more accurately [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
 
-+ PD <!--tw@Oreoxmt: 1 note-->
++ PD
 
     - Return `404` instead of `200` when deleting a non-existent label [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
-    - (dup): release-7.5.7.md > Improvements> PD - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 + Tools
 
-    + TiDB Data Migration (DM) <!--tw@lilin90: 2 notes-->
+    + TiDB Data Migration (DM)
 
         - Add foreign key causal dependency support in DM syncer to ensure parent-to-child execution order of row changes in multi-worker scenarios [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
 
 ## Bug fixes
 
-+ TiDB <!--tw@lilin90: the following 7 notes-->
++ TiDB
 
     - Fix the issue that upgrading from `release-8.5-20250606-v8.5.2` to the upstream `release-8.5` might skip the PITR metadata upgrade and cause PITR operations to fail [#66994](https://github.com/pingcap/tidb/issues/66994) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that after executing `EXCHANGE PARTITION`, non-unique global indexes or nullable unique global indexes on non-clustered partitioned tables might become inconsistent and return incomplete results [#65289](https://github.com/pingcap/tidb/issues/65289) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that `KILL QUERY` might incorrectly terminate idle connections [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)(https://github.com/CbcWestwolf) <!--tw@hfxsd: the following 8 notes-->
+    - Fix the issue that `KILL QUERY` might incorrectly terminate idle connections [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)(https://github.com/CbcWestwolf)
     - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the value of `tidb_service_scope` is not converted to lowercase when set [#66749](https://github.com/pingcap/tidb/issues/66749) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that affinity tables are not displayed after TiDB restarts [#66284](https://github.com/pingcap/tidb/issues/66284) @[lcwangchao](https://github.com/lcwangchao)
@@ -164,7 +164,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Fix the issue that statistics might not be updated due to abnormal updates of `modify_count` [#65426](https://github.com/pingcap/tidb/issues/65426) @[ti-chi-bot](https://github.com/ti-chi-bot)
     - Fix the issue that a pessimistic transaction might be unexpectedly rolled back due to a keep-alive mechanism failure when its first statement acquires locks in fair locking mode [#66571](https://github.com/pingcap/tidb/issues/66571) @[MyonKeminta](https://github.com/MyonKeminta)
 
-+ TiKV <!--tw@Oreoxmt: 7 notes-->
++ TiKV
 
     - Fix the memory leak issue in crossbeam skiplist [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     - Fix the issue that global indexes on non-unique columns of partitioned tables might become inconsistent and return incorrect results in some cases [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
@@ -172,14 +172,14 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Fix the issue that follower reads might remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
     - Fix the issue that resolved-ts task backlogs might cause OOM when the resolved-ts worker is busy [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
     - Fix the issue that long-tail follower read latency might occur during leader transfer by retrying read-index requests earlier and adding a dedicated retry interval setting [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
-    - (dup): release-5.1.4.md > Bug fixes> TiKV - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
+    - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
 
-+ PD <!--tw@hfxsd: 2 notes-->
++ PD
 
     - Fix a panic issue that might occur when executing `DISTRIBUTE TABLE` in scenarios with a large number of Merge Region operators [#10293](https://github.com/tikv/pd/issues/10293) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that configuring Store Limit might not take effect immediately [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
 
-+ TiFlash <!--tw@hfxsd: 3 notes-->
++ TiFlash
 
     - Fix a potential data inconsistency issue between TiFlash and TiKV after executing a DDL statement to remove the `NOT NULL` constraint of a column [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that the Raft throughput metric in the Grafana dashboard might display an abnormally large value [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
@@ -187,21 +187,21 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + Tools
 
-    + Backup & Restore (BR) <!--tw@lilin90: 4 notes-->
+    + Backup & Restore (BR)
 
         - Fix the issue that `flush_ts` might be `0` in log backup [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that BR might fail during multipart uploads when accessing Google Cloud Storage via Amazon S3-compatible APIs with S3-style credentials, due to a missing Content-Length header [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that the BR `restore point` might remain stuck in the `waiting for schema info finishes reloading` state for a long time and then fail due to timeout after 15 minutes [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
         - Fix the issue that BR cannot correctly pre-split Regions when restoring tables with the `SHARD_ROW_ID_BITS`, `PRE_SPLIT_REGIONS`, and `merge_option` attributes [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
 
-    + TiCDC <!--tw@Oreoxmt: 4 notes-->
+    + TiCDC
 
         - Fix the issue that changefeeds might repeatedly create invalid dispatchers after the server restarts [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
         - Fix the issue that TiCDC fails to replicate table renaming operations correctly when the upstream TiDB version is v8.1.x or earlier [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
         - Fix the issue that TiKV might crash during data scanning when CDC is enabled [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         - Support Azure Managed Identity authentication for Azure Blob Storage and fix the issue that uploads to cloud storage might get stuck [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
-    + TiDB Data Migration (DM) <!--tw@qiancai: 3 notes-->
+    + TiDB Data Migration (DM)
 
         - Fix the issue that DM does not advance the global checkpoint position after an upstream binlog file rotation [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929)
         - Fix the issue that, when processing updates on tables with foreign key constraints in safe mode, DM might still incorrectly trigger foreign key cascades and cause unintended data deletion even if the primary key or unique key is not modified [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
