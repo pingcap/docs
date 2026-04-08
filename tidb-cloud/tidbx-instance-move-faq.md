@@ -7,7 +7,7 @@ summary: Learn why TiDB Cloud prompts you to move or convert your {{{ .starter }
 
 TiDB X instances are service-oriented TiDB Cloud offerings built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), including {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
 
-This FAQ explains why the [TiDB Cloud console](https://tidbcloud.com/) prompts you to move your {{{ .starter }}} and Essential instances to TiDB X projects, and what changes occur during the migration process, and what follow-up actions you need to take.
+This FAQ explains why the [TiDB Cloud console](https://tidbcloud.com/) prompts you to move your {{{ .starter }}} and Essential instances to TiDB X projects, what changes occur during the migration process, and what follow-up actions you need to take.
 
 ## Why does the TiDB Cloud console prompt you to move your {{{ .starter }}} and Essential instances?
 
