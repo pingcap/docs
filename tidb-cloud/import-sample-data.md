@@ -20,7 +20,6 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**.
 2. Click **Import data from Cloud Storage**.
 
 3. On the **Import Data from Cloud Storage** page, provide the following information:
