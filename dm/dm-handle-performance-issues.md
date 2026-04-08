@@ -55,35 +55,38 @@ The main operations of the Load unit are to read the SQL file data from the loca
 
 ## Binlog replication unit
 
-To diagnose performance issues in the Binlog replication unit, you can check the `binlog file gap between master and syncer` monitoring metric. For more information about this metric, refer to [monitoring metrics of the Binlog replication](/dm/monitor-a-dm-cluster.md#binlog-replication).
+To diagnose performance issues in the Binlog replication unit, first check `binlog file gap between master and syncer`. For more information about this metric, refer to [monitoring metrics of the Binlog replication](/dm/monitor-a-dm-cluster.md#binlog-replication).
 
-- If this metric is greater than 1 for a long time, it usually indicates that there is a performance issue.
-- If this metric is 0, it usually indicates that there is no performance issue.
+- If this metric is greater than 1 for a period of time, continue locating the bottleneck.
+- If this metric remains 0, the Binlog replication unit does not show file-level lag accumulation.
 
-When `binlog file gap between master and syncer` is greater than 1 for a long time, check `binlog file gap between relay and syncer` to figure out which unit the latency mainly exists in. If this value is usually 0, the latency might exist in the relay log unit. Then you can refer to [relay log unit](#relay-log-unit) to resolve this issue; otherwise, continue checking the Binlog replication unit.
+When `binlog file gap between master and syncer` is greater than 1 for a period of time, check `binlog file gap between relay and syncer`:
+
+- If `binlog file gap between relay and syncer` remains low, the latency is more likely to exist in the relay log unit. In this case, refer to [relay log unit](#relay-log-unit).
+- If `binlog file gap between relay and syncer` also keeps increasing, continue checking the Binlog replication unit.
 
 ### Locate the bottleneck by combining metrics
 
-Besides `binlog file gap between master and syncer`, you can also check `replicate lag gauge`, `remaining time to sync`, `DML queue remain length`, and `ideal QPS`.
+Besides `binlog file gap between master and syncer`, you can also check `replicate lag gauge`, `remaining time to sync`, `DML queue remain length`, `transaction execution latency`, and `ideal QPS`.
 
-- If `replicate lag gauge` or `remaining time to sync` keeps increasing while `DML queue remain length` stays low, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. A low DML queue length only means that jobs are not accumulating in the queue.
-- If `DML queue remain length` keeps increasing and `transaction execution latency` is large, check the path that writes SQL statements to the downstream first.
+- If `replicate lag gauge` or `remaining time to sync` keeps increasing while `DML queue remain length` stays low, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. A low DML queue length only means that DML jobs are not accumulating in the queue.
+- If `DML queue remain length` keeps increasing and `transaction execution latency` is also increasing, check the path that writes SQL statements to the downstream first.
 - If `binlog event QPS` drops to 0 and `replicate lag gauge` keeps increasing, check the task state, `shard lock resolving`, and DM logs to see whether the task is blocked by a downstream DDL, a shard DDL lock, or a long-running transaction.
-- If `ideal QPS` decreases and `transaction execution latency` increases, check the downstream execution path first.
+- If `ideal QPS` decreases and `transaction execution latency` increases, the downstream execution capacity seen by DM is decreasing. In this case, check the downstream execution path first.
 
 ### Read binlog data
 
-The Binlog replication unit decides whether to read the binlog event from the upstream MySQL/MariaDB or from the relay log file according to the configuration. The related performance metric is `read binlog event duration`, which generally ranges from a few microseconds to tens of microseconds.
+The Binlog replication unit reads binlog events either from the upstream MySQL/MariaDB or from the relay log file, depending on the configuration. The related performance metric is `read binlog event duration`.
 
-- If DM's Binlog replication processing unit reads the binlog event from upstream MySQL/MariaDB, to locate and resolve the issue, refer to [read binlog data](#read-binlog-data) in the "relay log unit" section.
+- If the Binlog replication unit reads binlog events from upstream MySQL/MariaDB, to locate and resolve the issue, refer to [read binlog data](#read-binlog-data) in the "relay log unit" section.
 
-- If DM's Binlog replication processing unit reads the binlog event from the relay log file, when `binlog event size` is not too large, the value of `read binlog event duration` should be microseconds. If `read binlog event duration` is too large, check the read performance of the disk. To avoid low write performance, use local SSDs for DM-worker.
+- If the Binlog replication unit reads binlog events from the relay log file and `read binlog event duration` stays high, check the read performance of the disk. To avoid low disk I/O performance, use local SSDs for DM-worker.
 
 ### binlog event conversion
 
 The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-table-routing.md) conversion from binlog event data. The related metric is `transform binlog event duration`.
 
-The duration is mainly affected by the write operations upstream. Take the `INSERT INTO` statement as an example, the time consumed to convert a single `VALUES` greatly differs from that to convert a lot of `VALUES`. The time consumed might range from tens of microseconds to hundreds of microseconds. However, usually this is not a bottleneck of the system.
+This metric is mainly affected by the number of rows and the complexity of the upstream write operations. Take the `INSERT INTO` statement as an example. Converting a single `VALUES` clause and converting many `VALUES` clauses consume different amounts of time. If `transform binlog event duration` is high for a period of time while `read binlog event duration` and `transaction execution latency` stay low, check the conversion path first.
 
 ### Write SQL statements to downstream
 
@@ -91,17 +94,17 @@ When the Binlog replication unit writes the converted SQL statements to the down
 
 After constructing SQL statements from binlog event, DM uses `worker-count` queues to concurrently write these statements to the downstream. However, to avoid too many monitoring entries, DM performs the modulo `8` operation on the IDs of concurrent queues. This means that all concurrent queues correspond to one item from `q_0` to `q_7`.
 
-`DML queue remain length` indicates in the concurrent processing queue, the number of DML statements that have not been consumed and have not started to be written downstream. Ideally, the curves corresponding to each `q_*` are almost the same. If not, it indicates that the concurrent load is extremely unbalanced.
+`DML queue remain length` indicates, in each concurrent processing queue, the number of DML statements that have not been consumed and have not started to be written downstream. Ideally, the curves corresponding to each `q_*` are close to each other. If not, the concurrent load is unbalanced.
 
 If the load is not balanced, confirm whether tables need to be migrated have primary keys or unique keys. If these keys do not exist, add the primary keys or the unique keys; if these keys do exist while the load is not balanced, upgrade DM to v1.0.5 or later versions.
 
-- When there is no noticeable latency in the entire data migration link, the corresponding curve of `DML queue remain length` is almost always 0, and the maximum does not exceed the value of `batch` in the task configuration file.
+- When there is no noticeable latency in the entire data migration link, the corresponding curve of `DML queue remain length` is close to 0.
 
-- If you find a noticeable latency in the data migration link, and the curve of `DML queue remain length` corresponding to each `q_*` is almost the same and is almost always 0, it indicates that DML jobs are not accumulating in the queue. In this case, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. For troubleshooting, refer to the previous sections of this document.
+- If you find a noticeable latency in the data migration link, and the curve of `DML queue remain length` corresponding to each `q_*` is close to 0, it indicates that DML jobs are not accumulating in the queue. In this case, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. For troubleshooting, refer to the previous sections of this document.
 
 If the corresponding curve of `DML queue remain length` stays above 0 for a period of time, it indicates that DML jobs are accumulating before execution. In this case, use `transaction execution latency` to view the time consumed to execute a single transaction to the downstream.
 
-`transaction execution latency` is usually tens of milliseconds. If this value is too large, check the downstream performance based on the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
+If `transaction execution latency` is high for a period of time, check the downstream performance based on the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
 
 To view the time consumed to write a single statement such as `BEGIN`, `INSERT`, `UPDATE`, `DELETE`, or `COMMIT` to the downstream, you can also check `statement execution latency`.
 
