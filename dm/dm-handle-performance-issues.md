@@ -66,10 +66,10 @@ When `binlog file gap between master and syncer` is greater than 1 for a long ti
 
 Besides `binlog file gap between master and syncer`, you can also check `replicate lag gauge`, `remaining time to sync`, `DML queue remain length`, and `ideal QPS`.
 
-- If `replicate lag gauge` is large, but `DML queue remain length` is almost always 0, first check the relay log unit, binlog reading, or binlog event conversion instead of downstream SQL execution.
+- If `replicate lag gauge` or `remaining time to sync` keeps increasing while `DML queue remain length` stays low, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. A low DML queue length only means that jobs are not accumulating in the queue.
 - If `DML queue remain length` keeps increasing and `transaction execution latency` is large, check the path that writes SQL statements to the downstream first.
-- If `binlog event QPS` suddenly drops to 0 and `replicate lag gauge` keeps increasing, first check whether DM is blocked by a long-running downstream DDL.
-- If `ideal QPS` is much higher than the actual throughput for a long time, check the downstream execution path first.
+- If `binlog event QPS` drops to 0 and `replicate lag gauge` keeps increasing, check the task state, `shard lock resolving`, and DM logs to see whether the task is blocked by a downstream DDL, a shard DDL lock, or a long-running transaction.
+- If `ideal QPS` decreases and `transaction execution latency` increases, check the downstream execution path first.
 
 ### Read binlog data
 
@@ -97,9 +97,9 @@ If the load is not balanced, confirm whether tables need to be migrated have pri
 
 - When there is no noticeable latency in the entire data migration link, the corresponding curve of `DML queue remain length` is almost always 0, and the maximum does not exceed the value of `batch` in the task configuration file.
 
-- If you find a noticeable latency in the data migration link, and the curve of `DML queue remain length` corresponding to each `q_*` is almost the same and is almost always 0, it means that DM fails to read, convert, or concurrently write the data from the upstream in time (the bottleneck might be in the relay log unit). For troubleshooting, refer to the previous sections of this document.
+- If you find a noticeable latency in the data migration link, and the curve of `DML queue remain length` corresponding to each `q_*` is almost the same and is almost always 0, it indicates that DML jobs are not accumulating in the queue. In this case, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. For troubleshooting, refer to the previous sections of this document.
 
-If the corresponding curve of `DML queue remain length` is not 0 (usually the maximum is not more than 1024), it indicates that there is a bottleneck when writing SQL statements to the downstream. You can use `transaction execution latency` to view the time consumed to execute a single transaction to the downstream.
+If the corresponding curve of `DML queue remain length` stays above 0 for a period of time, it indicates that DML jobs are accumulating before execution. In this case, use `transaction execution latency` to view the time consumed to execute a single transaction to the downstream.
 
 `transaction execution latency` is usually tens of milliseconds. If this value is too large, check the downstream performance based on the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
 
