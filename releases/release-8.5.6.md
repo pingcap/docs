@@ -150,7 +150,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
         - Add foreign key causal dependency support in DM syncer to ensure parent-to-child execution order of row changes in multi-worker scenarios [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
 
-## Bug Fixes
+## Bug fixes
 
 + TiDB <!--tw@lilin90: the following 7 notes-->
 
