@@ -134,6 +134,7 @@
             -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
             -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
+        -   [TiDB Cloud Premium からデータをエクスポート](/tidb-cloud/premium/premium-export.md)
     -   TiFlashでHTAPクラスタを使用する
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
         -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
