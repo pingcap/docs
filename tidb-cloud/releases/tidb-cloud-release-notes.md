@@ -8,6 +8,21 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## April 8, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Enhance the cloud storage data import experience for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+        The import process is now streamlined into a 3-step wizard (Connection, Destination Mapping, and Pre-check) with a unified **Import data from Cloud Storage** entry point for Amazon S3, Google Cloud Storage, and Azure Blob Storage. The new flow supports single-file URIs and manual file mapping via wildcard patterns, and the pre-check step scans the source files and previews the mapping before the import runs, helping you catch configuration issues early and reduce import failures.
+
+        For more information, see the following documents:
+
+        - [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)
+        - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)
+
 ## March 31, 2026
 
 **General changes**
