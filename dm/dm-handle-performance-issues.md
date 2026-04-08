@@ -67,12 +67,10 @@ When `binlog file gap between master and syncer` is greater than 1 for a period 
 
 ### Locate the bottleneck by combining metrics
 
-Besides `binlog file gap between master and syncer`, you can also check `replicate lag gauge`, `remaining time to sync`, `DML queue remain length`, `transaction execution latency`, and `ideal QPS`.
+Besides `binlog file gap between master and syncer`, you can also check `replicate lag gauge`, `remaining time to sync`, `DML queue remain length`, and `transaction execution latency`.
 
-- If `replicate lag gauge` or `remaining time to sync` keeps increasing while `DML queue remain length` stays low, combine `read binlog event duration`, `transform binlog event duration`, and `transaction execution latency` to continue locating the bottleneck. A low DML queue length only means that DML jobs are not accumulating in the queue.
-- If `DML queue remain length` keeps increasing and `transaction execution latency` is also increasing, check the path that writes SQL statements to the downstream first.
+- If `replicate lag gauge` or `remaining time to sync` keeps increasing, combine `read binlog event duration`, `transform binlog event duration`, `DML queue remain length`, and `transaction execution latency` to continue locating the bottleneck.
 - If `binlog event QPS` drops to 0 and `replicate lag gauge` keeps increasing, check the task state, `shard lock resolving`, and DM logs to see whether the task is blocked by a downstream DDL, a shard DDL lock, or a long-running transaction.
-- If `ideal QPS` decreases and `transaction execution latency` increases, the downstream execution capacity seen by DM is decreasing. In this case, check the downstream execution path first.
 
 ### Read binlog data
 
@@ -107,6 +105,8 @@ If the corresponding curve of `DML queue remain length` stays above 0 for a peri
 If `transaction execution latency` is high for a period of time, check the downstream performance based on the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
 
 To view the time consumed to write a single statement such as `BEGIN`, `INSERT`, `UPDATE`, `DELETE`, or `COMMIT` to the downstream, you can also check `statement execution latency`.
+
+If `ideal QPS` decreases and `transaction execution latency` increases, the downstream execution capacity seen by DM is decreasing. In this case, check the downstream execution path first.
 
 If the bottleneck exists in downstream execution, check the TiDB or TiKV cluster before changing DM configurations:
 
