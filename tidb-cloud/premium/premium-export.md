@@ -15,7 +15,7 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 > **Note:**
 >
-> The maximum export size is 100 GiB. Exports larger than this limit might fail. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> The maximum export size is 1 TiB. Exports larger than this limit might fail. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Export locations
 
