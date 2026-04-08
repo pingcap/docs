@@ -10,8 +10,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## April 8, 2026
 
-## March 31, 2026
-
 **General changes**
 
 - **TiDB Cloud Dedicated**
@@ -24,6 +22,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)
     - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)
+
+## March 31, 2026
 
 **General changes**
 
