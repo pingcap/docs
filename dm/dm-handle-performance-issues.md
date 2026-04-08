@@ -62,6 +62,15 @@ To diagnose performance issues in the Binlog replication unit, you can check the
 
 When `binlog file gap between master and syncer` is greater than 1 for a long time, check `binlog file gap between relay and syncer` to figure out which unit the latency mainly exists in. If this value is usually 0, the latency might exist in the relay log unit. Then you can refer to [relay log unit](#relay-log-unit) to resolve this issue; otherwise, continue checking the Binlog replication unit.
 
+### Locate the bottleneck by combining metrics
+
+Besides `binlog file gap between master and syncer`, you can also check `replicate lag gauge`, `remaining time to sync`, `DML queue remain length`, and `ideal QPS`.
+
+- If `replicate lag gauge` is large, but `DML queue remain length` is almost always 0, first check the relay log unit, binlog reading, or binlog event conversion instead of downstream SQL execution.
+- If `DML queue remain length` keeps increasing and `transaction execution latency` is large, check the path that writes SQL statements to the downstream first.
+- If `binlog event QPS` suddenly drops to 0 and `replicate lag gauge` keeps increasing, first check whether DM is blocked by a long-running downstream DDL.
+- If `ideal QPS` is much higher than the actual throughput for a long time, check the downstream execution path first.
+
 ### Read binlog data
 
 The Binlog replication unit decides whether to read the binlog event from the upstream MySQL/MariaDB or from the relay log file according to the configuration. The related performance metric is `read binlog event duration`, which generally ranges from a few microseconds to tens of microseconds.
@@ -95,3 +104,18 @@ If the corresponding curve of `DML queue remain length` is not 0 (usually the ma
 `transaction execution latency` is usually tens of milliseconds. If this value is too large, check the downstream performance based on the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
 
 To view the time consumed to write a single statement such as `BEGIN`, `INSERT`, `UPDATE`, `DELETE`, or `COMMIT` to the downstream, you can also check `statement execution latency`.
+
+If the bottleneck exists in downstream execution, check the TiDB or TiKV cluster before changing DM configurations:
+
+- If TiDB CPU usage is already high, scale out TiDB first.
+- If TiDB query latency or TiDB KV-client backoff is high, the bottleneck might exist in the TiDB SQL layer or in the TiDB-to-TiKV path.
+- If TiKV write path metrics such as write RPC latency, scheduler CPU usage, apply CPU usage, write stall, or PD TSO latency are high, check TiKV or PD before tuning DM.
+- If the network latency between DM and the downstream database is large, resolve the network issue first.
+
+After confirming that the downstream TiDB or TiKV cluster is not saturated, adjust the task configuration according to the actual scenario:
+
+- If the DM-worker still has enough CPU resources, increase `worker-count` appropriately.
+- If the upstream workload contains many bulk `INSERT`, `UPDATE`, or `DELETE` statements, consider enabling `multiple-rows` in the task configuration.
+- If `multiple-rows` is already enabled but `transaction execution latency` is still high, check `replication transaction batch` and reduce `batch` appropriately.
+
+For more information about configuration optimization, refer to [Optimize Configuration of DM](/dm/dm-tune-configuration.md).
