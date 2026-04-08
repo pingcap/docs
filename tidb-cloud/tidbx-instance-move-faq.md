@@ -7,7 +7,7 @@ summary: Learn why TiDB Cloud prompts you to move or convert your {{{ .starter }
 
 TiDB X instances are service-oriented TiDB Cloud offerings built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), including {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
 
-This FAQ explains why the [TiDB Cloud console](https://tidbcloud.com/) prompts you to migrate your {{{ .starter }}} and Essential instances in the top banner, what changes occur during the migration process, and what follow-up actions you need to take.
+This FAQ explains why the [TiDB Cloud console](https://tidbcloud.com/) prompts you to move your {{{ .starter }}} and Essential instances to TiDB X projects, and what changes occur during the migration process, and what follow-up actions you need to take.
 
 ## Why does the TiDB Cloud console prompt you to move your {{{ .starter }}} and Essential instances?
 
@@ -24,7 +24,7 @@ Starting from April 15, 2026, TiDB Cloud introduces separate project types to pr
 
 TiDB X projects are lightweight and optional for TiDB X instances, while dedicated projects are mandatory for {{{ .dedicated }}} clusters. Separating these resources ensures a more consistent user experience and eliminates confusion over which project capabilities apply.
 
-As a result of this separation, dedicated projects can no longer contain TiDB X instances. If your organization has existing {{{ .starter }}} or Essential resources in dedicated projects, TiDB Cloud prompts you to migrate them to TiDB X projects to align with the new resource model.
+As a result of this separation, dedicated projects can no longer contain TiDB X instances. If your organization has existing {{{ .starter }}} or Essential resources in dedicated projects, TiDB Cloud prompts you to move them to TiDB X projects to align with the new resource model.
 
 ## What project types are available in TiDB Cloud?
 
@@ -63,7 +63,7 @@ The following table lists the differences between these project types:
 | Project-level billing | ✅ | ✅ | ❌ |
 | Instance movement between projects | ❌ | ✅ <br/>(You can move a TiDB X instance to a specific TiDB X project or out of any project) | ✅ <br/>(You can move a TiDB X instance out of any TiDB X project to a specific TiDB X project) |
 
-## Do I need to migrate my {{{ .starter }}} and Essential instances?
+## Do I need to move my {{{ .starter }}} and Essential instances?
 
 It depends on how your current project is structured:
 
