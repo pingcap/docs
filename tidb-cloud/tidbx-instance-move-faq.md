@@ -136,17 +136,6 @@ If your {{{ .starter }}} or Essential instances are moved to a new TiDB X projec
 
 Project-level RBAC permissions are copied to the new project, but you should still review access after migration to make sure users and workflows still work as expected.
 
-## Do I need to undeploy my Data Service endpoints before migration?
-
-For projects deployed with [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md) endpoints, whether you need to undeploy Data Service endpoints before migration depends on how your current project is structured:
-
-- If your project contains only {{{ .starter }}} and Essential instances, because the project ID does not change after the migration, the Data Service endpoints still work after the migration, so no further action is required.
-- If your project contains both {{{ .dedicated }}} clusters and {{{ .starter }}} or Essential instances, because these {{{ .starter }}} or Essential instances are moved to new TiDB X projects after the migration, note the following:
-
-    - Those {{{ .starter }}} and Essential instances cannot be moved until their associated endpoints are undeployed.
-    - After the migration is complete, you need to redeploy the required endpoints in the new TiDB X project and update your application configuration accordingly.
-    - If you use Data Apps or Data Service API keys, review and reconfigure them in the new project as needed. For more information, see [Manage Data Service endpoints](/tidb-cloud/data-service-manage-endpoint.md) and [API Keys in Data Service](/tidb-cloud/data-service-api-key.md).
-
 ## Where can I get help?
 
 If you are unsure whether your automation, integrations, or Data Service setup depends on the original project ID, contact TiDB Cloud support at [support@pingcap.com](mailto:support@pingcap.com) before you start the migration.
