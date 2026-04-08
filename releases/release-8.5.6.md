@@ -11,7 +11,7 @@ TiDB Version: 8.5.6
 
 Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production Deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup) | [Download Offline Package](https://pingkai.cn/download#tidb-community)
 
-## Feature Details
+## Feature details
 
 ### Performance
 
@@ -83,32 +83,32 @@ Try it out: [Quick Start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-ti
 
 - (dup): release-9.0.0.md > # Data migration * Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh)
 
-## Compatibility Changes
+## Compatibility changes
 
-For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.6. Most changes in v8.5.6 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility adjustments, system variable updates, configuration parameter updates, and system table changes. Before upgrading, make sure to carefully review this section.
+For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.6. Most changes in v8.5.6 are safe for routine upgrades, but this release also includes several MySQL compatibility changes, system variable updates, configuration parameter updates, and deprecated features. Before upgrading, make sure to carefully review this section.
 
 ### MySQL compatibility
 
-- Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
-- Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, you can still reference the base table name when an alias is defined, but this triggers a warning that recommends using the explicit alias. For more information, see [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
+- Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
+- Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, you can still reference the base table name when an alias is defined, but this triggers a warning recommending the use of an explicit alias. For more information, see [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
 - Starting from v8.5.6, Dumpling supports exporting data from MySQL 8.4 by adopting the updated MySQL binary log terminology [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
-- Starting from v8.5.6, TiDB Data Migration (DM) supports MySQL 8.4 as an upstream data source for DM by adapting to the new terminology and version detection logic introduced in this version [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
+- Starting from v8.5.6, TiDB Data Migration (DM) supports MySQL 8.4 as an upstream data source by adapting to the new terminology and version detection logic introduced in this version [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
 
 ### System variables
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_analyze_version-new-in-v510) | Modified | Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended to use statistics Version 2 (`tidb_analyze_version = 2`). |
-| [`tidb_ignore_inlist_plan_digest`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_ignore_inlist_plan_digest-new-in-v760) | Modified | Changes the default value from `OFF` to `ON`. The default value `ON` means that TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. |
+| [`tidb_ignore_inlist_plan_digest`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_ignore_inlist_plan_digest-new-in-v760) | Modified | Changes the default value from `OFF` to `ON`. The default value `ON` means that TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list when generating Plan Digests. |
 | [`tidb_service_scope`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_service_scope-new-in-v740) | Modified | Starting from v8.5.6, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison. |
 | [`InPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#inpacketbytes-new-in-v856) | Newly added | This variable is used only for internal statistics and is not visible to users. |
 | [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856) | Newly added | This variable is used only for internal statistics and is not visible to users. |
 | [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856) | Newly added | Controls whether foreign key checks in pessimistic transactions use shared locks instead of exclusive locks on rows in the parent table. The default value is `OFF`, which means TiDB uses exclusive locks by default. |
 | [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856) | Newly added | Defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster. |
-| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856) | Newly added | Improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization. |
+| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856) | Newly added | Improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions down to more appropriate positions whenever possible, allowing more tables to participate in join order optimization. |
 | [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v856) | Newly added | Controls whether the optimizer can leverage the partial ordering of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. The default value is `DISABLE`, which means the optimization is disabled. |
-| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) | Newly added | Controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` means there is no limit on the number of slow query log entries written per second.</li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul> |
-| [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) | Newly added | defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
+| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) | Newly added | Controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` (the default) means there is no limit on the number of slow query log entries written per second.</li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul> |
+| [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) | Newly added | Defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
 
 ### Configuration parameters
 
