@@ -58,17 +58,17 @@ Both `might` and `potential` are acceptable. Use them as follows:
 | `Fix the issue where ...` | `Fix the issue that ...` (use `that`, not `where`) |
 | `Fix the issue that ... may ...` | Use `might` or `potential` |
 | Entry ends with `.` | Remove the period |
-| `Fix npe in executeTS` (internal name) | Rewrite to user-observable behavior: `Fix the potential panic issue that occurs when running table scan tasks` |
+| `Fix nil pointer panic in getRegionFromTS` (internal function name) | Rewrite to user-observable behavior: `Fix the potential panic that occurs when fetching region information during a Stale Read` |
 | `The issue of X causing Y is fixed` | `Fix the issue that X causes Y` |
 
 ## Chinese style rules
 
 Lead with `修复` for most entries. The standard templates are:
 
-* `修复 [X] 的问题` (most common)
-* `修复 [X] 可能 [崩溃/panic/卡住/报错] 的问题` (non-deterministic failures)
-* `修复 [X] 导致 [Y] 的问题` (cause-effect issues)
-* `禁止 [X]` (used when the fix introduces a restriction rather than a repair; rare)
+- `修复 [X] 的问题` (most common)
+- `修复 [X] 可能 [崩溃/panic/卡住/报错] 的问题` (non-deterministic failures)
+- `修复 [X] 导致 [Y] 的问题` (cause-effect issues)
+- `禁止 [X]` (used when the fix introduces a restriction rather than a repair; rare)
 
 Close the description clause with `的问题`. Use `可能` for non-deterministic failures, consistent with the English use of `might`. Do not add `。` at the end.
 

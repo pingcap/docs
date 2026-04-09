@@ -54,7 +54,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 
 ### Reviewing an existing entry
 
-1. Identify the section (Compatibility changes, Improvements, or Bug fixes)
+1. Identify the section (Compatibility changes, Improvements, or Bug fixes) and load the corresponding reference file
 2. Check the opening pattern against section rules
 3. Verify trailing punctuation (no `.` in English; no `。` in Chinese)
 4. Verify inline code spans for all technical terms: variables, configs, SQL keywords/functions, error messages
@@ -67,7 +67,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 2. Identify the component (TiDB, TiKV, PD, TiFlash, BR, TiCDC, TiDB Lightning)
 3. Draft the English entry:
    - Bug fix: `Fix the issue that [concise repro condition and observed symptom] [#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) @[contributor](https://github.com/contributor)`
-   - Improvement: `[Action verb] [what was improved, added, or supported] [#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) @[contributor](https://github.com/contributor)`
+   - Improvement: `[Action verb] [what was improved, added, or supported] [#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) @[contributor](https://github.com/contributor)` — for approved opening verbs and usage guidance, see [improvements.md](improvements.md)
 4. Draft the Chinese entry with the matching pattern
 5. Verify issue numbers match exactly between English and Chinese
 6. Verify anchor suffix format if doc links are included

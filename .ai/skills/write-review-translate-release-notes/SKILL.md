@@ -5,7 +5,7 @@ description: Review, revise, write, and translate TiDB release notes for the Com
 
 # TiDB Release Notes
 
-This skill enforces the style used in published release notes in `docs/releases/` (English) and `docs-cn/releases/` (Chinese) for v6.1.0 and later.
+When you write, review, or translate a release note entry, use this skill to load the right reference, apply the correct patterns, and produce output that matches the published format in `docs/releases/` (English) and `docs-cn/releases/` (Chinese) for v6.1.0 and later.
 
 ## When to use this skill
 
@@ -17,16 +17,18 @@ Use this skill when the task involves any of the following:
 
 This skill applies to the three recurring sections in every `release-X.X.X.md` file: Compatibility changes, Improvements, and Bug fixes.
 
-## Which reference file to load
+## Which reference to load
 
-Read only what is necessary for the task.
+Load only what is necessary for the task:
 
-- Compatibility changes (upgrade note blocks, behavior-change paragraphs, system-variable tables, config-parameter tables, anchor suffix conventions): read [references/compatibility-changes.md](references/compatibility-changes.md)
-- Improvement entries (opening verbs, English and Chinese patterns, examples): read [references/improvements.md](references/improvements.md)
-- Bug-fix entries (fix templates, anti-patterns, English and Chinese patterns, examples): read [references/bug-fixes.md](references/bug-fixes.md)
-- Translating between English and Chinese, checking bilingual alignment, or auditing paired files: read [references/bilingual-alignment.md](references/bilingual-alignment.md)
+| Task | Load |
+|------|------|
+| Compatibility changes (upgrade note block, behavior-change paragraph, system-variable table, config-parameter table, anchor suffixes) | [references/compatibility-changes.md](references/compatibility-changes.md) |
+| Improvement entries (opening verbs, English and Chinese patterns, examples) | [references/improvements.md](references/improvements.md) |
+| Bug-fix entries (fix templates, anti-patterns, English and Chinese patterns, examples) | [references/bug-fixes.md](references/bug-fixes.md) |
+| Translation, bilingual alignment check, or auditing paired files | [references/bilingual-alignment.md](references/bilingual-alignment.md) |
 
-A Chinese-only bug-fix revision does not require the compatibility-changes file.
+A Chinese-only bug-fix revision does not need the compatibility-changes file. For a full bilingual audit, load all four.
 
 ## File-level structure
 
@@ -144,9 +146,11 @@ For multiple issues in one entry: `[#NNNNN](https://github.com/pingcap/tidb/issu
 
 ### Improvement opening verbs
 
-| English | Chinese |
-|---------|---------|
-| Support, Add, Optimize, Improve, Avoid, Enhance, Mitigate, Accelerate, Remove, Increase | 支持、新增、优化、提升、避免、改进、引入、增加 |
+English: `Support`, `Add`, `Optimize`, `Improve`, `Avoid`, `Enhance`, `Mitigate`, `Accelerate`, `Remove`, `Increase`
+
+Chinese: `支持`、`新增`、`优化`、`提升`、`避免`、`改进`、`引入`、`增加`
+
+For verb selection guidance and examples, see [references/improvements.md](references/improvements.md).
 
 ### Compatibility change-type vocabulary
 
