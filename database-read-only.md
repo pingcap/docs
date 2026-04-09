@@ -100,7 +100,7 @@ SELECT INSTANCE, ID, SESSION_ID, USER, DB, STATE, START_TIME, RELATED_TABLE_IDS 
 
 ## Behavior in a read-only database
 
-When a database is read-only, restricted statements typically fail with:
+Unless the session has the `RESTRICTED_REPLICA_WRITER_ADMIN` dynamic privilege, restricted statements typically fail with:
 
 - `ERROR 3989 (HY000): Schema '<db>' is in read only mode.`
 
