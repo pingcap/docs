@@ -4505,9 +4505,9 @@ mysql> desc select count(distinct a) from test.t;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions that appear between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions to more appropriate positions whenever possible, allowing more tables to participate in join order optimization.
-- Enabling this variable changes execution plans. If you observe performance regression or plan instability after enabling it, set the variable to `OFF` to disable this feature.
-- For filters that are non-deterministic or have side effects (for example, `RAND()`), even if this variable is enabled, the optimizer does not perform predicate pushdown, ensuring that the evaluation semantics of expressions remain unchanged.
+- This variable improves Join Reorder optimization for certain multi-table join queries. If you set it to `ON`, the optimizer includes filter conditions (`Selection`) between multiple consecutive joins into the candidate range for Join Reorder optimization, provided safety conditions are met. When rebuilding the join tree, the optimizer pushes these conditions down to more suitable positions, which lets more tables participate in Join Reorder optimization.
+- If you observe performance regressions or unstable execution plans after enabling this variable, set it to `OFF` to disable this feature.
+- To ensure the evaluation semantics of expressions remain unchanged, the optimizer does not perform condition pushdown even when this variable is enabled if the filter conditions contain non-deterministic functions or functions with side effects (such as `RAND()`).
 
 ### tidb_opt_limit_push_down_threshold
 
