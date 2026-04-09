@@ -39,7 +39,7 @@ If the database is already in the requested state, the statement succeeds and re
 - **Required privilege**: You must have the `ALTER` privilege on the target database.
 - **Interaction with cluster read-only**: When the cluster is in read-only mode (for example, `tidb_restricted_read_only=1`), you cannot change database read-only status. The statement will fail with `Running in read-only mode`.
 - **System database restriction**: Database-level read-only is not supported for system databases, including `mysql`, `sys`, `INFORMATION_SCHEMA`, `PERFORMANCE_SCHEMA`, and `METRICS_SCHEMA`.
-
+- **Bypass privilege**: If a session is explicitly granted the dynamic privilege `RESTRICTED_REPLICA_WRITER_ADMIN`, it can bypass database-level read-only restrictions. This is intended for replica writer / replication-related sessions.
 ## Database read-only observability
 
 ### Using INFORMATION_SCHEMA.SCHEMATA_EXTENSIONS
