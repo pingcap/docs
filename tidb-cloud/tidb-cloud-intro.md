@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
-TiDB Cloud [TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッドトランザクションおよび分析処理 (HTAP) データベースである TiDB [TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージド型のクラウドネイティブなデータベース・アズ・ア・サービス (DBaaS) です。TiDB Cloud は、データベースのデプロイと管理を容易にし、データベースの複雑さではなく、アプリケーションの開発に集中できるようにします。<CustomContent language="en,zh"> TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent><CustomContent language="ja"> TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 <CustomContent language="en,zh">TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -22,7 +22,7 @@ TiDB Cloudの詳細については、以下のビデオをご覧ください。
 
 <iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-TiDB Cloudでは、以下の主要機能をご利用いただけます。
+TiDB Cloudでは、以下の主要機能を利用できます。
 
 -   **高速かつカスタマイズ可能なスケーリング**
 
@@ -114,9 +114,9 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 -   TiDB Cloud Dedicated
 
-    TiDB Cloud Dedicatedは、ミッションクリティカルなビジネス向けに設計されており、複数の可用性ゾーンにわたる高可用性、水平スケーリング、および完全な[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)機能を提供します。
+    TiDB Cloud Dedicatedは、ミッションクリティカルなビジネス向けに設計されており、複数のアベイラビリティゾーンにわたる高可用性、水平スケーリング、および完全な[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)機能を提供します。
 
-    現在、 TiDB Cloud Dedicatedは AWS と Google Cloud で一般提供されており、Azure ではパブリックプレビューとして提供されています。詳細については、 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)参照してください。
+    現在、 TiDB Cloud DedicatedはAWSとGoogle Cloudで一般提供されており、Azureではパブリックプレビュー版が提供されています。詳細については、 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)ドキュメントを参照してください。
 
 ## アーキテクチャ {#architecture}
 
@@ -132,4 +132,4 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 -   あなたのVPC
 
-    TiDBクラスタには、プライベートエンドポイント接続またはVPCピアリング接続で接続できます。詳細は、 [プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。

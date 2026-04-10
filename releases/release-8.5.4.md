@@ -1,210 +1,210 @@
 ---
 title: TiDB 8.5.4 Release Notes
-summary: TiDB 8.5.4 の機能、互換性の変更、改善、バグ修正について説明します。
+summary: TiDB 8.5.4 の機能、互換性の変更点、改善点、およびバグ修正について学びましょう。
 ---
 
 # TiDB 8.5.4 リリースノート {#tidb-8-5-4-release-notes}
 
 発売日：2025年11月27日
 
-TiDB バージョン: 8.5.4
+TiDBバージョン：8.5.4
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
 ## 特徴 {#features}
 
--   特定のテーブルのデータの再配布をサポート（実験的） [＃63260](https://github.com/pingcap/tidb/issues/63260) @ [bufferflies](https://github.com/bufferflies)
+-   特定テーブルのデータ再配布のサポート（実験的） [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies)
 
-    PDは、クラスター内のすべてのTiKVノードにデータが可能な限り均等に分散されるように自動的にスケジュールを設定します。ただし、この自動スケジューリングはクラスター全体に焦点を当てています。場合によっては、クラスター全体のデータ分散が均衡していても、特定のテーブルのデータがTiKVノード間で不均等に分散されている可能性があります。
+    PDは、クラスタ内のすべてのTiKVノードにデータが可能な限り均等に分散されるように自動的にスケジュールします。ただし、この自動スケジュールはクラスタ全体を対象としています。場合によっては、クラスタ全体のデータ分散がバランスが取れていても、特定のテーブルのデータがTiKVノード間で不均等に分散される可能性があります。
 
-    v8.5.4以降では、 [`SHOW TABLE DISTRIBUTION`](https://docs.pingcap.com/tidb/v8.5/sql-statement-show-table-distribution/)のステートメントを使用して、特定のテーブルのデータがすべてのTiKVノード間でどのように分散されているかを確認できます。データ分散が不均衡な場合は、 [`DISTRIBUTE TABLE`](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table)ステートメントを使用してテーブルのデータを再分散し（実験的）、負荷分散を改善できます。
+    バージョン8.5.4以降では、 [`SHOW TABLE DISTRIBUTION`](https://docs.pingcap.com/tidb/v8.5/sql-statement-show-table-distribution/)ステートメントを使用して、特定のテーブルのデータがすべてのTiKVノードにどのように分散されているかを確認できます。データの分散が不均衡な場合は、 [`DISTRIBUTE TABLE`](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table)ステートメントを使用してテーブルのデータを再分散（実験的）し、負荷分散を改善できます。
 
-    特定のテーブルのデータの再配布は、タイムアウト制限のある1回限りのタスクであることに注意してください。タイムアウトまでに配布タスクが完了しない場合、タスクは自動的に終了します。
+    特定のテーブルのデータの再分配は、タイムアウト制限のある1回限りのタスクであることに注意してください。分配タスクがタイムアウト時間内に完了しない場合、自動的に終了します。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table)参照してください。
+    詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table)を参照してください。
 
--   DDL文に埋め込まれた`ANALYZE`サポート[＃57948](https://github.com/pingcap/tidb/issues/57948) @ [terry1purcell](https://github.com/terry1purcell) @ [AilinKid](https://github.com/AilinKid)
+-   DDL ステートメントに埋め込まれた`ANALYZE`をサポート [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid)
 
-    この機能は、次のタイプの DDL ステートメントに適用されます。
+    この機能は、以下の種類のDDLステートメントに適用されます。
 
-    -   新しいインデックスを作成するDDL文: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
-    -   既存のインデックスを再編成する DDL ステートメント: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)と[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+    -   新しいインデックスを作成するDDLステートメント： [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+    -   既存のインデックスを再編成するDDLステートメント： [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)および[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 
-    この機能を有効にすると、TiDBは新規または再編成されたインデックスがユーザーに表示される前に、自動的に`ANALYZE` （統計収集）操作を実行します。これにより、インデックスの作成または再編成後に一時的に統計が利用できなくなることによる、オプティマイザの推定値の不正確さや潜在的なプラン変更を防止できます。
+    この機能を有効にすると、TiDB は新規または再編成されたインデックスがユーザーに表示される前に`ANALYZE` (統計情報収集) 操作を自動的に実行します。これにより、インデックスの作成または再編成後に一時的に利用できなくなる統計情報によって、オプティマイザの推定値が不正確になったり、実行計画が変更されたりするのを防ぎます。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze)参照してください。
+    詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze)を参照してください。
 
--   パーティションテーブルの非一意の列に対するグローバルインデックスの作成をサポート[＃58650](https://github.com/pingcap/tidb/issues/58650) @ [Defined2014](https://github.com/Defined2014) @ [mjonss](https://github.com/mjonss)
+-   パーティションテーブルの一意でない列に対するグローバルインデックスの作成をサポート [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
 
-    バージョン8.3.0以降、TiDBではパーティションテーブルの一意の列にグローバルインデックスを作成してクエリパフォーマンスを向上できます。ただし、一意でない列へのグローバルインデックスの作成はサポートされていませんでした。バージョン8.5.4以降、TiDBはこの制限を撤廃し、パーティションテーブルの一意でない列にもグローバルインデックスを作成できるようになりました。これにより、グローバルインデックスの使い勝手が向上します。
+    バージョン8.3.0以降、TiDBではパーティションテーブルの一意列にグローバルインデックスを作成してクエリパフォーマンスを向上させることができます。ただし、一意でない列へのグローバルインデックスの作成はサポートされていませんでした。バージョン8.5.4以降、TiDBはこの制限を撤廃し、パーティションテーブルの一意でない列にもグローバルインデックスを作成できるようにすることで、グローバルインデックスの使いやすさを向上させています。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/global-indexes/)参照してください。
+    詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/global-indexes/)を参照してください。
 
--   TiFlash [＃10266](https://github.com/pingcap/tiflash/issues/10266) @ [gengliqi](https://github.com/gengliqi)の正常なシャットダウンをサポート
+-   TiFlashの正常なシャットダウンをサポート [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi)
 
-    TiFlashサーバーをシャットダウンする際、 TiFlash は現在実行中の MPP タスクを、設定可能なタイムアウト時間の間継続させ、新しい MPP タスク要求を拒否するようになりました。デフォルトのタイムアウト時間は 600 秒ですが、設定項目[`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)で調整できます。
+    TiFlashサーバーをシャットダウンする際、 TiFlashは現在実行中のMPPタスクを構成可能なタイムアウト時間だけ継続させ、新しいMPPタスク要求を拒否するようになりました。デフォルトのタイムアウト時間は600秒で、 [`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)設定項目を使用して調整できます。
 
-    -   タイムアウト期間が経過する前に実行中のすべての MPP タスクが終了した場合、 TiFlash は直ちにシャットダウンします。
-    -   タイムアウト期間が経過しても未完了の MPP タスクが残っている場合、 TiFlash は強制的にシャットダウンします。
+    -   実行中のすべてのMPPタスクがタイムアウト期間内に終了した場合、 TiFlashは直ちにシャットダウンします。
+    -   タイムアウト期間が経過しても未完了のMPPタスクが残っている場合、 TiFlashは強制的にシャットダウンします。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)参照してください。
+    詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)を参照してください。
 
--   パフォーマンス、スケーラビリティ、安定性を向上させる新しい TiCDCアーキテクチャオプションを導入[＃442](https://github.com/pingcap/ticdc/issues/442) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+-   パフォーマンス、拡張性、安定性を向上させるための新しいTiCDCアーキテクチャオプションを導入 [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    この新しいアーキテクチャは、TiCDC コア コンポーネントを再設計し、 [古典的なTiCDCアーキテクチャ](/ticdc/ticdc-classic-architecture.md)の構成、使用法、API との互換性を維持しながら、データ処理ワークフローを最適化します。
+    この新しいアーキテクチャは[従来のTiCDCアーキテクチャ](/ticdc/ticdc-classic-architecture.md)アーキテクチャの構成、使用法、API との互換性を維持しながら、TiCDC コア コンポーネントを再設計し、そのデータ処理ワークフローを最適化します。
 
-    この新しいアーキテクチャを使用するように構成すると、TiCDCはほぼ線形のスケーラビリティを実現し、数百万のテーブルをより少ないリソース消費で複製できます。また、変更フィードのレイテンシーも短縮され、書き込みワークロードが高く、DDL操作が頻繁に行われ、クラスタのスケーリングが行われるシナリオにおいて、より安定したパフォーマンスが得られます。なお、この新しいアーキテクチャは現在約[初期の制限](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture#limitations)です。
+    この新しいアーキテクチャを使用するように構成すると、TiCDC はほぼ線形のスケーラビリティを実現し、より低いリソース消費で数百万のテーブルを複製できます。また、変更フィードのレイテンシーを削減し、書き込みワークロードが高いシナリオ、頻繁な DDL 操作、クラスタのスケーリングにおいて、より安定したパフォーマンスを提供します。なお、この新しいアーキテクチャには現在、いくつか[初期の制約](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture#limitations)があります。
 
-    新しいアーキテクチャを使用するには、TiCDC 構成項目[`newarch`](https://docs.pingcap.com/tidb/v8.5/ticdc-server-config#newarch-new-in-v854-release1)を`true`に設定します。
+    新しいアーキテクチャを使用するには、TiCDC 構成項目[`newarch`](https://docs.pingcap.com/tidb/v8.5/ticdc-server-config#newarch-new-in-v854-release1) `true`に設定します。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture)参照してください。
+    詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture)を参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
-新しく作成されたv8.5.3クラスターは、v8.5.4にスムーズにアップグレードできます。ただし、v8.5.4では、システム変数と構成パラメータの**デフォルト値の変更と動作調整が**いくつか導入されています。アップグレード前に、以下の点にご注意ください。
+新規作成されたv8.5.3クラスタは、v8.5.4へスムーズにアップグレードできます。ただし、v8.5.4では、システム変数と構成パラメータの**デフォルト値の変更や動作調整が**いくつか導入されています。アップグレード前に、以下の点にご注意ください。
 
--   ほとんどの変更は、通常のアップグレードでは安全に実行できます。ただし、 TiFlashや TiKV のコンパクション設定をカスタマイズするなど、クラスターのパフォーマンスチューニングを行った場合は、このセクションをよくお読みください。
--   一部の旧式のTiKV設定項目はv8.5.4で非推奨となり、推奨されなくなりました。代替として、このセクションで提供されている新しいTiKV設定グループを使用することをお勧めします。
+-   ほとんどの変更は、通常のアップグレードであれば安全です。ただし、クラスターにTiFlashやTiKVの圧縮構成のカスタマイズなど、パフォーマンスチューニングが施されている場合は、このセクションをよくお読みください。
+-   バージョン8.5.4では、一部の従来のTiKV設定項目が非推奨となり、使用が推奨されなくなりました。代替として、このセクションで説明する新しいTiKV設定グループを使用することをお勧めします。
 
 ### システム変数 {#system-variables}
 
-| 変数                                                                                                                                                     | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_mpp_store_fail_ttl)                                               | 修正済み     | デフォルト値を`60s`から`0s`に変更します。これにより、クエリの失敗を防ぐための遅延が不要になり、TiDB は新しく起動したTiFlashノードにクエリを送信する前に待機する必要がなくなります[＃61826](https://github.com/pingcap/tidb/issues/61826) [@genliqi](https://github.com/gengliqi)                                                                                                                                                                                                                            |
-| [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_replica_read-new-in-v40)                                                | 修正済み     | バージョン8.5.4以降、この変数は読み取り専用SQL文にのみ適用されます。これにより、データ読み取りの安全性が向上し、他の機能との重複が軽減されます[＃62856](https://github.com/pingcap/tidb/issues/62856) [@you06](https://github.com/you06)                                                                                                                                                                                                                                                         |
-| [`tidb_opt_enable_no_decorrelate_in_select`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_no_decorrelate_in_select-new-in-v854) | 新しく追加された | `SELECT`リスト内のサブクエリの相関を解除するかどうかを制御します。デフォルト値は`OFF`です[＃51116](https://github.com/pingcap/tidb/issues/51116) [@terry1purcell](https://github.com/terry1purcell)                                                                                                                                                                                                                                                                 |
-| [`tidb_opt_enable_semi_join_rewrite`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_semi_join_rewrite-new-in-v854)               | 新しく追加された | `EXISTS`サブクエリを書き換えるかどうかを制御します。デフォルト値は`OFF`です[＃44850](https://github.com/pingcap/tidb/issues/44850) [@terry1purcell](https://github.com/terry1purcell)                                                                                                                                                                                                                                                                        |
-| [`tidb_stats_update_during_ddl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_update_during_ddl-new-in-v854)                         | 新しく追加された | [DDL文に埋め込まれた`ANALYZE`](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze)有効にするかどうかを制御します。デフォルト値は`OFF`です。有効にすると、 `ADD INDEX` DDL文は実行中に新しいインデックスの統計情報を収集し、オプティマイザはインデックスが追加された直後にそのインデックスを使用できるようになります。この変数を有効にすると[@terry1purcell](https://github.com/terry1purcell)大きなテーブルにインデックスを追加するときにDDL実行時間が長くなる可能性があることに注意してください。7 [＃57948](https://github.com/pingcap/tidb/issues/57948) [@アイリンキッド](https://github.com/AilinKid) |
+| 変数                                                                                                                                                     | 種類を変更する  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_mpp_store_fail_ttl)                                               | 修正済み     | デフォルト値を`60s`から`0s`に変更します。これにより、クエリの失敗を防ぐための遅延が不要になるため、TiDB は新しく起動したTiFlashノードにクエリを送信する前に待機する必要がなくなります。 [#61826](https://github.com/pingcap/tidb/issues/61826) [@genliqi](https://github.com/gengliqi)                                                                                                                                                                                                                    |
+| [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_replica_read-new-in-v40)                                                | 修正済み     | バージョン8.5.4以降、この変数は読み取り専用のSQLステートメントにのみ適用されます。これにより、データ読み取りの安全性が向上し、他の機能との重複が軽減されます。 [#62856](https://github.com/pingcap/tidb/issues/62856) [@you06](https://github.com/you06)                                                                                                                                                                                                                                            |
+| [`tidb_opt_enable_no_decorrelate_in_select`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_no_decorrelate_in_select-new-in-v854) | 新しく追加された | `SELECT`リスト内のサブクエリの関連付けを解除するかどうかを制御します。デフォルト値は`OFF`です。 [#51116](https://github.com/pingcap/tidb/issues/51116) [@terry1purcell](https://github.com/terry1purcell)                                                                                                                                                                                                                                                         |
+| [`tidb_opt_enable_semi_join_rewrite`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_semi_join_rewrite-new-in-v854)               | 新しく追加された | `EXISTS`サブクエリを書き換えるかどうかを制御します。デフォルト値は`OFF`です。 [#44850](https://github.com/pingcap/tidb/issues/44850) [@terry1purcell](https://github.com/terry1purcell)                                                                                                                                                                                                                                                                  |
+| [`tidb_stats_update_during_ddl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_update_during_ddl-new-in-v854)                         | 新しく追加された | [DDLステートメントに埋め込まれた`ANALYZE`](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze) 。デフォルト値は`OFF`です。有効にすると、 `ADD INDEX` DDL ステートメントは実行中に新しいインデックスの統計情報を収集し、オプティマイザがインデックスの追加直後にインデックスを使用できるようにします。この変数を有効にすると、大きなテーブルにインデックスを追加する際の DDL 実行時間が長くなる可能性があることに注意してください。 [#57948](https://github.com/pingcap/tidb/issues/57948) [@terry1purcell](https://github.com/terry1purcell) [@AilinKid](https://github.com/AilinKid) |
 
 ### コンフィグレーションパラメータ {#configuration-parameters}
 
-| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                             |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティクブ                     | [`rocksdb.max-manifest-file-size`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#max-manifest-file-size)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 修正済み     | 単一の TiKV ノードに多数の SST ファイルが含まれている場合に、全体的なパフォーマンスに影響を与える可能性のある頻繁なマニフェスト ファイルの圧縮を回避するために、既定値を`128MiB`から`256MiB`に変更します[＃18889](https://github.com/tikv/tikv/issues/18889) [@glorv](https://github.com/glorv)                                                                                                       |
-| TiKV                     | [`server.grpc-raft-conn-num`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#grpc-raft-conn-num)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 修正済み     | デフォルト値を`1`から`MAX(1, MIN(4, CPU cores / 8))`に変更します。これにより、gRPC関連のスレッド設定がCPUコア数に合わせて調整されます。CPUコア数が32以上の場合、デフォルトの最大接続数は4になります[＃18806](https://github.com/tikv/tikv/issues/18806) [ライクxサッシネーター](https://github.com/LykxSassinator)                                                                                  |
-| TiKV                     | [`server.grpc-concurrency`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#grpc-concurrency)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 修正済み     | デフォルト値を`5`から`grpc-raft-conn-num * 3 + 2`に変更します。これにより、gRPC 関連のスレッド設定が CPU コアの数に合わせて調整されるようになります[＃18806](https://github.com/tikv/tikv/issues/18806) [ライクxサッシネーター](https://github.com/LykxSassinator)                                                                                                             |
-| ティクブ                     | <li>[`region-compact-check-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-check-interval)</li><li>[`region-compact-check-step`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-check-step)</li><li>[`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-min-tombstones)</li><li>[`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-tombstones-percent)</li><li>[`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710)</li><li>[`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710)</li>                                                                                                                                                                                                                                                           | 非推奨      | これらの構成項目は、自動圧縮動作を制御する[`gc.auto-compaction`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#gcauto-compaction)構成グループに置き換えられます[＃18727](https://github.com/tikv/tikv/issues/18727) [@v01dstar](https://github.com/v01dstar)                                                                           |
-| TiKV                     | [`gc.auto-compaction`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#gcauto-compaction)構成グループ:<ul><li> [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#check-interval-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bottommost-level-force-new-in-v757-and-v854)</li></ul> | 新しく追加された | この設定グループは自動圧縮動作を制御します[＃18727](https://github.com/tikv/tikv/issues/18727) [@v01dstar](https://github.com/v01dstar)                                                                                                                                                                                              |
-| TiFlash                  | [`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 新しく追加された | TiFlash の正常なシャットダウンの最大待機時間（秒単位）を制御します。デフォルト値は`600`です。TiFlashをTiFlashすると、未完了の MPP タスクは引き続き実行されますが、新しい MPP タスクは受け付けなくなります。タイムアウト前にすべての MPP タスク[@genliqi](https://github.com/gengliqi)終了した場合、 TiFlash は直ちにシャットダウンします。それ以外の場合は、タイムアウト後に強制的にシャットダウンされます。3 [＃10266](https://github.com/pingcap/tiflash/issues/10266) |
+| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 種類を変更する  | 説明                                                                                                                                                                                                                                                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ティクヴ                     | [`rocksdb.max-manifest-file-size`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#max-manifest-file-size)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 修正済み     | 単一の TiKV ノードに多数の SST ファイルが含まれている場合に、全体的なパフォーマンスに影響を与える可能性のある頻繁なマニフェスト ファイル圧縮を回避するため、デフォルト値を`128MiB` `256MiB`に変更します。 [#18889](https://github.com/tikv/tikv/issues/18889) [@glorv](https://github.com/glorv)                                                                                             |
+| ティクヴ                     | [`server.grpc-raft-conn-num`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#grpc-raft-conn-num)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 修正済み     | デフォルト値を`1`から`MAX(1, MIN(4, CPU cores / 8))`に変更します。これにより、gRPC 関連のスレッド設定が CPU コア数に応じて調整されるようになります。CPU コア数が 32 以上の場合、デフォルトの最大接続数は 4 になります。 [#18806](https://github.com/tikv/tikv/issues/18806) [@LykxSassinator](https://github.com/LykxSassinator)                                                       |
+| ティクヴ                     | [`server.grpc-concurrency`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#grpc-concurrency)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 修正済み     | デフォルト値を`5`から`grpc-raft-conn-num * 3 + 2`に変更します。これにより、gRPC 関連のスレッド設定が CPU コア数に合わせて調整されるようになります。 [#18806](https://github.com/tikv/tikv/issues/18806) [@LykxSassinator](https://github.com/LykxSassinator)                                                                                                |
+| ティクヴ                     | <li>[`region-compact-check-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-check-interval)</li><li>[`region-compact-check-step`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-check-step)</li><li>[`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-min-tombstones)</li><li>[`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-tombstones-percent)</li><li>[`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710)</li><li>[`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710)</li>                                                                                                                                                                                                                                                           | 非推奨      | これらの設定項目は、自動圧縮動作を制御する[`gc.auto-compaction`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#gcauto-compaction)設定グループに置き換えられます。 [#18727](https://github.com/tikv/tikv/issues/18727) [@v01dstar](https://github.com/v01dstar)                                                                 |
+| ティクヴ                     | [`gc.auto-compaction`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#gcauto-compaction)設定グループ:<ul><li> [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#check-interval-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757-and-v854)</li><li> [`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bottommost-level-force-new-in-v757-and-v854)</li></ul> | 新しく追加された | この構成グループは、自動圧縮動作を制御します。 [#18727](https://github.com/tikv/tikv/issues/18727) [@v01dstar](https://github.com/v01dstar)                                                                                                                                                                                   |
+| TiFlash                  | [`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 新しく追加された | TiFlashの正常なシャットダウンの最大待機時間（秒単位）を制御します。デフォルト値は`600`です。TiFlashをシャットダウンする際、未完了のMPPタスクの実行は継続されますが、新しいMPPタスクは受け付けなくなります。すべてのMPPタスクがタイムアウト前に完了した場合、 TiFlashは直ちにシャットダウンします。そうでない場合は、タイムアウト後に強制的にシャットダウンされます。 [#10266](https://github.com/pingcap/tiflash/issues/10266) [@genliqi](https://github.com/gengliqi) |
 
-### MySQLの互換性 {#mysql-compatibility}
+### MySQLとの互換性 {#mysql-compatibility}
 
-v8.5.4以降、TiDBは`DECIMAL`桁の列にデータを挿入する際の動作をMySQLに準拠させました。小数点以下の桁数が列の定義スケールを超える場合、TiDBは自動的に余分な桁を切り捨て、切り捨てられたデータを正常に挿入します。これは、小数点以下の桁数に関わらず行われます。以前のバージョンのTiDBでは、挿入された`DECIMAL`値の小数点以下の桁数が72を超えると、挿入は失敗し、エラーが返されていました。詳細については、 [JDBC を使用して TiDB に接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-sample-application-java-jdbc#mysql-compatibility)参照してください。
+バージョン 8.5.4 以降、TiDB は`DECIMAL`列にデータを挿入する際の動作を MySQL と同期させました。小数点以下の桁数が列の定義済みスケールを超えた場合、TiDB は余分な桁を自動的に切り捨て、切り捨てられたデータを正常に挿入します。小数点以下の桁数に関係なく、切り捨てられたデータは挿入されます。以前の TiDB バージョンでは、挿入される`DECIMAL`値の小数点以下の桁数が 72 を超えると、挿入は失敗し、エラーが返されました。詳細については、 [JDBCを使用してTiDBに接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-sample-application-java-jdbc#mysql-compatibility)
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
-    -   `IN`サブクエリ[＃58829](https://github.com/pingcap/tidb/issues/58829) @ [qw4990](https://github.com/qw4990)の Semi テーブル結合に`semi_join_rewrite`ヒントを適用することをサポート
-    -   `tidb_opt_ordering_index_selectivity_ratio`システム変数が[＃62817](https://github.com/pingcap/tidb/issues/62817)で[テリー・パーセル](https://github.com/terry1purcell)で効果を発揮するときの推定戦略を最適化する
-    -   オプティマイザの選択ロジックを調整して、特定のシナリオで新しく作成されたインデックスが選択される可能性を高めます[＃57948](https://github.com/pingcap/tidb/issues/57948) @ [terry1purcell](https://github.com/terry1purcell)
-    -   少数の個別値（NDV）を持つ列のクエリ推定ロジックを最適化[＃61792](https://github.com/pingcap/tidb/issues/61792) @ [terry1purcell](https://github.com/terry1purcell)
-    -   `LIMIT OFFSET` [＃45077](https://github.com/pingcap/tidb/issues/45077) @ [qw4990](https://github.com/qw4990)を含むインデックス結合クエリの推定戦略を最適化する
-    -   統計が時間[＃58068](https://github.com/pingcap/tidb/issues/58068) @ [terry1purcell](https://github.com/terry1purcell)で収集されない場合の範囲外推定戦略を最適化する
-    -   デバッグを容易にするために、Grafanaの**パフォーマンス概要**&gt; **SQL実行時間概要**パネルに`backoff`メトリックを追加します[＃61441](https://github.com/pingcap/tidb/issues/61441) @ [dbsid](https://github.com/dbsid)
-    -   監査ログプラグイン[＃63525](https://github.com/pingcap/tidb/issues/63525) @ [YangKeao](https://github.com/YangKeao)にステートメント ID 情報を追加します
+    -   `semi_join_rewrite`サブクエリのセミテーブル結合に`IN`ヒントを適用することをサポートする [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
+    -   `tidb_opt_ordering_index_selectivity_ratio`システム変数が有効になったときに推定戦略を最適化する [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
+    -   オプティマイザの選択ロジックを調整して、特定のシナリオで新しく作成されたインデックスが選択される可能性が高くなるようにする [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
+    -   一意の値の数が少ない列（NDV）のクエリ推定ロジックを最適化する [#61792](https://github.com/pingcap/tidb/issues/61792) @[terry1purcell](https://github.com/terry1purcell)
+    -   `LIMIT OFFSET`を含む Index Join クエリの推定戦略を最適化する [#45077](https://github.com/pingcap/tidb/issues/45077) @[qw4990](https://github.com/qw4990)
+    -   統計情報が時間内に収集されない場合の範囲外推定戦略を最適化する [#58068](https://github.com/pingcap/tidb/issues/58068) @[terry1purcell](https://github.com/terry1purcell)
+    -   Grafana の**パフォーマンス概要**&gt; **SQL 実行時間概要**パネルに`backoff`メトリックを追加してデバッグを容易にします [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
+    -   監査ログ プラグインにステートメント ID 情報を追加 [#63525](https://github.com/pingcap/tidb/issues/63525) @[YangKeao](https://github.com/YangKeao)
 
--   TiKV
+-   ティクヴ
 
-    -   BRモジュール内の特定の自動回復可能なエラーのログレベルを`ERROR`から`WARN`に変更して、不要なアラート[＃18493](https://github.com/tikv/tikv/issues/18493) @ [YuJuncen](https://github.com/YuJuncen)を削減します。
-    -   不要なアラートを減らすために、特定の TiKV エラーのログレベルを`ERROR`から`WARN`に変更します[＃18745](https://github.com/tikv/tikv/issues/18745) @ [exit-code-1](https://github.com/exit-code-1)
-    -   RaftモジュールのGCチェックプロセスを2つのフェーズに分割して、リージョン[＃18695](https://github.com/tikv/tikv/issues/18695) @ [v01dstar](https://github.com/v01dstar)の冗長MVCCバージョンのガベージコレクションの効率を向上させます。
-    -   GCセーフポイントとRocksDB統計に基づいてMVCC冗長性を計算し、圧縮[＃18697](https://github.com/tikv/tikv/issues/18697) @ [v01dstar](https://github.com/v01dstar)の効率と精度を向上させます。
-    -   リージョンMVCCのGC処理ロジックをGCワーカースレッドで実行するように変更し、GC処理ロジック全体を統一する[＃18727](https://github.com/tikv/tikv/issues/18727) @ [v01dstar](https://github.com/v01dstar)
-    -   デフォルトの gRPC スレッド プール サイズの計算方法を最適化し、固定値ではなく CPU クォータの合計に基づいて動的に計算するようにすることで、gRPC スレッド[＃18613](https://github.com/tikv/tikv/issues/18613) @ [LykxSassinator](https://github.com/LykxSassinator)の不足によるパフォーマンスのボトルネックを回避します。
-    -   多数の SST ファイルがある環境での非同期スナップショットおよび書き込み操作のテールレイテンシーを最適化します[＃18743](https://github.com/tikv/tikv/issues/18743) @ [Connor1996](https://github.com/Connor1996)
+    -   BRモジュール内の特定の自動回復可能なエラーのログレベルを`ERROR`から`WARN`に変更して、不要なアラートを削減します [#18493](https://github.com/tikv/tikv/issues/18493) @[YuJuncen](https://github.com/YuJuncen)
+    -   不要なアラートを減らすため、特定の TiKV エラーのログレベルを`ERROR`から`WARN`に変更します [#18745](https://github.com/tikv/tikv/issues/18745) @[exit-code-1](https://github.com/exit-code-1)
+    -   RaftモジュールのGCチェックプロセスを2つのフェーズに分割し、リージョン内の冗長なMVCCバージョンのガベージコレクションの効率を向上させる [#18695](https://github.com/tikv/tikv/issues/18695) @[v01dstar](https://github.com/v01dstar)
+    -   GCセーフポイントとRocksDB統計に基づいてMVCC冗長性を計算し、圧縮の効率と精度を向上させる [#18697](https://github.com/tikv/tikv/issues/18697) @[v01dstar](https://github.com/v01dstar)
+    -   リージョン MVCC の GC 処理ロジックを GC ワーカー スレッドで実行するように変更し、GC 処理ロジック全体を統一します [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
+    -   デフォルトのgRPCスレッドプールサイズの計算方法を最適化し、固定値ではなくCPUクォータの合計に基づいて動的に計算するようにすることで、gRPCスレッド不足によるパフォーマンスボトルネックを回避します [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
+    -   多数のSSTファイルが存在する環境における非同期スナップショットおよび書き込み操作のテールレイテンシーを最適化する [#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
 
 -   PD
 
-    -   不要なエラーログを[＃9370](https://github.com/tikv/pd/issues/9370) [バッファフライ](https://github.com/bufferflies)削減
-    -   Golangのバージョンを1.23.0から1.23.12にアップグレードし、関連する依存関係[＃9788](https://github.com/tikv/pd/issues/9788) @ [JmPotato](https://github.com/JmPotato)を更新します。
-    -   テーブルレベルでの領域分散をサポートし、 `scatter-role`と`engine`次元にわたってバランスのとれた分散を実現します[＃8986](https://github.com/tikv/pd/issues/8986) @ [bufferflies](https://github.com/bufferflies)
+    -   不要なエラーログを削減 [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    -   Golangのバージョンを1.23.0から1.23.12にアップグレードし、関連する依存関係を更新します [#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
+    -   テーブルレベルで散布領域をサポートして、 `scatter-role`と`engine`の次元全体にバランスの取れた分布を実現します [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies)
 
 -   TiFlash
 
-    -   不要なデータの読み取りをスキップして`TableScan`パフォーマンスを向上[＃9875](https://github.com/pingcap/tiflash/issues/9875) @ [gengliqi](https://github.com/gengliqi)
-    -   TiFlash [＃10361](https://github.com/pingcap/tiflash/issues/10361) @ [JaySon-Huang](https://github.com/JaySon-Huang)で、多数の列とスパース データ (つまり、 `NULL`または空の値が多い) を含む`TableScan`の広いテーブルのパフォーマンスを最適化します。
-    -   多数のテーブル[＃10357](https://github.com/pingcap/tiflash/issues/10357) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)を持つクラスターにベクトル インデックスを追加することによって発生するTiFlash CPU オーバーヘッドを削減します。
-    -   無駄なRaftコマンドを処理するときに不要なログ出力を最小限に抑えてログ量を減らす[＃10467](https://github.com/pingcap/tiflash/issues/10467) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   TiFlash [＃10487](https://github.com/pingcap/tiflash/issues/10487) @ [JaySon-Huang](https://github.com/JaySon-Huang)の小さなパーティションテーブルで`TableScan`パフォーマンスを向上
+    -   `TableScan`パフォーマンスを向上させるために不要なデータ読み取りをスキップします [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
+    -   TiFlash [#10361](https://github.com/pingcap/tiflash/issues/10361) 10361 @ジェイソン・ファンで、多くの列とスパース データ (つまり、大量の`TableScan` } または空の値) を含む広いテーブルでの { `NULL`パフォーマンスを最適[ジェイソン・ファン](https://github.com/JaySon-Huang)ます。
+    -   多くのテーブルを持つクラスターにベクトル インデックスを追加することによって発生するTiFlash CPU オーバーヘッドを削減 [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   無駄なRaftコマンド処理時の不要なログ出力を最小限にしてログ量を削減 [#10467](https://github.com/pingcap/tiflash/issues/10467) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   TiFlashの小さなパーティション分割テーブルでの`TableScan`パフォーマンスを向上 [#10487](https://github.com/pingcap/tiflash/issues/10487) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 
-    -   TiDB データ移行 (DM)
+    -   TiDBデータ移行（DM）
 
-        -   アップストリーム`GTID_MODE` [＃12167](https://github.com/pingcap/tiflow/issues/12167) @ [OliverS929](https://github.com/OliverS929)を取得する際に大文字と小文字を区別しないマッチングをサポートします
+        -   上流の`GTID_MODE`を取得する際に、大文字小文字を区別しないマッチングをサポートする [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
-    -   `tidb_isolation_read_engines` `tiflash` [＃60869](https://github.com/pingcap/tidb/issues/60869) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)に設定されている場合に`use index`ヒントが有効にならない問題を修正しました
-    -   `max_execution_time` `SELECT FOR UPDATE`ステートメント[＃62960](https://github.com/pingcap/tidb/issues/62960) @ [ekexium](https://github.com/ekexium)に反映されない問題を修正
-    -   月または年にわたる行数の推定値が大幅に過大評価される可能性がある問題を修正[＃50080](https://github.com/pingcap/tidb/issues/50080) @ [terry1purcell](https://github.com/terry1purcell)
-    -   準備済みステートメントの`Decimal`型の処理が MySQL [＃62602](https://github.com/pingcap/tidb/issues/62602) @ [ChangRui-Ryan](https://github.com/ChangRui-Ryan)と一致しない問題を修正しました
-    -   `TRUNCATE()`関数のショートパスが誤って処理される問題を修正[＃57608](https://github.com/pingcap/tidb/issues/57608) @ [xzhangxian1008](https://github.com/xzhangxian1008)
-    -   `Out Of Quota For Local Temporary Space`エラーが発生したときに、こぼれたファイルが完全に削除されない可能性がある問題を修正[＃63216](https://github.com/pingcap/tidb/issues/63216) @ [xzhangxian1008](https://github.com/xzhangxian1008)
-    -   `INFORMATION_SCHEMA`テーブルに対して正規表現を使用したクエリが誤った結果を返す可能性がある問題を修正しました[＃62347](https://github.com/pingcap/tidb/issues/62347) @ [River2000i](https://github.com/River2000i)
-    -   PD [＃58871](https://github.com/pingcap/tidb/issues/58871) @ [joechenrh](https://github.com/joechenrh)からタイムスタンプを取得できなかった場合に TiDB がエラーを返さない問題を修正しました
-    -   `MODIFY COLUMN`ステートメント[＃60264](https://github.com/pingcap/tidb/issues/60264) @ [tangenta](https://github.com/tangenta)の実行中に、オーナー TiDB インスタンスと非オーナー TiDB インスタンス間でクエリ結果が異なる問題を修正しました。
-    -   パラメータ[＃63201](https://github.com/pingcap/tidb/issues/63201) @ [fzzf678](https://github.com/fzzf678)を動的に変更した後、 `ADMIN ALTER DDL JOBS`ステートメントで誤ったパラメータ値が表示される問題を修正しました。
-    -   トランザクション[＃62424](https://github.com/pingcap/tidb/issues/62424) @ [wjhuang2016](https://github.com/wjhuang2016)内でインデックスを追加したときに GC セーフ ポイントが進まない問題を修正しました
-    -   過度に大きな SST ファイルを L0 に取り込むとフロー制御[＃63466](https://github.com/pingcap/tidb/issues/63466) @ [CbcWestwolf](https://github.com/CbcWestwolf)がトリガーされる問題を修正しました
-    -   CPU対メモリ比が1:2 [＃60951](https://github.com/pingcap/tidb/issues/60951) @ [wjhuang2016](https://github.com/wjhuang2016)のときにグローバルソートがブロックされる問題を修正
-    -   タスク数が[＃63896](https://github.com/pingcap/tidb/issues/63896)を超えると、保留中の Distributed eXecution Framework (DXF) タスクをキャンセルできない問題を修正しました[D3ハンター](https://github.com/D3Hunter)
-    -   DXFタスクがキャンセルされた後、他のタスクが[＃63927](https://github.com/pingcap/tidb/issues/63927) @ [D3Hunter](https://github.com/D3Hunter)で終了できない問題を修正しました
-    -   `Apply`演算子同時実行を有効にすると（ `tidb_enable_parallel_apply = on` ）、クローン実装[＃59863](https://github.com/pingcap/tidb/issues/59863) @ [hawkingrei](https://github.com/hawkingrei)の不足によりプラン生成が失敗する問題を修正しました。
-    -   `ATAN2`関数を使用すると誤った結果が生成される可能性がある問題を修正[＃60093](https://github.com/pingcap/tidb/issues/60093) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   `select 1 from dual`インスタンスレベルのプランキャッシュ[＃63075](https://github.com/pingcap/tidb/issues/63075) @ [time-and-fate](https://github.com/time-and-fate)を使用できない問題を修正
-    -   結合順序を変更するとプランナーが失敗する可能性がある問題を修正[＃61715](https://github.com/pingcap/tidb/issues/61715) @ [hawkingrei](https://github.com/hawkingrei)
-    -   バインディングで`set_var`ヒントを使用すると変数が元の設定に復元されなくなる問題を修正[＃59822](https://github.com/pingcap/tidb/issues/59822) @ [wddevries](https://github.com/wddevries)
-    -   `ONLY_FULL_GROUP_BY`負の値に設定すると検証エラー[＃62617](https://github.com/pingcap/tidb/issues/62617) @ [AilinKid](https://github.com/AilinKid)が発生する問題を修正しました
-    -   `ONLY_FULL_GROUP_BY`チェックで大文字と小文字が区別されない問題を修正[＃62672](https://github.com/pingcap/tidb/issues/62672) @ [AilinKid](https://github.com/AilinKid)
-    -   DP結合順序アルゴリズムが誤ったプラン[＃63353](https://github.com/pingcap/tidb/issues/63353) @ [winoros](https://github.com/winoros)を生成する可能性がある問題を修正しました
-    -   外部結合を内部結合に書き換えると誤った結果が生成される可能性がある問題を修正[＃61327](https://github.com/pingcap/tidb/issues/61327) @ [hawkingrei](https://github.com/hawkingrei)
-    -   特定のクエリを実行すると内部panicが発生する可能性がある問題を修正[＃58600](https://github.com/pingcap/tidb/issues/58600) @ [Defined2014](https://github.com/Defined2014)
-    -   特定の`ALTER PARTITION`操作[＃64084](https://github.com/pingcap/tidb/pull/64084) @ [mjonss](https://github.com/mjonss)でグローバルインデックスが誤ったデータを読み取る可能性がある問題を修正しました
-    -   グローバルインデックスが場合によっては誤った結果を返す可能性がある問題を修正[＃61083](https://github.com/pingcap/tidb/issues/61083) @ [Defined2014](https://github.com/Defined2014)
-    -   `character_set_results`誤った文字を置き換えるのではなく切り捨てる問題を修正[＃61085](https://github.com/pingcap/tidb/issues/61085) @ [xhebox](https://github.com/xhebox)
-    -   `ADD COLUMN`と`UPDATE`ステートメントを同時に実行するとエラー[＃60047](https://github.com/pingcap/tidb/issues/60047) @ [L-maple](https://github.com/L-maple)が発生する可能性がある問題を修正しました
-    -   マージ結合でコスト[＃62917](https://github.com/pingcap/tidb/issues/62917) @ [qw4990](https://github.com/qw4990)を計算するときにフィルター条件が省略される可能性がある問題を修正しました
+    -   `use index`が`tidb_isolation_read_engines`に設定されている場合、 `tiflash`ヒントが [#60869](https://github.com/pingcap/tidb/issues/60869) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   `max_execution_time`が`SELECT FOR UPDATE`ステートメントに適用されない問題を修正 [#62960](https://github.com/pingcap/tidb/issues/62960) @[ekexium](https://github.com/ekexium)
+    -   月や年をまたいだ行数の推定値が大幅に過大評価される問題を修正 [#50080](https://github.com/pingcap/tidb/issues/50080) @[terry1purcell](https://github.com/terry1purcell)
+    -   プリペアドステートメントにおける`Decimal`タイプの処理が MySQL と矛盾する問題を修正 [#62602](https://github.com/pingcap/tidb/issues/62602) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    -   `TRUNCATE()`関数内の短いパスが正しく処理されない問題を修正しました [#57608](https://github.com/pingcap/tidb/issues/57608) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   `Out Of Quota For Local Temporary Space`エラーが発生した際に、スピルしたファイルが完全に削除されない可能性がある問題を修正しました [#63216](https://github.com/pingcap/tidb/issues/63216) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   `INFORMATION_SCHEMA`テーブルに対して正規表現を使用したクエリが誤った結果を返す可能性がある問題を修正しました [#62347](https://github.com/pingcap/tidb/issues/62347) @[River2000i](https://github.com/River2000i)
+    -   TiDBがPDからタイムスタンプを取得できなかった場合にエラーを返さない問題を修正します [#58871](https://github.com/pingcap/tidb/issues/58871) @[joechenrh](https://github.com/joechenrh)
+    -   `MODIFY COLUMN`ステートメントの実行中に、所有者 TiDB インスタンスと非所有者 TiDB インスタンス間でクエリ結果が異なる問題を修正します [#60264](https://github.com/pingcap/tidb/issues/60264) @[tangenta](https://github.com/tangenta)
+    -   `ADMIN ALTER DDL JOBS`ステートメントでパラメータを動的に変更した後に誤ったパラメータ値が表示される問題を修正します [#63201](https://github.com/pingcap/tidb/issues/63201) @[fzzf678](https://github.com/fzzf678)
+    -   トランザクション内でインデックスを追加する際にGCセーフポイントが進まない問題を修正 [#62424](https://github.com/pingcap/tidb/issues/62424) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   過度に大きな SST ファイルを L0 に取り込むとフロー制御がトリガーされる問題を修正 [#63466](https://github.com/pingcap/tidb/issues/63466) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    -   CPUとメモリの比率が1:2の場合にグローバルソートがブロックされる問題を修正 [#60951](https://github.com/pingcap/tidb/issues/60951) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   タスク数が16を超えると、保留中の分散実行フレームワーク（DXF）タスクをキャンセルできない問題を修正しました [#63896](https://github.com/pingcap/tidb/issues/63896) @[D3Hunter](https://github.com/D3Hunter)
+    -   DXFタスクがキャンセルされた後、他のタスクが終了しない問題を修正します [#63927](https://github.com/pingcap/tidb/issues/63927) @[D3Hunter](https://github.com/D3Hunter)
+    -   `Apply`演算子の同時実行（ `tidb_enable_parallel_apply = on` ）を有効にすると、クローン実装が欠落しているためにプラン生成が失敗する問題を修正しました [#59863](https://github.com/pingcap/tidb/issues/59863) @[hawkingrei](https://github.com/hawkingrei)
+    -   `ATAN2`関数を使用すると誤った結果が生じる可能性がある問題を修正しました [#60093](https://github.com/pingcap/tidb/issues/60093) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   `select 1 from dual`がインスタンスレベルのプランキャッシュを使用できない問題を修正 [#63075](https://github.com/pingcap/tidb/issues/63075) @[time-and-fate](https://github.com/time-and-fate)
+    -   参加順序を変更するとプランナーが失敗する可能性がある問題を修正 [#61715](https://github.com/pingcap/tidb/issues/61715) @[hawkingrei](https://github.com/hawkingrei)
+    -   `set_var`ヒントをバインディングで使用すると、変数が元の設定に戻らない問題を修正します [#59822](https://github.com/pingcap/tidb/issues/59822) @[wddevries](https://github.com/wddevries)
+    -   `ONLY_FULL_GROUP_BY`負の値に設定すると検証が失敗する問題を修正 [#62617](https://github.com/pingcap/tidb/issues/62617) @[AilinKid](https://github.com/AilinKid)
+    -   `ONLY_FULL_GROUP_BY`チェックで大文字と小文字が区別されない問題を修正 [#62672](https://github.com/pingcap/tidb/issues/62672) @[AilinKid](https://github.com/AilinKid)
+    -   DP結合順序アルゴリズムが誤ったプランを生成する可能性がある問題を修正 [#63353](https://github.com/pingcap/tidb/issues/63353) @[winoros](https://github.com/winoros)
+    -   外部結合を内部結合に書き換えると誤った結果が生じる可能性がある問題を修正 [#61327](https://github.com/pingcap/tidb/issues/61327) @[hawkingrei](https://github.com/hawkingrei)
+    -   特定のクエリを実行すると内部panicが発生する可能性がある問題を修正 [#58600](https://github.com/pingcap/tidb/issues/58600) @[Defined2014](https://github.com/Defined2014)
+    -   グローバルインデックスが特定の`ALTER PARTITION`操作中に誤ったデータを読み取る可能性がある問題を修正 [#64084](https://github.com/pingcap/tidb/pull/64084) @[mjonss](https://github.com/mjonss)
+    -   場合によってはグローバルインデックスが誤った結果を返す可能性がある問題を修正 [#61083](https://github.com/pingcap/tidb/issues/61083) @[Defined2014](https://github.com/Defined2014)
+    -   `character_set_results`が誤った文字を置き換えるのではなく切り捨ててしまう問題を修正 [#61085](https://github.com/pingcap/tidb/issues/61085) @[xhebox](https://github.com/xhebox)
+    -   `ADD COLUMN`と`UPDATE`ステートメントを同時に実行するとエラーが発生する可能性がある問題を修正しました [#60047](https://github.com/pingcap/tidb/issues/60047) @[L-maple](https://github.com/L-maple)
+    -   マージ結合時にコスト計算時にフィルタ条件が省略される可能性がある問題を修正 [#62917](https://github.com/pingcap/tidb/issues/62917) @[qw4990](https://github.com/qw4990)
 
 -   PD
 
-    -   PDクライアントの再試行戦略が正しく初期化されない問題を修正[＃9013](https://github.com/tikv/pd/issues/9013) @ [rleungx](https://github.com/rleungx)
-    -   TSO HTTP API `/config`および`/members`が誤った結果[＃9797](https://github.com/tikv/pd/issues/9797) @ [lhy1024](https://github.com/lhy1024)を返す問題を修正しました
-    -   TSO Follower Proxy [＃9188](https://github.com/tikv/pd/issues/9188) @ [Tema](https://github.com/Tema)の誤ったエラー処理ロジックを修正しました
-    -   バケットレポートを無効にした後でもバケットの分割が機能する問題を修正[＃9726](https://github.com/tikv/pd/issues/9726) @ [bufferflies](https://github.com/bufferflies)
-    -   リソース マネージャーがトークンを誤って割り当て、クエリが[＃9455](https://github.com/tikv/pd/issues/9455) @ [JmPotato](https://github.com/JmPotato)でスタックする問題を修正しました。
-    -   PDリーダーが[＃9602](https://github.com/tikv/pd/issues/9602) [okJiang](https://github.com/okJiang)で切り替えた後に配置ルールが有効にならない問題を修正しました
-    -   PD が科学表記法の大きな数値を解析できず、その結果一部の TTL 関連の設定が有効にならない問題を修正[＃9343](https://github.com/tikv/pd/issues/9343) @ [lhy1024](https://github.com/lhy1024)
+    -   PDクライアントの再試行戦略が正しく初期化されない問題を修正 [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
+    -   TSO HTTP API `/config`および`/members`が誤った結果を返す問題を修正します [#9797](https://github.com/tikv/pd/issues/9797) @[lhy1024](https://github.com/lhy1024)
+    -   TSOFollowerプロキシの誤ったエラー処理ロジックを修正 [#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
+    -   バケットのレポートが無効になった後でもバケットの分割が機能する問題を修正 [#9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
+    -   リソースマネージャがトークンを誤って割り当て、クエリが停止する問題を修正しました [#9455](https://github.com/tikv/pd/issues/9455) @[JmPotato](https://github.com/JmPotato)
+    -   PDリーダーが交代した後、配置ルールが有効にならない問題を修正 [#9602](https://github.com/tikv/pd/issues/9602) [okJiang](https://github.com/okJiang)
+    -   PDが科学表記の大きな数値を解析できない場合があり、その結果、一部のTTL関連の設定が有効にならない問題を修正します。 [#9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
 
 -   TiFlash
 
-    -   クエリ対象の列に`NULL`値が[＃10340](https://github.com/pingcap/tiflash/issues/10340) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で多数含まれている場合にクエリが失敗する可能性がある問題を修正しました
-    -   TiFlash がRU 消費量[＃10380](https://github.com/pingcap/tiflash/issues/10380) @ [JinheLin](https://github.com/JinheLin)の統計を水増し生成する問題を修正しました
-    -   分散storageとコンピューティングアーキテクチャ[＃10278](https://github.com/pingcap/tiflash/issues/10278) @ [JaySon-Huang](https://github.com/JaySon-Huang)で低速クエリが存在する場合にTiFlash がOOM に遭遇する可能性がある問題を修正しました
-    -   分散storageおよびコンピューティングアーキテクチャ[＃10424](https://github.com/pingcap/tiflash/issues/10424) @ [JaySon-Huang](https://github.com/JaySon-Huang)でTiFlashと S3 の間でネットワークパーティションが発生すると、 TiFlash が無期限に再試行する可能性がある問題を修正しました。
-    -   `FLOOR()`と`CEIL()`関数のパラメータが`DECIMAL`型[＃10365](https://github.com/pingcap/tiflash/issues/10365) @ [ChangRui-Ryan](https://github.com/ChangRui-Ryan)の場合に誤った結果を返す可能性がある問題を修正しました
+    -   クエリ対象の列に多数の`NULL`値が含まれている場合にクエリが失敗する可能性がある問題を修正 [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   TiFlashがRU消費量の統計情報を水増しして生成する問題を修正 [#10380](https://github.com/pingcap/tiflash/issues/10380) @[JinheLin](https://github.com/JinheLin)
+    -   分離されたstorageとコンピューティングアーキテクチャの下で低速クエリが存在する場合にTiFlash でOOM が発生する可能性がある問題を修正 [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散storageおよびコンピューティングアーキテクチャ下でTiFlashと S3 の間でネットワーク分割が発生した場合、 TiFlash が無期限に再試行する可能性がある問題を修正 [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   `FLOOR()`関数と`CEIL()`関数のパラメータ`DECIMAL`型の場合、誤った結果を返すことがある問題を修正 [#10365](https://github.com/pingcap/tiflash/issues/10365) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
-        -   ログバックアップのzstd圧縮が有効にならず、出力が圧縮されない問題を修正[＃18836](https://github.com/tikv/tikv/issues/18836) @ [3pointer](https://github.com/3pointer)
-        -   Azure Blob Storage [＃18410](https://github.com/tikv/tikv/issues/18410) @ [YuJuncen](https://github.com/YuJuncen)にデータをバックアップするときにフラッシュ操作が時々遅くなる問題を修正しました
-        -   ファイルの削除に失敗した場合に発生する可能性のある問題`log truncate`を修正[＃63358](https://github.com/pingcap/tidb/issues/63358) @ [YuJuncen](https://github.com/YuJuncen)
-        -   バックアップ中に`--checksum`を`false`に設定すると、 [＃60978](https://github.com/pingcap/tidb/issues/60978) @ [Leavrth](https://github.com/Leavrth)を復元した後に`mysql.stats_meta`テーブルの`count`列が`0`なる可能性がある問題を修正しました。
-        -   これらのサービスの帯域幅制限が有効になっている場合に、 BRがS3互換storageサービスからデータを復元できない可能性を低減します[＃18846](https://github.com/tikv/tikv/issues/18846) @ [kennytm](https://github.com/kennytm)
-        -   `log backup observer`リージョンの観測を失い、ログ バックアップの進行が[＃18243](https://github.com/tikv/tikv/issues/18243) @ [Leavrth](https://github.com/Leavrth)に進まなくなる可能性がある問題を修正しました。
-        -   バックアップされたテーブルに特定の特別なスキーマ[＃63663](https://github.com/pingcap/tidb/issues/63663) @ [RidRisR](https://github.com/RidRisR)が含まれている場合に`restore point`作成が失敗する問題を修正しました
+        -   ログ バックアップの zstd 圧縮が有効にならず、出力が圧縮されないままになる問題を修正 [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
+        -   Azure Blob Storageへのデータバックアップ時にフラッシュ操作が時々遅くなる問題を修正 [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
+        -   ファイル削除が失敗した場合に`log truncate`が発生する可能性がある問題を修正 [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
+        -   バックアップ中に`--checksum`を`false`に設定すると、リストア後に`count`テーブルの`mysql.stats_meta`列が`0`になる可能性がある問題を修正 [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)
+        -   S3互換storageサービスの帯域幅制限が有効になっている場合に、 BRがこれらのサービスからデータを復元できない可能性を低減する [#18846](https://github.com/tikv/tikv/issues/18846) @[kennytm](https://github.com/kennytm)
+        -   `log backup observer`リージョン上の観測を失う可能性があり、ログバックアップの進行が進まなくなる問題を修正しました [#18243](https://github.com/tikv/tikv/issues/18243) @[Leavrth](https://github.com/Leavrth)
+        -   バックアップされたテーブルに特定の特殊スキーマが含まれている場合に`restore point`作成が失敗する問題を修正します [#63663](https://github.com/pingcap/tidb/issues/63663) @[RidRisR](https://github.com/RidRisR)
 
     -   TiCDC
 
-        -   仮想列[＃12241](https://github.com/pingcap/tiflow/issues/12241) @ [wk989898](https://github.com/wk989898)を含む列型パーティションディスパッチャを構成するときに発生する可能性のあるpanicを修正しました。
-        -   DDL プラー[＃12244](https://github.com/pingcap/tiflow/issues/12244) @ [wk989898](https://github.com/wk989898)を閉じるときに発生する可能性のあるpanicを修正しました
-        -   `filter`構成[＃12286](https://github.com/pingcap/tiflow/issues/12286) @ [asddongmen](https://github.com/asddongmen)の`ignore-txn-start-ts`パラメータを通じてサポートされていない DDL タイプのフィルタリングをサポートします
-        -   Azure Blob Storage をダウンストリーム[＃12277](https://github.com/pingcap/tiflow/issues/12277) @ [zurakutsia](https://github.com/zurakutsia)として使用すると、変更フィード タスクがスタックする可能性がある問題を修正しました。
-        -   `DROP FOREIGN KEY` DDLが下流[＃12328](https://github.com/pingcap/tiflow/issues/12328) @ [3AceShowHand](https://github.com/3AceShowHand)に複製されない問題を修正
-        -   リージョンサブスクリプション[＃19048](https://github.com/tikv/tikv/issues/19048) @ [3AceShowHand](https://github.com/3AceShowHand)中にロールバックおよび事前書き込みエントリが発生すると TiCDC がpanicになる可能性がある問題を修正しました。
-        -   TiKV のアサーションエラーにより TiCDC がpanicになる可能性がある問題を修正[＃18498](https://github.com/tikv/tikv/issues/18498) @ [tharanga](https://github.com/tharanga)
+        -   仮想列を含む列型パーティションディスパッチャを構成する際に発生する可能性のあるpanicを修正します [#12241](https://github.com/pingcap/tiflow/issues/12241) @[wk989898](https://github.com/wk989898)
+        -   DDLプーラーを閉じるときに発生する可能性のあるpanicを修正しました [#12244](https://github.com/pingcap/tiflow/issues/12244) @[wk989898](https://github.com/wk989898)
+        -   `ignore-txn-start-ts`設定の`filter`パラメーターを使用して、サポートされていない DDL タイプをフィルタリングする機能をサポートする [#12286](https://github.com/pingcap/tiflow/issues/12286) @[asddongmen](https://github.com/asddongmen)
+        -   Azure Blob Storage をダウンストリームとして使用している場合、changefeed タスクが停止する可能性がある問題を修正します [#12277](https://github.com/pingcap/tiflow/issues/12277) @[zurakutsia](https://github.com/zurakutsia)
+        -   `DROP FOREIGN KEY` DDL がダウンストリームにレプリケートされない問題を修正 [#12328](https://github.com/pingcap/tiflow/issues/12328) @[3AceShowHand](https://github.com/3AceShowHand)
+        -   リージョンサブスクリプション中にロールバックと事前書き込みエントリが発生したときに TiCDC がpanicになる可能性がある問題を修正 [#19048](https://github.com/tikv/tikv/issues/19048) @[3AceShowHand](https://github.com/3AceShowHand)
+        -   TiKV のアサーション エラーが TiCDC をpanic可能性がある問題を修正 [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)
