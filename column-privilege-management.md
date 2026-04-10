@@ -40,7 +40,7 @@ For example, the following statement grants `SELECT` privileges on `col1` and `c
 GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 ```
 
-## Example: Granting column-level privileges
+## Example: Grant column-level privileges
 
 The following example grants user `newuser` the `SELECT` privilege on `col1` and `col2` in table `test.tbl`, and grants the same user the `UPDATE` privilege on `col3`:
 
