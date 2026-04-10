@@ -30,7 +30,7 @@ Use the following statement to grant the `xxx` user all privileges on all databa
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](/column-privilege-management.md).
+Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns in a specified table. For more information, see [Column-Level Privilege Management](/column-privilege-management.md).
 
 By default, [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statements will return an error if the user specified does not exist. This behavior depends on if the [SQL mode](/system-variables.md#sql_mode) `NO_AUTO_CREATE_USER` is specified:
 

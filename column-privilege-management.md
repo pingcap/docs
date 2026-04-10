@@ -1,21 +1,21 @@
 ---
 title: Column-Level Privilege Management
-summary: TiDB supports a MySQL-compatible column-level privilege management mechanism, enabling you to grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, thus achieving finer-grained access control.
+summary: TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, achieving finer-grained access control.
 ---
 
 # Column-Level Privilege Management
 
-Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. With column-level privileges, you can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table, achieving finer-grained data access control.
+Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. With column-level privileges, you can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns in a specified table, achieving finer-grained data access control.
 
 > **Note:**
 >
-> Although MySQL syntax allows column-level specification like `REFERENCES(col_name)`, `REFERENCES` itself is a database/table-level privilege used for foreign key-related permission checks. Therefore, column-level `REFERENCES` does not actually take effect in MySQL. TiDB's behavior is consistent with MySQL.
+> Although MySQL syntax allows column-level syntax such as `REFERENCES(col_name)`, `REFERENCES` itself is a database-level or table-level privilege used for foreign key-related privilege checks. Therefore, column-level `REFERENCES` does not produce any actual column-level privilege effect in MySQL. TiDB's behavior is consistent with MySQL.
 
 ## Syntax
 
-Granting and revoking column-level privileges are similar to table-level privileges, with the following differences:
+The syntax for granting and revoking column-level privileges is similar to that for table-level privileges, with the following differences:
 
-- The column name list is placed after the **privilege type**, not after the **table name**.
+- Write the column name list after the **privilege type**, not after the **table name**.
 - Multiple column names are separated by commas (`,`).
 
 ```sql
@@ -31,7 +31,7 @@ REVOKE priv_type(col_name [, col_name] ...) [, priv_type(col_name [, col_name] .
 Where:
 
 * `priv_type` supports `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES`.
-* The `ON` clause requires specifying the specific table, for example, `test.tbl`.
+* The `ON` clause must specify a table, for example, `test.tbl`.
 * A single `GRANT` or `REVOKE` statement can include multiple privilege items, and each privilege item can specify its own list of column names.
 
 For example, the following statement grants `SELECT` privileges on `col1` and `col2` and `UPDATE` privilege on `col3` to the user:
@@ -40,9 +40,9 @@ For example, the following statement grants `SELECT` privileges on `col1` and `c
 GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 ```
 
-## Grant column-level privileges
+## Grant column-level privilege example
 
-The following example grants the `SELECT` privilege on `col1` and `col2` of table `test.tbl` to user `newuser`, and grants the `UPDATE` privilege on `col3` to the same user:
+The following example grants user `newuser` the `SELECT` privilege on `col1` and `col2` in table `test.tbl`, and grants the same user the `UPDATE` privilege on `col3`:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS test;
@@ -69,7 +69,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 
 In addition to using `SHOW GRANTS`, you can also view column-level privilege information by querying `INFORMATION_SCHEMA.COLUMN_PRIVILEGES`.
 
-## Revoke column-level privileges
+## Revoke column-level privilege example
 
 The following example revokes the `SELECT` privilege on column `col2` from user `newuser`:
 
@@ -93,7 +93,7 @@ After granting or revoking column-level privileges, TiDB performs privilege chec
 
 * `SELECT` statements: `SELECT` column privileges affect columns referenced in the `SELECT` list as well as `WHERE`, `ORDER BY`, and other clauses.
 * `UPDATE` statements: columns being updated in the `SET` clause require `UPDATE` column privileges. Columns read in expressions or conditions usually also require `SELECT` column privileges.
-* `INSERT` statements: columns being written to require `INSERT` column privileges. `INSERT INTO t VALUES (...)` is equivalent to writing to all columns.
+* `INSERT` statements: columns being written to require `INSERT` column privileges. `INSERT INTO t VALUES (...)` is equivalent to writing values to all columns in table definition order.
 
 In the following example, user `newuser` can only query `col1` and update `col3`:
 
@@ -116,8 +116,8 @@ TiDB's column-level privileges are generally compatible with MySQL. However, the
 
 | Scenario                                             | TiDB                                                                                                                                                                   | MySQL                                                                                                                                                                            |
 | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Revoking column-level privileges not granted to a user | `REVOKE` executes successfully.                                                                                                                                        | `REVOKE` throws an error.                                                                                                                                                        |
-| Execution order of column pruning and `SELECT` privilege check | `SELECT` column privileges are checked first, then column pruning is performed. For example: executing `SELECT a FROM (SELECT a, b FROM t) s` requires `SELECT` column privileges for both `t.a` and `t.b`. | Column pruning is performed first, then `SELECT` column privileges are checked. For example: executing `SELECT a FROM (SELECT a, b FROM t) s` only requires `SELECT` column privilege for `t.a`. |
+| Revoking column-level privileges not granted to a user | `REVOKE` executes successfully. | When `IF EXISTS` is not used, `REVOKE` returns an error. |
+| Execution order of column pruning and `SELECT` privilege check | `SELECT` column privileges are checked before column pruning. For example, executing `SELECT a FROM (SELECT a, b FROM t) s` requires `SELECT` column privileges on both `t.a` and `t.b`. | Column pruning is performed before `SELECT` column privileges are checked. For example, executing `SELECT a FROM (SELECT a, b FROM t) s` only requires the `SELECT` column privilege on `t.a`. |
 
 ### Column pruning and privilege checks in view scenarios
 
