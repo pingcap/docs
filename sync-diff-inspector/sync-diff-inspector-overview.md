@@ -23,7 +23,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 The installation method varies depending on your TiDB version:
 
-For TiDB v9.0.0 and later versions:
+For TiDB v8.5.6 and later versions:
 
 + Install using TiUP:
 
@@ -39,7 +39,7 @@ For TiDB v9.0.0 and later versions:
     docker pull pingcap/sync-diff-inspector:latest
     ```
 
-For TiDB versions before v9.0.0:
+For TiDB versions before v8.5.6:
 
 + Binary package from the legacy [`tidb-tools`](https://github.com/pingcap/tidb-tools) repository. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
