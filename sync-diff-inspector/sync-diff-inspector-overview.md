@@ -5,18 +5,9 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tiflow/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
-This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. To download sync-diff-inspector, use one of the following methods:
-
-+ Binary package. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
-+ Docker image. Execute the following command to download:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    docker pull pingcap/tidb-tools:latest
-    ```
+This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool.
 
 ## Key features
 
@@ -26,6 +17,36 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 * Support [data check in the sharding scenario](/sync-diff-inspector/shard-diff.md)
 * Support [data check for TiDB upstream-downstream clusters](/ticdc/ticdc-upstream-downstream-check.md)
 * Support [data check in the DM replication scenario](/sync-diff-inspector/dm-diff.md)
+
+## Install sync-diff-inspector
+
+The installation method varies depending on your TiDB version:
+
+For TiDB v8.5.6 and later:
+
++ Install using TiUP:
+
+    ```shell
+    tiup install sync-diff-inspector
+    ```
+
++ Binary package: included in the TiDB Toolkit. To download the toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
++ Docker image: execute the following command to download:
+
+    ```shell
+    docker pull pingcap/sync-diff-inspector:latest
+    ```
+
+For versions before v8.5.6:
+
++ Binary package: included in the TiDB Toolkit (from the legacy [`tidb-tools`](https://github.com/pingcap/tidb-tools) repository). To download the toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
++ Docker image (legacy version): execute the following command to download:
+
+    ```shell
+    docker pull pingcap/tidb-tools:latest
+    ```
 
 ## Restrictions of sync-diff-inspector
 
