@@ -2373,6 +2373,23 @@ Configures the behavior of TiKV automatic compaction.
 + Controls whether to force compaction on the bottommost files in RocksDB.
 + Default value: `true`
 
+### `mvcc-read-aware-enabled` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Controls whether to enable MVCC-read-aware compaction. When enabled, TiKV tracks the number of MVCC versions scanned during read requests and uses this information to prioritize compaction for Regions with high MVCC read amplification. This reduces read latency for hot Regions that encounter many stale versions during scans.
++ Default value: `false`
+
+### `mvcc-scan-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856-and-v900) is set to `true`.
++ Default value: `1000`
++ Minimum value: `0`
+
+### `mvcc-read-weight` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers, such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856-and-v900) is set to `true`.
++ Default value: `3.0`
++ Minimum value: `0.0`
+
 ## backup
 
 Configuration items related to BR backup.
