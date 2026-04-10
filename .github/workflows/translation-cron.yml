@@ -5,6 +5,12 @@ on:
     # every Wednesday at 11:00 AM
     - cron: "0 11 * * 3"
   workflow_dispatch:
+    inputs:
+      file_names:
+        description: 'Specify file names to translate (comma-separated list)'
+        required: false
+        type: string
+        default: ''
 
 env:
   LTS_BRANCH: i18n-ja-release-8.5
@@ -24,7 +30,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ github.token }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-zh.yaml/dispatches \
-          -d '{"ref":"master"}'
+          -d '{"ref":"master","inputs":{"file_names":${{ toJSON(inputs.file_names || '') }}}}'
 
   # build a matrix of branches to translate, including LTS and Cloud
   build-matrix:
@@ -75,6 +81,7 @@ jobs:
         with:
           config_file: latest_translation_commit.json
           working_directory: docs
+          files: ${{ inputs.file_names || '' }}
 
       - name: Show tmp directory structure
         run: |
