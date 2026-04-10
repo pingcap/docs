@@ -35,6 +35,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 ### Table parity
 
 - English and Chinese compatibility tables must have:
+
     - Same number of rows
     - Same row order
     - Same variable/parameter names

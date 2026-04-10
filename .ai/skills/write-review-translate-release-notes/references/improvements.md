@@ -62,7 +62,7 @@ Metric claims are encouraged when sourced, such as "up to 10 times performance i
 
 | Verb | When to use |
 |------|-------------|
-| `Support` | New capability: `Support casting the \`STRING\` type to the \`DOUBLE\` type` |
+| `Support` | New capability: ```Support casting the `STRING` type to the `DOUBLE` type``` |
 | `Add` | New element or mechanism: `Add a timeout mechanism for LDAP authentication` |
 | `Optimize` | Algorithmic improvement: `Optimize the non-joined data in right outer join using multiple threads` |
 | `Improve` | General improvement: `Improve the MySQL compatibility of ...` |
