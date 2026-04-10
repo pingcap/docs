@@ -3475,11 +3475,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `ON`. Before v8.5.6, the default value is `OFF`.
+- Default value: `OFF`
 - This variable controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests.
 
-    - When it is the default value `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
-    - When it is set to `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
+    - When it is the default value `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
+    - When it is set to `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
 
 ### tidb_index_join_batch_size
 
@@ -3887,22 +3887,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1024`
 - Range: `[100, 16384]`
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
-
-### tidb_max_dist_task_nodes <span class="version-mark">New in v8.5.6</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `-1`
-- Range: `-1` or `[1, 128]`
-- This variable defines the maximum number of TiDB nodes that Distributed eXecution Framework (DXF) tasks can use. The default value `-1` indicates that automatic mode is enabled. In this mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` is the number of TiKV nodes in the cluster.
-
-> **Note:**
-> 
-> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, DXF schedules tasks only to these nodes. In this case, even if you set `tidb_max_dist_task_nodes` to a larger value, DXF uses at most the number of nodes you explicitly configured with `tidb_service_scope`.
->
-> For example, if the cluster has 10 TiDB nodes and 4 of them are configured with `tidb_service_scope = group1`, then even if you set `tidb_max_dist_task_nodes = 5`, only 4 nodes participate in the task execution.
 
 ### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
 
@@ -5832,34 +5816,6 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > **Note:**
 >
 > If the character check is skipped, TiDB might fail to detect invalid UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
-
-### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `0`
-- Type: Integer
-- Range: `[0, 1000000]`
-- This variable controls the maximum number of slow query log entries that can be written per TiDB node per second.
-    - A value of `0` means there is no limit on the number of slow query log entries written per second.
-    - A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
-- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v856) to prevent excessive slow query logs from being generated under high-workload conditions.
-
-### tidb_slow_log_rules <span class="version-mark">New in v8.5.6</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: ""
-- Type: String
-- This variable defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging.
-- For more information about how to use this system variable, see [Use `tidb_slow_log_rules`](/identify-slow-queries.md#use-tidb_slow_log_rules).
-
-> **Tip:**
->
-> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v856) to avoid excessively frequent slow query log printing.
-> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
 
 ### tidb_slow_log_threshold
 
