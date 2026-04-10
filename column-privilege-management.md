@@ -40,7 +40,7 @@ For example, the following statement grants `SELECT` privileges on `col1` and `c
 GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 ```
 
-## Grant column-level privilege example
+## Example: Granting column-level privileges
 
 The following example grants user `newuser` the `SELECT` privilege on `col1` and `col2` in table `test.tbl`, and grants the same user the `UPDATE` privilege on `col3`:
 
@@ -69,7 +69,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 
 In addition to using `SHOW GRANTS`, you can also view column-level privilege information by querying `INFORMATION_SCHEMA.COLUMN_PRIVILEGES`.
 
-## Revoke column-level privilege example
+## Example: Revoke column-level privileges
 
 The following example revokes the `SELECT` privilege on column `col2` from user `newuser`:
 
@@ -87,7 +87,7 @@ SHOW GRANTS FOR 'newuser'@'%';
 +---------------------------------------------------------------+
 ```
 
-## Column-level privilege access control example
+## Example: Column-level privilege access control
 
 After granting or revoking column-level privileges, TiDB performs privilege checks on columns referenced in SQL statements. For example:
 
