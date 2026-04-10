@@ -43,13 +43,13 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 2. On the **Create Resource** page, select **Premium** as your plan.
 3. Enter a name for your {{{ .premium }}} instance, and then choose a cloud provider and a region where you want to host your instance.
 4. (Optional) To group this {{{ .premium }}} instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
-5. In the **Capacity** area, set the maximum number of the Request Capacity Units (RCUs) for your instance.
-
-    RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
+5. In the Capacity area, set the maximum number of Request Capacity Units (RCUs) for your instance.RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
     > **Note:**
-    >
-    > You will be billed for the **Minimum Billing RCU** shown below the maximum number of RCUs, even if your actual usage is lower. The maximum RCU value must be set in increments of 100.
+    > 
+    > You will be billed for a Minimum Billing RCU, which is 25% (1/4) of your set Maximum RCU (or a minimum of 5,000 RCUs, whichever is higher). This floor ensures that dedicated resources are reserved to guarantee your peak performance. You will be charged this minimum amount even if your actual usage is lower.
+
+The maximum RCU value must be set in increments of 100.
 
 6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 
