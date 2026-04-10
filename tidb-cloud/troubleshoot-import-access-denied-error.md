@@ -17,11 +17,20 @@ This section describes how to troubleshoot the issue that TiDB Cloud cannot assu
 
 ### Check the trust entity
 
-1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**. 
-2. In the list of roles, find and click the role you have created for the target TiDB cluster. The role summary page is displayed. 
-3. On the role summary page, click the **Trust relationships** tab, and you will see the trusted entities.
+The TiDB Cloud Account ID and TiDB Cloud External ID are environment-specific and per-cluster, so do not copy literal values from this document. Instead, get them from the TiDB Cloud console:
 
-The following is a sample trust entity:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to your target cluster, and then click **Data** > **Import** in the left navigation pane.
+2. Click **Import data from Cloud Storage**.
+3. On the **Import Data from Cloud Storage** page, select **Amazon S3** as the cloud provider.
+4. In the **Credentials** section, click **Click here to create new one with AWS CloudFormation** to open the **Add New Role ARN** dialog, and then expand **Having trouble? Create Role ARN manually** to display the **TiDB Cloud Account ID** and **TiDB Cloud External ID** for this cluster.
+
+Then verify the trust entity on your IAM role:
+
+1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**.
+2. In the list of roles, find and click the role you have created for the target TiDB cluster. The role summary page is displayed.
+3. On the role summary page, click the **Trust relationships** tab to view the trusted entities.
+
+The trust entity should look like the following sample, with `<TiDB-Cloud-Account-ID>` and `<TiDB-Cloud-External-ID>` replaced by the values you obtained from the console:
 
 ```
 {
@@ -30,12 +39,12 @@ The following is a sample trust entity:
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::380838443567:root"
+                "AWS": "arn:aws:iam::<TiDB-Cloud-Account-ID>:root"
             },
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                    "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
+                    "sts:ExternalId": "<TiDB-Cloud-External-ID>"
                 }
             }
         }
@@ -43,10 +52,7 @@ The following is a sample trust entity:
 }
 ```
 
-In the sample trust entity:
-
-- `380838443567` is the TiDB Cloud Account ID. Make sure that this field in your trust entity matches your TiDB Cloud Account ID.
-- `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe` is the TiDB Cloud External ID. Make sure that this field in your trusted entity matches your TiDB Cloud External ID.
+Make sure that the `Principal.AWS` field matches the **TiDB Cloud Account ID** shown in the console, and that the `sts:ExternalId` condition matches the **TiDB Cloud External ID** shown in the console.
 
 ### Check whether the IAM role exists
 
