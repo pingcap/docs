@@ -97,15 +97,15 @@ mysql-instances:
 
 > **Warning:**
 >
-> This feature is introduced in v8.5.6 and is experimental.
+> This feature is experimental. It is not recommended that you use it in the production environment. It might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tiflow/issues) on GitHub.
 
 When you enable safe mode and set `foreign_key_checks=1` in the downstream task session, the default `DELETE` + `REPLACE` rewrite for `UPDATE` statements can trigger unintended `ON DELETE CASCADE` effects on child rows. Starting from v8.5.6, DM introduces the following improvements to address this issue.
 
 ### Non-key `UPDATE` optimization
 
-For `UPDATE` statements that do not modify primary key or unique key values, DM skips the `DELETE` step and executes only `REPLACE INTO`. Because the primary key remains unchanged, `REPLACE INTO` overwrites the existing row without triggering cascade deletes. This optimization is applied automatically in safe mode.
+For `UPDATE` statements that do not modify primary key or unique key values, DM skips the `DELETE` step and executes only `REPLACE INTO`. Because the primary key remains unchanged, `REPLACE INTO` overwrites the existing row without triggering foreign key cascade deletes. This optimization is applied automatically in safe mode.
 
-For example, consider the following upstream statement, where `id` is the primary key:
+Take the following upstream statement as an example, where `id` is the primary key:
 
 ```sql
 UPDATE dummydb.dummytbl SET int_value = 888999 WHERE id = 123;
@@ -126,17 +126,17 @@ REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);  -
 
 > **Warning:**
 >
-> When `foreign_key_checks=1`, DM does not support `UPDATE` statements that modify primary key or unique key values. In this case, the task is paused with the error `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate such `UPDATE` statements on tables with foreign keys, set `safe-mode: false`.
+> When `foreign_key_checks=1`, DM does not support replicating `UPDATE` statements that modify primary key or unique key values. In this case, the replication task is paused with the error `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate such `UPDATE` statements on tables with foreign keys, set `safe-mode: false`.
 
 ### Session-level `foreign_key_checks`
 
-During batch execution in safe mode, DM executes `SET SESSION foreign_key_checks=0` before executing `INSERT` and `UPDATE` batches, and restores the original value afterward. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering cascade operations in the downstream.
+During batch execution in safe mode, DM executes `SET SESSION foreign_key_checks=0` before executing `INSERT` and `UPDATE` batches, and restores the original value of `foreign_key_checks` afterward. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering foreign key cascade operations in the downstream.
 
 This session-level setting introduces a small overhead per batch (two `SET SESSION` round trips). In most workloads, this overhead is negligible.
 
 ### Multi-worker foreign key causality
 
-When you set `worker-count` to a value greater than 1 and the task includes tables with foreign keys, DM reads foreign key relationships from the downstream `CREATE TABLE` schema when the task starts. For each DML operation, DM injects causality keys based on these relationships. This ensures that operations on parent rows and their dependent child rows are assigned to the same DML worker queue.
+When you set `worker-count` to a value greater than 1 and the replication task includes tables with foreign keys, DM reads foreign key relationships from the downstream `CREATE TABLE` schema when the task starts. For each DML operation, DM injects causality keys based on these relationships. This ensures that operations on parent rows and their dependent child rows are assigned to the same DML worker queue.
 
 For detailed constraints, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
 

@@ -31,11 +31,11 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 
 > **Warning:**
 >
-> This feature is experimental.
+> This feature is experimental. It is not recommended that you use it in the production environment. It might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tiflow/issues) on GitHub.
 
 Starting from v8.5.6, DM provides **experimental** support for replicating tables that use foreign key constraints. This support includes the following improvements:
 
-- **Safe mode**: during safe mode execution, DM sets `foreign_key_checks=0` for each batch and skips the redundant `DELETE` step for `UPDATE` statements that do not modify primary key or unique key values. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering unintended `ON DELETE CASCADE` effects on child rows. For details, see [DM Safe Mode](/dm/dm-safe-mode.md#foreign-key-handling-new-in-v856).
+- **Safe mode**: during safe mode execution, DM sets `foreign_key_checks=0` for each batch and skips the redundant `DELETE` step for `UPDATE` statements that do not modify primary key or unique key values. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering unintended `ON DELETE CASCADE` effects on child rows. For more information, see [DM safe mode](/dm/dm-safe-mode.md#foreign-key-handling-new-in-v856).
 - **Multi-worker causality**: when `worker-count > 1`, DM reads foreign key relationships from the downstream schema at task start and injects causality keys. This ensures that DML operations on parent rows complete before operations on dependent child rows, preserving binlog order across workers.
 
 The following limitations apply to foreign key replication:
