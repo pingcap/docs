@@ -357,7 +357,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 > **Warning:**
 >
-> Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
+> Starting from v8.5.6, Statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
 
 The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, TiDB supports two statistics versions: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
@@ -382,7 +382,7 @@ The following table lists the information collected by each version for usage in
 
 It is recommended that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Until Version 2 statistics are collected for an object (such as a table, an index, or a partition), TiDB continues to use the existing Version 1 statistics for that object.
 
-One major reason to migrate is that Version 1 might produce inaccurate estimates for equal/IN predicates because the Count-Min sketch can have hash collisions. For more information, see [Count-Min Sketch](#count-min-sketch). To avoid this issue, set `tidb_analyze_version = 2` and rerun `ANALYZE` on all objects.
+One major reason to migrate is that Version 1 might produce inaccurate estimates for equal/IN predicates because the Count-Min Sketch can have hash collisions. For more information, see [Count-Min Sketch](#count-min-sketch). To avoid this issue, set `tidb_analyze_version = 2` and rerun `ANALYZE` on all objects.
 
 To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Version 2:
 
