@@ -15,9 +15,9 @@ Top SQL provides the following features:
 * Visualize the top `5`, `20`, or `100` SQL queries with the most resource consumption in the current time range through charts and tables, with the remaining records automatically summarized as `Others`.
 * Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical IO bytes.
 * Display SQL and execution plan details by query. When selecting a TiKV node, you can also aggregate analysis in dimensions of `By Table`, `By DB`, and `By Region`.
-* Support zooming the chart by selecting a time range, manual refresh, auto refresh, and exporting to CSV.
+* Zoom in on a selected time range in the chart, manually refresh data, enable auto refresh, and export table data to CSV.
 * Collect all SQL statements that are executed, including those that are still running.
-* Allow you to view data of a specific TiDB and TiKV node.
+* Display data of a specific TiDB or TiKV node.
 
 ## Recommended scenarios
 
@@ -112,7 +112,7 @@ The following are the common steps to use Top SQL.
 
 4. Select the observation mode.
 
-    - Use `Limit` to select the Top `5`, `20`, or `100` SQL queries to display.
+    - Use `Limit` to display the Top `5`, `20`, or `100` SQL queries.
     - The default aggregation dimension is `By Query`. If you select a TiKV node, you can also aggregate in dimensions of `By Table`, `By DB`, or `By Region`.
 
         ![Select aggregation dimension](/media/dashboard/v8.5-top-sql-usage-select-agg-by.png)
@@ -161,7 +161,7 @@ You can disable this feature by following these steps:
 3. Click **Save**.
 4. In the popped-up dialog box, click **Disable**.
 
-After disabling, new Top SQL data collection will stop, but historical data can still be viewed before it expires.
+After you disable Top SQL, new Top SQL data collection will stop, but historical data can still be viewed before it expires.
 
 In addition to the UI, you can also disable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
@@ -196,7 +196,7 @@ It is now a generally available (GA) feature and can be used in production envir
 
 **4. What does `Others` mean in the UI?**
 
-`Others` represents the summary result of all non-Top N records under the current sort dimension. You can use this result to understand the proportion of Top N records in the overall workload.
+`Others` represents the summary result of all non-Top N records under the current sort dimension. You can use it to understand how much of the total workload comes from the Top N records.
 
 **5. What is the relationship between the CPU overhead displayed by Top SQL and the actual CPU usage of the process?**
 
@@ -212,7 +212,7 @@ The Y-axis of the Top SQL chart represents the resource consumption under the cu
 
 **7. Does Top SQL collect running (unfinished) SQL statements?**
 
-Yes. TiDB Dashboard collects the resource consumption of all running or completed SQL after Top SQL is enabled, so unfinished SQL is also collected.
+Yes. After you enable Top SQL, TiDB Dashboard collects resource consumption for all running SQL statements, including unfinished ones.
 
 **8. Why is there no new data for `Order By Network`, `Order By Logical IO`, or `By Region`?**
 
