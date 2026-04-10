@@ -5,7 +5,7 @@ description: Review, revise, write, and translate TiDB release notes for the Com
 
 # TiDB Release Notes
 
-When you write, review, or translate a release note entry, use this skill to load the right reference, apply the correct patterns, and produce output that matches the published format in `docs/releases/` (English) and `docs-cn/releases/` (Chinese) for v6.1.0 and later.
+When you write, review, or translate a release note entry, use this skill to load the right references, apply the correct patterns, and produce output that matches the published format in `releases/` (`pingcap/docs` for English, `pingcap/docs-cn` for Chinese) for v6.1.0 and later.
 
 ## When to use this skill
 
@@ -75,7 +75,7 @@ TiDB 版本：X.X.X
 | `## Compatibility changes` | `## 兼容性变更` |
 | `### Behavior changes` | `### 行为变更` |
 | `### System variables` | `### 系统变量` |
-| `### Configuration file parameters` | `### 配置文件参数` |
+| `### Configuration parameters` | `### 配置参数` |
 | `## Deprecated features` | `## 废弃功能` |
 | `## Improvements` | `## 改进提升` |
 | `## Bug fixes` | `## 错误修复` |

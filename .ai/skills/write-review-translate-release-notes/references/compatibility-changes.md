@@ -7,7 +7,7 @@ Rules for the `## Compatibility changes` / `## 兼容性变更` section, includi
 - Upgrade note block
 - Behavior changes (paragraph format, required content, examples)
 - System variables table (format, change-type vocabulary, anchor convention)
-- Configuration file parameters table
+- Configuration parameters table
 - Common review findings
 
 ## Upgrade note block
@@ -99,7 +99,7 @@ For pre-existing variables (not introduced in this version), use no suffix — o
 
 Both links point to the same documentation page; only the anchor fragment differs.
 
-## Configuration file parameters table
+## Configuration parameters table
 
 **English**
 

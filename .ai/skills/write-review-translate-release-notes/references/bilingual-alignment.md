@@ -35,10 +35,10 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 ### Table parity
 
 - English and Chinese compatibility tables must have:
-  - Same number of rows
-  - Same row order
-  - Same variable/parameter names
-  - Matching change-type translations (`Newly added` ↔ `新增`, `Modified` ↔ `修改`, etc.)
+    - Same number of rows
+    - Same row order
+    - Same variable/parameter names
+    - Matching change-type translations (`Newly added` ↔ `新增`, `Modified` ↔ `修改`, etc.)
 
 ### Note block punctuation
 
