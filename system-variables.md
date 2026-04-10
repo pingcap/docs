@@ -4514,7 +4514,7 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
 - Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
 
-### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
