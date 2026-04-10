@@ -2358,7 +2358,7 @@ Configures the behavior of TiKV automatic compaction.
 
 ### `mvcc-read-weight` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856-and-v900) is set to `true`.
++ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers, such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856-and-v900) is set to `true`.
 + Default value: `3.0`
 + Minimum value: `0.0`
 
