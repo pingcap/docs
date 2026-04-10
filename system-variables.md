@@ -4514,6 +4514,17 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
 - Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
 
+### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable improves Join Reorder optimization for certain multi-table join queries. If you set it to `ON`, the optimizer includes filter conditions (`Selection`) between multiple consecutive joins into the candidate range for Join Reorder optimization, provided safety conditions are met. When rebuilding the join tree, the optimizer pushes these conditions down to more suitable positions, which lets more tables participate in Join Reorder optimization.
+- If you observe performance regressions or unstable execution plans after enabling this variable, set it to `OFF` to disable this feature.
+- To ensure the evaluation semantics of expressions remain unchanged, the optimizer does not perform condition pushdown even when this variable is enabled if the filter conditions contain non-deterministic functions or functions with side effects (such as `RAND()`).
+
 ### tidb_opt_limit_push_down_threshold
 
 - Scope: SESSION | GLOBAL
