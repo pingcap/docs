@@ -559,4 +559,5 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [{{{ .starter }}} FAQs](/tidb-cloud/serverless-faqs.md)
+  - [Project Migration FAQ for TiDB X Instances](/tidb-cloud/tidbx-instance-move-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)

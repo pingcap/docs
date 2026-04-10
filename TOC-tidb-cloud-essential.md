@@ -572,4 +572,5 @@
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
+  - [Project Migration FAQ for TiDB X Instances](/tidb-cloud/tidbx-instance-move-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
