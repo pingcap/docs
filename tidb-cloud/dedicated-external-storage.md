@@ -31,11 +31,11 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-    3. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+    3. Click **Import data from Cloud Storage**.
 
-    4. On the **Import Data from Amazon S3** page, click the link under **Role ARN**. The **Add New Role ARN** dialog is displayed.
+    4. On the **Import Data from Cloud Storage** page, set **Storage Provider** to **Amazon S3**, make sure **AWS Role ARN** is selected under **Credentials**, and then click **Click here to create new one with AWS CloudFormation** under the **Role ARN** field. The **Add New Role ARN** dialog is displayed.
 
-    5. Expand **Create Role ARN manually** to get the TiDB Cloud Account ID and TiDB Cloud External ID. Take a note of these IDs for later use.
+    5. Expand **Having trouble? Create Role ARN manually** to get the **TiDB Cloud Account ID** and **TiDB Cloud External ID** for this cluster. Take a note of these IDs for later use.
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
@@ -161,9 +161,9 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-    3. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
+    3. Click **Import data from Cloud Storage**.
 
-    4. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
+    4. On the **Import Data from Cloud Storage** page, set **Storage Provider** to **Google Cloud Storage**, and then copy the Google Cloud Service Account ID for later use.
 
 2. In the Google Cloud console, create an IAM role for your GCS bucket.
 
