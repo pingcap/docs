@@ -13,7 +13,7 @@ The section structure is identical to Improvements: use `+` for component groups
 
 ## English style rules
 
-Lead with a fix verb phrase. The accepted patterns, listed roughly by frequency in published v6.1+ notes:
+Lead with a fix verb phrase. Use the following accepted patterns, which are listed roughly by frequency in published v6.1+ notes:
 
 - `Fix the issue that [subject] [verb phrase]` (dominant modern pattern)
 - `Fix the issue of [noun phrase] that occurs when/during [condition]` (result-first phrasing)

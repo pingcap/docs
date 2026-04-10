@@ -1,6 +1,6 @@
 ---
 name: release-notes
-description: Review, revise, write, and translate TiDB release notes for the Compatibility changes, Improvements, and Bug fixes sections in English and Chinese. Use this skill when working with release note entries, aligning English and Chinese content, auditing `release-X.X.X.md` files, or editing files under `docs/releases/` or `docs-cn/releases/`.
+description: Write, review, revise, and translate TiDB release notes for the Compatibility changes, Improvements, and Bug fixes sections in English and Chinese. Use this skill when working with release note entries, aligning English and Chinese content, auditing `release-X.X.X.md` files, or editing files under `docs/releases/` or `docs-cn/releases/`.
 ---
 
 # TiDB Release Notes

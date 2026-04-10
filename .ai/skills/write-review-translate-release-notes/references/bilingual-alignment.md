@@ -30,7 +30,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 
 - Each English section must have an exact Chinese counterpart.  
 - Example: If the English file has `### Behavior changes`, the Chinese file must have `### 行为变更`.  
-- Missing sections are considered defects. See SKILL.md for section heading mappings.
+- Treat missing sections as defects. See SKILL.md for section heading mappings.
 
 ### Table parity
 
@@ -71,7 +71,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
    - Improvement: `[Action verb] [what was improved, added, or supported] [#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) @[contributor](https://github.com/contributor)` — for approved opening verbs and usage guidance, see [improvements.md](improvements.md)
 4. Draft the Chinese entry with the matching pattern
 5. Verify issue numbers match exactly between English and Chinese
-6. Verify anchor suffix format if doc links are included
+6. Verify the anchor suffix format if you include documentation links
 
 ## English to Chinese translation
 

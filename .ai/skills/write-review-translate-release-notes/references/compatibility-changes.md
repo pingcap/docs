@@ -34,14 +34,14 @@ Note block punctuation: English uses `**Note:**` (ASCII colon). Chinese uses `**
 
 ## Behavior changes
 
-Each behavior change is written as a paragraph, not a table row. A complete entry must include:
+Write each behavior change as a paragraph, not a table row. A complete entry must include:
 
 1. The old behavior: "In earlier versions, ..." / "Before vX.X.X, ..." / "在此前版本中，......"
 2. The new behavior starting from this version: "Starting from vX.X.X, ..." / "从 vX.X.X 开始，......"
 3. The reason for the change (optional but recommended for significant changes)
 4. A documentation link: "For more information, see [documentation](/path.md#anchor)." / "更多信息，请参考[用户文档](/path.md#锚点)。"
 
-Omitting either the old behavior or the new behavior is considered a defect.
+Treat the omission of either the old behavior or the new behavior as a defect.
 
 **English example** (from v8.1.0):
 
@@ -90,7 +90,7 @@ Do not use variants such as `New` or `Modify`.
 
 ### Anchor suffix convention
 
-For variables introduced in this version, the documentation anchor includes a version suffix:
+For variables that you introduce in this version, include a version suffix in the documentation anchor:
 
 - English: `#var_name-new-in-vXYZ`, for example `#tidb_build_sampling_stats_concurrency-new-in-v750`
 - Chinese: `#var_name-从-vXYZ-版本开始引入`, for example `#tidb_build_sampling_stats_concurrency-从-v750-版本开始引入`
