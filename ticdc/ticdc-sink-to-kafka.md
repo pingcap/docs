@@ -211,7 +211,7 @@ token="xxxx"
 
 In the above configuration, `region` and `registry-name` are required fields, while `access-key`, `secret-access-key`, and `token` are optional fields. The best practice is to set the AWS credentials as environment variables or store them in the `~/.aws/credentials` file instead of setting them in the changefeed configuration file.
 
-For more information, refer to the [official AWS SDK for Go V2 documentation](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials).
+For more information, refer to the [official AWS SDK for Go V2 documentation](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/configure-gosdk.html#specifying-credentials).
 
 ## Customize the rules for Topic and Partition dispatchers of Kafka Sink
 
