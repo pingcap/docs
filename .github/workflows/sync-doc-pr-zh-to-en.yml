@@ -22,11 +22,6 @@ on:
           - gemini
           - azure
         default: 'azure'
-      azure_base_url:
-        description: 'Azure OpenAI base URL (required for azure unless AZURE_OPENAI_BASE_URL repo variable is set)'
-        required: false
-        type: string
-        default: ''
 
 permissions:
   contents: write
@@ -35,6 +30,7 @@ permissions:
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
+    if: contains(fromJson('["hfxsd","likidu","lilin90","Oreoxmt","qiancai"]'), github.actor)
 
     steps:
       - name: Checkout current repository
@@ -137,28 +133,6 @@ jobs:
 
           echo "Push preflight passed for ${HEAD_REPO}."
 
-      - name: Validate AI provider configuration
-        env:
-          AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
-          AZURE_BASE_URL: ${{ github.event.inputs.azure_base_url || vars.AZURE_OPENAI_BASE_URL }}
-          AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY }}
-        run: |
-          if [[ "$AI_PROVIDER" == "azure" ]]; then
-            if [[ -z "$AZURE_OPENAI_KEY" ]]; then
-              echo "❌ Missing AZURE_OPENAI_KEY secret for Azure OpenAI."
-              exit 1
-            fi
-
-            if [[ -z "$AZURE_BASE_URL" ]]; then
-              echo "❌ Missing Azure OpenAI base URL. Provide workflow input 'azure_base_url' or set repo variable AZURE_OPENAI_BASE_URL."
-              exit 1
-            fi
-
-            echo "Azure OpenAI configuration validated."
-          else
-            echo "No Azure-specific validation required for provider ${AI_PROVIDER}."
-          fi
-
       - name: Clone target repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -178,7 +152,7 @@ jobs:
           DEEPSEEK_API_TOKEN: ${{ secrets.DEEPSEEK_API_TOKEN }}
           GEMINI_API_TOKEN: ${{ secrets.GEMINI_API_TOKEN }}
           AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY }}
-          OPENAI_BASE_URL: ${{ github.event.inputs.azure_base_url || vars.AZURE_OPENAI_BASE_URL }}
+          OPENAI_BASE_URL: ${{ secrets.AZURE_OPENAI_BASE_URL }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
