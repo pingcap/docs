@@ -175,7 +175,7 @@ These automated backups enable you to restore your database either from a full b
 
 During a failure, ongoing transactions on the failed server might be interrupted. Although failover is transparent to applications, you must implement logic to handle recoverable failures during active transactions. Different failure scenarios are handled as follows:
 
-- **TiDB failures**: If a TiDB instance fails, client connections are unaffected because TiDB Cloud automatically reroutes traffic through the gateway. While transactions on the failed TiDB instance might be interrupted, the system ensures that committed data is preserved, and new transactions are handled by another available TiDB instance.
+- **TiDB failures**: If a TiDB node fails, client connections are unaffected because TiDB Cloud automatically reroutes traffic through the gateway. While transactions on the failed TiDB node might be interrupted, the system ensures that committed data is preserved, and new transactions are handled by another available TiDB node.
 - **Gateway failures**: If the Gateway fails, client connections are disrupted. However, TiDB Cloud gateways are stateless and can restart immediately in a new zone or server. Traffic is automatically redirected to the new gateway, minimizing downtime.
 
 It is recommended to implement retry logic in your application to handle recoverable failures. For implementation details, refer to your driver or ORM documentation (for example, [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
