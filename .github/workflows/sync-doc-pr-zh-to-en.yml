@@ -20,8 +20,13 @@ on:
         options:
           - deepseek
           - gemini
-          - openai
-        default: 'openai'
+          - azure
+        default: 'azure'
+      azure_base_url:
+        description: 'Azure OpenAI base URL (required for azure unless AZURE_OPENAI_BASE_URL repo variable is set)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -100,13 +105,59 @@ jobs:
           TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
           TARGET_PR: ${{ steps.extract_info.outputs.target_pr }}
         run: |
-          PR_INFO=$(curl -s -H "Authorization: token ${GH_TOKEN}" -H "Accept: application/vnd.github.v3+json" \
+          PR_INFO=$(curl -fsS -H "Authorization: token ${GH_TOKEN}" -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/pulls/${TARGET_PR}")
           TARGET_BRANCH=$(echo "$PR_INFO" | jq -r '.head.ref')
           HEAD_REPO=$(echo "$PR_INFO" | jq -r '.head.repo.full_name')
+          BASE_BRANCH=$(echo "$PR_INFO" | jq -r '.base.ref')
+          MAINTAINER_CAN_MODIFY=$(echo "$PR_INFO" | jq -r '.maintainer_can_modify // false')
+
+          if [[ -z "$TARGET_BRANCH" || "$TARGET_BRANCH" == "null" || -z "$HEAD_REPO" || "$HEAD_REPO" == "null" || -z "$BASE_BRANCH" || "$BASE_BRANCH" == "null" ]]; then
+            echo "❌ Failed to extract target PR branch metadata from the GitHub API response."
+            exit 1
+          fi
+
           echo "target_branch=${TARGET_BRANCH}" >> $GITHUB_OUTPUT
           echo "head_repo=${HEAD_REPO}" >> $GITHUB_OUTPUT
-          echo "Target branch: ${TARGET_BRANCH}, Head repo: ${HEAD_REPO}"
+          echo "base_branch=${BASE_BRANCH}" >> $GITHUB_OUTPUT
+          echo "maintainer_can_modify=${MAINTAINER_CAN_MODIFY}" >> $GITHUB_OUTPUT
+          echo "Target branch: ${TARGET_BRANCH}, Head repo: ${HEAD_REPO}, Base branch: ${BASE_BRANCH}, Maintainer can modify: ${MAINTAINER_CAN_MODIFY}"
+
+      - name: Verify target PR branch is pushable
+        env:
+          TARGET_OWNER: ${{ steps.extract_info.outputs.target_owner }}
+          TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
+          HEAD_REPO: ${{ steps.target_branch.outputs.head_repo }}
+          MAINTAINER_CAN_MODIFY: ${{ steps.target_branch.outputs.maintainer_can_modify }}
+        run: |
+          if [[ "$HEAD_REPO" != "${TARGET_OWNER}/${TARGET_REPO}" && "$MAINTAINER_CAN_MODIFY" != "true" ]]; then
+            echo "Fork PR head repo ${HEAD_REPO} does not allow maintainer edits, so translated changes cannot be pushed back automatically."
+            exit 1
+          fi
+
+          echo "Push preflight passed for ${HEAD_REPO}."
+
+      - name: Validate AI provider configuration
+        env:
+          AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
+          AZURE_BASE_URL: ${{ github.event.inputs.azure_base_url || vars.AZURE_OPENAI_BASE_URL }}
+          AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY }}
+        run: |
+          if [[ "$AI_PROVIDER" == "azure" ]]; then
+            if [[ -z "$AZURE_OPENAI_KEY" ]]; then
+              echo "❌ Missing AZURE_OPENAI_KEY secret for Azure OpenAI."
+              exit 1
+            fi
+
+            if [[ -z "$AZURE_BASE_URL" ]]; then
+              echo "❌ Missing Azure OpenAI base URL. Provide workflow input 'azure_base_url' or set repo variable AZURE_OPENAI_BASE_URL."
+              exit 1
+            fi
+
+            echo "Azure OpenAI configuration validated."
+          else
+            echo "No Azure-specific validation required for provider ${AI_PROVIDER}."
+          fi
 
       - name: Clone target repository
         env:
@@ -126,11 +177,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEEPSEEK_API_TOKEN: ${{ secrets.DEEPSEEK_API_TOKEN }}
           GEMINI_API_TOKEN: ${{ secrets.GEMINI_API_TOKEN }}
-          OPENAI_API_TOKEN: ${{ secrets.OPENAI_API_TOKEN }}
+          AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY }}
+          OPENAI_BASE_URL: ${{ github.event.inputs.azure_base_url || vars.AZURE_OPENAI_BASE_URL }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
           TARGET_REPO_PATH: ${{ github.workspace }}/target_repo
+          TERMS_PATH: ${{ github.workspace }}/target_repo/resources/terms.md
         run: |
           cd ai-pr-translator/scripts
           if python main_workflow.py; then
@@ -143,25 +196,77 @@ jobs:
           fi
 
       - name: Commit and push changes
+        id: commit_push
         if: steps.sync_script.outputs.sync_success == 'true'
+        continue-on-error: true
         env:
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
           TARGET_BRANCH: ${{ steps.target_branch.outputs.target_branch }}
+          TARGET_BASE_BRANCH: ${{ steps.target_branch.outputs.base_branch }}
         run: |
           cd target_repo && git add .
-          if ! git diff --staged --quiet; then
-            printf "Auto-sync: Update English docs from Chinese PR\n\nSynced from: %s\nTarget PR: %s\nAI Provider: %s\n\nCo-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
-              "$SOURCE_PR_URL" "$TARGET_PR_URL" "$AI_PROVIDER" | git commit -F -
-            git push origin "$TARGET_BRANCH"
-            echo "Changes pushed to $TARGET_BRANCH"
-          else
-            echo "No changes to commit"
+          if git diff --staged --quiet; then
+            echo "push_success=false" >> $GITHUB_OUTPUT
+            echo "No translated changes were generated, so nothing was pushed."
+            exit 1
           fi
 
+          REWRITE_PLACEHOLDER_COMMITS=false
+          BASE_REF="origin/${TARGET_BASE_BRANCH}"
+
+          if git rev-parse --verify "$BASE_REF" >/dev/null 2>&1; then
+            if MERGE_BASE=$(git merge-base HEAD "$BASE_REF"); then
+              readarray -t BRANCH_COMMITS < <(git rev-list --reverse "${MERGE_BASE}..HEAD")
+
+              if [[ ${#BRANCH_COMMITS[@]} -eq 2 ]]; then
+                FIRST_MSG=$(git log -1 --format=%s "${BRANCH_COMMITS[0]}")
+                SECOND_MSG=$(git log -1 --format=%s "${BRANCH_COMMITS[1]}")
+
+                if [[ "$FIRST_MSG" == "Add temp.md" && "$SECOND_MSG" == "Delete temp.md" ]]; then
+                  echo "Detected placeholder commits. Resetting branch to ${MERGE_BASE} before creating the first real sync commit."
+                  git reset --soft "${MERGE_BASE}"
+                  REWRITE_PLACEHOLDER_COMMITS=true
+                fi
+              fi
+            else
+              echo "Failed to find a merge-base with ${BASE_REF}. Skipping placeholder cleanup."
+            fi
+          else
+            echo "Base ref ${BASE_REF} not found in cloned fork. Skipping placeholder cleanup."
+          fi
+
+          if ! printf "Auto-sync: Update English docs from Chinese PR\n\nSynced from: %s\nTarget PR: %s\nAI Provider: %s\n\nCo-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
+            "$SOURCE_PR_URL" "$TARGET_PR_URL" "$AI_PROVIDER" | git commit -F -; then
+            echo "push_success=false" >> $GITHUB_OUTPUT
+            echo "Failed to create a commit for the translated changes."
+            exit 1
+          fi
+
+          if [[ "$REWRITE_PLACEHOLDER_COMMITS" == "true" ]]; then
+            if git push --force-with-lease origin "$TARGET_BRANCH"; then
+              echo "push_success=true" >> $GITHUB_OUTPUT
+            else
+              echo "push_success=false" >> $GITHUB_OUTPUT
+              echo "Failed to force-push translated changes to $TARGET_BRANCH."
+              exit 1
+            fi
+          else
+            if git push origin "$TARGET_BRANCH"; then
+              echo "push_success=true" >> $GITHUB_OUTPUT
+            else
+              echo "push_success=false" >> $GITHUB_OUTPUT
+              echo "Failed to push translated changes to $TARGET_BRANCH."
+              exit 1
+            fi
+          fi
+
+          echo "Changes pushed to $TARGET_BRANCH"
+
       - name: Add success comment to target PR
-        if: steps.sync_script.outputs.sync_success == 'true'
+        if: steps.commit_push.outputs.push_success == 'true'
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
@@ -182,7 +287,8 @@ jobs:
             -d "$PAYLOAD"
 
       - name: Add failure comment to target PR
-        if: always() && steps.sync_script.outputs.sync_success == 'false'
+        if: always() && steps.extract_info.outputs.target_owner != '' && steps.commit_push.outputs.push_success != 'true'
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
@@ -195,30 +301,15 @@ jobs:
             "**Auto-sync failed**" \
             "**Source PR**: ${SOURCE_PR_URL}" \
             "**Target PR**: ${TARGET_PR_URL}" \
-            "The sync process encountered an error. Please check the workflow logs for details.")
+            "Translated changes were not pushed to the target branch. Please check the workflow logs for details.")
           PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
           curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
             -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
             -d "$PAYLOAD"
 
-      - name: Add failure comment on early step failure
-        if: failure() && steps.extract_info.outputs.target_owner != ''
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
-          TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
-          TARGET_OWNER: ${{ steps.extract_info.outputs.target_owner }}
-          TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
-          TARGET_PR: ${{ steps.extract_info.outputs.target_pr }}
+      - name: Fail workflow if translated changes were not pushed
+        if: always() && steps.commit_push.outputs.push_success != 'true'
         run: |
-          BODY=$(printf '%s\n\n%s\n%s\n\n%s' \
-            "**Auto-sync failed (early step failure)**" \
-            "**Source PR**: ${SOURCE_PR_URL}" \
-            "**Target PR**: ${TARGET_PR_URL}" \
-            "A step before the sync script failed. Please check the workflow logs for details.")
-          PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
-          curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
-            -d "$PAYLOAD"
+          echo "Workflow failed because translated changes were not pushed to the target branch."
+          exit 1
