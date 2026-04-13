@@ -255,7 +255,7 @@ To remove a member from an organization, take the following steps:
 
 ## Manage project access
 
-This section describes how to rename a project and how to invite and remove project members. To learn how to create or manage a project, see [Manage projects](/tidb-cloud/manage-projects-and-resources.md#manage-projects).
+This section describes how to rename a project and how to invite and remove project members. To learn how to create or manage a project, see [Manage projects](/tidb-cloud/manage-projects-and-resources.md#manage-tidb-cloud-projects).
 
 ### Rename a project
 
