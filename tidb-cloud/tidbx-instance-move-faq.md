@@ -9,7 +9,7 @@ TiDB X instances are service-oriented TiDB Cloud offerings built on the [TiDB X 
 
 This FAQ explains why the [TiDB Cloud console](https://tidbcloud.com/) prompts you to move your {{{ .starter }}} and Essential instances to TiDB X projects, what changes occur during the migration process, and what follow-up actions you need to take.
 
-## Why does the TiDB Cloud console prompt you to move your {{{ .starter }}} and Essential instances?
+## Why does the TiDB Cloud console prompt me to move my {{{ .starter }}} and Essential instances?
 
 Before April 15, 2026, TiDB Cloud used a single **TiDB dedicated project** type to manage all TiDB Cloud resources. Such a project could contain a mix of {{{ .dedicated }}} clusters and TiDB X instances. However, mixing different resource types in one project increased management complexity because:
 
@@ -18,8 +18,8 @@ Before April 15, 2026, TiDB Cloud used a single **TiDB dedicated project** type 
 
 Starting from April 15, 2026, TiDB Cloud introduces separate project types to provide clear separation between different resource types. Each project type now exclusively hosts its own resource type:
 
-- **TiDB X project**: for TiDB X instances
 - **TiDB dedicated project**: for {{{ .dedicated }}} clusters
+- **TiDB X project**: for TiDB X instances
 - **TiDB X virtual project**: for TiDB X instances not grouped in any TiDB X project
 
 TiDB X projects are lightweight and optional for TiDB X instances, while dedicated projects are mandatory for {{{ .dedicated }}} clusters. Separating these resources ensures a more consistent user experience and eliminates confusion over which project capabilities apply.
@@ -134,7 +134,7 @@ If your {{{ .starter }}} or Essential instances are moved to a new TiDB X projec
 - Data Apps
 - Data Service API keys
 
-Project-level RBAC permissions are copied to the new project, but you should still review access after migration to make sure users and workflows still work as expected.
+Project-level RBAC permissions are copied to the new project, but you must still review access after migration to make sure users and workflows still work as expected.
 
 If you use the TiDB Cloud API to manage your instances, see [OpenAPI Migration Guide for Starter and Essential](/tidbx-starter-essential-openapi-migration-guide.md) to update your API calls.
 
