@@ -7,6 +7,8 @@ summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 
 This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
 
+Starting from v8.5.6, TiDB supports the MySQL-compatible column-level privilege management mechanism. You can specify a list of column names in `REVOKE`, for example `REVOKE SELECT(col2) ON test.tbl FROM 'user'@'host';`. For more information, see [Column-Level Privilege Management](/column-privilege-management.md).
+
 ## Synopsis
 
 ```ebnf+diagram
