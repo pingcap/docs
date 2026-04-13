@@ -590,6 +590,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Unit: Seconds
 - The lock wait timeout for pessimistic transactions (default).
 
+### InPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- This variable is used only for internal statistics and is not visible to users.
+
 ### interactive_timeout
 
 > **Note:**
@@ -670,6 +674,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
 - The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
 - If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
+
+### OutPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- This variable is used only for internal statistics and is not visible to users.
 
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
