@@ -2678,7 +2678,7 @@ Configuration items related to resource metering.
 
 ### `enable-network-io-collection` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ Whether to collect TiKV network traffic and logical I/O information in [Top SQL](/dashboard/top-sql.md) in addition to CPU data.
++ Controls whether to collect TiKV network traffic and logical I/O information in [Top SQL](/dashboard/top-sql.md) in addition to CPU data.
 + When enabled, TiKV additionally records inbound network bytes, outbound network bytes, logical read bytes, and logical write bytes during request processing.
 + When reporting resource consumption, TiKV filters the Top N records based on CPU time, network traffic, and logical I/O, and additionally reports these statistics by Region for more fine-grained analysis of hotspot requests or resource usage sources.
 + Default value: `false`
