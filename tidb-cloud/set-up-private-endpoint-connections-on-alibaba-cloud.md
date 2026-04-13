@@ -20,12 +20,12 @@ This tutorial walks you through the steps to connect to your {{{ .starter }}} or
 
 To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint, follow these steps:
 
-1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-instance)
+1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create a private endpoint on Alibaba Cloud](#step-2-create-a-private-endpoint-on-alibaba-cloud)
 3. [Authorize your private endpoint in TiDB Cloud](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
 4. [Connect to your {{{ .starter }}} or Essential instance using the private endpoint](#step-4-connect-to-your-instance-using-the-private-endpoint)
 
-### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-instance}
+### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-instance}
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -60,7 +60,7 @@ After creating the interface endpoint on Alibaba Cloud, you must add it to your 
 3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table.
 4. Click **Add Rule** to add a firewall rule.
 
-    - **Endpoint Service Name**: paste the service name you got from [Step 1](#step-1-choose-a-tidb-cluster).
+    - **Endpoint Service Name**: paste the service name you got from [Step 1](#step-1-choose-a-tidb-instance).
     - **Firewall Rule Name**: enter a name to identify this connection.
     - **Your Endpoint ID**: paste your 23-character endpoint ID from the Alibaba Cloud Management Console (starts with `ep-`).
 

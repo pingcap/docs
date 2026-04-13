@@ -112,7 +112,7 @@ After creating the AWS interface endpoint, you must add it to your cluster's all
 3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table.
 4. Click **Add Rule** to add a firewall rule.
 
-    - **Endpoint Service Name**: paste the service name you got from [Step 1](#step-1-choose-a-tidb-cluster).
+    - **Endpoint Service Name**: paste the service name you got from [Step 1](#step-1-choose-a-tidb-instance).
     - **Firewall Rule Name**: enter a name to identify this connection.
     - **Your VPC Endpoint ID**: paste your 22-character VPC Endpoint ID from the AWS Management Console (starts with `vpce-`).
 
