@@ -21,7 +21,7 @@ The private link connection can access various AWS services, such as RDS instanc
 
 ### Amazon MSK Provisioned
 
-This type of private link connection enables TiDB Cloud clusters on **AWS** to connect to your [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) with private link.
+This type of private link connection enables {{{ .essential }}} instances on **AWS** to connect to your [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) with private link.
 
 ### Alibaba Cloud Endpoint Service
 
@@ -91,20 +91,20 @@ You can create an Amazon MSK Provisioned private link connection using the TiDB 
 
 Before creating the Amazon MSK Provisioned private link connection, ensure that your Amazon MSK Provisioned cluster turns on multi-VPC connectivity. See [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md) for more details.
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 
 4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **Amazon MSK Provisioned**. If this option is not displayed, ensure that your cluster is created on AWS.
+    - **Connection Type**: select **Amazon MSK Provisioned**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on AWS.
     - **MSK Cluster ARN**: enter the ARN of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx`.
 
 5. Click **Create**.

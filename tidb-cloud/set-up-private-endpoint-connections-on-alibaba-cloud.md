@@ -53,9 +53,9 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 
 ### Step 3. Authorize your private endpoint in TiDB Cloud
 
-After creating the interface endpoint on Alibaba Cloud, you must add it to your cluster's allowlist.
+After creating the interface endpoint on Alibaba Cloud, you must add it to the allowlist of your target {{{ .starter }}} or {{{ .essential }}} instance.
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
 3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table.
 4. Click **Add Rule** to add a firewall rule.
