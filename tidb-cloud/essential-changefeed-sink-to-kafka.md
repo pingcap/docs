@@ -33,13 +33,14 @@ Ensure that your {{{ .essential }}} instance can connect to the Apache Kafka ser
 
 Private link connections leverage **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka and Confluent Cloud Dedicated clusters. It does not support direct integration with MSK or other Kafka SaaS services.
+{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka, Confluent Cloud Dedicated clusters, and Amazon MSK Provisioned. It does not support direct integration with other Kafka SaaS services.
 
 To set up a Private Link connection based on your Kafka deployment and cloud provider, see the following guides:
 
 - [Connect to Confluent Cloud on AWS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+- [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 
 </div>
 
@@ -90,7 +91,7 @@ The steps vary depending on the connectivity method you select.
 
 1. In **Connectivity Method**, select **Private Link**.
 2. In **Private Link Connection**, select the private link connection that you created in the [Network](#network) section. Make sure the Availability Zones of the private link connection match those of the Kafka deployment.
-3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section.
+3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section. If you are using the Amazon MSK Provisioned private link connection, you can skip this field.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.

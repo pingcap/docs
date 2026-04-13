@@ -41,7 +41,8 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
 1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Connect to your {{{ .starter }}} or Essential instance](#step-3-connect-to-your-tidb)
+3. [Authorize your private endpoint in TiDB Cloud](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+4. [Connect to your {{{ .starter }}} or Essential instance](#step-4-connect-to-your-tidb)
 
 ### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-instance}
 
@@ -102,7 +103,26 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 Then you can connect to the endpoint service with the private DNS name.
 
-### Step 3: Connect to your {{{ .starter }}} or Essential instance {#step-3-connect-to-your-tidb}
+### Step 3. Authorize your private endpoint in TiDB Cloud
+
+After creating the AWS interface endpoint, you must add it to your cluster's allowlist.
+
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
+2. Click **Settings** > **Networking** in the left navigation pane.
+3. Scroll down to the **Private Endpoint** section and then locate the **Authorized Networks** table.
+4. Click **Add Rule** to add a firewall rule.
+
+    - **Endpoint Service Name**: paste the service name you got from [Step 1](#step-1-choose-a-tidb-cluster).
+    - **Firewall Rule Name**: enter a name to identify this connection.
+    - **Your VPC Endpoint ID**: paste your 22-character VPC Endpoint ID from the AWS Management Console (starts with `vpce-`).
+
+    > **Tip:**
+    > 
+    > To allow all Private Endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your VPC Endpoint ID** field.
+
+5. Click **Submit**.
+
+### Step 4. Connect to your {{{ .starter }}} or Essential instance {#step-4-connect-to-your-tidb}
 
 After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
 

@@ -1,4 +1,4 @@
-name: Upload media files to Qiniu when they change
+name: Upload media files to Tencent Cloud when they change
 on:
   push:
     branches:
@@ -72,4 +72,5 @@ jobs:
         run: pipx install tccli
 
       - name: Purge production CDN cache
-        run: tccli cdn PurgePathCache --Paths '["https://docs-download.pingcap.com/media/images/docs/"]' --FlushType delete
+        run: |
+          tccli teo CreatePurgeTask --cli-unfold-argument --ZoneId ${{ secrets.TENCENTCLOUD_EO_DOCS_ZONEID }} --Type purge_prefix --Method invalidate --Targets 'https://docs-download.pingcap.com/media/images/docs/'
