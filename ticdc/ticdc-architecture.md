@@ -76,6 +76,49 @@ In table split mode, pay attention to the following settings:
 - [`scheduler.region-count-per-span`](/ticdc/ticdc-changefeed-config.md#region-count-per-span-new-in-v854): the default value is `100`. During changefeed initialization, TiCDC splits tables that meet the split conditions according to this parameter. After splitting, each sub-table contains at most `region-count-per-span` Regions.
 - [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold): the default value is `0` (disabled). When the sink write throughput of a table exceeds this threshold, TiCDC triggers table splitting. In most cases, keep this parameter at `0`.
 
+## Storage Sink file name changes and consumption instructions
+
+After switching to the new TiCDC architecture and enabling table-level task splitting, for [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md), the file name format for recording data changes changes from `CDC_{num}.{extension}` to `CDC_{uuid}_{num}.{extension}`, and the Index file name format changes from `CDC.index` to `CDC_{uuid}.index`. Here, `uuid` identifies the sub replication task after table splitting, and `num` indicates the file sequence number.
+
+- Data change record path
+
+  ```
+  {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC_{uuid}_{num}.{extension}
+  ```
+
+- Index file path
+
+  ```
+  {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/meta/CDC_{uuid}.index
+  ```
+
+After table-level task splitting is enabled, under the `{schema}/{table}/{table-version-separator}/` directory, the same table might have multiple data files with different `uuid` values but the same sequence number. For example:
+
+  ```
+  ├── metadata
+  └── test
+      ├── tbl_1
+      │   ├── 437752935075545091
+      │   │   ├── CDC_11_000001.json
+      │   │   ├── CDC_11_000002.json
+      │   │   ├── CDC_22_000001.json
+      │   │   └── meta
+      │   │       ├── CDC_11.index
+      │   │       └── CDC_22.index
+      │   ├── 437752935075546092
+      │   │   ├── CDC_33_000001.json
+      │   │   ├── CDC_44_000001.json
+      │   │   └── meta
+      │   │       ├── CDC_33.index
+      │   │       └── CDC_44.index
+  ```
+
+Because multiple sub replication tasks write files in parallel, a data file might be read by the downstream before it is fully written, causing part of the data to fail to be read successfully. To avoid this situation, when writing a downstream consumer program, read the data in the following order:
+
+1. Read the `meta/CDC_{uuid}.index` file (for example, `CDC_11.index`) to obtain the name of the file that has been completely written (for example, `CDC_11_000002.json`).
+2. Read the files whose sequence numbers are less than or equal to the sequence number in that file name in order (for example, `CDC_11_000001.json` and `CDC_11_000002.json`).
+3. After reading DML events from the files of all sub tasks, sort these files by the `commit-ts` of the DML events, and then process them downstream in a unified manner.
+
 ## Compatibility
 
 Except as described in the following special cases, the TiCDC new architecture is fully compatible with the classic architecture.
