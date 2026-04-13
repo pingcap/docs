@@ -101,7 +101,7 @@ To view Top SQL, take the following steps:
 
 2. Click **Top SQL**.
 
-3. Select a specific TiDB or TiKV node to observe its load. You can use the time picker or select a time range in the chart to refine your analysis.
+3. Select a specific TiDB or TiKV node to observe its workload. You can use the time picker or select a time range in the chart to refine your analysis.
 
 4. Analyze the charts and tables displayed by Top SQL. Depending on the selected node and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical I/O hotspots.
 

@@ -8,7 +8,7 @@ summary: Use Top SQL to identify queries that consume the most CPU, network, and
 On the Top SQL page of TiDB Dashboard, you can view and analyze the most resource-consuming SQL queries on a specified TiDB or TiKV node over a period of time.
 
 - After you enable Top SQL, this feature continuously collects CPU workload data from existing TiDB and TiKV nodes and retains the data for up to 30 days.
-- Starting from v8.5.6 and v9.0.0, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
+- Starting from v8.5.6, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
 
 Top SQL provides the following features:
 
@@ -65,7 +65,7 @@ In addition to the UI, you can also enable the Top SQL feature by setting the Ti
 SET GLOBAL tidb_enable_top_sql = 1;
 ```
 
-### (Optional) Enable TiKV Network IO collection <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### (Optional) Enable TiKV Network IO collection <span class="version-mark">New in v8.5.6</span>
 
 To view Top SQL by `Order By Network` or `Order By Logical IO` for TiKV nodes, or to use the `By Region` aggregation, you can enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in Top SQL settings and save the changes.
 
@@ -117,13 +117,13 @@ The following are the common steps to use Top SQL.
 
         ![Select aggregation dimension](/media/dashboard/v8.5-top-sql-usage-select-agg-by.png)
 
-    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856-and-v900), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
+    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
 
         ![Select order by](/media/dashboard/v8.5-top-sql-usage-select-order-by.png)
 
     > **Note**
     >
-    > `By Region` and `Order By Network`, `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856-and-v900) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
+    > `By Region`, `Order By Network`, and `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856) is enabled. If this feature is not enabled but historical data still exists, the page continues to display historical data and prompt that new data cannot be fully collected.
 
 5. Observe the resource consumption hotspot records in the chart and table.
 
@@ -221,4 +221,4 @@ These views depend on TiKV Network IO collection (multi-dimensional). You can ch
 - You have selected a TiKV node.
 - The **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel is enabled.
 - The relevant TiKV nodes in the cluster have all successfully enabled this configuration. If only some nodes enable this configuration, the Top SQL page prompts that new data might be incomplete.
-- For newly added TiKV nodes, you need to manually enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel and save again. To make this setting automatically enabled for newly added nodes, also enable `resource-metering.enable-network-io-collection` in the TiKV default configuration of TiUP.
+- For newly added TiKV nodes, you need to manually enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel and save the changes again. To make this setting automatically enabled for newly added nodes, also enable `resource-metering.enable-network-io-collection` in the TiKV default configuration of TiUP.
