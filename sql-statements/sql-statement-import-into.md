@@ -112,7 +112,7 @@ In the left side of the `SET` expression, you can only reference a column name t
 
 It specifies where your data files are located and which files to import. You can specify a single file or use wildcards to match multiple files.
 
-- Cloud storage (Amazon S3, GCS, or Azure Blob Storage): provide the full object storage URI, formatted as described in [URI Formats of External Storage Services](/external-storage-uri.md).
+- Cloud storage (Amazon S3 or GCS): provide the full object storage URI, formatted as described in [URI Formats of External Storage Services](/external-storage-uri.md).
 
 - TiDB local file path: the path must be absolute, and the file extension must be `.csv`, `.sql`, or `.parquet`. Ensure that the specified path and files exist on the TiDB node to which your session is connected, and verify that you have the required `FILE` privilege.
 
