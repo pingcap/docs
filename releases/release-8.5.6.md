@@ -53,7 +53,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### SQL
 
-- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678) **tw@hfxsd** <!--2332-->
+- Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678)
 
     Before v8.5.6, TiDB privilege control covers the database and table levels and does not support granting or revoking privileges on specific columns, unlike MySQL. As a result, you cannot restrict users to access only a subset of sensitive columns in a table.
 
@@ -128,7 +128,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 + TiDB
 
-    - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd** <!--2414-->
+    - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate)
     - Support column-level privileges in `GRANT` and `REVOKE` [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve the performance of privilege update operations such as `GRANT` and `REVOKE` in deployments with a large number of column-level privilege entries [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
