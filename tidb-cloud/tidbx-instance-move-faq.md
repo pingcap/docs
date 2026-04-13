@@ -136,6 +136,8 @@ If your {{{ .starter }}} or Essential instances are moved to a new TiDB X projec
 
 Project-level RBAC permissions are copied to the new project, but you should still review access after migration to make sure users and workflows still work as expected.
 
+If you use the TiDB Cloud API to manage your instances, see [OpenAPI Migration Guide for Starter and Essential](/tidbx-starter-essential-openapi-migration-guide.md) to update your API calls.
+
 ## Where can I get help?
 
 If you are unsure whether your automation, integrations, or Data Service setup depends on the original project ID, contact TiDB Cloud support at [support@pingcap.com](mailto:support@pingcap.com) before you start the migration.
