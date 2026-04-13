@@ -117,13 +117,13 @@ The following are the common steps to use Top SQL.
 
         ![Select aggregation dimension](/media/dashboard/v8.5-top-sql-usage-select-agg-by.png)
 
-    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#enable-tikv-network-io-collection-optional), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
+    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856-and-v900), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
 
         ![Select order by](/media/dashboard/v8.5-top-sql-usage-select-order-by.png)
 
     > **Note**
     >
-    > `By Region` and `Order By Network`, `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#enable-tikv-network-io-collection-optional) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
+    > `By Region` and `Order By Network`, `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856-and-v900) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
 
 5. Observe the resource consumption hotspot records in the chart and table.
 
