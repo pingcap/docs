@@ -37,6 +37,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Checkout ai-pr-translator repository
@@ -45,6 +46,7 @@ jobs:
           repository: "qiancai/ai-pr-translator"
           ref: "main"
           path: "ai-pr-translator"
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -101,8 +103,7 @@ jobs:
           TARGET_REPO: ${{ steps.extract_info.outputs.target_repo }}
           TARGET_PR: ${{ steps.extract_info.outputs.target_pr }}
         run: |
-          PR_INFO=$(curl -fsS -H "Authorization: token ${GH_TOKEN}" -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/pulls/${TARGET_PR}")
+          PR_INFO=$(gh api "repos/${TARGET_OWNER}/${TARGET_REPO}/pulls/${TARGET_PR}")
           TARGET_BRANCH=$(echo "$PR_INFO" | jq -r '.head.ref')
           HEAD_REPO=$(echo "$PR_INFO" | jq -r '.head.repo.full_name')
           BASE_BRANCH=$(echo "$PR_INFO" | jq -r '.base.ref')
@@ -139,7 +140,21 @@ jobs:
           HEAD_REPO: ${{ steps.target_branch.outputs.head_repo }}
           TARGET_BRANCH: ${{ steps.target_branch.outputs.target_branch }}
         run: |
-          git clone "https://x-access-token:${GITHUB_TOKEN}@github.com/${HEAD_REPO}.git" target_repo
+          ASKPASS_SCRIPT="$RUNNER_TEMP/git-askpass-clone.sh"
+          cat >"$ASKPASS_SCRIPT" <<'EOF'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' "x-access-token" ;;
+            *Password*) printf '%s\n' "$GITHUB_TOKEN" ;;
+            *) printf '\n' ;;
+          esac
+          EOF
+          chmod 700 "$ASKPASS_SCRIPT"
+          export GIT_ASKPASS="$ASKPASS_SCRIPT"
+          export GIT_TERMINAL_PROMPT=0
+          trap 'rm -f "$ASKPASS_SCRIPT"' EXIT
+
+          git clone "https://github.com/${HEAD_REPO}.git" target_repo
           cd target_repo && git checkout "$TARGET_BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -174,12 +189,27 @@ jobs:
         if: steps.sync_script.outputs.sync_success == 'true'
         continue-on-error: true
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           AI_PROVIDER: ${{ github.event.inputs.ai_provider }}
           TARGET_BRANCH: ${{ steps.target_branch.outputs.target_branch }}
           TARGET_BASE_BRANCH: ${{ steps.target_branch.outputs.base_branch }}
         run: |
+          ASKPASS_SCRIPT="$RUNNER_TEMP/git-askpass-push.sh"
+          cat >"$ASKPASS_SCRIPT" <<'EOF'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' "x-access-token" ;;
+            *Password*) printf '%s\n' "$GITHUB_TOKEN" ;;
+            *) printf '\n' ;;
+          esac
+          EOF
+          chmod 700 "$ASKPASS_SCRIPT"
+          export GIT_ASKPASS="$ASKPASS_SCRIPT"
+          export GIT_TERMINAL_PROMPT=0
+          trap 'rm -f "$ASKPASS_SCRIPT"' EXIT
+
           cd target_repo && git add .
           if git diff --staged --quiet; then
             echo "push_success=false" >> $GITHUB_OUTPUT
@@ -242,7 +272,7 @@ jobs:
         if: steps.commit_push.outputs.push_success == 'true'
         continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           TARGET_OWNER: ${{ steps.extract_info.outputs.target_owner }}
@@ -255,16 +285,15 @@ jobs:
             "**Target PR**: ${TARGET_PR_URL}" \
             "English documentation has been updated based on Chinese documentation changes.")
           PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
-          curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
-            -d "$PAYLOAD"
+          printf '%s' "$PAYLOAD" | gh api --method POST \
+            "repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
+            --input -
 
       - name: Add failure comment to target PR
         if: always() && steps.extract_info.outputs.target_owner != '' && steps.commit_push.outputs.push_success != 'true'
         continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_PR_URL: ${{ github.event.inputs.source_pr_url }}
           TARGET_PR_URL: ${{ github.event.inputs.target_pr_url }}
           TARGET_OWNER: ${{ steps.extract_info.outputs.target_owner }}
@@ -277,10 +306,9 @@ jobs:
             "**Target PR**: ${TARGET_PR_URL}" \
             "Translated changes were not pushed to the target branch. Please check the workflow logs for details.")
           PAYLOAD=$(jq -n --arg body "$BODY" '{body: $body}')
-          curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
-            -d "$PAYLOAD"
+          printf '%s' "$PAYLOAD" | gh api --method POST \
+            "repos/${TARGET_OWNER}/${TARGET_REPO}/issues/${TARGET_PR}/comments" \
+            --input -
 
       - name: Fail workflow if translated changes were not pushed
         if: always() && steps.commit_push.outputs.push_success != 'true'
