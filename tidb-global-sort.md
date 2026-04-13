@@ -21,7 +21,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), providing a global sort service on cloud.
 
-Currently, the Global Sort feature supports using Amazon S3 or GCS as cloud storage.
+Currently, the Global Sort feature supports using Amazon S3 or Google Cloud Storage (GCS) as cloud storage.
 
 ## Use cases
 
