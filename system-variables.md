@@ -663,7 +663,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 ### OutPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-- This variable is used only for internal statistics and is not visible to you.
+- This variable is used only for internal statistics and is not visible to users.
 
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
