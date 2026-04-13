@@ -588,6 +588,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Unit: Seconds
 - The lock wait timeout for pessimistic transactions (default).
 
+### InPacketBytes <span class="version-mark">New in v8.5.6</span>
+
+- This variable is used only for internal statistics and is not visible to users.
+
 ### interactive_timeout
 
 > **Note:**
@@ -656,6 +660,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - The maximum packet size allowed by the server and the client in one transmission of packets.
 - In the `SESSION` scope, this variable is read-only.
 - This variable is compatible with MySQL.
+
+### OutPacketBytes <span class="version-mark">New in v8.5.6</span>
+
+- This variable is used only for internal statistics and is not visible to users.
 
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
