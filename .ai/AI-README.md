@@ -23,6 +23,7 @@ Use `resources/terms.md` when terminology is uncertain or not covered by the qui
 - `.ai/skills/review-doc-pr/`: review documentation PRs and Markdown diffs for factual accuracy, user usefulness, completeness, version fit, related-doc impact, links, and style
 - `.ai/skills/create-or-update-zh-translation-pr/`: create a new docs translation PR or update an existing one by combining repo-local scripts with minimal-edit translation rules and incremental source-diff handling
 - `.ai/skills/writing-doc-summaries/`: write or update the `summary` front matter field in a document following the repo's 115-145 character SEO-friendly sentence rules
+- `.ai/skills/write-review-translate-release-notes/`: write, review, revise, and translate TiDB release note entries for the Compatibility changes, Improvements, and Bug fixes sections in English and Chinese
 
 The translation skill includes bundled scripts under `.ai/skills/create-or-update-zh-translation-pr/scripts/` for:
 

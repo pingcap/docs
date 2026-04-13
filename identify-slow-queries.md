@@ -190,7 +190,7 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 
 ## Use `tidb_slow_log_rules`
 
-[`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900) is used to define trigger rules for slow query logs, supporting multi-dimensional metric combinations. It is suitable for "targeted sampling" and "problem reproduction" of slow logs, enabling you to filter target statements based on specific metric combinations.
+[`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856-and-v900) is used to define trigger rules for slow query logs, supporting multi-dimensional metric combinations. It is suitable for "targeted sampling" and "problem reproduction" of slow logs, enabling you to filter target statements based on specific metric combinations.
 
 The triggering behavior of slow query logs depends on the configuration of `tidb_slow_log_rules`:
 
@@ -309,11 +309,11 @@ Unless otherwise noted, the fields in the following table follow the general mat
 
 - `tidb_slow_log_rules` is designed to replace the single-threshold approach. It supports combinations of multi-dimensional metric conditions, enabling more flexible and fine-grained control over slow query logging.
 
-- In a well-provisioned test environment with 1 TiDB node (16 CPU cores, 48 GiB memory) and 3 TiKV nodes (each with 16 CPU cores and 48 GiB memory), repeated sysbench tests show that performance impact remains small when multi-dimensional slow query log rules generate millions of slow log entries within 30 minutes. However, when the log volume reaches tens of millions, TPS drops significantly and latency increases noticeably. Therefore, if business workload is high or CPU and memory resources are close to their limits, configure `tidb_slow_log_rules` carefully to avoid log flooding caused by overly broad rules. If you need to limit the log output rate, use [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900) to throttle it and reduce the impact on business performance.
+- In a well-provisioned test environment with 1 TiDB node (16 CPU cores, 48 GiB memory) and 3 TiKV nodes (each with 16 CPU cores and 48 GiB memory), repeated sysbench tests show that performance impact remains small when multi-dimensional slow query log rules generate millions of slow log entries within 30 minutes. However, when the log volume reaches tens of millions, TPS drops significantly and latency increases noticeably. Therefore, if business workload is high or CPU and memory resources are close to their limits, configure `tidb_slow_log_rules` carefully to avoid log flooding caused by overly broad rules. If you need to limit the log output rate, use [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856-and-v900) to throttle it and reduce the impact on business performance.
 
 ## Related system variables
 
-* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900): see [`tidb_slow_log_rules` recommendations](#recommendations)
+* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856-and-v900): see [`tidb_slow_log_rules` recommendations](#recommendations)
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for slow query logging. SQL statements whose execution time exceeds this threshold are recorded in the slow query log. The default value is `300ms` (milliseconds).
 
@@ -321,7 +321,7 @@ Unless otherwise noted, the fields in the following table follow the general mat
     >
     > Time-related fields in `tidb_slow_log_rules`, such as `Query_time` and `Process_time`, use seconds as the unit and can include decimals, while [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) uses milliseconds.
 
-* [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900): sets the maximum number of slow query log entries that can be written per second. The default value is `0`. This variable is introduced in v9.0.0.
+* [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856-and-v900): sets the maximum number of slow query log entries that can be written per second. The default value is `0`. This variable is introduced in v9.0.0.
     * A value of `0` means there is no limit on the number of slow query log entries written per second.
     * A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
     * It is recommended to set this variable after enabling `tidb_slow_log_rules` to prevent rule-based slow query logging from being triggered too frequently.
