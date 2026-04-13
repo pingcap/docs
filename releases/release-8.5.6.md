@@ -118,11 +118,12 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 | TiKV | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856) | Newly added | The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. The default value is `3.0`. |
 | TiKV | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856) | Newly added | The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. The default value is `1000`. |
 | TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | Newly added | Controls whether TiKV network traffic and logical I/O metrics are additionally collected in Top SQL. The default value is `false`. |
-| TiCDC | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc/ticdc-csv#use-csv) | Newly added | Controls whether a header row is output in CSV files. The default value is `false`. This parameter applies only to the TiCDC new architecture. |
+| TiCDC | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv) | Newly added | Controls whether a header row is output in CSV files. The default value is `false`. This parameter applies only to the TiCDC new architecture. |
 
 ## Deprecated features
 
 - Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future version. It is recommended that you use statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use statistics Version 1 to Version 2](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions) for more accurate statistics.
+- Starting from v8.5.6, the TiDB Lightning Web Interface is deprecated and will be removed in v8.5.7. The web UI build has been broken since v8.4.0. Use the [CLI](/tidb-lightning/tidb-lightning-overview.md) or the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement instead. If this affects your workflow, comment on [#67697](https://github.com/pingcap/tidb/issues/67697).
 
 ## Improvements
 
