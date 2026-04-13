@@ -181,7 +181,7 @@ When you `INSERT` into or `UPDATE` a child table, the foreign key constraint che
 
 By default, in pessimistic transactions, the locking behavior of foreign key checks on rows in the parent table is equivalent to performing a locking read using `SELECT ... FOR UPDATE` (that is, acquiring an exclusive lock) on the corresponding row. In high-concurrency write scenarios for a child table, if a large number of transactions repeatedly reference the same parent table row, serious lock conflicts might occur.
 
-You can enable the system variable [`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856-and-v900) to let foreign key checks use shared locks. Shared locks allow multiple transactions to perform foreign key checks on the same parent table row simultaneously, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
+You can enable the system variable [`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856) to let foreign key checks use shared locks. Shared locks allow multiple transactions to perform foreign key checks on the same parent table row simultaneously, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
 
 ## Definition and metadata of foreign keys
 

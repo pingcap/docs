@@ -3119,7 +3119,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >
 > Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
 
-### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
