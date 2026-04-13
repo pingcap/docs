@@ -136,21 +136,21 @@ Project members are users who are invited to join one or more projects of the or
 
 ### Recycle Bin
 
-<CustomContent plan="starter,essential,dedicated">
+The place where the data of deleted [TiDB Cloud resources](#tidb-cloud-resource) with valid backups is stored.
 
-The place where the data of deleted {{{ .dedicated }}} clusters and {{{ .essential }}} instances with valid backups is stored.
+Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it are moved to the Recycle Bin. For backup files from automatic backups, the Recycle Bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new TiDB Cloud resource in time. Note that if a TiDB Cloud resource **has no backup**, the deleted resource will not be displayed in the Recycle Bin.
 
-Once a backed-up {{{ .dedicated }}} cluster or {{{ .essential }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster or {{{ .essential }}} instance in time. Note that if a {{{ .dedicated }}} cluster or {{{ .essential }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
+Currently, only the following types of TiDB Cloud resources support the Recycle Bin feature:
 
-</CustomContent>
+- {{{ .essential }}} instances
 
 <CustomContent plan="premium">
 
-The place where the data of deleted {{{ .dedicated }}} clusters, {{{ .essential }}} instances, and {{{ .premium }}} instances with valid backups is stored.
-
-Once a backed-up {{{ .dedicated }}} cluster, {{{ .essential }}} instance, or {{{ .premium }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster, {{{ .essential }}} instance, or {{{ .premium }}} instance in time. Note that if a {{{ .dedicated }}} cluster, {{{ .essential }}} instance, or {{{ .premium }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
+- {{{ .premium }}} instances
 
 </CustomContent>
+
+- {{{ .dedicated }}} clusters
 
 ### region
 

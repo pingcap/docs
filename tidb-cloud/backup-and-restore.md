@@ -323,12 +323,17 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
 >
 > You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.
 
-To restore a deleted cluster from recycle bin, take the following steps:
+To restore a deleted TiDB Cloud Dedicated cluster from the Recycle Bin, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Recycle Bin**.
-3. On the **Recycle Bin** page, locate the cluster you want to restore, click **...** in the **Action** column, and then click **Backups**.
-4. On the **Backups** page, locate your desired backup time, click **...** in the **Action** column, and then click **Restore**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
+
+    >**Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+2. On the **Recycle Bin** page, click the **Dedicated** tab to go to the recycle bin of TiDB Cloud Dedicated clusters.
+3. Locate the cluster you want to restore, and then click the **>** button to expand the available backups of the cluster.
+4. In the row of your desired backup, click **...**, and then select **Restore**.
 5. On the **Restore** page, specify a name for the new cluster, and then make the following changes if necessary:
 
     - Update the port number of the cluster.

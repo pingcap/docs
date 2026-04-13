@@ -85,9 +85,9 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your instance
 
 TiDB Cloud supports restoring data to a new instance.
 
-### Restore to a new instance
+### Restore to a new {{{ .premium }}} instance {#restore-to-a-new-instance}
 
-To restore your data to a new instance, take the following steps:
+To restore your data to a new {{{ .premium }}} instance, take the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
@@ -128,16 +128,21 @@ To restore your data to a new instance, take the following steps:
 
 ### Restore from Recycle Bin
 
-To restore a deleted instance from the Recycle Bin, take the following steps:
+To restore a deleted {{{ .premium }}} instance from the Recycle Bin, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the top-right corner, click **Recycle Bin**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
-2. On the **Recycle Bin** page, locate the {{{ .premium }}} instance you want to restore:
+    >**Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    - Click the **>** button to expand instance details.
-    - Find the desired backup, click **...** in the **Action** column, and then select **Restore**.
+2. On the **Recycle Bin** page, click the **Premium** tab to go to the recycle bin of {{{ .premium }}} instances.
 
-3. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
+3. Locate the {{{ .premium }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance.
+
+4. In the row of your desired backup, click **...**, and then select **Restore**.
+
+5. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
 
 ### Restore backups from a different plan type
 
