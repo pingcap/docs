@@ -1753,7 +1753,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `""`
-- This variable is used to specify the Amazon S3 cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format).
+- This variable is used to specify the Amazon S3 or GCS cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format) and [GCS URI format](/external-storage-uri.md#gcs-uri-format).
 - The following statements can use the Global Sort feature.
     - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement.
     - The [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
@@ -3963,7 +3963,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
 
 > **Note:**
-> 
+>
 > If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, the Distributed eXecution Framework schedules tasks only to these nodes. In this case, even if you set `tidb_max_dist_task_nodes` to a larger value, the framework uses no more than the number of nodes explicitly configured with `tidb_service_scope`.
 >
 > For example, if the cluster has 10 TiDB nodes, and 4 of them are configured with `tidb_service_scope = group1`, then even if you set `tidb_max_dist_task_nodes = 5`, only 4 nodes participate in task execution.
