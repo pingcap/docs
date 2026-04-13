@@ -24,7 +24,7 @@ Because of these project model changes, note the following API changes:
 
 | Value | Description |
 |---|---|
-| `dedicated` | A project that contains only TiDB Dedicated clusters. |
+| `dedicated` | A project that contains only TiDB Cloud Dedicated clusters. |
 | `tidbx` | A project that contains only TiDB X instances (such as {{{ .starter }}} and Essential). |
 | `tidbx_virtual` | The default organization-level project for TiDB X instances that are not assigned to any project. For each organization, there is only a single `tidbx_virtual` project. |
 
@@ -73,7 +73,9 @@ If you already have a {{{ .starter }}} or Essential instance and only need its c
 
 > **Note:**
 >
-> This approach does not apply to cluster creation using `POST /api/v1beta/projects/{project_id}/clusters`. Note that `v1beta` supports creating only {{{ .starter }}} instances and Dedicated clusters. To create a {{{ .essential }}} instance, use the `v1beta1` API instead. For more information, see [TiDB Cloud API documentation](https://docs.pingcap.com/api/). When creating new {{{ .starter }}} or Essential instances, check your cluster creation workflow to ensure that it targets a `tidbx` project.
+> - This approach does not apply to cluster creation using `POST /api/v1beta/projects/{project_id}/clusters`.
+> - `v1beta` supports creating only {{{ .starter }}} instances and TiDB Cloud Dedicated clusters. To create a {{{ .essential }}} instance, use the `v1beta1` API instead. For more information, see [TiDB Cloud API documentation](https://docs.pingcap.com/api/). 
+> - When creating new {{{ .starter }}} or Essential instances, check your cluster creation workflow to ensure that it targets a `tidbx` project.
 
 ## Summary of required changes
 
