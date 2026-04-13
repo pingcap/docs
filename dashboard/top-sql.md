@@ -156,7 +156,7 @@ The following are the common steps to use Top SQL.
 
 You can disable this feature by following these steps:
 
-1. Visit [Top SQL page](#access-the-page).
+1. Visit the [Top SQL page](#access-the-page).
 2. Click the gear icon in the upper right corner to open the settings pane and disable the **Enable Feature** switch.
 3. Click **Save**.
 4. In the popped-up dialog box, click **Disable**.
