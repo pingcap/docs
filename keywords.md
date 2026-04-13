@@ -450,6 +450,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - NATIONAL
 - NATURAL (R)
 - NCHAR
+- NDVRATE 
 - NEVER
 - NEXT
 - NEXTVAL
