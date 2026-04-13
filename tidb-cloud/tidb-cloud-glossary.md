@@ -117,14 +117,14 @@ A document that defines permissions applying to a role, user, or organization, s
 
 In TiDB Cloud, you can use projects to group and manage your TiDB resources.
 
-- For {{{ .starter }}}, Essential, and Premium instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
+- For <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
 - For {{{ .dedicated }}} clusters, projects are required.
 
 The function of a project varies by project type. Currently, there are three types of projects:
 
 - **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
-- **TiDB X project**: This project type is used only for TiDB X instances ({{{ .starter }}}, Essential, and Premium). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
-- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances ({{{ .starter }}}, Essential, and Premium) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X project**: This project type is used only for TiDB X instances (<CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances (<CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
 For more information about the differences between these project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 
@@ -136,9 +136,21 @@ Project members are users who are invited to join one or more projects of the or
 
 ### Recycle Bin
 
-The place where the data of deleted {{{ .dedicated }}} clusters and {{{ .premium }}} instances with valid backups is stored.
+<CustomContent plan="starter,essential,dedicated">
 
-Once a backed-up {{{ .dedicated }}} cluster or {{{ .premium }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster or {{{ .premium }}} instance in time. Note that if a {{{ .dedicated }}} cluster or {{{ .premium }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
+The place where the data of deleted {{{ .dedicated }}} clusters and {{{ .essential }}} instances with valid backups is stored.
+
+Once a backed-up {{{ .dedicated }}} cluster or {{{ .essential }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster or {{{ .essential }}} instance in time. Note that if a {{{ .dedicated }}} cluster or {{{ .essential }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+The place where the data of deleted {{{ .dedicated }}} clusters, {{{ .essential }}} instances, and {{{ .premium }}} instances with valid backups is stored.
+
+Once a backed-up {{{ .dedicated }}} cluster, {{{ .essential }}} instance, or {{{ .premium }}} instance is deleted, the existing backup files of the cluster or instance are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new {{{ .dedicated }}} cluster, {{{ .essential }}} instance, or {{{ .premium }}} instance in time. Note that if a {{{ .dedicated }}} cluster, {{{ .essential }}} instance, or {{{ .premium }}} instance **has no backup**, the deleted cluster or instance will not be displayed here.
+
+</CustomContent>
 
 ### region
 
