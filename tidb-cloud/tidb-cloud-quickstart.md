@@ -30,7 +30,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
     - To create a new {{{ .starter }}} instance on your own, follow these steps:
 
         1. Click **Create Resource**.
-        2. On the **Create** page, **Starter** is selected by default. Select the cloud provider and target region for your {{{ .starter }}} instance, update the default instance name if necessary, and then click **Create**. Your {{{ .starter }}} instance will be created in approximately 30 seconds.
+        2. On the **Create Resource** page, **Starter** is selected by default. Enter a name for the {{{ .starter }}} instance, select the cloud provider and target region, and then click **Create**. Your {{{ .starter }}} instance will be created in approximately 30 seconds.
 
         <CustomContent language="en,zh">
 

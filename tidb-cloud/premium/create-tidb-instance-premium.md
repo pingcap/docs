@@ -9,7 +9,7 @@ This document describes how to create a {{{ .premium }}} instance in the [TiDB C
 
 > **Note:**
 >
-> - Currently, {{{ .premium }}} is only available upon request. To request {{{ .premium }}}, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .premium }}}" in the **Description** in the **Description** field, and then click **Submit**.
+> - Currently, {{{ .premium }}} is only available upon request. To request {{{ .premium }}}, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for {{{ .premium }}}" in the **Description** field, and then click **Submit**.
 > - To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Before you begin
@@ -41,8 +41,8 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click **Create Resource** in the upper-right corner.
 2. On the **Create Resource** page, select **Premium** as your plan.
-3. Enter a name for your {{{ .premium }}} instance.
-4. Choose a cloud provider and a region where you want to host your instance.
+3. Enter a name for your {{{ .premium }}} instance, and then choose a cloud provider and a region where you want to host your instance.
+4. (Optional) To group this {{{ .premium }}} instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
 5. In the **Capacity** area, set the maximum number of the Request Capacity Units (RCUs) for your instance.
 
     RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.

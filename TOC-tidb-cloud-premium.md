@@ -125,6 +125,7 @@
 ## GUIDES
 
 - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
 - Manage {{{ .premium }}} Instances
   - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
   - Connect to Your {{{ .premium }}} Instance

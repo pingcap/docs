@@ -86,6 +86,11 @@ The following sections describe how to create, edit, delete, and expire API keys
 To create an API key for a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, to navigate to the **Data Service** page of your target project, click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your target project, and then click **Data Service**.
+
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, click **Create API Key**.
 4. In the **Create API Key** dialog box, do the following:
