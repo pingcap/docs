@@ -661,25 +661,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - In the `SESSION` scope, this variable is read-only.
 - This variable is compatible with MySQL.
 
-<<<<<<< HEAD
-=======
-### max_user_connections <span class="version-mark">New in v9.0.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 100000]`
-- This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
-- The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
-- If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
-
 ### OutPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-- This variable is used only for internal statistics and is not visible to users.
+- This variable is used only for internal statistics and is not visible to you.
 
->>>>>>> 6334b03d72 (Add two internal session variable info: InPacketBytes, OutPacketBytes (#22508))
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
