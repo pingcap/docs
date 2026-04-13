@@ -203,7 +203,7 @@ The computing node that aggregates data from queries returned from transactional
 
 A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
 
-- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB X
@@ -216,7 +216,7 @@ The TiDB X architecture is now available in <CustomContent plan="starter,essenti
 
 A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md). It does not require you to manage or understand the underlying cluster topology.
 
-Among TiDB Cloud plans, {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} are using the TiDB X architecture. Therefore, when "TiDB X instance" is mentioned, it refers to a {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instance.
+Among TiDB Cloud plans, <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> are using the TiDB X architecture. Therefore, when "TiDB X instance" is mentioned, it refers to a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance.
 
 ### TiFlash node
 
