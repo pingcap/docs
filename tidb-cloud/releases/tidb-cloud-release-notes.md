@@ -20,7 +20,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Unify the [TiDB Cloud console](https://tidbcloud.com) experience across all TiDB Cloud plans (such as {{{ .starter }}}, Essential, and Dedicated). The following capabilities are now available:
 
-    - **[My TiDB](https://tidbcloud.com/tidbs) homepage**: A new org-level homepage with two views — Resource view lists all instances across plans in one place, and Project view organizes resources by project.
+    - **[My TiDB](https://tidbcloud.com/tidbs) homepage**: A new org-level homepage with the following views:
+ 
+        - The resource view lists all instances across plans in one place.
+        - The project view organizes resources by project.
+
     - **Unified resource creation workflow**: A single creation flow applies to all TiDB Cloud resource types, including {{{ .starter }}}, Essential, and Dedicated.
     - **TiDB X project support**: TiDB X instances ({{{ .starter }}} and Essential) can now be optionally assigned to projects and moved between projects after creation.
     - **Instance-level roles**: Role assignments can now be scoped to individual TiDB X instances, enabling fine-grained access control within a project.
