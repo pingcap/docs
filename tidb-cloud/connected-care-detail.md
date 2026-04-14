@@ -141,4 +141,4 @@ This document provides detailed information about the [Connected Care](/tidb-clo
 
 - Business hours: 9 AM - 6 PM local time, Monday to Friday
 - IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. We are planning to support [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) in the future.
-- [Clinic](https://clinic.pingcap.com/): a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
+- [Clinic](https://clinic.pingcap.com/): a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your {{{ .dedicated }}} clusters.

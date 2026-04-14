@@ -24,9 +24,9 @@ Choose the steps based on your TiDB deployment type:
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-You can [create a TiDB Cloud Starter cluster](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console as follows:
+You can [create a TiDB Cloud Starter instance](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console as follows:
 
-1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 3. Copy the connection parameters to your code or environment variables.
 
@@ -46,7 +46,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint. The `pytidb` client **automatically** enables TLS for TiDB Cloud Starter clusters.
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint. The `pytidb` client **automatically** enables TLS for TiDB Cloud Starter instances.
 
 </div>
 <div label="TiDB Self-Managed">
@@ -83,9 +83,9 @@ If you prefer to use a connection string (database URL), you can follow the form
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-You can [create a TiDB Cloud Starter cluster](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console as follows:
+You can [create a TiDB Cloud Starter instance](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console as follows:
 
-1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with the connection parameters listed.
 3. Copy the connection parameters and construct a connection string in the following format:
 

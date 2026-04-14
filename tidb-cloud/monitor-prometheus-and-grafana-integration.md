@@ -25,7 +25,7 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
 - To integrate TiDB Cloud with Prometheus, you must have a self-hosted or managed Prometheus service.
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` role to access the target clusters under your project in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` role to access the target TiDB Cloud Dedicated clusters under your project in TiDB Cloud.
 
 ## Limitation
 
@@ -36,14 +36,14 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
 ### Step 1. Get a scrape_config file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target TiDB Cloud Dedicated clusters.
 
 Depending on your [Prometheus integration version](#prometheus-integration-versions), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
 
 <SimpleTab>
 <div label="Cluster-level Prometheus integration">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Prometheus**.
 4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
@@ -52,11 +52,12 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 </div>
 <div label="Legacy project-level Prometheus integration (Beta)">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Prometheus (BETA)**.
-4. Click **Add File** to generate and show the scrape_config file for the current project.
-5. Make a copy of the `scrape_config` file content for later use.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Integrations** under **Project Settings**.
+4. On the **Integrations** page, click **Integration to Prometheus (BETA)**.
+5. Click **Add File** to generate and show the scrape_config file for the current project.
+6. Make a copy of the `scrape_config` file content for later use.
 
 </div>
 </SimpleTab>

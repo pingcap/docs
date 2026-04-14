@@ -32,9 +32,9 @@ Because of these project model changes, note the following API changes:
 >
 > {{{ .starter }}} and Essential instances both use the `tidbx` project type.
 
-**If you only read `id` and `name` from project responses**, you likely do not need to make any changes.
+**If your application only reads the `id` and `name` fields from project responses**, no changes are required.
 
-**If you need to distinguish between project types** (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field.
+**If your application needs to distinguish between project types** (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field.
 
 ### POST /api/v1beta/projects
 
