@@ -128,7 +128,7 @@ TiFlashの分散型storageおよびコンピューティングアーキテクチ
 
     -   上記の`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`設定ファイルに直接記述されていることに注意してください。環境変数を使用して個別に設定することもできます。両方の方法で設定した場合、環境変数が優先されます。
 
-        環境変数を使用して`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`構成するには、 TiFlashTiFlashを開始するユーザー環境 (通常は`tidb` ) に切り替え、 `~/.bash_profile`変更して次の構成を追加します。
+        環境変数を使用して`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`構成するには、 TiFlashを開始するユーザー環境 (通常は`tidb` ) に切り替え、 `~/.bash_profile`変更して次の構成を追加します。
 
         ```shell
         export S3_ACCESS_KEY_ID={ACCESS_KEY_ID}

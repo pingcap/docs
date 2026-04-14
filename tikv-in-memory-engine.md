@@ -77,7 +77,7 @@ mvcc-amplification-threshold = 10
 
 ## 互換性 {#compatibility}
 
--   [BR](/br/br-use-overview.md) ：インメモリエンジンはBRと併用できます。ただし、 BRリストア中は、リストア処理に関係するリージョンはインメモリエンジンから削除されます。BRBRが完了した後、対応するリージョンがホットスポットとして残っている場合は、インメモリエンジンによって自動的にロードされます。
+-   [BR](/br/br-use-overview.md) ：インメモリエンジンはBRと併用できます。ただし、 BRリストア中は、リストア処理に関係するリージョンはインメモリエンジンから削除されます。BRが完了した後、対応するリージョンがホットスポットとして残っている場合は、インメモリエンジンによって自動的にロードされます。
 -   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) ：インメモリエンジンはTiDB Lightningと併用できます。ただし、 TiDB Lightningが物理インポートモードで動作する場合、復元プロセスに関係するリージョンはインメモリエンジンから削除されます。物理インポートが完了すると、対応するリージョンがホットスポットとして残っている場合、それらはインメモリエンジンによって自動的にロードされます。
 -   [Follower Read](/develop/dev-guide-use-follower-read.md)と[ステイル読み取り](/develop/dev-guide-use-stale-read.md) ：インメモリエンジンは、これら2つの機能と併用できます。ただし、インメモリエンジンはLeader上のコプロセッサ要求のみを高速化でき、Follower Readとステイル読み取り操作を高速化することはできません。
 -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) ：インメモリエンジンはFlashbackと併用できます。ただし、Flashbackはインメモリエンジンのキャッシュを無効化します。Flashback処理が完了すると、インメモリエンジンはホットスポット領域を自動的にロードします。

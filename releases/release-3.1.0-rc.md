@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1 RC Release Notes
-summary: TiDB 3.1 RCは2020年4月2日にリリースされました。パーティションプルーニングの改善、RECOVER`構文のサポート、TLS証明書の更新などの新機能が含まれています。バグ修正には、 TiFlashレプリカ、`last_insert_id`、`集計プッシュダウンに関する問題の解決が含まれます。TiKVは、バックアップ用にTLS認証とAWS IAMウェブIDをサポートするようになりました。PDでは、データ競合の問題と配置ルールの不整合が修正されました。TiDB TiDB LightningやBRなどのツールも最適化され、修正されました。
+summary: TiDB 3.1 RCは2020年4月2日にリリースされました。パーティションプルーニングの改善、RECOVER`構文のサポート、TLS証明書の更新などの新機能が含まれています。バグ修正には、 TiFlashレプリカ、`last_insert_id`、`集計プッシュダウンに関する問題の解決が含まれます。TiKVは、バックアップ用にTLS認証とAWS IAMウェブIDをサポートするようになりました。PDでは、データ競合の問題と配置ルールの不整合が修正されました。TiDB LightningやBRなどのツールも最適化され、修正されました。
 ---
 
 # TiDB 3.1 RC リリースノート {#tidb-3-1-rc-release-notes}

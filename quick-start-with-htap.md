@@ -155,7 +155,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 もう一度[ステップ3](#step-3-query-data-with-the-row-based-storage-engine)の SQL 文を実行すると、 TiDB HTAPのパフォーマンスを確認できます。
 
-TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashTiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`ステートメントを使用します。例：
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`ステートメントを使用します。例：
 
 ```sql
 USE test;

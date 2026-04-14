@@ -5,7 +5,7 @@ summary: Datadogとの連携により、TiDBクラスタを監視する方法を
 
 # TiDB CloudとDatadogを統合する {#integrate-tidb-cloud-with-datadog}
 
-TiDB CloudはDatadogとの連携をサポートしています。TiDB TiDB Cloudを設定することで、TiDBクラスタに関するメトリクスを[データドッグ](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
+TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを設定することで、TiDBクラスタに関するメトリクスを[データドッグ](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
 
 ## Datadog統合バージョン {#datadog-integration-version}
 
@@ -20,7 +20,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
     Datadogアカウントをお持ちでない場合は、 [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)でサインアップしてください。
 
--   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
+-   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
 
 ## 制限 {#limitation}
 

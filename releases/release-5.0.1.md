@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.0.1 Release Notes
-summary: TiDB 5.0.1は2021年4月24日にリリースされました。committer-concurrency`のデフォルト値が128に変更されました。TiDB、TiKV、PD、 TiFlash、およびツールに様々なバグ修正と改善が行われました。例えば、TiDBではクエリ結果とパフォーマンスの低下に関する問題が修正され、TiKVではコプロセッサと起動エラーに関する問題が修正されました。TiDB TiDB LightningやBackup & Restoreなどのツールにもバグ修正が行われました。
+summary: TiDB 5.0.1は2021年4月24日にリリースされました。committer-concurrency`のデフォルト値が128に変更されました。TiDB、TiKV、PD、 TiFlash、およびツールに様々なバグ修正と改善が行われました。例えば、TiDBではクエリ結果とパフォーマンスの低下に関する問題が修正され、TiKVではコプロセッサと起動エラーに関する問題が修正されました。TiDB LightningやBackup & Restoreなどのツールにもバグ修正が行われました。
 ---
 
 # TiDB 5.0.1 リリースノート {#tidb-5-0-1-release-notes}

@@ -10,7 +10,7 @@ summary: TiFlashパイプライン実行モデルについて学習します。
 v7.2.0 以降、 TiFlash は新しい実行モデルであるパイプライン実行モデルをサポートします。
 
 -   v7.2.0 および v7.3.0 の場合: パイプライン実行モデルは実験的もので、 [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720)によって制御されます。
--   v7.4.0以降のバージョン：パイプライン実行モデルが一般提供されました。これはTiFlashの内部機能であり、 TiFlashリソース制御と緊密に統合されています。TiFlashTiFlash制御を有効にすると、パイプライン実行モデルも自動的に有効になります。TiFlashTiFlash制御の使用方法の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md#parameters-for-resource-control)を参照してください。また、v7.4.0以降、システム変数`tidb_enable_tiflash_pipeline_model`非推奨となりました。
+-   v7.4.0以降のバージョン：パイプライン実行モデルが一般提供されました。これはTiFlashの内部機能であり、 TiFlashリソース制御と緊密に統合されています。TiFlash制御を有効にすると、パイプライン実行モデルも自動的に有効になります。TiFlash制御の使用方法の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md#parameters-for-resource-control)を参照してください。また、v7.4.0以降、システム変数`tidb_enable_tiflash_pipeline_model`非推奨となりました。
 
 論文[Morsel駆動型並列処理: メニーコア時代に向けたNUMA対応クエリ評価フレームワーク](https://dl.acm.org/doi/10.1145/2588555.2610507)に着想を得たTiFlashパイプライン実行モデルは、従来のスレッドスケジューリングモデルとは異なる、きめ細かなタスクスケジューリングモデルを提供します。これにより、オペレーティングシステムのスレッド適用とスケジューリングのオーバーヘッドが削減され、きめ細かなスケジューリングメカニズムが実現されます。
 

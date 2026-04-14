@@ -159,9 +159,9 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiFlashデータ複製の進行状況[＃4902](https://github.com/pingcap/tiflash/issues/4902) @ [hehechen](https://github.com/hehechen)精度を向上
 
-    TiDBでは、 `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの`PROGRESS`フィールドは、TiKV内の対応するテーブルからTiFlashレプリカへのデータレプリケーションの進行状況を示すために使用されます。以前のTiDBバージョンでは、 `PROCESS`フィールドはTiFlashレプリカの作成中のデータレプリケーションの進行状況のみを示します。TiFlashTiFlashの作成後、TiKV内の対応するテーブルに新しいデータがインポートされても、このフィールドは更新されず、新しいデータのTiKVからTiFlashへのレプリケーションの進行状況は表示されません。
+    TiDBでは、 `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの`PROGRESS`フィールドは、TiKV内の対応するテーブルからTiFlashレプリカへのデータレプリケーションの進行状況を示すために使用されます。以前のTiDBバージョンでは、 `PROCESS`フィールドはTiFlashレプリカの作成中のデータレプリケーションの進行状況のみを示します。TiFlashの作成後、TiKV内の対応するテーブルに新しいデータがインポートされても、このフィールドは更新されず、新しいデータのTiKVからTiFlashへのレプリケーションの進行状況は表示されません。
 
-    v6.4.0では、TiDBはTiFlashレプリカのデータレプリケーションの進行状況の更新メカニズムを改善しました。TiFlashTiFlashの作成後、TiKVの対応するテーブルに新しいデータがインポートされると、テーブル[`INFORMATION_SCHEMA.TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)の`PROGRESS`の値が更新され、新しいデータのTiKVからTiFlashへの実際のレプリケーション進行状況が表示されます。この改善により、 TiFlashデータレプリケーションの実際の進行状況を簡単に確認できます。
+    v6.4.0では、TiDBはTiFlashレプリカのデータレプリケーションの進行状況の更新メカニズムを改善しました。TiFlashの作成後、TiKVの対応するテーブルに新しいデータがインポートされると、テーブル[`INFORMATION_SCHEMA.TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)の`PROGRESS`の値が更新され、新しいデータのTiKVからTiFlashへの実際のレプリケーション進行状況が表示されます。この改善により、 TiFlashデータレプリケーションの実際の進行状況を簡単に確認できます。
 
     詳細については[ユーザードキュメント](/information-schema/information-schema-tiflash-replica.md)参照してください。
 

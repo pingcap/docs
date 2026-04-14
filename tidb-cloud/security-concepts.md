@@ -217,7 +217,7 @@ TiDB Cloud は、高度な暗号化機能を使用して静的データを保護
 
 -   有効にすると、静的データとバックアップが CMEK キーで暗号化されます。
 
--   CMEK のないTiDB Cloud Dedicated クラスターの場合、 TiDB Cloud はエスクロー キーを使用します。TiDB TiDB Cloud Starter およびTiDB Cloud Essential クラスターはエスクロー キーのみに依存します。
+-   CMEK のないTiDB Cloud Dedicated クラスターの場合、 TiDB Cloud はエスクロー キーを使用します。TiDB Cloud Starter およびTiDB Cloud Essential クラスターはエスクロー キーのみに依存します。
 
 **ベストプラクティス:**
 

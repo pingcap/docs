@@ -34,7 +34,7 @@ SQL プロキシ アカウントの主な利点は次のとおりです。
 
 ## SQLプロキシアカウントの作成方法 {#how-the-sql-proxy-account-is-created}
 
-SQL プロキシ アカウントは、クラスター内で権限を持つロールが付与されたTiDB Cloud TiDB Cloud Cloud クラスターの初期化中に自動的に作成されます。
+SQL プロキシ アカウントは、クラスター内で権限を持つロールが付与されたTiDB Cloud クラスターの初期化中に自動的に作成されます。
 
 ## SQLプロキシアカウントを削除する方法 {#how-the-sql-proxy-account-is-deleted}
 

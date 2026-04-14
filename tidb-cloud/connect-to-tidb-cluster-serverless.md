@@ -14,7 +14,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにさ
 
 ## ネットワーク接続方法 {#network-connection-methods}
 
-TiDB TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスが作成されたら、以下のいずれかの方法で接続できます。
+TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスが作成されたら、以下のいずれかの方法で接続できます。
 
 -   直接接続
 

@@ -296,7 +296,7 @@ I/O トラフィック制限設定を構成します。
 
 #### ロガー {#logger}
 
-以下のパラメータはTiFlashログとTiFlashエラーログにのみ有効です。TiFlashTiFlashのログパラメータを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
+以下のパラメータはTiFlashログとTiFlashエラーログにのみ有効です。TiFlashのログパラメータを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
 
 ##### <code>level</code> {#code-level-code}
 
@@ -323,7 +323,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>count</code> {#code-count-code}
 
--   保存できるログファイルの最大数。TiFlashTiFlashとTiFlashエラーログの場合、保存できるログファイルの最大数はそれぞれ`count`です。
+-   保存できるログファイルの最大数。TiFlashとTiFlashエラーログの場合、保存できるログファイルの最大数はそれぞれ`count`です。
 -   デフォルト値: `10`
 
 #### ラフト {#raft}
@@ -454,7 +454,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>task_scheduler_active_set_soft_limit</code><span class="version-mark">バージョン6.4.0の新機能</span> {#code-task-scheduler-active-set-soft-limit-code-span-class-version-mark-new-in-v6-4-0-span}
 
--   この項目はMinTSOスケジューラに使用されます。TiFlashTiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)参照してください。
+-   この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)参照してください。
 -   デフォルト値: バージョン7.4.0より前のバージョンでは、デフォルト値は`vcpu * 0.25`で、これはvCPU数の4分の1を意味します。バージョン7.4.0以降では、デフォルト値は`vcpu * 2`で、これはvCPU数の2倍を意味します。
 
 #### セキュリティ<span class="version-mark">v4.0.5 の新機能</span> {#security-span-class-version-mark-new-in-v4-0-5-span}
@@ -491,7 +491,7 @@ I/O トラフィック制限設定を構成します。
 
 ### <code>tiflash-learner.toml</code>ファイルを設定する {#configure-the-code-tiflash-learner-toml-code-file}
 
-`tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashTiFlashの設定については[TiKV構成](/tikv-configuration-file.md)参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
+`tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
 
 -   TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)追加パラメーターがあります。
 -   キーが`engine`の`label`は予約されており、手動で設定することはできません。

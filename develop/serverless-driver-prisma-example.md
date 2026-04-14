@@ -172,7 +172,7 @@ const prisma = new PrismaClient({ adapter });
           name  String? @db.VarChar(255)
         }
 
-3.  データベースをPrismaスキーマと同期させます。TiDB TiDB Cloud Starterインスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成することができます。
+3.  データベースをPrismaスキーマと同期させます。TiDB Cloud Starterインスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成することができます。
 
         npx prisma db push
 

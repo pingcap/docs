@@ -15,7 +15,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
 > **注記：**
 >
-> `tidbcloud_dedicated_vpc_peering`リソースは変更できません。TiDB TiDB Cloud Dedicated VPC ピアリングの設定を変更する場合は、既存のピアリングを削除してから、新しいピアリングを作成する必要があります。
+> `tidbcloud_dedicated_vpc_peering`リソースは変更できません。TiDB Cloud Dedicated VPC ピアリングの設定を変更する場合は、既存のピアリングを削除してから、新しいピアリングを作成する必要があります。
 
 ## 前提条件 {#prerequisites}
 

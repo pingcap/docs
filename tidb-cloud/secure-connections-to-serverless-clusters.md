@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 # TiDB Cloud Starter または Essential への TLS 接続 {#tls-connections-to-tidb-cloud-starter-or-essential}
 
-クライアントとTiDB Cloud StarterまたはTiDB Cloud Essentialクラスタ間の安全なTLS接続を確立することは、データベース接続における基本的なセキュリティ対策の一つです。TiDB TiDB Cloudのサーバー証明書は、独立したサードパーティの証明書プロバイダによって発行されます。サーバー側のデジタル証明書をダウンロードすることなく、 TiDB Cloudクラスタに簡単に接続できます。
+クライアントとTiDB Cloud StarterまたはTiDB Cloud Essentialクラスタ間の安全なTLS接続を確立することは、データベース接続における基本的なセキュリティ対策の一つです。TiDB Cloudのサーバー証明書は、独立したサードパーティの証明書プロバイダによって発行されます。サーバー側のデジタル証明書をダウンロードすることなく、 TiDB Cloudクラスタに簡単に接続できます。
 
 > **注記：**
 >
@@ -45,7 +45,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 ### ルート証明書の発行と有効性 {#root-certificate-issuance-and-validity}
 
-TiDB Cloudは、クライアントとTiDB Cloudクラスタ間のTLS接続において、 [レッツ・エンクリプト](https://letsencrypt.org/)の証明書を証明機関（CA）として使用します。TiDB TiDB Cloud証明書の有効期限が切れると、クラスタの通常の動作や確立されたTLSセキュア接続に影響を与えることなく、自動的にローテーションされます。
+TiDB Cloudは、クライアントとTiDB Cloudクラスタ間のTLS接続において、 [レッツ・エンクリプト](https://letsencrypt.org/)の証明書を証明機関（CA）として使用します。TiDB Cloud証明書の有効期限が切れると、クラスタの通常の動作や確立されたTLSセキュア接続に影響を与えることなく、自動的にローテーションされます。
 
 JavaやGoなど、クライアントがシステムのルートCAストアをデフォルトで使用する場合、CAルートのパスを指定せずにTiDB Cloudクラスタに安全に接続できます。ただし、一部のドライバやORMはシステムルートCAストアを使用しません。そのような場合は、ドライバやORMのCAルートパスをシステムルートCAストアに設定する必要があります。例えば、macOS上のPythonで[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)使用してTiDB Cloudクラスタに接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`設定する必要があります。
 

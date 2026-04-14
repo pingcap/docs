@@ -217,7 +217,7 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb-cloud">
 
-このセクションは、TiDB Self-Managed にのみ適用されます。TiDB TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメータの値はデフォルトで`false`であり、動的な変更はサポートされていません。
+このセクションは、TiDB Self-Managed にのみ適用されます。TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメータの値はデフォルトで`false`であり、動的な変更はサポートされていません。
 
 </CustomContent>
 

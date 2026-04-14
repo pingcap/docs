@@ -26,7 +26,7 @@ TiUPの基本は次のとおりです。
 
 ### Kubernetes 上で TiDBをデプロイて運用する - TiDB Operator {#deploy-and-operate-tidb-on-kubernetes-tidb-operator}
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator) 、Kubernetes上でTiDBクラスタを管理するための自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、設定変更など、TiDBのライフサイクル全体にわたる管理を提供します。TiDB TiDB Operatorを使用することで、パブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスタ内でTiDBをシームレスに実行できます。
+[TiDB Operator](https://github.com/pingcap/tidb-operator) 、Kubernetes上でTiDBクラスタを管理するための自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、設定変更など、TiDBのライフサイクル全体にわたる管理を提供します。TiDB Operatorを使用することで、パブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスタ内でTiDBをシームレスに実行できます。
 
 TiDB Operatorの基本は次のとおりです。
 
