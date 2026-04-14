@@ -68,7 +68,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
 2. In the project view, locate your target project, and then click the gear icon for the project.
 3. In the left navigation pane, click **Network Access** under **Project Settings**.
-4. On the **Network Access** page, click the **VPC Peering**tab, and then click the **AWS** sub-tab.
+4. On the **Network Access** page, click the **VPC Peering** tab, and then click the **AWS** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
