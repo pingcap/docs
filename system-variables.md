@@ -590,6 +590,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Unit: Seconds
 - The lock wait timeout for pessimistic transactions (default).
 
+### InPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- This variable is used only for internal statistics and is not visible to users.
+
 ### interactive_timeout
 
 > **Note:**
@@ -670,6 +674,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
 - The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
 - If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
+
+### OutPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- This variable is used only for internal statistics and is not visible to users.
 
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
@@ -3171,6 +3179,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >
 > Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
 
+### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether foreign key constraint checks use shared locks instead of exclusive locks when locking rows in the parent table in pessimistic transactions. When enabled, multiple concurrent transactions can perform foreign key checks on the same parent row without blocking each other, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
+
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
 > **Note:**
@@ -3523,11 +3540,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Before v8.5.6, the default value is `OFF`.
 - This variable controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests.
 
-    - When it is the default value `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
-    - When it is set to `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
+    - When it is the default value `ON`, TiDB ignores the element differences (including the difference in the number of elements) in the `IN` list and uses `...` to replace elements in the `IN` list in Plan Digests. In this case, TiDB generates the same Plan Digests for `IN` queries of the same type.
+    - When it is set to `OFF`, TiDB does not ignore the element differences (including the difference in the number of elements) in the `IN` list when generating Plan Digests. The element differences in the `IN` list result in different Plan Digests.
 
 ### tidb_index_join_batch_size
 
@@ -4565,6 +4582,17 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
 - Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
 
+### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable improves Join Reorder optimization for certain multi-table join queries. If you set it to `ON`, the optimizer includes filter conditions (`Selection`) between multiple consecutive joins into the candidate range for Join Reorder optimization, provided safety conditions are met. When rebuilding the join tree, the optimizer pushes these conditions down to more suitable positions, which lets more tables participate in Join Reorder optimization.
+- If you observe performance regressions or unstable execution plans after enabling this variable, set it to `OFF` to disable this feature.
+- To ensure the evaluation semantics of expressions remain unchanged, the optimizer does not perform condition pushdown even when this variable is enabled if the filter conditions contain non-deterministic functions or functions with side effects (such as `RAND()`).
+
 ### tidb_opt_limit_push_down_threshold
 
 - Scope: SESSION | GLOBAL
@@ -4761,6 +4789,73 @@ mysql> desc select count(distinct a) from test.t;
 |     └─TableRowIDScan_18          | 8748.62 | cop[tikv] | table:t              | keep order:false                    |
 +----------------------------------+---------+-----------+----------------------+-------------------------------------+
 ```
+
+### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enum
+- Default value: `DISABLE`
+- Possible values: `DISABLE`, `COST`
+- Controls whether the optimizer can leverage the partial order of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. When the sort column matches the index order (for example, the sort column is an index column or has a prefix index), the data returned by the index scan is already partially ordered on that column. In this case, the optimizer can incrementally build the TopN result during the scan and stop early once the `LIMIT` is satisfied, thereby reducing sorting overhead.
+- Usage scenarios: When the sort column in an `ORDER BY ... LIMIT` clause is a long string with only a prefix index, to reduce the TopN sorting overhead, you can set this variable to `COST` and specify a `USE INDEX` or `FORCE INDEX` hint in the query to enable the partial order TopN optimization.
+
+    - The default value is `DISABLE`, which means the partial order TopN optimization is disabled. In this case, the optimizer uses the standard global sorting approach for TopN.
+    - To force the use of the partial order TopN optimization, set this variable to `COST` and specify a qualifying index in the query using `USE INDEX` or `FORCE INDEX`. If the specified index does not meet the prerequisites for this optimization (for example, the `ORDER BY` clause does not match the index prefix, or the query contains unsupported ordering patterns), the optimization might not be applied even when the variable is set to `COST`, and the execution plan falls back to the standard TopN approach.
+
+    > **Note:**
+    >
+    > Currently, the optimizer does not support dynamically deciding whether to apply the partial order TopN optimization based on the cost model. If you only set this variable to `COST` without specifying `USE INDEX` or `FORCE INDEX`, the optimizer might not apply this optimization. To ensure that the optimization is applied, use it together with `USE INDEX` or `FORCE INDEX`.
+
+<details>
+<summary>View examples of partial order TopN optimization</summary>
+
+Create a table `t_varchar` and define a prefix index `idx_name_prefix(name(10))` on the string column `name`:
+
+```sql
+CREATE TABLE t_varchar (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    INDEX idx_name_prefix(name(10))
+);
+```
+
+- Force the partial order TopN optimization (`COST` + `USE INDEX`):
+
+    ```sql
+    > SET SESSION tidb_opt_partial_ordered_index_for_topn = 'COST';
+
+    > EXPLAIN FORMAT='brief' SELECT /*+ use_index(t_varchar, idx_name_prefix) */ *
+        FROM t_varchar ORDER BY name LIMIT 5;
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    | id                                        | estRows | task      | access object                | operator info                                                                                |
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    | TopN                                      | 5.00    | root      |                              | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5, prefix_col:planner__core__partial_order_topn.t_varchar.name, prefix_len:10 |
+    | └─IndexLookUp                             | 5.00    | root      |                              |                                                                                              |
+    |   ├─Limit(Build)                          | 5.00    | cop[tikv] |                              | offset:0, count:5, prefix_col:planner__core__partial_order_topn.t_varchar.name, prefix_len:10 |
+    |   │ └─IndexFullScan                       | 10000.00| cop[tikv] | table:t_varchar, index:idx_name_prefix(name) | keep order:true, stats:pseudo                                               |
+    |   └─TableRowIDScan(Probe)                 | 5.00    | cop[tikv] | table:t_varchar              | keep order:false, stats:pseudo                                                               |
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    ```
+
+- Disable the partial order TopN optimization (`DISABLE`):
+
+    ```sql
+    > SET SESSION tidb_opt_partial_ordered_index_for_topn = 'DISABLE';
+
+    > EXPLAIN FORMAT='brief' SELECT * FROM t_varchar ORDER BY name LIMIT 5;
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    | id                        | estRows | task      | access object       | operator info                                      |
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    | TopN                      | 5.00    | root      |                     | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5 |
+    | └─TableReader             | 5.00    | root      | data:TopN           |                                                    |
+    |   └─TopN                  | 5.00    | cop[tikv] |                     | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5 |
+    |     └─TableFullScan       | 10000.00| cop[tikv] | table:t_varchar     | keep order:false, stats:pseudo                     |
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    ```
+
+</details>
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
@@ -5711,6 +5806,7 @@ SHOW WARNINGS;
 - Before TiDB v8.4.0, the default value of this variable is `0`.
 - Starting from TiDB v8.4.0, the default value is `536870912`. When you upgrade from an earlier version to v8.4.0 or later, the old value set in the earlier version is used.
 - This variable controls the size of the schema cache in TiDB. The unit is byte. Setting this variable to `0` means the cache limit feature is disabled. To enable this feature, you need to set a value within the range `[67108864, 9223372036854775807]`. TiDB will use this value as the maximum available memory limit and apply the Least Recently Used (LRU) algorithm to cache the required tables, effectively reducing the memory used by schema information.
+- If your cluster contains a large number of partitioned tables, or if you frequently perform DDL operations on partitioned tables (such as `TRUNCATE` or `DROP PARTITION`), it is recommended that you set this variable to `0`.
 
 ### tidb_schema_version_cache_limit <span class="version-mark">New in v7.4.0</span>
 
@@ -5778,7 +5874,7 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
-- Optional value: a string with a length of up to 64 characters. Valid characters include digits `0-9`, letters `a-zA-Z`, underscores `_`, and hyphens `-`.
+- Optional value: a string with a length of up to 64 characters. Valid characters include digits `0-9`, letters `a-zA-Z`, underscores `_`, and hyphens `-`. Starting from v8.5.6 and v9.0.0, the value of this variable is case-insensitive. TiDB converts the input value to lowercase for storage and comparison.
 - This variable is an instance-level system variable. You can use it to control the service scope of each TiDB node under the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). The DXF determines which TiDB nodes can be scheduled to execute distributed tasks based on the value of this variable. For specific rules, see [Task scheduling](/tidb-distributed-execution-framework.md#task-scheduling).
 
 ### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
@@ -5888,7 +5984,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > If the character check is skipped, TiDB might fail to detect invalid UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
 
-### tidb_slow_log_max_per_sec <span class="version-mark">New in v9.0.0</span>
+### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5899,9 +5995,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - This variable controls the maximum number of slow query log entries that can be written per TiDB node per second.
     - A value of `0` means there is no limit on the number of slow query log entries written per second.
     - A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
-- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v900) to prevent excessive slow query logs from being generated under high-workload conditions.
+- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v856-and-v900) to prevent excessive slow query logs from being generated under high-workload conditions.
 
-### tidb_slow_log_rules <span class="version-mark">New in v9.0.0</span>
+### tidb_slow_log_rules <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -5913,8 +6009,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Tip:**
 >
-> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v900) to avoid excessively frequent slow query log printing.
-> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
+> After enabling `tidb_slow_log_rules`, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v856-and-v900) to limit the slow query log output rate and prevent rule-based slow query logging from being triggered too frequently.
 
 ### tidb_slow_log_threshold
 
