@@ -53,16 +53,17 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to New Relic (BETA)**.
-4. Enter your API key of New Relic and choose the site of New Relic.
-5. Click **Test Integration**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click the gear icon for the project.
+3. In the left navigation pane, click **Integrations** under **Project Settings**.
+4. On the **Integrations** page, click **Integration to New Relic (BETA)**.
+5. Enter your API key of New Relic and choose the site of New Relic.
+6. Click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
 
-6. Click **Confirm** to complete the integration.
+7. Click **Confirm** to complete the integration.
 
 </div>
 </SimpleTab>

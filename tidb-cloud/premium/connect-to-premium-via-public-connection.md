@@ -26,7 +26,7 @@ To connect to a {{{ .premium }}} instance via public connection, take the follow
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target instance to go to its overview page.
 

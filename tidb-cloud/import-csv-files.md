@@ -105,7 +105,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -160,7 +160,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -213,7 +213,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 

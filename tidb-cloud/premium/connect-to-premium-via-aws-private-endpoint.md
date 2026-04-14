@@ -175,7 +175,7 @@ After you have accepted the private endpoint connection, you are redirected back
 
 When you use private endpoint connections, the statuses of private endpoints and private endpoint services are displayed on the instance-level **Networking** page:
 
-1. Switch to your target instance using the combo box in the upper-left corner.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
 
 The possible statuses of a private endpoint are explained as follows:

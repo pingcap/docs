@@ -24,7 +24,7 @@ Backup files can originate from the following sources:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations and instances.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Data** > **Backup**.
 

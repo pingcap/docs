@@ -93,7 +93,7 @@ To view metrics on the overview page, take the following steps:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Check the **Core Metrics** section.
 
@@ -107,7 +107,7 @@ To view metrics on the **Metrics** page, take the following steps:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Monitoring** > **Metrics**.
 

@@ -146,7 +146,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
