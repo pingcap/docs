@@ -33,15 +33,19 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **Terminology update**: {{{ .starter }}} and Essential **clusters** are renamed to {{{ .starter }}} and Essential **instances** across the console.
     - **Breaking change tour guide**: A guided walkthrough is shown to existing users to explain structural changes, reducing disruption during the transition.
 
-  For more information, see [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md).
+  For more information, see [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md) and [Project Migration FAQ for TiDB X Instances](/tidb-cloud/tidbx-instance-move-faq.md).
 
 **API changes**
+
+- `project_id` values for TiDB Cloud Starter and Essential instances **can change** because these instances can be moved between projects in the TiDB Cloud console. Do not hardcode `project_id` values.
 
 - Add a `type` field to the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint.
 
     - If your application only reads the `id` and `name` fields from project responses, no changes are required.
     - If you need to distinguish between [project types](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)
- (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field. For more information, see [Project API Migration Guide for TiDB Cloud Starter and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md).
+ (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field.
+
+For more information, see [Project API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md).
 
 ## April 8, 2026
 
