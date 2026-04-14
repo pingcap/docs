@@ -55,8 +55,8 @@ jobs:
           cd docs-toolkit/markdown-translator
           yarn
           cd ../..
-          export OPENAI_RESPONSES_API_URL=${{ secrets.OPENAI_RESPONSES_API_URL }}
-          export OPENAI_API_KEY=${{ secrets.OPENAI_TRANSLATE_API_KEY }}
+          export OPENAI_RESPONSES_API_URL=${{ secrets.AZURE_OPENAI_BASE_URL }}
+          export OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_KEY }}
           export OPENAI_MODEL=gpt-5.4
           node docs-toolkit/markdown-translator/src/index.js --input-dir docs/tmp --output-dir docs/
 
