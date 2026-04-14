@@ -23,7 +23,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 

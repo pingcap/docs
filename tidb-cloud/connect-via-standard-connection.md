@@ -25,7 +25,7 @@ To connect to a TiDB Cloud Dedicated cluster via public connection, take the fol
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 

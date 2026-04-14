@@ -53,16 +53,17 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 </div>
 <div label="Datadog integration (Beta)">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Datadog (BETA)**.
-4. Enter your Datadog API key and choose your Datadog site.
-5. Click **Test Integration**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Integrations** under **Project Settings**.
+4. On the **Integrations** page, click **Integration to Datadog (BETA)**.
+5. Enter your Datadog API key and choose your Datadog site.
+6. Click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
 
-6. Click **Confirm** to complete the integration.
+7. Click **Confirm** to complete the integration.
 
 </div>
 </SimpleTab>

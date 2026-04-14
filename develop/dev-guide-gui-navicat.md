@@ -61,7 +61,7 @@ Connect to TiDB depending on the TiDB deployment option you have selected.
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the {{{ .starter }}} instance.
+    - **Password**: enter the password you created in step 4.
 
     ![Navicat: configure connection general panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-general.png)
 

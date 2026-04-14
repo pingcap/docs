@@ -724,7 +724,7 @@ Do the following to set up the load balancer:
         - `usw2-az2` with `broker-usw2-az2 subnet`
         - `usw2-az3` with `broker-usw2-az3 subnet`
     - **Security groups**: create a new security group with the following rules.
-        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, switch to your target project using the combo box in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com), click **Project Settings** > **Network Access** in the left navigation pane, and then click **Project CIDR** > **AWS**.
+        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization in the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab, locate your target project, click <MDSvgIcon name="icon-project-settings" /> for the project, click **Network Access** under **Project Settings**, and then click **Project CIDR** > **AWS**.
         - Outbound rule allows all TCP to Kafka VPC: Type - `All TCP`; Destination - `Anywhere-IPv4`
     - Listeners and routing:
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`

@@ -18,7 +18,7 @@ This document describes how to back up and restore your data on {{{ .starter }}}
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Data** > **Backup**.
 

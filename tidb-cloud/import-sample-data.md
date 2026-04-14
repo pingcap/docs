@@ -16,7 +16,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -48,7 +48,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -80,7 +80,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 

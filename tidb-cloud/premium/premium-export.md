@@ -97,7 +97,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
@@ -123,7 +123,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
@@ -147,7 +147,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
@@ -173,7 +173,7 @@ To cancel an ongoing export task, take the following steps:
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and instances.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 

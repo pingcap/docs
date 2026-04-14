@@ -64,14 +64,15 @@ You can complete the CMEK configuration of the project using either the TiDB Clo
 
 To complete the CMEK configuration of the project, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Encryption Access**.
-3. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
-4. The key provider only supports AWS KMS. You can choose the region where the encryption key can be used.
-5. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship.
-6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-7. In the TiDB Cloud console, scroll to the bottom of the key creation page, and then fill in the **KMS Key ARN** obtained from AWS KMS.
-8. Click **Create** to create the key.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Encryption Access** under **Project Settings**.
+4. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
+5. The key provider only supports AWS KMS. You can choose the region where the encryption key can be used.
+6. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship.
+7. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+8. In the TiDB Cloud console, scroll to the bottom of the key creation page, and then fill in the **KMS Key ARN** obtained from AWS KMS.
+9. Click **Create** to create the key.
 
 </div>
 <div label="Use API" value="api">

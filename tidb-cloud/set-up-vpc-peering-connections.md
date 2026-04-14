@@ -27,10 +27,11 @@ Before adding VPC Peering requests to a region, you must set a CIDR for that reg
 
 You can set the CIDR when creating the first TiDB Cloud Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Network Access**.
-3. On the **Network Access** page, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
-4. In the upper-right corner, click **Create CIDR**. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** dialog, and then click **Confirm**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Network Access** under **Project Settings**.
+4. On the **Network Access** page, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
+5. In the upper-right corner, click **Create CIDR**. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** dialog, and then click **Confirm**.
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
 
@@ -47,7 +48,7 @@ You can set the CIDR when creating the first TiDB Cloud Dedicated cluster. If yo
     >     - 172.30.0.0 - 172.31.255.255
     > - TiDB Cloud limits the number of TiDB Cloud nodes in a region of a project based on the CIDR block size of the region.
 
-5. View the CIDR of the cloud provider and the specific region.
+6. View the CIDR of the cloud provider and the specific region.
 
     The CIDR is inactive by default. To activate the CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
 
@@ -64,13 +65,14 @@ You can add VPC peering requests on either the project-level **Network Access** 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Network Access**.
-3. On the **Network Access** page, click the **VPC Peering**tab, and then click the **AWS** sub-tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Network Access** under **Project Settings**.
+4. On the **Network Access** page, click the **VPC Peering** tab, and then click the **AWS** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
-4. In the upper-right corner, click **Create VPC Peering**, select the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
+5. In the upper-right corner, click **Create VPC Peering**, select the **TiDB Cloud VPC Region**, and then fill in the required information of your existing AWS VPC:
 
     - Your VPC Region
     - AWS Account ID
@@ -81,9 +83,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **AWS** tab. The status of the newly created VPC peering is **System Checking**.
+6. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **AWS** tab. The status of the newly created VPC peering is **System Checking**.
 
-6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
+7. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
@@ -94,7 +96,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
@@ -254,13 +256,14 @@ You can add VPC peering requests on either the project-level **Network Access** 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Network Access**.
-3. On the **Network Access** page, click the **VPC Peering** tab, and then click the **Google Cloud** sub-tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Network Access** under **Project Settings**.
+4. On the **Network Access** page, click the **VPC Peering** tab, and then click the **Google Cloud** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
-4. In the upper-right corner, click **Create VPC Peering**, select the **TiDB Cloud VPC Region**, and then fill in the required information of your existing Google Cloud VPC:
+5. In the upper-right corner, click **Create VPC Peering**, select the **TiDB Cloud VPC Region**, and then fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
@@ -270,9 +273,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
     - VPC Network Name
     - VPC CIDR
 
-5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **Google Cloud** tab. The status of the newly created VPC peering is **System Checking**.
+6. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **Google Cloud** tab. The status of the newly created VPC peering is **System Checking**.
 
-6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
+7. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
@@ -283,7 +286,7 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 

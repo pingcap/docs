@@ -51,21 +51,9 @@ To disable log redaction, do the following:
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page.
 
-    <CustomContent plan="dedicated">
-
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
-
-    </CustomContent>
-
-    <CustomContent plan="premium">
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations and instances.
-
-    </CustomContent>
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 3. In the left navigation pane, click **Settings** > **Security**.
 4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Enabled** by default.
@@ -98,21 +86,9 @@ To maintain data security, **enable log redaction** as soon as you complete your
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page.
 
-    <CustomContent plan="dedicated">
-
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and resources.
-
-    </CustomContent>
-
-    <CustomContent plan="premium">
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations and instances.
-
-    </CustomContent>
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 3. In the left navigation pane, click **Settings** > **Security**.
 4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Disabled**.
