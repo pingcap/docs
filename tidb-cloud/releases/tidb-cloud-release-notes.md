@@ -42,6 +42,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
    - If your application only reads the `id` and `name` fields from project responses, no changes are required.
     - If you need to distinguish between [project types](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)
  (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field. For more information, see [Project API Migration Guide for TiDB Cloud Starter and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md).
+
 ## April 8, 2026
 
 **General changes**
