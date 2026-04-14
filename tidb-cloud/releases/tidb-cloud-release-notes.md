@@ -8,6 +8,44 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## April 14, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/) to [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/).
+
+    - The Top SQL page in [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md) now supports collecting and displaying TiKV network traffic and logical I/O metrics for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+
+**Console changes**
+
+- Unify the [TiDB Cloud console](https://tidbcloud.com) experience across all TiDB Cloud plans (such as {{{ .starter }}}, Essential, and Dedicated). The following capabilities are now available:
+
+    - **[My TiDB](https://tidbcloud.com/tidbs) homepage**: A new org-level homepage with both the resource view and project view.
+ 
+        - The resource view lists all TiDB Cloud resources across plans in one place.
+        - The project view organizes TiDB Cloud resources by project and lets you manage projects in your organization.
+
+    - **Unified resource creation workflow**: A single creation flow applies to all TiDB Cloud resource types, including {{{ .starter }}}, Essential, and Dedicated.
+    - **TiDB X project support**: TiDB X instances (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as {{{ .starter }}} and Essential) can now be optionally assigned to projects and moved between projects after creation.
+    - **Instance-level roles**: Role assignments can now be scoped to individual TiDB X instances, enabling fine-grained access control within a project.
+    - **Terminology update**: {{{ .starter }}} and Essential **clusters** are renamed to {{{ .starter }}} and Essential **instances** across the console.
+    - **Breaking change tour guide**: A guided walkthrough is shown to existing users to explain structural changes, reducing disruption during the transition.
+
+  For more information, see [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md) and [Project Migration FAQ for TiDB X Instances](/tidb-cloud/tidbx-instance-move-faq.md).
+
+**API changes**
+
+- `project_id` values for TiDB Cloud Starter and Essential instances **can change** because these instances can be moved between projects in the TiDB Cloud console. Do not hardcode `project_id` values.
+
+- Add a `type` field to the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint.
+
+    - If your application only reads the `id` and `name` fields from project responses, no changes are required.
+    - If you need to distinguish between [project types](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud) (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field.
+
+For more information, see [Project API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md).
+
 ## April 8, 2026
 
 **General changes**
