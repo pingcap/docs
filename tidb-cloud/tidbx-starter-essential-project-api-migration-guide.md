@@ -11,7 +11,7 @@ This guide is intended for API callers who want to keep most existing `v1beta` c
 
 Because of these project model changes, note the following API changes:
 
-- `project_id` values for {{{ .starter }}} and Essential instances **can change** because these instances can be moved between projects. Do not hardcode `project_id` values.
+- `project_id` values for {{{ .starter }}} and Essential instances **can change** because these instances can be moved between projects in the TiDB Cloud console. Do not hardcode `project_id` values.
 - Project responses now include a `type` field. For possible values, see [Project type values](#project-type-values).
 
 ## Project API changes
