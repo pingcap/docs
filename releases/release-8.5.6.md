@@ -1,6 +1,6 @@
 ---
 title: TiDB 8.5.6 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 8.5.6.
+summary: Learn about the features, compatibility changes, improvements, and bug fixes in TiDB 8.5.6.
 ---
 
 # TiDB 8.5.6 Release Notes
@@ -9,9 +9,9 @@ Release date: 2026-xx-xx
 
 TiDB version: 8.5.6
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup) | [Download offline package](https://pingkai.cn/download#tidb-community)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
-## Feature details
+## Features
 
 ### Performance
 
@@ -91,8 +91,8 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 - Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 - Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, you can still reference the base table name when an alias is defined, but this triggers a warning recommending the use of an explicit alias. For more information, see [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
-- Starting from v8.5.6, Dumpling supports exporting data from MySQL 8.4 by adopting the updated MySQL binary log terminology [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
-- Starting from v8.5.6, TiDB Data Migration (DM) supports MySQL 8.4 as an upstream data source by adapting to the new terminology and version detection logic introduced in this version [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
+- Starting from v8.5.6, Dumpling supports exporting data from MySQL 8.4 by adopting the updated MySQL binary log terminology. [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
+- Starting from v8.5.6, TiDB Data Migration (DM) supports MySQL 8.4 as an upstream data source by adapting to the new terminology and version detection logic introduced in this version. [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
 
 ### System variables
 
@@ -130,9 +130,9 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 + TiDB
 
     - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate)
-    - Support column-level privileges in `GRANT` and `REVOKE` [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve the performance of privilege update operations such as `GRANT` and `REVOKE` in deployments with a large number of column-level privilege entries [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
+    - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
 
 + TiKV
 
@@ -158,11 +158,10 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Fix the issue that upgrading from `release-8.5-20250606-v8.5.2` to the upstream `release-8.5` might skip the PITR metadata upgrade and cause PITR operations to fail [#66994](https://github.com/pingcap/tidb/issues/66994) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that after executing `EXCHANGE PARTITION`, non-unique global indexes or nullable unique global indexes on non-clustered partitioned tables might become inconsistent and return incomplete results [#65289](https://github.com/pingcap/tidb/issues/65289) @[mjonss](https://github.com/mjonss)
     - Fix the issue that `KILL QUERY` might incorrectly terminate idle connections [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)
-    - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the value of `tidb_service_scope` is not converted to lowercase when set [#66749](https://github.com/pingcap/tidb/issues/66749) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that affinity tables are not displayed after TiDB restarts [#66284](https://github.com/pingcap/tidb/issues/66284) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that the Stats Healthy metric displays inaccurately because system tables are not excluded from the stats cache [#64080](https://github.com/pingcap/tidb/issues/64080) @[ti-chi-bot](https://github.com/ti-chi-bot)
-    - Fix the issue that statistics might not be updated due to abnormal updates of `modify_count` [#65426](https://github.com/pingcap/tidb/issues/65426) @[ti-chi-bot](https://github.com/ti-chi-bot)
+    - Fix the issue that the Stats Healthy metric displays inaccurately because system tables are not excluded from the stats cache [#64080](https://github.com/pingcap/tidb/issues/64080) @[0xPoe](https://github.com/0xPoe)
+    - Fix the issue that statistics might not be updated due to abnormal updates of `modify_count` [#65426](https://github.com/pingcap/tidb/issues/65426) @[0xPoe](https://github.com/0xPoe)
     - Fix the issue that a pessimistic transaction might be unexpectedly rolled back due to a keep-alive mechanism failure when its first statement acquires locks in fair locking mode [#66571](https://github.com/pingcap/tidb/issues/66571) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiKV
@@ -173,7 +172,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
     - Fix the issue that follower reads might remain blocked on disk-full TiKV nodes by rejecting read-index requests on disk-full followers [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
     - Fix the issue that resolved-ts task backlogs might cause OOM when the resolved-ts worker is busy [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
     - Fix the issue that long-tail follower read latency might occur during leader transfer by retrying read-index requests earlier and adding a dedicated retry interval setting [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)
-    - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187)
+    - Fix the rare data inconsistency issue when retrying a prewrite request in pessimistic transactions [#11187](https://github.com/tikv/tikv/issues/11187) @[wk989898](https://github.com/wk989898)
 
 + PD
 
@@ -184,7 +183,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     - Fix a potential data inconsistency issue between TiFlash and TiKV after executing a DDL statement to remove the `NOT NULL` constraint of a column [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that the Raft throughput metric in the Grafana dashboard might display an abnormally large value [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
-    - Fix an issue that the Join result might be incorrect when the Runtime Filter is enabled and the Join Keys have inconsistent data types [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    - Fix the issue that the Join result might be incorrect when the Runtime Filter is enabled and the Join Keys have inconsistent data types [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 + Tools
 
