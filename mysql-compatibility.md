@@ -55,7 +55,6 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + Optimizer trace
 + XML Functions
 + X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
-+ Column-level privileges [#9766](https://github.com/pingcap/tidb/issues/9766)
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
