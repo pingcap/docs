@@ -194,6 +194,7 @@
         - [SQL Plan Management](/sql-plan-management.md)
         - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
         - [Optimizer Fix Controls](/optimizer-fix-controls.md)
+      - [Save and Restore the On-Site Information of an Instance](/sql-plan-replayer.md)
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
