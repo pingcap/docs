@@ -20,16 +20,17 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Unify the [TiDB Cloud console](https://tidbcloud.com) experience across all TiDB Cloud plans (such as {{{ .starter }}}, Essential, and Dedicated). The following capabilities are now available:
 
-    - **[My TiDB](https://tidbcloud.com/tidbs) homepage**: A new org-level homepage with the following views:
+    - **[My TiDB](https://tidbcloud.com/tidbs) homepage**: A new org-level homepage with both the resource view and project view.
  
-        - The resource view lists all instances across plans in one place.
-        - The project view organizes resources by project.
+        - The resource view lists all TiDB Cloud resources across plans in one place.
+        - The project view organizes TiDB Cloud resources by project and lets you manage projects in your organization.
 
     - **Unified resource creation workflow**: A single creation flow applies to all TiDB Cloud resource types, including {{{ .starter }}}, Essential, and Dedicated.
-    - **TiDB X project support**: TiDB X instances ({{{ .starter }}} and Essential) can now be optionally assigned to projects and moved between projects after creation.
+    - **TiDB X project support**: TiDB X instances (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as {{{ .starter }}} and Essential) can now be optionally assigned to projects and moved between projects after creation.
     - **Instance-level roles**: Role assignments can now be scoped to individual TiDB X instances, enabling fine-grained access control within a project.
     - **Terminology update**: {{{ .starter }}} and Essential **clusters** are renamed to {{{ .starter }}} and Essential **instances** across the console.
     - **Breaking change tour guide**: A guided walkthrough is shown to existing users to explain structural changes, reducing disruption during the transition.
+  For more information, see [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md).
 
 ## April 8, 2026
 
