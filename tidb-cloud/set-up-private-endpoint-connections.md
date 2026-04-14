@@ -138,7 +138,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 > You can view and manage private endpoint connections on two pages:
 >
 > - Cluster-level **Networking** page: navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-> - Project-level **Network Access** page: navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the **Project view** tab, locate your target project, click the gear icon for the project, and then click **Network Access** under **Project Settings**.
+> - Project-level **Network Access** page: navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the **Project view** tab, locate your target project, click <MDSvgIcon name="icon-project-settings" /> for the project, and then click **Network Access** under **Project Settings**.
 
 ### Step 4. Enable private DNS
 
@@ -187,7 +187,7 @@ After you have accepted the private endpoint connection, you are redirected back
 When you use private endpoint connections, the statuses of private endpoints and private endpoint services are displayed on the following pages:
 
 - Cluster-level **Networking** page: navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-- Project-level **Network Access** page: navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the **Project view** tab, locate your target project, click the gear icon for the project, and then click **Network Access** under **Project Settings**.
+- Project-level **Network Access** page: navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the **Project view** tab, locate your target project, click <MDSvgIcon name="icon-project-settings" /> for the project, and then click **Network Access** under **Project Settings**.
 
 The possible statuses of a private endpoint are explained as follows:
 

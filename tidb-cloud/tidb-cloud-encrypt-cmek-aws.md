@@ -65,7 +65,7 @@ You can complete the CMEK configuration of the project using either the TiDB Clo
 To complete the CMEK configuration of the project, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Encryption Access** under **Project Settings**.
 4. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
 5. The key provider only supports AWS KMS. You can choose the region where the encryption key can be used.

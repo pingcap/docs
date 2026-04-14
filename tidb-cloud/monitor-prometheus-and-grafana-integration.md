@@ -53,7 +53,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 <div label="Legacy project-level Prometheus integration (Beta)">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Integrations** under **Project Settings**.
 4. On the **Integrations** page, click **Integration to Prometheus (BETA)**.
 5. Click **Add File** to generate and show the scrape_config file for the current project.

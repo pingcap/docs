@@ -37,7 +37,7 @@ Alert notification subscriptions vary by [your TiDB Cloud plan](/tidb-cloud/sele
 > For {{{ .dedicated }}}, the alert subscription is for all alerts in the current project. If you have multiple {{{ .dedicated }}} clusters in the project, you just need to subscribe once.
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
 4. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 5. Select **PagerDuty** from the **Subscriber Type** drop-down list.
@@ -84,7 +84,7 @@ If you no longer want to receive alert notifications, take the following steps. 
 <CustomContent plan="dedicated">
     
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
 4. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 5. Click **Unsubscribe** to confirm the unsubscription.

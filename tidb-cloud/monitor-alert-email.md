@@ -31,7 +31,7 @@ To receive alert notifications, take the following steps. The steps vary by [you
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
 4. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 5. Select **Email** from the **Subscriber Type** drop-down list.
@@ -78,7 +78,7 @@ If you no longer want to receive alert notifications, please take the following 
 <CustomContent plan="dedicated">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
 4. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 5. Click **Unsubscribe** to confirm the unsubscription.

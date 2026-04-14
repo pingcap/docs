@@ -47,7 +47,7 @@ To configure CMEK using the TiDB Cloud console and Azure portal, take the follow
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
 
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 
 3. In the left navigation pane, click **Encryption Access** under **Project Settings**.
 
@@ -101,7 +101,7 @@ To configure CMEK using the TiDB Cloud console and Azure Resource Manager, take 
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 
 3. In the left navigation pane, go to **Encryption Access** under **Project Settings**.
 

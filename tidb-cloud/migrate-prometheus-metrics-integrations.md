@@ -23,7 +23,7 @@ Do the following to migrate the Prometheus integration.
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. In the project view, locate your target project, and then click the gear icon for the project.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 
 3. In the left navigation panel, click **Integrations** under **Project Settings**.
 
