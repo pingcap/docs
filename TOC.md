@@ -627,6 +627,7 @@
   - Privileges
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [Privilege Management](/privilege-management.md)
+    - [Column-Level Privilege Management](/column-privilege-management.md)
     - [User Account Management](/user-account-management.md)
     - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)

@@ -20,7 +20,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`COLLATIONS`](/information-schema/information-schema-collations.md)                    | Provides a list of collations that the server supports. |
 | [`COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md) | Explains which collations apply to which character sets. |
 | [`COLUMNS`](/information-schema/information-schema-columns.md)                          | Provides a list of columns for all tables. |
-| `COLUMN_PRIVILEGES`                                                                     | Not implemented by TiDB. Returns zero rows. |
+| `COLUMN_PRIVILEGES`                                                                     | Summarizes the information about column privileges visible to the current user. |
 | `COLUMN_STATISTICS`                                                                     | Not implemented by TiDB. Returns zero rows. |
 | [`ENGINES`](/information-schema/information-schema-engines.md)                          | Provides a list of supported storage engines. |
 | `EVENTS`                                                                                | Not implemented by TiDB. Returns zero rows. |
@@ -38,14 +38,14 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | `REFERENTIAL_CONSTRAINTS`                                                               | Provides information on `FOREIGN KEY` constraints. |
 | `ROUTINES`                                                                              | Not implemented by TiDB. Returns zero rows. |
 | [`SCHEMATA`](/information-schema/information-schema-schemata.md)                        | Provides similar information to `SHOW DATABASES`. |
-| `SCHEMA_PRIVILEGES`                                                                     | Not implemented by TiDB. Returns zero rows. |
+| `SCHEMA_PRIVILEGES`                                                                     | Summarizes the database privileges visible to the current user. |
 | `SESSION_STATUS`                                                                        | Not implemented by TiDB. Returns zero rows. |
 | [`SESSION_VARIABLES`](/information-schema/information-schema-session-variables.md)      | Provides similar functionality to the command `SHOW SESSION VARIABLES` |
 | [`STATISTICS`](/information-schema/information-schema-statistics.md)                    | Provides information on table indexes. |
 | [`TABLES`](/information-schema/information-schema-tables.md)                            | Provides a list of tables that the current user has visibility of. Similar to `SHOW TABLES`. |
 | `TABLESPACES`                                                                           | Not implemented by TiDB. Returns zero rows. |
 | [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)      | Provides information on primary keys, unique indexes and foreign keys. |
-| `TABLE_PRIVILEGES`                                                                      | Not implemented by TiDB. Returns zero rows. |
+| `TABLE_PRIVILEGES`                                                                      | Summarizes the table privileges visible to the current user. |
 | `TRIGGERS`                                                                              | Not implemented by TiDB. Returns zero rows. |
 | [`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md) | Summarizes information about user comments and user attributes. |
 | [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)          | Summarizes the privileges associated with the current user. |
