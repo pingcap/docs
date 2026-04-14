@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud API Migration Guide for {{{ .starter }}} and Essential
+title: Project API Migration Guide for {{{ .starter }}} and Essential
 summary: Learn the minimum changes needed to keep your existing v1beta API calls working after TiDB Cloud introduces separate project types for TiDB X instances.
 ---
 
-# TiDB Cloud API Migration Guide for {{{ .starter }}} and Essential
+# Project API Migration Guide for {{{ .starter }}} and Essential
 
 Starting from April 15, 2026, TiDB Cloud introduces separate project types for different resource types. For {{{ .starter }}} and Essential instances, you can now manage them either in TiDB X projects or at the organization level. For more information, see [Project Migration FAQ for TiDB X Instances](/tidb-cloud/tidbx-instance-move-faq.md).
 
