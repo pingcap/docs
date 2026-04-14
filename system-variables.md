@@ -1735,7 +1735,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud" plan="dedicated">
+<CustomContent platform="tidb-cloud" plan="starter,essential,dedicated">
 
 - This variable is used to specify the cloud storage URI for TiDB features that use external storage. After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the [Global Sort](/tidb-global-sort.md) feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For supported URI formats, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - The following statements use this variable:
@@ -1744,7 +1744,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud" plan="starter,essential,premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 - This variable is used to specify the cloud storage URI for TiDB features that use external storage. After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the [Global Sort](/tidb-global-sort.md) feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. [`PLAN REPLAYER`](/sql-plan-replayer.md) also uses this URI to store generated files. If this variable is empty, `PLAN REPLAYER` uses local storage. For supported URI formats, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - The following statements and features use this variable:
