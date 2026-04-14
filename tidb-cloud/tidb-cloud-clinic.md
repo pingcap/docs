@@ -25,7 +25,7 @@ To view the **Cluster** page, take the following steps:
 
 2. From the organization list, select your target organization. The clusters in the selected project are displayed.
 
-3. Click the name of your target cluster. The cluster overview page is displayed, where you can view detailed information about your cluster, including:
+3. Click the name of your target TiDB Cloud Dedicated cluster. The cluster overview page is displayed, where you can view detailed information about your cluster, including:
 
     - Advanced Metrics
     - Top Slow Queries (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)

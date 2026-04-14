@@ -22,7 +22,7 @@ By following this document, you will learn how to:
 
 ## Prerequisites
 
-- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter cluster for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB Self-Managed cluster for local testing.
+- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter instance for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB Self-Managed cluster for local testing.
 
 ## Installation
 
@@ -45,9 +45,9 @@ pip install "pytidb[models]"
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/clusters):
+You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/tidbs):
 
-1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
 For example, if the connection parameters are displayed as follows:
@@ -61,7 +61,7 @@ DATABASE: test
 CA:       /etc/ssl/cert.pem
 ```
 
-The corresponding Python code to connect to the TiDB Cloud Starter cluster would be as follows:
+The corresponding Python code to connect to the TiDB Cloud Starter instance would be as follows:
 
 ```python
 from pytidb import TiDBClient
@@ -82,7 +82,7 @@ client = TiDBClient.connect(
 </div>
 <div label="TiDB Self-Managed">
 
-Here is a basic example for connecting to a self-managed TiDB cluster:
+Here is a basic example for connecting to a TiDB Self-Managed cluster:
 
 ```python
 from pytidb import TiDBClient

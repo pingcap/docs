@@ -41,9 +41,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[Create a TiDB Instance](https://docs-preview.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium)
+[Create a {{{ .premium }}} Instance](https://docs-preview.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium)
 
-[Connect to a TiDB Instance](https://docs-preview.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=premium)
+[Connect to a {{{ .premium }}} Instance](https://docs-preview.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=premium)
 
 [Use an HTAP Cluster](https://docs-preview.pingcap.com/tidbcloud/tiflash-overview/?plan=premium)
 

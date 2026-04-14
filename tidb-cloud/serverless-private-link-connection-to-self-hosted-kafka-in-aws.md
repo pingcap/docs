@@ -5,7 +5,7 @@ summary: Learn how to connect to an AWS Self-Hosted Kafka using an AWS Endpoint 
 
 # Connect to AWS Self-Hosted Kafka via Private Link Connection
 
-This document describes how to connect a {{{ .essential }}} cluster to a self-hosted Kafka cluster in AWS using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
+This document describes how to connect a {{{ .essential }}} instance to a self-hosted Kafka cluster in AWS using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 The mechanism works as follows:
 
@@ -36,7 +36,7 @@ The mechanism works as follows:
 
 To view the AWS account ID and availability zones, do the following:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the displayed dialog, you can find the AWS account ID and availability zones.
 
@@ -51,9 +51,9 @@ The following table shows an example of the deployment information.
 
 ## Step 1. Set up a Kafka cluster
 
-If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
+If you need to deploy a new Kafka cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
-If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
+If you need to expose an existing Kafka cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
 
 ### Deploy a new Kafka cluster
 
@@ -513,7 +513,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 ### Reconfigure a running Kafka cluster
 
-Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB cluster. If any brokers are in different AZs, move them to the correct ones.
+Ensure that your Kafka cluster is deployed in the same region and AZs as the {{{ .essential }}} instance. If any brokers are in different AZs, move them to the correct ones.
 
 #### 1. Configure the EXTERNAL listener for brokers
 
@@ -678,7 +678,7 @@ Do the following to set up the load balancer:
         - `usw2-az2` with `broker-usw2-az2 subnet`
         - `usw2-az3` with `broker-usw2-az3 subnet`
     - **Security groups**: create a new security group with the following rules.
-        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, switch to your target project using the combo box in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com), click **Project Settings** > **Network Access** in the left navigation pane, and then click **Project CIDR** > **AWS**.
+        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization in the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab, locate your target project, click <MDSvgIcon name="icon-project-settings" /> for the project, click **Network Access** under **Project Settings**, and then click **Project CIDR** > **AWS**.
         - Outbound rule allows all TCP to Kafka VPC: Type - `All TCP`; Destination - `Anywhere-IPv4`
     - Listeners and routing:
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`

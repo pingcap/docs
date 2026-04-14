@@ -117,7 +117,7 @@ For more information about how to grant a user permissions and test them, see [C
 ### Check the policy of the IAM role
 
 1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**. 
-2. In the list of roles, find and click the role you have created for the target TiDB cluster. The role summary page is displayed.
+2. In the list of roles, find and click the role you have created for the target TiDB Cloud resource. The role summary page is displayed.
 3. In the **Permission policies** area of the role summary page, a list of policies is displayed. Take the following steps for each policy:
     1. Click the policy to enter the policy summary page.
     2. On the policy summary page, click the **{}JSON** tab to check the permission policy. Make sure that the `Resource` fields in the policy are correctly configured.

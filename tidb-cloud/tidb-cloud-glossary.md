@@ -27,11 +27,17 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+
+### Cluster
+
+In TiDB Cloud, a cluster is a dedicated cloud deployment that includes explicit infrastructure details such as node topology, instance types, storage configuration, and scaling model.
+
+Among TiDB Cloud plans, only TiDB Cloud Dedicated clusters use this deployment model.
 
 ### Credit
 
-TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay fees before the credits become expired.
 
 ## D
 
@@ -71,7 +77,7 @@ For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/d
 
 ### member
 
-A user that has been invited to an organization, with access to the organization and the clusters of this organization.
+A user that has been invited to an [organization](#organization) in TiDB Cloud.
 
 ### MPP
 
@@ -95,7 +101,7 @@ Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analy
 
 ### organization
 
-An entity that you create to manage your TiDB Cloud accounts, including a management account with any number of multiple member accounts.
+A top level container to manage your TiDB Cloud accounts (including a management account with any number of multiple member accounts), [projects](#project), and [resources](#tidb-cloud-resource).
 
 ### organization members
 
@@ -109,23 +115,48 @@ A document that defines permissions applying to a role, user, or organization, s
 
 ### project
 
-Based on the projects created by the organization, resources such as personnel, instances, and networks can be managed separately according to projects, and resources between projects do not interfere with each other.
+In TiDB Cloud, you can use projects to group and manage your TiDB resources.
+
+- For <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
+- For {{{ .dedicated }}} clusters, projects are required.
+
+The function of a project varies by project type. Currently, there are three types of projects:
+
+- **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
+- **TiDB X project**: This project type is used only for TiDB X instances (<CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances (<CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+
+For more information about the differences between these project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 
 ### project members
 
-Project members are users who are invited to join one or more projects of the organization. Project members can manage clusters, network access, backups, and other resources.
+Project members are users who are invited to join one or more projects of the organization.
 
 ## R
 
 ### Recycle Bin
 
-The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+The place where the data of deleted [TiDB Cloud resources](#tidb-cloud-resource) with valid backups is stored.
+
+Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it are moved to the Recycle Bin. For backup files from automatic backups, the Recycle Bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new TiDB Cloud resource in time. Note that if a TiDB Cloud resource **has no backup**, the deleted resource will not be displayed in the Recycle Bin.
+
+<CustomContent plan="starter,essential,dedicated">
+
+Currently, only {{{ .dedicated }}} clusters support the Recycle Bin feature.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+Currently, only {{{ .premium }}} instances and {{{ .dedicated }}} clusters support the Recycle Bin feature.
+
+</CustomContent>
 
 ### region
 
 - TiDB Cloud region
 
-    A geographical area in which a TiDB Cloud cluster is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster is deployed across these zones.
+    A geographical area in which a TiDB Cloud resource is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster or instance is deployed across these zones.
 
 - TiDB Region
 
@@ -137,11 +168,11 @@ A separate database that can be located in the same or different region and cont
 
 ### Replication Capacity Unit (RCU)
 
-TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
+TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
 
 ### Request Capacity Unit (RCU)
 
-A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your {{{ .essential }}} instance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 ### Request Unit (RU)
 
@@ -156,23 +187,36 @@ For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resourc
 
 ### Spending limit
 
-[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card.
+[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} instances. If the spending limit is set to 0, the {{{ .starter }}} instance remains free. If the spending limit is greater than 0, you need to add a credit card.
 
 ## T
 
 ### TiDB cluster
 
-The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage), [the Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) nodes that form a functional working database.
+In TiDB Cloud, a cluster is a dedicated cloud deployment of TiDB that includes explicit infrastructure details such as node topology (where you can specify the number of [TiDB](/tidb-computing.md) nodes, [TiKV](/tidb-storage.md) nodes, and [TiFlash](/tiflash/tiflash-overview.md) nodes), storage configuration, and scaling model.
 
 ### TiDB node
 
-The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the cluster can handle.
+The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the {{{ .dedicated }}} cluster can handle.
+
+### TiDB Cloud resource
+
+A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
+
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance
+- A {{{ .dedicated }}} cluster
 
 ### TiDB X
 
 A new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. By decoupling compute and storage, TiDB X enables TiDB to scale intelligently, adapting in real time to workload patterns, business cycles, and data characteristics.
 
 The TiDB X architecture is now available in <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>. For more information, see [Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/) and [PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/).
+
+### TiDB X instance
+
+A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md). It does not require you to manage or understand the underlying cluster topology.
+
+Among TiDB Cloud plans, <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> are using the TiDB X architecture. Therefore, when "TiDB X instance" is mentioned, it refers to a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance.
 
 ### TiFlash node
 
@@ -184,7 +228,7 @@ The storage node that stores the online transactional processing (OLTP) data. It
 
 ### traffic filter
 
-A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster via a SQL client. The traffic filter is empty by default.
+A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud resource via a SQL client. The traffic filter is empty by default.
 
 ## V
 
