@@ -8,7 +8,6 @@
 - [API Overview](/api/tidb-cloud-api-overview.md)
 - [API v1beta1](/api/tidb-cloud-api-v1beta1.md)
 - [API v1beta](/api/tidb-cloud-api-v1beta.md)
-- [TiDB Cloud API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-openapi-migration-guide.md)
 
 ## TIDB SELF-MANAGED
 
