@@ -140,17 +140,17 @@ The place where the data of deleted [TiDB Cloud resources](#tidb-cloud-resource)
 
 Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it are moved to the Recycle Bin. For backup files from automatic backups, the Recycle Bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new TiDB Cloud resource in time. Note that if a TiDB Cloud resource **has no backup**, the deleted resource will not be displayed in the Recycle Bin.
 
-Currently, only the following types of TiDB Cloud resources support the Recycle Bin feature:
+<CustomContent plan="starter,essential,dedicated">
 
-- {{{ .essential }}} instances
-
-<CustomContent plan="premium">
-
-- {{{ .premium }}} instances
+Currently, only {{{ .dedicated }}} clusters support the Recycle Bin feature.
 
 </CustomContent>
 
-- {{{ .dedicated }}} clusters
+<CustomContent plan="premium">
+
+Currently, only {{{ .premium }}} instances and {{{ .dedicated }}} clusters support the Recycle Bin feature.
+
+</CustomContent>
 
 ### region
 
