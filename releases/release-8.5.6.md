@@ -137,7 +137,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     - Introduce a load-based compaction mechanism, which detects MVCC read overhead and prioritizes compaction for Regions with higher read cost to improve query performance [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     - Optimize the stale range cleanup logic during cluster scale-out and scale-in operations by deleting stale keys directly instead of cleaning them up through SST file ingestion, thereby reducing the impact on online request latency [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Support collecting TiKV network traffic and logical I/O metrics for Top SQL, which helps users diagnose SQL performance issues more accurately [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
+    - Support collecting TiKV network traffic and logical I/O metrics for Top SQL, which helps you diagnose SQL performance issues more accurately [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
 
 + PD
 
@@ -197,7 +197,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
         - Fix the issue that changefeeds might repeatedly create invalid dispatchers after the server restarts [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
         - Fix the issue that TiCDC fails to replicate table renaming operations correctly when the upstream TiDB version is v8.1.x or earlier [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
-        - Fix the issue that TiKV might crash during data scanning when CDC is enabled [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiKV might crash during data scanning when TiCDC is enabled [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         - Support Azure Managed Identity authentication for Azure Blob Storage and fix the issue that uploads to cloud storage might get stuck [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
     + TiDB Data Migration (DM)
