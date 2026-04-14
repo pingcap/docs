@@ -14,9 +14,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - The Top SQL page in [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md) now supports collecting and displaying TiKV network traffic and logical I/O metrics for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
-
     - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/) to [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/).
+
+    - The Top SQL page in [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md) now supports collecting and displaying TiKV network traffic and logical I/O metrics for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
 
 **Console changes**
 
