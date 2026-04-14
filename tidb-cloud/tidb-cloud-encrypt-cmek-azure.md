@@ -88,7 +88,7 @@ To configure CMEK using the TiDB Cloud console and Azure portal, take the follow
     5. Click **+ Select members**, enter the TiDB-provided **Enterprise Application Name**, and select it as the member. Then, click **Select**.
     6. Review the configuration and click **Review + assign**.
 
-10. In the TiDB Cloud console, click **Test Encryption Key and Create** to validate the configuration and create the encryption key.
+11. In the TiDB Cloud console, click **Test Encryption Key and Create** to validate the configuration and create the encryption key.
 
 </div>
 <div label="Use Azure Resource Manager" value="arm">
