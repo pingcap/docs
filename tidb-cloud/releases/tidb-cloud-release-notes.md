@@ -30,6 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **Instance-level roles**: Role assignments can now be scoped to individual TiDB X instances, enabling fine-grained access control within a project.
     - **Terminology update**: {{{ .starter }}} and Essential **clusters** are renamed to {{{ .starter }}} and Essential **instances** across the console.
     - **Breaking change tour guide**: A guided walkthrough is shown to existing users to explain structural changes, reducing disruption during the transition.
+
   For more information, see [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md).
 
 ## April 8, 2026
