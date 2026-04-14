@@ -65,7 +65,7 @@ Connect to TiDB depending on the TiDB deployment option you have selected.
     - **Hostname**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: click **Store in Keychain ...** or **Store in Vault**, enter the password of the {{{ .starter }}} instance, and then click **OK** to store the password.
+    - **Password**: click **Store in Keychain ...** or **Store in Vault**, enter the password you created in step 4, and then click **OK** to store the password.
 
         ![MySQL Workbench: store the password of {{{ .starter }}} in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
