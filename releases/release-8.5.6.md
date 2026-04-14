@@ -130,7 +130,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 + TiDB
 
     - Improve plan selection for queries with `IN` predicates on index prefix columns. TiDB can now use merge sort to preserve order for `ORDER BY ... LIMIT` queries, reducing unnecessary scans and improving performance. [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate)
-    - Improve the performance of privilege update operations such as `GRANT` and `REVOKE` in deployments with a large number of column-level privilege entries [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve slow query log readability by outputting non-printable prepared statement arguments as hexadecimal values [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
     - Add `cluster_id` to `mysql.tidb`, enabling external tools to determine whether two TiDB instances belong to the same cluster [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
 
