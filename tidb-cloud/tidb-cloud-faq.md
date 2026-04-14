@@ -42,8 +42,8 @@ No.
 ### What versions of TiDB are supported on TiDB Cloud?
 
 - For new TiDB Cloud Dedicated clusters, the default TiDB version is [v8.5.6](https://docs.pingcap.com/tidb/v8.5/release-8.5.6) starting from April 14, 2026.
-- For {{{ .starter }}} clusters, the TiDB version is [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3) starting from February 10, 2026.
-- For {{{ .essential }}} clusters, the TiDB version is [v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2) starting from April 22, 2025.
+- For {{{ .starter }}} instances, the TiDB version is [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3) starting from February 10, 2026.
+- For {{{ .essential }}} instances, the TiDB version is [v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2) starting from April 22, 2025.
 
 For more information, see [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md).
 
