@@ -355,13 +355,17 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ## Versions of statistics
 
-The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+> **Warning:**
+>
+> Starting from v8.5.6, Statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
+
+The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, TiDB supports two statistics versions: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
 - For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
 - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 
-Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see [Collecting statistics on some columns](#collect-statistics-on-some-columns)).
+Version 2 is the recommended statistics version. Compared to Version 1, Version 2 improves the accuracy of many statistics for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics.
 
 The following table lists the information collected by each version for usage in the optimizer estimates:
 
@@ -376,11 +380,11 @@ The following table lists the information collected by each version for usage in
 
 ### Switch between statistics versions
 
-It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
+It is recommended that all tables, indexes, and partitions use the same statistics version. If your cluster still uses Statistics Version 1, migrate to Statistics Version 2 as soon as possible. Until Version 2 statistics are collected for an object (such as a table, an index, or a partition), TiDB continues to use the existing Version 1 statistics for that object.
 
-Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to set `tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
+One major reason to migrate is that Version 1 might produce inaccurate estimates for equal/IN predicates because the Count-Min Sketch can have hash collisions. For more information, see [Count-Min Sketch](#count-min-sketch). To avoid this issue, set `tidb_analyze_version = 2` and rerun `ANALYZE` on all objects.
 
-To prepare `ANALYZE` for switching between versions:
+To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Version 2:
 
 - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 
@@ -388,17 +392,10 @@ To prepare `ANALYZE` for switching between versions:
     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
     FROM information_schema.tables JOIN mysql.stats_histograms
     ON table_id = tidb_table_id
-    WHERE stats_ver = 2;
+    WHERE stats_ver = 1;
     ```
 
-- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
-
-    ```sql
-    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
-    FROM information_schema.tables JOIN mysql.stats_histograms
-    ON table_id = tidb_table_id
-    WHERE stats_ver = 2;
-    ```
+- If TiDB automatically executes the `ANALYZE` statement because auto-analysis is enabled, after you set `tidb_analyze_version = 2`, TiDB gradually refreshes statistics to Version 2 through subsequent auto-analysis. Before Version 2 statistics are collected for an object, TiDB can continue to use its existing Version 1 statistics. To speed up the migration for important objects, run `ANALYZE` on them manually.
 
 - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
 
