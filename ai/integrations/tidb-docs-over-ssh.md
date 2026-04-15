@@ -74,7 +74,14 @@ You can configure the sync target with environment variables:
 - `DOCS_SYNC_REPO`: SSH Git URL. Default: `git@github.com:pingcap/docs.git`
 - `DOCS_SYNC_BRANCH`: branch to sync. Default: `master`
 - `DOCS_SYNC_TARGET_DIR`: local target directory. Default: `../docs-upstream`
-- `DOCS_SYNC_SSH_COMMAND`: custom SSH command for Git, such as identity file options
+- `DOCS_SYNC_TIMEOUT_MS`: timeout for each Git command. Default: `120000`
+- `DOCS_SYNC_SSH_COMMAND`: full custom SSH command for Git (highest priority)
+- `DOCS_SYNC_SSH_BIN`: SSH binary name or path. Default: `ssh`
+- `DOCS_SYNC_SSH_KEY_PATH`: private key path used by SSH
+- `DOCS_SYNC_SSH_PORT`: SSH port
+- `DOCS_SYNC_SSH_STRICT_HOST_KEY_CHECKING`: value for `StrictHostKeyChecking`
+- `DOCS_SYNC_SSH_USER_KNOWN_HOSTS_FILE`: path for `UserKnownHostsFile`
+- `DOCS_SYNC_SSH_EXTRA_OPTIONS`: extra SSH `-o` options separated by commas
 
 Example:
 
