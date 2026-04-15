@@ -603,4 +603,4 @@ We would like to thank the following contributors from the TiDB community:
 - [tangjingyu97](https://github.com/tangjingyu97)
 - [Tema](https://github.com/Tema)
 - [ub-3](https://github.com/ub-3)
-- [yoshikipom](https://github.com/yoshikipom)
+- [yoshikipom](https://github.com/yoshikipom) 

@@ -50,7 +50,7 @@ TiDB supports specifying the following expressions as default values in the `DEF
 * [`NEXTVAL()`](/functions-and-operators/sequence-functions.md#nextval)
 * [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)
 * [`UUID()`](/functions-and-operators/miscellaneous-functions.md#uuid), [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)
-* [`VEC_FROM_TEXT()`](/vector-search/vector-search-functions-and-operators.md#vec_from_text)
+* [`VEC_FROM_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#vec_from_text)
 
 TiDB supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions, not literals, to define default values for these data types. The following is an example of `BLOB`:
 

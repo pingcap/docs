@@ -54,6 +54,7 @@ AlterTableSpec ::=
         | TTLEnable EqOpt ( 'ON' | 'OFF' )
         | TTLJobInterval EqOpt stringLit
     )
+|   'AFFINITY' EqOpt stringLit
 |   PlacementPolicyOption
 
 PlacementPolicyOption ::=
@@ -180,6 +181,8 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 - Changes of column types on generated columns are not supported.
 
 - Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+
+- The `AFFINITY` option is a TiDB extension syntax. After `AFFINITY` is enabled for a table, you cannot modify the partition scheme of that table, such as adding, dropping, reorganizing, or swapping partitions. To modify the partition scheme, you must first remove `AFFINITY`.
 
 - Spatial data types are not supported.
 

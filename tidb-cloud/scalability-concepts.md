@@ -7,7 +7,7 @@ summary: Learn about scalability concepts for TiDB Cloud.
 
 TiDB Cloud offers multiple deployment options with flexible scalability to meet the needs of different workloads.
 
-- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is ideal for prototyping, development, and early-stage workloads. It provides a simplified, cost-effective way to get started with TiDB Cloud, with automatic scaling built in.
+- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) is ideal for prototyping, development, and early-stage workloads. It provides a simplified, cost-effective way to get started with TiDB Cloud, with automatic scaling built in.
 - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) is built for production workloads that require more robust scalability and predictable performance under growing traffic or data volume.
 - TiDB Cloud Dedicated lets you adjust its compute and storage resources separately to match your data volume or workload changes. TiDB Cloud Dedicated can do scaling without any service disruption. This flexibility allows organizations to optimize their infrastructure costs while maintaining high performance and availability.
 
@@ -40,4 +40,4 @@ TiDB Cloud deploys TiKV nodes evenly to 3 available zones in the region you sele
 
 TiFlash is responsible for storing columnar data. TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. You can configure the node number, vCPU and RAM, and storage for TiFlash.
 
-TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least two replicas of the data for high availability in your production environment.
+TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud Dedicated cluster and create at least two replicas of the data for high availability in your production environment.

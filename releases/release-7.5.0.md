@@ -108,7 +108,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
+    For more information, see [documentation](/best-practices/ddl-introduction.md#ddl-related-commands).
 
 * BR supports backing up and restoring statistics [#48008](https://github.com/pingcap/tidb/issues/48008) @[Leavrth](https://github.com/Leavrth)
 
@@ -302,4 +302,4 @@ To learn about the performance of TiDB v7.5.0, you can refer to the [TPC-C perfo
 We would like to thank the following contributors from the TiDB community:
 
 - [jgrande](https://github.com/jgrande) (First-time contributor)
-- [shawn0915](https://github.com/shawn0915)
+- [shawn0915](https://github.com/shawn0915) 

@@ -1,63 +1,42 @@
 ---
-title: Build a {{{ .starter }}} Cluster
-summary: Learn how to build a {{{ .starter }}} cluster in TiDB Cloud and connect to it.
+title: Create a {{{ .starter }}} Instance
+summary: Learn how to create a {{{ .starter }}} instance and connect to it.
+aliases: ['/tidb/stable/dev-guide-build-cluster-in-cloud/','/tidb/dev/dev-guide-build-cluster-in-cloud/','/tidbcloud/dev-guide-build-cluster-in-cloud/']
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a {{{ .starter }}} Cluster
+# Create a {{{ .starter }}} Instance
 
-<CustomContent platform="tidb">
-
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} (formerly Serverless) cluster, connect to it, and run a sample application on it.
+This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} instance, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-This document walks you through the quickest way to get started with TiDB Cloud. You will create a TiDB cluster, connect to it, and run a sample application on it.
-
-</CustomContent>
-
-## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
+## Step 1. Create a {{{ .starter }}} instance {#step-1-create-a-starter-instance}
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
+3. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **Create Resource**.
 
-4. On the **Create Cluster** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create Resource** page, **Starter** is selected by default. Enter a name for your {{{ .starter }}} instance, and then select the cloud provider and region where you want to create it.
 
-5. Click **Create** to create a {{{ .starter }}} cluster.
+5. Click **Create** to create a {{{ .starter }}} instance.
 
-    Your TiDB Cloud cluster will be created in approximately 30 seconds.
+    Your {{{ .starter }}} instance will be created in approximately 30 seconds.
 
-6. After your TiDB Cloud cluster is created, click your cluster name to go to the cluster overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
+6. After your {{{ .starter }}} instance is created, click your instance name to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 7. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
 
-8. Click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
-
-<CustomContent platform="tidb">
+8. Click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the {{{ .starter }}} instance.
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+> When you connect to a {{{ .starter }}} instance, you must include the prefix for your instance in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-
-</CustomContent>
-
-## Step 2. Connect to a cluster
+## Step 2. Connect to a {{{ .starter }}} instance {#step-2-connect-to-a-starter-instance}
 
 1. If the MySQL client is not installed, select your operating system and follow the steps below to install it.
 
@@ -130,7 +109,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-cloud-cluster).
+2. Run the connection string obtained in [Step 1](#step-1-create-a-starter-instance).
 
     {{< copyable "shell-regular" >}}
 
@@ -138,23 +117,10 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
 
-<CustomContent platform="tidb">
-
 > **Note:**
 >
-> - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
-> - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> - When you connect to a {{{ .starter }}} cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-> - If you encounter problems when connecting to a {{{ .starter }}} cluster, you can read [Secure Connections to {{{ .starter }}} Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
-
-</CustomContent>
+> - When you connect to a {{{ .starter }}} instance, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
+> - If you encounter problems when connecting to a {{{ .starter }}} instance, you can read [Secure Connections to {{{ .starter }}} Instances](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
 
 3. Fill in the password to sign in.
 
@@ -180,14 +146,6 @@ If your actual output is similar to the expected output, congratulations, you ha
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

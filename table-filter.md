@@ -220,14 +220,6 @@ These regular expressions use the [Go dialect](https://pkg.go.dev/regexp/syntax?
 
 ## Multiple rules
 
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This section is not applicable to TiDB Cloud. Currently, TiDB Cloud only supports one table filter rule.
-
-</CustomContent>
-
 When a table name matches none of the rules in the filter list, the default behavior is to ignore such unmatched tables.
 
 To build a block list, an explicit `*.*` must be used as the first rule, otherwise all tables will be excluded.

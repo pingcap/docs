@@ -21,7 +21,6 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 ### Restrictions
 
 - PITR only supports restoring data to **an empty cluster**.
-- PITR only supports cluster-level restore and does not support database-level or table-level restore.
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - It is not recommended to back up tables that are being restored, because the backed-up data might be problematic.
@@ -116,8 +115,8 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 | New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collation_enabled` variable in the `mysql.tidb` table during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
-| TiCDC | | BR v8.2.0 and later: if the target cluster to be restored has a changefeed and the changefeed [CheckpointTS](/ticdc/ticdc-architecture.md#checkpointts) is earlier than the BackupTS, BR does not perform the restoration. BR versions before v8.2.0: if the target cluster to be restored has any active TiCDC changefeeds, BR does not perform the restoration. |
-| Vector search | | Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with [vector data types](/vector-search/vector-search-data-types.md) to TiDB clusters earlier than v8.4.0 is not supported. |
+| TiCDC | | BR v8.2.0 and later: if the target cluster to be restored has a changefeed and the changefeed [CheckpointTS](/ticdc/ticdc-classic-architecture.md#checkpointts) is earlier than the BackupTS, BR does not perform the restoration. BR versions before v8.2.0: if the target cluster to be restored has any active TiCDC changefeeds, BR does not perform the restoration. |
+| Vector search | | Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with [vector data types](/ai/reference/vector-search-data-types.md) to TiDB clusters earlier than v8.4.0 is not supported. |
 
 ### Version compatibility
 
@@ -144,7 +143,8 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> - Known issue: Starting from v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> - Starting from v8.5.5, BR supports checking collation compatibility when restoring system tables by using the `--sys-check-collation` parameter. During restore, BR checks whether case conflicts exist under the target cluster collation. If the data is compatible with the target collation, BR can successfully restore backups from earlier versions. Otherwise, BR reports an error and terminates the restore.
 
 The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 

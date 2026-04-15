@@ -20,9 +20,7 @@ To use connections secured with TLS, you first need to configure the TiDB server
 Similar to MySQL, TiDB allows TLS and non-TLS connections on the same TCP port. For a TiDB server with TLS enabled, you can choose to securely connect to the TiDB server through an encrypted connection, or to use an unencrypted connection. You can use the following ways to require the use of secure connections:
 
 + Configure the system variable [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) to require secure connections to the TiDB server for all users.
-+ Specify `REQUIRE SSL` when you create a user (`create user`), or modify an existing user (`alter user`), which is to specify that specified users must use TLS connections to access TiDB. The following is an example of creating a user:
-
-    {{< copyable "sql" >}}
++ Specify `REQUIRE SSL` when you create a user (`CREATE USER`), or modify an existing user (`ALTER USER`), which is to specify that specified users must use TLS connections to access TiDB. The following is an example of creating a user:
 
     ```sql
     CREATE USER 'u1'@'%' IDENTIFIED BY 'my_random_password' REQUIRE SSL;
@@ -49,6 +47,10 @@ To enable secure connections with your own certificates in the TiDB server, you 
 All the files specified by the parameters are in PEM (Privacy Enhanced Mail) format. Currently, TiDB does not support the import of a password-protected private key, so it is required to provide a private key file without a password. If the certificate or private key is invalid, the TiDB server starts as usual, but the client cannot connect to the TiDB server through a TLS connection.
 
 If the certificate parameters are correct, TiDB outputs `mysql protocol server secure connection is enabled` to the logs on `"INFO"` level when started.
+
+## Configure TiProxy to use TLS connections
+
+To enable [TiProxy](/tiproxy/tiproxy-overview.md) to accept TLS connections, you can specify the [`sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) configuration item in the TiProxy configuration file. For details on this setting and how to enable TLS for backend connections, see [TiProxy security](/tiproxy/tiproxy-overview.md#security).
 
 ## Configure the MySQL client to use TLS connections
 
@@ -89,7 +91,7 @@ If the `ssl-ca` parameter is not specified in the TiDB server or MySQL client, t
 By default, the server-to-client authentication is optional. Even if the client does not present its certificate of identification during the TLS handshake, the TLS connection can be still established. You can also require the client to be authenticated by specifying `REQUIRE x509` when creating a user (`CREATE USER`), or modifying an existing user (`ALTER USER`). The following is an example of creating a user:
 
 ```sql
-CREATE USER 'u1'@'%'  REQUIRE X509;
+CREATE USER 'u1'@'%' REQUIRE X509;
 ```
 
 > **Note:**

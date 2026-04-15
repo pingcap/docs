@@ -19,7 +19,7 @@ TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc
 | [`<<`](#-left-shift) | Left shift |
 | [`>>`](#-right-shift) | Right shift |
 
-## [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count)
+## `BIT_COUNT()`
 
 The `BIT_COUNT(expr)` function returns the number of bits that are set as 1 in `expr`.
 
@@ -70,7 +70,7 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [`&` (bitwise AND)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and)
+## `&` (bitwise AND)
 
 The `&` operator performs a bitwise AND operation. It compares the corresponding bits of two numbers: if both corresponding bits are 1, the corresponding bit of the result is 1; otherwise, it is 0.
 
@@ -128,7 +128,7 @@ SELECT INET_NTOA(INET_ATON('192.168.1.2') & INET_ATON('255.255.255.0'));
 1 row in set (0.00 sec)
 ```
 
-## [`~` (bitwise inversion)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert)
+## `~` (bitwise inversion)
 
 The `~` operator performs a bitwise inversion (or bitwise NOT) operation on a given value. It inverts each bit of the given value: bits that are 0 become 1, and bits that are 1 become 0.
 
@@ -168,7 +168,7 @@ SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111
 1 row in set (0.00 sec)
 ```
 
-## [`|` (bitwise OR)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or)
+## `|` (bitwise OR)
 
 The `|` operator performs a bitwise OR operation. It compares the corresponding bits of two numbers: if at least one of the corresponding bits is 1, the corresponding bit in the result is 1.
 
@@ -196,7 +196,7 @@ SELECT CONV(b'1010' | b'1100',10,2);
 1 row in set (0.00 sec)
 ```
 
-## [`^` (bitwise XOR)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor)
+## `^` (bitwise XOR)
 
 The `^` operator performs a bitwise XOR (exclusive OR) operation. It compares the corresponding bits of two numbers: if the corresponding bits are different, the corresponding bit in the result is 1.
 
@@ -226,7 +226,7 @@ SELECT CONV(b'1010' ^ b'1100',10,2);
 
 Note that the result is shown as `110` instead of `0110` because the leading zero is removed.
 
-## [`<<` (left shift)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift)
+## `<<` (left shift)
 
 The `<<` operator performs a left shift operation, which shifts the bits of a number to the left by a specified number of positions, filling the vacated bits with zeros on the right.
 
@@ -260,7 +260,7 @@ SELECT n,1<<n,LPAD(CONV(1<<n,10,2),11,0) FROM cte;
 11 rows in set (0.00 sec)
 ```
 
-## [`>>` (right shift)](https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift)
+## `>>` (right shift)
 
 The `>>` operator performs a right shift operation, which shifts the bits of a number to the right by a specified number of positions, filling the vacated bits with zeros on the left.
 

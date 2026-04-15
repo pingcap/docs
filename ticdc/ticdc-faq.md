@@ -195,8 +195,12 @@ The default Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 
 
 ||Upstream time zone| TiCDC time zone|Downstream time zone|
 | :-: | :-: | :-: | :-: |
-| Configuration method | See [Time Zone Support](/configure-time-zone.md) | Configured using the `--tz` parameter when you start the TiCDC server |  Configured using the `time-zone` parameter in `sink-uri` |
-| Description | The time zone of the upstream TiDB, which affects DML operations of the timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column.| The downstream MySQL processes the timestamp in the DML and DDL operations according to the downstream time zone setting.|
+| Configuration method | See [Time Zone Support](/configure-time-zone.md) | Configured using the `--tz` parameter when you start the TiCDC server |  Configured using the `time-zone` parameter in `sink-uri`. This parameter only takes effect for `mysql` or `tidb` sinks. |
+| Description | The time zone of the upstream TiDB, which affects DML operations of the timestamp type and DDL operations related to timestamp type columns.| TiCDC assumes that the upstream TiDB's time zone is the same as the TiCDC time zone configuration, and performs related operations on the timestamp column. | Downstream `mysql` and `tidb` sinks process the timestamp in DML and DDL operations according to the time zone setting of the connection session.|
+
+> **Note:**
+>
+> The `time-zone` parameter in `sink-uri` only takes effect for `mysql` and `tidb` sinks. For sinks such as Kafka, Pulsar, and Cloud Storage that do not involve downstream database session time zones, there is no need to configure `time-zone`. In such scenarios, you only need to ensure that the upstream database time zone and the TiCDC server's `--tz` parameter setting are consistent.
 
  > **Note:**
  >
@@ -369,21 +373,35 @@ In v6.1.3 and later versions, the default value of `safe-mode` changes to `false
 
 When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
 
-## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning physical import mode and BR from upstream?
+## What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?
 
-Currently, TiCDC is not yet fully compatible with [TiDB Lightning physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) and BR. Therefore, avoid using TiDB Lightning physical import mode and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
+TiDB Lightning [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) directly generates SST files and imports them into the TiKV cluster. Because this import mode bypasses the regular data writing process, it does not produce change logs. In most cases, a changefeed cannot detect these data changes. A changefeed can detect this data only during changefeed initialization or when Region changes (such as split, merge, or leader transfer) trigger incremental scans. Therefore, a changefeed cannot fully capture data imported through TiDB Lightning Physical Import Mode.
 
-If you need to use TiDB Lightning physical import mode or BR to restore data for some tables replicated by TiCDC, take these steps:
+If the tables imported using TiDB Lightning Physical Import Mode overlap with the tables monitored by a changefeed, incomplete data capture might cause errors, such as stuck replication and data inconsistency between upstream and downstream. If you need to use TiDB Lightning Physical Import Mode to import tables replicated by TiCDC, follow these steps:
 
-1. Remove the TiCDC replication task related to these tables.
+1. Delete the TiCDC replication task related to these tables.
 
-2. Use TiDB Lightning physical import mode or BR to restore data separately in the upstream and downstream clusters of TiCDC.
+2. Use TiDB Lightning Physical Import Mode to import data into the upstream and downstream clusters of TiCDC respectively.
 
-3. After the restoration is complete and data consistency between the upstream and downstream clusters is verified, create a new TiCDC replication task for incremental replication, with the timestamp (TSO) from the upstream backup as the `start-ts` for the task. For example, assuming the snapshot timestamp of the BR backup in the upstream cluster is `431434047157698561`, you can create a new TiCDC replication task using the following command:
+3. After the import is complete, verify the data consistency of the corresponding tables in the upstream and downstream clusters.
+
+4. Create a new TiCDC replication task to resume incremental replication, using the timestamp (TSO) after the completion of the import as the `start-ts`.
 
     ```shell
-    cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
+    cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000?time-zone="
     ```
+
+If the tables imported by TiDB Lightning Physical Import Mode do not overlap with the tables monitored by any changefeed, you can set [`check-requirements`](/tidb-lightning/tidb-lightning-configuration.md#check-requirements) to `false` in the TiDB Lightning configuration file to force the data import.
+
+## What are the compatibility limitations between BR and TiCDC?
+
+Because BR (Backup & Restore) directly generates SST files and imports them into the TiKV cluster, a changefeed cannot guarantee to fully capture data restored by BR. For more information, see [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
+
+BR handles compatibility differently based on the version:
+
+- Before v8.2.0, if any changefeed tasks are running in the cluster, BR rejects restore task creation.
+
+- Starting from v8.2.0, BR allows creating restore tasks only when the `backupTs` of the data to be restored is earlier than the `checkpointTs` of all changefeeds in the cluster.
 
 ## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
 
@@ -407,7 +425,7 @@ If the downstream is a TiDB cluster or MySQL instance, it is recommended that yo
 
 ## Replication of a single table can only be run on a single TiCDC node. Will it be possible to use multiple TiCDC nodes to replicate data of multiple tables?
 
-Starting from v7.1.0, TiCDC supports the MQ sink to replicate data change logs at the granularity of TiKV Regions, which achieves scalable processing capability and allows TiCDC to replicate a single table with a large number of Regions. To enable this feature, you can configure the following parameter in the [TiCDC configuration file](/ticdc/ticdc-changefeed-config.md):
+Starting from v7.1.0, TiCDC supports the MQ sink to replicate data change logs at the granularity of TiKV Regions, which achieves scalable processing capability and allows TiCDC to replicate a single table with a large number of Regions. To enable this feature, you can configure the following parameter in the [TiCDC changefeed configuration file](/ticdc/ticdc-changefeed-config.md):
 
 ```toml
 [scheduler]

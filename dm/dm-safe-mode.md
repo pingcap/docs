@@ -24,6 +24,8 @@ In safe mode, DM guarantees the idempotency of binlog events by rewriting SQL st
 * `INSERT` statements are rewritten to `REPLACE` statements.
 * `UPDATE` statements are analyzed to obtain the value of the primary key or the unique index of the row updated. `UPDATE` statements are then rewritten to `DELETE` + `REPLACE` statements in the following two steps: DM deletes the old record using the primary key or unique index, and inserts the new record using the `REPLACE` statement.
 
+    Starting from v8.5.6, when you set `foreign_key_checks=1` in the task session, DM skips the `DELETE` step for `UPDATE` statements that do not modify primary key or unique index values. For more information, see [Foreign key handling](#foreign-key-handling-new-in-v856).
+
 `REPLACE` is a MySQL-specific syntax for inserting data. When you insert data using `REPLACE`, and the new data and existing data have a primary key or unique constraint conflict, MySQL deletes all the conflicting records and executes the insert operation, which is equivalent to "force insert". For details, see [`REPLACE` statement](https://dev.mysql.com/doc/refman/8.0/en/replace.html) in MySQL documentation.
 
 Assume that a `dummydb.dummytbl` table has a primary key `id`. Execute the following SQL statements repeatedly on this table:
@@ -90,6 +92,53 @@ mysql-instances:
     # Other configuration items are not provided in this example.
     syncer-config-name: "global"            # Name of the syncers configuration.
 ```
+
+## Foreign key handling <span class="version-mark">New in v8.5.6</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. It might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tiflow/issues) on GitHub.
+
+When you enable safe mode and set `foreign_key_checks=1` in the downstream task session, the default `DELETE` + `REPLACE` rewrite for `UPDATE` statements can trigger unintended `ON DELETE CASCADE` effects on child rows. Starting from v8.5.6, DM introduces the following improvements to address this issue.
+
+### Non-key `UPDATE` optimization
+
+For `UPDATE` statements that do not modify primary key or unique key values, DM skips the `DELETE` step and executes only `REPLACE INTO`. Because the primary key remains unchanged, `REPLACE INTO` overwrites the existing row without triggering foreign key cascade deletes. This optimization is applied automatically in safe mode.
+
+Take the following upstream statement as an example, where `id` is the primary key:
+
+```sql
+UPDATE dummydb.dummytbl SET int_value = 888999 WHERE id = 123;
+```
+
+In versions earlier than v8.5.6, safe mode rewrites this statement as follows:
+
+```sql
+DELETE FROM dummydb.dummytbl WHERE id = 123;       -- Triggers ON DELETE CASCADE
+REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);
+```
+
+Starting from v8.5.6, safe mode rewrites the statement as follows:
+
+```sql
+REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);  -- No cascade
+```
+
+> **Warning:**
+>
+> When `foreign_key_checks=1`, DM does not support replicating `UPDATE` statements that modify primary key or unique key values. In this case, the replication task is paused with the error `safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`. To replicate such `UPDATE` statements on tables with foreign keys, set `safe-mode: false`.
+
+### Session-level `foreign_key_checks`
+
+During batch execution in safe mode, DM executes `SET SESSION foreign_key_checks=0` before executing `INSERT` and `UPDATE` batches, and restores the original value of `foreign_key_checks` afterward. This prevents `REPLACE INTO` (which internally performs `DELETE` + `INSERT`) from triggering foreign key cascade operations in the downstream.
+
+This session-level setting introduces a small overhead per batch (two `SET SESSION` round trips). In most workloads, this overhead is negligible.
+
+### Multi-worker foreign key causality
+
+When you set `worker-count` to a value greater than 1 and the replication task includes tables with foreign keys, DM reads foreign key relationships from the downstream `CREATE TABLE` schema when the task starts. For each DML operation, DM injects causality keys based on these relationships. This ensures that operations on parent rows and their dependent child rows are assigned to the same DML worker queue.
+
+For detailed constraints, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
 
 ## Notes for safe mode
 

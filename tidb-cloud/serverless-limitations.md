@@ -16,12 +16,14 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Audit logs
 
-- [Database audit logging](/tidb-cloud/tidb-cloud-auditing.md) is currently unavailable.
+- [Database audit logging](/tidb-cloud/essential-database-audit-logging.md) is currently unavailable for {{{ .starter }}} instances.
 
 ### Connection
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters. 
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} instances.
 - No [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) support for Private Endpoint.
+- Your database client connections might be terminated unexpectedly if they remain open for more than 30 minutes. This can occur when a TiDB server shuts down, restarts, or undergoes maintenance, potentially causing application disruptions. To avoid this issue, configure a maximum connection lifetime. It is recommended to start with 5 minutes and increase it gradually if it affects tail latency. For more information, see [Recommended settings for connection pools](/develop/dev-guide-connection-parameters.md).
+- For a {{{ .starter }}} instance, you can have up to 400 concurrent connections. If you set a [spending limit](/tidb-cloud/manage-serverless-spend-limit.md), this limit increases to 5,000.
 
 > **Note:**
 >
@@ -29,8 +31,8 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Encryption
 
-- Data persisted in your {{{ .starter }}} or {{{ .essential }}} cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For {{{ .starter }}} (with spending limit > 0) and {{{ .essential }}} clusters, an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
-- Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
+- Data persisted in your {{{ .starter }}} or {{{ .essential }}} instance is encrypted using the encryption tool provided by the cloud provider that manages your instance. For {{{ .starter }}} (with spending limit > 0) and {{{ .essential }}} instances, an optional second layer of encryption is available during the instance creation process, providing an additional level of security beyond the default encryption at rest.
+- Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) is currently unavailable.
 
 ### Maintenance window
 
@@ -38,7 +40,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Monitoring and diagnosis
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
 - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
 
@@ -48,8 +50,8 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Stream data
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} and {{{ .essential }}} currently.
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} and {{{ .essential }}} currently.
+- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} currently.
+- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} currently.
 
 ### Time to live (TTL)
 
@@ -62,20 +64,20 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} instances](/tidb-cloud/select-cluster-tier.md#starter) by default. To create more {{{ .starter }}} instances, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
-For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five {{{ .starter }}} instances in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
 The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for {{{ .starter }}} service.
 
-Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
+Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
-If you want to create a {{{ .starter }}} cluster with an additional quota, you can set the monthly spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+If you want to create a {{{ .starter }}} instance with an additional quota, you can set the monthly spending limit on the {{{ .starter }}} instance creation page. For more information, see [Create a {{{ .starter }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-After creating a {{{ .starter }}} cluster, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for {{{ .starter }}} Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+After creating a {{{ .starter }}} instance, you can still check and edit the spending limit on the overview page of your {{{ .starter }}} instance. For more information, see [Manage Spending Limit for {{{ .starter }}} Instances](/tidb-cloud/manage-serverless-spend-limit.md).

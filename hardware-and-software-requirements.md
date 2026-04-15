@@ -67,7 +67,7 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     >     - Starting from v8.5.1, to assist users still using CentOS Linux 7, TiDB resumes the support of glibc 2.17, resumes testing of CentOS Linux 7, and is now compatible with CentOS Linux 7. However, due to the EOL status of CentOS Linux, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and migrate to an operating system supported by TiDB for production use, such as Rocky Linux 9.1 or later.
     > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ended on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
 
-+ For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
++ For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, because these combinations have not undergone comprehensive and systematic testing, TiDB **does not guarantee enterprise-level production quality**:
 
     <table>
     <thead>
@@ -167,13 +167,14 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ### Development and test environments
 
-| Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
-| :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
-| PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
-| TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
-| TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
-| TiCDC | 8 core+ | 16 GB+ | SAS, 200 GB+ | Gigabit network card | 1 |
+| Component | CPU       | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
+| :-------: | :-------: | :----: | :------------: | :------: | :----------------: |
+| TiDB      | 8 core+   | 16 GB+ | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+| PD        | 4 core+   | 8 GB+  | SAS, 200 GB+   | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
+| TiKV      | 8 core+   | 32 GB+ | SAS, 200 GB+   | Gigabit network card | 3 |
+| TiFlash   | 32 core+  | 64 GB+ | SSD, 200 GB+   | Gigabit network card | 1 |
+| TiCDC     | 8 core+   | 16 GB+ | SAS, 200 GB+   | Gigabit network card | 1 |
+| TiProxy   | 4 core+   | 8 GB+  | SAS            | Gigabit network card | 1 |
 
 > **Note:**
 >
@@ -185,14 +186,15 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ### Production environment
 
-| Component | CPU | Memory | Hard Disk Type | Network | Number of Instances (Minimum Requirement) |
-| :-----: | :------: | :------: | :------: | :------: | :-----: |
-| TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
-| PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
-| TiCDC | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
-| Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
+| Component | CPU      | Memory | Hard Disk Type | Network | Number of Instances (Minimum Requirement) |
+| :-------: | :------: | :------: | :------: | :------: | :-----: |
+| TiDB      | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
+| PD        | 8 core+  | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
+| TiKV      | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
+| TiFlash   | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
+| TiCDC     | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
+| Monitor   | 8 core+  | 16 GB+ | SAS | Gigabit network card | 1 |
+| TiProxy   | 8 core+  | 16 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
 
 > **Note:**
 >

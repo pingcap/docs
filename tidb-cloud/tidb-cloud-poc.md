@@ -13,7 +13,7 @@ This document describes the typical PoC procedures and aims to help you quickly 
 
 If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
-Alternatively, you can [create a {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the {{{ .starter }}} has some [special terms and conditions](/tidb-cloud/serverless-limitations.md).
+Alternatively, you can [create a {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-starter-instance) to get familiar with TiDB Cloud for a quick evaluation. Note that the {{{ .starter }}} has some [special terms and conditions](/tidb-cloud/serverless-limitations.md).
 
 ## Overview of the PoC procedures
 
@@ -60,23 +60,22 @@ You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/st
 
 To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster for the PoC, take the following steps:
 
-1. Fill in the PoC application form by doing one of the following:
+1. Fill in the PoC application form.
 
-    - On the PingCAP website, go to the [Apply for PoC](https://pingcap.com/apply-for-poc/) page to fill in the application form.
-    - In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, click **Contact Sales**, and then select **Apply for PoC** to fill in the application form.
+    In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, click **Contact Sales**, and then select **Apply for PoC** to fill in the application form.
 
     Once you submit the form, the TiDB Cloud Support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
 2. Refer to [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Cloud Dedicated cluster for the PoC.
 
-   > **Note:**
-   >
-   > Before creating a TiDB Cloud Dedicated cluster, you must add one of the following payment methods:
-   >  - Add a credit card by following the on-screen instructions on the cluster creation page.
-   >  - Contact the TiDB Cloud Support team to pay by wire transfer.
-   >  - Sign up for TiDB Cloud through a cloud marketplace (AWS, Azure, or Google Cloud) to pay using your cloud provider account.
-   >
-   > Your PoC credits will automatically be used to offset eligible expenses incurred during the PoC period.
+    > **Note:**
+    >
+    > Before creating a TiDB Cloud Dedicated cluster, you must add one of the following payment methods:
+    >  - Add a credit card by following the on-screen instructions on the cluster creation page.
+    >  - Contact the TiDB Cloud Support team to pay by wire transfer.
+    >  - Sign up for TiDB Cloud through a cloud marketplace (AWS, Azure, or Google Cloud) to pay using your cloud provider account.
+    >
+    > Your PoC credits will automatically be used to offset eligible expenses incurred during the PoC period.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
@@ -96,7 +95,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [{{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [{{{ .starter }}} instance](/tidb-cloud/select-cluster-tier.md#starter) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 8.0. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
@@ -180,11 +179,11 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Upgrade
 
-    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md).
+    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md).
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore Data on {{{ .starter }}}, Essential, or Premium](/tidb-cloud/backup-and-restore-serverless.md).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore Data on {{{ .starter }}} or Essential](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 
@@ -194,9 +193,7 @@ If you want to try TiDB Cloud on a larger scale, for a new round of deployments 
 
 If your credits are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
-You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
-
-Any feedback to our support team is highly appreciated by filling in the [TiDB Cloud Feedback form](https://www.surveymonkey.com/r/L3VVW8R), such as the PoC process, the feature requests, and how we can improve the products.
+You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cloud Resource](/tidb-cloud/delete-tidb-cluster.md).
 
 ## FAQ
 

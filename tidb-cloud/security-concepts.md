@@ -107,60 +107,72 @@ This system ensures flexibility and precision in managing user access while alig
 
 ### Organization and projects
 
-TiDB Cloud manages users and resources with a hierarchical structure: organizations, projects, and clusters.
+TiDB Cloud manages users and resources with a hierarchical structure: organizations, projects, and resources.
 
 **Organizations**
 
-- The top-level entity for managing resources, roles, and billing.
+- The top-level entity for managing users, roles, projects, resources, and billing.
 
 - The organization owner has full permissions, including project creation and role assignment.
 
 **Projects**
 
-- Subdivisions of an organization containing clusters and project-specific configurations.
+- Containers for grouping and managing TiDB Cloud resources.
 
-- Managed by project owners responsible for clusters within their scope.
+- In TiDB Cloud, there are three types of projects:
 
-**Clusters**
+    - **TiDB Dedicated project**: a project type for {{{ .dedicated }}} clusters only. Dedicated projects manage project-scoped settings such as networking, maintenance, alert subscriptions, integrations, and encryption-related access.
+    - **TiDB X project**: a logical container for <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> instances. TiDB X projects are used for grouping resources and applying project-level RBAC, but they do not carry Dedicated-only infrastructure settings.
+    - **TiDB X virtual project**: a virtual project for <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> instances that are not grouped in any TiDB X project. This project type is used only for API compatibility and does not provide any management capabilities.
 
-- Individual database instances within a project.
+**Resources**
+
+- A TiDB Cloud resource can be either a TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)) or a TiDB Cloud Dedicated cluster.
 
 ### Example structure
 
 ```
 - Your organization
-    - Project 1
-        - Cluster 1
-        - Cluster 2
-    - Project 2
-        - Cluster 3
-        - Cluster 4
-    - Project 3
-        - Cluster 5
-        - Cluster 6
+    - TiDB X instances out of any project
+        - {{{ .starter }}} instance 1
+        - {{{ .essential }}} instance 1
+    - TiDB X project 1
+        - {{{ .starter }}} instance 2
+        - {{{ .starter }}} instance 3
+        - {{{ .essential }}} instance 2
+    - TiDB Dedicated project 1
+        - {{{ .dedicated }}} cluster 1
+        - {{{ .dedicated }}} cluster 2
 ```
 
 ### Key features
 
 - **Granular permissions**:
-    - Assign specific roles at both the organization and project levels for precise access control.
+    - Assign specific roles at the organization, project, and instance levels for precise access control.
 
-    - Ensure flexibility and security by carefully planning role assignments.
+    - TiDB X instances can be accessed through either project roles or instance roles, while TiDB Cloud Dedicated clusters are managed through project-level access.
+
+- **Flexible project model**:
+    - TiDB X projects are optional, so TiDB X instances can be grouped in a project or kept at the organization level.
+
+    - TiDB Dedicated projects are required, so each Dedicated cluster must belong to a Dedicated project.
 
 - **Billing management**:
-    - Billing is consolidated at the organization level, with detailed breakdowns available for each project.
+    - Billing is consolidated at the organization level, with detailed breakdowns available for each project and resource.
 
 ### Identity and Access Management (IAM) Roles
 
-TiDB Cloud provides role-based access control to manage permissions across organizations and projects:
+TiDB Cloud provides role-based access control to manage permissions across organizations, projects, and instances:
 
 - **[Organization-Level roles](/tidb-cloud/manage-user-access.md#organization-roles)**: Grant permissions to manage the entire organization, including billing and project creation.
 
-- **[Project-Level roles](/tidb-cloud/manage-user-access.md#project-roles)**: Assign permissions to manage specific projects, including clusters and configurations.
+- **[Project-Level roles](/tidb-cloud/manage-user-access.md#project-roles)**: Assign permissions to manage specific projects, including project-scoped resources and configurations.
+
+- **[Instance-Level roles](/tidb-cloud/manage-user-access.md#instance-roles)**: Grant fine-grained access to specific TiDB X instances.
 
 ## Network access control
 
-TiDB Cloud ensures secure cluster connectivity and data transmission through robust network access controls. Key features include:
+TiDB Cloud ensures secure connectivity and data transmission through robust network access controls. Key features include:
 
 ### Private endpoints
 
@@ -188,7 +200,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Setup guides:
 
-    - [TLS Connections to {{{ .starter }}}, Essential, or Premium](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [TLS Connections to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
 
 **Best practices:** Ensure TLS certificates are current and rotate them periodically.
@@ -219,7 +231,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Encrypts static data and backups with CMEK keys when enabled.
 
-- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} clusters rely exclusively on escrow keys.
+- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} instances rely exclusively on escrow keys.
 
 **Best practices:**
 
@@ -229,7 +241,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Leverage CMEK for industries requiring strict compliance, such as HIPAA and GDPR.
 
-For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md).
+For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md).
 
 ## Audit logging
 
@@ -237,7 +249,7 @@ TiDB Cloud provides comprehensive audit logging to monitor user activities and d
 
 ### Console audit logging
 
-Tracks key actions on the TiDB Cloud console, such as inviting users or managing clusters.
+Tracks key actions on the TiDB Cloud console, such as inviting users or importing data.
 
 **Best practices:**
 

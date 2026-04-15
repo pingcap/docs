@@ -1,9 +1,9 @@
 ---
-title: Import CSV Files from Cloud Storage into {{{ .starter }}}, Essential, or Premium
+title: Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential
 summary: Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 ---
 
-# Import CSV Files from Cloud Storage into {{{ .starter }}}, Essential, or Premium
+# Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential
 
 This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 
@@ -13,13 +13,13 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 
 ## Limitations
 
-- To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+- To ensure data consistency, TiDB Cloud allows importing CSV files into empty tables only. To import data into an existing table that already contains data, you can import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
 ## Step 1. Prepare the CSV files
 
-1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+1. If a CSV file is larger than 256 MiB, consider splitting it into smaller files, each with a size around 256 MiB.
 
-    TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MiB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
 
 2. Name the CSV files as follows:
 
@@ -47,7 +47,7 @@ Because CSV files do not contain schema information, before importing data from 
 
         Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud will create the `${db_name}` database to store your data when you import the data.
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud will create the `mydb` database when you import the data.
+        For example, if you create a `mydb-schema-create.sql` file that contains the following statement, TiDB Cloud will create the `mydb` database when you import the data.
 
         ```sql
         CREATE DATABASE mydb;
@@ -76,15 +76,15 @@ Because CSV files do not contain schema information, before importing data from 
 
 To allow TiDB Cloud to access the CSV files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
-- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) for your cluster.
+- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your {{{ .starter }}} or Essential instance.
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files).
 
-- If your CSV files are located in GCS, [configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) for your cluster.
+- If your CSV files are located in GCS, [configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) for your {{{ .starter }}} or Essential instance.
 
-- If your CSV files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) for your cluster.
+- If your CSV files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) for your {{{ .starter }}} or Essential instance.
 
-- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) for your cluster.
+- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .starter }}} or Essential instance.
 
 ## Step 4. Import CSV files
 
@@ -93,15 +93,15 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -111,7 +111,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
 
@@ -146,15 +146,15 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -164,7 +164,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
-    - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+    - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access).
 
 4. Click **Next**.
 
@@ -197,15 +197,15 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -215,7 +215,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access).
 
 4. Click **Next**.
 
@@ -248,15 +248,15 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -266,7 +266,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
-    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 4. Click **Next**.
 

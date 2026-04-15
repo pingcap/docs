@@ -81,7 +81,7 @@ Skyline-pruning is a heuristic filtering rule for indexes, which can reduce the 
 
 - Select whether the index satisfies a certain order. Because index reading can guarantee the order of certain column sets, indexes that satisfy the query order are superior to indexes that do not satisfy on this dimension.
 
-- Whether the index is a [global index](/partitioned-table.md#global-indexes). In partitioned tables, global indexes can effectively reduce the number of cop tasks for a SQL compared to normal indexes, thus improving overall performance.
+- Whether the index is a [global index](/global-indexes.md). In partitioned tables, global indexes can effectively reduce the number of cop tasks for a SQL compared to normal indexes, thus improving overall performance.
 
 For these preceding dimensions, if the index `idx_a` performs no worse than the index `idx_b` in all three dimensions and performs better than `idx_b` in one dimension, then `idx_a` is preferred. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if skyline-pruning excludes some indexes, TiDB outputs a NOTE-level warning listing the remaining indexes after the skyline-pruning exclusion.
 

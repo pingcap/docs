@@ -42,7 +42,7 @@ Starting from TiKV v5.0, all read requests use the unified thread pool for queri
 
 * The gRPC thread pool.
 
-    The default size (configured by `server.grpc-concurrency`) of the gRPC thread pool is `5`. This thread pool has almost no computing overhead and is mainly responsible for network I/O and deserialization requests, so generally you do not need to adjust the default configuration.
+    Starting from v8.5.4, the default size of the gRPC thread pool (configured by `server.grpc-concurrency`) is changed from a fixed value of `5` to an adaptive value calculated based on the number of CPU cores. For the detailed calculation formula, see [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency). This thread pool has almost no computing overhead and is mainly responsible for network I/O and deserialization requests, so generally you do not need to adjust the default configuration.
 
     - If the machine deployed with TiKV has a small number (less than or equal to 8) of CPU cores, consider setting the `server.grpc-concurrency` configuration item to `2`.
     - If the machine deployed with TiKV has very high configuration, TiKV undertakes a large number of read and write requests, and the value of `gRPC poll CPU` that monitors Thread CPU on Grafana exceeds 80% of `server.grpc-concurrency`, then consider increasing the value of `server.grpc-concurrency` to keep the thread pool usage rate below 80% (that is, the metric on Grafana is lower than `80% * server.grpc-concurrency`).

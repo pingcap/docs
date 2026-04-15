@@ -214,6 +214,10 @@ Starting from v1.3.1, TiProxy supports configuring multiple virtual IP addresses
 
 ### security
 
+> **Note:**
+>
+> TiProxy reloads certificates from disk once an hour. Therefore, any changes that you make to certificate files on disk can take up to one hour to take effect.
+
 There are four TLS objects in the `[security]` section with different names. They share the same configuration format and fields, but they are interpreted differently depending on their names.
 
 ```toml

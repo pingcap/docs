@@ -458,7 +458,9 @@ tiup br restore point --pd="${PD_IP}:2379"
 --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 --full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}'
 
-Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Split&Scatter Region <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Download&Ingest SST <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Restore Pipeline <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]
 Restore Meta Files <--------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 Restore KV Files <----------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -497,4 +499,157 @@ tiup br restore point --pd="${PD_IP}:2379"
 --crypter.key 0123456789abcdef0123456789abcdef
 --master-key-crypter-method aes128-ctr
 --master-key "local:///path/to/master.key"
+```
+
+### Restore data using filters
+
+Starting from TiDB v8.5.5, you can use filters during PITR to restore specific databases or tables, enabling more fine-grained control over the data to be restored.
+
+The filter patterns follow the same [table filtering syntax](/table-filter.md) as other BR operations:
+
+- `'*.*'`: matches all databases and tables.
+- `'db1.*'`: matches all tables in the database `db1`.
+- `'db1.table1'`: matches the specific table `table1` in the database `db1`.
+- `'db*.tbl*'`: matches databases starting with `db` and tables starting with `tbl`.
+- `'!mysql.*'`: excludes all tables in the `mysql` database.
+
+Usage examples:
+
+```shell
+# restore specific databases
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db1.*' --filter 'db2.*'
+
+# restore specific tables
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db1.users' --filter 'db1.orders'
+
+# restore using pattern matching
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db*.tbl*'
+```
+
+> **Note:**
+>
+> - Before restoring data using filters, ensure that the target cluster does not contain any databases or tables that match the filter. Otherwise, the restore will fail with an error.
+> - The filter options apply during the restore phase for both snapshot and log backups.
+> - You can specify multiple `--filter` options to include or exclude different patterns.
+> - PITR filtering does not support system tables yet. If you need to restore specific system tables, use the `br restore full` command with filters instead. Note that this command restores only the snapshot backup data (not log backup data).
+> - The regular expression in the restore task matches the table name at the `restored-ts` time point, with the following three possible cases:
+>     - Table A (table id = 1): the table name always matches the `--filter` regular expression at and before the `restored-ts` time point. In this case, PITR restores the table.
+>     - Table B (table id = 2): the table name does not match the `--filter` regular expression at some point before `restored-ts`, but matches at the `restored-ts` time point. In this case, PITR restores the table.
+>     - Table C (table id = 3): the table name matches the `--filter` regular expression at some point before `restored-ts`, but does **not** match at the `restored-ts` time point. In this case, PITR does **not** restore the table.
+> - You can use the database and table filtering feature to restore part of the data online. During the online restore process, do **not** create databases or tables with the same names as the restored objects, otherwise the restore task fails due to conflicts. To avoid data inconsistency, the tables created by PITR during this restore process are not readable or writable until the restore task is complete.
+
+### Concurrent restore operations
+
+Starting from TiDB v8.5.5, you can run multiple PITR restore tasks concurrently. This feature allows you to restore different datasets in parallel, improving efficiency for large-scale restore scenarios.
+
+Usage example for concurrent restores:
+
+```shell
+# terminal 1 - restore database db1
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db1.*'
+
+# terminal 2 - restore database db2 (can run simultaneously)
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db2.*'
+```
+
+> **Note:**
+>
+> - Each concurrent restore operation must target a different database or a non-overlapping set of tables. Attempting to restore overlapping datasets concurrently will result in an error.
+> - Multiple restore tasks consume a lot of system resources. It is recommended to run concurrent restore tasks only when CPU and I/O resources are sufficient.
+
+### Compatibility between ongoing log backup and snapshot restore
+
+Starting from v8.5.5, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
+
+- The node performing backup and restore operations has the following necessary permissions: 
+    - Read access to the external storage containing the backup source, for snapshot restore
+    - Write access to the target external storage used by the log backup
+- The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
+- The data to be restored uses the same type of external storage as the target storage for the log backup.
+- Neither the data to be restored nor the log backup has local encryption enabled. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
+
+If any of the above conditions are not met, you can restore the data by following these steps:
+
+1. [Stop the log backup task](#stop-a-log-backup-task).
+2. Perform the data restore.
+3. After the restore is complete, perform a new snapshot backup.
+4. [Restart the log backup task](#restart-a-log-backup-task).
+
+> **Note:**
+>
+> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v8.5.5 or later. Otherwise, restoring the recorded full restore data might fail.
+
+### Compatibility between ongoing log backup and PITR operations
+
+Starting from TiDB v8.5.5, you can perform PITR operations while a log backup task is running by default. The system automatically handles compatibility between these operations.
+
+#### Important limitation for PITR with ongoing log backup
+
+When you perform the PITR operations while a log backup is running, the restored data will also be recorded in the ongoing log backup. However, due to the nature of log restore operations, data inconsistencies might occur within the restore window. The system writes metadata to external storage to mark both the time range and data range where consistency cannot be guaranteed.
+
+If such inconsistency occurs during the time range `[t1, t2)`, you cannot directly restore data from this period. Instead, choose one of the following alternatives:
+
+- Restore data up to `t1` (to retrieve data before the inconsistent period).
+- Perform a new snapshot backup after `t2`, and use it as the base for future PITR operations.
+
+### Abort restore operations
+
+If a restore operation fails, you can use the `tiup br abort` command to clean up registry entries and checkpoint data. This command automatically locates and removes relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (regardless of whether it is stored in a local database or external storage).
+
+> **Note:**
+>
+> The `abort` command only cleans up metadata. You need to manually delete any actual restored data from the cluster.
+
+The following examples show how to abort restore operations using the same parameters as the original restore command:
+
+```shell
+# Abort a PITR operation
+tiup br abort restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+
+# Abort a PITR operation with filters
+tiup br abort restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--filter 'db1.*'
+
+# Abort a full restore
+tiup br abort restore full --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+
+# Abort a database restore
+tiup br abort restore db --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--db database_name
+
+# Abort a table restore
+tiup br abort restore table --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--db database_name --table table_name
 ```

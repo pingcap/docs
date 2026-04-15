@@ -136,4 +136,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiDB Binlog
 
-        - Fix the issue that TiDB Binlog reports an error when encountering a `CANCELED` DDL statement [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[okJiang](https://github.com/okJiang)
+        - Fix the issue that TiDB Binlog reports an error when encountering a `CANCELED` DDL statement [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[okJiang](https://github.com/okJiang) 

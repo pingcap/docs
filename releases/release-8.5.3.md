@@ -143,4 +143,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiDB Lightning
 
-        - Fix the issue that TiDB Lightning returns the `context deadline exceeded` error when the RPC request to TiKV times out [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
+        - Fix the issue that TiDB Lightning returns the `context deadline exceeded` error when the RPC request to TiKV times out [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh) 

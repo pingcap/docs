@@ -1,43 +1,43 @@
 ---
-title: Manage Spending Limit for {{{ .starter }}} Clusters
-summary: Learn how to manage spending limit for your {{{ .starter }}} clusters.
+title: Manage Spending Limit for {{{ .starter }}} Instances
+summary: Learn how to manage spending limit for your {{{ .starter }}} instances.
 ---
 
-# Manage Spending Limit for {{{ .starter }}} Clusters
+# Manage Spending Limit for {{{ .starter }}} Instances
 
 > **Note:**
 >
-> The spending limit is only applicable to {{{ .starter }}} clusters.
+> The spending limit is only applicable to {{{ .starter }}} instances.
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your {{{ .starter }}} clusters.
+Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your {{{ .starter }}} instances.
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set a monthly spending limit for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} instances](/tidb-cloud/select-cluster-tier.md#starter) by default. To create more {{{ .starter }}} instances, you need to add a credit card and set a monthly spending limit for the usage. But if you delete some of your previous {{{ .starter }}} instances before creating more, the new {{{ .starter }}} instance can still be created without a credit card.
 
 ## Usage quota
 
-For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five {{{ .starter }}} instances in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
-Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
+Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a {{{ .starter }}} instance exceeds 5 GiB for a free {{{ .starter }}} instance, the {{{ .starter }}} instance automatically restricts any new connection attempts.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
-If you want to create a {{{ .starter }}} cluster with an additional quota, you can edit the spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+If you want to create a {{{ .starter }}} instance with an additional quota, you can edit the spending limit on the {{{ .starter }}} instance creation page. For more information, see [Create a {{{ .starter }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Update spending limit
 
-For a {{{ .starter }}} free cluster, you can increase the usage quota by setting a monthly spending limit when creating the cluster. For an existing cluster, you can adjust the monthly spending limit directly.
+For a free {{{ .starter }}} instance, you can increase the usage quota by setting a monthly spending limit when creating the {{{ .starter }}} instance. For an existing {{{ .starter }}} instance, you can adjust the monthly spending limit directly.
 
-To update the spending limit for a {{{ .starter }}} cluster, perform the following steps:
+To update the spending limit for a {{{ .starter }}} instance, perform the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the **Capacity used this month** area, click **Set Spending Limit**.
 

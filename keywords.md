@@ -65,6 +65,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ADMIN
 - ADVISE
 - AFTER
+- AFFINITY
 - AGAINST
 - AGO
 - ALGORITHM
@@ -224,6 +225,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - DISK
 - DISTINCT (R)
 - DISTINCTROW (R)
+- DISTRIBUTE
+- DISTRIBUTION
+- DISTRIBUTIONS
 - DIV (R)
 - DO
 - DOUBLE (R)
@@ -409,6 +413,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="M" class="letter" href="#M">M</a>
 
+- MASKING
 - MASTER
 - MATCH (R)
 - MAXVALUE (R)
@@ -436,6 +441,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MOD (R)
 - MODE
 - MODIFY
+- MONITOR
 - MONTH
 
 <a id="N" class="letter" href="#N">N</a>
@@ -512,6 +518,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PLUGINS
 - POINT
 - POLICY
+- POLICIES
 - PRECEDING
 - PRECISION (R)
 - PREPARE
@@ -588,6 +595,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ROW_NUMBER (R-Window)
 - ROWS (R-Window)
 - RTREE
+- RULE
 - RUN
 
 <a id="S" class="letter" href="#S">S</a>
@@ -699,6 +707,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TIFLASH
 - TIKV_IMPORTER
 - TIME
+- TIMEOUT
 - TIMESTAMP
 - TINYBLOB (R)
 - TINYINT (R)

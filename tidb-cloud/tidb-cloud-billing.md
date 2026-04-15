@@ -13,39 +13,19 @@ TiDB Cloud charges according to the resources that you consume.
 
 See [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 
-### Pricing for {{{ .starter }}} (formerly Serverless) {#pricing-for-starter}
+### Pricing for {{{ .starter }}} {#pricing-for-starter}
 
 See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
-<CustomContent language="en,zh">
-
 ### Pricing for {{{ .essential }}} {#pricing-for-essential}
 
-> **Tip:**
->
-> Currently, {{{ .essential }}} is in public preview on Alibaba Cloud and is only available in the following regions: Jakarta, Mexico, Singapore, and Tokyo. To request other regions on Alibaba Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center).
+For {{{ .essential }}}, you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application. See [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
-For {{{ .essential }}}, you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application.
+<CustomContent plan="premium">
 
-A **Request Capacity Unit (RCU)** is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity.
+### Pricing for {{{ .premium }}} {#pricing-for-premium}
 
-See the detailed pricing for each available Alibaba Cloud region below.
-
-| Resource | Jakarta | Mexico | Singapore | Tokyo |
-|----------|---------|--------|-----------|-------|
-| Compute (per RCU/month) | $0.27 | $0.22 | $0.24 | $0.28 |
-| Row-based storage (per GiB/month) | $0.24 | $0.24 | $0.24 | $0.24 |
-| Columnar storage (per GiB/month) | $0.06 | $0.06 | $0.06 | $0.06 |
-| Row-based storage with dual-layer encryption (per GiB/month) | $0.36 | $0.36 | $0.36 | $0.36 |
-| Columnar storage with dual-layer encryption (per GiB/month) | $0.09 | $0.09 | $0.09 | $0.09 |
-
-#### Throttling
-
-For {{{ .essential }}} clusters, the throttling policy is based on the provisioned Request Capacity Units (RCUs). When the workload exceeds the maximum RCU capacity, the cluster will automatically throttle incoming requests to maintain stability. Existing connections will experience throttling, but new connection attempts will be accepted as long as they don't exceed the maximum RCU limit. This ensures predictable performance while protecting the cluster from overload.
-
-#### Billing cycle
-
-Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
+For {{{ .premium }}}, you are billed based on the number of provisioned Request Capacity Units (RCUs) and the storage you actually use, rather than the underlying backend nodes or provisioned disk size. As {{{ .premium }}} is currently in private preview, you can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
 
 </CustomContent>
 
@@ -73,11 +53,11 @@ After you set up the payment method, TiDB Cloud will generate an invoice once yo
 
 After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 
-Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
+Invoice costs include TiDB resource usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
 
 For each monthly invoice:
 
-- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
+- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the resource usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
 - You can view the summary and details of charges for the current month and the previous month.
 
@@ -97,7 +77,7 @@ To view the list of invoices, perform the following steps:
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB resource usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
 > **Note:**
 >
@@ -111,7 +91,7 @@ To view the billing details, perform the following steps:
 
 On the **Billing** page, the **Bills** tab is displayed by default.
 
-The **Bills** tab shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+The **Bills** tab shows the billing summary by projects & instances and the billing summary by service. You can also see the usage details and download the data in CSV format.
 
 > **Note:**
 >
@@ -164,7 +144,7 @@ If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By provi
 
 ## Credits
 
-TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB usage fees before the credits become expired.
 
 > **Tip:**
 >
@@ -180,14 +160,14 @@ To view the credit information, perform the following steps:
 
 > **Note:**
 >
-> - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
+> - After you set up your payment method, the resource usage fees are first deducted from your unused credits, then from your payment method.
 > - Credits cannot be used to pay the support plan fees.
 
 > **Warning:**
 >
 > During a PoC process:
 >
-> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
+> - If all your credits become expired before you add a payment method, you cannot create a new TiDB Cloud Dedicated cluster. After 3 days, all your existing TiDB Cloud Dedicated clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
 > - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
 ## Discounts
@@ -222,11 +202,11 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 </CustomContent>
 
-The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
+The fee is deducted from a bound credit card according to your resource usage. To add a valid credit card, you can use either of the following methods:
 
 - When you are creating a TiDB Cloud Dedicated cluster:
 
-    1. On the **Create Cluster** page, click **Add Credit Card**.
+    1. On the **Create Resource** page, click **Add Credit Card**.
     2. In the **Add a Card** dialog, fill in the card information and billing address.
     3. Click **Save Card**.
 

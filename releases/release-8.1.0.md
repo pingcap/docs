@@ -368,4 +368,4 @@ We would like to thank the following contributors from the TiDB community:
 - [negachov](https://github.com/negachov) (First-time contributor)
 - [testwill](https://github.com/testwill)
 - [yzhan1](https://github.com/yzhan1) (First-time contributor)
-- [zxc111](https://github.com/zxc111) (First-time contributor)
+- [zxc111](https://github.com/zxc111) (First-time contributor) 

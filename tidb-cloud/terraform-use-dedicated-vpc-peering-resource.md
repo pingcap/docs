@@ -146,18 +146,18 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
 
 ## Import a TiDB Cloud Dedicated VPC peering
 
-For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 For example, you can import a VPC peering that is not created by Terraform.
 
 1. Add an import block for the new `tidbcloud_dedicated_vpc_peering` resource.
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${vpc_peering_id}` with the actual VPC peering ID.
 
     ```
     import {
       to = tidbcloud_dedicated_vpc_peering.example
-      id = "${id}"
+      id = "${vpc_peering_id}"
     }
     ```
 

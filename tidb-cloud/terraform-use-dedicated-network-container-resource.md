@@ -138,7 +138,7 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
 
 ## Import a TiDB Cloud Dedicated network container
 
-For a TiDB Cloud Dedicated network container that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Dedicated network container that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 For example, you can import a network container that is not created by Terraform.
 

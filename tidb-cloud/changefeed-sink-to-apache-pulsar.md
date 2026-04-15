@@ -10,7 +10,8 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 > **Note:**
 >
 > - To replicate data to Apache Pulsar using the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v7.5.1 or later.
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is in beta. For more information, see [Changefeed (Beta)](/tidb-cloud/essential-changefeed-overview.md).
 
 ## Restrictions
 
@@ -109,6 +110,7 @@ For more information, see [How to create a topic](https://pulsar.apache.org/docs
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
 
+    - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
     - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when the downstream handles duplicate events. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can add filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
@@ -180,7 +182,9 @@ For more information, see [How to create a topic](https://pulsar.apache.org/docs
 
         If you want the changefeed to send Pulsar messages of a table to different partitions, choose this distribution method. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that changelogs with the same column values are sent to the same partition.
 
-7. Click **Next**.
+7. In the **Split Event** area, choose whether to split `UPDATE` events into separate `DELETE` and `INSERT` events or keep as raw `UPDATE` events. For more information, see [Split primary or unique key UPDATE events for non-MySQL sinks](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
+
+8. Click **Next**.
 
 ## Step 4. Configure specification and review
 

@@ -1,14 +1,16 @@
 ---
-title: Changefeed Billing
+title: Changefeed Billing for TiDB Cloud Dedicated
 summary: Learn about billing for changefeeds in TiDB Cloud.
 aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
-# Changefeed Billing
+# Changefeed Billing for TiDB Cloud Dedicated
+
+This document describes the billing details for changefeeds in TiDB Cloud Dedicated.
 
 ## RCU cost
 
-TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
+TiDB Cloud Dedicated measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
 
 ### Number of TiCDC RCUs
 
@@ -23,6 +25,13 @@ The following table lists the specifications and corresponding replication perfo
 | 24 RCUs       | 60,000 rows/s                   |
 | 32 RCUs       | 80,000 rows/s                   |
 | 40 RCUs       | 100,000 rows/s                  |
+| 64 RCUs       | 160,000 rows/s                  |
+| 96 RCUs       | 240,000 rows/s                  |
+| 128 RCUs      | 320,000 rows/s                  |
+| 192 RCUs      | 480,000 rows/s                  |
+| 256 RCUs      | 640,000 rows/s                  |
+| 320 RCUs      | 800,000 rows/s                  |
+| 384 RCUs      | 960,000 rows/s                  |
 
 > **Note:**
 >

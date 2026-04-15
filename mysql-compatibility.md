@@ -45,12 +45,16 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + Events
 + User-defined functions
 + `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
+
+    >**Note:**
+    >
+    > Currently, only {{{ .starter }}} and {{{ .essential }}} instances in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql). TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
+
 + `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
 + Optimizer trace
 + XML Functions
 + X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
-+ Column-level privileges [#9766](https://github.com/pingcap/tidb/issues/9766)
 + `XA` syntax (TiDB uses a two-phase commit internally, but this is not exposed via an SQL interface)
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)

@@ -109,7 +109,7 @@ You can scale TiDB as your business grows.
 
 ### If Percolator uses distributed locks and the crash client keeps the lock, will the lock not be released?
 
-For more details, see [Percolator and TiDB Transaction Algorithm](https://pingcap.com/blog-cn/percolator-and-txn/) in Chinese.
+For more details, see [Percolator and TiDB Transaction Algorithm](https://tidb.net/blog/f537be2c) in Chinese.
 
 ### Why does TiDB use gRPC instead of Thrift? Is it because Google uses it?
 

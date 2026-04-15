@@ -403,15 +403,16 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
-2. Set the I/O Scheduler of the storage media.
+- Disable [transparent huge pages (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp). Database memory access is usually sparse. When higher-order memory becomes heavily fragmented, THP allocation can cause high memory allocation latency. Therefore, it is recommended to disable THP to avoid performance fluctuations.
+
+- Set the [I/O scheduler](/tune-operating-system.md#io-scheduler) of the storage media.
 
     - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
     - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
 
-3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
+- Choose the `performance` mode for [the cpufreq module](/tune-operating-system.md#cpufrequency-scaling) that controls the CPU frequency dynamically. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
-Take the following steps to check the current operating system configuration and configure optimal parameters:
+The steps to check and configure these parameters are as follows:
 
 1. Execute the following command to see whether THP is enabled or disabled:
 
@@ -719,12 +720,17 @@ Take the following steps to check the current operating system configuration and
 
 ## Manually configure the SSH mutual trust and sudo without password
 
-This section describes how to manually configure the SSH mutual trust and sudo without password. It is recommended to use TiUP for deployment, which automatically configure SSH mutual trust and login without password. If you deploy TiDB clusters using TiUP, ignore this section.
+This section describes how to manually configure SSH mutual trust from the control machine to the target nodes. If you use the TiUP deployment tool, SSH mutual trust and password-free login are configured automatically, and you can skip this section.
+
+When configuring SSH mutual trust, it is recommended to create and use the `tidb` user on all target nodes. In general, TiDB does not require that you use the same user across all nodes. However, pay attention to user consistency in the following scenarios:
+
+- Using Backup & Restore (BR): it is strongly recommended to perform all BR and TiDB-related operations with the same user.
+- Using network storage such as NFS: ensure that the user has the same UID and GID on all nodes. NFS determines file access permissions based on underlying UID and GID. If the UID or GID differs across nodes, or if the user running BR is different from the user running TiDB (especially without `sudo` privileges), permission denied errors might occur during backup or restore operations.
 
 1. Log in to the target machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
     ```bash
-    useradd tidb && \
+    useradd -m -d /home/tidb tidb
     passwd tidb
     ```
 

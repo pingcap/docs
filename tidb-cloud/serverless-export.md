@@ -1,15 +1,15 @@
 ---
-title: Export Data from {{{ .starter }}}, Essential, or Premium
-summary: Learn how to export data from {{{ .starter }}} or {{{ .essential }}} clusters.
+title: Export Data from {{{ .starter }}} or Essential
+summary: Learn how to export data from {{{ .starter }}} or {{{ .essential }}} instances.
 ---
 
-# Export Data from {{{ .starter }}}, Essential, or Premium
+# Export Data from {{{ .starter }}} or Essential
 
-TiDB Cloud enables you to export data from a {{{ .starter }}}, Essential, or Premium cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud enables you to export data from a {{{ .starter }}} or Essential instance to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a {{{ .starter }}} or Essential instance. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .starter }}} or Essential instance, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
@@ -35,7 +35,7 @@ You can export data to the following locations:
 
 ### A local file
 
-To export data from a TiDB Cloud cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+To export data from a {{{ .starter }}} or Essential instance to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
 
 Exporting data to a local file has the following limitations:
 
@@ -52,7 +52,7 @@ To export data to Amazon S3, you need to provide the following information:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
     - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. Note that only clusters hosted on AWS support the role ARN.
 
-For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
 
 ### Google Cloud Storage
 
@@ -61,7 +61,7 @@ To export data to Google Cloud Storage, you need to provide the following inform
 - URI: `gs://<bucket-name>/<folder-path>/`
 - Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
-For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+For more information, see [Configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access).
 
 ### Azure Blob Storage
 
@@ -70,16 +70,16 @@ To export data to Azure Blob Storage, you need to provide the following informat
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
-For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+For more information, see [Configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access).
 
 ### Alibaba Cloud OSS
 
 To export data to Alibaba Cloud OSS, you need to provide the following information:
 
 - URI: `oss://<bucket-name>/<folder-path>/`
-- Access credential: An [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject`, `oss:ListBuckets` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
+- Access credential: An [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject` and `oss:GetBucketInfo` permissions.
 
-For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 ## Export options
 
@@ -175,13 +175,13 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
 
@@ -192,7 +192,7 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 
    > **Tip:**
    >
-   > If your cluster has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+   > If your {{{ .starter }}} or Essential instance has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
 
 4. Click **Export**.
 
@@ -226,13 +226,13 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
 
@@ -242,7 +242,7 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
     - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
-        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
         - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
 
 4. Click **Export**.
@@ -270,13 +270,13 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
 
@@ -308,13 +308,13 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
 
@@ -323,7 +323,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
-    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access).
 
 4. Click **Export**.
 
@@ -346,13 +346,13 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Alibaba Cloud OSS** from the drop-down list. 
 
@@ -389,13 +389,13 @@ To cancel an ongoing export task, take the following steps:
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export** to view the export task list.
 
@@ -416,7 +416,7 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## Export speed
 
-The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md):
+The export speed varies between {{{ .starter }}} and {{{ .essential }}}:
 
 - **{{{ .starter }}}**:
 
@@ -427,4 +427,4 @@ The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.
 
 ## Pricing
 
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
+The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.

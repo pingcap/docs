@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with C#
 summary: Learn how to connect to TiDB using C#. This tutorial provides sample C# code snippets for interacting with TiDB.
+aliases: ['/tidb/stable/dev-guide-sample-application-cs/','/tidb/dev/dev-guide-sample-application-cs/','/tidbcloud/dev-guide-sample-application-cs/']
 ---
 
 # Connect to TiDB with C\#
@@ -13,7 +14,7 @@ While .NET is commonly used on Windows, it is also available for macOS and Linux
 
 - Download the [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download).
 - This tutorial uses the `dotnet` command-line tool. Alternatively, you can use the Visual Studio Code IDE to work with C# code.
-- To complete this tutorial, you need access to a TiDB instance. You can use a [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) or [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) cluster on TiDB Cloud, or a TiDB Self-Managed cluster, such as one started using `tiup playground`.
+- To complete this tutorial, you need access to a TiDB instance. You can use a [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) instance or [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) cluster on TiDB Cloud, or a TiDB Self-Managed cluster, such as one started using `tiup playground`.
 
 ## Step 1. Set up a console project
 

@@ -414,8 +414,8 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | DM | [`on-duplicate-physical`](/dm/task-configuration-file-full.md) | Newly added | This configuration item controls how DM resolves conflicting data in the physical import mode. The default value is `"none"`, which means not resolving conflicting data. `"none"` has the best performance, but might lead to inconsistent data in the downstream database. |
 | DM | [`sorting-dir-physical`](/dm/task-configuration-file-full.md) | Newly added | This configuration item specifies the directory used for local KV sorting in the physical import mode. The default value is the same as the `dir` configuration. |
 | sync-diff-inspector | [`skip-non-existing-table`](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description) | Newly added | This configuration item controls whether to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream.  |
-| TiSpark | [`spark.tispark.replica_read`](/tispark-overview.md#tispark-configurations) | Newly added | This configuration item controls the type of replicas to be read. The value options are `leader`, `follower`, and `learner`. |
-| TiSpark | [`spark.tispark.replica_read.label`](/tispark-overview.md#tispark-configurations) | Newly added | This configuration item is used to set labels for the target TiKV node. |
+| TiSpark | [`spark.tispark.replica_read`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview/#tispark-configurations) | Newly added | This configuration item controls the type of replicas to be read. The value options are `leader`, `follower`, and `learner`. |
+| TiSpark | [`spark.tispark.replica_read.label`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview#tispark-configurations) | Newly added | This configuration item is used to set labels for the target TiKV node. |
 
 ### Others
 
@@ -518,7 +518,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - Fix the issue that resources are not released when disabling the resource management module [#40546](https://github.com/pingcap/tidb/issues/40546) @[zimulala](https://github.com/zimulala)
     - Fix the issue that TTL tasks cannot trigger statistics updates in time [#40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that unexpected data is read because TiDB improperly handles `NULL` values when constructing key ranges [#40158](https://github.com/pingcap/tidb/issues/40158) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that illegal values are written to a table when the `MODIFY COLUMN` statement also changes the default value of a column [#40164](https://github.com/pingcap/tidb/issues/40164) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Fix the issue that invalid values are written to a table when the `MODIFY COLUMN` statement also changes the default value of a column [#40164](https://github.com/pingcap/tidb/issues/40164) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that the adding index operation is inefficient due to invalid Region cache when there are many Regions in a table [#38436](https://github.com/pingcap/tidb/issues/38436) @[tangenta](https://github.com/tangenta)
     - Fix data race occurred in allocating auto-increment IDs [#40584](https://github.com/pingcap/tidb/issues/40584) @[Dousir9](https://github.com/Dousir9)
     - Fix the issue that the implementation of the not operator in JSON is incompatible with the implementation in MySQL [#40683](https://github.com/pingcap/tidb/issues/40683) @[YangKeao](https://github.com/YangKeao)
@@ -623,4 +623,4 @@ We would like to thank the following contributors from the TiDB community:
 - [hihihuhu](https://github.com/hihihuhu)
 - [mychoxin](https://github.com/mychoxin)
 - [xuning97](https://github.com/xuning97)
-- [andreid-db](https://github.com/andreid-db)
+- [andreid-db](https://github.com/andreid-db) 

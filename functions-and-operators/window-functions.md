@@ -31,7 +31,7 @@ Except for `GROUP_CONCAT()` and `APPROX_PERCENTILE()`, TiDB supports using all [
 | [`RANK()`](#rank)                 | Returns the rank of the current row within the partition. The rank might have gaps. |
 | [`ROW_NUMBER()`](#row_number)     | Returns the number of the current row in the partition. |
 
-## [`CUME_DIST()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist)
+## `CUME_DIST()`
 
 `CUME_DIST()` calculates the cumulative distribution of a value within a group of values. Note that you need to use the `ORDER BY` clause with `CUME_DIST()` to sort the group of values. Otherwise, this function will not return the expected values.
 
@@ -65,7 +65,7 @@ FROM
 4 rows in set (0.00 sec)
 ```
 
-## [`DENSE_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank)
+## `DENSE_RANK()`
 
 The `DENSE_RANK()` function returns the rank of the current row. It is similar to [`RANK()`](#rank) but does not leave any gaps in case of ties (rows that share the same values and order conditions).
 
@@ -101,7 +101,7 @@ FROM (
 6 rows in set (0.00 sec)
 ```
 
-## [`FIRST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_first-value)
+## `FIRST_VALUE()`
 
 The `FIRST_VALUE(expr)` returns the first value in a window.
 
@@ -140,7 +140,7 @@ ORDER BY
 4 rows in set (0.00 sec)
 ```
 
-## [`LAG()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lag)
+## `LAG()`
 
 The `LAG(expr [, num [, default]])` function returns the value of `expr` from the row that is `num` rows preceding the current row. If such row does not exist, `default` is returned. By default, `num` is `1` and `default` is `NULL` when they are not specified.
 
@@ -182,7 +182,7 @@ FROM
 10 rows in set (0.01 sec)
 ```
 
-## [`LAST_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_last-value)
+## `LAST_VALUE()`
 
 The `LAST_VALUE()` function returns the last value in the window.
 
@@ -225,7 +225,7 @@ ORDER BY
 10 rows in set (0.00 sec)
 ```
 
-## [`LEAD()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead)
+## `LEAD()`
 
 The `LEAD(expr [, num [,default]])` function returns the value of `expr` from the row that is `num` rows following the current row. If such row does not exist, `default` is returned. By default, `num` is `1` and `default` is `NULL` when they are not specified.
 
@@ -268,7 +268,7 @@ FROM
 10 rows in set (0.00 sec)
 ```
 
-## [`NTH_VALUE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_nth-value)
+## `NTH_VALUE()`
 
 The `NTH_VALUE(expr, n)` function returns the `n`-th value of the window.
 
@@ -316,7 +316,7 @@ ORDER BY
 10 rows in set (0.00 sec)
 ```
 
-## [`NTILE()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile)
+## `NTILE()`
 
 The `NTILE(n)` function divides the window into `n` groups and returns the group number of each row.
 
@@ -359,7 +359,7 @@ FROM
 
 ```
 
-## [`PERCENT_RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_percent-rank)
+## `PERCENT_RANK()`
 
 The `PERCENT_RANK()` function returns a number between 0 and 1 indicating the percentage of rows with a value less than the value of the current row.
 
@@ -396,7 +396,7 @@ FROM (
 6 rows in set (0.00 sec)
 ```
 
-## [`RANK()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_rank)
+## `RANK()`
 
 The `RANK()` function is similar to [`DENSE_RANK()`](#dense_rank) but will leave gaps in case of ties (rows that share the same values and order conditions). This means it provides an absolute ranking. For example, a rank of 7 means that there are 6 rows with lower ranks.
 
@@ -433,7 +433,7 @@ FROM (
 6 rows in set (0.00 sec)
 ```
 
-## [`ROW_NUMBER()`](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number)
+## `ROW_NUMBER()`
 
 The `ROW_NUMBER()` returns the row number of the current row in the result set.
 

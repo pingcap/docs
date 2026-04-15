@@ -7,11 +7,11 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 [n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic, and apps.
 
-This document introduces how to build an auto-workflow: create a {{{ .starter }}} cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
+This document introduces how to build an auto-workflow: create a {{{ .starter }}} instance, gather Hacker News RSS, store it to TiDB and send a briefing email.
 
 > **Note:**
 >
-> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+> In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 
 ## Prerequisites: Get TiDB Cloud API key
 
@@ -21,7 +21,7 @@ This document introduces how to build an auto-workflow: create a {{{ .starter }}
 4. Enter a description for the API key, and then click **Next**.
 5. Copy the created API key for later use in n8n, and then click **Done**.
 
-For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
+For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/api/tidb-cloud-api-overview).
 
 ## Step 1: Install n8n
 
@@ -80,9 +80,9 @@ The final workflow should look like the following image.
 
 ![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
-### (Optional) Create a {{{ .starter }}} cluster
+### (Optional) Create a {{{ .starter }}} instance
 
-If you don't have a {{{ .starter }}} cluster, you can use this node to create one. Otherwise, feel free to skip this operation.
+If you don't have a {{{ .starter }}} instance, you can use this node to create one. Otherwise, feel free to skip this operation.
 
 1. Navigate to **Workflows** panel, and click **Add workflow**.
 2. In new workflow workspace, click **+** in the top right corner and choose **All** field.
@@ -90,14 +90,14 @@ If you don't have a {{{ .starter }}} cluster, you can use this node to create on
 4. Enter credentials, which is the TiDB Cloud API key, for the TiDB Cloud node.
 5. In the **Project** list, select your project.
 6. In the **Operation** list, select `Create Serverless Cluster`.
-7. In the **Cluster Name** box, enter a cluster name.
+7. In the **Cluster Name** box, enter a name for the {{{ .starter }}} instance.
 8. In the **Region** list, select a region.
-9. In the **Password** box, enter a password used to log in to your TiDB clusters.
+9. In the **Password** box, enter a password used to log in to your {{{ .starter }}} instances.
 10. Click **Execute Node** to run the node.
 
 > **Note:**
 >
-> It takes several seconds to create a new {{{ .starter }}} cluster.
+> It takes several seconds to create a new {{{ .starter }}} instance.
 
 ### Create a workflow
 
@@ -122,7 +122,7 @@ This trigger will execute your workflow every morning at 8 AM.
 3. In the **Parameters** dialog, enter the credential for the TiDB Cloud node. The credential is your TiDB Cloud API key.
 4. In the **Project** list, select your project.
 5. In the **Operation** list, select `Execute SQL`.
-6. Select the cluster. If you have not seen your new cluster in the list, you need to wait a few minutes until the cluster creation is completed.
+6. Select the {{{ .starter }}} instance. If you have not seen your new instance in the list, you need to wait a few minutes until the instance creation is completed.
 7. In the **User** list, select a user. TiDB Cloud always creates a default user, so you don't have to manually create one.
 8. In the **Database** box, enter `test`.
 9. Enter your database password.
@@ -207,7 +207,7 @@ This trigger will execute your workflow every morning at 8 AM.
 
 After building up the workflow, you can click **Execute Workflow** to test run it.
 
-If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your {{{ .starter }}} cluster, so you don't have to worry about losing them.
+If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your {{{ .starter }}} instance, so you don't have to worry about losing them.
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the front-page articles on Hacker News every day.
 
@@ -217,7 +217,7 @@ Now you can activate this workflow in the **Workflows** panel. This workflow wil
 
 TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes) and only supports the following five operations:
 
-- **Create Serverless Cluster**: creates a {{{ .starter }}} cluster.
+- **Create Serverless Cluster**: creates a {{{ .starter }}} instance.
 - **Execute SQL**: executes an SQL statement in TiDB.
 - **Delete**: deletes rows in TiDB.
 - **Insert**: inserts rows in TiDB.
@@ -233,9 +233,9 @@ To use different operations, you need to fill in the different required fields. 
 - **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: the TiDB Cloud project name.
 - **Operation**: the operation of this node. For all supported operations, refer to [Supported operations](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. Enter the name for your new cluster.
-- **Region**: the region name. Choose a region where your cluster will be deployed. Usually, choose the region closest to your application deployment.
-- **Password**: the root password. Set a password for your new cluster.
+- **Cluster**: enter the name of your {{{ .starter }}} instance.
+- **Region**: the region name. Choose a region where your {{{ .starter }}} instance will be deployed. Usually, choose the region closest to your application deployment.
+- **Password**: the root password. Set a password for your new {{{ .starter }}} instance.
 
 </div>
 <div label="Execute SQL">
@@ -243,9 +243,9 @@ To use different operations, you need to fill in the different required fields. 
 - **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: the TiDB Cloud project name.
 - **Operation**: the operation of this node. For all supported operations, refer to [Supported operations](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
+- **Cluster**: the name of your {{{ .starter }}} instance. You should choose one existing instance.
+- **Password**: the password of your {{{ .starter }}} instance.
+- **User**: the username of your {{{ .starter }}} instance.
 - **Database**: the database name.
 - **SQL**: the SQL statement to be executed.
 
@@ -255,9 +255,9 @@ To use different operations, you need to fill in the different required fields. 
 - **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: the TiDB Cloud project name.
 - **Operation**: the operation of this node. For all supported operations, refer to [Support Operation](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
+- **Cluster**: the name of your {{{ .starter }}} instance. You should choose one existing instance.
+- **Password**: the password of your {{{ .starter }}} instance.
+- **User**: the username of your {{{ .starter }}} instance.
 - **Database**: the database name.
 - **Table**: the table name. You can use the `From list` mode to choose one or use the `Name` mode to type the table name manually.
 - **Delete Key**: the name of the item's property that decides which rows in the database are deleted. An item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
@@ -268,9 +268,9 @@ To use different operations, you need to fill in the different required fields. 
 - **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: the TiDB Cloud project name.
 - **Operation**: the operation of this node. For all supported operations, refer to [Support Operation](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
+- **Cluster**: the name of your {{{ .starter }}} instance. You should choose one existing instance.
+- **Password**: the password of your {{{ .starter }}} instance.
+- **User**: the username of your {{{ .starter }}} instance.
 - **Database**: the database name.
 - **Table**: the table name. You can use the `From list` mode to choose one or use the `Name` mode to type the table name manually.
 - **Columns**: The comma-separated list of the input item's properties, which are used as columns for the new rows. An item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
@@ -281,9 +281,9 @@ To use different operations, you need to fill in the different required fields. 
 - **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: the TiDB Cloud project name.
 - **Operation**: the operation of this node. For all supported operations, refer to [Support Operation](#supported-operations).
-- **Cluster**: the TiDB Cloud cluster name. You should choose one existing cluster.
-- **Password**: the password of the TiDB Cloud cluster.
-- **User**: the username of the TiDB Cloud cluster.
+- **Cluster**: the {{{ .starter }}} instance name. You should choose one existing instance.
+- **Password**: the password of your {{{ .starter }}} instance.
+- **User**: the username of your {{{ .starter }}} instance.
 - **Database**: the database name.
 - **Table**: the table name. You can use the `From list` mode to choose one or use the `Name` mode to type the table name manually.
 - **Update Key**: the name of the item's property that decides which rows in the database are updated. An item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).

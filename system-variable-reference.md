@@ -248,6 +248,7 @@ Referenced in:
 - [Character Set and Collation](/character-set-and-collation.md)
 - [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [System Variables](/system-variables.md#character_set_results)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 - [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md)
 
@@ -374,6 +375,7 @@ Referenced in:
 
 Referenced in:
 
+- [Compatibility Catalog of TiDB Data Migration](/dm/dm-compatibility-catalog.md)
 - [FOREIGN KEY Constraints](/foreign-key.md)
 - [Pipelined DML](/pipelined-dml.md)
 - [System Variables](/system-variables.md#foreign_key_checks)
@@ -438,7 +440,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#interactive_timeout)
 - [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
@@ -525,7 +527,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Optimizer Hints](/optimizer-hints.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
@@ -533,6 +535,7 @@ Referenced in:
 - [System Variables](/system-variables.md#max_execution_time)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 - [TiDB 2.1.14 Release Notes](/releases/release-2.1.14.md)
@@ -721,11 +724,10 @@ Referenced in:
 - [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
 - [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
-- [Get Started with TiDB + AI via Python](/vector-search/vector-search-get-started-using-python.md)
-- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-- [Integrate TiDB Vector Search with SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
-- [Integrate Vector Search with LangChain](/vector-search/vector-search-integrate-with-langchain.md)
-- [Integrate Vector Search with LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+- [Integrate TiDB Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
+- [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+- [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
+- [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - [System Variables](/system-variables.md#ssl_ca)
 
 ### ssl_cert
@@ -1131,6 +1133,7 @@ Referenced in:
 
 - [Cost Model](/cost-model.md)
 - [System Variables](/system-variables.md#tidb_cost_model_version-new-in-v620)
+- [TiDB 7.5.7 Release Notes](/releases/release-7.5.7.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
@@ -1207,8 +1210,9 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Best Practices for DDL Execution in TiDB](/ddl-introduction.md)
+- [Best Practices for DDL Execution in TiDB](/best-practices/ddl-introduction.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [Performance Tuning Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
@@ -1252,8 +1256,9 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Best Practices for DDL Execution in TiDB](/ddl-introduction.md)
+- [Best Practices for DDL Execution in TiDB](/best-practices/ddl-introduction.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [Performance Tuning Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
@@ -1626,6 +1631,7 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_enable_historical_stats)
 - [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 7.5.7 Release Notes](/releases/release-7.5.7.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### tidb_enable_historical_stats_for_capture
@@ -1675,7 +1681,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [System Variables](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
@@ -1818,6 +1824,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_enable_parallel_apply-new-in-v50)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 - [TiDB 7.1.1 Release Notes](/releases/release-7.1.1.md)
 - [TiDB 6.5.4 Release Notes](/releases/release-6.5.4.md)
@@ -2038,7 +2045,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
 - [Explain Statements That Use Joins](/explain-joins.md)
@@ -2066,6 +2073,7 @@ Referenced in:
 - [TiDB 8.5.2 Release Notes](/releases/release-8.5.2.md)
 - [TiDB 8.5.1 Release Notes](/releases/release-8.5.1.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 7.5.7 Release Notes](/releases/release-7.5.7.md)
 - [TiDB 7.5.6 Release Notes](/releases/release-7.5.6.md)
 - [TiDB 6.5.12 Release Notes](/releases/release-6.5.12.md)
 - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
@@ -2513,6 +2521,7 @@ Referenced in:
 - [TiFlash Compatibility Notes](/tiflash/tiflash-compatibility.md)
 - [Use FastScan](/tiflash/use-fastscan.md)
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
 ### tidb_last_ddl_info
@@ -2822,6 +2831,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_mpp_store_fail_ttl)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 
 ### tidb_multi_statement_mode
 
@@ -2999,6 +3009,13 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 
+### tidb_opt_enable_no_decorrelate_in_select
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_opt_enable_no_decorrelate_in_select-new-in-v854)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
+
 ### tidb_opt_enable_non_eval_scalar_subquery
 
 Referenced in:
@@ -3007,6 +3024,13 @@ Referenced in:
 - [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
 - [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+
+### tidb_opt_enable_semi_join_rewrite
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_opt_enable_semi_join_rewrite-new-in-v854)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 
 ### tidb_opt_fix_control
 
@@ -3154,6 +3178,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 
 ### tidb_opt_ordering_index_selectivity_threshold
@@ -3161,6 +3186,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700)
+- [TiDB 7.5.7 Release Notes](/releases/release-7.5.7.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 
 ### tidb_opt_prefer_range_scan
@@ -3517,7 +3543,8 @@ Referenced in:
 - [Optimizer Hints](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_replica_read-new-in-v40)
-- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [TiDB Best Practices on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
@@ -3869,6 +3896,14 @@ Referenced in:
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
+### tidb_stats_update_during_ddl
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_stats_update_during_ddl-new-in-v854)
+- [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
+- [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
+
 ### tidb_stmt_summary_enable_persistent
 
 Referenced in:
@@ -3936,6 +3971,7 @@ Referenced in:
 
 Referenced in:
 
+- [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [SLOW_QUERY](/information-schema/information-schema-slow-query.md)
@@ -4061,7 +4097,7 @@ Referenced in:
 
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)
-- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [TiDB Best Practices on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
 - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_tso_client_rpc_mode
@@ -4465,7 +4501,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#wait_timeout)
