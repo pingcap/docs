@@ -151,8 +151,9 @@
     - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    - [Use the Diagnosis Page](/tidb-cloud/tune-performance.md)
-    - [Identify Slow Queries](/identify-slow-queries.md)
+    - Analyze Performance
+      - [Use the Diagnosis Page](/tidb-cloud/tune-performance.md)
+      - [Identify Slow Queries](/identify-slow-queries.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan
