@@ -20,6 +20,9 @@ Before you begin, ensure you have the following:
 - **Node.js 18 or later**
 - **Git with SSH access** to your docs repository (for sync)
 - **The docs repository cloned locally**
+- **OpenSSH server** installed and running on the host
+- **Passwordless SSH access** configured for the target user (recommended)
+- **A dedicated low-privilege user** (for example, `tidbdocs`) for docs shell access
 
 ## Quick start
 
@@ -98,6 +101,36 @@ Match User tidbdocs
 
 After this configuration, users can connect and run the docs shell through SSH.
 
+## Set up passwordless SSH access (recommended)
+
+Use key-based authentication to avoid interactive password prompts and to improve automation reliability.
+
+1. Generate an SSH key pair on the client machine if needed:
+
+   ```bash
+   ssh-keygen -t ed25519 -C "tidb-docs-ssh"
+   ```
+
+2. Copy the public key to the SSH host user:
+
+   ```bash
+   ssh-copy-id tidbdocs@<your-host>
+   ```
+
+3. Verify login without password:
+
+   ```bash
+   ssh tidbdocs@<your-host> "pwd"
+   ```
+
+4. (Optional) Restrict this user to key-based auth only in `sshd_config`:
+
+   ```sshconfig
+   Match User tidbdocs
+     PasswordAuthentication no
+     PubkeyAuthentication yes
+   ```
+
 ## Use with Cursor and Claude Code
 
 You can use the SSH endpoint in two patterns:
@@ -171,6 +204,52 @@ ssh tidbdocs@<your-host> "cat /ai/integrations/tidb-docs-mcp-server.md"
 ssh tidbdocs@<your-host> "ls /ai/integrations"
 ```
 
+## Validate your deployment
+
+After setup, run the following checks.
+
+### 1. Verify interactive shell is available
+
+```bash
+ssh tidbdocs@<your-host>
+```
+
+Expected:
+
+- You can see the docs shell prompt.
+- `help` returns the command list.
+
+### 2. Verify one-command mode works
+
+```bash
+ssh tidbdocs@<your-host> "pwd"
+```
+
+Expected:
+
+- Output is `/`.
+
+### 3. Verify read-only command behavior
+
+```bash
+ssh tidbdocs@<your-host> "cat /ai/integrations/tidb-docs-over-ssh.md"
+```
+
+Expected:
+
+- The markdown content is returned.
+- Write commands are rejected as unsupported.
+
+### 4. Verify path sandbox protection
+
+```bash
+ssh tidbdocs@<your-host> "cat /etc/passwd"
+```
+
+Expected:
+
+- The command is rejected with `Access denied`.
+
 ## Security notes
 
 - The shell is read-only and only supports a fixed command set.
@@ -183,6 +262,17 @@ ssh tidbdocs@<your-host> "ls /ai/integrations"
   - Use only commands listed in **Supported commands**.
 - **`Access denied`**
   - Check whether the requested path is outside the docs root.
+- **Still prompted for password**
+  - Verify public key installation (`~/.ssh/authorized_keys`) and file permissions.
+  - Verify `PasswordAuthentication no` and `PubkeyAuthentication yes` in `sshd_config` if you require key-only auth.
+- **`Permission denied (publickey)`**
+  - Confirm you are using the correct SSH key and user.
+  - If needed, specify key explicitly: `ssh -i <private-key> tidbdocs@<your-host>`.
+- **`node: command not found` in ForceCommand**
+  - Use the absolute Node.js path in `ForceCommand`, such as `/usr/bin/node`.
+- **SSH login succeeds but docs shell does not start**
+  - Verify `ForceCommand` points to the correct `docs-ssh-shell.js` path.
+  - Restart `sshd` after config changes.
 - **`git ... failed` when syncing**
   - Verify SSH keys, repository permissions, and branch name.
 
