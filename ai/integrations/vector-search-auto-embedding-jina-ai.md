@@ -1,50 +1,50 @@
 ---
 title: Jina AI Embeddings
-summary: TiDB Cloudで Jina AI 埋め込みモデルを使用する方法を学びます。
+summary: TiDB CloudでJina AI埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-jina-ai/']
 ---
 
-# Jina AI 埋め込み {#jina-ai-embeddings}
+# Jina AI埋め込み {#jina-ai-embeddings}
 
-このドキュメントでは、TiDB Cloudで[Jina AI埋め込みモデル](https://jina.ai/embeddings/)と[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を使用してテキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、TiDB Cloudで[Jina AI埋め込みモデル](https://jina.ai/embeddings/)with [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-Jina AI は、検索、RAG、エージェント アプリケーション向けに、高性能、マルチモーダル、多言語のロングコンテキスト埋め込みを提供します。
+Jina AIは、検索、RAG、およびエージェントアプリケーション向けに、高性能でマルチモーダルかつ多言語対応の長文コンテキスト埋め込みを提供します。
 
-ご自身のJina AI APIキー（BYOK）をお持ちいただければ、すべてのJina AIモデルを`jina_ai/`プレフィックスでご利用いただけます。例：
+Jina AI APIキー（BYOK）をお持ちの場合は、 `jina_ai/`プレフィックスを使用してすべてのJina AIモデルをご利用いただけます。例：
 
 **jina-embeddings-v4**
 
 -   名前: `jina_ai/jina-embeddings-v4`
 -   寸法: 2048
--   距離計量：コサイン、L2
--   最大入力テキストトークン数: 32,768
--   価格：Jina AIによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
+-   距離指標：コサイン類似度、L2
+-   入力可能なテキストトークンの最大数：32,768
+-   価格：Jina AIによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
 
 **jina-embeddings-v3**
 
 -   名前: `jina_ai/jina-embeddings-v3`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   最大入力テキストトークン数: 8,192
--   価格：Jina AIによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
+-   距離指標：コサイン類似度、L2
+-   入力可能なテキストトークンの最大数：8,192
+-   価格：Jina AIによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
 
-利用可能なモデルの完全なリストについては、 [Jina AI ドキュメント](https://jina.ai/embeddings/)参照してください。
+利用可能なモデルの完全なリストについては、 [Jina AI ドキュメント](https://jina.ai/embeddings/)を参照してください。
 
 ## 使用例 {#usage-example}
 
-この例では、ベクター テーブルを作成し、ドキュメントを挿入し、Jina AI 埋め込みモデルを使用して類似性検索を実行する方法を示します。
+この例では、Jina AIの埋め込みモデルを使用して、ベクターテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
-### ステップ1: データベースに接続する {#step-1-connect-to-the-database}
+### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -76,14 +76,14 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 </div>
 </SimpleTab>
 
-### ステップ2: APIキーを設定する {#step-2-configure-the-api-key}
+### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-[ジナAIプラットフォーム](https://jina.ai/embeddings/)から API キーを作成し、独自のキー (BYOK) を持って埋め込みサービスを使用します。
+[Jina AIプラットフォーム](https://jina.ai/embeddings/)から API キーを作成し、埋め込みサービスを使用するために独自のキーを使用 (BYOK) します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-TiDB クライアントを使用して、Jina AI 埋め込みプロバイダーの API キーを設定します。
+TiDBクライアントを使用して、Jina AI埋め込みプロバイダーのAPIキーを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -95,7 +95,7 @@ tidb_client.configure_embedding_provider(
 </div>
 <div label="SQL" value="sql">
 
-SQL を使用して Jina AI 埋め込みプロバイダーの API キーを設定します。
+SQLを使用して、Jina AI埋め込みプロバイダーのAPIキーを設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = "{your-jina-api-key}";
@@ -104,9 +104,9 @@ SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = "{your-jina-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3: ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
 
-`jina_ai/jina-embeddings-v4`モデルを使用して 2048 次元のベクトルを生成するベクトル フィールドを持つテーブルを作成します。
+`jina_ai/jina-embeddings-v4`モデルを使用して 2048 次元ベクトルを生成するベクトルフィールドを持つテーブルを作成します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -144,7 +144,7 @@ CREATE TABLE sample_documents (
 </div>
 </SimpleTab>
 
-### ステップ4: テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
+### ステップ4：テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -180,12 +180,12 @@ VALUES
 </div>
 </SimpleTab>
 
-### ステップ5: 類似文書を検索する {#step-5-search-for-similar-documents}
+### ステップ5：類似文書を検索する {#step-5-search-for-similar-documents}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`table.search()` API を使用してベクトル検索を実行します。
+`table.search()` APIを使用してベクトル検索を実行します。
 
 ```python
 results = table.search("How to start learning Java programming?") \
@@ -197,7 +197,7 @@ print(results)
 </div>
 <div label="SQL" value="sql">
 
-`VEC_EMBED_COSINE_DISTANCE`関数を使用して、コサイン距離メトリックに基づいてベクトル検索を実行します。
+`VEC_EMBED_COSINE_DISTANCE`関数を使用して、コサイン距離メトリックに基づくベクトル検索を実行します。
 
 ```sql
 SELECT
@@ -223,9 +223,9 @@ LIMIT 2;
 
 ## オプション {#options}
 
-[Jina AIオプション](https://jina.ai/embeddings/)すべて、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+すべての[Jina AIのオプション](https://jina.ai/embeddings/)は`additional_json_options`関数の`EMBED_TEXT()`パラメータを通じてサポートされます。
 
-**例: パフォーマンス向上のため「下流タスク」を指定する**
+**例：パフォーマンス向上のため「下流タスク」を指定してください**
 
 ```sql
 CREATE TABLE sample (
@@ -239,7 +239,7 @@ CREATE TABLE sample (
 );
 ```
 
-**例: 代替ディメンションを使用する**
+**例：別の次元を使用する**
 
 ```sql
 CREATE TABLE sample (
@@ -253,9 +253,9 @@ CREATE TABLE sample (
 );
 ```
 
-利用可能なすべてのオプションについては、 [Jina AI ドキュメント](https://jina.ai/embeddings/)参照してください。
+利用可能なすべてのオプションについては、 [Jina AI ドキュメント](https://jina.ai/embeddings/)を参照してください。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

@@ -1,21 +1,21 @@
 ---
 title: ADD INDEX | TiDB SQL Statement Reference
-summary: TiDB データベースの ADD INDEX の使用法の概要。
+summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 ---
 
 # インデックスを追加 {#add-index}
 
-`ALTER TABLE.. ADD INDEX`文は既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインで実行されるため、インデックスの追加によってテーブルへの読み取りも書き込みもブロックされることはありません。
+`ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインで実行されるため、インデックスの追加によってテーブルへの読み取りや書き込みがブロックされることはありません。
 
 > **ヒント：**
 >
-> [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)使用すると、このステートメントの操作を高速化できます。
+> [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)使用すると、このステートメントの操作を高速化できます。
 
 <CustomContent platform="tidb-cloud">
 
 > **注記：**
 >
-> 4つのvCPUを搭載したクラスタ[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の場合、インデックス作成時にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響が軽減されます。
+> 4 vCPUを搭載した[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの場合、インデックス作成中にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすることで、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響を軽減できます。
 
 </CustomContent>
 
@@ -23,15 +23,15 @@ summary: TiDB データベースの ADD INDEX の使用法の概要。
 
 > **警告：**
 >
-> -   クラスター内で DDL ステートメントが実行されているときは、TiDB クラスターをアップグレード**しないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。
-> -   アップグレード前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターで実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
-> -   また、クラスタのアップグレード中は、DDL文を実行**しないでください**。そうしないと、未定義の動作が発生する可能性があります。
+> -   TiDB クラスターで DDL ステートメントが実行されている間は、TiDB クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。
+> -   アップグレードを行う前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスタで実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスタで DDL ジョブが実行されている場合は、クラスタをアップグレードする前に、DDL ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
+> -   さらに、クラスタのアップグレード中は、DDLステートメントを一切実行**しないでください**。実行すると、未定義の動作が発生する可能性があります。
 >
-> TiDBをv7.1.0からそれ以降のバージョンにアップグレードする場合、上記の制限は無視できます。詳細については、 [TiDBスムーズアップグレードの制限](/smooth-upgrade-tidb.md)参照してください。
+> TiDB を v7.1.0 から以降のバージョンにアップグレードする場合は、前述の制限を無視できます。詳細については、 [TiDBのスムーズアップグレードの制限事項](/smooth-upgrade-tidb.md)を参照してください。
 
 </CustomContent>
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -92,33 +92,33 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
--   TiDB は、MySQL との互換性のために`BTREE` `HASH` `RTREE`インデックス タイプを受け入れますが、それらを無視します。
+-   TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
 
 -   `SPATIAL`インデックスはサポートされていません。
 
--   TiDB Self-Managed およびTiDB Cloud Dedicated は、 `FULLTEXT`構文の解析をサポートしますが、 `FULLTEXT`インデックスの使用はサポートしません。
+-   TiDB Self-Managed およびTiDB Cloud Dedicated は`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 
     > **注記：**
     >
-    > 現在、特定の AWS リージョンのTiDB Cloud Starter クラスターとTiDB Cloud Essential クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
+    > 現在、特定の AWS リージョンのTiDB Cloud StarterとTiDB Cloud Essentialインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
--   降順インデックスはサポートされていません ( MySQL 5.7と同様)。
+-   降順インデックスはサポートされていません（ MySQL 5.7と同様）。
 
--   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 `CLUSTERED`の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+-   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
--   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/global-indexes.md)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
+-   `PRIMARY KEY`インデックス オプションを使用して、 `UNIQUE INDEX`または`GLOBAL`グローバル インデックスとして[グローバルインデックス](/global-indexes.md)ことは、パーティション化[パーティション化されたテーブル](/partitioned-table.md)の TiDB 拡張機能であり、MySQL とは互換性がありません。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
--   [インデックスの選択](/choose-index.md)
+-   [インデックス選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスを作成する](/sql-statements/sql-statement-create-index.md)
 -   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
--   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
+-   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)

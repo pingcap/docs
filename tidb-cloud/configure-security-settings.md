@@ -1,28 +1,28 @@
 ---
 title: Configure Cluster Password Settings
-summary: クラスターに接続するためのルート パスワードを構成する方法を学習します。
+summary: TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードの設定方法を学びましょう。
 ---
 
-# クラスタパスワード設定を構成する {#configure-cluster-password-settings}
+# クラスタパスワード設定の構成 {#configure-cluster-password-settings}
 
-TiDB Cloud Dedicated クラスターの場合、クラスターに接続するためのルート パスワードと許可された IP アドレスを構成できます。
+TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を許可するIPアドレスを設定できます。
 
 > **注記：**
 >
-> TiDB Cloud Starter またはTiDB Cloud Essential クラスターの場合、このドキュメントは適用されませんので、代わりに[TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、このドキュメントは適用されないため、代わりに[TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの行で、 **...**をクリックし、 **[パスワード設定]**を選択します。
+2.  対象のTiDB Cloud Dedicatedクラスターの行で、[ **...]**をクリックし、 **[パスワード設定]**を選択します。
 
-3.  クラスターに接続するためのルート パスワードを設定し、 **[保存]**をクリックします。
+3.  TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードを設定し、 **[保存]**をクリックします。
 
-    **「パスワードを自動生成」**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは再度表示されないため、安全な場所に保存してください。
+    **「パスワードを自動生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
 > **ヒント：**
 >
-> クラスターの概要ページを表示している場合は、ページの右上隅にある**...**をクリックし、 **[パスワード設定]**を選択して、これらの設定も構成できます。
+> TiDB Cloud Dedicatedクラスターの概要ページを表示している場合は、ページ右上隅の「 **...」**をクリックし、 **「パスワード設定」**を選択して、これらの設定を構成することもできます。

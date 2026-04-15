@@ -1,35 +1,35 @@
 ---
 title: Connect to TiDB Cloud Starter or Essential via Public Endpoint
-summary: パブリック エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法を学習します。
+summary: パブリックエンドポイントを介して、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法を学びましょう。
 ---
 
-# パブリックエンドポイント経由でTiDB Cloud Starter または Essential に接続する {#connect-to-tidb-cloud-starter-or-essential-via-public-endpoint}
+# パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します {#connect-to-tidb-cloud-starter-or-essential-via-public-endpoint}
 
-このドキュメントでは、コンピューターから SQL クライアントを使用してパブリック エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法と、パブリック エンドポイントを無効にする方法について説明します。
+このドキュメントでは、コンピュータ上のSQLクライアントを使用してパブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法、およびパブリックエンドポイントを無効にする方法について説明します。
 
-## パブリックエンドポイント経由で接続する {#connect-via-a-public-endpoint}
+## 公開エンドポイント経由で接続します {#connect-via-a-public-endpoint}
 
 > **ヒント：**
 >
-> パブリック エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+> パブリック エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
-パブリック エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、次の手順を実行します。
+パブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、以下の手順を実行してください。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティング システムを選択して、対応する接続文字列を取得します。
+3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティングシステムを選択して、対応する接続​​文字列を取得します。
 
     <CustomContent language="en,zh">
 
     > **注記：**
     >
-    > -   接続タイプを`Public`ままにしておくと、標準のTLS接続が使用されます。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
-    > -   **「接続タイプ」**ドロップダウンリストで**「プライベートエンドポイント」**を選択した場合、接続はプライベートエンドポイント経由となります。詳細については、以下のドキュメントをご覧ください。
+    > -   接続タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+    > -   **接続タイプの**ドロップダウンリストで**「プライベートエンドポイント」**を選択した場合、接続はプライベートエンドポイント経由で行われます。詳細については、以下のドキュメントを参照してください。
     >
-    >     -   [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    >     -   [Alibaba Cloud プライベートエンドポイント経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+    >     -   [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します。](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    >     -   [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
     </CustomContent>
 
@@ -37,47 +37,47 @@ summary: パブリック エンドポイント経由でTiDB Cloud Starter また
 
     > **注記：**
     >
-    > -   接続タイプを`Public`ままにしておくと、標準のTLS接続が使用されます。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
-    > -   **「接続タイプ」**ドロップダウンリストで**「プライベートエンドポイント」**を選択した場合、接続はプライベートエンドポイント経由となります。詳細については、 [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
+    > -   接続タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+    > -   **[接続タイプ]**ドロップダウン リストで**[プライベート エンドポイント]**を選択した場合、接続がプライベート エンドポイント経由であることを意味します。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します。](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
 
     </CustomContent>
 
-4.  TiDB Cloud、 TiDB Cloud StarterまたはTiDB Cloud Essentialクラスター用に[枝](/tidb-cloud/branch-overview.md)作成できます。ブランチを作成したら、 **「ブランチ」**ドロップダウンリストからブランチへの接続を選択できます。5 `main`クラスター自体を表します。
+4.  TiDB Cloud、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス用に[支店](/tidb-cloud/branch-overview.md)を作成できます。ブランチが作成されると、**ブランチの**ドロップダウン リストからブランチに接続できます。 `main` TiDB Cloud StarterまたはEssentialインスタンス自体を表します。
 
-5.  まだパスワードを設定していない場合は、 **「パスワードを生成」**をクリックしてランダムなパスワードを生成します。生成されたパスワードは再度表示されないため、安全な場所に保存してください。
+5.  まだパスワードを設定していない場合は、 **「パスワードを生成」をクリックしてランダムなパスワード**を生成してください。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
-6.  接続文字列を使用してクラスターに接続します。
+6.  接続文字列を使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します。
 
     > **注記：**
     >
-    > TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する場合は、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。クライアント IP は、クラスターのパブリックエンドポイントの許可 IP ルールに含まれている必要があります。詳細については、 [パブリックエンドポイント用のTiDB Cloud Starter または Essential ファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
+    > TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するときは、ユーザー名にTiDB Cloud Starterまたは TiDB Cloud Essentialインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。クライアント IP は、TiDB Cloud StarterまたはEssentialインスタンスのパブリック エンドポイントの許可された IP ルールに含まれている必要があります。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
 
-## パブリックエンドポイントを無効にする {#disable-a-public-endpoint}
+## 公開エンドポイントを無効にする {#disable-a-public-endpoint}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターのパブリック エンドポイントを使用する必要がない場合は、それを無効にしてインターネットからの接続を防ぐことができます。
+TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリックエンドポイントを使用する必要がない場合は、インターネットからの接続を防止するために、そのエンドポイントを無効にすることができます。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-3.  **「ネットワーク」**ページで、 **「無効にする」**をクリックします。確認ダイアログが表示されます。
+3.  **ネットワーク設定**ページで、 **「無効にする」**をクリックします。確認ダイアログが表示されます。
 
-4.  確認ダイアログで**[無効にする] を**クリックします。
+4.  確認ダイアログで**「無効にする」**をクリックしてください。
 
-パブリックエンドポイントを無効化すると、接続ダイアログの「**接続タイプ」**ドロップダウンリストの「 `Public`エントリが無効化されます。ユーザーがパブリックエンドポイントからクラスターにアクセスしようとすると、エラーが発生します。
+パブリックエンドポイントを無効にすると、接続ダイアログの**「接続タイプ」**ドロップダウンリストにある`Public`エントリが無効になります。ユーザーがパブリックエンドポイントからTiDB Cloud StarterまたはEssentialインスタンスにアクセスしようとすると、エラーが発生します。
 
 > **注記：**
 >
-> パブリックエンドポイントを無効にしても、既存の接続には影響しません。インターネットからの新規接続のみがブロックされます。
+> パブリックエンドポイントを無効にしても、既存の接続には影響しません。インターネットからの新規接続のみを防止します。
 
-パブリック エンドポイントを無効にした後、再度有効にすることができます。
+パブリックエンドポイントを無効化した後、再度有効化することができます。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-3.  **[ネットワーク]**ページで、 **[有効化]**をクリックします。
+3.  **ネットワークの**ページで、 **[有効にする]**をクリックします。
 
-## 次は何か {#what-s-next}
+## 次は？ {#what-s-next}
 
-TiDB クラスターに正常に接続すると、 [TiDBでSQL文を調べる](/basic-sql-operations.md) 。
+TiDB Cloud StarterまたはEssentialインスタンスに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。

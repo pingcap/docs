@@ -1,82 +1,82 @@
 ---
 title: Integrate TiDB Cloud Starter with Amazon Lambda Using AWS CloudFormation
-summary: TiDB Cloud Starter を Amazon Lambda および CloudFormation と統合する方法を段階的に紹介します。
+summary: TiDB Cloud StarterをAmazon LambdaおよびCloudFormationと統合する方法を、手順を追って説明します。
 ---
 
-# AWS CloudFormation を使用してTiDB Cloud Starter を Amazon Lambda と統合する {#integrate-tidb-cloud-starter-with-amazon-lambda-using-aws-cloudformation}
+# AWS CloudFormationを使用してTiDB Cloud StarterをAmazon Lambdaと統合する {#integrate-tidb-cloud-starter-with-amazon-lambda-using-aws-cloudformation}
 
-このドキュメントでは、クラウドネイティブの分散SQLデータベースである[TiDB Cloudスターター](https://www.pingcap.com/tidb-cloud-starter/) 、サーバーレスでイベントドリブンなコンピューティングサービスである[AWS ラムダ](https://aws.amazon.com/lambda/)と統合するための手順を[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)から順に説明します。TiDB TiDB Cloud StarterをAmazon Lambdaと統合することで、 TiDB Cloud StarterとAWS Lambdaを介したマイクロサービスのスケーラビリティとコスト効率を活用できます。AWS CloudFormationは、Lambda関数、API Gateway、Secrets ManagerなどのAWSリソースの作成と管理を自動化します。
+このドキュメントでは、 [AWS CloudFormation](https://aws.amazon.com/cloudformation/)使用して、クラウドネイティブな分散 SQL データベースである[TiDB Cloud Starter](https://www.pingcap.com/tidb-cloud-starter/)と、サーバーレスでイベント駆動型のコンピューティング サービスである[AWS Lambda](https://aws.amazon.com/lambda/)を統合する手順を段階的に説明します。TiDB TiDB Cloud Starter をAmazon Lambda と統合することで、 TiDB Cloud Starterと AWS Lambda を通じてマイクロサービスの拡張性とコスト効率を活用できます。AWS CloudFormation は、Lambda関数、API Gateway、Secrets Manager などの AWS リソースの作成と管理を自動化します。
 
 > **注記：**
 >
-> このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
+> このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
 
 ## ソリューションの概要 {#solution-overview}
 
-このガイドでは、次のコンポーネントを使用して、完全に機能するオンライン書店を作成します。
+このガイドでは、以下のコンポーネントを使用して、完全に機能するオンライン書店を作成します。
 
--   AWS Lambda 関数: Sequelize ORM と Fastify API フレームワークを使用して、 TiDB Cloud Starter クラスターからのリクエストを処理し、データをクエリします。
--   AWS Secrets Manager SDK: TiDB Cloud Starter クラスターの接続構成を取得および管理します。
--   AWS API Gateway: HTTP リクエストルートを処理します。
--   TiDB Cloud Starter: クラウドネイティブの分散 SQL データベース。
+-   AWS Lambda関数：Sequelize ORMとFastify APIフレームワークを使用して、TiDB Cloud Starterインスタンスからのリクエストとクエリデータを処理します。
+-   AWS Secrets Manager SDK: TiDB Cloud Starterインスタンスの接続構成を取得および管理します。
+-   AWS API Gateway：HTTPリクエストのルーティングを処理します。
+-   TiDB Cloud Starter：クラウドネイティブな分散型SQLデータベース。
 
-AWS CloudFormation は、Secrets Manager、API Gateway、Lambda 関数など、プロジェクトに必要なリソースを作成するために使用されます。
+AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プロジェクトに必要なリソースを作成するために使用されます。
 
-書店プロジェクトの構造は次のとおりです。
+書店プロジェクトの構成は以下のとおりです。
 
 ![AWS Lambda structure overview](/media/develop/aws-lambda-structure-overview.png)
 
 ## 前提条件 {#prerequisites}
 
-始める前に、次のものを用意してください。
+始める前に、以下のものを用意してください。
 
--   次の AWS サービスにアクセスできる AWS アカウント:
-    -   [AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)
+-   以下のAWSサービスにアクセスできるAWSアカウント：
+    -   [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
     -   [シークレットマネージャー](https://aws.amazon.com/secrets-manager/)
     -   [APIゲートウェイ](https://aws.amazon.com/api-gateway/)
-    -   [ラムダサービス](https://aws.amazon.com/lambda/)
+    -   [Lambdaサービス](https://aws.amazon.com/lambda/)
     -   [S3](https://aws.amazon.com/s3/)
     -   [IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 
--   [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starter クラスター。TiDB TiDB Cloud Starter クラスターの接続情報を取得します。
+-   [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starterインスタンスが必要です。TiDB TiDB Cloud Starterインスタンスの接続情報を取得するには、以下の手順に従ってください。
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
--   [郵便配達員](https://www.postman.com/)や[カール](https://curl.se/)などのAPIテストツール。このドキュメントのほとんどの例ではcURLを使用しています。WindowsユーザーにはPostmanの使用をお勧めします。
+-   [郵便配達人](https://www.postman.com/)や[カール](https://curl.se/)などのAPIテストツール。このドキュメントのほとんどの例では cURL を使用します。 Windows ユーザーには Postman をお勧めします。
 
--   プロジェクトの[最新リリースアセット](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)ローカル マシンにダウンロードします。これには、 `cloudformation_template.yml`と`cloudformation_template.json`ファイルが含まれます。
+-   プロジェクトの[最新リリースのアセット](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)ローカル マシンにダウンロードします。これには、 `cloudformation_template.yml`および`cloudformation_template.json`ファイルが含まれます。
 
 > **注記：**
 >
-> -   AWSリソースを作成する際は、クラスターのリージョンとして`us-east-1`使用することをお勧めします。これは、このデモのLambda関数コードがリージョンを`us-east-1`にハードコードし、コードバンドルが`us-east-1`リージョンに保存されるためです。
-> -   別のリージョンを使用する場合は、次の手順に従って Lambda 関数コードを変更し、再構築して、コードバンドルを独自の S3 バケットにアップロードする必要があります。
+> -   AWS リソースを作成する際は、リージョンとして`us-east-1`を使用することをお勧めします。これは、このデモの Lambda 関数コードでリージョンが`us-east-1`とハードコーディングされており、コードバンドルが`us-east-1`リージョンに保存されるためです。
+> -   別のリージョンを使用する場合は、以下の手順に従ってLambda関数のコードを変更し、再構築して、コードバンドルを独自のS3バケットにアップロードする必要があります。
 
-<details><summary><code>us-east-1</code>以外のリージョンを使用する場合は、Lambda 関数のコードを修正して再構築します。</summary>
+<details><summary><code>us-east-1</code>以外のリージョンを使用する場合は、Lambda関数のコードを修正して再構築してください。</summary>
 
-クラスターリージョンとして`us-east-1`使用する場合は、このセクションをスキップして[ステップ1: AWS CloudFormationを使用してプロジェクトをセットアップする](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)に進みます。
+リージョンとして`us-east-1`を使用する場合は、このセクションをスキップして、 [ステップ1：AWS CloudFormationを使用してプロジェクトをセットアップする](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)進みます。
 
-AWS リソースを作成するために`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数コードを変更して再構築し、コードバンドルを独自の S3 バケットにアップロードする必要があります。
+AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数のコードを変更し、再構築して、コード バンドルを独自の S3 バケットにアップロードする必要があります。
 
-ローカル開発環境の問題を回避するには、 [ギットポッド](https://www.gitpod.io/)などのクラウドネイティブ開発環境を使用することをお勧めします。
+ローカル開発環境の問題を回避するため、 [Gitpod](https://www.gitpod.io/)などのクラウドネイティブ開発環境を使用することをお勧めします。
 
-コードバンドルを再構築して独自の S3 バケットにアップロードするには、次の手順を実行します。
+コードバンドルを再構築して独自のS3バケットにアップロードするには、次の手順を実行します。
 
 1.  開発環境を初期化します。
 
-    -   [ギットポッド](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration)ワークスペースを開き、GitHub アカウントでログインします。
+    -   [Gitpod](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration)ワークスペースを開き、GitHubアカウントでログインしてください。
 
-2.  Lambda 関数のコードを変更します。
+2.  ラムダ関数のコードを修正してください。
 
     1.  左側のサイドバーで`aws-lambda-cloudformation/src/secretManager.ts`ファイルを開きます。
-    2.  22 行目を見つけて、 `region`変数を自分の地域に合わせて変更します。
+    2.  22行目を見つけて、 `region`変数を自分の地域に合わせて変更してください。
 
-3.  コード バンドルを再構築します。
+3.  コードバンドルを再構築してください。
 
-    1.  依存関係をインストールします。
+    1.  依存関係をインストールしてください。
 
-        1.  Gitpod でターミナルを開きます。
+        1.  Gitpodでターミナルを開きます。
 
-        2.  作業ディレクトリを入力してください:
+        2.  作業ディレクトリを入力してください：
 
             ```shell
             cd aws-lambda-cloudformation
@@ -88,9 +88,9 @@ AWS リソースを作成するために`us-east-1`以外の別の AWS リージ
             yarn
             ```
 
-    2.  コード バンドルを再構築します。
+    2.  コードバンドルを再構築してください。
 
-        1.  コードバンドルをビルドします。
+        1.  コードバンドルを作成します。
 
             ```shell
             yarn build
@@ -98,113 +98,113 @@ AWS リソースを作成するために`us-east-1`以外の別の AWS リージ
 
         2.  `aws-lambda-cloudformation/dist/index.zip`ファイルを確認してください。
 
-        3.  `index.zip`ファイルを右クリックし、 **[ダウンロード]**を選択します。
+        3.  `index.zip`ファイルを右クリックして、 **[ダウンロード]**を選択します。
 
-4.  再構築されたコードバンドルを独自の S3 バケットにアップロードします。
+4.  再構築したコードバンドルを、ご自身のS3バケットにアップロードしてください。
 
-    1.  AWS マネジメントコンソールの[S3 サービス](https://console.aws.amazon.com/s3)アクセスします。
+    1.  AWS マネジメントコンソールの[S3サービス](https://console.aws.amazon.com/s3)にアクセスします。
     2.  選択したリージョンに新しいバケットを作成します。
     3.  `index.zip`ファイルをバケットにアップロードします。
-    4.  後で使用するために、S3 バケット名とリージョンを書き留めておきます。
+    4.  後で使用するため、S3バケット名とリージョンをメモしておいてください。
 
 </details>
 
-## ステップ1. AWS CloudFormationを使用して書店プロジェクトをセットアップする {#step-1-set-up-the-bookshop-project-using-aws-cloudformation}
+## ステップ1. AWS CloudFormationを使用して書店プロジェクトをセットアップします。 {#step-1-set-up-the-bookshop-project-using-aws-cloudformation}
 
-AWS CloudFormation を使用してブックショッププロジェクトをセットアップするには、次の手順を実行します。
+AWS CloudFormation を使用して書店プロジェクトを設定するには、次の手順を実行します。
 
-1.  AWS マネジメントコンソールに移動し、 [AWS CloudFormation サービス](https://console.aws.amazon.com/cloudformation)にアクセスします。
+1.  AWS マネジメントコンソールに移動し、 [AWS CloudFormationサービス](https://console.aws.amazon.com/cloudformation)にアクセスします。
 2.  **[スタックの作成]** &gt; **[新しいリソースを使用 (標準)]**をクリックします。
-3.  **「スタックの作成」**ページで、スタックの作成プロセスを完了します。
+3.  「**スタックの作成」**ページで、スタックの作成プロセスを完了します。
 
-    1.  **前提条件**領域で、**既存のテンプレートを選択**を選択します。
+    1.  **前提条件の**領域で、 **「既存のテンプレートを選択」**を選択します。
 
-    2.  **[テンプレートの指定]**領域で**[テンプレート ファイルのアップロード]**を選択し、[**ファイルの選択]**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
+    2.  **テンプレート指定**領域で、 **[テンプレート ファイルをアップロード]**を選択し、 **[ファイルを選択]**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
 
-        ファイルがまだない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。ファイルには、プロジェクトに必要なリソースを作成する AWS CloudFormation テンプレートが含まれています。
+        まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 
         ![Create a stack](/media/develop/aws-lambda-cf-create-stack.png)
 
-    3.  スタックの詳細を指定します。
+    3.  スタックの詳細を指定してください。
 
-        -   クラスターリージョンとして`us-east-1`使用する場合は、次のスクリーンショットのようにフィールドに入力します。
+        -   地域として`us-east-1`を使用する場合は、次のスクリーンショットのようにフィールドに入力してください。
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
-            -   **スタック名**: スタック名を入力します。
-            -   **S3Bucket** : zip ファイルを保存する S3 バケットを入力します。
-            -   **S3Key** : S3 キーを入力します。
-            -   **TiDBDatabase** : TiDB Cloudクラスター名を入力します。
-            -   **TiDBHost** : TiDB Cloudデータベースアクセス用のホストURLを入力します。2 `localhost`入力してください。
-            -   **TiDBPassword** : TiDB Cloudデータベース アクセス用のパスワードを入力します。
-            -   **TiDBPort** : TiDB Cloudデータベース アクセス用のポートを入力します。
-            -   **TiDBUser** : TiDB Cloudデータベース アクセス用のユーザー名を入力します。
+            -   **スタック名**：スタック名を入力してください。
+            -   **S3Bucket** ：zipファイルを保存しているS3バケットを入力してください。
+            -   **S3Key** ：S3キーを入力してください。
+            -   **TiDBDatabase** ： TiDB Cloud Starterインスタンス名を入力してください。
+            -   **TiDBHost** : TiDB Cloudデータベースにアクセスするためのホスト URL を入力してください。 `localhost`を入力してください。
+            -   **TiDBPassword** ： TiDB Cloudデータベースへのアクセスに使用するパスワードを入力してください。
+            -   **TiDBPort** ： TiDB Cloudデータベースへのアクセスに使用するポート番号を入力してください。
+            -   **TiDBUser** ： TiDB Cloudデータベースにアクセスするためのユーザー名を入力してください。
 
-        -   `us-east-1`以外の AWS リージョンを使用する場合は、次の手順に従ってください。
+        -   `us-east-1`以外のAWSリージョンを使用する場合は、以下の手順に従ってください。
 
-            1.  [`us-east-1`以外のリージョンを使用する場合は、Lambda 関数のコードを修正して再構築します。](#prerequisites)を参照して Lambda 関数コードを変更し、再構築して、コードバンドルを独自の S3 バケットにアップロードします。
-            2.  スタックの詳細フィールドで、独自の設定に応じて、パラメータ`S3Bucket`と`S3Key`に S3 バケット名とリージョンを指定します。
-            3.  前のスクリーンショットのように、他のフィールドに入力します。
+            1.  Lambda 関数のコードを変更して再構築し、 [`us-east-1`以外のリージョンを使用する場合は、Lambda関数のコードを修正して再構築してください。](#prerequisites)参照してください。
+            2.  スタックの詳細フィールドでは、 `S3Bucket`および`S3Key`パラメーターに、ご自身の設定に応じて S3 バケット名とリージョンを指定してください。
+            3.  前のスクリーンショットのように、他の項目も入力してください。
 
-    4.  スタックオプションを設定します。デフォルトの設定を使用できます。
+    4.  スタックオプションを設定してください。デフォルト設定を使用することもできます。
 
         ![Configure stack options](/media/develop/aws-lambda-cf-stack-config-option.png)
 
-    5.  スタックを確認して作成します。
+    5.  スタックを確認し、作成します。
 
         ![Review and create the stack](/media/develop/aws-lambda-cf-stack-config-review.png)
 
 ## ステップ2. 書店プロジェクトを使用する {#step-2-use-the-bookshop-project}
 
-スタックが作成されたら、次のようにプロジェクトを使用できます。
+スタックが作成されたら、プロジェクトは次のように使用できます。
 
-1.  AWS マネジメントコンソールの[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)アクセスし、 `TiDBCloudApiGatewayV2` API をクリックして、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
+1.  AWS マネジメント コンソールで[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)サービスにアクセスし、 `TiDBCloudApiGatewayV2` API をクリックし、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
 
-2.  **概要**ページから`Invoke URL`コピーします。このURLがAPIエンドポイントとして機能します。
+2.  **概要**ページから`Invoke URL`をコピーしてください。この URL が API エンドポイントとして機能します。
 
     ![API Gateway Invoke URL](/media/develop/aws-lambda-get-apigateway-invoke-url.png)
 
-3.  API をテストするには、Postman や cURL などの API テスト ツールを使用してください。
+3.  APIをテストするには、PostmanやcURLなどのAPIテストツールを使用してください。
 
-    -   模擬試験本を初期化します:
+    -   模擬書籍の初期化:
 
         ```shell
         curl -X POST -H "Content-Type: application/json" -d '{"count":100}' https://<your-api-endpoint>/book/init
         ```
 
-    -   すべての書籍を入手:
+    -   すべての書籍を入手する：
 
         ```shell
         curl https://<your-api-endpoint>/book
         ```
 
-    -   書籍IDで書籍を取得します:
+    -   書籍IDで書籍を入手：
 
         ```shell
         curl https://<your-api-endpoint>/book/<book-id>
         ```
 
-    -   本を作成する:
+    -   本を作成する：
 
         ```shell
         curl -X POST -H "Content-Type: application/json" -d '{ "title": "Book Title", "type": "Test", "publishAt": "2022-12-15T21:01:49.000Z", "stock": 123, "price": 12.34, "authors": "Test Test" }' https://  <your-api-endpoint>/book
         ```
 
-    -   本を更新する:
+    -   本を更新する：
 
         ```shell
         curl -X PUT -H "Content-Type: application/json" -d '{ "title": "Book Title(updated)" }' https://<your-api-endpoint>/book/<book-id>
         ```
 
-    -   本を削除する:
+    -   本を削除する：
 
         ```shell
         curl -X DELETE https://<your-api-endpoint>/book/<book-id>
         ```
 
-## ステップ3. リソースをクリーンアップする {#step-3-clean-up-resources}
+## ステップ3．リソースを整理する {#step-3-clean-up-resources}
 
-不要な料金を避けるため、作成されたすべてのリソースをクリーンアップしてください。
+不要な料金が発生しないように、作成されたすべてのリソースをクリーンアップしてください。
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/cloudformation)にアクセスします。
-2.  作成した AWS CloudFormation スタックを削除します。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/cloudformation)コンソールにアクセスします。
+2.  作成したAWS CloudFormationスタックを削除してください。

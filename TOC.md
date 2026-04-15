@@ -299,7 +299,7 @@
         -   [インデックスアドバイザー](/index-advisor.md)
 -   チュートリアル
     -   [1つのリージョンに複数の可用性ゾーンを展開](/multi-data-centers-in-one-city-deployment.md)
-    -   [2つのリージョンに3つのアベイラビリティゾーンを展開](/three-data-centers-in-two-cities-deployment.md)
+    -   [2つのリージョンに3つの可用性ゾーンを展開](/three-data-centers-in-two-cities-deployment.md)
     -   [1つのリージョン展開で2つの可用性ゾーンを実現](/two-data-centers-in-one-city-deployment.md)
     -   履歴データを読む
         -   ステイル読み取りを使用する（推奨）
@@ -628,6 +628,7 @@
     -   権限
         -   [MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)
         -   [権限管理](/privilege-management.md)
+        -   [列レベルの権限管理](/column-privilege-management.md)
         -   [ユーザーアカウント管理](/user-account-management.md)
         -   [TiDBパスワード管理](/password-management.md)
         -   [役割ベースのアクセス制御](/role-based-access-control.md)

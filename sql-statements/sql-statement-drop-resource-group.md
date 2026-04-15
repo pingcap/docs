@@ -1,17 +1,17 @@
 ---
 title: DROP RESOURCE GROUP
-summary: TiDB での DROP RESOURCE GROUP の使用方法を学習します。
+summary: TiDBにおけるDROP RESOURCE GROUPの使い方を学びましょう。
 ---
 
-# リソースグループの削除 {#drop-resource-group}
+# リソースグループを削除する {#drop-resource-group}
 
 `DROP RESOURCE GROUP`ステートメントを使用してリソース グループを削除できます。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropResourceGroupStmt ::=
@@ -27,8 +27,8 @@ ResourceGroupName ::=
 
 > **注記：**
 >
-> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
-> -   `default`リソース グループは予約されており、削除できません。
+> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
+> -   `default`リソース グループは予約済みであり、削除できません。
 
 ## 例 {#examples}
 
@@ -77,12 +77,12 @@ Query OK, 1 rows affected (0.09 sec)
 Empty set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-MySQL も[リソースグループの削除](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)サポートしていますが、 TiDB は`FORCE`パラメータをサポートしていません。
+MySQL は[リソースグループを削除する](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)もサポートしていますが、TiDB は`FORCE`パラメータをサポートしていません。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
--   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
 -   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

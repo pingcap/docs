@@ -1,29 +1,29 @@
 ---
 title: SLOW_QUERY
-summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します。
+summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# 遅いクエリ {#slow-query}
+# スロークエリ {#slow-query}
 
 <CustomContent platform="tidb">
 
-`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](/tidb-configuration-file.md#slow-query-file)の解析結果である現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
+`SLOW_QUERY`テーブルは、現在のノードのスロークエリ情報を提供します。これは、TiDB[スローログファイル](/tidb-configuration-file.md#slow-query-file)の解析結果です。テーブルの列名は、スローログのフィールド名に対応しています。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)の解析結果である現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
+`SLOW_QUERY`テーブルは、現在のノードのスロークエリ情報を提供します。これは、TiDB [スローログファイル](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)の解析結果です。テーブルの列名は、スローログのフィールド名に対応しています。
 
 </CustomContent>
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 <CustomContent platform="tidb">
 
-この表を使用して問題のあるステートメントを識別し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)参照してください。
+このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、[スロークエリログドキュメント](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 
@@ -32,7 +32,7 @@ USE INFORMATION_SCHEMA;
 DESC SLOW_QUERY;
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -123,19 +123,19 @@ DESC SLOW_QUERY;
 81 rows in set (0.00 sec)
 ```
 
-`Query`列目の最大ステートメント長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
+`Query`列の最大ステートメント長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
 
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-`CLUSTER_SLOW_QUERY`テーブル`CLUSTER_SLOW_QUERY` 、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDBスローログファイルの解析結果です。3 テーブルは`CLUSTER_SLOW_QUERY` `SLOW_QUERY`と同じように使用できます。7 テーブルのテーブルスキーマは、 `CLUSTER_SLOW_QUERY`列に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルと異なります。15 `INSTANCE`は、スロークエリの行情報の TiDB ノードアドレスを表します。
+`CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDB スローログファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`と同様に使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`SLOW_QUERY`テーブルとは異なり`INSTANCE`に`CLUSTER_SLOW_QUERY`列が追加されています。 `INSTANCE`列は、スロークエリの行情報の TiDB ノードアドレスを表します。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 <CustomContent platform="tidb">
 
-この表を使用して問題のあるステートメントを識別し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)参照してください。
+このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、[スロークエリログドキュメント](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 
@@ -143,7 +143,7 @@ DESC SLOW_QUERY;
 DESC CLUSTER_SLOW_QUERY;
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -235,13 +235,13 @@ DESC CLUSTER_SLOW_QUERY;
 82 rows in set (0.00 sec)
 ```
 
-クラスタシステムテーブルへのクエリ実行時、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは以下のとおりです。
+クラスタシステムテーブルにクエリを実行する際、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは以下のとおりです。
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
@@ -255,9 +255,9 @@ DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 4 rows in set (0.00 sec)
 ```
 
-上記の実行プランでは、 `user = u1`条件が他の（ `cop` ）TiDBノードにプッシュダウンされ、集計演算子もプッシュダウンされます（グラフの`StreamAgg`の演算子）。
+前述の実行プランでは、 `user = u1`条件が他の ( `cop` ) TiDB ノードにプッシュダウンされ、集約演算子もプッシュダウンされます (グラフ内の`StreamAgg`演算子)。
 
-現在、システムテーブルの統計情報が収集されていないため、一部の集計演算子をプッシュダウンできず、実行速度が低下することがあります。このような場合は、SQL HINTを手動で指定して、集計演算子をプッシュダウンすることができます。例：
+現在、システムテーブルの統計情報が収集されていないため、集計演算子の一部がプッシュダウンされず、実行速度が低下する場合があります。このような場合は、SQL HINTを手動で指定して集計演算子をプッシュダウンできます。例：
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
@@ -265,7 +265,7 @@ SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 
 ## 実行情報をビュー {#view-execution-information}
 
-`SLOW_QUERY`テーブルに対して[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報を取得する方法に関する詳細な情報を取得できます。ただし、 `CLUSTER_SLOW_QUERY`テーブルに対して`EXPLAIN ANALYZE`を実行しても、この情報は取得でき**ません**。
+`SLOW_QUERY`テーブルに対して[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報をどのように取得しているかについての詳細情報を取得できます。ただし、 `EXPLAIN ANALYZE`テーブルに対して`CLUSTER_SLOW_QUERY` } を実行しても、この情報は取得**できません**。
 
 例：
 
@@ -295,7 +295,7 @@ EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
               disk: N/A
     2 rows in set (0.01 sec)
 
-出力で、セクション`execution info`の次のフィールド (読みやすいようにフォーマットされています) を確認します。
+出力結果の`execution info`セクションで、以下のフィールド（読みやすくするためにフォーマット済み）を確認してください。
 
     initialize: 55.5µs,
     read_file: 1.21ms,
@@ -307,12 +307,12 @@ EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
     read_file: 1,
     read_size: 4.06 MB
 
-| 分野                      | 説明                                                                                                            |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `initialize`            | 初期化に要した時間                                                                                                     |
-| `read_file`             | 遅いログファイルの読み取りに費やされた時間                                                                                         |
-| `parse_log.time`        | スローログファイルの解析に要した時間                                                                                            |
-| `parse_log.concurrency` | スローログファイルの解析の同時実行性（ [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)に設定） |
-| `total_file`            | スローログファイルの合計数                                                                                                 |
-| `read_file`             | 読み取られる遅いログファイルの数                                                                                              |
-| `read_size`             | ログファイルから読み取られたバイト数                                                                                            |
+| 分野                      | 説明                                                                                                              |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `initialize`            | 初期化に費やした時間                                                                                                      |
+| `read_file`             | 遅いログファイルの読み取りに費やした時間                                                                                            |
+| `parse_log.time`        | 遅いログファイルの解析に費やした時間                                                                                              |
+| `parse_log.concurrency` | 低速ログファイルの解析における同時実行数（ [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)で設定） |
+| `total_file`            | スローログファイルの総数                                                                                                    |
+| `read_file`             | 読み取られた低速ログファイルの数                                                                                                |
+| `read_size`             | ログファイルから読み取ったバイト数                                                                                               |

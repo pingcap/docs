@@ -1,55 +1,55 @@
 ---
 title: Get Started with TiDB + AI via SQL
-summary: SQL ステートメントを使用して TiDB で Vector Search をすぐに開始し、生成 AI アプリケーションを強化する方法を学習します。
-aliases: ['/ja/tidb/stable/vector-search-get-started-using-sql/','/ja/tidbcloud/vector-search-get-started-using-sql/']
+summary: SQL文を使用してTiDBのベクトル検索を素早く使い始め、生成型AIアプリケーションを強化する方法を学びましょう。
+aliases: ['/ja/tidb/stable/vector-search-get-started-using-sql/','/ja/tidb/dev/vector-search-get-started-using-sql/','/ja/tidbcloud/vector-search-get-started-using-sql/']
 ---
 
-# SQL経由でTiDB + AIを使い始める {#get-started-with-tidb-ai-via-sql}
+# SQL を介して TiDB + AI を使い始める {#get-started-with-tidb-ai-via-sql}
 
-TiDB は MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-search-overview.md)サポートし、新しい[ベクトルデータ型](/ai/reference/vector-search-data-types.md)といくつかの[ベクトル関数](/ai/reference/vector-search-functions-and-operators.md)を導入します。
+TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-search-overview.md)をサポートし、新しい [ベクトルデータ型](/ai/reference/vector-search-data-types.md)といくつかの[ベクトル関数](/ai/reference/vector-search-functions-and-operators.md)を導入します。
 
-このドキュメントでは、SQL文のみを使ってTiDB Vector Searchを使い始める方法を説明します。1 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)使って以下の操作を実行する方法を学びます。
+このドキュメントでは、SQL ステートメントだけを使用して TiDB Vector Search を開始する方法を説明します。 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)を使用して、次の操作を実行する方法を学習します。
 
--   TiDB クラスターに接続します。
+-   TiDBに接続します。
 -   ベクターテーブルを作成します。
--   ベクトル埋め込みを保存します。
--   ベクター検索クエリを実行します。
+-   ベクトル埋め込みを保存する。
+-   ベクトル検索クエリを実行します。
 
 > **注記：**
 >
-> -   ベクター検索機能はベータ版であり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> -   ベクトル検索機能は[TiDBセルフマネージド](/overview.md) 、 [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) 、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用可能です。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> -   ベクトル検索機能はベータ版であり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
+> -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
-このドキュメントの手順を完了するには、次のものが必要です。
+この文書の手順を完了するには、以下が必要です。
 
--   [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) がマシンにインストールされています。
--   TiDB クラスター。
+-   [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)(MySQL CLI)がマシンにインストールされています。
+-   TiDBクラスタ。
 
-**TiDB クラスターがない場合は、次のように作成できます。**
+**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+-   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+-   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
-## 始めましょう {#get-started}
+## さあ始めましょう {#get-started}
 
-### ステップ1. TiDBクラスターに接続する {#step-1-connect-to-the-tidb-cluster}
+### ステップ1. TiDBに接続する {#step-1-connect-to-tidb}
 
-選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
+選択したTiDBのデプロイオプションに応じて、TiDBに接続してください。
 
 <SimpleTab>
-<div label="TiDB Cloud Starter or Essential">
+<div label="TiDB Cloud Starter">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **「接続先」**ドロップダウンリストから**「MySQL CLI」**を選択し、 **「接続タイプ」**のデフォルト設定を**「パブリック」**のままにします。
+3.  接続ダイアログで、[接続**方法]**ドロップダウンリストから**[MySQL CLI]**を選択し、 **[接続タイプ]**のデフォルト設定を**[パブリック]**のままにします。
 
-4.  まだパスワードを設定していない場合は、 **「パスワードの生成」をクリックしてランダムなパスワード**を生成します。
+4.  まだパスワードを設定していない場合は、 **「パスワードを生成」**をクリックしてランダムなパスワードを生成してください。
 
-5.  接続コマンドをコピーしてターミナルに貼り付けます。以下はmacOSの例です。
+5.  接続コマンドをコピーしてターミナルに貼り付けてください。以下はmacOSの例です。
 
     ```bash
     mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
@@ -58,9 +58,9 @@ TiDB は MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-sea
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-TiDB セルフマネージド クラスターが起動したら、ターミナルでクラスター接続コマンドを実行します。
+TiDBセルフマネージドクラスタが起動したら、ターミナルでクラスタ接続コマンドを実行してください。
 
-以下は macOS の接続コマンドの例です。
+以下はmacOSにおける接続コマンドの例です。
 
 ```bash
 mysql --comments --host 127.0.0.1 --port 4000 -u root
@@ -70,11 +70,11 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root
 
 </SimpleTab>
 
-### ステップ2.ベクターテーブルを作成する {#step-2-create-a-vector-table}
+### ステップ2. ベクターテーブルを作成する {#step-2-create-a-vector-table}
 
-テーブルを作成するときに、 `VECTOR`データ型を指定して列を[ベクター](/ai/concepts/vector-search-overview.md#vector-embedding)列として定義できます。
+テーブルを作成する際、 `VECTOR`データ型を指定することで、列を[ベクター](/ai/concepts/vector-search-overview.md#vector-embedding)として定義できます。
 
-たとえば、3 次元の`VECTOR`列を持つテーブル`embedded_documents`を作成するには、MySQL CLI を使用して次の SQL ステートメントを実行します。
+例えば、3次元の列`embedded_documents`を持つテーブル`VECTOR` } を作成するには、MySQL CLI を使用して次の SQL ステートメントを実行します。
 
 ```sql
 USE test;
@@ -87,15 +87,15 @@ CREATE TABLE embedded_documents (
 );
 ```
 
-期待される出力は次のとおりです。
+期待される出力は以下のとおりです。
 
 ```text
 Query OK, 0 rows affected (0.27 sec)
 ```
 
-### ステップ3. テーブルにベクトル埋め込みを挿入する {#step-3-insert-vector-embeddings-to-the-table}
+### ステップ3. ベクトル埋め込みをテーブルに挿入する {#step-3-insert-vector-embeddings-to-the-table}
 
-[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)を持つ 3 つのドキュメントを`embedded_documents`つのテーブルに挿入します。
+[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)だ 3 つのドキュメントを`embedded_documents`テーブルに挿入します。
 
 ```sql
 INSERT INTO embedded_documents
@@ -105,26 +105,26 @@ VALUES
     (3, 'tree', '[1,0,0]');
 ```
 
-期待される出力は次のとおりです。
+期待される出力は以下のとおりです。
 
     Query OK, 3 rows affected (0.15 sec)
     Records: 3  Duplicates: 0  Warnings: 0
 
 > **注記**
 >
-> この例では、ベクトル埋め込みの次元を簡略化し、デモンストレーションの目的で 3 次元ベクトルのみを使用します。
+> この例では、ベクトル埋め込みの次元を簡略化し、説明のために3次元ベクトルのみを使用しています。
 >
-> 実際のアプリケーションでは、数百または数千の次元を持つ[埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)埋め込みが生成されることがよくあります。
+> 実際のアプリケーションでは、 [埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)は多くの場合、数百または数千の次元を持つベクトル埋め込みを生成します。
 
-### ステップ4.ベクターテーブルをクエリする {#step-4-query-the-vector-table}
+### ステップ4. ベクトルテーブルを照会する {#step-4-query-the-vector-table}
 
-ドキュメントが正しく挿入されたことを確認するには、 `embedded_documents`テーブルをクエリします。
+ドキュメントが正しく挿入されたことを確認するには、 `embedded_documents`テーブルを照会します。
 
 ```sql
 SELECT * FROM embedded_documents;
 ```
 
-期待される出力は次のとおりです。
+期待される出力は以下のとおりです。
 
 ```sql
 +----+----------+-----------+
@@ -137,13 +137,13 @@ SELECT * FROM embedded_documents;
 3 rows in set (0.15 sec)
 ```
 
-### ステップ5.ベクター検索クエリを実行する {#step-5-perform-a-vector-search-query}
+### ステップ5. ベクトル検索クエリを実行する {#step-5-perform-a-vector-search-query}
 
-全文検索と同様に、ベクター検索を使用する場合、ユーザーはアプリケーションに検索用語を提供します。
+全文検索と同様に、ベクトル検索を使用する場合も、ユーザーはアプリケーションに検索語を入力します。
 
-この例では、検索語は「泳ぐ動物」であり、対応するベクトル埋め込みは`[1,2,3]`と仮定されています。実際のアプリケーションでは、埋め込みモデルを使用してユーザーの検索語をベクトル埋め込みに変換する必要があります。
+この例では、検索語は「泳ぐ動物」であり、それに対応するベクトル埋め込みは`[1,2,3]`であると想定されています。実際のアプリケーションでは、埋め込みモデルを使用して、ユーザーの検索語をベクトル埋め込みに変換する必要があります。
 
-次のSQL文を実行すると、TiDBはテーブル内のベクトル埋め込み間のコサイン距離（ `vec_cosine_distance` ）を計算してソートし、 `[1,2,3]`に最も近い上位3つのドキュメントを識別します。
+次の SQL ステートメントを実行すると、TiDB はテーブル内のベクトル埋め込み間のコサイン距離 ( `[1,2,3]`計算してソートすることにより、 `vec_cosine_distance` } に最も近い上位 3 つのドキュメントを特定します。
 
 ```sql
 SELECT id, document, vec_cosine_distance(embedding, '[1,2,3]') AS distance
@@ -152,7 +152,7 @@ ORDER BY distance
 LIMIT 3;
 ```
 
-期待される出力は次のとおりです。
+期待される出力は以下のとおりです。
 
 ```plain
 +----+----------+---------------------+
@@ -165,11 +165,11 @@ LIMIT 3;
 3 rows in set (0.15 sec)
 ```
 
-検索結果の 3 つの用語は、クエリされたベクトルからのそれぞれの距離によって並べ替えられます。距離が小さいほど、対応する`document`関連性が高くなります。
+検索結果の 3 つの用語は、クエリされたベクトルからのそれぞれの距離によってソートされます。距離が小さいほど、対応する`document`の関連性が高くなります。
 
-したがって、出力によれば、泳いでいる動物は魚、または泳ぐ才能のある犬である可能性が最も高いです。
+したがって、出力結果から判断すると、泳いでいる動物は魚か、泳ぎの才能に恵まれた犬である可能性が最も高い。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクター検索インデックス](/ai/reference/vector-search-index.md)
+-   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

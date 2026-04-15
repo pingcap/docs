@@ -1,49 +1,49 @@
 ---
 title: Import Sample Data (SQL Files) into TiDB Cloud Starter or Essential from Cloud Storage
-summary: UI 経由でサンプル データをTiDB Cloud Starter またはTiDB Cloud Essential にインポートする方法を学習します。
+summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプルデータをインポートする方法を学びましょう。
 ---
 
-# クラウド ストレージからサンプル データ (SQL ファイル) をTiDB Cloud Starter または Essential にインポートする {#import-sample-data-sql-files-into-tidb-cloud-starter-or-essential-from-cloud-storage}
+# クラウドストレージからサンプルデータ（SQLファイル）をTiDB Cloud StarterまたはEssentialにインポートする {#import-sample-data-sql-files-into-tidb-cloud-starter-or-essential-from-cloud-storage}
 
-このドキュメントでは、UIを介してサンプルデータ（SQLファイル）をTiDB Cloud StarterまたはTiDB Cloud Essentialにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスタを1つ用意する必要があります。
+このドキュメントでは、UI を介してサンプルデータ (SQL ファイル) をTiDB Cloud StarterまたはTiDB Cloud Essentialにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshare のデータライセンス契約に基づいて公開されている Capital Bikeshare のシステムデータです。サンプルデータをインポートする前に、 TiDB Cloud StarterまたはEssential のインスタンスが 1 つ必要です。
 
 > **注記：**
 >
-> このドキュメントで使用されているサンプルデータは Amazon S3 から取得されています。
+> この文書で使用されているサンプルデータは、Amazon S3 から取得したものです。
 
-1.  ターゲット クラスターの**インポート**ページを開きます。
+1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **ヒント：**
         >
-        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+        > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート」**をクリックします。
 
-2.  **Cloud Storage からデータをインポート**をクリックします。
+2.  **「クラウドストレージからデータをインポート」**をクリックします。
 
-3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
+3.  **「クラウドストレージからデータをインポート」**ページで、以下の情報を入力してください。
 
-    -   **ストレージプロバイダー**: **Amazon S3**を選択します。
-    -   **ソース ファイル URI** : サンプル データ URI `s3://tidbcloud-sample-data/data-ingestion/`を入力します。
-    -   **資格情報**:
-        -   **AWS ロール ARN** : `arn:aws:iam::801626783489:role/import-sample-access`と入力します。
-        -   **AWS アクセスキー**: サンプルデータの場合はこのオプションをスキップします。
+    -   **ストレージプロバイダー**： **Amazon S3**を選択してください。
+    -   **ソースファイルURI** ：サンプルデータURI `s3://tidbcloud-sample-data/data-ingestion/`を入力してください。
+    -   **資格情報**：
+        -   **AWS ロール ARN** : `arn:aws:iam::801626783489:role/import-sample-access`を入力してください。
+        -   **AWSアクセスキー**：サンプルデータの場合はこのオプションをスキップしてください。
 
-4.  **「次へ」**をクリックします。
+4.  **「次へ」**をクリックしてください。
 
-5.  **[宛先マッピング]**セクションで、 **[自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則を</a>使用する]**オプションを選択したままにして、データ形式として**[SQL]**を選択します。
+5.  **「宛先マッピング」**セクションで、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションが選択されたままになっていることを確認し、データ形式として**「SQL」**を選択します。
 
-6.  **「次へ」**をクリックします。
+6.  **「次へ」**をクリックしてください。
 
-7.  スキャン結果を確認し、見つかったデータ ファイルと対応するターゲット テーブルをチェックして、 **[インポートの開始] を**クリックします。
+7.  スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **「インポート開始」を**クリックします。
 
-8.  インポートの進行状況に**「完了」と**表示されたら、インポートされたテーブルを確認します。
+8.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。
 
-クラスターに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。次に例を示します。
+TiDB Cloud StarterまたはEssentialインスタンスに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。例：
 
-1.  「12th &amp; U St NW」から始まる旅行記録を取得します。
+1.  「12th &amp; U St NW」から始まる旅行記録を取得してください。
 
     ```sql
     use bikeshare;
@@ -70,7 +70,7 @@ summary: UI 経由でサンプル データをTiDB Cloud Starter またはTiDB C
     +-----------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2.  電動自転車での旅行記録を取得:
+2.  電動自転車で走行記録を取得しましょう：
 
     ```sql
     use bikeshare;

@@ -1,58 +1,58 @@
 ---
-title: Configure TiDB Cloud Starter or Essential Firewall Rules for Public Endpoints 
-summary: TiDB Cloud Starter またはTiDB Cloud Essential クラスターへのパブリック アクセスを使用してファイアウォール ルールを安全に構成および管理する方法を学びます。
+title: Configure TiDB Cloud Starter or Essential Firewall Rules for Public Endpoints
+summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへのパブリックアクセスを安全に設定および管理するためのファイアウォールルールの構成方法を学びましょう。
 ---
 
-# パブリックエンドポイント用のTiDB Cloud Starter または Essential ファイアウォールルールを構成する {#configure-tidb-cloud-starter-or-essential-firewall-rules-for-public-endpoints}
+# パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する {#configure-tidb-cloud-starter-or-essential-firewall-rules-for-public-endpoints}
 
-このドキュメントでは、TiDB Cloud Starter およびTiDB Cloud Essential クラスターのパブリック接続オプションについて説明します。インターネット経由でアクセス可能なクラスターを安全に管理するための重要な概念を学習します。
+このドキュメントでは、 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのパブリック接続オプションについて説明します。インターネット経由でアクセス可能なTiDB Cloud StarterまたはEssentialインスタンスを安全に管理するための重要な概念を習得できます。
 
 > **注記：**
 >
-> このドキュメントは**、TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。TiDB **TiDB Cloud Dedicated**のIPアクセスリストの設定手順については、 [TiDB Cloud DedicatedのIPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+> このドキュメントは**TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。 **TiDB Cloud Dedicated**の IP アクセス リストを設定する手順については、 [TiDB Cloud Dedicatedの IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
-## パブリックエンドポイント {#public-endpoints}
+## 公開エンドポイント {#public-endpoints}
 
-クラスターにパブリックアクセスを設定すると、パブリックエンドポイント経由でクラスターにアクセスできるようになります。つまり、クラスターはインターネット経由でアクセス可能になります。パブリックエンドポイントとは、公開されているDNSアドレスです。「承認済みネットワーク」とは、クラスターへのアクセスを許可するために選択したIPアドレスの範囲を指します。これらの権限は、**ファイアウォールルール**を通じて適用されます。
+TiDB Cloud StarterまたはEssentialインスタンスでパブリック アクセスを設定すると、パブリック エンドポイント経由でインスタンスにアクセスできるようになります。つまり、 TiDB Cloud StarterまたはEssentialインスタンスはインターネット経由でアクセス可能になります。パブリック エンドポイントは、公開されている DNS アドレスです。「承認済みネットワーク」とは、TiDB Cloud StarterまたはEssentialインスタンスへのアクセスを許可する IP アドレスの範囲を指します。これらのアクセス許可は、**ファイアウォール ルール**によって適用されます。
 
-### パブリックアクセスの特徴 {#characteristics-of-public-access}
+### 公共アクセスの特徴 {#characteristics-of-public-access}
 
--   指定された IP アドレスのみがクラスターにアクセスできます。
-    -   デフォルトではすべてのIPアドレス（ `0.0.0.0 - 255.255.255.255` ）が許可されます。
-    -   クラスターの作成後に、許可された IP アドレスを更新できます。
--   クラスターにはパブリックに解決可能な DNS 名があります。
--   クラスターとの間のネットワーク トラフィックは、プライベート ネットワークではなく**パブリック インターネット**経由でルーティングされます。
+-   指定されたIPアドレスのみが、TiDB Cloud StarterまたはEssentialインスタンスにアクセスできます。
+    -   デフォルトでは、すべてのIPアドレス（ `0.0.0.0 - 255.255.255.255` ）が許可されます。
+    -   TiDB Cloud StarterまたはEssentialインスタンスの作成後、許可するIPアドレスを更新できます。
+-   TiDB Cloud StarterまたはEssentialインスタンスには、公開解決可能なDNS名が割り当てられています。
+-   TiDB Cloud StarterまたはEssentialインスタンスとの間のネットワークトラフィックは、プライベートネットワークではなく、**パブリックインターネット**を経由してルーティングされます。
 
 ### ファイアウォールルール {#firewall-rules}
 
-IPアドレスへのアクセスの許可は、**ファイアウォールルール**によって行われます。承認されていないIPアドレスから接続が試みられた場合、クライアントはエラーを受け取ります。
+IPアドレスへのアクセス権限は**ファイアウォールルール**によって付与されます。承認されていないIPアドレスからの接続試行があった場合、クライアントはエラーを受け取ります。
 
-最大 200 個の IP ファイアウォール ルールを作成できます。
+IPファイアウォールルールは最大200個まで作成できます。
 
-### AWSアクセスを許可する {#allow-aws-access}
+### AWSへのアクセスを許可する {#allow-aws-access}
 
-TiDB Cloud Starter クラスターが AWS でホストされている場合は、公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**すべての AWS IP アドレス**からのアクセスを有効にできます。
+TiDB Cloud Starterインスタンスが AWS でホストされている場合は、公式[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**すべての AWS IP アドレス**からのアクセスを有効にすることができます。
 
 TiDB Cloud はこのリストを定期的に更新し、予約済みの IP アドレス**169.254.65.87**を使用してすべての AWS IP アドレスを表します。
 
 ## ファイアウォールルールの作成と管理 {#create-and-manage-a-firewall-rule}
 
-このセクションでは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのファイアウォールルールを管理する方法について説明します。パブリックエンドポイントを使用すると、クラスターへの接続はファイアウォールルールで指定された IP アドレスに制限されます。
+このセクションでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのファイアウォール ルールを管理する方法について説明します。パブリック エンドポイントを使用する場合、インスタンスへの接続はファイアウォール ルールで指定された IP アドレスに制限されます。
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターにファイアウォール ルールを追加するには、次の手順を実行します。
+TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイアウォールルールを追加するには、次の手順を実行します。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-3.  **「ネットワーク」**ページで、 **「パブリックエンドポイント」**が無効になっている場合は有効にします。 **「承認済みネットワーク」**で、 **「+ 現在のIPを追加」**をクリックします。これにより、 TiDB Cloudが認識したコンピューターのパブリックIPアドレスを含むファイアウォールルールが自動的に作成されます。
+3.  **ネットワーク**ページで、**パブリックエンドポイント**が無効になっている場合は有効にします。**承認済みネットワーク**で、 **[+ 現在のIPアドレスを追加]**をクリックします。これにより、 TiDB Cloudが認識するコンピュータのパブリックIPアドレスを含むファイアウォールルールが自動的に作成されます。
 
     > **注記：**
     >
-    > 状況によっては、 TiDB Cloudコンソールで監視される IP アドレスが、インターネットへのアクセス時に使用される IP アドレスと異なる場合があります。そのため、ルールを期待どおりに機能させるには、開始 IP アドレスと終了 IP アドレスを変更する必要がある場合があります。検索エンジンなどのオンラインツールを使用して、ご自身の IP アドレスを確認できます。例えば、「what is my IP」で検索してみてください。
+    > TiDB Cloudコンソールで確認されるIPアドレスが、インターネットアクセス時に使用するIPアドレスと異なる場合があります。そのため、ルールが正しく機能するように、開始IPアドレスと終了IPアドレスを変更する必要があるかもしれません。検索エンジンやその他のオンラインツールを使用して、自分のIPアドレスを確認できます。例えば、「自分のIPアドレスは何ですか」と検索してみてください。
 
-4.  アドレス範囲を追加するには、 **「ルールを追加」**をクリックしてください。表示されるウィンドウで、単一のIPアドレスまたはIPアドレスの範囲を指定できます。ルールを単一のIPアドレスに限定する場合は、 **「開始IPアドレス」フィールド**と**「終了IPアドレス」**フィールドに同じIPアドレスを入力してください。ファイアウォールを開くと、管理者、ユーザー、アプリケーションは、有効な資格情報を持つクラスタ上の任意のデータベースにアクセスできるようになります。「**送信」**をクリックしてファイアウォールルールを追加します。
+4.  アドレス範囲を追加するには、 **「ルールの追加」**をクリックします。表示されたウィンドウで、単一のIPアドレスまたはIPアドレスの範囲を指定できます。ルールを単一のIPアドレスに限定する場合は、 **「開始IPアドレス」**と**「終了IPアドレス」**フィールドに同じIPアドレスを入力します。ファイアウォールを開くと、管理者、ユーザー、およびアプリケーションは、有効な認証情報を持つTiDB Cloud StarterまたはEssentialインスタンス上の任意のデータベースにアクセスできるようになります。「**送信」**をクリックしてファイアウォールルールを追加します。
 
-## 次は何？ {#what-s-next}
+## 次は？ {#what-s-next}
 
--   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)
+-   [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)

@@ -1,15 +1,15 @@
 ---
 title: CLUSTER_INFO
-summary: CLUSTER_INFO` クラスター トポロジ情報テーブルについて学習します。
+summary: CLUSTER_INFO`クラスタトポロジ情報テーブルについて学びましょう。
 ---
 
 # クラスター情報 {#cluster-info}
 
-`CLUSTER_INFO`クラスター トポロジ テーブルには、クラスターの現在のトポロジ情報、各インスタンスのバージョン情報、インスタンス バージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時刻が示されます。
+`CLUSTER_INFO`クラスタトポロジテーブルには、クラスタの現在のトポロジ情報、各インスタンスのバージョン情報、インスタンスバージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時刻が表示されます。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 ```sql
 USE information_schema;
@@ -32,13 +32,13 @@ desc cluster_info;
 8 rows in set (0.01 sec)
 ```
 
-フィールドの説明:
+分野の説明：
 
--   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
--   `INSTANCE` : インスタンス アドレス`IP:PORT`の形式の文字列です。
--   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。tikv-ctl、pd-ctl、tidb-ctlの一部のコマンドはこのAPIとこのアドレスを使用する場合があります。また、このアドレスを使用して、クラスターの詳細情報を取得することもできます。詳細は[TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。
--   `VERSION` : 対応するインスタンスのセマンティックバージョン番号。MySQLのバージョン番号との互換性を保つため、TiDBのバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
--   `GIT_HASH` : インスタンス バージョンをコンパイルするときの Git コミット ハッシュ。2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
+-   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : インスタンスアドレス。これは`IP:PORT`の形式の文字列です。
+-   `STATUS_ADDRESS` : HTTP API のサービス アドレス。tikv-ctl、pd-ctl、または tidb-ctl の一部のコマンドでは、この API とこのアドレスが使用される場合があります。このアドレスからクラスタに関する詳細情報を取得することもできます。詳細は[TiDB HTTP APIドキュメント](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。
+-   `VERSION` : 対応するインスタンスのセマンティックバージョン番号。MySQL のバージョン番号との互換性を保つため、TiDB のバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
+-   `GIT_HASH` : インスタンス バージョンをコンパイルする際の Git コミット ハッシュ。これは、2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
 -   `START_TIME` : 対応するインスタンスの開始時刻。
 -   `UPTIME` : 対応するインスタンスの稼働時間。
 -   `SERVER_ID` : 対応するインスタンスのサーバーID。

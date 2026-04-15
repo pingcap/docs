@@ -29,22 +29,22 @@
 
 ## ガイド {#guides}
 
--   クラスタの管理
-    -   [クラスタプランを選択してください](/tidb-cloud/select-cluster-tier.md)
-    -   TiDB Cloudクラスターの管理
-        -   [TiDB Cloudクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-        -   TiDB Cloudクラスタに接続
-            -   [ネットワーク接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-            -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
-            -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-            -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-        -   支店![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-            -   [概要](/tidb-cloud/branch-overview.md)
-            -   [支店の管理](/tidb-cloud/branch-manage.md)
-            -   [GitHub連携](/tidb-cloud/branch-github-integration.md)
-        -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)
-        -   [TiDB Cloudからデータをエクスポート](/tidb-cloud/serverless-export.md)
-    -   TiFlashでHTAPクラスタを使用する
+-   [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
+-   [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
+-   TiDB Cloud Essentialインスタンスの管理
+    -   [TiDB Cloud Essentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    -   TiDB Cloud Essentialインスタンスに接続します
+        -   [ネットワーク接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+        -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
+        -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+    -   ブランチ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+        -   [概要](/tidb-cloud/branch-overview.md)
+        -   [支店の管理](/tidb-cloud/branch-manage.md)
+        -   [GitHub連携](/tidb-cloud/branch-github-integration.md)
+    -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)
+    -   [TiDB Cloudからデータをエクスポート](/tidb-cloud/serverless-export.md)
+    -   HTAPにはTiFlashを使用してください
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
         -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
         -   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
@@ -64,7 +64,7 @@
             -   [メールで購読する](/tidb-cloud/monitor-alert-email.md)
             -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
-        -   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)
+        -   [イベント](/tidb-cloud/tidb-cloud-events.md)
     -   チューニングパフォーマンス
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
@@ -117,8 +117,8 @@
             -   [概要](/garbage-collection-overview.md)
             -   [コンフィグレーション](/garbage-collection-configuration.md)
         -   [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
-    -   [TiDBクラスタのアップグレード](/tidb-cloud/upgrade-tidb-cluster.md)
-    -   [TiDBクラスタを削除します](/tidb-cloud/delete-tidb-cluster.md)
+    -   [TiDBのバージョンをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+    -   [TiDB Cloud Essentialインスタンスを削除する](/tidb-cloud/delete-tidb-cluster.md)
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
@@ -139,7 +139,7 @@
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-        -   [AWS DMSをTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+        -   [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 -   ストリームデータ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [変更フィードの概要](/tidb-cloud/essential-changefeed-overview.md)
     -   [MySQLにシンクする](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
@@ -554,6 +554,7 @@
     -   [外部ストレージサービスのURI形式](/external-storage-uri.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
+    -   [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
 -   サポートプラン
     -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
     -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
@@ -573,4 +574,5 @@
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
     -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Xインスタンスのプロジェクト移行に関するFAQ](/tidb-cloud/tidbx-instance-move-faq.md)
 -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)

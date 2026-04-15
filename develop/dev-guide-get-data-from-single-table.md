@@ -1,52 +1,52 @@
 ---
 title: Query Data from a Single Table
-summary: このドキュメントでは、データベース内の単一のテーブルからデータをクエリする方法について説明します。
-aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidbcloud/dev-guide-get-data-from-single-table/']
+summary: このドキュメントでは、データベース内の単一のテーブルからデータを照会する方法について説明します。
+aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidb/dev/dev-guide-get-data-from-single-table/','/ja/tidbcloud/dev-guide-get-data-from-single-table/']
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# 単一のテーブルからデータをクエリする {#query-data-from-a-single-table}
+# 単一テーブルからデータをクエリする {#query-data-from-a-single-table}
 
-このドキュメントでは、SQL とさまざまなプログラミング言語を使用して、データベース内の単一のテーブルからデータをクエリする方法について説明します。
+このドキュメントでは、SQLおよび各種プログラミング言語を使用して、データベース内の単一テーブルからデータを照会する方法について説明します。
 
 ## 始める前に {#before-you-begin}
 
-次のコンテンツでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、TiDB 内の単一のテーブルからデータをクエリする方法を示します。
+以下の内容は、TiDB の単一テーブルからデータをクエリする方法を示すために、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として使用します。
 
-データをクエリする前に、次の手順が完了していることを確認してください。
+データを照会する前に、以下の手順を完了していることを確認してください。
 
 <SimpleTab groupId="platform">
 <div label="TiDB Cloud" value="tidb-cloud">
 
-1.  [TiDB Cloudクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md) 。
-2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
-3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md) 。
+1.  [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
+3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  [TiDBセルフマネージドクラスタをデプロイ](/production-deployment-using-tiup.md) 。
-2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
-3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md) 。
+1.  [TiDBセルフマネージドクラスタをデプロイ](/production-deployment-using-tiup.md)。
+2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
+3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
 </div>
 </SimpleTab>
 
-## 簡単なクエリを実行する {#execute-a-simple-query}
+## 簡単なクエリを実行します {#execute-a-simple-query}
 
-Bookshopアプリケーションのデータベースでは、 `authors`番目のテーブルに著者の基本情報が保存されています。3 `SELECT ... FROM ...`のステートメントを使用して、データベースからデータをクエリできます。
+Bookshopアプリケーションのデータベースでは、 `authors`テーブルに著者の基本情報が格納されています。 `SELECT ... FROM ...`ステートメントを使用して、データベースからデータを照会できます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-MySQL クライアントで次の SQL ステートメントを実行します。
+MySQLクライアントで以下のSQL文を実行してください。
 
 ```sql
 SELECT id, name FROM authors;
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
     +------------+--------------------------+
     | id         | name                     |
@@ -68,12 +68,12 @@ SELECT id, name FROM authors;
 </div>
 <div label="Java" value="java">
 
-Javaでは、著者の基本情報を格納するためにクラス`Author`を宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に応じて適切なJavaデータ型を選択する必要があります。例えば、次のようになります。
+Javaでは、著者の基本情報を格納するために、クラス`Author`[価格帯](/data-type-numeric.md)[データ型](/data-type-overview.md)応じて適切なJavaデータ型を選択する必要があります。例：
 
--   タイプ`Int`の変数を使用して、タイプ`int`のデータを保存します。
--   タイプ`Long`の変数を使用して、タイプ`bigint`のデータを保存します。
--   タイプ`Short`の変数を使用して、タイプ`tinyint`のデータを保存します。
--   タイプ`String`の変数を使用して、タイプ`varchar`のデータを保存します。
+-   `Int`型のデータを格納するには、 `int`型の変数を使用します。
+-   `Long`型のデータを格納するには、 `bigint`型の変数を使用します。
+-   `Short`型のデータを格納するには、 `tinyint`型の変数を使用します。
+-   `String`型のデータを格納するには、 `varchar`型の変数を使用します。
 
 ```java
 public class Author {
@@ -112,23 +112,23 @@ public class AuthorDAO {
 }
 ```
 
-[JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ要求を開始できます。
+[JDBCドライバを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `Statement`を使用して`conn.createStatement()`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ リクエストを開始できます。
 
-クエリ結果は`ResultSet`オブジェクトに保存されます。 `ResultSet`トラバースすることで、返された結果を`Author`オブジェクトにマッピングできます。
+クエリ結果は`ResultSet`オブジェクトに格納されます。 `ResultSet`を走査することで、返された結果を`Author`オブジェクトにマッピングできます。
 
 </div>
 </SimpleTab>
 
-## 結果をフィルタリング {#filter-results}
+## 結果を絞り込む {#filter-results}
 
 クエリ結果をフィルタリングするには、 `WHERE`ステートメントを使用できます。
 
-たとえば、次のコマンドは、すべての著者の中から 1998 年に生まれた著者を照会します。
+例えば、以下のコマンドは、すべての著者の中から1998年生まれの著者を抽出します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-`WHERE`ステートメントにフィルター条件を追加します。
+`WHERE`ステートメントにフィルタ条件を追加します。
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -137,11 +137,11 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" value="java">
 
-Javaでは、同じ SQL を使用して、動的パラメータを含むデータ クエリ要求を処理できます。
+Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリ要求を処理できます。
 
-これは、パラメータをSQL文に連結することで実現できます。ただし、この方法はアプリケーションのセキュリティに潜在的[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)リスクをもたらします。
+これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)インジェクションの潜在的なリスクが生じます。
 
-このようなクエリを処理するには、通常のステートメントの代わりに[準備された声明](/develop/dev-guide-prepared-statement.md)を使用します。
+このようなクエリに対処するには、通常のステートメントの代わりに[準備された声明](/develop/dev-guide-prepared-statement.md)を使用します。
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -170,7 +170,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 クエリ結果を並べ替えるには、 `ORDER BY`ステートメントを使用できます。
 
-たとえば、次の SQL 文は、 `authors`テーブルを`birth_year`番目の列に従って降順 ( `DESC` ) で並べ替えて、最も若い著者のリストを取得します。
+例えば、次の SQL ステートメントは、 `authors`テーブルを降順 ( `DESC` ) にソートすることにより、 `birth_year`リストを取得します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -211,7 +211,7 @@ public List<Author> getAuthorsSortByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-結果は次のようになります。
+結果は以下のとおりです。
 
     +-----------+------------------------+------------+
     | id        | name                   | birth_year |
@@ -274,7 +274,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 </div>
 </SimpleTab>
 
-結果は次のようになります。
+結果は以下のとおりです。
 
     +-----------+------------------------+------------+
     | id        | name                   | birth_year |
@@ -292,13 +292,13 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
     +-----------+------------------------+------------+
     10 rows in set (0.11 sec)
 
-この例では、 `LIMIT`文を実行することでクエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)参照してください。
+この例では、 `LIMIT`ステートメントを使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)参照してください。
 
 ## 集計クエリ {#aggregate-queries}
 
-全体的なデータ状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
+データの全体的な状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-たとえば、どの年に作家がより多く生まれたかを知りたい場合は、 `authors`テーブルを`birth_year`番目の列でグループ化し、各年についてカウントすることができます。
+例えば、どの年に作家の出生数が多いかを知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、各年ごとにカウントすることができます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -349,7 +349,7 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-結果は次のようになります。
+結果は以下のとおりです。
 
     +------------+--------------+
     | birth_year | author_count |
@@ -370,8 +370,8 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 
 `COUNT`関数に加えて、TiDB は他の集計関数もサポートしています。詳細については、 [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)参照してください。
 
-## ヘルプが必要ですか? {#need-help}
+## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -1,23 +1,23 @@
 ---
 title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
-summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用法の概要。
+summary: TiDBデータベースにおけるSHOW [BACKUPS|RESTORES]の使用方法の概要。
 ---
 
-# 表示 [バックアップ|復元] {#show-backups-restores}
+# [バックアップ|復元]を表示 {#show-backups-restores}
 
-これらのステートメントは、TiDB インスタンスで実行されたキューに入れられたタスク、実行中のタスク、最近完了したタスク[`BACKUP`](/sql-statements/sql-statement-backup.md)と[`RESTORE`](/sql-statements/sql-statement-restore.md)リストを表示します。
+これらのステートメントは、TiDBインスタンスで実行された、キューに入っている、実行中の、および最近完了したすべての[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクのリストを示します。
 
-どちらのステートメントも、実行には`SUPER`権限が必要です。
+どちらのステートメントも、実行するには`SUPER`権限が必要です。
 
-`BACKUP`タスクを照会するには`SHOW BACKUPS`使用し、 `RESTORE`タスクを照会するには`SHOW RESTORES`使用します。
+`SHOW BACKUPS`を使用して`BACKUP`タスクを照会し、 `SHOW RESTORES`を使用して`RESTORE`タスクを照会します。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
+`br`コマンドラインツールを使用して開始されたバックアップとリストアは表示されません。
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowBRIEStmt ::=
@@ -30,13 +30,13 @@ ShowLikeOrWhere ::=
 
 ## 例 {#examples}
 
-1 つの接続で、次のステートメントを実行します。
+1つの接続で、次のステートメントを実行します。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01';
 ```
 
-バックアップが完了する前に、新しい接続で`SHOW BACKUPS`実行します。
+バックアップが完了する前に、新しい接続で`SHOW BACKUPS`を実行してください。
 
 ```sql
 SHOW BACKUPS;
@@ -51,28 +51,28 @@ SHOW BACKUPS;
 1 row in set (0.00 sec)
 ```
 
-上記の結果の最初の行は次のように記述されます。
+上記の結果の最初の行は、次のように説明されています。
 
-| カラム              | 説明                                                                   |
-| :--------------- | :------------------------------------------------------------------- |
-| `Destination`    | 宛先 URL（秘密鍵の漏洩を防ぐため、すべてのパラメータを削除）                                     |
-| `State`          | タスクの状態                                                               |
-| `Progress`       | 現在の状態における進捗状況の推定値（パーセント）                                             |
-| `Queue_time`     | タスクがキューに入れられたとき                                                      |
-| `Execution_time` | タスクが開始されたとき。キューイングタスクの場合は値は`0000-00-00 00:00:00`です。                  |
-| `Finish_time`    | タスクが終了したときのタイムスタンプ。キューイングおよび実行中のタスクの場合、値は`0000-00-00 00:00:00`になります。 |
-| `Connection`     | このタスクを実行している接続ID                                                     |
-| `Message`        | 詳細を記載したメッセージ                                                         |
+| カラム              | 説明                                                                |
+| :--------------- | :---------------------------------------------------------------- |
+| `Destination`    | 宛先URL（秘密鍵の漏洩を防ぐため、すべてのパラメータは削除済み）                                 |
+| `State`          | タスクの状況                                                            |
+| `Progress`       | 現状における推定進捗率（パーセント）                                                |
+| `Queue_time`     | タスクがキューに入れられたとき                                                   |
+| `Execution_time` | タスクが開始されたとき、キューイングタスクの値は`0000-00-00 00:00:00`です。                  |
+| `Finish_time`    | タスクが完了したときのタイムスタンプ。キューイングおよび実行中のタスクの場合、値は`0000-00-00 00:00:00`です。 |
+| `Connection`     | このタスクを実行している接続ID                                                  |
+| `Message`        | 詳細を添えたメッセージ                                                       |
 
-可能な状態は次のとおりです:
+考えられる状態は以下のとおりです。
 
-| 州      | 説明          |
-| :----- | :---------- |
-| バックアップ | バックアップを作成する |
-| 待って    | 実行待ち        |
-| チェックサム | チェックサム操作の実行 |
+| 州      | 説明           |
+| :----- | :----------- |
+| バックアップ | バックアップを作成する  |
+| 待って    | 処刑を待っている     |
+| チェックサム | チェックサム操作を実行中 |
 
-接続 ID は、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを介してバックアップ/復元タスクをキャンセルするために使用できます。
+接続IDは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してバックアップ/リストアタスクをキャンセルするために使用できます。
 
 ```sql
 KILL TIDB QUERY 4;
@@ -84,23 +84,23 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### フィルタリング {#filtering}
 
-`LIKE`句を使用して、宛先 URL をワイルドカード式と照合し、タスクを除外します。
+`LIKE`句を使用して、宛先URLをワイルドカード式と照合することでタスクをフィルタリングします。
 
 ```sql
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-列でフィルタリングするには、 `WHERE`句を使用します。
+`WHERE`句を使用して、列でフィルタリングします。
 
 ```sql
 SHOW BACKUPS WHERE `Progress` < 25.0;
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張です。
+このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
 -   [復元する](/sql-statements/sql-statement-restore.md)

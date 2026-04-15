@@ -1,17 +1,17 @@
 ---
 title: SHOW PLUGINS
-summary: TiDB データベースの SHOW PLUGINS の使用法の概要。
+summary: TiDBデータベースにおけるSHOW PLUGINSの使用方法の概要。
 ---
 
 # プラグインを表示 {#show-plugins}
 
-`SHOW PLUGINS` 、各プラグインのステータスとバージョン情報を含む、TiDB にインストールされているすべてのプラグインを表示します。
+`SHOW PLUGINS` 、TiDB にインストールされているすべてのプラグインと、各プラグインの状態およびバージョン情報を表示します。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowPluginsStmt ::=
@@ -42,10 +42,10 @@ SHOW PLUGINS LIKE 'a%';
     +-------+--------------+-------+-----------------------------+---------+---------+
     1 row in set (0.000 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-TiDBの`SHOW PLUGINS`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+TiDB の`SHOW PLUGINS`ステートメントは、MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [`ADMIN PLUGINS`](/sql-statements/sql-statement-admin.md#admin-plugins-related-statement)

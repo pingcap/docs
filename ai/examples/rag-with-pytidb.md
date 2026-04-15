@@ -1,29 +1,29 @@
 ---
 title: RAG Example
-summary: ドキュメント検索と言語生成を組み合わせた RAG アプリケーションを構築します。
+summary: 文書検索と言語生成を組み合わせたRAGアプリケーションを構築する。
 ---
 
 # RAGの例 {#rag-example}
 
-この例では、 [`pytidb`](https://github.com/pingcap/pytidb) (TiDB の公式 Python SDK) を使用して最小限の RAG アプリケーションを構築する方法を示します。
+この例では、 [`pytidb`](https://github.com/pingcap/pytidb) （TiDBの公式Python SDK）を使用して最小限のRAGアプリケーションを構築する方法を示します。
 
-アプリケーションは、ローカル埋め込み生成に[オラマ](https://ollama.com/download)使用し、Web UI に[ストリームリット](https://streamlit.io/)使用し、RAG パイプラインの構築に`pytidb`使用します。
+このアプリケーションは、ローカル埋め込み生成に[オラマ](https://ollama.com/download)、Web UI に[ストリームリット](https://streamlit.io/)リット、RAG パイプラインの構築に`pytidb`を使用します。
 
-<p align="center"><img src="https://docs-download.pingcap.com/media/images/docs/ai/rag-application-built-with-pytidb.png" alt="PyTiDB で構築された RAG アプリケーション" width="600" /><p align="center"> <i>PyTiDB で構築された RAG アプリケーション</i></p></p>
+<p align="center"><img src="https://docs-download.pingcap.com/media/images/docs/ai/rag-application-built-with-pytidb.png" alt="PyTiDBで構築されたRAGアプリケーション" width="600" /><p align="center"> <i>PyTiDBで構築されたRAGアプリケーション</i></p></p>
 
 ## 前提条件 {#prerequisites}
 
-始める前に、次のものがあることを確認してください。
+始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [パイソン](https://www.python.org/downloads/) 3.10 以降のバージョンをインストールします。
--   **TiDB Cloud Starter クラスター**: [TiDB Cloud](https://tidbcloud.com/free-trial)に無料の TiDB クラスターを作成できます。
--   **Ollama** : [オラマ](https://ollama.com/download)からインストールします。
+-   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+-   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+-   **Ollama** :[オラマ](https://ollama.com/download)からインストールします。
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1.推論APIを準備する {#step-1-prepare-the-inference-api}
+### ステップ1. 推論APIを準備する {#step-1-prepare-the-inference-api}
 
-Ollama CLI を使用して埋め込みモデルと LLM モデルを取得します。
+Ollama CLIを使用して、埋め込みモデルとLLMモデルを取得します。
 
 ```bash
 ollama pull mxbai-embed-large
@@ -31,7 +31,7 @@ ollama pull gemma3:4b
 ollama run gemma3:4b
 ```
 
-エンドポイント`/embed`と`/generate`が実行されていることを確認します。
+`/embed`および`/generate`エンドポイントが実行されていることを確認してください。
 
 ```bash
 curl http://localhost:11434/api/embed -d '{
@@ -47,14 +47,14 @@ curl http://localhost:11434/api/generate -d '{
 }'
 ```
 
-### ステップ2. リポジトリのクローンを作成する {#step-2-clone-the-repository}
+### ステップ2. リポジトリをクローンする {#step-2-clone-the-repository}
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/rag/
 ```
 
-### ステップ3. 必要なパッケージをインストールして環境を設定する {#step-3-install-the-required-packages-and-set-up-the-environment}
+### ステップ3．必要なパッケージをインストールし、環境をセットアップする {#step-3-install-the-required-packages-and-set-up-the-environment}
 
 ```bash
 python -m venv .venv
@@ -62,11 +62,11 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-### ステップ4. 環境変数を設定する {#step-4-set-environment-variables}
+### ステップ4．環境変数を設定する {#step-4-set-environment-variables}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で[**クラスター**](https://tidbcloud.com/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
-2.  右上隅の**「接続」**をクリックします。接続パラメータがリストされた接続ダイアログが表示されます。
-3.  次のように接続パラメータに応じて環境変数を設定します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+3.  接続パラメータに応じて環境変数を以下のように設定してください。
 
 ```bash
 cat > .env <<EOF
@@ -78,13 +78,13 @@ TIDB_DATABASE=test
 EOF
 ```
 
-### ステップ5. Streamlitアプリを実行する {#step-5-run-the-streamlit-app}
+### ステップ5. Streamlitアプリを実行します {#step-5-run-the-streamlit-app}
 
 ```bash
 streamlit run main.py
 ```
 
-ブラウザを開いて`http://localhost:8501`アクセスします。
+ブラウザを開いて`http://localhost:8501`にアクセスしてください。
 
 ## トラブルシューティング {#troubleshooting}
 
@@ -94,4 +94,4 @@ streamlit run main.py
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**: [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/rag)
+-   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/rag)

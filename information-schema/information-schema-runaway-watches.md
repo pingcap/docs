@@ -1,15 +1,15 @@
 ---
 title: RUNAWAY_WATCHES
-summary: RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習します。
+summary: RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# ランナウェイウォッチ {#runaway-watches}
+# ランナウェイ・ウォッチズ {#runaway-watches}
 
-`RUNAWAY_WATCHES`表は、予想以上にリソースを消費するランナウェイクエリの監視リストを示しています。詳細については、 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)参照してください。
+`RUNAWAY_WATCHES`表には、想定よりも多くのリソースを消費する暴走クエリの監視リストが表示されます。詳細については、 [暴走クエリ](/tidb-resource-control-runaway-queries.md)参照してください。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -35,13 +35,13 @@ DESC RUNAWAY_WATCHES;
 
 ## 例 {#examples}
 
-ランナウェイクエリの監視リストをクエリします。
+暴走クエリの監視リストを照会する：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES ORDER BY id\G
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 *************************** 1. row ***************************
@@ -77,19 +77,19 @@ RESOURCE_GROUP_NAME: default
 3 rows in set (0.00 sec)
 ```
 
-リソース グループ`rg1`のリストに監視項目を追加します。
+リソースグループ`rg1`に監視アイテムをリストに追加します。
 
 ```sql
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-ランナウェイクエリのウォッチリストを再度クエリします。
+暴走クエリの監視リストを再度照会します。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 *************************** 1. row ***************************
@@ -135,16 +135,16 @@ RESOURCE_GROUP_NAME: default
 3 row in set (0.00 sec)
 ```
 
-`RUNAWAY_WATCHES`テーブル内の各列フィールドの意味は次のとおりです。
+`RUNAWAY_WATCHES`テーブルの各列フィールドの意味は次のとおりです。
 
--   `ID` : 監視項目の ID。
+-   `ID` : ウォッチアイテムのID。
 -   `RESOURCE_GROUP_NAME` : リソース グループの名前。
 -   `START_TIME` : 開始時刻。
--   `END_TIME` : 終了時刻。2 `UNLIMITED` 、監視項目の有効期間が無制限であることを意味します。
--   `WATCH` : クイック識別の一致タイプ。値は次のとおりです。
-    -   `Plan`プランダイジェストが一致していることを示します。この場合、 `WATCH_TEXT`列目にプランダイジェストが表示されます。
-    -   `Similar` SQLダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列目にSQLダイジェストが表示されます。
-    -   `Exact` SQLテキストが一致したことを示します。この場合、 `WATCH_TEXT`列目にSQLテキストが表示されます。
--   `SOURCE` : 監視対象項目のソース。2 `QUERY_LIMIT`ルールで識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は`manual`表示されます。
+-   `END_TIME` ：終了時刻。 `UNLIMITED`は、ウォッチアイテムの有効期間が無制限であることを意味します。
+-   `WATCH` : クイック識別のマッチタイプ。値は次のとおりです。
+    -   `Plan`は、プランダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列にプランダイジェストが表示されます。
+    -   `Similar`は、SQL ダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列に SQL ダイジェストが表示されます。
+    -   `Exact`は、SQLテキストが一致したことを示します。この場合、 `WATCH_TEXT`列にSQLテキストが表示されます。
+-   `SOURCE` ：監視対象アイテムの発生源。 `QUERY_LIMIT`ルールによって識別された場合は、識別されたTiDB IPアドレスが表示されます。手動で追加された場合は、 `manual`が表示されます。
 -   `ACTION` : 識別後の対応する操作。
--   `RULE` : 識別ルール。現在設定されている3つのルールは`ElapsedTime` 、 `ProcessedKeys` 、 `RequestUnit`です。フォーマットは`ProcessedKeys = 666(10)`で、 `666`は実際の値、 `10`閾値です。
+-   `RULE` : 識別ルール。現在の 3 つのルールは`ElapsedTime` 、 `ProcessedKeys` 、および`RequestUnit`です。形式は`ProcessedKeys = 666(10)`で、 `666`は実際の値、 `10`はしきい値です。

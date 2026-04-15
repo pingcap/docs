@@ -1,66 +1,66 @@
 ---
 title: CRUD SQL in TiDB
-summary: TiDB の CRUD SQL の簡単な紹介。
-aliases: ['/ja/tidb/stable/dev-guide-tidb-crud-sql/','/ja/tidbcloud/dev-guide-tidb-crud-sql/']
+summary: TiDBのCRUD SQLに関する簡単な紹介。
+aliases: ['/ja/tidb/stable/dev-guide-tidb-crud-sql/','/ja/tidb/dev/dev-guide-tidb-crud-sql/','/ja/tidbcloud/dev-guide-tidb-crud-sql/']
 ---
 
-# TiDB の CRUD SQL {#crud-sql-in-tidb}
+# TiDBにおけるCRUD SQL {#crud-sql-in-tidb}
 
-このドキュメントでは、TiDB の CRUD SQL の使用方法について簡単に説明します。
+このドキュメントでは、TiDBのCRUD SQLの使用方法について簡単に説明します。
 
 ## 始める前に {#before-you-start}
 
-TiDB クラスターに接続していることを確認してください。接続されていない場合は、 [TiDB Cloudスタータークラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)を参照してTiDB Cloud Starter クラスターを作成してください。
+TiDB に接続していることを確認してください。そうでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、最初に接続します。
 
-## TiDB で SQL を探索する {#explore-sql-with-tidb}
+## TiDBでSQLを探求しよう {#explore-sql-with-tidb}
 
 > **注記：**
 >
-> この文書では[TiDB で SQL を探索する](/basic-sql-operations.md)を参照し、簡略化しています。詳細については[TiDB で SQL を探索する](/basic-sql-operations.md)参照してください。
+> このドキュメントは[TiDBでSQLを探求しよう](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)参照してください。
 
-TiDBはMySQLと互換性があり、ほとんどの場合MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)参照してください。
+TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)試すことができます。また、最初に TiDB クラスターをデプロイし、その中で SQL ステートメントを実行することもできます。
+SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)試すことができます。最初に[TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、その中で SQL ステートメントを実行することもできます。
 
-このページでは、DDL、DML、CRUD操作といったTiDB SQL文について解説します。TiDB文の完全なリストについては、 [SQL ステートメントの概要](/sql-statements/sql-statement-overview.md)ご覧ください。
+このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
 
 ## カテゴリ {#category}
 
-SQL は関数に応じて次の 4 つの種類に分けられます。
+SQLは、その関数に応じて以下の4種類に分類されます。
 
--   **DDL (データ定義言語)** : データベース、テーブル、ビュー、インデックスなどのデータベース オブジェクトを定義するために使用されます。
+-   **DDL（データ定義言語）** ：データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。
 
--   **DML (データ操作言語)** : アプリケーション関連のレコードを操作するために使用されます。
+-   **DML（データ操作言語）** ：アプリケーション関連のレコードを操作するために使用されます。
 
--   **DQL (データ クエリ言語)** : 条件付きフィルタリング後のレコードをクエリするために使用されます。
+-   **DQL（データクエリ言語）** ：条件付きフィルタリング後にレコードをクエリするために使用されます。
 
--   **DCL (データ制御言語)** : アクセス権限とセキュリティ レベルを定義するために使用されます。
+-   **DCL（データ制御言語）** ：アクセス権限とセキュリティレベルを定義するために使用されます。
 
-以下では主にDMLとDQLについて紹介します。DDLとDCLの詳細については、 [TiDB で SQL を探索する](/basic-sql-operations.md)または[SQL ステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
+以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)または[SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
 
 ## データ操作言語 {#data-manipulation-language}
 
-一般的なDML機能は、テーブルレコードの追加、変更、削除です。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE`です。
+一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
 
-テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
+テーブルにデータを挿入するには、 `INSERT`ステートメントを使用します。
 
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、次の`INSERT`ステートメントを使用します。
+いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`ステートメントを使用します。
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-テーブル内のレコードの一部のフィールドを更新するには、次の`UPDATE`ステートメントを使用します。
+テーブル内のレコードの一部のフィールドを更新するには、 `UPDATE`ステートメントを使用します。
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-テーブル内のデータを削除するには、次の`DELETE`ステートメントを使用します。
+テーブル内のデータを削除するには、 `DELETE`ステートメントを使用します。
 
 ```sql
 DELETE FROM person WHERE id=2;
@@ -68,13 +68,13 @@ DELETE FROM person WHERE id=2;
 
 > **注記：**
 >
-> フィルターとして`WHERE`節を使用しない`UPDATE`および`DELETE`ステートメントは、テーブル全体に対して動作します。
+> `UPDATE`および`DELETE`ステートメントは、フィルターとして`WHERE`句を指定しない場合、テーブル全体に対して動作します。
 
 ## データクエリ言語 {#data-query-language}
 
-DQL は、1 つまたは複数のテーブルから必要なデータ行を取得するために使用されます。
+DQLは、テーブルまたは複数のテーブルから目的のデータ行を取得するために使用されます。
 
-テーブル内のデータを表示するには、次の`SELECT`ステートメントを使用します。
+データを表形式で表示するには、 `SELECT`ステートメントを使用します。
 
 ```sql
 SELECT * FROM person;
@@ -86,7 +86,7 @@ SELECT * FROM person;
 SELECT name FROM person;
 ```
 
-結果は次のようになります。
+結果は以下のとおりです。
 
     +------+
     | name |
@@ -101,8 +101,8 @@ SELECT name FROM person;
 SELECT * FROM person WHERE id < 5;
 ```
 
-## ヘルプが必要ですか? {#need-help}
+## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -1,17 +1,17 @@
 ---
 title: SHOW CREATE RESOURCE GROUP
-summary: TiDB での SHOW CREATE RESOURCE GROUP の使用方法を学習します。
+summary: TiDBにおけるSHOW CREATE RESOURCE GROUPの使い方を学びましょう。
 ---
 
-# リソースグループの作成を表示 {#show-create-resource-group}
+# リソースグループの作成と表示 {#show-create-resource-group}
 
-`SHOW CREATE RESOURCE GROUP`ステートメントを使用して、リソース グループの現在の定義を表示できます。
+`SHOW CREATE RESOURCE GROUP`ステートメントを使用すると、リソース グループの現在の定義を表示できます。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowCreateResourceGroupStmt ::=
@@ -24,7 +24,7 @@ ResourceGroupName ::=
 
 ## 例 {#examples}
 
-リソース グループ`rg1`を作成します。
+リソースグループ`rg1`を作成します。
 
 ```sql
 CREATE RESOURCE GROUP rg1 RU_PER_SEC=100;
@@ -44,13 +44,13 @@ SHOW CREATE RESOURCE GROUP rg1;
 1 row in set (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL の TiDB 拡張機能です。
+このステートメントは、MySQL 用の TiDB 拡張機能です。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
--   [TiDB リソース制御](/tidb-resource-control-ru-groups.md)
--   [リソースグループの作成](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループの削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [TiDBリソース制御](/tidb-resource-control-ru-groups.md)
+-   [リソースグループを作成する](/sql-statements/sql-statement-alter-resource-group.md)
+-   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)

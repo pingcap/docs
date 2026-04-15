@@ -1,17 +1,17 @@
 ---
 title: QUERY WATCH
-summary: TiDB データベースの QUERY WATCH の使用法の概要。
+summary: TiDBデータベースにおけるQUERY WATCHの使用方法の概要。
 ---
 
 # クエリウォッチ {#query-watch}
 
-`QUERY WATCH`ステートメントは、リソース グループ内のランナウェイ クエリの監視リストを手動で管理するために使用されます。
+`QUERY WATCH`ステートメントは、リソース グループ内の暴走クエリの監視リストを手動で管理するために使用されます。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AddQueryWatchStmt ::=
@@ -54,12 +54,12 @@ DropQueryWatchStmt ::=
 
 ## パラメータ {#parameters}
 
-[`QUERY WATCH`パラメータ](/tidb-resource-control-runaway-queries.md#query-watch-parameters)参照。
+[`QUERY WATCH`パラメータ](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張です。
+このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
--   [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)
+-   [暴走クエリ](/tidb-resource-control-runaway-queries.md)

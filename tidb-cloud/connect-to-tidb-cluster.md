@@ -1,51 +1,51 @@
 ---
 title: Connect to Your TiDB Cloud Dedicated Cluster
-summary: さまざまな方法でTiDB Cloud Dedicated クラスターに接続する方法を学習します。
+summary: さまざまな方法でTiDB Cloud Dedicatedクラスターに接続する方法を学びましょう。
 ---
 
-# TiDB Cloud専用クラスタに接続する {#connect-to-your-tidb-cloud-dedicated-cluster}
+# TiDB Cloud Dedicatedクラスタに接続します {#connect-to-your-tidb-cloud-dedicated-cluster}
 
-このドキュメントでは、TiDB Cloud Dedicated クラスターに接続する方法について説明します。
+このドキュメントでは、TiDB Cloud Dedicatedクラスタへの接続方法について説明します。
 
 > **ヒント：**
 >
-> -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [TiDB Cloud StarterまたはEssential クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
-> -   このドキュメントでは、TiDB Cloud Dedicated のネットワーク接続方法に焦点を当てています。特定のツール、ドライバー、または ORM 経由で TiDB に接続するには、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
+> -   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+> -   このドキュメントでは、 TiDB Cloud Dedicatedのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
 
-TiDB TiDB Cloud TiDB Cloud Dedicated クラスターが作成されたら、次のいずれかのネットワーク接続方法を使用してそのクラスターに接続できます。
+TiDB TiDB Cloud TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
 
 -   直接接続
 
-    直接接続では、TCP経由のMySQLネイティブ接続システムを使用します。1 など、MySQL接続をサポートする任意のツールを使用して、 TiDB Cloud Dedicatedクラスタに接続できます。TiDB TiDB Cloudは[MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) [SQLシェル](/tidb-cloud/connect-via-sql-shell.md)提供しており、これを使用すると、 TiDB SQL を試用したり、TiDBとMySQLの互換性を迅速にテストしたり、ユーザー権限を管理したりできます。
+    直接接続では、TCP 上で MySQL のネイティブ接続システムを使用します。MySQL 接続をサポートするツールであれば、MySQL シェルなどを使用してTiDB Cloud Dedicated[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)に接続できます。 TiDB Cloud は[SQLシェル](/tidb-cloud/connect-via-sql-shell.md)も提供しており、 TiDB SQL を試用したり、TiDB と MySQL の互換性を迅速にテストしたり、ユーザー権限を管理したりできます。
 
-    TiDB Cloud Dedicated は、次の 3 種類のネットワーク接続を提供します。
+    TiDB Cloud Dedicatedは、3種類のネットワーク接続タイプを提供します。
 
     -   [パブリック接続](/tidb-cloud/connect-via-standard-connection.md)
 
-        パブリック接続はトラフィックフィルター付きのパブリックエンドポイントを公開するため、ノートパソコンからSQLクライアント経由でTiDBクラスターに接続できます。TiDBクラスターへの接続にはTLSを使用できるため、アプリケーションからTiDBクラスターへのデータ転送のセキュリティが確保されます。詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)ご覧ください。
+        パブリック接続はトラフィック フィルターを備えたパブリック エンドポイントを公開するため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ送信のセキュリティが確保されます。詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
     -   プライベートエンドポイント（推奨）
 
-        プライベートエンドポイント接続は、VPC内のSQLクライアントがTiDB Cloud Dedicatedクラスターに安全にアクセスできるようにするプライベートエンドポイントを提供します。これは、複数のクラウドプロバイダーが提供するプライベートリンクサービスを使用することで、簡素化されたネットワーク管理で、データベースサービスへの高度に安全な一方向アクセスを実現します。
+        プライベートエンドポイント接続は、VPC内のSQLクライアントがTiDB Cloud Dedicatedクラスターに安全にアクセスできるようにするためのプライベートエンドポイントを提供します。これは、さまざまなクラウドプロバイダーが提供するプライベートリンクサービスを利用しており、ネットワーク管理を簡素化しながら、データベースサービスへの高度に安全な一方向アクセスを実現します。
 
-        -   AWS でホストされているTiDB Cloud Dedicated クラスターの場合、プライベートエンドポイント接続には AWS PrivateLink が使用されます。詳細については、 [AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
-        -   AzureでホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続にはAzure Private Linkが使用されます。詳細については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)ご覧ください。
-        -   Google Cloud でホストされているTiDB Cloud Dedicated クラスタの場合、プライベートエンドポイント接続には Google Cloud Private Service Connect が使用されます。詳細については、 [Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
+        -   AWS でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は AWS PrivateLink を使用します。詳細については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します。](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
+        -   Azure 上でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は Azure Private Link を使用します。詳細については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
+        -   Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
     -   [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)
 
-        レイテンシーを低くし、セキュリティを強化したい場合は、VPCピアリングを設定し、クラウドアカウント内の対応するクラウドプロバイダーのVMインスタンスを使用してプライベートエンドポイント経由で接続してください。詳細については、 [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)ご覧ください。
+        レイテンシーを短縮し、セキュリティを強化したい場合は、VPC ピアリングを設定し、クラウド アカウント内の対応するクラウド プロバイダー上の VM インスタンスを使用してプライベート エンドポイント経由で接続します。詳細については、 [VPCピアリング経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
 
 -   [組み込みSQLエディタ](/tidb-cloud/explore-data-with-chat2query.md)
 
     > **注記：**
     >
-    > [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで SQL エディターを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+    > [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタでSQLエディタを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-    クラスターが AWS でホストされており、クラスターの TiDB バージョンが v6.5.0 以降である場合は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 支援 SQL エディターを使用してデータの価値を最大化できます。
+    クラスターがAWS上でホストされており、クラスターのTiDBバージョンがv6.5.0以降である場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)のAI支援SQLエディタを使用して、データの価値を最大化できます。
 
-    SQLエディタでは、SQLクエリを手動で記述するか、macOSでは<kbd>⌘</kbd> + <kbd>I</kbd> （WindowsまたはLinuxでは<kbd>Control</kbd> + <kbd>I</kbd> ）を押して[Chat2Query（ベータ版）](/tidb-cloud/tidb-cloud-glossary.md#chat2query) SQLクエリを自動生成させることができます。これにより、ローカルSQLクライアントがなくても、データベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
+    SQLエディタでは、SQLクエリを手動で記述することも、macOSでは<kbd>⌘</kbd> + <kbd>I</kbd> （WindowsまたはLinuxでは<kbd>Control</kbd> + <kbd>I</kbd> ）を押すだけで[Chat2Query（ベータ版）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)にSQLクエリを自動生成させることもできます。これにより、ローカルSQLクライアントがなくてもデータベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
 
-## 次は何か {#what-s-next}
+## 次は？ {#what-s-next}
 
-TiDB クラスターに正常に接続すると、次の操作を実行できます[TiDBでSQL文を調べる](/basic-sql-operations.md) 。
+TiDB クラスターに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。

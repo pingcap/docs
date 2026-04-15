@@ -124,18 +124,18 @@
 
 ## ガイド {#guides}
 
--   インスタンスの管理
-    -   [クラスタプランを選択してください](/tidb-cloud/select-cluster-tier.md)
-    -   TiDB Cloudインスタンスの管理
-        -   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
-        -   TiDB Cloudインスタンスに接続します
-            -   [接続概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
-            -   [パブリックエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
-            -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-            -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-        -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
-        -   [TiDB Cloud Premium からデータをエクスポート](/tidb-cloud/premium/premium-export.md)
-    -   TiFlashでHTAPクラスタを使用する
+-   [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
+-   [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
+-   TiDB Cloud Premiumインスタンスの管理
+    -   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
+    -   TiDB Cloud Premiumインスタンスに接続します
+        -   [接続概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
+        -   [パブリックエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
+        -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+    -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
+    -   [TiDB Cloud Premium からデータをエクスポート](/tidb-cloud/premium/premium-export.md)
+    -   HTAPにはTiFlashを使用してください
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
         -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
         -   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
@@ -199,7 +199,7 @@
         -   [TiKV Follower Readの調整](/follower-read.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
         -   [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
-    -   [TiDBインスタンスを削除する](/tidb-cloud/premium/delete-tidb-instance.md)
+    -   [TiDB Cloud Premiumインスタンスを削除する](/tidb-cloud/premium/delete-tidb-instance.md)
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
@@ -218,7 +218,7 @@
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-        -   [AWS DMSをTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+        -   [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 -   ストリームデータ
     -   [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)

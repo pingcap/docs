@@ -1,62 +1,62 @@
 ---
 title: Cohere Embeddings
-summary: TiDB Cloudで Cohere 埋め込みモデルを使用する方法を学習します。
+summary: TiDB CloudでCohere埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-cohere/']
 ---
 
-# コヒーレ埋め込み {#cohere-embeddings}
+# Cohere埋め込み {#cohere-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で Cohere 埋め込みモデルを使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudで Cohere 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用する方法、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-TiDB Cloud は、以下の[コヒア](https://cohere.com/)埋め込みモデルをネイティブに提供します。API キーは必要ありません。
+TiDB Cloud は、次の[調和する](https://cohere.com/)埋め込みモデルをネイティブに提供します。 API キーは必要ありません。
 
 **Cohere Embed v3 モデル**
 
 -   名前: `tidbcloud_free/cohere/embed-english-v3`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   言語: 英語
--   最大入力テキストトークン数: 512 (トークンあたり約 4 文字)
--   最大入力テキスト文字数: 2,048
--   価格: 無料
--   TiDB Cloudがホスト: ✅ `tidbcloud_free/cohere/embed-english-v3`
--   鍵をご持参ください: ✅ `cohere/embed-english-v3.0`
+-   距離指標：コサイン類似度、L2
+-   言語：英語
+-   入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
+-   入力可能なテキスト文字数：最大2,048文字
+-   価格：無料
+-   TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-english-v3`
+-   鍵をご持参ください：✅ `cohere/embed-english-v3.0`
 
 **Cohere Multilingual Embed v3 モデル**
 
 -   名前: `tidbcloud_free/cohere/embed-multilingual-v3`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   言語: 100以上の言語
--   最大入力テキストトークン数: 512 (トークンあたり約 4 文字)
--   最大入力テキスト文字数: 2,048
--   価格: 無料
--   TiDB Cloudがホスト: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
--   鍵をご持参ください: ✅ `cohere/embed-multilingual-v3.0`
+-   距離指標：コサイン類似度、L2
+-   対応言語：100以上の言語
+-   入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
+-   入力可能なテキスト文字数：最大2,048文字
+-   価格：無料
+-   TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
+-   鍵をご持参ください：✅ `cohere/embed-multilingual-v3.0`
 
-または、ご自身のCohere APIキー（BYOK）をお持ちいただければ、 `cohere/`プレフィックスですべてのCohereモデルをご利用いただけます。例：
+あるいは、独自のCohere APIキー（BYOK）をお持ちの場合は`cohere/`プレフィックスを使用してすべてのCohereモデルをご利用いただけます。例：
 
 **Cohere Embed v4 モデル**
 
 -   名前: `cohere/embed-v4.0`
--   寸法: 256、512、1024、1536 (デフォルト)
--   距離計量：コサイン、L2
--   最大入力テキストトークン数: 128,000
--   価格: Cohereによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
+-   寸法：256、512、1024、1536（デフォルト）
+-   距離指標：コサイン類似度、L2
+-   入力可能なテキストトークンの最大数：128,000
+-   価格：Cohereが請求
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
 
-Cohere モデルの完全なリストについては、 [Cohereドキュメント](https://docs.cohere.com/docs/cohere-embed)参照してください。
+Cohere モデルの完全なリストについては、 [Cohereのドキュメント](https://docs.cohere.com/docs/cohere-embed)を参照してください。
 
-## SQL の使用例 (TiDB Cloudホスト) {#sql-usage-example-tidb-cloud-hosted}
+## SQLの使用例（TiDB Cloudホスト型） {#sql-usage-example-tidb-cloud-hosted}
 
-次の例は、自動埋め込みを備えたTiDB Cloudでホストされている Cohere 埋め込みモデルを使用する方法を示しています。
+以下の例は、TiDB CloudでホストされているCohere埋め込みモデルを自動埋め込み機能で使用する方法を示しています。
 
 ```sql
 CREATE TABLE sample (
@@ -72,10 +72,10 @@ CREATE TABLE sample (
 
 > **注記：**
 >
-> -   Cohere埋め込みモデルの場合、テーブルを定義する際に関数`EMBED_TEXT()`に`input_type`指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`指定すると、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`自動的に適用されます。
-> -   `@search`サフィックスは、フィールドがベクトル検索クエリ中にのみ有効になることを示します。そのため、クエリを記述するときに`input_type`再度指定する必要はありません。
+> -   Cohere埋め込みモデルの場合、テーブルを定義する際に、{{ `input_type` `EMBED_TEXT()` }を指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`は、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`が自動的に適用されることを意味します。
+> -   `@search`サフィックスは、そのフィールドがベクトル検索クエリの実行時のみ有効であることを示しています。そのため、クエリを作成する際に`input_type`を再度指定する必要はありません。
 
-データの挿入とクエリ:
+データ挿入とデータ照会：
 
 ```sql
 INSERT INTO sample
@@ -106,28 +106,28 @@ LIMIT 2;
     |    4 | Java's syntax is used in Android apps.                         |
     +------+----------------------------------------------------------------+
 
-## オプション（TiDB Cloudホスト） {#options-tidb-cloud-hosted}
+## オプション（TiDB Cloudホスティング） {#options-tidb-cloud-hosted}
 
-**Embed v3**モデルと**Multilingual Embed v3**モデルはどちらも次のオプションをサポートしており、 `EMBED_TEXT()`関数の`additional_json_options`パラメータで指定できます。
+**Embed v3**モデルと**Multilingual Embed v3**モデルの両方で、以下のオプションがサポートされています。これらのオプションは、 `additional_json_options`関数の`EMBED_TEXT()`パラメータを介して指定できます。
 
--   `input_type` （必須）: 埋め込みの目的を示す特別なトークンを先頭に付加します。同じタスクの埋め込みを生成する際は、常に同じ入力タイプを使用する必要があります。そうでない場合、埋め込みは異なる意味空間にマッピングされ、互換性がなくなります。唯一の例外はセマンティック検索で、ドキュメントは`search_document`で、クエリは`search_query`で埋め込まれます。
+-   `input_type` (必須): 埋め込みの目的を示す特別なトークンを先頭に追加します。同じタスクの埋め込みを生成する場合は、常に同じ入力タイプを使用する必要があります。そうしないと、埋め込みが異なる意味空間にマッピングされ、互換性がなくなります。唯一の例外はセマンティック検索で、ドキュメントは`search_document`で埋め込まれ、クエリは`search_query`で埋め込まれます。
 
-    -   `search_document` : ドキュメントから埋め込みを生成し、ベクター データベースに保存します。
-    -   `search_query` : クエリから埋め込みを生成し、ベクトル データベースに保存されている埋め込みを検索します。
-    -   `classification` : テキスト分類器の入力として使用される埋め込みを生成します。
-    -   `clustering` : クラスタリングタスクの埋め込みを生成します。
+    -   `search_document` : ドキュメントから埋め込みを生成し、ベクトルデータベースに保存します。
+    -   `search_query` : クエリから埋め込みを生成し、ベクトルデータベースに保存されている埋め込みに対して検索を行います。
+    -   `classification` : テキスト分類器への入力として使用される埋め込みを生成します。
+    -   `clustering` : クラスタリングタスク用の埋め込みを生成します。
 
--   `truncate` （オプション）: 最大トークン長を超える入力をAPIがどのように処理するかを制御します。以下のいずれかの値を指定できます。
+-   `truncate` （オプション）：APIが最大トークン長を超える入力をどのように処理するかを制御します。以下のいずれかの値を指定できます。
 
     -   `NONE` (デフォルト): 入力が最大入力トークン長を超えた場合にエラーを返します。
-    -   `START` : 入力が収まるまで先頭からのテキストを破棄します。
+    -   `START` : 入力が収まるまで、先頭からテキストを破棄します。
     -   `END` : 入力が収まるまで末尾からテキストを破棄します。
 
 ## 使用例（BYOK） {#usage-example-byok}
 
-この例では、Bring Your Own Key (BYOK) Cohere モデルを使用してベクター テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、Bring Your Own Key (BYOK) Cohere モデルを使用して、ベクター テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
-### ステップ1: データベースに接続する {#step-1-connect-to-the-database}
+### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -159,14 +159,14 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 </div>
 </SimpleTab>
 
-### ステップ2: APIキーを設定する {#step-2-configure-the-api-key}
+### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-[Cohereダッシュボード](https://dashboard.cohere.com/api-keys)から API キーを作成し、独自のキー (BYOK) を持って埋め込みサービスを使用します。
+[Cohereダッシュボード](https://dashboard.cohere.com/api-keys)からAPIキーを作成し、独自のキー(BYOK)を使用して埋め込みサービスを使用します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-TiDB クライアントを使用して、Cohere 埋め込みプロバイダーの API キーを構成します。
+TiDBクライアントを使用して、Cohere埋め込みプロバイダのAPIキーを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -178,7 +178,7 @@ tidb_client.configure_embedding_provider(
 </div>
 <div label="SQL" value="sql">
 
-SQL を使用して Cohere 埋め込みプロバイダーの API キーを設定します。
+SQLを使用して、Cohere埋め込みプロバイダのAPIキーを設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = "{your-cohere-api-key}";
@@ -187,9 +187,9 @@ SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = "{your-cohere-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3: ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
 
-`cohere/embed-v4.0`モデルを使用して 1536 次元のベクトル (デフォルトの次元) を生成するベクトル フィールドを持つテーブルを作成します。
+`cohere/embed-v4.0`モデルを使用して 1536 次元ベクトル (デフォルトの次元) を生成するベクトルフィールドを持つテーブルを作成します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -227,7 +227,7 @@ CREATE TABLE sample_documents (
 </div>
 </SimpleTab>
 
-### ステップ4: テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
+### ステップ4：テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -263,12 +263,12 @@ VALUES
 </div>
 </SimpleTab>
 
-### ステップ5: 類似文書を検索する {#step-5-search-for-similar-documents}
+### ステップ5：類似文書を検索する {#step-5-search-for-similar-documents}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`table.search()` API を使用してベクトル検索を実行します。
+`table.search()` APIを使用してベクトル検索を実行します。
 
 ```python
 results = table.search("How to learn Python programming?") \
@@ -280,7 +280,7 @@ print(results)
 </div>
 <div label="SQL" value="sql">
 
-`VEC_EMBED_COSINE_DISTANCE`関数を使用して、コサイン距離メトリックに基づいてベクトル検索を実行します。
+`VEC_EMBED_COSINE_DISTANCE`関数を使用して、コサイン距離メトリックに基づくベクトル検索を実行します。
 
 ```sql
 SELECT
@@ -297,11 +297,11 @@ LIMIT 2;
 
 ## オプション（BYOK） {#options-byok}
 
-[Cohere埋め込みオプション](https://docs.cohere.com/v2/reference/embed)すべて、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+[Cohereの埋め込みオプション](https://docs.cohere.com/v2/reference/embed)は`additional_json_options`関数の`EMBED_TEXT()`パラメータを介してサポートされます。
 
-**例: 検索操作と挿入操作に異なる`input_type`を指定する**
+**例：検索操作と挿入操作で異なる`input_type`を指定する**
 
-フィールドがベクトル検索クエリ中にのみ有効であることを示すには、サフィックス`@search`を使用します。
+`@search`という接尾辞を使用して、そのフィールドがベクトル検索クエリ実行時のみ有効であることを示します。
 
 ```sql
 CREATE TABLE sample (
@@ -315,7 +315,7 @@ CREATE TABLE sample (
 );
 ```
 
-**例: 代替ディメンションを使用する**
+**例：別の次元を使用する**
 
 ```sql
 CREATE TABLE sample (
@@ -329,9 +329,9 @@ CREATE TABLE sample (
 );
 ```
 
-利用可能なすべてのオプションについては、 [Cohereドキュメント](https://docs.cohere.com/v2/reference/embed)参照してください。
+利用可能なすべてのオプションについては、 [Cohereのドキュメント](https://docs.cohere.com/v2/reference/embed)を参照してください。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

@@ -1,105 +1,105 @@
 ---
 title: Connect to TiDB with Django
-summary: Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
+summary: Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBと連携するPythonのサンプルコードを紹介します。
 aliases: ['/ja/tidb/dev/dev-guide-outdated-for-django','/ja/tidb/stable/dev-guide-sample-application-python-django/','/ja/tidb/dev/dev-guide-sample-application-python-django/','/ja/tidbcloud/dev-guide-sample-application-python-django/']
 ---
 
 # DjangoでTiDBに接続する {#connect-to-tidb-with-django}
 
-TiDB は MySQL 互換のデータベースであり、 [ジャンゴ](https://www.djangoproject.com)強力なオブジェクト リレーショナル マッパー (ORM) ライブラリを含む Python 用の人気の Web フレームワークです。
+TiDBはMySQL互換のデータベースであり、[ジャンゴ](https://www.djangoproject.com)強力なオブジェクトリレーショナルマッパー（ORM）ライブラリを含む、Python向けの人気の高いWebフレームワークです。
 
-このチュートリアルでは、TiDB と Django を使用して次のタスクを実行する方法を学習します。
+このチュートリアルでは、TiDBとDjangoを使用して以下のタスクを実行する方法を学ぶことができます。
 
--   環境を設定します。
--   Django を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作のサンプルコードスニペットもご利用いただけます。
+-   環境をセットアップしてください。
+-   Djangoを使用してTiDBに接続します。
+-   アプリケーションをビルドして実行します。必要に応じて、基本的なCRUD操作のサンプルコードスニペットも利用できます。
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、および TiDB Self-Managed クラスターで機能します。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
-このチュートリアルを完了するには、次のものが必要です。
+このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/) 。
--   [ギット](https://git-scm.com/downloads) 。
--   TiDB クラスター。
+-   [Python 3.8以降](https://www.python.org/downloads/)。
+-   [Git](https://git-scm.com/downloads) 。
+-   TiDBクラスタ。
 
-**TiDB クラスターがない場合は、次のように作成できます。**
+**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
--   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
--   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+-   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+-   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
-## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
+## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
 
-このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
+このセクションでは、サンプルアプリケーションコードを実行してTiDBに接続する方法を説明します。
 
-### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
+### ステップ1：サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
+サンプルコードリポジトリをクローンするには、ターミナルウィンドウで以下のコマンドを実行してください。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-django-quickstart.git
 cd tidb-python-django-quickstart
 ```
 
-### ステップ2: 依存関係をインストールする {#step-2-install-dependencies}
+### ステップ2：依存関係をインストールする {#step-2-install-dependencies}
 
-次のコマンドを実行して、サンプル アプリに必要なパッケージ (Django、django-tidb、mysqlclient を含む) をインストールします。
+サンプルアプリに必要なパッケージ（Django、django-tidb、mysqlclientなど）をインストールするには、以下のコマンドを実行してください。
 
 ```shell
 pip install -r requirements.txt
 ```
 
-mysqlclient のインストールで問題が発生した場合は、 [mysqlclient 公式ドキュメント](https://github.com/PyMySQL/mysqlclient#install)を参照してください。
+mysqlclient でインストールの問題が発生した場合は、 [mysqlclient の公式ドキュメント](https://github.com/PyMySQL/mysqlclient#install)を参照してください。
 
-#### <code>django-tidb</code>とは何ですか? {#what-is-code-django-tidb-code}
+#### <code>django-tidb</code>とは何ですか？ {#what-is-code-django-tidb-code}
 
 `django-tidb`は、TiDB と Django 間の互換性の問題を解決する Django 用の TiDB 方言です。
 
-`django-tidb`インストールするには、お使いのDjangoのバージョンに合ったバージョンを選択してください。例えば、 `django==4.2.*`使用している場合は`django-tidb==4.2.*`インストールしてください。マイナーバージョンは同じである必要はありません。最新のマイナーバージョンを使用することをお勧めします。
+`django-tidb`をインストールするには、お使いの Django のバージョンに合ったバージョンを選択してください。例えば、 `django==4.2.*`を使用している場合は、 `django-tidb==4.2.*`をインストールしてください。マイナーバージョンは同じである必要はありませんが、最新のマイナーバージョンを使用することをお勧めします。
 
-詳細については[django-tidbリポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
+詳細については、 [django-tidbリポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
 
-### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
+### ステップ3：接続情報の設定 {#step-3-configure-connection-information}
 
-選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
+選択したTiDBのデプロイオプションに応じて、TiDBに接続してください。
 
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの構成が動作環境と一致していることを確認します。
+3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています
+    -   **接続タイプ**は`Public`に設定されています。
 
-    -   **ブランチ**は`main`に設定されています
+    -   **ブランチ**は`main`に設定されています。
 
-    -   **接続先が**`General`に設定されています
+    -   **Connect With は**`General`に設定されています。
 
-    -   **オペレーティング システムは**環境に適合します。
-
-    > **ヒント：**
-    >
-    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
-
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
+    -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
+    > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
+4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+
+    > **ヒント：**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
+
+5.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-6.  対応する接続​​文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
+6.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -110,32 +110,32 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
     CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Starterは安全な接続を必要とします。mysqlclientの`ssl_mode`デフォルトで`PREFERRED`に設定されているため、 `CA_PATH`手動で指定する必要はありません。空白のままにしておいてください。ただし、特別な理由により`CA_PATH`手動で指定する必要がある場合は、 [TiDB Cloud StarterへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得できます。
+    TiDB Cloud Starter は安全な接続を必要とします。mysqlclient の`ssl_mode`はデフォルトで`PREFERRED`になっているため、 `CA_PATH`手動で指定する必要はありません。空欄のままにしてください。ただし、 `CA_PATH`手動で指定する必要がある特別な理由がある場合は、 [TiDB Cloud StarterへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得してください。
 
 7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
+3.  接続ダイアログで、「**接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「CA証明書」**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
-4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
+4.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-5.  対応する接続​​文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
+5.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -146,20 +146,20 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`前の手順でダウンロードした証明書パスで構成してください。
+    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`前の手順でダウンロードした証明書のパスに設定してください。
 
 6.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
+1.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
     ```shell
     cp .env.example .env
     ```
 
-2.  対応する接続​​文字列をコピーして、 `.env`ファイルに貼り付けます。結果の例は次のとおりです。
+2.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
@@ -169,22 +169,22 @@ mysqlclient のインストールで問題が発生した場合は、 [mysqlclie
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `CA_PATH`行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空欄です。
 
 3.  `.env`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
-### ステップ4: データベースを初期化する {#step-4-initialize-the-database}
+### ステップ4：データベースを初期化する {#step-4-initialize-the-database}
 
-プロジェクトのルート ディレクトリで、次のコマンドを実行してデータベースを初期化します。
+プロジェクトのルートディレクトリで、以下のコマンドを実行してデータベースを初期化します。
 
 ```shell
 python manage.py migrate
 ```
 
-### ステップ5: サンプルアプリケーションを実行する {#step-5-run-the-sample-application}
+### ステップ5：サンプルアプリケーションを実行する {#step-5-run-the-sample-application}
 
 1.  アプリケーションを開発モードで実行します。
 
@@ -192,30 +192,30 @@ python manage.py migrate
     python manage.py runserver
     ```
 
-    アプリケーションはデフォルトでポート`8000`で実行されます。別のポートを使用するには、コマンドにポート番号を追加します。例を以下に示します。
+    アプリケーションはデフォルトでポート`8000`で実行されます。別のポートを使用するには、コマンドにポート番号を追加します。以下に例を示します。
 
     ```shell
     python manage.py runserver 8080
     ```
 
-2.  アプリケーションにアクセスするには、ブラウザを開いて`http://localhost:8000/`に移動します。サンプルアプリケーションでは、次の操作を実行できます。
+2.  アプリケーションにアクセスするには、ブラウザを開いて`http://localhost:8000/`にアクセスしてください。サンプルアプリケーションでは、以下の操作が可能です。
 
-    -   新しいプレーヤーを作成します。
-    -   プレーヤーを一括作成します。
-    -   すべてのプレーヤーをビュー。
-    -   プレーヤーを更新します。
-    -   プレーヤーを削除します。
-    -   2 人のプレイヤー間で商品を取引します。
+    -   新しいプレイヤーを作成します。
+    -   プレイヤーを一括作成する。
+    -   全プレイヤーをビュー。
+    -   プレイヤーを更新する。
+    -   プレイヤーを削除する。
+    -   2人のプレイヤー間で商品を取引する。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
-次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
+以下のサンプルコードスニペットを参考に、独自のアプリケーション開発を完成させてください。
 
-完全なサンプル コードとその実行方法については、 [tidb-サンプル/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリを参照してください。
+完全なサンプル コードとその実行方法については、 [tidb-サンプル/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリをチェックしてください。
 
 ### TiDBに接続する {#connect-to-tidb}
 
-ファイル`sample_project/settings.py`に次の設定を追加します。
+ファイル`sample_project/settings.py`に、以下の設定を追加します。
 
 ```python
 DATABASES = {
@@ -240,7 +240,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-`${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、 `${ca_path}`を TiDB クラスターの実際の値に置き換える必要があります。
+`${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、および`${ca_path}` 、TiDBの実際の値に置き換える必要があります。
 
 ### データモデルを定義する {#define-the-data-model}
 
@@ -255,7 +255,7 @@ class Player(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 ```
 
-詳細については[Djangoモデル](https://docs.djangoproject.com/en/dev/topics/db/models/)を参照してください。
+詳細については、 [Djangoモデル](https://docs.djangoproject.com/en/dev/topics/db/models/)を参照してください。
 
 ### データを挿入する {#insert-data}
 
@@ -271,7 +271,7 @@ Player.objects.bulk_create([
 ])
 ```
 
-詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
+詳細については、[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -286,9 +286,9 @@ filtered_players = Player.objects.filter(name="player1")
 all_players = Player.objects.all()
 ```
 
-詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
+詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### データを更新する {#update-data}
+### データの更新 {#update-data}
 
 ```python
 # update a single object
@@ -300,7 +300,7 @@ player.save()
 Player.objects.filter(coins=100).update(coins=200)
 ```
 
-詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
+詳細については、[データの更新](/develop/dev-guide-update-data.md)を参照してください。
 
 ### データを削除する {#delete-data}
 
@@ -313,16 +313,16 @@ player.delete()
 Player.objects.filter(coins=100).delete()
 ```
 
-詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
+詳細については、[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
 ## 次のステップ {#next-steps}
 
--   [Djangoのドキュメント](https://www.djangoproject.com/)から Django の使い方を詳しく学びます。
--   [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   Django の使用法の詳細については[Djangoのドキュメント](https://www.djangoproject.com/)参照してください。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
-## ヘルプが必要ですか? {#need-help}
+## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
--   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+-   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

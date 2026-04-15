@@ -1,48 +1,48 @@
 ---
 title: OpenAI Embeddings
-summary: TiDB Cloudで OpenAI 埋め込みモデルを使用する方法を学びます。
+summary: TiDB CloudでOpenAIの埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-openai/']
 ---
 
-# OpenAI 埋め込み {#openai-embeddings}
+# OpenAI埋め込み {#openai-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で OpenAI 埋め込みモデルを使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudで OpenAI 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用する方法、テキストクエリによる意味検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-ご自身のOpenAI APIキー（BYOK）をお持ちいただく場合、すべてのOpenAIモデルは`openai/`プレフィックスでご利用いただけます。例：
+OpenAI APIキー（BYOK）をお持ちの場合は、 `openai/`というプレフィックスを付けて、すべてのOpenAIモデルをご利用いただけます。例：
 
-**テキスト埋め込み 3 小**
+**テキスト埋め込み3（小）**
 
 -   名前: `openai/text-embedding-3-small`
--   寸法: 512-1536 (デフォルト: 1536)
--   距離計量：コサイン、L2
--   価格: OpenAIによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
+-   寸法：512～1536（デフォルト：1536）
+-   距離指標：コサイン類似度、L2
+-   価格：OpenAIが課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
 
-**テキスト埋め込み 3 大きい**
+**テキスト埋め込み3（大）**
 
 -   名前: `openai/text-embedding-3-large`
--   寸法: 256-3072 (デフォルト: 3072)
--   距離計量：コサイン、L2
--   価格: OpenAIによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
+-   寸法：256～3072（デフォルト：3072）
+-   距離指標：コサイン類似度、L2
+-   価格：OpenAIが課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
 
-利用可能なモデルの完全なリストについては、 [OpenAIドキュメント](https://platform.openai.com/docs/guides/embeddings)参照してください。
+利用可能なモデルの完全なリストについては、 [OpenAIドキュメント](https://platform.openai.com/docs/guides/embeddings)を参照してください。
 
 ## 使用例 {#usage-example}
 
-この例では、OpenAI 埋め込みモデルを使用してベクター テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、OpenAIの埋め込みモデルを使用して、ベクトルテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
-自動埋め込み生成用の AI SDK またはネイティブ SQL関数を使用して、OpenAI Embeddings API を TiDB と統合できます。
+AI SDKまたはネイティブSQL関数を使用して、OpenAI Embeddings APIをTiDBと統合し、埋め込みを自動生成できます。
 
-### ステップ1: データベースに接続する {#step-1-connect-to-the-database}
+### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -74,14 +74,14 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 </div>
 </SimpleTab>
 
-### ステップ2: APIキーを設定する {#step-2-configure-the-api-key}
+### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-[OpenAI APIプラットフォーム](https://platform.openai.com/api-keys)で API キーを作成し、埋め込みサービスを使用するには独自のキー (BYOK) を使用します。
+[OpenAI APIプラットフォーム](https://platform.openai.com/api-keys)で API キーを作成し、独自のキー (BYOK) を使用して埋め込みサービスを使用します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-TiDB クライアントを使用して、OpenAI 埋め込みプロバイダーの API キーを設定します。
+TiDBクライアントを使用して、OpenAI埋め込みプロバイダーのAPIキーを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -93,7 +93,7 @@ tidb_client.configure_embedding_provider(
 </div>
 <div label="SQL" value="sql">
 
-SQL を使用して OpenAI 埋め込みプロバイダーの API キーを設定します。
+SQLを使用してOpenAI埋め込みプロバイダーのAPIキーを設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = "{your-openai-api-key}";
@@ -102,9 +102,9 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = "{your-openai-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3: ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
 
-`openai/text-embedding-3-small`モデルを使用して 1536 次元のベクトルを生成するベクトル フィールドを持つテーブルを作成します。
+`openai/text-embedding-3-small`モデルを使用して 1536 次元ベクトルを生成するベクトルフィールドを持つテーブルを作成します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -142,7 +142,7 @@ CREATE TABLE sample_documents (
 </div>
 </SimpleTab>
 
-### ステップ4: テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
+### ステップ4：テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -178,12 +178,12 @@ VALUES
 </div>
 </SimpleTab>
 
-### ステップ5: 類似文書を検索する {#step-5-search-for-similar-documents}
+### ステップ5：類似文書を検索する {#step-5-search-for-similar-documents}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`table.search()` API を使用してベクトル検索を実行します。
+`table.search()` APIを使用してベクトル検索を実行します。
 
 ```python
 results = table.search("How to start learning Java programming?") \
@@ -219,9 +219,9 @@ LIMIT 2;
 </div>
 </SimpleTab>
 
-## Azure OpenAI を使用する {#use-azure-openai}
+## Azure OpenAIを使用する {#use-azure-openai}
 
-AzureでOpenAI埋め込みモデルを使用するには、グローバル変数`TIDB_EXP_EMBED_OPENAI_API_BASE` AzureリソースのURLに設定します。例：
+Azure で OpenAI 埋め込みモデルを使用するには、グローバル変数`TIDB_EXP_EMBED_OPENAI_API_BASE` Azure リソースの URL に設定します。例:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
@@ -254,9 +254,9 @@ ORDER BY
 LIMIT 2;
 ```
 
-リソース URL が`https://<your-resource-name>.cognitiveservices.azure.com/`と表示される場合でも、OpenAI 互換のリクエストおよびレスポンス形式を維持するには、API ベースとして`https://<your-resource-name>.openai.azure.com/openai/v1`使用する必要があります。
+リソース URL が`https://<your-resource-name>.cognitiveservices.azure.com/`と表示されていても、OpenAI と互換性のあるリクエストおよびレスポンス形式を維持するために、API ベースとして`https://<your-resource-name>.openai.azure.com/openai/v1`を使用する必要があります。
 
-Azure OpenAI から OpenAI に直接切り替えるには、 `TIDB_EXP_EMBED_OPENAI_API_BASE`空の文字列に設定します。
+Azure OpenAI から OpenAI に直接切り替えるには、 `TIDB_EXP_EMBED_OPENAI_API_BASE`を空の文字列に設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
@@ -264,14 +264,14 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 
 > **注記：**
 >
-> -   セキュリティ上の理由から、API ベースは Azure OpenAI URL または OpenAI URL のみに設定できます。任意のベース URL は許可されません。
-> -   OpenAI 互換の別の埋め込みサービスを利用する場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> -   セキュリティ上の理由から、API ベースとして設定できるのは Azure OpenAI の URL または OpenAI の URL のみです。任意のベース URL は許可されていません。
+> -   OpenAI互換の別の埋め込みサービスを利用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## オプション {#options}
 
-[OpenAI埋め込みオプション](https://platform.openai.com/docs/api-reference/embeddings/create)すべて、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+すべての[OpenAIの埋め込みオプション](https://platform.openai.com/docs/api-reference/embeddings/create)は`additional_json_options`関数の`EMBED_TEXT()`パラメータを通じてサポートされます。
 
-**例: text-embedding-3-large に代替ディメンションを使用する**
+**例：text-embedding-3-large に別の次元を使用する**
 
 ```sql
 CREATE TABLE sample (
@@ -285,9 +285,9 @@ CREATE TABLE sample (
 );
 ```
 
-利用可能なすべてのオプションについては、 [OpenAIドキュメント](https://platform.openai.com/docs/api-reference/embeddings/create)参照してください。
+利用可能なすべてのオプションについては、 [OpenAIドキュメント](https://platform.openai.com/docs/api-reference/embeddings/create)を参照してください。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

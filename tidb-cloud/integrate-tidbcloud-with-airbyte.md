@@ -1,32 +1,32 @@
 ---
 title: Integrate TiDB Cloud with Airbyte
-summary: Airbyte TiDB コネクタの使用方法を学びます。
+summary: Airbyte TiDBコネクタの使い方を学びましょう。
 ---
 
 # TiDB CloudとAirbyteを統合する {#integrate-tidb-cloud-with-airbyte}
 
-Airbyte [エアバイト](https://airbyte.com/) 、抽出、ロード、変換（ELT）パイプラインを構築し、データウェアハウス、データレイク、データベース内のデータを統合するためのオープンソースのデータ統合エンジンです。このドキュメントでは、AirbyteをTiDB Cloudにソースまたはデスティネーションとして接続する方法について説明します。
+[エアバイト](https://airbyte.com/)データウェアハウス、データレイク、データベース内のデータを統合し、抽出、ロード、変換（ELT）パイプラインを構築するためのオープンソースのデータ統合エンジンです。このドキュメントでは、エアバイトをソースまたは宛先としてTiDB Cloudに接続する方法について説明します。
 
 ## Airbyteをデプロイ {#deploy-airbyte}
 
-わずか数ステップで Airbyte をローカルに展開できます。
+Airbyteは、わずか数ステップでローカル環境にデプロイできます。
 
-1.  ワークスペースに[ドッカー](https://www.docker.com/products/docker-desktop)インストールします。
+1.  ワークスペースに[ドッカー](https://www.docker.com/products/docker-desktop)をインストールします。
 
-2.  Airbyte ソース コードを複製します。
+2.  Airbyteのソースコードをクローンする。
 
     ```shell
     git clone https://github.com/airbytehq/airbyte.git && \
     cd airbyte
     ```
 
-3.  docker-compose で Docker イメージを実行します。
+3.  docker-composeを使用してDockerイメージを実行します。
 
     ```shell
     docker-compose up
     ```
 
-Airbyteのバナーが表示されたら、ユーザー名( `airbyte` )とパスワード( `password` )を使用して[http://localhost:8000](http://localhost:8000)に進み、UIにアクセスできます。
+Airbyteのバナーが表示されたら、ユーザー名（ `airbyte` ）とパスワード（`password`）を使用して[http://localhost:8000](http://localhost:8000) `password`アクセスし、UIにアクセスできます。
 
     airbyte-server      |     ___    _      __          __
     airbyte-server      |    /   |  (_)____/ /_  __  __/ /____
@@ -40,77 +40,77 @@ Airbyteのバナーが表示されたら、ユーザー名( `airbyte` )とパス
 
 ## TiDBコネクタを設定する {#set-up-the-tidb-connector}
 
-便利なことに、TiDB をソースと宛先として設定する手順は同じです。
+便利なことに、TiDBをソースと宛先に設定する手順は同じです。
 
-1.  サイドバーの**「ソース」**または**「宛先」**をクリックし、TiDB タイプを選択して新しい TiDB コネクタを作成します。
+1.  サイドバーの**「ソース」**または**「宛先」**をクリックし、TiDBタイプを選択して新しいTiDBコネクタを作成します。
 
-2.  次のパラメータを入力してください。
+2.  以下のパラメータを入力してください。
 
-    -   ホスト: TiDB Cloudクラスターのエンドポイント
-    -   ポート: データベースのポート
-    -   データベース: データを同期するデータベース
-    -   ユーザー名: データベースにアクセスするためのユーザー名
-    -   パスワード: ユーザー名のパスワード
+    -   ホスト: <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent>のエンドポイント<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>
+    -   ポート: データベースのポート番号
+    -   データベース：データを同期したいデータベース
+    -   ユーザー名：データベースにアクセスするためのユーザー名
+    -   パスワード：ユーザー名のパスワード
 
-    パラメータ値は、クラスターの接続ダイアログから取得できます。ダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。
+    TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
-3.  **SSL 接続**を有効にし、 **JDBC URL パラメータ**で TLS プロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
+3.  **SSL接続**を有効にし、 **JDBC URLパラメータ**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 
     > **注記：**
     >
-    > -   TiDB CloudはTLS接続をサポートしています。TLSv1.2**と****TLSv1.3** （例： `enabledTLSProtocols=TLSv1.2` ）の中から、ご希望のTLSプロトコルを選択できます。
-    > -   JDBC 経由でTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります (例: `useSSL=false` )。
-    > -   TiDB Cloud Starter とTiDB Cloud Essential は TLS 接続のみをサポートします。
+    > -   TiDB Cloud はTLS 接続をサポートしています。TLSv1.2 および**TLSv1.3**から TLS プロトコルを選択できます。たとえば、 `enabledTLSProtocols=TLSv1.2` **。**
+    > -   JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
+    > -   TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
-4.  「ソースまたは**宛先の****設定」**をクリックしてコネクタの作成を完了します。次のスクリーンショットは、ソースとしてTiDBを設定した場合の設定を示しています。
+4.  コネクタの作成を完了するには、「ソースまたは**宛先の****設定」**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
-TiDB から Snowflake、CSV ファイルから TiDB など、ソースと宛先の任意の組み合わせを使用できます。
+TiDBからSnowflakeへの転送や、CSVファイルからTiDBへの転送など、ソースと宛先を自由に組み合わせて使用​​できます。
 
-TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyte.com/integrations/sources/tidb)および[TiDB 宛先](https://docs.airbyte.com/integrations/destinations/tidb)参照してください。
+TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyte.com/integrations/sources/tidb)と[TiDB宛先](https://docs.airbyte.com/integrations/destinations/tidb)参照してください。
 
 ## 接続を設定する {#set-up-the-connection}
 
-ソースと宛先を設定したら、接続を構築して構成できます。
+送信元と送信先を設定したら、接続を構築して構成できます。
 
-以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタではパラメータが異なる場合があります。
+以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタでは、パラメータが異なる場合があります。
 
-1.  サイドバーの**「接続」**をクリックし、 **「新しい接続」**をクリックします。
+1.  サイドバーの**「接続」**をクリックし、次に**「新しい接続」**をクリックします。
 
-2.  以前に設定したソースと宛先を選択します。
+2.  事前に設定した送信元と送信先を選択してください。
 
-3.  [接続**の設定]**パネルに移動して、接続の名前 (例: `${source_name} - ${destination-name}` ) を作成します。
+3.  接続**設定**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
 
-4.  **レプリケーション頻度を****24 時間ごと**に設定します。これは、接続が 1 日に 1 回データを複製することを意味します。
+4.  **レプリケーション頻度を****「24時間ごと**」に設定すると、接続は1日に1回データを複製します。
 
 5.  **宛先名前空間を****カスタム形式**に設定し、**名前空間カスタム形式**を**テスト**に設定して、すべてのデータを`test`データベースに保存します。
 
-6.  **同期モード**を**「完全更新 | 上書き」**に選択します。
+6.  **同期モード**を**「完全更新」または「上書き」**に選択してください。
 
     > **ヒント：**
     >
-    > TiDB コネクタは[増分同期と完全更新同期](https://airbyte.com/blog/understanding-data-replication-modes)両方をサポートします。
+    > TiDB コネクタは[増分更新と完全更新の同期](https://airbyte.com/blog/understanding-data-replication-modes)をサポートします。
     >
-    > -   増分モードでは、Airbyteは前回の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。増分モードでの最初の同期は、完全更新モードと同等です。
-    > -   フルリフレッシュモードでは、Airbyteは同期タスクごとにソース内のすべてのレコードを読み取り、同期先に複製します。同期モードは、Airbyte内の**Namespace**という名前のテーブルごとに個別に設定できます。
+    > -   インクリメンタルモードでは、Airbyteは前回の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。インクリメンタルモードを使用した最初の同期は、フルリフレッシュモードと同等です。
+    > -   フルリフレッシュモードでは、Airbyteはソース内のすべてのレコードを読み取り、同期タスクごとに宛先に複製します。Airbyteの**「名前空間」**という名前のテーブルごとに、同期モードを個別に設定できます。
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7.  デフォルトの正規化モードを使用するには、 **「正規化と変換」**を**「正規化された表形式データ」**に設定するか、ジョブのdbtファイルを設定すると便利です。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
+7.  デフォルトの正規化モードを使用するには、 **「正規化と変換」**を「正規化**された表形式データ」**に設定してください。または、ジョブに使用するdbtファイルを設定することもできます。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
 
-8.  **[接続の設定]を**クリックします。
+8.  **「接続設定」**をクリックしてください。
 
-9.  接続が確立されたら、 **「有効」**をクリックして同期タスクを有効にします。 **「今すぐ同期」**をクリックしてすぐに同期することもできます。
+9.  接続が確立されたら、 **「有効」**をクリックして同期タスクをアクティブ化します。また、 **「今すぐ同期」**をクリックすると、すぐに同期を開始できます。
 
 ![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 
 ## 制限事項 {#limitations}
 
--   TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソルメカニズムに基づいて実行されます。
--   TiDBの宛先は、デフォルトの正規化モードでは`timestamp`型を`varchar`型に変換します。これは、Airbyteが送信時にタイムスタンプ型を文字列に変換するのに対し、TiDBが`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないために発生します。
--   一部の大規模な ELT ミッションでは、TiDB のパラメータを[取引制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)増やす必要があります。
+-   TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソル機構に基づいて実行されます。
+-   TiDB の宛先では、デフォルトの正規化モードで`timestamp`型が`varchar`型に変換されます。これは、Airbyte が送信中にタイムスタンプ型を文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないためです。
+-   一部の大規模な ELT ミッションでは、TiDB の[取引制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
-[Airbyte を使用してTiDB Cloudから Snowflake にデータを移行する](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/) 。
+[Airbyteを使用してTiDB CloudからSnowflakeへデータを移行する](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/)。

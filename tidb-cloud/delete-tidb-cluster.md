@@ -1,45 +1,49 @@
 ---
-title: Delete a TiDB Cluster
-summary: TiDB クラスターを削除する方法を学習します。
+title: Delete a TiDB Cloud Resource
+summary: TiDB Cloudリソースを削除する方法を学びましょう。
 ---
 
-# TiDBクラスタを削除する {#delete-a-tidb-cluster}
+# TiDB Cloudリソースを削除します {#delete-a-tidb-cloud-resource}
 
-このドキュメントでは、TiDB Cloud上の TiDB クラスターを削除する方法について説明します。
+このドキュメントでは、以下のTiDB Cloudリソースを削除する方法について説明します。
 
-次の手順を実行することにより、いつでもクラスターを削除できます。
+-   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンス
+-   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス
+-   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+以下の手順を実行することで、いつでもTiDB Cloudリソースを削除できます。
 
-2.  削除するターゲット クラスターの行で、 **...**をクリックします。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+
+2.  削除する対象リソースの行で、 **...**をクリックします。
 
     > **ヒント：**
     >
-    > または、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**...**をクリックすることもできます。
+    > または、対象のリソース名をクリックして概要ページに移動し、右上隅の**「…」**をクリックすることもできます。
 
-3.  ドロップダウンメニューで**「削除」**をクリックします。
+3.  ドロップダウンメニューの**「削除」**をクリックしてください。
 
-4.  クラスター削除ウィンドウで、削除を確認します。
+4.  削除確認ウィンドウで、削除を確定してください。
 
-    -   手動または自動バックアップが少なくとも1つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **「続行」**をクリックし、 `<organization name>/<project name>/<cluster name>`入力してください。
-    -   バックアップがない場合は、 `<organization name>/<project name>/<cluster name>`入力してください。
+    -   手動または自動バックアップが少なくとも 1 つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **[続行]**をクリックして`<organization name>/<project name>/<resource name>`と入力します。
+    -   バックアップがない場合は、 `<organization name>/<project name>/<resource name>`と入力してください。
 
-    将来クラスタを復元する場合は、クラスタのバックアップを必ず作成してください。バックアップがないと、復元できなくなります。TiDB TiDB Cloud Dedicatedクラスタのバックアップ方法の詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+    削除されたTiDB Cloud Dedicatedクラスターを将来復元したい場合は、そのバックアップがあることを確認してください。そうしないと、もう復元できません。 TiDB Cloud Dedicatedクラスターをバックアップする方法の詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
     > **注記：**
     >
-    > [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターは、削除後のデータの復元をサポートしていません。TiDB TiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除し、後でデータを復元する場合は、 [TiDB Cloud StarterまたはEssentialからデータをエクスポートする](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
+    > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)と[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスは、削除後のデータの復元をサポートしていません。 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを削除し、将来そのデータを復元したい場合は、 [TiDB Cloud StarterまたはEssentialからデータをエクスポートする](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートします。
 
-5.  **「理解しましたので削除します」**をクリックします。
+5.  **「了解しました、削除します」**をクリックしてください。
 
-    バックアップされたTiDB Cloud Dedicated クラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。
+    バックアップ済みのTiDB Cloud Dedicatedクラスターが削除されると、クラスターの既存のバックアップファイルはごみ箱に移動されます。
 
-    -   自動バックアップは、最新のものを除き、保持期間が終了すると期限切れとなり、自動的に削除されます。デフォルトの保持期間は、変更しない場合は7日間です。最新の自動バックアップは、明示的に削除しない限り削除されません。
+    -   自動バックアップは、最新のものを除き、保持期間が終了すると期限切れとなり自動的に削除されます。保持期間は、変更しない場合はデフォルトで7日間です。最新の自動バックアップは、明示的に削除しない限り削除されません。
 
-    -   手動バックアップは、手動で削除されるまでごみ箱に保存されます。
+    -   手動で作成したバックアップファイルは、手動で削除されるまでごみ箱に保存されます。
 
     > **注記：**
     >
     > バックアップは削除されるまで料金が発生し続けることにご注意ください。
 
-    TiDB Cloud Dedicated クラスターをごみ箱から復元する場合は、 [削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)参照してください。
+    TiDB Cloud Dedicatedクラスターをごみ箱から復元する場合は、 [削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)参照してください。

@@ -1,26 +1,26 @@
 ---
 title: Database Audit Logging (Beta) for TiDB Cloud Essential
-summary: TiDB CloudでTiDB Cloud Essential クラスターを監査する方法について説明します。
+summary: TiDB CloudでTiDB Cloud Essentialインスタンスを監査する方法について学びましょう。
 aliases: ['/ja/tidbcloud/serverless-audit-logging']
 ---
 
-# TiDB Cloud Essential のデータベース監査ログ (ベータ版) {#database-audit-logging-beta-for-tidb-cloud-essential}
+# TiDB Cloud Essentialのデータベース監査ログ機能 (ベータ版) {#database-audit-logging-beta-for-tidb-cloud-essential}
 
-TiDB Cloud Essential は、実行された SQL ステートメントなど、データベースのユーザー アクセス アクティビティを記録する監査ログ機能を提供します。
+TiDB Cloud Essentialは、実行されたSQLステートメントなど、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
 > **注記：**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**欄に「 TiDB Cloud Essential データベース監査ログの申請」と入力して、 **「送信」を**クリックしてください。
+> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？」**をクリックし、 次に**「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **「送信」を**クリックします。
 
-組織のユーザー アクセス ポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティのベスト プラクティスです。
+組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
-監査ログ機能は**デフォルトで無効になっています**。TiDB クラスターを監査するには、監査ログを有効にする必要があります。
+監査ログ機能は**デフォルトでは無効になっています**。TiDB TiDB Cloud Essentialインスタンスの監査を行うには、監査ログを有効にする必要があります。
 
-## 監査ログの構成 {#audit-logging-configurations}
+## 監査ログの設定 {#audit-logging-configurations}
 
 ### データ編集 {#data-redaction}
 
-TiDB Cloud Essentialはデフォルトで監査ログ内の機密データを削除します。次のSQL文を例に挙げましょう。
+TiDB Cloud Essentialは、デフォルトでは監査ログ内の機密データをマスキングします。以下のSQL文を例に挙げます。
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -34,165 +34,165 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### ログファイルのローテーション {#log-file-rotation}
 
-TiDB Cloud Essential は、次のいずれかの条件が満たされると、新しい監査ログ ファイルを生成します。
+TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合に新しい監査ログファイルを生成します。
 
--   現在のログ ファイルがローテーション サイズ (デフォルトでは 100 MiB) に達しました。
--   前回のログ生成からローテーション間隔（デフォルトでは1時間）が経過しました。内部のスケジュール設定によっては、ログ生成が数分遅れる場合があります。
+-   現在のログファイルがローテーションサイズ（デフォルトでは100MiB）に達しました。
+-   前回のログ生成から、ローテーション間隔（デフォルトでは1時間）が経過しました。内部スケジューリングメカニズムによっては、ログ生成が数分遅れる場合があります。
 
 ## 監査ログの場所 {#audit-logging-locations}
 
-監査ログは次の場所に保存できます。
+監査ログは以下の場所に保存できます。
 
 -   TiDB Cloud
--   [アマゾンS3](https://aws.amazon.com/s3/)
--   [Googleクラウドストレージ](https://cloud.google.com/storage)
--   [Azure BLOB ストレージ](https://azure.microsoft.com/en-us/services/storage/blobs/)
--   [Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/product/oss)
+-   [Amazon S3](https://aws.amazon.com/s3/)
+-   [Google Cloud Storage](https://cloud.google.com/storage)
+-   [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+-   [Alibaba Cloudオブジェクトストレージサービス（OSS）](https://www.alibabacloud.com/product/oss)
 
 ### TiDB Cloud {#tidb-cloud}
 
-監査ログはTiDB Cloudに保存し、ローカルマシンにダウンロードできます。監査ログは365日後に有効期限が切れ、削除されます。保存期間の延長をご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
+TiDB Cloudに監査ログを保存し、ローカルマシンにダウンロードできます。監査ログは365日後に期限切れとなり、削除されます。保存期間の延長をご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
 
-### アマゾンS3 {#amazon-s3}
+### Amazon S3 {#amazon-s3}
 
-監査ログを Amazon S3 に保存するには、次の情報を提供する必要があります。
+監査ログをAmazon S3に保存するには、以下の情報を提供する必要があります。
 
 -   URI: `s3://<bucket-name>/<folder-path>/`
--   アクセス資格情報: 次のいずれかを選択します。
-    -   `s3:PutObject`許可を持つ[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) 。
-    -   権限`s3:PutObject`を持つ[役割ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)でホストされているクラスターのみがロールARNの使用をサポートします。
+-   アクセス認証情報：以下のいずれかを選択してください。
+    -   `s3:PutObject`権限を持つ[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)。
+    -   `s3:PutObject`権限を持つ[ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) 。ロールARNの使用は、AWSでホストされているクラスターのみでサポートされています。
 
-詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)参照してください。
+詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)参照してください。
 
-### Googleクラウドストレージ {#google-cloud-storage}
+### Google Cloud Storage {#google-cloud-storage}
 
-監査ログを Google Cloud Storage に保存するには、次の情報を提供する必要があります。
+監査ログをGoogle Cloud Storageに保存するには、以下の情報を提供する必要があります。
 
 -   URI: `gs://<bucket-name>/<folder-path>/`
--   アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つ[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) 。
+-   アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つサービス[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
 
-詳細については[GCS アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)参照してください。
+詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)参照してください。
 
-### Azure BLOB ストレージ {#azure-blob-storage}
+### Azure Blob Storage {#azure-blob-storage}
 
-監査ログを Azure Blob Storage に保存するには、次の情報を提供する必要があります。
+Azure Blob Storage に監査ログを保存するには、以下の情報を提供する必要があります。
 
 -   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
--   アクセス資格情報: `Container`および`Object`リソースに対する`Read`および`Write`権限を持つ[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) 。
+-   [共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)資格情報: `Read`および`Write`および { `Container` `Object`権限を持つ共有アクセス宣言（SAS） ブラウザ。
 
-詳細については[Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)参照してください。
+詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)参照してください。
 
 ### アリババクラウドOSS {#alibaba-cloud-oss}
 
-Alibaba Cloud OSS に監査ログを保存するには、次の情報を提供する必要があります。
+Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供する必要があります。
 
 -   URI: `oss://<bucket-name>/<folder-path>/`
--   アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) 。
+-   アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)キーペア。
 
-詳細については[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
+詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
 
 ## 監査ログフィルタルール {#audit-logging-filter-rules}
 
-監査ログをフィルタリングするには、ログに記録するイベントを指定するフィルタ ルールを作成する必要があります。
+監査ログをフィルタリングするには、ログに記録するイベントを指定するフィルタルールを作成する必要があります。
 
-フィルター ルールには次のフィールドが含まれます。
+フィルタルールには以下のフィールドが含まれます。
 
--   `users` : 監査イベントをフィルタリングするユーザー名のリスト。ワイルドカード`%`を使用すると、任意のユーザー名に一致します。
--   `filters` : フィルターオブジェクトのリスト。各フィルターオブジェクトには以下のフィールドが含まれます。
+-   `users` : 監査イベントをフィルタリングするためのユーザー名のリスト。ワイルドカード`%`を使用すると、任意のユーザー名に一致させることができます。
+-   `filters` : フィルタオブジェクトのリスト。各フィルタオブジェクトには、次のフィールドが含まれます。
 
-    -   `classes` : 監査イベントをフィルタリングするイベントクラスのリスト。例： `["QUERY", "EXECUTE"]` 。
-    -   `tables` : テーブルフィルターのリスト。詳細については、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter/)参照してください。
-    -   `statusCodes` : 監査イベントをフィルター処理するためのステータス コードのリスト。2 `1`成功、 `0`失敗を意味します。
+    -   `classes` : 監査イベントをフィルタリングするためのイベントクラスのリスト。例: `["QUERY", "EXECUTE"]` 。
+    -   `tables` : テーブル フィルターのリスト。詳細については、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter/)参照してください。
+    -   `statusCodes` : 監査イベントをフィルタリングするためのステータスコードのリスト。 `1`は成功、 `0`は失敗を意味します。
 
-次の表は、データベース監査ログのすべてのイベント クラスを示しています。
+以下の表は、データベース監査ログにおけるすべてのイベントクラスを示しています。
 
-| イベントクラス             | 説明                                                             | 親クラス         |
-| ------------------- | -------------------------------------------------------------- | ------------ |
-| `CONNECTION`        | ハンドシェイク、接続、切断、接続のリセット、ユーザーの変更など、接続に関連するすべての操作を記録します。           | <li></li>    |
-| `CONNECT`           | 接続時のハンドシェイクのすべての操作を記録する                                        | `CONNECTION` |
-| `DISCONNECT`        | 切断のすべての操作を記録する                                                 | `CONNECTION` |
-| `CHANGE_USER`       | ユーザーの変更に関するすべての操作を記録します                                        | `CONNECTION` |
-| `QUERY`             | データのクエリと変更に関するすべてのエラーを含む、SQL ステートメントのすべての操作を記録します。             | <li></li>    |
-| `TRANSACTION`       | `BEGIN`などのトランザクションに関連するすべての操作を記録し`ROLLBACK` `COMMIT`           | `QUERY`      |
-| `EXECUTE`           | `EXECUTE`ステートメントのすべての操作を記録します                                  | `QUERY`      |
-| `QUERY_DML`         | `INSERT` `UPDATE`含むDML文`DELETE`すべての操作を記録し`LOAD DATA` `REPLACE` | `QUERY`      |
-| `INSERT`            | `INSERT`ステートメントのすべての操作を記録します                                   | `QUERY_DML`  |
-| `REPLACE`           | `REPLACE`ステートメントのすべての操作を記録します                                  | `QUERY_DML`  |
-| `UPDATE`            | `UPDATE`ステートメントのすべての操作を記録します                                   | `QUERY_DML`  |
-| `DELETE`            | `DELETE`ステートメントのすべての操作を記録します                                   | `QUERY_DML`  |
-| `LOAD DATA`         | `LOAD DATA`ステートメントのすべての操作を記録します                                | `QUERY_DML`  |
-| `SELECT`            | `SELECT`ステートメントのすべての操作を記録します                                   | `QUERY`      |
-| `QUERY_DDL`         | DDL文のすべての操作を記録する                                               | `QUERY`      |
-| `AUDIT`             | システム変数の設定やシステム関数の呼び出しなど、TiDB データベース監査の設定に関連するすべての操作を記録します。     | <li></li>    |
-| `AUDIT_FUNC_CALL`   | TiDB Cloudデータベース監査に関連するシステム関数の呼び出し操作をすべて記録します。                 | `AUDIT`      |
-| `AUDIT_SET_SYS_VAR` | システム変数の設定操作をすべて記録します                                           | `AUDIT`      |
+| イベントクラス             | 説明                                                           | 親クラス         |
+| ------------------- | ------------------------------------------------------------ | ------------ |
+| `CONNECTION`        | ハンドシェイク、接続、切断、接続リセット、ユーザー変更など、接続に関連するすべての操作を記録します。           | -            |
+| `CONNECT`           | 接続におけるハンドシェイクのすべての操作を記録します                                   | `CONNECTION` |
+| `DISCONNECT`        | 切断操作の全記録                                                     | `CONNECTION` |
+| `CHANGE_USER`       | 変更されたユーザーのすべての操作を記録します                                       | `CONNECTION` |
+| `QUERY`             | SQLステートメントのすべての操作を記録します。これには、データのクエリと変更に関するすべてのエラーが含まれます。    | -            |
+| `TRANSACTION`       | `BEGIN` 、 `COMMIT` 、 `ROLLBACK`などのトランザクションに関連するすべての操作を記録します。 | `QUERY`      |
+| `EXECUTE`           | `EXECUTE`ステートメントのすべての操作を記録します。                               | `QUERY`      |
+| `QUERY_DML`         | `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE` `LOAD DATA`     | `QUERY`      |
+| `INSERT`            | `INSERT`ステートメントのすべての操作を記録します。                                | `QUERY_DML`  |
+| `REPLACE`           | `REPLACE`ステートメントのすべての操作を記録します。                               | `QUERY_DML`  |
+| `UPDATE`            | `UPDATE`ステートメントのすべての操作を記録します。                                | `QUERY_DML`  |
+| `DELETE`            | `DELETE`ステートメントのすべての操作を記録します。                                | `QUERY_DML`  |
+| `LOAD DATA`         | `LOAD DATA`ステートメントのすべての操作を記録します。                             | `QUERY_DML`  |
+| `SELECT`            | `SELECT`ステートメントのすべての操作を記録します。                                | `QUERY`      |
+| `QUERY_DDL`         | DDLステートメントのすべての操作を記録します                                      | `QUERY`      |
+| `AUDIT`             | TiDBデータベース監査の設定に関連するすべての操作（システム変数の設定やシステム関数の呼び出しなど）を記録します。   | -            |
+| `AUDIT_FUNC_CALL`   | TiDB Cloudデータベース監査に関連する呼び出しシステム関数のすべての操作を記録します。              | `AUDIT`      |
+| `AUDIT_SET_SYS_VAR` | システム変数の設定操作をすべて記録します                                         | `AUDIT`      |
 
 > **注記：**
 >
-> `AUDIT`イベント クラスとそのサブクラスは常に監査ログに記録され、フィルター処理することはできません。
+> `AUDIT`イベント クラスとそのサブクラスは常に監査ログに記録され、フィルタリングすることはできません。
 
-## 監査ログを構成する {#configure-audit-logging}
+## 監査ログの設定 {#configure-audit-logging}
 
-監査ログを有効化、編集、無効化できます。
+監査ログの有効化、編集、無効化が可能です。
 
 ### 監査ログを有効にする {#enable-audit-logging}
 
-TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、 TiDB Cloud Essential クラスターの監査ログを有効にできます。
+TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Essentialインスタンスの監査ログを有効にすることができます。
 
 > **注記：**
 >
-> 監査ログを有効にするだけでは監査ログは生成されません。ログに記録するイベントを指定するには、フィルターも設定する必要があります。詳細については、 [監査ログフィルタルールを管理する](#manage-audit-logging-filter-rules)参照してください。
+> 監査ログを有効にするだけでは監査ログは生成されません。また、ログに記録するイベントを指定するフィルターを構成する必要があります。詳細については、[監査ログフィルタルールの管理](#manage-audit-logging-filter-rules)参照してください。
 
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、 **[有効化]**をクリックします。
+3.  **DB監査ログの**ページで、 **[有効にする]**をクリックします。
 
-4.  監査ログのstorage場所を選択し、必要な情報を入力してください。 **「接続テスト」をクリックし、「次へ」**または**「次へ」を**クリックします。利用可能なstorage場所の詳細については、 [監査ログの場所](#audit-logging-locations)参照してください。
+4.  監査ログのstorage場所を選択し、必要な情報を入力します。次に、 **「接続をテスト」をクリックし、「次へ」**または**「次へ」を**クリックします。利用可能なstorage場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
 
-5.  **[データベース監査ログ設定]**ダイアログで、ログ ファイルのローテーションとログ編集の設定を入力し、 **[保存]**をクリックします。
+5.  **データベース監査ログ設定**ダイアログで、ログファイルのローテーションとログのマスキング設定を入力し、 **[保存]**をクリックします。
 
 </div>
 
 <div label="CLI">
 
-Amazon S3storageを例に挙げましょう。監査ログを有効にし、Amazon S3に監査ログを保存するには、次のコマンドを実行します。
+Amazon S3storageを例にとってみましょう。監査ログを有効にして監査ログをAmazon S3に保存するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
 ```
 
-`--rotation-size-mib` 、 `--rotation-interval-minutes` 、 `--unredacted`パラメータはオプションです。指定しない場合は、デフォルト値が使用されます。
+`--rotation-size-mib` 、 `--rotation-interval-minutes` 、および`--unredacted`パラメータはオプションです。これらを指定しない場合、デフォルト値が使用されます。
 
 </div>
 </SimpleTab>
 
 ### 監査ログの編集 {#edit-audit-logging}
 
-TiDB Cloud Essential クラスターの監査ログは、有効化した後に編集できます。
+TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集できます。
 
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、 **[設定]**をクリックします。
+3.  **DB監査ログの**ページで、 **[設定]**をクリックします。
 
-4.  **[データベース監査ログ設定]**ダイアログで、ログ ファイルのローテーションまたはログ編集設定を更新し、 **[保存]**をクリックします。
+4.  **データベース監査ログ設定**ダイアログで、ログファイルのローテーションまたはログのマスキング設定を更新し、 **[保存]**をクリックします。
 
 </div>
 
@@ -209,22 +209,22 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### 監査ログを無効にする {#disable-audit-logging}
 
-TiDB Cloud Essential クラスターの監査ログを無効にすることができます。
+TiDB Cloud Essentialインスタンスの監査ログを無効にすることができます。
 
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、右上隅の**[...]**をクリックし、 **[無効]**をクリックします。
+3.  **DB監査ログの**ページで、右上隅の**...**をクリックし、次に**無効に**します。
 
-4.  **DB 監査ログの無効化**ダイアログで、 **「無効化」**をクリックします。
+4.  **「DB監査ログを無効にする」**ダイアログで、 **「無効にする」**をクリックします。
 
 </div>
 
@@ -239,34 +239,34 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 </div>
 </SimpleTab>
 
-## 監査ログフィルタルールを管理する {#manage-audit-logging-filter-rules}
+## 監査ログフィルタルールの管理 {#manage-audit-logging-filter-rules}
 
-監査ログ フィルタ ルールを作成、編集、無効化、および削除できます。
+監査ログフィルタルールを作成、編集、無効化、削除できます。
 
-### フィルタールールを作成する {#create-a-filter-rule}
+### フィルタルールを作成する {#create-a-filter-rule}
 
-フィルタールールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定して、ニーズに合わせてログをカスタマイズできます。
+フィルタルールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定することで、ログ記録をニーズに合わせてカスタマイズできます。
 
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、**フィルター ルールの追加を**クリックします。
+3.  **DB監査ログの**ページで、 **[フィルタルールの追加]**をクリックします。
 
-4.  **「フィルタルールの追加」**ダイアログで、 **「フィルタ名」** 、 **「SQLユーザー」** 、 **「フィルタルール**」の各フィールドに入力し、 **「確認」**をクリックします。これらのフィールドの詳細については、 [監査ログフィルタルール](#audit-logging-filter-rules)参照してください。
+4.  **[フィルター ルールの追加]**ダイアログで、 **[フィルター名]** 、 **[SQL ユーザー]** 、および**[フィルター ルール]**フィールドに入力し、 **[確認]**をクリックします。これらのフィールドの詳細については、[監査ログフィルタルール](#audit-logging-filter-rules)を参照してください。
 
 </div>
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用してフィルター ルールを作成するには、次のコマンドを実行します。
+TiDB Cloud CLI を使用してフィルタルールを作成するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
@@ -280,23 +280,23 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、編集するフィルター ルールを見つけて、その行の**[...** ] をクリックし、 **[編集]**をクリックします。
+3.  **DB監査ログ**ページで、編集するフィルタルールを見つけ、その行の**...**をクリックしてから、 **[編集]**をクリックします。
 
-4.  **[フィルター ルールの編集]**ダイアログで、 **[フィルター名]**または**[フィルター ルール]**フィールドを更新し、 **[確認]**をクリックします。
+4.  **「フィルタールールの編集」**ダイアログで、 **「フィルター名」**または**「フィルタールール」**フィールドを更新し、 **「確認」**をクリックします。
 
 </div>
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用してフィルター ルールを編集するには、次のコマンドを実行します。
+TiDB Cloud CLI を使用してフィルタルールを編集するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -310,21 +310,21 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、無効にするフィルター ルールを見つけて、トグルをオフにしてフィルター ルールを無効にします。
+3.  **DB監査ログの**ページで、無効にしたいフィルタルールを見つけ、トグルをオフにしてフィルタルールを無効にします。
 
 </div>
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用してフィルター ルールを無効にするには、次のコマンドを実行します。
+TiDB Cloud CLI を使用してフィルタルールを無効にするには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled=false
@@ -333,22 +333,22 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 </div>
 </SimpleTab>
 
-### フィルタールールを削除する {#delete-a-filter-rule}
+### フィルタルールを削除する {#delete-a-filter-rule}
 
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページで、削除するフィルター ルールを見つけて、 **...**をクリックします。
+3.  **DB監査ログ**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
 
-4.  **「削除」**をクリックし、 **「理解しました」をクリックします。削除を**確定してください。
+4.  **「削除」**をクリックし、次に**「了解しました。削除して確定します」を**クリックしてください。
 
 </div>
 
@@ -361,110 +361,110 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 </div>
 </SimpleTab>
 
-## TiDB Cloudストレージによるアクセス監査ログ {#access-audit-logging-with-tidb-cloud-storage}
+## TiDB Cloud Storage を使用した監査ログへのアクセス {#access-audit-logging-with-tidb-cloud-storage}
 
-TiDB Cloudに監査ログを保存すると、 TiDB Cloud Essential はそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、TiDB CloudコンソールまたはTiDB Cloud CLI を使用して表示およびダウンロードできます。
+TiDB Cloudに監査ログを保存すると、 TiDB Cloud Essentialはそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、 TiDB CloudコンソールまたはTiDB Cloud CLIを使用して表示およびダウンロードできます。
 
 > **注記：**
 >
-> -   TiDB Cloud Essential は、監査ログが必ずしも順番に保存されることを保証しません。ログファイル`YYYY-MM-DD-<index>.log`には、以前の日付のエントリが含まれている可能性があります。
-> -   特定の日付（例えば2025年1月1日）のすべてのログを取得するには、 `--start-date 2025-01-01`と`--end-date 2025-01-02`を設定します。場合によっては、すべてのログファイルをダウンロードし、 `TIME`フィールドで並べ替える必要があるかもしれません。
+> -   TiDB Cloud Essentialは、監査ログが時系列順に保存されることを保証しません。 `YYYY-MM-DD-<index>.log`という名前のログファイルには、それ以前の日付のエントリが含まれている可能性があります。
+> -   特定の日付（例：2025年1月1日）のすべてのログを取得するには、 `--start-date 2025-01-01`と`--end-date 2025-01-02` 。場合によっては、すべてのログファイルをダウンロードし、 `TIME`フィールドでソートする必要があるかもしれません。
 
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
+2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
-3.  **DB 監査ログ**ページでは、 **TiDB Cloud Storage**の監査ログのリストを表示できます。
+3.  **DB監査ログ**ページでは、 **TiDB Cloud Storageの**下にある監査ログの一覧を表示できます。
 
-4.  監査ログをダウンロードするには、リストから 1 つ以上のログを選択し、 **[ダウンロード]**をクリックします。
+4.  監査ログをダウンロードするには、リストから1つ以上のログを選択し、 **「ダウンロード」**をクリックします。
 
 </div>
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用して監査ログをダウンロードするには、次のコマンドを実行します。
+TiDB Cloud CLIを使用して監査ログをダウンロードするには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
--   `start-date` : ダウンロードする監査ログの開始日。形式は`YYYY-MM-DD`です (例: `2025-01-01` )。
--   `end-date` : ダウンロードする監査ログの終了日。形式は`YYYY-MM-DD`です (例: `2025-01-01` )。
+-   `start-date` : ダウンロードする監査ログの開始日。形式は`YYYY-MM-DD`です。例: `2025-01-01` 。
+-   `end-date` : ダウンロードする監査ログの終了日。形式は`YYYY-MM-DD`です。例: `2025-01-01` 。
 
 </div>
 </SimpleTab>
 
 ## 監査ログフィールド {#audit-logging-fields}
 
-監査ログ内の各データベース イベント レコードに対して、 TiDB Cloud は次のフィールドを提供します。
+TiDB Cloudは、監査ログ内の各データベースイベントレコードに対して、以下のフィールドを提供します。
 
 ### 一般情報 {#general-information}
 
-すべてのクラスの監査ログには、次の情報が含まれます。
+すべての監査ログの種類には、以下の情報が含まれています。
 
-| 分野                      | 説明                                           |
-| ----------------------- | -------------------------------------------- |
-| `ID`                    | 操作の監査レコードを識別する一意の識別子。                        |
-| `TIME`                  | 監査レコードのタイムスタンプ。                              |
-| `EVENT`                 | 監査レコードのイベントクラス。複数のイベントタイプはカンマ（ `,` ）で区切られます。 |
-| `USER`                  | 監査レコードのユーザー名。                                |
-| `ROLES`                 | 操作時のユーザーの役割。                                 |
-| `CONNECTION_ID`         | ユーザーの接続の識別子。                                 |
-| `TABLES`                | この監査レコードに関連するアクセスされたテーブル。                    |
-| `STATUS_CODE`           | 監査レコードのステータス コード。1 `1`成功、 `0`失敗を意味します。       |
-| `KEYSPACE_NAME`         | 監査レコードのキースペース名。                              |
-| `SERVERLESS_TENANT_ID`  | クラスターが属するサーバーレス テナントの ID。                    |
-| `SERVERLESS_PROJECT_ID` | クラスターが属するサーバーレス プロジェクトの ID。                  |
-| `SERVERLESS_CLUSTER_ID` | 監査レコードが属するサーバーレス クラスターの ID。                  |
-| `REASON`                | 監査レコードのエラーメッセージ。操作中にエラーが発生した場合にのみ記録されます。     |
+| 分野                      | 説明                                             |
+| ----------------------- | ---------------------------------------------- |
+| `ID`                    | 業務の監査記録を識別する固有の識別子。                            |
+| `TIME`                  | 監査記録のタイムスタンプ。                                  |
+| `EVENT`                 | 監査記録のイベントクラス。複数のイベントタイプはカンマで区切られます（ `,` ）。     |
+| `USER`                  | 監査記録のユーザー名。                                    |
+| `ROLES`                 | 操作時のユーザーの役割。                                   |
+| `CONNECTION_ID`         | ユーザーの接続を識別する識別子。                               |
+| `TABLES`                | この監査記録に関連するアクセスされたテーブル。                        |
+| `STATUS_CODE`           | 監査記録のステータスコード。 `1`は成功、 `0`は失敗を意味します。           |
+| `KEYSPACE_NAME`         | 監査レコードのキースペース名。                                |
+| `SERVERLESS_TENANT_ID`  | TiDB Cloud Essentialインスタンスが属するサーバーレステナントのID。   |
+| `SERVERLESS_PROJECT_ID` | TiDB Cloud Essentialインスタンスが属するサーバーレスプロジェクトのID。 |
+| `SERVERLESS_CLUSTER_ID` | 監査レコードが属するサーバーレスTiDB Cloud EssentialインスタンスのID。 |
+| `REASON`                | 監査記録のエラーメッセージ。操作中にエラーが発生した場合にのみ記録されます。         |
 
-### SQL文の情報 {#sql-statement-information}
+### SQLステートメント情報 {#sql-statement-information}
 
-イベント クラスが`QUERY`または`QUERY`のサブクラスの場合、監査ログには次の情報が含まれます。
+イベントクラスが`QUERY`または`QUERY`のサブクラスである場合、監査ログには次の情報が含まれます。
 
-| 分野               | 説明                                                                  |
-| ---------------- | ------------------------------------------------------------------- |
-| `CURRENT_DB`     | 現在のデータベースの名前。                                                       |
-| `SQL_TEXT`       | 実行されたSQL文。監査ログの編集が有効になっている場合は、編集されたSQL文が記録されます。                     |
-| `EXECUTE_PARAMS` | `EXECUTE`ステートメントのパラメータ。イベントクラスに`EXECUTE`含まれ、編集が無効になっている場合にのみ記録されます。 |
-| `AFFECTED_ROWS`  | SQL文の影響を受けた行数。イベントクラスに`QUERY_DML`含まれる場合にのみ記録されます。                   |
+| 分野               | 説明                                                                     |
+| ---------------- | ---------------------------------------------------------------------- |
+| `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                     |
+| `SQL_TEXT`       | 実行されたSQLステートメント。監査ログのマスキングが有効になっている場合は、マスキングされたSQLステートメントが記録されます。      |
+| `EXECUTE_PARAMS` | `EXECUTE`ステートメントのパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ編集が無効になっている場合にのみ記録されます。 |
+| `AFFECTED_ROWS`  | SQL ステートメントの影響を受ける行数。イベント クラスに`QUERY_DML`が含まれている場合にのみ記録されます。           |
 
 ### 接続情報 {#connection-information}
 
-イベント クラスが`CONNECTION`または`CONNECTION`のサブクラスの場合、監査ログには次の情報が含まれます。
+イベントクラスが`CONNECTION`または`CONNECTION`のサブクラスである場合、監査ログには次の情報が含まれます。
 
-| 分野                | 説明                                                   |
-| ----------------- | ---------------------------------------------------- |
-| `CURRENT_DB`      | 現在のデータベースの名前。イベントクラスにDISCONNECTが含まれる場合、この情報は記録されません。 |
-| `CONNECTION_TYPE` | 接続の種類 (ソケット、UnixSocket、SSL/TLS など)。                  |
-| `PID`             | 現在の接続のプロセス ID。                                       |
-| `SERVER_VERSION`  | 接続されている TiDBサーバーの現在のバージョン。                           |
-| `SSL_VERSION`     | 現在使用されている SSL のバージョン。                                |
-| `HOST_IP`         | 接続されている TiDBサーバーの現在の IP アドレス。                        |
-| `HOST_PORT`       | 接続されている TiDBサーバーの現在のポート。                             |
-| `CLIENT_IP`       | クライアントの現在の IP アドレス。                                  |
-| `CLIENT_PORT`     | クライアントの現在のポート。                                       |
+| 分野                | 説明                                                     |
+| ----------------- | ------------------------------------------------------ |
+| `CURRENT_DB`      | 現在のデータベースの名前。イベントクラスにDISCONNECTが含まれている場合、この情報は記録されません。 |
+| `CONNECTION_TYPE` | 接続の種類（ソケット、UnixSocket、SSL/TLSなど）。                      |
+| `PID`             | 現在の接続のプロセスID。                                          |
+| `SERVER_VERSION`  | 接続されているTiDBサーバーの現在のバージョン。                              |
+| `SSL_VERSION`     | 現在使用されているSSLのバージョン。                                    |
+| `HOST_IP`         | 接続されているTiDBサーバーの現在のIPアドレス。                             |
+| `HOST_PORT`       | 接続されているTiDBサーバーの現在のポート番号。                              |
+| `CLIENT_IP`       | クライアントの現在のIPアドレス。                                      |
+| `CLIENT_PORT`     | クライアントの現在のポート番号。                                       |
 
 > **注記：**
 >
-> トラフィックの可視性を向上させるため、AWS PrivateLink 経由の接続において、ロードバランサー (LB) IP ではなく、実際のクライアント IP アドレスが表示されるようになり`CLIENT_IP`た。現在、この機能はベータ版であり、AWS リージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
+> トラフィックの可視性を向上させるため、 `CLIENT_IP`では、ロードバランサー (LB) IP の代わりに、AWS PrivateLink 経由の接続の実際のクライアント IP アドレスが表示されるようになりました。現在、この機能はベータ版であり、AWS リージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
 
 ### 監査操作情報 {#audit-operation-information}
 
-イベント クラスが`AUDIT`または`AUDIT`のサブクラスの場合、監査ログには次の情報が含まれます。
+イベントクラスが`AUDIT`または`AUDIT`のサブクラスである場合、監査ログには次の情報が含まれます。
 
 | 分野                | 説明                            |
 | ----------------- | ----------------------------- |
-| `AUDIT_OP_TARGET` | TiDB Cloudデータベース監査に関連する設定の対象。 |
+| `AUDIT_OP_TARGET` | TiDB Cloudデータベース監査に関連する設定対象。  |
 | `AUDIT_OP_ARGS`   | TiDB Cloudデータベース監査に関連する設定の引数。 |
 
 ## 監査ログの制限 {#audit-logging-limitations}
 
-TiDB Cloud Essentialは監査ログの順序を保証しません。そのため、最新のイベントを見つけるには、すべてのログファイルを確認する必要がある場合があります。ログを時系列で並べ替えるには、監査ログの`TIME`フィールドを使用します。
+TiDB Cloud Essential は監査ログの順序を保証しないため、最新のイベントを見つけるにはすべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、監査ログの`TIME`フィールドを使用できます。

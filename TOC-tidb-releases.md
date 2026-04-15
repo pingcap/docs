@@ -6,34 +6,35 @@
 
 ## 概要 {#overview}
 
--   [リリースタイムライン](/releases/release-timeline.md)
--   [TiDB のバージョン管理](/releases/versioning.md)
+-   [リリーススケジュール](/releases/release-timeline.md)
+-   [TiDB バージョン管理](/releases/versioning.md)
 -   [リリースサポートポリシー](https://www.pingcap.com/tidb-release-support-policy/)
 
 ## リリースノート {#release-notes}
 
--   バージョン8.5
+-   v8.5
+    -   [8.5.6](/releases/release-8.5.6.md)
     -   [8.5.5](/releases/release-8.5.5.md)
     -   [8.5.4](/releases/release-8.5.4.md)
     -   [8.5.3](/releases/release-8.5.3.md)
     -   [8.5.2](/releases/release-8.5.2.md)
     -   [8.5.1](/releases/release-8.5.1.md)
     -   [8.5.0](/releases/release-8.5.0.md)
--   バージョン8.4
+-   v8.4
     -   [8.4.0-DMR](/releases/release-8.4.0.md)
--   バージョン8.3
+-   v8.3
     -   [8.3.0-DMR](/releases/release-8.3.0.md)
--   バージョン8.2
+-   v8.2
     -   [8.2.0-DMR](/releases/release-8.2.0.md)
--   バージョン8.1
+-   v8.1
     -   [8.1.2](/releases/release-8.1.2.md)
     -   [8.1.1](/releases/release-8.1.1.md)
     -   [8.1.0](/releases/release-8.1.0.md)
--   バージョン8.0
+-   v8.0
     -   [8.0.0-DMR](/releases/release-8.0.0.md)
--   バージョン7.6
+-   v7.6
     -   [7.6.0-DMR](/releases/release-7.6.0.md)
--   バージョン7.5
+-   v7.5
     -   [7.5.7](/releases/release-7.5.7.md)
     -   [7.5.6](/releases/release-7.5.6.md)
     -   [7.5.5](/releases/release-7.5.5.md)
@@ -42,13 +43,13 @@
     -   [7.5.2](/releases/release-7.5.2.md)
     -   [7.5.1](/releases/release-7.5.1.md)
     -   [7.5.0](/releases/release-7.5.0.md)
--   バージョン7.4
+-   v7.4
     -   [7.4.0-DMR](/releases/release-7.4.0.md)
--   バージョン7.3
+-   v7.3
     -   [7.3.0-DMR](/releases/release-7.3.0.md)
--   バージョン7.2
+-   v7.2
     -   [7.2.0-DMR](/releases/release-7.2.0.md)
--   バージョン7.1
+-   v7.1
     -   [7.1.6](/releases/release-7.1.6.md)
     -   [7.1.5](/releases/release-7.1.5.md)
     -   [7.1.4](/releases/release-7.1.4.md)
@@ -56,11 +57,11 @@
     -   [7.1.2](/releases/release-7.1.2.md)
     -   [7.1.1](/releases/release-7.1.1.md)
     -   [7.1.0](/releases/release-7.1.0.md)
--   バージョン7.0
+-   v7.0
     -   [7.0.0-DMR](/releases/release-7.0.0.md)
--   バージョン6.6
+-   v6.6
     -   [6.6.0-DMR](/releases/release-6.6.0.md)
--   バージョン6.5
+-   v6.5
     -   [6.5.12](/releases/release-6.5.12.md)
     -   [6.5.11](/releases/release-6.5.11.md)
     -   [6.5.10](/releases/release-6.5.10.md)
@@ -74,13 +75,13 @@
     -   [6.5.2](/releases/release-6.5.2.md)
     -   [6.5.1](/releases/release-6.5.1.md)
     -   [6.5.0](/releases/release-6.5.0.md)
--   バージョン6.4
+-   v6.4
     -   [6.4.0-DMR](/releases/release-6.4.0.md)
--   バージョン6.3
+-   v6.3
     -   [6.3.0-DMR](/releases/release-6.3.0.md)
--   バージョン6.2
+-   v6.2
     -   [6.2.0-DMR](/releases/release-6.2.0.md)
--   バージョン6.1
+-   v6.1
     -   [6.1.7](/releases/release-6.1.7.md)
     -   [6.1.6](/releases/release-6.1.6.md)
     -   [6.1.5](/releases/release-6.1.5.md)
@@ -89,34 +90,34 @@
     -   [6.1.2](/releases/release-6.1.2.md)
     -   [6.1.1](/releases/release-6.1.1.md)
     -   [6.1.0](/releases/release-6.1.0.md)
--   バージョン6.0
+-   v6.0
     -   [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
--   バージョン5.4
+-   v5.4
     -   [5.4.3](/releases/release-5.4.3.md)
     -   [5.4.2](/releases/release-5.4.2.md)
     -   [5.4.1](/releases/release-5.4.1.md)
     -   [5.4.0](/releases/release-5.4.0.md)
--   サポート終了リリース
-    -   バージョン5.3
+-   サポート終了となったリリース
+    -   v5.3
         -   [5.3.4](/releases/release-5.3.4.md)
         -   [5.3.3](/releases/release-5.3.3.md)
         -   [5.3.2](/releases/release-5.3.2.md)
         -   [5.3.1](/releases/release-5.3.1.md)
         -   [5.3.0](/releases/release-5.3.0.md)
-    -   バージョン5.2
+    -   v5.2
         -   [5.2.4](/releases/release-5.2.4.md)
         -   [5.2.3](/releases/release-5.2.3.md)
         -   [5.2.2](/releases/release-5.2.2.md)
         -   [5.2.1](/releases/release-5.2.1.md)
         -   [5.2.0](/releases/release-5.2.0.md)
-    -   バージョン5.1
+    -   v5.1
         -   [5.1.5](/releases/release-5.1.5.md)
         -   [5.1.4](/releases/release-5.1.4.md)
         -   [5.1.3](/releases/release-5.1.3.md)
         -   [5.1.2](/releases/release-5.1.2.md)
         -   [5.1.1](/releases/release-5.1.1.md)
         -   [5.1.0](/releases/release-5.1.0.md)
-    -   バージョン5.0
+    -   v5.0
         -   [5.0.6](/releases/release-5.0.6.md)
         -   [5.0.5](/releases/release-5.0.5.md)
         -   [5.0.4](/releases/release-5.0.4.md)
@@ -125,7 +126,7 @@
         -   [5.0.1](/releases/release-5.0.1.md)
         -   [5.0 GA](/releases/release-5.0.0.md)
         -   [5.0.0-rc](/releases/release-5.0.0-rc.md)
-    -   バージョン4.0
+    -   v4.0
         -   [4.0.16](/releases/release-4.0.16.md)
         -   [4.0.15](/releases/release-4.0.15.md)
         -   [4.0.14](/releases/release-4.0.14.md)
@@ -146,18 +147,18 @@
         -   [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
         -   [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
         -   [4.0.0-rc](/releases/release-4.0.0-rc.md)
-        -   [4.0.0-ベータ.2](/releases/release-4.0.0-beta.2.md)
-        -   [4.0.0-ベータ.1](/releases/release-4.0.0-beta.1.md)
-        -   [4.0.0-ベータ](/releases/release-4.0.0-beta.md)
-    -   バージョン3.1
+        -   [4.0.0-beta.2](/releases/release-4.0.0-beta.2.md)
+        -   [4.0.0-beta.1](/releases/release-4.0.0-beta.1.md)
+        -   [4.0.0-beta](/releases/release-4.0.0-beta.md)
+    -   v3.1
         -   [3.1.2](/releases/release-3.1.2.md)
         -   [3.1.1](/releases/release-3.1.1.md)
         -   [3.1.0 GA](/releases/release-3.1.0-ga.md)
         -   [3.1.0-rc](/releases/release-3.1.0-rc.md)
-        -   [3.1.0-ベータ.2](/releases/release-3.1.0-beta.2.md)
-        -   [3.1.0-ベータ.1](/releases/release-3.1.0-beta.1.md)
-        -   [3.1.0-ベータ](/releases/release-3.1.0-beta.md)
-    -   バージョン3.0
+        -   [3.1.0-beta.2](/releases/release-3.1.0-beta.2.md)
+        -   [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
+        -   [3.1.0-beta](/releases/release-3.1.0-beta.md)
+    -   v3.0
         -   [3.0.20](/releases/release-3.0.20.md)
         -   [3.0.19](/releases/release-3.0.19.md)
         -   [3.0.18](/releases/release-3.0.18.md)
@@ -182,9 +183,9 @@
         -   [3.0.0-rc.3](/releases/release-3.0.0-rc.3.md)
         -   [3.0.0-rc.2](/releases/release-3.0.0-rc.2.md)
         -   [3.0.0-rc.1](/releases/release-3.0.0-rc.1.md)
-        -   [3.0.0-ベータ.1](/releases/release-3.0.0-beta.1.md)
-        -   [3.0.0-ベータ](/releases/release-3.0-beta.md)
-    -   バージョン2.1
+        -   [3.0.0-beta.1](/releases/release-3.0.0-beta.1.md)
+        -   [3.0.0-beta](/releases/release-3.0-beta.md)
+    -   v2.1
         -   [2.1.19](/releases/release-2.1.19.md)
         -   [2.1.18](/releases/release-2.1.18.md)
         -   [2.1.17](/releases/release-2.1.17.md)
@@ -211,7 +212,7 @@
         -   [2.1 RC2](/releases/release-2.1-rc.2.md)
         -   [2.1 RC1](/releases/release-2.1-rc.1.md)
         -   [2.1 ベータ版](/releases/release-2.1-beta.md)
-    -   バージョン2.0
+    -   v2.0
         -   [2.0.11](/releases/release-2.0.11.md)
         -   [2.0.10](/releases/release-2.0.10.md)
         -   [2.0.9](/releases/release-2.0.9.md)
@@ -230,7 +231,7 @@
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)
-    -   バージョン1.0
+    -   v1.0
         -   [1.0.8](/releases/release-1.0.8.md)
         -   [1.0.7](/releases/release-1.0.7.md)
         -   [1.0.6](/releases/release-1.0.6.md)
@@ -240,7 +241,7 @@
         -   [1.0.2](/releases/release-1.0.2.md)
         -   [1.0.1](/releases/release-1.0.1.md)
         -   [1.0](/releases/release-1.0-ga.md)
-        -   [プレGA](/releases/release-pre-ga.md)
+        -   [事前総会](/releases/release-pre-ga.md)
         -   [RC4](/releases/release-rc.4.md)
         -   [RC3](/releases/release-rc.3.md)
         -   [RC2](/releases/release-rc.2.md)

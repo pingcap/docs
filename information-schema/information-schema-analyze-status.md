@@ -1,15 +1,15 @@
 ---
 title: ANALYZE_STATUS
-summary: ANALYZE_STATUS` information_schema テーブルについて学習します。
+summary: ANALYZE_STATUS`情報スキーマテーブルについて学習してください。
 ---
 
-# 分析ステータス {#analyze-status}
+# 状態分析 {#analyze-status}
 
-`ANALYZE_STATUS`テーブルには、統計を収集する実行中のタスクと、限られた数の履歴タスクに関する情報が提供されます。
+`ANALYZE_STATUS`テーブルには、統計情報を収集する実行中のタスクと、限られた数の履歴タスクに関する情報が表示されます。
 
-TiDB v6.1.0以降、 `ANALYZE_STATUS`テーブルはクラスターレベルのタスクの表示をサポートします。TiDBの再起動後でも、このテーブルを使用して再起動前のタスク記録を表示できます。TiDB v6.1.0より前のバージョンでは、 `ANALYZE_STATUS`テーブルはインスタンスレベルのタスクのみを表示でき、タスク記録はTiDBの再起動後に消去されます。
+TiDB v6.1.0 以降では、 `ANALYZE_STATUS`テーブルでクラスタレベルのタスクの表示がサポートされています。TiDB を再起動した後でも、このテーブルを使用して再起動前のタスクレコードを表示できます。TiDB v6.1.0 より前では、 `ANALYZE_STATUS`テーブルではインスタンスレベルのタスクのみが表示され、TiDB の再起動後にタスクレコードはクリアされます。
 
-TiDB v6.1.0 以降では、システム テーブル`mysql.analyze_jobs`を通じて過去 7 日間の履歴タスクを表示できます。
+TiDB v6.1.0以降では、システムテーブル`mysql.analyze_jobs`を通じて過去7日間の履歴タスクを表示できます。
 
 ```sql
 USE information_schema;
@@ -57,24 +57,24 @@ SELECT * FROM information_schema.analyze_status;
 6 rows in set (0.00 sec)
 ```
 
-`ANALYZE_STATUS`テーブル内のフィールドは次のように説明されます。
+`ANALYZE_STATUS`テーブルのフィールドは、次のように説明されます。
 
 -   `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
 -   `TABLE_NAME` : テーブルの名前。
 -   `PARTITION_NAME` :パーティションテーブルの名前。
--   `JOB_INFO` : タスク`ANALYZE`の情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。4 `tidb_analyze_version = 2`場合、この情報にはサンプルレートなどの設定項目が含まれます。
+-   `JOB_INFO` : `ANALYZE`タスクの情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version = 2`の場合、この情報にはサンプルレートなどの構成項目が含まれます。
 -   `PROCESSED_ROWS` : 処理された行数。
--   `START_TIME` : `ANALYZE`のタスクの開始時刻。
--   `END_TIME` : `ANALYZE`のタスクの終了時刻。
--   `STATE` : タスク`ANALYZE`の実行ステータス。値は`pending` 、 `running` 、 `finished`または`failed`なります。
--   `FAIL_REASON` : タスクが失敗した理由。実行が成功した場合、値は`NULL`なります。
+-   `START_TIME` : `ANALYZE`タスクの開始時刻。
+-   `END_TIME` : `ANALYZE`タスクの終了時刻。
+-   `STATE` : `ANALYZE`タスクの実行ステータス。値は`pending` 、 `running` 、 `finished`または`failed` 。
+-   `FAIL_REASON` : タスクが失敗した理由。実行が成功した場合は、値は`NULL`になります。
 -   `INSTANCE` : タスクを実行する TiDB インスタンス。
--   `PROCESS_ID` : タスクを実行するプロセス ID。
--   `REMAINING_SECONDS` : タスクが完了するまでの残り時間の推定値（秒数）。
--   `PROGRESS` : タスクの進行状況。
--   `ESTIMATED_TOTAL_ROWS` : タスクで分析する必要がある行の合計数。
+-   `PROCESS_ID` : タスクを実行するプロセスID。
+-   `REMAINING_SECONDS` : タスクが完了するまでの推定残り時間（秒）。
+-   `PROGRESS` : タスクの進捗状況。
+-   `ESTIMATED_TOTAL_ROWS` : タスクによって分析する必要のある行の総数。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
 -   [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)

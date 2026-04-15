@@ -1,39 +1,39 @@
 ---
 title: Image Search Example
-summary: テキストから画像への検索と画像から画像への検索の両方にマルチモーダル埋め込みを使用して画像検索アプリケーションを構築します。
+summary: テキストから画像への検索と画像から画像への検索の両方に対応する、マルチモーダル埋め込みを用いた画像検索アプリケーションを構築する。
 ---
 
 # 画像検索の例 {#image-search-example}
 
-この例では、TiDB ベクトル検索機能とマルチモーダル埋め込みモデルを組み合わせて画像検索アプリを構築する方法を示します。
+この例では、TiDBのベクトル検索機能とマルチモーダル埋め込みモデルを組み合わせることで、画像検索アプリを構築する方法を示します。
 
-わずか数行のコードで、テキストと画像の両方を理解する検索システムを作成できます。
+ほんの数行のコードで、テキストと画像の両方を理解する検索システムを作成できます。
 
--   **テキストから画像への検索**: 「ふわふわのオレンジ色の猫」など、自然言語で欲しいものを説明してペットの写真を検索します
--   **画像間検索**: 写真をアップロードして、品種、色、ポーズなどで視覚的に似ているペットを検索します
+-   **テキストから画像への検索**：例えば「ふわふわのオレンジ色の猫」のように、自然言語でペットの写真を説明することで、ペットの写真を検索できます。
+-   **画像検索**：写真をアップロードして、犬種、色、ポーズなど、視覚的に類似したペットを検索します。
 
-<p align="center"><img width="700" alt="PyTiDB 画像検索デモ" src="https://docs-download.pingcap.com/media/images/docs/ai/pet-image-search-via-multimodal-embeddings.png" /><p align="center"><i>マルチモーダル埋め込みによるペット画像検索</i></p></p>
+<p align="center"><img width="700" alt="PyTiDB画像検索デモ" src="https://docs-download.pingcap.com/media/images/docs/ai/pet-image-search-via-multimodal-embeddings.png" /><p align="center"><i>マルチモーダル埋め込みによるペット画像検索</i></p></p>
 
 ## 前提条件 {#prerequisites}
 
-始める前に、次のものがあることを確認してください。
+始める前に、以下のものを用意してください。
 
--   **Python (&gt;=3.10)** : [パイソン](https://www.python.org/downloads/) 3.10 以降のバージョンをインストールします。
--   **TiDB Cloud Starter クラスター**: [TiDB Cloud](https://tidbcloud.com/free-trial)に無料の TiDB クラスターを作成できます。
--   **Jina AI APIキー**： [Jina AI 埋め込み](https://jina.ai/embeddings/)から無料のAPIキーを取得できます。
+-   **Python (&gt;=3.10)** : [Python](https://www.python.org/downloads/) 3.10以降のバージョンをインストールしてください。
+-   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+-   **Jina AI API キー**: [Jina AI埋め込み](https://jina.ai/embeddings/)から無料の API キーを取得できます。
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1. <code>pytidb</code>リポジトリのクローンを作成する {#step-1-clone-the-code-pytidb-code-repository}
+### ステップ1. <code>pytidb</code>リポジトリをクローンする {#step-1-clone-the-code-pytidb-code-repository}
 
-[`pytidb`](https://github.com/pingcap/pytidb)は、開発者が AI アプリケーションを効率的に構築できるように設計されています。
+[`pytidb`](https://github.com/pingcap/pytidb)はTiDBの公式Python SDKであり、開発者がAIアプリケーションを効率的に構築できるよう設計されています。
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/image_search/
 ```
 
-### ステップ2. 必要なパッケージをインストールする {#step-2-install-the-required-packages}
+### ステップ2. 必要なパッケージをインストールします {#step-2-install-the-required-packages}
 
 ```bash
 python -m venv .venv
@@ -41,11 +41,11 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r reqs.txt
 ```
 
-### ステップ3. 環境変数を設定する {#step-3-set-environment-variables}
+### ステップ3．環境変数を設定する {#step-3-set-environment-variables}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で[**クラスター**](https://tidbcloud.com/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
-2.  右上隅の**「接続」**をクリックします。接続パラメータがリストされた接続ダイアログが表示されます。
-3.  次のように接続パラメータに応じて環境変数を設定します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+3.  接続パラメータに応じて環境変数を以下のように設定してください。
 
 ```bash
 cat > .env <<EOF
@@ -59,11 +59,11 @@ JINA_AI_API_KEY={your-jina-ai-api-key}
 EOF
 ```
 
-### ステップ4.データセットをダウンロードして抽出する {#step-4-download-and-extract-the-dataset}
+### ステップ4．データセットをダウンロードして解凍する {#step-4-download-and-extract-the-dataset}
 
-このデモでは、 [オックスフォードペットデータセット](https://www.robots.ox.ac.uk/~vgg/data/pets/)を使用してペットの画像を検索用にデータベースに読み込みます。
+[オックスフォード・ペットデータセット](https://www.robots.ox.ac.uk/~vgg/data/pets/)を使用して、ペット画像をデータベースに読み込んで検索するデモです。
 
-*Linux/MacOSの場合:*
+*Linux/macOSの場合：*
 
 ```bash
 # Download the dataset
@@ -80,20 +80,20 @@ tar -xzf oxford_pets.tar.gz -C oxford_pets
 streamlit run app.py
 ```
 
-ブラウザを開いて`http://localhost:8501`アクセスします。
+ブラウザを開いて`http://localhost:8501`にアクセスしてください。
 
-### ステップ6. データをロードする {#step-6-load-data}
+### ステップ6．データの読み込み {#step-6-load-data}
 
-サンプル アプリでは、 **[サンプル データの読み込み]**ボタンをクリックして、サンプル データをデータベースに読み込むことができます。
+サンプルアプリでは、 **「サンプルデータの読み込み**」ボタンをクリックすると、サンプルデータがデータベースに読み込まれます。
 
-または、Oxford Pets データセット内のすべてのデータをロードする場合は、 **[すべてのデータのロード]**ボタンをクリックします。
+または、オックスフォード・ペット・データセットのすべてのデータを読み込みたい場合は、 **「すべてのデータを読み込む」**ボタンをクリックしてください。
 
 ### ステップ7. 検索 {#step-7-search}
 
-1.  サイドバーで**検索タイプ**を選択します。
-2.  探しているペットの説明文を入力するか、犬または猫の写真をアップロードします。
-3.  **[検索]**ボタンをクリックします。
+1.  サイドバーで**検索タイプ**を選択してください。
+2.  探しているペットの説明文を入力するか、犬または猫の写真をアップロードしてください。
+3.  **検索**ボタンをクリックしてください。
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**: [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/image_search)
+-   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/image_search)

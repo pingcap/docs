@@ -1,22 +1,22 @@
 ---
 title: TIKV_STORE_STATUS
-summary: TIKV_STORE_STATUS` INFORMATION_SCHEMA テーブルについて学習します。
+summary: TIKV_STORE_STATUS` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# TIKV_ストア_ステータス {#tikv-store-status}
+# TIKV_STORE_STATUS {#tikv-store-status}
 
-`TIKV_STORE_STATUS`番目の表には、クラスターに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数など、PD の API 経由の TiKV ノードの基本情報が表示されます。
+`TIKV_STORE_STATUS`テーブルには、PD の API を介して TiKV ノードの基本情報が表示されます。これには、クラスタに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数などが含まれます。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_STORE_STATUS;
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 +-------------------+-------------+------+------+---------+-------+
@@ -45,24 +45,24 @@ DESC TIKV_STORE_STATUS;
 19 rows in set (0.00 sec)
 ```
 
-`TIKV_STORE_STATUS`表の列の説明は次のとおりです。
+`TIKV_STORE_STATUS`テーブルの列の説明は以下のとおりです。
 
--   `STORE_ID` : ストアの ID。
--   `ADDRESS` : ストアのアドレス。
--   `STORE_STATE` : ストア状態の識別子`STORE_STATE_NAME`に相当します。
--   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
--   `LABEL` : ストアに設定されたラベル。
+-   `STORE_ID` : ストアのID。
+-   `ADDRESS` : 店舗の住所。
+-   `STORE_STATE` : ストア状態の識別子。これは`STORE_STATE_NAME`に対応します。
+-   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone` 。
+-   `LABEL` : ストアのラベルセット。
 -   `VERSION` : ストアのバージョン番号。
 -   `CAPACITY` : ストアのstorage容量。
 -   `AVAILABLE` : ストアの残りのstorage容量。
 -   `LEADER_COUNT` : ストアのリーダーの数。
--   `LEADER_WEIGHT` : ストアのリーダーの重み。
+-   `LEADER_WEIGHT` : ストアのリーダーウェイト。
 -   `LEADER_SCORE` : ストアのリーダースコア。
--   `LEADER_SIZE` : ストア上のすべてのリーダーのおおよその合計データ サイズ (MB)。
--   `REGION_COUNT` : ストア上のリージョンの数。
--   `REGION_WEIGHT` : ストアのリージョンの重み。
+-   `LEADER_SIZE` : ストア上のすべてのリーダーのおおよその合計データサイズ (MB)。
+-   `REGION_COUNT` : ストアのリージョン数。
+-   `REGION_WEIGHT` : ストアのリージョンウェイト。
 -   `REGION_SCORE` : ストアのリージョンスコア。
--   `REGION_SIZE` : ストア上のすべてのリージョンのおおよその合計データ サイズ (MB)。
--   `START_TS` : ストアが開始されたときのタイムスタンプ。
+-   `REGION_SIZE` : ストア上のすべてのリージョンのおおよその合計データサイズ (MB)。
+-   `START_TS` : ストアが開始された時のタイムスタンプ。
 -   `LAST_HEARTBEAT_TS` : ストアから送信された最後のハートビートのタイムスタンプ。
--   `UPTIME` : ストアが開始してからの合計時間。
+-   `UPTIME` : ストアが起動してからの合計時間。

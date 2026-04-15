@@ -1,22 +1,22 @@
 ---
 title: TIDB_SERVERS_INFO
-summary: TIDB_SERVERS_INFO` INFORMATION_SCHEMA テーブルについて学習します。
+summary: TIDB_SERVERS_INFO` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
 # TIDB_SERVERS_INFO {#tidb-servers-info}
 
-`TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
+`TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (具体的には、tidb-server プロセス) に関する情報を提供します。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC tidb_servers_info;
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 +---------------+--------------+------+------+---------+-------+
@@ -35,13 +35,13 @@ DESC tidb_servers_info;
 9 rows in set (0.00 sec)
 ```
 
-`TIDB_SERVERS_INFO`テーブルをビュー:
+`TIDB_SERVERS_INFO`テーブルをビュー。
 
 ```sql
 SELECT * FROM TIDB_SERVERS_INFO\G
 ```
 
-出力は次のようになります。
+出力は以下のとおりです。
 
 ```sql
 *************************** 1. row ***************************
@@ -50,7 +50,7 @@ SELECT * FROM TIDB_SERVERS_INFO\G
          PORT: 4000
   STATUS_PORT: 10080
         LEASE: 45s
-      VERSION: 8.0.11-TiDB-v8.5.3
+      VERSION: 8.0.11-TiDB-v8.5.4
      GIT_HASH: 827d8ff2d22ac4c93ae1b841b79d468211e1d393
 BINLOG_STATUS: Off
        LABELS:

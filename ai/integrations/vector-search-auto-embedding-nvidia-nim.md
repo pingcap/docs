@@ -1,33 +1,33 @@
 ---
 title: NVIDIA NIM Embeddings
-summary: TiDB Cloudで NVIDIA NIM 埋め込みモデルを使用する方法を学びます。
+summary: TiDB CloudでNVIDIA NIM埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-nvidia-nim/']
 ---
 
-# NVIDIA NIM 埋め込み {#nvidia-nim-embeddings}
+# NVIDIA NIM エンベディング {#nvidia-nim-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で NVIDIA NIM 埋め込みモデルを使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、TiDB CloudでNVIDIA NIM埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-NVIDIA NIM でホストされている埋め込みモデルは、独自の[NVIDIA NIM APIキー](https://build.nvidia.com/settings/api-keys) (BYOK) を持ち込む場合、プレフィックス`nvidia_nim/`で使用できます。
+NVIDIA NIM 上でホストされている埋め込みモデルは、独自の[NVIDIA NIM APIキー](https://build.nvidia.com/settings/api-keys)(BYOK) をお持ちの場合、 `nvidia_nim/`プレフィックスを使用して使用できます。
 
-以下のセクションでは、便宜上、一般的なモデルを例に挙げ、自動埋め込みでの使用方法を説明します。利用可能なモデルの完全なリストについては、 [NVIDIA NIM テキスト埋め込みモデル](https://build.nvidia.com/models?filters=usecase%3Ausecase_text_to_embedding)参照してください。
+便宜上、次のセクションでは人気のあるモデルを例として、自動埋め込みでの使用方法を示します。利用可能なモデルの完全なリストについては、 [NVIDIA NIM テキスト埋め込みモデル](https://build.nvidia.com/models?filters=usecase%3Ausecase_text_to_embedding)を参照してください。
 
 ## bge-m3 {#bge-m3}
 
 -   名前: `nvidia_nim/baai/bge-m3`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   最大入力テキストトークン数: 8,192
--   価格: NVIDIA が請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
--   ドキュメント: [https://docs.api.nvidia.com/nim/reference/baai-bge-m3](https://docs.api.nvidia.com/nim/reference/baai-bge-m3)
+-   距離指標：コサイン類似度、L2
+-   入力可能なテキストトークンの最大数：8,192
+-   価格：NVIDIAが請求
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
+-   ドキュメント： [https://docs.api.nvidia.com/nim/reference/baai-bge-m3](https://docs.api.nvidia.com/nim/reference/baai-bge-m3)
 
 例：
 
@@ -73,9 +73,9 @@ LIMIT 2;
 
 ## nv-embed-v1 {#nv-embed-v1}
 
-この例では、ベクター テーブルを作成し、ドキュメントを挿入し、 `nvidia/nv-embed-v1`モデルを使用して類似性検索を実行する方法を示します。
+この例では`nvidia/nv-embed-v1`モデルを使用して、ベクトルテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
-### ステップ1: データベースに接続する {#step-1-connect-to-the-database}
+### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -107,14 +107,14 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 </div>
 </SimpleTab>
 
-### ステップ2: APIキーを設定する {#step-2-configure-the-api-key}
+### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-認証が必要なNVIDIA NIMモデルをご利用の場合は、APIキーを設定できます。1 [NVIDIA 開発者プログラム](https://developer.nvidia.com/nim) NIM APIエンドポイントに無料でアクセスするか、 [NVIDIA ビルド プラットフォーム](https://build.nvidia.com/settings/api-keys)からAPIキーを作成できます。
+認証が必要な NVIDIA NIM モデルを使用している場合は、API キーを構成できます。 [NVIDIA開発者プログラム](https://developer.nvidia.com/nim)を通じて NIM API エンドポイントに無料でアクセスすることも、 [NVIDIAビルドプラットフォーム](https://build.nvidia.com/settings/api-keys)プラットフォームから API キーを作成することもできます。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-TiDB クライアントを使用して NVIDIA NIM モデルの API キーを構成します。
+TiDBクライアントを使用して、NVIDIA NIMモデルのAPIキーを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -126,7 +126,7 @@ tidb_client.configure_embedding_provider(
 </div>
 <div label="SQL" value="sql">
 
-SQL を使用して NVIDIA NIM モデルの API キーを設定します。
+SQLを使用してNVIDIA NIMモデルのAPIキーを設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_NVIDIA_NIM_API_KEY = "{your-nvidia-api-key}";
@@ -135,9 +135,9 @@ SET @@GLOBAL.TIDB_EXP_EMBED_NVIDIA_NIM_API_KEY = "{your-nvidia-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3: ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
 
-NVIDIA NIM モデルを使用して埋め込みを生成するベクトル フィールドを含むテーブルを作成します。
+NVIDIA NIMモデルを使用して埋め込みを生成するベクトルフィールドを持つテーブルを作成します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -175,7 +175,7 @@ CREATE TABLE sample_documents (
 </div>
 </SimpleTab>
 
-### ステップ4: テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
+### ステップ4：テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -211,12 +211,12 @@ VALUES
 </div>
 </SimpleTab>
 
-### ステップ5: 類似文書を検索する {#step-5-search-for-similar-documents}
+### ステップ5：類似文書を検索する {#step-5-search-for-similar-documents}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`table.search()` API を使用してベクトル検索を実行します。
+`table.search()` APIを使用してベクトル検索を実行します。
 
 ```python
 results = table.search("How do neural networks work?") \
@@ -245,7 +245,7 @@ LIMIT 3;
 </div>
 </SimpleTab>
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

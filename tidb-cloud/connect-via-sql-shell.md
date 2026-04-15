@@ -1,26 +1,26 @@
 ---
 title: Connect via SQL Shell
-summary: SQL Shell 経由で TiDB クラスターに接続する方法を学習します。
+summary: SQLシェルを使用してTiDBクラスタに接続する方法を学びましょう。
 ---
 
-# SQL シェル経由で接続する {#connect-via-sql-shell}
+# SQL Shell経由で接続する {#connect-via-sql-shell}
 
-TiDB Cloud SQL Shell では、 TiDB SQLを試したり、TiDB と MySQL の互換性をすぐにテストしたり、データベース ユーザー権限を管理したりできます。
+TiDB Cloud SQL Shell では、 TiDB SQL を試用したり、TiDB と MySQL の互換性を迅速にテストしたり、データベースのユーザー権限を管理したりできます。
 
 > **注記：**
 >
-> SQL Shellを使用して[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)に接続することはできません。TiDB TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するには、 [TiDB Cloud StarterまたはEssential クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+> SQL Shell を使用して[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)または[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)に接続することはできません。 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します。](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 
-SQL シェルを使用して TiDB クラスターに接続するには、次の手順を実行します。
+SQLシェルを使用してTiDBに接続するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲット クラスターの名前をクリックしてクラスターの概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「ネットワーク」**をクリックします。
 
-3.  **[ネットワーク]**ページで、右上隅の**[Web SQL Shell]**をクリックします。
+3.  **ネットワーク**ページで、右上隅にある**「Web SQL Shell」**をクリックします。
 
-4.  プロンプトが表示されたら、 **「パスワードを入力**」行に現在のクラスタのルートパスワードを入力します。これで、アプリケーションがTiDBクラスタに接続されます。
+4.  **「パスワードを入力してください**」というプロンプトが表示されたら、現在のクラスタのrootパスワードを入力してください。これで、アプリケーションがTiDBクラスタに接続されます。

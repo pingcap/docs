@@ -1,38 +1,38 @@
 ---
 title: Gemini Embeddings
-summary: TiDB Cloudで Google Gemini 埋め込みモデルを使用する方法を学びます。
+summary: TiDB CloudでGoogle Geminiの埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 ---
 
 # ジェミニ埋め込み {#gemini-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で Gemini 埋め込みモデルを使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudで Gemini 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用する方法、およびテキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-ご自身のGemini APIキー（BYOK）をお持ちいただければ、すべてのGeminiモデルを`gemini/`プレフィックスでご利用いただけます。例：
+Gemini APIキー（BYOK）をお持ちの場合は、 `gemini/`プレフィックスを使用してすべてのGeminiモデルをご利用いただけます。例：
 
 **ジェミニ埋め込み-001**
 
 -   名前: `gemini/gemini-embedding-001`
--   寸法: 128～3072 (デフォルト: 3072)
--   距離計量：コサイン、L2
--   最大入力テキストトークン数: 2,048
--   価格: Google が請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
+-   寸法：128～3072（デフォルト：3072）
+-   距離指標：コサイン類似度、L2
+-   入力可能なテキストトークンの最大数：2,048
+-   価格：Googleが課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
 
-利用可能なモデルの完全なリストについては、 [Gemini ドキュメント](https://ai.google.dev/gemini-api/docs/embeddings)参照してください。
+利用可能なモデルの完全なリストについては、 [Geminiのドキュメント](https://ai.google.dev/gemini-api/docs/embeddings)を参照してください。
 
 ## 使用例 {#usage-example}
 
-この例では、Google Gemini 埋め込みモデルを使用してベクター テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、Google Geminiの埋め込みモデルを使用して、ベクターテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
-### ステップ1: データベースに接続する {#step-1-connect-to-the-database}
+### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -64,14 +64,14 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 </div>
 </SimpleTab>
 
-### ステップ2: APIキーを設定する {#step-2-configure-the-api-key}
+### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-[Google AIスタジオ](https://makersuite.google.com/app/apikey)から API キーを作成し、独自のキー (BYOK) を持って埋め込みサービスを使用します。
+[Google AI Studio](https://makersuite.google.com/app/apikey)でAPIキーを作成し、埋め込みサービスを利用するには、ご自身のキー（BYOK）をご用意ください。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-TiDB クライアントを使用して、Google Gemini 埋め込みプロバイダの API キーを設定します。
+TiDBクライアントを使用して、Google Gemini埋め込みプロバイダーのAPIキーを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -83,7 +83,7 @@ tidb_client.configure_embedding_provider(
 </div>
 <div label="SQL" value="sql">
 
-SQL を使用して Google Gemini 埋め込みプロバイダの API キーを設定します。
+SQLを使用して、Google Gemini埋め込みプロバイダーのAPIキーを設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_GEMINI_API_KEY = "{your-google-api-key}";
@@ -92,9 +92,9 @@ SET @@GLOBAL.TIDB_EXP_EMBED_GEMINI_API_KEY = "{your-google-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3: ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
 
-`gemini-embedding-001`モデルを使用して 3072 次元のベクトルを生成するベクトル フィールドを持つテーブルを作成します (デフォルト)。
+`gemini-embedding-001`モデルを使用して 3072 次元ベクトルを生成するベクトルフィールドを持つテーブルを作成します (デフォルト):
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -132,7 +132,7 @@ CREATE TABLE sample_documents (
 </div>
 </SimpleTab>
 
-### ステップ4: テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
+### ステップ4：テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -168,12 +168,12 @@ VALUES
 </div>
 </SimpleTab>
 
-### ステップ5: 類似文書を検索する {#step-5-search-for-similar-documents}
+### ステップ5：類似文書を検索する {#step-5-search-for-similar-documents}
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`table.search()` API を使用してベクトル検索を実行します。
+`table.search()` APIを使用してベクトル検索を実行します。
 
 ```python
 results = table.search("How to start learning Java programming?") \
@@ -185,7 +185,7 @@ print(results)
 </div>
 <div label="SQL" value="sql">
 
-`VEC_EMBED_COSINE_DISTANCE`関数を使用して、コサイン距離に基づいてベクトル検索を実行します。
+`VEC_EMBED_COSINE_DISTANCE`関数を使用して、コサイン距離に基づいたベクトル検索を実行します。
 
 ```sql
 SELECT
@@ -202,7 +202,7 @@ LIMIT 2;
 
 ## カスタム埋め込み寸法 {#custom-embedding-dimensions}
 
-`gemini-embedding-001`モデルは、Matryoshka Representation Learning (MRL) を通じて柔軟な次元をサポートしています。埋め込み関数で必要な次元を指定できます。
+`gemini-embedding-001`モデルは、マトリョーシカ表現学習 (MRL) を通じて柔軟な次元をサポートしています。埋め込み関数で必要な次元を指定できます。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -243,13 +243,13 @@ embedding: list[float] = EmbeddingFunction(
 </div>
 </SimpleTab>
 
-パフォーマンス要件とstorageの制約に基づいてディメンションを選択してください。ディメンションを大きくすると精度が向上しますが、より多くのstorageとコンピューティングリソースが必要になります。
+パフォーマンス要件とstorageの制約に基づいて、次元を選択してください。次元数を増やすと精度は向上しますが、より多くのstorageと計算リソースが必要になります。
 
 ## オプション {#options}
 
-[ジェミニオプション](https://ai.google.dev/gemini-api/docs/embeddings)すべて、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+すべての[ジェミニオプション](https://ai.google.dev/gemini-api/docs/embeddings)`additional_json_options`関数の`EMBED_TEXT()`パラメータを介してサポートされます。
 
-**例: 品質を向上させるためにタスクの種類を指定する**
+**例：タスクの種類を指定して品質を向上させる**
 
 ```sql
 CREATE TABLE sample (
@@ -263,7 +263,7 @@ CREATE TABLE sample (
 );
 ```
 
-**例: 代替ディメンションを使用する**
+**例：別の次元を使用する**
 
 ```sql
 CREATE TABLE sample (
@@ -277,9 +277,9 @@ CREATE TABLE sample (
 );
 ```
 
-利用可能なすべてのオプションについては、 [Gemini ドキュメント](https://ai.google.dev/gemini-api/docs/embeddings)参照してください。
+利用可能なすべてのオプションについては、 [Geminiのドキュメント](https://ai.google.dev/gemini-api/docs/embeddings)を参照してください。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

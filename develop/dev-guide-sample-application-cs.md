@@ -1,24 +1,24 @@
 ---
 title: Connect to TiDB with C#
-summary: C#を使用してTiDBに接続する方法を学びます。このチュートリアルでは、TiDBを操作するためのサンプルC#コードスニペットを提供します。
-aliases: ['/ja/tidb/stable/dev-guide-sample-application-cs/','/ja/tidbcloud/dev-guide-sample-application-cs/']
+summary: C# を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、TiDB とやり取りするための C# コードのサンプルを提供します。
+aliases: ['/ja/tidb/stable/dev-guide-sample-application-cs/','/ja/tidb/dev/dev-guide-sample-application-cs/','/ja/tidbcloud/dev-guide-sample-application-cs/']
 ---
 
-# C#でTiDBに接続する {#connect-to-tidb-with-c}
+# C#を使用してTiDBに接続する {#connect-to-tidb-with-c}
 
-C#（発音は「Cシャープ」）は、Microsoftによって開発された.NETファミリーのプログラミング言語の一つです。他の.NET言語には、VB.NETやF#などがあります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、C#アプリケーションをMySQLプロトコル経由でTiDBに接続します。これは、TiDBが[MySQLと互換性あり](/mysql-compatibility.md) .
+C#（「シーシャープ」と発音）は、Microsoftが開発した.NETファミリーのプログラミング言語の1つです。他の.NET言語には、VB.NETとF#があります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、MySQLプロトコルを使用してC#アプリケーションをTiDBに接続します。これは、TiDBが[MySQLと互換性あり](/mysql-compatibility.md)高いためです。 ありがとうございます。
 
-.NETはWindowsでよく使用されますが、macOSとLinuxでも利用できます。すべてのプラットフォームで、コマンドとコードはほぼ同じで、プロンプトとファイルパスにわずかな違いがあるだけです。
+.NETはWindowsで広く利用されていますが、macOSやLinuxでも利用可能です。どのプラットフォームでもコマンドやコードはほぼ同じで、プロンプトやファイルパスにわずかな違いがあるだけです。
 
 ## 前提条件 {#prerequisites}
 
 -   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)をダウンロードしてください。
--   このチュートリアルでは、 `dotnet`コマンドラインツールを使用します。または、Visual Studio Code IDE を使用して C# コードを操作することもできます。
--   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB セルフマネージドクラスターを使用できます。
+-   このチュートリアルでは`dotnet`コマンドラインツールを使用します。あるいは、Visual Studio Code IDE を使用して C# コードを操作することもできます。
+-   このチュートリアルを完了するには、TiDB インスタンスへのアクセスが必要です。TiDB TiDB Cloud上の[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)インスタンスまたは[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`を使用して起動した TiDB Self-Managed クラスターを使用できます。
 
 ## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 
-`console`テンプレートを使用して新しいプロジェクトを作成します。これにより、 `tidb_cs`という名前の新しいディレクトリが生成されます。以下のコマンドを実行する前に、このディレクトリを作成する場所に移動するか、フルパスを指定してください。
+`console`テンプレートを使用して新しいプロジェクトを作成します。これにより`tidb_cs`という名前の新しいディレクトリが生成されます。次のコマンドを実行する前に、このディレクトリを作成する場所に移動するか、完全なパスを指定してください。
 
     $ dotnet new console -o tidb_cs
     The template "Console App" was created successfully.
@@ -29,7 +29,7 @@ C#（発音は「Cシャープ」）は、Microsoftによって開発された.N
 
 ## ステップ2. MySql.Dataパッケージを追加する {#step-2-add-the-mysql-data-package}
 
-.NET用のパッケージマネージャーはNuGetと呼ばれます。MySQL Connector/NETのNuGetパッケージ名は[MySQL.データ](https://www.nuget.org/packages/MySql.Data)で、.NETアプリケーションでMySQLプロトコルのサポートを提供します。バージョンを指定しない場合、NuGetは最新の安定バージョン（例：バージョン9.3.0）をインストールします。
+.NET のパッケージマネージャは NuGet と呼ばれます。MySQL Connector/NET の NuGet パッケージ名は[MySql.Data](https://www.nuget.org/packages/MySql.Data)で、.NET アプリケーションで MySQL プロトコルをサポートします。バージョンを指定しない場合、NuGet は最新の安定版 (例えば、バージョン 9.3.0) をインストールします。
 
     $ cd tidb_cs
     $ dotnet add package MySql.Data
@@ -55,7 +55,7 @@ C#（発音は「Cシャープ」）は、Microsoftによって開発された.N
 
 ## ステップ3. コードを更新する {#step-3-update-the-code}
 
-`Program.cs`の「Hello World」の例を次のコードに置き換えます。
+`Program.cs`内の「Hello World」の例を次のコードに置き換えてください。
 
 ```cs
 using System;
@@ -94,19 +94,19 @@ public class Tutorial1
 }
 ```
 
-指定されたIPとポート上のTiDBインスタンスに接続します。TiDB TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)に記載されている詳細情報に置き換えてください。
+これは、指定されたIPアドレスとポート番号のTiDBインスタンスに接続します。TiDB TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート番号、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)で提供されている詳細情報に置き換えてください。 。
 
-コードはデータベースに接続し、そのバージョンを出力、次に[`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にこの結果を出力。
+このコードはデータベースに接続し、そのバージョンを出力後、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にその結果を出力。
 
-## ステップ4. プログラムを実行する {#step-4-run-the-program}
+## ステップ4．プログラムを実行する {#step-4-run-the-program}
 
     $ dotnet run
     Connecting to TiDB...
 
-    Connected to: 8.0.11-TiDB-v8.5.5
+    Connected to: 8.0.11-TiDB-v8.5.4
 
     Version details:
-    Release Version: v8.5.5
+    Release Version: v8.5.4
     Edition: Community
     Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
     Git Branch: HEAD

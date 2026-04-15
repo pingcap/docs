@@ -1,63 +1,63 @@
 ---
-title: Connect to Your TiDB Cloud Starter or Essential Cluster
-summary: さまざまな方法でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法を学習します。
+title: Connect to Your TiDB Cloud Starter or Essential Instance
+summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにさまざまな方法で接続する方法を学びましょう。
 ---
 
-# TiDB Cloud StarterまたはEssential クラスタに接続する {#connect-to-your-tidb-cloud-starter-or-essential-cluster}
+# TiDB Cloud StarterまたはEssentialインスタンスに接続します {#connect-to-your-tidb-cloud-starter-or-essential-instance}
 
-このドキュメントでは、TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法について説明します。
+このドキュメントでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへの接続方法について説明します。
 
 > **ヒント：**
 >
-> -   TiDB Cloud Dedicated クラスターに接続する方法については、 [TiDB Cloud専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
-> -   このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法に焦点を当てています。特定のツール、ドライバー、またはORMを介してTiDBに接続するには、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
+> -   TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+> -   このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
 
 ## ネットワーク接続方法 {#network-connection-methods}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターがTiDB Cloud上に作成されたら、次のいずれかの方法でそのクラスターに接続できます。
+TiDB TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスが作成されたら、以下のいずれかの方法で接続できます。
 
 -   直接接続
 
-    直接接続とは、TCP経由のMySQLネイティブ接続システムを指します。MySQL接続をサポートする任意のツール（例： [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用してクラスタに接続できます。
+    直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、MySQL などを使用してTiDB Cloud StarterまたはEssential [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)に接続できます。 。
 
 -   [データサービス（ベータ版）](/tidb-cloud/data-service-overview.md)
 
-    TiDB Cloud は、カスタム API エンドポイントを使用した HTTPS リクエストを介して、AWS でホストされているTiDB Cloud Starter クラスターに接続できるデータサービス機能を提供します。直接接続とは異なり、データサービスは生の SQL ではなく RESTful API を介してクラスターデータにアクセスします。
+    TiDB Cloudにはデータサービス機能があり、カスタムAPIエンドポイントを使用してHTTPSリクエスト経由でAWS上でホストされているTiDB Cloud Starterインスタンスに接続できます。直接接続とは異なり、データサービスは生のSQLではなくRESTful APIを介してTiDB Cloud StarterまたはEssentialインスタンスのデータにアクセスします。
 
 -   [サーバーレスDriver（ベータ版）](/develop/serverless-driver.md)
 
-    TiDB Cloud はJavaScript 用のサーバーレス ドライバーを提供しており、これにより、直接接続と同じエクスペリエンスでエッジ環境のTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続できます。
+    TiDB CloudはJavaScript用のサーバーレスドライバを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
 
-上記の接続方法の中から、ニーズに応じて希望するものを選択できます。
+上記の接続方法の中から、ご自身のニーズに合わせてお好みの方法をお選びください。
 
-| 接続方法         | ユーザーインターフェース | シナリオ                                                                                                                                |
-| ------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| 直接接続         | SQL/ORM      | Java、Node.js、Python などの長期実行環境。                                                                                                      |
-| データサービス      | RESTful API  | すべてのブラウザとアプリケーションのインタラクション。                                                                                                         |
-| サーバーレスDriver | SQL/ORM      | [Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)などのサーバーレスおよびエッジ環境。 |
+| 接続方法         | ユーザーインターフェース | シナリオ                                                                                                                                       |
+| ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| 直接接続         | SQL/ORM      | Java、Node.js、Pythonなどの長時間稼働環境。                                                                                                             |
+| データサービス      | RESTful API  | すべてのブラウザおよびアプリケーションとのやり取り。                                                                                                                 |
+| サーバーレスDriver | SQL/ORM      | [Vercel Edgeの機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのサーバーレスおよびエッジ環境。 |
 
 ## ネットワーク {#network}
 
-TiDB Cloud Starter とTiDB Cloud Essential には、次の 2 つのネットワーク接続タイプがあります。
+TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク接続タイプがあります。
 
--   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) （推奨）
+-   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)(推奨)
 
-    プライベートエンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink を介して安全にサービスにアクセスできるようにするプライベートエンドポイントを提供します。これにより、簡素化されたネットワーク管理により、データベースサービスへの非常に安全な一方向アクセスが提供されます。
+    プライベートエンドポイント接続は、VPC内のSQLクライアントがAWS PrivateLink経由でサービスに安全にアクセスできるようにするプライベートエンドポイントを提供します。AWS PrivateLinkは、簡素化されたネットワーク管理で、データベースサービスへの高度に安全な一方向アクセスを提供します。
 
--   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
+-   [公開エンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-    標準接続ではパブリック エンドポイントが公開されるため、ラップトップから SQL クライアントを介して TiDB クラスターに接続できます。
+    標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
 
-    TiDB Cloud Starter およびTiDB Cloud Essential には[TLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)必要です。これにより、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが確保されます。
+    TiDB Cloud StarterとTiDB Cloud Essentialは[TLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を必要とします。TLSは、アプリケーションからTiDB Cloud StarterまたはEssentialインスタンスへのデータ送信のセキュリティを保証します。
 
-次の表は、さまざまな接続方法で使用できるネットワークを示しています。
+以下の表は、さまざまな接続方法で使用できるネットワークを示しています。
 
-| 接続方法               | ネットワーク                | 説明                                                                                          |
-| ------------------ | --------------------- | ------------------------------------------------------------------------------------------- |
-| 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリック エンドポイントとプライベート エンドポイントの両方を介して行うことができます。                                         |
-| データサービス（ベータ版）      | /                     | Data Service (ベータ版) を介して AWS でホストされているTiDB Cloud Starter にアクセスする場合、ネットワーク タイプを指定する必要はありません。 |
-| サーバーレスDriver（ベータ版） | パブリックエンドポイント          | Serverless Driver は、パブリック エンドポイント経由の接続のみをサポートします。                                           |
+| 接続方法               | ネットワーク                | 説明                                                                                |
+| ------------------ | --------------------- | --------------------------------------------------------------------------------- |
+| 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行うことができます。                                 |
+| データサービス（ベータ版）      | /                     | データサービス（ベータ版）を介してAWS上でホストされているTiDB Cloud Starterにアクセスする場合、ネットワークの種類を指定する必要はありません。 |
+| サーバーレスDriver（ベータ版） | 公開エンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
 
-## 次は何？ {#what-s-next}
+## 次は？ {#what-s-next}
 
-TiDB クラスターに正常に接続すると、次の操作を実行できます[TiDBでSQL文を調べる](/basic-sql-operations.md) 。
+TiDB Cloud StarterまたはEssentialインスタンスに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。

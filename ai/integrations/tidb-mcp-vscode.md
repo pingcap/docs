@@ -1,41 +1,41 @@
 ---
 title: Get started with Visual Studio Code and TiDB MCP Server
-summary: このガイドでは、Visual Studio Code で TiDB MCP サーバーを構成する方法を説明します。
+summary: このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設定する方法を説明します。
 ---
 
-# Visual Studio Code と TiDB MCP サーバーを使い始める {#get-started-with-visual-studio-code-and-tidb-mcp-server}
+# Visual Studio CodeとTiDB MCPサーバーを使い始める {#get-started-with-visual-studio-code-and-tidb-mcp-server}
 
-このガイドでは、Visual Studio Code (VS Code) で TiDB MCP サーバーを構成する方法を説明します。
+このガイドでは、Visual Studio Code (VS Code) で TiDB MCP サーバーを設定する方法を説明します。
 
 ## 前提条件 {#prerequisites}
 
-始める前に、次のものがあることを確認してください。
+始める前に、以下のものを用意してください。
 
--   **Visual Studio Code** : [code.visualstudio.com](https://code.visualstudio.com)から VS Code をダウンロードしてインストールします。
--   **Python (&gt;=3.10) と uv** : Python (3.10以降) と`uv`インストールされていることを確認してください。4 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)手順に従って`uv`インストールしてください。
--   **TiDB Cloud Starter クラスター**: [TiDB Cloud](https://tidbcloud.com/free-trial)に無料の TiDB クラスターを作成できます。
+-   **Visual Studio Code** : [code.visualstudio.com](https://code.visualstudio.com)からVS Codeをダウンロードしてインストールしてください。
+-   **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
+-   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 
 ## TiDB Cloud Starterに接続する（推奨） {#connect-to-tidb-cloud-starter-recommended}
 
-TiDB Cloudコンソールを使用して VS Code 構成を生成します。
+TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
-1.  [クラスター](https://tidbcloud.com/console/clusters)ページに移動し、クラスターを選択して、右上隅の**[AI ツールで使用]**をクリックします。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
 
-2.  **AI ツールを使用して`your_cluster_name`にアクセス**ダイアログで、VS Code がアクセスする**ブランチ**と**データベース**を選択します。
+2.  表示されたダイアログで、VS Codeがアクセスする**ブランチ**と**データベース**を選択します。
 
-3.  ダイアログの**前提条件**リストを確認し、不足している依存関係をインストールします。
+3.  ダイアログに表示される**前提条件**リストを確認し、不足している依存関係があればインストールしてください。
 
 4.  ルートパスワードを設定します。
 
-    -   まだパスワードを設定していない場合は、 **「パスワードの生成」を**クリックして、安全な場所に保存します (1 回だけ表示されます)。
-    -   パスワードがすでに存在する場合は、 **「簡単セットアップ用のパスワードを入力」**フィールドに入力します。
-    -   パスワードを忘れた場合は、 **「前提条件」**セクションの**「パスワードのリセット」**をクリックして、新しいパスワードを生成します。
+    -   まだパスワードを設定していない場合は、「パスワード**を生成」をクリックして、生成されたパスワード**を安全な場所に保存してください（パスワードは一度しか表示されません）。
+    -   パスワードが既に存在する場合は、 **「簡単なセットアップのためのパスワードを入力してください」**欄に入力してください。
+    -   パスワードを忘れた場合は、 **「前提条件」**セクションの**「パスワードのリセット」**をクリックして新しいパスワードを生成してください。
 
-5.  **VS Code**タブを選択し、 **VS Code に追加**をクリックして、VS Code に**インストール を**クリックします。
+5.  **VS Code**タブを選択し、 **「VS Codeに追加」**をクリックしてから、「VS Codeに**インストール」**をクリックします。
 
-## 手動構成（任意の TiDB クラスター） {#manual-configuration-any-tidb-cluster}
+## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
 
-手動で設定する場合は、次の構成を`.vscode/mcp.json`ファイルに追加し、プレースホルダーを接続パラメータに置き換えます。
+手動で設定する場合は、 `.vscode/mcp.json`ファイルに次の設定を追加し、プレースホルダーを接続パラメータに置き換えてください。
 
 ```json
 {
@@ -56,6 +56,6 @@ TiDB Cloudコンソールを使用して VS Code 構成を生成します。
 }
 ```
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
--   [TiDB MCP サーバー](/ai/integrations/tidb-mcp-server.md)
+-   [TiDB MCPサーバー](/ai/integrations/tidb-mcp-server.md)

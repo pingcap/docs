@@ -1,39 +1,39 @@
 ---
 title: Amazon Titan Embeddings
-summary: TiDB Cloudで Amazon Titan 埋め込みモデルを使用する方法を学びます。
+summary: TiDB CloudでAmazon Titanの埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-amazon-titan/']
 ---
 
 # Amazon Titan 埋め込み {#amazon-titan-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で Amazon Titan 埋め込みモデルを使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、Amazon Titanの埋め込みモデルをTiDB Cloudで[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)に使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-TiDB Cloud は以下の[Amazon Titan 埋め込みモデル](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)ネイティブに提供します。APIキーは必要ありません。
+TiDB Cloud は、次の[Amazon Titan埋め込みモデル](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)ネイティブで提供します。 API キーは必要ありません。
 
 **Amazon Titan テキスト埋め込み V2 モデル**
 
 -   名前: `tidbcloud_free/amazon/titan-embed-text-v2`
 -   寸法: 1024 (デフォルト)、512、256
--   距離計量：コサイン、L2
--   言語: 英語 (プレビューでは 100 以上の言語に対応)
--   一般的な使用例: RAG、ドキュメント検索、再ランク付け、分類
--   最大入力テキストトークン数: 8,192
--   最大入力テキスト文字数: 50,000
--   価格: 無料
--   TiDB Cloudがホスト: ✅
--   鍵をご持参ください: ❌
+-   距離指標：コサイン類似度、L2
+-   対応言語：英語（プレビュー版では100以上の言語に対応）
+-   典型的な使用例：RAG、文書検索、再ランキング、分類
+-   入力可能なテキストトークンの最大数：8,192
+-   入力可能なテキスト文字数：最大50,000文字
+-   価格：無料
+-   TiDB Cloudがホストしています: ✅
+-   鍵をご持参ください：❌
 
-このモデルの詳細については、 [Amazon Bedrock ドキュメント](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)参照してください。
+このモデルの詳細については、 [Amazon Bedrock のドキュメント](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)を参照してください。
 
 ## SQLの使用例 {#sql-usage-example}
 
-次の例は、Auto Embedding で Amazon Titan 埋め込みモデルを使用する方法を示しています。
+以下の例は、Amazon Titan埋め込みモデルを自動埋め込みで使用する方法を示しています。
 
 ```sql
 CREATE TABLE sample (
@@ -76,12 +76,12 @@ LIMIT 2;
 
 ## オプション {#options}
 
-`EMBED_TEXT()`関数の`additional_json_options`パラメータを介して次のオプションを指定できます。
+`additional_json_options` `EMBED_TEXT()` } パラメータを使用して、以下のオプションを指定できます。
 
 -   `normalize` (オプション): 出力埋め込みを正規化するかどうか。デフォルトは`true`です。
--   `dimensions` （オプション）: 出力埋め込みの次元数。サポートされる値: `1024` （デフォルト）、 `512` 、 `256` 。
+-   `dimensions` (オプション): 出力埋め込みの次元数。サポートされている値: `1024` (デフォルト)、 `512` 、および`256` 。
 
-**例: 代替ディメンションを使用する**
+**例：別の次元を使用する**
 
 ```sql
 CREATE TABLE sample (
@@ -123,7 +123,7 @@ LIMIT 2;
     |    4 | Java's syntax is used in Android apps.                         |
     +------+----------------------------------------------------------------+
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

@@ -1,21 +1,21 @@
 ---
 title: SHOW DISTRIBUTION JOBS
-summary: TiDB データベースの SHOW DISTRIBUTION JOBS の使用法の概要。
+summary: TiDBデータベースにおけるSHOW DISTRIBUTION JOBSの使用方法の概要。
 ---
 
-# 配布ジョブの表示<span class="version-mark">v8.5.4 の新機能</span> {#show-distribution-jobs-span-class-version-mark-new-in-v8-5-4-span}
+# 配布ジョブの表示<span class="version-mark">（v8.5.4の新機能）</span> {#show-distribution-jobs-span-class-version-mark-new-in-v8-5-4-span}
 
-`SHOW DISTRIBUTION JOBS`ステートメントは、現在のリージョン配布ジョブをすべて表示します。
+`SHOW DISTRIBUTION JOBS`ステートメントは、現在実行中のリージョン配布ジョブをすべて表示します。
 
 <CustomContent platform="tidb-cloud">
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 </CustomContent>
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowDistributionJobsStmt ::=
@@ -24,7 +24,7 @@ ShowDistributionJobsStmt ::=
 
 ## 例 {#examples}
 
-現在のリージョン配布ジョブをすべて表示:
+現在実行中のリージョン配布ジョブをすべて表示します。
 
 ```sql
 SHOW DISTRIBUTION JOBS;
@@ -38,11 +38,11 @@ SHOW DISTRIBUTION JOBS;
     |    102 | test     | t5    | p1,p2          | tikv   | peer-scatter   | cancelled | 2025-05-21 15:32:44 | 2025-05-21 15:32:47 | 2025-05-21 15:32:47 |
     +--------+----------+-------+----------------+--------+----------------+-----------+---------------------+---------------------+---------------------+
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張です。
+このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
 -   [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)

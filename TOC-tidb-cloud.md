@@ -21,7 +21,7 @@
     -   [取引](/tidb-cloud/transaction-concepts.md)
     -   [SQL](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
-    -   [データサービス](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    -   [データサービス](/tidb-cloud/data-service-concepts.md)![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [拡張性](/tidb-cloud/scalability-concepts.md)
     -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
     -   [監視](/tidb-cloud/monitoring-concepts.md)
@@ -31,11 +31,12 @@
 
 ## ガイド {#guides}
 
--   クラスタの管理
-    -   クラスタを計画する
-        -   [クラスタプランを選択してください](/tidb-cloud/select-cluster-tier.md)
-        -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
-        -   [TiDB Cloudパフォーマンスリファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
+-   クラスタを計画する
+    -   [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
+    -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
+    -   [TiDB Cloudパフォーマンスリファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
+-   [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
+-   TiDB Cloud Dedicatedクラスターの管理
     -   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
     -   TiDB Cloud Dedicatedクラスタに接続します
         -   [ネットワーク接続の概要](/tidb-cloud/connect-to-tidb-cluster.md)
@@ -49,7 +50,7 @@
     -   [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)
     -   [TiDB Cloud Dedicatedクラスタの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     -   [メンテナンスウィンドウの設定](/tidb-cloud/configure-maintenance-window.md)
-    -   TiFlashでHTAPクラスタを使用する
+    -   HTAPにはTiFlashを使用してください
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
         -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
         -   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
@@ -68,7 +69,7 @@
             -   [メールで購読する](/tidb-cloud/monitor-alert-email.md)
             -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
-        -   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)
+        -   [イベント](/tidb-cloud/tidb-cloud-events.md)
         -   サードパーティ製指標の統合
             -   [概要](/tidb-cloud/third-party-monitoring-integrations.md)
             -   [DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)
@@ -86,7 +87,7 @@
                 -   [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
                 -   [索引](/explain-indexes.md)
                 -   [テーブル結合](/explain-joins.md)
-                -   [MPPに関する質問](/explain-mpp.md)
+                -   [MPPに関する問い合わせ](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
                 -   [閲覧数](/explain-views.md)
@@ -141,8 +142,8 @@
     -   TiProxyによる接続管理
         -   [TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)
         -   [TiProxyを管理する](/tidb-cloud/tiproxy-management.md)
-    -   [TiDBクラスタのアップグレード](/tidb-cloud/upgrade-tidb-cluster.md)
-    -   [TiDBクラスタを削除します](/tidb-cloud/delete-tidb-cluster.md)
+    -   [TiDBのバージョンをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+    -   [TiDB Cloud Dedicatedクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
@@ -164,7 +165,7 @@
         -   [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
         -   [データ移行に関する事前チェックエラー、移行エラー、およびアラート](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
-        -   [AWS DMSをTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+        -   [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 -   データ探索
     -   [SQLエディタでのChat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [SQLプロキシアカウント](/tidb-cloud/sql-proxy-account.md)

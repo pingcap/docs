@@ -1,30 +1,30 @@
 ---
 title: TiDB Cloud Serverless Driver Drizzle Tutorial
-summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する方法を学びます。
+summary: TiDB CloudサーバーレスドライバーをDrizzleで使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 ---
 
-# TiDB CloudサーバーレスDriverDrizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
+# TiDB Cloud Serverless Driver Drizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
 
-[霧雨ORM](https://orm.drizzle.team/) 、開発者エクスペリエンス`drizzle-orm@0.31.2`重視した軽量で高性能な TypeScript ORM です。2 以降では[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)サポートし、 [TiDB Cloudサーバーレス ドライバー](/develop/serverless-driver.md)では HTTPS 経由で Drizzle を利用できるようになります。
+[Drizzle ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを念頭に置いた軽量で高性能な TypeScript ORM です。 `drizzle-orm@0.31.2`以降、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートしており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md).
 
-このチュートリアルでは、Node.js 環境およびエッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
+このチュートリアルでは、Node.js環境およびエッジ環境でDrizzleとTiDB Cloudサーバーレスドライバーを使用する方法について説明します。
 
 > **ヒント：**
 >
-> このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
+> このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
 
-## Node.js環境でDrizzleとTiDB Cloudサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
+## Node.js環境でDrizzleとTiDB Cloudのサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
 
-このセクションでは、Node.js 環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
+このセクションでは、Node.js環境でDrizzleとTiDB Cloudサーバーレスドライバーを連携させる方法について説明します。
 
 ### 始める前に {#before-you-begin}
 
-このチュートリアルを完了するには、次のものが必要です。
+このチュートリアルを完了するには、以下のものが必要です。
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)実行できます。
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
+-   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -35,13 +35,13 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     cd drizzle-node-example
     ```
 
-2.  `drizzle-orm`と`@tidbcloud/serverless`パッケージをインストールします。
+2.  `drizzle-orm`および`@tidbcloud/serverless`パッケージをインストールしてください。
 
     ```shell
     npm install drizzle-orm @tidbcloud/serverless
     ```
 
-3.  プロジェクトのルート ディレクトリで、 `package.json`ファイルを見つけ、ファイルに`"type": "module"`追加して ES モジュールを指定します。
+3.  プロジェクトのルートディレクトリで、 `package.json`ファイルを探し、そのファイルに`"type": "module"`を追加して ES モジュールを指定します。
 
     ```json
     {
@@ -53,7 +53,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     }
     ```
 
-4.  プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義するファイル`tsconfig.json`を追加します。以下にサンプルファイルを示します。
+4.  プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
 
     ```json
     {
@@ -74,19 +74,19 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Starter クラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成] をクリックし、ランダム パスワード**を作成します。
+2.  概要ページで、右上隅の**「接続」**をクリックし、 **「接続先」**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
     接続文字列は次のようになります。
 
         mysql://[username]:[password]@[host]/[database]
 
-3.  ローカル環境で環境変数`DATABASE_URL`を設定します。例えば、LinuxまたはmacOSでは、次のコマンドを実行できます。
+3.  ローカル環境で環境変数`DATABASE_URL`を設定してください。例えば、Linux または macOS では、次のコマンドを実行できます。
 
     ```shell
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
@@ -94,9 +94,9 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ3. Drizzleを使用してデータをクエリする {#step-3-use-drizzle-to-query-data}
 
-1.  TiDB Cloud Starter クラスターにテーブルを作成します。
+1.  TiDB Cloud Starterインスタンスにテーブルを作成します。
 
-    [TiDB Cloudコンソールの SQL エディター](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)使用するとSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)使用してSQL文を実行できます。以下に例を示します。
 
     ```sql
     CREATE TABLE `test`.`users` (
@@ -106,7 +106,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     );
     ```
 
-2.  プロジェクトのルート ディレクトリに`hello-world.ts`という名前のファイルを作成し、次のコードを追加します。
+2.  プロジェクトのルートディレクトリに、 `hello-world.ts`という名前のファイルを作成し、以下のコードを追加してください。
 
     ```ts
     import { connect } from '@tidbcloud/serverless';
@@ -133,54 +133,54 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     console.log(result);
     ```
 
-### ステップ4. Typescriptコードを実行する {#step-4-run-the-typescript-code}
+### ステップ4．TypeScriptコードを実行する {#step-4-run-the-typescript-code}
 
-1.  `ts-node`インストールして TypeScript を JavaScript に変換し、次に`@types/node`インストールして Node.js に TypeScript 型定義を提供します。
+1.  TypeScript を JavaScript に変換するには`ts-node`をインストールし、次に Node.js 用の TypeScript 型定義を提供するには`@types/node`をインストールします。
 
     ```shell
     npm install -g ts-node
     npm i --save-dev @types/node
     ```
 
-2.  次のコマンドで Typescript コードを実行します。
+2.  以下のコマンドでTypeScriptコードを実行してください。
 
     ```shell
     ts-node --esm hello-world.ts
     ```
 
-## エッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-edge-environments}
+## エッジ環境でDrizzleとTiDB Cloudのサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-edge-environments}
 
-このセクションでは、Vercel Edge Function を例に説明します。
+このセクションでは、Vercel Edge関数を例として取り上げます。
 
 ### 始める前に {#before-you-begin}
 
-このチュートリアルを完了するには、次のものが必要です。
+このチュートリアルを完了するには、以下のものが必要です。
 
 -   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
--   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)実行できます。
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
+-   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1.  Vercel CLI をインストールします。
+1.  Vercel CLIをインストールしてください。
 
     ```shell
     npm i -g vercel@latest
     ```
 
-2.  次のターミナル コマンドを使用して、 `drizzle-example`という[ネクスト.js](https://nextjs.org/)プロジェクトを作成します。
+2.  以下のターミナルコマンドを使用して`drizzle-example`という名前の[Next.js](https://nextjs.org/)プロジェクトを作成します。
 
     ```shell
     npx create-next-app@latest drizzle-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
     ```
 
-3.  `drizzle-example`ディレクトリに移動します。
+3.  `drizzle-example`ディレクトリに移動してください。
 
     ```shell
     cd drizzle-example
     ```
 
-4.  `drizzle-orm`と`@tidbcloud/serverless`パッケージをインストールします。
+4.  `drizzle-orm`および`@tidbcloud/serverless`パッケージをインストールしてください。
 
     ```shell
     npm install drizzle-orm @tidbcloud/serverless --force
@@ -188,13 +188,13 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Starter クラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
-2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成] をクリックし、ランダム パスワード**を作成します。
+2.  概要ページで、右上隅の**「接続」**をクリックし、 **「接続先」**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
     接続文字列は次のようになります。
 
@@ -202,9 +202,9 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1.  TiDB Cloud Starter クラスターにテーブルを作成します。
+1.  TiDB Cloud Starterインスタンスにテーブルを作成します。
 
-    [TiDB Cloudコンソールの SQL エディター](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md)使用してSQL文を実行できます。以下に例を示します。
 
     ```sql
     CREATE TABLE `test`.`users` (
@@ -214,7 +214,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     );
     ```
 
-2.  プロジェクトの`app`ディレクトリにファイル`/api/edge-function-example/route.ts`を作成し、次のコードを追加します。
+2.  プロジェクトの`app`ディレクトリに、 `/api/edge-function-example/route.ts`ファイルを作成し、以下のコードを追加します。
 
     ```ts
     import { NextResponse } from 'next/server';
@@ -246,28 +246,28 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     }
     ```
 
-3.  コードをローカルでテストします。
+3.  コードをローカル環境でテストしてください。
 
     ```shell
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     next dev
     ```
 
-4.  ルートからの応答を取得するには、 `http://localhost:3000/api/edge-function-example`に移動します。
+4.  `http://localhost:3000/api/edge-function-example`に移動して、ルートからの応答を取得してください。
 
-### ステップ4. コードをVercelにデプロイ {#step-4-deploy-your-code-to-vercel}
+### ステップ4．Vercelにコードをデプロイ {#step-4-deploy-your-code-to-vercel}
 
-1.  `DATABASE_URL`環境変数を使用してコードを Vercel にデプロイ。
+1.  `DATABASE_URL`環境変数を使用して、Vercelにコードをデプロイ。
 
     ```shell
     vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
     ```
 
-    デプロイが完了すると、プロジェクトの URL が取得されます。
+    デプロイが完了すると、プロジェクトのURLが発行されます。
 
-2.  ルートからの応答を取得するには、 `${Your-URL}/api/edge-function-example`ページに移動します。
+2.  `${Your-URL}/api/edge-function-example`ページに移動して、ルートからの応答を取得してください。
 
-## 次は何？ {#what-s-next}
+## 次は？ {#what-s-next}
 
--   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しく説明します。
--   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学習します。
+-   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しくはこちらをご覧ください。
+-   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学びましょう。

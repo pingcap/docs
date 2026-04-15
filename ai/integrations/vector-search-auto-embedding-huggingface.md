@@ -1,32 +1,32 @@
 ---
 title: Hugging Face Embeddings
-summary: TiDB Cloudで Hugging Face 埋め込みモデルを使用する方法を学びます。
+summary: TiDB CloudでHugging Face埋め込みモデルを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 ---
 
-# ハグフェイス埋め込み {#hugging-face-embeddings}
+# ハグする顔の埋め込み {#hugging-face-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で Hugging Face 埋め込みモデルを使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudで Hugging Face 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用する方法、テキストクエリによる意味検索を実行する方法について説明します。
 
 > **注記：**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
-独自の[ハグ顔推論API](https://huggingface.co/docs/inference-providers/index)キー (BYOK) を持ち込む場合、Hugging Face モデルは`huggingface/`プレフィックスで使用できます。
+[ハグ顔推論API](https://huggingface.co/docs/inference-providers/index)キー（BYOK）をお持ちの場合は、 `huggingface/`プレフィックスを使用してハグ顔モデルをご利用いただけます。
 
-便宜上、以下のセクションではいくつかの一般的なモデルを例として使用します。利用可能なモデルの完全なリストについては、 [ハグフェイスモデル](https://huggingface.co/models?library=sentence-transformers&#x26;inference_provider=hf-inference&#x26;sort=trending)参照してください。すべてのモデルがHugging Face Inference APIで利用可能であるわけではなく、確実に動作するわけでもありませんのでご了承ください。
+便宜上、以下のセクションではいくつかの人気モデルを例として使用します。利用可能なモデルの全リストについては、 [ハグ顔モデル](https://huggingface.co/models?library=sentence-transformers&#x26;inference_provider=hf-inference&#x26;sort=trending)を参照してください。なお、すべてのモデルがハグ顔推論APIで利用できるわけではなく、また正常に動作するとは限りません。
 
-## 多言語-e5-ラージ {#multilingual-e5-large}
+## 多言語対応E5ラージ {#multilingual-e5-large}
 
 -   名前: `huggingface/intfloat/multilingual-e5-large`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   価格：Hugging Faceによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
--   プロジェクトホーム: [https://huggingface.co/intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)
+-   距離指標：コサイン類似度、L2
+-   価格：ハギングフェイスによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
+-   プロジェクトホームページ： [https://huggingface.co/intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)
 
 例：
 
@@ -66,11 +66,11 @@ LIMIT 2;
 
 -   名前: `huggingface/BAAI/bge-m3`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   価格：Hugging Faceによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
--   プロジェクトホーム: [https://huggingface.co/BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3)
+-   距離指標：コサイン類似度、L2
+-   価格：ハグフェイスによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
+-   プロジェクトホームページ： [https://huggingface.co/BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3)
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -104,15 +104,15 @@ ORDER BY
 LIMIT 2;
 ```
 
-## オールミニLM-L6-v2 {#all-minilm-l6-v2}
+## all-MiniLM-L6-v2 {#all-minilm-l6-v2}
 
 -   名前: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
 -   寸法: 384
--   距離計量：コサイン、L2
--   価格：Hugging Faceによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
--   プロジェクトホーム: [https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+-   距離指標：コサイン類似度、L2
+-   価格：ハギングフェイスによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
+-   プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 
 例：
 
@@ -152,11 +152,11 @@ LIMIT 2;
 
 -   名前: `huggingface/sentence-transformers/all-mpnet-base-v2`
 -   寸法: 768
--   距離計量：コサイン、L2
--   価格：Hugging Faceによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
--   プロジェクトホーム: [https://huggingface.co/sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
+-   距離指標：コサイン類似度、L2
+-   価格：ハギングフェイスによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
+-   プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -190,20 +190,20 @@ ORDER BY
 LIMIT 2;
 ```
 
-## Qwen3-埋め込み-0.6B {#qwen3-embedding-0-6b}
+## Qwen3-Embedding-0.6B {#qwen3-embedding-0-6b}
 
 > **注記：**
 >
-> Hugging Face Inference API はこのモデルでは不安定になる可能性があります。
+> このモデルでは、ハグ顔推論APIが不安定になる可能性があります。
 
 -   名前: `huggingface/Qwen/Qwen3-Embedding-0.6B`
 -   寸法: 1024
--   距離計量：コサイン、L2
--   最大入力テキストトークン数: 512
--   価格：Hugging Faceによる請求
--   TiDB Cloudがホスト: ❌
--   鍵をご持参ください: ✅
--   プロジェクトホーム: [https://huggingface.co/Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B)
+-   距離指標：コサイン類似度、L2
+-   入力可能なテキストトークンの最大数：512
+-   価格：ハギングフェイスによる課金
+-   TiDB Cloudでホストされています: ❌
+-   鍵をご持参ください：✅
+-   プロジェクトホームページ： [https://huggingface.co/Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B)
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -239,9 +239,9 @@ LIMIT 2;
 
 ## Pythonの使用例 {#python-usage-example}
 
-この例では、ベクター テーブルを作成し、ドキュメントを挿入し、Hugging Face 埋め込みモデルを使用して類似性検索を実行する方法を示します。
+この例では、Hugging Face埋め込みモデルを使用して、ベクターテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
-### ステップ1: データベースに接続する {#step-1-connect-to-the-database}
+### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
 ```python
 from pytidb import TiDBClient
@@ -256,11 +256,11 @@ tidb_client = TiDBClient.connect(
 )
 ```
 
-### ステップ2: APIキーを設定する {#step-2-configure-the-api-key}
+### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-プライベートモデルをご利用の場合、またはより高いレート制限が必要な場合は、Hugging Face APIトークンを設定できます。トークンは[ハグフェイストークンの設定](https://huggingface.co/settings/tokens)ページ目から作成できます。
+プライベート モデルを使用している場合、またはより高いレート制限が必要な場合は、Hugging Face API トークンを構成できます。[ハグフェイストークン設定](https://huggingface.co/settings/tokens)ページからトークンを作成できます。
 
-TiDB クライアントを使用して、Hugging Face モデルの API トークンを設定します。
+TiDBクライアントを使用して、ハグフェイスモデルのAPIトークンを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -269,9 +269,9 @@ tidb_client.configure_embedding_provider(
 )
 ```
 
-### ステップ3: ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
 
-Hugging Face モデルを使用して埋め込みを生成するベクトル フィールドを含むテーブルを作成します。
+ハギングフェイスモデルを使用して埋め込みを生成するベクトルフィールドを持つテーブルを作成します。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -291,9 +291,9 @@ table = tidb_client.create_table(schema=Document, if_exists="overwrite")
 
 > **ヒント：**
 >
-> ベクトルの次元は選択したモデルによって異なります。例えば、 `huggingface/sentence-transformers/all-MiniLM-L6-v2`は384次元のベクトルが生成され、 `huggingface/sentence-transformers/all-mpnet-base-v2`では768次元のベクトルが生成されます。
+> ベクトルの次元は、選択したモデルによって異なります。たとえば、 `huggingface/sentence-transformers/all-MiniLM-L6-v2`は 384 次元のベクトルを生成し、 `huggingface/sentence-transformers/all-mpnet-base-v2`は 768 次元のベクトルを生成します。
 
-### ステップ4: テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
+### ステップ4：テーブルにデータを挿入する {#step-4-insert-data-into-the-table}
 
 `table.insert()`または`table.bulk_insert()` API を使用してデータを追加します。
 
@@ -308,9 +308,9 @@ documents = [
 table.bulk_insert(documents)
 ```
 
-### ステップ5: 類似文書を検索する {#step-5-search-for-similar-documents}
+### ステップ5：類似文書を検索する {#step-5-search-for-similar-documents}
 
-`table.search()` API を使用してベクトル検索を実行します。
+`table.search()` APIを使用してベクトル検索を実行します。
 
 ```python
 results = table.search("How do neural networks work?") \
@@ -321,7 +321,7 @@ for doc in results:
     print(f"ID: {doc.id}, Content: {doc.content}")
 ```
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)

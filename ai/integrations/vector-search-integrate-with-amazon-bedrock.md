@@ -1,86 +1,86 @@
 ---
 title: Integrate TiDB Vector Search with Amazon Bedrock
-summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生成 (RAG) Q&A ボットを構築する方法を学びます。
+summary: TiDB Vector SearchをAmazon Bedrockと統合して、検索拡張生成（RAG）Q&Aボットを構築する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 ---
 
-# TiDB Vector Search を Amazon Bedrock に統合する {#integrate-tidb-vector-search-with-amazon-bedrock}
+# TiDB Vector SearchをAmazon Bedrockと統合する {#integrate-tidb-vector-search-with-amazon-bedrock}
 
 > **注記：**
 >
-> このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managed には適用されません。
+> このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
-このチュートリアルでは、 [TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と[アマゾンの岩盤](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
+このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と[アマゾンの岩盤](https://aws.amazon.com/bedrock/)統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 > **注記：**
 >
-> -   ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> -   ベクトル検索機能は[TiDBセルフマネージド](/overview.md) 、 [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) 、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用可能です。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
 >
-> [サンプルコード](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)全体をノートブック形式で閲覧できます。
+> 完全な[サンプルコード](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)Notebook 形式で表示できます。
 
 ## 前提条件 {#prerequisites}
 
-このチュートリアルを完了するには、次のものが必要です。
+このチュートリアルを完了するには、以下が必要です。
 
--   [Python 3.11以降](https://www.python.org/downloads/)インストール済み
+-   [Python 3.11以降](https://www.python.org/downloads/)インストールされています
 
--   [ピップ](https://pypi.org/project/pip/)インストール済み
+-   [ピップ](https://pypi.org/project/pip/)がインストールされました
 
--   [AWS CLI](https://aws.amazon.com/cli/)インストール済み
+-   [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
 
-    AWS CLI プロファイルがサポートされている[アマゾンの岩盤](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされているリージョンの一覧は[アマゾンの岩盤地域](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)にあります。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
+    AWS CLI プロファイルがサポートされている[アマゾンの岩盤](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされている地域のリストは[アマゾンの岩盤地帯](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)でご覧いただけます。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
 
     ```shell
     aws configure set region <your-region>
     ```
 
--   TiDB Cloud Starter クラスター
+-   TiDB Cloud Starterインスタンス
 
-    独自のTiDB Cloudクラスターがない場合は、手順[TiDB Cloud Starter クラスターの作成](/tidb-cloud/select-cluster-tier.md#starter)に従って作成します。
+    お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/select-cluster-tier.md#starter)。
 
--   [Amazon Bedrock に必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)と次のモデルへのアクセス権を持つ AWS アカウント:
+-   [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
 
-    -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) テキスト埋め込みの生成に使用
-    -   **Meta Llama 3** ( `us.meta.llama3-2-3b-instruct-v1:0` )、テキスト生成に使用
+    -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) は、テキスト埋め込みを生成するために使用されます。
+    -   テキスト生成に使用される**メタラマ3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
 
-    アクセスできない場合は、 [Amazon Bedrock 基盤モデルへのアクセスをリクエストする](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)手順に従ってください。
+    アクセス権がない場合は、 [Amazon Bedrock基盤モデルへのアクセスをリクエストする](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)手順に従ってください。
 
-## 始めましょう {#get-started}
+## さあ始めましょう {#get-started}
 
-このセクションでは、TiDB Vector Search を Amazon Bedrock と統合して RAG ベースの Q&amp;A ボットを構築するための手順を段階的に説明します。
+このセクションでは、TiDB Vector SearchをAmazon Bedrockと統合してRAGベースのQ&amp;Aボットを構築するための手順を段階的に説明します。
 
-### ステップ1.環境変数を設定する {#step-1-set-the-environment-variables}
+### ステップ1. 環境変数を設定する {#step-1-set-the-environment-variables}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/)から TiDB 接続情報を取得し、開発環境で環境変数を次のように設定します。
+[TiDB Cloudコンソール](https://tidbcloud.com/)からTiDB接続情報を取得し、開発環境の環境変数を以下のように設定してください。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
-3.  接続ダイアログの構成が動作環境と一致していることを確認します。
+3.  接続ダイアログの設定がご使用のオペレーティング環境と一致していることを確認してください。
 
-    -   **接続タイプ**は`Public`に設定されています
+    -   **接続タイプ**は`Public`に設定されています。
 
-    -   **ブランチ**は`main`に設定されています
+    -   **ブランチ**は`main`に設定されています。
 
-    -   **接続先が**`General`に設定されています
+    -   **Connect With は**`General`に設定されています。
 
-    -   **オペレーティング システムは**環境に適合します。
-
-    > **ヒント：**
-    >
-    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
-
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
+    -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
+    > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-5.  環境変数を設定するには、ターミナルで以下のコマンドを実行します。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続​​パラメータに置き換える必要があります。
+4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+
+    > **ヒント：**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
+
+5.  環境変数を設定するには、ターミナルで以下のコマンドを実行してください。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続​​パラメータに置き換える必要があります。
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -90,7 +90,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
     export TIDB_DB_NAME=test
     ```
 
-### ステップ2. Python仮想環境を設定する {#step-2-set-up-the-python-virtual-environment}
+### ステップ2. Python仮想環境をセットアップする {#step-2-set-up-the-python-virtual-environment}
 
 1.  `demo.py`という名前の Python ファイルを作成します。
 
@@ -98,7 +98,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
     touch demo.py
     ```
 
-2.  依存関係を管理するために仮想環境を作成してアクティブ化します。
+2.  依存関係を管理するための仮想環境を作成してアクティブ化する：
 
     ```shell
     python3 -m venv env
@@ -113,7 +113,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 ### ステップ3. 必要なライブラリをインポートする {#step-3-import-required-libraries}
 
-必要なライブラリをインポートするには、 `demo.py`の先頭に次のコードを追加します。
+必要なライブラリをインポートするには、 `demo.py`の先頭に次のコードを追加してください。
 
 ```python
 import os
@@ -124,9 +124,9 @@ from sqlalchemy.orm import declarative_base, Session
 from tidb_vector.sqlalchemy import VectorType
 ```
 
-### ステップ4. データベース接続を構成する {#step-4-configure-the-database-connection}
+### ステップ4．データベース接続の設定 {#step-4-configure-the-database-connection}
 
-`demo.py`で、次のコードを追加してデータベース接続を構成します。
+`demo.py`に、データベース接続を設定するための以下のコードを追加します。
 
 ```python
 # ---- Configuration Setup ----
@@ -147,16 +147,16 @@ engine = create_engine(get_db_url(), pool_recycle=300)
 Base = declarative_base()
 ```
 
-### ステップ 5. Bedrock ランタイム クライアントを使用して Amazon Titan Text Embeddings V2 モデルを呼び出す {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
+### ステップ5. Bedrockランタイムクライアントを使用してAmazon Titan Text Embeddings V2モデルを呼び出します。 {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
 
-Amazon Bedrock ランタイムクライアントは、次のパラメータを受け入れる`invoke_model` API を提供します。
+Amazon Bedrock ランタイム クライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
 
 -   `modelId` : Amazon Bedrock で利用可能な基盤モデルのモデル ID。
--   `accept` : 入力要求のタイプ。
--   `contentType` : 入力のコンテンツ タイプ。
--   `body` : プロンプトと構成で構成される JSON 文字列ペイロード。
+-   `accept` : 入力リクエストのタイプ。
+-   `contentType` : 入力のコンテンツタイプ。
+-   `body` : プロンプトと設定で構成される JSON 文字列ペイロード。
 
-`demo.py`に次のコードを追加して`invoke_model` API を呼び出し、Amazon Titan Text Embeddings を使用してテキスト埋め込みを生成し、Meta Llama 3 からの応答を取得します。
+`demo.py`に次のコードを追加して、 `invoke_model` API を呼び出し、Amazon Titan Text Embeddings を使用してテキスト埋め込みを生成し、Meta Llama 3 から応答を取得します。
 
 ```python
 # Bedrock Runtime Client Setup
@@ -228,9 +228,9 @@ def generate_result(query: str, info_str: str):
     return completion
 ```
 
-### ステップ6.ベクターテーブルを作成する {#step-6-create-a-vector-table}
+### ステップ6. ベクターテーブルを作成する {#step-6-create-a-vector-table}
 
-`demo.py`に次のコードを追加して、テキストとベクトル埋め込みを格納するベクトル テーブルを作成します。
+`demo.py`に、テキストとベクター埋め込みを格納するベクターテーブルを作成するための以下のコードを追加します。
 
 ```python
 # ---- TiDB Setup and Vector Index Creation ----
@@ -245,9 +245,9 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### ステップ7. ベクターデータをTiDB Cloud Starterに保存する {#step-7-save-the-vector-data-to-tidb-cloud-starter}
+### ステップ7. ベクターデータをTiDB Cloud Starterに保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
 
-`demo.py`で、次のコードを追加して、ベクター データをTiDB Cloud Starter クラスターに保存します。
+`demo.py`に、ベクトルデータをTiDB Cloud Starterインスタンスに保存するための以下のコードを追加します。
 
 ```python
 # ---- Saving Vectors to TiDB ----
@@ -259,9 +259,9 @@ def save_entities_with_embedding(session, contents):
     session.commit()
 ```
 
-### ステップ8. アプリケーションを実行する {#step-8-run-the-application}
+### ステップ8．アプリケーションを実行する {#step-8-run-the-application}
 
-1.  `demo.py`では、次のコードを追加して、データベース セッションを確立し、埋め込みを TiDB に保存し、サンプルの質問 (「TiDB とは何ですか?」など) を尋ね、モデルから結果を生成します。
+1.  `demo.py`に、データベースセッションを確立し、埋め込みを TiDB に保存し、例となる質問 (「TiDB とは何ですか？」など) を尋ね、モデルから結果を生成するための以下のコードを追加します。
 
     ```python
     if __name__ == "__main__":
@@ -288,13 +288,13 @@ def save_entities_with_embedding(session, contents):
             print(f"Generated answer: {result}")
     ```
 
-2.  すべての変更を`demo.py`に保存し、スクリプトを実行します。
+2.  `demo.py`へのすべての変更を保存し、スクリプトを実行します。
 
     ```shell
     python3 demo.py
     ```
 
-    予想される出力は次のようになります。
+    期待される出力は以下のようになります。
 
         Generated answer:  What is the main purpose of TiDB?
              What are the key features of TiDB?
@@ -316,7 +316,7 @@ def save_entities_with_embedding(session, contents):
 
         The final answer is: TiDB is a distributed SQL database compatible with MySQL.
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [ベクター検索インデックス](/ai/reference/vector-search-index.md)
+-   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

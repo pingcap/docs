@@ -1,6 +1,6 @@
 ---
 title: JSON Functions That Validate JSON Documents
-summary: JSON ドキュメントを検証する JSON関数について学習します。
+summary: JSONドキュメントを検証するJSON関数について学びましょう。
 ---
 
 # JSONドキュメントを検証するJSON関数 {#json-functions-that-validate-json-documents}
@@ -9,52 +9,52 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 
 > **注記：**
 >
-> 現在、この機能はクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> 現在、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 ## <code>JSON_SCHEMA_VALID()</code> {#code-json-schema-valid-code}
 
-`JSON_SCHEMA_VALID(schema, json_doc)`関数は、データの整合性と一貫性を確保するために、スキーマに対して JSON ドキュメントを検証します。
+`JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
 
-これを[チェック](/constraints.md#check)制約と一緒に使用すると、テーブルが変更されたときに自動スキーマ検証を行うことができます。
+これは[チェック](/constraints.md#check)制約と組み合わせて使用​​することで、テーブルが変更されたときにスキーマの自動検証を行うことができます。
 
-この関数は[JSONスキーマ仕様](https://json-schema.org/specification)に従います。
+この関数は[JSONスキーマ仕様](https://json-schema.org/specification)に準拠しています。
 
-サポートされている検証キーワードは次のとおりです。
+サポートされている検証キーワードは以下のとおりです。
 
-| 検証キーワード                | 適用タイプ                | 説明                                        |
-| ---------------------- | -------------------- | ----------------------------------------- |
-| `type`                 | どれでも                 | タイプをテストします（ `array`や`string`など）           |
-| `enum`                 | どれでも                 | 値が指定された値の配列内にあるかどうかをテストします                |
-| `const`                | どれでも                 | `enum`と同様だが、単一の値である                       |
-| `allOf`                | どれでも                 | 指定されたすべてのスキーマに一致します                       |
-| `anyOf`                | どれでも                 | 指定されたスキーマのいずれかに一致する                       |
-| `multipleOf`           | `number` / `integer` | 値が指定された値の倍数かどうかをテストします                    |
-| `maximum`              | `number` / `integer` | 値が最大値（含む）を下回っているかどうかをテストします               |
-| `exclusiveMaximum`     | `number` / `integer` | 値が最大値（含まない）を下回っているかどうかをテストします             |
-| `minimum`              | `number` / `integer` | 値が最小値（含む）を超えているかどうかをテストします                |
-| `exclusiveMinimum`     | `number` / `integer` | 値が最小値（含まない）より大きいかどうかをテストします               |
-| `maxlength`            | `string`             | 値の長さが指定された値を超えていないかどうかをテストします             |
-| `minLength`            | `string`             | 値の長さが指定された値以上かどうかをテストします                  |
-| `format`               | `string`             | 文字列が名前付きフォーマットと一致するかどうかをテストします            |
-| `pattern`              | `string`             | 文字列がパターンに一致するかどうかをテストします                  |
-| `items`                | `array`              | 配列の項目に適用するスキーマ                            |
-| `prefixItems`          | `array`              | 配列の位置項目に適用するスキーマ                          |
-| `maxItems`             | `array`              | 配列内の項目数が指定された値を超えていないかどうかをテストします          |
-| `minItems`             | `array`              | 配列内の項目数が指定された値以上かどうかをテストします               |
-| `uniqueItems`          | `array`              | 配列内の項目が一意かどうかをテストします`true` / `false`      |
-| `contains`             | `array`              | 配列に含まれる項目のスキーマを設定します                      |
-| `maxContains`          | `array`              | `contains`と一緒に使用して、アイテムが存在できる最大回数をテストします。 |
-| `minContains`          | `array`              | `contains`と一緒に使用して、アイテムが存在できる最小回数をテストします。 |
-| `properties`           | `object`             | オブジェクトのプロパティに適用するスキーマ                     |
-| `patternProperties`    | `object`             | プロパティ名のパターンマッチングに基づいて特定のプロパティに適用するスキーマ    |
-| `additionalProperties` | `object`             | 追加のプロパティが許可されるかどうか、 `true` / `false`      |
-| `minProperties`        | `object`             | オブジェクトが持つことができるプロパティの最小数をテストします           |
-| `maxProperties`        | `object`             | オブジェクトが持つことができるプロパティの最大数をテストします           |
-| `required`             | `object`             | 指定されたプロパティ名がオブジェクト内に存在するかどうかをテストします       |
+| 検証キーワード                | 適用タイプ                | 説明                                            |
+| ---------------------- | -------------------- | --------------------------------------------- |
+| `type`                 | どれでも                 | 型をテストします（例： `array`および`string` ）。             |
+| `enum`                 | どれでも                 | 値が指定された値の配列に含まれているかどうかをテストします。                |
+| `const`                | どれでも                 | `enum`と同様だが、単一の値用                             |
+| `allOf`                | どれでも                 | 指定されたすべてのスキーマに一致します                           |
+| `anyOf`                | どれでも                 | 指定されたスキーマのいずれかに一致する                           |
+| `multipleOf`           | `number` / `integer` | 値が指定された値の倍数であるかどうかをテストします。                    |
+| `maximum`              | `number` / `integer` | 値が最大値（含む）を下回っているかどうかをテストします。                  |
+| `exclusiveMaximum`     | `number` / `integer` | 値が最大値（排他的）を下回っているかどうかをテストします。                 |
+| `minimum`              | `number` / `integer` | 値が最小値（含む）以上かどうかをテストします。                       |
+| `exclusiveMinimum`     | `number` / `integer` | 値が最小値以上かどうかをテストします（最小値以外）。                    |
+| `maxlength`            | `string`             | 値の長さが指定された値を超えていないかどうかをテストします。                |
+| `minLength`            | `string`             | 値の長さが指定された値以上であるかどうかをテストします。                  |
+| `format`               | `string`             | 文字列が指定された形式に一致するかどうかをテストします。                  |
+| `pattern`              | `string`             | 文字列がパターンに一致するかどうかをテストします                      |
+| `items`                | `array`              | 配列の要素に適用するスキーマ                                |
+| `prefixItems`          | `array`              | 配列の位置要素に適用するスキーマ                              |
+| `maxItems`             | `array`              | 配列内の項目数が指定された値を超えていないかどうかをテストします。             |
+| `minItems`             | `array`              | 配列内の項目数が指定された値以上であるかどうかをテストします。               |
+| `uniqueItems`          | `array`              | 配列内の項目が一意であるかどうかをテストします。 `true` / `false`     |
+| `contains`             | `array`              | 配列に含まれる項目のスキーマを設定します。                         |
+| `maxContains`          | `array`              | `contains`と組み合わせて使用​​し、アイテムが存在できる最大回数をテストします。 |
+| `minContains`          | `array`              | `contains`と併用して、アイテムが存在できる最小回数をテストします。        |
+| `properties`           | `object`             | オブジェクトのプロパティに適用するスキーマ                         |
+| `patternProperties`    | `object`             | プロパティ名のパターンマッチングに基づいて特定のプロパティに適用するスキーマ        |
+| `additionalProperties` | `object`             | 追加のプロパティが許可されているかどうかに関わらず、 `true` / `false`   |
+| `minProperties`        | `object`             | オブジェクトが持つことができるプロパティの最小数をテストします。              |
+| `maxProperties`        | `object`             | オブジェクトが持つことができるプロパティの最大数をテストします。              |
+| `required`             | `object`             | 指定されたプロパティ名がオブジェクト内に存在するかどうかをテストします。          |
 
-例:
+例：
 
-いくつかの例では、次の JSON ドキュメントを使用します。
+いくつかの例については、このJSONドキュメントを使用してください。
 
 ```json
 {
@@ -70,13 +70,13 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 }
 ```
 
-JSON ドキュメントを保持するには[ユーザー定義変数](/user-defined-variables.md)を使用します。
+[ユーザー定義変数](/user-defined-variables.md)を使用して JSON ドキュメントを保持します。
 
 ```sql
 SET @j := '{"fruits": ["orange", "apple", "pear"], "vegetables": ["carrot", "pepper", "kale"]}';
 ```
 
-まず、次のタイプをテストします。
+まず、型のテストから始めましょう。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "object"}',@j);
@@ -111,9 +111,9 @@ mysql> SELECT JSON_TYPE(@j);
     +---------------+
     1 row in set (0.00 sec)
 
-上記の出力からわかるように、 `@j`の型は`object`です。これは[`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type)の出力と一致します。
+上記の出力で確認できるように、 `@j`のタイプは`object`です。これは[`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type)の出力と一致します。
 
-ここで、特定の属性の存在を検証します。
+次に、特定の属性の存在を確認します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
@@ -126,7 +126,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
     +---------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力では、属性`fruits`と`vegetables`の存在の検証が成功したことがわかります。
+上記の出力から、 `fruits`および`vegetables`属性の存在の検証が成功していることがわかります。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
@@ -139,9 +139,9 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
     +------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力では、 `grains`が存在しないため、 `fruits` 、 `vegetables` 、 `grains`属性の存在の検証が失敗していることがわかります。
+上記の出力から、 `fruits` 、 `vegetables` 、 `grains` }}属性の存在検証が、 `grains`存在しないため失敗していることがわかります。
 
-ここで、 `fruits`が配列であることを検証します。
+`fruits`が配列であることを検証します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
@@ -167,9 +167,9 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
     +------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力は、 `fruits`文字列で**はない**ことを示しています。
+上記の出力から、 `fruits`は文字列**ではないこと**がわかります。
 
-次に、配列内の項目の数を確認します。
+次に、配列内の要素数を確認します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 3}}}',@j);
@@ -195,7 +195,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
     +--------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力は、 `fruits`少なくとも 4 つの項目を持つ配列**ではない**ことを示しています。これは、最小項目数を満たしていないためです。
+上記の出力から、 `fruits`は少なくとも 4 つの項目を持つ配列では**ないこと**がわかります。これは、最小項目数を満たしていないためです。
 
 整数値の場合、特定の範囲内にあるかどうかを確認できます。
 
@@ -220,7 +220,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '1
     +-------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-文字列の場合、特定のパターンに一致するかどうかを検証できます。
+文字列に対して、特定のパターンに一致するかどうかを検証できます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"');
@@ -244,7 +244,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"');
     +------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには`ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、 `uri`などがあります。
+値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには、 `ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、および`uri` 。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"');
@@ -268,7 +268,7 @@ SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"');
     +--------------------------------------------------------+
     1 row in set (0.00 sec)
 
-`enum`使用して、文字列が配列内にあるかどうかを確認することもできます。
+`enum`を使用して、文字列が配列に含まれているかどうかを確認することもできます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"');
@@ -303,7 +303,7 @@ SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"SQLite"');
     +--------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-`anyOf`使用すると、特定の要件を組み合わせて、いずれかの要件が満たされているかどうかを検証できます。
+`anyOf`を使用すると、特定の要件を組み合わせて、いずれかの要件が満たされているかどうかを検証できます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '"TiDB"');
@@ -338,13 +338,13 @@ SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', 
     +-------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
--   `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合（例： `{"type": "sting"}` ）、MySQL はそれを受け入れる可能性がありますが、TiDB はエラーを返します。 `"sting"`にスペルミスがあり、正しくは`"string"`です。
--   MySQL は、JSON スキーマ標準の古いドラフト バージョンを使用します。
+-   `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合 (例えば`{"type": "sting"}` )、MySQL はそれを受け入れるかもしれませんが、TiDB はエラーを返します。 `"sting"`にはスペルミスがあり、正しくは`"string"`であるべきであることに注意してください。
+-   MySQLは、JSONスキーマ標準の古いドラフト版を使用しています。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [JSONスキーマリファレンス](https://json-schema.org/understanding-json-schema/reference)
 -   [JSON関数の概要](/functions-and-operators/json-functions.md)
--   [JSONデータ型](/data-type-json.md)
+-   [JSONデータタイプ](/data-type-json.md)

@@ -1,15 +1,15 @@
 ---
 title: SHOW TABLE REGIONS
-summary: TiDB で SHOW TABLE REGIONS を使用する方法を学習します。
+summary: TiDBでSHOW TABLE REGIONSを使用する方法を学びましょう。
 ---
 
-# テーブル領域を表示 {#show-table-regions}
+# テーブル領域を表示する {#show-table-regions}
 
-`SHOW TABLE REGIONS`ステートメントは、TiDB 内のテーブルのリージョン情報を表示するために使用されます。
+`SHOW TABLE REGIONS`ステートメントは、TiDB のテーブルのリージョン情報を表示するために使用されます。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 ## 構文 {#syntax}
 
@@ -18,7 +18,7 @@ SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
 
-## 概要 {#synopsis}
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowTableRegionStmt ::=
@@ -28,23 +28,23 @@ TableName ::=
     (SchemaName ".")? Identifier
 ```
 
-`SHOW TABLE REGIONS`実行すると、次の列が返されます。
+`SHOW TABLE REGIONS`を実行すると、次の列が返されます。
 
 -   `REGION_ID` :リージョンID。
 -   `START_KEY` :リージョンの開始キー。
 -   `END_KEY` :リージョンの終了キー。
--   `LEADER_ID` :リージョンのLeaderID。
--   `LEADER_STORE_ID` :リージョンリーダーが所在する店舗の ID (TiKV)。
--   `PEERS` : すべてのリージョンレプリカの ID。
--   `SCATTERING` :リージョンがスケジュールされているかどうか。2 `1` true を意味します。
--   `WRITTEN_BYTES` : 1ハートビートサイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
--   `READ_BYTES` : 1ハートビートサイクル内でリージョンから読み取られるデータの推定量。単位はバイトです。
--   `APPROXIMATE_SIZE(MB)` :リージョン内の推定データ量。単位はメガバイト（MB）です。
+-   `LEADER_ID` :リージョンのLeaderID 。
+-   `LEADER_STORE_ID` :リージョンリーダーが所在する店舗 (TiKV) の ID。
+-   `PEERS` : すべてのリージョンレプリカのID。
+-   `SCATTERING` :リージョンがスケジュールされているかどうか。 `1`は true を意味します。
+-   `WRITTEN_BYTES` : 1回のハートビートサイクルでリージョンに書き込まれるデータの推定量。単位はバイトです。
+-   `READ_BYTES` : 1回のハートビートサイクルでリージョンから読み取られたデータの推定量。単位はバイトです。
+-   `APPROXIMATE_SIZE(MB)` :リージョン内の推定データ量。単位はメガバイト (MB) です。
 -   `APPROXIMATE_KEYS` :リージョン内のキーの推定数。
 
 <CustomContent platform="tidb">
 
--   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[配置ポリシー設定](/placement-rules-in-sql.md) 。
+-   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[配置ポリシー設定](/placement-rules-in-sql.md)。
 
 </CustomContent>
 
@@ -54,15 +54,15 @@ TableName ::=
 
 </CustomContent>
 
--   `SCHEDULING_STATE` : 配置ポリシーを持つリージョンのスケジュール状態。
+-   `SCHEDULING_STATE` : 配置ポリシーを持つリージョンのスケジューリング状態。
 
 > **注記：**
 >
-> `WRITTEN_BYTES` `APPROXIMATE_SIZE(MB)`値`APPROXIMATE_KEYS`正確なデータではありません。これらは`READ_BYTES` PDがリージョンから受信したハートビート情報に基づいてPDが推定したデータです。
+> `WRITTEN_BYTES` 、 `READ_BYTES` 、 `APPROXIMATE_SIZE(MB)` 、 `APPROXIMATE_KEYS`は正確なデータではありません。これらは、PD がリージョンから受信するハートビート情報に基づいて PD が推定したデータです。
 
 ## 例 {#examples}
 
-いくつかのリージョンを埋めるのに十分なデータを含むサンプル テーブルを作成します。
+いくつかのリージョンを埋めるのに十分なデータを含むサンプルテーブルを作成してください。
 
 ```sql
 CREATE TABLE t1 (
@@ -88,7 +88,7 @@ SELECT SLEEP(5);
 SHOW TABLE t1 REGIONS;
 ```
 
-出力では`END_KEY`テーブルが地域ごとに分割されていることが`START_KEY`ます。1、3、5 `REGION_ID`完全に一致しない可能性があります。
+出力には、テーブルがリージョンに分割されていることが示されるはずです。 `REGION_ID` 、 `START_KEY` 、 `END_KEY`は完全に一致しない場合があります。
 
 ```sql
 ...
@@ -103,9 +103,9 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-上記の出力では、 `t_75_r_31717` `t_75_r_63434` 1 と`END_KEY`の`START_KEY`は、PRIMARY KEY が`31717`から`63434`のデータがこのリージョンに格納されていることを示しています。プレフィックス`t_75_` 、これが内部テーブル ID が`75`であるテーブル ( `t` ) のリージョンであることを示しています。19 または`END_KEY` `START_KEY`値が空の場合、それぞれ負の無限大または正の無限大を示します。
+上記の出力では、 `START_KEY`の`t_75_r_31717`と`END_KEY`の`t_75_r_63434`は、 `31717`と`63434`の間の PRIMARY KEY を持つデータがこのリージョンに格納されていることを示しています。プレフィックス`t_75_`は、内部テーブル ID が`75` `t`のリージョンであることを示しています。 `START_KEY`または`END_KEY`のキー値が空の場合、それぞれ負の無限大または正の無限大を示します。
 
-TiDBは必要に応じてリージョンを自動的に再調整します。手動で再調整する場合は、 `SPLIT TABLE REGION`ステートメントを使用します。
+TiDB は必要に応じてリージョンを自動的に再バランスします。手動で再バランスする場合は、 `SPLIT TABLE REGION`ステートメントを使用してください。
 
 ```sql
 mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
@@ -128,12 +128,12 @@ mysql> SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。テーブル内の残りのリージョンは分割操作の影響を受けませんでした。これは出力統計によって確認できます。
+上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。表内の残りのリージョンは、分割操作の影響を受けませんでした。これは、出力統計によって確認できます。
 
--   `TOTAL_SPLIT_REGION`新しく分割されたリージョンの数を示します。この例では、その数は1です。
--   `SCATTER_FINISH_RATIO` 、新しく分割された領域が正常に分散される割合を示します。2 `1.0` 、すべての領域が分散されることを意味します。
+-   `TOTAL_SPLIT_REGION`は、新しく分割されたリージョンの数を示します。この例では、その数は 1 です。
+-   `SCATTER_FINISH_RATIO`新しく分割された領域が正常に分散される割合を示します。 `1.0` 、すべての領域が分散されたことを意味します。
 
-より詳細な例:
+より詳細な例については、以下を参照してください。
 
 ```sql
 mysql> SHOW TABLE t REGIONS;
@@ -150,14 +150,14 @@ mysql> SHOW TABLE t REGIONS;
 6 rows in set
 ```
 
-上記の例では、
+上記の例では：
 
--   テーブル t は6つの領域に対応して`114`ます。これらの領域の`102` 、 `106` `110`は行データが格納され、 `3` `98`インデックスデータが格納されます。
--   リージョン`102`の`START_KEY`と`END_KEY`場合、 `t_43`テーブル プレフィックスと ID を示します。9 `_r`テーブル t 内のレコード データのプレフィックスです。11 `_i`インデックス データのプレフィックスです。
--   リージョン`102` `START_KEY` `114`範囲`END_KEY` `[-inf, 20000)`レコードデータ`110`格納されていることを意味します。同様に、 `3` `106`のデータstorage範囲も計算できます。
--   リージョン`98`インデックスデータが格納されています。テーブルtのインデックスデータの開始キーは`t_43_i`で、これはリージョン`98`範囲内です。
+-   テーブル t は 6 つの領域に対応しています。これらの領域では、 `102` 、 `106` 、 `110` 、 `114` 、および`3`に行データが格納され、 `98`にインデックスデータが格納されます。
+-   リージョン`START_KEY`の`END_KEY`および`102`について、 `t_43`はテーブルのプレフィックスと ID を示します。 `_r`テーブル t のレコード データのプレフィックスです。 `_i`はインデックス データのプレフィックスです。
+-   リージョン`102` 、 `START_KEY` 、および`END_KEY`では、 `[-inf, 20000)`の範囲内のstorageデータが格納されます。同様に、領域 ( `106` 、 `110` 、 `114` 、 `3` ) におけるデータ格納範囲も計算できます。
+-   リージョン`98`にはインデックスデータが格納されます。テーブル t のインデックスデータの開始キーは`t_43_i`であり、これはリージョン`98`の範囲内にあります。
 
-ストア 1 のテーブル t に対応するリージョンを確認するには、 `WHERE`句を使用します。
+ストア1のテーブルtに対応するリージョンを確認するには、 `WHERE`句を使用します。
 
 ```sql
 test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
@@ -168,7 +168,7 @@ test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 ```
 
-`SPLIT TABLE REGION`使用してインデックスデータをリージョンに分割します。次の例では、テーブル t のインデックスデータ`name` `[a,z]`範囲で 2 つのリージョンに分割されます。
+`SPLIT TABLE REGION`を使用して、インデックス データを領域に分割します。次の例では、テーブル t のインデックス データ`name`が`[a,z]`の範囲内の 2 つの領域に分割されます。
 
 ```sql
 test> SPLIT TABLE t INDEX name BETWEEN ("a") AND ("z") REGIONS 2;
@@ -180,7 +180,7 @@ test> SPLIT TABLE t INDEX name BETWEEN ("a") AND ("z") REGIONS 2;
 1 row in set
 ```
 
-現在、テーブル t は7つの地域に対応しています。そのうち5 `106` ( `102` `3`には`110` t のレコードデータが保存され、他`98` `114` `135`はインデックスデータ`name`が格納されています。
+テーブル t は 7 つの領域に対応しています。そのうち 5 つ ( `102` 、 `106` 、 `110` 、 `114` 、 `3` ) にはテーブル t のレコード データが格納され、残りの 2 つ ( `135` 、 `98` ) にはインデックス データ`name`格納されます。
 
 ```sql
 test> SHOW TABLE t REGIONS;
@@ -198,11 +198,11 @@ test> SHOW TABLE t REGIONS;
 7 rows in set
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張です。
+このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 参照 {#see-also}
+## 関連項目 {#see-also}
 
 -   [分割領域](/sql-statements/sql-statement-split-region.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)

@@ -1,15 +1,15 @@
 ---
 title: RESOURCE_GROUPS
-summary: RESOURCE_GROUPS` information_schema テーブルについて学習します。
+summary: RESOURCE_GROUPS`情報スキーマテーブルについて学習してください。
 ---
 
 # リソースグループ {#resource-groups}
 
-`RESOURCE_GROUPS`表にはすべてのリソースグループに関する情報が表示されます。詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。
+`RESOURCE_GROUPS`テーブルには、すべてのリソース グループに関する情報が表示されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)参照してください。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 ```sql
 USE information_schema;
@@ -76,13 +76,13 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 1 row in set (0.00 sec)
 ```
 
-`RESOURCE_GROUPS`表の列の説明は次のとおりです。
+`RESOURCE_GROUPS`テーブルの列の説明は以下のとおりです。
 
 -   `NAME` : リソース グループの名前。
--   `RU_PER_SEC` : リソースグループのバックフィル速度。単位はRU/秒で、RUは[リクエストユニット](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)意味します。
--   `PRIORITY` : TiKVで処理されるタスクの絶対優先度。異なるリソースは`PRIORITY`設定に従ってスケジュールされます。4 `PRIORITY`高いタスクが最初にスケジュールされます。同じ`PRIORITY`のリソースグループの場合、タスクは`RU_PER_SEC`設定に従って比例的にスケジュールされます。10 `PRIORITY`指定されていない場合、デフォルトの優先度は`MEDIUM`です。
+-   `RU_PER_SEC` : リソース グループのバックフィル速度。単位は RU/秒で、RU [リクエストユニット](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を意味します。
+-   `PRIORITY` : TiKV で処理されるタスクの絶対優先度。異なるリソースは`PRIORITY`の設定に従ってスケジュールされます。 `PRIORITY`が高いタスクが最初にスケジュールされます。 `PRIORITY`が同じリソース グループの場合、タスクは`RU_PER_SEC`の設定に従って比例的にスケジュールされます。 `PRIORITY`が指定されていない場合、デフォルトの優先度は`MEDIUM`です。
 -   `BURSTABLE` : リソース グループが利用可能なシステム リソースを過剰に使用することを許可するかどうか。
 
 > **注記：**
 >
-> TiDBは、クラスタの初期化中に自動的にリソースグループ`default`を作成します。このリソースグループでは、デフォルト値は`RU_PER_SEC`ですが、 `UNLIMITED` （ `INT`タイプの最大値である`2147483647`相当）に設定され、モードは`BURSTABLE`です。どのリソースグループにもバインドされていないすべてのリクエストは、この`default`リソースグループに自動的にバインドされます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループ構成を変更することをお勧めします。
+> TiDB はクラスタ初期化時に`default`リソース グループを自動的に作成します。このリソース グループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、自動的にこの`default`リソース グループにバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。
