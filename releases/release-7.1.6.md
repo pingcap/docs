@@ -31,7 +31,7 @@ TiDB バージョン: 7.1.6
     -   TiFlash配置ルールを一括削除することで、パーティションテーブル[＃54068](https://github.com/pingcap/tidb/issues/54068) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で`TRUNCATE`または`DROP`操作を実行した後のデータGCの処理速度が向上します。
     -   同期ロードパフォーマンスを改善し、統計情報のロード時のレイテンシーを削減します[＃52294](https://github.com/pingcap/tidb/issues/52294) [ホーキングレイ](https://github.com/hawkingrei)
 
--   ティクブ
+-   TiKV
 
     -   ピアのスローログを追加し、メッセージ[＃16600](https://github.com/tikv/tikv/issues/16600) @ [Connor1996](https://github.com/Connor1996)を保存します。
     -   RocksDB の圧縮トリガー メカニズムを最適化し、多数の DELETE バージョン[＃17269](https://github.com/tikv/tikv/issues/17269) @ [AndreMouche](https://github.com/AndreMouche)を処理するときにディスク領域の再利用を高速化します。

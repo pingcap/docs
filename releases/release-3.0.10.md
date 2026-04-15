@@ -47,7 +47,7 @@ TiDB Ansible バージョン: 3.0.10
 -   ix MySQLの非互換性の問題を修正するために、小数点割り算の計算に切り捨てエラー検出を追加しました[＃14673](https://github.com/pingcap/tidb/pull/14673)
 -   存在しないテーブルに対する権限をユーザーに付与してしまう問題を修正[＃14611](https://github.com/pingcap/tidb/pull/14611)
 
-## ティクブ {#tikv}
+## TiKV {#tikv}
 
 -   Raftstore
     -   リージョンマージの失敗[＃6481](https://github.com/tikv/tikv/pull/6481)によって発生するシステムpanicの問題 #6460 またはデータ損失の問題 #598 を修正しました

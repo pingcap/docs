@@ -26,7 +26,7 @@ TiDB バージョン: 5.0.6
 
     -   コプロセッサがロックに遭遇したときに影響を受けるSQL文をデバッグログに表示します。これは問題の診断に役立ちます[＃27718](https://github.com/pingcap/tidb/issues/27718)
 
--   ティクブ
+-   TiKV
 
     -   検証プロセスを`Apply`スレッド プールから`Import`スレッド プールに移動することで、SST ファイルの挿入速度が向上します[＃11239](https://github.com/tikv/tikv/issues/11239)
     -   モジュール[＃11374](https://github.com/tikv/tikv/issues/11374)のパフォーマンスの問題を特定するために、 Raftログのガベージコレクションモジュールのメトリックを追加します。
@@ -92,7 +92,7 @@ TiDB バージョン: 5.0.6
     -   プランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正しました[＃28087](https://github.com/pingcap/tidb/issues/28087)
     -   一部のケースでSQL文が結合結果に基づいて集計結果を評価するときに`index out of range [1] with length 1`エラーが報告される問題を修正しました[＃1978](https://github.com/pingcap/tics/issues/1978)
 
--   ティクブ
+-   TiKV
 
     -   TiKVノードがダウンすると解決されたタイムスタンプが[＃11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正しました
     -   Raftクライアント実装[＃9714](https://github.com/tikv/tikv/issues/9714)でバッチメッセージが大きすぎる問題を修正

@@ -396,7 +396,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
     -   パーティションテーブルが依存する列が削除されたときに報告されるエラーメッセージを改善する[＃38739](https://github.com/pingcap/tidb/issues/38739) @ [jiyfhust](https://github.com/jiyfhust)
     -   `min-resolved-ts` [＃39836](https://github.com/pingcap/tidb/issues/39836) @ [Defined2014](https://github.com/Defined2014)のチェックに失敗した場合、 `FLASHBACK CLUSTER`再試行するメカニズムを追加します。
 
--   ティクブ
+-   TiKV
 
     -   パーティション化されたraft-kvモードにおける一部のパラメータのデフォルト値を最適化しました。TiKV設定項目`storage.block-cache.capacity`のデフォルト値は45%から30%に調整され、デフォルト値`region-split-size`は`96MiB`から`10GiB`に調整されました。raft-kvモードを使用し、 `enable-region-bucket`が`true`の場合、 `region-split-size`はデフォルトで1GiBに調整されます[＃12842](https://github.com/tikv/tikv/issues/12842) @ [tonyxuqqi](https://github.com/tonyxuqqi)
     -   Raftstoreの非同期書き込み[＃13730](https://github.com/tikv/tikv/issues/13730) @ [Connor1996](https://github.com/Connor1996)での優先スケジュールをサポート
