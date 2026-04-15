@@ -9,13 +9,23 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 > **Note:**
 >
-> - Currently, TiDB Cloud only allows up to 100 changefeeds per cluster.
+> - Currently, TiDB Cloud only allows up to 100 changefeeds per <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 > - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
-> - For [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), the changefeed feature is unavailable.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
 
-To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
+## View the Changefeed page
 
-On the changefeed page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+To access the changefeed feature, take the following steps:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), <CustomContent plan="dedicated">navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.</CustomContent><CustomContent plan="premium">navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.</CustomContent>
+
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. Click the name of your target <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
+
+On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
 
 ## Create a changefeed
 
@@ -26,13 +36,30 @@ To create a changefeed, refer to the tutorials:
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 - [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
-## Query Changefeed RCUs
+## Query changefeed capacity
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+<CustomContent plan="dedicated">
+
+For TiDB Cloud Dedicated, you can query the TiCDC Replication Capacity Units (RCUs) of a changefeed.
+
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
 3. You can see the current TiCDC Replication Capacity Units (RCUs) in the **Specification** area of the page.
 
+</CustomContent>
+<CustomContent plan="premium">
+
+For {{{ .premium }}}, you can query the TiCDC Changefeed Capacity Units (CCUs) of a changefeed.
+
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB instance.
+2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
+3. You can see the current TiCDC Changefeed Capacity Units (CCUs) in the **Specification** area of the page.
+
+</CustomContent>
+
 ## Scale a changefeed
+
+<CustomContent plan="dedicated">
 
 You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changfeed.
 
@@ -41,7 +68,14 @@ You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by sc
 > - To scale a changefeed for a cluster, make sure that all changefeeds for this cluster are created after March 28, 2023.
 > - If a cluster has changefeeds created before March 28, 2023, neither the existing changefeeds nor newly created changefeeds for this cluster support scaling up or down.
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+</CustomContent>
+<CustomContent plan="premium">
+
+You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changfeed.
+
+</CustomContent>
+
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
 3. Select a new specification.
 4. Click **Submit**.
@@ -50,7 +84,7 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
 ## Pause or resume a changefeed
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 ## Edit a changefeed
@@ -59,7 +93,7 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
@@ -72,9 +106,16 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
+## Duplicate a changefeed
+
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
+2. Locate the changefeed that you want to duplicate. In the **Action** column, click **...** > **Duplicate**.
+3. TiDB Cloud automatically populates the new changefeed configuration with the original settings. You can review and modify the configuration as needed.
+4. After confirming the configuration, click **Submit** to create and start the new changefeed.
+
 ## Delete a changefeed
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 ## Changefeed billing
@@ -83,7 +124,7 @@ To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/ti
 
 ## Changefeed states
 
-The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state.
+The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, or be manually paused or resumed. These behaviors can lead to changes of the replication task state.
 
 The states are described as follows:
 

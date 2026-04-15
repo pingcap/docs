@@ -13,7 +13,7 @@ The TiUP meta file is used for cluster operation and maintenance (OM). If this f
 tiup cluster meta backup <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to be operated on. If you forget the cluster name, you can check it using the [`tiup dm list`](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>` is the name of the cluster to be operated on. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
 
 ## Options
 

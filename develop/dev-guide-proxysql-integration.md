@@ -1,6 +1,7 @@
 ---
-title: ProxySQL Integration Guide
+title: Integrate TiDB with ProxySQL
 summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+aliases: ['/tidb/stable/dev-guide-proxysql-integration/','/tidb/dev/dev-guide-proxysql-integration/','/tidbcloud/dev-guide-proxysql-integration/']
 ---
 
 # Integrate TiDB with ProxySQL
@@ -10,7 +11,7 @@ This document provides a high-level introduction to ProxySQL, describes how to i
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
-- [TiDB Developer Guide](/develop/dev-guide-overview.md)
+- [TiDB Developer Guide](https://docs.pingcap.com/developer/)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 
 ## What is ProxySQL?
@@ -119,11 +120,11 @@ systemctl start docker
 
 ### Option 1: Integrate TiDB Cloud with ProxySQL
 
-For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Cloud Serverless cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
+For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a {{{ .starter }}} cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
-#### Step 1. Create a TiDB Cloud Serverless cluster
+#### Step 1. Create a {{{ .starter }}} cluster
 
-1. [Create a free TiDB Cloud Serverless cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
+1. [Create a free {{{ .starter }}} cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
 2. Get your cluster hostname, port, and username for later use.
 
     1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
@@ -327,12 +328,12 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     >
     > 1. Adds a user using the username and password of your cluster.
     > 2. Assigns the user to the monitoring account.
-    > 3. Adds your TiDB Cloud Serverless cluster to the list of hosts.
-    > 4. Enables a secure connection between ProxySQL and the TiDB Cloud Serverless cluster.
+    > 3. Adds your {{{ .starter }}} cluster to the list of hosts.
+    > 4. Enables a secure connection between ProxySQL and the {{{ .starter }}} cluster.
     >
     > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
-    The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the TiDB Cloud Serverless cluster is established.
+    The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the {{{ .starter }}} cluster is established.
 
     ```
     *************************** 1. row ***************************
@@ -388,7 +389,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     SELECT VERSION();
     ```
 
-    If the TiDB version is displayed, you are successfully connected to your TiDB Cloud Serverless cluster through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
+    If the TiDB version is displayed, you are successfully connected to your {{{ .starter }}} cluster through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
 
     > **Note:**
     >
@@ -1128,14 +1129,6 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

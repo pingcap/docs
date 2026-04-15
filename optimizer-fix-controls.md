@@ -88,7 +88,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `ON`
 - Possible values: `ON`, `OFF`
 - Due to challenges in accurately estimating the number of qualified rows for each plan step in a query plan, the optimizer might estimate a smaller value for `estRows`. This variable controls whether to limit the minimum value of `estRows`.
-- `ON`: limits the minimum value of `estRows` to 1, which is the new behavior introduced in v8.4.0 and is consistent with other databases, such as Oracle and DB2.
+- `ON`: limits the minimum value of `estRows` to 1, which is the new behavior introduced in v8.4.0 and is consistent with other databases, such as Oracle and Db2.
 - `OFF`: disables the minimum row estimate limit, which maintains the behavior consistent with versions before v8.4.0. In this case, `estRows` might be zero.
 
 ### [`52592`](https://github.com/pingcap/tidb/issues/52592) <span class="version-mark">New in v8.4.0</span>
@@ -108,9 +108,19 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - As stated in the **Note** of [Explain Statements Using Index Merge](/explain-index-merge.md#examples), if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge.
 - You can remove this limitation by enabling this fix control. Removing this limitation enables the optimizer to choose index merge automatically in more queries, but might cause the optimizer to ignore the optimal execution plans. Therefore, it is recommended to conduct sufficient tests on actual use cases before removing this limitation to make sure that it will not cause performance regressions.
 
-### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">New in v8.2.0</span>
+### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">New in v8.3.0</span>
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - Currently, the TiDB optimizer has limitations in deriving index ranges for complex conjunctive conditions where each conjunct comprises a list of ranges. This can be addressed by applying general range intersection.
 - You can remove this limitation by enabling this fix control, allowing the optimizer to handle complex range intersections. However, for conditions with a large number of conjuncts (more than 10), there is a slight risk of increased optimization time.
+
+### [`56318`](https://github.com/pingcap/tidb/issues/56318)
+
+> **Note:**
+>
+> This is only available for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter).
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether to avoid calculating the heavy expression used in the `ORDER BY` statement twice.

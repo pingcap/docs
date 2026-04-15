@@ -17,6 +17,14 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 >
 > The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) only support `LOAD DATA LOCAL INFILE`.
+
+</CustomContent>
+
 ## Synopsis
 
 ```ebnf+diagram
@@ -24,6 +32,9 @@ LoadDataStmt ::=
     'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
 
 LocalOpt ::= ('LOCAL')?
+
+DuplicateOpt ::=
+    ( 'IGNORE' | 'REPLACE' )?
 
 Fields ::=
     ('TERMINATED' 'BY' stringLit
@@ -38,9 +49,9 @@ Fields ::=
 
 You can use `LOCAL` to specify data files on the client to be imported, where the file parameter must be the file system path on the client.
 
-If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
+If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud.
 
-- The following is an example connection string for TiDB Cloud Serverless:
+- The following is an example connection string for {{{ .starter }}}:
 
     ```
     mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
@@ -51,6 +62,15 @@ If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data
     ```
     mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
     ```
+
+### `REPLACE` and `IGNORE`
+
+You can use `REPLACE` and `IGNORE` to specify how duplicate data is handled. 
+
+- `REPLACE`: existing data is overwritten.
+- `IGNORE`: duplicate rows are ignored, keeping existing data.
+
+By default, duplicate data leads to errors.
 
 ### S3 and GCS storage
 
@@ -144,6 +164,21 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 ```
 
 In the above example, `x'2c'` is the hexadecimal representation of the `,` character, and `b'100010'` is the binary representation of the `"` character.
+
+<CustomContent platform="tidb-cloud">
+
+The following example shows how to import data into a TiDB Cloud Dedicated cluster from Amazon S3 using the `LOAD DATA INFILE` statement:
+
+```sql
+LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=<The ARN of the IAM role you created for TiDB Cloud import>&external_id=<TiDB Cloud external ID (optional)>'
+INTO TABLE <your-db-name>.<your-table-name>
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+```
+
+</CustomContent>
 
 ## MySQL compatibility
 

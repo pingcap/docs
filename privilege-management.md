@@ -282,6 +282,8 @@ Dynamic privileges include:
 * `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
 * `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This privilege affects `KILL` and `KILL TIDB` statements.
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
+* `TRAFFIC_CAPTURE_ADMIN` allows privilege owners to create, view, and cancel traffic capture jobs. For details, see [TiProxy traffic replay](/tiproxy/tiproxy-traffic-replay.md).
+* `TRAFFIC_REPLAY_ADMIN` allows privilege owners to create, view, and cancel traffic replay jobs. For details, see [TiProxy traffic replay](/tiproxy/tiproxy-traffic-replay.md).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
@@ -497,6 +499,26 @@ Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 ### SET RESOURCE GROUP
 
 When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to execute this statement.
+
+### TRAFFIC CAPTURE
+
+Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege.
+
+### TRAFFIC REPLAY
+
+Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege.
+
+### CANCEL TRAFFIC JOBS
+
+Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to cancel traffic capture jobs.
+
+Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to cancel traffic replay jobs.
+
+### SHOW TRAFFIC JOBS
+
+Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to view traffic capture jobs.
+
+Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to view traffic replay jobs.
 
 ## Implementation of the privilege system
 

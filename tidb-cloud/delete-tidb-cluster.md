@@ -9,7 +9,7 @@ This document describes how to delete a TiDB cluster on TiDB Cloud.
 
 You can delete a cluster at any time by performing the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 2. In the row of your target cluster to be deleted, click **...**.
 
     > **Tip:**
@@ -26,13 +26,13 @@ You can delete a cluster at any time by performing the following steps:
 
     > **Note:**
     >
-    > [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) only support [in-place restoring from backups](/tidb-cloud/backup-and-restore-serverless.md#restore) and do not support restoring data after the deletion. If you want to delete a TiDB Cloud Serverless cluster and restore its data in the future, you can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    > [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters do not support restoring data after the deletion. If you want to delete a {{{ .starter }}} or {{{ .essential }}} cluster and restore its data in the future, see [Export Data from {{{ .starter }}} or Essential](/tidb-cloud/serverless-export.md) to export your data as a backup.
 
 5. Click **I understand, delete it**.
 
     Once a backed up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
 
-    - Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
+    - Automatic backups will expire and be automatically deleted once the retention period ends, except for the latest one. The default retention period is 7 days if you don't modify it. The latest automatic backup will not be deleted unless you explicitly delete it.
     - Manual backups will be kept in the Recycle Bin until manually deleted.
 
     > **Note:**

@@ -30,12 +30,12 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td rowspan="7">Scalability and Performance</td>
     <td>Reduce data processing latency in multiple dimensions</td>
     <td>TiDB continuously refines data processing to improve performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include:
-    <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
+    <ul><li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
     <li>Optimize <a href="https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
     <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_tso_client_rpc_mode-new-in-v840">parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
     <li>Reduce the resource overhead of <a href="https://docs.pingcap.com/tidb/v8.5/sql-statement-delete">DELETE</a> operations (introduced in v8.4.0) </li>
     <li>Improve query performance for <a href="https://docs.pingcap.com/tidb/v8.5/cached-tables">cached tables</a> (introduced in v8.4.0) </li>
-    <li>Introduce <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">an optimized version of Hash Join</a> (experimental, introduced in v8.4.0) </li>
+    <li>Introduce <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">an optimized version of Hash Join</a> (experimental, introduced in v8.4.0) </li></ul>
     </td>
   </tr>
   <tr>
@@ -51,7 +51,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>Instance-level plan cache allows all sessions within the same TiDB instance to share the plan cache. Compared with session-level plan cache, this feature reduces SQL compilation time by caching more execution plans in memory, decreasing overall SQL execution time. It improves OLTP performance and throughput while providing better control over memory usage and enhancing database stability.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/partitioned-table#global-indexes">Global indexes for partitioned tables</a> (GA in v8.4.0)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/global-indexes">Global indexes for partitioned tables</a> (GA in v8.4.0)</td>
     <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables, improves the performance of partitioned tables, and reduces resource consumption in certain query scenarios.</td>
   </tr>
   <tr>
@@ -66,10 +66,10 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td rowspan="5">Reliability and availability</td>
     <td>Improve the stability of large-scale clusters</td>
     <td>Companies that use TiDB to run multi-tenant or SaaS applications often need to store a large number of tables. In v8.5.0, TiDB significantly enhances the stability of large-scale clusters. 
-    <li><a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">setting the memory quota for the TiDB statistics cache</a> are generally available (GA), reducing stability issues caused by excessive memory consumption. </li>
+    <ul><li><a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">setting the memory quota for the TiDB statistics cache</a> are generally available (GA), reducing stability issues caused by excessive memory consumption. </li>
     <li>PD introduces <a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active Follower</a> to handle the pressure brought by numerous Regions, gradually <a href="https://docs.pingcap.com/tidb/v8.5/pd-microservices">decouples the services handled by PD</a> for independent deployment. </li>
     <li>PD improves the performance of Region heartbeat processing and supports tens of millions of Regions for a single cluster.</li>
-    <li>You can <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collected objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans in large clusters.</li>
+    <li>You can <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collected objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans in large clusters.</li></ul>
     </td>
   </tr>
   <tr>
@@ -83,9 +83,9 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   <tr>
     <td>Enhance and expand TiProxy use cases</td>
     <td>As a crucial component of the high availability of TiDB, <a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy</a> extends its capabilities beyond SQL traffic access and forwarding to support cluster change evaluation. Key features include:
-    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental, introduced in v8.4.0)</li>
+    <ul><li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental, introduced in v8.4.0)</li>
     <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy supports built-in virtual IP management</a> (introduced in v8.3.0)</li>
-    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-load-balance">TiProxy supports multiple load balancing policies</a> (introduced in v8.2.0)</li>
+    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-load-balance">TiProxy supports multiple load balancing policies</a> (introduced in v8.2.0)</li></ul>
     </td>
   </tr>
   <tr>
@@ -98,7 +98,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>Foreign keys are constraints in a database that establish relationships between tables, ensuring data consistency and integrity. They ensure that the data referenced in a child table exist in the parent table, preventing the insertion of invalid data. Foreign keys also support cascading operations (such as automatic synchronization during deletion or update), simplifying business logic implementation and reducing the complexity of manually maintaining data relationships.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/vector-search-overview">Vector search</a> (experimental, introduced in v8.4.0) </td>
+    <td><a href="https://docs.pingcap.com/ai/vector-search-overview">Vector search</a> (experimental, introduced in v8.4.0) </td>
     <td>Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.</td>
   </tr>
   <tr>
@@ -228,7 +228,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the [accelerated table creation](/accelerated-table-creation.md) feature is enabled by default. |
-| [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v755-and-v850)  | Newly added | Limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable). For example, setting the variable to `200MiB` limits the maximum write speed to 200 MiB/s.  |
+| [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)  | Newly added | Limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable). For example, setting the variable to `200MiB` limits the maximum write speed to 200 MiB/s.  |
 
 ### Configuration parameters
 
@@ -236,6 +236,10 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | -------- | -------- | -------- | -------- |
 | TiDB | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) | Modified | Starting from v8.5.0, the integer display width feature is deprecated. The default value of this configuration item is changed from `false` to `true`. |
 | TiKV | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size) | Modified | Changes the default value from `8192` to `16384`. |
+| TiKV | [`in-memory-engine.capacity`](/tikv-configuration-file.md#capacity-new-in-v850) | Newly added | Controls the maximum memory size that the TiKV MVCC in-memory engine can use. The default value is `min(the system memory * 10%, 5 GiB)`.|
+| TiKV | [`in-memory-engine.enable`](/tikv-configuration-file.md#enable-new-in-v850) | Newly added | Controls whether to enable the TiKV MVCC in-memory engine to accelerate multi-version queries. The default value is `false`, which means that the in-memory engine is disabled. |
+| TiKV | [`in-memory-engine.gc-run-interval`](/tikv-configuration-file.md#gc-run-interval-new-in-v850) | Newly added | Controls the time interval at which the in-memory engine performs garbage collection (GC) on cached MVCC versions. The default value is `"3m"`.|
+| TiKV | [`in-memory-engine.mvcc-amplification-threshold`](/tikv-configuration-file.md#mvcc-amplification-threshold-new-in-v850) | Newly added | Controls the threshold for MVCC read amplification when the in-memory engine selects and loads Regions. The default value is `10`, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.|
 | PD | [`patrol-region-worker-count`](/pd-configuration-file.md#patrol-region-worker-count-new-in-v850) | Newly added | Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. |
 | BR | [`--checksum`](/br/br-snapshot-manual.md) | Modified | Changes the default value from `true` to `false`, meaning that BR does not calculate the table-level checksum during full backups by default, to improve backup performance. |
 
@@ -336,7 +340,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that some metrics in the monitoring panel of Distributed eXecution Framework (DXF) are inaccurate [#57172](https://github.com/pingcap/tidb/issues/57172) @[fzzf678](https://github.com/fzzf678) [#56942](https://github.com/pingcap/tidb/issues/56942) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that `REORGANIZE PARTITION` fails to return error reasons in certain cases [#56634](https://github.com/pingcap/tidb/issues/56634) @[mjonss](https://github.com/mjonss)
     - Fix the issue that querying `INFORMATION_SCHEMA.TABLES` returns incorrect results due to case sensitivity [#56987](https://github.com/pingcap/tidb/issues/56987) @[joechenrh](https://github.com/joechenrh)
-    - Fix the issue of illegal memory access that might occur when a Common Table Expression (CTE) has multiple data consumers and one consumer exits without reading any data [#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
+    - Fix the issue of invalid memory access that might occur when a Common Table Expression (CTE) has multiple data consumers and one consumer exits without reading any data [#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
     - Fix the issue that `INDEX_HASH_JOIN` might hang during an abnormal exit [#54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
     - Fix the issue that the `TRUNCATE` statement returns incorrect results when handling `NULL` values [#53546](https://github.com/pingcap/tidb/issues/53546) @[tuziemon](https://github.com/tuziemon)
     - Fix the issue that the `CAST AS CHAR` function returns incorrect results due to type inference errors [#56640](https://github.com/pingcap/tidb/issues/56640) @[zimulala](https://github.com/zimulala)

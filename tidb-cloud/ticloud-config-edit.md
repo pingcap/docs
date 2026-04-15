@@ -15,7 +15,7 @@ If you are using Windows, after you execute the preceding command, the path of t
 
 > **Note:**
 >
-> To avoid format errors and execution failures, it is NOT recommended to manually edit the configuration file. Instead, you can use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md), [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md), or [`ticloud config set`](/tidb-cloud/ticloud-config-set.md) to modify the confiturations.
+> To avoid format errors and execution failures, it is NOT recommended to manually edit the configuration file. Instead, you can use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md), [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md), or [`ticloud config set`](/tidb-cloud/ticloud-config-set.md) to modify the configurations.
 
 ## Examples
 

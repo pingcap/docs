@@ -32,7 +32,7 @@ Prepare the following based on the strategy you choose:
 
 TiDB is [compatible with MySQL](/mysql-compatibility.md), and MySQL and MariaDB have a lot of functionality in common. However, there might be MariaDB-specific features that might not be compatible with TiDB that you should be aware of before migrating.
 
-Besides checking the items in this section, it is recommended that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
+Besides checking the items in this section, it is recommended that you also check the [Compatibility and Differences](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences) in the MariaDB documentation.
 
 ### Authentication
 
@@ -61,7 +61,7 @@ GROUP BY
 
 ### System-versioned tables
 
-TiDB does not support [system-versioned tables](https://mariadb.com/kb/en/system-versioned-tables/). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system-versioned tables.
+TiDB does not support [system-versioned tables](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system-versioned tables.
 
 You can check for affected tables with the following statement:
 
@@ -186,18 +186,22 @@ WHERE
 
 TiDB does not support the `latin1_swedish_ci` collation that is often used in MariaDB.
 
+TiDB does not support `utf8mb4_uca1400_ai_ci`, the default collation in MariaDB 11.6 and later versions. Use `utf8mb4_0900_ai_ci` instead. These two collations differ in their versions of the [Unicode Collation Algorithm (UCA)](http://www.unicode.org/reports/tr10/): `utf8mb4_0900_ai_ci` uses UCA 9.0.0, while `utf8mb4_uca1400_ai_ci` uses UCA 14.0.0.
+
 To see what collations TiDB supports, execute this statement on TiDB:
 
 ```sql
 SHOW COLLATION;
 ```
 
-```sql
+```
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | ascii_bin          | ascii   |  65 | Yes     | Yes      |       1 | PAD SPACE     |
 | binary             | binary  |  63 | Yes     | Yes      |       1 | NO PAD        |
+| gb18030_bin        | gb18030 | 249 |         | Yes      |       1 | PAD SPACE     |
+| gb18030_chinese_ci | gb18030 | 248 | Yes     | Yes      |       1 | PAD SPACE     |
 | gbk_bin            | gbk     |  87 |         | Yes      |       1 | PAD SPACE     |
 | gbk_chinese_ci     | gbk     |  28 | Yes     | Yes      |       1 | PAD SPACE     |
 | latin1_bin         | latin1  |  47 | Yes     | Yes      |       1 | PAD SPACE     |
@@ -210,7 +214,7 @@ SHOW COLLATION;
 | utf8mb4_general_ci | utf8mb4 |  45 |         | Yes      |       1 | PAD SPACE     |
 | utf8mb4_unicode_ci | utf8mb4 | 224 |         | Yes      |       8 | PAD SPACE     |
 +--------------------+---------+-----+---------+----------+---------+---------------+
-13 rows in set (0.00 sec)
+15 rows in set (0.000 sec)
 ```
 
 To check what collations the columns of your current tables are using, you can use this statement:

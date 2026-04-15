@@ -230,7 +230,6 @@ In the `config` diagnostic rule, the following two diagnostic rules are executed
     |  Component  | Configuration item | Expected value |
     |  ----  | ----  |  ----  |
     | TiDB | log.slow-threshold | larger than `0` |
-    | TiKV | raftstore.sync-log | `true` |
 
 ### `version` diagnostic rule
 

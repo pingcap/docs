@@ -59,9 +59,9 @@ Before using the DM tool, note the following restrictions:
 
     - DM does not replicate view-related DDL statements and DML statements to the downstream TiDB cluster. It is recommended that you create the view in the downstream TiDB cluster manually.
 
-+ GBK character set compatibility
++ GBK and GB18030 character sets compatibility
 
-    - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+    - Before v5.4.0, DM does not support migrating `charset=GBK` tables to TiDB clusters. Before v9.0.0, DM does not support migrating tables with `charset=GB18030` to TiDB clusters.
 
 + Binlog compatibility
 
@@ -69,7 +69,7 @@ Before using the DM tool, note the following restrictions:
 
 + Vector data type replication
 
-    - DM does not support migrating or replicating MySQL 9.0 vector data types to TiDB.
+    - DM does not support migrating or replicating MySQL vector data types to TiDB.
 
 ## Contributing
 
@@ -87,9 +87,9 @@ DM complies with the Apache 2.0 license. For more details, see [LICENSE](https:/
 
 Before v5.4, the DM documentation is independent of the TiDB documentation. To access these earlier versions of the DM documentation, click one of the following links:
 
-- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
-- [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
+- [DM v5.3 documentation](https://docs-archive.pingcap.com/tidb-data-migration/v5.3/)
+- [DM v2.0 documentation](https://docs-archive.pingcap.com/tidb-data-migration/v2.0/)
+- [DM v1.0 documentation](https://docs-archive.pingcap.com/tidb-data-migration/v1.0/)
 
 > **Note:**
 >

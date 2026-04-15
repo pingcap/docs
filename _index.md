@@ -82,7 +82,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/dev/tidb-monitoring-framework)
+[Use Prometheus, Grafana, and TiDB Dashboard](https://docs.pingcap.com/tidb/dev/tidb-monitoring-framework)
 
 [Monitoring API](https://docs.pingcap.com/tidb/dev/tidb-monitoring-api)
 
@@ -128,8 +128,6 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
-
 [TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/dev/tidb-configuration-file)
 
 [TiDB Command-line Flags](https://docs.pingcap.com/tidb/dev/command-line-flags-for-tidb-configuration)
@@ -138,7 +136,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidb/dev/release-notes)
+[Release Notes](https://docs.pingcap.com/releases/tidb-self-managed)
 
 [FAQ Summary](https://docs.pingcap.com/tidb/dev/faq-overview)
 

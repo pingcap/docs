@@ -108,6 +108,14 @@ After you pause a log backup task, to prevent the MVCC data from being garbage c
 
 To address this problem, delete the current task using `br log stop`, and then create a log backup task using `br log start`. At the same time, you can perform a full backup for subsequent PITR.
 
+### What should I do if the error message `[ddl:8204]invalid ddl job type: none` is returned when using the PITR table filter?
+
+```shell
+failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:8204]invalid ddl job type: none
+```
+
+This error occurs because the TiDB node acting as the DDL Owner is running an outdated version that cannot recognize the Refresh Meta DDL. To resolve this issue, upgrade your cluster to v8.5.5 or later before using the PITR [table filter](/table-filter.md) feature.
+
 ## Feature compatibility issues
 
 ### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC?
@@ -272,11 +280,11 @@ If you only need to restore `mysql.usertable`, run the following command:
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-Note that even if you configures [table filter](/table-filter.md#syntax), **BR does not restore the following system tables**:
+Note that even if you configure [table filter](/table-filter.md#syntax), **BR does not restore the following system tables**:
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
+- Other system tables. For more details, see [Restore tables in the `mysql` schema system tables](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 
 ### How to deal with the error of `cannot find rewrite rule` during restoration?
 

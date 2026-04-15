@@ -6,13 +6,30 @@ aliases: ['/docs/dev/sql-statements/sql-statement-modify-column/','/docs/dev/ref
 
 # MODIFY COLUMN
 
-The `ALTER TABLE.. MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename at the same time, use the [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement instead.
+The `ALTER TABLE ... MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename the column at the same time, use the [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement instead.
 
-Since v5.1.0, TiDB has supported changes of data types for Reorg data, including but not limited to:
+Starting from v5.1.0, TiDB supports column type changes that require Reorg-Data. When performing such changes, TiDB rebuilds all existing data in the table by reading the original data, converting it to the new column type, and then writing the converted data back to the table. Because all table data must be processed, Reorg-Data operations typically take a long time, and the execution time is proportional to the amount of data in the table.
+
+The following are some common examples of column type changes that require Reorg-Data:
 
 - Changing `VARCHAR` to `BIGINT`
 - Modifying the `DECIMAL` precision
-- Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
+- Reducing the length of `VARCHAR(10)` to `VARCHAR(5)`
+
+Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB rebuilds only the affected indexes instead of the entire table, thereby improving execution efficiency:
+
+- The current session uses a strict [SQL mode](/sql-mode.md) (`sql_mode` includes `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`).
+- The table has no TiFlash replicas.
+- There is no risk of data truncation during type conversion.
+
+This optimization only applies to the following type change scenarios:
+
+- Conversions between integer types, such as from `BIGINT` to `INT`
+- Conversions between string types where the character set remains unchanged, such as from `VARCHAR(200)` to `VARCHAR(100)`
+
+> **Note:**
+>
+> When converting from `VARCHAR` to `CHAR`, the original data must not contain trailing spaces. If the original data contains trailing spaces, TiDB still performs Reorg-Data to ensure that the converted values comply with the padding rules of the `CHAR` type.
 
 ## Synopsis
 
@@ -34,7 +51,7 @@ ColumnOption
            | 'AUTO_INCREMENT'
            | 'PRIMARY'? 'KEY' ( 'CLUSTERED' | 'NONCLUSTERED' )?
            | 'UNIQUE' 'KEY'?
-           | 'DEFAULT' ( NowSymOptionFraction | SignedLiteral | NextValueForSequence )
+           | 'DEFAULT' DefaultValueExpr
            | 'SERIAL' 'DEFAULT' 'VALUE'
            | 'ON' 'UPDATE' NowSymOptionFraction
            | 'COMMENT' stringLit
@@ -48,11 +65,18 @@ ColumnOption
 
 ColumnName ::=
     Identifier ( '.' Identifier ( '.' Identifier )? )?
+
+DefaultValueExpr ::=
+    NowSymOptionFractionParentheses
+|   SignedLiteral
+|   NextValueForSequenceParentheses
+|   BuiltinFunction
+|   '(' SignedLiteral ')'
 ```
 
 ## Examples
 
-### Meta-Only Change
+### Meta-only change
 
 {{< copyable "sql" >}}
 
@@ -102,7 +126,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-### Reorg-Data Change
+### Reorg-Data change
 
 {{< copyable "sql" >}}
 
@@ -161,7 +185,7 @@ CREATE TABLE `t1` (
 >    ERROR 1406 (22001): Data Too Long, field len 4, data len 5
 >    ```
 >
-> - Due to the compatibility with the Async Commit feature, the DDL statement waits for a period of time (about 2.5s) before starting to process into Reorg Data.
+> - Due to the compatibility with the Async Commit feature, when [Metadata lock](/metadata-lock.md) is disabled, the DDL statement waits for a period of time (about 2.5s) before starting to process into Reorg-Data.
 >
 >    ```
 >    Query OK, 0 rows affected (2.52 sec)

@@ -513,10 +513,6 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 
 ## Import TiDB Ansible cluster
 
-> **Note:**
->
-> Currently, TiUP cluster's support for TiSpark is still **experimental**. It is not supported to import a TiDB cluster with TiSpark enabled.
-
 Before TiUP is released, TiDB Ansible is often used to deploy TiDB clusters. To enable TiUP to take over the cluster deployed by TiDB Ansible, use the `import` command.
 
 The usage of the `import` command is as follows:
@@ -700,7 +696,7 @@ Environment checks are not necessary for deploying a cluster. For the production
 
 All operations above performed on the cluster machine use the SSH client embedded in TiUP to connect to the cluster and execute commands. However, in some scenarios, you might also need to use the SSH client native to the control machine system to perform such cluster operations. For example:
 
-- To use a SSH plug-in for authentication
+- To use an SSH plug-in for authentication
 - To use a customized SSH client
 
 Then you can use the `--ssh=system` command-line flag to enable the system-native command-line tool:

@@ -1,11 +1,11 @@
 ---
-title: GBK
+title: The GBK Character Set
 summary: This document provides details about the TiDB support of the GBK character set.
 ---
 
-# GBK
+# The GBK Character Set
 
-Since v5.4.0, TiDB supports the GBK character set. This document provides the TiDB support and compatibility information of the GBK character set.
+Starting from v5.4.0, TiDB supports the GBK character set. This document provides the TiDB support and compatibility information of the GBK character set.
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -31,7 +31,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 | gbk_bin        | gbk     | 87 |         | Yes      |       1 | PAD SPACE     |
 | gbk_chinese_ci | gbk     | 28 | Yes     | Yes      |       1 | PAD SPACE     |
 +----------------+---------+----+---------+----------+---------+---------------+
-2 rows in set (0.00 sec)
+2 rows in set (0.001 sec)
 ```
 
 ## MySQL compatibility
@@ -40,21 +40,26 @@ This section provides the compatibility information between MySQL and TiDB.
 
 ### Collations
 
-The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. Unlike MySQL, the default collation of the GBK character set in TiDB is `gbk_bin`. Additionally, because TiDB converts GBK to `utf8mb4` and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
-
 <CustomContent platform="tidb">
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). This is the default setting for new deployments.
+The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. The default collation for the GBK character set in TiDB depends on the value of the TiDB configuration item [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap):
+
+- By default, the TiDB configuration item [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is set to `true`, which means that the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) is enabled and the default collation for the GBK character set is `gbk_chinese_ci`.
+- When the TiDB configuration item [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is set to `false`, the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) is disabled, and the default collation for the GBK character set is `gbk_bin`.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, TiDB Cloud enables the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) by default.
+By default, TiDB Cloud enables the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) and the default collation for the GBK character set is `gbk_chinese_ci`.
 
 </CustomContent>
 
-After enabling the new framework for collations, if you check the collations corresponding to the GBK character set, you can see that the TiDB GBK default collation is changed to `gbk_chinese_ci`.
+Additionally, the `gbk_bin` supported by TiDB differs from MySQL's `gbk_bin` collation. TiDB converts GBK to `utf8mb4` and then performs binary sorting.
+
+After [the new framework for collations](/character-set-and-collation.md#new-framework-for-collations) is enabled, if you check the collations for the GBK character set, you can see that TiDB's default collation for GBK is switched to `gbk_chinese_ci`.
+
+Starting from TiDB v6.0.0, the new framework for collations is enabled by default, which sets `gbk_chinese_ci` as the default collation for the GBK character set in TiDB, consistent with MySQL.
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -80,16 +85,16 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 | gbk_bin        | gbk     | 87 |         | Yes      |       1 | PAD SPACE     |
 | gbk_chinese_ci | gbk     | 28 | Yes     | Yes      |       1 | PAD SPACE     |
 +----------------+---------+----+---------+----------+---------+---------------+
-2 rows in set (0.00 sec)
+2 rows in set (0.001 sec)
 ```
 
-### Illegal character compatibility
+### Invalid character compatibility
 
-* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md#character_set_connection) are not set to `gbk` at the same time, TiDB handles illegal characters in the same way as MySQL.
-* If `character_set_client` and `character_set_connection` are both set to `gbk`, TiDB handles illegal characters differently than MySQL.
+* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md#character_set_connection) are not set to `gbk` at the same time, TiDB handles invalid characters in the same way as MySQL.
+* If `character_set_client` and `character_set_connection` are both set to `gbk`, TiDB handles invalid characters differently than MySQL.
 
-    - MySQL handles illegal GBK character sets in reading and writing operations differently.
-    - TiDB handles illegal GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing illegal GBK characters. In the non-strict mode, TiDB replaces illegal GBK characters with `?` when either reading or writing illegal GBK characters.
+    - MySQL handles invalid GBK character sets in reading and writing operations differently.
+    - TiDB handles invalid GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing invalid GBK characters. In the non-strict mode, TiDB replaces invalid GBK characters with `?` when either reading or writing invalid GBK characters.
 
 For example, after `SET NAMES gbk`, if you create a table using the `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` statement in MySQL and TiDB respectively and then execute the SQL statements in the following table, you can see the detailed differences.
 

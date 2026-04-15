@@ -18,9 +18,9 @@ You are expected to have an AWS account with enough access to manage DMS-related
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have a TiDB Cloud account and a TiDB Cloud Serverless or TiDB Cloud Dedicated cluster. If not, refer to the following documents to create one:
+You are expected to have a TiDB Cloud account and a {{{ .starter }}}, {{{ .essential }}}, or TiDB Cloud Dedicated cluster. If not, refer to the following documents to create one:
 
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a {{{ .starter }}} or Essential cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
 ## Configure network
@@ -29,17 +29,36 @@ Before creating DMS resources, you need to configure network properly to ensure 
 
 <SimpleTab>
 
-<div label="TiDB Cloud Serverless">
+<div label="{{{ .starter }}} or Essential">
 
-For TiDB Cloud Serverless, your clients can connect to clusters via public endpoint or private endpoint.
+For {{{ .starter }}} or {{{ .essential }}}, your clients can connect to clusters via public endpoint or private endpoint.
 
-- To [connect to a TiDB Cloud Serverless cluster via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md), do one of the following to make sure that the DMS replication instance can access the internet.
+<CustomContent language="en,zh">
+
+- To [connect to a {{{ .starter }}} or Essential cluster via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md), do one of the following to make sure that the DMS replication instance can access the internet.
 
     - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
 
     - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
 
-- To connect to a TiDB Cloud Serverless cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) first and deploy the replication instance in private subnets.
+- To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, refer to the following documents to set up a private endpoint first and deploy the replication instance in private subnets.
+
+    - [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- To [connect to a {{{ .starter }}} or Essential cluster via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md), do one of the following to make sure that the DMS replication instance can access the internet.
+
+    - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
+
+    - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
+
+- To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, refer to [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) to set up a private endpoint first and deploy the replication instance in private subnets.
+
+</CustomContent>
 
 </div>
 
@@ -110,14 +129,14 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
     <SimpleTab>
 
-    <div label="TiDB Cloud Serverless">
+    <div label="{{{ .starter }}} or Essential">
 
-    - **Server name**: `HOST` of TiDB Cloud Serverless cluster.
-    - **Port**: `PORT` of TiDB Cloud Serverless cluster.
-    - **User name**: User of TiDB Cloud Serverless cluster for migration. Make sure it meets DMS requirements.
-    - **Password**: Password of the TiDB Cloud Serverless cluster user.
+    - **Server name**: `HOST` of the cluster.
+    - **Port**: `PORT` of the cluster.
+    - **User name**: User of the cluster for migration. Make sure it meets DMS requirements.
+    - **Password**: Password of the cluster user.
     - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
-    - (Optional) **CA certificate**: Use the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    - (Optional) **CA certificate**: Use the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 
     </div>
 

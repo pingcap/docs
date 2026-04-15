@@ -152,3 +152,7 @@ SELECT * FROM information_schema.cluster_processlist;
 | 127.0.0.1:10080 | 1268776964 | root | 127.0.0.1:59922 | NULL | Query   |    0 | autocommit | SELECT * FROM information_schema.cluster_processlist | b1e38e59fbbc3e2b35546db5c8053040db989a497ac6cd71ff8dd4394395701a |    0 |    0 | 07-29 12:39:24.282(451471727468740609) | default        |               |             0 |        0 |        0 |
 +-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+----------+----------+
 ```
+
+## Permissions
+
+If the current user does not have the `PROCESS` privilege, `PROCESSLIST` only shows the requests from the user’s own sessions.

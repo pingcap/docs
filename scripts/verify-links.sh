@@ -15,7 +15,17 @@
 ROOT=$(unset CDPATH && cd $(dirname "${BASH_SOURCE[0]}")/.. && pwd)
 cd $ROOT
 
-npm install -g markdown-link-check@3.8.1
+MLC_CMD=()
+if [ -x "$ROOT/node_modules/.bin/markdown-link-check" ]; then
+    # Prefer the repo-local pinned version (installed by `npm ci`).
+    MLC_CMD=("$ROOT/node_modules/.bin/markdown-link-check")
+elif command -v markdown-link-check >/dev/null 2>&1; then
+    # Fall back to a globally-installed version (less reproducible).
+    MLC_CMD=(markdown-link-check)
+else
+    # As a last resort, rely on `npx` without installing.
+    MLC_CMD=(npx --no-install markdown-link-check)
+fi
 
 VERBOSE=${VERBOSE:-}
 CONFIG_TMP=$(mktemp)
@@ -49,7 +59,7 @@ fi
 while read -r tasks; do
     for task in $tasks; do
         (
-            output=$(markdown-link-check --config "$CONFIG_TMP" "$task" -q)
+            output=$("${MLC_CMD[@]}" --config "$CONFIG_TMP" "$task" -q)
             if [ $? -ne 0 ]; then
                 printf "$output" >> $ERROR_REPORT
             fi
@@ -59,7 +69,7 @@ while read -r tasks; do
         ) &
     done
     wait
-done <<<"$(find "." -type f -not -path './node_modules/*' -name '*.md' | xargs -n 10)"
+done <<<"$(find "." -type f -name '*.md' -not -path './node_modules/*' -not -path './tmp/*' -not -path './.*/*' | xargs -n 10)"
 
 error_files=$(cat $ERROR_REPORT | grep 'FILE: ' | wc -l)
 error_output=$(cat $ERROR_REPORT)

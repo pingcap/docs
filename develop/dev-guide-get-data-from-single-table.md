@@ -1,6 +1,7 @@
 ---
 title: Query Data from a Single Table
 summary: This document describes how to query data from a single table in a database.
+aliases: ['/tidb/stable/dev-guide-get-data-from-single-table/','/tidb/dev/dev-guide-get-data-from-single-table/','/tidbcloud/dev-guide-get-data-from-single-table/']
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -15,31 +16,22 @@ The following content takes the [Bookshop](/develop/dev-guide-bookshop-schema-de
 
 Before querying data, make sure that you have completed the following steps:
 
-<CustomContent platform="tidb">
+<SimpleTab groupId="platform">
+<div label="TiDB Cloud" value="tidb-cloud">
 
-1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-1. Build a TiDB cluster using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md).
-
-</CustomContent>
-
+1. [Create a TiDB Cloud cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
-
-<CustomContent platform="tidb">
-
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
-</CustomContent>
+</div>
+<div label="TiDB Self-Managed" value="tidb">
 
-<CustomContent platform="tidb-cloud">
+1. [Deploy a TiDB Self-Managed cluster](/production-deployment-using-tiup.md).
+2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
+3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
-3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
-
-</CustomContent>
+</div>
+</SimpleTab>
 
 ## Execute a simple query
 
@@ -122,20 +114,9 @@ public class AuthorDAO {
 }
 ```
 
-<CustomContent platform="tidb">
+After [connecting to TiDB using the JDBC driver](/develop/dev-guide-sample-application-java-jdbc.md), you can create a `Statement` object with `conn.createStatement()`, and then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
 
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can create a `Statement` object with `conn.createStatus()`.
-
-</CustomContent>
-
-- Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
-- The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
+The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
 </div>
 </SimpleTab>
@@ -399,14 +380,6 @@ In addition to the `COUNT` function, TiDB also supports other aggregate function
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

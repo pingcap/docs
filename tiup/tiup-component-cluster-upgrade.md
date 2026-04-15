@@ -116,6 +116,13 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `STRINGS`
 - If this option is not set, the version of Node Exporter remains consistent with the cluster version.
 
+### --restart-timeout
+
+- Specifies the waiting time after upgrading a component during a rolling upgrade.
+- Data type: `STRINGS`. Any type that can be parsed by [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration) is supported.
+- Default: `0`
+- If this option is not specified, there will be no waiting time after upgrading a component.
+
 ### -h, --help
 
 - Prints the help information.

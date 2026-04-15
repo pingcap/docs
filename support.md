@@ -21,7 +21,6 @@ If you encounter a problem when you use TiDB, you can reach out for support from
     - [Discord channels](https://discord.gg/DQZ2dy3cuc?utm_source=doc)
     - Slack channels: [#everyone](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs) (English), [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&channel=tidb-japan&ref=docs) (Japanese)
     - [Stack Overflow](https://stackoverflow.com/questions/tagged/tidb) (questions tagged with #tidb)
-    - [TiDB Forum](https://ask.pingcap.com/)
 
 + Report a bug
 
@@ -30,4 +29,4 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 + Learn TiDB's implementation and design
 
     - [TiDB development guide](https://pingcap.github.io/tidb-dev-guide/)
-    - [TiDB Internals forum](https://internals.tidb.io/)
+    - [Discussions on GitHub](https://github.com/orgs/pingcap/discussions)

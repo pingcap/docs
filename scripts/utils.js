@@ -58,12 +58,26 @@ const filterLink = (srcList = []) => {
   return result;
 };
 
-export const getAllMdList = (tocFile) => {
-  const tocFileContent = fs.readFileSync(tocFile);
-  const mdAst = generateMdAstFromFile(tocFileContent);
-  const linkList = extractLinkNodeFromAst(mdAst);
-  const filteredLinkList = filterLink(linkList);
-  return filteredLinkList;
+export const getAllMdList = (tocFiles) => {
+  const tocFileList = Array.isArray(tocFiles) ? tocFiles : [tocFiles];
+
+  const allLinks = tocFileList.flatMap((tocFile) => {
+    if (!fs.existsSync(tocFile)) {
+      console.log(`TOC file not found: ${tocFile}`);
+      return [];
+    }
+    try {
+      const tocFileContent = fs.readFileSync(tocFile);
+      const mdAst = generateMdAstFromFile(tocFileContent);
+      const linkList = extractLinkNodeFromAst(mdAst);
+      return filterLink(linkList);
+    } catch (error) {
+      console.error(`Error reading TOC file ${tocFile}:`, error);
+      return [];
+    }
+  });
+
+  return [...new Set(allLinks)];
 };
 
 const checkDestDir = (destPath) => {
@@ -159,9 +173,9 @@ export const astNode2mdStr = (astNode) => {
 
 export const removeCustomContent = (type, content = "") => {
   const TIDB_CUSTOM_CONTENT_REGEX =
-    /<CustomContent +platform=["']tidb["'] *>(.|\n)*?<\/CustomContent>\n/g;
+    /<CustomContent[^>]*platform=["']tidb["'][^>]*>(.|\n)*?<\/CustomContent>/g;
   const TIDB_CLOUD_CONTENT_REGEX =
-    /<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?<\/CustomContent>\n/g;
+    /<CustomContent[^>]*platform=["']tidb-cloud["'][^>]*>(.|\n)*?<\/CustomContent>/g;
   if (type === "tidb") {
     return content.replaceAll(TIDB_CLOUD_CONTENT_REGEX, "");
   }

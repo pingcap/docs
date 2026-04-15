@@ -119,7 +119,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     Starting with v8.3.0, the global index feature is released as an experimental feature. You can explicitly create a global index for a partitioned table with the keyword `Global` to remove the restriction that the unique key must use every column in the table's partitioning expression, to meet flexible business needs. Global indexes also enhance the performance of queries that do not include partition keys.
 
-    For more information, see [documentation](/partitioned-table.md#global-indexes).
+    For more information, see [documentation](/global-indexes.md).
 
 ### Reliability
 
@@ -188,9 +188,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
 ### Data migration
 
-* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
+* TiCDC supports replicating DDL statements in bidirectional replication (BDR) mode (GA) [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
 
-    TiCDC v7.6.0 introduced the replication of DDL statements with bi-directional replication configured. Previously, bi-directional replication of DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to execute DDL statements on both TiDB clusters separately. With this feature, after assigning a `PRIMARY` BDR role to a cluster, TiCDC can replicate the DDL statements from that cluster to the `SECONDARY` cluster.
+    TiCDC v7.6.0 introduced the replication of DDL statements with bidirectional replication configured. Previously, bidirectional replication of DDL statements was not supported by TiCDC, so users of TiCDC's bidirectional replication had to execute DDL statements on both TiDB clusters separately. With this feature, after assigning a `PRIMARY` BDR role to a cluster, TiCDC can replicate the DDL statements from that cluster to the `SECONDARY` cluster.
 
     In v8.3.0, this feature becomes generally available (GA).
 
@@ -212,6 +212,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 |--------|------------------------------|------|
 | [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)    | Modified   | Adds the SESSION scope.       |
 | [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)  | Modified   | Adds the SESSION scope.    |
+| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) | Modified | Changes the default value from `OFF` to `ON` after further tests, which means that TiDB collects `PREDICATE COLUMNS` by default. |
 | [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) | Modified | Starting from v8.3.0, this variable controls the number of concurrent threads during the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) and [Delete Range](/garbage-collection-overview.md#delete-ranges) steps of the [Garbage Collection (GC)](/garbage-collection-overview.md) process. Before v8.3.0, this variable only controls the number of threads during the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step. |
 | [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) | Modified | Adds the GLOBAL scope. |
 | [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610) | Modified | Adds the GLOBAL scope and persists the variable value to the cluster. Changes the default value from `OFF` to `ON` after further tests, which means that the optimizer is allowed to push `Projection` down to the TiKV coprocessor. |

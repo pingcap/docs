@@ -11,7 +11,7 @@ This statement performs a distributed restore from a backup archive previously p
 > **Warning:**
 >
 > - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> - This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 The `RESTORE` statement uses the same engine as the [BR tool](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
 
@@ -108,17 +108,7 @@ BR supports restoring data from S3 or GCS:
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-<CustomContent platform="tidb">
-
 The URL syntax is further explained in [URI Formats of External Storage Services](/external-storage-uri.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-The URL syntax is further explained in [external storage URI](https://docs.pingcap.com/tidb/stable/external-storage-uri).
-
-</CustomContent>
 
 When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
 

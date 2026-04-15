@@ -61,11 +61,11 @@ When you create a table, you can declare that the primary key is either a cluste
 
 - Clustered indexes + `AUTO_RANDOM`
 
-    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In subsequent queries, if you have to use the ID column to sort data, you can use the [`AUTO_RANDOM`](/auto-random.md) ID column and left shift 5 bits to ensure the order of the query data. For example:
+    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In subsequent queries, if you have to use the ID column to sort data, you can use the [`AUTO_RANDOM`](/auto-random.md) ID column and left shift 6 bits (1 sign bit + 5 shard bits) to ensure the order of the query data. For example:
 
     ```sql
     CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255));
-    Select a, a<<5 ,b from t order by a <<5 desc
+    Select a, a<<6 ,b from t order by a <<6 desc
     ```
 
 The following table summarizes the pros and cons of each solution.

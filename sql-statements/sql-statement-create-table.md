@@ -118,6 +118,7 @@ TableOption ::=
 |   'UNION' EqOpt '(' TableNameListOpt ')'
 |   'ENCRYPTION' EqOpt EncryptionOpt
 |    'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))? (TTLJobInterval EqOpt stringLit)?
+|   'AFFINITY' EqOpt StringName
 |   PlacementPolicyOption
 
 OnCommitOpt ::=
@@ -126,6 +127,38 @@ OnCommitOpt ::=
 PlacementPolicyOption ::=
     "PLACEMENT" "POLICY" EqOpt PolicyName
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
+
+DefaultValueExpr ::=
+    NowSymOptionFractionParentheses
+|   SignedLiteral
+|   NextValueForSequenceParentheses
+|   BuiltinFunction
+|   '(' SignedLiteral ')'
+
+BuiltinFunction ::=
+    '(' BuiltinFunction ')'
+|   identifier '(' ')'
+|   identifier '(' ExpressionList ')'
+|   "REPLACE" '(' ExpressionList ')'
+
+NowSymOptionFractionParentheses ::=
+    '(' NowSymOptionFractionParentheses ')'
+|   NowSymOptionFraction
+
+NowSymOptionFraction ::=
+    NowSym
+|   NowSymFunc '(' ')'
+|   NowSymFunc '(' NUM ')'
+|   CurdateSym '(' ')'
+|   "CURRENT_DATE"
+
+NextValueForSequenceParentheses ::=
+    '(' NextValueForSequenceParentheses ')'
+|   NextValueForSequence
+
+NextValueForSequence ::=
+    "NEXT" "VALUE" forKwd TableName
+|   "NEXTVAL" '(' TableName ')'
 ```
 
 The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored. `ENGINE_ATTRIBUTE` is parsed but always returns the `ERROR 3981 (HY000): Storage engine does not support ENGINE_ATTRIBUTE` error. This option is reserved for future use.
@@ -138,13 +171,16 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 |`AUTO_ID_CACHE`| To set the auto ID cache size in a TiDB instance. By default, TiDB automatically changes this size according to allocation speed of auto ID |`AUTO_ID_CACHE` = 200 |
 |`AUTO_RANDOM_BASE`| To set the initial incremental part value of auto_random. This option can be considered as a part of the internal interface. Users can ignore this parameter |`AUTO_RANDOM_BASE` = 0|
 | `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
+| `COLLATE` | To specify the character set collation for the table | `COLLATE` = 'utf8mb4_bin' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
+| `AFFINITY` | To enable affinity scheduling for a table or partition. It can be set to `'table'` for non-partitioned tables and `'partition'` for partitioned tables. Setting it to `'none'` or leaving it empty disables affinity scheduling. | `AFFINITY` = 'table' |
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
+> - The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
+> - Before using `AFFINITY`, note that modifying the partitioning scheme (such as adding, dropping, reorganizing, or swapping partitions) of a table with affinity enabled is not supported, and configuring `AFFINITY` on temporary tables or views is not supported.
 
 </CustomContent>
 
@@ -152,7 +188,8 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 
 > **Note:**
 >
-> TiDB creates a separate Region for each newly created table.
+> - TiDB creates a separate Region for each newly created table.
+> - Before using `AFFINITY`, note that modifying the partitioning scheme (such as adding, dropping, reorganizing, or swapping partitions) of a table with affinity enabled is not supported, and configuring `AFFINITY` on temporary tables or views is not supported.
 
 </CustomContent>
 
@@ -242,8 +279,13 @@ mysql> DESC t1;
 
 * All of the data types except spatial types are supported.
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
-* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/partitioned-table.md#global-indexes) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
+* TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
+
+    >**Note:**
+    >
+    > Currently, only {{{ .starter }}} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
+
+* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/global-indexes.md) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 <CustomContent platform="tidb">
 

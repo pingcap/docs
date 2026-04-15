@@ -156,7 +156,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 * Support the checkpoint mechanism for Fast Online DDL to improve fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta)
 
-    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/ddl-introduction.md), which significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis, making the DDL execution more stable and efficient.
+    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/best-practices/ddl-introduction.md), which significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis, making the DDL execution more stable and efficient.
 
     For more information, see [documentation](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
 

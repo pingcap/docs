@@ -69,20 +69,18 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 ### How to use the `fio` command to test the disk performance of the TiKV instance?
 
+The following example uses `ioengine=psync` (synchronous I/O), so `iodepth` is typically fixed at `1`, and concurrency is primarily controlled by `numjobs`. It is recommended to set `direct=1` to bypass the file system cache.
+
 - Random Read test:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
-    ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randread -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
+    ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randread -time_based -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
     ```
 
 - The mix test of sequential Write and random Read:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
-    ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
+    ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -time_based -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
 ## What public cloud vendors are currently supported by TiDB?

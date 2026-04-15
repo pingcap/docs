@@ -109,7 +109,7 @@ TiDB version: 5.0.6
     - Fix the issue that TiDB cannot correctly identify whether the `Int64` types in `Max`/`Min` functions are a signed integer or not, which causes the wrong calculation result of `Max`/`Min` [#10158](https://github.com/tikv/tikv/issues/10158)
     - Fix the issue that the node of a TiKV replica is down after the node gets snapshots because TiKV cannot modify the metadata accurately [#10225](https://github.com/tikv/tikv/issues/10225)
     - Fix the leak issue of the backup thread pool [#10287](https://github.com/tikv/tikv/issues/10287)
-    - Fix the issue of casting illegal strings into floating-point numbers [#23322](https://github.com/pingcap/tidb/issues/23322)
+    - Fix the issue of casting invalid strings into floating-point numbers [#23322](https://github.com/pingcap/tidb/issues/23322)
 
 + PD
 

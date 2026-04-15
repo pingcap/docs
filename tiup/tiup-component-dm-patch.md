@@ -79,7 +79,7 @@ The following example shows how to apply `v5.3.0-hotfix` to the `v5.3.0` cluster
 
 > **Note:**
 >
-> Hotfix is used only for emergency fixes. Its daily maintenance is complicated. It is recommend that you upgrade the DM cluster to an official version as soon as it is released.
+> Hotfix is used only for emergency fixes. Its daily maintenance is complicated. It is recommended that you upgrade the DM cluster to an official version as soon as it is released.
 
 ### Preparations
 

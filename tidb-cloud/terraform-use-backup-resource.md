@@ -1,9 +1,9 @@
 ---
-title: Use Backup Resource
-summary: Learn how to create a backup of a TiDB Cloud cluster using the backup resource.
+title: Use the `tidbcloud_backup` Resource
+summary: Learn how to create a backup of a TiDB Cloud cluster using the `tidbcloud_backup` resource.
 ---
 
-# Use Backup Resource
+# Use the `tidbcloud_backup` Resource
 
 You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud_backup` resource in this document.
 
@@ -15,9 +15,9 @@ The features of the `tidbcloud_backup` resource include the following:
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- The backup and restore feature is unavailable to TiDB Cloud Serverless clusters. To use backup resources, make sure that you have created a TiDB Cloud Dedicated cluster.
+- The backup and restore feature introduced in this document is unavailable to {{{ .starter }}} or {{{ .essential }}} clusters. To use `tidbcloud_backup` resources, make sure that you have created a TiDB Cloud Dedicated cluster.
 
-## Create a backup with the backup resource
+## Create a backup with the `tidbcloud_backup` resource
 
 1. Create a directory for the backup and enter it.
 
@@ -48,7 +48,7 @@ The features of the `tidbcloud_backup` resource include the following:
 
     You need to replace resource values (such as project ID and cluster ID) in the file with your own.
 
-    If you have maintained a cluster resource (for example, `example_cluster`) using Terraform, you can also configure the backup resource as follows, without specifying the actual project ID and cluster ID.
+    If you have maintained a cluster resource (for example, `example_cluster`) using Terraform, you can also configure the `tidbcloud_backup` resource as follows, without specifying the actual project ID and cluster ID.
 
     ```
     resource "tidbcloud_backup" "example_backup" {
@@ -147,7 +147,7 @@ The features of the `tidbcloud_backup` resource include the following:
 
 When the status turns to `SUCCESS`, it indicates that you have created a backup for your cluster. Pay attention that the backup cannot be updated after the creation.
 
-Now, you have created a backup for the cluster. If you want to use the backup to restore the cluster, you can [use the restore resources](/tidb-cloud/terraform-use-restore-resource.md).
+Now, you have created a backup for the cluster. If you want to use the backup to restore the cluster, you can [use the `tidbcloud_restore` resource](/tidb-cloud/terraform-use-restore-resource.md).
 
 ## Update a backup
 
@@ -155,7 +155,7 @@ Backups cannot be updated.
 
 ## Delete a backup
 
-To delete a backup, go to the backup directory where the corresponding `backup.tf` file is located, and then run the `terraform destroy` command to destroy the backup resource.
+To delete a backup, go to the backup directory where the corresponding `backup.tf` file is located, and then run the `terraform destroy` command to destroy the `tidbcloud_backup` resource.
 
 ```
 $ terraform destroy

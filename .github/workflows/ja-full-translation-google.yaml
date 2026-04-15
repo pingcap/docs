@@ -14,50 +14,58 @@ on:
 
 jobs:
   ja-translation:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         name: Download translator repo
         with:
-          repository: "shczhen/markdown-translator"
-          path: "markdown-translator"
+          repository: "pingcap/docs-toolkit"
+          ref: "main"
+          path: "docs-toolkit"
       - uses: actions/checkout@v4
         name: Download specified branch of docs repo
         with:
           ref: ${{ github.event.inputs.from }}
           path: "docs"
       - uses: actions/setup-node@v4
-        name: Setup node 18
+        name: Setup node
         with:
-          node-version: 18
+          node-version: 20
 
       - run: |
           sudo apt install tree -y
 
       - name: Copy doc files to translator folder
         run: |
-          cp -r docs markdown-translator/markdowns
-          rm -rf markdown-translator/markdowns/.github
-          rm -rf markdown-translator/markdowns/scripts
-          rm -rf markdown-translator/markdowns/media
+          cp -r docs docs-toolkit/markdown-translator/markdowns
+          rm -rf docs-toolkit/markdown-translator/markdowns/.github
+          rm -rf docs-toolkit/markdown-translator/markdowns/scripts
+          rm -rf docs-toolkit/markdown-translator/markdowns/media
 
       - name: Config and translate
         run: |
-          cd markdown-translator
+          cd docs-toolkit/markdown-translator
           echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           yarn
-          node src/index.js
+          node src/index_ja.js
           cd ..
       - name: Copy translated files to docs repo
         run: |
           cd docs
           git checkout -b ${{ github.event.inputs.to }}
           cd ..
-          cp -r markdown-translator/output/markdowns/* docs/
+          cp -r docs-toolkit/markdown-translator/output/markdowns/* docs/
+
+      - name: Update latest translation commit info
+        run: |
+          cd docs
+          SOURCE_SHA=$(git rev-parse origin/${{ github.event.inputs.from }})
+          echo '{"target":"${{ github.event.inputs.from }}","sha":"'$SOURCE_SHA'"}' > latest_translation_commit.json
 
       - name: Git commit and push
         run: |
@@ -74,6 +82,7 @@ jobs:
           git push -f --set-upstream origin ${{ github.event.inputs.to }}
 
   dispatch:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     needs: [ja-translation]
 

@@ -21,9 +21,9 @@ Before performing a failover, a recovery group should have been created and be s
 
 In the event of a disaster, you can use the recovery group to failover databases to the secondary cluster.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, locate the name of the recovery group that you wish to failover.
 
@@ -47,9 +47,9 @@ If the original primary cluster that was affected by the disaster can be brought
 
 ![Unprotected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, locate the name of the recovery group that you wish to reprotect.
 
