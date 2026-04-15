@@ -127,12 +127,12 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
-| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7     |
-| Amazon Aurora MySQL                              | 8.0, 5.7     |
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7           |
+| Amazon Aurora MySQL                              | 8.0, 5.7           |
 | Amazon RDS MySQL                                 | 8.0, 5.7           |
 | Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
-| Azure Database for MySQL - Flexible Server                          | 8.0, 5.7           |
-| Google Cloud SQL for MySQL                                                | 8.0, 5.7    |
+| Azure Database for MySQL - Flexible Server       | 8.0, 5.7           |
+| Google Cloud SQL for MySQL                       | 8.0, 5.7           |
 
 </CustomContent>
 
@@ -140,12 +140,13 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 To continuously replicate incremental changes from the source MySQL-compatible database to the TiDB Cloud target cluster using DM, you need the following configurations to enable binary logs in the source database:
 
-| Configuration | Required value | Why |
-|:--------------|:---------------|:----|
-| `log_bin` | `ON` | Enables binary logging, which DM uses to replicate changes to TiDB |
-| `binlog_format` | `ROW` | Captures all data changes accurately (other formats miss edge cases) |
-| `binlog_row_image` | `FULL` | Includes all column values in events for safe conflict resolution |
-| `binlog_expire_logs_seconds` | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+| Configuration                    | Required value | Why |
+|:---------------------------------|:---------------|:----|
+| `log_bin`                        | `ON`           | Enables binary logging, which DM uses to replicate changes to TiDB |
+| `binlog_format`                  | `ROW`          | Captures all data changes accurately (other formats miss edge cases) |
+| `binlog_row_image`               | `FULL`         | Includes all column values in events for safe conflict resolution |
+| `binlog_expire_logs_seconds`     | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+| `binlog_transaction_compression` | `OFF`          | DM does not support transaction compression |
 
 #### Check current values and configure the source MySQL instance
 
@@ -154,7 +155,7 @@ To check the current configurations, connect to the source MySQL instance and ex
 ```sql
 SHOW VARIABLES WHERE Variable_name IN
 ('log_bin','server_id','binlog_format','binlog_row_image',
-'binlog_expire_logs_seconds','expire_logs_days');
+'binlog_expire_logs_seconds','expire_logs_days','binlog_transaction_compression');
 ```
 
 If necessary, change the source MySQL instance configurations to match the required values.
@@ -170,6 +171,7 @@ If necessary, change the source MySQL instance configurations to match the requi
     binlog_format = ROW
     binlog_row_image = FULL
     binlog_expire_logs_seconds = 604800   # 7 days retention
+    binlog_transaction_compression = OFF
     ```
 
 2. Restart the MySQL service to apply the changes:
