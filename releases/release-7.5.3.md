@@ -21,7 +21,7 @@ TiDB バージョン: 7.5.3
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   TiFlash配置ルールを一括削除することで、パーティションテーブル[＃54068](https://github.com/pingcap/tidb/issues/54068) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で`TRUNCATE`または`DROP`操作を実行した後のデータGCの処理速度が向上します。
 
@@ -47,7 +47,7 @@ TiDB バージョン: 7.5.3
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   インデックス統計の読み込み時にメモリリークが発生する可能性がある問題を修正[＃54022](https://github.com/pingcap/tidb/issues/54022) @ [Rustin170506](https://github.com/Rustin170506)
     -   `UPDATE`操作で複数テーブルシナリオ[＃53742](https://github.com/pingcap/tidb/issues/53742) @ [hawkingrei](https://github.com/hawkingrei)で TiDB OOM が発生する可能性がある問題を修正

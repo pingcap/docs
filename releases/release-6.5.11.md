@@ -20,7 +20,7 @@ TiDBバージョン: 6.5.11
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   TiFlash配置ルールを一括削除することで、パーティションテーブル[＃54068](https://github.com/pingcap/tidb/issues/54068) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で`TRUNCATE`または`DROP`操作を実行した後のデータGCの処理速度が向上します。
 
@@ -41,7 +41,7 @@ TiDBバージョン: 6.5.11
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   再帰CTE演算子がメモリ使用量[＃54181](https://github.com/pingcap/tidb/issues/54181) @ [guo-shaoge](https://github.com/guo-shaoge)を誤って追跡する問題を修正しました
     -   `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに発生する予期しないエラーを修正します。これは[＃53600](https://github.com/pingcap/tidb/issues/53600) @ [XuHuaiyu](https://github.com/XuHuaiyu)の繰り返し操作による以前のパラメータ値の再利用が原因です。

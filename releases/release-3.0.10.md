@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 3.0.10
 >
 > このバージョンにはいくつかの既知の問題が見つかりましたが、これらの問題は新しいバージョンで修正されています。最新の3.0.xバージョンをご利用いただくことをお勧めします。
 
-## ティドブ {#tidb}
+## TiDB {#tidb}
 
 -   `IndexLookUpJoin` `OtherCondition`を使用して`InnerRange` [＃14599](https://github.com/pingcap/tidb/pull/14599)を構築したときに間違った`Join`結果を修正します
 -   `tidb_pprof_sql_cpu`設定項目を削除し、 `tidb_pprof_sql_cpu`変数[＃14416](https://github.com/pingcap/tidb/pull/14416)を追加します。

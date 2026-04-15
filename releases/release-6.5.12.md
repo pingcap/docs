@@ -19,7 +19,7 @@ TiDBバージョン: 6.5.12
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   読み取りタイムスタンプ[＃57786](https://github.com/pingcap/tidb/issues/57786) @ [MyonKeminta](https://github.com/MyonKeminta)の有効性チェックを強化
 
@@ -46,7 +46,7 @@ TiDBバージョン: 6.5.12
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   `NATURAL JOIN`または`USING`節の後にサブクエリを使用するとエラー[＃53766](https://github.com/pingcap/tidb/issues/53766) @ [dash12653](https://github.com/dash12653)が発生する可能性がある問題を修正しました
     -   `CAST`関数が文字セット[＃55677](https://github.com/pingcap/tidb/issues/55677) @ [Defined2014](https://github.com/Defined2014)の明示的な設定をサポートしていない問題を修正しました

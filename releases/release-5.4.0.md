@@ -37,8 +37,8 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 | コンフィグレーションファイル  | コンフィグレーション                                                                                                      | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                             |
 | :-------------- | :-------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティドブ            | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                      | 新しく追加された | TiDB同期ロード統計機能が同時に処理できる列の最大数を制御します。デフォルト値は`5`です。                                                                                                                                                                                                                                                                |
-| ティドブ            | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)                        | 新しく追加された | TiDB同期ロード統計機能がキャッシュできる列リクエストの最大数を制御します。デフォルト値は`1000`です。                                                                                                                                                                                                                                                        |
+| TiDB            | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                      | 新しく追加された | TiDB同期ロード統計機能が同時に処理できる列の最大数を制御します。デフォルト値は`5`です。                                                                                                                                                                                                                                                                |
+| TiDB            | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)                        | 新しく追加された | TiDB同期ロード統計機能がキャッシュできる列リクエストの最大数を制御します。デフォルト値は`1000`です。                                                                                                                                                                                                                                                        |
 | ティクブ            | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540)                  | 新しく追加された | `snap-generator`スレッドプールのサイズ。デフォルト値は`2`です。                                                                                                                                                                                                                                                                      |
 | ティクブ            | `log.file.max-size` `log.file.max-days` `log.file.max-backups`                                                  | 新しく追加された | 詳細は[TiKVコンフィグレーションファイル - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540)参照。                                                                                                                                                                                                                       |
 | ティクブ            | `raft-engine`                                                                                                   | 新しく追加された | `enable` 、 `dir` 、 `batch-compression-threshold` 、 `bytes-per-sync` 、 `target-file-size` 、 `purge-threshold` 、 `recovery-mode` 、 `recovery-read-block-size` 、 `recovery-read-block-size` 、 `recovery-threads`が含まれます。詳細は[TiKVコンフィグレーションファイル - `raft-engine`](/tikv-configuration-file.md#raft-engine)参照してください。  |
@@ -290,7 +290,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   キャッシュされたクエリプランをクリアするための`ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポートする[＃30370](https://github.com/pingcap/tidb/pull/30370)
 
@@ -346,7 +346,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   クラスターをv4.xからv5.xにアップグレードするときに発生する`tidb_analyze_version`値の変更の問題を修正しました[＃25422](https://github.com/pingcap/tidb/issues/25422)
     -   サブクエリ[＃30748](https://github.com/pingcap/tidb/issues/30748)で異なる照合順序を使用した場合に誤った結果が発生する問題を修正しました

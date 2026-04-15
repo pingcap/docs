@@ -24,7 +24,7 @@ TiDBバージョン: 4.0.16
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   Grafanaのバージョンを7.5.7から7.5.11にアップグレードします。
 
@@ -45,7 +45,7 @@ TiDBバージョン: 4.0.16
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   コスト見積もり[＃23625](https://github.com/pingcap/tidb/issues/23625)ために範囲をポイントに変換するときに統計モジュールのオーバーフローによって発生するクエリpanicを修正しました
     -   `ENUM`型データを制御関数のパラメータとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[＃23114](https://github.com/pingcap/tidb/issues/23114)

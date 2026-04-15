@@ -68,7 +68,7 @@ MySQLにおけるGBK文字セットのデフォルトの照合照合順序は`gb
 | データベース | 設定されたSQLモードに`STRICT_ALL_TABLES`または`STRICT_TRANS_TABLES`が含まれている場合                                                  | 設定されたSQLモードに`STRICT_ALL_TABLES`も`STRICT_TRANS_TABLES`も含まれていない場合                                                                     |
 | ------ | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | MySQL  | `SELECT HEX('一a');` <br/> `e4b88061`<br/><br/>`INSERT INTO gbk_table values('一a');`<br/> `Incorrect Error`        | `SELECT HEX('一a');` <br/> `e4b88061`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/>`SELECT HEX(a) FROM gbk_table;`<br/> `e4b8` |
-| ティドブ   | `SELECT HEX('一a');` <br/> `Incorrect Error`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/> `Incorrect Error` | `SELECT HEX('一a');` <br/> `e4b83f`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/>`SELECT HEX(a) FROM gbk_table;`<br/> `e4b83f` |
+| TiDB   | `SELECT HEX('一a');` <br/> `Incorrect Error`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/> `Incorrect Error` | `SELECT HEX('一a');` <br/> `e4b83f`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/>`SELECT HEX(a) FROM gbk_table;`<br/> `e4b83f` |
 
 上記の表では、 `utf8mb4`バイト セットの`SELECT HEX('a');`の結果は`e4b88061`なります。
 

@@ -181,7 +181,7 @@ TiDB は、実行ステータスや失敗ステータスなど、テレメトリ
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   組み込み関数`VITESS_HASH()` [＃23915](https://github.com/pingcap/tidb/pull/23915)をサポート
     -   `WHERE`節[＃23619](https://github.com/pingcap/tidb/issues/23619)で列挙型を使用するときにパフォーマンスを向上させるために、列挙型のデータを TiKV にプッシュダウンすることをサポートします。
@@ -255,7 +255,7 @@ TiDB は、実行ステータスや失敗ステータスなど、テレメトリ
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   投影結果が空の場合にプロジェクト除去の実行結果が間違っている可能性がある問題を修正[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[＃23891](https://github.com/pingcap/tidb/issues/23891)

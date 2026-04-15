@@ -198,7 +198,7 @@ TiDB バージョン: 8.3.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                        | タイプを変更   | 説明                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティドブ           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDB から TiKV へのリクエストのバッチ処理戦略を制御します。                                                                                                                   |
+| TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDB から TiKV へのリクエストのバッチ処理戦略を制御します。                                                                                                                   |
 | PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 修正済み     | PD設定項目の値を`security.redact-info-log`から`"marker"`に設定すると`"marker"`ログ内の機密情報を直接シールドするのではなく、 `‹ ›`でマークできます。7オプションを使用すると、編集ルールをカスタマイズできます。                   |
 | TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 修正済み     | TiKV設定項目の値を`security.redact-info-log`から`"marker"`に設定することで`"marker"`ログ内の機密情報を直接シールドするのではなく、 `‹ ›`でマークすることができます。7オプションを使用すると、編集ルールをカスタマイズできます。          |
 | TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 修正済み     | TiFlash Learner設定項目の値を`security.redact-info-log`から`"marker"`に設定することで、ログ内の機密情報を直接保護するのではなく、 `‹ ›`でマークできます。7 `"marker"`オプションを使用すると、編集ルールをカスタマイズできます。    |
@@ -229,7 +229,7 @@ TiDB バージョン: 8.3.0
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )`ステートメント[＃54162](https://github.com/pingcap/tidb/issues/54162) @ [dveeden](https://github.com/dveeden)をサポート
     -   `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))` [＃54337](https://github.com/pingcap/tidb/issues/54337) @ [ghazalfamilyusa](https://github.com/ghazalfamilyusa)のようなフィルタ条件に対してより正確なインデックスアクセス範囲を構築する
@@ -286,7 +286,7 @@ TiDB バージョン: 8.3.0
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに発生する予期しないエラーを修正します。これは[＃53600](https://github.com/pingcap/tidb/issues/53600) @ [XuHuaiyu](https://github.com/XuHuaiyu)の繰り返し操作による以前のパラメータ値の再利用が原因です。
     -   メモリ使用量が`tidb_mem_quota_query` [＃55042](https://github.com/pingcap/tidb/issues/55042) @ [yibin87](https://github.com/yibin87)で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました

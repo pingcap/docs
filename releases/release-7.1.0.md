@@ -282,9 +282,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                | タイプを変更   | 説明                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティドブ           | [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                            | 新しく追加された | TiDB の起動中にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。                                                                                                                                 |
-| ティドブ           | [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                       | 新しく追加された | TiDB の起動時に軽量統計初期化を使用するかどうかを制御します。                                                                                                                                                  |
-| ティドブ           | [`log.timeout`](/tidb-configuration-file.md#timeout-new-in-v710)                                                               | 新しく追加された | TiDBにおけるログ書き込み操作のタイムアウトを設定します。ディスク障害によりログの書き込みが不可能になった場合、この設定項目によりTiDBプロセスがハングアップする代わりにpanicになる可能性があります。デフォルト値は`0`で、タイムアウトは設定されません。                                                |
+| TiDB           | [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                            | 新しく追加された | TiDB の起動中にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。                                                                                                                                 |
+| TiDB           | [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                       | 新しく追加された | TiDB の起動時に軽量統計初期化を使用するかどうかを制御します。                                                                                                                                                  |
+| TiDB           | [`log.timeout`](/tidb-configuration-file.md#timeout-new-in-v710)                                                               | 新しく追加された | TiDBにおけるログ書き込み操作のタイムアウトを設定します。ディスク障害によりログの書き込みが不可能になった場合、この設定項目によりTiDBプロセスがハングアップする代わりにpanicになる可能性があります。デフォルト値は`0`で、タイムアウトは設定されません。                                                |
 | TiKV           | [`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)               | 新しく追加された | RocksDBの圧縮をトリガーするために必要な冗長MVCC行の数を設定します。デフォルト値は`50000`です。                                                                                                                           |
 | TiKV           | [`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)       | 新しく追加された | RocksDBの圧縮をトリガーするために必要な冗長MVCC行の割合を設定します。デフォルト値は`20`です。                                                                                                                             |
 | TiKV           | [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50)                                                | 修正済み     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`30MiB`から`100MiB`に変更します。                                                                   |
@@ -306,7 +306,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   対応する列の個別値の数を、 `SHOW INDEX`結果[＃42227](https://github.com/pingcap/tidb/issues/42227) @ [winoros](https://github.com/winoros)の Cardinality 列に表示します。
     -   TTLスキャンクエリがTiKVブロックキャッシュ[＃43206](https://github.com/pingcap/tidb/issues/43206) @ [lcwangchao](https://github.com/lcwangchao)に影響を与えないようにするには`SQL_NO_CACHE`使用します。
@@ -356,7 +356,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   パーティション[＃42183](https://github.com/pingcap/tidb/issues/42183) @ [CbcWestwolf](https://github.com/CbcWestwolf)を再編成した後、手動で`ANALYZE TABLE`実行するプロンプトが表示されない問題を修正しました。
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @ [tiancaiamao](https://github.com/tiancaiamao)

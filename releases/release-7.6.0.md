@@ -245,7 +245,7 @@ TiDB バージョン: 7.6.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                        | タイプを変更   | 説明                                                                                                                                                                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティドブ           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                               | 修正済み     | デフォルト値は &quot;&quot; です。TiDB のデフォルトでサポートされる TLS バージョンが`TLS1.1`以上から`TLS1.2`以上に変更されました。                                                                                                                                  |
+| TiDB           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                               | 修正済み     | デフォルト値は &quot;&quot; です。TiDB のデフォルトでサポートされる TLS バージョンが`TLS1.1`以上から`TLS1.2`以上に変更されました。                                                                                                                                  |
 | TiKV           | [`raftstore.report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#report-min-resolved-ts-interval-new-in-v600) | 名前を変更    | 名前をより正確にするために、この構成項目の名前は[`raftstore.pd-report-min-resolved-ts-interval`](/tikv-configuration-file.md#pd-report-min-resolved-ts-interval-new-in-v760)に変更されました。 `raftstore.report-min-resolved-ts-interval`無効になりました。     |
 | TiKV           | [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)                                                                           | 修正済み     | Titanで値を圧縮するために使用されるアルゴリズム。単位はvalueです。TiDB v7.6.0以降、デフォルトの圧縮アルゴリズムは`zstd`です。                                                                                                                                           |
 | TiKV           | [`rocksdb.defaultcf.titan.min-blob-size`](/tikv-configuration-file.md#min-blob-size)                                                                   | 修正済み     | TiDB v7.6.0以降、新規クラスターのデフォルト値は`32KB`です。v7.6.0にアップグレードする既存のクラスターの場合、デフォルト値は`1KB`ままです。                                                                                                                                    |
@@ -284,7 +284,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   非バイナリ照合順序が設定され、クエリに`LIKE`含まれている場合、オプティマイザは実行効率を向上させるために`IndexRangeScan`を生成します[＃48181](https://github.com/pingcap/tidb/issues/48181) [＃49138](https://github.com/pingcap/tidb/issues/49138) @ [time-and-fate](https://github.com/time-and-fate)
     -   特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[＃49616](https://github.com/pingcap/tidb/issues/49616) @ [qw4990](https://github.com/qw4990)
@@ -342,7 +342,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   TiDBがパニックを起こしてエラーを報告する問題を修正`invalid memory address or nil pointer dereference` [＃42739](https://github.com/pingcap/tidb/issues/42739) @ [CbcWestwolf](https://github.com/CbcWestwolf)
     -   DDL `jobID` 0 [＃46296](https://github.com/pingcap/tidb/issues/46296) @ [jiyfhust](https://github.com/jiyfhust)に復元されたときに発生する TiDB ノードpanicの問題を修正しました

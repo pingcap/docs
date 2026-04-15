@@ -162,8 +162,8 @@ TiDB バージョン: 7.2.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                 | タイプを変更   | 説明                                                                                                                                                                                                                                                                        |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティドブ           | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                                                    | 修正済み     | さらにテストを行った後、デフォルト値を`false`から`true`に変更します。つまり、TiDB は、初期化の効率を向上させるために、TiDB の起動時にデフォルトで軽量統計初期化を使用します。                                                                                                                                                                        |
-| ティドブ           | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                                                         | 修正済み     | デフォルト値を`false`から`true`に変更して[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)に合わせます。つまり、TiDB の起動中にサービスを提供する前に、統計の初期化が完了するまで TiDB は待機します。                                                                                                        |
+| TiDB           | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                                                    | 修正済み     | さらにテストを行った後、デフォルト値を`false`から`true`に変更します。つまり、TiDB は、初期化の効率を向上させるために、TiDB の起動時にデフォルトで軽量統計初期化を使用します。                                                                                                                                                                        |
+| TiDB           | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                                                         | 修正済み     | デフォルト値を`false`から`true`に変更して[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)に合わせます。つまり、TiDB の起動中にサービスを提供する前に、統計の初期化が完了するまで TiDB は待機します。                                                                                                        |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].compaction-guard-min-output-file-size`](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 修正済み     | RocksDB の圧縮タスクのデータ量を削減するために、デフォルト値を`"8MB"`から`"1MB"`に変更します。                                                                                                                                                                                                                |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v720)         | 新しく追加された | メモリの内部断片化を最小限に抑えるブルーム/リボン フィルターを生成するかどうかを制御します。                                                                                                                                                                                                                           |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720)         | 新しく追加された | 定期的な圧縮の間隔を制御します。この値より古い更新を含む SST ファイルが圧縮対象として選択され、これらの SST ファイルが元々存在していたレベルと同じレベルに書き換えられます。                                                                                                                                                                               |
@@ -178,7 +178,7 @@ TiDB バージョン: 7.2.0
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   インデックススキャン範囲を構築するロジックを最適化し、複雑な条件をインデックススキャン範囲[＃41572](https://github.com/pingcap/tidb/issues/41572) [＃44389](https://github.com/pingcap/tidb/issues/44389) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)に変換できるようにします。
     -   新しい監視メトリック`Stale Read OPS`と`Stale Read Traffic` [＃43325](https://github.com/pingcap/tidb/issues/43325) @ [you06](https://github.com/you06)を追加
@@ -226,7 +226,7 @@ TiDB バージョン: 7.2.0
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   CTE を含むクエリによって TiDB がハングする問題を修正[＃43749](https://github.com/pingcap/tidb/issues/43749) [＃36896](https://github.com/pingcap/tidb/issues/36896) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `min, max`クエリ結果が正しくない問題を修正[＃43805](https://github.com/pingcap/tidb/issues/43805) @ [wshwsh12](https://github.com/wshwsh12)
