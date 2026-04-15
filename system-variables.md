@@ -2960,10 +2960,10 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether TiDB validates the legality of the timestamp in a request before sending the request to TiKV. If an illegal timestamp is detected in the request, TiDB rejects sending the request to avoid data corruption.
+- This variable controls whether TiDB validates the timestamp in a request before sending the request to TiKV. If an invalid timestamp is detected in the request, TiDB rejects sending it to avoid data corruption.
 
 ### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 
