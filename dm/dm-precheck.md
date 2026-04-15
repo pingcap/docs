@@ -131,6 +131,7 @@ For the incremental data migration mode (`task-mode: incremental`), in addition 
     - Check whether binlog is enabled (required by DM).
     - Check whether `binlog_format=ROW` is configured (DM only supports the migration of binlog in the ROW format).
     - Check whether `binlog_row_image=FULL` is configured (DM only supports `binlog_row_image=FULL`).
+    - Check whether `binlog_transaction_compression=OFF` is configured (DM does not support transaction compression).
     - If `binlog_do_db` or `binlog_ignore_db` is configured, check whether the database tables to be migrated meet the conditions of `binlog_do_db` and `binlog_ignore_db`.
 
 * (Mandatory) Check if the upstream database is in an [Online-DDL](/dm/feature-online-ddl.md) process (in which the `ghost` table is created but the `rename` phase is not executed yet). If the upstream is in the online-DDL process, the precheck returns an error. In this case, wait until the DDL to complete and retry.
@@ -143,21 +144,21 @@ For the full and incremental data migration mode (`task-mode: all`), in addition
 
 Prechecks can find potential risks in your environments. It is not recommended to ignore check items. If your data migration task has special needs, you can use the [`ignore-checking-items` configuration item](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) to skip some check items.
 
-| Check item  | Description   |
-| :---------- | :------------ |
-| `dump_privilege`         | Checks the dump privilege of the user in the upstream MySQL instance. |
-| `replication_privilege` | Checks the replication privilege of the user in the upstream MySQL instance. |
-| `version`               | Checks the version of the upstream database. |
-| `server_id`             | Checks whether server_id is configured in the upstream database. |
-| `binlog_enable`         | Checks whether binlog is enabled in the upstream database. |
-| `table_schema`          | Checks the compatibility of the table schemas in the upstream MySQL tables. |
-| `schema_of_shard_tables`| Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
-| `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
-|`online_ddl`| Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
-| `empty_region` | Checks the number of empty Regions in the downstream database for physical import. |
-| `region_distribution` | Checks the distribution of Regions in the downstream database for physical import. |
-| `downstream_version` | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
-| `free_space` | Checks the free space of the downstream database. |
+| Check item                  | Description   |
+| :-------------------------- | :------------ |
+| `dump_privilege`            | Checks the dump privilege of the user in the upstream MySQL instance. |
+| `replication_privilege`     | Checks the replication privilege of the user in the upstream MySQL instance. |
+| `version`                   | Checks the version of the upstream database. |
+| `server_id`                 | Checks whether server_id is configured in the upstream database. |
+| `binlog_enable`             | Checks whether binlog is enabled in the upstream database. |
+| `table_schema`              | Checks the compatibility of the table schemas in the upstream MySQL tables. |
+| `schema_of_shard_tables`    | Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
+| `auto_increment_ID`         | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
+| `online_ddl`                | Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
+| `empty_region`              | Checks the number of empty Regions in the downstream database for physical import. |
+| `region_distribution`       | Checks the distribution of Regions in the downstream database for physical import. |
+| `downstream_version`        | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
+| `free_space`                | Checks the free space of the downstream database. |
 | `downstream_mutex_features` | Checks whether the downstream database is running tasks that are incompatible with physical import. |
 
 > **Note:**
