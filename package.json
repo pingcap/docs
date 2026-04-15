@@ -8,7 +8,9 @@
     "docs-api:build": "node scripts/build-docs-api-index.js",
     "docs-api:serve": "node scripts/docs-api-server.js",
     "docs-mcp:serve": "node scripts/docs-mcp-server.js",
-    "docs-mcp:serve:http": "node scripts/docs-mcp-server.js"
+    "docs-mcp:serve:http": "node scripts/docs-mcp-server.js",
+    "docs-ssh:shell": "node scripts/docs-ssh-shell.js",
+    "docs-sync:ssh": "node scripts/docs-sync-over-ssh.js"
   },
   "dependencies": {
     "axios": "^1.4.0",

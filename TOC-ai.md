@@ -76,6 +76,7 @@
   - [VS Code](/ai/integrations/tidb-mcp-vscode.md)
   - [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
   - [TiDB Docs MCP Server](/ai/integrations/tidb-docs-mcp-server.md)
+  - [TiDB Docs over SSH](/ai/integrations/tidb-docs-over-ssh.md)
 
 ## REFERENCE
 
