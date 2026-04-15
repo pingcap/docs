@@ -182,8 +182,9 @@ For more information, see [Create a bucket](https://www.alibabacloud.com/help/en
 
 If the OSS bucket storing the audit logs and the role accessing the OSS bucket are in different cloud accounts, the configuration process is slightly different.
 
-**1. RAM Policy Configuration**
-When creating the RAM policy, you need to add the information of User Account 2 in the Resource field. Define the policy using the following JSON script:
+**1. Configure the RAM policy**
+
+When creating the RAM policy, you need to add the information of User Account 2 in the **Resource** field. Define the policy using the following JSON script:
 
 ```json
 {
@@ -198,8 +199,9 @@ When creating the RAM policy, you need to add the information of User Account 2 
 }
 ```
 
-**2. Bucket Policy Configuration**
-In addition, you also need to configure a Bucket Policy on the destination OSS bucket to allow the assumed role from the different account to access it. Use the following configuration:
+**2. Configure the bucket policy**
+
+In addition, you also need to configure a bucket policy on the destination OSS bucket to allow the assumed role from the different account to access it. Use the following configuration:
 
 ```json
 {
@@ -220,7 +222,6 @@ In addition, you also need to configure a Bucket Policy on the destination OSS b
     ]
 }
 ```
-
 
 #### Step 3. Enable audit logging
 
