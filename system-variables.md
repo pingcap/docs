@@ -590,6 +590,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Unit: Seconds
 - The lock wait timeout for pessimistic transactions (default).
 
+### InPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- This variable is used only for internal statistics and is not visible to users.
+
 ### interactive_timeout
 
 > **Note:**
@@ -670,6 +674,10 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
 - The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
 - If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
+
+### OutPacketBytes <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- This variable is used only for internal statistics and is not visible to users.
 
 ### password_history <span class="version-mark">New in v6.5.0</span>
 
@@ -3171,6 +3179,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >
 > Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
 
+### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether foreign key constraint checks use shared locks instead of exclusive locks when locking rows in the parent table in pessimistic transactions. When enabled, multiple concurrent transactions can perform foreign key checks on the same parent row without blocking each other, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
+
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
 > **Note:**
@@ -4772,6 +4789,73 @@ mysql> desc select count(distinct a) from test.t;
 |     └─TableRowIDScan_18          | 8748.62 | cop[tikv] | table:t              | keep order:false                    |
 +----------------------------------+---------+-----------+----------------------+-------------------------------------+
 ```
+
+### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enum
+- Default value: `DISABLE`
+- Possible values: `DISABLE`, `COST`
+- Controls whether the optimizer can leverage the partial order of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. When the sort column matches the index order (for example, the sort column is an index column or has a prefix index), the data returned by the index scan is already partially ordered on that column. In this case, the optimizer can incrementally build the TopN result during the scan and stop early once the `LIMIT` is satisfied, thereby reducing sorting overhead.
+- Usage scenarios: When the sort column in an `ORDER BY ... LIMIT` clause is a long string with only a prefix index, to reduce the TopN sorting overhead, you can set this variable to `COST` and specify a `USE INDEX` or `FORCE INDEX` hint in the query to enable the partial order TopN optimization.
+
+    - The default value is `DISABLE`, which means the partial order TopN optimization is disabled. In this case, the optimizer uses the standard global sorting approach for TopN.
+    - To force the use of the partial order TopN optimization, set this variable to `COST` and specify a qualifying index in the query using `USE INDEX` or `FORCE INDEX`. If the specified index does not meet the prerequisites for this optimization (for example, the `ORDER BY` clause does not match the index prefix, or the query contains unsupported ordering patterns), the optimization might not be applied even when the variable is set to `COST`, and the execution plan falls back to the standard TopN approach.
+
+    > **Note:**
+    >
+    > Currently, the optimizer does not support dynamically deciding whether to apply the partial order TopN optimization based on the cost model. If you only set this variable to `COST` without specifying `USE INDEX` or `FORCE INDEX`, the optimizer might not apply this optimization. To ensure that the optimization is applied, use it together with `USE INDEX` or `FORCE INDEX`.
+
+<details>
+<summary>View examples of partial order TopN optimization</summary>
+
+Create a table `t_varchar` and define a prefix index `idx_name_prefix(name(10))` on the string column `name`:
+
+```sql
+CREATE TABLE t_varchar (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    INDEX idx_name_prefix(name(10))
+);
+```
+
+- Force the partial order TopN optimization (`COST` + `USE INDEX`):
+
+    ```sql
+    > SET SESSION tidb_opt_partial_ordered_index_for_topn = 'COST';
+
+    > EXPLAIN FORMAT='brief' SELECT /*+ use_index(t_varchar, idx_name_prefix) */ *
+        FROM t_varchar ORDER BY name LIMIT 5;
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    | id                                        | estRows | task      | access object                | operator info                                                                                |
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    | TopN                                      | 5.00    | root      |                              | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5, prefix_col:planner__core__partial_order_topn.t_varchar.name, prefix_len:10 |
+    | └─IndexLookUp                             | 5.00    | root      |                              |                                                                                              |
+    |   ├─Limit(Build)                          | 5.00    | cop[tikv] |                              | offset:0, count:5, prefix_col:planner__core__partial_order_topn.t_varchar.name, prefix_len:10 |
+    |   │ └─IndexFullScan                       | 10000.00| cop[tikv] | table:t_varchar, index:idx_name_prefix(name) | keep order:true, stats:pseudo                                               |
+    |   └─TableRowIDScan(Probe)                 | 5.00    | cop[tikv] | table:t_varchar              | keep order:false, stats:pseudo                                                               |
+    +-------------------------------------------+---------+-----------+------------------------------+----------------------------------------------------------------------------------------------+
+    ```
+
+- Disable the partial order TopN optimization (`DISABLE`):
+
+    ```sql
+    > SET SESSION tidb_opt_partial_ordered_index_for_topn = 'DISABLE';
+
+    > EXPLAIN FORMAT='brief' SELECT * FROM t_varchar ORDER BY name LIMIT 5;
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    | id                        | estRows | task      | access object       | operator info                                      |
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    | TopN                      | 5.00    | root      |                     | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5 |
+    | └─TableReader             | 5.00    | root      | data:TopN           |                                                    |
+    |   └─TopN                  | 5.00    | cop[tikv] |                     | planner__core__partial_order_topn.t_varchar.name, offset:0, count:5 |
+    |     └─TableFullScan       | 10000.00| cop[tikv] | table:t_varchar     | keep order:false, stats:pseudo                     |
+    +---------------------------+---------+-----------+---------------------+----------------------------------------------------+
+    ```
+
+</details>
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 

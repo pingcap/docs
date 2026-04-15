@@ -1,6 +1,7 @@
 <!-- markdownlint-disable MD041 -->
 | en | zh | comments |
 |:---|:---|:---|
+| <span class="version-mark">New in vX.X.X</span> | <span class="version-mark">从 vX.X.X 版本开始引入</span> | Use this translation term only in <span class="version-mark">version-mark</span> tags. |
 | 2-phase commit (2PC) | 2 阶段提交 |  |
 | abort | 退出 |  |
 | abstract | 抽象 |  |
