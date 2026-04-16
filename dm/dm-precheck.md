@@ -67,9 +67,9 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
 * (Mandatory) dump permission of the upstream database
 
-    - SELECT permission on INFORMATION_SCHEMA and dump tables
-    - RELOAD permission if `consistency=flush`
-    - LOCK TABLES permission on the dump tables if `consistency=lock`
+    - `SELECT` permission on `INFORMATION_SCHEMA` and dump tables
+    - `RELOAD` permission if `consistency=flush`
+    - `LOCK TABLES` permission on the dump tables if `consistency=lock`
 
     > **Note:**
     >
