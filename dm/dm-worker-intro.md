@@ -52,11 +52,21 @@ The upstream database (MySQL/MariaDB) user must have the following privileges:
 | `REPLICATION SLAVE` | Global |
 | `REPLICATION CLIENT` | Global |
 
+> **Note:**
+>
+> If you migrate from a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted, also grant the `LOCK TABLES` privilege. With the default `consistency=auto` setting, DM falls back to `LOCK TABLES` when FTWRL is unavailable.
+
 If you need to migrate the data from `db1` to TiDB, execute the following `GRANT` statement:
 
 ```sql
 GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
+```
+
+For managed MySQL services where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted, also grant the `LOCK TABLES` privilege:
+
+```sql
+GRANT LOCK TABLES ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
 If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
