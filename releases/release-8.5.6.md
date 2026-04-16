@@ -124,7 +124,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 | System table | Change type | Description |
 | -------- | -------- | -------- |
-| [`mysql.tidb`](https://docs.pingcap.com/tidb/v8.5/mysql-schema#cluster-information-system-table) | Modified | Added the `cluster_id` field to record the unique identifier of the TiDB cluster. Note that this value is read-only and cannot be modified. |
+| [`mysql.tidb`](https://docs.pingcap.com/tidb/v8.5/mysql-schema#cluster-status-system-tables) | Modified | Adds the `cluster_id` field, which represents the unique identifier of a TiDB cluster. Note that `cluster_id` is read-only and cannot be modified. |
 
 ## Deprecated features
 
