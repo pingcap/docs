@@ -63,7 +63,7 @@ GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_w
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
-For managed MySQL services where FTWRL is not permitted, also grant the `LOCK TABLES` privilege:
+For managed MySQL services where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted, also grant the `LOCK TABLES` privilege:
 
 ```sql
 GRANT LOCK TABLES ON db1.* TO 'your_user'@'your_wildcard_of_host';
