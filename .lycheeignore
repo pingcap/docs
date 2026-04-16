@@ -29,6 +29,7 @@ https://bugs\.mysql\.com/bug\.php.*
 https://www\.mysql\.com/products/.*
 https://help\.openai\.com/en/articles/.*
 https://platform\.openai\.com/docs/.*
+https://platform\.openai\.com/api-keys
 https://openai\.com/.*
 https://jwt\.io/
 https://typeorm\.io/.*
@@ -38,3 +39,9 @@ https://docs\.pingcap\.com/tidb/v6\.6/system-variables#tidb_pessimistic_txn_aggr
 https://docs\.pingcap\.com/tidb/v7\.6/system-variables#tidb_ddl_version-new-in-v760
 https://developers\.redhat\.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level
 https://portal\.azure\.com/.*
+https://.*github.*/%7B%7B%7B%20.tidb_operator_version%20%7D%7D%7D
+https://.*github.*/%7B%7B%7B.tidb-operator-version%7D%7D%7D
+https://portal\.azure\.com/.*
+https://azuremarketplace\.microsoft\.com/.*
+https://one\.newrelic\.com/.*
+https://tidbcloud\.com/.*
