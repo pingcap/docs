@@ -67,6 +67,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ADMIN
 - ADVISE
 - AFTER
+- AFFINITY
 - AGAINST
 - AGO
 - ALGORITHM
@@ -392,6 +393,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LAST_BACKUP
 - LAST_VALUE (R-Window)
 - LASTVAL
+- LATERAL (R)
 - LEAD (R-Window)
 - LEADING (R)
 - LEAVE (R)
@@ -420,6 +422,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="M" class="letter" href="#M">M</a>
 
+- MASKING
 - MASTER
 - MATCH (R)
 - MAXVALUE (R)
@@ -447,6 +450,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MOD (R)
 - MODE
 - MODIFY
+- MONITOR
 - MONTH
 
 <a id="N" class="letter" href="#N">N</a>
@@ -455,6 +459,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - NATIONAL
 - NATURAL (R)
 - NCHAR
+- NDVRATE
 - NEVER
 - NEXT
 - NEXTVAL
@@ -526,6 +531,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PLUGINS
 - POINT
 - POLICY
+- POLICIES
 - PRECEDING
 - PRECISION (R)
 - PREPARE
@@ -554,6 +560,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RANGE (R)
 - RANK (R-Window)
 - RATE_LIMIT
+- RAW
 - READ (R)
 - REAL (R)
 - REBUILD
@@ -674,6 +681,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS_BUCKETS
 - STATS_COL_CHOICE
 - STATS_COL_LIST
+- STATS_DELTA
 - STATS_EXTENDED
 - STATS_HEALTHY
 - STATS_HISTOGRAMS

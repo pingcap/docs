@@ -23,6 +23,7 @@ Learn best practices for designing schemas in TiDB, including managing DDL opera
 | ------------------- | ----------- |
 | [Manage DDL](/best-practices/ddl-introduction.md) | Best practices for managing Data Definition Language (DDL) operations in TiDB. |
 | [Use UUIDs as Primary Keys](/best-practices/uuid.md) | Best practices for storing and indexing UUIDs (Universally Unique Identifiers) efficiently when using UUIDs as primary keys. |
+| [Use TiDB Partitioned Tables](/best-practices/tidb-partitioned-tables-best-practices.md) | Best practices for using TiDB partitioned tables to improve performance, simplify data management, and efficiently handle large-scale datasets. |
 | [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md) | Best practices for designing and using multi-column indexes in TiDB to improve query performance. |
 | [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md) | Best practices for managing and optimizing indexes, identifying and removing unused indexes in TiDB to optimize performance. |
 
