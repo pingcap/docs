@@ -332,7 +332,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   `EXPAND`演算子を導入して、1 つの`SELECT`ステートメントに複数の`DISTINCT`が含まれる SQL クエリのパフォーマンスを最適化します[＃16581](https://github.com/pingcap/tidb/issues/16581) @ [AilinKid](https://github.com/AilinKid)
     -   インデックス結合[＃40505](https://github.com/pingcap/tidb/issues/40505) @ [Yisaer](https://github.com/Yisaer)のより多くの SQL 形式をサポート
@@ -383,7 +383,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   TiDBをv6.5.1からそれ以降のバージョン[＃41502](https://github.com/pingcap/tidb/issues/41502) @ [chrysan](https://github.com/chrysan)にアップグレードする際に更新が失われる問題を修正しました
     -   [＃41423](https://github.com/pingcap/tidb/issues/41423) @ [crazycs520](https://github.com/crazycs520)にアップグレードした後、一部のシステム変数のデフォルト値が変更されない問題を修正しました

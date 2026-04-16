@@ -27,7 +27,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   TiFlash配置ルールを一括削除することで、パーティションテーブル[＃54068](https://github.com/pingcap/tidb/issues/54068) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で`TRUNCATE`または`DROP`操作を実行した後のデータGCの処理速度が向上します。
     -   MPP ロード バランシング[＃52313](https://github.com/pingcap/tidb/issues/52313) @ [xzhangxian1008](https://github.com/xzhangxian1008)中にリージョンのないストアを削除する
@@ -60,7 +60,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   HashAgg 演算子のディスク スピルにより並列計算[＃55290](https://github.com/pingcap/tidb/issues/55290) @ [xzhangxian1008](https://github.com/xzhangxian1008)中に誤ったクエリ結果が発生する問題を修正しました。
     -   SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @ [wshwsh12](https://github.com/wshwsh12)

@@ -23,7 +23,7 @@ TiDB バージョン: 7.5.1
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`使用して、クラスタ[＃48124](https://github.com/pingcap/tidb/issues/48124) @ [cfzjywxk](https://github.com/cfzjywxk)でのメタリージョンLeaderの読み取り不可の影響を軽減します。
 
@@ -50,7 +50,7 @@ TiDB バージョン: 7.5.1
 
     -   空のテーブルにインデックスを追加する速度を向上[＃49682](https://github.com/pingcap/tidb/issues/49682) @ [zimulala](https://github.com/zimulala)
 
--   ティクブ
+-   TiKV
 
     -   低速ストア検出アルゴリズムを強化し、感度を向上させ、特に集中的な読み取りおよび書き込み負荷のシナリオで誤検出率を低減します[＃15909](https://github.com/tikv/tikv/issues/15909) @ [LykxSassinator](https://github.com/LykxSassinator)
 
@@ -84,7 +84,7 @@ TiDB バージョン: 7.5.1
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   システム変数`tidb_service_scope`設定が[＃49245](https://github.com/pingcap/tidb/issues/49245)で[ywqzzy](https://github.com/ywqzzy)に反映されない問題を修正
     -   圧縮が有効になっている場合、通信プロトコルが16 MB以上のパケットを処理できない問題を修正[＃47157](https://github.com/pingcap/tidb/issues/47157) [＃47161](https://github.com/pingcap/tidb/issues/47161) @ [dveeden](https://github.com/dveeden)

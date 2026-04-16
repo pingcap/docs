@@ -11,7 +11,7 @@ TiDBバージョン: 4.0.16
 
 ## 互換性の変更 {#compatibility-changes}
 
--   ティクブ
+-   TiKV
 
     -   v4.0.16より前では、TiDBが無効なUTF-8文字列をReal型に変換すると、直接エラーが報告されていました。v4.0.16以降、TiDBは文字列[＃11466](https://github.com/tikv/tikv/issues/11466)内の有効なUTF-8プレフィックスに従って変換処理を行います。
 
@@ -24,11 +24,11 @@ TiDBバージョン: 4.0.16
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   Grafanaのバージョンを7.5.7から7.5.11にアップグレードします。
 
--   ティクブ
+-   TiKV
 
     -   バックアップと復元を使用してデータを復元する場合、またはTiDB Lightning [＃11469](https://github.com/tikv/tikv/issues/11469)のローカル バックエンドを使用してデータをインポートする場合に、zstd アルゴリズムを採用して SST ファイルを圧縮することで、ディスク領域の消費量を削減します。
 
@@ -45,7 +45,7 @@ TiDBバージョン: 4.0.16
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   コスト見積もり[＃23625](https://github.com/pingcap/tidb/issues/23625)ために範囲をポイントに変換するときに統計モジュールのオーバーフローによって発生するクエリpanicを修正しました
     -   `ENUM`型データを制御関数のパラメータとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[＃23114](https://github.com/pingcap/tidb/issues/23114)
@@ -68,7 +68,7 @@ TiDBバージョン: 4.0.16
     -   `IndexScan`プレフィックス インデックス[＃29711](https://github.com/pingcap/tidb/issues/29711)を使用している場合に、 `TopN`が誤って`indexPlan`にプッシュダウンされる問題を修正しました。
     -   `DOUBLE`種類の自動インクリメント列でトランザクションを再試行するとデータ破損が発生する問題を修正[＃29892](https://github.com/pingcap/tidb/issues/29892)
 
--   ティクブ
+-   TiKV
 
     -   極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正しました[＃11475](https://github.com/tikv/tikv/issues/11475)
     -   小数点以下の除算結果がゼロの場合の負の符号の問題を修正しました[＃29586](https://github.com/pingcap/tidb/issues/29586)

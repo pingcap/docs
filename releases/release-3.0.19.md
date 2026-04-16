@@ -18,12 +18,12 @@ TiDBバージョン: 3.0.19
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   障害回復によるQPSパフォーマンスへの影響を軽減する[＃19764](https://github.com/pingcap/tidb/pull/19764)
     -   `union`演算子[＃19885](https://github.com/pingcap/tidb/pull/19885)の同時実行の調整をサポート
 
--   ティクブ
+-   TiKV
 
     -   `sync-log` ～ `true`を調整不可の値[＃8636](https://github.com/tikv/tikv/pull/8636)として設定する
 
@@ -33,7 +33,7 @@ TiDBバージョン: 3.0.19
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[＃20050](https://github.com/pingcap/tidb/pull/20050)
     -   `SHOW STATS_META`と`SHOW STATS_BUCKET`の権限チェックを追加する[＃19759](https://github.com/pingcap/tidb/pull/19759)
@@ -42,7 +42,7 @@ TiDBバージョン: 3.0.19
     -   panic後にtidb-serverがテーブルロックを解放しないバグを修正[＃20021](https://github.com/pingcap/tidb/pull/20021)
     -   `WHERE`節[＃19901](https://github.com/pingcap/tidb/pull/19901)で`OR`演算子が正しく処理されないバグを修正
 
--   ティクブ
+-   TiKV
 
     -   理由フレーズが欠落している応答を解析するときに TiKV がパニックを起こすバグを修正[＃8540](https://github.com/tikv/tikv/pull/8540)
 

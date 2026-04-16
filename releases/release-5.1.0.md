@@ -181,7 +181,7 @@ TiDB は、実行ステータスや失敗ステータスなど、テレメトリ
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   組み込み関数`VITESS_HASH()` [＃23915](https://github.com/pingcap/tidb/pull/23915)をサポート
     -   `WHERE`節[＃23619](https://github.com/pingcap/tidb/issues/23619)で列挙型を使用するときにパフォーマンスを向上させるために、列挙型のデータを TiKV にプッシュダウンすることをサポートします。
@@ -194,7 +194,7 @@ TiDB は、実行ステータスや失敗ステータスなど、テレメトリ
     -   一部の高負荷書き込み状況で発生する可能性の`Region is Unavailable`問題を修正しました
     -   キャッシュされた統計が最新である場合は、CPU使用率の上昇を避けるために、 `mysql.stats_histograms`テーブルを頻繁に読み取らないようにします[＃24317](https://github.com/pingcap/tidb/pull/24317)
 
--   ティクブ
+-   TiKV
 
     -   `zstd`を使用してリージョンスナップショットを圧縮し、高負荷のスケジュールやスケーリングの際にノード間の大きなスペースの違いを防ぎます[＃10005](https://github.com/tikv/tikv/pull/10005)
 
@@ -255,7 +255,7 @@ TiDB は、実行ステータスや失敗ステータスなど、テレメトリ
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   投影結果が空の場合にプロジェクト除去の実行結果が間違っている可能性がある問題を修正[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[＃23891](https://github.com/pingcap/tidb/issues/23891)
@@ -288,7 +288,7 @@ TiDB は、実行ステータスや失敗ステータスなど、テレメトリ
     -   `CONCAT`関数が照合順序[＃24296](https://github.com/pingcap/tidb/issues/24296)を誤って処理する問題を修正しました
     -   `collation_server`グローバル変数が新しいセッション[＃24156](https://github.com/pingcap/tidb/pull/24156)で有効にならない問題を修正しました
 
--   ティクブ
+-   TiKV
 
     -   コプロセッサが`IN`式[＃9821](https://github.com/tikv/tikv/issues/9821)の符号付きまたは符号なし整数型を適切に処理できない問題を修正
     -   SST ファイルのバッチ取り込み後に多くの空の領域が発生する問題を修正[＃964](https://github.com/pingcap/br/issues/964)

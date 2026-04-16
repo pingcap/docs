@@ -20,7 +20,7 @@ TiDB バージョン: 8.1.2
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   リクエストユニット（RU）設定に関するメトリックを[＃8444](https://github.com/tikv/pd/issues/8444) @ [nolouch](https://github.com/nolouch)に追加します
 
@@ -55,7 +55,7 @@ TiDB バージョン: 8.1.2
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   v6.5からv7.5以降にアップグレードされたクラスターで、既存のTTLタスクが予期せず頻繁に実行される問題を修正[＃56539](https://github.com/pingcap/tidb/issues/56539) @ [lcwangchao](https://github.com/lcwangchao)
     -   特定の状況下でプランキャッシュを使用する際に、メタデータロックの不適切な使用によって異常なデータが書き込まれる可能性がある問題を修正しました[＃53634](https://github.com/pingcap/tidb/issues/53634) @ [zimulala](https://github.com/zimulala)

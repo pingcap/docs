@@ -159,9 +159,9 @@ TiDB バージョン: 8.2.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                              | タイプを変更 | 説明                                                                                                                                                                                               |
 | -------------- | ------------------------------------------------------------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ティドブ           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 修正済み   | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。                            |
-| ティドブ           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 修正済み   | デフォルト値を`5`から`0`に、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行性を自動的に調整します。                                                                                                                  |
-| ティドブ           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 修正済み   | 最大値を`18446744073709551615` （64ビットプラットフォーム）および`4294967295` （32ビットプラットフォーム）から`1048576`に変更しました。これは、設定値が大きすぎる場合にTiDBサーバーのOOM（オーバーヘッドオーバー）が発生するのを防ぐためです。つまり、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
+| TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 修正済み   | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。                            |
+| TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 修正済み   | デフォルト値を`5`から`0`に、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行性を自動的に調整します。                                                                                                                  |
+| TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 修正済み   | 最大値を`18446744073709551615` （64ビットプラットフォーム）および`4294967295` （32ビットプラットフォーム）から`1048576`に変更しました。これは、設定値が大きすぎる場合にTiDBサーバーのOOM（オーバーヘッドオーバー）が発生するのを防ぐためです。つまり、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
 | TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 修正済み   | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。つまり、コミット済みだが永続化されていないRaftログの最大適用数は、デフォルトで`1024`になります。                                                                        |
 | TiKV           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 修正済み   | この設定項目は、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御するようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                                                        |
 | TiFlash        | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)               | 修正済み   | 新しい値オプション`marker`が導入されました。値を`marker`に設定すると、ログ内のすべてのユーザーデータが`‹ ›`で囲まれます。                                                                                                                          |
@@ -196,7 +196,7 @@ TiDB バージョン: 8.2.0
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   [論理DDL文（一般DDL）](/best-practices/ddl-introduction.md#types-of-ddl-statements)の並列実行をサポートします。v8.1.0と比較して、10セッションを使用して異なるDDL文を同時に送信する場合、パフォーマンスは3～6倍向上します[＃53246](https://github.com/pingcap/tidb/issues/53246) @ [D3Hunter](https://github.com/D3Hunter)
     -   `((a = 1 and b = 2 and c > 3) or (a = 4 and b = 5 and c > 6)) and d > 3`ような式を使用して複数列のインデックスを一致させるロジックを改善し、より正確な`Range` [＃41598](https://github.com/pingcap/tidb/issues/41598) @ [ghazalfamilyusa](https://github.com/ghazalfamilyusa)を生成します。
@@ -248,7 +248,7 @@ TiDB バージョン: 8.2.0
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   SQL文に外部結合が含まれており、結合条件に`false IN (column_name)`式が含まれている場合、クエリ結果にデータ[＃49476](https://github.com/pingcap/tidb/issues/49476) @ [ghazalfamilyusa](https://github.com/ghazalfamilyusa)が欠落する問題を修正しました。
     -   TiDB がテーブル[＃53403](https://github.com/pingcap/tidb/issues/53403) @ [Rustin170506](https://github.com/Rustin170506)の統計を`PREDICATE COLUMNS`収集するときに、システム テーブルの列の統計が収集される問題を修正しました。

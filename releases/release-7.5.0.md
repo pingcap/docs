@@ -121,7 +121,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                    | タイプを変更   | 説明                                                                                                                            |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| ティドブ           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサー要求のタイムアウトを設定します。                                                                                                    |
+| TiDB           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサー要求のタイムアウトを設定します。                                                                                                    |
 | TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 修正済み     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                               |
 | TiKV           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 修正済み     | RocksDBのコンパクションをトリガーするために必要な冗長MVCC行数を設定します。v7.5.0以降、この設定項目は`"raft-kv"`storageエンジンに適用されます。                                     |
 | TiKV           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 修正済み     | RocksDBのコンパクションをトリガーするために必要な冗長MVCC行の割合を設定します。v7.5.0以降、この設定項目は`"raft-kv"`storageエンジンに適用されます。                                   |
@@ -161,7 +161,7 @@ v7.5.0 以降、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   グローバル統計情報のマージにおける同時実行モデルを最適化します[`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750)導入することで、統計情報の同時ロードとマージが可能になり、パーティションテーブルにおけるグローバル統計情報の生成速度が向上します。グローバル統計情報のマージにおけるメモリ使用量を最適化し、OOM（オブジェクトメモリオーバーヘッド）を回避し、メモリ割り当てを削減します[＃47219](https://github.com/pingcap/tidb/issues/47219) @ [hawkingrei](https://github.com/hawkingrei)
     -   `ANALYZE`プロセスを最適化します。3 [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)導入することで、 `ANALYZE`並行処理をより適切に制御し、リソース消費を削減します。7 `ANALYZE`メモリ使用量を最適化してメモリ割り当てを削減し、中間結果を再利用することで頻繁なGCを回避します[＃47275](https://github.com/pingcap/tidb/issues/47275) @ [hawkingrei](https://github.com/hawkingrei)
@@ -185,7 +185,7 @@ v7.5.0 以降、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   非整数クラスター化インデックス[＃47350](https://github.com/pingcap/tidb/issues/47350) @ [tangenta](https://github.com/tangenta)でのテーブル分割操作を禁止する
     -   タイムゾーン情報が正しくない時間フィールドをエンコードする問題を修正[＃46033](https://github.com/pingcap/tidb/issues/46033) @ [tangenta](https://github.com/tangenta)

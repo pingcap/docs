@@ -18,11 +18,11 @@ TiDB バージョン: 7.5.5
 
 ## 改善点 {#improvements}
 
--   ティドブ
+-   TiDB
 
     -   統計情報がすべて TopN で構成され、対応するテーブル統計の変更された行数が 0 以外である場合に、TopN にヒットしない等価条件の推定結果を 0 から 1 に調整します[＃47400](https://github.com/pingcap/tidb/issues/47400) @ [terry1purcell](https://github.com/terry1purcell)
 
--   ティクブ
+-   TiKV
 
     -   Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[＃17884](https://github.com/tikv/tikv/issues/17884) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   ピアのスローログを追加し、メッセージ[＃16600](https://github.com/tikv/tikv/issues/16600) @ [Connor1996](https://github.com/Connor1996)を保存します。
@@ -46,7 +46,7 @@ TiDB バージョン: 7.5.5
 
 ## バグ修正 {#bug-fixes}
 
--   ティドブ
+-   TiDB
 
     -   DDL 所有者ノードが[＃56506](https://github.com/pingcap/tidb/issues/56506) @ [tangenta](https://github.com/tangenta)に切り替えられた後、TiDB が以前の進行状況から再編成 DDL タスクを再開できない問題を修正しました。
     -   非厳密モードで無効な`NULL`値が挿入される問題を修正 ( `sql_mode = ''` ) [＃56381](https://github.com/pingcap/tidb/issues/56381) @ [joechenrh](https://github.com/joechenrh)
