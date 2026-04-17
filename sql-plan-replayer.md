@@ -32,10 +32,10 @@ Based on the SQL statement or statements, TiDB sorts out and exports the followi
 - The result of `EXPLAIN [ANALYZE] sql-statement`
 - Some internal procedures of query optimization
 
-Depending on whether you dump a single SQL statement or multiple SQL statements, the structure of the exported ZIP file is as follows:
+The structure of the exported ZIP file depends on whether you dump a single SQL statement or multiple SQL statements:
 
 - For a single SQL statement, the ZIP file includes `sql/sql0.sql` and `explain.txt`.
-- For multiple SQL statements, the ZIP file includes `sql/sql0.sql`, `sql/sql1.sql`, ... and the corresponding `explain/explain0.txt`, `explain/explain1.txt`, ..., together with schema and statistics files for the referenced tables.
+- For multiple SQL statements, the ZIP file includes SQL files such as `sql/sql0.sql` and `sql/sql1.sql`, their corresponding explain files such as `explain/explain0.txt` and `explain/explain1.txt`, and the schema and statistics files for the referenced tables.
 
 If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
 
@@ -95,8 +95,6 @@ SELECT @@tidb_last_plan_replayer_token;
 ```
 
 To dump multiple SQL statements in a single command, you can use the multi-statement syntax:
-
-{{< copyable "sql" >}}
 
 ```sql
 PLAN REPLAYER DUMP EXPLAIN (
