@@ -147,7 +147,7 @@ mysql2 ドライバーを使用して TiDB に接続します。
 
 ## MySQLクライアントソフトウェアを使用する {#use-mysql-client-software}
 
-TiDBはMySQL互換データベースであるため、多くの使い慣れたクライアントソフトウェアツールを使用してTiDBに接続し、データベースを管理できます。TiDB TiDB Cloudでは、 [コマンドラインツール](/tidb-cloud/get-started-with-cli.md)使用してデータベースに接続および管理することもできます。
+TiDBはMySQL互換データベースであるため、多くの使い慣れたクライアントソフトウェアツールを使用してTiDBに接続し、データベースを管理できます。TiDB Cloudでは、 [コマンドラインツール](/tidb-cloud/get-started-with-cli.md)使用してデータベースに接続および管理することもできます。
 
 <DevToolGroup>
 <DevToolCard title="MySQL Workbench" logo="mysql-1" docLink="/developer/dev-guide-gui-mysql-workbench">

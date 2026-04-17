@@ -22,7 +22,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -156,7 +156,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
     -   `tidbcloud_serverless_cluster`リソースを使用するには、リソース タイプを`tidbcloud_serverless_cluster`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。TiDB TiDB Cloud Essentialクラスターを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
+    -   リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。TiDB Cloud Essentialクラスターを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 

@@ -47,7 +47,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 
 ### 既存データの読み込み（オプション） {#load-existing-data-optional}
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
 
 既存のデータを読み込むには：
 

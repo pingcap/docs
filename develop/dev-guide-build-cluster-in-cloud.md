@@ -20,7 +20,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 3.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
 
-4.  **「リソースの作成」**ページでは、デフォルトで**「Starter」**が選択されています。TiDB TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
+4.  **「リソースの作成」**ページでは、デフォルトで**「Starter」**が選択されています。TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
 
 5.  **「作成」**をクリックして、 TiDB Cloud Starterインスタンスを作成します。
 
@@ -134,7 +134,7 @@ SELECT 'Hello TiDB Cloud!';
 +-------------------+
 ```
 
-実際の出力が期待される出力と類似していれば、おめでとうございます。TiDB TiDB Cloud上で SQL ステートメントを正常に実行できました。
+実際の出力が期待される出力と類似していれば、おめでとうございます。TiDB Cloud上で SQL ステートメントを正常に実行できました。
 
 ## お困りですか？ {#need-help}
 

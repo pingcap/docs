@@ -3,7 +3,7 @@ title: Home
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-summary: TiDBドキュメントでは、データ移行やアプリケーション構築など、 TiDB CloudとTiDB Self-Managedの使用方法に関するガイドとリファレンスを提供しています。TiDB TiDB Cloudは、クラウドネイティブな分散SQLデータベースのパワーに簡単にアクセスできる、フルマネージドのDatabase-as-a-Service（DaaS）です。TiDBは、MySQLとの互換性、水平スケーラビリティ、高可用性を備えたオープンソースの分散SQLデータベースです。開発者は、アプリケーション開発に関するドキュメントにアクセスしたり、TiDB Playground、PingCAP Education、コミュニティ参加の機会などの追加リソースを活用したりできます。
+summary: TiDBドキュメントでは、データ移行やアプリケーション構築など、 TiDB CloudとTiDB Self-Managedの使用方法に関するガイドとリファレンスを提供しています。TiDB Cloudは、クラウドネイティブな分散SQLデータベースのパワーに簡単にアクセスできる、フルマネージドのDatabase-as-a-Service（DaaS）です。TiDBは、MySQLとの互換性、水平スケーラビリティ、高可用性を備えたオープンソースの分散SQLデータベースです。開発者は、アプリケーション開発に関するドキュメントにアクセスしたり、TiDB Playground、PingCAP Education、コミュニティ参加の機会などの追加リソースを活用したりできます。
 ---
 
 <DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud Starter, TiDB Cloud Dedicated and TiDB Self-Managed, migrate data, and build your applications on the database." ctaLabel="Start TiDB Cloud Starter for Free" ctaLink="https://tidbcloud.com/free-trial">

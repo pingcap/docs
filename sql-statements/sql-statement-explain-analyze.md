@@ -224,7 +224,7 @@ tiflash_scan: {
 }
 ```
 
--   `dtfile` : テーブル スキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlash TiFlashレイヤーのデータ スキャン ステータスを反映します。
+-   `dtfile` : テーブル スキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlashレイヤーのデータ スキャン ステータスを反映します。
     -   `total_scanned_packs` : DTFileでスキャンされたパックの総数。パックとは、 TiFlash DTFileで読み取ることができる最小単位です。デフォルトでは、8192行ごとに1パックが構成されます。
     -   `total_skipped_packs` : DTFile 内のスキャンでスキップされたパックの総数。2 `WHERE`が粗集合インデックスにヒットするか、主キーの範囲フィルタリングに一致する場合、無関係なパックはスキップされます。
     -   `total_scanned_rows` : DTFile でスキャンされた行の総数。MVCC により更新または削除のバージョンが複数ある場合、各バージョンは個別にカウントされます。

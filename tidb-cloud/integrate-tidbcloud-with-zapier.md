@@ -71,7 +71,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     この手順では、イベントデータを保存するTiDB Cloud Starterインスタンス内のテーブルを指定する必要があります。テーブルがまだ作成されていない場合は、この手順で作成できます。
 
-    1.  ドロップダウンリストからプロジェクト名とインスタンス名を選択してください。TiDB TiDB Cloud Starterインスタンスの接続情報が自動的に表示されます。
+    1.  ドロップダウンリストからプロジェクト名とインスタンス名を選択してください。TiDB Cloud Starterインスタンスの接続情報が自動的に表示されます。
 
         ![Set up project name and instance name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
@@ -81,7 +81,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
-        Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
+        Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
     4.  **「検索するテーブル」ボックス**に`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **「続行」**をクリックします。
 
@@ -117,7 +117,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 4.  テストアクション
 
-    **「テスト」アクション**をクリックして、テーブルに新しい行を作成します。TiDB TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
+    **「テスト」アクション**をクリックして、テーブルに新しい行を作成します。TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
 
     ```sql
     mysql> SELECT * FROM test.github_global_event;
@@ -161,7 +161,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 | アクション         | 説明                                                            | リソース                                    |
 | ------------- | ------------------------------------------------------------- | --------------------------------------- |
 | クラスタの検索       | 既存のTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスタを検索します。 | なし                                      |
-| クラスタを作成する     | 新しいクラスターを作成します。TiDB TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
+| クラスタを作成する     | 新しいクラスターを作成します。TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
 | データベースの検索     | 既存のデータベースを検索します。                                              | TiDB Cloud Starterインスタンス                |
 | データベースを作成する   | 新しいデータベースを作成します。                                              | TiDB Cloud Starterインスタンス                |
 | テーブルを探す       | 既存のテーブルを検索します。                                                | TiDB Cloud Starterインスタンスとデータベース         |

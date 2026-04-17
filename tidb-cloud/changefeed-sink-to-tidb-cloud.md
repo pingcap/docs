@@ -1,6 +1,6 @@
 ---
 title: Sink to TiDB Cloud
-summary: このドキュメントでは、TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB TiDB Cloudシンクを作成するには、クラスタの概要ページに移動し、接続を確立し、テーブルとイベントのフィルタをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
+summary: このドキュメントでは、TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスタの概要ページに移動し、接続を確立し、テーブルとイベントのフィルタをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
 ---
 
 # TiDB Cloudにシンクする {#sink-to-tidb-cloud}
@@ -28,7 +28,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 -   ソースとなるTiDB Cloud Dedicatedクラスターと、宛先となるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスは、同じプロジェクトおよび同じリージョンに属している必要があります。
 
--   **TiDB Cloudへのシンク**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートしています。TiDB TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2つのクラスタ間のプライベートエンドポイント接続を自動的に設定します。
+-   **TiDB Cloudへのシンク**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートしています。TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2つのクラスタ間のプライベートエンドポイント接続を自動的に設定します。
 
 ## 前提条件 {#prerequisites}
 

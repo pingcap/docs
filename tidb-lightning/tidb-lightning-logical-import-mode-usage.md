@@ -47,7 +47,7 @@ log-level = "error"
 
 ## 競合検出 {#conflict-detection}
 
-競合データとは、PK列またはUK列に同じデータを持つ2つ以上のレコードを指します。論理インポートモードでは、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)設定項目を設定することで、競合データの処理方法を設定できます。TiDB TiDB Lightningは、この処理方法に基づいて、異なるSQL文でデータをインポートします。
+競合データとは、PK列またはUK列に同じデータを持つ2つ以上のレコードを指します。論理インポートモードでは、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)設定項目を設定することで、競合データの処理方法を設定できます。TiDB Lightningは、この処理方法に基づいて、異なるSQL文でデータをインポートします。
 
 | 戦略          | 競合データのデフォルトの動作                                         | 対応するSQL文                                                                                                     |
 | :---------- | :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |

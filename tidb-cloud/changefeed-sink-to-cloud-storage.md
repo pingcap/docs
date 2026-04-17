@@ -169,7 +169,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 </div>
 </SimpleTab>
 
-**「次へ」**をクリックして、 TiDB Cloud DedicatedクラスターからAmazon S3、GCS、またはAzure Blob Storageへの接続を確立します。TiDB TiDB Cloudは接続が成功したかどうかを自動的にテストおよび検証します。
+**「次へ」**をクリックして、 TiDB Cloud DedicatedクラスターからAmazon S3、GCS、またはAzure Blob Storageへの接続を確立します。TiDB Cloudは接続が成功したかどうかを自動的にテストおよび検証します。
 
 -   はいの場合、次の設定手順に進みます。
 -   そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、 **「次へ」**をクリックして接続を再試行してください。

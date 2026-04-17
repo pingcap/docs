@@ -272,7 +272,7 @@ MariaDB から TiDB にデータを移行するには、次の手順を実行し
     tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
     ```
 
-3.  `tiup tidb-lightning`コマンドを使用してデータを復元します。TiDB TiDB Lightning の設定方法と実行方法の詳細については、 [TiDB Lightningを使い始める](/get-started-with-tidb-lightning.md)参照してください。
+3.  `tiup tidb-lightning`コマンドを使用してデータを復元します。TiDB Lightning の設定方法と実行方法の詳細については、 [TiDB Lightningを使い始める](/get-started-with-tidb-lightning.md)参照してください。
 
 4.  ユーザーアカウントと権限を移行します。ユーザーと権限の移行方法の詳細については、 [ユーザーと権限をエクスポートする](#export-users-and-grants)参照してください。
 

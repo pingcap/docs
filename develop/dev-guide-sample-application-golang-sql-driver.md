@@ -191,7 +191,7 @@ func openDB(driverName string, runnable func(db *sql.DB)) {
 }
 ```
 
-この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}` TiDBの実際の値に置き換える必要があります。TiDB TiDB Cloud StarterとTiDB Cloud Essentialはセキュアな接続を必要とします。そのため、 `${use_ssl}`の値を`true`に設定する必要があります。
+この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}` TiDBの実際の値に置き換える必要があります。TiDB Cloud StarterとTiDB Cloud Essentialはセキュアな接続を必要とします。そのため、 `${use_ssl}`の値を`true`に設定する必要があります。
 
 ### データを挿入する {#insert-data}
 

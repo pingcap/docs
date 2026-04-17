@@ -174,7 +174,7 @@ v6.6.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiDB Lightningは、ソースファイルとターゲットテーブル間の列名の不一致の問題に対処するために、新しい構成パラメータ`"header-schema-match"`を追加しました@ [dsdashun](https://github.com/dsdashun)
 
-    v6.6.0では、 TiDB Lightningに新しいプロファイルパラメータ`"header-schema-match"`が追加されました。デフォルト値は`true`で、これはソースCSVファイルの最初の行が列名として扱われ、ターゲットテーブルの列名と一致していることを意味します。CSVテーブルヘッダーのフィールド名がターゲットテーブルの列名と一致しない場合は、この設定を`false`に設定できます。TiDB TiDB Lightningはエラーを無視し、ターゲットテーブルの列順にデータをインポートし続けます。
+    v6.6.0では、 TiDB Lightningに新しいプロファイルパラメータ`"header-schema-match"`が追加されました。デフォルト値は`true`で、これはソースCSVファイルの最初の行が列名として扱われ、ターゲットテーブルの列名と一致していることを意味します。CSVテーブルヘッダーのフィールド名がターゲットテーブルの列名と一致しない場合は、この設定を`false`に設定できます。TiDB Lightningはエラーを無視し、ターゲットテーブルの列順にデータをインポートし続けます。
 
     詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)参照してください。
 

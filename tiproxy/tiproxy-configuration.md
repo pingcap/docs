@@ -266,7 +266,7 @@ TLS オブジェクト フィールド:
 
 #### <code>sql-tls</code> {#code-sql-tls-code}
 
-クライアントTLSオブジェクト。TiDB TiDB SQLポート（4000）へのアクセスに使用されます。
+クライアントTLSオブジェクト。TiDB SQLポート（4000）へのアクセスに使用されます。
 
 #### <code>server-tls</code> {#code-server-tls-code}
 

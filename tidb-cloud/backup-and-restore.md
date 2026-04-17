@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 # TiDB Cloud Dedicatedデータのバックアップと復元 {#back-up-and-restore-tidb-cloud-dedicated-data}
 
-このドキュメントでは、 TiDB Cloud上でTiDB Cloud Dedicatedクラスタのデータをバックアップおよび復元する方法について説明します。TiDB TiDB Cloud Dedicated は、自動バックアップと手動バックアップをサポートしています。また、バックアップデータを新しいクラスタに復元したり、ごみ箱から削除されたクラスタを復元したりすることもできます。
+このドキュメントでは、 TiDB Cloud上でTiDB Cloud Dedicatedクラスタのデータをバックアップおよび復元する方法について説明します。TiDB Cloud Dedicated は、自動バックアップと手動バックアップをサポートしています。また、バックアップデータを新しいクラスタに復元したり、ごみ箱から削除されたクラスタを復元したりすることもできます。
 
 > **ヒント**
 >

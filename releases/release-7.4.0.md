@@ -79,7 +79,7 @@ TiDB バージョン: 7.4.0
 
     TiFlash v7.0.0以降、 `GROUP BY` `ORDER BY` 3つの演算子のデータスピル制御がサポートされます。この機能により、データサイズが利用可能なメモリを超えた場合にクエリの終了やシステムクラッシュなどの問題を防ぐことができます。ただし、各演算子のスピルを個別に管理するのは煩雑で、全体`JOIN`なリソース制御には効果的ではありません。
 
-    v7.4.0では、 TiFlashにクエリレベルのデータスピルが導入されました。TiFlashTiFlashへのクエリのメモリ制限を[`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)に設定し、データスピルをトリガーするメモリ比率を[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)に設定することで、クエリのメモリ使用量を効率的に管理し、 TiFlashのメモリリソースをより適切に制御できます。
+    v7.4.0では、 TiFlashにクエリレベルのデータスピルが導入されました。TiFlashへのクエリのメモリ制限を[`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)に設定し、データスピルをトリガーするメモリ比率を[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)に設定することで、クエリのメモリ使用量を効率的に管理し、 TiFlashのメモリリソースをより適切に制御できます。
 
     詳細については[ドキュメント](/tiflash/tiflash-spill-disk.md)参照してください。
 

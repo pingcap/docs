@@ -91,12 +91,12 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 <CustomContent plan="dedicated">
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud DedicatedクラスタからMySQLにシンクできます。TiDB TiDB Cloud Dedicatedクラスタに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Dedicatedクラスタの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud DedicatedクラスタからMySQLにシンクできます。TiDB Cloud Dedicatedクラスタに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Dedicatedクラスタの既存データをエクスポートしてMySQLにロードすることができます。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud PremiumインスタンスからMySQLにシンクできます。TiDB TiDB Cloud Premiumインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Premiumインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud PremiumインスタンスからMySQLにシンクできます。TiDB Cloud Premiumインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Premiumインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
 
 </CustomContent>
 

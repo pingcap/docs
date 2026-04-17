@@ -12,7 +12,7 @@ summary: さまざまな方法でTiDB Cloud Dedicatedクラスターに接続す
 > -   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 > -   このドキュメントでは、 TiDB Cloud Dedicatedのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
 
-TiDB TiDB Cloud TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
+TiDB Cloud TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
 
 -   直接接続
 

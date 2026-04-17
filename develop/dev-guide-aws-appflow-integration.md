@@ -153,7 +153,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 5.  `sf_account`テーブルが作成されたら、 **[接続]**をクリックします。接続ダイアログが表示されます。
 
-6.  **TiDBコネクタへの接続**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **[接続]**をクリックします。
+6.  **TiDBコネクタへの接続**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **[接続]**をクリックします。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 

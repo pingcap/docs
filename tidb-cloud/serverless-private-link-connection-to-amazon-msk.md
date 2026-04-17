@@ -146,7 +146,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 
-クラスターがアクティブになった後、MSKクラスターの場合は[マルチVPC接続を有効にする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) 。AWS PrivateLinkにはマルチVPC接続が必要です。TiDB TiDB Cloudから接続するには、SASL/SCRAM認証を有効にする必要があります。
+クラスターがアクティブになった後、MSKクラスターの場合は[マルチVPC接続を有効にする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) 。AWS PrivateLinkにはマルチVPC接続が必要です。TiDB Cloudから接続するには、SASL/SCRAM認証を有効にする必要があります。
 
 クラスターのステータスが**「更新中」**から**「アクティブ」**に再度変わるまで待ちます。
 

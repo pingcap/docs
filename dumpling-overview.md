@@ -11,7 +11,7 @@ summary: Dumplingツールを使用して TiDB からデータをエクスポー
 
 [TiUP](/tiup/tiup-overview.md)を使って`tiup install dumpling`実行するとDumpling が手に入ります。その後、 `tiup dumpling ...`使ってDumpling を実行できます。
 
-DumplingインストールパッケージはTiDB Toolkitに含まれています。TiDBTiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
+DumplingインストールパッケージはTiDB Toolkitに含まれています。TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
 
 </CustomContent>
 
@@ -101,7 +101,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 2
     -   TiDBの場合、 Dumplingは分割にリージョン情報を使用するため、メモリ使用量も削減されます。指定された値`-r`は分割アルゴリズムに影響を与えません。
     -   MySQL の場合、このオプションは、主キー (または複合主キーの最初の列) が`INT`または`STRING`タイプの場合にサポートされます。
 
--   `-F`オプションは、単一ファイルの最大サイズを指定するために使用されます（単位は`MiB`ですが、 `5GiB`や`8KB`などの入力も許容されます）。TiDB TiDB Lightningを使用してこのファイルを TiDB インスタンスにロードする場合は、この値を 256 MiB 以下に抑えることをお勧めします。
+-   `-F`オプションは、単一ファイルの最大サイズを指定するために使用されます（単位は`MiB`ですが、 `5GiB`や`8KB`などの入力も許容されます）。TiDB Lightningを使用してこのファイルを TiDB インスタンスにロードする場合は、この値を 256 MiB 以下に抑えることをお勧めします。
 
 > **注記：**
 >

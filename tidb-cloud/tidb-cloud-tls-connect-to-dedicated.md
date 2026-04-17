@@ -44,7 +44,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLIクライアントはデフォルトでTLS接続を確立しようとします。TiDB TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-mode`と`ssl-ca`設定する必要があります。
+MySQL CLIクライアントはデフォルトでTLS接続を確立しようとします。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-mode`と`ssl-ca`設定する必要があります。
 
 ```shell
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
@@ -60,7 +60,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 <div label="MyCLI">
 
-[マイクリ](https://www.mycli.net/)指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`設定する必要があります。
+[マイクリ](https://www.mycli.net/)指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`設定する必要があります。
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
