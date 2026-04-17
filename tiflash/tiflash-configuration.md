@@ -166,6 +166,14 @@ Configure the I/O traffic limit settings.
 - When the value of `max_bytes_per_sec` is not `0`, [`max_bytes_per_sec`](#max_bytes_per_sec) is prioritized.
 - Default value: `0`
 
+##### `s3_max_read_bytes_per_sec` <span class="version-mark">New in v9.0.0</span>
+
+- The total bandwidth limitation for reading from object storage. All direct reads from object storage and background downloads by FileCache share this bandwidth budget.
+- This configuration only takes effect in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md) and is used to limit the amplified read traffic to object storage during cold reads or cache misses.
+- Setting it to `0` disables this limitation.
+- Default value: `0`
+- Unit: Byte
+
 ##### `foreground_write_weight`
 
 <!-- The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%) -->
@@ -451,9 +459,49 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - Specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file.
 - Default value: `0.5`
 
+##### `remote_checkpoint_interval_seconds` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the execution interval of the background task for TiFlash to upload checkpoints to object storage. This parameter only takes effect on TiFlash Write Nodes that have object storage enabled in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md).
+- Default value: `30`
+- Unit: seconds
+- Decreasing this value allows the latest data to be uploaded to object storage faster, but increases the frequency of checkpoint uploads and associated overhead. Increasing this value reduces the upload frequency. It is generally not recommended to modify this parameter.
+
+##### `remote_gc_method` <span class="version-mark">New in v9.0.0</span>
+
+- Controls how TiFlash executes GC on object storage. This parameter only takes effect on TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md).
+- Optional values:
+    - `1`: `Lifecycle`. TiFlash marks objects to be deleted with the `tiflash_deleted=true` tag and relies on the lifecycle rules of the object storage to complete physical deletion asynchronously. When the first GC is executed, the TiFlash Write Node selected as the GC owner checks and attempts to create the corresponding lifecycle rules.
+    - `2`: `ScanThenDelete`. TiFlash periodically scans for expired objects with a deletion tag and directly initiates physical deletion, without relying on the lifecycle rules of the object storage.
+- Default value: `1`
+- This parameter only affects how remote objects are recycled and does not affect TiFlash's behavior of uploading checkpoints. If you are not sure whether TiFlash is compatible with the lifecycle rules of your object storage, it is recommended to set this value to `2` during deployment to use the `ScanThenDelete` method for object storage GC.
+
+##### `remote_gc_interval_seconds` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the execution interval of background tasks for remote object storage GC. This parameter only takes effect on TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md), and only the node currently selected as the GC owner actually executes this task.
+- Default value: `3600`
+- Unit: seconds
+- When `remote_gc_method` is set to `1`, this parameter controls the frequency at which TiFlash scans locks and manifests and maintains lifecycle rules, but the actual physical deletion time of objects is still determined by the lifecycle rules of the object storage.
+- When `remote_gc_method` is set to `2`, this parameter also controls the frequency at which TiFlash scans and directly deletes expired objects. It is generally not recommended to modify this parameter.
+
+##### `remote_summary_interval_seconds` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the execution interval for TiFlash to periodically summarize the storage space usage of remote object storage. This parameter only takes effect on TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md), and only the node currently selected as the GC owner actually executes this task. This task traverses relevant keys in the object storage to collect statistics on the storage space used.
+- Default value: `0`
+- Unit: seconds
+- When the value is less than or equal to `0`, the periodic space summary task is disabled.
+- This task does not affect GC behavior on the object storage; it is mainly used for observing the storage space usage. After execution, it updates Prometheus metrics.
+- This task requires traversing keys in the object storage, and its overhead is usually higher than regular GC scans. If you need to enable this parameter, it is generally recommended to set it to at least `86400` (24 hours).
+
+##### `dt_filecache_wait_on_downloading_ms` <span class="version-mark">New in v9.0.0</span>
+
+- In the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md), when a TiFlash Compute Node finds that the same key is already being downloaded in the background, this parameter controls the maximum time the current request can wait for that download to complete. It is used to reduce the extra object storage read pressure caused by duplicate downloads of the same object.
+- Setting it to `0` disables waiting, meaning the current request will not wait for a download that is already in progress.
+- Default value: `0`
+- Unit: milliseconds
+
 ##### `disagg_blocklist_wn_store_id` <span class="version-mark">New in v9.0.0</span>
 
-- In the disaggregated storage and compute architecture, specifies the TiFlash Write Nodes that TiFlash Compute Nodes do not send requests to.
+- In the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md), specifies the TiFlash Write Nodes that TiFlash Compute Nodes do not send requests to.
 - The value is a comma-separated string of `store_id` values. For example, setting it to `"140,141"` means that TiFlash Compute Nodes will not send requests to TiFlash Write Nodes with `store_id` `140` or `141`. You can use [pd-ctl](/pd-control.md#query-tiflash-nodes-in-the-disaggregated-storage-and-compute-architecture) to query the `store_id` of TiFlash Write Nodes in the cluster.
 - If the value is an empty string `""`, it means that TiFlash Compute Nodes send requests to all TiFlash Write Nodes.
 - Default value: `""`
