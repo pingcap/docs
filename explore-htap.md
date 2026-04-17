@@ -96,7 +96,7 @@ If any issue occurs during using TiDB, refer to the following documents:
 - [TiDB cluster troubleshooting guide](/troubleshoot-tidb-cluster.md)
 - [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
 
-You are also welcome to create [GitHub Issues](https://github.com/pingcap/tiflash/issues) or ask the community on [AskTUG](https://pingkai.cn/tidbcommunity/forum), [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+You are also welcome to create [GitHub Issues](https://github.com/pingcap/tiflash/issues) or ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
 
 ## What's next
 
