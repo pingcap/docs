@@ -469,7 +469,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `remote_gc_method` <span class="version-mark">New in v9.0.0</span>
 
 - Controls how TiFlash executes GC on object storage. This parameter only takes effect on TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md).
-- Optional values:
+- Value options:
     - `1`: `Lifecycle`. TiFlash marks objects to be deleted with the `tiflash_deleted=true` tag and relies on the lifecycle rules of the object storage to complete physical deletion asynchronously. When the first GC is executed, the TiFlash Write Node selected as the GC owner checks and attempts to create the corresponding lifecycle rules.
     - `2`: `ScanThenDelete`. TiFlash periodically scans for expired objects with a deletion tag and directly initiates physical deletion, without relying on the lifecycle rules of the object storage.
 - Default value: `1`
@@ -480,8 +480,8 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - Controls the execution interval of background tasks for remote object storage GC. This parameter only takes effect on TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md), and only the node currently selected as the GC owner actually executes this task.
 - Default value: `3600`
 - Unit: seconds
-- When `remote_gc_method` is set to `1`, this parameter controls the frequency at which TiFlash scans locks and manifests and maintains lifecycle rules, but the actual physical deletion time of objects is still determined by the lifecycle rules of the object storage.
-- When `remote_gc_method` is set to `2`, this parameter also controls the frequency at which TiFlash scans and directly deletes expired objects. It is generally not recommended to modify this parameter.
+- When [`remote_gc_method`](#remote_gc_method-new-in-v900) is set to `1`, this parameter controls the frequency at which TiFlash scans locks and manifests and maintains lifecycle rules, but the actual physical deletion time of objects is still determined by the lifecycle rules of the object storage.
+- When [`remote_gc_method`](#remote_gc_method-new-in-v900) is set to `2`, this parameter also controls the frequency at which TiFlash scans and directly deletes expired objects. It is generally not recommended to modify this parameter.
 
 ##### `remote_summary_interval_seconds` <span class="version-mark">New in v9.0.0</span>
 
