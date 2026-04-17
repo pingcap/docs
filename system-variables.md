@@ -4632,6 +4632,7 @@ SHOW WARNINGS;
 > The TiDB query optimizer uses this variable. Do not adjust this variable without guidance from TiDB support or engineering.
 
 - Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 1]`
@@ -4645,6 +4646,7 @@ SHOW WARNINGS;
 > The TiDB query optimizer uses this variable. Do not adjust this variable without guidance from TiDB support or engineering.
 
 - Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 1]`
