@@ -106,7 +106,7 @@ PLAN REPLAYER DUMP EXPLAIN (
 Alternatively, when there are multiple SQL statements, you can obtain the result of the `PLAN REPLAYER DUMP` execution using a file. The results of multiple SQL statements are separated by `;` in this file.
 
 ```sql
-plan replayer dump explain 'sqls.txt';
+PLAN REPLAYER DUMP EXPLAIN 'sqls.txt';
 ```
 
 ```sql
