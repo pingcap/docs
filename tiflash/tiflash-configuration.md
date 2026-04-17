@@ -461,7 +461,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `remote_checkpoint_interval_seconds` <span class="version-mark">New in v9.0.0</span>
 
-- Controls the execution interval of the background task for TiFlash to upload checkpoints to object storage. This parameter only takes effect on TiFlash Write Nodes that have object storage enabled in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md).
+- Controls the execution interval of the background task for TiFlash to upload checkpoints to object storage. This parameter only takes effect on TiFlash Write Nodes that store data on object storage in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md).
 - Default value: `30`
 - Unit: seconds
 - Decreasing this value allows the latest data to be uploaded to object storage faster, but increases the frequency of checkpoint uploads and associated overhead. Increasing this value reduces the upload frequency. It is generally not recommended to modify this parameter.
