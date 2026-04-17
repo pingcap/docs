@@ -14,11 +14,11 @@ category: intro
 
 TiDB Cloud 让你几乎无需培训即可轻松完成如基础设施管理和集群部署等复杂任务。
 
-- 开发者和数据库管理员（DBA）可以轻松应对大量在线流量，并能跨多个数据集快速分析海量数据。
+- 开发者和数据库管理员（DBA）可以轻松应对大量在线流量，并能快速分析跨多个数据集的大规模数据。
 
-- 各类规模的企业都可以轻松部署和管理 TiDB Cloud，无需预付费用，即可适应你的业务增长。
+- 各类规模的企业都可以轻松部署和管理 TiDB Cloud，无需预付费用，灵活应对业务增长。
 
-观看以下视频，进一步了解 TiDB Cloud：
+观看下方视频，进一步了解 TiDB Cloud：
 
 <iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -26,11 +26,11 @@ TiDB Cloud 让你几乎无需培训即可轻松完成如基础设施管理和集
 
 - **Fast and Customized Scaling**
 
-    弹性且透明地扩展到数百个节点以应对关键负载，同时保持 ACID 事务。无需担心分片（动词或动名词）。你还可以根据业务需求分别扩展计算和存储节点。
+    弹性且透明地扩展至数百个节点，满足关键业务负载，同时保持 ACID 事务。无需关注分片（动词或动名词）。你还可以根据业务需求分别扩展计算和存储节点。
 
 - **MySQL Compatibility**
 
-    借助 TiDB 的 MySQL 兼容性，提高开发效率并缩短应用上线时间。可以轻松从现有 MySQL 实例迁移数据，无需重写代码。
+    借助 TiDB 的 MySQL 兼容性，提高开发效率并缩短应用上线时间。可以轻松将现有 MySQL 实例中的数据迁移过来，无需重写代码。
 
 - **High Availability and Reliability**
 
@@ -38,11 +38,11 @@ TiDB Cloud 让你几乎无需培训即可轻松完成如基础设施管理和集
 
 - **Real-Time Analytics**
 
-    内置分析引擎，实时获得分析查询结果。TiDB Cloud 可在当前数据上运行一致性的分析查询，不会影响关键业务应用。
+    内置分析引擎，实时获得分析查询结果。TiDB Cloud 能在当前数据上运行一致性的分析查询，不会影响关键业务应用。
 
 - **Enterprise Grade Security**
 
-    在专用网络和机器上保护你的数据，支持传输和静态加密。TiDB Cloud 通过了 SOC 2 Type 2、ISO 27001:2013、ISO 27701 认证，并完全符合 GDPR。
+    在专用网络和机器上保护你的数据，支持传输和静态加密。TiDB Cloud 通过了 SOC 2 Type 2、ISO 27001:2013、ISO 27701 认证，并完全符合 GDPR 要求。
 
 - **Fully-Managed Service**
 
@@ -52,7 +52,7 @@ TiDB Cloud 让你几乎无需培训即可轻松完成如基础设施管理和集
 
     <CustomContent language="en,zh">
 
-    保持灵活性，避免云厂商锁定。TiDB Cloud 目前支持 AWS、Azure、Google Cloud 和阿里云。
+    保持灵活，避免云厂商锁定。TiDB Cloud 目前支持 AWS、Azure、Google Cloud 和阿里云。
 
     </CustomContent>
 
@@ -64,11 +64,11 @@ TiDB Cloud 让你几乎无需培训即可轻松完成如基础设施管理和集
 
 - **Simple Pricing Plans**
 
-    只需为实际使用付费，价格透明，无隐藏费用。
+    只为实际使用付费，价格透明，无隐藏费用。
 
 - **World-Class Support**
 
-    通过我们的支持门户、<a href="mailto:tidbcloud-support@pingcap.com">电子邮件</a>、聊天或视频会议获得世界级支持。
+    通过我们的支持门户、<a href="mailto:tidbcloud-support@pingcap.com">电子邮件</a>、聊天或视频会议，获得世界级支持。
 
 ## 部署选项
 
@@ -86,7 +86,7 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB Cloud Essential
 
-    针对需要实时扩展以应对不断增长负载的应用，TiDB Cloud Essential 提供灵活性和性能，助力你的业务增长。
+    针对业务负载持续增长、需要实时扩展性的应用，TiDB Cloud Essential 提供灵活性和性能，助力你的业务增长。
 
     <CustomContent language="en,zh">
 
@@ -114,9 +114,9 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB Cloud Dedicated
 
-    TiDB Cloud Dedicated 专为关键业务设计，提供跨多个可用区的高可用、横向扩展和完整的 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 能力。
+    TiDB Cloud Dedicated 面向关键业务，提供跨多个可用区的高可用、横向扩展和完整的 HTAP 能力。
 
-    目前，TiDB Cloud Dedicated 已在 AWS 和 Google Cloud 上正式发布，并在 Azure 上公测。更多信息参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
+    目前，TiDB Cloud Dedicated 已在 AWS 和 Google Cloud 上正式发布，并在 Azure 上公测。更多信息，参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
 
 ## 架构
 
