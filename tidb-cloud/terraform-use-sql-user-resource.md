@@ -17,7 +17,9 @@ summary: 了解如何使用 SQL 用户资源在 TiDB Cloud 中创建和修改 SQ
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
-- [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md) 或 [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- 参考以下文档之一创建 TiDB Cloud 集群：
+    - [创建 {{{ .starter }}} 或 Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 
 ## 创建 SQL 用户
 
@@ -55,7 +57,7 @@ summary: 了解如何使用 SQL 用户资源在 TiDB Cloud 中创建和修改 SQ
 
     - 要使用 SQL 用户资源，需要将资源类型设置为 `tidbcloud_sql_user`。
     - 资源名称可以根据需要自定义，例如 `example`。
-    - 对于 TiDB Cloud Serverless 集群中的 SQL 用户，`user_name` 以及内置角色 `role_readonly` 和 `role_readwrite` 必须以用户前缀开头，你可以通过运行 `tidbcloud_serverless_cluster` 数据源获取用户前缀。
+    - 对于 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户，`user_name` 以及内置角色 `role_readonly` 和 `role_readwrite` 必须以用户前缀开头，你可以通过运行 `tidbcloud_serverless_cluster` 数据源获取用户前缀。
     - 获取 SQL 用户的详细配置信息，请参见 [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)。
 
 3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。

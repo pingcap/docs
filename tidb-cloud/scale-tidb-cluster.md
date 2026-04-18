@@ -7,7 +7,7 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 
 > **Note:**
 >
-> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 和 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 会根据你的应用负载变化自动扩缩容。但你无法手动扩缩容 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 和 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 会根据你的应用负载变化自动扩缩容。但你无法手动扩缩容 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 > - 当集群处于 **MODIFYING** 状态时，你无法对其执行任何新的扩缩容操作。
 
 你可以从以下维度扩容 TiDB 集群：
@@ -36,12 +36,12 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 
 要更改 TiDB、TiKV 或 TiFlash 的节点数量，请按照以下步骤操作：
 
-1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在你想要扩容的集群所在行，点击 **...**。
+1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+2. 在你想要扩容的 TiDB Cloud Dedicated 集群所在行，点击 **...**。
 
     > **Tip:**
     >
-    > 你也可以在 **Clusters** 页面点击你想要扩容的集群名称，然后在右上角点击 **...**。
+    > 你也可以在 **My TiDB** 页面点击你想要扩容的 TiDB Cloud Dedicated 集群名称，然后在右上角点击 **...**。
 
 3. 在下拉菜单中点击 **Modify**，进入 **Modify Cluster** 页面。
 4. 在 **Modify Cluster** 页面，修改 TiDB、TiKV 或 TiFlash 的节点数量。
@@ -64,12 +64,12 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 
 要更改 TiDB、TiKV 或 TiFlash 节点的 vCPU 和内存，请按照以下步骤操作：
 
-1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在你想要扩容的集群所在行，点击 **...**。
+1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+2. 在你想要扩容的 TiDB Cloud Dedicated 集群所在行，点击 **...**。
 
     > **Tip:**
     >
-    > 你也可以在 **Clusters** 页面点击你想要扩容的集群名称，然后在右上角点击 **...**。
+    > 你也可以在 **My TiDB** 页面点击你想要扩容的 TiDB Cloud Dedicated 集群名称，然后在右上角点击 **...**。
 
 3. 在下拉菜单中点击 **Modify**，进入 **Modify Cluster** 页面。
 4. 在 **Modify Cluster** 页面，修改 TiDB、TiKV 或 TiFlash 节点的 vCPU 和内存。
@@ -88,12 +88,12 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 
 要更改 TiKV 或 TiFlash 的存储空间，请按照以下步骤操作：
 
-1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在你想要扩容的集群所在行，点击 **...**。
+1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+2. 在你想要扩容的 TiDB Cloud Dedicated 集群所在行，点击 **...**。
 
     > **Tip:**
     >
-    > 你也可以在 **Clusters** 页面点击你想要扩容的集群名称，然后在右上角点击 **...**。
+    > 你也可以在 **My TiDB** 页面点击你想要扩容的 TiDB Cloud Dedicated 集群名称，然后在右上角点击 **...**。
 
 3. 在下拉菜单中点击 **Modify**，进入 **Modify Cluster** 页面。
 4. 在 **Modify Cluster** 页面，修改每个 TiKV 或 TiFlash 节点的存储空间。

@@ -1,19 +1,19 @@
 ---
 title: 使用 TiDB Cloud Starter 搭配 AI 工具
-summary: 了解如何将 TiDB Cloud Starter 集群连接到支持 Model Context Protocol (MCP) 的 AI 驱动开发工具，如 Cursor、Claude Code、VS Code 和 Windsurf。
+summary: 了解如何将 TiDB Cloud Starter 实例连接到支持 Model Context Protocol (MCP) 的 AI 驱动开发工具，如 Cursor、Claude Code、VS Code 和 Windsurf。
 ---
 
 # 使用 TiDB Cloud Starter 搭配 AI 工具
 
-本文介绍如何将 TiDB Cloud Starter 集群连接到支持 Model Context Protocol (MCP) 的 AI 驱动开发工具，如 Cursor、Claude Code、Visual Studio Code (VS Code) 和 Windsurf。
+本文介绍如何将 TiDB Cloud Starter 实例连接到支持 Model Context Protocol (MCP) 的 AI 驱动开发工具，如 Cursor、Claude Code、Visual Studio Code (VS Code) 和 Windsurf。
 
-通过将 TiDB Cloud Starter 集群配置为 MCP 服务器，你可以让开发工具中的 AI 助手查询你的数据库 schema，理解你的数据模型，并生成具备上下文感知的代码建议。
+通过将 TiDB Cloud Starter 实例配置为 MCP 服务器，你可以让开发工具中的 AI 助手查询你的数据库 schema，理解你的数据模型，并生成具备上下文感知的代码建议。
 
 ## 开始之前
 
 完成本指南，你需要准备以下内容：
 
-- 一个 TiDB Cloud Starter 集群。如果你还没有，可以[创建一个 TiDB Cloud Starter 集群](/develop/dev-guide-build-cluster-in-cloud.md)。
+- 一个 TiDB Cloud Starter 实例。如果你还没有，可以[创建一个 TiDB Cloud Starter 实例](/develop/dev-guide-build-cluster-in-cloud.md)。
 - 已安装 [Python 3.11 或更高版本](https://www.python.org/downloads/)。
 - 已安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)。
 - 一个支持 MCP 的 AI 开发工具，例如：
@@ -25,9 +25,9 @@ summary: 了解如何将 TiDB Cloud Starter 集群连接到支持 Model Context 
 
 ## 连接到 AI 工具
 
-在 TiDB Cloud 中创建 TiDB Cloud Starter 集群后，按照以下步骤将其连接到你的 AI 工具。
+在 TiDB Cloud 中创建 TiDB Cloud Starter 实例后，按照以下步骤将其连接到你的 AI 工具。
 
-1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页面。然后，点击右上角的 **Use with AI Tools**。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud Starter 实例的名称进入其概览页面。
 2. 在 **Access `your_cluster_name` with AI tools** 对话框中，选择你希望 AI 工具访问的 **Branch** 和 **Database**。
 3. 确认你已满足所有 **Prerequisites**（前置条件）。如未满足，请按照屏幕提示安装所需依赖。
 4. 配置密码：

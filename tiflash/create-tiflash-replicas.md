@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **Note:**
 >
-> 对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 集群，TiFlash 副本的 `count` 只能为 `2`。如果你设置为 `1`，会自动调整为 `2` 执行。如果你设置为大于 2 的数值，则会报副本数量的错误。
+> 对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 实例，TiFlash 副本的 `count` 只能为 `2`。如果你设置为 `1`，会自动调整为 `2` 执行。如果你设置为大于 2 的数值，则会报副本数量的错误。
 
 如果你对同一张表执行多条 DDL 语句，只有最后一条语句会生效。如下例所示，对表 `tpch50` 执行了两条 DDL 语句，但只有第二条（删除副本）生效。
 

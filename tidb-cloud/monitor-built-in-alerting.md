@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud 内置告警
-summary: 了解如何通过 TiDB Cloud 获取告警通知来监控你的 TiDB 集群。
+summary: 了解如何通过 TiDB Cloud 获取告警通知来监控你的 TiDB Cloud 资源。
 ---
 
 # TiDB Cloud 内置告警
@@ -11,19 +11,19 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 
 > **注意：**
 >
-> 目前，告警订阅仅适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> 目前，告警订阅仅适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
 ## 查看告警
 
 在 TiDB Cloud 中，你可以在 **Alerts** 页面查看活跃和已关闭的告警。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-2. 点击目标集群的名称，进入集群概览页面。
+2. 点击目标 {{{ .essential }}} 实例或 TiDB Cloud Dedicated 集群的名称，进入其概览页面。
 3. 在左侧导航栏点击 **Alerts**。
 4. **Alerts** 页面默认显示活跃告警。你可以查看每个活跃告警的信息，如告警名称、触发时间和持续时间。
 5. 如果你还想查看已关闭的告警，只需点击 **Status** 下拉列表并选择 **Closed** 或 **All**。
@@ -60,7 +60,7 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 > - 你可以在 TiDB Cloud 控制台编辑告警的阈值。
 > - 部分告警规则默认处于禁用状态。你可以根据需要启用它们。
 
-TiDB Cloud 会根据不同集群方案，结合该方案下可用的功能，提供不同的告警规则。
+TiDB Cloud 会根据不同的 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)，结合该方案下可用的[功能](/tidb-cloud/features.md)，提供不同的告警规则。
 
 <CustomContent plan="dedicated">
 

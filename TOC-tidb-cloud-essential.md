@@ -28,22 +28,22 @@
 
 ## 指南
 
-- 管理集群
-  - [选择集群套餐](/tidb-cloud/select-cluster-tier.md)
-  - 管理 TiDB Cloud 集群
-    - [创建 TiDB Cloud 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - 连接到 TiDB Cloud 集群
-      - [网络连接概述](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-    - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-      - [概览](/tidb-cloud/branch-overview.md)
-      - [管理分支](/tidb-cloud/branch-manage.md)
-      - [GitHub 集成](/tidb-cloud/branch-github-integration.md)
-    - [备份和恢复 TiDB Cloud 数据](/tidb-cloud/backup-and-restore-serverless.md)
-    - [从 TiDB Cloud 导出数据](/tidb-cloud/serverless-export.md)
-  - 使用带有 TiFlash 的 HTAP 集群
+- [选择您的方案](/tidb-cloud/select-cluster-tier.md)
+- [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)
+- 管理 {{{ .essential }}} 实例
+  - [创建 {{{ .essential }}} 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - 连接到您的 {{{ .essential }}} 实例
+    - [网络连接概述](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+    - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
+    - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+  - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [概览](/tidb-cloud/branch-overview.md)
+    - [管理分支](/tidb-cloud/branch-manage.md)
+    - [GitHub 集成](/tidb-cloud/branch-github-integration.md)
+  - [备份和恢复 TiDB Cloud 数据](/tidb-cloud/backup-and-restore-serverless.md)
+  - [从 TiDB Cloud 导出数据](/tidb-cloud/serverless-export.md)
+  - 使用 TiFlash 实现 HTAP
     - [TiFlash 简介](/tiflash/tiflash-overview.md)
     - [构建 TiFlash 副本](/tiflash/create-tiflash-replicas.md)
     - [使用 TiDB 读取 TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -58,11 +58,12 @@
     - [概览](/tidb-cloud/monitor-tidb-cluster.md)
     - [内置指标](/tidb-cloud/built-in-monitoring.md)
     - [内置告警](/tidb-cloud/monitor-built-in-alerting.md)
+    - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](/tidb-cloud/prometheus-grafana-integration.md)
     - 订阅告警通知
       - [通过邮件订阅](/tidb-cloud/monitor-alert-email.md)
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
-    - [集群事件](/tidb-cloud/tidb-cloud-events.md)
+    - [事件](/tidb-cloud/tidb-cloud-events.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [分析性能](/tidb-cloud/tune-performance.md)
@@ -115,8 +116,8 @@
        - [GC 机制简介](/garbage-collection-overview.md)
        - [GC 配置](/garbage-collection-configuration.md)
     - [TiFlash 调优](/tiflash/tune-tiflash-performance.md)
-  - [升级 TiDB 集群](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [删除 TiDB 集群](/tidb-cloud/delete-tidb-cluster.md)
+  - [升级 TiDB 版本](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [删除 {{{ .essential }}} 实例](/tidb-cloud/delete-tidb-cluster.md)
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
@@ -137,7 +138,7 @@
     - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [将 AWS DMS 连接到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 同步数据 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed 概述](/tidb-cloud/essential-changefeed-overview.md)
   - [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
@@ -203,6 +204,7 @@
     - 属性
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
+      - [_tidb_rowid](/tidb-rowid.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
     - [字面值](/literal-values.md)
     - [Schema 对象名](/schema-object-names.md)
@@ -551,6 +553,7 @@
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
+  - [适用于 {{{ .starter }}} 和 Essential 的项目 API 迁移指南](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
 - 支持计划
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
@@ -570,4 +573,5 @@
   - [获取支持](/tidb-cloud/tidb-cloud-support.md)
 - 常见问题
   - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
+  - [TiDB X 实例的项目迁移常见问题](/tidb-cloud/tidbx-instance-move-faq.md)
 - [术语表](/tidb-cloud/tidb-cloud-glossary.md)

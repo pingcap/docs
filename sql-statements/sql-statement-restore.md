@@ -10,7 +10,7 @@ summary: TiDB 数据库中 RESTORE 的用法概述。
 > **Warning:**
 >
 > - 该功能为实验性功能。不建议在生产环境中使用。该功能可能会在没有提前通知的情况下更改或移除。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
-> - 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> - 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
 
 `RESTORE` 语句使用与 [BR 工具](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 相同的引擎，不同之处在于恢复过程由 TiDB 自身驱动，而不是单独的 BR 工具。BR 的所有优点和注意事项在此同样适用。特别地，**`RESTORE` 目前不符合 ACID**。在运行 `RESTORE` 之前，请确保满足以下要求：
 

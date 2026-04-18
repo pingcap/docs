@@ -13,7 +13,7 @@ summary: TiDB 数据库中 SHOW [BACKUPS|RESTORES] 的用法概述。
 
 > **Note:**
 >
-> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
 
 通过 `br` 命令行工具启动的备份和恢复任务不会显示在这里。
 

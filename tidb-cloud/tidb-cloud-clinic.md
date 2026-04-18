@@ -25,11 +25,11 @@ TiDB Cloud Clinic 仅对订阅了 **Enterprise** 或 **Premium** 支持计划的
 
 2. 在组织列表中，选择你的目标组织。所选项目下的集群会被展示出来。
 
-3. 点击目标集群的名称。会显示集群概览页面，你可以在此查看集群的详细信息，包括：
+3. 点击目标 TiDB Cloud Dedicated 集群的名称。会显示集群概览页面，你可以在此查看集群的详细信息，包括：
 
     - 高级统计/指标（信息）
     - Top 慢查询（仅当集群的 TiDB 版本为 v8.1.1 或更高，v7.5.4 或更高时支持）
-    - TopSQL（仅当集群的 TiDB 版本为 v8.1.1 或更高，v7.5.4 或更高时支持）
+    - Top SQL（仅当集群的 TiDB 版本为 v8.1.1 或更高，v7.5.4 或更高时支持）
     - Benchmark Report
 
 ## 监控高级统计/指标（信息）
@@ -91,21 +91,21 @@ Top 慢查询会按 SQL digest 聚合展示排名前 10 的查询，并按以下
 
 更多信息，参见 [TiDB Dashboard 中的 Slow Queries](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)。
 
-## 监控 TopSQL
+## 监控 Top SQL {#monitor-top-sql}
 
-TiDB Cloud Clinic 提供 TopSQL 信息，使你能够实时监控并可视化分析数据库中每条 SQL 语句的 CPU 开销。这有助于你优化和解决数据库性能问题。
+TiDB Cloud Clinic 提供 Top SQL 信息，帮助你直观分析一段时间内特定 TiDB 或 TiKV 节点上资源消耗最高的查询。默认情况下，Top SQL 会持续收集 CPU 负载数据。对于 TiKV 节点，如果启用了 TiKV 网络 IO 采集，你还可以查看 `Network Bytes` 和 `Logical IO Bytes`，并按 `Query`、`Table`、`DB` 或 `Region` 分析热点。这有助于你从多个资源维度（而不仅仅是 CPU）识别并排查性能问题。
 
-要查看 TopSQL，请按照以下步骤操作：
+要查看 Top SQL，请按照以下步骤操作：
 
-1. 在 [TiDB Cloud Clinic 控制台](https://clinic.pingcap.com/)中，进入某个集群的 **Cluster** 页面。
+1. 在 [TiDB Cloud Clinic 控制台](https://clinic.pingcap.com/) 中，进入某个集群的 **Cluster** 页面。
 
-2. 点击 **TopSQL**。
+2. 点击 **Top SQL**。
 
-3. 选择具体的 TiDB 或 TiKV 实例以观察其负载。你可以使用时间选择器或在图表中选择时间范围以细化分析。
+3. 选择特定的 TiDB 或 TiKV 节点以观察其工作负载。你可以使用时间选择器，或在图表中选择一个时间范围来细化分析。
 
-4. 分析 TopSQL 展示的图表和表格。
+4. 分析 Top SQL 显示的图表和表格。根据所选节点和已启用的指标，你可以使用 `Order By` 和可用的聚合维度来查看 CPU、网络或逻辑 I/O 热点。
 
-更多信息，参见 [TiDB Dashboard 中的 TopSQL](https://docs.pingcap.com/tidb/stable/top-sql)。
+更多信息，请参见 [TiDB Dashboard 中的 Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)。
 
 ## 生成 Benchmark Report
 

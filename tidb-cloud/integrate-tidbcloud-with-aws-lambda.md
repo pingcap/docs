@@ -9,14 +9,14 @@ summary: 逐步介绍如何通过 AWS CloudFormation 将 TiDB Cloud Starter 与 
 
 > **注意：**
 >
-> 除了 TiDB Cloud Starter 集群外，本文档中的步骤同样适用于 TiDB Cloud Essential 集群。
+> 除了 TiDB Cloud Starter 实例外，本文档中的步骤同样适用于 TiDB Cloud Essential 实例。
 
 ## 方案概述
 
 在本指南中，你将创建一个功能完善的在线书店项目，包含以下组件：
 
-- AWS Lambda Function：处理请求并通过 Sequelize ORM 和 Fastify API 框架从 TiDB Cloud Starter 集群查询数据。
-- AWS Secrets Manager SDK：获取并管理 TiDB Cloud Starter 集群的连接配置信息。
+- AWS Lambda Function：处理请求并通过 Sequelize ORM 和 Fastify API 框架从 TiDB Cloud Starter 实例查询数据。
+- AWS Secrets Manager SDK：获取并管理 TiDB Cloud Starter 实例的连接配置信息。
 - AWS API Gateway：处理 HTTP 请求路由。
 - TiDB Cloud Starter：云原生分布式 SQL 数据库。
 
@@ -37,7 +37,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
     - [Lambda services](https://aws.amazon.com/lambda/)
     - [S3](https://aws.amazon.com/s3/)
     - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- 一个 [TiDB Cloud](https://tidbcloud.com) 账号和一个 TiDB Cloud Starter 集群。获取你的 TiDB Cloud Starter 集群的连接信息：
+- 一个 [TiDB Cloud](https://tidbcloud.com) 账号和一个 TiDB Cloud Starter 实例。获取你的 TiDB Cloud Starter 实例的连接信息：
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
@@ -46,13 +46,13 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
 
 > **注意：**
 >
-> - 在创建 AWS 资源时，建议将集群区域选择为 `us-east-1`。这是因为本示例中的 Lambda 函数代码将区域硬编码为 `us-east-1`，且代码包也存储在 `us-east-1` 区域。
+> - 在创建 AWS 资源时，建议将区域选择为 `us-east-1`。这是因为本示例中的 Lambda 函数代码将区域硬编码为 `us-east-1`，且代码包也存储在 `us-east-1` 区域。
 > - 如果你使用其他区域，需要按照下述说明修改 Lambda 函数代码，重新构建并将代码包上传到你自己的 S3 bucket。
 
 <details>
 <summary>如果你使用的区域不是 <code>us-east-1</code>，请修改并重新构建 Lambda 函数代码</summary>
 
-如果你将集群区域设置为 `us-east-1`，请跳过本节，直接前往 [步骤 1：使用 AWS CloudFormation 搭建书店项目](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)。
+如果你将区域设置为 `us-east-1`，请跳过本节，直接前往 [步骤 1：使用 AWS CloudFormation 搭建书店项目](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)。
 
 如果你在 `us-east-1` 以外的 AWS 区域创建 AWS 资源，则需要修改 Lambda 函数代码，重新构建，并将代码包上传到你自己的 S3 bucket。
 
@@ -123,14 +123,14 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
 
     3. 指定堆栈详细信息。
 
-        - 如果你使用 `us-east-1` 作为集群区域，请按照下图填写各项内容：
+        - 如果你使用 `us-east-1` 作为区域，请按照下图填写各项内容：
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
             - **Stack name**：输入堆栈名称。
             - **S3Bucket**：输入存放 zip 文件的 S3 bucket 名称。
             - **S3Key**：输入 S3 key。
-            - **TiDBDatabase**：输入 TiDB Cloud 集群名称。
+            - **TiDBDatabase**：输入 TiDB Cloud Starter 实例名称。
             - **TiDBHost**：输入 TiDB Cloud 数据库访问的主机 URL。请输入 `localhost`。
             - **TiDBPassword**：输入 TiDB Cloud 数据库访问密码。
             - **TiDBPort**：输入 TiDB Cloud 数据库访问端口。

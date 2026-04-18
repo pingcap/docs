@@ -8,6 +8,59 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 4 月 14 日
+
+**常规变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 将新建 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本从 [v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/) 升级到 [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/)。
+
+    - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md) 中的 Top SQL 页面现已支持为托管在 AWS 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群采集并展示 TiKV 网络流量和逻辑 I/O 指标。
+
+**控制台变更**
+
+- 统一所有 TiDB Cloud 方案（例如 {{{ .starter }}}、Essential 和 Dedicated）的 [TiDB Cloud 控制台](https://tidbcloud.com) 使用体验。现已提供以下功能：
+
+    - **[My TiDB](https://tidbcloud.com/tidbs) 首页**：新增组织级首页，包含资源视图和项目视图。
+
+        - 资源视图可在一个位置列出跨所有方案的全部 TiDB Cloud 资源。
+        - 项目视图按项目组织 TiDB Cloud 资源，并允许你管理组织中的项目。
+
+    - **统一的资源创建流程**：单一创建流程适用于所有 TiDB Cloud 资源类型，包括 {{{ .starter }}}、Essential 和 Dedicated。
+    - **TiDB X 项目支持**：TiDB X 实例（一种基于 [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md) 的面向服务的 TiDB Cloud 产品，例如 {{{ .starter }}} 和 Essential）现在可以选择性地分配到项目中，并且在创建后可在项目之间移动。
+    - **实例级角色**：角色分配现在可以限定到单个 TiDB X 实例，从而在项目内实现细粒度访问控制。
+    - **术语更新**：控制台中将 {{{ .starter }}} 和 Essential **clusters** 统一重命名为 {{{ .starter }}} 和 Essential **instances**。
+    - **重大变更引导**：向现有用户展示引导式说明，解释结构性变更，以减少迁移期间的干扰。
+
+  更多信息，请参见 [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md) 和 [TiDB X 实例项目迁移常见问题](/tidb-cloud/tidbx-instance-move-faq.md)。
+
+**API 变更**
+
+- TiDB Cloud Starter 和 Essential 实例的 `project_id` 值**可能会变化**，因为这些实例可以在 TiDB Cloud 控制台中在项目之间移动。请勿硬编码 `project_id` 值。
+
+- 为 [列出所有可访问项目](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 端点新增 `type` 字段。
+
+    - 如果你的应用程序仅从项目响应中读取 `id` 和 `name` 字段，则无需做任何更改。
+    - 如果你需要区分[项目类型](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)（例如筛选 dedicated 项目、TiDB X 项目或 TiDB X 虚拟项目），请开始读取 `type` 字段。
+
+更多信息，请参见 [{{{ .starter }}} 和 Essential 的项目 API 迁移指南](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)。
+
+## 2026 年 4 月 8 日
+
+**常规变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 增强 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的云存储数据导入体验。
+
+        导入流程现已简化为 3 步向导（Connection、Destination Mapping 和 Pre-check），并为 Amazon S3、Google Cloud Storage 和 Azure Blob Storage 提供统一的 **Import data from Cloud Storage** 入口。新流程支持单文件 URI 和通过通配符模式进行手动文件映射，Pre-check 步骤会在导入运行前扫描源文件并预览映射，帮助你及早发现配置问题并减少导入失败。
+
+        更多信息，请参见以下文档：
+
+        - [从云存储将 CSV 文件导入 TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)
+        - [从云存储将 Apache Parquet 文件导入 TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)
+
 ## 2026 年 3 月 31 日
 
 **通用变更**

@@ -19,7 +19,7 @@ summary: 了解如何在 Postman 中运行数据应用。
 - 一个 [Postman 桌面应用](https://www.postman.com/downloads)（可选）。或者，你可以使用 Postman 网页版而无需下载应用。
 - 一个至少具有一个定义完善的[端点](/tidb-cloud/data-service-manage-endpoint.md)的[数据应用](/tidb-cloud/data-service-manage-data-app.md)。只有满足以下要求的端点才能导入到 Postman：
 
-    - 已选择目标集群。
+    - 已选择目标 {{{ .starter }}} 实例。
     - 已配置端点路径和请求方法。
     - 已编写 SQL 语句。
 
@@ -35,7 +35,7 @@ summary: 了解如何在 Postman 中运行数据应用。
 
     > **注意：**
     >
-    > - 如果数据应用缺少定义完善的端点（已配置目标集群、路径、请求方法和 SQL 语句），则该数据应用的**在 Postman 中运行**按钮将保持禁用状态。
+    > - 如果数据应用缺少定义完善的端点（已配置目标 {{{ .starter }}} 实例、路径、请求方法和 SQL 语句），则该数据应用的**在 Postman 中运行**按钮将保持禁用状态。
     > - Chat2Query 数据应用不提供**在 Postman 中运行**功能。
 
 4. 按照对话框中提供的步骤导入数据应用：

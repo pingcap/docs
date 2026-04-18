@@ -142,13 +142,13 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ## 步骤 1：进入 Data Migration 页面
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以通过左上角的下拉框切换 organization、project 和 cluster。
+    > 如果你属于多个 organization，请先使用左上角的下拉框切换到目标 organization。
 
-2. 点击目标 cluster 的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Data Migration**。
+2. 点击目标 <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> 的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Data Migration**。
 
 3. 在 **Data Migration** 页面，点击右上角的 **Create Migration Job**。此时会进入 **Create Migration Job** 页面。
 
@@ -187,7 +187,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 3. 填写目标连接信息。
 
-   - **Username**：输入 TiDB Cloud 目标 cluster 的用户名。
+   - **Username**：输入 TiDB Cloud 目标 <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> 的用户名。
    - **Password**：输入 TiDB Cloud 用户名的密码。
 
 4. 点击 **Validate Connection and Next** 验证你填写的信息。

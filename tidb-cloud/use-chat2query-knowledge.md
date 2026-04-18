@@ -11,7 +11,7 @@ summary: 了解如何通过使用 Chat2Query 知识库 API 提升 Chat2Query 的
 
 > **Note:**
 >
-> 知识库相关接口仅适用于托管在 AWS 上的 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 集群。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用知识库相关接口，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
+> 知识库相关接口仅适用于托管在 AWS 上的 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用知识库相关接口，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
 
 ## 开始前的准备
 
@@ -38,7 +38,7 @@ summary: 了解如何通过使用 Chat2Query 知识库 API 提升 Chat2Query 的
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
  --header 'content-type: application/json'\
  --data-raw '{
-    "cluster_id": "<The ID of the cluster to which the database belongs>",
+    "cluster_id": "<The ID of the {{{ .starter }}} instance to which the database belongs>",
     "database": "<The name of the target database>",
     "description": "<Your knowledge base description>"
 }'

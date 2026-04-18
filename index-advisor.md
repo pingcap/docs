@@ -9,7 +9,7 @@ summary: 了解如何使用 TiDB Index Advisor 优化查询性能。
 
 > **Note:**
 >
-> 目前，该功能不支持在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上使用。
+> 目前，该功能不支持在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例上使用。
 
 Index Advisor 会分析查询，识别如 `WHERE`、`GROUP BY` 和 `ORDER BY` 等子句中的可建索引列。随后，它会生成索引候选项，并通过假设索引评估其性能收益。TiDB 使用遗传搜索算法，从单列索引开始，迭代探索多列索引，利用 “What-If” 分析根据优化器执行计划的成本评估潜在索引。当索引能降低整体查询成本时，Advisor 会推荐这些索引。
 

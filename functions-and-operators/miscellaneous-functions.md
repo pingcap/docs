@@ -25,7 +25,7 @@ TiDB 支持 MySQL 8.0 中大多数[杂项函数](https://dev.mysql.com/doc/refma
 | [`IS_IPV6()`](#is_ipv6)                  | 判断参数是否为 IPv6 地址               |
 | [`IS_UUID()`](#is_uuid)                  | 判断参数是否为 UUID                       |
 | [`NAME_CONST()`](#name_const)            | 可用于重命名列名               |
-| [`SLEEP()`](#sleep)                      | 休眠指定秒数。注意，对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群，`SLEEP()` 函数有最大 300 秒的休眠时间限制。       |
+| [`SLEEP()`](#sleep)                      | 休眠指定秒数。注意，对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，`SLEEP()` 函数有最大 300 秒的休眠时间限制。       |
 | [`UUID()`](#uuid)                        | 返回一个全局唯一标识符（UUID）       |
 | [`UUID_TO_BIN()`](#uuid_to_bin)          | 将 UUID 从文本格式转换为二进制格式    |
 | [`VALUES()`](#values)                    | 定义在 INSERT 时要使用的值    |

@@ -33,6 +33,7 @@ summary: 了解 TiDB 系统表。
     * `tidb_server_version`: TiDB 初始化时的版本信息。注意，该值为只读，不能修改。
     * `system_tz`: TiDB 的系统时区。
     * `new_collation_enabled`: TiDB 是否启用了 [新框架的字符集排序](/character-set-and-collation.md#new-framework-for-collations)。注意，该值为只读，不能修改。
+    * `cluster_id`（v8.5.6 新增）：TiDB 集群的唯一标识符。注意，该值为只读，不能修改。
 
 ## Server-side help system tables
 

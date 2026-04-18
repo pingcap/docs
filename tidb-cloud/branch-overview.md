@@ -5,7 +5,7 @@ summary: 了解 TiDB Cloud 分支的概念。
 
 # TiDB Cloud Branching（Beta）概述
 
-TiDB Cloud 允许你为 TiDB Cloud Starter 和 TiDB Cloud Essential 集群创建分支。一个集群的分支是一个独立的实例，包含从原始集群分叉出来的数据副本。它提供了一个隔离的环境，使你可以自由地进行实验，而无需担心影响原始集群。
+TiDB Cloud 允许你为 {{{ .starter }}} 和 {{{ .essential }}} 实例创建分支。{{{ .starter }}} 或 Essential 实例的分支是一个独立的实例，包含从原始 {{{ .starter }}} 或 Essential 实例分叉出来的数据副本。它提供了一个隔离的环境，使你可以自由地进行实验，而无需担心影响原始 {{{ .starter }}} 或 Essential 实例。
 
 通过分支，开发者可以并行工作，快速迭代新功能，排查问题而不影响生产数据库，并且在需要时可以轻松回滚更改。该功能简化了开发和部署流程，同时确保生产数据库具有高稳定性和可靠性。
 
@@ -15,9 +15,9 @@ TiDB Cloud 允许你为 TiDB Cloud Starter 和 TiDB Cloud Essential 集群创建
 
 ## 实现方式
 
-当为一个集群创建分支时，分支中的数据会在某一特定时间点与原始集群或其父分支的数据分叉。这意味着之后在父集群或分支中所做的更改将不会相互同步。
+当为 {{{ .starter }}} 或 Essential 实例创建分支时，分支中的数据会在某一特定时间点与原始 {{{ .starter }}} 或 Essential 实例或其父分支的数据分叉。这意味着之后在父分支或分支中所做的更改将不会相互同步。
 
-为了确保分支创建的快速与无缝，TiDB Cloud 采用了写时复制（copy-on-write）技术，在原始集群与其分支之间共享数据。该过程通常在几分钟内完成，对用户来说几乎无感知，并且不会影响原始集群的性能。
+为了确保分支创建的快速与无缝，TiDB Cloud 采用了写时复制（copy-on-write）技术，在原始 {{{ .starter }}} 或 Essential 实例与其分支之间共享数据。该过程通常在几分钟内完成，对用户来说几乎无感知，并且不会影响原始 {{{ .starter }}} 或 Essential 实例的性能。
 
 ## 场景
 
@@ -39,18 +39,18 @@ TiDB Cloud 允许你为 TiDB Cloud Starter 和 TiDB Cloud Essential 集群创建
 
 目前，TiDB Cloud 分支处于 beta 阶段，且免费使用。
 
-- 对于 TiDB Cloud 中的每个组织，默认最多可在所有集群下创建 5 个分支。集群的分支会在与集群相同的 region 创建，且无法为受限集群或大于 100 GiB 的集群创建分支。
+- 对于 TiDB Cloud 中的每个组织，默认最多可在所有 {{{ .starter }}} 和 Essential 实例下创建 5 个分支。{{{ .starter }}} 或 Essential 实例的分支会在与实例相同的 region 创建，且无法为受限或大于 100 GiB 的 {{{ .starter }}} 或 Essential 实例创建分支。
 
-- 对于免费集群的每个分支，允许使用 10 GiB 存储空间。对于消费额度大于 0 的集群的每个分支，允许使用 100 GiB 存储空间。当存储空间达到上限时，该分支的读写操作将被限制，直到你减少存储占用。
+- 对于免费 {{{ .starter }}} 实例的每个分支，允许使用 10 GiB 存储空间。对于消费额度大于 0 的 {{{ .starter }}} 实例的每个分支，允许使用 100 GiB 存储空间。当存储空间达到上限时，该分支的读写操作将被限制，直到你减少存储占用。
 
 - 分支主要用于短期功能开发和功能测试。由于分支不具备自动扩缩容能力，不适合用于性能测试。
 
-- 如果你的集群包含 TiFlash 副本，在创建新分支后，这些副本会在新分支中暂时不可用，因为 TiFlash 需要重建副本数据。
+- 如果你的 {{{ .starter }}} 或 Essential 实例包含 TiFlash 副本，在创建新分支后，这些副本会在新分支中暂时不可用，因为 TiFlash 需要重建副本数据。
 
 - 当你从某一特定时间点[创建分支](/tidb-cloud/branch-manage.md#create-a-branch)时：
 
-    - 对于免费 TiDB Cloud Starter 集群，你可以选择最近 24 小时内的任意时间点。
-    - 对于 TiDB Cloud Starter（消费额度大于 0）或 TiDB Cloud Essential 集群，你可以选择最近 14 天内的任意时间点。
+    - 对于免费 {{{ .starter }}} 实例，你可以选择最近 24 小时内的任意时间点。
+    - 对于 {{{ .starter }}}（消费额度大于 0）或 {{{ .essential }}} 实例，你可以选择最近 14 天内的任意时间点。
 
 如果你需要更多配额，请[联系 TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
 

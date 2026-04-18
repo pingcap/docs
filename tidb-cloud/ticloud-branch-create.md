@@ -5,7 +5,7 @@ summary: "`ticloud serverless branch create` 的参考文档。"
 
 # ticloud serverless branch create
 
-为 TiDB Cloud Serverless 集群创建一个 [分支](/tidb-cloud/branch-overview.md)：
+为 TiDB Cloud Serverless 实例创建一个 [分支](/tidb-cloud/branch-overview.md)：
 
 ```shell
 ticloud serverless branch create [flags]
@@ -13,13 +13,13 @@ ticloud serverless branch create [flags]
 
 ## 示例
 
-以交互模式为 TiDB Cloud Serverless 集群创建分支：
+以交互模式为 TiDB Cloud Serverless 实例创建分支：
 
 ```shell
 ticloud serverless branch create
 ```
 
-以非交互模式为 TiDB Cloud Serverless 集群创建分支：
+以非交互模式为 TiDB Cloud Serverless 实例创建分支：
 
 ```shell
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>

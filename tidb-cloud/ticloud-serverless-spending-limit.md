@@ -5,7 +5,7 @@ summary: "`ticloud serverless spending-limit` 的参考文档。"
 
 # ticloud serverless spending-limit
 
-为 TiDB Cloud Serverless 集群设置每月的最大 [消费限额](/tidb-cloud/manage-serverless-spend-limit.md)：
+为 TiDB Cloud Serverless 实例设置每月的最大 [消费限额](/tidb-cloud/manage-serverless-spend-limit.md)：
 
 ```shell
 ticloud serverless spending-limit [flags]
@@ -13,13 +13,13 @@ ticloud serverless spending-limit [flags]
 
 ## 示例
 
-以交互模式为 TiDB Cloud Serverless 集群设置消费限额：
+以交互模式为 TiDB Cloud Serverless 实例设置消费限额：
 
 ```shell
 ticloud serverless spending-limit
 ```
 
-以非交互模式为 TiDB Cloud Serverless 集群设置消费限额：
+以非交互模式为 TiDB Cloud Serverless 实例设置消费限额：
 
 ```shell
 ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-monthly>

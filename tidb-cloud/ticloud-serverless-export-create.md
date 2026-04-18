@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export create`.
 
 # ticloud serverless export create
 
-从 TiDB Cloud Serverless 集群导出数据：
+从 TiDB Cloud Serverless 实例导出数据：
 
 ```shell
 ticloud serverless export create [flags]
@@ -13,37 +13,37 @@ ticloud serverless export create [flags]
 
 ## 示例
 
-以交互模式从 TiDB Cloud Serverless 集群导出数据：
+以交互模式从 TiDB Cloud Serverless 实例导出数据：
 
 ```shell
 ticloud serverless export create
 ```
 
-以非交互模式将 TiDB Cloud Serverless 集群的数据导出到本地文件：
+以非交互模式将 TiDB Cloud Serverless 实例的数据导出到本地文件：
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>
 ```
 
-以非交互模式将 TiDB Cloud Serverless 集群的数据导出到 Amazon S3：
+以非交互模式将 TiDB Cloud Serverless 实例的数据导出到 Amazon S3：
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
-以非交互模式将 TiDB Cloud Serverless 集群的数据导出到 Google Cloud Storage：
+以非交互模式将 TiDB Cloud Serverless 实例的数据导出到 Google Cloud Storage：
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter <database.table>
 ```
 
-以非交互模式将 TiDB Cloud Serverless 集群的数据导出到 Azure Blob Storage：
+以非交互模式将 TiDB Cloud Serverless 实例的数据导出到 Azure Blob Storage：
 
 ```shell
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>
 ```
 
-以非交互模式将 TiDB Cloud Serverless 集群的数据导出到阿里云 OSS：
+以非交互模式将 TiDB Cloud Serverless 实例的数据导出到阿里云 OSS：
 
 ```shell
 ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter <database.table>
@@ -81,7 +81,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --oss.uri string                 | 指定阿里云 OSS URI，格式为 `oss://<bucket>/<file-path>`。当导出 `target-type` 为 `"OSS"` 时必填。                                | 否       | 仅在非交互模式下生效。                              |
 | --oss.access-key-id string       | 指定访问阿里云 OSS 的 AccessKey ID。                                                                                            | 否       | 仅在非交互模式下生效。                              |
 | --oss.access-key-secret string   | 指定访问阿里云 OSS 的 AccessKey Secret。                                                                                        | 否       | 仅在非交互模式下生效。                              |
-| --csv.delimiter string           | 指定 CSV 文件中字符串类型变量的定界符。（默认值为 "\""）                                                                         | 否       | 仅在非交互模式下生效。                              |
+| --csv.delimiter string           | 指定 CSV 文件中字符串类型变量的定界符。（默认值为 "\"")                                                                         | 否       | 仅在非交互模式下生效。                              |
 | --csv.null-value string          | 指定 CSV 文件中 null 值的表示方式。（默认值为 "\\N"）                                                                           | 否       | 仅在非交互模式下生效。                              |
 | --csv.separator string           | 指定 CSV 文件中每个值的分隔符。（默认值为 ","）                                                                                  | 否       | 仅在非交互模式下生效。                              |
 | --csv.skip-header                | 导出表的 CSV 文件时不包含表头。                                                                                                 | 否       | 仅在非交互模式下生效。                              |
@@ -90,7 +90,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --sql string                     | 通过 `SQL SELECT` 语句过滤导出数据。                                                                                            | 否       | 仅在非交互模式下生效。                              |
 | --where string                   | 通过 `WHERE` 条件过滤导出表。不要与 --sql 一起使用。                                                                            | 否       | 仅在非交互模式下生效。                              |
 | --compression string             | 指定导出文件的压缩算法。支持的算法包括 `GZIP`、`SNAPPY`、`ZSTD` 和 `NONE`。默认值为 `GZIP`。                                    | 否       | 仅在非交互模式下生效。                              |
-| --force                          | 无需确认直接创建导出任务。当你在非交互模式下导出整个集群时需要确认。                                                            | 否       | 仅在非交互模式下生效。                              |
+| --force                          | 无需确认直接创建导出任务。当你在非交互模式下导出整个 TiDB Cloud Serverless {{{ .starter }}} 或 {{{ .essential }}} 实例时需要确认。                                                            | 否       | 仅在非交互模式下生效。                              |
 | -h, --help                       | 显示该命令的帮助信息。                                                                                                          | 否       | 在非交互和交互模式下均可用。                        |
 
 ## 继承参数

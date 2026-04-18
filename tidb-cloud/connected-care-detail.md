@@ -141,4 +141,4 @@ summary: 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
 
 - 工作时间：本地时间 9:00 - 18:00，周一至周五
 - IM：即时消息。目前支持 [Slack](https://slack.com/) 和 [Lark](https://www.larksuite.com/)，未来计划支持 [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)。
-- [Clinic](https://clinic.pingcap.com/)：一项现代化监控服务，为你的 TiDB Cloud 集群提供高级监控与诊断能力。
+- [Clinic](https://clinic.pingcap.com/)：一项现代化监控服务，为你的 {{{ .dedicated }}} 集群提供高级监控与诊断能力。

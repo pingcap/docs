@@ -5,7 +5,7 @@ summary: "`ticloud serverless branch list` 的参考文档。"
 
 # ticloud serverless branch list
 
-列出所有 TiDB Cloud Serverless 集群的分支：
+列出所有 TiDB Cloud Serverless 实例的分支：
 
 ```shell
 ticloud serverless branch list <cluster-id> [flags]
@@ -19,19 +19,19 @@ ticloud serverless branch ls <cluster-id> [flags]
 
 ## 示例
 
-以交互模式列出所有 TiDB Cloud Serverless 集群的分支：
+以交互模式列出所有 TiDB Cloud Serverless 实例的分支：
 
 ```shell
 ticloud serverless branch list
 ```
 
-以非交互模式列出指定 TiDB Cloud Serverless 集群的所有分支：
+以非交互模式列出指定 TiDB Cloud Serverless 实例的所有分支：
 
 ```shell
 ticloud serverless branch list -c <cluster-id>
 ```
 
-以 JSON 格式列出指定 TiDB Cloud Serverless 集群的所有分支：
+以 JSON 格式列出指定 TiDB Cloud Serverless 实例的所有分支：
 
 ```shell
 ticloud serverless branch list <cluster-id> -o json

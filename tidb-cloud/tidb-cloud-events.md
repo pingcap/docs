@@ -1,23 +1,33 @@
 ---
-title: TiDB Cloud Cluster Events
-summary: 了解如何使用 Events 页面查看 TiDB Cloud 集群的事件。
+title: Events
+summary: 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
 ---
 
-# TiDB Cloud Cluster Events
+# Events
 
-TiDB Cloud 会在集群层级记录历史事件。一个 *event* 表示你的 TiDB Cloud 集群发生了一次变更。你可以在 **Events** 页面查看已记录的事件，包括事件类型、状态、消息、触发时间和触发用户。
+<CustomContent plan="starter,essential">
 
-本文档介绍如何使用 **Events** 页面查看 TiDB Cloud 集群的事件，并列出了支持的事件类型。
+对于 {{{ .starter }}} 和 Essential 实例，TiDB Cloud 会在实例层级记录历史事件。一个 *event* 表示你的 {{{ .starter }}} 或 Essential 实例发生了一次变更。你可以在 **Events** 页面查看已记录的事件，包括事件类型、状态、消息、触发时间和触发用户。
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
+对于 TiDB Cloud Dedicated 集群，TiDB Cloud 会在集群层级记录历史事件。一个 *event* 表示你的 TiDB Cloud Dedicated 集群发生了一次变更。你可以在 **Events** 页面查看已记录的事件，包括事件类型、状态、消息、触发时间和触发用户。
+
+</CustomContent>
+
+本文档介绍如何使用 **Events** 页面查看历史事件，并列出了支持的事件类型。
 
 ## 查看 Events 页面
 
 要在 **Events** 页面查看事件，请按照以下步骤操作：
 
-1. 在你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群的名称，进入其概览页面。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标<CustomContent plan="starter,essential">{{{ .starter }}} 或 Essential 实例</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent>的名称，进入其概览页面。
 
     > **Tip:**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
 2. 在左侧导航栏，点击 **Monitoring** > **Events**。
 
@@ -42,8 +52,8 @@ TiDB Cloud 会记录以下类型的集群事件：
 | ScaleChangefeed |   扩容 changefeed 规格 |  
 | FailedChangefeed |   changefeed 失败 |  
 | ImportData |   向集群导入数据 |  
-| UpdateSpendingLimit |   更新 TiDB Cloud Starter 集群的消费额度 |  
-| ResourceLimitation |   更新 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的资源限制 |  
+| UpdateSpendingLimit |   更新 TiDB Cloud Starter 实例的消费额度 |  
+| ResourceLimitation |   更新 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的资源限制 |  
 
 对于每个事件，都会记录以下信息：
 

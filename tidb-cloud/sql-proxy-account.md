@@ -34,11 +34,11 @@ SQL 代理账号的主要优势如下：
 
 ## SQL 代理账号的创建方式
 
-当 TiDB Cloud 用户被授予集群权限角色时，SQL 代理账号会在 TiDB Cloud 集群初始化期间自动创建。
+当 TiDB Cloud 用户被授予实例或集群权限角色时，SQL 代理账号会在 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群初始化期间自动创建。
 
 ## SQL 代理账号的删除方式
 
-当用户被移出 [组织](/tidb-cloud/manage-user-access.md#remove-an-organization-member) 或 [项目](/tidb-cloud/manage-user-access.md#remove-a-project-member)，或者其角色变更为无权访问集群的角色时，SQL 代理账号会被自动删除。
+当用户被移出 [组织](/tidb-cloud/manage-user-access.md#remove-an-organization-member) 或 [项目](/tidb-cloud/manage-user-access.md#remove-project-access-for-a-user)，或者其角色变更为无权访问 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群的角色时，SQL 代理账号会被自动删除。
 
 需要注意的是，如果 SQL 代理账号被手动删除，当用户下次登录 TiDB Cloud 控制台时，该账号会被自动重新创建。
 
@@ -64,7 +64,7 @@ SQL 代理账号的主要优势如下：
 
 > **Note:**
 >
-> 在上表中，`{user_name_prefix}` 是 TiDB Cloud 为区分 TiDB Cloud Serverless 集群而生成的唯一前缀。详情请参见 TiDB Cloud Serverless 集群的 [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+> 在上表中，`{user_name_prefix}` 是 TiDB Cloud 为区分 {{{ .starter }}} 实例而生成的唯一前缀。详情请参见 {{{ .starter }}} 实例的 [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
 
 ## SQL 代理账号密码
 
@@ -87,4 +87,4 @@ SQL 代理账号的角色取决于 TiDB Cloud 用户的 IAM 角色：
 
 ## SQL 代理账号访问控制
 
-SQL 代理账号基于 JWT 令牌，仅可用于 Data Service 和 SQL Editor 访问。无法通过用户名和密码使用 SQL 代理账号访问 TiDB Cloud 集群。
+SQL 代理账号基于 JWT 令牌，仅可用于 Data Service 和 SQL Editor 访问。无法通过用户名和密码使用 SQL 代理账号访问 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群。

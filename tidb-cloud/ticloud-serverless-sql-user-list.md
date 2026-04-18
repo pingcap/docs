@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user list` 的参考文档。"
 
 # ticloud serverless sql-user list
 
-列出 TiDB Cloud Serverless SQL 用户：
+列出 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user list [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user list [flags]
 
 ## 示例
 
-以交互模式列出 TiDB Cloud Serverless SQL 用户：
+以交互模式列出 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user list
 ```
 
-以非交互模式列出 TiDB Cloud Serverless SQL 用户：
+以非交互模式列出 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user list -c <cluster-id>

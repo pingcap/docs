@@ -197,7 +197,7 @@ OptionItem ::=
 
 > **注意：**
 >
-> Global Sort 不支持在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上使用。
+> Global Sort 不支持在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例上使用。
 
 `IMPORT INTO ... FROM FILE` 会将源数据文件的导入任务拆分为多个子任务，每个子任务独立编码并排序后导入数据。如果这些子任务编码后的 KV 范围有大量重叠（关于 TiDB 如何将数据编码为 KV，参见 [TiDB 计算](/tidb-computing.md)），则 TiKV 在导入过程中需要持续进行 compaction，导致导入性能和稳定性下降。
 

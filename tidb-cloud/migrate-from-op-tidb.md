@@ -18,13 +18,13 @@ summary: 了解如何将数据从 TiDB 自建集群迁移到 TiDB Cloud。
 
 ## 前置条件
 
-建议将 S3 bucket 和 TiDB Cloud 集群放在同一区域。跨区域迁移可能会产生额外的数据转换费用。
+建议将 S3 bucket 和 TiDB Cloud 资源放在同一区域。跨区域迁移可能会产生额外的数据转换费用。
 
 在迁移前，你需要准备以下内容：
 
 - 一个具有管理员权限的 [AWS 账号](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
 - 一个 [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- 一个 [TiDB Cloud 账号](/tidb-cloud/tidb-cloud-quickstart.md)，并对目标 AWS 上托管的 TiDB Cloud 集群拥有至少 [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) 权限
+- 一个 [TiDB Cloud 账号](/tidb-cloud/tidb-cloud-quickstart.md)，并对目标 AWS 上托管的 TiDB Cloud 资源拥有至少 [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) 权限
 
 ## 准备工具
 
@@ -39,7 +39,7 @@ summary: 了解如何将数据从 TiDB 自建集群迁移到 TiDB Cloud。
 
 在部署 Dumpling 前，请注意以下事项：
 
-- 推荐在与 TiDB Cloud 集群同一 VPC 的新 EC2 实例上部署 Dumpling。
+- 推荐在与 TiDB Cloud 资源同一 VPC 的新 EC2 实例上部署 Dumpling。
 - 推荐的 EC2 实例类型为 **c6g.4xlarge**（16 vCPU 和 32 GiB 内存）。你也可以根据实际需求选择其他 EC2 实例类型。Amazon Machine Image（AMI）可以选择 Amazon Linux、Ubuntu 或 Red Hat。
 
 你可以通过 TiUP 或安装包部署 Dumpling。
@@ -77,11 +77,11 @@ tiup update --self && tiup update dumpling
 
 ### 部署 TiCDC
 
-你需要 [部署 TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) 以将增量数据从上游 TiDB 集群同步到 TiDB Cloud。
+你需要 [部署 TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) 以将增量数据从上游 TiDB 自建集群同步到下游 TiDB Cloud 资源。
 
-1. 确认当前 TiDB 版本是否支持 TiCDC。TiDB v4.0.8.rc.1 及以上版本支持 TiCDC。你可以在 TiDB 集群中执行 `select tidb_version();` 检查 TiDB 版本。如需升级，参见 [使用 TiUP 升级 TiDB](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)。
+1. 确认上游 TiDB 自建集群当前的 TiDB 版本是否支持 TiCDC。TiDB v4.0.8.rc.1 及以上版本支持 TiCDC。你可以在上游 TiDB 自建集群中执行 `select tidb_version();` 检查 TiDB 版本。如需升级，参见 [使用 TiUP 升级 TiDB](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)。
 
-2. 向 TiDB 集群添加 TiCDC 组件。参见 [使用 TiUP 向现有 TiDB 集群添加或扩容 TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)。编辑 `scale-out.yml` 文件添加 TiCDC：
+2. 向上游 TiDB 自建集群添加 TiCDC 组件。参见 [使用 TiUP 向现有 TiDB 集群添加或扩容 TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)。编辑 `scale-out.yml` 文件添加 TiCDC：
 
     ```yaml
     cdc_servers:
@@ -111,7 +111,7 @@ tiup update --self && tiup update dumpling
 
 你需要使用 Dumpling 将数据从 TiDB 自建集群迁移到 Amazon S3。
 
-如果你的 TiDB 集群在本地 IDC，或者 Dumpling 服务器与 Amazon S3 之间网络不通，可以先将文件导出到本地存储，再上传到 Amazon S3。
+如果你的 TiDB 自建集群在本地 IDC，或者 Dumpling 服务器与 Amazon S3 之间网络不通，可以先将文件导出到本地存储，再上传到 Amazon S3。
 
 #### 步骤 1. 临时关闭上游 TiDB 自建集群的 GC 机制
 
@@ -201,10 +201,10 @@ SELECT @@global.tidb_gc_enable;
 
 将数据从 TiDB 自建集群导出到 Amazon S3 后，需要将数据迁移到 TiDB Cloud。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 根据以下文档获取目标集群的 Account ID 和 External ID：
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 根据以下文档获取目标 TiDB 资源的 Account ID 和 External ID：
 
    - 对于 TiDB Cloud Dedicated 集群，参见 [通过 Role ARN 配置 Amazon S3 访问权限](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn)。
-   - 对于 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，参见 [通过 Role ARN 配置 Amazon S3 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn)。
+   - 对于 TiDB Cloud Starter 或 TiDB Cloud Essential 实例，参见 [通过 Role ARN 配置 Amazon S3 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn)。
 
 2. 配置 Amazon S3 访问权限。通常需要以下只读权限：
 
@@ -271,7 +271,7 @@ SELECT @@global.tidb_gc_enable;
 6. 导入数据到 TiDB Cloud。
 
     - 对于 TiDB Cloud Dedicated 集群，参见 [从云存储导入 CSV 文件到 TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)。
-    - 对于 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，参见 [从云存储导入 CSV 文件到 TiDB Cloud Starter 或 Essential](/tidb-cloud/import-csv-files-serverless.md)。
+    - 对于 TiDB Cloud Starter 或 TiDB Cloud Essential 实例，参见 [从云存储导入 CSV 文件到 TiDB Cloud Starter 或 Essential](/tidb-cloud/import-csv-files-serverless.md)。
 
 ## 同步增量数据
 
@@ -283,17 +283,17 @@ SELECT @@global.tidb_gc_enable;
 
 2. 授权 TiCDC 连接 TiDB Cloud。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters) 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源名称进入概览页。
     2. 在左侧导航栏点击 **Settings** > **Networking**。
     3. 在 **Networking** 页面点击 **Add IP Address**。
     4. 在弹窗中选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。此时 TiCDC 可以访问 TiDB Cloud。更多信息参见 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
-3. 获取下游 TiDB Cloud 集群的连接信息。
+3. 获取下游 TiDB Cloud 资源的连接信息。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters) 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud 资源名称进入概览页。
     2. 点击右上角 **Connect**。
     3. 在连接对话框中，**Connection Type** 下拉选择 **Public**，**Connect With** 下拉选择 **General**。
-    4. 从连接信息中获取集群的 host IP 地址和端口。更多信息参见 [通过公网连接](/tidb-cloud/connect-via-standard-connection.md)。
+    4. 从连接信息中获取 TiDB Cloud 资源的 host IP 地址和端口。更多信息参见 [通过公网连接](/tidb-cloud/connect-via-standard-connection.md)。
 
 4. 创建并运行增量同步任务。在上游集群运行如下命令：
 
@@ -317,7 +317,7 @@ SELECT @@global.tidb_gc_enable;
 
     更多信息参见 [TiCDC Changefeed 的 CLI 及配置参数](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)。
 
-5. 在上游集群重新开启 GC 机制。如果增量同步无报错或延迟，建议开启 GC 机制，恢复集群的垃圾回收。
+5. 在上游集群重新开启 GC 机制。如果增量同步无报错或延迟，建议开启 GC 机制，恢复上游集群的垃圾回收。
 
     运行以下命令，验证设置是否生效。
 
@@ -348,17 +348,17 @@ SELECT @@global.tidb_gc_enable;
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - 校验同步效果。向上游集群写入新记录，检查该记录是否同步到下游 TiDB Cloud 集群。
+    - 校验同步效果。向上游集群写入新记录，检查该记录是否同步到下游 TiDB Cloud 资源。
 
-7. 设置上下游集群的时区一致。TiDB Cloud 默认时区为 UTC。如果上下游集群时区不同，需要将两端时区设置为一致。
+7. 设置上下游的时区一致。TiDB Cloud 默认时区为 UTC。如果上下游时区不同，需要将上下游的时区设置为一致。
 
-    1. 在上游集群运行以下命令检查时区：
+    1. 在上游 TiDB 自建集群运行以下命令检查时区：
 
         ```sql
         SELECT @@global.time_zone;
         ```
 
-    2. 在下游集群运行以下命令设置时区：
+    2. 在下游 TiDB Cloud 资源运行以下命令设置时区：
 
         ```sql
         SET GLOBAL time_zone = '+08:00';
@@ -370,7 +370,7 @@ SELECT @@global.tidb_gc_enable;
         SELECT @@global.time_zone;
         ```
 
-8. 备份上游集群的 [查询绑定](/sql-plan-management.md)，并在下游集群恢复。你可以使用以下 SQL 备份查询绑定：
+8. 备份上游 TiDB 自建集群的 [查询绑定](/sql-plan-management.md)，并在下游 TiDB Cloud 资源恢复。你可以使用以下 SQL 备份查询绑定：
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
@@ -378,9 +378,9 @@ SELECT @@global.tidb_gc_enable;
 
     如果没有输出，说明上游集群未使用查询绑定，可以跳过此步骤。
 
-    获取到查询绑定后，在下游集群执行这些 SQL 以恢复查询绑定。
+    获取到查询绑定后，在下游 TiDB Cloud 资源执行这些 SQL 以恢复查询绑定。
 
-9. 备份上游集群的用户和权限信息，并在下游集群恢复。你可以使用以下脚本备份用户和权限信息。注意需将占位符替换为实际值。
+9. 备份上游 TiDB 自建集群的用户和权限信息，并在下游 TiDB Cloud 资源恢复。你可以使用以下脚本备份用户和权限信息。注意需将占位符替换为实际值。
 
     ```shell
     #!/bin/bash
@@ -409,4 +409,4 @@ SELECT @@global.tidb_gc_enable;
     backup_user_priv
     ```
     
-    获取到用户和权限信息后，在下游集群执行生成的 SQL 语句以恢复用户和权限信息。
+    获取到用户和权限信息后，在下游 TiDB Cloud 资源执行生成的 SQL 语句以恢复用户和权限信息。

@@ -17,19 +17,25 @@ TiDB Cloud 现在在集群级别管理 [Prometheus 集成](/tidb-cloud/monitor-p
 
 ### 步骤 1. 删除传统的项目级 Prometheus 集成（Beta）
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，使用左上角的下拉框切换到目标项目。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
 
-2. 在左侧导航栏，点击 **Project Settings** > **Integrations**。
+    > **Tip:**
+    >
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-3. 在 **Integrations** > **Integration to Prometheus (BETA)** 模块中，选择 **Scrape_config Files** 并点击 **Delete**。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
 
-4. 在弹出的对话框中，输入 `Delete` 以确认移除传统集成。
+3. 在左侧导航栏，点击 **Project Settings** 下的 **Integrations**。
+
+4. 在 **Integrations** > **Integration to Prometheus (BETA)** 模块中，选择 **Scrape_config Files** 并点击 **Delete**。
+
+5. 在弹出的对话框中，输入 `Delete` 以确认移除传统集成。
 
 ### 步骤 2. 为每个集群创建新的集群级 Prometheus 集成
 
 请对项目中的每个 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群重复以下步骤。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群名称进入其概览页面。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Dedicated 集群的名称进入其概览页面。
 
 2. 在左侧导航栏，点击 **Settings** > **Integrations**。
 

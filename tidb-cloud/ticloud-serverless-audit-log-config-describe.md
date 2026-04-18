@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log config describe` 的参考文档。"
 
 # ticloud serverless audit-log config describe
 
-描述 TiDB Cloud Essential 集群的数据库审计日志配置。
+描述 TiDB Cloud Essential 实例的数据库审计日志配置。
 
 ```shell
 ticloud serverless audit-log config describe [flags]

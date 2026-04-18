@@ -20,18 +20,17 @@ SQL 编辑器推荐的使用场景如下：
 ## 限制
 
 - AI 生成的 SQL 查询可能并非 100% 准确，你可能需要对其进行优化。
-- SQL 编辑器仅支持部署在 AWS 上、版本为 v6.5.0 及以上的 TiDB 集群。
-- SQL 编辑器仅适用于部署在 AWS 上的 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 集群。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL 编辑器和 Chat2Query，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
+- SQL 编辑器仅适用于部署在 AWS 上的 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL 编辑器和 Chat2Query，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
 
 ## 访问 SQL 编辑器
 
-1. 进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击你的集群名称，然后在左侧导航栏点击 **SQL Editor**。
+2. 点击你的 {{{ .starter }}} 实例或 TiDB Cloud Dedicated 集群名称，然后在左侧导航栏点击 **SQL Editor**。
 
     > **注意：**
     >
@@ -168,7 +167,7 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
 ## 从 SQL 文件生成 endpoint
 
-对于 TiDB 集群，TiDB Cloud 提供了 [Data Service (beta)](/tidb-cloud/data-service-overview.md) 功能，使你可以通过自定义 API endpoint 以 HTTPS 请求方式访问 TiDB Cloud 数据。在 SQL 编辑器中，你可以通过以下步骤从 SQL 文件生成 Data Service (beta) 的 endpoint：
+TiDB Cloud 提供了 [Data Service (beta)](/tidb-cloud/data-service-overview.md) 功能，使你可以通过自定义 API endpoint 以 HTTPS 请求方式访问 TiDB Cloud 数据。在 SQL 编辑器中，你可以通过以下步骤从 SQL 文件生成 Data Service (beta) 的 endpoint：
 
 1. 将光标移到文件名上，点击文件名旁的 **...**，然后选择 **Generate endpoint**。
 2. 在 **Generate endpoint** 对话框中，选择你要为其生成 endpoint 的 Data App，并输入 endpoint 名称。

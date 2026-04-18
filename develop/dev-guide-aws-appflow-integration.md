@@ -8,9 +8,9 @@ aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide
 
 [Amazon AppFlow](https://aws.amazon.com/appflow/) 是一项全托管的 API 集成 service，可用于将你的 SaaS 应用程序与 AWS service 连接，并安全地传输数据。通过 Amazon AppFlow，你可以在 TiDB 与多种数据提供方之间导入和导出数据，例如 Salesforce、Amazon S3、LinkedIn 和 GitHub。更多信息请参见 AWS 文档中的 [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)。
 
-本文档介绍如何将 TiDB 集成到 Amazon AppFlow，并以集成 TiDB Cloud Starter cluster 为例。
+本文档介绍如何将 TiDB 集成到 Amazon AppFlow，并以集成 {{{ .starter }}} 实例为例。
 
-如果你还没有 TiDB cluster，可以创建一个 [TiDB Cloud Starter](https://tidbcloud.com/console/clusters) cluster，该 cluster 免费且大约 30 秒即可创建完成。
+如果你还没有 {{{ .starter }}} 实例，可以按照 [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) 创建一个，该实例免费且大约 30 秒即可创建完成。
 
 ## 前置条件
 
@@ -149,7 +149,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     ```
 
 5. 创建好 `sf_account` 表后，点击 **Connect**，会弹出连接对话框。
-6. 在 **Connect to TiDB-Connector** 对话框中，输入 TiDB cluster 的连接属性。如果你使用 TiDB Cloud Starter cluster，需要将 **TLS** 选项设置为 `Yes`，以便 TiDB connector 使用 TLS 连接。然后点击 **Connect**。
+6. 在 **Connect to TiDB-Connector** 对话框中，输入 {{{ .starter }}} 实例的连接属性。对于 {{{ .starter }}}，需要将 **TLS** 选项设置为 `Yes`，以便 TiDB connector 使用 TLS 连接。然后点击 **Connect**。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 

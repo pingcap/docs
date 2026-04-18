@@ -9,7 +9,7 @@ TiDB Cloud 为你提供了通过 Zoom、[Slack](/tidb-cloud/monitor-alert-slack.
 
 > **注意：**
 >
-> 目前，报警订阅功能适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> 目前，报警订阅功能适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
 ## 前提条件
 
@@ -45,35 +45,42 @@ TiDB Cloud 为你提供了通过 Zoom、[Slack](/tidb-cloud/monitor-alert-slack.
 
 ### 步骤 3. 从 TiDB Cloud 订阅
 
-报警通知订阅方式根据集群计划有所不同。
+报警通知订阅方式根据[你的 TiDB Cloud 计划](/tidb-cloud/select-cluster-tier.md)有所不同。
 
 <CustomContent plan="dedicated">
 
+要订阅 {{{ .dedicated }}} 集群的报警通知，请按照以下步骤操作：
+
 > **提示：**
 >
-> 报警订阅针对当前项目下的所有报警。如果你在该项目下有多个集群，只需订阅一次即可。
+> 对于 {{{ .dedicated }}}，报警订阅针对当前项目下的所有报警。如果你在该项目下有多个 {{{ .dedicated }}} 集群，只需订阅一次即可。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Alert Subscription**。
-3. 在 **Alert Subscription** 页面，点击右上角的 **Add Subscriber**。
-4. 在 **Subscriber Type** 下拉列表中选择 **Zoom**。
-5. 在 **Name** 字段输入名称，在 **URL** 字段输入你的 Zoom webhook URL，在 **Token** 字段输入 verification token。
-6. 点击 **Test Connection**。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
+3. 在左侧导航栏，点击 **Project Settings** 下的 **Alert Subscription**。
+4. 在 **Alert Subscription** 页面，点击右上角的 **Add Subscriber**。
+5. 在 **Subscriber Type** 下拉列表中选择 **Zoom**。
+6. 在 **Name** 字段输入名称，在 **URL** 字段输入你的 Zoom webhook URL，在 **Token** 字段输入 verification token。
+7. 点击 **Test Connection**。
 
     - 如果测试成功，会显示 **Save** 按钮。
     - 如果测试失败，会显示错误信息。请根据提示排查并重试连接。
 
-7. 点击 **Save** 完成订阅。
+8. 点击 **Save** 完成订阅。
+
+你也可以在目标 {{{ .dedicated }}} 集群的 **Alert** 页面右上角点击 **Subscribe**，会跳转到 **Alert Subscription** 页面。
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
+要订阅 {{{ .essential }}} 实例的报警通知，请按照以下步骤操作：
+
 > **提示：**
 >
-> 报警订阅针对当前集群的所有报警。如果你有多个集群，需要分别为每个集群单独订阅。
+> 对于 {{{ .essential }}}，报警订阅针对当前实例下的所有报警。如果你有多个 {{{ .essential }}} 实例，需要分别为每个实例单独订阅。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标集群。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .essential }}} 实例的名称进入其概览页面。
 2. 在左侧导航栏，点击 **Settings** > **Alert Subscription**。
 3. 在 **Alert Subscription** 页面，点击右上角的 **Add Subscriber**。
 4. 在 **Subscriber Type** 下拉列表中选择 **Zoom**。
@@ -85,28 +92,29 @@ TiDB Cloud 为你提供了通过 Zoom、[Slack](/tidb-cloud/monitor-alert-slack.
 
 7. 点击 **Save** 完成订阅。
 
-</CustomContent>
+你也可以在目标 {{{ .essential }}} 实例的 **Alert** 页面右上角点击 **Subscribe**，会跳转到 **Alert Subscription** 页面。
 
-你也可以在集群的 **Alert** 页面右上角点击 **Subscribe**，会跳转到 **Alert Subscription** 页面。
+</CustomContent>
 
 如果报警条件持续未变，报警会每隔三小时发送一次通知。
 
 ## 取消订阅报警通知
 
-如果你不再希望接收报警通知，请按照以下步骤操作。具体步骤根据集群计划有所不同。
+如果你不再希望接收报警通知，请按照以下步骤操作。具体步骤根据[你的 TiDB Cloud 计划](/tidb-cloud/select-cluster-tier.md)有所不同。
 
 <CustomContent plan="dedicated">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Alert Subscription**。
-3. 在 **Alert Subscription** 页面，找到你要删除的订阅者所在行，然后点击 **...** > **Unsubscribe**。
-4. 点击 **Unsubscribe** 确认取消订阅。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
+3. 在左侧导航栏，点击 **Project Settings** 下的 **Alert Subscription**。
+4. 在 **Alert Subscription** 页面，找到你要删除的订阅者所在行，然后点击 **...** > **Unsubscribe**。
+5. 点击 **Unsubscribe** 确认取消订阅。
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标集群。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .essential }}} 实例的名称进入其概览页面。
 2. 在左侧导航栏，点击 **Settings** > **Alert Subscription**。
 3. 在 **Alert Subscription** 页面，找到你要删除的订阅者所在行，然后点击 **...** > **Unsubscribe**。
 4. 点击 **Unsubscribe** 确认取消订阅。

@@ -40,4 +40,4 @@ TiDB Cloud 会将 TiKV 节点均匀部署在你选择的区域内的 3 个可用
 
 TiFlash 负责存储列存数据。TiFlash 会实时从 TiKV 同步数据，并原生支持实时分析型工作负载。你可以为 TiFlash 配置节点数量、vCPU、内存（RAM）和存储空间。
 
-TiDB Cloud 会将 TiFlash 节点均匀部署在一个区域内的不同可用区。建议你在每个 TiDB Cloud 集群中至少配置两个 TiFlash 节点，并为生产环境中的数据创建至少两个副本，以实现高可用性。
+TiDB Cloud 会将 TiFlash 节点均匀部署在一个区域内的不同可用区。建议你在每个 TiDB Cloud Dedicated 集群中至少配置两个 TiFlash 节点，并为生产环境中的数据创建至少两个副本，以实现高可用性。

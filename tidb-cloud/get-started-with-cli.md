@@ -1,15 +1,15 @@
 ---
 title: TiDB Cloud CLI 快速入门
-summary: 了解如何通过 TiDB Cloud CLI 管理 TiDB Cloud 资源。
+summary: 了解如何通过 TiDB Cloud CLI 管理 {{{ .starter }}} 和 Essential 实例。
 ---
 
 # TiDB Cloud CLI 快速入门
 
 TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)，你可以通过在终端输入几行命令与 TiDB Cloud 进行交互。例如，你可以使用 `ticloud` 轻松完成以下操作：
 
-- 创建、删除和列出你的集群。
-- 向你的集群导入数据。
-- 从你的集群导出数据。
+- 创建、删除和列出你的 {{{ .starter }}} 或 Essential 实例。
+- 向你的 {{{ .starter }}} 或 Essential 实例导入数据。
+- 从你的 {{{ .starter }}} 或 Essential 实例导出数据。
 
 > **Note:**
 >
@@ -87,11 +87,11 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 
 ## 快速入门
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始使用 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Starter 集群。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始使用 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Starter 实例。
 
 ### 创建用户配置文件或登录 TiDB Cloud
 
-在使用 TiDB Cloud CLI 创建集群之前，你需要先创建用户配置文件或登录 TiDB Cloud。
+在使用 TiDB Cloud CLI 创建 TiDB Cloud Starter 实例之前，你需要先创建用户配置文件或登录 TiDB Cloud。
 
 - 使用你的 [TiDB Cloud API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) 创建用户配置文件：
 
@@ -115,9 +115,9 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 >
 > 在上述两种方式中，TiDB Cloud API key 的优先级高于 OAuth token。如果两者都存在，将优先使用 API key。
 
-### 创建 TiDB Cloud Starter 集群
+### 创建 {{{ .starter }}} 实例 {#create-a-starter-instance}
 
-要创建 TiDB Cloud Starter 集群，输入以下命令，并根据 CLI 提示填写所需信息：
+要创建一个 {{{ .starter }}} 实例，请输入以下命令，然后根据 CLI 提示提供所需信息：
 
 ```shell
 ticloud serverless create

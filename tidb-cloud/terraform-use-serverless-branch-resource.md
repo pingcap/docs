@@ -20,7 +20,7 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
-- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
 ## 创建 TiDB Cloud Starter 或 TiDB Cloud Essential 分支
 

@@ -177,9 +177,11 @@ TiDB 支持外键约束检查，由系统变量 [`foreign_key_checks`](/system-v
 
 ## 锁定
 
-在对子表执行 `INSERT` 或 `UPDATE` 时，TiDB 会检查对应的外键值是否存在于父表中，并锁定父表中的行，以避免被其他操作删除或修改，违反外键约束。锁定行为等同于对父表中外键值所在行执行 `SELECT FOR UPDATE`。
+当你对子表执行 `INSERT` 或 `UPDATE` 时，外键约束会检查对应的外键值是否存在于父表中，并锁定父表中对应的行，以防止其他操作删除该外键值而违反外键约束。
 
-由于 TiDB 目前不支持 `LOCK IN SHARE MODE`，如果子表接受大量并发写入且大部分引用的外键值相同，可能会出现严重的锁冲突。建议在大量写入子表数据时禁用 [`foreign_key_checks`](/system-variables.md#foreign_key_checks)。
+默认情况下，在悲观事务中，外键检查对父表中行的锁定行为等同于对对应行执行 `SELECT ... FOR UPDATE` 锁定读取（即获取排他锁）。在对子表进行高并发写入的场景中，如果大量事务反复引用父表中的同一行，可能会出现严重的锁冲突。
+
+你可以启用系统变量 [`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856)，让外键检查使用共享锁。共享锁允许多个事务同时对父表中的同一行执行外键检查，从而减少锁冲突并提升对子表并发写入的性能。
 
 ## 外键的定义和元数据
 
@@ -303,7 +305,7 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
-- [DM](/dm/dm-overview.md) 不支持外键。在将数据复制到 TiDB 时，DM 会禁用下游 TiDB 的 [`foreign_key_checks`](/system-variables.md#foreign_key_checks)。因此，外键引起的级联操作不会从上游复制到下游，可能导致数据不一致。
+- [DM](/dm/dm-overview.md)：从 v8.5.6 开始，DM 以实验特性的形式支持复制使用外键约束的表。支持的场景和限制请参见 [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)。在早于 v8.5.6 的版本中，DM 在将数据复制到 TiDB 时会禁用下游 TiDB 的 [`foreign_key_checks`](/system-variables.md#foreign_key_checks) 系统变量，因此级联操作不会复制到下游集群。
 - [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 兼容外键。早期版本的 TiCDC 在复制带有外键的表时可能会报错。建议在使用 v6.6.0 之前的 TiCDC 时，禁用下游 TiDB 的 `foreign_key_checks`。
 - [BR](/br/backup-and-restore-overview.md) v6.6.0 兼容外键。早期版本的 BR 在还原带有外键的表到 v6.6.0 或更高版本的集群时可能会报错。建议在使用早于 v6.6.0 的 BR 时，先禁用下游 TiDB 的 `foreign_key_checks`。
 - 使用 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 时，如果目标表使用了外键，建议在导入数据前禁用下游 TiDB 的 `foreign_key_checks`。对于早于 v6.6.0 的版本，禁用此系统变量不会生效，需授予下游数据库用户 `REFERENCES` 权限，或提前在下游数据库中手动创建目标表，以确保数据导入顺利。

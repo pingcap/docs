@@ -106,7 +106,8 @@ TableSample ::=
 
 > **注意：**
 >
-> 从 v6.6.0 版本开始，TiDB 支持 [Resource Control](/tidb-resource-control-ru-groups.md)。你可以利用此功能在不同资源组中以不同优先级执行 SQL 语句。通过为这些资源组配置合适的配额和优先级，可以获得更好的调度控制。当启用资源控制时，语句优先级（`HIGH_PRIORITY`）将不再生效。建议使用 [Resource Control](/tidb-resource-control-ru-groups.md) 来管理不同 SQL 语句的资源使用。
+> - 从 v8.5.6 版本开始，TiDB 支持在 `FOR UPDATE OF` 子句中使用表别名。为保持向后兼容性，在定义了别名时，你仍然可以引用基表名，但这会触发一条警告，建议使用显式别名。当查询涉及不同数据库中多个同名表时（例如，`FROM db1.t, db2.t FOR UPDATE OF t`），TiDB 现在会按照 `FROM` 子句中的顺序从左到右匹配目标表，而不是根据当前数据库上下文进行匹配。为避免歧义，建议你在 `FOR UPDATE OF` 子句中指定数据库名或使用别名。
+> - 从 v6.6.0 版本开始，TiDB 支持 [Resource Control](/tidb-resource-control-ru-groups.md)。你可以利用此功能在不同资源组中以不同优先级执行 SQL 语句。通过为这些资源组配置合适的配额和优先级，可以获得更好的调度控制。当启用资源控制时，语句优先级（`HIGH_PRIORITY`）将不再生效。建议使用 [Resource Control](/tidb-resource-control-ru-groups.md) 来管理不同 SQL 语句的资源使用。
 
 ## 示例
 

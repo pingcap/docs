@@ -5,7 +5,7 @@ summary: "`ticloud serverless export download` 的参考文档。"
 
 # ticloud serverless export download
 
-从 TiDB Cloud Serverless 集群下载导出的数据到本地存储：
+从 TiDB Cloud Serverless 实例下载导出的数据到本地存储：
 
 ```shell
 ticloud serverless export download [flags]

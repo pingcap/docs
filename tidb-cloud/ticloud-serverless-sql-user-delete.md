@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user delete` 的参考文档。"
 
 # ticloud serverless sql-user delete
 
-删除一个 TiDB Cloud Serverless SQL 用户：
+删除一个 TiDB Cloud Serverless 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user delete [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user delete [flags]
 
 ## 示例
 
-以交互模式删除一个 TiDB Cloud Serverless SQL 用户：
+以交互模式删除一个 TiDB Cloud Serverless 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user delete
 ```
 
-以非交互模式删除一个 TiDB Cloud Serverless SQL 用户：
+以非交互模式删除一个 TiDB Cloud Serverless 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user delete -c <cluster-id> --user <user-name>

@@ -5,21 +5,21 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Starter 或 T
 
 # 从云存储将示例数据（SQL 文件）导入到 TiDB Cloud Starter 或 Essential
 
-本文档介绍如何通过 UI 将示例数据（SQL 文件）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。所使用的示例数据为 Capital Bikeshare 的系统数据，根据 Capital Bikeshare 数据许可协议发布。在导入示例数据之前，你需要拥有一个 TiDB 集群。
+本文档介绍如何通过 UI 将示例数据（SQL 文件）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。所使用的示例数据为 Capital Bikeshare 的系统数据，根据 Capital Bikeshare 数据许可协议发布。在导入示例数据之前，你需要拥有一个 {{{ .starter }}} 或 Essential 实例。
 
 > **注意：**
 >
 > 本文档中使用的示例数据来自 Amazon S3。
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 {{{ .starter }}} 或 Essential 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}} 或 Essential 实例的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -41,7 +41,7 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Starter 或 T
 
 8. 当导入进度显示为 **Completed** 时，检查已导入的表。
 
-连接到集群后，你可以在终端中运行一些查询来检查结果，例如：
+连接到 {{{ .starter }}} 或 Essential 实例后，你可以在终端中运行一些查询来检查结果，例如：
 
 1. 获取起点为 "12th & U St NW" 的骑行记录：
 

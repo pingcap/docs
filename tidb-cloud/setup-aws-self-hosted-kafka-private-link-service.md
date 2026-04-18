@@ -39,8 +39,8 @@ aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3. 从你的 TiDB Cloud Dedicated 集群获取 Kafka 部署信息。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入 TiDB 集群的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
-    2. 在概览页面，找到 TiDB 集群的 Region。确保你的 Kafka 集群将部署在同一 Region。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 {{{ .dedicated }}} 集群的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
+    2. 在概览页面，找到你的 {{{ .dedicated }}} 集群所在的 Region。确保你的 Kafka 集群将部署在同一 Region。
     3. 点击 **Create Changefeed**。
         1. 在 **Destination** 选择 **Kafka**。
         2. 在 **Connectivity Method** 选择 **Private Link**。
@@ -67,8 +67,8 @@ aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3. 从你的 TiDB Cloud Premium 实例获取 Kafka 部署信息。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入 TiDB 实例的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
-    2. 在概览页面，找到 TiDB 实例的 Region。确保你的 Kafka 集群将部署在同一 Region。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入 {{{ .premium }}} 实例的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
+    2. 在概览页面，找到 {{{ .premium }}} 实例所在的 Region。确保你的 Kafka 集群将部署在同一 Region。
     3. 创建 changefeed，请参考以下教程：
 
         - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
@@ -88,9 +88,9 @@ aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 ## 步骤 1. 搭建 Kafka 集群
 
-如果你需要部署新集群，请参考 [部署新 Kafka 集群](#deploy-a-new-kafka-cluster)。
+如果你需要部署新的 Kafka 集群，请参考 [部署新 Kafka 集群](#deploy-a-new-kafka-cluster)。
 
-如果你需要暴露已有集群，请参考 [重配置运行中的 Kafka 集群](#reconfigure-a-running-kafka-cluster)。
+如果你需要暴露现有的 Kafka 集群，请参考 [重配置运行中的 Kafka 集群](#reconfigure-a-running-kafka-cluster)。
 
 ### 部署新 Kafka 集群
 
@@ -552,12 +552,12 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 <CustomContent plan="dedicated">
 
-确保你的 Kafka 集群部署在与 TiDB 集群相同的 Region 和 AZ。如果有 broker 在不同 AZ，请将其迁移到正确的 AZ。
+确保你的 Kafka 集群部署在与 {{{ .dedicated }}} 集群相同的 Region 和 AZ。如果有 broker 在不同 AZ，请将其迁移到正确的 AZ。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-确保你的 Kafka 集群部署在与 TiDB 实例相同的 Region 和 AZ。如果有 broker 在不同 AZ，请将其迁移到正确的 AZ。
+确保你的 Kafka 集群部署在与 {{{ .premium }}} 实例相同的 Region 和 AZ。如果有 broker 在不同 AZ，请将其迁移到正确的 AZ。
 
 </CustomContent>
 
@@ -724,7 +724,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         - `usw2-az2` 及其 `broker-usw2-az2` 子网
         - `usw2-az3` 及其 `broker-usw2-az3` 子网
     - **Security groups**: 新建安全组，规则如下。
-        - 入站规则允许来自 Kafka VPC 的所有 TCP：Type - `{ports of target groups}`，如 `9092-9095`；Source - `{TiDB Cloud 的 CIDR}`。获取 Region 内 TiDB Cloud 的 CIDR，请在 [TiDB Cloud 控制台](https://tidbcloud.com) 左上角切换到目标项目，点击 **Project Settings** > **Network Access**，再点击 **Project CIDR** > **AWS**。
+        - 入站规则允许来自 Kafka VPC 的所有 TCP：Type - `{ports of target groups}`，如 `9092-9095`；Source - `{TiDB Cloud 的 CIDR}`。获取 Region 内 TiDB Cloud 的 CIDR，请在 [TiDB Cloud 控制台](https://tidbcloud.com)中进入你的组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击 **Project view** 页签，找到目标项目，点击项目的 <MDSvgIcon name="icon-project-settings" />，在 **Project Settings** 下点击 **Network Access**，然后点击 **Project CIDR** > **AWS**。
         - 出站规则允许所有 TCP 到 Kafka VPC：Type - `All TCP`；Destination - `Anywhere-IPv4`
     - Listeners and routing:
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`
@@ -765,7 +765,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ## 步骤 3. 从 TiDB Cloud 连接
 
-1. 回到 [TiDB Cloud 控制台](https://tidbcloud.com)，为 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 创建 changefeed，通过 **Private Link** 连接到 Kafka 集群。详细操作请参见 [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)。
+1. 回到 [TiDB Cloud 控制台](https://tidbcloud.com)，为 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent> 创建 changefeed，通过 **Private Link** 连接到 Kafka 集群。详细操作请参见 [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)。
 
 2. 当你进行 **Configure the changefeed target > Connectivity Method > Private Link** 配置时，按下表填写对应字段，其他字段按需填写。
 

@@ -277,7 +277,7 @@ mysql> DESC t1;
 
     >**注意：**
     >
-    > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+    > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 实例支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 
 * 在分区表中，将 `PRIMARY KEY` 或 `UNIQUE INDEX` 设置为 [全局索引](/global-indexes.md)（通过 `GLOBAL` 索引选项）是 TiDB 的扩展功能，并不兼容 MySQL。
 

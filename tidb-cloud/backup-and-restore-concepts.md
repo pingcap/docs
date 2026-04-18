@@ -5,15 +5,15 @@ summary: 了解 TiDB Cloud 的备份与恢复相关概念。
 
 # 备份与恢复
 
-TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支持集群数据的备份与恢复，确保业务的连续性。
+TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支持数据的备份与恢复，确保业务的连续性。
 
 ## 自动备份
 
-对于 TiDB Cloud 集群，默认会自动进行快照备份，并根据你的备份保留策略进行存储。
+在 TiDB Cloud 中，默认会自动进行快照备份，并根据你的备份保留策略进行存储。
 
 欲了解更多信息，请参见以下内容：
 
-- [TiDB Cloud Starter 和 TiDB Cloud Essential 集群的自动备份](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+- [TiDB Cloud Starter 和 TiDB Cloud Essential 实例的自动备份](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
 - [TiDB Cloud Dedicated 集群的自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## 手动备份
@@ -30,7 +30,7 @@ TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支
 
 ## 时间点恢复
 
-时间点恢复是一项功能，允许你将任意时间点的数据恢复到一个新集群。你可以用它来：
+时间点恢复是一项功能，允许你将任意时间点的数据恢复到一个新的 TiDB 集群或实例。你可以用它来：
 
 - 降低灾难恢复中的 RPO。
 - 通过恢复到错误事件发生前的时间点，解决数据写入错误的问题。
@@ -38,6 +38,6 @@ TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支
 
 如果你想执行时间点恢复，请注意以下事项：
 
-- 对于 TiDB Cloud Starter 集群，不支持时间点恢复。
-- 对于 TiDB Cloud Essential 集群，你可以恢复到最近 30 天内的任意时间点。欲了解更多信息，请参见 [恢复模式](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)。
+- 对于 TiDB Cloud Starter 实例，不支持时间点恢复。
+- 对于 TiDB Cloud Essential 实例，你可以恢复到最近 30 天内的任意时间点。欲了解更多信息，请参见 [恢复模式](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)。
 - 对于 TiDB Cloud Dedicated 集群，你需要提前 [开启 PITR](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)。

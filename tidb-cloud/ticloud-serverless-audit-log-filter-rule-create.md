@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule create` 的参考文档。"
 
 # ticloud serverless audit-log filter-rule create
 
-为 TiDB Cloud Essential 集群创建一个审计日志过滤规则。
+为 TiDB Cloud Essential 实例创建一个审计日志过滤规则。
 
 ```shell
 ticloud serverless audit-log filter-rule create [flags]

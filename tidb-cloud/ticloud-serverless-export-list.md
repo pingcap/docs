@@ -5,7 +5,7 @@ summary: "`ticloud serverless export list` 的参考文档。"
 
 # ticloud serverless export list
 
-列出 TiDB Cloud Serverless 集群的数据导出任务：
+列出 {{{ .starter }}} 和 {{{ .essential }}} 实例的数据导出任务：
 
 ```shell
 ticloud serverless export list [flags]
@@ -25,13 +25,13 @@ ticloud serverless export ls [flags]
 ticloud serverless export list
 ```
 
-以非交互模式列出指定集群的导出任务：
+以非交互模式列出指定 {{{ .starter }}} 或 Essential 实例的导出任务：
 
 ```shell
 ticloud serverless export list -c <cluster-id>
 ```
 
-以非交互模式并以 JSON 格式列出指定集群的导出任务：
+以非交互模式并以 JSON 格式列出指定 {{{ .starter }}} 或 Essential 实例的导出任务：
 
 ```shell
 ticloud serverless export list -c <cluster-id> -o json

@@ -16,14 +16,14 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 ### 审计日志
 
-- [数据库审计日志](/tidb-cloud/essential-database-audit-logging.md) 目前在 TiDB Cloud Starter 集群中不可用。
+- [数据库审计日志](/tidb-cloud/essential-database-audit-logging.md) 目前在 TiDB Cloud Starter 实例中不可用。
 
 ### 连接
 
-- 仅支持 [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) 和 [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。你无法使用 [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) 连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+- 仅支持 [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) 和 [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。你无法使用 [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) 连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 - Private Endpoint 不支持 [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
 - 如果你的数据库 client 连接保持打开超过 30 分钟，可能会被意外断开。这种情况可能发生在 TiDB server 关闭、restart 或维护期间，可能导致应用程序中断。为避免此问题，请配置最大连接生命周期。建议从 5 分钟开始，如果影响 tail latency 可逐步增加。更多信息参见 [连接池推荐设置](/develop/dev-guide-connection-parameters.md)。
-- 对于 TiDB Cloud Starter 集群，最多支持 400 个并发连接。如果你设置了 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md)，此限制提升至 5,000。
+- 对于 TiDB Cloud Starter 实例，最多支持 400 个并发连接。如果你设置了 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md)，此限制提升至 5,000。
 
 > **注意：**
 >
@@ -31,7 +31,7 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 ### 加密
 
-- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中持久化的数据，使用管理你集群的云服务商提供的加密工具进行加密。对于 TiDB Cloud Starter（spending limit > 0）和 TiDB Cloud Essential 集群，在集群创建过程中可选择启用第二层加密，为默认静态加密之外提供额外的安全保障。
+- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 实例中持久化的数据，使用管理你实例的云服务商提供的加密工具进行加密。对于 TiDB Cloud Starter（spending limit > 0）和 TiDB Cloud Essential 实例，在实例创建过程中可选择启用第二层加密，为默认静态加密之外提供额外的安全保障。
 - 目前不支持使用 [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)。
 
 ### 维护窗口
@@ -64,9 +64,9 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 ## 使用配额
 
-对于 TiDB Cloud 中的每个组织，默认最多可创建 5 个 [免费 TiDB Cloud Starter 集群](/tidb-cloud/select-cluster-tier.md#starter)。如需创建更多 TiDB Cloud Starter 集群，你需要添加信用卡并为使用量 [设置每月 spending limit](/tidb-cloud/manage-serverless-spend-limit.md)。
+对于 TiDB Cloud 中的每个组织，默认最多可创建 5 个 [免费 TiDB Cloud Starter 实例](/tidb-cloud/select-cluster-tier.md#starter)。如需创建更多 TiDB Cloud Starter 实例，你需要添加信用卡并为使用量 [设置每月 spending limit](/tidb-cloud/manage-serverless-spend-limit.md)。
 
-对于组织中的前 5 个 TiDB Cloud Starter 集群，TiDB Cloud 为每个集群提供如下免费使用配额：
+对于组织中的前 5 个 TiDB Cloud Starter 实例，TiDB Cloud 为每个实例提供如下免费使用配额：
 
 - 行存储：5 GiB
 - 列存储：5 GiB
@@ -74,10 +74,10 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 Request Unit (RU) 是用于衡量 query 或 transaction 资源消耗的单位。它是一种指标，可以帮助你估算处理特定 request 在数据库中所需的计算资源。request unit 也是 TiDB Cloud Starter service 的计费单位。
 
-当集群达到其使用配额后，将立即拒绝所有新的连接尝试，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新一月开始时使用量被重置。已建立的连接在达到配额前会保持活跃，但会受到限流。
+当 TiDB Cloud Starter 实例达到其使用配额后，将立即拒绝所有新的连接尝试，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新一月开始时使用量被重置。已建立的连接在达到配额前会保持活跃，但会受到限流。
 
 如需了解不同资源（包括 read、write、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参见 [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 
-如果你希望创建配额更高的 TiDB Cloud Starter 集群，可以在集群创建页面设置每月 spending limit。更多信息参见 [创建 TiDB Cloud Starter 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+如果你希望创建配额更高的 TiDB Cloud Starter 实例，可以在 TiDB Cloud Starter 实例创建页面设置每月 spending limit。更多信息参见 [创建 TiDB Cloud Starter 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-创建 TiDB Cloud Starter 集群后，你仍可在集群概览页面查看和 edit spending limit。更多信息参见 [管理 TiDB Cloud Starter 集群的 Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)。
+创建 TiDB Cloud Starter 实例后，你仍可在 TiDB Cloud Starter 实例的概览页面查看和 edit spending limit。更多信息参见 [管理 TiDB Cloud Starter 实例的 Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)。

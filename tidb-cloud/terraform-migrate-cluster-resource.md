@@ -43,7 +43,7 @@ terraform state rm ${your_target_cluster_resource}
 
 ## 第 4 步：为新的无服务器或专用集群资源添加 import 块
 
-- 如果你的目标集群是 TiDB Cloud Serverless，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate) 获取的集群 ID：
+- 如果你的目标是一个 TiDB Cloud Serverless 实例，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate) 获取的集群 ID：
 
     ```
     # TiDB Cloud Serverless
@@ -53,7 +53,7 @@ terraform state rm ${your_target_cluster_resource}
     }
     ```
 
-- 如果你的目标集群是 TiDB Cloud Dedicated，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate) 获取的集群 ID：
+- 如果你的目标是一个 TiDB Cloud Dedicated 集群，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate) 获取的集群 ID：
 
     ```
     # TiDB Cloud Dedicated

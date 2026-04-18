@@ -10,83 +10,120 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Dedicated。
 <SimpleTab>
 <div label="Amazon S3">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 TiDB Cloud Dedicated 集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 TiDB Cloud Dedicated 集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
-2. 选择 **Import data from Cloud Storage**。
+2. 点击 **Import data from Cloud Storage**。
 
-3. 在 **Import Data from Amazon S3** 页面，配置以下源数据信息：
+3. 在 **Import Data from Cloud Storage** 页面，提供以下信息：
 
-    - **Included Schema Files**：对于示例数据，选择 **Yes**。
-    - **Data Format**：选择 **SQL**。
-    - **Folder URI** 或 **File URI**：输入示例数据的 URI `s3://tidbcloud-sample-data/data-ingestion/`。
-    - **Bucket Access**：对于示例数据，只能使用 Role ARN 访问其 bucket。对于你自己的数据，可以使用 AWS access key 或 Role ARN 访问你的 bucket。
-        - **AWS Role ARN**：输入 `arn:aws:iam::801626783489:role/import-sample-access`。
+    - **Storage Provider**：选择 **Amazon S3**。
+    - **Source URI**：输入示例数据的 URI `s3://tidbcloud-sample-data/data-ingestion/`。
+    - **Credentials**：选择 **AWS Role ARN**，然后输入 `arn:aws:iam::801626783489:role/import-sample-access`。
         - **AWS Access Key**：对于示例数据跳过此项。
 
-4. 点击 **Connect** > **Start Import**。
+4. 点击 **Next**。
+
+5. 在 **Destination Mapping** 部分，保持选中 **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**，然后选择 **SQL** 作为数据格式。
+
+6. 点击 **Next**。TiDB Cloud 会扫描源文件。
+
+7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+
+8. 当导入进度显示为 **Completed** 时，检查已导入的表。
 
 </div>
 <div label="Google Cloud">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 TiDB Cloud Dedicated 集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 TiDB Cloud Dedicated 集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
-2. 选择 **Import data from Cloud Storage**。
+2. 点击 **Import data from Cloud Storage**。
 
-3. 在 **Import Data from GCS** 页面，配置以下源数据信息：
+3. 在 **Import Data from Cloud Storage** 页面，提供以下信息：
 
-    - **Included Schema Files**：对于示例数据，选择 **Yes**。
-    - **Data Format**：选择 **SQL**。
-    - **Folder URI** 或 **File URI**：输入示例数据的 URI `gs://tidbcloud-samples-us-west1/`。
-    - **Bucket Access**：你可以使用 GCS IAM Role 访问你的 bucket。更多信息，参见 [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)。
+    - **Storage Provider**：选择 **Google Cloud Storage**。
+    - **Source URI**：输入示例数据的 URI `gs://tidbcloud-samples-us-west1/`。
+    - **Google Cloud Service Account ID**：TiDB Cloud 会在此页面显示一个 Google Cloud Service Account ID。使用示例数据 URI 时，你可以直接继续。
 
-    如果 bucket 的区域与你的集群不同，请确认跨区域合规性。
+4. 点击 **Next**。
 
-4. 点击 **Connect** > **Start Import**。
+5. 在 **Destination Mapping** 部分，保持选中 **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**，然后选择 **SQL** 作为数据格式。
+
+6. 点击 **Next**。TiDB Cloud 会扫描源文件。
+
+7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+
+8. 当导入进度显示为 **Completed** 时，检查已导入的表。
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 TiDB Cloud Dedicated 集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 TiDB Cloud Dedicated 集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
-2. 选择 **Import data from Cloud Storage**。
+2. 点击 **Import data from Cloud Storage**。
 
-3. 在 **Import Data from Azure Blob Storage** 页面，配置以下源数据信息：
+3. 在 **Import Data from Cloud Storage** 页面，提供以下信息：
 
-    - **Included Schema Files**：对于示例数据，选择 **Yes**。
-    - **Data Format**：选择 **SQL**。
-    - **Folder URI**：输入示例数据的 URI `https://tcidmsampledata.blob.core.windows.net/sql/`。
+    - **Storage Provider**：选择 **Azure Blob Storage**。
+    - **Source URI**：输入示例数据的 URI `https://tcidmsampledata.blob.core.windows.net/sql/`。
+    - **Connectivity Method**：选择 TiDB Cloud 连接到 Azure Blob Storage 的方式。导入示例数据时，可以使用默认连接方式。
+
+        - **Public**（默认）：通过公共互联网连接。当存储账户允许公共网络访问时，使用此选项。
+        - **Private Link**：通过 Azure 私有端点连接，以实现网络隔离访问。当存储账户阻止公共访问，或者你的安全策略要求使用私有连接时，使用此选项。如果选择 **Private Link**，你还需要填写额外字段 **Azure Blob Storage Resource ID**。要查找资源 ID，请执行以下操作：
+
+            1. 前往 [Azure 门户](https://portal.azure.com/)。
+            2. 导航到你的存储账户，然后点击 **Overview** > **JSON View**。
+            3. 复制 `id` 属性的值。资源 ID 的格式为 `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`。
+
     - **SAS Token**：
+
         - 对于示例数据，使用以下 **SAS Token**：`sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`。
         - 对于你自己的数据，可以使用 SAS token 访问你的 Azure Blob Storage。更多信息，参见 [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)。
 
-    如果存储账户的区域与你的集群不同，请确认跨区域合规性。
+4. 点击 **Next**。
 
-4. 点击 **Connect** > **Start Import**。
+    如果你选择 **Private Link** 作为连接方式，TiDB Cloud 会为你的存储账户创建一个私有端点。你需要先在 Azure 门户中批准此端点请求，连接才能继续：
+
+    1. 前往 [Azure 门户](https://portal.azure.com/)，并导航到你的存储账户。
+    2. 点击 **Networking** > **Private endpoint connections**。
+    3. 找到来自 TiDB Cloud 的待处理连接请求，然后点击 **Approve**。
+    4. 返回 [TiDB Cloud 控制台](https://tidbcloud.com/)。端点获批后，导入向导会自动继续。
+
+    > **Note:**
+    >
+    > 如果端点尚未获批，TiDB Cloud 会显示一条消息，指示连接正在等待批准。请在 [Azure 门户](https://portal.azure.com/) 中批准该请求，然后重试。
+
+5. 在 **Destination Mapping** 部分，保持选中 **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**，然后选择 **SQL** 作为数据格式。
+
+6. 点击 **Next**。TiDB Cloud 会扫描源文件。
+
+7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+
+8. 当导入进度显示为 **Completed** 时，检查已导入的表。
 
 </div>
 </SimpleTab>

@@ -3,29 +3,29 @@ title: 将本地文件导入 TiDB Cloud Starter 或 Essential
 summary: 了解如何将本地文件导入 TiDB Cloud Starter 或 TiDB Cloud Essential。
 ---
 
-# 将本地文件导入 TiDB Cloud Starter 或 Essential
+# 将本地文件导入 {{{ .starter }}} 或 Essential
 
-你可以直接将本地文件导入 TiDB Cloud Starter 或 TiDB Cloud Essential。只需几步简单操作即可完成任务配置，你的本地 CSV 数据就会被快速导入到 TiDB 集群中。使用此方法，无需提供云存储和凭证，整个导入过程快速且流畅。
+你可以直接将本地文件导入 {{{ .starter }}} 或 {{{ .essential }}}。只需几步简单操作即可完成任务配置，你的本地 CSV 数据就会被快速导入到你的 {{{ .starter }}} 或 Essential 实例中。使用此方法，无需提供云存储和凭证，整个导入过程快速且流畅。
 
 目前，该方法支持每个任务导入一个 CSV 文件到现有的空表或新建表中。
 
 ## 限制
 
 - 目前，TiDB Cloud 仅支持每个任务导入一个大小不超过 250 MiB 的本地 CSV 文件。
-- 本地文件导入仅支持 TiDB Cloud Starter 和 TiDB Cloud Essential 集群，不支持 TiDB Cloud Dedicated 集群。
+- 本地文件导入仅支持 {{{ .starter }}} 和 {{{ .essential }}} 实例，不支持 TiDB Cloud Dedicated 集群。
 - 你不能同时运行多个导入任务。
 
 ## 导入本地文件
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 {{{ .starter }}} 或 Essential 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并导航到项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并导航到 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}} 或 Essential 实例的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 在 **Import** 页面，你可以直接将本地文件拖拽到上传区域，或点击 **Upload a local file** 选择并上传目标本地文件。请注意，每个任务只能上传一个小于 250 MiB 的 CSV 文件。如果你的本地文件大于 250 MiB，请参见 [如何导入大于 250 MiB 的本地文件？](#how-to-import-a-local-file-larger-than-250-mib)。
 
@@ -85,7 +85,7 @@ summary: 了解如何将本地文件导入 TiDB Cloud Starter 或 TiDB Cloud Ess
 
 不能。目前，使用 Import 功能时，只能将 CSV 文件的所有列导入到现有表中。
 
-如果只想导入指定的部分列，可以使用 MySQL 客户端连接 TiDB 集群，然后通过 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) 指定要导入的列。例如：
+如果只想导入指定的部分列，可以使用 MySQL 客户端连接 {{{ .starter }}} 或 Essential 实例，然后通过 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) 指定要导入的列。例如：
 
 ```sql
 CREATE TABLE `import_test` (

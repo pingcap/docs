@@ -388,7 +388,7 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 
     >**注意：**
     >
-    > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+    > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 实例支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 
 * TiDB 为兼容 MySQL，语法上接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略它们。
 * 不支持降序索引（与 MySQL 5.7 类似）。

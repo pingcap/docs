@@ -20,7 +20,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 
     如果你还没有 New Relic 账户，请在 [这里](https://newrelic.com/signup) 注册。
 
-- 要为 TiDB Cloud 设置第三方统计/指标（信息）集成，你必须拥有 TiDB Cloud 的 `Organization Owner` 或 `Project Owner` 访问权限。要通过提供的链接查看集成页面或访问已配置的仪表盘，你至少需要 `Project Viewer` 角色，以访问你项目下的目标集群。
+- 要为 TiDB Cloud 设置第三方统计/指标（信息）集成，你必须拥有 TiDB Cloud 的 `Organization Owner` 或 `Project Owner` 访问权限。要通过提供的链接查看集成页面或访问已配置的仪表盘，你至少需要 `Project Viewer` 角色，以访问你项目下的目标 TiDB Cloud Dedicated 集群。
 
 ## 限制
 
@@ -39,7 +39,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 <SimpleTab>
 <div label="集群级 New Relic 集成">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群名称，进入其概览页面。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Dedicated 集群名称，进入其概览页面。
 2. 在左侧导航栏，点击 **Settings** > **Integrations**。
 3. 在 **Integrations** 页面，点击 **Integration to New Relic**。
 4. 输入你的 New Relic API key，并选择 New Relic 的站点。
@@ -53,16 +53,17 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 </div>
 <div label="旧版项目级 New Relic 集成（Beta）">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到你的目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Integrations**。
-3. 在 **Integrations** 页面，点击 **Integration to New Relic (BETA)**。
-4. 输入你的 New Relic API key，并选择 New Relic 的站点。
-5. 点击 **Test Integration**。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
+3. 在左侧导航栏，点击 **Project Settings** 下的 **Integrations**。
+4. 在 **Integrations** 页面，点击 **Integration to New Relic (BETA)**。
+5. 输入你的 New Relic API key，并选择 New Relic 的站点。
+6. 点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
     - 如果测试失败，会显示错误信息。请根据提示排查并重试集成。
 
-6. 点击 **Confirm** 完成集成。
+7. 点击 **Confirm** 完成集成。
 
 </div>
 </SimpleTab>
@@ -135,9 +136,9 @@ New Relic 会跟踪你的 TiDB 集群的以下统计/指标（信息）。
 | 统计/指标（信息）名称  | 统计/指标（信息）类型 | 标签 | 描述                                   |
 | :------------| :---------- | :------| :----------------------------------------------------- |
 | tidb_cloud.db_database_time| gauge | sql_type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒在 TiDB 中运行的所有 SQL 语句消耗的总时间，包括所有进程的 CPU 时间和非空闲等待时间。 |
-| tidb_cloud.db_query_per_second| gauge | type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 所有 TiDB 实例每秒执行的 SQL 语句数量，按 `SELECT`、`INSERT`、`UPDATE` 及其他类型语句统计。 |
+| tidb_cloud.db_query_per_second| gauge | type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 所有 TiDB 节点每秒执行的 SQL 语句数量，按 `SELECT`、`INSERT`、`UPDATE` 及其他类型语句统计。 |
 | tidb_cloud.db_average_query_duration| gauge | sql_type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 客户端网络请求发送到 TiDB 与 TiDB 执行后返回给客户端之间的耗时。 |
-| tidb_cloud.db_failed_queries| gauge | type: executor:xxxx\|parser:xxxx\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒每个 TiDB 实例发生的 SQL 执行错误类型（如语法错误、主键冲突等）统计。 |
+| tidb_cloud.db_failed_queries| gauge | type: executor:xxxx\|parser:xxxx\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒每个 TiDB 节点发生的 SQL 执行错误类型（如语法错误、主键冲突等）统计。 |
 | tidb_cloud.db_total_connection| gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 当前 TiDB server 的连接数。 |
 | tidb_cloud.db_active_connections| gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 活跃连接数。 |
 | tidb_cloud.db_disconnections| gauge | result: ok\|error\|undetermined<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 断开连接的客户端数量。 |

@@ -17,7 +17,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 ## 限制
 
-- 对于每个 TiDB Cloud <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>，最多可以创建 100 个 changefeed。
+- 对于每个 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>，最多可以创建 100 个 changefeed。
 - 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果需要同步的表没有主键或非空唯一索引，则在某些重试场景下，由于同步过程中缺少唯一约束，可能会导致下游插入重复数据。
 
@@ -33,17 +33,17 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 <CustomContent plan="dedicated">
 
-确保你的 TiDB Cloud 集群可以连接到 MySQL service。
+确保你的 {{{ .dedicated }}} 集群可以连接到 MySQL service。
 
 <SimpleTab>
 <div label="VPC Peering">
 
 如果你的 MySQL service 位于没有公网访问权限的 AWS VPC 中，请按照以下步骤操作：
 
-1. 在 MySQL service 所在 VPC 与 TiDB 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. 在 MySQL service 所在 VPC 与 {{{ .dedicated }}} 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2. 修改 MySQL service 关联的安全组的入站规则。
 
-    你必须将 [TiDB Cloud 集群所在区域的 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) 添加到入站规则中。这样可以允许来自 TiDB 集群到 MySQL 实例的流量。
+    你必须将 [{{{ .dedicated }}} 集群所在区域的 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) 添加到入站规则中。这样可以允许来自 {{{ .dedicated }}} 集群到 MySQL 实例的流量。
 
 3. 如果 MySQL URL 包含主机名，你需要允许 TiDB Cloud 能够解析 MySQL service 的 DNS 主机名。
 
@@ -53,10 +53,10 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 如果你的 MySQL service 位于没有公网访问权限的 Google Cloud VPC 中，请按照以下步骤操作：
 
 1. 如果你的 MySQL service 是 Google Cloud SQL，必须在 Google Cloud SQL 实例关联的 VPC 中暴露一个 MySQL endpoint。你可能需要使用 Google 提供的 [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy)。
-2. 在 MySQL service 所在 VPC 与 TiDB 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
+2. 在 MySQL service 所在 VPC 与 {{{ .dedicated }}} 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
 3. 修改 MySQL 所在 VPC 的 ingress 防火墙规则。
 
-    你必须将 [TiDB Cloud 集群所在区域的 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) 添加到 ingress 防火墙规则中。这样可以允许来自 TiDB Cloud 集群到 MySQL endpoint 的流量。
+    你必须将 [{{{ .dedicated }}} 集群所在区域的 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) 添加到 ingress 防火墙规则中。这样可以允许来自 {{{ .dedicated }}} 集群到 MySQL endpoint 的流量。
 
 </div>
 
@@ -64,7 +64,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 私有 endpoint 利用云服务商的 **Private Link** 或 **Private Service Connect** 技术，使你 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 的 service，就像这些 service 直接托管在你的 VPC 内一样。
 
-你可以通过私有 endpoint，将 TiDB Cloud 集群安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置私有 endpoint](/tidb-cloud/set-up-sink-private-endpoint.md) 创建一个。
+你可以通过私有 endpoint，将 {{{ .dedicated }}} 集群安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置私有 endpoint](/tidb-cloud/set-up-sink-private-endpoint.md) 创建一个。
 
 </div>
 
@@ -74,7 +74,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 <CustomContent plan="premium">
 
-确保你的 TiDB Cloud 实例可以连接到 MySQL service。
+确保你的 {{{ .premium }}} 实例可以连接到 MySQL service。
 
 > **注意：**
 >
@@ -82,7 +82,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 私有 endpoint 利用云服务商的 **Private Link** 或 **Private Service Connect** 技术，使你 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 的 service，就像这些 service 直接托管在你的 VPC 内一样。
 
-你可以通过私有 endpoint，将 TiDB Cloud 实例安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置私有 endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) 创建一个。
+你可以通过私有 endpoint，将 {{{ .premium }}} 实例安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置私有 endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) 创建一个。
 
 </CustomContent>
 
@@ -90,12 +90,12 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 <CustomContent plan="dedicated">
 
-**Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 TiDB 集群同步到 MySQL。如果你的 TiDB 集群中已经有数据，可以在启用 **Sink to MySQL** 之前，将 TiDB 集群的已有数据导出并加载到 MySQL。
+**Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 {{{ .dedicated }}} 集群同步到 MySQL。如果你的 {{{ .dedicated }}} 集群中已经有数据，可以在启用 **Sink to MySQL** 之前，将 {{{ .dedicated }}} 集群的已有数据导出并加载到 MySQL。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-**Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 TiDB 实例同步到 MySQL。如果你的 TiDB 实例中已经有数据，可以在启用 **Sink to MySQL** 之前，将 TiDB 实例的已有数据导出并加载到 MySQL。
+**Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 {{{ .premium }}} 实例同步到 MySQL。如果你的 {{{ .premium }}} 实例中已经有数据，可以在启用 **Sink to MySQL** 之前，将 {{{ .premium }}} 实例的已有数据导出并加载到 MySQL。
 
 </CustomContent>
 
@@ -113,7 +113,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. 使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 从 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>导出数据，然后使用 [mydumper/myloader](https://centminmod.com/mydumper.html) 等社区工具将数据加载到 MySQL service。
+2. 使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 从 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>导出数据，然后使用 [mydumper/myloader](https://centminmod.com/mydumper.html) 等社区工具将数据加载到 MySQL service。
 
 3. 从 [Dumpling 导出的文件](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files) 中，在元信息文件获取 MySQL sink 的起始位置：
 
@@ -135,7 +135,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 完成前提条件后，你可以将数据同步到 MySQL。
 
-1. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的概览页面，在左侧导航栏点击 **Data** > **Changefeed**。
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的概览页面，在左侧导航栏点击 **Data** > **Changefeed**。
 
 2. 点击 **Create Changefeed**，并选择 **MySQL** 作为 **Destination**。
 
@@ -172,7 +172,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 8. 在 **Start Replication Position** 中，配置 MySQL sink 的起始位置。
 
     - 如果你已通过 Dumpling [加载了已有数据](#load-existing-data-optional)，请选择 **Start replication from a specific TSO**，并填写从 Dumpling 导出元信息文件中获取的 TSO。
-    - 如果上游 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>中没有任何数据，选择 **Start replication from now on**。
+    - 如果上游 TiDB 中没有任何数据，选择 **Start replication from now on**。
     - 否则，你可以通过选择 **Start replication from a specific time** 自定义起始时间点。
 
 9. 点击 **Next**，配置 changefeed 规格。

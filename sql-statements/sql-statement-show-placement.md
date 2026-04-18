@@ -9,7 +9,7 @@ summary: SHOW PLACEMENT 在 TiDB 中的用法。
 
 > **Note:**
 >
-> 此功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 此功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
 
 该语句返回的结果集中，`Scheduling_State` 字段表示 Placement Driver（PD）在调度放置规则时的当前进度：
 

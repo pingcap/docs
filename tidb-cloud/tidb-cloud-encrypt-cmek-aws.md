@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 客户管理加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，来保护 TiDB Cloud Dedicated 集群中的静态数据安全。该密钥被称为 CMEK 密钥。
 
-一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥（escrow key）对集群中的所有静态数据进行加密。
+一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥（escrow key）对 TiDB Cloud Dedicated 集群中的所有静态数据进行加密。
 
 > **注意：**
 >
@@ -35,12 +35,11 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 要创建启用 CMEK 的项目，请按照以下步骤操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标组织。
-2. 在左侧导航栏，点击 **Projects**。
-3. 在 **Projects** 页面，点击右上角的 **Create New Project**。
-4. 填写项目名称。
-5. 选择启用项目的 CMEK 功能。
-6. 点击 **Confirm** 完成项目创建。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Create Project**。
+2. 在弹出的对话框中，输入项目名称。
+3. 选择 **Create for Dedicated Cluster** 选项。
+4. 选择启用项目的 CMEK 功能。
+5. 点击 **Confirm** 完成项目创建。
 
 </div>
 <div label="Use API" value="api">
@@ -65,14 +64,15 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 要完成项目的 CMEK 配置，请按照以下步骤操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Encryption Access**。
-3. 在 **Encryption Access** 页面，点击 **Create Encryption Key** 进入密钥创建页面。
-4. 密钥提供方仅支持 AWS KMS。你可以选择加密密钥可用的区域。
-5. 复制并保存 JSON 文件为 `ROLE-TRUST-POLICY.JSON`。该文件描述了信任关系。
-6. 将此信任关系添加到 AWS KMS 的密钥策略中。更多信息请参考 [AWS KMS 中的密钥策略](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)。
-7. 在 TiDB Cloud 控制台的密钥创建页面底部，填写从 AWS KMS 获取的 **KMS Key ARN**。
-8. 点击 **Create** 创建密钥。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 页签。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
+3. 在左侧导航栏中，点击 **Project Settings** 下的 **Encryption Access**。
+4. 在 **Encryption Access** 页面，点击 **Create Encryption Key** 进入密钥创建页面。
+5. 密钥提供方仅支持 AWS KMS。你可以选择加密密钥可用的区域。
+6. 复制并保存 JSON 文件为 `ROLE-TRUST-POLICY.JSON`。该文件描述了信任关系。
+7. 将此信任关系添加到 AWS KMS 的密钥策略中。更多信息请参考 [AWS KMS 中的密钥策略](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)。
+8. 在 TiDB Cloud 控制台的密钥创建页面底部，填写从 AWS KMS 获取的 **KMS Key ARN**。
+9. 点击 **Create** 创建密钥。
 
 </div>
 <div label="Use API" value="api">
@@ -125,8 +125,8 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
     }
     ```
 
-    - `<pingcap-account>` 是你的集群运行所在的账户。如果你不清楚该账户，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
-    - `<region>` 是你希望创建集群的区域，例如 `us-west-2`。如果你不想指定区域，可以将 `<region>` 替换为通配符 `*`，并放在 `StringLike` 块中。
+    - `<pingcap-account>` 是你的 TiDB Cloud Dedicated 集群运行所在的账户。如果你不清楚该账户，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+    - `<region>` 是你希望创建 TiDB Cloud Dedicated 集群的区域，例如 `us-west-2`。如果你不想指定区域，可以将 `<region>` 替换为通配符 `*`，并放在 `StringLike` 块中。
     - 有关上述 EBS 相关策略的更多信息，请参考 [AWS 文档](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)。
     - 有关上述 S3 相关策略的更多信息，请参考 [AWS 博客](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)。
 

@@ -11,8 +11,28 @@ summary: 学习如何通过 MySQL CLI 向 TiDB Cloud Starter 或 TiDB Cloud Esse
 
 在你通过 MySQL CLI 向 TiDB Cloud Starter 或 TiDB Cloud Essential 导入数据之前，需要满足以下前置条件：
 
-- 你可以访问你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。如果还没有，请按照 [构建 TiDB Cloud 集群](/develop/dev-guide-build-cluster-in-cloud.md) 的说明创建一个。
+- 你可以访问你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。如果还没有，请按照 [创建 TiDB Cloud Starter 实例](/develop/dev-guide-build-cluster-in-cloud.md) 的说明创建一个。
 - 在本地计算机上安装 MySQL CLI。
+
+## 第 1 步：连接到你的 {{{ .starter }}} 或 Essential 实例 {#step-1-connect-to-your-starter-or-essential-instance}
+
+连接到你的 {{{ .starter }}} 或 Essential 实例。
+
+1. 前往 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .starter }}} 或 Essential 实例的名称，进入其实例概览页面。
+
+2. 点击右上角的 **Connect**。此时会显示连接对话框。
+
+3. 确保连接对话框中的配置与你的操作环境匹配。
+
+    - **Connection Type** 设置为 `Public`。
+    - **Connect With** 设置为 `MySQL CLI`。
+    - **Operating System** 与你的环境匹配。
+
+4. 点击 **Generate Password** 以创建一个随机密码。
+
+    > **Tip:**
+    >
+    > 如果你之前已经创建过密码，请使用原密码，或者点击 **Reset Password** 生成一个新密码。
 
 ## 步骤 1. 连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群
 
@@ -33,25 +53,6 @@ summary: 学习如何通过 MySQL CLI 向 TiDB Cloud Starter 或 TiDB Cloud Esse
     > **Tip:**
     >
     > 如果你之前已经创建过密码，可以使用原有密码，或者点击 **Reset Password** 生成新密码。
-
-## 步骤 2. 定义表结构并插入示例数据
-
-在导入数据之前，你需要准备表结构，并向其中插入真实的示例数据。以下是一个 SQL 文件（`product_data.sql`）的示例，你可以用它来创建表并插入示例数据：
-
-```sql
--- Create a table in your TiDB database
-CREATE TABLE products (
-    product_id INT PRIMARY KEY,
-    product_name VARCHAR(255),
-    price DECIMAL(10, 2)
-);
-
--- Insert sample data into the table
-INSERT INTO products (product_id, product_name, price) VALUES
-    (1, 'Laptop', 999.99),
-    (2, 'Smartphone', 499.99),
-    (3, 'Tablet', 299.99);
-```
 
 ## 步骤 3. 从 SQL 或 CSV 文件导入数据
 

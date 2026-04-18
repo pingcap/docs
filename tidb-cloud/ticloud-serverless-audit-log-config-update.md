@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log config update` 的参考文档。"
 
 # ticloud serverless audit-log config update
 
-用于更新 TiDB Cloud Essential 集群的数据库审计日志配置。
+用于更新 TiDB Cloud Essential 实例的数据库审计日志配置。
 
 ```shell
 ticloud serverless audit-log config update [flags]

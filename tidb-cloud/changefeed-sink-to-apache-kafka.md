@@ -17,24 +17,24 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 ## 限制
 
-- 对于每个 TiDB Cloud <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>，最多可以创建 100 个 changefeed。
+- 对于每个 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>，最多可以创建 100 个 changefeed。
 - 目前，TiDB Cloud 不支持上传自签名 TLS 证书以连接 Kafka broker。
 - 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果需要同步的表没有主键或非空唯一索引，在某些重试场景下，由于同步过程中缺少唯一约束，可能会导致下游插入重复数据。
 
 <CustomContent plan="dedicated">
 
-- 如果你选择 Private Link 或 Private Service Connect 作为网络连接方式，请确保 TiDB 集群版本满足以下要求：
+- 如果你选择 Private Link 或 Private Service Connect 作为网络连接方式，请确保 {{{ .dedicated }}} 集群版本满足以下要求：
 
     - v6.5.x：v6.5.9 或更高版本
     - v7.1.x：v7.1.4 或更高版本
     - v7.5.x：v7.5.1 或更高版本
     - v8.1.x：支持所有 v8.1.x 及更高版本
-- 如果你希望使用 Debezium 作为数据格式，请确保 TiDB 集群版本为 v8.1.0 或更高。
+- 如果你希望使用 Debezium 作为数据格式，请确保 {{{ .dedicated }}} 集群版本为 v8.1.0 或更高。
 - 关于 Kafka 消息的分区分布，请注意以下事项：
 
-    - 如果你希望按主键或索引值分发 changelog 到带有指定索引名的 Kafka 分区，请确保 TiDB 集群版本为 v7.5.0 或更高。
-    - 如果你希望按列值分发 changelog 到 Kafka 分区，请确保 TiDB 集群版本为 v7.5.0 或更高。
+    - 如果你希望按主键或索引值分发 changelog 到带有指定索引名的 Kafka 分区，请确保 {{{ .dedicated }}} 集群版本为 v7.5.0 或更高。
+    - 如果你希望按列值分发 changelog 到 Kafka 分区，请确保 {{{ .dedicated }}} 集群版本为 v7.5.0 或更高。
 
 </CustomContent>
 
@@ -47,7 +47,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 ### 网络
 
-确保你的 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 能够连接到 Apache Kafka 服务。你可以选择以下任一连接方式：
+确保你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent> 能够连接到 Apache Kafka 服务。你可以选择以下任一连接方式：
 
 - Private Connect：适用于避免 VPC CIDR 冲突并满足安全合规性，但会产生额外的 [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)。
 - VPC Peering：作为一种高性价比的选项，但需要管理潜在的 VPC CIDR 冲突和安全性问题。
@@ -71,10 +71,10 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 
 如果你的 Apache Kafka 服务位于没有互联网访问的 AWS VPC，请执行以下步骤：
 
-1. 在 Apache Kafka 服务所在 VPC 与 TiDB 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. 在 Apache Kafka 服务所在 VPC 与 {{{ .dedicated }}} 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2. 修改 Apache Kafka 服务关联的安全组的入站规则。
 
-    你必须将 TiDB Cloud 集群所在区域的 CIDR 添加到入站规则中。该 CIDR 可在 **VPC Peering** 页面找到。这样可以允许 TiDB 集群的流量访问 Kafka broker。
+    你必须将 {{{ .dedicated }}} 集群所在区域的 CIDR 添加到入站规则中。该 CIDR 可在 **VPC Peering** 页面找到。这样可以允许 {{{ .dedicated }}} 集群的流量访问 Kafka broker。
 
 3. 如果 Apache Kafka URL 包含主机名，你需要允许 TiDB Cloud 能够解析 Apache Kafka broker 的 DNS 主机名。
 
@@ -83,10 +83,10 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 
 如果你的 Apache Kafka 服务位于没有互联网访问的 Google Cloud VPC，请执行以下步骤：
 
-1. 在 Apache Kafka 服务所在 VPC 与 TiDB 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. 在 Apache Kafka 服务所在 VPC 与 {{{ .dedicated }}} 集群之间 [建立 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2. 修改 Apache Kafka 所在 VPC 的 ingress 防火墙规则。
 
-    你必须将 TiDB Cloud 集群所在区域的 CIDR 添加到 ingress 防火墙规则中。该 CIDR 可在 **VPC Peering** 页面找到。这样可以允许 TiDB 集群的流量访问 Kafka broker。
+    你必须将 {{{ .dedicated }}} 集群所在区域的 CIDR 添加到 ingress 防火墙规则中。该 CIDR 可在 **VPC Peering** 页面找到。这样可以允许 {{{ .dedicated }}} 集群的流量访问 Kafka broker。
 
 </div>
 <div label="Public IP">
@@ -141,7 +141,7 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 ## 第 1 步：打开 Apache Kafka 的 Changefeed 页面
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com)。
-2. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
+2. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
 3. 点击 **Create Changefeed**，并选择 **Kafka** 作为 **Destination**。
 
 ## 第 2 步：配置 changefeed 目标
@@ -281,7 +281,7 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 6. 如果你选择 **Avro** 作为数据格式，页面会显示一些 Avro 专属配置。你可以按如下方式填写：
 
     - 在 **Decimal** 和 **Unsigned BigInt** 配置项中，指定 TiDB Cloud 如何处理 Kafka 消息中的 decimal 和 unsigned bigint 数据类型。
-    - 在 **Schema Registry** 区域，填写你的 schema registry endpoint。如果启用 **HTTP Authentication**，会显示用户名和密码字段，并自动填充为你的 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> endpoint 和密码。
+    - 在 **Schema Registry** 区域，填写你的 schema registry endpoint。如果启用 **HTTP Authentication**，会显示用户名和密码字段，并自动填充为你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 endpoint 和密码。
 
 7. 在 **Topic Distribution** 区域，选择分发模式，并根据模式填写 topic 名称配置。
 

@@ -81,15 +81,15 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 为了让 TiDB Cloud 能够访问 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务 bucket 中的 Parquet 文件，请执行以下操作之一：
 
-- 如果你的 Parquet 文件位于 Amazon S3，请为你的集群 [配置 Amazon S3 访问](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
+- 如果你的 Parquet 文件位于 Amazon S3，请为你的 {{{ .starter }}} 或 Essential 实例[配置 Amazon S3 访问](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
 
     你可以使用 AWS 访问密钥或 Role ARN 访问你的 bucket。完成后，请记录访问密钥（包括访问密钥 ID 和密钥）或 Role ARN 值，后续在 [第 4 步](#step-4-import-parquet-files) 中会用到。
 
-- 如果你的 Parquet 文件位于 GCS，请为你的集群 [配置 GCS 访问](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
+- 如果你的 Parquet 文件位于 GCS，请为你的 {{{ .starter }}} 或 Essential 实例[配置 GCS 访问](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
-- 如果你的 Parquet 文件位于 Azure Blob Storage，请为你的集群 [配置 Azure Blob Storage 访问](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
+- 如果你的 Parquet 文件位于 Azure Blob Storage，请为你的 {{{ .starter }}} 或 Essential 实例[配置 Azure Blob Storage 访问](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
-- 如果你的 Parquet 文件位于阿里云对象存储服务（OSS），请为你的集群 [配置阿里云对象存储服务（OSS）访问](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+- 如果你的 Parquet 文件位于阿里云对象存储服务（OSS），请为你的 {{{ .starter }}} 或 Essential 实例[配置阿里云对象存储服务（OSS）访问](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## 第 4 步：导入 Parquet 文件
 
@@ -98,15 +98,15 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 <SimpleTab>
 <div label="Amazon S3">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 {{{ .starter }}} 或 Essential 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}} 或 Essential 实例名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -151,15 +151,15 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 <div label="Google Cloud">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 {{{ .starter }}} 或 Essential 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}} 或 Essential 实例名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -202,15 +202,15 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 <div label="Azure Blob Storage">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 {{{ .starter }}} 或 Essential 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}} 或 Essential 实例名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -253,15 +253,15 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 {{{ .starter }}} 或 Essential 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}} 或 Essential 实例名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 

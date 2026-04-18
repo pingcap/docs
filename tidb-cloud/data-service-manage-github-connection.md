@@ -22,7 +22,7 @@ TiDB Cloud 提供了一种配置即代码（Configuration as Code，CaC）的方
 
 > **注意：**
 >
-> GitHub 仓库用于在将 Data App 连接到它后存储 [Data App 配置文件](/tidb-cloud/data-service-app-config-files.md)。如果配置文件中的信息（如集群 ID 和端点 URL）比较敏感，请确保使用私有仓库而不是公共仓库。
+> GitHub 仓库用于在将 Data App 连接到它后存储 [Data App 配置文件](/tidb-cloud/data-service-app-config-files.md)。如果配置文件中的信息（例如 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群的 ID 以及端点 URL）比较敏感，请确保使用私有仓库而不是公共仓库。
 
 ## 步骤 1. 将 Data App 连接到 GitHub
 
@@ -63,7 +63,7 @@ TiDB Cloud 提供了一种配置即代码（Configuration as Code，CaC）的方
 ```
 ├── <你在 GitHub 上的 Data App 目录>
 │   ├── data_sources
-│   │   └── cluster.json  # 指定链接的集群。
+│   │   └── cluster.json  # 指定链接的 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群。
 │   ├── dataapp_config.json # 指定 Data APP ID、名称、类型、版本和描述。
 │   ├── http_endpoints
 │   │   ├── config.json # 指定端点。
@@ -90,7 +90,7 @@ TiDB Cloud 提供了一种配置即代码（Configuration as Code，CaC）的方
 
 | 文件目录  | 注意事项 |
 | ---------|---------|
-| `data_source/cluster.json`     | 更新此文件时，请确保你有权访问链接的集群。你可以从集群 URL 获取集群 ID。例如，如果集群 URL 是 `https://tidbcloud.com/clusters/1234567891234567890/overview`，则集群 ID 是 `1234567891234567890`。 |
+| `data_source/cluster.json`     | 更新此文件时，请确保你有权访问链接的 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群。你可以从 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群的 URL 获取其 ID。例如，如果 URL 是 `https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`，则该 ID 是 `1234567891234567890`。 |
 | `http_endpoints/config.json`     | 修改端点时，请确保遵循[HTTP 端点配置](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration)中描述的规则。   |
 | `http_endpoints/sql/method-<endpoint-path>.sql`| 要在 `http_endpoints/sql` 目录中添加或删除 SQL 文件，你还需要更新相应的端点配置。 |
 | `datapp_config.json` | 除非你的 `dataapp_config.json` 文件是从另一个 Data App 复制的，并且你想将其更新为当前 Data App 的 ID，否则不要更改此文件中的 `app_id` 字段。否则，由此修改触发的部署将失败。 |

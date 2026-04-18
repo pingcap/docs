@@ -137,7 +137,7 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### 启用审计日志
 
-你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 为 TiDB Cloud Essential 集群启用审计日志。
+你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 为 TiDB Cloud Essential 实例启用审计日志。
 
 > **注意：**
 >
@@ -146,13 +146,13 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，点击 **Enable**。
 
@@ -177,18 +177,18 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 
 ### 编辑审计日志
 
-启用后，你可以编辑 TiDB Cloud Essential 集群的审计日志配置。
+启用后，你可以编辑 TiDB Cloud Essential 实例的审计日志配置。
 
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，点击 **Settings**。
 
@@ -209,18 +209,18 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### 禁用审计日志
 
-你可以为 TiDB Cloud Essential 集群禁用审计日志。
+你可以为 TiDB Cloud Essential 实例禁用审计日志。
 
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，点击右上角的 **...**，然后点击 **Disable**。
 
@@ -250,13 +250,13 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，点击 **Add Filter Rule**。
 
@@ -280,13 +280,13 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，找到你要编辑的过滤规则，点击其所在行的 **...**，然后点击 **Edit**。
 
@@ -310,13 +310,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，找到你要禁用的过滤规则，关闭开关以禁用该规则。
 
@@ -338,13 +338,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，找到你要删除的过滤规则并点击 **...**。
 
@@ -373,13 +373,13 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
 3. 在 **DB Audit Logging** 页面，你可以在 **TiDB Cloud Storage** 下查看审计日志列表。
 
@@ -420,9 +420,9 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 | `TABLES`        | 与该审计记录相关的访问表。                                              |
 | `STATUS_CODE`   | 审计记录的状态码。`1` 表示成功，`0` 表示失败。                |
 | `KEYSPACE_NAME` | 审计记录的 keyspace 名称。                                                        |
-| `SERVERLESS_TENANT_ID`           | 集群所属的 serverless 租户 ID。                 |
-| `SERVERLESS_PROJECT_ID`          | 集群所属的 serverless 项目 ID。                |
-| `SERVERLESS_CLUSTER_ID`          | 审计记录所属的 serverless 集群 ID。           |
+| `SERVERLESS_TENANT_ID`           | {{{ .essential }}} 实例所属的 serverless 租户 ID。                 |
+| `SERVERLESS_PROJECT_ID`          | {{{ .essential }}} 实例所属的 serverless 项目 ID。                |
+| `SERVERLESS_CLUSTER_ID`          | 审计记录所属的 serverless {{{ .essential }}} 实例 ID。           |
 | `REASON`        | 审计记录的错误信息。仅在操作发生错误时记录。|
 
 ### SQL 语句信息

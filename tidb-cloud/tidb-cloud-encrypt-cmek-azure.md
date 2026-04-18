@@ -7,7 +7,7 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
 
 客户管理的加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，来保护 TiDB Cloud Dedicated 集群中的静态数据。该密钥被称为 CMEK 密钥。
 
-一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥（escrow key）对你集群中的所有静态数据进行加密。
+一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥（escrow key）对你的 TiDB Cloud Dedicated 集群中的所有静态数据进行加密。
 
 ## 限制
 
@@ -25,12 +25,11 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
 
 如果你在组织中拥有 `Organization Owner` 角色，可以通过以下步骤创建支持 CMEK 的项目：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标组织。
-2. 在左侧导航栏中，点击 **Projects**。
-3. 在 **Projects** 页面，点击右上角的 **Create New Project**。
-4. 填写项目名称。
-5. 选择启用项目的 CMEK 功能。
-6. 点击 **Confirm** 完成项目创建。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Create Project**。
+2. 在弹出的对话框中，输入项目名称。
+3. 选择 **Create for Dedicated Cluster** 选项。
+4. 选择启用项目的 CMEK 功能。
+5. 点击 **Confirm** 完成项目创建。
 
 ### 步骤 2. 完成项目的 CMEK 配置
 
@@ -46,15 +45,17 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
 
 要通过 TiDB Cloud 控制台和 Azure 门户配置 CMEK，请按照以下步骤操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，使用左上角的下拉框切换到目标项目。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
 
-2. 在左侧导航栏中，点击 **Project Settings** > **Encryption Access**。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
 
-3. 在 **Encryption Access** 页面，点击 **Create Encryption Key**。
+3. 在左侧导航栏中，点击 **Project Settings** 下的 **Encryption Access**。
 
-4. 在 **Key Management Service** 下，选择 **Azure Key Vault**，并选择将要使用加密密钥的区域。
+4. 在 **Encryption Access** 页面，点击 **Create Encryption Key**。
 
-5. 如果你的租户中尚未存在 TiDB 提供的企业应用的 Service Principal，请创建一个。TiDB Cloud 控制台会显示 **Microsoft Entra Application Name** 和 **ID**，你在本步骤及后续步骤中需要用到。要创建 Service Principal，请在 **Create Service Principal** 部分运行以下命令：
+5. 在 **Key Management Service** 下，选择 **Azure Key Vault**，并选择将要使用加密密钥的区域。
+
+6. 如果你的租户中尚未存在 TiDB 提供的企业应用的 Service Principal，请创建一个。TiDB Cloud 控制台会显示 **Microsoft Entra Application Name** 和 **ID**，你在本步骤及后续步骤中需要用到。要创建 Service Principal，请在 **Create Service Principal** 部分运行以下命令：
 
     ```shell
     az ad sp create --id {Microsoft_Entra_Application_ID}
@@ -62,14 +63,14 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
 
     更多信息请参见 [Microsoft Entra ID 中的应用程序和服务主体对象](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)。
 
-6. 在你的 Azure 账户中创建一个 Key Vault，或选择已有的 Key Vault。确保：
+7. 在你的 Azure 账户中创建一个 Key Vault，或选择已有的 Key Vault。确保：
 
     * 已启用 **Purge protection**。
     * **region** 与集群的区域一致。
 
-7. 在 TiDB Cloud 控制台中，输入 Key Vault 名称和 Key 名称。TiDB Cloud 会为密钥名称添加唯一后缀以增强安全性。复制完整密钥名称，并在 Azure 门户中创建加密密钥。更多信息请参见 [创建你的加密密钥](https://learn.microsoft.com/en-us/azure/key-vault/keys/quick-create-portal)。
+8. 在 TiDB Cloud 控制台中，输入 Key Vault 名称和 Key 名称。TiDB Cloud 会为密钥名称添加唯一后缀以增强安全性。复制完整密钥名称，并在 Azure 门户中创建加密密钥。更多信息请参见 [创建你的加密密钥](https://learn.microsoft.com/en-us/azure/key-vault/keys/quick-create-portal)。
 
-8. 为当前用户分配 **Key Vault Crypto Officer** 角色：
+9. 为当前用户分配 **Key Vault Crypto Officer** 角色：
 
     1. 在 [Azure 门户](https://portal.azure.com/) 中，导航到你的 Key Vault。
     2. 点击 **Access control (IAM)**，然后点击 **Add** > **Add role assignment**。
@@ -78,7 +79,7 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
     5. 点击 **+ Select members**，搜索并选择当前用户作为成员。然后点击 **Select**。
     6. 检查设置后，点击 **Review + assign**。
 
-9. 为加密密钥分配 **Key Vault Crypto Service Encryption User** 角色给 TiDB 提供的企业应用：
+10. 为加密密钥分配 **Key Vault Crypto Service Encryption User** 角色给 TiDB 提供的企业应用：
 
     1. 在你的 Key Vault 中，进入你创建的加密密钥对象。
     2. 点击 **Add** > **Add role assignment**。
@@ -87,22 +88,28 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
     5. 点击 **+ Select members**，输入 TiDB 提供的 **Enterprise Application Name**，并选择为成员。然后点击 **Select**。
     6. 检查配置后，点击 **Review + assign**。
 
-10. 在 TiDB Cloud 控制台中，点击 **Test Encryption Key and Create** 以验证配置并创建加密密钥。
+11. 在 TiDB Cloud 控制台中，点击 **Test Encryption Key and Create** 以验证配置并创建加密密钥。
 
 </div>
 <div label="Use Azure Resource Manager" value="arm">
 
 要通过 TiDB Cloud 控制台和 Azure Resource Manager 配置 CMEK，请按照以下步骤操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，使用左上角的下拉框切换到目标项目。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
 
-2. 在左侧导航栏中，进入 **Project Settings** > **Encryption Access**。
+    > **提示：**
+    >
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-3. 在 **Encryption Access** 页面，点击 **Create Encryption Key**。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
 
-4. 在 **Key Management Service** 下，选择 **Azure Key Vault**，并指定加密密钥可用的区域。
+3. 在左侧导航栏中，进入 **Project Settings** 下的 **Encryption Access**。
 
-5. 如果你的租户中尚未存在 TiDB 提供的企业应用的 Service Principal，请创建一个。要创建 Service Principal，请在 **Create Service Principal** 部分运行以下命令：
+4. 在 **Encryption Access** 页面，点击 **Create Encryption Key**。
+
+5. 在 **Key Management Service** 下，选择 **Azure Key Vault**，并指定加密密钥可用的区域。
+
+6. 如果你的租户中尚未存在 TiDB 提供的企业应用的 Service Principal，请创建一个。要创建 Service Principal，请在 **Create Service Principal** 部分运行以下命令：
 
     ```shell
     az ad sp create --id {Microsoft_Entra_Application_ID}
@@ -110,7 +117,7 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
 
     更多信息请参见 [Microsoft Entra ID 中的应用程序和服务主体对象](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)。
 
-6. 在 Azure 门户中打开 [TiDB 针对 Azure Resource Manager 的自定义部署模板](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Ftcidm.blob.core.windows.net%2Fcmek%2Fazure_cmek_rmt.json%3Fsv%3D2015-04-05%26ss%3Db%26srt%3Dco%26sp%3Drl%26se%3D2029-03-01T00%3A00%3A01.0000000Z%26sig%3DIA02CymcFpYCwoTsqCSJVD%2F8Khh%2F0UAPrkKDeLMIIFc%3D)。选择你的 **Subscription** 和 **Resource Group**，然后在 **Instance Details** 部分按如下填写：
+7. 在 Azure 门户中打开 [TiDB 针对 Azure Resource Manager 的自定义部署模板](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Ftcidm.blob.core.windows.net%2Fcmek%2Fazure_cmek_rmt.json%3Fsv%3D2015-04-05%26ss%3Db%26srt%3Dco%26sp%3Drl%26se%3D2029-03-01T00%3A00%3A01.0000000Z%26sig%3DIA02CymcFpYCwoTsqCSJVD%2F8Khh%2F0UAPrkKDeLMIIFc%3D)。选择你的 **Subscription** 和 **Resource Group**，然后在 **Instance Details** 部分按如下填写：
 
     - **Region**：选择你希望创建 Key Vault 的位置。该区域必须与你的集群区域一致。
     - **Key Vault Name**：输入你的 Azure Key Vault 名称。

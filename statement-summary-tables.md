@@ -17,7 +17,7 @@ summary: 了解 TiDB 中的 Statement Summary Table。
 
 > **注意：**
 >
-> 上述表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 上述表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
 
 本文档详细介绍了这些表，并介绍如何使用它们来排查 SQL 性能问题。
 

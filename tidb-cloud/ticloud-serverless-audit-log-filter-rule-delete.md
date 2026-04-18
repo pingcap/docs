@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule delete` 的参考文档。"
 
 # ticloud serverless audit-log filter-rule delete
 
-删除 TiDB Cloud Essential 集群的审计日志过滤规则。
+删除 TiDB Cloud Essential 实例的审计日志过滤规则。
 
 ```shell
 ticloud serverless audit-log filter-rule delete [flags]

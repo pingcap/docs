@@ -27,7 +27,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 - 一个 [Zapier 账户](https://zapier.com/app/login)。
 - 一个 [GitHub 账户](https://github.com/login)。
-- 一个 [TiDB Cloud 账户](https://tidbcloud.com/signup) 以及在 TiDB Cloud 上的 TiDB Cloud Serverless 集群。更多详情请参见 [TiDB Cloud 快速入门](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)。
+- 一个 [TiDB Cloud 账户](https://tidbcloud.com/signup) 以及在 TiDB Cloud 上的 {{{ .starter }}} 实例。更多详情请参见 [TiDB Cloud 快速入门](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)。
 
 ### 步骤 1：获取模板
 
@@ -69,11 +69,11 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 3. 设置动作
 
-    在此步骤，你需要指定 TiDB Cloud 集群中的某个表来存储事件数据。如果你还没有表，可以在此步骤创建。
+    在此步骤，你需要指定 {{{ .starter }}} 实例中的某个表来存储事件数据。如果你还没有表，可以在此步骤创建。
 
-    1. 在下拉列表中选择项目名称和集群名称。你的集群连接信息会自动显示。
+    1. 在下拉列表中选择项目名称和实例名称。你的 {{{ .starter }}} 实例连接信息会自动显示。
 
-        ![Set up project name and cluster name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
+        ![Set up project name and instance name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
     2. 输入你的密码。
 
@@ -81,7 +81,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
-        Zapier 会使用你输入的密码从 TiDB Cloud 查询数据库。如果在集群中未找到数据库，请重新输入密码并刷新页面。
+        Zapier 会使用你输入的密码从 TiDB Cloud 查询数据库。如果在 {{{ .starter }}} 实例中未找到数据库，请重新输入密码并刷新页面。
 
     4. 在 **The table you want to search** 框中填写 `github_global_event`。如果该表不存在，模板会使用以下 DDL 创建表。点击 **Continue**。
 
@@ -117,7 +117,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 4. 测试动作
 
-    点击 **Test action**，即可在表中创建一行新数据。如果你检查 TiDB Cloud 集群，可以发现数据已成功写入。
+    点击 **Test action**，即可在表中创建一行新数据。如果你检查 {{{ .starter }}} 实例，可以发现数据已成功写入。
 
    ```sql
    mysql> SELECT * FROM test.github_global_event;
@@ -160,16 +160,16 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 | Action | Description | Resource |
 |---|---|---|
-| Find Cluster | 查找已存在的 TiDB Cloud Serverless 或 TiDB Cloud Dedicated 集群。 | None |
-| Create Cluster | 创建新集群。仅支持创建 TiDB Cloud Serverless 集群。 | None |
-| Find Database | 查找已存在的数据库。 | 一个 TiDB Cloud Serverless 集群 |
-| Create Database | 创建新数据库。 | 一个 TiDB Cloud Serverless 集群 |
-| Find Table | 查找已存在的表。 | 一个 TiDB Cloud Serverless 集群和一个数据库 |
-| Create Table | 创建新表。 | 一个 TiDB Cloud Serverless 集群和一个数据库 |
-| Create Row | 创建新行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
-| Update Row | 更新已存在的行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
-| Find Row | 通过查找列在表中查找行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
-| Find Row (Custom Query) | 通过你提供的自定义查询在表中查找行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
+| Find Cluster | 查找已存在的 {{{ .starter }}} 实例或 TiDB Cloud Dedicated 集群。 | None |
+| Create Cluster | 创建新集群。仅支持创建 {{{ .starter }}} 实例。 | None |
+| Find Database | 查找已存在的数据库。 | 一个 {{{ .starter }}} 实例 |
+| Create Database | 创建新数据库。 | 一个 {{{ .starter }}} 实例 |
+| Find Table | 查找已存在的表。 | 一个 {{{ .starter }}} 实例和一个数据库 |
+| Create Table | 创建新表。 | 一个 {{{ .starter }}} 实例和一个数据库 |
+| Create Row | 创建新行。 | 一个 {{{ .starter }}} 实例、一个数据库和一个表 |
+| Update Row | 更新已存在的行。 | 一个 {{{ .starter }}} 实例、一个数据库和一个表 |
+| Find Row | 通过查找列在表中查找行。 | 一个 {{{ .starter }}} 实例、一个数据库和一个表 |
+| Find Row (Custom Query) | 通过你提供的自定义查询在表中查找行。 | 一个 {{{ .starter }}} 实例、一个数据库和一个表 |
 
 ## TiDB Cloud App 模板
 

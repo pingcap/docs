@@ -5,7 +5,7 @@ summary: "`ticloud serverless list` 的参考文档。"
 
 # ticloud serverless list
 
-列出一个项目下所有的 TiDB Cloud Serverless 集群：
+列出一个项目下所有的 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless list [flags]
@@ -19,19 +19,19 @@ ticloud serverless ls [flags]
 
 ## 示例
 
-以交互模式列出所有 TiDB Cloud Serverless 集群：
+以交互模式列出所有 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless list
 ```
 
-在非交互模式下，列出指定项目下的所有 TiDB Cloud Serverless 集群：
+在非交互模式下，列出指定项目下的所有 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless list -p <project-id>
 ```
 
-在非交互模式下，以 JSON 格式列出指定项目下的所有 TiDB Cloud Serverless 集群：
+在非交互模式下，以 JSON 格式列出指定项目下的所有 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless list -p <project-id> -o json

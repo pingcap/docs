@@ -63,11 +63,11 @@ summary: 了解如何为 changefeed 设置私有端点。
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)。
 
-2. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页面。
+2. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud Dedicated 集群的名称进入其概览页面。
 
     > **Tip:**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
 3. 在左侧导航栏，点击 **Settings** > **Networking**。
 

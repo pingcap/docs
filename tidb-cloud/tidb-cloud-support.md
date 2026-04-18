@@ -43,8 +43,8 @@ TiDB Cloud 提供多种支持渠道。可用选项取决于问题的类型以及
 - 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 左下角点击 **Support**，然后根据你的支持计划选择以下操作：
     - **Basic**：在 **Account & Billing** 区域，点击 **Account/Billing issues**。
     - **Developer**、**Enterprise** 或 **Premium**：在 **Talk to an expert** 区域，点击 **PingCAP Help Center**。
-- 在你的项目 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击集群所在行的 **...**，然后选择 **Get Support**。
-- 在集群概览页面右上角点击 **...**，然后选择 **Get Support**。
+- 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源所在行的 **...**，然后选择 **Get Support**。
+- 在目标资源的概览页面右上角点击 **...**，然后选择 **Get Support**。
 
 ## 创建账户或账单支持工单
 
@@ -56,7 +56,7 @@ TiDB Cloud 提供多种支持渠道。可用选项取决于问题的类型以及
 
     - **Summary**：简要描述你的问题。
     - **TiDB Cloud Org**：选择相关的 TiDB Cloud 组织（如适用）。
-    - **TiDB Cloud Cluster**：选择相关的 TiDB Cloud 集群（如适用）。
+    - **TiDB Cloud Resource**：选择相关的 TiDB Cloud 资源（如适用）。
     - **Description**：详细描述问题。
     - **Severity**：评估该问题对业务的影响，并选择合适的严重性。（S1 不适用于账单或账户问题。）
 
@@ -78,8 +78,8 @@ TiDB Cloud 提供多种支持渠道。可用选项取决于问题的类型以及
 
     - **Summary**：简要描述你的问题。
     - **TiDB Cloud Org**：选择该问题相关的 TiDB Cloud 组织。
-    - **TiDB Cloud Cluster**：选择相关的 TiDB Cloud 集群（如适用）。
-    - **Environment**：选择你使用 TiDB Cloud 集群的对应环境。
+    - **TiDB Cloud Resource**：选择相关的 TiDB Cloud 资源（如适用）。
+    - **Environment**：选择你使用 TiDB Cloud 资源的对应环境。
     - **Description**：尽可能详细地描述你遇到的问题。例如，提供遇到问题的精确时间戳，附上详细的错误信息和问题的调用堆栈，并补充你的排查或分析过程。
     - **Severity**：评估该问题对业务的影响，并选择合适的严重性。
 
@@ -91,7 +91,7 @@ TiDB Cloud 提供多种支持渠道。可用选项取决于问题的类型以及
         | S4 | 关于某个特性或功能如何运行或应如何配置的一般性问题。对业务影响极小，可在合理时间内容忍的问题。 |
 
     - **Components**：选择要报告问题的相关 TiDB Cloud 组件，如 TiDB、TiKV、PD 或 TiFlash。
-    - **Affects versions**：指定与该问题相关的 TiDB Cloud 集群版本。
+    - **Affects versions**：指定与该问题相关的 TiDB 版本。
 
 4. 点击 **Submit**。
 

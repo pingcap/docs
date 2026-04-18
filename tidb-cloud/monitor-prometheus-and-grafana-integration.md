@@ -25,7 +25,7 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
 - 若要集成 TiDB Cloud 与 Prometheus，你必须拥有自托管或托管的 Prometheus 服务。
 
-- 若要为 TiDB Cloud 设置第三方统计/指标（信息）集成，你必须在 TiDB Cloud 中拥有 `Organization Owner` 或 `Project Owner` 访问权限。若要查看集成页面，至少需要 `Project Viewer` 角色以访问项目下的目标集群。
+- 若要为 TiDB Cloud 设置第三方统计/指标（信息）集成，你必须在 TiDB Cloud 中拥有 `Organization Owner` 或 `Project Owner` 访问权限。若要查看集成页面，至少需要 `Project Viewer` 角色以访问项目下的目标 TiDB Cloud Dedicated 集群。
 
 ## 限制
 
@@ -36,14 +36,14 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
 ### 步骤 1. 获取 Prometheus 的 scrape_config 文件
 
-在配置 Prometheus 服务以读取 TiDB Cloud 统计/指标（信息）之前，你需要先在 TiDB Cloud 中生成一个 `scrape_config` YAML 文件。该 `scrape_config` 文件包含一个唯一的 bearer token，允许 Prometheus 服务监控你的目标集群。
+在配置 Prometheus 服务以读取 TiDB Cloud 统计/指标（信息）之前，你需要先在 TiDB Cloud 中生成一个 `scrape_config` YAML 文件。该 `scrape_config` 文件包含一个唯一的 bearer token，允许 Prometheus 服务监控你的目标 TiDB Cloud Dedicated 集群。
 
 根据你的 [Prometheus 集成版本](#prometheus-集成版本)，获取 Prometheus 的 `scrape_config` 文件及访问集成页面的步骤有所不同。
 
 <SimpleTab>
 <div label="集群级 Prometheus 集成">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群名称进入其概览页面。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Dedicated 集群的名称进入其概览页面。
 2. 在左侧导航栏，点击 **Settings** > **Integrations**。
 3. 在 **Integrations** 页面，点击 **Integration to Prometheus**。
 4. 点击 **Add File**，为当前集群生成并显示 `scrape_config` 文件。
@@ -52,11 +52,12 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 </div>
 <div label="遗留项目级 Prometheus 集成（Beta）">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Integrations**。
-3. 在 **Integrations** 页面，点击 **Integration to Prometheus (BETA)**。
-4. 点击 **Add File**，为当前项目生成并显示 scrape_config 文件。
-5. 复制 scrape_config 文件内容，供后续使用。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，导航到组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
+3. 在左侧导航栏，点击 **Project Settings** 下的 **Integrations**。
+4. 在 **Integrations** 页面，点击 **Integration to Prometheus (BETA)**。
+5. 点击 **Add File**，为当前项目生成并显示 scrape_config 文件。
+6. 复制 `scrape_config` 文件内容，供后续使用。
 
 </div>
 </SimpleTab>
