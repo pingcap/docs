@@ -594,18 +594,18 @@ mysql> SELECT * FROM t1;
 
 ### interactive_timeout
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `28800`
-- Range: `[1, 31536000]`
-- Unit: Seconds
-- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL Shell and MySQL Client). This variable is fully compatible with MySQL.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`28800`
+- 范围：`[1, 31536000]`
+- 单位：秒
+- 该变量表示交互式用户会话的空闲超时时间。交互式用户会话是指使用 `CLIENT_INTERACTIVE` 选项调用 [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API 建立的会话（例如 MySQL Shell 和 MySQL Client）。该变量与 MySQL 完全兼容。
 
 ### last_insert_id <span class="version-mark">从 v5.3.0 版本开始引入</span>
 
@@ -644,21 +644,21 @@ mysql> SELECT * FROM t1;
 - 默认值：`Apache License 2.0`
 - 这个变量表示 TiDB 服务器的安装许可证。
 
-### max_allowed_packet <span class="version-mark">New in v6.1.0</span>
+### max_allowed_packet <span class="version-mark">从 v6.1.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `67108864`
-- Range: `[1024, 1073741824]`
-- The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
-- The maximum packet size allowed by the server and the client in one transmission of packets.
-- In the `SESSION` scope, this variable is read-only.
-- This variable is compatible with MySQL.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`67108864`
+- 范围：`[1024, 1073741824]`
+- 该值应为 1024 的整数倍。如果该值不能被 1024 整除，系统会发出警告并将该值向下取整。例如，当该值设为 1025 时，TiDB 中的实际值为 1024。
+- 服务器和客户端在一次数据包传输中所允许的最大数据包大小。
+- 在 `SESSION` 作用域下，该变量为只读。
+- 该变量与 MySQL 兼容。
 
 ### OutPacketBytes <span class="version-mark">从 v8.5.6 和 v9.0.0 版本开始引入</span>
 
@@ -798,27 +798,27 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### plugin_dir
 
-> **Note:**
+> **注意：**
 >
-> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 该变量不适用于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)。
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: ""
-- Indicates the directory to load plugins as specified by a command-line flag.
+- 作用域：GLOBAL
+- 是否持久化到集群：否，仅作用于当前连接的 TiDB 实例。
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：""
+- 表示通过命令行参数指定的插件加载目录。
 
 ### plugin_load
 
-> **Note:**
+> **注意：**
 >
-> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 该变量不适用于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)。
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: ""
-- Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
+- 作用域：GLOBAL
+- 是否持久化到集群：否，仅作用于当前连接的 TiDB 实例。
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：""
+- 表示 TiDB 启动时要加载的插件。这些插件通过命令行参数指定，多个插件之间用逗号分隔。
 
 ### port
 
@@ -877,29 +877,29 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 该设置以前是 `tidb.toml` 的配置选项 (`security.require-secure-transport`)，从 TiDB v6.1.0 起改为系统变量。
 - 从 v6.5.6、v7.1.2、v7.5.1 和 v8.0.0 开始，当启用安全增强模式 (SEM) 时，禁止将该变量设置为 `ON`，以避免用户出现潜在的连接问题。
 
-### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
+### skip_name_resolve <span class="version-mark">从 v5.2.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.
-- When the DNS is unreliable, you can enable this option to improve network performance.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`OFF`
+- 该变量用于控制 `tidb-server` 实例是否在连接握手过程中解析主机名。
+- 当 DNS 不可靠时，可以开启该选项以提高网络性能。
 
-> **Note:**
+> **注意：**
 >
-> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log into the server. For example:
+> 当 `skip_name_resolve=ON` 时，身份信息中包含主机名的用户将无法登录服务器。例如：
 >
 > ```sql
 > CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';
 > ```
 >
-> In this example, it is recommended to replace `apphost` with an IP address or the wildcard (`%`).
+> 在此示例中，建议将 `apphost` 替换为 IP 地址或通配符 (`%`)。
 
 ### socket
 
@@ -1420,19 +1420,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 这个变量用于控制是否开启[自动捕获绑定](/sql-plan-management.md#自动捕获绑定-baseline-capturing)功能。该功能依赖 Statement Summary，因此在使用自动绑定之前需打开 Statement Summary 开关。
 - 开启该功能后会定期遍历一次 Statement Summary 中的历史 SQL 语句，并为至少出现两次的 SQL 语句自动创建绑定。
 
-### tidb_cdc_write_source <span class="version-mark">New in v6.5.0</span>
+### tidb_cdc_write_source <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Persists to cluster: No
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 15]`
-- When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case.
+- 作用域：SESSION
+- 是否持久化到集群：否
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`0`
+- 范围：`[0, 15]`
+- 当该变量被设置为非 0 值时，该会话中写入的数据将被视为由 TiCDC 写入。该变量只能由 TiCDC 修改，任何情况下都不要手动修改该变量。
 
 ### tidb_check_mb4_value_in_utf8
 
@@ -1733,64 +1733,64 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_ddl_error_count_limit
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `512`
-- Range: `[0, 9223372036854775807]`
-- This variable is used to set the number of retries when the DDL operation fails. When the number of retries exceeds the parameter value, the wrong DDL operation is canceled.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`512`
+- 范围：`[0, 9223372036854775807]`
+- 该变量用于设置 DDL 操作失败时的重试次数。当重试次数超过该参数值时，出错的 DDL 操作将被取消。
 
-### tidb_ddl_flashback_concurrency <span class="version-mark">New in v6.3.0</span>
+### tidb_ddl_flashback_concurrency <span class="version-mark">从 v6.3.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `64`
-- Range: `[1, 256]`
-- This variable controls the concurrency of [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`64`
+- 范围：`[1, 256]`
+- 该变量用于控制 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 的并发度。
 
 ### tidb_ddl_reorg_batch_size
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `256`
-- Range: `[32, 10240]`
-- Unit: Rows
-- This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
-    - If `tidb_ddl_enable_fast_reorg` is set to `OFF`, `ADD INDEX` is executed as a transaction. If there are many update operations such as `UPDATE` and `REPLACE` in the target columns during the `ADD INDEX` execution, a larger batch size indicates a larger probability of transaction conflicts. In this case, it is recommended that you set the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, or if `tidb_ddl_enable_fast_reorg` is set to `ON`, you can set the batch size to a large value. This makes data backfilling faster but also increases the write pressure on TiKV. For a proper batch size, you also need to refer to the value of `tidb_ddl_reorg_worker_cnt`. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations) for reference.
-    - Starting from v8.3.0, this parameter is supported at the SESSION level. Modifying the parameter at the GLOBAL level will not impact currently running DDL statements. It will only apply to DDLs submitted in new sessions.
-    - Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`. In TiDB versions earlier than v8.5.5, note that this operation is not supported for `ADD INDEX` DDL when [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled. For details, see [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`256`
+- 范围：`[32, 10240]`
+- 单位：行
+- 该变量用于设置 DDL 操作 `re-organize` 阶段的批量大小。例如，当 TiDB 执行 `ADD INDEX` 操作时，索引数据需要由 `tidb_ddl_reorg_worker_cnt`（数量）个并发 worker 进行回填，每个 worker 以批量方式回填索引数据。
+    - 如果 `tidb_ddl_enable_fast_reorg` 设为 `OFF`，`ADD INDEX` 将以事务方式执行。如果在 `ADD INDEX` 执行期间目标列上有大量 `UPDATE` 和 `REPLACE` 等更新操作，批量大小越大，事务冲突的概率越大。在这种情况下，建议将批量大小设置为较小的值，最小值为 32。
+    - 如果不存在事务冲突，或者 `tidb_ddl_enable_fast_reorg` 设为 `ON`，可以将批量大小设为较大的值，这样可以加快数据回填速度，但同时也会增加 TiKV 的写入压力。合适的批量大小还需参考 `tidb_ddl_reorg_worker_cnt` 的值。可以参考[在线负载与 `ADD INDEX` 操作交互测试](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)。
+    - 从 v8.3.0 开始，该参数支持 SESSION 级别。在 GLOBAL 级别修改该参数不会影响正在运行的 DDL 语句，只会对新会话中提交的 DDL 生效。
+    - 从 v8.5.0 开始，可以通过执行 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;` 来修改正在运行的 DDL 任务的该参数。在 v8.5.5 之前的版本中，当 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 开启时，`ADD INDEX` DDL 不支持此操作。详情参见 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)。
 
 ### tidb_ddl_reorg_priority
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Enumeration
-- Default value: `PRIORITY_LOW`
-- Value options: `PRIORITY_LOW`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`
-- This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
-- You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
+- 作用域：SESSION
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：枚举型
+- 默认值：`PRIORITY_LOW`
+- 可选值：`PRIORITY_LOW`、`PRIORITY_NORMAL`、`PRIORITY_HIGH`
+- 该变量用于设置 `re-organize` 阶段中执行 `ADD INDEX` 操作的优先级。
+- 可以将该变量的值设置为 `PRIORITY_LOW`、`PRIORITY_NORMAL` 或 `PRIORITY_HIGH`。
 
 ### tidb_ddl_reorg_max_write_speed <span class="version-mark">从 v6.5.12、v7.5.5 和 v8.5.0 版本开始引入</span>
 
@@ -1948,42 +1948,42 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > 自 v7.0.0 起，`tidb_dml_batch_size` 对 [`LOAD DATA` 语句](/sql-statements/sql-statement-load-data.md)不再生效。
 
-### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
+### tidb_dml_type <span class="version-mark">从 v8.0.0 版本开始引入</span>
 
-> **Warning:**
+> **警告：**
 >
-> The bulk DML execution mode (`tidb_dml_type = "bulk"`) is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues). In the current version, when TiDB performs large transactions using the bulk DML mode, it might affect the memory usage and execution efficiency of TiCDC, TiFlash, and the resolved-ts module of TiKV, and might cause OOM issues. Additionally, BR might be blocked and fail to process when encountering locks. Therefore, it is not recommended to use this mode when these components or features are enabled.
+> 批量 DML 执行模式 (`tidb_dml_type = "bulk"`) 为实验特性，不建议在生产环境中使用。该功能可能会在未事先通知的情况下被修改或删除。如果发现 bug，请在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues) 反馈。在当前版本中，当 TiDB 使用批量 DML 模式执行大事务时，可能会影响 TiCDC、TiFlash 以及 TiKV 的 resolved-ts 模块的内存使用和执行效率，并可能导致 OOM 问题。此外，BR 在遇到锁时可能会被阻塞并导致处理失败。因此，不建议在启用了这些组件或功能时使用该模式。
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: String
-- Default value: `"standard"`
-- Value options: `"standard"`, `"bulk"`
-- This variable controls the execution mode of DML statements.
-    - `"standard"` indicates the standard DML execution mode, where TiDB transactions are cached in memory before being committed. This mode is suitable for high-concurrency transaction scenarios with potential conflicts and is the default recommended execution mode.
-    - `"bulk"` indicates the pipelined DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB. For more information, see [Pipelined DML](/pipelined-dml.md).
+- 作用域：SESSION
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：是
+- 类型：字符串
+- 默认值：`"standard"`
+- 可选值：`"standard"`、`"bulk"`
+- 该变量控制 DML 语句的执行模式。
+    - `"standard"` 表示标准 DML 执行模式，TiDB 事务在提交前缓存在内存中。该模式适用于存在潜在冲突的高并发事务场景，是默认推荐的执行模式。
+    - `"bulk"` 表示 Pipelined DML 执行模式，适用于大量数据写入导致 TiDB 内存使用过高的场景。详情参见 [Pipelined DML](/pipelined-dml.md)。
 
-### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
+### tidb_enable_1pc <span class="version-mark">从 v5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于指定是否对仅影响一个 Region 的事务启用一阶段提交功能。与常用的两阶段提交相比，一阶段提交可以大幅降低事务提交的延迟并提高吞吐量。
 
-> **Note:**
+> **注意：**
 >
-> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
+> - 默认值 `ON` 仅适用于新创建的集群。如果集群是从早期 TiDB 版本升级的，将使用 `OFF` 值。
+> - 开启该参数仅表示一阶段提交成为事务提交的一个可选模式。实际上，最合适的事务提交模式由 TiDB 决定。
 
 ### tidb_enable_analyze_snapshot <span class="version-mark">从 v6.2.0 版本开始引入</span>
 
@@ -1999,37 +1999,37 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > 如果 `ANALYZE` 读取 `ANALYZE` 开始时刻的历史数据，长时间的 `AUTO ANALYZE` 可能会因为历史数据被 GC 而出现 `GC life time is shorter than transaction duration` 的报错。
 
-### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
+### tidb_enable_async_commit <span class="version-mark">从 v5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制是否开启异步提交 (Async Commit) 功能，使两阶段事务提交的第二阶段在后台异步执行。开启该功能可以降低事务提交的延迟。
 
-> **Note:**
+> **注意：**
 >
-> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
+> - 默认值 `ON` 仅适用于新创建的集群。如果集群是从早期 TiDB 版本升级的，将使用 `OFF` 值。
+> - 开启该参数仅表示 Async Commit 成为事务提交的一个可选模式。实际上，最合适的事务提交模式由 TiDB 决定。
 
-### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
+### tidb_enable_auto_analyze <span class="version-mark">从 v6.1.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- Determines whether TiDB automatically updates table statistics as a background operation.
-- This setting was previously a `tidb.toml` option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制 TiDB 是否以后台操作自动更新表的统计信息。
+- 该设置以前是 `tidb.toml` 的配置选项 (`performance.run-auto-analyze`)，从 TiDB v6.1.0 起改为系统变量。
 
 ### tidb_enable_auto_analyze_priority_queue <span class="version-mark">从 v8.0.0 版本开始引入</span>
 
@@ -2105,18 +2105,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - `ON` 表示所有主键默认使用聚簇索引。
     - `INT_ONLY` 此时的行为受配置项 `alter-primary-key` 控制。如果该配置项取值为 `true`，则所有主键默认使用非聚簇索引；如果该配置项取值为 `false`，则由单个整数类型的列构成的主键默认使用聚簇索引，其他类型的主键默认使用非聚簇索引。
 
-### tidb_enable_ddl <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_ddl <span class="version-mark">从 v6.3.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `ON`
-- Possible values: `OFF`, `ON`
-- This variable controls whether the corresponding TiDB instance can become a DDL owner or not. If there is only one TiDB instance in the current TiDB cluster, you cannot prevent it from becoming a DDL owner, which means you cannot set it to `OFF`.
+- 作用域：GLOBAL
+- 是否持久化到集群：否，仅作用于当前连接的 TiDB 实例。
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`ON`
+- 可选值：`OFF`、`ON`
+- 该变量用于控制对应的 TiDB 实例是否可以成为 DDL owner。如果当前 TiDB 集群中只有一个 TiDB 实例，则无法阻止该实例成为 DDL owner，即不能将该变量设为 `OFF`。
 
 ### tidb_enable_collect_execution_info
 
@@ -2246,20 +2246,20 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_gc_aware_memory_track
 
-> **Warning:**
+> **警告：**
 >
-> This variable is an internal variable for debugging in TiDB. It might be removed in a future release. **Do not** set this variable.
+> 该变量是 TiDB 内部调试变量，可能会在未来版本中移除。**请勿**设置该变量。
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable GC-Aware memory track.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`OFF`
+- 该变量用于控制是否开启 GC-Aware 内存追踪。
 
 ### tidb_enable_global_index <span class="version-mark">从 v7.6.0 版本开始引入</span>
 
@@ -2338,18 +2338,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 默认值：`OFF`
 - 这个变量用来控制[非 Prepare 语句执行计划缓存](/sql-non-prepared-plan-cache.md)是否支持 DML 语句。
 
-### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
+### tidb_enable_gogc_tuner <span class="version-mark">从 v6.4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable GOGC Tuner.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制是否开启 GOGC Tuner。
 
 ### tidb_enable_historical_stats
 
@@ -2420,16 +2420,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_local_txn
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used for an unreleased feature. **Do not change the variable value**.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`OFF`
+- 该变量用于一个尚未发布的功能。**请勿修改该变量值**。
 
 ### tidb_enable_metadata_lock <span class="version-mark">从 v6.3.0 版本开始引入</span>
 
@@ -2752,18 +2752,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
-### tidb_enable_resource_control <span class="version-mark">New in v6.6.0</span>
+### tidb_enable_resource_control <span class="version-mark">从 v6.6.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `ON`
-- Type: Boolean
-- This variable is a switch for [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`ON`
+- 类型：布尔型
+- 该变量是[资源管控功能](/tidb-resource-control-ru-groups.md)的开关。当该变量设置为 `ON` 时，TiDB 集群可以基于资源组实现应用资源的隔离。
 
 ### tidb_enable_reuse_chunk <span class="version-mark">从 v6.4.0 版本开始引入</span>
 
@@ -2817,18 +2817,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 可选值：`OFF`、`ON`
 - 用于设置该 TiDB 实例是否可以运行[统计信息自动更新](/statistics.md#自动更新)任务。若当前 TiDB 集群中只有一台 TiDB 实例，则不能禁止该实例运行统计信息自动更新，即不能设置为 `OFF`。
 
-### tidb_enable_stmt_summary <span class="version-mark">New in v3.0.4</span>
+### tidb_enable_stmt_summary <span class="version-mark">从 v3.0.4 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制是否开启 Statement Summary 功能。开启后，SQL 的耗时等执行信息将被记录到 `information_schema.STATEMENTS_SUMMARY` 系统表中，用于定位和排查 SQL 性能问题。
 
 ### tidb_enable_strict_double_type_check <span class="version-mark">从 v5.0 版本开始引入</span>
 
@@ -2927,26 +2927,26 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
+### tidb_enable_tso_follower_proxy <span class="version-mark">从 v5.3.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. When the value is `ON`, TiDB evenly distributes requests for TSO to all PD servers, and PD followers can also handle TSO requests, thereby reducing the CPU pressure on the PD leader.
-- Scenarios for enabling TSO Follower Proxy:
-    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
-    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) cannot alleviate the high latency issue of TSO RPC requests.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`OFF`
+- 该变量用于控制是否开启 TSO Follower Proxy 功能。当值为 `OFF` 时，TiDB 仅从 PD leader 获取 TSO。当值为 `ON` 时，TiDB 会将 TSO 请求均匀分发到所有 PD 节点，PD follower 也可以处理 TSO 请求，从而降低 PD leader 的 CPU 压力。
+- 适合开启 TSO Follower Proxy 的场景：
+    * 由于 TSO 请求压力大，PD leader 的 CPU 达到瓶颈，导致 TSO RPC 请求延迟高。
+    * TiDB 集群中有大量 TiDB 实例，且增大 [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-从-v530-版本开始引入) 的值无法缓解 TSO RPC 请求延迟高的问题。
 
-> **Note:**
+> **注意：**
 >
-> - Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
-> - This feature is incompatible with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this feature is enabled, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) does not take effect.
+> - 如果 TSO RPC 延迟升高的原因不是 PD leader 的 CPU 使用率瓶颈（如网络问题），开启 TSO Follower Proxy 可能会增加 TiDB 的执行延迟，并影响集群的 QPS 性能。
+> - 该功能与 [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-从-v840-版本开始引入) 不兼容。如果开启了该功能，[`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-从-v840-版本开始引入) 将不生效。
 
 ### tidb_enable_unsafe_substitute <span class="version-mark">从 v6.3.0 版本开始引入</span>
 
@@ -3161,38 +3161,38 @@ v5.0 后，用户仍可以单独修改以上系统变量（会有废弃警告）
 - 默认值：`OFF`
 - 该变量用于控制在悲观事务中，外键约束检查对父表中的行加锁时是否使用共享锁（而非排他锁）。开启后，多个并发事务可以同时对同一父表行执行外键检查而不互相阻塞，从而降低锁冲突并提升子表并发写入性能。
 
-### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
+### tidb_gc_concurrency <span class="version-mark">从 v5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `-1`
-- Range: `-1` or `[1, 256]`
-- Unit: Threads
-- This variable controls the number of concurrent threads during the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of the [Garbage Collection (GC)](/garbage-collection-overview.md) process.
-- Starting from v8.3.0, this variable also controls the number of concurrent threads during the [Delete Ranges](/garbage-collection-overview.md#delete-ranges) step of the GC process.
-- By default, this variable is `-1`, allowing TiDB to automatically determine the appropriate number of threads based on workloads.
-- When this variable is set to a number in the range of `[1, 256]`:
-    - Resolve Locks directly uses the value set for this variable as the number of threads.
-    - Delete Range uses one-fourth of the value set for this variable as the number of threads.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`-1`
+- 范围：`-1` 或 `[1, 256]`
+- 单位：线程
+- 该变量用于控制 [GC (Garbage Collection)](/garbage-collection-overview.md) 过程中 [Resolve Locks](/garbage-collection-overview.md#resolve-locks) 步骤的并发线程数。
+- 从 v8.3.0 开始，该变量还控制 GC 过程中 [Delete Ranges](/garbage-collection-overview.md#delete-ranges) 步骤的并发线程数。
+- 该变量默认值为 `-1`，表示由 TiDB 根据负载自动确定合适的线程数。
+- 当该变量设为 `[1, 256]` 范围内的值时：
+    - Resolve Locks 直接使用该变量设定的值作为线程数。
+    - Delete Range 使用该变量设定值的四分之一作为线程数。
 
-### tidb_gc_enable <span class="version-mark">New in v5.0</span>
+### tidb_gc_enable <span class="version-mark">从 v5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- Enables garbage collection for TiKV. Disabling garbage collection will reduce system performance, as old versions of rows will no longer be purged.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制是否启用 TiKV 的垃圾回收 (GC) 机制。关闭 GC 会降低系统性能，因为旧版本的行数据将不再被清理。
 
 ### tidb_gc_life_time <span class="version-mark">从 v5.0 版本开始引入</span>
 
@@ -3211,34 +3211,34 @@ v5.0 后，用户仍可以单独修改以上系统变量（会有废弃警告）
 >     - 大量的历史数据可能在一定程度上影响性能，尤其是范围查询，如 `select count(*) from t`
 > - 如果存在运行时间超过 `tidb_gc_life_time` 的事务，在 GC 过程中会保留自该事务 `start_ts` 以来的数据，以确保该事务能继续执行。例如，如果 `tidb_gc_life_time` 配置为 10 分钟，而所有正在执行的事务中最早开始的事务已运行 15 分钟，GC 将保留最近 15 分钟的数据。
 
-### tidb_gc_max_wait_time <span class="version-mark">New in v6.1.0</span>
+### tidb_gc_max_wait_time <span class="version-mark">从 v6.1.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `86400`
-- Range: `[600, 31536000]`
-- Unit: Seconds
-- This variable is used to set the maximum time that active transactions block the GC safe point. During each time of GC, the safe point does not exceed the start time of the ongoing transactions by default. If the runtime of active transactions does not exceed this variable value, the GC safe point will be blocked until the runtime exceeds this value.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`86400`
+- 范围：`[600, 31536000]`
+- 单位：秒
+- 该变量用于设置活跃事务阻塞 GC safe point 的最长时间。每次 GC 时，默认 safe point 不会超过正在执行的事务的开始时间。如果活跃事务的运行时间未超过该变量值，GC safe point 将一直被阻塞，直到运行时间超过该值。
 
-### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
+### tidb_gc_run_interval <span class="version-mark">从 v5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Duration
-- Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]`
-- Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：Duration
+- 默认值：`10m0s`
+- 范围：`[10m0s, 8760h0m0s]`
+- 该变量用于指定 GC 的运行间隔，使用 Go Duration 格式，例如 `"1h30m"` 和 `"15m"`。
 
 ### tidb_gc_scan_lock_mode <span class="version-mark">从 v5.0 版本开始引入</span>
 
@@ -3339,20 +3339,20 @@ v5.0 后，用户仍可以单独修改以上系统变量（会有废弃警告）
 - 范围：`[0, 15]`
 - 该变量用于设置新建表默认的行分裂分片数。当设置了该变量为非 0 值后，执行 `CREATE TABLE` 语句时，TiDB 会为允许使用 `PRE_SPLIT_REGIONS` 的表（例如 `NONCLUSTERED` 表）自动设定该属性。详见 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)。该变量通常与 [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-从-v840-版本开始引入) 配合使用，用于为新建表进行分片以及 Region 预分裂。
 
-### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
+### tidb_generate_binary_plan <span class="version-mark">从 v6.2.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.
-- When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
-- You can execute the [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) statement to parse the specific plan from a binary plan.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制是否在慢日志和 Statement Summary 中生成二进制编码的执行计划。
+- 当该变量设为 `ON` 时，可以在 TiDB Dashboard 中查看可视化的执行计划。注意，TiDB Dashboard 仅对该变量开启后生成的执行计划提供可视化展示。
+- 可以通过执行 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) 语句从二进制执行计划中解析出具体的执行计划。
 
 ### tidb_gogc_tuner_max_value <span class="version-mark">从 v7.5.0 版本开始引入</span>
 
@@ -3374,33 +3374,33 @@ v5.0 后，用户仍可以单独修改以上系统变量（会有废弃警告）
 - 范围：`[10, 2147483647]`
 - 该变量用来控制 GOGC Tuner 可调节 GOGC 的最小值。
 
-### tidb_gogc_tuner_threshold <span class="version-mark">New in v6.4.0</span>
+### tidb_gogc_tuner_threshold <span class="version-mark">从 v6.4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `0.6`
-- Range: `[0, 0.9)`
-- This variable specifies the maximum memory threshold for tuning GOGC. When the memory exceeds this threshold, GOGC Tuner stops working.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`0.6`
+- 范围：`[0, 0.9)`
+- 该变量用于指定 GOGC 调优的最大内存阈值。当内存使用超过该阈值时，GOGC Tuner 将停止工作。
 
-### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
+### tidb_guarantee_linearizability <span class="version-mark">从 v5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable controls the way commit TS is calculated for async commit. By default (with the `ON` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
-- If you set this variable to `OFF`, the process of fetching TS from the PD server is skipped, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://www.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
-- For scenarios that require only causal consistency, you can set this variable to `OFF` to improve performance.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 该变量用于控制异步提交 (Async Commit) 中计算 commit TS 的方式。默认情况下（值为 `ON`），两阶段提交会从 PD 请求一个新的 TS，并使用该 TS 来计算最终的 commit TS。在这种情况下，所有并发事务可保证线性一致性。
+- 如果将该变量设为 `OFF`，则跳过从 PD 获取 TS 的过程，但代价是只能保证因果一致性而无法保证线性一致性。详情参见博客文章 [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://www.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/)。
+- 对于只需要因果一致性的场景，可以将该变量设为 `OFF` 以提升性能。
 
 ### tidb_hash_exchange_with_new_collation
 
@@ -3654,16 +3654,16 @@ v5.0 后，用户仍可以单独修改以上系统变量（会有废弃警告）
 - 单位：字节
 - 这个变量用于设置 [Instance Plan Cache](/system-variables.md#tidb_enable_instance_plan_cache-从-v840-版本开始引入) 的最大内存使用量。
 
-### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
+### tidb_isolation_read_engines <span class="version-mark">从 v4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `tikv,tiflash,tidb`
-- This variable is used to set the storage engine list that TiDB can use when reading data.
+- 作用域：SESSION
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：是
+- 默认值：`tikv,tiflash,tidb`
+- 该变量用于设置 TiDB 在读取数据时可以使用的存储引擎列表。
 
 ### tidb_last_ddl_info <span class="version-mark">从 v6.0.0 版本开始引入</span>
 
@@ -5403,20 +5403,20 @@ SHOW WARNINGS;
 > - 该选项目前仅对需要上锁单个 key 的语句有效。如果一个语句需要对多行同时上锁，则该选项不会对此类语句生效。
 > - 该功能从 v6.6.0 版本引入。在 v6.6.0 版本中，该功能由变量 [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/zh/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-从-v660-版本开始引入) 控制，默认关闭。
 
-### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
+### tidb_placement_mode <span class="version-mark">从 v6.0.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Enumeration
-- Default value: `STRICT`
-- Possible values: `STRICT`, `IGNORE`
-- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.
-- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：枚举型
+- 默认值：`STRICT`
+- 可选值：`STRICT`、`IGNORE`
+- 该变量用于控制 DDL 语句是否忽略 [SQL 中指定的放置规则](/placement-rules-in-sql.md)。当该变量值为 `IGNORE` 时，所有放置规则选项将被忽略。
+- 该变量主要供逻辑备份/恢复工具使用，确保即使分配了无效的放置规则也能正常创建表。这类似于 mysqldump 在每个导出文件开头写入 `SET FOREIGN_KEY_CHECKS=0;` 的做法。
 
 ### tidb_plan_cache_invalidation_on_fresh_stats <span class="version-mark">从 v7.1.0 版本开始引入</span>
 
@@ -5739,20 +5739,20 @@ SHOW WARNINGS;
 
 ### tidb_scatter_region
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Enumeration
-- Default value: `""`
-- Possible values: `""`, `table`, `global`
-- If the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` parameters are set during table creation, then the system automatically splits the table into a specified number of Regions upon successful creation. This variable controls the scattering strategy for these split Regions. TiDB processes the Regions based on the selected scattering strategy. It is important to note that because the table creation operation waits for the scattering process to complete before returning a success status, enabling this variable might significantly increase the execution time of the `CREATE TABLE` statement. Compared to the scenario where this variable is disabled, the execution time could be several times longer. Descriptions of possible values are as follows:
-    - `""`: the default value, indicating that the Regions of the table are not scattered after table creation.
-    - `table`: indicates that if you set the `PRE_SPLIT_REGIONS` or `SHARD_ROW_ID_BITS` attribute when you create a table, in the scenario of pre-splitting multiple Regions, the Regions of these tables are scattered according to the granularity of the tables. However, if you do not set the preceding attribute when you create a table, in the scenario of creating a large number of tables rapidly, it will cause the Regions of these tables to be concentrated on a few TiKV nodes, resulting in an uneven distribution of Regions.
-    - `global`: indicates that TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Especially when creating a large number of tables rapidly, using the `global` option helps prevent Regions from becoming overly concentrated on a few TiKV nodes, ensuring a more balanced distribution of Regions across the cluster.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：枚举型
+- 默认值：`""`
+- 可选值：`""`、`table`、`global`
+- 如果在建表时设置了 `SHARD_ROW_ID_BITS` 和 `PRE_SPLIT_REGIONS` 参数，系统会在表创建成功后自动将其拆分为指定数量的 Region。该变量用于控制这些拆分 Region 的打散策略。TiDB 会根据所选的打散策略处理 Region。需要注意的是，由于建表操作需要等待打散过程完成后才返回成功状态，开启该变量可能会显著增加 `CREATE TABLE` 语句的执行时间，与未开启时相比可能慢数倍。各可选值的说明如下：
+    - `""`：默认值，表示建表后不打散表的 Region。
+    - `table`：表示如果建表时设置了 `PRE_SPLIT_REGIONS` 或 `SHARD_ROW_ID_BITS` 属性，在预拆分多个 Region 的场景下，这些表的 Region 将按表的粒度进行打散。但如果建表时未设置上述属性，在快速创建大量表的场景下，这些表的 Region 会集中在少数 TiKV 节点上，导致 Region 分布不均。
+    - `global`：表示 TiDB 根据整个集群的数据分布来打散新创建表的 Region。特别是在快速创建大量表的场景下，使用 `global` 选项有助于防止 Region 过度集中在少数 TiKV 节点上，确保 Region 在集群中更均衡地分布。
 
 ### tidb_schema_cache_size <span class="version-mark">从 v8.0.0 版本开始引入</span>
 
@@ -5778,49 +5778,49 @@ SHOW WARNINGS;
 - 一般不需要修改该变量。当使用 [Stale Read](/stale-read.md) 功能且 DDL 执行非常频繁时，会导致表结构信息的版本号变更非常频繁，进而导致 Stale Read 在获取 Snapshot 的表结构信息时，可能会因为未命中表结构信息的缓存而需要消耗大量时间重新构建该信息。此时可以适当调大 `tidb_schema_version_cache_limit` 的值（例如 `32` ）来避免表结构信息的缓存不命中的问题。
 - 修改该变量会使 TiDB 的内存占用轻微上升。使用时请注意 TiDB 的内存占用，避免出现 OOM 问题。
 
-### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
+### tidb_server_memory_limit <span class="version-mark">从 v6.4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `80%`
-- Range:
-    - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
-    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is supported. `0` means no memory limit.
-    - If this variable is set to a memory size that is less than 512 MiB but not `0`, TiDB uses 512 MiB as the actual size.
-- This variable specifies the memory limit for a TiDB instance. When the memory usage of TiDB reaches the limit, TiDB cancels the currently running SQL statement with the highest memory usage. After the SQL statement is successfully canceled, TiDB tries to call Golang GC to immediately reclaim memory to relieve memory stress as soon as possible.
-- Only the SQL statements with more memory usage than the [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640) limit are selected as the SQL statements to be canceled first.
-- Currently, TiDB cancels only one SQL statement at a time. After TiDB completely cancels a SQL statement and recovers resources, if the memory usage is still greater than the limit set by this variable, TiDB starts the next cancel operation.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`80%`
+- 范围：
+    - 可以设置为百分比格式，表示内存使用占总内存的百分比，取值范围为 `[1%, 99%]`。
+    - 也可以设置为内存大小，取值范围为 `0` 和 `[536870912, 9223372036854775807]`（单位为字节），支持 "KiB|MiB|GiB|TiB" 单位格式。`0` 表示不限制内存。
+    - 如果该变量设为小于 512 MiB 但不为 `0` 的内存大小，TiDB 将使用 512 MiB 作为实际大小。
+- 该变量用于指定 TiDB 实例的内存限制。当 TiDB 的内存使用达到该限制时，TiDB 会取消当前正在运行的内存使用最高的 SQL 语句。SQL 语句被成功取消后，TiDB 会尝试调用 Golang GC 立即回收内存，以尽快缓解内存压力。
+- 只有内存使用超过 [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-从-v640-版本开始引入) 限制的 SQL 语句才会被优先选为待取消的 SQL 语句。
+- 目前，TiDB 每次只取消一条 SQL 语句。当 TiDB 完全取消一条 SQL 语句并回收资源后，如果内存使用仍大于该变量设置的限制，TiDB 将开始下一次取消操作。
 
-### tidb_server_memory_limit_gc_trigger <span class="version-mark">New in v6.4.0</span>
+### tidb_server_memory_limit_gc_trigger <span class="version-mark">从 v6.4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `70%`
-- Range: `[50%, 99%]`
-- The threshold at which TiDB tries to trigger GC. When the memory usage of TiDB reaches the value of `tidb_server_memory_limit` \* the value of `tidb_server_memory_limit_gc_trigger`, TiDB will actively trigger a Golang GC operation. Only one GC operation will be triggered in one minute.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`70%`
+- 范围：`[50%, 99%]`
+- TiDB 尝试触发 GC 的阈值。当 TiDB 的内存使用达到 `tidb_server_memory_limit` \* `tidb_server_memory_limit_gc_trigger` 的值时，TiDB 会主动触发一次 Golang GC 操作。一分钟内最多只会触发一次 GC 操作。
 
-### tidb_server_memory_limit_sess_min_size <span class="version-mark">New in v6.4.0</span>
+### tidb_server_memory_limit_sess_min_size <span class="version-mark">从 v6.4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `134217728` (which is 128 MiB)
-- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported.
-- After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`134217728`（即 128 MiB）
+- 范围：`[128, 9223372036854775807]`，单位为字节，也支持 "KiB|MiB|GiB|TiB" 单位格式。
+- 开启内存限制后，TiDB 会终止当前实例上内存使用最高的 SQL 语句。该变量用于指定待终止 SQL 语句的最小内存使用量。如果 TiDB 实例超出内存限制是由于大量低内存使用的会话导致的，可以适当调小该变量的值以允许更多会话被取消。
 
 ### tidb_service_scope <span class="version-mark">从 v7.4.0 版本开始引入</span>
 
@@ -5878,16 +5878,16 @@ SHOW WARNINGS;
 
 ### tidb_simplified_metrics
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- When this variable is enabled, TiDB does not collect or record the metrics that are not used in the Grafana panels.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`OFF`
+- 开启该变量后，TiDB 将不再收集或记录 Grafana 面板中未使用的监控指标。
 
 ### tidb_skip_ascii_check <span class="version-mark">从 v5.0 版本开始引入</span>
 
@@ -6061,20 +6061,20 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 默认值：`ON`
 - 这个变量用于控制统计信息同步加载超时后，SQL 是执行失败（`OFF`），还是退回使用 pseudo 的统计信息（`ON`）。
 
-### tidb_stats_load_sync_wait <span class="version-mark">New in v5.4.0</span>
+### tidb_stats_load_sync_wait <span class="version-mark">从 v5.4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: Integer
-- Default value: `100`
-- Range: `[0, 2147483647]`
-- Unit: Milliseconds
-- This variable controls whether to enable the synchronously loading statistics feature. The value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：是
+- 类型：整数型
+- 默认值：`100`
+- 范围：`[0, 2147483647]`
+- 单位：毫秒
+- 该变量用于控制是否开启统计信息的同步加载功能。值为 `0` 表示关闭该功能。如需开启，可以将该变量设置为 SQL 优化等待同步加载完整列统计信息的最大超时时间（单位为毫秒）。详情参见[统计信息的加载](/statistics.md#统计信息的加载)。
 
 ### tidb_stmt_summary_enable_persistent <span class="version-mark">从 v6.6.0 版本开始引入</span>
 
@@ -6208,32 +6208,32 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 </CustomContent>
 
-### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_history_size <span class="version-mark">从 v4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `24`
-- Range: `[0, 255]`
-- This variable is used to set the history capacity of [statement summary tables](/statement-summary-tables.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`24`
+- 范围：`[0, 255]`
+- 该变量用于设置 [Statement Summary 表](/statement-summary-tables.md)的历史容量。
 
-### tidb_stmt_summary_internal_query <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_internal_query <span class="version-mark">从 v4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to include the SQL information of TiDB in [statement summary tables](/statement-summary-tables.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`OFF`
+- 该变量用于控制是否在 [Statement Summary 表](/statement-summary-tables.md)中包含 TiDB 内部 SQL 的信息。
 
 ### tidb_stmt_summary_max_sql_length <span class="version-mark">从 v4.0 版本开始引入</span>
 
@@ -6283,20 +6283,20 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 </CustomContent>
 
-### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_refresh_interval <span class="version-mark">从 v4.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `1800`
-- Range: `[1, 2147483647]`
-- Unit: Seconds
-- This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`1800`
+- 范围：`[1, 2147483647]`
+- 单位：秒
+- 该变量用于设置 [Statement Summary 表](/statement-summary-tables.md)的刷新时间。
 
 ### tidb_store_batch_size
 
@@ -6356,19 +6356,19 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 默认值：`OFF`
 - 这个变量用于控制 `SYSDATE` 函数能否替换为 `NOW` 函数，其效果与 MYSQL 中的 [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now) 一致。
 
-### tidb_sysproc_scan_concurrency <span class="version-mark">New in v6.5.0</span>
+### tidb_sysproc_scan_concurrency <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
-- This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`1`
+- 范围：`[0, 4294967295]`。v7.5.0 及更早版本的最大值为 `256`。v8.2.0 之前最小值为 `1`。设为 `0` 时，系统会根据集群规模自适应调整并发度。
+- 该变量用于设置 TiDB 执行内部 SQL 语句（例如统计信息的自动更新）时扫描操作的并发度。
 
 ### tidb_table_cache_lease <span class="version-mark">从 v6.0.0 版本开始引入</span>
 
@@ -6459,31 +6459,31 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > 如果禁用该变量，TiDB 可能无法准确跟踪内存使用情况，并且无法控制对应 SQL 语句的内存使用。
 
-### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
+### tidb_tso_client_batch_max_wait_time <span class="version-mark">从 v5.3.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Float
-- Default value: `0`
-- Range: `[0, 10]`
-- Unit: Milliseconds
-- This variable is used to set the maximum waiting time for a batch operation when TiDB requests TSO from PD. The default value is `0`, which means no extra waiting time.
-- When obtaining TSO requests from PD each time, PD Client, used by TiDB, collects as many TSO requests received at the same time as possible. Then, PD Client merges the collected requests in batch into one RPC request and sends the request to PD. This helps reduce the pressure on PD.
-- After setting this variable to a value greater than `0`, TiDB waits for the maximum duration of this value before the end of each batch merge. This is to collect more TSO requests and improve the effect of batch operations.
-- Scenarios for increasing the value of this variable:
-    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
-    * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
-- It is recommended to set this variable to a value as small as possible.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：浮点型
+- 默认值：`0`
+- 范围：`[0, 10]`
+- 单位：毫秒
+- 该变量用于设置 TiDB 从 PD 请求 TSO 时批量操作的最大等待时间。默认值为 `0`，表示不额外等待。
+- 每次从 PD 获取 TSO 请求时，TiDB 使用的 PD Client 会尽可能多地收集同一时间收到的 TSO 请求，然后将收集到的请求批量合并为一个 RPC 请求发送给 PD，以减轻 PD 的压力。
+- 将该变量设为大于 `0` 的值后，TiDB 会在每次批量合并结束前等待该值对应的最大时长，以收集更多的 TSO 请求并提高批量操作的效果。
+- 适合增大该变量值的场景：
+    * 由于 TSO 请求压力大，PD leader 的 CPU 达到瓶颈，导致 TSO RPC 请求延迟高。
+    * 集群中 TiDB 实例数量不多，但每个 TiDB 实例的并发度较高。
+- 建议将该变量设置为尽可能小的值。
 
-> **Note:**
+> **注意：**
 >
-> - Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
-> - This feature is incompatible with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this variable is set to a non-zero value, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) does not take effect.
+> - 如果 TSO RPC 延迟升高的原因不是 PD leader 的 CPU 使用率瓶颈（如网络问题），增大 `tidb_tso_client_batch_max_wait_time` 的值可能会增加 TiDB 的执行延迟，并影响集群的 QPS 性能。
+> - 该功能与 [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-从-v840-版本开始引入) 不兼容。如果该变量设为非零值，[`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-从-v840-版本开始引入) 将不生效。
 
 ### tidb_tso_client_rpc_mode <span class="version-mark">从 v8.4.0 版本开始引入</span>
 
@@ -6523,123 +6523,123 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 取值范围：`[0, 1]`
 - 该变量用于控制 TiDB 何时触发熔断器。设置为 `0`（默认值）表示禁用熔断器。设置为 `0.01` 到 `1` 之间的值时，表示启用熔断器，当发送到 PD 的特定请求的错误率达到或超过该阈值时，熔断器会被触发。
 
-### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_delete_rate_limit <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `0`
-- Range: `[0, 9223372036854775807]`
-- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`0`
+- 范围：`[0, 9223372036854775807]`
+- 该变量用于限制每个 TiDB 节点上 TTL 任务中 `DELETE` 语句的速率。该值表示单个节点在 TTL 任务中每秒允许执行的 `DELETE` 语句的最大数量。当该变量设为 `0` 时，不做任何限制。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_delete_batch_size <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_delete_batch_size <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `100`
-- Range: `[1, 10240]`
-- This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`100`
+- 范围：`[1, 10240]`
+- 该变量用于设置 TTL 任务中单个 `DELETE` 事务中可删除的最大行数。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_delete_worker_count <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_delete_worker_count <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `4`
-- Range: `[1, 256]`
-- This variable is used to set the maximum concurrency of TTL jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`4`
+- 范围：`[1, 256]`
+- 该变量用于设置每个 TiDB 节点上 TTL 任务的最大并发度。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_job_enable <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_job_enable <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `ON`
-- Type: Boolean
-- This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`ON`
+- 类型：布尔型
+- 该变量用于控制是否启用 TTL 任务。如果设为 `OFF`，所有设置了 TTL 属性的表将自动停止清理过期数据。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_scan_batch_size <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_scan_batch_size <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `500`
-- Range: `[1, 10240]`
-- This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`500`
+- 范围：`[1, 10240]`
+- 该变量用于设置 TTL 任务中用于扫描过期数据的每条 `SELECT` 语句的 `LIMIT` 值。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_scan_worker_count <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_scan_worker_count <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `4`
-- Range: `[1, 256]`
-- This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`4`
+- 范围：`[1, 256]`
+- 该变量用于设置每个 TiDB 节点上 TTL 扫描任务的最大并发度。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_job_schedule_window_start_time <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Time
-- Persists to cluster: Yes
-- Default value: `00:00 +0000`
-- This variable is used to control the start time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：Time
+- 是否持久化到集群：是
+- 默认值：`00:00 +0000`
+- 该变量用于控制后台 TTL 任务调度窗口的开始时间。修改该变量值时请注意，过小的窗口可能导致过期数据清理失败。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
+### tidb_ttl_job_schedule_window_end_time <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Time
-- Persists to cluster: Yes
-- Default value: `23:59 +0000`
-- This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：Time
+- 是否持久化到集群：是
+- 默认值：`23:59 +0000`
+- 该变量用于控制后台 TTL 任务调度窗口的结束时间。修改该变量值时请注意，过小的窗口可能导致过期数据清理失败。详情参见 [Time to Live](/time-to-live.md)。
 
-### tidb_ttl_running_tasks <span class="version-mark">New in v7.0.0</span>
+### tidb_ttl_running_tasks <span class="version-mark">从 v7.0.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `-1`
-- Range: `-1` and `[1, 256]`
-- Specifies the maximum number of running TTL tasks in the entire cluster. `-1` means the number of TTL tasks is equivalent to the number of TiKV nodes. For more information, refer to [Time to Live](/time-to-live.md).
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`-1`
+- 范围：`-1` 和 `[1, 256]`
+- 该变量用于指定整个集群中正在运行的 TTL 任务的最大数量。`-1` 表示 TTL 任务数量等于 TiKV 节点数。详情参见 [Time to Live](/time-to-live.md)。
 
 ### tidb_txn_assertion_level <span class="version-mark">从 v6.0.0 版本开始引入</span>
 
@@ -6706,19 +6706,19 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_txn_mode
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Enumeration
-- Default value: `pessimistic`
-- Possible values: `pessimistic`, `optimistic`
-- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/pessimistic-transaction.md) is enabled by default.
-- If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
-- If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/optimistic-transaction.md).
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：枚举型
+- 默认值：`pessimistic`
+- 可选值：`pessimistic`、`optimistic`
+- 该变量用于设置事务模式。TiDB 3.0 支持悲观事务。从 TiDB 3.0.8 开始，默认启用[悲观事务模式](/pessimistic-transaction.md)。
+- 如果从 v3.0.7 或更早版本升级到 v3.0.8 或更高版本，默认事务模式不会改变。**只有新创建的集群才默认使用悲观事务模式**。
+- 如果将该变量设为 "optimistic" 或 ""，TiDB 将使用[乐观事务模式](/optimistic-transaction.md)。
 
 ### tidb_use_plan_baselines <span class="version-mark">从 v4.0 版本开始引入</span>
 
@@ -6731,32 +6731,32 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_wait_split_region_finish
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed:
-    - `ON` requires that the `SPLIT REGIONS` statement waits until all Regions are scattered.
-    - `OFF` permits the `SPLIT REGIONS` statement to return before finishing scattering all Regions.
-- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished.
+- 作用域：SESSION
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：布尔型
+- 默认值：`ON`
+- 打散 Region 通常需要较长时间，由 PD 调度和 TiKV 负载决定。该变量用于设置执行 `SPLIT REGION` 语句时是否在所有 Region 完全打散后才将结果返回给客户端：
+    - `ON` 要求 `SPLIT REGIONS` 语句等待所有 Region 打散完成。
+    - `OFF` 允许 `SPLIT REGIONS` 语句在所有 Region 打散完成之前返回。
+- 注意，在打散 Region 期间，正在被打散的 Region 的读写性能可能会受到影响。在批量写入或数据导入场景中，建议在 Region 打散完成后再导入数据。
 
 ### tidb_wait_split_region_timeout
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `300`
-- Range: `[1, 2147483647]`
-- Unit: Seconds
-- This variable is used to set the timeout for executing the `SPLIT REGION` statement. If a statement is not executed completely within the specified time value, a timeout error is returned.
+- 作用域：SESSION
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`300`
+- 范围：`[1, 2147483647]`
+- 单位：秒
+- 该变量用于设置执行 `SPLIT REGION` 语句的超时时间。如果语句在指定时间内未执行完毕，将返回超时错误。
 
 ### tidb_window_concurrency <span class="version-mark">从 v4.0 版本开始引入</span>
 
@@ -6941,16 +6941,16 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### txn_scope
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `global`
-- Value options: `global` and `local`
-- This variable is used to set whether the current session transaction is a global transaction or a local transaction.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
+- 作用域：SESSION
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`global`
+- 可选值：`global` 和 `local`
+- 该变量用于设置当前会话事务是全局事务还是局部事务。
+- 该变量仅用于 TiDB 内部操作，**不推荐设置该变量**。
 
 ### validate_password.check_user_name <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
@@ -6974,18 +6974,18 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 该变量是一个长字符串，长度不超过 1024，字符串内容可包含一个或多个在密码中不允许出现的单词，每个单词之间采用英文分号（`;`）分隔。
 - 默认情况下，该变量为空值，不执行字典检查。要进行字典检查，该变量值必须包含待匹配的单词。配置了该变量后，在设置账户密码时，TiDB 会将长度为 4 到 100 的密码的每个子字符串与该变量中配置的单词进行比较。任何匹配都会导致密码被拒绝。比较不区分大小写。
 
-### validate_password.enable <span class="version-mark">New in v6.5.0</span>
+### validate_password.enable <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
-> **Note:**
+> **注意：**
 >
-> This variable is always enabled for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)，该变量始终开启。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `OFF`
-- Type: Boolean
-- This variable controls whether to perform password complexity check. If this variable is set to `ON`, TiDB performs the password complexity check when you set a password.
+- 作用域：GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`OFF`
+- 类型：布尔型
+- 该变量用于控制是否进行密码复杂度检查。如果该变量设为 `ON`，TiDB 将在设置密码时进行密码复杂度检查。
 
 ### validate_password.length <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
@@ -7046,10 +7046,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### version
 
-- Scope: NONE
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `8.0.11-TiDB-`(tidb version)
-- This variable returns the MySQL version, followed by the TiDB version. For example '8.0.11-TiDB-v{{{ .tidb-version }}}'.
+- 作用域：NONE
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 默认值：`8.0.11-TiDB-(tidb version)`
+- 这个变量的值是 MySQL 的版本和 TiDB 的版本，例如 '8.0.11-TiDB-v8.5.0'。
 
 ### version_comment
 
@@ -7074,18 +7074,18 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### wait_timeout
 
-> **Note:**
+> **注意：**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `28800`
-- Range: `[0, 31536000]`
-- Unit: Seconds
-- This variable controls the idle timeout of user sessions. A zero-value means unlimited.
+- 作用域：SESSION | GLOBAL
+- 是否持久化到集群：是
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制：否
+- 类型：整数型
+- 默认值：`28800`
+- 范围：`[0, 31536000]`
+- 单位：秒
+- 该变量用于控制用户会话的空闲超时时间。值为零表示不限制。
 
 ### warning_count
 
