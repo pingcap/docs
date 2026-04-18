@@ -75,6 +75,8 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Built-in Monitoring](https://docs-preview.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium)
 
+[TopRU in TiDB Cloud Clinic](https://docs-preview.pingcap.com/tidbcloud/top-ru-in-clinic-premium/?plan=premium)
+
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">

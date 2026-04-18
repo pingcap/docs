@@ -30,6 +30,7 @@ To view the **Cluster** page, take the following steps:
     - Advanced Metrics
     - Top Slow Queries (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
     - Top SQL (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
+    - TopRU (only supported in TiDB Cloud Clinic for TiDB Cloud Dedicated clusters)
     - Benchmark Report
 
 ## Monitor advanced metrics
@@ -106,6 +107,12 @@ To view Top SQL, take the following steps:
 4. Analyze the charts and tables displayed by Top SQL. Depending on the selected node and enabled metrics, you can use `Order By` and the available aggregation dimensions to inspect CPU, network, or logical I/O hotspots.
 
 For more information, see [Top SQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql).
+
+## Monitor TopRU
+
+TopRU in TiDB Cloud Clinic helps you analyze SQL workload hotspots by request unit (RU) consumption and by database user.
+
+For usage details, prerequisites, and limitations, see [TopRU in TiDB Cloud Clinic](/tidb-cloud/premium/top-ru-in-clinic-premium.md).
 
 ## Generate benchmark reports
 
