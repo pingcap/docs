@@ -1,105 +1,228 @@
-name: Translation(zh) by AI
+name: Sync TiDB Cloud Docs from EN to ZH
+
+concurrency:
+  group: translation-zh-cloud-${{ github.event_name }}
+  cancel-in-progress: true
 
 on:
+  schedule:
+    - cron: "0 9 * * 3" # Runs at 17:00 every Wednesday (Beijing time, UTC+8)
   workflow_dispatch:
     inputs:
       file_names:
-        description: 'Specify file names to translate (comma-separated list)'
+        description: "Specify Cloud files to translate (comma-separated list)"
         required: false
         type: string
-        default: ''
-
+        default: ""
 
 env:
+  SOURCE_REPO: pingcap/docs
+  SOURCE_BRANCH: release-8.5
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
+  CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-releases.md
+  AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
+  AI_TRANSLATOR_REF: main
 
 jobs:
   translate:
     if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
-        name: Download translator repo
+        name: Checkout docs target branch
         with:
-          repository: "pingcap/docs-toolkit"
-          ref: "main"
-          path: "docs-toolkit"
+          ref: ${{ env.CN_CLOUD_BRANCH }}
+          path: docs
+
       - uses: actions/checkout@v4
-        name: Download docs repo and specified branch
+        name: Checkout docs source branch
         with:
-          ref: "${{ env.CN_CLOUD_BRANCH }}"
-          path: "docs"
-      - uses: actions/setup-node@v4
-        name: Setup node
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ env.SOURCE_BRANCH }}
+          path: docs-source
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/checkout@v4
+        name: Checkout ai-pr-translator
         with:
-          node-version: 20
+          repository: ${{ env.AI_TRANSLATOR_REPO }}
+          ref: ${{ env.AI_TRANSLATOR_REF }}
+          path: ai-pr-translator
+          persist-credentials: false
 
-      - run: |
-          sudo apt install tree -y
-
-      - name: Download files
-        uses: pingcap/docs-toolkit/actions/file-diff-update@main
+      - uses: actions/setup-python@v5
+        name: Setup Python
         with:
-          config_file: latest_translation_commit.json
-          working_directory: docs
-          filter_by_cloud_toc: 'true'
-          files: ${{ inputs.file_names }}
+          python-version: "3.9"
+          cache: pip
+          cache-dependency-path: ai-pr-translator/scripts/requirements.txt
 
-      - name: Show tmp directory structure
+      - name: Install Python dependencies
+        shell: bash
         run: |
-          cd docs
-          tree tmp || find tmp -type f | head -20
-      - name: Config and translate
-        run: |
-          cd docs-toolkit/markdown-translator
-          yarn
-          cd ../..
-          export OPENAI_RESPONSES_API_URL=${{ secrets.AZURE_OPENAI_BASE_URL }}
-          export OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_KEY }}
-          export OPENAI_MODEL=gpt-5.4
-          node docs-toolkit/markdown-translator/src/index.js --input-dir docs/tmp --output-dir docs/
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install -r ai-pr-translator/scripts/requirements.txt
 
-      - name: Set build ID
-        id: build_id
-        run: echo "::set-output name=id::$(date +%s)"
+      - name: Resolve commit range
+        id: commits
+        shell: bash
+        working-directory: docs
+        run: |
+          set -euo pipefail
+
+          readarray -t cursor_values < <(python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("latest_translation_commit.json").read_text(encoding="utf-8"))
+          print((data.get("target") or "").strip())
+          print((data.get("sha") or "").strip())
+          PY
+          )
+
+          cursor_target="${cursor_values[0]:-}"
+          base_ref="${cursor_values[1]:-}"
+          head_ref="$(git -C "${GITHUB_WORKSPACE}/docs-source" rev-parse HEAD)"
+
+          if [ -z "${base_ref}" ]; then
+            echo "latest_translation_commit.json does not contain a source sha" >&2
+            exit 1
+          fi
+
+          if [ -n "${cursor_target}" ] && [ "${cursor_target}" != "${SOURCE_BRANCH}" ]; then
+            echo "latest_translation_commit.json target is ${cursor_target}, expected ${SOURCE_BRANCH}" >&2
+            exit 1
+          fi
+
+          echo "base_ref=${base_ref}" >> "${GITHUB_OUTPUT}"
+          echo "head_ref=${head_ref}" >> "${GITHUB_OUTPUT}"
+
+      - name: Resolve Cloud source file filter
+        id: source_files
+        shell: bash
+        env:
+          INPUT_FILE_NAMES: ${{ inputs.file_names || '' }}
+          BASE_REF: ${{ steps.commits.outputs.base_ref }}
+          HEAD_REF: ${{ steps.commits.outputs.head_ref }}
+          DOCS_SOURCE_PATH: ${{ github.workspace }}/docs-source
+          CLOUD_TOC_FILES: ${{ env.CLOUD_TOC_FILES }}
+        run: |
+          set -euo pipefail
+          python ai-pr-translator/scripts/resolve_cloud_source_files.py
+
+      - name: Run commit sync workflow
+        id: sync
+        if: steps.source_files.outputs.has_source_changes == 'true'
+        continue-on-error: true
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.AZURE_OPENAI_BASE_URL }}
+          SOURCE_REPO: ${{ env.SOURCE_REPO }}
+          TARGET_REPO: ${{ env.SOURCE_REPO }}
+          SOURCE_BRANCH: ${{ env.SOURCE_BRANCH }}
+          SOURCE_BASE_REF: ${{ steps.commits.outputs.base_ref }}
+          SOURCE_HEAD_REF: ${{ steps.commits.outputs.head_ref }}
+          SOURCE_FOLDER: ""
+          SOURCE_FILES: ${{ steps.source_files.outputs.files }}
+          SOURCE_REPO_PATH: ${{ github.workspace }}/docs-source
+          TARGET_REF: ${{ env.CN_CLOUD_BRANCH }}
+          PREFER_LOCAL_TARGET_FOR_READ: "true"
+          TARGET_REPO_PATH: ${{ github.workspace }}/docs
+          AI_PROVIDER: azure
+          TERMS_PATH: ${{ github.workspace }}/docs-source/resources/terms.md
+          FAIL_ON_TRANSLATION_ERROR: "true"
+          SKIP_TRANSLATING_CLOUD_DOCS_TO_ZH: "false"
+          SKIP_TRANSLATING_AI_DOCS_TO_ZH: "true"
+        run: |
+          set -euo pipefail
+          cd ai-pr-translator/scripts
+          python commit_sync_workflow.py
+
+      - name: Prepare translated changes
+        id: changes
+        if: always() && steps.source_files.outputs.has_source_changes == 'true'
+        shell: bash
+        working-directory: docs
+        env:
+          HEAD_REF: ${{ steps.commits.outputs.head_ref }}
+          SOURCE_BRANCH: ${{ env.SOURCE_BRANCH }}
+          FAILURE_REPORT: ${{ github.workspace }}/ai-pr-translator/scripts/temp_output/translation-failures.md
+        run: |
+          set -euo pipefail
+
+          if [ -s "${FAILURE_REPORT}" ]; then
+            {
+              echo "failure_summary<<EOF"
+              cat "${FAILURE_REPORT}"
+              echo
+              echo "> Before merging this PR, manually translate the failed files above or rerun this workflow with workflow_dispatch and file_names set to those paths."
+              echo "EOF"
+            } >> "${GITHUB_OUTPUT}"
+          fi
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "has_changes=false" >> "${GITHUB_OUTPUT}"
+            exit 0
+          fi
+
+          python -c 'import json, os; from pathlib import Path; Path("latest_translation_commit.json").write_text(json.dumps({"target": os.environ["SOURCE_BRANCH"], "sha": os.environ["HEAD_REF"]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")'
+          echo "has_changes=true" >> "${GITHUB_OUTPUT}"
+
+      - name: Set build metadata
+        id: build_meta
+        if: steps.changes.outputs.has_changes == 'true'
+        shell: bash
+        run: |
+          echo "date=$(TZ=Asia/Shanghai date +'%Y-%m-%d')" >> "${GITHUB_OUTPUT}"
+          echo "id=$(TZ=Asia/Shanghai date +'%Y%m%d')-$(date +%s)" >> "${GITHUB_OUTPUT}"
 
       - name: Create PR
+        if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          path: "docs"
+          path: docs
           token: ${{ github.token }}
-          branch: zh-translation/${{ steps.build_id.outputs.id }}
+          branch: zh-translation/cloud-${{ steps.build_meta.outputs.id }}
           base: ${{ env.CN_CLOUD_BRANCH }}
-          title: "ci: ZH translation ${{ steps.build_id.outputs.id }}"
+          title: "${{ env.CN_CLOUD_BRANCH }}: translate Cloud doc changes from ${{ env.SOURCE_REPO }} ${{ env.SOURCE_BRANCH }} on ${{ steps.build_meta.outputs.date }}"
+          labels: |
+            translation/no-need
           body: |
             ### What is changed, added or deleted? (Required)
 
-            Translate docs to Chinese.
+            Translate Cloud documentation changes from `pingcap/docs` `${{ env.SOURCE_BRANCH }}` to Chinese via `ai-pr-translator` commit-diff sync.
+
+            English commit diff:
+
+            https://github.com/${{ env.SOURCE_REPO }}/compare/${{ steps.commits.outputs.base_ref }}...${{ steps.commits.outputs.head_ref }}
 
             ### Which TiDB version(s) do your changes apply to? (Required)
-
-            <!-- Fill in "x" in [] to tick the checkbox below.-->
-
-            **Tips for choosing the affected version(s):**
-
-            By default, **CHOOSE MASTER ONLY** so your changes will be applied to the next TiDB major or minor releases. If your PR involves a product feature behavior change or a compatibility change, **CHOOSE THE AFFECTED RELEASE BRANCH(ES) AND MASTER**.
-
-            For details, see [tips for choosing the affected versions](https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md#guideline-for-choosing-the-affected-versions).
 
             - [x] ${{ env.CN_CLOUD_BRANCH }}
 
             ### What is the related PR or file link(s)?
 
-            <!--Reference link(s) will help reviewers review your PR quickly.-->
+            - Source repo: `${{ env.SOURCE_REPO }}`
+            - Source branch: `${{ env.SOURCE_BRANCH }}`
+            - Cloud TOCs: `${{ env.CLOUD_TOC_FILES }}`
+            - Source files: `${{ steps.source_files.outputs.files }}`
+            - Sync outcome: `${{ steps.sync.outcome }}`
 
-            - This PR is translated from: en
-            - Other reference link(s):
+            ${{ steps.changes.outputs.failure_summary }}
 
             ### Do your changes match any of the following descriptions?
 
             - [ ] Delete files
             - [ ] Change aliases
-            - [ ] Need modification after applied to another branch <!-- If yes, please comment "/label version-specific-changes-required" below to trigger the bot to add the label. -->
+            - [ ] Need modification after applied to another branch
             - [ ] Might cause conflicts after applied to another branch
           delete-branch: true
