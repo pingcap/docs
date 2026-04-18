@@ -124,11 +124,11 @@ systemctl start docker
 
 #### 步骤 1. 创建 {{{ .starter }}} 实例 {#step-1-create-a-starter-instance}
 
-1. [创建一个免费的 {{{ .starter }}} 实例](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)。请记住你为 {{{ .starter }}} 实例设置的 root 密码。
-2. 获取 {{{ .starter }}} 实例的主机名、端口和用户名，以供后续使用。
+1. [创建一个免费的 {{{ .starter }}} 实例](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)。记住你为 {{{ .starter }}} 实例设置的 root 密码。
+2. 获取 {{{ .starter }}} 实例的主机名、端口和用户名，供后续使用。
 
-    1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面中，点击目标 {{{ .starter }}} 实例的名称，进入其概览页面。
-    2. 在概览页面中，找到 **Connection** 面板，然后复制 `Endpoint`、`Port` 和 `User` 字段，其中 `Endpoint` 即为 {{{ .starter }}} 实例的主机名。
+    1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 {{{ .starter }}} 实例的名称，进入其概览页。
+    2. 在概览页中，找到 **Connection** 面板，然后复制 `Endpoint`、`Port` 和 `User` 字段，其中 `Endpoint` 即为 {{{ .starter }}} 实例的主机名。
 
 #### 步骤 2. 生成 ProxySQL 配置文件
 
@@ -222,7 +222,7 @@ systemctl start docker
 
     </SimpleTab>
 
-    按提示输入 {{{ .starter }}} 实例的 endpoint 作为 `Serverless Tier Host`，然后输入 {{{ .starter }}} 实例的用户名和密码。
+    按提示输入你的 {{{ .starter }}} 实例的 endpoint 作为 `Serverless Tier Host`，然后输入 {{{ .starter }}} 实例的用户名和密码。
 
     以下为示例输出。你会看到当前 `tidb-cloud-connect` 文件夹下生成了三个配置文件。
 
@@ -351,9 +351,9 @@ systemctl start docker
                 comment:
     ```
 
-#### 步骤 4. 通过 ProxySQL 连接到 TiDB {#step-4-connect-to-tidb-through-proxysql}
+#### 步骤 4. 通过 ProxySQL 连接 TiDB {#step-4-connect-to-tidb-through-proxysql}
 
-1. 要连接到 {{{ .starter }}} 实例，请运行 `proxysql-connect.py`。该脚本会自动启动 MySQL 客户端，并使用你在[步骤 2](#step-2-generate-proxysql-configuration-files)中指定的用户名和密码进行连接。
+1. 运行 `proxysql-connect.py` 连接 {{{ .starter }}} 实例。该脚本会自动启动 MySQL 客户端，并使用你在[步骤 2](#step-2-generate-proxysql-configuration-files)中指定的用户名和密码进行连接。
 
     <SimpleTab groupId="os">
 
@@ -383,19 +383,214 @@ systemctl start docker
 
     </SimpleTab>
 
-2. 连接到 {{{ .starter }}} 实例后，你可以使用以下 SQL 语句验证连接：
+2. 连接到 {{{ .starter }}} 实例后，可以使用以下 SQL 语句验证连接：
 
     ```sql
     SELECT VERSION();
     ```
 
-    如果显示 TiDB 版本，则表示你已成功通过 ProxySQL 连接到 {{{ .starter }}} 实例。要随时退出 MySQL 客户端，请输入 `quit` 并按 <kbd>enter</kbd>。
+    如果显示 TiDB 版本，说明你已通过 ProxySQL 成功连接到 {{{ .starter }}} 实例。随时输入 `quit` 并按 <kbd>enter</kbd> 退出 MySQL 客户端。
 
     > **注意：**
     >
-    > ***For Debugging:*** 如果你无法连接到 {{{ .starter }}} 实例，请检查 `tidb-cloud-connect.cnf`、`proxysql-prepare.sql` 和 `proxysql-connect.py` 文件。确保你提供的服务器信息可用且正确。
+    > ***调试提示：*** 如果无法连接 {{{ .starter }}} 实例，请检查 `tidb-cloud-connect.cnf`、`proxysql-prepare.sql` 和 `proxysql-connect.py` 文件，确保你提供的服务器信息可用且正确。
 
-3. 要停止并移除容器，并返回上一级目录，请运行以下命令：
+3. 停止并移除容器，并返回上级目录，运行以下命令：
+
+    <SimpleTab groupId="os">
+
+    <div label="macOS" value="macOS">
+
+    ```bash
+    docker compose down
+    cd -
+    ```
+
+    </div>
+
+    <div label="CentOS" value="CentOS">
+
+    ```bash
+    docker compose down
+    cd -
+    ```
+
+    </div>
+
+    <div label="Windows (Git Bash)" value="Windows">
+
+    ```bash
+    docker compose down
+    cd -
+    ```
+
+    </div>
+
+    </SimpleTab>
+
+### 方案 2：集成 TiDB Self-Managed 与 ProxySQL {#option-2-integrate-tidb-self-managed-with-proxysql}
+
+在本集成方案中，你将使用 [TiDB](https://hub.docker.com/r/pingcap/tidb) 和 [ProxySQL](https://hub.docker.com/r/proxysql/proxysql) 的 Docker 镜像搭建环境。你也可以根据兴趣尝试[其他 TiDB Self-Managed 安装方式](/quick-start-with-tidb.md)。
+
+以下步骤会将 ProxySQL 和 TiDB 分别设置在 `6033` 和 `4000` 端口，请确保这些端口可用。
+
+1. 启动 Docker。如果 Docker 已启动可跳过此步骤：
+
+    <SimpleTab groupId="os">
+
+    <div label="macOS" value="macOS">
+
+    双击已安装的 Docker 图标启动。
+
+    </div>
+
+    <div label="CentOS" value="CentOS">
+
+    ```bash
+    systemctl start docker
+    ```
+
+    </div>
+
+    <div label="Windows" value="Windows">
+
+    双击已安装的 Docker 图标启动。
+
+    </div>
+
+    </SimpleTab>
+
+2. 克隆 TiDB 与 ProxySQL 的[集成示例代码仓库](https://github.com/pingcap-inc/tidb-proxysql-integration)：
+
+    <SimpleTab groupId="os">
+
+    <div label="macOS" value="macOS">
+
+    ```bash
+    git clone https://github.com/pingcap-inc/tidb-proxysql-integration.git
+    ```
+
+    </div>
+
+    <div label="CentOS" value="CentOS">
+
+    ```bash
+    git clone https://github.com/pingcap-inc/tidb-proxysql-integration.git
+    ```
+
+    </div>
+
+    <div label="Windows (Git Bash)" value="Windows">
+
+    ```bash
+    git clone https://github.com/pingcap-inc/tidb-proxysql-integration.git
+    ```
+
+    </div>
+
+    </SimpleTab>
+
+3. 拉取 ProxySQL 和 TiDB 的最新镜像：
+
+    <SimpleTab groupId="os">
+
+    <div label="macOS" value="macOS">
+
+    ```bash
+    cd tidb-proxysql-integration && docker compose pull
+    ```
+
+    </div>
+
+    <div label="CentOS" value="CentOS">
+
+    ```bash
+    cd tidb-proxysql-integration && docker compose pull
+    ```
+
+    </div>
+
+    <div label="Windows (Git Bash)" value="Windows">
+
+    ```bash
+    cd tidb-proxysql-integration && docker compose pull
+    ```
+
+    </div>
+
+    </SimpleTab>
+
+4. 启动包含 TiDB 和 ProxySQL 的集成环境（以容器方式运行）：
+
+    <SimpleTab groupId="os">
+
+    <div label="macOS" value="macOS">
+
+    ```bash
+    docker compose up -d
+    ```
+
+    </div>
+
+    <div label="CentOS" value="CentOS">
+
+    ```bash
+    docker compose up -d
+    ```
+
+    </div>
+
+    <div label="Windows (Git Bash)" value="Windows">
+
+    ```bash
+    docker compose up -d
+    ```
+
+    </div>
+
+    </SimpleTab>
+
+    登录 ProxySQL `6033` 端口时，可以使用 `root` 用户名和空密码。
+
+5. 通过 ProxySQL 连接 TiDB：
+
+    <SimpleTab groupId="os">
+
+    <div label="macOS" value="macOS">
+
+    ```bash
+    mysql -u root -h 127.0.0.1 -P 6033
+    ```
+
+    </div>
+
+    <div label="CentOS" value="CentOS">
+
+    ```bash
+    mysql -u root -h 127.0.0.1 -P 6033
+    ```
+
+    </div>
+
+    <div label="Windows (Git Bash)" value="Windows">
+
+    ```bash
+    mysql -u root -h 127.0.0.1 -P 6033
+    ```
+
+    </div>
+
+    </SimpleTab>
+
+6. 连接到 TiDB Self-Managed 集群后，可以使用以下 SQL 语句验证连接：
+
+    ```sql
+    SELECT VERSION();
+    ```
+
+    如果显示 TiDB 版本，说明你已通过 ProxySQL 成功连接到 TiDB 容器。
+
+7. 停止并移除容器，并返回上级目录，运行以下命令：
 
     <SimpleTab groupId="os">
 
@@ -538,201 +733,6 @@ ProxySQL 可在多种平台上安装。以下以 CentOS 为例。
     > - `default_hostgroup`：用户默认使用的主机组，SQL 流量会分发到该主机组，除非查询规则将流量重定向到特定主机组。
     > - `transaction_persistent`：`1` 表示持久事务。当用户在连接中开启事务时，所有查询语句都会路由到同一主机组，直到事务提交或回滚。
 
-### 方案 2：集成 TiDB Self-Managed 与 ProxySQL {#option-2-integrate-tidb-self-managed-with-proxysql}
-
-在本集成方案中，你将使用 [TiDB](https://hub.docker.com/r/pingcap/tidb) 和 [ProxySQL](https://hub.docker.com/r/proxysql/proxysql) 的 Docker 镜像来搭建环境。你也可以根据需要尝试[其他安装 TiDB Self-Managed 的方式](/quick-start-with-tidb.md)。
-
-以下步骤会分别将 ProxySQL 和 TiDB 设置在 `6033` 和 `4000` 端口，请确保这些端口可用。
-
-1. 启动 Docker。如果 Docker 已启动可跳过此步骤：
-
-    <SimpleTab groupId="os">
-
-    <div label="macOS" value="macOS">
-
-    双击已安装的 Docker 图标启动。
-
-    </div>
-
-    <div label="CentOS" value="CentOS">
-
-    ```bash
-    systemctl start docker
-    ```
-
-    </div>
-
-    <div label="Windows" value="Windows">
-
-    双击已安装的 Docker 图标启动。
-
-    </div>
-
-    </SimpleTab>
-
-2. 克隆 TiDB 与 ProxySQL 的[集成示例代码仓库](https://github.com/pingcap-inc/tidb-proxysql-integration)：
-
-    <SimpleTab groupId="os">
-
-    <div label="macOS" value="macOS">
-
-    ```bash
-    git clone https://github.com/pingcap-inc/tidb-proxysql-integration.git
-    ```
-
-    </div>
-
-    <div label="CentOS" value="CentOS">
-
-    ```bash
-    git clone https://github.com/pingcap-inc/tidb-proxysql-integration.git
-    ```
-
-    </div>
-
-    <div label="Windows (Git Bash)" value="Windows">
-
-    ```bash
-    git clone https://github.com/pingcap-inc/tidb-proxysql-integration.git
-    ```
-
-    </div>
-
-    </SimpleTab>
-
-3. 拉取最新的 ProxySQL 和 TiDB 镜像：
-
-    <SimpleTab groupId="os">
-
-    <div label="macOS" value="macOS">
-
-    ```bash
-    cd tidb-proxysql-integration && docker compose pull
-    ```
-
-    </div>
-
-    <div label="CentOS" value="CentOS">
-
-    ```bash
-    cd tidb-proxysql-integration && docker compose pull
-    ```
-
-    </div>
-
-    <div label="Windows (Git Bash)" value="Windows">
-
-    ```bash
-    cd tidb-proxysql-integration && docker compose pull
-    ```
-
-    </div>
-
-    </SimpleTab>
-
-4. 启动集成环境，以容器方式同时运行 TiDB 和 ProxySQL：
-
-    <SimpleTab groupId="os">
-
-    <div label="macOS" value="macOS">
-
-    ```bash
-    docker compose up -d
-    ```
-
-    </div>
-
-    <div label="CentOS" value="CentOS">
-
-    ```bash
-    docker compose up -d
-    ```
-
-    </div>
-
-    <div label="Windows (Git Bash)" value="Windows">
-
-    ```bash
-    docker compose up -d
-    ```
-
-    </div>
-
-    </SimpleTab>
-
-    要登录到 ProxySQL 的 `6033` 端口，可以使用 `root` 用户名和空密码。
-
-5. 通过 ProxySQL 连接到 TiDB：
-
-    <SimpleTab groupId="os">
-
-    <div label="macOS" value="macOS">
-
-    ```bash
-    mysql -u root -h 127.0.0.1 -P 6033
-    ```
-
-    </div>
-
-    <div label="CentOS" value="CentOS">
-
-    ```bash
-    mysql -u root -h 127.0.0.1 -P 6033
-    ```
-
-    </div>
-
-    <div label="Windows (Git Bash)" value="Windows">
-
-    ```bash
-    mysql -u root -h 127.0.0.1 -P 6033
-    ```
-
-    </div>
-
-    </SimpleTab>
-
-6. 连接到 TiDB Self-Managed 集群后，你可以使用以下 SQL 语句验证连接：
-
-    ```sql
-    SELECT VERSION();
-    ```
-
-    如果显示 TiDB 版本，则表示你已成功通过 ProxySQL 连接到 TiDB 容器。
-
-7. 要停止并移除容器，并返回上一级目录，请运行以下命令：
-
-    <SimpleTab groupId="os">
-
-    <div label="macOS" value="macOS">
-
-    ```bash
-    docker compose down
-    cd -
-    ```
-
-    </div>
-
-    <div label="CentOS" value="CentOS">
-
-    ```bash
-    docker compose down
-    cd -
-    ```
-
-    </div>
-
-    <div label="Windows (Git Bash)" value="Windows">
-
-    ```bash
-    docker compose down
-    cd -
-    ```
-
-    </div>
-
-    </SimpleTab>
-
 ##### 方案 2：通过配置文件配置 ProxySQL
 
 此方案仅作为配置 ProxySQL 的备选方法。更多信息参见 [Configuring ProxySQL through the config file](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file)。
@@ -776,8 +776,8 @@ ProxySQL 可在多种平台上安装。以下以 CentOS 为例。
 
     上述示例中：
 
-    - `address` 和 `port`：指定 TiDB Cloud 集群的 endpoint 和端口。
-    - `username` 和 `password`：指定 TiDB Cloud 集群的用户名和密码。
+    - `address` 和 `port`：指定 TiDB Cloud Dedicated 集群的 endpoint 和端口。
+    - `username` 和 `password`：指定 TiDB Cloud Dedicated 集群的用户名和密码。
 
 3. 重启 ProxySQL：
 

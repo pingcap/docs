@@ -12,61 +12,25 @@ category: quick start
 
 此外，你还可以在 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start) 上体验 TiDB 的功能。
 
-## 第 1 步：创建一个 {{{ .starter }}} 实例 {#step-1-create-a-starter-instance}
+## 第 1 步：创建 {{{ .starter }}} 实例 {#step-1-create-a-starter-instance}
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始使用 TiDB Cloud 的最佳方式。要创建一个 {{{ .starter }}} 实例，请按照以下步骤操作：
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是体验 TiDB Cloud 的最佳方式。要创建 {{{ .starter }}} 实例，请按照以下步骤操作：
 
-1. 如果你还没有 TiDB Cloud 账号，请点击[这里](https://tidbcloud.com/free-trial)注册。
-
-    你可以使用邮箱和密码注册，并通过 TiDB Cloud 管理密码；也可以选择使用 Google、GitHub 或 Microsoft 账号登录，通过单点登录（SSO）使用 TiDB Cloud。
-
-2. [登录](https://tidbcloud.com/)你的 TiDB Cloud 账号。
-
-    默认会显示 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
-
-3. 对于新注册用户，TiDB Cloud 会自动为你创建一个默认的 {{{ .starter }}} 实例，名称为 `Instance0`。
-
-    - 若要立即使用这个默认的 {{{ .starter }}} 实例体验 TiDB Cloud 功能，请继续阅读[第 2 步：体验 AI 辅助 SQL 编辑器](#step-2-try-ai-assisted-sql-editor)。
-    - 若要自行创建一个新的 {{{ .starter }}} 实例，请按照以下步骤操作：
-
-        1. 点击 **Create Resource**。
-        2. 在 **Create Resource** 页面，默认已选择 **Starter**。输入 {{{ .starter }}} 实例名称，选择云服务提供商和目标区域，然后点击 **Create**。大约 30 秒后即可创建完成。
-
-        <CustomContent language="en,zh">
-
-        > **注意**
-        >
-        > 当前，{{{ .starter }}} 在 AWS 上已正式发布，在阿里云上处于公测阶段。本文档后续步骤以 AWS 为例。
-
-        </CustomContent>
-
-        <CustomContent language="ja">
-
-        > **注意**
-        >
-        > 当前，{{{ .starter }}} 在 AWS 上已正式发布。本文档后续步骤以 AWS 为例。
-
-        </CustomContent>
-
-## 第 1 步：创建 TiDB 集群
-
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是体验 TiDB Cloud 的最佳方式。要创建 TiDB Cloud Starter 集群，请按照以下步骤操作：
-
-1. 如果你还没有 TiDB Cloud 账号，请点击[这里](https://tidbcloud.com/free-trial)注册。
+1. 如果你还没有 TiDB Cloud 账户，请点击[这里](https://tidbcloud.com/free-trial)注册。
 
     你可以使用邮箱和密码注册并由 TiDB Cloud 管理密码，或者选择使用 Google、GitHub 或 Microsoft 账号进行单点登录（SSO）到 TiDB Cloud。
 
-2. [登录](https://tidbcloud.com/)你的 TiDB Cloud 账号。
+2. [登录](https://tidbcloud.com/)你的 TiDB Cloud 账户。
 
-    默认会显示 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    默认会显示 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
-3. 对于新注册用户，TiDB Cloud 会自动为你创建一个名为 `Cluster0` 的默认 TiDB Cloud Starter 集群。
+3. 对于新注册用户，TiDB Cloud 会自动为你创建一个名为 `Instance0` 的默认 {{{ .starter }}} 实例。
 
-    - 如果你想立即使用该默认集群体验 TiDB Cloud 的功能，请继续阅读 [第 2 步：体验 AI 辅助 SQL 编辑器](#step-2-try-ai-assisted-sql-editor)。
-    - 如果你想自行创建新的 TiDB Cloud Starter 集群，请按照以下步骤操作：
+    - 如果你想立即使用该默认 {{{ .starter }}} 实例体验 TiDB Cloud 的功能，请继续阅读 [第 2 步：体验 AI 辅助 SQL 编辑器](#step-2-try-ai-assisted-sql-editor)。
+    - 如果你想自行创建新的 {{{ .starter }}} 实例，请按照以下步骤操作：
 
-        1. 点击 **Create Cluster**。
-        2. 在 **Create Cluster** 页面，**Starter** 会被默认选中。选择你的集群所需的云服务商和目标区域，如有需要可修改默认集群名称，然后点击 **Create**。你的 TiDB Cloud Starter 集群将在大约 30 秒内创建完成。
+        1. 点击 **Create Resource**。
+        2. 在 **Create Resource** 页面，**Starter** 会被默认选中。输入 {{{ .starter }}} 实例名称，选择云服务商和目标区域，然后点击 **Create**。你的 {{{ .starter }}} 实例将在大约 30 秒内创建完成。
 
         <CustomContent language="en,zh">
 
@@ -84,12 +48,85 @@ category: quick start
 
         </CustomContent>
 
+## 第 2 步：体验 AI 辅助 SQL 编辑器
+
+对于托管在 AWS 上的 {{{ .starter }}} 实例，你可以在 TiDB Cloud 控制台中使用内置的 AI 辅助 SQL 编辑器，最大化数据价值。你无需本地 SQL 客户端即可对数据库运行 SQL 查询，并可直观地以表格或图表形式查看查询结果，轻松查看查询日志。
+
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击你的 {{{ .starter }}} 实例名称进入其概览页面，然后在左侧导航栏点击 **SQL Editor**。
+
+2. 若要体验 TiDB Cloud 的 AI 能力，请按照页面提示，允许 PingCAP 和 AWS Bedrock 使用你的代码片段进行研究和服务改进，然后点击 **Save and Get Started**。
+
+3. 在 SQL Editor 中，按下 <kbd>⌘</kbd> + <kbd>I</kbd>（macOS）或 <kbd>Control</kbd> + <kbd>I</kbd>（Windows 或 Linux），即可指示 [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) 自动生成 SQL 查询。
+
+    例如，若要创建一个包含两列（`id` 和 `name`）的新表 `test.t`，你可以输入 `use test;` 指定数据库，按下 <kbd>⌘</kbd> + <kbd>I</kbd>，输入指令 `create a new table t with id and name`，然后按 **Enter**，让 AI 自动生成相应的 SQL 语句。
+
+    对于生成的语句，你可以点击 **Accept** 接受并根据需要进一步编辑，或点击 **Discard** 拒绝。
+
+    > **注意：**
+    >
+    > AI 生成的 SQL 查询并非 100% 准确，可能仍需进一步调整。
+
+4. 运行 SQL 查询。
+
+    <SimpleTab>
+    <div label="macOS">
+
+    对于 macOS：
+
+    - 如果编辑器中只有一个查询，按下 **⌘ + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** 执行。
+
+    - 如果编辑器中有多个查询，使用光标选中目标查询的行，然后按 **⌘ + Enter** 或点击 **Run** 顺序执行。
+
+    - 若要顺序执行编辑器中的所有查询，按 **⇧ + ⌘ + Enter**，或用光标选中所有查询的行后点击 **Run**。
+
+    </div>
+
+    <div label="Windows/Linux">
+
+    对于 Windows 或 Linux：
+
+    - 如果编辑器中只有一个查询，按下 **Ctrl + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** 执行。
+
+    - 如果编辑器中有多个查询，使用光标选中目标查询的行，然后按 **Ctrl + Enter** 或点击 **Run** 顺序执行。
+
+    - 若要顺序执行编辑器中的所有查询，按 **Shift + Ctrl + Enter**，或用光标选中所有查询的行后点击 **Run**。
+
+    </div>
+    </SimpleTab>
+
+运行查询后，你可以在页面底部立即看到查询日志和结果。
+
+如需让 AI 生成更多 SQL 语句，你可以输入更多指令，如下例所示：
+
+```sql
+use test;
+
+-- create a new table t with id and name 
+CREATE TABLE
+  `t` (`id` INT, `name` VARCHAR(255));
+
+-- add 3 rows 
+INSERT INTO
+  `t` (`id`, `name`)
+VALUES
+  (1, 'row1'),
+  (2, 'row2'),
+  (3, 'row3');
+
+-- query all
+SELECT
+  `id`,
+  `name`
+FROM
+  `t`;
+```
+
 ## 第 3 步：体验控制台引导式教程
 
-TiDB Cloud 提供了交互式教程和精心设计的示例数据集，帮助你快速上手 TiDB Cloud。对于托管在 AWS 上的 TiDB Cloud Starter 实例，你可以通过该教程学习如何使用 TiDB Cloud 进行高性能数据分析。
+TiDB Cloud 提供了交互式教程和精心设计的示例数据集，帮助你快速上手 TiDB Cloud。对于托管在 AWS 上的 {{{ .starter }}} 实例，你可以通过该教程学习如何使用 TiDB Cloud 进行高性能数据分析。
 
 1. 点击控制台右下角的 **?** 图标，选择 **Guided tour of SQL Editor**。
-2. 选择你想用于教程的 TiDB Cloud Starter 实例，点击 **Import Dataset**。导入过程大约需要 1 分钟。
+2. 选择你想用于教程的 {{{ .starter }}} 实例，点击 **Import Dataset**。导入过程大约需要 1 分钟。
 3. 示例数据导入完成后，按照页面提示完成教程。
 
 ## 后续操作
