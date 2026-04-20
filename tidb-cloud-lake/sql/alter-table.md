@@ -351,7 +351,7 @@ CONNECTION=(connection_name = 's3_access_key_conn');
 
 CREATE CONNECTION s3_role_conn
     STORAGE_TYPE = 's3'
-    ROLE_ARN = 'arn:aws:iam::123456789012:role/databend-access';
+    ROLE_ARN = 'arn:aws:iam::123456789012:role/lake-access';
 
 ALTER TABLE sales_data CONNECTION=( connection_name = 's3_role_conn' );
 ```
@@ -397,4 +397,25 @@ ALTER TABLE t1 SWAP WITH t2;
 -- After swapping, t1 now has t2's schema, and t2 has t1's schema
 DESC t1;
 DESC t2;
+```
+
+## Tag Operations
+
+Assigns or removes governance tags on a table. Governance tags are key-value metadata for classification and data governance. Tags must be created with [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) first. For full details, see [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md).
+
+### Syntax
+
+```sql
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
+    SET TAG <tag_name> = '<value>' [, <tag_name> = '<value>' ...]
+
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
+    UNSET TAG <tag_name> [, <tag_name> ...]
+```
+
+### Examples
+
+```sql
+ALTER TABLE default.users SET TAG env = 'prod', owner = 'team_a';
+ALTER TABLE default.users UNSET TAG env, owner;
 ```

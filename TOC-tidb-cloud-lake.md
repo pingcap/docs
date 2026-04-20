@@ -1152,6 +1152,7 @@
       - [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md)
       - [READ_FILE](/tidb-cloud-lake/sql/read-file.md)
       - [RESULT_SCAN](/tidb-cloud-lake/sql/result-scan.md)
+      - [SYSTEM$SET_CACHE_CAPACITY](/tidb-cloud-lake/sql/set-cache-capacity.md)
       - [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants-sql.md)
       - [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables-sql.md)
       - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md)
