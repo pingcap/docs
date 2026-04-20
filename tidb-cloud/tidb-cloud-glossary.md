@@ -71,7 +71,7 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 
 Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
-For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/developer/vector-search-full-text-search-sql) and [Full-Text Search with Python](https://docs.pingcap.com/developer/vector-search-full-text-search-python).
+For more information, see [Full-Text Search with SQL](/ai/guides/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md).
 
 ## M
 
