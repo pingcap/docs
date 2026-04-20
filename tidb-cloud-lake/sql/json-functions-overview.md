@@ -47,6 +47,7 @@ This section provides reference information for JSON functions in {{{ .lake }}}.
 | [JSON_EXTRACT_PATH_TEXT](/tidb-cloud-lake/sql/json-extract-path-text.md) | Extracts text value from JSON using path | `JSON_EXTRACT_PATH_TEXT('{"name":"John"}', 'name')` → `'John'` |
 | [JSON_EACH](/tidb-cloud-lake/sql/json-each.md) | Expands JSON object into key-value pairs | `JSON_EACH('{"a":1,"b":2}')` → `[("a",1),("b",2)]` |
 | [JSON_ARRAY_ELEMENTS](/tidb-cloud-lake/sql/json-array-elements.md) | Expands JSON array into individual elements | `JSON_ARRAY_ELEMENTS('[1,2,3]')` → `1, 2, 3` |
+| [JQ](/tidb-cloud-lake/sql/jq.md) | Processes JSON using jq-style queries | `JQ('{"name":"John"}', '.name')` → `"John"` |
 
 ## JSON Formatting & Processing
 
@@ -54,7 +55,7 @@ This section provides reference information for JSON functions in {{{ .lake }}}.
 |----------|-------------|---------|
 | [JSON_PRETTY](/tidb-cloud-lake/sql/json-pretty.md) | Formats JSON with proper indentation | `JSON_PRETTY('{"a":1}')` → Formatted JSON string |
 | [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | Removes null values from JSON | `STRIP_NULL_VALUE('{"a":1,"b":null}')` → `{"a":1}` |
-| [JQ](/tidb-cloud-lake/sql/jq.md) | Processes JSON using jq-style queries | `JQ('{"name":"John"}', '.name')` → `"John"` |
+| [JSON_STRIP_NULLS](/tidb-cloud-lake/sql/json-strip-nulls.md) | Removes null values from JSON Object | `JSON_STRIP_NULLS(PARSE_JSON('{"a":1,"b":null}'))` → `{"a":1}` |
 
 ## JSON Containment & Existence
 
