@@ -2345,6 +2345,23 @@ Configures the behavior of TiKV automatic compaction.
 + Controls whether to force compaction on the bottommost files in RocksDB.
 + Default value: `true`
 
+### `mvcc-read-aware-enabled` <span class="version-mark">New in v8.5.6</span>
+
++ Controls whether to enable MVCC-read-aware compaction. When enabled, TiKV tracks the number of MVCC versions scanned during read requests and uses this information to prioritize compaction for Regions with high MVCC read amplification. This reduces read latency for hot Regions that encounter many stale versions during scans.
++ Default value: `false`
+
+### `mvcc-scan-threshold` <span class="version-mark">New in v8.5.6</span>
+
++ The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) is set to `true`.
++ Default value: `1000`
++ Minimum value: `0`
+
+### `mvcc-read-weight` <span class="version-mark">New in v8.5.6</span>
+
++ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers, such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) is set to `true`.
++ Default value: `3.0`
++ Minimum value: `0.0`
+
 ## backup
 
 Configuration items related to BR backup.
@@ -2643,6 +2660,24 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 + The maximum number of TSOs in a timestamp request.
 + In a default TSO physical time update interval (`50ms`), PD provides at most 262144 TSOs. When requested TSOs exceed this number, PD provides no more TSOs. This configuration item is used to avoid exhausting TSOs and the reverse impact of TSO exhaustion on other businesses. If you increase the value of this configuration item to improve high availability, you need to decrease the value of [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) at the same time to get enough TSOs.
 + Default value: `8192`
+
+## resource-metering
+
+Configuration items related to resource metering.
+
+### `enable-network-io-collection` <span class="version-mark">New in v8.5.6</span>
+
++ Controls whether to collect TiKV network traffic and logical I/O information in [Top SQL](/dashboard/top-sql.md) in addition to CPU data.
++ When enabled, TiKV additionally records inbound network bytes, outbound network bytes, logical read bytes, and logical write bytes during request processing.
++ When reporting resource consumption, TiKV filters the Top N records based on CPU time, network traffic, and logical I/O, and additionally reports these statistics by Region for more fine-grained analysis of hotspot requests or resource usage sources.
++ Default value: `false`
+
+> **Note:**
+>
+> Logical I/O is not equivalent to physical I/O and cannot be directly correlated:
+>
+> - Logical I/O refers to the logical amount of data processed by requests at the TiKV storage layer, such as data scanned or processed during reads and data written by write requests.
+> - Physical I/O refers to the actual disk read/write traffic on the underlying storage device, which is affected by block cache, compaction, flush, and other factors.
 
 ## resource-control
 

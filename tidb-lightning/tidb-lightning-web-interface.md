@@ -5,6 +5,10 @@ summary: Control TiDB Lightning through the web interface.
 
 # TiDB Lightning Web Interface
 
+> **Warning:**
+>
+> Starting from v8.5.6, the TiDB Lightning Web Interface is deprecated and will be removed in v8.5.7. The web UI build has been broken since v8.4.0. Use the [`tidb-lightning` CLI](/tidb-lightning/tidb-lightning-overview.md) or the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement instead. If this affects your workflow, comment on [#67697](https://github.com/pingcap/tidb/issues/67697).
+
 TiDB Lightning provides a webpage for viewing the import progress and performing some simple task management. This is called the *server mode*.
 
 To enable server mode, either start `tidb-lightning` with the `--server-mode` flag

@@ -8,7 +8,7 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 If your source data is stored in Amazon S3 buckets, Azure Blob Storage containers, or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. This document describes how to do this for TiDB Cloud Dedicated clusters.
 
-If you need to configure these external storages for {{{ .starter }}} or {{{ .essential }}} clusters, see [Configure External Storage Access for {{{ .starter }}} or Essential](/tidb-cloud/configure-external-storage-access.md).
+If you need to configure these external storages for {{{ .starter }}} or {{{ .essential }}} instances, see [Configure External Storage Access for {{{ .starter }}} or Essential](/tidb-cloud/configure-external-storage-access.md).
 
 ## Configure Amazon S3 access
 
@@ -23,19 +23,19 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), get the corresponding TiDB Cloud account ID and external ID of the target TiDB cluster.
 
-    1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-    3. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
+    3. Click **Import data from Cloud Storage**.
 
-    4. On the **Import Data from Amazon S3** page, click the link under **Role ARN**. The **Add New Role ARN** dialog is displayed.
+    4. On the **Import Data from Cloud Storage** page, set **Storage Provider** to **Amazon S3**, make sure **AWS Role ARN** is selected under **Credentials**, and then click **Click here to create new one with AWS CloudFormation** under the **Role ARN** field. The **Add New Role ARN** dialog is displayed.
 
-    5. Expand **Create Role ARN manually** to get the TiDB Cloud Account ID and TiDB Cloud External ID. Take a note of these IDs for later use.
+    5. Expand **Having trouble? Create Role ARN manually** to get the **TiDB Cloud Account ID** and **TiDB Cloud External ID** for this cluster. Take a note of these IDs for later use.
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
@@ -153,17 +153,17 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
 
-    1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-    3. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
+    3. Click **Import data from Cloud Storage**.
 
-    4. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
+    4. On the **Import Data from Cloud Storage** page, set **Storage Provider** to **Google Cloud Storage**, and then copy the Google Cloud Service Account ID for later use.
 
 2. In the Google Cloud console, create an IAM role for your GCS bucket.
 

@@ -5,18 +5,18 @@ summary: Learn how to connect to an Amazon MSK Provisioned cluster using an Amaz
 
 # Connect to Amazon MSK Provisioned via a Private Link Connection
 
-This document describes how to connect a {{{ .essential }}} cluster to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster using an [Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
+This document describes how to connect a {{{ .essential }}} instance to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster using an [Amazon MSK Provisioned private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection).
 
 ## Prerequisites for {{{ .essential }}} {#prerequisites-for-essential}
 
-- Your {{{ .essential }}} cluster is hosted on AWS and is active. Retrieve and save the following for later use:
+- Your {{{ .essential }}} instance is hosted on AWS and is active. Retrieve and save the following for later use:
 
     - AWS Account ID
     - Availability zones (AZ)
 
 To view the AWS account ID and availability zones:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), go to the cluster overview page of your TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), go to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the dialog, note the AWS account ID and availability zones.
 
@@ -24,13 +24,13 @@ To view the AWS account ID and availability zones:
 
 Before you begin, ensure the following for your Amazon MSK Provisioned cluster:
  
-- **Region and AZ**: Your Amazon MSK Provisioned cluster is in the same AWS region as your {{{ .essential }}} cluster, and the availability zones of the MSK cluster are the same as your TiDB Cloud cluster.
+- **Region and AZ**: Your Amazon MSK Provisioned cluster is in the same AWS region as your {{{ .essential }}} instance, and the availability zones of the MSK cluster are the same as your {{{ .essential }}} instance.
 - **Authentication**: [SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) is required for the MSK cluster.
 - **Broker type**: Do not use the `t4.small` broker type. It does not support private link.
     
 For more requirements, see [Amazon MSK multi-VPC private connectivity in a single Region](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements).
     
- If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) in the same region and the same availability zone as your {{{ .essential }}} cluster, and then [set up SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for the created cluster.
+ If you do not have an Amazon MSK Provisioned cluster, [create one](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) in the same region and the same availability zone as your {{{ .essential }}} instance, and then [set up SASL/SCRAM authentication](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) for the created cluster.
 
 - **Secret name**: the secret name must start with `AmazonMSK_`.
 - **Encryption**: do not use the default encryption key. Create a new custom AWS KMS key for your secret.

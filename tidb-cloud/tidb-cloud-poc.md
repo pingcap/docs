@@ -13,7 +13,7 @@ This document describes the typical PoC procedures and aims to help you quickly 
 
 If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
-Alternatively, you can [create a {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the {{{ .starter }}} has some [special terms and conditions](/tidb-cloud/serverless-limitations.md).
+Alternatively, you can [create a {{{ .starter }}}](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-starter-instance) to get familiar with TiDB Cloud for a quick evaluation. Note that the {{{ .starter }}} has some [special terms and conditions](/tidb-cloud/serverless-limitations.md).
 
 ## Overview of the PoC procedures
 
@@ -95,7 +95,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [{{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#starter) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [{{{ .starter }}} instance](/tidb-cloud/select-cluster-tier.md#starter) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 8.0. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
@@ -179,7 +179,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Upgrade
 
-    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md).
+    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade the TiDB Version](/tidb-cloud/upgrade-tidb-cluster.md).
 
 - Backup
 
@@ -193,7 +193,7 @@ If you want to try TiDB Cloud on a larger scale, for a new round of deployments 
 
 If your credits are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
-You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
+You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cloud Resource](/tidb-cloud/delete-tidb-cluster.md).
 
 ## FAQ
 
