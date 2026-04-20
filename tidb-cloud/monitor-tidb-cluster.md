@@ -60,25 +60,25 @@ summary: 了解如何监控你的 TiDB Cloud 资源。
 
 <CustomContent plan="starter,essential,premium">
 
-## Instance status
+## 实例状态
 
 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，你可以在 **Status** 列中查看每个正在运行的 TiDB Cloud 实例的当前状态。
 
-| Status | Description |
+| 状态 | 描述 |
 |:--|:--|
 | **Active** | 实例健康且可用。 |
-| **Creating** | 实例正在创建中。实例在创建期间不可访问。 |
+| **Creating** | 实例正在创建中。实例在创建期间无法访问。 |
 | **Importing** | 正在将数据导入实例。 |
 | **Maintaining** | 实例正在维护中。 |
 | **Modifying** | 实例正在被修改。 |
-| **Unavailable** | 实例发生故障，TiDB 无法恢复。 |
-| **Restoring** | 实例当前正在从备份恢复。 |
+| **Unavailable** | 实例发生故障，且 TiDB 无法恢复它。 |
+| **Restoring** | 实例当前正在从备份中恢复。 |
 
 </CustomContent>
 
 ## 监控统计/指标（信息）
 
-在 TiDB Cloud 中，你可以通过以下页面查看集群的常用统计/指标（信息）：
+在 TiDB Cloud 中，你可以通过以下页面查看 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent> 的常用统计/指标（信息）：
 
 - **Overview** 页面
 - **Metrics** 页面
@@ -97,9 +97,18 @@ summary: 了解如何监控你的 TiDB Cloud 资源。
 
 2. 查看 **Core Metrics** 部分。
 
-## Monitoring metrics
+### Metrics 页面
 
-在 TiDB Cloud 中，你可以从以下页面查看 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent> 的常用统计/指标（信息）：
+**Metrics** 页面提供你的 TiDB Cloud 资源的完整统计/指标（信息）集。通过查看这些统计/指标（信息），你可以轻松识别性能问题，并判断当前数据库部署是否满足你的需求。
 
-- **Overview** 页面
-- **Metrics** 页面
+要在 **Metrics** 页面查看统计/指标（信息），请按照以下步骤操作：
+
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源名称，进入其 Overview 页面。
+
+    > **提示：**
+    >
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
+
+2. 在左侧导航栏，点击 **Monitoring** > **Metrics**。
+
+更多信息，参见 [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md)。
