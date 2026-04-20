@@ -110,11 +110,13 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 
 <CustomContent plan="premium">
 
+To subscribe to alert notifications of a {{{ .premium }}} instance, take the following steps:
+
 > **Tip:**
 >
-> The alert subscription is for all alerts in the current {{{ .premium }}} instance. If you have multiple {{{ .premium }}} instances, you need to subscribe to each {{{ .premium }}} instance individually.
+> For {{{ .premium }}}, the alert subscription is for all alerts in the current instance. If you have multiple {{{ .premium }}} instances, you need to subscribe to each instance individually.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target {{{ .premium }}} instance using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Zoom** from the **Subscriber Type** drop-down list.
@@ -126,7 +128,7 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 
 7. Click **Save** to complete the subscription.
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
 
 </CustomContent>
 
@@ -157,7 +159,7 @@ If you no longer want to receive alert notifications, take the following steps. 
 
 <CustomContent plan="premium">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target {{{ .premium }}} instance using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.

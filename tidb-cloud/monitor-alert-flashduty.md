@@ -29,7 +29,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ## Subscribe to alert notifications
 
-To receive alert notifications of <CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, take the following steps:
+To receive alert notifications of <CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, take the following steps:
 
 ### Step 1. Generate a Flashduty webhook URL
 
@@ -97,9 +97,9 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 
 > **Tip:**
 >
-> The alert subscription is for all alerts in the current {{{ .premium }}} instance. If you have multiple {{{ .premium }}} instances, you need to subscribe to each {{{ .premium }}} instance individually.
+> For {{{ .premium }}}, the alert subscription is for all alerts in the current instance. If you have multiple {{{ .premium }}} instances, you need to subscribe to each instance individually.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target {{{ .premium }}} instance using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Flashduty** from the **Subscriber Type** drop-down list.
@@ -142,7 +142,7 @@ If you no longer want to receive alert notifications, take the following steps. 
 
 <CustomContent plan="premium">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target {{{ .premium }}} instance using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.

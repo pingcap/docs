@@ -36,15 +36,16 @@ In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page
 
 In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page of your instance to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations and {{{ .premium }}} instances.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. In the left navigation pane, click **Monitoring** > **Alerts**.
-3. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
-4. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
+2. Click the name of the target {{{ .premium }}} instance to go to its overview page.
+3. Click **Alerts** in the left navigation pane.
+4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
+5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
 
 </CustomContent>
 
