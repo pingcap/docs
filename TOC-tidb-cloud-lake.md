@@ -238,12 +238,12 @@
       - [DDL Overview](/tidb-cloud-lake/sql/ddl.md)
       - Database
         - [Overview](/tidb-cloud-lake/sql/ddl-database-overview.md)
-        - [RENAME DATABASE](/tidb-cloud-lake/sql/rename-database.md)
         - [CREATE DATABASE](/tidb-cloud-lake/sql/create-database.md)
-        - [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
-        - [USE DATABASE](/tidb-cloud-lake/sql/use-database.md)
         - [SHOW CREATE DATABASE](/tidb-cloud-lake/sql/show-create-database.md)
+        - [USE DATABASE](/tidb-cloud-lake/sql/use-database.md)
+        - [ALTER DATABASE](/tidb-cloud-lake/sql/alter-database.md)
         - [SHOW DATABASES](/tidb-cloud-lake/sql/show-databases.md)
+        - [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
         - [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
         - [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md)
       - Table
@@ -326,6 +326,12 @@
         - [CREATE NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/create-notification-integration.md)
         - [ALTER NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/alter-notification-integration.md)
         - [DROP NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/drop-notification-integration.md)
+      - Tag
+        - [Overview](/tidb-cloud-lake/sql/tag-overview.md)
+        - [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md)
+        - [DROP TAG](/tidb-cloud-lake/sql/drop-tag.md)
+        - [SHOW TAGS](/tidb-cloud-lake/sql/show-tags.md)
+        - [SET TAG](/tidb-cloud-lake/sql/set-tag.md)
       - Connection
         - [Overview](/tidb-cloud-lake/sql/connection.md)
         - [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
@@ -1149,6 +1155,7 @@
       - [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants-sql.md)
       - [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables-sql.md)
       - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md)
+      - [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md)
       - [TASK_HISTORY](/tidb-cloud-lake/sql/task-history.md)
     - Sequence Functions
       - [Overview](/tidb-cloud-lake/sql/sequence-functions-overview.md)

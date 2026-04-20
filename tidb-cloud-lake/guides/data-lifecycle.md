@@ -35,7 +35,7 @@ Arrange your data in databases and tables.
 Key Commands:
 
 - [`CREATE DATABASE`](/tidb-cloud-lake/sql/create-database.md): To create a new database.
-- [`ALTER DATABASE`](/tidb-cloud-lake/sql/rename-database.md): To modify an existing database.
+- [`ALTER DATABASE`](/tidb-cloud-lake/sql/alter-database.md): To modify an existing database.
 - [`CREATE TABLE`](/tidb-cloud-lake/sql/create-table.md): To create a new table.
 - [`ALTER TABLE`](/tidb-cloud-lake/sql/alter-table.md): To modify an existing table.
 
