@@ -339,3 +339,57 @@ To restore a deleted cluster from recycle bin, take the following steps:
    The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
 7. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.
+
+## Export backups
+
+TiDB Cloud Dedicated clusters can export a backup to your own Cloud Object Storage location.
+
+### Export backups to Google Cloud Storage
+
+To export your cluster backups to Google Cloud Storage, take the following steps:
+
+1. Navigate to the **Backup** tab of a cluster deployed on Google Cloud.
+
+2. From the list of backups, identify the backup that you want to export.
+
+3. Click **Export** from the action menu of the identified backup. The export backup window displays.
+
+4. In **Google Cloud Storage Settings**, enter the Folder URI of a Google Cloud Storage location that you want to export the backup into.
+
+    > **Note**
+    > - To allow TiDB Cloud to export the backup data to your GCS bucket, you need to configure the GCS access for the bucket. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project and region can access the GCS bucket.
+
+5. If this is the first time exporting a backup to this bucket then configure access by:
+
+   1. Copy the **Google Cloud Service Account ID**
+   
+   2. Sign in to the [Google Cloud console](https://console.cloud.google.com/).
+
+   3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and click the name of the GCS bucket you want TiDB Cloud to access.
+
+   4. On the **Bucket details** page, click the **PERMISSIONS** tab, and then click **GRANT ACCESS**.
+
+       ![Grant Access to the bucket ](/media/tidb-cloud/gcp-bucket-permissions.png)
+
+   5. Fill in the following information to grant access to your bucket, and then click **SAVE**.
+
+       - In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster.
+       - In the **Select a role** drop-down list, select the `Storage Legacy Bucket Writer` role.
+
+       > **Note:**
+       >
+       > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
+
+   6. On the **Bucket details** page, click the **OBJECTS** tab.
+
+       If you want to copy a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
+
+       For example, if the folder name is `tidb-cloud-export-data`, you need to use `gs://tidb-cloud-export-data/` as the URI.
+
+       ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
+    
+    7. In the TiDB Cloud Console click **Export** to begin exporting the backup.
+
+        The backup export process starts and the list of **Exported Backups** is displayed showing the progress.
+
+        To return to the list at any time, click the **Exported Backups** option on the Cluster's **Backup** page.
