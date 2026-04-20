@@ -17,11 +17,20 @@ summary: 了解如何排查从 Amazon S3 导入数据到 TiDB Cloud 时的访问
 
 ### 检查信任实体
 
+TiDB Cloud 账户 ID 和 TiDB Cloud 外部 ID 与环境相关，并且因集群而异，因此请勿直接复制本文档中的字面值。请改为从 TiDB Cloud 控制台获取这些值：
+
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，转到目标集群，然后在左侧导航栏中点击 **Data** > **Import**。
+2. 点击 **Import data from Cloud Storage**。
+3. 在 **Import Data from Cloud Storage** 页面上，选择 **Amazon S3** 作为云服务提供商。
+4. 在 **Credentials** 部分，点击 **Click here to create new one with AWS CloudFormation** 以打开 **Add New Role ARN** 对话框，然后展开 **Having trouble? Create Role ARN manually** 以显示此集群的 **TiDB Cloud Account ID** 和 **TiDB Cloud External ID**。
+
+然后验证 IAM 角色上的信任实体：
+
 1. 在 AWS 管理控制台中，转到 **IAM** > **访问管理** > **角色**。
 2. 在角色列表中，找到并点击你为目标 TiDB 集群创建的角色。此时会显示角色摘要页面。
-3. 在角色摘要页面上，点击**信任关系**标签页，你将看到受信任的实体。
+3. 在角色摘要页面上，点击**信任关系**标签页以查看受信任的实体。
 
-以下是信任实体的示例：
+信任实体应类似于以下示例，其中 `<TiDB-Cloud-Account-ID>` 和 `<TiDB-Cloud-External-ID>` 替换为你从控制台获取的值：
 
 ```
 {
@@ -30,12 +39,12 @@ summary: 了解如何排查从 Amazon S3 导入数据到 TiDB Cloud 时的访问
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::380838443567:root"
+                "AWS": "arn:aws:iam::<TiDB-Cloud-Account-ID>:root"
             },
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                    "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
+                    "sts:ExternalId": "<TiDB-Cloud-External-ID>"
                 }
             }
         }
@@ -43,10 +52,7 @@ summary: 了解如何排查从 Amazon S3 导入数据到 TiDB Cloud 时的访问
 }
 ```
 
-在示例信任实体中：
-
-- `380838443567` 是 TiDB Cloud 账户 ID。确保你的信任实体中的此字段与你的 TiDB Cloud 账户 ID 匹配。
-- `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe` 是 TiDB Cloud 外部 ID。确保你的信任实体中的此字段与你的 TiDB Cloud 外部 ID 匹配。
+确保 `Principal.AWS` 字段与控制台中显示的 **TiDB Cloud Account ID** 一致，并且 `sts:ExternalId` 条件与控制台中显示的 **TiDB Cloud External ID** 一致。
 
 ### 检查 IAM 角色是否存在
 
@@ -111,7 +117,7 @@ summary: 了解如何排查从 Amazon S3 导入数据到 TiDB Cloud 时的访问
 ### 检查 IAM 角色的策略
 
 1. 在 AWS 管理控制台中，转到 **IAM** > **访问管理** > **角色**。
-2. 在角色列表中，找到并点击你为目标 TiDB 集群创建的角色。此时会显示角色摘要页面。
+2. 在角色列表中，找到并点击你为目标 TiDB Cloud 资源创建的角色。此时会显示角色摘要页面。
 3. 在角色摘要页面的**权限策略**区域中，会显示策略列表。对每个策略执行以下步骤：
     1. 点击策略进入策略摘要页面。
     2. 在策略摘要页面上，点击 **{}JSON** 标签页以检查权限策略。确保策略中的 `Resource` 字段配置正确。

@@ -13,7 +13,7 @@ summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 
 > **注意：**
 >
-> 你无法暂停 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 或 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群。
+> 你无法暂停 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 或 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例。
 
 ## 限制
 
@@ -71,12 +71,12 @@ summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 
 暂停集群的操作步骤如下：
 
-1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在你想要暂停的集群所在行，点击 **...**。
+1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+2. 在你想要暂停的 TiDB Cloud 专属集群所在行，点击 **...**。
 
     > **提示：**
     >
-    > 你也可以在 **Clusters** 页面点击你想要暂停的集群名称，然后点击右上角的 **...**。
+    > 你也可以在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面点击你想要暂停的集群名称，然后点击右上角的 **...**。
 
 3. 在下拉菜单中点击 **Pause**。
 
@@ -98,8 +98,8 @@ summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 
 恢复已暂停集群的操作步骤如下：
 
-1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在你想要恢复的集群所在行，点击 **Resume**。此时会弹出 **Resume your cluster** 对话框。
+1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+2. 对于你想要恢复的 TiDB Cloud 专属集群，点击 **Resume**。此时会弹出 **Resume your cluster** 对话框。
 
     > **注意：**
     >

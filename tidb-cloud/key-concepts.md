@@ -44,11 +44,11 @@ TiDB Cloud 在所有支持的方案中都保证高可用：
 
 ## 监控
 
-TiDB Cloud 提供全面的集群性能与健康监控能力。[了解更多监控相关内容](/tidb-cloud/monitoring-concepts.md)。
+TiDB Cloud 提供全面的 TiDB 性能与健康监控能力。[了解更多监控相关内容](/tidb-cloud/monitoring-concepts.md)。
 
 ## 数据流
 
-TiDB Cloud 支持将 TiDB 集群中的数据变更流式传输到其他系统，如 Kafka、MySQL 和对象存储。[了解更多数据流](/tidb-cloud/data-streaming-concepts.md)。
+TiDB Cloud 支持将数据变更流式传输到其他系统，如 Kafka、MySQL 和对象存储。[了解更多数据流](/tidb-cloud/data-streaming-concepts.md)。
 
 ## 备份与恢复
 

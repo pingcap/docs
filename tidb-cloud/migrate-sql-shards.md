@@ -11,7 +11,7 @@ summary: 了解如何将大型 MySQL 分片数据集迁移并合并到 TiDB Clou
 
 ## 示例中的环境信息
 
-本节介绍示例中所用上游集群、DM 及下游集群的基本信息。
+本节介绍示例中所用上游集群、DM 及下游 TiDB Cloud 的基本信息。
 
 ### 上游集群
 
@@ -44,7 +44,7 @@ DM 的版本为 v5.3.0。你需要手动部署 TiDB DM。详细步骤参见 [使
 
 本文档以 Amazon S3 为例。
 
-### 下游集群
+### 下游 TiDB Cloud {#downstream-tidb-cloud}
 
 分片的 schema 和表将被合并到表 `store.sales` 中。
 
@@ -110,9 +110,9 @@ CSV 文件命名方式如下：
 
 详细步骤参见 [导出数据到 Amazon S3 云存储](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)。
 
-### 步骤 3. 在 TiDB Cloud 集群中创建 schema
+### 步骤 3. 在 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>中创建 schema {#step-3-create-schemas-in-starter-instance-essential-instance-premium-instance-dedicated-cluster}
 
-在 TiDB Cloud 集群中创建 schema，操作如下：
+在 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>中创建 schema，操作如下：
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -175,15 +175,15 @@ Query OK, 0 rows affected (0.17 sec)
 
 配置好 Amazon S3 访问权限后，你可以在 TiDB Cloud 控制台执行数据导入任务，操作如下：
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标<CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群名称进入概览页，然后点击左侧导航栏的 **Data** > **Import**。
+    2. 点击目标<CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>名称进入概览页，然后点击左侧导航栏的 **Data** > **Import**。
 
 2. 选择 **Import data from Cloud Storage**，然后点击 **Amazon S3**。
 
@@ -195,7 +195,7 @@ Query OK, 0 rows affected (0.17 sec)
     - **Folder URI**：填写源数据的 bucket URI。本例中可以使用对应表的二级目录 `s3://dumpling-s3/store/sales/`，这样 TiDB Cloud 可以一次性将所有 MySQL 实例的数据导入并合并到 `store.sales`。
     - **Bucket Access** > **AWS Role ARN**：输入你获取到的 Role-ARN。
 
-    如果 bucket 的位置与集群不同，请确认跨区域合规性。
+    如果 bucket 的位置与目标<CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>不同，请确认跨区域合规性。
 
     TiDB Cloud 会开始验证是否能访问你指定的 bucket URI 中的数据。验证通过后，TiDB Cloud 会尝试使用默认文件命名模式扫描数据源中的所有文件，并在下一页左侧返回扫描摘要结果。如果遇到 `AccessDenied` 错误，参见 [排查 S3 数据导入时的 Access Denied 错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)。
 
@@ -402,8 +402,8 @@ Query OK, 0 rows affected (0.17 sec)
          binlog-pos: 1312659
          binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
 
-    ## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
-    target-database:       # The target TiDB cluster on TiDB Cloud
+    ## ******** Configuration of the target TiDB database on TiDB Cloud **********
+    target-database:       # The target TiDB database on TiDB Cloud
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"

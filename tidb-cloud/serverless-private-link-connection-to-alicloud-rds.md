@@ -5,7 +5,7 @@ summary: 了解如何通过阿里云 Endpoint Service Private Link 连接，将 
 
 # 通过 Private Link 连接到阿里云 ApsaraDB RDS for MySQL
 
-本文介绍如何使用 [阿里云 Endpoint Service Private Link 连接](/tidb-cloud/serverless-private-link-connection.md) 将 TiDB Cloud Essential 集群连接到 [阿里云 ApsaraDB RDS for MySQL](https://www.alibabacloud.com/en/product/apsaradb-for-rds-mysql) 实例。
+本文介绍如何使用 [阿里云 Endpoint Service Private Link 连接](/tidb-cloud/serverless-private-link-connection.md) 将 {{{ .essential }}} 实例连接到 [阿里云 ApsaraDB RDS for MySQL](https://www.alibabacloud.com/en/product/apsaradb-for-rds-mysql) 实例。
 
 ## 前提条件
 
@@ -16,14 +16,14 @@ summary: 了解如何通过阿里云 Endpoint Service Private Link 连接，将 
     - 管理负载均衡器
     - 管理 endpoint services
 
-- 你的 TiDB Cloud Essential 集群部署在阿里云上，并且处于活跃状态。请获取并保存以下信息以备后续使用：
+- 你的 {{{ .essential }}} 实例部署在阿里云上，并且处于活跃状态。请获取并保存以下信息以备后续使用：
 
     - 阿里云账户 ID
     - 可用区（AZ）
 
 要查看阿里云账户 ID 和可用区，请执行以下操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入 TiDB 集群的集群总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 {{{ .essential }}} 实例总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
 2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
 3. 在弹出的对话框中，你可以找到阿里云账户 ID 和可用区信息。
 
@@ -33,8 +33,8 @@ summary: 了解如何通过阿里云 Endpoint Service Private Link 连接，将 
 
 你的 ApsaraDB RDS for MySQL 实例需满足以下要求：
 
-- Region 匹配：实例必须与 TiDB Cloud Essential 集群处于同一阿里云 Region。
-- 可用区（AZ）可用性：可用区需与 TiDB Cloud Essential 集群的可用区有重叠。
+- Region 匹配：实例必须与 {{{ .essential }}} 实例处于同一阿里云 Region。
+- 可用区（AZ）可用性：可用区需与 {{{ .essential }}} 实例的可用区有重叠。
 - 网络可达性：实例需配置合适的 IP 允许列表，并可在 VPC 内访问。
 
 > **注意**
@@ -63,7 +63,7 @@ summary: 了解如何通过阿里云 Endpoint Service Private Link 连接，将 
 
     - **Network Type**：选择 `Internal-facing`
     - **VPC**：选择你的 ApsaraDB RDS for MySQL 所在的 VPC
-    - **Zone**：需与 TiDB Cloud Essential 集群的可用区有重叠
+    - **Zone**：需与 {{{ .essential }}} 实例的可用区有重叠
     - **IP Version**：选择 `IPv4`
 
 4. 找到你创建的负载均衡器，点击 **Create Listener**，填写以下信息：
@@ -71,7 +71,7 @@ summary: 了解如何通过阿里云 Endpoint Service Private Link 连接，将 
     - **Listener Protocol**：选择 `TCP`
     - **Listener Port**：输入数据库端口，例如 MySQL 的 `3306`
     - **Server Group**：选择上一步创建的服务器组
-  
+
 ### 步骤 2.2. 设置 endpoint service
 
 在与你的 ApsaraDB RDS for MySQL 实例相同的 Region 内设置 endpoint service，操作如下：

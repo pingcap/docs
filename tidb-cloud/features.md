@@ -64,7 +64,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td rowspan="7" style="background-color: white;">集群管理</td>
+    <td rowspan="7" style="background-color: white;">资源管理</td>
     <td>按需付费</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>

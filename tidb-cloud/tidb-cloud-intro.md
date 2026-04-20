@@ -6,7 +6,7 @@ category: intro
 
 # 什么是 TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款完全托管的云原生数据库即服务（DBaaS），基于 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源 HTAP (Hybrid Transactional and Analytical Processing) 数据库。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款完全托管的云原生数据库即服务（DBaaS），基于 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源 HTAP (Hybrid Transactional and Analytical Processing) 数据库。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 资源（例如 {{{ .starter }}} 实例、{{{ .essential }}} 实例和 {{{ .dedicated }}} 集群），快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud resources (such as {{{ .starter }}} instances, {{{ .essential }}} instances, and {{{ .dedicated }}} clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -124,12 +124,12 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB VPC（虚拟私有云）
 
-    对于每个 TiDB Cloud 集群，所有 TiDB 节点及辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 中。
+    对于每个 TiDB Cloud 资源，所有 TiDB 节点及辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 中。
 
 - TiDB Cloud Central Services
 
-    中央服务（包括计费、告警、元数据存储、Dashboard UI）独立部署。你可以通过互联网访问 Dashboard UI 来操作 TiDB 集群。
+    中央服务（包括计费、告警、元数据存储、Dashboard UI）独立部署。你可以通过互联网访问 Dashboard UI 来操作 TiDB Cloud 资源。
 
 - 你的 VPC
 
-    你可以通过私有端点连接或 VPC 对等连接访问你的 TiDB 集群。详情请参考 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    你可以通过私有端点连接或 VPC 对等连接访问你的 TiDB Cloud 资源。详情请参考 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。

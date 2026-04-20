@@ -16,7 +16,9 @@ summary: 学习如何使用 import 资源管理导入任务。
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 或 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
+- 参考以下任一文档创建 TiDB Cloud 集群：
+    - [创建 {{{ .starter }}} 或 Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 
 ## 创建并运行导入任务
 
@@ -26,7 +28,7 @@ summary: 学习如何使用 import 资源管理导入任务。
 
 > **Note:**
 >
-> 本地文件导入仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
+> 本地文件导入仅支持 {{{ .starter }}} 或 {{{ .essential }}} 实例，不支持 TiDB Cloud Dedicated 集群。
 
 1. 创建一个用于导入的 CSV 文件。例如：
 

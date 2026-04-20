@@ -1,11 +1,16 @@
 ---
-title: 升级 TiDB 集群
-summary: 了解如何升级 TiDB 集群。
+title: 升级 TiDB 版本
+summary: 了解如何升级 TiDB 集群或实例的 TiDB 版本。
 ---
 
-# 升级 TiDB 集群
+# 升级 TiDB 版本
 
-本文档介绍了如何在 TiDB Cloud 上升级 TiDB 集群。TiDB Cloud 提供了两种升级机制来升级你的 TiDB 版本。
+本文档介绍了如何升级 TiDB Cloud 资源的 TiDB 版本。
+
+TiDB Cloud 提供了两种升级机制：
+
+- [定期升级](#regularly-upgrade)
+- [联系支持团队进行升级](#contact-support-to-upgrade)
 
 ## 定期升级
 
@@ -18,14 +23,14 @@ summary: 了解如何升级 TiDB 集群。
 <CustomContent language="en,zh">
 
 - 云服务商：AWS、Azure、Google Cloud 或 Alibaba Cloud
-- 集群名称：xxx
+- 集群或实例名称：xxx
 
 </CustomContent>
 
 <CustomContent language="ja">
 
-- Cloud Provider: AWS, Azure, or Google Cloud
-- Cluster Name: xxx
+- 云服务商：AWS、Azure 或 Google Cloud
+- 集群或实例名称：xxx
 
 </CustomContent>
 

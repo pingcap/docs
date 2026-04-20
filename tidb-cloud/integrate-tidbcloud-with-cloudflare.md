@@ -20,7 +20,7 @@ summary: 了解如何将 Cloudflare Workers 与 TiDB Cloud 部署。
 在尝试本文步骤之前，你需要准备以下内容：
 
 - 一个 [TiDB Cloud 账户](https://tidbcloud.com/signup)。
-- 一个 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。如果你还没有，请参阅 [创建 TiDB Cloud Starter 或 Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- 一个 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。如果你还没有，请参阅 [创建 TiDB Cloud Starter 或 Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
 - 一个 [Cloudflare Workers 账户](https://dash.cloudflare.com/login)。
 - 已安装 [npm](https://docs.npmjs.com/about-npm)。
 

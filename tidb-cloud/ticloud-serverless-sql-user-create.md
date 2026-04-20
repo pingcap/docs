@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user create` 的参考文档。"
 
 # ticloud serverless sql-user create
 
-创建一个 TiDB Cloud Serverless SQL 用户：
+在一个 {{{ .starter }}} 或 {{{ .essential }}} 实例中创建 SQL 用户：
 
 ```shell
 ticloud serverless sql-user create [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user create [flags]
 
 ## 示例
 
-以交互模式创建一个 TiDB Cloud Serverless SQL 用户：
+以交互模式在一个 {{{ .starter }}} 或 {{{ .essential }}} 实例中创建 SQL 用户：
 
 ```shell
 ticloud serverless sql-user create
 ```
 
-以非交互模式创建一个 TiDB Cloud Serverless SQL 用户：
+以非交互模式在一个 {{{ .starter }}} 或 {{{ .essential }}} 实例中创建 SQL 用户：
 
 ```shell
 ticloud serverless sql-user create --user <user-name> --password <password> --role <role> --cluster-id <cluster-id>

@@ -5,7 +5,7 @@ summary: "`ticloud serverless export describe` 的参考文档。"
 
 # ticloud serverless export describe
 
-获取 TiDB Cloud Serverless 集群的导出信息：
+获取 TiDB Cloud Serverless 实例的导出信息：
 
 ```shell
 ticloud serverless export describe [flags]

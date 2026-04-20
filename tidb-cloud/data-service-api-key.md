@@ -12,12 +12,12 @@ TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_acc
 
 > **注意：**
 >
-> Data Service 中的 Data API 密钥与 [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication) 中使用的密钥不同。Data API 密钥用于访问 TiDB Cloud 集群中的数据，而 TiDB Cloud API 密钥用于管理项目、集群、备份、恢复和导入等资源。
+> Data Service 中的 Data API 密钥与 [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication) 中使用的密钥不同。Data API 密钥用于访问 TiDB 中的数据，而 TiDB Cloud API 密钥用于管理项目、集群、备份、恢复和导入等资源。
 
 ## API 密钥概述
 
 - API 密钥包含一个公钥和一个私钥，它们作为认证所需的用户名和密码。私钥仅在密钥创建时显示。
-- 每个 API 密钥仅属于一个 Data App，用于访问 TiDB Cloud 集群中的数据。
+- 每个 API 密钥仅属于一个 Data App，用于访问 TiDB 中的数据。
 - 你必须在每个请求中提供正确的 API 密钥。否则，TiDB Cloud 将返回 `401` 错误。
 
 ## 速率限制
@@ -86,6 +86,10 @@ TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_acc
 要为 Data App 创建 API 密钥，请执行以下步骤：
 
 1. 导航到项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。
+
+    > **提示：**
+    >
+    > 如果你有多个项目，要导航到目标项目的 **Data Service** 页面，请在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面点击 **Project view** 标签页，点击目标项目的 **...**，然后点击 **Data Service**。
 2. 在左侧窗格中，点击目标 Data App 的名称以查看其详细信息。
 3. 在**认证**区域，点击**创建 API 密钥**。
 4. 在**创建 API 密钥**对话框中，执行以下操作：
@@ -93,7 +97,7 @@ TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_acc
     1. （可选）为你的 API 密钥输入描述。
     2. 为你的 API 密钥选择角色。
 
-        角色用于控制 API 密钥是否可以读取或写入链接到 Data App 的集群数据。你可以选择 `ReadOnly` 或 `ReadAndWrite` 角色：
+        角色用于控制 API 密钥是否可以读取或写入链接到 Data App 的数据源中的数据。你可以选择 `ReadOnly` 或 `ReadAndWrite` 角色：
 
         - `ReadOnly`：仅允许 API 密钥读取数据，如 `SELECT`、`SHOW`、`USE`、`DESC` 和 `EXPLAIN` 语句。
         - `ReadAndWrite`：允许 API 密钥读取和写入数据。你可以使用此 API 密钥执行所有 SQL 语句，如 DML 和 DDL 语句。

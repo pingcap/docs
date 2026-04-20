@@ -30,11 +30,12 @@
 
 ## 指南
 
-- 管理集群
-  - 规划集群
-    - [选择集群套餐](/tidb-cloud/select-cluster-tier.md)
-    - [确定 TiDB 的大小](/tidb-cloud/size-your-cluster.md)
-    - [TiDB Cloud 性能参考](/tidb-cloud/tidb-cloud-performance-reference.md)
+- 规划你的集群
+  - [选择 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)
+  - [确定 TiDB 的大小](/tidb-cloud/size-your-cluster.md)
+  - [TiDB Cloud 性能参考](/tidb-cloud/tidb-cloud-performance-reference.md)
+- [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)
+- 管理 {{{ .dedicated }}} 集群
   - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
   - 连接到 TiDB Cloud Dedicated 集群
     - [网络连接概述](/tidb-cloud/connect-to-tidb-cluster.md)
@@ -48,7 +49,7 @@
   - [备份和恢复 TiDB Cloud Dedicated 数据](/tidb-cloud/backup-and-restore.md)
   - [暂停或恢复 TiDB Cloud Dedicated 集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [配置维护窗口](/tidb-cloud/configure-maintenance-window.md)
-  - 使用带有 TiFlash 的 HTAP 集群
+  - 使用 TiFlash 实现 HTAP
     - [TiFlash 简介](/tiflash/tiflash-overview.md)
     - [构建 TiFlash 副本](/tiflash/create-tiflash-replicas.md)
     - [使用 TiDB 读取 TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -67,7 +68,7 @@
       - [通过电子邮件订阅](/tidb-cloud/monitor-alert-email.md)
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
-    - [集群事件](/tidb-cloud/tidb-cloud-events.md)
+    - [事件](/tidb-cloud/tidb-cloud-events.md)
     - 第三方指标集成
       - [概览](/tidb-cloud/third-party-monitoring-integrations.md)
       - [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md)
@@ -140,8 +141,8 @@
   - 通过 TiProxy 管理连接
     - [TiProxy 概览](/tidb-cloud/tiproxy-overview-for-cloud.md)
     - [管理 TiProxy](/tidb-cloud/tiproxy-management.md)
-  - [升级 TiDB 集群](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [删除 TiDB 集群](/tidb-cloud/delete-tidb-cluster.md)
+  - [升级 TiDB 版本](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [删除 {{{ .dedicated }}} 集群](/tidb-cloud/delete-tidb-cluster.md)
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
@@ -163,7 +164,7 @@
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [数据迁移的预检查错误、迁移错误和警报](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
-    - [将 AWS DMS 连接到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 探索数据
   - [SQL 编辑器中的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](/tidb-cloud/sql-proxy-account.md)
@@ -268,6 +269,7 @@
     - 属性
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
+      - [_tidb_rowid](/tidb-rowid.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
     - [字面值](/literal-values.md)
     - [Schema 对象名](/schema-object-names.md)
@@ -618,7 +620,7 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)

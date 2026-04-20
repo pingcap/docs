@@ -1,20 +1,20 @@
 ---
 title: 使用 `tidbcloud_serverless_cluster` 资源
-summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修改 TiDB Cloud Starter 集群。
+summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修改 TiDB Cloud Starter 实例。
 ---
 
 # 使用 `tidbcloud_serverless_cluster` 资源
 
-本文档介绍了如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 集群。
+本文档介绍了如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例。
 
 你还将学习如何通过 `tidbcloud_projects` 数据源获取所需的信息。
 
 `tidbcloud_serverless_cluster` 资源的功能包括：
 
-- 创建 TiDB Cloud Starter 集群
-- 修改 TiDB Cloud Starter 集群
-- 导入 TiDB Cloud Starter 集群
-- 删除 TiDB Cloud Starter 集群
+- 创建 TiDB Cloud Starter 实例
+- 修改 TiDB Cloud Starter 实例
+- 导入 TiDB Cloud Starter 实例
+- 删除 TiDB Cloud Starter 实例
 
 ## 前置条件
 
@@ -22,7 +22,7 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
 ## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-每个 TiDB 集群都属于一个项目。在创建 TiDB Cloud Starter 集群之前，你需要获取要创建集群的项目 ID。如果未指定 `project_id`，则会使用默认项目。
+每个 TiDB Cloud Starter 实例都属于一个项目。在创建 TiDB Cloud Starter 实例之前，你需要获取要创建 TiDB Cloud Starter 实例的项目 ID。如果未指定 `project_id`，则会使用默认项目。
 
 要检索所有可用项目的信息，可以按如下方式使用 `tidbcloud_projects` 数据源：
 
@@ -119,15 +119,15 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
 现在，你可以从输出中获取所有可用的项目。复制你需要的项目 ID。
 
-## 创建 TiDB Cloud Starter 集群
+## 创建 TiDB Cloud Starter 实例 {#create-a-starter-instance}
 
-你可以使用 `tidbcloud_serverless_cluster` 资源来创建 TiDB Cloud Starter 集群。
+你可以使用 `tidbcloud_serverless_cluster` 资源创建 TiDB Cloud Starter 实例。
 
-1. 为集群创建一个目录并进入该目录。
+1. 为 TiDB Cloud Starter 实例创建一个目录并进入该目录。
 
 2. 创建一个 `cluster.tf` 文件。
 
-    以下是 `cluster.tf` 文件的示例：
+    以下是 `cluster.tf` 文件示例：
 
     ```
     terraform {
@@ -158,10 +158,10 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
     使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
     - 若要使用 `tidbcloud_serverless_cluster` 资源，将资源类型设置为 `tidbcloud_serverless_cluster`。
-    - 资源名称可以根据需要自定义，例如 `example`。
-    - 资源详情可根据项目 ID 及 [`tidbcloud_serverless_cluster` 规范](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster) 进行配置。
+    - 资源名称可以根据需要自定义。例如，`example`。
+    - 对于资源详情，你可以根据项目 ID 和 [`tidbcloud_serverless_cluster` 规范](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)进行配置。
 
-3. 运行 `terraform apply` 命令。应用资源时不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -207,13 +207,13 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
         Enter a value:
     ```
 
-    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
+    在上述结果中，Terraform 会为你生成一个执行计划，描述 Terraform 将要执行的操作：
 
-    - 你可以检查配置与当前状态之间的差异。
-    - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示你将在 `apply` 后获得对应的值。
+    - 你可以检查配置与状态之间的差异。
+    - 你还可以看到此次 `apply` 的结果。它将新增一个资源，不会更改或销毁任何资源。
+    - `known after apply` 表示你将在执行 `apply` 后获得相应的值。
 
-4. 如果你的计划没有问题，输入 `yes` 继续：
+4. 如果计划中的内容都符合预期，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -228,7 +228,7 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_cluster.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_cluster.${resource-name}` 命令查看资源状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -288,16 +288,16 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
     }
     ```
 
-## 修改 TiDB Cloud Starter 集群
+## 修改 TiDB Cloud Starter 实例 {#modify-a-starter-instance}
 
-对于 TiDB Cloud Starter 集群，你可以使用 Terraform 管理资源。可修改的参数包括：
+对于 TiDB Cloud Starter 实例，你可以使用 Terraform 管理资源。可修改的参数包括：
 
-- `display_name`：集群的显示名称
-- `spending_limit`：集群的消费上限
-- `endpoints.public.disabled`：是否禁用公网连接
-- `automated_backup_policy.start_time`：自动备份开始的 UTC 时间，格式为 `HH:mm`
+- `display_name`：TiDB Cloud Starter 实例的显示名称。
+- `spending_limit`：TiDB Cloud Starter 实例的支出限制。
+- `endpoints.public.disabled`：是否禁用公共端点。
+- `automated_backup_policy.start_time`：自动备份开始的 UTC 时间，格式为 `HH:mm`。
 
-要修改 TiDB Cloud Starter 集群，可以修改 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令应用更改。例如，你可以如下修改 `display_name` 和 `spending_limit`：
+要修改 TiDB Cloud Starter 实例，你可以修改 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令应用更改。例如，你可以按如下方式修改 `display_name` 和 `spending_limit`：
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
@@ -312,7 +312,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-然后，运行 `terraform apply` 命令应用更改：
+然后，运行 `terraform apply` 命令以应用更改：
 
 ```shell
 $ terraform apply
@@ -358,7 +358,7 @@ tidbcloud_serverless_cluster.example: Modifications complete after 8s
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-然后，你可以使用 `terraform show` 或 `terraform state show tidbcloud_serverless_cluster.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
+然后，你可以使用 `terraform show` 或 `terraform state show tidbcloud_serverless_cluster.${resource-name}` 命令查看资源状态。前者会显示所有资源和数据源的状态。
 
 ```shell
 $ terraform state show tidbcloud_serverless_cluster.example
@@ -417,13 +417,13 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## 导入 TiDB Cloud Starter 集群
+## 导入 TiDB Cloud Starter 实例 {#import-a-starter-instance}
 
-对于未被 Terraform 管理的 TiDB Cloud Starter 集群，你可以通过导入将其纳入 Terraform 管理。
+对于未由 Terraform 管理的 TiDB Cloud Starter 实例，你可以通过导入将其纳入 Terraform 管理。
 
-1. 为新的 `tidbcloud_serverless_cluster` 资源添加 import 块。
+1. 为新的 `tidbcloud_serverless_cluster` 资源添加一个 import 块。
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为集群 ID：
+    将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为所需的资源名称，并将 `${id}` 替换为集群 ID：
 
     ```
     import {
@@ -440,26 +440,26 @@ resource "tidbcloud_serverless_cluster" "example" {
       terraform plan -generate-config-out=generated.tf
       ```
 
-    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
+    在上述命令中，请勿指定现有的 `.tf` 文件名。否则，Terraform 将返回错误。
 
-3. 审查并应用生成的配置。
+3. 审核并应用生成的配置。
 
-    审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
+    审核生成的配置文件，确保其符合你的需求。你也可以选择将该文件的内容移动到你偏好的位置。
 
-    然后，运行 `terraform apply` 导入你的基础设施。应用后，示例输出如下：
+    然后，运行 `terraform apply` 以导入你的基础设施。应用后，示例输出如下：
 
     ```shell
-    tidbcloud_serverless_cluster.example: Importing... 
-    tidbcloud_serverless_cluster.example: Import complete 
+    tidbcloud_serverless_cluster.example: Importing...
+    tidbcloud_serverless_cluster.example: Import complete
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-现在你可以使用 Terraform 管理已导入的集群。
+现在，你可以使用 Terraform 管理已导入的 TiDB Cloud Starter 实例。
 
-## 删除 TiDB Cloud Starter 集群
+## 删除 TiDB Cloud Starter 实例 {#delete-a-starter-instance}
 
-要删除 TiDB Cloud Starter 集群，可以删除 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
+要删除 TiDB Cloud Starter 实例，你可以删除 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
 $ terraform apply

@@ -1,11 +1,11 @@
 ---
-title: 连接到你的 TiDB Cloud Starter 或 Essential 集群
-summary: 了解如何通过不同方法连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+title: 连接到你的 TiDB Cloud Starter 或 Essential 实例
+summary: 了解如何通过不同方法连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 ---
 
-# 连接到你的 TiDB Cloud Starter 或 Essential 集群
+# 连接到你的 TiDB Cloud Starter 或 Essential 实例
 
-本文档介绍如何连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+本文档介绍如何连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
 > **提示：**
 >
@@ -14,19 +14,19 @@ summary: 了解如何通过不同方法连接到你的 TiDB Cloud Starter 或 Ti
 
 ## 网络连接方法
 
-在 TiDB Cloud 上创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群后，你可以通过以下方法之一进行连接：
+在 TiDB Cloud 上创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例后，你可以通过以下方法之一进行连接：
 
 - 直连
 
-  直连指的是通过 TCP 的 MySQL 原生连接系统。你可以使用任何支持 MySQL 连接的工具连接到你的集群，例如 [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)。
+  直连指的是通过 TCP 的 MySQL 原生连接系统。你可以使用任何支持 MySQL 连接的工具连接到你的 TiDB Cloud Starter 或 Essential 实例，例如 [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)。
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Cloud 提供 Data Service 功能，使你能够通过自定义 API endpoint，使用 HTTPS request 连接到托管在 AWS 上的 TiDB Cloud Starter 集群。与直连不同，Data Service 通过 RESTful API 访问你的集群数据，而不是原始 SQL。
+  TiDB Cloud 提供 Data Service 功能，使你能够通过自定义 API endpoint，使用 HTTPS request 连接到托管在 AWS 上的 TiDB Cloud Starter 实例。与直连不同，Data Service 通过 RESTful API 访问你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例数据，而不是原始 SQL。
 
 - [Serverless Driver (beta)](/develop/serverless-driver.md)
 
-  TiDB Cloud 为 JavaScript 提供了 serverless driver，允许你在边缘环境中以与直连相同的体验连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+  TiDB Cloud 为 JavaScript 提供了 serverless driver，允许你在边缘环境中以与直连相同的体验连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
 在上述连接方法中，你可以根据需求选择合适的方法：
 
@@ -46,9 +46,9 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持两种网络连接类型：
 
 - [公网 endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-  标准连接会暴露一个公网 endpoint，因此你可以通过 SQL client 从你的笔记本电脑连接到 TiDB 集群。
+  标准连接会暴露一个公网 endpoint，因此你可以通过 SQL client 从你的笔记本电脑连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
-  TiDB Cloud Starter 和 TiDB Cloud Essential 要求 [TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)，以确保从你的应用到 TiDB 集群的数据传输安全。
+  TiDB Cloud Starter 和 TiDB Cloud Essential 要求 [TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)，以确保从你的应用到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据传输安全。
 
 下表展示了不同连接方法可用的网络类型：
 
@@ -60,4 +60,4 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持两种网络连接类型：
 
 ## 后续操作
 
-成功连接到 TiDB 集群后，你可以 [使用 TiDB 探索 SQL 语句](/basic-sql-operations.md)。
+成功连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例后，你可以 [使用 TiDB 探索 SQL 语句](/basic-sql-operations.md)。

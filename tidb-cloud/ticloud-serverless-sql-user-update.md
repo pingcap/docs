@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user update` 的参考文档。"
 
 # ticloud serverless sql-user update
 
-更新 TiDB Cloud Serverless SQL 用户：
+更新 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user update [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user update [flags]
 
 ## 示例
 
-以交互模式更新 TiDB Cloud Serverless SQL 用户：
+以交互模式更新 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user update
 ```
 
-以非交互模式更新 TiDB Cloud Serverless SQL 用户：
+以非交互模式更新 {{{ .starter }}} 或 {{{ .essential }}} 实例中的 SQL 用户：
 
 ```shell
 ticloud serverless sql-user update -c <cluster-id> --user <user-name> --password <password> --role <role>

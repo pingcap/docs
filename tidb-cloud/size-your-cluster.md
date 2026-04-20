@@ -9,7 +9,7 @@ summary: 了解如何确定你的 TiDB Cloud 集群规模。
 
 > **Note:**
 >
-> 你无法更改 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的规模。
+> 你无法更改 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的规模。
 
 ## 规划 TiDB 规模
 
@@ -40,7 +40,7 @@ TiDB 仅用于计算，不存储数据，并且支持水平扩展。
 > - 4 vCPU 的 TiDB 只能与 4 vCPU 的 TiKV 搭配使用。
 > - TiFlash 不可用。
 >
-> **4 vCPU, 16 GiB** 规格的 TiDB 设计用于学习、测试和试用场景，适用于预生产环境或小型、非关键性负载。但由于性能有限，**不**推荐用于大规模生产环境。如果你需要更低的成本和生产环境的 SLA 保证，请考虑使用 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群方案。
+> **4 vCPU, 16 GiB** 规格的 TiDB 设计用于学习、测试和试用场景，适用于预生产环境或小型、非关键性负载。但由于性能有限，**不**推荐用于大规模生产环境。如果你需要更低的成本和生产环境的 SLA 保证，请考虑使用 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 方案。
 
 ### TiDB 节点数
 
@@ -106,7 +106,7 @@ TiKV 负责存储数据，并支持水平扩展。
 > - 4 vCPU 的 TiKV 只能与 4 vCPU 的 TiDB 搭配使用。
 > - TiFlash 不可用。
 >
-> **4 vCPU, 16 GiB** 规格的 TiKV 设计用于学习、测试和试用场景，适用于预生产环境或小型、非关键性负载。但由于性能有限，**不**推荐用于大规模生产环境。如果你需要更低的成本和生产环境的 SLA 保证，请考虑使用 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群方案。
+> **4 vCPU, 16 GiB** 规格的 TiKV 设计用于学习、测试和试用场景，适用于预生产环境或小型、非关键性负载。但由于性能有限，**不**推荐用于大规模生产环境。如果你需要更低的成本和生产环境的 SLA 保证，请考虑使用 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 方案。
 
 ### TiKV 节点数
 

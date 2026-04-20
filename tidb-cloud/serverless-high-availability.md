@@ -22,8 +22,8 @@ TiDB Cloud 在此基础上扩展了分区高可用和区域高可用能力，以
 
 > **注意：**
 >
-> - 对于 TiDB Cloud Starter 集群，仅启用分区高可用，且不可配置。
-> - 对于部署在 AWS 东京（ap-northeast-1）Region 或任意阿里云 Region 的 TiDB Cloud Essential 集群，默认启用区域高可用。你可以在集群创建时根据需要切换为分区高可用。对于部署在其他 Region 的 TiDB Cloud Essential 集群，仅启用分区高可用，且不可配置。
+> - 对于 TiDB Cloud Starter 实例，仅启用分区高可用，且不可配置。
+> - 对于部署在 AWS 东京（ap-northeast-1）Region 或任意阿里云 Region 的 TiDB Cloud Essential 实例，默认启用区域高可用。你可以在 TiDB Cloud Essential 实例创建时根据需要切换为分区高可用。对于部署在其他 Region 的 TiDB Cloud Essential 实例，仅启用分区高可用，且不可配置。
 
 </CustomContent>
 
@@ -31,19 +31,19 @@ TiDB Cloud 在此基础上扩展了分区高可用和区域高可用能力，以
 
 > **注意：**
 >
-> - 对于 TiDB Cloud Starter 集群，仅启用分区高可用，且不可配置。
+> - 对于 TiDB Cloud Starter 实例，仅启用分区高可用，且不可配置。
 > - 对于 TiDB Cloud Premium 集群，仅启用区域高可用，且不可配置。
-> - 对于部署在 AWS 东京（ap-northeast-1）Region 或任意阿里云 Region 的 TiDB Cloud Essential 集群，默认启用区域高可用。你可以在集群创建时根据需要切换为分区高可用。对于部署在其他 Region 的 TiDB Cloud Essential 集群，仅启用分区高可用，且不可配置。
+> - 对于部署在 AWS 东京（ap-northeast-1）Region 或任意阿里云 Region 的 TiDB Cloud Essential 实例，默认启用区域高可用。你可以在 TiDB Cloud Essential 实例创建时根据需要切换为分区高可用。对于部署在其他 Region 的 TiDB Cloud Essential 实例，仅启用分区高可用，且不可配置。
 
 </CustomContent>
 
 - **分区高可用**：该选项将所有 node 部署在同一个可用区内，降低网络延时。它无需在应用层实现跨区冗余即可保证高可用，适用于优先考虑单区低延时的应用。详细信息参见 [分区高可用架构](#zonal-high-availability-architecture)。
 
-- **区域高可用（beta）**：该选项将 node 分布在多个可用区，实现最大程度的基础设施隔离和冗余。它提供最高级别的可用性，但需要应用层实现跨区冗余。如果你需要最大程度防护单区基础设施故障，建议选择该选项。需要注意的是，该模式会增加延时，并可能产生跨区数据传输费用。该功能仅在拥有三个以上可用区的 Region 可用，且只能在集群创建时启用。详细信息参见 [区域高可用架构](#regional-high-availability-architecture)。
+- **区域高可用（beta）**：该选项将 node 分布在多个可用区，实现最大程度的基础设施隔离和冗余。它提供最高级别的可用性，但需要应用层实现跨区冗余。如果你需要最大程度防护单区基础设施故障，建议选择该选项。需要注意的是，该模式会增加延时，并可能产生跨区数据传输费用。该功能仅在拥有三个以上可用区的 Region 可用。详细信息参见 [区域高可用架构](#regional-high-availability-architecture)。
 
 ## 分区高可用架构
 
-当你以默认的分区高可用创建集群时，所有组件（包括 Gateway、TiDB、TiKV 和 TiFlash 计算/写 node）都运行在同一个可用区内。数据面组件的部署通过虚拟机池提供基础设施冗余，从而最大程度减少故障转移时间和因同区部署带来的网络延时。
+当你创建启用分区高可用的 {{{ .starter }}} 或 Essential 实例时，所有组件（包括 Gateway、TiDB、TiKV 和 TiFlash 计算/写 node）都运行在同一个可用区内。数据面组件的部署通过虚拟机池提供基础设施冗余，从而最大程度减少故障转移时间和因同区部署带来的网络延时。
 
 <CustomContent language="en,zh">
 
@@ -99,7 +99,7 @@ Gateway 和计算层为无状态的，因此故障转移时会立即在其他位
 
 ## 区域高可用架构
 
-当你以区域高可用创建集群时，关键 OLTP（联机事务处理）工作负载组件（如 PD 和 TiKV）会跨多个可用区部署，以确保冗余复制并最大化可用性。在正常运行期间，Gateway、TiDB 和 TiFlash 计算/写 node 等组件会部署在主可用区。这些数据面组件通过虚拟机池提供基础设施冗余，从而最大程度减少故障转移时间和因同区部署带来的网络延时。
+当你创建启用区域高可用的 {{{ .essential }}} 或 {{{ .premium }}} 实例时，关键 OLTP（联机事务处理）工作负载组件（如 PD 和 TiKV）会跨多个可用区部署，以确保冗余复制并最大化可用性。在正常运行期间，Gateway、TiDB 和 TiFlash 计算/写 node 等组件会部署在主可用区。这些数据面组件通过虚拟机池提供基础设施冗余，从而最大程度减少故障转移时间和因同区部署带来的网络延时。
 
 > **注意：**
 >
@@ -175,7 +175,7 @@ TiDB Cloud 提供了强大的自动备份机制，确保持续的数据保护：
 
 在故障发生时，正在故障 server 上运行的事务可能会被中断。虽然故障转移对应用是透明的，但你必须实现相应的 logic 来处理活跃事务期间可恢复的故障。不同故障场景的处理方式如下：
 
-- **TiDB 故障**：如果 TiDB 实例故障，client 连接不会受到影响，因为 TiDB Cloud 会自动通过 Gateway 重路由流量。虽然故障 TiDB 实例上的事务可能会被中断，但系统会确保已提交的数据被保留，新事务会由其他可用的 TiDB 实例处理。
+- **TiDB 故障**：如果 TiDB node 故障，client 连接不会受到影响，因为 TiDB Cloud 会自动通过 Gateway 重路由流量。虽然故障 TiDB node 上的事务可能会被中断，但系统会确保已提交的数据被保留，新事务会由其他可用的 TiDB node 处理。
 - **Gateway 故障**：如果 Gateway 故障，client 连接会被中断。但 TiDB Cloud 的 Gateway 为无状态的，可以立即在新的可用区或 server 上重启。流量会自动重定向到新的 Gateway，最大程度减少停机时间。
 
 建议你在应用中实现重试 logic，以处理可恢复的故障。具体实现方式请参考你的驱动或 ORM 文档（例如 [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)）。

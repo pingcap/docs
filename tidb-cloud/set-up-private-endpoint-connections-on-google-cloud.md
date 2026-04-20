@@ -13,7 +13,7 @@ summary: 了解如何通过 Google Cloud Private Service Connect 连接你的 Ti
 >
 > - 如需了解如何通过 AWS 私有端点连接 TiDB Cloud Dedicated 集群，请参见 [通过 AWS PrivateLink 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
 > - 如需了解如何通过 Azure 私有端点连接 TiDB Cloud Dedicated 集群，请参见 [通过 Azure Private Link 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
-> - 如需了解如何通过私有端点连接 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，请参见以下文档：
+> - 如需了解如何通过私有端点连接 TiDB Cloud Starter 或 TiDB Cloud Essential 实例，请参见以下文档：
 >     - [通过 AWS PrivateLink 连接 TiDB Cloud Starter](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
 >     - [通过阿里云私有端点连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
@@ -94,7 +94,7 @@ Google Cloud Private Service Connect 的架构如下所示：[^1]
 
 ### Step 1. 选择 TiDB 集群
 
-1. 在项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标 TiDB 集群的名称，进入其概览页面。你可以选择以下任一状态的集群：
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud Dedicated 集群的名称，进入其概览页面。你可以选择以下任一状态的集群：
 
     - **Available**
     - **Restoring**

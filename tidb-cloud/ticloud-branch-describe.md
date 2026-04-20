@@ -19,13 +19,13 @@ ticloud serverless branch get [flags]
 
 ## 示例
 
-以交互模式获取 TiDB Cloud Serverless 集群的分支信息：
+以交互模式获取 TiDB Cloud Serverless 实例的分支信息：
 
 ```shell
 ticloud serverless branch describe
 ```
 
-以非交互模式获取 TiDB Cloud Serverless 集群的分支信息：
+以非交互模式获取 TiDB Cloud Serverless 实例的分支信息：
 
 ```shell
 ticloud serverless branch describe --branch-id <branch-id> --cluster-id <cluster-id>

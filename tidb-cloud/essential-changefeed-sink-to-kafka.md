@@ -9,7 +9,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud Essent
 
 ## 限制
 
-- 每个 TiDB Cloud Essential 集群最多可创建 10 个 changefeed。
+- 每个 TiDB Cloud Essential 实例最多可创建 10 个 changefeed。
 - 目前，TiDB Cloud Essential 不支持上传自签名 TLS 证书以连接 Kafka broker。
 - 由于 TiDB Cloud Essential 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果待同步的表没有主键或非空唯一索引，则在某些重试场景下，由于缺少唯一约束，可能会导致下游插入重复数据。
@@ -23,7 +23,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud Essent
 
 ### 网络
 
-确保你的 TiDB Cloud Essential 集群能够连接到 Apache Kafka 服务。你可以选择以下任一连接方法：
+确保你的 TiDB Cloud Essential 实例能够连接到 Apache Kafka 服务。你可以选择以下任一连接方法：
 
 - Private Link Connection：满足安全合规要求并确保网络质量。
 - Public Network：适用于快速搭建。
@@ -65,7 +65,7 @@ TiDB Cloud Essential 目前仅支持自建 Kafka、Confluent Cloud Dedicated 集
 ## 第 1 步：打开 Apache Kafka 的 Changefeed 页面
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com)。
-2. 进入目标 TiDB Cloud Essential 集群的概览页面，然后在左侧导航栏点击 **Data** > **Changefeed**。
+2. 进入目标 TiDB Cloud Essential 实例的概览页面，然后在左侧导航栏点击 **Data** > **Changefeed**。
 3. 点击 **Create Changefeed**，然后在 **Destination** 选择 **Kafka**。
 
 ## 第 2 步：配置 changefeed 目标

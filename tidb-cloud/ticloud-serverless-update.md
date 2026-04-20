@@ -5,7 +5,7 @@ summary: "`ticloud serverless update` 的参考文档。"
 
 # ticloud serverless update
 
-更新一个 TiDB Cloud Serverless 集群：
+更新一个 {{{ .starter }}} 或 {{{ .essential }}} 实例：
 
 ```shell
 ticloud serverless update [flags]
@@ -13,19 +13,19 @@ ticloud serverless update [flags]
 
 ## 示例
 
-以交互模式更新一个 TiDB Cloud Serverless 集群：
+以交互模式更新一个 {{{ .starter }}} 或 {{{ .essential }}} 实例：
 
 ```shell
 ticloud serverless update
 ```
 
-以非交互模式更新 TiDB Cloud Serverless 集群的名称：
+以非交互模式更新 {{{ .starter }}} 或 {{{ .essential }}} 实例的名称：
 
 ```shell
 ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-以非交互模式更新 TiDB Cloud Serverless 集群的标签：
+以非交互模式更新 {{{ .starter }}} 或 {{{ .essential }}} 实例的标签：
 
 ```shell
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
@@ -38,9 +38,9 @@ ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 | 参数                        | 描述                                         | 是否必需 | 备注                                               |
 |-----------------------------|----------------------------------------------|----------|----------------------------------------------------|
 | -c, --cluster-id string     | 指定集群的 ID。                              | 是       | 仅在非交互模式下生效。                            |
-| -n --display-name string    | 指定集群的新名称。                           | 否       | 仅在非交互模式下生效。                            |
-| --labels string             | 指定集群的新标签。                           | 否       | 仅在非交互模式下生效。                            |
-| --disable-public-endpoint   | 禁用集群的公共访问端点。                     | 否       | 仅在非交互模式下生效。                            |
+| -n --display-name string    | 指定 {{{ .starter }}} 或 Essential 实例的新名称。 | 否       | 仅在非交互模式下生效。                            |
+| --labels string             | 指定 {{{ .starter }}} 或 Essential 实例的新标签。 | 否       | 仅在非交互模式下生效。                            |
+| --disable-public-endpoint   | 禁用 {{{ .starter }}} 或 Essential 实例的公共访问端点。 | 否       | 仅在非交互模式下生效。                            |
 | -h, --help                  | 显示该命令的帮助信息。                       | 否       | 在非交互和交互模式下均可用。                      |
 
 ## 继承参数

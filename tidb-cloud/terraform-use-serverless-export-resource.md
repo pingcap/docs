@@ -1,17 +1,17 @@
 ---
 title: 使用 `tidbcloud_serverless_export` 资源
-summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建和修改数据导出任务。
+summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例创建和修改数据导出任务。
 ---
 
 # 使用 `tidbcloud_serverless_export` 资源
 
-本文档介绍如何使用 `tidbcloud_serverless_export` 资源管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务。
+本文档介绍如何使用 `tidbcloud_serverless_export` 资源管理 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务。
 
 `tidbcloud_serverless_export` 资源的功能包括：
 
-- 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建数据导出任务。
-- 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务。
-- 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务。
+- 为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例创建数据导出任务。
+- 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务。
+- 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务。
 
 > **Note:**
 >
@@ -20,11 +20,11 @@ summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud S
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
-- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-## 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建数据导出任务
+## 为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例创建数据导出任务 {#create-a-data-export-task-for-a-starter-or-essential-instance}
 
-你可以使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建数据导出任务。
+你可以使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例创建数据导出任务。
 
 1. 为导出任务创建一个目录并进入该目录。
 
@@ -51,12 +51,12 @@ summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud S
     }
     ```
 
-    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
+    使用 `resource` 块定义 TiDB Cloud 资源，包括资源类型、资源名称和资源详情。
 
-    - 要使用 serverless 导出资源，将资源类型设置为 `tidbcloud_serverless_export`。
-    - 资源名称可以根据需要自定义，例如 `example`。
-    - 资源详情可以根据 serverless 导出规范信息进行配置。
-    - 获取 serverless 导出规范信息，请参见 [tidbcloud_serverless_export (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export)。
+    - 要使用 serverless export 资源，请将资源类型设置为 `tidbcloud_serverless_export`。
+    - 对于资源名称，你可以根据需要自行定义。例如，`example`。
+    - 对于资源详情，你可以根据 serverless export 规范信息进行配置。
+    - 如需获取 serverless export 规范信息，请参见 [tidbcloud_serverless_export (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export)。
 
 3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
@@ -94,13 +94,13 @@ summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud S
         Enter a value:
     ```
 
-    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
+    在上述结果中，Terraform 会为你生成一个执行计划，描述 Terraform 将要执行的操作：
 
-    - 你可以检查配置与当前状态之间的差异。
-    - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示你将在 `apply` 后获得对应的值。
+    - 你可以检查配置与状态之间的差异。
+    - 你还可以看到此次 `apply` 的结果。它将新增一个资源，不会更改或销毁任何资源。
+    - `known after apply` 表示你将在执行 `apply` 后获得相应的值。
 
-4. 如果你的计划没有问题，输入 `yes` 继续：
+4. 如果计划中的内容都符合预期，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -115,11 +115,11 @@ summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud S
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    在本示例中，`tidbcloud_serverless_export.example` 资源将创建一个导出任务，用于导出整个集群的数据。
+    在此示例中，`tidbcloud_serverless_export.example` 资源将创建一个导出任务，用于从整个 TiDB Cloud Starter 或 TiDB Cloud Essential 实例导出数据。
 
-    该资源是异步的。你可以使用 `terraform refresh` 获取其最新状态。
+    此资源不会自动同步。你可以使用 `terraform refresh` 获取其最新状态。
 
-5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_export.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_export.${resource-name}` 命令查看资源状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_serverless_export.example
@@ -142,13 +142,13 @@ summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud S
     }
     ```
 
-## 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务
+## 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务 {#import-a-data-export-task-for-a-starter-or-essential-instance}
 
-如果某个 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务未被 Terraform 管理，你可以通过导入将其纳入 Terraform 管理。
+如果某个 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务尚未由 Terraform 管理，你可以通过导入将其纳入 Terraform 管理。
 
 1. 为新的 `tidbcloud_serverless_export` 资源添加一个 import 块。
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,export_id` 的格式：
+    将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为所需的资源名称，并将 `${id}` 替换为 `cluster_id,export_id` 格式：
 
     ```
     import {
@@ -165,26 +165,26 @@ summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud S
       terraform plan -generate-config-out=generated.tf
       ```
 
-    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
+    在上述命令中，请勿指定已存在的 `.tf` 文件名。否则，Terraform 将返回错误。
 
-3. 审查并应用生成的配置。
+3. 查看并应用生成的配置。
 
-    审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
+    查看生成的配置文件，确保其符合你的需求。你也可以选择将该文件的内容移动到你偏好的位置。
 
     然后，运行 `terraform apply` 导入你的基础设施。应用后，示例输出如下：
 
     ```shell
-    tidbcloud_serverless_export.example: Importing... 
-    tidbcloud_serverless_export.example: Import complete 
+    tidbcloud_serverless_export.example: Importing...
+    tidbcloud_serverless_export.example: Import complete
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-现在你可以使用 Terraform 管理已导入的导出任务。
+现在，你可以使用 Terraform 管理已导入的导出任务。
 
-## 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务
+## 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务 {#delete-a-data-export-task-for-a-starter-or-essential-instance}
 
-要删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务，你可以删除 `tidbcloud_serverless_export` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
+要删除 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的数据导出任务，你可以删除 `tidbcloud_serverless_export` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
 $ terraform apply
@@ -228,7 +228,7 @@ tidbcloud_serverless_export.example: Destruction complete after 2s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-现在，如果你运行 `terraform show` 命令，将不会显示任何被管理的资源，因为该资源已被清除：
+现在，如果你运行 `terraform show` 命令，将不会显示任何受管资源，因为该资源已被清除：
 
 ```
 $ terraform show

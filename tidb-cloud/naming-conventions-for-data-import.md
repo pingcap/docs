@@ -119,7 +119,9 @@ summary: 了解 CSV、Parquet、Aurora Snapshot 和 SQL 文件在数据导入过
 
 ## 文件模式
 
-如果 CSV 或 Parquet 的源数据文件不符合命名规范，你可以使用文件模式功能建立源数据文件与目标表之间的名称映射关系。此功能不支持 Aurora Snapshot 和 SQL 数据文件。
+如果 CSV 或 Parquet 的源数据文件不符合命名规范，你可以使用文件名模式手动将源数据文件映射到目标表。此功能不支持 Aurora Snapshot 和 SQL 数据文件。
 
-- 对于 CSV 文件，请参阅[步骤 4. 将 CSV 文件导入到 TiDB Cloud](/tidb-cloud/import-csv-files.md#步骤-4-将-csv-文件导入到-tidb-cloud) 中的**高级设置** > **映射设置**
-- 对于 Parquet 文件，请参阅[步骤 4. 将 Parquet 文件导入到 TiDB Cloud](/tidb-cloud/import-parquet-files.md#步骤-4-将-parquet-文件导入到-tidb-cloud) 中的**高级设置** > **映射设置**
+在导入向导的 **Destination Mapping** 步骤中，取消选中 **Use TiDB file naming conventions for automatic mapping**，然后填写 **Source**、**Target Database** 和 **Target Table** 字段。**Source** 字段接受支持 `*` 和 `?` 通配符的文件名模式。
+
+- 对于 CSV 文件，请参阅[步骤 4. 将 CSV 文件导入到 TiDB Cloud](/tidb-cloud/import-csv-files.md#步骤-4-将-csv-文件导入到-tidb-cloud)。
+- 对于 Parquet 文件，请参阅[步骤 4. 将 Parquet 文件导入到 TiDB Cloud](/tidb-cloud/import-parquet-files.md#步骤-4-将-parquet-文件导入到-tidb-cloud)。

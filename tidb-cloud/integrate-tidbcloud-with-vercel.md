@@ -11,7 +11,7 @@ summary: 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
 
 将 TiDB Cloud 与 Vercel 结合使用，可以让你基于 MySQL 兼容的关系模型更快地构建新的前端应用，并借助具备高可用性、可扩展性以及最高级别数据隐私和安全的平台，放心地扩展你的应用。
 
-本指南介绍了如何通过以下方法之一，将你的 TiDB Cloud 集群连接到 Vercel 项目：
+本指南介绍了如何通过以下方法之一，将你的 TiDB Cloud 资源连接到 Vercel 项目：
 
 * [通过 TiDB Cloud Vercel 集成进行连接](#connect-via-the-tidb-cloud-vercel-integration)
 * [通过手动配置环境变量进行连接](#connect-via-manually-setting-environment-variables)
@@ -38,11 +38,11 @@ summary: 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
 
 你需要在 TiDB Cloud 中拥有一个账户和一个集群。如果还没有，请参考以下内容进行创建：
 
-- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
 
     > **注意：**
     >
-    > TiDB Cloud Vercel 集成支持创建 TiDB Cloud Starter 和 TiDB Cloud Essential 集群。你也可以在集成过程中创建。
+    > TiDB Cloud Vercel 集成支持创建 TiDB Cloud Starter 和 TiDB Cloud Essential 实例。你也可以在集成过程中创建。
 
 - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
 
@@ -71,7 +71,7 @@ summary: 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
 
 > **注意：**
 >
-> 此方法仅适用于 TiDB Cloud Starter 和 TiDB Cloud Essential 集群。如果你想连接 TiDB Cloud Dedicated 集群，请使用[手动方法](#connect-via-manually-setting-environment-variables)。
+> 此方法仅适用于 TiDB Cloud Starter 和 TiDB Cloud Essential 实例。如果你想连接 TiDB Cloud Dedicated 集群，请使用[手动方法](#connect-via-manually-setting-environment-variables)。
 
 ### 集成流程
 
@@ -89,7 +89,7 @@ summary: 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
     1. 选择目标 Vercel 项目，点击 **Next**。
     2. 选择目标 TiDB Cloud 组织和项目。
     3. 选择 **Cluster** 作为连接类型。
-    4. 选择目标 TiDB Cloud 集群。如果 **Cluster** 下拉列表为空，或你想选择新的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，可点击列表中的 **+ Create Cluster** 创建。
+    4. 选择目标 TiDB Cloud 资源。如果 **Cluster** 下拉列表为空，或你想选择新的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例，可点击列表中的 **+ Create Cluster** 创建。
     5. 选择要连接的数据库。如果 **Database** 下拉列表为空，或你想选择新的数据库，可点击列表中的 **+ Create Database** 创建。
     6. 选择 Vercel 项目所用的框架。如果目标框架未列出，选择 **General**。不同框架会决定不同的环境变量。
     7. 选择是否启用 **Branching**，以为预览环境创建新分支。
@@ -211,7 +211,7 @@ Vercel 的 [Preview Deployments](https://vercel.com/docs/deployments/preview-dep
 
 > **注意：**
 >
-> 在 TiDB Cloud 的每个组织中，默认最多可为 TiDB Cloud Starter 集群创建 5 个分支。为避免超出限制，你可以删除不再需要的集群分支。更多信息参见 [管理 TiDB Cloud 分支](/tidb-cloud/branch-manage.md)。
+> 在 TiDB Cloud 的每个组织中，默认最多可为 TiDB Cloud Starter 实例创建 5 个分支。为避免超出限制，你可以删除不再需要的 TiDB Cloud Starter 实例分支。更多信息参见 [管理 TiDB Cloud 分支](/tidb-cloud/branch-manage.md)。
 
 ## 通过手动设置环境变量进行连接
 
@@ -220,13 +220,13 @@ Vercel 的 [Preview Deployments](https://vercel.com/docs/deployments/preview-dep
 
 1. 获取 TiDB 集群的连接信息。
 
-    你可以在集群的连接对话框中获取连接信息。打开方式：进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页，然后点击右上角的 **Connect**。
+    你可以在集群的连接对话框中获取连接信息。打开方式：进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源名称进入概览页，然后点击右上角的 **Connect**。
 
 2. 进入 Vercel 控制台 > Vercel 项目 > **Settings** > **Environment Variables**，根据 TiDB 集群的连接信息[声明每个环境变量的值](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-这里以 Prisma 应用和 TiDB Cloud Starter 集群为例。以下是 TiDB Cloud Starter 集群在 Prisma schema 文件中的 datasource 设置：
+这里以 Prisma 应用和 TiDB Cloud Starter 实例为例。以下是 TiDB Cloud Starter 实例在 Prisma schema 文件中的 datasource 设置：
 
 ```
 datasource db {

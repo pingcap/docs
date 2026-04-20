@@ -1,11 +1,11 @@
 ---
-title: ticloud serverless cluster delete
+title: ticloud serverless delete
 summary: "`ticloud serverless delete` 的参考文档。"
 ---
 
 # ticloud serverless delete
 
-从你的项目中删除一个 TiDB Cloud Serverless 集群：
+从你的项目中删除一个 {{{ .starter }}} 或 {{{ .essential }}} 实例：
 
 ```shell
 ticloud serverless delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless rm [flags]
 
 ## 示例
 
-以交互模式删除一个 TiDB Cloud Serverless 集群：
+以交互模式删除一个 {{{ .starter }}} 或 {{{ .essential }}} 实例：
 
 ```shell
 ticloud serverless delete
 ```
 
-以非交互模式删除一个 TiDB Cloud Serverless 集群：
+以非交互模式删除一个 {{{ .starter }}} 或 {{{ .essential }}} 实例：
 
 ```shell
 ticloud serverless delete --cluster-id <cluster-id>
@@ -38,7 +38,7 @@ ticloud serverless delete --cluster-id <cluster-id>
 | 参数                      | 描述                                         | 是否必需 | 备注                                               |
 |---------------------------|----------------------------------------------|----------|----------------------------------------------------|
 | -c, --cluster-id string   | 指定要删除的集群 ID。                       | 是       | 仅在非交互模式下生效。                             |
-| --force                   | 无需确认直接删除集群。                       | 否       | 在非交互和交互模式下均可用。                       |
+| --force                   | 无需确认直接删除 {{{ .starter }}} 或 Essential 实例。                       | 否       | 在非交互和交互模式下均可用。                       |
 | -h, --help                | 显示该命令的帮助信息。                       | 否       | 在非交互和交互模式下均可用。                       |
 
 ## 继承参数

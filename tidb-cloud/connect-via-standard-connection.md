@@ -9,7 +9,7 @@ summary: 了解如何通过公共连接接入你的 TiDB Cloud 集群。
 
 > **Tip:**
 >
-> 如果你想了解如何通过公共连接接入 TiDB Cloud Serverless 集群，请参见 [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)。
+> 如果你想了解如何通过公共连接接入 {{{ .starter }}} 或 {{{ .essential }}} 实例，请参见 [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)。
 
 ## 前置条件：配置 IP 访问列表
 
@@ -19,15 +19,15 @@ summary: 了解如何通过公共连接接入你的 TiDB Cloud 集群。
 
 要通过公共连接接入 TiDB Cloud Dedicated 集群，请按照以下步骤操作：
 
-1. 打开目标集群的概览页面。
+1. 打开目标 TiDB Cloud Dedicated 集群的概览页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群的名称，进入其概览页面。
+    2. 点击目标 TiDB Cloud Dedicated 集群的名称，进入其概览页面。
 
 2. 点击右上角的 **Connect**。此时会弹出连接对话框。
 
@@ -37,7 +37,7 @@ summary: 了解如何通过公共连接接入你的 TiDB Cloud 集群。
 
 4. 点击 **CA cert** 下载用于 TLS 连接 TiDB 集群的 CA 证书。该 CA 证书默认支持 TLS 1.2 版本。
 
-5. 选择你偏好的连接方式，然后参考该标签页上的连接字符串和示例代码，连接到你的集群。
+5. 选择你偏好的连接方式，然后参考该标签页上的连接字符串和示例代码，连接到你的 TiDB Cloud Dedicated 集群。
 
 ## 后续操作
 

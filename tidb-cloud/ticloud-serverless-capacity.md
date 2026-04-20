@@ -5,7 +5,7 @@ summary: "`ticloud serverless capacity` 的参考文档。"
 
 # ticloud serverless capacity
 
-为 TiDB Cloud 集群设置最大和最小请求容量单元（RCU）的容量。
+为 {{{ .essential }}} 实例设置最大和最小请求容量单元（RCU）的容量。
 
 ```shell
 ticloud serverless capacity [flags]
@@ -13,13 +13,13 @@ ticloud serverless capacity [flags]
 
 ## 示例
 
-以交互模式为 TiDB Cloud 集群设置容量：
+以交互模式为 {{{ .essential }}} 实例设置容量：
 
 ```shell
  ticloud serverless capacity
 ```
 
-以非交互模式为 TiDB Cloud 集群设置容量：
+以非交互模式为 {{{ .essential }}} 实例设置容量：
 
 ```shell
 ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
@@ -32,8 +32,8 @@ ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <m
 | Flag                    | 说明                                                         | 是否必需 | 备注                                               |
 |-------------------------|--------------------------------------------------------------|----------|----------------------------------------------------|
 | -c, --cluster-id string | 指定集群的 ID。                                              | 是       | 仅在非交互模式下生效。                             |
-| --max-rcu int32         | 指定集群的最大请求容量单元（RCU），最大可设置为 100000。      | 否       | 仅在非交互模式下生效。                             |
-| --min-rcu int32         | 指定集群的最小请求容量单元（RCU），最小需为 2000。            | 否       | 仅在非交互模式下生效。                             |
+| --max-rcu int32         | 指定 {{{ .essential }}} 实例的最大请求容量单元（RCU），最大可设置为 100000。 | 否       | 仅在非交互模式下生效。                             |
+| --min-rcu int32         | 指定 {{{ .essential }}} 实例的最小请求容量单元（RCU），最小需为 2000。 | 否       | 仅在非交互模式下生效。                             |
 | -h, --help              | 显示该命令的帮助信息。                                       | 否       | 在非交互和交互模式下均可用。                       |
 
 ## 继承参数

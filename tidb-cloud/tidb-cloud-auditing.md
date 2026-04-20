@@ -56,13 +56,13 @@ TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志记录到你的云存
 
 1. 获取你要启用审计日志的 TiDB 集群的 TiDB Cloud Account ID 和 External ID。
 
-    1. 在 TiDB Cloud 控制台，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+    2. 点击目标 TiDB Cloud Dedicated 集群的名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
     3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
     4. 在 **Enable Database Audit Logging** 对话框中，找到 **AWS IAM Policy Settings** 部分，记录下 **TiDB Cloud Account ID** 和 **TiDB Cloud External ID**，以备后用。
 
@@ -130,13 +130,13 @@ TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志记录到你的云存
 
 1. 获取你要启用审计日志的 TiDB 集群的 Google Cloud Service Account ID。
 
-    1. 在 TiDB Cloud 控制台，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+    2. 点击目标 TiDB Cloud Dedicated 集群的名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
     3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
     4. 在 **Enable Database Audit Logging** 对话框中，找到 **Google Cloud Server Account ID** 部分，记录下 **Service Account ID**，以备后用。
 
@@ -227,13 +227,13 @@ TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志记录到你的云存
 
 #### 步骤 3. 启用审计日志
 
-1. 在 TiDB Cloud 控制台，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+1. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
+2. 点击目标 TiDB Cloud Dedicated 集群的名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
 4. 在 **Enable Database Audit Logging** 对话框中，填写你在 [步骤 2. 配置 Azure Blob 访问权限](#step-2-configure-azure-blob-storage-access) 获取的 blob URL 和 SAS token：
 

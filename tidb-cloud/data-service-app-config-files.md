@@ -51,7 +51,7 @@ Data App 的数据源来自其链接的 TiDB 集群。你可以在 `data_sources
 
 | 字段   | 类型    | 说明  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | 你的 TiDB 集群的 ID。你可以从集群的 URL 获取它。例如，如果你的集群 URL 是 `https://tidbcloud.com/clusters/1234567891234567890/overview`，你的集群 ID 是 `1234567891234567890`。 |
+| `cluster_id` | Integer | 你的 {{{ .starter }}} 实例的 ID。你可以从实例的 URL 获取它。例如，如果你的实例 URL 是 `https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`，你的实例 ID 是 `1234567891234567890`。 |
 
 ## Data App 配置
 
@@ -170,10 +170,10 @@ Data App 的属性包含 App ID、名称和类型。你可以在 `dataapp_config
 | `description` | String | （可选）端点描述。          |
 | `method`      | String | 端点的 HTTP 方法。你可以使用 `GET` 检索数据，使用 `POST` 创建或插入数据，使用 `PUT` 更新或修改数据，使用 `DELETE` 删除数据。 |
 | `endpoint`    | String | Data App 中端点的唯一路径。路径中只允许使用字母、数字、下划线（`_`）和斜杠（`/`），必须以斜杠（`/`）开头，以字母、数字或下划线（`_`）结尾。例如，`/my_endpoint/get_id`。路径长度必须小于 64 个字符。|
-| `cluster_id`  | String | 端点使用的 TiDB 集群的 ID。你可以从 TiDB 集群的 URL 获取它。例如，如果你的集群 URL 是 `https://tidbcloud.com/clusters/1234567891234567890/overview`，集群 ID 是 `1234567891234567890`。 |
-| `params` | Array | 端点使用的参数。通过定义参数，你可以通过端点动态替换查询中的参数值。在 `params` 中，你可以定义一个或多个参数。对于每个参数，你需要定义其 `name`、`type`、`required` 和 `default` 字段。如果你的端点不需要任何参数，你可以将 `params` 留空，如 `"params": []`。 |
+| `cluster_id`  | String | 端点使用的 {{{ .starter }}} 实例的 ID。你可以从实例的 URL 获取它。例如，如果你的实例 URL 是 `https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`，实例 ID 是 `1234567891234567890`。 |
+| `params` | Array | 端点使用的参数。通过定义参数，你可以通过端点动态替换查询中的参数值。在 `params` 中，你可以定义一个或多个参数。对于每个参数，你需要定义其 `name`、`type`、`required` 和 `default` 字段。如果你的端点不需要任何参数，你可以将 `params` 留空，如 `\"params\": []`。 |
 | `params.name` | String | 参数的名称。名称只能包含字母、数字和下划线（`_`），且必须以字母或下划线（`_`）开头。**不要**使用 `page` 和 `page_size` 作为参数名称，这些是为请求结果分页保留的。 |
-| `params.type` | String | 参数的数据类型。支持的值有 `string`、`number`、`integer`、`boolean` 和 `array`。使用 `string` 类型参数时，不需要添加引号（`'` 或 `"`）。例如，`foo` 对于 `string` 类型是有效的，会被处理为 `"foo"`，而 `"foo"` 会被处理为 `"\"foo\""` 。 |
+| `params.type` | String | 参数的数据类型。支持的值有 `string`、`number`、`integer`、`boolean` 和 `array`。使用 `string` 类型参数时，不需要添加引号（`'` 或 `\"`）。例如，`foo` 对于 `string` 类型是有效的，会被处理为 `\"foo\"`，而 `\"foo\"` 会被处理为 `\"\\\"foo\\\"\"` 。 |
 | `params.required` | Integer | 指定请求中是否必须包含该参数。支持的值为 `0`（不必须）和 `1`（必须）。默认值为 `0`。  |
 | `params.enum` | String | （可选）指定参数的值选项。此字段仅在 `params.type` 设置为 `string`、`number` 或 `integer` 时有效。要指定多个值，可以用逗号（`,`）分隔。 |
 | `params.default` | String | 参数的默认值。确保值与你指定的参数类型匹配。否则，端点将返回错误。`ARRAY` 类型参数的默认值是一个字符串，你可以使用逗号（`,`）分隔多个值。 |
@@ -184,11 +184,11 @@ Data App 的属性包含 App ID、名称和类型。你可以在 `dataapp_config
 | `settings.enable_pagination`   | Integer  | 控制是否为请求返回的结果启用分页。支持的值为 `0`（禁用）和 `1`（启用）。默认值为 `0`。 |
 | `settings.cache_enabled`   | Integer  | 控制是否在指定的生存时间（TTL）期间内缓存你的 `GET` 请求返回的响应。支持的值为 `0`（禁用）和 `1`（启用）。默认值为 `0`。 |
 | `settings.cache_ttl`   | Integer  | 当 `settings.cache_enabled` 设置为 `1` 时，缓存响应的生存时间（TTL）期限（以秒为单位）。你可以将其设置为 30 到 600 之间的整数。在 TTL 期间内，如果你再次发出相同的 `GET` 请求，Data Service 将直接返回缓存的响应，而不是再次从目标数据库获取数据，这样可以提高你的查询性能。 |
-| `tag`    | String | 端点的标签。默认值为 `"Default"`。 |
+| `tag`    | String | 端点的标签。默认值为 `\"Default\"`。 |
 | `batch_operation`    | Integer | 控制是否启用端点以批处理模式运行。支持的值为 `0`（禁用）和 `1`（启用）。当设置为 `1` 时，你可以在单个请求中操作多行。要启用此选项，请确保请求方法为 `POST` 或 `PUT`。 |
-| `sql_file`    | String | 端点的 SQL 文件目录。例如，`"sql/GET-v1.sql"`。 |
-| `type`        | String | 端点的类型。预定义的系统端点值为 `"system-data"`，其他端点值为 `"sql_endpoint"`。 |
-| `return_type` | String | 端点的响应格式，只能是 `"json"`。             |
+| `sql_file`    | String | 端点的 SQL 文件目录。例如，`\"sql/GET-v1.sql\"`。 |
+| `type`        | String | 端点的类型。预定义的系统端点值为 `\"system-data\"`，其他端点值为 `\"sql_endpoint\"`。 |
+| `return_type` | String | 端点的响应格式，只能是 `\"json\"`。             |
 
 ### SQL 文件配置
 

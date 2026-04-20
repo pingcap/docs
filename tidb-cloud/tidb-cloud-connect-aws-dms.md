@@ -1,9 +1,9 @@
 ---
-title: 连接 AWS DMS 到 TiDB Cloud 集群
+title: 连接 AWS DMS 到 TiDB Cloud
 summary: 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cloud 迁移数据或向 TiDB Cloud 迁移数据。
 ---
 
-# 连接 AWS DMS 到 TiDB Cloud 集群
+# 连接 AWS DMS 到 TiDB Cloud
 
 [AWS Database Migration Service (AWS DMS)](https://aws.amazon.com/dms/) 是一项云服务，可以实现关系型数据库、数据仓库、NoSQL 数据库以及其他类型数据存储的迁移。你可以使用 AWS DMS 将数据从 TiDB Cloud 集群迁移出去，或迁移到 TiDB Cloud 集群。本文档介绍如何将 AWS DMS 连接到 TiDB Cloud 集群。
 
@@ -20,7 +20,7 @@ summary: 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cl
 
 你需要拥有一个 TiDB Cloud 账号，以及 TiDB Cloud Starter、TiDB Cloud Essential 或 TiDB Cloud Dedicated 集群。如果没有，请参考以下文档进行创建：
 
-- [创建 TiDB Cloud Starter 或 Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [创建 TiDB Cloud Starter 或 Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
 
 ## 配置网络
@@ -35,13 +35,13 @@ summary: 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cl
 
 <CustomContent language="en,zh">
 
-- 若要[通过公有端点连接 TiDB Cloud Starter 或 Essential 集群](/tidb-cloud/connect-via-standard-connection-serverless.md)，请执行以下任一操作，确保 DMS 复制实例能够访问互联网。
+- 若要[通过公有端点连接 TiDB Cloud Starter 或 Essential 实例](/tidb-cloud/connect-via-standard-connection-serverless.md)，请执行以下任一操作，确保 DMS 复制实例能够访问互联网。
 
     - 在公有子网中部署复制实例，并启用 **Public accessible**。更多信息请参见 [互联网访问配置](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)。
 
     - 在私有子网中部署复制实例，并将私有子网的流量路由到公有子网。在这种情况下，你至少需要三个子网，两个私有子网和一个公有子网。两个私有子网组成复制实例所在的子网组。然后你需要在公有子网中创建 NAT 网关，并将两个私有子网的流量路由到该 NAT 网关。更多信息请参见 [从私有子网访问互联网](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)。
 
-- 若要通过私有端点连接 TiDB Cloud Starter 或 Essential 集群，请先参考以下文档设置私有端点，并在私有子网中部署复制实例。
+- 若要通过私有端点连接 TiDB Cloud Starter 或 Essential 实例，请先参考以下文档设置私有端点，并在私有子网中部署复制实例。
 
     - [通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [通过阿里云私有端点连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -50,13 +50,13 @@ summary: 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cl
 
 <CustomContent language="ja">
 
-- 若要[通过公有端点连接 TiDB Cloud Starter 或 Essential 集群](/tidb-cloud/connect-via-standard-connection-serverless.md)，请执行以下任一操作，确保 DMS 复制实例能够访问互联网。
+- 若要[通过公有端点连接 TiDB Cloud Starter 或 Essential 实例](/tidb-cloud/connect-via-standard-connection-serverless.md)，请执行以下任一操作，确保 DMS 复制实例能够访问互联网。
 
     - 在公有子网中部署复制实例，并启用 **Public accessible**。更多信息请参见 [互联网访问配置](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)。
 
     - 在私有子网中部署复制实例，并将私有子网的流量路由到公有子网。在这种情况下，你至少需要三个子网，两个私有子网和一个公有子网。两个私有子网组成复制实例所在的子网组。然后你需要在公有子网中创建 NAT 网关，并将两个私有子网的流量路由到该 NAT 网关。更多信息请参见 [从私有子网访问互联网](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)。
 
-- 若要通过私有端点连接 TiDB Cloud Starter 或 Essential 集群，请参考 [通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 先设置私有端点，并在私有子网中部署复制实例。
+- 若要通过私有端点连接 TiDB Cloud Starter 或 Essential 实例，请参考 [通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 先设置私有端点，并在私有子网中部署复制实例。
 
 </CustomContent>
 

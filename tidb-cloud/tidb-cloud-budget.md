@@ -11,7 +11,7 @@ summary: 了解如何使用 TiDB Cloud 的预算功能来监控你的成本。
 
 TiDB Cloud 提供两种类型的预算，帮助你跟踪支出：
 
-- **Serverless Spending Limit** 预算：对于每个 TiDB Cloud Serverless 可扩展集群，TiDB Cloud 会自动创建一个 **Serverless Spending Limit** 预算。该预算帮助你根据该集群上配置的 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 跟踪实际成本。它包含三个阈值规则：预算的 75%、90% 和 100%，这些阈值不可编辑。
+- **Serverless Spending Limit** 预算：对于每个 TiDB Cloud Serverless 可扩展集群，TiDB Cloud 会自动创建一个 **Serverless Spending Limit** 预算。该预算帮助你根据该 {{{ .starter }}} 实例上配置的 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 跟踪实际成本。它包含三个阈值规则：预算的 75%、90% 和 100%，这些阈值不可编辑。
 
 - **Custom** 预算：你可以创建自定义预算，用于跟踪整个组织或特定项目的实际成本。对于每个预算，你可以指定预算范围、设置目标支出金额，并配置告警阈值。创建自定义预算后，你可以将每月实际成本与计划成本进行对比，确保支出不超出预算。
 
@@ -60,7 +60,7 @@ TiDB Cloud 提供两种类型的预算，帮助你跟踪支出：
 
 > **注意：**
 >
-> **Serverless Spending Limit** 预算无法编辑，因为它是由 TiDB Cloud 自动创建，用于帮助你根据 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 跟踪 TiDB Cloud Serverless 可扩展集群的成本。
+> **Serverless Spending Limit** 预算无法编辑，因为它是由 TiDB Cloud 自动创建，用于帮助你根据 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 跟踪 {{{ .starter }}} 实例的成本。
 
 要编辑自定义预算，请按照以下步骤操作：
 
@@ -81,7 +81,7 @@ TiDB Cloud 提供两种类型的预算，帮助你跟踪支出：
 > **注意：**
 >
 > - 一旦自定义预算被删除，你将不再收到与其相关的任何告警邮件。
-> - **Serverless Spending Limit** 预算无法删除，因为它是由 TiDB Cloud 自动创建，用于帮助你根据 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 跟踪 TiDB Cloud Serverless 可扩展集群的成本。
+> - **Serverless Spending Limit** 预算无法删除，因为它是由 TiDB Cloud 自动创建，用于帮助你根据 [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 跟踪 {{{ .starter }}} 实例的成本。
 
 要删除自定义预算，请按照以下步骤操作：
 

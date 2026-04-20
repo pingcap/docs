@@ -8,13 +8,13 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 <CustomContent plan="starter,essential">
 
-如果你希望在 TiDB Cloud 集群中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 TiDB Cloud Starter 和 TiDB Cloud Essential 集群配置外部存储访问。
+如果你希望在 {{{ .starter }}} 或 TiDB Cloud Essential 实例中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 TiDB Cloud Starter 和 TiDB Cloud Essential 实例配置外部存储访问。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-如果你希望在 TiDB Cloud 实例中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 TiDB Cloud Premium 实例配置外部存储访问。
+如果你希望在 {{{ .premium }}} 实例中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 TiDB Cloud Premium 实例配置外部存储访问。
 
 </CustomContent>
 
@@ -22,7 +22,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 ## 配置 Amazon S3 访问
 
-要允许 TiDB Cloud <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 访问你 Amazon S3 bucket 中的源数据，可以通过以下任一方法为 <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 配置 bucket 访问权限：
+要允许 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例访问你的 Amazon S3 bucket，可以通过以下任一方法为该实例配置 bucket 访问权限：
 
 - [使用 Role ARN](#configure-amazon-s3-access-using-a-role-arn)：使用 Role ARN 访问你的 Amazon S3 bucket。
 - [使用 AWS 访问密钥](#configure-amazon-s3-access-using-an-aws-access-key)：使用 IAM 用户的访问密钥访问你的 Amazon S3 bucket。
@@ -33,13 +33,12 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 > **注意：**
 >
-> 仅当 <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 的云服务商为 AWS 时，才支持通过 Role ARN 访问 Amazon S3。如果你使用其他云服务商，请改用 AWS 访问密钥。详情请参阅 [使用 AWS 访问密钥配置 Amazon S3 访问](#configure-amazon-s3-access-using-an-aws-access-key)。
+> 仅当目标 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的云服务商为 AWS 时，才支持通过 Role ARN 访问 Amazon S3。如果你使用其他云服务商，请改用 AWS 访问密钥。详情请参阅 [使用 AWS 访问密钥配置 Amazon S3 访问](#configure-amazon-s3-access-using-an-aws-access-key)。
 
-1. 打开目标 <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 的 **Import** 页面。
+1. 打开目标 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，<CustomContent plan="starter,essential">进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。</CustomContent><CustomContent plan="premium">进入 [**TiDB Instances**](https://tidbcloud.com/tidbs) 页面。</CustomContent>
-
-    2. 点击目标 <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 的名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+    2. 点击目标 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 打开 **Add New ARN** 对话框。
 
@@ -49,11 +48,26 @@ aliases: ['/tidbcloud/serverless-external-storage']
         2. 填写 **File URI** 字段。
         3. 选择 **AWS Role ARN** 并点击 **Click here to create new one with AWS CloudFormation**。
 
+    <CustomContent plan="starter,essential">
+
     - 如果你希望将数据导出到 Amazon S3，按如下方式打开 **Add New ARN** 对话框：
 
-        1. 点击 **Export data to...**  > **Amazon S3**。如果你的 <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 之前未进行过数据导入或导出操作，请在页面底部点击 **Click here to export data to...** > **Amazon S3**。
+        1. 点击 **Export data to...** > **Amazon S3**。如果你的 {{{ .starter }}} 或 TiDB Cloud Essential 实例之前未进行过数据导入或导出操作，请在页面底部点击 **Click here to export data to...** > **Amazon S3**。
         2. 填写 **Folder URI** 字段。
         3. 选择 **AWS Role ARN** 并点击 **Click here to create new one with AWS CloudFormation**。
+
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    - 如果你希望将数据导出到 Amazon S3，按如下方式打开 **Add New ARN** 对话框：
+
+        1. 点击 **Export Data**。
+        2. 在 **Target Connection** 中选择 **Amazon S3**。
+        3. 填写 **Folder URI** 字段。
+        4. 选择 **AWS Role ARN** 并点击 **Click here to create new one with AWS CloudFormation**。
+
+    </CustomContent>
 
 3. 使用 AWS CloudFormation 模板创建 Role ARN。
 
@@ -80,7 +94,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
     1. 登录 [AWS 管理控制台](https://console.aws.amazon.com/)，打开 [Amazon S3 控制台](https://console.aws.amazon.com/s3/)。
 
-    2. 在 **Buckets** 列表中，选择包含源数据的 bucket 名称，然后点击 **Copy ARN** 获取你的 S3 bucket ARN（例如，`arn:aws:s3:::tidb-cloud-source-data`）。请记录该 bucket ARN 以备后用。
+    2. 在 **Buckets** 列表中，选择目标 bucket 的名称，然后点击 **Copy ARN** 获取你的 S3 bucket ARN（例如，`arn:aws:s3:::tidb-cloud-source-data`）。请记录该 bucket ARN 以备后用。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
@@ -90,10 +104,10 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
     4. 在 **Create policy** 页面，点击 **JSON** 标签。
 
-    5. 根据你的需求在策略文本框中配置策略。以下为一个示例，可用于从 TiDB Cloud <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 导出和导入数据。
+    5. 根据你的需求在策略文本框中配置策略。以下为一个示例，可用于从 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导出和导入数据。
 
-        - 从 TiDB Cloud <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 导出数据需要 **s3:PutObject** 和 **s3:ListBucket** 权限。
-        - 向 TiDB Cloud <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 导入数据需要 **s3:GetObject**、**s3:GetObjectVersion** 和 **s3:ListBucket** 权限。
+        - 从 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导出数据需要 **s3:PutObject** 和 **s3:ListBucket** 权限。
+        - 向 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导入数据需要 **s3:GetObject**、**s3:GetObjectVersion** 和 **s3:ListBucket** 权限。
 
         ```json
         {
@@ -107,7 +121,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
                         "s3:GetObjectVersion",
                         "s3:PutObject"
                     ],
-                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
+                    "Resource": "<Your S3 bucket ARN>/<Your data directory>/*"
                 },
                 {
                     "Sid": "VisualEditor1",
@@ -123,10 +137,10 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
         在策略文本框中，将以下配置替换为你自己的值。
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`。例如：
+        - `"Resource": "<Your S3 bucket ARN>/<Your data directory>/*"`，其中 `<Your data directory>` 是导出数据的目标目录或导入数据的源目录。例如：
 
-            - 如果你的源数据存储在 `tidb-cloud-source-data` bucket 的根目录，使用 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`。
-            - 如果你的源数据存储在 bucket 的 `mydata` 目录，使用 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`。
+            - 如果你用于导入或导出的数据位于 `tidb-cloud-source-data` bucket 的根目录，使用 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`。
+            - 如果你用于导入或导出的数据位于 bucket 的 `mydata` 目录，使用 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`。
 
           请确保目录末尾添加了 `/*`，以便 TiDB Cloud 能访问该目录下的所有文件。
 
@@ -161,7 +175,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
         - 在 **Trusted entity type** 选择 **AWS account**。
         - 在 **An AWS account** 选择 **Another AWS account**，并将 TiDB Cloud account ID 粘贴到 **Account ID** 字段。
-        - 在 **Options**，点击 **Require external ID (Best practice when a third party will assume this role)**，并将 TiDB Cloud External ID 粘贴到 **External ID** 字段。<CustomContent plan="starter,essential"> 如果创建角色时未勾选 Require external ID，则项目下所有 TiDB 集群配置完成后都可使用同一个 Role ARN 访问你的 Amazon S3 bucket。如果使用 account ID 和 external ID 创建角色，则只有对应的 TiDB 集群可以访问该 bucket。</CustomContent>
+        - 在 **Options**，点击 **Require external ID (Best practice when a third party will assume this role)**，并将 TiDB Cloud External ID 粘贴到 **External ID** 字段。<CustomContent plan="starter,essential"> 如果创建角色时未勾选 Require external ID，则项目下一个 {{{ .starter }}} 或 TiDB Cloud Essential 实例完成配置后，该项目中的所有 {{{ .starter }}} 和 TiDB Cloud Essential 实例都可使用同一个 Role ARN 访问你的 Amazon S3 bucket。如果使用 account ID 和 external ID 创建角色，则只有对应的 {{{ .starter }}} 或 TiDB Cloud Essential 实例可以访问该 bucket。</CustomContent>
 
     3. 点击 **Next** 打开策略列表，选择你刚刚创建的策略，然后点击 **Next**。
 
@@ -193,7 +207,7 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 ## 配置 GCS 访问
 
-要允许 TiDB Cloud 集群访问你的 GCS bucket，你需要为该 bucket 配置 GCS 访问权限。你可以使用服务账户密钥配置 bucket 访问：
+要允许 {{{ .starter }}} 或 TiDB Cloud Essential 实例访问你的 GCS bucket，你需要为该 bucket 配置 GCS 访问权限。你可以使用服务账户密钥配置 bucket 访问：
 
 请按照以下步骤配置服务账户密钥：
 
@@ -204,8 +218,8 @@ aliases: ['/tidbcloud/serverless-external-storage']
     3. 点击 **CREATE AND CONTINUE** 创建服务账户。
     4. 在 `Grant this service account access to project`，选择具有所需权限的 [IAM 角色](https://cloud.google.com/iam/docs/understanding-roles)。
 
-        - 从 TiDB Cloud 集群导出数据需要具有 `storage.objects.create` 权限的角色。
-        - 向 TiDB Cloud 集群导入数据需要具有 `storage.buckets.get`、`storage.objects.get` 和 `storage.objects.list` 权限的角色。
+        - 从 {{{ .starter }}} 或 TiDB Cloud Essential 实例导出数据需要具有 `storage.objects.create` 权限的角色。
+        - 向 {{{ .starter }}} 或 TiDB Cloud Essential 实例导入数据需要具有 `storage.buckets.get`、`storage.objects.get` 和 `storage.objects.list` 权限的角色。
 
     5. 点击 **Continue** 进入下一步。
     6. 可选：在 `Grant users access to this service account`，选择需要[将服务账户附加到其他资源](https://cloud.google.com/iam/docs/attach-service-accounts)的成员。
@@ -217,11 +231,11 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. 选择默认的 `JSON` 密钥类型，然后点击 **CREATE** 下载 Google Cloud 凭证文件。该文件包含你在为 TiDB Cloud 集群配置 GCS 访问时需要使用的服务账户密钥。
+3. 选择默认的 `JSON` 密钥类型，然后点击 **CREATE** 下载 Google Cloud 凭证文件。该文件包含你在为 {{{ .starter }}} 或 TiDB Cloud Essential 实例配置 GCS 访问时需要使用的服务账户密钥。
 
 </CustomContent>
 
-<CustomContent plan="starter,essential">
+<CustomContent plan="starter,essential,premium">
 
 ## 配置 Azure Blob Storage 访问
 
@@ -231,17 +245,38 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 通过 Azure ARM 模板创建 SAS token，请按照以下步骤操作：
 
-1. 打开目标集群的 **Import** 页面。
+1. 打开目标 TiDB Cloud 资源的 **Import** 或 **Export** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
-    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 TiDB Cloud 资源名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import** 或 **Data** > **Export**。
 
 2. 打开 **Generate New SAS Token via ARM Template Deployment** 对话框。
 
-    1. 点击 **Export data to...**  > **Azure Blob Storage**。如果你的集群之前未进行过数据导入或导出操作，请在页面底部点击 **Click here to export data to...** > **Azure Blob Storage**。
+    - 如果你希望从 Azure Blob Storage 导入数据：
 
-    2. 向下滚动到 **Azure Blob Storage Settings** 区域，在 SAS Token 字段下点击 **Click here to create a new one with Azure ARM template**。
+        1. 点击 **Import from Azure Blob Storage**。
+        2. 填写 **Folder URI** 字段。
+        3. 在 **SAS Token** 字段中点击 **Click here to create a new one with Azure ARM template**。
+
+    <CustomContent plan="starter,essential">
+
+    - 如果你希望将数据导出到 Azure Blob Storage：
+
+        1. 点击 **Export data to...** > **Azure Blob Storage**。如果你的 {{{ .starter }}} 或 TiDB Cloud Essential 实例之前未进行过数据导入或导出操作，请在页面底部点击 **Click here to export data to...** > **Azure Blob Storage**。
+        2. 向下滚动到 **Azure Blob Storage Settings** 区域，在 SAS Token 字段下点击 **Click here to create a new one with Azure ARM template**。
+
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    - 如果你希望将数据导出到 Azure Blob Storage：
+
+        1. 点击 **Export Data**。
+        2. 在 **Target Connection** 中选择 **Azure Blob Storage**。
+        3. 在 SAS Token 字段下点击 **Click here to create a new one with Azure ARM template**。
+
+    </CustomContent>
 
 3. 使用 Azure ARM 模板创建 SAS token。
 
@@ -274,8 +309,8 @@ aliases: ['/tidbcloud/serverless-external-storage']
     2. 在 **Allowed Resource types** 区域选择 **Container** 和 **Object**。
     3. 在 **Allowed permissions** 区域根据需要选择权限。
 
-        - 从 TiDB Cloud 集群导出数据需要 **Read** 和 **Write** 权限。
-        - 向 TiDB Cloud 集群导入数据需要 **Read** 和 **List** 权限。
+        - 从 {{{ .starter }}} 或 TiDB Cloud Essential 实例导出数据需要 **Read** 和 **Write** 权限。
+        - 向 {{{ .starter }}} 或 TiDB Cloud Essential 实例导入数据需要 **Read** 和 **List** 权限。
 
     4. 根据需要调整 **Start and expiry date/time**。
     5. 其他设置可保持默认值。
@@ -304,9 +339,9 @@ aliases: ['/tidbcloud/serverless-external-storage']
     - 在 **Service** 区域选择 **Object Storage Service**。
     - 在 **Action** 区域根据需要选择权限。
 
-        向 TiDB Cloud <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 导入数据需授予 **oss:GetObject**、**oss:GetBucketInfo** 和 **oss:ListObjects** 权限。
+        向 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导入数据需授予 **oss:GetObject**、**oss:GetBucketInfo** 和 **oss:ListObjects** 权限。
 
-        从 TiDB Cloud <CustomContent plan="starter,essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 导出数据需授予 `oss:PutObject` 和 `oss:GetBucketInfo` 权限。
+        从 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导出数据需授予 `oss:PutObject` 和 `oss:GetBucketInfo` 权限。
 
     - 在 **Resource** 区域选择 bucket 及其对象。
 

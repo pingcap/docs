@@ -37,7 +37,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 在上述代码中，请求体是一个具有以下属性的 JSON 对象：
 
-- `cluster_id`：_string_。TiDB 集群的唯一标识符。
+- `cluster_id`：_string_。{{{ .starter }}} 实例的唯一标识符。
 - `database`：_string_。数据库名称。
 - `name`：_string_。会话名称。
 

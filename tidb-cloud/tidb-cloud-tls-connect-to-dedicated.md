@@ -14,15 +14,15 @@ aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 
 - 通过 [密码认证](/tidb-cloud/tidb-cloud-password-authentication.md) 或 [SSO 认证](/tidb-cloud/tidb-cloud-sso-authentication.md) 登录 TiDB Cloud，然后 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 
-- 在安全设置中为你的集群设置访问密码。
+- 在安全设置中为你的 TiDB Cloud Dedicated 集群设置访问密码。
 
-    操作方法：你可以进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，在你的 TiDB Cloud Dedicated 集群所在行点击 **...**，然后选择 **Password Settings**。在密码设置中，你可以点击 **Auto-generate Password**，自动生成一个包含数字、大小写字母和特殊字符、长度为 16 位的 root 密码。
+    操作方法：你可以进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，在你的 TiDB Cloud Dedicated 集群所在行点击 **...**，然后选择 **Password Settings**。在密码设置中，你可以点击 **Auto-generate Password**，自动生成一个包含数字、大小写字母和特殊字符、长度为 16 位的 root 密码。
 
 ## 安全连接到 TiDB Cloud Dedicated 集群
 
 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，你可以获取不同连接方式的示例，并按如下步骤连接到你的 TiDB Cloud Dedicated 集群：
 
-1. 进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击你的 TiDB Cloud Dedicated 集群名称，进入集群概览页面。
+1. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击你的 TiDB Cloud Dedicated 集群名称，进入集群概览页面。
 
 2. 点击右上角的 **Connect**，弹出连接对话框。
 
@@ -37,7 +37,7 @@ aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
     > - 你可以将下载的 CA 证书存储在操作系统的默认路径，或指定其他存储路径。后续步骤中，你需要将代码示例中的 CA 证书路径替换为你自己的 CA 证书路径。
     > - TiDB Cloud Dedicated 不强制客户端使用 TLS 连接，且当前不支持用户自定义配置 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) 变量。
 
-5. 选择你喜欢的连接方式，然后参考标签页中的连接字符串和示例代码连接到你的集群。
+5. 选择你喜欢的连接方式，然后参考标签页中的连接字符串和示例代码连接到你的 TiDB Cloud Dedicated 集群。
 
 以下示例展示了 MySQL、MyCLI、JDBC、Python、Go 和 Node.js 的连接字符串：
 

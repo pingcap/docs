@@ -8,7 +8,7 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 如果你的源数据存储在 Amazon S3 bucket、Azure Blob Storage 容器或 Google Cloud Storage (GCS) bucket 中，在将数据导入或迁移到 TiDB Cloud 之前，你需要为这些 bucket 配置跨账号访问权限。本文档介绍了如何为 TiDB Cloud Dedicated 集群进行相关配置。
 
-如果你需要为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群配置这些外部存储，请参见 [为 TiDB Cloud Starter 或 Essential 配置外部存储访问](/tidb-cloud/configure-external-storage-access.md)。
+如果你需要为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例配置这些外部存储，请参见 [为 TiDB Cloud Starter 或 Essential 配置外部存储访问](/tidb-cloud/configure-external-storage-access.md)。
 
 ## 配置 Amazon S3 访问权限
 
@@ -23,19 +23,19 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，获取目标 TiDB 集群对应的 TiDB Cloud 账号 ID 和 external ID。
 
-    1. 进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 TiDB Cloud Dedicated 集群的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
-    3. 选择 **Import data from Cloud Storage**，然后点击 **Amazon S3**。
+    3. 点击 **Import data from Cloud Storage**。
 
-    4. 在 **Import Data from Amazon S3** 页面，点击 **Role ARN** 下方的链接。此时会弹出 **Add New Role ARN** 对话框。
+    4. 在 **Import Data from Cloud Storage** 页面，将 **Storage Provider** 设置为 **Amazon S3**，确保在 **Credentials** 下选择了 **AWS Role ARN**，然后点击 **Role ARN** 字段下方的 **Click here to create new one with AWS CloudFormation**。此时会弹出 **Add New Role ARN** 对话框。
 
-    5. 展开 **Create Role ARN manually**，获取 TiDB Cloud Account ID 和 TiDB Cloud External ID。请记录这些 ID，后续会用到。
+    5. 展开 **Having trouble? Create Role ARN manually**，获取此集群的 **TiDB Cloud Account ID** 和 **TiDB Cloud External ID**。请记录这些 ID，后续会用到。
 
 2. 在 AWS 管理控制台中，为你的 Amazon S3 bucket 创建一个托管策略。
 
@@ -153,17 +153,17 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 1. 在 TiDB Cloud 控制台获取目标 TiDB 集群的 Google Cloud Service Account ID。
 
-    1. 进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
         > **Tip:**
         >
-        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+        > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 TiDB Cloud Dedicated 集群的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
-    3. 选择 **Import data from Cloud Storage**，然后点击 **Google Cloud Storage**。
+    3. 点击 **Import data from Cloud Storage**。
 
-    4. 点击 **Show Google Cloud Server Account ID**，复制 Service Account ID 以备后用。
+    4. 在 **Import Data from Cloud Storage** 页面，将 **Storage Provider** 设置为 **Google Cloud Storage**，然后复制 Google Cloud Service Account ID 以备后用。
 
 2. 在 Google Cloud 控制台中，为你的 GCS bucket 创建 IAM 角色。
 

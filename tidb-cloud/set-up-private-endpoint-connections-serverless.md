@@ -1,11 +1,11 @@
 ---
 title: 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential
-summary: 了解如何通过私有端点连接到你的 TiDB Cloud 集群。
+summary: 了解如何通过私有端点连接到你的 {{{ .starter }}} 或 Essential 实例。
 ---
 
 # 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential
 
-本文档介绍如何通过 AWS PrivateLink 连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+本文档介绍如何通过 AWS PrivateLink 连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
 > **提示：**
 >
@@ -37,23 +37,23 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 
 ## 使用 AWS 设置私有端点
 
-要通过私有端点连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，请按照以下步骤操作：
+要通过私有端点连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例，请按照以下步骤操作：
 
-1. [选择 TiDB 集群](#step-1-choose-a-tidb-cluster)
+1. [选择 {{{ .starter }}} 或 Essential 实例](#step-1-choose-a-tidb-instance)
 2. [创建 AWS interface 端点](#step-2-create-an-aws-interface-endpoint)
 3. [在 TiDB Cloud 中授权你的私有端点](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
-4. [连接到你的 TiDB 集群](#step-4-connect-to-your-tidb-cluster)
+4. [连接到你的 {{{ .starter }}} 或 Essential 实例](#step-4-connect-to-your-tidb)
 
-### Step 1. 选择 TiDB 集群
+### Step 1. 选择 {{{ .starter }}} 或 Essential 实例 {#step-1-choose-a-tidb-instance}
 
-1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的名称，进入其概览页面。
-2. 点击右上角的 **Connect**。会弹出连接对话框。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 {{{ .starter }}} 或 {{{ .essential }}} 实例的名称，进入其概览页面。
+2. 点击右上角的 **Connect**。此时会显示连接对话框。
 3. 在 **Connection Type** 下拉列表中，选择 **Private Endpoint**。
-4. 记录下 **Service Name**、**Availability Zone ID** 和 **Region ID**。
+4. 记下 **Service Name**、**Availability Zone ID** 和 **Region ID**。
 
     > **注意：**
     >
-    > 每个 AWS Region 只需创建一个私有端点，该端点可被同一 Region 内的所有 TiDB Cloud Starter 或 TiDB Cloud Essential 集群共享。
+    > 每个 AWS 区域只需创建一个私有端点，该端点可供位于同一区域的所有 {{{ .starter }}} 或 {{{ .essential }}} 实例共享。
 
 ### Step 2. 创建 AWS interface 端点
 
@@ -70,10 +70,10 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
 3. 选择 **Endpoint services that use NLBs and GWLBs**。
-4. 输入你在 [step 1](#step-1-choose-a-tidb-cluster) 获取的 service name。
+4. 输入你在 [step 1](#step-1-choose-a-tidb-instance) 获取的 service name。
 5. 点击 **Verify service**。
 6. 在下拉列表中选择你的 VPC。展开 **Additional settings** 并勾选 **Enable DNS name** 复选框。
-7. 在 **Subnets** 区域，选择你的 TiDB 集群所在的 availability zone，并选择 Subnet ID。
+7. 在 **Subnets** 区域，选择你的 {{{ .starter }}} 或 Essential 实例所在的 availability zone，并选择 Subnet ID。
 8. 在 **Security groups** 区域，正确选择你的安全组。
 
     > **注意：**
@@ -87,7 +87,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 
 如需使用 AWS CLI 创建 VPC interface 端点，请执行以下步骤：
 
-1. 获取 **VPC ID** 和 **Subnet ID**，可在 AWS Management Console 的相关页面找到。请确保填写你在 [step 1](#step-1-choose-a-tidb-cluster) 获取的 **Availability Zone ID**。
+1. 获取 **VPC ID** 和 **Subnet ID**，可在 AWS Management Console 的相关页面找到。请确保填写你在 [step 1](#step-1-choose-a-tidb-instance) 获取的 **Availability Zone ID**。
 2. 复制下方命令，将相关参数替换为你获取的信息，然后在终端中 execute。
 
 ```bash
@@ -105,14 +105,14 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 ### Step 3. 在 TiDB Cloud 中授权你的私有端点
 
-创建 AWS interface 端点后，必须将其添加到集群的 allowlist。
+创建 AWS interface 端点后，必须将其添加到目标 {{{ .starter }}} 或 {{{ .essential }}} 实例的 allowlist。
 
-1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的名称，进入其概览页面。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的名称，进入其概览页面。
 2. 在左侧导航栏点击 **Settings** > **Networking**。
 3. 向下滚动到 **Private Endpoint** 部分，找到 **Authorized Networks** 表格。
 4. 点击 **Add Rule** 添加防火墙规则。
 
-    - **Endpoint Service Name**：粘贴你在 [Step 1](#step-1-choose-a-tidb-cluster) 获取的 service name。
+    - **Endpoint Service Name**：粘贴你在 [Step 1](#step-1-choose-a-tidb-instance) 获取的 service name。
     - **Firewall Rule Name**：输入用于标识此连接的名称。
     - **Your VPC Endpoint ID**：粘贴你在 AWS Management Console 获取的 22 位 VPC Endpoint ID（以 `vpce-` 开头）。
 
@@ -122,26 +122,26 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 5. 点击 **Submit**。
 
-### Step 4. 连接到你的 TiDB 集群
+### Step 4. 连接到你的 {{{ .starter }}} 或 Essential 实例 {#step-4-connect-to-your-tidb}
 
-创建 interface 端点后，返回 TiDB Cloud 控制台并执行以下操作：
+创建 interface 端点后，返回 TiDB Cloud 控制台并执行以下步骤：
 
-1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入其概览页面。
-2. 点击右上角的 **Connect**。会弹出连接对话框。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 {{{ .starter }}} 或 Essential 实例的名称，进入其概览页面。
+2. 点击右上角的 **Connect**。此时会显示连接对话框。
 3. 在 **Connection Type** 下拉列表中，选择 **Private Endpoint**。
-4. 在 **Connect With** 下拉列表中，选择你偏好的连接 method。对话框底部会显示对应的连接 string。
-5. 使用该连接 string 连接到你的集群。
+4. 在 **Connect With** 下拉列表中，选择你偏好的连接方式。对话框底部会显示相应的连接字符串。
+5. 使用该连接字符串连接到你的 {{{ .starter }}} 或 Essential 实例。
 
 > **提示：**
 >
-> 如果无法连接到集群，可能是 AWS 中 VPC 端点的安全组设置不正确。解决方法请参见 [此 FAQ](#troubleshooting)。
+> 如果你无法连接到 {{{ .starter }}} 或 Essential 实例，原因可能是 AWS 中 VPC 端点的安全组设置不正确。请参见[此常见问题](#troubleshooting)获取解决方案。
 >
-> 创建 VPC 端点时，如果遇到错误 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`，说明已存在私有端点，无需重复创建。
+> 创建 VPC 端点时，如果遇到错误 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`，说明已经创建了一个私有端点，无需再创建新的端点。
 
 ## 故障排查
 
-### 启用私有 DNS 后无法通过私有端点连接 TiDB 集群，原因是什么？
+### I cannot connect to a {{{ .starter }}} or Essential instance via a private endpoint after enabling private DNS. Why? {#i-cannot-connect-to-a-starter-or-essential-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
-你可能需要在 AWS Management Console 中正确设置 VPC 端点的安全组。进入 **VPC** > **Endpoints**，右键你的 VPC 端点，选择合适的 **Manage security groups**。确保你的 VPC 内有允许 EC2 实例在 Port 4000 或自定义 port 入站 access 的安全组。
+你可能需要在 AWS Management Console 中正确设置 VPC 端点的安全组。前往 **VPC** > **Endpoints**。右键点击你的 VPC 端点，然后选择合适的 **Manage security groups**。应选择 VPC 内允许你的 EC2 实例通过 Port 4000 或自定义端口进行入站访问的安全组。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

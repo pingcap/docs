@@ -5,7 +5,7 @@ summary: 了解如何通过 AWS Endpoint Service Private Link 连接，连接到
 
 # 通过 Private Link 连接访问 AWS 自建 Kafka
 
-本文档介绍如何使用 [AWS Endpoint Service Private Link 连接](/tidb-cloud/serverless-private-link-connection.md) 将 TiDB Cloud Essential 集群连接到 AWS 上的自建 Kafka 集群。
+本文档介绍如何使用 [AWS Endpoint Service Private Link 连接](/tidb-cloud/serverless-private-link-connection.md) 将 TiDB Cloud Essential 实例连接到 AWS 上的自建 Kafka 集群。
 
 其机制如下：
 
@@ -36,7 +36,7 @@ summary: 了解如何通过 AWS Endpoint Service Private Link 连接，连接到
 
 要查看 AWS 账户 ID 和可用区，请执行以下操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB 集群的集群总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB Cloud Essential 实例的总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
 2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
 3. 在弹出的对话框中，你可以找到 AWS 账户 ID 和可用区。
 
@@ -51,9 +51,9 @@ summary: 了解如何通过 AWS Endpoint Service Private Link 连接，连接到
 
 ## 步骤 1. 搭建 Kafka 集群
 
-如果你需要部署新集群，请参考 [部署新 Kafka 集群](#deploy-a-new-kafka-cluster)。
+如果你需要部署新的 Kafka 集群，请参考 [部署新 Kafka 集群](#deploy-a-new-kafka-cluster)。
 
-如果你需要暴露已有集群，请参考 [重新配置运行中的 Kafka 集群](#reconfigure-a-running-kafka-cluster)。
+如果你需要暴露已有的 Kafka 集群，请参考 [重新配置运行中的 Kafka 集群](#reconfigure-a-running-kafka-cluster)。
 
 ### 部署新 Kafka 集群
 
@@ -512,7 +512,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 ### 重新配置运行中的 Kafka 集群
 
-确保你的 Kafka 集群部署在与 TiDB 集群相同的 Region 和 AZ。如果有 broker 在不同 AZ，请将其迁移到正确的 AZ。
+确保你的 Kafka 集群部署在与 TiDB Cloud Essential 实例相同的 Region 和 AZ。如果有 broker 在不同 AZ，请将其迁移到正确的 AZ。
 
 #### 1. 为 broker 配置 EXTERNAL listener
 
@@ -677,7 +677,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
         - `usw2-az2` 绑定 `broker-usw2-az2 subnet`
         - `usw2-az3` 绑定 `broker-usw2-az3 subnet`
     - **Security groups**: 新建安全组，规则如下。
-        - 入站规则允许来自 Kafka VPC 的所有 TCP：Type - `{ports of target groups}`，如 `9092-9095`；Source - `{TiDB Cloud 的 CIDR}`。获取 Region 内 TiDB Cloud 的 CIDR，请在 [TiDB Cloud 控制台](https://tidbcloud.com) 左上角切换到目标项目，点击 **Project Settings** > **Network Access**，再点击 **Project CIDR** > **AWS**。
+        - 入站规则允许来自 Kafka VPC 的所有 TCP：Type - `{ports of target groups}`，如 `9092-9095`；Source - `{TiDB Cloud 的 CIDR}`。要获取该 Region 中 TiDB Cloud 的 CIDR，请在 [TiDB Cloud 控制台](https://tidbcloud.com) 中进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击 **Project view** 页签，找到目标项目，点击项目的 <MDSvgIcon name="icon-project-settings" />，在 **Project Settings** 下点击 **Network Access**，然后点击 **Project CIDR** > **AWS**。
         - 出站规则允许所有 TCP 到 Kafka VPC：Type - `All TCP`；Destination - `Anywhere-IPv4`
     - Listeners 和路由：
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`

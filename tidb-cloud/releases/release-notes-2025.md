@@ -198,7 +198,7 @@ summary: 了解 2025 年 TiDB Cloud 的发布说明。
 
     - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 移除了原地恢复功能，即不再支持将备份直接恢复到同一集群。此变更有助于防止误覆盖活跃生产数据和潜在数据丢失。
 
-        如需恢复数据，你可以 [将备份恢复到新集群](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore)。验证恢复数据后，将应用切换到新集群。已在现有集群中恢复的数据不受影响，除非你执行新的恢复操作，否则无需任何操作。
+        如需恢复数据，你可以 [将备份恢复到新集群](/tidb-cloud/backup-and-restore-serverless.md#restore-to-a-new-instance)。验证恢复数据后，将应用切换到新集群。已在现有集群中恢复的数据不受影响，除非你执行新的恢复操作，否则无需任何操作。
 
         如需更安全、可控且灵活的恢复和迁移流程，建议使用 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)。
 

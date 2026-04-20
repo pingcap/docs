@@ -16,9 +16,9 @@ summary: 了解如何通过 MySQL CLI 向 TiDB Cloud Dedicated 导入数据。
 
 ## 步骤 1. 连接到你的 TiDB Cloud Dedicated 集群
 
-连接到你的 TiDB 集群。
+连接到你的 TiDB Cloud Dedicated 集群。
 
-1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
+1. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Dedicated 集群的名称，进入其概览页面。
 
 2. 在左侧导航栏，点击 **Settings** > **Networking**。
 

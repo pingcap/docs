@@ -97,7 +97,7 @@ AWS DMS 是一项云服务，可以轻松迁移关系型数据库、数据仓库
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2. 在 TiDB Cloud 控制台，进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，然后点击右上角的 **Connect** 获取 TiDB Cloud 数据库连接信息。
+2. 在 TiDB Cloud 控制台，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源名称，然后点击右上角的 **Connect** 获取 TiDB Cloud 数据库连接信息。
 
 3. 在弹窗的 **Step 1: Create traffic filter** 下，点击 **Edit**，输入从 AWS DMS 控制台复制的公网和私网 IP 地址，然后点击 **Update Filter**。建议同时将 AWS DMS 复制实例的公网和私网 IP 地址添加到 TiDB 集群流量过滤器，否则在某些场景下 AWS DMS 可能无法连接 TiDB 集群。
 
@@ -181,7 +181,7 @@ AWS DMS 是一项云服务，可以轻松迁移关系型数据库、数据仓库
 
 ## 参见
 
-- 如果你想了解更多关于如何将 AWS DMS 连接到 TiDB Cloud Serverless 或 TiDB Cloud Dedicated 的信息，请参见 [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)。
+- 如果你想了解更多关于如何将 AWS DMS 连接到 TiDB Cloud 的信息，请参见 [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)。
 
 - 如果你想将 MySQL 兼容数据库（如 Aurora MySQL 和 Amazon Relational Database Service (RDS)）迁移到 TiDB Cloud，推荐使用 [Data Migration on TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md)。
 

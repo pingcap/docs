@@ -5,7 +5,7 @@ summary: 了解 TiDB Cloud 控制台的审计日志功能。
 
 # 控制台审计日志
 
-TiDB Cloud 提供了控制台审计日志功能，帮助你追踪用户在 [TiDB Cloud 控制台](https://tidbcloud.com) 上的各种行为和操作。例如，你可以追踪邀请用户加入你的组织、创建集群等操作。
+TiDB Cloud 提供了控制台审计日志功能，帮助你追踪用户在 [TiDB Cloud 控制台](https://tidbcloud.com) 上的各种行为和操作。例如，你可以追踪邀请用户加入你的组织、导入数据等操作。
 
 ## 前提条件
 
@@ -152,14 +152,14 @@ TiDB Cloud 提供了控制台审计日志功能，帮助你追踪用户在 [TiDB
 | BindSupportPlan                   | 绑定支持计划                                                          |
 | CancelSupportPlan                 | 取消支持计划                                                          |
 | UpdateOrganizationName            | 更新组织名称                                                          |
-| SetSpendLimit                     | 编辑 TiDB Cloud Starter 集群的消费上限                                |
+| SetSpendLimit                     | 编辑 TiDB Cloud Starter 实例的消费上限                                |
 | UpdateMaintenanceWindow           | 修改维护窗口开始时间                                                  |
 | DeferMaintenanceTask              | 延迟维护任务                                                          |
-| CreateBranch                      | 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建分支            |
-| DeleteBranch                      | 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的分支            |
-| SetBranchRootPassword             | 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的分支设置 root 密码 |
-| ConnectBranchGitHub               | 将集群与 GitHub 仓库连接以启用分支集成                                |
-| DisconnectBranchGitHub            | 断开集群与 GitHub 仓库的连接以禁用分支集成                            |
+| CreateBranch                      | 为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例创建分支            |
+| DeleteBranch                      | 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的分支            |
+| SetBranchRootPassword             | 为 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的分支设置 root 密码 |
+| ConnectBranchGitHub               | 将 TiDB Cloud Starter 或 TiDB Cloud Essential 实例与 GitHub 仓库连接以启用分支集成 |
+| DisconnectBranchGitHub            | 断开 TiDB Cloud Starter 或 TiDB Cloud Essential 实例与 GitHub 仓库的连接以禁用分支集成 |
 | UpdateAuthenticationMethod        | 更新 Cloud Organization SSO 的认证方式                                |
 
 ## 控制台审计日志字段

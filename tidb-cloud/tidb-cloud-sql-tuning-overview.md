@@ -19,11 +19,11 @@ summary: 了解如何在 TiDB Cloud 中调优 SQL 性能。
 - 使用适当的连接类型。根据查询中每个表的大小和相关性，选择正确的连接类型非常重要。通常，TiDB 中的基于成本的优化器会自动选择最优的连接类型。但是，在某些情况下，你可能需要手动指定连接类型。详情请参见[解释使用连接的语句](/explain-joins.md)。
 - 使用适当的存储引擎。对于混合事务和分析处理（HTAP）工作负载，建议使用 TiFlash 存储引擎。请参见 [HTAP 查询](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)。
 
-TiDB Cloud 提供了几个工具来帮助你分析集群上的慢查询。以下部分描述了优化慢查询的几种方法。
+TiDB Cloud 提供了几个工具来帮助你分析慢查询。以下部分描述了优化慢查询的几种方法。
 
 ### 使用诊断页面上的 Statement
 
-TiDB Cloud 控制台在[**诊断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)页面上提供了 [**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis) 标签页。它收集集群上所有数据库的 SQL 语句的执行统计信息。你可以使用它来识别和分析总执行时间或单次执行时间较长的 SQL 语句。
+TiDB Cloud 控制台在[**诊断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)页面上提供了 [**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis) 标签页。它收集你的 TiDB Cloud 资源上所有数据库的 SQL 语句的执行统计信息。你可以使用它来识别和分析总执行时间或单次执行时间较长的 SQL 语句。
 
 请注意，在此页面上，具有相同结构的 SQL 查询（即使查询参数不匹配）会被归类为同一个 SQL 语句。例如，`SELECT * FROM employee WHERE id IN (1, 2, 3)` 和 `select * from EMPLOYEE where ID in (4, 5)` 都属于同一个 SQL 语句 `select * from employee where id in (...)`。
 
@@ -105,7 +105,7 @@ TiDB Cloud 控制台在[**诊断**](/tidb-cloud/tune-performance.md#view-the-dia
 
 你可以使用 [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) 分析热点问题。
 
-你可以使用 Key Visualizer 分析 TiDB 集群的使用模式并排查流量热点。此页面提供了 TiDB 集群随时间变化的流量的可视化表示。
+你可以使用 Key Visualizer 分析 {{{ .dedicated }}} 集群的使用模式并排查流量热点。此页面提供了 {{{ .dedicated }}} 集群随时间变化的流量的可视化表示。
 
 你可以在 Key Visualizer 中观察以下信息。你可能需要先了解一些[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#基本概念)。
 

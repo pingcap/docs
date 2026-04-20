@@ -357,7 +357,7 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 }
 ```
 
-这也可能与无法连接 TiDB Cloud 集群有关。你需要参考 `message` 进行故障排除。
+这也可能与无法连接 {{{ .starter }}} 实例有关。你需要参考 `message` 进行故障排除。
 
 ```json
 {

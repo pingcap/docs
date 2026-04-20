@@ -14,7 +14,7 @@ summary: 了解如何使用 restore 资源。
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用恢复资源，请确保你已创建 TiDB Cloud Dedicated 集群。
+- 本文介绍的备份与恢复功能不适用于 {{{ .starter }}} 和 {{{ .essential }}} 实例。要使用 `tidbcloud_restore` 资源，请确保你已创建 TiDB Cloud Dedicated 集群。
 
 ## 创建恢复任务
 

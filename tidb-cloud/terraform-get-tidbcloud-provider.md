@@ -35,7 +35,7 @@ TiDB Cloud Terraform Provider 已发布到 [Terraform Registry](https://registry
 
 TiDB Cloud API 使用 HTTP 摘要认证（Digest Authentication），可以保护你的私钥不会通过网络传输。
 
-目前，TiDB Cloud Terraform Provider 不支持管理 API 密钥。因此，你需要在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters) 中创建 API 密钥。
+目前，TiDB Cloud Terraform Provider 不支持管理 API 密钥。因此，你需要在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中创建 API 密钥。
 
 详细步骤请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)。
 

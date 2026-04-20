@@ -48,13 +48,13 @@ airbyte-server      | --------------------------------------
 
 2. 填写以下参数。
 
-    - Host: 你的 TiDB Cloud 集群的 endpoint
+    - Host: 你的 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>的 endpoint
     - Port: 数据库的端口
     - Database: 你想要同步数据的数据库
     - Username: 访问数据库的用户名
     - Password: 用户名对应的密码
 
-    你可以在集群的连接对话框中获取这些参数值。要打开该对话框，请进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页，然后点击右上角的 **Connect**。
+    你可以在 TiDB Cloud 控制台的连接对话框中获取这些参数值。要打开该对话框，请进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent> 的名称进入其概览页，然后点击右上角的 **Connect**。
 
 3. 启用 **SSL Connection**，并在 **JDBC URL Params** 中将 TLS 协议设置为 **TLSv1.2** 或 **TLSv1.3**。
 

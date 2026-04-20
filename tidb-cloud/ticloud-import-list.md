@@ -31,7 +31,7 @@ ticloud serverless import list
 ticloud serverless import list --cluster-id <cluster-id>
 ```
 
-以 JSON 格式列出指定集群的导入任务：
+以 JSON 格式列出指定 {{{ .starter }}} 或 Essential 实例的导入任务：
 
 ```shell
 ticloud serverless import list --cluster-id <cluster-id> --output json

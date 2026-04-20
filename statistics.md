@@ -355,13 +355,17 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ## 统计信息版本
 
-[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) 变量控制 TiDB 收集的统计信息版本。目前支持两种版本：`tidb_analyze_version = 1` 和 `tidb_analyze_version = 2`。
+> **警告：**
+>
+> 从 v8.5.6 起，统计信息版本 1（`tidb_analyze_version = 1`）已废弃，并将在未来版本中移除。建议使用统计信息版本 2（`tidb_analyze_version = 2`），并[将现有使用统计信息版本 1 的对象迁移到版本 2](#switch-between-statistics-versions)。
+
+[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) 变量控制 TiDB 收集的统计信息版本。目前，TiDB 支持两种统计信息版本：`tidb_analyze_version = 1` 和 `tidb_analyze_version = 2`。
 
 - 对于 TiDB 自建版，从 v5.3.0 起该变量默认值由 `1` 变为 `2`。
 - 对于 TiDB Cloud，从 v6.5.0 起该变量默认值由 `1` 变为 `2`。
 - 如果你的集群由早期版本升级而来，升级后 `tidb_analyze_version` 的默认值不会改变。
 
-推荐使用版本 2，且后续会持续增强，最终完全替代版本 1。与版本 1 相比，版本 2 在大数据量下提升了统计信息的准确性，并通过移除 Count-Min Sketch 统计信息收集（用于谓词选择性估算）和支持仅收集部分列（参见 [收集部分列的统计信息](#collect-statistics-on-some-columns)）提升了收集性能。
+版本 2 是推荐使用的统计信息版本。与版本 1 相比，版本 2 在大数据量下提升了许多统计信息的准确性，并通过移除 Count-Min Sketch 统计信息收集提升了收集性能。
 
 下表列出了每个版本为优化器估算收集的信息：
 
@@ -376,11 +380,11 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ### 切换统计信息版本
 
-建议确保所有表/索引（及分区）使用同一版本的统计信息收集。推荐使用版本 2，但不建议无正当理由（如当前版本出现问题）随意切换。切换版本期间，若所有表尚未用新版本分析，可能会出现一段时间无统计信息，影响优化器的执行计划选择。
+建议所有表、索引和分区使用相同的统计信息版本。如果你的集群仍在使用统计信息版本 1，请尽快迁移到统计信息版本 2。在某个对象（如表、索引或分区）收集到版本 2 的统计信息之前，TiDB 会继续使用该对象现有的版本 1 统计信息。
 
-常见切换理由如：在版本 1 下，因收集 Count-Min Sketch 统计信息时哈希冲突，导致等值/IN 谓词估算不准确。解决方法见 [Count-Min Sketch](#count-min-sketch) 一节。或者，将 `tidb_analyze_version` 设为 2 并对所有对象重新执行 `ANALYZE` 也是一种解决方案。早期版本 2 存在 `ANALYZE` 后内存溢出的风险，该问题已修复，最初的解决方法是将 `tidb_analyze_version` 设为 1 并对所有对象重新执行 `ANALYZE`。
+迁移的一个主要原因是，版本 1 可能因为 Count-Min Sketch 的哈希冲突而对等值/IN 谓词产生不准确的估算。更多信息请参见 [Count-Min Sketch](#count-min-sketch)。要避免此问题，请将 `tidb_analyze_version = 2` 并对所有对象重新执行 `ANALYZE`。
 
-切换版本前的 `ANALYZE` 准备：
+从统计信息版本 1 迁移到统计信息版本 2 前的 `ANALYZE` 准备：
 
 - 若手动执行 `ANALYZE` 语句，请手动分析所有需分析的表。
 
@@ -388,17 +392,10 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
     FROM information_schema.tables JOIN mysql.stats_histograms
     ON table_id = tidb_table_id
-    WHERE stats_ver = 2;
+    WHERE stats_ver = 1;
     ```
 
-- 若 TiDB 自动执行 `ANALYZE`（已开启自动分析），可执行以下语句生成 [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) 语句：
-
-    ```sql
-    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
-    FROM information_schema.tables JOIN mysql.stats_histograms
-    ON table_id = tidb_table_id
-    WHERE stats_ver = 2;
-    ```
+- 若 TiDB 自动执行 `ANALYZE`（已开启自动分析），在将 `tidb_analyze_version = 2` 后，TiDB 会在后续自动分析过程中逐步将统计信息刷新为版本 2。在某个对象收集到版本 2 的统计信息之前，TiDB 可以继续使用其现有的版本 1 统计信息。要加快重要对象的迁移速度，可手动对其执行 `ANALYZE`。
 
 - 若上述语句结果过长无法复制粘贴，可将结果导出到临时文本文件，再从文件执行：
 
@@ -460,7 +457,7 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 > **注意：**
 >
-> 加载统计信息不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。
+> 加载统计信息不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例。
 
 默认情况下，TiDB 会根据列统计信息的大小采用不同的加载方式：
 

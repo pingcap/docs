@@ -82,7 +82,7 @@ mysql> SHOW GRANTS FOR 'newuser';
 ## MySQL 兼容性
 
 * 类似于 MySQL，`USAGE` 权限表示登录 TiDB 服务器的能力。
-* 目前不支持列级权限。
+* 从 v8.5.6 开始，TiDB 支持与 MySQL 兼容的列级权限管理机制。你可以对指定表中的特定列授予或撤销 `SELECT`、`INSERT`、`UPDATE` 和 `REFERENCES` 权限。更多信息，请参见 [列级权限管理](/column-privilege-management.md)。
 * 类似于 MySQL，当 sql mode 中没有 `NO_AUTO_CREATE_USER` 时，如果用户不存在，`GRANT` 语句会自动创建一个空密码的新用户。移除此 sql mode（它默认启用）存在安全风险。
 * 在 TiDB 中，成功执行 `GRANT <privileges>` 语句后，执行结果会立即在当前连接生效。而 [在 MySQL 中，对于某些权限，执行结果只在后续连接中生效](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html)。详情请参见 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)。
 

@@ -13,24 +13,24 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
 - 若要将 TiDB Cloud 集成到 Prometheus，必须拥有自托管或托管的 Prometheus service。
 
-- 若要为 TiDB Cloud 设置第三方统计/指标（信息）集成，你必须在 TiDB Cloud 中拥有 `Organization Owner` 或 `Instance Manager` 访问权限。若要查看集成页面，至少需要 `Project Viewer` 或 `Instance Viewer` 角色，以访问你所在 Organization 下目标 <CustomContent plan="essential">TiDB Cloud Essential 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent>。
+- 若要为 TiDB Cloud 设置第三方统计/指标（信息）集成，你必须在 TiDB Cloud 中拥有 `Organization Owner` 或 `Instance Manager` 访问权限。若要查看集成页面，至少需要 `Project Viewer` 或 `Instance Viewer` 角色，以访问你所在 Organization 下目标 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例。
 
 ## 限制
 
-- Prometheus 和 Grafana 集成不适用于 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 集群。
-- 当集群状态为 **CREATING**、**RESTORING**、**PAUSED** 或 **RESUMING** 时，不支持 Prometheus 和 Grafana 集成。
+- Prometheus 和 Grafana 集成不适用于 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例。
+- 当你的 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例状态为 **CREATING**、**RESTORING**、**PAUSED** 或 **RESUMING** 时，不支持 Prometheus 和 Grafana 集成。
 
 ## 操作步骤
 
 ### 步骤 1. 获取 Prometheus 的 `scrape_config` 文件
 
-在配置 Prometheus service 以读取 TiDB Cloud 统计/指标（信息）之前，你需要先在 TiDB Cloud 中生成一个 `scrape_config` YAML 文件。该 `scrape_config` 文件包含一个唯一的 bearer token，允许 Prometheus service 监控你的目标 <CustomContent plan="essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>。
+在配置 Prometheus service 以读取 TiDB Cloud 统计/指标（信息）之前，你需要先在 TiDB Cloud 中生成一个 `scrape_config` YAML 文件。该 `scrape_config` 文件包含一个唯一的 bearer token，允许 Prometheus service 监控你的目标 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例。
 
 <CustomContent plan="essential">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**Clusters**](https://tidbcloud.com/console/clusters) 页面，然后点击目标 TiDB Cloud Essential 集群名称，进入其概览页面。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Essential 实例名称，进入其概览页面。
 2. 在左侧导航栏，点击 **Integrations** > **Integration to Prometheus(Preview)**。
-3. 点击 **Add File**，为当前 TiDB Cloud Essential 集群生成并显示 `scrape_config` 文件。
+3. 点击 **Add File**，为当前 TiDB Cloud Essential 实例生成并显示 `scrape_config` 文件。
 4. 复制 `scrape_config` 文件内容，供后续使用。
 
 </CustomContent>
@@ -80,7 +80,7 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
     > **注意：**
     >
-    > 如果你已经使用 Prometheus 和 Grafana 监控 <CustomContent plan="essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>，并希望引入新开放的统计/指标（信息），建议新建一个仪表盘，而不是直接更新现有仪表盘的 JSON。
+    > 如果你已经使用 Prometheus 和 Grafana 监控 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例，并希望引入新开放的统计/指标（信息），建议新建一个仪表盘，而不是直接更新现有仪表盘的 JSON。
 
 3. （可选）根据需要自定义仪表盘，例如添加或移除面板、变更数据源、修改显示选项等。
 
@@ -93,11 +93,11 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 1. 按照 [步骤 1](#step-1-get-a-scrape_config-file-for-prometheus) 创建新的 Prometheus `scrape_config` 文件。
 2. 将新文件内容添加到你的 Prometheus 配置文件中。
 3. 确认 Prometheus service 能够从 TiDB Cloud 读取后，从 Prometheus 配置文件中移除旧的 `scrape_config` 文件内容。
-4. 在 <CustomContent plan="essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 的 **Integrations** 页面，删除对应的旧 `scrape_config` 文件，阻止其他人使用该文件从 TiDB Cloud Prometheus 端点读取数据。
+4. 在 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的 **Integrations** 页面，删除对应的旧 `scrape_config` 文件，阻止其他人使用该文件从 TiDB Cloud Prometheus 端点读取数据。
 
 ## Prometheus 可用统计/指标（信息）
 
-Prometheus 会为你的 <CustomContent plan="essential">集群</CustomContent><CustomContent plan="premium">实例</CustomContent> 跟踪以下统计/指标（信息）。
+Prometheus 会为你的 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例跟踪以下统计/指标（信息）。
 
 <CustomContent plan="essential">
 
@@ -117,8 +117,8 @@ Prometheus 会为你的 <CustomContent plan="essential">集群</CustomContent><C
 | `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 每秒命中执行计划缓存的查询统计 |
 | `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 网络请求发送到 TiDB 并返回 client 的耗时 |
 | `tidbcloud_db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 每秒执行的事务数 |
-| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 集群行存储空间（字节数） |
-| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 集群列存储空间（字节数）。若未启用 TiFlash，则返回 0。 |
+| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB Cloud Essential 实例的行存储空间（字节数） |
+| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB Cloud Essential 实例的列存储空间（字节数）。若未启用 TiFlash，则返回 0。 |
 | `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 已消耗的 Request Units（RU）总数。|
 
 </CustomContent>
@@ -137,8 +137,8 @@ Prometheus 会为你的 <CustomContent plan="essential">集群</CustomContent><C
 | `tidbcloud_db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 每秒命中执行计划缓存的查询统计 |
 | `tidbcloud_db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 网络请求发送到 TiDB 并返回 client 的耗时 |
 | `tidbcloud_db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 每秒执行的事务数 |
-| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 集群行存储空间（字节数） |
-| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 集群列存储空间（字节数）。 |
+| `tidbcloud_db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB Cloud Premium 实例的行存储空间（字节数） |
+| `tidbcloud_db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB Cloud Premium 实例的列存储空间（字节数）。 |
 | `tidbcloud_resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 已消耗的 Request Units（RU）总数。 |
 | `tidbcloud_changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed 上游与下游间的数据同步延时 |
 | `tidbcloud_changefeed_status` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed 状态：<br/>`-1`: 未知<br/>`0`: 正常<br/>`1`: 警告<br/>`2`: 失败<br/>`3`: 已停止<br/>`4`: 已完成<br/>`6`: 警告<br/>`7`: 其他 |

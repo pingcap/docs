@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-connect']
 
 # ticloud serverless shell
 
-连接到 TiDB Cloud Serverless 集群：
+连接到 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless shell [flags]
@@ -14,25 +14,25 @@ ticloud serverless shell [flags]
 
 ## 示例
 
-以交互模式连接到 TiDB Cloud Serverless 集群：
+以交互模式连接到 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless shell
 ```
 
-以非交互模式，使用默认用户连接到 TiDB Cloud Serverless 集群：
+以非交互模式，使用默认用户连接到 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless shell -c <cluster-id>
 ```
 
-以非交互模式，使用默认用户和密码连接到 TiDB Cloud Serverless 集群：
+以非交互模式，使用默认用户和密码连接到 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless shell -c <cluster-id> --password <password>
 ```
 
-以非交互模式，使用指定用户和密码连接到 TiDB Cloud Serverless 集群：
+以非交互模式，使用指定用户和密码连接到 TiDB Cloud Serverless 实例：
 
 ```shell
 ticloud serverless shell -c <cluster-id> -u <user-name> --password <password>

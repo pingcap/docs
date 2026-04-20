@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule update` 的参考文档。"
 
 # ticloud serverless audit-log filter-rule update
 
-为 TiDB Cloud Essential 集群更新审计日志过滤规则。
+为 TiDB Cloud Essential 实例更新审计日志过滤规则。
 
 ```shell
 ticloud serverless audit-log filter-rule update [flags]

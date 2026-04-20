@@ -5,7 +5,7 @@ summary: "`ticloud serverless branch delete` 的参考文档。"
 
 # ticloud serverless branch delete
 
-从你的 TiDB Cloud Serverless 集群中删除一个分支：
+从你的 TiDB Cloud Serverless 实例中删除一个分支：
 
 ```shell
 ticloud serverless branch delete [flags]

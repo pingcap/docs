@@ -1,11 +1,11 @@
 ---
-title: ticloud serverless cluster describe
+title: ticloud serverless describe
 summary: The reference of `ticloud serverless describe`.
 ---
 
 # ticloud serverless describe
 
-获取 TiDB Cloud Serverless 集群的信息（如集群配置和集群状态）：
+获取 TiDB Cloud Serverless 实例的信息（如实例配置和实例状态）：
 
 ```shell
 ticloud serverless describe [flags]
@@ -19,13 +19,13 @@ ticloud serverless get [flags]
 
 ## 示例
 
-以交互模式获取 TiDB Cloud Serverless 集群的信息：
+以交互模式获取 TiDB Cloud Serverless 实例的信息：
 
 ```shell
 ticloud serverless describe
 ```
 
-以非交互模式获取 TiDB Cloud Serverless 集群的信息：
+以非交互模式获取 TiDB Cloud Serverless 实例的信息：
 
 ```shell
 ticloud serverless describe --cluster-id <cluster-id>

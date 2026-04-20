@@ -1,11 +1,13 @@
 ---
-title: 监控 TiDB 集群
-summary: 了解如何监控你的 TiDB 集群。
+title: 监控 TiDB
+summary: 了解如何监控你的 TiDB Cloud 资源。
 ---
 
-# 监控 TiDB 集群
+# 监控 TiDB
 
-本文档介绍如何在 TiDB Cloud 上监控 TiDB 集群。
+本文档介绍如何监控 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent>。
+
+<CustomContent plan="dedicated">
 
 ## 集群状态与节点状态
 
@@ -54,38 +56,58 @@ summary: 了解如何监控你的 TiDB 集群。
 | **Unavailable** | TiKV 节点不可用。 |
 | **Deleting** | TiKV 节点正在被删除。 |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential,premium">
+
+## 实例状态
+
+在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，你可以在 **Status** 列中查看每个正在运行的 TiDB Cloud 实例的当前状态。
+
+| 状态 | 描述 |
+|:--|:--|
+| **Active** | 实例健康且可用。 |
+| **Creating** | 实例正在创建中。实例在创建期间无法访问。 |
+| **Importing** | 正在将数据导入实例。 |
+| **Maintaining** | 实例正在维护中。 |
+| **Modifying** | 实例正在被修改。 |
+| **Unavailable** | 实例发生故障，且 TiDB 无法恢复它。 |
+| **Restoring** | 实例当前正在从备份中恢复。 |
+
+</CustomContent>
+
 ## 监控统计/指标（信息）
 
-在 TiDB Cloud 中，你可以通过以下页面查看集群的常用统计/指标（信息）：
+在 TiDB Cloud 中，你可以通过以下页面查看 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent> 的常用统计/指标（信息）：
 
 - **Overview** 页面
 - **Metrics** 页面
 
 ### Overview 页面
 
-**Overview** 页面提供集群的总体统计/指标（信息）。
+**Overview** 页面提供你的 TiDB Cloud 资源的总体统计/指标（信息）。
 
-要在集群 Overview 页面查看统计/指标（信息），请按照以下步骤操作：
+要在 Overview 页面查看统计/指标（信息），请按照以下步骤操作：
 
-1. 在你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入其 Overview 页面。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源名称，进入其 Overview 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
 2. 查看 **Core Metrics** 部分。
 
 ### Metrics 页面
 
-**Metrics** 页面提供集群的完整统计/指标（信息）集。通过查看这些统计/指标（信息），你可以轻松识别性能问题，并判断当前数据库部署是否满足你的需求。
+**Metrics** 页面提供你的 TiDB Cloud 资源的完整统计/指标（信息）集。通过查看这些统计/指标（信息），你可以轻松识别性能问题，并判断当前数据库部署是否满足你的需求。
 
 要在 **Metrics** 页面查看统计/指标（信息），请按照以下步骤操作：
 
-1. 在你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入其 Overview 页面。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标资源名称，进入其 Overview 页面。
 
     > **提示：**
     >
-    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
 2. 在左侧导航栏，点击 **Monitoring** > **Metrics**。
 

@@ -9,7 +9,7 @@ TiDB 支持大多数 MySQL 8.0 中提供的 [JSON schema 校验函数](https://d
 
 > **Note:**
 >
-> 目前，该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上不可用。
+> 目前，该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例上不可用。
 
 ## `JSON_SCHEMA_VALID()`
 

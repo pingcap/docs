@@ -1,6 +1,6 @@
 ---
 title: 配置维护时间窗
-summary: 了解如何为你的集群配置维护时间窗。
+summary: 了解如何为你的 TiDB Cloud Dedicated 集群配置维护时间窗。
 ---
 
 # 配置维护时间窗
@@ -58,17 +58,23 @@ summary: 了解如何为你的集群配置维护时间窗。
 
 你可以按如下方式将开始时间修改为你偏好的时间，或在截止时间前重新调度维护任务：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Maintenance**。
-3. 在 **Maintenance** 页面，查看维护信息。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，前往你的组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
+
+    > **提示：**
+    >
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
+
+2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
+3. 在左侧导航栏中，点击 **Project Settings** 下的 **Maintenance**。
+4. 在 **Maintenance** 页面，查看维护信息。
 
      - 如果有维护任务显示，请查看描述、计划开始时间和截止时间。维护任务将在指定时间开始。
 
      - 如果没有维护数据，表示近期没有计划的维护任务。
 
-4. （可选）点击 **Maintenance Window Setting** 修改维护时间窗的开始时间。请注意，只有当本周有计划的维护任务时，维护才会在指定的开始时间执行。
+5. （可选）点击 **Maintenance Window Setting** 修改维护时间窗的开始时间。请注意，只有当本周有计划的维护任务时，维护才会在指定的开始时间执行。
 
-5. 若需重新调度某个具体的维护任务，在 **Action** 列点击 **...** > **Reschedule**，并在截止时间前选择新的时间。
+6. 若需重新调度某个具体的维护任务，在 **Action** 列点击 **...** > **Reschedule**，并在截止时间前选择新的时间。
 
     如果你需要将维护任务重新调度到截止时间之后，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) 获取帮助。
 

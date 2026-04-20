@@ -5,18 +5,18 @@ summary: 了解如何使用 Amazon MSK Provisioned Private Link 连接访问 Ama
 
 # 通过 Private Link 连接访问 Amazon MSK Provisioned
 
-本文档介绍如何通过 [Amazon MSK Provisioned Private Link 连接](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection) 将 TiDB Cloud Essential 集群连接到 [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) 集群。
+本文档介绍如何通过 [Amazon MSK Provisioned Private Link 连接](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection) 将 TiDB Cloud Essential 实例连接到 [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) 集群。
 
 ## TiDB Cloud Essential 的前置条件 {#prerequisites-for-essential}
 
-- 你的 TiDB Cloud Essential 集群托管在 AWS 上并处于活跃状态。请获取并保存以下信息以备后用：
+- 你的 TiDB Cloud Essential 实例托管在 AWS 上并处于活跃状态。请获取并保存以下信息以备后用：
 
     - AWS 账户 ID
     - 可用区（AZ）
 
 查看 AWS 账户 ID 和可用区的方法如下：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB 集群的集群总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB Cloud Essential 实例的总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
 2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
 3. 在弹窗中，记下 AWS 账户 ID 和可用区信息。
 
@@ -24,13 +24,13 @@ summary: 了解如何使用 Amazon MSK Provisioned Private Link 连接访问 Ama
 
 在开始之前，请确保你的 Amazon MSK Provisioned 集群满足以下条件：
  
-- **Region 和 AZ**：你的 Amazon MSK Provisioned 集群与 TiDB Cloud Essential 集群位于同一个 AWS Region，且 MSK 集群的可用区与 TiDB Cloud 集群一致。
+- **Region 和 AZ**：你的 Amazon MSK Provisioned 集群与 TiDB Cloud Essential 实例位于同一个 AWS Region，且 MSK 集群的可用区与 TiDB Cloud Essential 实例一致。
 - **认证**：MSK 集群需要启用 [SASL/SCRAM 认证](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)。
 - **Broker 类型**：不要使用 `t4.small` broker 类型。该类型不支持 Private Link。
     
 更多要求请参见 [Amazon MSK 单 Region 多 VPC 私有连接要求](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)。
     
-如果你还没有 Amazon MSK Provisioned 集群，请在与你的 TiDB Cloud Essential 集群相同的 Region 和可用区 [创建一个集群](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)，并为新建的集群 [配置 SASL/SCRAM 认证](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)。
+如果你还没有 Amazon MSK Provisioned 集群，请在与你的 TiDB Cloud Essential 实例相同的 Region 和可用区 [创建一个集群](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)，并为新建的集群 [配置 SASL/SCRAM 认证](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)。
 
 - **Secret name**：secret 名称必须以 `AmazonMSK_` 开头。
 - **加密**：不要使用默认加密密钥。请为你的 secret 创建新的自定义 AWS KMS 密钥。

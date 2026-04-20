@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-connect']
 
 # ticloud serverless branch shell
 
-连接到 TiDB Cloud Serverless 集群的某个分支：
+连接到 TiDB Cloud Serverless 实例的某个分支：
 
 ```shell
 ticloud serverless branch shell [flags]

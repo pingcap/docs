@@ -9,7 +9,7 @@ summary: ALTER PLACEMENT POLICY 在 TiDB 中的用法。
 
 > **Note:**
 >
-> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
 
 `ALTER PLACEMENT POLICY` 会用新的定义 _替换_ 之前的策略，而不是将旧策略与新策略 _合并_。在以下示例中，执行 `ALTER PLACEMENT POLICY` 后，`FOLLOWERS=4` 会丢失：
 

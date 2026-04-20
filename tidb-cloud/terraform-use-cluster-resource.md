@@ -15,9 +15,9 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 `tidbcloud_cluster` 资源的功能包括：
 
-- 创建 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
+- 创建 TiDB Cloud Serverless 实例和 TiDB Cloud Dedicated 集群。
 - 修改 TiDB Cloud Dedicated 集群。
-- 删除 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
+- 删除 TiDB Cloud Serverless 实例和 TiDB Cloud Dedicated 集群。
 
 ## 前置条件
 

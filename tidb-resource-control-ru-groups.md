@@ -8,7 +8,7 @@ aliases: ['/tidb/v8.5/tidb-resource-control/','/tidb/stable/tidb-resource-contro
 
 > **Note:**
 >
-> 此功能不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。
+> 此功能不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例。
 
 作为集群管理员，你可以使用资源控制功能创建资源组、为资源组设置配额，并将用户绑定到这些资源组。
 

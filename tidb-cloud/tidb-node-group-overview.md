@@ -11,7 +11,7 @@ summary: 了解 TiDB 节点组功能的实现方式及使用场景。
 
 > **Note**:
 >
-> TiDB 节点组功能 **不** 支持 TiDB Cloud Serverless 集群。
+> TiDB 节点组功能 **不** 支持 {{{ .starter }}} 和 {{{ .essential }}} 实例。
 
 ## 实现方式
 

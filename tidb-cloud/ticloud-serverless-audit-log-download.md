@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log download` 的参考文档。"
 
 # ticloud serverless audit-log download
 
-从 TiDB Cloud Essential 集群下载数据库审计日志文件。
+从 TiDB Cloud Essential 实例下载数据库审计日志文件。
 
 ```shell
 ticloud serverless audit-log download [flags]

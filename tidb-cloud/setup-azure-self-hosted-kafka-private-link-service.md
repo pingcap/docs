@@ -34,7 +34,7 @@ summary: 本文档说明如何在 Azure 中为自托管 Kafka 设置 Private Lin
 
 3. 从你的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群获取 Kafka 部署信息。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称以进入其概览页面。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，导航到 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Dedicated 集群的名称以进入其概览页面。
     2. 在左侧导航栏中，点击**数据** > **变更数据捕获**。
     3. 在**变更数据捕获**页面，点击右上角的**创建变更数据捕获**，然后提供以下信息：
         1. 在**目标**中，选择 **Kafka**。
