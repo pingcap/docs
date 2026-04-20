@@ -599,7 +599,7 @@ Referenced in:
 Referenced in:
 
 - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
-- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900)
+- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857)
 
 ### plugin_dir
 

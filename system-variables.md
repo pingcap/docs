@@ -794,7 +794,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
     * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
     * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
 
-### performance_schema_session_connect_attrs_size <span class="version-mark">New in v9.0.0</span>
+### performance_schema_session_connect_attrs_size <span class="version-mark">New in v8.5.7</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes

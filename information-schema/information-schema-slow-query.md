@@ -126,7 +126,7 @@ The output is as follows:
 
 The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
 
-The `Session_connect_attrs` column stores session connection attributes in JSON format parsed from the slow log. TiDB controls the maximum payload size written to this field using [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900).
+The `Session_connect_attrs` column stores session connection attributes in JSON format parsed from the slow log. TiDB controls the maximum payload size written to this field using [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857).
 
 ## CLUSTER_SLOW_QUERY table
 
