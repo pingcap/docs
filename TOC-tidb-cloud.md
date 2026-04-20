@@ -30,8 +30,8 @@
 
 ## 指南
 
-- 规划您的集群
-  - [选择您的方案](/tidb-cloud/select-cluster-tier.md)
+- 规划你的集群
+  - [选择 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)
   - [确定 TiDB 的大小](/tidb-cloud/size-your-cluster.md)
   - [TiDB Cloud 性能参考](/tidb-cloud/tidb-cloud-performance-reference.md)
 - [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)

@@ -28,11 +28,11 @@
 
 ## 指南
 
-- [选择您的方案](/tidb-cloud/select-cluster-tier.md)
+- [选择 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)
 - [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)
 - 管理 {{{ .essential }}} 实例
   - [创建 {{{ .essential }}} 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
-  - 连接到您的 {{{ .essential }}} 实例
+  - 连接到你的 {{{ .essential }}} 实例
     - [网络连接概述](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
     - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
