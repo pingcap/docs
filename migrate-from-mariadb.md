@@ -294,7 +294,7 @@ To use DM, you need to deploy a set of DM services either with a [TiUP cluster](
 
 ### Step 1. Prepare
 
-Make sure that binlogs are enabled on MariaDB and that the `binlog_format` is set to `ROW`. It is also recommended to set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
+Make sure that binlogs are enabled on MariaDB and that `binlog_format=ROW`, `binlog_row_image=FULL`, and `binlog_legacy_event_pos=ON` are configured. You also need to set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
 
 You also need an account with the `SUPER` permission or with the `BINLOG MONITOR` and `REPLICATION MASTER ADMIN` permissions. This account also needs read permission for the schemas you are going to migrate.
 
