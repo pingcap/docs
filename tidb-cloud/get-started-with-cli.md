@@ -87,6 +87,10 @@ Install the MySQL command-line client if you do not have it. You can refer to th
 
 ## Quick start
 
+> **Note:**
+>
+> If you use TiUP, you can use `tiup cloud` instead of `ticloud`.
+
 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a {{{ .starter }}} instance with TiDB Cloud CLI.
 
 ### Create a user profile or log into TiDB Cloud
