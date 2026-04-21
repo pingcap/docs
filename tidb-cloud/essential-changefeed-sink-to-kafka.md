@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from {{{ .esse
 
 ## Restrictions
 
-- For each {{{ .essential }}} cluster, you can create up to 10 changefeeds.
+- For each {{{ .essential }}} instance, you can create up to 10 changefeeds.
 - Currently, {{{ .essential }}} does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because {{{ .essential }}} uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
@@ -23,7 +23,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
+Ensure that your {{{ .essential }}} instance can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Private Link Connection: meeting security compliance and ensuring network quality.
 - Public Network: suitable for a quick setup.
@@ -33,13 +33,14 @@ Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka serv
 
 Private link connections leverage **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka and Confluent Cloud Dedicated clusters. It does not support direct integration with MSK or other Kafka SaaS services.
+{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka, Confluent Cloud Dedicated clusters, and Amazon MSK Provisioned. It does not support direct integration with other Kafka SaaS services.
 
 To set up a Private Link connection based on your Kafka deployment and cloud provider, see the following guides:
 
 - [Connect to Confluent Cloud on AWS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+- [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 
 </div>
 
@@ -64,7 +65,7 @@ For example, if your Kafka cluster is in Confluent Cloud, refer to [Resources](h
 ## Step 1. Open the Changefeed page for Apache Kafka
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the overview page of the target {{{ .essential }}} cluster, and then click **Data** > **Changefeed** in the left navigation pane.
+2. Navigate to the overview page of the target {{{ .essential }}} instance, and then click **Data** > **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**, and then select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
@@ -90,7 +91,7 @@ The steps vary depending on the connectivity method you select.
 
 1. In **Connectivity Method**, select **Private Link**.
 2. In **Private Link Connection**, select the private link connection that you created in the [Network](#network) section. Make sure the Availability Zones of the private link connection match those of the Kafka deployment.
-3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section.
+3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section. If you are using the Amazon MSK Provisioned private link connection, you can skip this field.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.

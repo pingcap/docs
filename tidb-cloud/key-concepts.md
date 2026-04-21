@@ -44,11 +44,11 @@ TiDB Cloud ensures high availability in all supported plans:
 
 ## Monitoring
 
-TiDB Cloud provides comprehensive monitoring capabilities for cluster performance and health. [Learn more about monitoring](/tidb-cloud/monitoring-concepts.md).
+TiDB Cloud provides comprehensive monitoring capabilities for TiDB performance and health. [Learn more about monitoring](/tidb-cloud/monitoring-concepts.md).
 
 ## Data streaming
 
-TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems such as Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
+TiDB Cloud lets you stream data changes to other systems such as Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
 
 ## Backup & Restore
 
