@@ -62,7 +62,7 @@ To allow {{{ .essential }}} changefeeds to stream data to Apache Kafka and creat
 
 For example, if your Kafka cluster is in Confluent Cloud, refer to [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls) in the Confluent documentation for more information.
 
-## Step 1. Open the Changefeed page for Apache Kafka
+## Step 1. Create a Changefeed for Apache Kafka
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Navigate to the overview page of the target {{{ .essential }}} instance, and then click **Data** > **Changefeed** in the left navigation pane.
