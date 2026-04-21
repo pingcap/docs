@@ -62,7 +62,7 @@ To set the backup time for a {{{ .essential }}} instance, perform the following 
 
 ## Restore
 
-TiDB Cloud offer restore functionality to help recover data in case of accidental loss or corruption.
+TiDB Cloud offers restore functionality to help recover data in case of accidental loss or corruption.
 
 ### Restore mode
 

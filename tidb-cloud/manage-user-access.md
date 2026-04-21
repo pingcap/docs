@@ -124,7 +124,7 @@ At the project level, TiDB Cloud defines four roles, in which `Project Owner` ca
 > - Each project role has all the permissions of `Organization Viewer` by default.
 > - If a user in your organization does not belong to any projects, the user does not have any project permissions.
 > - For both TiDB X projects and TiDB Dedicated projects, project roles control access to resources in the project. For TiDB Dedicated projects, project roles also control Dedicated-specific project settings.
-> - Project roles do not apply to the TiDB X virtual project because TiDB X virtual project does not provide any management capabilities. To manage RBAC for a specific TiDB X instance that are not grouped in any TiDB X project, use [instance roles](#instance-roles).
+> - Project roles do not apply to the TiDB X virtual project because the TiDB X virtual project does not provide any management capabilities. To manage RBAC for a specific TiDB X instance that is not grouped in any TiDB X project, use [instance roles](#instance-roles).
 
 | Permission  | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` | `Project Viewer` |
 |---|---|---|---|---|
