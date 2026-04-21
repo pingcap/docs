@@ -83,11 +83,11 @@ Because CSV files do not contain schema information, before importing data from 
 
 To allow {{{ .premium }}} to access the CSV files in Amazon S3 or Alibaba Cloud Object Storage Service (OSS), do one of the following:
 
-- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your TiDB instance.
+- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your {{{ .premium }}} instance.
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files).
 
-- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your TiDB instance.
+- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .premium }}} instance.
 
 ## Step 4. Import CSV files
 
@@ -96,15 +96,15 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target TiDB instance.
+1. Open the **Import** page for your target {{{ .premium }}} instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations and instances.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target TiDB instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -150,15 +150,15 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1. Open the **Import** page for your target TiDB instance.
+1. Open the **Import** page for your target {{{ .premium }}} instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations and instances.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target TiDB instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 

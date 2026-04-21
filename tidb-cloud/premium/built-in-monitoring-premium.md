@@ -5,23 +5,23 @@ summary: Learn how to view {{{ .premium }}} built-in metrics and understand the 
 
 # {{{ .premium }}} Built-in Metrics
 
-TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloud collects and displays a full set of standard metrics of your {{{ .premium }}} instance on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 ## View the Metrics page
 
 To view the metrics on the **Metrics** page, take the following steps:
 
-1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click the name of your target instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations and TiDB instances.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Monitoring** > **Metrics**.
 
 ## Metrics retention policy
 
-For TiDB Cloud instances, the metrics data is kept for 7 days.
+For {{{ .premium }}} instances, the metrics data is kept for 7 days.
 
 ## Metrics for {{{ .premium }}} Instances
 
@@ -33,16 +33,16 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 | :------------| :------| :-------------------------------------------- |
 | Request Units per Second | Total RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, request units can be consumed by background activities, so when the QPS is 0, the request units per second might  not be zero. |
 | Used Storage Size | {type} | The size of the row store and the size of the column store. |
-| Query Per Second | All, {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Query Duration | avg, avg-{SQL type}, 99, 99-{SQL type} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. |
 | Database Time by SQL Types | All, {SQL type} | All: total database time per second. <br/> {SQL type}: database time consumed by SQL statements per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Failed Queries | All | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute. |
-| Command Per Second | {type} | The number of commands processed by all TiDB instances per second based on command types. |
-| Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second in all TiDB instances. <br/> miss: the number of queries missing plan cache per second in all TiDB instances. |
+| Command Per Second | {type} | The number of commands processed per second based on command types. |
+| Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second. <br/> miss: the number of queries missing plan cache per second. |
 | Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
 | Transaction Duration | avg-{transaction model}, 99-{transaction model} | The average or the 99th percentile duration of transactions. |
-| Connection Count | All, active connection | All: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
-| Disconnection Count | {result} | The number of clients disconnected to all TiDB instances. |
+| Connection Count | All, active connection | All: the number of connections. <br/> Active connections: the number of active connections. |
+| Disconnection Count | {result} | The number of clients disconnected. |
 
 ### Database
 
@@ -61,8 +61,8 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 | Parse Duration | avg, 99 | The average or the 99th percentile duration consumed in parsing SQL statements. |
 | Compile Duration | avg, 99 | The average or the 99th percentile duration consumed in compiling the parsed SQL AST to execution plans. |
 | Execute Duration | avg, 99 | The average or the 99th percentile duration consumed in executing execution plans of SQL statements. |
-| Average TiDB KV Request Duration | {Request Type} | The average time consumed in executing KV requests in all TiDB instances based on request types, such as `Get`, `Prewrite`, and `Commit`. |
-| Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average or the 99th percentile duration in waiting for PD to return TSO in all TiDB instances. <br/> RPC: the average time or the 99th percentile of duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
+| Average TiDB KV Request Duration | {Request Type} | The average time consumed in executing KV requests based on request types, such as `Get`, `Prewrite`, and `Commit`. |
+| Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average or the 99th percentile duration in waiting for PD to return TSO. <br/> RPC: the average time or the 99th percentile of duration from sending TSO requests to PD to receiving TSO. |
 
 ## FAQ
 
@@ -70,8 +70,8 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 
 If a pane does not provide any metrics, the possible reasons are as follows:
 
-- The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
+- The workload of the corresponding {{{ .premium }}} instance does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The TiDB version of the {{{ .premium }}} instance is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 

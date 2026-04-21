@@ -39,8 +39,8 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Data** > **Changefeed** in the left navigation pane.
-    2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the overview page of your {{{ .dedicated }}} cluster, and then click **Data** > **Changefeed** in the left navigation pane.
+    2. On the overview page, find the region of your {{{ .dedicated }}} cluster. Ensure that your Kafka cluster will be deployed to the same region.
     3. Click **Create Changefeed**.
         1. In **Destination**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Link**.
@@ -67,8 +67,8 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 3. Get the Kafka deployment information from your {{{ .premium }}} instance.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the instance overview page of the TiDB instance, and then click **Data** > **Changefeed** in the left navigation pane.
-    2. On the overview page, find the region of the TiDB instance. Ensure that your Kafka cluster will be deployed to the same region.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the instance overview page of the {{{ .premium }}} instance, and then click **Data** > **Changefeed** in the left navigation pane.
+    2. On the overview page, find the region of the {{{ .premium }}} instance. Ensure that your Kafka cluster will be deployed to the same region.
     3. To create a changefeed, refer to the tutorials:
 
         - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
@@ -88,9 +88,9 @@ The following table shows an example of the deployment information.
 
 ## Step 1. Set up a Kafka cluster
 
-If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
+If you need to deploy a new Kafka cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
-If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
+If you need to expose an existing Kafka cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
 
 ### Deploy a new Kafka cluster
 
@@ -421,7 +421,7 @@ $KAFKA_STORAGE_CMD format -t "BRl69zcmTFmiPaoaANybiw" -c "$KAFKA_CONFIG_DIR/serv
 LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
 ```
 
-**2.5. Test the cluster setting in the bastion node**
+**2.5. Test the Kafka cluster setting in the bastion node**
 
 1. Test the Kafka bootstrap.
 
@@ -552,12 +552,12 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 <CustomContent plan="dedicated">
 
-Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB cluster. If any brokers are in different AZs, move them to the correct ones.
+Ensure that your Kafka cluster is deployed in the same region and AZs as the {{{ .dedicated }}} cluster. If any brokers are in different AZs, move them to the correct ones.
 
 </CustomContent>
 <CustomContent plan="premium">
 
-Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB instance. If any brokers are in different AZs, move them to the correct ones.
+Ensure that your Kafka cluster is deployed in the same region and AZs as the {{{ .premium }}} instance. If any brokers are in different AZs, move them to the correct ones.
 
 </CustomContent>
 
@@ -724,7 +724,7 @@ Do the following to set up the load balancer:
         - `usw2-az2` with `broker-usw2-az2 subnet`
         - `usw2-az3` with `broker-usw2-az3 subnet`
     - **Security groups**: create a new security group with the following rules.
-        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, switch to your target project using the combo box in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com), click **Project Settings** > **Network Access** in the left navigation pane, and then click **Project CIDR** > **AWS**.
+        - Inbound rule allows all TCP from Kafka VPC: Type - `{ports of target groups}`, for example, `9092-9095`; Source - `{CIDR of TiDB Cloud}`. To get the CIDR of TiDB Cloud in the region, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization in the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab, locate your target project, click <MDSvgIcon name="icon-project-settings" /> for the project, click **Network Access** under **Project Settings**, and then click **Project CIDR** > **AWS**.
         - Outbound rule allows all TCP to Kafka VPC: Type - `All TCP`; Destination - `Anywhere-IPv4`
     - Listeners and routing:
         - Protocol: `TCP`; Port: `9092`; Forward to: `bootstrap-target-group`
@@ -765,7 +765,7 @@ Do the following to set up the load balancer:
 
 ## Step 3. Connect from TiDB Cloud
 
-1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and other fields as needed.
 

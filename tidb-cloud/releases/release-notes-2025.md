@@ -198,7 +198,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) removes the in-place restore feature, which means you can no longer restore a backup directly to the same cluster. This change helps prevent accidental overwrites of active production data and potential data loss.
 
-        To restore your data, you can [restore the backup to a new cluster](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore). After validating the restored data, switch your application to the new cluster. Previously restored data in existing clusters remains intact, and no action is required unless you perform a new restore.
+        To restore your data, you can [restore the backup to a new cluster](/tidb-cloud/backup-and-restore-serverless.md#restore-to-a-new-instance). After validating the restored data, switch your application to the new cluster. Previously restored data in existing clusters remains intact, and no action is required unless you perform a new restore.
 
         For safer restore and migration workflows with more control and flexibility, consider using [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential).
 

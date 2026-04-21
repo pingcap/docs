@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user list`.
 
 # ticloud serverless sql-user list
 
-List SQL users in a {{{ .starter }}} or {{{ .essential }}} cluster:
+List SQL users in a {{{ .starter }}} or {{{ .essential }}} instance:
 
 ```shell
 ticloud serverless sql-user list [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user list [flags]
 
 ## Examples
 
-List SQL users in a {{{ .starter }}} or {{{ .essential }}} cluster in interactive mode:
+List SQL users in a {{{ .starter }}} or {{{ .essential }}} instance in interactive mode:
 
 ```shell
 ticloud serverless sql-user list
 ```
 
-List SQL users in a {{{ .starter }}} or {{{ .essential }}} cluster in non-interactive mode:
+List SQL users in a {{{ .starter }}} or {{{ .essential }}} instance in non-interactive mode:
 
 ```shell
 ticloud serverless sql-user list -c <cluster-id>

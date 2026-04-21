@@ -17,11 +17,11 @@ TiDB Cloud provides layered role and permission management, and you can enable m
 
 TiDB Cloud provides private endpoints, VPC Peering, and IP access lists for network isolation and access control.
 
-You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster resources, enhancing overall security.
+You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster or instance resources, enhancing overall security.
 
 ## Data access control
 
-For cluster types that support Customer-Managed Encryption Keys (CMEK), TiDB Cloud provides encryption for both data at rest and backups.
+For {{{ .dedicated }}} clusters with Customer-Managed Encryption Keys (CMEK) enabled, TiDB Cloud provides encryption for both data at rest and backups.
 
 Combined with robust key management mechanisms, you can control the lifecycle and usage of encryption keys, further enhancing data security and compliance.
 

@@ -6,25 +6,25 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back Up and Restore {{{ .premium }}} Data
 
-This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports automatic backup and lets you restore backup data to a new instance as needed.
+This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports both automatic backups and manual backups, and lets you restore backup data to a new instance as needed.
 
 Backup files can originate from the following sources:
 
 - Active {{{ .premium }}} instances
-- The Recycle Bin for backups from deleted Premium instances
+- The Recycle Bin for backups from deleted {{{ .premium }}} instances
 
 > **Tip:**
 >
 > - To learn how to back up and restore data on {{{ .dedicated }}} clusters, see [Back Up and Restore {{{ .dedicated }}} Data](/tidb-cloud/backup-and-restore.md).
-> - To learn how to back up and restore data on {{{ .starter }}} or {{{ .essential }}} clusters, see [Back Up and Restore {{{ .starter }}} or Essential Data](/tidb-cloud/backup-and-restore-serverless.md).
+> - To learn how to back up and restore data on {{{ .starter }}} or {{{ .essential }}} instances, see [Back Up and Restore {{{ .starter }}} or Essential Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## View the Backup page
 
-1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click the name of your target instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations and instances.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Data** > **Backup**.
 
@@ -67,6 +67,32 @@ To delete an existing backup file for your {{{ .premium }}} instance, perform th
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
+## Manual backups
+
+In addition to automatic backups, {{{ .premium }}} supports manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
+
+### Key characteristics
+
+- **Retention and deletion**: unlike automatic backups, manual backups are not automatically deleted based on retention policies. They are retained until you explicitly delete them. If you delete the instance, its manual backups move to the recycle bin and remain there until you manually delete them.
+
+- **Storage location**: manual backups are stored in cloud storage managed by TiDB.
+
+- **Cost**: because manual backups are retained long term and incur additional charges.
+
+- **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
+
+- **Permissions**: both `Organization Owner` and `Instance Manager` can create manual backups. Only `Organization Owner` can restore system-managed manual backups.
+
+### Create a manual backup
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
+
+2. In the upper-right corner, click **...**, and then click **Manual Backup**.
+
+3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**. 
+
+You can restore a manual backup directly in the TiDB Cloud console without providing external storage credentials.
+
 ## Restore
 
 TiDB Cloud provides restore functionality to help recover data in case of accidental loss or corruption. You can restore from backups of active instances or from deleted instances in the Recycle Bin.
@@ -75,19 +101,19 @@ TiDB Cloud provides restore functionality to help recover data in case of accide
 
 TiDB Cloud supports snapshot restore and point-in-time restore for your instance.
 
-- **Snapshot Restore**: restores your instance from a specific backup snapshot.
+- **Snapshot Restore**: restores your instance from a specific backup snapshot. You can use this method to restore both automatic and manual backups. In the **Backup List**, manual backups are labeled with the **Manual** type and a **Permanent** expiration status.
 
 - **Point-in-Time Restore**: restores your instance to a specific point in time.
 
-    - Premium instances: can be restored to any time within the last 33 days, but not earlier than the instance creation time or later than one minute before the current time.
+    - Premium instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
 
 ### Restore destination
 
 TiDB Cloud supports restoring data to a new instance.
 
-### Restore to a new instance
+### Restore to a new {{{ .premium }}} instance {#restore-to-a-new-instance}
 
-To restore your data to a new instance, take the following steps:
+To restore your data to a new {{{ .premium }}} instance, take the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
@@ -116,7 +142,7 @@ To restore your data to a new instance, take the following steps:
 
 4. Click **Next** to proceed to the **Restore to a New Instance** page.
 
-5. Configure your new TiDB instance for restoration. The steps are the same as [creating a new TiDB instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+5. Configure your new {{{ .premium }}} instance for restoration. The steps are the same as [creating a {{{ .premium }}} instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
 
     > **Note:**
     >
@@ -128,16 +154,21 @@ To restore your data to a new instance, take the following steps:
 
 ### Restore from Recycle Bin
 
-To restore a deleted instance from the Recycle Bin, take the following steps:
+To restore a deleted {{{ .premium }}} instance from the Recycle Bin, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page. In the top-right corner, click **Recycle Bin**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
-2. On the **Recycle Bin** page, locate the TiDB instance you want to restore:
+    >**Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    - Click the **>** button to expand instance details.
-    - Find the desired backup, click **...** in the **Action** column, and then select **Restore**.
+2. On the **Recycle Bin** page, click the **Premium** tab to go to the recycle bin of {{{ .premium }}} instances.
 
-3. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
+3. Locate the {{{ .premium }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance.
+
+4. In the row of your desired backup, click **...**, and then select **Restore**.
+
+5. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
 
 ### Restore backups from a different plan type
 
@@ -145,13 +176,13 @@ Currently, you can only restore backups from a {{{ .dedicated }}} cluster hosted
 
 To restore a backup generated by a {{{ .dedicated }}} cluster, follow these steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...**, and then click **Restore from Another Plan**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...**, and then click **Restore from Another Plan**.
 
-2. On the **Select Backup** page, select the project that contains the target {{{ .dedicated }}} cluster. Select the cluster, select the backup snapshot that you want to restore, and then click **Next**.
+2. On the **Select Backup** page, select the project that contains the target {{{ .dedicated }}} cluster. Select the {{{ .dedicated }}} cluster, select the backup snapshot that you want to restore, and then click **Next**.
 
     > **Note:**
     >
-    > - Ensure that the cluster that contains the backup snapshot is in either the **Active** or **Deleted** status within the selected project.
+    > - Ensure that the {{{ .dedicated }}} cluster that contains the backup snapshot is in either the **Active** or **Deleted** status within the selected project.
     > - The snapshot must be located in a region that {{{ .premium }}} supports. If the region is not supported, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to open a new region for {{{ .premium }}}, or select another backup snapshot.
 
 3. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
@@ -172,7 +203,7 @@ Before you begin, ensure that you have an access key and secret key with suffici
 
 To restore backups from cloud storage, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...** , and then click **Restore from Cloud Storage**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...** , and then click **Restore from Cloud Storage**.
 
 2. On the **Select Backup Storage Location** page, provide the following information:
 
@@ -193,10 +224,6 @@ To restore backups from cloud storage, do the following:
     If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
 
 5. Click **Restore** to restore the backup.
-
-## Limitations
-
-Currently, manual backups are not supported for {{{ .premium }}} instances.
 
 ## References
 
@@ -271,7 +298,7 @@ Take the following steps to configure an AccessKey pair:
 
     - In the **Effect** section, select **Allow**.
     - In the **Service** section, select **Object Storage Service**.
-    - In the **Action** section, select the required permissions. To restore a backup to a TiDB Cloud instance, grant the `oss:ListObjects` and `oss:GetObject` permissions.
+    - In the **Action** section, select the required permissions. To restore a backup to a {{{ .premium }}} instance, grant the `oss:ListObjects` and `oss:GetObject` permissions.
 
         > **Tip:**
         >
