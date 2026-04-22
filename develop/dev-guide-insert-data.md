@@ -14,7 +14,7 @@ This document describes how to insert data into TiDB by using the SQL language w
 
 Before reading this document, you need to prepare the following:
 
-- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
 ## Insert rows
@@ -49,7 +49,7 @@ CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 ```
 
-For more information on how to use this SQL, see [Connecting to a TiDB Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster) and follow the steps to enter the SQL statement after connecting to a TiDB cluster using a client.
+For more information on how to use this SQL, see [Connect to a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-starter-instance) and follow the steps to enter the SQL statement after connecting to a {{{ .starter }}} instance using a client.
 
 </div>
 
@@ -231,14 +231,14 @@ For complete examples in Python, see:
 
 ## Bulk-Insert
 
-If you need to quickly import a large amount of data into a TiDB cluster, it is recommended that you use a range of tools provided by **PingCAP** for data migration. Using the `INSERT` statement is not the best way, because it is not efficient and requires to handle exceptions and other issues on your own.
+If you need to quickly import a large amount of data into TiDB, it is recommended that you use a range of tools provided by **PingCAP** for data migration. Using the `INSERT` statement is not the best way, because it is not efficient and requires to handle exceptions and other issues on your own.
 
 The following are the recommended tools for bulk-insert:
 
 <SimpleTab groupId="platform">
 <div label="TiDB Cloud" value="tidb-cloud">
 
-- Data export: use [Dumpling](/dumpling-overview.md) to export MySQL or TiDB data to local or your cloud storage. For a TiDB Cloud Starter or Essential cluster, you can also use the [Export](/tidb-cloud/serverless-export.md) feature in the [TiDB Cloud console](https://tidbcloud.com/) to export data more efficiently.
+- Data export: use [Dumpling](/dumpling-overview.md) to export MySQL or TiDB data to local or your cloud storage. For a {{{ .starter }}} or Essential instance, you can also use the [Export](/tidb-cloud/serverless-export.md) feature in the [TiDB Cloud console](https://tidbcloud.com/) to export data more efficiently.
 - Data import: use the [Import](/tidb-cloud/import-sample-data.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). You can import Dumpling exported data, import a local CSV file, or [import CSV files from cloud storage into TiDB Cloud](/tidb-cloud/import-csv-files.md).
 - Data replication: use the [TiDB Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). You can replicate MySQL-compatible databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: use the [Backup](/tidb-cloud/backup-and-restore.md) feature in the [TiDB Cloud console](https://tidbcloud.com/). Compared to Dumpling, backup and restore is more suitable for big data scenario.
