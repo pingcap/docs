@@ -244,17 +244,12 @@ All classes of audit logs contain the following information:
 | Field         | Description                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------|
 | `ID`            | The unique identifier that identifies the audit record of an operation.                        |
-| `TIME`          | The timestamp of the audit record.                                                             |
 | `EVENT`         | The event classes of the audit record. Multiple event types are separated by commas (`,`).     |
 | `USER`          | The username of the audit record.                                                              |
 | `ROLES`         | The roles of the user at the time of the operation.                                            |
 | `CONNECTION_ID` | The identifier of the user's connection.                                                       |
 | `TABLES`        | The accessed tables related to this audit record.                                              |
 | `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
-| `KEYSPACE_NAME` | The keyspace name of the audit record.                                                        |
-| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the {{{ .essential }}} instance belongs to.                 |
-| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the {{{ .essential }}} instance belongs to.                |
-| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless {{{ .essential }}} instance that the audit record belongs to.           |
 | `REASON`        | The error message of the audit record. Only recorded when an error occurs during the operation.|
 
 ### SQL statement information
