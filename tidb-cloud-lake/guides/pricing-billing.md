@@ -21,7 +21,7 @@ The size of a warehouse refers to the maximum number of concurrent queries it ca
 |---------|-------------------------|-----------------------------------|-----------------------------------|
 | XSmall  | r8g.2xlarge 8c 64 GiB   | 1.6                               | 2.4                               |
 | Small   | r8g.4xlarge 16c 128 GiB | 3.2                               | 4.8                               |
-| Medium  | 32c 256GiB              | 6.4                               | 9.6                               |
+| Medium  | 32c 256 GiB             | 6.4                               | 9.6                               |
 | Large   | r8g.16xlarge 64c 512 GiB| 12.8                              | 19.2                              |
 | XLarge  | 128c                    | 25.6                              | 38.4                              |
 | 2XLarge | 256c                    | 51.2                              | 76.8                              |
