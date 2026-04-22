@@ -48,13 +48,13 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 2. Fill in the following parameters.
 
-    - Host: The endpoint of your TiDB Cloud cluster
+    - Host: The endpoint of your <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>
     - Port: The port of the database
     - Database: The database that you want to sync the data
     - Username: The username to access the database
     - Password: The password of the username
 
-    You can get the parameter values from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the parameter values from the connection dialog in the TiDB Cloud console. To open the dialog, go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page, and then click **Connect** in the upper-right corner.
 
 3. Enable **SSL Connection**, and set TLS protocols to **TLSv1.2** or **TLSv1.3** in **JDBC URL Params**.
 

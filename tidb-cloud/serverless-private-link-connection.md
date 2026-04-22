@@ -11,17 +11,21 @@ Private link connections enable direct connectivity between {{{ .essential }}} a
 
 ## Private link connection types
 
-Private link connections for dataflow are available in different types, depending on the cloud provider and the service you want to access. Each type enables secure and private network access between your TiDB Cloud cluster and external resources (for example, RDS or Kafka) in the same cloud environment.
+Private link connections for dataflow are available in different types, depending on the cloud provider and the service you want to access. Each type enables secure and private network access between your {{{ .essential }}} instance and external resources (for example, RDS or Kafka) in the same cloud environment.
 
 ### AWS Endpoint Service
 
-This type of private link connection enables TiDB Cloud clusters on **AWS** to connect to your [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) powered by AWS PrivateLink.
+This type of private link connection enables {{{ .essential }}} instances on **AWS** to connect to your [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) powered by AWS PrivateLink.
 
 The private link connection can access various AWS services, such as RDS instances and Kafka services, by associating them with the endpoint service.
 
+### Amazon MSK Provisioned
+
+This type of private link connection enables {{{ .essential }}} instances on **AWS** to connect to your [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) with private link.
+
 ### Alibaba Cloud Endpoint Service
 
-This type of private link connection enables TiDB Cloud clusters on **Alibaba Cloud** to connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7) powered by Alibaba Cloud PrivateLink.
+This type of private link connection enables {{{ .essential }}} instances on **Alibaba Cloud** to connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7) powered by Alibaba Cloud PrivateLink.
 
 The private link connection can access various Alibaba Cloud services, such as RDS instances and Kafka services, by associating them with the endpoint service.
 
@@ -31,9 +35,9 @@ You can create an AWS Endpoint Service private link connection using the TiDB Cl
 
 Ensure that the AWS endpoint service:
 
-- Resides in the same region as your TiDB Cloud cluster.
+- Resides in the same region as your {{{ .essential }}} instance.
 - Add the TiDB Cloud account ID to the **Allow principals** list.
-- Has availability zones that overlap with your TiDB Cloud cluster.
+- Has availability zones that overlap with your {{{ .essential }}} instance.
 
 You can get the account ID and availability zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
 
@@ -44,20 +48,20 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 
 4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
+    - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on AWS.
     - **Endpoint Service Name**: enter your AWS endpoint service name, for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`.
 
 5. Click **Create**.
@@ -81,15 +85,39 @@ To create a private link connection using the TiDB Cloud CLI:
 </div>
 </SimpleTab>
 
+## Create an Amazon MSK Provisioned private link connection
+
+You can create an Amazon MSK Provisioned private link connection using the TiDB Cloud console.
+
+Before creating the Amazon MSK Provisioned private link connection, ensure that your Amazon MSK Provisioned cluster turns on multi-VPC connectivity. See [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md) for more details.
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+
+    > **Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+
+3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
+
+4. In the **Create Private Link Connection** dialog, enter the required information:
+
+    - **Private Link Connection Name**: enter a name for the private link connection.
+    - **Connection Type**: select **Amazon MSK Provisioned**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on AWS.
+    - **MSK Cluster ARN**: enter the ARN of your Amazon MSK Provisioned cluster, for example, `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx`.
+
+5. Click **Create**.
+
 ## Create an Alibaba Cloud Endpoint Service private link connection
 
 You can create an Alibaba Cloud Endpoint Service private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
 Ensure that the Alibaba Cloud endpoint service:
 
-- Resides in the same region as your TiDB Cloud cluster.
+- Resides in the same region as your {{{ .essential }}} instance.
 - Add the TiDB Cloud account ID to the **Service Whitelist**.
-- Has availability zones that overlap with your TiDB Cloud cluster.
+- Has availability zones that overlap with your {{{ .essential }}} instance.
 
 You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
 
@@ -100,20 +128,20 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 
 4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If this option is not displayed, ensure that your cluster is created on Alibaba Cloud.
+    - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on Alibaba Cloud.
     - **Endpoint Service Name**: enter the Alibaba Cloud endpoint service name, for example, `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx`.
 
 5. Click **Create**.
@@ -147,6 +175,7 @@ Different private link connection types support attaching different domain types
 |--------------------------------|-------------------------------------------|
 | AWS Endpoint Service           | <ul><li>TiDB Cloud managed (`aws.tidbcloud.com`)</li><li>Confluent Dedicated (`aws.confluent.cloud`)</li></ul>  |
 | Alibaba Cloud Endpoint Service | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
+| Amazon MSK Provisioned         | Domain attachment is not supported. |
 
 If your domain is not included in this table, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request support.
 
@@ -157,13 +186,13 @@ You can attach domains to a private link connection using the TiDB Cloud console
 
 To attach domains to a private link connection using the TiDB Cloud console, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
 
@@ -210,13 +239,13 @@ You can detach domains from a private link connection using the TiDB Cloud conso
 
 To detach domains from a private link connection using the TiDB Cloud console, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
 
@@ -252,13 +281,13 @@ You can delete a private link connection using the TiDB Cloud console or the TiD
 
 To delete a private link connection using the TiDB Cloud console, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
 3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
 
@@ -281,6 +310,7 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 
 - [Connect to Confluent Cloud via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
+- [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 - [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)

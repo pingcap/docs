@@ -11,7 +11,7 @@ Chat2Query API can only be accessed through HTTPS, ensuring that all data transm
 
 > **Note:**
 >
-> Chat2Query API is only available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters hosted on AWS. To use the Chat2Query API on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> Chat2Query API is only available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances hosted on AWS. To use the Chat2Query API on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Before you begin
 
@@ -25,7 +25,7 @@ To create a Data App for your project, perform the following steps:
 
     > **Tip:**
     >
-    > If you are on the **SQL Editor** page of your cluster, you can also open the data app creation dialog by clicking **...** in the upper-right corner, choosing **Access Chat2Query via API**, and clicking **New Chat2Query Data App**.
+    > If you are on the **SQL Editor** page of your {{{ .starter }}} instance, you can also open the data app creation dialog by clicking **...** in the upper-right corner, choosing **Access Chat2Query via API**, and clicking **New Chat2Query Data App**.
 
 2. In the dialog, define a name for your Data App, choose the desired clusters as the data sources, and select **Chat2Query Data App** as the **Data App** type. Optionally, you can also write a description for the App.
 
@@ -150,7 +150,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 In the preceding example, the request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `description`: _string_. A description of the data summary.
 - `reuse`: _boolean_. Specifies whether to reuse an existing data summary. If you set it to `true`, the API will reuse an existing data summary. If you set it to `false`, the API will generate a new data summary.
@@ -253,7 +253,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 The request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `data_summary_id`: _integer_. The ID of the data summary used to generate SQL. This property only takes effect if `cluster_id` and `database` are not provided. If you specify both `cluster_id` and `database`, the API uses the default data summary of the database.
 - `question`: _string_. A question in natural language describing the query you want.
@@ -378,7 +378,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 In the preceding example, the request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `tables`: _array_. (optional) A list of table names to be queried.
 - `instruction`: _string_. An instruction in natural language describing the query you want.

@@ -11,7 +11,6 @@
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
   - [Architecture](/tidb-cloud/architecture-concepts.md)
@@ -124,17 +123,18 @@
 
 ## GUIDES
 
-- Manage Instances
-  - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Instances
-    - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
-    - Connect to Your TiDB Cloud Instance
-      - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
-      - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
-  - Use an HTAP Cluster with TiFlash
+- [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
+- Manage {{{ .premium }}} Instances
+  - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
+  - Connect to Your {{{ .premium }}} Instance
+    - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
+    - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+    - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+  - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
+  - [Export Data from {{{ .premium }}}](/tidb-cloud/premium/premium-export.md)
+  - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -148,6 +148,7 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
+    - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -197,7 +198,7 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Delete a TiDB Instance](/tidb-cloud/premium/delete-tidb-instance.md)
+  - [Delete a {{{ .premium }}} Instance](/tidb-cloud/premium/delete-tidb-instance.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
@@ -216,7 +217,7 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -534,62 +535,6 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/cli-reference.md)
-  - auth
-    - [login](/tidb-cloud/ticloud-auth-login.md)
-    - [logout](/tidb-cloud/ticloud-auth-logout.md)
-    - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
-  - serverless
-    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
-    - [create](/tidb-cloud/ticloud-cluster-create.md)
-    - [delete](/tidb-cloud/ticloud-cluster-delete.md)
-    - [describe](/tidb-cloud/ticloud-cluster-describe.md)
-    - [list](/tidb-cloud/ticloud-cluster-list.md)
-    - [update](/tidb-cloud/ticloud-serverless-update.md)
-    - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
-    - [region](/tidb-cloud/ticloud-serverless-region.md)
-    - [shell](/tidb-cloud/ticloud-serverless-shell.md)
-    - branch
-      - [create](/tidb-cloud/ticloud-branch-create.md)
-      - [delete](/tidb-cloud/ticloud-branch-delete.md)
-      - [describe](/tidb-cloud/ticloud-branch-describe.md)
-      - [list](/tidb-cloud/ticloud-branch-list.md)
-      - [shell](/tidb-cloud/ticloud-branch-shell.md)
-    - import
-      - [cancel](/tidb-cloud/ticloud-import-cancel.md)
-      - [describe](/tidb-cloud/ticloud-import-describe.md)
-      - [list](/tidb-cloud/ticloud-import-list.md)
-      - [start](/tidb-cloud/ticloud-import-start.md)
-    - export
-      - [create](/tidb-cloud/ticloud-serverless-export-create.md)
-      - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)
-      - [list](/tidb-cloud/ticloud-serverless-export-list.md)
-      - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
-      - [download](/tidb-cloud/ticloud-serverless-export-download.md)
-    - sql-user
-      - [create](/tidb-cloud/ticloud-serverless-sql-user-create.md)
-      - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
-      - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
-      - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
-    - authorized-network
-      - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
-      - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
-      - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
-      - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-  - [completion](/tidb-cloud/ticloud-completion.md)
-  - config
-    - [create](/tidb-cloud/ticloud-config-create.md)
-    - [delete](/tidb-cloud/ticloud-config-delete.md)
-    - [describe](/tidb-cloud/ticloud-config-describe.md)
-    - [edit](/tidb-cloud/ticloud-config-edit.md)
-    - [list](/tidb-cloud/ticloud-config-list.md)
-    - [set](/tidb-cloud/ticloud-config-set.md)
-    - [use](/tidb-cloud/ticloud-config-use.md)
-  - project
-    - [list](/tidb-cloud/ticloud-project-list.md)
-  - [upgrade](/tidb-cloud/ticloud-upgrade.md)
-  - [help](/tidb-cloud/ticloud-help.md)
 - General Reference
   - TiDB Classic Architecture
     - [Overview](/tidb-architecture.md)

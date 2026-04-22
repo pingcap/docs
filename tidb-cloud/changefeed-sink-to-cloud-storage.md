@@ -10,24 +10,57 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 > **Note:**
 >
 > - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is in beta. For more information, see [Changefeed (Beta)](/tidb-cloud/essential-changefeed-overview.md).
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 100 changefeeds.
+- For each TiDB Cloud Dedicated cluster, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
+For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for authentication. Using **AWS Role ARN** is recommended for stronger security and easier management.
 
-![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
+**Option 1: AWS Role ARN (recommended)**
+
+To use an IAM Role for authentication, follow these steps:
+
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+2. Under **Bucket Access**, select **AWS Role ARN**.
+3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
+
+    If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
+
+4. Ensure your IAM role has at least the following permissions for the target bucket:
+
+    - `s3:ListBucket`
+    - `s3:PutObject`
+    - `s3:GetObject`
+    - `s3:DeleteObject`
+
+5. Paste the generated **Role ARN** into the corresponding field.
+
+**Option 2: AWS access key**
+
+> **Note:**
+>
+> Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, it is recommended to use **AWS Role ARN** instead.
+
+To use an access key for authentication, follow these steps:
+
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+2. Under **Bucket Access**, select **AWS Access Key**.
+3. Fill in the following fields:
+
+    - **Access Key ID**
+    - **Secret Access Key**
 
 </div>
 <div label="GCS">
@@ -82,7 +115,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
+7. In the TiDB Cloud console, go to the Changefeed's **Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
 <div label="Azure Blob Storage">
@@ -119,7 +152,7 @@ For **Azure Blob Storage**, you must configure the container and get a SAS token
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Configure Destination** page, and fill in the following fields:
+4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Destination** page, and fill in the following fields:
 
     - **Blob URL**: enter the container URL obtained in step 2. You can optionally add a prefix.
     - **SAS Token**: enter the generated SAS token obtained in step 3.
