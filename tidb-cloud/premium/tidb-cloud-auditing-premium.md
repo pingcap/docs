@@ -274,7 +274,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
-| `CURRENT_DB`      | The name of the current database. When the event classes include DISCONNECT, this information is not recorded. |
+| `CURRENT_DB`      | The name of the current database. When the event classes include `DISCONNECT`, this information is not recorded. |
 | `CONNECTION_TYPE` | The type of connection, including Socket, UnixSocket, and SSL/TLS.                                 |
 | `PID`             | The process ID of the current connection.                                                          |
 | `SERVER_VERSION`  | The current version of the connected TiDB server.                                                  |
