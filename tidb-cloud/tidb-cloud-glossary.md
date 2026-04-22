@@ -1,209 +1,253 @@
 ---
 title: TiDB Cloud Glossary
-summary: TiDB Cloudで使用される用語を学習します。
+summary: TiDB Cloudで使用される用語を学びましょう。
 category: glossary
 aliases: ['/ja/tidbcloud/glossary']
 ---
 
 # TiDB Cloud用語集 {#tidb-cloud-glossary}
 
-## あ {#a}
+## A {#a}
 
 ### ACID {#acid}
 
-ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、独立性、そして永続性を指します。これらの特性については、以下でそれぞれ説明します。
+ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、分離性、および永続性を指します。これらの特性はそれぞれ以下で説明します。
 
--   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDBは、トランザクションの原子性を実現するために、主キーを格納する[TiDBリージョン](#region)のキーの原子性を保証します。
+-   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのどちらかであることを意味します。TiDB は[TiDBリージョン](#region)です。
 
--   **一貫性と**は、トランザクションが常にデータベースをある一貫性のある状態から別の一貫性のある状態へと移行させることを意味します。TiDBでは、データをメモリに書き込む前にデータの一貫性が確保されます。
+-   **一貫性と**は、トランザクションによってデータベースが常に一貫性のある状態から別の一貫性のある状態へと移行することを意味します。TiDBでは、メモリにデータを書き込む前にデータの一貫性が確保されます。
 
--   **分離と**は、処理中のトランザクションが完了するまで他のトランザクションから参照できないことを意味します。これにより、同時実行中のトランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDBは現在、分離レベル`REPEATABLE READ`をサポートしています。
+-   **分離とは**、進行中のトランザクションが完了するまで他のトランザクションから見えないことを意味します。これにより、同時実行トランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDB は現在、 `REPEATABLE READ`の分離レベルをサポートしています。
 
--   **耐久性**とは、トランザクションが一度コミットされると、システム障害が発生してもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して耐久性を確保します。
+-   **永続性**とは、一度トランザクションがコミットされると、システム障害が発生した場合でもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して永続性を確保しています。
 
 ## C {#c}
 
-### チャット2クエリ {#chat2query}
+### Chat2Query {#chat2query}
 
-Chat2Queryは、SQLエディタに統合されたAIを活用した機能で、自然言語による指示を用いてSQLクエリの生成、デバッグ、書き換えを支援します。詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)ご覧ください。
+Chat2Query は、SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
 
-さらに、 TiDB CloudはAWSでホストされているTiDB Cloud Starterクラスター向けにChat2Query APIを提供しています。有効化すると、 TiDB Cloudは自動的に**Chat2Query**というシステムデータアプリと、データサービスにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えることでSQL文を生成・実行できるようになります。詳細については、 [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)ご覧ください。
+さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、データサービスに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)参照してください。.
+
+### クラスタ {#cluster}
+
+TiDB Cloudでは、クラスターとは、ノードトポロジー、インスタンスタイプ、storage構成、スケーリングモデルなどの明確なインフラストラクチャの詳細を含む、専用のクラウドデプロイメントのことです。
+
+TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスタのみです。
 
 ### クレジット {#credit}
 
-TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジットを提供しています。1クレジットは1米ドルに相当します。クレジットは、有効期限が切れる前にTiDBクラスタの料金をお支払いいただくためにご利用いただけます。
+TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジットを提供しています。1クレジットは1米ドルに相当します。クレジットは有効期限が切れる前に料金の支払いに使用できます。
 
 ## D {#d}
 
 ### データアプリ {#data-app}
 
-[データサービス（ベータ版）](#data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。APIキーを使用して認証設定を構成し、データアプリ内のエンドポイントへのアクセスを制限できます。
+データサービス[データサービス（ベータ版）](#data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントの集合です。APIキーを使用して認証設定を構成することで、データアプリ内のエンドポイントへのアクセスを制限できます。
 
-詳細については[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)参照してください。
+詳細については、[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)参照してください。
 
 ### データサービス {#data-service}
 
-データサービス（ベータ版）を使用すると、カスタムAPI [終点](#endpoint)を使用したHTTPSリクエストを介してTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
+データサービス（ベータ版）を使用すると、カスタムAPI[終点](#endpoint)を使用してHTTPSリクエスト経由でTiDB Cloudデータにアクセスできます。この機能はサーバーレスアーキテクチャを採用し、コンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
-詳細については[データサービスの概要](/tidb-cloud/data-service-overview.md)参照してください。
+詳細については、[データサービス概要](/tidb-cloud/data-service-overview.md)ご覧ください。
 
 ### 直接顧客 {#direct-customer}
 
-直接顧客とは、 TiDB Cloudを購入し、PingCAPから直接請求書を支払うエンドカスタマーです。これは[MSP顧客](#msp-customer)とは区別されます。
+直接顧客とは、 TiDB Cloudを購入し、PingCAP から直接請求書を支払うエンド顧客です。 [MSPのお客様](#msp-customer)とは区別されます。
 
 ## E {#e}
 
 ### 終点 {#endpoint}
 
-Data Service のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文のパラメータ（ `WHERE`句で使用する値など）を指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
+Data Service のエンドポイントは、SQL ステートメントを実行するようにカスタマイズできる Web API です。SQL ステートメントには、 `WHERE`句で使用される値などのパラメーターを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL のパラメーターに値を指定すると、エンドポイントは指定されたパラメーターを使用して対応する SQL ステートメントを実行し、結果を HTTP レスポンスの一部として返します。
 
-詳細については[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
+詳細については、[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
 
 ## F {#f}
 
 ### 全文検索 {#full-text-search}
 
-意味的類似性に重点を置く[ベクトル検索](/ai/concepts/vector-search-overview.md)は異なり、全文検索では正確なキーワードで文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を併用することで、検索品質を向上させることができます。
+意味的な類似性に焦点を当てる[ベクトル検索](/ai/concepts/vector-search-overview.md)とは異なり、全文検索では正確なキーワードに基づいて文書を取得できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用​​することで、検索品質を向上させることができます。
 
-詳細については、 [SQLによる全文検索](https://docs.pingcap.com/developer/vector-search-full-text-search-sql)および[Pythonによる全文検索](https://docs.pingcap.com/developer/vector-search-full-text-search-python)を参照してください。
+詳細については、 [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)および[Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)参照してください。
 
 ## M {#m}
 
 ### メンバー {#member}
 
-組織に招待され、組織とこの組織のクラスターへのアクセス権を持つユーザー。
+TiDB Cloudの[組織](#organization)に招待されたユーザー。
 
 ### MPP {#mpp}
 
-TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）アーキテクチャが導入され、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有できるようになりました。MPPモードを有効にすると、TiDBはコストに基づいて、MPPフレームワークを使用して計算を実行するかどうかを判断します。MPPモードでは、計算中に結合キーがExchange操作を通じて再分配されるため、各TiFlashノードへの計算負荷が分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)参照してください。
+バージョン5.0以降、TiDBはTiFlashノードを介した大規模並列処理（MPP）アーキテクチャを導入し、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有します。MPPモードが有効になっている場合、TiDBはコストに基づいて、計算にMPPフレームワークを使用するかどうかを決定します。MPPモードでは、結合キーは計算中にExchange操作によって再分配され、計算負荷が各TiFlashノードに分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)参照してください。 .
 
 ### MSP顧客 {#msp-customer}
 
-マネージドサービスプロバイダー（MSP）顧客とは、 TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドカスタマーです。これは[直接顧客](#direct-customer)とは区別されます。
+マネージドサービスプロバイダー（MSP）の顧客とは、 TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドユーザーのことです。これは[直接の顧客](#direct-customer)とは異なります。
 
 ### マネージドサービスプロバイダー（MSP） {#managed-service-provider-msp}
 
-マネージド サービス プロバイダー (MSP) は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス、技術サポートなどを含む付加価値サービスを提供するパートナーです。
+マネージドサービスプロバイダー（MSP）とは、 TiDB Cloudを再販し、 TiDB Cloudの組織管理、請求サービス、技術サポートなどを含む（ただしこれらに限定されない）付加価値サービスを提供するパートナーです。
 
-## 北 {#n}
+## N {#n}
 
 ### ノード {#node}
 
-データ インスタンス (TiKV)、コンピューティング インスタンス (TiDB)、または分析インスタンス (TiFlash) のいずれかを指します。
+データインスタンス（TiKV）、コンピューティングインスタンス（TiDB）、または分析インスタンス（TiFlash）のいずれかを指します。
 
-## お {#o}
+## O {#o}
 
 ### 組織 {#organization}
 
-任意の数の複数のメンバー アカウントを持つ管理アカウントを含む、 TiDB Cloudアカウントを管理するために作成するエンティティ。
+TiDB Cloudアカウント (任意の数の複数のメンバー アカウントを持つ管理アカウントを含む)、[プロジェクト](#project)、および[リソース](#tidb-cloud-resource)を管理するための最上位のコンテナー。
 
-### 組織メンバー {#organization-members}
+### 組織のメンバー {#organization-members}
 
-組織メンバーとは、組織のオーナーまたはプロジェクトオーナーから組織への参加を招待されたユーザーです。組織メンバーは、組織のメンバーを閲覧したり、組織内のプロジェクトに招待したりできます。
+組織メンバーとは、組織のオーナーまたはプロジェクトのオーナーから組織への参加を招待されたユーザーのことです。組織メンバーは組織のメンバーを閲覧したり、組織内のプロジェクトに招待されたりすることができます。
 
 ## P {#p}
 
 ### ポリシー {#policy}
 
-特定のアクションやリソースへのアクセスなど、ロール、ユーザー、または組織に適用される権限を定義するドキュメント。
+役割、ユーザー、または組織に適用される権限（特定のアクションやリソースへのアクセスなど）を定義する文書。
 
 ### プロジェクト {#project}
 
-組織が作成したプロジェクトに基づいて、人員、インスタンス、ネットワークなどのリソースをプロジェクトごとに個別に管理することができ、プロジェクト間のリソースが互いに干渉することはありません。
+TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグループ化および管理できます。
+
+-   <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterとEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、およびPremium</CustomContent>インスタンスの場合、プロジェクトはオプションです。つまり、これらのインスタンスをプロジェクトにグループ化するか、組織レベルでこれらのインスタンスを保持することができます。
+-   TiDB Cloud Dedicatedクラスターの場合、プロジェクトが必要です。
+
+プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
+
+-   **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
+-   **TiDB X プロジェクト**: このプロジェクト タイプは、TiDB X インスタンス ( <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterとEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、およびPremium</CustomContent> ) でのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは、[**私のTiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
+-   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想であり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンス ( <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterとEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、およびPremium</CustomContent> ) の仮想コンテナとして機能し、プロジェクト ID を使用してTiDB Cloud API を介してこれらのインスタンスにアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は[**私のTiDB**](https://tidbcloud.com/tidbs)ページのプロジェクト ビューから取得できます。
+
+これらのプロジェクト タイプの違いの詳細については、 [プロジェクト](/tidb-cloud/manage-user-access.md#projects)を参照してください。
 
 ### プロジェクトメンバー {#project-members}
 
-プロジェクトメンバーとは、組織内の1つ以上のプロジェクトに参加するよう招待されたユーザーです。プロジェクトメンバーは、クラスタ、ネットワークアクセス、バックアップ、その他のリソースを管理できます。
+プロジェクトメンバーとは、組織の1つ以上のプロジェクトへの参加を招待されたユーザーのことです。
 
 ## R {#r}
 
-### ごみ箱 {#recycle-bin}
+### リサイクルボックス {#recycle-bin}
 
-有効なバックアップがある削除されたクラスターのデータが保存される場所です。バックアップされたTiDB Cloud Dedicated クラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。自動バックアップからのバックアップ ファイルの場合、ごみ箱には指定された期間保持されます。バックアップの保持期間は**バックアップ設定**で設定でき、デフォルトは 7 日間です。手動バックアップからのバックアップ ファイルの場合、有効期限はありません。データ損失を避けるため、データを新しいクラスターに時間内に復元することを忘れないでください。クラスターに**バックアップがない**場合、削除されたクラスターはここに表示されないことに注意してください。
+削除された[TiDB Cloudのリソース](#tidb-cloud-resource)のデータと有効なバックアップが保存される場所。
+
+バックアップされたTiDB Cloudリソースが削除されると、その既存のバックアップ ファイルはごみ箱に移動されます。自動バックアップからのバックアップ ファイルについては、ごみ箱に指定された期間保持されます。バックアップの保持期間は**「バックアップ設定」**で設定でき、デフォルトは 7 日です。手動バックアップからのバックアップ ファイルには有効期限はありません。データ損失を防ぐため、新しいTiDB Cloudリソースにデータを速やかに復元してください。なお、 TiDB Cloudリソース**にバックアップがない**場合、削除されたリソースはごみ箱に表示されません。
+
+<CustomContent plan="starter,essential,dedicated">
+
+現在、ごみ箱機能はTiDB Cloud Dedicatedクラスタのみがサポートしています。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+現在、ごみ箱機能はTiDB Cloud PremiumインスタンスとTiDB Cloud Dedicatedクラスタのみをサポートしています。
+
+</CustomContent>
 
 ### 地域 {#region}
 
 -   TiDB Cloudリージョン
 
-    TiDB Cloudクラスターがデプロイされる地理的領域。TiDB Cloudリージョンは少なくとも 3 つのアベイラビリティーゾーンで構成され、クラスターはこれらのゾーンにまたがってデプロイされます。
+    TiDB Cloudリソースがデプロイされる地理的領域。TiDB TiDB Cloudリージョンは少なくとも3つのアベイラビリティゾーンで構成され、クラスターまたはインスタンスはこれらのゾーンにまたがってデプロイされます。
 
 -   TiDBリージョン
 
-    TiDBにおけるデータの基本単位。TiKVはキーバリュー空間を連続するキーセグメントに分割し、各セグメントはリージョンと呼ばれます。各リージョンのデフォルトのサイズ制限は96MBですが、変更可能です。
+    TiDBにおけるデータの基本単位。TiKVはキーバリュー空間を連続するキーセグメントに分割し、各セグメントをリージョンと呼びます。各リージョンのデフォルトのサイズ制限は96MBで、設定可能です。
 
 ### レプリカ {#replica}
 
-同じリージョンまたは別のリージョンに配置され、同じデータを含む独立したデータベース。レプリカは、災害復旧やパフォーマンス向上のためによく使用されます。
+同一または異なるリージョンに配置される、同じデータを含む独立したデータベース。レプリカは、ディザスタリカバリ目的やパフォーマンス向上のためによく使用される。
 
-### レプリケーション容量ユニット (RCU) {#replication-capacity-unit-rcu}
+### レプリケーション容量ユニット（RCU） {#replication-capacity-unit-rcu}
 
-TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)の容量をTiCDCレプリケーション容量ユニット（RCU）で測定します。クラスターの変更フィードを作成する際に、適切な仕様を選択できます。RCUが大きいほど、レプリケーションパフォーマンスが向上します。これらのTiCDC変更フィードRCUに対して料金が発生します。詳細については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)ご覧ください。
+TiDB Cloud は、TiCDC Replication Capacity Unit (RCU) の[変更フィード](/tidb-cloud/changefeed-overview.md)の容量を測定します。変更フィードを作成するときに、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。詳細については、 [変更フィードのコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)参照してください。
 
-### リクエスト容量単位 (RCU) {#request-capacity-unit-rcu}
+### 要求容量単位（RCU） {#request-capacity-unit-rcu}
 
-リクエスト容量ユニット（RCU）は、 TiDB Cloud Essential クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)ご覧ください。
+リクエストキャパシティユニット（RCU）は、 TiDB Cloud Essentialインスタンスにプロビジョニングされたコンピューティング能力を表す単位です。1 RCUは、1秒あたり一定数のRUを処理できる固定量のコンピューティングリソースを提供します。プロビジョニングするRCUの数によって、TiDB Cloud Essentialインスタンスのベースラインパフォーマンスとスループット容量が決まります。詳細については、 [TiDB Cloud Essentialの料金詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)参照してください。
 
 ### リクエストユニット（RU） {#request-unit-ru}
 
-TiDB Cloud StarterとEssentialでは、リクエストユニット（RU）は、データベースへの1回のリクエストで消費されるリソース量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。ただし、 TiDB Cloud StarterとEssentialの課金モデルは異なります。
+TiDB Cloud StarterおよびEssentialでは、リクエストユニット（RU）は、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。ただし、 TiDB Cloud StarterとEssentialの課金モデルは異なります。
 
--   TiDB Cloud Starterは、消費されたRUの合計数に基づいて課金されます。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)ご覧ください。
--   TiDB Cloud Essentialは、プロビジョニングされた[リクエスト容量単位（RCU）](#request-capacity-unit-rcu) RCUの数に基づいて課金されます。1 RCUは、1秒あたり一定数のRUを処理できる固定量のコンピューティングリソースを提供します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)ご覧ください。
+-   TiDB Cloud Starter は、消費された RU の合計数に基づいて請求されます。詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+-   TiDB Cloud Essentialは、プロビジョニングされた[要求容量単位（RCU）](#request-capacity-unit-rcu)の数に基づいて請求されます。 1 つの RCU は、1 秒あたり特定の数の RU を処理できる固定量のコンピューティング リソースを提供します。詳細については、 [TiDB Cloud Essentialの料金詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
 
-TiDB Cloud DedicatedおよびTiDB Self-Managedにおいて、リクエストユニット（RU）はシステムリソースの消費量を表すリソース抽象化単位であり、現在CPU、IOPS、IO帯域幅のメトリクスが含まれます。リクエストユニットは、**課金目的ではなく**、リソース制御機能によってデータベースリクエストで消費されるリソースを制限、分離、管理するために使用されます。詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)ご覧ください。
+TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエスト ユニット (RU) はシステム リソースの消費を表すリソース抽象化ユニットであり、これには現在 CPU、IOPS、および IO 帯域幅のメトリクスが含まれます。これは、**請求目的ではなく**、データベース要求によって消費されるリソースを制限、分離、管理するためにリソース制御機能によって使用されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)参照してください。
 
 ## S {#s}
 
 ### 支出限度額 {#spending-limit}
 
-[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md) 、特定のワークロードに対して1ヶ月あたりに支出可能な最大金額を表します。これは、TiDB Cloud Starterクラスターの予算を設定できるコスト管理メカニズムです。支出限度額が0に設定されている場合、クラスターは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
+は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)制限が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出制限が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
-### TiDB クラスター {#tidb-cluster}
+### TiDBクラスター {#tidb-cluster}
 
-機能的な作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)のノードの集合。
+TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[ティクヴ](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
 
 ### TiDBノード {#tidb-node}
 
-トランザクションストアまたは分析ストアから返されたクエリからデータを集約するコンピューティングノード。TiDBノードの数を増やすと、クラスターが処理できる同時クエリの数が増加します。
+トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスタが処理できる同時クエリの数が増加します。
+
+### TiDB Cloudリソース {#tidb-cloud-resource}
+
+TiDB Cloudリソースとは、管理可能なTiDB Cloudデプロイメント単位のことです。以下のいずれかになります。
+
+-   TiDB X インスタンス ( [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリング) ( <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterまたはEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、またはPremium</CustomContent>など)
+-   TiDB Cloud Dedicatedクラスター
 
 ### TiDB X {#tidb-x}
 
-クラウドネイティブなオブジェクトstorageをTiDBのバックボーンとする、新しい分散SQLアーキテクチャ。TiDB Xは、コンピューティングとstorageを分離することで、ワークロードパターン、ビジネスサイクル、データ特性にリアルタイムで適応し、TiDBをインテリジェントに拡張することを可能にします。
+TiDB Xは、クラウドネイティブなオブジェクトstorageをTiDBの基盤とする、新しい分散SQLアーキテクチャです。コンピューティングとstorageを分離することで、TiDBはワークロードパターン、ビジネスサイクル、データ特性にリアルタイムで適応し、インテリジェントなスケーリングを実現します。
 
-TiDB Xアーキテクチャは現在、<CustomContent plan="starter,essential,dedicated"> TiDB Cloud StarterとEssential</CustomContent><CustomContent plan="premium"> TiDB Cloud Starter、Essential、および Premium</CustomContent>詳細については、 [TiDB X のご紹介: AI 時代の分散 SQL の新たな基盤](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/)および[PingCAP、SCaiLE Summit 2025でTiDB Xと新しいAI機能を発表](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/)を参照してください。
+TiDB Xアーキテクチャは、 <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterとEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、およびPremium</CustomContent>で利用できるようになりました。詳細については、 [TiDB Xのご紹介：AI時代の分散SQLのための新たな基盤](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/)および[PingCAPがSCaiLEサミット2025でTiDB Xと新たなAI機能を発表](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/)参照してください。
+
+### TiDB Xインスタンス {#tidb-x-instance}
+
+TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタトポロジーの管理や理解は不要です。
+
+TiDB Cloudプランのうち、 <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterとEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、およびPremium</CustomContent>は TiDB Xアーキテクチャを使用しています。したがって、「TiDB X インスタンス」という場合は、 <CustomContent plan="starter,essential,dedicated">TiDB Cloud StarterまたはEssential</CustomContent> <CustomContent plan="premium">TiDB Cloud Starter、 Essential、またはPremium</CustomContent>インスタンスを指します。
 
 ### TiFlashノード {#tiflash-node}
 
-TiKV からデータをリアルタイムで複製し、リアルタイムの分析ワークロードをサポートする分析storageノード。
+TiKVからリアルタイムでデータを複製し、リアルタイムの分析ワークロードをサポートする分析storageノード。
 
 ### TiKVノード {#tikv-node}
 
-オンライントランザクション処理（OLTP）データを保存するstorageノードです。高可用性を実現するために、3ノードの倍数（例：3、6、9）で拡張され、2つのノードがレプリカとして機能します。TiKVノードの数を増やすと、全体のスループットが向上します。
+オンライントランザクション処理（OLTP）データを格納するstorageノード。高可用性を実現するため、3ノードの倍数（例えば、3、6、9）で拡張され、2つのノードがレプリカとして機能します。TiKVノードの数を増やすと、総スループットが向上します。
 
 ### トラフィックフィルター {#traffic-filter}
 
-SQLクライアント経由でTiDB Cloudクラスターへのアクセスが許可されるIPアドレスとクラスレス・インタードメイン・ルーティング（CIDR）アドレスのリスト。トラフィックフィルターはデフォルトで空です。
+SQLクライアント経由でTiDB Cloudリソースへのアクセスが許可されているIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルタはデフォルトでは空です。
 
 ## V {#v}
 
 ### ベクトル検索 {#vector-search}
 
-[ベクトル検索](/ai/concepts/vector-search-overview.md)は、データの意味を優先して関連性の高い結果を提供する検索手法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクター検索は、テキスト、画像、音声など様々なデータタイプを高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解します。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの検索意図に沿った結果を提供できます。
+[ベクトル検索](/ai/concepts/vector-search-overview.md)、データの意味を優先して関連性の高い結果を提供する検索方法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクトル検索は、テキスト、画像、音声などのさまざまなデータタイプを高次元ベクトルに変換し、これらのベクトル間の類似性に基づいてクエリを実行します。この検索方法は、データの意味と文脈情報を捉え、ユーザーの意図をより正確に理解することを可能にします。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクトル検索はデータの意味を分析することで、ユーザーの意図に沿った結果を提供できます。
 
 ### 仮想プライベートクラウド {#virtual-private-cloud}
 
-リソースに対して管理されたネットワーク サービスを提供する、論理的に分離された仮想ネットワーク パーティション。
+論理的に分離された仮想ネットワークパーティションであり、お客様のリソースに対してマネージドネットワークサービスを提供します。
 
 ### VPC {#vpc}
 
-Virtual Private Cloud の略。
+仮想プライベートクラウドの略。
 
 ### VPCピアリング {#vpc-peering}
 
-異なる VPC ネットワーク内のワークロードがプライベートに通信できるように、仮想プライベート クラウド ( [VPC](#vpc) ) ネットワークを接続できます。
+仮想プライベートクラウド（ [VPC](#vpc) ）ネットワークを接続し、異なるVPCネットワーク内のワークロードがプライベートに通信できるようにします。
 
 ### VPCピアリング接続 {#vpc-peering-connection}
 
-2 つの仮想プライベート クラウド (VPC) 間のネットワーク接続。これにより、プライベート IP アドレスを使用して VPC 間のトラフィックをルーティングし、データ転送を容易にすることができます。
+2つの仮想プライベートクラウド（VPC）間のネットワーク接続であり、プライベートIPアドレスを使用してVPC間でトラフィックをルーティングし、データ転送を容易にします。

@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka (Beta)
-summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの構成が含まれます。
+summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用チェンジフィードの設定手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの設定が含まれます。
 ---
 
 # Apache Kafkaへのシンク（ベータ版） {#sink-to-apache-kafka-beta}
@@ -12,7 +12,7 @@ summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafk
 -   TiDB Cloud Essentialインスタンスごとに、最大10個のチェンジフィードを作成できます。
 -   現在、 TiDB Cloud Essentialは、Kafkaブローカーへの接続に自己署名TLS証明書をアップロードすることをサポートしていません。
 -   TiDB Cloud Essential はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
--   複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
+-   複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製時に一意制約が存在しないことにより、一部の再試行シナリオでは、下流で重複データが挿入される可能性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -62,7 +62,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については、Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls)を参照してください。
 
-## ステップ1. Apache KafkaのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-kafka}
+## ステップ1. Apache Kafka の変更フィードを作成する {#step-1-create-a-changefeed-for-apache-kafka}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 2.  対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
@@ -171,13 +171,13 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
         変更フィードでデータベースごとに専用のKafkaトピックを作成する場合は、このモードを選択してください。そうすると、データベースのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックスとサフィックスを設定することで、データベースのトピック名をカスタマイズできます。
 
-        解決済みTsイベントなど、行以外のイベントの変更ログについては、 **「デフォルトトピック名」**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
+        解決済みTsイベントなど、行イベント以外のイベントの変更ログについては、 **「デフォルトトピック名」**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
 
     -   **すべての変更ログを、指定された1つのKafkaトピックに送信する**
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**「トピック名」**フィールドで指定できます。
 
-8.  **パーティション分散**領域では、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャを**定義することも、**テーブルごとに異なるパーティションディスパッチャを**定義することもできます。TiDB Cloud、次の 4 種類のディスパッチャが提供されています。
+8.  **パーティション分散**領域では、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャを**定義することも、**テーブルごとに異なるパーティションディスパッチャを**定義することもできます。TiDB TiDB Cloud、次の 4 種類のディスパッチャが提供されています。
 
     -   **プライマリキーまたはインデックス値に基づいて変更ログをKafkaパーティションに分散します。**
 
