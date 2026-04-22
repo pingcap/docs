@@ -299,4 +299,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-{{{ .essential }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+{{{ .premium }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files to find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
