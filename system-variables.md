@@ -7089,19 +7089,6 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
-### txn_scope
-
-> **Note:**
->
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
-
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `global`
-- Value options: `global` and `local`
-- This variable is used to set whether the current session transaction is a global transaction or a local transaction.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
-
 ### validate_password.check_user_name <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
