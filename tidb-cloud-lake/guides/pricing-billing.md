@@ -13,22 +13,22 @@ This section provides pricing information on warehouse, storage, and cloud servi
 
 ### Warehouse Pricing
 
-Your warehouses incur costs when they are running (specifically, when in the Running state). The cost depends on the warehouse\'s size and running time. **Billing is calculated on a per-second basis**. For example, if you have a warehouse running for three seconds, you will be charged for that exact duration.
+Your warehouses incur costs when they are running (specifically, when in the Running state). The cost depends on the warehouse's size and running time. **Billing is calculated on a per-second basis**. For example, if you have a warehouse running for three seconds, you will be charged for that exact duration.
 
 The size of a warehouse refers to the maximum number of concurrent queries it can handle, and prices vary based on the different sizes available and the {{{ .lake }}} edition you use.
 
-| Size    | Hourly Cost (Personal) | Hourly Cost (Business) | Per-Second Cost (Personal) | Per-Second Cost (Business) |
-| ------- | ---------------------- | ---------------------- | -------------------------- | -------------------------- |
-| XSmall  | $1.00                  | $1.50                  | $0.000277778               | $0.000416667               |
-| Small   | $2.00                  | $3.00                  | $0.000555556               | $0.000833333               |
-| Medium  | $4.00                  | $6.00                  | $0.001111111               | $0.001666667               |
-| Large   | $8.00                  | $12.00                 | $0.002222222               | $0.003333333               |
-| XLarge  | $16.00                 | $24.00                 | $0.004444444               | $0.006666667               |
-| 2XLarge | $32.00                 | $48.00                 | $0.008888889               | $0.013333333               |
-| 3XLarge | $64.00                 | $96.00                 | $0.017777778               | $0.026666667               |
-| 4XLarge | $128.00                | $192.00                | $0.035555556               | $0.053333333               |
-| 5XLarge | $256.00                | $384.00                | $0.071111111               | $0.106666667               |
-| 6XLarge | $512.00                | $768.00                | $0.142222222               | $0.213333333               |
+| Size    | EC2      | Personal Tier Listing Price ($/h) | Business Tier Listing Price ($/h) |
+|---------|--------------------|---------------------|--------------------|
+| XSmall  | r8g.2xlarge 8c 64GiB      | 1.6                | 2.4               |
+| Small   | r8g.4xlarge 16c 128GiB    | 3.2                  | 4.8           |
+| Medium  | 32c 256GiB                | 6.4                    | 9.6               |
+| Large   | r8g.16xlarge 64c 512GiB   | 12.8             | 19.2          |
+| XLarge  | 128c                    | 25.6            | 38.4          |
+| 2XLarge | 256c                    | 51.2                   | 76.8              |
+| 3XLarge | 512c                    | 102.4                | 153.6             |
+| 4XLarge | 1024c                   | 204.8                  | 307.2         |
+| 5XLarge | 2048c                   | 409.6            | 614.4                  |
+| 6XLarge | 4096c                   | 819.2             | 1228.8               |
 
 A suspended warehouse does not consume any resources. By default, {{{ .lake }}} automatically suspends a warehouse after five minutes of inactivity to save resources and costs. You can adjust or disable this automatic suspension feature according to your preferences.
 
