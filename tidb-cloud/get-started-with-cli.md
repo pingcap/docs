@@ -87,6 +87,10 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 
 ## 快速入门
 
+> **注意：**
+>
+> 如果你使用 TiUP，可以使用 `tiup cloud` 代替 `ticloud`。
+
 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始使用 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Starter 实例。
 
 ### 创建用户配置文件或登录 TiDB Cloud

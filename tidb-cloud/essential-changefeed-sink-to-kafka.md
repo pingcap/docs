@@ -62,7 +62,7 @@ TiDB Cloud Essential 目前仅支持自建 Kafka、Confluent Cloud Dedicated 集
 
 例如，如果你的 Kafka 集群在 Confluent Cloud，请参考 Confluent 文档中的 [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) 和 [Adding ACLs](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls) 获取更多信息。
 
-## 第 1 步：打开 Apache Kafka 的 Changefeed 页面
+## 第 1 步：为 Apache Kafka 创建 Changefeed {#step-1-create-a-changefeed-for-apache-kafka}
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com)。
 2. 进入目标 TiDB Cloud Essential 实例的概览页面，然后在左侧导航栏点击 **Data** > **Changefeed**。
