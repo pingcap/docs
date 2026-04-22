@@ -269,7 +269,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
-| `CURRENT_DB`      | The name of the current database. When the event classes include DISCONNECT, this information is not recorded. |
+| `CURRENT_DB`      | The name of the current database. When the event classes include `DISCONNECT`, this information is not recorded. |
 | `CONNECTION_TYPE` | The type of connection, including Socket, UnixSocket, and SSL/TLS.                                 |
 | `PID`             | The process ID of the current connection.                                                          |
 | `SERVER_VERSION`  | The current version of the connected TiDB server.                                                  |
@@ -294,4 +294,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-{{{ .essential }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+{{{ .premium }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files to find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
