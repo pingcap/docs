@@ -69,14 +69,14 @@ Follow these steps to install and deploy Metabase with Docker:
 
 3. Click on the **gear** icon in the top right, and navigate to **Admin settings** > **Databases** > **Add a database** to create a connection:
 
-    | Parameter                     | {{{ .lake }}}               | {{{ .lake }}}                     |
-    | ----------------------------- | ---------------------- | ---------------------------------- |
-    | Database type                 | `Databend`             | `Databend`                         |
-    | Host                          | `host.docker.internal` | Obtain from connection information |
-    | Port                          | `8000`                 | `443`                              |
-    | Username                      | For example, `root`    | `cloudapp`                         |
-    | Password                      | Enter your password    | Obtain from connection information |
-    | Use a secure connection (SSL) | Toggle off             | Toggle on                          |
+    | Parameter                     | {{{ .lake }}}                     |
+    | ----------------------------- | ---------------------------------- |
+    | Database type                 | `Databend`                         |
+    | Host                          | Obtain from connection information |
+    | Port                          | `443`                              |
+    | Username                      | `cloudapp`                         |
+    | Password                      | Obtain from connection information |
+    | Use a secure connection (SSL) | Toggle on                          |
 
 4. Click **Save changes**, then click **Exit admin**.
 

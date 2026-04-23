@@ -13,22 +13,22 @@ This section provides pricing information on warehouse, storage, and cloud servi
 
 ### Warehouse Pricing
 
-Your warehouses incur costs when they are running (specifically, when in the Running state). The cost depends on the warehouse\'s size and running time. **Billing is calculated on a per-second basis**. For example, if you have a warehouse running for three seconds, you will be charged for that exact duration.
+Your warehouses incur costs when they are running (specifically, when in the Running state). The cost depends on the warehouse's size and running time. **Billing is calculated on a per-second basis**. For example, if you have a warehouse running for three seconds, you will be charged for that exact duration.
 
 The size of a warehouse refers to the maximum number of concurrent queries it can handle, and prices vary based on the different sizes available and the {{{ .lake }}} edition you use.
 
-| Size    | Hourly Cost (Personal) | Hourly Cost (Business) | Per-Second Cost (Personal) | Per-Second Cost (Business) |
-| ------- | ---------------------- | ---------------------- | -------------------------- | -------------------------- |
-| XSmall  | $1.00                  | $1.50                  | $0.000277778               | $0.000416667               |
-| Small   | $2.00                  | $3.00                  | $0.000555556               | $0.000833333               |
-| Medium  | $4.00                  | $6.00                  | $0.001111111               | $0.001666667               |
-| Large   | $8.00                  | $12.00                 | $0.002222222               | $0.003333333               |
-| XLarge  | $16.00                 | $24.00                 | $0.004444444               | $0.006666667               |
-| 2XLarge | $32.00                 | $48.00                 | $0.008888889               | $0.013333333               |
-| 3XLarge | $64.00                 | $96.00                 | $0.017777778               | $0.026666667               |
-| 4XLarge | $128.00                | $192.00                | $0.035555556               | $0.053333333               |
-| 5XLarge | $256.00                | $384.00                | $0.071111111               | $0.106666667               |
-| 6XLarge | $512.00                | $768.00                | $0.142222222               | $0.213333333               |
+| Size    | Hourly Cost (Personal)            | Hourly Cost (Business)            |
+|---------|-----------------------------------|-----------------------------------|
+| XSmall  | $1.6                              | $2.4                              |
+| Small   | $3.2                              | $4.8                              |
+| Medium  | $6.4                              | $9.6                              |
+| Large   | $12.8                             | $19.2                             |
+| XLarge  | $25.6                             | $38.4                             |
+| 2XLarge | $51.2                             | $76.8                             |
+| 3XLarge | $102.4                            | $153.6                            |
+| 4XLarge | $204.8                            | $307.2                            |
+| 5XLarge | $409.6                            | $614.4                            |
+| 6XLarge | $819.2                            | $1228.8                           |
 
 A suspended warehouse does not consume any resources. By default, {{{ .lake }}} automatically suspends a warehouse after five minutes of inactivity to save resources and costs. You can adjust or disable this automatic suspension feature according to your preferences.
 
@@ -56,10 +56,10 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 | Cost | Formula | Amount |
 |------|---------|--------|
-| Compute | $0.000416667 × (5×60+20) | $0.13 |
-| Storage | $23 ÷ 1024 ÷ 30 × 100 | $0.75 |
-| **Daily Total** | | **$0.88** |
-| **Monthly Total** | | **$26.40** |
+| Warehouse | $2.4 ÷ 3600 × (5×60+20) | $0.21 |
+| Storage | $23 ÷ 1024 ÷ 30 × 100 | $0.07 |
+| **Daily Total** | | **$0.28** |
+| **Monthly Total** | | **$8.40** |
 
 ## Example-2
 
@@ -67,11 +67,11 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 | Cost | Formula | Amount |
 |------|---------|--------|
-| Compute | $1.50 × 24h | $36.00/day |
+| Warehouse | $2.40 × 24h | $57.60/day |
 | Storage | $23 ÷ 30 | $0.77/day |
 | Cloud Service | $2 × 5 | $10.00/day |
-| **Daily Total** | | **$46.77** |
-| **Monthly Total** | | **$1,403.10** |
+| **Daily Total** | | **$68.37** |
+| **Monthly Total** | | **$2,051.10** |
 
 ## {{{ .lake }}} Billing
 
