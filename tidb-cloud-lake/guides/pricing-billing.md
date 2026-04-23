@@ -56,7 +56,7 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 | Cost | Formula | Amount |
 |------|---------|--------|
-| Compute | $2.4 ÷ 3600 × (5×60+20) | $0.21 |
+| Warehouse | $2.4 ÷ 3600 × (5×60+20) | $0.21 |
 | Storage | $23 ÷ 1024 ÷ 30 × 100 | $0.07 |
 | **Daily Total** | | **$0.28** |
 | **Monthly Total** | | **$8.40** |
@@ -67,7 +67,7 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 | Cost | Formula | Amount |
 |------|---------|--------|
-| Compute | $2.40 × 24h | $57.60/day |
+| Warehouse | $2.40 × 24h | $57.60/day |
 | Storage | $23 ÷ 30 | $0.77/day |
 | Cloud Service | $2 × 5 | $10.00/day |
 | **Daily Total** | | **$68.37** |
