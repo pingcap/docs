@@ -132,7 +132,7 @@ You can enable Multi-Cluster for a warehouse when you create it and set the maxi
 
 Multi-Cluster Warehouses are billed based on the number of active clusters used during specific time intervals.
 
-For example, for an XSmall Warehouse priced at $1 per hour, if one cluster is actively used from 13:00 to 14:00 and two clusters are actively used from 14:00 to 15:00, the total cost incurred from 13:00 to 15:00 is $3 ((1 cluster × 1 hour × $1) + (2 clusters × 1 hour × $1)).
+For example, for an XSmall Warehouse priced at $1.6 per hour, if one cluster is actively used from 13:00 to 14:00 and two clusters are actively used from 14:00 to 15:00, the total cost incurred from 13:00 to 15:00 is $4.8 ((1 cluster × 1 hour × $1.6) + (2 clusters × 1 hour × $1.6)).
 
 ## Connecting to a Warehouse {#connecting}
 
