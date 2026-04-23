@@ -62,6 +62,19 @@ For applications experiencing growing workloads and needing scalability in real 
 
 For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
 
+## {{{ .premium }}}
+
+For mission-critical applications that require the highest level of performance, enhanced security within a managed environment, the Premium plan provides robust infrastructure and advanced controls:
+
+- **Unlimited Growth and Auto-scaling**: Provides seamless scaling capabilities to handle evolving workloads，which ensures continuous reliability for business-critical operations.
+- **Performance Optimization**: Specifically tuned for high-throughput and low-latency workloads, offering larger resource ceilings and more granular scaling controls.
+- **Pay-as-you-go Pricing**:Billed based on actual Request Capacity Unit (RCU) consumption and storage usage, this flexible pay-as-you-go model eliminates the need for manual backend over-provisioning.
+- **Advanced Security**: Offers deeper security configurations and compliance capabilities required by large-scale enterprises and regulated industries.
+
+{{{ .premium }}} is the ideal choice for customers migrating from Essential who have outgrown shared environments and require a more stable, isolated, and high-performance database tier.
+
+To ensure maximum uptime and resilience for mission-critical workloads, {{{ .premium }}} exclusively provides **Regional High Availability**. By distributing nodes across multiple availability zones, it offers superior redundancy compared to zonal deployments.
+
 ## TiDB Cloud Dedicated
 
 TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full HTAP capabilities.
