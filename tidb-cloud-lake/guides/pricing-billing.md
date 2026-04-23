@@ -56,10 +56,10 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 | Cost | Formula | Amount |
 |------|---------|--------|
-| Compute | $0.000416667 × (5×60+20) | $0.13 |
-| Storage | $23 ÷ 1024 ÷ 30 × 100 | $0.75 |
-| **Daily Total** | | **$0.88** |
-| **Monthly Total** | | **$26.40** |
+| Compute | $2.4 ÷ 3600 × (5×60+20) | $0.21 |
+| Storage | $23 ÷ 1024 ÷ 30 × 100 | $0.07 |
+| **Daily Total** | | **$0.28** |
+| **Monthly Total** | | **$8.40** |
 
 ## Example-2
 
@@ -67,11 +67,11 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 
 | Cost | Formula | Amount |
 |------|---------|--------|
-| Compute | $1.50 × 24h | $36.00/day |
+| Compute | $2.40 × 24h | $57.60/day |
 | Storage | $23 ÷ 30 | $0.77/day |
 | Cloud Service | $2 × 5 | $10.00/day |
-| **Daily Total** | | **$46.77** |
-| **Monthly Total** | | **$1,403.10** |
+| **Daily Total** | | **$68.37** |
+| **Monthly Total** | | **$2,051.10** |
 
 ## {{{ .lake }}} Billing
 
