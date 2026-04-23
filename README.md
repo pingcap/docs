@@ -48,7 +48,7 @@ Currently, we maintain the following versions of TiDB documentation in different
 | [`release-6.2`](https://github.com/pingcap/docs/tree/release-6.2) | 6.2 Development Milestone Release (Archived documentation, no longer updated) |
 | [`release-6.1`](https://github.com/pingcap/docs/tree/release-6.1) | 6.1 LTS (Long-Term Support) version |
 | [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 Development Milestone Release (Archived documentation, no longer updated) |
-| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version |
+| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version (Archived documentation, no longer updated) |
 | [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 stable version (Archived documentation, no longer updated) |
 | [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version (Archived documentation, no longer updated) |
 | [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version (Archived documentation, no longer updated) |
