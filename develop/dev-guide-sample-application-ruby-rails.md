@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and Rails to accomplish the foll
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -96,6 +96,42 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
    > For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), TLS connection **MUST** be enabled with the `ssl_mode=verify_identity` query parameter when using public endpoint.
 
 7. Save the `.env` file.
+
+</div>
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
+
+    Ensure that your client IP address is added to the access list.
+
+4. In the left navigation pane, click **Overview** to return to the instance overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+6. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
+    - If you have not set a password yet, click **Set Root Password** in the dialog.
+    - If you need to verify the server certificate or if the connection fails and requires a CA certificate, click **CA cert** to download it.
+    - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+7. Run the following command to copy `.env.example` and rename it to `.env`:
+
+    ```shell
+    cp .env.example .env
+    ```
+
+8. Edit the `.env` file, set up the `DATABASE_URL` environment variable as follows, and replace the corresponding placeholders `{}` with connection parameters in the connection dialog:
+
+    ```dotenv
+    DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}'
+    ```
+
+9. Save the `.env` file.
 
 </div>
 <div label="TiDB Cloud Dedicated">
