@@ -27,6 +27,7 @@ summary: "{{{ .lake }}} supports familiar Data Definition Language (DDL) and Dat
 - Grants
 - Warehouse
 - Task
+- [Snapshot Tag](/tidb-cloud-lake/sql/table-versioning.md#snapshot-tags)
 
 ## Organizing Data
 

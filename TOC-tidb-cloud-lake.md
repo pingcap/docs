@@ -89,11 +89,12 @@
     - [Track and Transform Data via Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
     - [Automate Data Loading with Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md)
 - Data Unloading
+  - [Overview](/tidb-cloud-lake/guides/unload-data.md)
   - [Unload Parquet File](/tidb-cloud-lake/guides/unload-parquet-file.md)
   - [Unload CSV File](/tidb-cloud-lake/guides/unload-csv-file.md)
   - [Unload TSV File](/tidb-cloud-lake/guides/unload-tsv-file.md)
   - [Unload NDJSON File](/tidb-cloud-lake/guides/unload-ndjson-file.md)
-  - [Unload Data from Databend](/tidb-cloud-lake/guides/unload-data-from-databend.md)
+  - [Unload Lance Dataset](/tidb-cloud-lake/guides/unload-lance-dataset.md)
 - AI and ML Integration
   - [Overview](/tidb-cloud-lake/guides/ai-ml-integration.md)
   - [External AI Functions](/tidb-cloud-lake/guides/external-ai-functions.md)
@@ -234,7 +235,7 @@
     - [SQL Dialects & Conformance](/tidb-cloud-lake/sql/sql-dialects-conformance.md)
   - SQL Statements
     - [Overview](/tidb-cloud-lake/sql/sql-statements-reference.md)
-    - DDL Statements
+    - DDL Commands
       - [DDL Overview](/tidb-cloud-lake/sql/ddl.md)
       - Database
         - [Overview](/tidb-cloud-lake/sql/ddl-database-overview.md)
@@ -431,13 +432,17 @@
         - [QUERY_HISTORY](/tidb-cloud-lake/sql/query-history.md)
         - [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)
         - [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)
-      - workload group
+      - Workload Group
         - [ALTER WORKLOAD GROUP](/tidb-cloud-lake/sql/alter-workload-group.md)
         - [CREATE WORKLOAD GROUP](/tidb-cloud-lake/sql/create-workload-group.md)
         - [DROP WORKLOAD GROUP](/tidb-cloud-lake/sql/drop-workload-group.md)
         - [Workload Group](/tidb-cloud-lake/sql/workload-group.md)
         - [RENAME WORKLOAD GROUP](/tidb-cloud-lake/sql/rename-workload-group.md)
         - [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md)
+      - Table Versioning
+        - [Overview](/tidb-cloud-lake/sql/table-versioning.md)
+        - [CREATE SNAPSHOT TAG](/tidb-cloud-lake/sql/create-snapshot-tag.md)
+        - [DROP SNAPSHOT TAG](/tidb-cloud-lake/sql/drop-snapshot-tag.md)
     - DML Commands
       - [DML Overview](/tidb-cloud-lake/sql/dml.md)
       - [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)
@@ -1135,6 +1140,7 @@
       - [FUSE_SEGMENT](/tidb-cloud-lake/sql/fuse-segment.md)
       - [FUSE_SNAPSHOT](/tidb-cloud-lake/sql/fuse-snapshot.md)
       - [FUSE_STATISTIC](/tidb-cloud-lake/sql/fuse-statistic.md)
+      - [FUSE_TAG](/tidb-cloud-lake/sql/fuse-tag.md)
       - [FUSE_TIME_TRAVEL_SIZE](/tidb-cloud-lake/sql/fuse-time-travel-size.md)
       - [FUSE_VIRTUAL_COLUMN](/tidb-cloud-lake/sql/fuse-virtual-column.md)
       - [System Functions](/tidb-cloud-lake/sql/system-functions-sql.md)
@@ -1170,12 +1176,12 @@
       - [Test Functions](/tidb-cloud-lake/sql/test-functions.md)
       - [SLEEP](/tidb-cloud-lake/sql/sleep.md)
     - Other Functions
+      - [Overview](/tidb-cloud-lake/sql/other-functions.md)
       - [ASSUME_NOT_NULL](/tidb-cloud-lake/sql/assume-not-null.md)
       - [EXISTS](/tidb-cloud-lake/sql/exists.md)
       - [GROUPING](/tidb-cloud-lake/sql/grouping.md)
       - [HUMANIZE_NUMBER](/tidb-cloud-lake/sql/humanize-number.md)
       - [HUMANIZE_SIZE](/tidb-cloud-lake/sql/humanize-size.md)
-      - [Other Functions](/tidb-cloud-lake/sql/other-functions.md)
       - [REMOVE_NULLABLE](/tidb-cloud-lake/sql/remove-nullable.md)
       - [TO_NULLABLE](/tidb-cloud-lake/sql/nullable.md)
       - [TYPEOF](/tidb-cloud-lake/sql/typeof.md)

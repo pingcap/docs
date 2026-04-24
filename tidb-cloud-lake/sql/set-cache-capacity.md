@@ -17,7 +17,7 @@ CALL system$set_cache_capacity('<cache_name>', <new_capacity>)
 
 | Parameter    | Description                                                              |
 |--------------|--------------------------------------------------------------------------|
-| cache_name   | The name of the cache (see the cache list in [system.caches](../../00-sql-reference/31-system-tables/system-caches.md)) |
+| cache_name   | The name of the cache (see the cache list in [system.caches](/tidb-cloud-lake/sql/system-caches.md)) |
 | new_capacity | New capacity value. Unit (count or bytes) depends on the cache type.                                                                 |
 
 ## Notes

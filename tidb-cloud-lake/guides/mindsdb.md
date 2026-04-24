@@ -11,7 +11,7 @@ Both {{{ .lake }}} and {{{ .lake }}} can integrate with MindsDB as a data source
 
 ## Tutorial-1: Integrating {{{ .lake }}} with MindsDB
 
-Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart#1-create-a-mindsdb-cloud-account-or-install-mindsdb-locally>
+Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart-tutorial>.
 
 ### Step 1. Load Dataset into {{{ .lake }}}
 
@@ -100,7 +100,7 @@ WHERE (NO2 = 0.005)
 
 ## Tutorial-2: Integrating {{{ .lake }}} with MindsDB
 
-Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart#1-create-a-mindsdb-cloud-account-or-install-mindsdb-locally>
+Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart-tutorial>.
 
 ### Step 1. Load Dataset into {{{ .lake }}}
 

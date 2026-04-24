@@ -227,9 +227,9 @@ CREATE TABLE t(id INT);
 ALTER TABLE t COMMENT = 'new-comment';
 ```
 
-## Fuse Engine Options {#fuse-engine-options}
+## Fuse Engine Options
 
-Sets or unsets [Fuse Engine options](/tidb-cloud-lake/sql/table-engines.md#available-engines) for a table.
+Sets or unsets [Fuse Engine options](/tidb-cloud-lake/sql/fuse-engine-tables.md#fuse-engine-options) for a table.
 
 ### Syntax
 
@@ -356,7 +356,22 @@ CREATE CONNECTION s3_role_conn
 ALTER TABLE sales_data CONNECTION=( connection_name = 's3_role_conn' );
 ```
 
-## Swap Tables {#swap-tables}
+## Snapshot Tag Operations
+
+<FunctionDescription description="Introduced or updated: v1.2.891"/>
+
+Creates or drops a named snapshot tag that references a specific FUSE table snapshot. Snapshot tags let you bookmark a point-in-time state of a table so you can query it later with the [AT](/tidb-cloud-lake/sql/at.md) clause.
+
+For full details, see:
+
+- [CREATE SNAPSHOT TAG](/tidb-cloud-lake/sql/create-snapshot-tag.md)
+- [DROP SNAPSHOT TAG](/tidb-cloud-lake/sql/drop-snapshot-tag.md)
+
+> **Note:**
+>
+> Snapshot tags are different from [governance tags](#tag-operations). Snapshot tags bookmark a table snapshot for time travel, while governance tags attach key-value metadata to objects for classification.
+
+## Swap Tables
 
 Swaps all table metadata and data between two tables atomically in a single transaction. This operation exchanges the table schemas, including all columns, constraints, and data, effectively making each table take on the identity of the other.
 

@@ -24,7 +24,7 @@ FROM { [<database_name>.]<table_name> | ( <query> ) }
 [ PARTITION BY ( <expr> ) ]
 [ FILE_FORMAT = (
          FORMAT_NAME = '<your-custom-format>'
-         | TYPE = { CSV | TSV | NDJSON | PARQUET } [ formatTypeOptions ]
+         | TYPE = { CSV | TSV | NDJSON | PARQUET | LANCE } [ formatTypeOptions ]
        ) ]
 [ copyOptions ]
 [ VALIDATION_MODE = RETURN_ROWS ]
@@ -122,6 +122,8 @@ For the connection parameters available for accessing Tencent Cloud Object Stora
 
 See [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md) for details.
 
+`LANCE` is supported only in `COPY INTO <location>`. {{{ .lake}}} writes a Lance dataset directory under the target path, not a standalone file.
+
 ### PARTITION BY
 
 Specifies an expression used to partition the unloaded data into separate folders. The expression must evaluate to a `STRING` type. Each distinct value produced by the expression creates a subfolder in the destination path, and the corresponding rows are written into files under that subfolder.
@@ -156,6 +158,13 @@ copyOptions ::=
 | OVERWRITE        | false                  | When `true`, existing files with the same name at the target path will be overwritten. Note: `OVERWRITE = true` requires `USE_RAW_PATH = true` and `INCLUDE_QUERY_ID = false`. |
 | INCLUDE_QUERY_ID | true                   | When `true`, a unique UUID will be included in the exported file names.                                                                                                        |
 | USE_RAW_PATH     | false                  | When `true`, the exact user-provided path (including the full file name) will be used for exporting the data. If set to `false`, the user must provide a directory path.       |
+
+> **Note:**
+>
+> - With `TYPE = LANCE`, `SINGLE` is not supported.
+> - With `TYPE = LANCE`, `PARTITION BY` is not supported.
+> - With `TYPE = LANCE`, `USE_RAW_PATH = TRUE` is recommended when you want a stable dataset URI for downstream Lance readers.
+> - With `TYPE = LANCE` and `USE_RAW_PATH = FALSE`, {{{ .lake}}} appends the query ID to the target path and creates a separate dataset root for each export.
 
 ### DETAILED_OUTPUT
 
@@ -350,3 +359,31 @@ SELECT name FROM list_stage(location => '@partitioned_stage') ORDER BY name;
 ```
 
 When the partition expression evaluates to `NULL`, the data is placed in a `_NULL_` folder. Each unique partition value creates its own subfolder containing the corresponding data files.
+
+### Example 5: Unloading to a Lance Dataset
+
+This example unloads data as a Lance dataset directory instead of standalone files:
+
+```sql
+CREATE STAGE ml_stage;
+
+COPY INTO @ml_stage/datasets/train
+FROM (
+    SELECT number, number + 1 AS label
+    FROM numbers(10)
+)
+FILE_FORMAT = (TYPE = LANCE)
+USE_RAW_PATH = TRUE
+OVERWRITE = TRUE
+DETAILED_OUTPUT = TRUE;
+```
+
+The output path will contain a Lance dataset layout with entries similar to:
+
+```text
+datasets/train/_versions/...
+datasets/train/data/... .lance
+datasets/train/*.manifest
+```
+
+For a complete end-to-end example, including validation with Python `lance`, see [Unloading Lance Dataset](/tidb-cloud-lake/guides/unload-lance-dataset.md).

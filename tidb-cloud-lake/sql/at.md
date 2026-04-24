@@ -34,6 +34,7 @@ AT (
 | TIMESTAMP | Specifies a particular timestamp to retrieve data from.                                                                                                                                                                                                                                                          |
 | STREAM    | Indicates querying the data at the time the specified stream was created.                                                                                                                                                                                                                                        |
 | OFFSET    | Specifies the number of seconds to go back from the current time. It should be in the form of a negative integer, where the absolute value represents the time difference in seconds. For example, `-3600` represents traveling back in time by 1 hour (3,600 seconds). |
+| TAG       | Specifies a named tag created by `ALTER TABLE ... CREATE TAG` to query the snapshot associated with that tag. This is an experimental feature and requires `SET enable_experimental_table_ref = 1`. See [Snapshot Tag Operations](/tidb-cloud-lake/sql/alter-table.md#snapshot-tag-operations). |
 
 ## Obtaining Snapshot ID and Timestamp
 
@@ -53,7 +54,7 @@ This example demonstrates the AT clause, allowing retrieval of previous data ver
 
     ```sql
     CREATE TABLE t(a INT);
-    
+
     INSERT INTO t VALUES(1);
     INSERT INTO t VALUES(2);
     ```
@@ -62,7 +63,7 @@ This example demonstrates the AT clause, allowing retrieval of previous data ver
 
     ```sql
     CREATE STREAM s ON TABLE t;
-    
+
     INSERT INTO t VALUES(3);
     ```
 
