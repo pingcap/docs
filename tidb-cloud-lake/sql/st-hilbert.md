@@ -27,7 +27,7 @@ ST_HILBERT(<geometry_or_geography>, <bounds>)
 
 > **Note:**
 >
-> - Geometry: If no bounding box is provided, GEOMETRY coordinates are not normalized to a specific bounding box. Instead, the center point values are mapped to the full float32 domain, and then encoded into the Hilbert index.
+> - Geometry: If no bounding box is provided, GEOMETRY coordinates are not normalized to a specific bounding box. Instead, the center point values are mapped to the full `float32` domain, and then encoded into the Hilbert index.
 > - Geography: If no bounding box is provided, the default bounds are `[-180, -90, 180, 90]`.
 
 ## Return Type
