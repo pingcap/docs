@@ -22,7 +22,7 @@ With just a few lines of code, you can create a search system that understands b
 Before you begin, ensure you have the following:
 
 - **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 - **Jina AI API key**: You can get a free API key from [Jina AI Embeddings](https://jina.ai/embeddings/).
 
 ## How to run
@@ -46,7 +46,7 @@ pip install -r reqs.txt
 
 ### Step 3. Set environment variables
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 3. Set environment variables according to the connection parameters as follows:
 

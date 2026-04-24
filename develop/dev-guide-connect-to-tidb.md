@@ -20,7 +20,7 @@ TiDB is highly compatible with the MySQL protocol, so you can connect to it usin
 
 - To build applications on TiDB, [choose a driver or ORM](/develop/dev-guide-choose-driver-or-orm.md) based on your programming language and framework.
 
-- To connect to {{{ .starter }}} or {{{ .essential }}} clusters from edge environments via HTTP, use the [TiDB Cloud Serverless Driver](/develop/serverless-driver.md). Note that the serverless driver is in beta and only applicable to {{{ .starter }}} or {{{ .essential }}} clusters.
+- To connect to {{{ .starter }}} or {{{ .essential }}} instances from edge environments via HTTP, use the [TiDB Cloud Serverless Driver](/develop/serverless-driver.md). Note that the serverless driver is in beta and only applicable to {{{ .starter }}} or {{{ .essential }}} instances.
 
 ## Need help?
 
