@@ -235,11 +235,11 @@ If you no longer want to audit an instance, go to the page of the instance, clic
 
 ## Audit logging fields
 
-For each database event record in audit logs, TiDB Cloud provides the following fields:
+For each database event record in audit logs, TiDB Cloud provides the following fields.
 
 ### General information
 
-All classes of audit logs contain the following information:
+All classes of audit logs contain the following fields:
 
 | Field         | Description                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------|
@@ -254,7 +254,7 @@ All classes of audit logs contain the following information:
 
 ### SQL statement information
 
-When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain the following information:
+When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain the following fields:
 
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
@@ -265,7 +265,7 @@ When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain
 
 ### Connection information
 
-When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit logs contain the following information:
+When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit logs contain the following fields:
 
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
@@ -285,7 +285,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 ### Audit operation information
 
-When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:
+When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following fields:
 
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
