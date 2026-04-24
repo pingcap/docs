@@ -102,15 +102,21 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
-<CustomContent plan="premium">
-
 - {{{ .premium }}}
 
     {{{ .premium }}} is designed for mission-critical businesses that demand unlimited real-time scalability. It delivers workload-aware auto-scaling and comprehensive enterprise capabilities.
 
+    <CustomContent language="en,zh">
+
     Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud. 
 
-</CustomContent>
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    Currently, {{{ .premium }}} is in public preview on AWS.
+
+    </CustomContent>
 
 - TiDB Cloud Dedicated
 
