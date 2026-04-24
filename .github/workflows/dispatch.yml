@@ -18,9 +18,11 @@ on:
       - release-5.0
       - release-4.0
       - release-3.0
+      - i18n-zh-release-8.5
 
 jobs:
   trigger:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:

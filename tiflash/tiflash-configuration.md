@@ -65,6 +65,8 @@ This section introduces the configuration parameters of TiFlash.
 
 - The path in which the TiFlash temporary files are stored.
 - By default, it is the first directory in [`path`](#path) or in [`storage.latest.dir`](#dir-1) appended with `"/tmp"`.
+- Starting from v9.0.0, it is recommended that you use the [`storage.temp`](#storagetemp-new-in-v900) configuration instead of `tmp_path`, because it supports setting a capacity limit to control temporary file space usage.
+- When `storage.temp` is configured, the `tmp_path` configuration does not take effect.
 
 <!-- Example: `"/tidb-data/tiflash-9000/tmp"` -->
 
@@ -121,6 +123,24 @@ Configure storage path related settings.
 - The maximum storage capacity of each directory in [`storage.latest.dir`](#dir-1). If it is not set, or is set to multiple `0`, the actual disk (the disk where the directory is located) capacity is used.
 
 <!-- Example: `[10737418240, 10737418240]` -->
+
+#### storage.temp <span class="version-mark">New in v9.0.0</span>
+
+##### `dir`
+
+- The directory in which the temporary spill files generated during query execution are stored.
+- By default, it is the first directory in [`storage.latest.dir`](#dir-1) appended with `"/tmp"`.
+
+##### `capacity`
+
+- Limits the total space usage of the temporary file directory. If the temporary spill files generated during query execution exceed this limit, the query fails with an error.
+- Unit: Byte. Formats such as `"10GB"` are not supported.
+- Range: `[0, 9223372036854775807]`
+- If this value is not set or is set to `0`, temporary files are not subject to a space limit and can use the entire disk capacity.
+- If a value greater than `0` is set, TiFlash performs the following checks at startup:
+    - `storage.temp.capacity` must be less than or equal to the total space of the disk where `storage.temp.dir` is located.
+    - If `storage.temp.dir` is a subdirectory of `storage.main.dir` and `storage.main.capacity` is greater than `0`, then `storage.temp.capacity` must be less than or equal to `storage.main.capacity`. The same check applies if it is a subdirectory of `storage.latest.dir`.
+- This configuration item does not support hot-reloading. You must restart the TiFlash process for changes to take effect.
 
 #### storage.io_rate_limit <span class="version-mark">New in v5.2.0</span>
 
@@ -250,6 +270,13 @@ The following configuration items only take effect for the TiFlash disaggregated
 
 - This configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md).
 - Value options: `"tiflash_write"`, `"tiflash_compute"`
+
+##### `graceful_wait_shutdown_timeout` <span class="version-mark">New in v8.5.4 and v9.0.0</span>
+
+- Controls the maximum wait time when shutting down a TiFlash server. During this period, TiFlash continues running unfinished MPP tasks but does not accept new ones. If all running MPP tasks finish before this timeout, TiFlash shuts down immediately; otherwise, it is forcibly shut down after the wait time expires.
+- Default value: `600`
+- Unit: seconds
+- While the TiFlash server is waiting to shut down (in the grace period), TiDB will not send new MPP tasks to it.
 
 #### flash.proxy
 
@@ -449,6 +476,8 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `enable_resource_control` <span class="version-mark">New in v7.4.0</span>
 
 - Controls whether to enable the TiFlash resource control feature. When it is set to `true`, TiFlash uses the [pipeline execution model](/tiflash/tiflash-pipeline-model.md).
+- Default value: `true`
+- Value options: `true`, `false`
 
 ##### `task_scheduler_thread_soft_limit` <span class="version-mark">New in v6.0.0</span>
 

@@ -1,6 +1,7 @@
 ---
-title: ProxySQL Integration Guide
+title: Integrate TiDB with ProxySQL
 summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+aliases: ['/tidb/stable/dev-guide-proxysql-integration/','/tidb/dev/dev-guide-proxysql-integration/','/tidbcloud/dev-guide-proxysql-integration/']
 ---
 
 # Integrate TiDB with ProxySQL
@@ -10,7 +11,7 @@ This document provides a high-level introduction to ProxySQL, describes how to i
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
-- [TiDB Developer Guide](/develop/dev-guide-overview.md)
+- [TiDB Developer Guide](https://docs.pingcap.com/developer/)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 
 ## What is ProxySQL?
@@ -37,10 +38,10 @@ The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standa
 
 ## Development environment
 
-This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
+This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB deployment option after you have all the [prerequisites](#prerequisite) in place.
 
 - Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1-integrate-tidb-cloud-with-proxysql)
-- Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2-integrate-tidb-self-hosted-with-proxysql)
+- Option 2: [Integrate TiDB Self-Managed with ProxySQL](#option-2-integrate-tidb-self-managed-with-proxysql)
 
 ### Prerequisites
 
@@ -119,15 +120,15 @@ systemctl start docker
 
 ### Option 1: Integrate TiDB Cloud with ProxySQL
 
-For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a {{{ .starter }}} cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
+For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a {{{ .starter }}} instance. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
-#### Step 1. Create a {{{ .starter }}} cluster
+#### Step 1. Create a {{{ .starter }}} instance
 
-1. [Create a free {{{ .starter }}} cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
-2. Get your cluster hostname, port, and username for later use.
+1. [Create a free {{{ .starter }}} instance](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance). Remember the root password that you set for your {{{ .starter }}} instance.
+2. Get the hostname, port, and username of your {{{ .starter }}} instance for later use.
 
-    1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
-    2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
+    1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
+    2. On the overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is the hostname of your {{{ .starter }}} instance.
 
 #### Step 2. Generate ProxySQL configuration files
 
@@ -221,7 +222,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-    When prompted, enter the endpoint of your cluster for `Serverless Tier Host`, and then enter the username and the password of your cluster.
+    When prompted, enter the endpoint of your {{{ .starter }}} instance for `Serverless Tier Host`, and then enter the username and the password of your {{{ .starter }}} instance.
 
     The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
 
@@ -325,14 +326,14 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     >
     > The `proxysql-prepare.sql` script does the following:
     >
-    > 1. Adds a user using the username and password of your cluster.
+    > 1. Adds a user using the username and password of your {{{ .starter }}} instance.
     > 2. Assigns the user to the monitoring account.
-    > 3. Adds your {{{ .starter }}} cluster to the list of hosts.
-    > 4. Enables a secure connection between ProxySQL and the {{{ .starter }}} cluster.
+    > 3. Adds your {{{ .starter }}} instance to the list of hosts.
+    > 4. Enables a secure connection between ProxySQL and the {{{ .starter }}} instance.
     >
     > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
-    The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the {{{ .starter }}} cluster is established.
+    The following is an example output. You will see that the hostname of your {{{ .starter }}} instance is shown in the output, which means that the connectivity between ProxySQL and the {{{ .starter }}} instance is established.
 
     ```
     *************************** 1. row ***************************
@@ -350,9 +351,9 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
                 comment:
     ```
 
-#### Step 4. Connect to your TiDB cluster through ProxySQL
+#### Step 4. Connect to TiDB through ProxySQL
 
-1. To connect to your TiDB cluster, run `proxysql-connect.py`. The script will automatically launch the MySQL client and use the username and password you specified in [Step 2](#step-2-generate-proxysql-configuration-files) for connection.
+1. To connect to your {{{ .starter }}} instance, run `proxysql-connect.py`. The script will automatically launch the MySQL client and use the username and password you specified in [Step 2](#step-2-generate-proxysql-configuration-files) for connection.
 
     <SimpleTab groupId="os">
 
@@ -382,17 +383,17 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-2. After connecting to your TiDB cluster, you can use the following SQL statement to validate the connection:
+2. After connecting to your {{{ .starter }}} instance, you can use the following SQL statement to validate the connection:
 
     ```sql
     SELECT VERSION();
     ```
 
-    If the TiDB version is displayed, you are successfully connected to your {{{ .starter }}} cluster through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
+    If the TiDB version is displayed, you are successfully connected to your {{{ .starter }}} instance through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
 
     > **Note:**
     >
-    > ***For Debugging:*** If you are unable to connect to the cluster, check the files `tidb-cloud-connect.cnf`, `proxysql-prepare.sql`, and `proxysql-connect.py`. Make sure that the server information you provided is available and correct.
+    > ***For Debugging:*** If you are unable to connect to the {{{ .starter }}} instance, check the files `tidb-cloud-connect.cnf`, `proxysql-prepare.sql`, and `proxysql-connect.py`. Make sure that the server information you provided is available and correct.
 
 3. To stop and remove containers, and go to the previous directory, run the following command:
 
@@ -427,9 +428,9 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-### Option 2: Integrate TiDB (self-hosted) with ProxySQL
+### Option 2: Integrate TiDB Self-Managed with ProxySQL
 
-For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
+For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB Self-Managed](/quick-start-with-tidb.md) in your own interest.
 
 The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` respectively, so make sure these ports are available.
 
@@ -581,7 +582,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </SimpleTab>
 
-6. After connecting to your TiDB cluster, you can use the following SQL statement to validate the connection:
+6. After connecting to your TiDB Self-Managed cluster, you can use the following SQL statement to validate the connection:
 
     ```sql
     SELECT VERSION();
@@ -638,7 +639,7 @@ For a full list of supported platforms and the corresponding version requirement
 
 #### Step 1. Create a TiDB Cloud Dedicated cluster
 
-For detailed steps, see [Create a TiDB Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
+For detailed steps, see [Create a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
 
 #### Step 2. Install ProxySQL
 
@@ -687,7 +688,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
     The above step will take you to the ProxySQL admin prompt.
 
-2. Configure the TiDB clusters to be used, where you can add one or multiple TiDB clusters to ProxySQL. The following statement will add one TiDB Cloud Dedicated cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud endpoint and port (the default port is `4000`).
+2. Configure the TiDB Cloud Dedicated clusters to be used, where you can add one or multiple TiDB Cloud Dedicated clusters to ProxySQL. The following statement will add one TiDB Cloud Dedicated cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud Dedicated endpoint and port (the default port is `4000`).
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -704,10 +705,10 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
     > **Note:**
     >
     > - `hostgroup_id`:  specify an ID of the hostgroup. ProxySQL manages clusters using hostgroup. To distribute SQL traffic to these clusters evenly, you can configure several clusters that need load balancing to the same hostgroup. To distinguish the clusters, such as for read and write purposes, you can configure them to use different hostgroups.
-    > - `hostname`: the endpoint of the TiDB cluster.
-    > - `port`: the port of the TiDB cluster.
+    > - `hostname`: the endpoint of the TiDB Cloud Dedicated cluster.
+    > - `port`: the port of the TiDB Cloud Dedicated cluster.
 
-3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB cluster. In the following statements, you need to replace '*tidb cloud dedicated cluster username*' and '*tidb cloud dedicated cluster password*' with the actual username and password of your cluster.
+3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB Cloud Dedicated cluster. In the following statements, you need to replace '*tidb cloud dedicated cluster username*' and '*tidb cloud dedicated cluster password*' with the actual username and password of your TiDB Cloud Dedicated cluster.
 
     ```sql
     INSERT INTO mysql_users(
@@ -775,8 +776,8 @@ This option should only be considered as an alternate method for configuring Pro
 
     In the preceding example:
 
-    - `address` and `port`: specify the endpoint and port of your TiDB Cloud cluster.
-    - `username` and `password`: specify the username and password of your TiDB Cloud cluster.
+    - `address` and `port`: specify the endpoint and port of your TiDB Cloud Dedicated cluster.
+    - `username` and `password`: specify the username and password of your TiDB Cloud Dedicated cluster.
 
 3. Restart ProxySQL:
 
@@ -802,7 +803,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 > **Note:**
 >
-> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2-integrate-tidb-self-hosted-with-proxysql) for detailed steps.
+> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2-integrate-tidb-self-managed-with-proxysql) for detailed steps.
 
 1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL. Skip this step if you have already cloned it in the previous steps.
 
@@ -1128,14 +1129,6 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

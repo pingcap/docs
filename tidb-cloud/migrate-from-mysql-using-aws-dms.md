@@ -97,7 +97,7 @@ Before you start the migration, make sure you have read the following:
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2. In the TiDB Cloud console, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
+2. In the TiDB Cloud console, go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
 
 3. Under **Step 1: Create traffic filter** in the dialog, click **Edit**, enter the public and private network IP addresses that you copied from the AWS DMS console, and then click **Update Filter**. It is recommended to add the public IP address and private IP address of the AWS DMS replication instance to the TiDB cluster traffic filter at the same time. Otherwise, AWS DMS might not be able to connect to the TiDB cluster in some scenarios.
 
@@ -181,8 +181,8 @@ If you encounter any issues or failures during the migration, you can check the 
 
 ## See also
 
-- If you want to learn more about how to connect AWS DMS to TiDB Cloud Serverless or TiDB Cloud Dedicated, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+- If you want to learn more about how to connect AWS DMS to TiDB Cloud, see [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
 
 - If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration on TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
-- If you want to migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Using AWS DMS, see [Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md).
+- If you want to migrate from Amazon RDS for Oracle to TiDB Cloud using AWS DMS, see [Migrate from Amazon RDS for Oracle to TiDB Cloud using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md).

@@ -62,6 +62,7 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `--tikv-max-restore-concurrency`: the maximum number of concurrent tasks per TiKV node during snapshot restore.
 * `--compression`: determines the compression algorithm used for generating backup files. It supports `lz4`, `snappy`, and `zstd`, with the default being `zstd` (usually no need to modify). For guidance on choosing different compression algorithms, refer to [this document](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md).
 * `--compression-level`: sets the compression level corresponding to the chosen compression algorithm for backup. The default compression level for `zstd` is 3. In most cases there is no need to set this option.
+* `--checksum`: controls whether to perform table-level checksum verification during backup and restore. The default value is `false`, meaning that checksum verification is not performed. For more details, see [Checksum](/br/br-snapshot-manual.md#checksum).
 
 ## Commands of full backup
 

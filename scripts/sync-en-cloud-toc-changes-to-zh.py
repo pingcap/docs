@@ -31,7 +31,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # ========== AI Configuration ==========
-MODEL_NAME = "gemini-2.0-flash"
+MODEL_NAME = "gemini-2.5-flash"
 genai_token = os.getenv("GEMINI_API_TOKEN")
 if not genai_token:
     logger.error("GEMINI_API_TOKEN environment variable must be set")

@@ -21,7 +21,7 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 
 > **Note:**
 >
-> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) only support `LOAD DATA LOCAL INFILE`.
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) only support `LOAD DATA LOCAL INFILE`.
 
 </CustomContent>
 
@@ -32,6 +32,9 @@ LoadDataStmt ::=
     'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
 
 LocalOpt ::= ('LOCAL')?
+
+DuplicateOpt ::=
+    ( 'IGNORE' | 'REPLACE' )?
 
 Fields ::=
     ('TERMINATED' 'BY' stringLit
@@ -59,6 +62,15 @@ If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data
     ```
     mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
     ```
+
+### `REPLACE` and `IGNORE`
+
+You can use `REPLACE` and `IGNORE` to specify how duplicate data is handled. 
+
+- `REPLACE`: existing data is overwritten.
+- `IGNORE`: duplicate rows are ignored, keeping existing data.
+
+By default, duplicate data leads to errors.
 
 ### S3 and GCS storage
 

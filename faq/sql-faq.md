@@ -247,7 +247,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL Execution
 
-This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md).
+This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/best-practices/ddl-introduction.md).
 
 ### How long does it take to perform various DDL operations?
 
@@ -359,7 +359,7 @@ When `connectionCollation` is not configured in the JDBC URL, there are two scen
 
 In TiDB v7.4 and earlier versions, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the TiDB [`collation_connection`](/system-variables.md#collation_connection) variable defaults to the `utf8mb4_bin` collation.
 
-Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the value of the [`collation_connection`](/system-variables.md#collation_connection) variable depends on the JDBC driver version. For example, for Connector/J 8.0.26 and later versions, the JDBC driver defaults to the `utf8mb4` character set and uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver, and the [`collation_connection`](/system-variables.md#collation_connection) variable uses the `utf8mb4_0900_ai_ci` collation. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
+Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the value of the [`collation_connection`](/system-variables.md#collation_connection) variable depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
 
 When upgrading from an earlier version to v7.4 or later (for example, from v6.5 to v7.5), if you need to maintain the `collation_connection` as `utf8mb4_bin` for JDBC connections, it is recommended to configure the `connectionCollation` parameter in the JDBC URL.
 

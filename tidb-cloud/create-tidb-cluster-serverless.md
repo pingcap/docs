@@ -1,11 +1,11 @@
 ---
-title: Create a TiDB Cloud Serverless Cluster
-summary: Learn how to create your TiDB Cloud Serverless cluster.
+title: Create a {{{ .starter }}} or Essential Instance
+summary: Learn how to create a {{{ .starter }}} or {{{ .essential }}} instance.
 ---
 
-# Create a TiDB Cloud Serverless Cluster
+# Create a {{{ .starter }}} or Essential Instance
 
-This document describes how to create a TiDB Cloud Serverless cluster in the [TiDB Cloud console](https://tidbcloud.com/).
+This document describes how to create a {{{ .starter }}} or {{{ .essential }}} instance in the [TiDB Cloud console](https://tidbcloud.com/).
 
 > **Tip:**
 >
@@ -15,39 +15,63 @@ This document describes how to create a TiDB Cloud Serverless cluster in the [Ti
 
 If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
 
+<CustomContent language="en,zh">
+
+- You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
+- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Alibaba Cloud Marketplace users, you can also sign up through Alibaba Cloud Marketplace. To do that, search for `TiDB Cloud` in [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
 - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
+</CustomContent>
+
 ## Steps
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Serverless cluster as follows:
+If you are in the `Organization Owner` or the `Project Owner` role, you can create a {{{ .starter }}} or {{{ .essential }}} instance as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-2. Click **Create Cluster**.
+2. Click **Create Resource**.
 
-3. On the **Create Cluster** page, **Serverless** is selected by default.
+3. Select a plan.
 
-4. The cloud provider of TiDB Cloud Serverless is AWS. You can select an AWS region where you want to host your cluster.
+    You can start with a **Starter** instance and later upgrade to an **Essential** instance as your needs grow. For more information, see [Select a Plan](/tidb-cloud/select-cluster-tier.md).
 
-5. Update the default cluster name if necessary.
+4. Enter a name for your instance, and then choose a cloud provider and a region where you want to host your instance.
 
-6. Select a cluster plan. TiDB Cloud Serverless provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Free Cluster** and **Scalable Cluster**. You can start with a free cluster and later upgrade to a scalable cluster as your needs grow. To create a scalable cluster, you need to specify a **Monthly Spending Limit** and add a credit card.
+5. (Optional) To group this instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
 
-    > **Note:**
-    >
-    > For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+6. Update the capacity of the instance.
+
+    - **Starter** plan:
+
+        - You can update the spending limit for your {{{ .starter }}} instance. If the spending limit is set to 0, the instance remains free. If the spending limit is greater than 0, you need to add a credit card before creating the {{{ .starter }}} instance.
+
+        - By default, each organization can create up to five [free {{{ .starter }}} instances](/tidb-cloud/select-cluster-tier.md#starter). To create additional {{{ .starter }}} instances, you must add a credit card and specify a spending limit.
+
+    - **Essential** plan:
+
+        - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your {{{ .essential }}} instance.
+
+        - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your {{{ .essential }}} instance within this range based on demand.
 
 7. Click **Create**.
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
+    The instance creation process starts and your instance will be created in approximately 30 seconds.
 
 ## What's next
 
-After your cluster is created, follow the instructions in [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+After your {{{ .starter }}} or Essential instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your instance.
 
 > **Note:**
 >
-> If you do not set a password, you cannot connect to the cluster.
+> If you do not set a password, you cannot connect to the {{{ .starter }}} or Essential instance.

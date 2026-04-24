@@ -402,7 +402,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - The database related passwords in all the DM configuration files should be encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt the password. Cleartext passwords can be used since v1.0.6.
     - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](/dm/dm-precheck.md) automatically while starting the data replication task.
-    - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5) in Chinese.
+    - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5) in Chinese.
 
 - 6.1.3 A replication task is interrupted with the `driver: bad connection` error returned.
 

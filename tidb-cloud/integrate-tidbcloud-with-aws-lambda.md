@@ -1,20 +1,24 @@
 ---
-title: Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
-summary: Introduce how to integrate TiDB Cloud Serverless with Amazon Lambda and CloudFormation step by step.
+title: Integrate {{{ .starter }}} with Amazon Lambda Using AWS CloudFormation
+summary: Introduce how to integrate {{{ .starter }}} with Amazon Lambda and CloudFormation step by step.
 ---
 
-# Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
+# Integrate {{{ .starter }}} with Amazon Lambda Using AWS CloudFormation
 
-This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [AWS Lambda](https://aws.amazon.com/lambda/), a serverless and event-driven compute service. By integrating TiDB Cloud Serverless with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through TiDB Cloud Serverless and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [{{{ .starter }}}](https://www.pingcap.com/tidb-cloud-starter/), a cloud-native distributed SQL database, with [AWS Lambda](https://aws.amazon.com/lambda/), a serverless and event-driven compute service. By integrating {{{ .starter }}} with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through {{{ .starter }}} and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+
+> **Note:**
+>
+> In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 
 ## Solution overview
 
 In this guide, you will create a fully functional online bookshop with the following components:
 
-- AWS Lambda Function: handles requests and queries data from a TiDB Cloud Serverless cluster using Sequelize ORM and Fastify API framework.
-- AWS Secrets Manager SDK: retrieves and manages connection configurations for the TiDB Cloud Serverless cluster.
+- AWS Lambda Function: handles requests and queries data from a {{{ .starter }}} instance using Sequelize ORM and Fastify API framework.
+- AWS Secrets Manager SDK: retrieves and manages connection configurations for the {{{ .starter }}} instance.
 - AWS API Gateway: handles HTTP request routes.
-- TiDB Cloud Serverless: a cloud-native distributed SQL database.
+- {{{ .starter }}}: a cloud-native distributed SQL database.
 
 AWS CloudFormation is used to create the necessary resources for the project, including the Secrets Manager, API Gateway, and Lambda Functions.
 
@@ -33,7 +37,7 @@ Before getting started, ensure that you have the following:
     - [Lambda services](https://aws.amazon.com/lambda/)
     - [S3](https://aws.amazon.com/s3/)
     - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- A [TiDB Cloud](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster. Get the connection information for your TiDB Cloud Serverless cluster:
+- A [TiDB Cloud](https://tidbcloud.com) account and a {{{ .starter }}} instance. Get the connection information for your {{{ .starter }}} instance:
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
@@ -42,13 +46,13 @@ Before getting started, ensure that you have the following:
 
 > **Note:**
 >
-> - When you create the AWS resources, it is recommended to use `us-east-1` as your cluster region. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
+> - When you create the AWS resources, it is recommended to use `us-east-1` as your region. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
 > - If you use a different region, you need to follow the following instructions to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
 <details>
 <summary>Modify and rebuild the Lambda function code if you use a region other than <code>us-east-1</code></summary>
 
-If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-bookshop-project-using-aws-cloudformation).
+If you use `us-east-1` as your region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-bookshop-project-using-aws-cloudformation).
 
 If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
@@ -119,14 +123,14 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
     3. Specify stack details.
 
-        - If you use `us-east-1` as your cluster region, fill in the fields as in the following screenshot:
+        - If you use `us-east-1` as your region, fill in the fields as in the following screenshot:
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
             - **Stack name**: enter the stack name.
             - **S3Bucket**: enter the S3 bucket where you store the zip file.
             - **S3Key**: enter the S3 key.
-            - **TiDBDatabase**: enter the TiDB Cloud cluster name.
+            - **TiDBDatabase**: enter the {{{ .starter }}} instance name.
             - **TiDBHost**: enter the host URL for TiDB Cloud database access. Enter `localhost`.
             - **TiDBPassword**: enter the password for TiDB Cloud database access.
             - **TiDBPort**: enter the port for TiDB Cloud database access.

@@ -3,7 +3,7 @@ title: SHOW DISTRIBUTION JOBS
 summary: An overview of the usage of SHOW DISTRIBUTION JOBS for the TiDB database.
 ---
 
-# SHOW DISTRIBUTION JOBS <span class="version-mark">New in v9.0.0</span>
+# SHOW DISTRIBUTION JOBS <span class="version-mark">New in v8.5.4 and v9.0.0</span>
 
 The `SHOW DISTRIBUTION JOBS` statement shows all current Region distribution jobs.
 
@@ -11,7 +11,7 @@ The `SHOW DISTRIBUTION JOBS` statement shows all current Region distribution job
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 </CustomContent>
 

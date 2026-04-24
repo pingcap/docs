@@ -20,20 +20,20 @@ You are expected to have a Netlify account and CLI. If you do not have any, refe
 * [Sign up for a Netlify account](https://app.netlify.com/signup).
 * [Get Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
-### A TiDB Cloud account and a TiDB cluster
+### A TiDB Cloud account and a TiDB Cloud resource
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+You are expected to have an account and a TiDB Cloud resource. If you do not have any, refer to the following to create one:
 
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a {{{ .starter }}} or {{{ .essential }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
-One TiDB Cloud cluster can connect to multiple Netlify sites.
+One TiDB Cloud resource can connect to multiple Netlify sites.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
 
 For TiDB Cloud Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection. This is because Netlify deployments use dynamic IP addresses.
 
-TiDB Cloud Serverless clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
+{{{ .starter }}} and {{{ .essential }}} instances allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
 ## Step 1. Get the example project and the connection string
 
@@ -52,7 +52,7 @@ To help you get started quickly, TiDB Cloud provides a fullstack example app in 
 
 ### Get the TiDB Cloud connection string
 
-For a TiDB Cloud Serverless cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
+For a {{{ .starter }}} or {{{ .essential }}} instance, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
 
 For a TiDB Cloud Dedicated cluster, you can get the connection string only from the TiDB Cloud console.
 
@@ -63,13 +63,13 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
 >
 > If you have not installed Cloud CLI, refer to [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) for quick installation before taking the following steps.
 
-1. Get the connection string of a cluster in interactive mode:
+1. Get the connection string of a {{{ .starter }}} or {{{ .essential }}} instance in interactive mode:
 
     ```shell
     ticloud cluster connect-info
     ```
 
-2. Follow the prompts to select your cluster, client, and operating system. Note that the client used in this document is `Prisma`.
+2. Follow the prompts to select your {{{ .starter }}} or {{{ .essential }}} instance, client, and operating system. Note that the client used in this document is `Prisma`.
 
     ```
     Choose the cluster
@@ -99,7 +99,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
 </div>
 <div label="TiDB Cloud console">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
@@ -177,7 +177,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
+3. Set environment variables. To connect to your TiDB Cloud from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
 
     ```shell
     # set the environment variable for your own space
@@ -197,7 +197,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify env:list
     ```
 
-4. Build the app locally and migrate the schema to your TiDB Cloud cluster.
+4. Build the app locally and migrate the schema to your TiDB Cloud resource.
 
     > **Tips:**
     >
@@ -226,23 +226,23 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
 
 ## Use the edge function
 
-The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
+The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/develop/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
 
 To use the edge function, take the following steps:
 
-1. Create a directory named `netlify/edge-functions` in the root directory of your project. 
+1. Create a directory named `netlify/edge-functions` in the root directory of your project.
 
 2. Create a file named `hello.ts` in the directory and add the following code:
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
-    
+
     export default async () => {
       const conn = connect({url: Netlify.env.get('DATABASE_URL')})
       const result = await conn.execute('show databases')
       return new Response(JSON.stringify(result));
     }
-   
+
     export const config = { path: "/api/hello" };
     ```
 

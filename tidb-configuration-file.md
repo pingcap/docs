@@ -616,6 +616,10 @@ Configuration items related to performance.
 
 ### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
 
+> **Warning:**
+>
+> Starting from v9.0.0, the `concurrently-init-stats` configuration item is deprecated and TiDB always initializes statistics concurrently during startup.
+
 + Controls whether to initialize statistics concurrently during TiDB startup. This configuration item takes effect only when [`lite-init-stats`](#lite-init-stats-new-in-v710) is set to `false`.
 + Default value: `false` for versions earlier than v8.2.0, `true` for v8.2.0 and later versions.
 
@@ -642,6 +646,11 @@ Configuration items related to performance.
 + Controls whether to skip statistics initialization during TiDB startup.
 + Default value: `false`
 + When the value of `skip-init-stats` is `true`, TiDB skips statistics initialization during startup and does not load statistics afterward. It is useful if you need to start TiDB quickly without waiting for statistics initialization, especially when there are a large number of tables and partitions. However, it is intended for maintenance only. In most cases, do not set this configuration item to `true`; otherwise, the optimizer might generate suboptimal execution plans due to missing statistics.
+
+### `enable-async-batch-get` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. Using asynchronous mode can reduce goroutine overhead and provide better performance. Generally, there is no need to modify this configuration item.
++ Default value: `true` for v9.0.0 and later versions. In v8.5.5, the default value is `false`.
 
 ## opentracing
 

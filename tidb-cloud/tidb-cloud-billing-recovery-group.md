@@ -11,4 +11,4 @@ TiDB Cloud also bills for data processing per GiB basis. The data processing pri
 
 ## Pricing
 
-To learn about the supported regions and the pricing for TiDB Cloud recovery groups, see [Recovery Group Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#recovery-group-cost).
+To learn about the supported regions and the pricing for TiDB Cloud recovery groups, see [Recovery Group Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#recovery-group-cost).

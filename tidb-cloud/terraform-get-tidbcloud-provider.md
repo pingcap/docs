@@ -35,7 +35,7 @@ For other operating systems, see [Terraform documentation](https://learn.hashico
 
 TiDB Cloud API uses HTTP Digest Authentication. It protects your private key from being sent over the network.
 
-Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/project/clusters).
+Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/).
 
 For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
@@ -126,4 +126,4 @@ Setting `sync` to `true` is recommended, but note that `sync` currently only wor
 
 ## Next step
 
-Get started by managing a cluster with the [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).
+Get started by managing a cluster with the [`tidbcloud_serverless_cluster`](/tidb-cloud/terraform-use-serverless-cluster-resource.md) or [`tidbcloud_dedicated_cluster`](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) resource.

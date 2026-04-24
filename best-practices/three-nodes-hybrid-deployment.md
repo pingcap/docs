@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Three-Node Hybrid Deployment
 summary: TiDB cluster can be deployed in a cost-effective way on three machines. Best practices for this hybrid deployment include adjusting parameters for stability and performance. Limiting resource consumption and adjusting thread pool sizes are key to optimizing the cluster. Adjusting parameters for TiKV background tasks and TiDB execution operators is also important.
+aliases: ['/tidb/stable/three-nodes-hybrid-deployment/','/tidb/dev/three-nodes-hybrid-deployment/']
 ---
 
 # Best Practices for Three-Node Hybrid Deployment
@@ -61,7 +62,7 @@ The default value of this parameter is 80% of the number of machine threads. In 
 
 #### `server.grpc-concurrency`
 
-This parameter defaults to `4`. Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
+Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency), and keep the usage rate below 80%.
 
 In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
 

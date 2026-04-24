@@ -8,21 +8,21 @@ aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 
 On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to TiDB Cloud Dedicated clusters. You can configure multiple TLS connections from your client, application, and development tools to your TiDB Cloud Dedicated cluster to protect data transmission security. For security reasons, TiDB Cloud Dedicated only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
-To ensure data security, TiDB cluster CA for your TiDB Cloud Dedicated cluster is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), and TiDB cluster private keys are stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+To ensure data security, the CA certificate for your TiDB Cloud Dedicated cluster is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of the CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## Prerequisites
 
 - Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
-- Set a password to access your cluster in secure settings.
+- Set a password to access your TiDB Cloud Dedicated cluster in secure settings.
 
-    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your TiDB Cloud Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
+    To do so, you can navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the row of your TiDB Cloud Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
 
 ## Secure connection to a TiDB Cloud Dedicated cluster
 
 In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Cloud Dedicated cluster as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your TiDB Cloud Dedicated cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
@@ -37,7 +37,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     > - You can store the downloaded CA cert in the default storage path of your operating system, or specify another storage path. You need to replace the CA cert path in the code example with your own CA cert path in the subsequent steps.
     > - TiDB Cloud Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Cloud Dedicated.
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your TiDB Cloud Dedicated cluster.
 
 The following examples show the connection strings in MySQL, MyCLI, JDBC, Python, Go, and Node.js:
 
@@ -284,7 +284,7 @@ Parameter descriptions：
 
 ## Manage root certificates for TiDB Cloud Dedicated
 
-TiDB Cloud Dedicated uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Dedicated clusters. Usually, the root certificates of ACM are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+TiDB Cloud Dedicated uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Dedicated clusters. Usually, the private key of the CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## FAQs
 

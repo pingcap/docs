@@ -1,6 +1,7 @@
 ---
 title: Transaction Restraints
 summary: Learn about transaction restraints in TiDB.
+aliases: ['/tidb/stable/dev-guide-transaction-restraints/','/tidb/dev/dev-guide-transaction-restraints/','/tidbcloud/dev-guide-transaction-restraints/']
 ---
 
 # Transaction Restraints
@@ -683,7 +684,7 @@ mysql> SELECT * FROM doctors;
 
 > **Note:**
 >
-> Starting from v6.2.0, TiDB supports the [`savepoint`](/sql-statements/sql-statement-savepoint.md) feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. It is recommended to upgrade to v6.2.0 or a later version. If upgrading TiDB is not possible, and your applications are based on the **Java Spring** framework that uses the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+> Starting from v6.2.0, TiDB supports the [`savepoint`](/sql-statements/sql-statement-savepoint.md) feature. If your TiDB version is earlier than v6.2.0, it does not support the `PROPAGATION_NESTED` behavior. It is recommended to upgrade to v6.2.0 or a later version. If upgrading TiDB is not possible, and your applications are based on the **Java Spring** framework that uses the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
 
 The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
 
@@ -723,7 +724,7 @@ Note that for both the size restrictions and row restrictions, you should also c
 
 ## Auto-committed `SELECT FOR UPDATE` statements do NOT wait for locks
 
-Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. The effect is shown in the following figure:
+Currently, locks are not added to auto-committed `SELECT FOR UPDATE` statements. The following screenshot shows the effect in two separate sessions:
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
@@ -731,14 +732,6 @@ This is a known incompatibility issue with MySQL. You can solve this issue by us
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

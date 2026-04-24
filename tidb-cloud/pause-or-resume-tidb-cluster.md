@@ -13,7 +13,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 > **Note:**
 >
-> You cannot pause a [TiDB Cloud Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+> You cannot pause a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instance.
 
 ## Limitations
 
@@ -71,12 +71,12 @@ When a cluster is paused, note the following:
 
 To pause a cluster, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of the cluster that you want to pause, click **...**.
+1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+2. In the row of the TiDB Cloud Dedicated cluster that you want to pause, click **...**.
 
     > **Tip:**
     >
-    > Alternatively, you can click the name of the cluster that you want to pause on the **Clusters** page, and then click **...** in the upper-right corner.
+    > Alternatively, you can click the name of the cluster that you want to pause on the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click **...** in the upper-right corner.
 
 3. Click **Pause** in the drop-down menu.
 
@@ -98,8 +98,8 @@ After a paused cluster is resumed, note the following:
 
 To resume a paused cluster, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. For the cluster that you want to resume, click **Resume**. The **Resume your cluster** dialog is displayed.
+1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+2. For the TiDB Cloud Dedicated cluster that you want to resume, click **Resume**. The **Resume your cluster** dialog is displayed.
 
     > **Note:**
     >

@@ -37,18 +37,18 @@ TiDB Cloud Dedicated lets you adjust its compute and storage resources separatel
 
 ## High availability
 
-TiDB Cloud ensures high availability in both TiDB Cloud Serverless and TiDB Cloud Dedicated clusters:
+TiDB Cloud ensures high availability in all supported plans:
 
-- [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md)
-- [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
+- For <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent> <CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+- For TiDB Cloud Dedicated, see [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md).
 
 ## Monitoring
 
-TiDB Cloud provides comprehensive monitoring capabilities for cluster performance and health. [Learn more about monitoring](/tidb-cloud/monitoring-concepts.md).
+TiDB Cloud provides comprehensive monitoring capabilities for TiDB performance and health. [Learn more about monitoring](/tidb-cloud/monitoring-concepts.md).
 
 ## Data streaming
 
-TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems such as Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
+TiDB Cloud lets you stream data changes to other systems such as Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
 
 ## Backup & Restore
 

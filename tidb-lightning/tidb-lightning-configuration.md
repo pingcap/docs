@@ -275,8 +275,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 
 - Specifies the concurrency that TiKV writes KV data in the physical import mode.
 - When the network transmission speed between TiDB Lightning and TiKV exceeds 10 Gigabit, you can increase this value accordingly.
-
-<!-- Example: `16` -->
+- Default value: `16`
 
 #### `store-write-bwlimit`
 

@@ -1,32 +1,37 @@
 ---
 title: TiDB Dashboard Top SQL page
-summary: TiDB Dashboard Top SQL allows real-time monitoring and visualization of CPU overhead for SQL statements in your database. It helps optimize performance by identifying high CPU load statements and provides detailed execution information. It's suitable for analyzing performance issues and can be accessed through TiDB Dashboard or a browser. The feature has a slight impact on cluster performance and is now generally available for production use.
+summary: Use Top SQL to identify queries that consume the most CPU, network, and logical IO resources
 ---
 
 # TiDB Dashboard Top SQL Page
 
-With Top SQL, you can monitor and visually explore the CPU overhead of each SQL statement in your database in real-time, which helps you optimize and resolve database performance issues. Top SQL continuously collects and stores CPU load data summarized by SQL statements at any seconds from all TiDB and TiKV instances. The collected data can be stored for up to 30 days. Top SQL presents you with visual charts and tables to quickly pinpoint which SQL statements are contributing the high CPU load of a TiDB or TiKV instance over a certain period of time.
+On the Top SQL page of TiDB Dashboard, you can view and analyze the most resource-consuming SQL queries on a specified TiDB or TiKV node over a period of time.
+
+- After you enable Top SQL, this feature continuously collects CPU workload data from existing TiDB and TiKV nodes and retains the data for up to 30 days.
+- Starting from v8.5.6 and v9.0.0, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
 
 Top SQL provides the following features:
 
-* Visualize the top 5 types of SQL statements with the highest CPU overhead through charts and tables.
-* Display detailed execution information such as queries per second, average latency, and query plan.
+* Visualize the top `5`, `20`, or `100` SQL queries with the most resource consumption in the current time range through charts and tables, with the remaining records automatically summarized as `Others`.
+* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical IO bytes.
+* Display SQL and execution plan details by query. When selecting a TiKV node, you can also aggregate analysis in dimensions of `By Table`, `By DB`, and `By Region`.
+* Zoom in on a selected time range in the chart, manually refresh data, enable auto refresh, and export table data to CSV.
 * Collect all SQL statements that are executed, including those that are still running.
-* Allow viewing data of a specific TiDB and TiKV instance.
+* Display data of a specific TiDB or TiKV node.
 
 ## Recommended scenarios
 
 Top SQL is suitable for analyzing performance issues. The following are some typical Top SQL scenarios:
 
-* You discovered that an individual TiKV instance in the cluster has a very high CPU usage through the Grafana charts. You want to know which SQL statements cause the CPU hotspots so that you can optimize them and better leverage all of your distributed resources.
-* You discovered that the cluster has a very high CPU usage overall and queries are slow. You want to quickly figure out which SQL statements are currently consuming the most CPU resources so that you can optimize them.
-* The CPU usage of the cluster has drastically changed and you want to know the major cause.
-* Analyze the most resource-intensive SQL statements in the cluster and optimize them to reduce hardware costs.
+* You discovered that an individual TiDB or TiKV node in the cluster has a very high CPU usage. You want to quickly locate which type of SQL is consuming a lot of CPU resources.
+* The overall cluster queries become slow. You want to find out which SQL is currently consuming the most resources, or compare the main query differences before and after the workload changes.
+* You need to locate hotspots from a higher dimension and want to aggregate and view resource consumption on the TiKV side by `Table`, `DB`, or `Region`.
+* You need to troubleshoot TiKV hotspots from the perspective of network traffic or logical IO, not just limited to the CPU dimension.
 
 Top SQL cannot be used in the following scenarios:
 
 - Top SQL cannot be used to pinpoint non-performance issues, such as incorrect data or abnormal crashes.
-- Top SQL does not support analyzing database performance issues that are not caused by high CPU load, such as transaction lock conflicts.
+- Top SQL is not suitable for directly analyzing lock conflicts, transaction semantic errors, or other issues not caused by resource consumption.
 
 ## Access the page
 
@@ -34,9 +39,9 @@ You can access the Top SQL page using either of the following methods:
 
 * After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
 
-  ![Top SQL](/media/dashboard/top-sql-access.png)
+  ![Top SQL](/media/dashboard/v8.5-top-sql-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD node address and port.
 
 ## Enable Top SQL
 
@@ -47,10 +52,10 @@ You can access the Top SQL page using either of the following methods:
 Top SQL is not enabled by default as it has a slight impact on cluster performance (within 3% on average) when enabled. You can enable Top SQL by the following steps:
 
 1. Visit the [Top SQL page](#access-the-page).
-2. Click **Open Settings**. On the right side of the **Settings** area, switch on **Enable Feature**.
+2. Click **Open Settings**. In the **Settings** area on the right side of the page, enable the **Enable Feature** switch.
 3. Click **Save**.
 
-After enabling the feature, wait up to 1 minute for Top SQL to load the data. Then you can see the CPU load details.
+After enabling Top SQL, you can only view data collected starting from this point in time, while historical data before enabling will not be backfilled. Data display usually has a delay of about 1 minute, so you need to wait a moment to see new data. After disabling Top SQL, if historical data has not expired, the Top SQL page still displays this historical data, but new data will no longer be collected or displayed.
 
 In addition to the UI, you can also enable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
@@ -60,56 +65,103 @@ In addition to the UI, you can also enable the Top SQL feature by setting the Ti
 SET GLOBAL tidb_enable_top_sql = 1;
 ```
 
+### (Optional) Enable TiKV Network IO collection <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
+To view Top SQL by `Order By Network` or `Order By Logical IO` for TiKV nodes, or to use the `By Region` aggregation, you can enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in Top SQL settings and save the changes.
+
+- **Order By Network**: Sorts by the number of network bytes generated during TiKV request processing.
+- **Order By Logical IO**: Sorts by the amount of logical data (in bytes) processed by TiKV at the storage layer for TiKV requests, such as the data scanned or processed during reads and the data written by write requests.
+
+As shown in the following screenshot, the right **Settings** panel displays both the **Enable Feature** and **Enable TiKV Network IO collection (multi-dimensional)** switches.
+
+![Enable TiKV Network IO collection](/media/dashboard/v8.5-top-sql-settings-enable-tikv-network-io.png)
+
+**Enabling TiKV Network IO collection (multi-dimensional)** increases storage and query overhead. After enabling, the configuration is delivered to all current TiKV nodes; data display might also have a delay of about 1 minute. If some TiKV nodes fail to enable this feature, the page shows a warning, and new data might be incomplete.
+
+For newly added TiKV nodes, this switch does not take effect automatically. You need to set the **Enable TiKV Network IO collection (multi-dimensional)** switch to all enabled in the Top SQL settings panel and save, so the configuration is delivered to all TiKV nodes again. If you want newly added TiKV nodes to automatically enable this feature, add the following configuration under `server_configs.tikv` in the TiUP cluster topology file and use TiUP to re-deliver the TiKV configuration:
+
+```yaml
+server_configs:
+  tikv:
+    resource-metering.enable-network-io-collection: true
+```
+
+For more information about TiUP topology configuration, see [TiUP cluster topology file configuration](/tiup/tiup-cluster-topology-reference.md).
+
 ## Use Top SQL
 
 The following are the common steps to use Top SQL.
 
 1. Visit the [Top SQL page](#access-the-page).
 
-2. Select a particular TiDB or TiKV instance that you want to observe the load.
+2. Select a particular TiDB or TiKV node that you want to observe the workload.
 
-    ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
+    ![Select a TiDB or TiKV node](/media/dashboard/v8.5-top-sql-usage-select-instance.png)
 
-    If you are unsure of which TiDB or TiKV instance to observe, you can select an arbitrary instance. Also, when the cluster CPU load is extremely unbalanced, you can first use Grafana charts to determine the specific instance you want to observe.
+    If you are not sure which node to observe, you can first locate the node with abnormal workload from Grafana or the [TiDB Dashboard Overview page](/dashboard/dashboard-overview.md), and then return to the Top SQL page for further analysis.
 
-3. Observe the charts and tables presented by Top SQL.
+3. Set the time range and refresh data as needed.
 
-    ![Chart and Table](/media/dashboard/top-sql-usage-chart.png)
+    You can adjust the time range in the time picker or zoom the observation window by selecting a time range in the chart. Setting a smaller time range displays more fine-grained data, with a precision of up to 1 second.
 
-    The size of the bars in the bar chart represents the size of CPU resources consumed by the SQL statement at that moment. Different colors distinguish different types of SQL statements. In most cases, you only need to focus on the SQL statements that have a higher CPU resource overhead in the corresponding time range in the chart.
+    ![Change time range](/media/dashboard/v8.5-top-sql-usage-change-timerange.png)
 
-4. Click a SQL statement in the table to show more information. You can see detailed execution metrics of different plans of that statement, such as Call/sec (average queries per second) and Scan Indexes/sec (average number of index rows scanned per second).
+    If the chart is out of date, click **Refresh** to refresh once, or select the data auto-refresh frequency from the **Refresh** drop-down list.
 
-    ![Details](/media/dashboard/top-sql-details.png)
+    ![Refresh](/media/dashboard/v8.5-top-sql-usage-refresh.png)
 
-5. Based on these initial clues, you can further explore the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page to find the root cause of high CPU consumption or large data scans of the SQL statement.
+4. Select the observation mode.
 
-    You can adjust the time range in the time picker or select a time range in the chart to get a more precise and detailed look at the problem. A smaller time range can provide more detailed data, with precision of up to 1 second.
+    - Use `Limit` to display the Top `5`, `20`, or `100` SQL queries.
+    - The default aggregation dimension is `By Query`. If you select a TiKV node, you can also aggregate in dimensions of `By Table`, `By DB`, or `By Region`.
 
-    ![Change time range](/media/dashboard/top-sql-usage-change-timerange.png)
+        ![Select aggregation dimension](/media/dashboard/v8.5-top-sql-usage-select-agg-by.png)
 
-    If the chart is out of date, you can click the **Refresh** button or select Auto Refresh options from the **Refresh** drop-down list.
+    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856-and-v900), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
 
-    ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
+        ![Select order by](/media/dashboard/v8.5-top-sql-usage-select-order-by.png)
 
-6. View the CPU resource usage by table or database level to quickly identify resource usage at a higher level. Currently, only TiKV instances are supported.
+    > **Note**
+    >
+    > `By Region` and `Order By Network`, `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v856-and-v900) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
 
-    Select a TiKV instance, and then select **By TABLE** or **By DB**:
+5. Observe the resource consumption hotspot records in the chart and table.
 
-    ![Select aggregation dimension](/media/dashboard/top-sql-usage-select-agg-by.png)
+    ![Chart and Table](/media/dashboard/v8.5-top-sql-usage-chart.png)
 
-    View the aggregated results at a higher level:
+    The bar chart shows resource consumption under the current sort dimension, with different colors representing different records. The table displays cumulative values according to the current sort dimension, and provides an `Others` row at the end to summarize all non-Top N records.
 
-    ![Aggregated results at DB level](/media/dashboard/top-sql-usage-agg-by-db-detail.png)
+6. In the `By Query` view, click a row in the table to view the execution plan details for that type of SQL.
+
+    ![Details](/media/dashboard/v8.5-top-sql-details.png)
+
+    In the SQL statement details, you can view the corresponding SQL template, Query template ID, Plan template ID, and execution plan text. The SQL statement details table displays different metrics depending on the node type:
+
+    - TiDB nodes usually show `Call/sec` and `Latency/call`.
+    - TiKV nodes usually show `Call/sec`, `Scan Rows/sec`, and `Scan Indexes/sec`.
+
+    > **Note**
+    >
+    > If you select the `By Table`, `By DB`, or `By Region` aggregation view, the page displays the aggregation results and does not show SQL statement details by SQL execution plan.
+
+    In the `By Query` view, you can also click **Search in SQL Statements** in the Top SQL table to jump to the corresponding SQL Statement Analysis page. If you need to analyze the current table results offline, you can click **Download to CSV** above the table to export the current table data.
+
+7. On TiKV nodes, if you need to locate hotspots from a higher dimension, you can switch to `By Table`, `By DB`, or `By Region` to view the aggregated results.
+
+    ![Aggregated results at DB level](/media/dashboard/v8.5-top-sql-usage-agg-by-db-detail.png)
+
+8. Based on these initial clues, you can further analyze the root cause using the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page.
 
 ## Disable Top SQL
 
 You can disable this feature by following these steps:
 
-1. Visit [Top SQL page](#access-the-page).
-2. Click the gear icon in the upper right corner to open the settings screen and switch off **Enable Feature**.
+1. Visit the [Top SQL page](#access-the-page).
+2. Click the gear icon in the upper right corner to open the settings pane and disable the **Enable Feature** switch.
 3. Click **Save**.
 4. In the popped-up dialog box, click **Disable**.
+
+After you disable Top SQL, new Top SQL data collection will stop, but historical data can still be viewed before it expires.
 
 In addition to the UI, you can also disable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
@@ -119,6 +171,15 @@ In addition to the UI, you can also disable the Top SQL feature by setting the T
 SET GLOBAL tidb_enable_top_sql = 0;
 ```
 
+### Disable TiKV Network IO collection
+
+If you only want to stop collecting multi-dimensional data such as `Network Bytes` and `Logical IO Bytes` for TiKV, while retaining the CPU dimension analysis capability of Top SQL, disable the **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel.
+
+After disabling:
+
+- The Top SQL page can still display previously collected, unexpired historical network IO and logical IO data.
+- New network IO and logical IO data, as well as `By Region` data, will no longer be collected.
+
 ## Frequently asked questions
 
 **1. Top SQL cannot be enabled and the UI displays "required component NgMonitoring is not started"**.
@@ -127,24 +188,37 @@ See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmoni
 
 **2. Will performance be affected after enabling Top SQL?**
 
-This feature has a slight impact on cluster performance. According to our benchmark, the average performance impact is usually less than 3% when the feature is enabled.
+Enabling Top SQL has a slight impact on cluster performance. According to measurements, the average performance impact is less than 3%. If you also enable TiKV Network IO collection (multi-dimensional), there will be additional storage and query overhead.
 
 **3. What is the status of this feature?**
 
 It is now a generally available (GA) feature and can be used in production environments.
 
-**4. What is the meaning of "Other Statements"?**
+**4. What does `Others` mean in the UI?**
 
-"Other Statement" counts the total CPU overhead of all non-Top 5 statements. With this information, you can learn the CPU overhead contributed by the Top 5 statements compared with the overall.
+`Others` represents the summary result of all non-Top N records under the current sort dimension. You can use it to understand how much of the total workload comes from the Top N records.
 
 **5. What is the relationship between the CPU overhead displayed by Top SQL and the actual CPU usage of the process?**
 
 Their correlation is strong but they are not exactly the same thing. For example, the cost of writing multiple replicas is not counted in the TiKV CPU overhead displayed by Top SQL. In general, SQL statements with higher CPU usage result in higher CPU overhead displayed in Top SQL.
 
-**6. What is the meaning of the Y-axis of the Top SQL chart?**
+**6. What does the Y-axis of the Top SQL chart mean?**
 
-It represents the size of CPU resources consumed. The more resources consumed by a SQL statement, the higher the value is. In most cases, you do not need to care about the meaning or unit of the specific value.
+The Y-axis of the Top SQL chart represents the resource consumption under the current sort dimension.
+
+- When `Order By CPU` is selected, the Y-axis represents CPU time.
+- When `Order By Network` is selected, the Y-axis represents network bytes.
+- When `Order By Logical IO` is selected, the Y-axis represents logical IO bytes.
 
 **7. Does Top SQL collect running (unfinished) SQL statements?**
 
-Yes. The bars displayed in the Top SQL chart at each moment indicate the CPU overhead of all running SQL statements at that moment.
+Yes. After you enable Top SQL, TiDB Dashboard collects resource consumption for all running SQL statements, including unfinished ones.
+
+**8. Why is there no new data for `Order By Network`, `Order By Logical IO`, or `By Region`?**
+
+These views depend on TiKV Network IO collection (multi-dimensional). You can check the following items:
+
+- You have selected a TiKV node.
+- The **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel is enabled.
+- The relevant TiKV nodes in the cluster have all successfully enabled this configuration. If only some nodes enable this configuration, the Top SQL page prompts that new data might be incomplete.
+- For newly added TiKV nodes, you need to manually enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel and save again. To make this setting automatically enabled for newly added nodes, also enable `resource-metering.enable-network-io-collection` in the TiKV default configuration of TiUP.
