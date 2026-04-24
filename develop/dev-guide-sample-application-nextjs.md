@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accompl
 
 > **Note**
 >
-> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -105,11 +105,62 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     TIDB_USER='{prefix}.root'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
+    TIDB_ENABLE_SSL='true'
     ```
 
     Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
 7. Save the `.env` file.
+
+</div>
+
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
+
+    Ensure that your client IP address is added to the access list.
+
+4. In the left navigation pane, click **Overview** to return to the instance overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+6. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
+    - If you have not set a password yet, click **Set Root Password** in the dialog.
+    - If you need to verify the server certificate or if the connection fails and requires a CA certificate, click **CA cert** to download it.
+    - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+7. Run the following command to copy `.env.example` and rename it to `.env`:
+
+    ```bash
+    # Linux
+    cp .env.example .env
+    ```
+
+    ```powershell
+    # Windows
+    Copy-Item ".env.example" -Destination ".env"
+    ```
+
+8. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
+
+    ```bash
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    TIDB_ENABLE_SSL='false'
+    ```
+
+    Replace the placeholders in `{}` with the values obtained in the connection dialog.
+
+9. Save the `.env` file.
 
 </div>
 
@@ -135,6 +186,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     TIDB_USER='root'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
+    TIDB_ENABLE_SSL='false'
     ```
 
     Replace the placeholders in `{}` with the values obtained in the **Connect** window. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
@@ -192,10 +244,10 @@ export function connect() {
     user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
     password: process.env.TIDB_PASSWORD, // The password of TiDB user.
     database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
-    ssl: {
+    ssl: process.env.TIDB_ENABLE_SSL === 'true' ? {
       minVersion: 'TLSv1.2',
       rejectUnauthorized: true,
-    },
+    } : null,
     connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
     maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
     enableKeepAlive: true,
