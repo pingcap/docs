@@ -139,7 +139,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>Data export via CSV, Parquet, and SQL files to local or object storages</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
@@ -277,7 +277,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>VPC peering</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview)</span></td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -306,7 +306,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>CMEK</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
