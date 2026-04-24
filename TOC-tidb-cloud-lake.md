@@ -12,6 +12,7 @@
 
 - Resources
   - [Dashboards](/tidb-cloud-lake/guides/dashboards.md)
+  - [Task Flow](/tidb-cloud-lake/guides/task-flow.md)
   - [Warehouses](/tidb-cloud-lake/guides/warehouse.md)
   - [Worksheets](/tidb-cloud-lake/guides/worksheet.md)
 - Administration
