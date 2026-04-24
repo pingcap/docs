@@ -126,9 +126,9 @@ Before you begin to create an endpoint:
 2. Open [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) and execute the command to create the private endpoint.
 
 </div>
-<div label="Use Google Cloud Console">
+<div label="Use Google Cloud console">
 
-1. In the [Google Cloud console](https://console.cloud.google.com/), make sure the current project is the same as the **Google Cloud Project ID** that you filled in TiDB Cloud.
+1. In the [Google Cloud console](https://console.cloud.google.com/), make sure the current project is the same as the **Google Cloud Project ID** you entered in TiDB Cloud.
 2. Go to **VPC network** > **Private Service Connect** > **Connected endpoints**, and then click **Connect endpoint**.
 3. Configure the endpoint by using the values from the generated command in TiDB Cloud:
     - **Endpoint name**: use the forwarding rule name from the command.
@@ -146,7 +146,7 @@ Before you begin to create an endpoint:
 
 After creating the endpoint in Google Cloud successfully, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
 
-If you see an error `not received connection request from endpoint`, make sure that the endpoint is created successfully in your Google Cloud project and that its configuration matches the generated command.
+If you see an error `not received connection request from endpoint`, make sure that you have successfully created the endpoint in your Google Cloud project and that its configuration matches the generated command.
 
 ### Step 4. Connect to your TiDB cluster
 
