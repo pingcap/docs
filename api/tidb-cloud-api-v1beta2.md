@@ -13,4 +13,4 @@ Currently, you can use the following v1beta2 APIs to manage the resources in TiD
 
     - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
     - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
-    - **Region**: retrieve available regions for deploying TiDB Cloud Premium instances.
+    - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
