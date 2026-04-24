@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from {{{ .esse
 
 ## Restrictions
 
-- For each {{{ .essential }}} cluster, you can create up to 10 changefeeds.
+- For each {{{ .essential }}} instance, you can create up to 10 changefeeds.
 - Currently, {{{ .essential }}} does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because {{{ .essential }}} uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
@@ -23,7 +23,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
+Ensure that your {{{ .essential }}} instance can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Private Link Connection: meeting security compliance and ensuring network quality.
 - Public Network: suitable for a quick setup.
@@ -62,10 +62,10 @@ To allow {{{ .essential }}} changefeeds to stream data to Apache Kafka and creat
 
 For example, if your Kafka cluster is in Confluent Cloud, refer to [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls) in the Confluent documentation for more information.
 
-## Step 1. Open the Changefeed page for Apache Kafka
+## Step 1. Create a changefeed for Apache Kafka
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the overview page of the target {{{ .essential }}} cluster, and then click **Data** > **Changefeed** in the left navigation pane.
+2. Navigate to the overview page of the target {{{ .essential }}} instance, and then click **Data** > **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**, and then select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target

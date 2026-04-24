@@ -5,7 +5,7 @@ summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instanc
 
 # Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection 
 
-This document describes how to connect a {{{ .essential }}} cluster to an [Alibaba Cloud ApsaraDB RDS for MySQL](https://www.alibabacloud.com/en/product/apsaradb-for-rds-mysql) instance using an [Alibaba Cloud Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
+This document describes how to connect a {{{ .essential }}} instance to an [Alibaba Cloud ApsaraDB RDS for MySQL](https://www.alibabacloud.com/en/product/apsaradb-for-rds-mysql) instance using an [Alibaba Cloud Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 ## Prerequisites
 
@@ -16,14 +16,14 @@ This document describes how to connect a {{{ .essential }}} cluster to an [Aliba
     - Manage load balancer
     - Manage endpoint services
 
-- Your {{{ .essential }}} cluster is on Alibaba Cloud, and it is active. Retrieve and save the following details for later use:
+- Your {{{ .essential }}} instance is on Alibaba Cloud, and it is active. Retrieve and save the following details for later use:
 
     - Alibaba Cloud account ID
     - Availability Zones (AZ)
 
 To view the Alibaba Cloud account ID and availability zones, do the following:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the displayed dialog, you can find the Alibaba Cloud account ID and availability zones.
 
@@ -33,8 +33,8 @@ Identify an Alibaba Cloud ApsaraDB RDS for MySQL that you want to use, or [creat
 
 Your ApsaraDB RDS for MySQL instance must meet the following requirements:
 
-- Region match: the instance must reside in the same Alibaba Cloud region as your {{{ .essential }}} cluster.
-- AZ (Availability Zone) availability: the availability zones must overlap with those of your {{{ .essential }}} cluster.
+- Region match: the instance must reside in the same Alibaba Cloud region as your {{{ .essential }}} instance.
+- AZ (Availability Zone) availability: the availability zones must overlap with those of your {{{ .essential }}} instance.
 - Network accessibility: the instance must be configured with a proper IP allowlist and be accessible within the VPC.
 
 > **Note**
@@ -63,7 +63,7 @@ Set up the load balancer in the same region as your ApsaraDB RDS for MySQL as fo
 
     - **Network Type**: select `Internal-facing`
     - **VPC**: select the VPC where your ApsaraDB RDS for MySQL is located
-    - **Zone**: it must overlap with your {{{ .essential }}} cluster
+    - **Zone**: it must overlap with your {{{ .essential }}} instance
     - **IP Version**: select `IPv4`
 
 4. Find the load balancer you created, and then click **Create Listener**. Provide the following information:

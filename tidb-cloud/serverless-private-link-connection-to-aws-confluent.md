@@ -5,7 +5,7 @@ summary: Learn how to connect to a Confluent Cloud Dedicated cluster on AWS usin
 
 # Connect to Confluent Cloud on AWS via a Private Link Connection
 
-This document describes how to connect a {{{ .essential }}} cluster to a [Confluent Cloud Dedicated cluster](https://docs.confluent.io/cloud/current/clusters/cluster-types.html) on AWS using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
+This document describes how to connect a {{{ .essential }}} instance to a [Confluent Cloud Dedicated cluster](https://docs.confluent.io/cloud/current/clusters/cluster-types.html) on AWS using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 > **Note**
 >
@@ -22,7 +22,7 @@ This document describes how to connect a {{{ .essential }}} cluster to a [Conflu
 
 To view the AWS account ID and availability zones, do the following:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the displayed dialog, you can find the AWS account ID and availability zones.
 
@@ -33,8 +33,8 @@ Identify a Confluent Cloud network that you want to use, or [create a new Conflu
 The Confluent Cloud network must meet the following requirements:
 
 - Type: the network must be a **PrivateLink** network.
-- Region match: the network must reside in the same AWS region as your {{{ .essential }}} cluster.
-- AZ (Availability Zone) availability: the availability zones of the network must overlap with those of your {{{ .essential }}} cluster.
+- Region match: the network must reside in the same AWS region as your {{{ .essential }}} instance.
+- AZ (Availability Zone) availability: the availability zones of the network must overlap with those of your {{{ .essential }}} instance.
 
 To get the unique name of the Confluent Cloud network, take the following steps:
 

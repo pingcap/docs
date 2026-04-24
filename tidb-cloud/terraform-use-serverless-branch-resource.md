@@ -20,7 +20,7 @@ The features of the `tidbcloud_serverless_branch` resource include the following
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a {{{ .starter }}} or {{{ .essential }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [Create a {{{ .starter }}} or {{{ .essential }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Create a {{{ .starter }}} or {{{ .essential }}} branch
 

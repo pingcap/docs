@@ -17,19 +17,25 @@ Do the following to migrate the Prometheus integration.
 
 ### Step 1. Delete the legacy project-level Prometheus integrations (Beta)
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to the target project using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
 
-2. In the left navigation panel, click **Project Settings** > **Integrations**.
+    > **Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-3. On the **Integrations** > **Integration to Prometheus (BETA)** module, select **Scrape_config Files** and click **Delete**.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 
-4. In the displayed dialog, type `Delete` to confirm the removal of the legacy integration.
+3. In the left navigation panel, click **Integrations** under **Project Settings**.
+
+4. On the **Integrations** > **Integration to Prometheus (BETA)** module, select **Scrape_config Files** and click **Delete**.
+
+5. In the displayed dialog, type `Delete` to confirm the removal of the legacy integration.
 
 ### Step 2. Create a new cluster-level Prometheus integration for each cluster
 
 Repeat the following steps for each [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in the project.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. In the left navigation panel, click **Settings** > **Integrations**.
 

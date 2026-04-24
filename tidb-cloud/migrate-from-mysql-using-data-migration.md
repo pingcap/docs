@@ -43,7 +43,7 @@ You can create up to 200 migration jobs on {{{ .dedicated }}} clusters for each 
 </CustomContent>
 <CustomContent plan="essential">
 
-You can create up to 100 migration jobs on {{{ .essential }}} clusters for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+You can create up to 100 migration jobs on {{{ .essential }}} instances for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ You can create up to 100 migration jobs on {{{ .essential }}} clusters for each 
 
 <CustomContent plan="dedicated">
 
-- When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
+- When you delete a TiDB Cloud Dedicated cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
 </CustomContent>
 
@@ -88,11 +88,16 @@ To prevent this, create the target tables in the downstream database before star
 
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target cluster with the MySQL source records.
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> with the MySQL source records.
 
-- During incremental data migration (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to ensure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
+<CustomContent plan="essential">
 
+- During incremental data migration (migrating ongoing changes to your {{{ .essential }}} instance), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target {{{ .essential }}} instance to ensure that all the data during the abrupt error has been migrated smoothly to the target {{{ .essential }}} instance. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target {{{ .essential }}} instance because the data might be inserted repeatedly into the target {{{ .essential }}} instance.
+
+</CustomContent>
 <CustomContent plan="dedicated">
+
+- During incremental data migration (migrating ongoing changes to your {{{ .dedicated }}} cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target {{{ .dedicated }}} cluster to ensure that all the data during the abrupt error has been migrated smoothly to the target {{{ .dedicated }}} cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target {{{ .dedicated }}} cluster because the data might be inserted repeatedly into the target {{{ .dedicated }}} cluster.
 
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database. This allows Data Migration to get consecutive binary logs for incremental data migration:
 
@@ -103,7 +108,7 @@ To prevent this, create the target tables in the downstream database before star
 
 ## Prerequisites
 
-Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target TiDB Cloud cluster database.
+Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> database.
 
 ### Make sure your data source and version are supported
 
@@ -127,25 +132,26 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
-| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7     |
-| Amazon Aurora MySQL                              | 8.0, 5.7     |
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7           |
+| Amazon Aurora MySQL                              | 8.0, 5.7           |
 | Amazon RDS MySQL                                 | 8.0, 5.7           |
 | Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
-| Azure Database for MySQL - Flexible Server                          | 8.0, 5.7           |
-| Google Cloud SQL for MySQL                                                | 8.0, 5.7    |
+| Azure Database for MySQL - Flexible Server       | 8.0, 5.7           |
+| Google Cloud SQL for MySQL                       | 8.0, 5.7           |
 
 </CustomContent>
 
 ### Enable binary logs in the source MySQL-compatible database for replication
 
-To continuously replicate incremental changes from the source MySQL-compatible database to the TiDB Cloud target cluster using DM, you need the following configurations to enable binary logs in the source database:
+To continuously replicate incremental changes from the source MySQL-compatible database to the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> using DM, you need the following configurations to enable binary logs in the source database:
 
-| Configuration | Required value | Why |
-|:--------------|:---------------|:----|
-| `log_bin` | `ON` | Enables binary logging, which DM uses to replicate changes to TiDB |
-| `binlog_format` | `ROW` | Captures all data changes accurately (other formats miss edge cases) |
-| `binlog_row_image` | `FULL` | Includes all column values in events for safe conflict resolution |
-| `binlog_expire_logs_seconds` | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+| Configuration                    | Required value | Why |
+|:---------------------------------|:---------------|:----|
+| `log_bin`                        | `ON`           | Enables binary logging, which DM uses to replicate changes to TiDB |
+| `binlog_format`                  | `ROW`          | Captures all data changes accurately (other formats miss edge cases) |
+| `binlog_row_image`               | `FULL`         | Includes all column values in events for safe conflict resolution |
+| `binlog_expire_logs_seconds`     | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+| `binlog_transaction_compression` | `OFF`          | DM does not support transaction compression |
 
 #### Check current values and configure the source MySQL instance
 
@@ -154,7 +160,7 @@ To check the current configurations, connect to the source MySQL instance and ex
 ```sql
 SHOW VARIABLES WHERE Variable_name IN
 ('log_bin','server_id','binlog_format','binlog_row_image',
-'binlog_expire_logs_seconds','expire_logs_days');
+'binlog_expire_logs_seconds','expire_logs_days','binlog_transaction_compression');
 ```
 
 If necessary, change the source MySQL instance configurations to match the required values.
@@ -170,6 +176,7 @@ If necessary, change the source MySQL instance configurations to match the requi
     binlog_format = ROW
     binlog_row_image = FULL
     binlog_expire_logs_seconds = 604800   # 7 days retention
+    binlog_transaction_compression = OFF
     ```
 
 2. Restart the MySQL service to apply the changes:
@@ -248,7 +255,7 @@ For more information, see [Set instance parameters](https://www.alibabacloud.com
 
 ### Ensure network connectivity
 
-Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target TiDB Cloud cluster.
+Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
 
 <CustomContent plan="dedicated">
 
@@ -392,12 +399,22 @@ If you use AWS VPC peering or Google Cloud VPC network peering, see the followin
 
 If your MySQL service is in an AWS VPC, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+    <CustomContent plan="dedicated">
 
+    You must add [the CIDR of the region where your {{{ .dedicated }}} cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your {{{ .dedicated }}} cluster to the MySQL instance.
+
+    </CustomContent>
+    
+    <CustomContent plan="essential">
+
+    You must add [the CIDR of the region where your {{{ .essential }}} instance is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your {{{ .essential }}} instance to the MySQL instance.
+
+    </CustomContent>
+    
 3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service.
 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
@@ -412,11 +429,21 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 1. If it is a self-hosted MySQL, you can skip this step and proceed to the next step. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You might need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) developed by Google.
 
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of your MySQL service and your TiDB cluster.
+2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of your MySQL service and your {{{ .dedicated }}} cluster.
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
+    <CustomContent plan="dedicated">
+
+    You must add [the CIDR of the region where your {{{ .dedicated }}} cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your {{{ .dedicated }}} cluster to the MySQL endpoint.
+
+    </CustomContent>
+    
+    <CustomContent plan="essential">
+
+    You must add [the CIDR of the region where your {{{ .essential }}} instance is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your {{{ .essential }}} instance to the MySQL endpoint.
+
+    </CustomContent>
 
 </details>
 
@@ -424,7 +451,7 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 ### Grant required privileges for migration
 
-Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
+Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
 
 #### Grant required privileges to the migration user in the source MySQL database
 
@@ -438,18 +465,23 @@ For production workloads, it is recommended to have a dedicated user for data du
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
+| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted. In this case, DM falls back to `LOCK TABLES` to ensure consistency during full data export. Not required for self-managed MySQL instances where FTWRL is available. |
 
 For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
 ```sql
+-- For self-managed MySQL:
 GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
+
+-- For managed MySQL services (such as Amazon RDS and Aurora), also grant the LOCK TABLES privilege:
+GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
-#### Grant required privileges in the target TiDB Cloud cluster
+#### Grant required privileges in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>
 
-For testing purposes, you can use the `root` account of your TiDB Cloud cluster.
+For testing purposes, you can use the `root` account of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
 
-For production workloads, it is recommended to have a dedicated user for replication in the target TiDB Cloud cluster and grant only the necessary privileges:
+For production workloads, it is recommended to have a dedicated user for replication in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> and grant only the necessary privileges:
 
 | Privilege | Scope | Purpose |
 |:----------|:------|:--------|
@@ -463,7 +495,7 @@ For production workloads, it is recommended to have a dedicated user for replica
 | `INDEX`  | Tables | Creates and modifies indexes |
 | `CREATE VIEW`  | Views | Creates views used by migration |
 
-For example, you can execute the following `GRANT` statement in your target TiDB Cloud cluster to grant corresponding privileges:
+For example, you can execute the following `GRANT` statement in your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to grant corresponding privileges:
 
 ```sql
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
@@ -471,13 +503,9 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 ## Step 1: Go to the Data Migration page
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -561,7 +589,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-    - **User Name**: enter the username of the target cluster in TiDB Cloud.
+    - **User Name**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> in TiDB Cloud.
     - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
@@ -610,8 +638,8 @@ You can use **physical mode** or **logical mode** to migrate **existing data** a
 
 > **Note:**
 >
-> - When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
-> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the cluster. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+> - When you use physical mode, you cannot create a second migration job or import task for the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 Physical mode exports the MySQL source data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the MySQL source database during data export. The following table shows the performance regression of each specification.
 
@@ -725,9 +753,9 @@ When scaling a migration job specification, note the following:
 
 ### Scaling procedure
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **...** > **Scale Up/Down**.
 

@@ -627,6 +627,7 @@
   - Privileges
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [Privilege Management](/privilege-management.md)
+    - [Column-Level Privilege Management](/column-privilege-management.md)
     - [User Account Management](/user-account-management.md)
     - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
@@ -636,6 +637,7 @@
       - Attributes
         - [AUTO_INCREMENT](/auto-increment.md)
         - [AUTO_RANDOM](/auto-random.md)
+        - [_tidb_rowid](/tidb-rowid.md)
         - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
       - [Literal Values](/literal-values.md)
       - [Schema Object Names](/schema-object-names.md)

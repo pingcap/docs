@@ -9,7 +9,7 @@ This document describes how to connect to your {{{ .premium }}} instance via pub
 
 > **Tip:**
 >
-> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public connection, see [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} instance via public connection, see [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
 ## Prerequisite: Configure IP access list
@@ -22,11 +22,11 @@ To connect to a {{{ .premium }}} instance via public connection, take the follow
 
 1. Open the overview page of the target instance.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
     2. Click the name of your target instance to go to its overview page.
 
@@ -36,10 +36,10 @@ To connect to a {{{ .premium }}} instance via public connection, take the follow
 
     If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 by default.
+4. Click **CA cert** to download CA cert for TLS connection to {{{ .premium }}} instances. The CA cert supports TLS 1.2 by default.
 
 5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your instance.
 
 ## What's next
 
-After you have successfully connected to your TiDB instance, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+After you have successfully connected to your {{{ .premium }}} instance, you can [explore SQL statements with TiDB](/basic-sql-operations.md).

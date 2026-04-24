@@ -45,7 +45,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target TiDB instance.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target {{{ .premium }}} instance.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -83,11 +83,11 @@ You need the following privileges to export data from the upstream database:
 
 ### Deploy TiCDC
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to {{{ .premium }}}.
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to {{{ .premium }}}.
 
-1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
+1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB Self-Managed cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
 
-2. Add the TiCDC component to the TiDB cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
+2. Add the TiCDC component to the TiDB Self-Managed cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
 
     ```yaml
     cdc_servers:
@@ -117,7 +117,7 @@ To migrate data from the TiDB Self-Managed cluster to {{{ .premium }}}, perform 
 
 You need to migrate data from the TiDB Self-Managed cluster to Amazon S3 using Dumpling.
 
-If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
+If your TiDB Self-Managed cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
 
 #### Step 1. Disable the GC mechanism of the upstream TiDB Self-Managed cluster temporarily
 
@@ -155,9 +155,9 @@ Create an access key in the AWS console. See [Create an access key](https://docs
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
 
-#### Step 3. Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
+#### Step 3. Export data from the upstream TiDB Self-Managed cluster to Amazon S3 using Dumpling
 
-Do the following to export data from the upstream TiDB cluster to Amazon S3 using Dumpling:
+Do the following to export data from the upstream TiDB Self-Managed cluster to Amazon S3 using Dumpling:
 
 1. Configure the environment variables for Dumpling.
 
@@ -207,9 +207,9 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to {{{ .premium }}}.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target TiDB instance.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target {{{ .premium }}} instance.
 
-    1. Navigate to the **TiDB Instances** page, and click the name of your target instance.
+    1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and click the name of your target instance.
     2. In the left navigation pane, click **Data** > **Import**.
     3. Choose **Import data from Cloud Storage** > **Amazon S3**.
     4. Note down the **Account ID** and **External ID** displayed in the wizard. These values are embedded in the CloudFormation template.
@@ -285,14 +285,14 @@ To replicate incremental data, do the following:
 
 2. Grant TiCDC to connect to {{{ .premium }}}.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB instance to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
     2. In the left navigation pane, click **Settings** > **Networking**.
     3. On the **Networking** page, click **Add IP Address**.
     4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access {{{ .premium }}}. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
 3. Get the connection information of the downstream {{{ .premium }}} instance.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB instance to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
     4. From the connection information, you can get the host IP address and port of the instance. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
@@ -411,4 +411,4 @@ To replicate incremental data, do the following:
     backup_user_priv
     ```
 
-    After you get the user and privilege information, run the generated SQL statements in the downstream TiDB instance to restore the user and privilege information.
+    After you get the user and privilege information, run the generated SQL statements in the downstream {{{ .premium }}} instance to restore the user and privilege information.

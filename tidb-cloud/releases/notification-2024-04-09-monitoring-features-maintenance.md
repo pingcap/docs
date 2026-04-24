@@ -30,7 +30,7 @@ During the maintenance window, the monitoring features in the following regions 
     - Cloud Provider: Google Cloud, Region: Iowa (us-central1)
     - Cloud Provider: Google Cloud, Region: Taiwan (asia-east1)
 
-- {{{ .starter }}} clusters：
+- {{{ .starter }}} instances：
     - Cloud Provider: AWS, Region: Frankfurt (eu-central-1)
     - Cloud Provider: AWS, Region: Oregon (us-west-2)
 

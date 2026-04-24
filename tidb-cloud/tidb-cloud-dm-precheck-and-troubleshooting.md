@@ -94,6 +94,22 @@ Failed to create a schema in the downstream TiDB cluster. This error means that 
 
 To resolve this issue, you can create a schema in the TiDB cluster based on a [supported collation](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb), and then resume the task by clicking **Restart**.
 
+### Error message: "LOCK TABLES ... Access denied"
+
+The full data export fails because the source database user does not have the `LOCK TABLES` privilege. This error typically occurs when migrating from a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL), where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted by the cloud provider. In this scenario, DM uses the default `consistency=auto` mode, which falls back to `LOCK TABLES` to ensure data consistency during full export. This operation requires the `LOCK TABLES` privilege.
+
+> **Note:** 
+>
+> This error can also occur on self-managed MySQL instances if FTWRL is unavailable for other reasons, such as a missing `RELOAD` privilege.
+
+To resolve this issue, grant the `LOCK TABLES` privilege to the migration user on the source MySQL database:
+
+```sql
+GRANT LOCK TABLES ON *.* TO 'dm_source_user'@'%';
+```
+
+Then resume the task by clicking **Restart**.
+
 ## Alerts
 
 You can subscribe to TiDB Cloud alert emails to be informed in time when an alert occurs.

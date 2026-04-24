@@ -123,17 +123,18 @@
 
 ## GUIDES
 
-- Manage Instances
-  - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Instances
-    - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
-    - Connect to Your TiDB Cloud Instance
-      - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
-      - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
-  - Use an HTAP Cluster with TiFlash
+- [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
+- Manage {{{ .premium }}} Instances
+  - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
+  - Connect to Your {{{ .premium }}} Instance
+    - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
+    - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+    - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+  - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
+  - [Export Data from {{{ .premium }}}](/tidb-cloud/premium/premium-export.md)
+  - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -147,6 +148,7 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
+    - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -196,7 +198,7 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Delete a TiDB Instance](/tidb-cloud/premium/delete-tidb-instance.md)
+  - [Delete a {{{ .premium }}} Instance](/tidb-cloud/premium/delete-tidb-instance.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
@@ -215,7 +217,7 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -280,6 +282,7 @@
     - Attributes
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
+      - [_tidb_rowid](/tidb-rowid.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
     - [Literal Values](/literal-values.md)
     - [Schema Object Names](/schema-object-names.md)
