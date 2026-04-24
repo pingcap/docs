@@ -144,7 +144,7 @@ Before you begin to create an endpoint:
 
 ### Step 3. Accept endpoint access
 
-After creating the endpoint in Google Cloud successfully, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
+After creating the endpoint in Google Cloud successfully, go back to the TiDB Cloud console, and then click **Accept Endpoint Access**.
 
 If you see an error `not received connection request from endpoint`, make sure that you have successfully created the endpoint in your Google Cloud project and that its configuration matches the generated command.
 

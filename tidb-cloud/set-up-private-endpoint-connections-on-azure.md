@@ -77,10 +77,10 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
     >
     > For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
-2. Create the private endpoint by using either Azure Portal or Azure CLI.
+2. Create the private endpoint by using either the Azure portal or Azure CLI.
 
 <SimpleTab>
-<div label="Use Azure Portal">
+<div label="Use Azure portal">
 
 1. Log in to the [Azure portal](https://portal.azure.com/).
 2. Search for **Private endpoints**, and then select **Private endpoints** in the result.
@@ -108,7 +108,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
     az account set --subscription ${your_subscription_id}
     ```
 
-2. Create the private endpoint by using the TiDB Cloud resource ID copied in Step 2:
+2. Create the private endpoint by using the TiDB Cloud resource ID that you copied from the **Create Azure Private Endpoint Connection** dialog:
 
     ```bash
     az network private-endpoint create \
