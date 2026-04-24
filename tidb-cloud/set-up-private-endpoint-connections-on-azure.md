@@ -77,23 +77,72 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
     >
     > For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
-2. Log in to the [Azure portal](https://portal.azure.com/), and then create a private endpoint for your cluster using the copied TiDB Cloud resource ID as follows:
+2. Create the private endpoint by using either Azure Portal or Azure CLI.
 
-    1. In the Azure portal, search for **Private endpoints**, and then select **Private endpoints** in the result.
-    2. On the **Private endpoint** page, click **+ Create**.
-    3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
-    4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, and paste the TiDB Cloud resource ID to the **Resource ID or alias** field.
-    5. Continue clicking **Next** to go through the remaining configuration tabs and complete the required settings. Then, click **Create** to create and deploy the private endpoint. It might take a few seconds for Azure to complete the deployment. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
+<SimpleTab>
+<div label="Use Azure Portal">
 
-3. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
+1. Log in to the [Azure portal](https://portal.azure.com/).
+2. Search for **Private endpoints**, and then select **Private endpoints** in the result.
+3. On the **Private endpoint** page, click **+ Create**.
+4. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
+5. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, and paste the copied TiDB Cloud resource ID to the **Resource ID or alias** field.
+6. Continue clicking **Next** to go through the remaining configuration tabs and complete the required settings. Then, click **Create** to create and deploy the private endpoint. It might take a few seconds for Azure to complete the deployment. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
+7. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
 
-     - Click **Settings** > **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
+    - Click **Settings** > **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
 
-         ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
+        ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-     - Click **Settings** > **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
+    - Click **Settings** > **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
 
-         ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+        ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+
+</div>
+<div label="Use Azure CLI">
+
+1. Sign in to Azure CLI and select your subscription:
+
+    ```bash
+    az login
+    az account set --subscription ${your_subscription_id}
+    ```
+
+2. Create the private endpoint by using the TiDB Cloud resource ID copied in Step 2:
+
+    ```bash
+    az network private-endpoint create \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --vnet-name ${your_vnet_name} \
+      --subnet ${your_subnet_name} \
+      --private-connection-resource-id "${your_tidb_cloud_resource_id}" \
+      --connection-name ${your_private_endpoint_connection_name} \
+      --location ${your_region}
+    ```
+
+3. Get the private endpoint **Resource ID**:
+
+    ```bash
+    az network private-endpoint show \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --query "id" \
+      --output tsv
+    ```
+
+4. Get the private endpoint **IP address** from DNS configuration:
+
+    ```bash
+    az network private-endpoint show \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --query "customDnsConfigs[0].ipAddresses[0]" \
+      --output tsv
+    ```
+
+</div>
+</SimpleTab>
 
 ### Step 3. Accept the endpoint
 
