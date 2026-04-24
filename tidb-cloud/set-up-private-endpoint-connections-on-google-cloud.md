@@ -136,7 +136,7 @@ Before you begin to create an endpoint:
     - **Region**: select the region from the command.
     - **Network**: select your VPC network from `--network`.
     - **Subnetwork**: select your subnet from `--subnet`.
-4. Click **Add endpoint** (or **Create**) to create the endpoint.
+4. Click **Add endpoint** to create the endpoint.
 5. In **Connected endpoints**, verify that the new endpoint is created and record its endpoint name.
 
 </div>
