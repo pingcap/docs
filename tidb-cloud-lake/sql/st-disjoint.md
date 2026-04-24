@@ -24,9 +24,9 @@ ST_DISJOINT(<geometry1>, <geometry2>)
 | `<geometry1>` | The argument must be an expression of type GEOMETRY. |
 | `<geometry2>` | The argument must be an expression of type GEOMETRY. |
 
-:::note
-- The function reports an error if the two input GEOMETRY objects have different SRIDs.
-:::
+> **Note:**
+>
+> The function reports an error if the two input GEOMETRY objects have different SRIDs.
 
 ## Return Type
 
