@@ -13,7 +13,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can discover, access, a
 
 A TiDB Cloud resource is a deployable unit that you can manage. It can be one of the following:
 
-- A TiDB X instance, which is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance
+- A TiDB X instance, which is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, or Premium instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB Cloud projects
@@ -43,11 +43,7 @@ For more information, see the following documents:
 
 - [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 
-<CustomContent plan="premium">
-
 - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
-
-</CustomContent>
 
 - [Create a {{{ .dedicated }}} Cluster](/tidb-cloud/create-tidb-cluster.md)
 
