@@ -2,7 +2,7 @@ name: Translation Cron JA
 
 on:
   schedule:
-    # Runs JA translation every Wednesday at 11:00 UTC.
+    # Runs JA translation at 19:00 every Wednesday (Beijing time, UTC+8)
     - cron: "0 11 * * 3"
   workflow_dispatch:
     inputs:
