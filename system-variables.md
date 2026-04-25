@@ -2176,15 +2176,15 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> Setting this variable to `ON` requires that every TiKV store in the cluster supports descending-order index keys. TiDB rejects `CREATE INDEX` and `CREATE TABLE` statements that would persist a descending column when any store reports a TiKV version below the minimum required by this feature; upgrade TiKV before enabling this variable.
+> Setting this variable to `ON` requires every TiKV store in the cluster to support descending-order index keys. TiDB rejects `CREATE INDEX` and `CREATE TABLE` statements that persist a descending column if any store reports a TiKV version below the minimum required version. Upgrade TiKV before you enable this variable.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether the `DESC` keyword on individual columns of `CREATE INDEX` and `CREATE TABLE` statements is honored. When set to `OFF` (the default), TiDB parses the `DESC` keyword for compatibility with MySQL 5.7 but stores all index columns in ascending order. When set to `ON`, columns marked `DESC` are stored in descending order, allowing composite indexes such as `INDEX(a ASC, b DESC)` to satisfy `ORDER BY a ASC, b DESC` directly without an additional `Sort` operator.
-- The variable is evaluated at DDL time only. Toggling it after creating descending indexes does not change those indexes; subsequent `CREATE INDEX` statements with `DESC` are governed by the variable's current value.
+- This variable controls whether TiDB honors the `DESC` keyword on individual columns in `CREATE INDEX` and `CREATE TABLE` statements. When this variable is set to `OFF` (default), TiDB parses the `DESC` keyword for compatibility with MySQL 5.7 but stores all index columns in ascending order. When set to `ON`, columns marked `DESC` are stored in descending order, which allows composite indexes such as `INDEX(a ASC, b DESC)` to satisfy `ORDER BY a ASC, b DESC` directly without an additional `Sort` operator.
+- TiDB evaluates this variable only at DDL time. Toggling it after you create descending indexes does not change those indexes. Subsequent `CREATE INDEX` statements with `DESC` use the current value of this variable.
 
 ### tidb_enable_enhanced_security
 
