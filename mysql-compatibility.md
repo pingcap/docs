@@ -66,7 +66,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
 + "Session Tracker: Add GTIDs context to the OK packet"
-+ Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
++ Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519) (supported as an opt-in feature starting from v9.0.0; controlled by the [`tidb_enable_descending_index`](/system-variables.md#tidb_enable_descending_index-new-in-v900) system variable, which defaults to `OFF`)
 + `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
 + Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
 + JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
