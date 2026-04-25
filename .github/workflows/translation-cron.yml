@@ -1,8 +1,8 @@
-name: Translation Cron
+name: Translation Cron JA
 
 on:
   schedule:
-    # every Wednesday at 11:00 AM
+    # Runs JA translation every Wednesday at 11:00 UTC.
     - cron: "0 11 * * 3"
   workflow_dispatch:
     inputs:
@@ -17,22 +17,7 @@ env:
   CLOUD_BRANCH: i18n-ja-release-8.5
 
 jobs:
-  dispatch-translation-zh:
-    if: github.repository == 'pingcap/docs'
-    runs-on: ubuntu-latest
-    continue-on-error: true
-
-    steps:
-      - name: Dispatch translation-zh workflow
-        run: |
-          curl \
-          -X POST \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: token ${{ github.token }}" \
-          https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-zh.yaml/dispatches \
-          -d '{"ref":"master","inputs":{"file_names":${{ toJSON(inputs.file_names || '') }}}}'
-
-  # build a matrix of branches to translate, including LTS and Cloud
+  # Build a matrix of JA branches to translate, including LTS and Cloud.
   build-matrix:
     runs-on: ubuntu-latest
     outputs:
