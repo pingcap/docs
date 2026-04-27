@@ -74,24 +74,24 @@ def stack_tag(tag, stack):
 def tag_is_wrapped(pos, content):
     tag_start = pos[0]
     tag_end = pos[1]
-    content_previous = content[:tag_start][::-1] # reverse content_previous
-    content_later = content[tag_end:]
 
-    left_wraps_findall = re.findall(r'`', content_previous)
-    left_single_backtick = len(left_wraps_findall) % 2
-    right_wraps_findall = re.findall(r'`', content_later)
-    right_single_backtick = len(right_wraps_findall) % 2
-    # print(left_single_backtick, right_single_backtick)
+    # Scope the backtick check to the current line only.
+    # Counting across the entire document produces incorrect results when there
+    # is an even number of backtick-wrapped spans before the tag on earlier lines.
+    line_start = content.rfind('\n', 0, tag_start) + 1
+    line_end = content.find('\n', tag_end)
+    if line_end == -1:
+        line_end = len(content)
+
+    content_previous = content[line_start:tag_start]
+    content_later = content[tag_end:line_end]
+
+    left_single_backtick = len(re.findall(r'`', content_previous)) % 2
+    right_single_backtick = len(re.findall(r'`', content_later)) % 2
 
     if left_single_backtick != 0 and right_single_backtick != 0:
-        # print(content_previous.find('`'), content_later.find('`'))
-        # print(content_previous)
-        # print(content_later)
         return True
     else:
-        # print(content_previous.find('`'), content_later.find('`'))
-        # print(content_previous)
-        # print(content_later)
         return False
 
 def filter_frontmatter(content):
