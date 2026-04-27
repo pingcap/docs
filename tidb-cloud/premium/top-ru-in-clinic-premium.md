@@ -1,11 +1,11 @@
 ---
-title: TopRU page in TiDB Cloud Clinic
+title: TopRU views in Top SQL in TiDB Cloud Clinic
 summary: Learn how to use TopRU in TiDB Cloud Clinic to identify SQL statements and database users with high RU consumption.
 ---
 
-# TopRU page in TiDB Cloud Clinic
+# TopRU views in Top SQL in TiDB Cloud Clinic
 
-TopRU is an SQL observability feature in TiDB Cloud Clinic. It ranks SQL workloads by request unit (RU) consumption to help you quickly identify SQL statements with high resource usage.
+TopRU is an SQL observability feature in the Top SQL page of TiDB Cloud Clinic. It ranks SQL workloads by request unit (RU) consumption to help you quickly identify SQL statements with high resource usage.
 
 TopRU reuses the Top SQL collection and reporting pipeline, but extends the core metric from CPU to RU, and aggregates records by `(user, sql_digest, plan_digest)`. This helps you identify both high-cost SQL statements and the database users who continuously consume RU.
 
@@ -49,7 +49,7 @@ Before using TopRU, make sure that all of the following conditions are met:
 
 ## Page views
 
-The TopRU page currently includes the following views:
+TopRU in Top SQL currently includes the following views:
 
 - **Overview (instance-level)**: inspect top RU-consuming SQL from the cluster instance perspective.
 - **Sliced by Users (DB user-level)**: inspect RU consumption grouped by database user.
@@ -68,9 +68,9 @@ A common diagnosis path is to locate RU hotspots in the **Overview** view first,
 
 A common workflow for TopRU is as follows:
 
-1. Open the TopRU page and select a time range.
-2. In the **Overview** view, identify top RU-consuming SQL statements and hotspot periods.
-3. Switch to the **Sliced by Users** view to verify whether RU is concentrated on a small set of users.
+1. Open the **Top SQL** page in TiDB Cloud Clinic.
+2. Select a time range, and use the TopRU **Overview** view to identify top RU-consuming SQL statements and hotspot periods.
+3. Switch to the TopRU **Sliced by Users** view to verify whether RU is concentrated on a small set of users.
 4. Open SQL details and combine `sql_digest` / `plan_digest` with execution count and execution duration to prioritize optimization.
 5. Continue analysis with Top SQL, slow query data, and execution plans.
 
