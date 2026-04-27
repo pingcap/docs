@@ -29,7 +29,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ## Subscribe to alert notifications
 
-To receive alert notifications of <CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, take the following steps:
+To receive alert notifications of <CustomContent plan="essential">{{{ .essential }}} instances</CustomContent><CustomContent plan="premium">{{{ .premium }}} instances</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} clusters</CustomContent>, take the following steps:
 
 ### Step 1. Generate a Flashduty webhook URL
 
