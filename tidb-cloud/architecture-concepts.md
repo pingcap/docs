@@ -154,3 +154,64 @@ A [TiFlash node](/tiflash/tiflash-overview.md) is a specialized type of storage 
 - **Vector search index support**
 
     The vector search index feature uses TiFlash replicas for tables, enabling advanced search capabilities and improving efficiency in complex analytical scenarios.
+
+## Request Unit 
+A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
+
+### Request Unit for Starter & Essential 
+Currently, the RU will include statistics for the following resources:
+| Resource | RU Consumption |
+| :--- | :--- |
+| **Read** | 2 storage read batches consumes 1 RU |
+| | 8 storage read requests consumes 1 RU |
+| | 64 KiB read request payload consumes 1 RU |
+| **Write\*** | 2 storage write batch consumes 1 RU |
+| | 2 storage write request consumes 1 RU |
+| | 2 KiB write request payload consumes 1 RU |
+| | 16 KiB write request payload consumes 1 RU (for transactions\*\* >= 16 MiB) |
+| **SQL CPU** | 3 ms consumes 1 RU |
+| **Network Egress** | 1 KiB read consumes 1 RU for Public Endpoint |
+| | 4 KiB read consumes 1 RU for Private Endpoint |
+
+> **Note:** For each request, the RU is calculated by converting the usage of the above resource types into RUs proportionally and then summing them. The values in the table indicate, for each resource type on its own, the approximate amount that corresponds to 1 RU.
+
+*Write: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
+
+**Transaction: This applies only to optimistic transaction or autocommit.
+
+### Request Unit for Premium 
+
+TiDB Cloud Premium normalizes the cost of all database operations using **Request Units (RUs)** and measures cost based on throughput (**Request Units per second, RU/s**). By providing a unified metric, TiDB Cloud ensures that your throughput costs are **deterministic and predictable**, allowing you to manage your application cost-effectively.
+
+#### Baseline Performance Examples
+To help you estimate your workload, here are some baseline performance examples for common operations. 
+
+| Operation Type | Description | Estimated Cost |
+| :--- | :--- | :--- |
+| **Point Read** | Reading a 1 KB item by its unique ID | **1.5 RU** |
+| **OLTP Write** | Standard Sysbench model (1 KB item size) | **2.5 RU** |
+
+> **Note:** > A **Point Read** is the most efficient way to retrieve data by its unique ID. For **Write Operations**, the RU cost accounts for the I/O and indexing effort required to persist the data. RU consumption scales proportionally with data size and operation complexity.
+
+### Request Unit Considerations
+The total RU charge for any given operation is determined by the total **"database effort"** required to execute it. TiDB Cloud calculates this consumption based on four key dimensions:
+
+1. Data Access & Size
+* **Read/Write Volume**: RUs scale with the number of storage requests and the size of the data payload. Reading or writing a large 100 KB document will naturally consume more RUs than a 1 KB record.
+* **Indexing Impact**: Every index on a table must be updated during a write operation. Tables with more indexes will incur higher RU costs for inserts, updates, and deletes.
+
+2. Query Complexity
+* **Scanning Efficiency**: RU consumption is heavily influenced by how many rows the engine must "touch." A point read using a primary key is the most efficient operation. Conversely, a query requiring a full table scan of millions of rows will consume significantly more RUs than one that utilizes an optimized index.
+* **Computational Logic**: Complex SQL operations—including multiple table joins, deep subqueries, and aggregations—require more CPU cycles and "optimizer brainpower" to process.
+
+3. Memory Utilization
+* **Data Buffering & Sorting**: For operations involving large result sets or complex sorting/grouping, TiDB utilizes memory to buffer and process data. The larger the memory footprint required for these intermediate steps, the higher the RU charge.
+* **Result Assembly**: Constructing and holding large, multi-column result sets in memory accounts for a portion of the RU calculation.
+
+4. Consistency & Transactional Overhead
+* **Locking & Concurrency**: High-contention workloads or long-running transactions that require complex locking mechanisms and Multi-Version Concurrency Control (MVCC) will be reflected in the total RU footprint.
+
+## Request Capacity Unit
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your TiDB Cloud Essential cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs-per-second. The number of RCUs you provision determines your cluster’s baseline performance and throughput capacity.
+
+1 RCU represents sustained RUs-per-second capacity. A baseline of X RCU entitles the tenant to X RU/s averaged over 1-minute windows (or comply with our minimal calculation window).
