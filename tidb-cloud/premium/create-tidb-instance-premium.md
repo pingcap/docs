@@ -48,7 +48,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
     > **Note:**
     > 
     > - The maximum RCU value must be set in increments of 100.
-    > - You will be billed for a minimum number of RCUs, known as the **Minimum Billing RCU**. This value is the greater of 25% of your configured maximum RCU or 5,000 RCUs. The minimum billing RCU ensures that dedicated resources are reserved for peak performance. You are charged this minimum amount even if your actual usage is lower.
+    > - You will be billed for a minimum number of RCUs, known as the **Minimum Billing RCU**. This value is the greater of 25% of your configured maximum RCU and 5,000 RCUs. The minimum billing RCU ensures that dedicated resources are reserved for peak performance. You are charged this minimum amount even if your actual usage is lower.
 
 6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 
