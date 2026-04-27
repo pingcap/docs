@@ -328,6 +328,7 @@
         - [CREATE NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/create-notification-integration.md)
         - [ALTER NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/alter-notification-integration.md)
         - [DROP NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/drop-notification-integration.md)
+        - [DESCRIBE NOTIFICATION INTEGRATION](/tidb-cloud-lake/sql/describe-notification-integration.md)
       - Tag
         - [Overview](/tidb-cloud-lake/sql/tag-overview.md)
         - [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md)
@@ -368,6 +369,11 @@
         - [DROP NGRAM INDEX](/tidb-cloud-lake/sql/drop-ngram-index.md)
         - [Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)
         - [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md)
+      - Spatial Index
+        - [Spatial Index](/tidb-cloud-lake/sql/spatial-index-overview.md)
+        - [CREATE SPATIAL INDEX](/tidb-cloud-lake/sql/create-spatial-index.md)
+        - [REFRESH SPATIAL INDEX](/tidb-cloud-lake/sql/refresh-spatial-index.md)
+        - [DROP SPATIAL INDEX](/tidb-cloud-lake/sql/drop-spatial-index.md)
       - Vector Index
         - [CREATE VECTOR INDEX](/tidb-cloud-lake/sql/create-vector-index.md)
         - [DROP VECTOR INDEX](/tidb-cloud-lake/sql/drop-vector-index.md)
@@ -378,13 +384,13 @@
         - [REFRESH VIRTUAL COLUMN](/tidb-cloud-lake/sql/refresh-virtual-column.md)
         - [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md)
       - User-Defined Function
+        - [User-Defined Function](/tidb-cloud-lake/sql/user-defined-function.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function.md)
         - [CREATE AGGREGATE FUNCTION](/tidb-cloud-lake/sql/create-aggregate-function.md)
         - [CREATE SCALAR FUNCTION](/tidb-cloud-lake/sql/create-scalar-function.md)
         - [CREATE TABLE FUNCTION](/tidb-cloud-lake/sql/create-table-function.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md)
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
-        - [User-Defined Function](/tidb-cloud-lake/sql/user-defined-function.md)
       - External Function
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
         - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
@@ -442,11 +448,18 @@
         - [QUERY_HISTORY](/tidb-cloud-lake/sql/query-history.md)
         - [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)
         - [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)
+      - Worker
+        - [Overview](/tidb-cloud-lake/sql/worker-overview.md)
+        - [CREATE WORKER](/tidb-cloud-lake/sql/create-worker.md)
+        - [ALTER WORKER](/tidb-cloud-lake/sql/alter-worker.md)
+        - [DROP WORKER](/tidb-cloud-lake/sql/drop-worker.md)
+        - [SHOW WORKERS](/tidb-cloud-lake/sql/show-workers.md)
+        - [Worker Examples](/tidb-cloud-lake/worker-examples.md)
       - Workload Group
+        - [Workload Group](/tidb-cloud-lake/sql/workload-group.md)
         - [ALTER WORKLOAD GROUP](/tidb-cloud-lake/sql/alter-workload-group.md)
         - [CREATE WORKLOAD GROUP](/tidb-cloud-lake/sql/create-workload-group.md)
         - [DROP WORKLOAD GROUP](/tidb-cloud-lake/sql/drop-workload-group.md)
-        - [Workload Group](/tidb-cloud-lake/sql/workload-group.md)
         - [RENAME WORKLOAD GROUP](/tidb-cloud-lake/sql/rename-workload-group.md)
         - [SHOW WORKLOAD GROUPS](/tidb-cloud-lake/sql/show-workload-groups.md)
       - Table Versioning
@@ -1171,7 +1184,6 @@
       - [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md)
       - [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md)
       - [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md)
-      - [READ_FILE](/tidb-cloud-lake/sql/read-file.md)
       - [RESULT_SCAN](/tidb-cloud-lake/sql/result-scan.md)
       - [SYSTEM$SET_CACHE_CAPACITY](/tidb-cloud-lake/sql/set-cache-capacity.md)
       - [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants-sql.md)
@@ -1197,6 +1209,7 @@
       - [GROUPING](/tidb-cloud-lake/sql/grouping.md)
       - [HUMANIZE_NUMBER](/tidb-cloud-lake/sql/humanize-number.md)
       - [HUMANIZE_SIZE](/tidb-cloud-lake/sql/humanize-size.md)
+      - [READ_FILE](/tidb-cloud-lake/sql/read-file.md)
       - [REMOVE_NULLABLE](/tidb-cloud-lake/sql/remove-nullable.md)
       - [TO_NULLABLE](/tidb-cloud-lake/sql/nullable.md)
       - [TYPEOF](/tidb-cloud-lake/sql/typeof.md)

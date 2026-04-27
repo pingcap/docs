@@ -45,7 +45,7 @@ Get recent query history for a specific warehouse:
 
 ```sql
 QUERY_HISTORY
-    BY WAREHOUSE etl_wh
+    BY WAREHOUSE 'etl-wh'
     FROM '2023-08-20 00:00:00'
     TO '2023-08-20 06:00:00'
     LIMIT 200;

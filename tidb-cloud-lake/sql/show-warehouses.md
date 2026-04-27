@@ -56,5 +56,5 @@ SHOW WAREHOUSES LIKE '%prod%';
 Use a literal without `LIKE`:
 
 ```sql
-SHOW WAREHOUSES nightly_etl;
+SHOW WAREHOUSES 'nightly-etl';
 ```

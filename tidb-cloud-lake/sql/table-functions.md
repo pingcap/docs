@@ -19,7 +19,6 @@ This page provides reference information for the table functions in {{{ .lake }}
 | Function | Description | Example |
 |----------|-------------|--------|
 | [LIST_STAGE](/tidb-cloud-lake/sql/list-stage.md) | Lists files in a stage | `SELECT * FROM LIST_STAGE(LOCATION => '@mystage/data/')` |
-| [READ_FILE](/tidb-cloud-lake/sql/read-file.md) | Reads file content from a stage as binary | `SELECT read_file('@mystage/file.csv')` |
 | [RESULT_SCAN](/tidb-cloud-lake/sql/result-scan.md) | Retrieves the result set of a previous query | `SELECT * FROM RESULT_SCAN(LAST_QUERY_ID())` |
 
 ## Data Generation

@@ -205,7 +205,7 @@ SELECT sale_date, amount,
            ORDER BY sale_date
            RANGE BETWEEN INTERVAL '7' DAY PRECEDING AND CURRENT ROW
        ) AS avg_7day
-FROM sales
+FROM sales_duplicates
 ORDER BY sale_date;
 ```
 
