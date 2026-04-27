@@ -454,7 +454,7 @@
         - [ALTER WORKER](/tidb-cloud-lake/sql/alter-worker.md)
         - [DROP WORKER](/tidb-cloud-lake/sql/drop-worker.md)
         - [SHOW WORKERS](/tidb-cloud-lake/sql/show-workers.md)
-        - [Worker Examples](/tidb-cloud-lake/worker-examples.md)
+        - [Worker Examples](/tidb-cloud-lake/sql/worker-examples.md)
       - Workload Group
         - [Workload Group](/tidb-cloud-lake/sql/workload-group.md)
         - [ALTER WORKLOAD GROUP](/tidb-cloud-lake/sql/alter-workload-group.md)
