@@ -29,35 +29,30 @@ In this step, we'll configure Snowflake to access Amazon S3 using IAM roles. Fir
 
     ```json
     {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": [
-                  "s3:PutObject",
-                  "s3:GetObject",
-                  "s3:GetObjectVersion",
-                  "s3:DeleteObject",
-                  "s3:DeleteObjectVersion"
-                ],
-                "Resource": "arn:aws:s3:::databend-doc/snowflake/*"
-            },
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation"
-                ],
-                "Resource": "arn:aws:s3:::databend-doc",
-                "Condition": {
-                    "StringLike": {
-                        "s3:prefix": [
-                            "snowflake/*"
-                        ]
-                    }
-                }
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:PutObject",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:DeleteObject",
+            "s3:DeleteObjectVersion"
+          ],
+          "Resource": "arn:aws:s3:::databend-doc/snowflake/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+          "Resource": "arn:aws:s3:::databend-doc",
+          "Condition": {
+            "StringLike": {
+              "s3:prefix": ["snowflake/*"]
             }
-        ]
+          }
+        }
+      ]
     }
     ```
 
@@ -93,22 +88,22 @@ In this step, we'll configure Snowflake to access Amazon S3 using IAM roles. Fir
 
 5. Go back to the AWS Management Console, open the role `databend-doc-role`, and navigate to **Trust relationships** > **Edit trust policy**. Copy the following code into the editor:
 
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
         {
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::123456789012:user/example"
-            },
-            "Action": "sts:AssumeRole"
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::123456789012:user/example"
+          },
+          "Action": "sts:AssumeRole"
         }
-    ]
-}
-```
+      ]
+    }
+    ```
 
-The ARN `arn:aws:iam::123456789012:user/example` is the IAM user ARN for the Snowflake account that we obtained in the previous step.
+    The ARN `arn:aws:iam::123456789012:user/example` is the IAM user ARN for the Snowflake account that we obtained in the previous step.
 
 ## Step 2: Preparing and Exporting Data to Amazon S3
 

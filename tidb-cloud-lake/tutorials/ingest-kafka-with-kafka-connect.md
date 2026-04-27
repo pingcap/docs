@@ -72,30 +72,30 @@ In this step, you will create a Kafka topic in Confluent Cloud.
 
 4. On the **Add new schema** page, select the **Avro** tab, then copy and paste the following schema to the editor:
 
-```json
-{
-    "doc": "Sample schema to help you get started.",
-    "fields": [
+    ```json
+    {
+      "doc": "Sample schema to help you get started.",
+      "fields": [
         {
-            "doc": "The int type is a 32-bit signed integer.",
-            "name": "id",
-            "type": "int"
+          "doc": "The int type is a 32-bit signed integer.",
+          "name": "id",
+          "type": "int"
         },
         {
-            "doc": "The string is a unicode character sequence.",
-            "name": "name",
-            "type": "string"
+          "doc": "The string is a unicode character sequence.",
+          "name": "name",
+          "type": "string"
         },
         {
-            "doc": "The string is a unicode character sequence.",
-            "name": "age",
-            "type": "int"
+          "doc": "The string is a unicode character sequence.",
+          "name": "age",
+          "type": "int"
         }
-    ],
-    "name": "sampleRecord",
-    "type": "record"
-}
-```
+      ],
+      "name": "sampleRecord",
+      "type": "record"
+    }
+    ```
 
 ![alt text](/media/tidb-cloud-lake/kafka-1.png)
 
@@ -149,26 +149,26 @@ In this step, you will produce messages using the Confluent CLI and verify that 
 
     ```json
     {
-        "doc": "Sample schema to help you get started.",
-        "fields": [
-            {
-                "doc": "The int type is a 32-bit signed integer.",
-                "name": "id",
-                "type": "int"
-            },
-            {
-                "doc": "The string is a unicode character sequence.",
-                "name": "name",
-                "type": "string"
-            },
-            {
-                "doc": "The string is a unicode character sequence.",
-                "name": "age",
-                "type": "int"
-            }
-        ],
-        "name": "sampleRecord",
-        "type": "record"
+      "doc": "Sample schema to help you get started.",
+      "fields": [
+        {
+          "doc": "The int type is a 32-bit signed integer.",
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "doc": "The string is a unicode character sequence.",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "doc": "The string is a unicode character sequence.",
+          "name": "age",
+          "type": "int"
+        }
+      ],
+      "name": "sampleRecord",
+      "type": "record"
     }
     ```
 
