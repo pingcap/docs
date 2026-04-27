@@ -71,8 +71,6 @@ For mission-critical applications that require the highest level of performance,
 - **Pay-as-you-go Pricing**:Billed based on actual Request Capacity Unit (RCU) consumption and storage usage, this flexible pay-as-you-go model eliminates the need for manual backend over-provisioning.
 - **Advanced Security**: Offers deeper security configurations and compliance capabilities required by large-scale enterprises and regulated industries.
 
-{{{ .premium }}} is the ideal choice for customers migrating from Essential who have outgrown shared environments and require a more stable, isolated, and high-performance database tier.
-
 To ensure maximum uptime and resilience for mission-critical workloads, {{{ .premium }}} exclusively provides **Regional High Availability**. By distributing nodes across multiple availability zones, it offers superior redundancy compared to zonal deployments.
 
 ## TiDB Cloud Dedicated
@@ -108,7 +106,7 @@ For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/api
 Nodes are the core components of the TiDB architecture. TiDB nodes, TiKV nodes, and TiFlash nodes work together to process SQL queries, store data, and accelerate analytical workloads.
 
 - In a TiDB Cloud Dedicated cluster, you can fully manage the number and size of your dedicated TiDB, TiKV, and TiFlash nodes according to your performance requirements. For more information, see [Scalability](/tidb-cloud/scalability-concepts.md).
-- In a {{{ .starter }}} or {{{ .essential }}} instance, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
+- In a {{{ .starter }}} or {{{ .essential }}} or {{{ .premium }}}instance, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
 
 ### TiDB node
 
@@ -155,31 +153,35 @@ A [TiFlash node](/tiflash/tiflash-overview.md) is a specialized type of storage 
 
     The vector search index feature uses TiFlash replicas for tables, enabling advanced search capabilities and improving efficiency in complex analytical scenarios.
 
-## Request Unit 
+
+## Request Capacity Unit In TiDB Cloud Premium
+
+### What is a Request Capacity Unit (RCU)
+
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your TiDB Cloud Premium instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs-per-second. The number of RCUs you provision determines your cluster’s baseline performance and throughput capacity.
+
+1 RCU represents sustained RUs-per-second capacity. A baseline of X RCU entitles the tenant to X RU/s averaged over 1-minute windows (or comply with our minimal calculation window).
+
+### TiDB Cloud Premium RCU Autoscale
+
+When configuring your TiDB Cloud Premium instance, you specify the Maximum RCU ($RCU_{max}$) required for your workload. TiDB Cloud automatically scales the available Request Units ($RCU$) within a range where $0.25 \times RCU_{max} \le RCU \le RCU_{max}$.For example, if you set the maximum throughput to 20,000 RCU, the system will dynamically scale between 5,000 and 20,000 RCU based on real-time demand. This scaling process is automatic and instantaneous, ensuring you can consume up to your Max RCU at any time with no manual intervention or latency delays.
+
+### TiDB Cloud Premium RCU Billing
+
+TiDB Cloud Premium follows a usage-based billing model where you are charged based on the actual Request Units consumed by your workload.
+
+#### Per-Minute Calculation
+
+The system calculates your usage every minute. It measures the total amount of Request Units consumed within that 60-second window and averages it to determine the RCU（RUs-per-second capacity） for that minute. This ensures that your billing accurately reflects real-time traffic fluctuations.
+
+#### Minimum Usage Requirement
+To ensure high availability and guarantee that resources are always reserved for your cluster, a Minimum Billing RCU is automatically established based on your Maximum RCU setting. This acts as a baseline for the reserved capacity dedicated to your instance.
+
+If your actual consumption during a minute is lower than this threshold, the billing will default to the Minimum Billing RCU. This mechanism ensures that the system can immediately handle sudden traffic spikes up to your specified maximum without any performance degradation or delays.
+
+
+### Request Unit In TiDB Cloud Premium
 A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
-
-### Request Unit for Starter & Essential 
-Currently, the RU will include statistics for the following resources:
-| Resource | RU Consumption |
-| :--- | :--- |
-| **Read** | 2 storage read batches consumes 1 RU |
-| | 8 storage read requests consumes 1 RU |
-| | 64 KiB read request payload consumes 1 RU |
-| **Write\*** | 2 storage write batch consumes 1 RU |
-| | 2 storage write request consumes 1 RU |
-| | 2 KiB write request payload consumes 1 RU |
-| | 16 KiB write request payload consumes 1 RU (for transactions\*\* >= 16 MiB) |
-| **SQL CPU** | 3 ms consumes 1 RU |
-| **Network Egress** | 1 KiB read consumes 1 RU for Public Endpoint |
-| | 4 KiB read consumes 1 RU for Private Endpoint |
-
-> **Note:** For each request, the RU is calculated by converting the usage of the above resource types into RUs proportionally and then summing them. The values in the table indicate, for each resource type on its own, the approximate amount that corresponds to 1 RU.
-
-*Write: Each write operation is duplicated to multiple storage processes (3 for row-based storage without index), and each duplicate is considered a distinct write operation.
-
-**Transaction: This applies only to optimistic transaction or autocommit.
-
-### Request Unit for Premium 
 
 TiDB Cloud Premium normalizes the cost of all database operations using **Request Units (RUs)** and measures cost based on throughput (**Request Units per second, RU/s**). By providing a unified metric, TiDB Cloud ensures that your throughput costs are **deterministic and predictable**, allowing you to manage your application cost-effectively.
 
@@ -210,8 +212,3 @@ The total RU charge for any given operation is determined by the total **"databa
 
 4. Consistency & Transactional Overhead
 * **Locking & Concurrency**: High-contention workloads or long-running transactions that require complex locking mechanisms and Multi-Version Concurrency Control (MVCC) will be reflected in the total RU footprint.
-
-## Request Capacity Unit
-A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your TiDB Cloud Essential cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs-per-second. The number of RCUs you provision determines your cluster’s baseline performance and throughput capacity.
-
-1 RCU represents sustained RUs-per-second capacity. A baseline of X RCU entitles the tenant to X RU/s averaged over 1-minute windows (or comply with our minimal calculation window).
