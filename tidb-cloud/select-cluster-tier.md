@@ -86,13 +86,13 @@ To get the prefix for your {{{ .starter }}} or {{{ .essential }}} instance, take
 
 ## {{{ .premium }}} {#premium}
 
-For mission-critical enterprise workloads requiring hyper-scale and the highest levels of performance, the Premium plan delivers a true cloud-native experience with the following features:
+For mission-critical enterprise workloads that require large-scale capacity and consistent high performance, the Premium plan provides a cloud-native experience with the following features:
 
-- **Instant elasticity**: handles massive and unpredictable traffic spikes by scaling computing resources automatically, ensuring zero performance bottlenecks during peak demands.
-- **Unlimited growth**: architected for virtually unlimited expansion in both storage and throughput, allowing your database to scale seamlessly alongside your business without physical infrastructure constraints.
-- **Zero-infrastructure management**: provides a fully managed, "zero-touch" operational experience, eliminating the complexity of manual scaling, patching, or capacity planning.
+- **Instant elasticity**: automatically scales computing resources to absorb sudden traffic spikes and maintain stable performance during peak demand.
+- **Unlimited scalability**: expands storage and throughput to keep pace with business growth, without physical infrastructure constraints.
+- **Zero-infrastructure management**: offers a fully managed service that eliminates manual scaling, patching, and capacity planning.
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
-- **Advanced security and compliance**: incorporates our most stringent security standards, including advanced encryption, CMEK, private networking options, and comprehensive compliance certifications to protect your most sensitive data.
+- **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
 
 ## TiDB Cloud Dedicated
 
