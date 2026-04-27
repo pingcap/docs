@@ -79,7 +79,7 @@ Every column except the timestamp and line column becomes a LogQL label.
    - **Database**: The database name containing your log table
    - **Warehouse**: The warehouse name
 
-For detailed information on obtaining connection details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+For detailed information on obtaining connection details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
 ### Step 3. Configure Grafana Data Source
 
@@ -128,7 +128,7 @@ For advanced use cases requiring direct SQL access or when working with self-hos
 Before you start, ensure you have:
 
 - Grafana installed. Refer to the official installation guide: [https://grafana.com/docs/grafana/latest/setup-grafana/installation](https://grafana.com/docs/grafana/latest/setup-grafana/installation)
-- {{{ .lake }}} access with connection information for a warehouse (see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting))
+- {{{ .lake }}} access with connection information for a warehouse (see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse))
 
 ### Step 2. Modify Grafana Configuration
 

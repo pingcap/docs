@@ -237,7 +237,7 @@ Before you start, ensure that you have [Python](https://www.python.org/) install
 
 ### Step 1. Obtain Connection Information
 
-Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
 ### Step 2. Deploy Jupyter Notebook
 
