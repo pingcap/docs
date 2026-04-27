@@ -38,7 +38,44 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 
 ## Examples
 
-This example creates an external function that calculates the greatest common divisor (GCD) of two integers:
+This example walks through a complete end-to-end setup for an external function that calculates the greatest common divisor (GCD) of two integers.
+
+### Step 1: Set Up the Python UDF Server
+
+Install the `databend-udf` package:
+
+```bash
+pip install databend-udf
+```
+
+Create a file `udf_server.py` with the following content:
+
+```python
+from databend_udf import udf, UDFServer
+
+@udf(
+    input_types=["INT", "INT"],
+    result_type="INT",
+    skip_null=True,
+)
+def gcd(x: int, y: int) -> int:
+    while y != 0:
+        (x, y) = (y, x % y)
+    return x
+
+if __name__ == '__main__':
+    server = UDFServer("0.0.0.0:8815")
+    server.add_function(gcd)
+    server.serve()
+```
+
+Start the server:
+
+```bash
+python udf_server.py
+```
+
+### Step 2: Register the Function in {{{ .lake }}}
 
 ```sql
 CREATE FUNCTION gcd AS (INT, INT)
@@ -46,4 +83,14 @@ CREATE FUNCTION gcd AS (INT, INT)
     LANGUAGE python
     HANDLER = 'gcd'
     ADDRESS = 'http://localhost:8815';
+```
+
+### Step 3: Call the Function
+
+```sql
+SELECT gcd(48, 18);
+-- Returns: 6
+
+SELECT gcd(100, 75);
+-- Returns: 25
 ```

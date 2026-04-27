@@ -7,7 +7,8 @@ summary: TSV (Tab Separated Values) is a simple file format used to store tabula
 
 ## What is TSV?
 
-TSV (Tab Separated Values) is a simple file format used to store tabular data, such as a spreadsheet or database. The TSV file format is very similar to CSV, the records are separated by newlines, and each field is separated by a tab.
+TSV (Tab Separated Values, called `TEXT` in {{{ .lake }}} `v1.2.890-nightly` and later) is a simple file format used to store tabular data, such as a spreadsheet or database. The TSV file format is very similar to CSV, the records are separated by newlines, and each field is separated by a tab.
+
 The following example shows a TSV file with two records:
 
 ```text
@@ -29,6 +30,10 @@ FROM { userStage | internalStage | externalStage | externalLocation }
     COMPRESSION = AUTO
 ) ]
 ```
+
+> **Note:**
+>
+> Starting in {{{ .lake }}} `v1.2.890-nightly`, `TEXT` is supported as an alias for `TSV`. This guide keeps `TYPE = TSV` in examples so they continue to work on older server versions. If you only target `v1.2.890-nightly` or later, you can use `TYPE = TEXT` instead.
 
 - For more TSV file format options, refer to [TSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options).
 - For more COPY INTO table options, refer to [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).

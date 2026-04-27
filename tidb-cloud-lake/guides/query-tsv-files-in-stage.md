@@ -5,6 +5,8 @@ summary: Create an external stage with your own S3 bucket and credentials where 
 
 # Querying TSV Files in Stage
 
+This guide queries TSV (called `TEXT` in {{{ .lake }}} `v1.2.890-nightly` and later) files from a stage. The examples keep `TSV` for compatibility with older server versions.
+
 ## Syntax
 
 - [Query columns by position](/tidb-cloud-lake/guides/query-stage.md#query-columns-by-position)

@@ -11,6 +11,7 @@ These topics provide reference information for the DDL (Data Definition Language
 
 | Component | Description |
 |-----------|-------------|
+| **[Catalog](/tidb-cloud-lake/sql/show-catalogs.md)** | Create, drop and list catalogs |
 | **[Database](/tidb-cloud-lake/sql/ddl-database-overview.md)** | Create, alter, and drop databases |
 | **[Table](/tidb-cloud-lake/sql/ddl-table-overview.md)** | Create, alter, and manage tables |
 | **[View](/tidb-cloud-lake/sql/ddl-view-overview.md)** | Create and manage virtual tables based on queries |

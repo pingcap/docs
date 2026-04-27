@@ -340,6 +340,8 @@
         - [DESC CONNECTION](/tidb-cloud-lake/sql/desc-connection.md)
         - [DROP CONNECTION](/tidb-cloud-lake/sql/drop-connection.md)
         - [SHOW CONNECTIONS](/tidb-cloud-lake/sql/show-connections.md)
+      - Catalog
+        - [SHOW CATALOGS](/tidb-cloud-lake/sql/show-catalogs.md)
       - File Format
         - [Overview](/tidb-cloud-lake/sql/file-format.md)
         - [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md)
@@ -407,6 +409,13 @@
         - [DROP PASSWORD POLICY](/tidb-cloud-lake/sql/drop-password-policy.md)
         - [Password Policy](/tidb-cloud-lake/sql/password-policy-sql.md)
         - [SHOW PASSWORD POLICIES](/tidb-cloud-lake/sql/show-password-policies.md)
+      - Dictionary
+        - [Overview](/tidb-cloud-lake/sql/dictionary.md)
+        - [CREATE DICTIONARY](/tidb-cloud-lake/sql/create-dictionary.md)
+        - [DROP DICTIONARY](/tidb-cloud-lake/sql/drop-dictionary.md)
+        - [RENAME DICTIONARY](/tidb-cloud-lake/sql/rename-dictionary.md)
+        - [SHOW CREATE DICTIONARY](/tidb-cloud-lake/sql/show-create-dictionary.md)
+        - [SHOW DICTIONARIES](/tidb-cloud-lake/sql/show-dictionaries.md)
       - Transaction
         - [BEGIN](/tidb-cloud-lake/sql/begin.md)
         - [COMMIT](/tidb-cloud-lake/sql/commit.md)
@@ -494,6 +503,7 @@
       - [UNSET](/tidb-cloud-lake/sql/unset.md)
       - [SET_VAR](/tidb-cloud-lake/sql/set-var.md)
       - [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md)
+      - [SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md)
       - [SHOW FUNCTIONS](/tidb-cloud-lake/sql/show-functions.md)
       - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions-sql.md)
       - [SHOW TABLE FUNCTIONS](/tidb-cloud-lake/sql/show-table-functions.md)
@@ -502,10 +512,10 @@
       - [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table-sql.md)
       - [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table-sql.md)
       - [VACUUM TEMPORARY FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md)
+      - [VACUUM VIRTUAL COLUMN](/tidb-cloud-lake/sql/vacuum-virtual-column.md)
       - [EXECUTE IMMEDIATE](/tidb-cloud-lake/sql/execute-immediate.md)
       - [SYSTEM FLUSH PRIVILEGES](/tidb-cloud-lake/sql/system-flush-privileges.md)
       - [SYSTEM ENABLE / DISABLE EXCEPTION_BACKTRACE](/tidb-cloud-lake/sql/system-enable-disable-exception-backtrace.md)
-      - [SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md)
   - SQL Functions
     - [SQL Function Reference](/tidb-cloud-lake/sql/sql-function-reference.md)
     - Bitmap Functions
@@ -822,6 +832,10 @@
       - [QUANTILE_TDIGEST_WEIGHTED](/tidb-cloud-lake/sql/quantile-tdigest-weighted.md)
       - [RETENTION](/tidb-cloud-lake/sql/retention.md)
       - [SKEWNESS](/tidb-cloud-lake/sql/skewness.md)
+      - [ST_COLLECT](/tidb-cloud-lake/sql/st-collect.md)
+      - [ST_ENVELOPE_AGG](/tidb-cloud-lake/sql/st-envelope-agg.md)
+      - [ST_INTERSECTION_AGG](/tidb-cloud-lake/sql/st-intersection-agg.md)
+      - [ST_UNION_AGG](/tidb-cloud-lake/sql/st-union-agg.md)
       - [STDDEV_POP](/tidb-cloud-lake/sql/stddev-pop.md)
       - [STDDEV_SAMP](/tidb-cloud-lake/sql/stddev-samp.md)
       - [STRING_AGG](/tidb-cloud-lake/sql/string-agg.md)
