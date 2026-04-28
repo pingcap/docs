@@ -1429,8 +1429,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - Default value: `2`
 - Range: `[1, 256]`
-- Used to control the concurrency level for merging samples collected from different regions.
-- Used to control the concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of indexes which can concurrently collect statistics.
+- This variable controls the following aspects of `ANALYZE` concurrency:
+    - The concurrency for merging samples collected from different regions.
+    - The concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
