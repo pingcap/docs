@@ -4141,7 +4141,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
-- Used to control the concurrency for merging TopN results of partitioned tables.
+- This variable controls the concurrency for merging TopN results of partitioned tables.
 
 ### tidb_enable_async_merge_global_stats <span class="version-mark">New in v7.5.0</span>
 
