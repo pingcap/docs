@@ -6,6 +6,11 @@ aliases: ['/tidbcloud/premium/tidb-cloud-encrypt-cmek']
 
 # Dual-layer Data Encryption
 
+> **Note:**
+>
+> Currently, the Dual-layer Data Encryption feature is only available upon request. To request access, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for Dual-layer Data Encryption" in the **Description** field, and then click **Submit**.
+
+
 ## Overview
 {{{ .premium }}} enables data encryption at rest by default on TiDB service instance storage and snapshot volumes. This provides basic encryption capabilities to enhance data security. Building on this, {{{ .premium }}} allows you to combine TiDB service's storage engine encryption with your cloud provider's KMS, adding another layer of data encryption (Dual-layer Data Encryption).
 
