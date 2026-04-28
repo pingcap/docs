@@ -763,7 +763,7 @@ The default value is `2`.
 
 #### `tidb_analyze_partition_concurrency`
 
-Used to control the concurrency for saving analyze results (writing TopN and histograms to system tables). The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
+This variable controls the concurrency for saving analyze results (writing TopN and histograms to system tables). The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
 
 #### `tidb_analyze_distsql_scan_concurrency`
 
