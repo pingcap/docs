@@ -49,7 +49,7 @@ ClusterOption ::=
 
 ## Options
 
-- **Targets (`RefreshTargetList`)**
+- **Targets (`RefreshTargetList`)**:
     - `table_name` refreshes a table in the current database.
     - `db_name.table_name` refreshes a fully qualified table.
     - `db_name.*` refreshes every table in the specified database.
