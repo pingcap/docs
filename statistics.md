@@ -767,8 +767,10 @@ Used to control the concurrency for saving analyze results (writing TopN and his
 
 #### `tidb_analyze_distsql_scan_concurrency`
 
-1. Used to control the concurrency of scanning TiKV regions.  
-2. Used to control the concurrency of scanning regions for special indexes (indexes generated from virtual columns).
+This variable controls the following aspects of `ANALYZE` concurrency:
+
+- The concurrency of scanning TiKV regions. 
+- The concurrency of scanning regions for special indexes (indexes generated from virtual columns).
 
 The default value is `4`.
 
