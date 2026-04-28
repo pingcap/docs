@@ -38,7 +38,6 @@ When you create a migration job, you choose one of the following modes:
 
 - The system databases `mysql`, `information_schema`, `performance_schema`, and `sys` are filtered out and not migrated, even if you select all databases.
 - During existing data migration, if the target database already contains the table to be migrated and there are duplicate keys, the rows with duplicate keys are replaced.
-- During incremental data migration, if a migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, `INSERT` statements are migrated as `REPLACE`, and `UPDATE` statements as `DELETE` and `REPLACE`. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows in the target instance.
 
 For a complete list of Data Migration limitations across TiDB Cloud, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
