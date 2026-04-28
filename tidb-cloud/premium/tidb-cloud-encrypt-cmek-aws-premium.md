@@ -137,7 +137,7 @@ If the backup is encrypted using a CMEK, you must verify that the new instance c
 
 1. The key ARN will remain unchanged. Click **Check** to proceed with the trust policy verification.
 2. The system will check if the authorized TiDB Cloud account in the key policy matches the one associated with the original backup.
-3. If the TiDB Cloud account in the key policy is the same as the TiDB Cloud account associated with the original backup TiDB instance, no further authorization is required
+3. If the TiDB Cloud account in the key policy is the same as the TiDB Cloud account associated with the original backup TiDB instance, no further authorization is required.
 4. If the TiDB Cloud account in the key policy is different from the TiDB Cloud account associated with the original backup TiDB instance, you must copy the provided key policy and update it in your AWS KMS. This re-authorizes the key and ensures the new instance can access it.
 
 #### Service-Managed Encryption Key
