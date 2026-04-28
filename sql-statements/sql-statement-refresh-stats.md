@@ -73,7 +73,7 @@ ClusterOption ::=
   REFRESH STATS sales.* LITE;
   ```
 
-- Force every TiDB node to load full statistics for the entire cluster:
+- Force every TiDB node to load complete statistics for the entire cluster:
 
   ```sql
   REFRESH STATS *.* FULL CLUSTER;
