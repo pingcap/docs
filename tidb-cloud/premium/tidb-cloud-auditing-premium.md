@@ -243,14 +243,14 @@ All classes of audit logs contain the following fields:
 
 | Field         | Description                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------|
-| `ID`            | The unique identifier that identifies the audit record of an operation.                        |
-| `EVENT`         | The event classes of the audit record. Multiple event types are separated by commas (`,`).     |
-| `USER`          | The username of the audit record.                                                              |
-| `ROLES`         | The roles of the user at the time of the operation.                                            |
-| `CONNECTION_ID` | The identifier of the user's connection.                                                       |
-| `TABLES`        | The accessed tables related to this audit record.                                              |
-| `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
-| `REASON`        | The error message of the audit record. Only recorded when an error occurs during the operation.|
+| `ID`            | The unique identifier of the audit record. |
+| `EVENT`         | The event classes of the audit record. Multiple event classes are separated by commas (`,`).  |
+| `USER`          | The name of the user who performed the operation.                                             |
+| `ROLES`         | The roles assigned to the user at the time of the operation.                                  |
+| `CONNECTION_ID` | The identifier of the user's connection.                                                      |
+| `TABLES`        | The tables accessed during the operation.                                              |
+| `STATUS_CODE`   | The status code of the operation. `1` indicates success, and `0` indicates failure.           |
+| `REASON`        | The error message of the operation. Recorded only when an error occurs. |
 
 ### SQL statement information
 
@@ -259,9 +259,9 @@ When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
 | `CURRENT_DB`     | The name of the current database.                                                                             |
-| `SQL_TEXT`       | The executed SQL statements. If audit log redaction is enabled, the redacted SQL statements are recorded.     |
-| `EXECUTE_PARAMS` | The parameters for the `EXECUTE` statements. Recorded only when the event classes include `EXECUTE` and redaction is disabled. |
-| `AFFECTED_ROWS`  | The number of affected rows of the SQL statements. Recorded only when the event classes include `QUERY_DML`.  |
+| `SQL_TEXT`       | The executed SQL statement. If audit log redaction is enabled, the redacted statement is recorded instead.     |
+| `EXECUTE_PARAMS` | The parameters passed to the `EXECUTE` statement. Recorded only when the event classes include `EXECUTE` and redaction is disabled. |
+| `AFFECTED_ROWS`  | The number of rows affected by the SQL statement. Recorded only when the event classes include `QUERY_DML`.  |
 
 ### Connection information
 
@@ -269,19 +269,19 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
-| `CURRENT_DB`      | The name of the current database. When the event classes include `DISCONNECT`, this information is not recorded. |
-| `CONNECTION_TYPE` | The type of connection, including Socket, UnixSocket, and SSL/TLS.                                 |
-| `PID`             | The process ID of the current connection.                                                          |
-| `SERVER_VERSION`  | The current version of the connected TiDB server.                                                  |
-| `SSL_VERSION`     | The current version of SSL in use.                                                                 |
-| `HOST_IP`         | The current IP address of the connected TiDB server.                                               |
-| `HOST_PORT`       | The current port of the connected TiDB server.                                                     |
-| `CLIENT_IP`       | The current IP address of the client.                                                              |
-| `CLIENT_PORT`     | The current port of the client.                                                                    |
+| `CURRENT_DB`      | The name of the current database. Not recorded when the event classes include `DISCONNECT`.  |
+| `CONNECTION_TYPE` | The type of the connection, such as Socket, UnixSocket, or SSL/TLS.                          |
+| `PID`             | The process ID of the current connection.                                                    |
+| `SERVER_VERSION`  | The version of the connected TiDB server.                                                  |
+| `SSL_VERSION`     | The version of SSL in use.                                                                 |
+| `HOST_IP`         | The IP address of the connected TiDB server.                                               |
+| `HOST_PORT`       | The port of the connected TiDB server.                                                     |
+| `CLIENT_IP`       | The IP address of the client.                                                              |
+| `CLIENT_PORT`     | The port of the client.                                                                    |
 
 > **Note:**
 >
-> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
+> To improve traffic visibility, `CLIENT_IP` displays the actual client IP address for connections through AWS PrivateLink instead of the load balancer IP. This feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 
@@ -289,9 +289,9 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 | Field          | Description                                                                                                   |
 |----------------|---------------------------------------------------------------------------------------------------------------|
-| `AUDIT_OP_TARGET`| The objects of the setting related to TiDB Cloud database auditing. |
-| `AUDIT_OP_ARGS`  | The arguments of the setting related to TiDB Cloud database auditing. |
+| `AUDIT_OP_TARGET`| The target object of the TiDB Cloud database audit setting change. |
+| `AUDIT_OP_ARGS`  | The arguments used in the TiDB Cloud database audit setting change. |
 
 ## Audit logging limitations
 
-{{{ .premium }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files to find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+{{{ .premium }}} does not guarantee that audit logs are written in chronological order. To find the most recent events, you might need to review all log files. To sort logs chronologically, use the `TIME` field in each audit record.
