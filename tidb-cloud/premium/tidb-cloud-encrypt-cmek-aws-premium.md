@@ -117,7 +117,7 @@ Before proceeding, ensure you have created a symmetric encryption key in your AW
 #### Option 2: Service-Managed Encryption Key
 
 To let TiDB Cloud automatically manage the encryption key for you, follow these steps:
-1. On the Security page of your {{{ .premium }}} instance , click **Enable** in the Dual-layer Data Encryption section.
+1. On the **Security** page of your {{{ .premium }}} instance, click **Enable** in the Dual-layer Data Encryption section.
 2. Select **Service-Managed Encryption Key**.
 3. Click **Enable**.
 
