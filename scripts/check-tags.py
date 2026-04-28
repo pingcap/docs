@@ -32,33 +32,27 @@ import re
 import sys
 import os
 
-TAG_PATTERN = re.compile(r'</?[A-Za-z][A-Za-z0-9:-]*(?:\s[^>\n]*)?/?>')
+TAG_PATTERN = re.compile(r'</?[A-Za-z][A-Za-z0-9:-]*(?:\s[^>]*)?/?>')
+TAG_NAME_PATTERN = re.compile(r'</?\s*([A-Za-z][A-Za-z0-9:-]*)')
 
 # reference: https://stackoverflow.com/questions/35761133/python-how-to-check-for-open-and-close-tags
 def stack_tag(tag, stack):
-    t = tag[1:-1]
-    first_space = t.find(' ')
-    #print(t)
-    if t[-1:] == '/':
-        pass
-    elif t[:1] != '/':
-        # Add tag to stack
-        if first_space == -1:
-            stack.append(t)
-            # print("TRACE open", stack)
-        else:
-            stack.append(t[:first_space])
-            # print("TRACE open", stack)
-    else:
-        if first_space != -1:
-            t = t[1:first_space]
-        else:
-            t = t[1:]
+    tag_name_match = TAG_NAME_PATTERN.match(tag)
+    if tag_name_match is None:
+        return stack
 
-        if len(stack) != 0 and stack[-1] == t:
+    tag_name = tag_name_match.group(1)
+    if tag.rstrip()[-2:] == '/>':
+        pass
+    elif tag[:2] != '</':
+        # Add tag to stack
+        stack.append(tag_name)
+        # print("TRACE open", stack)
+    else:
+        if len(stack) != 0 and stack[-1] == tag_name:
             # Close the block
             stack.pop()
-            # print("TRACE close", t, stack)
+            # print("TRACE close", tag_name, stack)
 
     # if len(stack):
     #     print("Blocks still open at EOF:", stack)
@@ -90,12 +84,14 @@ def filter_fenced_code_blocks(content, filename):
 
         result.append(content[pos:opener.start()])
         fence_char = opener.group('fence')[0]
+        # Keep the historical behavior of this script by accepting any closing
+        # fence with the same character and at least three markers.
         closing_pattern = re.compile(
             r'(?m)^[ \t]*' + re.escape(fence_char) + r'{3,}[ \t]*$'
         )
         closer = closing_pattern.search(content, opener.end())
         if closer is None:
-            print(filename, ": Some of your code blocks ``` ``` are not closed. Please close them.")
+            print(filename + " : Some of your code blocks " + fence_char * 3 + " are not closed. Please close them.")
             exit(1)
 
         code_block = content[opener.start():closer.end()]
