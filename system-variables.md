@@ -1335,7 +1335,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[1, 256]`
-- For auto analyze: used to control the concurrency of table or partition analysis — for example, the number of partitions or table tasks that can be processed simultaneously.
+- For auto analyze, this variable controls the concurrency of table or partition analysis, for example, the number of partitions or table tasks that can be processed simultaneously.
 - Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_backoff_lock_fast
