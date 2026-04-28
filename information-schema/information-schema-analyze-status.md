@@ -64,7 +64,7 @@ Fields in the `ANALYZE_STATUS` table are described as follows:
 * `TABLE_SCHEMA`: The name of the database to which the table belongs.
 * `TABLE_NAME`: The name of the table.
 * `PARTITION_NAME`: The name of the partitioned table.
-* `JOB_INFO`: A brief description of the `ANALYZE` subtask. It shows the `ANALYZE` scope, such as columns, indexes, or global statistics merge, and might include the effective options used, such as `buckets`, `topn`, `samplerate`, or `samples`.
+* `JOB_INFO`: A brief description of the `ANALYZE` subtask. It shows the `ANALYZE` scope, such as columns, indexes, or global statistics merging, and might include the effective options used, such as `buckets`, `topn`, `samplerate`, or `samples`.
 * `PROCESSED_ROWS`: The number of rows that have been processed.
 * `START_TIME`: The start time of the `ANALYZE` task.
 * `END_TIME`: The end time of the `ANALYZE` task.
