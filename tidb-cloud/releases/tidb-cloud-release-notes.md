@@ -27,14 +27,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - TiProxy is now available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
+    - TiProxy is now generally available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
 
         Key features of TiProxy:
 
         - Maintains persistent client connections during scaling operations and rolling upgrades.
         - Distributes traffic evenly across TiDB nodes for better resource utilization.
 
-      For implementation details, see the [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+      For implementation details, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
 
 **Console changes**
 
