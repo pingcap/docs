@@ -169,13 +169,16 @@ The migration job list shows the **Name**, **Status**, **Mode**, **Target User**
 - A **Summary** panel with the job name, ID, status, mode, data source, data target, migration objects, and creation time.
 - A **Progress** panel that shows the migration progress once the job starts running.
 
-### Pause, resume, or delete a migration job
+### Manage a migration job from the job list
 
-From the migration job detail page or from the actions menu in the job list, you can take the following actions:
+To manage a migration job, click the `...` (more) button at the end of the migration job row on the **Data Migration** page. The actions menu shows different options depending on the job status:
 
+- **View**: navigate to the job detail page.
 - **Pause**: temporarily pause a running migration job. You can resume it later from the same position.
 - **Resume**: resume a paused migration job.
 - **Delete**: delete the migration job and its metadata. This action does not affect data already migrated to the target instance.
+
+**Pause** and **Resume** are only available when the job is in a running or paused state. While the job is in the **Creating** state, only **View** and **Delete** are available.
 
 ## See also
 
