@@ -155,7 +155,7 @@ A [TiFlash node](/tiflash/tiflash-overview.md) is a specialized type of storage 
 
 <CustomContent plan="premium">
 
-## Request units and capacity in {{{ .premium }}}
+## Request units and capacity in {{{ .premium }}} {#request-units-and-capacity-in-premium}
 
 ### Request Capacity Unit (RCU)
 
