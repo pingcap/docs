@@ -3610,7 +3610,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> This variable is deprecated and cannot be modified. Sequential index scans now follow [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control index read concurrency.
+> This variable is deprecated and no longer controls execution behavior. Sequential index scans now follow [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control index read concurrency.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
