@@ -5,7 +5,7 @@ summary: Learn how to reload statistics into memory for specific tables or the w
 
 # REFRESH STATS
 
-`REFRESH STATS` reloads persisted optimizer statistics from the TiDB system tables into memory. This statement is primarily intended for scenarios where statistics have been restored externally (for example, by BR) or when you need to reconcile in-memory statistics without rerunning `ANALYZE`.
+`REFRESH STATS` reloads persisted optimizer statistics from the TiDB system tables into memory. This statement is primarily intended for scenarios where statistics have been restored externally (for example, by [BR](/br/br-use-overview.md)) or when you need to reconcile in-memory statistics without rerunning `ANALYZE`.
 
 When you run `REFRESH STATS`, TiDB reuses the statistics initialization routines that are automatically triggered at startup. You can reload statistics for individual tables, every table in selected databases, or the entire cluster, and optionally choose whether to perform lightweight (`LITE`) or full (`FULL`) initialization.
 
