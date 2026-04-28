@@ -12,6 +12,7 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 
 - [TiDB Cloud Starter](#starter)
 - [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
 > **Note:**
@@ -82,6 +83,16 @@ To get the prefix for your {{{ .starter }}} or {{{ .essential }}} instance, take
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the dialog, get the prefix from the connection string.
+
+## {{{ .premium }}} {#premium}
+
+For mission-critical enterprise workloads that require large-scale capacity and consistent high performance, the Premium plan provides a cloud-native experience with the following features:
+
+- **Instant elasticity**: automatically scales compute resources to absorb sudden traffic spikes and maintain stable performance during peak demand.
+- **Unlimited scalability**: expands storage and throughput to keep pace with business growth, without physical infrastructure constraints.
+- **Zero-infrastructure management**: offers a fully managed service that eliminates manual scaling, patching, and capacity planning.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+- **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
 
 ## TiDB Cloud Dedicated
 
