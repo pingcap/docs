@@ -134,6 +134,7 @@
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
   - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
   - [Export Data from {{{ .premium }}}](/tidb-cloud/premium/premium-export.md)
+  - [Migrate Data to {{{ .premium }}} Using Data Migration](/tidb-cloud/premium/premium-data-migration.md)
   - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
