@@ -11,7 +11,7 @@ The Data Migration feature enables you to migrate existing MySQL data and contin
 
 > **Note:**
 >
-> The Data Migration feature for {{{ .premium }}} is currently in Public Preview. During Public Preview, the source database must be reachable over a public network endpoint, and the source connection cannot be reused across migration jobs. For details, see [Limitations](#limitations).
+> The Data Migration feature for {{{ .premium }}} is currently in Public Preview. During Public Preview, the source database must be reachable over a public network endpoint, and you cannot reuse the source connection across migration jobs. For details, see [Limitations](#limitations).
 
 ## Supported source databases
 
@@ -37,7 +37,7 @@ The **Existing data migration mode** does not apply to **Incremental only** migr
 
 When you use physical mode, the following limitations apply:
 
-- After the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead.
+- After the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead.
 - You cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
 
 ## Limitations
@@ -51,8 +51,8 @@ When you use physical mode, the following limitations apply:
 ### General limitations
 
 - The system databases `mysql`, `information_schema`, `performance_schema`, and `sys` are filtered out and not migrated, even if you select all databases.
-- During existing data migration, if the target database already contains the table to be migrated and there are duplicate keys, the rows with duplicate keys are replaced.
-- During incremental data migration, if a migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, `INSERT` statements are migrated as `REPLACE`, and `UPDATE` statements as `DELETE` and `REPLACE`. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows in the target instance.
+- During existing data migration, if the target database already contains the table to be migrated and there are duplicate keys, TiDB Cloud replaces the rows with duplicate keys.
+- During incremental data migration, if a migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE`, and `UPDATE` statements as `DELETE` and `REPLACE`. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows in the target instance.
 
 For a complete list of Data Migration limitations across TiDB Cloud, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
@@ -130,14 +130,14 @@ In the **Migration Type** section, configure how data is migrated:
 
 In the **Select Objects to Migrate** section, choose:
 
-- **All** (default): migrate every database and table on the source. The system databases (`mysql`, `information_schema`, `performance_schema`, `sys`) are excluded automatically.
+- **All** (default): migrate every database and table on the source. TiDB Cloud automatically excludes the system databases (`mysql`, `information_schema`, `performance_schema`, `sys`).
 - **Customize**: pick specific databases and tables. The wizard fetches the source schema and shows two panels, **Source Database** and **Selected Objects**. Use the arrow buttons between the panels to move databases or tables into the **Selected Objects** list.
 
 Click **Next**.
 
 ### Step 3: Pre-check
 
-The console runs the pre-check against the source database, network connectivity, and the target {{{ .premium }}} instance. The progress bar shows **Running {percentage}%** while checks execute, and **Finished 100%** when complete. The summary line reports total items, completed, passed, with warning, and failed.
+The console runs the pre-check against the source database, network connectivity, and the target {{{ .premium }}} instance. The progress bar shows **Running {percentage}%** while checks execute, and **Finished 100%** when complete. The summary line reports the total number of items, including those that are completed, passed, with warnings, or failed.
 
 The **Pre-check Result** table lists every item that did not pass, along with its reason and a suggested solution. To re-run the pre-check after fixing an item, click **Check Again**. To proceed without addressing a warning, you can dismiss it by selecting **Ignore** on the row.
 
@@ -153,7 +153,7 @@ When all checks pass (or you choose to ignore the remaining warnings), click **N
 The review page shows three sections summarizing the migration job:
 
 - **Job Configuration**: job name and migration type.
-- **Source Connection Profile**: data source, host, port, connectivity method, username, SSL/TLS status, selected objects, and import mode.
+- **Source Connection Profile**: data source, host, port, connectivity method, username, SSL/TLS status, selected objects, and the existing data migration mode (shown as **Import Mode** on the review page).
 - **Target Connection Profile**: region, cluster ID, cluster name, and target username.
 
 Click **Previous** to revise any setting, or click **Create Job and Start** to create the migration job. The console redirects to the job detail page, where the job status starts in **Creating** and transitions to **Running** when the migration begins.

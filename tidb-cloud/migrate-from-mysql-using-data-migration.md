@@ -97,7 +97,7 @@ To prevent this, create the target tables in the downstream database before star
 <CustomContent plan="premium">
 
 - For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports rows as SQL statements and replays them on the target instance, consuming Request Capacity Units (RCUs) on the target during the load. Physical mode uses `IMPORT INTO` on the target instance and is recommended for large datasets where load throughput and cost are priorities.
-- When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+- When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 - When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
 
 </CustomContent>
