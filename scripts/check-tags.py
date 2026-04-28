@@ -32,13 +32,15 @@ import re
 import sys
 import os
 
+TAG_PATTERN = re.compile(r'</?[A-Za-z][A-Za-z0-9:-]*(?:\s[^>\n]*)?/?>')
+
 # reference: https://stackoverflow.com/questions/35761133/python-how-to-check-for-open-and-close-tags
 def stack_tag(tag, stack):
     t = tag[1:-1]
     first_space = t.find(' ')
     #print(t)
     if t[-1:] == '/':
-        self_closed_tag = True
+        pass
     elif t[:1] != '/':
         # Add tag to stack
         if first_space == -1:
@@ -53,86 +55,81 @@ def stack_tag(tag, stack):
         else:
             t = t[1:]
 
-        if len(stack) == 0:
-            # print("No blocks are open; tried to close", t)
-            closed_tag = True
-        else:
-            if stack[-1] == t:
-                # Close the block
-                stack.pop()
-                # print("TRACE close", t, stack)
-            else:
-                # print("Tried to close", t, "but most recent open block is", stack[-1])
-                if t in stack:
-                    stack.remove(t)
-                    # print("Prior block closed; continuing")
+        if len(stack) != 0 and stack[-1] == t:
+            # Close the block
+            stack.pop()
+            # print("TRACE close", t, stack)
 
     # if len(stack):
     #     print("Blocks still open at EOF:", stack)
     return stack
 
-def tag_is_wrapped(pos, content):
-    tag_start = pos[0]
-    tag_end = pos[1]
-    content_previous = content[:tag_start][::-1] # reverse content_previous
-    content_later = content[tag_end:]
-
-    left_wraps_findall = re.findall(r'`', content_previous)
-    left_single_backtick = len(left_wraps_findall) % 2
-    right_wraps_findall = re.findall(r'`', content_later)
-    right_single_backtick = len(right_wraps_findall) % 2
-    # print(left_single_backtick, right_single_backtick)
-
-    if left_single_backtick != 0 and right_single_backtick != 0:
-        # print(content_previous.find('`'), content_later.find('`'))
-        # print(content_previous)
-        # print(content_later)
-        return True
-    else:
-        # print(content_previous.find('`'), content_later.find('`'))
-        # print(content_previous)
-        # print(content_later)
-        return False
-
 def filter_frontmatter(content):
     # if there is frontmatter, remove it
-    if content.startswith('---'):
-        collect = []
-        content_finditer = re.finditer(r'---\n', content)
-        for i in content_finditer:
-            meta_pos = i.span()[1]
-            collect.append(meta_pos)
+    return re.sub(r'\A---\n.*?\n---\n', '', content, count=1, flags=re.DOTALL)
 
-        # if the number of "---" >= 2
-        if len(collect) >= 2:
-            filter_point = collect[1]
-            content = content[filter_point:]
-
-    return content
+def filter_html_comments(content):
+    return re.sub(r'<!--[\s\S]*?-->', '', content)
 
 def filter_backticks(content, filename):
-    # remove content wrapped by backticks
-    backticks = []
-    content_findall = re.findall(r'```', content)
-    if len(content_findall):
-        content_finditer = re.finditer(r'```', content)
-        for i in content_finditer:
-            pos = i.span()
-            backticks.append(pos)
-        # e.g. backticks = [[23, 26],[37, 40],[123, 126],[147, 150]]
-        if len(backticks) % 2 != 0:
-            # print(len(content_findall))
-            # print(backticks)
-            # print(backticks[0][0], backticks[0][1])
+    # Remove fenced code blocks and inline code spans before checking tags.
+    # Markdown supports code spans wrapped by one or more backticks.
+    content = filter_fenced_code_blocks(content, filename)
+    return filter_inline_code_spans(content)
+
+def filter_fenced_code_blocks(content, filename):
+    fence_pattern = re.compile(r'(?m)^[ \t]*(?P<fence>`{3,}|~{3,})[^\n]*\n?')
+    result = []
+    pos = 0
+
+    while True:
+        opener = fence_pattern.search(content, pos)
+        if opener is None:
+            result.append(content[pos:])
+            break
+
+        result.append(content[pos:opener.start()])
+        fence_char = opener.group('fence')[0]
+        closing_pattern = re.compile(
+            r'(?m)^[ \t]*' + re.escape(fence_char) + r'{3,}[ \t]*$'
+        )
+        closer = closing_pattern.search(content, opener.end())
+        if closer is None:
             print(filename, ": Some of your code blocks ``` ``` are not closed. Please close them.")
             exit(1)
-        elif len(backticks) != 0:
-            backticks_start = backticks[0][0]
-            backticks_end = backticks[1][1]
-            # print(backticks_start, backticks_end)
-            content = content.replace(content[backticks_start:backticks_end],'')
-            content = filter_backticks(content, filename)
-    return content
+
+        code_block = content[opener.start():closer.end()]
+        result.append('\n' * code_block.count('\n'))
+        pos = closer.end()
+
+    return ''.join(result)
+
+def filter_inline_code_spans(content):
+    result = []
+    pos = 0
+    opener_pattern = re.compile(r'`+')
+
+    while True:
+        opener = opener_pattern.search(content, pos)
+        if opener is None:
+            result.append(content[pos:])
+            break
+
+        result.append(content[pos:opener.start()])
+        ticks = opener.group()
+        closer_pattern = re.compile(r'(?<!`)' + re.escape(ticks) + r'(?!`)')
+        closer = closer_pattern.search(content, opener.end())
+        if closer is None:
+            # Keep unmatched backticks as normal text so this script only checks tags.
+            result.append(content[opener.start():opener.end()])
+            pos = opener.end()
+            continue
+
+        code_span = content[opener.start():closer.end()]
+        result.append('\n' * code_span.count('\n'))
+        pos = closer.end()
+
+    return ''.join(result)
 
 status_code = 0
 
@@ -146,13 +143,13 @@ for filename in sys.argv[1:]:
 
         content = filter_frontmatter(content)
         content = filter_backticks(content, filename)
+        content = filter_html_comments(content)
         # print(content)
-        result_findall = re.findall(r'<([^\n`>]*)>', content)
-        if len(result_findall) == 0:
+        if TAG_PATTERN.search(content) is None:
             # print("The edited markdown file " + filename + " has no tags!\n")
             continue
         else:
-            result_finditer = re.finditer(r'<([^\n`>]*)>', content)
+            result_finditer = TAG_PATTERN.finditer(content)
             stack = []
             for i in result_finditer:
                 # print(i.group(), i.span())
@@ -166,10 +163,6 @@ for filename in sys.argv[1:]:
                     continue
                 elif tag[:5] == '<http': # or tag[:4] == '<ftp'
                     # filter urls
-                    continue
-                elif tag_is_wrapped(pos, content):
-                    # print(content[int(pos[0])-1:int(pos[1]+1)])
-                    # print(tag, 'is wrapped by backticks!')
                     continue
 
                 stack = stack_tag(tag, stack)
