@@ -1192,7 +1192,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `2`
 - Range: `[2]`. 
 - Controls how TiDB collects statistics.
-    - If you try to set this variable to `1`, TiDB returns an error.
+    - Starting from v9.0.0, Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. If you try to set this variable to `1`, TiDB returns an error. For more information, see [Versions of statistics](/statistics.md#versions-of-statistics).
     - For TiDB Self-Managed, the default value of this variable changed from `1` to `2` starting from v5.3.0.
     - For TiDB Cloud, the default value of this variable changed from `1` to `2` starting from v6.5.0.
     - When you upgrade a cluster that still persists `tidb_analyze_version = 1`, TiDB rewrites the persisted global value to `2` during upgrade.
