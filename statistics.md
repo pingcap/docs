@@ -756,8 +756,10 @@ This variable controls the concurrency of table or partition analysis (for examp
 
 #### `tidb_build_sampling_stats_concurrency`
 
-1. Used to control the concurrency level for merging samples collected from different regions.  
-2. Used to control the concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of special indexes that can collect statistics simultaneously.
+This variable controls the following aspects of `ANALYZE` concurrency:
+
+- The concurrency for merging samples collected from different regions.
+- The concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
 
 The default value is `2`.
 
