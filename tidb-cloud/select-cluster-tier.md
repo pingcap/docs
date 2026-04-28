@@ -12,8 +12,8 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 
 - [TiDB Cloud Starter](#starter)
 - [{{{ .essential }}}](#essential)
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 - [{{{ .premium }}}](#premium)
+- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
 > **Note:**
 >
