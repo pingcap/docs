@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Premium**
 
-    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) is now in public preview on AWS and Alibaba Cloud.
+    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) is now in public preview on AWS<CustomContent language="en,zh"> and Alibaba Cloud</CustomContent>.
 
         Powered by the [TiDB X](/tidb-cloud/tidb-x-architecture.md) kernel, TiDB Cloud Premium is specifically designed for mission-critical enterprise workloads that require hyperscale, uncompromising performance, and the cost efficiency of a cloud-native consumption model.
 
