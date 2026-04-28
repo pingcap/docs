@@ -199,16 +199,16 @@ To help you estimate your workload, here are some baseline performance examples 
 The total RU charge for any given operation is determined by the total **"database effort"** required to execute it. TiDB Cloud calculates this consumption based on four key dimensions:
 
 1. Data Access & Size
-* **Read/Write Volume**: RUs scale with the number of storage requests and the size of the data payload. Reading or writing a large 100 KB document will naturally consume more RUs than a 1 KB record.
-* **Indexing Impact**: Every index on a table must be updated during a write operation. Tables with more indexes will incur higher RU costs for inserts, updates, and deletes.
+* **Read/Write Volume**: RUs scale directly with the size of the data payload. Processing a large 100 KB document will naturally consume more RUs than a 1 KB record.
+* **Read/Write Rows**: The number of rows involved in an operation is a primary driver of cost. Even with small payloads, querying or updating a large volume of rows increases total RU consumption, as each row requires individual processing, locking, and validation.
+* **Indexing Impact**:
+    * **Writes**: Every index on a table must be updated during a write operation. Tables with more indexes will incur higher RU costs for `INSERT`, `UPDATE`, and `DELETE` operations.
+    * **Reads**: Conversely, well-designed indexes significantly **reduce Query RUs** by allowing the engine to locate rows efficiently and avoiding the heavy resource cost of full-table scans.
 
 2. Query Complexity
-* **Scanning Efficiency**: RU consumption is heavily influenced by how many rows the engine must "touch." A point read using a primary key is the most efficient operation. Conversely, a query requiring a full table scan of millions of rows will consume significantly more RUs than one that utilizes an optimized index.
-* **Computational Logic**: Complex SQL operations—including multiple table joins, deep subqueries, and aggregations—require more CPU cycles and "optimizer brainpower" to process.
+* **Scanning Efficiency**: RU consumption is heavily influenced by how many rows the engine must "touch".
+    * **Read Metrics (Estimated Rows)**: A point-read using a primary key is the most efficient operation. Conversely, a query requiring a scan of millions of **estimated rows** will consume significantly more RUs than one utilizing an optimized index.
+    * **Write Metrics (Affected Rows)**: The RU cost for data modification is tied to the number of **affected rows**. Modifying 10,000 rows in a single statement will result in a much higher charge than modifying a single row.
+* **Computational Logic**: Complex SQL operations—including multiple table joins, deep subqueries, and aggregations—require more "optimizer brainpower" and CPU cycles to calculate the execution path and process the data. 
 
-3. Memory Utilization
-* **Data Buffering & Sorting**: For operations involving large result sets or complex sorting/grouping, TiDB utilizes memory to buffer and process data. The larger the memory footprint required for these intermediate steps, the higher the RU charge.
-* **Result Assembly**: Constructing and holding large, multi-column result sets in memory accounts for a portion of the RU calculation.
 
-4. Consistency & Transactional Overhead
-* **Locking & Concurrency**: High-contention workloads or long-running transactions that require complex locking mechanisms and Multi-Version Concurrency Control (MVCC) will be reflected in the total RU footprint.
