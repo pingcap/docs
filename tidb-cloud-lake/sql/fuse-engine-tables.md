@@ -103,6 +103,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
     Note that `ALTER TABLE ... SET OPTIONS(bloom_index_type = ...)` only affects new writes and rebuilt bloom indexes. Existing `xor8` index files and new `binary_fuse32` index files can coexist in the same table.
 
     **Examples:**
+
     ```sql
     -- Set bloom_index_type at table creation
     CREATE TABLE t (a INT) bloom_index_type = 'binary_fuse32';

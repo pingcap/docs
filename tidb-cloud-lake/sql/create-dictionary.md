@@ -35,9 +35,9 @@ SOURCE(
 | `SOURCE(...)` | Defines the source connector name and its key-value options. |
 | `COMMENT` | Optional dictionary comment. |
 
-:::note
-- SOURCE only support `MySQL` and `Redis`.
-:::
+> **Note:**
+>
+> SOURCE only support `MySQL` and `Redis`.
 
 ## Examples
 
