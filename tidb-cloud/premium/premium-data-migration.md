@@ -87,9 +87,9 @@ The target {{{ .premium }}} instance must also be reachable. If the target clust
 
 The migration user on the source database must have privileges sufficient to read schema and data and to read the binary log, including (but not limited to) `SELECT`, `RELOAD`, `REPLICATION SLAVE`, `REPLICATION CLIENT`, and `PROCESS`. The pre-check step warns if the `PROCESS` privilege is missing, because Data Migration uses it to verify that the migration user does not exceed the source database's connection-concurrency limit.
 
-For managed MySQL services such as AWS RDS, Aurora, Azure Database for MySQL, Google Cloud SQL, and Alibaba Cloud RDS, additional service-specific permissions might be required. For details, see [Grant required privileges to the migration user in the source database](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-to-the-migration-user-in-the-source-database).
+For managed MySQL services such as AWS RDS, Aurora, Azure Database for MySQL, Google Cloud SQL, and Alibaba Cloud RDS, additional service-specific permissions might be required. For details, see [Grant required privileges to the migration user in the source MySQL database](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-to-the-migration-user-in-the-source-mysql-database).
 
-On the target {{{ .premium }}} instance, the migration user must have privileges sufficient to create databases, create tables, and write data in the target schemas. For details, see [Grant required privileges to the migration user in the target database](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-to-the-migration-user-in-the-target-database).
+On the target {{{ .premium }}} instance, the migration user must have privileges sufficient to create databases, create tables, and write data in the target schemas. For details, see [Grant required privileges for migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-for-migration).
 
 ## Create a migration job
 
