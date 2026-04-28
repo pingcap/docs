@@ -21,10 +21,19 @@ Supported MySQL versions: 5.7 and 8.0.
 
 ## Migration modes
 
-When you create a migration job, you choose one of the following modes:
+When you create a migration job, you choose a **Migration process** and an **Existing data migration mode**.
+
+The **Migration process** determines what data is migrated:
 
 - **Full + Incremental**: migrates existing data from the source database first, and then continuously replicates ongoing changes (binlog) to the target {{{ .premium }}} instance.
-- **Incremental Data Only**: continuously replicates ongoing changes (binlog) from the source database to the target {{{ .premium }}} instance, starting from the current binlog position.
+- **Incremental only**: continuously replicates ongoing changes (binlog) from the source database to the target {{{ .premium }}} instance, starting from the current binlog position.
+
+The **Existing data migration mode** determines how the existing data load is performed when **Full + Incremental** is selected:
+
+- **Logical** (default): exports rows from the source database and replays them as SQL `INSERT` statements on the target instance. Logical mode applies before any incremental replication starts. This mode consumes Request Capacity Units (RCUs) on the target instance during the data load.
+- **Physical**: uses `IMPORT INTO` on the target instance to import data without RCU charges during the load. Use this mode for large datasets where load throughput and cost are priorities.
+
+The **Existing data migration mode** does not apply to **Incremental only** migrations.
 
 ## Limitations
 
@@ -70,7 +79,9 @@ The target {{{ .premium }}} instance must also be reachable. If the target clust
 
 ### Grant required privileges
 
-The migration user on the source database must have privileges sufficient to read schema and data and to read the binary log, including (but not limited to) `SELECT`, `RELOAD`, `REPLICATION SLAVE`, and `REPLICATION CLIENT`. For managed MySQL services such as AWS RDS, Aurora, Azure Database for MySQL, Google Cloud SQL, and Alibaba Cloud RDS, additional service-specific permissions might be required. For details, see [Grant required privileges to the migration user in the source database](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-to-the-migration-user-in-the-source-database).
+The migration user on the source database must have privileges sufficient to read schema and data and to read the binary log, including (but not limited to) `SELECT`, `RELOAD`, `REPLICATION SLAVE`, `REPLICATION CLIENT`, and `PROCESS`. The pre-check step warns if the `PROCESS` privilege is missing, because Data Migration uses it to verify that the migration user does not exceed the source database's connection-concurrency limit.
+
+For managed MySQL services such as AWS RDS, Aurora, Azure Database for MySQL, Google Cloud SQL, and Alibaba Cloud RDS, additional service-specific permissions might be required. For details, see [Grant required privileges to the migration user in the source database](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-to-the-migration-user-in-the-source-database).
 
 On the target {{{ .premium }}} instance, the migration user must have privileges sufficient to create databases, create tables, and write data in the target schemas. For details, see [Grant required privileges to the migration user in the target database](/tidb-cloud/migrate-from-mysql-using-data-migration.md#grant-required-privileges-to-the-migration-user-in-the-target-database).
 
@@ -106,19 +117,40 @@ To create a migration job from a MySQL-compatible source database to a {{{ .prem
 
 ### Step 2: Choose objects to be migrated
 
-1. Select the **Migration Type**: **Full + Incremental** (default) or **Incremental Data Only**.
-2. The wizard scans the source database and displays the available databases and tables. Select the databases and tables you want to migrate. The system databases (`mysql`, `information_schema`, `performance_schema`, `sys`) are filtered out automatically.
-3. Click **Next**.
+In the **Migration Type** section, configure how data is migrated:
 
-### Step 3: Precheck
+- **Migration process**: select **Full + Incremental** (default) or **Incremental only**.
+- **Existing data migration mode** (only applies to **Full + Incremental**): select **Logical** (default) or **Physical**. For details, see [Migration modes](#migration-modes).
 
-The console runs prechecks against the source database, network connectivity, and the target {{{ .premium }}} instance. If any precheck fails, follow the displayed error messages to fix the issue, and then click **Recheck**. For common precheck errors and remediation, see [Precheck errors and solutions](/tidb-cloud/migrate-from-mysql-using-data-migration.md#precheck-errors-and-solutions).
+In the **Select Objects to Migrate** section, choose:
 
-When all prechecks pass, click **Next**.
+- **All** (default): migrate every database and table on the source. The system databases (`mysql`, `information_schema`, `performance_schema`, `sys`) are excluded automatically.
+- **Customize**: pick specific databases and tables. The wizard fetches the source schema and shows two panels, **Source Database** and **Selected Objects**. Use the arrow buttons between the panels to move databases or tables into the **Selected Objects** list.
+
+Click **Next**.
+
+### Step 3: Pre-check
+
+The console runs the pre-check against the source database, network connectivity, and the target {{{ .premium }}} instance. The progress bar shows **Running {percentage}%** while checks execute, and **Finished 100%** when complete. The summary line reports total items, completed, passed, with warning, and failed.
+
+The **Pre-check Result** table lists every item that did not pass, along with its reason and a suggested solution. To re-run the pre-check after fixing an item, click **Check Again**. To proceed without addressing a warning, you can dismiss it by selecting **Ignore** on the row.
+
+If the pre-check completes with at least one warning and you click **Next**, the console shows a confirmation dialog with two options:
+
+- **Check Again**: return to the **Pre-check Result** table and address the warnings.
+- **Ignore warnings**: advance to the next step. Note that ignoring warnings may result in job failures or data inconsistencies.
+
+When all checks pass (or you choose to ignore the remaining warnings), click **Next**.
 
 ### Step 4: Review and start migration
 
-Review the configuration summary. When you are ready, click **Create Job and Start** to create the migration job. The console redirects to the job detail page, where the job status starts in **Creating** and transitions to **Running** when the migration begins.
+The review page shows three sections summarizing the migration job:
+
+- **Job Configuration**: job name and migration type.
+- **Source Connection Profile**: data source, host, port, connectivity method, username, SSL/TLS status, selected objects, and import mode.
+- **Target Connection Profile**: region, cluster ID, cluster name, and target username.
+
+Click **Previous** to revise any setting, or click **Create Job and Start** to create the migration job. The console redirects to the job detail page, where the job status starts in **Creating** and transitions to **Running** when the migration begins.
 
 ## Manage a migration job
 
