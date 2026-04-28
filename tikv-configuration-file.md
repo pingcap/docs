@@ -1168,7 +1168,7 @@ Configuration items related to Raftstore.
 ### `inspect-kvdb-interval` <span class="version-mark">New in v8.1.2</span>
 
 + The interval and timeout for checking the KV disk during slow node detection in TiKV. If KVDB and RaftDB share the same mount path, this value is overridden by `0` (no detection).
-+ Default value: `2s`
++ Default value: `100ms`. In v8.5.2 and earlier versions, the default value is `2s`.
 
 ### `min-pending-apply-region-count` <span class="version-mark">New in v8.0.0</span>
 
