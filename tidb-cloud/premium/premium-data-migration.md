@@ -35,6 +35,11 @@ The **Existing data migration mode** determines how the existing data load is pe
 
 The **Existing data migration mode** does not apply to **Incremental only** migrations.
 
+When you use physical mode, the following limitations apply:
+
+- After the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead.
+- You cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
+
 ## Limitations
 
 ### Public Preview limitations

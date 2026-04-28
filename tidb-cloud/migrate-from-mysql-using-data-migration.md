@@ -6,13 +6,21 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent> using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
 <CustomContent plan="essential">
 
 > **Note:**
 >
 > Currently, the Data Migration feature is in beta for {{{ .essential }}}.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> Currently, the Data Migration feature is in Public Preview for {{{ .premium }}}. For a {{{ .premium }}}-focused overview, see [Migrate Data to {{{ .premium }}} Using Data Migration](/tidb-cloud/premium/premium-data-migration.md).
 
 </CustomContent>
 
@@ -86,9 +94,17 @@ To prevent this, create the target tables in the downstream database before star
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports rows as SQL statements and replays them on the target instance, consuming Request Capacity Units (RCUs) on the target during the load. Physical mode uses `IMPORT INTO` on the target instance and is recommended for large datasets where load throughput and cost are priorities.
+- When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+- When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
+
+</CustomContent>
+
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> with the MySQL source records.
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> with the MySQL source records.
 
 <CustomContent plan="essential">
 
@@ -108,7 +124,7 @@ To prevent this, create the target tables in the downstream database before star
 
 ## Prerequisites
 
-Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> database.
+Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> database.
 
 ### Make sure your data source and version are supported
 
@@ -141,9 +157,24 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+For {{{ .premium }}}, the Data Migration feature supports any MySQL-compatible source database. The wizard exposes a single source-engine option (**MySQL**); to migrate from a managed MySQL service, connect via the public endpoint of the managed instance.
+
+| Data source                                      | Supported versions |
+|:-------------------------------------------------|:-------------------|
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7           |
+| Amazon Aurora MySQL                              | 8.0, 5.7           |
+| Amazon RDS MySQL                                 | 8.0, 5.7           |
+| Azure Database for MySQL - Flexible Server       | 8.0, 5.7           |
+| Google Cloud SQL for MySQL                       | 8.0, 5.7           |
+| Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
+
+</CustomContent>
+
 ### Enable binary logs in the source MySQL-compatible database for replication
 
-To continuously replicate incremental changes from the source MySQL-compatible database to the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> using DM, you need the following configurations to enable binary logs in the source database:
+To continuously replicate incremental changes from the source MySQL-compatible database to the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> using DM, you need the following configurations to enable binary logs in the source database:
 
 | Configuration                    | Required value | Why |
 |:---------------------------------|:---------------|:----|
@@ -255,7 +286,7 @@ For more information, see [Set instance parameters](https://www.alibabacloud.com
 
 ### Ensure network connectivity
 
-Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
+Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
 <CustomContent plan="dedicated">
 
@@ -399,7 +430,7 @@ If you use AWS VPC peering or Google Cloud VPC network peering, see the followin
 
 If your MySQL service is in an AWS VPC, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
@@ -451,7 +482,7 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 ### Grant required privileges for migration
 
-Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
+Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
 
 #### Grant required privileges to the migration user in the source MySQL database
 
@@ -477,11 +508,11 @@ GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source
 GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
-#### Grant required privileges in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>
+#### Grant required privileges in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>
 
-For testing purposes, you can use the `root` account of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
+For testing purposes, you can use the `root` account of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
-For production workloads, it is recommended to have a dedicated user for replication in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> and grant only the necessary privileges:
+For production workloads, it is recommended to have a dedicated user for replication in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> and grant only the necessary privileges:
 
 | Privilege | Scope | Purpose |
 |:----------|:------|:--------|
@@ -495,7 +526,7 @@ For production workloads, it is recommended to have a dedicated user for replica
 | `INDEX`  | Tables | Creates and modifies indexes |
 | `CREATE VIEW`  | Views | Creates views used by migration |
 
-For example, you can execute the following `GRANT` statement in your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to grant corresponding privileges:
+For example, you can execute the following `GRANT` statement in your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to grant corresponding privileges:
 
 ```sql
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
@@ -505,7 +536,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -589,7 +620,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-    - **User Name**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> in TiDB Cloud.
+    - **User Name**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> in TiDB Cloud.
     - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
@@ -638,8 +669,8 @@ You can use **physical mode** or **logical mode** to migrate **existing data** a
 
 > **Note:**
 >
-> - When you use physical mode, you cannot create a second migration job or import task for the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> before the existing data migration is completed.
-> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+> - When you use physical mode, you cannot create a second migration job or import task for the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 Physical mode exports the MySQL source data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the MySQL source database during data export. The following table shows the performance regression of each specification.
 
@@ -755,7 +786,7 @@ When scaling a migration job specification, note the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **...** > **Scale Up/Down**.
 

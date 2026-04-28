@@ -5,7 +5,7 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 # Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS) or self-hosted source database to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent> using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS) or self-hosted source database to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> using the Data Migration feature of the TiDB Cloud console.
 
 <CustomContent plan="essential">
 
@@ -148,7 +148,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -187,7 +187,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-   - **Username**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
+   - **Username**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
    - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.

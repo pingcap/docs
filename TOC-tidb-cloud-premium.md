@@ -135,6 +135,8 @@
   - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
   - [Export Data from {{{ .premium }}}](/tidb-cloud/premium/premium-export.md)
   - [Migrate Data to {{{ .premium }}} Using Data Migration](/tidb-cloud/premium/premium-data-migration.md)
+  - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+  - [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
   - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
