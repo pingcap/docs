@@ -174,7 +174,7 @@ TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overvie
 
 For {{{ .essential }}} and {{{ .premium }}}, a Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} or {{{ .premium }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your instance. However, the way RCUs are managed differs between {{{ .essential }}} and {{{ .premium }}}:
 
-- {{{ .essential }}} automatically provisions RCUs based on your actual workload. As your QPS increases, the system dynamically scales up the provisioned RCU to maintain performance.For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+- {{{ .essential }}} automatically provisions RCUs based on your workload. As your QPS increases, TiDB Cloud dynamically scales up the provisioned RCUs to maintain performance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 - {{{ .premium }}} lets you specify the maximum RCU (`RCU_max`) for your workload. TiDB Cloud automatically scales capacity within the range of `0.25 * RCU_max` to `RCU_max` based on real-time demand. For more information, see [Request units and capacity in {{{ .premium }}}](/tidb-cloud/architecture-concepts.md#request-units-and-capacity-in-premium).
 
 ### Request Unit (RU)
