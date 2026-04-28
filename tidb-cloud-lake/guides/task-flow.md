@@ -83,9 +83,9 @@ In the task form, fill in the following:
 | Enable Query Result Cache       | Cache query results to avoid redundant computation                      |
 | Min Execute Seconds             | Minimum interval between executions (5s / 10s / 15s / 30s)              |
 
-5. Click **Save** to add the task to the flow.
-6. Repeat to add more tasks. Use **Require Tasks** to define dependencies between them.
-7. Click **Publish** to create the flow.
+1. Click **Save** to add the task to the flow.
+2. Repeat to add more tasks. Use **Require Tasks** to define dependencies between them.
+3. Click **Publish** to create the flow.
 
 > **Note:**
 >
