@@ -1152,8 +1152,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
-- Used to control the concurrency of scanning TiKV regions.
-- Used to control the concurrency of scanning regions for special indexes (indexes generated from virtual columns).
+- This variable controls the following aspects of `ANALYZE` concurrency:
+    - The concurrency of scanning TiKV regions.
+    - The concurrency of scanning regions for special indexes, such as indexes on generated virtual columns.
 
 ### tidb_analyze_partition_concurrency
 
