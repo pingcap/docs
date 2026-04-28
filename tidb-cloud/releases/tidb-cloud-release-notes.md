@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         Powered by the [TiDB X](/tidb-cloud/tidb-x-architecture.md) kernel, TiDB Cloud Premium is specifically designed for mission-critical enterprise workloads that require hyperscale, uncompromising performance, and the cost efficiency of a cloud-native consumption model.
 
-        TiDB Cloud Premium bridges the gap between TiDB Cloud Essential and TiDB Cloud Dedicated.
+        TiDB Cloud Premium bridges the gap between [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
         - Compared with TiDB Cloud Essential, TiDB Cloud Premium delivers significantly stronger isolation across the compute, storage, and network layers, ensuring predictable performance for critical workloads. At the same time, it retains an elastic, on-demand scaling model, allowing compute capacity to scale independently without operational overhead.
         - Compared with TiDB Cloud Dedicated, TiDB Cloud Premium improves cost efficiency by eliminating idle headroom, so you only pay for the performance you actually use.
@@ -27,7 +27,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - TiProxy is now available for TiDB Cloud Dedicated clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
+    - TiProxy is now available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
 
         Key features of TiProxy:
 
