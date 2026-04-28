@@ -30,7 +30,7 @@ When you create a migration job, you choose one of the following modes:
 
 ### Public Preview limitations
 
-- Connectivity to the source database is currently public-only. Private Link connectivity to the source database is in development and not yet available.
+- Connectivity to the source database is currently public-only. Private Link connectivity to the source database is in development and not yet generally available.
 - Source connection details cannot be saved or reused across migration jobs. Each migration job requires the source connection to be entered from scratch.
 - Migration jobs created during Public Preview might be subject to additional restrictions as the feature matures. For up-to-date information, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
@@ -93,11 +93,11 @@ To create a migration job from a MySQL-compatible source database to a {{{ .prem
 
 4. On the **Configure source and target connection** step, enter the following information:
 
-    - **Job Name**: a name for the migration job. The default value is `migration_job_{timestamp}`. The name must start with a letter and can contain letters, numbers, underscores (`_`), and hyphens (`-`), with a maximum length of 60 characters.
+    - **Job Name**: a name for the migration job. The default value is `migration_job_{timestamp}`. The name must start with a letter, can contain letters, numbers, underscores (`_`), and hyphens (`-`), and must be less than 60 characters.
     - **Source Connection Profile**:
         - **Data Source**: select **MySQL**.
         - **Connectivity Method**: select **Public**.
-        - **Hostname or IP address**: enter the hostname or public IP address of the source database.
+        - **Hostname or IP address**: enter the hostname or IP address of the source database.
         - **Port**: enter the source database port. The default is `3306`.
         - **User Name** and **Password**: enter the credentials for the migration user. This user must have the privileges listed in [Grant required privileges](#grant-required-privileges).
         - **SSL/TLS**: enabled by default. If your source database requires encrypted connections, upload the **CA Certificate**, **Client Certificate**, and **Client private key** as needed. If your source database does not require encrypted connections, turn off the **SSL/TLS** toggle.
@@ -111,7 +111,13 @@ To create a migration job from a MySQL-compatible source database to a {{{ .prem
 2. The wizard scans the source database and displays the available databases and tables. Select the databases and tables you want to migrate. The system databases (`mysql`, `information_schema`, `performance_schema`, `sys`) are filtered out automatically.
 3. Click **Next**.
 
-### Step 3: Review and start migration
+### Step 3: Precheck
+
+The console runs prechecks against the source database, network connectivity, and the target {{{ .premium }}} instance. If any precheck fails, follow the displayed error messages to fix the issue, and then click **Recheck**. For common precheck errors and remediation, see [Precheck errors and solutions](/tidb-cloud/migrate-from-mysql-using-data-migration.md#precheck-errors-and-solutions).
+
+When all prechecks pass, click **Next**.
+
+### Step 4: Review and start migration
 
 Review the configuration summary. When you are ready, click **Create Job and Start** to create the migration job. The console redirects to the job detail page, where the job status starts in **Creating** and transitions to **Running** when the migration begins.
 
