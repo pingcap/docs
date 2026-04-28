@@ -1418,7 +1418,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `2`. The default value is `4` for v7.4.0 and earlier versions.
 - Range: `[1, 256]`
 - Unit: Threads
-- For manual analyze: used to control the concurrency of table or partition analysis — for example, the number of partitions or table tasks that can be processed simultaneously.
+- For manual analyze, this variable controls the concurrency of table or partition analysis, for example, the number of partitions or table tasks that can be processed simultaneously.
 
 ### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
 
