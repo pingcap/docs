@@ -19,7 +19,7 @@ env:
   SOURCE_REPO: pingcap/docs
   SOURCE_BRANCH: release-8.5
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
-  CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-releases.md
+  CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
   AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
   AI_TRANSLATOR_REF: main
 
