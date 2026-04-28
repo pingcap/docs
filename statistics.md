@@ -356,11 +356,14 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ## Versions of statistics
 
+The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls how TiDB collects statistics.
+
+Before v9.0.0, TiDB supported two statistics versions for new statistics collection: Version 1 (`tidb_analyze_version = 1`) and Version 2 (`tidb_analyze_version = 2`). Starting from v9.0.0, Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. TiDB only supports Version 2 (`tidb_analyze_version = 2`) for collecting new statistics.
+
 > **Warning:**
 >
-> Statistics Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. TiDB keeps reading existing Version 1 statistics for upgrade compatibility, but all new `ANALYZE` operations use Statistics Version 2 (`tidb_analyze_version = 2`). It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
+> If your TiDB cluster is upgraded from an earlier version and still has existing Version 1 statistics, TiDB can continue to read these Version 1 statistics for upgrade compatibility. However, TiDB can no longer collect new statistics using Version 1. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
 
-The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, TiDB supports two statistics versions: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
 - For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
