@@ -172,14 +172,18 @@ TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overvie
 
 ### Request Capacity Unit (RCU)
 
-A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your {{{ .essential }}} instance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+For {{{ .essential }}} and {{{ .premium }}}, a Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} or {{{ .premium }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your instance. However, the way RCUs are managed differs between {{{ .essential }}} and {{{ .premium }}}:
+
+- {{{ .essential }}} automatically provisions RCUs based on your workload. As your QPS increases, TiDB Cloud dynamically scales up the provisioned RCUs to maintain performance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+- {{{ .premium }}} lets you specify the maximum RCU (`RCU_max`) for your workload. TiDB Cloud automatically scales capacity within the range of `0.25 * RCU_max` to `RCU_max` based on real-time demand. For more information, see [Request units and capacity in {{{ .premium }}}](/tidb-cloud/architecture-concepts.md#request-units-and-capacity-in-premium).
 
 ### Request Unit (RU)
 
-For {{{ .starter }}} and Essential, a Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. However, the billing models for {{{ .starter }}} and Essential are different:
+For {{{ .starter }}}, Essential, and Premium, a Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. However, the billing models for these plans are different:
 
 - {{{ .starter }}} is billed based on the total number of RUs consumed. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 - {{{ .essential }}} is billed based on the number of provisioned [Request Capacity Units (RCUs)](#request-capacity-unit-rcu). One RCU provides a fixed amount of compute resources that can process a certain number of RUs-per-second. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+- {{{ .premium }}} is billed based on the actual RUs consumed by your workload. TiDB Cloud calculates the average RUs per second every minute and converts the value to [Request Capacity Units (RCUs)](#request-capacity-unit-rcu) for billing. For more information, see [Request units and capacity in {{{ .premium }}}](/tidb-cloud/architecture-concepts.md#request-units-and-capacity-in-premium).
 
 For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resource abstraction unit that represents system resource consumption, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used by the resource control feature to limit, isolate, and manage resources consumed by database requests, **not for billing purposes**. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 
