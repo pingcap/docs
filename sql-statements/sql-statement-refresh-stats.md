@@ -81,7 +81,7 @@ ClusterOption ::=
 
 ## Privileges
 
-To execute `REFRESH STATS`, you must either have the `RESTORE_ADMIN` privilege or hold `SELECT` on every targeted table. If you do not have sufficient privileges, TiDB returns an error and aborts the statement.
+To execute `REFRESH STATS`, you must either have the `RESTORE_ADMIN` privilege or have the `SELECT` privilege on every target table. If your privileges are insufficient, TiDB returns an error and aborts the statement execution.
 
 ## MySQL compatibility
 
