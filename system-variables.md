@@ -1190,7 +1190,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `2`
-- Range: `[1, 2]`. Only `2` is supported for new statistics collection.
+- Range: `[2]`. 
 - Controls how TiDB collects statistics.
     - If you try to set this variable to `1`, TiDB returns an error.
     - For TiDB Self-Managed, the default value of this variable changed from `1` to `2` starting from v5.3.0.
