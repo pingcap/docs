@@ -81,7 +81,7 @@ Before proceeding, you must create a symmetric encryption key in AWS KMS. Ensure
 5. Copy the displayed JSON policy and save it as ROLE-TRUST-POLICY.JSON. This file describes the required trust relationship.
 6. In your AWS KMS Console, add this trust relationship to the your key. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
 7. Return to the TiDB Cloud console, scroll to the bottom of the key creation page, and enter the **KMS Key ARN** obtained from AWS KMS.
-8. Click **Test and Add KMS Key ARN** to verigy the key trust relationship.
+8. Click **Test and Add KMS Key ARN** to verify the key trust relationship.
 9. Once the verification passes, Click **Create** to finish creating your {{{ .premium }}} instance.
 
 #### Option 2: Service-Managed Encryption Key
