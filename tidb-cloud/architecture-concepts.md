@@ -182,7 +182,6 @@ TiDB Cloud calculates your usage every minute. It measures the total number of R
 To maintain baseline capacity and ensure that resources are always available for your instance, TiDB Cloud automatically sets a minimum billing RCU based on your maximum RCU setting. This value defines the baseline reserved capacity for your instance.
 
 If your actual consumption in a given minute is below this threshold, billing defaults to the minimum billing RCU. This mechanism ensures that your instance can immediately handle sudden traffic spikes up to your specified maximum, without performance degradation or delays.
-
 ### Request Unit (RU)
 
 A [Request Unit (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) is a unit of measure used to represent the resources consumed by a single request to the database. The number of RUs consumed by a request depends on factors such as the operation type and the amount of data retrieved or modified.
