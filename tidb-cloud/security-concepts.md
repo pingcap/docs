@@ -225,6 +225,8 @@ TiDB Cloud ensures secure connectivity and data transmission through robust netw
 
 TiDB Cloud safeguards static data with advanced encryption capabilities, ensuring security and compliance with industry regulations.
 
+<CustomContent plan="starter,essential,dedicated">
+
 **Customer-Managed Encryption Key (CMEK)**
 
 - Provides organizations full control over encryption for TiDB Cloud Dedicated clusters.
@@ -242,6 +244,22 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 - Leverage CMEK for industries requiring strict compliance, such as HIPAA and GDPR.
 
 For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+**Dual-Layer Data Encryption**
+
+- Combines storage-layer encryption (provided by the cloud provider) with database-layer encryption to add an additional layer of data-at-rest protection for {{{ .premium }}} instances hosted on AWS.
+
+- Encrypts data stored by TiKV, changefeed data, and backup data when enabled.
+
+- Lets you choose between a Customer-Managed Encryption Key (CMEK) and a Service-Managed Encryption Key, depending on your security and operational requirements.
+
+For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+
+</CustomContent>
 
 ## Audit logging
 

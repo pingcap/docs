@@ -9,21 +9,31 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances, [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances, and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
 - The subscribing via Flashduty feature is only available for organizations that subscribe to the **Enterprise** or **Premium** [support plan](/tidb-cloud/connected-care-overview.md).
 
+<CustomContent plan="essential,dedicated">
+
 - To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Instance Manager` access to the target {{{ .premium }}} instance in TiDB Cloud.
+
+</CustomContent>
 
 ## Subscribe to alert notifications
 
-To receive alert notifications of <CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, take the following steps:
+To receive alert notifications of <CustomContent plan="essential">{{{ .essential }}} instances</CustomContent><CustomContent plan="premium">{{{ .premium }}} instances</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} clusters</CustomContent>, take the following steps:
 
 ### Step 1. Generate a Flashduty webhook URL
 
-1. Generate a webhook URL by following the instructions in [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/flashduty/prometheus-integration-guide).
+1. Generate a webhook URL by following the instructions in [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/on-call/integration/alert-integration/alert-sources/prometheus#prometheus-integration-guide).
 2. Save the generated webhook URL to use in the next step.
 
 ### Step 2. Subscribe from TiDB Cloud
@@ -57,6 +67,8 @@ Alert notification subscriptions vary by [your TiDB Cloud plan](/tidb-cloud/sele
 
 Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the {{{ .dedicated }}} cluster. You will be directed to the **Alert Subscription** page.
 
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscription** page.
+
 </CustomContent>
 
 <CustomContent plan="essential">
@@ -81,6 +93,28 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+> **Tip:**
+>
+> For {{{ .premium }}}, the alert subscription is for all alerts in the current instance. If you have multiple {{{ .premium }}} instances, you need to subscribe to each instance individually.
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+2. In the left navigation pane, click **Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+4. Select **Flashduty** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field and your Flashduty webhook URL in the **Webhook URL** field.
+6. Click **Test Connection**.
+
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
+
+7. Click **Save** to complete the subscription.
+
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
+
+</CustomContent>
+
 If an alert condition remains unchanged, the alert sends notifications every three hours.
 
 ## Unsubscribe from alert notifications
@@ -100,6 +134,15 @@ If you no longer want to receive alert notifications, take the following steps. 
 <CustomContent plan="essential">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
+2. In the left navigation pane, click **Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.

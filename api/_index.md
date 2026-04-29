@@ -13,6 +13,7 @@ TiDB provides various APIs for querying and operating clusters, managing data re
 
 | API | Description |
 | --- | --- |
+| [v1beta2](/api/tidb-cloud-api-v1beta2.md) | Manage TiDB Cloud Premium instances. |
 | [v1beta1](/api/tidb-cloud-api-v1beta1.md) | Manage TiDB Cloud Starter, Essential, and Dedicated clusters, as well as billing, Data Service, and IAM resources. |
 | [v1beta](/api/tidb-cloud-api-v1beta.md) | Manage projects, clusters, backups, imports, and restores for TiDB Cloud. |
 

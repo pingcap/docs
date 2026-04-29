@@ -233,54 +233,65 @@ If you no longer want to audit an instance, go to the page of the instance, clic
 >
 > Each time the size of the log file reaches 10 MiB, the log file is pushed to the cloud storage bucket. Therefore, after audit logging is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-## Audit log fields
+## Audit logging fields
 
-For each database event record in audit logs, TiDB provides the following fields:
+For each database event record in audit logs, TiDB Cloud provides the following fields.
+
+### General information
+
+All audit log records contain the following fields:
+
+| Field         | Description                                                                                   |
+|---------------|-----------------------------------------------------------------------------------------------|
+| `ID`            | The unique identifier of the audit record. |
+| `EVENT`         | The event classes of the audit record. Multiple event classes are separated by commas (`,`).  |
+| `USER`          | The name of the user who performed the operation.                                             |
+| `ROLES`         | The roles assigned to the user at the time of the operation.                                  |
+| `CONNECTION_ID` | The identifier of the user's connection.                                                      |
+| `TABLES`        | The tables accessed during the operation.                                              |
+| `STATUS_CODE`   | The status code of the operation. `1` indicates success, and `0` indicates failure.           |
+| `REASON`        | The error message of the operation. Recorded only when an error occurs. |
+
+### SQL statement information
+
+When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain the following fields:
+
+| Field          | Description                                                                                                   |
+|----------------|---------------------------------------------------------------------------------------------------------------|
+| `CURRENT_DB`     | The name of the current database.                                                                             |
+| `SQL_TEXT`       | The executed SQL statement. If audit log redaction is enabled, the redacted statement is recorded instead.     |
+| `EXECUTE_PARAMS` | The parameters passed to the `EXECUTE` statement. Recorded only when the event classes include `EXECUTE` and redaction is disabled. |
+| `AFFECTED_ROWS`  | The number of rows affected by the SQL statement. Recorded only when the event classes include `QUERY_DML`.  |
+
+### Connection information
+
+When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit logs contain the following fields:
+
+| Field           | Description                                                                                   |
+|-----------------|-----------------------------------------------------------------------------------------------|
+| `CURRENT_DB`      | The name of the current database. Not recorded when the event classes include `DISCONNECT`.  |
+| `CONNECTION_TYPE` | The connection type, such as Socket, UnixSocket, or SSL/TLS.                          |
+| `PID`             | The process ID of the current connection.                                                    |
+| `SERVER_VERSION`  | The version of the connected TiDB server.                                                  |
+| `SSL_VERSION`     | The version of SSL in use.                                                                 |
+| `HOST_IP`         | The IP address of the connected TiDB server.                                               |
+| `HOST_PORT`       | The port of the connected TiDB server.                                                     |
+| `CLIENT_IP`       | The IP address of the client.                                                              |
+| `CLIENT_PORT`     | The port of the client.                                                                    |
 
 > **Note:**
 >
-> In the following tables, the empty maximum length of a field means that the data type of this field has a well-defined constant length (for example, 4 bytes for INTEGER).
+> To improve traffic visibility, `CLIENT_IP` displays the actual client IP address for connections through AWS PrivateLink instead of the load balancer IP. This feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
-| Col # | Field name | TiDB data type | Maximum length | Description |
-|---|---|---|---|---|
-| 1 | N/A | N/A | N/A | Reserved for internal use |
-| 2 | N/A | N/A | N/A | Reserved for internal use |
-| 3 | N/A | N/A | N/A | Reserved for internal use |
-| 4 | ID       | INTEGER |  | Unique event ID  |
-| 5 | TIMESTAMP | TIMESTAMP |  | Time of event   |
-| 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
-| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
-| 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
-| 10 | HOST | VARCHAR | 16 | Server IP    |
-| 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
-| 12 | USER | VARCHAR | 17 | Login username    |
-| 13 | DATABASE | VARCHAR | 64 | Event-related database      |
-| 14 | TABLES | VARCHAR | 64 | Event-related table name          |
-| 15 | SQL_TEXT | VARCHAR | 64 KB | Masked SQL statement   |
-| 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
+### Audit operation information
 
-Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
+When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following fields:
 
-- If the EVENT_CLASS value is `CONNECTION`, database event records also contain the following fields:
+| Field          | Description                                                                                                   |
+|----------------|---------------------------------------------------------------------------------------------------------------|
+| `AUDIT_OP_TARGET`| The target object of the TiDB Cloud database audit setting change. |
+| `AUDIT_OP_ARGS`  | The arguments used in the TiDB Cloud database audit setting change. |
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
-    |---|---|---|---|---|
-    | 17 | CLIENT_PORT | INTEGER |  | Client port number |
-    | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
-    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
-    | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
-    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to client communication via the MySQL protocol |
-    | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
-    | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
-    | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
-    | 25 | PID | INTEGER |  | The PID of the TiDB process |
+## Audit logging limitations
 
-- If the EVENT_CLASS value is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
-
-    | Col # | Field name | TiDB data type | Maximum length | Description |
-    |---|---|---|---|---|
-    | 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
-    | 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
-    | 19 | SQL_STATEMENT  | VARCHAR | 17 | The SQL statement type |
-    | 20 | PID | INTEGER |  | The PID of the TiDB process  |
+{{{ .premium }}} does not guarantee that audit logs are written in chronological order. To find the most recent events, you might need to review all log files. To sort logs chronologically, use the `TIME` field in each audit record.

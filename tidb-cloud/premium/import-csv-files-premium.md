@@ -7,12 +7,6 @@ summary: Learn how to import CSV files from Amazon S3 or Alibaba Cloud Object St
 
 This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) or Alibaba Cloud Object Storage Service (OSS) into {{{ .premium }}} instances.
 
-> **Warning:**
->
-> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
->
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
-
 > **Tip:**
 >
 > - For {{{ .starter }}} or Essential, see [Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-csv-files-serverless.md).
