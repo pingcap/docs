@@ -45,13 +45,27 @@ To add firewall rules to a {{{ .starter }}} or {{{ .essential }}} instance, take
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. On the **Networking** page, enable **Public Endpoint** if it is disabled. In **Authorized Networks**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
+3. On the **Networking** page, enable **Public Endpoint** if it is disabled.
 
-    > **Note:**
-    >
-    > In some situations, the IP address observed by the TiDB Cloud console differs from the IP address used when accessing the internet. Therefore, you might need to change the start and end IP addresses to make the rule function as expected. You can use a search engine or other online tool to check your own IP address. For example, search for "what is my IP."
+4. (Optional) For a newly created {{{ .starter }}} or {{{ .essential }}} instance, TiDB Cloud enables **Allow_all_public_connections** by default. To restrict access to specific IP addresses or ranges, click **...** in the row of **Allow_all_public_connections**, and then click **Delete**.
 
-4. Click **Add rule** to add more address ranges. In the displayed window, you can specify a single IP address or a range of IP addresses. If you want to limit the rule to a single IP address, type the same IP address in the **Start IP Address** and **End IP Address** fields. Opening the firewall enables administrators, users, and applications to access any database on your {{{ .starter }}} or Essential instance to which they have valid credentials. Click **Submit** to add the firewall rule.
+5. In the **Authorized Networks** section, click **Add rule**, and then add the IP address or IP address range that you want to allow.
+
+    - To add the current IP address of your computer, click **Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
+
+        > **Note:**
+        >
+        > The IP address perceived by the TiDB Cloud console might differ from the IP address used by your database client. If the rule does not work as expected, adjust the start and end IP addresses. You can use a search engine or an online tool to check your public IP address. For example, search for "what is my IP".
+
+    - To enable access from all AWS IP addresses if your {{{ .starter }}} or Essential instance is hosted on AWS, click **Add AWS Access**. This automatically creates a firewall rule that includes all AWS IP ranges. TiDB Cloud uses the reserved IP address **169.254.65.87** to represent AWS IP ranges and updates the list regularly based on the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).
+
+    - To add more address ranges, specify a single IP address or a range of IP addresses. To limit the rule to a single IP address, enter the same IP address in the **Start IP Address** and **End IP Address** fields.
+
+        > **Note:**
+        >
+        > Opening the firewall enables administrators, users, and applications from the specified IP addresses or IP address ranges to access any database on your {{{ .starter }}} or Essential instance to which they have valid credentials.
+
+6. Click **Save**.
 
 ## What's next
 

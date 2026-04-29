@@ -117,14 +117,36 @@ Before you begin to create an endpoint:
     - **Google Cloud Subnet Name**: the name of the subnet in the specified VPC. You can find it on the **VPC network details** page.
     - **Private Service Connect Endpoint Name**: enter a unique name for the private endpoint that will be created.
 2. After entering the information, click **Generate Command**.
-3. Copy the generated command.
-4. Open [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) and execute the command to create the private endpoint.
+3. Create the private endpoint by using either the Google Cloud CLI or the Google Cloud console.
+
+<SimpleTab>
+<div label="Use Google Cloud CLI">
+
+1. Copy the generated command.
+2. Open [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) and execute the command to create the private endpoint.
+
+</div>
+<div label="Use Google Cloud console">
+
+1. In the [Google Cloud console](https://console.cloud.google.com/), make sure the current project is the same as the **Google Cloud Project ID** you entered in TiDB Cloud.
+2. Go to **VPC network** > **Private Service Connect** > **Connected endpoints**, and then click **Connect endpoint**.
+3. Configure the endpoint by using the values from the generated command in TiDB Cloud:
+    - **Endpoint name**: use the forwarding rule name from the command.
+    - **Target**: select **Published service**, and then enter the service attachment URI from `--target-service-attachment`.
+    - **Region**: select the region from the command.
+    - **Network**: select your VPC network from `--network`.
+    - **Subnetwork**: select your subnet from `--subnet`.
+4. Click **Add endpoint** to create the endpoint.
+5. In **Connected endpoints**, verify that the new endpoint is created and record its endpoint name.
+
+</div>
+</SimpleTab>
 
 ### Step 3. Accept endpoint access
 
-After executing the command in Google Cloud Shell successfully, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
+After creating the endpoint in Google Cloud successfully, go back to the TiDB Cloud console, and then click **Accept Endpoint Access**.
 
-If you see an error `not received connection request from endpoint`, make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
+If you see an error `not received connection request from endpoint`, make sure that you have successfully created the endpoint in your Google Cloud project and that its configuration matches the generated command.
 
 ### Step 4. Connect to your TiDB cluster
 
