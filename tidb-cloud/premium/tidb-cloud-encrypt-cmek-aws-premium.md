@@ -12,7 +12,7 @@ aliases: ['/tidbcloud/premium/tidb-cloud-encrypt-cmek']
 
 
 ## Overview
-{{{ .premium }}} enables data encryption at rest by default on TiDB service instance storage and snapshot volumes. This provides basic encryption capabilities to enhance data security. Building on this, {{{ .premium }}} allows you to combine TiDB service's storage engine encryption with your cloud provider's KMS, adding another layer of data encryption (Dual-layer Data Encryption).
+{{{ .premium }}} enables data encryption at rest by default on TiDB service instance storage and snapshot volumes. This provides basic encryption capabilities to enhance data security. Building on this, you can combine the TiDB service's storage engine encryption with your cloud provider's Key Management Service (KMS) to add another layer of data encryption (Dual-layer Data Encryption).
 
 ### Encryption mechanism
 
