@@ -9,7 +9,7 @@ summary: 了解如何启用、禁用、查看和修改 TiProxy。
 
 > **注意：**
 >
-> TiProxy 目前处于 beta 阶段，仅适用于部署在 AWS 上的 TiDB Cloud Dedicated 集群。
+> TiProxy 目前仅适用于部署在 AWS 上的 TiDB Cloud Dedicated 集群。
 
 ## 启用 TiProxy
 

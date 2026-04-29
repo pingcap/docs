@@ -9,7 +9,7 @@ TiDB Cloud 通过强大的机制，默认保持高可用和数据持久性，防
 
 > **注意：**
 >
-> - 本文档仅适用于 <CustomContent plan="starter,essential">TiDB Cloud Starter 和 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Starter、TiDB Cloud Essential 和 TiDB Cloud Premium</CustomContent>。
+> - 本文档仅适用于 {{{ .starter }}}、{{{ .essential }}} 和 {{{ .premium }}}。
 > - 关于 TiDB Cloud Dedicated 的高可用，请参见 [TiDB Cloud Dedicated 的高可用](/tidb-cloud/high-availability-with-multi-az.md)。
 
 ## 概述
@@ -18,24 +18,11 @@ TiDB 通过 Raft 一致性算法确保高可用和数据持久性。该算法会
 
 TiDB Cloud 在此基础上扩展了分区高可用和区域高可用能力，以满足不同的运维需求。
 
-<CustomContent plan="starter,essential">
-
 > **注意：**
 >
 > - 对于 TiDB Cloud Starter 实例，仅启用分区高可用，且不可配置。
+> - 对于 {{{ .premium }}} 实例，仅启用区域高可用，且不可配置。
 > - 对于部署在 AWS 东京（ap-northeast-1）Region 或任意阿里云 Region 的 TiDB Cloud Essential 实例，默认启用区域高可用。你可以在 TiDB Cloud Essential 实例创建时根据需要切换为分区高可用。对于部署在其他 Region 的 TiDB Cloud Essential 实例，仅启用分区高可用，且不可配置。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-> **注意：**
->
-> - 对于 TiDB Cloud Starter 实例，仅启用分区高可用，且不可配置。
-> - 对于 TiDB Cloud Premium 集群，仅启用区域高可用，且不可配置。
-> - 对于部署在 AWS 东京（ap-northeast-1）Region 或任意阿里云 Region 的 TiDB Cloud Essential 实例，默认启用区域高可用。你可以在 TiDB Cloud Essential 实例创建时根据需要切换为分区高可用。对于部署在其他 Region 的 TiDB Cloud Essential 实例，仅启用分区高可用，且不可配置。
-
-</CustomContent>
 
 - **分区高可用**：该选项将所有 node 部署在同一个可用区内，降低网络延时。它无需在应用层实现跨区冗余即可保证高可用，适用于优先考虑单区低延时的应用。详细信息参见 [分区高可用架构](#zonal-high-availability-architecture)。
 

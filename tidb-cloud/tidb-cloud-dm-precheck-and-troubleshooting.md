@@ -94,6 +94,22 @@ TiDB 集群存储空间不足。建议[增加 TiKV 节点存储](/tidb-cloud/sca
 
 要解决此问题，你可以根据[支持的排序规则](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)在 TiDB 集群中创建架构，然后点击**重启**恢复任务。
 
+### 报错信息：“LOCK TABLES ... Access denied”
+
+由于源数据库用户没有 `LOCK TABLES` 权限，全量数据导出失败。该错误通常发生在从托管 MySQL 服务（例如 Amazon RDS、Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL 或 Google Cloud SQL）迁移时，因为云服务提供商不允许使用 `FLUSH TABLES WITH READ LOCK` (FTWRL)。在这种情况下，DM 使用默认的 `consistency=auto` 模式，并回退到 `LOCK TABLES` 以确保全量导出期间的数据一致性。此操作需要 `LOCK TABLES` 权限。
+
+> **注意：**
+>
+> 如果由于其他原因无法使用 FTWRL（例如缺少 `RELOAD` 权限），该错误也可能发生在自管理 MySQL 实例上。
+
+要解决此问题，请在源 MySQL 数据库上为迁移用户授予 `LOCK TABLES` 权限：
+
+```sql
+GRANT LOCK TABLES ON *.* TO 'dm_source_user'@'%';
+```
+
+然后点击 **Restart** 恢复任务。
+
 ## 告警
 
 你可以订阅 TiDB Cloud 告警邮件，以便在发生告警时及时获得通知。

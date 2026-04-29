@@ -11,7 +11,7 @@ TiProxy 是 PingCAP 官方的代理组件。它位于客户端与 TiDB 服务器
 
 > **注意：**
 >
-> TiProxy 目前处于 beta 阶段，仅适用于部署在 AWS 上的 TiDB Cloud Dedicated 集群。
+> TiProxy 目前仅适用于部署在 AWS 上的 TiDB Cloud Dedicated 集群。
 
 ## 场景
 

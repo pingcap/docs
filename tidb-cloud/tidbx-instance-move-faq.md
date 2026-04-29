@@ -47,7 +47,7 @@ TiDB Cloud 为不同的资源类型和使用场景提供三种项目类型。
 
     - 它充当不属于任何项目的 TiDB X 实例的逻辑容器，因此可以通过使用项目 ID 通过 TiDB Cloud API 访问这些实例。
     - 每个组织都有一个唯一的 virtual project ID。
-    - 你可以在 **[My TiDB](https://tidbcloud.com/tidbs)** 页面上的项目视图中获取此 ID。
+    - 你可以通过 TiDB Cloud API 的 [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 端点获取此 ID。
 
 下表列出了这些项目类型之间的差异：
 

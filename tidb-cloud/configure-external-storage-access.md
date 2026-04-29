@@ -6,23 +6,13 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 # 配置外部存储访问
 
-<CustomContent plan="starter,essential">
-
-如果你希望在 {{{ .starter }}} 或 TiDB Cloud Essential 实例中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 TiDB Cloud Starter 和 TiDB Cloud Essential 实例配置外部存储访问。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-如果你希望在 {{{ .premium }}} 实例中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 TiDB Cloud Premium 实例配置外部存储访问。
-
-</CustomContent>
+如果你希望在 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例中从外部存储导入数据或将数据导出到外部存储，你需要配置跨账户访问。本文档介绍了如何为 {{{ .starter }}}、{{{ .essential }}} 和 {{{ .premium }}} 实例配置外部存储访问。
 
 如果你需要为 TiDB Cloud Dedicated 集群配置这些外部存储，请参阅 [为 TiDB Cloud Dedicated 配置外部存储访问](/tidb-cloud/dedicated-external-storage.md)。
 
 ## 配置 Amazon S3 访问
 
-要允许 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例访问你的 Amazon S3 bucket，可以通过以下任一方法为该实例配置 bucket 访问权限：
+要允许 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例访问你的 Amazon S3 bucket，可以通过以下任一方法为该实例配置 bucket 访问权限：
 
 - [使用 Role ARN](#configure-amazon-s3-access-using-a-role-arn)：使用 Role ARN 访问你的 Amazon S3 bucket。
 - [使用 AWS 访问密钥](#configure-amazon-s3-access-using-an-aws-access-key)：使用 IAM 用户的访问密钥访问你的 Amazon S3 bucket。
@@ -33,12 +23,12 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 > **注意：**
 >
-> 仅当目标 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的云服务商为 AWS 时，才支持通过 Role ARN 访问 Amazon S3。如果你使用其他云服务商，请改用 AWS 访问密钥。详情请参阅 [使用 AWS 访问密钥配置 Amazon S3 访问](#configure-amazon-s3-access-using-an-aws-access-key)。
+> 仅当目标 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例的云服务商为 AWS 时，才支持通过 Role ARN 访问 Amazon S3。如果你使用其他云服务商，请改用 AWS 访问密钥。详情请参阅 [使用 AWS 访问密钥配置 Amazon S3 访问](#configure-amazon-s3-access-using-an-aws-access-key)。
 
-1. 打开目标 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的 **Import** 页面。
+1. 打开目标 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例的 **Import** 页面。
 
     1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
-    2. 点击目标 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例的名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 打开 **Add New ARN** 对话框。
 
@@ -104,10 +94,10 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
     4. 在 **Create policy** 页面，点击 **JSON** 标签。
 
-    5. 根据你的需求在策略文本框中配置策略。以下为一个示例，可用于从 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导出和导入数据。
+    5. 根据你的需求在策略文本框中配置策略。以下为一个示例，可用于从 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例导出和导入数据。
 
-        - 从 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导出数据需要 **s3:PutObject** 和 **s3:ListBucket** 权限。
-        - 向 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导入数据需要 **s3:GetObject**、**s3:GetObjectVersion** 和 **s3:ListBucket** 权限。
+        - 从 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例导出数据需要 **s3:PutObject** 和 **s3:ListBucket** 权限。
+        - 向 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例导入数据需要 **s3:GetObject**、**s3:GetObjectVersion** 和 **s3:ListBucket** 权限。
 
         ```json
         {
@@ -339,9 +329,9 @@ aliases: ['/tidbcloud/serverless-external-storage']
     - 在 **Service** 区域选择 **Object Storage Service**。
     - 在 **Action** 区域根据需要选择权限。
 
-        向 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导入数据需授予 **oss:GetObject**、**oss:GetBucketInfo** 和 **oss:ListObjects** 权限。
+        向 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例导入数据需授予 **oss:GetObject**、**oss:GetBucketInfo** 和 **oss:ListObjects** 权限。
 
-        从 <CustomContent plan="starter,essential">{{{ .starter }}} 或 TiDB Cloud Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例导出数据需授予 `oss:PutObject` 和 `oss:GetBucketInfo` 权限。
+        从 {{{ .starter }}}、TiDB Cloud Essential 或 TiDB Cloud Premium 实例导出数据需授予 `oss:PutObject` 和 `oss:GetBucketInfo` 权限。
 
     - 在 **Resource** 区域选择 bucket 及其对象。
 

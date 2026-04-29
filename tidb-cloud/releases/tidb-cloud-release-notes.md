@@ -8,6 +8,52 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 4 月 28 日
+
+**常规变更**
+
+- **TiDB Cloud Premium**
+
+    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) 现已在 AWS<CustomContent language="en,zh"> 和阿里云</CustomContent> 上开启公测。
+
+        由 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 内核驱动，TiDB Cloud Premium 专为关键任务型企业工作负载而设计，这类工作负载需要超大规模、毫不妥协的性能，以及云原生按需消费模式带来的成本效益。
+
+        TiDB Cloud Premium 弥合了 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 与 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 之间的差距。
+
+        - 与 TiDB Cloud Essential 相比，TiDB Cloud Premium 在计算、存储和网络层提供了显著更强的隔离能力，确保关键工作负载获得可预测的性能。同时，它保留了弹性按需扩缩容模型，使计算容量能够独立扩展，而无需运维开销。
+        - 与 TiDB Cloud Dedicated 相比，TiDB Cloud Premium 通过消除闲置冗余容量来提升成本效益，因此你只需为实际使用的性能付费。
+
+      如需试用 TiDB Cloud Premium，请前往 [TiDB Cloud 控制台](https://tidbcloud.com/)，点击 **Create Resource**，并选择 **Premium** 作为你的套餐。更多信息，请参见[创建 TiDB Cloud Premium 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)。
+
+- **TiDB Cloud Dedicated**
+
+    - TiProxy 现已在 AWS 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中正式发布。它提供增强的连接管理和负载均衡能力，以提升数据库的可靠性和性能。
+
+        TiProxy 的主要特性：
+
+        - 在扩缩容操作和滚动升级期间保持客户端连接持久不断开。
+        - 将流量均匀分发到各个 TiDB 节点，以更好地利用资源。
+
+      有关实现细节，请参见 [TiProxy 概览](/tidb-cloud/tiproxy-overview-for-cloud.md)。
+
+**控制台变更**
+
+- 改进 TiDB Cloud Starter 和 Essential 公网端点的防火墙规则管理体验。
+
+    TiDB Cloud 控制台现已提供一个简化的对话框，用于管理 TiDB Cloud Starter 和 Essential 公网端点的防火墙规则。你可以在同一处添加当前 IP 地址、允许来自所有 AWS IP 地址的访问（适用于托管在 AWS 上的实例），或手动指定 IP 地址或 IP 地址范围。
+
+    更多信息，请参见[创建和管理防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)。
+
+**API 变更**
+
+- 推出 TiDB Cloud Premium API (v1beta2)，用于自动高效地管理以下资源：
+
+    - **TiDB Cloud Premium Instance**：管理 TiDB Cloud Premium 实例的生命周期和配置，包括密码、CA 证书和云服务提供商信息。
+    - **Backup**：管理 TiDB Cloud Premium 实例的备份，包括基于备份的恢复。
+    - **Region**：获取可用于创建 TiDB Cloud Premium 实例的区域。
+
+  更多信息，请参见 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/)。
+
 ## 2026 年 4 月 14 日
 
 **常规变更**

@@ -102,15 +102,21 @@ TiDB Cloud 提供以下部署选项：
 
     </CustomContent>
 
-<CustomContent plan="premium">
-
 - TiDB Cloud Premium
 
     TiDB Cloud Premium 专为对实时无限扩展有极高要求的关键业务设计。它提供基于负载的自动扩展和全面的企业级能力。
 
-    目前，TiDB Cloud Premium 在 AWS 和阿里云上私测。
+    <CustomContent language="en,zh">
 
-</CustomContent>
+    目前，TiDB Cloud Premium 在 AWS 和阿里云上公测。
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    Currently, TiDB Cloud Premium is in public preview on AWS.
+
+    </CustomContent>
 
 - TiDB Cloud Dedicated
 
