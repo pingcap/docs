@@ -148,6 +148,7 @@
     - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [TLS Connections to TiDB Cloud](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - Data Access Control
+    - [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
     - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Audit Management
     - [Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
