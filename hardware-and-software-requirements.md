@@ -27,7 +27,11 @@ This document describes the software and hardware requirements for deploying and
 </thead>
 <tbody>
   <tr>
-    <td>Red Hat Enterprise Linux 8.6 or a later 8.x version</td>
+    <td>Red Hat Enterprise Linux 9.4 or a later 9.x version</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Red Hat Enterprise Linux 8.6 or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -98,6 +102,7 @@ This document describes the software and hardware requirements for deploying and
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
 > - Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
+> - Support for Red Hat Enterprise Linux 9.x starts from [TiUP](https://github.com/pingcap/tiup/releases) v1.16.5.
 
 ### Libraries required for compiling and running TiDB
 
