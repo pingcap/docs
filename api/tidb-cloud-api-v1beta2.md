@@ -5,7 +5,7 @@ summary: Learn about the v1beta2 API of TiDB Cloud.
 
 # TiDB Cloud API v1beta2 Overview
 
-The TiDB Cloud API v1beta2 is a RESTful API that gives you programmatic access to manage [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances and related resources.
+The TiDB Cloud API v1beta2 is a RESTful API that gives you programmatic access to manage [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=premium#premium) instances and related resources.
 
 Currently, you can use the following v1beta2 APIs to manage the resources in TiDB Cloud Premium:
 
