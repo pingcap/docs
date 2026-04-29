@@ -25,7 +25,7 @@ For {{{ .essential }}}, you are charged based on the number of provisioned Reque
 
 ### Pricing for {{{ .premium }}} {#pricing-for-premium}
 
-For {{{ .premium }}}, you are billed based on the number of provisioned Request Capacity Units (RCUs) and the storage you actually use, rather than the underlying backend nodes or provisioned disk size. As {{{ .premium }}} is currently in private preview, you can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
+For {{{ .premium }}}, you are billed based on the actual [Request Capacity Unit (RCU)](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) consumption and the storage that you actually use, rather than the underlying backend nodes or provisioned disk size. See [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
 </CustomContent>
 
