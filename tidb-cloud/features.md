@@ -313,7 +313,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>Dual-layer encryption</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
