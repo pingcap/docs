@@ -97,6 +97,11 @@ To create a new project, take the following steps:
 3. Depending on which type of TiDB Cloud resources you are creating the project for, do one of the following:
 
     - If the project is created for TiDB X instances, click **Confirm**.
+
+        > **Note:**
+        >
+        > For {{{ .premium }}} instances, encryption is configured per instance rather than per project. After you create the instance, you can enable [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) to add a database-layer encryption on top of the default storage-layer encryption.
+
     - If the project is created for {{{ .dedicated }}} clusters, select the **Create for Dedicated Cluster** option, configure [Customer-Managed Encryption Keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [maintenance window](/tidb-cloud/configure-maintenance-window.md) for the project, and then click **Confirm**.
 
 ### Manage a project

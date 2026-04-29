@@ -10,7 +10,7 @@ TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbra
 
 > **Note:**
 >
-> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 You can use DataGrip in two ways:
 
@@ -74,6 +74,48 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     ![Test the connection to a {{{ .starter }}} instance](/media/develop/datagrip-test-connection.jpg)
 
 9. Click **OK** to save the connection configuration.
+
+</div>
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
+
+    Ensure that your client IP address is added to the access list.
+
+4. In the left navigation pane, click **Overview** to return to the instance overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+6. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
+    - If you have not set a password yet, click **Set Root Password** in the dialog.
+    - If you need to verify the server certificate or if the connection fails and requires a CA certificate, click **CA cert** to download it.
+    - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+7. Launch DataGrip and create a project to manage your connections.
+
+8. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+
+9. Copy and paste the appropriate connection string into the **Data Source and Drivers** window in DataGrip. The mappings between DataGrip fields and {{{ .premium }}} connection string are as follows:
+
+    | DataGrip field | {{{ .premium }}} connection string |
+    | -------------- | ------------------------------- |
+    | Host           | `{host}`                        |
+    | Port           | `{port}`                        |
+    | User           | `{user}`                        |
+    | Password       | `{password}`                    |
+
+    - On the **SSH/SSL** tab, clear the **Use SSL** checkbox.
+    - If a **Download missing driver files** warning is displayed, click **Download** to acquire the driver files.
+
+10. Click **Test Connection** to validate the connection to the {{{ .premium }}} instance.
+
+11. Click **OK** to save the connection configuration.
 
 </div>
 <div label="TiDB Cloud Dedicated">

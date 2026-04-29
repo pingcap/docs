@@ -76,10 +76,6 @@ You can connect your {{{ .dedicated }}} cluster to your MySQL service securely t
 
 Make sure that your {{{ .premium }}} instance can connect to the MySQL service.
 
-> **Note:**
->
-> Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for VPC Peering for {{{ .premium }}} instance" in the **Description** field, and then click **Submit**.
-
 Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
 You can connect your {{{ .premium }}} instance to your MySQL service securely through a private endpoint. If the private endpoint is not available for your MySQL service, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) to create one.

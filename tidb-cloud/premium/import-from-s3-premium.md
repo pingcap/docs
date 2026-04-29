@@ -5,13 +5,7 @@ summary: Learn how to import CSV files from Amazon S3 into {{{ .premium }}} inst
 
 # Import Data from Amazon S3 into {{{ .premium }}}
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) into {{{ .premium }}} instances. The steps reflect the current private preview user interface and serve as an initial framework for the upcoming public preview launch.
-
-> **Warning:**
->
-> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
->
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) into {{{ .premium }}} instances.
 
 > **Tip:**
 >
@@ -21,7 +15,7 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 ## Limitations
 
 - To ensure data consistency, {{{ .premium }}} allows importing CSV files into empty tables only. If the target table already contains data, import into a staging table and then copy the rows using the `INSERT ... SELECT` statement.
-- During the private preview, the user interface currently supports Amazon S3 as the only storage provider. Support for additional providers will be added in future releases.
+- During the public preview, the user interface currently supports Amazon S3 as the only storage provider. Support for additional providers will be added in future releases.
 - Each import job maps a single source pattern to one destination table.
 
 ## Step 1. Prepare the CSV files

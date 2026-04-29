@@ -7,12 +7,6 @@ summary: Learn how to import small CSV or SQL files into {{{ .premium }}} instan
 
 This document describes how to import data into {{{ .premium }}} using the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`). The following sections provide step-by-step instructions for importing data from SQL or CSV files. This process performs a logical import, where the MySQL Command-Line Client replays SQL statements from your local machine against TiDB Cloud.
 
-> **Warning:**
->
-> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
->
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
-
 > **Tip:**
 >
 > - Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV Files from Cloud Storage into {{{ .premium }}}](/tidb-cloud/premium/import-csv-files-premium.md).
