@@ -47,7 +47,7 @@ TiDB Cloud provides three project types for different resource types and use cas
 
     - It acts as a logical container for TiDB X instances that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID.
     - Each organization has a unique virtual project ID.
-    - You can get this ID from the project view on the **[My TiDB](https://tidbcloud.com/tidbs)** page.
+    - You can get this ID from the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint of the TiDB Cloud API.
 
 The following table lists the differences between these project types:
 
