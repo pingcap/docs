@@ -8,17 +8,6 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
-## April 28, 2026
-
-**API changes**
-
-- Introduce TiDB Cloud Premium API (v1beta2) for managing the following resources automatically and efficiently:
-
-    - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
-    - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
-
-  For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/).
-
 ## April 14, 2026
 
 **General changes**
