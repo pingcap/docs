@@ -106,7 +106,7 @@ If you did not enable encryption during cluster creation, you can still enable i
 
 Before proceeding, ensure you have created a symmetric encryption key in your AWS KMS. Then, follow these steps:
 
-1. On the **Security** page of your {{{ .premium }}} instance, click **Enable** for in the Dual-layer Data Encryption section.
+1. On the **Security** page of your {{{ .premium }}} instance, click **Enable** in the Dual-layer Data Encryption section.
 2. Select **Customer-Managed Encryption Key (CMEK)** and click **Add KMS Key ARN**.
 3. Copy the displayed JSON policy and save it as ROLE-TRUST-POLICY.JSON. This file describes the required trust relationship.
 4. In your AWS KMS console, add this trust policy to your key. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
