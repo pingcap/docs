@@ -41,7 +41,7 @@ ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 
 > **Note:**
 >
-> Statistics Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. The following example shows the current `ANALYZE` behavior with Statistics Version 2.
+> Starting from v9.0.0, TiDB no longer support using Statistics Version 1 (`tidb_analyze_version = 1`) for new statistics collection. The following example shows the current `ANALYZE` behavior with Statistics Version 2.
 
 ```sql
 mysql> create table t(x int, index idx(x)) partition by hash(x) partitions 2;

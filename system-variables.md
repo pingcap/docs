@@ -1183,7 +1183,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> Statistics Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. TiDB keeps reading existing Version 1 statistics for upgrade compatibility, but all new `ANALYZE` operations use Statistics Version 2 (`tidb_analyze_version = 2`). It is recommended that you use `tidb_analyze_version = 2`.
+> Starting from v9.0.0, TiDB no longer support using Statistics Version 1 (`tidb_analyze_version = 1`) for new statistics collection. If you try to set this variable to `1`, TiDB returns an error. For more information, see [Versions of statistics](/statistics.md#versions-of-statistics). TiDB still supports reading existing Version 1 statistics for upgrade compatibility, but all new `ANALYZE` operations use Statistics Version 2 (`tidb_analyze_version = 2`). It is recommended that you use `tidb_analyze_version = 2`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1191,7 +1191,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Integer
 - Default value: `2`
 - Controls how TiDB collects statistics.
-    - Starting from v9.0.0, Version 1 (`tidb_analyze_version = 1`) is no longer supported for new statistics collection. If you try to set this variable to `1`, TiDB returns an error. For more information, see [Versions of statistics](/statistics.md#versions-of-statistics).
     - For TiDB Self-Managed, the default value of this variable changed from `1` to `2` starting from v5.3.0.
     - For TiDB Cloud, the default value of this variable changed from `1` to `2` starting from v6.5.0.
     - When you upgrade a cluster that still persists `tidb_analyze_version = 1`, TiDB rewrites the persisted global value to `2` during upgrade. Note that after the upgrade, the existing Version 1 statistics are not converted to Version 2 statistics automatically. It is recommended that you [migrate existing objects that use Statistics Version 1 to Version 2](/statistics.md#switch-between-statistics-versions).

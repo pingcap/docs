@@ -387,7 +387,7 @@ It is recommended that all tables, indexes, and partitions use the same statisti
 
 One major reason to migrate is that Version 1 might produce inaccurate estimates for equality and `IN` predicates because the Count-Min sketch can have hash collisions. For more information, see [Count-Min Sketch](#count-min-sketch). To avoid this issue, set `tidb_analyze_version = 2` and rerun `ANALYZE` on all objects.
 
-To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Version 2:
+To prepare `ANALYZE` for migrating from Statistics Version 1 to Statistics Version 2, do the following:
 
 - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 
