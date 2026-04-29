@@ -239,7 +239,7 @@ For each database event record in audit logs, TiDB Cloud provides the following 
 
 ### General information
 
-All classes of audit logs contain the following fields:
+All audit log records contain the following fields:
 
 | Field         | Description                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------|
@@ -270,7 +270,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 | Field           | Description                                                                                   |
 |-----------------|-----------------------------------------------------------------------------------------------|
 | `CURRENT_DB`      | The name of the current database. Not recorded when the event classes include `DISCONNECT`.  |
-| `CONNECTION_TYPE` | The type of the connection, such as Socket, UnixSocket, or SSL/TLS.                          |
+| `CONNECTION_TYPE` | The connection type, such as Socket, UnixSocket, or SSL/TLS.                          |
 | `PID`             | The process ID of the current connection.                                                    |
 | `SERVER_VERSION`  | The version of the connected TiDB server.                                                  |
 | `SSL_VERSION`     | The version of SSL in use.                                                                 |
