@@ -116,7 +116,7 @@ TiDB Cloud provides the following deployment options:
 
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
 
-    Currently, TiDB Cloud Dedicated is generally available on AWS and Google Cloud, and in public preview on Azure. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
+    Currently, TiDB Cloud Dedicated is generally available on AWS, Azure, and Google Cloud. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
 
 ## Architecture
 
