@@ -165,17 +165,17 @@ One RCU represents a sustained capacity of RUs per second. For example, a baseli
 
 ### RCU auto-scaling
 
-When configuring your {{{ .premium }}} instance, you specify the maximum RCU (`RCU_max`) required for your workload. TiDB Cloud automatically scales capacity within the range of `0.25 * RCU_max` to `RCU_max`.
+When configuring your {{{ .premium }}} instance, you specify the maximum number of RCUs (`RCU_max`) required for your workload. TiDB Cloud automatically scales capacity within the range of `0.25 * RCU_max` to `RCU_max`.
 
-For example, if you set the maximum throughput to 20,000 RCUs, TiDB Cloud dynamically scales the capacity between 5,000 and 20,000 RCUs based on real-time demand. This scaling is automatic and instantaneous, enabling you to consume up to the maximum RCU at any time without manual intervention or delay.
+For example, if you set the maximum capacity to 20,000 RCUs, TiDB Cloud dynamically scales the capacity between 5,000 and 20,000 RCUs based on real-time demand. This scaling is automatic and instantaneous, enabling you to consume up to the maximum number of RCUs at any time without manual intervention or delay.
 
 ### RCU billing
 
-{{{ .premium }}} uses a usage-based billing model that charges you based on the actual Request Units that your workload consumes.
+{{{ .premium }}} uses a usage-based billing model that charges you based on the actual Request Capacity Unit (RCU) consumption and storage usage.
 
 #### Per-minute calculation
 
-TiDB Cloud calculates your usage every minute. It measures the total number of Request Units consumed within a 60-second window and averages this value to determine the RCU (RUs per second) for that minute. This calculation ensures that your billing accurately reflects real-time traffic fluctuations.
+TiDB Cloud calculates your usage every minute. It measures the total number of Request Units (RUs) consumed within a 60-second window, calculates the average RUs per second, and uses this average value as the RCU consumption for that minute. This calculation ensures that your billing accurately reflects real-time traffic fluctuations.
 
 #### Minimum usage requirement
 
@@ -208,11 +208,11 @@ TiDB Cloud calculates the total RU charge for any operation based on the databas
 
 - **Data access and size**
 
-    - **Read and write volume**: RUs scale directly with the size of the data payload. Processing a 100 KiB document consumes more RUs than a 1 KiB record.
+    - **Read and write volume**: RUs scale directly with the size of the data payload. Processing a 100 KiB record consumes more RUs than a 1 KiB record.
     - **Read and write rows**: the number of rows involved in an operation is a primary cost driver. Even with small payloads, querying or updating multiple rows increases the total RU consumption because each row requires processing, locking, and validation.
     - **Indexing impact**:
 
-        - **Writes**: every index on a table must be updated during a write operation. Tables with more indexes incur higher RU costs for `INSERT`, `UPDATE`, and `DELETE` operations.
+        - **Writes**: each affected index on a table must be updated during a write operation. Tables with more indexes incur higher RU costs for `INSERT`, `UPDATE`, and `DELETE` operations.
         - **Reads**: well-designed indexes significantly reduce query RUs by enabling the engine to locate rows efficiently and avoid full-table scans.
 
 - **Query complexity**
