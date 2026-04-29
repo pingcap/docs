@@ -48,9 +48,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce TiDB Cloud Premium API (v1beta2) for managing the following resources automatically and efficiently:
 
-    - TiDB Cloud Premium Instance: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
-    - Backup: manage backups for TiDB Cloud Premium instances, including backup-based restore.
-    - Region: retrieve available regions for creating TiDB Cloud Premium instances.
+    - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
+    - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
+    - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
 
   For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/).
 
