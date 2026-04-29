@@ -1611,7 +1611,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
+> This variable is read-only for [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium).
 
 </CustomContent>
 
@@ -5610,7 +5610,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
+> This variable is read-only for [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium).
 
 </CustomContent>
 
