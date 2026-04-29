@@ -5,9 +5,9 @@ summary: Learn about how to unload CSV files.
 
 # Unloading CSV File
 
-## Unloading CSV File
+This page describes how to unload CSV files using the `COPY INTO` command.
 
-Syntax:
+## Syntax
 
 ```sql
 COPY INTO { internalStage | externalStage | externalLocation }

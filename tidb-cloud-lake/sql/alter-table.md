@@ -227,9 +227,9 @@ CREATE TABLE t(id INT);
 ALTER TABLE t COMMENT = 'new-comment';
 ```
 
-## Fuse Engine Options {#fuse-engine-options}
+## Fuse Engine Options
 
-Sets or unsets [Fuse Engine options](/tidb-cloud-lake/sql/table-engines.md#available-engines) for a table.
+Sets or unsets [Fuse Engine options](/tidb-cloud-lake/sql/fuse-engine-tables.md#fuse-engine-options) for a table.
 
 ### Syntax
 
@@ -351,12 +351,27 @@ CONNECTION=(connection_name = 's3_access_key_conn');
 
 CREATE CONNECTION s3_role_conn
     STORAGE_TYPE = 's3'
-    ROLE_ARN = 'arn:aws:iam::123456789012:role/databend-access';
+    ROLE_ARN = 'arn:aws:iam::123456789012:role/lake-access';
 
 ALTER TABLE sales_data CONNECTION=( connection_name = 's3_role_conn' );
 ```
 
-## Swap Tables {#swap-tables}
+## Snapshot Tag Operations
+
+<FunctionDescription description="Introduced or updated: v1.2.891"/>
+
+Creates or drops a named snapshot tag that references a specific FUSE table snapshot. Snapshot tags let you bookmark a point-in-time state of a table so you can query it later with the [AT](/tidb-cloud-lake/sql/at.md) clause.
+
+For full details, see:
+
+- [CREATE SNAPSHOT TAG](/tidb-cloud-lake/sql/create-snapshot-tag.md)
+- [DROP SNAPSHOT TAG](/tidb-cloud-lake/sql/drop-snapshot-tag.md)
+
+> **Note:**
+>
+> Snapshot tags are different from [governance tags](#tag-operations). Snapshot tags bookmark a table snapshot for time travel, while governance tags attach key-value metadata to objects for classification.
+
+## Swap Tables
 
 Swaps all table metadata and data between two tables atomically in a single transaction. This operation exchanges the table schemas, including all columns, constraints, and data, effectively making each table take on the identity of the other.
 
@@ -397,4 +412,25 @@ ALTER TABLE t1 SWAP WITH t2;
 -- After swapping, t1 now has t2's schema, and t2 has t1's schema
 DESC t1;
 DESC t2;
+```
+
+## Tag Operations
+
+Assigns or removes governance tags on a table. Governance tags are key-value metadata for classification and data governance. Tags must be created with [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) first. For full details, see [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md).
+
+### Syntax
+
+```sql
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
+    SET TAG <tag_name> = '<value>' [, <tag_name> = '<value>' ...]
+
+ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
+    UNSET TAG <tag_name> [, <tag_name> ...]
+```
+
+### Examples
+
+```sql
+ALTER TABLE default.users SET TAG env = 'prod', owner = 'team_a';
+ALTER TABLE default.users UNSET TAG env, owner;
 ```

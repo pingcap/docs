@@ -234,5 +234,5 @@ cd agent-ui && npm run dev
 
 - **GitHub Repository**: [databendlabs/mcp-databend](https://github.com/databendlabs/mcp-databend)
 - **PyPI Package**: [mcp-databend](https://pypi.org/project/mcp-databend)
-- **Agno Framework**: [Agno MCP](https://docs.agno.com/tools/mcp/mcp)
+- **Agno Framework**: [Agno MCP](https://docs.agno.com/tools/mcp/overview)
 - **Agent UI**: [Agent UI](https://docs.agno.com/agent-ui/introduction)

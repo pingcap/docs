@@ -63,19 +63,19 @@ The `SET` clause accepts the same options as [CREATE WAREHOUSE](/tidb-cloud-lake
 Suspend a warehouse:
 
 ```sql
-ALTER WAREHOUSE my_wh SUSPEND;
+ALTER WAREHOUSE 'my-wh' SUSPEND;
 ```
 
 Resume a warehouse:
 
 ```sql
-ALTER WAREHOUSE my_wh RESUME;
+ALTER WAREHOUSE 'my-wh' RESUME;
 ```
 
 Modify warehouse settings:
 
 ```sql
-ALTER WAREHOUSE my_wh
+ALTER WAREHOUSE 'my-wh'
     SET warehouse_size = Large
     auto_resume = TRUE
     comment = 'Serving tier';
@@ -84,14 +84,14 @@ ALTER WAREHOUSE my_wh
 Disable auto-suspend:
 
 ```sql
-ALTER WAREHOUSE my_wh SET auto_suspend = NULL;
+ALTER WAREHOUSE 'my-wh' SET auto_suspend = NULL;
 ```
 
 Manage tags:
 
 ```sql
-ALTER WAREHOUSE wh_hot SET TAG environment = 'production';
-ALTER WAREHOUSE wh_hot SET TAG environment = 'staging', owner = 'john', cost_center = 'eng';
-ALTER WAREHOUSE wh_hot UNSET TAG environment;
-ALTER WAREHOUSE wh_hot UNSET TAG environment, owner, cost_center;
+ALTER WAREHOUSE 'wh-hot' SET TAG environment = 'production';
+ALTER WAREHOUSE 'wh-hot' SET TAG environment = 'staging', owner = 'john', cost_center = 'eng';
+ALTER WAREHOUSE 'wh-hot' UNSET TAG environment;
+ALTER WAREHOUSE 'wh-hot' UNSET TAG environment, owner, cost_center;
 ```

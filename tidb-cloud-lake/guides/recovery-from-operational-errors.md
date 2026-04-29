@@ -197,7 +197,7 @@ If you've made unwanted changes to a table's structure, you can revert to the pr
 ## Important Considerations and Limitations
 
 - **Time Constraints**: Recovery only works within the retention period (default: 24 hours).
-- **Name Conflicts**: Cannot undrop if an object with the same name exists — [rename database](/tidb-cloud-lake/sql/rename-database.md) or [rename table](/tidb-cloud-lake/sql/rename-table.md) first.
+- **Name Conflicts**: Cannot undrop if an object with the same name exists — [rename database](/tidb-cloud-lake/sql/alter-database.md) or [rename table](/tidb-cloud-lake/sql/rename-table.md) first.
 - **Ownership**: Ownership isn't automatically restored—manually grant it after recovery.
 - **Transient Tables**: Flashback doesn't work for transient tables (no snapshots stored).
 

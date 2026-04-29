@@ -1,81 +1,90 @@
 ---
 title: READ_FILE
-summary: Reads the content of a file from a stage and returns it as a BINARY value. This is useful for loading raw file content (images, PDFs, binary data, etc.) directly into a table column.
+summary: Reads a file from a stage and returns its raw bytes.
 ---
 
 # READ_FILE
 
-> **Note:**
->
-> Introduced or updated in v1.2.882.
+Reads a file from a stage and returns its contents as raw bytes.
 
-Reads the content of a file from a stage and returns it as a `BINARY` value. This is useful for loading raw file content (images, PDFs, binary data, etc.) directly into a table column.
+`READ_FILE` is useful when you want to package staged assets such as documents, images, or model inputs into downstream datasets, for example when unloading training data to Lance.
 
 ## Syntax
 
 ```sql
--- Single argument: combined stage and file path
-READ_FILE('<stage_path>')
-
--- Two arguments: separate stage and relative file path
-READ_FILE('<stage>', '<file_path>')
+READ_FILE('@<stage>/<path-to-file>')
+READ_FILE('@<stage>', '<path-to-file>')
 ```
 
-## Parameters
+## Arguments
 
-| Parameter     | Description                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------------- |
-| `stage_path`  | A combined stage and file path starting with `@`, e.g., `'@my_stage/path/to/file.png'`.                      |
-| `stage`       | The stage name starting with `@`, e.g., `'@my_stage'`. The stage is validated at bind time when it is a constant. |
-| `file_path`   | The relative file path within the stage, e.g., `'path/to/file.png'`.                                         |
+| Arguments | Description |
+|-----------|-------------|
+| `@<stage>/<path-to-file>` | Full stage file path. The expression must resolve to a stage file path that starts with `@`. |
+| `@<stage>` | Stage name in the two-argument form. Use a constant stage reference such as `@assets`. |
+| `<path-to-file>` | File path relative to the stage. This can be a string literal, column, or expression that resolves to a string. |
 
 ## Return Type
 
-`BINARY`. Returns `NULL` if any argument is `NULL`.
+`BINARY`
+
+If any argument is `NULL`, the result is `NULL`.
+
+## Usage Notes
+
+- `READ_FILE` reads files from a stage. It does not read local files from the {{{ .lake }}} server.
+- The target must be a file, not a directory.
+- The caller must have permission to read the stage.
 
 ## Examples
 
-### Reading a single file
+Read a file with the full stage path:
 
 ```sql
--- Read a file using a combined stage path
-SELECT to_hex(read_file('@my_stage/data/file.csv'));
-
--- Read a file using separate stage and path arguments
-SELECT to_hex(read_file('@my_stage', 'data/file.csv'));
+SELECT TO_HEX(READ_FILE('@data/csv/prefix/ab.csv'));
 ```
 
-### Reading files from a table column
+Result:
 
-```sql
--- Create a table with file paths
-CREATE TABLE file_paths(path STRING);
-INSERT INTO file_paths VALUES
-    ('@my_stage/images/01.png'),
-    ('@my_stage/images/02.png'),
-    (NULL);
-
--- Read all files referenced in the table
-SELECT path, to_hex(read_file(path)) AS content_hex FROM file_paths;
-
-┌──────────────────────────────────────────────────┐
-│           path           │       content_hex      │
-├──────────────────────────┼────────────────────────┤
-│ @my_stage/images/01.png  │ 89504e47...            │
-│ @my_stage/images/02.png  │ 89504e47...            │
-│ NULL                     │ NULL                   │
-└──────────────────────────────────────────────────┘
+```text
+31
 ```
 
-### Using two-argument form with relative paths
+Read a file with a stage name plus a relative path:
 
 ```sql
--- Create a table with relative file paths
-CREATE TABLE rel_paths(path STRING);
-INSERT INTO rel_paths VALUES
-    ('data/file1.csv'),
-    ('data/file2.csv');
+SELECT TO_HEX(READ_FILE('@data', 'csv/prefix/ab.csv'));
+```
 
--- Read files using a fixed stage and relative paths from the table
-SELECT path, to_hex(read_file('@my_stage', path)) AS content_hex FROM rel_paths;
+Result:
+
+```text
+31
+```
+
+Read multiple files by combining a constant stage with per-row relative paths:
+
+```sql
+CREATE OR REPLACE TABLE read_file_rel_paths(path STRING);
+
+INSERT INTO read_file_rel_paths VALUES
+  ('csv/prefix/ab.csv'),
+  ('csv/prefix/ab/cd.csv'),
+  (NULL);
+
+SELECT path, TO_HEX(READ_FILE('@data', path))
+FROM read_file_rel_paths
+ORDER BY path;
+```
+
+Result:
+
+```text
++----------------------+--------------------------------+
+| path                 | to_hex(read_file('@data',path)) |
++----------------------+--------------------------------+
+| csv/prefix/ab.csv    | 31                             |
+| csv/prefix/ab/cd.csv | 32                             |
+| NULL                 | NULL                           |
++----------------------+--------------------------------+
 ```

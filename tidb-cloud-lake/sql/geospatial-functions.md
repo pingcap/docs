@@ -7,62 +7,90 @@ summary: "{{{ .lake }}} ships with two complementary sets of geospatial capabili
 
 {{{ .lake }}} ships with two complementary sets of geospatial capabilities: PostGIS-style geometry functions for building and analysing shapes, and H3 utilities for global hexagonal indexing. The tables below group the functions by task so you can quickly locate the right tool, similar to the layout used in the Snowflake documentation.
 
-## Geometry Constructors
+## Constructors
 
-| Function | Description | Example |
-|----------|-------------|---------|
-| [ST_MAKEGEOMPOINT](/tidb-cloud-lake/sql/st-makegeompoint.md) / [ST_GEOM_POINT](/tidb-cloud-lake/sql/st-geom-point.md) | Construct a Point geometry | `ST_MAKEGEOMPOINT(-122.35, 37.55)` → `POINT(-122.35 37.55)` |
-| [ST_MAKEPOINT](/tidb-cloud-lake/sql/st-makepoint.md) / [ST_POINT](/tidb-cloud-lake/sql/st-point.md) | Construct a Point geography | `ST_MAKEPOINT(-122.35, 37.55)` → `POINT(-122.35 37.55)` |
-| [ST_MAKELINE](/tidb-cloud-lake/sql/st-makeline.md) / [ST_MAKE_LINE](/tidb-cloud-lake/sql/st-make-line.md) | Create a LineString from points | `ST_MAKELINE(ST_MAKEGEOMPOINT(-122.35, 37.55), ST_MAKEGEOMPOINT(-122.40, 37.60))` → `LINESTRING(-122.35 37.55, -122.40 37.60)` |
-| [ST_MAKEPOLYGON](/tidb-cloud-lake/sql/st-makepolygon.md) | Create a Polygon from a closed LineString | `ST_MAKEPOLYGON(ST_MAKELINE(...))` → `POLYGON(...)` |
-| [ST_POLYGON](/tidb-cloud-lake/sql/st-polygon.md) | Create a Polygon from coordinate rings | `ST_POLYGON(...)` → `POLYGON(...)` |
+| Function | Description | Note | Example |
+|----------|-------------|------|---------|
+| [ST_MAKEGEOMPOINT](/tidb-cloud-lake/sql/st-makegeompoint.md) / [ST_GEOM_POINT](/tidb-cloud-lake/sql/st-geom-point.md) | Construct a Point geometry | GEOGRAPHY only | `ST_MAKEGEOMPOINT(-122.35, 37.55)` → `POINT(-122.35 37.55)` |
+| [ST_MAKEPOINT](/tidb-cloud-lake/sql/st-makepoint.md) / [ST_POINT](/tidb-cloud-lake/sql/st-point.md) | Construct a Point geography | GEOGRAPHY only | `ST_MAKEPOINT(-122.35, 37.55)` → `POINT(-122.35 37.55)` |
+| [ST_MAKELINE](/tidb-cloud-lake/sql/st-makeline.md) / [ST_MAKE_LINE](/tidb-cloud-lake/sql/st-make-line.md) | Create a LineString from points |  | `ST_MAKELINE(ST_MAKEGEOMPOINT(-122.35, 37.55), ST_MAKEGEOMPOINT(-122.40, 37.60))` → `LINESTRING(-122.35 37.55, -122.40 37.60)` |
+| [ST_MAKEPOLYGON](/tidb-cloud-lake/sql/st-makepolygon.md) | Create a Polygon from a closed LineString |  | `ST_MAKEPOLYGON(ST_MAKELINE(...))` → `POLYGON(...)` |
+| [ST_POLYGON](/tidb-cloud-lake/sql/st-polygon.md) | Create a Polygon from coordinate rings | GEOGRAPHY only | `ST_POLYGON(...)` → `POLYGON(...)` |
 
-## Geometry Conversion
+## Conversion
 
-| Function | Description | Example |
-|----------|-------------|---------|
-| [ST_GEOMETRYFROMTEXT](/tidb-cloud-lake/sql/st-geometryfromtext.md) / [ST_GEOMFROMTEXT](/tidb-cloud-lake/sql/st-geomfromtext.md) | Convert WKT to geometry | `ST_GEOMETRYFROMTEXT('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
-| [ST_GEOMETRYFROMWKB](/tidb-cloud-lake/sql/st-geometryfromwkb.md) / [ST_GEOMFROMWKB](/tidb-cloud-lake/sql/st-geomfromwkb.md) | Convert WKB to geometry | `ST_GEOMETRYFROMWKB(...)` → `POINT(...)` |
-| [ST_GEOMETRYFROMEWKT](/tidb-cloud-lake/sql/st-geometryfromewkt.md) / [ST_GEOMFROMEWKT](/tidb-cloud-lake/sql/st-geomfromewkt.md) | Convert EWKT to geometry | `ST_GEOMETRYFROMEWKT('SRID=4326;POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
-| [ST_GEOMETRYFROMEWKB](/tidb-cloud-lake/sql/st-geometryfromewkb.md) / [ST_GEOMFROMEWKB](/tidb-cloud-lake/sql/st-geomfromewkb.md) | Convert EWKB to geometry | `ST_GEOMETRYFROMEWKB(...)` → `POINT(...)` |
-| [ST_GEOGRAPHYFROMWKT](/tidb-cloud-lake/sql/st-geographyfromwkt.md) / [ST_GEOGFROMWKT](/tidb-cloud-lake/sql/st-geogfromwkt.md) | Convert WKT/EWKT to geography | `ST_GEOGRAPHYFROMWKT('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
-| [ST_GEOGRAPHYFROMWKB](/tidb-cloud-lake/sql/st-geographyfromwkb.md) / [ST_GEOGFROMWKB](/tidb-cloud-lake/sql/st-geogfromwkb.md) | Convert WKB/EWKB to geography | `ST_GEOGRAPHYFROMWKB(...)` → `POINT(...)` |
-| [ST_GEOMFROMGEOHASH](/tidb-cloud-lake/sql/st-geomfromgeohash.md) | Convert GeoHash to geometry | `ST_GEOMFROMGEOHASH('9q8yyk8')` → `POLYGON(...)` |
-| [ST_GEOMPOINTFROMGEOHASH](/tidb-cloud-lake/sql/st-geompointfromgeohash.md) | Convert GeoHash to Point geometry | `ST_GEOMPOINTFROMGEOHASH('9q8yyk8')` → `POINT(...)` |
-| [ST_GEOGFROMGEOHASH](/tidb-cloud-lake/sql/st-geogfromgeohash.md) | Convert GeoHash to geography polygon | `ST_GEOGFROMGEOHASH('9q8yyk8')` → `POLYGON(...)` |
-| [ST_GEOGPOINTFROMGEOHASH](/tidb-cloud-lake/sql/st-geogpointfromgeohash.md) | Convert GeoHash to geography point | `ST_GEOGPOINTFROMGEOHASH('9q8yyk8')` → `POINT(...)` |
-| [TO_GEOMETRY](/tidb-cloud-lake/sql/geometry.md) | Parse various formats into geometry | `TO_GEOMETRY('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
-| [TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md) / [TRY_TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md) | Parse various formats into geography | `TO_GEOGRAPHY('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
+| Function | Description | Note | Example |
+|----------|-------------|------|---------|
+| [ST_GEOMETRYFROMTEXT](/tidb-cloud-lake/sql/st-geometryfromtext.md) / [ST_GEOMFROMTEXT](/tidb-cloud-lake/sql/st-geomfromtext.md) | Convert WKT to geometry | GEOGRAPHY only | `ST_GEOMETRYFROMTEXT('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
+| [ST_GEOMETRYFROMWKB](/tidb-cloud-lake/sql/st-geometryfromwkb.md) / [ST_GEOMFROMWKB](/tidb-cloud-lake/sql/st-geomfromwkb.md) | Convert WKB to geometry | GEOGRAPHY only | `ST_GEOMETRYFROMWKB(...)` → `POINT(...)` |
+| [ST_GEOMETRYFROMEWKT](/tidb-cloud-lake/sql/st-geometryfromewkt.md) / [ST_GEOMFROMEWKT](/tidb-cloud-lake/sql/st-geomfromewkt.md) | Convert EWKT to geometry | GEOGRAPHY only | `ST_GEOMETRYFROMEWKT('SRID=4326;POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
+| [ST_GEOMETRYFROMEWKB](/tidb-cloud-lake/sql/st-geometryfromewkb.md) / [ST_GEOMFROMEWKB](/tidb-cloud-lake/sql/st-geomfromewkb.md) | Convert EWKB to geometry | GEOGRAPHY only | `ST_GEOMETRYFROMEWKB(...)` → `POINT(...)` |
+| [ST_GEOGRAPHYFROMWKT](/tidb-cloud-lake/sql/st-geographyfromwkt.md) / [ST_GEOGFROMWKT](/tidb-cloud-lake/sql/st-geogfromwkt.md) | Convert WKT/EWKT to geography | GEOGRAPHY only | `ST_GEOGRAPHYFROMWKT('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
+| [ST_GEOGRAPHYFROMWKB](/tidb-cloud-lake/sql/st-geographyfromwkb.md) / [ST_GEOGFROMWKB](/tidb-cloud-lake/sql/st-geogfromwkb.md) | Convert WKB/EWKB to geography | GEOGRAPHY only | `ST_GEOGRAPHYFROMWKB(...)` → `POINT(...)` |
+| [ST_GEOMFROMGEOHASH](/tidb-cloud-lake/sql/st-geomfromgeohash.md) | Convert GeoHash to geometry | GEOGRAPHY only | `ST_GEOMFROMGEOHASH('9q8yyk8')` → `POLYGON(...)` |
+| [ST_GEOMPOINTFROMGEOHASH](/tidb-cloud-lake/sql/st-geompointfromgeohash.md) | Convert GeoHash to Point geometry | GEOGRAPHY only | `ST_GEOMPOINTFROMGEOHASH('9q8yyk8')` → `POINT(...)` |
+| [ST_GEOGFROMGEOHASH](/tidb-cloud-lake/sql/st-geogfromgeohash.md) | Convert GeoHash to geography polygon | GEOGRAPHY only | `ST_GEOGFROMGEOHASH('9q8yyk8')` → `POLYGON(...)` |
+| [ST_GEOGPOINTFROMGEOHASH](/tidb-cloud-lake/sql/st-geogpointfromgeohash.md) | Convert GeoHash to geography point | GEOGRAPHY only | `ST_GEOGPOINTFROMGEOHASH('9q8yyk8')` → `POINT(...)` |
+| [TO_GEOMETRY](/tidb-cloud-lake/sql/geometry.md) | Parse various formats into geometry | GEOGRAPHY only | `TO_GEOMETRY('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
+| [TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md) / [TRY_TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md) | Parse various formats into geography | GEOGRAPHY only | `TO_GEOGRAPHY('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
 
-## Geometry Output
+## Output
 
-| Function | Description | Example |
-|----------|-------------|---------|
-| [ST_ASTEXT](/tidb-cloud-lake/sql/st-astext.md) | Convert geometry to WKT | `ST_ASTEXT(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
-| [ST_ASWKT](/tidb-cloud-lake/sql/st-aswkt.md) | Convert geometry to WKT | `ST_ASWKT(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
-| [ST_ASBINARY](/tidb-cloud-lake/sql/st-asbinary.md) / [ST_ASWKB](/tidb-cloud-lake/sql/st-aswkb.md) | Convert geometry to WKB | `ST_ASBINARY(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `WKB representation` |
-| [ST_ASEWKT](/tidb-cloud-lake/sql/st-asewkt.md) | Convert geometry to EWKT | `ST_ASEWKT(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'SRID=4326;POINT(-122.35 37.55)'` |
-| [ST_ASEWKB](/tidb-cloud-lake/sql/st-asewkb.md) | Convert geometry to EWKB | `ST_ASEWKB(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `EWKB representation` |
-| [ST_ASGEOJSON](/tidb-cloud-lake/sql/st-asgeojson.md) | Convert geometry to GeoJSON | `ST_ASGEOJSON(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'{"type":"Point","coordinates":[-122.35,37.55]}'` |
-| [ST_GEOHASH](/tidb-cloud-lake/sql/st-geohash.md) | Convert geometry to GeoHash | `ST_GEOHASH(ST_MAKEGEOMPOINT(-122.35, 37.55), 7)` → `'9q8yyk8'` |
-| [TO_STRING](/tidb-cloud-lake/sql/string.md) | Convert geometry to string | `TO_STRING(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
+| Function | Description | Note | Example |
+|----------|-------------|------|---------|
+| [ST_ASTEXT](/tidb-cloud-lake/sql/st-astext.md) | Convert geometry to WKT |  | `ST_ASTEXT(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
+| [ST_ASWKT](/tidb-cloud-lake/sql/st-aswkt.md) | Convert geometry to WKT |  | `ST_ASWKT(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
+| [ST_ASBINARY](/tidb-cloud-lake/sql/st-asbinary.md) / [ST_ASWKB](/tidb-cloud-lake/sql/st-aswkb.md) | Convert geometry to WKB |  | `ST_ASBINARY(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `WKB representation` |
+| [ST_ASEWKT](/tidb-cloud-lake/sql/st-asewkt.md) | Convert geometry to EWKT |  | `ST_ASEWKT(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'SRID=4326;POINT(-122.35 37.55)'` |
+| [ST_ASEWKB](/tidb-cloud-lake/sql/st-asewkb.md) | Convert geometry to EWKB |  | `ST_ASEWKB(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `EWKB representation` |
+| [ST_ASGEOJSON](/tidb-cloud-lake/sql/st-asgeojson.md) | Convert geometry to GeoJSON |  | `ST_ASGEOJSON(ST_MAKEGEOMPOINT(-122.35, 37.55))` → '{"type":"Point","coordinates":[-122.35,37.55]}' |
+| [ST_GEOHASH](/tidb-cloud-lake/sql/st-geohash.md) | Convert geometry to GeoHash |  | `ST_GEOHASH(ST_MAKEGEOMPOINT(-122.35, 37.55), 7)` → `'9q8yyk8'` |
+| [TO_STRING](/tidb-cloud-lake/sql/string.md) | Convert geometry to string |  | `TO_STRING(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
 
-## Geometry Accessors & Properties
+## Accessors & Properties
 
-| Function | Description | Example |
-|----------|-------------|---------|
-| [ST_DIMENSION](/tidb-cloud-lake/sql/st-dimension.md) | Return the topological dimension | `ST_DIMENSION(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `0` |
-| [ST_SRID](/tidb-cloud-lake/sql/st-srid.md) | Return the SRID of a geometry | `ST_SRID(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `4326` |
-| [ST_SETSRID](/tidb-cloud-lake/sql/st-setsrid.md) | Assign an SRID to a geometry | `ST_SETSRID(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-122.35 37.55)` |
-| [ST_TRANSFORM](/tidb-cloud-lake/sql/st-transform.md) | Transform geometry to a new SRID | `ST_TRANSFORM(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-13618288.8 4552395.0)` |
-| [ST_NPOINTS](/tidb-cloud-lake/sql/st-npoints.md) / [ST_NUMPOINTS](/tidb-cloud-lake/sql/st-numpoints.md) | Count points in a geometry | `ST_NPOINTS(ST_MAKELINE(...))` → `2` |
-| [ST_POINTN](/tidb-cloud-lake/sql/st-pointn.md) | Return a specific point from a LineString | `ST_POINTN(ST_MAKELINE(...), 1)` → `POINT(-122.35 37.55)` |
-| [ST_STARTPOINT](/tidb-cloud-lake/sql/st-startpoint.md) | Return the first point in a LineString | `ST_STARTPOINT(ST_MAKELINE(...))` → `POINT(-122.35 37.55)` |
-| [ST_ENDPOINT](/tidb-cloud-lake/sql/st-endpoint.md) | Return the last point in a LineString | `ST_ENDPOINT(ST_MAKELINE(...))` → `POINT(-122.40 37.60)` |
-| [ST_LENGTH](/tidb-cloud-lake/sql/st-length.md) | Measure the length of a LineString | `ST_LENGTH(ST_MAKELINE(...))` → `5.57` |
-| [ST_X](/tidb-cloud-lake/sql/st-x.md) / [ST_Y](/tidb-cloud-lake/sql/st-y.md) | Return the X or Y coordinate of a Point | `ST_X(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `-122.35` |
-| [ST_XMIN](/tidb-cloud-lake/sql/st-xmin.md) / [ST_XMAX](/tidb-cloud-lake/sql/st-xmax.md) | Return the min/max X coordinate | `ST_XMIN(ST_MAKELINE(...))` → `-122.40` |
-| [ST_YMIN](/tidb-cloud-lake/sql/st-ymin.md) / [ST_YMAX](/tidb-cloud-lake/sql/st-ymax.md) | Return the min/max Y coordinate | `ST_YMAX(ST_MAKELINE(...))` → `37.60` |
+| Function | Description | Note | Example |
+|----------|-------------|------|---------|
+| [ST_DIMENSION](/tidb-cloud-lake/sql/st-dimension.md) | Return the topological dimension |  | `ST_DIMENSION(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `0` |
+| [ST_CENTROID](/tidb-cloud-lake/sql/st-centroid.md) | Return the centroid of a geometry | GEOMETRY only | `ST_CENTROID(TO_GEOMETRY('LINESTRING(0 0, 2 0)'))` → `POINT(1 0)` |
+| [ST_ENVELOPE](/tidb-cloud-lake/sql/st-envelope.md) | Return the minimum bounding rectangle | GEOMETRY only | `ST_ENVELOPE(TO_GEOMETRY('LINESTRING(0 0, 2 3)'))` → `POLYGON((0 0,2 0,2 3,0 3,0 0))` |
+| [ST_SRID](/tidb-cloud-lake/sql/st-srid.md) | Return the SRID of a geometry |  | `ST_SRID(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `4326` |
+| [ST_POINTN](/tidb-cloud-lake/sql/st-pointn.md) | Return a specific point from a LineString |  | `ST_POINTN(ST_MAKELINE(...), 1)` → `POINT(-122.35 37.55)` |
+| [ST_STARTPOINT](/tidb-cloud-lake/sql/st-startpoint.md) | Return the first point in a LineString |  | `ST_STARTPOINT(ST_MAKELINE(...))` → `POINT(-122.35 37.55)` |
+| [ST_ENDPOINT](/tidb-cloud-lake/sql/st-endpoint.md) | Return the last point in a LineString |  | `ST_ENDPOINT(ST_MAKELINE(...))` → `POINT(-122.40 37.60)` |
+| [ST_X](/tidb-cloud-lake/sql/st-x.md) / [ST_Y](/tidb-cloud-lake/sql/st-y.md) | Return the X or Y coordinate of a Point |  | `ST_X(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `-122.35` |
+| [ST_XMIN](/tidb-cloud-lake/sql/st-xmin.md) / [ST_XMAX](/tidb-cloud-lake/sql/st-xmax.md) | Return the min/max X coordinate |  | `ST_XMIN(ST_MAKELINE(...))` → `-122.40` |
+| [ST_YMIN](/tidb-cloud-lake/sql/st-ymin.md) / [ST_YMAX](/tidb-cloud-lake/sql/st-ymax.md) | Return the min/max Y coordinate |  | `ST_YMAX(ST_MAKELINE(...))` → `37.60` |
+
+## Relationship and measurement
+
+| Function | Description | Note | Example |
+|----------|-------------|------|---------|
+| [HAVERSINE](/tidb-cloud-lake/sql/haversine.md) | Compute great-circle distance between coordinates |  | `HAVERSINE(37.55, -122.35, 37.60, -122.40)` → `6.12` |
+| [ST_AREA](/tidb-cloud-lake/sql/st-area.md) | Measure the area of geometry or geography object |  | `ST_AREA(TO_GEOMETRY('POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))'))` → `1.0` |
+| [ST_CONTAINS](/tidb-cloud-lake/sql/st-contains.md) | Test whether one geometry contains another | GEOMETRY only | `ST_CONTAINS(ST_MAKEPOLYGON(...), ST_MAKEGEOMPOINT(...))` → `TRUE` |
+| [ST_CONVEXHULL](/tidb-cloud-lake/sql/st-convexhull.md) | Compute the convex hull of a geometry | GEOMETRY only | `ST_CONVEXHULL(TO_GEOMETRY('POLYGON((0 0,2 0,2 2,0 2,0 0))'))` → `POLYGON((0 0,2 0,2 2,0 2,0 0))` |
+| [ST_NPOINTS](/tidb-cloud-lake/sql/st-npoints.md) | Count points in a geometry |  | `ST_NPOINTS(ST_MAKELINE(...))` → `2` |
+| [ST_NUMPOINTS](/tidb-cloud-lake/sql/st-numpoints.md) | Count points in a geometry | GEOMETRY only | `ST_NUMPOINTS(ST_MAKELINE(...))` → `2` |
+| [ST_INTERSECTS](/tidb-cloud-lake/sql/st-intersects.md) | Test whether two geometries intersect | GEOMETRY only | `ST_INTERSECTS(TO_GEOMETRY('LINESTRING(0 0, 2 2)'), TO_GEOMETRY('LINESTRING(0 2, 2 0)'))` → `TRUE` |
+| [ST_DISJOINT](/tidb-cloud-lake/sql/st-disjoint.md) | Test whether two geometries are disjoint | GEOMETRY only | `ST_DISJOINT(TO_GEOMETRY('POINT(3 3)'), TO_GEOMETRY('POLYGON((0 0,2 0,2 2,0 2,0 0))'))` → `TRUE` |
+| [ST_WITHIN](/tidb-cloud-lake/sql/st-within.md) | Test whether one geometry is within another | GEOMETRY only | `ST_WITHIN(TO_GEOMETRY('POINT(1 1)'), TO_GEOMETRY('POLYGON((0 0,2 0,2 2,0 2,0 0))'))` → `TRUE` |
+| [ST_EQUALS](/tidb-cloud-lake/sql/st-equals.md) | Test whether two geometries are spatially equal | GEOMETRY only | `ST_EQUALS(TO_GEOMETRY('POINT(1 1)'), TO_GEOMETRY('POINT(1 1)'))` → `TRUE` |
+| [ST_LENGTH](/tidb-cloud-lake/sql/st-length.md) | Measure the length of a LineString |  | `ST_LENGTH(ST_MAKELINE(...))` → `5.57` |
+| [ST_DISTANCE](/tidb-cloud-lake/sql/st-distance.md) | Measure the distance between geometries |  | `ST_DISTANCE(ST_MAKEGEOMPOINT(-122.35, 37.55), ST_MAKEGEOMPOINT(-122.40, 37.60))` → `5.57` |
+| [ST_DWITHIN](/tidb-cloud-lake/sql/st-dwithin.md) | Test whether two geometries are within a distance | GEOMETRY only | `ST_DWITHIN(TO_GEOMETRY('POINT(0 0)'), TO_GEOMETRY('POINT(1 1)'), 1.5)` → `TRUE` |
+| [ST_UNION](/tidb-cloud-lake/sql/st-union.md) | Return the combined geometry of two inputs | GEOMETRY only | `ST_UNION(TO_GEOMETRY('POINT(0 0)'), TO_GEOMETRY('POINT(1 1)'))` → `MULTIPOINT(0 0,1 1)` |
+| [ST_INTERSECTION](/tidb-cloud-lake/sql/st-intersection.md) | Return the shared part of two geometries | GEOMETRY only | `ST_INTERSECTION(TO_GEOMETRY('LINESTRING(0 0, 1 1)'), TO_GEOMETRY('LINESTRING(0 0, 1 1)'))` → `LINESTRING(0 0,1 1)` |
+| [ST_DIFFERENCE](/tidb-cloud-lake/sql/st-difference.md) | Return the part of the first geometry not covered by the second | GEOMETRY only | `ST_DIFFERENCE(TO_GEOMETRY('POINT(0 0)'), TO_GEOMETRY('POINT(1 1)'))` → `POINT(0 0)` |
+| [ST_SYMDIFFERENCE](/tidb-cloud-lake/sql/st-symdifference.md) | Return the non-overlapping parts of two geometries | GEOMETRY only | `ST_SYMDIFFERENCE(TO_GEOMETRY('POINT(0 0)'), TO_GEOMETRY('POINT(1 1)'))` → `MULTIPOINT(0 0,1 1)` |
+
+## Transformation
+
+| Function | Description | Note | Example |
+|----------|-------------|------|---------|
+| [ST_HILBERT](/tidb-cloud-lake/sql/st-hilbert.md) | Encode geometry or geography into a Hilbert curve index |  | `ST_HILBERT(TO_GEOMETRY('POINT(0.5 0.5)'), [0, 0, 1, 1])` → `715827882` |
+| [ST_SETSRID](/tidb-cloud-lake/sql/st-setsrid.md) | Assign an SRID to a geometry | GEOMETRY only | `ST_SETSRID(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-122.35 37.55)` |
+| [ST_TRANSFORM](/tidb-cloud-lake/sql/st-transform.md) | Transform geometry to a new SRID | GEOMETRY only | `ST_TRANSFORM(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-13618288.8 4552395.0)` |
 
 ## Spatial Relationships
 
@@ -108,6 +136,11 @@ summary: "{{{ .lake }}} ships with two complementary sets of geospatial capabili
 | [H3_HEX_AREA_M2](/tidb-cloud-lake/sql/h3-hex-area-m2.md) | Return the average hexagon area in m² | `H3_HEX_AREA_M2(10)` → `15200` |
 | [H3_TO_GEO_BOUNDARY](/tidb-cloud-lake/sql/h3-to-geo-boundary.md) | Return the boundary of a cell | `H3_TO_GEO_BOUNDARY(644325524701193974)` → `[[lon1,lat1], ...]` |
 | [H3_NUM_HEXAGONS](/tidb-cloud-lake/sql/h3-num-hexagons.md) | Return the number of hexagons at a resolution | `H3_NUM_HEXAGONS(2)` → `5882` |
+| [GEO_DISTANCE](/tidb-cloud-lake/sql/geo-distance.md) | Return the approximate distance in meters using WGS84 | `GEO_DISTANCE(0, 0, 0, 0)` → `0` |
+| [GREAT_CIRCLE_DISTANCE](/tidb-cloud-lake/sql/great-circle-distance.md) | Return the great-circle distance in meters | `GREAT_CIRCLE_DISTANCE(0, 0, 0, 0)` → `0` |
+| [GREAT_CIRCLE_ANGLE](/tidb-cloud-lake/sql/great-circle-angle.md) | Return the great-circle central angle in degrees | `GREAT_CIRCLE_ANGLE(0, 0, 45, 0)` → `45` |
+| [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | Check if a point lies inside a polygon | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
+| [POINT_IN_ELLIPSES](/tidb-cloud-lake/sql/point-in-ellipses.md) | Check if a point lies inside any ellipse | `POINT_IN_ELLIPSES(10, 10, 10, 9.1, 1, 0.9999)` → `1` |
 
 ## H3 Neighborhoods
 

@@ -64,6 +64,15 @@ This page provides a comprehensive overview of aggregate functions in {{{ .lake 
 | [GROUP_ARRAY_MOVING_AVG](/tidb-cloud-lake/sql/group-array-moving-avg.md) | Moving average over array | `GROUP_ARRAY_MOVING_AVG(3)(values)` → `[null, null, 3.0, 6.0, 9.0]` |
 | [GROUP_ARRAY_MOVING_SUM](/tidb-cloud-lake/sql/group-array-moving-sum.md) | Moving sum over array | `GROUP_ARRAY_MOVING_SUM(2)(values)` → `[null, 3, 7, 11, 15]` |
 
+## Geospatial Aggregation
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| [ST_UNION_AGG](/tidb-cloud-lake/sql/st-union-agg.md) | Unions GEOMETRY values across a group | `ST_UNION_AGG(geom)` → `MULTIPOINT(...)` |
+| [ST_INTERSECTION_AGG](/tidb-cloud-lake/sql/st-intersection-agg.md) | Intersects GEOMETRY values across a group | `ST_INTERSECTION_AGG(geom)` → `POLYGON(...)` |
+| [ST_ENVELOPE_AGG](/tidb-cloud-lake/sql/st-envelope-agg.md) | Returns the bounding rectangle of GEOMETRY values in a group | `ST_ENVELOPE_AGG(geom)` → `POLYGON(...)` |
+| [ST_COLLECT](/tidb-cloud-lake/sql/st-collect.md) | Collects GEOMETRY values into one GEOMETRY result | `ST_COLLECT(geom)` → `GEOMETRYCOLLECTION(...)` |
+
 ## String Aggregation
 
 | Function | Description | Example |

@@ -117,7 +117,7 @@ In this tutorial, you'll integrate {{{ .lake }}} with [Tableau Desktop](https://
 
 ### Step 1. Obtain Connection Information
 
-Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
 ### Step 2. Install databend-jdbc
 

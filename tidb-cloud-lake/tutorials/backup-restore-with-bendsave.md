@@ -111,7 +111,7 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
 
     ```bash
     curl -I  http://127.0.0.1:28002/v1/health
-    
+
     curl -I  http://127.0.0.1:8080/v1/health
     ```
 
@@ -155,7 +155,7 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://databend/ --recursive
     ```bash
     export AWS_ACCESS_KEY_ID=minioadmin
     export AWS_SECRET_ACCESS_KEY=minioadmin
-    
+
     ./databend-bendsave backup \
       --from ../configs/databend-query.toml \
       --to 's3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1'

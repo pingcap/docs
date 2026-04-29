@@ -51,6 +51,10 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 [ copyOptions ]
 ```
 
+> **Note:**
+>
+> Starting in {{{ .lake }}} `v1.2.890-nightly`, `TEXT` can be used as an alias for `TSV` in `FILE_FORMAT`. Older servers may reject `TYPE = TEXT`, so this page keeps using `TSV` in syntax and examples for compatibility.
+
 Where:
 
 ```sql

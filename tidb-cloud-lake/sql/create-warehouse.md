@@ -51,7 +51,7 @@ CREATE WAREHOUSE [ IF NOT EXISTS ] <warehouse_name>
 This example creates an XLarge warehouse with auto-scaling and custom settings:
 
 ```sql
-CREATE WAREHOUSE IF NOT EXISTS etl_wh
+CREATE WAREHOUSE IF NOT EXISTS 'etl-wh'
     WITH warehouse_size = XLarge
     auto_suspend = 600
     initially_suspended = TRUE
@@ -65,6 +65,6 @@ CREATE WAREHOUSE IF NOT EXISTS etl_wh
 This example creates a basic Small warehouse:
 
 ```sql
-CREATE WAREHOUSE my_warehouse
+CREATE WAREHOUSE 'my-warehouse'
     WITH warehouse_size = Small;
 ```

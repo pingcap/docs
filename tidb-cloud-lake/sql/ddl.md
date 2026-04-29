@@ -11,8 +11,10 @@ These topics provide reference information for the DDL (Data Definition Language
 
 | Component | Description |
 |-----------|-------------|
+| **[Catalog](/tidb-cloud-lake/sql/show-catalogs.md)** | Create, drop and list catalogs |
 | **[Database](/tidb-cloud-lake/sql/ddl-database-overview.md)** | Create, alter, and drop databases |
 | **[Table](/tidb-cloud-lake/sql/ddl-table-overview.md)** | Create, alter, and manage tables |
+| **[Table Versioning](/tidb-cloud-lake/sql/table-versioning.md)** | Create named snapshot tags for time travel |
 | **[View](/tidb-cloud-lake/sql/ddl-view-overview.md)** | Create and manage virtual tables based on queries |
 
 ## Performance & Indexing
@@ -23,6 +25,8 @@ These topics provide reference information for the DDL (Data Definition Language
 | **[Aggregating Index](/tidb-cloud-lake/sql/aggregating-index-sql.md)** | Pre-compute aggregations for faster queries |
 | **[Inverted Index](/tidb-cloud-lake/sql/inverted-index.md)** | Full-text search index for text columns |
 | **[Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)** | Substring search index for LIKE patterns |
+| **[Spatial Index](/tidb-cloud-lake/sql/spatial-index-overview.md)** | Spatial pruning index for GEOMETRY columns |
+| **[Vector Index](/tidb-cloud-lake/sql/vector-index.md)** | Similarity search index for vector embeddings |
 | **[Virtual Column](/tidb-cloud-lake/sql/virtual-column-overview.md)** | Extract and index JSON fields as virtual columns |
 
 ## Security & Access Control
@@ -30,6 +34,7 @@ These topics provide reference information for the DDL (Data Definition Language
 | Component | Description |
 |-----------|-------------|
 | **[User](/tidb-cloud-lake/sql/user-role.md)** | Create and manage database users |
+| **[Tag](/tidb-cloud-lake/sql/tag-overview.md)** | Attach key-value metadata to objects for governance and classification |
 | **[Network Policy](/tidb-cloud-lake/sql/network-policy-sql.md)** | Control network access to databases |
 | **[Mask Policy](/tidb-cloud-lake/sql/masking-policy-sql.md)** | Apply data masking for sensitive information |
 | **[Password Policy](/tidb-cloud-lake/sql/password-policy-sql.md)** | Enforce password requirements and rotation |
@@ -44,6 +49,7 @@ These topics provide reference information for the DDL (Data Definition Language
 | **[Sequence](/tidb-cloud-lake/sql/sequence.md)** | Generate unique sequential numbers |
 | **[Connection](/tidb-cloud-lake/sql/connection.md)** | Configure external data source connections |
 | **[File Format](/tidb-cloud-lake/sql/file-format.md)** | Define formats for data import/export |
+| **[Dictionary](/tidb-cloud-lake/sql/dictionary.md)** | Define dictionaries backed by external sources |
 
 ## Functions & Procedures
 
@@ -59,6 +65,7 @@ These topics provide reference information for the DDL (Data Definition Language
 | Component | Description |
 |-----------|-------------|
 | **[Warehouse](/tidb-cloud-lake/sql/warehouse-overview.md)** | Manage compute resources for query execution |
+| **[Worker](/tidb-cloud-lake/sql/worker-overview.md)** | Manage sandbox UDF execution environments through cloud control |
 | **[Workload Group](/tidb-cloud-lake/sql/workload-group.md)** | Control resource allocation and priorities |
 | **[Transaction](/tidb-cloud-lake/sql/transaction.md)** | Manage database transactions |
 | **[Variable](/tidb-cloud-lake/sql/sql-variables.md)** | Set and use session/global variables |

@@ -26,5 +26,5 @@ USE WAREHOUSE <warehouse_name>
 Set a warehouse as active for the current session:
 
 ```sql
-USE WAREHOUSE my_warehouse;
+USE WAREHOUSE 'my-warehouse';
 ```

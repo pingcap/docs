@@ -43,7 +43,8 @@ Structured and semi-structured functions in {{{ .lake }}} enable efficient proce
 |----------|-------------|--------|
 | [JSON_TO_STRING](/tidb-cloud-lake/sql/json-to-string.md) | Converts a JSON value to a string | `JSON_TO_STRING(PARSE_JSON('{"a":1}'))` |
 | [JSON_PRETTY](/tidb-cloud-lake/sql/json-pretty.md) | Formats JSON with proper indentation | `JSON_PRETTY(PARSE_JSON('{"a":1}'))` |
-| [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | Removes null values from JSON | `STRIP_NULL_VALUE(PARSE_JSON('{"a":1,"b":null}'))` |
+| [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | Converts a JSON null value to a SQL NULL value | `STRIP_NULL_VALUE(parse_json('null'))` → `NULL` |
+| [JSON_STRIP_NULLS](/tidb-cloud-lake/sql/json-strip-nulls.md) | Removes null values from JSON Object | `JSON_STRIP_NULLS(PARSE_JSON('{"a":1,"b":null}'))` → `{"a":1}` |
 
 ### Array/Object Expansion
 

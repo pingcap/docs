@@ -19,7 +19,6 @@ This page provides reference information for the table functions in {{{ .lake }}
 | Function | Description | Example |
 |----------|-------------|--------|
 | [LIST_STAGE](/tidb-cloud-lake/sql/list-stage.md) | Lists files in a stage | `SELECT * FROM LIST_STAGE(LOCATION => '@mystage/data/')` |
-| [READ_FILE](/tidb-cloud-lake/sql/read-file.md) | Reads file content from a stage as binary | `SELECT read_file('@mystage/file.csv')` |
 | [RESULT_SCAN](/tidb-cloud-lake/sql/result-scan.md) | Retrieves the result set of a previous query | `SELECT * FROM RESULT_SCAN(LAST_QUERY_ID())` |
 
 ## Data Generation
@@ -43,6 +42,7 @@ This page provides reference information for the table functions in {{{ .lake }}
 | [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) | Shows stream status information | `SELECT * FROM STREAM_STATUS('mystream')` |
 | [TASK_HISTROY](/tidb-cloud-lake/sql/task-history.md) | Shows task execution history | `SELECT * FROM TASK_HISTROY('mytask')` |
 | [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md) | Returns associations between security policies and tables/views | `SELECT * FROM POLICY_REFERENCES(POLICY_NAME => 'mypolicy')` |
+| [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md) | Returns tags assigned to a database object | `SELECT * FROM TAG_REFERENCES('mydb.mytable', 'TABLE')` |
 
 ## Storage Engine Functions
 

@@ -46,6 +46,7 @@ This page provides reference information for the system administration commands 
 | **[VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md)** | Reclaim storage space from tables |
 | **[VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md)** | Clean up dropped table data |
 | **[VACUUM TEMP FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md)** | Remove temporary files |
+| **[VACUUM VIRTUAL COLUMN](/tidb-cloud-lake/sql/vacuum-virtual-column.md)** | Remove obsolete virtual column files |
 | **[SHOW INDEXES](/tidb-cloud-lake/sql/show-indexes.md)** | Display table indexes |
 
 ## Dynamic Execution

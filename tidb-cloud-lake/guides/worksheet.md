@@ -33,6 +33,18 @@ The query result shows in the output area. You can click **Export** to save the 
 >
 > - If you enter multiple statements in the SQL input area, {{{ .lake }}} will only execute the statement where the cursor is located. You can move the cursor to execute other statements. Additionally, you can use keyboard shortcuts: Ctrl + Enter (Windows) or Command + Enter (Mac) to execute the current statement, and Ctrl + Shift + Enter (Windows) or Command + Shift + Enter (Mac) to execute all statements.
 
+## Query Result Defaults
+
+{{{ .lake }}} applies the following default limits to query results displayed in the worksheet output area:
+
+| Setting | Default | Description |
+|---|---|---|
+| Max display rows | 10,000 | Only the first 10,000 rows are shown in the preview. |
+| Max display columns | 200 | Only the first 200 columns are shown in the preview. |
+| Max cell content length | 3,000 characters | Cell values longer than this are truncated in the display. |
+
+The row and column limits are fixed. To adjust the max cell content length, click the settings icon in the bottom-right corner of the result area and choose a value (3K–Unlimited). Note that setting a very large value or **Unlimited** may cause the browser to slow down or become unresponsive when working with large result sets.
+
 ## Sharing a Worksheet
 
 You can share your worksheets with everyone in your organization or specific individuals. To do so, click **Share** in the worksheet you want to share, or click **Share this Folder** to share a worksheet folder.

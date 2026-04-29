@@ -190,3 +190,52 @@ export function calculateAge(birthDateStr) {
 }
 $$;
 ```
+
+## Worker Management for UDFs
+
+In {{{ .lake }}}, each UDF has an associated **Worker** that manages its execution environment in the sandbox. After creating a UDF, you may need to manage its worker for optimal performance and resource utilization.
+
+### Creating a Worker for Your UDF
+
+```sql
+-- Create a worker for your UDF (worker name should match UDF name)
+CREATE WORKER calculate_age_js WITH
+    size='small',
+    auto_suspend='300',
+    auto_resume='true';
+```
+
+### Managing Worker Resources
+
+```sql
+-- View all workers
+SHOW WORKERS;
+
+-- Adjust worker settings
+ALTER WORKER calculate_age_js SET size='medium', auto_suspend='600';
+
+-- Add tags for organization
+ALTER WORKER calculate_age_js SET TAG
+    environment='production',
+    team='analytics',
+    purpose='age-calculation';
+```
+
+### Worker Lifecycle
+
+```sql
+-- Suspend worker when not in use
+ALTER WORKER calculate_age_js SUSPEND;
+
+-- Resume worker when needed
+ALTER WORKER calculate_age_js RESUME;
+
+-- Remove worker when UDF is no longer needed
+DROP WORKER calculate_age_js;
+```
+
+### Environment Variables
+
+For security reasons, environment variables for UDFs are managed separately in the cloud console. After creating a UDF and its worker, configure any required environment variables through the {{{ .lake }}} interface.
+
+For more information, see [Worker Management](/tidb-cloud-lake/sql/worker-overview.md).

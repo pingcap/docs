@@ -19,7 +19,7 @@ For connections to {{{ .lake }}}, you can use the default `cloudapp` user or an 
 
 ### Step 1: Obtain {{{ .lake }}} Connection Information
 
-Log in to {{{ .lake }}} to obtain connection information. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting).
+Log in to {{{ .lake }}} to obtain connection information. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
 ![alt text](/media/tidb-cloud-lake/dbeaver-connect-info.png)
 
