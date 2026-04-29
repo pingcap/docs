@@ -27,7 +27,7 @@ This document describes the software and hardware requirements for deploying and
 </thead>
 <tbody>
   <tr>
-    <td>Red Hat Enterprise Linux 9.4 or a later 9.x version</td>
+    <td>Red Hat Enterprise Linux 9.4 or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
