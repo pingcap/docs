@@ -396,6 +396,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LATERAL (R)
 - LEAD (R-Window)
 - LEADING (R)
+- LATERAL (R)
 - LEAVE (R)
 - LEFT (R)
 - LESS
