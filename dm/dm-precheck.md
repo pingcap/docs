@@ -139,6 +139,16 @@ For the incremental data migration mode (`task-mode: incremental`), in addition 
     - Check whether `binlog_transaction_compression=OFF` is configured (DM does not support transaction compression).
     - If `binlog_do_db` or `binlog_ignore_db` is configured, check whether the database tables to be migrated meet the conditions of `binlog_do_db` and `binlog_ignore_db`.
 
+* (Mandatory) MariaDB binlog configuration
+
+    - Check whether binlog is enabled (required by DM).
+    - Check whether `binlog_legacy_event_pos` is set to `ON`.
+    - Check whether `binlog_format=ROW` is configured (DM only supports the migration of binlog in the ROW format).
+    - Check whether `binlog_row_image=FULL` is configured (DM only supports `binlog_row_image=FULL`).
+    - If `binlog_do_db` or `binlog_ignore_db` is configured, check whether the database tables to be migrated meet the conditions of `binlog_do_db` and `binlog_ignore_db`.
+    - Check whether `binlog_annotate_row_events` is set to `OFF`.
+    - Check whether `log_bin_compress` is set to `OFF`.
+
 * (Mandatory) Check if the upstream database is in an [Online-DDL](/dm/feature-online-ddl.md) process (in which the `ghost` table is created but the `rename` phase is not executed yet). If the upstream is in the online-DDL process, the precheck returns an error. In this case, wait until the DDL to complete and retry.
 
 ### Check items for full and incremental data migration
