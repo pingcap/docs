@@ -1189,16 +1189,19 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
+> **Warning:**
+>
+> Starting from v9.0.0, TiDB no longer support using Statistics Version 1 (`tidb_analyze_version = 1`) for new statistics collection. If you try to set this variable to `1`, TiDB returns an error. For more information, see [Versions of statistics](/statistics.md#versions-of-statistics). TiDB still supports reading existing Version 1 statistics for upgrade compatibility, but all new `ANALYZE` operations use Statistics Version 2 (`tidb_analyze_version = 2`). It is recommended that you use `tidb_analyze_version = 2`.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `2`
-- Range: `[1, 2]`
 - Controls how TiDB collects statistics.
-    - For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
-    - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
-    - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+    - For TiDB Self-Managed, the default value of this variable changed from `1` to `2` starting from v5.3.0.
+    - For TiDB Cloud, the default value of this variable changed from `1` to `2` starting from v6.5.0.
+    - When you upgrade a cluster that still persists `tidb_analyze_version = 1`, TiDB rewrites the persisted global value to `2` during upgrade. Note that after the upgrade, the existing Version 1 statistics are not converted to Version 2 statistics automatically. It is recommended that you [migrate existing objects that use Statistics Version 1 to Version 2](/statistics.md#switch-between-statistics-versions).
 - For detailed introduction about this variable, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
