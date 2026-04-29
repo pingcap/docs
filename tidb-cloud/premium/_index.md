@@ -21,21 +21,17 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=premium)
 
-[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python/?plan=premium)
-
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart/?plan=premium)
-
-[Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=premium)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview/?plan=premium)
+[Developer Guide Overview](https://docs.pingcap.com/developer/)
 
-[Quick Start](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud/?plan=premium)
+[Quick Start](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
 
-[Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot/?plan=premium)
+[Example Application](https://docs.pingcap.com/developer/dev-guide-sample-application-java-spring-boot/)
 
 </LearningPath>
 
@@ -49,9 +45,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium)
 
-[Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=premium)
-
-[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=premium)
+[Use API (Beta)](https://docs.pingcap.com/api/)
 
 </LearningPath>
 
@@ -122,8 +116,6 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel/?plan=premium)
 
 [Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview/?plan=premium)
-
-[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration/?plan=premium)
 
 </LearningPath>
 
