@@ -8,6 +8,52 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## April 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) is now in public preview on AWS<CustomContent language="en,zh"> and Alibaba Cloud</CustomContent>.
+
+        Powered by the [TiDB X](/tidb-cloud/tidb-x-architecture.md) kernel, TiDB Cloud Premium is specifically designed for mission-critical enterprise workloads that require hyperscale, uncompromising performance, and the cost efficiency of a cloud-native consumption model.
+
+        TiDB Cloud Premium bridges the gap between [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+
+        - Compared with TiDB Cloud Essential, TiDB Cloud Premium delivers significantly stronger isolation across the compute, storage, and network layers, ensuring predictable performance for critical workloads. At the same time, it retains an elastic, on-demand scaling model, allowing compute capacity to scale independently without operational overhead.
+        - Compared with TiDB Cloud Dedicated, TiDB Cloud Premium improves cost efficiency by eliminating idle headroom, so you only pay for the performance you actually use.
+
+      To try TiDB Cloud Premium, go to the [TiDB Cloud console](https://tidbcloud.com/), click **Create Resource**, and select **Premium** as your plan. For more information, see [Create a TiDB Cloud Premium instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+
+- **TiDB Cloud Dedicated**
+
+    - TiProxy is now generally available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
+
+        Key features of TiProxy:
+
+        - Maintains persistent client connections during scaling operations and rolling upgrades.
+        - Distributes traffic evenly across TiDB nodes for better resource utilization.
+
+      For implementation details, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+
+**Console changes**
+
+- Improve the firewall rule management experience for public endpoints of TiDB Cloud Starter and Essential.
+
+    The TiDB Cloud console now provides a streamlined dialog for managing firewall rules for public endpoints in TiDB Cloud Starter and Essential. You can add your current IP address, allow access from all AWS IP addresses for AWS-hosted instances, or manually specify an IP address or IP address range in one place.
+
+    For more information, see [Create and manage a firewall rule](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule).
+
+**API changes**
+
+- Introduce TiDB Cloud Premium API (v1beta2) for managing the following resources automatically and efficiently:
+
+    - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
+    - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
+    - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
+
+  For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/).
+
 ## April 14, 2026
 
 **General changes**
