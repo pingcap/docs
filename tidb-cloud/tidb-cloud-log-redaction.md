@@ -9,21 +9,9 @@ User-controlled log redaction lets you manage the visibility of sensitive data i
 
 Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> maintenance or SQL tuning, you can disable this feature at any time.
 
-<CustomContent plan="dedicated">
-
-> **Note:**
->
-> The log redaction feature is only supported for TiDB Cloud Dedicated clusters.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
 > **Note:**
 >
 > The log redaction feature is supported for TiDB Cloud Dedicated clusters and {{{ .premium }}} instances.
-
-</CustomContent>
 
 ## Prerequisites
 

@@ -6,23 +6,13 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 # Configure External Storage Access
 
-<CustomContent plan="starter,essential">
-
-If you want to import data from or export data to an external storage in a {{{ .starter }}} or Essential instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} and {{{ .essential }}} instances.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-If you want to import data from or export data to an external storage in a {{{ .premium }}} instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .premium }}} instances.
-
-</CustomContent>
+If you want to import data from or export data to an external storage in a {{{ .starter }}}, Essential, or Premium instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}} instances.
 
 If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
 
 ## Configure Amazon S3 access
 
-To allow a <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance to access your Amazon S3 bucket, configure the bucket access for the instance using either of the following methods:
+To allow a {{{ .starter }}}, Essential, or Premium instance to access your Amazon S3 bucket, configure the bucket access for the instance using either of the following methods:
 
 - [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
 - [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
@@ -33,12 +23,12 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
 > **Note:**
 >
-> Role ARN access to Amazon S3 is only supported when the cloud provider of your target <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance is AWS. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
+> Role ARN access to Amazon S3 is only supported when the cloud provider of your target {{{ .starter }}}, Essential, or Premium instance is AWS. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
 
-1. Open the **Import** page for your target <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance.
+1. Open the **Import** page for your target {{{ .starter }}}, Essential, or Premium instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
-    2. Click the name of your target <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}}, Essential, or Premium instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Open the **Add New ARN** dialog.
 
@@ -104,10 +94,10 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     4. On the **Create policy** page, click the **JSON** tab.
 
-    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance.
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a {{{ .starter }}}, Essential, or Premium instance.
 
-        - Exporting data from a <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance needs the **s3:PutObject** and **s3:ListBucket** permissions.
-        - Importing data into a <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
+        - Exporting data from a {{{ .starter }}}, Essential, or Premium instance needs the **s3:PutObject** and **s3:ListBucket** permissions.
+        - Importing data into a {{{ .starter }}}, Essential, or Premium instance needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
 
         ```json
         {
@@ -339,9 +329,9 @@ Take the following steps to configure an AccessKey pair:
     - In the **Service** section, select **Object Storage Service**.
     - In the **Action** section, select the permissions as needed.
 
-        To import data into a <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
+        To import data into a {{{ .starter }}}, Essential, or Premium instance, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
 
-        To export data from a <CustomContent plan="starter,essential">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance, grant `oss:PutObject` and `oss:GetBucketInfo` permissions.
+        To export data from a {{{ .starter }}}, Essential, or Premium instance, grant `oss:PutObject` and `oss:GetBucketInfo` permissions.
 
     - In the **Resource** section, select the bucket and the objects in the bucket.
 

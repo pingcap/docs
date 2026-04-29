@@ -9,7 +9,7 @@ TiDB Cloud is designed with robust mechanisms to maintain high availability and 
 
 > **Note:**
 >
-> - This document is only applicable for <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>.
+> - This document is only applicable for {{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}.
 > - For high availability in TiDB Cloud Dedicated, see [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md).
 
 ## Overview
@@ -18,24 +18,11 @@ TiDB ensures high availability and data durability using the Raft consensus algo
 
 TiDB Cloud extends these capabilities with zonal high availability and regional high availability to meet different operational requirements.
 
-<CustomContent plan="starter,essential">
-
-> **Note:**
->
-> - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
-> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
 > **Note:**
 >
 > - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
 > - For {{{ .premium }}} clusters, only regional high availability is enabled, and it is not configurable.
 > - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
-
-</CustomContent>
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
