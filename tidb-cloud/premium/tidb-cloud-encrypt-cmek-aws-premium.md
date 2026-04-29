@@ -100,7 +100,7 @@ If you did not enable encryption during cluster creation, you can still enable i
 
 > **Note:**
 >
-> Enable Encryption on an existing instance requires some time to complete the activation process.
+Enabling encryption on an existing instance takes some time to complete.
 
 #### Option 1: Customer-Managed Encryption Key (CMEK)
 
