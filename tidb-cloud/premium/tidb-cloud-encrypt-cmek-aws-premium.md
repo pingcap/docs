@@ -28,7 +28,7 @@ To provide the highest level of data security, {{{ .premium }}} TiDB adopts a tw
   - Unlike default storage encryption, this feature can be managed by users, allowing you to choose either a Customer-Managed Encryption Key (CMEK) or a Service-Managed Encryption Key based on your security compliance and operational requirements.
 
 
-#### Backup & Restore Description
+#### Backup and restore description
 When Dual-layer Data Encryption is enabled, the backup data for your {{{ .premium }}} TiDB instance is also encrypted. Any new instance restored from this backup will natively inherit the encryption attributes and KMS master key of the original instance.
 
 Since accessing the backup data relies on the originally configured KMS master key, please ensure the following:
