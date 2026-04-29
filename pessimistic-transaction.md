@@ -147,7 +147,39 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 In the transaction commit process, pessimistic transactions and optimistic transactions have the same logic. Both transactions adopt the two-phase commit (2PC) mode. The important adaptation of pessimistic transactions is DML execution.
 
-![TiDB pessimistic transaction commit process](/media/pessimistic-transaction-commit.png)
+```mermaid
+---
+config:
+  themeCSS: |
+    /* workaround for https://github.com/mermaid-js/mermaid/issues/523 */
+    /* mark the two "Lock" arrows as red, by restyling the dashed arrows */
+    line.messageLine1 {
+        stroke: #d32f2f;
+        stroke-dasharray: none !important;
+    }
+    /* make sure the arrow heads inherit the stroke color (another bug in mermaid) */
+    #arrowhead path {
+        fill: context-stroke;
+        stroke: context-stroke;
+    }
+---
+sequenceDiagram
+    participant Client
+    participant TiDB
+    participant TiKV
+
+    Client->>TiDB: BEGIN
+    rect rgba(255, 0, 0, 0.08)
+        Client->>TiDB: DML
+        TiDB-->>TiKV: Lock
+        TiDB-->>TiKV: Lock
+    end
+    rect rgba(0, 0, 0, 0.04)
+        Client->>TiDB: COMMIT
+        TiDB->>TiKV: Prewrite
+        TiDB->>TiKV: Commit
+    end
+```
 
 The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
 
@@ -155,7 +187,52 @@ The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC.
 2. When the TiDB server receives a writing request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
 3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the two-phase commit similar to the optimistic transaction mode.
 
-![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
+```mermaid
+---
+title: Pessimistic Transaction in TiDB
+---
+sequenceDiagram
+    participant client
+    participant TiDB
+    participant PD
+    participant TiKV
+
+    client->>TiDB: begin
+    TiDB->>PD: get ts as start_ts
+    loop excute SQL
+        rect rgba(0, 0, 0, 0.04)
+            alt do read
+                TiDB->>TiKV: get data from TiKV with start_ts
+                TiDB-->>client: return read result
+            else do write
+                rect rgba(255, 0, 0, 0.08)
+                    loop if has write conflict
+                        TiDB->>PD: get ts as for_update_ts
+                        TiDB->>TiDB: write in cache
+                        TiDB->>TiKV: acquire pessimistic locks parallelly
+                    end
+                end
+                TiDB-->>client: return write result
+            end
+        end
+    end
+    client->>TiDB: commit
+    opt start 2PC
+        rect rgba(0, 0, 0, 0.04)
+            par prewrite
+                TiDB->>TiKV: prewrite each key in cache with start_ts parallelly
+            end
+        end
+        rect rgba(0, 0, 0, 0.04)
+            par commit
+                TiDB->>PD: get ts as commit_ts
+                TiDB->>TiKV: commit primary_key with commit_ts first
+                TiDB-->>client: success
+                TiDB->>TiKV: commit each secondary_key with commit_ts parallelly
+            end
+        end
+    end
+```
 
 ## Pipelined locking process
 
@@ -171,7 +248,25 @@ To reduce the overhead of locking, TiKV implements the pipelined locking process
 
 If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
 
-![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
+```mermaid
+---
+title: pipelined pessimistic lock
+---
+sequenceDiagram
+    participant Client
+    participant TiDB
+    participant TiKV1
+    participant TiKV2
+    participant TiKV3
+
+    loop
+        Client->>TiDB: DML
+        TiDB->>TiKV1: Acquire pessimistic locks
+        TiKV1-->>TiDB: OK
+        TiKV1-)TiKV2: Log replication
+        TiKV1-)TiKV3: Log replication
+    end
+```
 
 This feature is enabled by default. To disable it, modify the TiKV configuration:
 
