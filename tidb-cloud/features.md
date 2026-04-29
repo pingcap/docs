@@ -273,10 +273,6 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>Dual-layer encryption</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
-<<<<<<< HEAD
-=======
-    <td style="text-align:center;">🔒</td>
->>>>>>> f4b2fddbf7 (cloud: update Premium doc links and add Features to TOC (#22827))
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
