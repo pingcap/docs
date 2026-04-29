@@ -13,12 +13,14 @@ Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com
 
 TiDB Cloud uses a hierarchical structure based on organizations, projects, and resources to help you manage users and TiDB deployments.
 
-- An organization is a top-level entity (such as a company or a customer) that you use to manage your TiDB Cloud accounts (including a management account with any number of member accounts), [projects](#projects), and [resources](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource).
-- A project is a container for TiDB Cloud resources.
+- A [resource](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource) in TiDB Cloud can be either a TiDB X instance or a {{{ .dedicated }}} cluster. A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, or Premium instance.
 
-    - For {{{ .starter }}} and Essential instances, a project is an optional logical container, which means you can either group these instances in a project or keep these instances at the organization level.
+- A [project](/tidb-cloud/tidb-cloud-glossary.md#project) is a container for TiDB Cloud resources.
+
+    - For TiDB X instances, a project is an optional logical container, which means you can either group these instances in a project or keep these instances at the organization level.
     - For {{{ .dedicated }}} clusters, a project is infrastructure-bound and required, which means {{{ .dedicated }}} clusters must be grouped in projects for management purposes.
-- A resource in TiDB Cloud can be either a TiDB X instance (for example, {{{ .starter }}} or {{{ .essential }}}) or a {{{ .dedicated }}} cluster.
+
+- An organization is a top-level entity (such as a company or a customer) that you use to manage your TiDB Cloud accounts (including a management account with any number of member accounts), projects, and resources.
 
 If you are an organization owner, you can create multiple projects in your organization.
 
@@ -36,6 +38,7 @@ The following is an example of the hierarchical structure:
         - {{{ .starter }}} instance 2
         - {{{ .starter }}} instance 3
         - {{{ .essential }}} instance 2
+        - {{{ .premium }}} instance 1
     - TiDB Dedicated project 1
         - {{{ .dedicated }}} cluster 1
         - {{{ .dedicated }}} cluster 2
@@ -71,8 +74,8 @@ A project groups and manages TiDB Cloud resources.
 In TiDB Cloud, there are three types of projects:
 
 - **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
-- **TiDB X project**: This project type is used only for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
-- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances ({{{ .starter }}} and {{{ .essential }}}) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint of the TiDB Cloud API.
+- **TiDB X project**: This project type is used only for TiDB X instances (including {{{ .starter }}}, Essential, and Premium instances). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint of the TiDB Cloud API.
 
 The following table lists the differences between these project types:
 
@@ -149,7 +152,7 @@ TiDB X instances support instance-level roles so that you can grant access to a 
 
 > **Note:**
 >
-> - Instance roles apply only to {{{ .starter }}} and {{{ .essential }}}. TiDB Cloud Dedicated clusters do not support instance roles.
+> - Instance roles apply only to {{{ .starter }}}, Essential, and Premium instances. TiDB Cloud Dedicated clusters do not support instance roles.
 > - `Organization Owner` automatically has all permissions for all TiDB X instances in the organization.
 > - Each instance role inherits all the permissions of the `Organization Viewer` role by default.
 > - Project roles and instance roles are additive. A user can inherit access from a project role and also have a more specific role on an individual instance.

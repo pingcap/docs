@@ -117,14 +117,14 @@ A document that defines permissions applying to a role, user, or organization, s
 
 In TiDB Cloud, you can use projects to group and manage your TiDB resources.
 
-- For <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> instances, projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
+- For TiDB X instances (including {{{ .starter }}}, Essential, and Premium instances), projects are optional, which means you can either group these instances in a project or keep these instances at the organization level.
 - For {{{ .dedicated }}} clusters, projects are required.
 
 The function of a project varies by project type. Currently, there are three types of projects:
 
 - **TiDB Dedicated project**: This project type is used only for {{{ .dedicated }}} clusters. It helps you manage settings for {{{ .dedicated }}} clusters separately by project, such as RBAC, networks, maintenance, alert subscriptions, and encryption access.
-- **TiDB X project**: This project type is used only for TiDB X instances (<CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>). It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
-- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances (<CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>) that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the project view on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X project**: This project type is used only for TiDB X instances. It helps you manage RBAC for TiDB X instances by project. A TiDB X project is the default project type when you create a project on the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+- **TiDB X virtual project**: This project is virtual and does not provide any management capabilities. It acts as a virtual container for TiDB X instances that do not belong to any project, so these instances can be accessed through the TiDB Cloud API by using a project ID. Each organization has a unique virtual project ID. You can get this ID from the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint of the TiDB Cloud API.
 
 For more information about the differences between these project types, see [Projects](/tidb-cloud/manage-user-access.md#projects).
 
@@ -140,17 +140,7 @@ The place where the data of deleted [TiDB Cloud resources](#tidb-cloud-resource)
 
 Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it are moved to the Recycle Bin. For backup files from automatic backups, the Recycle Bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new TiDB Cloud resource in time. Note that if a TiDB Cloud resource **has no backup**, the deleted resource will not be displayed in the Recycle Bin.
 
-<CustomContent plan="starter,essential,dedicated">
-
-Currently, only {{{ .dedicated }}} clusters support the Recycle Bin feature.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
 Currently, only {{{ .premium }}} instances and {{{ .dedicated }}} clusters support the Recycle Bin feature.
-
-</CustomContent>
 
 ### region
 
@@ -207,20 +197,20 @@ The computing node that aggregates data from queries returned from transactional
 
 A TiDB Cloud resource is a manageable TiDB Cloud deployment unit. It can be one of the following:
 
-- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance
+- A TiDB X instance (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md)), such as a {{{ .starter }}}, Essential, or Premium instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB X
 
 A new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. By decoupling compute and storage, TiDB X enables TiDB to scale intelligently, adapting in real time to workload patterns, business cycles, and data characteristics.
 
-The TiDB X architecture is now available in <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>. For more information, see [Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/) and [PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/).
+The TiDB X architecture is now available in {{{ .starter }}}, Essential, and Premium. For more information, see [Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/) and [PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/).
 
 ### TiDB X instance
 
 A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md). It does not require you to manage or understand the underlying cluster topology.
 
-Among TiDB Cloud plans, <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent> are using the TiDB X architecture. Therefore, when "TiDB X instance" is mentioned, it refers to a <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} or Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, or Premium</CustomContent> instance.
+Among TiDB Cloud plans, {{{ .starter }}}, Essential, and Premium are using the TiDB X architecture. Therefore, when "TiDB X instance" is mentioned, it refers to a {{{ .starter }}}, Essential, or Premium instance.
 
 ### TiFlash node
 
