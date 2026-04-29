@@ -15,7 +15,8 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 > **Note:**
 >
-> The maximum export size is 1 TiB. Exports larger than this limit might fail. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> - Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for data export for {{{ .premium }}} instance" in the **Description** field, and then click **Submit**.
+> - The maximum export size is 1 TiB. Exports larger than this limit might fail. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Export locations
 

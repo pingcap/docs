@@ -7,12 +7,6 @@ summary: Learn how to migrate data from TiDB Self-Managed to {{{ .premium }}}.
 
 This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} (on AWS) instances using Dumpling and TiCDC.
 
-> **Warning:**
->
-> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
->
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
-
 The overall procedure is as follows:
 
 1. Build the environment and prepare the tools.
