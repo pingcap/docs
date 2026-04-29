@@ -16,7 +16,7 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 
 > **注記**
 >
-> このチュートリアルは、TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -82,7 +82,7 @@ npm install
     >
     > Node.jsアプリケーションでは、SSL CA証明書を提供する必要はありません。Node.jsはTLS（SSL）接続を確立する際に、デフォルトで組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するためです。
 
-4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
+4.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。
 
     > **ヒント**
     >
@@ -108,11 +108,62 @@ npm install
     TIDB_USER='{prefix}.root'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
+    TIDB_ENABLE_SSL='true'
     ```
 
     `{}`内のプレースホルダーを、接続ダイアログで取得した値に置き換えてください。
 
 7.  `.env`ファイルを保存します。
+
+</div>
+
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+
+    ```bash
+    # Linux
+    cp .env.example .env
+    ```
+
+    ```powershell
+    # Windows
+    Copy-Item ".env.example" -Destination ".env"
+    ```
+
+8.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+
+    ```bash
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    TIDB_ENABLE_SSL='false'
+    ```
+
+    `{}`内のプレースホルダーを、接続ダイアログで取得した値に置き換えてください。
+
+9.  `.env`ファイルを保存します。
 
 </div>
 
@@ -138,6 +189,7 @@ npm install
     TIDB_USER='root'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
+    TIDB_ENABLE_SSL='false'
     ```
 
     `{}`内のプレースホルダーを、 **[接続]**ウィンドウで取得した値に置き換えてください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空欄です。
@@ -195,10 +247,10 @@ export function connect() {
     user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
     password: process.env.TIDB_PASSWORD, // The password of TiDB user.
     database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
-    ssl: {
+    ssl: process.env.TIDB_ENABLE_SSL === 'true' ? {
       minVersion: 'TLSv1.2',
       rejectUnauthorized: true,
-    },
+    } : null,
     connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
     maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
     enableKeepAlive: true,

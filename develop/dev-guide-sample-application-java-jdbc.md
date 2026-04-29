@@ -16,7 +16,7 @@ TiDBはMySQL互換データベースであり、JDBC（Java Database Connectivit
 
 > **注記：**
 >
-> -   このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> -   このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 > -   TiDB v7.4 以降、 `connectionCollation`が構成されておらず、JDBC URL で`characterEncoding`が構成されていないか、または`UTF-8`に設定されている場合、JDBC 接続で使用される照合順序は JDBC ドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)を参照してください。
 
 ## 前提条件 {#prerequisites}
@@ -71,7 +71,7 @@ cd tidb-java-jdbc-quickstart
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。
+4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
     > **ヒント：**
     >
@@ -101,6 +101,51 @@ cd tidb-java-jdbc-quickstart
 7.  `env.sh`ファイルを保存します。
 
 </div>
+
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
+
+    ```shell
+    cp env.sh.example env.sh
+    ```
+
+8.  対応する接続​​文字列`env.sh`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+
+    ```shell
+    export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    export TIDB_PORT='4000'
+    export TIDB_USER='{user}'  # e.g. root
+    export TIDB_PASSWORD='{password}'
+    export TIDB_DB_NAME='test'
+    export USE_SSL='false'
+    ```
+
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+
+9.  `env.sh`ファイルを保存します。
+
+</div>
+
 <div label="TiDB Cloud Dedicated">
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。

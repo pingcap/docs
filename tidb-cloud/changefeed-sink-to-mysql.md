@@ -57,7 +57,7 @@ MySQL サービスがパブリック インターネット アクセスのない
 2.  MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 3.  MySQLが配置されているVPCの受信ファイアウォールルールを変更します。
 
-    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、 TiDB Cloud Dedicatedクラスターから MySQL エンドポイントにトラフィックが流れるようになります。
+    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)イングレス ファイアウォール ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れるようになります。
 
 </div>
 
@@ -77,10 +77,6 @@ MySQL サービスがパブリック インターネット アクセスのない
 
 TiDB Cloud PremiumインスタンスがMySQLサービスに接続できることを確認してください。
 
-> **注記：**
->
-> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「TiDB Cloud PremiumインスタンスのVPCピアリングの申請」と入力して、 **「送信」を**クリックします。
-
 プライベートエンドポイントは、クラウドプロバイダーの**プライベートリンク**または**プライベートサービスコネクト**技術を活用し、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
 プライベート エンドポイントを通じて、 TiDB Cloud Premium インスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベート エンドポイントが利用できない場合は、 [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従って作成します。
@@ -91,12 +87,12 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 <CustomContent plan="dedicated">
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud DedicatedクラスタからMySQLにシンクできます。TiDB Cloud Dedicatedクラスタに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Dedicatedクラスタの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud DedicatedクラスタからMySQLにシンクできます。TiDB TiDB Cloud Dedicatedクラスタに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Dedicatedクラスタの既存データをエクスポートしてMySQLにロードすることができます。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud PremiumインスタンスからMySQLにシンクできます。TiDB Cloud Premiumインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Premiumインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データのみをTiDB Cloud PremiumインスタンスからMySQLにシンクできます。TiDB TiDB Cloud Premiumインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Premiumインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
 
 </CustomContent>
 

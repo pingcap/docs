@@ -7,12 +7,6 @@ summary: MySQLコマンドラインクライアント（mysql`）を使用して
 
 このドキュメントでは[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用してTiDB Cloud Premium にデータをインポートする方法について説明します。( `mysql` )。以下のセクションでは、SQL ファイルまたは CSV ファイルからデータをインポートするための手順を段階的に説明します。このプロセスでは論理インポートが実行され、MySQL コマンドライン クライアントがローカル マシンからTiDB Cloudに対して SQL ステートメントを再生します。
 
-> **警告：**
->
-> TiDB Cloud Premiumは現在、一部のAWSリージョンで**プライベートプレビュー版**として提供されています。
->
-> 組織で Premium がまだ有効になっていない場合、または別のクラウド プロバイダーまたは地域でアクセスする必要がある場合は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[サポート]**をクリックするか、Web サイトの[お問い合わせ](https://www.pingcap.com/contact-us)フォームからリクエストを送信してください。
-
 > **ヒント：**
 >
 > -   論理インポートは、比較的小さな SQL ファイルまたは CSV ファイルに最適です。クラウドstorageからのより高速な並行インポート、または[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)エクスポートからの複数のファイルの処理については、 [クラウドストレージからCSVファイルをTiDB Cloud Premiumにインポートする](/tidb-cloud/premium/import-csv-files-premium.md)インポートするを参照してください。

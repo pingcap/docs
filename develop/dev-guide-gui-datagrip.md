@@ -10,7 +10,7 @@ TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https:/
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 DataGripは2つの方法で使用できます。
 
@@ -74,6 +74,48 @@ DataGripは2つの方法で使用できます。
     ![Test the connection to a TiDB Cloud Starter instance](/media/develop/datagrip-test-connection.jpg)
 
 9.  接続設定を保存するには、 **「OK」**をクリックしてください。
+
+</div>
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
+
+8.  新しく作成したプロジェクトで、**データベースエクスプローラー**パネルの左上隅にある**「+」**をクリックし、 **「データソース」** &gt; **「その他」** &gt; **「TiDB」**を選択します。
+
+9.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
+
+    | データグリップフィールド | TiDB Cloud Premium接続文字列 |
+    | ------------ | ----------------------- |
+    | ホスト          | `{host}`                |
+    | ポート          | `{port}`                |
+    | ユーザー         | `{user}`                |
+    | パスワード        | `{password}`            |
+
+    -   **SSH/SSL**タブで、 **「SSLを使用する」**チェックボックスをオフにします。
+    -   **「不足しているドライバファイルをダウンロードしてください」**という警告が表示された場合は、 **「ダウンロード」**をクリックしてドライバファイルを入手してください。
+
+10. **「接続テスト」**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+
+11. 接続設定を保存するには、 **「OK」**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Dedicated">

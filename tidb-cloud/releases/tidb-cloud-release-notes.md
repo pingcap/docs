@@ -8,6 +8,94 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年4月28日 {#april-28-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloudプレミアム**
+
+    -   [TiDB Cloudプレミアム](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)現在、AWS<CustomContent language="en,zh">アリババクラウド</CustomContent>でパブリック プレビュー中です。
+
+        [TiDB X](/tidb-cloud/tidb-x-architecture.md)カーネルを搭載したTiDB Cloud Premiumは、ハイパースケール、妥協のないパフォーマンス、そしてクラウドネイティブな消費モデルによるコスト効率を必要とする、ミッションクリティカルなエンタープライズワークロード向けに特別に設計されています。
+
+        TiDB Cloud Premium は[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の間のギャップを埋めるものです。
+
+        -   TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、storage、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティング能力を個別に拡張できます。
+        -   TiDB Cloud Dedicatedと比較して、 TiDB Cloud Premiumはアイドル状態の余裕を排除することでコスト効率を向上させ、実際に使用したパフォーマンスに対してのみ料金を支払うことができます。
+
+        TiDB Cloud Premium を試すには、 [TiDB Cloudコンソール](https://tidbcloud.com/)に移動し、 **[Create Resource]**をクリックして、プランとして**[Premium]**を選択します。詳細については、 [TiDB Cloud Premiumインスタンスを作成します](/tidb-cloud/premium/create-tidb-instance-premium.md)参照してください。
+
+-   **TiDB Cloud Dedicated**
+
+    -   TiProxyがAWS上の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで一般提供開始となりました。接続管理と負荷分散機能が強化され、データベースの信頼性とパフォーマンスが向上します。
+
+        TiProxyの主な特徴：
+
+        -   スケーリング操作およびローリングアップグレード中も、クライアントとの永続的な接続を維持します。
+        -   リソース利用効率を向上させるため、TiDBノード全体にトラフィックを均等に分散します。
+
+        実装の詳細については、 [TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)参照してください。
+
+**コンソールの変更**
+
+-   TiDB Cloud StarterおよびEssentialのパブリックエンドポイントにおけるファイアウォールルールの管理エクスペリエンスを改善します。
+
+    TiDB Cloudコンソールに、 TiDB Cloud StarterおよびEssentialのパブリックエンドポイントのファイアウォールルールを管理するための簡素化されたダイアログが追加されました。現在のIPアドレスを追加したり、AWSホストインスタンスに対してすべてのAWS IPアドレスからのアクセスを許可したり、IPアドレスまたはIPアドレス範囲を1か所で手動で指定したりできます。
+
+    詳細については、 [ファイアウォールルールの作成と管理](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
+
+**APIの変更**
+
+-   以下のリソースを自動的かつ効率的に管理するためのTiDB Cloud Premium API（v1beta2）をご紹介します。
+
+    -   **TiDB Cloud Premiumインスタンス**：パスワード、CA証明書、クラウドプロバイダー情報など、 TiDB Cloud Premiumインスタンスのライフサイクルと構成を管理します。
+    -   **バックアップ**： TiDB Cloud Premiumインスタンスのバックアップを管理します。バックアップベースのリストア機能も含まれます。
+    -   **リージョン**： TiDB Cloud Premiumインスタンスを作成するために利用可能なリージョンを取得します。
+
+    詳細については、 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/)参照してください。
+
+## 2026年4月14日 {#april-14-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloud Dedicated**
+
+    -   新しい[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/)から[v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/)にアップグレードします。
+
+    -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)のTop SQLページは、AWS 上でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiKV ネットワーク トラフィックと論理 I/O メトリックの収集と表示をサポートするようになりました。
+
+**コンソールの変更**
+
+-   [TiDB Cloudコンソール](https://tidbcloud.com)すべてのTiDB Cloudプラン ( TiDB Cloud Starter、 Essential、 Dedicatedなど) で統一します。以下の機能が利用可能になりました。
+
+    -   **<a href="https://tidbcloud.com/tidbs">私のTiDB</a>ホームページ**：リソースビューとプロジェクトビューの両方を備えた、新しい組織レベルのホームページ。
+
+        -   リソースビューには、すべてのプランにわたるTiDB Cloudリソースが一覧表示されます。
+        -   プロジェクトビューでは、TiDB Cloudのリソースをプロジェクトごとに整理し、組織内のプロジェクトを管理できます。
+
+    -   **統一されたリソース作成ワークフロー**：単一の作成フローが、 TiDB Cloud Starter、 Essential、 Dedicatedを含むすべてのTiDB Cloudリソースタイプに適用されます。
+
+    -   **TiDB X プロジェクトのサポート**: TiDB X インスタンス ( [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリング、 TiDB Cloud StarterやEssentialなど) は、作成後にプロジェクトにオプションで割り当てたり、プロジェクト間で移動したりできるようになりました。
+
+    -   **インスタンスレベルのロール**：ロールの割り当てを個々のTiDB Xインスタンスにスコープ設定できるようになり、プロジェクト内でのきめ細かなアクセス制御が可能になります。
+
+    -   **用語の更新**： TiDB Cloud StarterおよびEssential**クラスターは**、コンソール全体でTiDB Cloud StarterおよびEssential**インスタンス**に名称変更されました。
+
+    -   **変更案内ツアー**：既存ユーザー向けに、構造変更について説明するガイド付きウォークスルーを実施し、移行期間中の混乱を軽減します。
+
+    詳細については、 [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)および[TiDB Xインスタンスのプロジェクト移行に関するFAQ](/tidb-cloud/tidbx-instance-move-faq.md)参照してください。
+
+**APIの変更**
+
+-   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間でインスタンスを移動できるため、**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
+
+-   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
+
+    -   アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
+    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターする場合)、 `type`フィールドの読み取りを開始します。
+
+詳細については、 [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)参照してください。
+
 ## 2026年4月8日 {#april-8-2026}
 
 **全般的な変更**
@@ -106,7 +194,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   Azure Blob Storageからのデータインポートにおけるプライベートリンク接続をサポートします。
 
-        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントに対して、安全でネットワーク分離されたデータインポートが可能になります。
+        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントでも、安全でネットワーク分離されたデータインポートが可能になります。
 
         詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)参照してください。
 
@@ -166,7 +254,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)監査、および[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示します[DB監査ログ](/tidb-cloud/essential-database-audit-logging.md)
 
-        TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビュー、DB監査ログ、および`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベースリクエストの真の発生源を正確に特定し、トラブルシューティングと分析を改善できます。
+        TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビュー、DB監査ログ、および`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベース要求の真の発生源を正確に特定し、トラブルシューティングと分析を改善できます。
 
         現在、この機能はベータ版であり、AWSリージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
 

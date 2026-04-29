@@ -17,7 +17,7 @@ TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.co
 
 > **注記**
 >
-> このチュートリアルは、TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -102,7 +102,47 @@ npm install
         "TIDB_HOST": "{gateway-region}.aws.tidbcloud.com",
         "TIDB_PORT": "4000",
         "TIDB_USER": "{prefix}.root",
-        "TIDB_PASSWORD": "{password}"
+        "TIDB_PASSWORD": "{password}",
+        "TIDB_ENABLE_SSL": "true"
+      }
+    }
+    ```
+
+    `{}`内のプレースホルダーを、接続ダイアログで取得した値に置き換えてください。
+
+</div>
+
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  対応する接続​​文字列をコピーして`env.json`に貼り付けてください。以下に例を示します。
+
+    ```json
+    {
+      "Parameters": {
+        "TIDB_HOST": "{host}",
+        "TIDB_PORT": "4000",
+        "TIDB_USER": "root",
+        "TIDB_PASSWORD": "{password}",
+        "TIDB_ENABLE_SSL": "false"
       }
     }
     ```
@@ -121,7 +161,8 @@ npm install
     "TIDB_HOST": "{tidb_server_host}",
     "TIDB_PORT": "4000",
     "TIDB_USER": "root",
-    "TIDB_PASSWORD": "{password}"
+    "TIDB_PASSWORD": "{password}",
+    "TIDB_ENABLE_SSL": "false"
   }
 }
 ```
@@ -240,7 +281,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
 
 3.  [Lambda関数の作成](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html)の手順に従って、Node.js Lambda 関数を作成します。
 
-4.  [Lambdaデプロイメントパッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って、 `dist/index.zip`ファイルをアップロードします。
+4.  [Lambda デプロイメントパッケージ](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)の手順に従って、 `dist/index.zip`ファイルをアップロードします。
 
 5.  Lambda 関数で[対応する接続​​文字列をコピーして設定します。](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
 
@@ -276,10 +317,10 @@ function connect() {
     user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
     password: process.env.TIDB_PASSWORD, // TiDB password
     database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
-    ssl: {
+    ssl: process.env.TIDB_ENABLE_SSL === 'true' ? {
       minVersion: 'TLSv1.2',
       rejectUnauthorized: true,
-    },
+    } : null,
     connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
     maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
     enableKeepAlive: true,

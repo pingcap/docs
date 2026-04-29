@@ -1,129 +1,93 @@
 ---
 title: User-Controlled Log Redaction
-summary: 実行ログ内の機密データの可視性を管理するために、 TiDB Cloudでユーザー制御のログ編集を有効または無効にする方法を学習します。
+summary: TiDB Cloudでユーザーが制御するログのマスキングを有効または無効にする方法を学び、実行ログ内の機密データの可視性を管理しましょう。
 ---
 
-# ユーザー制御のログ編集 {#user-controlled-log-redaction}
+# ユーザーによるログの編集 {#user-controlled-log-redaction}
 
-ユーザー制御のログ編集により、機密データの可視性を管理できます。<CustomContent plan="dedicated"> [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログ。この編集機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスを取り、ログに表示される内容を制御できます。<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>ログ。
+ユーザー制御のログ秘匿化により<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログ内の機密データの可視性を管理できます。この編集機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスをとり、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログに表示される内容を制御できます。
 
-ログ編集はデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。より詳細なログ情報が必要な場合は、<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>メンテナンスや SQL チューニングのため、この機能はいつでも無効にできます。
-
-<CustomContent plan="dedicated">
+ログのマスキングはデフォルトで有効になっており、実行ログや実行プラン内の機密情報が隠蔽されます。TiDB <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>メンテナンスやSQLチューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
 
 > **注記：**
 >
-> ログ編集機能は、 TiDB Cloud Dedicated クラスターでのみサポートされます。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-> **注記：**
->
-> ログ編集機能は、 TiDB Cloud Dedicated クラスターとTiDB Cloud Premium インスタンスでサポートされています。
-
-</CustomContent>
+> ログ編集機能は、 TiDB Cloud DedicatedクラスターおよびTiDB Cloud Premium インスタンスでサポートされています。
 
 ## 前提条件 {#prerequisites}
 
 <CustomContent plan="dedicated">
 
--   TiDB Cloudで組織の**組織所有者**または**プロジェクト所有者**の役割を持っている必要があります。
--   クラスターが`paused`状態にある場合、ログ編集を有効または無効にすることはできません。
+-   TiDB Cloudでは、組織の**組織オーナー**または**プロジェクトオーナー**の役割を担っている必要があります。
+-   TiDB Cloud Dedicatedクラスターが`paused`状態にある場合、ログのマスキングを有効または無効にすることはできません。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
--   TiDB Cloudで組織の**組織所有者**の役割を持っている必要があります。
+-   TiDB Cloudにおいて、組織の**組織オーナー**の役割を担っている必要があります。
 
 </CustomContent>
 
-## ログ編集を無効にする {#disable-log-redaction}
+## ログの編集を無効にする {#disable-log-redaction}
 
 > **警告：**
 >
-> ログ編集を無効にすると、機密情報が漏洩し、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを十分に理解し、認識していることを確認してください。診断またはメンテナンスタスクを完了したら、すぐにログ編集を再度有効にしてください。
+> ログのマスキングを無効にすると、機密情報が公開され、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを理解し、認識していることを確認してください。診断またはメンテナンス作業が完了したら、すぐにログのマスキングを再度有効にすることを忘れないでください。
 
-ログ編集を無効にするには、次の手順を実行します。
+ログのマスキングを無効にするには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  に移動<CustomContent plan="dedicated">[**クラスター**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium"> [**TiDBインスタンス**](https://tidbcloud.com/tidbs)</CustomContent>ページに移動し、ターゲットの名前をクリックします<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>概要ページに移動します。
-
-    <CustomContent plan="dedicated">
+2.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    </CustomContent>
-
-    <CustomContent plan="premium">
-
-    > **ヒント：**
-    >
-    > 左上隅のコンボ ボックスを使用して、組織とインスタンスを切り替えることができます。
-
-    </CustomContent>
-
-3.  左側のナビゲーション ペインで、 **[設定]** &gt; **[Security]**をクリックします。
+3.  左側のナビゲーションペインで、 **[設定]** &gt; **[Security]**をクリックします。
 
 4.  **実行ログの編集**セクションでは、編集機能がデフォルトで**有効になっている**ことがわかります。
 
-5.  **「無効にする」**をクリックします。ログ編集を無効にすることのリスクを説明する警告が表示されます。
+5.  **「無効にする」**をクリックします。ログのマスキングを無効にすることのリスクを説明する警告が表示されます。
 
-6.  無効化を確認します。
+6.  無効化を確認してください。
 
-ログ編集を無効にした後、次の点に注意してください。
+ログのマスキングを無効にした後、以下の点に注意してください。
 
--   変更は新しいデータベース接続にのみ適用されます。
--   既存の接続は影響を受けません。変更を有効にするには、再接続する必要があります。
--   新しいセッションのログは編集されなくなります。
+-   この変更は、新規のデータベース接続にのみ適用されます。
+-   既存の接続には影響はありません。変更を有効にするには、既存の接続を再接続する必要があります。
+-   新規セッションのログは今後編集されなくなります。
 
-## 更新されたログを確認する {#check-the-updated-logs}
+## 更新されたログを確認してください {#check-the-updated-logs}
 
-ログ編集を無効にした後で更新されたログを確認するには、次の手順を実行します。
+ログのマスキングが無効になった後に更新されたログを確認するには、次の手順を実行します。
 
-1.  遅いクエリによって発生するパフォーマンスの問題をシミュレートします。例えば、次のSQL文を実行します。
+1.  クエリの実行速度が遅いことが原因で発生するパフォーマンスの問題をシミュレートします。たとえば、次の SQL ステートメントを実行します。
 
     ```sql
     SELECT *, SLEEP(2) FROM users WHERE email LIKE "%useremail%";
     ```
 
-2.  スロークエリログが更新されるまで数分間お待ちください。
+2.  スロークエリログが更新されるまで数分お待ちください。
 
-3.  ログを確認して、機密データが編集されていないことを確認します。
+3.  ログを確認して、機密データが削除されていないことを確認してください。
 
-## ログ編集を有効にする {#enable-log-redaction}
+## ログの編集を有効にする {#enable-log-redaction}
 
-データのセキュリティを維持するために、次のように診断またはメンテナンス タスクを完了したらすぐに**ログ編集を有効にします**。
+データセキュリティを維持するため、診断またはメンテナンス作業が完了したらすぐに、以下の手順で**ログのマスキングを有効にしてください**。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  に移動<CustomContent plan="dedicated">[**クラスター**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium"> [**TiDBインスタンス**](https://tidbcloud.com/tidbs)</CustomContent>ページに移動し、ターゲットの名前をクリックします<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>概要ページに移動します。
-
-    <CustomContent plan="dedicated">
+2.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **ヒント：**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    </CustomContent>
-
-    <CustomContent plan="premium">
-
-    > **ヒント：**
-    >
-    > 左上隅のコンボ ボックスを使用して、組織とインスタンスを切り替えることができます。
-
-    </CustomContent>
-
-3.  左側のナビゲーション ペインで、 **[設定]** &gt; **[Security]**をクリックします。
+3.  左側のナビゲーションペインで、 **[設定]** &gt; **[Security]**をクリックします。
 
 4.  **実行ログの編集**セクションでは、編集機能が**無効になって**いることがわかります。
 
-5.  有効にするには、 **[有効]**をクリックします。
+5.  有効にするには、 **「有効にする**」をクリックしてください。
 
-6.  新しいセッションで変更を有効にするには、データベースに再接続します。
+6.  変更内容を新しいセッションに反映させるには、データベースに再接続してください。

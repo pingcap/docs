@@ -16,7 +16,7 @@ TiDB は MySQL 互換データベースであり、[プリズマ](https://github
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -110,6 +110,51 @@ npm install prisma typescript ts-node @types/node --save-dev
     ```
 
 </div>
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+
+    ```shell
+    cp .env.example .env
+    ```
+
+8.  `.env`ファイルを編集し、環境変数`DATABASE_URL`次のように設定し、接続ダイアログで対応するプレースホルダー`{}`接続パラメータに置き換えます。
+
+    ```dotenv
+    DATABASE_URL='mysql://{user}:{password}@{host}:4000/test'
+    ```
+
+9.  `.env`ファイルを保存します。
+
+10. `prisma/schema.prisma`で、 `mysql`を接続プロバイダとして、 `env("DATABASE_URL")`接続 URL として設定します。
+
+    ```prisma
+    datasource db {
+      provider = "mysql"
+      url      = env("DATABASE_URL")
+    }
+    ```
+
+</div>
 <div label="TiDB Cloud Dedicated">
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
@@ -180,7 +225,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 </div>
 </SimpleTab>
 
-### ステップ4. データベーススキーマを初期化する {#step-4-initialize-the-database-schema}
+### ステップ4．データベーススキーマを初期化する {#step-4-initialize-the-database-schema}
 
 次のコマンドを実行して[プリズマ・マイグレート](https://www.prisma.io/docs/concepts/components/prisma-migrate)を呼び出し、 `prisma/prisma.schema`で定義されたデータ モデルでデータベースを初期化します。
 

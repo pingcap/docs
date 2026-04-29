@@ -13,8 +13,9 @@ TiDBバージョン：8.5.3
 
 ## 互換性の変更 {#compatibility-changes}
 
+-   KVDBとRaftDBが別々のディスクにデプロイされているシナリオで、KVDBディスクI/Oジッター検出の感度を向上させるため、TiKV構成項目[`raftstore.inspect-kvdb-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#inspect-kvdb-interval-new-in-v812)のデフォルト値を`2s`から`100ms`に変更します。 [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
 -   [コストモデル](/cost-model.md)による内部使用のために次のシステム変数を追加します。これらの変数を変更することは推奨さ**れません**: [`tidb_opt_hash_agg_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_hash_agg_cost_factor-new-in-v853) 、 [`tidb_opt_hash_join_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_hash_join_cost_factor-new-in-v853) 、 [`tidb_opt_index_join_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_index_join_cost_factor-new-in-v853) 、 [`tidb_opt_index_lookup_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_index_lookup_cost_factor-new-in-v853) 、 [`tidb_opt_index_merge_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_index_merge_cost_factor-new-in-v853) 、 [`tidb_opt_index_reader_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_index_reader_cost_factor-new-in-v853) 、 [`tidb_opt_index_scan_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_index_scan_cost_factor-new-in-v853) 、 [`tidb_opt_limit_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_limit_cost_factor-new-in-v853) 、 [`tidb_opt_merge_join_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_merge_join_cost_factor-new-in-v853) 、 [`tidb_opt_sort_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_sort_cost_factor-new-in-v853) 、 [`tidb_opt_stream_agg_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_stream_agg_cost_factor-new-in-v853) 、 [`tidb_opt_table_full_scan_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_table_full_scan_cost_factor-new-in-v853) 、 [`tidb_opt_table_range_scan_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_table_range_scan_cost_factor-new-in-v853) 、 [`tidb_opt_table_reader_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_table_reader_cost_factor-new-in-v853) 、 [`tidb_opt_table_rowid_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_table_rowid_cost_factor-new-in-v853) 、 [`tidb_opt_table_tiflash_scan_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_table_tiflash_scan_cost_factor-new-in-v853) 、および[`tidb_opt_topn_cost_factor`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_opt_topn_cost_factor-new-in-v853) [#60357](https://github.com/pingcap/tidb/issues/60357) @[terry1purcell](https://github.com/terry1purcell)
--   [テレメトリー](https://docs.pingcap.com/tidb/v8.5/telemetry)機能を再導入します。ただし、テレメトリ関連の情報をローカルでログに記録するだけであり、ネットワーク経由で PingCAP にデータを送信することはなくなりました [#61766](https://github.com/pingcap/tidb/issues/61766) @[Defined2014](https://github.com/Defined2014)
+-   [テレメトリー](https://docs.pingcap.com/tidb/v8.5/telemetry)機能を再導入します。ただし、テレメトリ関連の情報をローカルに記録するだけであり、ネットワーク経由で PingCAP にデータを送信することはなくなりました [#61766](https://github.com/pingcap/tidb/issues/61766) @[Defined2014](https://github.com/Defined2014)
 
 ## 改善点 {#improvements}
 
@@ -86,22 +87,22 @@ TiDBバージョン：8.5.3
     -   HashAgg オペレーターでディスク スピル中に`nil`内の`basePartialResult4GroupConcat`バッファがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   集計式のエンコードロジックにおける誤った戻り値がクエリ実行中にpanicを引き起こす問題を修正 [#61735](https://github.com/pingcap/tidb/issues/61735) @[YangKeao](https://github.com/YangKeao)
     -   HashJoin演算子がメモリの過剰使用によりゴルーチンリークを引き起こす問題を修正 [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    -   `IndexMerge`および`IndexLookUp`オペレーターで共有 KV リクエストがクエリのプッシュダウン時にデータ競合を引き起こす問題を修正 [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
+    -   `IndexMerge`および`IndexLookUp`オペレーターで共有 KV リクエストがクエリのプッシュダウン時にデータ競合を引き起こす問題を修正しました [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
     -   `_charset(xxx), _charset(xxx2), ...`を含む SQL ステートメントが異なるダイジェストを生成する問題を修正 [#58447](https://github.com/pingcap/tidb/issues/58447) @[xhebox](https://github.com/xhebox)
     -   無効な UTF-8 文字を処理するときに TiDB がpanic可能性がある問題を修正 [#47521](https://github.com/pingcap/tidb/issues/47521) @[Defined2014](https://github.com/Defined2014)
     -   無効な夏時間 (DST) タイムスタンプを挿入すると`0000-00-00`になる問題を修正 [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
-    -   厳密な SQL モードで`INSERT IGNORE`を使用して無効な夏時間タイムスタンプを挿入すると、MySQL と矛盾するタイムスタンプが生成される問題を修正しました [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
+    -   `INSERT IGNORE`を使用して厳密なSQLモードで無効な夏時間タイムスタンプを挿入すると、MySQLと矛盾するタイムスタンプが生成される問題を修正しました [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
     -   リージョンのマージが頻繁に行われるとTTLジョブの開始が妨げられる問題を修正 [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
     -   TiDB がネットワーク プロトコルで返す列の長さが`0`になる可能性がある問題を修正します。もし`0`であれば、TiDB は各フィールド タイプのデフォルトの長さを返します。 [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
     -   ネットワークプロトコルにおける`blob`の戻り値の型が MySQL と一致しない問題を修正しました [#60195](https://github.com/pingcap/tidb/issues/60195) @[dveeden](https://github.com/dveeden)
     -   `CAST()`が返す長さが MySQL と互換性がない問題を修正 [#61350](https://github.com/pingcap/tidb/issues/61350) @[YangKeao](https://github.com/YangKeao)
     -   `latin1_bin`の比較動作が`utf8mb4_bin`および`utf8_bin`と異なる問題を修正 [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
     -   クエリが終了したときに悲観的ロックが残る可能性がある問題を修正 [#61454](https://github.com/pingcap/tidb/issues/61454) @[zyguan](https://github.com/zyguan)
-    -   TiDBが単一のリクエストでPDからリージョンを多数ロードしたために大規模なクエリを実行する際にエラーが発生する問題を修正しました [#1704](https://github.com/tikv/client-go/issues/1704) @[you06](https://github.com/you06)
+    -   TiDBがPDから単一のリクエストでリージョンを多数ロードしたために大規模なクエリを実行する際にエラーが発生する問題を修正しました [#1704](https://github.com/tikv/client-go/issues/1704) @[you06](https://github.com/you06)
 
 -   ティクヴ
 
-    -   TiKVが正常なシャットダウン中に進行中の手動圧縮タスクを終了できない問題を修正 [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
+    -   TiKV が正常シャットダウン中に進行中の手動圧縮タスクを終了できない問題を修正 [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
     -   クラスターのアップグレード後にデフォルトのリージョンサイズが予期せず変更される問題を修正 [#18503](https://github.com/tikv/tikv/issues/18503) @[LykxSassinator](https://github.com/LykxSassinator)
     -   TiKVがクライアントがデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正 [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
     -   Titanが無効化された後に、ブロブインデックスが原因でスナップショットの適用が失敗する可能性がある問題を修正しました [#18434](https://github.com/tikv/tikv/issues/18434) @[v01dstar](https://github.com/v01dstar)
@@ -114,7 +115,7 @@ TiDBバージョン：8.5.3
     -   `recovery-duration`が低速ノード検出メカニズムで有効にならない問題を修正 [#9384](https://github.com/tikv/pd/issues/9384) @[rleungx](https://github.com/rleungx)
     -   クラスタのアップグレード後に Evict Leaderスケジューラが誤って一時停止される可能性がある問題を修正しました [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
     -   TiDB DashboardのTCP接続を不適切に閉じるとPDゴルーチンリークが発生する問題を修正しました [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
-    -   新しく追加されたTiKVノードがスケジュールされない可能性がある問題を修正 [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
+    -   新しく追加された TiKV ノードがスケジュールに失敗する可能性がある問題を修正 [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
 
 -   TiFlash
 

@@ -15,7 +15,8 @@ TiDB Cloudを使用すると、 TiDB Cloud Premiumインスタンスから外部
 
 > **注記：**
 >
-> エクスポートの最大サイズは1 TiBです。この制限を超えるエクスポートは失敗する可能性があります。より多くのデータをエクスポートする場合、またはエクスポート速度の向上を希望する場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> -   現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**「？」**をクリックし、 次に**「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **「説明」**フィールドに「 TiDB Cloud Premiumインスタンスのデータエクスポートを申請する」と入力して、 **「送信」を**クリックします。
+> -   エクスポートの最大サイズは1 TiBです。この制限を超えるエクスポートは失敗する可能性があります。より多くのデータをエクスポートする場合、またはエクスポート速度の向上を希望する場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 輸出先 {#export-locations}
 
@@ -52,7 +53,7 @@ Alibaba Cloud OSSにデータをエクスポートするには、以下の情報
 -   URI: `oss://<bucket-name>/<folder-path>/`
 -   アクセス資格情報: Alibaba Cloud アカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。 AccessKey ペアに`oss:PutObject`および`oss:GetBucketInfo`権限があることを確認してください。
 
-詳細については、 [外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
+詳細については、 [外部ストレージへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
 
 ## エクスポートオプション {#export-options}
 

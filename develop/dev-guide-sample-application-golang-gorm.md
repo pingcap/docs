@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with GORM
-summary: GORMを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、GORMを使用してTiDBと連携するGolangのサンプルコードを紹介します。
+summary: GORM を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、GORM を使用して TiDB と連携するGolang のサンプルコードを紹介します。
 aliases: ['/ja/tidb/stable/dev-guide-sample-application-golang-gorm/','/ja/tidb/dev/dev-guide-sample-application-golang-gorm/','/ja/tidbcloud/dev-guide-sample-application-golang-gorm/']
 ---
 
@@ -16,7 +16,7 @@ TiDB は MySQL 互換データベースであり、[ゴーム](https://gorm.io/i
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -97,6 +97,49 @@ cd tidb-golang-gorm-quickstart
     TiDB Cloud Starter は安全な接続を必要とします。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
 
 7.  `.env`ファイルを保存します。
+
+</div>
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
+
+    ```shell
+    cp .env.example .env
+    ```
+
+8.  対応する接続​​文字列`.env`ファイルにコピー＆ペーストしてください。例は以下のとおりです。
+
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='false'
+    ```
+
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+
+9.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -193,7 +236,7 @@ func createDB() *gorm.DB {
 }
 ```
 
-この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}` TiDBの実際の値に置き換える必要があります。TiDB Cloud Starterはセキュアな接続を必要とします。そのため、 `${use_ssl}`の値を`true`に設定する必要があります。
+この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}` TiDBの実際の値に置き換える必要があります。TiDB TiDB Cloud Starterはセキュアな接続を必要とします。そのため、 `${use_ssl}`の値を`true`に設定する必要があります。
 
 ### データを挿入する {#insert-data}
 

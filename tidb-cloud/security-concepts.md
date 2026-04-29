@@ -1,256 +1,286 @@
 ---
 title: Security
-summary: TiDB Cloudのセキュリティ概念について学習します。
+summary: TiDB Cloudのセキュリティ概念について学びましょう。
 ---
 
 # Security {#security}
 
-TiDB Cloudは、データ保護、アクセス制御の強化、そして最新のコンプライアンス基準への準拠を目的とした、堅牢かつ柔軟なセキュリティフレームワークを提供します。このフレームワークは、高度なセキュリティ機能と運用効率を融合し、組織のニーズを大規模にサポートします。
+TiDB Cloudは、データの保護、アクセス制御の徹底、最新のコンプライアンス基準への準拠を目的とした、堅牢かつ柔軟なセキュリティフレームワークを提供します。このフレームワークは、高度なセキュリティ機能と運用効率を組み合わせ、大規模な組織のニーズに対応します。
 
-**主要コンポーネント**
+**主要構成要素**
 
--   **アイデンティティおよびアクセス管理 (IAM )** : TiDB Cloudコンソールとデータベース環境の両方に対するセキュリティで柔軟な認証および権限管理。
+-   **IDおよびアクセス管理（IAM ）** ： TiDB Cloudコンソール環境とデータベース環境の両方において、セキュリティかつ柔軟な認証と権限管理を実現します。
 
--   **ネットワーク アクセス制御**: プライベート エンドポイント、VPC ピアリング、TLS 暗号化、IP アクセス リストなどの構成可能な接続オプション。
+-   **ネットワークアクセス制御**：プライベートエンドポイント、VPCピアリング、TLS暗号化、IPアクセスリストなど、設定可能な接続オプション。
 
--   **データ アクセス制御**: 保存中のデータを保護するための顧客管理暗号化キー (CMEK) などの高度な暗号化機能。
+-   **データアクセス制御**：保存されているデータを保護するための、顧客管理暗号化キー（CMEK）などの高度な暗号化機能。
 
--   **監査ログ**: コンソールアクションとデータベース操作の両方に対する包括的なアクティビティ追跡により、説明責任と透明性が確保されます。
+-   **監査ログ**：コンソール操作とデータベース操作の両方について包括的なアクティビティ追跡を行い、説明責任と透明性を確保します。
 
-これらの機能を統合することで、 TiDB Cloud は組織が機密データを保護し、アクセス制御を合理化し、セキュリティ運用を最適化できるようにします。
+TiDB Cloudはこれらの機能を統合することで、組織が機密データを保護し、アクセス制御を効率化し、セキュリティ運用を最適化できるよう支援します。
 
-## アイデンティティとアクセス管理（IAM） {#identity-and-access-management-iam}
+## IDおよびアクセス管理（IAM） {#identity-and-access-management-iam}
 
-TiDB Cloud は、 Identity and Access Management (IAM) を採用し、コンソール環境とデータベース環境の両方でユーザー ID と権限を安全かつ効率的に管理します。IAM 機能は、認証オプション、ロールベースのアクセス制御、階層型リソース構造を組み合わせることで、組織のセキュリティとコンプライアンスのニーズを満たすように設計されています。
+TiDB Cloudは、アイデンティティおよびアクセス管理（IAM）を採用し、コンソール環境とデータベース環境の両方でユーザーのIDと権限を安全かつ効率的に管理します。IAMの機能は、認証オプション、ロールベースのアクセス制御、階層的なリソース構造を組み合わせることで、組織のセキュリティとコンプライアンスのニーズを満たすように設計されています。
 
 ### TiDB Cloudユーザーアカウント {#tidb-cloud-user-accounts}
 
-TiDB Cloudのユーザーアカウントは、IDとリソースへのアクセスを管理するための基盤です。各アカウントはプラットフォーム内の個人またはエンティティを表し、組織のニーズに合わせて複数の認証方法をサポートしています。
+TiDB Cloudのユーザーアカウントは、ID管理とリソースへのアクセス管理の基盤となります。各アカウントはプラットフォーム内の個人または組織を表し、組織のニーズに合わせて複数の認証方法をサポートします。
 
 -   **デフォルトのユーザー名とパスワード**
 
-    -   ユーザーは電子メール アドレスとパスワードを使用してアカウントを作成します。
+    -   ユーザーはメールアドレスとパスワードを使ってアカウントを作成します。
 
-    -   外部 ID プロバイダーを持たない小規模なチームまたは個人に適しています。
+    -   外部のIDプロバイダーを利用していない小規模チームや個人に適しています。
 
 -   **標準SSO認証**
 
-    -   ユーザーは GitHub、Google、または Microsoft アカウントを使用してログインします。
+    -   ユーザーはGitHub、Google、またはMicrosoftのアカウント経由でログインします。
 
-    -   すべての組織に対してデフォルトで有効になっています。
+    -   すべての組織でデフォルトで有効になっています。
 
-    -   **ベスト プラクティス**: 小規模なチームや厳格なコンプライアンスが求められないチームに使用します。
+    -   **推奨される使用方法**：小規模チームや、厳格なコンプライアンス要件がないチームでの使用。
 
-    -   詳細については[標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)参照してください。
+    -   詳細については、 [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を参照してください。
 
 -   **組織のSSO認証**
 
-    -   OIDC または SAML プロトコルを使用して企業 ID プロバイダー (IdP) と統合します。
+    -   OIDCまたはSAMLプロトコルを使用して、企業IDプロバイダー（IdP）と連携します。
 
-    -   MFA の適用、パスワード有効期限ポリシー、ドメイン制限などの機能を有効にします。
+    -   多要素認証の強制、パスワード有効期限ポリシー、ドメイン制限などの機能を有効にします。
 
-    -   **ベスト プラクティス**: 高度なセキュリティとコンプライアンスの要件を持つ大規模な組織に最適です。
+    -   **ベストプラクティス**：高度なセキュリティおよびコンプライアンス要件を持つ大規模組織に最適です。
 
-    -   詳細については[組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)参照してください。
+    -   詳細については、 [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)を参照してください。
 
 ### データベースアクセス制御 {#database-access-control}
 
-TiDB Cloudは、ユーザーベースおよびロールベースの権限設定によるきめ細かなデータベースアクセス制御を提供します。これらのメカニズムにより、管理者は組織のセキュリティポリシーへの準拠を確保しながら、データオブジェクトとスキーマへのアクセスを安全に管理できます。
+TiDB Cloudは、ユーザーベースおよびロールベースの権限設定により、きめ細かなデータベースアクセス制御を提供します。これらの仕組みにより、管理者は組織のセキュリティポリシーを遵守しながら、データオブジェクトとスキーマへのアクセスを安全に管理できます。
 
--   **ベストプラクティス:**
+-   **ベストプラクティス：**
 
-    -   ユーザーの役割に必要な権限のみを付与することで、最小権限の原則を実装します。
+    -   最小権限の原則を実践するため、ユーザーにはそれぞれの役割に必要な権限のみを付与してください。
 
-    -   変化する組織の要件に合わせて、ユーザー アクセスを定期的に監査および更新します。
+    -   組織の要件の変化に合わせて、ユーザーアクセス権限を定期的に監査および更新する。
 
 ### データベースユーザーアカウント {#database-user-accounts}
 
-データベース ユーザー アカウントは`mysql.user`システム テーブルに保存され、ユーザー名とクライアント ホストによって一意に識別されます。
+データベースのユーザーアカウントは`mysql.user`システムテーブルに格納され、ユーザー名とクライアントホストによって一意に識別されます。
 
-データベースの初期化中に、TiDB は自動的にデフォルトのアカウントを作成します: `'root'@'%'` 。
+データベースの初期化中に、TiDB は自動的にデフォルト アカウント`'root'@'%'`を作成します。
 
-詳細については[TiDB ユーザーアカウント管理](https://docs.pingcap.com/tidb/stable/user-account-management#user-names-and-passwords)参照してください。
+詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/stable/user-account-management#user-names-and-passwords)参照してください。
 
-### SQL プロキシアカウント {#sql-proxy-accounts}
+### SQLプロキシアカウント {#sql-proxy-accounts}
 
-SQL Proxy アカウントは、 TiDB Cloudによって自動的に生成される特別な目的のアカウントです。これらのアカウントの主な特徴は次のとおりです。
+SQLプロキシアカウントは、 TiDB Cloudによって自動的に生成される特殊用途アカウントです。これらのアカウントの主な特徴は以下のとおりです。
 
--   **TiDB Cloudユーザー アカウントにリンク:**各 SQL Proxy アカウントは特定のTiDB Cloudユーザーに対応します。
+-   **TiDB Cloudユーザーアカウントにリンクされています：**各SQLプロキシアカウントは、特定のTiDB Cloudユーザーに対応しています。
 
--   **ロールにマップされています:** SQL プロキシ アカウントには`role_admin`ロールが付与されます。
+-   **役割にマッピングされています:** SQL プロキシ アカウントには`role_admin`役割が付与されます。
 
--   **トークンベース:** SQL プロキシ アカウントは、パスワードの代わりに安全な JWT トークンを使用し、 TiDB Cloudデータ サービスまたは SQL エディターを介したシームレスで制限されたアクセスを保証します。
+-   **トークンベース：** SQLプロキシアカウントは、パスワードの代わりに安全なJWTトークンを使用するため、 TiDB CloudデータサービスまたはSQLエディターを介したシームレスで制限されたアクセスが保証されます。
 
-### TiDB の権限とロール {#tidb-privileges-and-roles}
+### TiDBの権限と役割 {#tidb-privileges-and-roles}
 
-TiDBの権限管理システムはMySQL 5.7をベースにしており、データベースオブジェクトへのきめ細かなアクセスを可能にします。同時に、TiDBはMySQL 8.0のRBACと動的権限メカニズムも導入しています。これにより、きめ細やかで便利なデータベース権限管理が可能になります。
+TiDBの権限管理システムはMySQL 5.7をベースとしており、データベースオブジェクトへのきめ細かなアクセス制御を可能にします。同時に、TiDBはMySQL 8.0のRBAC（ロールベースアクセス制御）と動的権限メカニズムも導入しています。これにより、データベース権限をきめ細かく、かつ便利に管理できます。
 
 **静的権限**
 
--   テーブル、ビュー、インデックス、ユーザー、その他のオブジェクトを含むデータベース オブジェクトに基づいたきめ細かなアクセス制御をサポートします。
+-   テーブル、ビュー、インデックス、ユーザー、その他のオブジェクトを含むデータベースオブジェクトに基づいた、きめ細かなアクセス制御をサポートします。
 
--   *例: 特定のテーブルに対する SELECT権限をユーザーに付与します。*
+-   *例：特定のテーブルに対するSELECT権限をユーザーに付与する。*
 
-**動的権限**
+**動的な権限**
 
--   データベース管理権限の合理的な分割をサポートし、システム管理権限のきめ細かな制御を実現します。
+-   データベース管理権限の適切な分割をサポートし、システム管理権限のきめ細かな制御を実現します。
 
--   例: より広範な管理権限を持たないデータベースのバックアップを管理するアカウントに`BACKUP_ADMIN`割り当てます。
+-   例: より広範な管理権限を持たないデータベースバックアップを管理するアカウントに`BACKUP_ADMIN`を割り当てます。
 
-**SQL ロール (RBAC)**
+**SQLロール（RBAC）**
 
--   権限をユーザーに割り当てることができるロールにグループ化することで、権限管理と動的な更新を効率化できます。
+-   権限を役割ごとにグループ化し、ユーザーに割り当てられるようにすることで、権限管理の効率化と動的な更新が可能になります。
 
--   例: アナリストに読み取り/書き込みロールを割り当てて、ユーザー アクセス制御を簡素化します。
+-   例：アナリストに読み書き権限を割り当てることで、ユーザーアクセス制御を簡素化する。
 
-このシステムにより、組織のポリシーに準拠しながら、ユーザー アクセスを柔軟かつ正確に管理できるようになります。
+このシステムは、組織の方針に準拠しながら、ユーザーアクセス管理における柔軟性と正確性を確保します。
 
 ### 組織とプロジェクト {#organization-and-projects}
 
-TiDB Cloud は、組織、プロジェクト、クラスターという階層構造でユーザーとリソースを管理します。
+TiDB Cloudは、組織、プロジェクト、リソースという階層構造でユーザーとリソースを管理します。
 
 **組織**
 
--   リソース、ロール、課金を管理するための最上位エンティティ。
+-   ユーザー、役割、プロジェクト、リソース、および請求を管理するための最上位エンティティ。
 
--   組織の所有者には、プロジェクトの作成やロールの割り当てなど、完全な権限が与えられます。
+-   組織の所有者は、プロジェクトの作成や役割の割り当てなど、すべての権限を持っています。
 
 **プロジェクト**
 
--   クラスターとプロジェクト固有の構成を含む組織の区分。
+-   TiDB Cloudのリソースをグループ化および管理するためのコンテナ。
 
--   範囲内のクラスターを担当するプロジェクト所有者によって管理されます。
+-   TiDB Cloudには、3種類のプロジェクトがあります。
 
-**クラスター**
+    -   **TiDB Dedicatedプロジェクト**： TiDB Cloud Dedicatedクラスタ専用のプロジェクトタイプです。Dedicatedプロジェクトは、ネットワーク、メンテナンス、アラート購読、統合、暗号化関連のアクセスなど、プロジェクトスコープの設定を管理します。
+    -   **TiDB Xプロジェクト**：TiDB Xインスタンス（ TiDB Cloud Starter、 Essential、Premiumインスタンスを含む）の論理コンテナです。TiDB Xプロジェクトは、リソースのグループ化やプロジェクトレベルのRBACの適用に使用されますが、専用環境専用のインフラストラクチャ設定は保持しません。
+    -   **TiDB X仮想プロジェクト**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用の仮想プロジェクトです。このプロジェクトタイプはAPI互換性のためだけに使用され、管理機能は提供されません。
 
--   プロジェクト内の個々のデータベース インスタンス。
+**リソース**
 
-### 構造例 {#example-structure}
+-   TiDB Cloudリソースは、TiDB X インスタンス ( [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリング) またはTiDB Cloud Dedicatedクラスタのいずれかになります。
+
+### 例となる構造 {#example-structure}
 
     - Your organization
-        - Project 1
-            - Cluster 1
-            - Cluster 2
-        - Project 2
-            - Cluster 3
-            - Cluster 4
-        - Project 3
-            - Cluster 5
-            - Cluster 6
+        - TiDB X instances out of any project
+            - TiDB Cloud Starter instance 1
+            - TiDB Cloud Essential instance 1
+        - TiDB X project 1
+            - TiDB Cloud Starter instance 2
+            - TiDB Cloud Starter instance 3
+            - TiDB Cloud Essential instance 2
+        - TiDB Dedicated project 1
+            - TiDB Cloud Dedicated cluster 1
+            - TiDB Cloud Dedicated cluster 2
 
-### 主な特徴 {#key-features}
+### 主な機能 {#key-features}
 
--   **きめ細かな権限**:
-    -   正確なアクセス制御のために、組織レベルとプロジェクトレベルの両方で特定のロールを割り当てます。
+-   **詳細な権限設定**：
+    -   組織、プロジェクト、インスタンスの各レベルで特定の役割を割り当てることで、正確なアクセス制御を実現します。
 
-    -   役割の割り当てを慎重に計画することで、柔軟性とセキュリティを確保します。
+    -   TiDB Xインスタンスにはプロジェクトロールまたはインスタンスロールのいずれかを通じてアクセスできますが、 TiDB Cloud Dedicatedクラスタはプロジェクトレベルのアクセスによって管理されます。
+
+-   **柔軟なプロジェクトモデル**：
+    -   TiDB Xプロジェクトはオプションなので、TiDB Xインスタンスはプロジェクトにグループ化することも、組織レベルで管理することもできます。
+
+    -   TiDB Dedicatedプロジェクトは必須であるため、各DedicatedクラスターはDedicatedプロジェクトに属していなければなりません。
 
 -   **請求管理**：
-    -   請求は組織レベルで統合され、プロジェクトごとに詳細な内訳が提供されます。
+    -   請求は組織レベルで統合され、各プロジェクトおよびリソースごとに詳細な内訳が提供されます。
 
-### アイデンティティとアクセス管理（IAM）ロール {#identity-and-access-management-iam-roles}
+### IDおよびアクセス管理（IAM）の役割 {#identity-and-access-management-iam-roles}
 
-TiDB Cloud は、組織やプロジェクト全体の権限を管理するためのロールベースのアクセス制御を提供します。
+TiDB Cloudは、組織、プロジェクト、インスタンス全体にわたる権限管理のためのロールベースのアクセス制御を提供します。
 
--   **<a href="/tidb-cloud/manage-user-access.md#organization-roles">組織レベルの役割</a>**: 請求やプロジェクトの作成など、組織全体を管理するための権限を付与します。
+-   **<a href="/tidb-cloud/manage-user-access.md#organization-roles">組織レベルの役割</a>**：請求処理やプロジェクト作成など、組織全体を管理するための権限を付与します。
 
--   **<a href="/tidb-cloud/manage-user-access.md#project-roles">プロジェクト レベルのロール</a>**: クラスターや構成など、特定のプロジェクトを管理するための権限を割り当てます。
+-   **<a href="/tidb-cloud/manage-user-access.md#project-roles">プロジェクトレベルの役割</a>**：プロジェクトスコープのリソースや構成など、特定のプロジェクトを管理するための権限を割り当てます。
+
+-   **<a href="/tidb-cloud/manage-user-access.md#instance-roles">インスタンスレベルのロール</a>**：特定のTiDB Xインスタンスに対して、きめ細かなアクセス権限を付与します。
 
 ## ネットワークアクセス制御 {#network-access-control}
 
-TiDB Cloudは、堅牢なネットワークアクセス制御を通じて、安全なクラスタ接続とデータ転送を保証します。主な機能は以下のとおりです。
+TiDB Cloudは、堅牢なネットワークアクセス制御により、安全な接続とデータ伝送を保証します。主な機能は以下のとおりです。
 
 ### プライベートエンドポイント {#private-endpoints}
 
 <CustomContent language="en,zh">
 
--   仮想プライベート クラウド (VPC) 内の SQL クライアントからTiDB Cloud Dedicated クラスターへの安全な接続を有効にします。
+-   仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
--   [AWS プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md) 、 [Azure プライベート リンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 、 [Google Cloud プライベート サービス接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloud プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
+-   [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)リンク、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloudプライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
 
 </CustomContent>
 
 <CustomContent language="ja">
 
--   仮想プライベート クラウド (VPC) 内の SQL クライアントからTiDB Cloud Dedicated クラスターへの安全な接続を有効にします。
+-   仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
--   [AWS プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md) 、 [Azure プライベート リンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 、 [Google Cloud プライベート サービス接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
+-   [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)リンク、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
 
 </CustomContent>
 
-**ベスト プラクティス:**本番ではプライベート エンドポイントを使用して公開を最小限に抑え、構成を定期的に確認します。
+**ベストプラクティス：**本番ではプライベートエンドポイントを使用して外部への露出を最小限に抑え、設定を定期的に見直してください。
 
-### TLS (トランスポート層Security) {#tls-transport-layer-security}
+### TLS（トランスポート層Security） {#tls-transport-layer-security}
 
--   クライアントとサーバー間の通信を暗号化して、データ転送を安全にします。
+-   クライアントとサーバー間の通信を暗号化し、データ送信の安全性を確保します。
 
--   セットアップガイド:
+-   セットアップガイド：
 
-    -   [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    -   [TiDB Cloud専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+    -   [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    -   [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
 
-**ベスト プラクティス:** TLS 証明書が最新であることを確認し、定期的にローテーションします。
+**ベストプラクティス：** TLS証明書が最新であることを確認し、定期的に更新してください。
 
 ### VPCピアリング {#vpc-peering}
 
--   仮想プライベート クラウド間のプライベート接続を確立し、安全でシームレスな通信を可能にします。
+-   仮想プライベートクラウド間でプライベート接続を確立し、安全でシームレスな通信を実現します。
 
--   詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
+-   詳細については、 [VPCピアリング経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
 
-**ベスト プラクティス:**重要なワークロードに使用して、パブリック インターネットへの露出を回避し、パフォーマンスを監視します。
+**推奨される使用方法：**重要なワークロードには、インターネットへの公開を避け、パフォーマンスを監視するために使用してください。
 
 ### IPアクセスリスト {#ip-access-list}
 
--   信頼できる IP アドレスへのクラスター アクセスを制限するファイアウォールとして機能します。
+-   ファイアウォールとして機能し、クラスタへのアクセスを信頼できるIPアドレスに制限します。
 
--   詳細については[IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+-   詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
-**ベスト プラクティス:**セキュリティを維持するために、アクセス リストを定期的に監査して更新します。
+**ベストプラクティス：**セキュリティを維持するために、アクセスリストを定期的に監査し、更新してください。
 
 ## データアクセス制御 {#data-access-control}
 
-TiDB Cloud は、高度な暗号化機能を使用して静的データを保護し、セキュリティと業界規制へのコンプライアンスを確保します。
+TiDB Cloudは、高度な暗号化機能で静的データを保護し、セキュリティと業界規制への準拠を保証します。
+
+<CustomContent plan="starter,essential,dedicated">
 
 **顧客管理暗号化キー（CMEK）**
 
--   組織はTiDB Cloud Dedicated クラスターの暗号化を完全に制御できます。
+-   TiDB Cloud Dedicatedクラスターの暗号化に関して、組織に完全な制御権限を提供します。
 
--   有効にすると、静的データとバックアップが CMEK キーで暗号化されます。
+-   有効にすると、静的データとバックアップをCMEKキーで暗号化します。
 
--   CMEK のないTiDB Cloud Dedicated クラスターの場合、 TiDB Cloud はエスクロー キーを使用します。TiDB Cloud Starter およびTiDB Cloud Essential クラスターはエスクロー キーのみに依存します。
+-   CMEKを使用しないTiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはエスクローキーを使用します。TiDB TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、エスクローキーのみに依存します。
 
-**ベストプラクティス:**
+**ベストプラクティス：**
 
--   セキュリティを強化し、コンプライアンス標準を満たすために、CMEK キーを定期的にローテーションします。
+-   セキュリティを強化し、コンプライアンス基準を満たすため、CMEKキーは定期的に交換してください。
 
--   保護を強化するために、CMEK キーを使用してバックアップを一貫して暗号化します。
+-   バックアップはCMEKキーを使用して一貫して暗号化することで、セキュリティをさらに強化できます。
 
--   HIPAA や GDPR などの厳格なコンプライアンスが求められる業界向けに CMEK を活用します。
+-   HIPAAやGDPRなど、厳格なコンプライアンスが求められる業界では、CMEKを活用してください。
 
-詳細については、 [AWS での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)および[Azure での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)参照してください。
+詳細については、 [AWS 上で顧客管理暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)および[Azure 上で顧客管理暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)参照してください。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+**二重層データ暗号化**
+
+-   ストレージ層の暗号化（クラウドプロバイダーによって提供される）とデータベースレイヤーの暗号化を組み合わせることで、AWS上でホストされているTiDB Cloud Premiumインスタンスの保存データに対する保護をさらに強化します。
+
+-   有効にすると、TiKVに保存されているデータ、変更フィードデータ、およびバックアップデータを暗号化します。
+
+-   セキュリティ要件や運用要件に応じて、顧客管理型暗号化キー（CMEK）とサービス管理型暗号化キーのどちらかを選択できます。
+
+詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)参照してください。
+
+</CustomContent>
 
 ## 監査ログ {#audit-logging}
 
-TiDB Cloud は、ユーザー アクティビティとデータベース操作を監視するための包括的な監査ログを提供し、セキュリティ、アカウンタビリティ、コンプライアンスを確保します。
+TiDB Cloudは、ユーザーアクティビティとデータベース操作を監視するための包括的な監査ログ機能を提供し、セキュリティ、説明責任、およびコンプライアンスを確保します。
 
 ### コンソール監査ログ {#console-audit-logging}
 
-ユーザーの招待やクラスターの管理など、 TiDB Cloudコンソール上の主要なアクションを追跡します。
+TiDB Cloudコンソール上で行われた主要な操作（ユーザーの招待やデータのインポートなど）を追跡します。
 
-**ベストプラクティス:**
+**ベストプラクティス：**
 
--   ログを SIEM ツールと統合して、リアルタイムの監視とアラートを実現します。
+-   ログをSIEMツールと統合することで、リアルタイムの監視とアラートを実現します。
 
--   コンプライアンス要件を満たす保持ポリシーを設定します。
+-   法令遵守要件を満たすようにデータ保持ポリシーを設定する。
 
-### データベース監査ログ {#database-audit-logging}
+### 国立データベース監査ログ {#database-audit-logging}
 
-実行された SQL ステートメントやユーザー アクセスなど、詳細なデータベース操作を記録します。
+実行されたSQL文やユーザーアクセスなど、データベース操作の詳細を記録します。
 
-**ベストプラクティス:**
+**ベストプラクティス：**
 
--   異常なアクティビティや不正アクセスがないか定期的にログを確認します。
+-   不審な活動や不正アクセスがないか、定期的にログを確認してください。
 
--   コンプライアンス レポートとフォレンジック分析にログを使用します。
+-   ログは、コンプライアンス報告およびフォレンジック分析に活用してください。
 
-詳細については、 [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)および[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)参照してください。
+詳細については、 [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。

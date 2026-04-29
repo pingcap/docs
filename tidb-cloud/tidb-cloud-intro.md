@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 <CustomContent language="en,zh">TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 <CustomContent language="en,zh">TiDB Cloudのリソース（ TiDB Cloud Starterインスタンス、 TiDB Cloud Essentialインスタンス、 TiDB Cloud Dedicatedクラスターなど）を作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">TiDB Cloudのリソース（ TiDB Cloud Starterインスタンス、 TiDB Cloud Essentialインスタンス、 TiDB Cloud Dedicatedクラスターなど）を作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -38,11 +38,11 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
 -   **リアルタイム分析**
 
-    内蔵の分析エンジンにより、リアルタイムの分析クエリ結果を取得できます。TiDB Cloudは、ミッションクリティカルなアプリケーションに影響を与えることなく、最新データに対して一貫した分析クエリを実行します。
+    内蔵の分析エンジンにより、リアルタイムの分析クエリ結果を取得できます。TiDB TiDB Cloudは、ミッションクリティカルなアプリケーションに影響を与えることなく、最新データに対して一貫した分析クエリを実行します。
 
 -   **エンタープライズグレードのSecurity**
 
-    専用ネットワークと専用マシンでデータをセキュリティ。転送中および保存時の暗号化にも対応しています。TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701の認証を取得しており、GDPRにも完全に準拠しています。
+    専用ネットワークと専用マシンでデータをセキュリティ。転送中および保存時の暗号化にも対応しています。TiDB TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701の認証を取得しており、GDPRにも完全に準拠しています。
 
 -   **フルマネージドサービス**
 
@@ -52,13 +52,13 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
     <CustomContent language="en,zh">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB Cloudは現在、AWS、Azure、Google Cloud、およびAlibaba Cloudで利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud、およびAlibaba Cloudで利用可能です。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB Cloudは現在、AWS、Azure、Google Cloudで利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloudで利用可能です。
 
     </CustomContent>
 
@@ -102,15 +102,21 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     </CustomContent>
 
-<CustomContent plan="premium">
-
 -   TiDB Cloudプレミアム
 
     TiDB Cloud Premiumは、無制限のリアルタイム拡張性を必要とするミッションクリティカルなビジネス向けに設計されています。ワークロードに応じた自動スケーリングと包括的なエンタープライズ機能を提供します。
 
-    現在、 TiDB Cloud PremiumはAWSおよびAlibaba Cloud上でプライベートプレビュー版として提供されています。
+    <CustomContent language="en,zh">
 
-</CustomContent>
+    現在、 TiDB Cloud PremiumはAWSとAlibaba Cloudでパブリックプレビュー版として提供されています。
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    現在、 TiDB Cloud PremiumはAWS上でパブリックプレビュー版として提供されています。
+
+    </CustomContent>
 
 -   TiDB Cloud Dedicated
 
@@ -124,12 +130,12 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 -   TiDB VPC（仮想プライベートクラウド）
 
-    各TiDB Cloudクラスタにおいて、 TiDB Operatorノードやログ記録ノードを含むすべてのTiDBノードおよび補助ノードは、同一のVPC内にデプロイされます。
+    TiDB Cloudの各リソースについて、 TiDB Operatorノードやログ記録ノードを含むすべてのTiDBノードおよび補助ノードは、同じVPC内にデプロイされます。
 
 -   TiDB Cloudセントラルサービス
 
-    課金、アラート、メタstorage、ダッシュボードUIなどの中央サービスは、それぞれ独立してデプロイされます。ダッシュボードUIにはインターネット経由でアクセスでき、TiDBクラスタを操作できます。
+    課金、アラート、メタstorage、ダッシュボードUIなどの中央サービスは、それぞれ独立してデプロイされます。ダッシュボードUIにはインターネット経由でアクセスでき、 TiDB Cloudリソースを操作できます。
 
 -   あなたのVPC
 
-    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    プライベート エンドポイント接続または VPC ピアリング接続を介してTiDB Cloudリソースに接続できます。詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。

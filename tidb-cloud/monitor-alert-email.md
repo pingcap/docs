@@ -9,11 +9,21 @@ TiDB Cloud、電子メール、[スラック](/tidb-cloud/monitor-alert-slack.md
 
 > **注記：**
 >
-> 現在、アラート購読は[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスおよび[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
+> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
 
 ## 前提条件 {#prerequisites}
 
+<CustomContent plan="essential,dedicated">
+
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象のTiDB Cloud Premium インスタンスへの`Instance Manager`アクセス権が必要です。
+
+</CustomContent>
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
@@ -79,6 +89,33 @@ TiDB Cloud、電子メール、[スラック](/tidb-cloud/monitor-alert-slack.md
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+> **ヒント：**
+>
+> TiDB Cloud Premiumの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Premiumインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
+
+3.  **アラート購読**ページで、右上隅にある**「購読者を追加」**をクリックします。
+
+4.  **購読者タイプの**ドロップダウンリストから**「メール」**を選択してください。
+
+5.  メールアドレスを入力してください。
+
+6.  **「接続テスト」**をクリックしてください。
+
+    -   テストが成功すると、「**保存」**ボタンが表示されます。
+    -   テストが失敗した場合は、エラーメッセージが表示されます。メッセージの指示に従って問題を解決し、接続を再試行してください。
+
+7.  購読を完了するには、 **「保存」**をクリックしてください。
+
+または、 TiDB Cloud Premiumインスタンスの[**警告**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**「購読」を**クリックすることもできます。**アラート購読**ページに移動します。
+
+</CustomContent>
+
 アラート条件に変更がない場合、アラートは3時間ごとにメール通知を送信します。
 
 ## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
@@ -98,6 +135,15 @@ TiDB Cloud、電子メール、[スラック](/tidb-cloud/monitor-alert-slack.md
 <CustomContent plan="essential">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
+3.  **アラート購読**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
+4.  購読解除を確定するには、 **「購読解除」**をクリックしてください。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[アラートの購読]**をクリックします。
 3.  **アラート購読**ページで、削除する対象の購読者の行を見つけて、 **[...]** &gt; **[購読解除]**をクリックします。
 4.  購読解除を確定するには、 **「購読解除」**をクリックしてください。

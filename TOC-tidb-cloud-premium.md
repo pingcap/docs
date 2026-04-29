@@ -7,9 +7,10 @@
 ## さあ始めましょう {#get-started}
 
 -   TiDB Cloudを選ぶ理由
-    -   [TiDB Cloudの概要](/tidb-cloud/tidb-cloud-intro.md)
+    -   [導入](/tidb-cloud/tidb-cloud-intro.md)
+    -   [特徴](/tidb-cloud/features.md)
     -   [MySQLとの互換性](/mysql-compatibility.md)
--   TiDB Cloudを使い始める
+-   さあ始めましょう
     -   [TiDB Cloudをお試しください](/tidb-cloud/tidb-cloud-quickstart.md)
     -   [HTAPを試してみてください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
 -   主要概念
@@ -24,103 +25,6 @@
     -   [監視](/tidb-cloud/monitoring-concepts.md)
     -   [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
     -   [Security](/tidb-cloud/security-concepts.md)
-
-## 開発する {#develop}
-
--   開発クイックスタート
-    -   [TiDB Cloudクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
-    -   [TiDBにおけるCRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
--   TiDB Cloudに接続
-    -   GUIデータベースツール
-        -   [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
-        -   [DBeaver](/develop/dev-guide-gui-dbeaver.md)
-        -   [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
-        -   [MySQL Workchen](/develop/dev-guide-gui-mysql-workbench.md)
-        -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
-    -   [DriverまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)
-    -   Java
-        -   [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
-        -   [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
-        -   [ハイバネイト](/develop/dev-guide-sample-application-java-hibernate.md)
-        -   [スプリングブーツ](/develop/dev-guide-sample-application-java-spring-boot.md)
-        -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
-    -   行く
-        -   [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
-        -   [ゴーム](/develop/dev-guide-sample-application-golang-gorm.md)
-    -   Python
-        -   [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
-        -   [MySQLコネクタ/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-        -   [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
-        -   [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
-        -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
-        -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
-        -   [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
-        -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
-        -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
-        -   [シークエライズ](/develop/dev-guide-sample-application-nodejs-sequelize.md)
-        -   [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-        -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
-    -   ルビー
-        -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-        -   [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
-    -   C#
-        -   [C#](/develop/dev-guide-sample-application-cs.md)
-    -   [WordPress](/develop/dev-guide-wordpress.md)
-    -   サーバーレスDriver![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)<!--TBD, ToDo: Not sure if we need to update the driver name-->
-        -   [TiDB CloudサーバーレスDriver](/develop/serverless-driver.md)
-        -   [Node.js の例](/develop/serverless-driver-node-example.md)
-        -   [Prismaの例](/develop/serverless-driver-prisma-example.md)
-        -   [キセリーの例](/develop/serverless-driver-kysely-example.md)
-        -   [霧雨の例](/develop/serverless-driver-drizzle-example.md)
--   開発リファレンス
-    -   データベーススキーマの設計
-        -   [概要](/develop/dev-guide-schema-design-overview.md)
-        -   [データベースを作成する](/develop/dev-guide-create-database.md)
-        -   [テーブルを作成する](/develop/dev-guide-create-table.md)
-        -   [セカンダリーインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
-    -   データを書き込む
-        -   [データを挿入する](/develop/dev-guide-insert-data.md)
-        -   [データの更新](/develop/dev-guide-update-data.md)
-        -   [データ削除](/develop/dev-guide-delete-data.md)
-        -   [TTL（有効期限）を使用して、期限切れのデータを定期的に削除する](/time-to-live.md)
-        -   [準備された声明](/develop/dev-guide-prepared-statement.md)
-    -   データ読み取り
-        -   [単一テーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)
-        -   [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)
-        -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
-        -   [結果のページ分割](/develop/dev-guide-paginate-results.md)
-        -   [閲覧数](/develop/dev-guide-use-views.md)
-        -   [一時テーブル](/develop/dev-guide-use-temporary-tables.md)
-        -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
-        -   レプリカデータの読み取り
-            -   [Follower Read](/develop/dev-guide-use-follower-read.md)
-            -   [ステイル読み取り](/develop/dev-guide-use-stale-read.md)
-        -   [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    -   トランザクション
-        -   [概要](/develop/dev-guide-transaction-overview.md)
-        -   [楽観的取引と悲観的取引](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-        -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
-        -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
-    -   最適化する
-        -   [概要](/develop/dev-guide-optimize-sql-overview.md)
-        -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
-        -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
-        -   [インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)
-        -   その他の最適化手法
-            -   [暗黙的な型変換を避ける](/develop/dev-guide-implicit-type-conversion.md)
-            -   [固有シリアル番号生成](/develop/dev-guide-unique-serial-number-generation.md)
-    -   トラブルシューティング
-        -   [SQLまたはトランザクションの問題](/develop/dev-guide-troubleshoot-overview.md)
-        -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
-        -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
-    -   開発ガイドライン
-        -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)
-        -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
-    -   [書店向けアプリケーション例](/develop/dev-guide-bookshop-schema-design.md)
-    -   サードパーティサポート
-        -   [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md)
-        -   [サードパーティ製ツールとの互換性に関する既知の問題](/develop/dev-guide-third-party-tools-compatibility.md)
 
 ## ガイド {#guides}
 
@@ -149,7 +53,12 @@
     -   監視と警告
         -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
         -   [組み込みの指標](/tidb-cloud/premium/built-in-monitoring-premium.md)
+        -   [内蔵アラート機能](/tidb-cloud/monitor-built-in-alerting.md)
         -   [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)
+        -   アラート通知を購読する
+            -   [メールで購読する](/tidb-cloud/monitor-alert-email.md)
+            -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
     -   チューニングパフォーマンス
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
@@ -232,7 +141,7 @@
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
         -   [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-        -   [IDアクセス管理](/tidb-cloud/premium/manage-user-access-premium.md)
+        -   [IDアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
         -   [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
@@ -241,6 +150,7 @@
         -   [パブリックエンドポイントのファイアウォールルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
+        -   [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
         -   [ユーザーによるログの編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   監査管理
         -   [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
@@ -568,6 +478,11 @@
     -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
     -   コネクテッドケアサポートサービスの特長
         -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
+        -   接続済み： TiDB CloudアラートのIMサブスクリプション
+            -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
+            -   [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
+            -   [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
         -   接続済み：IMチケットの作成と更新のサブスクリプション
             -   [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)

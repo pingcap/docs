@@ -37,9 +37,9 @@ TiDBバージョン：8.5.6
 
 -   低速クエリログに対する多次元で詳細なトリガールールの定義をサポートする[#62959](https://github.com/pingcap/tidb/issues/62959) 、 [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
 
-    バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャするニーズを満たすことができません。
+    バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たすことができません。
 
-    バージョン 8.5.6 以降、TiDB [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)スロークエリログの制御を強化しました。tidb_slow_log_rules システム変数を使用して、 `Query_time` 、 `Digest`などの条件に基づいて、 `Mem_max` `KV_total`および SQL レベルで多次元のスロークエリログ出力ルールを定義できます。tidb_slow_log_max_per_sec [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)使用して、1 秒あたりに書き込まれるログエントリの数を制限したり、 [`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints)ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
+    バージョン 8.5.6 以降、TiDB [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)スロークエリログの制御を強化しました。tidb_slow_log_rules システム変数を使用して、 `Query_time` 、 `Digest`などの条件に基づいて、 `Mem_max` `KV_total`多次元のスロークエリログ出力ルールを定義できます。tidb_slow_log_max_per_sec [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)使用して、1 秒あたりに書き込まれるログエントリの数を制限したり、 [`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints)ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries)を参照してください。
 
@@ -120,6 +120,12 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | ティクヴ                     | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | 新しく追加された | TiKV ネットワーク トラフィックと論理 I/O メトリックをTop SQLに追加で収集するかどうかを制御します。デフォルト値は`false`です。      |
 | TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                                  | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
 
+### システムテーブルの変更 {#system-table-changes}
+
+| システムテーブル                                                                                     | 種類を変更する | 説明                                                                                  |
+| -------------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| [`mysql.tidb`](https://docs.pingcap.com/tidb/v8.5/mysql-schema#cluster-status-system-tables) | 修正済み    | TiDBクラスタの一意の識別子を表す`cluster_id`フィールドを追加します。 `cluster_id`は読み取り専用であり、変更できませんのでご注意ください。 |
+
 ## 非推奨機能 {#deprecated-features}
 
 -   v8.5.6 以降、統計バージョン 1 ( `tidb_analyze_version = 1` ) は非推奨となり、将来のリリースでは削除される予定です。より正確な統計を得るには、統計バージョン 2 ( `tidb_analyze_version = 2` ) および[統計情報を使用する既存のオブジェクトをバージョン1からバージョン2に移行する](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions)お勧めします。
@@ -181,8 +187,8 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 -   TiFlash
 
     -   DDL ステートメントを実行して列 [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)の`NOT NULL`制約を削除した後、 TiFlashと TiKV の間で潜在的なデータの不整合の問題を修正しました。
-    -   Grafana ダッシュボードのRaftスループット メトリックに異常に大きな値が表示される問題を修正 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
-    -   ランタイムフィルターが有効で結合キーのデータ型が一致しない場合に結合結果が正しくなくなることがある問題を修正 [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    -   Grafana ダッシュボードのRaftスループット メトリックに異常に大きな値が表示されることがある問題を修正 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
+    -   ランタイムフィルターが有効で結合キーのデータ型が一致しない場合、結合結果が正しくなくなることがある問題を修正 [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 -   ツール
 
@@ -196,7 +202,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
     -   TiCDC
 
         -   サーバーの再起動後にchangefeedsが繰り返し無効なディスパッチャーを作成する可能性がある問題を修正 [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
-        -   TiCDCが、上流のTiDBバージョンがv8.1.x以前の場合にテーブル名変更操作を正しく複製できない問題を修正します [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
+        -   TiCDCが、上流のTiDBバージョンがv8.1.x以前の場合にテーブル名変更操作を正しく複製できない問題を修正 [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
         -   TiCDCが有効になっている場合に、データスキャン中にTiKVがクラッシュする可能性がある問題を修正しました [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         -   Azure Blob Storage の Azure Managed Identity 認証をサポートし、クラウドstorageへのアップロードが停止する可能性がある問題を修正します [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
@@ -204,4 +210,4 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
         -   アップストリームのbinlogファイルのローテーション後にDMがグローバルチェックポイントの位置を進めない問題を修正 [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929)
         -   セーフモードで外部キー制約のあるテーブルの更新を処理する際に、主キーまたは一意キーが変更されていない場合でも、DM が誤って外部キーのカスケードをトリガーし、意図しないデータ削除を引き起こす可能性がある問題を修正します。 [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
-        -   DMバリデーターが`UNSIGNED`列を処理する際に誤って検証エラーを返す問題を修正しました [#12178](https://github.com/pingcap/tiflow/issues/12178) @[OliverS929](https://github.com/OliverS929)
+        -   `UNSIGNED`列を処理する際に、DMバリデーターが誤って検証エラーを返す問題を修正しました [#12178](https://github.com/pingcap/tiflow/issues/12178) @[OliverS929](https://github.com/OliverS929)

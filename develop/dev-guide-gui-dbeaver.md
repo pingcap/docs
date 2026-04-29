@@ -12,7 +12,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -85,6 +85,45 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
 9.  接続設定を保存するには、 **「完了」**をクリックしてください。
+
+</div>
+<div label="TiDB Cloud Premium">
+
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+
+2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
+
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックし、次に**[IP アドレスの追加]**をクリックします。
+
+    クライアントのIPアドレスがアクセスリストに追加されていることを確認してください。
+
+4.  左側のナビゲーションペインで**「概要」**をクリックすると、インスタンスの概要ページに戻ります。
+
+5.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
+
+6.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
+
+    -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
+    -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
+    -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+
+7.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
+
+8.  適切な接続文字列をコピーして、DBeaverの接続パネルに貼り付けてください。DBeaverのフィールドとTiDB Cloud Premiumの接続文字列のマッピングは以下のとおりです。
+
+    | DBeaverフィールド | TiDB Cloud Premium接続文字列 |
+    | ------------ | ----------------------- |
+    | サーバーホスト      | `{host}`                |
+    | ポート          | `{port}`                |
+    | ユーザー名        | `{user}`                |
+    | パスワード        | `{password}`            |
+
+    SSL設定は無効のままにしてください。
+
+9.  **「接続テスト」**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+
+10. 接続設定を保存するには、 **「完了」**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
