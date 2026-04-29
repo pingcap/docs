@@ -120,6 +120,12 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 | TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | Newly added | Controls whether TiKV network traffic and logical I/O metrics are additionally collected in Top SQL. The default value is `false`. |
 | TiCDC | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv) | Newly added | Controls whether a header row is output in CSV files. The default value is `false`. This parameter applies only to the TiCDC new architecture. |
 
+### System table changes
+
+| System table | Change type | Description |
+| -------- | -------- | -------- |
+| [`mysql.tidb`](https://docs.pingcap.com/tidb/v8.5/mysql-schema#cluster-status-system-tables) | Modified | Adds the `cluster_id` field, which represents the unique identifier of a TiDB cluster. Note that `cluster_id` is read-only and cannot be modified. |
+
 ## Deprecated features
 
 - Starting from v8.5.6, statistics Version 1 (`tidb_analyze_version = 1`) is deprecated and will be removed in a future release. It is recommended that you use statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use statistics Version 1 to Version 2](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions) for more accurate statistics.
