@@ -5210,6 +5210,17 @@ SHOW WARNINGS;
 - Range: `[0, 2147483647]`
 - Default value: `1`
 
+### `tidb_opt_index_join_build_v2` <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable is retained for compatibility only. TiDB always uses the Index Join build v2 path, and you cannot switch back to v1 through this variable.
+- If you set this variable to `OFF`, TiDB returns an error indicating that this capability is always enabled.
+- After upgrading from an earlier version, even if the historical value of this variable is retained in `mysql.global_variables`, TiDB still treats it as `ON`.
+
 ### tidb_opt_index_join_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
 
 > **Warning:**
