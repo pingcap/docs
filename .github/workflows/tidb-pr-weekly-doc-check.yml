@@ -1,0 +1,102 @@
+name: Weekly TiDB PR Doc Check (docs-cn)
+
+on:
+  schedule:
+    # 01:00 every Monday in Asia/Shanghai (UTC+8) => 17:00 every Sunday UTC
+    - cron: "0 17 * * 0"
+  workflow_dispatch:
+
+jobs:
+  weekly-check:
+    if: github.repository == 'pingcap/docs'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      SOURCE_REPO: pingcap/tidb
+      OUTPUT_DIR: tmp/tidb-doc-check
+      DOCS_CN_BASE_BRANCH: master
+
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Scan merged TiDB PRs in last weekly window
+        id: scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.DOCS_CN_BOT_TOKEN || github.token }}
+          SOURCE_REPO: ${{ env.SOURCE_REPO }}
+          OUTPUT_DIR: ${{ env.OUTPUT_DIR }}
+          DOCS_CN_BASE_BRANCH: ${{ env.DOCS_CN_BASE_BRANCH }}
+        run: |
+          set -euo pipefail
+          python scripts/check_tidb_prs_and_create_docs_cn_pr.py
+
+      - name: Skip when no docs updates are needed
+        if: steps.scan.outputs.needs_update != 'true'
+        run: |
+          echo "No doc-impact PRs found in this weekly window."
+
+      - name: Checkout docs-cn repo
+        if: steps.scan.outputs.needs_update == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: pingcap/docs-cn
+          token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
+          ref: ${{ steps.scan.outputs.docs_cn_base_branch }}
+          path: docs-cn
+          persist-credentials: false
+
+      - name: Copy weekly report into docs-cn
+        if: steps.scan.outputs.needs_update == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs-cn/weekly-doc-sync
+          cp "${{ steps.scan.outputs.report_path }}" "docs-cn/weekly-doc-sync/${{ steps.scan.outputs.report_filename }}"
+
+      - name: Create docs-cn PR
+        if: steps.scan.outputs.needs_update == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: docs-cn
+          token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
+          branch: ${{ steps.scan.outputs.branch_name }}
+          base: ${{ steps.scan.outputs.docs_cn_base_branch }}
+          commit-message: "docs: weekly TiDB PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
+          title: "docs: weekly TiDB PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
+          body: |
+            ### What is changed, added or deleted? (Required)
+
+            Add a weekly report that checks merged `pingcap/tidb` code PRs from the previous week and identifies PRs that likely require docs updates.
+
+            - Source repo: `${{ env.SOURCE_REPO }}`
+            - Time window (Asia/Shanghai): `${{ steps.scan.outputs.window_start_date }} 00:00` to `${{ steps.scan.outputs.window_end_date }} 00:00`
+            - Report file: `weekly-doc-sync/${{ steps.scan.outputs.report_filename }}`
+
+            This report is heuristic-based and requires maintainer confirmation before making detailed docs edits.
+
+            ### Which TiDB version(s) do your changes apply to? (Required)
+
+            - [x] master
+
+            ### What is the related PR or file link(s)?
+
+            - TiDB merged PR search: https://github.com/pingcap/tidb/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Amerged
+
+            ### Do your changes match any of the following descriptions?
+
+            - [ ] Delete files
+            - [ ] Change aliases
+            - [ ] Need modification after applied to another branch
+            - [ ] Might cause conflicts after applied to another branch
+          add-paths: |
+            weekly-doc-sync/${{ steps.scan.outputs.report_filename }}
+          delete-branch: true
