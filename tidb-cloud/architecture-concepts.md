@@ -179,7 +179,7 @@ TiDB Cloud calculates your usage every minute. It measures the total number of R
 
 #### Minimum usage requirement
 
-To maintain high availability and ensure that resources are always available for your instance, TiDB Cloud automatically sets a minimum billing RCU based on your maximum RCU setting. This value defines the baseline reserved capacity for your instance.
+To maintain baseline capacity and ensure that resources are always available for your instance, TiDB Cloud automatically sets a minimum billing RCU based on your maximum RCU setting. This value defines the baseline reserved capacity for your instance.
 
 If your actual consumption in a given minute is below this threshold, billing defaults to the minimum billing RCU. This mechanism ensures that your instance can immediately handle sudden traffic spikes up to your specified maximum, without performance degradation or delays.
 
@@ -219,7 +219,7 @@ TiDB Cloud calculates the total RU charge for any operation based on the databas
 
     - **Scanning efficiency**: RU consumption is heavily influenced by the number of rows that the engine must scan.
 
-        - **Read metrics (estimated rows)**: a point read that uses a primary key is the most efficient operation. A query that scans millions of estimated rows consumes significantly more RUs than a query that uses an optimized index.
+        - **Read metrics (estimated rows)**: a point read that uses a primary key or unique index is the most efficient operation. A query that scans millions of rows consumes significantly more RUs than a query that uses an optimized index.
         - **Write metrics (affected rows)**: the RU cost for data modification is tied to the number of affected rows. Modifying 10,000 rows in a single statement results in a much higher charge than modifying a single row.
 
     - **Computational logic**: complex SQL operations, including multiple table joins, deep subqueries, and aggregations, require more CPU cycles to compute execution paths and process data.
