@@ -38,7 +38,7 @@ Since accessing the backup data relies on the originally configured KMS master k
 
 ### Key Management Mechanism
 
-Premium's Dual-layer Data Encryption uses AWS KMS to manage master keys for data-at-rest encryption. Depending on your compliance and maintenance requirements, you can choose between two key management options：
+Premium's Dual-layer Data Encryption uses AWS KMS to manage master keys for data-at-rest encryption. Depending on your compliance and maintenance requirements, you can choose between two key management options:
 
 1. **Customer-Managed Encryption Key (CMEK)**: You provide and manage your own AWS KMS master key. This option offers maximum control over your encryption, making it ideal for organizations prioritizing strict security.
 - **Important:** You are fully responsible for maintaining the key's security and availability. If the configured CMEK is deleted, your Premium TiDB instance will malfunction, and the encrypted data will become permanently unrecoverable.
