@@ -8,13 +8,13 @@ aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibil
 
 <CustomContent platform="tidb">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
 
 </CustomContent>
 
@@ -234,21 +234,21 @@ TiDB supports most [SQL modes](/sql-mode.md):
 
 ### Default differences
 
-TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
+TiDB has default differences when compared with MySQL 5.7 and MySQL 8.x:
 
 - Default character set:
     - TiDB's default value is `utf8mb4`.
     - MySQL 5.7's default value is `latin1`.
-    - MySQL 8.0's default value is `utf8mb4`.
+    - MySQL 8.x's default value is `utf8mb4`.
 - Default collation:
     - TiDB's default collation is `utf8mb4_bin`.
     - MySQL 5.7's default collation is `utf8mb4_general_ci`.
-    - MySQL 8.0's default collation is `utf8mb4_0900_ai_ci`.
+    - MySQL 8.x's default collation is `utf8mb4_0900_ai_ci`.
 - Default SQL mode:
     - TiDB's default SQL mode includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
     - MySQL's default SQL mode:
         - The default SQL mode in MySQL 5.7 is the same as TiDB.
-        - The default SQL mode in MySQL 8.0 includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
+        - The default SQL mode in MySQL 8.x includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
 - Default value of `lower_case_table_names`:
     - The default value in TiDB is `2`, and only `2` is currently supported.
     - MySQL defaults to the following values:
@@ -259,7 +259,7 @@ TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
     - The default value in TiDB is `ON`, and only `ON` is currently supported.
     - MySQL defaults to the following values:
         - For MySQL 5.7: `OFF`.
-        - For MySQL 8.0: `ON`.
+        - For MySQL 8.x: `ON`.
 
 ### Date and Time
 

@@ -21,7 +21,7 @@ TiDB provides complete distributed transactions, and the model has some optimiza
 
 ## SQL
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. [Learn more about SQL in TiDB Cloud](/tidb-cloud/sql-concepts.md).
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.x. [Learn more about SQL in TiDB Cloud](/tidb-cloud/sql-concepts.md).
 
 ## AI features
 

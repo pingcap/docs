@@ -443,7 +443,7 @@ String > Column > Table > Database > Server
 
 ## Validity check of characters
 
-If the specified character set is `utf8` or `utf8mb4`, TiDB only supports the valid `utf8` characters. For invalid characters, TiDB reports the `incorrect utf8 value` error. This validity check of characters in TiDB is compatible with MySQL 8.0 but incompatible with MySQL 5.7 or earlier versions.
+If the specified character set is `utf8` or `utf8mb4`, TiDB only supports the valid `utf8` characters. For invalid characters, TiDB reports the `incorrect utf8 value` error. This validity check of characters in TiDB is compatible with MySQL 8.x but incompatible with MySQL 5.7 or earlier versions.
 
 To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the character check.
 

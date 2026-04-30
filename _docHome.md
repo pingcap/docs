@@ -82,7 +82,7 @@ Connect your application with the languages and frameworks you prefer.
 
 <DocHomeCard href="/tidb/stable/mysql-compatibility" label="MySQL Compatibility" icon="oss-mysql-blue">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x.
 
 </DocHomeCard>
 
