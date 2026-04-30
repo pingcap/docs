@@ -25,7 +25,7 @@ TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an eas
 
 ### Is TiDB Cloud compatible with MySQL?
 
-Currently, TiDB Cloud supports the majority of MySQL 5.7 and MySQL 8.0 syntax with the exception of triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
+Currently, TiDB Cloud supports the majority of MySQL 8.x syntax with the exception of triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
 ### What programming languages can I use to work with TiDB Cloud?
 

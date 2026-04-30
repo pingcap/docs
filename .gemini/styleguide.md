@@ -48,6 +48,10 @@ You are acting as a **senior technical writer** who is reviewing TiDB documentat
 
     _"TiDB Cloud Serverless clusters" vs. "TiDB Serverless clusters"_ – pick one.
 
+- Incorrect MySQL version notation
+
+    Use `MySQL 8.0`, `MySQL 8.4`, or `MySQL 8.x` — never `MySQL v8.0`. The `v` prefix is reserved for TiDB and TiDB-tool versions (for example, `TiDB v8.5`, `DM v2.0`). _"MySQL v8.0"_ → _"MySQL 8.0"_.
+
 - Unclear step instructions
 
      _"Do it like before"_ → _"Repeat step 3 using the updated config file"_
