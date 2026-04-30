@@ -135,7 +135,7 @@ In this step, you will set up a connector that connects to {{{ .lake }}}.
     }
     ```
 
-4. In the **Networking** step, enter your {{{ .lake }}} warehouse endpoint, such as `xxxxxxxxx--xxx.gw.aws-us-east-2.default.databend.com`.
+4. In the **Networking** step, enter your {{{ .lake }}} warehouse endpoint, such as `xxxxxxxxx--xxx.gw.aws-us-east-2.default.tidbcloud.com`.
 
 5. In the **Sizing** step, set it to **1 task**.
 

@@ -56,7 +56,7 @@ CREATE USER metrics IDENTIFIED BY 'metrics_password';
     | ------------------- | ------------------------------------------------ | ------------------------------------------------- |
     | `<USERNAME>`        | The username for the SQL user.                   | `metrics`                                         |
     | `<PASSWORD>`        | The secure password for the SQL user.            | `metrics_password`                                |
-    | `<TENANT_ENDPOINT>` | The endpoint URL for your {{{ .lake }}} tenant. | `tnxxxxxxx.gw.aws-us-east-2.default.databend.com` |
+    | `<TENANT_ENDPOINT>` | The endpoint URL for your {{{ .lake }}} tenant. | `tnxxxxxxx.gw.aws-us-east-2.default.tidbcloud.com` |
     | `<TENANT_ID>`       | Your tenant's unique identifier.                 | `tnxxxxxxx`                                       |
     | `<PLATFORM>`        | The cloud platform hosting the tenant.           | `aws`                                             |
     | `<REGION>`          | The region where the tenant is hosted.           | `us-east-2`                                       |

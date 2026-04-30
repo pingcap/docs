@@ -103,7 +103,7 @@ CREATE    TABLE databend_topic (
 
     ```bash
     Welcome to BendSQL 0.19.2-1e338e1(2024-07-17T09:02:28.323121000Z).
-    Connecting to tn3ftqihs--eric.gw.aws-us-east-2.default.databend.com:443 with warehouse eric as user cloudapp
+    Connecting to tn3ftqihs--eric.gw.aws-us-east-2.default.tidbcloud.com:443 with warehouse eric as user cloudapp
     Connected to Databend Query v1.2.626-nightly-a055124b65(rust-1.81.0-nightly-2024-08-27T15:49:08.376336236Z)
     
     cloudapp@(eric)/doc> SELECT * FROM databend_topic;

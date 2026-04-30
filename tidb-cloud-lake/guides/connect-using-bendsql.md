@@ -194,7 +194,7 @@ databend[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&ar
 lake://root:@localhost:8000/?sslmode=disable&presign=detect
 
 # {{{ .lake }}} connection with tenant and warehouse info
-lake://user1:password1@tnxxxx--default.gw.aws-us-east-2.default.databend.com:443/benchmark?enable_dphyp=1
+lake://user1:password1@tnxxxx--default.gw.aws-us-east-2.default.tidbcloud.com:443/benchmark?enable_dphyp=1
 
 # Local connection using FlightSQL API
 lake+flight://root:@localhost:8900/database1?connect_timeout=10
@@ -211,7 +211,7 @@ The best practice for connecting to {{{ .lake }}} is to obtain your DSN from {{{
 3. Your DSN will be automatically generated in the **Examples** section. Below the DSN, you'll find a BendSQL snippet that exports the DSN as an environment variable named `BENDSQL_DSN` and launches BendSQL with the correct configuration. You can copy and paste it directly into your terminal.
 
     ```bash title='Example'
-    export BENDSQL_DSN="lake://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.databend.com:443/information_schema?warehouse=small-xy2t"
+    export BENDSQL_DSN="lake://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.tidbcloud.com:443/information_schema?warehouse=small-xy2t"
     bendsql
     ```
 
