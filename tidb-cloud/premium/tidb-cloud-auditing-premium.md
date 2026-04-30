@@ -177,7 +177,6 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 
 5. 复制 **Role ARN**（例如：`acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`）以供后续使用。
 
-请提供保持所有格式和结构不变的翻译内容。
 #### Step 3. 启用审计日志 {#step-3-enable-audit-logging}
 
 在 TiDB Cloud 控制台中，返回到你获取 TiDB Cloud account ID 时所在的 **Database Audit Log Storage Configuration** 对话框，然后执行以下步骤：

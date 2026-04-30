@@ -85,5 +85,3 @@ summary: 了解在 TiDB Cloud 为 TiDB X 实例引入独立项目类型后，为
 | You hardcode `project_id` for {{{ .starter }}} or Essential instances | 使用 `labels["tidb.cloud/project"]` 的动态查找替换硬编码值。 |
 | You create projects and need to target TiDB X instances | 在 `POST /api/v1beta/projects` 的请求体中传入 `"type": "tidbx"`。 |
 | You filter projects by type | 开始从 `GET /api/v1beta/projects` 响应中读取 `type` 字段。 |
-
-请提供保持所有格式和结构不变的翻译内容。
