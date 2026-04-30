@@ -11,9 +11,11 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 
 > **注意：**
 >
-> 目前，告警订阅仅适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> 目前，告警订阅适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例、[TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 实例和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
 ## 查看告警
+
+<CustomContent plan="essential,dedicated">
 
 在 TiDB Cloud 中，你可以在 **Alerts** 页面查看活跃和已关闭的告警。
 
@@ -27,6 +29,25 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 3. 在左侧导航栏点击 **Alerts**。
 4. **Alerts** 页面默认显示活跃告警。你可以查看每个活跃告警的信息，如告警名称、触发时间和持续时间。
 5. 如果你还想查看已关闭的告警，只需点击 **Status** 下拉列表并选择 **Closed** 或 **All**。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+在 TiDB Cloud 中，你可以在 **Alerts** 页面查看活跃和已关闭的告警。
+
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，导航到 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
+
+    > **提示：**
+    >
+    > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
+
+2. 点击目标 {{{ .premium }}} 实例的名称，进入其概览页面。
+3. 在左侧导航栏点击 **Alerts**。
+4. **Alerts** 页面默认显示活跃告警。你可以查看每个活跃告警的信息，如告警名称、触发时间和持续时间。
+5. 如果你还想查看已关闭的告警，只需点击 **Status** 下拉列表并选择 **Closed** 或 **All**。
+
+</CustomContent>
 
 ## 编辑告警规则
 
@@ -101,7 +122,7 @@ TiDB Cloud 会根据不同的 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tie
 
 </CustomContent>
 
-<CustomContent plan="essential">
+<CustomContent plan="essential, premium">
 
 ### 性能总览告警
 
@@ -113,7 +134,7 @@ TiDB Cloud 会根据不同的 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tie
 | Query P95 延时超过 200 ms | <ol><li>排查慢 query：进入 Slow Query 页面，按最近时间范围筛选，定位新引入或运行变慢的 query。</li><li>回顾近期变更，如应用部署、schema 变更或数据导入任务，这些可能影响流量模式。</li></ol><br/>如果无法定位根因，请立即联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。|
 | 请求错误率超过 10%  | 检查集群近期错误和整体语句执行情况。|
 
-### TiDB Cloud Essential 的 Changefeed 告警
+### TiDB Cloud Essential 和 TiDB Cloud Premium 的 Changefeed 告警 {#changefeed-alerts-for-essential-and-premium}
 
 | 条件                                   | 推荐操作                   |
 |:----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

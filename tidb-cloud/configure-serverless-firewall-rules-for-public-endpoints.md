@@ -45,13 +45,27 @@ TiDB Cloud 会定期更新该列表，并使用保留 IP 地址 **169.254.65.87*
 
 2. 在左侧导航栏，点击 **Settings** > **Networking**。
 
-3. 在 **Networking** 页面，如果 **Public Endpoint** 处于禁用状态，请先启用。在 **Authorized Networks** 区域，点击 **+ Add Current IP**。这会自动使用 TiDB Cloud 识别到的你电脑的公网 IP 地址创建一条防火墙规则。
+3. 在 **Networking** 页面，如果 **Public Endpoint** 处于禁用状态，请先启用。
 
-    > **注意：**
-    >
-    > 在某些情况下，TiDB Cloud 控制台检测到的 IP 地址与你实际访问互联网时使用的 IP 地址不同。因此，你可能需要更改起始和结束 IP 地址，以确保规则按预期生效。你可以使用搜索引擎或其他在线工具查询自己的 IP 地址。例如，搜索 “what is my IP”。
+4. （可选）对于新创建的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例，TiDB Cloud 默认启用 **Allow_all_public_connections**。如果你想将访问限制为特定 IP 地址或地址范围，请点击 **Allow_all_public_connections** 所在行中的 **...**，然后点击 **Delete**。
 
-4. 点击 **Add rule** 以添加更多地址范围。在弹出的窗口中，你可以指定单个 IP 地址或一段 IP 地址范围。如果你只想允许单个 IP 地址访问，请在 **Start IP Address** 和 **End IP Address** 字段中输入相同的 IP 地址。开启防火墙后，管理员、用户和应用程序可以使用有效凭证访问实例上的任意数据库。点击 **Submit** 添加防火墙规则。
+5. 在 **Authorized Networks** 区域，点击 **Add rule**，然后添加你想要允许的 IP 地址或 IP 地址范围。
+
+    - 若要添加你当前电脑的 IP 地址，点击 **Add Current IP**。这会自动使用 TiDB Cloud 识别到的你电脑的公网 IP 地址创建一条防火墙规则。
+
+        > **注意：**
+        >
+        > TiDB Cloud 控制台识别到的 IP 地址可能与你的数据库客户端使用的 IP 地址不同。如果规则未按预期生效，请调整起始和结束 IP 地址。你可以使用搜索引擎或在线工具查询你的公网 IP 地址。例如，搜索 “what is my IP”。
+
+    - 如果你的 TiDB Cloud Starter 或 Essential 实例托管在 AWS 上，若要允许所有 AWS IP 地址访问，请点击 **Add AWS Access**。这会自动创建一条包含所有 AWS IP 范围的防火墙规则。TiDB Cloud 使用保留 IP 地址 **169.254.65.87** 表示 AWS IP 范围，并根据官方的 [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html) 定期更新该列表。
+
+    - 若要添加更多地址范围，请指定单个 IP 地址或一段 IP 地址范围。如果你只想将规则限制为单个 IP 地址，请在 **Start IP Address** 和 **End IP Address** 字段中输入相同的 IP 地址。
+
+        > **注意：**
+        >
+        > 开放防火墙后，来自指定 IP 地址或 IP 地址范围的管理员、用户和应用程序只要具有有效凭证，就可以访问你的 TiDB Cloud Starter 或 Essential 实例上的任意数据库。
+
+6. 点击 **Save**。
 
 ## 后续操作
 

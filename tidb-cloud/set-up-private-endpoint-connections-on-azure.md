@@ -77,23 +77,72 @@ Azure Private Link 的架构如下所示：[^1]
     >
     > 对于每个 TiDB Cloud Dedicated 集群，相关的终端节点服务会在集群创建后 3 到 4 分钟内自动创建。
 
-2. 登录 [Azure portal](https://portal.azure.com/)，然后使用复制的 TiDB Cloud 资源 ID 为你的集群创建私有终端节点，具体步骤如下：
+2. 你可以使用 Azure portal 或 Azure CLI 创建私有终端节点。
 
-    1. 在 Azure portal 中，搜索 **Private endpoints**，然后在结果中选择 **Private endpoints**。
-    2. 在 **Private endpoint** 页面，点击 **+ Create**。
-    3. 在 **Basics** 标签页，填写项目和实例信息，然后点击 **Next: Resource**。
-    4. 在 **Resource** 标签页，将 **connection method** 选择为 **Connect to an Azure resource by resource ID or alias**，并将 TiDB Cloud 资源 ID 粘贴到 **Resource ID or alias** 字段。
-    5. 继续点击 **Next**，完成剩余配置标签页的必填项。然后点击 **Create** 创建并部署私有终端节点。Azure 可能需要几秒钟完成部署。更多信息请参见 Azure 文档 [创建私有终端节点](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)。
+<SimpleTab>
+<div label="使用 Azure portal">
 
-3. 私有终端节点创建并部署完成后，点击 **Go to resource**，然后执行以下操作：
+1. 登录 [Azure portal](https://portal.azure.com/)。
+2. 搜索 **Private endpoints**，然后在结果中选择 **Private endpoints**。
+3. 在 **Private endpoint** 页面，点击 **+ Create**。
+4. 在 **Basics** 标签页，填写项目和实例信息，然后点击 **Next: Resource**。
+5. 在 **Resource** 标签页，将 **connection method** 选择为 **Connect to an Azure resource by resource ID or alias**，并将复制的 TiDB Cloud 资源 ID 粘贴到 **Resource ID or alias** 字段。
+6. 继续点击 **Next**，完成剩余配置标签页的必填项。然后点击 **Create** 创建并部署私有终端节点。Azure 可能需要几秒钟完成部署。更多信息请参见 Azure 文档 [创建私有终端节点](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint)。
+7. 私有终端节点创建并部署完成后，点击 **Go to resource**，然后执行以下操作：
 
-     - 点击左侧导航栏的 **Settings** > **Properties**，复制其 **Resource ID** 以备后用。
+    - 点击左侧导航栏的 **Settings** > **Properties**，复制其 **Resource ID** 以备后用。
 
-         ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
+        ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-     - 点击左侧导航栏的 **Settings** > **DNS configuration**，复制其 **IP address** 以备后用。
+    - 点击左侧导航栏的 **Settings** > **DNS configuration**，复制其 **IP address** 以备后用。
 
-         ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+        ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+
+</div>
+<div label="使用 Azure CLI">
+
+1. 登录 Azure CLI 并选择你的订阅：
+
+    ```bash
+    az login
+    az account set --subscription ${your_subscription_id}
+    ```
+
+2. 使用你从 **Create Azure Private Endpoint Connection** 对话框中复制的 TiDB Cloud 资源 ID 创建私有终端节点：
+
+    ```bash
+    az network private-endpoint create \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --vnet-name ${your_vnet_name} \
+      --subnet ${your_subnet_name} \
+      --private-connection-resource-id "${your_tidb_cloud_resource_id}" \
+      --connection-name ${your_private_endpoint_connection_name} \
+      --location ${your_region}
+    ```
+
+3. 获取私有终端节点的 **Resource ID**：
+
+    ```bash
+    az network private-endpoint show \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --query "id" \
+      --output tsv
+    ```
+
+4. 从 DNS 配置中获取私有终端节点的 **IP address**：
+
+    ```bash
+    az network private-endpoint show \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --query "customDnsConfigs[0].ipAddresses[0]" \
+      --output tsv
+    ```
+
+</div>
+</SimpleTab>
 
 ### Step 3. 接受终端节点
 
