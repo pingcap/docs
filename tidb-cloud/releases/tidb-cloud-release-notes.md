@@ -23,6 +23,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - Compared with TiDB Cloud Essential, TiDB Cloud Premium delivers significantly stronger isolation across the compute, storage, and network layers, ensuring predictable performance for critical workloads. At the same time, it retains an elastic, on-demand scaling model, allowing compute capacity to scale independently without operational overhead.
         - Compared with TiDB Cloud Dedicated, TiDB Cloud Premium improves cost efficiency by eliminating idle headroom, so you only pay for the performance you actually use.
 
+      For more information about TiDB Cloud Premium, see [TiDB Cloud Premium: Public Preview for Mission-Critical SQL](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/).
+
       To try TiDB Cloud Premium, go to the [TiDB Cloud console](https://tidbcloud.com/), click **Create Resource**, and select **Premium** as your plan. For more information, see [Create a TiDB Cloud Premium instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
 
 - **TiDB Cloud Dedicated**
