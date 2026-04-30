@@ -96,7 +96,7 @@ Because the number of failed attempts and lock status of accounts need to be glo
 The password reuse policies of TiDB and MySQL have the following differences:
 
 - MySQL 5.7 does not support password reuse management.
-- MySQL 8.0 supports password reuse management.
+- MySQL 8.x supports password reuse management.
 - TiDB supports password reuse management starting from v6.5.0.
 
 The implementation mechanisms are consistent between TiDB and MySQL. Both use the `mysql.password_history` system table to implement the password reuse management feature. However, when deleting a user that does not exist in the `mysql.user` system table, TiDB and MySQL have different behaviors:
