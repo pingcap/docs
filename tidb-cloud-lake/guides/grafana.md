@@ -73,7 +73,7 @@ Every column except the timestamp and line column becomes a LogQL label.
 1. Log in to your {{{ .lake }}} account.
 
 2. On the dashboard, click **Connect** to view the connection information. Note down:
-   - **Host**: The warehouse endpoint (e.g., `tnxxxxxxx.gw.aws-us-east-2.default.databend.com`)
+   - **Host**: The warehouse endpoint (e.g., `tnxxxxxxx.gw.aws-us-east-2.default.tidbcloud.com`)
    - **User**: Your username (typically `cloudapp`)
    - **Password**: Your password or API key
    - **Database**: The database name containing your log table
@@ -165,7 +165,7 @@ allow_loading_unsigned_plugins = databend-datasource
 
 3. Input the `DSN` field for your {{{ .lake }}} instance. For example:
 
-    {{{ .lake }}}: `lake://cloudapp:******@tnxxxxxxx.gw.aws-us-east-2.default.databend.com:443/default?warehouse=xsmall-fsta`
+    {{{ .lake }}}: `lake://cloudapp:******@tnxxxxxxx.gw.aws-us-east-2.default.tidbcloud.com:443/default?warehouse=xsmall-fsta`
 
 4. Optionally, input the `SQL User Password` field to override the password in the `DSN` field.
 
