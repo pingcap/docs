@@ -76,10 +76,6 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 确保你的 {{{ .premium }}} 实例可以连接到 MySQL service。
 
-> **注意：**
->
-> 目前，TiDB Cloud Premium 实例的 VPC Peering 功能仅支持按需申请。若需申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写“Apply for VPC Peering for TiDB Cloud Premium instance”，并点击 **Submit**。
-
 私有 endpoint 利用云服务商的 **Private Link** 或 **Private Service Connect** 技术，使你 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 的 service，就像这些 service 直接托管在你的 VPC 内一样。
 
 你可以通过私有 endpoint，将 {{{ .premium }}} 实例安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置私有 endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) 创建一个。

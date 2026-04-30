@@ -104,7 +104,7 @@ wrangler secret put <DATABASE_URL>
 在你的项目目录下，运行以下命令：
 
 ```
-npx wrangler publish
+npx wrangler deploy
 ```
 
 ## 步骤 6：尝试你的 Cloudflare Workers

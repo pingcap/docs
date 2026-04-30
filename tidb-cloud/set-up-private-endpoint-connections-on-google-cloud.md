@@ -117,14 +117,36 @@ Google Cloud Private Service Connect 的架构如下所示：[^1]
     - **Google Cloud Subnet Name**：指定 VPC 下的子网名称。你可以在 **VPC network details** 页面找到。
     - **Private Service Connect Endpoint Name**：为将要创建的私有端点输入一个唯一名称。
 2. 输入信息后，点击 **Generate Command**。
-3. 复制生成的命令。
-4. 打开 [Google Cloud Shell](https://console.cloud.google.com/home/dashboard)，执行该命令以创建私有端点。
+3. 使用 Google Cloud CLI 或 Google Cloud 控制台创建私有端点。
+
+<SimpleTab>
+<div label="Use Google Cloud CLI">
+
+1. 复制生成的命令。
+2. 打开 [Google Cloud Shell](https://console.cloud.google.com/home/dashboard)，执行该命令以创建私有端点。
+
+</div>
+<div label="Use Google Cloud console">
+
+1. 在 [Google Cloud 控制台](https://console.cloud.google.com/)中，确保当前项目与你在 TiDB Cloud 中输入的 **Google Cloud Project ID** 相同。
+2. 前往 **VPC network** > **Private Service Connect** > **Connected endpoints**，然后点击 **Connect endpoint**。
+3. 使用 TiDB Cloud 中生成的命令里的值配置端点：
+    - **Endpoint name**：使用命令中的转发规则名称。
+    - **Target**：选择 **Published service**，然后输入 `--target-service-attachment` 中的服务附件 URI。
+    - **Region**：选择命令中的区域。
+    - **Network**：从 `--network` 中选择你的 VPC 网络。
+    - **Subnetwork**：从 `--subnet` 中选择你的子网。
+4. 点击 **Add endpoint** 创建端点。
+5. 在 **Connected endpoints** 中，确认新端点已创建并记录其端点名称。
+
+</div>
+</SimpleTab>
 
 ### Step 3. 接受端点访问
 
-在 Google Cloud Shell 成功执行命令后，返回 TiDB Cloud 控制台，点击 **Accept Endpoint Access**。
+在 Google Cloud 中成功创建端点后，返回 TiDB Cloud 控制台，然后点击 **Accept Endpoint Access**。
 
-如果你看到错误 `not received connection request from endpoint`，请确保你已正确复制命令并在 Google Cloud Shell 中成功执行。
+如果你看到错误 `not received connection request from endpoint`，请确保你已在 Google Cloud 项目中成功创建端点，并且其配置与生成的命令一致。
 
 ### Step 4. 连接到你的 TiDB 集群
 

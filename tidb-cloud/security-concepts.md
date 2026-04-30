@@ -122,8 +122,8 @@ TiDB Cloud 通过分层结构（组织、项目和资源）管理用户和资源
 - 在 TiDB Cloud 中，项目分为三种类型：
 
     - **TiDB Dedicated project**：仅适用于 {{{ .dedicated }}} 集群的项目类型。Dedicated 项目管理项目范围内的设置，例如网络、维护、告警订阅、集成以及与加密相关的访问控制。
-    - **TiDB X project**：用于容纳 <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} 和 Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}、Essential 和 Premium</CustomContent> 实例的逻辑容器。TiDB X 项目用于对资源进行分组并应用项目级 RBAC，但不包含 Dedicated 专属的基础设施设置。
-    - **TiDB X virtual project**：用于容纳未分组到任何 TiDB X project 中的 <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} 和 Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}、Essential 和 Premium</CustomContent> 实例的虚拟项目。此项目类型仅用于 API 兼容性，不提供任何管理能力。
+    - **TiDB X project**：用于容纳 TiDB X 实例（包括 {{{ .starter }}}、Essential 和 Premium 实例）的逻辑容器。TiDB X 项目用于对资源进行分组并应用项目级 RBAC，但不包含 Dedicated 专属的基础设施设置。
+    - **TiDB X virtual project**：用于容纳未分组到任何 TiDB X project 中的 TiDB X 实例的虚拟项目。此项目类型仅用于 API 兼容性，不提供任何管理能力。
 
 **Resources**
 
@@ -225,6 +225,8 @@ TiDB Cloud 通过强大的网络访问控制，确保连接和数据传输的安
 
 TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合行业法规。
 
+<CustomContent plan="starter,essential,dedicated">
+
 **Customer-Managed Encryption Key (CMEK)**
 
 - 为组织提供对 TiDB Cloud Dedicated 集群加密的完全控制权。
@@ -242,6 +244,22 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 - 针对如 HIPAA 和 GDPR 等有严格合规要求的行业，建议使用 CMEK。
 
 详细信息参见 [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) 和 [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+**Dual-Layer Data Encryption**
+
+- 结合存储层加密（由云服务提供商提供）和数据库层加密，为托管在 AWS 上的 {{{ .premium }}} 实例增加一层额外的静态数据保护。
+
+- 启用后，对 TiKV 存储的数据、changefeed 数据和备份数据进行加密。
+
+- 可根据你的安全和运维需求，在 Customer-Managed Encryption Key (CMEK) 和 Service-Managed Encryption Key 之间进行选择。
+
+详细信息参见 [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)。
+
+</CustomContent>
 
 ## Audit logging
 
