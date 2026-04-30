@@ -38,11 +38,11 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
 -   **リアルタイム分析**
 
-    内蔵の分析エンジンにより、リアルタイムの分析クエリ結果を取得できます。TiDB TiDB Cloudは、ミッションクリティカルなアプリケーションに影響を与えることなく、最新データに対して一貫した分析クエリを実行します。
+    内蔵の分析エンジンにより、リアルタイムの分析クエリ結果を取得できます。TiDB Cloudは、ミッションクリティカルなアプリケーションに影響を与えることなく、最新データに対して一貫した分析クエリを実行します。
 
 -   **エンタープライズグレードのSecurity**
 
-    専用ネットワークと専用マシンでデータをセキュリティ。転送中および保存時の暗号化にも対応しています。TiDB TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701の認証を取得しており、GDPRにも完全に準拠しています。
+    専用ネットワークと専用マシンでデータをセキュリティ。転送中および保存時の暗号化にも対応しています。TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701の認証を取得しており、GDPRにも完全に準拠しています。
 
 -   **フルマネージドサービス**
 
@@ -52,13 +52,13 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
     <CustomContent language="en,zh">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud、およびAlibaba Cloudで利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB Cloudは現在、AWS、Azure、Google Cloud、およびAlibaba Cloudで利用可能です。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloudで利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB Cloudは現在、AWS、Azure、Google Cloudで利用可能です。
 
     </CustomContent>
 
