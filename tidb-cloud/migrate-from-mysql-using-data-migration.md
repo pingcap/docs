@@ -498,7 +498,7 @@ For production workloads, it is recommended to have a dedicated user for replica
 For example, you can execute the following `GRANT` statement in your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to grant corresponding privileges:
 
 ```sql
-GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON *.* TO 'dm_target_user'@'%';
 ```
 
 ## Step 1: Go to the Data Migration page
