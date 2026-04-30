@@ -1632,7 +1632,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **注意：**
 >
-> 对于 [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options)，该变量为只读。
+> 对于 [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium)，该变量为只读。
 
 </CustomContent>
 
@@ -5632,7 +5632,7 @@ SHOW WARNINGS;
 
 > **注意：**
 >
-> 对于 [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options)，该变量为只读。
+> 对于 [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium)，该变量为只读。
 
 </CustomContent>
 
