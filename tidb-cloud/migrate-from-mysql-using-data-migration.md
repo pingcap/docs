@@ -122,12 +122,12 @@ To prevent this, create the target tables in the downstream database before star
 
 <CustomContent plan="essential">
 
-- During incremental data migration (migrating ongoing changes to your {{{ .essential }}} instance), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target {{{ .essential }}} instance to ensure that all the data during the abrupt error has been migrated smoothly to the target {{{ .essential }}} instance. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target {{{ .essential }}} instance because the data might be inserted repeatedly into the target {{{ .essential }}} instance.
+- During incremental data migration (migrating ongoing changes to your {{{ .essential }}} instance), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .essential }}} instance so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .essential }}} instance.
 
 </CustomContent>
 <CustomContent plan="dedicated">
 
-- During incremental data migration (migrating ongoing changes to your {{{ .dedicated }}} cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target {{{ .dedicated }}} cluster to ensure that all the data during the abrupt error has been migrated smoothly to the target {{{ .dedicated }}} cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target {{{ .dedicated }}} cluster because the data might be inserted repeatedly into the target {{{ .dedicated }}} cluster.
+- During incremental data migration (migrating ongoing changes to your {{{ .dedicated }}} cluster), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .dedicated }}} cluster so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .dedicated }}} cluster.
 
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database. This allows Data Migration to get consecutive binary logs for incremental data migration:
 
@@ -138,7 +138,7 @@ To prevent this, create the target tables in the downstream database before star
 
 <CustomContent plan="premium">
 
-- During incremental data migration (migrating ongoing changes to your {{{ .premium }}} instance), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target {{{ .premium }}} instance to ensure that all the data during the abrupt error has been migrated smoothly to the target {{{ .premium }}} instance. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target {{{ .premium }}} instance because the data might be inserted repeatedly into the target {{{ .premium }}} instance.
+- During incremental data migration (migrating ongoing changes to your {{{ .premium }}} instance), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .premium }}} instance so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .premium }}} instance.
 
 </CustomContent>
 
@@ -734,7 +734,7 @@ You can use **physical mode** or **logical mode** to migrate **existing data** a
 > **Note:**
 >
 > - When you use physical mode, you cannot create a second migration job or import task for the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> before the existing data migration is completed.
-> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 Physical mode exports the MySQL source data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the MySQL source database during data export. The following table shows the performance regression of each specification.
 
