@@ -20,7 +20,7 @@ This document guides you through migrating your MySQL databases from Amazon Auro
 
 > **Note:**
 >
-> Currently, the Data Migration feature is in Public Preview for {{{ .premium }}}. For a {{{ .premium }}}-focused overview, see [Migrate Data to {{{ .premium }}} Using Data Migration](/tidb-cloud/premium/premium-data-migration.md).
+> Currently, the Data Migration feature is in public preview for {{{ .premium }}}.
 
 </CustomContent>
 
@@ -41,6 +41,15 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 </CustomContent> 
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
+
+<CustomContent plan="premium">
+
+- The Data Migration feature for {{{ .premium }}} is in public preview.
+
+    - You cannot save or reuse source connection details across migration jobs.
+    - During public preview, additional restrictions might apply to migration jobs as the feature matures. For more information, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 ### Maximum number of migration jobs
 
@@ -96,7 +105,7 @@ To prevent this, create the target tables in the downstream database before star
 
 <CustomContent plan="premium">
 
-- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports rows as SQL statements and replays them on the target instance, consuming Request Capacity Units (RCUs) on the target during the load. Physical mode uses `IMPORT INTO` on the target instance and is recommended for large datasets where load throughput and cost are priorities.
+- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports rows as SQL statements and replays them on the target {{{ .premium }}} instance, consuming Request Capacity Units (RCUs) during the load. Physical mode uses `IMPORT INTO` on the target {{{ .premium }}} instance, which is recommended for large datasets where load throughput and cost are priorities.
 - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 - When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
 
@@ -119,6 +128,12 @@ To prevent this, create the target tables in the downstream database before star
 
     - During the existing data migration.
     - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0 ms.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+- During incremental data migration (migrating ongoing changes to your {{{ .premium }}} instance), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target {{{ .premium }}} instance to ensure that all the data during the abrupt error has been migrated smoothly to the target {{{ .premium }}} instance. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target {{{ .premium }}} instance because the data might be inserted repeatedly into the target {{{ .premium }}} instance.
 
 </CustomContent>
 

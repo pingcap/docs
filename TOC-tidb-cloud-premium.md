@@ -134,9 +134,6 @@
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
   - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
   - [Export Data from {{{ .premium }}}](/tidb-cloud/premium/premium-export.md)
-  - [Migrate Data to {{{ .premium }}} Using Data Migration](/tidb-cloud/premium/premium-data-migration.md)
-  - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-  - [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
   - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -205,6 +202,8 @@
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
+    - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
     - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)

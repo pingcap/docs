@@ -15,6 +15,14 @@ This document describes how to migrate incremental data from a MySQL-compatible 
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> Currently, the Data Migration feature is in public preview for {{{ .premium }}}.
+
+</CustomContent>
+
 For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 ## Limitations
@@ -162,7 +170,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - **Data source**: the data source type.
     - **Region**: the region of the data source, which is required for cloud databases only.
-    - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent>
+    - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent><CustomContent plan="premium">You can choose Public or Private Link (AWS only) according to your connection method.</CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -174,6 +182,12 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - **Hostname or IP address** (for public IP): the hostname or IP address of the data source.
     - **Private Link Connection** (for Private Link): the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
+
+    </CustomContent>
+    <CustomContent plan="premium">
+
+    - **Hostname or IP address** (for Public): the hostname or IP address of the data source.
+    - **Private Endpoint** (for Private Link): the Private Endpoint that you created in **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance, or click **Create a Private Endpoint here** to create one inline. For setup details, see the [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) section in the Data Migration guide.
 
     </CustomContent>
 
@@ -203,6 +217,13 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="essential">
 
     If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+    - If you use **Private Link** and the selected Private Endpoint is not yet accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 
