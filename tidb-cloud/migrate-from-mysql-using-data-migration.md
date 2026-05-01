@@ -87,6 +87,19 @@ During full data migration, PolarDB-X schemas might contain keywords that are in
 To prevent this, create the target tables in the downstream database before starting the migration process.
 
 </CustomContent>
+<CustomContent plan="premium">
+
+### Limitations of Alibaba Cloud RDS
+
+When using Alibaba Cloud RDS as a data source, every table must have an explicit primary key. For tables without one, RDS appends a hidden primary key to the binlog, which leads to a schema mismatch with the source table and causes the migration to fail.
+
+### Limitations of Alibaba Cloud PolarDB-X
+
+During full data migration, PolarDB-X schemas might contain keywords that are incompatible with the downstream database, causing the import to fail.
+
+To prevent this, create the target tables in the downstream database before starting the migration process.
+
+</CustomContent>
 
 ### Limitations of existing data migration
 
@@ -113,7 +126,16 @@ To prevent this, create the target tables in the downstream database before star
 
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> with the MySQL source records.
+<CustomContent plan="dedicated">
+
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target {{{ .dedicated }}} cluster with the MySQL source records.
+
+</CustomContent>
+<CustomContent plan="essential">
+
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target {{{ .essential }}} instance with the MySQL source records.
+
+</CustomContent>
 
 <CustomContent plan="essential">
 
