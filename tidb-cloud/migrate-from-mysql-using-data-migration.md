@@ -74,8 +74,6 @@ You can create up to 100 migration jobs on {{{ .essential }}} instances for each
 
 </CustomContent>
 
-<CustomContent plan="essential">
-
 ### Limitations of Alibaba Cloud RDS
 
 When using Alibaba Cloud RDS as a data source, every table must have an explicit primary key. For tables without one, RDS appends a hidden primary key to the binlog, which leads to a schema mismatch with the source table and causes the migration to fail.
@@ -85,21 +83,6 @@ When using Alibaba Cloud RDS as a data source, every table must have an explicit
 During full data migration, PolarDB-X schemas might contain keywords that are incompatible with the downstream database, causing the import to fail.
 
 To prevent this, create the target tables in the downstream database before starting the migration process.
-
-</CustomContent>
-<CustomContent plan="premium">
-
-### Limitations of Alibaba Cloud RDS
-
-When using Alibaba Cloud RDS as a data source, every table must have an explicit primary key. For tables without one, RDS appends a hidden primary key to the binlog, which leads to a schema mismatch with the source table and causes the migration to fail.
-
-### Limitations of Alibaba Cloud PolarDB-X
-
-During full data migration, PolarDB-X schemas might contain keywords that are incompatible with the downstream database, causing the import to fail.
-
-To prevent this, create the target tables in the downstream database before starting the migration process.
-
-</CustomContent>
 
 ### Limitations of existing data migration
 
