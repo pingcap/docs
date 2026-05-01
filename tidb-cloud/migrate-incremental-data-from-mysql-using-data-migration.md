@@ -5,13 +5,21 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 # Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS) or self-hosted source database to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent> using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS) or self-hosted source database to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> using the Data Migration feature of the TiDB Cloud console.
 
 <CustomContent plan="essential">
 
 > **Note:**
 >
 > Currently, the Data Migration feature is in beta for {{{ .essential }}}.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> Currently, the Data Migration feature is in public preview for {{{ .premium }}}.
 
 </CustomContent>
 
@@ -148,7 +156,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -162,7 +170,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - **Data source**: the data source type.
     - **Region**: the region of the data source, which is required for cloud databases only.
-    - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent>
+    - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent><CustomContent plan="premium">You can choose Public or Private Link (AWS only) according to your connection method.</CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -176,6 +184,12 @@ On the **Create Migration Job** page, configure the source and target connection
     - **Private Link Connection** (for Private Link): the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
 
     </CustomContent>
+    <CustomContent plan="premium">
+
+    - **Hostname or IP address** (for Public): the hostname or IP address of the data source.
+    - **Private Endpoint** (for Private Link): the Private Endpoint that you created in **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance, or click **Create a Private Endpoint here** to create one inline. For setup details, see the [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) section in the Data Migration guide.
+
+    </CustomContent>
 
     - **Port**: the port of the data source.
     - **Username**: the username of the data source.
@@ -187,7 +201,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-   - **Username**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent>.
+   - **Username**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
    - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
@@ -203,6 +217,13 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="essential">
 
     If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+    - If you use **Private Link** and the selected Private Endpoint is not yet accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 
