@@ -159,7 +159,7 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 <CustomContent plan="premium">
 
-For {{{ .premium }}}, the Data Migration feature supports any MySQL-compatible source database. The wizard exposes a single source-engine option (**MySQL**); to migrate from a managed MySQL service, connect via the public endpoint of the managed instance.
+For {{{ .premium }}}, the Data Migration feature supports any MySQL-compatible source database. The wizard exposes a single source-engine option (**MySQL**). For supported connection methods, see [Ensure network connectivity](#ensure-network-connectivity).
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
@@ -309,6 +309,16 @@ For {{{ .essential }}}, the available connection methods are as follows:
 | Private links or private endpoints | AWS and Alibaba Cloud only | Production workloads without exposing data to the public internet |
 
 </CustomContent>
+<CustomContent plan="premium">
+
+For {{{ .premium }}}, the available connection methods are as follows:
+
+| Connection method | Availability | Recommended for |
+|:---------------------|:-------------|:----------------|
+| Public endpoints or IP addresses | All cloud providers supported by {{{ .premium }}} | Quick proof-of-concept migrations, testing, or when private connectivity is unavailable |
+| Private Link | AWS only | Production workloads without exposing data to the public internet |
+
+</CustomContent>
 
 Choose a connection method that best fits your cloud provider, network topology, and security requirements, and then follow the setup instructions for that method.
 
@@ -416,6 +426,18 @@ To add a new private endpoint, take the following steps:
 <CustomContent plan="essential">
 
 If you use a provider-native private link or private endpoint, create a [Private Link Connection](/tidb-cloud/serverless-private-link-connection.md) for your source MySQL instance.
+
+</CustomContent>
+<CustomContent plan="premium">
+
+For {{{ .premium }}} on AWS, you can use AWS PrivateLink to connect to your source MySQL instance without exposing the database over the public internet. A Private Endpoint can be reused across multiple Data Migration jobs and Changefeeds on the same {{{ .premium }}} instance.
+
+To use PrivateLink:
+
+1. In the AWS console, create a Network Load Balancer (NLB) and publish it as an Endpoint Service for your source MySQL instance. The AWS-side setup is the same as the **Set up AWS PrivateLink and Private Endpoint for the MySQL source database** steps shown for {{{ .dedicated }}} above. After creating the Endpoint Service, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
+2. In the [TiDB Cloud console](https://tidbcloud.com/), open your {{{ .premium }}} instance, go to **Networking**, and use the **Private Endpoint for External Services** card to create a Private Endpoint with the Endpoint Service name from step 1. After the Private Endpoint becomes available, you can select it when creating a Data Migration job.
+
+You can also create the Private Endpoint inline during job creation (see [Step 2](#step-2-configure-the-source-and-target-connections)).
 
 </CustomContent>
 
@@ -567,6 +589,14 @@ On the **Create Migration Job** page, configure the source and target connection
         - **Private Link**: available for AWS and Alibaba Cloud only (recommended for production workloads requiring private connectivity).
 
     </CustomContent>
+    <CustomContent plan="premium">
+
+    - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
+
+        - **Public**: available for all cloud providers supported by {{{ .premium }}} (recommended for testing and proof-of-concept migrations).
+        - **Private Link**: available for AWS only (recommended for production workloads requiring private connectivity).
+
+    </CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -584,6 +614,14 @@ On the **Create Migration Job** page, configure the source and target connection
 
         - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, select the private link connection that you created in the [Private link or private endpoint](#private-link-or-private-endpoint) section.
+
+    </CustomContent>
+    <CustomContent plan="premium">
+
+    - Based on the selected **Connectivity method**, do the following:
+
+        - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
+        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing Private Endpoint, or click **Create a Private Endpoint here** to create one inline. Private Endpoints are managed in **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance, and can be reused across Data Migration jobs and Changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
 
     </CustomContent>
 
@@ -638,6 +676,12 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="essential">
 
     If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+
+    </CustomContent>
+    <CustomContent plan="premium">
+
+    - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+    - If you use **Private Link** and the selected Private Endpoint is not yet accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 
