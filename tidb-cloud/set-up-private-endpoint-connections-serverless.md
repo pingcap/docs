@@ -41,7 +41,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
 1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Authorize your private endpoint in TiDB Cloud](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+3. [Authorize your private endpoint in TiDB Cloud (Optional)](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
 4. [Connect to your {{{ .starter }}} or Essential instance](#step-4-connect-to-your-tidb)
 
 ### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-instance}
@@ -103,9 +103,15 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 Then you can connect to the endpoint service with the private DNS name.
 
-### Step 3. Authorize your private endpoint in TiDB Cloud
+### Step 3. Authorize your private endpoint in TiDB Cloud (Optional)
 
-After creating the AWS interface endpoint, you must add it to the allowlist of your target {{{ .starter }}} or {{{ .essential }}} instance.
+<Info>
+
+This step is optional. You only need to configure authorized networks when you want to restrict access to specific private endpoint connections. If no rules are configured, all private endpoint connections are allowed by default.
+
+</Info>
+
+After creating the AWS interface endpoint, you can add it to the allowlist of your target {{{ .starter }}} or {{{ .essential }}} instance to restrict access.
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
@@ -117,8 +123,9 @@ After creating the AWS interface endpoint, you must add it to the allowlist of y
     - **Your VPC Endpoint ID**: paste your 22-character VPC Endpoint ID from the AWS Management Console (starts with `vpce-`).
 
     > **Tip:**
-    > 
-    > To allow all Private Endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your VPC Endpoint ID** field.
+    >
+    > - If you leave the **Authorized Networks** table empty (that is, no rules are added), all private endpoint connections are allowed by default. You only need to add rules when you want to restrict access to specific private endpoint connections.
+    > - To allow all Private Endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your VPC Endpoint ID** field.
 
 5. Click **Submit**.
 
