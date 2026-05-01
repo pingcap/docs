@@ -3,7 +3,7 @@ title: 系统变量
 summary: 使用 TiDB 系统变量来优化性能或修改运行行为。
 ---
 
-# 系统变量 <!--Corresponding EN commit: c913fdf54451bceb35beb56879ebdfecb76d7e93-->
+# 系统变量
 
 TiDB 系统变量的行为与 MySQL 相似，变量的作用范围可以是会话级别有效 (Session Scope) 或全局范围有效 (Global Scope)。其中：
 
