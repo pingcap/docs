@@ -118,12 +118,15 @@ The output is as follows:
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+| Session_connect_attrs         | json                | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-81 rows in set (0.00 sec)
+82 rows in set (0.00 sec)
 ```
 
 The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
+
+The `Session_connect_attrs` column stores session connection attributes in JSON format parsed from the slow log. TiDB controls the maximum payload size written to this field using [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857).
 
 ## CLUSTER_SLOW_QUERY table
 
@@ -230,9 +233,10 @@ The output is as follows:
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+| Session_connect_attrs         | json                | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-82 rows in set (0.00 sec)
+83 rows in set (0.00 sec)
 ```
 
 When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
