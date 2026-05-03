@@ -110,6 +110,10 @@ Top-N values are values with the top N occurrences in a column or index. Top-N s
 
 TiDB records the values and occurrences of Top-N values. Here `N` is controlled by the `WITH NUM TOPN` parameter. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter, see [Manual collection](#manual-collection).
 
+> **Note:**
+>
+> When [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510), TiDB does not collect Top-N statistics for unique indexes that contain only a single column, or for the corresponding column statistics. This is because each value can occur at most once.
+
 ## Selective statistics collection
 
 This section describes how to collect statistics selectively.
