@@ -37,7 +37,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 3. (Optional) Create a Flink cluster.
 
     - Lab environment: refer to [Apache Flink First steps](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/try-flink/local_installation/) to start a Flink cluster.
-    - Production environment: refer to [Apache Kafka Deployment](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/overview/) to deploy a Flink production cluster.
+    - Production environment: refer to [Apache Flink Deployment](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/overview/) to deploy a Flink production cluster.
 
 ## Step 2. Create a Kafka changefeed
 
