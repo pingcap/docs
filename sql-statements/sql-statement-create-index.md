@@ -53,6 +53,7 @@ IndexOption ::=
 |   'COMMENT' stringLit
 |   ("VISIBLE" | "INVISIBLE")
 |   ("GLOBAL" | "LOCAL")
+|   'WHERE' Expression
 
 IndexTypeName ::=
     'BTREE'
@@ -365,6 +366,138 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 - Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
 - If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
 - For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
+
+## Partial indexes
+
+A partial index is an index built on a subset of rows in a table, defined by a conditional expression (called the predicate of the partial index). The index contains entries only for those rows that satisfy the predicate.
+
+### Create partial indexes
+
+You can create partial indexes by adding a `WHERE` clause to the index definition. For example:
+
+```sql
+CREATE TABLE t1 (c1 INT, c2 INT, c3 TEXT);
+CREATE INDEX idx1 ON t1 (c1) WHERE c2 > 10;
+```
+
+You can also create partial indexes using `ALTER TABLE`:
+
+```sql
+ALTER TABLE t1 ADD INDEX idx2 (c1, c2) WHERE c3 = 'abc';
+```
+
+Or specify the partial index when creating the table:
+
+```sql
+CREATE TABLE t2 (
+    id INT PRIMARY KEY,
+    status VARCHAR(20),
+    created_at DATETIME,
+    INDEX idx_active_status (status) WHERE status = 'active'
+);
+```
+
+### Usage examples
+
+The following examples demonstrate how to use partial indexes effectively:
+
+```sql
+-- Create a table with user data
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    status varchar(20),
+    created_at DATETIME,
+    score INT
+);
+
+-- Create partial indexes for common query patterns
+CREATE INDEX idx_active_users ON users (name) WHERE status = 'active';
+CREATE INDEX idx_high_score_users ON users (created_at) WHERE score > 1000;
+CREATE INDEX idx_pending_status ON users (created_at) WHERE status = 'pending';
+```
+
+Then the following queries can use the partial index:
+
+```
+mysql> explain SELECT * FROM users WHERE status = 'active' AND name = 'John';
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+| id                            | estRows | task      | access object                             | operator info                                         |
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+| IndexLookUp_9                 | 1.00    | root      |                                           |                                                       |
+| ├─IndexRangeScan_6(Build)     | 10.00   | cop[tikv] | table:users, index:idx_active_users(name) | range:["John","John"], keep order:false, stats:pseudo |
+| └─Selection_8(Probe)          | 1.00    | cop[tikv] |                                           | eq(test.users.status, "active")                       |
+|   └─TableRowIDScan_7          | 10.00   | cop[tikv] | table:users                               | keep order:false, stats:pseudo                        |
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> explain SELECT * FROM users WHERE status = 'active' ORDER BY name;
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+| id                            | estRows  | task      | access object                             | operator info                   |
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+| IndexLookUp_18                | 10.00    | root      |                                           |                                 |
+| ├─IndexFullScan_15(Build)     | 10000.00 | cop[tikv] | table:users, index:idx_active_users(name) | keep order:true, stats:pseudo   |
+| └─Selection_17(Probe)         | 10.00    | cop[tikv] |                                           | eq(test.users.status, "active") |
+|   └─TableRowIDScan_16         | 10000.00 | cop[tikv] | table:users                               | keep order:false, stats:pseudo  |
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> explain SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+| id                            | estRows  | task      | access object                                       | operator info                  |
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+| IndexLookUp_18                | 3333.33  | root      |                                                     |                                |
+| ├─IndexFullScan_15(Build)     | 10000.00 | cop[tikv] | table:users, index:idx_high_score_users(created_at) | keep order:true, stats:pseudo  |
+| └─Selection_17(Probe)         | 3333.33  | cop[tikv] |                                                     | gt(test.users.score, 10000)     |
+|   └─TableRowIDScan_16         | 10000.00 | cop[tikv] | table:users                                         | keep order:false, stats:pseudo |
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> explain SELECT * FROM users WHERE status = 'pending';
++-------------------------+----------+-----------+---------------+----------------------------------+
+| id                      | estRows  | task      | access object | operator info                    |
++-------------------------+----------+-----------+---------------+----------------------------------+
+| TableReader_8           | 10.00    | root      |               | data:Selection_7                 |
+| └─Selection_7           | 10.00    | cop[tikv] |               | eq(test.users.status, "pending") |
+|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo   |
++-------------------------+----------+-----------+---------------+----------------------------------+
+3 rows in set (0.00 sec)
+```
+
+If the predicates in query don't meet the index definition, the index will not be chosen even with hint:
+
+```
+mysql> explain SELECT * FROM users use index(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
++---------------------------+----------+-----------+---------------+--------------------------------+
+| id                        | estRows  | task      | access object | operator info                  |
++---------------------------+----------+-----------+---------------+--------------------------------+
+| Sort_5                    | 3333.33  | root      |               | test.users.created_at          |
+| └─TableReader_11          | 3333.33  | root      |               | data:Selection_10              |
+|   └─Selection_10          | 3333.33  | cop[tikv] |               | gt(test.users.score, 100)      |
+|     └─TableFullScan_9     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo |
++---------------------------+----------+-----------+---------------+--------------------------------+
+```
+
+### When to use partial indexes
+
+Partial indexes are particularly useful in the following scenarios:
+
+- **Selective filtering**: When you frequently query a small subset of rows based on specific conditions
+- **Conditional uniqueness**: When you need unique constraints that only apply under certain conditions
+
+### Limitations
+
+- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`) and `IN` predicates with constant values
+- The types of the column and constant value should be the same
+- The predicate can only reference columns from the same table
+- Partial indexes cannot be used on expression indexes
+
+### Performance benefits
+
+Partial indexes offer several advantages:
+
+1. **Reduced storage**: Only rows matching the predicate are indexed, saving storage space
+2. **Faster DML**: It'll be faster to maintain the index of a subset of data during INSERT, UPDATE, and DELETE operations
 
 ## Invisible index
 
