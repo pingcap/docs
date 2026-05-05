@@ -2172,6 +2172,20 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `ON`. Before v8.3.0, the default value is `OFF`.
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
+### tidb_enable_descending_index <span class="version-mark">New in v9.0.0</span>
+
+> **Note:**
+>
+> Setting this variable to `ON` requires every TiKV store in the cluster to support descending-order index keys. TiDB rejects `CREATE INDEX` and `CREATE TABLE` statements that persist a descending column if any store reports a TiKV version below the minimum required version. Upgrade TiKV before you enable this variable.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB honors the `DESC` keyword on individual columns in `CREATE INDEX` and `CREATE TABLE` statements. When this variable is set to `OFF` (default), TiDB parses the `DESC` keyword for compatibility with MySQL 5.7 but stores all index columns in ascending order. When set to `ON`, columns marked `DESC` are stored in descending order, which allows composite indexes such as `INDEX(a ASC, b DESC)` to satisfy `ORDER BY a ASC, b DESC` directly without an additional `Sort` operator.
+- TiDB evaluates this variable only at DDL time. Toggling it after you create descending indexes does not change those indexes. Subsequent `CREATE INDEX` statements with `DESC` use the current value of this variable.
+
 ### tidb_enable_enhanced_security
 
 - Scope: NONE
