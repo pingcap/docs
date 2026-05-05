@@ -111,7 +111,7 @@ This step is optional. You only need to configure **Authorized Networks** when y
 
 </Info>
 
-After creating the AWS interface endpoint, you can add it to the allowlist of your target {{{ .starter }}} or {{{ .essential }}} instance to restrict access.
+After creating the AWS interface endpoint, you can authorize it for your target {{{ .starter }}} or {{{ .essential }}} instance to restrict access.
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
