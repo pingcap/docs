@@ -103,13 +103,11 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 Then you can connect to the endpoint service with the private DNS name.
 
-### Step 3. Authorize your private endpoint in TiDB Cloud (optional) {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
+### Step 3. Authorize your private endpoint in TiDB Cloud (optional)
 
-<Info>
-
-This step is optional. You only need to configure **Authorized Networks** when you want to restrict access to specific private endpoint connections. If no rules are configured, all private endpoint connections are allowed by default.
-
-</Info>
+> **Note:**
+>
+> This step is optional. You only need to configure **Authorized Networks** when you want to restrict access to specific private endpoint connections. If no rules are configured, all private endpoint connections are allowed by default.
 
 After creating the AWS interface endpoint, you can authorize it for your target {{{ .starter }}} or {{{ .essential }}} instance to restrict access.
 
