@@ -103,7 +103,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 Then you can connect to the endpoint service with the private DNS name.
 
-### Step 3. Authorize your private endpoint in TiDB Cloud (Optional)
+### Step 3. Authorize your private endpoint in TiDB Cloud (optional) {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
 
 <Info>
 
