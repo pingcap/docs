@@ -41,7 +41,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
 1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Authorize your private endpoint in TiDB Cloud (Optional)](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
+3. [Authorize your private endpoint in TiDB Cloud (optional)](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
 4. [Connect to your {{{ .starter }}} or Essential instance](#step-4-connect-to-your-tidb)
 
 ### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-instance}
