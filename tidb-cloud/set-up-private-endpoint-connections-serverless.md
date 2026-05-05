@@ -124,8 +124,8 @@ After creating the AWS interface endpoint, you can authorize it for your target 
 
     > **Tip:**
     >
-    > - If you leave the **Authorized Networks** table empty (that is, no rules are added), all private endpoint connections are allowed by default. You only need to add rules when you want to restrict access to specific private endpoint connections.
-    > - To allow all Private Endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your VPC Endpoint ID** field.
+    > - If you leave the **Authorized Networks** table empty, all private endpoint connections are allowed by default.
+    > - To allow all private endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your VPC Endpoint ID** field.
 
 5. Click **Submit**.
 
