@@ -3,7 +3,7 @@ title: 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential
 summary: 了解如何通过私有端点连接到你的 {{{ .starter }}} 或 Essential 实例。
 ---
 
-# 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential
+# 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential <!--Corresponding EN commit: 992bd07e5f8fd1b88460ad98020632d12048c146-->
 
 本文档介绍如何通过 AWS PrivateLink 连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
@@ -41,7 +41,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 
 1. [选择 {{{ .starter }}} 或 Essential 实例](#step-1-choose-a-tidb-instance)
 2. [创建 AWS interface 端点](#step-2-create-an-aws-interface-endpoint)
-3. [在 TiDB Cloud 中授权你的私有端点](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+3. [在 TiDB Cloud 中授权你的私有端点（可选）](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
 4. [连接到你的 {{{ .starter }}} 或 Essential 实例](#step-4-connect-to-your-tidb)
 
 ### Step 1. 选择 {{{ .starter }}} 或 Essential 实例 {#step-1-choose-a-tidb-instance}
@@ -103,9 +103,13 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 然后你可以通过私有 DNS name 连接到端点 service。
 
-### Step 3. 在 TiDB Cloud 中授权你的私有端点
+### Step 3. 在 TiDB Cloud 中授权你的私有端点（可选） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
 
-创建 AWS interface 端点后，必须将其添加到目标 {{{ .starter }}} 或 {{{ .essential }}} 实例的 allowlist。
+> **注意：**
+>
+> 此步骤为可选。仅当你希望将访问限制为特定私有端点连接时，才需要配置 **Authorized Networks**。如果未配置任何规则，则默认允许所有私有端点连接。
+
+创建 AWS interface 端点后，你可以为目标 {{{ .starter }}} 或 {{{ .essential }}} 实例授权该端点以限制访问。
 
 1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的名称，进入其概览页面。
 2. 在左侧导航栏点击 **Settings** > **Networking**。
@@ -117,8 +121,9 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
     - **Your VPC Endpoint ID**：粘贴你在 AWS Management Console 获取的 22 位 VPC Endpoint ID（以 `vpce-` 开头）。
 
     > **提示：**
-    > 
-    > 如需允许来自你的云 Region 的所有 Private Endpoint 连接（用于测试或开放 access），可在 **Your VPC Endpoint ID** 字段中输入单个星号（`*`）。
+    >
+    > - 如果将 **Authorized Networks** 表留空，则默认允许所有私有端点连接。
+    > - 如需允许来自你的云 Region 的所有 private endpoint 连接（用于测试或开放 access），可在 **Your VPC Endpoint ID** 字段中输入单个星号（`*`）。
 
 5. 点击 **Submit**。
 
