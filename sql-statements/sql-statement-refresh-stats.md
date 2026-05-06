@@ -51,7 +51,7 @@ ClusterOption ::=
 
 - **Targets (`RefreshTargetList`)**:
     - `table_name` refreshes a table in the current database.
-    - `db_name.table_name` refreshes a fully qualified table.
+    - `db_name.table_name` refreshes a table in the specified database.
     - `db_name.*` refreshes every table in the specified database.
     - `*.*` refreshes every table in the cluster.
 - **`FULL`**: loads complete statistics (such as histograms, TopN, and CMSketches) into memory, equivalent to setting [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `false` for this operation. Use this when you need complete statistics immediately.
