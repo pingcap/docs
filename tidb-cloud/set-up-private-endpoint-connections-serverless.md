@@ -53,7 +53,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
     > **Note:**
     >
-    > For each VPC in an AWS Region, you only need to create one private endpoint. The endpoint can be used by all {{{ .starter }}} or {{{ .essential }}} instances in that Region from the same VPC, but cannot be shared across VPCs.
+    > For each VPC in an AWS region, you only need to create one private endpoint. The endpoint can be used by all {{{ .starter }}} or {{{ .essential }}} instances in that AWS region from the same VPC, but cannot be shared across VPCs.
 
 ### Step 2. Create an AWS interface endpoint
 
