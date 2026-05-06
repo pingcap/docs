@@ -15,9 +15,11 @@ import datetime as dt
 import json
 import os
 import pathlib
+import re
+import urllib.error
 import urllib.parse
 import urllib.request
-from typing import Dict, List, Tuple
+from typing import Dict, List, Pattern, Tuple
 
 
 SOURCE_REPO = os.environ.get("SOURCE_REPO", "pingcap/tidb")
@@ -44,7 +46,6 @@ NEGATIVE_LABELS = {
 
 POSITIVE_KEYWORDS = [
     "compatibility",
-    "deprecate",
     "deprecated",
     "new feature",
     "sql",
@@ -52,7 +53,6 @@ POSITIVE_KEYWORDS = [
     "default value",
     "system variable",
     "configuration",
-    "config",
     "api",
     "planner",
     "optimizer",
@@ -81,8 +81,14 @@ def gh_api_json(url: str) -> Dict:
     if TOKEN:
         headers["Authorization"] = f"Bearer {TOKEN}"
     req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"GitHub API HTTP error {exc.code} for {url}: {detail}") from exc
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"GitHub API network error for {url}: {exc.reason}") from exc
 
 
 def list_search_results(query: str) -> List[Dict]:
@@ -136,6 +142,28 @@ def weekly_window_shanghai(now_utc: dt.datetime) -> Tuple[dt.datetime, dt.dateti
     return start_sh, end_sh
 
 
+def format_iso8601_with_colon_offset(ts: dt.datetime) -> str:
+    return ts.isoformat(timespec="seconds")
+
+
+def parse_merged_at(merged_at: str) -> dt.datetime:
+    if merged_at.endswith("Z"):
+        merged_at = merged_at.replace("Z", "+00:00")
+    return dt.datetime.fromisoformat(merged_at)
+
+
+def build_keyword_patterns(keywords: List[str]) -> List[Tuple[str, Pattern[str]]]:
+    patterns: List[Tuple[str, Pattern[str]]] = []
+    for keyword in keywords:
+        escaped = re.escape(keyword).replace(r"\ ", r"\s+")
+        pattern = re.compile(rf"\b{escaped}\b")
+        patterns.append((keyword, pattern))
+    return patterns
+
+
+KEYWORD_PATTERNS = build_keyword_patterns(POSITIVE_KEYWORDS)
+
+
 def classify_pr(pr: Dict, pr_files: List[str]) -> Tuple[bool, List[str], int]:
     score = 0
     reasons: List[str] = []
@@ -155,7 +183,7 @@ def classify_pr(pr: Dict, pr_files: List[str]) -> Tuple[bool, List[str], int]:
         score -= 1
         reasons.append(f"Only maintenance labels: {', '.join(hit_negative_labels)}")
 
-    kw_hits = sorted({kw for kw in POSITIVE_KEYWORDS if kw in text})
+    kw_hits = sorted({keyword for keyword, pattern in KEYWORD_PATTERNS if pattern.search(text)})
     if kw_hits:
         score += 1
         reasons.append(f"Keyword hints: {', '.join(kw_hits[:5])}")
@@ -204,8 +232,10 @@ def main() -> None:
     start_sh, end_sh = weekly_window_shanghai(now_utc)
     start_date = start_sh.date().isoformat()
     end_date = end_sh.date().isoformat()
+    start_iso = format_iso8601_with_colon_offset(start_sh)
+    end_iso = format_iso8601_with_colon_offset(end_sh)
 
-    query = f"repo:{SOURCE_REPO} is:pr is:merged merged:{start_date}..{end_date}"
+    query = f"repo:{SOURCE_REPO} is:pr is:merged merged:{start_iso}..{end_iso}"
     merged_prs = list_search_results(query)
 
     results: List[Dict] = []
@@ -213,6 +243,12 @@ def main() -> None:
     for item in merged_prs:
         number = item["number"]
         pr_detail = gh_api_json(f"https://api.github.com/repos/{SOURCE_REPO}/pulls/{number}")
+        merged_at_raw = pr_detail.get("merged_at", "")
+        if not merged_at_raw:
+            continue
+        merged_at = parse_merged_at(merged_at_raw).astimezone(start_sh.tzinfo)
+        if not (start_sh <= merged_at < end_sh):
+            continue
         pr_files = list_pr_files(SOURCE_REPO, number)
 
         needs_docs_update, reasons, score = classify_pr(pr_detail, pr_files)
