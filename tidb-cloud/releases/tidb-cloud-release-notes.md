@@ -23,6 +23,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
         -   TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、storage、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティング能力を個別に拡張できます。
         -   TiDB Cloud Dedicatedと比較して、 TiDB Cloud Premiumはアイドル状態の余裕を排除することでコスト効率を向上させ、実際に使用したパフォーマンスに対してのみ料金を支払うことができます。
 
+        TiDB Cloud Premium の詳細については、 [TiDB Cloud Premium: ミッションクリティカルなSQLのパブリックプレビュー](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/)参照してください。
+
         TiDB Cloud Premium を試すには、 [TiDB Cloudコンソール](https://tidbcloud.com/)に移動し、 **[Create Resource]**をクリックして、プランとして**[Premium]**を選択します。詳細については、 [TiDB Cloud Premiumインスタンスを作成します](/tidb-cloud/premium/create-tidb-instance-premium.md)参照してください。
 
 -   **TiDB Cloud Dedicated**
@@ -230,7 +232,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Starter**
 
-    -   実際のクライアント IP アドレスを [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に表示します。
+    -   [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示します。
 
         TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビューと`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベースリクエストの真の送信元を正確に特定し、トラブルシューティングと分析を改善できます。
 
