@@ -26,7 +26,7 @@ from .scope_filter import move_prs_not_in_scope, parse_date_value
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate English release notes with AI from a tirelease workbook."
+        description="Generate English release notes with AI according to PRs and issues in a specified excel file."
     )
     parser.add_argument("--version", required=True, help="Target TiDB version, for example 8.5.7.")
     parser.add_argument("--excel", required=True, help="Path to the release note Excel workbook.")
@@ -36,7 +36,6 @@ def parse_args() -> argparse.Namespace:
         help="Path to the existing English release notes directory.",
     )
     parser.add_argument("--sheet", default="pr_for_release_note", help="Workbook sheet name.")
-    parser.add_argument("--github-token-file", help="Path to a GitHub token file.")
     parser.add_argument(
         "--ai-command",
         default="codex --ask-for-approval never exec --sandbox read-only --ephemeral",
@@ -137,7 +136,10 @@ def main() -> int:
         if not base_branch_start_date:
             raise ValueError("--scope-base-branch-start-date must use YYYY-MM-DD format")
 
-    token = load_github_token(args.github_token_file)
+    try:
+        token = load_github_token()
+    except ValueError as exc:
+        raise SystemExit(f"error: {exc}") from None
     github = GitHubClient(token)
     involve_ai_generation = args.involve_ai_generation == "ON"
     ai = AIClient(args.ai_command, args.ai_model, args.ai_timeout) if involve_ai_generation else None
@@ -278,24 +280,8 @@ def save_workbook_safely(workbook: openpyxl.Workbook, excel_path: Path) -> None:
         raise RuntimeError(f"Failed to save workbook {excel_path}: {exc}") from exc
 
 
-def load_github_token(token_file: str | None) -> str | None:
-    import shutil
-    import subprocess
-
-    if token_file:
-        return Path(token_file).read_text(encoding="utf-8").strip()
-    if os.environ.get("GITHUB_TOKEN"):
-        return os.environ["GITHUB_TOKEN"].strip()
-    gh = shutil.which("gh")
-    if not gh:
-        return None
-    completed = subprocess.run(
-        [gh, "auth", "token"],
-        text=True,
-        capture_output=True,
-        timeout=10,
-        check=False,
-    )
-    if completed.returncode == 0 and completed.stdout.strip():
-        return completed.stdout.strip()
-    return None
+def load_github_token() -> str:
+    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    if not token:
+        raise ValueError("GITHUB_TOKEN environment variable is required")
+    return token

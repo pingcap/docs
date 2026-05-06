@@ -26,7 +26,7 @@ GENERATION_PROMPT_TEMPLATE = (
 )
 
 BOT_AUTHORS = {"ti-chi-bot", "ti-srebot"}
-# Keep the misspelled source column name because tirelease exports it this way.
+# Keep the misspelled source column name because release note excel file exports it this way.
 REQUIRED_HEADERS = {
     "pr_author",
     "pr_link",
