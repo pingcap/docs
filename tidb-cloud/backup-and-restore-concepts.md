@@ -14,6 +14,7 @@ In TiDB Cloud, snapshot backups are taken automatically by default and stored ac
 For more information, see the following:
 
 - [Automatic backups for {{{ .starter }}} and {{{ .essential }}} instances](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+- [Automatic backups for {{{ .premium }}} instances](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backups)
 - [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## Manual backup
