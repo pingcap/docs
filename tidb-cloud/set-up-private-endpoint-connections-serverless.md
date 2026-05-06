@@ -53,7 +53,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
     > **Note:**
     >
-    > You only need to create one private endpoint per AWS region, which can be shared by all {{{ .starter }}} or {{{ .essential }}} instances located in the same region.
+    > For each VPC in an AWS Region, you only need to create one private endpoint. The endpoint can be used by all {{{ .starter }}} or {{{ .essential }}} instances in that Region from the same VPC, but cannot be shared across VPCs.
 
 ### Step 2. Create an AWS interface endpoint
 
@@ -141,7 +141,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 >
 > If you cannot connect to the {{{ .starter }}} or Essential instance, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
 >
-> When creating a VPC endpoint, if you encounter an error `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`, it is due to that a private endpoint has already been created, and creating a new one is unnecessary.
+> When creating a VPC endpoint, if you encounter an error `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`, a private endpoint has already been created in that VPC, and creating another one for the same private DNS name is unnecessary.
 
 ## Troubleshooting
 
