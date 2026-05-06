@@ -31,8 +31,10 @@ Useful options:
         them again.
 
     --output-release-file /path/to/release-8.5.7.md
-        Write the generated Markdown to a custom path. By default, the output is
-        ``release-<version>-updated-by-ai.md`` under ``--releases-dir``.
+        Write the generated Markdown to a custom path. By default, the output
+        under ``--releases-dir`` is ``release-<version>-updated-by-ai.md`` if
+        ``release-<version>.md`` already exists, otherwise
+        ``release-<version>.md``.
 
 Run ``python3 scripts/release_notes_generate_ai.py --help`` for the full option
 list.

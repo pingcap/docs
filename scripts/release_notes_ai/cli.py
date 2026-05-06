@@ -58,7 +58,10 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-release-file",
-        help="Output Markdown file. Defaults to release-{version}-updated-by-ai.md.",
+        help=(
+            "Output Markdown file. Defaults to release-{version}-updated-by-ai.md "
+            "if release-{version}.md already exists, otherwise release-{version}.md."
+        ),
     )
     parser.add_argument(
         "--ai-timeout",
@@ -142,7 +145,7 @@ def main() -> int:
     output_file = (
         Path(args.output_release_file)
         if args.output_release_file
-        else Path(args.releases_dir) / f"release-{args.version}-updated-by-ai.md"
+        else default_output_release_file(Path(args.releases_dir), args.version)
     )
 
     excel_path = Path(args.excel)
@@ -217,6 +220,13 @@ def parse_on_off(value: str) -> str:
     if normalized not in {"ON", "OFF"}:
         raise argparse.ArgumentTypeError("value must be ON or OFF")
     return normalized
+
+
+def default_output_release_file(releases_dir: Path, version: str) -> Path:
+    release_file = releases_dir / f"release-{version}.md"
+    if release_file.is_file():
+        return releases_dir / f"release-{version}-updated-by-ai.md"
+    return release_file
 
 
 def default_processed_excel_path(excel_path: Path) -> Path:
