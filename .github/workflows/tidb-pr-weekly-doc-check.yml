@@ -63,6 +63,16 @@ jobs:
           set -euo pipefail
           mkdir -p docs-cn/weekly-doc-sync
           cp "${{ steps.scan.outputs.report_path }}" "docs-cn/weekly-doc-sync/${{ steps.scan.outputs.report_filename }}"
+          cp "${{ steps.scan.outputs.json_path }}" "docs-cn/weekly-doc-sync/"
+
+      - name: Apply concrete docs updates in docs-cn
+        if: steps.scan.outputs.needs_update == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/apply_weekly_docs_cn_updates.py \
+            --report-json "${{ steps.scan.outputs.json_path }}" \
+            --docs-cn-dir "docs-cn"
 
       - name: Create docs-cn PR
         if: steps.scan.outputs.needs_update == 'true'
@@ -83,8 +93,9 @@ jobs:
             - Excluded repositories: `${{ env.EXCLUDED_REPOS }}`
             - Time window (Asia/Shanghai): `${{ steps.scan.outputs.window_start_date }} 00:00` to `${{ steps.scan.outputs.window_end_date }} 00:00`
             - Report file: `weekly-doc-sync/${{ steps.scan.outputs.report_filename }}`
+            - Update summary: `weekly-doc-sync/applied-doc-updates.json`
 
-            This report is heuristic-based and requires maintainer confirmation before making detailed docs edits.
+            This PR includes heuristic-based direct doc edits. Please review technical accuracy before merging.
 
             ### Which TiDB version(s) do your changes apply to? (Required)
 
@@ -100,6 +111,4 @@ jobs:
             - [ ] Change aliases
             - [ ] Need modification after applied to another branch
             - [ ] Might cause conflicts after applied to another branch
-          add-paths: |
-            weekly-doc-sync/${{ steps.scan.outputs.report_filename }}
           delete-branch: true

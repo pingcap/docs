@@ -291,6 +291,7 @@ def main() -> None:
                 "url": pr_detail.get("html_url", ""),
                 "merged_at": pr_detail.get("merged_at", ""),
                 "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
+                "changed_files": pr_files,
                 "score": score,
                 "needs_docs_update": needs_docs_update,
                 "reasons": reasons,
