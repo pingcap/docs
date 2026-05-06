@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Weekly checker for merged TiDB PRs that might require docs updates.
+"""Weekly checker for merged PingCAP code PRs that might require docs updates.
 
 This script:
-1. Collects merged PRs in pingcap/tidb during the previous Monday-to-Monday window
-   in Asia/Shanghai timezone.
+1. Collects merged PRs in PingCAP source repositories during the previous
+   Monday-to-Monday window in Asia/Shanghai timezone.
 2. Uses lightweight heuristics to decide whether a PR likely needs docs updates.
 3. Writes a markdown report and json summary for downstream CI steps.
 4. Exposes outputs for GitHub Actions via GITHUB_OUTPUT.
@@ -22,7 +22,10 @@ import urllib.request
 from typing import Dict, List, Pattern, Tuple
 
 
-SOURCE_REPO = os.environ.get("SOURCE_REPO", "pingcap/tidb")
+SOURCE_ORG = os.environ.get("SOURCE_ORG", "pingcap")
+EXCLUDED_REPOS = {
+    item.strip() for item in os.environ.get("EXCLUDED_REPOS", "pingcap/docs,pingcap/docs-cn").split(",") if item.strip()
+}
 OUTPUT_DIR = pathlib.Path(os.environ.get("OUTPUT_DIR", "tmp/tidb-doc-check")).resolve()
 DOCS_CN_BASE_BRANCH = os.environ.get("DOCS_CN_BASE_BRANCH", "master")
 TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
@@ -113,6 +116,34 @@ def list_search_results(query: str) -> List[Dict]:
             break
         page += 1
     return all_items
+
+
+def list_source_repos(org: str) -> List[str]:
+    repos: List[str] = []
+    page = 1
+    while True:
+        url = (
+            f"https://api.github.com/orgs/{org}/repos"
+            f"?type=public&sort=updated&per_page=100&page={page}"
+        )
+        data = gh_api_json(url)
+        if not data:
+            break
+        for repo in data:
+            full_name = repo.get("full_name", "")
+            if not full_name:
+                continue
+            if repo.get("fork", False):
+                continue
+            if repo.get("archived", False) or repo.get("disabled", False):
+                continue
+            if full_name in EXCLUDED_REPOS:
+                continue
+            repos.append(full_name)
+        if len(data) < 100:
+            break
+        page += 1
+    return sorted(set(repos))
 
 
 def list_pr_files(repo: str, number: int) -> List[str]:
@@ -235,36 +266,38 @@ def main() -> None:
     start_iso = format_iso8601_with_colon_offset(start_sh)
     end_iso = format_iso8601_with_colon_offset(end_sh)
 
-    query = f"repo:{SOURCE_REPO} is:pr is:merged merged:{start_iso}..{end_iso}"
-    merged_prs = list_search_results(query)
-
     results: List[Dict] = []
     needs_update_prs: List[Dict] = []
-    for item in merged_prs:
-        number = item["number"]
-        pr_detail = gh_api_json(f"https://api.github.com/repos/{SOURCE_REPO}/pulls/{number}")
-        merged_at_raw = pr_detail.get("merged_at", "")
-        if not merged_at_raw:
-            continue
-        merged_at = parse_merged_at(merged_at_raw).astimezone(start_sh.tzinfo)
-        if not (start_sh <= merged_at < end_sh):
-            continue
-        pr_files = list_pr_files(SOURCE_REPO, number)
+    source_repos = list_source_repos(SOURCE_ORG)
+    for source_repo in source_repos:
+        query = f"repo:{source_repo} is:pr is:merged merged:{start_iso}..{end_iso}"
+        merged_prs = list_search_results(query)
+        for item in merged_prs:
+            number = item["number"]
+            pr_detail = gh_api_json(f"https://api.github.com/repos/{source_repo}/pulls/{number}")
+            merged_at_raw = pr_detail.get("merged_at", "")
+            if not merged_at_raw:
+                continue
+            merged_at = parse_merged_at(merged_at_raw).astimezone(start_sh.tzinfo)
+            if not (start_sh <= merged_at < end_sh):
+                continue
+            pr_files = list_pr_files(source_repo, number)
 
-        needs_docs_update, reasons, score = classify_pr(pr_detail, pr_files)
-        row = {
-            "number": number,
-            "title": pr_detail.get("title", ""),
-            "url": pr_detail.get("html_url", ""),
-            "merged_at": pr_detail.get("merged_at", ""),
-            "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
-            "score": score,
-            "needs_docs_update": needs_docs_update,
-            "reasons": reasons,
-        }
-        results.append(row)
-        if needs_docs_update:
-            needs_update_prs.append(row)
+            needs_docs_update, reasons, score = classify_pr(pr_detail, pr_files)
+            row = {
+                "repo": source_repo,
+                "number": number,
+                "title": pr_detail.get("title", ""),
+                "url": pr_detail.get("html_url", ""),
+                "merged_at": pr_detail.get("merged_at", ""),
+                "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
+                "score": score,
+                "needs_docs_update": needs_docs_update,
+                "reasons": reasons,
+            }
+            results.append(row)
+            if needs_docs_update:
+                needs_update_prs.append(row)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     window_tag = f"{start_date}_to_{end_date}"
@@ -277,7 +310,9 @@ def main() -> None:
     lines: List[str] = []
     lines.append("# TiDB weekly merged PR doc-impact check")
     lines.append("")
-    lines.append(f"- Source repo: `{SOURCE_REPO}`")
+    lines.append(f"- Source org: `{SOURCE_ORG}`")
+    lines.append(f"- Repositories scanned: `{len(source_repos)}`")
+    lines.append(f"- Excluded repositories: `{', '.join(sorted(EXCLUDED_REPOS))}`")
     lines.append(f"- Time window (Asia/Shanghai): `{start_date} 00:00` to `{end_date} 00:00`")
     lines.append(f"- Total merged PRs found: `{len(results)}`")
     lines.append(f"- PRs judged as docs-update-needed: `{len(needs_update_prs)}`")
@@ -287,7 +322,7 @@ def main() -> None:
         lines.append("## PRs that likely need docs updates")
         lines.append("")
         for pr in needs_update_prs:
-            lines.append(f"### #{pr['number']} {pr['title']}")
+            lines.append(f"### {pr['repo']}#{pr['number']} {pr['title']}")
             lines.append(f"- PR: {pr['url']}")
             lines.append(f"- Merged at: `{pr['merged_at']}`")
             lines.append(f"- Labels: `{', '.join(pr['labels']) if pr['labels'] else 'none'}`")
@@ -308,7 +343,9 @@ def main() -> None:
     report_path.write_text("\n".join(lines), encoding="utf-8")
 
     json_payload = {
-        "source_repo": SOURCE_REPO,
+        "source_org": SOURCE_ORG,
+        "scanned_repositories": source_repos,
+        "excluded_repositories": sorted(EXCLUDED_REPOS),
         "time_window": {
             "timezone": "Asia/Shanghai",
             "start": start_sh.isoformat(),
