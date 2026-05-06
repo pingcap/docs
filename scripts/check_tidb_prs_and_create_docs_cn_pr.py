@@ -124,7 +124,7 @@ def list_source_repos(org: str) -> List[str]:
     while True:
         url = (
             f"https://api.github.com/orgs/{org}/repos"
-            f"?type=public&sort=updated&per_page=100&page={page}"
+            f"?type=all&sort=updated&per_page=100&page={page}"
         )
         data = gh_api_json(url)
         if not data:
