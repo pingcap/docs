@@ -1,4 +1,4 @@
-name: Weekly TiDB PR Doc Check (docs-cn)
+name: Weekly PingCAP Code PR Doc Check (docs-cn)
 
 on:
   schedule:
@@ -15,7 +15,8 @@ jobs:
       contents: read
 
     env:
-      SOURCE_REPO: pingcap/tidb
+      SOURCE_ORG: pingcap
+      EXCLUDED_REPOS: pingcap/docs,pingcap/docs-cn
       OUTPUT_DIR: tmp/tidb-doc-check
       DOCS_CN_BASE_BRANCH: master
 
@@ -28,11 +29,12 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Scan merged TiDB PRs in last weekly window
+      - name: Scan merged PingCAP code PRs in last weekly window
         id: scan
         env:
           GITHUB_TOKEN: ${{ secrets.DOCS_CN_BOT_TOKEN || github.token }}
-          SOURCE_REPO: ${{ env.SOURCE_REPO }}
+          SOURCE_ORG: ${{ env.SOURCE_ORG }}
+          EXCLUDED_REPOS: ${{ env.EXCLUDED_REPOS }}
           OUTPUT_DIR: ${{ env.OUTPUT_DIR }}
           DOCS_CN_BASE_BRANCH: ${{ env.DOCS_CN_BASE_BRANCH }}
         run: |
@@ -70,14 +72,15 @@ jobs:
           token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
           branch: ${{ steps.scan.outputs.branch_name }}
           base: ${{ steps.scan.outputs.docs_cn_base_branch }}
-          commit-message: "docs: weekly TiDB PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
-          title: "docs: weekly TiDB PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
+          commit-message: "docs: weekly PingCAP code PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
+          title: "docs: weekly PingCAP code PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
           body: |
             ### What is changed, added or deleted? (Required)
 
-            Add a weekly report that checks merged `pingcap/tidb` code PRs from the previous week and identifies PRs that likely require docs updates.
+            Add a weekly report that checks merged code PRs across PingCAP source repositories (excluding documentation repositories) and identifies PRs that likely require docs updates.
 
-            - Source repo: `${{ env.SOURCE_REPO }}`
+            - Source org: `${{ env.SOURCE_ORG }}`
+            - Excluded repositories: `${{ env.EXCLUDED_REPOS }}`
             - Time window (Asia/Shanghai): `${{ steps.scan.outputs.window_start_date }} 00:00` to `${{ steps.scan.outputs.window_end_date }} 00:00`
             - Report file: `weekly-doc-sync/${{ steps.scan.outputs.report_filename }}`
 
@@ -89,7 +92,7 @@ jobs:
 
             ### What is the related PR or file link(s)?
 
-            - TiDB merged PR search: https://github.com/pingcap/tidb/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Amerged
+            - PingCAP repositories: https://github.com/orgs/pingcap/repositories?type=source
 
             ### Do your changes match any of the following descriptions?
 
