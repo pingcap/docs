@@ -23,6 +23,7 @@ jobs:
     env:
       SOURCE_ORG: pingcap
       EXCLUDED_REPOS: pingcap/docs,pingcap/docs-cn
+      EXTRA_REPOS: tikv/tikv,tikv/pd
       OUTPUT_DIR: tmp/tidb-doc-check
       DOCS_CN_BASE_BRANCH: master
       TARGET_BRANCH_MAP: '{"master":"master","release-8.5":"release-8.5","release-8.1":"release-8.1","release-7.5":"release-7.5","release-7.1":"release-7.1","release-6.5":"release-6.5","release-6.1":"release-6.1","release-5.4":"release-5.4"}'
@@ -41,6 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DOCS_CN_BOT_TOKEN || github.token }}
           SOURCE_ORG: ${{ env.SOURCE_ORG }}
           EXCLUDED_REPOS: ${{ env.EXCLUDED_REPOS }}
+          EXTRA_REPOS: ${{ env.EXTRA_REPOS }}
           OUTPUT_DIR: ${{ env.OUTPUT_DIR }}
           DOCS_CN_BASE_BRANCH: ${{ env.DOCS_CN_BASE_BRANCH }}
           TARGET_BRANCH_MAP: ${{ env.TARGET_BRANCH_MAP }}

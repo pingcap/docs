@@ -26,6 +26,9 @@ SOURCE_ORG = os.environ.get("SOURCE_ORG", "pingcap")
 EXCLUDED_REPOS = {
     item.strip() for item in os.environ.get("EXCLUDED_REPOS", "pingcap/docs,pingcap/docs-cn").split(",") if item.strip()
 }
+EXTRA_REPOS = {
+    item.strip() for item in os.environ.get("EXTRA_REPOS", "tikv/tikv,tikv/pd").split(",") if item.strip()
+}
 OUTPUT_DIR = pathlib.Path(os.environ.get("OUTPUT_DIR", "tmp/tidb-doc-check")).resolve()
 DOCS_CN_BASE_BRANCH = os.environ.get("DOCS_CN_BASE_BRANCH", "master")
 TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
@@ -144,7 +147,10 @@ def list_source_repos(org: str) -> List[str]:
         if len(data) < 100:
             break
         page += 1
-    return sorted(set(repos))
+    merged = set(repos)
+    merged.update(EXTRA_REPOS)
+    merged.difference_update(EXCLUDED_REPOS)
+    return sorted(merged)
 
 
 def list_pr_files(repo: str, number: int) -> List[str]:
