@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""Apply concrete docs-cn updates from weekly code PR scan results.
-
-This script reads the JSON produced by check_tidb_prs_and_create_docs_cn_pr.py
-and directly updates matched docs files in docs-cn by appending a short
-"weekly code sync" section for each impacted page.
-"""
+"""Apply docs-cn updates for one source PR candidate."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import pathlib
-from collections import defaultdict
 from typing import Dict, List
 
 
@@ -45,81 +39,76 @@ def resolve_target_docs(repo: str, changed_files: List[str]) -> List[str]:
     return sorted(targets)
 
 
-def append_section(file_path: pathlib.Path, section_title: str, lines: List[str]) -> bool:
+def append_pr_note(file_path: pathlib.Path, marker: str, lines: List[str]) -> bool:
     if not file_path.exists():
         return False
-
     content = file_path.read_text(encoding="utf-8")
-    marker = f"<!-- weekly-code-sync: {section_title} -->"
     if marker in content:
         return False
-
-    block = [""]
-    block.append(marker)
-    block.append(f"## {section_title}")
-    block.append("")
+    block = ["", marker, "## Weekly code sync note", ""]
     block.extend(lines)
     block.append("")
     file_path.write_text(content.rstrip() + "\n" + "\n".join(block), encoding="utf-8")
     return True
 
 
+def load_candidate(report: Dict, repo: str, number: int) -> Dict:
+    for pr in report.get("pull_requests", []):
+        if pr.get("repo") == repo and int(pr.get("number", -1)) == number:
+            return pr
+    raise SystemExit(f"Candidate not found in report: {repo}#{number}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--report-json", required=True)
     parser.add_argument("--docs-cn-dir", required=True)
+    parser.add_argument("--source-repo", required=True)
+    parser.add_argument("--source-pr-number", required=True, type=int)
     args = parser.parse_args()
 
     report_json = pathlib.Path(args.report_json).resolve()
     docs_cn_dir = pathlib.Path(args.docs_cn_dir).resolve()
     payload = json.loads(report_json.read_text(encoding="utf-8"))
+    pr = load_candidate(payload, args.source_repo, args.source_pr_number)
 
-    start = payload["time_window"]["start"][:10]
-    end = payload["time_window"]["end"][:10]
-    section_title = f"每周代码变更同步（{start} 到 {end}）"
+    if not pr.get("needs_docs_update"):
+        return
 
-    doc_to_items: Dict[str, List[Dict]] = defaultdict(list)
-    for pr in payload.get("pull_requests", []):
-        if not pr.get("needs_docs_update"):
-            continue
-        targets = resolve_target_docs(pr.get("repo", ""), pr.get("changed_files", []))
-        for target in targets:
-            doc_to_items[target].append(pr)
+    targets = resolve_target_docs(pr.get("repo", ""), pr.get("changed_files", []))
+    marker = f"<!-- weekly-code-sync: {pr['repo']}#{pr['number']} -->"
+    note_lines = [
+        f"- Source PR: [{pr['repo']}#{pr['number']}]({pr['url']})",
+        f"- Title: {pr['title']}",
+        f"- Merged at: `{pr['merged_at']}`",
+        f"- Reasons: {'; '.join(pr.get('reasons', []))}",
+    ]
 
     changed_files: List[str] = []
     missing_files: List[str] = []
-    for rel_path, items in sorted(doc_to_items.items()):
+    for rel_path in targets:
         abs_path = docs_cn_dir / rel_path
-        lines = []
-        for item in items:
-            lines.append(
-                f"- [{item['repo']}#{item['number']}]({item['url']}): {item['title']}"
-            )
-        ok = append_section(abs_path, section_title, lines)
-        if ok:
+        changed = append_pr_note(abs_path, marker, note_lines)
+        if changed:
             changed_files.append(rel_path)
         elif not abs_path.exists():
             missing_files.append(rel_path)
 
-    print("Changed docs files:")
-    for path in changed_files:
-        print(f"- {path}")
-
-    if missing_files:
-        print("Missing mapped files:")
-        for path in sorted(set(missing_files)):
-            print(f"- {path}")
-
+    out_dir = docs_cn_dir / "weekly-doc-sync"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = out_dir / f"applied-{pr['repo'].replace('/', '_')}-{pr['number']}.json"
     summary = {
+        "source_repo": pr["repo"],
+        "source_pr_number": pr["number"],
+        "target_docs_files": targets,
         "changed_docs_files": changed_files,
         "missing_mapped_files": sorted(set(missing_files)),
-        "mapped_docs_count": len(doc_to_items),
     }
-    (docs_cn_dir / "weekly-doc-sync").mkdir(parents=True, exist_ok=True)
-    (docs_cn_dir / "weekly-doc-sync" / "applied-doc-updates.json").write_text(
-        json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    print(f"Changed docs files for {pr['repo']}#{pr['number']}:")
+    for item in changed_files:
+        print(f"- {item}")
 
 
 if __name__ == "__main__":

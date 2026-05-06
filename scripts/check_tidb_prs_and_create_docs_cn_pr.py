@@ -29,6 +29,7 @@ EXCLUDED_REPOS = {
 OUTPUT_DIR = pathlib.Path(os.environ.get("OUTPUT_DIR", "tmp/tidb-doc-check")).resolve()
 DOCS_CN_BASE_BRANCH = os.environ.get("DOCS_CN_BASE_BRANCH", "master")
 TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
+TARGET_BRANCH_MAP_RAW = os.environ.get("TARGET_BRANCH_MAP", "").strip()
 
 
 POSITIVE_LABELS = {
@@ -255,9 +256,27 @@ def write_github_output(kv: Dict[str, str]) -> None:
             f.write(f"{k}={v}\n")
 
 
+def load_target_branch_map(raw: str) -> Dict[str, str]:
+    if not raw:
+        return {}
+    try:
+        loaded = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"Invalid TARGET_BRANCH_MAP JSON: {exc}") from exc
+    if not isinstance(loaded, dict):
+        raise SystemExit("TARGET_BRANCH_MAP must be a JSON object.")
+    out: Dict[str, str] = {}
+    for k, v in loaded.items():
+        if isinstance(k, str) and isinstance(v, str) and k and v:
+            out[k] = v
+    return out
+
+
 def main() -> None:
     if not TOKEN:
         raise SystemExit("GITHUB_TOKEN is required.")
+
+    target_branch_map = load_target_branch_map(TARGET_BRANCH_MAP_RAW)
 
     now_utc = dt.datetime.now(dt.timezone.utc)
     start_sh, end_sh = weekly_window_shanghai(now_utc)
@@ -290,6 +309,7 @@ def main() -> None:
                 "title": pr_detail.get("title", ""),
                 "url": pr_detail.get("html_url", ""),
                 "merged_at": pr_detail.get("merged_at", ""),
+                "source_base_branch": pr_detail.get("base", {}).get("ref", ""),
                 "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
                 "changed_files": pr_files,
                 "score": score,
@@ -360,10 +380,28 @@ def main() -> None:
 
     branch_tag = end_date.replace("-", "")
     branch_name = f"weekly/tidb-doc-check-{branch_tag}"
+    candidates: List[Dict] = []
+    for pr in needs_update_prs:
+        source_base_branch = pr.get("source_base_branch") or ""
+        target_branch = target_branch_map.get(source_base_branch, DOCS_CN_BASE_BRANCH)
+        candidates.append(
+            {
+                "repo": pr["repo"],
+                "number": pr["number"],
+                "title": pr["title"],
+                "url": pr["url"],
+                "merged_at": pr["merged_at"],
+                "source_base_branch": source_base_branch,
+                "target_branch": target_branch,
+            }
+        )
+    matrix_json = json.dumps({"include": candidates}, ensure_ascii=False, separators=(",", ":"))
 
     write_github_output(
         {
             "needs_update": "true" if needs_update_prs else "false",
+            "candidates_count": str(len(candidates)),
+            "candidates_matrix": matrix_json,
             "report_path": str(report_path),
             "json_path": str(json_path),
             "report_filename": report_filename,

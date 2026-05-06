@@ -7,19 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  weekly-check:
+  scan:
     if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
-
+    outputs:
+      needs_update: ${{ steps.scan.outputs.needs_update }}
+      candidates_count: ${{ steps.scan.outputs.candidates_count }}
+      candidates_matrix: ${{ steps.scan.outputs.candidates_matrix }}
+      json_path: ${{ steps.scan.outputs.json_path }}
+      report_path: ${{ steps.scan.outputs.report_path }}
+      window_start_date: ${{ steps.scan.outputs.window_start_date }}
+      window_end_date: ${{ steps.scan.outputs.window_end_date }}
     env:
       SOURCE_ORG: pingcap
       EXCLUDED_REPOS: pingcap/docs,pingcap/docs-cn
       OUTPUT_DIR: tmp/tidb-doc-check
       DOCS_CN_BASE_BRANCH: master
-
+      TARGET_BRANCH_MAP: '{"master":"master","release-8.5":"release-8.5","release-8.1":"release-8.1","release-7.5":"release-7.5","release-7.1":"release-7.1","release-6.5":"release-6.5","release-6.1":"release-6.1","release-5.4":"release-5.4"}'
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v4
@@ -37,73 +43,105 @@ jobs:
           EXCLUDED_REPOS: ${{ env.EXCLUDED_REPOS }}
           OUTPUT_DIR: ${{ env.OUTPUT_DIR }}
           DOCS_CN_BASE_BRANCH: ${{ env.DOCS_CN_BASE_BRANCH }}
+          TARGET_BRANCH_MAP: ${{ env.TARGET_BRANCH_MAP }}
         run: |
           set -euo pipefail
           python scripts/check_tidb_prs_and_create_docs_cn_pr.py
 
-      - name: Skip when no docs updates are needed
-        if: steps.scan.outputs.needs_update != 'true'
+      - name: Print summary
         run: |
-          echo "No doc-impact PRs found in this weekly window."
+          echo "needs_update=${{ steps.scan.outputs.needs_update }}"
+          echo "candidates_count=${{ steps.scan.outputs.candidates_count }}"
 
-      - name: Checkout docs-cn repo
+      - name: Upload scan artifacts
         if: steps.scan.outputs.needs_update == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-doc-check-report
+          path: |
+            ${{ steps.scan.outputs.json_path }}
+            ${{ steps.scan.outputs.report_path }}
+
+  create-pr-per-source:
+    if: needs.scan.outputs.needs_update == 'true'
+    needs: scan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJson(needs.scan.outputs.candidates_matrix) }}
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download scan artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: weekly-doc-check-report
+          path: tmp/tidb-doc-check
+
+      - name: Checkout docs-cn repo target branch
         uses: actions/checkout@v4
         with:
           repository: pingcap/docs-cn
           token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
-          ref: ${{ steps.scan.outputs.docs_cn_base_branch }}
+          ref: ${{ matrix.target_branch }}
           path: docs-cn
           persist-credentials: false
 
-      - name: Copy weekly report into docs-cn
-        if: steps.scan.outputs.needs_update == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p docs-cn/weekly-doc-sync
-          cp "${{ steps.scan.outputs.report_path }}" "docs-cn/weekly-doc-sync/${{ steps.scan.outputs.report_filename }}"
-          cp "${{ steps.scan.outputs.json_path }}" "docs-cn/weekly-doc-sync/"
-
-      - name: Apply concrete docs updates in docs-cn
-        if: steps.scan.outputs.needs_update == 'true'
-        shell: bash
+      - name: Apply docs-cn updates for one source PR
         run: |
           set -euo pipefail
           python scripts/apply_weekly_docs_cn_updates.py \
-            --report-json "${{ steps.scan.outputs.json_path }}" \
-            --docs-cn-dir "docs-cn"
+            --report-json "$(ls tmp/tidb-doc-check/*.json | head -1)" \
+            --docs-cn-dir "docs-cn" \
+            --source-repo "${{ matrix.repo }}" \
+            --source-pr-number "${{ matrix.number }}"
 
-      - name: Create docs-cn PR
-        if: steps.scan.outputs.needs_update == 'true'
+      - name: Build branch metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          safe_repo="$(echo "${{ matrix.repo }}" | tr '/' '-')"
+          echo "safe_repo=${safe_repo}" >> "$GITHUB_OUTPUT"
+          echo "branch=weekly/doc-sync/${safe_repo}-pr-${{ matrix.number }}-${{ needs.scan.outputs.window_end_date }}" >> "$GITHUB_OUTPUT"
+
+      - name: Create docs-cn PR for one source PR
         uses: peter-evans/create-pull-request@v7
         with:
           path: docs-cn
           token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
-          branch: ${{ steps.scan.outputs.branch_name }}
-          base: ${{ steps.scan.outputs.docs_cn_base_branch }}
-          commit-message: "docs: weekly PingCAP code PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
-          title: "docs: weekly PingCAP code PR doc-impact check (${{ steps.scan.outputs.window_start_date }} to ${{ steps.scan.outputs.window_end_date }})"
+          branch: ${{ steps.meta.outputs.branch }}
+          base: ${{ matrix.target_branch }}
+          commit-message: "docs: sync from ${{ matrix.repo }}#${{ matrix.number }}"
+          title: "docs: sync from ${{ matrix.repo }}#${{ matrix.number }}"
           body: |
             ### What is changed, added or deleted? (Required)
 
-            Add a weekly report that checks merged code PRs across PingCAP source repositories (excluding documentation repositories) and identifies PRs that likely require docs updates.
+            Sync docs-cn updates for one source code PR.
 
-            - Source org: `${{ env.SOURCE_ORG }}`
-            - Excluded repositories: `${{ env.EXCLUDED_REPOS }}`
-            - Time window (Asia/Shanghai): `${{ steps.scan.outputs.window_start_date }} 00:00` to `${{ steps.scan.outputs.window_end_date }} 00:00`
-            - Report file: `weekly-doc-sync/${{ steps.scan.outputs.report_filename }}`
-            - Update summary: `weekly-doc-sync/applied-doc-updates.json`
-
-            This PR includes heuristic-based direct doc edits. Please review technical accuracy before merging.
+            - Source PR: ${{ matrix.url }}
+            - Source repo: `${{ matrix.repo }}`
+            - Source PR number: `${{ matrix.number }}`
+            - Source base branch: `${{ matrix.source_base_branch }}`
+            - Target docs-cn branch: `${{ matrix.target_branch }}`
+            - Weekly window (Asia/Shanghai): `${{ needs.scan.outputs.window_start_date }} 00:00` to `${{ needs.scan.outputs.window_end_date }} 00:00`
 
             ### Which TiDB version(s) do your changes apply to? (Required)
 
-            - [x] master
+            - [x] ${{ matrix.target_branch }}
 
             ### What is the related PR or file link(s)?
 
-            - PingCAP repositories: https://github.com/orgs/pingcap/repositories?type=source
+            - This PR is translated from: ${{ matrix.url }}
 
             ### Do your changes match any of the following descriptions?
 
