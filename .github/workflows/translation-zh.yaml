@@ -184,7 +184,12 @@ jobs:
             exit 0
           fi
 
-          python -c 'import json, os; from pathlib import Path; Path("latest_translation_commit.json").write_text(json.dumps({"target": os.environ["SOURCE_BRANCH"], "sha": os.environ["HEAD_REF"]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")'
+          if [ "${GITHUB_EVENT_NAME}" = "schedule" ]; then
+            python -c 'import json, os; from pathlib import Path; Path("latest_translation_commit.json").write_text(json.dumps({"target": os.environ["SOURCE_BRANCH"], "sha": os.environ["HEAD_REF"]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")'
+          else
+            echo "Skipping latest_translation_commit.json update for ${GITHUB_EVENT_NAME} run."
+          fi
+
           echo "has_changes=true" >> "${GITHUB_OUTPUT}"
 
       - name: Set build metadata
