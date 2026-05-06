@@ -11,15 +11,23 @@ on:
     inputs:
       file_names:
         description: "Specify Cloud files to translate (comma-separated list)"
-        required: false
+        required: true
         type: string
-        default: ""
+      source_files_translation_mode:
+        description: "Translate specified files incrementally or as full files"
+        required: true
+        type: choice
+        default: incremental
+        options:
+          - incremental
+          - full
 
 env:
   SOURCE_REPO: pingcap/docs
   SOURCE_BRANCH: release-8.5
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
   CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
+  CLOUD_INDEX_FILES: tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
   AI_TRANSLATOR_REF: main
 
@@ -113,6 +121,7 @@ jobs:
           HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           DOCS_SOURCE_PATH: ${{ github.workspace }}/docs-source
           CLOUD_TOC_FILES: ${{ env.CLOUD_TOC_FILES }}
+          CLOUD_INDEX_FILES: ${{ env.CLOUD_INDEX_FILES }}
         run: |
           set -euo pipefail
           python ai-pr-translator/scripts/resolve_cloud_source_files.py
@@ -133,6 +142,7 @@ jobs:
           SOURCE_HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           SOURCE_FOLDER: ""
           SOURCE_FILES: ${{ steps.source_files.outputs.files }}
+          SOURCE_FILES_TRANSLATION_MODE: ${{ inputs.source_files_translation_mode || 'incremental' }}
           SOURCE_REPO_PATH: ${{ github.workspace }}/docs-source
           TARGET_REF: ${{ env.CN_CLOUD_BRANCH }}
           PREFER_LOCAL_TARGET_FOR_READ: "true"
