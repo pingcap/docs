@@ -30,7 +30,11 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     </thead>
     <tbody>
       <tr>
-        <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+        <td>Red Hat Enterprise Linux 9.4 or a later 9.x version</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Red Hat Enterprise Linux 8.6 or a later 8.x version</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
@@ -66,6 +70,10 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     >     - Before upgrading TiDB, make sure to check your operating system version. TiDB v8.4.0 DMR and v8.5.0 removed the support of glibc 2.17, and dropped support and testing with CentOS Linux 7. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or v8.5.0 will cause the risk of cluster unavailability.
     >     - Starting from v8.5.1, to assist users still using CentOS Linux 7, TiDB resumes the support of glibc 2.17, resumes testing of CentOS Linux 7, and is now compatible with CentOS Linux 7. However, due to the EOL status of CentOS Linux, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and migrate to an operating system supported by TiDB for production use, such as Rocky Linux 9.1 or later.
     > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ended on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
+
+    > **Note:**
+    >
+    > Support for Red Hat Enterprise Linux 9.x starts from [TiUP](https://github.com/pingcap/tiup/releases) v1.16.5.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, because these combinations have not undergone comprehensive and systematic testing, TiDB **does not guarantee enterprise-level production quality**:
 
