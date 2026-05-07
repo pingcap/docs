@@ -480,8 +480,8 @@ To create a private endpoint from the **Networking** page, take the following st
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the overview page of your {{{ .premium }}} instance.
 2. In the left navigation pane, click **Settings** > **Networking**.
-3. In the **AWS Private Endpoint for Changefeed** section, click **Create Private Endpoint**.
-4. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint and the **Endpoint Service Name** you copied when setting up AWS PrivateLink for the MySQL source database.
+3. In the **AWS Private Endpoint for External Services** section, click **Create Private Endpoint for External Services**.
+4. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint and the **Endpoint Service Name** you copied when setting up AWS PrivateLink for the MySQL source database.
 5. Click **Create**.
 
     After the private endpoint becomes available, you can select it when creating a Data Migration job.
