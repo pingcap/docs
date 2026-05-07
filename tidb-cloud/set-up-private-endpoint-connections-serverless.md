@@ -3,7 +3,7 @@ title: 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential
 summary: 了解如何通过私有端点连接到你的 {{{ .starter }}} 或 Essential 实例。
 ---
 
-# 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential <!--Corresponding EN commit: 992bd07e5f8fd1b88460ad98020632d12048c146-->
+# 通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential
 
 本文档介绍如何通过 AWS PrivateLink 连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 

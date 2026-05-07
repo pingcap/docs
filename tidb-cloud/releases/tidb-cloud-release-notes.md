@@ -23,6 +23,8 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
         - 与 TiDB Cloud Essential 相比，TiDB Cloud Premium 在计算、存储和网络层提供了显著更强的隔离能力，确保关键工作负载获得可预测的性能。同时，它保留了弹性按需扩缩容模型，使计算容量能够独立扩展，而无需运维开销。
         - 与 TiDB Cloud Dedicated 相比，TiDB Cloud Premium 通过消除闲置冗余容量来提升成本效益，因此你只需为实际使用的性能付费。
 
+      如需了解 TiDB Cloud Premium 的更多信息，请参见 [TiDB Cloud Premium: Public Preview for Mission-Critical SQL](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/)。
+
       如需试用 TiDB Cloud Premium，请前往 [TiDB Cloud 控制台](https://tidbcloud.com/)，点击 **Create Resource**，并选择 **Premium** 作为你的套餐。更多信息，请参见[创建 TiDB Cloud Premium 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)。
 
 - **TiDB Cloud Dedicated**
