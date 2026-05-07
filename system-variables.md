@@ -2857,6 +2857,26 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `ON`
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
 
+### `tidb_enable_strict_not_null_check` <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Can be set by Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether TiDB performs strict validation when `NULL` values are explicitly written to `NOT NULL` columns in `INSERT` statements.
+- Possible values:
+    - `ON`: Enables strict `NOT NULL` validation. This behavior is closer to the standard semantics of MySQL 8.0.
+        - In strict SQL mode, if a `NULL` value is inserted into a `NOT NULL` column, TiDB returns an error.
+        - In non-strict SQL mode: for single-row `INSERT` statements, if a `NULL` value is inserted into a `NOT NULL` column, TiDB returns an error; for multi-row `INSERT` statements, if a `NULL` value is inserted into a `NOT NULL` column, TiDB downgrades the error to a warning and writes the implicit default value corresponding to the column data type.
+    - `OFF`: Disables strict `NOT NULL` validation for compatibility with the more permissive behavior in earlier TiDB versions. When disabled, if a `NULL` value is inserted into a `NOT NULL` column, TiDB downgrades the error to a warning and writes the implicit default value corresponding to the column data type. For example, `0` is written for numeric types, and an empty string `''` is written for string types.
+
+> **Note:**
+>
+> - Earlier TiDB versions were relatively permissive in validating `NOT NULL` constraints. When a `NULL` value was inserted into a `NOT NULL` column, TiDB might automatically write the implicit default value corresponding to the column data type. Starting from v8.5.0, TiDB tightened this validation: even in non-strict SQL mode, inserting a `NULL` value into a `NOT NULL` column might directly return an error. This behavior is closer to MySQL 8.0 semantics, but it might affect existing applications that depend on the earlier permissive behavior of TiDB.
+>
+> - If you upgrade from an earlier TiDB version to a version with strict `NOT NULL` validation enabled, and your existing business logic depends on the behavior of automatically using implicit default values after writing `NULL` to `NOT NULL` columns, related SQL statements might return errors after the upgrade. If you cannot immediately modify the business logic, you can temporarily set this variable to `OFF` to reduce upgrade compatibility risks. It is recommended to later modify the application logic to avoid explicitly writing `NULL` values to `NOT NULL` columns.
+
 ### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
