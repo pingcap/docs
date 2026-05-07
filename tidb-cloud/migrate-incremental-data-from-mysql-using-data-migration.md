@@ -187,7 +187,7 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="premium">
 
     - **Hostname or IP address** (for Public): the hostname or IP address of the data source.
-    - **Private Endpoint** (for Private Link): the Private Endpoint that you created in **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance, or click **Create a Private Endpoint here** to create one inline. For setup details, see the [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) section in the Data Migration guide.
+    - **Private Endpoint** (for Private Link): the private endpoint that you created in **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance. Alternatively, click **Create a Private Endpoint here** to create one. For setup details, see the [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) section in the Data Migration guide.
 
     </CustomContent>
 
@@ -223,7 +223,7 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="premium">
 
     - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use **Private Link** and the selected Private Endpoint is not yet accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
+    - If you use **Private Link** and the selected private endpoint has not yet been accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 

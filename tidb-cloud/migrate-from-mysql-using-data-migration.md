@@ -51,6 +51,8 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 
 </CustomContent>
 
+<CustomContent plan="essential,dedicated">
+
 ### Maximum number of migration jobs
 
 <CustomContent plan="dedicated">
@@ -61,6 +63,8 @@ You can create up to 200 migration jobs on {{{ .dedicated }}} clusters for each 
 <CustomContent plan="essential">
 
 You can create up to 100 migration jobs on {{{ .essential }}} instances for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 </CustomContent>
 
@@ -101,7 +105,7 @@ To prevent this, create the target tables in the downstream database before star
 
 <CustomContent plan="premium">
 
-- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports rows as SQL statements and replays them on the target {{{ .premium }}} instance, consuming Request Capacity Units (RCUs) during the load. Physical mode uses `IMPORT INTO` on the target {{{ .premium }}} instance, which is recommended for large datasets where load throughput and cost are priorities.
+- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports data from MySQL source databases as SQL statements and then executes them on the target {{{ .premium }}} instance, which consumes Request Capacity Units (RCUs) during the load. Physical mode uses `IMPORT INTO` on the target {{{ .premium }}} instance and is recommended for large datasets when load throughput and cost are priorities.
 - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 - When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
 
@@ -117,11 +121,6 @@ To prevent this, create the target tables in the downstream database before star
 <CustomContent plan="essential">
 
 - During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target {{{ .essential }}} instance with the MySQL source records.
-
-</CustomContent>
-
-<CustomContent plan="essential">
-
 - During incremental data migration (migrating ongoing changes to your {{{ .essential }}} instance), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .essential }}} instance so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .essential }}} instance.
 
 </CustomContent>
@@ -179,7 +178,7 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 <CustomContent plan="premium">
 
-For {{{ .premium }}}, the Data Migration feature supports any MySQL-compatible source database. The wizard exposes a single source-engine option (**MySQL**). For supported connection methods, see [Ensure network connectivity](#ensure-network-connectivity).
+For {{{ .premium }}}, the Data Migration feature supports any MySQL-compatible source database, and **MySQL** is the only data source type available in the migration job wizard. For supported connection methods, see [Ensure network connectivity](#ensure-network-connectivity).
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
@@ -336,7 +335,7 @@ For {{{ .premium }}}, the available connection methods are as follows:
 | Connection method | Availability | Recommended for |
 |:---------------------|:-------------|:----------------|
 | Public endpoints or IP addresses | All cloud providers supported by {{{ .premium }}} | Quick proof-of-concept migrations, testing, or when private connectivity is unavailable |
-| Private Link | AWS only | Production workloads without exposing data to the public internet |
+| Private links | AWS only | Production workloads without exposing data to the public internet |
 
 </CustomContent>
 
@@ -450,14 +449,42 @@ If you use a provider-native private link or private endpoint, create a [Private
 </CustomContent>
 <CustomContent plan="premium">
 
-For {{{ .premium }}} on AWS, you can use AWS PrivateLink to connect to your source MySQL instance without exposing the database over the public internet. A Private Endpoint can be reused across multiple Data Migration jobs and Changefeeds on the same {{{ .premium }}} instance.
+For {{{ .premium }}} instances hosted on AWS, you can use AWS PrivateLink to connect to your source MySQL instance without exposing the database to the public internet. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds on the same {{{ .premium }}} instance.
 
-To use PrivateLink:
+<details>
+<summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
 
-1. In the AWS console, create a Network Load Balancer (NLB) and publish it as an Endpoint Service for your source MySQL instance. The AWS-side setup is the same as the **Set up AWS PrivateLink and Private Endpoint for the MySQL source database** steps shown for {{{ .dedicated }}} above. After creating the Endpoint Service, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
-2. In the [TiDB Cloud console](https://tidbcloud.com/), open your {{{ .premium }}} instance, go to **Networking**, and use the **Private Endpoint for External Services** card to create a Private Endpoint with the Endpoint Service name from step 1. After the Private Endpoint becomes available, you can select it when creating a Data Migration job.
+AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB) and publish it as an endpoint service associated with your source MySQL instance.
 
-You can also create the Private Endpoint inline during job creation (see [Step 2](#step-2-configure-the-source-and-target-connections)).
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an NLB in the same subnet(s) as your RDS or Aurora writer. Configure the NLB with a TCP listener on port `3306` that forwards traffic to the database endpoint.
+
+    For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
+
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and then create an endpoint service. During the setup, select the NLB created in the previous step as the backing load balancer, and enable the **Require acceptance for endpoint** option. After the endpoint service is created, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
+
+    For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
+
+3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
+
+    ```shell
+    mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
+    ```
+
+4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
+
+</details>
+
+You can create the private endpoint either on the **Networking** page of your {{{ .premium }}} instance or during Data Migration job creation (see [Step 2](#step-2-configure-the-source-and-target-connections)).
+
+To create a private endpoint from the **Networking** page, take the following steps:
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the overview page of your {{{ .premium }}} instance.
+2. In the left navigation pane, click **Settings** > **Networking**.
+3. In the **AWS Private Endpoint for Changefeed** section, click **Create Private Endpoint**.
+4. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint and the **Endpoint Service Name** you copied when setting up AWS PrivateLink for the MySQL source database.
+5. Click **Create**.
+
+    After the private endpoint becomes available, you can select it when creating a Data Migration job.
 
 </CustomContent>
 
@@ -641,7 +668,7 @@ On the **Create Migration Job** page, configure the source and target connection
     - Based on the selected **Connectivity method**, do the following:
 
         - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing Private Endpoint, or click **Create a Private Endpoint here** to create one inline. Private Endpoints are managed in **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance, and can be reused across Data Migration jobs and Changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
+        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing private endpoint, or click **Create a Private Endpoint here** to create one. Private endpoints are managed under **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
 
     </CustomContent>
 
@@ -701,7 +728,7 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="premium">
 
     - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use **Private Link** and the selected Private Endpoint is not yet accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
+    - If you use **Private Link** and the selected private endpoint has not yet been accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), select **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 
