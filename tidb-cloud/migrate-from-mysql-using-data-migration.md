@@ -395,23 +395,51 @@ If you use a provider-native private link or private endpoint, create a private 
 <details>
 <summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
 
-AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB) and publish it as an endpoint service associated with your source MySQL instance.
+AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB), publish it as an endpoint service associated with your source MySQL instance, and authorize TiDB Cloud's AWS principal to consume the service.
 
-1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an NLB in the same subnet(s) as your RDS or Aurora writer. Configure the NLB with a TCP listener on port `3306` that forwards traffic to the database endpoint.
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Key configuration:
+
+    - **Scheme**: **Internal**. The load balancer stays inside your VPC; only the endpoint service in the next step exposes it to TiDB Cloud.
+    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's Default VPC, which is rarely where your database lives, so switch the **VPC** dropdown before continuing.
+    - **Availability Zones**: select subnets in **at least 2 Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
+    - **Listener port**: `3306`. The wizard default is `80`, change it before creating the listener.
+    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. RDS endpoints are not directly registerable, so you register the database's private IP.
+
+        To find your database's private IP, in the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), click **Network Interfaces** in the left navigation pane, and filter by **Description** = `RDSNetworkInterface` and **VPC** = your VPC. Use the **Primary private IPv4 address** shown in the matching network interface.
+
+        > **Note:**
+        >
+        > The RDS private IP can change on failover, maintenance, or storage scaling. For production deployments, see [Access Amazon RDS across VPCs using AWS PrivateLink and Network Load Balancer](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/) in the AWS Database Blog for an automated IP-rotation pattern.
 
     For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
 
-2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and then create an endpoint service. During the setup, select the NLB created in the previous step as the backing load balancer, and enable the **Require acceptance for endpoint** option. After the endpoint service is created, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following:
+
+    - **Load balancer type**: **Network**, and select the NLB created in the previous step. If the **Available load balancers** list is empty, wait until the NLB shows the **Active** state and click the refresh icon next to the list.
+    - **Acceptance required**: enabled (this is the default).
+    - **Supported IP address types**: check **IPv4**.
+
+    After the endpoint service is created, copy the service name for later use. The service name is in the `com.amazonaws.vpce.<region>.vpce-svc-<id>` format, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.
 
     For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
 
-3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
+3. Authorize TiDB Cloud's AWS principal to use your endpoint service. On the endpoint service detail page in the [Amazon VPC console](https://console.aws.amazon.com/vpc/), open the **Allow principals** tab, click **Allow principals**, and add the following ARN:
+
+    ```text
+    arn:aws:iam::886436925895:root
+    ```
+
+    Without this step, TiDB Cloud cannot create the VPC endpoint that connects to your service, and the **Create Private Endpoint for External Services** dialog in TiDB Cloud hangs indefinitely with no error.
+
+    For detailed instructions, see [Manage permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions) in AWS documentation.
+
+4. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
+5. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
 
 </details>
 
@@ -454,23 +482,51 @@ For {{{ .premium }}} instances hosted on AWS, you can use AWS PrivateLink to con
 <details>
 <summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
 
-AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB) and publish it as an endpoint service associated with your source MySQL instance.
+AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB), publish it as an endpoint service associated with your source MySQL instance, and authorize TiDB Cloud's AWS principal to consume the service.
 
-1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an NLB in the same subnet(s) as your RDS or Aurora writer. Configure the NLB with a TCP listener on port `3306` that forwards traffic to the database endpoint.
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Key configuration:
+
+    - **Scheme**: **Internal**. The load balancer stays inside your VPC; only the endpoint service in the next step exposes it to TiDB Cloud.
+    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's Default VPC, which is rarely where your database lives, so switch the **VPC** dropdown before continuing.
+    - **Availability Zones**: select subnets in **at least 2 Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
+    - **Listener port**: `3306`. The wizard default is `80`, change it before creating the listener.
+    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. RDS endpoints are not directly registerable, so you register the database's private IP.
+
+        To find your database's private IP, in the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), click **Network Interfaces** in the left navigation pane, and filter by **Description** = `RDSNetworkInterface` and **VPC** = your VPC. Use the **Primary private IPv4 address** shown in the matching network interface.
+
+        > **Note:**
+        >
+        > The RDS private IP can change on failover, maintenance, or storage scaling. For production deployments, see [Access Amazon RDS across VPCs using AWS PrivateLink and Network Load Balancer](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/) in the AWS Database Blog for an automated IP-rotation pattern.
 
     For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
 
-2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and then create an endpoint service. During the setup, select the NLB created in the previous step as the backing load balancer, and enable the **Require acceptance for endpoint** option. After the endpoint service is created, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following:
+
+    - **Load balancer type**: **Network**, and select the NLB created in the previous step. If the **Available load balancers** list is empty, wait until the NLB shows the **Active** state and click the refresh icon next to the list.
+    - **Acceptance required**: enabled (this is the default).
+    - **Supported IP address types**: check **IPv4**.
+
+    After the endpoint service is created, copy the service name for later use. The service name is in the `com.amazonaws.vpce.<region>.vpce-svc-<id>` format, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.
 
     For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
 
-3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
+3. Authorize TiDB Cloud's AWS principal to use your endpoint service. On the endpoint service detail page in the [Amazon VPC console](https://console.aws.amazon.com/vpc/), open the **Allow principals** tab, click **Allow principals**, and add the following ARN:
+
+    ```text
+    arn:aws:iam::886436925895:root
+    ```
+
+    Without this step, TiDB Cloud cannot create the VPC endpoint that connects to your service, and the **Create Private Endpoint for External Services** dialog in TiDB Cloud hangs indefinitely with no error.
+
+    For detailed instructions, see [Manage permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions) in AWS documentation.
+
+4. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
+5. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
 
 </details>
 
@@ -482,6 +538,11 @@ To create a private endpoint from the **Networking** page, take the following st
 2. In the left navigation pane, click **Settings** > **Networking**.
 3. In the **AWS Private Endpoint for External Services** section, click **Create Private Endpoint for External Services**.
 4. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint and the **Endpoint Service Name** you copied when setting up AWS PrivateLink for the MySQL source database.
+
+    > **Note:**
+    >
+    > Before clicking **Create**, ensure that you have authorized TiDB Cloud's AWS principal (`arn:aws:iam::886436925895:root`) on your endpoint service in AWS, as described in Step 3 of **Set up AWS PrivateLink and Private Endpoint for the MySQL source database** above. Otherwise, this dialog hangs indefinitely with no error.
+
 5. Click **Create**.
 
     After the private endpoint becomes available, you can select it when creating a Data Migration job.
@@ -651,7 +712,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
         - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, fill in the following information:
-            - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
+            - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce.<region>.vpce-svc-<id>`, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`) that you created for your RDS or Aurora instance.
             - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
 
     </CustomContent>
