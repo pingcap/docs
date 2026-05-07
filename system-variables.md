@@ -1153,8 +1153,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `4`
 - Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
 - This variable controls the following aspects of `ANALYZE` concurrency:
-    - The concurrency of scanning TiKV regions.
-    - The concurrency of scanning regions for special indexes, such as indexes on generated virtual columns.
+    - The concurrency of scanning TiKV Regions.
+    - The concurrency of scanning Regions for special indexes, such as indexes on generated virtual columns.
 
 ### tidb_analyze_partition_concurrency
 
@@ -1163,7 +1163,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
 - Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
-- For manual and auto analyze, this variable controls the concurrency for saving analyze results, including writing TopN and histograms to system tables.
+- For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -1305,7 +1305,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-- For auto analyze, this variable controls the concurrency of table or partition analysis, for example, the number of partitions or table tasks that can be processed simultaneously.
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
 
 ### tidb_backoff_lock_fast
 
@@ -1418,7 +1418,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `2`. The default value is `4` for v7.4.0 and earlier versions.
 - Range: `[1, 256]`
 - Unit: Threads
-- For manual analyze, this variable controls the concurrency of table or partition analysis, for example, the number of partitions or table tasks that can be processed simultaneously.
+- This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
 ### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
 
