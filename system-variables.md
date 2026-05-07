@@ -2864,7 +2864,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether TiDB performs strict validation when `NULL` values are explicitly written to `NOT NULL` columns in `INSERT` statements.
+- This variable controls whether TiDB performs strict validation when an `INSERT` statement explicitly writes a `NULL` value to a `NOT NULL` column.
 - Possible values:
     - `ON`: Enables strict `NOT NULL` validation. This behavior is closer to MySQL 8.0 semantics.
         - In strict SQL mode, if you insert a `NULL` value into a `NOT NULL` column, TiDB returns an error.
