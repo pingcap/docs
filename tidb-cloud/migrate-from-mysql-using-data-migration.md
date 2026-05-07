@@ -777,7 +777,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - If you use **Public IP** or **VPC Peering** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use **Private Link** as the connectivity method, you are prompted to accept the endpoint request:
-        - For AWS: go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
+        - For AWS: in the [AWS VPC console](https://console.aws.amazon.com/vpc/home), switch to the AWS region where you created the endpoint service, click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
         - For Azure: go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, click **Setting** > **Networking** in the left navigation pane, locate the **Private endpoint** section on the right side, and then approve the pending connection request from TiDB Cloud.
 
     </CustomContent>
@@ -789,7 +789,7 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="premium">
 
     - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use **Private Link** and the selected private endpoint has not yet been accepted in AWS, go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), select **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
+    - If you use **Private Link** and the selected private endpoint has not yet been accepted in AWS, in the [AWS VPC console](https://console.aws.amazon.com/vpc/home), switch to the AWS region where you created the endpoint service, select **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 
