@@ -16,7 +16,7 @@
 | algorithm | 算法 |  |
 | anonymous | 匿名 |  |
 | appendix | 附录 |  |
-| Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) | 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制： |  |
+| Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): | 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制： |  |
 | architecture | 架构 |  |
 | arithmetic operation | 数值运算/算术运算 |  |
 | ascending order | 正序 |  |
