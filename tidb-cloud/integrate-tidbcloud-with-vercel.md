@@ -71,7 +71,7 @@ To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integrat
 
 > **Note:**
 >
-> This method is only available for {{{ .starter }}} and {{{ .essential }}} instances. If you want to connect to a TiDB Cloud Dedicated cluster, use the [manual method](#connect-via-manually-setting-environment-variables).
+> This method is only available for {{{ .starter }}} and {{{ .essential }}} instances. If you want to connect to a TiDB Cloud Dedicated cluster or a TiDB Cloud Premium instance, use the [manual method](#connect-via-manually-setting-environment-variables).
 
 ### Integration workflow
 

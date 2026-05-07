@@ -66,6 +66,8 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
 - [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
+- [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
@@ -154,7 +156,7 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud 
 
 ### Is my TiDB Cloud resource secure?
 
-In TiDB Cloud, you can use a TiDB Cloud Dedicated cluster, a {{{ .starter }}} instance, or a {{{ .essential }}} instance according to your needs.
+In TiDB Cloud, you can use a TiDB Cloud Dedicated cluster, a {{{ .premium }}} instance, a {{{ .starter }}} instance, or a {{{ .essential }}} instance according to your needs.
 
 For TiDB Cloud Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
 

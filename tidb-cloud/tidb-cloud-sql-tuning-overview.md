@@ -101,6 +101,8 @@ If you still cannot get better performance based on SQL performance tuning, you 
 
 For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts#troubleshoot-lock-conflicts).
 
+<CustomContent plan="starter,essential,dedicated">
+
 ### Hotspot issues
 
 You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
@@ -123,3 +125,5 @@ In Key Visualizer, there are [four common heat map results](https://docs.pingcap
 In both cases of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
 
 For more information about SQL performance optimization, see [SQL Optimization](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization) in SQL FAQs.
+
+</CustomContent>
