@@ -397,13 +397,13 @@ If you use a provider-native private link or private endpoint, create a private 
 
 AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB), publish it as an endpoint service associated with your source MySQL instance, and authorize TiDB Cloud's AWS principal to consume the service.
 
-1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Key configuration:
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Configure the following key settings:
 
     - **Scheme**: **Internal**. The load balancer stays inside your VPC; only the endpoint service in the next step exposes it to TiDB Cloud.
-    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's Default VPC, which is rarely where your database lives, so switch the **VPC** dropdown before continuing.
-    - **Availability Zones**: select subnets in **at least 2 Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
-    - **Listener port**: `3306`. The wizard default is `80`, change it before creating the listener.
-    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. RDS endpoints are not directly registerable, so you register the database's private IP.
+    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's default VPC, which is rarely where your database resides, so switch the **VPC** dropdown before continuing.
+    - **Availability Zones**: select subnets in **at least two Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
+    - **Listener port**: `3306`. The wizard default is `80`. Change it before you create the listener.
+    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. You cannot register RDS endpoints directly, so register the database's private IP instead.
 
         To find your database's private IP, in the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), click **Network Interfaces** in the left navigation pane, and filter by **Description** = `RDSNetworkInterface` and **VPC** = your VPC. Use the **Primary private IPv4 address** shown in the matching network interface.
 
@@ -413,11 +413,11 @@ AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you 
 
     For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
 
-2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following:
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following settings:
 
     - **Load balancer type**: **Network**, and select the NLB created in the previous step. If the **Available load balancers** list is empty, wait until the NLB shows the **Active** state and click the refresh icon next to the list.
-    - **Acceptance required**: enabled (this is the default).
-    - **Supported IP address types**: check **IPv4**.
+    - **Acceptance required**: enabled (default).
+    - **Supported IP address types**: select **IPv4**.
 
     After the endpoint service is created, copy the service name for later use. The service name is in the `com.amazonaws.vpce.<region>.vpce-svc-<id>` format, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.
 
@@ -484,13 +484,13 @@ For {{{ .premium }}} instances hosted on AWS, you can use AWS PrivateLink to con
 
 AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB), publish it as an endpoint service associated with your source MySQL instance, and authorize TiDB Cloud's AWS principal to consume the service.
 
-1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Key configuration:
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Configure the following key settings:
 
     - **Scheme**: **Internal**. The load balancer stays inside your VPC; only the endpoint service in the next step exposes it to TiDB Cloud.
-    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's Default VPC, which is rarely where your database lives, so switch the **VPC** dropdown before continuing.
-    - **Availability Zones**: select subnets in **at least 2 Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
-    - **Listener port**: `3306`. The wizard default is `80`, change it before creating the listener.
-    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. RDS endpoints are not directly registerable, so you register the database's private IP.
+    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's default VPC, which is rarely where your database resides, so switch the **VPC** dropdown before continuing.
+    - **Availability Zones**: select subnets in **at least two Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
+    - **Listener port**: `3306`. The wizard default is `80`. Change it before you create the listener.
+    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. You cannot register RDS endpoints directly, so register the database's private IP instead.
 
         To find your database's private IP, in the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), click **Network Interfaces** in the left navigation pane, and filter by **Description** = `RDSNetworkInterface` and **VPC** = your VPC. Use the **Primary private IPv4 address** shown in the matching network interface.
 
@@ -500,11 +500,11 @@ AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you 
 
     For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
 
-2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following:
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following settings:
 
     - **Load balancer type**: **Network**, and select the NLB created in the previous step. If the **Available load balancers** list is empty, wait until the NLB shows the **Active** state and click the refresh icon next to the list.
-    - **Acceptance required**: enabled (this is the default).
-    - **Supported IP address types**: check **IPv4**.
+    - **Acceptance required**: enabled (default).
+    - **Supported IP address types**: select **IPv4**.
 
     After the endpoint service is created, copy the service name for later use. The service name is in the `com.amazonaws.vpce.<region>.vpce-svc-<id>` format, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.
 
