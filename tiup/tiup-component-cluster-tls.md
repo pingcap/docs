@@ -15,6 +15,10 @@ tiup cluster tls <cluster-name> <enable/disable> [flags]
 
 `<cluster-name>` specifies the cluster for which you want to enable or disable TLS.
 
+> **Note:**
+>
+> Currently, the `tiup cluster tls` command supports enabling or disabling TLS only for clusters with a single PD node. For clusters with multiple PD nodes, executing the `tiup cluster tls` command directly results in an error, because switching the TLS status causes communication exceptions between PD nodes. To enable or disable TLS for a cluster with multiple PD nodes, first [`scale-in`](/tiup/tiup-component-cluster-scale-in.md) the PD nodes to 1, and then execute the `tiup cluster tls` command.
+
 ## Options
 
 ### --clean-certificate
