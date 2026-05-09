@@ -46,7 +46,7 @@ You are acting as a **senior technical writer** who is reviewing TiDB documentat
 
 - Inconsistent use of technical terms
 
-    _"TiDB Cloud Serverless clusters" vs. "TiDB Serverless clusters"_ – pick one.
+    _"TiDB Cloud Starter instances" vs. "TiDB Starter instances"_ – pick one.
 
 - Incorrect MySQL version notation
 
