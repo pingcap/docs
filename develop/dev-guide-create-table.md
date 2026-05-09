@@ -12,13 +12,13 @@ This document introduces how to create tables using the SQL statement and the re
 
 Before reading this document, make sure that the following tasks are completed:
 
-- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 
 ## What is a table
 
-A [table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to store the data sent from SQL statements. Tables save data records in the form of rows and columns. A table has at least one column. If you have defined `n` columns, each row of data has exactly the same fields as the `n` columns.
+A [table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to store the data sent from SQL statements. Tables save data records in the form of rows and columns. A table has at least one column. If you have defined `n` columns, each row of data has exactly the same fields as the `n` columns.
 
 ## Name a table
 
@@ -168,7 +168,7 @@ In addition to [primary key constraints](#select-primary-key), TiDB also support
 
 To set a default value on a column, use the `DEFAULT` constraint. The default value allows you to insert data without specifying a value for each column.
 
-You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
+You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are instead handled by the database. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -263,7 +263,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster that includes **TiFlash**.
+> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance) to create a {{{ .starter }}} instance that includes **TiFlash**.
 
 Then you can go on to perform the following query:
 

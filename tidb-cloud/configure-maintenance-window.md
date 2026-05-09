@@ -1,6 +1,6 @@
 ---
 title: Configure Maintenance Window
-summary: Learn how to configure maintenance window for your cluster.
+summary: Learn how to configure maintenance window for your TiDB Cloud Dedicated cluster.
 ---
 
 # Configure Maintenance Window
@@ -58,17 +58,23 @@ Regular maintenance ensures that important updates are performed to safeguard Ti
 
 You can modify the start time to your preferred time or reschedule maintenance tasks until the deadline as follows:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Maintenance**.
-3. On the **Maintenance** page, check the maintenance information.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+
+    > **Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Maintenance** under **Project Settings**.
+4. On the **Maintenance** page, check the maintenance information.
 
      - If any maintenance tasks are displayed, check the descriptions, scheduled start time, and deadline. The maintenance tasks will start at the designated time.
 
      - If there is no maintenance data, it means no maintenance task is scheduled recently.
 
-4. (Optional) Click **Maintenance Window Setting** to modify the start time of the maintenance window. Note that the maintenance will be performed at the specified start time only if there is a maintenance window planned for that week.
+5. (Optional) Click **Maintenance Window Setting** to modify the start time of the maintenance window. Note that the maintenance will be performed at the specified start time only if there is a maintenance window planned for that week.
 
-5. To reschedule a specific maintenance task, click **...** > **Reschedule** in the **Action** column, and choose a new time before the deadline.
+6. To reschedule a specific maintenance task, click **...** > **Reschedule** in the **Action** column, and choose a new time before the deadline.
 
     If you need to reschedule the maintenance task beyond the deadline, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 

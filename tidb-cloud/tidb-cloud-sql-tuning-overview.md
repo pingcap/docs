@@ -19,11 +19,11 @@ To improve the performance of SQL statements, consider the following principles.
 - Use appropriate Join types. Depending on the size and correlation of each table in the query, it is very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
 - Use appropriate storage engines. It is recommended to use the TiFlash storage engine for Hybrid Transactional and Analytical Processing (HTAP) workloads. See [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
 
-TiDB Cloud provides several tools to help you analyze slow queries on a cluster. The following sections describe several approaches to optimize slow queries.
+TiDB Cloud provides several tools to help you analyze slow queries. The following sections describe several approaches to optimize slow queries.
 
 ### Use Statement on the Diagnosis page
 
-The TiDB Cloud console provides a [**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis) tab on the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to identify and analyze SQL statements that consume a long time in total or in a single execution.
+The TiDB Cloud console provides a [**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis) tab on the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page. It collects the execution statistics of SQL statements of all databases on your TiDB Cloud resource. You can use it to identify and analyze SQL statements that consume a long time in total or in a single execution.
 
 Note that on this page, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 
@@ -105,7 +105,7 @@ For more information on how to locate and resolve transaction conflicts, see [Tr
 
 You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
 
-You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
+You can use Key Visualizer to analyze the usage patterns of {{{ .dedicated }}} clusters and troubleshoot traffic hotspots. This page provides a visual representation of the {{{ .dedicated }}} cluster's traffic over time.
 
 You can observe the following information in Key Visualizer. You may need to understand some [basic concepts](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts) first.
 

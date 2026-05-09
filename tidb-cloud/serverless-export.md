@@ -1,15 +1,15 @@
 ---
 title: Export Data from {{{ .starter }}} or Essential
-summary: Learn how to export data from {{{ .starter }}} or {{{ .essential }}} clusters.
+summary: Learn how to export data from {{{ .starter }}} or {{{ .essential }}} instances.
 ---
 
 # Export Data from {{{ .starter }}} or Essential
 
-TiDB Cloud enables you to export data from a {{{ .starter }}} or Essential cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud enables you to export data from a {{{ .starter }}} or Essential instance to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a {{{ .starter }}} or Essential instance. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .starter }}} or Essential instance, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
@@ -35,7 +35,7 @@ You can export data to the following locations:
 
 ### A local file
 
-To export data from a TiDB Cloud cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+To export data from a {{{ .starter }}} or Essential instance to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
 
 Exporting data to a local file has the following limitations:
 
@@ -175,13 +175,13 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
 
@@ -192,7 +192,7 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 
    > **Tip:**
    >
-   > If your cluster has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+   > If your {{{ .starter }}} or Essential instance has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
 
 4. Click **Export**.
 
@@ -226,13 +226,13 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
 
@@ -270,13 +270,13 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
 
@@ -308,13 +308,13 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
 
@@ -346,13 +346,13 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Alibaba Cloud OSS** from the drop-down list. 
 
@@ -389,13 +389,13 @@ To cancel an ongoing export task, take the following steps:
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
    > **Tip:**
    >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+   > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export** to view the export task list.
 
@@ -416,7 +416,7 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## Export speed
 
-The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md):
+The export speed varies between {{{ .starter }}} and {{{ .essential }}}:
 
 - **{{{ .starter }}}**:
 

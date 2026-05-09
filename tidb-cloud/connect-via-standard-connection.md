@@ -9,7 +9,7 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 
 > **Tip:**
 >
-> To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public connection, see [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} instance via public connection, see [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
 
 ## Prerequisite: Configure IP access list
 
@@ -19,15 +19,15 @@ For public connections, TiDB Cloud Dedicated only allows client connections from
 
 To connect to a TiDB Cloud Dedicated cluster via public connection, take the following steps:
 
-1. Open the overview page of the target cluster.
+1. Open the overview page of the target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -37,7 +37,7 @@ To connect to a TiDB Cloud Dedicated cluster via public connection, take the fol
 
 4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your TiDB Cloud Dedicated cluster.
 
 ## What's next
 

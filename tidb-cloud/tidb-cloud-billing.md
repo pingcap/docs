@@ -53,11 +53,11 @@ After you set up the payment method, TiDB Cloud will generate an invoice once yo
 
 After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 
-Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
+Invoice costs include TiDB resource usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
 
 For each monthly invoice:
 
-- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
+- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the resource usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
 - You can view the summary and details of charges for the current month and the previous month.
 
@@ -77,7 +77,7 @@ To view the list of invoices, perform the following steps:
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB resource usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
 > **Note:**
 >
@@ -91,7 +91,7 @@ To view the billing details, perform the following steps:
 
 On the **Billing** page, the **Bills** tab is displayed by default.
 
-The **Bills** tab shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+The **Bills** tab shows the billing summary by projects & instances and the billing summary by service. You can also see the usage details and download the data in CSV format.
 
 > **Note:**
 >
@@ -144,7 +144,7 @@ If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By provi
 
 ## Credits
 
-TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB usage fees before the credits become expired.
 
 > **Tip:**
 >
@@ -160,14 +160,14 @@ To view the credit information, perform the following steps:
 
 > **Note:**
 >
-> - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
+> - After you set up your payment method, the resource usage fees are first deducted from your unused credits, then from your payment method.
 > - Credits cannot be used to pay the support plan fees.
 
 > **Warning:**
 >
 > During a PoC process:
 >
-> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
+> - If all your credits become expired before you add a payment method, you cannot create a new TiDB Cloud Dedicated cluster. After 3 days, all your existing TiDB Cloud Dedicated clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
 > - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
 ## Discounts
@@ -202,11 +202,11 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 </CustomContent>
 
-The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
+The fee is deducted from a bound credit card according to your resource usage. To add a valid credit card, you can use either of the following methods:
 
 - When you are creating a TiDB Cloud Dedicated cluster:
 
-    1. On the **Create Cluster** page, click **Add Credit Card**.
+    1. On the **Create Resource** page, click **Add Credit Card**.
     2. In the **Add a Card** dialog, fill in the card information and billing address.
     3. Click **Save Card**.
 

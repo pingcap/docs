@@ -43,8 +43,8 @@ You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/ser
 - Click **Support** in the lower-left corner of [TiDB Cloud console](https://tidbcloud.com/), and then do one of the following depending on your support plan:
     - **Basic**:  in the **Account & Billing** area, click **Account/Billing issues**.
     - **Developer**, **Enterprise**, or **Premium**:  in the **Talk to an expert** area, click **PingCAP Help Center**.
-- On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
-- On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
+- On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the row of your target resource, and then select **Get Support**.
+- On the overview page of your target resource, click **...** in the upper-right corner, and then select **Get Support**.
 
 ## Create an account or billing support ticket
 
@@ -56,7 +56,7 @@ All TiDB Cloud users can create billing and account-related tickets. To create a
 
     - **Summary**: provide a brief summary of your question.
     - **TiDB Cloud Org**: select the relevant TiDB Cloud organization, if applicable.
-    - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
+    - **TiDB Cloud Resource**: select the relevant TiDB Cloud resource, if applicable.
     - **Description**: provide the details about the issue.
     - **Severity**: estimate the business impact of the issue and choose the proper severity for it. (S1 is not applicable to billing or account issues.)
 
@@ -78,8 +78,8 @@ To create a support ticket about technical issues, take the following steps:
 
     - **Summary**: provide a brief summary of your question.
     - **TiDB Cloud Org**: select the relevant TiDB Cloud organization for the issue.
-    - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
-    - **Environment**: select the corresponding environment in which you use the TiDB Cloud cluster.
+    - **TiDB Cloud Resource**: select the relevant TiDB Cloud resource, if applicable.
+    - **Environment**: select the corresponding environment in which you use the TiDB Cloud resource.
     - **Description**: describe the issue you encountered as detailed as possible. For example, share the exact timestamp when you encountered the issue, attach the detailed error messages and call stack of the issue, and add your troubleshooting or analysis of the issue.
     - **Severity**: estimate the business impact of the issue and choose the proper severity for it.
 
@@ -91,7 +91,7 @@ To create a support ticket about technical issues, take the following steps:
         | S4 | General question on how a particular feature or function performs or should be configured. An issue that has minimal impact on business and can be tolerated for a reasonable period. |
 
     - **Components**: select the relevant TiDB Cloud component to report the issue for, such as TiDB, TiKV, PD, or TiFlash.
-    - **Affects versions**: specify the TiDB Cloud cluster version related to the issue.
+    - **Affects versions**: specify the TiDB version related to the issue.
 
 4. Click **Submit**.
 

@@ -9,7 +9,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
@@ -45,35 +45,42 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ### Step 3. Subscribe from TiDB Cloud
 
-Alert notification subscriptions vary by cluster plan.
+Alert notification subscriptions vary by [your TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md).
 
 <CustomContent plan="dedicated">
 
+To subscribe to alert notifications of {{{ .dedicated }}} clusters, take the following steps:
+
 > **Tip:**
 >
-> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
+> For {{{ .dedicated }}}, the alert subscription is for all alerts in the current project. If you have multiple {{{ .dedicated }}} clusters in the project, you just need to subscribe once.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Zoom** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field, your Zoom webhook URL in the **URL** field, and the verification token in the **Token** field.
-6. Click **Test Connection**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
+4. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+5. Select **Zoom** from the **Subscriber Type** drop-down list.
+6. Enter a name in the **Name** field, your Zoom webhook URL in the **URL** field, and the verification token in the **Token** field.
+7. Click **Test Connection**.
 
     - If the test succeeds, the **Save** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the connection.
 
-7. Click **Save** to complete the subscription.
+8. Click **Save** to complete the subscription.
+
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .dedicated }}} cluster. You will be directed to the **Alert Subscription** page.
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
+To subscribe to alert notifications of a {{{ .essential }}} instance, take the following steps:
+
 > **Tip:**
 >
-> The alert subscription is for all alerts in the current cluster. If you have multiple clusters, you need to subscribe to each cluster individually.
+> For {{{ .essential }}}, the alert subscription is for all alerts in the current instance. If you have multiple {{{ .essential }}} instances, you need to subscribe to each instance individually.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target cluster using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Zoom** from the **Subscriber Type** drop-down list.
@@ -85,28 +92,29 @@ Alert notification subscriptions vary by cluster plan.
 
 7. Click **Save** to complete the subscription.
 
-</CustomContent>
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .essential }}} instance. You will be directed to the **Alert Subscription** page.
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscription** page.
+</CustomContent>
 
 If an alert condition remains unchanged, the alert sends notifications every three hours.
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications, take the following steps. The steps vary by cluster plan.
+If you no longer want to receive alert notifications, take the following steps. The steps vary by [your TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md).
 
 <CustomContent plan="dedicated">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
-4. Click **Unsubscribe** to confirm the unsubscription.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
+2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
+3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
+4. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+5. Click **Unsubscribe** to confirm the unsubscription.
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target cluster using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.

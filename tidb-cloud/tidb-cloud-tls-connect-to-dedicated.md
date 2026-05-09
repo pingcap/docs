@@ -14,15 +14,15 @@ To ensure data security, the CA certificate for your TiDB Cloud Dedicated cluste
 
 - Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
-- Set a password to access your cluster in secure settings.
+- Set a password to access your TiDB Cloud Dedicated cluster in secure settings.
 
-    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your TiDB Cloud Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
+    To do so, you can navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the row of your TiDB Cloud Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
 
 ## Secure connection to a TiDB Cloud Dedicated cluster
 
 In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Cloud Dedicated cluster as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your TiDB Cloud Dedicated cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
@@ -37,7 +37,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     > - You can store the downloaded CA cert in the default storage path of your operating system, or specify another storage path. You need to replace the CA cert path in the code example with your own CA cert path in the subsequent steps.
     > - TiDB Cloud Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Cloud Dedicated.
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your TiDB Cloud Dedicated cluster.
 
 The following examples show the connection strings in MySQL, MyCLI, JDBC, Python, Go, and Node.js:
 

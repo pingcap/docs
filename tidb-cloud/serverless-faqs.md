@@ -29,15 +29,15 @@ To make the purpose of this entry tier clearer, we’ve renamed it to Starter, t
 - A fully managed database with both row-based and columnar storage, ideal for hybrid OLTP and OLAP workloads.
 - Automatic and request-driven scaling, no capacity planning or manual tuning required.
 - Built-in vector search and full-text search to power GenAI retrieval, chatbots, and other AI applications.
-- Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) per cluster).
+- Always-free monthly quota for up to five {{{ .starter }}} instances per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) per {{{ .starter }}} instance).
 
 ### How do I get started with {{{ .starter }}}?
 
 Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
 
-### How many {{{ .starter }}} clusters can I create in TiDB Cloud?
+### How many {{{ .starter }}} instances can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances by default. To create more {{{ .starter }}} instances, you need to add a credit card and set the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
 ### Are all TiDB Cloud features fully supported on {{{ .starter }}}?
 
@@ -47,9 +47,9 @@ Some of TiDB Cloud features are partially supported or not supported on {{{ .sta
 
 We are actively working on expanding {{{ .starter }}} to other cloud platforms, including Google Cloud and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make {{{ .starter }}} available on more cloud platforms, and we will keep our community updated as we progress.
 
-### I created a Developer Tier cluster before {{{ .starter }}} was available. Can I still use my cluster?
+### I created a Developer Tier cluster before {{{ .starter }}} was available. Can I still use my {{{ .starter }}} instance?
 
-Yes, your Developer Tier cluster has been automatically migrated to the {{{ .starter }}} cluster, providing you with an improved user experience without any disruptions to your prior usage.
+Yes, your Developer Tier cluster has been automatically migrated to the {{{ .starter }}} instance, providing you with an improved user experience without any disruptions to your prior usage.
 
 ### What is columnar storage in {{{ .starter }}}?
 
@@ -57,7 +57,7 @@ Columnar storage in {{{ .starter }}} acts as an additional replica of row-based 
 
 Columnar storage is a key feature that enables the Hybrid Transactional and Analytical Processing (HTAP) capabilities of TiDB by seamlessly blending transactional and analytical workloads.
 
-To efficiently manage columnar storage data, {{{ .starter }}} uses a separate elastic TiFlash engine. During query execution, the optimizer guides the cluster to automatically decide whether to retrieve data from row-based or columnar storage.
+To efficiently manage columnar storage data, {{{ .starter }}} uses a separate elastic TiFlash engine. During query execution, the optimizer guides the {{{ .starter }}} instance to automatically decide whether to retrieve data from row-based or columnar storage.
 
 ### When should I use columnar storage in {{{ .starter }}}?
 
@@ -84,41 +84,45 @@ For more information about how to set up TiFlash replicas, see [Create TiFlash r
 
 When you connect via a Public Endpoint, your connection passes through various network providers and intermediate devices. These devices might have their own short idle timeouts, which can interrupt your connection prematurely. For more information, see [Connection limitations](/tidb-cloud/serverless-limitations.md#connection).
 
+### Why did I receive a "Connection limit exceeded" error?
+
+This error occurs when your {{{ .starter }}} instance exceeds its maximum concurrent connection limit. For more information, see [Connection limitations](/tidb-cloud/serverless-limitations.md#connection).
+
 ## Billing and metering FAQs
 
 ### What are Request Units?
 
-{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and {{{ .starter }}} instance usage. In this model, all {{{ .starter }}} instance activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru). RU is an abstract measurement for the size and intricacy of requests initiated on your {{{ .starter }}} instance. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 ### Is there any free plan available for {{{ .starter }}}?
 
-For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five {{{ .starter }}} instances in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
-If the monthly spending limit is set for a {{{ .starter }}} cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you set a monthly spending limit or the usage is reset upon the start of a new month.
+If the monthly spending limit is set for a {{{ .starter }}} instance, usage beyond the free quota will be charged. For a free {{{ .starter }}} instance, once the free quota is reached, the read and write operations on this instance will be throttled until you set a monthly spending limit or the usage is reset upon the start of a new month.
 
 For more information, see [{{{ .starter }}} usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### What are the limitations of the free plan?
 
-Under the free plan, cluster performance is limited due to non-scalable resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize cluster performance and avoid these limitations, you can [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for your {{{ .starter }}} cluster.
+Under the free plan, {{{ .starter }}} instance performance is limited due to non-scalable resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize the performance of the {{{ .starter }}} instance and avoid these limitations, you can [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for your {{{ .starter }}} instance.
 
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
 To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
 
-To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit for additional resources. For more information, see [{{{ .starter }}} usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
+To get the RUs and storage used by your {{{ .starter }}} instance, navigate to the overview page of your {{{ .starter }}} instance, and then view the **Usage this month** pane. With your past resource usage data and real-time resource usage in this pane, you can track the resource consumption of your {{{ .starter }}} instance and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit for additional resources. For more information, see [{{{ .starter }}} usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### How can I optimize my workload to minimize the number of RUs consumed?
 
-Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). To identify the SQL statements that consume the most RUs, navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your cluster, and then check the **SQL Statements** tab, where you can observe SQL execution and view the top statements sorted by **Total RU** or **Mean RU**. For more information, see [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
+Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). To identify the SQL statements that consume the most RUs, navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your {{{ .starter }}} instance, and then check the **SQL Statements** tab, where you can observe SQL execution and view the top statements sorted by **Total RU** or **Mean RU**. For more information, see [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
 
 ### How storage is metered for {{{ .starter }}}？
 
-The storage is metered based on the amount of data stored in a {{{ .starter }}} cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
+The storage is metered based on the amount of data stored in a {{{ .starter }}} instance, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
 
 ### Why does the storage usage size remain unchanged after dropping a table or database immediately?
 
@@ -126,19 +130,19 @@ This is because TiDB retains dropped tables and databases for a certain period o
 
 ### Why are there RU consumptions when I'm not actively running any queries?
 
-RU consumptions can occur in various scenarios. One common scenario is during background queries, including but not limited to synchronizing schema changes between TiDB instances, executing DDL jobs, refreshing privileges, refreshing SQL bindings, and refreshing global variables. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
+RU consumptions can occur in various scenarios. One common scenario is during background queries, including but not limited to synchronizing schema changes between TiDB nodes, executing DDL jobs, refreshing privileges, refreshing SQL bindings, and refreshing global variables. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
 
 ### Why is there a spike in RU usage when my workload is steady?
 
 A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistics, are required for generating optimized query plans.
 
-### What happens when my cluster exhausts its free quota or exceeds its spending limit?
+### What happens when my {{{ .starter }}} instance exhausts its free quota or exceeds its spending limit?
 
-Once a cluster reaches its free quota or spending limit, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For more information, see [{{{ .starter }}} Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+Once a {{{ .starter }}} instance reaches its free quota or spending limit, the instance immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For more information, see [{{{ .starter }}} Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
 
 ### Why do I observe spikes in RU usage while importing data?
 
-During the data import process of a {{{ .starter }}} cluster, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
+During the data import process of a {{{ .starter }}} instance, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
 
 ### What costs are involved when using columnar storage in {{{ .starter }}}?
 
@@ -163,10 +167,10 @@ The serverless technology is designed for multi-tenancy and the resources used b
 ### How does {{{ .starter }}} ensure security?
 
 - Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to {{{ .starter }}}, see [TLS Connection to {{{ .starter }}}](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-- All persisted data on {{{ .starter }}} is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
+- All persisted data on {{{ .starter }}} is encrypted-at-rest using the tool of the cloud provider that your {{{ .starter }}} instance is running in.
 
 ## Maintenance FAQ
 
-### Can I upgrade the version of TiDB that my cluster is running on?
+### Can I upgrade the version of TiDB that my {{{ .starter }}} instance is running on?
 
-No. {{{ .starter }}} clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://tidbcloud.com/project/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+No. {{{ .starter }}} instances are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your {{{ .starter }}} instance is running in the [TiDB Cloud console](https://tidbcloud.com/tidbs) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your {{{ .starter }}} instance and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.

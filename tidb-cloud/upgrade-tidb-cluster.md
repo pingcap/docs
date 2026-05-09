@@ -1,11 +1,16 @@
 ---
-title: Upgrade a TiDB Cluster
-summary: Learn how to upgrade a TiDB cluster.
+title: Upgrade the TiDB version
+summary: Learn how to upgrade the TiDB version of your TiDB cluster or instance.
 ---
 
-# Upgrade a TiDB Cluster
+# Upgrade the TiDB version
 
-This document describes how to upgrade a TiDB cluster on TiDB Cloud. TiDB Cloud provides two upgrade mechanisms for upgrading your TiDB version.
+This document describes how to upgrade the TiDB version of your TiDB Cloud resource.
+
+TiDB Cloud provides two upgrade mechanisms:
+
+- [Regularly upgrade](#regularly-upgrade)
+- [Contact support to upgrade](#contact-support-to-upgrade)
 
 ## Regularly upgrade
 
@@ -17,15 +22,15 @@ To submit an upgrade request, perform the steps in [TiDB Cloud Support](/tidb-cl
 
 <CustomContent language="en,zh">
 
-- Cloud Provider: AWS, Azure, Google Cloud, or Alibaba Cloud
-- Cluster Name: xxx
+- Cloud provider: AWS, Azure, Google Cloud, or Alibaba Cloud
+- Cluster or instance name: xxx
 
 </CustomContent>
 
 <CustomContent language="ja">
 
-- Cloud Provider: AWS, Azure, or Google Cloud
-- Cluster Name: xxx
+- Cloud provider: AWS, Azure, or Google Cloud
+- Cluster or instance name: xxx
 
 </CustomContent>
 
