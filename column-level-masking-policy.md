@@ -8,7 +8,7 @@ aliases: ['/docs/dev/column-level-masking-policy/']
 
 Column-level masking policy is a security feature that allows you to protect sensitive data by applying masking rules at the column level. When a masking policy is applied to a column, TiDB automatically masks the data returned to users based on the defined rules, while the original data remains unchanged in storage.
 
-This feature is particularly useful for compliance requirements such as PCI-DSS (Payment Card Industry Data Security Standard) and data privacy regulations (e.g., GDPR - General Data Protection Regulation, CCPA - California Consumer Privacy Act) that require strict control over who can view sensitive information like credit card numbers, personal identifiers, and other confidential data.
+This feature is particularly useful for compliance requirements such as PCI-DSS (Payment Card Industry Data Security Standard) and data privacy regulations (For example, GDPR - General Data Protection Regulation, CCPA - California Consumer Privacy Act) that require strict control over who can view sensitive information like credit card numbers, personal identifiers, and other confidential data.
 
 ## Overview
 
@@ -29,7 +29,7 @@ To manage masking policies, users need the following dynamic privileges:
 | Privilege | Description |
 |-----------|-------------|
 | `CREATE MASKING POLICY` | Create new masking policies |
-| `ALTER MASKING POLICY` | Modify existing policies (enable/disable, change expression, etc.) |
+| `ALTER MASKING POLICY` | Modify existing policies (such as enable/disable, change expression) |
 | `DROP MASKING POLICY` | Remove masking policies |
 
 These privileges can be granted using the `GRANT` statement:
@@ -283,9 +283,9 @@ For role-based access control, use `current_role()`:
 CREATE ROLE data_viewer;
 
 -- Create a masking policy based on role
-CREATE MASKING POLICY ssn_mask ON customers(ssn)
+CREATE MASKING POLICY ssn_mask ON employees(ssn)
   AS CASE
-      WHEN current_role() = 'data_viewer@%' THEN ssn
+      WHEN current_role() = '`data_viewer`@`%`' THEN ssn
       ELSE MASK_PARTIAL(ssn, 3, 4, '*')
     END
   ENABLE;
@@ -296,6 +296,10 @@ GRANT data_viewer TO 'analyst'@'%';
 -- Users must activate the role to see unmasked data
 SET ROLE data_viewer;
 ```
+
+
+CAUTION: `current_role()` and `current_user()` has different format, the former uses '\`salary_access\`@\`%\`' while the later uses 'salary_access@%', no \`.
+This is MySQL's behavior, not a bug. See https://github.com/pingcap/tidb/issues/67227
 
 ## RESTRICT ON semantics
 
