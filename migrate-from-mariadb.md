@@ -331,7 +331,7 @@ Query OK, 1 row affected (0.006 sec)
 
 tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
 ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
-tidb> 
+tidb>
 ```
 
 ## Dump data with Dumpling and restore data with TiDB Lightning
@@ -372,7 +372,7 @@ To use DM, you need to deploy a set of DM services either with a [TiUP cluster](
 
 ### Step 1. Prepare
 
-Make sure that binlogs are enabled on MariaDB and that the `binlog_format` is set to `ROW`. It is also recommended to set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
+Enable binlog on MariaDB and set `binlog_format=ROW`, `binlog_row_image=FULL`, and `binlog_legacy_event_pos=ON`. Also set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
 
 You also need an account with the `SUPER` permission or with the `BINLOG MONITOR` and `REPLICATION MASTER ADMIN` permissions. This account also needs read permission for the schemas you are going to migrate.
 

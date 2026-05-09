@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export list`.
 
 # ticloud serverless export list
 
-List data export tasks of TiDB Cloud Serverless clusters:
+List data export tasks of {{{ .starter }}} and {{{ .essential }}} instances:
 
 ```shell
 ticloud serverless export list [flags]
@@ -25,13 +25,13 @@ List all export tasks in interactive mode:
 ticloud serverless export list
 ```
 
-List export tasks for a specified cluster in non-interactive mode:
+List export tasks for a specified {{{ .starter }}} or Essential instance in non-interactive mode:
 
 ```shell
 ticloud serverless export list -c <cluster-id>
 ```
 
-List export tasks for a specified cluster in the JSON format in non-interactive mode:
+List export tasks for a specified {{{ .starter }}} or Essential instance in the JSON format in non-interactive mode:
 
 ```shell
 ticloud serverless export list -c <cluster-id> -o json

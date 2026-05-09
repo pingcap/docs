@@ -37,7 +37,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 In the preceding code, the request body is a JSON object with the following properties:
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
+- `cluster_id`: _string_. A unique identifier of the {{{ .starter }}} instance.
 - `database`: _string_. The name of the database.
 - `name`: _string_. The name of the session.
 

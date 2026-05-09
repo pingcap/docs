@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Using TiDB Partitioned Tables
 summary: Learn best practices for using TiDB partitioned tables to improve performance, simplify data management, and handle large-scale datasets efficiently.
+aliases: ['/tidb/stable/tidb-partitioned-tables-best-practices/','/tidb/dev/tidb-partitioned-tables-best-practices/']
 ---
 
 # Best Practices for Using TiDB Partitioned Tables

@@ -27,7 +27,7 @@ In v5.2, the key new features and improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.2, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Note](/releases/release-notes.md) for the corresponding version.
+> When upgrading from an earlier TiDB version to v5.2, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Note](/releases/_index.md) for the corresponding version.
 
 ### System variables
 

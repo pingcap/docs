@@ -101,15 +101,15 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | Blackbox Exporter | 9115        | HTTP       |
 | NG Monitoring     | 12020       | HTTP       |
 
-It is recommended to only expose the `4000` port for the database and the `9000` port for the Grafana dashboard to ordinary users, while restricting access to other ports using network security policies or firewalls. The following is an example of using `iptables` to restrict port access:
+It is recommended to only expose the `4000` port for the database and the `3000` port for the Grafana dashboard to ordinary users, while restricting access to other ports using network security policies or firewalls. The following is an example of using `iptables` to restrict port access:
 
 ```shell
 # Allow internal port communication from the whitelist of component IP addresses
 sudo iptables -A INPUT -s internal IP address range -j ACCEPT
 
-# Only open ports 4000 and 9000 to external users
+# Only open ports 4000 and 3000 to external users
 sudo iptables -A INPUT -p tcp --dport 4000 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 9000 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 # Deny all other traffic by default
 sudo iptables -P INPUT DROP

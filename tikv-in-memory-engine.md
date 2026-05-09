@@ -42,7 +42,7 @@ To enable the TiKV MVCC in-memory engine (IME), you need to adjust the [TiKV con
 enable = false
 
 # This parameter controls the memory size available to the in-memory engine.
-# The default value is 10% of the system memory, and the maximum value is 5 GiB.
+# The default value is `min(the system memory * 10%, 5 GiB)`. You can manually adjust the configuration to use more memory.
 # You can manually adjust this configuration to allocate more memory.
 # Note: When the in-memory engine is enabled, block-cache.capacity automatically decreases by 10%.
 capacity = "5GiB"
