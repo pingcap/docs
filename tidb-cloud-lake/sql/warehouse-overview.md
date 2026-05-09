@@ -58,6 +58,8 @@ Tags are returned in API responses and visible through `SHOW WAREHOUSES`.
 | [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)       | Sets the current warehouse for the session        |
 | [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)   | Lists all warehouses with optional filtering      |
 | [ALTER WAREHOUSE](/tidb-cloud-lake/sql/alter-warehouse.md)   | Suspends, resumes, or modifies warehouse settings |
+| [ALTER WAREHOUSE ASSIGN NODES](/tidb-cloud-lake/sql/alter-warehouse-assign-nodes.md) | Assigns nodes to warehouse clusters |
+| [ALTER WAREHOUSE UNASSIGN NODES](/tidb-cloud-lake/sql/alter-warehouse-unassign-nodes.md) | Removes assigned nodes from warehouse clusters |
 | [DROP WAREHOUSE](/tidb-cloud-lake/sql/drop-warehouse.md)     | Removes a warehouse                               |
 | [QUERY_HISTORY](/tidb-cloud-lake/sql/query-history.md)       | Inspects query logs for a warehouse               |
 

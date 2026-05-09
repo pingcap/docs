@@ -100,10 +100,10 @@ The following is a list of storage metrics available in {{{ .lake }}}:
 
 | Name                          | Type  | Labels | Description                                           |
 | ----------------------------- | ----- | ------ | ----------------------------------------------------- |
-| storage_total_size            | Guage | tenant | Total size for backend object storage                 |
-| storage_staged_size           | Guage | tenant | Total size for staged files on backend object storage |
-| storage_table_compressed_size | Guage | tenant | Total size for current tables backend object storage  |
-| storage_non_current_size      | Guage | tenant | Total size for non-current objects in backend storage |
+| storage_total_size            | Gauge | tenant | Total size for backend object storage                 |
+| storage_staged_size           | Gauge | tenant | Total size for staged files on backend object storage |
+| storage_table_compressed_size | Gauge | tenant | Total size for current tables backend object storage  |
+| storage_non_current_size      | Gauge | tenant | Total size for non-current objects in backend storage |
 
 ### Warehouse Metrics
 
@@ -111,17 +111,18 @@ The following is a list of warehouse metrics available in {{{ .lake }}}:
 
 | Name                             | Type    | Labels                       | Description                                         |
 | -------------------------------- | ------- | ---------------------------- | --------------------------------------------------- |
-| warehouse_status                 | Guage   | tenant,warehouse,size,status | Flag for warehouse status (Suspended,Running, etc.) |
-| warehouse_connections            | Guage   | tenant,warehouse             | Session Count currently                             |
-| warehouse_queries_queued         | Guage   | tenant,warehouse             | Queries waiting in queue currently                  |
-| warehouse_queries_running        | Guage   | tenant,warehouse             | Queries running currently                           |
-| warehouse_queries_start_total    | Counter | tenant,warehouse             | Queries started total                               |
-| warehouse_queries_failed_total   | Counter | tenant,warehouse             | Queries failed total                                |
-| warehouse_queries_success_total  | Counter | tenant,warehouse             | Queries success total                               |
-| warehouse_storage_requests_total | Counter | tenant,warehouse,scheme,op   | Requests count to backend storage                   |
-| warehouse_storage_requests_bytes | Counter | tenant,warehouse,scheme,op   | Requests bytes from backend storage                 |
-| warehouse_data_scan_rows         | Counter | tenant,warehouse             | Data rows scanned from backend storage              |
-| warehouse_data_write_rows        | Counter | tenant,warehouse             | Data rows written to backend storage                |
+| warehouse_status                 | Gauge   | tenant,warehouse,size,status | Flag for warehouse status (Suspended,Running, etc.) |
+| warehouse_running_clusters       | Gauge   | tenant,warehouse             | Number of running clusters for a warehouse (multi-cluster warehouses only) |
+| warehouse_connections            | Gauge   | tenant,warehouse,warehouse_cluster | Session Count currently                             |
+| warehouse_queries_queued         | Gauge   | tenant,warehouse,warehouse_cluster | Queries waiting in queue currently                  |
+| warehouse_queries_running        | Gauge   | tenant,warehouse,warehouse_cluster | Queries running currently                           |
+| warehouse_queries_start_total    | Counter | tenant,warehouse,warehouse_cluster | Queries started total                               |
+| warehouse_queries_failed_total   | Counter | tenant,warehouse,warehouse_cluster | Queries failed total                                |
+| warehouse_queries_success_total  | Counter | tenant,warehouse,warehouse_cluster | Queries success total                               |
+| warehouse_storage_requests_total | Counter | tenant,warehouse,warehouse_cluster,scheme,op | Requests count to backend storage         |
+| warehouse_storage_requests_bytes | Counter | tenant,warehouse,warehouse_cluster,scheme,op | Requests bytes from backend storage       |
+| warehouse_data_scan_rows         | Counter | tenant,warehouse,warehouse_cluster | Data rows scanned from backend storage              |
+| warehouse_data_write_rows        | Counter | tenant,warehouse,warehouse_cluster | Data rows written to backend storage                |
 
 ### Task Metrics
 

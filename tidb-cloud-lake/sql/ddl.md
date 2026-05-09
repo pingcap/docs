@@ -11,7 +11,7 @@ These topics provide reference information for the DDL (Data Definition Language
 
 | Component | Description |
 |-----------|-------------|
-| **[Catalog](/tidb-cloud-lake/sql/show-catalogs.md)** | Create, drop and list catalogs |
+| **[Catalog](/tidb-cloud-lake/sql/catalog.md)** | Create, drop and list catalogs |
 | **[Database](/tidb-cloud-lake/sql/ddl-database-overview.md)** | Create, alter, and drop databases |
 | **[Table](/tidb-cloud-lake/sql/ddl-table-overview.md)** | Create, alter, and manage tables |
 | **[Table Versioning](/tidb-cloud-lake/sql/table-versioning.md)** | Create named snapshot tags for time travel |
@@ -44,6 +44,7 @@ These topics provide reference information for the DDL (Data Definition Language
 | Component | Description |
 |-----------|-------------|
 | **[Stage](/tidb-cloud-lake/sql/stage.md)** | Define storage locations for data loading |
+| **[Pipe](/tidb-cloud-lake/sql/pipe.md)** | Manage ingestion pipes |
 | **[Stream](/tidb-cloud-lake/sql/stream.md)** | Capture and process data changes |
 | **[Task](/tidb-cloud-lake/sql/task.md)** | Schedule and automate SQL operations |
 | **[Sequence](/tidb-cloud-lake/sql/sequence.md)** | Generate unique sequential numbers |
