@@ -34,8 +34,10 @@ To create a changefeed, refer to the tutorials:
 
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+<CustomContent plan="dedicated">
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 - [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+</CustomContent>
 
 ## Query changefeed capacity
 
@@ -102,8 +104,10 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
     - Apache Kafka sink: all configurations.
     - MySQL sink: **MySQL Connection**, **Table Filter**, and **Event Filter**.
+    <CustomContent plan="dedicated">
     - TiDB Cloud sink: **TiDB Cloud Connection**, **Table Filter**, and **Event Filter**.
     - Cloud storage sink: **Storage Endpoint**, **Table Filter**, and **Event Filter**.
+    </CustomContent>
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
