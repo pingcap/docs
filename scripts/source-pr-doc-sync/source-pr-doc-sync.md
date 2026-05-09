@@ -175,5 +175,5 @@ Check:
 ## Files in This Automation
 
 - `.github/workflows/source-pr-doc-sync.yml`
-- `scripts/collect_source_pr_doc_candidates.py`
-- `scripts/apply_source_pr_docs_cn_updates.py`
+- `scripts/source-pr-doc-sync/collect_source_pr_doc_candidates.py`
+- `scripts/source-pr-doc-sync/apply_source_pr_docs_cn_updates.py`

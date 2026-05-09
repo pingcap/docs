@@ -69,7 +69,7 @@ jobs:
           FORCE_SOURCE_PR_NUMBER: ${{ github.event.inputs.source_pr_number || github.event.client_payload.source_pr_number || '' }}
         run: |
           set -euo pipefail
-          python scripts/collect_source_pr_doc_candidates.py
+          python scripts/source-pr-doc-sync/collect_source_pr_doc_candidates.py
 
       - name: Print summary
         run: |
@@ -122,7 +122,7 @@ jobs:
       - name: Apply docs-cn updates for one source PR
         run: |
           set -euo pipefail
-          python scripts/apply_source_pr_docs_cn_updates.py \
+          python scripts/source-pr-doc-sync/apply_source_pr_docs_cn_updates.py \
             --report-json "$(ls tmp/tidb-doc-check/*.json | head -1)" \
             --docs-cn-dir "docs-cn" \
             --source-repo "${{ matrix.repo }}" \
