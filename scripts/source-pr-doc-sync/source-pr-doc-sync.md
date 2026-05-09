@@ -39,6 +39,10 @@ Main workflow env values:
 - `DOCS_CN_BASE_BRANCH`: fallback docs-cn branch
 - `TARGET_BRANCH_MAP`: source branch -> target docs-cn branch map
 
+Section insertion preferences are configured in:
+
+- `scripts/source-pr-doc-sync/section-preferences.json`
+
 ## Trigger Modes
 
 ### 1. Scheduled
@@ -99,7 +103,7 @@ The `scan` job generates:
 The `create-pr-per-source` job:
 
 - downloads scan artifacts
-- applies docs changes for one source PR
+- applies docs changes for one source PR (prefer inserting under matched in-page sections, fallback to file end)
 - skips PR creation if there are no docs-cn file changes
 
 ## Idempotency and PR Granularity
@@ -132,6 +136,13 @@ Set `max_candidates_per_run` to a smaller value (for example, `10`).
 ### Adjust branch mapping
 
 Edit `TARGET_BRANCH_MAP` in workflow env.
+
+### Adjust in-page insertion behavior
+
+Edit `scripts/source-pr-doc-sync/section-preferences.json`:
+
+- `path_to_preferred_sections`: per-path heading preference list
+- `default_preferred_sections`: fallback heading preference list
 
 ## Troubleshooting
 
