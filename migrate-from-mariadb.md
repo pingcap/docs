@@ -258,7 +258,7 @@ See also [Character Set and Collation](/character-set-and-collation.md).
 
 ### Index length
 
-As the following example shows, MariaDB automatically converts an index to a prefix index if it exceeds the maximum key length. TiDB, following MySQL's behavior, does not perform this automatic conversion and instead returns an error. Therefore, you need to modify your scripts to explicitly create prefix indexes where necessary.
+As the following example shows, MariaDB automatically converts an index to a prefix index and returns a warning if the index exceeds the maximum key length. Unlike MariaDB, TiDB follows the MySQL behavior: it does not perform this automatic conversion and returns an error instead. Therefore, when migrating MariaDB DDL to TiDB, if an indexed column might exceed the maximum key length supported by TiDB, you need to modify your scripts to create a prefix index explicitly.
 
 ```
 MariaDB> \W
@@ -283,7 +283,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.001 sec)
 ```
 
-MariaDB also has special handling for unique indexes that exceed the maximum key length, as shown below. TiDB does not provide this feature.
+MariaDB also has special handling for unique indexes that exceed the maximum key length. For example, in the following example, MariaDB creates a `USING HASH` unique index on a `TEXT` column. TiDB does not provide this feature.
 
 ```
 MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
