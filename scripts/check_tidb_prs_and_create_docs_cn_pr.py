@@ -33,6 +33,9 @@ OUTPUT_DIR = pathlib.Path(os.environ.get("OUTPUT_DIR", "tmp/tidb-doc-check")).re
 DOCS_CN_BASE_BRANCH = os.environ.get("DOCS_CN_BASE_BRANCH", "master")
 TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 TARGET_BRANCH_MAP_RAW = os.environ.get("TARGET_BRANCH_MAP", "").strip()
+MAX_CANDIDATES_PER_RUN = int(os.environ.get("MAX_CANDIDATES_PER_RUN", "50"))
+FORCE_SOURCE_REPO = os.environ.get("FORCE_SOURCE_REPO", "").strip()
+FORCE_SOURCE_PR_NUMBER = os.environ.get("FORCE_SOURCE_PR_NUMBER", "").strip()
 
 
 POSITIVE_LABELS = {
@@ -293,38 +296,63 @@ def main() -> None:
 
     results: List[Dict] = []
     needs_update_prs: List[Dict] = []
-    source_repos = list_source_repos(SOURCE_ORG)
-    for source_repo in source_repos:
-        query = f"repo:{source_repo} is:pr is:merged merged:{start_iso}..{end_iso}"
-        merged_prs = list_search_results(query)
-        for item in merged_prs:
-            number = item["number"]
-            pr_detail = gh_api_json(f"https://api.github.com/repos/{source_repo}/pulls/{number}")
-            merged_at_raw = pr_detail.get("merged_at", "")
-            if not merged_at_raw:
-                continue
-            merged_at = parse_merged_at(merged_at_raw).astimezone(start_sh.tzinfo)
-            if not (start_sh <= merged_at < end_sh):
-                continue
-            pr_files = list_pr_files(source_repo, number)
+    source_repos: List[str] = []
 
-            needs_docs_update, reasons, score = classify_pr(pr_detail, pr_files)
-            row = {
-                "repo": source_repo,
-                "number": number,
-                "title": pr_detail.get("title", ""),
-                "url": pr_detail.get("html_url", ""),
-                "merged_at": pr_detail.get("merged_at", ""),
-                "source_base_branch": pr_detail.get("base", {}).get("ref", ""),
-                "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
-                "changed_files": pr_files,
-                "score": score,
-                "needs_docs_update": needs_docs_update,
-                "reasons": reasons,
-            }
-            results.append(row)
-            if needs_docs_update:
-                needs_update_prs.append(row)
+    if FORCE_SOURCE_REPO and FORCE_SOURCE_PR_NUMBER:
+        source_repos = [FORCE_SOURCE_REPO]
+        pr_number = int(FORCE_SOURCE_PR_NUMBER)
+        pr_detail = gh_api_json(f"https://api.github.com/repos/{FORCE_SOURCE_REPO}/pulls/{pr_number}")
+        pr_files = list_pr_files(FORCE_SOURCE_REPO, pr_number)
+        needs_docs_update, reasons, score = classify_pr(pr_detail, pr_files)
+        row = {
+            "repo": FORCE_SOURCE_REPO,
+            "number": pr_number,
+            "title": pr_detail.get("title", ""),
+            "url": pr_detail.get("html_url", ""),
+            "merged_at": pr_detail.get("merged_at", ""),
+            "source_base_branch": pr_detail.get("base", {}).get("ref", ""),
+            "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
+            "changed_files": pr_files,
+            "score": score,
+            "needs_docs_update": needs_docs_update,
+            "reasons": reasons,
+        }
+        results.append(row)
+        if needs_docs_update:
+            needs_update_prs.append(row)
+    else:
+        source_repos = list_source_repos(SOURCE_ORG)
+        for source_repo in source_repos:
+            query = f"repo:{source_repo} is:pr is:merged merged:{start_iso}..{end_iso}"
+            merged_prs = list_search_results(query)
+            for item in merged_prs:
+                number = item["number"]
+                pr_detail = gh_api_json(f"https://api.github.com/repos/{source_repo}/pulls/{number}")
+                merged_at_raw = pr_detail.get("merged_at", "")
+                if not merged_at_raw:
+                    continue
+                merged_at = parse_merged_at(merged_at_raw).astimezone(start_sh.tzinfo)
+                if not (start_sh <= merged_at < end_sh):
+                    continue
+                pr_files = list_pr_files(source_repo, number)
+
+                needs_docs_update, reasons, score = classify_pr(pr_detail, pr_files)
+                row = {
+                    "repo": source_repo,
+                    "number": number,
+                    "title": pr_detail.get("title", ""),
+                    "url": pr_detail.get("html_url", ""),
+                    "merged_at": pr_detail.get("merged_at", ""),
+                    "source_base_branch": pr_detail.get("base", {}).get("ref", ""),
+                    "labels": [x.get("name", "") for x in pr_detail.get("labels", [])],
+                    "changed_files": pr_files,
+                    "score": score,
+                    "needs_docs_update": needs_docs_update,
+                    "reasons": reasons,
+                }
+                results.append(row)
+                if needs_docs_update:
+                    needs_update_prs.append(row)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     window_tag = f"{start_date}_to_{end_date}"
@@ -338,7 +366,7 @@ def main() -> None:
     lines.append("# TiDB weekly merged PR doc-impact check")
     lines.append("")
     lines.append(f"- Source org: `{SOURCE_ORG}`")
-    lines.append(f"- Repositories scanned: `{len(source_repos)}`")
+    lines.append(f"- Repositories scanned: `{len(set(source_repos))}`")
     lines.append(f"- Excluded repositories: `{', '.join(sorted(EXCLUDED_REPOS))}`")
     lines.append(f"- Time window (Asia/Shanghai): `{start_date} 00:00` to `{end_date} 00:00`")
     lines.append(f"- Total merged PRs found: `{len(results)}`")
@@ -387,7 +415,12 @@ def main() -> None:
     branch_tag = end_date.replace("-", "")
     branch_name = f"weekly/tidb-doc-check-{branch_tag}"
     candidates: List[Dict] = []
-    for pr in needs_update_prs:
+    sorted_candidates = sorted(
+        needs_update_prs,
+        key=lambda x: (x.get("merged_at") or "", x.get("score") or 0),
+        reverse=True,
+    )
+    for pr in sorted_candidates[:MAX_CANDIDATES_PER_RUN]:
         source_base_branch = pr.get("source_base_branch") or ""
         target_branch = target_branch_map.get(source_base_branch, DOCS_CN_BASE_BRANCH)
         candidates.append(

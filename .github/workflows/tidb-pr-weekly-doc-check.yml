@@ -5,6 +5,24 @@ on:
     # 01:00 every Monday in Asia/Shanghai (UTC+8) => 17:00 every Sunday UTC
     - cron: "0 17 * * 0"
   workflow_dispatch:
+    inputs:
+      source_repo:
+        description: "Optional: run for one source repo only (e.g. pingcap/tidb)"
+        required: false
+        type: string
+        default: ""
+      source_pr_number:
+        description: "Optional: run for one source PR only"
+        required: false
+        type: string
+        default: ""
+      max_candidates_per_run:
+        description: "Max per-source docs-cn PRs created in one run"
+        required: false
+        type: string
+        default: "50"
+  repository_dispatch:
+    types: [docs-sync-source-pr]
 
 jobs:
   scan:
@@ -46,6 +64,9 @@ jobs:
           OUTPUT_DIR: ${{ env.OUTPUT_DIR }}
           DOCS_CN_BASE_BRANCH: ${{ env.DOCS_CN_BASE_BRANCH }}
           TARGET_BRANCH_MAP: ${{ env.TARGET_BRANCH_MAP }}
+          MAX_CANDIDATES_PER_RUN: ${{ github.event.inputs.max_candidates_per_run || github.event.client_payload.max_candidates_per_run || '50' }}
+          FORCE_SOURCE_REPO: ${{ github.event.inputs.source_repo || github.event.client_payload.source_repo || '' }}
+          FORCE_SOURCE_PR_NUMBER: ${{ github.event.inputs.source_pr_number || github.event.client_payload.source_pr_number || '' }}
         run: |
           set -euo pipefail
           python scripts/check_tidb_prs_and_create_docs_cn_pr.py
@@ -116,7 +137,20 @@ jobs:
           echo "safe_repo=${safe_repo}" >> "$GITHUB_OUTPUT"
           echo "branch=weekly/doc-sync/${safe_repo}-pr-${{ matrix.number }}-${{ needs.scan.outputs.window_end_date }}" >> "$GITHUB_OUTPUT"
 
+      - name: Check if docs-cn changes exist
+        id: changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs-cn
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create docs-cn PR for one source PR
+        if: steps.changed.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           path: docs-cn
@@ -152,3 +186,7 @@ jobs:
             - [ ] Need modification after applied to another branch
             - [ ] Might cause conflicts after applied to another branch
           delete-branch: true
+
+      - name: Print no-change reason
+        if: steps.changed.outputs.has_changes != 'true'
+        run: echo "No docs-cn file changes detected for ${{ matrix.repo }}#${{ matrix.number }}, skipping PR creation."
