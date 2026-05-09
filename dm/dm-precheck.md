@@ -47,7 +47,7 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
     > **Warning:**
     >
-    > - Migrating data from MariaDB to TiDB using DM is an experimental feature. It is NOT recommended that you use it in a production environment.
+    > Migrating data from MariaDB to TiDB using DM is an experimental feature. It is NOT recommended that you use it in a production environment.
 
 - Compatibility of the upstream MySQL table schema
 
