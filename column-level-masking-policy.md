@@ -12,7 +12,7 @@ This feature is particularly useful for compliance requirements such as PCI-DSS 
 
 ## Overview
 
-A masking policy is bound to a table column and evaluated at query result time. The policy uses SQL expressions to determine how to mask the data based on the current user's identity or role.
+TiDB binds a masking policy to a table column and evaluates it at query result time.
 
 Key characteristics:
 
@@ -215,9 +215,8 @@ MASK_DATE(column, date_literal)
 **Logic & Data Types**
 
 - **Logic**: Type-aware operator for partial redaction of date components. Replaces the date with a specified literal while preserving the original column type.
-- **Types**: DATE, DATETIME, TIMESTAMP
-- **Placeholders**: The `date_literal` follows format `'YYYY-MM-DD'` where Y/M/D components can be preserved or fixed values for redaction
-- **Time Component**: Hours, minutes, and seconds are reset to `00:00:00`
+  - **Placeholders**: The `date_literal` follows the `'YYYY-MM-DD'` format. Y/M/D components can be preserved or fixed values for redaction
+  - **Time Component**: Hours, minutes, and seconds are reset to `00:00:00`
 
 **Use Case & Example**
 
@@ -424,7 +423,7 @@ CREATE OR REPLACE MASKING POLICY email_mask ON customers(email)
 ## Behavior considerations
 
 ### At-result masking
-
+TiDB applies masking policies **at result time**, which means:
 Masking policies are applied **at result time**, which means:
 
 1. **Storage is unchanged**: The original data is stored without modification
@@ -471,8 +470,7 @@ The following are **not supported**:
 
 ### Cascade behavior
 
-When you drop a column or table that has a masking policy, the policy is automatically removed from the system. When you rename a column or table, the masking policy remains bound to it.
-
+When you drop a column or table that has a masking policy, TiDB automatically removes the policy from the system. When you rename a column or table, the masking policy remains bound to the renamed column or table.
 ## Complete example
 
 Here's a complete example showing a typical workflow:
@@ -515,7 +513,7 @@ CREATE MASKING POLICY email_policy ON employees(email)
 -- Salary: show only to those with the salary_access role
 CREATE MASKING POLICY salary_policy ON employees(salary)
   AS CASE
-      WHEN current_role() = 'salary_access' THEN salary
+      WHEN current_role() = '`salary_access`@`%`' THEN salary
       ELSE NULL
     END
   ENABLE;
