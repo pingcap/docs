@@ -1,4 +1,4 @@
-name: Weekly PingCAP Code PR Doc Check (docs-cn)
+name: Source PR Docs Sync (docs-cn)
 
 on:
   schedule:
@@ -54,7 +54,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Scan merged PingCAP code PRs in last weekly window
+      - name: Collect source PR doc candidates
         id: scan
         env:
           GITHUB_TOKEN: ${{ secrets.DOCS_CN_BOT_TOKEN || github.token }}
@@ -69,7 +69,7 @@ jobs:
           FORCE_SOURCE_PR_NUMBER: ${{ github.event.inputs.source_pr_number || github.event.client_payload.source_pr_number || '' }}
         run: |
           set -euo pipefail
-          python scripts/check_tidb_prs_and_create_docs_cn_pr.py
+          python scripts/collect_source_pr_doc_candidates.py
 
       - name: Print summary
         run: |
@@ -80,7 +80,7 @@ jobs:
         if: steps.scan.outputs.needs_update == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: weekly-doc-check-report
+          name: source-pr-doc-candidates
           path: |
             ${{ steps.scan.outputs.json_path }}
             ${{ steps.scan.outputs.report_path }}
@@ -107,7 +107,7 @@ jobs:
       - name: Download scan artifacts
         uses: actions/download-artifact@v4
         with:
-          name: weekly-doc-check-report
+          name: source-pr-doc-candidates
           path: tmp/tidb-doc-check
 
       - name: Checkout docs-cn repo target branch
@@ -122,7 +122,7 @@ jobs:
       - name: Apply docs-cn updates for one source PR
         run: |
           set -euo pipefail
-          python scripts/apply_weekly_docs_cn_updates.py \
+          python scripts/apply_source_pr_docs_cn_updates.py \
             --report-json "$(ls tmp/tidb-doc-check/*.json | head -1)" \
             --docs-cn-dir "docs-cn" \
             --source-repo "${{ matrix.repo }}" \
@@ -135,7 +135,7 @@ jobs:
           set -euo pipefail
           safe_repo="$(echo "${{ matrix.repo }}" | tr '/' '-')"
           echo "safe_repo=${safe_repo}" >> "$GITHUB_OUTPUT"
-          echo "branch=weekly/doc-sync/${safe_repo}-pr-${{ matrix.number }}-${{ needs.scan.outputs.window_end_date }}" >> "$GITHUB_OUTPUT"
+          echo "branch=source-pr/doc-sync/${safe_repo}-pr-${{ matrix.number }}-${{ needs.scan.outputs.window_end_date }}" >> "$GITHUB_OUTPUT"
 
       - name: Check if docs-cn changes exist
         id: changed
@@ -169,7 +169,7 @@ jobs:
             - Source PR number: `${{ matrix.number }}`
             - Source base branch: `${{ matrix.source_base_branch }}`
             - Target docs-cn branch: `${{ matrix.target_branch }}`
-            - Weekly window (Asia/Shanghai): `${{ needs.scan.outputs.window_start_date }} 00:00` to `${{ needs.scan.outputs.window_end_date }} 00:00`
+            - Scheduled window (Asia/Shanghai): `${{ needs.scan.outputs.window_start_date }} 00:00` to `${{ needs.scan.outputs.window_end_date }} 00:00`
 
             ### Which TiDB version(s) do your changes apply to? (Required)
 

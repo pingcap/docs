@@ -1,10 +1,10 @@
-# Weekly Docs Sync Automation
+# Source PR Docs Sync Automation
 
-This document describes how to operate the weekly docs sync workflow that maps merged code PRs to docs-cn update PRs.
+This document describes how to operate the source-PR docs sync workflow that maps merged code PRs to docs-cn update PRs.
 
 ## Overview
 
-The workflow file is `.github/workflows/tidb-pr-weekly-doc-check.yml`.
+The workflow file is `.github/workflows/source-pr-doc-sync.yml`.
 
 It runs in two stages:
 
@@ -92,8 +92,8 @@ curl -X POST \
 
 The `scan` job generates:
 
-- a markdown report (`tidb-weekly-doc-check-<start>_to_<end>.md`)
-- a json report (`tidb-weekly-doc-check-<start>_to_<end>.json`)
+- a markdown report (`source-pr-doc-check-<start>_to_<end>.md`)
+- a json report (`source-pr-doc-check-<start>_to_<end>.json`)
 - candidate matrix output for downstream matrix jobs
 
 The `create-pr-per-source` job:
@@ -107,7 +107,7 @@ The `create-pr-per-source` job:
 Current design is per-source-PR:
 
 - one source PR -> one docs-cn PR
-- no weekly mixed PR
+- no mixed aggregate PR
 
 This improves:
 
@@ -174,6 +174,6 @@ Check:
 
 ## Files in This Automation
 
-- `.github/workflows/tidb-pr-weekly-doc-check.yml`
-- `scripts/check_tidb_prs_and_create_docs_cn_pr.py`
-- `scripts/apply_weekly_docs_cn_updates.py`
+- `.github/workflows/source-pr-doc-sync.yml`
+- `scripts/collect_source_pr_doc_candidates.py`
+- `scripts/apply_source_pr_docs_cn_updates.py`

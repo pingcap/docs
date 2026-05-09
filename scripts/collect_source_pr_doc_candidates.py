@@ -86,7 +86,7 @@ def gh_api_json(url: str) -> Dict:
     headers = {
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "tidb-doc-weekly-checker",
+        "User-Agent": "source-pr-doc-sync-checker",
     }
     if TOKEN:
         headers["Authorization"] = f"Bearer {TOKEN}"
@@ -356,14 +356,14 @@ def main() -> None:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     window_tag = f"{start_date}_to_{end_date}"
-    report_filename = f"tidb-weekly-doc-check-{window_tag}.md"
-    json_filename = f"tidb-weekly-doc-check-{window_tag}.json"
+    report_filename = f"source-pr-doc-check-{window_tag}.md"
+    json_filename = f"source-pr-doc-check-{window_tag}.json"
 
     report_path = OUTPUT_DIR / report_filename
     json_path = OUTPUT_DIR / json_filename
 
     lines: List[str] = []
-    lines.append("# TiDB weekly merged PR doc-impact check")
+    lines.append("# Source PR doc-impact check")
     lines.append("")
     lines.append(f"- Source org: `{SOURCE_ORG}`")
     lines.append(f"- Repositories scanned: `{len(set(source_repos))}`")
@@ -413,7 +413,7 @@ def main() -> None:
     json_path.write_text(json.dumps(json_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     branch_tag = end_date.replace("-", "")
-    branch_name = f"weekly/tidb-doc-check-{branch_tag}"
+    branch_name = f"source-pr/doc-check-{branch_tag}"
     candidates: List[Dict] = []
     sorted_candidates = sorted(
         needs_update_prs,
