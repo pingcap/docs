@@ -145,10 +145,10 @@ MASK_FULL(column)
 
 - **Logic**: Replaces the entire value with a type-specific default mask character.
 - **Types**: String, Date/DATETIME/TIMESTAMP, Duration, YEAR
-  - **String** → Returns a string of the same length with all characters replaced by `'X'`
-  - **Date/DATETIME/TIMESTAMP** → Returns `1970-01-01` (preserving original type and fractional seconds precision)
-  - **Duration** → Returns `00:00:00`
-  - **YEAR** → Returns `1970`
+  - **String**: Returns a string of the same length with all characters replaced by `'X'`
+  - **Date/DATETIME/TIMESTAMP**: Returns `1970-01-01` (preserving original type and fractional seconds precision)
+  - **Duration**: Returns `00:00:00`
+  - **YEAR**: Returns `1970`
 
 **Use Case & Example**
 
