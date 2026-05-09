@@ -52,13 +52,13 @@ The SSH shell supports the following commands:
 For automation or remote execution, run one command and exit:
 
 ```bash
-node scripts/docs-ssh-shell.js --command "ls /ai/integrations"
+node scripts/docs-ssh/docs-ssh-shell.js --command "ls /ai/integrations"
 ```
 
 You can also run content search:
 
 ```bash
-node scripts/docs-ssh-shell.js --command "grep TiDB /ai/integrations/tidb-docs-mcp-server.md"
+node scripts/docs-ssh/docs-ssh-shell.js --command "grep TiDB /ai/integrations/tidb-docs-mcp-server.md"
 ```
 
 ## Sync docs from Git over SSH
@@ -100,7 +100,7 @@ Example `sshd_config` snippet:
 
 ```sshconfig
 Match User tidbdocs
-  ForceCommand /usr/bin/node /srv/tidb/docs/scripts/docs-ssh-shell.js
+  ForceCommand /usr/bin/node /srv/tidb/docs/scripts/docs-ssh/docs-ssh-shell.js
   PermitTTY yes
   X11Forwarding no
   AllowTcpForwarding no
@@ -287,3 +287,4 @@ Expected:
 
 - [TiDB Docs MCP Server](/ai/integrations/tidb-docs-mcp-server.md)
 - [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md)
+

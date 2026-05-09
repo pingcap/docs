@@ -163,7 +163,7 @@ Example:
   "mcpServers": {
     "tidb-docs": {
       "command": "node",
-      "args": ["scripts/docs-mcp-server.js"],
+      "args": ["scripts/docs-mcp/docs-mcp-server.js"],
       "env": {
         "DOCS_API_SOURCE_DIR": "/workspaces/docs-staging"
       }
@@ -317,3 +317,4 @@ Check:
 - Enforce version routing on every query. If `version` is missing, resolve to latest LTS stable.
 - Include `source` in outputs to improve answer trust.
 - Template variables (for example, `{{{ .starter }}}`) are resolved via `variables.json` in the selected source directory.
+

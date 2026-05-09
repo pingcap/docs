@@ -5,7 +5,7 @@ import {
   loadDocContentByPath,
   loadTemplateVariables,
   resolveDefaultSourceDir,
-} from "./docs-api-lib.js";
+} from "../docs-api/docs-api-lib.js";
 
 const SERVER_NAME = "tidb-docs-mcp";
 const SERVER_VERSION = "0.2.0";
@@ -560,4 +560,5 @@ if (TRANSPORT === "http") {
 } else {
   startStdioServer();
 }
+
 

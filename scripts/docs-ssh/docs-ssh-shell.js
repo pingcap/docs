@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import readline from "readline";
-import { loadTemplateVariables, resolveDefaultSourceDir } from "./docs-api-lib.js";
+import { loadTemplateVariables, resolveDefaultSourceDir } from "../docs-api/docs-api-lib.js";
 
 const SOURCE_DIR = path.resolve(
   process.env.DOCS_SSH_SOURCE_DIR ||
@@ -298,3 +298,4 @@ if (cliCommand) {
 } else {
   startInteractive();
 }
+
