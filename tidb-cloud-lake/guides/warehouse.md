@@ -223,10 +223,28 @@ Where:
 
 ### Creating SQL Users for Warehouse Access
 
-Besides the default `cloudapp` user, you can create additional SQL users for better security and access control:
+Besides the default `cloudapp` user, you can create additional SQL users for better security and access control.
+
+#### Example 1: Full access across all databases
+
+Grant a user read/write access to all databases — useful for admin accounts or automation pipelines that need cross-database operations:
 
 ```sql
--- Create a role with database access
+-- Create a role with global access
+CREATE ROLE full_access_role;
+GRANT ALL ON *.* TO ROLE full_access_role;
+
+-- Create the user and assign the role
+CREATE USER admin_user IDENTIFIED BY 'SecurePass456!' WITH DEFAULT_ROLE = 'full_access_role';
+GRANT ROLE full_access_role TO admin_user;
+```
+
+#### Example 2: Single-database access
+
+Grant a user access to one specific database only:
+
+```sql
+-- Create a role scoped to one database
 CREATE ROLE warehouse_user1_role;
 GRANT ALL ON my_database.* TO ROLE warehouse_user1_role;
 
@@ -234,6 +252,24 @@ GRANT ALL ON my_database.* TO ROLE warehouse_user1_role;
 CREATE USER warehouse_user1 IDENTIFIED BY 'StrongPassword123' WITH DEFAULT_ROLE = 'warehouse_user1_role';
 GRANT ROLE warehouse_user1_role TO warehouse_user1;
 ```
+
+#### Example 3: Read-only access across all databases
+
+For scenarios where the user should only query data (dashboards, BI tools, AI agents in safe mode):
+
+```sql
+-- Create a read-only role
+CREATE ROLE readonly_role;
+GRANT SELECT ON *.* TO ROLE readonly_role;
+
+-- Create the user
+CREATE USER readonly_user IDENTIFIED BY 'ReadOnly789!' WITH DEFAULT_ROLE = 'readonly_role';
+GRANT ROLE readonly_role TO readonly_user;
+```
+
+> **Tip:**
+>
+> In {{{ .lake }}}, privileges like `CREATE DATABASE` can only be granted to roles, not directly to users. Always create a role first, grant privileges to the role, then assign the role to the user.
 
 For more details, see [CREATE USER](/tidb-cloud-lake/sql/create-user.md) and [GRANT](/tidb-cloud-lake/sql/grant.md) documentation.
 

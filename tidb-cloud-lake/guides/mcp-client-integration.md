@@ -21,7 +21,11 @@ For example: "Create a scheduled task that copies parquet files from @my_stage t
 
 ### 1. Get a {{{ .lake }}} Connection
 
-We recommend using **{{{ .lake }}}** for the best experience.
+We recommend using **{{{ .lake }}}** for the best experience. You can obtain the DSN in two ways.
+
+#### Option A: Use **Use with AI Tools** (recommended)
+
+Generates a short-lived DSN with session sandbox safety in one click. Best for getting AI tools connected quickly.
 
 1. Log in to [{{{ .lake }}}](https://app.lake.tidbcloud.com).
 2. Click **Use with AI Tools**.
@@ -30,6 +34,18 @@ We recommend using **{{{ .lake }}}** for the best experience.
 5. Copy the DSN, which looks like `lake://user:password@host:443/database?warehouse=warehouse_name`.
 
 ![Use with AI Tools](/media/tidb-cloud-lake/ai-tools.png)
+
+#### Option B: Build the DSN with your own SQL user
+
+Use this when you want a stable account and permission set (for example, CI pipelines, sharing with teammates, or pairing with a least-privilege policy).
+
+1. Create a SQL user in {{{ .lake }}} and grant the required privileges. See [CREATE USER](/tidb-cloud-lake/sql/create-user.md#example-1-full-access-across-all-databases).
+2. Get your `tenant`, `region`, `database`, and `warehouse` values from **Overview → Connect**.
+3. Assemble the DSN using this format:
+
+    ```text
+    lake://<username>:<password>@<tenant>.gw.<region>.default.tidbcloud.com:443/<database>?warehouse=<warehouse_name>
+    ```
 
 ### 2. Configure Your MCP Client
 
