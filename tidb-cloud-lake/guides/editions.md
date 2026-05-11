@@ -66,7 +66,7 @@ The following are feature lists of {{{ .lake }}} among editions:
 | Schema detection for automatically detecting the schema in a set of staged semi-structured data files and retrieving the column definitions. | ✓ | ✓ | ✓ |
 | Schema evolution for automatically evolving tables to support the structure of new data received from the data sources. | ✓ | ✓ | ✓ |
 | Support for [creating table with external location](/tidb-cloud-lake/sql/create-external-table.md). | ✓ | ✓ | ✓ |
-| Supports for [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md). | ✓ | ✓ | ✓ |
+| Support for [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md). | ✓ | ✓ | ✓ |
 
 ### Interfaces & Tools
 
