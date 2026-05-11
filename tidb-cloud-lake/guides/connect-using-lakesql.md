@@ -74,7 +74,7 @@ curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefi
 
 --------------------------------------------------------------------------------
 Website: https://tidbcloud.com
-Docs: https://docs.databend.com
+Docs: https://docs.pingcap.com
 Github: https://github.com/tidbcloud/lakesql
 --------------------------------------------------------------------------------
 
