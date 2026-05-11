@@ -69,7 +69,7 @@ curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefi
 ```bash title='Example:'
 # highlight-next-line
 curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
-                                  B E N D S Q L
+                                  L A K E S Q L
                                     Installer
 
 --------------------------------------------------------------------------------
