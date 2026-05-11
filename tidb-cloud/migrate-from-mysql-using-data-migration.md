@@ -807,6 +807,12 @@ In the **Choose migration job type** step, you can choose to migrate both existi
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+In the **Migration Type** step, you can choose **Full + Incremental** to migrate both existing data and incremental data, or **Incremental only** to migrate only incremental data.
+
+</CustomContent>
+
 ### Migrate existing data and incremental data
 
 <CustomContent plan="dedicated">
@@ -839,6 +845,23 @@ Physical mode exports the MySQL source data as fast as possible, so [different s
 To migrate data to TiDB Cloud once and for all, choose both **Full + Incremental** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
 Currently you can only use **logical mode** to migrate **existing data**. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+To migrate data to {{{ .premium }}} once and for all, choose **Full + Incremental**, which ensures data consistency between the source and target databases.
+
+You can use **physical mode** or **logical mode** for **existing data migration**:
+
+- The default mode is **logical mode**. This mode exports data from MySQL source databases as SQL statements and then executes them on the target {{{ .premium }}} instance. In this mode, the target tables can be either empty or non-empty before migration, but performance is slower than physical mode.
+
+- For large datasets, you can choose **physical mode**. This mode uses `IMPORT INTO` on the target {{{ .premium }}} instance for faster loading. Physical mode requires the target tables to be empty before migration. If precheck detects that the selected target tables are not empty, the migration job automatically falls back to logical mode.
+
+> **Note:**
+>
+> - When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 </CustomContent>
 
@@ -893,6 +916,22 @@ If a migration job has failed, you can resume it after solving the problem.
 You can delete a migration job in any status.
 
 If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+## Step 6: Monitor the migration progress
+
+After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
+
+You can pause or delete a migration job when it is running. If a migration job has failed, you can resume it after solving the problem. You can delete a migration job in any status.
+
+If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+
+> **Note:**
+>
+> {{{ .premium }}} automatically manages migration job resources. The worker pool scales up and down based on the number of active migration jobs, so you do not need to choose a specification or perform manual scaling.
 
 </CustomContent>
 
