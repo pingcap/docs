@@ -81,9 +81,9 @@ You can use the following methods to export the data in TiDB:
 - Export data using mysqldump and the `WHERE` clause.
 - Use the MySQL client to export the results of `select` to a file.
 
-### How to migrate from DB2 or Oracle to TiDB?
+### How to migrate from Db2 or Oracle to TiDB?
 
-To migrate all the data or migrate incrementally from DB2 or Oracle to TiDB, see the following solution:
+To migrate all the data or migrate incrementally from Db2 or Oracle to TiDB, see the following solution:
 
 - Use the official migration tool of Oracle, such as OGG, Gateway, CDC (Change Data Capture).
 - Develop a program for importing and exporting data.

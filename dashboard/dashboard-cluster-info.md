@@ -86,3 +86,7 @@ The list includes the following information:
 - Disk Capacity: The total space of the disk on the host on which the instance is running.
 - Disk Usage: The space usage of the disk on the host on which the instance is running.
 - Instance: The instance running on this host.
+
+> **Note:**
+>
+> The **Disks** list might not display disk information for some hosts, depending on the component type, partition configuration, and deployment method. In these cases, a yellow warning icon (⚠️) appears. If you hover over the icon, a tooltip with the message "Failed to get host information" appears. This is expected behavior.

@@ -156,36 +156,125 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     >
     > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) will be disabled during runtime.
 
-## Check and stop the firewall service of target machines
+## Check the firewall service of target machines
 
 In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the allowlist of the firewall service.
 
-The rest of this section describes how to stop the firewall service of a target machine.
+### Stop and disable firewalld
 
-1. Check the firewall status. Take CentOS Linux release 7.7.1908 (Core) as an example.
+This section describes how to stop and disable the firewall service of a target machine.
+
+1. Check the firewall status. The following example uses CentOS Linux release 7.7.1908 (Core):
 
     ```shell
     sudo firewall-cmd --state
     sudo systemctl status firewalld.service
     ```
 
-2. Stop the firewall service.
+2. Stop the firewall service:
 
     ```bash
     sudo systemctl stop firewalld.service
     ```
 
-3. Disable automatic start of the firewall service.
+3. Disable automatic startup of the firewall service:
 
     ```bash
     sudo systemctl disable firewalld.service
     ```
 
-4. Check the firewall status.
+4. Check the firewall status:
 
     ```bash
     sudo systemctl status firewalld.service
     ```
+
+### Change the firewall zone
+
+Instead of disabling the firewall completely, you can use a less restrictive zone. The default `public` zone allows only specific services and ports, while the `trusted` zone allows all traffic by default.
+
+To set the default zone to `trusted`:
+
+```bash
+firewall-cmd --set-default-zone trusted
+```
+
+To verify the default zone:
+
+```bash
+firewall-cmd --get-default-zone
+# trusted
+```
+
+To list the policy for a zone:
+
+```bash
+firewall-cmd --zone=trusted --list-all
+# trusted
+#   target: ACCEPT
+#   icmp-block-inversion: no
+#   interfaces:
+#   sources:
+#   services:
+#   ports:
+#   protocols:
+#   forward: yes
+#   masquerade: no
+#   forward-ports:
+#   source-ports:
+#   icmp-blocks:
+#   rich rules:
+```
+
+### Configure the firewall
+
+To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, ports, and services based on your specific environment.
+
+Configure the firewall for the TiDB component:
+
+```bash
+firewall-cmd --permanent --new-service tidb
+firewall-cmd --permanent --service tidb --set-description="TiDB Server"
+firewall-cmd --permanent --service tidb --set-short="TiDB"
+firewall-cmd --permanent --service tidb --add-port=4000/tcp
+firewall-cmd --permanent --service tidb --add-port=10080/tcp
+firewall-cmd --permanent --zone=public --add-service=tidb
+```
+
+Configure the firewall for the TiKV component:
+
+```bash
+firewall-cmd --permanent --new-service tikv
+firewall-cmd --permanent --service tikv --set-description="TiKV Server"
+firewall-cmd --permanent --service tikv --set-short="TiKV"
+firewall-cmd --permanent --service tikv --add-port=20160/tcp
+firewall-cmd --permanent --service tikv --add-port=20180/tcp
+firewall-cmd --permanent --zone=public --add-service=tikv
+```
+
+Configure the firewall for the PD component:
+
+```bash
+firewall-cmd --permanent --new-service pd
+firewall-cmd --permanent --service pd --set-description="PD Server"
+firewall-cmd --permanent --service pd --set-short="PD"
+firewall-cmd --permanent --service pd --add-port=2379/tcp
+firewall-cmd --permanent --service pd --add-port=2380/tcp
+firewall-cmd --permanent --zone=public --add-service=pd
+```
+
+Configure the firewall for Prometheus:
+
+```bash
+firewall-cmd --permanent --zone=public --add-service=prometheus
+firewall-cmd --permanent --service=prometheus --add-port=12020/tcp
+```
+
+Configure the firewall for Grafana:
+
+```bash
+firewall-cmd --permanent --zone=public --add-service=grafana
+```
 
 ## Check and install the NTP service
 
@@ -293,6 +382,8 @@ To check whether the NTP service is installed and whether it synchronizes with t
         506 Cannot talk to daemon
         ```
 
+    - If the offset appears to be too high, you can run the `chronyc makestep` command to immediately correct the time offset. Otherwise, `chronyd` will gradually correct the time offset.
+
 To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
 
 ```bash
@@ -313,15 +404,16 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
-2. Set the I/O Scheduler of the storage media.
+- Disable [transparent huge pages (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp). Database memory access is usually sparse. When higher-order memory becomes heavily fragmented, THP allocation can cause high memory allocation latency. Therefore, it is recommended to disable THP to avoid performance fluctuations.
+
+- Set the [I/O scheduler](/tune-operating-system.md#io-scheduler) of the storage media.
 
     - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
     - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
 
-3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
+- Choose the `performance` mode for [the cpufreq module](/tune-operating-system.md#cpufrequency-scaling) that controls the CPU frequency dynamically. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
-Take the following steps to check the current operating system configuration and configure optimal parameters:
+The steps to check and configure these parameters are as follows:
 
 1. Execute the following command to see whether THP is enabled or disabled:
 
@@ -364,7 +456,7 @@ Take the following steps to check the current operating system configuration and
     [none] mq-deadline kyber bfq
     [none] mq-deadline kyber bfq
     ```
-    
+
     > **Note:**
     >
     > `[none] mq-deadline kyber bfq` indicates that the NVMe device uses the `none` I/O Scheduler, and no changes are needed.
@@ -618,21 +710,28 @@ Take the following steps to check the current operating system configuration and
 
     ```bash
     cat << EOF >>/etc/security/limits.conf
-    tidb           soft    nofile          1000000
-    tidb           hard    nofile          1000000
+    tidb           soft    nofile         1000000
+    tidb           hard    nofile         1000000
     tidb           soft    stack          32768
     tidb           hard    stack          32768
+    tidb           soft    core           unlimited
+    tidb           hard    core           unlimited
     EOF
     ```
 
 ## Manually configure the SSH mutual trust and sudo without password
 
-This section describes how to manually configure the SSH mutual trust and sudo without password. It is recommended to use TiUP for deployment, which automatically configure SSH mutual trust and login without password. If you deploy TiDB clusters using TiUP, ignore this section.
+This section describes how to manually configure SSH mutual trust from the control machine to the target nodes. If you use the TiUP deployment tool, SSH mutual trust and password-free login are configured automatically, and you can skip this section.
+
+When configuring SSH mutual trust, it is recommended to create and use the `tidb` user on all target nodes. In general, TiDB does not require that you use the same user across all nodes. However, pay attention to user consistency in the following scenarios:
+
+- Using Backup & Restore (BR): it is strongly recommended to perform all BR and TiDB-related operations with the same user.
+- Using network storage such as NFS: ensure that the user has the same UID and GID on all nodes. NFS determines file access permissions based on underlying UID and GID. If the UID or GID differs across nodes, or if the user running BR is different from the user running TiDB (especially without `sudo` privileges), permission denied errors might occur during backup or restore operations.
 
 1. Log in to the target machine respectively using the `root` user account, create the `tidb` user and set the login password.
 
     ```bash
-    useradd tidb && \
+    useradd -m -d /home/tidb tidb
     passwd tidb
     ```
 
@@ -708,4 +807,8 @@ sudo yum -y install numactl
 
 ## Disable SELinux
 
-Use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility to check if SELinux is disabled or set to permissive. SELinux in enforcing mode can cause deployment failures. For instructions on disabling SELinux, refer to your operating system's documentation.
+SELinux must be disabled or set to permissive mode. To check the current status, use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility.
+
+If SELinux is not disabled, open the `/etc/selinux/config` file, locate the line starting with `SELINUX=`, and change it to `SELINUX=disabled`. After making this change, you need to reboot the system because switching from `enforcing` or `permissive` to `disabled` does not take effect without a reboot.
+
+On some systems (such as Ubuntu), the `/etc/selinux/config` file might not exist, and the getenforce utility might not be installed. In that case, you can skip this step.

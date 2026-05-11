@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-drop-view/','/docs/dev/referen
 
 # DROP VIEW
 
-This statement drops an view object from the currently selected database. It does not effect any base tables that a view references.
+This statement drops a view object from the currently selected database. It does not affect any base tables that a view references.
 
 ## Synopsis
 

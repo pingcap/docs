@@ -41,7 +41,7 @@ TiDB supports both primary keys and secondary indexes (both unique and non-uniqu
 For primary keys and unique indexes, it is needed to quickly locate the corresponding `RowID` based on the key-value pair, so such a key-value pair is encoded as follows.
 
 ```
-Key:   tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
+Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
 Value: RowID
 ```
 

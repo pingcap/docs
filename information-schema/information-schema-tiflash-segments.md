@@ -9,7 +9,7 @@ summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
 >
 > Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
 
-The `TIFLASH_SEGMENTS` table provides statistical information about data tables in TiFlash.
+The `TIFLASH_SEGMENTS` table provides statistical information about segments in data tables in TiFlash.
 
 ```sql
 USE information_schema;
@@ -20,47 +20,42 @@ DESC tiflash_segments;
 +-------------------------------+-------------+------+------+---------+-------+
 | Field                         | Type        | Null | Key  | Default | Extra |
 +-------------------------------+-------------+------+------+---------+-------+
-| DATABASE                      | varchar(64) | YES  |      | NULL    |       |
-| TABLE                         | varchar(64) | YES  |      | NULL    |       |
 | TIDB_DATABASE                 | varchar(64) | YES  |      | NULL    |       |
 | TIDB_TABLE                    | varchar(64) | YES  |      | NULL    |       |
-| TABLE_ID                      | bigint(64)  | YES  |      | NULL    |       |
-| IS_TOMBSTONE                  | bigint(64)  | YES  |      | NULL    |       |
-| SEGMENT_ID                    | bigint(64)  | YES  |      | NULL    |       |
+| TABLE_ID                      | bigint      | YES  |      | NULL    |       |
+| IS_TOMBSTONE                  | bigint      | YES  |      | NULL    |       |
+| SEGMENT_ID                    | bigint      | YES  |      | NULL    |       |
 | RANGE                         | varchar(64) | YES  |      | NULL    |       |
-| EPOCH                         | bigint(64)  | YES  |      | NULL    |       |
-| ROWS                          | bigint(64)  | YES  |      | NULL    |       |
-| SIZE                          | bigint(64)  | YES  |      | NULL    |       |
+| EPOCH                         | bigint      | YES  |      | NULL    |       |
+| ROWS                          | bigint      | YES  |      | NULL    |       |
+| SIZE                          | bigint      | YES  |      | NULL    |       |
 | DELTA_RATE                    | double      | YES  |      | NULL    |       |
-| DELTA_MEMTABLE_ROWS           | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_MEMTABLE_SIZE           | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_MEMTABLE_COLUMN_FILES   | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_MEMTABLE_DELETE_RANGES  | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_PERSISTED_PAGE_ID       | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_PERSISTED_ROWS          | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_PERSISTED_SIZE          | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_PERSISTED_COLUMN_FILES  | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_PERSISTED_DELETE_RANGES | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_CACHE_SIZE              | bigint(64)  | YES  |      | NULL    |       |
-| DELTA_INDEX_SIZE              | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_PAGE_ID                | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_ROWS                   | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_SIZE                   | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_DMFILES                | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_DMFILES_ID_0           | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_DMFILES_ROWS           | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_DMFILES_SIZE           | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_DMFILES_SIZE_ON_DISK   | bigint(64)  | YES  |      | NULL    |       |
-| STABLE_DMFILES_PACKS          | bigint(64)  | YES  |      | NULL    |       |
+| DELTA_MEMTABLE_ROWS           | bigint      | YES  |      | NULL    |       |
+| DELTA_MEMTABLE_SIZE           | bigint      | YES  |      | NULL    |       |
+| DELTA_MEMTABLE_COLUMN_FILES   | bigint      | YES  |      | NULL    |       |
+| DELTA_MEMTABLE_DELETE_RANGES  | bigint      | YES  |      | NULL    |       |
+| DELTA_PERSISTED_PAGE_ID       | bigint      | YES  |      | NULL    |       |
+| DELTA_PERSISTED_ROWS          | bigint      | YES  |      | NULL    |       |
+| DELTA_PERSISTED_SIZE          | bigint      | YES  |      | NULL    |       |
+| DELTA_PERSISTED_COLUMN_FILES  | bigint      | YES  |      | NULL    |       |
+| DELTA_PERSISTED_DELETE_RANGES | bigint      | YES  |      | NULL    |       |
+| DELTA_CACHE_SIZE              | bigint      | YES  |      | NULL    |       |
+| DELTA_INDEX_SIZE              | bigint      | YES  |      | NULL    |       |
+| STABLE_PAGE_ID                | bigint      | YES  |      | NULL    |       |
+| STABLE_ROWS                   | bigint      | YES  |      | NULL    |       |
+| STABLE_SIZE                   | bigint      | YES  |      | NULL    |       |
+| STABLE_DMFILES                | bigint      | YES  |      | NULL    |       |
+| STABLE_DMFILES_ID_0           | bigint      | YES  |      | NULL    |       |
+| STABLE_DMFILES_ROWS           | bigint      | YES  |      | NULL    |       |
+| STABLE_DMFILES_SIZE           | bigint      | YES  |      | NULL    |       |
+| STABLE_DMFILES_SIZE_ON_DISK   | bigint      | YES  |      | NULL    |       |
+| STABLE_DMFILES_PACKS          | bigint      | YES  |      | NULL    |       |
 | TIFLASH_INSTANCE              | varchar(64) | YES  |      | NULL    |       |
 +-------------------------------+-------------+------+------+---------+-------+
-33 rows in set (0.00 sec)
 ```
 
 Fields in the `TIFLASH_SEGMENTS` table are described as follows:
 
-- `DATABASE`: Database name in TiFlash. The segment belongs to a table in this database.
-- `TABLE`: Table name in TiFlash. The segment belongs to this table.
 - `TIDB_DATABASE`: Database name in TiDB. The segment belongs to a table in this database.
 - `TIDB_TABLE`: Table name in TiDB. The segment belongs to this table.
 - `TABLE_ID`: The internal ID of the table to which the segment belongs. This ID is unique within a TiDB cluster.

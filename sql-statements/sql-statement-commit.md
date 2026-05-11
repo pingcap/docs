@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-commit/','/docs/dev/reference/
 
 # COMMIT
 
-This statement commits a transaction inside of the TIDB server.
+This statement commits a transaction inside of the TiDB server.
 
 In the absence of a `BEGIN` or `START TRANSACTION` statement, the default behavior of TiDB is that every statement will be its own transaction and autocommit. This behavior ensures MySQL compatibility.
 

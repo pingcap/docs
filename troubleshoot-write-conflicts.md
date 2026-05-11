@@ -78,7 +78,7 @@ You can use `tableID` to find the name of the related table:
 {{< copyable "" >}}
 
 ```shell
-curl http://{TiDBIP}:10080/db-table/{tableID}
+curl http://{TiDBIP}:10080/db-table/{TableID}
 ```
 
 You can use `indexID` and the table name to find the name of the related index:

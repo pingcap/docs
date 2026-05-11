@@ -21,9 +21,9 @@ Before performing a failover, a recovery group should have been created and be s
 
 In the event of a disaster, you can use the recovery group to failover databases to the secondary cluster.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, locate the name of the recovery group that you wish to failover.
 
@@ -47,9 +47,9 @@ If the original primary cluster that was affected by the disaster can be brought
 
 ![Unprotected Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-unprotected.png)
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, locate the name of the recovery group that you wish to reprotect.
 
@@ -60,7 +60,7 @@ If the original primary cluster that was affected by the disaster can be brought
 
     > **Warning**
     > 
-    > As part of the data replication necessary to perform the reprotect operation, the content of the selected databases will be replaced at the target cluster by the content of the databases from the (new) primary cluster. If you wish to preserve the unique content on the target cluster, complete a backup before performing the Reprotect operation.
+    > As part of the data replication necessary to perform the reprotect operation, the content of the selected databases will be replaced at the target TiDB Cloud Dedicated cluster by the content of the databases from the (new) primary cluster. If you wish to preserve the unique content on the target TiDB Cloud Dedicated cluster, complete a backup before performing the Reprotect operation.
 
 4. Click the **Action** menu for the recovery group, and then click **Reprotect**. The reprotect dialog is displayed.
 

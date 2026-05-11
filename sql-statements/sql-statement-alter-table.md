@@ -55,6 +55,7 @@ AlterTableSpec ::=
         | TTLEnable EqOpt ( 'ON' | 'OFF' )
         | TTLJobInterval EqOpt stringLit
     )
+|   'AFFINITY' EqOpt stringLit
 |   PlacementPolicyOption
 
 PlacementPolicyOption ::=
@@ -120,7 +121,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDB supports the ability to assert that DDL changes will use a particular `ALTER` algorithm. This is only an assertion, and does not change the actual algorithm which will be used to modify the table. It can be useful if you only want to permit instant DDL changes during the peak hours of your cluster:
+TiDB supports the ability to assert that DDL changes use a particular `ALTER` algorithm. Note that this is only an assertion, and does not change the actual algorithm used to modify the table:
 
 {{< copyable "sql" >}}
 
@@ -181,6 +182,8 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 - Changes of column types on generated columns are not supported.
 
 - Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+
+- The `AFFINITY` option is a TiDB extension syntax. After `AFFINITY` is enabled for a table, you cannot modify the partition scheme of that table, such as adding, dropping, reorganizing, or swapping partitions. To modify the partition scheme, you must first remove `AFFINITY`.
 
 - Spatial data types are not supported.
 

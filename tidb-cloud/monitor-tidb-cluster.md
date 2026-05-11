@@ -1,11 +1,13 @@
 ---
-title: Monitor a TiDB Cluster
-summary: Learn how to monitor your TiDB cluster.
+title: Monitor TiDB
+summary: Learn how to monitor your TiDB Cloud resource.
 ---
 
-# Monitor a TiDB Cluster
+# Monitor TiDB
 
-This document describes how to monitor a TiDB cluster on TiDB Cloud.
+This document describes how to monitor a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
+
+<CustomContent plan="dedicated">
 
 ## Cluster status and node status
 
@@ -32,6 +34,8 @@ You can see the current status of each running cluster on the cluster page.
 >
 > The TiDB node status is only available for TiDB Cloud Dedicated clusters.
 
+The node names starting with `tidb` are TiDB nodes, and those starting with `tiproxy` are TiProxy nodes.
+
 | TiDB node status | Description |
 |:--|:--|
 | **Available** | The TiDB node is healthy and available. |
@@ -52,38 +56,59 @@ You can see the current status of each running cluster on the cluster page.
 | **Unavailable** | The TiKV node is not available. |
 | **Deleting** | The TiKV node is being deleted. |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential,premium">
+
+## Instance status
+
+On the [**My TiDB**](https://tidbcloud.com/tidbs) page, you can see the current status of each running TiDB Cloud instance in the **Status** column.
+
+| Status | Description |
+|:--|:--|
+| **Active** | The instance is healthy and available. |
+| **Creating** | The instance is being created. The instance is inaccessible while it is being created. |
+| **Importing** | Importing data into the instance. |
+| **Maintaining** | The instance is in maintenance. |
+| **Modifying** | The instance is being modified. |
+| **Unavailable** | The instance has failed and TiDB cannot recover it. |
+| **Restoring** | The instance is currently being restored from a backup. |
+
+</CustomContent>
+
 ## Monitoring metrics
 
-In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
+In TiDB Cloud, you can view the commonly used metrics of a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> from the following pages:
 
-- Cluster overview page
-- Cluster monitoring page
+- **Overview** page
+- **Metrics** page
 
-### Metrics on the cluster overview page
+### Overview page
 
-The cluster overview page provides general metrics of a cluster, including total QPS, query duration, active connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB memory, TiKV memory, TiFlash memory, TiKV used storage size, and TiFlash used storage size.
+The **Overview** page provides general metrics of your TiDB Cloud resource.
 
-> **Note:**
->
-> Some of these metrics might be available only for TiDB Cloud Dedicated clusters.
+To view metrics on the overview page, take the following steps:
 
-To view metrics on the cluster overview page, take the following steps:
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+    > **Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Choose the target project and click the name of a cluster to go to its cluster overview page.
+2. Check the **Core Metrics** section.
 
-### Metrics on the cluster monitoring page
+### Metrics page
 
-The cluster monitoring page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+The **Metrics** page provides a full set of metrics of your TiDB Cloud resource. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-> **Note:**
->
-> Currently, the cluster monitoring page is unavailable for [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+To view metrics on the **Metrics** page, take the following steps:
 
-To view metrics on the cluster monitoring page, take the following steps:
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of the target project, click the name of the target cluster. The cluster overview page is displayed.
-2. Click **Monitoring** in the left navigation pane.
+    > **Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
+2. In the left navigation pane, click **Monitoring** > **Metrics**.
+
+For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).

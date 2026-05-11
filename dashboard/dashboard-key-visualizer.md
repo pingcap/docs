@@ -47,7 +47,7 @@ When you use the TiDB database, the hotspot issue is typical, where high traffic
 + Write adjacent data into a table with the `AUTO_INCREMENT` primary key, which causes a hotspot issue on this table.
 + Write adjacent time data into the time index of a table, which causes a hotspot issue on the table index.
 
-For more details about hotspot, refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md#hotspot-causes)
+For more details about hotspot, refer to [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md#hotspot-causes)
 
 ### Heatmap
 
@@ -178,4 +178,4 @@ Regions in the bright areas are the hotspots of read and write traffic, which of
 
 ## Address hotspot issues
 
-TiDB has some built-in features to mitigate the common hotspot issue. Refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md) for details.
+TiDB has some built-in features to mitigate the common hotspot issue. Refer to [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md) for details.

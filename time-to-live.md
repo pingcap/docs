@@ -1,9 +1,9 @@
 ---
-title: Periodically Delete Data Using TTL (Time to Live)
+title: TTL (Time to Live)
 summary: Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. In this document, you can learn how to use TTL to automatically expire and delete old data.
 ---
 
-# Periodically Delete Expired Data Using TTL (Time to Live)
+# TTL (Time to Live)
 
 Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level. This feature can effectively save storage space and enhance performance in some scenarios.
 
@@ -128,15 +128,17 @@ CREATE TABLE orders (
 
 ## TTL job
 
-For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 24 hours:
+For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the `TTL_JOB_INTERVAL` attribute for the table. The following example sets the background cleanup jobs for the table `orders` to run once every 48 hours:
 
 ```sql
-ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
+ALTER TABLE orders TTL_JOB_INTERVAL = '48h';
 ```
 
-`TTL_JOB_INTERVAL` is set to `1h` by default.
+`TTL_JOB_INTERVAL` is set to `24h` by default. In v8.5 and earlier versions, the default value is `1h`.
 
-When executing a TTL job, TiDB will split the table into up to 64 tasks, with the Region being the smallest unit. These tasks will be executed distributedly. You can limit the number of concurrent TTL tasks across the entire cluster by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700). However, not all TTL jobs for all kinds of tables can be split into tasks. For more details on which kinds of tables' TTL jobs cannot be split into tasks, refer to the [Limitations](#limitations) section.
+When executing a TTL job, TiDB splits the table into tasks, with the Region as the smallest unit. These tasks are executed distributedly. Typically, a single table can have up to 64 tasks. However, in larger clusters with more than 64 TiKV instances, the maximum number of tasks for a single table is equal to the number of TiKV instances. Note that not the TTL jobs of all types of tables can be split into tasks. For more details on which table types are exceptions, see [Limitations](#limitations).
+
+TiDB also limits the number of concurrent TTL tasks at the cluster level. You can adjust this concurrency by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700).
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
 

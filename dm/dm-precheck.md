@@ -47,12 +47,11 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
     > **Warning:**
     >
-    > - Migrating data from MySQL 8.0 to TiDB using DM is an experimental feature (introduced since DM v2.0). It is NOT recommended that you use it in a production environment.
-    > - Migrating data from MariaDB to TiDB using DM is an experimental feature. It is NOT recommended that you use it in a production environment.
+    > Migrating data from MariaDB to TiDB using DM is an experimental feature. It is NOT recommended that you use it in a production environment.
 
 - Compatibility of the upstream MySQL table schema
 
-    - Check whether the upstream tables have foreign keys, which are not supported by TiDB. A warning is returned if a foreign key is found in the precheck.
+    - Check whether the upstream tables have foreign keys. TiDB supports foreign keys (GA since v8.5.0), and DM provides experimental support for replicating tables with foreign key constraints starting from v8.5.6. During the precheck, DM returns a warning if foreign keys are detected. For supported scenarios and limitations, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
     - Check whether the upstream tables use character sets that are incompatible with TiDB. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
     - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7).
 
@@ -67,9 +66,13 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
 * (Mandatory) dump permission of the upstream database
 
-    - SELECT permission on INFORMATION_SCHEMA and dump tables
-    - RELOAD permission if `consistency=flush`
-    - LOCK TABLES permission on the dump tables if `consistency=flush/lock`
+    - `SELECT` permission on `INFORMATION_SCHEMA` and dump tables
+    - `RELOAD` permission if `consistency=flush`
+    - `LOCK TABLES` permission on the dump tables if `consistency=lock`
+
+    > **Note:**
+    >
+    > When `consistency=auto` (the default), DM first tries `FLUSH TABLES WITH READ LOCK` (FTWRL). If FTWRL is unavailable, DM falls back to `LOCK TABLES`. This fallback commonly occurs on managed MySQL services (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, and Google Cloud SQL), where FTWRL is not permitted. In this case, the `LOCK TABLES` privilege is required at runtime, but the precheck does not currently verify this privilege. For the full list of privileges, see [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges).
 
 * (Mandatory) Consistency of upstream MySQL multi-instance sharding tables
 
@@ -132,7 +135,18 @@ For the incremental data migration mode (`task-mode: incremental`), in addition 
     - Check whether binlog is enabled (required by DM).
     - Check whether `binlog_format=ROW` is configured (DM only supports the migration of binlog in the ROW format).
     - Check whether `binlog_row_image=FULL` is configured (DM only supports `binlog_row_image=FULL`).
+    - Check whether `binlog_transaction_compression=OFF` is configured (DM does not support transaction compression).
     - If `binlog_do_db` or `binlog_ignore_db` is configured, check whether the database tables to be migrated meet the conditions of `binlog_do_db` and `binlog_ignore_db`.
+
+* (Mandatory) MariaDB binlog configuration
+
+    - Check whether binlog is enabled (required by DM).
+    - Check whether `binlog_legacy_event_pos` is set to `ON`.
+    - Check whether `binlog_format=ROW` is configured (DM only supports the migration of binlog in the ROW format).
+    - Check whether `binlog_row_image=FULL` is configured (DM only supports `binlog_row_image=FULL`).
+    - If `binlog_do_db` or `binlog_ignore_db` is configured, check whether the database tables to be migrated meet the conditions of `binlog_do_db` and `binlog_ignore_db`.
+    - Check whether `binlog_annotate_row_events` is set to `OFF`.
+    - Check whether `log_bin_compress` is set to `OFF`.
 
 * (Mandatory) Check if the upstream database is in an [Online-DDL](/dm/feature-online-ddl.md) process (in which the `ghost` table is created but the `rename` phase is not executed yet). If the upstream is in the online-DDL process, the precheck returns an error. In this case, wait until the DDL to complete and retry.
 
@@ -144,21 +158,21 @@ For the full and incremental data migration mode (`task-mode: all`), in addition
 
 Prechecks can find potential risks in your environments. It is not recommended to ignore check items. If your data migration task has special needs, you can use the [`ignore-checking-items` configuration item](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) to skip some check items.
 
-| Check item  | Description   |
-| :---------- | :------------ |
-| `dump_privilege`         | Checks the dump privilege of the user in the upstream MySQL instance. |
-| `replication_privilege` | Checks the replication privilege of the user in the upstream MySQL instance. |
-| `version`               | Checks the version of the upstream database. |
-| `server_id`             | Checks whether server_id is configured in the upstream database. |
-| `binlog_enable`         | Checks whether binlog is enabled in the upstream database. |
-| `table_schema`          | Checks the compatibility of the table schemas in the upstream MySQL tables. |
-| `schema_of_shard_tables`| Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
-| `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
-|`online_ddl`| Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
-| `empty_region` | Checks the number of empty Regions in the downstream database for physical import. |
-| `region_distribution` | Checks the distribution of Regions in the downstream database for physical import. |
-| `downstream_version` | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
-| `free_space` | Checks the free space of the downstream database. |
+| Check item                  | Description   |
+| :-------------------------- | :------------ |
+| `dump_privilege`            | Checks the dump privilege of the user in the upstream MySQL instance. |
+| `replication_privilege`     | Checks the replication privilege of the user in the upstream MySQL instance. |
+| `version`                   | Checks the version of the upstream database. |
+| `server_id`                 | Checks whether server_id is configured in the upstream database. |
+| `binlog_enable`             | Checks whether binlog is enabled in the upstream database. |
+| `table_schema`              | Checks the compatibility of the table schemas in the upstream MySQL tables. |
+| `schema_of_shard_tables`    | Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
+| `auto_increment_ID`         | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
+| `online_ddl`                | Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
+| `empty_region`              | Checks the number of empty Regions in the downstream database for physical import. |
+| `region_distribution`       | Checks the distribution of Regions in the downstream database for physical import. |
+| `downstream_version`        | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
+| `free_space`                | Checks the free space of the downstream database. |
 | `downstream_mutex_features` | Checks whether the downstream database is running tasks that are incompatible with physical import. |
 
 > **Note:**
@@ -176,7 +190,7 @@ mydumpers:                           # Configuration arguments of the dump proce
   global:                            # Configuration name
     threads: 4                       # The number of threads that access the upstream when the dump processing unit performs the precheck and exports data from the upstream database (4 by default)
     chunk-filesize: 64               # The size of the files generated by the dump processing unit (64 MB by default)
-    extra-args: "--consistency none" # Other arguments of the dump processing unit. You do not need to manually configure table-list in `extra-args`, because it is automatically generated by DM.
+    extra-args: "--consistency auto" # Other arguments of the dump processing unit. You do not need to manually configure table-list in `extra-args`, because it is automatically generated by DM.
 
 ```
 

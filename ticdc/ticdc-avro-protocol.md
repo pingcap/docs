@@ -205,6 +205,7 @@ If one column can be NULL, the Column data format can be:
 | ENUM       | ENUM      | string    |  -                                                                                                                         |
 | SET        | SET       | string    |  -                                                                                                                         |
 | DECIMAL    | DECIMAL   | bytes     | When `avro-decimal-handling-mode` is string, AVRO_TYPE is string.                                                         |
+| TiDBVECTORFloat32 | TiDBVECTORFloat32 | string | - |
 
 In the Avro protocol, two other `sink-uri` parameters might affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
 

@@ -17,6 +17,10 @@ TiDB Dashboard supports [OIDC](https://openid.net/connect/)-based Single Sign-On
 
 3. In the **Single Sign-On** section, select **Enable to use SSO when sign into TiDB Dashboard**.
 
+    > **Note:**
+    >
+    > If your account does not have the `SYSTEM_VARIABLES_ADMIN` permission, the **Enable to use SSO when sign into TiDB Dashboard** option is disabled. For more information on permissions, see [TiDB Dashboard User Management](/dashboard/dashboard-user.md).
+
 4. Fill the **OIDC Client ID** and the **OIDC Discovery URL** fields in the form.
 
     Generally, you can obtain the two fields from the SSO service provider:

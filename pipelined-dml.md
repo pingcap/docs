@@ -102,6 +102,10 @@ If the `pipelined` field in the output is `true`, it indicates that Pipelined DM
 <CustomContent platform="tidb">
 
 - The [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable controls whether Pipelined DML is enabled at the session level.
+- The [`tidb_pipelined_dml_resource_policy`](/system-variables.md#tidb_pipelined_dml_resource_policy-new-in-v900) system variable controls the resource usage policy for Pipelined DML. When the following resource contention occurs, consider setting this variable to `conservative` to reduce the impact of Pipelined DML on cluster performance:
+    - TiKV nodes experience write hotspots and high load.
+    - The request latency of OLTP applications significantly increases.
+    - The write throughput of the cluster significantly decreases.
 - When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
 - Transactions executed using Pipelined DML are not subject to the size limit specified by the TiDB configuration item [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
 - For large transactions executed using Pipelined DML, transaction duration might increase. In such cases, the maximum TTL for the transaction lock is the larger value of [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl) or 24 hours.
@@ -112,6 +116,10 @@ If the `pipelined` field in the output is `true`, it indicates that Pipelined DM
 <CustomContent platform="tidb-cloud">
 
 - The [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable controls whether Pipelined DML is enabled at the session level.
+- The [`tidb_pipelined_dml_resource_policy`](/system-variables.md#tidb_pipelined_dml_resource_policy-new-in-v900) system variable controls the resource usage policy for Pipelined DML. When the following resource contention occurs, consider setting this variable to `conservative` to reduce the impact of Pipelined DML on cluster performance:
+    - TiKV nodes experience write hotspots and high load.
+    - The request latency of OLTP applications significantly increases.
+    - The write throughput of the cluster significantly decreases.
 - When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
 - Transactions executed using Pipelined DML are not subject to the size limit specified by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
 - For large transactions executed using Pipelined DML, transaction duration might increase. In such cases, the maximum TTL for the transaction lock is the larger value of [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) or 24 hours.

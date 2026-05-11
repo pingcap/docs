@@ -26,8 +26,6 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [tiproxy_servers](#tiproxy_servers): The configuration of the TiProxy instance. This configuration specifies the machines to which the TiProxy component is deployed.
 - [kvcdc_servers](#kvcdc_servers): The configuration of the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) instance. This configuration specifies the machines to which the TiKV-CDC component is deployed.
 - [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
-- [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines to which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
-- [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines to which the TiSpark worker component is deployed.
 - [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers): The configuration of the TSO instance. This configuration specifies the machines to which the `tso` microservice is deployed (requires configuring `pd_mode: "ms"` in [`global`](#global) to enable [PD microservices](/pd-microservices.md)).
 - [scheduling_servers](/tiup/tiup-cluster-topology-reference.md#scheduling_servers): The configuration of the Scheduling instance. This configuration specifies the machines to which the `scheduling` microservice is deployed (requires configuring `pd_mode: "ms"` in [`global`](#global) to enable [PD microservices](/pd-microservices.md)).
 - [monitoring_servers](#monitoring_servers): Specifies the machines to which Prometheus and NGMonitoring are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
@@ -41,6 +39,8 @@ The `global` section corresponds to the cluster's global configuration and has t
 - `user`: The user used to start the deployed cluster. The default value is `"tidb"`. If the user specified in the `<user>` field does not exist on the target machine, this user is automatically created.
 
 - `group`: The user group to which a user belongs. It is specified when the user is created. The value defaults to that of the `<user>` field. If the specified group does not exist, it is automatically created.
+
+- `systemd_mode`: Specifies the `systemd` mode used on the target machine during cluster deployment. The default value is `system`. If set to `user`, sudo permissions are not required on the target machine, meaning [TiUP no-sudo mode](/tiup/tiup-cluster-no-sudo-mode.md) is used.
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
 
@@ -402,7 +402,7 @@ tikv_servers:
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
-After the deployment, for the fields above, you can only add directories to `data_dir`; for the fields below, you cannot modified these fields:
+After the deployment, for the fields above, you can only add directories to `data_dir`; for the fields below, you cannot modify these fields:
 
 - `host`
 - `tcp_port`
@@ -573,103 +573,6 @@ cdc_servers:
   - host: 10.0.1.21
     gc-ttl: 86400
     data_dir: "/cdc-data"
-```
-
-### `tispark_masters`
-
-`tispark_masters` specifies the machines to which the master node of TiSpark is deployed. It also specifies the service configuration on each machine. `tispark_masters` is an array. Each array element contains the following fields:
-
-- `host`: Specifies the machine to which the TiSpark master is deployed. The field value is an IP address and is mandatory.
-
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
-
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-
-- `port`: Spark's listening port, used for communication before the node. The default value is `7077`.
-
-- `web_port`: Spark's web port, which provides web services and the task status. The default value is `8080`.
-
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
-
-- `java_home`: Specifies the path of the JRE environment to be used. This parameter corresponds to the `JAVA_HOME` system environment variable.
-
-- `spark_config`: Configures to configure the TiSpark services. Then, a configuration file is generated and sent to the machine specified in `host`.
-
-- `spark_env`: Configures the environment variables when Spark starts.
-
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
-
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
-
-For the above fields, you cannot modify these configured fields after the deployment:
-
-- `host`
-- `listen_host`
-- `port`
-- `web_port`
-- `deploy_dir`
-- `arch`
-- `os`
-
-A `tispark_masters` configuration example is as follows:
-
-```yaml
-tispark_masters:
-  - host: 10.0.1.21
-    spark_config:
-      spark.driver.memory: "2g"
-      spark.eventLog.enabled: "False"
-      spark.tispark.grpc.framesize: 2147483647
-      spark.tispark.grpc.timeout_in_sec: 100
-      spark.tispark.meta.reload_period_in_sec: 60
-      spark.tispark.request.command.priority: "Low"
-      spark.tispark.table.scan_concurrency: 256
-    spark_env:
-      SPARK_EXECUTOR_CORES: 5
-      SPARK_EXECUTOR_MEMORY: "10g"
-      SPARK_WORKER_CORES: 5
-      SPARK_WORKER_MEMORY: "10g"
-  - host: 10.0.1.22
-```
-
-### `tispark_workers`
-
-`tispark_workers` specifies the machines to which the worker nodes of TiSpark are deployed. It also specifies the service configuration on each machine. `tispark_workers` is an array. Each array element contains the following fields:
-
-- `host`: Specifies the machine to which the TiSpark workers are deployed. The field value is an IP address and is mandatory.
-
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
-
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-
-- `port`: Spark's listening port, used for communication before the node. The default value is `7077`.
-
-- `web_port`: Spark's web port, which provides web services and the task status. The default value is `8080`.
-
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
-
-- `java_home`: Specifies the path in which the JRE environment to be used is located. This parameter corresponds to the `JAVA_HOME` system environment variable.
-
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
-
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
-
-For the above fields, you cannot modify these configured fields after the deployment:
-
-- `host`
-- `listen_host`
-- `port`
-- `web_port`
-- `deploy_dir`
-- `arch`
-- `os`
-
-A `tispark_workers` configuration example is as follows:
-
-```yaml
-tispark_workers:
-  - host: 10.0.1.22
-  - host: 10.0.1.23
 ```
 
 ### `tso_servers`

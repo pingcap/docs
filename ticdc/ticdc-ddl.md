@@ -92,7 +92,7 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO test.t2` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE test.t1 TO ignore.t1` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE ignore.t1 TO ignore.t2` | Ignore | `ignore.t1` does not match the filter rule |
-| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is illegal. In this case, refer to the error message for handling. |
+| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is invalid. In this case, refer to the error message for handling. |
 | `RENAME TABLE ignore.t1 TO test.t1` | Report an error and exit the replication | Same reason as above. |
 
 #### Rename multiple tables in a DDL statement
@@ -131,6 +131,7 @@ Assume that the configuration file of your changefeed is as follows:
 [filter]
 rules = ['test.t*']
 
+[[filter.event-filters]]
 matcher = ["test.t1"] # This filter rule applies only to the t1 table in the test database.
 ignore-event = ["create table", "drop table", "truncate table", "rename table"]
 ```
