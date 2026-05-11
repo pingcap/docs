@@ -105,7 +105,7 @@ To prevent this, create the target tables in the downstream database before star
 
 <CustomContent plan="premium">
 
-- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports data from MySQL source databases as SQL statements and then executes them on the target {{{ .premium }}} instance, which consumes Request Capacity Units (RCUs) during the load. Physical mode uses `IMPORT INTO` on the target {{{ .premium }}} instance and is recommended for large datasets when load throughput and cost are priorities.
+- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports data from MySQL source databases as SQL statements and then executes them on the target {{{ .premium }}} instance, which consumes Request Capacity Units (RCUs) during the load. Physical mode uses `IMPORT INTO` on the target {{{ .premium }}} instance and is recommended for large datasets when you prioritize load throughput and cost efficiency.
 - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 - When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
 
@@ -178,7 +178,7 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 <CustomContent plan="premium">
 
-For {{{ .premium }}}, the Data Migration feature supports any MySQL-compatible source database, and **MySQL** is the only data source type available in the migration job wizard. For supported connection methods, see [Ensure network connectivity](#ensure-network-connectivity).
+For {{{ .premium }}}, the Data Migration feature supports the following MySQL-compatible source databases, and **MySQL** is the only data source type available in the migration job wizard. For supported connection methods, see [Ensure network connectivity](#ensure-network-connectivity).
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
@@ -433,7 +433,7 @@ AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you 
 
     For detailed instructions, see [Manage permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions) in AWS documentation.
 
-4. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
+4. Optional: Test connectivity from a bastion or client inside the same VPC before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
@@ -520,7 +520,7 @@ AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you 
 
     For detailed instructions, see [Manage permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions) in AWS documentation.
 
-4. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
+4. Optional: Test connectivity from a bastion or client inside the same VPC before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
@@ -560,7 +560,7 @@ If you use AWS VPC peering or Google Cloud VPC network peering, see the followin
 
 If your MySQL service is in an AWS VPC, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
@@ -638,7 +638,7 @@ GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source
 GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
-#### Grant required privileges in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>
+#### Grant required privileges in the target TiDB Cloud resource
 
 For testing purposes, you can use the `root` account of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
