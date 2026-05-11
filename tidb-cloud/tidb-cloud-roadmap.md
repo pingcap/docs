@@ -71,10 +71,6 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 </tbody>
 </table>
 
-## TiDB kernel
-
-For the roadmap of TiDB kernel, refer to TiDB Roadmap.
-
 ## Diagnosis and maintenance
 
 <table>
