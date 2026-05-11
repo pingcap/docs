@@ -251,7 +251,7 @@ Keep safe mode enabled for most workflows. Disable it only when the agent must m
 
 | Variable                 | Description                                    | Default  |
 | ------------------------ | ---------------------------------------------- | -------- |
-| `DATABEND_DSN`           | {{{ .lake }}} connection string                     | Required |
+| `DATABEND_DSN`           | {{{ .lake }}} connection string                | Required |
 | `DATABEND_MCP_SAFE_MODE` | Enable session sandbox protection for AI tools | `true`   |
 | `DATABEND_QUERY_TIMEOUT` | Query timeout in seconds                       | `300`    |
 
