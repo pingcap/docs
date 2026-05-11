@@ -104,7 +104,7 @@ You're now ready to deploy to Cloudflare Workers.
 In your project directory, run the following command:
 
 ```
-npx wrangler publish
+npx wrangler deploy
 ```
 
 ## Step 6: Try your Cloudflare Workers
