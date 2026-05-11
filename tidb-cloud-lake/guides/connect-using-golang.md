@@ -10,7 +10,7 @@ The official Go driver provides a standard `database/sql` interface for seamless
 ## Installation
 
 ```bash
-go get github.com/databendlabs/databend-go
+go get github.com/tidbcloud/lake-go
 ```
 
 **Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
@@ -60,7 +60,7 @@ import (
     "fmt"
     "log"
 
-    _ "github.com/databendlabs/databend-go"
+    _ "github.com/tidbcloud/lake-go"
 )
 
 // Connect to {{{ .lake }}}
@@ -95,6 +95,6 @@ fmt.Printf("User: %d, %s\n", id, name)
 
 ## Resources
 
-- **GitHub Repository**: [databend-go](https://github.com/databendlabs/databend-go)
+- **GitHub Repository**: [lake-go](https://github.com/tidbcloud/lake-go)
 - **Go Package**: [pkg.go.dev](https://pkg.go.dev/github.com/datafuselabs/databend-go)
-- **Examples**: [GitHub Examples](https://github.com/databendlabs/databend-go/tree/main/examples)
+- **Examples**: [GitHub Examples](https://github.com/tidbcloud/lake-go/tree/main/examples)
