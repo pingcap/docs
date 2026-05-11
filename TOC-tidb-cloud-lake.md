@@ -342,7 +342,9 @@
         - [DROP CONNECTION](/tidb-cloud-lake/sql/drop-connection.md)
         - [SHOW CONNECTIONS](/tidb-cloud-lake/sql/show-connections.md)
       - Catalog
+        - [Overview](/tidb-cloud-lake/sql/catalog.md)
         - [SHOW CATALOGS](/tidb-cloud-lake/sql/show-catalogs.md)
+        - [SHOW CREATE CATALOG](/tidb-cloud-lake/sql/show-create-catalog.md)
       - File Format
         - [Overview](/tidb-cloud-lake/sql/file-format.md)
         - [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md)
@@ -422,6 +424,11 @@
         - [RENAME DICTIONARY](/tidb-cloud-lake/sql/rename-dictionary.md)
         - [SHOW CREATE DICTIONARY](/tidb-cloud-lake/sql/show-create-dictionary.md)
         - [SHOW DICTIONARIES](/tidb-cloud-lake/sql/show-dictionaries.md)
+      - Pipe
+        - [Overview](/tidb-cloud-lake/sql/pipe.md)
+        - [CREATE PIPE](/tidb-cloud-lake/sql/create-pipe.md)
+        - [DESCRIBE PIPE](/tidb-cloud-lake/sql/describe-pipe.md)
+        - [DROP PIPE](/tidb-cloud-lake/sql/drop-pipe.md)
       - Transaction
         - [BEGIN](/tidb-cloud-lake/sql/begin.md)
         - [COMMIT](/tidb-cloud-lake/sql/commit.md)
@@ -442,12 +449,14 @@
         - [SHOW PROCEDURES](/tidb-cloud-lake/sql/show-procedures.md)
       - Warehouse
         - [Overview](/tidb-cloud-lake/sql/warehouse-overview.md)
-        - [ALTER WAREHOUSE](/tidb-cloud-lake/sql/alter-warehouse.md)
         - [CREATE WAREHOUSE](/tidb-cloud-lake/sql/create-warehouse.md)
+        - [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)
+        - [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)
+        - [ALTER WAREHOUSE](/tidb-cloud-lake/sql/alter-warehouse.md)
+        - [ALTER WAREHOUSE ASSIGN NODES](/tidb-cloud-lake/sql/alter-warehouse-assign-nodes.md)
+        - [ALTER WAREHOUSE UNASSIGN NODES](/tidb-cloud-lake/sql/alter-warehouse-unassign-nodes.md)
         - [DROP WAREHOUSE](/tidb-cloud-lake/sql/drop-warehouse.md)
         - [QUERY_HISTORY](/tidb-cloud-lake/sql/query-history.md)
-        - [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)
-        - [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)
       - Worker
         - [Overview](/tidb-cloud-lake/sql/worker-overview.md)
         - [CREATE WORKER](/tidb-cloud-lake/sql/create-worker.md)
