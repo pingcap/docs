@@ -1,33 +1,33 @@
 ---
-title: BendSQL
-summary: BendSQL is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
+title: LakeSQL
+summary: LakeSQL is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 ---
 
-# BendSQL
+# LakeSQL
 
-[BendSQL](https://github.com/databendlabs/bendsql) is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
+[LakeSQL](https://github.com/tidbcloud/lakesql) is a command line tool that has been designed specifically for {{{ .lake }}}. It allows users to establish a connection with {{{ .lake }}} and execute queries directly from a CLI window.
 
-BendSQL is particularly useful for those who prefer a command line interface and need to work with {{{ .lake }}} on a regular basis. With BendSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
+LakeSQL is particularly useful for those who prefer a command line interface and need to work with {{{ .lake }}} on a regular basis. With LakeSQL, users can easily and efficiently manage their databases, tables, and data, and perform a wide range of queries and operations with ease.
 
-## Installing BendSQL
+## Installing LakeSQL
 
-BendSQL offers multiple installation options to suit different platforms and preferences. Choose your preferred method from the sections below or download the installation package from the [BendSQL release page](https://github.com/databendlabs/bendsql/releases) to install it manually.
+LakeSQL offers multiple installation options to suit different platforms and preferences. Choose your preferred method from the sections below or download the installation package from the [LakeSQL release page](https://github.com/tidbcloud/lakesql/releases) to install it manually.
 
 ### Shell Script
 
-BendSQL provides a convenient Shell script for installation. You can choose between two options:
+LakeSQL provides a convenient Shell script for installation. You can choose between two options:
 
 #### Default Installation
 
-Install BendSQL to the user's home directory (~/.bendsql):
+Install LakeSQL to the user's home directory (~/.lakesql):
 
 ```bash
-curl -fsSL https://repo.databend.com/install/bendsql.sh | bash
+curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash
 ```
 
 ```bash title='Example:'
 # highlight-next-line
-curl -fsSL https://repo.databend.com/install/bendsql.sh | bash
+curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash
 
                                   B E N D S Q L
                                     Installer
@@ -35,10 +35,10 @@ curl -fsSL https://repo.databend.com/install/bendsql.sh | bash
 --------------------------------------------------------------------------------
 Website: https://tidbcloud.com
 Docs: https://docs.tidb.io/tidbcloudlake/
-Github: https://github.com/databendlabs/bendsql
+Github: https://github.com/tidbcloud/lakesql
 --------------------------------------------------------------------------------
 
->>> We'll be installing BendSQL via a pre-built archive at https://repo.databend.com/bendsql/v0.22.2/
+>>> We'll be installing LakeSQL via a pre-built archive at https://repo.tidbcloud.com/lakesql/v0.22.2/
 >>> Ready to proceed? (y/n)
 
 >>> Please enter y or n.
@@ -46,83 +46,83 @@ Github: https://github.com/databendlabs/bendsql
 
 --------------------------------------------------------------------------------
 
->>> Downloading BendSQL via https://repo.databend.com/bendsql/v0.22.2/bendsql-aarch64-apple-darwin.tar.gz ✓
->>> Unpacking archive to /Users/eric/.bendsql ... ✓
->>> Adding BendSQL path to /Users/eric/.zprofile ✓
->>> Adding BendSQL path to /Users/eric/.profile ✓
+>>> Downloading LakeSQL via https://repo.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
+>>> Unpacking archive to /Users/eric/.lakesql ... ✓
+>>> Adding LakeSQL path to /Users/eric/.zprofile ✓
+>>> Adding LakeSQL path to /Users/eric/.profile ✓
 >>> Install succeeded! 🚀
->>> To start BendSQL:
+>>> To start LakeSQL:
 
-    bendsql --help
+    lakesql --help
 
->>> More information at https://github.com/databendlabs/bendsql
+>>> More information at https://github.com/tidbcloud/lakesql
 ```
 
 #### Custom Installation with `--prefix`
 
-Install BendSQL to a specified directory (e.g., /usr/local):
+Install LakeSQL to a specified directory (e.g., /usr/local):
 
 ```bash
-curl -fsSL https://repo.databend.com/install/bendsql.sh | bash -s -- -y --prefix /usr/local
+curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
 ```
 
 ```bash title='Example:'
 # highlight-next-line
-curl -fsSL https://repo.databend.com/install/bendsql.sh | bash -s -- -y --prefix /usr/local
+curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
                                   B E N D S Q L
                                     Installer
 
 --------------------------------------------------------------------------------
 Website: https://tidbcloud.com
 Docs: https://docs.databend.com
-Github: https://github.com/databendlabs/bendsql
+Github: https://github.com/tidbcloud/lakesql
 --------------------------------------------------------------------------------
 
->>> Downloading BendSQL via https://repo.databend.com/bendsql/v0.22.2/bendsql-aarch64-apple-darwin.tar.gz ✓
+>>> Downloading LakeSQL via https://repo.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
 >>> Unpacking archive to /usr/local ... ✓
 >>> Install succeeded! 🚀
->>> To start BendSQL:
+>>> To start LakeSQL:
 
-    bendsql --help
+    lakesql --help
 
->>> More information at https://github.com/databendlabs/bendsql
+>>> More information at https://github.com/tidbcloud/lakesql
 ```
 
 ### Homebrew (for macOS)
 
-BendSQL can be easily installed on macOS using Homebrew with a simple command:
+LakeSQL can be easily installed on macOS using Homebrew with a simple command:
 
 ```bash
-brew install databendcloud/homebrew-tap/bendsql
+brew install tidbcloud/homebrew-tap/lakesql
 ```
 
 ### Apt (for Ubuntu/Debian)
 
-On Ubuntu and Debian systems, BendSQL can be installed via the Apt package manager. Choose the appropriate instructions based on the distribution version.
+On Ubuntu and Debian systems, LakeSQL can be installed via the Apt package manager. Choose the appropriate instructions based on the distribution version.
 
 #### DEB822-STYLE format (Ubuntu-22.04/Debian-12 and later)
 
 ```bash
-sudo curl -L -o /etc/apt/sources.list.d/databend.sources https://repo.databend.com/deb/databend.sources
+sudo curl -L -o /etc/apt/sources.list.d/tidbcloudlake.sources https://repo.tidbcloud.com/deb/tidbcloudlake.sources
 ```
 
 #### Old format (Ubuntu-20.04/Debian-11 and earlier)
 
 ```bash
-sudo curl -L -o /usr/share/keyrings/databend-keyring.gpg https://repo.databend.com/deb/databend.gpg
-sudo curl -L -o /etc/apt/sources.list.d/databend.list https://repo.databend.com/deb/databend.list
+sudo curl -L -o /usr/share/keyrings/tidbcloudlake-keyring.gpg https://repo.tidbcloud.com/deb/tidbcloudlake.gpg
+sudo curl -L -o /etc/apt/sources.list.d/tidbcloudlake.list https://repo.tidbcloud.com/deb/tidbcloudlake.list
 ```
 
-Finally, update the package list and install BendSQL:
+Finally, update the package list and install LakeSQL:
 
 ```bash
 sudo apt update
-sudo apt install bendsql
+sudo apt install lakesql
 ```
 
 ### Cargo (Rust Package Manager)
 
-To install BendSQL using Cargo, utilize the `cargo-binstall` tool or build from source using the provided command.
+To install LakeSQL using Cargo, utilize the `cargo-binstall` tool or build from source using the provided command.
 
 > **Note:**
 >
@@ -133,7 +133,7 @@ To install BendSQL using Cargo, utilize the `cargo-binstall` tool or build from 
 Please refer to [Cargo B(inary)Install - Installation](https://github.com/cargo-bins/cargo-binstall#installation) to install `cargo-binstall` and enable the `cargo binstall <crate-name>` subcommand.
 
 ```bash
-cargo binstall bendsql
+cargo binstall lakesql
 ```
 
 **Building from Source**
@@ -141,20 +141,20 @@ cargo binstall bendsql
 When building from source, some dependencies may involve compiling C/C++ code. Ensure that you have the GCC/G++ or Clang toolchain installed on your computer.
 
 ```bash
-cargo install bendsql
+cargo install lakesql
 ```
 
 ## User Authentication
 
 For connections to {{{ .lake }}}, you can use the default `cloudapp` user or an SQL user created with the [CREATE USER](/tidb-cloud-lake/sql/create-user.md) command. Note that the user account you use to log in to the [{{{ .lake }}} console](https://app.lake.tidbcloud.com) cannot be used for connecting to {{{ .lake }}}.
 
-## Connecting with BendSQL
+## Connecting with LakeSQL
 
-BendSQL allows you to connect to both {{{ .lake }}} instances.
+LakeSQL allows you to connect to both {{{ .lake }}} instances.
 
 ### Customize Connections with a DSN
 
-A DSN (Data Source Name) is a simple yet powerful way to configure and manage your {{{ .lake }}} connection in BendSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
+A DSN (Data Source Name) is a simple yet powerful way to configure and manage your {{{ .lake }}} connection in LakeSQL using a single URI-style string. This method allows you to embed your credentials and connection settings directly into your environment, streamlining the connection process.
 
 #### DSN Format and Parameters
 
@@ -208,16 +208,16 @@ The best practice for connecting to {{{ .lake }}} is to obtain your DSN from {{{
 
 2. Select the database and warehouse you want to connect to.
 
-3. Your DSN will be automatically generated in the **Examples** section. Below the DSN, you'll find a BendSQL snippet that exports the DSN as an environment variable named `BENDSQL_DSN` and launches BendSQL with the correct configuration. You can copy and paste it directly into your terminal.
+3. Your DSN will be automatically generated in the **Examples** section. Below the DSN, you'll find a LakeSQL snippet that exports the DSN as an environment variable named `LAKESQL_DSN` and launches LakeSQL with the correct configuration. You can copy and paste it directly into your terminal.
 
     ```bash title='Example'
-    export BENDSQL_DSN="lake://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.tidbcloud.com:443/information_schema?warehouse=small-xy2t"
-    bendsql
+    export LAKESQL_DSN="lake://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.tidbcloud.com:443/information_schema?warehouse=small-xy2t"
+    lakesql
     ```
 
-## BendSQL Settings
+## LakeSQL Settings
 
-BendSQL provides a range of settings that allow you to define how query results are presented:
+LakeSQL provides a range of settings that allow you to define how query results are presented:
 
 | Setting              | Description                                                                                                                                                 |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -541,13 +541,13 @@ root@localhost:8000/default> SELECT 'Hello\nWorld' AS message;
 1 row read in 0.067 sec. Processed 1 row, 1 B (14.87 rows/s, 14 B/s)
 ```
 
-### Configuring BendSQL Settings
+### Configuring LakeSQL Settings
 
-You have the following options to configure a BendSQL setting:
+You have the following options to configure a LakeSQL setting:
 
 - Use the `!set <setting> <value>` command. For more information, see [Utility Commands](#utility-commands).
 
-- Add and configure a setting in the configuration file `~/.config/bendsql/config.toml`. To do so, open the file and add your setting under the `[settings]` section. The following example sets the `max_display_rows` to 10 and `max_width` to 100:
+- Add and configure a setting in the configuration file `~/.config/lakesql/config.toml`. To do so, open the file and add your setting under the `[settings]` section. The following example sets the `max_display_rows` to 10 and `max_width` to 100:
 
 ```toml title='Example:'
 ...
@@ -557,7 +557,7 @@ max_width = 100
 ...
 ```
 
-- Configure a setting at runtime by launching BendSQL and then specifying the setting in the format `.<setting> <value>`. Please note that settings configured in this way only take effect in the current session.
+- Configure a setting at runtime by launching LakeSQL and then specifying the setting in the format `.<setting> <value>`. Please note that settings configured in this way only take effect in the current session.
 
 ```shell title='Example:'
 root@localhost:8000/default> .max_display_rows 10
@@ -566,25 +566,25 @@ root@localhost:8000/default> .max_width 100
 
 ## Utility Commands
 
-BendSQL provides users with a variety of commands to streamline their workflow and customize their experience. Here's an overview of the commands available in BendSQL:
+LakeSQL provides users with a variety of commands to streamline their workflow and customize their experience. Here's an overview of the commands available in LakeSQL:
 
 | Command                  | Description                        |
 | ------------------------ | ---------------------------------- |
-| `!exit`                  | Exits BendSQL.                     |
-| `!quit`                  | Exits BendSQL.                     |
-| `!configs`               | Displays current BendSQL settings. |
-| `!set <setting> <value>` | Modifies a BendSQL setting.        |
+| `!exit`                  | Exits LakeSQL.                     |
+| `!quit`                  | Exits LakeSQL.                     |
+| `!configs`               | Displays current LakeSQL settings. |
+| `!set <setting> <value>` | Modifies a LakeSQL setting.        |
 | `!source <sql_file>`     | Executes a SQL file.               |
 
 For examples of each command, please refer to the reference information below:
 
 ### `!exit`
 
-Disconnects from {{{ .lake }}} and exits BendSQL.
+Disconnects from {{{ .lake }}} and exits LakeSQL.
 
 ```shell title='Example:'
-➜  ~ bendsql
-Welcome to BendSQL 0.17.0-homebrew.
+➜  ~ lakesql
+Welcome to LakeSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
 Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
@@ -595,11 +595,11 @@ Bye~
 
 ### `!quit`
 
-Disconnects from {{{ .lake }}} and exits BendSQL.
+Disconnects from {{{ .lake }}} and exits LakeSQL.
 
 ```shell title='Example:'
-➜  ~ bendsql
-Welcome to BendSQL 0.17.0-homebrew.
+➜  ~ lakesql
+Welcome to LakeSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
 Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 
@@ -611,7 +611,7 @@ Bye~
 
 ### `!configs`
 
-Displays the current BendSQL settings.
+Displays the current LakeSQL settings.
 
 ```shell title='Example:'
 // highlight-next-line
@@ -636,7 +636,7 @@ Settings {
 
 ### `!set <setting> <value>`
 
-Modifies a BendSQL setting.
+Modifies a LakeSQL setting.
 
 ```shell title='Example:'
 root@localhost:8000/default> !set display_pretty_sql false
@@ -656,8 +656,8 @@ CREATE TABLE test_table (
 INSERT INTO test_table (id, name) VALUES (1, 'Alice');
 INSERT INTO test_table (id, name) VALUES (2, 'Bob');
 INSERT INTO test_table (id, name) VALUES (3, 'Charlie');
-➜  ~ bendsql
-Welcome to BendSQL 0.17.0-homebrew.
+➜  ~ lakesql
+Welcome to LakeSQL 0.17.0-homebrew.
 Connecting to localhost:8000 as user root.
 Connected to {{{ .lake }}} Query v1.2.427-nightly-b1b622d406(rust-1.77.0-nightly-2024-04-20T22:12:35.318382488Z)
 

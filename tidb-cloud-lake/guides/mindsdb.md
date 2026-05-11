@@ -121,7 +121,7 @@ CREATE TABLE pollution_measurement(
   PM25 double
 );
 
-COPY INTO pollution_measurement FROM 'https://repo.databend.com/AirPolutionSeoul/Measurement_summary.csv' file_format=(type='CSV' skip_header=1);
+COPY INTO pollution_measurement FROM 'https://repo.tidbcloud.com/AirPolutionSeoul/Measurement_summary.csv' file_format=(type='CSV' skip_header=1);
 ```
 
 ### Step 2. Connect MindsDB to {{{ .lake }}}

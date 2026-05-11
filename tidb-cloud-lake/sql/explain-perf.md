@@ -22,7 +22,7 @@ EXPLAIN PERF <statement>
 ## Examples
 
 ```shell
-bendsql --quote-style never --query="EXPLAIN PERF SELECT avg(number) FROM numbers(10000000)" > demo.html
+lakesql --quote-style never --query="EXPLAIN PERF SELECT avg(number) FROM numbers(10000000)" > demo.html
 ```
 
 Then, you can open the `demo.html` file in your browser to view the flame graphs.

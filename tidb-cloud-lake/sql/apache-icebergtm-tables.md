@@ -124,14 +124,14 @@ Once the TPC-H tables are loaded, you can query the data in {{{ .lake }}}:
       datafuselabs/databend
     ```
 
-2. Connect to {{{ .lake }}} using BendSQL first, and then create an Iceberg catalog:
+2. Connect to {{{ .lake }}} using LakeSQL first, and then create an Iceberg catalog:
 
     ```bash
-    bendsql
+    lakesql
     ```
 
     ```bash
-    Welcome to BendSQL 0.24.1-f1f7de0(2024-12-04T12:31:18.526234000Z).
+    Welcome to LakeSQL 0.24.1-f1f7de0(2024-12-04T12:31:18.526234000Z).
     Connecting to localhost:8000 as user root.
     Connected to Databend Query v1.2.725-8d073f6b7a(rust-1.88.0-nightly-2025-04-21T11:49:03.577976082Z)
     Loaded 1436 auto complete keywords from server.

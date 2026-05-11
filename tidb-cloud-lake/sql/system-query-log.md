@@ -95,7 +95,7 @@ written_io_bytes_cost_ms: 0
        bytes_from_memory: 0
              client_info:
           client_address: 192.168.65.1
-              user_agent: bendsql/0.24.1-f1f7de0
+              user_agent: lakesql/0.24.1-f1f7de0
           exception_code: 0
           exception_text:
              stack_trace:

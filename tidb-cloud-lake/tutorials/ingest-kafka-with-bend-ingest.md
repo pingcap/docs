@@ -99,10 +99,10 @@ CREATE    TABLE databend_topic (
     2024/08/20 15:10:15 ingest 2 rows (1.225576 rows/s), 75 bytes (45.959100 bytes/s)
     ```
 
-3. Connect to {{{ .lake }}} using BendSQL and verify that the data has been successfully loaded:
+3. Connect to {{{ .lake }}} using LakeSQL and verify that the data has been successfully loaded:
 
     ```bash
-    Welcome to BendSQL 0.19.2-1e338e1(2024-07-17T09:02:28.323121000Z).
+    Welcome to LakeSQL 0.19.2-1e338e1(2024-07-17T09:02:28.323121000Z).
     Connecting to tn3ftqihs--eric.gw.aws-us-east-2.default.tidbcloud.com:443 with warehouse eric as user cloudapp
     Connected to Databend Query v1.2.626-nightly-a055124b65(rust-1.81.0-nightly-2024-08-27T15:49:08.376336236Z)
     

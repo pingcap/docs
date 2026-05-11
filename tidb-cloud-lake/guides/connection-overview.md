@@ -11,7 +11,7 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 
 | I want to... | Recommended |
 |-------------|-------------|
-| Run SQL queries interactively | **BendSQL** (CLI) or **DBeaver** (GUI) |
+| Run SQL queries interactively | **LakeSQL** (CLI) or **DBeaver** (GUI) |
 | Build an application | Language-specific **Driver** |
 | Create dashboards & reports | **BI/Visualization Tools** |
 
@@ -29,7 +29,7 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 
 | Tool | Type | Best For |
 |------|------|----------|
-| [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) | CLI | Developers, Scripting, Automation |
+| [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) | CLI | Developers, Scripting, Automation |
 | [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md) | GUI | Data Analysis, Visual Query Building |
 
 ## Drivers

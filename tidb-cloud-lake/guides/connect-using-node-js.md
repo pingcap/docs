@@ -82,5 +82,5 @@ conn.close();
 ## Resources
 
 - **NPM Package**: [databend-driver](https://www.npmjs.com/package/databend-driver)
-- **GitHub Repository**: [databend-driver](https://github.com/databendlabs/bendsql/tree/main/bindings/nodejs)
+- **GitHub Repository**: [databend-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/nodejs)
 - **TypeScript Definitions**: Included in package

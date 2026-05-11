@@ -9,7 +9,7 @@ In this tutorial, we’ll guide you through accessing MySQL and Redis data using
 
 ## Before You Start
 
-Before you start, ensure that [Docker](https://www.docker.com/) is installed on your local machine. We need Docker to set up the necessary containers for {{{ .lake }}}, MySQL, and Redis. You will also need a SQL client to connect to MySQL; we recommend using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to connect to {{{ .lake }}}.
+Before you start, ensure that [Docker](https://www.docker.com/) is installed on your local machine. We need Docker to set up the necessary containers for {{{ .lake }}}, MySQL, and Redis. You will also need a SQL client to connect to MySQL; we recommend using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) to connect to {{{ .lake }}}.
 
 ## Step 1: Setting up Environment
 

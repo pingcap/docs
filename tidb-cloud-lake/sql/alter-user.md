@@ -128,7 +128,7 @@ ALTER USER user1 WITH UNSET NETWORK POLICY;
 2. Verify the default role of user "user1" using the [SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) command:
 
 ```sql title='Connect as user "user1":'
-eric@Erics-iMac ~ % bendsql --user user1 --password abc123
+eric@Erics-iMac ~ % lakesql --user user1 --password abc123
 show roles;
 ┌───────────────────────────────────────────────────────┐
 │    name   │ inherited_roles │ is_current │ is_default │

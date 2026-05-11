@@ -14,16 +14,16 @@ Before you start, ensure you have the following prerequisites in place:
 - A Linux machine (x86_64 or aarch64 architecture): In this tutorial, we'll deploy {{{ .lake }}} on a Linux machine. You can use a local machine, a virtual machine, or a cloud instance such as AWS EC2.
     - [Docker](https://www.docker.com/): Used to deploy a local MinIO instance.
     - [AWS CLI](https://aws.amazon.com/cli/): Used to manage buckets in MinIO.
-    - If you are on AWS EC2, make sure your security group allows inbound traffic on port `8000`, as this is required for BendSQL to connect to {{{ .lake }}}.
+    - If you are on AWS EC2, make sure your security group allows inbound traffic on port `8000`, as this is required for LakeSQL to connect to {{{ .lake }}}.
 
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- LakeSQL is installed on your local machine. See [Installing LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md#installing-lakesql) for instructions on how to install LakeSQL using various package managers.
 
 - The {{{ .lake }}} release package: Download the release from the [{{{ .lake }}} GitHub Releases page](https://github.com/databendlabs/databend/releases). The package contains the `databend-bendsave` binary in the `bin` directory, which is the tool we'll use for backup and restore operations in this tutorial.
 
 ```bash
 databend-v1.2.725-nightly-x86_64-unknown-linux-gnu/
 ├── bin
-│   ├── bendsql
+│   ├── lakesql
 │   ├── databend-bendsave  # The BendSave binary used in this tutorial
 │   ├── databend-meta
 │   ├── databend-metactl
@@ -115,10 +115,10 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
     curl -I  http://127.0.0.1:8080/v1/health
     ```
 
-4. Connect to your {{{ .lake }}} instance from your local machine with BendSQL, then apply your {{{ .lake }}} Enterprise license, create a table, and insert some sample data.
+4. Connect to your {{{ .lake }}} instance from your local machine with LakeSQL, then apply your {{{ .lake }}} Enterprise license, create a table, and insert some sample data.
 
     ```bash
-    bendsql -h <your-linux-host>
+    lakesql -h <your-linux-host>
     ```
 
     ```sql
@@ -185,7 +185,7 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://backupbucket/ --recursive
     aws --endpoint-url http://127.0.0.1:9000 s3 rm s3://databend/ --recursive
     ```
 
-2. After the removal, you can verify using BendSQL that querying the table in {{{ .lake }}} fails:
+2. After the removal, you can verify using LakeSQL that querying the table in {{{ .lake }}} fails:
 
     ```sql
     SELECT * FROM books;
@@ -221,7 +221,7 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://backupbucket/ --recursive
     2025-04-07 23:21:39     344781 databend_meta.db
     ```
 
-5. Query the table again using BendSQL, and you will see that the query now succeeds:
+5. Query the table again using LakeSQL, and you will see that the query now succeeds:
 
 ```sql
 SELECT * FROM books;

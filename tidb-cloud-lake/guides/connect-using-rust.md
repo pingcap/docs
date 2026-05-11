@@ -107,5 +107,5 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## Resources
 
 - **Crates.io**: [databend-driver](https://crates.io/crates/databend-driver)
-- **GitHub Repository**: [BendSQL/driver](https://github.com/databendlabs/BendSQL/tree/main/driver)
+- **GitHub Repository**: [LakeSQL/driver](https://github.com/tidbcloud/lakesql/tree/main/driver)
 - **Rust Documentation**: [docs.rs/databend-driver](https://docs.rs/databend-driver)

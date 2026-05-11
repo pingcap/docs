@@ -73,7 +73,7 @@ The following are feature lists of {{{ .lake }}} among editions:
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
 | The next-generation SQL worksheet for advanced query development, data analysis, and visualization. | ✓ | ✓ | ✓ |
-| BendSQL, a command line client for building/testing queries, loading/unloading bulk data, and automating DDL operations. | ✓ | ✓ | ✓ |
+| LakeSQL, a command line client for building/testing queries, loading/unloading bulk data, and automating DDL operations. | ✓ | ✓ | ✓ |
 | Programmatic interfaces for Rust, Python, Java, Node.js, .js, PHP, and Go. | ✓ | ✓ | ✓ |
 | Native support for JDBC. | ✓ | ✓ | ✓ |
 | Extensive ecosystem for connecting to ETL, BI, and other third-party vendors and technologies. | ✓ | ✓ | ✓ |

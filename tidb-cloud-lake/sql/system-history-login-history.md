@@ -47,7 +47,7 @@ connection_uri: /session/login?disable_session_token=true
      auth_type: Password
      user_name: root
      client_ip: 127.0.0.1
-    user_agent: bendsql/0.26.2-unknown
+    user_agent: lakesql/0.26.2-unknown
     session_id: 9a3ba9d8-44d9-49ca-9446-501deaca15c9
        node_id: 765ChL6Ra949Ioeb5LrTs
  error_message:

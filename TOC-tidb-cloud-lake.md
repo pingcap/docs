@@ -30,7 +30,7 @@
 - Connect
   - [Overview](/tidb-cloud-lake/guides/connection-overview.md)
   - SQL Clients
-    - [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md)
+    - [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)
     - [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md)
   - Drivers
     - [Overview](/tidb-cloud-lake/guides/driver-overview.md)

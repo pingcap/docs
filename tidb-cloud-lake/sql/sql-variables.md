@@ -38,7 +38,7 @@ SELECT * FROM sales WHERE amount > getvariable('threshold');
 
 ### Accessing Objects with `IDENTIFIER`
 
-The `IDENTIFIER` keyword lets you reference database objects whose names are stored in variables, enabling flexible query construction. (Note: BendSQL does not yet support `IDENTIFIER`.)
+The `IDENTIFIER` keyword lets you reference database objects whose names are stored in variables, enabling flexible query construction. (Note: LakeSQL does not yet support `IDENTIFIER`.)
 
 ```sql title='Example:'
 -- Create a table with sales data

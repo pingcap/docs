@@ -14,7 +14,7 @@ Before you start, ensure you have the following prerequisites in place:
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch a self-hosted {{{ .lake }}}.
 - An AWS S3 bucket used as storage for your self-hosted {{{ .lake }}}. [Learn how to create an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html).
 - AWS Access Key ID and Secret Access Key with sufficient permissions for accessing your S3 bucket. [Manage your AWS credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- LakeSQL is installed on your local machine. See [Installing LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md#installing-lakesql) for instructions on how to install LakeSQL using various package managers.
 
 ## Step 1: Launch {{{ .lake }}} in Docker
 
@@ -60,7 +60,7 @@ SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'population');
 
 ## Step 2: Set Up Attached Tables in {{{ .lake }}}
 
-1. [Connect to {{{ .lake }}} using BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md).
+1. [Connect to {{{ .lake }}} using LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md).
 2. Execute the following statements to create two attached tables:
     - The first table, `population_all_columns`, includes all columns from the source data.
     - The second table, `population_only`, includes only the selected columns (`city` & `population`).

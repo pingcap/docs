@@ -11,10 +11,10 @@ summary: "{{{ .lake }}} recommends two file upload methods for stages PRESIGN an
 
 The PRESIGN method generates a time-limited URL with a signature, which clients can use to securely initiate file uploads. This URL grants temporary access to the designated stage, allowing clients to directly transfer data without relying on {{{ .lake }}} servers for the entire process, enhancing both security and efficiency.
 
-If you're using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md) to manage files in a stage, you can use the PUT command for uploading files and the GET command for downloading files.
+If you're using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) to manage files in a stage, you can use the PUT command for uploading files and the GET command for downloading files.
 
 - The GET command currently can only download all files in a stage, not individual ones.
-- These commands are exclusive to BendSQL and the GET command will not function when {{{ .lake }}} uses the file system as the storage backend.
+- These commands are exclusive to LakeSQL and the GET command will not function when {{{ .lake }}} uses the file system as the storage backend.
 
 ## Uploading with Presigned URL
 
@@ -159,7 +159,7 @@ Result:
 
 ### Uploading with PUT Command
 
-The following examples demonstrate how to use BendSQL to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with the PUT command.
+The following examples demonstrate how to use LakeSQL to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with the PUT command.
 
 <SimpleTab groupId="PUT">
 
@@ -302,7 +302,7 @@ Result:
 
 ### Downloading with GET Command
 
-The following examples demonstrate how to use BendSQL to download a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) from the user stage, an internal stage, and an external stage with the GET command.
+The following examples demonstrate how to use LakeSQL to download a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) from the user stage, an internal stage, and an external stage with the GET command.
 
 <SimpleTab groupId="GET">
 

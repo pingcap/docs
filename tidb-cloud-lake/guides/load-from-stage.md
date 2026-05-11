@@ -1,11 +1,11 @@
 ---
 title: Loading from Stage
-summary: "{{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using BendSQL, and then employ the COPY INTO command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see Input & Output File Formats."
+summary: "{{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using LakeSQL, and then employ the COPY INTO command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see Input & Output File Formats."
 ---
 
 # Loading from Stage
 
-{{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md), and then employ the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
+{{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md), and then employ the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 ![image](/media/tidb-cloud-lake/load-data-from-stage.png)
 
@@ -40,7 +40,7 @@ Follow this tutorial to upload the sample file to the user stage and load data f
 
 ### Step 1: Upload Sample File
 
-1. Upload the sample file using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md):
+1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
 
     ```sql
     root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @~
@@ -107,7 +107,7 @@ my_internal_stage|Internal  |              0|'root'@'%'|       |
 
 ### Step 2: Upload Sample File
 
-1. Upload the sample file using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md):
+1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
 
     ```sql
     root@localhost:8000/default> CREATE STAGE my_internal_stage;
@@ -187,7 +187,7 @@ my_external_stage|External  |               |'root'@'%'|       |
 
 ### Step 2: Upload Sample File
 
-1. Upload the sample file using [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md):
+1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
 
     ```sql
     root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_external_stage

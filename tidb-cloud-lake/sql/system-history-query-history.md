@@ -121,7 +121,7 @@ written_io_bytes_cost_ms: 0
    bytes_from_local_disk: 0
        bytes_from_memory: 0
           client_address: 127.0.0.1
-              user_agent: bendsql/0.26.2-unknown
+              user_agent: lakesql/0.26.2-unknown
           exception_code: 0
           exception_text:
           server_version: v1.2.753-nightly-c3d5fabb79(rust-1.88.0-nightly-2025-06-12T01:48:36.733925000Z)

@@ -16,7 +16,7 @@ Before you start, ensure you have the following prerequisites in place:
 
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch MySQL.
 - [Go](https://go.dev/dl/) is installed on your local machine, as it is required to install bend-archiver.
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- LakeSQL is installed on your local machine. See [Installing LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md#installing-lakesql) for instructions on how to install LakeSQL using various package managers.
 
 ## Step 1: Launch MySQL in Docker
 
@@ -111,7 +111,7 @@ Bye
 
 ## Step 3: Set Up Target in {{{ .lake }}}
 
-1. Connect to {{{ .lake }}} using BendSQL. If you're unfamiliar with BendSQL, refer to this tutorial: [Connecting to {{{ .lake }}} using BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md).
+1. Connect to {{{ .lake }}} using LakeSQL. If you're unfamiliar with LakeSQL, refer to this tutorial: [Connecting to {{{ .lake }}} using LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md).
 2. Copy and paste the following SQL to create a target table named **my_table**:
 
 ```sql
@@ -202,7 +202,7 @@ Download bend-archiver from the [release page](https://github.com/databendlabs/b
     total time: 1.269478875s
     ```
 
-3. Return to your BendSQL session and verify the migration:
+3. Return to your LakeSQL session and verify the migration:
 
 ```sql
 SELECT * FROM my_table;
