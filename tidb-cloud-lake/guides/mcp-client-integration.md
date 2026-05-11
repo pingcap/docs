@@ -218,9 +218,9 @@ uv tool run --from mcp-databend@latest mcp-databend
 | Value | Behavior | Recommended usage |
 | ----- | -------- | ----------------- |
 | `true` | Production objects are read-only for the agent. Write operations are allowed only on session sandbox objects such as `mcp_sandbox_{session_id}_*`. | Default and recommended for AI tools. |
-| `false` | The MCP server can write to objects allowed by the {{{ .lake}}} user permissions. | Use only with trusted agents and least-privilege {{{ .lake}}} users. |
+| `false` | The MCP server can write to objects allowed by the {{{ .lake }}} user permissions. | Use only with trusted agents and least-privilege {{{ .lake }}} users. |
 
-Keep safe mode enabled for most workflows. Disable it only when the agent must modify real production objects and the {{{ .lake}}} user already has the minimum required permissions.
+Keep safe mode enabled for most workflows. Disable it only when the agent must modify real production objects and the {{{ .lake }}} user already has the minimum required permissions.
 
 ## Available Tools
 
