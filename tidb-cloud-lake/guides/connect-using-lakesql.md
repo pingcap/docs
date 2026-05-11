@@ -29,7 +29,7 @@ curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash
 # highlight-next-line
 curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash
 
-                                  B E N D S Q L
+                                  L A K E S Q L
                                     Installer
 
 --------------------------------------------------------------------------------
