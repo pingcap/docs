@@ -560,7 +560,7 @@ If you use AWS VPC peering or Google Cloud VPC network peering, see the followin
 
 If your MySQL service is in an AWS VPC, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your {{{ .dedicated }}} cluster.
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
