@@ -25,9 +25,14 @@ TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers a
 
 The free plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
 
-- **No cost**: This plan is completely free, with no credit card required to get started.
+- **No cost**: This plan is completely free within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
+
+> **Note:**
+>
+> - To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Agent Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances. To learn more and apply for the Agent Plan, fill out the [application form](https://www.pingcap.com/agent-plan/).
+> - You will receive an email notification once your application for the Agent Plan is approved. You will also be notified via email and the TiDB Cloud console when you are approaching the limit of 100 free {{{ .starter }}} instances in your organization.
 
 ### Usage quota
 
