@@ -827,8 +827,8 @@ You can use **physical mode** or **logical mode** to migrate **existing data** a
 
 > **Note:**
 >
-> - When you use physical mode, you cannot create a second migration job or import task for the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> before the existing data migration is completed.
-> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+> - When you use physical mode, you cannot create a second migration job or import task for the {{{ .dedicated }}} cluster before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .dedicated }}} cluster. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 Physical mode exports the MySQL source data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the MySQL source database during data export. The following table shows the performance regression of each specification.
 
@@ -977,7 +977,7 @@ When scaling a migration job specification, note the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target {{{ .dedicated }}} cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **...** > **Scale Up/Down**.
 
