@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## May 12, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated is now generally available (GA) on Microsoft Azure in **Japan East** and **East US 2**.
+
+      It delivers 3-AZ high availability with a 99.99% uptime SLA, full HTAP powered by TiFlash, independent compute and storage scaling, fully managed operations by PingCAP SRE, continuous backup with PITR, enterprise-grade security, and integrated observability. It also supports seamless data import and migration (including TiCDC and DM) and is available through Azure Marketplace.
+
 ## April 28, 2026
 
 **General changes**
