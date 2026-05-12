@@ -32,7 +32,7 @@ The free plan is ideal for those who are getting started with {{{ .starter }}}. 
 > **Note:**
 >
 > - To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Agent Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances. To learn more and apply for the Agent Plan, fill out the [application form](https://www.pingcap.com/agent-plan/).
-> - You will receive an email notification once your application for the Agent Plan is approved. You will also be notified via email and the TiDB Cloud console when you are approaching the limit of 100 free {{{ .starter }}} instances in your organization.
+> - You will receive an email notification once your application for the Agent Plan is approved. You will also be notified via email and the TiDB Cloud console when the number of free {{{ .starter }}} instances in your organization reaches 80 and 100.
 
 ### Usage quota
 
