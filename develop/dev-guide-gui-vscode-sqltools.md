@@ -79,7 +79,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
     -   **MySQLドライバ固有のオプション**領域で、以下のパラメータを設定します。
 
         -   **認証プロトコル**：**デフォルト**を選択してください。
-        -   **SSL** ： **[有効]**を選択します。TiDB TiDB Cloud Starterは安全な接続を必要とします。SSL**オプション（node.TLSSocket）**領域で、 TiDB Cloud接続ダイアログの`CA`パラメーターを**[認証局（CA）証明書**ファイル]フィールドに設定してください。
+        -   **SSL** ： **[有効]**を選択します。TiDB Cloud Starterは安全な接続を必要とします。SSL**オプション（node.TLSSocket）**領域で、 TiDB Cloud接続ダイアログの`CA`パラメーターを**[認証局（CA）証明書**ファイル]フィールドに設定してください。
 
             > **注記：**
             >

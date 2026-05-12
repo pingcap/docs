@@ -27,7 +27,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 -   [Zapierアカウント](https://zapier.com/app/login)。
 -   [GitHubアカウント](https://github.com/login)。
--   [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDBTiDB CloudTiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
+-   [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
 
 ### ステップ1：テンプレートを入手する {#step-1-get-the-template}
 

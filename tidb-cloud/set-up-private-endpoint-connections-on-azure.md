@@ -183,6 +183,6 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 ### セットアップ中にアクションをキャンセルした場合、プライベートエンドポイントを受け入れる前に何をすべきですか？ {#if-i-cancel-the-action-during-setup-what-should-i-do-before-accepting-the-private-endpoint}
 
-Azure プライベート エンドポイント接続機能は、プライベート エンドポイントを自動的に検出できます。つまり、 [Azureプライベートエンドポイントの作成](#step-2-create-an-azure-private-endpoint)Azure ポータルで、 TiDB Cloudコンソールの [ **Azure プライベート エンドポイント接続の作成**] ダイアログで**[キャンセル] を**クリックしても、作成されたエンドポイントを**[ネットワーク]**ページで表示できます。キャンセルが意図的でない場合は、エンドポイントの設定を続行してセットアップを完了できます。キャンセルが意図的な場合は、TiDB TiDB Cloudコンソールでエンドポイントを直接削除できます。
+Azure プライベート エンドポイント接続機能は、プライベート エンドポイントを自動的に検出できます。つまり、 [Azureプライベートエンドポイントの作成](#step-2-create-an-azure-private-endpoint)Azure ポータルで、 TiDB Cloudコンソールの [ **Azure プライベート エンドポイント接続の作成**] ダイアログで**[キャンセル] を**クリックしても、作成されたエンドポイントを**[ネットワーク]**ページで表示できます。キャンセルが意図的でない場合は、エンドポイントの設定を続行してセットアップを完了できます。キャンセルが意図的な場合は、TiDB Cloudコンソールでエンドポイントを直接削除できます。
 
 [^1]: Azure Private Linkアーキテクチャの図は、Creative Commons Attribution 4.0 International に基づいてライセンスされている、Azure ドキュメントの「Azureプライベートリンクサービス[Azureプライベートリンクサービスとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview)ドキュメント ( [ソースファイルはGitHubにあります](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-link-service-overview.md)) からのものです。

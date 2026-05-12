@@ -57,7 +57,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
         >
         > TiDB Cloudコンソールが認識するIPアドレスは、データベースクライアントが使用するIPアドレスと異なる場合があります。ルールが期待どおりに機能しない場合は、開始IPアドレスと終了IPアドレスを調整してください。公開IPアドレスを確認するには、検索エンジンまたはオンラインツールを使用できます。たとえば、「自分のIPアドレスは何ですか」と検索してください。
 
-    -   TiDB Cloud StarterまたはEssentialインスタンスがAWS上でホストされている場合、すべてのAWS IPアドレスからのアクセスを有効にするには、 **[AWSアクセスを追加**]をクリックします。これにより、すべてのAWS IPアドレス範囲を含むファイアウォールルールが自動的に作成されます。TiDB TiDB Cloudは、予約済みIPアドレス**169.254.65.87**を使用してAWS IPアドレス範囲を表し、公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)に基づいてリストを定期的に更新します。
+    -   TiDB Cloud StarterまたはEssentialインスタンスがAWS上でホストされている場合、すべてのAWS IPアドレスからのアクセスを有効にするには、 **[AWSアクセスを追加**]をクリックします。これにより、すべてのAWS IPアドレス範囲を含むファイアウォールルールが自動的に作成されます。TiDB Cloudは、予約済みIPアドレス**169.254.65.87**を使用してAWS IPアドレス範囲を表し、公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)に基づいてリストを定期的に更新します。
 
     -   アドレス範囲を追加するには、単一のIPアドレスまたはIPアドレスの範囲を指定します。ルールを単一のIPアドレスに限定するには、 **「開始IPアドレス」**と**「終了IPアドレス」**のフィールドに同じIPアドレスを入力します。
 
