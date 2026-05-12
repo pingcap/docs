@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) is now generally available (GA) on Microsoft Azure in **Japan East** and **East US 2**.
 
-        It delivers 3-AZ high availability with a 99.99% uptime SLA, full HTAP powered by TiFlash, independent compute and storage scaling, fully managed operations by PingCAP SRE, continuous backup with PITR, enterprise-grade security, and integrated observability. It also supports seamless data import and migration (including TiCDC and DM) and is available through Azure Marketplace.
+        It delivers three-AZ high availability with a 99.99% uptime SLA, full HTAP powered by TiFlash, independent compute and storage scaling, fully managed operations by PingCAP SRE, seamless data import and migration, continuous backup with PITR, enterprise-grade security, and integrated observability. It also supports bulk data import, migration from MySQL and other sources, and real-time replication to downstream systems. If you use [Azure Marketplace](https://azuremarketplace.microsoft.com/), you can also subscribe to TiDB Cloud Dedicated through Azure Marketplace.
 
         For more information, see [From Preview to Production: TiDB Cloud Dedicated on Microsoft Azure is Now Generally Available](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/).
 
