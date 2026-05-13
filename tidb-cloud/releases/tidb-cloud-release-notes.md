@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Add the `AVG RU/s` metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) metrics page.
     
-        `AVG RU/s` displays the average RU/s over the selected time range, giving you a clearer view of resource consumption.
+        `AVG RU/s` displays the average RU per second over the selected time range, giving you a clearer view of resource consumption.
 
 ## April 28, 2026
 
