@@ -107,7 +107,7 @@ summary: TiDBの機能概要について学びましょう。
 | [コプロセッサーキャッシュ](/coprocessor-cache.md)                                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ステイル読み取り](/stale-read.md)                                                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Followerが読む](/follower-read.md)                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [過去のデータ（tidb_snapshot）を読み込む](/read-historical-data.md)                                                       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [履歴データ（tidb_snapshot）を読み込む](/read-historical-data.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [オプティマイザのヒント](/optimizer-hints.md)                                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [MPP実行エンジン](/explain-mpp.md)                                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [MPP実行エンジン - 圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)                                |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
@@ -221,7 +221,7 @@ summary: TiDBの機能概要について学びましょう。
 | [Dumpling論理ダンプ](/dumpling-overview.md)                                                               | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
 | [トランザクション`LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5]                               | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
 | [データベース移行ツールキット（DM）](/migration-overview.md)                                                         | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
-| [TiDBBinlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) [^6]                           | 削除済み | Y   | Y   | Y   | Y   | Y   | Y   |
+| [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) [^6]                  | 削除済み | Y   | Y   | Y   | Y   | Y   | Y   |
 | [変更データキャプチャ（CDC）](/ticdc/ticdc-overview.md)                                                          | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
 | [TiCDCを介してAmazon S3、GCS、Azure Blob Storage、NFSにデータをストリーミングする](/ticdc/ticdc-sink-to-cloud-storage.md) | Y    | Y   | Y   | Y   | E   | N   | N   |
 | [TiCDCは、2つのTiDBクラスタ間での双方向レプリケーションをサポートしています。](/ticdc/ticdc-bidirectional-replication.md)             | Y    | Y   | Y   | Y   | Y   | N   | N   |
@@ -281,4 +281,4 @@ summary: TiDBの機能概要について学びましょう。
 
 [^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
 
-[^6]: バージョン 7.5.0 以降、 [TiDBBinlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスタをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。
+[^6]: バージョン 7.5.0 以降、 [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスタをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。

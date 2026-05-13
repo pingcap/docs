@@ -46,7 +46,7 @@ db = TiDBClient.connect(
 
 > **注記：**
 >
-> TiDB Cloud Starterの場合、パブリック エンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/)が必要です。 `pytidb`クライアントは、 TiDB Cloud Starterインスタンスの TLS を**自動的に**有効にします。
+> TiDB Cloud Starterの場合、パブリック エンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要です。 `pytidb`クライアントは、 TiDB Cloud Starterインスタンスの TLS を**自動的に**有効にします。
 
 </div>
 <div label="TiDB Self-Managed">
@@ -99,7 +99,7 @@ db = TiDBClient.connect(
 
 > **注記：**
 >
-> TiDB Cloud Starterの場合、パブリック エンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/)が必要となるため、接続文字列に`ssl_verify_cert=true&ssl_verify_identity=true`を設定する必要があります。
+> TiDB Cloud Starterの場合、パブリック エンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要となるため、接続文字列に`ssl_verify_cert=true&ssl_verify_identity=true`を設定する必要があります。
 
 </div>
 <div label="TiDB Self-Managed">

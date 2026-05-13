@@ -112,6 +112,8 @@
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
+        -   [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+        -   [データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
         -   [TiDB Self-ManagedからTiDB Cloud Premiumへの移行](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
         -   [大規模データセットのMySQLシャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
         -   [AWS DMSを使用してAmazon RDS for Oracleから移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
@@ -147,7 +149,6 @@
         -   [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
         -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
         -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-        -   [パブリックエンドポイントのファイアウォールルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
         -   [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
@@ -173,15 +174,6 @@
     -   [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
     -   [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
     -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
-    -   テラフォーム
-        -   [Terraform統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-        -   [TiDB Cloud Terraform プロバイダーを取得する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-        -   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
-        -   [`tidbcloud_serverless_branch`リソースを使用する](/tidb-cloud/terraform-use-serverless-branch-resource.md)
-        -   [`tidbcloud_serverless_export`リソースを使用する](/tidb-cloud/terraform-use-serverless-export-resource.md)
-        -   [`tidbcloud_sql_user`リソースを使用する](/tidb-cloud/terraform-use-sql-user-resource.md)
-        -   [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
-        -   [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
     -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
     -   [ザピアー](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 

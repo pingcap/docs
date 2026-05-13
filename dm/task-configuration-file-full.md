@@ -1,19 +1,19 @@
 ---
 title: DM Advanced Task Configuration File
-summary: このドキュメントでは、データ移行（DM）の高度なタスク設定ファイルについて、グローバル設定とインスタンス設定の両方について解説します。グローバル設定には基本設定と機能設定が含まれ、インスタンス設定では上流の1つまたは複数のMySQLインスタンスから下流の同じインスタンスへのデータ移行に関するサブタスクを定義します。
+summary: このドキュメントでは、データ移行（DM）の高度なタスク設定ファイルについて、グローバル設定とインスタンス設定の両面から解説します。グローバル設定には基本設定と機能設定が含まれ、インスタンス設定では、上流側の1つまたは複数のMySQLインスタンスから下流側の同じインスタンスへのデータ移行のためのサブタスクを定義します。
 ---
 
-# DM 高度なタスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
+# DM 高度タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
 
-このドキュメントでは、 [グローバル構成](#global-configuration)と[インスタンス構成](#instance-configuration)含む、データ移行 (DM) の高度なタスク構成ファイルについて説明します。
+このドキュメントでは[インスタンス構成](#instance-configuration)[グローバル設定](#global-configuration)とインスタンス構成を含む、データ移行 (DM) の高度なタスク設定ファイルを紹介します。
 
 ## 重要な概念 {#important-concepts}
 
-`source-id`および DM ワーカー ID を含む重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)参照してください。
+`source-id`や DM ワーカー ID などの重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)参照してください。
 
-## タスク構成ファイルテンプレート（上級） {#task-configuration-file-template-advanced}
+## タスク設定ファイルテンプレート（上級者向け） {#task-configuration-file-template-advanced}
 
-以下は、**高度な**データ移行タスクを実行できるタスク構成ファイル テンプレートです。
+以下は、**高度な**データ移行タスクを実行できるタスク構成ファイルのテンプレートです。
 
 ```yaml
 ---
@@ -24,7 +24,7 @@ name: test                      # The name of the task. Should be globally uniqu
 task-mode: all                  # The task mode. Can be set to `full`(only migrates full data)/`incremental`(replicates binlogs synchronously)/`all` (replicates both full data and incremental binlogs).
 shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"pessimistic"/"optimistic". The "" mode is used by default which means sharding DDL merge is disabled. If the task is a shard merge task, set it to the "pessimistic" mode.
                                 # After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
-strict-optimistic-shard-mode: false # Only takes effect in the optimistic mode. This configuration restricts the behavior of the optimistic mode. The default value is false. Introduced in v7.2.0. For details, see https://docs.pingcap.com/tidb/v7.2/feature-shard-merge-optimistic
+strict-optimistic-shard-mode: false # Only takes effect in the optimistic mode. This configuration restricts the behavior of the optimistic mode. The default value is false. Introduced in v7.2.0. For details, see https://docs.pingcap.com/tidb/stable/feature-shard-merge-optimistic/
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 timezone: "Asia/Shanghai"       # The timezone used in SQL Session. By default, DM uses the global timezone setting in the target cluster, which ensures the correctness automatically. A customized timezone does not affect data migration but is unnecessary.
 case-sensitive: false           # Determines whether the schema/table is case-sensitive.
@@ -241,58 +241,58 @@ mysql-instances:
 
 ## コンフィグレーション順序 {#configuration-order}
 
-サンプル設定ファイルを見ると、設定ファイルが`Global configuration`と`Instance configuration` 2つの部分で構成されており、 `Global configuration`には`Basic configuration`と`Feature configuration set`含まれていることがわかります。設定順序は以下のとおりです。
+サンプル設定ファイルから、設定ファイルが`Global configuration`と`Instance configuration`の 2 つの部分から構成されていることがわかります。ここで、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれています。設定順序は次のとおりです。
 
-1.  [グローバル構成](#global-configuration)を編集します。
-2.  グローバル構成に基づいて[インスタンス構成](#instance-configuration)編集します。
+1.  [グローバル設定](#global-configuration)を編集します。
+2.  グローバル構成に基づいて[インスタンス構成](#instance-configuration)を編集します。
 
-## グローバル構成 {#global-configuration}
+## グローバル設定 {#global-configuration}
 
 ### 基本構成 {#basic-configuration}
 
-詳細については、 [テンプレート](#task-configuration-file-template-advanced)のコメントを参照してください。3 `task-mode`詳細な説明は次のとおりです。
+詳細については、 [テンプレート](#task-configuration-file-template-advanced)内のコメントを参照してください。 `task-mode`に関する詳細な説明は以下のとおりです。
 
--   説明: 実行するデータ移行タスクを指定するために使用できるタスク モード。
+-   説明：実行するデータ移行タスクを指定するために使用できるタスクモード。
 -   値: 文字列 ( `full` 、 `incremental` 、または`all` )。
-    -   `full` 、上流データベースの完全バックアップのみを作成し、その後、完全なデータを下流データベースにインポートします。
-    -   `incremental` : 上流データベースの増分データのみをbinlogを使用して下流データベースに複製します。インスタンス設定の`meta`の設定項目で、増分レプリケーションの開始位置を指定できます。
-    -   `all` : `full` + `incremental` 。上流データベースの完全バックアップを作成し、その完全データを下流データベースにインポートし、その後、binlogを使用して、完全バックアッププロセス中にエクスポートされた位置（binlogの位置）から下流データベースへの増分レプリケーションを作成します。
+    -   `full` 、上流データベースの完全なバックアップを作成し、その後、完全なデータを下流データベースにインポートします。
+    -   `incremental` :binlogを使用して、アップストリームデータベースの増分データのみをダウンストリームデータベースに複製します。インスタンス構成の`meta`構成項目を設定することで、増分レプリケーションの開始位置を指定できます。
+    -   `all` : `full` + `incremental` 。アップストリーム データベースの完全バックアップを作成し、ダウンストリーム データベースに完全なデータをインポートしてから、完全バックアップ プロセス中にエクスポートされた位置 ( binlog位置) から開始して、 binlogを使用してダウンストリーム データベースへの増分レプリケーションを作成します。
 
 ### 機能構成セット {#feature-configuration-set}
 
-各機能構成セットの引数については、 [テンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
+各機能構成セットの引数は、 [テンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
 
 #### <code>routes</code> {#code-routes-code}
 
--   アップストリームテーブルとダウンストリームテーブル間のルーティングマッピングルールセット。アップストリームとダウンストリームのスキーマとテーブルの名前が同じ場合は、この項目を設定する必要はありません。使用シナリオと設定例については、 [テーブルルーティング](/dm/dm-table-routing.md)参照してください。
+-   アップストリームテーブルとダウンストリームテーブル間のルーティングマッピングルールセット。アップストリームとダウンストリームのスキーマ名およびテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオと設定例については[テーブルルーティング](/dm/dm-table-routing.md)参照してください。
 
 #### <code>filters</code> {#code-filters-code}
 
--   binlogストリームデータベースインスタンスの一致テーブルのbinlogイベントフィルタルールセット。binlogフィルタリングが不要な場合は、この項目を設定する必要はありません。使用シナリオとサンプル設定については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)参照してください。
+-   アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルタ](/dm/dm-binlog-event-filter.md)参照してください。
 
 #### <code>block-allow-list</code> {#code-block-allow-list-code}
 
--   アップストリームデータベースインスタンスの一致テーブルのブロック許可リストのフィルタールールセット。この項目では、移行が必要なスキーマとテーブルを指定することをお勧めします。指定しない場合は、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル設定については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)と[ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)参照してください。
+-   上流のデータベース インスタンスの一致するテーブルのブロック許可リストのフィルター ルール セット。この項目で移行する必要があるスキーマとテーブルを指定することをお勧めします。指定しないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [Binlogイベントフィルタ](/dm/dm-binlog-event-filter.md)と[ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)を参照してください。
 
 #### <code>mydumpers</code> {#code-mydumpers-code}
 
--   ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定で十分な場合は、この項目を設定する必要はありません。または、 `mydumper-thread`使用して`thread`のみを設定することもできます。
+-   ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `thread`のみを使用して`mydumper-thread` } を設定することもできます。
 
 #### <code>loaders</code> {#code-loaders-code}
 
--   負荷処理ユニットのコンフィグレーション引数。デフォルト設定で十分な場合は、この項目を設定する必要はありません。または、 `loader-thread`使用して`pool-size`のみを設定することもできます。
+-   負荷処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `pool-size`のみを使用して`loader-thread` } を設定することもできます。
 
 #### <code>syncers</code> {#code-syncers-code}
 
--   同期処理ユニットのコンフィグレーション引数。デフォルト設定で十分な場合は、この項目を設定する必要はありません。または、 `syncer-thread`使用して`worker-count`のみを設定することもできます。
+-   同期処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `worker-count`のみを使用して`syncer-thread` } を設定することもできます。
 
 ## インスタンス構成 {#instance-configuration}
 
-この部分は、データ移行のサブタスクを定義します。DM は、アップストリームの 1 つまたは複数の MySQL インスタンスからダウンストリームの同じインスタンスへのデータ移行をサポートします。
+この部分では、データ移行のサブタスクを定義します。DMは、上流の1つまたは複数のMySQLインスタンスから下流の同じインスタンスへのデータ移行をサポートします。
 
-上記オプションの設定詳細については、次の表に示すように、 [機能構成セット](#feature-configuration-set)の対応する部分を参照してください。
+上記オプションの構成詳細については、次の表に示すように、[機能構成セット](#feature-configuration-set)の対応する部分を参照してください。
 
-| オプション                  | 該当部分               |
+| オプション                  | 対応する部分             |
 | :--------------------- | :----------------- |
 | `route-rules`          | `routes`           |
 | `filter-rules`         | `filters`          |

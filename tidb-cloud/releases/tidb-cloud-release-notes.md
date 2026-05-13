@@ -8,6 +8,24 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年5月12日 {#may-12-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloudプレミアム**
+
+    -   `AVG RU/s`メトリクスを[TiDB Cloudプレミアム](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)**Metrics**ページに追加します。
+
+        `AVG RU/s` 、選択した時間範囲における1秒あたりの平均RU消費数を表示し、リソース消費をよりよく理解するのに役立ちます。
+
+-   **TiDB Cloud Dedicated**
+
+    -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
+
+        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとstorageのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。Azure [Azure Marketplace](https://azuremarketplace.microsoft.com/)ご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
+
+        詳細については、 [プレビュー版から本番環境へ：Microsoft Azure 上のTiDB Cloud Dedicatedが一般提供開始](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/)参照してください。
+
 ## 2026年4月28日 {#april-28-2026}
 
 **全般的な変更**
@@ -94,7 +112,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 -   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 
     -   アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
-    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターする場合)、 `type`フィールドの読み取りを開始します。
+    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
 
 詳細については、 [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)参照してください。
 
@@ -196,7 +214,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   Azure Blob Storageからのデータインポートにおけるプライベートリンク接続をサポートします。
 
-        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントでも、安全でネットワーク分離されたデータインポートが可能になります。
+        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントに対して、安全でネットワーク分離されたデータインポートが可能になります。
 
         詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)参照してください。
 

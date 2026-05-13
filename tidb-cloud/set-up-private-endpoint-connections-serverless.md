@@ -53,7 +53,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにプライベ
 
     > **注記：**
     >
-    > AWSリージョンごとに作成する必要があるプライベートエンドポイントは1つだけで、同じリージョンにあるすべてのTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで共有できます。
+    > AWSリージョン内の各VPCにつき、作成する必要があるプライベートエンドポイントは1つだけです。このエンドポイントは、同じAWSリージョン内の同じVPCにあるすべてのTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで使用できますが、VPC間で共有することはできません。
 
 ### ステップ2. AWSインターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 
@@ -62,7 +62,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにプライベ
 
 AWS マネジメントコンソールを使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
 
-1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)コンソールにサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)にある Amazon VPC コンソールを開きます。
+1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)コンソールにサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
 2.  ナビゲーションペインの**「エンドポイント」**をクリックし、右上隅の**「エンドポイントの作成」を**クリックします。
 
@@ -152,7 +152,7 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 >
 > TiDB Cloud StarterまたはEssentialインスタンスに接続できない場合、AWSのVPCエンドポイントのセキュリティグループが正しく設定されていないことが原因である可能性があります。解決策については、[このFAQ](#troubleshooting)ご覧ください。
 >
-> VPCエンドポイントを作成する際に、 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`エラーが発生した場合は、既にプライベートエンドポイントが作成されているため、新しいエンドポイントを作成する必要がないことを意味します。
+> VPCエンドポイントを作成する際に、 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`というエラーが発生した場合は、そのVPC内に既にプライベートエンドポイントが存在します。同じプライベートDNS名で別のエンドポイントを作成する必要はありません。
 
 ## トラブルシューティング {#troubleshooting}
 

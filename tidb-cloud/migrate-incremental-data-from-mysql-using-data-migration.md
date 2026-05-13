@@ -5,13 +5,21 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 # データ移行を使用して、MySQL互換データベースからTiDB Cloudへ増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウド プロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) またはセルフホストのソース データベース上の MySQL 互換データベースから、増分データをTiDB Cloud <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent>に移行する方法について説明します。
+このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウド プロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソース データベースから、 TiDB Cloudコンソールのデータ移行機能を使用して、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
 
 <CustomContent plan="essential">
 
 > **注記：**
 >
 > 現在、 TiDB Cloud Essentialのデータ移行機能はベータ版です。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **注記：**
+>
+> 現在、データ移行機能はTiDB Cloud Premiumのパブリックプレビュー版として提供されています。
 
 </CustomContent>
 
@@ -148,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
+2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
 
 3.  **データ移行**ページで、右上隅にある**「移行ジョブの作成」**をクリックします。**移行ジョブの作成**ページが表示されます。
 
@@ -162,7 +170,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     -   **データソース**：データソースの種類。
     -   **リージョン**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
-    -   **接続方法**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent>
+    -   **接続方法**: データ ソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -176,6 +184,12 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     -   **プライベート リンク接続**(プライベート リンク用): プライベートリンク[プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)セクションで作成したプライベート リンク接続。
 
     </CustomContent>
+    <CustomContent plan="premium">
+
+    -   **ホスト名またはIPアドレス**（公開の場合）：データソースのホスト名またはIPアドレス。
+    -   **プライベート エンドポイント**(プライベート リンク用): TiDB Cloud Premium インスタンスの**[ネットワーキング]** &gt; **[外部サービスのプライベート エンドポイント]**で作成したプライベート エンドポイント。または、**ここで [プライベート エンドポイントの作成] をクリックしてプライベート エンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+
+    </CustomContent>
 
     -   **ポート**：データソースのポート番号。
     -   **ユーザー名**：データソースのユーザー名。
@@ -187,7 +201,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 3.  ターゲット接続プロファイルを入力してください。
 
-    -   **ユーザー名**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>のユーザー名を入力します。
+    -   **ユーザー名**: ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
     -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
 4.  入力した情報を検証するには、 **「接続を検証」をクリックし、「次へ」を**クリックしてください。
@@ -197,12 +211,19 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="dedicated">
 
     -   パブリックIPまたはVPCピアリングを使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    -   AWS Private Link を使用する場合、エンドポイント要求を承認するよう求められます。AWS [AWS VPCコンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、**エンドポイント サービス**をクリックしてエンドポイント要求を承認してください。
+    -   AWS Private Link を使用している場合、エンドポイント要求を承認するよう求められます。AWS [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **[エンドポイントサービス]**をクリックしてエンドポイント要求を承認してください。
 
     </CustomContent>
     <CustomContent plan="essential">
 
     パブリックIPを使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    -   接続方法として**パブリックを**使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    -   **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **[エンドポイントサービス]**をクリックして、 TiDB Cloudからのエンドポイント接続要求を承認してください。
 
     </CustomContent>
 

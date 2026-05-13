@@ -42,10 +42,9 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
         > **注記：**
         >
-        > -   現在、Azure 上でのTiDB Cloud Dedicatedのサポートはパブリックプレビュー段階です。
         > -   [AWS Marketplace](https://aws.amazon.com/marketplace)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは AWS となり、 TiDB Cloudで変更することはできません。
         > -   [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更することはできません。
-        > -   TiDB Cloudを[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由で登録した場合、クラウドプロバイダーはGoogle Cloudとなり、 TiDB Cloudで変更することはできません。
+        > -   [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudに登録した場合、クラウドプロバイダーは Google Cloud となり、 TiDB Cloudで変更することはできません。
 
     4.  TiDB、TiKV、 TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)をそれぞれ設定します (オプション)。
 
@@ -64,7 +63,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     > **注記：**
     >
-    > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+    > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
 6.  **「作成」**をクリックします。
 

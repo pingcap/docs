@@ -1,37 +1,37 @@
 ---
 title: TiDB Accelerated Table Creation
-summary: TiDB でテーブルを作成する場合のパフォーマンス最適化の概念、原則、実装の詳細を学習します。
+summary: TiDBでテーブルを作成する際のパフォーマンス最適化の概念、原則、および実装の詳細について学びます。
 ---
 
-# TiDB 高速テーブル作成 {#tidb-accelerated-table-creation}
+# TiDB高速テーブル作成 {#tidb-accelerated-table-creation}
 
-TiDB v7.6.0では、テーブル作成の高速化をサポートするシステム変数[`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_enable_fast_create_table-new-in-v800)が導入され、バルクテーブル作成の効率が向上しました。v8.0.0以降、このシステム変数の名前は[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)に変更されます。
+TiDB v7.6.0 では、テーブル作成の高速化をサポートするシステム変数[`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760)が導入され、一括テーブル作成の効率が向上しました。v8.0.0 以降、このシステム変数は[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)に名称変更されました。
 
-[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)で高速テーブル作成を有効にすると、同じTiDBノードに同時にコミットされた同一スキーマのテーブル作成文がバッチテーブル作成文にマージされ、テーブル作成パフォーマンスが向上します。したがって、テーブル作成パフォーマンスを向上させるには、同じTiDBノードに接続し、同一スキーマのテーブルを同時に作成し、同時実行性を適切に高めるようにしてください。
+[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)で高速テーブル作成を有効にすると、同じスキーマを持つテーブル作成ステートメントが同じ TiDB ノードに同時にコミットされた場合、テーブル作成パフォーマンスを向上させるために、バッチ テーブル作成ステートメントにマージされます。したがって、テーブル作成パフォーマンスを向上させるには、同じ TiDB ノードに接続し、同じスキーマを持つテーブルを並行して作成し、並行処理数を適切に増やすようにしてください。
 
-マージされたバッチ テーブル作成ステートメントは同じトランザクション内で実行されるため、そのうちの 1 つのステートメントが失敗すると、すべてが失敗します。
+マージされたバッチテーブル作成ステートメントは同じトランザクション内で実行されるため、いずれかのステートメントが失敗すると、すべてが失敗します。
 
 ## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
--   TiDB v8.3.0より前のバージョンでは、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) `tidb_enable_fast_create_table`で作成されたテーブルのレプリケーションをサポートしていません。v8.3.0以降、TiCDCはこれらのテーブルを適切にレプリケーションできます。
+-   TiDB v8.3.0より前のバージョンでは、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) `tidb_enable_fast_create_table`によって作成されたテーブルのレプリケーションをサポートしていませんでした。v8.3.0以降では、TiCDCはこれらのテーブルを適切にレプリケーションできます。
 
 ## 制限 {#limitation}
 
-[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)のステートメントでのみテーブル作成のパフォーマンス最適化を使用できるようになりました。このステートメントには外部キー制約を含めることはできません。
+テーブル作成時のパフォーマンス最適化は、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)文でのみ使用可能になりました。ただし、この文には外部キー制約を含めてはなりません。
 
-## <code>tidb_enable_fast_create_table</code>を使用してテーブル作成を高速化します {#use-code-tidb-enable-fast-create-table-code-to-accelerate-table-creation}
+## テーブル作成を高速化するには、 <code>tidb_enable_fast_create_table</code>使用してください。 {#use-code-tidb-enable-fast-create-table-code-to-accelerate-table-creation}
 
-システム変数[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)の値を指定することにより、テーブル作成のパフォーマンス最適化を有効または無効にすることができます。
+システム変数[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)の値を指定することで、テーブル作成時のパフォーマンス最適化を有効または無効にすることができます。
 
-TiDB v8.5.0以降、新規作成されたクラスターでは高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスターでは、デフォルト値の`tidb_enable_fast_create_table`は変更されません。
+TiDB v8.5.0以降、新しく作成されたクラスタでは、高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスタの場合、 `tidb_enable_fast_create_table`のデフォルト値は変更されません。
 
-テーブル作成のパフォーマンス最適化を有効にするには、この変数の値を`ON`に設定します。
+テーブル作成時のパフォーマンス最適化を有効にするには、この変数の値を`ON`に設定してください。
 
 ```sql
 SET GLOBAL tidb_enable_fast_create_table = ON;
 ```
 
-テーブル作成のパフォーマンス最適化を無効にするには、この変数の値を`OFF`に設定します。
+テーブル作成時のパフォーマンス最適化を無効にするには、この変数の値を`OFF`に設定してください。
 
 ```sql
 SET GLOBAL tidb_enable_fast_create_table = OFF;

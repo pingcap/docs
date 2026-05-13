@@ -135,6 +135,16 @@ tiup dmctl check-task ./task.yaml
     -   `binlog_transaction_compression=OFF`が設定されているかどうかを確認してください (DM はトランザクション圧縮をサポートしていません)。
     -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行対象のデータベース テーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
 
+-   （必須）MariaDBbinlogの設定
+
+    -   binlogが有効になっているか確認してください（DMで必須）。
+    -   `binlog_legacy_event_pos`が`ON`に設定されているかどうかを確認してください。
+    -   `binlog_format=ROW`が設定されているかどうかを確認してください（DMはROW形式のbinlogの移行のみをサポートしています）。
+    -   `binlog_row_image=FULL`が設定されているかどうかを確認してください (DM は`binlog_row_image=FULL`のみをサポートしています)。
+    -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合は、移行対象のデータベース テーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
+    -   `binlog_annotate_row_events`が`OFF`に設定されているかどうかを確認してください。
+    -   `log_bin_compress`が`OFF`に設定されているかどうかを確認してください。
+
 -   （必須）上流データベースが[オンラインDDL](/dm/feature-online-ddl.md)プロセス中かどうかを確認します（ `ghost`テーブルは作成されていますが、 `rename`フェーズはまだ実行されていません）。上流データベースがオンラインDDLプロセス中の場合、事前チェックでエラーが返されます。この場合、DDLが完了するまで待ってから再試行してください。
 
 ### 完全データ移行および増分データ移行のチェック項目 {#check-items-for-full-and-incremental-data-migration}
@@ -168,7 +178,7 @@ tiup dmctl check-task ./task.yaml
 
 ## 事前チェック引数を設定する {#configure-precheck-arguments}
 
-移行タスクの事前チェックは並列処理に対応しています。シャーディングされたテーブルの行数が100万行に達しても、事前チェックは数分で完了します。
+移行タスクの事前チェックは並列処理に対応しています。シャーディングされたテーブルの行数が100万行に達した場合でも、事前チェックは数分で完了します。
 
 事前チェックのスレッド数を指定するには、移行タスク構成ファイルの`threads`フィールドの`mydumpers`引数を設定します。
 

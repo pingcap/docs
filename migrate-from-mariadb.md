@@ -1,42 +1,42 @@
 ---
 title: Migrate Data from MariaDB to TiDB
-summary: MariaDB から TiDB にデータを移行する方法を学びます。
+summary: MariaDBからTiDBへのデータ移行方法を学びましょう。
 ---
 
 # MariaDBからTiDBへのデータ移行 {#migrate-data-from-mariadb-to-tidb}
 
-このドキュメントでは、MariaDBサーバーインストールから TiDB クラスターにデータを移行する方法について説明します。
+このドキュメントでは、MariaDBサーバー環境からTiDBクラスタへデータを移行する方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
 適切な移行戦略を選択してください。
 
--   最初の戦略は[Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する](#dump-data-with-dumpling-and-restore-data-with-tidb-lightning)です。これはMariaDBのすべてのバージョンで機能します。この戦略の欠点は、ダウンタイムが長くなることです。
--   2つ目の戦略は、DMを使用してMariaDBからTiDBに[DMでデータを複製する](#replicate-data-with-dm)することです。DMはMariaDBのすべてのバージョンをサポートしているわけではありません。サポートされているバージョンは[DM 互換性カタログ](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration)に記載されています。
+-   最初の戦略は、 [Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する](#dump-data-with-dumpling-and-restore-data-with-tidb-lightning)です。これは MariaDB のすべてのバージョンで機能します。この戦略の欠点は、より多くのダウンタイムが必要になることです。
+-   2 番目の戦略は、 [DMを使用してデータを複製する](#replicate-data-with-dm)ことです。 DM は MariaDB のすべてのバージョンをサポートしているわけではありません。サポートされているバージョンは、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#compatibility-catalog-of-tidb-data-migration)に記載されています。
 
-これら2つの戦略以外にも、あなたの状況に合った戦略が他にもあるかもしれません。例えば：
+これら2つの戦略以外にも、あなたの状況に特化した戦略が存在する可能性があります。例えば、以下のような戦略です。
 
--   オブジェクト リレーショナル マッピング (ORM) の機能を使用して、データを再デプロイおよび移行します。
--   移行の進行中に MariaDB と TiDB の両方から書き込むようにアプリケーションを変更します。
+-   オブジェクトリレーショナルマッピング（ORM）の機能を使用して、データを再デプロイおよび移行してください。
+-   移行作業中は、アプリケーションを修正してMariaDBとTiDBの両方から書き込みを行えるようにしてください。
 
-このドキュメントでは、最初の 2 つの戦略についてのみ説明します。
+この文書では、最初の2つの戦略のみを取り上げています。
 
-選択した戦略に基づいて、次のものを準備します。
+選択した戦略に基づいて、以下のものを準備してください。
 
--   **ダンプと復元の**戦略の場合:
-    -   [Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)をインストールします。
-    -   Dumpling がデータをエクスポートするには、MariaDBサーバーに[必要な権限](/dumpling-overview.md#required-privileges)あることを確認してください。
--   **データ複製**戦略については、 [データ移行（DM）](/dm/dm-overview.md)を設定します。
+-   **ダンプとリストアの**戦略について：
+    -   [Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)をインストールしてください。
+    -   Dumpling がデータをエクスポートするために MariaDBサーバー上で [必要な権限](/dumpling-overview.md#required-privileges)を持っていることを確認してください。
+-   **データレプリケーション**戦略として、[データ移行（DM）](/dm/dm-overview.md)を設定します。
 
-## 互換性を確認する {#check-compatibility}
+## 互換性を確認してください {#check-compatibility}
 
-TiDBは[MySQLと互換性あり](/mysql-compatibility.md)あり、MySQLとMariaDBには多くの共通機能があります。ただし、MariaDB固有の機能の中にはTiDBと互換性がないものもあるため、移行前に注意が必要です。
+TiDBは[MySQLと互換性あり](/mysql-compatibility.md)。MySQLとMariaDBには多くの共通機能がありますが、移行前に知っておくべきMariaDB固有の機能の中には、TiDBと互換性がないものがあるかもしれません。
 
-このセクションの項目を確認するだけでなく、MariaDB ドキュメントの[互換性と相違点](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences)確認することをお勧めします。
+このセクションの項目を確認するだけでなく、MariaDB ドキュメントの[互換性と相違点](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences)も確認することをお勧めします。
 
 ### 認証 {#authentication}
 
-[MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)ドキュメントでは、TiDB がサポートする認証方法をリストしています。TiDB は MariaDB のいくつかの認証方法をサポートしていません。つまり、アカウントに新しいパスワードハッシュを作成するか、その他の特別な対策を講じる必要がある可能性があります。
+[MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)ドキュメントには、TiDBがサポートする認証方法が記載されています。TiDBはMariaDBの一部の認証方法をサポートしていません。そのため、アカウント用に新しいパスワードハッシュを作成するか、その他の特別な対策を講じる必要がある場合があります。
 
 使用されている認証方法を確認するには、次のステートメントを実行します。
 
@@ -61,9 +61,9 @@ GROUP BY
 
 ### システムバージョン管理されたテーブル {#system-versioned-tables}
 
-TiDBは[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)サポートしていません。ただし、TiDBは[`AS OF TIMESTAMP`](/as-of-timestamp.md)サポートしており、システムバージョン管理されたテーブルのユースケースの一部を置き換える可能性があります。
+TiDB は[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)サポートしていません。ただし、TiDB は[`AS OF TIMESTAMP`](/as-of-timestamp.md)をサポートしており、システム バージョン管理テーブルの使用例の一部を置き換える可能性があります。
 
-次のステートメントを使用して、影響を受けるテーブルを確認できます。
+影響を受けるテーブルは、以下のステートメントで確認できます。
 
 ```sql
 SELECT
@@ -84,7 +84,7 @@ WHERE
 1 row in set (0.005 sec)
 ```
 
-システムのバージョン管理を削除するには、次の`ALTER TABLE`ステートメントを実行します。
+システムのバージョン管理を削除するには、 `ALTER TABLE`ステートメントを実行します。
 
 ```sql
 MariaDB [test]> ALTER TABLE t DROP SYSTEM VERSIONING;
@@ -94,9 +94,9 @@ Records: 0  Duplicates: 0  Warnings: 0
 
 ### シーケンス {#sequences}
 
-MariaDBとTiDBはどちらも[`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)サポートしています。ただし、現在DMではサポートされていません。移行中はシーケンスの作成、変更、削除を行わず、移行後に特にこの点をテストすることをお勧めします。
+MariaDBとTiDBはどちらも[`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)をサポートしています。しかし、DMは現在この機能をサポートしていません。移行中はシーケンスの作成、変更、削除を行わないことを推奨し、移行後にこの点を特にテストすることをお勧めします。
 
-シーケンスを使用しているかどうかを確認するには、次のステートメントを実行します。
+シーケンスを使用しているかどうかを確認するには、次のステートメントを実行してください。
 
 ```sql
 SELECT
@@ -119,9 +119,9 @@ WHERE
 
 ### ストレージエンジン {#storage-engines}
 
-MariaDBは`Aria` `InnoDB`といったローカルデータ用のstorageエンジンを提供しています。これら`MyISAM`データ形式はTiDBでは直接サポートされていませんが、これらの移行は問題なく行えます。ただし、 `CONNECT`storageエンジンや`Spider`など、一部のエンジンはデータをサーバーの外部に配置します。このようなテーブルをTiDBに移行することは可能ですが、TiDBはTiDBクラスターの外部にデータを保存する機能を提供していません。
+MariaDB は`InnoDB` 、 `MyISAM` 、 `Aria`などのstorageデータ用のストレージ エンジンを提供しています。これらのデータ形式は TiDB で直接サポートされていませんが、移行は問題なく行えます。ただし、 `CONNECT`storageエンジンや`Spider`など、サーバー外にデータを配置するエンジンもあります。これらのテーブルを TiDB に移行することはできますが、TiDB は TiDB クラスタ外にデータを保存する機能を提供していません。
 
-使用しているstorageエンジンを確認するには、次のステートメントを実行します。
+使用しているstorageエンジンを確認するには、次のステートメントを実行してください。
 
 ```sql
 SELECT
@@ -150,11 +150,11 @@ GROUP BY
 
 ### 構文 {#syntax}
 
-MariaDBは、 `DELETE` 、 `INSERT` 、 `REPLACE`ステートメントで`RETURNING`キーワードをサポートしています。TiDBはこれらのステートメントをサポートしていません。移行に影響があるかどうかを確認するには、アプリケーションとクエリのログを確認することをお勧めします。
+MariaDB は`RETURNING` 、 `DELETE` 、および`INSERT`ステートメントに対して`REPLACE`キーワードをサポートしています。TiDB はこれらをサポートしていません。移行に影響があるかどうかを確認するために、アプリケーションとクエリのログを確認することをお勧めします。
 
 ### データ型 {#data-types}
 
-MariaDB は、 `UUID` 、 `INET4` 、 `INET6`など、TiDB がサポートしていないいくつかのデータ型をサポートしています。
+MariaDB は、 `UUID` 、 `INET4` 、 `INET6` 。
 
 これらのデータ型を確認するには、次のステートメントを実行します。
 
@@ -186,9 +186,9 @@ WHERE
 
 TiDB は、MariaDB でよく使用される`latin1_swedish_ci`照合順序をサポートしていません。
 
-TiDBは、MariaDB 11.6以降のバージョンのデフォルト照合順序順序である`utf8mb4_uca1400_ai_ci`サポートしていません。代わりに`utf8mb4_0900_ai_ci`使用してください。これらの2つの照合順序は、 [Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/)のバージョンが異なります。7 `utf8mb4_0900_ai_ci` UCA 9.0.0を使用し、 `utf8mb4_uca1400_ai_ci` UCA 14.0.0を使用します。
+TiDB は、MariaDB 11.6 以降のバージョンの照合順序の照合順序である`utf8mb4_uca1400_ai_ci`サポートしていません。代わりに`utf8mb4_0900_ai_ci`を使用してください。これら 2 つの照合順序は[Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/) : `utf8mb4_0900_ai_ci`は UCA 9.0.0 を使用し、 `utf8mb4_uca1400_ai_ci`は UCA 14.0.0 を使用します。
 
-TiDB がサポートする照合順序を確認するには、TiDB で次のステートメントを実行します。
+TiDBがサポートする照合順序を確認するには、TiDBで次のステートメントを実行してください。
 
 ```sql
 SHOW COLLATION;
@@ -215,7 +215,7 @@ SHOW COLLATION;
 13 rows in set (0.00 sec)
 ```
 
-現在のテーブルの列が使用している照合順序を確認するには、次のステートメントを使用できます。
+現在使用しているテーブルの列がどの照合順序を使用しているかを確認するには、次のステートメントを使用できます。
 
 ```sql
 SELECT
@@ -252,96 +252,168 @@ ORDER BY
 14 rows in set (0.045 sec)
 ```
 
-[文字セットと照合順序](/character-set-and-collation.md)も参照してください。
+[文字セットと照合](/character-set-and-collation.md)も参照してください。
 
-## Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する {#dump-data-with-dumpling-and-restore-data-with-tidb-lightning}
+### インデックスの長さ {#index-length}
 
-この方法では、アプリケーションをオフラインにしてデータを移行し、移行したデータを使用するようにアプリケーションを再構成することを前提としています。
+次の例に示すように、MariaDB はインデックスを自動的にプレフィックス インデックスに変換し、インデックスが最大キー長を超える場合は警告を返します。MariaDB とは異なり、TiDB は MySQL の動作に従います。つまり、自動変換は行わず、代わりにエラーを返します。したがって、MariaDB DDL を TiDB に移行する際、インデックス付き列が TiDB でサポートされる最大キー長を超える可能性がある場合は、プレフィックス インデックスを明示的に作成するようにスクリプトを変更する必要があります。
+
+    MariaDB> \W
+    Show warnings enabled.
+    MariaDB> CREATE TABLE t1(id SERIAL, c1 VARCHAR(800));
+    Query OK, 0 rows affected (0.024 sec)
+
+    MariaDB> ALTER TABLE t1 ADD INDEX(c1);
+    Query OK, 0 rows affected, 1 warning (0.031 sec)
+    Records: 0  Duplicates: 0  Warnings: 1
+
+    Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+    MariaDB> SHOW CREATE TABLE t1\G
+    *************************** 1. row ***************************
+           Table: t1
+    Create Table: CREATE TABLE `t1` (
+      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+      `c1` varchar(800) DEFAULT NULL,
+      UNIQUE KEY `id` (`id`),
+      KEY `c1` (`c1`(768))
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+    1 row in set (0.001 sec)
+
+MariaDBには、最大キー長を超える一意インデックスに対する特別な処理機能もあります。例えば、次の例では、MariaDBは`USING HASH`列に`TEXT`一意インデックスを作成します。TiDBにはこの機能はありません。
+
+    MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
+    Query OK, 0 rows affected (0.015 sec)
+
+    MariaDB> ALTER TABLE t2 ADD INDEX regular_index_c1 (c1);
+    Query OK, 0 rows affected, 1 warning (0.034 sec)
+    Records: 0  Duplicates: 0  Warnings: 1
+
+    Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+    MariaDB> ALTER TABLE t2 ADD UNIQUE INDEX unique_index_c1 (c1);
+    Query OK, 0 rows affected (0.048 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+
+    MariaDB> SHOW CREATE TABLE t2\G
+    *************************** 1. row ***************************
+           Table: t2
+    Create Table: CREATE TABLE `t2` (
+      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+      `c1` text NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `unique_index_c1` (`c1`) USING HASH,
+      KEY `regular_index_c1` (`c1`(768))
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+    1 row in set (0.001 sec)
+
+TiDB の長いテキスト列に一意性を持たせるには、生成ハッシュ列を追加し、その生成ハッシュ列に一意インデックスを作成します。手順は次のとおりです。
+
+    tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT NOT NULL);
+    Query OK, 0 rows affected (0.102 sec)
+
+    tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
+    Query OK, 0 rows affected (0.242 sec)
+
+    tidb> ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
+    Query OK, 0 rows affected (0.363 sec)
+
+    tidb> INSERT INTO t1(id,c1) VALUES (1,'aaa');
+    Query OK, 1 row affected (0.015 sec)
+
+    tidb> INSERT INTO t1(id,c1) VALUES (2,'bbb');
+    Query OK, 1 row affected (0.006 sec)
+
+    tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
+    ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
+    tidb>
+
+## Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する。 {#dump-data-with-dumpling-and-restore-data-with-tidb-lightning}
+
+この方法は、アプリケーションをオフラインにしてデータを移行し、その後、移行したデータを使用するようにアプリケーションを再構成することを前提としています。
 
 > **注記：**
 >
-> 本番本番で実行する前に、アプリケーションのテストインスタンスまたは開発インスタンスでこの作業を実行することを強くお勧めします。これは、互換性の問題が発生する可能性を確認するためと、移行にかかる時間を把握するためです。
+> 本番で実行する前に、まずテスト環境または開発環境でこの作業を行うことを強くお勧めします。これは、互換性の問題がないかを確認するためと、移行にかかる時間を把握するためです。
 
-MariaDB から TiDB にデータを移行するには、次の手順を実行します。
+MariaDBからTiDBへデータを移行するには、以下の手順を実行してください。
 
-1.  アプリケーションを停止します。アプリケーションをオフラインにします。これにより、移行中および移行後にMariaDBのデータが変更されないことが保証されます。
+1.  アプリケーションを停止してください。アプリケーションをオフラインにしてください。これにより、移行中または移行後にMariaDB内のデータが変更されることがなくなります。
 
-2.  [`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data)コマンドで MariaDB にデータをダンプします。
+2.  MariaDBに[`tiup dumpling`](/dumpling-overview.md#use-dumpling-to-export-data)コマンドを使用してデータをダンプします。
 
     ```shell
     tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
     ```
 
-3.  `tiup tidb-lightning`コマンドを使用してデータを復元します。TiDB Lightning の設定方法と実行方法の詳細については、 [TiDB Lightningを使い始める](/get-started-with-tidb-lightning.md)参照してください。
+3.  `tiup tidb-lightning`コマンドを使用してデータを復元します。 TiDB Lightning の構成方法と実行方法の詳細については、 [TiDB Lightningを使い始めよう](/get-started-with-tidb-lightning.md)を参照してください。
 
-4.  ユーザーアカウントと権限を移行します。ユーザーと権限の移行方法の詳細については、 [ユーザーと権限をエクスポートする](#export-users-and-grants)参照してください。
+4.  ユーザーアカウントと権限を移行します。ユーザーと権限を移行する方法の詳細については、[輸出ユーザーと助成金](#export-users-and-grants)を参照してください。
 
-5.  アプリケーションを再設定してください。TiDBサーバーに接続できるように、アプリケーションの設定を変更する必要があります。
+5.  アプリケーションを再構成してください。TiDBサーバーに接続できるように、アプリケーションの設定を変更する必要があります。
 
-6.  クリーンアップ。移行が成功したことを確認したら、MariaDBのデータの最終バックアップを作成し、サーバーを停止します。これにより、 TiUP、 Dumpling、 TiDB Lightningなどのツールも削除できます。
+6.  クリーンアップ。移行が成功したことを確認したら、MariaDB のデータの最終バックアップを作成し、サーバーを停止します。これにより、 TiUP、 Dumpling、 TiDB Lightningなどのツールを削除することもできます。
 
-## DMでデータを複製する {#replicate-data-with-dm}
+## DMを使用してデータを複製する {#replicate-data-with-dm}
 
-この方法では、レプリケーションを設定し、アプリケーションを停止してレプリケーションが追いつくまで待機し、その後、TiDB を使用するようにアプリケーションを再構成することを前提としています。
+この方法は、レプリケーションを設定し、アプリケーションを停止してレプリケーションが追いつくまで待機し、その後アプリケーションを再構成してTiDBを使用するようにすることを前提としています。
 
-DMを使用するには、 [TiUPクラスター](/dm/deploy-a-dm-cluster-using-tiup.md)または[TiDB Operator](/tidb-operator-overview.md)を使用してDMサービスのセットをデプロイする必要があります。その後、 `dmctl`使用してDMサービスを設定します。
+DMを使用するには、 [TiUPクラスター](/dm/deploy-a-dm-cluster-using-tiup.md)または[TiDB Operator](/tidb-operator-overview.md)を使用して一連のDMサービスをデプロイする必要があります。その後、 `dmctl`を使用してDMサービスを構成します。
 
 > **注記：**
 >
-> 本番本番で実行する前に、アプリケーションのテストインスタンスまたは開発インスタンスでこの作業を実行することを強くお勧めします。これは、互換性の問題が発生する可能性を確認するためと、移行にかかる時間を把握するためです。
+> 本番で実行する前に、まずテスト環境または開発環境でこの作業を行うことを強くお勧めします。これは、互換性の問題がないかを確認するためと、移行にかかる時間を把握するためです。
 
-### ステップ1.準備 {#step-1-prepare}
+### ステップ1. 準備する {#step-1-prepare}
 
-MariaDBでbinlogsが有効になっていること、および`binlog_format`が`ROW`に設定されていることを確認してください。5と`binlog_annotate_row_events=OFF` `log_bin_compress=OFF`設定することも推奨されます。
+MariaDB でbinlogを有効にし、 `binlog_format=ROW` 、 `binlog_row_image=FULL` 、および`binlog_legacy_event_pos=ON`を設定します。また、 `binlog_annotate_row_events=OFF`および`log_bin_compress=OFF`も設定します。
 
-また、権限`SUPER` 、または権限`BINLOG MONITOR`と権限`REPLICATION MASTER ADMIN`を持つアカウントも必要です。このアカウントには、移行するスキーマに対する読み取り権限も必要です。
+`SUPER`権限、または`BINLOG MONITOR`と`REPLICATION MASTER ADMIN`の権限を持つアカウントが必要です。また、このアカウントには、移行するスキーマに対する読み取り権限も必要です。
 
-`SUPER`権限を持つアカウントを使用していない場合は、TiDB が MariaDB 固有の権限を確認する方法をまだ知らないため、DM 構成に以下を追加する必要がある可能性があります。
+`SUPER`権限を持つアカウントを使用していない場合は、TiDB が MariaDB 固有の権限を確認する方法をまだ知らないため、DM 構成に以下を追加する必要があるかもしれません。
 
 ```yaml
 ignore-checking-items: ["replication_privilege"]
 ```
 
-DMを使用して上流から下流へデータを移行する前に、事前チェックを行うことで上流データベース構成のエラーを検出し、移行がスムーズに進むようにします。詳細については、 [移行タスクの事前チェック](/dm/dm-precheck.md)参照してください。
+DM を使用してアップストリームからダウンストリームにデータを移行する前に、事前チェックによりアップストリームのデータベース構成のエラーを検出し、移行がスムーズに行われるようにします。詳細については、[移行タスクの事前チェック](/dm/dm-precheck.md)参照してください。
 
-### ステップ2. データを複製する {#step-2-replicate-data}
+### ステップ2．データの複製 {#step-2-replicate-data}
 
-[TiDB データ移行のクイックスタートガイド](/dm/quick-start-with-dm.md)に従って、MariaDB から TiDB にデータを複製します。
+[TiDBデータ移行クイックスタートガイド](/dm/quick-start-with-dm.md)に従って、MariaDB から TiDB にデータをレプリケートします。
 
-MariaDB から MariaDB へのレプリケーションの場合のように、最初に初期データをコピーする必要はないことに注意してください。DM が自動的にこれを実行します。
+MariaDBからMariaDBへのレプリケーションのように、最初に初期データをコピーする必要はありません。DMが自動的にコピーしてくれます。
 
-### ステップ3. ユーザーアカウントと権限を移行する {#step-3-migrate-user-accounts-and-permissions}
+### ステップ3．ユーザーアカウントと権限を移行する {#step-3-migrate-user-accounts-and-permissions}
 
-ユーザーと権限の移行方法については、 [ユーザーと権限をエクスポートする](#export-users-and-grants)参照してください。
+ユーザーと権限を移行する方法については[輸出ユーザーと助成金](#export-users-and-grants)を参照してください。
 
-### ステップ4. データをテストする {#step-4-test-your-data}
+### ステップ4．データをテストする {#step-4-test-your-data}
 
-データが複製されたら、読み取り専用クエリを実行して検証できます。詳細については、 [アプリケーションをテストする](#test-your-application)参照してください。
+データがレプリケートされたら、そのデータに対して読み取り専用クエリを実行して検証できます。詳細については、[アプリケーションをテストしてください](#test-your-application)参照してください。
 
-### ステップ5. 切り替える {#step-5-switch-over}
+### ステップ5．切り替える {#step-5-switch-over}
 
-TiDB に切り替えるには、次の手順を実行する必要があります。
+TiDBに切り替えるには、以下の手順を実行する必要があります。
 
-1.  アプリケーションを停止します。
-2.  レプリケーションの遅延を監視します。0 秒になるはずです。
-3.  アプリケーションの構成を TiDB に接続するように変更し、再度起動します。
+1.  アプリケーションを停止してください。
+2.  レプリケーション遅延を監視してください。遅延時間は0秒になるはずです。
+3.  アプリケーションの設定を変更してTiDBに接続するようにし、再度起動してください。
 
-レプリケーションの遅延を確認するには、 [`query-status &#x3C;taskname>`](/dm/dm-query-status.md#detailed-query-result)から`dmctl`を実行し、 `subTaskStatus`で`"synced: true"`を確認します。
+レプリケーションの遅延を確認するには、 `dmctl`を介して[`query-status &#x3C;taskname>`](/dm/dm-query-status.md#detailed-query-result)を実行し、 `"synced: true"`内の`subTaskStatus`を確認します。
 
-### ステップ6. クリーンアップ {#step-6-clean-up}
+### ステップ6．片付け {#step-6-clean-up}
 
-移行が成功したことを確認したら、MariaDB のデータの最終バックアップを作成し、サーバーを停止します。これにより、DM クラスターを停止して削除することもできます。
+移行が成功したことを確認したら、MariaDB のデータの最終バックアップを作成し、サーバーを停止できます。これにより、DM クラスターを停止して削除することもできます。
 
-## ユーザーと権限をエクスポートする {#export-users-and-grants}
+## 輸出ユーザーと助成金 {#export-users-and-grants}
 
-[`pt-show-grants`](https://docs.percona.com/percona-toolkit/pt-show-grants.html)使用できます。これは、MariaDB からユーザーと権限をエクスポートし、TiDB にロードするための Percona Toolkit の一部です。
+[`pt-show-grants`](https://docs.percona.com/percona-toolkit/pt-show-grants.html)を使用できます。これは Percona Toolkit の一部で、MariaDB からユーザーと権限をエクスポートし、TiDB にロードするために使用されます。
 
-## アプリケーションをテストする {#test-your-application}
+## アプリケーションをテストしてください {#test-your-application}
 
-`sysbench`ような汎用ツールをテストに使用することも可能ですが、アプリケーションの特定の機能をテストすることを強くお勧めします。例えば、アプリケーションのコピーを、データの一時コピーを含む TiDB クラスターに対して実行します。
+`sysbench`のような汎用ツールを使ってテストすることも可能ですが、アプリケーションの特定の機能をテストすることを強くお勧めします。例えば、アプリケーションのコピーを、データの一時コピーとともにTiDBクラスタに対して実行してみてください。
 
-このようなテストを行うことで、アプリケーションとTiDBの互換性とパフォーマンスを検証できます。アプリケーションとTiDBのログファイルを監視して、対処が必要な警告がないか確認する必要があります。アプリケーションが使用しているデータベースドライバ（ Javaベースのアプリケーションの場合はMySQL Connector/Jなど）がテストされていることを確認してください。必要に応じて、JMeterなどのアプリケーションを使用してアプリケーションに負荷をかけることもできます。
+このようなテストを行うことで、アプリケーションとTiDBの互換性およびパフォーマンスが検証されます。アプリケーションとTiDBのログファイルを監視して、対処が必要な警告がないか確認する必要があります。アプリケーションで使用しているデータベースドライバ（例えば、 Javaベースのアプリケーションの場合はMySQL Connector/J）がテストされていることを確認してください。必要に応じて、JMeterなどのアプリケーションを使用してアプリケーションに負荷をかけることもできます。
 
-## データを検証する {#validate-data}
+## データの検証 {#validate-data}
 
-[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用して、MariaDB と TiDB のデータが同じかどうかを検証できます。
+[同期差分検査ツール](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、MariaDB と TiDB のデータが同一で​​あるかどうかを検証できます。
