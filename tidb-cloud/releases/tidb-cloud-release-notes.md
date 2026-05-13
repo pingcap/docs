@@ -20,6 +20,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more information, see [From Preview to Production: TiDB Cloud Dedicated on Microsoft Azure is Now Generally Available](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/).
 
+- **TiDB Cloud Premium**
+
+    - Add the AVG RU/s metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) metrics page.
+    
+        AVG RU/s displays the average RU/s over the selected time range, giving you a clearer view of overall resource consumption.
+
 ## April 28, 2026
 
 **General changes**
