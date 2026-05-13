@@ -12,6 +12,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- **TiDB Cloud Premium**
+
+    - Add the `AVG RU/s` metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) **Metrics** page.
+    
+        `AVG RU/s` displays the average number of RUs consumed per second over the selected time range, helping you better understand resource consumption.
+
 - **TiDB Cloud Dedicated**
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) is now generally available (GA) on Microsoft Azure in **Japan East** and **East US 2**.
