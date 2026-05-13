@@ -443,3 +443,16 @@ We would like to thank the following contributors from the TiDB community:
 - [LindaSummer](https://github.com/LindaSummer)
 - [songzhibin97](https://github.com/songzhibin97)
 - [Hexilee](https://github.com/Hexilee)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard
+    title="Reducing P999 Latency in Distributed Databases with TiDB 8.5"
+    type="blog"
+    link="https://www.pingcap.com/blog/tidb-8-5-reduce-p999-latency-distributed-database/"
+    imgSrc="https://static.pingcap.com/files/2026/04/07040029/20260407-162905.png"
+    author="Rui Xu"
+    date="2026-04-07"
+  />
+</RelatedResources>

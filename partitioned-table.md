@@ -2102,3 +2102,15 @@ Currently, `static` pruning mode does not support plan cache for both prepared a
     SET session tidb_partition_prune_mode = dynamic;
     source gatherGlobalStats.sql
     ```
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard
+    title="TiDB SQL Tuning Lab 2: Partitioned Tables"
+    type="lab"
+    link="https://labs.tidb.io/labs/dba_307_lab_ff1"
+    imgSrc="https://lab-static.pingcap.com/quick-demo/307-02.png"
+    duration="90 mins"
+  />
+</RelatedResources>

@@ -121,3 +121,16 @@ To experience the whole process from importing data to querying in a TPC-H datas
 - [TiFlash compatibility](/tiflash/tiflash-compatibility.md)
 
 </CustomContent>
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard
+    title="TiDB Internal (I) - Data Storage"
+    type="blog"
+    link="https://www.pingcap.com/blog/tidb-internal-data-storage/"
+    imgSrc="https://static.pingcap.com/files/2017/07/20220830-172555-scaled.jpg"
+    author="Li Shen"
+    date="2017-07-11"
+  />
+</RelatedResources>

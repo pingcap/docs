@@ -14,3 +14,16 @@ You can use TiCDC to replicate incremental data from TiDB to Confluent Cloud, an
 ## Integrate with Apache Kafka and Apache Flink
 
 You can use TiCDC to replicate incremental data from TiDB to Apache Kafka, and consume the data using Apache Flink. For details, see [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md).
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard
+    title="How to Replicate TiDB to a Mirrored Database in Microsoft Fabric with TiCDC"
+    type="blog"
+    link="https://www.pingcap.com/blog/replicate-tidb-mirrored-database-microsoft-fabric-ticdc/"
+    imgSrc="https://static.pingcap.com/files/2025/10/27043237/20251027-170225.png"
+    author="Guanglei Bao, Jasper Hu, Brian Foster"
+    date="2025-10-27"
+  />
+</RelatedResources>

@@ -162,3 +162,15 @@ Currently, the following scenarios are not supported:
 - Starting from v8.2.0, BR relaxes the restrictions on data restoration for TiCDC: if the `BackupTS` (the backup time) of the data to be restored is earlier than the changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (the timestamp that indicates the current replication progress), BR can proceed with the data restoration normally. Considering that the `BackupTS` is usually much earlier, it can be assumed that in most scenarios, BR supports restoring data for a cluster with TiCDC replication tasks.
 
 TiCDC only partially supports scenarios involving large transactions in the upstream. For details, refer to the [TiCDC FAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk), where you can find details on whether TiCDC supports replicating large transactions and any associated risks.
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard
+    title="TiDB Admin Lab 11: Replicating TiDB Change Events Using TiCDC"
+    type="lab"
+    link="https://labs.tidb.io/labs/dba_303_lab_ff10"
+    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch12_en.png"
+    duration="60 mins"
+  />
+</RelatedResources>

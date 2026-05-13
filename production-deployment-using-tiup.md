@@ -398,3 +398,15 @@ If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB clust
 - [TiCDC FAQs](/ticdc/ticdc-faq.md)
 
 If you want to scale out or scale in your TiDB cluster without interrupting the online services, see [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard
+    title="TiDB Admin Lab 1: Deploying a TiDB Cluster Using TiUP"
+    type="lab"
+    link="https://labs.tidb.io/labs/dba_303_lab_ff0"
+    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch01_en.png"
+    duration="60 mins"
+  />
+</RelatedResources>
