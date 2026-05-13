@@ -12,6 +12,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- **TiDB Cloud Premium**
+
+    - Add the `AVG RU/s` metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) metrics page.
+    
+        `AVG RU/s` displays the average RU per second over the selected time range, giving you a clearer view of resource consumption.
+
 - **TiDB Cloud Dedicated**
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) is now generally available (GA) on Microsoft Azure in **Japan East** and **East US 2**.
@@ -19,12 +25,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         It delivers three-AZ high availability with a 99.99% uptime SLA, full HTAP powered by TiFlash, independent compute and storage scaling, fully managed operations by PingCAP SRE, seamless data import and migration, continuous backup with PITR, enterprise-grade security, and integrated observability. It also supports bulk data import, migration from MySQL and other sources, and real-time replication to downstream systems. If you use [Azure Marketplace](https://azuremarketplace.microsoft.com/), you can also subscribe to TiDB Cloud Dedicated through Azure Marketplace.
 
         For more information, see [From Preview to Production: TiDB Cloud Dedicated on Microsoft Azure is Now Generally Available](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/).
-
-- **TiDB Cloud Premium**
-
-    - Add the `AVG RU/s` metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) metrics page.
-    
-        `AVG RU/s` displays the average RU per second over the selected time range, giving you a clearer view of resource consumption.
 
 ## April 28, 2026
 
