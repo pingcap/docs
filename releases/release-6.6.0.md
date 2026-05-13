@@ -13,7 +13,7 @@ TiDB version: 6.6.0-[DMR](/releases/versioning.md#development-milestone-releases
 >
 > The TiDB 6.6.0-DMR documentation has been [archived](https://docs-archive.pingcap.com/tidb/v6.6/). PingCAP encourages you to use [the latest LTS version](https://docs.pingcap.com/tidb/stable) of the TiDB database.
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.6/quick-start-with-tidb)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.6/quick-start-with-tidb)
 
 In v6.6.0-DMR, the key new features and improvements are as follows:
 
@@ -28,38 +28,38 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 <tbody>
   <tr>
     <td rowspan="3">Scalability and Performance<br /></td>
-    <td>TiKV supports <a href="https://docs.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">Partitioned Raft KV storage engine</a> (experimental)</td>
+    <td>TiKV supports <a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">Partitioned Raft KV storage engine</a> (experimental)</td>
     <td>TiKV introduces the Partitioned Raft KV storage engine, and each Region uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger scalability.</td>
   </tr>
   <tr>
-    <td>TiKV supports <a href="https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a></td>
+    <td>TiKV supports <a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a></td>
     <td>This enhancement significantly reduces total RPCs in TiKV batch-get operations. In situations where data is highly dispersed and the gRPC thread pool has insufficient resources, batching coprocessor requests can improve performance by more than 50%.</td>
   </tr>
   <tr>
-    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v6.6/stale-read" target="_blank">Stale Read</a> and <a href="https://docs.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">compression exchange</a></td>
+    <td>TiFlash supports <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">Stale Read</a> and <a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">compression exchange</a></td>
     <td>TiFlash supports the stale read feature, which can improve query performance in scenarios where real-time requirements are not restricted. TiFlash supports data compression to improve the efficiency of parallel data exchange, and the overall TPC-H performance improves by 10%, which can save more than 50% of the network usage.</td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and availability<br /></td>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">Resource control</a> (experimental)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">Resource control</a> (experimental)</td>
     <td>Support resource management based on resource groups, which maps database users to the corresponding resource groups and sets quotas for each resource group based on actual needs.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">Historical SQL binding</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">Historical SQL binding</a></td>
     <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
   </tr>
   <tr>
     <td rowspan="2">SQL functionalities<br /></td>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/foreign-key" target="_blank">Foreign key</a> (experimental)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">Foreign key</a> (experimental)</td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (experimental)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (experimental)</td>
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
     <td>DB operations and observability<br /></td>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DM supports physical import</a> (experimental)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DM supports physical import</a> (experimental)</td>
     <td>TiDB Data Migration (DM) integrates TiDB Lightning's physical import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
   </tr>
 </tbody>
@@ -79,17 +79,17 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support the distributed parallel execution framework for DDL operations (experimental) [#37125](https://github.com/pingcap/tidb/issues/37125) @[zimulala](https://github.com/zimulala)
 
-    In previous versions, only one TiDB instance in the entire TiDB cluster was allowed to handle schema change tasks as a DDL owner. To further improve DDL concurrency for large table's DDL operations, TiDB v6.6.0 introduces the distributed parallel execution framework for DDL, through which all TiDB instances in the cluster can concurrently execute the `StateWriteReorganization` phase of the same task to speed up DDL execution. This feature is controlled by the system variable [`tidb_ddl_distribute_reorg`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660) and is currently only supported for `Add Index` operations.
+    In previous versions, only one TiDB instance in the entire TiDB cluster was allowed to handle schema change tasks as a DDL owner. To further improve DDL concurrency for large table's DDL operations, TiDB v6.6.0 introduces the distributed parallel execution framework for DDL, through which all TiDB instances in the cluster can concurrently execute the `StateWriteReorganization` phase of the same task to speed up DDL execution. This feature is controlled by the system variable [`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660) and is currently only supported for `Add Index` operations.
 
 ### Performance
 
 * Support a stable wake-up model for pessimistic lock queues [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
 
-    If an application encounters frequent single-point pessimistic lock conflicts, the existing wake-up mechanism cannot guarantee the time for transactions to acquire locks, which causes high long-tail latency and even lock acquisition timeout. Starting from v6.6.0, you can enable a stable wake-up model for pessimistic locks by setting the value of the system variable [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) to `ON`. In this wake-up model, the wake-up sequence of a queue can be strictly controlled to avoid the waste of resources caused by invalid wake-ups. In scenarios with serious lock conflicts, the stable wake-up model can reduce long-tail latency and the P99 response time.
+    If an application encounters frequent single-point pessimistic lock conflicts, the existing wake-up mechanism cannot guarantee the time for transactions to acquire locks, which causes high long-tail latency and even lock acquisition timeout. Starting from v6.6.0, you can enable a stable wake-up model for pessimistic locks by setting the value of the system variable [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) to `ON`. In this wake-up model, the wake-up sequence of a queue can be strictly controlled to avoid the waste of resources caused by invalid wake-ups. In scenarios with serious lock conflicts, the stable wake-up model can reduce long-tail latency and the P99 response time.
 
     Tests indicate this reduces tail latency 40-60%.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
+    For more information, see [documentation](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
 
 * Batch aggregate data requests [#39361](https://github.com/pingcap/tidb/issues/39361) @[cfzjywxk](https://github.com/cfzjywxk) @[you06](https://github.com/you06)
 
@@ -155,7 +155,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support dynamically managing the resource usage of DDL operations (experimental) [#38025](https://github.com/pingcap/tidb/issues/38025) @[hawkingrei](https://github.com/hawkingrei)
 
-    TiDB v6.6.0 introduces resource management for DDL operations to reduce the impact of DDL changes on online applications by automatically controlling the CPU usage of these operations. This feature is effective only after the [DDL distributed parallel execution framework](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660) is enabled.
+    TiDB v6.6.0 introduces resource management for DDL operations to reduce the impact of DDL changes on online applications by automatically controlling the CPU usage of these operations. This feature is effective only after the [DDL distributed parallel execution framework](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660) is enabled.
 
 ### Availability
 
@@ -364,13 +364,13 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size) | Modified | This variable controls the batch size of the Coprocessor Tasks of the `IndexLookUp` operator. `0` means to disable batch. Starting from v6.6.0, the default value is changed from `0` to `4`, which means 4 Coprocessor tasks will be batched into one task for each batch of requests. |
 | [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)  | Newly added |  This variable specifies the data compression mode of the MPP Exchange operator. It takes effect when TiDB selects the MPP execution plan with the version number `1`. The default value `UNSPECIFIED` means that TiDB automatically selects the `FAST` compression mode. |
 | [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)  | Newly added |  This variable specifies the version of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The default value `UNSPECIFIED` means that TiDB automatically selects the latest version `1`. |
-| [`tidb_ddl_distribute_reorg`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660) | Newly added | This variable controls whether to enable distributed execution of the DDL reorg phase to accelerate this phase. The default value `OFF` means not to enable distributed execution of the DDL reorg phase by default. Currently, this variable takes effect only for `ADD INDEX`. |
+| [`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660) | Newly added | This variable controls whether to enable distributed execution of the DDL reorg phase to accelerate this phase. The default value `OFF` means not to enable distributed execution of the DDL reorg phase by default. Currently, this variable takes effect only for `ADD INDEX`. |
 | [`tidb_enable_historical_stats_for_capture`](/system-variables.md#tidb_enable_historical_stats_for_capture) | Newly added | This variable controls whether the information captured by `PLAN REPLAYER CAPTURE` includes historical statistics by default. The default value `OFF` means that historical statistics are not included by default. |
 | [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit-new-in-v660) | Newly added | This variable controls whether Prepared Plan Cache caches execution plans that contain `COUNT` after `Limit`. The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a `COUNT` condition that counts a number greater than 10000. |
 | [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) | Newly added  | This variable controls whether to enable the resource control feature. The default value is `OFF`. When this variable is set to `ON`, the TiDB cluster supports resource isolation of applications based on resource groups. |
 | [`tidb_historical_stats_duration`](/system-variables.md#tidb_historical_stats_duration-new-in-v660) | Newly added | This variable controls how long the historical statistics are retained in storage. The default value is 7 days. |
 | [`tidb_index_join_double_read_penalty_cost_rate`](/system-variables.md#tidb_index_join_double_read_penalty_cost_rate-new-in-v660) | Newly added | This variable controls whether to add some penalty cost to the selection of index join. The default value `0` means that this feature is disabled by default. |
-| [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) | Newly added | This variable controls whether to use enhanced pessimistic locking wake-up model for pessimistic transactions. The default value `OFF` means not to use such a wake-up model for pessimistic transactions by default. |
+| [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) | Newly added | This variable controls whether to use enhanced pessimistic locking wake-up model for pessimistic transactions. The default value `OFF` means not to use such a wake-up model for pessimistic transactions by default. |
 | [`tidb_stmt_summary_enable_persistent`](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660) | Newly added | This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660). |
 | [`tidb_stmt_summary_filename`](/system-variables.md#tidb_stmt_summary_filename-new-in-v660) | Newly added | This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660). |
 | [`tidb_stmt_summary_file_max_backups`](/system-variables.md#tidb_stmt_summary_file_max_backups-new-in-v660) | Newly added | This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660). |
