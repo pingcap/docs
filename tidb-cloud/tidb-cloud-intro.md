@@ -144,6 +144,14 @@ TiDB Cloud provides the following deployment options:
 
 <RelatedResources>
   <ResourceCard
+    title="TiDB Cloud in 3 Minutes"
+    type="video"
+    link="https://www.youtube.com/watch?v=skCV9BEmjbo"
+    imgSrc="https://i.ytimg.com/vi/skCV9BEmjbo/hqdefault.jpg"
+    author="PingCAP"
+    duration="3 mins"
+  />
+  <ResourceCard
     title="TiDB Cloud Premium Public Preview: Predictable Performance, Elastic Scale, Enterprise Isolation"
     type="blog"
     link="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
@@ -158,13 +166,5 @@ TiDB Cloud provides the following deployment options:
     imgSrc="https://static.pingcap.com/files/2025/10/14065646/tidb_1200x627-2-1.png"
     author="Liya Du"
     date="2025-10-14"
-  />
-  <ResourceCard
-    title="TiDB Cloud in 3 Minutes"
-    type="video"
-    link="https://www.youtube.com/watch?v=skCV9BEmjbo"
-    imgSrc="https://i.ytimg.com/vi/skCV9BEmjbo/hqdefault.jpg"
-    author="PingCAP"
-    duration="3 mins"
   />
 </RelatedResources>
