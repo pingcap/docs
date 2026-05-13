@@ -280,8 +280,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| `log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
-| `sql_log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
+| `log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
+| `sql_log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [global index](/global-indexes.md) is enabled by default. You only need to add the keyword `GLOBAL` to the corresponding column when executing `CREATE TABLE` or `ALTER TABLE` to create a global index. |
 | [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [list partitioning](/partitioned-table.md#list-partitioning) is enabled by default. |
 | [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default. |
@@ -318,7 +318,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | PD | [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) | Modified | Changes the default value from `200000` to `540000`. |
 | PD | [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) | Modified | Changes the default value from `20` to `54`. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md) | Modified | Changes the default TiFlash storage format version from `5` to `7` to support vector index creation and storage. Due to this format change, TiFlash clusters upgraded to v8.4.0 or a later version do not support in-place downgrading to earlier versions. |
-| TiDB Binlog | `--enable-binlog` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This parameter controls whether to enable TiDB binlog generation or not, and is deleted starting from v8.4.0. |
+| TiDB Binlog | `--enable-binlog` | Deleted | In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. This parameter controls whether to enable TiDB binlog generation or not, and is deleted starting from v8.4.0. |
 | TiCDC | [`claim-check-raw-value`](/ticdc/ticdc-sink-to-kafka.md#send-the-value-field-to-external-storage-only) | Newly added | Controls whether TiCDC sends only the `value` field of Kafka messages to external storage. This feature is only applicable to non-Open Protocol scenarios. |
 | TiDB Lightning | [`logical-import-prep-stmt`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve performance. The default value is `false`. |
 | BR | [`--log.crypter.key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the encryption key in hexadecimal string format for log backup data. It is a 128-bit (16 bytes) key for the algorithm `aes128-ctr`, a 24-byte key for the algorithm `aes192-ctr`, and a 32-byte key for the algorithm `aes256-ctr`. |
@@ -347,7 +347,7 @@ Before upgrading TiDB, ensure that your operating system version meets the [OS a
 
 * The following features are removed starting from v8.4.0:
 
-    * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
+    * In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
 
 * The following features are planned for removal in future versions:
 
