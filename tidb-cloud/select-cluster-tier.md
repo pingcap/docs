@@ -30,11 +30,6 @@ The free plan is ideal for those who are getting started with {{{ .starter }}}. 
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
-> **Note:**
->
-> - To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Agent Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances in total, with each [branch](/tidb-cloud/branch-overview.md) counted as a separate instance. To learn more and apply for the Agent Plan, fill out the [application form](https://www.pingcap.com/agent-plan/).
-> - You will receive an email notification once your application for the Agent Plan is approved. You will also be notified via email and the TiDB Cloud console when the total number of free {{{ .starter }}} instances (including branches) in your organization reaches 80 and 100.
-
 ### Usage quota
 
 For each organization in TiDB Cloud, you can create a maximum of five free {{{ .starter }}} instances by default. To create more {{{ .starter }}} instances, you need to add a credit card and specify a spending limit.
@@ -50,6 +45,12 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a {{{ .starter }}} instance exceeds 5 GiB for a free {{{ .starter }}} instance, the instance automatically restricts any new connection attempts.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+
+### Agent Plan
+
+To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Agent Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances in total, with each [branch](/tidb-cloud/branch-overview.md) counted as a separate instance. To learn more and apply for the Agent Plan, fill out the [application form](https://www.pingcap.com/agent-plan/).
+
+You will receive an email notification once your application for the Agent Plan is approved. You will also be notified via email and the TiDB Cloud console when the total number of free {{{ .starter }}} instances (including branches) in your organization reaches 80 and 100.
 
 ## {{{ .essential }}} {#essential}
 
