@@ -101,6 +101,8 @@ TiDB Cloud 控制台在[**诊断**](/tidb-cloud/tune-performance.md#view-the-dia
 
 有关如何定位和解决事务冲突的更多信息，请参见[排查锁冲突问题](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts#排查锁冲突问题)。
 
+<CustomContent plan="starter,essential,dedicated">
+
 ### 热点问题
 
 你可以使用 [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) 分析热点问题。
@@ -123,3 +125,5 @@ TiDB Cloud 控制台在[**诊断**](/tidb-cloud/tune-performance.md#view-the-dia
 在 X 轴和 Y 轴明暗交替的情况下，都需要解决读写压力。
 
 有关 SQL 性能优化的更多信息，请参见 SQL 常见问题中的 [SQL 优化](https://docs.pingcap.com/tidb/stable/sql-faq#sql-优化)。
+
+</CustomContent>

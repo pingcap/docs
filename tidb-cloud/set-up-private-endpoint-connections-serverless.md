@@ -53,7 +53,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 
     > **注意：**
     >
-    > 每个 AWS 区域只需创建一个私有端点，该端点可供位于同一区域的所有 {{{ .starter }}} 或 {{{ .essential }}} 实例共享。
+    > 对于 AWS 区域中的每个 VPC，你只需创建一个私有端点。该端点可供该 AWS 区域中同一 VPC 内的所有 {{{ .starter }}} 或 {{{ .essential }}} 实例使用，但不能跨 VPC 共享。
 
 ### Step 2. 创建 AWS interface 端点
 
@@ -141,7 +141,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 >
 > 如果你无法连接到 {{{ .starter }}} 或 Essential 实例，原因可能是 AWS 中 VPC 端点的安全组设置不正确。请参见[此常见问题](#troubleshooting)获取解决方案。
 >
-> 创建 VPC 端点时，如果遇到错误 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`，说明已经创建了一个私有端点，无需再创建新的端点。
+> 创建 VPC 端点时，如果遇到错误 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`，说明该 VPC 中已存在一个私有端点。对于相同的私有 DNS 名称，你无需再创建另一个端点。
 
 ## 故障排查
 

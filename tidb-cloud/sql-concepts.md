@@ -5,7 +5,7 @@ summary: 了解 TiDB 的 SQL 概念。
 
 # SQL
 
-TiDB 高度兼容 MySQL 协议以及 MySQL 5.7 和 MySQL 8.0 的常用功能和语法。MySQL 的生态工具（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver 和[更多](https://docs.pingcap.com/tidb/v7.2/dev-guide-third-party-support#gui)）和 MySQL 客户端都可以用于 TiDB。
+TiDB 高度兼容 MySQL 协议以及 MySQL 5.7 和 MySQL 8.0 的常用功能和语法。MySQL 的生态工具（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver 和[更多](/develop/dev-guide-third-party-support.md#gui)）和 MySQL 客户端都可以用于 TiDB。
 
 然而，TiDB 不支持 MySQL 的某些功能。这可能是因为现在有更好的方法来解决问题（比如使用 JSON 而不是 XML 函数），或者是当前需求相对于所需努力较小（比如存储过程和函数）。此外，某些功能在分布式系统中可能难以实现。更多信息，请参见 [MySQL 兼容性](/mysql-compatibility.md)。
 

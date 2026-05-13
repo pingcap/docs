@@ -14,6 +14,7 @@ TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支
 欲了解更多信息，请参见以下内容：
 
 - [TiDB Cloud Starter 和 TiDB Cloud Essential 实例的自动备份](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+- [TiDB Cloud Premium 实例的自动备份](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backups)
 - [TiDB Cloud Dedicated 集群的自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## 手动备份

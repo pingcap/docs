@@ -9,6 +9,7 @@ TiDB Cloud 提供多种部署选项，具备灵活的可扩展性，以满足不
 
 - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 非常适合原型开发、开发环境和早期阶段的工作负载。它为你提供了一种简化且具性价比的方式来快速上手 TiDB Cloud，并内置了自动扩缩容功能。
 - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 适用于需要更强可扩展性和在流量或数据量增长时依然保持可预测性能的生产级工作负载。
+- [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 专为需要无限实时扩展能力的关键业务而设计。它提供工作负载感知的自动扩缩容和全面的企业级能力。
 - TiDB Cloud Dedicated 允许你分别调整计算和存储资源，以适应数据量或工作负载的变化。TiDB Cloud Dedicated 可以在不中断服务的情况下进行扩缩容。这种灵活性使组织能够在保持高性能和高可用性的同时，优化基础设施成本。
 
 > **Tip:**

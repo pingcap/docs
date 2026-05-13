@@ -71,7 +71,7 @@ summary: 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
 
 > **注意：**
 >
-> 此方法仅适用于 TiDB Cloud Starter 和 TiDB Cloud Essential 实例。如果你想连接 TiDB Cloud Dedicated 集群，请使用[手动方法](#connect-via-manually-setting-environment-variables)。
+> 此方法仅适用于 TiDB Cloud Starter 和 TiDB Cloud Essential 实例。如果你想连接 TiDB Cloud Dedicated 集群或 TiDB Cloud Premium 实例，请使用[手动方法](#connect-via-manually-setting-environment-variables)。
 
 ### 集成流程
 
