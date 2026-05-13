@@ -13,7 +13,7 @@ Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `T
 
 <CustomContent platform="tidb-cloud">
 
-Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/v8.0/tidb-configuration-file#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
+Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
 
 </CustomContent>
 
