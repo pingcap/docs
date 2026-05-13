@@ -165,5 +165,6 @@ TiDB Cloud provides the following deployment options:
     link="https://www.youtube.com/watch?v=skCV9BEmjbo"
     imgSrc="https://i.ytimg.com/vi/skCV9BEmjbo/hqdefault.jpg"
     author="PingCAP"
+    duration="3 mins"
   />
 </RelatedResources>

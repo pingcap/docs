@@ -77,5 +77,6 @@ The following video introduces key features of TiDB.
     link="https://www.youtube.com/watch?v=aWBNNPm21zg"
     imgSrc="https://i.ytimg.com/vi/aWBNNPm21zg/hqdefault.jpg"
     author="PingCAP"
+    duration="2 mins"
   />
 </RelatedResources>
