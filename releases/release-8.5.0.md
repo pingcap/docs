@@ -442,8 +442,4 @@ We would like to thank the following contributors from the TiDB community:
 - [chagelo](https://github.com/chagelo) (First-time contributor)
 - [LindaSummer](https://github.com/LindaSummer)
 - [songzhibin97](https://github.com/songzhibin97)
-<<<<<<< HEAD
-- [Hexilee](https://github.com/Hexilee) 
-=======
 - [Hexilee](https://github.com/Hexilee)
->>>>>>> 6faf18c558 (Fix stale versioned docs links (#22875))
