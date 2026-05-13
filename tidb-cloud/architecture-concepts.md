@@ -42,7 +42,8 @@ TiDB Cloud makes it easy to scale your database, handle complex management tasks
 
 The Starter plan is ideal for those who are getting started with TiDB Cloud. It provides developers and small teams with the following features:
 
-- **No cost**: This plan is completely free within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
+- **No cost**: This plan is free when usage is within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
+
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
