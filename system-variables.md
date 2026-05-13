@@ -4008,6 +4008,70 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Threads
 - This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid and the maximum concurrency depends on the setting of the TiFlash configuration `profiles.default.max_threads`. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
 
+### `tidb_mem_arbitrator_mode` <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental and is not recommended for use in the production environment. This feature might be changed or removed without prior notice. If you encounter any bugs, report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Is controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enum
+- Default value: `disable`
+- Possible values: `disable`, `standard`, `priority`
+- This variable sets the memory management mode of a TiDB instance. For details, see [TiDB memory control](/configure-memory-usage.md#memory-arbitration-mode). The following values are supported:
+    - `disable` (default): Disables memory arbitration mode and keeps the mechanism of [use first and report later](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+    - `standard`: Enables standard memory arbitration mode. When SQL needs to use memory resources, it first subscribes to the memory arbitrator and allocates memory resources only after the subscription succeeds. If the subscription fails, the SQL execution is terminated.
+    - `priority`: Enables priority-based memory arbitration mode. When SQL needs to use memory resources, it first subscribes to the memory arbitrator and allocates memory resources only after the subscription succeeds. TiDB handles memory resource subscription requests according to the SQL [resource group priority](/information-schema/information-schema-resource-groups.md).
+
+### `tidb_mem_arbitrator_query_reserved` <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental and is not recommended for use in the production environment. This feature might be changed or removed without prior notice. If you encounter any bugs, report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION
+- Is controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Integer
+- Default value: `0`
+- Unit: Bytes
+- Range: `[0, 9223372036854775807]`
+- When [memory arbitration mode](/configure-memory-usage.md#memory-arbitration-mode) is enabled, this variable controls the amount of memory resources that SQL pre-subscribes to from the memory arbitrator before execution. For details, see [TiDB memory control](/configure-memory-usage.md#manually-ensuring-memory-safety).
+
+### `tidb_mem_arbitrator_soft_limit` <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental and is not recommended for use in the production environment. This feature might be changed or removed without prior notice. If you encounter any bugs, report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Is controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `0`
+- Possible values: `0`, floating-point number `(0, 1]`, integer `(1, 9223372036854775807]`
+- When [memory arbitration mode](/configure-memory-usage.md#memory-arbitration-mode) is enabled, this variable controls the upper limit of memory resources that the arbitrator can allocate in a TiDB instance. For details, see [TiDB memory control](/configure-memory-usage.md#manually-ensuring-memory-safety).
+    - `0`: The default upper limit of memory resources is `95%` of the value of [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)
+    - Floating-point number `(0, 1]`: Specifies the upper limit of memory resources as a ratio relative to [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640). For example, `0.8` means the upper limit of memory resources is `tidb_server_memory_limit * 0.8`.
+    - Integer `(1, 9223372036854775807]`: Specifies the number of bytes
+
+### `tidb_mem_arbitrator_wait_averse` <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental and is not recommended for use in the production environment. This feature might be changed or removed without prior notice. If you encounter any bugs, report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION
+- Is controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enum
+- Default value: `0`
+- Possible values: `0`, `1`, `nolimit`
+- When [memory arbitration mode](/configure-memory-usage.md#memory-arbitration-mode) is enabled, this variable controls the behavior of SQL when waiting for memory resources. For details, see [TiDB memory control](/configure-memory-usage.md#memory-arbitration-mode).
+    - `0` (default): Disables this feature, and the variable does not take effect
+    - `1`: Takes effect only in `priority` mode. SQL is automatically bound to high priority when subscribing to memory resources. When global memory resources are insufficient, the SQL execution is terminated instead of being blocked waiting.
+    - `nolimit`: The memory usage of SQL is not limited by the arbitrator. This value might increase the risk of OOM on the TiDB instance.
+
 ### tidb_mem_oom_action <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL

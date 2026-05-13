@@ -208,8 +208,6 @@ The following example uses a memory-consuming SQL statement to demonstrate the d
     9 rows in set (1 min 37.428 sec)
     ```
 
-## Others
-
 ### Mitigate OOM issues by configuring `GOMEMLIMIT`
 
 GO 1.19 introduces an environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) to set the memory limit that triggers GC.
@@ -227,3 +225,145 @@ To verify the performance of `GOMEMLIMIT`, a test is performed to compare the sp
 - In TiDB v6.1.3, `GOMEMLIMIT` is set to 40000 MiB. It is found that the simulated workload runs stably for a long time, OOM does not occur in the TiDB server, and the maximum memory usage of the process is stable at around 40.8 GiB:
 
     ![v6.1.3 workload no oom with GOMEMLIMIT](/media/configure-memory-usage-613-no-oom.png)
+
+## Memory arbitrator mode
+
+In versions earlier than TiDB v9.0.0, the [memory control mechanism](#how-to-configure-the-memory-usage-threshold-of-a-tidb-server-instance) had the following issues:
+
+- When the memory usage of a TiDB instance exceeded the limit, TiDB might randomly terminate running SQL statements.
+- Memory resources were used first and then reported, and memory usage information was isolated between different SQL statements, making it difficult for TiDB to uniformly schedule and control memory resources at the instance level.
+- Under high memory pressure, the overhead of Go garbage collection (Garbage Collection, GC) increased significantly, and in severe cases could lead to out of memory (OOM) issues.
+
+Starting from v9.0.0, TiDB introduces memory arbitrator mode. This mode introduces a global memory arbitrator in each TiDB instance to centrally manage and schedule the memory resources of the instance from top to bottom, mitigating the preceding issues.
+
+> **Warning:**
+>
+> This feature is experimental and is not recommended for use in the production environment. This feature might be changed or removed without prior notice. If you find a bug, report it by submitting an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+You can enable memory arbitrator mode using the [`tidb_mem_arbitrator_mode`](/system-variables.md#tidb_mem_arbitrator_mode-introduced-in-v900) system variable or the `instance.tidb_mem_arbitrator_mode` parameter in the TiDB configuration file.
+
+- `disable`: disables memory arbitrator mode
+
+- `standard` or `priority`: enables memory arbitrator mode. After it is enabled:
+    - Memory resources are used with a subscribe-before-allocation mechanism and are uniformly scheduled by the memory arbitrator in each TiDB instance
+    - The overall memory usage of the TiDB instance is expected not to exceed the limit of [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-introduced-in-v640), and the [alarm for high memory usage](#alarm-for-high-memory-usage-of-tidb-server) no longer takes effect
+    - The control behavior of the following system variables remains effective:
+        - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-introduced-in-v610)
+        - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
+        - [`max_execution_time`](/system-variables.md#max_execution_time)
+
+When memory resources are insufficient or there is an OOM risk, the arbitrator can reclaim memory resources by terminating SQL, but it does not terminate `DDL`, `DCL`, or `TCL` SQL types. Terminated SQL returns error code `8180` to the client. The error format is: `Query execution was stopped by the global memory arbitrator [reason=?, path=?] [conn=?]`. The related fields are explained as follows:
+
+- `conn`: connection (session) ID
+- `reason`: the specific reason why the SQL was terminated
+- `path`: the stage at which the SQL was terminated (if the error does not contain the `path` field, the SQL was terminated during the execution stage)
+    - `ParseSQL`: parsing
+    - `CompilePlan`: compiling the execution plan
+
+Memory arbitrator mode pools the arbitrable memory resources in each TiDB instance. The memory resources corresponding to `tidb_server_memory_limit` are divided into the following four categories, which can be viewed through the `Mem Quota Stats` monitoring metric:
+
+- `allocated`: allocated memory quota, including but not limited to the memory pool to which the SQL belongs and the memory pools of various public modules
+- `available`: allocatable memory quota
+- `buffer`: memory quota of the buffer
+- `out-of-control`: memory quota not controlled by the arbitrator, including but not limited to:
+    - unsafe or disabled memory
+    - memory waiting for garbage collection
+    - memory used by the Go runtime
+    - other untracked memory usage
+
+`out-of-control` is a risk metric that requires special attention. It is dynamically calculated by the arbitrator, with a minimum value of `tidb_server_memory_limit - tidb_mem_arbitrator_soft_limit`. The arbitrator quantifies this type of risky memory quota as accurately as possible and reserves space for it during memory allocation, thereby reducing the risk of OOM in the TiDB instance.
+
+### `standard` mode
+
+In `standard` mode, during SQL execution, SQL dynamically subscribes to memory resources from the arbitrator and blocks to wait when resources are insufficient. The arbitrator processes subscription requests on a first in, first out (FIFO) basis.
+
+- When parsing SQL or compiling the execution plan, the required memory quota is estimated by TiDB and is proportional to the number of SQL keywords.
+- If global memory resources are insufficient, the arbitrator fails the subscription request and terminates the SQL. The `reason` field in the returned error is `CANCEL(out-of-quota & standard-mode)`.
+
+### `priority` mode
+
+In `priority` mode, during SQL execution, SQL dynamically subscribes to memory resources from the arbitrator and blocks to wait when resources are insufficient. The arbitrator processes subscription requests according to the [resource group priority](/information-schema/information-schema-resource-groups.md) (`LOW | MEDIUM | HIGH`) to which the SQL belongs.
+
+- When parsing SQL or compiling the execution plan, the required memory quota is estimated by TiDB and is proportional to the number of SQL keywords. Unlike `standard` mode, in `priority` mode, unless there is an `OOM` risk, a failed subscription does not immediately terminate the SQL.
+- The arbitrator processes subscription requests in descending order of priority. Requests with the same priority are queued in the order they are initiated.
+- When global memory resources are insufficient:
+    - The arbitrator terminates lower-priority SQL in order (from lower to higher priority, and from larger to smaller memory quota usage) to reclaim resources for higher-priority SQL. The `reason` field in the returned error is `CANCEL(out-of-quota & priority-mode)`.
+    - If there is no terminable SQL, the subscription request continues to wait until an existing SQL finishes execution and releases resources.
+
+If you want SQL to avoid the latency overhead caused by waiting for memory resources, you can set the [`tidb_mem_arbitrator_wait_averse`](/system-variables.md#tidb_mem_arbitrator_wait_averse-introduced-in-v900) system variable to `1`.
+
+- The subscription requests of the related SQL are automatically bound to priority `HIGH`.
+- When global memory resources are insufficient, the arbitrator directly terminates the related SQL, and the `reason` field in the returned error is `CANCEL(out-of-quota & wait-averse)`.
+
+### Memory risk control
+
+When the memory usage of a TiDB instance reaches the `95%` threshold of `tidb_server_memory_limit`, the arbitrator starts handling memory risks. If the actual memory usage cannot be reduced to a safe level in the short term or the actual memory release rate is too low, the TiDB instance faces an `OOM` risk. The arbitrator forcibly terminates SQL in order (from lower to higher priority, and from larger to smaller memory quota usage), and the `reason` field in the returned error is `KILL(out-of-memory)`.
+
+If you need to force SQL to run when memory resources are insufficient, you can set the [`tidb_mem_arbitrator_wait_averse`](/system-variables.md#tidb_mem_arbitrator_wait_averse-introduced-in-v900) system variable to `nolimit`. This variable makes the memory usage of the related SQL unrestricted by the arbitrator, but it might cause the TiDB instance to `OOM`.
+
+### Manually ensuring memory safety
+
+You can set the upper limit of the arbitrator's memory quota in a TiDB instance using the [`tidb_mem_arbitrator_soft_limit`](/system-variables.md#tidb_mem_arbitrator_soft_limit-introduced-in-v900) system variable or the `instance.tidb_mem_arbitrator_soft_limit` parameter in the TiDB configuration file. The smaller the upper limit, the safer the global memory, but the lower the memory resource utilization. This variable can be used to manually and quickly converge memory risks.
+
+TiDB internally caches the historical maximum memory usage of some SQL statements and pre-subscribes sufficient memory quota before the next execution of the SQL. If it is known that a SQL statement has a problem of a large amount of uncontrolled memory usage, you can use the [`tidb_mem_arbitrator_query_reserved`](/system-variables.md#tidb_mem_arbitrator_query_reserved-introduced-in-v900) system variable to specify the quota subscribed by the SQL. The larger the value, the safer the global memory, but the lower the memory resource utilization. Pre-subscribing sufficient or excess quota can effectively ensure the isolation of memory resources for SQL.
+
+### Monitoring and observability metrics
+
+The `TiDB / Memory Arbitrator` panel is added to `Grafana` monitoring, containing the following metrics:
+
+- `Work Mode`: the memory management mode of the TiDB instance
+- `Arbitration Exec`: statistics on the arbitrator processing various requests
+- `Events`: statistics on various events in arbitrator mode. Pay special attention to `mem-risk` (memory risk) and `oom-risk` (`OOM` risk)
+- `Mem Quota Stats`: usage of various memory quotas. Pay special attention to `out-of-control`, `wait-alloc` (total memory quota waiting for allocation), and `mem-inuse` (actual memory usage)
+- `Mem Quota Arbitration`: processing time of memory resource subscription requests
+- `Mem Pool Stats`: the number of various memory pools
+- `Runtime Mem Pressure`: memory pressure value, that is, the ratio of actual memory usage to allocated memory quota
+- `Waiting Tasks`: the number of various tasks queued and waiting for memory allocation
+
+[`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) adds the `Mem_arbitration` field, which indicates the total time that SQL waits for memory resources. The `Mem Arbitration` column on the [TiDB Dashboard slow query page](/dashboard/dashboard-slow-query.md) also displays this information.
+
+[`PROCESSLIST`](/information-schema/information-schema-processlist.md) adds the following fields:
+
+- `MEM_ARBITRATION`: the total time that SQL has waited for memory resources so far
+- `MEM_WAIT_ARBITRATE_START`: the start time of the current memory resource subscription request. If there is currently no waiting subscription request, the value is NULL
+- `MEM_WAIT_ARBITRATE_BYTES`: the requested bytes of the current memory resource subscription request. If there is currently no waiting subscription request, the value is NULL
+
+[`Expensive query`](/identify-expensive-queries.md) adds the `mem_arbitration` field to record the time that SQL waits for memory resources and the information of the current subscription request, for example:
+
+- `cost_time 2.1s, wait_start 1970-01-02 10:17:36.789 UTC, wait_bytes 123456789123 Bytes (115.0 GB)`
+
+[`STATEMENTS_SUMMARY`](/statement-summary-tables.md): the `statements_summary`, `statements_summary_history`, `cluster_statements_summary`, and `cluster_statements_summary_history` tables add the following fields. The `Mean Mem Arbitration` column on the [TiDB Dashboard SQL statement analysis execution details page](/dashboard/dashboard-statement-list.md) also displays this information:
+
+- `AVG_MEM_ARBITRATION`: the average time that SQL waits for memory resources
+- `MAX_MEM_ARBITRATION`: the maximum time that SQL waits for memory resources
+
+### Best practices
+
+The default value `80%` of the `tidb_server_memory_limit` system variable is relatively small. After enabling memory arbitrator mode, it is recommended to set it to `95%`.
+
+In single-node TiDB deployment scenarios:
+
+- If `priority` mode is enabled, it is recommended to bind OLTP-related SQL or business-critical SQL to high-priority resource groups, and bind other SQL to medium-priority or low-priority resource groups as needed
+- If `standard` mode is enabled and SQL returns error `8180`, it is recommended to retry the SQL after waiting for a period of time
+
+In multi-node TiDB deployment scenarios:
+
+- If `standard` mode is enabled and SQL returns error `8180`, it is recommended to retry the SQL on another TiDB node
+
+- If `priority` mode is enabled:
+    - It is recommended to bind OLTP-related SQL or business-critical SQL to high-priority resource groups, and bind other SQL to medium-priority or low-priority resource groups as needed
+    - Use `max_execution_time` to limit the maximum execution time of SQL
+    - If a timeout or error `8180` occurs, it is recommended to retry the SQL on another TiDB node
+    - If you want SQL to fail quickly when memory resources are insufficient and then be retried on another node, you can set `tidb_mem_arbitrator_wait_averse`
+
+- TiDB instance grouping
+    - In each group, use the `instance.tidb_mem_arbitrator_mode` parameter in the configuration file to set the memory management mode of TiDB instances
+    - In each group, use the `instance.tidb_mem_arbitrator_soft_limit` parameter in the configuration file to set the upper limit of the memory quota of TiDB instances as needed
+    - Distribute SQL to different instance groups according to business requirements, and handle SQL failures or retries based on the arbitrator mode of each instance group
+
+You can take the following measures to ensure the execution of important SQL:
+
+- Use `tidb_mem_arbitrator_query_reserved` to pre-subscribe memory quota for important SQL, enhancing its memory resource isolation.
+- Bind important SQL to high-priority resource groups.
+- Set `tidb_mem_quota_query` to a larger value to reduce the probability that a single SQL is interrupted because it exceeds the memory quota.
+- If you can accept the OOM risk, set `tidb_mem_arbitrator_wait_averse` to `nolimit` so that the related SQL bypasses the memory arbitrator limitation.
