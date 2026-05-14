@@ -78,8 +78,6 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 </CustomContent>
 
-<CustomContent plan="essential">
-
 ### 阿里云 RDS 的限制
 
 使用阿里云 RDS 作为数据源时，每个表必须有显式主键。对于没有主键的表，RDS 会在 binlog 中追加隐藏主键，导致与源表结构不一致，进而导致迁移失败。
@@ -89,8 +87,6 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 在全量数据迁移过程中，PolarDB-X 的 schema 可能包含下游数据库不兼容的关键字，导致导入失败。
 
 为避免此问题，请在迁移前先在下游数据库中创建目标表。
-
-</CustomContent>
 
 ### 现有数据迁移的限制
 
