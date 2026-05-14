@@ -4020,10 +4020,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Enum
 - Default value: `disable`
 - Possible values: `disable`, `standard`, `priority`
-- This variable sets the memory management mode of a TiDB instance. For more information, see [TiDB memory control](/configure-memory-usage.md#memory-arbitration-mode). The following values are supported:
-    - `disable` (default): Disables memory arbitration mode and keeps the mechanism of [use first and report later](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-    - `standard`: Enables standard memory arbitration mode. When SQL needs to use memory resources, it first subscribes to the memory arbitrator and allocates memory resources only after the subscription succeeds. If the subscription fails, the SQL execution is terminated.
-    - `priority`: Enables priority-based memory arbitration mode. When SQL needs to use memory resources, it first subscribes to the memory arbitrator and allocates memory resources only after the subscription succeeds. TiDB handles memory resource subscription requests according to the SQL [resource group priority](/information-schema/information-schema-resource-groups.md).
+- This variable sets the memory management mode of a TiDB instance. For more information, see [TiDB memory control](/configure-memory-usage.md#memory-arbitrator-mode). The following values are supported:
+    - `disable` (default): Disables memory arbitrator mode and keeps the mechanism of [use first and report later](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+    - `standard`: Enables standard memory arbitrator mode. When SQL needs to use memory resources, it first subscribes to the memory arbitrator and allocates memory resources only after the subscription succeeds. If the subscription fails, the SQL execution is terminated.
+    - `priority`: Enables priority-based memory arbitrator mode. When SQL needs to use memory resources, it first subscribes to the memory arbitrator and allocates memory resources only after the subscription succeeds. TiDB handles memory resource subscription requests according to the SQL [resource group priority](/information-schema/information-schema-resource-groups.md).
 
 ### `tidb_mem_arbitrator_query_reserved` <span class="version-mark">New in v9.0.0</span>
 
@@ -4037,7 +4037,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `0`
 - Unit: Bytes
 - Range: `[0, 9223372036854775807]`
-- When [memory arbitration mode](/configure-memory-usage.md#memory-arbitration-mode) is enabled, this variable controls the amount of memory resources that SQL pre-subscribes to from the memory arbitrator before execution. For more information, see [TiDB memory control](/configure-memory-usage.md#manually-ensuring-memory-safety).
+- When [memory arbitrator mode](/configure-memory-usage.md#memory-arbitrator-mode) is enabled, this variable controls the amount of memory resources that SQL pre-subscribes to from the memory arbitrator before execution. For more information, see [TiDB memory control](/configure-memory-usage.md#manually-ensuring-memory-safety).
 
 ### `tidb_mem_arbitrator_soft_limit` <span class="version-mark">New in v9.0.0</span>
 
@@ -4051,7 +4051,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: String
 - Default value: `0`
 - Possible values: `0`, floating-point number `(0, 1]`, integer `(1, 9223372036854775807]`
-- When [memory arbitration mode](/configure-memory-usage.md#memory-arbitration-mode) is enabled, this variable controls the upper limit of memory resources that the arbitrator can allocate in a TiDB instance. For more information, see [TiDB memory control](/configure-memory-usage.md#manually-ensuring-memory-safety).
+- When [memory arbitrator mode](/configure-memory-usage.md#memory-arbitrator-mode) is enabled, this variable controls the upper limit of memory resources that the arbitrator can allocate in a TiDB instance. For more information, see [TiDB memory control](/configure-memory-usage.md#manually-ensuring-memory-safety).
     - `0`: The default upper limit of memory resources is `95%` of the value of [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)
     - Floating-point number `(0, 1]`: Specifies the upper limit of memory resources as a ratio relative to [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640). For example, `0.8` means the upper limit of memory resources is `tidb_server_memory_limit * 0.8`.
     - Integer `(1, 9223372036854775807]`: Specifies the number of bytes
@@ -4067,7 +4067,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Enum
 - Default value: `0`
 - Possible values: `0`, `1`, `nolimit`
-- When [memory arbitration mode](/configure-memory-usage.md#memory-arbitration-mode) is enabled, this variable controls the behavior of SQL when waiting for memory resources. For more information, see [TiDB memory control](/configure-memory-usage.md#memory-arbitration-mode).
+- When [memory arbitrator mode](/configure-memory-usage.md#memory-arbitrator-mode) is enabled, this variable controls the behavior of SQL when waiting for memory resources. For more information, see [TiDB memory control](/configure-memory-usage.md#memory-arbitrator-mode).
     - `0` (default): Disables this feature, and the variable does not take effect
     - `1`: Takes effect only in `priority` mode. SQL is automatically bound to high priority when subscribing to memory resources. When global memory resources are insufficient, the SQL execution is terminated instead of being blocked waiting.
     - `nolimit`: The memory usage of SQL is not limited by the arbitrator. This value might increase the risk of OOM on the TiDB instance.

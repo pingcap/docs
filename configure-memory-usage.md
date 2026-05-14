@@ -228,7 +228,7 @@ To verify the performance of `GOMEMLIMIT`, a test is performed to compare the sp
 
 ## Memory arbitrator mode
 
-Before TiDB v9.0.0, the [memory control mechanism](#how-to-configure-the-memory-usage-threshold-of-a-tidb-server-instance) has the following issues:
+Before TiDB v9.0.0, the [memory control mechanism](#configure-the-memory-usage-threshold-of-a-tidb-server-instance) has the following issues:
 
 - When the memory usage of a TiDB instance exceeds the limit, TiDB might randomly terminate running SQL statements.
 - Memory resources follow a “use-then-report” mechanism, and memory usage is isolated across different SQL statements. As a result, TiDB cannot centrally schedule or control memory resources at the instance level.
@@ -240,13 +240,13 @@ Starting from v9.0.0, TiDB introduces memory arbitrator mode. This mode introduc
 >
 > This feature is experimental and is not recommended for use in the production environment. This feature might be changed or removed without prior notice. If you find a bug, report it by submitting an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-You can enable memory arbitrator mode using the [`tidb_mem_arbitrator_mode`](/system-variables.md#tidb_mem_arbitrator_mode-introduced-in-v900) system variable or the `instance.tidb_mem_arbitrator_mode` parameter in the TiDB configuration file.
+You can enable memory arbitrator mode using the [`tidb_mem_arbitrator_mode`](/system-variables.md#tidb_mem_arbitrator_mode-new-in-v900) system variable or the `instance.tidb_mem_arbitrator_mode` parameter in the TiDB configuration file.
 
 - `disable`: disables memory arbitrator mode
 
 - `standard` or `priority`: enables memory arbitrator mode. After it is enabled:
     - Memory resources are used with a subscribe-before-allocation mechanism and are uniformly scheduled by the memory arbitrator in each TiDB instance.
-    - The overall memory usage of the TiDB instance is expected not to exceed the limit of [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640), and the [alarm for high memory usage](#alarm-for-high-memory-usage-of-tidb-server) no longer takes effect.
+    - The overall memory usage of the TiDB instance is expected not to exceed the limit of [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640), and the [alarm for high memory usage](#trigger-the-alarm-of-excessive-memory-usage) no longer takes effect.
     - The behavior of the following system variables remains effective:
         - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
         - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
