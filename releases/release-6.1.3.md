@@ -30,7 +30,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   TiCDC
 
         -   Enable transaction split and disable the safe mode of a changefeed in TiCDC by default to improve performance [＃7505](https://github.com/pingcap/tiflow/issues/7505) @ [asddongmen](https://github.com/asddongmen)
-        -   Kafka プロトコル エンコーダー[#7540](https://github.com/pingcap/tiflow/issues/7540) @ [＃7543](https://github.com/pingcap/tiflow/issues/7543) @ [3AceShowHand](https://github.com/3AceShowHand) [＃7532](https://github.com/pingcap/tiflow/issues/7532)パフォーマンス[スドジ](https://github.com/sdojjy)向上
+        -   Kafka プロトコル エンコーダー[#7540](https://github.com/pingcap/tiflow/issues/7540) @ [＃7543](https://github.com/pingcap/tiflow/issues/7543) @ [3AceShowHand](https://github.com/3AceShowHand) [＃7532](https://github.com/pingcap/tiflow/issues/7532)パフォーマン[スドジ](https://github.com/sdojjy)向上
 
 -   その他
 

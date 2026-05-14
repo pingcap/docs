@@ -16,7 +16,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloud をNew Relic と統合するには、[ニューレリック](https://newrelic.com/)レリック アカウントと、 `Ingest - License`タイプの[New Relic APIキーを作成する](https://one.newrelic.com/admin-portal/api-keys/home?)必要があります。
+-   TiDB Cloud をNew Relic と統合するには、[ニューレリック](https://newrelic.com/) アカウントと、 `Ingest - License`タイプの[New Relic APIキーを作成する](https://one.newrelic.com/admin-portal/api-keys/home?)必要があります。
 
     New Relicのアカウントをお持ちでない場合は、[ここ](https://newrelic.com/signup)ご登録ください。
 
@@ -123,7 +123,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 <div label="Legacy project-level New Relic integration (Beta)">
 
 1.  [ニューレリック](https://one.newrelic.com/)にログインします。
-2.  **「データの追加」**をクリックし、 `TiDB Cloud`を検索して、 **TiDB Cloud監視**ページに移動します。または、 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)クリックして直接ページにアクセスすることもできます。
+2.  **「データの追加」**をクリックし、 `TiDB Cloud`を検索して、 **TiDB Cloud監視**ページに移動します。または、 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)リックして直接ページにアクセスすることもできます。
 3.  アカウントIDを選択し、New Relicでダッシュボードを作成してください。
 
 </div>

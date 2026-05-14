@@ -372,7 +372,7 @@ tikv_servers:
 
 -   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
--   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP TiUP以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
+-   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
 
 -   `flash_service_port` : TiFlashがサービスを提供するポート。TiDBはこのポートを介してTiFlashからデータを読み取ります。デフォルト値は`3930`です。
 
@@ -641,7 +641,7 @@ scheduling_servers:
 
 -   `host` : 監視サービスがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
--   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
+-   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
 
 -   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 

@@ -11,7 +11,7 @@ summary: TiUP DMの「import」コマンドは、DMクラスタをv1.0からv2.0
 
 </Note>
 
-DM v1.0では、クラスターは基本的にTiDB Ansibleを使用してデプロイされます。TiUP TiUP DMは、 v1.0クラスターをインポートし、DM v2.0に再デプロイするためのコマンド`import`を提供します。
+DM v1.0では、クラスターは基本的にTiDB Ansibleを使用してデプロイされます。TiUP DMは、 v1.0クラスターをインポートし、DM v2.0に再デプロイするためのコマンド`import`を提供します。
 
 > **注記：**
 >

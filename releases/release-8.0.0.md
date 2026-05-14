@@ -76,7 +76,7 @@ TiDB バージョン: 8.0.0
 
 -   実行プランのキャッシュに関するいくつかの制限を削除 [#49161](https://github.com/pingcap/tidb/pull/49161) @[mjonss](https://github.com/mjonss)@[qw4990](https://github.com/qw4990)
 
-    TiDBは[プランキャッシュ](/sql-prepared-plan-cache.md)キャッシュをサポートしており、OLTPシステムのレイテンシーを効果的に削減し、パフォーマンス向上に重要な役割を果たします。バージョン8.0.0では、TiDBはプランキャッシュに関するいくつかの制限を撤廃しました。以下の項目を含む実行プランをキャッシュできるようになりました。
+    TiDBは[プランキャッシュ](/sql-prepared-plan-cache.md)をサポートしており、OLTPシステムのレイテンシーを効果的に削減し、パフォーマンス向上に重要な役割を果たします。バージョン8.0.0では、TiDBはプランキャッシュに関するいくつかの制限を撤廃しました。以下の項目を含む実行プランをキャッシュできるようになりました。
 
     -   [パーティションテーブル](/partitioned-table.md)
     -   [生成された列](/generated-columns.md)(生成された列に依存するオブジェクト ( [多値インデックス](/choose-index.md#multi-valued-indexes-and-plan-cache)など) を含む)

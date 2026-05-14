@@ -22,7 +22,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 -   `IMPORT INTO`データベース内の既存の空のテーブルへのデータのインポートのみをサポートしています。
 -   `IMPORT INTO` 、同じテーブルの他のパーティションに既にデータが含まれている場合、空のパーティションへのデータインポートをサポートしていません。インポート操作を行うには、対象テーブルが完全に空である必要があります。
--   `IMPORT INTO`[一時テーブル](/temporary-tables.md)またはキャッシュ[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
+-   `IMPORT INTO`[一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
 -   `IMPORT INTO`トランザクションまたはロールバックをサポートしていません。明示的なトランザクション ( `IMPORT INTO` / { `BEGIN`内) で`END`を実行するとエラーが返されます。
 -   `IMPORT INTO` [バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加処理の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)、 TiDB Lightning を使用したデータ インポート、TiCDC を使用したデータ レプリケーション、または[特定時点復旧（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能との同時作業をサポートしていません。互換性の詳細については、 [TiDB Lightningと`IMPORT INTO`のTiCDCおよびログバックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)参照してください。
 -   データインポート処理中は、対象テーブルに対してDDLまたはDML操作を実行したり、対象データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)を実行したりしないでください。これらの操作は、インポートの失敗やデータの不整合を引き起こす可能性があります。また、インポート処理中に読み取り操作を実行することも推奨さ**れません**。読み取られるデータに不整合が生じる可能性があるためです。読み取りおよび書き込み操作は、インポートが完了した後にのみ実行してください。

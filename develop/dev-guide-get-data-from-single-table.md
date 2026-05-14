@@ -139,7 +139,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリ要求を処理できます。
 
-これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)インジェクションの潜在的なリスクが生じます。
+これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)の潜在的なリスクが生じます。
 
 このようなクエリに対処するには、通常のステートメントの代わりに[準備された声明](/develop/dev-guide-prepared-statement.md)を使用します。
 

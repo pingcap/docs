@@ -61,7 +61,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   準備されていないステートメントの実行プランのキャッシュをサポートする（実験的） [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
 
-    実行プラン キャッシュは同時 OLTP の負荷容量を向上させるために重要であり、TiDB はすでに[準備された実行プランキャッシュ](/sql-prepared-plan-cache.md)キャッシュをサポートしています。 v7.0.0 では、TiDB は非 Prepare ステートメントの実行プランをキャッシュすることもできるため、実行プラン キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
+    実行プラン キャッシュは同時 OLTP の負荷容量を向上させるために重要であり、TiDB はすでに[準備された実行プランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare ステートメントの実行プランをキャッシュすることもできるため、実行プラン キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
 
     この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) `ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では準備されていない実行プランをキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL ステートメントに関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)参照してください。
 
@@ -81,7 +81,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tikv-configuration-file.md#prefill-for-recycle-new-in-v700)を参照してください。
 
--   ウィンドウ[ウィンドウ関数](/functions-and-operators/expressions-pushed-down.md)からの TopN または Limit 演算子の導出をサポート [#13936](https://github.com/tikv/tikv/issues/13936) @[windtalker](https://github.com/windtalker)
+-   ウィンド[ウィンドウ関数](/functions-and-operators/expressions-pushed-down.md)からの TopN または Limit 演算子の導出をサポート [#13936](https://github.com/tikv/tikv/issues/13936) @[windtalker](https://github.com/windtalker)
 
     この機能はデフォルトでは無効になっています。有効にするには、セッション変数[tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) `ON`に設定してください。
 

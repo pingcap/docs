@@ -85,7 +85,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録] を**クリックします。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **[新しいコネクタの登録] を**クリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 

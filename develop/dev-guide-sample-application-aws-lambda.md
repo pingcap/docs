@@ -195,7 +195,7 @@ npm install
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
     ```
 
-接続が成功したことを確認したら、[次のセクション](#deploy-the-aws-lambda-function)セクションに従って AWS Lambda 関数をデプロイできます。
+接続が成功したことを確認したら、[次のセクション](#deploy-the-aws-lambda-function)に従って AWS Lambda 関数をデプロイできます。
 
 ## AWS Lambda関数をデプロイ {#deploy-the-aws-lambda-function}
 
@@ -277,7 +277,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
     # dist/index.zip
     ```
 
-2.  [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)コンソールにアクセスしてください。
+2.  [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)にアクセスしてください。
 
 3.  [Lambda関数の作成](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html)の手順に従って、Node.js Lambda 関数を作成します。
 
@@ -396,7 +396,7 @@ console.log(rsh.affectedRows);
 -   `mysql2`の使用法について詳しくは、 [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)ご覧ください。
 -   AWS Lambda の使用方法の詳細については[AWS `Lambda`の開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)ご覧ください。
 -   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
--   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+-   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 

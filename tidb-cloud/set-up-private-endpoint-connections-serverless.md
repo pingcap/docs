@@ -62,7 +62,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにプライベ
 
 AWS マネジメントコンソールを使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
 
-1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)コンソールにサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
+1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
 2.  ナビゲーションペインの**「エンドポイント」**をクリックし、右上隅の**「エンドポイントの作成」を**クリックします。
 
@@ -109,7 +109,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 そうすれば、プライベートDNS名を使ってエンドポイントサービスに接続できます。
 
-### ステップ3．TiDB TiDB Cloudでプライベートエンドポイントを認証する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
+### ステップ3．TiDB Cloudでプライベートエンドポイントを認証する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
 
 > **注記：**
 >
