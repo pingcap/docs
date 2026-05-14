@@ -13,7 +13,7 @@ summary: 了解 `TIDB_INDEX_USAGE` INFORMATION_SCHEMA 表。
 
 <CustomContent platform="tidb-cloud">
 
-从 v8.0.0 版本开始，TiDB 提供了 `TIDB_INDEX_USAGE` 表。你可以使用 `TIDB_INDEX_USAGE` 获取当前 TiDB 节点上所有索引的使用统计信息。默认情况下，TiDB 在执行 SQL 语句时会收集这些索引使用统计信息。你可以通过关闭 [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/v8.0/tidb-configuration-file#tidb_enable_collect_execution_info) 配置项或 [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) 系统变量来禁用此功能。
+从 v8.0.0 版本开始，TiDB 提供了 `TIDB_INDEX_USAGE` 表。你可以使用 `TIDB_INDEX_USAGE` 获取当前 TiDB 节点上所有索引的使用统计信息。默认情况下，TiDB 在执行 SQL 语句时会收集这些索引使用统计信息。你可以通过关闭 [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#tidb_enable_collect_execution_info) 配置项或 [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) 系统变量来禁用此功能。
 
 </CustomContent>
 

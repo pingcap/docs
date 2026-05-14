@@ -8,6 +8,24 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 5 月 12 日
+
+**常规变更**
+
+- **TiDB Cloud Premium**
+
+    - 在 [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) 的 **Metrics** 页面中新增 `AVG RU/s` 指标。
+
+        `AVG RU/s` 显示在所选时间范围内每秒消耗的 RU 平均数量，帮助你更好地了解资源消耗情况。
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已在 Microsoft Azure 的 **Japan East** 和 **East US 2** 区域正式发布（GA）。
+
+        它提供跨三个可用区的高可用性、99.99% 正常运行时间 SLA、由 TiFlash 提供支持的完整 HTAP、计算与存储的独立扩缩容、由 PingCAP SRE 提供的全托管运维、无缝数据导入与迁移、带 PITR 的持续备份、企业级安全性以及集成可观测性。它还支持批量数据导入、从 MySQL 和其他来源迁移，以及向下游系统进行实时复制。如果你使用 [Azure Marketplace](https://azuremarketplace.microsoft.com/)，还可以通过 Azure Marketplace 订阅 TiDB Cloud Dedicated。
+
+        更多信息，请参见 [From Preview to Production: TiDB Cloud Dedicated on Microsoft Azure is Now Generally Available](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/)。
+
 ## 2026 年 4 月 28 日
 
 **常规变更**

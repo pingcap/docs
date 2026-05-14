@@ -111,6 +111,8 @@
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
+    - [使用 Data Migration 迁移现有数据和增量数据](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [使用 Data Migration 迁移增量数据](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
     - [从 TiDB 自管理迁移到 TiDB Cloud Premium](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
@@ -146,7 +148,6 @@
     - [配置 IP 访问列表](/tidb-cloud/premium/configure-ip-access-list-premium.md)
     - [通过 AWS Private Endpoint 连接](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-    - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [通过 TLS 连接到 TiDB Cloud](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - 数据访问控制
     - [双层数据加密](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
@@ -172,15 +173,6 @@
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
-  - Terraform
-    - [Terraform 集成概览](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-    - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [使用 `tidbcloud_serverless_cluster` 资源](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
-    - [使用 `tidbcloud_serverless_branch` 资源](/tidb-cloud/terraform-use-serverless-branch-resource.md)
-    - [使用 `tidbcloud_serverless_export` 资源](/tidb-cloud/terraform-use-serverless-export-resource.md)
-    - [使用 `tidbcloud_sql_user` 资源](/tidb-cloud/terraform-use-sql-user-resource.md)
-    - [使用 `tidbcloud_import` 资源](/tidb-cloud/terraform-use-import-resource.md)
-    - [迁移集群资源](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 

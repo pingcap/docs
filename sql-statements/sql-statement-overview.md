@@ -306,7 +306,7 @@ TiDB 使用的 SQL 语句旨在遵循 ISO/IEC SQL 标准，并在必要时扩展
 
 > **注意：**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) 是用于将 TiDB 数据复制到上游的工具，适用于 TiDB 自托管。大部分关于 TiCDC 和 TiDB Binlog 的 SQL 语句不适用于 TiDB Cloud。对于 TiDB Cloud，你可以使用 [Changefeed](/tidb-cloud/changefeed-overview.md) 功能，在 [TiDB Cloud 控制台](https://tidbcloud.com) 中实现数据流。|
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) 是用于将 TiDB 数据复制到上游的工具，适用于 TiDB 自托管。大部分关于 TiCDC 的 SQL 语句不适用于 TiDB Cloud。对于 TiDB Cloud，你可以使用 [Changefeed](/tidb-cloud/changefeed-overview.md) 功能，在 [TiDB Cloud 控制台](https://tidbcloud.com) 中实现数据流。
 
 | SQL 语句 | 描述 |
 |---------------|-------------|

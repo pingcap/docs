@@ -165,7 +165,7 @@ TiDB Cloud 以 TiCDC Replication Capacity Unit（RCU）衡量 [changefeeds](/tid
 对于 {{{ .essential }}} 和 {{{ .premium }}}，Request Capacity Unit（RCU）是用于表示 {{{ .essential }}} 或 {{{ .premium }}} 实例预配置计算能力的单位。1 个 RCU 提供固定数量的计算资源，可处理一定数量的 RU 每秒。你预配置的 RCU 数量决定了实例的基线性能和吞吐能力。不过，{{{ .essential }}} 和 {{{ .premium }}} 的 RCU 管理方式有所不同：
 
 - {{{ .essential }}} 会根据你的工作负载自动预配置 RCU。随着 QPS 增加，TiDB Cloud 会动态扩容已预配置的 RCU 以维持性能。更多信息，参见 [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
-- {{{ .premium }}} 允许你为工作负载指定最大 RCU 数量（`RCU_max`）。TiDB Cloud 会根据实时需求，在 `0.25 * RCU_max` 到 `RCU_max` 的范围内自动扩缩容。更多信息，参见 [{{{ .premium }}} 中的请求单位与容量](/tidb-cloud/architecture-concepts.md#request-units-and-capacity-in-premium)。
+- {{{ .premium }}} 允许你为工作负载指定最大 RCU 数量（`RCU_max`）。TiDB Cloud 会根据实时需求，在 `0.25 * RCU_max` 到 `RCU_max` 的范围内自动扩缩容。更多信息，参见 [{{{ .premium }}} 中的请求单位与容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)。
 
 ### Request Unit (RU)
 
@@ -173,7 +173,7 @@ TiDB Cloud 以 TiCDC Replication Capacity Unit（RCU）衡量 [changefeeds](/tid
 
 - {{{ .starter }}} 按消耗的 RU 总数计费。更多信息，参见 [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 - {{{ .essential }}} 按预配置的 [Request Capacity Unit (RCU)](#request-capacity-unit-rcu) 数量计费。1 个 RCU 提供固定数量的计算资源，可处理一定数量的每秒 RU。更多信息，参见 [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
-- {{{ .premium }}} 按工作负载实际消耗的 Request Capacity Unit（RCU）计费。TiDB Cloud 会每分钟计算一次平均每秒 RU，并将该平均值用作计费的 [Request Capacity Units (RCUs)](#request-capacity-unit-rcu)。更多信息，参见 [{{{ .premium }}} 中的请求单位与容量](/tidb-cloud/architecture-concepts.md#request-units-and-capacity-in-premium)。
+- {{{ .premium }}} 按工作负载实际消耗的 Request Capacity Unit（RCU）计费。TiDB Cloud 会每分钟计算一次平均每秒 RU，并将该平均值用作计费的 [Request Capacity Units (RCUs)](#request-capacity-unit-rcu)。更多信息，参见 [{{{ .premium }}} 中的请求单位与容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)。
 
 对于 TiDB Cloud Dedicated 和 TiDB Self-Managed，Request Unit（RU）是表示系统资源消耗的抽象单位，目前包括 CPU、IOPS 和 IO 带宽等指标。它被资源控制功能用于限制、隔离和管理数据库请求消耗的资源，**不用于计费**。更多信息，参见 [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)。
 

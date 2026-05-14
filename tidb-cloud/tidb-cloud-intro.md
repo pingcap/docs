@@ -122,7 +122,7 @@ TiDB Cloud 提供以下部署选项：
 
     TiDB Cloud Dedicated 面向关键业务，提供跨多个可用区的高可用、横向扩展和完整的 HTAP 能力。
 
-    目前，TiDB Cloud Dedicated 已在 AWS 和 Google Cloud 上正式发布，并在 Azure 上公测。更多信息，参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
+    目前，TiDB Cloud Dedicated 已在 AWS、Azure 和 Google Cloud 上正式发布。更多信息，参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
 
 ## 架构
 

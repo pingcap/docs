@@ -40,7 +40,6 @@ summary: 了解如何创建你的 TiDB Cloud Dedicated 集群。
 
         > **注意：**
         >
-        > - 目前，TiDB Cloud Dedicated 对 Azure 的支持处于公开预览阶段。
         > - 如果你通过 [AWS Marketplace](https://aws.amazon.com/marketplace) 注册 TiDB Cloud，则云服务提供商为 AWS，且无法在 TiDB Cloud 中更改。
         > - 如果你通过 [Azure Marketplace](https://azuremarketplace.microsoft.com) 注册 TiDB Cloud，则云服务提供商为 Azure Cloud，且无法在 TiDB Cloud 中更改。
         > - 如果你通过 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册 TiDB Cloud，则云服务提供商为 Google Cloud，且无法在 TiDB Cloud 中更改。

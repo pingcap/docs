@@ -5,13 +5,21 @@ summary: 了解如何使用 Data Migration，将托管于 Amazon Aurora MySQL、
 
 # 仅迁移 MySQL 兼容数据库的增量数据到 TiDB Cloud（使用 Data Migration）
 
-本文档介绍如何使用 TiDB Cloud 控制台的 Data Migration 功能，将云服务商（Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、阿里云 RDS）或自建源数据库中的增量数据，迁移到 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="essential">TiDB Cloud Essential</CustomContent>。
+本文档介绍如何使用 TiDB Cloud 控制台的 Data Migration 功能，将云服务商（Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、阿里云 RDS）或自建源数据库中的增量数据，迁移到 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="essential">TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent>。
 
 <CustomContent plan="essential">
 
 > **注意：**
 >
 > 目前，Data Migration 功能在 TiDB Cloud Essential 上处于 beta 阶段。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **注意：**
+>
+> 目前，Data Migration 功能在 TiDB Cloud Premium 上处于 public preview 阶段。
 
 </CustomContent>
 
@@ -148,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 如果你属于多个 organization，请先使用左上角的下拉框切换到目标 organization。
 
-2. 点击目标 <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> 的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Data Migration**。
+2. 点击目标 <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> 的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Data Migration**。
 
 3. 在 **Data Migration** 页面，点击右上角的 **Create Migration Job**。此时会进入 **Create Migration Job** 页面。
 
@@ -162,7 +170,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     - **Data source**：数据源类型。
     - **Region**：数据源的 Region，仅云数据库必填。
-    - **Connectivity method**：数据源的连接方法。<CustomContent plan="dedicated">目前，你可以根据连接方法选择 public IP、VPC Peering 或 Private Link。</CustomContent><CustomContent plan="essential">你可以根据连接方法选择 public IP 或 Private Link。</CustomContent>
+    - **Connectivity method**：数据源的连接方法。<CustomContent plan="dedicated">目前，你可以根据连接方法选择 public IP、VPC Peering 或 Private Link。</CustomContent><CustomContent plan="essential">你可以根据连接方法选择 public IP 或 Private Link。</CustomContent><CustomContent plan="premium">你可以根据连接方法选择 Public 或 Private Link（仅 AWS）。</CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -176,6 +184,12 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     - **Private Link Connection**（适用于 Private Link）：你在 [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) 部分创建的 private link 连接。
 
     </CustomContent>
+    <CustomContent plan="premium">
+
+    - **Hostname or IP address**（适用于 Public）：数据源的主机名或 IP 地址。
+    - **Private Endpoint**（适用于 Private Link）：你为 {{{ .premium }}} instance 在 **Networking** > **Private Endpoint for External Services** 中创建的 private endpoint。你也可以点击 **Create a Private Endpoint here** 进行创建。有关设置详情，请参见 Data Migration 指南中的 [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) 部分。
+
+    </CustomContent>
 
     - **Port**：数据源的端口。
     - **Username**：数据源的用户名。
@@ -187,8 +201,8 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 3. 填写目标连接信息。
 
-   - **Username**：输入 TiDB Cloud 目标 <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent> 的用户名。
-   - **Password**：输入 TiDB Cloud 用户名的密码。
+    - **Username**：输入 TiDB Cloud 目标 <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> 的用户名。
+    - **Password**：输入 TiDB Cloud 用户名的密码。
 
 4. 点击 **Validate Connection and Next** 验证你填写的信息。
 
@@ -197,12 +211,19 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="dedicated">
 
     - 如果你使用 Public IP 或 VPC Peering，需要将 Data Migration service 的 IP 地址添加到源数据库和防火墙（如有）的 IP Access List。
-    - 如果你使用 AWS Private Link，系统会提示你接受 endpoint request。请前往 [AWS VPC 控制台](https://us-west-2.console.aws.amazon.com/vpc/home)，点击 **Endpoint services** 接受 endpoint request。
+    - 如果你使用 AWS Private Link，系统会提示你接受 endpoint request。请在 [AWS VPC 控制台](https://console.aws.amazon.com/vpc/home) 中切换到你创建 endpoint service 的 AWS Region，然后点击 **Endpoint services** 接受 endpoint request。
 
     </CustomContent>
     <CustomContent plan="essential">
 
     如果你使用 Public IP，需要将 Data Migration service 的 IP 地址添加到源数据库和防火墙（如有）的 IP Access List。
+
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    - 如果你使用 **Public** 作为连接方法，需要将 Data Migration service 的 IP 地址添加到源数据库和防火墙（如有）的 IP Access List。
+    - 如果你使用 **Private Link**，且所选 private endpoint 尚未在 AWS 中被接受，请在 [AWS VPC 控制台](https://console.aws.amazon.com/vpc/home) 中切换到你创建 endpoint service 的 AWS Region，点击 **Endpoint services**，并接受来自 TiDB Cloud 的 endpoint connection request。
 
     </CustomContent>
 
