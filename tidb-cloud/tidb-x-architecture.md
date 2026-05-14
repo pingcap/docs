@@ -179,7 +179,7 @@ The following table summarizes the architectural transitions from classic TiDB t
   />
   <ResourceCard
     title="PingCAP Launches TiDB X and New AI Capabilities"
-    type="press release"
+    type="blog"
     link="https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/"
     imgSrc="https://static.pingcap.com/files/2025/10/08074548/tidb_1200x627.gif"
     date="2025-10-08"
