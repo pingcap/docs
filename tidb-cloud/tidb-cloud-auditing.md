@@ -260,16 +260,19 @@ After enabling audit logging, you must specify auditing filter rules to control 
 
 To specify auditing filter rules for a cluster, take the following steps:
 
-1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
+1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Audit Filters** section to add an audit filter rule.
 
-    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
+2. In the **Add Filter Rule** dialog, configure the following items:
 
-2. In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
+    - **Filter Name**: enter a name for the filter rule.
+    - **SQL User**: enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match any value or `_` to match any single character. The `@` symbol and `<host>` are optional.
+    - **Filter Events**: select the events to log. For the supported filter events, see [Audit Filter Events](#audit-filter-events).
+
+3. **Confirm** the filter rule.
 
 > **Note:**
 >
-> - The filter rules are regular expressions and case-sensitive. If you use the wildcard rule `.*`, all users, databases, or table events in the cluster are logged.
-> - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific database objects, users, and actions, where possible.
+> - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific users, and actions, where possible.
 
 ## View audit logs
 
@@ -285,60 +288,103 @@ For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log
 
 ## Disable audit logging
 
-If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off**.
+If you no longer want to audit a cluster, take the following steps:
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page in the TiDB Cloud console, and then click the name of your target TiDB Cloud Dedicated cluster.
+2. In the left navigation pane, click **Settings** > **DB Audit Logging**.
+3. In the **Database Audit Logging** section, click **...** next to **Settings**, and then click **Disable**.
 
 > **Note:**
 >
 > Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after the audit log is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
 
-## Audit log fields
+The following table shows all event classes in database audit logging:
 
-For each database event record in audit logs, TiDB provides the following fields:
+| Event class   | Description                                                                                      | Parent-class   |
+|---------------|--------------------------------------------------------------------------------------------------|---------------|
+| `CONNECTION`    | Records all operations related to connections, such as handshaking, connections, disconnections, connection reset, and changing users | -             |
+| `CONNECT`       | Records all operations of the handshaking in connections                                          | `CONNECTION`    |
+| `DISCONNECT`    | Records all operations of the disconnections                                                      | `CONNECTION`    |
+| `CHANGE_USER`   | Records all operations of changing users                                                          | `CONNECTION`    |
+| `QUERY`         | Records all operations of SQL statements, including all errors about querying and modifying data  | -               |
+| `TRANSACTION`   | Records all operations related to transactions, such as `BEGIN`, `COMMIT`, and `ROLLBACK`         | `QUERY`         |
+| `EXECUTE`       | Records all operations of the `EXECUTE` statements                                                | `QUERY`         |
+| `QUERY_DML`     | Records all operations of the DML statements, including `INSERT`, `REPLACE`, `UPDATE`, `DELETE`, and `LOAD DATA`    | `QUERY`     |
+| `INSERT`        | Records all operations of the `INSERT` statements                                                   | `QUERY_DML`   |
+| `REPLACE`       | Records all operations of the `REPLACE` statements                                                  | `QUERY_DML`   |
+| `UPDATE`        | Records all operations of the `UPDATE` statements                                                   | `QUERY_DML`   |
+| `DELETE`        | Records all operations of the `DELETE` statements                                                   | `QUERY_DML`   |
+| `LOAD DATA`     | Records all operations of the `LOAD DATA` statements                                                | `QUERY_DML`   |
+| `SELECT`        | Records all operations of the `SELECT` statements                                                   | `QUERY`       |
+| `QUERY_DDL`     | Records all operations of the DDL statements                                                        | `QUERY`       |
+| `AUDIT`         | Records all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
+| `AUDIT_FUNC_CALL` | Records all operations of calling system functions related to TiDB Cloud database auditing        | `AUDIT`       |
+| `AUDIT_SET_SYS_VAR` | Records all operations of setting system variables        | `AUDIT`       |
+
+## Audit logging fields
+
+For each database event record in audit logs, TiDB Cloud provides the following fields:
+
+### General information
+
+All classes of audit logs contain the following information:
+
+| Field         | Description                                                                                   |
+|---------------|-----------------------------------------------------------------------------------------------|
+| `ID`            | The unique identifier that identifies the audit record of an operation.                        |
+| `TIME`          | The timestamp of the audit record.                                                             |
+| `EVENT`         | The event classes of the audit record. Multiple event types are separated by commas (`,`).     |
+| `USER`          | The username of the audit record.                                                              |
+| `ROLES`         | The roles of the user at the time of the operation.                                            |
+| `CONNECTION_ID` | The identifier of the user's connection.                                                       |
+| `TABLES`        | The accessed tables related to this audit record.                                              |
+| `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
+| `KEYSPACE_NAME` | The keyspace name of the audit record.                                                        |
+| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the {{{ .essential }}} instance belongs to.                 |
+| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the {{{ .essential }}} instance belongs to.                |
+| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless {{{ .essential }}} instance that the audit record belongs to.           |
+| `REASON`        | The error message of the audit record. Only recorded when an error occurs during the operation.|
+
+### SQL statement information
+
+When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain the following information:
+
+| Field          | Description                                                                                                   |
+|----------------|---------------------------------------------------------------------------------------------------------------|
+| `CURRENT_DB`     | The name of the current database.                                                                             |
+| `SQL_TEXT`       | The executed SQL statements. If audit log redaction is enabled, the redacted SQL statements are recorded.     |
+| `EXECUTE_PARAMS` | The parameters for the `EXECUTE` statements. Recorded only when the event classes include `EXECUTE` and redaction is disabled. |
+| `AFFECTED_ROWS`  | The number of affected rows of the SQL statements. Recorded only when the event classes include `QUERY_DML`.  |
+
+### Connection information
+
+When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit logs contain the following information:
+
+| Field           | Description                                                                                   |
+|-----------------|-----------------------------------------------------------------------------------------------|
+| `CURRENT_DB`      | The name of the current database. When the event classes include DISCONNECT, this information is not recorded. |
+| `CONNECTION_TYPE` | The type of connection, including Socket, UnixSocket, and SSL/TLS.                                 |
+| `PID`             | The process ID of the current connection.                                                          |
+| `SERVER_VERSION`  | The current version of the connected TiDB server.                                                  |
+| `SSL_VERSION`     | The current version of SSL in use.                                                                 |
+| `HOST_IP`         | The current IP address of the connected TiDB server.                                               |
+| `HOST_PORT`       | The current port of the connected TiDB server.                                                     |
+| `CLIENT_IP`       | The current IP address of the client.                                                              |
+| `CLIENT_PORT`     | The current port of the client.                                                                    |
 
 > **Note:**
 >
-> In the following tables, the empty maximum length of a field means that the data type of this field has a well-defined constant length (for example, 4 bytes for INTEGER).
+> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
-| Col # | Field name | TiDB data type | Maximum length | Description |
-|---|---|---|---|---|
-| 1 | N/A | N/A | N/A | Reserved for internal use |
-| 2 | N/A | N/A | N/A | Reserved for internal use |
-| 3 | N/A | N/A | N/A | Reserved for internal use |
-| 4 | ID       | INTEGER |  | Unique event ID  |
-| 5 | TIMESTAMP | TIMESTAMP |  | Time of event   |
-| 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
-| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
-| 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
-| 10 | HOST | VARCHAR | 16 | Server IP    |
-| 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
-| 12 | USER | VARCHAR | 17 | Login username    |
-| 13 | DATABASE | VARCHAR | 64 | Event-related database      |
-| 14 | TABLES | VARCHAR | 64 | Event-related table name          |
-| 15 | SQL_TEXT | VARCHAR | 64 KB | Masked SQL statement   |
-| 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
+### Audit operation information
 
-Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
+When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:
 
-- If the EVENT_CLASS value is `CONNECTION`, database event records also contain the following fields:
+| Field          | Description                                                                                                   |
+|----------------|---------------------------------------------------------------------------------------------------------------|
+| `AUDIT_OP_TARGET`| The objects of the setting related to TiDB Cloud database auditing. |
+| `AUDIT_OP_ARGS`  | The arguments of the setting related to TiDB Cloud database auditing. |
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
-    |---|---|---|---|---|
-    | 17 | CLIENT_PORT | INTEGER |  | Client port number |
-    | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
-    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
-    | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
-    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to client communicating via the MySQL protocol |
-    | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
-    | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
-    | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
-    | 25 | PID | INTEGER |  | The PID of the TiDB process |
+## Audit logging limitations
 
-- If the EVENT_CLASS value is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
-
-    | Col # | Field name | TiDB data type | Maximum length | Description |
-    |---|---|---|---|---|
-    | 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
-    | 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
-    | 19 | SQL_STATEMENT  | VARCHAR | 17 | The SQL statement type |
-    | 20 | PID | INTEGER |  | The PID of the TiDB process  |
+{{{ .dedicated }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
