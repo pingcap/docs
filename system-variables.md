@@ -651,7 +651,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential). Its effective value is controlled by TiDB Cloud.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -661,6 +661,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
 - The maximum packet size allowed by the server and the client in one transmission of packets.
 - In the `SESSION` scope, this variable is read-only.
+- In Starter deployment mode, the effective value is configured by [`max-allowed-packet`](/tidb-configuration-file.md#max-allowed-packet-new-in-v900). TiDB uses the configured value when initializing sessions and when reporting the global `max_allowed_packet` value.
 - This variable is compatible with MySQL.
 
 ### max_user_connections <span class="version-mark">New in v9.0.0</span>
@@ -889,6 +890,8 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > **Note:**
 >
 > Currently, this variable is not supported on [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). DO **NOT** enable this variable for TiDB Cloud Dedicated clusters. Otherwise, you might get SQL client connection failures. This restriction is a temporary control measure and will be resolved in a future release.
+>
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only and always returns `ON`.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -904,11 +907,11 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- This variable ensures that all connections to TiDB are either on a local socket, or using TLS.
+- For TiDB Cloud, secure connection behavior is managed by the service. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is exposed as `ON` and cannot be changed by SQL statements.
 
 </CustomContent>
 
-- Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
+- For TiDB Self-Managed, setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
 - This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
 - Starting from v6.5.6, v7.1.2, v7.5.1, and v8.0.0, when Security Enhanced Mode (SEM) is enabled, setting this variable to `ON` is prohibited to avoid potential connectivity issues for users.
 

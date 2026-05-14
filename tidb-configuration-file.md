@@ -43,6 +43,15 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Minimum value: `1`
 + Maximum value: `1048576`
 
+### `max-allowed-packet` <span class="version-mark">New in v9.0.0</span>
+
++ Configures the effective value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) in Starter deployment mode.
++ Default value: `67108864` (64 MiB)
++ Minimum value: `1024`
++ Maximum value: `1073741824`
++ The value must be an integer multiple of `1024`.
++ This configuration item takes effect only in Starter deployment mode. In other deployment modes, configure the packet size by using the `max_allowed_packet` system variable.
+
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
 + File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
@@ -521,7 +530,7 @@ Configuration items related to performance.
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
 - Starting from v7.6.0, you can use the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) to dynamically modify the value of this configuration item.
 - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
-- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). If a row is larger than `max_allowed_packet`, the row gets truncated.
+- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). In Starter deployment mode, its effective value is configured by [`max-allowed-packet`](#max-allowed-packet-new-in-v900). If a row is larger than `max_allowed_packet`, the row gets truncated.
 - The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
 
 ### `txn-total-size-limit`
