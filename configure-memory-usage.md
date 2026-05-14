@@ -247,7 +247,7 @@ You can enable memory arbitrator mode using the [`tidb_mem_arbitrator_mode`](/sy
 - `standard` or `priority`: enables memory arbitrator mode. After it is enabled:
     - Memory resources are used with a subscribe-before-allocation mechanism and are uniformly scheduled by the memory arbitrator in each TiDB instance.
     - The overall memory usage of the TiDB instance is expected not to exceed the limit of [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640), and the [alarm for high memory usage](#alarm-for-high-memory-usage-of-tidb-server) no longer takes effect.
-    - The control behavior of the following system variables remains effective:
+    - The behavior of the following system variables remains effective:
         - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
         - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
         - [`max_execution_time`](/system-variables.md#max_execution_time)
