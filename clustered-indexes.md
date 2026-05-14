@@ -219,11 +219,5 @@ ERROR 8216 (HY000): Invalid auto random: column a is not the integer primary key
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="TiDB SQL Tuning Lab 1: Clustered and Non-Clustered Indexes"
-    type="lab"
-    link="https://labs.tidb.io/labs/dba_307_lab_ff0"
-    imgSrc="https://lab-static.pingcap.com/quick-demo/307-01.png"
-    duration="90 mins"
-  />
+  <ResourceCard title="TiDB SQL Tuning Lab 1: Clustered and Non-Clustered Indexes" type="lab" link="https://labs.tidb.io/labs/dba_307_lab_ff0" imgSrc="https://lab-static.pingcap.com/quick-demo/307-01.png" duration="90 mins" />
 </RelatedResources>

@@ -322,11 +322,5 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="TiDB Admin Lab 9: Using sync-diff-inspector for Data Check"
-    type="lab"
-    link="https://labs.tidb.io/labs/dba_303_lab_ff8"
-    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch10_en.png"
-    duration="60 mins"
-  />
+  <ResourceCard title="TiDB Admin Lab 9: Using sync-diff-inspector for Data Check" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff8" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch10_en.png" duration="60 mins" />
 </RelatedResources>

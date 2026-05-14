@@ -161,27 +161,7 @@ The following table summarizes the architectural transitions from classic TiDB t
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="The Making of TiDB X: Origins, Architecture, and What's to Come"
-    type="blog"
-    link="https://www.pingcap.com/blog/tidbx-origins-architecture/"
-    imgSrc="https://static.pingcap.com/files/2025/12/16202548/20251217-095444.png"
-    author="Ed Huang"
-    date="2025-12-17"
-  />
-  <ResourceCard
-    title="Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI"
-    type="blog"
-    link="https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/"
-    imgSrc="https://static.pingcap.com/files/2025/10/08085317/tidb_1200x627-2.png"
-    author="Ben Meadowcroft"
-    date="2025-10-08"
-  />
-  <ResourceCard
-    title="PingCAP Launches TiDB X and New AI Capabilities"
-    type="blog"
-    link="https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/"
-    imgSrc="https://static.pingcap.com/files/2025/10/08074548/tidb_1200x627.gif"
-    date="2025-10-08"
-  />
+  <ResourceCard title="The Making of TiDB X: Origins, Architecture, and What's to Come" type="blog" link="https://www.pingcap.com/blog/tidbx-origins-architecture/" imgSrc="https://static.pingcap.com/files/2025/12/16202548/20251217-095444.png" author="Ed Huang" date="2025-12-17" />
+  <ResourceCard title="Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI" type="blog" link="https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/" imgSrc="https://static.pingcap.com/files/2025/10/08085317/tidb_1200x627-2.png" author="Ben Meadowcroft" date="2025-10-08" />
+  <ResourceCard title="PingCAP Launches TiDB X and New AI Capabilities" type="blog" link="https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/" imgSrc="https://static.pingcap.com/files/2025/10/08074548/tidb_1200x627.gif" date="2025-10-08" />
 </RelatedResources>

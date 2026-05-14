@@ -192,11 +192,5 @@ While the DM cluster is running, DM-master, DM-worker, and dmctl output the moni
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="TiDB Admin Lab 10: Migrating Data Using TiDB Data Migration"
-    type="lab"
-    link="https://labs.tidb.io/labs/dba_303_lab_ff9"
-    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch11_en.png"
-    duration="60 mins"
-  />
+  <ResourceCard title="TiDB Admin Lab 10: Migrating Data Using TiDB Data Migration" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff9" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch11_en.png" duration="60 mins" />
 </RelatedResources>

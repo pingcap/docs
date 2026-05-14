@@ -444,11 +444,5 @@ The resource control feature does not impact the regular usage of data import, e
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="TiDB Admin Lab 5: Using Resource Control with Mixed Workloads"
-    type="lab"
-    link="https://labs.tidb.io/labs/demo_006"
-    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch05_en.png"
-    duration="90 mins"
-  />
+  <ResourceCard title="TiDB Admin Lab 5: Using Resource Control with Mixed Workloads" type="lab" link="https://labs.tidb.io/labs/demo_006" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch05_en.png" duration="90 mins" />
 </RelatedResources>

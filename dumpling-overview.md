@@ -454,11 +454,5 @@ For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="TiDB Admin Lab 7: Exporting Data Using Dumpling"
-    type="lab"
-    link="https://labs.tidb.io/labs/dba_303_lab_ff6"
-    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch08_en.png"
-    duration="60 mins"
-  />
+  <ResourceCard title="TiDB Admin Lab 7: Exporting Data Using Dumpling" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff6" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch08_en.png" duration="60 mins" />
 </RelatedResources>

@@ -71,12 +71,5 @@ The following video introduces key features of TiDB.
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="Why #TiDB?"
-    type="video"
-    link="https://www.youtube.com/watch?v=aWBNNPm21zg"
-    imgSrc="https://i.ytimg.com/vi/aWBNNPm21zg/hqdefault.jpg"
-    author="PingCAP"
-    duration="2 mins"
-  />
+  <ResourceCard title="Why #TiDB?" type="video" link="https://www.youtube.com/watch?v=aWBNNPm21zg" imgSrc="https://i.ytimg.com/vi/aWBNNPm21zg/hqdefault.jpg" author="PingCAP" duration="2 mins" />
 </RelatedResources>

@@ -166,11 +166,5 @@ TiCDC only partially supports scenarios involving large transactions in the upst
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard
-    title="TiDB Admin Lab 11: Replicating TiDB Change Events Using TiCDC"
-    type="lab"
-    link="https://labs.tidb.io/labs/dba_303_lab_ff10"
-    imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch12_en.png"
-    duration="60 mins"
-  />
+  <ResourceCard title="TiDB Admin Lab 11: Replicating TiDB Change Events Using TiCDC" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff10" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch12_en.png" duration="60 mins" />
 </RelatedResources>
