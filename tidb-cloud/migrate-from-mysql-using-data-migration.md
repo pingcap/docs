@@ -919,8 +919,6 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 </CustomContent>
 
-<CustomContent plan="dedicated">
-
 <CustomContent plan="premium">
 
 ## 第 6 步：监控迁移进度
