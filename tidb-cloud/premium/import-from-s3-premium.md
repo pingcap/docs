@@ -52,7 +52,7 @@ The wizard includes a helper link labeled **Click here to create a new one with 
 
 ## Step 4. Import CSV files from Amazon S3
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your TiDB instance.
+1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your {{{ .premium }}} instance.
 2. In the left navigation pane, click **Data** > **Import**, and choose **Import data from Cloud Storage**.
 3. In the **Source Connection** dialog:
     - Set **Storage Provider** to **Amazon S3**.

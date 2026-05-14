@@ -13,7 +13,7 @@ Before you begin, ensure you have the following:
 
 - **Claude Desktop**: Download and install Claude Desktop from [claude.ai](https://claude.ai/download).
 - **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Setup steps
 
@@ -41,7 +41,7 @@ Follow the steps below to set up the TiDB MCP Server in Claude Desktop:
     }
     ```
 
-5. Go to the [TiDB Cloud cluster page](https://tidbcloud.com/console/clusters) and navigate to the cluster you want to connect to.
+5. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page.
 6. Click **Connect** in the upper-right corner to get the connection parameters, and replace the `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, and `TIDB_DATABASE` values with your own.
 7. Restart Claude Desktop.
 

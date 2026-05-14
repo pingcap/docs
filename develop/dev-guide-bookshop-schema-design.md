@@ -19,7 +19,7 @@ To import table structures and data of the Bookshop application, choose one of t
 
 ### TiDB Self-Managed: via `tiup demo`
 
-If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+If your TiDB Self-Managed cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 ```shell
 tiup demo bookshop prepare
@@ -73,15 +73,15 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### TiDB Cloud: via the Import feature
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud resource.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target resource to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 

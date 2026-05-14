@@ -12,7 +12,7 @@ This demo shows how to build an AI-powered interface that converts natural-langu
 Before you begin, ensure you have the following:
 
 - **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 - **OpenAI API key**: Get an OpenAI API key from [OpenAI](https://platform.openai.com/api-keys).
 
 ## How to run

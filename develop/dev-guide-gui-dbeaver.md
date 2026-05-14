@@ -8,11 +8,11 @@ aliases: ['/tidb/stable/dev-guide-gui-dbeaver/','/tidb/dev/dev-guide-gui-dbeaver
 
 TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
 
-In this tutorial, you can learn how to connect to your TiDB cluster using DBeaver Community.
+In this tutorial, you can learn how to connect to TiDB using DBeaver Community.
 
 > **Note:**
 >
-> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -23,8 +23,8 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- (Recommended) [Create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Deploy a local test TiDB Self-Managed cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB Self-Managed cluster](/production-deployment-using-tiup.md).
 
 In addition, to connect to a {{{ .starter }}} or {{{ .essential }}} public endpoint from DBeaver on **Windows**, you must configure an additional SSL certificate (ISRG Root X1) as follows. Otherwise, the connection will fail. For other operating systems, you can skip these steps.
 
@@ -42,12 +42,12 @@ In addition, to connect to a {{{ .starter }}} or {{{ .essential }}} public endpo
 
 ## Connect to TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+Connect to TiDB depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -74,7 +74,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     ![Configure connection settings for {{{ .starter }}}](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. Click **Test Connection** to validate the connection to the {{{ .starter }}} cluster.
+8. Click **Test Connection** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
@@ -87,9 +87,48 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 9. Click **Finish** to save the connection configuration.
 
 </div>
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
+
+    Ensure that your client IP address is added to the access list.
+
+4. In the left navigation pane, click **Overview** to return to the instance overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+6. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
+    - If you have not set a password yet, click **Set Root Password** in the dialog.
+    - If you need to verify the server certificate or if the connection fails and requires a CA certificate, click **CA cert** to download it.
+    - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+7. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
+
+8. Copy and paste the appropriate connection string into the DBeaver connection panel. The mappings between DBeaver fields and {{{ .premium }}} connection string are as follows:
+
+    | DBeaver field | {{{ .premium }}} connection string |
+    |---------------| ------------------------------- |
+    | Server Host   | `{host}`                        |
+    | Port          | `{port}`                        |
+    | Username      | `{user}`                        |
+    | Password      | `{password}`                    |
+
+    Keep the SSL settings disabled.
+
+9. Click **Test Connection** to validate the connection to the {{{ .premium }}} instance.
+
+10. Click **Finish** to save the connection configuration.
+
+</div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

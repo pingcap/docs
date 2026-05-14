@@ -23,7 +23,7 @@ To complete this tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} instance. If you don't have any, you can [create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -74,7 +74,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your {{{ .starter }}} instance, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]/[database]
@@ -88,7 +88,7 @@ To complete this tutorial, you need the following:
    
 ### Step 3. Use Kysely to query data
 
-1. Create a table in your TiDB Cloud Serverless cluster and insert some data. 
+1. Create a table in your {{{ .starter }}} instance and insert some data. 
 
     You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
 
@@ -167,7 +167,7 @@ To complete this tutorial, you need the following:
 
 - A [Vercel](https://vercel.com/docs) account that provides edge environment.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} instance. If you don't have any, you can [create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -192,7 +192,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+On the overview page of your {{{ .starter }}} instance, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
 ```
 mysql://[username]:[password]@[host]/[database]
@@ -200,7 +200,7 @@ mysql://[username]:[password]@[host]/[database]
 
 ### Step 3. Create an edge function
 
-1. Create a table in your TiDB Cloud Serverless cluster and insert some data.
+1. Create a table in your {{{ .starter }}} instance and insert some data.
 
     You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
 

@@ -15,13 +15,13 @@ To ensure data security, the Certificate Authority (CA) certificate for your {{{
 
 - Set a password to access your instance in secure settings.
 
-    To do so, you can navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click **...** in the row of your {{{ .premium }}} instance, and then select **Change Root Password**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
+    To do so, you can navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the row of your {{{ .premium }}} instance, and then select **Change Root Password**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
 
 ## Secure connection to a {{{ .premium }}} instance
 
 In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your {{{ .premium }}} instance as follows:
 
-1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your {{{ .premium }}} instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your {{{ .premium }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
@@ -29,7 +29,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
     If you have not configured the IP access list, click **Configure IP Access List** to configure it before your first connection. For more information, see [Configure an IP access list](/tidb-cloud/premium/configure-ip-access-list-premium.md).
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 by default.
+4. Click **CA cert** to download CA cert for TLS connection to {{{ .premium }}} instances. The CA cert supports TLS 1.2 by default.
 
     > **Note:**
     >

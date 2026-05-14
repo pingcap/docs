@@ -1,11 +1,13 @@
 ---
-title: Monitor a TiDB Cluster
-summary: Learn how to monitor your TiDB cluster.
+title: Monitor TiDB
+summary: Learn how to monitor your TiDB Cloud resource.
 ---
 
-# Monitor a TiDB Cluster
+# Monitor TiDB
 
-This document describes how to monitor a TiDB cluster on TiDB Cloud.
+This document describes how to monitor a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
+
+<CustomContent plan="dedicated">
 
 ## Cluster status and node status
 
@@ -54,38 +56,58 @@ The node names starting with `tidb` are TiDB nodes, and those starting with `tip
 | **Unavailable** | The TiKV node is not available. |
 | **Deleting** | The TiKV node is being deleted. |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential,premium">
+
+## Instance status
+
+On the [**My TiDB**](https://tidbcloud.com/tidbs) page, you can see the current status of each running TiDB Cloud instance in the **Status** column.
+
+| Status | Description |
+|:--|:--|
+| **Active** | The instance is healthy and available. |
+| **Creating** | The instance is being created. The instance is inaccessible while it is being created. |
+| **Importing** | Importing data into the instance. |
+| **Maintaining** | The instance is in maintenance. |
+| **Modifying** | The instance is being modified. |
+| **Unavailable** | The instance has failed and TiDB cannot recover it. |
+| **Restoring** | The instance is currently being restored from a backup. |
+
+</CustomContent>
+
 ## Monitoring metrics
 
-In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
+In TiDB Cloud, you can view the commonly used metrics of a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> from the following pages:
 
 - **Overview** page
 - **Metrics** page
 
 ### Overview page
 
-The **Overview** page provides general metrics of a cluster.
+The **Overview** page provides general metrics of your TiDB Cloud resource.
 
-To view metrics on the cluster overview page, take the following steps:
+To view metrics on the overview page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. Check the **Core Metrics** section.
 
 ### Metrics page
 
-The **Metrics** page provides a full set of metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+The **Metrics** page provides a full set of metrics of your TiDB Cloud resource. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 To view metrics on the **Metrics** page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Monitoring** > **Metrics**.
 

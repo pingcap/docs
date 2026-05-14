@@ -13,14 +13,14 @@ Before you begin, ensure you have the following:
 
 - **Claude Code**: Install it from [claude.com](https://claude.com/product/claude-code).
 - **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Connect to TiDB Cloud Starter (recommended)
 
 Use the TiDB Cloud console to generate a ready-to-run Claude Code command.
 
-1. Go to the [Clusters](https://tidbcloud.com/console/clusters) page, select your cluster, and then click **Use with AI Tools** in the upper-right corner.
-2. In the **Access `your_cluster_name` with AI tools** dialog, select the **Branch** and **Database** that Claude Code should access.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Use with AI Tools** in the upper-right corner.
+2. In the displayed dialog, select the **Branch** and **Database** that Claude Code should access.
 3. Review the **Prerequisites** list in the dialog and install any missing dependencies.
 4. Configure the root password:
 

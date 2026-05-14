@@ -11,12 +11,12 @@ TiDB is a MySQL-compatible database, and JDBC (Java Database Connectivity) is th
 In this tutorial, you can learn how to use TiDB and JDBC to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using JDBC.
+- Connect to TiDB using JDBC.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
 >
-> - This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial works with {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 > - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
 
 ## Prerequisites
@@ -30,8 +30,8 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- (Recommended) [Create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Deploy a local test TiDB Self-Managed cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB Self-Managed cluster](/production-deployment-using-tiup.md).
 
 ## Run the sample app to connect to TiDB
 
@@ -48,12 +48,12 @@ cd tidb-java-jdbc-quickstart
 
 ### Step 2: Configure connection information
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+Connect to TiDB depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
 <div label="{{{ .starter }}} or Essential">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -98,9 +98,54 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 7. Save the `env.sh` file.
 
 </div>
+
+<div label="{{{ .premium }}}">
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+
+2. In the left navigation pane, click **Settings** > **Networking**.
+
+3. On the **Networking** page, click **Enable** for **Public Endpoint**, and then click **Add IP Address**.
+
+    Ensure that your client IP address is added to the access list.
+
+4. In the left navigation pane, click **Overview** to return to the instance overview page.
+
+5. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+6. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    - If a message indicates that the public endpoint is still being enabled, wait until the process completes.
+    - If you have not set a password yet, click **Set Root Password** in the dialog.
+    - If you need to verify the server certificate or if the connection fails and requires a CA certificate, click **CA cert** to download it.
+    - In addition to the **Public** connection type, {{{ .premium }}} supports **Private Endpoint** connections. For more information, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+
+7. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+
+    ```shell
+    cp env.sh.example env.sh
+    ```
+
+8. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+
+    ```shell
+    export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    export TIDB_PORT='4000'
+    export TIDB_USER='{user}'  # e.g. root
+    export TIDB_PASSWORD='{password}'
+    export TIDB_DB_NAME='test'
+    export USE_SSL='false'
+    ```
+
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+
+9. Save the `env.sh` file.
+
+</div>
+
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -194,7 +239,7 @@ public MysqlDataSource getMysqlDataSource() throws SQLException {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB.
 
 ### Insert data
 

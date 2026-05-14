@@ -11,16 +11,16 @@ This document introduces how to use the OpenAPI Specification of a [Data App](/t
 
 Before using OpenAPI Specification with Next.js, make sure that you have the following:
 
-- A TiDB cluster. For more information, see [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- [A {{{ .starter }}} Instance](/tidb-cloud/create-tidb-cluster-serverless.md) or [a {{{ .dedicated }}} cluster](/tidb-cloud/create-tidb-cluster.md).
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)
 
-This document uses a {{{ .starter }}} cluster as an example.
+This document uses a {{{ .starter }}} instance as an example.
 
 ## Step 1. Prepare data
 
-To begin with, create a table `test.repository` in your TiDB cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
+To begin with, create a table `test.repository` in your {{{ .starter }}} instance or {{{ .dedicated }}} cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
 
 To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
 
@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## Step 2. Create a Data App
 
-After the data is inserted, navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page in the [TiDB Cloud console](https://tidbcloud.com). Create a Data App that links to your TiDB cluster, create an API key for the Data App, and then create a `GET /repositories` endpoint in the Data App. The corresponding SQL statement for this endpoint is as follows, which fetches all rows from the `test.repository` table:
+After the data is inserted, navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page in the [TiDB Cloud console](https://tidbcloud.com). Create a Data App that links to your {{{ .starter }}} instance or {{{ .dedicated }}} cluster, create an API key for the Data App, and then create a `GET /repositories` endpoint in the Data App. The corresponding SQL statement for this endpoint is as follows, which fetches all rows from the `test.repository` table:
 
 ```sql
 SELECT * FROM test.repository;
@@ -182,7 +182,7 @@ You can use the generated client code to develop your Next.js application.
 
     > **Note:**
     >
-    > If the linked clusters of your Data App are hosted in different regions, you will see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
+    > If the linked {{{ .starter }}} instances or {{{ .dedicated }}} clusters of your Data App are hosted in different regions, you will see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
     >
     >  ```js
     >  const config = new Configuration({

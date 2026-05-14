@@ -10,7 +10,7 @@ TiDB extends MySQL syntax to support [Vector Search](/ai/concepts/vector-search-
 
 This document demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to complete the following operations:
 
-- Connect to your TiDB cluster.
+- Connect to TiDB.
 - Create a vector table.
 - Store vector embeddings.
 - Perform vector search queries.
@@ -29,19 +29,19 @@ To complete steps in this document, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- (Recommended) [Create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Deploy a local test TiDB Self-Managed cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB Self-Managed cluster](/production-deployment-using-tiup.md).
 
 ## Get started
 
-### Step 1. Connect to the TiDB cluster
+### Step 1. Connect to TiDB
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+Connect to TiDB depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

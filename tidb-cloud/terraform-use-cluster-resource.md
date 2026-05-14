@@ -15,9 +15,9 @@ In addition, you will also learn how to get the necessary information with the `
 
 The features of the `tidbcloud_cluster` resource include the following:
 
-- Create {{{ .starter }}} and TiDB Cloud Dedicated clusters.
+- Create {{{ .starter }}} instances and TiDB Cloud Dedicated clusters.
 - Modify TiDB Cloud Dedicated clusters.
-- Delete {{{ .starter }}} and TiDB Cloud Dedicated clusters.
+- Delete {{{ .starter }}} instances and TiDB Cloud Dedicated clusters.
 
 ## Prerequisites
 

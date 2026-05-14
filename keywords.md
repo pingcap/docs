@@ -459,6 +459,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - NATIONAL
 - NATURAL (R)
 - NCHAR
+- NDVRATE
 - NEVER
 - NEXT
 - NEXTVAL
@@ -559,6 +560,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RANGE (R)
 - RANK (R-Window)
 - RATE_LIMIT
+- RAW
 - READ (R)
 - REAL (R)
 - REBUILD

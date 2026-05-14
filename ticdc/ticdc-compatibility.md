@@ -7,6 +7,10 @@ summary: Learn about compatibility issues of TiCDC and how to handle them.
 
 This section describes compatibility issues related to TiCDC and how to handle them.
 
+## Compatibility between TiCDC new architecture and TiDB clusters
+
+The TiCDC new architecture supports TiDB clusters of v7.5.0 and later. For special compatibility notes, see [Compatibility](/ticdc/ticdc-architecture.md#compatibility).
+
 ## Compatibility with TiDB Lightning
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) provides two data import modes: [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) and [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). This section describes the compatibility of these modes with TiCDC and the steps to use TiDB Lightning and TiCDC together in a cluster.
@@ -35,11 +39,71 @@ Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, 
 * `ALTER TABLE table_name SET TIFLASH REPLICA count;`
 * `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
 
+## Compatibility notes for upgrading from earlier versions
+
+TiCDC relies on TiDB, TiKV, and PD to provide upstream change data and related interfaces. As TiDB and related components continue to evolve, these data formats and interfaces might change. For example, features such as parallel DDL and fast table creation in TiDB can change related logic and data processing workflows, and TiCDC needs corresponding adaptations. Therefore, the **TiCDC classic architecture does not guarantee official forward or backward compatibility in mixed TiDB/TiKV/PD deployments across versions**. The TiCDC new architecture provides **backward compatibility** for TiDB clusters of v7.5.0 and later.
+
+### Upgrade recommendations for the TiCDC classic architecture
+
+For the TiCDC classic architecture, it is **not recommended to keep changefeeds running during a TiDB rolling upgrade**. During the upgrade, it is recommended to perform the following steps in order:
+
+1. Pause all changefeeds.
+2. Upgrade TiCDC first.
+3. Upgrade the other components in the TiDB cluster.
+4. Resume all changefeeds after the upgrade is complete.
+
+For example, assuming that you upgrade the cluster from v8.5.4 to v8.5.5, if you manage the cluster using TiUP, you can refer to the following commands. The following example uses `linux-amd64`. For other platforms, replace the platform information in the package names based on your environment.
+
+```sh
+# 1. Pause all changefeeds. Run this command once for each changefeed.
+tiup cdc:v8.5.4 cli changefeed pause \
+  --server=http://<ticdc-host>:8300 \
+  --changefeed-id=<changefeed-id>
+
+# 2. Upgrade TiCDC first.
+wget https://tiup-mirrors.pingcap.com/cdc-v8.5.5-linux-amd64.tar.gz \
+  -O /tmp/cdc-v8.5.5-linux-amd64.tar.gz
+tiup cluster patch <cluster-name> /tmp/cdc-v8.5.5-linux-amd64.tar.gz -R cdc
+
+# 3. Upgrade the other components in the TiDB cluster.
+#    Run patch for each component that exists in the cluster.
+#    The following example includes PD, TiKV, and TiDB.
+wget https://tiup-mirrors.pingcap.com/pd-v8.5.5-linux-amd64.tar.gz \
+  -O /tmp/pd-v8.5.5-linux-amd64.tar.gz
+wget https://tiup-mirrors.pingcap.com/tikv-v8.5.5-linux-amd64.tar.gz \
+  -O /tmp/tikv-v8.5.5-linux-amd64.tar.gz
+wget https://tiup-mirrors.pingcap.com/tidb-v8.5.5-linux-amd64.tar.gz \
+  -O /tmp/tidb-v8.5.5-linux-amd64.tar.gz
+
+tiup cluster patch <cluster-name> /tmp/pd-v8.5.5-linux-amd64.tar.gz -R pd
+tiup cluster patch <cluster-name> /tmp/tikv-v8.5.5-linux-amd64.tar.gz -R tikv
+tiup cluster patch <cluster-name> /tmp/tidb-v8.5.5-linux-amd64.tar.gz -R tidb
+
+# If the cluster also includes components such as TiFlash, TiProxy, or TiKV-CDC,
+# run patch for each of them in the same way.
+
+# 4. Resume all changefeeds after the upgrade is complete.
+#    Run this command once for each changefeed.
+tiup cdc:v8.5.5 cli changefeed resume \
+  --server=http://<ticdc-host>:8300 \
+  --changefeed-id=<changefeed-id>
+```
+
+> **Note:**
+>
+> `tiup cluster patch` can replace only one component at a time, so in step 3 you need to run it separately for each component that exists in the cluster.
+
+### Upgrade recommendations for the TiCDC new architecture
+
+The TiCDC new architecture can keep changefeeds running during a TiDB rolling upgrade, but only if TiCDC has already been using the new architecture before the upgrade.
+
+If you need to upgrade or switch between the TiCDC classic and new architectures, see [Upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
+
 ## CLI and configuration file compatibility
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
+* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses `start_ts` to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
-* Starting from TiCDC v6.2.0, `cdc cli` can directly interact with TiCDC server via TiCDC Open API. You can specify the address of the TiCDC server using the `--server` parameter. `--pd` is deprecated.
+* Starting from TiCDC v6.2.0, `cdc cli` interacts directly with TiCDC server via the TiCDC Open API, without requiring access to PD. The `--pd` parameter in `cdc cli` subcommands is deprecated, and the `--server` parameter is added to specify the TiCDC server address. Use `--server` instead of `--pd`.
 * Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
 
 ## Handle compatibility issues

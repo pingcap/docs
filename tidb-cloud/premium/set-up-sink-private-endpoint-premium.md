@@ -59,7 +59,7 @@ If the Private Endpoint Service is not available for your downstream service, fo
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 
-2. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click the name of your target instance to go to its overview page.
+2. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
 
     > **Tip:**
     >
