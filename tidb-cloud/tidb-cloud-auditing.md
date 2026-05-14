@@ -237,9 +237,21 @@ For more information, see [Create an Azure storage account](https://learn.micros
 > After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must disable and re-enable audit logging.
 
 ## Database audit logging settings
-> TODO: here is the document for the general db audit logging settings. In this step, we can 
-> 1. Set log file rotation policy, including rotation based on file size and time interval. 
-> 2. Set log redaction. It is enabled by default, that means sensitive information contained in the SQL text in the cluster log will be replaced by "?". Here we can give a Note: Disable database audit log redaction, resulting in log files pushed to the user's cloud storage service containing sensitive information. This configuration is not recommended due to potential security risks.
+In the **Database Audit Logging Settings** step, configure the following items:
+
+1. Set the log file rotation policy.
+
+    You can rotate audit log files based on either file size or time interval. When either condition is met, TiDB Cloud generates a new audit log file.
+
+2. Configure log redaction.
+
+    Log redaction is enabled by default. When enabled, sensitive information in the SQL text is replaced with `?` in audit logs.
+
+3. Click **Save and Enable** to apply the settings and enable the audit logging.
+
+> **Note:**
+>
+> If you disable log redaction, audit log files written to your cloud storage might contain sensitive information. This configuration is not recommended due to potential security risks.
 
 
 ## Specify auditing filter rules
