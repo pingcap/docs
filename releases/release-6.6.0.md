@@ -174,7 +174,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   TiDB Lightning は、ソース ファイルとターゲット テーブル間の列名の不一致の問題に対処するため、新しい構成パラメータ`"header-schema-match"`を追加しました。@[dsdashun](https://github.com/dsdashun)
 
-    TiDB Lightning v6.6.0では、新しいプロファイルパラメータ`"header-schema-match"`が追加されました。デフォルト値は`true`で、これはソースCSVファイルの最初の行が列名として扱われ、ターゲットテーブルの列名と一致することを意味します。CSVテーブルヘッダーのフィールド名がターゲットテーブルの列名と一致しない場合は、この設定を`false`に設定できます。TiDB TiDB Lightningはエラーを無視し、ターゲットテーブルの列の順序でデータのインポートを続行します。
+    TiDB Lightning v6.6.0では、新しいプロファイルパラメータ`"header-schema-match"`が追加されました。デフォルト値は`true`で、これはソースCSVファイルの最初の行が列名として扱われ、ターゲットテーブルの列名と一致することを意味します。CSVテーブルヘッダーのフィールド名がターゲットテーブルの列名と一致しない場合は、この設定を`false`に設定できます。TiDB Lightningはエラーを無視し、ターゲットテーブルの列の順序でデータのインポートを続行します。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 

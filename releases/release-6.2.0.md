@@ -210,7 +210,7 @@ TiDBバージョン: 6.2.0-DMR
 
 -   TiDB Lightningのディスククォータ設定をサポート（実験的）
 
-    TiDB Lightning が物理インポートモード (backend=&#39;local&#39;) でデータをインポートする場合、sorted-kv-dir にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB TiDB Lightningが使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、sorted-kv-dir に十分なstorage容量がない場合でも、インポートタスクを正常に完了できます。
+    TiDB Lightning が物理インポートモード (backend=&#39;local&#39;) でデータをインポートする場合、sorted-kv-dir にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightningが使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、sorted-kv-dir に十分なstorage容量がない場合でも、インポートタスクを正常に完了できます。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
