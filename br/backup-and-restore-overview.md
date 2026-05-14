@@ -179,3 +179,9 @@ The following table lists the compatibility matrix for log backups. Note that al
 - [TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
 - [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md)
 - [Backup Storages](/br/backup-and-restore-storages.md)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 8: Performing Backup and Restore" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff7" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch09_en.png" duration="60 mins" />
+</RelatedResources>
