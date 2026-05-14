@@ -9,7 +9,13 @@ TiDB Cloud provides an audit logging feature that records user access activities
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for database audit logging" in the **Description** field, and then click **Submit**.
+> Database audit logging is now in Public Preview for eligible clusters.
+>
+> * **Public Preview Eligibility**: * Version: TiDB v7.5.6+ or v8.5.2+.
+>   * **Azure Restriction**: Must be created after April 15, 2026.
+> * **Other Clusters**: For all other versions or configurations, the feature remains available upon request.
+>
+> To request access for an ineligible cluster, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for database audit logging" in the **Description** field, and then click **Submit**.
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
@@ -98,22 +104,15 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
+In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
 
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
 2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
-
-    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
-
-5. Click **Enable** to enable audit logging for the cluster.
-
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Amazon S3 bucket.
+4. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigate to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
->
-> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
+> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must disable and re-enable audit logging.
 > - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in the AWS Management Console.
 
 ### Enable audit logging for Google Cloud
@@ -167,17 +166,10 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 1. In the **Bucket URI** field, enter your full GCS bucket name.
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
-
-    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
-
-4. Click **Enable** to enable audit logging for the cluster.
-
-    TiDB Cloud is ready to write audit logs for the specified cluster to your GCS bucket.
+3. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigate to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
->
-> - After enabling audit logging, if you make any new changes to the bucket URI or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
+> - After enabling audit logging, if you make any new changes to the bucket URI or location, you must disable and re-enable audit logging.
 > - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this cluster in the Google Cloud console.
 
 ### Enable audit logging for Azure
@@ -236,21 +228,19 @@ For more information, see [Create an Azure storage account](https://learn.micros
 2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
 4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
-
     - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
     - In the **SAS Token** field, enter the SAS token for accessing the container.
-
-5. Click **Test Connection** to verify whether TiDB Cloud can access and write to the container.
-
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
-
-6. Click **Enable** to enable audit logging for the cluster.
-
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Azure blob container.
+5. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigate to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
 >
-> After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must click **Test Connection** again to verify that TiDB Cloud can connect to the container. Then, click **Enable** to apply the changes.
+> After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must disable and re-enable audit logging.
+
+## Database audit logging settings
+> TODO: here is the document for the general db audit logging settings. In this step, we can 
+> 1. Set log file rotation policy, including rotation based on file size and time interval. 
+> 2. Set log redaction. It is enabled by default, that means sensitive information contained in the SQL text in the cluster log will be replaced by "?". Here we can give a Note: Disable database audit log redaction, resulting in log files pushed to the user's cloud storage service containing sensitive information. This configuration is not recommended due to potential security risks.
+
 
 ## Specify auditing filter rules
 
