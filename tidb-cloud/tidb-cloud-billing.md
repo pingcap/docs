@@ -21,13 +21,9 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 
 对于 {{{ .essential }}}，收费依据是已预配的 Request Capacity Units (RCUs) 数量，**而不是**应用程序的实际使用量。参见 [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
 
-<CustomContent plan="premium">
-
 ### {{{ .premium }}} 的定价 {#pricing-for-premium}
 
 对于 {{{ .premium }}}，计费依据是已预配的 Request Capacity Units (RCUs) 数量以及你实际使用的存储，而不是底层后端节点或已预配的磁盘大小。由于 {{{ .premium }}} 当前处于私有预览阶段，你可以[联系我们的销售团队](https://www.pingcap.com/contact-us/)了解定价详情。
-
-</CustomContent>
 
 ## 发票 {#invoices}
 
