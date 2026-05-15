@@ -216,7 +216,6 @@
     -   データアクセス制御
         -   [AWS 上で顧客管理暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)
         -   [Azure 上で顧客管理暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)
-        -   [ユーザーによるログの編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   データベースアクセス制御
         -   [クラスタパスワード設定の構成](/tidb-cloud/configure-security-settings.md)
     -   監査管理
