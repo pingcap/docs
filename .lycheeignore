@@ -33,14 +33,21 @@ https://platform\.openai\.com/api-keys
 https://openai\.com/.*
 https://jwt\.io/
 https://typeorm\.io/.*
+https://dl\.acm\.org/doi/10\.1145/(1988842\.1988850|2588555\.2610507)
+https://developer\.salesforce\.com/.*
+https?://(www\.)?npmjs\.com/package/.*
 https://dash\.cloudflare\.com/.*
 https://centminmod\.com/mydumper\.html
 https://docs\.pingcap\.com/tidb/v6\.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660
 https://docs\.pingcap\.com/tidb/v7\.6/system-variables#tidb_ddl_version-new-in-v760
 https://developers\.redhat\.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level
+<<<<<<< HEAD
 https://portal\.azure\.com/.*
 https://.*github.*/%7B%7B%7B%20.tidb_operator_version%20%7D%7D%7D
+=======
+>>>>>>> 145d861113 (workflow: optimize external link checks (#22894))
 https://.*github.*/%7B%7B%7B.tidb-operator-version%7D%7D%7D
+https://console\.cloud\.google\.com/.*
 https://portal\.azure\.com/.*
 https://azuremarketplace\.microsoft\.com/.*
 https://one\.newrelic\.com/.*

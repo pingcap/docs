@@ -1,7 +1,13 @@
-name: Links (Fail Fast)
+name: ci / external-links-in-changed-lines (pull_request)
 
 on:
   pull_request:
+
+env:
+  DOCS_SITE_BASE_URL: "https://docs.pingcap.com"
+
+permissions:
+  contents: read
 
 jobs:
   linkChecker:
@@ -11,17 +17,49 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: 'Get a list of changed markdown files to process'
-        id: changed-files
+      - name: Collect changed markdown lines with links
+        id: changed-lines
         run: |
-          CHANGED_FILES=$(git diff-tree --name-only --diff-filter 'AM' -r HEAD^1 HEAD -- "*.md" | sed -z "s/\n$//;s/\n/' '/g")
-          echo "all_changed_files=${CHANGED_FILES}" >> $GITHUB_OUTPUT
+          git -c core.quotePath=false diff --unified=0 --diff-filter=AM --no-ext-diff --no-color HEAD^1 HEAD -- '*.md' |
+            perl .github/scripts/extract-changed-markdown-lines.pl .lychee-pr-changed-lines .lychee-pr-inputs.txt
 
+<<<<<<< HEAD
       - name: Link Checker
         if: ${{ steps.changed-files.outputs.all_changed_files }}
         uses: lycheeverse/lychee-action@v2.3.0
         with:
           fail: true
           args: --root-dir $(pwd) -E -i -n -t 45 -- '${{ steps.changed-files.outputs.all_changed_files }}'
+=======
+          count=$(wc -l < .lychee-pr-inputs.txt | tr -d ' ')
+          echo "count=${count}" >> "$GITHUB_OUTPUT"
+
+          if [ "$count" -gt 0 ]; then
+            echo "has_inputs=true" >> "$GITHUB_OUTPUT"
+            sed 's/^/- /' .lychee-pr-inputs.txt
+          else
+            echo "has_inputs=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Collect doc site href URLs
+        if: ${{ steps.changed-lines.outputs.has_inputs == 'true' }}
+        run: |
+          tr '\n' '\0' < .lychee-pr-inputs.txt |
+            perl .github/scripts/extract-site-hrefs.pl .lychee-site-hrefs .lychee-site-href-files.txt
+
+          count=$(wc -l < .lychee-site-href-files.txt | tr -d ' ')
+          if [ "$count" -gt 0 ]; then
+            cat .lychee-site-href-files.txt >> .lychee-pr-inputs.txt
+            sed 's/^/- /' .lychee-site-href-files.txt
+          fi
+
+      - name: Link Checker
+        if: ${{ steps.changed-lines.outputs.has_inputs == 'true' }}
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          failIfEmpty: false
+          args: --root-dir $(pwd) --exclude '^file://' -E -i -n -t 45 --files-from .lychee-pr-inputs.txt
+>>>>>>> 145d861113 (workflow: optimize external link checks (#22894))
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
