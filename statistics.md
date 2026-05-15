@@ -362,7 +362,7 @@ Before v9.0.0, TiDB supported two statistics versions for new statistics collect
 
 > **Warning:**
 >
-> If your TiDB cluster is upgraded from an earlier version and still has existing Version 1 statistics, TiDB can continue to read these Version 1 statistics for upgrade compatibility. However, TiDB can no longer collect new statistics using Version 1. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
+> If your TiDB cluster is upgraded from an earlier version and still has Version 1 statistics collected before the upgrade, TiDB can continue to read these Version 1 statistics for upgrade compatibility. However, TiDB can no longer collect new statistics using Version 1. It is recommended that you use Statistics Version 2 (`tidb_analyze_version = 2`) and [migrate existing objects that use Statistics Version 1 to Version 2](#switch-between-statistics-versions).
 
 - For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
