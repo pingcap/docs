@@ -1,4 +1,4 @@
-name: Check external URLs in changed lines of a PR
+name: ci / external-links-in-changed-lines (pull_request)
 
 on:
   pull_request:
