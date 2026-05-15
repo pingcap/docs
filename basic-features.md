@@ -28,7 +28,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y |
 | [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y |
 | [JSON type](/data-type-json.md) | Y | Y | Y | Y | Y | E | E |
-| [Vector types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N |
+| [Vector types](/ai/reference/vector-search-data-types.md) | E | N | N | N | N | N | N |
 | [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y | Y | Y | Y | Y | Y | Y |
 | [String functions](/functions-and-operators/string-functions.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y |
@@ -36,7 +36,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Bit functions and operators](/functions-and-operators/bit-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md) | Y | Y | Y | Y | Y | Y | Y |
-| [Vector functions and operators](/vector-search/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N |
+| [Vector functions and operators](/ai/reference/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N |
 | [Information functions](/functions-and-operators/information-functions.md) | Y | Y | Y | Y | Y | Y | Y |
 | [JSON functions](/functions-and-operators/json-functions.md) | Y | Y | Y | Y | Y | E | E |
 | [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md) | Y | Y | Y | Y | Y | Y | Y |
@@ -66,8 +66,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | Y | Y | Y | N | N | N |
 | [Foreign key](/foreign-key.md) | Y | E | E | E | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | N | N | N |
-| [Global index](/partitioned-table.md#global-indexes) | Y |  N | N  | N | N | N | N |
-| [Vector index](/vector-search/vector-search-index.md) | E | N | N | N | N | N | N |
+| [Global indexes](/global-indexes.md) | Y |  N | N  | N | N | N | N |
+| [Vector indexes](/ai/reference/vector-search-index.md) | E | N | N | N | N | N | N |
 
 ## SQL statements
 
@@ -98,7 +98,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 | Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Vector search](/vector-search/vector-search-overview.md) |  E |  N |  N  | N | N | N | N |
+| [Vector search](/ai/concepts/vector-search-overview.md) |  E |  N |  N  | N | N | N | N |
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | Y | Y | E | N | N | N |
 | [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) | E | N | N | N | N | N | N |
@@ -174,7 +174,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | Y | Y | Y | E | N | N |
 | [Convert a partitioned table to a non-partitioned table](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) | Y | Y | Y | N | N | N | N |
 | [Partition an existing table](/partitioned-table.md#partition-an-existing-table) | Y | Y | Y | N | N | N | N |
-| [Global index](/partitioned-table.md#global-indexes) | Y | N | N | N | N | N | N |
+| [Global indexes](/global-indexes.md) | Y | N | N | N | N | N | N |
 
 ## Statistics
 
@@ -222,7 +222,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y |
-| [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) [^6] | Removed | Y | Y | Y | Y | Y | Y |
+| [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) [^6] | Removed | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | Y | Y | E | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | Y | Y | N | N |
@@ -261,7 +261,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E |
 | [Resource control](/tidb-resource-control-ru-groups.md) | Y | Y | Y | Y | N | N | N |
 | [Runaway Queries management](/tidb-resource-control-runaway-queries.md) | Y | Y | E | N | N | N | N |
-| [Background tasks management](/tidb-resource-control-background-tasks.md) | E | E | E | N | N | N | N |
+| [Background tasks management](/tidb-resource-control-background-tasks.md) | Y | E | E | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | Y | Y | E | N | N | N |
 | [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y |
@@ -282,4 +282,4 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 [^5]: Starting from [TiDB v7.0.0](/releases/release-7.0.0.md), the new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental features. Starting from [v7.6.0](/releases/release-7.6.0.md), TiDB processes `LOAD DATA` in transactions in the same way as MySQL. The `LOAD DATA` statement in a transaction no longer automatically commits the current transaction or starts a new transaction. Moreover, you can explicitly commit or roll back the `LOAD DATA` statement in a transaction. Additionally, the `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
 
-[^6]: Starting from v7.5.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated. Starting from v8.4.0, TiDB Binlog is removed. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
+[^6]: Starting from v7.5.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated. Starting from v8.4.0, TiDB Binlog is removed. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.

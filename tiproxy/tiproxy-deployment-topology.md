@@ -9,7 +9,7 @@ This document describes the deployment topology of [TiProxy](/tiproxy/tiproxy-ov
 
 For other deployment methods, refer to the following documents:
 
-- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
 - To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
 - To deploy TiProxy using TiUP, see [Installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
 

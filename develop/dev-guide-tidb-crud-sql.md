@@ -1,6 +1,7 @@
 ---
 title: CRUD SQL in TiDB
 summary: A brief introduction to TiDB's CRUD SQL.
+aliases: ['/tidb/stable/dev-guide-tidb-crud-sql/','/tidb/dev/dev-guide-tidb-crud-sql/','/tidbcloud/dev-guide-tidb-crud-sql/']
 ---
 
 # CRUD SQL in TiDB
@@ -9,7 +10,7 @@ This document briefly introduces how to use TiDB's CRUD SQL.
 
 ## Before you start
 
-Please make sure you are connected to a TiDB cluster. If not, refer to [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster.
+Please make sure you are connected to TiDB. If not, [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance) and connect to it first.
 
 ## Explore SQL with TiDB
 
@@ -19,7 +20,7 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first deploy a TiDB cluster and then run SQL statements in it.
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance) and then run SQL statements in it.
 
 This page walks you through the basic TiDB SQL statements such as DDL, DML, and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 
@@ -104,14 +105,6 @@ SELECT * FROM person WHERE id < 5;
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

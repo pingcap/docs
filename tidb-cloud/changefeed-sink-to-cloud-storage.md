@@ -1,33 +1,66 @@
 ---
 title: Sink to Cloud Storage
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
 ---
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
+This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage are supported.
 
 > **Note:**
 >
 > - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, the changefeed feature is unavailable.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is in beta. For more information, see [Changefeed (Beta)](/tidb-cloud/essential-changefeed-overview.md).
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 100 changefeeds.
+- For each TiDB Cloud Dedicated cluster, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
+For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for authentication. Using **AWS Role ARN** is recommended for stronger security and easier management.
 
-![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
+**Option 1: AWS Role ARN (recommended)**
+
+To use an IAM Role for authentication, follow these steps:
+
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+2. Under **Bucket Access**, select **AWS Role ARN**.
+3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
+
+    If you prefer to create the role manually, click **Create Role ARN manually** to view the TiDB Cloud account information and the required policy.
+
+4. Ensure your IAM role has at least the following permissions for the target bucket:
+
+    - `s3:ListBucket`
+    - `s3:PutObject`
+    - `s3:GetObject`
+    - `s3:DeleteObject`
+
+5. Paste the generated **Role ARN** into the corresponding field.
+
+**Option 2: AWS access key**
+
+> **Note:**
+>
+> Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, it is recommended to use **AWS Role ARN** instead.
+
+To use an access key for authentication, follow these steps:
+
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your TiDB cluster.
+2. Under **Bucket Access**, select **AWS Access Key**.
+3. Fill in the following fields:
+
+    - **Access Key ID**
+    - **Secret Access Key**
 
 </div>
 <div label="GCS">
@@ -82,12 +115,52 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
+7. In the TiDB Cloud console, go to the Changefeed's **Destination** page, and fill in the **bucket gsutil URI** field.
+
+</div>
+<div label="Azure Blob Storage">
+
+For **Azure Blob Storage**, you must configure the container and get a SAS token in the Azure portal first. Take the following steps:
+
+1. In the [Azure portal](https://portal.azure.com/), create a container to store changefeed data.
+
+    1. In the left navigation pane, click **Storage Accounts**, and then select your storage account.
+    2. In the storage account navigation menu, select **Data storage** > **Containers**, and then click **+ Container**.
+    3. Enter a name for your new container, set the anonymous access level (the recommended level is **Private**), and then click **Create**.
+
+2. Get the URL of the target container.
+
+    1. In the container list, select your target container.
+    2. Click **...** for the container, and then select **Container properties**.
+    3. Save the **URL** value for later use, for example `https://<storage_account>.blob.core.windows.net/<container>`.
+
+3. Generate a SAS token.
+
+    1. In the storage account navigation menu, select **Security + networking** > **Shared access signature**.
+    2. In the **Allowed services** section, select **Blob**.
+    3. In the **Allowed resource types** section, select **Container** and **Object**.
+    4. In the **Allowed permissions** section, select **Read**, **Write**, **Delete**, **List**, and **Create**.
+    5. Specify a validity period for the SAS token that is long enough to meet your needs.
+
+        > **Note:**
+        >
+        > - The changefeed continuously writes events, so ensure the SAS token has a sufficiently long validity period. For security, it is recommended to replace the token every six to twelve months.
+        > - The generated SAS token cannot be revoked, so set its validity period carefully.
+        > - To ensure continuous availability, regenerate and update the SAS token before it expires.
+
+    6. Click **Generate SAS and connection string**, and then save the **SAS token**.
+
+        ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
+
+4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Destination** page, and fill in the following fields:
+
+    - **Blob URL**: enter the container URL obtained in step 2. You can optionally add a prefix.
+    - **SAS Token**: enter the generated SAS token obtained in step 3.
 
 </div>
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3, GCS, or Azure Blob Storage. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
@@ -98,6 +171,7 @@ Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster
 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
+    - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
     - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
@@ -105,7 +179,13 @@ Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster
 2. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
-    - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
+    - **Event Filter**: you can use the following event filters to exclude specific events from the changefeed:
+        - **Ignore event**: excludes specified event types.
+        - **Ignore SQL**: excludes DDL events that match specified expressions. For example, `^drop` excludes statements starting with `DROP`, and `add column` excludes statements containing `ADD COLUMN`.
+        - **Ignore insert value expression**: excludes `INSERT` statements that meet specific conditions. For example, `id >= 100` excludes `INSERT` statements where `id` is greater than or equal to 100.
+        - **Ignore update new value expression**: excludes `UPDATE` statements where the new value matches a specified condition. For example, `gender = 'male'` excludes updates that result in `gender` being `male`.
+        - **Ignore update old value expression**: excludes `UPDATE` statements where the old value matches a specified condition. For example, `age < 18` excludes updates where the old value of `age` is less than 18.
+        - **Ignore delete value expression**: excludes `DELETE` statements that meet a specified condition. For example, `name = 'john'` excludes `DELETE` statements where `name` is `'john'`.
 
 3. In the **Start Replication Position** area, select one of the following replication positions:
 
@@ -148,6 +228,8 @@ Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster
     > **Note:**
     >
     > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
+
+6. In the **Split Event** area, choose whether to split `UPDATE` events into separate `DELETE` and `INSERT` events or keep as raw `UPDATE` events. For more information, see [Split primary or unique key UPDATE events for non-MySQL sinks](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
 
 ## Step 3. Configure specification
 

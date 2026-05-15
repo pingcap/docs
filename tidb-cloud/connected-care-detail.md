@@ -107,22 +107,22 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   </tr>
   <tr>
     <td rowspan="5">Customer Resources</td>
-    <td>Documentations</td>
-    <td>Documentations</td>
-    <td>Documentations</td>
-    <td>Documentations</td>
+    <td>Documentation</td>
+    <td>Documentation</td>
+    <td>Documentation</td>
+    <td>Documentation</td>
   </tr>
   <tr>
-    <td>FAQ</td>
-    <td>FAQ</td>
-    <td>FAQ</td>
-    <td>FAQ</td>
+    <td>FAQs</td>
+    <td>FAQs</td>
+    <td>FAQs</td>
+    <td>FAQs</td>
   </tr>
   <tr>
-    <td>Community Workspace</td>
-    <td>Community Workspace</td>
-    <td>Community Workspace</td>
-    <td>Community Workspace</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
   </tr>
   <tr>
     <td><a href="https://tidb.ai/">TiDB.AI</a></td>
@@ -141,4 +141,4 @@ This document provides detailed information about the [Connected Care](/tidb-clo
 
 - Business hours: 9 AM - 6 PM local time, Monday to Friday
 - IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. We are planning to support [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) in the future.
-- [Clinic](https://clinic.pingcap.com/): a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
+- [Clinic](https://clinic.pingcap.com/): a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your {{{ .dedicated }}} clusters.

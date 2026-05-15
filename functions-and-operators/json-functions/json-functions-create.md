@@ -5,9 +5,9 @@ summary: Learn about JSON functions that create JSON values.
 
 # JSON Functions That Create JSON Values
 
-This document describes JSON functions that create JSON values.
+TiDB supports all the [JSON functions that create JSON values](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html) available in MySQL 8.0.
 
-## [JSON_ARRAY()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-array)
+## `JSON_ARRAY()`
 
 The `JSON_ARRAY([val[, val] ...])` function evaluates a (possibly empty) list of values and returns a JSON array containing those values.
 
@@ -24,7 +24,7 @@ SELECT JSON_ARRAY(1,2,3,4,5), JSON_ARRAY("foo", "bar");
 1 row in set (0.00 sec)
 ```
 
-## [JSON_OBJECT()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-object)
+## `JSON_OBJECT()`
 
 The `JSON_OBJECT([key, val[, key, val] ...])` function evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs.
 
@@ -41,7 +41,7 @@ SELECT JSON_OBJECT("database", "TiDB", "distributed", TRUE);
 1 row in set (0.00 sec)
 ```
 
-## [JSON_QUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-quote)
+## `JSON_QUOTE()`
 
 The `JSON_QUOTE(str)` function returns a string as a JSON value with quotes.
 

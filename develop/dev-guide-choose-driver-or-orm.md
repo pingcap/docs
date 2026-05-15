@@ -1,9 +1,10 @@
 ---
-title: Choose Driver or ORM
+title: Choose a Driver or ORM
 summary: Learn how to choose a driver or ORM framework to connect to TiDB.
+aliases: ['/tidb/stable/dev-guide-choose-driver-or-orm/','/tidb/dev/dev-guide-choose-driver-or-orm/','/tidbcloud/dev-guide-choose-driver-or-orm/']
 ---
 
-# Choose Driver or ORM
+# Choose a Driver or ORM
 
 > **Note:**
 >
@@ -50,7 +51,7 @@ If you are using Maven, add the following content to the `<dependencies></depend
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 ```
 
@@ -60,7 +61,7 @@ If you need to enable SM3 authentication, add the following content to the `<dep
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 <dependency>
     <groupId>org.bouncycastle</groupId>
@@ -77,7 +78,7 @@ If you need to enable SM3 authentication, add the following content to the `<dep
 If you use Gradle, add the following content to `dependencies`:
 
 ```gradle
-implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
+implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.2'
 implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.67'
 implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67'
 ```
@@ -189,7 +190,7 @@ If you are using Maven, add the following content to the element body of `<depen
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 <dependency>
   <groupId>io.github.lastincisor</groupId>
@@ -201,7 +202,7 @@ If you are using Maven, add the following content to the element body of `<depen
 If you are using Gradle, add the following content to `dependencies`:
 
 ```gradle
-implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
+implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.2'
 implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version: '0.0.5'
 ```
 
@@ -302,22 +303,8 @@ For an example of using peewee to build a TiDB application, see [Connect to TiDB
 </div>
 </SimpleTab>
 
-<CustomContent platform="tidb-cloud">
-
-After you have determined the driver or ORM, you can [connect to your TiDB cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
-
-</CustomContent>
-
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

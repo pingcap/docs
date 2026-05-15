@@ -3,7 +3,7 @@ title: DISTRIBUTE TABLE
 summary: An overview of the usage of DISTRIBUTE TABLE for the TiDB database.
 ---
 
-# DISTRIBUTE TABLE <span class="version-mark">New in v9.0.0</span>
+# DISTRIBUTE TABLE <span class="version-mark">New in v8.5.4 and v9.0.0</span>
 
 > **Warning:**
 >
@@ -13,7 +13,7 @@ summary: An overview of the usage of DISTRIBUTE TABLE for the TiDB database.
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 </CustomContent>
 

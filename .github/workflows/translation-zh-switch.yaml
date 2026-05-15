@@ -15,15 +15,16 @@ on:
 
 jobs:
   zh-translation:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         name: Download translator repo
         with:
-          repository: "shczhen/markdown-translator"
-          ref: "openai"
-          path: "markdown-translator"
+          repository: "pingcap/docs-toolkit"
+          ref: "main"
+          path: "docs-toolkit"
 
       - uses: actions/checkout@v4
         name: Checkout from branch and create target branch
@@ -93,9 +94,9 @@ jobs:
           cd ..
 
       - uses: actions/setup-node@v4
-        name: Setup node 18
+        name: Setup node
         with:
-          node-version: 18
+          node-version: 20
 
       - run: |
           sudo apt install tree -y
@@ -111,7 +112,7 @@ jobs:
 
       - name: Copy new files to translator folder
         run: |
-          cp -r docs/tmp markdown-translator/markdowns
+          cp -r docs/tmp docs-toolkit/markdown-translator/markdowns
 
       - name: Copy variables.json to translator folder
         run: |
@@ -119,7 +120,7 @@ jobs:
 
       - name: Config and translate
         run: |
-          cd markdown-translator
+          cd docs-toolkit/markdown-translator
           export LANGLINK_ACCESS_KEY=${{ secrets.LANGLINK_ACCESS_KEY }}
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}
@@ -129,7 +130,7 @@ jobs:
 
       - name: Copy translated files to docs repo
         run: |
-          cp -r markdown-translator/output/markdowns/* docs/
+          cp -r docs-toolkit/markdown-translator/output/markdowns/* docs/
 
       - name: Set build ID
         id: build_id

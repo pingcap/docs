@@ -5,9 +5,9 @@ summary: Learn about JSON utility functions.
 
 # JSON Utility Functions
 
-This document describes JSON utility functions.
+TiDB supports all the [JSON utility functions](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html) available in MySQL 8.0.
 
-## [JSON_PRETTY()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty)
+## `JSON_PRETTY()`
 
 The `JSON_PRETTY(json_doc)` function does pretty formatting of a JSON document.
 
@@ -29,7 +29,7 @@ JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}'): {
 1 row in set (0.00 sec)
 ```
 
-## [JSON_STORAGE_FREE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free)
+## `JSON_STORAGE_FREE()`
 
 The `JSON_STORAGE_FREE(json_doc)` function returns how much storage space is freed in the binary representation of the JSON value after it is updated in place. 
 
@@ -50,7 +50,7 @@ SELECT JSON_STORAGE_FREE('{}');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_STORAGE_SIZE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size)
+## `JSON_STORAGE_SIZE()`
 
 The `JSON_STORAGE_SIZE(json_doc)` function returns an approximate size of bytes required to store the JSON value. Because the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL.
 

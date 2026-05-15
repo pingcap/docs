@@ -9,7 +9,7 @@ This document describes how to manage database users and roles using the **SQL U
 
 > **Note:**
 >
-> - The **SQL Users** page is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the SQL Users page" in the **Description** field and click **Submit**.
+> - The **SQL Users** page is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for the SQL Users page" in the **Description** field, and then click **Submit**.
 > - Database users and roles are independent of [organization and project users and roles](/tidb-cloud/manage-user-access.md). Database users are used to access databases in a TiDB cluster, while organization and project users are used to access organizations and projects in the [TiDB Cloud console](https://tidbcloud.com/).
 > - In addition to the **SQL Users** page, you can also manage database users and roles by connecting to your cluster with a SQL client and writing SQL statements. For more information, see [TiDB User Account Management](https://docs.pingcap.com/tidb/dev/user-account-management).
 
@@ -40,11 +40,11 @@ After a SQL user is granted both a built-in role and multiple custom roles, the 
 
 To view SQL users of a cluster, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target resource to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Settings** > **SQL Users**.
 

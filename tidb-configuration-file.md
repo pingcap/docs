@@ -616,6 +616,10 @@ Configuration items related to performance.
 
 ### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
 
+> **Warning:**
+>
+> Starting from v9.0.0, the `concurrently-init-stats` configuration item is deprecated and TiDB always initializes statistics concurrently during startup.
+
 + Controls whether to initialize statistics concurrently during TiDB startup. This configuration item takes effect only when [`lite-init-stats`](#lite-init-stats-new-in-v710) is set to `false`.
 + Default value: `false` for versions earlier than v8.2.0, `true` for v8.2.0 and later versions.
 
@@ -632,6 +636,21 @@ Configuration items related to performance.
 + Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
 + When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. Note that if there are a large number of tables and partitions and the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) is `false`, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
+
+### skip-init-stats <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> This configuration item is for maintenance purposes only. Do not enable it on TiDB nodes that handle regular workloads. 
+
++ Controls whether to skip statistics initialization during TiDB startup.
++ Default value: `false`
++ When the value of `skip-init-stats` is `true`, TiDB skips statistics initialization during startup and does not load statistics afterward. It is useful if you need to start TiDB quickly without waiting for statistics initialization, especially when there are a large number of tables and partitions. However, it is intended for maintenance only. In most cases, do not set this configuration item to `true`; otherwise, the optimizer might generate suboptimal execution plans due to missing statistics.
+
+### `enable-async-batch-get` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. Using asynchronous mode can reduce goroutine overhead and provide better performance. Generally, there is no need to modify this configuration item.
++ Default value: `true` for v9.0.0 and later versions. In v8.5.5, the default value is `false`.
 
 ## opentracing
 

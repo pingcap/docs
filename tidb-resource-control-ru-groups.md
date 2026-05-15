@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/tidb-resource-control/']
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 As a cluster administrator, you can use the resource control feature to create resource groups, set quotas for resource groups, and bind users to those groups.
 
@@ -102,7 +102,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
-> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Managed clusters, excluding the network and storage consumption. For {{{ .starter }}} RUs, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Managed clusters, excluding the network and storage consumption. For {{{ .starter }}} RUs, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 > - Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
 
 ## Parameters for resource control
@@ -446,3 +446,9 @@ The resource control feature does not impact the regular usage of data import, e
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [RESOURCE GROUP RFC](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 5: Using Resource Control with Mixed Workloads" type="lab" link="https://labs.tidb.io/labs/demo_006" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch05_en.png" duration="90 mins" />
+</RelatedResources>
