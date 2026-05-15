@@ -155,3 +155,7 @@ The following file-level metadata fields are available for the supported file fo
 - [Querying Avro Files](/tidb-cloud-lake/guides/query-avro-files-in-stage.md)
 - [Querying CSV Files](/tidb-cloud-lake/guides/query-csv-files-in-stage.md)
 - [Querying TSV Files](/tidb-cloud-lake/guides/query-tsv-files-in-stage.md)
+
+## Schema Evolution
+
+- [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md): Automatically add new columns to a table when loading Parquet files with evolving schemas.

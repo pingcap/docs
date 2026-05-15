@@ -85,6 +85,7 @@
     - [Query Avro Files](/tidb-cloud-lake/guides/query-avro-files-in-stage.md)
     - [Query Staged ORC Files](/tidb-cloud-lake/guides/query-staged-orc-files-in-stage.md)
     - [Transform Data on Load](/tidb-cloud-lake/guides/transform-data-on-load.md)
+    - [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md)
   - Continuous Data Pipelines
     - [Overview](/tidb-cloud-lake/guides/continuous-data-pipelines.md)
     - [Track and Transform Data via Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)

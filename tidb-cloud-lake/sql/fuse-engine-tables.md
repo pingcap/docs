@@ -189,3 +189,23 @@ SET GLOBAL data_retention_num_snapshots_to_keep = 20;
 ALTER TABLE t1 SET OPTIONS(data_retention_num_snapshots_to_keep = 3);
 -- Now t1 will keep 3 snapshots when vacuum is triggered
 ```
+
+### `enable_schema_evolution`
+
+- **Syntax:**
+
+    `enable_schema_evolution = True / False`
+
+- **Description:**
+
+    Controls whether the table schema can be automatically evolved during `COPY INTO` operations. When enabled (set to `True`), {{{ .lake }}} automatically adds missing columns to the table when loading Parquet files whose schemas contain columns not present in the destination table. Missing values for existing rows are filled with `NULL`. For more information, see [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md).
+
+**Examples:**
+
+```sql
+-- Enable schema evolution for an existing table
+ALTER TABLE invoices SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = true);
+
+-- Create a new table with schema evolution enabled
+CREATE OR REPLACE TABLE invoices (order_id INT) ENABLE_SCHEMA_EVOLUTION = true;
+```

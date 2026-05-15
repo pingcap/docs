@@ -247,6 +247,7 @@ Only the following Fuse Engine options can be unset:
 - `block_size_threshold`
 - `data_retention_period_in_hours`
 - `data_retention_num_snapshots_to_keep`
+- `enable_schema_evolution`
 - `row_avg_depth_threshold`
 - `row_per_block`
 - `row_per_page`
