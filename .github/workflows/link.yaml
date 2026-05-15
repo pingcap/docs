@@ -15,16 +15,24 @@ permissions:
 
 jobs:
   linkChecker:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Download Exclude Path
         run: |
           curl -fsSL https://raw.githubusercontent.com/pingcap/docs/master/.lycheeignore --output .lycheeignore
 
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
       - name: Check Links
-        uses: lycheeverse/lychee-action@v1.6.1
+        uses: lycheeverse/lychee-action@v2
         with:
           # Don't fail as we want the workflow to continue and run 'Create Issue From File'
           fail: false
@@ -85,7 +93,7 @@ jobs:
           } > out.md
 
       - name: Create Issue From File
-        uses: peter-evans/create-issue-from-file@v4
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: Broken Link Detected
           content-filepath: out.md

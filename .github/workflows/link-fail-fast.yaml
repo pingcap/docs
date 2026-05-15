@@ -13,7 +13,7 @@ jobs:
   linkChecker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -23,14 +23,6 @@ jobs:
           git -c core.quotePath=false diff --unified=0 --diff-filter=AM --no-ext-diff --no-color HEAD^1 HEAD -- '*.md' |
             perl .github/scripts/extract-changed-markdown-lines.pl .lychee-pr-changed-lines .lychee-pr-inputs.txt
 
-<<<<<<< HEAD
-      - name: Link Checker
-        if: ${{ steps.changed-files.outputs.all_changed_files }}
-        uses: lycheeverse/lychee-action@v2.3.0
-        with:
-          fail: true
-          args: --root-dir $(pwd) -E -i -n -t 45 -- '${{ steps.changed-files.outputs.all_changed_files }}'
-=======
           count=$(wc -l < .lychee-pr-inputs.txt | tr -d ' ')
           echo "count=${count}" >> "$GITHUB_OUTPUT"
 
@@ -60,6 +52,5 @@ jobs:
           fail: true
           failIfEmpty: false
           args: --root-dir $(pwd) --exclude '^file://' -E -i -n -t 45 --files-from .lychee-pr-inputs.txt
->>>>>>> 145d861113 (workflow: optimize external link checks (#22894))
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
