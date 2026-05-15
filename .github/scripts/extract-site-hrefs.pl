@@ -13,21 +13,25 @@ $site_base_url =~ s{/+\z}{};
 make_path($out_root);
 open my $list_fh, ">", $list_path or die "cannot write $list_path: $!";
 
-local $/ = "\0";
-while (my $file = <STDIN>) {
-  chomp $file;
-  next if $file =~ m{(?:^|/)\.\.(?:/|$)};
-  next unless -f $file;
+{
+  local $/ = "\0";
+  while (my $file = <STDIN>) {
+    chomp $file;
+    next if $file =~ m{(?:^|/)\.\.(?:/|$)};
+    next unless -f $file;
 
-  open my $in_fh, "<", $file or die "cannot read $file: $!";
-  my %seen;
-  while (my $line = <$in_fh>) {
-    while ($line =~ /\bhref\s*=\s*(["'])(.*?)\1/gi) {
+    open my $in_fh, "<", $file or die "cannot read $file: $!";
+    my $content = do { local $/; <$in_fh> };
+    close $in_fh;
+    next unless defined $content;
+
+    my %seen;
+    while ($content =~ /\bhref\s*=\s*(["'])(.*?)\1/gi) {
       my $href = $2;
       $href =~ s/^\s+|\s+$//g;
       next if $href eq "";
       next if $href =~ m{^https?://}i;
-      next if $href =~ m{^(?:#|mailto:|tel:|javascript:|data:)}i;
+      next if $href =~ m{^(?:#|[a-z][a-z0-9+.-]*:)}i;
 
       my $url;
       if ($href =~ m{^//}) {
@@ -35,21 +39,20 @@ while (my $file = <STDIN>) {
       } elsif ($href =~ m{^/}) {
         $url = "$site_base_url$href";
       } else {
-        $url = "$site_base_url/$href";
+        next;
       }
       $seen{$url} = 1;
     }
-  }
-  close $in_fh;
 
-  next unless %seen;
-  my $out_path = "$out_root/$file";
-  make_path(dirname($out_path));
-  open my $out_fh, ">", $out_path or die "cannot write $out_path: $!";
-  for my $url (sort keys %seen) {
-    print {$out_fh} "<$url>\n";
+    next unless %seen;
+    my $out_path = "$out_root/$file";
+    make_path(dirname($out_path));
+    open my $out_fh, ">", $out_path or die "cannot write $out_path: $!";
+    for my $url (sort keys %seen) {
+      print {$out_fh} "<$url>\n";
+    }
+    close $out_fh;
+    print {$list_fh} "$out_path\n";
   }
-  close $out_fh;
-  print {$list_fh} "$out_path\n";
 }
 close $list_fh;
