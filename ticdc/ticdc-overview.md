@@ -164,3 +164,9 @@ WHERE `A` = 1 OR `A` = 2;
 -   v8.2.0以降、 BRはTiCDCのデータ復元に関する制限を緩和しました。復元対象データの`BackupTS` （バックアップ時刻）が変更フィード[`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) （現在のレプリケーションの進行状況を示すタイムスタンプ）よりも前であれば、 BRは通常通りデータ復元を続行できます。5 `BackupTS`通常それよりもずっと前であることを考慮すると、ほとんどのシナリオにおいて、 BRはTiCDCレプリケーションタスクを含むクラスターのデータ復元をサポートしていると推測できます。
 
 TiCDCは、アップストリームにおける大規模トランザクションを含むシナリオを部分的にしかサポートしていません。詳細については、 [TiCDCFAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。TiCDCが大規模トランザクションの複製をサポートしているかどうか、および関連するリスクについて詳しく説明されています。
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="管理 TiDB 演習 11: TiCDC を使用して TiDB 変更イベントを複製する" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff10" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch12_en.png" duration="60 分" />
+</RelatedResources>

@@ -111,6 +111,8 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 -   TiDB の宛先では、デフォルトの正規化モードで`timestamp`型が`varchar`型に変換されます。これは、Airbyte が送信中にタイムスタンプ型を文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないためです。
 -   一部の大規模な ELT ミッションでは、TiDB の[取引制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
 
-## 関連項目 {#see-also}
+## 関連リソース {#related-resources}
 
-[Airbyteを使用してTiDB CloudからSnowflakeへデータを移行する](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/)。
+<RelatedResources>
+  <ResourceCard title="Airbyteを使用してTiDB CloudからSnowflakeにデータを移行する" type="blog" link="https://pingcap.co.jp/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/" imgSrc="https://static.pingcap.co.jp/files/2022/07/migrate-data-from-tidb-cloud-to-snowflake-scaled.jpeg" author="Qiang Wu" date="2022-07-28" />
+</RelatedResources>

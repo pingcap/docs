@@ -687,3 +687,9 @@ mysql> SHOW WARNINGS;  -- cannot hit plan cache since the JSON_CONTAINS predicat
 +---------+------+-------------------------------------------------------------------------------------------------------+
 1 row in set (0.01 sec)
 ```
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="SQL チューニング演習 1: CLUSTERED インデックスと NONCLUSTERED インデックス" type="lab" link="https://labs.tidb.io/ja/labs/dba_307_lab_ff0" imgSrc="https://lab-static.pingcap.com/quick-demo/307-01.png" duration="90 分" />
+</RelatedResources>

@@ -396,3 +396,9 @@ TiDB クラスターとともに[TiCDC](/ticdc/ticdc-overview.md)デプロイし
 -   [TiCDC よくある質問](/ticdc/ticdc-faq.md)
 
 オンライン サービスを中断せずに TiDB クラスターをスケール アウトまたはスケール インする場合は、 [TiUPを使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)参照してください。
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="管理 TiDB 演習 1: TiUP を使用した TiDB クラスタの導入" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff0" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch01_en.png" duration="60 分" />
+</RelatedResources>

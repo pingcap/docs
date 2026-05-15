@@ -1892,3 +1892,9 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
     SET session tidb_partition_prune_mode = dynamic;
     source gatherGlobalStats.sql
     ```
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="SQL チューニング演習 2: パーティションテーブル" type="lab" link="https://labs.tidb.io/ja/labs/dba_307_lab_ff1" imgSrc="https://lab-static.pingcap.com/quick-demo/307-02.png" duration="90 分" />
+</RelatedResources>

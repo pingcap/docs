@@ -177,3 +177,9 @@ TiDB v6.6.0 より前のBRの互換性情報は次のとおりです。
 -   [TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
 -   [TiDB ログバックアップと PITR ガイド](/br/br-pitr-guide.md)
 -   [バックアップストレージ](/br/backup-and-restore-storages.md)
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="管理 TiDB 演習 8: バックアップと復元" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff7" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch09_en.png" duration="60 分" />
+</RelatedResources>
