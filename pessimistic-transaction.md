@@ -202,7 +202,7 @@ sequenceDiagram
         rect rgba(0, 0, 0, 0.04)
             alt do read
                 TiDB->>TiKV: get data from TiKV with start_ts
-                TiDB-->>client: return read result
+                TiDB->>client: return read result
             else do write
                 rect rgba(255, 0, 0, 0.08)
                     loop if has write conflict
@@ -211,7 +211,7 @@ sequenceDiagram
                         TiDB->>TiKV: acquire pessimistic locks parallelly
                     end
                 end
-                TiDB-->>client: return write result
+                TiDB->>client: return write result
             end
         end
     end
@@ -226,7 +226,7 @@ sequenceDiagram
             par commit
                 TiDB->>PD: get ts as commit_ts
                 TiDB->>TiKV: commit primary_key with commit_ts first
-                TiDB-->>client: success
+                TiDB->>client: success
                 TiDB->>TiKV: commit each secondary_key with commit_ts parallelly
             end
         end
@@ -261,9 +261,9 @@ sequenceDiagram
     loop
         Client->>TiDB: DML
         TiDB->>TiKV1: Acquire pessimistic locks
-        TiKV1-->>TiDB: OK
-        TiKV1-)TiKV2: Log replication
-        TiKV1-)TiKV3: Log replication
+        TiKV1->>TiDB: OK
+        TiKV1--)TiKV2: Log replication
+        TiKV1--)TiKV3: Log replication
     end
 ```
 
