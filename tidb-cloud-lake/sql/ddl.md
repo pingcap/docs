@@ -38,6 +38,7 @@ These topics provide reference information for the DDL (Data Definition Language
 | **[Network Policy](/tidb-cloud-lake/sql/network-policy-sql.md)** | Control network access to databases |
 | **[Mask Policy](/tidb-cloud-lake/sql/masking-policy-sql.md)** | Apply data masking for sensitive information |
 | **[Password Policy](/tidb-cloud-lake/sql/password-policy-sql.md)** | Enforce password requirements and rotation |
+| **[Row Access Policy](/tidb-cloud-lake/sql/row-access-policy-overview.md)** | Filter table rows with centralized row-level predicates |
 
 ## Data Integration & Processing
 

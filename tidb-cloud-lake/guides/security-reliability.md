@@ -14,5 +14,6 @@ summary: "{{{ .lake }}} offers enterprise-grade security and reliability feature
 | [**Network Policy**](/tidb-cloud-lake/guides/network-policy.md) | Restrict network access | When you want to limit connections to specific IP ranges even with valid credentials |
 | [**Password Policy**](/tidb-cloud-lake/guides/password-policy.md) | Set password requirements | When you need to enforce password complexity, rotation, and account lockout rules |
 | [**Masking Policy**](/tidb-cloud-lake/guides/masking-policy.md) | Hide sensitive data | When you need to protect confidential data while still allowing authorized access |
+| [**Row Access Policy**](/tidb-cloud-lake/guides/row-access-policy.md) | Filter rows dynamically | When users should only see rows that match role-aware access rules |
 | [**Fail-Safe**](/tidb-cloud-lake/guides/fail-safe.md) | Prevent data loss | When you need to recover accidentally deleted data from S3-compatible storage |
 | [**Recovery from Errors**](/tidb-cloud-lake/guides/recovery-from-operational-errors.md) | Fix operational mistakes | When you need to recover from dropped databases/tables or incorrect data modifications |

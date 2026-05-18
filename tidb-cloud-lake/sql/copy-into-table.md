@@ -710,3 +710,25 @@ SELECT * FROM t2;
 │ 6                │ null              │
 └──────────────────────────────────────┘
 ```
+
+### Example 8: Loading with Schema Evolution
+
+When loading Parquet files whose schemas contain columns not present in the target table, you can use schema evolution to automatically add the missing columns. First, enable schema evolution on the table:
+
+```sql
+CREATE OR REPLACE TABLE invoices(order_id INT);
+
+-- Enable schema evolution
+ALTER TABLE invoices SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = true);
+```
+
+Then load Parquet files with different schemas. {{{ .lake }}} automatically adds new columns and fills missing values with `NULL`:
+
+```sql
+-- Assume @my_stage contains Parquet files with extra columns (e.g., amount, currency)
+COPY INTO invoices
+    FROM @my_stage/
+    FILE_FORMAT = (TYPE = PARQUET MISSING_FIELD_AS = FIELD_DEFAULT);
+```
+
+For more details, see [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md).
