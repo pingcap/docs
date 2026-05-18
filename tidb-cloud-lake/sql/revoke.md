@@ -19,6 +19,10 @@ See also:
 - [GRANT](/tidb-cloud-lake/sql/grant.md)
 - [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)
 
+> **Note:**
+>
+> After changing privileges or roles with `REVOKE`, run [SYSTEM FLUSH PRIVILEGES](/tidb-cloud-lake/sql/system-flush-privileges.md) to broadcast the updates to every query node immediately.
+
 ## Syntax
 
 ### Revoking Privileges
@@ -191,6 +195,36 @@ REVOKE ROLE role1 FROM USER user1;
 ```sql
 SHOW GRANTS FOR user1;
 ```
+
+> **Tip:**
+>
+> Why does `default_role` still show after revoke?
+>
+> `default_role` is a user property, not a grant. `REVOKE` removes role membership but won't reset `default_role`. Here's what that looks like:
+>
+> ```sql
+> CREATE ROLE analyst;
+> CREATE USER bob IDENTIFIED BY 'password123' WITH DEFAULT_ROLE = 'analyst';
+> GRANT ROLE analyst TO bob;
+>
+> DESC USER bob;
+> +------+----------+----------------------+--------------+---------+
+> | name | hostname | auth_type            | default_role | roles   |
+> +------+----------+----------------------+--------------+---------+
+> | bob  | %        | double_sha1_password | analyst      | analyst |
+> +------+----------+----------------------+--------------+---------+
+>
+> REVOKE ROLE analyst FROM bob;
+>
+> DESC USER bob;
+> +------+----------+----------------------+--------------+-------+
+> | name | hostname | auth_type            | default_role | roles |
+> +------+----------+----------------------+--------------+-------+
+> | bob  | %        | double_sha1_password | analyst      |       |
+> +------+----------+----------------------+--------------+-------+
+> ```
+>
+> Notice `roles` is now empty but `default_role` stays. The user no longer has `analyst`'s privileges. To clean up, run `ALTER USER bob WITH DEFAULT_ROLE = 'public'`.
 
 ### Example 4: Revoking Masking Policy Privileges
 
