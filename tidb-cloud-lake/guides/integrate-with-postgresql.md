@@ -7,7 +7,7 @@ summary: This page describes how to create a PostgreSQL integration task that sy
 
 This page describes how to create a PostgreSQL integration task that synchronizes data from a PostgreSQL database into {{{ .lake }}}. PostgreSQL tasks support full `Snapshot` loads, continuous `Change Data Capture (CDC)`, or a combination of both.
 
-If you need to create reusable PostgreSQL connection settings first, see [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md.
+If you need to create reusable PostgreSQL connection settings first, see [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md).
 
 ## Sync Modes
 

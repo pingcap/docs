@@ -26,5 +26,5 @@ Recommended reading order:
 
 ## Task Type Differences
 
-- S3 tasks are designed for file import scenarios and mainly focus on file path patterns, file formats, and ingestion behavior.
-- MySQL tasks are designed for table synchronization scenarios and mainly focus on sync modes, primary keys, incremental capture, and archive scheduling.
+- Amazon S3 tasks are designed for file import scenarios and mainly focus on file path patterns, file formats, and ingestion behavior.
+- MySQL and PostgreSQL tasks are designed for table synchronization scenarios and mainly focus on sync modes, primary keys, incremental capture, and archive scheduling.
