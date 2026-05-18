@@ -272,7 +272,7 @@ ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 - Audit access with `SHOW GRANTS ON ROW ACCESS POLICY <policy_name>`.
 - Find policy usage with [`POLICY_REFERENCES`](/tidb-cloud-lake/sql/policy-references.md): `POLICY_REFERENCES(POLICY_NAME => '<policy_name>')`.
 - Additional references:
-  - [User & Role](/tidb-cloud-lake/sql/user-role.md)
-  - [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
-  - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#row-access-policy-operations)
-  - [Row Access Policy Commands](/tidb-cloud-lake/sql/row-access-policy-overview.md)
+    - [User & Role](/tidb-cloud-lake/sql/user-role.md)
+    - [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
+    - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#row-access-policy-operations)
+    - [Row Access Policy Commands](/tidb-cloud-lake/sql/row-access-policy-overview.md)
