@@ -1,11 +1,13 @@
 ---
-title: Amazon S3
+title: Amazon S3 Integration Task
 summary: The Amazon S3 data integration enables you to import files from S3 buckets into {{{ .lake }}}. It supports CSV, Parquet, and NDJSON file formats, with options for one-time imports or continuous ingestion that automatically polls for new files.
 ---
 
-# Amazon S3
+# Amazon S3 Integration Task
 
-The Amazon S3 data integration enables you to import files from S3 buckets into {{{ .lake }}}. It supports CSV, Parquet, and NDJSON file formats, with options for one-time imports or continuous ingestion that automatically polls for new files.
+This page describes how to create an Amazon S3 integration task that imports files from an S3 bucket into {{{ .lake }}}. CSV, Parquet, and NDJSON file formats are supported, and the task can be configured for one-time import or continuous ingestion.
+
+If you need to create reusable AWS credentials first, see [AWS - Credentials](/tidb-cloud-lake/guides/aws-credentials.md).
 
 ## Supported File Formats
 
@@ -15,23 +17,11 @@ The Amazon S3 data integration enables you to import files from S3 buckets into 
 | Parquet | Columnar storage format, efficient for analytical workloads        |
 | NDJSON  | Newline-delimited JSON, one JSON object per line                   |
 
-## Creating an S3 Data Source
+## Prerequisites
 
-1. Navigate to **Data** > **Data Sources** and click **Create Data Source**.
-
-2. Select **AWS - Credentials** as the service type, and fill in the credentials:
-
-    | Field          | Required | Description                          |
-    |----------------|----------|--------------------------------------|
-    | **Name**       | Yes      | A descriptive name for this data source |
-    | **Access Key** | Yes      | AWS Access Key ID                    |
-    | **Secret Key** | Yes      | AWS Secret Access Key                |
-
-3. Click **Test Connectivity** to verify the credentials. If the test succeeds, click **OK** to save the data source.
-
-> **Tip:**
->
-> The AWS credentials must have read access to the target S3 bucket. If you plan to use the **Clean Up Original Files** option, write and delete permissions are also required.
+- An **AWS - Credentials** data source has already been created
+- The AWS credentials have read access to the target S3 bucket
+- If you plan to enable **Clean Up Original Files**, the credentials also need write and delete permissions
 
 ## Creating an S3 Integration Task
 
@@ -41,14 +31,12 @@ The Amazon S3 data integration enables you to import files from S3 buckets into 
 
 2. Select an S3 data source, then configure the basic settings:
 
-| Field              | Required | Description                                                                                      |
-|--------------------|----------|--------------------------------------------------------------------------------------------------|
-| **Data Source**    | Yes      | Select an existing AWS data source from the dropdown                                             |
-| **Name**          | Yes      | A name for this integration task                                                                 |
-| **File Path**     | Yes      | S3 URI with optional wildcard pattern (e.g., `s3://mybucket/data/2025-*.csv`)                    |
-| **File Type**     | Auto     | Auto-detected from file extension. Supported: CSV, Parquet, NDJSON                              |
-
-![Create S3 Task - Basic Info](/media/tidb-cloud-lake/create-s3-task-basic-info.png)
+    | Field              | Required | Description                                                                                      |
+    |--------------------|----------|--------------------------------------------------------------------------------------------------|
+    | **Data Source**    | Yes      | Select an existing **AWS - Credentials** data source from the dropdown                           |
+    | **Name**          | Yes      | A name for this integration task                                                                 |
+    | **File Path**     | Yes      | S3 URI with optional wildcard pattern (e.g., `s3://mybucket/data/2025-*.csv`)                    |
+    | **File Type**     | Auto     | Auto-detected from file extension. Supported: CSV, Parquet, NDJSON                              |
 
 #### CSV Options
 

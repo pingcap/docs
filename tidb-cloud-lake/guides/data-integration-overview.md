@@ -1,74 +1,36 @@
 ---
-title: Data Integration
-summary: The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
+title: Data Integration Overview
+summary: The Data Integration feature in {{{ .lake }}} provides a visual, no-code interface for importing or synchronizing data from external systems into {{{ .lake }}}.
 ---
 
-# Data Integration
+# Data Integration Overview
 
-The Data Integration feature in {{{ .lake }}} enables you to load data from external sources into {{{ .lake }}} through a visual, no-code interface. You can create data sources, configure integration tasks, and monitor synchronization — all from the {{{ .lake }}} console.
-
-## Supported Data Sources
-
-| Data Source          | Description                                                                              |
-| -------------------- | ---------------------------------------------------------------------------------------- |
-| [MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md)  | Sync data from MySQL databases with support for Snapshot, CDC, and Snapshot + CDC modes. |
-| [Amazon S3](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md) | Import files from Amazon S3 buckets with support for CSV, Parquet, and NDJSON formats.   |
+The Data Integration feature in {{{ .lake }}} provides a visual, no-code interface for importing or synchronizing data from external systems into {{{ .lake }}}. The feature centers around two key concepts: **data sources** and **integration tasks**.
 
 ## Key Concepts
 
-### Data Source
+| Concept | Description |
+|---------|-------------|
+| [Data Sources](/tidb-cloud-lake/guides/data-sources.md) | Reusable connection settings or credentials used to access external systems or send notifications, such as AWS Access Key / Secret Key, MySQL hostname / username / password, or a FeiShu bot webhook. |
+| [Integration Tasks](/tidb-cloud-lake/guides/integration-tasks.md) | Executable tasks that define where data comes from, which {{{ .lake }}} table it is written to, which runtime parameters are used, and how the task is started and monitored. |
 
-A data source represents a connection to an external system. It stores the credentials and connection details needed to access the source data. Once configured, a data source can be reused across multiple integration tasks.
+Data sources do not move data by themselves. They only store the information required to access external systems. Integration tasks are the units that actually perform imports, snapshots, and continuous synchronization.
 
-{{{ .lake }}} currently supports two types of data sources:
+Not every data source corresponds to an ingestion task. For example, `FeiShuBot` is used for notifications rather than loading source data into {{{ .lake }}}.
 
-- **MySQL - Credentials**: Connection to a MySQL database (host, port, username, password, database).
-- **AWS - Credentials**: Connection to Amazon S3 (Access Key and Secret Key).
+## Supported Integration Task Types
 
-### Integration Task
+| Task Type | Description |
+|-----------|-------------|
+| [Amazon S3](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md) | Imports CSV, Parquet, or NDJSON files from Amazon S3 with support for one-time or continuous ingestion. |
+| [MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md) | Synchronizes table data from MySQL using `Snapshot`, `CDC Only`, or `Snapshot + CDC` modes. |
 
-An integration task defines how data flows from a source to a target table in {{{ .lake }}}. Each task specifies the source configuration, target warehouse and table, and operational parameters specific to the data source type.
+## Recommended Flow
 
-## Managing Data Sources
-
-To manage data sources, navigate to **Data** > **Data Sources** from the left sidebar. From this page you can:
-
-- View all configured data sources
-- Create new data sources
-- Edit or delete existing data sources
-- Test connectivity to verify credentials
-
-> **Tip:**
->
-> It is recommended to always test the connection before saving a data source. This helps catch common issues such as incorrect credentials or network restrictions early.
-
-## Managing Tasks
-
-### Starting and Stopping Tasks
-
-After creation, a task is in a **Stopped** state. To begin data synchronization, click the **Start** button on the task.
-
-To stop a running task, click the **Stop** button. The task will gracefully shut down and save its progress.
-
-### Task Status
-
-The Data Integration page displays all tasks with their current status:
-
-| Status  | Description                   |
-| ------- | ----------------------------- |
-| Running | Task is actively syncing data |
-| Stopped | Task is not running           |
-| Failed  | Task encountered an error     |
-
-### Viewing Run History
-
-Click on a task to view its execution history. The run history includes:
-
-- Execution start and end times
-- Number of rows synced
-- Error details (if any)
-
-![Run History](/media/tidb-cloud-lake/dataintegration-run-history-page.png)
+1. Create and test reusable connection settings on the [Data Sources](/tidb-cloud-lake/guides/data-sources.md) page.
+2. Review supported task types and their use cases on the [Integration Tasks](/tidb-cloud-lake/guides/integration-tasks.md) page.
+3. Read the task-specific guide to configure the source, preview the data, and set the target table.
+4. Use the [Task Management](/tidb-cloud-lake/guides/task-management.md) page to start tasks, check status, and troubleshoot execution issues.
 
 ## Video Tour
 
