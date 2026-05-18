@@ -95,7 +95,7 @@ In this architecture, TiDB cluster 1 is deployed in region 1. BR regularly backs
 
 The DR solution based on BR provides an RPO lower than 5 minutes and an RTO that varies with the size of the data to be restored. For BR v6.5.0, you can refer to [Performance and impact of snapshot restore](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore) and [Performance and impact of PITR](/br/br-pitr-guide.md#performance-capabilities-of-pitr) to learn about the restore speed. Usually, the feature of backup across regions is considered the last resort of data security and also a must-have solution for most systems. For more information about this solution, see [DR solution based on BR](/dr-backup-restore.md).
 
-Meanwhile, starting from v6.5.0, BR supports [restoring a TiDB cluster from EBS volume snapshots](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-ebs-snapshot-across-multiple-kubernetes/#gatsby-focus-wrapper). If your cluster is running on Kubernetes and you want to restore the cluster as fast as possible without affecting the cluster, you can use this feature to reduce the RTO of your system.
+Meanwhile, starting from v6.5.0, BR supports [restoring a TiDB cluster from EBS volume snapshots](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-ebs-snapshot-across-multiple-kubernetes). If your cluster is running on Kubernetes and you want to restore the cluster as fast as possible without affecting the cluster, you can use this feature to reduce the RTO of your system.
 
 ### Other DR solutions
 
