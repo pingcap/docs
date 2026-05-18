@@ -73,7 +73,7 @@ Messages: {{ range .Messages }}
 
 A received message looks similar to this:
 
-![FeiShu notification example](/img/cloud/dataintegration/feishubot-example.png)
+![FeiShu notification example](/media/tidb-cloud-lake/feishubot-example.png)
 
 Custom templates support:
 
