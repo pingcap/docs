@@ -34,7 +34,7 @@ sequenceDiagram
         TiKV->>TiKV: Generate SST
         TiKV->>Storage: Upload SST
     end
-    TiKV-->>BR: Report backup result
+    TiKV->>BR: Report backup result
     BR->>BR: Handle all backup results
     BR->>TiKV: Back up schemas
     BR->>Storage: Upload backup metadata
@@ -93,7 +93,7 @@ sequenceDiagram
         TiKV->>TiKV: Rewrite KVs
         TiKV->>TiKV: Ingest SST
     end
-    TiKV-->>BR: Report restore result
+    TiKV->>BR: Report restore result
     BR->>BR: Handle all restore results
 ```
 

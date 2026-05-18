@@ -104,7 +104,7 @@ sequenceDiagram
             TiKV->>TiKV: Rewrite KVs
             TiKV->>TiKV: Apply KVs
         end
-        TiKV-->>BR: Report restore result
+        TiKV->>BR: Report restore result
         BR->>BR: Handle all restore results
     end
 ```
