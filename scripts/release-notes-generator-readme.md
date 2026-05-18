@@ -182,7 +182,7 @@ This separation is intentional. If the same issue appears again in the same majo
 For target version `8.5.7`, the same-series quarantine sheet is named:
 
 ```text
-issues_already_in_earlier_v8.5_notes
+issue_already_in_earlier_v8.5.x
 ```
 
 A row is moved to this sheet when all of the following are true:

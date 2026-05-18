@@ -372,7 +372,7 @@ def same_series_release_files_by_issue_url(
 
 def same_series_issues_sheet_name(version: str) -> str:
     major, minor, _patch = parse_semver_tuple(version)
-    return f"issues_already_in_earlier_v{major}.{minor}_notes"
+    return f"issue_already_in_earlier_v{major}.{minor}"
 
 
 def same_series_issue_reason(

@@ -33,6 +33,12 @@ Contributors:
 Row context:
 {{ROW_CONTEXT}}
 
+About `formatted_release_note_from_excel`:
+
+- This field can be empty, `None`, or a generic placeholder such as `Please refer to [Release Notes Language Style Guide](https://pingcap.github.io/tidb-dev-guide/contribute-to-tidb/release-notes-style-guide.html) to write a quality release note.`. In these cases, treat it as no usable release-note draft.
+- This field can also contain a draft release note written by the code PR author. In that case, use the draft as an important reference for the final release note, but verify and refine it against the PR code changes first and the issue description second.
+- Do not copy the draft blindly. Preserve its useful user-facing intent, correct unclear or inaccurate wording, and still follow all release-note style rules above.
+
 Improvements reference:
 {{IMPROVEMENTS_REFERENCE}}
 
