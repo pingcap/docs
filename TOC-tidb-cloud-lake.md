@@ -23,10 +23,20 @@
 - Security
   - [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md)
   - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
-- Integrations
-  - [Data Integration Overview](/tidb-cloud-lake/guides/data-integration-overview.md)
-  - [Integrate with MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md)
-  - [Integrate with Amazon S3](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
+- Data Integration
+  - [Overview](/tidb-cloud-lake/guides/data-integration-overview.md)
+  - Data Sources
+    - [Overview](/tidb-cloud-lake/guides/data-sources.md)
+    - [AWS - Credentials](/tidb-cloud-lake/guides/aws-credentials.md)
+    - [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md)
+    - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
+    - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
+  - Integration Tasks
+    - [Overview](/tidb-cloud-lake/guides/integration-tasks.md)
+    - [Task Management](/tidb-cloud-lake/guides/task-management.md)
+    - [Amazon S3 Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
+    - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
+    - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
 - Connect
   - [Overview](/tidb-cloud-lake/guides/connection-overview.md)
   - SQL Clients
