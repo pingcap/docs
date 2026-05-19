@@ -19,9 +19,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - AWS: `Oregon (us-west-2)`, `Frankfurt (eu-central-1)`, `Singapore (ap-southeast-1)`
         - Alibaba Cloud: `Mexico (na-south-1)`
 
-      This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify and optimize the most resource-intensive queries to reduce costs.
+      This feature shows the top RU-consuming SQL statements at minute-level granularity, helping you quickly identify and optimize resource-intensive queries to reduce costs.
 
-      It is rolling out in phases. Contact our support team at [support@pingcap.com](mailto:support@pingcap.com) for early access.
+      The feature is rolling out in phases. To request early access, contact [support@pingcap.com](mailto:support@pingcap.com).
 
 ## May 12, 2026
 
