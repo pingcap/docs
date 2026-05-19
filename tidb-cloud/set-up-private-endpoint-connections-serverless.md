@@ -109,7 +109,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 そうすれば、プライベートDNS名を使ってエンドポイントサービスに接続できます。
 
-### ステップ3．TiDB TiDB Cloudでプライベートエンドポイントを認証する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
+### ステップ3．TiDB Cloudでプライベートエンドポイントを認証する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
 
 > **注記：**
 >
