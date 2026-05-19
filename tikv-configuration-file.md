@@ -1,14 +1,13 @@
 ---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-aliases: ['/docs/dev/tikv-configuration-file/','/docs/dev/reference/configuration/tikv-server/configuration-file/']
 ---
 
 # TiKV Configuration File
 
 <!-- markdownlint-disable MD001 -->
 
-The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) and rename it to `config.toml`.
+The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml) and rename it to `config.toml`.
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
@@ -153,7 +152,7 @@ This document only describes the parameters that are not included in command-lin
 + The number of gRPC worker threads. When you modify the size of the gRPC thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
 + Default value: 
 
-    + Starting from v8.5.4 and v9.0.0, the default value is adjusted to `grpc-raft-conn-num * 3 + 2`, which is calculated based on the value of [`grpc-raft-conn-num`](#grpc-raft-conn-num). For example, when the number of CPU cores is 8, the default value of `grpc-raft-conn-num` is 1. Accordingly, the default value of `grpc-concurrency` is `1 * 3 + 2 = 5`.
+    + Starting from v8.5.4, the default value is adjusted to `grpc-raft-conn-num * 3 + 2`, which is calculated based on the value of [`grpc-raft-conn-num`](#grpc-raft-conn-num). For example, when the number of CPU cores is 8, the default value of `grpc-raft-conn-num` is 1. Accordingly, the default value of `grpc-concurrency` is `1 * 3 + 2 = 5`.
     + In v8.5.3 and earlier versions, the default value is `5`.
 
 + Minimum value: `1`
@@ -175,7 +174,7 @@ This document only describes the parameters that are not included in command-lin
 + The maximum number of connections between TiKV nodes for Raft communication
 + Default value: 
 
-    + Starting from v8.5.4 and v9.0.0, the default value is adjusted to `MAX(1, MIN(4, CPU cores / 8))`, where `MIN(4, CPU cores / 8)` indicates that when the number of CPU cores is greater than or equal to 32, the default maximum number of connections is 4. 
+    + Starting from v8.5.4, the default value is adjusted to `MAX(1, MIN(4, CPU cores / 8))`, where `MIN(4, CPU cores / 8)` indicates that when the number of CPU cores is greater than or equal to 32, the default maximum number of connections is 4. 
     + In v8.5.3 and earlier versions, the default value is `1`.
 
 + Minimum value: `1`
@@ -206,7 +205,7 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"3s"`
 + Minimum value: `"1s"`
 
-### `graceful-shutdown-timeout` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+### `graceful-shutdown-timeout` <span class="version-mark">New in v8.5.5</span>
 
 + Specifies the timeout duration for TiKV graceful shutdown.
     + When this value is greater than `0s`, TiKV attempts to transfer all leaders on this node to other TiKV nodes within the specified timeout before shutting down. If there are still leaders that have not been transferred when the timeout is reached, TiKV skips the remaining leader transfers and proceeds directly to the shutdown process.
@@ -297,7 +296,7 @@ This document only describes the parameters that are not included in command-lin
 + Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
 + Default value: `4`
 
-### `inspect-network-interval` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+### `inspect-network-interval` <span class="version-mark">New in v8.5.5</span>
 
 + Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. TiKV calculates a `NetworkSlowScore` based on the network detection results and reports the network status of slow nodes to PD.
 + Setting this value to `0` disables the network detection. Setting it to a smaller value increases the detection frequency, which helps detect network jitter more quickly, but it also consumes more network bandwidth and CPU resources.
@@ -343,7 +342,7 @@ Configuration items related to the single thread pool serving read requests. Thi
 + Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
 + Default value: `false`
 
-### `cpu-threshold` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+### `cpu-threshold` <span class="version-mark">New in v8.5.5</span>
 
 + Specifies the CPU utilization threshold for the unified read pool. For example, if you set this value to `0.8`, the thread pool can use up to 80% of the CPU.
 
@@ -513,9 +512,9 @@ Configuration items related to storage.
 
 + When TiKV is started, some space is reserved on the disk as disk protection. When the remaining disk space is less than the reserved space, TiKV restricts some write operations. The reserved space is divided into two parts: 80% of the reserved space is used as the extra disk space required for operations when the disk space is insufficient, and the other 20% is used to store the temporary file. In the process of reclaiming space, if the storage is exhausted by using too much extra disk space, this temporary file serves as the last protection for restoring services.
 + The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
-+ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MiB"`, TiKV disables this disk protection feature.
++ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. If this configuration item is set to `0`, or to a zero value with any supported unit (for example, `0KiB`, `0MiB`, or `0GiB`), TiKV disables this disk protection feature.
 + Default value: `"5GiB"`
-+ Unit: MiB|GiB
++ Unit: B|KB|KiB|MB|MiB|GB|GiB|TB|TiB|PB|PiB
 
 ### `enable-ttl`
 
@@ -636,33 +635,6 @@ Configuration items related to the I/O rate limiter.
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
 + Value options: `"read-only"`, `"write-only"`, and `"all-io"`
 + Default value: `"write-only"`
-
-## storage.max-ts
-
-Configuration items related to `max-ts`.
-
-`max-ts` is the maximum read timestamp known to the current TiKV node. It ensures linearizability and transaction concurrency control semantics for async commit and one-phase commit (1PC) transactions.
-
-### `action-on-invalid-update` <span class="version-mark">New in v9.0.0</span>
-
-+ Determines how TiKV handles invalid `max-ts` update requests. If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and [`max-drift`](#max-drift-new-in-v900)**, TiKV considers it an invalid `max-ts` update request. Invalid `max-ts` update requests might break the linearizability and transaction concurrency control semantics of the TiDB cluster.
-+ Value options:
-    + `"panic"`: TiKV panics. If the PD TSO cached in TiKV is not updated in time, TiKV uses an approximate method for validation, in which case invalid requests do not cause TiKV panic.
-    + `"error"`: TiKV returns an error and stops processing the request.
-    + `"log"`: TiKV prints an error log but still processes the request.
-+ Default value: `"panic"`
-
-### `cache-sync-interval` <span class="version-mark">New in v9.0.0</span>
-
-+ Controls the interval at which TiKV updates its local PD TSO cache. TiKV periodically retrieves the latest timestamp from PD and caches it locally to check the validity of `max-ts`.
-+ Default value: `"15s"`
-
-### `max-drift` <span class="version-mark">New in v9.0.0</span>
-
-+ Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV.
-+ If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and `max-drift`**, TiKV considers it an invalid `max-ts` update request and handles it according to the [`action-on-invalid-update`](#action-on-invalid-update-new-in-v900) configuration.
-+ Default value: `"60s"`
-+ It is recommended to set this value to at least three times the value of [`cache-sync-interval`](#cache-sync-interval-new-in-v900).
 
 ## pd
 
@@ -865,7 +837,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.check-interval`](#check-interval-new-in-v757-v854-and-v900).
+> Starting from v7.5.7 and v8.5.4, this configuration item is deprecated and replaced by [`gc.auto-compaction.check-interval`](#check-interval-new-in-v757-and-v854).
 
 + The time interval at which to check whether it is necessary to manually trigger RocksDB compaction. `0` means that this feature is disabled.
 + Default value: `"5m"`
@@ -875,7 +847,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated.
+> Starting from v7.5.7 and v8.5.4, this configuration item is deprecated.
 
 + The number of Regions checked at one time for each round of manual compaction
 + Default value:
@@ -888,7 +860,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-v854-and-v900).
+> Starting from v7.5.7 and v8.5.4, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854).
 
 + The number of tombstones required to trigger RocksDB compaction
 + Default value: `10000`
@@ -898,7 +870,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-v854-and-v900).
+> Starting from v7.5.7 and v8.5.4, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854).
 
 + The proportion of tombstone required to trigger RocksDB compaction
 + Default value: `30`
@@ -909,7 +881,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-v854-and-v900).
+> Starting from v7.5.7 and v8.5.4, this configuration item is deprecated and replaced by [`gc.auto-compaction.redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854).
 
 + The number of redundant MVCC rows required to trigger RocksDB compaction.
 + Default value: `50000`
@@ -919,7 +891,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-v854-and-v900).
+> Starting from v7.5.7 and v8.5.4, this configuration item is deprecated and replaced by [`gc.auto-compaction.redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854).
 
 + The percentage of redundant MVCC rows required to trigger RocksDB compaction.
 + Default value: `20`
@@ -1196,7 +1168,7 @@ Configuration items related to Raftstore.
 ### `inspect-kvdb-interval` <span class="version-mark">New in v8.1.2</span>
 
 + The interval and timeout for checking the KV disk during slow node detection in TiKV. If KVDB and RaftDB share the same mount path, this value is overridden by `0` (no detection).
-+ Default value: `2s`
++ Default value: `100ms`. In v8.5.2 and earlier versions, the default value is `2s`.
 
 ### `min-pending-apply-region-count` <span class="version-mark">New in v8.0.0</span>
 
@@ -1326,7 +1298,7 @@ Configuration items related to RocksDB
 ### `max-manifest-file-size`
 
 + The maximum size of a RocksDB Manifest file
-+ Default value: `"256MiB"`. Before v8.5.4 and v9.0.0, the default value is `"128MiB"`.
++ Default value: `"256MiB"`. For v8.5.3 and earlier v8.5.x versions, the default value is `"128MiB"`.
 + Minimum value: `0`
 + Unit: B|KiB|MiB|GiB
 
@@ -1706,7 +1678,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + The maximum number of files at L0 that trigger write stall.
 + In v8.5.4 and earlier versions: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is directly overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold).
-+ Starting from v8.5.5 and v9.0.0: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only when its value is greater than `storage.flow-control.l0-files-threshold`. This behavior prevents weakening RocksDB's compaction acceleration mechanism when you increase the flow control threshold.
++ Starting from v8.5.5: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only when its value is greater than `storage.flow-control.l0-files-threshold`. This behavior prevents weakening RocksDB's compaction acceleration mechanism when you increase the flow control threshold.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1764,7 +1736,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + The soft limit on the pending compaction bytes.
 + In v8.5.4 and earlier versions: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is directly overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit).
-+ Starting from v8.5.5 and v9.0.0: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only when its value is greater than `storage.flow-control.soft-pending-compaction-bytes-limit`. This behavior prevents weakening RocksDB's compaction acceleration mechanism when you increase the flow control threshold.
++ Starting from v8.5.5: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only when its value is greater than `storage.flow-control.soft-pending-compaction-bytes-limit`. This behavior prevents weakening RocksDB's compaction acceleration mechanism when you increase the flow control threshold.
 + Default value: `"192GiB"`
 + Unit: KiB|MiB|GiB
 
@@ -2333,60 +2305,60 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 Configures the behavior of TiKV automatic compaction.
 
-### `check-interval` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `check-interval` <span class="version-mark">New in v7.5.7 and v8.5.4</span>
 
 + The interval at which TiKV checks whether to trigger automatic compaction. Within this interval, Regions that meet the automatic compaction conditions are processed based on priority. When the interval elapses, TiKV rescans Region information and recalculates priorities.
 + Default value: `"300s"`
 
-### `tombstone-num-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `tombstone-num-threshold` <span class="version-mark">New in v7.5.7 and v8.5.4</span>
 
-+ The number of RocksDB tombstones required to trigger TiKV automatic compaction. When the number of tombstones reaches this threshold, or when the percentage of tombstones reaches [`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
++ The number of RocksDB tombstones required to trigger TiKV automatic compaction. When the number of tombstones reaches this threshold, or when the percentage of tombstones reaches [`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854), TiKV triggers automatic compaction.
 + This configuration item takes effect only when [Compaction Filter](/garbage-collection-configuration.md) is disabled.
 + Default value: `10000`
 + Minimum value: `0`
 
-### `tombstone-percent-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `tombstone-percent-threshold` <span class="version-mark">New in v7.5.7 and v8.5.4</span>
 
-+ The percentage of RocksDB tombstones required to trigger TiKV automatic compaction. When the percentage of tombstones reaches this threshold, or when the number of tombstones reaches [`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
++ The percentage of RocksDB tombstones required to trigger TiKV automatic compaction. When the percentage of tombstones reaches this threshold, or when the number of tombstones reaches [`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854), TiKV triggers automatic compaction.
 + This configuration item takes effect only when [Compaction Filter](/garbage-collection-configuration.md) is disabled.
 + Default value: `30`
 + Minimum value: `0`
 + Maximum value: `100`
 
-### `redundant-rows-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `redundant-rows-threshold` <span class="version-mark">New in v7.5.7 and v8.5.4</span>
 
-+ The number of redundant MVCC rows required to trigger TiKV automatic compaction. Redundant rows include RocksDB tombstones, TiKV stale versions, and TiKV deletion tombstones. When the number of redundant MVCC rows reaches this threshold, or when the percentage of these rows reaches [`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
++ The number of redundant MVCC rows required to trigger TiKV automatic compaction. Redundant rows include RocksDB tombstones, TiKV stale versions, and TiKV deletion tombstones. When the number of redundant MVCC rows reaches this threshold, or when the percentage of these rows reaches [`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854), TiKV triggers automatic compaction.
 + This configuration item takes effect only when [Compaction Filter](/garbage-collection-configuration.md) is enabled.
 + Default value: `50000`
 + Minimum value: `0`
 
-### `redundant-rows-percent-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `redundant-rows-percent-threshold` <span class="version-mark">New in v7.5.7 and v8.5.4</span>
 
-+ The percentage of redundant MVCC rows required to trigger TiKV automatic compaction. Redundant rows include RocksDB tombstones, TiKV stale versions, and TiKV deletion tombstones. When the number of redundant MVCC rows reaches [`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-v854-and-v900), or when the percentage of these rows reaches `redundant-rows-percent-threshold`, TiKV triggers automatic compaction.
++ The percentage of redundant MVCC rows required to trigger TiKV automatic compaction. Redundant rows include RocksDB tombstones, TiKV stale versions, and TiKV deletion tombstones. When the number of redundant MVCC rows reaches [`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854), or when the percentage of these rows reaches `redundant-rows-percent-threshold`, TiKV triggers automatic compaction.
 + This configuration item takes effect only when [Compaction Filter](/garbage-collection-configuration.md) is enabled.
 + Default value: `20`
 + Minimum value: `0`
 + Maximum value: `100`
 
-### `bottommost-level-force` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `bottommost-level-force` <span class="version-mark">New in v7.5.7 and v8.5.4</span>
 
 + Controls whether to force compaction on the bottommost files in RocksDB.
 + Default value: `true`
 
-### `mvcc-read-aware-enabled` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `mvcc-read-aware-enabled` <span class="version-mark">New in v8.5.6</span>
 
 + Controls whether to enable MVCC-read-aware compaction. When enabled, TiKV tracks the number of MVCC versions scanned during read requests and uses this information to prioritize compaction for Regions with high MVCC read amplification. This reduces read latency for hot Regions that encounter many stale versions during scans.
 + Default value: `false`
 
-### `mvcc-scan-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `mvcc-scan-threshold` <span class="version-mark">New in v8.5.6</span>
 
-+ The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856-and-v900) is set to `true`.
++ The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) is set to `true`.
 + Default value: `1000`
 + Minimum value: `0`
 
-### `mvcc-read-weight` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `mvcc-read-weight` <span class="version-mark">New in v8.5.6</span>
 
-+ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers, such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856-and-v900) is set to `true`.
++ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers, such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) is set to `true`.
 + Default value: `3.0`
 + Minimum value: `0.0`
 
