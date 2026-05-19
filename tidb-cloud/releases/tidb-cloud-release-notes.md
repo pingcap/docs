@@ -16,7 +16,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
 
-        - AWS: `Oregon (us-west-2)`, `Frankfurt (eu-central-1)`, `Singapore (ap-southeast-1)`
         - Alibaba Cloud: `Mexico (na-south-1)`
 
       This feature shows the top RU-consuming SQL statements at minute-level granularity, helping you quickly identify resource-intensive queries to reduce costs.
