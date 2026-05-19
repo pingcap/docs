@@ -198,7 +198,7 @@ sequenceDiagram
 
     client->>TiDB: begin
     TiDB->>PD: get ts as start_ts
-    loop excute SQL
+    loop execute SQL
         rect rgba(0, 0, 0, 0.04)
             alt do read
                 TiDB->>TiKV: get data from TiKV with start_ts

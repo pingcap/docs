@@ -29,7 +29,7 @@ sequenceDiagram
     BR->>PD: Pause GC
     BR->>PD: Fetch TiKV and Region info
     BR->>TiKV: Request TiKV to back up data
-    loop TiKV handle the local snapshot backup task
+    loop TiKV handles the local snapshot backup task
         TiKV->>TiKV: Scan KVs
         TiKV->>TiKV: Generate SST
         TiKV->>Storage: Upload SST
@@ -88,7 +88,7 @@ sequenceDiagram
     BR->>TiKV: Restore schema
     BR->>PD: Split and scatter Regions
     BR->>TiKV: Request TiKV to restore data
-    loop TiKV handle restore request
+    loop TiKV handles restore request
         TiKV->>Storage: Download SST
         TiKV->>TiKV: Rewrite KVs
         TiKV->>TiKV: Ingest SST

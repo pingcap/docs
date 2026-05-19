@@ -29,9 +29,9 @@ sequenceDiagram
     User->>BR: Run `br log start`
     BR->>PD: Register log backup task
     TiKV->>PD: Fetch log backup task
-    par TiKV handle the local log backup task
+    par TiKV handles the local log backup task
         loop
-            TiKV->>TiKV: Read kv change data
+            TiKV->>TiKV: Read KV change data
             TiKV->>PD: Fetch global checkpoint ts
             TiKV->>TiKV: Generate local metadata
             TiKV->>Storage: Upload log data & metadata
@@ -99,7 +99,7 @@ sequenceDiagram
         BR->>Storage: Read backup data
         BR->>PD: Fetch Region info
         BR->>TiKV: Request TiKV to restore data
-        loop TiKV handle restore request
+        loop TiKV handles restore request
             TiKV->>Storage: Download KVs
             TiKV->>TiKV: Rewrite KVs
             TiKV->>TiKV: Apply KVs
