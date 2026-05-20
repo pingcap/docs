@@ -45,12 +45,12 @@ TiCDC relies on TiDB, TiKV, and PD to provide upstream change data and related i
 
 ### Upgrade recommendations for the TiCDC classic architecture
 
-If you upgrade TiCDC from the classic architecture to the new architecture, you need to pause all changefeeds before the upgrade. For more information, see [TiCDC new architecture upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
+Before upgrading TiCDC from the classic architecture to the new architecture, pause all changefeeds. For more information, see [TiCDC new architecture upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
 
-If the upgrade is between TiCDC deployments that both use the classic architecture, rolling updates are supported between minor versions. However, for upgrades across major versions (for example, v8.5.0 -> v8.5.3 is a minor-version upgrade, while v8.1.x -> v8.5.x is a major-version upgrade), it is **not recommended to keep changefeeds running during a TiDB cluster rolling update**. For a major-version upgrade, it is recommended to perform the following steps in order:
+If the upgrade is between TiCDC deployments that both use the classic architecture, rolling upgrades are supported between minor versions. However, for upgrades across major versions (for example, v8.5.0 -> v8.5.3 is a minor version upgrade, while v8.1.x -> v8.5.x is a major version upgrade), it is **not recommended to keep changefeeds running during a TiDB cluster rolling upgrade**. For a major version upgrade, perform the following steps in order:
 
 1. Pause all changefeeds.
-2. Perform a rolling update on the TiDB cluster.
+2. Perform a rolling upgrade on the TiDB cluster.
 3. Resume all changefeeds after the upgrade is complete.
 
 For example, assuming that you upgrade the cluster from v8.5.4 to v8.5.5, if you manage the cluster using TiUP, you can refer to the following commands. The following example uses `linux-amd64`. For other platforms, replace the platform information in the package names based on your environment.
@@ -61,7 +61,7 @@ tiup cdc:v8.5.4 cli changefeed pause \
   --server=http://<ticdc-host>:8300 \
   --changefeed-id=<changefeed-id>
 
-# 2. Perform a rolling update on the TiDB cluster.
+# 2. Perform a rolling upgrade on the TiDB cluster.
 tiup cluster upgrade <cluster-name> v8.5.5
 
 # 3. Resume all changefeeds after the upgrade is complete.
