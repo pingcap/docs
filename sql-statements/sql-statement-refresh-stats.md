@@ -57,7 +57,7 @@ ClusterOption ::=
 - **`FULL`**: loads complete statistics (such as histograms, TopN, and CMSketches) into memory, equivalent to setting [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `false` for this operation. Use this when you need complete statistics immediately.
 - **`LITE`**: performs lightweight initialization, equivalent to `lite-init-stats = true`, which skips loading histograms and other heavy structures until they are needed.
 - **`CLUSTER`**: broadcasts the refresh request to every TiDB server. Without this option, only the TiDB node that receives the statement reloads its in-memory statistics.
-- **Default mode**: If neither `FULL` nor `LITE` is specified, TiDB uses the current value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710).
+- **Default mode**: if neither `FULL` nor `LITE` is specified, TiDB uses the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710).
 
 ## Examples
 
