@@ -111,3 +111,9 @@ tiup install tidb-lightning
 このチュートリアルでは、TiDB Lightningとは何か、またTiDB Lightningクラスターを迅速に展開して完全バックアップ データを TiDB クラスターにインポートする方法について簡単に説明します。
 
 TiDB Lightning の詳細な機能と使用方法については、 [TiDB Lightning の概要](/tidb-lightning/tidb-lightning-overview.md)を参照してください。
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="管理 TiDB 演習 6: TiDB Lightning を使用して TiDB にデータをインポートする" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff5" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch07_en.png" duration="60 分" />
+</RelatedResources>

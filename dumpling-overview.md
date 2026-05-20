@@ -431,3 +431,9 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | ビュー  | `{{fn .DB}}.{{fn .Table}}-schema-view`     |
 
 たとえば、 `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`使用すると、 Dumpling はテーブル`db.tbl:normal`のスキーマを`tbl%3Anormal.$schema.sql`という名前のファイルに書き込み、データを`tbl%3Anormal.000000000.sql` 、 `tbl%3Anormal.000000001.sql`などのファイルに書き込みます。
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="管理 TiDB 演習 7: Dumpling を使用したデータのエクスポート" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff6" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch08_en.png" duration="60 分" />
+</RelatedResources>

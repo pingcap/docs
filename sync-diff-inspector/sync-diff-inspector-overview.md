@@ -310,3 +310,9 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 -   sync-diff-inspector は、まず TiDB の統計情報に基づいてデータをチャンクに分割します。統計情報の正確性を保証する必要があります。TiDB サーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
 -   `table-rules`に特に注意してください。 `schema-pattern="test1"` 、 `table-pattern = "t_1"` 、 `target-schema="test2"` 、 `target-table = "t_2"`構成すると、ソース データベースの`test1` 、 `t_1`スキーマと、ターゲット データベースの`test2` 、 `t_2`スキーマが比較されます。 sync-diff-inspector ではシャーディングがデフォルトで有効になっているため、ソース データベースに`test2` . `t_2`テーブルがある場合、シャーディングとして機能しているソース データベースの`test1` . `t_1`テーブルと`test2` . `t_2`テーブルが、ターゲット データベースの`test2` . `t_2`テーブルと比較されます。
 -   生成されたSQLファイルは、データ修復の際の参照としてのみ使用されます。データ修復のためにこれらのSQL文を実行する前に、必ず内容を確認してください。
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="管理 TiDB 演習 9: データチェックに sync-diff-inspector を使用する" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff8" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch10_en.png" duration="60 分" />
+</RelatedResources>
