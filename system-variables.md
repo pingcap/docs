@@ -1946,7 +1946,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium). The value is fixed to `"standard"`, so Pipelined DML cannot be enabled by setting this variable to `"bulk"`.
+> This variable is read-only for [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium). The value is fixed to `"standard"`, so you cannot enable Pipelined DML by setting this variable to `"bulk"`.
 
 </CustomContent>
 
