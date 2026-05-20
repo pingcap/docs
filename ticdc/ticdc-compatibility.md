@@ -45,12 +45,13 @@ TiCDC relies on TiDB, TiKV, and PD to provide upstream change data and related i
 
 ### Upgrade recommendations for the TiCDC classic architecture
 
-For the TiCDC classic architecture, it is **not recommended to keep changefeeds running during a TiDB rolling upgrade**. During the upgrade, it is recommended to perform the following steps in order:
+Before upgrading TiCDC from the classic architecture to the new architecture, pause all changefeeds. For more information, see [TiCDC new architecture upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
+
+If the upgrade is between TiCDC deployments that both use the classic architecture, rolling upgrades are supported between minor versions. However, for upgrades across major versions (for example, v8.5.0 -> v8.5.3 is a minor version upgrade, while v8.1.x -> v8.5.x is a major version upgrade), it is **not recommended to keep changefeeds running during a TiDB cluster rolling upgrade**. For a major version upgrade, perform the following steps in order:
 
 1. Pause all changefeeds.
-2. Upgrade TiCDC first.
-3. Upgrade the other components in the TiDB cluster.
-4. Resume all changefeeds after the upgrade is complete.
+2. Perform a rolling upgrade on the TiDB cluster.
+3. Resume all changefeeds after the upgrade is complete.
 
 For example, assuming that you upgrade the cluster from v8.5.4 to v8.5.5, if you manage the cluster using TiUP, you can refer to the following commands. The following example uses `linux-amd64`. For other platforms, replace the platform information in the package names based on your environment.
 
@@ -60,38 +61,15 @@ tiup cdc:v8.5.4 cli changefeed pause \
   --server=http://<ticdc-host>:8300 \
   --changefeed-id=<changefeed-id>
 
-# 2. Upgrade TiCDC first.
-wget https://tiup-mirrors.pingcap.com/cdc-v8.5.5-linux-amd64.tar.gz \
-  -O /tmp/cdc-v8.5.5-linux-amd64.tar.gz
-tiup cluster patch <cluster-name> /tmp/cdc-v8.5.5-linux-amd64.tar.gz -R cdc
+# 2. Perform a rolling upgrade on the TiDB cluster.
+tiup cluster upgrade <cluster-name> v8.5.5
 
-# 3. Upgrade the other components in the TiDB cluster.
-#    Run patch for each component that exists in the cluster.
-#    The following example includes PD, TiKV, and TiDB.
-wget https://tiup-mirrors.pingcap.com/pd-v8.5.5-linux-amd64.tar.gz \
-  -O /tmp/pd-v8.5.5-linux-amd64.tar.gz
-wget https://tiup-mirrors.pingcap.com/tikv-v8.5.5-linux-amd64.tar.gz \
-  -O /tmp/tikv-v8.5.5-linux-amd64.tar.gz
-wget https://tiup-mirrors.pingcap.com/tidb-v8.5.5-linux-amd64.tar.gz \
-  -O /tmp/tidb-v8.5.5-linux-amd64.tar.gz
-
-tiup cluster patch <cluster-name> /tmp/pd-v8.5.5-linux-amd64.tar.gz -R pd
-tiup cluster patch <cluster-name> /tmp/tikv-v8.5.5-linux-amd64.tar.gz -R tikv
-tiup cluster patch <cluster-name> /tmp/tidb-v8.5.5-linux-amd64.tar.gz -R tidb
-
-# If the cluster also includes components such as TiFlash, TiProxy, or TiKV-CDC,
-# run patch for each of them in the same way.
-
-# 4. Resume all changefeeds after the upgrade is complete.
+# 3. Resume all changefeeds after the upgrade is complete.
 #    Run this command once for each changefeed.
 tiup cdc:v8.5.5 cli changefeed resume \
   --server=http://<ticdc-host>:8300 \
   --changefeed-id=<changefeed-id>
 ```
-
-> **Note:**
->
-> `tiup cluster patch` can replace only one component at a time, so in step 3 you need to run it separately for each component that exists in the cluster.
 
 ### Upgrade recommendations for the TiCDC new architecture
 

@@ -440,7 +440,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 6.1.7 The DM replication process returns an error `Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`.
 
-    - This value cannot be successfully written into MySQL 8.0 or TiDB, but can be written into MySQL 5.7. You can skip the data format check by enabling the `tidb_skip_utf8_check` parameter.
+    - This value cannot be successfully written into MySQL 8.x or TiDB, but can be written into MySQL 5.7. You can skip the data format check by enabling the `tidb_skip_utf8_check` parameter.
 
 ### 6.2 TiDB Lightning
 
