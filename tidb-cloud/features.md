@@ -217,8 +217,8 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Top SQL</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
+    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
