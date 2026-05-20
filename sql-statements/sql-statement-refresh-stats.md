@@ -85,7 +85,7 @@ To execute `REFRESH STATS`, you must either have the `RESTORE_ADMIN` privilege o
 
 ## MySQL compatibility
 
-`REFRESH STATS` is a TiDB-specific extension and is not part of MySQL.
+`REFRESH STATS` is a TiDB extension to MySQL syntax.
 
 ## See also
 
