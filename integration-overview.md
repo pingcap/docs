@@ -1,22 +1,22 @@
 ---
 title: Data Integration Overview
-summary: データ統合シナリオの概要を学習します。
+summary: データ統合シナリオの概要を学びましょう。
 ---
 
 # データ統合の概要 {#data-integration-overview}
 
-データ統合とは、様々なデータソース間でのデータの流れ、転送、統合を意味します。データ量が指数関数的に増加し、データの価値がより深く探求されるにつれて、データ統合はますます普及し、緊急の課題となっています。TiDBがデータサイロ化する状況を回避し、異なるプラットフォーム間でデータを統合するために、TiCDCはTiDBの増分データ変更ログを他のデータプラットフォームに複製する機能を提供します。このドキュメントでは、TiCDCを使用したデータ統合アプリケーションについて説明します。ビジネスシナリオに適した統合ソリューションをお選びいただけます。
+データ統合とは、さまざまなデータソース間でのデータの流れ、転送、および統合を意味します。データ量が指数関数的に増加し、データの価値がより深く探求されるにつれて、データ統合はますます普及し、緊急性を増しています。TiDBがデータサイロ化する状況を回避し、異なるプラットフォームとデータを統合するために、TiCDCはTiDBの増分データ変更ログを他のデータプラットフォームに複製する機能を提供します。このドキュメントでは、TiCDCを使用したデータ統合アプリケーションについて説明します。お客様のビジネスシナリオに適した統合ソリューションを選択できます。
 
-## Confluent Cloud、Snowflake、ksqlDB、SQL Server との統合 {#integrate-with-confluent-cloud-snowflake-ksqldb-and-sql-server}
+## Confluent Cloud、Snowflake、ksqlDB、SQL Serverとの統合 {#integrate-with-confluent-cloud-snowflake-ksqldb-and-sql-server}
 
-TiCDCを使用すると、TiDBからConfluent Cloudに増分データを複製し、Confluent Cloud経由でSnowflake、ksqlDB、SQL Serverにデータを複製できます。詳細は[Confluent Cloud、Snowflake、ksqlDB、SQL Server とデータを統合](/ticdc/integrate-confluent-using-ticdc.md)ご覧ください。
+TiCDC を使用して、増分データを TiDB から Confluent Cloud にレプリケートし、そのデータを Confluent Cloud 経由で Snowflake、ksqlDB、SQL Server にレプリケートできます。詳細については、 [Confluent Cloud、Snowflake、ksqlDB、SQL Serverとデータを統合する](/ticdc/integrate-confluent-using-ticdc.md)参照してください。
 
-## Apache Kafka および Apache Flink との統合 {#integrate-with-apache-kafka-and-apache-flink}
+## Apache KafkaおよびApache Flinkとの統合 {#integrate-with-apache-kafka-and-apache-flink}
 
-TiCDCを使用すると、TiDBからApache Kafkaに増分データを複製し、Apache Flinkを使用してデータを使用することができます。詳細については、 [Apache Kafka および Apache Flink との統合](/replicate-data-to-kafka.md)参照してください。
+TiCDC を使用すると、増分データを TiDB から Apache Kafka にレプリケートし、Apache Flink を使用してデータを消費できます。詳細については、 [Apache KafkaおよびApache Flinkとの統合](/replicate-data-to-kafka.md)を参照してください。
 
 ## 関連リソース {#related-resources}
 
 <RelatedResources>
-  <ResourceCard title="TiCDCを使用したMicrosoft FabricのミラーリングデータベースへのTiDBのレプリケーション方法" type="blog" link="https://pingcap.co.jp/blog/replicate-tidb-mirrored-database-microsoft-fabric-ticdc/" imgSrc="https://static.pingcap.co.jp/files/2024/10/28115550/Homepage-Ad.png" author="Guanglei Bao, Brian Foster" date="2025-10-27" />
+  <ResourceCard title="How to Replicate TiDB to a Mirrored Database in Microsoft Fabric with TiCDC" type="blog" link="https://www.pingcap.com/blog/replicate-tidb-mirrored-database-microsoft-fabric-ticdc/" imgSrc="https://static.pingcap.com/files/2025/10/27043308/20251027-170247.png" author="Guanglei Bao, Jasper Hu, Brian Foster" date="2025-10-27" />
 </RelatedResources>

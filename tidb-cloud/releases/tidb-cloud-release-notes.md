@@ -8,6 +8,20 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年5月19日 {#may-19-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloud Essential**
+
+    -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の Top RU が、以下のリージョンでパブリックプレビューとして利用可能になりました。
+
+        -   アリババクラウド: `Mexico (na-south-1)`
+
+        この機能は、RUを最も多く消費しているSQLステートメントを分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
+
+        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
+
 ## 2026年5月12日 {#may-12-2026}
 
 **全般的な変更**
@@ -112,7 +126,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 -   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 
     -   アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
-    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
+    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターする場合)、 `type`フィールドの読み取りを開始します。
 
 詳細については、 [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)参照してください。
 
@@ -250,7 +264,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Starter**
 
-    -   [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示します。
+    -   実際のクライアント IP アドレスを [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に表示します。
 
         TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビューと`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベースリクエストの真の送信元を正確に特定し、トラブルシューティングと分析を改善できます。
 

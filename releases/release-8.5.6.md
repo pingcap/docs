@@ -43,14 +43,6 @@ TiDBバージョン：8.5.6
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries)を参照してください。
 
--   TiDBダッシュボードのTop SQLページで、TiKVネットワークトラフィックと論理I/Oメトリックの収集と表示がサポートされるようになりました [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
-
-    以前のバージョンでは、TiDB DashboardはCPU関連のメトリックのみに基づいてTop SQLクエリを特定していたため、複雑なシナリオにおいてネットワークやstorageへのアクセスに関連するパフォーマンスのボトルネックを特定することが困難でした。
-
-    バージョン8.5.6以降では、Top SQL設定で**TiKVネットワークIO収集（多次元）**を有効にして、TiKVノードの`Network Bytes`や`Logical IO Bytes`などのメトリックを表示できます。また、 `By Query` 、 `By Table` 、 `By DB` `By Region` 、複数の次元にわたってこれらのメトリックを分析することで、リソースのホットスポットをより包括的に特定できます。
-
-    詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/top-sql)を参照してください。
-
 ### SQL {#sql}
 
 -   列レベルの権限管理をサポート [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678)
@@ -112,13 +104,12 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 ### コンフィグレーションパラメータ {#configuration-parameters}
 
-| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                                                         | 種類を変更する  | 説明                                                                               |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
-| ティクヴ                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856)          | 新しく追加された | MVCC読み取り対応の圧縮を有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
-| ティクヴ                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)                        | 新しく追加された | リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
-| ティクヴ                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)                  | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
-| ティクヴ                     | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | 新しく追加された | TiKV ネットワーク トラフィックと論理 I/O メトリックをTop SQLに追加で収集するかどうかを制御します。デフォルト値は`false`です。      |
-| TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                                  | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
+| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                                                | 種類を変更する  | 説明                                                                               |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| ティクヴ                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応の圧縮を有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
+| ティクヴ                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
+| ティクヴ                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
+| TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                         | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
 
 ### システムテーブルの変更 {#system-table-changes}
 
@@ -143,7 +134,6 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
     -   MVCCの読み取りオーバーヘッドを検出し、読み取りコストの高いリージョンの圧縮を優先することでクエリパフォーマンスを向上させる、負荷ベースの圧縮メカニズムを導入します [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     -   クラスタのスケールアウトおよびスケールイン操作中に、古いキーをSSTファイル取り込みでクリーンアップするのではなく直接削除することで、古いキーの範囲のクリーンアップロジックを最適化し、オンラインリクエストのレイテンシーへの影響を軽減します。 [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
-    -   Top SQLの TiKV ネットワークトラフィックと論理 I/O メトリックの収集をサポートし、SQL パフォーマンスの問題をより正確に診断できるようにします [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
 
 -   PD
 
@@ -201,7 +191,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
     -   TiCDC
 
-        -   サーバーの再起動後にchangefeedsが繰り返し無効なディスパッチャーを作成する可能性がある問題を修正 [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
+        -   changefeedsがサーバー再起動後に無効なディスパッチャーを繰り返し作成する可能性がある問題を修正 [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
         -   TiCDCが、上流のTiDBバージョンがv8.1.x以前の場合にテーブル名変更操作を正しく複製できない問題を修正 [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
         -   TiCDCが有効になっている場合に、データスキャン中にTiKVがクラッシュする可能性がある問題を修正しました [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         -   Azure Blob Storage の Azure Managed Identity 認証をサポートし、クラウドstorageへのアップロードが停止する可能性がある問題を修正します [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)

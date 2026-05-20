@@ -38,11 +38,11 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
 -   **リアルタイム分析**
 
-    内蔵の分析エンジンにより、リアルタイムの分析クエリ結果を取得できます。TiDB Cloudは、ミッションクリティカルなアプリケーションに影響を与えることなく、最新データに対して一貫した分析クエリを実行します。
+    内蔵の分析エンジンにより、リアルタイムの分析クエリ結果を取得できます。TiDB TiDB Cloudは、ミッションクリティカルなアプリケーションに影響を与えることなく、最新データに対して一貫した分析クエリを実行します。
 
 -   **エンタープライズグレードのSecurity**
 
-    専用ネットワークと専用マシンでデータのセキュリティを確保します。転送中および保存時の暗号化にも対応しています。TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701の認証を取得しており、GDPRにも完全に準拠しています。
+    専用ネットワークと専用マシンでデータをセキュリティ。転送中および保存時の暗号化にも対応しています。TiDB TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701の認証を取得しており、GDPRにも完全に準拠しています。
 
 -   **フルマネージドサービス**
 
@@ -52,13 +52,13 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
     <CustomContent language="en,zh">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB Cloudは現在、AWS、Azure、Google Cloud、およびAlibaba Cloudで利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud、およびAlibaba Cloudで利用可能です。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB Cloudは現在、AWS、Azure、Google Cloudで利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloudで利用可能です。
 
     </CustomContent>
 
@@ -143,5 +143,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 ## 関連リソース {#related-resources}
 
 <RelatedResources>
-  <ResourceCard title="3分で分かるNewSQLデータベースのTiDB Cloud" type="video" link="https://www.youtube.com/watch?v=kWrT4Qd1xA0" imgSrc="https://i.ytimg.com/vi/kWrT4Qd1xA0/hqdefault.jpg" author="PingCAP Japan" duration="3 分" />
+  <ResourceCard title="TiDB Cloud in 3 Minutes" type="video" link="https://www.youtube.com/watch?v=skCV9BEmjbo" imgSrc="https://i.ytimg.com/vi/skCV9BEmjbo/hqdefault.jpg" author="PingCAP" duration="3 mins" />
+  <ResourceCard title="TiDB Cloud Premium Public Preview: Predictable Performance, Elastic Scale, Enterprise Isolation" type="blog" link="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/" imgSrc="https://static.pingcap.com/files/2026/04/29131128/Blog-LinkedIn-2.png" author="Dan Qiao" date="2026-04-29" />
+  <ResourceCard title="TiDB Cloud Essential Now Available in Public Preview on AWS and Alibaba Cloud" type="blog" link="https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/" imgSrc="https://static.pingcap.com/files/2025/10/14065646/tidb_1200x627-2-1.png" author="Liya Du" date="2025-10-14" />
 </RelatedResources>

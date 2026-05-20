@@ -62,7 +62,7 @@ TiDB v8.5.6以降の場合：
 
 -   `SELECT` : データを比較するために必要です。
 -   `RELOAD` : テーブルスキーマを表示するために必要です。
--   `PROCESS` : アップストリームとダウンストリームの両方が TiDB クラスタである場合に必須です。これは`INFORMATION_SCHEMA.CLUSTER_INFO`テーブルをクエリするために使用されます。
+-   `PROCESS` : アップストリームとダウンストリームの両方が TiDB クラスタである場合に必須です。 `INFORMATION_SCHEMA.CLUSTER_INFO`テーブルをクエリするために使用されます。
 
 > **注記**：
 >
@@ -314,5 +314,5 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 ## 関連リソース {#related-resources}
 
 <RelatedResources>
-  <ResourceCard title="管理 TiDB 演習 9: データチェックに sync-diff-inspector を使用する" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff8" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch10_en.png" duration="60 分" />
+  <ResourceCard title="TiDB Admin Lab 9: Using sync-diff-inspector for Data Check" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff8" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch10_en.png" duration="60 mins" />
 </RelatedResources>

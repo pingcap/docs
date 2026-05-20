@@ -17,7 +17,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ## テンプレートを使ったクイックスタート {#quick-start-with-template}
 
-[Zapテンプレート](https://platform.zapier.com/partners/zap-templates)、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
+[Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
 
 このセクションでは、 **「新しい GitHub グローバル イベントを TiDB 行に追加する」**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
@@ -27,7 +27,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 -   [Zapierアカウント](https://zapier.com/app/login)。
 -   [GitHubアカウント](https://github.com/login)。
--   [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
+-   [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDBTiDB CloudTiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
 
 ### ステップ1：テンプレートを入手する {#step-1-get-the-template}
 
@@ -71,7 +71,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     この手順では、イベントデータを保存するTiDB Cloud Starterインスタンス内のテーブルを指定する必要があります。テーブルがまだ作成されていない場合は、この手順で作成できます。
 
-    1.  ドロップダウンリストからプロジェクト名とインスタンス名を選択してください。TiDB Cloud Starterインスタンスの接続情報が自動的に表示されます。
+    1.  ドロップダウンリストからプロジェクト名とインスタンス名を選択してください。TiDB TiDB Cloud Starterインスタンスの接続情報が自動的に表示されます。
 
         ![Set up project name and instance name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
@@ -81,7 +81,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
-        Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
+        Zapierは、入力されたパスワードを使用してTiDB Cloudからデータベースを検索します。TiDB TiDB Cloud Starterインスタンスにデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
     4.  **「検索するテーブル」ボックス**に`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 **「続行」**をクリックします。
 
@@ -95,7 +95,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 1.  アプリとイベントを選択
 
-    テンプレートで設定されているデフォルト値をそのまま使用します。 **[続行]**をクリックします。
+    テンプレートで設定されているデフォルト値をそのまま使用します。 **「続行」**をクリックしてください。
 
 2.  アカウントを選択
 
@@ -117,7 +117,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 4.  テストアクション
 
-    **「テスト」アクション**をクリックして、テーブルに新しい行を作成します。TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
+    **「テスト」アクション**をクリックして、テーブルに新しい行を作成します。TiDB TiDB Cloud Starterインスタンスを確認すると、データが正常に書き込まれていることが確認できます。
 
     ```sql
     mysql> SELECT * FROM test.github_global_event;
@@ -161,7 +161,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 | アクション         | 説明                                                            | リソース                                    |
 | ------------- | ------------------------------------------------------------- | --------------------------------------- |
 | クラスタの検索       | 既存のTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスタを検索します。 | なし                                      |
-| クラスタを作成する     | 新しいクラスターを作成します。TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
+| クラスタを作成する     | 新しいクラスターを作成します。TiDB TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
 | データベースの検索     | 既存のデータベースを検索します。                                              | TiDB Cloud Starterインスタンス                |
 | データベースを作成する   | 新しいデータベースを作成します。                                              | TiDB Cloud Starterインスタンス                |
 | テーブルを探す       | 既存のテーブルを検索します。                                                | TiDB Cloud Starterインスタンスとデータベース         |
@@ -173,7 +173,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ## TiDB Cloudアプリテンプレート {#tidb-cloud-app-templates}
 
-TiDB Cloudには、Zapierで直接使用できるテンプレートがいくつか用意されています。すべてのテンプレートは[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)ページで確認できます。
+TiDB Cloudには、Zapierで直接使用できるテンプレートがいくつか用意されています。すべてのテンプレートは[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)ページでご確認いただけます。
 
 以下に例を示します。
 

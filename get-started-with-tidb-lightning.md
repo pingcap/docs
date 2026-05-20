@@ -1,25 +1,25 @@
 ---
 title: Quick Start for TiDB Lightning
-summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポートするためのツールです。本番や開発環境ではなく、テストおよびトライアル用途にのみ推奨されます。このプロセスには、フルバックアップデータの準備、TiDBクラスタのデプロイ、 TiDB Lightningのインストール、 TiDB Lightningの起動、そしてデータ整合性のチェックが含まれます。詳細な機能と使用方法については、 TiDB Lightningの概要をご覧ください。
+summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポートするためのツールです。本番や開発環境ではなく、テストおよび試用目的でのみ使用することをお勧めします。このプロセスには、フルバックアップデータの準備、TiDBクラスタのデプロイ、 TiDB Lightningのインストール、 TiDB Lightningの起動、およびデータ整合性のチェックが含まれます。詳細な機能と使用方法については、 TiDB Lightningの概要を参照してください。
 ---
 
-# TiDB Lightningのクイックスタート {#quick-start-for-tidb-lightning}
+# TiDB Lightningクイックスタート {#quick-start-for-tidb-lightning}
 
-このドキュメントでは、MySQL データを TiDB クラスターにインポートしてTiDB Lightningを使い始めるためのクイック ガイドを提供します。
+このドキュメントでは、MySQLデータをTiDBクラスタにインポートすることでTiDB Lightningを使い始めるための簡単なガイドを提供します。
 
 > **警告：**
 >
-> このチュートリアルで紹介するデプロイ方法は、テストおよび試行目的のみに推奨されます。**本番や開発環境には適用しないでください。**
+> このチュートリアルで紹介するデプロイ方法は、テストおよび試用のみを推奨します。**本番や開発環境では適用しないでください。**
 
-## ステップ1: 完全バックアップデータを準備する {#step-1-prepare-full-backup-data}
+## ステップ1：フルバックアップデータを準備する {#step-1-prepare-full-backup-data}
 
-まず、 [団子](/dumpling-overview.md)使用して MySQL からデータをエクスポートできます。
+まず、[団子](/dumpling-overview.md)を使用してMySQLからデータをエクスポートできます。
 
-1.  `tiup --version`実行して、 TiUPが既にインストールされているかどうかを確認します。TiUPがインストールされている場合は、この手順をスキップしてください。TiUPがインストールされていない場合は、以下のコマンドを実行してください。
+1.  TiUPが既にインストールされているかどうかを確認するには、 `tiup --version`を実行してください。TiUPがインストールされている場合は、この手順をスキップしてください。TiUPがインストールされていない場合は、次のコマンドを実行してください。
 
         curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 
-2.  TiUPを使用してDumplingをインストールする:
+2.  TiUPを使用してDumplingをインストールする方法：
 
     ```shell
     tiup install dumpling
@@ -31,36 +31,36 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
     tiup dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
     ```
 
-    上記のコマンドでは、
+    上記のコマンドでは：
 
     -   `-t 16` : 16 スレッドを使用してデータをエクスポートします。
-    -   `-F 256MB` : 各テーブルを複数のファイルに分割します。各ファイルのサイズは約 256 MB になります。
+    -   `-F 256MB` : 各テーブルを複数のファイルに分割し、各ファイルのサイズは約 256 MB にします。
     -   `-B test` : `test`データベースからエクスポートします。
-    -   `-f 'test.t[12]'` : テーブル`test.t1`と`test.t2` 2 つのテーブルのみをエクスポートします。
+    -   `-f 'test.t[12]'` : 2 つのテーブル`test.t1`と`test.t2`のみをエクスポートします。
 
-    エクスポートされた完全バックアップ データは`/data/my_database`ディレクトリに保存されます。
+    エクスポートされた完全なバックアップデータは、 `/data/my_database`ディレクトリに保存されます。
 
-## ステップ2: TiDBクラスターをデプロイ {#step-2-deploy-the-tidb-cluster}
+## ステップ2：TiDBクラスタをデプロイ {#step-2-deploy-the-tidb-cluster}
 
-データのインポートを開始する前に、インポート用のTiDBクラスターをデプロイする必要があります。既にTiDBクラスターをお持ちの場合は、この手順をスキップできます。
+データインポートを開始する前に、インポート用のTiDBクラスタをデプロイする必要があります。既にTiDBクラスタをお持ちの場合は、この手順をスキップできます。
 
-TiDB クラスターをデプロイする手順については、 [TiDBセルフマネージドのクイックスタート](/quick-start-with-tidb.md)を参照してください。
+TiDB クラスターのデプロイ手順については、 [TiDBセルフマネージドのクイックスタート](/quick-start-with-tidb.md)を参照してください。
 
-## ステップ3: TiDB Lightningをインストールする {#step-3-install-tidb-lightning}
+## ステップ3： TiDB Lightningをインストールする {#step-3-install-tidb-lightning}
 
-次のコマンドを実行して、 TiDB Lightningの最新バージョンをインストールします。
+最新バージョンのTiDB Lightningをインストールするには、以下のコマンドを実行してください。
 
 ```shell
 tiup install tidb-lightning
 ```
 
-## ステップ4: TiDB Lightningを起動する {#step-4-start-tidb-lightning}
+## ステップ4： TiDB Lightningを起動する {#step-4-start-tidb-lightning}
 
 > **注記：**
 >
-> このセクションのインポート方法は、テストおよび機能確認にのみ適しています。本番環境では、 [大規模データセットをMySQLからTiDBに移行する](/migrate-large-mysql-to-tidb.md)を参照してください。
+> このセクションのインポート方法は、テストと機能体験にのみ適しています。本番環境については、 [MySQLからTiDBへの大規模データセットの移行](/migrate-large-mysql-to-tidb.md)を参照してください。
 
-1.  構成ファイル`tidb-lightning.toml`を作成し、クラスター情報に基づいて次の設定を入力します。
+1.  構成ファイル`tidb-lightning.toml`を作成し、クラスタ情報に基づいて以下の設定を入力してください。
 
     ```toml
     [lightning]
@@ -93,27 +93,27 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2.  `tidb-lightning`実行します。コマンドラインで`nohup`使用して直接プログラムを起動した際に`SIGHUP`シグナルによってプログラムが終了してしまうのを防ぐため、 `nohup`コマンドをスクリプトに含めることをお勧めします。例:
+2.  `tidb-lightning`を実行します。 `SIGHUP`を使用してコマンドラインから直接プログラムを起動したときに、 `nohup`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。例:
 
     ```shell
     #!/bin/bash
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-## ステップ5: データの整合性を確認する {#step-5-check-data-integrity}
+## ステップ5：データの整合性を確認する {#step-5-check-data-integrity}
 
-インポートが完了すると、 TiDB Lightning は自動的に終了します。インポートが成功した場合、ログファイルの最終行に`tidb lightning exit`表示されます。
+インポートが完了すると、 TiDB Lightning は自動的に終了します。インポートが成功した場合、ログファイルの最終行に`tidb lightning exit`が表示されます。
 
-エラーが発生した場合は、 [TiDB Lightningに関するよくある質問](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
+エラーが発生した場合は、 [TiDB Lightningよくある質問](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
 ## まとめ {#summary}
 
-このチュートリアルでは、TiDB Lightningとは何か、またTiDB Lightningクラスターを迅速に展開して完全バックアップ データを TiDB クラスターにインポートする方法について簡単に説明します。
+このチュートリアルでは、TiDB Lightningとは何か、そしてTiDB Lightningクラスタを迅速にデプロイして完全なバックアップデータをTiDBクラスタにインポートする方法について簡単に説明します。
 
-TiDB Lightning の詳細な機能と使用方法については、 [TiDB Lightning の概要](/tidb-lightning/tidb-lightning-overview.md)を参照してください。
+TiDB Lightning の詳しい機能や使い方については、 [TiDB Lightningの概要](/tidb-lightning/tidb-lightning-overview.md)をご覧ください。
 
 ## 関連リソース {#related-resources}
 
 <RelatedResources>
-  <ResourceCard title="管理 TiDB 演習 6: TiDB Lightning を使用して TiDB にデータをインポートする" type="lab" link="https://labs.tidb.io/ja/labs/dba_303_lab_ff5" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch07_en.png" duration="60 分" />
+  <ResourceCard title="TiDB Admin Lab 6: Importing Data into TiDB Using TiDB Lightning" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff5" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch07_en.png" duration="60 mins" />
 </RelatedResources>
