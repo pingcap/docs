@@ -198,7 +198,7 @@ summary: 了解 2024 年 TiDB Cloud 的发布说明。
 
     如果你的表包含 [向量数据类型](/ai/reference/vector-search-data-types.md)，你可以自动生成一个向量检索端点，根据所选距离函数计算向量距离。
 
-    该功能可无缝集成到 [Dify](https://docs.dify.ai/guides/tools) 和 [GPTs](https://openai.com/blog/introducing-gpts) 等 AI 平台，为你的应用带来更复杂的自然语言处理和 AI 能力，助力智能解决方案。
+    该功能可无缝集成到 [Dify](https://dify.ai/) 和 [GPTs](https://openai.com/blog/introducing-gpts) 等 AI 平台，为你的应用带来更复杂的自然语言处理和 AI 能力，助力智能解决方案。
 
     更多信息，参见 [自动生成端点](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically) 和 [将 Data App 集成到第三方工具](/tidb-cloud/data-service-integrations.md)。
 

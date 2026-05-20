@@ -94,7 +94,7 @@ airbyte-server      | --------------------------------------
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7. 将 **Normalization & Transformation** 设置为 **Normalized tabular data** 以使用默认的标准化模式，或者你也可以为你的作业设置 dbt 文件。关于标准化的更多信息，请参考 [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)。
+7. 将 **Normalization & Transformation** 设置为 **Normalized tabular data** 以使用默认的标准化模式，或者你也可以为你的作业设置 dbt 文件。
 8. 点击 **Set up connection**。
 9. 连接建立后，点击 **ENABLED** 激活同步任务。你也可以点击 **Sync now** 立即同步。
 

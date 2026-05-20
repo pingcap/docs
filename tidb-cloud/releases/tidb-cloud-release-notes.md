@@ -8,6 +8,20 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 5 月 19 日
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - Top RU 现已在以下区域的 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 中开启公开预览：
+
+        - 阿里云：`Mexico (na-south-1)`
+
+      此功能以分钟级粒度展示 RU 消耗最高的 SQL 语句，帮助你快速识别资源密集型查询以降低成本。
+
+        该功能正在分阶段推出。如需申请抢先体验，请联系 [support@pingcap.com](mailto:support@pingcap.com)。
+
 ## 2026 年 5 月 12 日
 
 **常规变更**

@@ -140,7 +140,39 @@ TiDB 在悲观事务模式下支持以下两种隔离级别：
 
 在事务提交流程中，悲观事务和乐观事务的逻辑相同。两者都采用两阶段提交（2PC）模式。悲观事务的关键适配在于 DML 执行。
 
-![TiDB 悲观事务提交流程](/media/pessimistic-transaction-commit.png)
+```mermaid
+---
+config:
+  themeCSS: |
+    /* workaround for https://github.com/mermaid-js/mermaid/issues/523 */
+    /* mark the two "Lock" arrows as red, by restyling the dashed arrows */
+    line.messageLine1 {
+        stroke: #d32f2f;
+        stroke-dasharray: none !important;
+    }
+    /* make sure the arrow heads inherit the stroke color (another bug in mermaid) */
+    #arrowhead path {
+        fill: context-stroke;
+        stroke: context-stroke;
+    }
+---
+sequenceDiagram
+    participant Client
+    participant TiDB
+    participant TiKV
+
+    Client->>TiDB: BEGIN
+    rect rgba(255, 0, 0, 0.08)
+        Client->>TiDB: DML
+        TiDB-->>TiKV: Lock
+        TiDB-->>TiKV: Lock
+    end
+    rect rgba(0, 0, 0, 0.04)
+        Client->>TiDB: COMMIT
+        TiDB->>TiKV: Prewrite
+        TiDB->>TiKV: Commit
+    end
+```
 
 悲观事务在 2PC 之前增加了 `Acquire Pessimistic Lock` 阶段，包括以下步骤：
 
@@ -148,7 +180,52 @@ TiDB 在悲观事务模式下支持以下两种隔离级别：
 2. 当 TiDB 服务器收到客户端的写入请求时，会向 TiKV 服务器发起悲观锁请求，锁信息会被持久化到 TiKV 服务器。
 3. （与乐观事务模式相同）当客户端发出提交请求时，TiDB 开始执行类似乐观事务的两阶段提交。
 
-![TiDB 中的悲观事务](/media/pessimistic-transaction-in-tidb.png)
+```mermaid
+---
+title: Pessimistic Transaction in TiDB
+---
+sequenceDiagram
+    participant client
+    participant TiDB
+    participant PD
+    participant TiKV
+
+    client->>TiDB: begin
+    TiDB->>PD: get ts as start_ts
+    loop execute SQL
+        rect rgba(0, 0, 0, 0.04)
+            alt do read
+                TiDB->>TiKV: get data from TiKV with start_ts
+                TiDB->>client: return read result
+            else do write
+                rect rgba(255, 0, 0, 0.08)
+                    loop if has write conflict
+                        TiDB->>PD: get ts as for_update_ts
+                        TiDB->>TiDB: write in cache
+                        TiDB->>TiKV: acquire pessimistic locks parallelly
+                    end
+                end
+                TiDB->>client: return write result
+            end
+        end
+    end
+    client->>TiDB: commit
+    opt start 2PC
+        rect rgba(0, 0, 0, 0.04)
+            par prewrite
+                TiDB->>TiKV: prewrite each key in cache with start_ts parallelly
+            end
+        end
+        rect rgba(0, 0, 0, 0.04)
+            par commit
+                TiDB->>PD: get ts as commit_ts
+                TiDB->>TiKV: commit primary_key with commit_ts first
+                TiDB->>client: success
+                TiDB->>TiKV: commit each secondary_key with commit_ts parallelly
+            end
+        end
+    end
+```
 
 ## 管道化锁定流程
 
@@ -164,7 +241,25 @@ TiDB 在悲观事务模式下支持以下两种隔离级别：
 
 如果你的应用逻辑依赖锁或等待锁机制，或者你希望在 TiKV 集群异常情况下尽可能保证事务提交成功率，应禁用管道化锁定功能。
 
-![管道化悲观锁](/media/pessimistic-transaction-pipelining.png)
+```mermaid
+---
+title: pipelined pessimistic lock
+---
+sequenceDiagram
+    participant Client
+    participant TiDB
+    participant TiKV1
+    participant TiKV2
+    participant TiKV3
+
+    loop
+        Client->>TiDB: DML
+        TiDB->>TiKV1: Acquire pessimistic locks
+        TiKV1->>TiDB: OK
+        TiKV1--)TiKV2: Log replication
+        TiKV1--)TiKV3: Log replication
+    end
+```
 
 此功能默认启用。若要禁用，可修改 TiKV 配置：
 
