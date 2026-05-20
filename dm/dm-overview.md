@@ -94,4 +94,4 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 > **Note:**
 >
 > - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/master/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
-> - In earlier versions (v1.0 and v2.0), DM uses version numbers independent of TiDB. Since v5.3, DM uses the same version number as TiDB. DM v5.3 follows DM v2.0 with no compatibility changes, and the upgrade process is standard, involving only a version number increase.
+> - In earlier versions (v1.0 and v2.0), DM uses version numbers independent of TiDB. Starting from v5.3, DM uses the same version number as TiDB. DM v5.3 follows DM v2.0 with no compatibility changes, and the upgrade process is standard, involving only a version number increase.
