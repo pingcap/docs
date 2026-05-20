@@ -61,5 +61,5 @@ If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-sup
 ## Related resources
 
 <RelatedResources>
-  <ResourceCard title="What Happens to a Database When the User is an AI agent" type="blog" link="https://www.pingcap.com/blog/what-makes-a-database-for-ai-agents-different/" imgSrc="https://static.pingcap.com/files/2026/04/17144530/Webinar-LP-Banner-4.png" author="Max Liu" date="2026-04-15" />
+  <ResourceCard title="What Happens to a Database When the User is an AI agent" type="blog" link="https://www.pingcap.com/blog/what-makes-a-database-for-ai-agents-different/" imgSrc="https://static.pingcap.com/files/2026/04/17143028/Blog-LinkedIn-1.png" author="Max Liu" date="2026-04-15" />
 </RelatedResources>
