@@ -7,7 +7,7 @@ description: Produces and merges Related resources cards for TiDB docs pages usi
 
 ## Overview
 
-A "Related resources" section is a final h2 in a TiDB docs page containing a `<RelatedResources>` block with one or more `<ResourceCard />` entries. Each card links to a blog post, YouTube video, or TiDB Lab.
+A "Related resources" section is a final h2 in a TiDB docs page, containing a `<RelatedResources>` block with one or more `<ResourceCard />` entries. Each card links to a blog post, YouTube video, or TiDB Lab.
 
 This skill produces those cards correctly for English, Simplified Chinese, and Japanese docs, and merges them into the target file.
 
@@ -26,7 +26,7 @@ Rules:
 - Use one `<ResourceCard ... />` per line. Do not wrap attributes.
 - Indent cards by two spaces inside `<RelatedResources>`.
 - Use double quotes for all attributes and a space before `/>`.
-- Keep no blank lines inside `<RelatedResources>`.
+- Do not add blank lines inside `<RelatedResources>`.
 - Add one blank line before the heading and one blank line after it when creating the container section.
 - Append as the last H2 unless the user gives another location.
 
