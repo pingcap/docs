@@ -5614,7 +5614,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium). For [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium), the value is fixed to `leader`, and other read modes are not supported.
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium), this variable is read-only and fixed to `leader`, which means other read modes are not supported.
 
 </CustomContent>
 
