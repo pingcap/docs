@@ -50,7 +50,7 @@ Currently, Pipelined DML has the following limitations:
 
 > **Note:**
 >
-> Pipelined DML is not supported for [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium). You cannot enable Pipelined DML by setting [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) to `"bulk"` or by using the [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) hint.
+> For [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium), Pipelined DML is not supported, and you cannot enable Pipelined DML by setting [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) to `"bulk"` or by using the [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) hint.
 
 </CustomContent>
 
