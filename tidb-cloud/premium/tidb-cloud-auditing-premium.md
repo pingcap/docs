@@ -177,7 +177,7 @@ For more information, see [Create a bucket](https://www.alibabacloud.com/help/en
 
 5. Copy the **Role ARN** (for example: `acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`) for later use.
 
-**Cross-Account OSS Bucket Configuration**
+**Cross-account OSS bucket configuration**
 
 If the OSS bucket storing the audit logs and the role accessing the OSS bucket are in different cloud accounts, the configuration process is slightly different.
 
