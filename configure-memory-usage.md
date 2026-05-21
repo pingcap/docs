@@ -231,7 +231,7 @@ To verify the performance of `GOMEMLIMIT`, a test is performed to compare the sp
 Before TiDB v9.0.0, the [memory control mechanism](#configure-the-memory-usage-threshold-of-a-tidb-server-instance) has the following issues:
 
 - When the memory usage of a TiDB instance exceeds the limit, TiDB might randomly terminate running SQL statements.
-- Memory resources follow a “use-then-report” mechanism, and memory usage is isolated across different SQL statements. As a result, TiDB cannot centrally schedule or control memory resources at the instance level.
+- Memory resources follow a "use-then-report" mechanism, and memory usage is isolated across different SQL statements. As a result, TiDB cannot centrally schedule or control memory resources at the instance level.
 - Under high memory pressure, the overhead of Go garbage collection (Garbage Collection, GC) increases significantly, and in severe cases might cause out of memory (OOM) issues.
 
 Starting from v9.0.0, TiDB introduces memory arbitrator mode. This mode introduces a global memory arbitrator in each TiDB instance to centrally manage and schedule the memory resources of the instance from top to bottom, mitigating the preceding issues.
