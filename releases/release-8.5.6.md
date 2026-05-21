@@ -43,14 +43,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries).
 
-- The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
-
-    In earlier versions, TiDB Dashboard identified Top SQL queries based only on CPU-related metrics, making it difficult to identify performance bottlenecks related to network or storage access in complex scenarios.
-
-    Starting from v8.5.6, you can enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to view metrics such as `Network Bytes` and `Logical IO Bytes` for TiKV nodes. You can also analyze these metrics across multiple dimensions, including `By Query`, `By Table`, `By DB`, and `By Region`, helping you identify resource hotspots more comprehensively.
-
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
-
 ### SQL
 
 - Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678)
@@ -117,7 +109,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 | TiKV | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | Newly added | Controls whether to enable MVCC-read-aware compaction. The default value is `false`. |
 | TiKV | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856) | Newly added | The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. The default value is `3.0`. |
 | TiKV | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856) | Newly added | The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. The default value is `1000`. |
-| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | Newly added | Controls whether TiKV network traffic and logical I/O metrics are additionally collected in Top SQL. The default value is `false`. |
 | TiCDC | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv) | Newly added | Controls whether a header row is output in CSV files. The default value is `false`. This parameter applies only to the TiCDC new architecture. |
 
 ### System table changes
@@ -143,7 +134,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     - Introduce a load-based compaction mechanism, which detects MVCC read overhead and prioritizes compaction for Regions with higher read cost to improve query performance [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     - Optimize the stale range cleanup logic during cluster scale-out and scale-in operations by deleting stale keys directly instead of cleaning them up through SST file ingestion, thereby reducing the impact on online request latency [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Support collecting TiKV network traffic and logical I/O metrics for Top SQL, which helps you diagnose SQL performance issues more accurately [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
 
 + PD
 
