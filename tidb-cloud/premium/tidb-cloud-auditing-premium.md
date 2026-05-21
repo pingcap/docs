@@ -209,7 +209,7 @@ In addition, you also need to configure a bucket policy on the destination OSS b
     "Statement": [
         {
             "Action": [
-                "oss:GetObject"
+                "oss:PutObject"
             ],
             "Effect": "Allow",
             "Principal": [
