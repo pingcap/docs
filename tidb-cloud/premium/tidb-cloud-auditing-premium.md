@@ -193,7 +193,7 @@ When creating the RAM policy, you need to add the information of User Account 2 
     {
       "Effect": "Allow",
       "Action": "oss:PutObject",
-      "Resource": "acs:oss:oss-<region>:<User Account 2>:<bucket-name>/*"
+      "Resource": "acs:oss:*:<User Account 2>:<bucket-name>/*"
     }
   ]
 }
