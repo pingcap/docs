@@ -87,7 +87,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 <CustomContent platform="tidb-cloud">
 
--   TiKV: TiDB Self-Managed では、 `resource-control.enabled`パラメータを使用して、リソース グループのクォータに基づいてリクエスト スケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。
+-   TiKV: TiDB Self-Managed では、 `resource-control.enabled`パラメータを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。
 -   TiFlash: TiDB セルフマネージドの場合、 `tidb_enable_resource_control`システム変数と`enable_resource_control`構成項目 (v7.4.0 で導入) を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。
 
 </CustomContent>
