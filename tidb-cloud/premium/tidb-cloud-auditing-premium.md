@@ -214,7 +214,7 @@ If the OSS bucket storing the audit logs and the role accessing the OSS bucket a
         "Statement": [
             {
                 "Action": [
-                    "oss:GetObject"
+                    "oss:PutObject"
                 ],
                 "Effect": "Allow",
                 "Principal": [
