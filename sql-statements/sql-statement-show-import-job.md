@@ -37,6 +37,7 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 | Group_Key        | The group key of the task                  |
 | Data_Source      | Information about the data source                  |
 | Target_Table     | The name of the target table                     |
+| Table_ID         | The ID of the target table                     |
 | Phase            | The current phase of the job, including `importing`, `validating`, and `add-index` |
 | Status           | The current status of the job, including `pending` (means created but not started yet), `running`, `canceled`, `failed`, and `finished` |
 | Source_File_Size | The size of the source file  |
@@ -53,6 +54,12 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 | Cur_Step_Progress_Pct       | The estimated completion percentage of the current step        |
 | Cur_Step_Speed       | The current data processing speed         |
 | Cur_Step_ETA       | The estimated time remaining for the current step to complete       |
+
+## Filtering import jobs
+
+Only `SHOW [RAW] IMPORT JOBS` supports filtering import jobs with a `WHERE` clause. `SHOW [RAW] IMPORT JOB <job-id>` does not support a `WHERE` clause.
+
+The `WHERE` clause can reference the output fields of `SHOW IMPORT JOBS`, including `Job_ID`, `Group_Key`, `Data_Source`, `Target_Table`, `Table_ID`, `Phase`, `Status`, `Source_File_Size`, `Imported_Rows`, `Result_Message`, `Create_Time`, `Start_Time`, `End_Time`, `Created_By`, `Last_Update_Time`, `Cur_Step`, `Cur_Step_Processed_Size`, `Cur_Step_Total_Size`, `Cur_Step_Progress_Pct`, `Cur_Step_Speed`, and `Cur_Step_ETA`.
 
 ## Example
 
