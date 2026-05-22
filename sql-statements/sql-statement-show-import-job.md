@@ -9,20 +9,17 @@ The `SHOW IMPORT JOB` statement is used to show `IMPORT` jobs created in TiDB. B
 
 ## Required privileges
 
-- `SHOW [RAW] IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
-- `SHOW [RAW] IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
+- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
+- `SHOW IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
 
 ## Synopsis
 
 ```ebnf+diagram
 ShowImportJobsStmt ::=
-    'SHOW' RawOpt? 'IMPORT' 'JOBS' ShowLikeOrWhereOpt?
+    'SHOW' 'IMPORT' 'JOBS' ShowLikeOrWhereOpt?
 
 ShowImportJobStmt ::=
-    'SHOW' RawOpt? 'IMPORT' 'JOB' JobID
-
-RawOpt ::=
-    'RAW'
+    'SHOW' 'IMPORT' 'JOB' JobID
 
 ShowLikeOrWhereOpt ::=
     'LIKE' SimpleExpr
@@ -57,7 +54,7 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 
 ## Filtering import jobs
 
-Only `SHOW [RAW] IMPORT JOBS` supports filtering import jobs with a `WHERE` clause. `SHOW [RAW] IMPORT JOB <job-id>` does not support a `WHERE` clause.
+Only `SHOW IMPORT JOBS` supports filtering import jobs with a `WHERE` clause. `SHOW IMPORT JOB <job-id>` does not support a `WHERE` clause.
 
 The `WHERE` clause can reference the output fields of `SHOW IMPORT JOBS`, including `Job_ID`, `Group_Key`, `Data_Source`, `Target_Table`, `Table_ID`, `Phase`, `Status`, `Source_File_Size`, `Imported_Rows`, `Result_Message`, `Create_Time`, `Start_Time`, `End_Time`, `Created_By`, `Last_Update_Time`, `Cur_Step`, `Cur_Step_Processed_Size`, `Cur_Step_Total_Size`, `Cur_Step_Progress_Pct`, `Cur_Step_Speed`, and `Cur_Step_ETA`.
 
@@ -86,22 +83,6 @@ Filter import jobs by output fields:
 ```sql
 SHOW IMPORT JOBS WHERE Group_Key = 'user_group';
 ```
-
-You can also add the `RAW` keyword before `IMPORT`:
-
-```sql
-SHOW RAW IMPORT JOBS;
-```
-
-```sql
-SHOW RAW IMPORT JOBS WHERE Group_Key = 'user_group';
-```
-
-```sql
-SHOW RAW IMPORT JOB 2;
-```
-
-`SHOW RAW IMPORT JOB <job-id>` returns the same output fields as `SHOW IMPORT JOB <job-id>`.
 
 ## MySQL compatibility
 
