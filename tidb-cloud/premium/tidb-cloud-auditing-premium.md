@@ -198,7 +198,7 @@ If the OSS bucket storing the audit logs and the role accessing the OSS bucket a
         {
           "Effect": "Allow",
           "Action": "oss:PutObject",
-          "Resource": "acs:oss:oss-<region>:<User Account 2>:<bucket-name>/*"
+          "Resource": "acs:oss:*:<User Account 2>:<bucket-name>/*"
         }
       ]
     }
