@@ -17,7 +17,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 ## 使用模板快速开始
 
-[Zap Templates](https://platform.zapier.com/partners/zap-templates) 是为公开可用的 Zapier 集成预先选定应用和核心字段的现成集成或 Zap。
+[Zap Templates](https://docs.zapier.com/integrations/publish/zap-templates) 是为公开可用的 Zapier 集成预先选定应用和核心字段的现成集成或 Zap。
 
 本节将以 **Add new Github global events to TiDB rows** 模板为例，创建一个工作流。在该工作流中，每当你的 GitHub 账户产生新的全局事件（任何 [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types) 发生在你或与你有关的任何仓库上），Zapier 会向你的 TiDB Cloud 集群添加一行新数据。
 

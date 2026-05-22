@@ -33,7 +33,7 @@ TiDB Cloud 为你提供了通过 Flashduty、[Slack](/tidb-cloud/monitor-alert-s
 
 ### 步骤 1. 生成 Flashduty webhook URL
 
-1. 按照 [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/on-call/integration/alert-integration/alert-sources/prometheus#prometheus-integration-guide) 的说明生成 webhook URL。
+1. 按照 [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/on-call/integration/alert-integration/alert-sources/prometheus) 的说明生成 webhook URL。
 2. 保存生成的 webhook URL，以便在下一步中使用。
 
 ### 步骤 2. 从 TiDB Cloud 进行订阅
