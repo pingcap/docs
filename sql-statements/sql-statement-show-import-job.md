@@ -1,32 +1,40 @@
 ---
-title: SHOW IMPORT
-summary: An overview of the usage of SHOW IMPORT in TiDB.
+title: SHOW IMPORT JOB
+summary: An overview of the usage of SHOW IMPORT JOB in TiDB.
 ---
 
-# SHOW IMPORT
+# SHOW IMPORT JOB
 
-The `SHOW IMPORT` statement is used to show the IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
+The `SHOW IMPORT JOB` statement is used to show the IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
 
 ## Required privileges
 
-- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
-- `SHOW IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
+- `SHOW [RAW] IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
+- `SHOW [RAW] IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
 
 ## Synopsis
 
 ```ebnf+diagram
 ShowImportJobsStmt ::=
-    'SHOW' 'IMPORT' 'JOBS'
+    'SHOW' RawOpt? 'IMPORT' 'JOBS' ShowLikeOrWhereOpt?
 
 ShowImportJobStmt ::=
-    'SHOW' 'IMPORT' 'JOB' JobID
+    'SHOW' RawOpt? 'IMPORT' 'JOB' JobID
+
+RawOpt ::=
+    'RAW'
+
+ShowLikeOrWhereOpt ::=
+    'LIKE' SimpleExpr
+|   'WHERE' Expression
 ```
 
-The output fields of the `SHOW IMPORT` statement are described as follows:
+The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 
 | Column           | Description             |
 |------------------|-------------------------|
 | Job_ID           | The ID of the task                  |
+| Group_Key        | The group key of the task                  |
 | Data_Source      | Information about the data source                  |
 | Target_Table     | The name of the target table                     |
 | Phase            | The current phase of the job, including `importing`, `validating`, and `add-index` |
@@ -38,8 +46,7 @@ The output fields of the `SHOW IMPORT` statement are described as follows:
 | Start_Time       | The time when the task is started                     |
 | End_Time         | The time when the task is ended            |
 | Created_By       | The name of the database user who creates the task         |
-
-| Last_Update_Time (NEW)       | The total size of the data to be processed in the current step         |
+| Last_Update_Time       | The time when the task is last updated         |
 | Cur_Step       | The specific sequential processing step of this job         |
 | Cur_Step_Processed_Size       | The amount of data that has been processed within the current step         |
 | Cur_Step_Total_Size       | The total size of the data to be processed in the current step         |
@@ -74,6 +81,20 @@ SHOW IMPORT JOB 2;
 |      2 | /path/to/file.csv | `test`.`bar` |      118 | global-sorting | running  | 277.5GiB         |             0 |                | 2025-07-09 10:40:18.580706 | 2025-07-09 10:40:19.092528 | NULL                       | root@%     | 2025-07-09 10:47:15 | encode       | 4.55GB                  | 298GB               | 1                     | 10.96MB/s      | 07:26:03     |                                                                                   +--------+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+----------+----------------+---------+------------------+---------------+----------------+----------------------------+----------------------------+----------+------------+---------------------+----------+-------------------------+---------------------+-----------
 +--------+-------------------+--------------+----------+----------------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+---------------------+--------------+-------------------------+---------------------+-----------------------+----------------+--------------+                                                                                 
 1 row in set (0.07 sec)  
+```
+
+You can also add the `RAW` keyword before `IMPORT`:
+
+```sql
+SHOW RAW IMPORT JOBS;
+```
+
+```sql
+SHOW RAW IMPORT JOBS WHERE Group_Key = 'user_group';
+```
+
+```sql
+SHOW RAW IMPORT JOB 2;
 ```
 
 ## MySQL compatibility

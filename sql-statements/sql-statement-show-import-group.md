@@ -3,7 +3,7 @@ title: SHOW IMPORT GROUP
 summary: An overview of the usage of SHOW IMPORT GROUP in TiDB.
 ---
 
-# SHOW IMPORT
+# SHOW IMPORT GROUP
 
 The `SHOW IMPORT GROUP` statement is used to show the groups of IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
 
@@ -22,7 +22,7 @@ ShowImportGroupStmt ::=
     'SHOW' 'IMPORT' 'GROUP' GroupKey
 ```
 
-The output fields of the `SHOW IMPORT` statement are described as follows:
+The output fields of the `SHOW IMPORT GROUP` statement are described as follows:
 
 | Column           | Description             |
 |------------------|-------------------------|
@@ -73,4 +73,5 @@ This statement is a TiDB extension to MySQL syntax.
 ## See also
 
 * [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
+* [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
 * [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)

@@ -243,7 +243,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
 
-Besides, you can use [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-job.md) to view the overall progress of the jobs in the group.
+Besides, you can use [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-group.md) to view the overall progress of the jobs in the group.
 
 After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
 
@@ -366,4 +366,5 @@ This statement is a TiDB extension to MySQL syntax.
 * [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
 * [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
 * [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+* [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-group.md)
 * [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
