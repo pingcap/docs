@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW IMPORT GROUP in TiDB.
 
 # SHOW IMPORT GROUP
 
-The `SHOW IMPORT GROUP` statement is used to show the groups of IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
+The `SHOW IMPORT GROUP` statement is used to show the groups of `IMPORT` jobs created in TiDB. By default, `SHOW IMPORT GROUPS` shows groups created by the current user. To view all import groups, you need the `SUPER` privilege.
 
 ## Required privileges
 

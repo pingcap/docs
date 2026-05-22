@@ -243,7 +243,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
 
-Besides, you can use [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-group.md) to view the overall progress of the jobs in the group.
+You can also use [`SHOW IMPORT GROUP(s)`](/sql-statements/sql-statement-show-import-group.md) to view the overall progress of jobs in the same group.
 
 After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
 
