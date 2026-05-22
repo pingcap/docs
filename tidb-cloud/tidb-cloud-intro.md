@@ -6,7 +6,7 @@ category: intro
 
 # What is TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully managed, cloud-native Database-as-a-Service (DBaaS) based on [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. <CustomContent language="en,zh">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully managed, cloud-native Database-as-a-Service (DBaaS) based on [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. <CustomContent language="en,zh">You can create TiDB Cloud resources (such as {{{ .starter }}} instances, {{{ .essential }}} instances, and {{{ .dedicated }}} clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">You can create TiDB Cloud resources (such as {{{ .starter }}} instances, {{{ .essential }}} instances, and {{{ .dedicated }}} clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -102,21 +102,27 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
-<CustomContent plan="premium">
-
 - {{{ .premium }}}
 
     {{{ .premium }}} is designed for mission-critical businesses that demand unlimited real-time scalability. It delivers workload-aware auto-scaling and comprehensive enterprise capabilities.
 
-    Currently, {{{ .premium }}} is in private preview on AWS and Alibaba Cloud. 
+    <CustomContent language="en,zh">
 
-</CustomContent>
+    Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud. 
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    Currently, {{{ .premium }}} is in public preview on AWS.
+
+    </CustomContent>
 
 - TiDB Cloud Dedicated
 
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
 
-    Currently, TiDB Cloud Dedicated is generally available on AWS and Google Cloud, and in public preview on Azure. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
+    Currently, TiDB Cloud Dedicated is generally available on AWS, Azure, and Google Cloud. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
 
 ## Architecture
 
@@ -124,12 +130,20 @@ TiDB Cloud provides the following deployment options:
 
 - TiDB VPC (Virtual Private Cloud)
 
-    For each TiDB Cloud cluster, all TiDB nodes and auxiliary nodes, including TiDB Operator nodes and logging nodes, are deployed in the same VPC.
+    For each TiDB Cloud resource, all TiDB nodes and auxiliary nodes, including TiDB Operator nodes and logging nodes, are deployed in the same VPC.
 
 - TiDB Cloud Central Services
 
-    Central Services, including billing, alerts, meta storage, dashboard UI, are deployed independently. You can access the dashboard UI to operate the TiDB cluster via the internet.
+    Central Services, including billing, alerts, meta storage, dashboard UI, are deployed independently. You can access the dashboard UI to operate the TiDB Cloud resource via the internet.
 
 - Your VPC
 
-    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+    You can connect to your TiDB Cloud resource via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Cloud in 3 Minutes" type="video" link="https://www.youtube.com/watch?v=skCV9BEmjbo" imgSrc="https://i.ytimg.com/vi/skCV9BEmjbo/hqdefault.jpg" author="PingCAP" duration="3 mins" />
+  <ResourceCard title="TiDB Cloud Premium Public Preview: Predictable Performance, Elastic Scale, Enterprise Isolation" type="blog" link="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/" imgSrc="https://static.pingcap.com/files/2026/04/29131128/Blog-LinkedIn-2.png" author="Dan Qiao" date="2026-04-29" />
+  <ResourceCard title="TiDB Cloud Essential Now Available in Public Preview on AWS and Alibaba Cloud" type="blog" link="https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/" imgSrc="https://static.pingcap.com/files/2025/10/14065646/tidb_1200x627-2-1.png" author="Liya Du" date="2025-10-14" />
+</RelatedResources>

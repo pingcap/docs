@@ -146,7 +146,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 * TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd)
 
-    TiDB v7.6.0 introduces accelerated table creation as an experimental feature, controlled by the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760). Staring from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
+    TiDB v7.6.0 introduces accelerated table creation as an experimental feature, controlled by the system variable [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760). Staring from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
     In v8.5.0, TiDB accelerated table creation becomes generally available (GA) and is enabled by default. During data migration and cluster initialization, this feature supports rapid creation of millions of tables, significantly reducing operation time.
 
@@ -236,7 +236,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | -------- | -------- | -------- | -------- |
 | TiDB | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) | Modified | Starting from v8.5.0, the integer display width feature is deprecated. The default value of this configuration item is changed from `false` to `true`. |
 | TiKV | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size) | Modified | Changes the default value from `8192` to `16384`. |
-| TiKV | [`in-memory-engine.capacity`](/tikv-configuration-file.md#capacity-new-in-v850) | Newly added | Controls the maximum memory size that the TiKV MVCC in-memory engine can use. The default value is 10% of the system memory. The maximum value is 5 GiB.|
+| TiKV | [`in-memory-engine.capacity`](/tikv-configuration-file.md#capacity-new-in-v850) | Newly added | Controls the maximum memory size that the TiKV MVCC in-memory engine can use. The default value is `min(the system memory * 10%, 5 GiB)`.|
 | TiKV | [`in-memory-engine.enable`](/tikv-configuration-file.md#enable-new-in-v850) | Newly added | Controls whether to enable the TiKV MVCC in-memory engine to accelerate multi-version queries. The default value is `false`, which means that the in-memory engine is disabled. |
 | TiKV | [`in-memory-engine.gc-run-interval`](/tikv-configuration-file.md#gc-run-interval-new-in-v850) | Newly added | Controls the time interval at which the in-memory engine performs garbage collection (GC) on cached MVCC versions. The default value is `"3m"`.|
 | TiKV | [`in-memory-engine.mvcc-amplification-threshold`](/tikv-configuration-file.md#mvcc-amplification-threshold-new-in-v850) | Newly added | Controls the threshold for MVCC read amplification when the in-memory engine selects and loads Regions. The default value is `10`, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.|
@@ -254,7 +254,7 @@ Before upgrading TiDB, ensure that your operating system version meets the [OS a
 
 * The following feature has been removed:
 
-    * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
+    * In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
 
 * The following features are planned for removal in future versions:
 
@@ -442,4 +442,10 @@ We would like to thank the following contributors from the TiDB community:
 - [chagelo](https://github.com/chagelo) (First-time contributor)
 - [LindaSummer](https://github.com/LindaSummer)
 - [songzhibin97](https://github.com/songzhibin97)
-- [Hexilee](https://github.com/Hexilee) 
+- [Hexilee](https://github.com/Hexilee)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="Reducing P999 Latency in Distributed Databases with TiDB 8.5" type="blog" link="https://www.pingcap.com/blog/tidb-8-5-reduce-p999-latency-distributed-database/" imgSrc="https://static.pingcap.com/files/2026/04/07040029/20260407-162905.png" author="Rui Xu" date="2026-04-07" />
+</RelatedResources>

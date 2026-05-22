@@ -273,6 +273,7 @@ For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions 
     - Fix the issue that a panic occurs when handling generated columns during `IMPORT INTO` [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that an error might be incorrectly reported when a single SQL statement contains multiple `AS OF TIMESTAMP` expressions [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
     - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when querying system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
+    - Fix a potential memory leak in `client-go` [#65522](https://github.com/pingcap/tidb/issues/65522) @[bufferflies](https://github.com/bufferflies)
 
 + TiKV
 

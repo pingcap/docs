@@ -6,9 +6,10 @@
 ## GET STARTED
 
 - Why TiDB Cloud
-  - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Features](/tidb-cloud/features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-- Get Started with TiDB Cloud
+- Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
 - Key Concepts
@@ -24,116 +25,20 @@
   - [Backup & Restore](/tidb-cloud/backup-and-restore-concepts.md)
   - [Security](/tidb-cloud/security-concepts.md)
 
-## DEVELOP
-
-- Development Quick Start
-  - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
-  - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
-- Connect to TiDB Cloud
-  - GUI Database Tools
-    - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
-    - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
-    - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
-    - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
-    - [Navicat](/develop/dev-guide-gui-navicat.md)
-  - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-  - Java
-    - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
-    - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
-    - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
-    - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
-    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-  - Go
-    - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
-    - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
-  - Python
-    - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
-    - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-    - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
-    - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
-    - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
-    - [Django](/develop/dev-guide-sample-application-python-django.md)
-  - Node.js
-    - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
-    - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
-    - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
-    - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
-    - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-    - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
-  - Ruby
-    - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-    - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
-  - C#
-    - [C#](/develop/dev-guide-sample-application-cs.md)
-  - [WordPress](/develop/dev-guide-wordpress.md)
-  - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
-    - [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)
-    - [Node.js Example](/develop/serverless-driver-node-example.md)
-    - [Prisma Example](/develop/serverless-driver-prisma-example.md)
-    - [Kysely Example](/develop/serverless-driver-kysely-example.md)
-    - [Drizzle Example](/develop/serverless-driver-drizzle-example.md)
-- Development Reference
-  - Design Database Schema
-    - [Overview](/develop/dev-guide-schema-design-overview.md)
-    - [Create a Database](/develop/dev-guide-create-database.md)
-    - [Create a Table](/develop/dev-guide-create-table.md)
-    - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
-  - Write Data
-    - [Insert Data](/develop/dev-guide-insert-data.md)
-    - [Update Data](/develop/dev-guide-update-data.md)
-    - [Delete Data](/develop/dev-guide-delete-data.md)
-    - [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
-    - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
-  - Read Data
-    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
-    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
-    - [Subquery](/develop/dev-guide-use-subqueries.md)
-    - [Paginate Results](/develop/dev-guide-paginate-results.md)
-    - [Views](/develop/dev-guide-use-views.md)
-    - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
-    - [Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
-    - Read Replica Data
-      - [Follower Read](/develop/dev-guide-use-follower-read.md)
-      - [Stale Read](/develop/dev-guide-use-stale-read.md)
-    - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-  - Transaction
-    - [Overview](/develop/dev-guide-transaction-overview.md)
-    - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-    - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
-    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
-  - Optimize
-    - [Overview](/develop/dev-guide-optimize-sql-overview.md)
-    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
-    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
-    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
-    - Other Optimization Methods
-      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
-      - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
-  - Troubleshoot
-    - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
-    - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
-    - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
-  - Development Guidelines
-    - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
-    - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
-  - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
-  - Third-Party Support
-    - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
-    - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
-
 ## GUIDES
 
-- Manage Instances
-  - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Instances
-    - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
-    - Connect to Your TiDB Cloud Instance
-      - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
-      - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-      - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
-  - Use an HTAP Cluster with TiFlash
+- [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
+- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
+- Manage {{{ .premium }}} Instances
+  - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
+  - Connect to Your {{{ .premium }}} Instance
+    - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
+    - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+    - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+  - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
+  - [Export Data from {{{ .premium }}}](/tidb-cloud/premium/premium-export.md)
+  - Use TiFlash for HTAP
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
     - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
@@ -147,6 +52,12 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
+    - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+    - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
+    - Subscribe to Alert Notifications
+      - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -196,10 +107,12 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Delete a TiDB Instance](/tidb-cloud/premium/delete-tidb-instance.md)
+  - [Delete a {{{ .premium }}} Instance](/tidb-cloud/premium/delete-tidb-instance.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
+    - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
     - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
@@ -215,7 +128,7 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -229,15 +142,15 @@
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-    - [Identity Access Management](/tidb-cloud/premium/manage-user-access-premium.md)
+    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
     - [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md)
     - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
-    - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [TLS Connections to TiDB Cloud](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - Data Access Control
+    - [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
     - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Audit Management
     - [Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
@@ -260,15 +173,6 @@
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
-  - Terraform
-    - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-    - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use the `tidbcloud_serverless_cluster` Resource](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
-    - [Use the `tidbcloud_serverless_branch` Resource](/tidb-cloud/terraform-use-serverless-branch-resource.md)
-    - [Use the `tidbcloud_serverless_export` Resource](/tidb-cloud/terraform-use-serverless-export-resource.md)
-    - [Use the `tidbcloud_sql_user` Resource](/tidb-cloud/terraform-use-sql-user-resource.md)
-    - [Use the `tidbcloud_import` Resource](/tidb-cloud/terraform-use-import-resource.md)
-    - [Migrate Cluster Resource](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
@@ -280,6 +184,7 @@
     - Attributes
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
+      - [_tidb_rowid](/tidb-rowid.md)
       - [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
     - [Literal Values](/literal-values.md)
     - [Schema Object Names](/schema-object-names.md)
@@ -564,6 +469,11 @@
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
   - Connected Care Support Service Features
     - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected: IM Subscription for TiDB Cloud Alerts
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
+      - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
+      - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)

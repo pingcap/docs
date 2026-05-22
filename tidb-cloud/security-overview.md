@@ -17,15 +17,27 @@ TiDB Cloud provides layered role and permission management, and you can enable m
 
 TiDB Cloud provides private endpoints, VPC Peering, and IP access lists for network isolation and access control.
 
-You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster resources, enhancing overall security.
+You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster or instance resources, enhancing overall security.
 
 ## Data access control
 
-For cluster types that support Customer-Managed Encryption Keys (CMEK), TiDB Cloud provides encryption for both data at rest and backups.
+<CustomContent plan="starter,essential,dedicated">
+
+For {{{ .dedicated }}} clusters with Customer-Managed Encryption Keys (CMEK) enabled, TiDB Cloud provides encryption for both data at rest and backups.
 
 Combined with robust key management mechanisms, you can control the lifecycle and usage of encryption keys, further enhancing data security and compliance.
 
 For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+For {{{ .premium }}} instances hosted on AWS, you can enable Dual-Layer Data Encryption to add a database-layer encryption on top of the default storage-layer encryption. With Dual-Layer Data Encryption enabled, TiDB Cloud encrypts data stored by TiKV, changefeed data, and backup data, and you can choose either a Customer-Managed Encryption Key (CMEK) or a Service-Managed Encryption Key.
+
+For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+
+</CustomContent>
 
 ## Database access control
 

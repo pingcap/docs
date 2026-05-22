@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
 
 - **An MCP-compatible client**: For example, [Cursor](/ai/integrations/tidb-mcp-cursor.md) or [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md).
 - **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
-- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
+- **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Supported MCP Clients
 
@@ -55,9 +55,9 @@ To set up the TiDB MCP Server in your MCP client using STDIO mode, take the foll
 
 1. Refer to your MCP client documentation to learn how to configure your MCP server.
 
-2. Go to your [TiDB Cloud clusters](https://tidbcloud.com/console/clusters) page and navigate to the overview page of your cluster.
+2. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
-3. Click **Connect** on the cluster overview page to get the connection parameters.
+3. Click **Connect** in the upper-right corner to get the connection parameters.
 
 4. Configure the TiDB MCP Server with your connection parameters in the `mcpServers` section of your AI application’s configuration file.
 
@@ -86,9 +86,9 @@ To set up the TiDB MCP Server in your MCP client using SSE mode, take the follow
 
 1. Refer to your MCP client documentation to learn how to configure an MCP server.
 
-2. Go to your [TiDB Cloud clusters](https://tidbcloud.com/console/clusters) page and select your cluster.
+2. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
-3. Click **Connect** on the cluster page to get the connection parameters.
+3. Click **Connect** in the upper-right corner to get the connection parameters.
 
 4. Create a `.env` file with your connection parameters.
 
@@ -128,7 +128,7 @@ The TiDB MCP Server provides the following actions (tools) to MCP clients. You c
 
 **Database Management**
 
-- `show_databases` - Show all databases in the TiDB cluster
+- `show_databases` - Show all databases in the {{{ .starter }}} instance
 
     * `username`: Database username (string, optional)
     * `password`: Database password (string, optional)

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless branch delete`.
 
 # ticloud serverless branch delete
 
-Delete a branch from your {{{ .starter }}} or {{{ .essential }}} cluster:
+Delete a branch from your {{{ .starter }}} or {{{ .essential }}} instance:
 
 ```shell
 ticloud serverless branch delete [flags]

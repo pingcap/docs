@@ -17,7 +17,7 @@ The features of the `tidbcloud_import` resource include the following:
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 - Refer to one of the following documents to create a TiDB Cloud cluster:
-    - [Create a {{{ .starter }}} or Essential cluster](/tidb-cloud/create-tidb-cluster-serverless.md) 
+    - [Create a {{{ .starter }}} or Essential instance](/tidb-cloud/create-tidb-cluster-serverless.md) 
     - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Create and run an import task
@@ -28,7 +28,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
 
 > **Note:**
 >
-> Importing local files is supported only for {{{ .starter }}} or {{{ .essential }}} clusters, not for TiDB Cloud Dedicated clusters.
+> Importing local files is supported only for {{{ .starter }}} or {{{ .essential }}} instances, not for TiDB Cloud Dedicated clusters.
 
 1. Create a CSV file for import. For example:
 

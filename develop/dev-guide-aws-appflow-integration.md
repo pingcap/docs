@@ -8,9 +8,9 @@ aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide
 
 [Amazon AppFlow](https://aws.amazon.com/appflow/) is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers, such as Salesforce, Amazon S3, LinkedIn, and GitHub. For more information, see [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html) in AWS documentation.
 
-This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a {{{ .starter }}} cluster as an example.
+This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a {{{ .starter }}} instance as an example.
 
-If you do not have a TiDB cluster, you can create a [{{{ .starter }}}](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
+If you do not have a {{{ .starter }}} instance, you can follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create one, which is free and can be created in approximately 30 seconds.
 
 ## Prerequisites
 
@@ -149,7 +149,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
     ```
 
 5. After the `sf_account` table is created, click **Connect**. A connection dialog is displayed.
-6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the TiDB cluster. If you use a {{{ .starter }}} cluster, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
+6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the {{{ .starter }}} instance. For {{{ .starter }}}, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 

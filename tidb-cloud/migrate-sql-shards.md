@@ -11,7 +11,7 @@ The example in this document uses a complex shard migration task across multiple
 
 ## Environment information in the example
 
-This section describes the basic information of the upstream cluster, DM, and downstream cluster used in the example.
+This section describes the basic information of the upstream cluster, DM, and downstream TiDB Cloud used in the example.
 
 ### Upstream cluster
 
@@ -44,7 +44,7 @@ The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed s
 
 This document uses the Amazon S3 as an example.
 
-### Downstream cluster
+### Downstream TiDB Cloud
 
 The sharded schemas and tables are merged into the table `store.sales`.
 
@@ -110,9 +110,9 @@ To export data to Amazon S3, do the following:
 
 For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
 
-### Step 3. Create schemas in TiDB Cloud cluster
+### Step 3. Create schemas in <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>
 
-Create schemas in the TiDB Cloud cluster as follows:
+Create schemas in the <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> as follows:
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -175,15 +175,15 @@ The following example only lists key policy configurations. Replace the Amazon S
 
 After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
@@ -195,7 +195,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
     - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
     - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region.
+    If the location of the bucket is different from your <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, confirm the compliance of cross region.
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
@@ -402,8 +402,8 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
          binlog-pos: 1312659
          binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
 
-    ## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
-    target-database:       # The target TiDB cluster on TiDB Cloud
+    ## ******** Configuration of the target TiDB database on TiDB Cloud **********
+    target-database:       # The target TiDB database on TiDB Cloud
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"

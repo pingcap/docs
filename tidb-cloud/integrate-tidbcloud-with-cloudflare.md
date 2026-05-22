@@ -20,7 +20,7 @@ This document shows how to connect to Cloudflare Workers with TiDB Cloud serverl
 Before you try the steps in this article, you need to prepare the following things:
 
 - A [TiDB Cloud account](https://tidbcloud.com/signup).
-- A {{{ .starter }}} or {{{ .essential }}} cluster. If you do not have one, see [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- A {{{ .starter }}} or {{{ .essential }}} instance. If you do not have one, see [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 - A [Cloudflare Workers account](https://dash.cloudflare.com/login).
 - [npm](https://docs.npmjs.com/about-npm) is installed.
 
@@ -104,7 +104,7 @@ You're now ready to deploy to Cloudflare Workers.
 In your project directory, run the following command:
 
 ```
-npx wrangler publish
+npx wrangler deploy
 ```
 
 ## Step 6: Try your Cloudflare Workers

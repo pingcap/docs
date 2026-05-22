@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Built-in Alerting
-summary: Learn how to monitor your TiDB cluster by getting alert notifications from TiDB Cloud.
+summary: Learn how to monitor your TiDB Cloud resource by getting alert notifications from TiDB Cloud.
 ---
 
 # TiDB Cloud Built-in Alerting
@@ -11,22 +11,43 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances, [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances, and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## View alerts
 
+<CustomContent plan="essential,dedicated">
+
 In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
+2. Click the name of the target {{{ .essential }}} instance or TiDB Cloud Dedicated cluster to go to its overview page.
 3. Click **Alerts** in the left navigation pane.
 4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
 5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page.
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+
+    > **Tip:**
+    >
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+2. Click the name of the target {{{ .premium }}} instance to go to its overview page.
+3. Click **Alerts** in the left navigation pane.
+4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
+5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
+
+</CustomContent>
 
 ## Edit alert rules
 
@@ -60,7 +81,7 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 > - You can edit the thresholds of the alerts on the TiDB Cloud console. 
 > - Some alert rules are disabled by default. You can enable them as needed.
 
-TiDB Cloud provides different alert rules for each cluster plan, based on the features available in that plan.
+TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md), based on the [features](/tidb-cloud/features.md) available in that plan.
 
 <CustomContent plan="dedicated">
 
@@ -101,7 +122,7 @@ TiDB Cloud provides different alert rules for each cluster plan, based on the fe
 
 </CustomContent>
 
-<CustomContent plan="essential">
+<CustomContent plan="essential, premium">
 
 ### Performance overview alerts
 
@@ -113,7 +134,7 @@ TiDB Cloud provides different alert rules for each cluster plan, based on the fe
 | Query P95 latency exceeds 200 ms | <ol><li>Investigate slow queries: go to the Slow Query page and filter by a recent time range to identify newly introduced or slower-running queries.</li><li>Review recent changes, such as application deployments, schema changes, or data import jobs, that might have affected traffic patterns.</li></ol><br/>If you cannot identify the root cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) immediately.|
 | Request error rate exceeds 10%  | Review recent errors and the overall statement execution status for the cluster.|
 
-### Changefeed alerts for {{{ .essential }}}
+### Changefeed alerts for {{{ .essential }}} and {{{ .premium }}}
 
 | Condition                                   | Recommended Action                   |
 |:--------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

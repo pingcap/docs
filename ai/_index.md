@@ -30,7 +30,7 @@ Step-by-step guides for building AI applications with TiDB using the [`pytidb`](
 
 | Document | Description |
 | --- | --- |
-| [Connect to TiDB](/ai/guides/connect.md) | Connect to TiDB Cloud or self-managed clusters using `pytidb`. |
+| [Connect to TiDB](/ai/guides/connect.md) | Connect to TiDB Cloud or TiDB Self-Managed using `pytidb`. |
 | [Working with Tables](/ai/guides/tables.md) | Create, query, and manage tables with vector fields. |
 | [Vector Search](/ai/guides/vector-search.md) | Perform semantic similarity searches using `pytidb`. |
 | [Full-Text Search](/ai/guides/vector-search-full-text-search-python.md) | Keyword-based text search with BM25 ranking. |

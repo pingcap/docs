@@ -118,6 +118,7 @@ To replicate data to TiDB or other MySQL-compatible databases, the downstream da
 - `Update`
 - `Delete`
 - `Create`
+- `References`
 - `Drop`
 - `Alter`
 - `Create View`

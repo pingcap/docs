@@ -5,7 +5,7 @@ summary: Learn how the shared-storage, cloud-native TiDB X architecture delivers
 
 # TiDB X Architecture
 
-TiDB X is a new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. Currently available in TiDB Cloud <CustomContent plan="starter,essential,dedicated">Starter and Essential</CustomContent><CustomContent plan="premium">Starter, Essential, and Premium</CustomContent>, this architecture enables elastic scalability, predictable performance, and optimized total cost of ownership (TCO) for AI-era workloads.
+TiDB X is a new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. Currently available in TiDB Cloud Starter, Essential, and Premium, this architecture enables elastic scalability, predictable performance, and optimized total cost of ownership (TCO) for AI-era workloads.
 
 TiDB X represents a fundamental evolution from [classic TiDB](/tidb-architecture.md)'s shared-nothing architecture to a cloud-native shared-storage architecture. By leveraging object storage as the shared persistent storage layer, TiDB X introduces a separation of compute workloads that isolates online transactional workloads from resource-intensive background tasks.
 
@@ -129,7 +129,7 @@ The move to object storage does not degrade foreground read and write performanc
 
 In classic TiDB, clusters are often over-provisioned to handle peak traffic and background tasks simultaneously. TiDB X enables **auto-scaling**, allowing users to pay only for the resources consumed (pay-as-you-go). Background resources for heavy tasks are provisioned on demand and released when no longer needed, eliminating wasted costs.
 
-TiDB X uses the [Request Capacity Unit](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) (RCU) to measure provisioned compute capacity. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. You can set an upper limit to control costs while still benefiting from elastic scaling.
+TiDB X uses the [Request Capacity Unit](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) (RCU) to measure provisioned compute capacity. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines the baseline performance and throughput capacity of your TiDB X instance. You can set an upper limit to control costs while still benefiting from elastic scaling.
 
 ### From LSM tree to LSM forest
 
@@ -157,3 +157,11 @@ The following table summarizes the architectural transitions from classic TiDB t
 | DDL execution | DDL competes with user traffic for local CPU and I/O | DDL offloaded to elastic compute resources | Faster schema changes with more predictable latency |
 | Cost model | Requires over-provisioning for peak workloads | Elastic TCO (pay-as-you-go) | Pay only for actual resource consumption |
 | Backup | Data-volume dependent physical backup | Metadata-driven with object storage integration | Significantly faster backup operations |
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="The Making of TiDB X: Origins, Architecture, and What's to Come" type="blog" link="https://www.pingcap.com/blog/tidbx-origins-architecture/" imgSrc="https://static.pingcap.com/files/2025/12/16202548/20251217-095444.png" author="Ed Huang" date="2025-12-17" />
+  <ResourceCard title="Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI" type="blog" link="https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/" imgSrc="https://static.pingcap.com/files/2025/10/08085317/tidb_1200x627-2.png" author="Ben Meadowcroft" date="2025-10-08" />
+  <ResourceCard title="PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025" type="blog" link="https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/" imgSrc="https://static.pingcap.com/files/2025/10/08074525/tidb_feature_1800x600-1.png" date="2025-10-08" />
+</RelatedResources>
