@@ -143,6 +143,7 @@ jobs:
           SOURCE_FOLDER: ""
           SOURCE_FILES: ${{ steps.source_files.outputs.files }}
           SOURCE_FILES_TRANSLATION_MODE: ${{ inputs.source_files_translation_mode || 'incremental' }}
+          IGNORE_RESOURCE_CARD_SECTION: "Yes"
           SOURCE_REPO_PATH: ${{ github.workspace }}/docs-source
           TARGET_REF: ${{ env.CN_CLOUD_BRANCH }}
           PREFER_LOCAL_TARGET_FOR_READ: "true"

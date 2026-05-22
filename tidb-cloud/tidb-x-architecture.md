@@ -157,3 +157,11 @@ The following table summarizes the architectural transitions from classic TiDB t
 | DDL execution | DDL competes with user traffic for local CPU and I/O | DDL offloaded to elastic compute resources | Faster schema changes with more predictable latency |
 | Cost model | Requires over-provisioning for peak workloads | Elastic TCO (pay-as-you-go) | Pay only for actual resource consumption |
 | Backup | Data-volume dependent physical backup | Metadata-driven with object storage integration | Significantly faster backup operations |
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="The Making of TiDB X: Origins, Architecture, and What's to Come" type="blog" link="https://www.pingcap.com/blog/tidbx-origins-architecture/" imgSrc="https://static.pingcap.com/files/2025/12/16202548/20251217-095444.png" author="Ed Huang" date="2025-12-17" />
+  <ResourceCard title="Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI" type="blog" link="https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/" imgSrc="https://static.pingcap.com/files/2025/10/08085317/tidb_1200x627-2.png" author="Ben Meadowcroft" date="2025-10-08" />
+  <ResourceCard title="PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025" type="blog" link="https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/" imgSrc="https://static.pingcap.com/files/2025/10/08074525/tidb_feature_1800x600-1.png" date="2025-10-08" />
+</RelatedResources>
