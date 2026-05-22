@@ -25,4 +25,4 @@ tiup cluster help [command] [flags]
 
 `[command]`またはtiup-clusterのヘルプ情報。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

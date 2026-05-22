@@ -81,7 +81,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 -   デフォルト値: `ON` 。v8.5.0 より前では、デフォルト値は`OFF`です。
 -   可能`OFF`値: `ON`
--   この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザーが強制されているプランを探索するかどうかを制御します。
+-   この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザーが強制されているプランを確認するかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/47400"><code>47400</code></a><span class="version-mark">バージョン8.4.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-47400-code-47400-code-a-span-class-version-mark-new-in-v8-4-0-span}
 

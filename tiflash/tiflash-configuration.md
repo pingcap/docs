@@ -46,30 +46,30 @@ summary: TiFlash の設定方法を学びます。
 
 #### <code>path</code> {#code-path-code}
 
--   TiFlashデータのstorageパス。複数のディレクトリがある場合は、各ディレクトリをカンマで区切ってください。
--   TiDB v4.0.9以降、 `path`と[`path_realtime_mode`](#path_realtime_mode)は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
--   TiDB v5.2.0 以降、 [`storage.io_rate_limit`](#storageio_rate_limit-new-in-v520)構成を使用する必要がある場合は、同時にTiFlashデータのstorageパスを[`storage.main.dir`](#dir)に設定する必要があります。
--   `storage`構成が存在する場合、 `path`と[`path_realtime_mode`](#path_realtime_mode)構成は両方とも無視されます。
+-   TiFlashデータのストレージパス。複数のディレクトリがある場合は、各ディレクトリをカンマで区切ってください。
+-   TiDB v4.0.9以降、 `path`と[`path_realtime_mode`](#path_realtime_mode)は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`ストレージ`](#ストレージ-new-in-v409)セクションの設定を使用してください。
+-   TiDB v5.2.0 以降、 [`ストレージ.io_rate_limit`](#ストレージio_rate_limit-new-in-v520)構成を使用する必要がある場合は、同時にTiFlashデータのストレージパスを[`ストレージ.main.dir`](#dir)に設定する必要があります。
+-   `ストレージ`構成が存在する場合、 `path`と[`path_realtime_mode`](#path_realtime_mode)構成は両方とも無視されます。
 
 <!-- Example: `"/tidb-data/tiflash-9000"` or `"/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"` -->
 
 #### <code>path_realtime_mode</code> {#code-path-realtime-mode-code}
 
 -   `true`に設定し、 `path`に複数のディレクトリを設定した場合、最初のディレクトリに最新のデータが保存され、残りのディレクトリには古いデータが保存されます。
--   TiDB v4.0.9以降、 [`path`](#path)と`path_realtime_mode`は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`storage`](#storage-new-in-v409)セクションの設定を使用してください。
--   `storage`構成が存在する場合、 [`path`](#path)と`path_realtime_mode`構成は両方とも無視されます。
+-   TiDB v4.0.9以降、 [`path`](#path)と`path_realtime_mode`は非推奨となりました。マルチディスク展開シナリオでパフォーマンスを向上させるには、 [`ストレージ`](#ストレージ-new-in-v409)セクションの設定を使用してください。
+-   `ストレージ`構成が存在する場合、 [`path`](#path)と`path_realtime_mode`構成は両方とも無視されます。
 -   デフォルト値: `false`
 
 #### <code>tmp_path</code> {#code-tmp-path-code}
 
 -   TiFlash一時ファイルが保存されるパス。
--   デフォルトでは、 [`path`](#path)の最初のディレクトリ、または[`storage.latest.dir`](#dir-1)に`"/tmp"`を付加したディレクトリになります。
+-   デフォルトでは、 [`path`](#path)の最初のディレクトリ、または[`ストレージ.latest.dir`](#dir-1)に`"/tmp"`を付加したディレクトリになります。
 
 <!-- Example: `"/tidb-data/tiflash-9000/tmp"` -->
 
-#### storage<span class="version-mark">v4.0.9 の新機能</span> {#storage-span-class-version-mark-new-in-v4-0-9-span}
+#### ストレージ<span class="version-mark">v4.0.9 の新機能</span> {#ストレージ-span-class-version-mark-new-in-v4-0-9-span}
 
-storageパス関連の設定を構成します。
+ストレージパス関連の設定を構成します。
 
 ##### <code>format_version</code> {#code-format-version-code}
 
@@ -80,10 +80,10 @@ storageパス関連の設定を構成します。
     -   `format_version = 3` : v6.0.0 および v6.1.x のデフォルト形式。より多くのデータ検証機能が提供されます。
     -   `format_version = 4` : バージョン v6.2.0 から v7.3.0 までのデフォルトの形式。書き込み増幅とバックグラウンド タスクのリソース消費を削減します。
     -   `format_version = 5` : v7.3.0 で導入され、v7.4.0 から v8.3.0 までのバージョンのデフォルト形式で、小さなファイルを結合することで物理ファイルの数を削減します。
-    -   `format_version = 6` : v8.4.0 で導入され、ベクトル インデックスの構築とstorageを部分的にサポートします。
-    -   `format_version = 7` : v8.4.0 で導入され、v8.4.0 以降のバージョンのデフォルト形式で、ベクトル インデックスの構築とstorageをサポートします。
+    -   `format_version = 6` : v8.4.0 で導入され、ベクトル インデックスの構築とストレージを部分的にサポートします。
+    -   `format_version = 7` : v8.4.0 で導入され、v8.4.0 以降のバージョンのデフォルト形式で、ベクトル インデックスの構築とストレージをサポートします。
 
-#### storage.main {#storage-main}
+#### ストレージ.main {#ストレージ-main}
 
 ##### <code>dir</code> {#code-dir-code}
 
@@ -92,47 +92,47 @@ storageパス関連の設定を構成します。
 
 ##### <code>capacity</code> {#code-capacity-code}
 
--   [`storage.main.dir`](#dir)内の各ディレクトリの最大storage容量。例: `[10737418240, 10737418240]` 。
+-   [`ストレージ.main.dir`](#dir)内の各ディレクトリの最大ストレージ容量。例: `[10737418240, 10737418240]` 。
 -   設定されていない場合、または`0`倍数に設定されている場合、実際のディスク (ディレクトリが配置されているディスク) の容量が使用されます。
 -   単位: バイト`"10GB"`などの人間が読める数値はまだサポートされていないことに注意してください。
--   `capacity`番目のリストのサイズは[`storage.main.dir`](#dir)リストのサイズと同じである必要があります。
+-   `capacity`番目のリストのサイズは[`ストレージ.main.dir`](#dir)リストのサイズと同じである必要があります。
 
-#### storage.latest {#storage-latest}
+#### ストレージ.latest {#ストレージ-latest}
 
 ##### <code>dir</code> {#code-dir-code}
 
--   最新データを保存するディレクトリのリストです。全データの約10%がこのディレクトリリストに保存されます。ここにリストされているディレクトリ（またはディレクトリ）は、 [`storage.main.dir`](#dir)よりも高いIOPSメトリックを必要とします。
--   設定されていない場合（デフォルト）、値[`storage.main.dir`](#dir)が使用されます。
+-   最新データを保存するディレクトリのリストです。全データの約10%がこのディレクトリリストに保存されます。ここにリストされているディレクトリ（またはディレクトリ）は、 [`ストレージ.main.dir`](#dir)よりも高いIOPSメトリックを必要とします。
+-   設定されていない場合（デフォルト）、値[`ストレージ.main.dir`](#dir)が使用されます。
 
 <!-- Example: `[]` -->
 
 ##### <code>capacity</code> {#code-capacity-code}
 
--   [`storage.latest.dir`](#dir-1)内の各ディレクトリの最大storage容量。設定されていない場合、または`0`倍数に設定されている場合は、実際のディスク（ディレクトリが配置されているディスク）の容量が使用されます。
+-   [`ストレージ.latest.dir`](#dir-1)内の各ディレクトリの最大ストレージ容量。設定されていない場合、または`0`倍数に設定されている場合は、実際のディスク（ディレクトリが配置されているディスク）の容量が使用されます。
 
 <!-- Example: `[10737418240, 10737418240]` -->
 
-#### storage.io_rate_limit <span class="version-mark">v5.2.0 の新機能</span> {#storage-io-rate-limit-span-class-version-mark-new-in-v5-2-0-span}
+#### ストレージ.io_rate_limit <span class="version-mark">v5.2.0 の新機能</span> {#ストレージ-io-rate-limit-span-class-version-mark-new-in-v5-2-0-span}
 
 I/O トラフィック制限設定を構成します。
 
 ##### <code>max_bytes_per_sec</code> {#code-max-bytes-per-sec-code}
 
--   ディスクの読み取りと書き込みの合計I/O帯域幅。この設定項目は、I/Oトラフィックを制限するかどうかを決定します。デフォルトでは無効になっています。TiFlashにおけるこのトラフィック制限は、ディスク帯域幅が小さく、特定のサイズに制限TiFlashれているクラウドstorageに適しています。
+-   ディスクの読み取りと書き込みの合計I/O帯域幅。この設定項目は、I/Oトラフィックを制限するかどうかを決定します。デフォルトでは無効になっています。TiFlashにおけるこのトラフィック制限は、ディスク帯域幅が小さく、特定のサイズに制限TiFlashれているクラウドストレージに適しています。
 -   デフォルト値: `0` 。これは、I/O トラフィックがデフォルトで制限されないことを意味します。
 -   単位: バイト
 
 ##### <code>max_read_bytes_per_sec</code> {#code-max-read-bytes-per-sec-code}
 
 -   ディスク読み取りの合計 I/O 帯域幅。
--   設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドstorageに使用できます。
+-   設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドストレージに使用できます。
 -   `max_bytes_per_sec`の値が`0`でない場合は[`max_bytes_per_sec`](#max_bytes_per_sec)が優先されます。
 -   デフォルト値: `0`
 
 ##### <code>max_write_bytes_per_sec</code> {#code-max-write-bytes-per-sec-code}
 
 -   ディスク書き込みの合計 I/O 帯域幅。
--   設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドstorageに使用できます。
+-   設定項目`max_read_bytes_per_sec`および`max_write_bytes_per_sec` 、ディスクの読み取りと書き込みの I/O 帯域幅を個別に制限します。Google Cloud が提供する Persistent Disk など、ディスクの読み取りと書き込みの I/O 帯域幅の制限を個別に計算するクラウドストレージに使用できます。
 -   `max_bytes_per_sec`の値が`0`でない場合は[`max_bytes_per_sec`](#max_bytes_per_sec)が優先されます。
 -   デフォルト値: `0`
 
@@ -173,9 +173,9 @@ I/O トラフィック制限設定を構成します。
 -   デフォルト値: `5`
 -   単位: 秒
 
-#### storage.s3 {#storage-s3}
+#### ストレージ.s3 {#ストレージ-s3}
 
-以下の設定項目は、 TiFlash分散storageおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
+以下の設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
 
 ##### <code>endpoint</code> {#code-endpoint-code}
 
@@ -197,11 +197,11 @@ I/O トラフィック制限設定を構成します。
 
 -   S3 にアクセスするために使用される SECRET_ACCESS_KEY。
 
-#### storage.remote.cache {#storage-remote-cache}
+#### ストレージ.remote.cache {#ストレージ-remote-cache}
 
 ##### <code>dir</code> {#code-dir-code}
 
--   分散storageおよびコンピューティングアーキテクチャ内のコンピューティング ノードのローカル データ キャッシュ ディレクトリ。
+-   分散ストレージおよびコンピューティングアーキテクチャ内のコンピューティング ノードのローカル データ キャッシュ ディレクトリ。
 
 <!-- Example: `"/data1/tiflash/cache"` -->
 
@@ -238,7 +238,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>disaggregated_mode</code> {#code-disaggregated-mode-code}
 
--   この設定項目は、 TiFlash分散storageおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
+-   この設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
 -   値`"tiflash_compute"`オプション: `"tiflash_write"`
 
 ##### <code>graceful_wait_shutdown_timeout</code> <span class="version-mark">v8.5.4 の新機能</span> {#code-graceful-wait-shutdown-timeout-code-span-class-version-mark-new-in-v8-5-4-span}
@@ -278,7 +278,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>data-dir</code> {#code-data-dir-code}
 
--   プロキシのデータstorageパス。
+-   プロキシのデータストレージパス。
 
 <!-- Example: `"/tidb-data/tiflash-9000/flash"` -->
 
@@ -404,13 +404,13 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>dt_compression_method</code> {#code-dt-compression-method-code}
 
--   TiFlashstorageエンジンの圧縮アルゴリズム。
+-   TiFlashストレージエンジンの圧縮アルゴリズム。
 -   デフォルト値: `LZ4`
 -   値のオプション: `LZ4` `LZ4HC`値は`zstd`と小文字を区別しません。
 
 ##### <code>dt_compression_level</code> {#code-dt-compression-level-code}
 
--   TiFlashstorageエンジンの圧縮レベル。
+-   TiFlashストレージエンジンの圧縮レベル。
 -   `dt_compression_method`が`LZ4`の場合は、この値を`1`に設定することをお勧めします。
 -   この値は`-1` (圧縮率は低くなりますが、読み取りパフォーマンスは向上します) に設定するか、 `dt_compression_method`が`zstd`の場合は`1`に設定することをお勧めします。
 -   `dt_compression_method`が`LZ4HC`の場合は、この値を`9`に設定することをお勧めします。
@@ -524,7 +524,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>apply-pool-size</code> {#code-apply-pool-size-code}
 
--   Raftデータをstorageにフラッシュするプール内の許容スレッド数。
+-   Raftデータをストレージにフラッシュするプール内の許容スレッド数。
 
 <!-- Example: `4` -->
 
@@ -582,12 +582,12 @@ I/O トラフィック制限設定を構成します。
 
 TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメータを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiUPの設定テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)参照してください。
 
-v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはstorageエンジンのメインデータと最新データを複数のディスクに保存することをサポートしています。TiFlashノードを複数のディスクにデプロイする場合は、ノードのI/Oパフォーマンスを最大限に活用するために、 `[storage]`セクションでstorageディレクトリを指定することをお勧めします。
+v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートしています。TiFlashノードを複数のディスクにデプロイする場合は、ノードのI/Oパフォーマンスを最大限に活用するために、 `[ストレージ]`セクションでストレージディレクトリを指定することをお勧めします。
 
-TiFlashノード上に類似したI/Oメトリックを持つ複数のディスクがある場合は、リスト`storage.main.dir`で対応するディレクトリを指定し、リスト`storage.latest.dir`空のままにすることをお勧めします。TiFlashはI/O負荷とデータをすべてのディレクトリに分散します。
+TiFlashノード上に類似したI/Oメトリックを持つ複数のディスクがある場合は、リスト`ストレージ.main.dir`で対応するディレクトリを指定し、リスト`ストレージ.latest.dir`空のままにすることをお勧めします。TiFlashはI/O負荷とデータをすべてのディレクトリに分散します。
 
-TiFlashノード上にI/Oメトリックが異なる複数のディスクがある場合は、 `storage.latest.dir`番目のリストにメトリックの高いディレクトリを指定し、 `storage.main.dir`番目のリストにメトリックの低いディレクトリを指定することをお勧めします。例えば、NVMe-SSDが1台とSATA-SSDが2台の場合、 `storage.latest.dir`を`["/nvme_ssd_a/data/tiflash"]`を`storage.main.dir` `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`設定します。TiFlashは、これらの2つのディレクトリリストにそれぞれI/O負荷とデータを分散します。この場合、 `storage.latest.dir`という容量は、計画容量全体の10%として計画する必要があることに注意してください。
+TiFlashノード上にI/Oメトリックが異なる複数のディスクがある場合は、 `ストレージ.latest.dir`番目のリストにメトリックの高いディレクトリを指定し、 `ストレージ.main.dir`番目のリストにメトリックの低いディレクトリを指定することをお勧めします。例えば、NVMe-SSDが1台とSATA-SSDが2台の場合、 `ストレージ.latest.dir`を`["/nvme_ssd_a/data/tiflash"]`を`ストレージ.main.dir` `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`設定します。TiFlashは、これらの2つのディレクトリリストにそれぞれI/O負荷とデータを分散します。この場合、 `ストレージ.latest.dir`という容量は、計画容量全体の10%として計画する必要があることに注意してください。
 
 > **警告：**
 >
-> `[storage]`設定はTiUP v1.2.5 以降でサポートされています。TiDB クラスタのバージョンが v4.0.9 以降の場合は、 TiUPのバージョンが v1.2.5 以降であることを確認してください。そうでない場合、 `[storage]`で定義されているデータディレクトリはTiUPによって管理されません。
+> `[ストレージ]`設定はTiUP v1.2.5 以降でサポートされています。TiDB クラスターのバージョンが v4.0.9 以降の場合は、 TiUPのバージョンが v1.2.5 以降であることを確認してください。そうでない場合、 `[ストレージ]`で定義されているデータディレクトリはTiUPによって管理されません。

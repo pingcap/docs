@@ -63,10 +63,10 @@ SHOW TABLES;
 | node_disk_read_latency                            |
 | node_disk_size                                    |
 ..
-| tikv_storage_async_request_total_time             |
-| tikv_storage_async_requests                       |
-| tikv_storage_async_requests_total_count           |
-| tikv_storage_command_ops                          |
+| tikv_ストレージ_async_request_total_time             |
+| tikv_ストレージ_async_requests                       |
+| tikv_ストレージ_async_requests_total_count           |
+| tikv_ストレージ_command_ops                          |
 | tikv_store_size                                   |
 | tikv_thread_cpu                                   |
 | tikv_thread_nonvoluntary_context_switches         |

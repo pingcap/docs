@@ -62,7 +62,7 @@ TiDB Ansible バージョン: 3.1.0 GA
     -   `TypeNull`クラスが可変長型[＃15739](https://github.com/pingcap/tidb/pull/15739)と誤認されるために左結合の`sort`演算子がpanic問題を修正
     -   監視セッション再試行エラーの数が不正確になる問題を修正[＃16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[＃16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の間違った結果の問題を修正
-    -   クラスタにTiFlashノード[＃15761](https://github.com/pingcap/tidb/pull/15761)がある場合にガベージコレクション（GC）が正常に動作しない可能性がある問題を修正しました
+    -   クラスターにTiFlashノード[＃15761](https://github.com/pingcap/tidb/pull/15761)がある場合にガベージコレクション（GC）が正常に動作しない可能性がある問題を修正しました
     -   ハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成する際にユーザーが大きなパーティション数を設定すると、TiDBがメモリ（OOM）になる問題を修正しました。
     -   警告がエラーと誤認される問題を修正し、 `UNION`文が`SELECT`文と同じ動作になるようにします[＃16138](https://github.com/pingcap/tidb/pull/16138)
     -   `TopN` mocktikv [＃16200](https://github.com/pingcap/tidb/pull/16200)にプッシュダウンしたときの実行エラーを修正しました
@@ -78,7 +78,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
     -   TiDBからスキーマを複製する際の`rename table`操作の潜在的な問題を修正
     -   複数のデータパス構成で`rename table`操作によって発生するデータ損失の問題を修正しました
-    -   一部のシナリオでTiFlash が誤ったstorage容量を報告する問題を修正しました
+    -   一部のシナリオでTiFlash が誤ったストレージ容量を報告する問題を修正しました
     -   リージョン結合が有効なときにTiFlashから読み取ることによって発生する可能性のある問題を修正しました
 
 -   ツール

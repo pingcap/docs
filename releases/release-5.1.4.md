@@ -14,7 +14,7 @@ TiDB バージョン: 5.1.4
 -   TiDB
 
     -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更します[＃31748](https://github.com/pingcap/tidb/issues/31748)
-    -   v5.1.4以降、TiKVが`storage.enable-ttl = true`に設定されている場合、TiKVのTTL機能は[RawKVモード](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) [＃27303](https://github.com/pingcap/tidb/issues/27303)のみをサポートしているため、TiDBからの要求は拒否されます。
+    -   v5.1.4以降、TiKVが`ストレージ.enable-ttl = true`に設定されている場合、TiKVのTTL機能は[RawKVモード](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) [＃27303](https://github.com/pingcap/tidb/issues/27303)のみをサポートしているため、TiDBからの要求は拒否されます。
 
 -   ツール
 
@@ -146,7 +146,7 @@ TiDB バージョン: 5.1.4
         -   デッドロックによりレプリケーションタスクが停止する可能性がある問題を修正しました[＃4055](https://github.com/pingcap/tiflow/issues/4055)
         -   DDL文の特別なコメントによりレプリケーションタスクが停止する問題を修正[＃3755](https://github.com/pingcap/tiflow/issues/3755)
         -   EtcdWorker がオーナーとプロセッサ[＃3750](https://github.com/pingcap/tiflow/issues/3750)をハングさせる可能性があるバグを修正しました
-        -   クラスタのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   クラスターのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
         -   TiCDC のデフォルト値のパディング例外によって発生するデータの不整合を修正[＃3918](https://github.com/pingcap/tiflow/issues/3918) [＃3929](https://github.com/pingcap/tiflow/issues/3929)
         -   PDリーダーがシャットダウンして新しいノード[＃3615](https://github.com/pingcap/tiflow/issues/3615)に転送するときにオーナーがスタックするバグを修正
@@ -175,4 +175,4 @@ TiDB バージョン: 5.1.4
 
     -   TiDB Lightning
 
-        -   S3storageパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃28031](https://github.com/pingcap/tidb/issues/28031) [＃30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃28031](https://github.com/pingcap/tidb/issues/28031) [＃30709](https://github.com/pingcap/tidb/issues/30709)

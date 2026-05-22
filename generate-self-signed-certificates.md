@@ -64,7 +64,7 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 このセクションでは、個々のコンポーネントに対して証明書を発行する方法について説明します。
 
-### クラスタで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
+### クラスターで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
 -   tidb-server 証明書: TiDB が他のコンポーネントやクライアントに対して TiDB を認証するために使用されます。
 -   tikv-server 証明書: TiKV が他のコンポーネントやクライアントに対して TiKV を認証するために使用されます

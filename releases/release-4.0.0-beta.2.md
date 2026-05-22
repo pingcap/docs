@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 
 -   ツール
     -   TiDBBinlog
-        -   TiDBクラスタ間の双方向データレプリケーションをサポート[＃879](https://github.com/pingcap/tidb-binlog/pull/879) [＃903](https://github.com/pingcap/tidb-binlog/pull/903)
+        -   TiDBクラスター間の双方向データレプリケーションをサポート[＃879](https://github.com/pingcap/tidb-binlog/pull/879) [＃903](https://github.com/pingcap/tidb-binlog/pull/903)
     -   TiDB Lightning
         -   TLS構成[＃40](https://github.com/tikv/importer/pull/40) [＃270](https://github.com/pingcap/tidb-lightning/pull/270)をサポートする
     -   TiCDC

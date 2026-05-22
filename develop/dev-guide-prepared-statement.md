@@ -189,7 +189,7 @@ try (Connection connection = ds.getConnection()) {
 
 次の構成は、JDBC で TiDB サーバー側の準備済みステートメントを使用するのに役立ちます。
 
-|          パラメータ          |                 手段                 |            推奨シナリオ           |          推奨コンフィグレーション         |
+|          パラメータ          |                 手段                 |            推奨シナリオ           |          推奨設定         |
 | :---------------------: | :--------------------------------: | :-------------------------: | :---------------------------: |
 |   `useServerPrepStmts`  |   サーバー側を使用して準備済みステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
 |     `cachePrepStmts`    |   クライアントが準備されたステートメントをキャッシュするかどうか  |  `useServerPrepStmts=true`  |             `true`            |
@@ -216,4 +216,4 @@ Javaの完全な例については、以下を参照してください。
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

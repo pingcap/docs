@@ -6,7 +6,7 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 
 # Grafana を使用した TiDB 監視のベストプラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-トポロジ構成にGrafanaとPrometheus [TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
+トポロジ構成にGrafanaとPrometheus [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
@@ -24,7 +24,7 @@ TiDB 2.1.3以降のバージョンでは、TiDBモニタリングはプル方式
 
 TiDBの3つのコアコンポーネント（TiDBサーバー、TiKVサーバー、PDサーバー）は、HTTPインターフェースを介してメトリクスを取得します。これらのメトリクスはプログラムコードから収集され、デフォルトのポートは次のとおりです。
 
-| 成分       | ポート   |
+| コンポーネント       | ポート   |
 | :------- | :---- |
 | TiDBサーバー | 10080 |
 | TiKVサーバー | 20180 |

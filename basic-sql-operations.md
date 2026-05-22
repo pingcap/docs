@@ -3,7 +3,7 @@ title: Explore SQL with TiDB
 summary: TiDB データベースの基本的な SQL ステートメントについて学習します。
 ---
 
-# TiDB で SQL を探索する {#explore-sql-with-tidb}
+# TiDBでのSQL基本操作 {#explore-sql-with-tidb}
 
 TiDBはMySQLと互換性があり、ほとんどの場合MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)参照してください。
 

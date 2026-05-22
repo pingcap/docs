@@ -58,7 +58,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 -   PD
 
     -   リージョンツリーの統計が不正確になる可能性がある問題を修正[＃5318](https://github.com/tikv/pd/issues/5318) @ [rleungx](https://github.com/rleungx)
-    -   TiFlash学習者レプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @ [HunDunDM](https://github.com/HunDunDM)
+    -   TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @ [HunDunDM](https://github.com/HunDunDM)
     -   PD がダッシュボード プロキシ リクエスト[＃5321](https://github.com/tikv/pd/issues/5321) @ [HunDunDM](https://github.com/HunDunDM)を正しく処理できない問題を修正しました
     -   不健全なリージョンがPDpanic[＃5491](https://github.com/tikv/pd/issues/5491) @ [nolouch](https://github.com/nolouch)を引き起こす可能性がある問題を修正
 
@@ -94,4 +94,4 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   バックアップと復元 (BR)
 
         -   復元中に同時実行が大きすぎる設定になっているため、領域のバランスが取れていない問題を修正しました[＃37549](https://github.com/pingcap/tidb/issues/37549) @ [3pointer](https://github.com/3pointer)
-        -   外部storage[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました
+        -   外部ストレージ[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました

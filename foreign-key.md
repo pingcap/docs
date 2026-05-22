@@ -293,7 +293,7 @@ mysql> explain analyze delete from parent where id = 1;
 
 ### TiDBバージョンの互換性 {#compatibility-between-tidb-versions}
 
-バージョン 6.6.0 より前の TiDB では、外部キーを作成する構文がサポートされていましたが、作成された外部キーは無効でした。バージョン 6.6.0 より前に作成された TiDB クラスタをバージョン 6.6.0 以降にアップグレードしても、アップグレード前に作成された外部キーは無効のままです。バージョン 6.6.0 以降で作成された外部キーのみが有効です。無効な外部キーを削除して新しい外部キーを作成することで、外部キー制約を有効にできます。 `SHOW CREATE TABLE`ステートメントを使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントが付きます。
+バージョン 6.6.0 より前の TiDB では、外部キーを作成する構文がサポートされていましたが、作成された外部キーは無効でした。バージョン 6.6.0 より前に作成された TiDB クラスターをバージョン 6.6.0 以降にアップグレードしても、アップグレード前に作成された外部キーは無効のままです。バージョン 6.6.0 以降で作成された外部キーのみが有効です。無効な外部キーを削除して新しい外部キーを作成することで、外部キー制約を有効にできます。 `SHOW CREATE TABLE`ステートメントを使用して、外部キーが有効かどうかを確認できます。無効な外部キーには`/* FOREIGN KEY INVALID */`コメントが付きます。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -311,10 +311,10 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
--   [DM](/dm/dm-overview.md) : v8.5.6以降、DMは実験的機能として外部キー制約を使用するテーブルのレプリケーションをサポートしています。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)を参照してください。 v8.5.6より前のバージョンでは、DMはTiDBへのデータレプリケーション時に[`foreign_key_checks`](/system-variables.md#foreign_key_checks)システム変数を無効にするため、カスケード操作はダウンストリームクラスタにレプリケートされません。
--   [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンの TiCDC では、外部キーを持つテーブルをレプリケートする際にエラーが発生する場合があります。TiCDC バージョン 6.6.0 より前のバージョンを使用する場合は、ダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。
--   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスタに復元する際にエラーが発生する場合があります。v6.6.0 より前のバージョンのBRを使用する場合は、クラスタを復元する前に、ダウンストリーム TiDB クラスタの`foreign_key_checks`無効にすることをお勧めします。
--   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用する場合、対象テーブルで外部キーが使用されている場合は、データのインポート前にダウンストリーム TiDB クラスタの`foreign_key_checks`を無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリーム データベース ユーザーに`REFERENCES`権限を付与するか、ダウンストリーム データベースに対象テーブルを事前に手動で作成して、スムーズなデータインポートを確保する必要があります。
+-   [DM](/dm/dm-overview.md) : v8.5.6以降、DMは実験的機能として外部キー制約を使用するテーブルのレプリケーションをサポートしています。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)を参照してください。 v8.5.6より前のバージョンでは、DMはTiDBへのデータレプリケーション時に[`foreign_key_checks`](/system-variables.md#foreign_key_checks)システム変数を無効にするため、カスケード操作はダウンストリームクラスターにレプリケートされません。
+-   [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンの TiCDC では、外部キーを持つテーブルをレプリケートする際にエラーが発生する場合があります。TiCDC バージョン 6.6.0 より前のバージョンを使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`を無効にすることをお勧めします。
+-   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーに対応しています。以前のバージョンのBRでは、外部キーを持つテーブルを v6.6.0 以降のクラスターに復元する際にエラーが発生する場合があります。v6.6.0 より前のバージョンのBRを使用する場合は、クラスターを復元する前に、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用する場合、対象テーブルで外部キーが使用されている場合は、データのインポート前にダウンストリーム TiDB クラスターの`foreign_key_checks`を無効にすることをお勧めします。v6.6.0 より前のバージョンでは、このシステム変数を無効にしても効果がなく、ダウンストリーム データベース ユーザーに`REFERENCES`権限を付与するか、ダウンストリーム データベースに対象テーブルを事前に手動で作成して、スムーズなデータインポートを確保する必要があります。
 
 </CustomContent>
 

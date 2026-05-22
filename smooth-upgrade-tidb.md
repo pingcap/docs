@@ -49,7 +49,7 @@ These limitations can be summarized as that you need to ensure that there are no
 
 #### TiUPを使用してアップグレードする {#use-tiup-to-upgrade}
 
-v1.14.0以降、 TiUPはこの機能を自動的にサポートします。つまり、 `tiup cluster upgrade`コマンドを使用してTiDBクラスタを直接アップグレードできます。3 `tiup cluster patch`は現在サポートされていないことに注意してください。
+v1.14.0以降、 TiUPはこの機能を自動的にサポートします。つまり、 `tiup cluster upgrade`コマンドを使用してTiDBクラスターを直接アップグレードできます。3 `tiup cluster patch`は現在サポートされていないことに注意してください。
 
 #### TiDB Operatorを使用してアップグレードする {#use-tidb-operator-to-upgrade}
 
@@ -81,7 +81,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 -   アップグレードする前に、次の制限を考慮してください。
 
-    -   クラスタ内にキャンセル中のDDLジョブがある場合、つまり実行中のDDLジョブがユーザーによってキャンセルされている場合、キャンセル中のジョブは一時停止できないため、TiDBはジョブのキャンセルを再試行します。再試行が失敗した場合はエラーが報告され、アップグレードは終了します。
+    -   クラスター内にキャンセル中のDDLジョブがある場合、つまり実行中のDDLジョブがユーザーによってキャンセルされている場合、キャンセル中のジョブは一時停止できないため、TiDBはジョブのキャンセルを再試行します。再試行が失敗した場合はエラーが報告され、アップグレードは終了します。
     -   現在ご使用の TiDB バージョンが v8.1.0 より前で、TiDB Distributed eXecution Framework (DXF) が有効になっている場合は、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)を`OFF`に設定して無効にしてください。実行中の分散タスク`ADD INDEX`と`IMPORT INTO`すべて完了していることを確認してください。または、これらのタスクをキャンセルし、アップグレードが完了するまで待ってから再開することもできます。そうしないと、アップグレード中の`ADD INDEX`操作によってデータインデックスの不整合が発生する可能性があります。現在ご使用の TiDB バージョンが v8.1.0 以降の場合は、DXF を無効にする必要はなく、この制限は無視してかまいません。
 
 -   TiUPを使用して TiDB をアップグレードするシナリオでは、 TiUPアップグレードにはタイムアウト期間があるため、アップグレード前にクラスターのキューで待機している DDL ジョブが多数 (300 を超える) ある場合、アップグレードが失敗する可能性があります。

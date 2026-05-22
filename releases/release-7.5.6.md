@@ -38,7 +38,7 @@ TiDB バージョン: 7.5.6
     -   バックアップと復元 (BR)
 
         -   バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にする（ `--checksum=false` ） [＃56373](https://github.com/pingcap/tidb/issues/56373) @ [Tristan1900](https://github.com/Tristan1900)
-        -   非完全リストア[＃55087](https://github.com/pingcap/tidb/issues/55087) @ [RidRisR](https://github.com/RidRisR)の場合、ターゲット クラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。
+        -   非完全リストア[＃55087](https://github.com/pingcap/tidb/issues/55087) @ [RidRisR](https://github.com/RidRisR)の場合、ターゲット クラスターに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。
 
     -   TiDB Lightning
 
@@ -67,7 +67,7 @@ TiDB バージョン: 7.5.6
     -   仮想生成列の依存関係に属性`ON UPDATE`持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[＃56829](https://github.com/pingcap/tidb/issues/56829) @ [joechenrh](https://github.com/joechenrh)
     -   TiDBハートビートが失われた場合に TTL ジョブをキャンセルできない問題を修正[＃57784](https://github.com/pingcap/tidb/issues/57784) @ [YangKeao](https://github.com/YangKeao)
     -   パラメータが`Enum` 、または`Set`型の場合、 `Conv()`関数はTiKV [＃51877](https://github.com/pingcap/tidb/issues/51877) @ [yibin87](https://github.com/yibin87)にプッシュダウンされなくなりました`Bit`
-    -   分散storageおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`実行した後、リージョンピアが誤ってTiFlashコンピューティングノード[＃58633](https://github.com/pingcap/tidb/issues/58633) @ [JaySon-Huang](https://github.com/JaySon-Huang)に追加される可能性がある問題を修正しました。
+    -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`実行した後、リージョンピアが誤ってTiFlashコンピューティングノード[＃58633](https://github.com/pingcap/tidb/issues/58633) @ [JaySon-Huang](https://github.com/JaySon-Huang)に追加される可能性がある問題を修正しました。
     -   DDL所有者が[＃52747](https://github.com/pingcap/tidb/issues/52747) @ [D3Hunter](https://github.com/D3Hunter)に変更されるとジョブステータスが上書きされる問題を修正
     -   ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanic[＃58374](https://github.com/pingcap/tidb/issues/58374) @ [Defined2014](https://github.com/Defined2014)が発生する問題を修正
     -   生成された列[＃58475](https://github.com/pingcap/tidb/issues/58475) @ [joechenrh](https://github.com/joechenrh)を含むパーティション テーブルをクエリするときにエラーが発生する問題を修正しました。
@@ -87,7 +87,7 @@ TiDB バージョン: 7.5.6
     -   GBK/GB18030エンコードデータ[＃17618](https://github.com/tikv/tikv/issues/17618) @ [CbcWestwolf](https://github.com/CbcWestwolf)処理時にエンコードが失敗する可能性がある問題を修正
     -   例外[＃18245](https://github.com/tikv/tikv/issues/18245) @ [wlwilliamx](https://github.com/wlwilliamx)が発生したときに CDC 接続でリソース漏洩が発生する可能性がある問題を修正しました
     -   リージョンマージでRaftインデックスの不一致[＃18129](https://github.com/tikv/tikv/issues/18129) @ [glorv](https://github.com/glorv)により TiKV 異常終了が発生する可能性がある問題を修正しました
-    -   解決済み-TSの監視とログが異常になる可能性がある問題を修正[＃17989](https://github.com/tikv/tikv/issues/17989) @ [ekexium](https://github.com/ekexium)
+    -   resolved-tsの監視とログが異常になる可能性がある問題を修正[＃17989](https://github.com/tikv/tikv/issues/17989) @ [ekexium](https://github.com/ekexium)
     -   Titanコンポーネントとの非互換性によりアップグレードが失敗する問題を修正[＃18263](https://github.com/tikv/tikv/issues/18263) @ [v01dstar](https://github.com/v01dstar) @ [LykxSassinator](https://github.com/LykxSassinator)
 
 -   PD
@@ -109,7 +109,7 @@ TiDB バージョン: 7.5.6
     -   特定の状況でTiFlash が予期せず終了したときにエラー スタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `profiles.default.init_thread_count_scale` `0` [＃9906](https://github.com/pingcap/tiflash/issues/9906) @ [JaySon-Huang](https://github.com/JaySon-Huang)に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました
     -   クエリに仮想列が含まれており、リモート読み取り[＃9561](https://github.com/pingcap/tiflash/issues/9561) @ [guo-shaoge](https://github.com/guo-shaoge)をトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。
-    -   分散storageおよびコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピア[＃9750](https://github.com/pingcap/tiflash/issues/9750) @ [JaySon-Huang](https://github.com/JaySon-Huang)を追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。
+    -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピア[＃9750](https://github.com/pingcap/tiflash/issues/9750) @ [JaySon-Huang](https://github.com/JaySon-Huang)を追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。
 
 -   ツール
 

@@ -3,7 +3,7 @@ title: Upstream and Downstream Clusters Data Validation and Snapshot Read
 summary: TiDB アップストリーム クラスターとダウンストリーム クラスターのデータを確認する方法を学習します。
 ---
 
-# 上流および下流のクラスタのデータ検証とスナップショットの読み取り {#upstream-and-downstream-clusters-data-validation-and-snapshot-read}
+# 上流および下流のクラスターのデータ検証とスナップショットの読み取り {#upstream-and-downstream-clusters-data-validation-and-snapshot-read}
 
 TiCDCを使用してTiDBの上流および下流クラスターを構築する場合、レプリケーションを停止することなく、上流および下流のスナップショットの一貫性読み取りやデータ整合性検証を実行する必要がある場合があります。通常のレプリケーションモードでは、TiCDCはデータの結果整合性のみを保証しますが、レプリケーションプロセス中のデータの一貫性は保証できません。そのため、動的に変化するデータの一貫性読み取りを実行することは困難です。このようなニーズを満たすために、TiCDCはSyncpoint機能を提供します。
 
@@ -51,7 +51,7 @@ sync-point-retention = "1h"
 
 ### ステップ1: <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
 
-下流TiDBクラスタで次のSQL文を実行すると、上流TSO（ `primary_ts` ）と下流TSO（ `secondary_ts` ）を取得できます。
+下流TiDBクラスターで次のSQL文を実行すると、上流TSO（ `primary_ts` ）と下流TSO（ `secondary_ts` ）を取得できます。
 
 ```sql
 select * from tidb_cdc.syncpoint_v1;
@@ -103,4 +103,4 @@ select * from tidb_cdc.syncpoint_v1;
     -   TiCDC が新しい`primary_ts`生成するときは、その値は`sync-point-interval`の整数倍である必要があります。
     -   TiCDCは、新しいチェンジフィードごとに初期値`primary_ts`計算します。この初期値は、チェンジフィードの開始時刻（ `startTs` ）以上であり、 `sync-point-interval`の最小の整数倍です。
 
-    この設定は、データレプリケーション中に異なる変更フィードの同期ポイントを揃えるために使用されます。例えば、複数の下流クラスタは、 [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)番目のステートメントを実行することで、同じ`primary_ts`番目の同期ポイントの`secondary_ts`番目の状態に復元することができ、下流クラスタ間でデータの一貫性を確保できます。
+    この設定は、データレプリケーション中に異なる変更フィードの同期ポイントを揃えるために使用されます。例えば、複数の下流クラスターは、 [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)番目のステートメントを実行することで、同じ`primary_ts`番目の同期ポイントの`secondary_ts`番目の状態に復元することができ、下流クラスター間でデータの一貫性を確保できます。

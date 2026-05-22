@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 2.1.10
 -   `SLOW_QUERY`テーブルを使用してスローログ[＃10412](https://github.com/pingcap/tidb/pull/10412)をクエリするときに、スローログの 1 行が長すぎるとエラー レポートが発生する問題を修正しました。
 -   `DATETIME` + `INTERVAL`の結果が MySQL の結果と一致しないケースがある問題を修正[＃10416](https://github.com/pingcap/tidb/pull/10416) , [＃10418](https://github.com/pingcap/tidb/pull/10418)
 -   うるう年の2月の無効な時刻のチェックを追加[＃10417](https://github.com/pingcap/tidb/pull/10417)
--   クラスタ[＃10426](https://github.com/pingcap/tidb/pull/10426)初期化時に多数の競合エラーレポートを回避するために、DDL所有者でのみ内部初期化操作の制限を実行します。
+-   クラスター[＃10426](https://github.com/pingcap/tidb/pull/10426)初期化時に多数の競合エラーレポートを回避するために、DDL所有者でのみ内部初期化操作の制限を実行します。
 -   出力タイムスタンプ列のデフォルト値が`default current_timestamp on update current_timestamp` [＃10337](https://github.com/pingcap/tidb/issues/10337)の場合、 `DESC` MySQLと互換性がない問題を修正しました。
 -   `Update`文[＃10439](https://github.com/pingcap/tidb/pull/10439)の権限チェック中にエラーが発生する問題を修正
 -   `RANGE`の計算を間違えると、場合によっては`CHAR`列に間違った結果が出る問題を修正しました[＃10455](https://github.com/pingcap/tidb/pull/10455)
@@ -53,7 +53,7 @@ TiDB Ansible バージョン: 2.1.10
 -   TiDB Lightning
     -   TiDB Lightningが`importer` [＃176](https://github.com/pingcap/tidb-lightning/pull/176)へのデータ送信に失敗した場合の再試行機能を追加
 -   TiDBBinlog
-    -   トラブルシューティングを容易にするためにPumpstorageログを最適化します[＃607](https://github.com/pingcap/tidb-binlog/pull/607)
+    -   トラブルシューティングを容易にするためにPumpストレージログを最適化します[＃607](https://github.com/pingcap/tidb-binlog/pull/607)
 
 ## TiDB アンシブル {#tidb-ansible}
 

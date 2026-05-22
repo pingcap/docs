@@ -19,10 +19,10 @@ TiDB Cloudにログインするには:
 ticloud auth login
 ```
 
-安全でないstorageを使用してTiDB Cloudにログインするには:
+安全でないストレージを使用してTiDB Cloudにログインするには:
 
 ```shell
-ticloud auth login --insecure-storage
+ticloud auth login --insecure-ストレージ
 ```
 
 ## 旗 {#flags}

@@ -36,9 +36,9 @@ TiDB バージョン: 5.1.0
 | [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新しく追加された | オプティマイザのコスト見積もりを無視し、クエリ実行に強制的に MPP モードを使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                                     |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新しく追加された | パーティションテーブルの動的プルーニングモードを有効にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`であり、これはパーティションテーブルの動的プルーニングモードがデフォルトで無効になっていることを意味します。 |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションアイテム                                                                                           | 種類を変更する  | 説明                                                                                                                                                                           |
+| 設定ファイル | 設定アイテム                                                                                           | 種類を変更する  | 説明                                                                                                                                                                           |
 | :------------- | :------------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB設定ファイル     | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)                                          | 新しく追加された | Security拡張モード（SEM）を有効にするかどうかを制御します。この設定項目のデフォルト値は`false`で、これはSEMが無効になっていることを意味します。                                                                                           |
 | TiDB設定ファイル     | `performance.committer-concurrency`                                                                      | 修正済み     | 単一トランザクションのコミットフェーズにおけるコミット操作に関連するリクエストの同時実行数を制御します。デフォルト値は`16`から`128`に変更されます。                                                                                               |
@@ -52,7 +52,7 @@ TiDB バージョン: 5.1.0
 | TiKV設定ファイル     | [`incremental-scan-threads`](/tikv-configuration-file.md#incremental-scan-threads)                       | 新しく追加された | 履歴データを増分的にスキャンするタスクのスレッド数を設定します。デフォルト値は`4`で、これはタスクに4つのスレッドが使用されることを意味します。                                                                                                    |
 | TiKV設定ファイル     | [`incremental-scan-concurrency`](/tikv-configuration-file.md#incremental-scan-concurrency)               | 新しく追加された | 履歴データの増分スキャンを行うタスクの同時実行の最大数を設定します。デフォルト値は`6`で、これは最大で 6 つのタスクを同時に実行できることを意味します。                                                                                               |
 | TiKV設定ファイル     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 修正済み     | 保留中の圧縮バイトのソフトリミット。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                         |
-| TiKV設定ファイル     | [`storage.io-rate-limit`](/tikv-configuration-file.md#storageio-rate-limit)                              | 新しく追加された | TiKV書き込みのI/Oレートを制御します。 `storage.io-rate-limit.max-bytes-per-sec`のデフォルト値は`"0MB"`です。                                                                                           |
+| TiKV設定ファイル     | [`ストレージ.io-rate-limit`](/tikv-configuration-file.md#ストレージio-rate-limit)                              | 新しく追加された | TiKV書き込みのI/Oレートを制御します。 `ストレージ.io-rate-limit.max-bytes-per-sec`のデフォルト値は`"0MB"`です。                                                                                           |
 | TiKV設定ファイル     | [`resolved-ts.enable`](/tikv-configuration-file.md#enable)                                               | 新しく追加された | すべてのリージョンリーダーに対して`resolved-ts`を維持するかどうかを決定します。デフォルト値は`true`です。                                                                                                               |
 | TiKV設定ファイル     | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                     | 新しく追加された | `resolved-ts`が転送される間隔。デフォルト値は`"1s"`です。この値は動的に変更できます。                                                                                                                         |
 | TiKV設定ファイル     | [`resolved-ts.scan-lock-pool-size`](/tikv-configuration-file.md#scan-lock-pool-size)                     | 新しく追加された | `resolved-ts`を初期化する際に TiKV が MVCC (マルチバージョン同時実行制御) ロックデータをスキャンするために使用するスレッドの数。デフォルト値は`2`です。                                                                                  |
@@ -61,11 +61,11 @@ TiDB バージョン: 5.1.0
 
 -   アップグレード前に、TiDB構成の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「回復可能なゴルーチンでpanicが発生しました」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
 -   TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.13.7からgo1.16.4にアップグレードしてください。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
--   TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスタ化インデックスを持つテーブルを作成しないようにしてください。
+-   TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスターでクラスター化インデックスを持つテーブルを作成しないようにしてください。
 -   TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
--   バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
+-   バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスターをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
 -   TiCDC の`--sort-dir`コマンドの`cdc cli changefeed`パラメータは非推奨です。代わりに、 `--sort-dir`コマンドで`cdc server` } を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
--   TiDB 5.1 にアップグレードした後、TiDB が「関数 READ ONLY には noop 実装しかありません」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では「noop」動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
+-   TiDB 5.1 にアップグレードした後、TiDB が「関数 READ ONLY には noop 実装しかありません」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では「noop」動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスターにデータを書き込むことができます。
 
 ## 新機能 {#new-features}
 
@@ -135,7 +135,7 @@ TiDB バージョン: 5.1.0
 
 ### パフォーマンス {#performance}
 
--   データレプリカの古い読み取り（Experimental）
+-   データレプリカのステイル読み取り（Experimental）
 
     ローカルレプリカのデータを直接読み込むことで、読み取りレイテンシーを削減し、クエリパフォーマンスを向上させます。
 
@@ -161,7 +161,7 @@ TiDB バージョン: 5.1.0
         -   ネットワークが不安定な場合のレプリケーションの中断
         -   TiKV/PD/TiCDCノードの一部がダウンした場合のレプリケーションの中断
 
--   TiFlashstorageメモリ制御
+-   TiFlashストレージメモリ制御
 
     リージョンスナップショット生成の速度とメモリ使用量を最適化し、メモリ不足（OOM）の可能性を低減します。
 
@@ -169,13 +169,13 @@ TiDB バージョン: 5.1.0
 
     読み取りおよび書き込み要求の継続時間の安定性を確保するため、TiKV 書き込みレートリミッターは、GC や圧縮などの TiKV バックグラウンドタスクの書き込みトラフィックを平滑化します。TiKV バックグラウンドタスク書き込みレートリミッターのデフォルト値は「0MB」です。この値は、クラウドディスクメーカーが指定する最大 I/O 帯域幅など、ディスクの最適な I/O 帯域幅に設定することをお勧めします。
 
-    [ユーザー向けドキュメント](/tikv-configuration-file.md#storageio-rate-limit)、 [#9156](https://github.com/tikv/tikv/issues/9156)
+    [ユーザー向けドキュメント](/tikv-configuration-file.md#ストレージio-rate-limit)、 [#9156](https://github.com/tikv/tikv/issues/9156)
 
 -   複数のスケーリングタスクが同時に実行される際のスケジューリングの安定性の問題を解決する
 
 ### テレメトリー {#telemetry}
 
-TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラスタリクエストの実行ステータスをテレメトリに追加します。
+TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラスターリクエストの実行ステータスをテレメトリに追加します。
 
 この情報の詳細と、この動作を無効にする方法については、[テレメトリー](/telemetry.md)を参照してください。
 
@@ -194,7 +194,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   一部の高負荷書き込み状況で発生する可能性のある`Region is Unavailable`問題を修正します。
     -   キャッシュされた統計情報が最新の場合は、CPU使用率が高くなるのを避けるため、 `mysql.stats_histograms`テーブルを頻繁に読み込まないようにしてください [#24317](https://github.com/pingcap/tidb/pull/24317)
 
--   ティクヴ
+-   TiKV
 
     -   `zstd`を使用してリージョンスナップショットを圧縮し、負荷の高いスケジューリングやスケーリングの場合にノード間の大きなスペース差を防ぎます [#10005](https://github.com/tikv/tikv/pull/10005)
 
@@ -213,8 +213,8 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   MPPモードでの左外部結合およびセミアンチ結合を含むデカルト積をサポートします。
     -   ロック操作を最適化して、実行中の DDL ステートメントと読み取り操作が互いにブロックされないようにする。
     -   TiFlashによる期限切れデータのクリーンアップを最適化
-    -   TiFlashstorageレベルで`timestamp`列に対するクエリフィルタのさらなるフィルタリングをサポートします。
-    -   クラスタ内に多数のテーブルが存在する場合のTiFlashの起動速度と拡張性を向上させる
+    -   TiFlashストレージレベルで`timestamp`列に対するクエリフィルタのさらなるフィルタリングをサポートします。
+    -   クラスター内に多数のテーブルが存在する場合のTiFlashの起動速度と拡張性を向上させる
     -   未知のCPU上で動作する際のTiFlashの互換性を向上させる
 
 -   PD
@@ -224,14 +224,14 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
 
         -   レプリカスナップショットの生成プロセスを最適化し、スケーリング時のスケジューリングの遅延問題を解決します[#3563](https://github.com/tikv/pd/issues/3563) [#10059](https://github.com/tikv/tikv/pull/10059) [#10001](https://github.com/tikv/tikv/pull/10001)
         -   トラフィックの変化によるハートビートのプレッシャーが原因で発生するスケジューリングの遅延問題を解決します[#3693](https://github.com/tikv/pd/issues/3693) [#3739](https://github.com/tikv/pd/issues/3739) [#3728](https://github.com/tikv/pd/issues/3728) [#3751](https://github.com/tikv/pd/issues/3751)
-        -   スケジューリングによる大規模クラスタの空間不一致を低減し、大きな圧縮率の不一致によって引き起こされるバースト問題（異種空間クラスタと同様）を防止するためにスケジューリング式を最適化する[#3592](https://github.com/tikv/pd/issues/3592) [#10005](https://github.com/tikv/tikv/pull/10005)
+        -   スケジューリングによる大規模クラスターの空間不一致を低減し、大きな圧縮率の不一致によって引き起こされるバースト問題（異種空間クラスターと同様）を防止するためにスケジューリング式を最適化する[#3592](https://github.com/tikv/pd/issues/3592) [#10005](https://github.com/tikv/tikv/pull/10005)
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
         -   `mysql`スキーマにおけるシステムテーブルのバックアップと復元をサポートする[#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)
-        -   仮想ホストアドレス指定モードに基づくS3互換storageをサポートする [#10243](https://github.com/tikv/tikv/pull/10243)
+        -   仮想ホストアドレス指定モードに基づくS3互換ストレージをサポートする [#10243](https://github.com/tikv/tikv/pull/10243)
         -   バックアップメタデータのフォーマットを最適化してメモリ使用量を削減する [#1171](https://github.com/pingcap/br/pull/1171)
 
     -   TiCDC
@@ -250,7 +250,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   TiDB Lightning
 
         -   データインポート速度の向上。最適化の結果、TPC-Cデータのインポート速度が30%向上し、インデックス数が多い（5インデックス）大規模テーブル（2TB以上）のインポート速度が50%以上向上しました。 [#753](https://github.com/pingcap/br/pull/753)
-        -   インポート前に、インポート対象データとターゲットクラスタの両方に対して事前チェックを追加し、インポート要件を満たしていない場合はエラーを報告してインポートプロセスを拒否する [#999](https://github.com/pingcap/br/pull/999)
+        -   インポート前に、インポート対象データとターゲットクラスターの両方に対して事前チェックを追加し、インポート要件を満たしていない場合はエラーを報告してインポートプロセスを拒否する [#999](https://github.com/pingcap/br/pull/999)
         -   ローカルバックエンドでのチェックポイント更新のタイミングを最適化し、ブレークポイントからの再開パフォーマンスを向上させる [#1080](https://github.com/pingcap/br/pull/1080)
 
 ## バグ修正 {#bug-fixes}
@@ -288,13 +288,13 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   `CONCAT`関数が照合順序を正しく処理しない問題を修正しました [#24296](https://github.com/pingcap/tidb/issues/24296)
     -   `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正しました [#24156](https://github.com/pingcap/tidb/pull/24156)
 
--   ティクヴ
+-   TiKV
 
     -   コプロセッサが`IN`式内の符号付きまたは符号なし整数型を正しく処理できない問題を修正します [#9821](https://github.com/tikv/tikv/issues/9821)
     -   SSTファイルをバッチ処理で取り込んだ後に、多数のリージョンが空になる問題を修正しました [#964](https://github.com/pingcap/br/issues/964)
     -   ファイル辞書ファイルが破損した後にTiKVが起動できないバグを修正しました [#9886](https://github.com/tikv/tikv/issues/9886)
     -   古い値の読み取りによって発生する TiCDC の OOM 問題を修正[#9996](https://github.com/tikv/tikv/issues/9996) [#9981](https://github.com/tikv/tikv/issues/9981)
-    -   照合順序が`latin1_bin`の場合に、クラスタ化された主キー列のセカンダリ インデックスに空の値が含まれる問題を修正します [#24548](https://github.com/pingcap/tidb/issues/24548)
+    -   照合順序が`latin1_bin`の場合に、クラスター化された主キー列のセカンダリ インデックスに空の値が含まれる問題を修正します [#24548](https://github.com/pingcap/tidb/issues/24548)
     -   TiKVがpanic発生時にコアダンプファイルを生成できるようにする`abort-on-panic`設定を追加します。ユーザーはコアダンプを有効にするために環境を正しく構成する必要があります [#10216](https://github.com/tikv/tikv/pull/10216)
     -   TiKVがビジー状態でない場合に発生する`point get`クエリのパフォーマンス低下問題を修正 [#10046](https://github.com/tikv/tikv/issues/10046)
 

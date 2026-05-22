@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 3.0.4
 -   改善点
     -   TiKV でバッチリージョン分割コマンドと空分割コマンドをサポートし、分割パフォーマンスを向上
     -   TiKV で RocksDB の二重リンクリストをサポートし、逆スキャンのパフォーマンスを向上
-    -   クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`追加します。
+    -   クラスターの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`追加します。
     -   冗長なフィールドを削除して、TiDB のスロークエリログの出力を最適化します。
 -   行動の変化
     -   デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にします。
@@ -122,7 +122,7 @@ TiDB Ansible バージョン: 3.0.4
 -   TiSparkをv2.2.0 [＃926](https://github.com/pingcap/tidb-ansible/pull/926)にアップグレード
 -   TiDB構成項目`pessimistic_txn`のデフォルト値を`true` [＃933](https://github.com/pingcap/tidb-ansible/pull/933)に更新します。
 -   `node_exporter` [＃938](https://github.com/pingcap/tidb-ansible/pull/938)にシステムレベルの監視メトリックを追加します
--   クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`追加します[＃946](https://github.com/pingcap/tidb-ansible/pull/946)
+-   クラスターの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`追加します[＃946](https://github.com/pingcap/tidb-ansible/pull/946)
 -   パスワードの有効期限が切れた場合などに発生する長い待機時間に対処するために、rawモジュールをシェルモジュールに置き換えます[＃949](https://github.com/pingcap/tidb-ansible/pull/949)
 -   TiDB構成項目`txn_local_latches`のデフォルト値を`false`に更新します
 -   Grafanaダッシュボードの監視メトリックとアラートルールを最適化する[＃962](https://github.com/pingcap/tidb-ansible/pull/962) [＃963](https://github.com/pingcap/tidb-ansible/pull/963) [＃969](https://github.com/pingcap/tidb-ansible/pull/963)

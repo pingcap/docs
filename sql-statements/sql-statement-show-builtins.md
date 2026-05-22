@@ -160,8 +160,8 @@ SHOW BUILTINS;
     | json_schema_valid           |
     | json_search                 |
     | json_set                    |
-    | json_storage_free           |
-    | json_storage_size           |
+    | json_ストレージ_free           |
+    | json_ストレージ_size           |
     | json_type                   |
     | json_unquote                |
     | json_valid                  |

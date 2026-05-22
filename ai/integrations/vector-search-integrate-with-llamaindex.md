@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 > **注記：**
 >
 > -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
 >
@@ -24,12 +24,12 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 -   [Python 3.8以降](https://www.python.org/downloads/)インストールされています。
 -   [ジュピターノートブック](https://jupyter.org/install)がインストールされました。
 -   [Git](https://git-scm.com/downloads)がインストールされました。
--   TiDBクラスタ。
+-   TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番環境のTiDB Self-Managedクラスターをデプロイ。](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -122,21 +122,21 @@ tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
-macOSを例にとると、クラスタ接続文字列は次のようになります。
+macOSを例にとると、クラスター接続文字列は次のようになります。
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
 # For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-TiDBクラスタに合わせて、接続文字列のパラメータを変更する必要があります。ローカルマシンでTiDBを実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期値の`<PASSWORD>`は空なので、クラスタを初めて起動する場合は、このフィールドを省略できます。
+TiDBクラスターに合わせて、接続文字列のパラメータを変更する必要があります。ローカルマシンでTiDBを実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期値の`<PASSWORD>`は空なので、クラスターを初めて起動する場合は、このフィールドを省略できます。
 
 各パラメータの説明は以下のとおりです。
 
 -   `<USERNAME>` : TiDBに接続するためのユーザー名。
 -   `<PASSWORD>` : TiDBに接続するためのパスワード。
--   `<HOST>` : TiDBクラスタのホスト。
--   `<PORT>` : TiDB クラスタのポート。
+-   `<HOST>` : TiDBクラスターのホスト。
+-   `<PORT>` : TiDB クラスターのポート。
 -   `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
@@ -189,9 +189,9 @@ tidbvec = TiDBVectorStore(
 以下のコードは、ドキュメントを解析し、埋め込みを生成し、それらをTiDBベクトルストアに保存します。
 
 ```python
-storage_context = StorageContext.from_defaults(vector_store=tidbvec)
+ストレージ_context = StorageContext.from_defaults(vector_store=tidbvec)
 index = VectorStoreIndex.from_documents(
-   documents, storage_context=storage_context, show_progress=True
+   documents, ストレージ_context=ストレージ_context, show_progress=True
 )
 ```
 
@@ -214,7 +214,7 @@ print(textwrap.fill(str(response), 100))
 
 > **注記**
 >
-> `TiDBVectorStore` [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリ モードのみをサポートしています。
+> `TiDBVectorStore` [`default`](https://docs.llamaindex.ai/en/stable/api_reference/ストレージ/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリ モードのみをサポートしています。
 
 期待される出力は以下のとおりです。
 

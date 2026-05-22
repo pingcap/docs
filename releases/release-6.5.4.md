@@ -54,7 +54,7 @@ TiDB バージョン: 6.5.4
     -   バックアップと復元 (BR)
 
         -   HTTPクライアント[＃46011](https://github.com/pingcap/tidb/issues/46011) @ [Leavrth](https://github.com/Leavrth)で`MaxIdleConns`と`MaxIdleConnsPerHost`パラメータを設定することで接続の再利用のサポートを強化します
-        -   PD または外部 S3storageへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
+        -   PD または外部 S3ストレージへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
         -   新しい復元パラメータ`WaitTiflashReady`を追加します。このパラメータを有効にすると、 TiFlashレプリカが正常に複製された後に復元操作が完了します[＃43828](https://github.com/pingcap/tidb/issues/43828) [＃46302](https://github.com/pingcap/tidb/issues/46302) @ [3pointer](https://github.com/3pointer)
 
     -   TiCDC
@@ -110,10 +110,10 @@ TiDB バージョン: 6.5.4
     -   `DATETIME`または`TIMESTAMP`列を数値定数[＃38361](https://github.com/pingcap/tidb/issues/38361) @ [yibin87](https://github.com/yibin87)と比較するときに、MySQL と動作が一致しない問題を修正しました。
     -   インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[＃45716](https://github.com/pingcap/tidb/issues/45716) @ [wshwsh12](https://github.com/wshwsh12)
     -   接続を切断すると go コルーチン リークが発生する可能性がある問題を修正[＃46034](https://github.com/pingcap/tidb/issues/46034) @ [pingyu](https://github.com/pingyu)
-    -   `tmp-storage-quota`設定が[＃45161](https://github.com/pingcap/tidb/issues/45161) [＃26806](https://github.com/pingcap/tidb/issues/26806) @ [wshwsh12](https://github.com/wshwsh12)で有効にならない問題を修正
+    -   `tmp-ストレージ-quota`設定が[＃45161](https://github.com/pingcap/tidb/issues/45161) [＃26806](https://github.com/pingcap/tidb/issues/26806) @ [wshwsh12](https://github.com/wshwsh12)で有効にならない問題を修正
     -   クラスター[＃38484](https://github.com/pingcap/tidb/issues/38484) @ [hehechen](https://github.com/hehechen)でTiFlashノードがダウンした場合にTiFlashレプリカが利用できなくなる問題を修正しました。
     -   `Config.Labels`同時に読み書きする場合に、データ競合により TiDB がクラッシュする問題を修正[＃45561](https://github.com/pingcap/tidb/issues/45561) @ [gengliqi](https://github.com/gengliqi)
-    -   クラスタが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
+    -   クラスターが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
 
 -   TiKV
 
@@ -133,9 +133,9 @@ TiDB バージョン: 6.5.4
     -   etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanic[＃6860](https://github.com/tikv/pd/issues/6860) @ [HuSharp](https://github.com/HuSharp)になる可能性がある問題を修正しました。
     -   リーダーが長時間退出できない問題を修正[＃6918](https://github.com/tikv/pd/issues/6918) @ [bufferflies](https://github.com/bufferflies)
     -   配置ルールが`LOCATION_LABELS`使用する場合、SQL とルールチェッカーが[＃38605](https://github.com/pingcap/tidb/issues/38605) @ [nolouch](https://github.com/nolouch)と互換性がない問題を修正しました
-    -   PD が予期せず複数の学習者をリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
+    -   PD が予期せず複数のラーナーをリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
     -   ルールチェッカーがピア[＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)を選択した場合に、不健全なピアを削除できない問題を修正しました
-    -   `unsafe recovery`で不合格になった学習者のピアが`auto-detect`モード[＃6690](https://github.com/tikv/pd/issues/6690) @ [v01dstar](https://github.com/v01dstar)で無視される問題を修正
+    -   `unsafe recovery`で不合格になったラーナーのピアが`auto-detect`モード[＃6690](https://github.com/tikv/pd/issues/6690) @ [v01dstar](https://github.com/v01dstar)で無視される問題を修正
 
 -   TiFlash
 
@@ -152,9 +152,9 @@ TiDB バージョン: 6.5.4
         -   BRで使用されるグローバルパラメータ`TableColumnCountLimit`と`IndexLimit`デフォルト値を最大値[＃45793](https://github.com/pingcap/tidb/issues/45793) @ [Leavrth](https://github.com/Leavrth)に増やすことで、復元が失敗する問題を修正しました。
         -   PITR [＃43184](https://github.com/pingcap/tidb/issues/43184) @ [Leavrth](https://github.com/Leavrth)で DDL メタ情報を処理するときに書き換えが失敗する問題を修正しました
         -   PITR実行中に関数の戻り値をチェックしないことで発生するpanicの問題を修正[＃45853](https://github.com/pingcap/tidb/issues/45853) @ [Leavrth](https://github.com/Leavrth)
-        -   Amazon S3 [＃41916](https://github.com/pingcap/tidb/issues/41916) [＃42033](https://github.com/pingcap/tidb/issues/42033) @ [3pointer](https://github.com/3pointer)以外の S3 互換storage使用時に無効なリージョン ID が取得される問題を修正
+        -   Amazon S3 [＃41916](https://github.com/pingcap/tidb/issues/41916) [＃42033](https://github.com/pingcap/tidb/issues/42033) @ [3pointer](https://github.com/3pointer)以外の S3 互換ストレージ使用時に無効なリージョン ID が取得される問題を修正
         -   RawKVモード[＃37085](https://github.com/pingcap/tidb/issues/37085) @ [pingyu](https://github.com/pingyu)のきめ細かなバックアップフェーズで発生する可能性のあるエラーを修正
-        -   TiDBクラスタ[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)にPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正
+        -   TiDBクラスター[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)にPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @ [YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
@@ -182,13 +182,13 @@ TiDB バージョン: 6.5.4
     -   TiDB Lightning
 
         -   エンジンがデータ[＃44867](https://github.com/pingcap/tidb/issues/44867) @ [D3Hunter](https://github.com/D3Hunter)をインポートしているときにディスク クォータ チェックがブロックされる可能性がある問題を修正しました
-        -   ターゲットクラスタ[＃45462](https://github.com/pingcap/tidb/issues/45462) @ [D3Hunter](https://github.com/D3Hunter)で SSL が有効になっているときにチェックサムがエラー`Region is unavailable`を報告する問題を修正しました
+        -   ターゲットクラスター[＃45462](https://github.com/pingcap/tidb/issues/45462) @ [D3Hunter](https://github.com/D3Hunter)で SSL が有効になっているときにチェックサムがエラー`Region is unavailable`を報告する問題を修正しました
         -   エンコードエラーが正しく記録されない問題を修正[＃44321](https://github.com/pingcap/tidb/issues/44321) @ [lyzx2001](https://github.com/lyzx2001)
         -   CSVデータ[＃43284](https://github.com/pingcap/tidb/issues/43284) @ [lyzx2001](https://github.com/lyzx2001)をインポートする際にルートがpanicになる可能性がある問題を修正
         -   論理インポートモードでテーブル A をインポートすると、テーブル B が存在しないと誤って報告される可能性がある問題を修正しました[＃44614](https://github.com/pingcap/tidb/issues/44614) @ [dsdashun](https://github.com/dsdashun)
         -   `NEXT_GLOBAL_ROW_ID` [＃45427](https://github.com/pingcap/tidb/issues/45427) @ [lyzx2001](https://github.com/lyzx2001)を保存するときにデータ型が間違っている問題を修正しました
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
-        -   PDクラスタアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
+        -   PDクラスターアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
         -   一部のPDノードが[＃43400](https://github.com/pingcap/tidb/issues/43400) @ [lichunzhu](https://github.com/lichunzhu)で失敗した場合にデータのインポートが失敗する問題を修正しました
         -   自動増分列を持つテーブルが`AUTO_ID_CACHE=1`設定すると、ID アロケータのベース値が正しくなくなる[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)という問題を修正しました
 

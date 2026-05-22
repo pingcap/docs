@@ -153,7 +153,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ## 使用されていないインデックスを削除する {#remove-unused-indexes}
 
-バージョン8.0.0以降では、 [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)と[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を使用して、ワークロード内の非アクティブなインデックスを特定できます。これらのインデックスを削除することで、storage容量を節約し、オーバーヘッドを削減できます。本番環境では、対象のインデックスを完全に削除する前に、まず非表示にして、1回の業務サイクルにわたって影響を確認することを強くお勧めします。
+バージョン8.0.0以降では、 [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)と[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を使用して、ワークロード内の非アクティブなインデックスを特定できます。これらのインデックスを削除することで、ストレージ容量を節約し、オーバーヘッドを削減できます。本番環境では、対象のインデックスを完全に削除する前に、まず非表示にして、1回の業務サイクルにわたって影響を確認することを強くお勧めします。
 
 ### <code>sys.schema_unused_indexes</code>を使用します {#use-code-sys-schema-unused-indexes-code}
 

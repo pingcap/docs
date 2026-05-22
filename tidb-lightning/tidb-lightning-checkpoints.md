@@ -28,7 +28,7 @@ driver = "file"
 # Enabled only when `driver = "mysql"`.
 # schema = "tidb_lightning_checkpoint"
 
-# The data source name (DSN) indicating the location of the checkpoint storage.
+# The data source name (DSN) indicating the location of the checkpoint ストレージ.
 #
 # For the "file" driver, the DSN is a path. If the path is not specified, Lightning would
 # default to "/tmp/CHECKPOINT_SCHEMA.pb".
@@ -45,15 +45,15 @@ driver = "file"
 # keep-after-success = false
 ```
 
-## チェックポイントのstorage {#checkpoints-storage}
+## チェックポイントのストレージ {#checkpoints-ストレージ}
 
-TiDB Lightning は、ローカル ファイルまたはリモート MySQL 互換データベースの 2 種類のチェックポイントstorageをサポートしています。
+TiDB Lightning は、ローカル ファイルまたはリモート MySQL 互換データベースの 2 種類のチェックポイントストレージをサポートしています。
 
 -   `driver = "file"`の場合、チェックポイントは`dsn`で指定されたパスのローカルファイルに保存されます。チェックポイントは頻繁に更新されるため、RAMディスクなど、書き込み耐久性が非常に高いドライブにチェックポイントファイルを置くことを強くお勧めします。
 
 -   `driver = "mysql"`の場合、MariaDBやTiDBを含む、 MySQL 5.7以降と互換性のある任意のデータベースにチェックポイントを保存できます。デフォルトでは、チェックポイントはターゲットデータベースに保存されます。
 
-Lightning は、ターゲットデータベースをチェックポイントのstorageとして使用している場合、大量のデータを同時にインポートします。これにより、ターゲットデータベースに余分な負荷がかかり、通信タイムアウトが発生する場合があります。そのため、**これらのチェックポイントを保存するための一時的な MySQLサーバーをインストールすることを強くお勧めします**。このサーバーは`tidb-lightning`と同じホストにインストールでき、インポート処理が完了したらアンインストールできます。
+Lightning は、ターゲットデータベースをチェックポイントのストレージとして使用している場合、大量のデータを同時にインポートします。これにより、ターゲットデータベースに余分な負荷がかかり、通信タイムアウトが発生する場合があります。そのため、**これらのチェックポイントを保存するための一時的な MySQLサーバーをインストールすることを強くお勧めします**。このサーバーは`tidb-lightning`と同じホストにインストールでき、インポート処理が完了したらアンインストールできます。
 
 ## チェックポイント制御 {#checkpoints-control}
 

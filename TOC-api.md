@@ -11,7 +11,7 @@
 -   [API v1beta1](/api/tidb-cloud-api-v1beta1.md)
 -   [API v1beta](/api/tidb-cloud-api-v1beta.md)
 
-## TIDB セルフマネージド {#tidb-self-managed}
+## TIDB Self-Managed {#tidb-self-managed}
 
 -   [TiProxy API](/api/tiproxy-api-overview.md)
 -   [データ移行API](/api/dm-api-overview.md)

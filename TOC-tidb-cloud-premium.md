@@ -17,7 +17,7 @@
     -   [概要](/tidb-cloud/key-concepts.md)
     -   [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
     -   [データベーススキーマ](/tidb-cloud/database-schema-concepts.md)
-    -   [取引](/tidb-cloud/transaction-concepts.md)
+    -   [トランザクション](/tidb-cloud/transaction-concepts.md)
     -   [SQL](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
     -   [拡張性](/tidb-cloud/scalability-concepts.md)
@@ -72,7 +72,7 @@
                 -   [MPPに関する質問](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
-                -   [閲覧数](/explain-views.md)
+                -   [ビュー](/explain-views.md)
                 -   [パーティション](/explain-partitions.md)
                 -   [インデックスマージ](/explain-index-merge.md)
             -   SQL最適化プロセス
@@ -125,7 +125,7 @@
         -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
         -   [MySQL CLI を使用したデータのインポート](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
     -   参照
-        -   [TiDB Cloudの外部ストレージアクセスを設定する](/tidb-cloud/configure-external-storage-access.md)
+        -   [TiDB Cloudの外部ストレージアクセスを設定する](/tidb-cloud/configure-external-ストレージ-access.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -179,14 +179,14 @@
 ## 参照 {#reference}
 
 -   SQLリファレンス
-    -   [TiDBでSQLを探求しよう](/basic-sql-operations.md)
+    -   [TiDBでのSQL基本操作](/basic-sql-operations.md)
     -   SQL言語の構造と構文
         -   属性
             -   [自動インクリメント](/auto-increment.md)
-            -   [自動乱数](/auto-random.md)
+            -   [AUTO_RANDOM](/auto-random.md)
             -   [_tidb_rowid](/tidb-rowid.md)
             -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
-        -   [文字通りの値](/literal-values.md)
+        -   [リテラル値](/literal-values.md)
         -   [スキーマオブジェクト名](/schema-object-names.md)
         -   [キーワードと予約語](/keywords.md)
         -   [ユーザー定義変数](/user-defined-variables.md)
@@ -364,13 +364,13 @@
     -   [生成された列](/generated-columns.md)
     -   [SQLモード](/sql-mode.md)
     -   [テーブル属性](/table-attributes.md)
-    -   取引
+    -   トランザクション
         -   [概要](/transaction-overview.md)
         -   [隔離レベル](/transaction-isolation-levels.md)
-        -   [楽観的な取引](/optimistic-transaction.md)
-        -   [悲観的な取引](/pessimistic-transaction.md)
+        -   [楽観的なトランザクション](/optimistic-transaction.md)
+        -   [悲観的なトランザクション](/pessimistic-transaction.md)
         -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
-    -   [閲覧数](/views.md)
+    -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
@@ -417,7 +417,7 @@
             -   [`STATISTICS`](/information-schema/information-schema-statistics.md)
             -   [`TABLES`](/information-schema/information-schema-tables.md)
             -   [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
-            -   [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)
+            -   [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-ストレージ-stats.md)
             -   [`TIDB_CHECK_CONSTRAINTS`](/information-schema/information-schema-tidb-check-constraints.md)
             -   [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
             -   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
@@ -440,15 +440,15 @@
 -   一般参考資料
     -   TiDBクラシックアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [ストレージ](/tidb-storage.md)
+        -   [ストレージ](/tidb-ストレージ.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクヴ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
-            -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
+            -   [RocksDBの概要](/ストレージ-engine/rocksdb-overview.md)
         -   TiFlash
             -   [TiFlashの概要](/tiflash/tiflash-overview.md)
             -   [ディスクに書き出す](/tiflash/tiflash-spill-disk.md)
@@ -461,7 +461,7 @@
     -   [システム変数](/system-variables.md)
     -   [サーバー状態変数](/status-variables.md)
     -   [テーブルフィルター](/table-filter.md)
-    -   [外部ストレージサービスのURI形式](/external-storage-uri.md)
+    -   [外部ストレージサービスのURI形式](/external-ストレージ-uri.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
 -   サポートプラン

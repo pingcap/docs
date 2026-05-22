@@ -88,7 +88,7 @@ TiDB バージョン: 4.0.11
     -   関数パラメータの数が無効な場合、生成された列の使用を禁止する[＃22174](https://github.com/pingcap/tidb/pull/22174)
     -   実行プランを構築する前にプロセス情報を正しく設定する[＃22148](https://github.com/pingcap/tidb/pull/22148)
     -   `IndexLookUp` [＃22136](https://github.com/pingcap/tidb/pull/22136)の不正確な実行時統計の問題を修正
-    -   コンテナ[＃22116](https://github.com/pingcap/tidb/pull/22116)にクラスタをデプロイするときにメモリ使用量情報のキャッシュを追加する
+    -   コンテナ[＃22116](https://github.com/pingcap/tidb/pull/22116)にクラスターをデプロイするときにメモリ使用量情報のキャッシュを追加する
     -   デコードプランエラーの問題を修正[＃22022](https://github.com/pingcap/tidb/pull/22022)
     -   無効なウィンドウ仕様の使用によるエラーを報告[＃21976](https://github.com/pingcap/tidb/pull/21976)
     -   `PREPARE`文が`EXECUTE` 、 `DEALLOCATE` 、または`PREPARE` [＃21972](https://github.com/pingcap/tidb/pull/21972)とネストされている場合はエラーを報告します。
@@ -140,7 +140,7 @@ TiDB バージョン: 4.0.11
     -   TiFlashがデータ読み取り時にクラッシュする可能性があるバグを修正
     -   DDL操作後に書き込まれたデータの一部がデータ圧縮後に失われる可能性がある問題を修正しました
     -   TiFlashがコプロセッサー内の10進定数を正しく処理しない問題を修正
-    -   学習者の読み取りプロセス中に発生する可能性のあるクラッシュを修正しました
+    -   ラーナーの読み取りプロセス中に発生する可能性のあるクラッシュを修正しました
     -   TiDBとTiFlash間の`0`または`NULL`による除算の不一致な動作を修正
 
 -   ツール

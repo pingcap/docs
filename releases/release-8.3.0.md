@@ -13,15 +13,15 @@ TiDBバージョン：8.3.0
 
 バージョン8.3.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/partitioned-table/#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行時に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.3/system-variables/#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>演算子をstorageエンジンにデフォルトでプッシュダウンする</a></td><td><code>Projection</code>演算子をstorageエンジンにプッシュダウンすることで、storageノード全体に負荷を分散させ、ノード間のデータ転送量を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/statistics/#collect-statistics-on-some-columns">統計情報を収集する際に不要な列を無視する</a></td><td>オプティマイザが必要な情報を確実に取得できるという前提のもと、TiDBは統計情報の収集を高速化し、統計情報の適時性を向上させることで、最適な実行プランの選択を保証し、クラスタのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率も向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/tiproxy-overview/">TiProxyに組み込まれた仮想IP管理機能</a></td><td>TiProxyは、仮想IP管理機能を内蔵しています。設定することで、外部プラットフォームやツールに依存することなく、仮想IPの自動切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/partitioned-table/#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行時に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.3/system-variables/#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>演算子をストレージエンジンにデフォルトでプッシュダウンする</a></td><td><code>Projection</code>演算子をストレージエンジンにプッシュダウンすることで、ストレージノード全体に負荷を分散させ、ノード間のデータ転送量を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/statistics/#collect-statistics-on-some-columns">統計情報を収集する際に不要な列を無視する</a></td><td>オプティマイザが必要な情報を確実に取得できるという前提のもと、TiDBは統計情報の収集を高速化し、統計情報の適時性を向上させることで、最適な実行プランの選択を保証し、クラスターのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率も向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/tiproxy-overview/">TiProxyに組み込まれた仮想IP管理機能</a></td><td>TiProxyは、仮想IP管理機能を内蔵しています。設定することで、外部プラットフォームやツールに依存することなく、仮想IPの自動切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
 ### パフォーマンス {#performance}
 
--   オプティマイザは`Projection`演算子をデフォルトでstorageエンジンにプッシュダウンすることを可能にします [#51876](https://github.com/pingcap/tidb/issues/51876) @[yibin87](https://github.com/yibin87)
+-   オプティマイザは`Projection`演算子をデフォルトでストレージエンジンにプッシュダウンすることを可能にします [#51876](https://github.com/pingcap/tidb/issues/51876) @[yibin87](https://github.com/yibin87)
 
-    `Projection`演算子をstorageエンジンにプッシュダウンすると、計算エンジンとstorageエンジン間のデータ転送が削減され、SQL 実行パフォーマンスが向上します。これは[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)含むクエリに特に効果的です。 または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)。v8.3.0 以降、TiDB は、この機能を制御するシステム変数[`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)のデフォルト値を`Projection`から`OFF` `ON`ダウン機能をデフォルトで有効にします。この機能が有効になると、オプティマイザは、対象となる JSON クエリ関数と JSON 値属性関数を自動的にstorageエンジンにプッシュダウンします。
+    `Projection`演算子をストレージエンジンにプッシュダウンすると、計算エンジンとストレージエンジン間のデータ転送が削減され、SQL 実行パフォーマンスが向上します。これは[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)含むクエリに特に効果的です。 または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)。v8.3.0 以降、TiDB は、この機能を制御するシステム変数[`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)のデフォルト値を`Projection`から`OFF` `ON`ダウン機能をデフォルトで有効にします。この機能が有効になると、オプティマイザは、対象となる JSON クエリ関数と JSON 値属性関数を自動的にストレージエンジンにプッシュダウンします。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)を参照してください。
 
@@ -49,7 +49,7 @@ TiDBバージョン：8.3.0
 
 -   一部のシステムテーブルのクエリパフォーマンスを改善 [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta)
 
-    以前のバージョンでは、クラスタサイズが大きくなり、テーブル数が多くなると、システムテーブルへのクエリのパフォーマンスが低下していました。
+    以前のバージョンでは、クラスターサイズが大きくなり、テーブル数が多くなると、システムテーブルへのクエリのパフォーマンスが低下していました。
 
     バージョン8.0.0では、以下の4つのシステムテーブルについてクエリパフォーマンスが最適化されています。
 
@@ -99,7 +99,7 @@ TiDBバージョン：8.3.0
 
     アプリケーションコードが[カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)を使用して結果セットを取得する場合、TiDBは通常、まず結果セット全体をメモリに格納し、その後データをバッチ処理でクライアントに返します。結果セットが大きすぎる場合は、TiDBは一時的に結果をハードディスクに書き込むことがあります。
 
-    バージョン8.3.0以降では、システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) `ON`に設定すると、TiDBはすべてのデータをTiDBノードに読み込むのではなく、クライアントが読み込むにつれて徐々にデータをTiDBノードに読み込むようになります。TiDBが大規模な結果セットを処理する場合、この機能によりTiDBノードのメモリ使用量が削減され、クラスタの安定性が向上します。
+    バージョン8.3.0以降では、システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) `ON`に設定すると、TiDBはすべてのデータをTiDBノードに読み込むのではなく、クライアントが読み込むにつれて徐々にデータをTiDBノードに読み込むようになります。TiDBが大規模な結果セットを処理する場合、この機能によりTiDBノードのメモリ使用量が削減され、クラスターの安定性が向上します。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を参照してください。
 
@@ -162,7 +162,7 @@ TiDBバージョン：8.3.0
 
 -   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（GA） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) [okJiang](https://github.com/okJiang) [asddongmen](https://github.com/asddongmen)
 
-    TiCDC v7.6.0 では、双方向レプリケーションが構成された DDL ステートメントのレプリケーションが導入されました。以前は、TiCDC は DDL ステートメントの双方向レプリケーションをサポートしていなかったため、TiCDC の双方向レプリケーションを使用するユーザーは、両方の TiDB クラスタで DDL ステートメントを個別に実行する必要がありました。この機能により、クラスタに`PRIMARY` BDR ロールを割り当てると、TiCDC はそのクラスタから`SECONDARY`クラスタに DDL ステートメントをレプリケートできます。
+    TiCDC v7.6.0 では、双方向レプリケーションが構成された DDL ステートメントのレプリケーションが導入されました。以前は、TiCDC は DDL ステートメントの双方向レプリケーションをサポートしていなかったため、TiCDC の双方向レプリケーションを使用するユーザーは、両方の TiDB クラスターで DDL ステートメントを個別に実行する必要がありました。この機能により、クラスターに`PRIMARY` BDR ロールを割り当てると、TiCDC はそのクラスターから`SECONDARY`クラスターに DDL ステートメントをレプリケートできます。
 
     バージョン8.3.0では、この機能が一般提供（GA）されます。
 
@@ -185,23 +185,23 @@ TiDBバージョン：8.3.0
 | [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)                                 | 修正済み     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
 | [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)                                 | 修正済み     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
 | [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)                 | 修正済み     | さらなるテストの結果、デフォルト値が`OFF`から`ON`に変更されます。これは、TiDB がデフォルトで`PREDICATE COLUMNS`を収集することを意味します。                                                                                                                                                                                                                   |
-| [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)                                  | 修正済み     | v8.3.0 以降、この変数は[ごみ収集（GC）](/garbage-collection-overview.md)プロセスの[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップと[範囲を削除](/garbage-collection-overview.md#delete-ranges)ステップ中の同時スレッドの数を制御します。 v8.3.0 より前では、この変数は[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップ中のスレッド数のみを制御します。 |
+| [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)                                  | 修正済み     | v8.3.0 以降、この変数は[ガベージコレクション（GC）](/garbage-collection-overview.md)プロセスの[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップと[範囲を削除](/garbage-collection-overview.md#delete-ranges)ステップ中の同時スレッドの数を制御します。 v8.3.0 より前では、この変数は[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップ中のスレッド数のみを制御します。 |
 | [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)                                     | 修正済み     | グローバルスコープを追加します。                                                                                                                                                                                                                                                                                         |
-| [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 修正済み     | GLOBAL スコープを追加し、変数の値をクラスタに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection` TiKV コプロセッサにプッシュできることを意味します。                                                                                                                                                                             |
+| [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 修正済み     | GLOBAL スコープを追加し、変数の値をクラスターに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection` TiKV コプロセッサにプッシュできることを意味します。                                                                                                                                                                             |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                           | 修正済み     | 値の範囲は`0`または`[536870912, 9223372036854775807]`に変更されました。キャッシュサイズが小さすぎてパフォーマンスが低下するのを避けるため、最小値は`536870912`バイト (つまり 512 MiB) です。                                                                                                                                                                             |
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                 | 新しく追加された | `ANALYZE TABLE`ステートメントの動作を制御します。デフォルト値の`PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。                                                                                                                                         |
 | [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)             | 新しく追加された | [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。                                                                                                                                                                                      |
 | [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)     | 新しく追加された | 共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。                                                                                                                                                                                                |
 | [`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830) | 新しく追加された | TiFlashにプッシュダウンされる2段階または3段階のHashAgg操作の最初の段階で使用される事前集計戦略を制御します。                                                                                                                                                                                                                                           |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                        | 種類を変更する  | 説明                                                                                                                                                      |
+| 設定ファイル | 設定パラメータ                                                                                        | 種類を変更する  | 説明                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
 | PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 修正済み     | PD構成項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
-| ティクヴ           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 修正済み     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
-| TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 修正済み     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
+| TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 修正済み     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
+| TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 修正済み     | TiFlash ラーナーの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
 | BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`ままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
 
 ### システムテーブル {#system-tables}
@@ -251,7 +251,7 @@ TiDBバージョン：8.3.0
 -   PD
 
     -   `batch`を介して`evict-leader-scheduler`の`pd-ctl`構成を変更してリーダー退去プロセスを加速するサポート [#8265](https://github.com/tikv/pd/issues/8265) @[rleungx](https://github.com/rleungx)
-    -   Grafana の**クラスタ &gt; Label 配信**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
+    -   Grafana の**クラスター &gt; Label 配信**パネルに`store_id`モニタリングメトリックを追加して、異なるラベルに対応するストア ID を表示します [#8337](https://github.com/tikv/pd/issues/8337) @[HuSharp](https://github.com/HuSharp)
     -   指定されたリソースグループが存在しない場合、デフォルトのリソースグループへのフォールバックをサポートする [#8388](https://github.com/tikv/pd/issues/8388) @[JmPotato](https://github.com/JmPotato)
     -   `approximate_kv_size`の`region`コマンドが出力するリージョン情報に`pd-ctl`フィールドを追加します。 [#8412](https://github.com/tikv/pd/issues/8412) @[zeminzhou](https://github.com/zeminzhou)
     -   PD APIを呼び出してTTL設定を削除したときに返されるメッセージを最適化します [#8450](https://github.com/tikv/pd/issues/8450) @[lhy1024](https://github.com/lhy1024)
@@ -260,7 +260,7 @@ TiDBバージョン：8.3.0
     -   PDマイクロサービスに`--name`起動パラメータを追加して、デプロイ中にサービス名をより正確に表示します [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
     -   領域数に基づいて`PatrolRegionScanLimit`を動的に調整してリージョンスキャン時間を短縮する機能をサポート [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
 
--   ティクヴ
+-   TiKV
 
     -   `async-io`が有効になっている場合、 Raftログの書き込みバッチ処理ポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
     -   リージョン部分購読をより適切にサポートするために、TiCDCデリゲートとダウンストリームモジュールを再設計します [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
@@ -356,10 +356,10 @@ TiDBバージョン：8.3.0
     -   TiFlashでSSL証明書の設定を空文字列に設定するとTLSが誤って有効になり、 TiFlashが起動に失敗する問題を修正しました [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   データベース作成直後にデータベースが削除されるとTiFlash がpanicことがある問題を修正 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashと任意の PD 間のネットワーク パーティション (ネットワークの切断) により、読み取りリクエストのタイムアウト エラーが発生する可能性がある問題を修正 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   分散storageおよびコンピューティングアーキテクチャでTiFlash書き込みノードの再起動に失敗することがある問題を修正 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   分散storageおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正します [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
+    -   分散ストレージおよびコンピューティングアーキテクチャでTiFlash書き込みノードの再起動に失敗することがある問題を修正 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正します [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
 
--   ティクヴ
+-   TiKV
 
     -   古いリージョンをクリーンアップすると、誤って有効なデータが削除される可能性がある問題を修正 [#17258](https://github.com/tikv/tikv/issues/17258) @[hbisheng](https://github.com/hbisheng)
     -   Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`が正しく表示されない問題を修正します [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
@@ -374,7 +374,7 @@ TiDBバージョン：8.3.0
 
         -   `ADD INDEX`や`MODIFY COLUMN`など、バックフィルが必要な DDL が増分リストア中に正しく復元されない可能性がある問題を修正します [#54426](https://github.com/pingcap/tidb/issues/54426) @[3pointer](https://github.com/3pointer)シュート
         -   バックアップと復元中に進行状況が停止する問題を修正 [#54140](https://github.com/pingcap/tidb/issues/54140) @[Leavrth](https://github.com/Leavrth)
-        -   バックアップとリストアのチェックポイントパスが一部の外部storageと互換性がない問題を修正 [#55265](https://github.com/pingcap/tidb/issues/55265) @[Leavrth](https://github.com/Leavrth)
+        -   バックアップとリストアのチェックポイントパスが一部の外部ストレージと互換性がない問題を修正 [#55265](https://github.com/pingcap/tidb/issues/55265) @[Leavrth](https://github.com/Leavrth)
 
     -   TiCDC
 

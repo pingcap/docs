@@ -1,11 +1,11 @@
 ---
 title: TiUP DM
-summary: TiUP DMは、DMクラスタの管理（デプロイ、起動、停止、破棄、スケーリング、アップグレード、構成パラメータの管理など）に使用されます。SSH、タイムアウト、確認のスキップ、バージョン情報の表示、ヘルプ情報などのオプションをサポートしています。サポートされるコマンドは、import、template、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、destroy、audit、replay、enable、disable、helpです。
+summary: TiUP DMは、DMクラスターの管理（デプロイ、起動、停止、破棄、スケーリング、アップグレード、構成パラメータの管理など）に使用されます。SSH、タイムアウト、確認のスキップ、バージョン情報の表示、ヘルプ情報などのオプションをサポートしています。サポートされるコマンドは、import、template、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、destroy、audit、replay、enable、disable、helpです。
 ---
 
 # TiUP DM {#tiup-dm}
 
-TiDBクラスタの管理に使用される[TiUPクラスタ](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスタの管理に使用されます。TiUP TiUP DMコンポーネントを使用すると、DMクラスタのデプロイ、起動、停止、破棄、エラスティックスケーリング、DMクラスタのアップグレード、DMクラスタの構成パラメータの管理など、DMクラスタの日常的な運用および保守タスクを実行できます。
+TiDBクラスターの管理に使用される[TiUPクラスター](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスターの管理に使用されます。TiUP TiUP DMコンポーネントを使用すると、DMクラスターのデプロイ、起動、停止、破棄、エラスティックスケーリング、DMクラスターのアップグレード、DMクラスターの構成パラメータの管理など、DMクラスターの日常的な運用および保守タスクを実行できます。
 
 ## 構文 {#syntax}
 

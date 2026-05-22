@@ -1,6 +1,6 @@
 ---
 title: Sink to TiDB Cloud
-summary: このドキュメントでは、TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスタの概要ページに移動し、接続を確立し、テーブルとイベントのフィルタをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
+summary: このドキュメントでは、TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスターの概要ページに移動し、接続を確立し、テーブルとイベントのフィルタをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
 ---
 
 # TiDB Cloudにシンクする {#sink-to-tidb-cloud}
@@ -9,7 +9,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 > **注記：**
 >
-> Changefeed機能を使用するには、 TiDB Cloud Dedicatedクラスタのバージョンがv6.1.3以降であることを確認してください。
+> Changefeed機能を使用するには、 TiDB Cloud Dedicatedクラスターのバージョンがv6.1.3以降であることを確認してください。
 
 ## 制限 {#restrictions}
 
@@ -28,11 +28,11 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 -   ソースとなるTiDB Cloud Dedicatedクラスターと、宛先となるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスは、同じプロジェクトおよび同じリージョンに属している必要があります。
 
--   **TiDB Cloudへのシンク**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートしています。TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2つのクラスタ間のプライベートエンドポイント接続を自動的に設定します。
+-   **TiDB Cloudへのシンク**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートしています。TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2つのクラスター間のプライベートエンドポイント接続を自動的に設定します。
 
 ## 前提条件 {#prerequisites}
 
-**TiDB Cloudへのシンク**コネクタは、特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)の後、 TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに増分データをシンクすることのみが可能です。
+**TiDB Cloudへのシンク**コネクタは、特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)の後、 TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに増分データをシンクすることのみが可能です。
 
 変更フィードを作成する前に、ソースのTiDB Cloud Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにロードする必要があります。
 
@@ -63,7 +63,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 前提条件を満たしたら、データを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにシンクできます。
 
-1.  対象のTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
+1.  対象のTiDBクラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「変更フィード」**をクリックします。
 
 2.  **「変更フィードを作成」**をクリックし、宛先として**「TiDB Cloud」**を選択します。
 

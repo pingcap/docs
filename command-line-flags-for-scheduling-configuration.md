@@ -3,7 +3,7 @@ title: Scheduling Configuration Flags
 summary: スケジュール構成フラグは、コマンド ライン フラグまたは環境変数を介して構成できます。
 ---
 
-# スケジュールコンフィグレーションフラグ {#scheduling-configuration-flags}
+# スケジュール設定フラグ {#scheduling-configuration-flags}
 
 スケジューリングノードは、PD用の`scheduling`マイクロサービスを提供するために使用されます。コマンドラインフラグまたは環境変数を使用して設定できます。
 

@@ -393,7 +393,7 @@ config set service-middleware audit enable-audit false
 
 -   `GetRegion` : 指定されたリージョンに関する情報を取得する
 -   `GetStore` : 指定された店舗の情報を取得する
--   `GetMembers` : PDクラスタメンバーに関する情報を取得する
+-   `GetMembers` : PDクラスターメンバーに関する情報を取得する
 
 gRPC API リクエストの最大レート（ `GetRegion` API リクエストなど）を制御するには、次のコマンドを実行します。
 
@@ -1103,7 +1103,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     > **注記：**
     >
-    > クラスタコンポーネントがv5.2より前のバージョンの場合、 `query`次元の設定は有効になりません。一部のコンポーネントをv5.2以降にアップグレードした場合でも、 `byte`と`key`次元はデフォルトでホットリージョンスケジューリングの優先権を持ちます。クラスタのすべてのコンポーネントをv5.2以降にアップグレードした後も、互換性のためにこれらの設定は有効になります。7 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
+    > クラスターコンポーネントがv5.2より前のバージョンの場合、 `query`次元の設定は有効になりません。一部のコンポーネントをv5.2以降にアップグレードした場合でも、 `byte`と`key`次元はデフォルトでホットリージョンスケジューリングの優先権を持ちます。クラスターのすべてのコンポーネントをv5.2以降にアップグレードした後も、互換性のためにこれらの設定は有効になります。7 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set read-priorities query,byte

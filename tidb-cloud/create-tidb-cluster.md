@@ -3,7 +3,7 @@ title: Create a TiDB Cloud Dedicated Cluster
 summary: TiDB Cloud Dedicatedクラスターの作成方法を学びましょう。
 ---
 
-# TiDB Cloud Dedicatedクラスタを作成する {#create-a-tidb-cloud-dedicated-cluster}
+# TiDB Cloud Dedicatedクラスターを作成する {#create-a-tidb-cloud-dedicated-cluster}
 
 このチュートリアルでは、TiDB Cloud Dedicatedクラスターへのサインアップと作成の手順を説明します。
 
@@ -20,7 +20,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 -   Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 -   Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
-## ステップ1. TiDB Cloud Dedicatedクラスタを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
+## ステップ1. TiDB Cloud Dedicatedクラスターを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
 
 `Organization Owner`または`Project Owner`の役割を担っている場合は、次のようにしてTiDB Cloud Dedicatedクラスターを作成できます。
 
@@ -32,7 +32,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 2.  **「リソースの作成」を**クリックします。
 
-3.  **「リソースの作成」**ページで**「Dedicated」**を選択し、クラスタ情報を次のように構成します。
+3.  **「リソースの作成」**ページで**「Dedicated」**を選択し、クラスター情報を次のように構成します。
 
     1.  TiDB Cloud Dedicatedクラスターのプロジェクトを選択してください。組織内にプロジェクトがない場合は、 **「プロジェクトの作成」を**クリックして作成できます。
 
@@ -67,7 +67,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 6.  **「作成」**をクリックします。
 
-    TiDB Cloudクラスタの作成には約20～30分かかります。作成が完了すると、 TiDB Cloudコンソールから通知が届きます。
+    TiDB Cloudクラスターの作成には約20～30分かかります。作成が完了すると、 TiDB Cloudコンソールから通知が届きます。
 
     > **注記：**
     >
@@ -85,4 +85,4 @@ TiDB Cloud Dedicatedクラスターの作成が完了したら、以下の手順
 
 ## 次は？ {#what-s-next}
 
-TiDB Cloud DedicatedクラスターがTiDB Cloud上に作成されたら、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)に接続します」で提供されている方法を介してそれに接続できます。
+TiDB Cloud DedicatedクラスターがTiDB Cloud上に作成されたら、 [TiDB Cloud Dedicatedクラスターに接続します](/tidb-cloud/connect-to-tidb-cluster.md)に接続します」で提供されている方法を介してそれに接続できます。

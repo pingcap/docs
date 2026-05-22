@@ -71,7 +71,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   TiKV
 
-    -   tikv-ctl の暗号化デバッグをサポートし、暗号化storageが有効な場合に tikv-ctl を使用してクラスターを操作および管理できるようになりました[＃7698](https://github.com/tikv/tikv/pull/7698)
+    -   tikv-ctl の暗号化デバッグをサポートし、暗号化ストレージが有効な場合に tikv-ctl を使用してクラスターを操作および管理できるようになりました[＃7698](https://github.com/tikv/tikv/pull/7698)
     -   スナップショット[＃7712](https://github.com/tikv/tikv/pull/7712)のロックカラムファミリーの暗号化をサポート
     -   Grafanaダッシュボードのヒートマップを使用して、 Raftstoreのレイテンシーサマリーを表示し、ジッターの問題をより適切に診断します[＃7717](https://github.com/tikv/tikv/pull/7717)
     -   gRPC メッセージのサイズの上限設定をサポート[＃7824](https://github.com/tikv/tikv/pull/7824)
@@ -89,13 +89,13 @@ TiDB バージョン: 4.0.0-rc.2
 
     -   Grafanaの**Read Index**のCountグラフの名前を**Ops**に変更します
     -   システム負荷が低いときにファイル記述子を開くためのデータを最適化して、システムリソースの消費を削減します。
-    -   データstorage容量を制限するために容量関連の設定パラメータを追加します
+    -   データストレージ容量を制限するために容量関連の設定パラメータを追加します
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   tidb-lightning-ctlに`fetch-mode`サブコマンドを追加して、TiKVクラスタモード[＃287](https://github.com/pingcap/tidb-lightning/pull/287)印刷します。
+        -   tidb-lightning-ctlに`fetch-mode`サブコマンドを追加して、TiKVクラスターモード[＃287](https://github.com/pingcap/tidb-lightning/pull/287)印刷します。
 
     -   TiCDC
 
@@ -122,7 +122,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   `IndexMerge` [＃16947](https://github.com/pingcap/tidb/pull/16947)の候補パスを計算するときにインデックスの`TableFilter`失われる問題を修正しました
     -   `MergeJoin`ヒントを使用し、 `TableDual`演算子が存在する場合に物理クエリプランを生成できない問題を修正しました[＃17016](https://github.com/pingcap/tidb/pull/17016)
     -   ステートメントサマリーテーブル[＃17018](https://github.com/pingcap/tidb/pull/17018)の`Stmt_Type`列目の値の大文字と小文字の誤りを修正しました。
-    -   異なるユーザーが同じ`tmp-storage-path` [＃16996](https://github.com/pingcap/tidb/pull/16996)を使用するとサービスを開始できないため、 `Permission Denied`エラーが報告される問題を修正しました。
+    -   異なるユーザーが同じ`tmp-ストレージ-path` [＃16996](https://github.com/pingcap/tidb/pull/16996)を使用するとサービスを開始できないため、 `Permission Denied`エラーが報告される問題を修正しました。
     -   結果の型が`CASE WHEN` [＃16995](https://github.com/pingcap/tidb/pull/16995)などの複数の入力列によって決定される式に対して、 `NotNullFlag`結果の型が誤って設定される問題を修正しました。
     -   ダーティストアが存在する場合にグリーンGCが未解決のロックを残す可能性がある問題を修正[＃16949](https://github.com/pingcap/tidb/pull/16949)
     -   複数の異なるロックを持つ単一のキーに遭遇したときに、グリーンGCが未解決のロックを残す可能性がある問題を修正しました[＃16948](https://github.com/pingcap/tidb/pull/16948)
@@ -152,7 +152,7 @@ TiDB バージョン: 4.0.0-rc.2
 
     -   復元後に多くの空の領域が生成される問題を修正[＃7632](https://github.com/tikv/tikv/pull/7632)
     -   順序がずれたインデックス読み取り応答を受け取ったときにRaftstoreがpanic問題を修正[＃7370](https://github.com/tikv/tikv/pull/7370)
-    -   統合スレッドプールが有効な場合に、無効なstorageまたはコプロセッサ読み取りプール構成が拒否されない可能性がある問題を修正しました[＃7513](https://github.com/tikv/tikv/pull/7513)
+    -   統合スレッドプールが有効な場合に、無効なストレージまたはコプロセッサ読み取りプール構成が拒否されない可能性がある問題を修正しました[＃7513](https://github.com/tikv/tikv/pull/7513)
     -   TiKVサーバーがシャットダウンされたときの`join`操作のpanic問題を修正しました[＃7713](https://github.com/tikv/tikv/pull/7713)
     -   診断API [＃7776](https://github.com/tikv/tikv/pull/7776)経由でTiKVスローログを検索しても結果が返されない問題を修正
     -   TiKVノードが長時間実行されると顕著なメモリ断片化が発生する問題を修正[＃7556](https://github.com/tikv/tikv/pull/7556)

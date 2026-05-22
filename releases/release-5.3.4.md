@@ -41,7 +41,7 @@ TiDB バージョン: 5.3.4
 -   PD
 
     -   PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正[＃5321](https://github.com/tikv/pd/issues/5321)
-    -   特定のシナリオでTiFlash学習者レプリカが作成されない可能性がある問題を修正[＃5401](https://github.com/tikv/pd/issues/5401)
+    -   特定のシナリオでTiFlashラーナーレプリカが作成されない可能性がある問題を修正[＃5401](https://github.com/tikv/pd/issues/5401)
     -   不正確なストリームタイムアウトを修正し、リーダーの切り替えを高速化[＃5207](https://github.com/tikv/pd/issues/5207)
 
 -   TiFlash

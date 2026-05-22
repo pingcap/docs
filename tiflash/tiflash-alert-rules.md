@@ -33,7 +33,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
 -   解決：
 
-    これは、 TiFlashstorageエンジンの内部的な問題が原因である可能性があります。1 [サポートを受ける](/support.md) PingCAP またはコミュニティから提供されました。
+    これは、 TiFlashストレージエンジンの内部的な問題が原因である可能性があります。1 [サポートを受ける](/support.md) PingCAP またはコミュニティから提供されました。
 
 ## <code>TiFlash_raft_read_index_duration</code> {#code-tiflash-raft-read-index-duration-code}
 

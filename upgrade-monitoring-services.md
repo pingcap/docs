@@ -3,7 +3,7 @@ title: Upgrade Cluster Monitoring Services
 summary: TiDB クラスターの Prometheus、Grafana、および Alertmanager 監視サービスをアップグレードする方法を学習します。
 ---
 
-# TiDBクラスタ監視サービスのアップグレード {#upgrade-tidb-cluster-monitoring-services}
+# TiDBクラスター監視サービスのアップグレード {#upgrade-tidb-cluster-monitoring-services}
 
 TiDB クラスターをデプロイすると、 TiUP はクラスターの監視サービス（Prometheus、Grafana、Alertmanager など）を自動的にデプロイします。このクラスターをスケールアウトすると、 TiUP はスケーリング中に新しく追加されたノードの監視設定も自動的に追加します。TiUP によって自動的にデプロイされる監視サービスは、通常、これらのサードパーティ製監視サービスの最新バージョンではありません。最新バージョンを使用するには、こちらのドキュメントに従って監視サービスをアップグレードしてください。
 

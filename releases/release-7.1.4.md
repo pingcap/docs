@@ -29,7 +29,7 @@ TiDBバージョン: 7.1.4
 
 -   PD
 
-    -   バックアップ クラスタが切断されたときに PD がクラスタ ステータスを自動更新する速度を向上[＃6883](https://github.com/tikv/pd/issues/6883) @ [disksing](https://github.com/disksing)
+    -   バックアップ クラスターが切断されたときに PD がクラスター ステータスを自動更新する速度を向上[＃6883](https://github.com/tikv/pd/issues/6883) @ [disksing](https://github.com/disksing)
 
 -   TiFlash
 
@@ -45,7 +45,7 @@ TiDBバージョン: 7.1.4
         -   より効率的なアルゴリズム[＃50613](https://github.com/pingcap/tidb/issues/50613) @ [Leavrth](https://github.com/Leavrth)を使用して、データ復元中に SST ファイルをマージする速度を改善します
         -   データ復元中に SST ファイルをバッチで取り込むことをサポート[＃16267](https://github.com/tikv/tikv/issues/16267) @ [3pointer](https://github.com/3pointer)
         -   ログバックアップ[＃51046](https://github.com/pingcap/tidb/issues/51046) @ [YuJuncen](https://github.com/YuJuncen)中に、ログとメトリックのグローバルチェックポイントの進行に影響を与える最も遅いリージョンの情報を出力します。
-        -   Google Cloud Storage（GCS）を外部storageとして使用する場合の古い互換性チェックを削除します[＃50533](https://github.com/pingcap/tidb/issues/50533) @ [lance6716](https://github.com/lance6716)
+        -   Google Cloud Storage（GCS）を外部ストレージとして使用する場合の古い互換性チェックを削除します[＃50533](https://github.com/pingcap/tidb/issues/50533) @ [lance6716](https://github.com/lance6716)
         -   複数のログバックアップ切り捨てタスク（ `br log truncate` ）が同時に実行されるのを防ぐためのロックメカニズムを実装する[＃49414](https://github.com/pingcap/tidb/issues/49414) @ [YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
@@ -132,8 +132,8 @@ TiDBバージョン: 7.1.4
     -   `MergeLabels`関数が[＃7535](https://github.com/tikv/pd/issues/7535) @ [lhy1024](https://github.com/lhy1024)で呼び出されたときにデータ競合が発生する問題を修正しました
     -   TLS が有効な場合に TiDB ダッシュボードが TiKV プロファイルを取得できない問題を修正[＃7561](https://github.com/tikv/pd/issues/7561) @ [Connor1996](https://github.com/Connor1996)
     -   レプリカ数が要件[＃7584](https://github.com/tikv/pd/issues/7584) @ [bufferflies](https://github.com/bufferflies)を満たしていない場合に孤立ピアが削除される問題を修正しました
-    -   データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`誤って計算される問題を修正[＃7221](https://github.com/tikv/pd/issues/7221) @ [disksing](https://github.com/disksing)
-    -   配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[＃7201](https://github.com/tikv/pd/issues/7201) @ [disksing](https://github.com/disksing)
+    -   データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで`available_stores`誤って計算される問題を修正[＃7221](https://github.com/tikv/pd/issues/7221) @ [disksing](https://github.com/disksing)
+    -   配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[＃7201](https://github.com/tikv/pd/issues/7201) @ [disksing](https://github.com/disksing)
     -   データレプリケーション自動同期（DR自動同期）モード[＃7218](https://github.com/tikv/pd/issues/7218) @ [disksing](https://github.com/disksing)を採用しているクラスターで、セカンダリAZがダウンしているときにプライマリAZがTiKVノードを追加できない問題を修正しました。
     -   リソース グループをバッチでクエリすると PD がpanic[＃7206](https://github.com/tikv/pd/issues/7206) @ [nolouch](https://github.com/nolouch)になる可能性がある問題を修正しました
     -   `pd-ctl`を使用してリーダーのないリージョンを照会すると、PD が[＃7630](https://github.com/tikv/pd/issues/7630) @ [rleungx](https://github.com/rleungx)でpanicになる可能性がある問題を修正しました。
@@ -169,7 +169,7 @@ TiDBバージョン: 7.1.4
         -   極端なケースでチェンジフィード`resolved ts`が進まない問題を修正[＃10157](https://github.com/pingcap/tiflow/issues/10157) @ [sdojjy](https://github.com/sdojjy)
         -   同期ポイントテーブルが誤って複製される可能性がある問題を修正[＃10576](https://github.com/pingcap/tiflow/issues/10576) @ [asddongmen](https://github.com/asddongmen)
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリーム[＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [CharlesCheung96](https://github.com/CharlesCheung96)に複製しない問題を修正しました。
-        -   storageシンク[＃10352](https://github.com/pingcap/tiflow/issues/10352) @ [CharlesCheung96](https://github.com/CharlesCheung96)の使用時に、storageサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。
+        -   ストレージシンク[＃10352](https://github.com/pingcap/tiflow/issues/10352) @ [CharlesCheung96](https://github.com/CharlesCheung96)の使用時に、ストレージサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。
         -   複数のチェンジフィード[＃10430](https://github.com/pingcap/tiflow/issues/10430) @ [CharlesCheung96](https://github.com/CharlesCheung96)を同時に作成すると TiCDC が`ErrChangeFeedAlreadyExists`エラーを返す問題を修正しました
         -   変更フィードを再開するときに`snapshot lost caused by GC`時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB [＃10463](https://github.com/pingcap/tiflow/issues/10463) @ [sdojjy](https://github.com/sdojjy)の GC セーフポイントよりも小さい問題を修正しました。
         -   単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`種類のチェックサムの検証に失敗する問題を修正[＃10573](https://github.com/pingcap/tiflow/issues/10573) @ [3AceShowHand](https://github.com/3AceShowHand)

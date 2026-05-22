@@ -29,7 +29,7 @@ graph TD
 
     ComputeLayer --> StorageLayer
 
-    subgraph StorageLayer["storage layer"]
+    subgraph StorageLayer["ストレージ layer"]
         TiKV1[TiKV] ~~~ TiKV2[TiKV] ~~~ TiFlash[TiFlash]
     end
 
@@ -89,7 +89,7 @@ TiProxyは、以下のシナリオに適しています。
 TiProxyは、以下のシナリオには適していません。
 
 -   パフォーマンスに敏感: TiProxy のパフォーマンスは HAProxy や他のロードバランサーよりも低いため、TiProxy を使用する場合は、同様のパフォーマンスレベルを維持するためにより多くの CPU リソースを確保する必要があります。詳細については、 [TiProxyのパフォーマンステストレポート](/tiproxy/tiproxy-performance-test.md)を参照してください。
--   コストに敏感な場合：TiDBクラスタがハードウェアロードバランサー、仮想IP、またはKubernetesが提供するロードバランサーを使用している場合、TiProxyを追加するとコストが増加します。さらに、クラウド上のアベイラビリティゾーンにまたがってTiDBクラスタをデプロイする場合、TiProxyを追加するとアベイラビリティゾーン間のトラフィックコストも増加します。
+-   コストに敏感な場合：TiDBクラスターがハードウェアロードバランサー、仮想IP、またはKubernetesが提供するロードバランサーを使用している場合、TiProxyを追加するとコストが増加します。さらに、クラウド上のアベイラビリティゾーンにまたがってTiDBクラスターをデプロイする場合、TiProxyを追加するとアベイラビリティゾーン間のトラフィックコストも増加します。
 -   予期せぬTiDBサーバーのダウンタイムに対するフェイルオーバー：TiProxyは、TiDBサーバーがオフラインになった場合、または計画通りに再起動された場合にのみ、クライアント接続を維持できます。TiDBサーバーが予期せずオフラインになった場合、接続は切断されます。
 
 TiProxyが適しているシナリオではTiProxyを使用し、アプリケーションのパフォーマンスが重要な場合はHAProxyなどの他のプロキシを使用することをお勧めします。
@@ -109,7 +109,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
 ### TiProxyでクラスターを作成する {#create-a-cluster-with-tiproxy}
 
-以下の手順では、新しいクラスタを作成する際に TiProxy をデプロイする方法について説明します。
+以下の手順では、新しいクラスターを作成する際に TiProxy をデプロイする方法について説明します。
 
 1.  TiDBインスタンスを設定します。
 
@@ -131,11 +131,11 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
     -   ワークロードの種類と最大 QPS に基づいて、TiProxy インスタンスのモデルと数を選択します。詳細については、 [TiProxyのパフォーマンステストレポート](/tiproxy/tiproxy-performance-test.md)参照してください。
     -   TiProxyインスタンスは通常TiDBサーバーインスタンスよりも少ないため、TiProxyのネットワーク帯域幅がボトルネックになりやすくなります。たとえば、AWSでは、同じシリーズのEC2インスタンスのベースラインネットワーク帯域幅はCPUコア数に比例しません。ネットワーク帯域幅がボトルネックになった場合は、TiProxyインスタンスをより多くの小さなインスタンスに分割してQPSを向上させることができます。詳細については、 [ネットワーク仕様](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network)参照してください。
-    -   トポロジ構成ファイルでTiProxyのバージョンを指定することをお勧めします。これにより、TiDBクラスタをアップグレードするためにコマンド[`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)を実行した際にTiProxyが自動的にアップグレードされるのを防ぎ、TiProxyのアップグレードによってクライアント接続が切断されるのを防止できます。
+    -   トポロジ構成ファイルでTiProxyのバージョンを指定することをお勧めします。これにより、TiDBクラスターをアップグレードするためにコマンド[`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)を実行した際にTiProxyが自動的にアップグレードされるのを防ぎ、TiProxyのアップグレードによってクライアント接続が切断されるのを防止できます。
 
     TiProxy のテンプレートの詳細については、 [TiProxyトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)参照してください。
 
-    TiDBクラスタトポロジファイル内の構成項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジーコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)参照してください。
+    TiDBクラスタートポロジファイル内の構成項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)参照してください。
 
     設定例は以下のとおりです。
 
@@ -161,7 +161,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
 4.  TiProxyに接続します。
 
-    クラスタがデプロイされると、TiDBサーバーポートとTiProxyポートが同時に公開されます。クライアントはTiDBサーバーに直接接続するのではなく、TiProxyポートに接続する必要があります。
+    クラスターがデプロイされると、TiDBサーバーポートとTiProxyポートが同時に公開されます。クライアントはTiDBサーバーに直接接続するのではなく、TiProxyポートに接続する必要があります。
 
 ### 既存のクラスターでTiProxyを有効にする {#enable-tiproxy-for-an-existing-cluster}
 
@@ -231,7 +231,7 @@ TiUPを使用してTiProxyの設定を変更する場合、変更する設定項
 
 ### TiProxyをアップグレードする {#upgrade-tiproxy}
 
-TiProxyをデプロイする際には、TiDBクラスタをアップグレードした際にTiProxyもアップグレードされないように、TiProxyのバージョンを指定することをお勧めします。
+TiProxyをデプロイする際には、TiDBクラスターをアップグレードした際にTiProxyもアップグレードされないように、TiProxyのバージョンを指定することをお勧めします。
 
 TiProxyをアップグレードする必要がある場合は、アップグレードコマンドに[`--tiproxy-version`](/tiup/tiup-component-cluster-upgrade.md#--tiproxy-version)を追加してTiProxyのバージョンを指定してください。
 

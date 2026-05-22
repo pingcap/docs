@@ -98,12 +98,12 @@ TiDB バージョン: 7.1.2
     -   アクセスパスプルーニングロジックが`READ_FROM_STORAGE(TIFLASH[...])`ヒントを無視し、 `Can't find a proper physical plan`エラー[＃40146](https://github.com/pingcap/tidb/issues/40146) @ [AilinKid](https://github.com/AilinKid)が発生する問題を修正しました。
     -   CAST に精度損失がないのに条件`cast(col)=range`で FullScan が発生する問題を修正[＃45199](https://github.com/pingcap/tidb/issues/45199) @ [AilinKid](https://github.com/AilinKid)
     -   `plan replayer dump explain`エラー[＃46197](https://github.com/pingcap/tidb/issues/46197) @ [time-and-fate](https://github.com/time-and-fate)を報告する問題を修正
-    -   `tmp-storage-quota`設定が[＃45161](https://github.com/pingcap/tidb/issues/45161) [＃26806](https://github.com/pingcap/tidb/issues/26806) @ [wshwsh12](https://github.com/wshwsh12)で有効にならない問題を修正
+    -   `tmp-ストレージ-quota`設定が[＃45161](https://github.com/pingcap/tidb/issues/45161) [＃26806](https://github.com/pingcap/tidb/issues/26806) @ [wshwsh12](https://github.com/wshwsh12)で有効にならない問題を修正
     -   TiDBパーサーが状態のままになり、解析エラーが発生する問題を修正[＃45898](https://github.com/pingcap/tidb/issues/45898) @ [qw4990](https://github.com/qw4990)
     -   MPP実行プランで集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[＃45850](https://github.com/pingcap/tidb/issues/45850) @ [AilinKid](https://github.com/AilinKid)
     -   `AUTO_ID_CACHE=1` [＃46454](https://github.com/pingcap/tidb/issues/46454) @ [tiancaiamao](https://github.com/tiancaiamao)に設定されている場合に、panic後に TiDB がゆっくりと回復する問題を修正しました。
     -   ソート演算子がスピルプロセス中に TiDB をクラッシュさせる可能性がある問題を修正[＃47538](https://github.com/pingcap/tidb/issues/47538) @ [windtalker](https://github.com/windtalker)
-    -   BRを使用して`AUTO_ID_CACHE=1` [＃46093](https://github.com/pingcap/tidb/issues/46093) @ [tiancaiamao](https://github.com/tiancaiamao)の非クラスタ化インデックステーブルを復元するときに重複する主キーの問題を修正しました。
+    -   BRを使用して`AUTO_ID_CACHE=1` [＃46093](https://github.com/pingcap/tidb/issues/46093) @ [tiancaiamao](https://github.com/tiancaiamao)の非クラスター化インデックステーブルを復元するときに重複する主キーの問題を修正しました。
     -   静的プルーニングモードでパーティションテーブルをクエリし、実行プランに`IndexLookUp` [＃45757](https://github.com/pingcap/tidb/issues/45757) @ [Defined2014](https://github.com/Defined2014)が含まれている場合にクエリがエラーを報告する可能性がある問題を修正しました。
     -   パーティションテーブルと配置ポリシー[＃45791](https://github.com/pingcap/tidb/issues/45791) @ [mjonss](https://github.com/mjonss)テーブル間でパーティションを交換した後に、パーティションテーブルへのデータの挿入が失敗する可能性がある問題を修正しました。
     -   タイムゾーン情報が正しくない時間フィールドをエンコードする問題を修正[＃46033](https://github.com/pingcap/tidb/issues/46033) @ [tangenta](https://github.com/tangenta)
@@ -138,7 +138,7 @@ TiDB バージョン: 7.1.2
 -   PD
 
     -   v2 スケジューラ アルゴリズム[＃6645](https://github.com/tikv/pd/issues/6645) @ [lhy1024](https://github.com/lhy1024)でホット リージョンがスケジュールされない可能性がある問題を修正しました
-    -   TLSハンドシェイクにより空のクラスタ[＃6913](https://github.com/tikv/pd/issues/6913) @ [nolouch](https://github.com/nolouch)でCPU使用率が上昇する可能性がある問題を修正
+    -   TLSハンドシェイクにより空のクラスター[＃6913](https://github.com/tikv/pd/issues/6913) @ [nolouch](https://github.com/nolouch)でCPU使用率が上昇する可能性がある問題を修正
     -   PDノード間の注入エラーによりPDpanic[＃6858](https://github.com/tikv/pd/issues/6858) @ [HuSharp](https://github.com/HuSharp)が発生する可能性がある問題を修正しました
     -   ストア情報の同期によりPDリーダーが終了し、 [＃6918](https://github.com/tikv/pd/issues/6918) @ [rleungx](https://github.com/rleungx)で停止する可能性がある問題を修正しました。
     -   フラッシュバック[＃6912](https://github.com/tikv/pd/issues/6912) @ [overvenus](https://github.com/overvenus)後にリージョン情報が更新されない問題を修正
@@ -152,7 +152,7 @@ TiDB バージョン: 7.1.2
     -   ルールチェッカーがピア[＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)を選択した場合に、不健全なピアを削除できない問題を修正しました
     -   etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanic[＃6860](https://github.com/tikv/pd/issues/6860) @ [HuSharp](https://github.com/HuSharp)になる可能性がある問題を修正しました。
     -   RU消費量が0未満の場合にPDが[＃6973](https://github.com/tikv/pd/issues/6973) @ [CabinfeverB](https://github.com/CabinfeverB)でクラッシュする問題を修正
-    -   クラスタが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
+    -   クラスターが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
 
 -   TiFlash
 
@@ -178,7 +178,7 @@ TiDB バージョン: 7.1.2
     -   TiCDC
 
         -   異常な状態のレプリケーションタスクが上流のGC [＃9543](https://github.com/pingcap/tiflow/issues/9543) @ [CharlesCheung96](https://github.com/CharlesCheung96)をブロックする問題を修正しました
-        -   オブジェクトstorageにデータを複製するとデータの不整合が発生する可能性がある問題を修正[＃9592](https://github.com/pingcap/tiflow/issues/9592) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージにデータを複製するとデータの不整合が発生する可能性がある問題を修正[＃9592](https://github.com/pingcap/tiflow/issues/9592) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   `redo-resolved-ts`有効にすると、changefeed が失敗する可能性がある問題を修正[＃9769](https://github.com/pingcap/tiflow/issues/9769) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   間違ったメモリ情報を取得すると、一部のオペレーティングシステムで OOM 問題が発生する可能性がある問題を修正[＃9762](https://github.com/pingcap/tiflow/issues/9762) @ [sdojjy](https://github.com/sdojjy)
         -   `scale-out`が有効になっている場合のノード間の書き込みキーの不均等な配布の問題を修正[＃9665](https://github.com/pingcap/tiflow/issues/9665) @ [sdojjy](https://github.com/sdojjy)
@@ -211,7 +211,7 @@ TiDB バージョン: 7.1.2
         -   `AUTO_ID_CACHE=1`を含むテーブルをインポートするときに、間違った`row_id`が[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)に割り当てられる問題を修正しました
         -   `NEXT_GLOBAL_ROW_ID` [＃45427](https://github.com/pingcap/tidb/issues/45427) @ [lyzx2001](https://github.com/lyzx2001)を保存するときにデータ型が間違っている問題を修正しました
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
-        -   PDクラスタアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
+        -   PDクラスターアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [lance6716](https://github.com/lance6716)
         -   CSVデータ[＃43284](https://github.com/pingcap/tidb/issues/43284) @ [lyzx2001](https://github.com/lyzx2001)をインポートする際にルートがpanicになる可能性がある問題を修正
 

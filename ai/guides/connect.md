@@ -51,7 +51,7 @@ db = TiDBClient.connect(
 </div>
 <div label="TiDB Self-Managed">
 
-[TiDBセルフマネージドのクイックスタート](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)スタートに従って、テスト用にTiDBクラスターをデプロイします。
+[TiDB Self-Managedのクイックスタート](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)スタートに従って、テスト用にTiDBクラスターをデプロイします。
 
 サンプルコード：
 
@@ -69,7 +69,7 @@ db = TiDBClient.connect(
 
 > **注記：**
 >
-> テスト用にTiDBクラスタをデプロイするために`tiup playground`を使用する場合、デフォルトのホストは`127.0.0.1`で、デフォルトのパスワードは空です。
+> テスト用にTiDBクラスターをデプロイするために`tiup playground`を使用する場合、デフォルトのホストは`127.0.0.1`で、デフォルトのパスワードは空です。
 
 </div>
 </SimpleTab>
@@ -116,7 +116,7 @@ db = TiDBClient.connect(
 
 > **注記：**
 >
-> `tiup playground`を使用してテスト用のTiDBクラスタをデプロイする場合、接続文字列は次のとおりです。
+> `tiup playground`を使用してテスト用のTiDBクラスターをデプロイする場合、接続文字列は次のとおりです。
 >
 >     mysql+pymysql://root:@127.0.0.1:4000/test
 

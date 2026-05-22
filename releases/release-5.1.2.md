@@ -138,7 +138,7 @@ TiDB バージョン: 5.1.2
     -   Dumpling
 
         -   一部のMySQLバージョン（8.0.3および8.0.23）で`show table status`誤った結果を返すときにDumplingが保留になる問題を修正しました[＃322](https://github.com/pingcap/dumpling/issues/322)
-        -   デフォルト`sort-engine`オプション[＃2373](https://github.com/pingcap/tiflow/issues/2373)の 4.0.x クラスタでの CLI 互換性の問題を修正しました
+        -   デフォルト`sort-engine`オプション[＃2373](https://github.com/pingcap/tiflow/issues/2373)の 4.0.x クラスターでの CLI 互換性の問題を修正しました
 
     -   TiCDC
 

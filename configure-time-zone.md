@@ -5,7 +5,7 @@ summary: TiDBのタイムゾーン設定は、time_zone`システム変数によ
 
 # タイムゾーンのサポート {#time-zone-support}
 
-TiDBのタイムゾーンは、システム変数[`time_zone`](/system-variables.md#time_zone)によって決定されます。セッションレベルまたはグローバルレベルで設定できます。デフォルト値は`time_zone`で、 `SYSTEM`です`SYSTEM`に対応する実際のタイムゾーンは、TiDBクラスタのブートストラップが初期化される際に設定されます。詳細なロジックは次のとおりです。
+TiDBのタイムゾーンは、システム変数[`time_zone`](/system-variables.md#time_zone)によって決定されます。セッションレベルまたはグローバルレベルで設定できます。デフォルト値は`time_zone`で、 `SYSTEM`です`SYSTEM`に対応する実際のタイムゾーンは、TiDBクラスターのブートストラップが初期化される際に設定されます。詳細なロジックは次のとおりです。
 
 1.  TiDB は`TZ`環境変数の使用を優先します。
 2.  `TZ`環境変数が失敗した場合、TiDB は`/etc/localtime`ソフト リンクからタイム ゾーンを読み取ります。

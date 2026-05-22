@@ -3,9 +3,9 @@ title: Maintain a TiFlash Cluster
 summary: TiFlashクラスターを保守する際の一般的な操作を学習します。
 ---
 
-# TiFlashクラスタを管理 {#maintain-a-tiflash-cluster}
+# TiFlashクラスターを管理 {#maintain-a-tiflash-cluster}
 
-このドキュメントでは、 TiFlash のバージョン確認など、 [TiFlash](/tiflash/tiflash-overview.md)クラスタのメンテナンス時によく行われる操作について説明します。また、 TiFlashの重要なログとシステムテーブルについても紹介します。
+このドキュメントでは、 TiFlash のバージョン確認など、 [TiFlash](/tiflash/tiflash-overview.md)クラスターのメンテナンス時によく行われる操作について説明します。また、 TiFlashの重要なログとシステムテーブルについても紹介します。
 
 ## TiFlashのバージョンを確認する {#check-the-tiflash-version}
 

@@ -3,9 +3,9 @@ title: Configure Cluster Password Settings
 summary: TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードの設定方法を学びましょう。
 ---
 
-# クラスタパスワード設定の構成 {#configure-cluster-password-settings}
+# クラスターパスワード設定の構成 {#configure-cluster-password-settings}
 
-TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を許可するIPアドレスを設定できます。
+TiDB Cloud Dedicatedクラスターの場合、ルートパスワードと接続を許可するIPアドレスを設定できます。
 
 > **注記：**
 >

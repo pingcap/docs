@@ -71,9 +71,9 @@ TiDB バージョン: 6.1.0
 
     [ユーザードキュメント](/tune-region-performance.md#use-bucket-to-increase-concurrency) [＃11515](https://github.com/tikv/tikv/issues/11515)
 
--   Use Raft Engine as the default log storage engine
+-   Use Raft Engine as the default log ストレージ engine
 
-    v6.1.0以降、TiDBはログのデフォルトstorageエンジンとしてRaft Engineを使用しています。RocksDBと比較して、 Raft EngineはTiKV I/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、フォアグラウンドスループットを約5%向上させ、特定の負荷下ではテールレイテンシーを20%削減します。
+    v6.1.0以降、TiDBはログのデフォルトストレージエンジンとしてRaft Engineを使用しています。RocksDBと比較して、 Raft EngineはTiKV I/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、フォアグラウンドスループットを約5%向上させ、特定の負荷下ではテールレイテンシーを20%削減します。
 
     [ユーザードキュメント](/tikv-configuration-file.md#raft-engine) [＃95](https://github.com/tikv/raft-engine/issues/95)
 
@@ -82,7 +82,7 @@ TiDB バージョン: 6.1.0
     -   The `LEADING` hint reminds the optimizer to use the specified order as the prefix of join operations. A good prefix of join can quickly reduce the amount of data at the early phase of join and improve the query performance.
     -   `STRAIGHT_JOIN`ヒントは、 `FROM`句内のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザーに通知します。
 
-    これにより、テーブル結合の順序を固定することができます。ヒントを適切に使用することで、SQLパフォーマンスとクラスタの安定性を効果的に向上させることができます。
+    これにより、テーブル結合の順序を固定することができます。ヒントを適切に使用することで、SQLパフォーマンスとクラスターの安定性を効果的に向上させることができます。
 
     [＃29932](https://github.com/pingcap/tidb/issues/29932) [`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join) : [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-)
 
@@ -105,25 +105,25 @@ TiDB バージョン: 6.1.0
 
 -   SST 破損からの自動回復
 
-    RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けたピアのスケジュールを設定し、他のレプリカを使用してそのデータの復旧を試みます。パラメータ`background-error-recovery-window`を使用して、復旧の最大許容時間を設定できます。復旧操作が指定時間内に完了しない場合、TiKVはpanicになります。この機能は、復旧可能な破損storageを自動的に検出して復旧するため、クラスターの安定性が向上します。
+    RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けたピアのスケジュールを設定し、他のレプリカを使用してそのデータの復旧を試みます。パラメータ`background-error-recovery-window`を使用して、復旧の最大許容時間を設定できます。復旧操作が指定時間内に完了しない場合、TiKVはpanicになります。この機能は、復旧可能な破損ストレージを自動的に検出して復旧するため、クラスターの安定性が向上します。
 
     [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578)
 
 -   非トランザクションDMLステートメントをサポートする
 
-    大規模データ処理のシナリオでは、大規模なトランザクションを伴う単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。TiDB v6.1.0以降、 `DELETE` SQL文を複数のSQL文に分割してバッチ処理する構文がサポートされています。分割文はトランザクションの原子性と独立性を損なう可能性がありますが、クラスタの安定性を大幅に向上させます。詳細な構文については、 [`BATCH`](/sql-statements/sql-statement-batch.md)参照してください。
+    大規模データ処理のシナリオでは、大規模なトランザクションを伴う単一のSQL文が、クラスターの安定性とパフォーマンスに悪影響を及ぼす可能性があります。TiDB v6.1.0以降、 `DELETE` SQL文を複数のSQL文に分割してバッチ処理する構文がサポートされています。分割文はトランザクションの原子性と独立性を損なう可能性がありますが、クラスターの安定性を大幅に向上させます。詳細な構文については、 [`BATCH`](/sql-statements/sql-statement-batch.md)参照してください。
 
     [User document](/non-transactional-dml.md)
 
 -   TiDBは最大GC待機時間の設定をサポートしています
 
-    TiDB のトランザクションは、マルチバージョン同時実行制御 (MVCC) メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが格納されます。古いデータはガベージコレクション (GC) タスクによって定期的にクリーンアップされ、storageスペースの再利用を促進してクラスターのパフォーマンスと安定性を向上させます。GC は、デフォルトでは 10 分ごとにトリガーされます。長時間実行トランザクションが対応する履歴データにアクセスできるようにするため、実行中のトランザクションがある場合は GC タスクが遅延されます。GC タスクが無期限に遅延されないように、TiDB は GC タスクの最大遅延時間を制御するシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)導入しています。最大遅延時間を超えると、GC は強制的に実行されます。変数のデフォルト値は 24 時間です。この機能により、GC の待機時間と長時間実行トランザクションの関係を制御でき、クラスターの安定性が向上します。
+    TiDB のトランザクションは、マルチバージョン同時実行制御 (MVCC) メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが格納されます。古いデータはガベージコレクション (GC) タスクによって定期的にクリーンアップされ、ストレージスペースの再利用を促進してクラスターのパフォーマンスと安定性を向上させます。GC は、デフォルトでは 10 分ごとにトリガーされます。長時間実行トランザクションが対応する履歴データにアクセスできるようにするため、実行中のトランザクションがある場合は GC タスクが遅延されます。GC タスクが無期限に遅延されないように、TiDB は GC タスクの最大遅延時間を制御するシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)導入しています。最大遅延時間を超えると、GC は強制的に実行されます。変数のデフォルト値は 24 時間です。この機能により、GC の待機時間と長時間実行トランザクションの関係を制御でき、クラスターの安定性が向上します。
 
     [ユーザードキュメント](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
 -   TiDBは自動統計収集タスクの最大実行時間の設定をサポートします
 
-    データベースは統計情報を収集することでデータの分布を効果的に把握し、合理的な実行計画を生成してSQL実行の効率を向上させることができます。TiDBは、頻繁に変更されるデータオブジェクトの統計をバックグラウンドで定期的に収集します。しかし、統計の収集はクラスタリソースを消費するため、ビジネスピーク時にはビジネスの安定運用に影響を与える可能性があります。
+    データベースは統計情報を収集することでデータの分布を効果的に把握し、合理的な実行計画を生成してSQL実行の効率を向上させることができます。TiDBは、頻繁に変更されるデータオブジェクトの統計をバックグラウンドで定期的に収集します。しかし、統計の収集はクラスターリソースを消費するため、ビジネスピーク時にはビジネスの安定運用に影響を与える可能性があります。
 
     v6.1.0以降、TiDBはバックグラウンド統計収集の最大実行時間を制御するための[`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)導入しました。これはデフォルトで12時間です。アプリケーションがリソースのボトルネックに遭遇しない場合は、TiDBがタイムリーに統計を収集できるように、この変数を変更しないことを推奨します。
 
@@ -145,9 +145,9 @@ TiDB バージョン: 6.1.0
 
 -   TiDB、TiKV、およびTiFlash構成の動的な変更をサポート
 
-    以前のバージョンのTiDBでは、設定項目を変更した後、変更を有効にするにはクラスタを再起動する必要がありました。これにより、オンラインサービスが中断される可能性がありました。この問題に対処するため、TiDB v6.1.0では動的設定機能が導入され、クラスタを再起動せずにパラメータ変更を検証できるようになりました。具体的な最適化は以下の通りです。
+    以前のバージョンのTiDBでは、設定項目を変更した後、変更を有効にするにはクラスターを再起動する必要がありました。これにより、オンラインサービスが中断される可能性がありました。この問題に対処するため、TiDB v6.1.0では動的設定機能が導入され、クラスターを再起動せずにパラメータ変更を検証できるようになりました。具体的な最適化は以下の通りです。
 
-    -   TiDBの一部の設定項目をシステム変数に変換し、動的に変更・保存できるようにします。変換後は元の設定項目は非推奨となることに注意してください。変換後の設定項目の詳細なリストについては、 [コンフィグレーションファイルのパラメータ](#configuration-file-parameters)参照してください。
+    -   TiDBの一部の設定項目をシステム変数に変換し、動的に変更・保存できるようにします。変換後は元の設定項目は非推奨となることに注意してください。変換後の設定項目の詳細なリストについては、 [設定ファイルのパラメータ](#configuration-file-parameters)参照してください。
     -   Support configuring some TiKV parameters online. For a detailed list of the parameters, see [その他](#others).
     -   TiFlash構成項目`max_threads`システム変数`tidb_max_tiflash_threads`に変換し、構成を動的に変更して永続化できるようにします。変換後も元の構成項目は保持されることに注意してください。
 
@@ -164,22 +164,22 @@ TiDB バージョン: 6.1.0
 
     `enable-global-kill`構成 (デフォルトで有効) を使用して、グローバル キル機能を制御できます。
 
-    TiDB v6.1.0より前のバージョンでは、操作が大量のリソースを消費し、クラスタの安定性に問題が発生する場合、対象のTiDBインスタンスに接続してから`KILL TIDB ${id};`のコマンドを実行して対象の接続と操作を終了する必要がありました。多くのTiDBインスタンスの場合、この方法は使いにくく、誤操作が発生しやすいという問題がありました。v6.1.0以降では、 `enable-global-kill`構成が導入され、デフォルトで有効になっています。クライアントとTiDBの間にプロキシがある場合、他のクエリやセッションを誤って終了してしまう心配なく、任意のTiDBインスタンスでkillコマンドを実行して、指定した接続と操作を終了できます。現在、TiDBはCtrl+Cを使用してクエリまたはセッションを終了することをサポートしていません。
+    TiDB v6.1.0より前のバージョンでは、操作が大量のリソースを消費し、クラスターの安定性に問題が発生する場合、対象のTiDBインスタンスに接続してから`KILL TIDB ${id};`のコマンドを実行して対象の接続と操作を終了する必要がありました。多くのTiDBインスタンスの場合、この方法は使いにくく、誤操作が発生しやすいという問題がありました。v6.1.0以降では、 `enable-global-kill`構成が導入され、デフォルトで有効になっています。クライアントとTiDBの間にプロキシがある場合、他のクエリやセッションを誤って終了してしまう心配なく、任意のTiDBインスタンスでkillコマンドを実行して、指定した接続と操作を終了できます。現在、TiDBはCtrl+Cを使用してクエリまたはセッションを終了することをサポートしていません。
 
     [ユーザードキュメント](/tidb-configuration-file.md#enable-global-kill-new-in-v610) [＃8854](https://github.com/pingcap/tidb/issues/8854)
 
 -   TiKV API V2 (実験的)
 
-    v6.1.0 より前では、TiKV が Raw Key Valuestorageとして使用される場合、TiKV はクライアントから渡された生データのみを保存するため、基本的な Key Value の読み取りおよび書き込み機能のみを提供します。
+    v6.1.0 より前では、TiKV が Raw Key Valueストレージとして使用される場合、TiKV はクライアントから渡された生データのみを保存するため、基本的な Key Value の読み取りおよび書き込み機能のみを提供します。
 
-    TiKV API V2 は、次のような新しい Raw Key Valuestorage形式とアクセス インターフェイスを提供します。
+    TiKV API V2 は、次のような新しい Raw Key Valueストレージ形式とアクセス インターフェイスを提供します。
 
     -   データはMVCCに保存され、データの変更タイムスタンプが記録されます。この機能は、変更データキャプチャ（CDC）と増分バックアップ・リストアの実装の基盤となります。
     -   データはさまざまな使用法に応じてスコープ設定され、単一の TiDB クラスター、トランザクション KV、RawKV アプリケーションの共存をサポートします。
 
     <Warning>
 
-    基盤となるstorage形式に大幅な変更が加えられたため、API V2 を有効にすると、TiKV クラスターを v6.1.0 より前のバージョンにロールバックできなくなります。TiKV をダウングレードすると、データが破損する可能性があります。
+    基盤となるストレージ形式に大幅な変更が加えられたため、API V2 を有効にすると、TiKV クラスターを v6.1.0 より前のバージョンにロールバックできなくなります。TiKV をダウングレードすると、データが破損する可能性があります。
 
     </Warning>
 
@@ -252,9 +252,9 @@ TiDB バージョン: 6.1.0
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                             | 新しく追加された    | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 以降ではシステム変数に変更されました。                                             |
 | [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)                                   | 新しく追加された    | この変数は、TiDB 統計キャッシュのメモリクォータを設定します。                                                                                                            |
 
-### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
+### 設定ファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーション                                                                                                                                                                                             | タイプを変更   | 説明                                                                                                                                            |
+| 設定ファイル | 設定                                                                                                                                                                                             | タイプを変更   | 説明                                                                                                                                            |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `committer-concurrency`                                                                                                                                                                                | 削除済み     | システム変数`tidb_committer_concurrency`に置き換えられました。この構成項目は無効になりました。値を変更する場合は、対応するシステム変数を変更する必要があります。                                                |
 | TiDB           | `lower-case-table-names`                                                                                                                                                                               | 削除済み     | 現在、TiDBは`lower_case_table_name=2`のみをサポートしています。別の値が設定されている場合は、クラスターをv6.1.0にアップグレードした後にその値は失われます。                                               |
@@ -276,8 +276,8 @@ TiDB バージョン: 6.1.0
 | TiKV           | [`causal-ts.renew-interval`](/tikv-configuration-file.md#renew-interval)                                                                                                                               | 新しく追加された | The interval at which the locally cached timestamps are refreshed.                                                                            |
 | TiKV           | [`max-snapshot-file-raw-size`](/tikv-configuration-file.md#max-snapshot-file-raw-size-new-in-v610)                                                                                                     | 新しく追加された | スナップショット ファイルのサイズがこの値を超えると、スナップショット ファイルは複数のファイルに分割されます。                                                                                      |
 | TiKV           | [`raft-engine.memory-limit`](/tikv-configuration-file.md#memory-limit)                                                                                                                                 | 新しく追加された | Raft Engineのメモリ使用量の制限を指定します。                                                                                                                  |
-| TiKV           | [`storage.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610)                                                                                 | 新しく追加された | The maximum recovery time is allowed after RocksDB detects a recoverable background error.                                                    |
-| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が生のキー値ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェース バージョン。                                                                              |
+| TiKV           | [`ストレージ.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610)                                                                                 | 新しく追加された | The maximum recovery time is allowed after RocksDB detects a recoverable background error.                                                    |
+| TiKV           | [`ストレージ.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が生のキー値ストアとして機能するときに TiKV によって使用されるストレージ形式とインターフェース バージョン。                                                                              |
 | PD             | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610)                                                                                                  | 新しく追加された | ストアがオンラインになるまでの最大待機時間を制御します。                                                                                                                  |
 | TiCDC          | [`enable-tls`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)                                                                                                                             | 新しく追加された | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか。                                                                                                  |
 | TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細については[`kafka`でシンクURIを設定する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)参照してください。      |
@@ -297,7 +297,7 @@ TiDB バージョン: 6.1.0
 
     新しいクラスターでは、 プリペアドプランキャッシュがデフォルトで有効化され、リクエストの`Prepare` `Execute`実行プランをキャッシュします。以降の実行では、クエリプランの最適化をスキップできるため、パフォーマンスが向上します。アップグレードされたクラスターは、設定ファイルから設定を継承します。新しいクラスターは新しいデフォルト値を使用するため、 プリペアドプランキャッシュ はデフォルトで有効化され、各セッションで最大100プランをキャッシュできます ( `capacity=100` )。この機能のメモリ消費量については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)参照してください。
 
--   TiDB v6.1.0より前のバージョンでは、 `SHOW ANALYZE STATUS`インスタンスレベルのタスクを示し、タスクレコードはTiDBの再起動後に消去されます。TiDB v6.1.0以降では、 `SHOW ANALYZE STATUS`クラスタレベルのタスクを示し、タスクレコードは再起動後も保持されます。5 `tidb_analyze_version = 2`場合、 `Job_info`列に`analyze option`情報が追加されます。
+-   TiDB v6.1.0より前のバージョンでは、 `SHOW ANALYZE STATUS`インスタンスレベルのタスクを示し、タスクレコードはTiDBの再起動後に消去されます。TiDB v6.1.0以降では、 `SHOW ANALYZE STATUS`クラスターレベルのタスクを示し、タスクレコードは再起動後も保持されます。5 `tidb_analyze_version = 2`場合、 `Job_info`列に`analyze option`情報が追加されます。
 
 -   TiKV内のSSTファイルが破損すると、TiKVプロセスがpanicになる可能性があります。TiDB v6.1.0より前では、SSTファイルが破損するとTiKVは直ちにpanic状態になりました。TiDB v6.1.0以降では、SSTファイルが破損してから1時間後にTiKVプロセスがpanicになります。
 

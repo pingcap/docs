@@ -47,4 +47,4 @@ streamlit run app.py
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/text2sql)
+-   **ソースコード**： [GitHubで確認](https://github.com/pingcap/pytidb/tree/main/examples/text2sql)

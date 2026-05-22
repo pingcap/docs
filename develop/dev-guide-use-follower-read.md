@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-follower-read/','/ja/tidbcloud/dev-guid
 
 ## 導入 {#introduction}
 
-TiDBは、 [リージョン](/tidb-storage.md#region)基本単位として、クラスター内のすべてのノードにデータを分散します。リージョンには複数のレプリカを配置でき、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDBはフォロワーのデータも同期的に更新します。
+TiDBは、 [リージョン](/tidb-ストレージ.md#region)基本単位として、クラスター内のすべてのノードにデータを分散します。リージョンには複数のレプリカを配置でき、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDBはフォロワーのデータも同期的に更新します。
 
 デフォルトでは、TiDB は同じリージョンのリーダーに対してのみデータの読み取りと書き込みを行います。リージョン内で読み取りホットスポットが発生すると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。このような状況では、Follower Read機能を有効にすると、リーダーの負荷を大幅に軽減し、複数のフォロワー間で負荷を分散することでシステム全体のスループットを向上させることができます。
 
@@ -21,7 +21,7 @@ TiDBは、 [リージョン](/tidb-storage.md#region)基本単位として、ク
 次のいずれかを実行すると、アプリケーションにホットスポットリージョンがあるかどうかを視覚的に分析できます。
 
 -   TiDB Cloud: [TiDB Cloudコンソールのキー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)に移動し、「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択して、読み取りホットスポットが発生するかどうかを確認します。
--   TiDB セルフマネージド: [TiDBダッシュボードのキービジュアライザー](/dashboard/dashboard-key-visualizer.md)に移動し、「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択して、読み取りホットスポットが発生するかどうかを確認します。
+-   TiDB Self-Managed: [TiDBダッシュボードのキービジュアライザー](/dashboard/dashboard-key-visualizer.md)に移動し、「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択して、読み取りホットスポットが発生するかどうかを確認します。
 
 ホットスポットの問題が存在する場合は、 [TiDBホットスポットの問題の処理](/troubleshoot-hot-spot-issues.md)を参照してトラブルシューティングを行うことができます。これにより、アプリケーション レベルでのホットスポットの生成を回避することができます。
 
@@ -140,10 +140,10 @@ public static class AuthorDAO {
 -   [Follower Read](/follower-read.md)
 -   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
 -   [TiDB Cloudコンソールのキー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
--   [TiDBセルフマネージド向けTiDBダッシュボードのキービジュアライザー](/dashboard/dashboard-key-visualizer.md)
+-   [TiDB Self-Managed向けTiDBダッシュボードのキービジュアライザー](/dashboard/dashboard-key-visualizer.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

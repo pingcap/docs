@@ -148,7 +148,7 @@ SHOW WARNINGS;
 +---------+------+------------------------------------------------------------------------------------------------------------------------------------+
 | Level   | Code | Message                                                                                                                            |
 +---------+------+------------------------------------------------------------------------------------------------------------------------------------+
-| Warning | 1105 | Scalar function 'time'(signature: Time, return type: time) is not supported to push down to storage layer now.                     |
+| Warning | 1105 | Scalar function 'time'(signature: Time, return type: time) is not supported to push down to ストレージ layer now.                     |
 | Warning | 1105 | Scalar function 'cast'(signature: CastDurationAsString, return type: var_string(10)) is not supported to push down to tiflash now. |
 | Warning | 1105 | Scalar function 'cast'(signature: CastDurationAsString, return type: var_string(10)) is not supported to push down to tiflash now. |
 +---------+------+------------------------------------------------------------------------------------------------------------------------------------+

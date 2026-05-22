@@ -18,7 +18,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-08-14T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.3"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-08-14T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"ストレージ":""}},"state":"normal","creator_version":"v8.5.3"}
 ```
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
@@ -293,5 +293,5 @@ cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simpl
 
 > **注記：**
 >
-> -   サーバーで、レイテンシーが長く、帯域幅が制限されている機械式ハード ドライブやその他のstorageデバイスが使用されている場合、Unified Sorter のパフォーマンスは大幅に低下します。
+> -   サーバーで、レイテンシーが長く、帯域幅が制限されている機械式ハード ドライブやその他のストレージデバイスが使用されている場合、Unified Sorter のパフォーマンスは大幅に低下します。
 > -   デフォルトでは、Unified Sorter は一時ファイルの保存に`data_dir`使用します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。本番環境では、各ノードの空きディスク容量が（業務で許容される最大遅延時間`checkpoint-ts` ）×（業務ピーク時のアップストリーム書き込みトラフィック）よりも大きいことを確認することをお勧めします。また、 `changefeed`作成した後に大量の履歴データを複製する予定がある場合は、各ノードの空き容量が複製データの量よりも大きいことを確認してください。

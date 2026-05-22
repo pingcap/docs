@@ -101,12 +101,12 @@ SHOW TABLES
 -   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
 -   `TABLE_NAME` : テーブルの名前。
 -   `TABLE_TYPE` : テーブルのタイプ。
--   `ENGINE` :storageエンジンの種類。現在の値は`InnoDB`です。
+-   `ENGINE` :ストレージエンジンの種類。現在の値は`InnoDB`です。
 -   `VERSION` : バージョン。デフォルトの値は`10`です。
 -   `ROW_FORMAT` : 行形式。現在の値は`Compact`です。
 -   `TABLE_ROWS` : 統計におけるテーブル内の行数。
 -   `AVG_ROW_LENGTH` : 表の平均行の長さ`AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` 。
--   `DATA_LENGTH` : データ長。2 = `DATA_LENGTH` * タプル内の列`TABLE_ROWS`storage長の合計。TiKVのレプリカは考慮されません。
+-   `DATA_LENGTH` : データ長。2 = `DATA_LENGTH` * タプル内の列`TABLE_ROWS`ストレージ長の合計。TiKVのレプリカは考慮されません。
 -   `MAX_DATA_LENGTH` : 最大データ長。現在の値は`0` 、データ長に上限がないことを意味します。
 -   `INDEX_LENGTH` : インデックスの長さ`INDEX_LENGTH` = `TABLE_ROWS` * インデックスタプル内の列の長さの合計。TiKVのレプリカは考慮されません。
 -   `DATA_FREE` : データフラグメント。現在の値は`0`です。
@@ -121,7 +121,7 @@ SHOW TABLES
 
 テーブル内の情報の大部分はMySQLと同じです。以下の列はTiDBによって新たに定義されています。
 
--   `TIDB_TABLE_ID` : テーブルの内部IDを示します。このIDはTiDBクラスタ内で一意です。
+-   `TIDB_TABLE_ID` : テーブルの内部IDを示します。このIDはTiDBクラスター内で一意です。
 -   `TIDB_ROW_ID_SHARDING_INFO` : テーブルのシャーディングタイプを示します。可能な値は次のとおりです。
     -   `"NOT_SHARDED"` : テーブルはシャード化されていません。
     -   `"NOT_SHARDED(PK_IS_HANDLE)"` : 行 ID として整数の主キーを定義するテーブルはシャード化されません。

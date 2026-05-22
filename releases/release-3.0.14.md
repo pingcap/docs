@@ -40,7 +40,7 @@ TiDB バージョン: 3.0.14
     -   クライアントに TLS [＃15415](https://github.com/pingcap/tidb/pull/15415)使用を強制する`require-secure-transport`起動オプションをサポートする
     -   TLS が設定されている場合に TiDB コンポーネント間の HTTP 通信をサポートする[＃15419](https://github.com/pingcap/tidb/pull/15419)
     -   現在のトランザクションの`start_ts`情報を`information_schema.processlist`テーブル[＃16160](https://github.com/pingcap/tidb/pull/16160)に追加します
-    -   クラスタ間の通信に使用されるTLS証明書情報の自動再読み込みをサポート[＃15162](https://github.com/pingcap/tidb/pull/15162)
+    -   クラスター間の通信に使用されるTLS証明書情報の自動再読み込みをサポート[＃15162](https://github.com/pingcap/tidb/pull/15162)
     -   パーティションプルーニング[＃15628](https://github.com/pingcap/tidb/pull/15628)を再構築することで、パーティションテーブルの読み取りパフォーマンスが向上します。
     -   `range`パーティションテーブル[＃16521](https://github.com/pingcap/tidb/pull/16521)のパーティション式として`floor(unix_timestamp(a))`使用される場合のパーティションプルーニング機能をサポートします。
     -   `view`を含む`update`文の実行を許可し、 `view` [＃16787](https://github.com/pingcap/tidb/pull/16787)を更新しない
@@ -105,9 +105,9 @@ TiDB バージョン: 3.0.14
 
     -   一部のケースで分離回復後にノードを正しく削除できない問題を修正[＃7703](https://github.com/tikv/tikv/pull/7703)
     -   リージョンマージ操作[＃7679](https://github.com/tikv/tikv/pull/7679)によってネットワーク分離中に発生するデータ損失の問題を修正
-    -   学習者が正しく削除されない場合がある問題を修正[＃7598](https://github.com/tikv/tikv/pull/7598)
+    -   ラーナーが正しく削除されない場合がある問題を修正[＃7598](https://github.com/tikv/tikv/pull/7598)
     -   生のキーと値のペアのスキャン結果が順序どおりに行われない可能性がある問題を修正[＃7597](https://github.com/tikv/tikv/pull/7597)
     -   Raftメッセージのバッチが大きすぎる場合の再接続の問題を修正[＃7542](https://github.com/tikv/tikv/pull/7542)
     -   空のリクエスト[＃7538](https://github.com/tikv/tikv/pull/7538)によって引き起こされるgRPCスレッドデッドロックの問題を修正
-    -   マージ処理中に学習者を再起動する処理ロジックが正しくない問題を修正[＃7457](https://github.com/tikv/tikv/pull/7457)
+    -   マージ処理中にラーナーを再起動する処理ロジックが正しくない問題を修正[＃7457](https://github.com/tikv/tikv/pull/7457)
     -   ロックのクリーンアップの繰り返しリクエストによりトランザクションの原子性が破壊される可能性がある問題を修正[＃7388](https://github.com/tikv/tikv/pull/7388)

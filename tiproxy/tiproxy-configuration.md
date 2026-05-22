@@ -3,7 +3,7 @@ title: TiProxy Configuration File
 summary: TiProxy を構成する方法を学びます。
 ---
 
-# TiProxyコンフィグレーションファイル {#tiproxy-configuration-file}
+# TiProxy設定ファイル {#tiproxy-configuration-file}
 
 このドキュメントでは、 TiProxyの導入と使用に関連する設定パラメータについて説明します。TiUP導入トポロジの設定については、 [tiproxy-servers の設定](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers)参照してください。
 
@@ -39,7 +39,7 @@ skip-ca = true
 
 ### プロキシ {#proxy}
 
-SQL ポートのコンフィグレーション。
+SQL ポートの設定。
 
 #### <code>addr</code> {#code-addr-code}
 
@@ -136,7 +136,7 @@ TiProxy の高可用性構成。
 
 -   デフォルト値: `""`
 -   ホットリロードのサポート: いいえ
--   仮想IPアドレスをCIDR形式（例： `"10.0.1.10/24"` ）で指定します。クラスタ内で複数のTiProxyインスタンスを同じ仮想IPで構成した場合、一度にバインドできるインスタンスは1つだけです。このインスタンスがオフラインになると、別のTiProxyインスタンスが自動的に仮想IPを引き継ぎます。これにより、クライアントは常に仮想IPを介して利用可能なTiProxyに接続できるようになります。
+-   仮想IPアドレスをCIDR形式（例： `"10.0.1.10/24"` ）で指定します。クラスター内で複数のTiProxyインスタンスを同じ仮想IPで構成した場合、一度にバインドできるインスタンスは1つだけです。このインスタンスがオフラインになると、別のTiProxyインスタンスが自動的に仮想IPを引き継ぎます。これにより、クライアントは常に仮想IPを介して利用可能なTiProxyに接続できるようになります。
 
 以下に構成例を示します。
 

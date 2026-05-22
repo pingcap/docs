@@ -3,17 +3,17 @@ title: Check Cluster Status
 summary: TiDB クラスターの実行ステータスを確認する方法を学習します。
 ---
 
-# クラスタのステータスを確認する {#check-cluster-status}
+# クラスターのステータスを確認する {#check-cluster-status}
 
-TiDBクラスタをデプロイした後、クラスタが正常に動作しているかどうかを確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)とGrafanaを使用してクラスタの状態を確認する方法と、TiDBデータベースにログインして簡単なSQL操作を実行する方法を紹介します。
+TiDBクラスターをデプロイした後、クラスターが正常に動作しているかどうかを確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)とGrafanaを使用してクラスターの状態を確認する方法と、TiDBデータベースにログインして簡単なSQL操作を実行する方法を紹介します。
 
-## TiDBクラスタのステータスを確認する {#check-the-tidb-cluster-status}
+## TiDBクラスターのステータスを確認する {#check-the-tidb-cluster-status}
 
 このセクションでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)および Grafana を使用して TiDB クラスターのステータスを確認する方法について説明します。
 
 ### TiUPを使用する {#use-tiup}
 
-`tiup cluster display <cluster-name>`コマンドを使用してクラスタのステータスを確認します。例:
+`tiup cluster display <cluster-name>`コマンドを使用してクラスターのステータスを確認します。例:
 
 ```shell
 tiup cluster display tidb-test
@@ -51,7 +51,7 @@ tiup cluster display tidb-test
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}` 、 `10.0.1.7`などの[クラスタトポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)の場合に`tidb_servers`に設定される IP アドレスの 1 つです。
+`${tidb_server_host_IP_address}` 、 `10.0.1.7`などの[クラスタートポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)の場合に`tidb_servers`に設定される IP アドレスの 1 つです。
 
 次の情報はログインが成功したことを示します。
 

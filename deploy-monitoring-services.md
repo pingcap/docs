@@ -3,7 +3,7 @@ title: Deploy Monitoring Services for the TiDB Cluster
 summary: TiDB クラスターの監視サービスをデプロイする方法を学習します。
 ---
 
-# TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
+# TiDBクラスターの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
 このドキュメントは、TiDB 監視およびアラートサービスを手動でデプロイしたいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。1 [TiDBダッシュボード](/dashboard/dashboard-intro.md) PDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
 
@@ -131,8 +131,8 @@ $ ./prometheus \
     --web.external-url="http://192.168.199.113:9090/" \
     --web.enable-admin-api \
     --log.level="info" \
-    --storage.tsdb.path="./data.metrics" \
-    --storage.tsdb.retention="15d" &
+    --ストレージ.tsdb.path="./data.metrics" \
+    --ストレージ.tsdb.retention="15d" &
 ```
 
 ### ステップ 4: Node1 で Grafana を開始する {#step-4-start-grafana-on-node1}
@@ -210,7 +210,7 @@ Grafana サービスを開始します。
     >
     > **パスワードの変更**手順では、 **「スキップ」**を選択できます。
 
-2.  Grafana サイドバー メニューで、**コンフィグレーション**内の**データ ソース**をクリックします。
+2.  Grafana サイドバー メニューで、**設定**内の**データ ソース**をクリックします。
 
 3.  **データ ソースの追加を**クリックします。
 

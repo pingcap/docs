@@ -18,14 +18,14 @@ TiDB バージョン: 7.5.1
 -   TiKV構成項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#num-threads-new-in-v658-and-v751)を導入して、 `enable-compaction-filter`が`false` [＃16101](https://github.com/tikv/tikv/issues/16101) @ [tonyxuqqi](https://github.com/tonyxuqqi)の場合のGCスレッド数を設定します。
 -   TiCDC Changefeed、次の新しい構成項目が導入されています。
     -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @ [sdojjy](https://github.com/sdojjy)
-    -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトstorage[＃10109](https://github.com/pingcap/tiflow/issues/10109) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製するときに履歴データの自動クリーンアップを設定できます。
+    -   [`sink.cloud-ストレージ-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージ[＃10109](https://github.com/pingcap/tiflow/issues/10109) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製するときに履歴データの自動クリーンアップを設定できます。
     -   [`consistent.flush-concurrency`](/ticdc/ticdc-changefeed-config.md) : 単一のREDOファイルのアップロードの同時実行を[＃10226](https://github.com/pingcap/tiflow/issues/10226) @ [sdojjy](https://github.com/sdojjy)に設定できます
 
 ## 改善点 {#improvements}
 
 -   TiDB
 
-    -   DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`使用して、クラスタ[＃48124](https://github.com/pingcap/tidb/issues/48124) @ [cfzjywxk](https://github.com/cfzjywxk)でのメタリージョンLeaderの読み取り不可の影響を軽減します。
+    -   DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`使用して、クラスター[＃48124](https://github.com/pingcap/tidb/issues/48124) @ [cfzjywxk](https://github.com/cfzjywxk)でのメタリージョンLeaderの読み取り不可の影響を軽減します。
 
     -   リソース制御に関する可観測性を強化する[＃49318](https://github.com/pingcap/tidb/issues/49318) @ [glorv](https://github.com/glorv) @ [bufferflies](https://github.com/bufferflies) @ [nolouch](https://github.com/nolouch)
 
@@ -76,7 +76,7 @@ TiDB バージョン: 7.5.1
 
         -   TiDBダッシュボード[＃10263](https://github.com/pingcap/tiflow/issues/10263) @ [CharlesCheung96](https://github.com/CharlesCheung96)でのTiCDCログの検索をサポート
         -   サポート[チェンジフィードの下流同期ステータスの照会](https://docs.pingcap.com/tidb/v7.5/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed)は、TiCDC が受信した上流データの変更が下流システムに完全に同期されているかどうかを判断するのに役立ちます[＃10289](https://github.com/pingcap/tiflow/issues/10289) @ [hongyunyan](https://github.com/hongyunyan)
-        -   並列処理を[＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)に増やすことで、TiCDC がオブジェクトstorageにデータを複製する際のパフォーマンスが向上します。
+        -   並列処理を[＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)に増やすことで、TiCDC がオブジェクトストレージにデータを複製する際のパフォーマンスが向上します。
 
     -   TiDB Lightning
 
@@ -201,7 +201,7 @@ TiDB バージョン: 7.5.1
     -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`実行した後にTiFlash がパニックを起こし、null 許容列が[＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [JaySon-Huang](https://github.com/JaySon-Huang)に非 null 許容に変更される問題を修正しました。
     -   `ColumnRef in (Literal, Func...)` [＃8631](https://github.com/pingcap/tiflash/issues/8631) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました
     -   `FLASHBACK DATABASE` [＃8450](https://github.com/pingcap/tiflash/issues/8450) @ [JaySon-Huang](https://github.com/JaySon-Huang)を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました
-    -   分散storageおよびコンピューティングアーキテクチャ[＃8519](https://github.com/pingcap/tiflash/issues/8519) @ [JaySon-Huang](https://github.com/JaySon-Huang)で、 TiFlash がオブジェクトstorageデータの GC 所有者を選択できない可能性がある問題を修正しました。
+    -   分散ストレージおよびコンピューティングアーキテクチャ[＃8519](https://github.com/pingcap/tiflash/issues/8519) @ [JaySon-Huang](https://github.com/JaySon-Huang)で、 TiFlash がオブジェクトストレージデータの GC 所有者を選択できない可能性がある問題を修正しました。
     -   定数文字列パラメータ[＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [windtalker](https://github.com/windtalker)を含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。
     -   ポイントインタイムリカバリ（PITR）を実行した後、または`FLASHBACK CLUSTER TO`実行した後にTiFlashレプリカデータが誤って削除され、データ異常[＃8777](https://github.com/pingcap/tiflash/issues/8777) @ [JaySon-Huang](https://github.com/JaySon-Huang)が発生する可能性がある問題を修正しました。
     -   結合に非等価条件[＃8791](https://github.com/pingcap/tiflash/issues/8791) @ [windtalker](https://github.com/windtalker)が含まれている場合に、 TiFlash Anti Semi Join が誤った結果を返す可能性がある問題を修正しました。
@@ -216,20 +216,20 @@ TiDB バージョン: 7.5.1
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[＃50839](https://github.com/pingcap/tidb/issues/50839) @ [YuJuncen](https://github.com/YuJuncen)
         -   古いバージョン[＃49466](https://github.com/pingcap/tidb/issues/49466) @ [3pointer](https://github.com/3pointer)のバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました
         -   タスク初期化中にPDへの接続に失敗すると、ログバックアップタスクは開始できるが正常に動作しない問題を修正[＃16056](https://github.com/tikv/tikv/issues/16056) @ [YuJuncen](https://github.com/YuJuncen)
-        -   BRが外部storageファイル[＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)に対して誤ったURIを生成する問題を修正
+        -   BRが外部ストレージファイル[＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)に対して誤ったURIを生成する問題を修正
         -   同じノード[＃50445](https://github.com/pingcap/tidb/issues/50445) @ [3pointer](https://github.com/3pointer)で TiKV IP アドレスを変更した後にログ バックアップが停止する問題を修正しました
         -   S3 [＃49942](https://github.com/pingcap/tidb/issues/49942) @ [Leavrth](https://github.com/Leavrth)からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました
 
     -   TiCDC
 
         -   Syncpoint が有効な場合にエラーが発生し、シンクモジュールが正常に再起動しない問題を修正 ( `enable-sync-point = true` ) [＃10091](https://github.com/pingcap/tiflow/issues/10091) @ [hicqu](https://github.com/hicqu)
-        -   storageシンク[＃10352](https://github.com/pingcap/tiflow/issues/10352) @ [CharlesCheung96](https://github.com/CharlesCheung96)の使用時に、storageサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。
+        -   ストレージシンク[＃10352](https://github.com/pingcap/tiflow/issues/10352) @ [CharlesCheung96](https://github.com/CharlesCheung96)の使用時に、ストレージサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。
         -   同期ポイントテーブルが誤って複製される可能性がある問題を修正[＃10576](https://github.com/pingcap/tiflow/issues/10576) @ [asddongmen](https://github.com/asddongmen)
         -   Apache Pulsarをダウンストリーム[＃10602](https://github.com/pingcap/tiflow/issues/10602) @ [asddongmen](https://github.com/asddongmen)として使用すると、OAuth2.0、TLS、mTLSが正しく有効化できない問題を修正
         -   複数のチェンジフィード[＃10430](https://github.com/pingcap/tiflow/issues/10430) @ [CharlesCheung96](https://github.com/CharlesCheung96)を同時に作成すると TiCDC が`ErrChangeFeedAlreadyExists`エラーを返す問題を修正しました
         -   極端なケースでチェンジフィード`resolved ts`が進まない問題を修正[＃10157](https://github.com/pingcap/tiflow/issues/10157) @ [sdojjy](https://github.com/sdojjy)
         -   特定の特殊なシナリオで TiCDC が TiKV との接続を誤って閉じる問題を修正[＃10239](https://github.com/pingcap/tiflow/issues/10239) @ [hicqu](https://github.com/hicqu)
-        -   オブジェクトstorageサービス[＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)にデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました
+        -   オブジェクトストレージサービス[＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)にデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました
         -   アップストリームテーブル[＃10522](https://github.com/pingcap/tiflow/issues/10522) @ [sdojjy](https://github.com/sdojjy)で`TRUNCATE PARTITION`を実行した後に、changefeed がエラーを報告する問題を修正しました。
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリーム[＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [CharlesCheung96](https://github.com/CharlesCheung96)に複製しない問題を修正しました。
         -   `kv-client`初期化[＃10095](https://github.com/pingcap/tiflow/issues/10095) @ [3AceShowHand](https://github.com/3AceShowHand)中に発生する可能性のあるデータ競合問題を修正

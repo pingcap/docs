@@ -19,12 +19,12 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 このチュートリアルを完了するには、以下が必要です。
 
 -   [DBeaver Community **23.0.3**以降](https://dbeaver.io/download/)。
--   TiDBクラスタ。
+-   TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番環境のTiDB Self-Managedクラスターをデプロイ。](/production-deployment-using-tiup.md)
 
 さらに、 **Windows**上の DBeaver からTiDB Cloud StarterまたはTiDB Cloud Essential のパブリックエンドポイントに接続するには、以下の手順で追加の SSL 証明書 (ISRG Root X1) を設定する必要があります。設定しない場合、接続は失敗します。その他のオペレーティングシステムの場合は、これらの手順はスキップできます。
 
@@ -128,7 +128,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
@@ -136,7 +136,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
 
@@ -176,16 +176,16 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 2.  以下の接続パラメータを設定してください。
 
-    -   **サーバーホスト**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号。
-    -   **ユーザー名**：TiDBセルフマネージドクラスタに接続するために使用するユーザー名。
+    -   **サーバーホスト**：TiDB Self-ManagedクラスターのIPアドレスまたはドメイン名。
+    -   **ポート**：TiDB Self-Managedクラスターのポート番号。
+    -   **ユーザー名**：TiDB Self-Managedクラスターに接続するために使用するユーザー名。
     -   **パスワード**：ユーザー名のパスワード。
 
     例えば、以下のような例があります。
 
     ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスターへの接続を検証してください。
 
     **「ドライバファイルのダウンロード」**ダイアログが表示されたら、 **「ダウンロード」**をクリックしてドライバファイルを入手してください。
 
@@ -203,7 +203,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 ## 次のステップ {#next-steps}
 
 -   DBeaver の使用法の詳細については[DBeaverのドキュメント](https://github.com/dbeaver/dbeaver/wiki)参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

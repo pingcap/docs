@@ -1,6 +1,6 @@
 ---
 title: tiup cluster template
-summary: tiup cluster templateコマンドは、クラスタデプロイメント用のトポロジファイルを準備するために使用されます。デフォルト、詳細、ローカル、またはマルチDCトポロジテンプレートを出力するオプションがあります。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
+summary: tiup cluster templateコマンドは、クラスターデプロイメント用のトポロジファイルを準備するために使用されます。デフォルト、詳細、ローカル、またはマルチDCトポロジテンプレートを出力するオプションがあります。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
 ---
 
 # tiup cluster template {#tiup-cluster-template}
@@ -48,4 +48,4 @@ tiup cluster template [flags]
 
 指定されたオプションに従ってトポロジ テンプレートを出力します。これは、デプロイメントのためにトポロジ ファイルにリダイレクトできます。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

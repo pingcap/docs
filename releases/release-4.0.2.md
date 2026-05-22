@@ -43,7 +43,7 @@ TiDB バージョン: 4.0.2
     -   SQL文[＃17493](https://github.com/pingcap/tidb/pull/17493)のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列目を追加します。
     -   `enable-collect-execution-info`構成項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各演算子の実行情報を収集し、その情報をスロークエリログ[＃18073](https://github.com/pingcap/tidb/pull/18073) [＃18072](https://github.com/pingcap/tidb/pull/18072)に記録するかどうかを制御します。
     -   スロークエリログ[＃17694](https://github.com/pingcap/tidb/pull/17694)でクエリの感度を下げるかどうかを制御するグローバル変数`tidb_slow_log_masking`追加します。
-    -   `storage.block-cache.capacity` TiKV構成項目[＃17671](https://github.com/pingcap/tidb/pull/17671) `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加します。
+    -   `ストレージ.block-cache.capacity` TiKV構成項目[＃17671](https://github.com/pingcap/tidb/pull/17671) `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加します。
     -   データのバックアップと復元を行うSQL文`BACKUP`と`RESTORE`を追加する[＃15274](https://github.com/pingcap/tidb/pull/15274)
 
 -   TiKV
@@ -111,8 +111,8 @@ TiDB バージョン: 4.0.2
     -   `IndexMergeJoin`実行者が時々スタックする問題を修正[＃18091](https://github.com/pingcap/tidb/pull/18091)
     -   メモリクォータ不足とクエリキャンセルがトリガーされたときに`IndexMergeJoin`のエグゼキュータがハングする問題を修正[＃17654](https://github.com/pingcap/tidb/pull/17654)
     -   `Insert`と`Replace`エグゼキュータ[＃18062](https://github.com/pingcap/tidb/pull/18062)の過剰なカウントメモリ使用量を修正
-    -   `DROP DATABASE`と`DROP TABLE`同じデータベース[＃17901](https://github.com/pingcap/tidb/pull/17901)で同時に実行するとTiFlashstorageへのデータレプリケーションが停止する問題を修正
-    -   TiDBとオブジェクトstorageサービス[＃17844](https://github.com/pingcap/tidb/pull/17844)の`BACKUP` `RESTORE`障害を修正
+    -   `DROP DATABASE`と`DROP TABLE`同じデータベース[＃17901](https://github.com/pingcap/tidb/pull/17901)で同時に実行するとTiFlashストレージへのデータレプリケーションが停止する問題を修正
+    -   TiDBとオブジェクトストレージサービス[＃17844](https://github.com/pingcap/tidb/pull/17844)の`BACKUP` `RESTORE`障害を修正
     -   アクセスが拒否されたときに権限チェックに失敗したという誤ったエラーメッセージを修正しました[＃17724](https://github.com/pingcap/tidb/pull/17724)
     -   `DELETE`文から`UPDATE`されたクエリフィードバックを破棄する[＃17843](https://github.com/pingcap/tidb/pull/17843)
     -   `AUTO_RANDOM`プロパティ[＃17828](https://github.com/pingcap/tidb/pull/17828)のないテーブルでは`AUTO_RANDOM_BASE`変更を禁止します
@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.2
     -   `max_execution_time`ヒントが時々機能しない問題を修正[＃17536](https://github.com/pingcap/tidb/pull/17536)
     -   `EXPLAIN ANALYZE` [＃17350](https://github.com/pingcap/tidb/pull/17350)の結果に同時実行情報が重複して出力される問題を修正しました
     -   `STR_TO_DATE`関数[＃17498](https://github.com/pingcap/tidb/pull/17498)の`%h`の非互換な動作を修正
-    -   `tidb_replica_read` `follower`に設定され、リーダーとフォロワー/学習者[＃17443](https://github.com/pingcap/tidb/pull/17443)間にネットワーク パーティションがある場合にフォロワー/学習者が再試行を続ける問題を修正しました。
+    -   `tidb_replica_read` `follower`に設定され、リーダーとフォロワー/ラーナー[＃17443](https://github.com/pingcap/tidb/pull/17443)間にネットワーク パーティションがある場合にフォロワー/ラーナーが再試行を続ける問題を修正しました。
     -   TiDBがPDフォロワーにpingを送信しすぎる場合がある問題を修正[＃17947](https://github.com/pingcap/tidb/pull/17947)
     -   TiDB v4.0 [＃17983](https://github.com/pingcap/tidb/pull/17983)で古いバージョンの範囲パーティションテーブルをロードできない問題を修正しました
     -   各リージョンに異なる`Backoffer`割り当てることで、複数のリージョン要求が同時に失敗した場合の SQL ステートメントのタイムアウト問題を修正しました[＃17585](https://github.com/pingcap/tidb/pull/17585)

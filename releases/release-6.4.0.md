@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.4.0 Release Notes
-summary: TiDB 6.4.0-DMRでは、クラスタを特定の時点に復元する機能、線形ハッシュパーティショニング構文との互換性、高性能なAUTO_INCREMENT`モードなど、新機能と改善点が導入されています。また、障害リカバリ、メモリ使用量制御、統計情報の収集機能も強化されています。TiFlashは保存時の暗号化にSM4アルゴリズムをサポートし、TiCDCはKafkaへのデータレプリケートに対応しました。さらに、各種ツールやコンポーネントにおけるバグ修正と改善も含まれています。
+summary: TiDB 6.4.0-DMRでは、クラスターを特定の時点に復元する機能、線形ハッシュパーティショニング構文との互換性、高性能なAUTO_INCREMENT`モードなど、新機能と改善点が導入されています。また、障害リカバリ、メモリ使用量制御、統計情報の収集機能も強化されています。TiFlashは保存時の暗号化にSM4アルゴリズムをサポートし、TiCDCはKafkaへのデータレプリケートに対応しました。さらに、各種ツールやコンポーネントにおけるバグ修正と改善も含まれています。
 ---
 
 # TiDB 6.4.0 リリースノート {#tidb-6-4-0-release-notes}
@@ -28,7 +28,7 @@ TiDBバージョン: 6.4.0-DMR
 -   [クラスター診断](/dashboard/dashboard-diagnostics-access.md)機能が GA になります。
 -   TiFlash は[保存時の暗号化](/encryption-at-rest.md#tiflash)のための SM4 アルゴリズムをサポートしています。
 -   SQL ステートメントを使用して[テーブル内の指定されたパーティションのコンパクトなTiFlashレプリカを即座に](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)サポートします。
--   [EBSボリュームスナップショットを使用したTiDBクラスタのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
+-   [EBSボリュームスナップショットを使用したTiDBクラスターのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
 -   DM は[上流のデータソース情報を下流のマージ済みテーブルの拡張列に書き込む](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)サポートしています。
 
 ## 新機能 {#new-features}
@@ -37,7 +37,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   SQL ステートメントを使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮するサポート [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen)
 
-    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQLステートメントを手動で実行してTiFlash内の物理データを即座に圧縮することで、storage容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
+    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQLステートメントを手動で実行してTiFlash内の物理データを即座に圧縮することで、ストレージ容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
 
     SQL ステートメント`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できます。
 
@@ -45,7 +45,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP`を使用した特定の時点へのクラスターの復元のサポート (実験的) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)
 
-    `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスタを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、{{B-PLACEHOLDER-2-PLACEHOLDER-E} `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスタを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
+    `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスターを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、{{B-PLACEHOLDER-2-PLACEHOLDER-E} `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスターを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
 
     `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーション タスクを一時停止し、 `FLASHBACK`が完了した後に再開する必要があります。そうしないと、レプリケーション タスクが失敗する可能性があります。
 
@@ -67,11 +67,11 @@ TiDBバージョン: 6.4.0-DMR
 
 ### 可観測性 {#observability}
 
--   クラスタ診断が GA になります [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee)
+-   クラスター診断が GA になります [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee)
 
-    TiDB Dashboardの [クラスター診断](/dashboard/dashboard-diagnostics-access.md)は、指定された時間範囲内でクラスタに存在する可能性のある問題を診断し、診断結果とクラスタ関連の負荷監視情報を レポートにまとめます。この診断レポートはWeb [診断レポート](/dashboard/dashboard-diagnostics-report.md)形式です。ブラウザからページを保存した後、オフラインでページを閲覧したり、このページのリンクを共有したりできます。
+    TiDB Dashboardの [クラスター診断](/dashboard/dashboard-diagnostics-access.md)は、指定された時間範囲内でクラスターに存在する可能性のある問題を診断し、診断結果とクラスター関連の負荷監視情報を レポートにまとめます。この診断レポートはWeb [診断レポート](/dashboard/dashboard-diagnostics-report.md)形式です。ブラウザからページを保存した後、オフラインでページを閲覧したり、このページのリンクを共有したりできます。
 
-    診断レポートを使用すると、負荷、コンポーネントの状態、処理時間、構成など、クラスタの基本的な状態情報をすばやく把握できます。クラスタに一般的な問題がある場合は、 [診断情報](/dashboard/dashboard-diagnostics-report.md#diagnostic-information)セクションにある組み込みの自動診断結果から原因を特定できます。
+    診断レポートを使用すると、負荷、コンポーネントの状態、処理時間、構成など、クラスターの基本的な状態情報をすばやく把握できます。クラスターに一般的な問題がある場合は、 [診断情報](/dashboard/dashboard-diagnostics-report.md#diagnostic-information)セクションにある組み込みの自動診断結果から原因を特定できます。
 
 ### パフォーマンス {#performance}
 
@@ -113,7 +113,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   ディスク障害やI/Oスタックなどの極端な状況における障害リカバリを加速する [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    エンタープライズユーザーにとって、データベースの可用性は最も重要な指標の一つです。複雑なハードウェア環境では、障害を迅速に検知して復旧する方法が、データベース可用性における課題の一つとなっています。v6.4.0では、TiDBはTiKVノードの状態検出メカニズムを完全に最適化しました。ディスク障害やI/Oスタックといった極端な状況下でも、TiDBはノードの状態を迅速に報告し、アクティブウェイクアップメカニズムを使用してLeader選出を事前に開始することで、クラスタの自己修復を加速します。この最適化により、TiDBはディスク障害発生時のクラスタリカバリ時間を約50%短縮できます。
+    エンタープライズユーザーにとって、データベースの可用性は最も重要な指標の一つです。複雑なハードウェア環境では、障害を迅速に検知して復旧する方法が、データベース可用性における課題の一つとなっています。v6.4.0では、TiDBはTiKVノードの状態検出メカニズムを完全に最適化しました。ディスク障害やI/Oスタックといった極端な状況下でも、TiDBはノードの状態を迅速に報告し、アクティブウェイクアップメカニズムを使用してLeader選出を事前に開始することで、クラスターの自己修復を加速します。この最適化により、TiDBはディスク障害発生時のクラスターリカバリ時間を約50%短縮できます。
 
 -   TiDBのメモリ使用量に関するグローバル制御 [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12)
 
@@ -145,15 +145,15 @@ TiDBバージョン: 6.4.0-DMR
 
 -   TiKV API V2 が一般公開 (GA) [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu)
 
-    バージョン6.1.0より前のTiKVは、クライアントから渡された生データのみを保存するため、基本的なキーバリューの読み書き機能しか提供していませんでした。さらに、異なるコーディング方式とスコープのないデータ範囲のため、TiDB、トランザクションKV、およびRawKVを同じTiKVクラスタで同時に使用することはできません。そのため、複数のクラスタが必要となり、マシンコストと導入コストが増加します。
+    バージョン6.1.0より前のTiKVは、クライアントから渡された生データのみを保存するため、基本的なキーバリューの読み書き機能しか提供していませんでした。さらに、異なるコーディング方式とスコープのないデータ範囲のため、TiDB、トランザクションKV、およびRawKVを同じTiKVクラスターで同時に使用することはできません。そのため、複数のクラスターが必要となり、マシンコストと導入コストが増加します。
 
-    TiKV API V2は、新しいRawKVstorageフォーマットとアクセスインターフェースを提供し、以下の利点をもたらします。
+    TiKV API V2は、新しいRawKVストレージフォーマットとアクセスインターフェースを提供し、以下の利点をもたらします。
 
     -   MVCCにデータを保存する際に、記録されたデータの変更タイムスタンプを付加します。このタイムスタンプに基づいて変更データキャプチャ（CDC）が実装されます。この機能は実験的であり、詳細は[TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)に記載されています。
-    -   データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
+    -   データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスター内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
     -   マルチテナントなどの機能をサポートするために、キースペースフィールドを予約してください。
 
-    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[storage]` }を設定します。
+    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[ストレージ]` }を設定します。
 
     詳細については、 [ユーザー向けドキュメント](/tikv-configuration-file.md#api-version-new-in-v610)を参照してください。
 
@@ -227,7 +227,7 @@ TiDBバージョン: 6.4.0-DMR
 
     TiDB クラスターが EKS 上にデプロイされ、AWS EBS ボリュームを使用している場合、TiDB クラスター データのバックアップ時に以下の要件を満たす必要がある場合は、 TiDB Operatorを使用してボリューム スナップショットとメタデータによるデータを AWS S3 にバックアップできます。
 
-    -   バックアップの影響を最小限に抑える。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスタのCPUとメモリを消費しないようにする。
+    -   バックアップの影響を最小限に抑える。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスターのCPUとメモリを消費しないようにする。
     -   短時間でデータのバックアップと復元が可能です。例えば、1時間以内にバックアップを完了し、2時間以内にデータを復元できます。
 
     詳細については、 [ユーザー向けドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)を参照してください。
@@ -254,7 +254,7 @@ TiDBバージョン: 6.4.0-DMR
 
     バージョン6.4.0以降では、binlogの位置やGTIDを指定せずに、増分移行を直接実行できます。DMは、タスク開始後にアップストリームから生成されたbinlogファイルを自動的に取得し、これらの増分データをダウンストリームに移行します。これにより、ユーザーは面倒な理解や複雑な設定から解放されます。
 
-    詳細については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+    詳細については、 [DM 高度タスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 -   DMが移行タスクのステータスインジケーターを追加 [#7343](https://github.com/pingcap/tiflow/issues/7343) [okJiang](https://github.com/okJiang)
 
@@ -281,7 +281,7 @@ TiDBバージョン: 6.4.0-DMR
 | [`max_execution_time`](/system-variables.md#max_execution_time)                                                                     | 修正済み     | バージョン6.4.0より前は、この変数はすべての種類のステートメントに適用されていました。バージョン6.4.0以降は、この変数は読み取り専用ステートメントの最大実行時間のみを制御します。                                                                                                                                       |
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)         | 修正済み     | グローバルスコープを削除し、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)設定項目を使用してデフォルト値を変更できるようにします。この変数は、TiDB が悲観的トランザクション内の一意制約をチェックするタイミングを制御します。 |
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 修正済み     | バージョン6.4.0以降で有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)の同時実行を制御します。デフォルト値は`64`です。                                                                                                |
-| [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 修正済み     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、プライマリキーがデフォルトでクラスタ化インデックスとして作成されることを意味します。                                                                                                                                                        |
+| [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 修正済み     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、プライマリキーがデフォルトでクラスター化インデックスとして作成されることを意味します。                                                                                                                                                        |
 | [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                                                         | 修正済み     | デフォルト値を`OFF`から`ON`に変更します。これは、コプロセッサ要求を送信するためのページング方式がデフォルトで使用されることを意味します。                                                                                                                                                           |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                               | 修正済み     | SESSION スコープを追加します。この変数は[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を有効にするかどうかを制御します。                                                                                                                                               |
 | [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)                                               | 修正済み     | デフォルト値を`0.8`から`0.7`に変更します。この変数は、tidb-server のメモリアラームをトリガーするメモリ使用率を制御します。                                                                                                                                                            |
@@ -304,19 +304,19 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)                       | 新しく追加された | TiDB が GC をトリガーしようとするしきい値を制御します (実験的)。デフォルト値は`70%`です。                                                                                                                                                                               |
 | [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)                 | 新しく追加された | メモリ制限を有効にすると、TiDB は現在のインスタンスで最もメモリ使用量の多い SQL ステートメントを終了します。この変数は、終了する SQL ステートメントの最小メモリ使用量を指定します。デフォルト値は`134217728` (128 MiB) です。                                                                                                   |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                   | 種類を変更する  | 説明                                                                                                                                                                      |
+| 設定ファイル | 設定パラメータ                                                                                                                                   | 種類を変更する  | 説明                                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `tidb_memory_usage_alarm_ratio`                                                                                                                   | 削除済み     | この設定項目は無効になりました。                                                                                                                                                        |
 | TiDB           | `memory-usage-alarm-ratio`                                                                                                                        | 削除済み     | システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)に置き換えられました。この設定項目が TiDB バージョン v6.4.0 より前のバージョンで設定されていた場合、アップグレード後には有効になりません。 |
 | TiDB           | [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)          | 新しく追加された | システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)のデフォルト値を制御します。デフォルト値は`true`です。         |
 | TiDB           | [`tidb-max-reuse-chunk`](/tidb-configuration-file.md#tidb-max-reuse-chunk-new-in-v640)                                                            | 新しく追加された | チャンク割り当てのキャッシュされたチャンクオブジェクトの最大数を制御します。デフォルト値は`64`です。                                                                                                                    |
 | TiDB           | [`tidb-max-reuse-column`](/tidb-configuration-file.md#tidb-max-reuse-column-new-in-v640)                                                          | 新しく追加された | チャンク割り当てのキャッシュされた列オブジェクトの最大数を制御します。デフォルト値は`256`です。                                                                                                                      |
-| ティクヴ           | [`cdc.raw-min-ts-outlier-threshold`](https://docs-archive.pingcap.com/tidb/v6.2/tikv-configuration-file#raw-min-ts-outlier-threshold-new-in-v620) | 非推奨      | この設定項目は無効になりました。                                                                                                                                                        |
-| ティクヴ           | [`causal-ts.alloc-ahead-buffer`](/tikv-configuration-file.md#alloc-ahead-buffer-new-in-v640)                                                      | 新しく追加された | 事前割り当て済みのTSOキャッシュサイズ（期間）。デフォルト値は`3s`です。                                                                                                                                 |
-| ティクヴ           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                                  | 新しく追加された | タイムスタンプ要求におけるTSOの最大数を制御します。デフォルト値は`8192`です。                                                                                                                             |
-| ティクヴ           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                              | 新しく追加された | Applyスレッドが1回のポーリングで1つのFSM（有限状態機械）に対して書き込める最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                                   |
+| TiKV           | [`cdc.raw-min-ts-outlier-threshold`](https://docs-archive.pingcap.com/tidb/v6.2/tikv-configuration-file#raw-min-ts-outlier-threshold-new-in-v620) | 非推奨      | この設定項目は無効になりました。                                                                                                                                                        |
+| TiKV           | [`causal-ts.alloc-ahead-buffer`](/tikv-configuration-file.md#alloc-ahead-buffer-new-in-v640)                                                      | 新しく追加された | 事前割り当て済みのTSOキャッシュサイズ（期間）。デフォルト値は`3s`です。                                                                                                                                 |
+| TiKV           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                                  | 新しく追加された | タイムスタンプ要求におけるTSOの最大数を制御します。デフォルト値は`8192`です。                                                                                                                             |
+| TiKV           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                              | 新しく追加された | Applyスレッドが1回のポーリングで1つのFSM（有限状態機械）に対して書き込める最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                                   |
 | PD             | [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)                                                          | 新しく追加された | バージョン6.4.0以降で有効になり、PDがTSOの物理時刻を更新する間隔を制御します。デフォルト値は`50ms`です。                                                                                                            |
 | TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                              | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                     |
 | DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                              | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたテーブルのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
@@ -335,10 +335,10 @@ TiDBバージョン: 6.4.0-DMR
 -   TiDB
 
     -   何もしない変数`lc_messages`の変更を許可する [#38231](https://github.com/pingcap/tidb/issues/38231) @[djshow832](https://github.com/djshow832)
-    -   `AUTO_RANDOM`列をクラスタ化複合インデックスの最初の列としてサポートする [#38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
+    -   `AUTO_RANDOM`列をクラスター化複合インデックスの最初の列としてサポートする [#38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
     -   内部トランザクションの再試行では悲観的トランザクションを使用して、再試行の失敗を回避し、時間の消費を削減します [#38136](https://github.com/pingcap/tidb/issues/38136) @[jackysp](https://github.com/jackysp)
 
--   ティクヴ
+-   TiKV
 
     -   Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size` -0-PLACEHOLDER-E}}を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     -   リージョンのリーダーを移行する前にエントリキャッシュをウォームアップして、リーダー転送プロセス中のQPSジッターを回避する [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
@@ -403,7 +403,7 @@ TiDBバージョン: 6.4.0-DMR
     -   外部結合が削除された際に`ORDER BY`内の`GROUP_CONCAT`が考慮されず、クエリ結果が誤る問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
     -   結合したテーブルの再配置 [#38736](https://github.com/pingcap/tidb/issues/38736)により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。@[winoros](https://github.com/winoros)
 
--   ティクヴ
+-   TiKV
 
     -   複数の`cgroup`および`mountinfo`が存在する場合に Gitpod で TiDB が起動に失敗する問題を修正 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
     -   TiKV メトリクスの間違った式を修正`tikv_gc_compaction_filtered` [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)

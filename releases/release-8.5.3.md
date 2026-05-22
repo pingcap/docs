@@ -33,9 +33,9 @@ TiDBバージョン：8.5.3
     -   インデックスを使用したグローバルソート時にマージソート段階の監視メトリクスを追加する [#61025](https://github.com/pingcap/tidb/issues/61025) @[fzzf678](https://github.com/fzzf678)
     -   `IndexLookup`オペレーターが`context canceled`エラーに遭遇したときに、冗長なログエントリを削除します [#61072](https://github.com/pingcap/tidb/issues/61072) @[yibin87](https://github.com/yibin87)
     -   `tidb_replica_read`を`closest-adaptive`に設定した場合のパフォーマンスを改善します [#61745](https://github.com/pingcap/tidb/issues/61745) @[you06](https://github.com/you06)
-    -   大規模クラスタにおける監視メトリクスデータの量を減らすことで運用コストを削減する [#59990](https://github.com/pingcap/tidb/issues/59990) @[zimulala](https://github.com/zimulala)
+    -   大規模クラスターにおける監視メトリクスデータの量を減らすことで運用コストを削減する [#59990](https://github.com/pingcap/tidb/issues/59990) @[zimulala](https://github.com/zimulala)
 
--   ティクヴ
+-   TiKV
 
     -   フォアグラウンド書き込みをブロックせずにSSTファイルを取り込むことをサポートし、レイテンシーの影響を軽減します [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
     -   フローコントローラによって引き起こされるパフォーマンスのジッターを軽減します [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
@@ -53,7 +53,7 @@ TiDBバージョン：8.5.3
 
 -   TiFlash
 
-    -   storageスナップショット取得時の最大リトライ回数を増やし、大規模テーブルのクエリの安定性を向上 [#10300](https://github.com/pingcap/tiflash/issues/10300) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   ストレージスナップショット取得時の最大リトライ回数を増やし、大規模テーブルのクエリの安定性を向上 [#10300](https://github.com/pingcap/tiflash/issues/10300) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   ワイドテーブルシナリオにおけるTiFlash OOM リスクの可観測性を強化 [#10272](https://github.com/pingcap/tiflash/issues/10272) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
@@ -100,7 +100,7 @@ TiDBバージョン：8.5.3
     -   クエリが終了したときに悲観的ロックが残る可能性がある問題を修正 [#61454](https://github.com/pingcap/tidb/issues/61454) @[zyguan](https://github.com/zyguan)
     -   TiDBがPDから単一のリクエストでリージョンを多数ロードしたために大規模なクエリを実行する際にエラーが発生する問題を修正しました [#1704](https://github.com/tikv/client-go/issues/1704) @[you06](https://github.com/you06)
 
--   ティクヴ
+-   TiKV
 
     -   TiKV が正常シャットダウン中に進行中の手動圧縮タスクを終了できない問題を修正 [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
     -   クラスターのアップグレード後にデフォルトのリージョンサイズが予期せず変更される問題を修正 [#18503](https://github.com/tikv/tikv/issues/18503) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -113,7 +113,7 @@ TiDBバージョン：8.5.3
 -   PD
 
     -   `recovery-duration`が低速ノード検出メカニズムで有効にならない問題を修正 [#9384](https://github.com/tikv/pd/issues/9384) @[rleungx](https://github.com/rleungx)
-    -   クラスタのアップグレード後に Evict Leaderスケジューラが誤って一時停止される可能性がある問題を修正しました [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
+    -   クラスターのアップグレード後に Evict Leaderスケジューラが誤って一時停止される可能性がある問題を修正しました [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
     -   TiDB DashboardのTCP接続を不適切に閉じるとPDゴルーチンリークが発生する問題を修正しました [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     -   新しく追加された TiKV ノードがスケジュールに失敗する可能性がある問題を修正 [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
 
@@ -127,11 +127,11 @@ TiDBバージョン：8.5.3
 
     -   バックアップと復元 (BR)
 
-        -   ブレークポイントリカバリ中にstorageノードの空き容量が不必要に再チェックされる問題を修正 [#54316](https://github.com/pingcap/tidb/issues/54316) @[Leavrth](https://github.com/Leavrth)
-        -   HTTP/2 GOAWAY エラーが発生した際に、外部storageからのデータインポートが自動的に再試行されない問題を修正 [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
+        -   ブレークポイントリカバリ中にストレージノードの空き容量が不必要に再チェックされる問題を修正 [#54316](https://github.com/pingcap/tidb/issues/54316) @[Leavrth](https://github.com/Leavrth)
+        -   HTTP/2 GOAWAY エラーが発生した際に、外部ストレージからのデータインポートが自動的に再試行されない問題を修正 [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
         -   インポートモードの切り替えにより復元中に発生する`keepalive watchdog timedout`エラーを修正 [#18541](https://github.com/tikv/tikv/issues/18541) @[Leavrth](https://github.com/Leavrth)
         -   大量のデータを転送する際に、ログバックアップのAzure Blob Storageへのアップロードが遅くなる問題を修正しました [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
-        -   `-f`でテーブルをフィルタリングする際に、 BRが対応するテーブルがクラスタ内に存在するかどうかをチェックしない問題を修正 [#61592](https://github.com/pingcap/tidb/issues/61592) @[RidRisR](https://github.com/RidRisR)
+        -   `-f`でテーブルをフィルタリングする際に、 BRが対応するテーブルがクラスター内に存在するかどうかをチェックしない問題を修正 [#61592](https://github.com/pingcap/tidb/issues/61592) @[RidRisR](https://github.com/RidRisR)
         -   PITR が 3072 バイトを超えるインデックスの復元に失敗する問題を修正 [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
         -   RangeTree の結果が完全バックアップ中にメモリを非効率的に消費する問題を修正 [#58587](https://github.com/pingcap/tidb/issues/58587) @[3pointer](https://github.com/3pointer)
 

@@ -280,7 +280,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export JAVA_HOME="$SCRIPT_DIR/jdk-22.0.2"
 # Define the vars
 KAFKA_DIR="$SCRIPT_DIR/kafka_2.13-3.7.1/bin"
-KAFKA_STORAGE_CMD=$KAFKA_DIR/kafka-storage.sh
+KAFKA_STORAGE_CMD=$KAFKA_DIR/kafka-ストレージ.sh
 KAFKA_START_CMD=$KAFKA_DIR/kafka-server-start.sh
 KAFKA_DATA_DIR=$SCRIPT_DIR/data
 KAFKA_LOG_DIR=$SCRIPT_DIR/log

@@ -123,7 +123,7 @@ read handle duration = read value duration =
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_get"} =
-    tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
+    tikv_ストレージ_engine_async_request_duration_seconds{type="snapshot"} +
     tikv_engine_seek_micro_seconds{type="seek_average"} +
     read value duration +
     read value duration(non-short value)
@@ -135,10 +135,10 @@ tikv_grpc_msg_duration_seconds{type="kv_get"} =
 
 ```text
 read value duration(from disk) =
-    sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
+    sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKVはstorageエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_storage_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
+TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_ストレージ_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
 
 ### バッチポイント取得 {#batch-point-get}
 
@@ -186,7 +186,7 @@ read handles duration = read values duration =
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_batch_get"} =
-    tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
+    tikv_ストレージ_engine_async_request_duration_seconds{type="snapshot"} +
     n * (
         tikv_engine_seek_micro_seconds{type="seek_max"} +
         read value duration +
@@ -194,10 +194,10 @@ tikv_grpc_msg_duration_seconds{type="kv_batch_get"} =
     )
 
 read value duration(from disk) =
-    sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="batch_get"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="batch_get"}))
+    sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_time",req="batch_get"})) / sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_count",req="batch_get"}))
 ```
 
-スナップショットを取得した後、TiKVは同じスナップショットから複数の値を読み取ります。読み取り時間は[ポイントゲット](#point-get)と同じです。TiKVがディスクからデータを読み込む場合の平均時間は、 `tikv_storage_rocksdb_perf`と`req="batch_get"`で計算できます。
+スナップショットを取得した後、TiKVは同じスナップショットから複数の値を読み取ります。読み取り時間は[ポイントゲット](#point-get)と同じです。TiKVがディスクからデータを読み込む場合の平均時間は、 `tikv_ストレージ_rocksdb_perf`と`req="batch_get"`で計算できます。
 
 ### テーブルスキャンとインデックススキャン {#table-scan-x26-index-scan}
 
@@ -306,7 +306,7 @@ Diagram(
 )
 ```
 
-|         | 悲観的な取引          | 楽観的な取引    |
+|         | 悲観的なトランザクション          | 楽観的なトランザクション    |
 | ------- | --------------- | --------- |
 | 自動コミット  | 実行 + ロック + コミット | 実行 + コミット |
 | 非自動コミット | 実行 + ロック        | 実行する      |
@@ -413,7 +413,7 @@ tidb_tikvclient_request_seconds{type="PessimisticLock"} =
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     tikv_scheduler_latch_wait_duration_seconds{type="acquire_pessimistic_lock"} +
-    tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
+    tikv_ストレージ_engine_async_request_duration_seconds{type="snapshot"} +
     (lock in-mem key count + lock on-disk key count) * lock read duration +
     lock on-disk key count / (lock in-mem key count + lock on-disk key count) *
     lock write duration
@@ -421,7 +421,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
 
 -   TiDB v6.0以降、TiKVはデフォルトで[メモリ内悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)使用します。メモリ内悲観的ロックは非同期書き込みプロセスをバイパスします。
 
--   `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`はスナップショットタイプの期間です。詳細については、 [TiKVスナップショット](#tikv-snapshot)セクションを参照してください。
+-   `tikv_ストレージ_engine_async_request_duration_seconds{type="snapshot"}`はスナップショットタイプの期間です。詳細については、 [TiKVスナップショット](#tikv-snapshot)セクションを参照してください。
 
 -   `lock in-mem key count`と`lock on-disk key count`次のように計算されます。
 
@@ -439,7 +439,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
 
     ```text
     lock read duration(from disk) =
-        sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="acquire_pessimistic_lock"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="acquire_pessimistic_lock"}))
+        sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_time",req="acquire_pessimistic_lock"})) / sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_count",req="acquire_pessimistic_lock"}))
     ```
 
 -   `lock write duration`はディスク上の書き込みロックの持続時間です。詳細については、 [非同期書き込み](#async-write)セクションを参照してください。
@@ -557,7 +557,7 @@ prewrite key count =
     sum(rate(tikv_scheduler_kv_command_key_write_count{type="prewrite"}))
 
 prewrite read duration(from disk) =
-    sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="prewrite"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="prewrite"}))
+    sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_time",req="prewrite"})) / sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_count",req="prewrite"}))
 ```
 
 TiKVのロックと同様に、事前書き込みは読み取りフェーズと書き込みフェーズで処理されます。読み取り時間はRocksDBパフォーマンスコンテキストから計算できます。書き込み時間の詳細については、セクション[非同期書き込み](#async-write)を参照してください。
@@ -574,7 +574,7 @@ commit key count =
     sum(rate(tikv_scheduler_kv_command_key_write_count{type="commit"}))
 
 commit read duration(from disk) =
-    sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="commit"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="commit"})) (storage)
+    sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_time",req="commit"})) / sum(rate(tikv_ストレージ_rocksdb_perf{metric="block_read_count",req="commit"})) (ストレージ)
 ```
 
 `kv_commit`の所要時間は`kv_prewrite`とほぼ同じです。書き込み所要時間の詳細については、 [非同期書き込み](#async-write)セクションを参照してください。
@@ -645,10 +645,10 @@ Diagram(
 )
 ```
 
-TiKV スナップショットの全体的な継続時間は`tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`として観測され、次のように計算されます。
+TiKV スナップショットの全体的な継続時間は`tikv_ストレージ_engine_async_request_duration_seconds{type="snapshot"}`として観測され、次のように計算されます。
 
 ```text
-tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
+tikv_ストレージ_engine_async_request_duration_seconds{type="snapshot"} =
     tikv_coprocessor_request_wait_seconds{type="snapshot"} =
     tikv_raftstore_request_wait_time_duration_secs +
     tikv_raftstore_commit_log_duration_seconds +
@@ -825,7 +825,7 @@ raft db write duration(raft engine disabled) =
 
 クォーラム ピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
-v6.1.0 以降、TiKV はデフォルトのログstorageエンジンとして[Raft Engine](/glossary.md#raft-engine)使用するようになり、ログの書き込みプロセスが変更されました。
+v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)使用するようになり、ログの書き込みプロセスが変更されました。
 
 ### KV DB {#kv-db}
 

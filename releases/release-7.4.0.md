@@ -13,7 +13,7 @@ TiDB バージョン: 7.4.0
 
 7.4.0 では、次の主な機能と改善が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-global-sort" target="_blank">グローバルソート</a>による<code>IMPORT INTO</code>および<code>ADD INDEX</code>操作のパフォーマンスと安定性を向上 (実験的)</td><td> v7.4.0より前のバージョンでは、 <a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-distributed-execution-framework" target="_blank">TiDB Distributed eXecution Framework (DXF)</a>を使用した<code>ADD INDEX</code>や<code>IMPORT INTO</code>などのタスクは、局所的かつ部分的なソートを意味しており、最終的にはTiKVが部分的なソートを補うために多くの追加作業を実行することになりました。また、これらのジョブを実行するには、TiDBノードがソート用のローカルディスク領域をTiKVにロードする前に割り当てる必要がありました。<br/> v7.4.0で導入されたグローバルソート機能により、データはTiKVにロードされる前に、グローバルソートのために外部共有storage（このバージョンではS3）に一時的に保存されます。これにより、TiKVが余分なリソースを消費する必要がなくなり、 <code>ADD INDEX</code>や<code>IMPORT INTO</code>などの操作のパフォーマンスと安定性が大幅に向上します。</td></tr><tr><td>バックグラウンドタスクの<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#manage-background-tasks" target="_blank">リソース制御</a>（実験的）</td><td> v7.1.0では、ワークロード間のリソースおよびstorageアクセスの干渉を軽減するための<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">リソース制御</a>機能が導入されました。TiDB v7.4.0では、この制御がバックグラウンドタスクにも適用されます。v7.4.0では、自動分析、バックアップとリストア、 TiDB Lightningによるバルクロード、オンラインDDLなどのバックグラウンドタスクによって生成されるリソースをリソース制御が識別し、管理するようになりました。これは最終的にすべてのバックグラウンドタスクに適用されます。</td></tr><tr><td> TiFlashは <a href="https://docs-archive.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">ストレージとコンピューティングの分離とS3</a> （GA）をサポートします</td><td>TiFlash分散storageおよびコンピューティングアーキテクチャと S3 共有storageが一般提供開始:<ul><li> TiFlash のコンピューティングとstorageを分離します。これは、弾力性のある HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有storageを提供できる S3 ベースのstorageエンジンの使用をサポートします。</li></ul></td></tr><tr><td rowspan="2"> SQL</td><td> TiDBは<a href="https://docs-archive.pingcap.com/tidb/v7.4/partitioned-table#convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">パーティションタイプの管理</a>をサポート</td><td>v7.4.0 より前では、範囲/リスト パーティション テーブルは、 <code>TRUNCATE</code> 、 <code>EXCHANGE</code> 、 <code>ADD</code> 、 <code>DROP</code> 、 <code>REORGANIZE</code>などのパーティション管理操作をサポートし、ハッシュ/キー パーティション テーブルは、 <code>ADD</code>や<code>COALESCE</code>などのパーティション管理操作をサポートします。<p>現在、TiDB は次のパーティション タイプ管理操作もサポートしています。</p><ul><li>パーティションテーブルを非パーティションテーブルに変換する</li><li>既存のパーティション化されていないテーブルをパーティション化する</li><li>既存のテーブルのパーティションタイプを変更する</li></ul></td></tr><tr><td>MySQL 8.0 互換性: <a href="https://docs-archive.pingcap.com/tidb/v7.4/character-set-and-collation#character-sets-and-collations-supported-by-tidb" target="_blank">照合順序<code>utf8mb4_0900_ai_ci</code></a>サポート</td><td>MySQL 8.0 の注目すべき変更点の 1 つは、デフォルトの文字セットが utf8mb4 になり、utf8mb4 のデフォルトの照合順序が<code>utf8mb4_0900_ai_ci</code>なったことです。TiDB v7.4.0 でこのサポートが追加されたことで、MySQL 8.0 との互換性が向上し、デフォルトの照合順序を持つ MySQL 8.0 データベースからの移行とレプリケーションがよりスムーズになりました。</td></tr><tr><td> DB操作と可観測性</td><td><code>IMPORT INTO</code>および<code>ADD INDEX</code> SQL ステートメントを実行するため<a href="https://docs-archive.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">のそれぞれの TiDB ノード</a>を指定します (実験的)</td><td> <code>IMPORT INTO</code>または<code>ADD INDEX</code> SQL 文を、既存の TiDB ノードの一部、または新規に追加された TiDB ノードに対して実行するかどうかを柔軟に指定できます。このアプローチにより、他の TiDB ノードからのリソース分離が可能になり、業務への影響を防ぎながら、先行する SQL 文の実行に最適なパフォーマンスを確保できます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-global-sort" target="_blank">グローバルソート</a>による<code>IMPORT INTO</code>および<code>ADD INDEX</code>操作のパフォーマンスと安定性を向上 (実験的)</td><td> v7.4.0より前のバージョンでは、 <a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-distributed-execution-framework" target="_blank">TiDB Distributed eXecution Framework (DXF)</a>を使用した<code>ADD INDEX</code>や<code>IMPORT INTO</code>などのタスクは、局所的かつ部分的なソートを意味しており、最終的にはTiKVが部分的なソートを補うために多くの追加作業を実行することになりました。また、これらのジョブを実行するには、TiDBノードがソート用のローカルディスク領域をTiKVにロードする前に割り当てる必要がありました。<br/> v7.4.0で導入されたグローバルソート機能により、データはTiKVにロードされる前に、グローバルソートのために外部共有ストレージ（このバージョンではS3）に一時的に保存されます。これにより、TiKVが余分なリソースを消費する必要がなくなり、 <code>ADD INDEX</code>や<code>IMPORT INTO</code>などの操作のパフォーマンスと安定性が大幅に向上します。</td></tr><tr><td>バックグラウンドタスクの<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#manage-background-tasks" target="_blank">リソース制御</a>（実験的）</td><td> v7.1.0では、ワークロード間のリソースおよびストレージアクセスの干渉を軽減するための<a href="https://docs-archive.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">リソース制御</a>機能が導入されました。TiDB v7.4.0では、この制御がバックグラウンドタスクにも適用されます。v7.4.0では、自動分析、バックアップとリストア、 TiDB Lightningによるバルクロード、オンラインDDLなどのバックグラウンドタスクによって生成されるリソースをリソース制御が識別し、管理するようになりました。これは最終的にすべてのバックグラウンドタスクに適用されます。</td></tr><tr><td> TiFlashは <a href="https://docs-archive.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">ストレージとコンピューティングの分離とS3</a> （GA）をサポートします</td><td>TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 共有ストレージが一般提供開始:<ul><li> TiFlash のコンピューティングとストレージを分離します。これは、弾力性のある HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有ストレージを提供できる S3 ベースのストレージエンジンの使用をサポートします。</li></ul></td></tr><tr><td rowspan="2"> SQL</td><td> TiDBは<a href="https://docs-archive.pingcap.com/tidb/v7.4/partitioned-table#convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">パーティションタイプの管理</a>をサポート</td><td>v7.4.0 より前では、範囲/リスト パーティション テーブルは、 <code>TRUNCATE</code> 、 <code>EXCHANGE</code> 、 <code>ADD</code> 、 <code>DROP</code> 、 <code>REORGANIZE</code>などのパーティション管理操作をサポートし、ハッシュ/キー パーティション テーブルは、 <code>ADD</code>や<code>COALESCE</code>などのパーティション管理操作をサポートします。<p>現在、TiDB は次のパーティション タイプ管理操作もサポートしています。</p><ul><li>パーティションテーブルを非パーティションテーブルに変換する</li><li>既存のパーティション化されていないテーブルをパーティション化する</li><li>既存のテーブルのパーティションタイプを変更する</li></ul></td></tr><tr><td>MySQL 8.0 互換性: <a href="https://docs-archive.pingcap.com/tidb/v7.4/character-set-and-collation#character-sets-and-collations-supported-by-tidb" target="_blank">照合順序<code>utf8mb4_0900_ai_ci</code></a>サポート</td><td>MySQL 8.0 の注目すべき変更点の 1 つは、デフォルトの文字セットが utf8mb4 になり、utf8mb4 のデフォルトの照合順序が<code>utf8mb4_0900_ai_ci</code>なったことです。TiDB v7.4.0 でこのサポートが追加されたことで、MySQL 8.0 との互換性が向上し、デフォルトの照合順序を持つ MySQL 8.0 データベースからの移行とレプリケーションがよりスムーズになりました。</td></tr><tr><td> DB操作と可観測性</td><td><code>IMPORT INTO</code>および<code>ADD INDEX</code> SQL ステートメントを実行するため<a href="https://docs-archive.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">のそれぞれの TiDB ノード</a>を指定します (実験的)</td><td> <code>IMPORT INTO</code>または<code>ADD INDEX</code> SQL 文を、既存の TiDB ノードの一部、または新規に追加された TiDB ノードに対して実行するかどうかを柔軟に指定できます。このアプローチにより、他の TiDB ノードからのリソース分離が可能になり、業務への影響を防ぎながら、先行する SQL 文の実行に最適なパフォーマンスを確保できます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -25,21 +25,21 @@ TiDB バージョン: 7.4.0
 
     詳細については[ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)参照してください。
 
--   パーティション化されたRaft KVstorageエンジンの強化 (実験的) [＃11515](https://github.com/tikv/tikv/issues/11515) [＃12842](https://github.com/tikv/tikv/issues/12842) @ [busyjay](https://github.com/busyjay) @ [tonyxuqqi](https://github.com/tonyxuqqi) @ [tabokie](https://github.com/tabokie) @ [bufferflies](https://github.com/bufferflies) @ [5kbpers](https://github.com/5kbpers) @ [SpadeA-Tang](https://github.com/SpadeA-Tang) @ [nolouch](https://github.com/nolouch)
+-   パーティション化されたRaft KVストレージエンジンの強化 (実験的) [＃11515](https://github.com/tikv/tikv/issues/11515) [＃12842](https://github.com/tikv/tikv/issues/12842) @ [busyjay](https://github.com/busyjay) @ [tonyxuqqi](https://github.com/tonyxuqqi) @ [tabokie](https://github.com/tabokie) @ [bufferflies](https://github.com/bufferflies) @ [5kbpers](https://github.com/5kbpers) @ [SpadeA-Tang](https://github.com/SpadeA-Tang) @ [nolouch](https://github.com/nolouch)
 
-    TiDB v6.6.0 では、実験的機能として Partitioned Raft KVstorageエンジンが導入されました。このエンジンは、複数の RocksDB インスタンスを使用して TiKVリージョンデータを格納し、各リージョンのデータは個別の RocksDB インスタンスに独立して格納されます。
+    TiDB v6.6.0 では、実験的機能として Partitioned Raft KVストレージエンジンが導入されました。このエンジンは、複数の RocksDB インスタンスを使用して TiKVリージョンデータを格納し、各リージョンのデータは個別の RocksDB インスタンスに独立して格納されます。
 
-    TiDB v7.4.0では、Partitioned Raft KVstorageエンジンの互換性と安定性がさらに向上しました。大規模データテストを通じて、DM、 Dumpling、 TiDB Lightning、TiCDC、 BR、PITRといったTiDBエコシステムツールおよび機能との互換性が確保されています。さらに、Partitioned Raft KVstorageエンジンは、読み取りと書き込みが混在するワークロードにおいてもより安定したパフォーマンスを提供し、特に書き込み負荷の高いシナリオに適しています。さらに、各TiKVノードは8コアCPUをサポートし、8TBのデータstorageと64GBのメモリを搭載できるようになりました。
+    TiDB v7.4.0では、Partitioned Raft KVストレージエンジンの互換性と安定性がさらに向上しました。大規模データテストを通じて、DM、 Dumpling、 TiDB Lightning、TiCDC、 BR、PITRといったTiDBエコシステムツールおよび機能との互換性が確保されています。さらに、Partitioned Raft KVストレージエンジンは、読み取りと書き込みが混在するワークロードにおいてもより安定したパフォーマンスを提供し、特に書き込み負荷の高いシナリオに適しています。さらに、各TiKVノードは8コアCPUをサポートし、8TBのデータストレージと64GBのメモリを搭載できるようになりました。
 
     詳細については[ドキュメント](/partitioned-raft-kv.md)参照してください。
 
--   TiFlashは、分散storageおよびコンピューティングアーキテクチャ（GA）をサポートします[＃6882](https://github.com/pingcap/tiflash/issues/6882) @ [JaySon-Huang](https://github.com/JaySon-Huang) @ [JinheLin](https://github.com/JinheLin) @ [breezewish](https://github.com/breezewish) @ [lidezhu](https://github.com/lidezhu) @ [CalvinNeo](https://github.com/CalvinNeo) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+-   TiFlashは、分散ストレージおよびコンピューティングアーキテクチャ（GA）をサポートします[＃6882](https://github.com/pingcap/tiflash/issues/6882) @ [JaySon-Huang](https://github.com/JaySon-Huang) @ [JinheLin](https://github.com/JinheLin) @ [breezewish](https://github.com/breezewish) @ [lidezhu](https://github.com/lidezhu) @ [CalvinNeo](https://github.com/CalvinNeo) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
-    v7.0.0では、 TiFlashは実験的機能として、分散storageおよびコンピューティングアーキテクチャを導入しました。一連の改良を経て、v7.4.0以降、 TiFlashの分散storageおよびコンピューティングアーキテクチャがGAとなります。
+    v7.0.0では、 TiFlashは実験的機能として、分散ストレージおよびコンピューティングアーキテクチャを導入しました。一連の改良を経て、v7.4.0以降、 TiFlashの分散ストレージおよびコンピューティングアーキテクチャがGAとなります。
 
-    このアーキテクチャでは、 TiFlashノードは2種類（コンピューティングノードと書き込みノード）に分かれており、S3 APIと互換性のあるオブジェクトstorageをサポートします。どちらのノードも、コンピューティング容量またはstorage容量を個別に拡張できます。分散storageおよびコンピューティングアーキテクチャでは、 TiFlashレプリカの作成、データのクエリ、オプティマイザーヒントの指定など、結合storageおよびコンピューティングアーキテクチャと同様にTiFlashを使用できます。
+    このアーキテクチャでは、 TiFlashノードは2種類（コンピューティングノードと書き込みノード）に分かれており、S3 APIと互換性のあるオブジェクトストレージをサポートします。どちらのノードも、コンピューティング容量またはストレージ容量を個別に拡張できます。分散ストレージおよびコンピューティングアーキテクチャでは、 TiFlashレプリカの作成、データのクエリ、オプティマイザーヒントの指定など、結合ストレージおよびコンピューティングアーキテクチャと同様にTiFlashを使用できます。
 
-    TiFlash**の分散storageおよびコンピューティングアーキテクチャ**と**結合storageおよびコンピューティングアーキテクチャ**は、同じクラスター内で使用したり、相互に変換したりすることはできません。TiFlashをデプロイする際に、使用するアーキテクチャを設定できます。
+    TiFlash**の分散ストレージおよびコンピューティングアーキテクチャ**と**結合ストレージおよびコンピューティングアーキテクチャ**は、同じクラスター内で使用したり、相互に変換したりすることはできません。TiFlashをデプロイする際に、使用するアーキテクチャを設定できます。
 
     詳細については[ドキュメント](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
 
@@ -57,9 +57,9 @@ TiDB バージョン: 7.4.0
 
 -   クラウドストレージベースのグローバルソート機能を導入して、並列実行における`ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスと安定性を向上します (実験的) [＃45719](https://github.com/pingcap/tidb/issues/45719) @ [wjhuang2016](https://github.com/wjhuang2016)
 
-    v7.4.0より前のバージョンでは、Distributed eXecution Framework（DXF）で`ADD INDEX`や`IMPORT INTO`ようなタスクを実行する場合、各TiDBノードは、エンコードされたインデックスKVペアとテーブルデータKVペアのソートのために、かなりの量のローカルディスク領域を割り当てる必要がありました。しかし、グローバルソート機能がないため、処理中に異なるTiDBノード間および各ノード内でデータが重複する可能性があります。その結果、TiKVはこれらのKVペアをstorageエンジンにインポートする際に、常にコンパクション操作を実行する必要があり、 `ADD INDEX`と`IMPORT INTO`のパフォーマンスと安定性に影響を与えます。
+    v7.4.0より前のバージョンでは、Distributed eXecution Framework（DXF）で`ADD INDEX`や`IMPORT INTO`ようなタスクを実行する場合、各TiDBノードは、エンコードされたインデックスKVペアとテーブルデータKVペアのソートのために、かなりの量のローカルディスク領域を割り当てる必要がありました。しかし、グローバルソート機能がないため、処理中に異なるTiDBノード間および各ノード内でデータが重複する可能性があります。その結果、TiKVはこれらのKVペアをストレージエンジンにインポートする際に、常にコンパクション操作を実行する必要があり、 `ADD INDEX`と`IMPORT INTO`のパフォーマンスと安定性に影響を与えます。
 
-    v7.4.0では、TiDBに[グローバルソート](/tidb-global-sort.md)の機能が導入されました。エンコードされたデータをローカルに書き込んでソートする代わりに、クラウドstorageに書き込んでグローバルソートを行うようになりました。ソート後、インデックスデータとテーブルデータの両方がTiKVに並列でインポートされるため、パフォーマンスと安定性が向上します。
+    v7.4.0では、TiDBに[グローバルソート](/tidb-global-sort.md)の機能が導入されました。エンコードされたデータをローカルに書き込んでソートする代わりに、クラウドストレージに書き込んでグローバルソートを行うようになりました。ソート後、インデックスデータとテーブルデータの両方がTiKVに並列でインポートされるため、パフォーマンスと安定性が向上します。
 
     詳細については[ドキュメント](/tidb-global-sort.md)参照してください。
 
@@ -87,7 +87,7 @@ TiDB バージョン: 7.4.0
 
     通常、TiKVはリクエストを数ミリ秒という非常に高速に処理します。しかし、TiKVノードがディスクI/Oジッターやネットワークレイテンシーに遭遇すると、リクエスト処理時間が大幅に増加する可能性があります。v7.4.0より前のバージョンでは、TiKVリクエストのタイムアウト制限は固定されており、調整できません。そのため、TiKVノードで問題が発生すると、TiDBは一定時間のタイムアウト応答を待機する必要があり、ジッター発生時のアプリケーションクエリパフォーマンスに顕著な影響が生じます。
 
-    TiDB v7.4.0 では、新しいシステム変数[`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740)が導入され、クエリで TiDB が TiKV に送信する RPC 読み取り要求のタイムアウトをカスタマイズできるようになりました。つまり、ディスクまたはネットワークの問題により TiKV ノードに送信された要求が遅延した場合、TiDB はより早くタイムアウトし、他の TiKV ノードに要求を再送信できるため、クエリのレイテンシーが短縮されます。すべての TiKV ノードでタイムアウトが発生した場合、TiDB はデフォルトのタイムアウトを使用して再試行します。さらに、クエリでオプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`使用して、TiDB が TiKV RPC 読み取り要求を送信するタイムアウトを設定することもできます。この機能強化により、不安定なネットワークやstorage環境に TiDB が柔軟に適応できるようになり、クエリのパフォーマンスが向上し、ユーザーエクスペリエンスが強化されます。
+    TiDB v7.4.0 では、新しいシステム変数[`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740)が導入され、クエリで TiDB が TiKV に送信する RPC 読み取り要求のタイムアウトをカスタマイズできるようになりました。つまり、ディスクまたはネットワークの問題により TiKV ノードに送信された要求が遅延した場合、TiDB はより早くタイムアウトし、他の TiKV ノードに要求を再送信できるため、クエリのレイテンシーが短縮されます。すべての TiKV ノードでタイムアウトが発生した場合、TiDB はデフォルトのタイムアウトを使用して再試行します。さらに、クエリでオプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`使用して、TiDB が TiKV RPC 読み取り要求を送信するタイムアウトを設定することもできます。この機能強化により、不安定なネットワークやストレージ環境に TiDB が柔軟に適応できるようになり、クエリのパフォーマンスが向上し、ユーザーエクスペリエンスが強化されます。
 
     詳細については[ドキュメント](/system-variables.md#tikv_client_read_timeout-new-in-v740)参照してください。
 
@@ -200,7 +200,7 @@ TiDB バージョン: 7.4.0
 
 -   `IMPORT INTO`機能を[＃46704](https://github.com/pingcap/tidb/issues/46704)つで[D3ハンター](https://github.com/D3Hunter)強化する
 
-    バージョン7.4.0以降では、 `IMPORT INTO`ステートメントに`CLOUD_STORAGE_URI`のオプションを追加することで、インポートのパフォーマンスと安定性を向上させる[グローバルソート](/tidb-global-sort.md)機能（実験的）を有効にすることができます`CLOUD_STORAGE_URI`のオプションでは、エンコードされたデータの保存先となるクラウドstorageのアドレスを指定できます。
+    バージョン7.4.0以降では、 `IMPORT INTO`ステートメントに`CLOUD_STORAGE_URI`のオプションを追加することで、インポートのパフォーマンスと安定性を向上させる[グローバルソート](/tidb-global-sort.md)機能（実験的）を有効にすることができます`CLOUD_STORAGE_URI`のオプションでは、エンコードされたデータの保存先となるクラウドストレージのアドレスを指定できます。
 
     さらに、v7.4.0 では、 `IMPORT INTO`機能に次の機能が導入されています。
 
@@ -227,9 +227,9 @@ TiDB バージョン: 7.4.0
 
 -   TiCDC はクレームチェックパターン[＃9153](https://github.com/pingcap/tiflow/issues/9153) @ [3AceShowHand](https://github.com/3AceShowHand)で大きなメッセージの処理を改善します
 
-    バージョン7.4.0より前のTiCDCでは、Kafkaの最大メッセージサイズ（ `max.message.bytes` ）を超える大きなメッセージを下流に送信できませんでした。バージョン7.4.0以降では、Kafkaを下流として変更フィードを設定する際に、大きなメッセージを保存する外部storageの場所を指定し、外部storage内の大きなメッセージのアドレスを含む参照メッセージをKafkaに送信できるようになりました。コンシューマーはこの参照メッセージを受信すると、外部storageのアドレスからメッセージの内容を取得できます。
+    バージョン7.4.0より前のTiCDCでは、Kafkaの最大メッセージサイズ（ `max.message.bytes` ）を超える大きなメッセージを下流に送信できませんでした。バージョン7.4.0以降では、Kafkaを下流として変更フィードを設定する際に、大きなメッセージを保存する外部ストレージの場所を指定し、外部ストレージ内の大きなメッセージのアドレスを含む参照メッセージをKafkaに送信できるようになりました。コンシューマーはこの参照メッセージを受信すると、外部ストレージのアドレスからメッセージの内容を取得できます。
 
-    詳細については[ドキュメント](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-ストレージ)参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -241,7 +241,7 @@ TiDB バージョン: 7.4.0
 
 -   v7.4.0 以降、TiDB は MySQL 8.0 の必須機能と互換性があり、 `version()` `8.0.11`で始まるバージョンを返します。
 
--   TiFlash を以前のバージョンから v7.4.0 にアップグレードした後、元のバージョンへのインプレースダウングレードはサポートされません。これは、v7.4 以降、 TiFlash がPageStorage V3 のデータ圧縮ロジックを最適化し、データ圧縮中に発生する読み取りおよび書き込みの増幅を削減しているためです。これにより、基盤となるstorageファイル名の一部が変更されます。
+-   TiFlash を以前のバージョンから v7.4.0 にアップグレードした後、元のバージョンへのインプレースダウングレードはサポートされません。これは、v7.4 以降、 TiFlash がPageStorage V3 のデータ圧縮ロジックを最適化し、データ圧縮中に発生する読み取りおよび書き込みの増幅を削減しているためです。これにより、基盤となるストレージファイル名の一部が変更されます。
 
 -   TSO タイムスタンプの論理部分を抽出できるように[`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md#tidb-specific-functions)関数が追加されました。
 
@@ -256,7 +256,7 @@ TiDB バージョン: 7.4.0
 | `tidb_enable_tiflash_pipeline_model`                                                                    | 削除済み     | この変数は、 TiFlashパイプライン実行モデルを有効にするかどうかを制御するために使用されます。v7.4.0以降では、 TiFlashリソース制御機能を有効にすると、 TiFlashパイプライン実行モデルも自動的に有効になります。                                                                                                                                                                                                                          |
 | [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)       | 修正済み     | さらにテストを行った後、デフォルト値を`ON`から`OFF`に変更します。これは、準備されていない実行プラン キャッシュが無効であることを意味します。                                                                                                                                                                                                                                                                    |
 | [`default_collation_for_utf8mb4`](/system-variables.md#default_collation_for_utf8mb4-new-in-v740)       | 新しく追加された | `utf8mb4`文字セットのデフォルトの照合順序を制御します。デフォルト値は`utf8mb4_bin`です。                                                                                                                                                                                                                                                                                        |
-| [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)                     | 新しく追加された | 有効にするクラウドstorageURI を指定します[グローバルソート](/tidb-global-sort.md) 。                                                                                                                                                                                                                                                                                   |
+| [`tidb_cloud_ストレージ_uri`](/system-variables.md#tidb_cloud_ストレージ_uri-new-in-v740)                     | 新しく追加された | 有効にするクラウドストレージURI を指定します[グローバルソート](/tidb-global-sort.md) 。                                                                                                                                                                                                                                                                                   |
 | [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) | 新しく追加された | オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御します。デフォルトの値は`ON`です。3 に`OFF`すると、他に利用可能な実行プランがない限り、オプティマイザはテーブルのハッシュ結合を選択しません。                                                                                                                                                                                                                                 |
 | [`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740)                             | 新しく追加された | この変数はオプティマイザの目的を制御します。1 `moderate` TiDB v7.4.0 より前のバージョンのデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより優れた実行プランを生成しようとします。3 `determinate`はより保守的になる傾向があり、実行プランをより安定させます。                                                                                                                                                                                   |
 | [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)                 | 新しく追加された | 現在のセッションのタスクタイプを明示的に指定します。タスクタイプは[リソース管理](/tidb-resource-control-ru-groups.md)によって識別および制御されます。例: `SET @@tidb_request_source_type = "background"` 。                                                                                                                                                                                             |
@@ -267,21 +267,21 @@ TiDB バージョン: 7.4.0
 | [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)               | 新しく追加された | TiFlash [クエリレベルのスピル](/tiflash/tiflash-spill-disk.md#query-level-spilling)のしきい値を制御します。デフォルト値は`0.7`です。                                                                                                                                                                                                                                           |
 | [`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740)                 | 新しく追加された | TiDBがクエリ内でTiKV RPC読み取りリクエストを送信する際のタイムアウトを制御します。デフォルト値`0` 、デフォルトのタイムアウト（通常は40秒）が使用されることを示します。                                                                                                                                                                                                                                                   |
 
-### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
+### 設定ファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                         | タイプを変更   | 説明                                                                                                                                                                      |
+| 設定ファイル | 設定パラメータ                                                                                                                         | タイプを変更   | 説明                                                                                                                                                                      |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 修正済み     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になることを意味します。                                                                                                    |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 修正済み     | RocksDBの定期的なコンパクションをデフォルトで無効化するため、デフォルト値を`"30d"`から`"0s"`に変更しました。この変更により、TiDBのアップグレード後に大量のコンパクションがトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響が出るのを回避できます。                       |
 | TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 修正済み     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
 | TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステート マシンによって進められた`applied_index`と最後のディスク スピル時の`applied_index`の差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
 | TiFlash        | [`profiles.default.enable_resource_control`](/tiflash/tiflash-configuration.md)                                                         | 新しく追加された | TiFlashリソース制御機能を有効にするかどうかを制御します。                                                                                                                                        |
-| TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 修正済み     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
+| TiFlash        | [`ストレージ.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 修正済み     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
 | TiFlash        | [`task_scheduler_active_set_soft_limit`](/tiflash/tiflash-configuration.md#task_scheduler_active_set_soft_limit-new-in-v640)            | 修正済み     | デフォルト値を`vcpu * 0.25`から`vcpu * 2`に変更します。                                                                                                                                 |
 | Dumpling       | [`--csv-line-terminator`](/dumpling-overview.md#option-list-of-dumpling)                                                                | 新しく追加された | CSVファイルの終端文字を指定します。このオプションは`"\r\n"`と`"\n"`サポートします。デフォルト値は`"\r\n"`で、以前のバージョンと同じです。                                                                                       |
-| TiCDC          | [`claim-check-storage-uri`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)                                      | 新しく追加された | `large-message-handle-option` `claim-check`に設定する場合、 `claim-check-storage-uri`有効な外部storageアドレスに設定する必要があります。そうでない場合、チェンジフィードの作成時にエラーが発生します。                               |
+| TiCDC          | [`claim-check-ストレージ-uri`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-ストレージ)                                      | 新しく追加された | `large-message-handle-option` `claim-check`に設定する場合、 `claim-check-ストレージ-uri`有効な外部ストレージアドレスに設定する必要があります。そうでない場合、チェンジフィードの作成時にエラーが発生します。                               |
 | TiCDC          | [`large-message-handle-compression`](/ticdc/ticdc-sink-to-kafka.md#ticdc-data-compression)                                              | 新しく追加された | エンコード中に圧縮を有効にするかどうかを制御します。デフォルト値は空で、無効を意味します。                                                                                                                           |
-| TiCDC          | [`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)                                  | 修正済み     | この設定項目は新しい値`claim-check`を追加します。これを`claim-check`に設定すると、TiCDC Kafka シンクは、メッセージサイズが制限を超えた場合にメッセージを外部storageに送信することをサポートし、外部storage内のこの大きなメッセージのアドレスを含むメッセージを Kafka に送信します。 |
+| TiCDC          | [`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-ストレージ)                                  | 修正済み     | この設定項目は新しい値`claim-check`を追加します。これを`claim-check`に設定すると、TiCDC Kafka シンクは、メッセージサイズが制限を超えた場合にメッセージを外部ストレージに送信することをサポートし、外部ストレージ内のこの大きなメッセージのアドレスを含むメッセージを Kafka に送信します。 |
 
 ## 廃止および削除された機能 {#deprecated-and-removed-features}
 
@@ -314,7 +314,7 @@ TiDB バージョン: 7.4.0
 
     -   TSO トレース情報を最適化して、TSO 関連の問題の調査を容易にします[＃6856](https://github.com/tikv/pd/pull/6856) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   メモリ使用量を削減するために HTTP クライアント接続の再利用をサポート[＃6913](https://github.com/tikv/pd/issues/6913) @ [nolouch](https://github.com/nolouch)
-    -   バックアップクラスタが切断されたときにPDがクラスタステータスを自動更新する速度を向上[＃6883](https://github.com/tikv/pd/issues/6883) @ [disksing](https://github.com/disksing)
+    -   バックアップクラスターが切断されたときにPDがクラスターステータスを自動更新する速度を向上[＃6883](https://github.com/tikv/pd/issues/6883) @ [disksing](https://github.com/disksing)
     -   リソース制御クライアントの構成取得方法を強化し、最新の構成を動的に取得する[＃7043](https://github.com/tikv/pd/issues/7043) @ [nolouch](https://github.com/nolouch)
 
 -   TiFlash
@@ -329,7 +329,7 @@ TiDB バージョン: 7.4.0
 
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @ [YuJuncen](https://github.com/YuJuncen)
         -   HTTPクライアント[＃46011](https://github.com/pingcap/tidb/issues/46011) @ [Leavrth](https://github.com/Leavrth)で`MaxIdleConns`と`MaxIdleConnsPerHost`パラメータを設定することにより、ログバックアップとPITRリストアタスクの接続再利用のサポートを強化します。
-        -   PD または外部 S3storageへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
+        -   PD または外部 S3ストレージへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
         -   新しい復元パラメータ`WaitTiflashReady`を追加します。このパラメータを有効にすると、 TiFlashレプリカが正常に複製された後に復元操作が完了します[＃43828](https://github.com/pingcap/tidb/issues/43828) [＃46302](https://github.com/pingcap/tidb/issues/46302) @ [3pointer](https://github.com/3pointer)
         -   ログバックアップのCPUオーバーヘッドを削減`resolve lock` [＃40759](https://github.com/pingcap/tidb/issues/40759) @ [3pointer](https://github.com/3pointer)
 
@@ -360,7 +360,7 @@ TiDB バージョン: 7.4.0
     -   `EXCHANGE PARTITION`失敗またはキャンセルされた場合に、パーティションテーブルの制限が元のテーブルに残る問題を修正[＃45920](https://github.com/pingcap/tidb/issues/45920) [＃45791](https://github.com/pingcap/tidb/issues/45791) @ [mjonss](https://github.com/mjonss)
     -   リストパーティションの定義で、 `NULL`と空の文字列[＃45694](https://github.com/pingcap/tidb/issues/45694) @ [mjonss](https://github.com/mjonss)の両方の使用がサポートされていない問題を修正しました。
     -   パーティション交換[＃46492](https://github.com/pingcap/tidb/issues/46492) @ [mjonss](https://github.com/mjonss)中にパーティション定義に準拠していないデータを検出できない問題を修正
-    -   `tmp-storage-quota`設定が[＃45161](https://github.com/pingcap/tidb/issues/45161) [＃26806](https://github.com/pingcap/tidb/issues/26806) @ [wshwsh12](https://github.com/wshwsh12)で有効にならない問題を修正
+    -   `tmp-ストレージ-quota`設定が[＃45161](https://github.com/pingcap/tidb/issues/45161) [＃26806](https://github.com/pingcap/tidb/issues/26806) @ [wshwsh12](https://github.com/wshwsh12)で有効にならない問題を修正
     -   `WEIGHT_STRING()`関数が照合順序[＃45725](https://github.com/pingcap/tidb/issues/45725) @ [dveeden](https://github.com/dveeden)と一致しない問題を修正
     -   インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[＃45716](https://github.com/pingcap/tidb/issues/45716) @ [wshwsh12](https://github.com/wshwsh12)
     -   `DATETIME`または`TIMESTAMP`列を数値定数[＃38361](https://github.com/pingcap/tidb/issues/38361) @ [yibin87](https://github.com/yibin87)と比較するときに、MySQL と動作が一致しない問題を修正しました。
@@ -387,8 +387,8 @@ TiDB バージョン: 7.4.0
     -   `sync_recovery`から`sync` [＃15366](https://github.com/tikv/tikv/issues/15366) @ [nolouch](https://github.com/nolouch)に切り替えた後に QPS が 0 に低下する問題を修正しました
     -   オンラインアンセーフリカバリがタイムアウト[＃15346](https://github.com/tikv/tikv/issues/15346) @ [Connor1996](https://github.com/Connor1996)で中止されない問題を修正
     -   CpuRecord [＃15304](https://github.com/tikv/tikv/issues/15304) @ [overvenus](https://github.com/overvenus)によって発生する潜在的なメモリリークの問題を修正しました
-    -   バックアップクラスタがダウンし、プライマリクラスタが[＃12914](https://github.com/tikv/tikv/issues/12914) @ [Connor1996](https://github.com/Connor1996)でクエリされたときに`"Error 9002: TiKV server timeout"`発生する問題を修正しました
-    -   プライマリクラスタが[＃12320](https://github.com/tikv/tikv/issues/12320) @ [disksing](https://github.com/disksing)に回復した後に TiKV が再起動するとバックアップ TiKV が停止する問題を修正しました
+    -   バックアップクラスターがダウンし、プライマリクラスターが[＃12914](https://github.com/tikv/tikv/issues/12914) @ [Connor1996](https://github.com/Connor1996)でクエリされたときに`"Error 9002: TiKV server timeout"`発生する問題を修正しました
+    -   プライマリクラスターが[＃12320](https://github.com/tikv/tikv/issues/12320) @ [disksing](https://github.com/disksing)に回復した後に TiKV が再起動するとバックアップ TiKV が停止する問題を修正しました
 
 -   PD
 
@@ -397,7 +397,7 @@ TiDB バージョン: 7.4.0
     -   Scatter Peers [＃6962](https://github.com/tikv/pd/issues/6962) @ [bufferflies](https://github.com/bufferflies)でグループが考慮されない問題を修正しました
     -   RU消費量が0未満の場合にPDが[＃6973](https://github.com/tikv/pd/issues/6973) @ [CabinfeverB](https://github.com/CabinfeverB)でクラッシュする問題を修正
     -   変更された分離レベルがデフォルトの配置ルール[＃7121](https://github.com/tikv/pd/issues/7121) @ [rleungx](https://github.com/rleungx)に同期されない問題を修正しました
-    -   クラスタが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
+    -   クラスターが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
 
 -   TiFlash
 
@@ -438,7 +438,7 @@ TiDB バージョン: 7.4.0
 
         -   TiDB Lightningがテーブル`NONCLUSTERED auto_increment`と`AUTO_ID_CACHE=1`インポートした後、データを挿入するとエラーが返される問題を修正しました[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [tiancaiamao](https://github.com/tiancaiamao)
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
-        -   PDクラスタアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
+        -   PDクラスターアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
 
 ## 寄稿者 {#contributors}
 

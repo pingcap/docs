@@ -3,7 +3,7 @@ title: DM Advanced Task Configuration File
 summary: このドキュメントでは、データ移行（DM）の高度なタスク設定ファイルについて、グローバル設定とインスタンス設定の両面から解説します。グローバル設定には基本設定と機能設定が含まれ、インスタンス設定では、上流側の1つまたは複数のMySQLインスタンスから下流側の同じインスタンスへのデータ移行のためのサブタスクを定義します。
 ---
 
-# DM 高度タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
+# DM 高度タスク設定ファイル {#dm-advanced-task-configuration-file}
 
 このドキュメントでは[インスタンス構成](#instance-configuration)[グローバル設定](#global-configuration)とインスタンス構成を含む、データ移行 (DM) の高度なタスク設定ファイルを紹介します。
 
@@ -239,7 +239,7 @@ mysql-instances:
     syncer-thread: 16                               # The number of threads that the sync processing unit uses for replicating incremental data. `syncer-thread` corresponds to the `worker-count` configuration item of the syncers configuration. `syncer-thread` has overriding priority when the two items are both configured. When multiple instances are migrating data to TiDB at the same time, reduce the value according to the load.
 ```
 
-## コンフィグレーション順序 {#configuration-order}
+## 設定順序 {#configuration-order}
 
 サンプル設定ファイルから、設定ファイルが`Global configuration`と`Instance configuration`の 2 つの部分から構成されていることがわかります。ここで、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれています。設定順序は次のとおりです。
 
@@ -276,15 +276,15 @@ mysql-instances:
 
 #### <code>mydumpers</code> {#code-mydumpers-code}
 
--   ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `thread`のみを使用して`mydumper-thread` } を設定することもできます。
+-   ダンプ処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `thread`のみを使用して`mydumper-thread` } を設定することもできます。
 
 #### <code>loaders</code> {#code-loaders-code}
 
--   負荷処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `pool-size`のみを使用して`loader-thread` } を設定することもできます。
+-   負荷処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `pool-size`のみを使用して`loader-thread` } を設定することもできます。
 
 #### <code>syncers</code> {#code-syncers-code}
 
--   同期処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `worker-count`のみを使用して`syncer-thread` } を設定することもできます。
+-   同期処理ユニットの設定引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `worker-count`のみを使用して`syncer-thread` } を設定することもできます。
 
 ## インスタンス構成 {#instance-configuration}
 

@@ -83,13 +83,13 @@ SEVERITY  | critical
 DETAILS   | the cluster has 2 different tidb version, execute the sql to see more detail: select * from information_schema.cluster_info where type='tidb'
 ***************************[ 3. row ]***************************
 RULE      | threshold-check
-ITEM      | storage-write-duration
+ITEM      | ストレージ-write-duration
 TYPE      | tikv
 INSTANCE  | 172.16.5.40:23151
 VALUE     | 130.417
 REFERENCE | < 0.100
 SEVERITY  | warning
-DETAILS   | max duration of 172.16.5.40:23151 tikv storage-write-duration was too slow
+DETAILS   | max duration of 172.16.5.40:23151 tikv ストレージ-write-duration was too slow
 ***************************[ 4. row ]***************************
 RULE      | threshold-check
 ITEM      | rocksdb-write-duration
@@ -153,7 +153,7 @@ select * from information_schema.inspection_result where rule='critical-error';
 
 ## 診断ルール {#diagnostic-rules}
 
-診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
+診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスター情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
 
 `inspection_rules`システム テーブルをクエリすることによって、既存の診断ルールをクエリできます。
 
@@ -189,7 +189,7 @@ select * from information_schema.inspection_rules where type='inspection';
     status.status-port
     log.file.filename
     log.slow-query-file
-    tmp-storage-path
+    tmp-ストレージ-path
 
     // The allowlist of the PD configuration consistency check
     advertise-client-urls
@@ -208,13 +208,13 @@ select * from information_schema.inspection_rules where type='inspection';
     server.status-addr
     log-file
     raftstore.raftdb-path
-    storage.data-dir
-    storage.block-cache.capacity
+    ストレージ.data-dir
+    ストレージ.block-cache.capacity
     ```
 
 -   以下の構成項目の値が期待どおりであるかどうかを確認します。
 
-    | 成分   | コンフィグレーション項目       | 期待値      |
+    | コンポーネント   | 設定項目       | 期待値      |
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 
@@ -244,7 +244,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 -   メトリック スキーマ内の関連する監視システム テーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 
-    | 成分   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
+    | コンポーネント   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
     | TiDB | パニックカウント                | tidb_panic_count_total_count       | TiDB でパニックが発生します。                            |
     | TiKV | 重大なエラー                  | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
@@ -259,15 +259,15 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システム テーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
-| 成分   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
+| コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
 | TiDB | tso期間                | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
 | TiDB | トークン取得期間             | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
 | TiDB | ロードスキーマ期間            | tidb_load_schema_duration           | 1秒未満      | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                    |
 | TiKV | スケジューラコマンド期間         | tikv_scheduler_command_duration     | 0.1秒未満    | TiKV が KV `cmd`要求を実行するのにかかる時間。                                                                                   |
 | TiKV | ハンドルスナップショット期間       | tikv_handle_snapshot_duration       | 30代未満     | TiKV がスナップショットを処理するのにかかる時間。                                                                                      |
-| TiKV | ストレージ書き込み時間          | tikv_storage_async_request_duration | 0.1秒未満    | TiKV の書き込みレイテンシー。                                                                                                |
-| TiKV | ストレージスナップショットの期間     | tikv_storage_async_request_duration | 50ミリ秒未満   | TiKV がスナップショットを取得するのにかかる時間。                                                                                      |
+| TiKV | ストレージ書き込み時間          | tikv_ストレージ_async_request_duration | 0.1秒未満    | TiKV の書き込みレイテンシー。                                                                                                |
+| TiKV | ストレージスナップショットの期間     | tikv_ストレージ_async_request_duration | 50ミリ秒未満   | TiKV がスナップショットを取得するのにかかる時間。                                                                                      |
 | TiKV | rocksdb書き込み時間        | tikv_engine_write_duration          | 100ミリ秒未満  | TiKV RocksDB の書き込みレイテンシー。                                                                                        |
 | TiKV | rocksdb-get-duration | tikv_engine_max_get_duration        | 50ミリ秒未満   | TiKV RocksDB の読み取りレイテンシー。                                                                                        |
 | TiKV | rocksdbシーク時間         | tikv_engine_max_seek_duration       | 50ミリ秒未満   | TiKV RocksDB の実行レイテンシーは`seek` 。                                                                                  |
@@ -277,7 +277,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | データブロックキャッシュヒット      | tikv_block_data_cache_hit           | 0.80      | TiKV のデータブロックキャッシュのヒット率。                                                                                         |
 | TiKV | リーダースコアバランス          | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリーダースコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                      |
 | TiKV | 地域スコアバランス            | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                     |
-| TiKV | 店舗利用可能残高             | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なstorageのバランスを確認します。インスタンス間の差は20%未満であることが期待されます。                                                 |
+| TiKV | 店舗利用可能残高             | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なストレージのバランスを確認します。インスタンス間の差は20%未満であることが期待されます。                                                 |
 | TiKV | 地域数                  | pd_scheduler_store_status           | 20000未満   | 各 TiKV インスタンスのリージョン数を確認します。1 つのインスタンスあたりのリージョン数は 20,000 未満と予想されます。                                               |
 | PD   | 地域の健康                | pd_region_health                    | 100未満     | クラスター内でスケジュール処理中のリージョンの数を検出します。想定される数は合計で100未満です。                                                                |
 

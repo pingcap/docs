@@ -154,7 +154,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 上記の例では、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
--   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
+-   `cluster_id` :*文字列*。TiDBクラスターの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
 -   `description` :*文字列*。データ概要の説明。
 -   `reuse` :*ブール値*。既存のデータサマリーを再利用するかどうかを指定します`true`に設定すると、APIは既存のデータサマリーを再利用します。6 `false`設定すると、APIは新しいデータサマリーを生成します。
@@ -257,7 +257,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 リクエスト本体は、次のプロパティを持つ JSON オブジェクトです。
 
--   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
+-   `cluster_id` :*文字列*。TiDBクラスターの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
 -   `data_summary_id` :*整数*。SQL生成に使用されるデータサマリーのID。このプロパティは、 `cluster_id`と`database`指定されていない場合にのみ有効になります。8と`cluster_id` `database`両方を指定した場合、APIはデータベースのデフォルトのデータサマリーを使用します。
 -   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
@@ -381,7 +381,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 上記の例では、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
--   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
+-   `cluster_id` :*文字列*。TiDBクラスターの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
 -   `tables` :*配列*。(オプション) クエリするテーブル名のリスト。
 -   `instruction` :*文字列*。必要なクエリを説明する自然言語の命令。

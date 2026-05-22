@@ -1,6 +1,6 @@
 ---
 title: TiFlash Query Result Materialization
-summary: TiFlashのクエリ結果をトランザクションに保存する方法を学びます。
+summary: TiFlashのクエリ結果をテーブルに保存（マテリアライズ）する方法を学びます。
 ---
 
 # TiFlashクエリ結果のマテリアライゼーション {#tiflash-query-result-materialization}

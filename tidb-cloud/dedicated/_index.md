@@ -42,17 +42,17 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[クラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
+[クラスターを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
-[クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
+[クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
 
-[HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
+[HTAPクラスターを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
 [データのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore)
 
-[クラスタのスケール](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[クラスターのスケール](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
+[TiDBクラスターを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
 [ストリームデータ](http://docs.pingcap.com/tidbcloud/changefeed-overview)
 
@@ -68,7 +68,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [Amazon RDS for Oracleから](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
 
-[TiDBセルフマネージドから](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
+[TiDB Self-Managedから](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 
 [CSVファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 

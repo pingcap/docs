@@ -18,13 +18,13 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 -   完全復元を実行する場合、復元対象のテーブルは既に存在してはなりません。既存のデータが上書きされ、データとインデックス間の不整合が発生する可能性があるためです。
 -   増分復元を実行する場合、テーブルはバックアップが作成された時点の`LAST_BACKUP`タイムスタンプとまったく同じ状態である必要があります。
 
-`RESTORE`を実行するには`RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、リストアを実行する TiDB ノードとクラスタ内のすべての TiKV ノードは、宛先からの読み取り権限を持っている必要があります。
+`RESTORE`を実行するには`RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、リストアを実行する TiDB ノードとクラスター内のすべての TiKV ノードは、宛先からの読み取り権限を持っている必要があります。
 
 `RESTORE`ステートメントはブロッキング処理であり、リストアタスク全体が完了、失敗、またはキャンセルされるまで終了しません。 `RESTORE`を実行するには、長時間接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
 `BACKUP`と`RESTORE`のタスクは、一度に 1 つしか実行できません。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`実行は、以前のすべてのタスクが完了するまで待機します。
 
-`RESTORE` 「tikv」storageエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
+`RESTORE` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
 
 ## あらすじ {#synopsis}
 
@@ -91,7 +91,7 @@ RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
 RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/2020/04/';
 ```
 
-### 外部ストレージ {#external-storages}
+### 外部ストレージ {#external-ストレージs}
 
 BRはS3またはGCSからのデータ復元をサポートしています。
 
@@ -99,7 +99,7 @@ BRはS3またはGCSからのデータ復元をサポートしています。
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-URL 構文については[外部ストレージサービスのURI形式](/external-storage-uri.md)で詳しく説明します。
+URL 構文については[外部ストレージサービスのURI形式](/external-ストレージ-uri.md)で詳しく説明します。
 
 認証情報を配布すべきでないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定してください。
 

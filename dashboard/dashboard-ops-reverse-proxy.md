@@ -29,7 +29,7 @@ http://192.168.0.123:2379/dashboard/
 >
 > この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details><summary>TiUPクラスタのアップグレード</summary>
+> <details><summary>TiUPクラスターのアップグレード</summary>
 >
 > ```bash
 > tiup update --self
@@ -117,7 +117,7 @@ server_configs:
 
 <details><summary><strong>TiUPを使用して新しいクラスターを展開するときに構成を変更する</strong></summary>
 
-新しいクラスタをデプロイする場合は、上記の設定を`topology.yaml` TiUPトポロジファイルに追加してクラスタをデプロイできます。具体的な手順については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)参照してください。
+新しいクラスターをデプロイする場合は、上記の設定を`topology.yaml` TiUPトポロジファイルに追加してクラスターをデプロイできます。具体的な手順については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)参照してください。
 
 </details>
 

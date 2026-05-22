@@ -50,7 +50,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 TiDB Lightning は以下をサポートします:
 
 -   [Dumpling](/dumpling-overview.md) 、CSV ファイル、および[Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、Snowflake によってエクスポートされたファイルをインポートします。
--   ローカルディスクまたは Amazon S3storageからデータを読み取ります。
+-   ローカルディスクまたは Amazon S3ストレージからデータを読み取ります。
 
 ## TiDB Lightning はスキーマとテーブルの作成をスキップできますか? {#could-tidb-lightning-skip-creating-schema-and-tables}
 
@@ -81,7 +81,7 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 TiDB Lightning は、10 ギガビット ネットワーク カードで使用するのが最適です。
 
-1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスタを停止させる可能性があります。
+1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスターを停止させる可能性があります。
 
 ## TiDB Lightning がターゲット TiKV クラスターにこれほど多くの空き領域を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
 
@@ -106,7 +106,7 @@ TiDB Lightning は、10 ギガビット ネットワーク カードで使用す
 
 4.  残留メタデータをクリーンアップします。以下のいずれかの条件に該当する場合は、メタデータスキーマを手動でクリーンアップする必要があります。
 
-    -   TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスタ内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
+    -   TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスター内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
     -   チェックポイント ファイルを手動で削除した場合は、ダウンストリーム メタデータ スキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
 
     メタデータをクリーンアップするには、次のコマンドを使用します。
@@ -147,11 +147,11 @@ Suppose the source cluster has the following topology:
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 ```
 
-**状況1：**ターゲットクラスタに3つのレプリカがあり、トポロジがソースクラスタと異なります。このような場合、 TiDB Lightningがターゲットクラスタに配置ポリシーを作成する際にエラーは報告されませんが、ターゲットクラスタのセマンティクスが誤っています。
+**状況1：**ターゲットクラスターに3つのレプリカがあり、トポロジがソースクラスターと異なります。このような場合、 TiDB Lightningがターゲットクラスターに配置ポリシーを作成する際にエラーは報告されませんが、ターゲットクラスターのセマンティクスが誤っています。
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**状況2：**ターゲットクラスタがフォロワーレプリカを「us-mid」リージョン内の別のTiKVノードに配置しており、トポロジ内に「us-west」リージョンが含まれていない場合。このような場合、ターゲットクラスタで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
+**状況2：**ターゲットクラスターがフォロワーレプリカを「us-mid」リージョン内の別のTiKVノードに配置しており、トポロジ内に「us-west」リージョンが含まれていない場合。このような場合、ターゲットクラスターで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 

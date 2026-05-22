@@ -46,7 +46,7 @@ file = "tidb-lightning.log"
 # "tidb": The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
 
 backend = "local"
-# Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+# Sets the temporary ストレージ directory for the sorted key-value files. The directory must be empty, and the ストレージ space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash ストレージ and exclusive I/O for the directory.
 sorted-kv-dir = "${sorted-kv-dir}"
 
 [mydumper]
@@ -63,13 +63,13 @@ status-port = ${status-port}  # During the import process, TiDB Lightning needs 
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
-設定ファイルの詳細については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+設定ファイルの詳細については、 [TiDB Lightning設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ4. データをインポートする {#step-4-import-the-data}
 
 インポートを開始するには、 `tidb-lightning`実行してください。コマンドラインでプログラムを起動すると、 `SIGHUP`シグナルによってプログラムが終了する可能性があります。その場合は、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。
 
-S3からデータをインポートする場合は、アカウントの`SecretKey`と`AccessKey`環境変数として渡す必要があります。アカウントにはS3バックエンドstorageへのアクセス権があります。
+S3からデータをインポートする場合は、アカウントの`SecretKey`と`AccessKey`環境変数として渡す必要があります。アカウントにはS3バックエンドストレージへのアクセス権があります。
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}

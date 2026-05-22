@@ -35,6 +35,6 @@ summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリー
     -   ダンプファイルの読み取りI/O同時実行を制限し、キャッシュミスが多すぎることによるパフォーマンスの低下を回避します[＃110](https://github.com/pingcap/tidb-lightning/pull/110)
     -   インポートの安定性を向上させるために、単一のテーブルへのデータのバッチインポートをサポートします[＃110](https://github.com/pingcap/tidb-lightning/pull/113)
     -   TiKV [＃4199](https://github.com/tikv/tikv/pull/4199)のインポートモードで自動圧縮を有効にする
-    -   TiKV クラスタバージョンが 2.1.4 以降の場合、インポートモードでレベル 1 圧縮が自動的に実行されるため、TiKV 定期的なレベル 1 圧縮パラメータを無効にすることをサポートします[＃119](https://github.com/pingcap/tidb-lightning/pull/119)
+    -   TiKV クラスターバージョンが 2.1.4 以降の場合、インポートモードでレベル 1 圧縮が自動的に実行されるため、TiKV 定期的なレベル 1 圧縮パラメータを無効にすることをサポートします[＃119](https://github.com/pingcap/tidb-lightning/pull/119)
     -   インポーターのディスク容量を過度に消費しないようにインポートエンジンの数を制限する[＃119](https://github.com/pingcap/tidb-lightning/pull/119)
 -   sync-diff-inspector [＃197](https://github.com/pingcap/tidb-tools/pull/197)の TiDB 統計を使用したチャンクの分割をサポート

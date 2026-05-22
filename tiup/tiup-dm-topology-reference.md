@@ -3,11 +3,11 @@ title: Topology Configuration File for DM Cluster Deployment Using TiUP
 summary: TiUPを使用して TiDB データ移行 (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
 ---
 
-# TiUPを使用した DMクラスタ展開のトポロジコンフィグレーションファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
+# TiUPを使用した DMクラスター展開のトポロジ設定ファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
 
 TiDBデータ移行（DM）クラスターをデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ）を提供する必要があります。
 
-同様に、クラスタトポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスタのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと、各セクション内の各フィールドについて説明します。
+同様に、クラスタートポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと、各セクション内の各フィールドについて説明します。
 
 ## ファイル構造 {#file-structure}
 
@@ -25,7 +25,7 @@ TiUPを使用した DM クラスターのデプロイメントのトポロジ構
 
 `global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
--   `user` : デプロイされたクラスタを起動するユーザー。デフォルト値は「tidb」です。2 `<user>`に指定されたユーザーがターゲットマシン上に存在しない場合、 TiUP は自動的にユーザーの作成を試みます。
+-   `user` : デプロイされたクラスターを起動するユーザー。デフォルト値は「tidb」です。2 `<user>`に指定されたユーザーがターゲットマシン上に存在しない場合、 TiUP は自動的にユーザーの作成を試みます。
 -   `group` : ユーザーが自動作成された際に所属するユーザーグループ。デフォルト値は`<user>`フィールドと同じです。指定されたグループが存在しない場合は、自動的に作成されます。
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポート。デフォルト値は「22」です。
 -   `deploy_dir` : 各コンポーネントのデプロイメントディレクトリ。デフォルト値は「deploy」です。構築ルールは以下のとおりです。
@@ -65,8 +65,8 @@ global:
 
 `server_configs` `server_configs`サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 セクションと同様に、 `global`セクションの設定は、インスタンス内の同じキーを持つ設定によって上書きできます。6 `server_configs`は主に以下のフィールドが含まれます。
 
--   `master` : DMマスターサービスに関連する設定。サポートされているすべての設定項目については、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)参照してください。
--   `worker` : DM ワーカー サービスに関連する構成。サポートされているすべての構成項目については、 [DMワーカーコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)参照してください。
+-   `master` : DMマスターサービスに関連する設定。サポートされているすべての設定項目については、 [DMマスター設定ファイル](/dm/dm-master-configuration-file.md)参照してください。
+-   `worker` : DM ワーカー サービスに関連する構成。サポートされているすべての構成項目については、 [DMワーカー設定ファイル](/dm/dm-worker-configuration-file.md)参照してください。
 
 `server_configs`構成の例は次のとおりです。
 
@@ -193,7 +193,7 @@ worker_servers:
 -   `data_dir` : データディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、データディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
 -   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
--   `storage_retention` : Prometheus監視データの保持期間を指定します。デフォルト値は「15日」です。
+-   `ストレージ_retention` : Prometheus監視データの保持期間を指定します。デフォルト値は「15日」です。
 -   `rule_dir` : `*.rules.yml`のファイルすべてが保存されているローカルディレクトリを指定します。指定されたディレクトリ内のファイルは、クラスター構成の初期化フェーズでPrometheusルールとしてターゲットマシンに送信されます。
 -   `remote_config` : Prometheusデータのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには2つの設定があります。
     -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。

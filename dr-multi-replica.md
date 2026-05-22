@@ -3,9 +3,9 @@ title: DR Solution Based on Multiple Replicas in a Single Cluster
 summary: 単一クラスターのマルチレプリカ災害復旧ソリューションについて学習します。
 ---
 
-# 単一クラスタ内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}
+# 単一クラスター内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}
 
-このドキュメントでは、単一クラスタ内の複数のレプリカに基づく災害復旧（DR）ソリューションについて説明します。このドキュメントは、以下の構成になっています。
+このドキュメントでは、単一クラスター内の複数のレプリカに基づく災害復旧（DR）ソリューションについて説明します。このドキュメントは、以下の構成になっています。
 
 -   ソリューション紹介
 -   クラスターをセットアップしてレプリカを構成する方法

@@ -18,7 +18,7 @@ TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](
 
 </CustomContent>
 
--   スロークエリを使用すると、TiDB内のすべてのスロークエリを検索して表示できます。<CustomContent plan="starter,essential,dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>実行プラン、SQL 実行情報、その他の詳細を表示して、各低速クエリのボトルネックを調査します。
+-   スロークエリを使用すると、TiDB内のすべてのスロークエリを検索して表示できます。<CustomContent plan="starter,essential,dedicated">クラスター</CustomContent><CustomContent plan="premium">実例</CustomContent>実行プラン、SQL 実行情報、その他の詳細を表示して、各低速クエリのボトルネックを調査します。
 
 -   <CustomContent plan="starter,essential,dedicated">ステートメント分析</CustomContent><CustomContent plan="premium">SQL文</CustomContent>ページ上の SQL 実行を直接観察し、システム テーブルをクエリせずにパフォーマンスの問題を簡単に見つけることができます。
 
@@ -62,7 +62,7 @@ TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](
 
 デフォルトでは、300 ミリ秒以上かかる SQL クエリは遅いクエリと見なされます。
 
-TiDBで遅いクエリを表示するには<CustomContent plan="starter,essential,dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>、次の手順を実行します。
+TiDBで遅いクエリを表示するには<CustomContent plan="starter,essential,dedicated">クラスター</CustomContent><CustomContent plan="premium">実例</CustomContent>、次の手順を実行します。
 
 <CustomContent plan="starter,essential,dedicated">
 

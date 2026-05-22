@@ -3,7 +3,7 @@ title: Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated
 summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud DedicatedにApache Parquetファイルをインポートする方法を学びましょう。
 ---
 
-# クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする {#import-apache-parquet-files-from-cloud-storage-into-tidb-cloud-dedicated}
+# クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする {#import-apache-parquet-files-from-cloud-ストレージ-into-tidb-cloud-dedicated}
 
 このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、または Azure Blob Storage からTiDB Cloud Dedicatedに Apache Parquet ファイルをインポートする方法について説明します。インポートできる Parquet ファイルは、非圧縮ファイルでも[Google Snappy](https://github.com/google/snappy)で圧縮されたファイルでも構いません。その他の Parquet 圧縮コーデックはサポートされていません。
 
@@ -87,13 +87,13 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
 
 TiDB CloudがAmazon S3バケット、GCSバケット、またはAzure Blob Storageコンテナ内のParquetファイルにアクセスできるようにするには、次のいずれかの操作を行います。
 
--   Parquet ファイルが Amazon S3 にある場合は、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)。
+-   Parquet ファイルが Amazon S3 にある場合は、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-ストレージ.md#configure-amazon-s3-access)。
 
     バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要となるため、アクセスキー (アクセスキー ID とシークレット アクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
--   Parquet ファイルが GCS にある場合は、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)。
+-   Parquet ファイルが GCS にある場合は、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-ストレージ.md#configure-gcs-access)。
 
--   Parquet ファイルが Azure Blob Storage に配置されている場合は、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)。
+-   Parquet ファイルが Azure Blob Storage に配置されている場合は、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-ストレージ.md#configure-azure-blob-ストレージ-access)。
 
 ## ステップ4. ParquetファイルをTiDB Cloudにインポートする {#step-4-import-parquet-files-to-tidb-cloud}
 
@@ -102,7 +102,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 <SimpleTab>
 <div label="Amazon S3">
 
-1.  対象のTiDB Cloud Dedicatedクラスタの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Dedicatedクラスターの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -120,7 +120,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
     -   **ソースURI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://mybucket/myfolder/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://mybucket/myfolder/` 。
-    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)参照してください。
+    -   **認証情報**: AWS ロール ARN または AWS アクセス キーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-ストレージ.md#configure-amazon-s3-access)参照してください。
         -   **AWS ロール ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する] を**クリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスター**のTiDB Cloudアカウント ID**と**TiDB Cloud外部 ID**を取得し、 IAMロールを手動で作成します。
         -   **AWSアクセスキー**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
@@ -155,7 +155,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 <div label="Google Cloud">
 
-1.  対象のTiDB Cloud Dedicatedクラスタの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Dedicatedクラスターの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -173,7 +173,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
     -   **ソースURI** ：
         -   1 つのファイルをインポートする場合は、ソースファイルの URI を`gs://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `gs://mybucket/myfolder/TableName.01.parquet` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
-    -   **認証情報**: TiDB Cloud は、このページで一意の Google Cloud サービス アカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービス アカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)参照してください。
+    -   **認証情報**: TiDB Cloud は、このページで一意の Google Cloud サービス アカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービス アカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-ストレージ.md#configure-gcs-access)参照してください。
 
 4.  **「次へ」**をクリックしてください。
 
@@ -206,7 +206,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 <div label="Azure Blob Storage">
 
-1.  対象のTiDB Cloud Dedicatedクラスタの**インポート**ページを開きます。
+1.  対象のTiDB Cloud Dedicatedクラスターの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -228,20 +228,20 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     -   **接続方法**： TiDB CloudがAzure Blob Storageに接続する方法を選択してください。
 
-        -   **パブリック**（デフォルト）：パブリックインターネット経由で接続します。storageアカウントがパブリックネットワークへのアクセスを許可している場合にこのオプションを使用してください。
-        -   **プライベートリンク**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。storageアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**プライベートリンク**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
+        -   **パブリック**（デフォルト）：パブリックインターネット経由で接続します。ストレージアカウントがパブリックネットワークへのアクセスを許可している場合にこのオプションを使用してください。
+        -   **プライベートリンク**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**プライベートリンク**を選択した場合は、追加フィールド**「Azure Blob Storage リソース ID」**も入力する必要があります。リソース ID を確認するには：
 
             1.  [Azureポータル](https://portal.azure.com/)にアクセスします。
-            2.  storageアカウントに移動し、 **[概要]** &gt; **[JSONビュー]**をクリックします。
-            3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
+            2.  ストレージアカウントに移動し、 **[概要]** &gt; **[JSONビュー]**をクリックします。
+            3.  `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/ストレージAccounts/<account_name>`の形式です。
 
-    -   **資格情報**: TiDB Cloud がAzure Blob Storage コンテナー内のソース ファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)参照してください。
+    -   **資格情報**: TiDB Cloud がAzure Blob Storage コンテナー内のソース ファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **「ここをクリックして Azure ARM テンプレートを使用して新しいものを作成します」を**クリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-ストレージ.md#configure-azure-blob-ストレージ-access)参照してください。
 
 4.  **「次へ」**をクリックしてください。
 
-    接続方法として**プライベートリンク**を選択した場合、 TiDB Cloudはstorageアカウント用のプライベートエンドポイントを作成します。ウィザードを続行するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
+    接続方法として**プライベートリンク**を選択した場合、 TiDB Cloudはストレージアカウント用のプライベートエンドポイントを作成します。ウィザードを続行するには、Azureポータルでこのエンドポイント要求を承認する必要があります。
 
-    1.  [Azureポータル](https://portal.azure.com/)に移動し、storageアカウントに移動します。
+    1.  [Azureポータル](https://portal.azure.com/)に移動し、ストレージアカウントに移動します。
 
     2.  **「ネットワーク」** &gt; **「プライベートエンドポイント接続」**をクリックします。
 

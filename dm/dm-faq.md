@@ -123,7 +123,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 -   TiDBサーバーのグローバル変数: `max_allowed_packet` 。
--   タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+-   タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>を処理する方法を教えてください。 {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 

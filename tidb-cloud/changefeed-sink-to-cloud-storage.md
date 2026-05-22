@@ -3,13 +3,13 @@ title: Sink to Cloud Storage
 summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage へデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様に関する構成手順、およびレプリケーションプロセスの開始方法についても説明します。
 ---
 
-# クラウドストレージへのシンク {#sink-to-cloud-storage}
+# クラウドストレージへのシンク {#sink-to-cloud-ストレージ}
 
-このドキュメントでは、TiDB Cloudからクラウドstorageへデータをストリーミングするためのチェンジフィードの作成方法について説明します。現在、Amazon S3、Google Cloud Storage（GCS）、およびAzure Blob Storageがサポートされています。
+このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするためのチェンジフィードの作成方法について説明します。現在、Amazon S3、Google Cloud Storage（GCS）、およびAzure Blob Storageがサポートされています。
 
 > **注記：**
 >
-> -   データをクラウドstorageにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
+> -   データをクラウドストレージにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 > -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 > -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はベータ版です。詳細については、 [変更フィード（ベータ版）](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
 
@@ -71,7 +71,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 1.  TiDB Cloudコンソールで、**サービスアカウントID**を記録してください。このIDは、 TiDB CloudにGCSバケットへのアクセス権を付与するために使用されます。
 
-    ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+    ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-gcs-endpoint.png)
 
 2.  Google Cloud コンソールで、GCS バケット用のIAMロールを作成します。
 
@@ -79,30 +79,30 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     2.  に移動して、 [役割](https://console.cloud.google.com/iam-admin/roles)**の作成]**をクリックします。
 
-        ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
+        ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-gcs-create-role.png)
 
     3.  役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更することはできません。
 
     4.  **「権限の追加」**をクリックします。役割に以下の権限を追加し、 **「追加」**をクリックします。
 
-        -   storage.buckets.get
-        -   storage.オブジェクト.作成
-        -   storage.オブジェクト.削除
-        -   storage.get
-        -   storage.オブジェクトリスト
-        -   storage.オブジェクト.更新
+        -   ストレージ.buckets.get
+        -   ストレージ.オブジェクト.作成
+        -   ストレージ.オブジェクト.削除
+        -   ストレージ.get
+        -   ストレージ.オブジェクトリスト
+        -   ストレージ.オブジェクト.更新
 
-    ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
+    ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-gcs-assign-permission.png)
 
-3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットを選択してください。GCSバケットは、TiDBクラスタと同じリージョンにある必要があります。
+3.  [バケツ](https://console.cloud.google.com/ストレージ/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットを選択してください。GCSバケットは、TiDBクラスターと同じリージョンにある必要があります。
 
 4.  **バケットの詳細**ページで、 **[権限]**タブをクリックし、 **[アクセスを許可]**をクリックします。
 
-    ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
+    ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-gcs-grant-access-1.png)
 
 5.  バケットへのアクセスを許可するには、以下の情報を入力し、 **「保存」**をクリックしてください。
 
-    -   **「新しいプリンシパル」**フィールドに、以前に記録した対象のTiDBクラスタの**サービスアカウントID**を貼り付けます。
+    -   **「新しいプリンシパル」**フィールドに、以前に記録した対象のTiDBクラスターの**サービスアカウントID**を貼り付けます。
 
     -   **「役割を選択」ドロップ**ダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
 
@@ -114,11 +114,11 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     -   バケットの gsutil URI を取得するには、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
-        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
+        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-gcs-uri01.png)
 
     -   フォルダの gsutil URI を取得するには、フォルダを開き、[コピー] ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
 
-        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
+        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-gcs-uri02.png)
 
 7.  TiDB Cloudコンソールで、Changefeedの**宛先**ページに移動し、**バケットgsutil URI**フィールドに入力します。
 
@@ -129,19 +129,19 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 1.  [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
 
-    1.  左側のナビゲーションペインで**「ストレージアカウント」**をクリックし、storageアカウントを選択します。
-    2.  storageアカウントのナビゲーションメニューで、 **[データstorage]** &gt; **[コンテナー]**を選択し、 **[+コンテナー]**をクリックします。
+    1.  左側のナビゲーションペインで**「ストレージアカウント」**をクリックし、ストレージアカウントを選択します。
+    2.  ストレージアカウントのナビゲーションメニューで、 **[データストレージ]** &gt; **[コンテナー]**を選択し、 **[+コンテナー]**をクリックします。
     3.  新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
 
 2.  対象コンテナのURLを取得します。
 
     1.  コンテナ一覧から、対象のコンテナを選択してください。
     2.  コンテナの**「…」**をクリックし、次に**「コンテナのプロパティ」**を選択します。
-    3.  **URL**値を後で使用するために保存します。たとえば`https://<storage_account>.blob.core.windows.net/<container>`のように保存します。
+    3.  **URL**値を後で使用するために保存します。たとえば`https://<ストレージ_account>.blob.core.windows.net/<container>`のように保存します。
 
 3.  SASトークンを生成します。
 
-    1.  storageアカウントのナビゲーション メニューで、 **[Security+ ネットワーク]** &gt; **[共有アクセス 署名]**を選択します。
+    1.  ストレージアカウントのナビゲーション メニューで、 **[Security+ ネットワーク]** &gt; **[共有アクセス 署名]**を選択します。
 
     2.  **「許可されたサービス」**セクションで、 **「Blob」**を選択します。
 
@@ -159,7 +159,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     6.  **「SASと接続文字列を生成」**をクリックし、 **SASトークン**を保存します。
 
-        ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
+        ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-azure-signature.png)
 
 4.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、Changefeed の**宛先**ページに移動し、次のフィールドに入力します。
 
@@ -214,7 +214,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     -   **区切り文字**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
     -   **引用符**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
     -   **null/空値**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
-    -   **コミットTを含める**：CSV行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
+    -   **コミットTを含める**：CSV行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-ストレージ#replicate-change-data-to-ストレージ-services)を含めるかどうかを制御します。
 
     </div>
      <div label="Configure Canal-JSON format">
@@ -232,11 +232,11 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     -   **洗浄間隔**：デフォルトでは60秒に設定されていますが、2秒から10分の範囲で調整可能です。
     -   **ファイルサイズ**：デフォルトでは64MBに設定されていますが、1MBから512MBの範囲で調整可能です。
 
-    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
+    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-ストレージ-flush-parameters.jpg)
 
     > **注記：**
     >
-    > これら2つのパラメータは、各データベーステーブルごとにクラウドstorageに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドstorageAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
+    > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
 6.  **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
 

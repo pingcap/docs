@@ -19,9 +19,9 @@ DMは、シャーディングDDLと呼ばれるシャーディングテーブル
 
 そのため、「楽観的モード」が必要になります。このモードでは、シャードテーブルに対して実行されたDDL文は、他のシャードテーブルと互換性のある文に自動的に変換され、すぐに下流に移行されます。これにより、DDL文がシャードテーブルによるDML移行の実行をブロックすることはありません。
 
-## 楽観的モードのコンフィグレーション {#configuration-of-the-optimistic-mode}
+## 楽観的モードの設定 {#configuration-of-the-optimistic-mode}
 
-楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。5 `strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
+楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。5 `strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)参照してください。
 
 ## 制限 {#restrictions}
 

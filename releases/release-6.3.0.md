@@ -121,7 +121,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB v6.2.0 では、オプティマイザに`MERGE`ヒントを導入し、CTE のインライン実行を可能にしました。これにより、CTE クエリ結果の利用者はTiFlashで並列実行できるようになりました。v6.3.0 では、セッション変数[`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)導入され、セッション内での CTE のインライン実行が可能になりました。これにより、使いやすさが大幅に向上します。
 
-### 取引 {#transactions}
+### トランザクション {#transactions}
 
 -   悲観的トランザクションにおける一意制約のチェックの延期をサポート [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium)
 
@@ -143,7 +143,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   Titan の無効化が GA に[タボキー](https://github.com/tabokie)
 
-    オンライン TiKV ノードに対して[Titanを無効にする](/storage-engine/titan-configuration.md#disable-titan)ことができます。
+    オンライン TiKV ノードに対して[Titanを無効にする](/ストレージ-engine/titan-configuration.md#disable-titan)ことができます。
 
 -   グローバル統計が準備できていない場合は、 `static`パーティションプルーニングを使用します [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
 
@@ -175,7 +175,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### バックアップと復元 {#backup-and-restore}
 
--   PITR はバックアップ ストレージとして[GCSとAzure Blob Storage](/br/backup-and-restore-storages.md)サポートしています @[joccau](https://github.com/joccau)
+-   PITR はバックアップ ストレージとして[GCSとAzure Blob Storage](/br/backup-and-restore-ストレージs.md)サポートしています @[joccau](https://github.com/joccau)
 
     TiDBクラスターがGoogle CloudまたはAzureにデプロイされている場合、クラスターをv6.3.0にアップグレードすると、PITR機能を使用できます。
 
@@ -203,7 +203,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiCDC はグレースフル アップグレードをサポート [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)@[3AceShowHand](https://github.com/3AceShowHand)
 
-    TiCDCを[TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) （&gt;=v1.11.0）または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) （&gt;=v1.3.8）を使用してデプロイする場合、TiCDCクラスタをスムーズにアップグレードできます。アップグレード中は、データレプリケーションのレイテンシーが30秒以下に抑えられます。これにより安定性が向上し、TiCDCはレイテンシに敏感なアプリケーションをより適切にサポートできるようになります。
+    TiCDCを[TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) （&gt;=v1.11.0）または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) （&gt;=v1.3.8）を使用してデプロイする場合、TiCDCクラスターをスムーズにアップグレードできます。アップグレード中は、データレプリケーションのレイテンシーが30秒以下に抑えられます。これにより安定性が向上し、TiCDCはレイテンシに敏感なアプリケーションをより適切にサポートできるようになります。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -215,7 +215,7 @@ TiDBバージョン: 6.3.0-DMR
 | [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630)                                       | 新しく追加された | テーブルに主キーが必要であるという要件を強制するかどうかを制御します。この変数を有効にすると、主キーのないテーブルを作成または変更しようとするとエラーが発生します。                                                                                                                                                   |
 | [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)             | 新しく追加された | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合、TiDBサーバーが読み取り要求を TiDBサーバーと同じリージョンのレプリカに送信することを優先するしきい値を制御します。                                                                  |
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) | 新しく追加された | TiDB が悲観的トランザクションで[固有の制約](/constraints.md#pessimistic-transactions)いつチェックするかを制御します。                                                                                                                                                  |
-| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)                                               | 新しく追加された | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)有効になっている場合にのみ有効になります。インデックス作成時のバックフィル処理中にローカルstorageを使用する際の制限を設定します。                                                                      |
+| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)                                               | 新しく追加された | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)有効になっている場合にのみ有効になります。インデックス作成時のバックフィル処理中にローカルストレージを使用する際の制限を設定します。                                                                      |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                                 | 新しく追加された | インデックス作成時のバックフィル速度を向上させるために、 `ADD INDEX`および`CREATE INDEX` DDL 操作の高速化を有効にするかどうかを制御します。                                                                                                                                                |
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                         | 新しく追加された | `flashback cluster`の同時実行を制御します。この変数で制御される機能は、TiDB v6.3.0 では完全には動作しません。デフォルト値を変更しないでください。                                                                                                                                             |
 | [`tidb_enable_exchange_partition`](/system-variables.md#tidb_enable_exchange_partition)                                     | 非推奨      | [`exchange partitions with tables`](/partitioned-table.md#partition-management)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。つまり、 `exchange partitions with tables`がデフォルトで有効になっています。                                                              |
@@ -237,19 +237,19 @@ TiDBバージョン: 6.3.0-DMR
 | [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)                                         | 新しく追加された | タイムスタンプの取得を最適化するために使用され、悲観的トランザクションのRC分離レベルにおいてポイントライト競合が少ないシナリオに適しています。この変数を有効にすると、ポイントライトステートメントの実行中にグローバルタイムスタンプを取得する際に発生するレイテンシーとオーバーヘッドを回避できます。                                                                                 |
 | [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新しく追加された | FastScanを有効にするかどうかを制御します。FastScan[ファストスキャン](/tiflash/use-fastscan.md)有効になっている場合（ `ON`に設定）、 TiFlashはより効率的なクエリパフォーマンスを提供しますが、クエリ結果の正確性やデータの一貫性は保証されません。                                                                                |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーション                                                                                            | 種類を変更する  | 説明                                                                                                                                                                                                               |
+| 設定ファイル | 設定                                                                                            | 種類を変更する  | 説明                                                                                                                                                                                                               |
 | -------------- | ----------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルstorageを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
-| ティクヴ           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
-| ティクヴ           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
-| ティクヴ           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログ ファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログ ファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
-| ティクヴ           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログ ファイルのバージョンを指定します。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログ ファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログ ファイルを読み取ることができます。       |
-| ティクヴ           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 修正済み     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
-| ティクヴ           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 修正済み     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |
+| TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
+| TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
+| TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
+| TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログ ファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログ ファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
+| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログ ファイルのバージョンを指定します。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログ ファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログ ファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログ ファイルを読み取ることができます。       |
+| TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 修正済み     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
+| TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 修正済み     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |
 | PD             | [診断を有効にする](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                   | 新しく追加された | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                           |
-| TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨      | バージョン6.3.0以降、この設定項目は非推奨となりました。デフォルトでは、スレッドプールがstorageエンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                    |
+| TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨      | バージョン6.3.0以降、この設定項目は非推奨となりました。デフォルトでは、スレッドプールがストレージエンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                    |
 | DM             | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | 自動セーフモードの継続時間を指定します。                                                                                                                                                                                             |
 | TiCDC          | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)          | 新しく追加された | Syncpoint機能を有効にするかどうかを指定します。                                                                                                                                                                                     |
 | TiCDC          | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)        | 新しく追加された | Syncpointがアップストリームとダウンストリームのスナップショットを同期させる間隔を指定します。                                                                                                                                                              |
@@ -258,7 +258,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### その他 {#others}
 
--   ログバックアップは、バックアップstorageとしてGCSとAzure Blob Storageをサポートしています。
+-   ログバックアップは、バックアップストレージとしてGCSとAzure Blob Storageをサポートしています。
 -   ログバックアップは`exchange partition` DDLと互換性を持つようになりました。
 -   以前[ファストスキャン](/tiflash/use-fastscan.md)を有効にするために使用されていた SQL ステートメント`ALTER TABLE ...SET TiFLASH MODE ...`非推奨となり、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)に置き換えられました。v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。この場合、FastScan を有効または無効にするには、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を設定する必要があります。以前のバージョンから v6.3.0 にアップグレードすると、データの一貫性を保つために、すべてのセッションで FastScan 機能はデフォルトで有効になりません。
 -   TiFlashをLinux AMD64アーキテクチャにデプロイするには、CPUがAVX2命令セットをサポートしている必要があります。 `grep avx2 /proc/cpuinfo`に出力があることを確認してください。TiFlashをLinux ARM64アーキテクチャにデプロイするには、CPUがARMv8命令セットアーキテクチャをサポートしている必要があります。 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`に出力があることを確認してください。命令セット拡張機能を使用することで、TiFlashのベクトル化エンジンはより優れたパフォーマンスを発揮できます。
@@ -280,7 +280,7 @@ TiDBバージョン: 6.3.0-DMR
     -   誤った共有の問題を修正することで、結合操作のパフォーマンスを向上させます [#37641](https://github.com/pingcap/tidb/issues/37641) @[gengliqi](https://github.com/gengliqi)
     -   [`PLAN REPLAYER`](/sql-plan-replayer.md)を使用して複数のSQLステートメントの実行プラン情報を一度にエクスポートできるようにすることで、トラブルシューティングの効率化を図ります。 [#37798](https://github.com/pingcap/tidb/issues/37798) @[Yisaer](https://github.com/Yisaer)
 
--   ティクヴ
+-   TiKV
 
     -   ピアが到達不能になった後にRaftstore がメッセージを過剰にブロードキャストするのを回避するために`unreachable_backoff`アイテムの設定をサポートします [#13054](https://github.com/tikv/tikv/issues/13054) @[5kbpers](https://github.com/5kbpers)
     -   TSOサービスの耐障害性を向上させる [#12794](https://github.com/tikv/tikv/issues/12794) @[pingyu](https://github.com/pingyu)
@@ -310,7 +310,7 @@ TiDBバージョン: 6.3.0-DMR
     -   バックアップと復元 (BR)
 
         -   PITRはログバックアップで生成された小さなファイルをマージできるため、バックアップファイルの数を大幅に削減できます。 [#13232](https://github.com/tikv/tikv/issues/13232) @[Leavrth](https://github.com/Leavrth)
-        -   PITRは、復元後にアップストリームクラスタ構成に基づいてTiFlashレプリカの数を自動的に構成することをサポートします [#37208](https://github.com/pingcap/tidb/issues/37208) @[YuJuncen](https://github.com/YuJuncen)
+        -   PITRは、復元後にアップストリームクラスター構成に基づいてTiFlashレプリカの数を自動的に構成することをサポートします [#37208](https://github.com/pingcap/tidb/issues/37208) @[YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
 
@@ -328,7 +328,7 @@ TiDBバージョン: 6.3.0-DMR
 
     -   TiDB Lightning
 
-        -   S3外部storageURLのクエリパラメータを追加し、指定されたロールを引き受けることで別のアカウントのS3データにアクセスできるようにする [#36891](https://github.com/pingcap/tidb/issues/36891) @[dsdashun](https://github.com/dsdashun)
+        -   S3外部ストレージURLのクエリパラメータを追加し、指定されたロールを引き受けることで別のアカウントのS3データにアクセスできるようにする [#36891](https://github.com/pingcap/tidb/issues/36891) @[dsdashun](https://github.com/dsdashun)
 
 ## バグ修正 {#bug-fixes}
 
@@ -366,7 +366,7 @@ TiDBバージョン: 6.3.0-DMR
     -   `Can't find column`ステートメントに共通テーブル式 (CTE) が含まれている場合に`UPDATE`が報告される問題を修正 [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
     -   間違った`PromQL` [#35856](https://github.com/pingcap/tidb/issues/35856) @[Defined2014](https://github.com/Defined2014)修正
 
--   ティクヴ
+-   TiKV
 
     -   リージョンのハートビートが中断された後、PD が TiKV に再接続しない問題を修正 [#12934](https://github.com/tikv/tikv/issues/12934) @[bufferflies](https://github.com/bufferflies)
     -   Raftstoreがビジー状態のときにリージョンが重複する可能性がある問題を修正 [#13160](https://github.com/tikv/tikv/issues/13160) @[5kbpers](https://github.com/5kbpers)
@@ -384,14 +384,14 @@ TiDBバージョン: 6.3.0-DMR
 
     -   `enable-forwarding`が有効になっている場合にgRPCがエラーを不適切に処理する問題によって発生するPDパニックを修正 [#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
     -   不健康なリージョンがPDpanicを引き起こす可能性がある問題を修正 [#5491](https://github.com/tikv/pd/issues/5491) @[nolouch](https://github.com/nolouch)
-    -   TiFlash学習者レプリカが作成されない可能性がある問題を修正 [#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
+    -   TiFlashラーナーレプリカが作成されない可能性がある問題を修正 [#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
 
 -   TiFlash
 
     -   ウィンドウ関数がクエリのキャンセル時にTiFlashをクラッシュさせる可能性がある問題を修正 [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
     -   `CAST(value AS DATETIME)`への誤ったデータ入力が原因でTiFlashシステムの CPU 使用率が高くなる問題を修正しました [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `CAST(Real/Decimal AS time)`の結果が MySQL と一致しない問題を修正します [#3779](https://github.com/pingcap/tiflash/issues/3779) @[mengxin9014](https://github.com/mengxin9014)
-    -   storage内の一部の古いデータが削除できない問題を修正 [#5570](https://github.com/pingcap/tiflash/issues/5570) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   ストレージ内の一部の古いデータが削除できない問題を修正 [#5570](https://github.com/pingcap/tiflash/issues/5570) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   ページ GC がテーブルの作成をブロックする可能性がある問題を修正 [#5697](https://github.com/pingcap/tiflash/issues/5697) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `NULL`値を含む列でプライマリ インデックスを作成した後に発生するpanicを修正 [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -402,7 +402,7 @@ TiDBバージョン: 6.3.0-DMR
         -   チェックポイントの情報が古くなる可能性がある問題を修正 [#36423](https://github.com/pingcap/tidb/issues/36423) @[YuJuncen](https://github.com/YuJuncen)
         -   復元中に同時実行数の設定が大きすぎるため、リージョンのバランスが取れていない問題を修正 [#37549](https://github.com/pingcap/tidb/issues/37549) @[3pointer](https://github.com/3pointer)
         -   クラスター内に TiCDC が存在する場合にログバックアップチェックポイント TS が停止する可能性がある問題を修正します [#37822](https://github.com/pingcap/tidb/issues/37822) @[YuJuncen](https://github.com/YuJuncen)
-        -   外部storageの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました [#37469](https://github.com/pingcap/tidb/issues/37469) @[MoCuishle28](https://github.com/MoCuishle28)
+        -   外部ストレージの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました [#37469](https://github.com/pingcap/tidb/issues/37469) @[MoCuishle28](https://github.com/MoCuishle28)
 
     -   TiCDC
 

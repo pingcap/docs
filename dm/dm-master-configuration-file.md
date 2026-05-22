@@ -3,11 +3,11 @@ title: DM-master Configuration File
 summary: DM-master の設定ファイルについて説明します。
 ---
 
-# DMマスターコンフィグレーションファイル {#dm-master-configuration-file}
+# DMマスター設定ファイル {#dm-master-configuration-file}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明を含む、DM-master の構成について説明します。
 
-## コンフィグレーションファイルテンプレート {#configuration-file-template}
+## 設定ファイルテンプレート {#configuration-file-template}
 
 以下は DM-master の設定ファイル テンプレートです。
 
@@ -38,7 +38,7 @@ cert-allowed-cn = ["dm"]
 secret-key-path = "/path/to/secret/key"
 ```
 
-## コンフィグレーションパラメータ {#configuration-parameters}
+## 設定パラメータ {#configuration-parameters}
 
 このセクションでは、DM マスターの構成パラメータについて説明します。
 

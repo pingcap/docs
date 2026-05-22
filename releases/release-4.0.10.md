@@ -96,7 +96,7 @@ TiDB バージョン: 4.0.10
     -   バックアップと復元 (BR)
 
         -   GCS [＃688](https://github.com/pingcap/br/pull/688)でBR v4.0.8を使用してバックアップされたファイルをBR v4.0.9で復元できない問題を修正しました。
-        -   GCSstorageURL にプレフィックス[＃673](https://github.com/pingcap/br/pull/673)がない場合にBR がパニックになる問題を修正しました
+        -   GCSストレージURL にプレフィックス[＃673](https://github.com/pingcap/br/pull/673)がない場合にBR がパニックになる問題を修正しました
         -   BR OOM [＃693](https://github.com/pingcap/br/pull/693)回避するために、デフォルトでバックアップ統計を無効にする
 
     -   TiDBBinlog

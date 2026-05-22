@@ -5,7 +5,7 @@ summary: ローカル ファイルをTiDB Cloud Starter またはTiDB Cloud Esse
 
 # ローカルファイルをTiDB Cloud StarterまたはEssentialにインポートする {#import-local-files-to-tidb-cloud-starter-or-essential}
 
-ローカルファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドstorageや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
+ローカルファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドストレージや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
 
 現在、この方法では、1 つのタスクに対して 1 つの CSV ファイルを既存の空のテーブルまたは新しいテーブルにインポートすることがサポートされています。
 
@@ -88,7 +88,7 @@ summary: ローカル ファイルをTiDB Cloud Starter またはTiDB Cloud Esse
 
 いいえ。現在、インポート機能を使用する場合、CSV ファイルのすべての列を既存のテーブルにインポートすることしかできません。
 
-特定の列のみをインポートするには、MySQLクライアントを使用してTiDBクラスタに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
+特定の列のみをインポートするには、MySQLクライアントを使用してTiDBクラスターに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
 
 ```sql
 CREATE TABLE `import_test` (

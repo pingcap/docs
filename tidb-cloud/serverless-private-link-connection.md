@@ -105,7 +105,7 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
 
     -   **プライベート リンク接続名**: プライベート リンク接続の名前を入力します。
     -   **接続タイプ**： **Amazon MSK Provisioned を**選択します。このオプションが表示されない場合は、クラスターがAWS上に作成されていることを確認してください。
-    -   **MSKクラスタARN** : Amazon MSK プロビジョニングされたクラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
+    -   **MSKクラスターARN** : Amazon MSK プロビジョニングされたクラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
 
 5.  **[作成]**をクリックします。
 
@@ -201,7 +201,7 @@ TiDB Cloudコンソールを使用してドメインをプライベート リン
 5.  **[ドメインの接続]**ダイアログで、ドメインの種類を選択します。
 
     -   **TiDB Cloud管理**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **「ドメインをアタッチ」**をクリックして確定します。
-    -   **Confluent Cloud** : Confluent Cloud Dedicatedクラスタからドメインを生成するために提供された一意の名前を入力し、 **「ドメインをアタッチ」を**クリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
+    -   **Confluent Cloud** : Confluent Cloud Dedicatedクラスターからドメインを生成するために提供された一意の名前を入力し、 **「ドメインをアタッチ」を**クリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
 
 </div>
 

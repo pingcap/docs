@@ -3,16 +3,16 @@ title: Connect to Your TiDB Cloud Dedicated Cluster
 summary: さまざまな方法でTiDB Cloud Dedicatedクラスターに接続する方法を学びましょう。
 ---
 
-# TiDB Cloud Dedicatedクラスタに接続します {#connect-to-your-tidb-cloud-dedicated-cluster}
+# TiDB Cloud Dedicatedクラスターに接続します {#connect-to-your-tidb-cloud-dedicated-cluster}
 
-このドキュメントでは、TiDB Cloud Dedicatedクラスタへの接続方法について説明します。
+このドキュメントでは、TiDB Cloud Dedicatedクラスターへの接続方法について説明します。
 
 > **ヒント：**
 >
 > -   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 > -   このドキュメントでは、 TiDB Cloud Dedicatedのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)参照してください。
 
-TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
+TiDB Cloud Dedicatedクラスターが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
 
 -   直接接続
 
@@ -28,9 +28,9 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
         プライベートエンドポイント接続は、VPC内のSQLクライアントがTiDB Cloud Dedicatedクラスターに安全にアクセスできるようにするためのプライベートエンドポイントを提供します。これは、さまざまなクラウドプロバイダーが提供するプライベートリンクサービスを利用しており、ネットワーク管理を簡素化しながら、データベースサービスへの高度に安全な一方向アクセスを実現します。
 
-        -   AWS でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は AWS PrivateLink を使用します。詳細については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します。](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
-        -   Azure 上でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は Azure Private Link を使用します。詳細については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
-        -   Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
+        -   AWS でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は AWS PrivateLink を使用します。詳細については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスターに接続します。](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
+        -   Azure 上でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は Azure Private Link を使用します。詳細については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
+        -   Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベート エンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスターに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
     -   [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)
 
@@ -40,7 +40,7 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
     > **注記：**
     >
-    > [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタでSQLエディタを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+    > [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでSQLエディタを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
     クラスターがAWS上でホストされており、クラスターのTiDBバージョンがv6.5.0以降である場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)のAI支援SQLエディタを使用して、データの価値を最大化できます。
 
@@ -48,4 +48,4 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
 ## 次は？ {#what-s-next}
 
-TiDB クラスターに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。
+TiDB クラスターに正常に接続したら、 [TiDBでのSQL基本操作](/basic-sql-operations.md)ことができます。

@@ -3,11 +3,11 @@ title: Upstream Database Configuration File of TiDB Data Migration
 summary: アップストリームデータベースの設定ファイルを学ぶ
 ---
 
-# TiDB データ移行の上流データベースコンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
+# TiDB データ移行の上流データベース設定ファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
 このドキュメントでは、アップストリーム データベースの構成ファイルについて紹介します。これには、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明が含まれます。
 
-## コンフィグレーションファイルテンプレート {#configuration-file-template}
+## 設定ファイルテンプレート {#configuration-file-template}
 
 以下は、アップストリーム データベースの構成ファイル テンプレートです。
 
@@ -59,7 +59,7 @@ from:
 >
 > DM v2.0.1では、 `enable-gtid`と`enable-relay`を同時に`true`に設定しないでください。そうしないと、増分データが失われる可能性があります。
 
-## コンフィグレーションパラメータ {#configuration-parameters}
+## 設定パラメータ {#configuration-parameters}
 
 このセクションでは、構成ファイル内の各構成パラメータについて説明します。
 

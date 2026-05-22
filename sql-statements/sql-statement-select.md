@@ -161,7 +161,7 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 > **注記：**
 >
 > -   この記述はTiDB Self-Managedにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
-> -   このステートメントは、Amazon S3 や GCS などの[外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)へのクエリ結果の書き込みをサポートしていません。
+> -   このステートメントは、Amazon S3 や GCS などの[外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-ストレージs)へのクエリ結果の書き込みをサポートしていません。
 
 ステートメントでは、以下の句を使用して出力ファイルの形式を指定できます。
 

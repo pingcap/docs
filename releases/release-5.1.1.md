@@ -13,9 +13,9 @@ TiDB バージョン: 5.1.1
 
 -   TiDB
 
-    -   TiDBクラスタをv4.0からv5.1にアップグレードする場合、デフォルト値は`tidb_multi_statement_mode`ではなく`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)参照してください[＃25751](https://github.com/pingcap/tidb/pull/25751)
+    -   TiDBクラスターをv4.0からv5.1にアップグレードする場合、デフォルト値は`tidb_multi_statement_mode`ではなく`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)参照してください[＃25751](https://github.com/pingcap/tidb/pull/25751)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[＃25874](https://github.com/pingcap/tidb/pull/25874)
-    -   `table_storage_stats`テーブル[＃26352](https://github.com/pingcap/tidb/pull/26352)アクセスするには`SUPER`権限が必要です
+    -   `table_ストレージ_stats`テーブル[＃26352](https://github.com/pingcap/tidb/pull/26352)アクセスするには`SUPER`権限が必要です
     -   他のユーザーの権限[＃26311](https://github.com/pingcap/tidb/pull/26311)表示するには、 `information_schema.user_privileges`テーブルにアクセスするために`mysql.user`の`SELECT`権限が必要です。
     -   `information_schema.cluster_hardware`テーブル[＃26297](https://github.com/pingcap/tidb/pull/26297)アクセスするには`CONFIG`権限が必要です
     -   `information_schema.cluster_info`テーブル[＃26297](https://github.com/pingcap/tidb/pull/26297)アクセスするには`PROCESS`権限が必要です
@@ -74,7 +74,7 @@ TiDB バージョン: 5.1.1
 
     -   Dumpling
 
-        -   アップストリームが TiDB v3.x クラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[＃295](https://github.com/pingcap/dumpling/issues/295)
+        -   アップストリームが TiDB v3.x クラスターの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[＃295](https://github.com/pingcap/dumpling/issues/295)
         -   データベースメタデータへのアクセス頻度を減らして、Dumplingのパフォーマンスと安定性を向上させます[＃315](https://github.com/pingcap/dumpling/pull/315)
 
 ## バグ修正 {#bug-fixes}

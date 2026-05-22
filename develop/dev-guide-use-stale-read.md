@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-stale-read/','/ja/tidbcloud/dev-guide-u
 
 # ステイル読み取り {#stale-read}
 
-ステイル読み取りは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができ、storageノード間のデータレプリケーションによって発生するレイテンシーを削減できます。Stale ステイル読み取りを使用する場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカがデータ読み取りに利用可能になります。
+ステイル読み取りは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができ、ストレージノード間のデータレプリケーションによって発生するレイテンシーを削減できます。Stale ステイル読み取りを使用する場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカがデータ読み取りに利用可能になります。
 
 実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて、TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取りを有効にしないでください。
 
@@ -483,4 +483,4 @@ public static class StaleReadHelper{
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

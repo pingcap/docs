@@ -33,7 +33,7 @@ TiDB バージョン: 4.0.0
 -   TiDB
     -   再試行コミットフェーズ[＃16849](https://github.com/pingcap/tidb/pull/16849)の`goroutines`数を制御するための`committer-concurrency`構成項目を追加します。
     -   `show table partition regions`構文[＃17294](https://github.com/pingcap/tidb/pull/17294)サポートする
-    -   TiDBサーバー[＃15700](https://github.com/pingcap/tidb/pull/15700)が使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します
+    -   TiDBサーバー[＃15700](https://github.com/pingcap/tidb/pull/15700)が使用する一時ディスク領域を制限するための`tmp-ストレージ-quota`構成項目を追加します
     -   テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
     -   `insert/replace into tbl_name partition` （ `partition_name_list` ）の声明[＃17313](https://github.com/pingcap/tidb/pull/17313)支持する
     -   `Distinct`関数[＃17240](https://github.com/pingcap/tidb/pull/17240)使用するときに`collations`の値をチェックする機能をサポート
@@ -42,7 +42,7 @@ TiDB バージョン: 4.0.0
     -   `in`式[＃17320](https://github.com/pingcap/tidb/pull/17320)範囲パーティションプルーニングをサポート
 
 -   TiFlash
-    -   Learnerがデータを読み取る際に、 `Lock CF`の`TSO`から`min commit ts`の条件を満たすデータをフィルタリングすることをサポートします。
+    -   ラーナーがデータを読み取る際に、 `Lock CF`の`TSO`から`min commit ts`の条件を満たすデータをフィルタリングすることをサポートします。
     -   `TIMESTAMP`種類の値が`1970-01-01 00:00:00`未満の場合に誤った計算結果を回避するために、システムが明示的にエラーを報告する機能を追加します。
     -   ログ検索時に正規表現でフラグの使用をサポート
 
@@ -98,8 +98,8 @@ TiDB バージョン: 4.0.0
     -   順序が乱れた`ReadIndex`パケット[＃7930](https://github.com/tikv/tikv/pull/7930)によるシステムパニックを修正
     -   読み取り要求コールバック関数が呼び出されないために予期しないエラーが返される問題を修正[＃7921](https://github.com/tikv/tikv/pull/7921)
     -   TiKV の再起動時にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
-    -   storage暗号化[＃7898](https://github.com/tikv/tikv/pull/7898)処理ロジックが正しくないため、 `master key`回転できない問題を修正しました
-    -   storage暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[＃7922](https://github.com/tikv/tikv/pull/7922)
+    -   ストレージ暗号化[＃7898](https://github.com/tikv/tikv/pull/7898)処理ロジックが正しくないため、 `master key`回転できない問題を修正しました
+    -   ストレージ暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[＃7922](https://github.com/tikv/tikv/pull/7922)
 
 -   PD
 
@@ -109,7 +109,7 @@ TiDB バージョン: 4.0.0
 -   ツール
 
     -   バックアップと復元 (BR)
-        -   BRがクラウドstorage[＃298](https://github.com/pingcap/br/pull/298)からデータを復元する際にネットワークの問題によりデータの復元が失敗する問題を修正
+        -   BRがクラウドストレージ[＃298](https://github.com/pingcap/br/pull/298)からデータを復元する際にネットワークの問題によりデータの復元が失敗する問題を修正
     -   TiCDC
         -   データ競合によるシステムパニックを修正[＃565](https://github.com/pingcap/tiflow/pull/565) [＃566](https://github.com/pingcap/tiflow/pull/566)
         -   誤った処理ロジックによるリソースリークやシステムブロックを修正する[＃574](https://github.com/pingcap/tiflow/pull/574) [＃586](https://github.com/pingcap/tiflow/pull/586)

@@ -20,12 +20,12 @@ TiDBはMySQL互換データベースであり、[ナビキャット](https://www
 
 -   [Navicat Premium](https://www.navicat.com) **17.1.6**以降のバージョン。
 -   Navicat Premiumの有料アカウント。
--   TiDBクラスタ。
+-   TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番環境のTiDB Self-Managedクラスターをデプロイ。](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -114,7 +114,7 @@ TiDBはMySQL互換データベースであり、[ナビキャット](https://www
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
@@ -122,7 +122,7 @@ TiDBはMySQL互換データベースであり、[ナビキャット](https://www
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  **CA証明書をダウンロードするには、「CA証明書**」をクリックしてください。
 
@@ -136,7 +136,7 @@ TiDBはMySQL互換データベースであり、[ナビキャット](https://www
     -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： TiDB Cloud Dedicatedクラスタのパスワードを入力してください。
+    -   **パスワード**： TiDB Cloud Dedicatedクラスターのパスワードを入力してください。
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
@@ -158,14 +158,14 @@ TiDBはMySQL互換データベースであり、[ナビキャット](https://www
 2.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号を入力してください。
+    -   **ホスト**：TiDB Self-ManagedクラスターのIPアドレスまたはドメイン名を入力してください。
+    -   **ポート**：TiDB Self-Managedクラスターのポート番号を入力してください。
     -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
     -   **パスワード**：TiDBに接続するために使用するパスワードを入力してください。
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスターへの接続を検証してください。
 
 4.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
 
@@ -174,7 +174,7 @@ TiDBはMySQL互換データベースであり、[ナビキャット](https://www
 
 ## 次のステップ {#next-steps}
 
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

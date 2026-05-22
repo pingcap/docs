@@ -50,7 +50,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 データ更新に関するベストプラクティスを以下に示します。
 
 -   `WHERE`ステートメントには、必ず`UPDATE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
--   大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的取引](/pessimistic-transaction.md))、競合が発生したり ([楽観的取引](/optimistic-transaction.md)) されます。
+-   大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
 
 ### <code>UPDATE</code>例 {#code-update-code-example}
 
@@ -152,7 +152,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 テーブル内の複数のデータ行を更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`使用する](#use-insert-on-duplicate-key-update)`WHERE`句を使用して、更新する必要のあるデータをフィルタリングできます。
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新すること、つまり、更新が完了するまで各繰り返しでデータの一部のみを更新することをお勧めします。これは、TiDB が単一トランザクションのサイズを制限しているためです ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。一度にあまりに多くのデータ更新を行うと、長時間ロックが保持されたり ([悲観的取引](/pessimistic-transaction.md)、競合が発生したり ([楽観的取引](/optimistic-transaction.md)) されます。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新すること、つまり、更新が完了するまで各繰り返しでデータの一部のみを更新することをお勧めします。これは、TiDB が単一トランザクションのサイズを制限しているためです ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。一度にあまりに多くのデータ更新を行うと、長時間ロックが保持されたり ([悲観的トランザクション](/pessimistic-transaction.md)、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 このセクションでは、反復的な更新を処理するスクリプトの記述例を示します。この例では`SELECT`と`UPDATE`を組み合わせて一括更新を完了する方法を示します。
 

@@ -13,9 +13,9 @@ TiDB Lightningを使用する前に、環境が要件を満たしているかど
 
 <table><tr><td></td><td>特徴</td><td>範囲</td><td>必要な権限</td><td>備考</td></tr><tr><td rowspan="2">必須</td><td rowspan="2">基本関数</td><td>ターゲットテーブル</td><td>作成、選択、挿入、更新、削除、ドロップ、変更</td><td>DROP は、tidb-lightning-ctl が checkpoint-destroy-all コマンドを実行する場合にのみ必要です。</td></tr><tr><td>ターゲットデータベース</td><td>作成する</td><td></td></tr><tr><td rowspan="4">必須</td><td>論理インポートモード</td><td>情報スキーマ列</td><td>選択</td><td></td></tr><tr><td rowspan="3">物理インポートモード</td><td>mysql.tidb</td><td>選択</td><td></td></tr><tr><td>-</td><td>素晴らしい</td><td></td></tr><tr><td>-</td><td>制限付き変数管理者、制限付きテーブル管理者</td><td>ターゲットTiDBがSEMを有効にする場合に必要</td></tr><tr><td>推奨</td><td>競合検出、最大エラー</td><td>lightning.task-info-schema-name 用に設定されたスキーマ</td><td>選択、挿入、更新、削除、作成、削除</td><td>必要でない場合は、値を &quot;&quot; に設定する必要があります</td></tr><tr><td>オプション</td><td>並行輸入</td><td>lightning.meta-schema-name 用に設定されたスキーマ</td><td>選択、挿入、更新、削除、作成、削除</td><td>必要でない場合は、値を &quot;&quot; に設定する必要があります</td></tr><tr><td>オプション</td><td>チェックポイント.ドライバー = &quot;mysql&quot;</td><td> checkpoint.schema 設定</td><td>選択、挿入、更新、削除、作成、削除</td><td>チェックポイント情報がファイルではなくデータベースに保存される場合に必要</td></tr></table>
 
-## 対象データベースのストレージスペース {#storage-space-of-the-target-database}
+## 対象データベースのストレージスペース {#ストレージ-space-of-the-target-database}
 
-ターゲットTiKVクラスターには、インポートしたデータを保存するための十分なディスク容量が必要です。1 に加え[標準的なハードウェア要件](/hardware-and-software-requirements.md) 、ターゲットTiKVクラスターのstorage容量**は、データソースのサイズ × レプリカ数 × 2**よりも大きくなければなりません。例えば、クラスターがデフォルトで3つのレプリカを使用する場合、ターゲットTiKVクラスターにはデータソースのサイズの6倍よりも大きなstorage容量が必要です。式に x 2 が含まれているのは、以下の理由によるものです。
+ターゲットTiKVクラスターには、インポートしたデータを保存するための十分なディスク容量が必要です。1 に加え[標準的なハードウェア要件](/hardware-and-software-requirements.md) 、ターゲットTiKVクラスターのストレージ容量**は、データソースのサイズ × レプリカ数 × 2**よりも大きくなければなりません。例えば、クラスターがデフォルトで3つのレプリカを使用する場合、ターゲットTiKVクラスターにはデータソースのサイズの6倍よりも大きなストレージ容量が必要です。式に x 2 が含まれているのは、以下の理由によるものです。
 
 -   インデックスは余分なスペースを占める可能性があります。
 -   RocksDB には空間増幅効果があります。

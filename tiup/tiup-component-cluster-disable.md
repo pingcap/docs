@@ -1,11 +1,11 @@
 ---
 title: tiup cluster disable
-summary: tiup cluster disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。指定されたノードで`systemctl disable <service>`を実行します。オプションには、ノードを指定するための-Nとロールを指定するための-Rがあります。出力はtiup-clusterの実行ログです。
+summary: tiup cluster disable`コマンドは、マシンの再起動後にクラスターサービスの自動有効化を無効にするために使用されます。指定されたノードで`systemctl disable <service>`を実行します。オプションには、ノードを指定するための-Nとロールを指定するための-Rがあります。出力はtiup-clusterの実行ログです。
 ---
 
 # tiup cluster disable {#tiup-cluster-disable}
 
-クラスタサービスが配置されているマシンを再起動すると、クラスタサービスは自動的に有効化されます。クラスタサービスの自動有効化を無効にするには、コマンド`tiup cluster disable`使用します。このコマンドは、指定されたノードでコマンド`systemctl disable <service>`を実行し、サービスの自動有効化を無効にします。
+クラスターサービスが配置されているマシンを再起動すると、クラスターサービスは自動的に有効化されます。クラスターサービスの自動有効化を無効にするには、コマンド`tiup cluster disable`使用します。このコマンドは、指定されたノードでコマンド`systemctl disable <service>`を実行し、サービスの自動有効化を無効にします。
 
 ## 構文 {#syntax}
 
@@ -19,7 +19,7 @@ tiup cluster disable <cluster-name> [flags]
 
 ### -N, --node {#n-node}
 
--   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスタステータステーブルの最初の列から取得できます。
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になります。
 
@@ -47,4 +47,4 @@ tiup cluster disable <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

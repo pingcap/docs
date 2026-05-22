@@ -37,7 +37,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 上記のコードでは、リクエスト本体は次のプロパティを持つ JSON オブジェクトです。
 
--   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
+-   `cluster_id` :*文字列*。TiDBクラスターの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
 -   `name` ：*文字列*。セッションの名前。
 

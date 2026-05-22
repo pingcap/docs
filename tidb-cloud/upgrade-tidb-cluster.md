@@ -3,7 +3,7 @@ title: Upgrade a TiDB Cluster
 summary: TiDB クラスターをアップグレードする方法を学びます。
 ---
 
-# TiDBクラスタのアップグレード {#upgrade-a-tidb-cluster}
+# TiDBクラスターのアップグレード {#upgrade-a-tidb-cluster}
 
 このドキュメントでは、 TiDB Cloud上の TiDB クラスターをアップグレードする方法について説明します。TiDB Cloud は、 TiDB バージョンをアップグレードするための 2 つのアップグレード メカニズムを提供します。
 
@@ -18,14 +18,14 @@ TiDB バージョンが低すぎる場合、 TiDB Cloud は定期的に均一に
 <CustomContent language="en,zh">
 
 -   クラウドプロバイダー: AWS、Azure、Google Cloud、または Alibaba Cloud
--   クラスタ名: xxx
+-   クラスター名: xxx
 
 </CustomContent>
 
 <CustomContent language="ja">
 
 -   クラウドプロバイダー: AWS、Azure、または Google Cloud
--   クラスタ名: xxx
+-   クラスター名: xxx
 
 </CustomContent>
 

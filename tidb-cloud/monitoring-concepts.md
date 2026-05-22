@@ -9,7 +9,7 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 ## 組み込みの指標 {#built-in-metrics}
 
-組み込みメトリクスとは<CustomContent plan="dedicated">クラスタ</CustomContent>TiDB Cloudが収集し、<CustomContent plan="starter,essential,premium">実例</CustomContent>レベルの**メトリクス**ページに表示する一連の標準メトリクスを指します。これらのメトリクスを使用することで、パフォーマンスの問題を容易に特定し、現在のデータベース展開が要件を満たしているかどうかを判断できます。
+組み込みメトリクスとは<CustomContent plan="dedicated">クラスター</CustomContent>TiDB Cloudが収集し、<CustomContent plan="starter,essential,premium">実例</CustomContent>レベルの**メトリクス**ページに表示する一連の標準メトリクスを指します。これらのメトリクスを使用することで、パフォーマンスの問題を容易に特定し、現在のデータベース展開が要件を満たしているかどうかを判断できます。
 
 <CustomContent plan="starter,essential,dedicated">
 
@@ -24,7 +24,7 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 ## 内蔵アラート機能 {#built-in-alerting}
 
-組み込みアラートとは、 TiDB Cloud EssentialインスタンスおよびTiDB Cloud Dedicatedクラスタの監視を支援するためにTiDB Cloudが提供するアラートメカニズムのことです。現在、 TiDB Cloudは以下の3種類のアラートを提供しています。
+組み込みアラートとは、 TiDB Cloud EssentialインスタンスおよびTiDB Cloud Dedicatedクラスターの監視を支援するためにTiDB Cloudが提供するアラートメカニズムのことです。現在、 TiDB Cloudは以下の3種類のアラートを提供しています。
 
 -   リソース使用状況アラート
 
@@ -32,7 +32,7 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 -   変更フィードアラート
 
-TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
+TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
 
 詳細については、 [TiDB Cloudの組み込みアラート機能](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 
@@ -41,7 +41,7 @@ TiDB Cloudコンソールの「アラート」ページでは、 TiDB Cloud Esse
 TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します。
 
 -   TiDB Cloud StarterおよびEssentialインスタンスの場合、 TiDB Cloudはインスタンスレベルで履歴イベントをログに記録します。
--   TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはクラスタレベルで履歴イベントをログに記録します。
+-   TiDB Cloud Dedicatedクラスターの場合、 TiDB Cloudはクラスターレベルで履歴イベントをログに記録します。
 
 **イベント**ページでは、イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなど、記録されたイベントを確認できます。
 
@@ -49,7 +49,7 @@ TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します
 
 ## サードパーティ製メトリクスの統合 {#third-party-metrics-integrations}
 
-TiDB Cloud、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスタのパフォーマンスメトリクスを表示したりできます。
+TiDB Cloud、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスターのパフォーマンスメトリクスを表示したりできます。
 
 -   [Datadogとの連携](/tidb-cloud/monitor-datadog-integration.md)
 

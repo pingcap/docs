@@ -116,7 +116,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
 -   PD
 
-    -   クラスタノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[＃5234](https://github.com/tikv/pd/issues/5234) @ [rleungx](https://github.com/rleungx)
+    -   クラスターノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[＃5234](https://github.com/tikv/pd/issues/5234) @ [rleungx](https://github.com/rleungx)
     -   `enable-forwarding`有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[＃5373](https://github.com/tikv/pd/issues/5373) @ [bufferflies](https://github.com/bufferflies)
     -   `/regions/replicated`間違ったステータス[＃5095](https://github.com/tikv/pd/issues/5095) @ [rleungx](https://github.com/rleungx)を返す可能性がある問題を修正しました
 
@@ -124,7 +124,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
     -   状況によっては、クラスター化インデックスを持つテーブルの列を削除した後にTiFlash がクラッシュする問題を修正[＃5154](https://github.com/pingcap/tiflash/issues/5154) @ [hongyunyan](https://github.com/hongyunyan)
     -   `format`関数が`Data truncated`エラー[＃4891](https://github.com/pingcap/tiflash/issues/4891) @ [xzhangxian1008](https://github.com/xzhangxian1008)を返す可能性がある問題を修正しました
-    -   一部の古いデータがstorageに残り、削除できない問題を修正[＃5659](https://github.com/pingcap/tiflash/issues/5659) @ [lidezhu](https://github.com/lidezhu)
+    -   一部の古いデータがストレージに残り、削除できない問題を修正[＃5659](https://github.com/pingcap/tiflash/issues/5659) @ [lidezhu](https://github.com/lidezhu)
     -   一部のエッジケースで不要な CPU 使用率を修正[＃5409](https://github.com/pingcap/tiflash/issues/5409) @ [breezewish](https://github.com/breezewish)
     -   IPv6 [＃5247](https://github.com/pingcap/tiflash/issues/5247) @ [solotzg](https://github.com/solotzg)を使用するクラスターでTiFlash が動作できないバグを修正しました
     -   並列集約[#5356](https://github.com/pingcap/tiflash/issues/5356) @ [gengliqi](https://github.com/gengliqi)エラーによりTiFlashがクラッシュする可能性があるバグを修正
@@ -166,7 +166,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   バックアップと復元 (BR)
 
         -   RawKVモード[＃35279](https://github.com/pingcap/tidb/issues/35279) @ [3pointer](https://github.com/3pointer)でBRが`ErrRestoreTableIDMismatch`報告するバグを修正
-        -   大規模クラスタバックアップ[#30087](https://github.com/pingcap/tidb/issues/30087) @ [MoCuishle28](https://github.com/MoCuishle28)での S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。
+        -   大規模クラスターバックアップ[#30087](https://github.com/pingcap/tidb/issues/30087) @ [MoCuishle28](https://github.com/MoCuishle28)での S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。
         -   サマリーログ[#35553](https://github.com/pingcap/tidb/issues/35553) @ [ixuh12](https://github.com/ixuh12)のバックアップ時間の誤りを修正
 
     -   Dumpling

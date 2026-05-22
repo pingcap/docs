@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.5 Release Notes
-summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではstorageとパフォーマンスの最適化が行われ、PDではstorage精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
+summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
 ---
 
 # TiDB 3.0.5 リリースノート {#tidb-3-0-5-release-notes}
@@ -69,7 +69,7 @@ TiDB Ansible バージョン: 3.0.5
 
 ## PD {#pd}
 
--   リージョン[＃1782](https://github.com/pingcap/pd/pull/1782)が占有するstorageの精度を向上
+-   リージョン[＃1782](https://github.com/pingcap/pd/pull/1782)が占有するストレージの精度を向上
 -   `--help`コマンド[＃1763](https://github.com/pingcap/pd/pull/1763)の出力を改善する
 -   TLS を有効にした後に HTTP リクエストがリダイレクトに失敗する問題を修正[＃1777](https://github.com/pingcap/pd/pull/1777)
 -   pd-ctlが`store shows limit`コマンド[＃1808](https://github.com/pingcap/pd/pull/1808)使用する際に発生するpanic問題を修正
@@ -80,7 +80,7 @@ TiDB Ansible バージョン: 3.0.5
 -   Tidb Binlog
     -   `ALTER DATABASE`関連する DDL 操作によりDrainerが異常終了する問題を修正[＃769](https://github.com/pingcap/tidb-binlog/pull/769)
     -   レプリケーション効率を向上させるためにコミットbinlog のトランザクション ステータス情報のクエリをサポートする[＃757](https://github.com/pingcap/tidb-binlog/pull/757)
-    -   ドレイナーの`start_ts`ポンプの最大値`commit_ts` [＃758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合にPumppanicが発生する可能性がある問題を修正しました。
+    -   Drainerの`start_ts`Pumpの最大値`commit_ts` [＃758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合にPumppanicが発生する可能性がある問題を修正しました。
 -   TiDB Lightning
     -   Loaderの完全なロジックインポート機能を統合し、バックエンドモード[＃221](https://github.com/pingcap/tidb-lightning/pull/221)構成をサポートします。
 

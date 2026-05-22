@@ -86,7 +86,7 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 
 > **注記：**
 >
-> -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。 TiDB は、クラスタ初期化時に`default`リソース グループを自動的に作成します。 このリソース グループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。いずれのリソースグループにも紐付けられていないすべてのリクエストは、自動的にこの`default`リソースグループに紐付けられます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
+> -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。 TiDB は、クラスター初期化時に`default`リソース グループを自動的に作成します。 このリソース グループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。いずれのリソースグループにも紐付けられていないすべてのリクエストは、自動的にこの`default`リソースグループに紐付けられます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
 > -   現在、 `default`リソース グループのみが`BACKGROUND`構成の変更をサポートしています。
 
 ## 例 {#examples}

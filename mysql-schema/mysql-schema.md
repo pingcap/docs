@@ -25,15 +25,15 @@ summary: TiDBのシステムテーブルについて学びましょう。
 -   `global_priv` : 証明書に基づく認証情報
 -   `role_edges` : 役割間の関係
 
-## クラスタステータスシステムテーブル {#cluster-status-system-tables}
+## クラスターステータスシステムテーブル {#cluster-status-system-tables}
 
 -   `tidb`テーブルには、TiDB に関するグローバル情報が含まれています。
 
-    -   `bootstrapped` : TiDBクラスタが初期化されているかどうか。この値は読み取り専用であり、変更できません。
+    -   `bootstrapped` : TiDBクラスターが初期化されているかどうか。この値は読み取り専用であり、変更できません。
     -   `tidb_server_version` : TiDB の初期化時のバージョン情報。この値は読み取り専用であり、変更できません。
     -   `system_tz` : TiDB のシステム タイム ゾーン。
     -   `new_collation_enabled` : TiDB が[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にしたかどうか。この値は読み取り専用であり、変更できないことに注意してください。
-    -   `cluster_id` （v8.5.6で追加）：TiDBクラスタの一意の識別子。この値は読み取り専用であり、変更できません。
+    -   `cluster_id` （v8.5.6で追加）：TiDBクラスターの一意の識別子。この値は読み取り専用であり、変更できません。
 
 ## サーバー側のヘルプシステムテーブル {#server-side-help-system-tables}
 
@@ -69,7 +69,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 > **注記：**
 >
-> GCワーカーシステムテーブルは、TiDBセルフマネージドでのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> GCワーカーシステムテーブルは、TiDB Self-Managedでのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
 -   `gc_delete_range` : 削除する KV 範囲
 -   `gc_delete_range_done` : 削除された KV 範囲

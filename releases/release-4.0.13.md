@@ -26,7 +26,7 @@ TiDB バージョン: 4.0.13
 
     -   `store used size`の計算プロセスをより正確にする[＃9904](https://github.com/tikv/tikv/pull/9904)
     -   `EpochNotMatch`メッセージにさらに多くのリージョンを設定すると、リージョンのミス[＃9731](https://github.com/tikv/tikv/pull/9731)が減ります。
-    -   長時間稼働するクラスタに蓄積されたメモリの解放を高速化[＃10035](https://github.com/tikv/tikv/pull/10035)
+    -   長時間稼働するクラスターに蓄積されたメモリの解放を高速化[＃10035](https://github.com/tikv/tikv/pull/10035)
 
 -   PD
 
@@ -42,7 +42,7 @@ TiDB バージョン: 4.0.13
     -   バックアップと復元 (BR)
 
         -   `mysql`スキーマ[＃1077](https://github.com/pingcap/br/pull/1077)で作成されたユーザー テーブルのバックアップをサポート
-        -   更新`checkVersion`クラスタデータとバックアップデータ[＃1090](https://github.com/pingcap/br/pull/1090)チェックする
+        -   更新`checkVersion`クラスターデータとバックアップデータ[＃1090](https://github.com/pingcap/br/pull/1090)チェックする
         -   バックアップ[＃1062](https://github.com/pingcap/br/pull/1062)中に少数のTiKVノード障害を許容する
 
     -   TiCDC
@@ -114,7 +114,7 @@ TiDB バージョン: 4.0.13
     -   `delta-merge-tasks`の数がPrometheusに報告されない問題を修正
     -   `Segment Split`中に発生するTiFlashpanic問題を修正
     -   Grafanaの`Region write Duration (write blocks)`パネルが間違った場所に表示される問題を修正しました
-    -   storageエンジンがデータの削除に失敗する潜在的な問題を修正
+    -   ストレージエンジンがデータの削除に失敗する潜在的な問題を修正
     -   `TIME`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました
     -   `bitwise`演算子の動作がTiDBと異なるバグを修正
     -   `STRING`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました

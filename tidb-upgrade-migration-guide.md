@@ -3,9 +3,9 @@ title: Migrate and Upgrade a TiDB Cluster
 summary: 完全バックアップと復元のためのBRと、増分データレプリケーションのための TiCDC を使用して、TiDB クラスターを移行およびアップグレードする方法を学習します。
 ---
 
-# TiDBクラスタの移行とアップグレード {#migrate-and-upgrade-a-tidb-cluster}
+# TiDBクラスターの移行とアップグレード {#migrate-and-upgrade-a-tidb-cluster}
 
-このドキュメントでは、 [BR](/br/backup-and-restore-overview.md)で完全バックアップとリストアを行い、 [TiCDC](/ticdc/ticdc-overview.md)で増分データレプリケーションを行う TiDB クラスタの移行とアップグレード（ブルーグリーンアップグレードとも呼ばれます）方法について説明します。このソリューションは、デュアルクラスタ冗長性と増分レプリケーションを使用することで、スムーズなトラフィック切り替えと高速ロールバックを実現し、重要なシステムに信頼性が高くリスクの低いアップグレードパスを提供します。パフォーマンスの向上と新機能のメリットを継続的に享受し、安全で効率的なデータベースシステムを維持するために、データベースバージョンを定期的にアップグレードすることをお勧めします。このソリューションの主な利点は次のとおりです。
+このドキュメントでは、 [BR](/br/backup-and-restore-overview.md)で完全バックアップとリストアを行い、 [TiCDC](/ticdc/ticdc-overview.md)で増分データレプリケーションを行う TiDB クラスターの移行とアップグレード（ブルーグリーンアップグレードとも呼ばれます）方法について説明します。このソリューションは、デュアルクラスター冗長性と増分レプリケーションを使用することで、スムーズなトラフィック切り替えと高速ロールバックを実現し、重要なシステムに信頼性が高くリスクの低いアップグレードパスを提供します。パフォーマンスの向上と新機能のメリットを継続的に享受し、安全で効率的なデータベースシステムを維持するために、データベースバージョンを定期的にアップグレードすることをお勧めします。このソリューションの主な利点は次のとおりです。
 
 -   **制御可能なリスク**: 数分以内に元のクラスターへのロールバックをサポートし、ビジネスの継続性を確保します。
 -   **データ整合性**: 多段階の検証メカニズムを使用してデータ損失を防ぎます。
@@ -21,7 +21,7 @@ summary: 完全バックアップと復元のためのBRと、増分データレ
 
 **ロールバック プラン**: 移行およびアップグレード プロセス中に新しいクラスターで問題が発生した場合、いつでもビジネス トラフィックを元のクラスターに戻すことができます。
 
-以下のセクションでは、TiDB クラスターの移行とアップグレードに関する標準化されたプロセスと一般的な手順について説明します。コマンド例は、TiDB セルフマネージド環境に基づいています。
+以下のセクションでは、TiDB クラスターの移行とアップグレードに関する標準化されたプロセスと一般的な手順について説明します。コマンド例は、TiDB Self-Managed環境に基づいています。
 
 ## ステップ1: ソリューションの実現可能性を評価する {#step-1-evaluate-solution-feasibility}
 
@@ -44,9 +44,9 @@ summary: 完全バックアップと復元のためのBRと、増分データレ
 
 ## ステップ2: 新しいクラスターを準備する {#step-2-prepare-the-new-cluster}
 
-### 1. 古いクラスタのGC有効期間を調整する {#1-adjust-the-gc-lifetime-of-the-old-cluster}
+### 1. 古いクラスターのGC有効期間を調整する {#1-adjust-the-gc-lifetime-of-the-old-cluster}
 
-データレプリケーションの安定性を確保するため、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 、 BRバックアップ、 BRリストア、クラスタアップグレード、 TiCDC Changefeedレプリケーションセットアップの各操作と間隔の合計所要時間をカバーする値に調整してください。そうしないと、レプリケーションタスクが回復不能な状態`failed`になり、移行とアップグレードのプロセス全体を新しいフルバックアップからやり直す必要が生じる可能性があります。
+データレプリケーションの安定性を確保するため、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 、 BRバックアップ、 BRリストア、クラスターアップグレード、 TiCDC Changefeedレプリケーションセットアップの各操作と間隔の合計所要時間をカバーする値に調整してください。そうしないと、レプリケーションタスクが回復不能な状態`failed`になり、移行とアップグレードのプロセス全体を新しいフルバックアップからやり直す必要が生じる可能性があります。
 
 次の例では、 `tidb_gc_life_time`を`60h`に設定します。
 
@@ -59,7 +59,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 > **注記：**
 >
-> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのstorage使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
+> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのストレージ使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。ストレージとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
 
 ### 2. 新しいクラスターに全データを移行する {#2-migrate-full-data-to-the-new-cluster}
 
@@ -74,7 +74,7 @@ SET GLOBAL tidb_gc_life_time=60h;
     -   バックアップ速度: 8 つのスレッドで TiKV ノードごとに 1 TiB のデータのバックアップに約 1 時間かかります。
     -   復元速度: TiKV ノードごとに 1 TiB のデータの復元には約 20 分かかります。
 
--   **コンフィグレーションの整合性**：古いクラスタと新しいクラスタの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
+-   **設定の整合性**：古いクラスターと新しいクラスターの構成が[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)であることを確認してください。同一でない場合、 BRの復元は失敗します。
 
 -   **システム テーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システム テーブル データを復元します。
 
@@ -90,7 +90,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
     ```shell
     tiup br:${cluster_version} validate decode --field="end-version" \
-    --storage "s3://xxx?access-key=${access-key}&secret-access-key=${secret-access-key}" | tail -n1
+    --ストレージ "s3://xxx?access-key=${access-key}&secret-access-key=${secret-access-key}" | tail -n1
     ```
 
 3.  新しいクラスターをデプロイ。
@@ -121,7 +121,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 ### 1. 順方向データ複製チャネルを確立する {#1-establish-a-forward-data-replication-channel}
 
-この段階では、古いクラスタは元のバージョンのままですが、新しいクラスタはターゲットバージョンにアップグレードされています。このステップでは、古いクラスタから新しいクラスタへの順方向データレプリケーションチャネルを確立する必要があります。
+この段階では、古いクラスターは元のバージョンのままですが、新しいクラスターはターゲットバージョンにアップグレードされています。このステップでは、古いクラスターから新しいクラスターへの順方向データレプリケーションチャネルを確立する必要があります。
 
 > **注記：**
 >
@@ -175,7 +175,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     ./sync_diff_inspector --config=./config.toml
     ```
 
--   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)参照してください。
+-   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスターのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)参照してください。
 
 -   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
 
@@ -184,7 +184,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 この移行手順では、 BR `--with-sys-table`オプションを使用して一部のシステムテーブルデータを復元します。対象範囲に含まれないテーブルについては、手動で復元する必要があります。確認および補足すべき一般的な項目は次のとおりです。
 
 -   ユーザー権限： `mysql.user`テーブルを比較します。
--   コンフィグレーション設定: 構成項目とシステム変数が一貫していることを確認します。
+-   設定設定: 構成項目とシステム変数が一貫していることを確認します。
 -   自動インクリメント列: 新しいクラスター内の自動インクリメント ID キャッシュをクリアします。
 -   統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 
@@ -206,7 +206,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 ### 2. 切り替えを実行する {#2-execute-the-switchover}
 
-1.  古いクラスタがビジネストラフィックを処理できないように、アプリケーションサービスを停止します。アクセスをさらに制限するには、次のいずれかの方法を使用します。
+1.  古いクラスターがビジネストラフィックを処理できないように、アプリケーションサービスを停止します。アクセスをさらに制限するには、次のいずれかの方法を使用します。
 
     -   古いクラスター内のユーザー アカウントをロックします。
 
@@ -214,7 +214,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
         ALTER USER ACCOUNT LOCK;
         ```
 
-    -   古いクラスタを読み取り専用モードに設定します。アクティブなビジネスセッションをクリアし、読み取り専用モードに入っていない接続を防止するため、古いクラスタ内のTiDBノードを再起動することをお勧めします。
+    -   古いクラスターを読み取り専用モードに設定します。アクティブなビジネスセッションをクリアし、読み取り専用モードに入っていない接続を防止するため、古いクラスター内のTiDBノードを再起動することをお勧めします。
 
         ```sql
         SET GLOBAL tidb_super_read_only=ON;

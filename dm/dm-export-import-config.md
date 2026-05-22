@@ -3,7 +3,7 @@ title: Export and Import Data Sources and Task Configuration of Clusters
 summary: DM を使用するときに、データ ソースとクラスターのタスク構成をエクスポートおよびインポートする方法を学習します。
 ---
 
-# データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション {#export-and-import-data-sources-and-task-configuration-of-clusters}
+# データソースのエクスポートとインポート、およびクラスターのタスク設定 {#export-and-import-data-sources-and-task-configuration-of-clusters}
 
 `config`コマンドは、クラスターのデータ ソースとタスク構成をエクスポートおよびインポートするために使用されます。
 

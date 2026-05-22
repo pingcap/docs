@@ -94,7 +94,7 @@ scrape_configs:
 
 いずれかの期間が長すぎる場合は、 TiDB Lightningが使用するディスクが遅すぎるか、I/O でビジー状態であることを示します。
 
-### 6行目: ストレージ {#row-6-storage}
+### 6行目: ストレージ {#row-6-ストレージ}
 
 ![Panels in sixth row](/media/lightning-grafana-row-6.png)
 

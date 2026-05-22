@@ -11,9 +11,9 @@ TiDB Cloud、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 >
 > これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## クラスタの制限 {#cluster-limits}
+## クラスターの制限 {#cluster-limits}
 
-| 成分                                                          | 制限 |
+| コンポーネント                                                          | 制限 |
 | :---------------------------------------------------------- | :- |
 | [データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)部あたりのコピー数 | 3  |
 | クロスゾーン展開のアベイラビリティゾーンの数                                      | 3  |
@@ -22,14 +22,14 @@ TiDB Cloud、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 >
 > TiDB の一般的な使用上の制限について詳しくは、 [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## クラスタクォータ {#cluster-quotas}
+## クラスタークォータ {#cluster-quotas}
 
-| 成分                            | クォータ（デフォルト） |
+| コンポーネント                            | クォータ（デフォルト） |
 | :---------------------------- | :---------- |
-| 組織内のすべてのクラスタの合計 TiDB ノードの最大数  | 10          |
-| 組織内のすべてのクラスタの合計 TiKV ノードの最大数  | 15          |
-| 組織内のすべてのクラスタのTiFlashノードの最大数   | 5           |
-| 組織内のすべてのクラスタの TiProxy ノードの最大数 | 10          |
+| 組織内のすべてのクラスターの合計 TiDB ノードの最大数  | 10          |
+| 組織内のすべてのクラスターの合計 TiKV ノードの最大数  | 15          |
+| 組織内のすべてのクラスターのTiFlashノードの最大数   | 5           |
+| 組織内のすべてのクラスターの TiProxy ノードの最大数 | 10          |
 
 > **注記：**
 >

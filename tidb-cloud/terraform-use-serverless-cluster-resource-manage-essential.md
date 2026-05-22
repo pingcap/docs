@@ -22,7 +22,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDBクラスターはプロジェクトに属します。TiDB Cloud Essentialクラスターを作成する前に、クラスターを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -289,7 +289,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 ## TiDB Cloud Essential クラスターを変更する {#modify-a-tidb-cloud-essential-cluster}
 
-TiDB Cloud Essential クラスタでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
+TiDB Cloud Essential クラスターでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
 
 -   `display_name` : クラスターの表示名。
 -   `auto_scaling` : クラスターの自動スケーリング構成。

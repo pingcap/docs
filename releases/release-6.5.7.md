@@ -69,7 +69,7 @@ TiDB バージョン: 6.5.7
 -   TiKV
 
     -   破損したSSTファイルが他のTiKVノード[＃15986](https://github.com/tikv/tikv/issues/15986) @ [Connor1996](https://github.com/Connor1996)に広がる可能性がある問題を修正
-    -   大規模なトランザクション[＃14864](https://github.com/tikv/tikv/issues/14864) @ [overvenus](https://github.com/overvenus)を追跡するときに、古い読み取りの解決済み TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました
+    -   大規模なトランザクション[＃14864](https://github.com/tikv/tikv/issues/14864) @ [overvenus](https://github.com/overvenus)を追跡するときに、ステイル読み取りの解決済み TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました
     -   TiKVがraft log [＃15800](https://github.com/tikv/tikv/issues/15800) @ [tonyxuqqi](https://github.com/tonyxuqqi)を追加できないため`ServerIsBusy`エラーを報告する問題を修正しました。
 
 -   PD

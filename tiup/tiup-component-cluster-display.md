@@ -1,11 +1,11 @@
 ---
 title: tiup cluster display
-summary: tiup cluster displayコマンドは、クラスタ内の各コンポーネントの動作状況を効率的に表示します。ダッシュボード情報、ノードステータス、CPUおよびメモリ使用率などを表示するオプションが用意されています。出力には、クラスタ名、バージョン、SSHクライアントの種類、ダッシュボードアドレス、ノードの詳細を含む表が含まれます。ノードのサービスステータスは、「稼働中」、「停止中」、「廃棄済み」、「オフライン保留中」、「不明」のいずれかになります。
+summary: tiup cluster displayコマンドは、クラスター内の各コンポーネントの動作状況を効率的に表示します。ダッシュボード情報、ノードステータス、CPUおよびメモリ使用率などを表示するオプションが用意されています。出力には、クラスター名、バージョン、SSHクライアントの種類、ダッシュボードアドレス、ノードの詳細を含む表が含まれます。ノードのサービスステータスは、「稼働中」、「停止中」、「廃棄済み」、「オフライン保留中」、「不明」のいずれかになります。
 ---
 
 # tiup cluster display {#tiup-cluster-display}
 
-クラスタ内の各コンポーネントの動作状況を確認したい場合、各マシンに1台ずつログインするのは明らかに非効率的です。そこで、 tiup-clusterは、この作業を効率的に実行するための`tiup cluster display`コマンドを提供します。
+クラスター内の各コンポーネントの動作状況を確認したい場合、各マシンに1台ずつログインするのは明らかに非効率的です。そこで、 tiup-clusterは、この作業を効率的に実行するための`tiup cluster display`コマンドを提供します。
 
 ## 構文 {#syntax}
 
@@ -101,4 +101,4 @@ tiup cluster display <cluster-name> [flags]
 
 ノードのサービスステータスはPDのスケジューリング情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)参照してください。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

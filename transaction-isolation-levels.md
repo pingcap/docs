@@ -32,7 +32,7 @@ TiDBはスナップショット分離（SI）一貫性を実装しており、My
 >
 > TiDB v3.0以降、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると**、トランザクション分離レベルが損なわれる**可能性があるため、有効にすることは推奨されません。詳細は[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
 >
-> TiDB v3.0.8以降、新規に作成されたTiDBクラスタはデフォルトで[悲観的トランザクションモード](/pessimistic-transaction.md)使用します。現在の読み取り（ `for update`読み取り）**は繰り返し不可能な読み取り**です。詳細は[悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
+> TiDB v3.0.8以降、新規に作成されたTiDBクラスターはデフォルトで[悲観的トランザクションモード](/pessimistic-transaction.md)使用します。現在の読み取り（ `for update`読み取り）**は繰り返し不可能な読み取り**です。詳細は[悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ## 繰り返し読み取り分離レベル {#repeatable-read-isolation-level}
 

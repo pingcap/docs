@@ -116,7 +116,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## ステートメントサマリーの<code>cluster</code>テーブル {#the-code-cluster-code-tables-for-statement-summary}
 
-`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスタ全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
+`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスター全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
 
 `cluster_statements_summary`には、各 TiDBサーバーの`statements_summary`データが表示されます。 `cluster_statements_summary_history`には、各 TiDBサーバーの`statements_summary_history`データが表示されます。 `cluster_statements_summary_evicted`には、各 TiDBサーバーの`statements_summary_evicted`データが表示されます。これらのテーブルでは`INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`と同じです。
 
@@ -406,7 +406,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_PROCESSED_KEYS` :コプロセッサーが処理したキーの最大数。
 -   `AVG_TIKV_CPU_TIME` : このカテゴリの SQL ステートメントが消費する TiKVサーバーのCPU 時間の平均値。
 
-取引関連フィールド：
+トランザクション関連フィールド：
 
 -   `AVG_PREWRITE_TIME` : プリライトフェーズの平均時間。
 -   `MAX_PREWRITE_TIME` : プリライトフェーズの最長時間。
@@ -418,8 +418,8 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_COMMIT_BACKOFF_TIME` : コミットフェーズ中に再試行が必要なエラーがSQLステートメントで発生した場合、再試行までの最大待機時間。
 -   `AVG_RESOLVE_LOCK_TIME` : トランザクション間で発生したロック競合の解決にかかる平均時間。
 -   `MAX_RESOLVE_LOCK_TIME` : ロック競合の解決に最も時間がかかったのはトランザクション間です。
--   `AVG_LOCAL_LATCH_WAIT_TIME` : ローカル取引の平均待ち時間。
--   `MAX_LOCAL_LATCH_WAIT_TIME` : ローカル取引の最大待ち時間。
+-   `AVG_LOCAL_LATCH_WAIT_TIME` : ローカルトランザクションの平均待ち時間。
+-   `MAX_LOCAL_LATCH_WAIT_TIME` : ローカルトランザクションの最大待ち時間。
 -   `AVG_WRITE_KEYS` : 入力されたキーの平均数。
 -   `MAX_WRITE_KEYS` : 書き込まれたキーの最大数。
 -   `AVG_WRITE_SIZE` : 書き込まれたデータの平均量（バイト単位）。
@@ -443,7 +443,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_QUEUED_RC_TIME` : SQL ステートメントを実行する際に、使用可能な RU の最大待機時間。
 -   `RESOURCE_GROUP` : SQL ステートメントにバインドされたリソース グループ。
 
-storageエンジンに関連する分野：
+ストレージエンジンに関連する分野：
 
 -   `STORAGE_KV` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行が TiKV からデータを読み取ったかどうかを示します。
 -   `STORAGE_MPP` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行がTiFlashからデータを読み取ったかどうかを示します。

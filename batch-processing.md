@@ -57,7 +57,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 #### 主なメリット {#key-benefits}
 
--   Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
+-   Streams data to the ストレージ layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
 -   標準のDMLに比べて優れたパフォーマンスを実現
 -   SQL を変更せずにシステム変数を通じて有効にすることができます
 

@@ -1,6 +1,6 @@
 ---
 title: tiup cluster audit
-summary: tiup cluster auditコマンドは、すべてのクラスタで実行されたコマンドの履歴と各コマンドの実行ログを表示します。[audit-id] を指定した場合、対応する実行ログが出力されます。指定しない場合は、ID、時間、コマンドのフィールドを含む表が時系列の逆順に出力されます。 -h, --helpオプションはヘルプ情報を出力、デフォルトでは無効になっています。
+summary: tiup cluster auditコマンドは、すべてのクラスターで実行されたコマンドの履歴と各コマンドの実行ログを表示します。[audit-id] を指定した場合、対応する実行ログが出力されます。指定しない場合は、ID、時間、コマンドのフィールドを含む表が時系列の逆順に出力されます。 -h, --helpオプションはヘルプ情報を出力、デフォルトでは無効になっています。
 ---
 
 # tiup cluster audit {#tiup-cluster-audit}
@@ -32,4 +32,4 @@ tiup cluster audit [audit-id] [flags]
     -   時間: レコードに対応するコマンドの実行時間
     -   コマンド: レコードに対応するコマンド
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -102,16 +102,16 @@ set SESSION tidb_isolation_read_engines = "engine list separated by commas";
 手動ヒントを使用すると、エンジン分離が満たされていることを前提に、特定のテーブルに対して指定されたレプリカを使用するようにTiDBに強制できます。以下は手動ヒントの使用例です。
 
 ```sql
-select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
+select /*+ read_from_ストレージ(tiflash[table_name]) */ ... from table_name;
 ```
 
 クエリ文でテーブルに別名を設定した場合、ヒントを有効にするには、ヒントを含む文でもその別名を使用する必要があります。例:
 
 ```sql
-select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
+select /*+ read_from_ストレージ(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記の文では、 `tiflash[]`オプティマイザにTiFlashレプリカの読み取りを指示します。また、 `tikv[]`使用すると、必要に応じてオプティマイザに TiKV レプリカの読み取りを指示できます。ヒント構文の詳細については、 [ストレージからの読み取り](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記の文では、 `tiflash[]`オプティマイザにTiFlashレプリカの読み取りを指示します。また、 `tikv[]`使用すると、必要に応じてオプティマイザに TiKV レプリカの読み取りを指示できます。ヒント構文の詳細については、 [ストレージからの読み取り](/optimizer-hints.md#read_from_ストレージtiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカが存在しない場合、ヒントは無視され、警告が報告されます。また、ヒントはエンジン分離を前提としてのみ有効です。ヒントで指定されたエンジンがエンジン分離リストに含まれていない場合も、ヒントは無視され、警告が報告されます。
 

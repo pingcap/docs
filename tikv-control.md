@@ -306,9 +306,9 @@ tikv-ctl --host localhost:20160 region-properties -r 2
     tikv-ctl --host ip:port compact -d kv
     ```
 
-### TiKVクラスタ全体のデータを手動で圧縮する {#compact-data-of-the-whole-tikv-cluster-manually}
+### TiKVクラスター全体のデータを手動で圧縮する {#compact-data-of-the-whole-tikv-cluster-manually}
 
-`compact-cluster`コマンドを使用して、TiKV クラスタ全体のデータを手動で圧縮します。このコマンドのフラグは、 `compact`コマンドと同じ意味と使用法を持ちます。唯一の違いは次のとおりです。
+`compact-cluster`コマンドを使用して、TiKV クラスター全体のデータを手動で圧縮します。このコマンドのフラグは、 `compact`コマンドと同じ意味と使用法を持ちます。唯一の違いは次のとおりです。
 
 -   `compact-cluster`コマンドでは、 `--pd`使用して PD のアドレスを指定し、 `tikv-ctl`クラスター内のすべての TiKV ノードをコンパクト ターゲットとして見つけられるようにします。
 -   `compact`コマンドでは、 `--data-dir`または`--host`使用して、単一の TiKV をコンパクト ターゲットとして指定します。
@@ -403,7 +403,7 @@ tikv-ctl --data-dir /path/to/tikv bad-regions
 `shared block cache`のサイズを設定します:
 
 ```shell
-tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10GB
+tikv-ctl --host ip:port modify-tikv-config -n ストレージ.block-cache.capacity -v 10GB
 ```
 
     success
@@ -449,7 +449,7 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 > **警告：**
 >
 > -   誤った操作が行われた場合、クラスターの復旧が困難になる可能性があります。潜在的なリスクを認識し、本番環境ではこの機能の使用を避けてください。
-> -   `--all-regions`オプションを使用する場合、このコマンドはクラスタに接続されている残りのすべてのストアに対して実行する必要があります。損傷したストアを復旧する前に、これらの正常なストアがサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカ内のピアリストの不整合により、 `split-region`または`remove-peer`実行した際にエラーが発生します。これにより、他のメタデータ間の不整合も発生し、最終的にはリージョンが利用できなくなります。
+> -   `--all-regions`オプションを使用する場合、このコマンドはクラスターに接続されている残りのすべてのストアに対して実行する必要があります。損傷したストアを復旧する前に、これらの正常なストアがサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカ内のピアリストの不整合により、 `split-region`または`remove-peer`実行した際にエラーが発生します。これにより、他のメタデータ間の不整合も発生し、最終的にはリージョンが利用できなくなります。
 > -   `remove-fail-stores`実行した後は、削除したノードを再起動したり、クラスターに追加したりすることはできません。そうしないと、メタデータに不整合が生じ、最終的にはリージョンが利用できなくなります。
 
 ```shell
@@ -516,7 +516,7 @@ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 データファイルの暗号化情報をダンプするには、サブコマンド`encryption-meta dump-file`使用します。TiKV デプロイメントに`data-dir`指定するには、TiKV 構成ファイルを作成する必要があります。
 
     # conf.toml
-    [storage]
+    [ストレージ]
     data-dir = "/path/to/tikv/data"
 
 `--path`オプションは、対象のデータファイルへの絶対パスまたは相対パスを指定するために使用できます。データファイルが暗号化されていない場合、コマンドは空の出力を返すことがあります。3 `--path`指定しない場合は、すべてのデータファイルの暗号化情報が出力されます。
@@ -530,7 +530,7 @@ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/dat
 データ暗号化キーをダンプするには、サブコマンド`encryption-meta dump-key`使用します。 `data-dir`に加えて、設定ファイルで現在使用されているマスターキーも指定する必要があります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドでは`security.encryption.previous-master-key`設定は無視され、マスターキーのローテーションは実行されません。
 
     # conf.toml
-    [storage]
+    [ストレージ]
     data-dir = "/path/to/tikv/data"
 
     [security.encryption.master-key]

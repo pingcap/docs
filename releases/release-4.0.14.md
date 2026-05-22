@@ -26,7 +26,7 @@ TiDB バージョン: 4.0.14
 -   TiKV
 
     -   保留中のPDハートビートの数を監視するメトリック`pending`を追加します。これは、遅いPDスレッド[＃10008](https://github.com/tikv/tikv/pull/10008)の問題の特定に役立ちます。
-    -   BRがS3互換storage[＃10242](https://github.com/tikv/tikv/pull/10242)サポートするために仮想ホストアドレス指定モードの使用をサポート
+    -   BRがS3互換ストレージ[＃10242](https://github.com/tikv/tikv/pull/10242)サポートするために仮想ホストアドレス指定モードの使用をサポート
 
 -   TiDBダッシュボード
 
@@ -67,7 +67,7 @@ TiDB バージョン: 4.0.14
 
     -   Dumpling
 
-        -   アップストリームが TiDB v3.x クラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[＃306](https://github.com/pingcap/dumpling/pull/306)
+        -   アップストリームが TiDB v3.x クラスターの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[＃306](https://github.com/pingcap/dumpling/pull/306)
 
     -   TiCDC
 
@@ -125,13 +125,13 @@ TiDB バージョン: 4.0.14
 
     -   **プロファイリング**UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正[＃944](https://github.com/pingcap/tidb-dashboard/pull/944)
     -   **明細書**UIに「プラン数」が表示されない問題を修正しました[＃939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    -   クラスタアップグレード[＃902](https://github.com/pingcap/tidb-dashboard/issues/902)後に**スロークエリ**UIに「不明なフィールド」エラーが表示される問題を修正しました
+    -   クラスターアップグレード[＃902](https://github.com/pingcap/tidb-dashboard/issues/902)後に**スロークエリ**UIに「不明なフィールド」エラーが表示される問題を修正しました
 
 -   TiFlash
 
     -   DAGリクエストをコンパイルする際に発生する可能性のあるpanic問題を修正しました
     -   読み取り負荷が大きい場合に発生するpanic問題を修正しました
-    -   列storageの分割失敗によりTiFlashが再起動し続ける問題を修正しました
+    -   列ストレージの分割失敗によりTiFlashが再起動し続ける問題を修正しました
     -   TiFlashがデルタデータを削除できない潜在的なバグを修正
     -   共有デルタインデックスを同時に複製するときに発生する誤った結果を修正しました
     -   データが不完全な場合にTiFlashが再起動に失敗するバグを修正
@@ -154,7 +154,7 @@ TiDB バージョン: 4.0.14
 
     -   Dumpling
 
-        -   Dumplingを使用してS3storageにデータをエクスポートする場合、バケット全体に対する`s3:ListBucket`権限は不要になりました。この権限はデータソースプレフィックスに対してのみ必要です[＃898](https://github.com/pingcap/br/issues/898)
+        -   Dumplingを使用してS3ストレージにデータをエクスポートする場合、バケット全体に対する`s3:ListBucket`権限は不要になりました。この権限はデータソースプレフィックスに対してのみ必要です[＃898](https://github.com/pingcap/br/issues/898)
 
     -   TiCDC
 

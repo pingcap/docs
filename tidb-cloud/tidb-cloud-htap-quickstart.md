@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/use-htap-cluster']
 
 # TiDB Cloud HTAP クイックスタート {#tidb-cloud-htap-quick-start}
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 、ハイブリッドトランザクションおよび分析処理を意味します。TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースstorageエンジン[TiKV](https://tikv.org)と、分析処理用に設計された列指向storage[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータはまず TiKV に保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ベースstorageから列指向storageへのリアルタイムレプリケーションです。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 、ハイブリッドトランザクションおよび分析処理を意味します。TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースストレージエンジン[TiKV](https://tikv.org)と、分析処理用に設計された列指向ストレージ[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータはまず TiKV に保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ベースストレージから列指向ストレージへのリアルタイムレプリケーションです。
 
 このチュートリアルでは、 TiDB Cloudのハイブリッドトランザクションおよび分析処理（HTAP）機能を簡単に体験する方法をご案内します。TiFlashへのテーブルのレプリケーション方法、 TiFlashを使用したクエリの実行方法、そしてパフォーマンス向上の体験方法などについて説明します。
 
@@ -16,7 +16,7 @@ HTAP 機能を体験する前に、 [TiDB Cloudクイックスタート](/tidb-c
 
 ## 手順 {#steps}
 
-### ステップ1. サンプルデータを列指向storageエンジンに複製する {#step-1-replicate-the-sample-data-to-the-columnar-storage-engine}
+### ステップ1. サンプルデータを列指向ストレージエンジンに複製する {#step-1-replicate-the-sample-data-to-the-columnar-ストレージ-engine}
 
 TiFlashノードを含むクラスターを作成した後、TiKVはデフォルトではTiFlashにデータを複製しません。複製するテーブルを指定するには、TiDBのMySQLクライアントでDDL文を実行する必要があります。その後、TiDBは指定されたテーブルのレプリカをTiFlashに作成します。
 
@@ -70,9 +70,9 @@ ORDER BY
   `release_year` DESC;
 ```
 
-### ステップ3. 行ベースのstorageと列ベースのstorageのクエリパフォーマンスを比較する {#step-3-compare-the-query-performance-between-row-based-storage-and-columnar-storage}
+### ステップ3. 行ベースのストレージと列ベースのストレージのクエリパフォーマンスを比較する {#step-3-compare-the-query-performance-between-row-based-ストレージ-and-columnar-ストレージ}
 
-このステップでは、TiKV (行ベースのstorage) とTiFlash (列ベースのstorage) 間の実行統計を比較できます。
+このステップでは、TiKV (行ベースのストレージ) とTiFlash (列ベースのストレージ) 間の実行統計を比較できます。
 
 -   TiKV を使用してこのクエリの実行統計を取得するには、次のステートメントを実行します。
 

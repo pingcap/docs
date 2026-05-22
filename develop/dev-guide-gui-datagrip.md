@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-datagrip/','/ja/tidb/dev/dev-guide-gui-
 
 # JetBrains DataGripを使用してTiDBに接続する {#connect-to-tidb-with-jetbrains-datagrip}
 
-TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html)データベースとSQLのための強力な統合開発環境（IDE）です。このチュートリアルでは、DataGripを使用してTiDBクラスタに接続する手順を説明します。
+TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html)データベースとSQLのための強力な統合開発環境（IDE）です。このチュートリアルでは、DataGripを使用してTiDBクラスターに接続する手順を説明します。
 
 > **注記：**
 >
@@ -24,12 +24,12 @@ DataGripは2つの方法で使用できます。
 このチュートリアルを完了するには、以下が必要です。
 
 -   [DataGrip **2023.2.1**以降](https://www.jetbrains.com/datagrip/download/)、または非コミュニティ エディションの[ジェットブレインズ](https://www.jetbrains.com/)IDE。
--   TiDBクラスタ。
+-   TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番環境のTiDB Self-Managedクラスターをデプロイ。](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -120,7 +120,7 @@ DataGripは2つの方法で使用できます。
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
@@ -128,7 +128,7 @@ DataGripは2つの方法で使用できます。
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
@@ -180,9 +180,9 @@ DataGripは2つの方法で使用できます。
 
 3.  以下の接続パラメータを設定してください。
 
-    -   **ホスト**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号。
-    -   **ユーザー**：TiDBセルフマネージドクラスタに接続するために使用するユーザー名。
+    -   **ホスト**：TiDB Self-ManagedクラスターのIPアドレスまたはドメイン名。
+    -   **ポート**：TiDB Self-Managedクラスターのポート番号。
+    -   **ユーザー**：TiDB Self-Managedクラスターに接続するために使用するユーザー名。
     -   **パスワード**：ユーザー名のパスワード。
 
     例えば、以下のような例があります。
@@ -191,7 +191,7 @@ DataGripは2つの方法で使用できます。
 
     **「不足しているドライバファイルをダウンロードしてください」**という警告が表示された場合は、 **「ダウンロード」**をクリックしてドライバファイルを入手してください。
 
-4.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+4.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスターへの接続を検証してください。
 
     ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
@@ -203,7 +203,7 @@ DataGripは2つの方法で使用できます。
 ## 次のステップ {#next-steps}
 
 -   DataGrip の使用法の詳細については[DataGripのドキュメント](https://www.jetbrains.com/help/datagrip/getting-started.html)ご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

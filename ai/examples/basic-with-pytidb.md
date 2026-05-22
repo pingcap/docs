@@ -96,4 +96,4 @@ Basic CRUD operations completed!
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/basic)
+-   **ソースコード**： [GitHubで確認](https://github.com/pingcap/pytidb/tree/main/examples/basic)

@@ -80,7 +80,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_remain_storage_of_relay_log</code> {#code-dm-remain-storage-of-relay-log-code}
+### <code>DM_remain_ストレージ_of_relay_log</code> {#code-dm-remain-ストレージ-of-relay-log-code}
 
 -   説明：
 

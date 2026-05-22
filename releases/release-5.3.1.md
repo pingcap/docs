@@ -38,7 +38,7 @@ TiDB バージョン: 5.3.1
     -   TiCDC
 
         -   Kafka プロデューサーの設定パラメータを公開して、TiCDC [＃4385](https://github.com/pingcap/tiflow/issues/4385)で設定できるようにします。
-        -   S3 をバックエンドstorageとして使用する場合、TiCDC の起動時に事前クリーンアッププロセスを追加します[＃3878](https://github.com/pingcap/tiflow/issues/3878)
+        -   S3 をバックエンドストレージとして使用する場合、TiCDC の起動時に事前クリーンアッププロセスを追加します[＃3878](https://github.com/pingcap/tiflow/issues/3878)
         -   TiCDCクライアントは証明書名が指定されていない場合でも動作します[＃3627](https://github.com/pingcap/tiflow/issues/3627)
         -   チェックポイントのタイムスタンプが予期せず進むのを避けるために、テーブルごとにシンクのチェックポイントを管理する[＃3545](https://github.com/pingcap/tiflow/issues/3545)
         -   チェンジフィードを再開するための指数バックオフメカニズムを追加します[＃3329](https://github.com/pingcap/tiflow/issues/3329)
@@ -127,7 +127,7 @@ TiDB バージョン: 5.3.1
         -   ロードタスクを停止するとタスク[＃3771](https://github.com/pingcap/tiflow/issues/3771)が予期せず転送されるバグを修正
         -   ローダー[＃3252](https://github.com/pingcap/tiflow/issues/3252)のコマンド`query-status`で間違った進行状況が返される問題を修正しました
         -   クラスター内に異なるバージョンの TiCDC ノードがある場合に HTTP API が動作しない問題を修正[＃3483](https://github.com/pingcap/tiflow/issues/3483)
-        -   S3storageがTiCDC Redo Log [＃3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合に TiCDC が異常終了する問題を修正しました
+        -   S3ストレージがTiCDC Redo Log [＃3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合に TiCDC が異常終了する問題を修正しました
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
         -   `batch-replace-enable`無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)照会するときにのみ同期メトリックが更新される問題を修正しました
@@ -140,7 +140,7 @@ TiDB バージョン: 5.3.1
         -   DDL文の特別なコメントによりレプリケーションタスクが停止する問題を修正[＃3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout` [＃3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成によって発生するレプリケーション停止の問題を修正しました
         -   一部の RHEL リリース[＃3584](https://github.com/pingcap/tiflow/issues/3584)でタイムゾーンの問題によりサービスを開始できない問題を修正しました
-        -   クラスタのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   クラスターのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[＃3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
         -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)による警告が頻繁に発生する問題を修正
         -   Canalプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で設定項目`enable-old-value`が自動的に`true`に設定されないバグを修正
@@ -160,6 +160,6 @@ TiDB バージョン: 5.3.1
     -   TiDB Lightning
 
         -   一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
-        -   storageURL プレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合にTiDB Lightning がエラーを返すバグを修正しました[＃32742](https://github.com/pingcap/tidb/issues/32742)
+        -   ストレージURL プレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合にTiDB Lightning がエラーを返すバグを修正しました[＃32742](https://github.com/pingcap/tidb/issues/32742)
         -   --log-file=&quot;-&quot; を設定しても stdout [＃29876](https://github.com/pingcap/tidb/issues/29876)にログが出力されない問題を修正しました
-        -   S3storageパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃30709](https://github.com/pingcap/tidb/issues/30709)

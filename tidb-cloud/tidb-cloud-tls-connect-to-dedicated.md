@@ -6,19 +6,19 @@ aliases: ['/ja/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 
 # TiDB Cloud専用へのTLS接続 {#tls-connections-to-tidb-cloud-dedicated}
 
-TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの接続における基本的なセキュリティ対策の一つです。クライアント、アプリケーション、開発ツールからTiDB Cloud Dedicated クラスタへの複数の TLS 接続を設定することで、データ転送のセキュリティを保護できます。セキュリティ上の理由から、 TiDB Cloud Dedicated は TLS 1.2 および TLS 1.3 のみをサポートし、TLS 1.0 および TLS 1.1 はサポートしていません。
+TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスターへの接続における基本的なセキュリティ対策の一つです。クライアント、アプリケーション、開発ツールからTiDB Cloud Dedicated クラスターへの複数の TLS 接続を設定することで、データ転送のセキュリティを保護できます。セキュリティ上の理由から、 TiDB Cloud Dedicated は TLS 1.2 および TLS 1.3 のみをサポートし、TLS 1.0 および TLS 1.1 はサポートしていません。
 
 データのセキュリティを確保するため、 TiDB Cloud Dedicated クラスターの CA 証明書は[AWS プライベート認証局](https://aws.amazon.com/private-ca/)でホストされています。CA 証明書の秘密鍵は、 [FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ標準を満たす AWS 管理のハードウェアセキュリティモジュール (HSM) に保存されます。
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由してTiDB Cloudにログインし、次に[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)経由してログインします。
+-   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由してTiDB Cloudにログインし、次に[TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)経由してログインします。
 
 -   安全な設定でクラスターにアクセスするためのパスワードを設定します。
 
     これを行うには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicatedクラスターの行にある**「...」**をクリックし、 **「パスワード設定」**を選択します。パスワード設定で「パスワードの**自動生成」**をクリックすると、数字、大文字、小文字、特殊文字を含む16文字のルートパスワードが自動的に生成されます。
 
-## TiDB Cloud専用クラスタへのセキュリティ接続 {#secure-connection-to-a-tidb-cloud-dedicated-cluster}
+## TiDB Cloud専用クラスターへのセキュリティ接続 {#secure-connection-to-a-tidb-cloud-dedicated-cluster}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を取得し、次のようにTiDB Cloud Dedicated クラスターに接続できます。
 
@@ -30,11 +30,11 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
     IPアクセスリストを設定していない場合は、初回接続前に**「IPアクセスリストの設定**」をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
-4.  **「CA証明書」**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
+4.  **「CA証明書」**をクリックして、TiDBクラスターへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
     > **注記：**
     >
-    > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのstorageパスに保存することも、別のstorageパスを指定することもできます。以降の手順では、コード例のCA証明書パスをご自身のCA証明書パスに置き換える必要があります。
+    > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスをご自身のCA証明書パスに置き換える必要があります。
     > -   TiDB Cloud Dedicated では、クライアントに TLS 接続の使用を強制しません。また、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義構成は現在TiDB Cloud Dedicated ではサポートされていません。
 
 5.  希望する接続方法を選択し、タブ上の接続文字列とサンプル コードを参照してクラスターに接続します。
@@ -44,7 +44,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLIクライアントはデフォルトでTLS接続を確立しようとします。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-mode`と`ssl-ca`設定する必要があります。
+MySQL CLIクライアントはデフォルトでTLS接続を確立しようとします。TiDB Cloud Dedicatedクラスターに接続する場合は、 `ssl-mode`と`ssl-ca`設定する必要があります。
 
 ```shell
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
@@ -60,7 +60,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 <div label="MyCLI">
 
-[マイクリ](https://www.mycli.net/)指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`設定する必要があります。
+[マイクリ](https://www.mycli.net/)指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`設定する必要があります。
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test

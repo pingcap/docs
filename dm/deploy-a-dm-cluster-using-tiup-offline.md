@@ -3,7 +3,7 @@ title: Deploy a DM Cluster Offline Using TiUP
 summary: TiUPを使用して DM クラスターをオフラインで展開する方法を紹介します。
 ---
 
-# TiUPを使用して DMクラスタをオフラインでデプロイ {#deploy-a-dm-cluster-offline-using-tiup}
+# TiUPを使用して DMクラスターをオフラインでデプロイ {#deploy-a-dm-cluster-offline-using-tiup}
 
 このドキュメントでは、 TiUPを使用して DM クラスターをオフラインで展開する方法について説明します。
 
@@ -141,7 +141,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 上記のコマンドでは、
 
 -   デプロイされた DM クラスターの名前は`dm-test`です。
--   DMクラスタのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`実行します。
+-   DMクラスターのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`実行します。
 -   初期化構成ファイルは`topology.yaml`です。
 -   `--user root` : `root`キーを使用してターゲット マシンにログインし、クラスターの展開を完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用して展開を完了することができます。
 -   `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。4 `[-i]` 、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。10 `[-p]` 、ユーザーパスワードを対話的に入力するために使用されます。
@@ -155,15 +155,15 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 tiup dm list
 ```
 
-TiUP は複数の DM クラスタの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスタの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
 
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  ${version}  /root/.tiup/ストレージ/dm/clusters/dm-test  /root/.tiup/ストレージ/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ6: 展開されたDMクラスタのステータスを確認する {#step-6-check-the-status-of-the-deployed-dm-cluster}
+## ステップ6: 展開されたDMクラスターのステータスを確認する {#step-6-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 

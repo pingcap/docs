@@ -10,7 +10,7 @@ summary: TiDB Cloudの v1beta API について学習します。
 現在、次の v1beta API を使用してTiDB Cloud内のリソースを管理できます。
 
 -   [プロジェクト](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project)
--   [クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Cluster)
+-   [クラスター](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Cluster)
 -   [バックアップ](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Backup)
 -   [インポート（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Import)
 -   [復元する](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Restore)

@@ -61,7 +61,7 @@ help operate-source
 operate-source create ./source.yaml
 ```
 
-`source.yaml`の設定については[アップストリームデータベースコンフィグレーションファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
+`source.yaml`の設定については[アップストリームデータベース設定ファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果の例を次に示します。
 

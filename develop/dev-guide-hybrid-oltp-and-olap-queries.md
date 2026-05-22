@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries/','/ja/tidbclo
 
 HTAPは、Hybrid Transactional and Analytical Processing（ハイブリッド・トランザクション・アンド・アナリティカル・プロセッシング）の略です。従来、データベースはトランザクション処理または分析シナリオ向けに設計されることが多く、データプラットフォームはトランザクション処理と分析処理に分割する必要があり、分析クエリへの迅速な応答のために、トランザクションデータベースから分析データベースにデータを複製する必要がありました。TiDBデータベースはトランザクションと分析の両方のタスクを実行できるため、データプラットフォームの構築が大幅に簡素化され、ユーザーはより新鮮なデータを分析に使用できるようになります。
 
-TiDBは、オンライントランザクション処理（OLTP）には行ベースのstorageエンジンであるTiKVを使用し、オンライン分析処理（OLAP）には列指向storageエンジンであるTiFlashを使用します。HTAPでは、行ベースのstorageエンジンと列指向storageエンジンが共存します。どちらのstorageエンジンも、データを自動的に複製し、強力な一貫性を維持できます。行ベースのstorageエンジンはOLTPのパフォーマンスを最適化し、列指向storageエンジンはOLAPのパフォーマンスを最適化します。
+TiDBは、オンライントランザクション処理（OLTP）には行ベースのストレージエンジンであるTiKVを使用し、オンライン分析処理（OLAP）には列指向ストレージエンジンであるTiFlashを使用します。HTAPでは、行ベースのストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンも、データを自動的に複製し、強力な一貫性を維持できます。行ベースのストレージエンジンはOLTPのパフォーマンスを最適化し、列指向ストレージエンジンはOLAPのパフォーマンスを最適化します。
 
 セクション[テーブルを作成する](/develop/dev-guide-create-table.md#use-htap-capabilities)では、TiDBのHTAP機能を有効にする方法を紹介します。以下では、HTAPを使用してデータをより高速に分析する方法について説明します。
 
@@ -143,7 +143,7 @@ TiDB は、より多くの分析ステートメントのために、集約され
 
 ### TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-TiDB はデフォルトで行ベースのstorageエンジン TiKV を使用します。列指向storageエンジンTiFlashを使用するには、 [HTAP機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)参照してください。TiFlashを介してデータをクエリする前に、次のステートメントを使用して`books`および`orders`テーブルのTiFlashレプリカを作成する必要があります。
+TiDB はデフォルトで行ベースのストレージエンジン TiKV を使用します。列指向ストレージエンジンTiFlashを使用するには、 [HTAP機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)参照してください。TiFlashを介してデータをクエリする前に、次のステートメントを使用して`books`および`orders`テーブルのTiFlashレプリカを作成する必要があります。
 
 ```sql
 ALTER TABLE books SET TIFLASH REPLICA 1;
@@ -204,17 +204,17 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop'
 
 TiDBはコストベースオプティマイザー（CBO）を使用して、コスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に選択します。ただし、クエリがトランザクションクエリか分析クエリかが明確な場合は、 [オプティマイザヒント](/optimizer-hints.md)を使用して使用するクエリエンジンを指定できます。
 
-クエリで使用するエンジンを指定するには、次のステートメントのように`/*+ read_from_storage(engine_name[table_name]) */`ヒントを使用できます。
+クエリで使用するエンジンを指定するには、次のステートメントのように`/*+ read_from_ストレージ(engine_name[table_name]) */`ヒントを使用できます。
 
 > **注記：**
 >
 > -   テーブルに別名がある場合は、ヒントでテーブル名の代わりに別名を使用します。そうしないと、ヒントは機能しません。
-> -   `read_from_storage`ヒントは[共通テーブル式](/develop/dev-guide-use-common-table-expression.md)には機能しません。
+> -   `read_from_ストレージ`ヒントは[共通テーブル式](/develop/dev-guide-use-common-table-expression.md)には機能しません。
 
 ```sql
 WITH orders_group_by_month AS (
     SELECT
-        /*+ read_from_storage(tikv[o]) */
+        /*+ read_from_ストレージ(tikv[o]) */
         b.type AS book_type,
         DATE_FORMAT(ordered_at, '%Y-%c') AS month,
         COUNT(*) AS orders
@@ -233,14 +233,14 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-`EXPLAIN`ステートメントを使用して、上記のSQL文の実行プランを確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のstorageエンジンは通常、異なる TiDB ノードを使用するため、2 つのクエリタイプは互いに影響を受けません。
+`EXPLAIN`ステートメントを使用して、上記のSQL文の実行プランを確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のストレージエンジンは通常、異なる TiDB ノードを使用するため、2 つのクエリタイプは互いに影響を受けません。
 
 TiDBがTiFlashをどのように使用するかの詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)参照してください。
 
 ## 続きを読む {#read-more}
 
 -   [TiDB Cloudの HTAP クイックスタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)
--   [TiDBセルフマネージド向けHTAPクイックスタート](/quick-start-with-htap.md)と[TiDBセルフマネージドのHTAPを探索する](/explore-htap.md)
+-   [TiDB Self-Managed向けHTAPクイックスタート](/quick-start-with-htap.md)と[HTAP入門](/explore-htap.md)
 -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
 -   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
 
@@ -248,4 +248,4 @@ TiDBがTiFlashをどのように使用するかの詳細については、 [TiDB
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

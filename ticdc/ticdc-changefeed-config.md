@@ -3,7 +3,7 @@ title: CLI and Configuration Parameters of TiCDC Changefeeds
 summary: TiCDCチェンジフィードのCLIの定義と設定パラメータについて学びましょう。
 ---
 
-# TiCDC ChangefeedsのCLIとコンフィグレーションパラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
+# TiCDC ChangefeedsのCLIと設定パラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
 ## 変更フィードCLIパラメータ {#changefeed-cli-parameters}
 
@@ -16,7 +16,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-11-27T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.4"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-11-27T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"ストレージ":""}},"state":"normal","creator_version":"v8.5.4"}
 ```
 
 -   `--changefeed-id` : レプリケーションタスクのID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
@@ -27,9 +27,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
     シンク URI パラメータに`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URIエンコーダー](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
 
--   `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスタはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
+-   `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスターはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
 
--   `--target-ts` : 変更フィードの終了TSOを指定します。このTSOに達すると、TiCDCクラスタはデータのプルを停止します。デフォルト値は空で、これはTiCDCが自動的にデータのプルを停止しないことを意味します。
+-   `--target-ts` : 変更フィードの終了TSOを指定します。このTSOに達すると、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、これはTiCDCが自動的にデータのプルを停止しないことを意味します。
 
 -   `--config` : 変更フィードの設定ファイルを指定します。
 
@@ -125,7 +125,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 ##### <code>ignore-event</code> {#code-ignore-event-code}
 
 -   `ignore-event = ["insert"]`は`INSERT`イベントを無視します。
--   `ignore-event = ["drop table", "delete"]`は`DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。 TiDB でクラスタ化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割することに注意してください。 TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、これらのイベントを正しくフィルタリングできません。
+-   `ignore-event = ["drop table", "delete"]`は`DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。 TiDB でクラスター化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割することに注意してください。 TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、これらのイベントを正しくフィルタリングできません。
 
 ##### <code>ignore-sql</code> {#code-ignore-sql-code}
 
@@ -200,10 +200,10 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 #### <code>protocol</code> {#code-protocol-code}
 
 -   メッセージのエンコードに使用されるプロトコル形式を指定します。
--   この設定項目は、ダウンストリームがKafka、Pulsar、またはstorageサービスの場合にのみ有効になります。
+-   この設定項目は、ダウンストリームがKafka、Pulsar、またはストレージサービスの場合にのみ有効になります。
 -   ダウンストリームがKafkaの場合、プロトコルはcanal-json、avro、debezium、open-protocol、またはsimpleのいずれかになります。
 -   ダウンストリームがPulsarの場合、プロトコルはcanal-jsonのみとなります。
--   ダウンストリームがstorageサービスの場合、プロトコルはcanal-jsonまたはcsvのみとなります。
+-   ダウンストリームがストレージサービスの場合、プロトコルはcanal-jsonまたはcsvのみとなります。
 
 <!-- Example: `"canal-json"` -->
 
@@ -249,23 +249,23 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### <code>terminator</code> {#code-terminator-code}
 
--   この構成項目は、データをstorageシンクにレプリケートする場合にのみ使用され、MQまたはMySQLシンクにデータをレプリケートする場合は無視できます。
+-   この構成項目は、データをストレージシンクにレプリケートする場合にのみ使用され、MQまたはMySQLシンクにデータをレプリケートする場合は無視できます。
 -   2つのデータ変更イベントを区切るために使用される行終端文字を指定します。
 -   デフォルト値: `""` 、つまり`\r\n`が使用されます。
 
 #### <code>date-separator</code> {#code-date-separator-code}
 
--   ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
--   この設定項目は、ダウンストリームがstorageサービスである場合にのみ有効になります。
+-   ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-ストレージ.md#data-change-records)参照してください。
+-   この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 -   デフォルト値: `day` 、ファイルを日付ごとに分割することを意味します。
 -   値のオプション: `none` 、 `year` 、 `month` 、 `day`
 
 #### <code>enable-partition-separator</code> {#code-enable-partition-separator-code}
 
 -   パーティションを区切り文字として使用するかどうかを制御します。
--   この設定項目は、ダウンストリームがstorageサービスである場合にのみ有効になります。
+-   この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 -   デフォルト値： `true` 。これは、テーブル内のパーティションが別々のディレクトリに保存されることを意味します。
--   この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [第11979号](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、データ[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
+-   この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [第11979号](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、データ[データ変更記録](/ticdc/ticdc-sink-to-cloud-ストレージ.md#data-change-records)参照してください。
 
 #### <code>debezium-disable-schema</code> {#code-debezium-disable-schema-code}
 
@@ -275,7 +275,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### sink.csv は<span class="version-mark">v6.5.0 で追加されました。</span> {#sink-csv-span-class-version-mark-new-in-v6-5-0-span}
 
-バージョン6.5.0以降、TiCDCはデータ変更をCSV形式でstorageサービスに保存することをサポートしています。データをMQまたはMySQLシンクにレプリケートする場合は、以下の設定は無視してください。
+バージョン6.5.0以降、TiCDCはデータ変更をCSV形式でストレージサービスに保存することをサポートしています。データをMQまたはMySQLシンクにレプリケートする場合は、以下の設定は無視してください。
 
 ##### <code>delimiter</code> {#code-delimiter-code}
 
@@ -383,9 +383,9 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 -   デフォルト値: `2000`
 -   単位：ミリ秒
 
-#### <code>storage</code> {#code-storage-code}
+#### <code>ストレージ</code> {#code-ストレージ-code}
 
--   リドゥログのstorageURI。
+-   リドゥログのストレージURI。
 -   デフォルト値: `""`
 
 #### <code>use-file-backend</code> {#code-use-file-backend-code}
@@ -588,21 +588,21 @@ token="xxxx"
 -   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`
 
-### sink.cloud-storage-config {#sink-cloud-storage-config}
+### sink.cloud-ストレージ-config {#sink-cloud-ストレージ-config}
 
 #### <code>worker-count</code> {#code-worker-count-code}
 
--   ダウンストリームのクラウドstorageの同時実行性が変更されます。
+-   ダウンストリームのクラウドストレージの同時実行性が変更されます。
 -   デフォルト値: `16`
 
 #### <code>flush-interval</code> {#code-flush-interval-code}
 
--   下流のクラウドstorageにデータを保存する間隔が変更されます。
+-   下流のクラウドストレージにデータを保存する間隔が変更されます。
 -   デフォルト値: `"2s"`
 
 #### <code>file-size</code> {#code-file-size-code}
 
--   このファイルのバイト数`file-size`を超えると、データ変更ファイルがクラウドstorageに保存されます。
+-   このファイルのバイト数`file-size`を超えると、データ変更ファイルがクラウドストレージに保存されます。
 -   デフォルト値： `67108864` 、つまり64MiB
 
 #### <code>file-expiration-days</code> {#code-file-expiration-days-code}

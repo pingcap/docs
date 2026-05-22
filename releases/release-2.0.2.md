@@ -26,5 +26,5 @@ summary: TiDB 2.0.2は2018年5月21日にリリースされ、システムの安
 -   Raftログが印刷されない問題を修正
 -   より多くの gRPC 関連パラメータの設定をサポート
 -   リーダー選出のタイムアウト範囲の設定をサポート
--   古くなった学習者が削除されない問題を修正
+-   古くなったラーナーが削除されない問題を修正
 -   Fix the issue that the snapshot intermediate file is mistakenly deleted

@@ -54,7 +54,7 @@ TiDB Cloudは、すぐに開発を始められるように、TypeScriptとNext.j
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、接続文字列は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。 。
 
-TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
+TiDB Cloud Dedicatedクラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">

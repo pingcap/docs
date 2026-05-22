@@ -31,7 +31,7 @@ ticloud serverless export create -c <cluster-id> --filter <database.table>
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスタから Google Cloud Storage にデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターから Google Cloud Storage にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter <database.table>

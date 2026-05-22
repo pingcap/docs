@@ -12,11 +12,11 @@ aliases: ['/ja/tidb/stable/dev-guide-tidb-crud-sql/','/ja/tidb/dev/dev-guide-tid
 
 TiDB に接続していることを確認してください。そうでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、最初に接続します。
 
-## TiDBでSQLを探求しよう {#explore-sql-with-tidb}
+## TiDBでのSQL基本操作 {#explore-sql-with-tidb}
 
 > **注記：**
 >
-> このドキュメントは[TiDBでSQLを探求しよう](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)参照してください。
+> このドキュメントは[TiDBでのSQL基本操作](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDBでのSQL基本操作](/basic-sql-operations.md)参照してください。
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
@@ -36,7 +36,7 @@ SQLは、その関数に応じて以下の4種類に分類されます。
 
 -   **DCL（データ制御言語）** ：アクセス権限とセキュリティレベルを定義するために使用されます。
 
-以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)または[SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
+以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDBでのSQL基本操作](/basic-sql-operations.md)または[SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
 
 ## データ操作言語 {#data-manipulation-language}
 

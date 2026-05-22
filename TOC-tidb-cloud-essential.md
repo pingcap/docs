@@ -18,7 +18,7 @@
     -   [概要](/tidb-cloud/key-concepts.md)
     -   [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
     -   [データベーススキーマ](/tidb-cloud/database-schema-concepts.md)
-    -   [取引](/tidb-cloud/transaction-concepts.md)
+    -   [トランザクション](/tidb-cloud/transaction-concepts.md)
     -   [SQL](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
     -   [拡張性](/tidb-cloud/scalability-concepts.md)
@@ -78,7 +78,7 @@
                 -   [MPPに関する質問](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
-                -   [閲覧数](/explain-views.md)
+                -   [ビュー](/explain-views.md)
                 -   [パーティション](/explain-partitions.md)
                 -   [インデックスマージ](/explain-index-merge.md)
             -   SQL最適化プロセス
@@ -113,9 +113,9 @@
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
         -   [TiKV Follower Readの調整](/follower-read.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
-        -   ごみ収集（GC）
+        -   ガベージコレクション（GC）
             -   [概要](/garbage-collection-overview.md)
-            -   [コンフィグレーション](/garbage-collection-configuration.md)
+            -   [設定](/garbage-collection-configuration.md)
         -   [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
     -   [TiDBのバージョンをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
     -   [TiDB Cloud Essentialインスタンスを削除する](/tidb-cloud/delete-tidb-cluster.md)
@@ -124,7 +124,7 @@
     -   TiDB Cloudへのデータ移行
         -   [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
         -   [データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
-        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [TiDB Self-ManagedからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [大規模データセットのMySQLシャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
         -   [AWS DMSを使用してAmazon RDS for Oracleから移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudにデータをインポートする
@@ -135,7 +135,7 @@
         -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
         -   [MySQL CLI を使用したインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
     -   参照
-        -   [TiDB Cloudの外部ストレージアクセスを設定する](/tidb-cloud/configure-external-storage-access.md)
+        -   [TiDB Cloudの外部ストレージアクセスを設定する](/tidb-cloud/configure-external-ストレージ-access.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -193,21 +193,21 @@
         -   [`tidbcloud_serverless_export`リソースを使用する](/tidb-cloud/terraform-use-serverless-export-resource.md)
         -   [`tidbcloud_sql_user`リソースを使用する](/tidb-cloud/terraform-use-sql-user-resource.md)
         -   [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
-        -   [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
+        -   [クラスターリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
     -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
     -   [ザピアー](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
 ## 参照 {#reference}
 
 -   SQLリファレンス
-    -   [TiDBでSQLを探求しよう](/basic-sql-operations.md)
+    -   [TiDBでのSQL基本操作](/basic-sql-operations.md)
     -   SQL言語の構造と構文
         -   属性
             -   [自動インクリメント](/auto-increment.md)
-            -   [自動乱数](/auto-random.md)
+            -   [AUTO_RANDOM](/auto-random.md)
             -   [_tidb_rowid](/tidb-rowid.md)
             -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
-        -   [文字通りの値](/literal-values.md)
+        -   [リテラル値](/literal-values.md)
         -   [スキーマオブジェクト名](/schema-object-names.md)
         -   [キーワードと予約語](/keywords.md)
         -   [ユーザー定義変数](/user-defined-variables.md)
@@ -385,13 +385,13 @@
     -   [生成された列](/generated-columns.md)
     -   [SQLモード](/sql-mode.md)
     -   [テーブル属性](/table-attributes.md)
-    -   取引
+    -   トランザクション
         -   [概要](/transaction-overview.md)
         -   [隔離レベル](/transaction-isolation-levels.md)
-        -   [楽観的な取引](/optimistic-transaction.md)
-        -   [悲観的な取引](/pessimistic-transaction.md)
+        -   [楽観的なトランザクション](/optimistic-transaction.md)
+        -   [悲観的なトランザクション](/pessimistic-transaction.md)
         -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
-    -   [閲覧数](/views.md)
+    -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
@@ -438,7 +438,7 @@
             -   [`STATISTICS`](/information-schema/information-schema-statistics.md)
             -   [`TABLES`](/information-schema/information-schema-tables.md)
             -   [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
-            -   [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)
+            -   [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-ストレージ-stats.md)
             -   [`TIDB_CHECK_CONSTRAINTS`](/information-schema/information-schema-tidb-check-constraints.md)
             -   [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
             -   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
@@ -529,15 +529,15 @@
 -   一般参考資料
     -   TiDBクラシックアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [ストレージ](/tidb-storage.md)
+        -   [ストレージ](/tidb-ストレージ.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクヴ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
-            -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
+            -   [RocksDBの概要](/ストレージ-engine/rocksdb-overview.md)
         -   TiFlash
             -   [TiFlashの概要](/tiflash/tiflash-overview.md)
             -   [ディスクに書き出す](/tiflash/tiflash-spill-disk.md)
@@ -551,7 +551,7 @@
     -   [システム変数](/system-variables.md)
     -   [サーバー状態変数](/status-variables.md)
     -   [テーブルフィルター](/table-filter.md)
-    -   [外部ストレージサービスのURI形式](/external-storage-uri.md)
+    -   [外部ストレージサービスのURI形式](/external-ストレージ-uri.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
     -   [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)

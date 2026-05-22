@@ -1,18 +1,18 @@
 ---
 title: Integrate TiDB Cloud with Datadog
-summary: Datadogとの連携により、TiDBクラスタを監視する方法を学びましょう。
+summary: Datadogとの連携により、TiDBクラスターを監視する方法を学びましょう。
 ---
 
 # TiDB CloudとDatadogを統合する {#integrate-tidb-cloud-with-datadog}
 
-TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを設定することで、TiDBクラスタに関するメトリクスを[データドッグ](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
+TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを設定することで、TiDBクラスターに関するメトリクスを[データドッグ](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
 
 ## Datadog統合バージョン {#datadog-integration-version}
 
 TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合（ベータ版）をサポートしてきました。2025年7月31日より、TiDB CloudレベルのDatadog統合（プレビュー版）を導入します。2025年9月30日より、クラスターレベルのDatadog統合が一般提供（GA）となります。
 
--   **クラスタレベルのDatadog統合**：2025年7月31日までに組織内に削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのDatadog統合を提供します。
--   **従来のプロジェクトレベルの Datadog 統合 (ベータ版)** : 2025 年 7 月 31 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloudは、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの Datadog 統合は、2025 年 10 月 31 日に廃止されることに注意してください。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+-   **クラスターレベルのDatadog統合**：2025年7月31日までに組織内に削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスターレベルのDatadog統合を提供します。
+-   **従来のプロジェクトレベルの Datadog 統合 (ベータ版)** : 2025 年 7 月 31 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloudは、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの Datadog 統合は、2025 年 10 月 31 日に廃止されることに注意してください。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスターレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
@@ -81,26 +81,26 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 > **注記：**
 >
-> Datadog にTiDB Cloud統合をすでにインストールしている場合は、このセクションの次の手順をスキップできます。 [**TiDB Cloudダイナミックトラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)または[**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードは、Datadog [**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)で自動的に利用可能になります。
+> Datadog にTiDB Cloud統合をすでにインストールしている場合は、このセクションの次の手順をスキップできます。 [**TiDB Cloudダイナミックトラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)または[**TiDB Cloudクラスターの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードは、Datadog [**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)で自動的に利用可能になります。
 
 1.  [データドッグ](https://app.datadoghq.com)にログインします。
 2.  Datadog の[**TiDB Cloud統合**ページ](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)に移動します。
-3.  **「コンフィグレーション」**タブで、 **「統合のインストール」を**クリックします。
+3.  **「設定」**タブで、 **「統合のインストール」を**クリックします。
 
     -   クラスターレベルの Datadog 統合の場合、 [**TiDB Cloudダイナミックトラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
-    -   従来のプロジェクト レベルの Datadog 統合 (ベータ版) の場合、 [**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ボード[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
+    -   従来のプロジェクト レベルの Datadog 統合 (ベータ版) の場合、 [**TiDB Cloudクラスターの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ボード[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
 ## 事前に構築されたダッシュボードをビュー {#view-the-pre-built-dashboard}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 **「統合」**ページに移動します。
 2.  **Datadog**セクションの**「ダッシュボード」**リンクをクリックしてください。
 
-    -   クラスタレベルのDatadog統合の場合、**ダッシュボード**リンクをクリックすると、拡張バージョンで導入された最新のメトリクスを含む新しいダッシュボードが開きます。
-    -   従来のプロジェクトレベルのDatadog統合（ベータ版）の場合、**ダッシュボード**リンクをクリックすると従来のダッシュボードが開きますが、そこにはクラスタレベルのDatadog統合で導入された最新のメトリクスは含まれていません。
+    -   クラスターレベルのDatadog統合の場合、**ダッシュボード**リンクをクリックすると、拡張バージョンで導入された最新のメトリクスを含む新しいダッシュボードが開きます。
+    -   従来のプロジェクトレベルのDatadog統合（ベータ版）の場合、**ダッシュボード**リンクをクリックすると従来のダッシュボードが開きますが、そこにはクラスターレベルのDatadog統合で導入された最新のメトリクスは含まれていません。
 
 ## Datadogで利用可能な指標 {#metrics-available-to-datadog}
 
-Datadogは、TiDBクラスタに関して以下のメトリクスを追跡します。
+Datadogは、TiDBクラスターに関して以下のメトリクスを追跡します。
 
 | メトリック名                                     | メトリックタイプ | ラベル                                                                                                               | 説明                                                                                                                                                                                                                                                                                                                         |
 | :----------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -114,20 +114,20 @@ Datadogは、TiDBクラスタに関して以下のメトリクスを追跡しま
 | tidb_cloud.db_command_per_second           | ゲージ      | タイプ: クエリ|ステートメント準備|...<br/>クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                | TiDBが1秒間に処理するコマンド数。コマンド実行結果の成否に応じて分類されます。                                                                                                                                                                                                                                                                                  |
 | tidb_cloud.db_queries_using_plan_cache_ops | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                                           | [プランキャッシュ](/sql-prepared-plan-cache.md)を使用したクエリの 1 秒あたりの統計。実行プラン キャッシュは、プリペアドステートメントコマンドのみをサポートします。                                                                                                                                                                                                                        |
 | tidb_cloud.db_transaction_per_second       | ゲージ      | txn_mode:悲観的|楽観的<br/>タイプ: 中止|コミット|...<br/>クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb` | 1秒あたりに実行されるトランザクション数。                                                                                                                                                                                                                                                                                                      |
-| tidb_cloud.node_storage_used_bytes         | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                | TiKV またはTiFlashノードのディスク使用量（バイト単位）。このメトリックは主にstorageエンジンの論理データ サイズを表し、WAL ファイルと一時ファイルは除外されます。実際のディスク使用率を計算するには、代わりに`(capacity - available) / capacity`を使用してください。TiKV のstorage使用率が 80% を超えると、レイテンシーの急増が発生する可能性があり、使用率が高くなるとリクエストが失敗する可能性があります。すべてのTiFlashノードのstorage使用率が 80% に達すると、 TiFlashレプリカを追加する DDL ステートメントは無期限にハングします。 |
-| tidb_cloud.node_storage_capacity_bytes     | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                | TiKV/ TiFlashノードのディスク容量（バイト単位）。                                                                                                                                                                                                                                                                                            |
+| tidb_cloud.node_ストレージ_used_bytes         | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                | TiKV またはTiFlashノードのディスク使用量（バイト単位）。このメトリックは主にストレージエンジンの論理データ サイズを表し、WAL ファイルと一時ファイルは除外されます。実際のディスク使用率を計算するには、代わりに`(capacity - available) / capacity`を使用してください。TiKV のストレージ使用率が 80% を超えると、レイテンシーの急増が発生する可能性があり、使用率が高くなるとリクエストが失敗する可能性があります。すべてのTiFlashノードのストレージ使用率が 80% に達すると、 TiFlashレプリカを追加する DDL ステートメントは無期限にハングします。 |
+| tidb_cloud.node_ストレージ_capacity_bytes     | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                | TiKV/ TiFlashノードのディスク容量（バイト単位）。                                                                                                                                                                                                                                                                                            |
 | tidb_cloud.node_cpu_seconds_total          | カウント     | クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードのCPU使用率。                                                                                                                                                                                                                                                                                              |
 | tidb_cloud.node_cpu_capacity_cores         | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードのCPUコア数の制限。                                                                                                                                                                                                                                                                                           |
 | tidb_cloud.node_memory_used_bytes          | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードで使用されているメモリ（バイト単位）。                                                                                                                                                                                                                                                                                   |
 | tidb_cloud.node_memory_capacity_bytes      | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードのメモリ容量（バイト単位）。                                                                                                                                                                                                                                                                                        |
 
-クラスタレベルのDatadog統合では、以下の追加メトリクスも利用可能です。
+クラスターレベルのDatadog統合では、以下の追加メトリクスも利用可能です。
 
 | メトリック名                                                                  | メトリックタイプ | ラベル                                                                                                                            | 説明                                                                                                                           |
 | :---------------------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| tidb_cloud.node_storage_available_bytes                                 | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`                                        | TiKV/ TiFlashノードで使用可能なディスク容量（バイト単位）。                                                                                         |
-| tidb_cloud.node_disk_read_latency                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device` : `nvme.*\|dm.*`         | storageデバイスごとの読み取りレイテンシー（秒）。                                                                                                 |
-| tidb_cloud.node_disk_write_latency                                      | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device` : `nvme.*\|dm.*`         | storageデバイスごとの書き込みレイテンシー（秒）。                                                                                                 |
+| tidb_cloud.node_ストレージ_available_bytes                                 | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`                                        | TiKV/ TiFlashノードで使用可能なディスク容量（バイト単位）。                                                                                         |
+| tidb_cloud.node_disk_read_latency                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device` : `nvme.*\|dm.*`         | ストレージデバイスごとの読み取りレイテンシー（秒）。                                                                                                 |
+| tidb_cloud.node_disk_write_latency                                      | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device` : `nvme.*\|dm.*`         | ストレージデバイスごとの書き込みレイテンシー（秒）。                                                                                                 |
 | tidb_cloud.db_kv_request_duration                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv`<br/>クラスター名: `<cluster name>`<br/> `type` : `BatchGet\|Commit\|Prewrite\|...` | TiKVリクエストの種類別の所要時間（秒）。                                                                                                       |
 | tidb_cloud.db_component_uptime                                          | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tidb\|tikv\|tiflash`<br/>クラスター名: `<cluster name>`                                  | TiDBコンポーネントの稼働時間（秒単位）。                                                                                                       |
 | tidb_cloud.cdc_changefeed_latency (別名 cdc_changefeed_checkpoint_ts_lag) | ゲージ      | changefeed_id: `<changefeed-id>`<br/>クラスター名: `<cluster name>`                                                                  | 変更フィード所有者のチェックポイントタイムスタンプの遅延（秒単位）。                                                                                           |

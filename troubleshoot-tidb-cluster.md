@@ -3,7 +3,7 @@ title: TiDB Cluster Troubleshooting Guide
 summary: TiDB を使用する際に問題を診断して解決する方法を学びます。
 ---
 
-# TiDBクラスタシューティング ガイド {#tidb-cluster-troubleshooting-guide}
+# TiDBクラスターシューティング ガイド {#tidb-cluster-troubleshooting-guide}
 
 このガイドは、TiDBの使用中に発生する基本的な問題の診断と解決に役立ちます。問題が解決しない場合は、以下の情報を収集して、 [バグを報告する](/support.md) .
 
@@ -32,7 +32,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 3.  データがクリアされ、サービスが再デプロイされる場合は、次の点を確認してください。
 
     -   `tikv-server`と`pd-server`のデータはすべてクリアされます。特定のデータは`tikv-server`に保存され、メタデータは`pd-server`に保存されます。2つのサーバーのうち1つだけがクリアされると、データの整合性が失われます。
-    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`再起動された後、 `tidb-server`も再起動する必要があります。クラスタIDは`pd-server`初期化される際にランダムに割り当てられます。そのため、クラスタが再デプロイされるとクラスタIDが変更され、新しいクラスタIDを取得するには`tidb-server`再起動する必要があります。
+    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`再起動された後、 `tidb-server`も再起動する必要があります。クラスターIDは`pd-server`初期化される際にランダムに割り当てられます。そのため、クラスターが再デプロイされるとクラスターIDが変更され、新しいクラスターIDを取得するには`tidb-server`再起動する必要があります。
 
 ## <code>tidb-server</code>を起動できません {#cannot-start-code-tidb-server-code}
 

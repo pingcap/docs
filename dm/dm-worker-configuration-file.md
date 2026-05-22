@@ -3,11 +3,11 @@ title: DM-worker Configuration File
 summary: DM-worker の設定ファイルについて学習します。
 ---
 
-# DMワーカーコンフィグレーションファイル {#dm-worker-configuration-file}
+# DMワーカー設定ファイル {#dm-worker-configuration-file}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明を含む、DM ワーカーの構成について説明します。
 
-## コンフィグレーションファイルテンプレート {#configuration-file-template}
+## 設定ファイルテンプレート {#configuration-file-template}
 
 以下は、DM ワーカーの構成ファイル テンプレートです。
 
@@ -34,7 +34,7 @@ ssl-key = "/path/to/key.pem"
 cert-allowed-cn = ["dm"]
 ```
 
-## コンフィグレーションパラメータ {#configuration-parameters}
+## 設定パラメータ {#configuration-parameters}
 
 ### グローバル {#global}
 

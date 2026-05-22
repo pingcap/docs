@@ -34,7 +34,7 @@ TiDB バージョン: 4.0.8
     -   スローログの解析を高速化してクエリパフォーマンスを向上させる[＃20556](https://github.com/pingcap/tidb/pull/20556)
     -   SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プラン バインディング ステージ中にタイムアウト実行プランを待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
     -   スローログに実行再試行時間を追加し、スロークエリの結果[＃20495](https://github.com/pingcap/tidb/pull/20495) [＃20494](https://github.com/pingcap/tidb/pull/20494)
-    -   `table_storage_stats`システムテーブル[＃20431](https://github.com/pingcap/tidb/pull/20431)を追加する
+    -   `table_ストレージ_stats`システムテーブル[＃20431](https://github.com/pingcap/tidb/pull/20431)を追加する
     -   `INSERT` `REPLACE`のRPC実行時統計情報`UPDATE`追加する[＃20430](https://github.com/pingcap/tidb/pull/20430)
     -   `EXPLAIN FOR CONNECTION` [＃20384](https://github.com/pingcap/tidb/pull/20384)の結果に演算子情報を追加します
     -   クライアントの接続/切断アクティビティ[＃20321](https://github.com/pingcap/tidb/pull/20321)のTiDBエラーログを`DEBUG`レベルに調整します。
@@ -88,7 +88,7 @@ TiDB バージョン: 4.0.8
 
         -   マルチバイトCSV区切り文字とセパレーターをサポート[＃406](https://github.com/pingcap/tidb-lightning/pull/406)
         -   一部のPDスケジューラを無効にして復元プロセスを高速化します[＃408](https://github.com/pingcap/tidb-lightning/pull/408)
-        -   v4.0 クラスタのチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラー[＃396](https://github.com/pingcap/tidb-lightning/pull/396)を回避します。
+        -   v4.0 クラスターのチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラー[＃396](https://github.com/pingcap/tidb-lightning/pull/396)を回避します。
 
 ## バグ修正 {#bug-fixes}
 
@@ -122,8 +122,8 @@ TiDB バージョン: 4.0.8
 
     -   暗号化時のミューテックスの競合によりpd-workerのハートビート処理が遅くなるバグを修正[＃8869](https://github.com/tikv/tikv/pull/8869)
     -   メモリプロファイルが誤って生成される問題を修正[＃8790](https://github.com/tikv/tikv/pull/8790)
-    -   storageクラス[＃8763](https://github.com/tikv/tikv/pull/8763)が指定されている場合に GCS 上のデータベースをバックアップできない問題を修正しました
-    -   リージョンが再起動されたり、新しく分割されたりしたときに学習者がリーダーを見つけられないバグを修正[＃8864](https://github.com/tikv/tikv/pull/8864)
+    -   ストレージクラス[＃8763](https://github.com/tikv/tikv/pull/8763)が指定されている場合に GCS 上のデータベースをバックアップできない問題を修正しました
+    -   リージョンが再起動されたり、新しく分割されたりしたときにラーナーがリーダーを見つけられないバグを修正[＃8864](https://github.com/tikv/tikv/pull/8864)
 
 -   PD
 
@@ -136,7 +136,7 @@ TiDB バージョン: 4.0.8
     -   マルチディスクTiFlash展開中に、間違った容量が原因でTiFlashレプリカの作成が失敗する問題を修正しました。
     -   再起動後にTiFlashが壊れたデータファイルに関するエラーをスローする可能性があるバグを修正しました
     -   TiFlashがクラッシュした後に壊れたファイルがディスク上に残る可能性がある問題を修正しました
-    -   プロキシが最新のRaftリース情報に追いつけない場合、学習者の読み取り中にインデックスを待つのに長い時間がかかる可能性があるというバグを修正しました。
+    -   プロキシが最新のRaftリース情報に追いつけない場合、ラーナーの読み取り中にインデックスを待つのに長い時間がかかる可能性があるというバグを修正しました。
     -   古いRaftログを再生中にプロキシがキー値エンジンに過剰なリージョン状態情報を書き込むバグを修正しました。
 
 -   ツール

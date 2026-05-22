@@ -30,7 +30,7 @@
     -   [再ランキング](/ai/guides/reranking.md)
     -   [結合クエリ](/ai/guides/join-queries.md)
     -   [生のSQLクエリ](/ai/guides/raw-queries.md)
-    -   [取引](/ai/guides/transactions.md)
+    -   [トランザクション](/ai/guides/transactions.md)
 
 ## 例 {#examples}
 
@@ -58,7 +58,7 @@
     -   [Google ジェミニ](/ai/integrations/vector-search-auto-embedding-gemini.md)
     -   [抱きしめる顔](/ai/integrations/vector-search-auto-embedding-huggingface.md)
     -   [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
-    -   [アマゾンタイタン](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
+    -   [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 -   AIフレームワーク
     -   [ランチェーン](/ai/integrations/vector-search-integrate-with-langchain.md)
     -   [ラマインデックス](/ai/integrations/vector-search-integrate-with-llamaindex.md)

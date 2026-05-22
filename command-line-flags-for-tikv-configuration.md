@@ -3,7 +3,7 @@ title: TiKV Configuration Flags
 summary: TiKV のいくつかの構成フラグについて学習します。
 ---
 
-# TiKVコンフィグレーションフラグ {#tikv-configuration-flags}
+# TiKV設定フラグ {#tikv-configuration-flags}
 
 TiKV は、コマンドラインパラメータに対していくつかの読み取り可能な単位変換をサポートしています。
 

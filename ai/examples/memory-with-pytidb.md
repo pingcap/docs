@@ -132,4 +132,4 @@ Goodbye!
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/memory)
+-   **ソースコード**： [GitHubで確認](https://github.com/pingcap/pytidb/tree/main/examples/memory)

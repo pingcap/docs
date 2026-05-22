@@ -38,7 +38,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 
 上記のコマンドでエクスポートされたスキーマの URI (「s3://my-bucket/schema-backup」など) を記録します。これは、後でスキーマ ファイルをインポートするときに使用されます。
 
-Amazon S3 にアクセスするには、この Amazon S3storageパスにアクセスできるアカウントのシークレットアクセスキーとアクセスキーを、環境変数としてDumplingまたはTiDB Lightningノードに渡すことができます。Dumpling とTiDB Lightning は、 `~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。この方法により、 DumplingまたはTiDB Lightningノード上のすべてのタスクでシークレットアクセスキーとアクセスキーを再度指定する必要がなくなります。
+Amazon S3 にアクセスするには、この Amazon S3ストレージパスにアクセスできるアカウントのシークレットアクセスキーとアクセスキーを、環境変数としてDumplingまたはTiDB Lightningノードに渡すことができます。Dumpling とTiDB Lightning は、 `~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。この方法により、 DumplingまたはTiDB Lightningノード上のすべてのタスクでシークレットアクセスキーとアクセスキーを再度指定する必要がなくなります。
 
 #### 1.2 スキーマファイル用のTiDB Lightning構成ファイルを作成する {#1-2-create-the-tidb-lightning-configuration-file-for-the-schema-file}
 
@@ -61,9 +61,9 @@ pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379
 # For more information about import modes, see https://docs.pingcap.com/tidb/stable/tidb-lightning-overview
 backend = "local"
 
-# Set the temporary storage directory for the sorted Key-Value files.
-# The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
-# For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
+# Set the temporary ストレージ directory for the sorted Key-Value files.
+# The directory must be empty, and the ストレージ space must be greater than the size of the dataset to be imported.
+# For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash ストレージ,
 # which can use I/O exclusively.
 sorted-kv-dir = "${path}"
 
@@ -72,7 +72,7 @@ sorted-kv-dir = "${path}"
 data-source-dir = "s3://my-bucket/schema-backup"
 ```
 
-TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB Lightning設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 #### 1.3 スキーマファイルをTiDBにインポートする {#1-3-import-the-schema-file-to-tidb}
 
@@ -128,9 +128,9 @@ pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379
 # For more information about import modes, see https://docs.pingcap.com/tidb/stable/tidb-lightning-overview
 backend = "local"
 
-# Set the temporary storage directory for the sorted Key-Value files.
-# The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
-# For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
+# Set the temporary ストレージ directory for the sorted Key-Value files.
+# The directory must be empty, and the ストレージ space must be greater than the size of the dataset to be imported.
+# For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash ストレージ,
 # which can use I/O exclusively.
 sorted-kv-dir = "${path}"
 
@@ -146,7 +146,7 @@ table = '$2'
 type = '$3'
 ```
 
-TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB Lightning設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 #### 2.3 TiDBに全データをインポートする {#2-3-import-full-data-to-tidb}
 
@@ -206,7 +206,7 @@ TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB 
 
     | パラメータ                   | 説明                                                                     |
     | ----------------------- | ---------------------------------------------------------------------- |
-    | `--master-addr`         | `dmctl`接続されるクラスタ内の任意の DM マスターの`{advertise-addr}` 、例: 172.16.10.71:8261 |
+    | `--master-addr`         | `dmctl`接続されるクラスター内の任意の DM マスターの`{advertise-addr}` 、例: 172.16.10.71:8261 |
     | `operate-source create` | データ ソースを DM クラスターにロードします。                                              |
 
 ### ステップ2: 移行タスクを作成する {#step-2-create-the-migration-task}
@@ -252,7 +252,7 @@ mysql-instances:
    #     safe-mode: true  # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
 ```
 
-上記のYAMLファイルは、移行タスクに必要な最小限の設定です。その他の設定項目については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+上記のYAMLファイルは、移行タスクに必要な最小限の設定です。その他の設定項目については、 [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ### ステップ3. 移行タスクを実行する {#step-3-run-the-migration-task}
 
@@ -272,7 +272,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 | パラメータ           | 説明                                                                     |
 | --------------- | ---------------------------------------------------------------------- |
-| `--master-addr` | `dmctl`接続されるクラスタ内の任意の DM マスターの`{advertise-addr}` 、例: 172.16.10.71:8261 |
+| `--master-addr` | `dmctl`接続されるクラスター内の任意の DM マスターの`{advertise-addr}` 、例: 172.16.10.71:8261 |
 | `start-task`    | 移行タスクを開始します。                                                           |
 
 タスクの開始に失敗した場合は、プロンプトメッセージを確認し、設定を修正してください。その後、上記のコマンドを再実行してタスクを開始できます。

@@ -47,13 +47,13 @@ Sink URI を使用して TiCDC ターゲット システムの接続情報を指
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-コンフィグレーション例1:
+設定例1:
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/persistent://abc/def/yktest?protocol=canal-json"
 ```
 
-コンフィグレーション例2:
+設定例2:
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/yktest?protocol=canal-json"
@@ -151,7 +151,7 @@ TiCDCはv7.5.1およびv8.0.0以降、PulsarのTLS暗号化通信をサポート
 --sink-uri="pulsar+ssl://127.0.0.1:6651/persistent://public/default/yktest?protocol=canal-json"
 ```
 
-コンフィグレーション：
+設定：
 
 ```toml
 [sink.pulsar-config]

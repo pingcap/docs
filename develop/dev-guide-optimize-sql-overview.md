@@ -18,7 +18,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-
 -   スキャンする行数はできるだけ少なくしてください。必要なデータのみをスキャンし、余分なデータのスキャンは避けることをお勧めします。
 -   適切なインデックスを使用してください。SQLの`WHERE`節の列に対応するインデックスがあることを確認してください。インデックスがない場合、文はフルテーブルスキャンを必要とし、パフォーマンスが低下します。
 -   適切な結合タイプを使用してください。クエリに含まれるテーブルの相対的なサイズに基づいて、適切な結合タイプを選択することが重要です。通常、TiDBのコストベースオプティマイザは、パフォーマンスが最も高い結合タイプを選択します。ただし、場合によっては、より適切な結合タイプを手動で指定する必要があることもあります。
--   適切なstorageエンジンを使用してください。OLTPとOLAPのハイブリッドワークロードには、 TiFlashエンジンが推奨されます。詳細については、 [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)参照してください。
+-   適切なストレージエンジンを使用してください。OLTPとOLAPのハイブリッドワークロードには、 TiFlashエンジンが推奨されます。詳細については、 [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)参照してください。
 
 ## スキーマ設計 {#schema-design}
 
@@ -30,10 +30,10 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-
 ### 参照 {#see-also}
 
 -   [TiDB Cloudの SQL性能チューニング](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
--   [TiDBセルフマネージドのSQL性能チューニング](/sql-tuning-overview.md)
+-   [TiDB Self-ManagedのSQL性能チューニング](/sql-tuning-overview.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -83,7 +83,7 @@ TiDB バージョン: 5.0.4
     -   TiKVコプロセッサのスローログに、リクエスト[＃10841](https://github.com/tikv/tikv/issues/10841)処理に費やされた時間のみを考慮するようにする
     -   未確定エラーの可能性を減らすために、できるだけべき等な事前書き込みを行う[＃10587](https://github.com/tikv/tikv/pull/10587)
     -   書き込みフローが低い場合に「GC が動作できません」という誤った警告を回避する[＃10662](https://github.com/tikv/tikv/pull/10662)
-    -   復元するデータベースが、バックアップ時の元のクラスタサイズと常に一致するようにします[＃10643](https://github.com/tikv/tikv/pull/10643)
+    -   復元するデータベースが、バックアップ時の元のクラスターサイズと常に一致するようにします[＃10643](https://github.com/tikv/tikv/pull/10643)
     -   panic出力がログ[＃9955](https://github.com/tikv/tikv/pull/9955)にフラッシュされていることを確認する
 
 -   PD
@@ -125,7 +125,7 @@ TiDB バージョン: 5.0.4
     -   ビューが`DEFINER` [＃24414](https://github.com/pingcap/tidb/issues/24414)をサポートしない問題を修正
     -   `tidb-server --help`コード`2` [＃24046](https://github.com/pingcap/tidb/issues/24046)で終了する問題を修正
     -   グローバル変数`dml_batch_size`設定が有効にならない問題を修正[＃24709](https://github.com/pingcap/tidb/issues/24709)
-    -   `read_from_storage`とパーティションテーブルを同時に使用するとエラーが発生する問題を修正[＃20372](https://github.com/pingcap/tidb/issues/20372)
+    -   `read_from_ストレージ`とパーティションテーブルを同時に使用するとエラーが発生する問題を修正[＃20372](https://github.com/pingcap/tidb/issues/20372)
     -   射影演算子[＃24264](https://github.com/pingcap/tidb/issues/24264)を実行するときに TiDB がパニックを起こす問題を修正しました
     -   統計情報によりクエリがpanicになる可能性がある問題を修正[＃24061](https://github.com/pingcap/tidb/pull/24061)
     -   `BIT`列で`approx_percentile`関数を使用するとpanic可能性がある問題を修正しました[＃23662](https://github.com/pingcap/tidb/issues/23662)
@@ -140,7 +140,7 @@ TiDB バージョン: 5.0.4
     -   破損したスナップショットファイルによって引き起こされる潜在的なディスクフル問題を修正[＃10813](https://github.com/tikv/tikv/issues/10813)
     -   Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKVpanic問題を修正しました[＃10843](https://github.com/tikv/tikv/pull/10843)
     -   新しいバージョンのTiKVをv5.0.xにロールバックできない問題を修正しました[＃10843](https://github.com/tikv/tikv/pull/10843)
-    -   5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKVpanicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスタをアップグレードした場合、このクラスタでこの問題が発生する可能性があります[＃10774](https://github.com/tikv/tikv/issues/10774)
+    -   5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKVpanicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスターをアップグレードした場合、このクラスターでこの問題が発生する可能性があります[＃10774](https://github.com/tikv/tikv/issues/10774)
     -   左悲観的ロックによる解析エラーを修正[＃26404](https://github.com/pingcap/tidb/issues/26404)
     -   特定のプラットフォームで期間を計算するときに発生するpanicを修正[＃10571](https://github.com/tikv/tikv/pull/10571)
     -   Load Base Split の`batch_get_command`のキーがエンコードされていない問題を修正[＃10542](https://github.com/tikv/tikv/issues/10542)

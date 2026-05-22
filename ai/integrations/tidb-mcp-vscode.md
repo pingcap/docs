@@ -33,7 +33,7 @@ TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
 5.  **VS Code**タブを選択し、 **「VS Codeに追加」**をクリックしてから、「VS Codeに**インストール」**をクリックします。
 
-## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
+## 手動設定（任意のTiDBクラスター） {#manual-configuration-any-tidb-cluster}
 
 手動で設定する場合は、 `.vscode/mcp.json`ファイルに次の設定を追加し、プレースホルダーを接続パラメータに置き換えてください。
 

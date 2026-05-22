@@ -1,11 +1,11 @@
 ---
 title: TiUP Cluster
-summary: TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiDBクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、 TiUPクラスタパラメータの管理など、日常的な運用とメンテナンスに使用されます。TiUP クラスタを使用するための構文は「tiup cluster [コマンド] [フラグ]」です。サポートされているコマンドには、import、template、check、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、rename、clean、destroy、audit、replay、enable、disable、meta backup、meta restore、helpなどがあります。
+summary: TiUP クラスターは、 Golangで記述されたTiUPのクラスター管理コンポーネントです。TiDBクラスターのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、 TiUPクラスターパラメータの管理など、日常的な運用とメンテナンスに使用されます。TiUP クラスターを使用するための構文は「tiup cluster [コマンド] [フラグ]」です。サポートされているコマンドには、import、template、check、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、rename、clean、destroy、audit、replay、enable、disable、meta backup、meta restore、helpなどがあります。
 ---
 
-# TiUPクラスタ {#tiup-cluster}
+# TiUPクラスター {#tiup-cluster}
 
-TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiUP クラスタコンポーネントを使用すると、 TiUPクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、TiDBクラスタパラメータの管理など、日常的な運用とメンテナンスを実行できます。
+TiUP クラスターは、 Golangで記述されたTiUPのクラスター管理コンポーネントです。TiUP クラスターコンポーネントを使用すると、 TiUPクラスターのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、TiDBクラスターパラメータの管理など、日常的な運用とメンテナンスを実行できます。
 
 ## 構文 {#syntax}
 
@@ -50,7 +50,7 @@ tiup cluster [command] [flags]
 
 ### -v, --バージョン {#v-version}
 
--   TiUP クラスタの現在のバージョンを出力します。
+-   TiUP クラスターの現在のバージョンを出力します。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
@@ -66,7 +66,7 @@ tiup cluster [command] [flags]
 -   [テンプレート](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力する
 -   [チェック](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします
 -   [展開する](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターを展開します
--   [リスト](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスタのリストを照会する
+-   [リスト](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスターのリストを照会する
 -   [画面](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します
 -   [始める](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します
 -   [停止](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
@@ -76,16 +76,16 @@ tiup cluster [command] [flags]
 -   [アップグレード](/tiup/tiup-component-cluster-upgrade.md) : 指定されたクラスターをアップグレードします
 -   [プルーン](/tiup/tiup-component-cluster-prune.md) : 指定されたクラスターの Tombstone ステータスのインスタンスをクリーンアップします
 -   [編集設定](/tiup/tiup-component-cluster-edit-config.md) : 指定されたクラスターの構成を変更します
--   [リロード](/tiup/tiup-component-cluster-reload.md) : 指定されたクラスタの構成を再読み込みします
+-   [リロード](/tiup/tiup-component-cluster-reload.md) : 指定されたクラスターの構成を再読み込みします
 -   [パッチ](/tiup/tiup-component-cluster-patch.md) : デプロイされたクラスター内のサービスを置き換えます
 -   [名前を変更する](/tiup/tiup-component-cluster-rename.md) : クラスターの名前を変更する
 -   [クリーン](/tiup/tiup-component-cluster-clean.md) : 指定されたクラスターからデータを削除します
 -   [破壊する](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄する
--   [監査](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスタの操作監査ログを照会します
+-   [監査](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスターの操作監査ログを照会します
 -   [リプレイ](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
--   [有効にする](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスタ サービスの自動有効化を有効にします
--   [無効にする](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後にクラスタ サービスの自動有効化を無効にします
--   [メタバックアップ](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスタの運用と保守に必要なTiUPメタファイルをバックアップします
+-   [有効にする](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスター サービスの自動有効化を有効にします
+-   [無効にする](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後にクラスター サービスの自動有効化を無効にします
+-   [メタバックアップ](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスターの運用と保守に必要なTiUPメタファイルをバックアップします
 -   [メタリストア](/tiup/tiup-component-cluster-meta-restore.md) : 指定されたクラスターのTiUPメタファイルを復元します
 -   [ヘルプ](/tiup/tiup-component-cluster-help.md) : ヘルプ情報を出力
 

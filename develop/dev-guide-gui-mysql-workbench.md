@@ -24,12 +24,12 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 このチュートリアルを完了するには、以下が必要です。
 
 -   [MySQL Workchen](https://dev.mysql.com/downloads/workbench/) **8.0.31**以降のバージョン。
--   TiDBクラスタ。
+-   TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番環境のTiDB Self-Managedクラスターをデプロイ。](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -116,7 +116,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
@@ -124,7 +124,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  MySQL Workbenchを起動し、 **「MySQL Connections」**タイトルの横にある**「+」**をクリックします。
 
@@ -136,7 +136,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
     -   **ホスト名**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **ユーザー名**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、 TiDB Cloud Dedicatedクラスタのパスワードを入力して、 **[OK]**をクリックするとパスワードが保存されます。
+    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、 TiDB Cloud Dedicatedクラスターのパスワードを入力して、 **[OK]**をクリックするとパスワードが保存されます。
 
         ![MySQL Workbench: store the password of TiDB Cloud Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
@@ -158,10 +158,10 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 2.  **「新しい接続の設定**」ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト名**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号を入力してください。
+    -   **ホスト名**：TiDB Self-ManagedクラスターのIPアドレスまたはドメイン名を入力してください。
+    -   **ポート**：TiDB Self-Managedクラスターのポート番号を入力してください。
     -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、TiDBセルフマネージドクラスタへの接続に使用するパスワードを入力して、 **[OK]**をクリックしてパスワードを保存します。
+    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、TiDB Self-Managedクラスターへの接続に使用するパスワードを入力して、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
@@ -169,7 +169,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     ![MySQL Workbench: configure connection settings for TiDB Self-Managed](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスターへの接続を検証してください。
 
 4.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存してください。
 
@@ -192,7 +192,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 ## 次のステップ {#next-steps}
 
 -   MySQL Workbench の使用法の詳細については[MySQL Workbenchのドキュメント](https://dev.mysql.com/doc/workbench/en/)参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

@@ -61,7 +61,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 >
 > この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details><summary>TiUPクラスタのアップグレード</summary>
+> <details><summary>TiUPクラスターのアップグレード</summary>
 >
 > ```bash
 > tiup update --self

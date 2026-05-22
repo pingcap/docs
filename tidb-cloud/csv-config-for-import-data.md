@@ -7,7 +7,7 @@ summary: TiDB Cloudのインポート データ サービスで CSV 構成を使
 
 このドキュメントでは、 TiDB Cloudの Import Data サービスの CSV 構成について説明します。
 
-以下は、 TiDB Cloudのデータインポートサービスを使用してCSVファイルをインポートする際のCSVコンフィグレーションウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+以下は、 TiDB Cloudのデータインポートサービスを使用してCSVファイルをインポートする際のCSV設定ウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/import-data-csv-config.png" width="500" />
 

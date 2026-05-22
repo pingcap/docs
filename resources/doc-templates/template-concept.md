@@ -67,6 +67,6 @@ xxx
 
 次のような、ユーザーが興味を持ちそうなドキュメントを直接提供することもできます。
 
--   [HTAPを探索する](/explore-htap.md)
+-   [HTAP入門](/explore-htap.md)
 -   [TiCDC よくある質問](/ticdc/ticdc-faq.md)
 -   [TiCDC用語集](/ticdc/ticdc-glossary.md)

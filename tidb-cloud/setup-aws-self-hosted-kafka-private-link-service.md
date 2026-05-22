@@ -35,7 +35,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
     -   エンドポイントサービスの管理
     -   EC2 ノードに接続して Kafka ノードを構成する
 
-2.  持っていない場合は[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+2.  持っていない場合は[TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
@@ -397,7 +397,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export JAVA_HOME="$SCRIPT_DIR/jdk-22.0.2"
 # Define the vars
 KAFKA_DIR="$SCRIPT_DIR/kafka_2.13-3.7.1/bin"
-KAFKA_STORAGE_CMD=$KAFKA_DIR/kafka-storage.sh
+KAFKA_STORAGE_CMD=$KAFKA_DIR/kafka-ストレージ.sh
 KAFKA_START_CMD=$KAFKA_DIR/kafka-server-start.sh
 KAFKA_DATA_DIR=$SCRIPT_DIR/data
 KAFKA_LOG_DIR=$SCRIPT_DIR/log
@@ -772,7 +772,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>**プライベートリンク**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<CustomContent plan="dedicated">クラスター</CustomContent><CustomContent plan="premium">実例</CustomContent>**プライベートリンク**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
 
 2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 

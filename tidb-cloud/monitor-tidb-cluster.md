@@ -9,13 +9,13 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 <CustomContent plan="dedicated">
 
-## クラスタの状態とノードの状態 {#cluster-status-and-node-status}
+## クラスターの状態とノードの状態 {#cluster-status-and-node-status}
 
 各実行中のクラスターの現在のステータスは、クラスターページで確認できます。
 
-### クラスタの状態 {#cluster-status}
+### クラスターの状態 {#cluster-status}
 
-| クラスタの状態  | 説明                               |
+| クラスターの状態  | 説明                               |
 | :------- | :------------------------------- |
 | **利用可能** | クラスターは正常で、利用可能です。                |
 | **作成**   | クラスターを作成中です。作成中はクラスターにアクセスできません。 |
@@ -32,7 +32,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 > **注記：**
 >
-> TiDBノードの状態は、 TiDB Cloud Dedicatedクラスタでのみ利用可能です。
+> TiDBノードの状態は、 TiDB Cloud Dedicatedクラスターでのみ利用可能です。
 
 `tidb`で始まるノード名はTiDBノードであり、 `tiproxy`で始まるノード名はTiProxyノードです。
 
@@ -47,7 +47,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 > **注記：**
 >
-> TiKVノードの状態は、 TiDB Cloud Dedicatedクラスタでのみ利用可能です。
+> TiKVノードの状態は、 TiDB Cloud Dedicatedクラスターでのみ利用可能です。
 
 | TiKVノードの状態 | 説明                 |
 | :--------- | :----------------- |

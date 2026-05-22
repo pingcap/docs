@@ -76,8 +76,8 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   属性
 -   AUTO_ID_CACHE
 -   自動インクリメント
--   自動乱数
--   自動乱数ベース
+-   AUTO_RANDOM
+-   AUTO_RANDOMベース
 -   平均
 -   平均行長
 
@@ -135,7 +135,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   クライアント
 -   クライアントエラーの概要
 -   近い
--   クラスタ
+-   クラスター
 -   クラスター化された
 -   CMSKETCH
 -   合体する
@@ -524,7 +524,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   プロフィール
 -   プロフィール
 -   プロキシ
--   ポンプ
+-   Pump
 -   パージ
 
 <a id="Q" class="letter" href="#Q">Q</a>
@@ -712,7 +712,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   トレース
 -   伝統的
 -   トレーリング（R）
--   取引
+-   トランザクション
 -   トリガー（R）
 -   トリガー
 -   真（R）

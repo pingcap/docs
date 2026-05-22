@@ -1,15 +1,15 @@
 ---
 title: tiup cluster enable
-summary: tiup cluster enable` コマンドは、マシンの再起動後にクラスタサービスを自動的に有効化するために使用されます。このコマンドは、指定されたノードで `systemctl enable <service>` を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。また、`-h, --help` オプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。
+summary: tiup cluster enable` コマンドは、マシンの再起動後にクラスターサービスを自動的に有効化するために使用されます。このコマンドは、指定されたノードで `systemctl enable <service>` を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。また、`-h, --help` オプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。
 ---
 
 # tiup cluster enable {#tiup-cluster-enable}
 
-`tiup cluster enable`コマンドは、マシンの再起動後にクラスタサービスを自動的に有効化するように設定するために使用されます。このコマンドは、指定されたノードで`systemctl enable <service>`実行することで、サービスの自動有効化を有効にします。
+`tiup cluster enable`コマンドは、マシンの再起動後にクラスターサービスを自動的に有効化するように設定するために使用されます。このコマンドは、指定されたノードで`systemctl enable <service>`実行することで、サービスの自動有効化を有効にします。
 
 > **注記：**
 >
-> すべてのクラスタをシャットダウンして再起動すると、サービスの起動順序はノードのオペレーティングシステムの起動順序によって決定されます。再起動順序が正しくない場合、再起動後のクラスタでもサービスを提供できない場合があります。例えば、TiKVが最初に起動されているのにPDが起動していない場合、PDが見つからない状態でTiKVを複数回再起動すると、systemdは処理を中止します。
+> すべてのクラスターをシャットダウンして再起動すると、サービスの起動順序はノードのオペレーティングシステムの起動順序によって決定されます。再起動順序が正しくない場合、再起動後のクラスターでもサービスを提供できない場合があります。例えば、TiKVが最初に起動されているのにPDが起動していない場合、PDが見つからない状態でTiKVを複数回再起動すると、systemdは処理を中止します。
 
 ## 構文 {#syntax}
 
@@ -51,4 +51,4 @@ tiup cluster enable <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

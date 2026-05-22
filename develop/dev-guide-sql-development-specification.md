@@ -45,7 +45,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sql-development-specification/','/ja/tidbcl
 -   `OR` `IN`または`UNION`に置き換えてください。7 の数は`IN` `300`でなければなりません。
 -   あいまいプレフィックスクエリには`%`プレフィックスを使用しないでください。
 -   アプリケーションが**マルチステートメント**を使用して SQL を実行する場合、つまり複数の SQL がセミコロンで結合され、一度にクライアントに送信されて実行される場合、TiDB は最初の SQL 実行の結果のみを返します。
--   式を使用する場合は、その式がstorageレイヤー（TiKVまたはTiFlash ）へのコンピューティングのプッシュダウンをサポートしているかどうかを確認してください。サポートされていない場合は、TiDBレイヤーでメモリ消費量が増加し、OOMが発生する可能性が高くなります。storageレイヤーにプッシュダウンできるコンピューティングは以下の通りです。
+-   式を使用する場合は、その式がストレージレイヤー（TiKVまたはTiFlash ）へのコンピューティングのプッシュダウンをサポートしているかどうかを確認してください。サポートされていない場合は、TiDBレイヤーでメモリ消費量が増加し、OOMが発生する可能性が高くなります。ストレージレイヤーにプッシュダウンできるコンピューティングは以下の通りです。
     -   [TiFlashはプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md) 。
     -   [TiKV - プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md) 。
     -   [述語プッシュダウン](/predicate-push-down.md) 。
@@ -54,4 +54,4 @@ aliases: ['/ja/tidb/stable/dev-guide-sql-development-specification/','/ja/tidbcl
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

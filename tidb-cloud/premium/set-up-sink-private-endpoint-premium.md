@@ -33,7 +33,7 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 -   ダウンストリームサービスのプライベートエンドポイントサービスの名前
 -   ダウンストリームサービスがデプロイされている可用性ゾーン（AZ）
 
-ダウンストリーム サービスでプライベート エンドポイント サービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスを設定します。
+ダウンストリーム サービスでプライベート エンドポイント サービスを利用できない場合は、 [ステップ2. Kafkaクラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスを設定します。
 
 </div>
 
@@ -48,7 +48,7 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサービスの許可リストにTiDB CloudのAlibaba CloudアカウントIDを追加する必要があります。
 
-ダウンストリーム サービスでプライベート エンドポイント サービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスをセットアップします。
+ダウンストリーム サービスでプライベート エンドポイント サービスを利用できない場合は、 [ステップ2. Kafkaクラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスをセットアップします。
 
 </div>
 </CustomContent>

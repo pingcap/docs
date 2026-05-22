@@ -39,7 +39,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)以下のシナリオにおいて、大規模データ書き込みのコストを最大80%削減します。
 
     -   [自動コミットモード](/transaction-overview.md#autocommit)で 16 MiB を超える書き込み操作を実行したとき。
-    -   [楽観的取引モデル](/optimistic-transaction.md)で16 MiBを超える書き込み操作を実行した場合。
+    -   [楽観的トランザクションモデル](/optimistic-transaction.md)で16 MiBを超える書き込み操作を実行した場合。
     -   [TiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)とき。
 
     この改善により、データ運用の効率性とコスト効率が向上し、ワークロードの規模が拡大するにつれて、より大きなコスト削減効果が得られます。
@@ -68,7 +68,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     この変更は**、2024年11月12日以降に作成された組織**にのみ適用されます。この日付以前に作成された組織は、事前通知の上、段階的に新しい一時停止動作に移行します。
 
-    詳細については、[TiDB Cloud Dedicatedクラスタの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
+    詳細については、[TiDB Cloud Dedicatedクラスターの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
 
 -   [Datadogとの連携（ベータ版）](/tidb-cloud/monitor-datadog-integration.md)では、新しいリージョン`AP1` (日本) のサポートが追加されました。
 
@@ -146,7 +146,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     以前は、 TiDB Cloud は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)を使用したデータエクスポートのみをサポートしていました。今後は、 [TiDB Cloudコンソール](https://tidbcloud.com/)TiDB Cloud Serverless クラスターからローカルファイルや Amazon S3 へ簡単にデータをエクスポートできます。
 
-    詳細については、 [TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)参照してください。
+    詳細については、 [TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-ストレージ-access.md)参照してください。
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを向上させます。
 
@@ -170,7 +170,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **「プライベートエンドポイント接続の作成」**ページのレイアウトを改良します。
 
-    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
+    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスターに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
@@ -186,9 +186,9 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **コンソールの変更**
 
--   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスタサイズ構成エクスペリエンスを向上させます。
+-   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスターサイズ構成エクスペリエンスを向上させます。
 
-    TiDB Cloud Dedicatedクラスターの [**クラスタを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**「クラスタサイズ」**セクションのレイアウトを調整します。さらに、 **「クラスタサイズ」**セクションには、適切なクラスター サイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
+    TiDB Cloud Dedicatedクラスターの [**クラスターを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスターの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**「クラスターサイズ」**セクションのレイアウトを調整します。さらに、 **「クラスターサイズ」**セクションには、適切なクラスター サイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
 
 ## 2024年7月23日 {#july-23-2024}
 
@@ -230,7 +230,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)参照してください。
 
--   低速クエリのデータstorageを強化する。
+-   低速クエリのデータストレージを強化する。
 
     [TiDB Cloudコンソール](https://tidbcloud.com)におけるクエリアクセスの遅延は、より安定し、データベースのパフォーマンスに影響を与えなくなりました。
 
@@ -274,11 +274,11 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの16 vCPU TiFlashおよび32 vCPU TiFlashの最大ノードstorageを2048 GiBから4096 GiBに増加します。
+-   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの16 vCPU TiFlashおよび32 vCPU TiFlashの最大ノードストレージを2048 GiBから4096 GiBに増加します。
 
-    この機能強化により、TiDB Cloud Dedicatedクラスタの分析データstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
+    この機能強化により、TiDB Cloud Dedicatedクラスターの分析データストレージ容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
-    詳細については、 [TiFlashノードstorage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)を参照してください。
+    詳細については、 [TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-ストレージ)を参照してください。
 
 -   新しい[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[v7.5.1](https://docs.pingcap.com/tidb/stable/release-7.5.1)から[v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)にアップグレードします。
 
@@ -290,11 +290,11 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     この機能を使用すると、TiDB Cloud Dedicatedクラスター間でデータベースを複製できるため、地域的な災害が発生した場合でも迅速なリカバリが可能になります。 `Project Owner`ロールをお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性 SLA を満たし、より積極的な復旧ポイント目標 (RPO) および復旧時間目標 (RTO) を達成できます。
 
--   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)カラム型storage[TiFlash](/tiflash/tiflash-overview.md)向けに、課金および計測機能 (ベータ版) を導入します。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)カラム型ストレージ[TiFlash](/tiflash/tiflash-overview.md)向けに、課金および計測機能 (ベータ版) を導入します。
 
-    2024年6月30日まで、 TiDB Cloud Serverlessクラスターのカラム型storageは100%割引で無料です。この日以降は、各TiDB Cloud Serverlessクラスターに5 GiBのカラム型storageの無料クォータが付与されます。無料クォータを超過した場合は、料金が発生します。
+    2024年6月30日まで、 TiDB Cloud Serverlessクラスターのカラム型ストレージは100%割引で無料です。この日以降は、各TiDB Cloud Serverlessクラスターに5 GiBのカラム型ストレージの無料クォータが付与されます。無料クォータを超過した場合は、料金が発生します。
 
-    詳細については、 [TiDB Cloud Serverlessの料金詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)を参照してください。
+    詳細については、 [TiDB Cloud Serverlessの料金詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#ストレージ)を参照してください。
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)[生きる時間（TTL）](/time-to-live.md)をサポートします。
 
@@ -326,7 +326,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   Google Cloud でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しい[TiDBノードサイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を指定します: `8 vCPU, 16 GiB`
+-   Google Cloud でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに新しい[TiDBノードサイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を指定します: `8 vCPU, 16 GiB`
 
 ## 2024年5月14日 {#may-14-2024}
 
@@ -349,7 +349,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 -   新しい[TiDB CloudAPI](https://docs.pingcap.com/api/tidb-cloud-api-overview)をベースに構築された[TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)をご紹介します。この新しい CLI には、以下の新機能が搭載されています。
 
     -   [TiDB Cloud Serverlessクラスターからデータをエクスポートする](/tidb-cloud/serverless-export.md)
-    -   [ローカルstorageからTiDB Cloudサーバーレスクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
+    -   [ローカルストレージからTiDB Cloudサーバーレスクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
     -   [OAuth経由で認証する](/tidb-cloud/ticloud-auth-login.md)
 
     TiDB Cloud CLI をアップグレードする前に、この新しい CLI は以前のバージョンと互換性がないことに注意してください。たとえば、CLI コマンドの`ticloud cluster`は`ticloud serverless`に更新されます。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)参照してください。 .
@@ -368,7 +368,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     TiDB Cloud Serverlessは、多様なユーザーニーズに対応するため、無料プランと拡張可能なサービスプランを提供しています。これからサービスを開始する場合でも、アプリケーションの需要増加に合わせて規模を拡大する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 
-    詳細については、[クラスタ計画](/tidb-cloud/select-cluster-tier.md)を参照してください。
+    詳細については、[クラスター計画](/tidb-cloud/select-cluster-tier.md)を参照してください。
 
 -   TiDB Cloud Serverless クラスターが使用量クォータに達した際のスロットリング動作を変更します。クラスターが使用量クォータに達すると、新規接続試行を即座に拒否し、既存の操作に対するサービスの中断を防ぎます。
 
@@ -390,7 +390,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) [ノードレベルのリソースメトリクス](/tidb-cloud/built-in-monitoring.md#server)の**制限**ラベルを表示します。
 
-    **制限**ラベルには、クラスター内の各コンポーネントにおけるCPU、メモリ、storageなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率の監視が簡素化されます。
+    **制限**ラベルには、クラスター内の各コンポーネントにおけるCPU、メモリ、ストレージなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率の監視が簡素化されます。
 
     これらのメトリック制限にアクセスするには、クラスターの**監視**ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認してください。
 
@@ -417,7 +417,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   TiDB、TiKV、およびTiFlashのノードサイズオプションとして、32 vCPUを追加します。
 
-    各`32 vCPU, 128 GiB` TiKV ノードのstorageは200 GiB から 6144 GiB の範囲です。
+    各`32 vCPU, 128 GiB` TiKV ノードのストレージは200 GiB から 6144 GiB の範囲です。
 
     次のようなシナリオでは、このようなノードの使用をお勧めします。
 

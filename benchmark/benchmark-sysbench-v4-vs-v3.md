@@ -43,7 +43,7 @@ tikv-client.max-batch-wait-time: 2000000
 #### TiKV v3.0 の構成 {#tikv-v3-0-configuration}
 
 ```yaml
-storage.scheduler-worker-pool-size: 5
+ストレージ.scheduler-worker-pool-size: 5
 raftstore.store-pool-size: 3
 raftstore.apply-pool-size: 3
 rocksdb.max-background-jobs: 3
@@ -66,7 +66,7 @@ tikv-client.max-batch-wait-time: 2000000
 #### TiKV v4.0 の構成 {#tikv-v4-0-configuration}
 
 ```yaml
-storage.scheduler-worker-pool-size: 5
+ストレージ.scheduler-worker-pool-size: 5
 raftstore.store-pool-size: 3
 raftstore.apply-pool-size: 3
 rocksdb.max-background-jobs: 3

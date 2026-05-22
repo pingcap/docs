@@ -18,7 +18,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 > **注記：**
 >
 > -   ベクトル検索機能はベータ版であり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
-> -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -82,7 +82,7 @@ client = TiDBClient.connect(
 </div>
 <div label="TiDB Self-Managed">
 
-TiDBセルフマネージドクラスタに接続するための基本的な例を以下に示します。
+TiDB Self-Managedクラスターに接続するための基本的な例を以下に示します。
 
 ```python
 from pytidb import TiDBClient
@@ -127,7 +127,7 @@ text_embed = EmbeddingFunction(
 </div>
 <div label="Jina AI">
 
-埋め込み用のAPIキーを作成するには、[ジナAI](https://jina.ai/embeddings/)にアクセスしてください。
+埋め込み用のAPIキーを作成するには、[Jina AI](https://jina.ai/embeddings/)にアクセスしてください。
 
 ```python
 from pytidb.embeddings import EmbeddingFunction

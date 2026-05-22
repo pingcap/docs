@@ -63,7 +63,7 @@ DESC tidb_hot_regions_history;
 -   REGION_ID: ホットリージョンのID。
 -   STORE_ID: ホットリージョンが存在する店舗のID。
 -   PEER_ID: ホットリージョンに対応するピアのID。
--   IS_LEARNER: PEERが学習者であるかどうか。
+-   IS_LEARNER: PEERがラーナーであるかどうか。
 -   IS_LEADER: PEERがLEADERであるかどうか。
 -   タイプ: 高温リージョンのタイプ。
 -   HOT_DEGREE: 高温リージョンの高温度。

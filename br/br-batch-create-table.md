@@ -28,7 +28,7 @@ BRはデフォルトでバッチテーブル作成機能を有効にします。
 
 ```shell
 tiup br restore full \
---storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
+--ストレージ local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
 --ddl-batch-size=1
 ```
 
@@ -48,7 +48,7 @@ tiup br restore full \
 
 このセクションでは、バッチテーブル作成機能に関するテスト情報について説明します。テスト環境は次のとおりです。
 
--   クラスタ構成:
+-   クラスター構成:
 
     -   15 個の TiKV インスタンス。各 TiKV インスタンスには、16 個の CPU コア、80 GB のメモリ、および RPC リクエストを処理するための 16 個のスレッド ( [`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16) が搭載されています。
     -   3 つの TiDB インスタンス。各 TiDB インスタンスには、16 個の CPU コアと 32 GB のメモリが搭載されています。

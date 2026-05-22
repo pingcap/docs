@@ -49,13 +49,13 @@ TiDB バージョン: 5.2.2
     -   プランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正しました[＃28087](https://github.com/pingcap/tidb/issues/28087)
     -   ハッシュ列の型が列挙型[＃27893](https://github.com/pingcap/tidb/issues/27893)場合の間違ったインデックス ハッシュ結合を修正しました
     -   アイドル接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるバッチクライアントのバグを修正しました[＃27688](https://github.com/pingcap/tidb/pull/27688)
-    -   ターゲット クラスタ[＃27686](https://github.com/pingcap/tidb/pull/27686)でチェックサムの実行に失敗した場合のTiDB Lightningpanic問題を修正しました。
+    -   ターゲット クラスター[＃27686](https://github.com/pingcap/tidb/pull/27686)でチェックサムの実行に失敗した場合のTiDB Lightningpanic問題を修正しました。
     -   いくつかのケースで`date_add`と`date_sub`関数の誤った結果を修正[＃27232](https://github.com/pingcap/tidb/issues/27232)
     -   ベクトル化された式[＃28643](https://github.com/pingcap/tidb/issues/28643)の関数`hour`の誤った結果を修正します
     -   MySQL 5.1またはそれ以前のクライアントバージョン[＃27855](https://github.com/pingcap/tidb/issues/27855)に接続する際の認証問題を修正
     -   新しいインデックスが追加されたときに、指定された時間外にauto analyzeがトリガーされる可能性がある問題を修正しました[＃28698](https://github.com/pingcap/tidb/issues/28698)
     -   セッション変数を設定すると`tidb_snapshot` [＃28683](https://github.com/pingcap/tidb/pull/28683)が無効になるバグを修正
-    -   ピアが見つからないリージョンが多数あるクラスタでBRが機能しないバグを修正[＃27534](https://github.com/pingcap/tidb/issues/27534)
+    -   ピアが見つからないリージョンが多数あるクラスターでBRが機能しないバグを修正[＃27534](https://github.com/pingcap/tidb/issues/27534)
     -   サポートされていない`cast` TiFlash [＃23907](https://github.com/pingcap/tidb/issues/23907)にプッシュダウンされたときに発生する`tidb_cast to Int32 is not supported`ような予期しないエラーを修正しました
     -   `%s value is out of range in '%s'`エラーメッセージ[＃27964](https://github.com/pingcap/tidb/issues/27964)に`DECIMAL overflow`が欠落している問題を修正
     -   MPPノードの可用性検出が一部のコーナーケースで機能しないバグを修正[＃3118](https://github.com/pingcap/tics/issues/3118)

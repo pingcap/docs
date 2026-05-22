@@ -63,7 +63,7 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
 
     -   **ネットワークタイプ**: `Internal-facing`を選択
     -   **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を選択します。
-    -   **ゾーン**: TiDB Cloud Essential クラスタと重複する必要があります
+    -   **ゾーン**: TiDB Cloud Essential クラスターと重複する必要があります
     -   **IPバージョン**: `IPv4`を選択
 
 4.  作成したロードバランサーを見つけて、 **「リスナーの作成」**をクリックします。以下の情報を入力します。

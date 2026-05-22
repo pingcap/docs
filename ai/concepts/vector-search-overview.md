@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-
 > **注記：**
 >
 > -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 概念 {#concepts}
 
@@ -29,7 +29,7 @@ aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-
 
 ベクトル埋め込みは機械学習において不可欠であり、意味的類似性検索の基盤となる。
 
-TiDB は、ベクトル埋め込みのstorageと検索を最適化するように設計された、シームレス [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を導入し、AI アプリケーションでの使用を強化します。ベクトル エンベディングを TiDB に保存し、ベクトル検索クエリを実行して、これらのデータ タイプを使用して最も関連性の高いデータを見つけることができます。
+TiDB は、ベクトル埋め込みのストレージと検索を最適化するように設計された、シームレス [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を導入し、AI アプリケーションでの使用を強化します。ベクトル エンベディングを TiDB に保存し、ベクトル検索クエリを実行して、これらのデータ タイプを使用して最も関連性の高いデータを見つけることができます。
 
 ### 埋め込みモデル {#embedding-model}
 
@@ -47,7 +47,7 @@ TiDBベクトル検索は、 [距離関数](/ai/reference/vector-search-function
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
-TiDBは、ベクトル検索機能を統合したリレーショナルデータベースとして、データとその対応するベクトル表現（つまり、ベクトル埋め込み）を1つのデータベースにまとめて保存できます。storage方法は以下のいずれかを選択できます。
+TiDBは、ベクトル検索機能を統合したリレーショナルデータベースとして、データとその対応するベクトル表現（つまり、ベクトル埋め込み）を1つのデータベースにまとめて保存できます。ストレージ方法は以下のいずれかを選択できます。
 
 -   データとその対応するベクトル表現を、同じテーブルの異なる列に格納します。
 -   データとその対応するベクトル表現を別々のテーブルに格納します。このため、データを取得する際には`JOIN`クエリを使用してテーブルを結合する必要があります。

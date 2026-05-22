@@ -16,11 +16,11 @@ TiDBバージョン：5.2.4
 
     -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更します。 [#31748](https://github.com/pingcap/tidb/issues/31748)
 
--   ティクヴ
+-   TiKV
 
     -   不要なRaftログを圧縮する時間間隔 (デフォルトでは`"2s"` ) を制御するために[`raft-log-compact-sync-interval`](https://docs-archive.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524)を追加する [#11404](https://github.com/tikv/tikv/issues/11404)
     -   [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval)のデフォルト値を`"10s"`から`"3s"`に変更する [#11404](https://github.com/tikv/tikv/issues/11404)
-    -   [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合、 [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)の値が[`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1)の値を上書きします [#11424](https://github.com/tikv/tikv/issues/11424)
+    -   [`ストレージ.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合、 [`ストレージ.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)の値が[`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1)の値を上書きします [#11424](https://github.com/tikv/tikv/issues/11424)
 
 -   ツール
 
@@ -30,7 +30,7 @@ TiDBバージョン：5.2.4
 
 ## 改善点 {#improvements}
 
--   ティクヴ
+-   TiKV
 
     -   レイテンシージッターを低減するために、リーダーシップをCDCオブザーバーに移管する [#12111](https://github.com/tikv/tikv/issues/12111)
     -   解決ロック手順 [#11993](https://github.com/tikv/tikv/issues/11993)を必要とするリージョンの数を減らすことで、TiCDCのリカバリ時間を短縮します。
@@ -84,7 +84,7 @@ TiDBバージョン：5.2.4
     -   テーブルに仮想列がある場合、TiDBが誤ったデータを読み取る可能性がある問題を修正しました [#30965](https://github.com/pingcap/tidb/issues/30965)
     -   ログレベルの設定がスロークエリログに反映されない問題を修正しました [#30309](https://github.com/pingcap/tidb/issues/30309)
     -   パーティションテーブルが場合によってはインデックスを完全に利用してデータをスキャンできない問題を修正しました [#33966](https://github.com/pingcap/tidb/issues/33966)
-    -   TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスタが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
+    -   TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
     -   TiDBが認証失敗のログを予期せず多数出力する可能性がある問題を修正しました [#29709](https://github.com/pingcap/tidb/issues/29709)
     -   システム変数`max_allowed_packet`が有効にならない問題を修正します [#31422](https://github.com/pingcap/tidb/issues/31422)
     -   `REPLACE`ステートメントが自動 ID が範囲外の場合に他の行を誤って変更してしまう問題を修正しました [#29483](https://github.com/pingcap/tidb/issues/29483)
@@ -95,7 +95,7 @@ TiDBバージョン：5.2.4
     -   STR_TO_DATE関数がマイクロ秒部分の先頭のゼロを正しく処理できない問題を修正しました [#30078](https://github.com/pingcap/tidb/issues/30078)
     -   TiFlashがまだ空の範囲のテーブル読み取りをサポートしていないにもかかわらず、TiDBが空の範囲のテーブルをスキャンする際に誤った結果を取得する問題を修正します。 [#33083](https://github.com/pingcap/tidb/issues/33083)
 
--   ティクヴ
+-   TiKV
 
     -   古いメッセージが原因で TiKV がpanicを起こすバグを修正しました [#12023](https://github.com/tikv/tikv/issues/12023)
     -   メモリメトリックのオーバーフローによって引き起こされる、断続的なパケット損失とメモリ不足（OOM）の問題を修正します [#12160](https://github.com/tikv/tikv/issues/12160)
@@ -135,7 +135,7 @@ TiDBバージョン：5.2.4
     -   `IN`の結果が複数値式で正しくない問題を修正 [#4016](https://github.com/pingcap/tiflash/issues/4016)
     -   日付フォーマットが`'\n'`無効な区切り文字として認識する問題を修正 [#4036](https://github.com/pingcap/tiflash/issues/4036)
     -   読み取り負荷の高い環境で列を追加した後に発生する可能性のあるクエリエラーを修正する [#3967](https://github.com/pingcap/tiflash/issues/3967)
-    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正 [#4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   無効なストレージディレクトリ構成が予期しない動作を引き起こすバグを修正 [#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   一部の例外が正しく処理されないバグを修正 [#4101](https://github.com/pingcap/tiflash/issues/4101)
     -   `STR_TO_DATE()`関数がマイクロ秒を解析する際に先頭のゼロを正しく処理しないバグを修正しました [#3557](https://github.com/pingcap/tiflash/issues/3557)
     -   `INT`を`DECIMAL`にキャストするとオーバーフローが発生する可能性がある問題を修正しました [#3920](https://github.com/pingcap/tiflash/issues/3920)
@@ -180,7 +180,7 @@ TiDBバージョン：5.2.4
         -   DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)
         -   RHELリリース [#3584](https://github.com/pingcap/tiflow/issues/3584)において、タイムゾーンの問題によりサービスを開始できない問題を修正しました。
-        -   `stopped`の変更フィードがクラスタのアップグレード後に自動的に再開される問題を修正します [#3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   `stopped`の変更フィードがクラスターのアップグレード後に自動的に再開される問題を修正します [#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   MySQLシンクのデッドロックによって発生する、警告が頻繁に発生する問題を修正しました [#2706](https://github.com/pingcap/tiflow/issues/2706)
         -   Canalプロトコルで`enable-old-value`設定項目が`true`に自動的に設定されないバグを修正しました [#3676](https://github.com/pingcap/tiflow/issues/3676)
         -   AvroシンクがJSON型カラムの解析をサポートしていない問題を修正 [#3624](https://github.com/pingcap/tiflow/issues/3624)
@@ -198,5 +198,5 @@ TiDBバージョン：5.2.4
         -   TiDB Lightningが`mysql.tidb`テーブルにアクセスする権限を持たない場合に発生する、インポート結果の誤りに関する問題を修正しました [#31088](https://github.com/pingcap/tidb/issues/31088)
         -   チェックサムエラー「GCの有効期間がトランザクション期間より短い」を修正 [#32733](https://github.com/pingcap/tidb/issues/32733)
         -   TiDB Lightningが、一部のインポートタスクにソースファイルが含まれていない場合にメタデータスキーマを削除しない可能性があるバグを修正しました [#28144](https://github.com/pingcap/tidb/issues/28144)
-        -   S3storageパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
         -   GCSで1000個以上のキーを反復処理する際に発生するエラーを修正しました [#30377](https://github.com/pingcap/tidb/issues/30377)

@@ -3,11 +3,11 @@ title: Deploy a DM Cluster Using TiUP
 summary: TiUP DMを使用して TiDB データ移行を展開する方法を学習します。
 ---
 
-# TiUPを使用して DMクラスタをデプロイ {#deploy-a-dm-cluster-using-tiup}
+# TiUPを使用して DMクラスターをデプロイ {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup) 、TiDB 4.0で導入されたクラスタ運用・保守ツールです。TiUPは、 Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)提供します。TiUP TiUP DMを使用すると、DMクラスタのデプロイ、起動、停止、破棄、スケーリング、アップグレードなど、日常的なTiDBデータ移行（DM）操作を簡単に実行でき、DMクラスタパラメータの管理も可能です。
+[TiUP](https://github.com/pingcap/tiup) 、TiDB 4.0で導入されたクラスター運用・保守ツールです。TiUPは、 Golangで記述されたクラスター管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)提供します。TiUP TiUP DMを使用すると、DMクラスターのデプロイ、起動、停止、破棄、スケーリング、アップグレードなど、日常的なTiDBデータ移行（DM）操作を簡単に実行でき、DMクラスターパラメータの管理も可能です。
 
-TiUPはDM v2.0以降のバージョンの導入をサポートしています。このドキュメントでは、さまざまなトポロジのDMクラスタを導入する方法について説明します。
+TiUPはDM v2.0以降のバージョンの導入をサポートしています。このドキュメントでは、さまざまなトポロジのDMクラスターを導入する方法について説明します。
 
 > **注記：**
 >
@@ -15,7 +15,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 ## 前提条件 {#prerequisites}
 
--   DMが完全なデータレプリケーションタスクを実行する場合、DMワーカーは1つの上流データベースのみにバインドされます。DMワーカーはまずローカルで全データをエクスポートし、その後、下流データベースにインポートします。そのため、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを保存できる十分な大きさが必要です。storageパスは、タスク作成時に後で指定します。
+-   DMが完全なデータレプリケーションタスクを実行する場合、DMワーカーは1つの上流データベースのみにバインドされます。DMワーカーはまずローカルで全データをエクスポートし、その後、下流データベースにインポートします。そのため、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを保存できる十分な大きさが必要です。ストレージパスは、タスク作成時に後で指定します。
 
 -   DM クラスターを展開する場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)満たす必要があります。
 
@@ -23,7 +23,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 ## ステップ1: 制御マシンにTiUPをインストールする {#step-1-install-tiup-on-the-control-machine}
 
-通常のユーザーアカウント（ユーザー`tidb`例に挙げます）を使用して制御マシンにログインします。以下のTiUPのインストールとクラスタ管理操作はすべて、ユーザー`tidb`で実行できます。
+通常のユーザーアカウント（ユーザー`tidb`例に挙げます）を使用して制御マシンにログインします。以下のTiUPのインストールとクラスター管理操作はすべて、ユーザー`tidb`で実行できます。
 
 1.  次のコマンドを実行してTiUPをインストールします。
 
@@ -176,15 +176,15 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 tiup dm list
 ```
 
-TiUP は複数の DM クラスタの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスタの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
 
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  ${version}  /root/.tiup/ストレージ/dm/clusters/dm-test  /root/.tiup/ストレージ/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ5: 展開されたDMクラスタのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
+## ステップ5: 展開されたDMクラスターのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 
@@ -202,7 +202,7 @@ tiup dm start dm-test
 
 出力ログに``Started cluster `dm-test` successfully``が含まれていれば起動は成功です。
 
-## ステップ7: DMクラスタの実行状態を確認する {#step-7-verify-the-running-status-of-the-dm-cluster}
+## ステップ7: DMクラスターの実行状態を確認する {#step-7-verify-the-running-status-of-the-dm-cluster}
 
 TiUPを使用して DM クラスターのステータスを確認します。
 
@@ -214,7 +214,7 @@ tiup dm display dm-test
 
 ## ステップ8: dmctlを使用して移行タスクを管理する {#step-8-managing-migration-tasks-using-dmctl}
 
-dmctl は、DM クラスタを制御するためのコマンドラインツールです[TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)を使用することをお勧めします。
+dmctl は、DM クラスターを制御するためのコマンドラインツールです[TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)を使用することをお勧めします。
 
 dmctlはコマンドモードと対話モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)参照してください。
 

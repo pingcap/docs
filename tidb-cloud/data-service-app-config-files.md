@@ -3,7 +3,7 @@ title: Data App Configuration Files
 summary: このドキュメントでは、TiDB Cloudのデータ アプリの構成ファイルについて説明します。
 ---
 
-# データアプリコンフィグレーションファイル {#data-app-configuration-files}
+# データアプリ設定ファイル {#data-app-configuration-files}
 
 このドキュメントでは、TiDB Cloudの[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の構成ファイルについて説明します。
 

@@ -24,7 +24,7 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/stable/backup-and-restore-storages/#uri-format.
+# The local data source directory or the URI of the external ストレージ. For more information about the URI of the external ストレージ, see https://docs.pingcap.com/tidb/stable/backup-and-restore-ストレージs/#uri-format.
 data-source-dir = "/data/my_database"
 
 [tikv-importer]
@@ -43,7 +43,7 @@ password = ""
 log-level = "error"
 ```
 
-完全な設定ファイルについては、 [TiDB Lightning のコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+完全な設定ファイルについては、 [TiDB Lightning の設定](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## 競合検出 {#conflict-detection}
 
@@ -64,7 +64,7 @@ log-level = "error"
 
 -   論理インポート モードでは、 TiDB Lightningのパフォーマンスはターゲット TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高並行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
--   対象の TiDB クラスタで書き込みボトルネックが発生しない場合は、 TiDB Lightning構成の`region-concurrency`の値を増やすことを検討してください。 `region-concurrency`のデフォルト値は CPU コア数です。 `region-concurrency`の意味は、物理インポート モードと論理インポート モードで異なります。論理インポート モードでは、 `region-concurrency`は書き込み同時実行数です。
+-   対象の TiDB クラスターで書き込みボトルネックが発生しない場合は、 TiDB Lightning構成の`region-concurrency`の値を増やすことを検討してください。 `region-concurrency`のデフォルト値は CPU コア数です。 `region-concurrency`の意味は、物理インポート モードと論理インポート モードで異なります。論理インポート モードでは、 `region-concurrency`は書き込み同時実行数です。
 
     設定例：
 

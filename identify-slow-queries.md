@@ -167,7 +167,7 @@ TiKVコプロセッサータスクフィールド：
 -   `Request_unit_write` : ステートメントによって消費された書き込み RU の合計。
 -   `Time_queued_by_rc` : ステートメントが利用可能なリソースを待機する合計時間。
 
-storageエンジンに関連する分野：
+ストレージエンジンに関連する分野：
 
 -   `Storage_from_kv` : v8.5.5 で導入され、このステートメントが TiKV からデータを読み取ったかどうかを示します。
 -   `Storage_from_mpp` : v8.5.5 で導入され、このステートメントがTiFlashからデータを読み取ったかどうかを示します。
@@ -547,7 +547,7 @@ group by plan_digest\G
                 └─HashAgg_8         cop     1                       group by:sbtest.sbtest25.c,
                   └─TableScan_11    cop     1.2440069558121831      table:sbtest25, range:[472745,472844], keep order:false
 
-### クラスタ内の各TiDBノードにおける低速クエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
+### クラスター内の各TiDBノードにおける低速クエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
 
 ```sql
 select instance, count(*) from information_schema.cluster_slow_query where time >= "2020-03-06 00:00:00" and time < now() group by instance;
@@ -697,7 +697,7 @@ TiDB はメモリが限られているため、低速クエリのレコードを
 | 詳細          | SQL実行の詳細                                      |
 | う           | SQL文が正常に実行されたかどうかを示します。 `1`は成功、 `0`は失敗を意味します。 |
 | conn_id     | セッションの接続ID                                    |
-| トランザクション_ts | 取引の`start ts`                                 |
+| トランザクション_ts | トランザクションの`start ts`                                 |
 | ユーザー        | ステートメントを実行するためのユーザー名                          |
 | db          | ステートメントの実行時に関係するデータベース                        |
 | テーブルID      | SQL文の実行時に関係するテーブルのID                          |

@@ -89,7 +89,7 @@ TiDB バージョン: 7.2.0
 
     バージョン7.2.0以降、軽量統計初期化機能が一般提供（GA）となりました。軽量統計初期化機能により、起動時にロードする必要のある統計情報の数を大幅に削減できるため、統計情報のロード速度が向上します。この機能は、複雑な実行環境におけるTiDBの安定性を高め、TiDBノードの再起動時にサービス全体への影響を軽減します。
 
-    v7.2.0以降のバージョンで新規作成されたクラスタの場合、TiDBはデフォルトでTiDB起動時に軽量統計情報をロードし、ロードが完了するまでサービスの提供を待ちます。以前のバージョンからアップグレードしたクラスタの場合は、TiDB構成項目[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)と[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)を`true`に設定することで、この機能を有効にできます。
+    v7.2.0以降のバージョンで新規作成されたクラスターの場合、TiDBはデフォルトでTiDB起動時に軽量統計情報をロードし、ロードが完了するまでサービスの提供を待ちます。以前のバージョンからアップグレードしたクラスターの場合は、TiDB構成項目[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)と[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)を`true`に設定することで、この機能を有効にできます。
 
     詳細については、[ドキュメント](/statistics.md#load-statistics)を参照してください。
 
@@ -158,17 +158,17 @@ TiDB バージョン: 7.2.0
 | [`tidb_enable_tiflash_pipeline_model`](https://docs-archive.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720) | 新しく追加された | TiFlashの新しい実行モデルで[パイプラインモデル](/tiflash/tiflash-pipeline-model.md)モデルを有効にするかどうかを制御します。デフォルト値は`OFF`で、パイプライン モデルが無効であることを意味します。                                                                                                                                                            |
 | [`tidb_expensive_txn_time_threshold`](/system-variables.md#tidb_expensive_txn_time_threshold-new-in-v720)                                          | 新しく追加された | 高額トランザクションをログに記録するしきい値を制御します。デフォルト値は600秒です。トランザクションの所要時間がこのしきい値を超え、かつコミットもロールバックもされない場合、そのトランザクションは高額トランザクションとみなされ、ログに記録されます。                                                                                                                                                          |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                 | 種類を変更する  | 説明                                                                                                                                                                                                                                                                                             |
+| 設定ファイル | 設定パラメータ                                                                                                                                 | 種類を変更する  | 説明                                                                                                                                                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                                                    | 修正済み     | さらなるテストの結果、デフォルト値が`false`から`true`に変更されました。これは、TiDB の起動時にデフォルトで軽量統計初期化を使用して初期化効率を向上させることを意味します。                                                                                                                                                                                                 |
 | TiDB           | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                                                         | 修正済み     | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)に合わせて、デフォルト値を`false`から`true`に変更します。これにより、TiDB の起動時に、TiDB は統計情報の初期化が完了するまでサービスの提供を待ちます。                                                                                                                             |
-| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].compaction-guard-min-output-file-size`](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 修正済み     | RocksDB の圧縮タスクのデータ量を削減するために、デフォルト値を`"8MB"`から`"1MB"`に変更します。                                                                                                                                                                                                                                     |
-| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v720)         | 新しく追加された | メモリ内部の断片化を最小限に抑えるブルーム/リボンフィルタを生成するかどうかを制御します。                                                                                                                                                                                                                                                  |
-| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720)         | 新しく追加された | 定期的な圧縮の間隔を制御します。この値よりも古い更新履歴を持つSSTファイルが圧縮対象として選択され、元のSSTファイルと同じ階層に書き換えられます。                                                                                                                                                                                                                    |
-| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].ribbon-filter-above-level`](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v720)             | 新しく追加された | この値以上のレベルではリボンフィルターを使用し、この値未満のレベルではブロックベースではないブルームフィルターを使用するかどうかを制御します。                                                                                                                                                                                                                        |
-| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                         | 新しく追加された | TTLよりも古い更新情報を持つSSTファイルは、自動的に圧縮対象として選択されます。                                                                                                                                                                                                                                                     |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].compaction-guard-min-output-file-size`](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 修正済み     | RocksDB の圧縮タスクのデータ量を削減するために、デフォルト値を`"8MB"`から`"1MB"`に変更します。                                                                                                                                                                                                                                     |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v720)         | 新しく追加された | メモリ内部の断片化を最小限に抑えるブルーム/リボンフィルタを生成するかどうかを制御します。                                                                                                                                                                                                                                                  |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720)         | 新しく追加された | 定期的な圧縮の間隔を制御します。この値よりも古い更新履歴を持つSSTファイルが圧縮対象として選択され、元のSSTファイルと同じ階層に書き換えられます。                                                                                                                                                                                                                    |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ribbon-filter-above-level`](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v720)             | 新しく追加された | この値以上のレベルではリボンフィルターを使用し、この値未満のレベルではブロックベースではないブルームフィルターを使用するかどうかを制御します。                                                                                                                                                                                                                        |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                         | 新しく追加された | TTLよりも古い更新情報を持つSSTファイルは、自動的に圧縮対象として選択されます。                                                                                                                                                                                                                                                     |
 | TiDB Lightning | `send-kv-pairs`                                                                                                                                 | 非推奨      | バージョン7.2.0以降、パラメータ`send-kv-pairs`は非推奨となりました。物理インポートモードでTiKVにデータを送信する際の1リクエストの最大サイズを制御するには、 [`send-kv-size`](/tidb-lightning/tidb-lightning-configuration.md)使用してください。                                                                                                                          |
 | TiDB Lightning | [`character-set`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                          | 修正済み     | データインポートでサポートされる文字セットに、新しい値オプション`latin1`が追加されました。このオプションを使用すると、Latin-1 文字セットのソースファイルをインポートできます。                                                                                                                                                                                                |
 | TiDB Lightning | [`send-kv-size`](/tidb-lightning/tidb-lightning-configuration.md)                                                                               | 新しく追加された | 物理インポートモードでTiKVにデータを送信する際の、1リクエストあたりの最大サイズを指定します。キーと値のペアのサイズが指定されたしきい値に達すると、 TiDB Lightningは直ちにそれらをTiKVに送信します。これにより、大規模なワイドテーブルをインポートする際に、 TiDB Lightningノードがメモリ内に大量のキーと値のペアを蓄積することによって発生するメモリ不足（OOM）の問題を回避できます。このパラメータを調整することで、メモリ使用量とインポート速度のバランスを取り、インポートプロセスの安定性と効率性を向上させることができます。         |
@@ -182,14 +182,14 @@ TiDB バージョン: 7.2.0
 
     -   インデックススキャン範囲の構築ロジックを最適化し、複雑な条件をインデックススキャン範囲に変換することをサポートする[#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   新しい監視メトリクス`Stale Read OPS`と`Stale Read Traffic`を追加 [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
-    -   古い読み取りの再試行リーダーがロックに遭遇した場合、TiDB はロックを解決した後、リーダーで強制的に再試行します。これにより、不要なオーバーヘッドが回避されます。 [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
-    -   推定時間を使用して古い読み取りtsを計算し、古い読み取りのオーバーヘッドを削減します [#44215](https://github.com/pingcap/tidb/issues/44215) @[you06](https://github.com/you06)
+    -   ステイル読み取りの再試行リーダーがロックに遭遇した場合、TiDB はロックを解決した後、リーダーで強制的に再試行します。これにより、不要なオーバーヘッドが回避されます。 [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
+    -   推定時間を使用してステイル読み取りtsを計算し、ステイル読み取りのオーバーヘッドを削減します [#44215](https://github.com/pingcap/tidb/issues/44215) @[you06](https://github.com/you06)
     -   長時間実行されるトランザクションのログとシステム変数を追加する [#41471](https://github.com/pingcap/tidb/issues/41471) @[crazycs520](https://github.com/crazycs520)
     -   圧縮されたMySQLプロトコルを介したTiDBへの接続をサポートします。これにより、低帯域幅ネットワーク下でのデータ集約型クエリのパフォーマンスが向上し、帯域幅コストが削減されます。これは`zlib`と`zstd`ベースの圧縮の両方をサポートします。 [#22605](https://github.com/pingcap/tidb/issues/22605) @[dveeden](https://github.com/dveeden)
     -   `utf8`と`utf8bm3`の両方を従来の 3 バイト UTF-8 文字セットエンコーディングとして認識することで、従来の UTF-8 エンコーディングを持つテーブルを MySQL 8.0 から TiDB に移行しやすくなります。 [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
     -   `:=`ステートメントでの代入に`UPDATE`を使用するサポート [#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
--   ティクヴ
+-   TiKV
 
     -   `pd.retry-interval`を使用した接続要求失敗などのシナリオで PD 接続の再試行間隔を設定することをサポートします [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
     -   グローバルなリソース使用状況を組み込むことで、リソース制御スケジューリングアルゴリズムを最適化する [#14604](https://github.com/tikv/tikv/issues/14604) @[Connor1996](https://github.com/Connor1996)
@@ -210,7 +210,7 @@ TiDB バージョン: 7.2.0
 
     -   TiCDC
 
-        -   オブジェクトstorageサービスへのレプリケーションシナリオでDDL操作が発生した場合に、データファイルが格納されるディレクトリの構造を最適化する [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージサービスへのレプリケーションシナリオでDDL操作が発生した場合に、データファイルが格納されるディレクトリの構造を最適化する [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   KafkaへのレプリケーションシナリオにおけるOAUTHBEARER認証のサポート [#8865](https://github.com/pingcap/tiflow/issues/8865) @[Rustin170506](https://github.com/Rustin170506)
         -   Kafka [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)ショーハンドにレプリケーションシナリオの`DELETE`オペレーションのハンドルキーのみを出力するオプションを追加
 
@@ -249,7 +249,7 @@ TiDB バージョン: 7.2.0
     -   結合したテーブルの再配置によって不正な外部結合結果が生じる可能性がある問題を修正 [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
     -   `PREPARE stmt FROM "ANALYZE TABLE xxx"`が`tidb_mem_quota_query`によって強制終了される可能性がある問題を修正 [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
 
--   ティクヴ
+-   TiKV
 
     -   TiKVが古い悲観的ロックの競合を処理する際にトランザクションが誤った値を返す問題を修正 [#13298](https://github.com/tikv/tikv/issues/13298) @[cfzjywxk](https://github.com/cfzjywxk)
     -   インメモリ悲観的ロックがフラッシュバックの失敗やデータの不整合を引き起こす可能性がある問題を修正 [#13303](https://github.com/tikv/tikv/issues/13303) @[JmPotato](https://github.com/JmPotato)

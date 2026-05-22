@@ -31,16 +31,16 @@ TiDB バージョン: 6.5.1
 
 -   TiDB
 
-    -   v6.5.1以降、 TiDB Operator v1.4.3以降でデプロイされたTiDBクラスタはIPv6アドレスをサポートします。これにより、TiDBはより広いアドレス空間をサポートし、セキュリティとネットワークパフォーマンスを向上させることができます。
+    -   v6.5.1以降、 TiDB Operator v1.4.3以降でデプロイされたTiDBクラスターはIPv6アドレスをサポートします。これにより、TiDBはより広いアドレス空間をサポートし、セキュリティとネットワークパフォーマンスを向上させることができます。
 
         -   IPv6 アドレスの完全サポート: TiDB は、クライアント接続、ノード間の内部通信、外部システムとの通信など、すべてのネットワーク接続で IPv6 アドレスの使用をサポートします。
-        -   デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスタ内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワーク展開モードを選択できます。
+        -   デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスター内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワーク展開モードを選択できます。
 
         IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)参照してください。
 
-    -   TiDB クラスタの初期化時に実行される SQL スクリプトの指定をサポート[＃35624](https://github.com/pingcap/tidb/issues/35624) @ [morgo](https://github.com/morgo)
+    -   TiDB クラスターの初期化時に実行される SQL スクリプトの指定をサポート[＃35624](https://github.com/pingcap/tidb/issues/35624) @ [morgo](https://github.com/morgo)
 
-        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)参照してください。
+        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスターを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)参照してください。
 
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [sticnarf](https://github.com/sticnarf)
 
@@ -71,7 +71,7 @@ TiDB バージョン: 6.5.1
     -   TiCDC
 
         -   プルベースのシンクを有効にしてシステムスループットを最適化します[＃8232](https://github.com/pingcap/tiflow/issues/8232) @ [Rustin170506](https://github.com/Rustin170506)
-        -   GCS 互換または Azure 互換のオブジェクトstorage[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [CharlesCheung96](https://github.com/CharlesCheung96)への REDO ログの保存をサポート
+        -   GCS 互換または Azure 互換のオブジェクトストレージ[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [CharlesCheung96](https://github.com/CharlesCheung96)への REDO ログの保存をサポート
         -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装します[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [amyangfei](https://github.com/amyangfei) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
@@ -134,7 +134,7 @@ TiDB バージョン: 6.5.1
 -   PD
 
     -   特定の条件下で実行`replace-down-peer`が遅くなる問題を修正[＃5788](https://github.com/tikv/pd/issues/5788) @ [HunDunDM](https://github.com/HunDunDM)
-    -   PD が予期せず複数の学習者をリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
+    -   PD が予期せず複数のラーナーをリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
     -   リージョンスキャッタタスクが予期せず冗長レプリカを生成する問題を修正[＃5909](https://github.com/tikv/pd/issues/5909) @ [HunDunDM](https://github.com/HunDunDM)
     -   `ReportMinResolvedTS`の呼び出しが[＃5965](https://github.com/tikv/pd/issues/5965) @ [HunDunDM](https://github.com/HunDunDM)で頻繁に発生する PD OOM 問題を修正しました
     -   リージョン散布により、リーダー[＃6017](https://github.com/tikv/pd/issues/6017) @ [HunDunDM](https://github.com/HunDunDM)の分布が不均一になる可能性がある問題を修正しました。
@@ -153,13 +153,13 @@ TiDB バージョン: 6.5.1
 
         -   PDとtidb-server間の接続障害により、PITRバックアップの進行が[＃41082](https://github.com/pingcap/tidb/issues/41082) @ [YuJuncen](https://github.com/YuJuncen)に進まない問題を修正しました。
         -   PDとTiKV [＃14159](https://github.com/tikv/tikv/issues/14159) @ [YuJuncen](https://github.com/YuJuncen)間の接続障害によりTiKVがPITRタスクをリッスンできない問題を修正しました
-        -   PITRがPDクラスタ[＃14165](https://github.com/tikv/tikv/issues/14165) @ [YuJuncen](https://github.com/YuJuncen)の構成変更をサポートしない問題を修正
+        -   PITRがPDクラスター[＃14165](https://github.com/tikv/tikv/issues/14165) @ [YuJuncen](https://github.com/YuJuncen)の構成変更をサポートしない問題を修正
         -   PITR機能がCAバンドル[＃38775](https://github.com/pingcap/tidb/issues/38775) @ [3pointer](https://github.com/3pointer)をサポートしない問題を修正
         -   PITRバックアップタスクを削除すると、残りのバックアップデータによって新しいタスク[#40403](https://github.com/pingcap/tidb/issues/40403) @ [joccau](https://github.com/joccau)でデータの不整合が発生する問題を修正しました。
         -   BRが`backupmeta`ファイル[＃40878](https://github.com/pingcap/tidb/issues/40878) @ [MoCuishle28](https://github.com/MoCuishle28)を解析するときにpanicを引き起こす問題を修正しました
         -   リージョンサイズ[＃36053](https://github.com/pingcap/tidb/issues/36053) @ [YuJuncen](https://github.com/YuJuncen)取得に失敗したために復元が中断される問題を修正しました
-        -   TiDBクラスタ[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)にPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正
-        -   ログバックアップが実行中のクラスタにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @ [Leavrth](https://github.com/Leavrth)
+        -   TiDBクラスター[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)にPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正
+        -   ログバックアップが実行中のクラスターにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @ [Leavrth](https://github.com/Leavrth)
         -   完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanicの問題を修正[＃40704](https://github.com/pingcap/tidb/issues/40704) @ [Leavrth](https://github.com/Leavrth)
         -   PITRエラーが[＃40576](https://github.com/pingcap/tidb/issues/40576) @ [Leavrth](https://github.com/Leavrth)で上書きされる問題を修正
         -   PITR バックアップ タスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[＃41806](https://github.com/pingcap/tidb/issues/41806) @ [joccau](https://github.com/joccau)
@@ -167,8 +167,8 @@ TiDB バージョン: 6.5.1
     -   TiCDC
 
         -   TiKV または TiCDC ノード[＃8174](https://github.com/pingcap/tiflow/issues/8174) @ [hicqu](https://github.com/hicqu)スケールインまたはスケールアウトなどの特別なシナリオで、changefeed がスタックする可能性がある問題を修正しました。
-        -   REDOログ[＃6335](https://github.com/pingcap/tiflow/issues/6335) @ [CharlesCheung96](https://github.com/CharlesCheung96)のstorageパスで事前チェックが実行されない問題を修正
-        -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [CharlesCheung96](https://github.com/CharlesCheung96)に対して、REDO ログが許容できる期間が不十分である問題を修正しました
+        -   REDOログ[＃6335](https://github.com/pingcap/tiflow/issues/6335) @ [CharlesCheung96](https://github.com/CharlesCheung96)のストレージパスで事前チェックが実行されない問題を修正
+        -   S3ストレージ障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [CharlesCheung96](https://github.com/CharlesCheung96)に対して、REDO ログが許容できる期間が不十分である問題を修正しました
         -   `transaction-atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [CharlesCheung96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
         -   TiCDC が過度に多数のテーブル[＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [overvenus](https://github.com/overvenus)を複製するとチェックポイントが進めなくなる問題を修正しました
         -   レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [CharlesCheung96](https://github.com/CharlesCheung96)

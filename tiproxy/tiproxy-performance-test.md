@@ -40,7 +40,7 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 | TiKV    | バージョン8.0.0  |
 | システムベンチ | 1.0.17      |
 
-### コンフィグレーション {#configuration}
+### 設定 {#configuration}
 
 #### TiProxy の設定 {#tiproxy-configuration}
 

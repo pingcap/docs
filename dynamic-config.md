@@ -3,11 +3,11 @@ title: Modify Configuration Dynamically
 summary: クラスター構成を動的に変更する方法を学習します。
 ---
 
-# コンフィグレーションを動的に変更する {#modify-configuration-dynamically}
+# 設定を動的に変更する {#modify-configuration-dynamically}
 
 このドキュメントでは、クラスター構成を動的に変更する方法について説明します。
 
-クラスタコンポーネントを再起動することなく、SQL文を使用してコンポーネント（TiDB、TiKV、PDを含む）の構成を動的に更新できます。現在、TiDBインスタンスの構成変更方法は、他のコンポーネント（TiKVやPDなど）の構成変更方法とは異なります。
+クラスターコンポーネントを再起動することなく、SQL文を使用してコンポーネント（TiDB、TiKV、PDを含む）の構成を動的に更新できます。現在、TiDBインスタンスの構成変更方法は、他のコンポーネント（TiKVやPDなど）の構成変更方法とは異なります。
 
 > **注記：**
 >
@@ -111,7 +111,7 @@ show warnings;
 
 次の TiKV 構成項目は動的に変更できます。
 
-| コンフィグレーション項目                                              | 説明                                                                                                                                         |
+| 設定項目                                              | 説明                                                                                                                                         |
 | :-------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | ログレベル                                                     | ログ レベル。                                                                                                                                    |
 | `raftstore.raft-max-inflight-msgs`                        | 確認するRaftログの数。この数を超えると、 Raftステートマシンはログの送信速度を低下させます。                                                                                         |
@@ -177,7 +177,7 @@ show warnings;
 | `gc.batch-keys`                                           | 1バッチで処理されるキーの数                                                                                                                             |
 | `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたり書き込める最大バイト数                                                                                                                   |
 | `gc.enable-compaction-filter`                             | 圧縮フィルタを有効にするかどうか                                                                                                                           |
-| `gc.compaction-filter-skip-version-check`                 | 圧縮フィルタのクラスタバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
+| `gc.compaction-filter-skip-version-check`                 | 圧縮フィルタのクラスターバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
 | `gc.auto-compaction.check-interval`                       | TiKVが自動（RocksDB）圧縮をトリガーするかどうかを確認する間隔                                                                                                       |
 | `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBトゥームストーンの数                                                                                            |
 | `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBトゥームストーンの割合                                                                                           |
@@ -216,13 +216,13 @@ show warnings;
 | `server.concurrent-recv-snap-limit`                       | 同時に受信するスナップショットの最大数を設定します                                                                                                                  |
 | `server.raft-msg-max-batch-size`                          | 1つのgRPCメッセージに含まれるRaftメッセージの最大数を設定します。                                                                                                      |
 | `server.simplify-metrics`                                 | サンプリング監視メトリックを簡素化するかどうかを制御します                                                                                                              |
-| `storage.block-cache.capacity`                            | 共有ブロックキャッシュのサイズ（v4.0.3以降でサポート）                                                                                                             |
-| storage.フロー制御.有効                                          | フロー制御メカニズムを有効にするかどうかを決定します                                                                                                                 |
-| storage.フロー制御.memtables-threshold                         | フロー制御をトリガーするkvDB memtablesの最大数                                                                                                             |
-| storage.flow-control.l0-files-threshold                   | フロー制御をトリガーするkvDB L0ファイルの最大数                                                                                                                |
-| storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                          |
-| storage.フロー制御.ハード保留圧縮バイト制限                                | フロー制御メカニズムがすべての書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
-| `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
+| `ストレージ.block-cache.capacity`                            | 共有ブロックキャッシュのサイズ（v4.0.3以降でサポート）                                                                                                             |
+| ストレージ.フロー制御.有効                                          | フロー制御メカニズムを有効にするかどうかを決定します                                                                                                                 |
+| ストレージ.フロー制御.memtables-threshold                         | フロー制御をトリガーするkvDB memtablesの最大数                                                                                                             |
+| ストレージ.flow-control.l0-files-threshold                   | フロー制御をトリガーするkvDB L0ファイルの最大数                                                                                                                |
+| ストレージ.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                          |
+| ストレージ.フロー制御.ハード保留圧縮バイト制限                                | フロー制御メカニズムがすべての書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
+| `ストレージ.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC 要求を処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
 | `split.qps-threshold`                                     | リージョンで`load-base-split`実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`超える場合、このリージョンは分割される必要があります。                                    |
@@ -241,7 +241,7 @@ show warnings;
 -   `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
 -   `db-name`が`raftdb`とき、 `cf-name`の値は`defaultcf`になります。
 
-詳細なパラメータの説明については[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
+詳細なパラメータの説明については[TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
 
 ### PD構成を動的に変更する {#modify-pd-configuration-dynamically}
 
@@ -263,7 +263,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 次の PD 構成項目は動的に変更できます。
 
-| コンフィグレーション項目                                         | 説明                                                         |
+| 設定項目                                         | 説明                                                         |
 | :--------------------------------------------------- | :--------------------------------------------------------- |
 | `log.level`                                          | ログレベル                                                      |
 | `cluster-version`                                    | クラスターバージョン                                                 |
@@ -304,14 +304,14 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.store-limit-version`                       | [店舗制限](/configure-store-limit.md)のバージョンを制御します              |
 | `schedule.patrol-region-worker-count`                | リージョンのヘルス状態を検査するときにチェッカーによって作成される同時オペレータの数を制御します           |
 | `replication.max-replicas`                           | レプリカの最大数を設定します                                             |
-| `replication.location-labels`                        | TiKVクラスタのトポロジ情報                                            |
+| `replication.location-labels`                        | TiKVクラスターのトポロジ情報                                            |
 | `replication.enable-placement-rules`                 | 配置ルールを有効にする                                                |
 | `replication.strictly-match-label`                   | ラベルチェックを有効にする                                              |
-| `replication.isolation-level`                        | TiKVクラスタの最小トポロジカル分離レベル                                     |
-| `pd-server.use-region-storage`                       | 独立したリージョンstorageを有効にする                                     |
+| `replication.isolation-level`                        | TiKVクラスターの最小トポロジカル分離レベル                                     |
+| `pd-server.use-region-ストレージ`                       | 独立したリージョンストレージを有効にする                                     |
 | `pd-server.max-gap-reset-ts`                         | タイムスタンプをリセットする最大間隔を設定します（BR）                               |
-| `pd-server.key-type`                                 | クラスタキータイプを設定します                                            |
-| `pd-server.metric-storage`                           | クラスターメトリックのstorageアドレスを設定します                               |
+| `pd-server.key-type`                                 | クラスターキータイプを設定します                                            |
+| `pd-server.metric-ストレージ`                           | クラスターメトリックのストレージアドレスを設定します                               |
 | `pd-server.dashboard-address`                        | ダッシュボードのアドレスを設定します                                         |
 | `pd-server.flow-round-by-digit`                      | リージョンフロー情報の丸めの最小桁数を指定します                                   |
 | `pd-server.min-resolved-ts-persistence-interval`     | 最小解決タイムスタンプがPDに永続的に保持される間隔を決定します。                          |
@@ -329,7 +329,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `replication-mode.dr-auto-sync.wait-recover-timeout` | ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間                   |
 | `replication-mode.dr-auto-sync.pause-region-split`   | `async_wait`と`async`ステータスでリージョン分割操作を一時停止するかどうかを制御します       |
 
-詳細なパラメータの説明については[PDコンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
+詳細なパラメータの説明については[PD設定ファイル](/pd-configuration-file.md)を参照してください。
 
 ### TiDB構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
@@ -362,7 +362,7 @@ select @@tidb_slow_log_threshold;
 
 次の TiDB 構成項目は動的に変更できます。
 
-| コンフィグレーション項目                                            | SQL変数                                        | 説明                                                                                    |
+| 設定項目                                            | SQL変数                                        | 説明                                                                                    |
 | ------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `instance.tidb_enable_slow_log`                         | `tidb_enable_slow_log`                       | スローログを有効にするかどうかを制御します                                                                 |
 | `instance.tidb_slow_log_threshold`                      | `tidb_slow_log_threshold`                    | スローログのしきい値を指定します                                                                      |

@@ -3,7 +3,7 @@ title: PD Configuration File
 summary: PD 構成ファイルについて学習します。
 ---
 
-# PDコンフィグレーションファイル {#pd-configuration-file}
+# PD設定ファイル {#pd-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -54,7 +54,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### <code>initial-cluster</code> {#code-initial-cluster-code}
 
--   ブートストラップのための初期クラスタ構成
+-   ブートストラップのための初期クラスター構成
 -   デフォルト値: `"{name}=http://{advertise-peer-url}"`
 -   たとえば、 `name`が「pd」、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`なります。
 -   3 つの PD サーバーを起動する必要がある場合、 `initial-cluster`は次のようになります。
@@ -80,7 +80,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### <code>quota-backend-bytes</code> {#code-quota-backend-bytes-code}
 
--   メタ情報データベースのstorageサイズはデフォルトで8GiBです
+-   メタ情報データベースのストレージサイズはデフォルトで8GiBです
 -   デフォルト値: `8589934592`
 
 ### <code>auto-compaction-mod</code> {#code-auto-compaction-mod-code}
@@ -125,7 +125,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ## pdサーバー {#pd-server}
 
-pd-server関連のコンフィグレーション項目
+pd-server関連の設定項目
 
 ### <code>server-memory-limit</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-server-memory-limit-code-span-class-version-mark-new-in-v6-6-0-span}
 
@@ -191,7 +191,7 @@ pd-server関連のコンフィグレーション項目
 
 ## 安全 {#security}
 
-セキュリティ関連のコンフィグレーション項目
+セキュリティ関連の設定項目
 
 ### <code>cacert-path</code> {#code-cacert-path-code}
 
@@ -217,7 +217,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>log</code> {#code-log-code}
 
-ログ関連のコンフィグレーション項目
+ログ関連の設定項目
 
 ### <code>level</code> {#code-level-code}
 
@@ -238,7 +238,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>log.file</code> {#code-log-file-code}
 
-ログファイルに関連するコンフィグレーション項目
+ログファイルに関連する設定項目
 
 ### <code>max-size</code> {#code-max-size-code}
 
@@ -261,7 +261,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>metric</code> {#code-metric-code}
 
-監視に関連するコンフィグレーション項目
+監視に関連する設定項目
 
 ### <code>interval</code> {#code-interval-code}
 
@@ -270,7 +270,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>schedule</code> {#code-schedule-code}
 
-スケジュールに関連するコンフィグレーション項目
+スケジュールに関連する設定項目
 
 > **注記：**
 >
@@ -456,7 +456,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>replication</code> {#code-replication-code}
 
-レプリカに関連するコンフィグレーション項目
+レプリカに関連する設定項目
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 
@@ -465,15 +465,15 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>location-labels</code> {#code-location-labels-code}
 
--   TiKVクラスタのトポロジ情報
+-   TiKVクラスターのトポロジ情報
 -   デフォルト値: `[]`
--   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
+-   [クラスタートポロジ構成](/schedule-replicas-by-topology-labels.md)
 
 ### <code>isolation-level</code> {#code-isolation-level-code}
 
--   TiKVクラスタの最小トポロジカル分離レベル
+-   TiKVクラスターの最小トポロジカル分離レベル
 -   デフォルト値: `""`
--   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
+-   [クラスタートポロジ構成](/schedule-replicas-by-topology-labels.md)
 
 ### <code>strictly-match-label</code> {#code-strictly-match-label-code}
 
@@ -488,7 +488,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>label-property</code> （非推奨） {#code-label-property-code-deprecated}
 
-ラベルに関連するコンフィグレーション項目`reject-leader`型のみをサポートします。
+ラベルに関連する設定項目`reject-leader`型のみをサポートします。
 
 > **注記：**
 >
@@ -506,7 +506,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>dashboard</code> {#code-dashboard-code}
 
-[TiDBダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目です。
+[TiDBダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関する設定項目です。
 
 ### <code>disable-custom-prom-addr</code> {#code-disable-custom-prom-addr-code}
 
@@ -546,7 +546,7 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>replication-mode</code> {#code-replication-mode-code}
 
-全リージョンのレプリケーションモードに関するコンフィグレーション項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
+全リージョンのレプリケーションモードに関する設定項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
 
 ## コントローラ {#controller}
 

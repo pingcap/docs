@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 > **注記：**
 >
 > -   ベクターデータ型はベータ版であり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> -   ベクトルデータ型は[TiDBセルフマネージド](/overview.md) 、 [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) 、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で使用できます。TiDB Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> -   ベクトルデータ型は[TiDB Self-Managed](/overview.md) 、 [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) 、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で使用できます。TiDB Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
 現在、次のベクター データ型が利用可能です。
 
@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 
 -   ベクトル インデックスのサポート: ベクトルの検索を高速化するために[ベクター検索インデックス](/ai/reference/vector-search-index.md)を構築できます。
 -   次元の強制: 異なる次元のベクトルの挿入を禁止する次元を指定できます。
--   最適化されたstorage形式: ベクター データ型はベクター データの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを実現します。
+-   最適化されたストレージ形式: ベクター データ型はベクター データの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを実現します。
 
 ## 構文 {#syntax}
 

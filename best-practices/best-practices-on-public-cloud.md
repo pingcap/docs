@@ -8,17 +8,17 @@ aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 
 パブリッククラウドインフラストラクチャは、TiDBの導入と管理においてますます人気の選択肢となっています。しかし、パブリッククラウドにTiDBを導入するには、パフォーマンスチューニング、コスト最適化、信頼性、スケーラビリティなど、いくつかの重要な要素を慎重に検討する必要があります。
 
-このドキュメントでは、KV RocksDB におけるコンパクション I/O フローの削減、 Raft Engine専用ディスクの使用、AZ 間トラフィックのコスト最適化、Google Cloud ライブマイグレーションイベントの軽減、大規模クラスタにおける PDサーバーの微調整など、パブリッククラウドへの TiDB の導入に関する様々な重要なベストプラクティスを解説します。これらのベストプラクティスに従うことで、パブリッククラウドにおける TiDB 導入のパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
+このドキュメントでは、KV RocksDB におけるコンパクション I/O フローの削減、 Raft Engine専用ディスクの使用、AZ 間トラフィックのコスト最適化、Google Cloud ライブマイグレーションイベントの軽減、大規模クラスターにおける PDサーバーの微調整など、パブリッククラウドへの TiDB の導入に関する様々な重要なベストプラクティスを解説します。これらのベストプラクティスに従うことで、パブリッククラウドにおける TiDB 導入のパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
 
 ## KV RocksDB の圧縮 I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
 
-TiKVのstorageエンジンである[ロックスDB](https://rocksdb.org/) 、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
+TiKVのストレージエンジンである[ロックスDB](https://rocksdb.org/) 、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
 
-ディスクスループットの制限によるボトルネックを軽減するには、パフォーマンスを[タイタンを有効にする](#enable-titan)向上させることができます。平均行サイズが 512 バイト未満の場合は、Titan は適用できません。この場合、パフォーマンスを[すべての圧縮レベルを上げる](#increase-all-the-compression-levels)向上させることができます。
+ディスクスループットの制限によるボトルネックを軽減するには、パフォーマンスを[Titanを有効にする](#enable-titan)向上させることができます。平均行サイズが 512 バイト未満の場合は、Titan は適用できません。この場合、パフォーマンスを[すべての圧縮レベルを上げる](#increase-all-the-compression-levels)向上させることができます。
 
-### タイタンを有効にする {#enable-titan}
+### Titanを有効にする {#enable-titan}
 
-[タイタン](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[ロックスDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
+[Titan](/ストレージ-engine/titan-overview.md)は、キーと値の分離のための高性能な[ロックスDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
 
 平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size` `"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan による圧縮 I/O フローの削減を有効にすることができます。
 
@@ -32,7 +32,7 @@ blob-file-compression = "zstd"
 
 > **注記：**
 >
-> Titanを有効にすると、主キーの範囲スキャンのパフォーマンスが若干低下する可能性があります。詳細については、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)参照してください。
+> Titanを有効にすると、主キーの範囲スキャンのパフォーマンスが若干低下する可能性があります。詳細については、 [`min-blob-size`がパフォーマンスに与える影響](/ストレージ-engine/titan-overview.md#impact-of-min-blob-size-on-performance)参照してください。
 
 ### すべての圧縮レベルを上げる {#increase-all-the-compression-levels}
 
@@ -51,7 +51,7 @@ TiKVの[Raft Engine](/glossary.md#raft-engine) 、従来のデータベースに
     sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
     sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
-デバイス`sdb`はKV RocksDBに使用され、 `sdd` Raft Engineのログを復元するために使用されます`sdd`には、デバイスの1秒あたりのフラッシュ要求完了数を表す`f/s`値が大幅に高いことに注目してください。Raft Raft Engineでは、バッチ内の書き込みが同期としてマークされている場合、バッチリーダーは書き込み後に`fdatasync()`呼び出し、バッファリングされたデータがstorageにフラッシュされることを保証します。Raft Raft Engine専用のディスクを使用することで、TiKVはリクエストの平均キュー長を短縮し、最適で安定した書き込みレイテンシーを保証します。
+デバイス`sdb`はKV RocksDBに使用され、 `sdd` Raft Engineのログを復元するために使用されます`sdd`には、デバイスの1秒あたりのフラッシュ要求完了数を表す`f/s`値が大幅に高いことに注目してください。Raft Raft Engineでは、バッチ内の書き込みが同期としてマークされている場合、バッチリーダーは書き込み後に`fdatasync()`呼び出し、バッファリングされたデータがストレージにフラッシュされることを保証します。Raft Raft Engine専用のディスクを使用することで、TiKVはリクエストの平均キュー長を短縮し、最適で安定した書き込みレイテンシーを保証します。
 
 クラウドプロバイダーによって、IOPSやMBPSなどのパフォーマンス特性が異なる様々なディスクタイプが提供されています。そのため、ワークロードに応じて適切なクラウドプロバイダー、ディスクタイプ、ディスクサイズを選択することが重要です。
 
@@ -111,7 +111,7 @@ Azure 上のRaft Engineに専用の 32 GB [ウルトラディスク](https://lea
 
 ### 例 3: TiKV マニフェストのRaft Engine用に Google Cloud に専用の pd-ssd ディスクを接続する {#example-3-attach-a-dedicated-pd-ssd-disk-on-google-cloud-for-raft-engine-on-tikv-manifest}
 
-次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`構成する方法を示しています。
+次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスターに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`構成する方法を示しています。
 
     tikv:
         config: |
@@ -120,12 +120,12 @@ Azure 上のRaft Engineに専用の 32 GB [ウルトラディスク](https://lea
             enable = true
             enable-log-recycle = true
         requests:
-          storage: 4Ti
-        storageClassName: pd-ssd
-        storageVolumes:
+          ストレージ: 4Ti
+        ストレージClassName: pd-ssd
+        ストレージVolumes:
         - mountPath: /var/lib/raft-pv-ssd
           name: raft-pv-ssd
-          storageSize: 512Gi
+          ストレージSize: 512Gi
 
 ## AZ間ネットワークトラフィックのコストを最適化する {#optimize-cost-for-cross-az-network-traffic}
 
@@ -137,9 +137,9 @@ TiFlash MPPタスクのデータシャッフルによって発生するネット
 
 ## Google Cloud でのライブ マイグレーション メンテナンス イベントを軽減する {#mitigate-live-migration-maintenance-events-on-google-cloud}
 
-Google Cloud の[ライブマイグレーション機能](https://cloud.google.com/compute/docs/instances/live-migration-process)は、ダウンタイムを発生させることなく、ホスト間でVMをシームレスに移行できます。しかし、これらの移行イベントは頻度は低いものの、TiDBクラスタで実行されているVMを含むVMのパフォーマンスに重大な影響を与える可能性があります。このようなイベントが発生すると、影響を受けるVMのパフォーマンスが低下し、TiDBクラスタでのクエリ処理時間が長くなる可能性があります。
+Google Cloud の[ライブマイグレーション機能](https://cloud.google.com/compute/docs/instances/live-migration-process)は、ダウンタイムを発生させることなく、ホスト間でVMをシームレスに移行できます。しかし、これらの移行イベントは頻度は低いものの、TiDBクラスターで実行されているVMを含むVMのパフォーマンスに重大な影響を与える可能性があります。このようなイベントが発生すると、影響を受けるVMのパフォーマンスが低下し、TiDBクラスターでのクエリ処理時間が長くなる可能性があります。
 
-Google Cloud によって開始されたライブマイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[スクリプトを見る](https://github.com/PingCAP-QE/tidb-google-maintenance)提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスタの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
+Google Cloud によって開始されたライブマイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[スクリプトを見る](https://github.com/PingCAP-QE/tidb-google-maintenance)提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスターの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
 
 -   TiDB: TiDBノードをオフラインにし、TiDBポッドを削除します。これは、TiDBインスタンスのノードプールが自動スケールに設定され、TiDB専用になっていることを前提としています。ノード上で実行されている他のポッドに中断が発生する可能性があり、切断されたノードは自動スケーラーによって回収されることが想定されます。
 -   TiKV: メンテナンス中に、影響を受ける TiKV ストアのリーダーを削除します。
@@ -147,11 +147,11 @@ Google Cloud によって開始されたライブマイグレーション イベ
 
 この監視スクリプトは、Kubernetes 環境での TiDB の強化された管理機能を提供する[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/tidb-operator-overview)を使用してデプロイされた TiDB クラスター用に特別に設計されていることに注意することが重要です。
 
-監視スクリプトを活用し、メンテナンス イベント中に必要なアクションを実行することで、TiDB クラスタは Google Cloud 上のライブ マイグレーション イベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を実現できます。
+監視スクリプトを活用し、メンテナンス イベント中に必要なアクションを実行することで、TiDB クラスターは Google Cloud 上のライブ マイグレーション イベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を実現できます。
 
-## 高QPSの大規模TiDBクラスタのPDをチューニングする {#tune-pd-for-a-large-scale-tidb-cluster-with-high-qps}
+## 高QPSの大規模TiDBクラスターのPDをチューニングする {#tune-pd-for-a-large-scale-tidb-cluster-with-high-qps}
 
-TiDBクラスタでは、TSO（Timestamp Oracle）の提供やリクエストの処理といった重要なタスクを、単一のアクティブなPlacement Driver （PD）サーバーで処理します。しかし、単一のアクティブなPDサーバーに依存すると、TiDBクラスタのスケーラビリティが制限される可能性があります。
+TiDBクラスターでは、TSO（Timestamp Oracle）の提供やリクエストの処理といった重要なタスクを、単一のアクティブなPlacement Driver （PD）サーバーで処理します。しかし、単一のアクティブなPDサーバーに依存すると、TiDBクラスターのスケーラビリティが制限される可能性があります。
 
 ### PD制限の症状 {#symptoms-of-pd-limitation}
 

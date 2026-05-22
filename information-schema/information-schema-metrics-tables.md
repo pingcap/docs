@@ -56,24 +56,24 @@ TABLE_NAME: etcd_disk_wal_fsync_rate
     PROMQL: delta(etcd_disk_wal_fsync_duration_seconds_count{$LABEL_CONDITIONS}[$RANGE_DURATION])
     LABELS: instance
   QUANTILE: 0
-   COMMENT: The rate of writing WAL into the persistent storage
+   COMMENT: The rate of writing WAL into the persistent ストレージ
 *************************** 3. row ***************************
 TABLE_NAME: etcd_wal_fsync_duration
     PROMQL: histogram_quantile($QUANTILE, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{$LABEL_CONDITIONS}[$RANGE_DURATION])) by (le,instance))
     LABELS: instance
   QUANTILE: 0.99
-   COMMENT: The quantile time consumed of writing WAL into the persistent storage
+   COMMENT: The quantile time consumed of writing WAL into the persistent ストレージ
 *************************** 4. row ***************************
 TABLE_NAME: etcd_wal_fsync_total_count
     PROMQL: sum(increase(etcd_disk_wal_fsync_duration_seconds_count{$LABEL_CONDITIONS}[$RANGE_DURATION])) by (instance)
     LABELS: instance
   QUANTILE: 0
-   COMMENT: The total count of writing WAL into the persistent storage
+   COMMENT: The total count of writing WAL into the persistent ストレージ
 *************************** 5. row ***************************
 TABLE_NAME: etcd_wal_fsync_total_time
     PROMQL: sum(increase(etcd_disk_wal_fsync_duration_seconds_sum{$LABEL_CONDITIONS}[$RANGE_DURATION])) by (instance)
     LABELS: instance
   QUANTILE: 0
-   COMMENT: The total time of writing WAL into the persistent storage
+   COMMENT: The total time of writing WAL into the persistent ストレージ
 5 rows in set (0.00 sec)
 ```

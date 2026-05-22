@@ -3,7 +3,7 @@ title: Data Migration Task Configuration Guide
 summary: Data Migration (DM) でデータ移行タスクを構成する方法を学習します。
 ---
 
-# データ移行タスクコンフィグレーションガイド {#data-migration-task-configuration-guide}
+# データ移行タスク設定ガイド {#data-migration-task-configuration-guide}
 
 このドキュメントでは、Data Migration (DM) でデータ移行タスクを構成する方法について説明します。
 
@@ -29,7 +29,7 @@ mysql-instances:
   - source-id: "mysql-replica-02"  # Migrate data from the data source whose `source-id` is `mysql-replica-02`.
 ```
 
-## ダウンストリームTiDBクラスタを構成する {#configure-the-downstream-tidb-cluster}
+## ダウンストリームTiDBクラスターを構成する {#configure-the-downstream-tidb-cluster}
 
 次の例`target-database`は、データ移行タスクの移行先となるターゲット TiDB クラスターを構成する方法を示しています。
 

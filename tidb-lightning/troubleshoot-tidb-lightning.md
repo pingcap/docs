@@ -152,7 +152,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ### TiDB Lightningがモードを切り替えるときに、 <code>rpc error: code = Unimplemented ...</code> {#encounter-code-rpc-error-code-unimplemented-code-when-tidb-lightning-switches-the-mode}
 
-**原因**: クラスタ内の一部のノードが`switch-mode`サポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2` 、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)より前の場合などです。
+**原因**: クラスター内の一部のノードが`switch-mode`サポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2` 、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)より前の場合などです。
 
 **ソリューション**：
 

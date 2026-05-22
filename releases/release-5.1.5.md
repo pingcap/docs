@@ -31,7 +31,7 @@ TiDBバージョン：5.1.5
     -   リージョンが空のデータを返した場合に発生する誤った`ANY_VALUE`の結果を修正する [#30923](https://github.com/pingcap/tidb/issues/30923)
     -   innerWorkerのpanicによって発生したインデックス結合の誤った結果を修正 [#31494](https://github.com/pingcap/tidb/issues/31494)
     -   SQL操作がJSON型の列と`CHAR`型の列を結合する際にキャンセルされる問題を修正しました [#29401](https://github.com/pingcap/tidb/issues/29401)
-    -   TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスタが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
+    -   TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
     -   同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
     -   `KILL TIDB`がアイドル状態の接続で即座に有効にならない問題を修正します [#24031](https://github.com/pingcap/tidb/issues/24031)
     -   セッション変数を設定すると`tidb_snapshot`が機能しなくなるバグを修正しました [#35515](https://github.com/pingcap/tidb/issues/35515)
@@ -49,7 +49,7 @@ TiDBバージョン：5.1.5
     -   `lock tables`フラグが有効になっていない場合に、 `unlock tables`と`enable-table-lock`に対する警告を追加する [#28967](https://github.com/pingcap/tidb/issues/28967)
     -   範囲パーティションで複数の`MAXVALUE`パーティションが許可される問題を修正 [#36329](https://github.com/pingcap/tidb/issues/36329)
 
--   ティクヴ
+-   TiKV
 
     -   `DATETIME`値に小数点が含まれる場合と`Z`値が含まれる場合に発生する時間解析エラーの問題を修正します。 [#12739](https://github.com/tikv/tikv/issues/12739)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正 [#12109](https://github.com/tikv/tikv/issues/12109)
@@ -74,7 +74,7 @@ TiDBバージョン：5.1.5
     -   `not leader` [#4797](https://github.com/tikv/pd/issues/4797)の誤ったステータスコードを修正します。
     -   PDがダッシュボードプロキシ要求を正しく処理できない問題を修正 [#5321](https://github.com/tikv/pd/issues/5321)
     -   TSOフォールバックの特定の特殊ケースにおけるバグを修正 [#4884](https://github.com/tikv/pd/issues/4884)
-    -   特定のシナリオでTiFlash学習者レプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
+    -   特定のシナリオでTiFlashラーナーレプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
     -   ラベル分布にメトリクスに残余ラベルが含まれる問題を修正 [#4825](https://github.com/tikv/pd/issues/4825)
     -   大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小型ストアを検出できず、結果としてバランス演算子が生成されない問題を修正します [#4805](https://github.com/tikv/pd/issues/4805)
     -   `SchedulerMaxWaitingOperator`が`1`に設定されている場合、スケジューラが機能しない問題を修正します。 [#4946](https://github.com/tikv/pd/issues/4946)
@@ -86,7 +86,7 @@ TiDBバージョン：5.1.5
     -   並列集計のエラーによりTiFlashがクラッシュする可能性があるバグを修正しました [#5356](https://github.com/pingcap/tiflash/issues/5356)
     -   `JOIN`を含むクエリでエラーが発生した場合にハングアップする可能性がある問題を修正しました [#4195](https://github.com/pingcap/tiflash/issues/4195)
     -   関数`OR`が誤った結果を返す問題を修正しました [#5849](https://github.com/pingcap/tiflash/issues/5849)
-    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正 [#4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   無効なストレージディレクトリ構成が予期しない動作を引き起こすバグを修正 [#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   多数のINSERTおよびDELETE操作後に発生する可能性のあるデータ不整合を修正する [#4956](https://github.com/pingcap/tiflash/issues/4956)
     -   リージョン範囲に一致しないデータがTiFlashノード上に残ってしまうバグを修正しました [#4414](https://github.com/pingcap/tiflash/issues/4414)
     -   読み取り負荷の高い環境で列を追加した後に発生する可能性のあるクエリエラーを修正する [#3967](https://github.com/pingcap/tiflash/issues/3967)

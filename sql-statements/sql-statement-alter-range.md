@@ -33,4 +33,4 @@ ALTER RANGE global PLACEMENT POLICY = "deploy111";
 ALTER RANGE meta PLACEMENT POLICY = "five_replicas";
 ```
 
-上記の例では、2 つの配置ポリシー ( `deploy111`と`five_replicas` ) を作成し、異なる領域の制約を指定した後、 `deploy111`配置ポリシーをクラスタ範囲内のすべてのデータに適用し、 `five_replicas`配置ポリシーをメタデータ範囲に適用しています。
+上記の例では、2 つの配置ポリシー ( `deploy111`と`five_replicas` ) を作成し、異なる領域の制約を指定した後、 `deploy111`配置ポリシーをクラスター範囲内のすべてのデータに適用し、 `five_replicas`配置ポリシーをメタデータ範囲に適用しています。

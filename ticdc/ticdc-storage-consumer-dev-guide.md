@@ -1,36 +1,36 @@
 ---
 title: Guide for Developing a Storage Sink Consumer
-summary: storageシンク内のデータの変更を消費するコンシューマーを設計および実装する方法を学習します。
+summary: ストレージシンク内のデータの変更を消費するコンシューマーを設計および実装する方法を学習します。
 ---
 
-# ストレージシンクコンシューマーの開発ガイド {#guide-for-developing-a-storage-sink-consumer}
+# ストレージシンクコンシューマーの開発ガイド {#guide-for-developing-a-ストレージ-sink-consumer}
 
 このドキュメントでは、TiDB データ変更コンシューマーを設計および実装する方法について説明します。
 
 > **注記：**
 >
-> storageシンクは`DROP DATABASE` DDLを処理できません。そのため、このDDLの実行は避けてください。このDDLを実行する必要がある場合は、下流のMySQLで手動で実行してください。
+> ストレージシンクは`DROP DATABASE` DDLを処理できません。そのため、このDDLの実行は避けてください。このDDLを実行する必要がある場合は、下流のMySQLで手動で実行してください。
 
-TiCDC は、コンシューマーを実装するための標準的な方法を提供していません。このドキュメントでは、 Golangで記述されたコンシューマーのサンプルプログラムを提供します。このプログラムは、storageサービスからデータを読み取り、MySQL 互換データベースに書き込むことができます。このサンプルで提供されているデータ形式と手順を参考に、独自にコンシューマーを実装できます。
+TiCDC は、コンシューマーを実装するための標準的な方法を提供していません。このドキュメントでは、 Golangで記述されたコンシューマーのサンプルプログラムを提供します。このプログラムは、ストレージサービスからデータを読み取り、MySQL 互換データベースに書き込むことができます。このサンプルで提供されているデータ形式と手順を参考に、独自にコンシューマーを実装できます。
 
-[Golangで書かれたコンシューマープログラム](https://github.com/pingcap/tiflow/tree/release-8.5/cmd/storage-consumer)
+[Golangで書かれたコンシューマープログラム](https://github.com/pingcap/tiflow/tree/release-8.5/cmd/ストレージ-consumer)
 
 ## 消費者をデザインする {#design-a-consumer}
 
 次の図は、消費者の全体的な消費プロセスを示しています。
 
-![TiCDC storage consumer overview](/media/ticdc/ticdc-storage-consumer-overview.png)
+![TiCDC ストレージ consumer overview](/media/ticdc/ticdc-ストレージ-consumer-overview.png)
 
 コンシューマーのコンポーネントとその機能は次のように説明されます。
 
 ```go
 type StorageReader struct {
 }
-// Read the files from storage.
-// Add new files and delete files that do not exist in storage.
+// Read the files from ストレージ.
+// Add new files and delete files that do not exist in ストレージ.
 func (c *StorageReader) ReadFiles() {}
 
-// Query newly added files and the latest checkpoint from storage. One file can only be returned once.
+// Query newly added files and the latest checkpoint from ストレージ. One file can only be returned once.
 func (c *StorageReader) ExposeNewFiles() (int64, []string) {}
 
 // ConsumerManager is responsible for assigning tasks to TableConsumer.
@@ -38,7 +38,7 @@ func (c *StorageReader) ExposeNewFiles() (int64, []string) {}
 // but data of one table must be processed by the same TableConsumer.
 type ConsumerManager struct {
   // StorageCheckpoint is recorded in the metadata file, and it can be fetched by calling `StorageReader.ExposeNewFiles()`.
-  // This checkpoint indicates that the data whose transaction commit time is less than this checkpoint has been stored in storage.
+  // This checkpoint indicates that the data whose transaction commit time is less than this checkpoint has been stored in ストレージ.
   StorageCheckpoint int64
   // This checkpoint indicates where the consumer has consumed.
   // ConsumerManager periodically collects TableConsumer.Checkpoint,

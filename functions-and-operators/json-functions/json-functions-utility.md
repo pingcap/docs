@@ -27,13 +27,13 @@ SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')
     }
     1 row in set (0.00 sec)
 
-## <code>JSON_STORAGE_FREE()</code> {#code-json-storage-free-code}
+## <code>JSON_STORAGE_FREE()</code> {#code-json-ストレージ-free-code}
 
-`JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるstorage容量を返します。
+`JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるストレージ容量を返します。
 
 > **注記：**
 >
-> TiDBはMySQLとは異なるstorageアーキテクチャを採用しているため、この関数は有効なJSON値に対して常に`0`返します。これは[MySQL 8.0との互換性](/mysql-compatibility.md)で実装されています。TiDBはインプレース更新を行わないことに注意してください。詳細については[RocksDB のスペース使用量](/storage-engine/rocksdb-overview.md#rocksdb-space-usage)参照してください。
+> TiDBはMySQLとは異なるストレージアーキテクチャを採用しているため、この関数は有効なJSON値に対して常に`0`返します。これは[MySQL 8.0との互換性](/mysql-compatibility.md)で実装されています。TiDBはインプレース更新を行わないことに注意してください。詳細については[RocksDB のスペース使用量](/ストレージ-engine/rocksdb-overview.md#rocksdb-space-usage)参照してください。
 
 ```sql
 SELECT JSON_STORAGE_FREE('{}');
@@ -46,7 +46,7 @@ SELECT JSON_STORAGE_FREE('{}');
     +-------------------------+
     1 row in set (0.00 sec)
 
-## <code>JSON_STORAGE_SIZE()</code> {#code-json-storage-size-code}
+## <code>JSON_STORAGE_SIZE()</code> {#code-json-ストレージ-size-code}
 
 `JSON_STORAGE_SIZE(json_doc)`関数は、JSON 値を格納するために必要なバイト数の概算値を返します。このサイズは TiKV 圧縮を考慮していないため、この関数の出力は MySQL と厳密には互換性がありません。
 

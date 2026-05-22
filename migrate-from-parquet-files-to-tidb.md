@@ -73,7 +73,7 @@ file = "tidb-lightning.log"
 backend = "local"
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 # For more information on import mode, refer to <https://docs.pingcap.com/tidb/stable/tidb-lightning-overview#tidb-lightning-architecture>
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
+# Set the temporary ストレージ directory for the sorted Key-Value files. The directory must be empty, and the ストレージ space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash ストレージ, which can use I/O exclusively.
 sorted-kv-dir = "${sorted-kv-dir}"
 
 [mydumper]
@@ -96,7 +96,7 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
 1.  実行`tidb-lightning` 。
 
-    -   Amazon S3 からデータをインポートする場合は、 TiDB Lightningを実行する前に、S3 バックエンドstorageにアクセスする権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
+    -   Amazon S3 からデータをインポートする場合は、 TiDB Lightningを実行する前に、S3 バックエンドストレージにアクセスする権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
 
         ```shell
         export AWS_ACCESS_KEY_ID=${access_key}

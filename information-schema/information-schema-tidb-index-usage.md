@@ -63,9 +63,9 @@ DESC TIDB_INDEX_USAGE;
 
 ## クラスターTIDBインデックス使用状況 {#cluster-tidb-index-usage}
 
-`TIDB_INDEX_USAGE`テーブルは、単一の TiDB ノード上のすべてのインデックスの使用統計情報のみを提供します。クラスタ内のすべての TiDB ノードのインデックス使用統計情報を取得するには、 `CLUSTER_TIDB_INDEX_USAGE`テーブルをクエリする必要があります。
+`TIDB_INDEX_USAGE`テーブルは、単一の TiDB ノード上のすべてのインデックスの使用統計情報のみを提供します。クラスター内のすべての TiDB ノードのインデックス使用統計情報を取得するには、 `CLUSTER_TIDB_INDEX_USAGE`テーブルをクエリする必要があります。
 
-`TIDB_INDEX_USAGE`テーブルと比較して、 `CLUSTER_TIDB_INDEX_USAGE`テーブルのクエリ結果には`INSTANCE`フィールドが追加されています。このフィールドには、クラスタ内の各ノードの IP アドレスとポートが表示され、異なるノード間の統計情報を区別するのに役立ちます。
+`TIDB_INDEX_USAGE`テーブルと比較して、 `CLUSTER_TIDB_INDEX_USAGE`テーブルのクエリ結果には`INSTANCE`フィールドが追加されています。このフィールドには、クラスター内の各ノードの IP アドレスとポートが表示され、異なるノード間の統計情報を区別するのに役立ちます。
 
 ```sql
 USE INFORMATION_SCHEMA;

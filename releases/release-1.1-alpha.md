@@ -38,7 +38,7 @@ summary: 2018年1月19日にリリースされたTiDB 1.1 Alphaでは、MySQLと
 
 ## TiKV {#tikv}
 
--   Raft学習者をサポート
+-   Raftラーナーをサポート
 -   Raftスナップショットを最適化し、I/Oオーバーヘッドを削減する
 -   TLSをサポート
 -   RocksDB 構成を最適化してパフォーマンスを向上させる

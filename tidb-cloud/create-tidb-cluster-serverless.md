@@ -9,7 +9,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの作
 
 > **ヒント：**
 >
-> TiDB Cloud Dedicatedクラスターを作成する方法については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
+> TiDB Cloud Dedicatedクラスターを作成する方法については、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 
 ## 始める前に {#before-you-begin}
 

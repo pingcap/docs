@@ -18,7 +18,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 -   データフロー: TiCDC 内部モジュールによって処理されるデータ変更の統計。
 -   トランザクションシンク: ダウンストリーム MySQL または TiDB の書き込みレイテンシー。
 -   MQ シンク: ダウンストリーム MQ システムの書き込みレイテンシー。
--   クラウド ストレージ シンク: ダウンストリーム クラウドstorageの書き込み速度。
+-   クラウド ストレージ シンク: ダウンストリーム クラウドストレージの書き込み速度。
 -   やり直し: やり直し機能が有効な場合の書き込みレイテンシー。
 
 ## サーバーパネル {#server-panel}
@@ -84,11 +84,11 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 -   **ワーカー送信メッセージ期間パーセンタイル**: TiCDC MQ シンク ワーカーがダウンストリームにデータを送信する際のレイテンシー。
 -   **Kafka Ongoing Bytes** : TiCDC MQ Sink がダウンストリームにデータを送信する速度。
 
-## クラウドストレージシンクパネル {#cloud-storage-sink-panel}
+## クラウドストレージシンクパネル {#cloud-ストレージ-sink-panel}
 
 **Cloud Storage シンク**パネルには、ダウンストリームが Cloud Storage の場合にのみデータが表示されます。
 
-![TiCDC Summary Dashboard - Transaction Sink metrics](/media/ticdc/ticdc-summary-monitor-cloud-storage.png)
+![TiCDC Summary Dashboard - Transaction Sink metrics](/media/ticdc/ticdc-summary-monitor-cloud-ストレージ.png)
 
 -   **書き込みバイト数/秒**: Cloud Storage Sink モジュールがダウンストリームにデータを書き込む速度。
 -   **ファイル数**: Cloud Storage Sink モジュールによって書き込まれたファイルの合計数。

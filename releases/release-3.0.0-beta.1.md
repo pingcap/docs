@@ -49,7 +49,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
     <!---->
 
-    -   クエリコンテキストに基づいてChunkサイズを最適化し、SQL文の実行時間とクラスタのリソース消費を削減します[＃6489](https://github.com/pingcap/tidb/issues/6489)
+    -   クエリコンテキストに基づいてChunkサイズを最適化し、SQL文の実行時間とクラスターのリソース消費を削減します[＃6489](https://github.com/pingcap/tidb/issues/6489)
 -   権限管理
     -   サポート`SET ROLE`と`CURRENT_ROLE` [＃9581](https://github.com/pingcap/tidb/pull/9581)
     -   サポート`DROP ROLE` [＃9616](https://github.com/pingcap/tidb/pull/9616)
@@ -107,7 +107,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   複製する必要のないファイルのフィルタリングをサポート
     -   生成された列の複製をサポート
 -   稲妻
-    -   TiKVの定期的なレベル1圧縮を無効にすることをサポートし、TiKVクラスタバージョンが2.1.4以降の場合、レベル1圧縮はインポートモード[＃119](https://github.com/pingcap/tidb-lightning/pull/119)で自動的に実行されます[＃4199](https://github.com/tikv/tikv/pull/4199)
+    -   TiKVの定期的なレベル1圧縮を無効にすることをサポートし、TiKVクラスターバージョンが2.1.4以降の場合、レベル1圧縮はインポートモード[＃119](https://github.com/pingcap/tidb-lightning/pull/119)で自動的に実行されます[＃4199](https://github.com/tikv/tikv/pull/4199)
     -   `table_concurrency`構成項目を追加して、インポートエンジンの数（デフォルトでは「16」）を制限し、インポーターのディスクスペース[＃119](https://github.com/pingcap/tidb-lightning/pull/119)過剰な使用を回避します。
     -   メモリ使用量を削減するために、中間状態SSTをディスクに保存することをサポート[＃4369](https://github.com/tikv/tikv/pull/4369)
     -   TiKV-Importer のインポートパフォーマンスを最適化し、大規模なテーブルのデータとインデックスの個別インポートをサポートします[＃132](https://github.com/pingcap/tidb-lightning/pull/132)

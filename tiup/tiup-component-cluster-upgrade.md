@@ -13,7 +13,7 @@ summary: tiup cluster upgradeコマンドは、指定したクラスターを特
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
--   `<cluster-name>` : 操作対象のクラスタ名。クラスタ名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+-   `<cluster-name>` : 操作対象のクラスター名。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 -   `<version>` : アップグレード先のバージョン（例： `v8.5.3` ）。現在、現在のクラスターよりも上位のバージョンへのアップグレードのみが許可されており、ダウングレードは許可されていません。また、ナイトリーバージョンへのアップグレードも許可されていません。
 
 ## オプション {#options}
@@ -70,7 +70,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --tikv-cdc-バージョン {#tikv-cdc-version}
 
--   TiKV CDCのバージョンを指定します。このオプションを設定すると、TiKV CDCのバージョンはクラスタのバージョンと一致しなくなります。
+-   TiKV CDCのバージョンを指定します。このオプションを設定すると、TiKV CDCのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiKV CDC のバージョンはクラスターのバージョンと一致し続けます。
 
@@ -88,7 +88,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --tiproxy バージョン {#tiproxy-version}
 
--   TiProxyのバージョンを指定します。このオプションを設定すると、TiProxyのバージョンはクラスタのバージョンと一致しなくなります。
+-   TiProxyのバージョンを指定します。このオプションを設定すると、TiProxyのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiProxy のバージョンはクラスターのバージョンと一致したままになります。
 
@@ -106,7 +106,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --blackbox-exporter-version {#blackbox-exporter-version}
 
--   Blackbox Exporterのバージョンを指定します。このオプションを設定すると、Blackbox Exporterのバージョンとクラスタのバージョンが一致しなくなります。
+-   Blackbox Exporterのバージョンを指定します。このオプションを設定すると、Blackbox Exporterのバージョンとクラスターのバージョンが一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、Blackbox Exporter のバージョンはクラスターのバージョンと一致したままになります。
 
@@ -153,4 +153,4 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 アップグレードの進行状況のログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

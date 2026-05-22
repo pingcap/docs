@@ -5,7 +5,7 @@ summary: Lightning とアーキテクチャ全体について学びます。
 
 # TiDB Lightning の概要 {#tidb-lightning-overview}
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) 、TB規模のデータをTiDBクラスタにインポートするためのツールです。TiDBクラスタへの初期データインポートによく使用されます。
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) 、TB規模のデータをTiDBクラスターにインポートするためのツールです。TiDBクラスターへの初期データインポートによく使用されます。
 
 TiDB Lightning は次のファイル形式をサポートしています。
 
@@ -16,8 +16,8 @@ TiDB Lightning は次のファイル形式をサポートしています。
 TiDB Lightning は次のソースからデータを読み取ることができます。
 
 -   地元
--   [アマゾンS3](/external-storage-uri.md#amazon-s3-uri-format)
--   [Googleクラウドストレージ](/external-storage-uri.md#gcs-uri-format)
+-   [アマゾンS3](/external-ストレージ-uri.md#amazon-s3-uri-format)
+-   [Googleクラウドストレージ](/external-ストレージ-uri.md#gcs-uri-format)
 
 > **注記：**
 >
@@ -41,8 +41,8 @@ TiDB Lightning は、 `backend`で設定された 2 つのインポート モー
 | ネットワーク帯域幅の消費                   | 高い                                                                           | 低い              |
 | インポート時のACID準拠                  | いいえ                                                                          | はい              |
 | ターゲットテーブル                      | 空でなければなりません                                                                  | データを含むことができる    |
-| TiDB クラスタ バージョン                | = 4.0.0                                                                      | 全て              |
-| TiDBクラスタがインポート中にサービスを提供できるかどうか | [限定サービス](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | はい              |
+| TiDB クラスター バージョン                | = 4.0.0                                                                      | 全て              |
+| TiDBクラスターがインポート中にサービスを提供できるかどうか | [限定サービス](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | はい              |
 
 <Note>
 

@@ -19,7 +19,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 -   **分離とは**、進行中のトランザクションが完了するまで他のトランザクションから見えないことを意味します。これにより、同時実行トランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDB は現在、 `REPEATABLE READ`の分離レベルをサポートしています。
 
--   **永続性**とは、一度トランザクションがコミットされると、システム障害が発生した場合でもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して永続性を確保しています。
+-   **永続性**とは、一度トランザクションがコミットされると、システム障害が発生した場合でもコミットされた状態が維持されることを意味します。TiKVは永続ストレージを使用して永続性を確保しています。
 
 ## C {#c}
 
@@ -29,11 +29,11 @@ Chat2Query は SQL エディターに統合された AI を活用した機能で
 
 さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、データサービスに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)参照してください。.
 
-### クラスタ {#cluster}
+### クラスター {#cluster}
 
-TiDB Cloudでは、クラスターとは、ノードトポロジー、インスタンスタイプ、storage構成、スケーリングモデルなどの明確なインフラストラクチャの詳細を含む、専用のクラウドデプロイメントのことです。
+TiDB Cloudでは、クラスターとは、ノードトポロジー、インスタンスタイプ、ストレージ構成、スケーリングモデルなどの明確なインフラストラクチャの詳細を含む、専用のクラウドデプロイメントのことです。
 
-TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスタのみです。
+TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスターのみです。
 
 ### クレジット {#credit}
 
@@ -122,7 +122,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
 
--   **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
+-   **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスターの設定をプロジェクトごとに個別に管理できます。
 -   **TiDB X プロジェクト**: このプロジェクトタイプは、TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**私のTiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクトタイプです。
 -   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB CloudAPI 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 。
 
@@ -140,7 +140,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 バックアップされたTiDB Cloudリソースが削除されると、その既存のバックアップ ファイルはごみ箱に移動されます。自動バックアップからのバックアップ ファイルについては、ごみ箱に指定された期間保持されます。バックアップの保持期間は**「バックアップ設定」**で設定でき、デフォルトは 7 日です。手動バックアップからのバックアップ ファイルには有効期限はありません。データ損失を防ぐため、新しいTiDB Cloudリソースにデータを速やかに復元してください。なお、 TiDB Cloudリソース**にバックアップがない**場合、削除されたリソースはごみ箱に表示されません。
 
-現在、ごみ箱機能はTiDB Cloud PremiumインスタンスとTiDB Cloud Dedicatedクラスタのみをサポートしています。
+現在、ごみ箱機能はTiDB Cloud PremiumインスタンスとTiDB Cloud Dedicatedクラスターのみをサポートしています。
 
 ### 地域 {#region}
 
@@ -175,7 +175,7 @@ TiDB Cloud Starter、 Essential、およびPremiumプランでは、リクエス
 -   TiDB Cloud Essentialは、プロビジョニングされた[要求容量単位（RCU）](#request-capacity-unit-rcu)の数に基づいて請求されます。 1 つの RCU は、1 秒あたり特定の数の RU を処理できる固定量のコンピューティング リソースを提供します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
 -   TiDB Cloud Premium は、ワークロードによって消費された実際のリクエスト キャパシティー ユニット (RCU) に基づいて請求されます。 TiDB Cloudは1 秒あたりの平均 RU を毎分計算し、その平均値を[要求容量単位（RCU）](#request-capacity-unit-rcu)として請求に使用します。詳細については、 [TiDB Cloud Premiumでユニットと容量をリクエストする](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)参照してください。
 
-TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエスト ユニット (RU) はシステム リソースの消費を表すリソース抽象化ユニットであり、これには現在 CPU、IOPS、および IO 帯域幅のメトリクスが含まれます。これは、**請求目的ではなく**、データベース要求によって消費されるリソースを制限、分離、管理するためにリソース制御機能によって使用されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)参照してください。
+TiDB Cloud Dedicatedおよび TiDB Self-Managedの場合、リクエスト ユニット (RU) はシステム リソースの消費を表すリソース抽象化ユニットであり、これには現在 CPU、IOPS、および IO 帯域幅のメトリクスが含まれます。これは、**請求目的ではなく**、データベース要求によって消費されるリソースを制限、分離、管理するためにリソース制御機能によって使用されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)参照してください。
 
 ## S {#s}
 
@@ -187,11 +187,11 @@ TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエ
 
 ### TiDBクラスター {#tidb-cluster}
 
-TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[ティクヴ](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
+TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[TiKV](/tidb-ストレージ.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、ストレージ構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
 
 ### TiDBノード {#tidb-node}
 
-トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスタが処理できる同時クエリの数が増加します。
+トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスターが処理できる同時クエリの数が増加します。
 
 ### TiDB Cloudリソース {#tidb-cloud-resource}
 
@@ -202,23 +202,23 @@ TiDB Cloudリソースとは、管理可能なTiDB Cloudデプロイメント単
 
 ### TiDB X {#tidb-x}
 
-TiDB Xは、クラウドネイティブなオブジェクトstorageをTiDBの基盤とする、新しい分散SQLアーキテクチャです。コンピューティングとstorageを分離することで、TiDBはワークロードパターン、ビジネスサイクル、データ特性にリアルタイムで適応し、インテリジェントなスケーリングを実現します。
+TiDB Xは、クラウドネイティブなオブジェクトストレージをTiDBの基盤とする、新しい分散SQLアーキテクチャです。コンピューティングとストレージを分離することで、TiDBはワークロードパターン、ビジネスサイクル、データ特性にリアルタイムで適応し、インテリジェントなスケーリングを実現します。
 
 TiDB Xアーキテクチャは、 TiDB Cloud Starter、 Essential、および Premium で利用できるようになりました。詳細については、 [TiDB Xのご紹介：AI時代の分散SQLのための新たな基盤](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/)および[PingCAPがSCaiLEサミット2025でTiDB Xと新たなAI機能を発表](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/)参照してください。
 
 ### TiDB Xインスタンス {#tidb-x-instance}
 
-TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタトポロジーの管理や理解は不要です。
+TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタートポロジーの管理や理解は不要です。
 
 TiDB Cloudのプランのうち、 TiDB Cloud Starter、 Essential、およびPremiumはTiDB Xアーキテクチャを使用しています。したがって、「TiDB Xインスタンス」という表現は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスを指します。
 
 ### TiFlashノード {#tiflash-node}
 
-TiKVからリアルタイムでデータを複製し、リアルタイムの分析ワークロードをサポートする分析storageノード。
+TiKVからリアルタイムでデータを複製し、リアルタイムの分析ワークロードをサポートする分析ストレージノード。
 
 ### TiKVノード {#tikv-node}
 
-オンライントランザクション処理（OLTP）データを格納するstorageノード。高可用性を実現するため、3ノードの倍数（例えば、3、6、9）で拡張され、2つのノードがレプリカとして機能します。TiKVノードの数を増やすと、総スループットが向上します。
+オンライントランザクション処理（OLTP）データを格納するストレージノード。高可用性を実現するため、3ノードの倍数（例えば、3、6、9）で拡張され、2つのノードがレプリカとして機能します。TiKVノードの数を増やすと、総スループットが向上します。
 
 ### トラフィックフィルター {#traffic-filter}
 

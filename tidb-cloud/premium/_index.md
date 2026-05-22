@@ -41,7 +41,7 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 [TiDB Cloud Premiumインスタンスに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=premium)
 
-[HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview/?plan=premium)
+[HTAPクラスターを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview/?plan=premium)
 
 [データのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium)
 

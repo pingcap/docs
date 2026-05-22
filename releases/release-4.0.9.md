@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.9 Release Notes
-summary: TiDB 4.0.9は2020年12月21日にリリースされました。このリリースには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、TiDBダッシュボード、PD、 TiFlash 、そして各種ツールのアップデートが含まれています。注目すべき変更点としては、TiDBにおける「enable-streaming」設定項目の廃止、 TiFlashにおけるstorageエンジンの最新データを複数のディスクに保存する機能のサポート、そしてTiDBとTiKVにおける各種バグ修正などが挙げられます。
+summary: TiDB 4.0.9は2020年12月21日にリリースされました。このリリースには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、TiDBダッシュボード、PD、 TiFlash 、そして各種ツールのアップデートが含まれています。注目すべき変更点としては、TiDBにおける「enable-streaming」設定項目の廃止、 TiFlashにおけるストレージエンジンの最新データを複数のディスクに保存する機能のサポート、そしてTiDBとTiKVにおける各種バグ修正などが挙げられます。
 ---
 
 # TiDB 4.0.9 リリースノート {#tidb-4-0-9-release-notes}
@@ -23,7 +23,7 @@ TiDB バージョン: 4.0.9
 
 -   TiFlash
 
-    -   storageエンジンの最新データを複数のディスクに保存する機能をサポート (実験的)
+    -   ストレージエンジンの最新データを複数のディスクに保存する機能をサポート (実験的)
 
 -   TiDBダッシュボード
 
@@ -96,7 +96,7 @@ TiDB バージョン: 4.0.9
     -   TiCDC
 
         -   TiKV の Hibernate リージョン機能[＃1120](https://github.com/pingcap/tiflow/pull/1120)を有効にするためのアラートを追加する
-        -   スキーマstorage[＃1127](https://github.com/pingcap/tiflow/pull/1127)のメモリ使用量を削減
+        -   スキーマストレージ[＃1127](https://github.com/pingcap/tiflow/pull/1127)のメモリ使用量を削減
         -   増分スキャンのデータサイズが大きい場合にレプリケーションを高速化する統合ソーター機能を追加（実験的） [＃1122](https://github.com/pingcap/tiflow/pull/1122)
         -   TiCDC オープンプロトコルメッセージの最大メッセージサイズと最大メッセージバッチの構成をサポート (Kafka シンクのみ) [＃1079](https://github.com/pingcap/tiflow/pull/1079)
 
@@ -204,8 +204,8 @@ TiDB バージョン: 4.0.9
         -   所有者キャンペーンキーが削除されたときに複数の所有者が存在する可能性がある問題を修正[＃1104](https://github.com/pingcap/tiflow/pull/1104)
         -   TiKVノードがクラッシュまたはクラッシュから回復した際に、TiCDCがデータレプリケーションを続行できなくなる可能性があるバグを修正しました。このバグはv4.0.8にのみ存在します[＃1198](https://github.com/pingcap/tiflow/pull/1198)
         -   テーブルが初期化される前にメタデータがetcdに繰り返しフラッシュされる問題を修正[＃1191](https://github.com/pingcap/tiflow/pull/1191)
-        -   スキーマstorageがTiDB テーブル[＃1114](https://github.com/pingcap/tiflow/pull/1114)をキャッシュするときに、早期 GC または更新のレイテンシー`TableInfo`によって発生するレプリケーション中断の問題を修正しました。
-        -   DDL操作が頻繁に行われる場合にスキーマstorageのメモリ消費量が多すぎる問題を修正しました[＃1127](https://github.com/pingcap/tiflow/pull/1127)
+        -   スキーマストレージがTiDB テーブル[＃1114](https://github.com/pingcap/tiflow/pull/1114)をキャッシュするときに、早期 GC または更新のレイテンシー`TableInfo`によって発生するレプリケーション中断の問題を修正しました。
+        -   DDL操作が頻繁に行われる場合にスキーマストレージのメモリ消費量が多すぎる問題を修正しました[＃1127](https://github.com/pingcap/tiflow/pull/1127)
         -   チェンジフィードが一時停止または停止したときのゴルーチンリークを修正[＃1075](https://github.com/pingcap/tiflow/pull/1075)
         -   下流の Kafka [＃1118](https://github.com/pingcap/tiflow/pull/1118)サービスまたはネットワークジッターによるレプリケーションの中断を防ぐために、Kafka プロデューサーの最大再試行タイムアウトを 600 秒に増やします。
         -   Kafka のバッチサイズが有効にならないバグを修正[＃1112](https://github.com/pingcap/tiflow/pull/1112)

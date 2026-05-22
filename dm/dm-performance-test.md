@@ -3,7 +3,7 @@ title: DM Cluster Performance Test
 summary: DM クラスターのパフォーマンスをテストする方法を学びます。
 ---
 
-# DMクラスタパフォーマンステスト {#dm-cluster-performance-test}
+# DMクラスターパフォーマンステスト {#dm-cluster-performance-test}
 
 このドキュメントでは、データ移行に関する速度テストやレイテンシーテストなど、DM クラスターでパフォーマンス テストを実行するためのテスト シナリオの構築方法について説明します。
 

@@ -23,7 +23,7 @@ tiup cluster destroy <cluster-name> [flags]
 
 ### &#x20;--force {#force}
 
--   場合によっては、クラスタ内の一部のノードがダウンし、SSH経由でノードに接続して操作できなくなることがあります。このような場合は、 `--force`オプションを使用してこれらのエラーを無視できます。
+-   場合によっては、クラスター内の一部のノードがダウンし、SSH経由でノードに接続して操作できなくなることがあります。このような場合は、 `--force`オプションを使用してこれらのエラーを無視できます。
 -   データ型: `Boolean`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
@@ -49,4 +49,4 @@ tiup cluster destroy <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

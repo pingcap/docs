@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-cohere/']
 
 ## 利用可能なモデル {#available-models}
 
-TiDB Cloud は、次の[調和する](https://cohere.com/)埋め込みモデルをネイティブに提供します。 API キーは必要ありません。
+TiDB Cloud は、次の[Cohere](https://cohere.com/)埋め込みモデルをネイティブに提供します。 API キーは必要ありません。
 
 **Cohere Embed v3 モデル**
 
@@ -115,7 +115,7 @@ LIMIT 2;
     -   `search_document` : ドキュメントから埋め込みを生成し、ベクトルデータベースに保存します。
     -   `search_query` : クエリから埋め込みを生成し、ベクトルデータベースに保存されている埋め込みに対して検索を行います。
     -   `classification` : テキスト分類器への入力として使用される埋め込みを生成します。
-    -   `clustering` : クラスタリングタスク用の埋め込みを生成します。
+    -   `clustering` : クラスターリングタスク用の埋め込みを生成します。
 
 -   `truncate` （オプション）：APIが最大トークン長を超える入力をどのように処理するかを制御します。以下のいずれかの値を指定できます。
 

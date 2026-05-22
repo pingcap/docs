@@ -13,7 +13,7 @@ PPD は、選択演算子をデータ ソースに可能な限り近づけて、
 
 以下のケースでは、PPD の最適化について説明します。ケース 1、2、3 は PPD が適用可能なシナリオであり、ケース 4、5、6 は PPD が適用できないシナリオです。
 
-### ケース1: 述語をstorageレイヤーにプッシュする {#case-1-push-predicates-to-storage-layer}
+### ケース1: 述語をストレージレイヤーにプッシュする {#case-1-push-predicates-to-ストレージ-layer}
 
 ```sql
 create table t(id int primary key, a int);
@@ -30,7 +30,7 @@ explain select * from t where a < 1;
 
 このクエリでは、述語`a < 1` TiKVレイヤーにプッシュダウンしてデータをフィルター処理すると、ネットワーク転送のオーバーヘッドを削減できます。
 
-### ケース2: 述語をstorageレイヤーにプッシュする {#case-2-push-predicates-to-storage-layer}
+### ケース2: 述語をストレージレイヤーにプッシュする {#case-2-push-predicates-to-ストレージ-layer}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -70,7 +70,7 @@ explain select * from t join s on t.a = s.a where t.a < 1;
 
 さらに、このSQL文では内部結合が実行され、条件`ON`は`t.a = s.a`です。述語`s.a <1` `t.a < 1`から導出され、結合演算子の下のテーブル`s`にプッシュダウンされます。テーブル`s`フィルタリングすることで、結合の計算オーバーヘッドをさらに削減できます。
 
-### ケース4:storage層でサポートされていない述語はプッシュダウンできない {#case-4-predicates-that-are-not-supported-by-storage-layers-cannot-be-pushed-down}
+### ケース4:ストレージ層でサポートされていない述語はプッシュダウンできない {#case-4-predicates-that-are-not-supported-by-ストレージ-layers-cannot-be-pushed-down}
 
 ```sql
 create table t(id int primary key, a varchar(10) not null);

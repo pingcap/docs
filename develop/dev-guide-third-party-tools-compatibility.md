@@ -43,8 +43,8 @@ MySQLは、データベースに対して実行された操作の合計数を追
 
 これらの変数は使用しないでください。よくあるシナリオの一つは監視です。TiDBは監視性に優れているため、サーバーステータス変数からのクエリは必要ありません。監視サービスの詳細については、以下のドキュメントを参照してください。
 
--   TiDB Cloudドキュメント: [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
--   TiDB セルフマネージド ドキュメント: [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md) .
+-   TiDB Cloudドキュメント: [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
+-   TiDB Self-Managed ドキュメント: [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md) .
 
 ### TiDBはエラーメッセージで<code>TIMESTAMP</code>と<code>DATETIME</code>を区別します {#tidb-distinguishes-between-code-timestamp-code-and-code-datetime-code-in-error-messages}
 
@@ -220,4 +220,4 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 -   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

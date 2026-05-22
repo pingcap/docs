@@ -50,18 +50,18 @@ summary: TiDBの機能概要について学びましょう。
 | インデックスと制約                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [発現インデックス](/sql-statements/sql-statement-create-index.md#expression-index)[^2]              |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [カラム型storage（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [カラム型ストレージ（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [FastScanを使用してOLAPシナリオにおけるクエリを高速化する](/tiflash/use-fastscan.md)                              |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
-| [RocksDBエンジン](/storage-engine/rocksdb-overview.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [Titanプラグイン](/storage-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [タイタンレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental)               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
+| [RocksDBエンジン](/ストレージ-engine/rocksdb-overview.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [Titanプラグイン](/ストレージ-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [Titanレベルマージ](/ストレージ-engine/titan-configuration.md#level-merge-experimental)               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [バケットを使用してスキャンの同時実行性を向上させる](/tune-region-performance.md#use-bucket-to-increase-concurrency) |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
 | [見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [複合`PRIMARY KEY`](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`CHECK`制約](/constraints.md#check)                                                          |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [一意のインデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [整数型の`PRIMARY KEY`に対するクラスタ化インデックス](/clustered-indexes.md)                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [複合キーまたは非整数キーに対するクラスタ化インデックス](/clustered-indexes.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [整数型の`PRIMARY KEY`に対するクラスター化インデックス](/clustered-indexes.md)                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [複合キーまたは非整数キーに対するクラスター化インデックス](/clustered-indexes.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [外部キー](/foreign-key.md)                                                                     |  Y  |  E  |  E  |  E  |  N  |  N  |  N  |
 | [TiFlashの遅延実現](/tiflash/tiflash-late-materialization.md)                                    |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
@@ -124,7 +124,7 @@ summary: TiDBの機能概要について学びましょう。
 | ------------------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :---: | :-: | :-: |
 | 基本`CREATE` 、 `DROP` 、 `ALTER` 、 `RENAME` 、 `TRUNCATE`                                                                    |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [生成された列](/generated-columns.md)                                                                                          |  Y  |  Y  |  Y  |  Y  |   E   |  E  |  E  |
-| [閲覧数](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
+| [ビュー](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [自動インクリメント](/auto-increment.md)                                                                                          |  Y  |  Y  |  Y  |  Y  | Y[^4] |  Y  |  Y  |
 | [自動ランダム](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
@@ -141,15 +141,15 @@ summary: TiDBの機能概要について学びましょう。
 | [TiDB高速テーブル作成](/accelerated-table-creation.md)                                                                           |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 | [BDRロールを構成して、BDRモードでDDLステートメントを複製するようにします。](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 
-## 取引 {#transactions}
+## トランザクション {#transactions}
 
-| 取引                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
+| トランザクション                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [大規模トランザクション（1 TiB）](/transaction-overview.md#transaction-size-limit)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [悲観的な取引](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [楽観的な取引](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [悲観的なトランザクション](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [楽観的なトランザクション](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [反復読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [リードコミット隔離](/transaction-isolation-levels.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [長時間実行されているアイドル状態のトランザクションを自動的に終了する](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
@@ -223,8 +223,8 @@ summary: TiDBの機能概要について学びましょう。
 | [データベース移行ツールキット（DM）](/migration-overview.md)                                                         | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
 | [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) [^6]                  | 削除済み | Y   | Y   | Y   | Y   | Y   | Y   |
 | [変更データキャプチャ（CDC）](/ticdc/ticdc-overview.md)                                                          | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
-| [TiCDCを介してAmazon S3、GCS、Azure Blob Storage、NFSにデータをストリーミングする](/ticdc/ticdc-sink-to-cloud-storage.md) | Y    | Y   | Y   | Y   | E   | N   | N   |
-| [TiCDCは、2つのTiDBクラスタ間での双方向レプリケーションをサポートしています。](/ticdc/ticdc-bidirectional-replication.md)             | Y    | Y   | Y   | Y   | Y   | N   | N   |
+| [TiCDCを介してAmazon S3、GCS、Azure Blob Storage、NFSにデータをストリーミングする](/ticdc/ticdc-sink-to-cloud-ストレージ.md) | Y    | Y   | Y   | Y   | E   | N   | N   |
+| [TiCDCは、2つのTiDBクラスター間での双方向レプリケーションをサポートしています。](/ticdc/ticdc-bidirectional-replication.md)             | Y    | Y   | Y   | Y   | Y   | N   | N   |
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)                                                      | Y    | Y   | Y   | Y   | N   | N   | N   |
 | [DM](/dm/dm-overview.md) MySQL 8.0の移行をサポートしています                                                      | Y    | Y   | E   | E   | E   | E   | N   |
 
@@ -236,7 +236,7 @@ summary: TiDBの機能概要について学びましょう。
 | [TiDBダッシュボードの継続的プロファイリング](/dashboard/continuous-profiling.md)                                                                                                                                                                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
 | [TiDBダッシュボードのTop SQL](/dashboard/top-sql.md)                                                                                                                                                                                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
 | [TiDBダッシュボードのSQL診断](/information-schema/information-schema-sql-diagnostics.md)                                                                                                                                                                                         |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [TiDBダッシュボードクラスタ診​​断](/dashboard/dashboard-diagnostics-access.md)                                                                                                                                                                                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
+| [TiDBダッシュボードクラスター診​​断](/dashboard/dashboard-diagnostics-access.md)                                                                                                                                                                                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
 | [TiKV-FastTuneダッシュボード](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard)                                                                                                                                                                                             |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [情報スキーマ](/information-schema/information-schema.md)                                                                                                                                                                                                                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [メトリクススキーマ](/metrics-schema.md)                                                                                                                                                                                                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -281,4 +281,4 @@ summary: TiDBの機能概要について学びましょう。
 
 [^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
 
-[^6]: バージョン 7.5.0 以降、 [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスタをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。
+[^6]: バージョン 7.5.0 以降、 [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスターをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。

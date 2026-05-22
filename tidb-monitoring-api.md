@@ -7,12 +7,12 @@ summary: TiDB 監視サービスの API を学習します。
 
 次のタイプのインターフェースを使用して、TiDB クラスターのステータスを監視できます。
 
--   [ステータスインターフェース](#use-the-status-interface) : このインターフェースはHTTPインターフェースを使用してコンポーネント情報を取得します。このインターフェースを使用すると、現在のTiDBサーバーの[実行ステータス](#running-status)とテーブルの[storage情報](#storage-information)取得できます。
+-   [ステータスインターフェース](#use-the-status-interface) : このインターフェースはHTTPインターフェースを使用してコンポーネント情報を取得します。このインターフェースを使用すると、現在のTiDBサーバーの[実行ステータス](#running-status)とテーブルの[ストレージ情報](#ストレージ-information)取得できます。
 -   [メトリクスインターフェース](#use-the-metrics-interface) : このインターフェースは Prometheus を使用してコンポーネント内のさまざまな操作の詳細情報を記録し、Grafana を使用してこれらのメトリックを表示します。
 
 ## ステータスインターフェースを使用する {#use-the-status-interface}
 
-ステータスインターフェースは、TiDBクラスタ内の特定のコンポーネントの基本情報を監視します。また、Keepaliveメッセージの監視インターフェースとしても機能します。さらに、配置Driver（PD）のステータスインターフェースは、TiKVクラスタ全体の詳細情報を取得できます。
+ステータスインターフェースは、TiDBクラスター内の特定のコンポーネントの基本情報を監視します。また、Keepaliveメッセージの監視インターフェースとしても機能します。さらに、配置Driver（PD）のステータスインターフェースは、TiKVクラスター全体の詳細情報を取得できます。
 
 ### TiDBサーバー {#tidb-server}
 
@@ -32,12 +32,12 @@ curl http://127.0.0.1:10080/status
 }
 ```
 
-#### 保管情報 {#storage-information}
+#### 保管情報 {#ストレージ-information}
 
-次の例では、 `http://${host}:${port}/schema_storage/${db}/${table}`使用して特定のデータテーブルのstorage情報を取得します。結果は**JSON**形式で返されます。
+次の例では、 `http://${host}:${port}/schema_ストレージ/${db}/${table}`使用して特定のデータテーブルのストレージ情報を取得します。結果は**JSON**形式で返されます。
 
 ```bash
-curl http://127.0.0.1:10080/schema_storage/mysql/stats_histograms
+curl http://127.0.0.1:10080/schema_ストレージ/mysql/stats_histograms
 ```
 
     {
@@ -52,7 +52,7 @@ curl http://127.0.0.1:10080/schema_storage/mysql/stats_histograms
     }
 
 ```bash
-curl http://127.0.0.1:10080/schema_storage/test
+curl http://127.0.0.1:10080/schema_ストレージ/test
 ```
 
     [

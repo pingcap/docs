@@ -22,7 +22,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDB Cloud Dedicatedクラスタはプロジェクトに属します。TiDB Cloud Dedicatedクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDB Cloud Dedicatedクラスターはプロジェクトに属します。TiDB Cloud Dedicatedクラスターを作成する前に、クラスターを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -157,8 +157,8 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
           tikv_node_setting = {
            node_spec_key   = "2C4G"
            node_count      = 3
-           storage_size_gi = 60
-           storage_type    = "Standard"
+           ストレージ_size_gi = 60
+           ストレージ_type    = "Standard"
           }
         }
 
@@ -205,8 +205,8 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
               + node_count             = 3
               + node_spec_display_name = (known after apply)
               + node_spec_key          = "2C4G"
-              + storage_size_gi        = 60
-              + storage_type           = "Standard"
+              + ストレージ_size_gi        = 60
+              + ストレージ_type           = "Standard"
             }
           + update_time         = (known after apply)
           + version             = (known after apply)
@@ -299,8 +299,8 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
             node_count             = 3
             node_spec_display_name = "2 vCPU, 4 GiB"
             node_spec_key          = "2C4G"
-            storage_size_gi        = 60
-            storage_type           = "Standard"
+            ストレージ_size_gi        = 60
+            ストレージ_type           = "Standard"
         }
         update_time         = "2025-06-06 06:31:42.974 +0000 UTC"
         version             = "v7.5.6"
@@ -370,8 +370,8 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
             node_count             = 3
             node_spec_display_name = "2 vCPU, 4 GiB"
             node_spec_key          = "2C4G"
-            storage_size_gi        = 60
-            storage_type           = "Standard"
+            ストレージ_size_gi        = 60
+            ストレージ_type           = "Standard"
         }
         update_time         = "2025-06-06 06:31:42.974 +0000 UTC"
         version             = "v7.5.6"
@@ -398,7 +398,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
         tiflash_node_setting = {
           node_spec_key = "2C4G"
           node_count = 3
-          storage_size_gi = 60
+          ストレージ_size_gi = 60
         }
 
 2.  `terraform apply`コマンドを実行します。
@@ -451,12 +451,12 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
               + node_count             = 3
               + node_spec_display_name = (known after apply)
               + node_spec_key          = "2C4G"
-              + storage_size_gi        = 60
-              + storage_type           = (known after apply)
+              + ストレージ_size_gi        = 60
+              + ストレージ_type           = (known after apply)
             }
           ~ tikv_node_setting    = {
               ~ node_spec_display_name = "2 vCPU, 4 GiB" -> (known after apply)
-              ~ storage_type           = "Standard" -> (known after apply)
+              ~ ストレージ_type           = "Standard" -> (known after apply)
                 # (3 unchanged attributes hidden)
             }
           ~ update_time          = "2025-06-06 09:19:01.548 +0000 UTC" -> (known after apply)
@@ -540,15 +540,15 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
                 node_count             = 3
                 node_spec_display_name = "2 vCPU, 4 GiB"
                 node_spec_key          = "2C4G"
-                storage_size_gi        = 60
-                storage_type           = "Basic"
+                ストレージ_size_gi        = 60
+                ストレージ_type           = "Basic"
             }
             tikv_node_setting   = {
                 node_count             = 3
                 node_spec_display_name = "2 vCPU, 4 GiB"
                 node_spec_key          = "2C4G"
-                storage_size_gi        = 60
-                storage_type           = "Standard"
+                ストレージ_size_gi        = 60
+                ストレージ_type           = "Standard"
             }
             update_time         = "2025-06-06 08:31:42.974 +0000 UTC"
             version             = "v7.5.6"
@@ -571,12 +571,12 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
          tikv_node_setting = {
            node_spec_key = "8C32G"
            node_count = 6
-           storage_size_gi = 200
+           ストレージ_size_gi = 200
          }
          tiflash_node_setting = {
            node_spec_key = "8C64G"
            node_count = 4
-           storage_size_gi = 200
+           ストレージ_size_gi = 200
          }
 
 2.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。
@@ -626,13 +626,13 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
               ~ tiflash_node_setting = {
                   ~ node_count             = 3 -> 4
                   ~ node_spec_display_name = "8 vCPU, 64 GiB" -> (known after apply)
-                  ~ storage_type           = "Basic" -> (known after apply)
+                  ~ ストレージ_type           = "Basic" -> (known after apply)
                     # (2 unchanged attributes hidden)
                 }
               ~ tikv_node_setting    = {
                   ~ node_count             = 3 -> 6
                   ~ node_spec_display_name = "8 vCPU, 32 GiB" -> (known after apply)
-                  ~ storage_type           = "Standard" -> (known after apply)
+                  ~ ストレージ_type           = "Standard" -> (known after apply)
                     # (2 unchanged attributes hidden)
                 }
               ~ update_time          = "2025-06-09 09:29:25.678 +0000 UTC" -> (known after apply)
@@ -715,12 +715,12 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
              }
            ~ tiflash_node_setting = {
                ~ node_spec_display_name = "8 vCPU, 64 GiB" -> (known after apply)
-               ~ storage_type           = "Basic" -> (known after apply)
+               ~ ストレージ_type           = "Basic" -> (known after apply)
                  # (3 unchanged attributes hidden)
              }
            ~ tikv_node_setting    = {
                ~ node_spec_display_name = "8 vCPU, 32 GiB" -> (known after apply)
-               ~ storage_type           = "Standard" -> (known after apply)
+               ~ ストレージ_type           = "Standard" -> (known after apply)
                  # (3 unchanged attributes hidden)
              }
            ~ update_time          = "2025-06-09 10:01:59.65 +0000 UTC" -> (known after apply)
@@ -796,8 +796,8 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
                  node_count             = 3
                  node_spec_display_name = "2 vCPU, 4 GiB"
                  node_spec_key          = "2C4G"
-                 storage_size_gi        = 60
-                 storage_type           = "Standard"
+                 ストレージ_size_gi        = 60
+                 ストレージ_type           = "Standard"
              }
              update_time         = "2025-06-06 06:31:42.974 +0000 UTC"
              version             = "v7.5.6"
@@ -1138,15 +1138,15 @@ TiDB Cloud Dedicated クラスターを削除するには、 `tidbcloud_dedicate
             - node_count             = 4 -> null
             - node_spec_display_name = "8 vCPU, 64 GiB" -> null
             - node_spec_key          = "8C64G" -> null
-            - storage_size_gi        = 200 -> null
-            - storage_type           = "Basic" -> null
+            - ストレージ_size_gi        = 200 -> null
+            - ストレージ_type           = "Basic" -> null
           } -> null
         - tikv_node_setting    = {
             - node_count             = 6 -> null
             - node_spec_display_name = "8 vCPU, 32 GiB" -> null
             - node_spec_key          = "8C32G" -> null
-            - storage_size_gi        = 200 -> null
-            - storage_type           = "Standard" -> null
+            - ストレージ_size_gi        = 200 -> null
+            - ストレージ_type           = "Standard" -> null
           } -> null
         - update_time          = "2025-06-06 14:15:29.609 +0000 UTC" -> null
         - version              = "v7.5.6" -> null

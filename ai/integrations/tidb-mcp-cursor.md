@@ -37,7 +37,7 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
 
 5.  **「カーソル」**タブを選択し、 **「カーソルに追加」**をクリックしてから、「カーソルに**インストール」を**クリックします。
 
-## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
+## 手動設定（任意のTiDBクラスター） {#manual-configuration-any-tidb-cluster}
 
 手動で設定する場合は、 `.cursor/mcp.json`ファイルに次の設定を追加し、プレースホルダーを接続パラメータに置き換えてください。
 

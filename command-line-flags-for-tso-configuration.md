@@ -3,7 +3,7 @@ title: TSO Configuration Flags
 summary: TSO 構成フラグは、コマンド ライン フラグまたは環境変数を介して構成できます。
 ---
 
-# TSOコンフィグレーションフラグ {#tso-configuration-flags}
+# TSO設定フラグ {#tso-configuration-flags}
 
 TSOノードは、PD用の`tso`マイクロサービスを提供するために使用されます。コマンドラインフラグまたは環境変数を使用して設定できます。
 

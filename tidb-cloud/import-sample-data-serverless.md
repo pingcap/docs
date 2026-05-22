@@ -3,7 +3,7 @@ title: Import Sample Data (SQL Files) into TiDB Cloud Starter or Essential from 
 summary: TiDB Cloud StarterまたはTiDB Cloud EssentialにUI経由でサンプルデータをインポートする方法を学びましょう。
 ---
 
-# クラウドストレージからサンプルデータ（SQLファイル）をTiDB Cloud StarterまたはEssentialにインポートする {#import-sample-data-sql-files-into-tidb-cloud-starter-or-essential-from-cloud-storage}
+# クラウドストレージからサンプルデータ（SQLファイル）をTiDB Cloud StarterまたはEssentialにインポートする {#import-sample-data-sql-files-into-tidb-cloud-starter-or-essential-from-cloud-ストレージ}
 
 このドキュメントでは、UI を介してサンプルデータ (SQL ファイル) をTiDB Cloud StarterまたはTiDB Cloud Essentialにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshare のデータライセンス契約に基づいて公開されている Capital Bikeshare のシステムデータです。サンプルデータをインポートする前に、 TiDB Cloud StarterまたはEssential のインスタンスが 1 つ必要です。
 
