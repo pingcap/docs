@@ -75,6 +75,12 @@ Show a specific import job by job ID:
 SHOW IMPORT JOB 2;
 ```
 
+The output is as follows:
+
+| Job_ID | Group_Key | Data_Source | Target_Table | Table_ID | Phase | Status | Source_File_Size | Imported_Rows | Result_Message | Create_Time | Start_Time | End_Time | Created_By | Last_Update_Time | Cur_Step | Cur_Step_Processed_Size | Cur_Step_Total_Size | Cur_Step_Progress_Pct | Cur_Step_Speed | Cur_Step_ETA |
+|--------|-----------|-------------|--------------|----------|-------|--------|------------------|---------------|----------------|-------------|------------|----------|------------|------------------|----------|-------------------------|---------------------|-----------------------|----------------|--------------|
+| 2 | import_group_1 | /path/to/file.csv | `test`.`bar` | 118 | global-sorting | running | 277.5GiB | 0 |  | 2025-07-09 10:40:18.580706 | 2025-07-09 10:40:19.092528 | NULL | root@% | 2025-07-09 10:47:15 | encode | 4.55GB | 298GB | 1 | 10.96MB/s | 07:26:03 |
+
 Filter import jobs by output fields:
 
 ```sql
@@ -94,6 +100,8 @@ SHOW RAW IMPORT JOBS WHERE Group_Key = 'user_group';
 ```sql
 SHOW RAW IMPORT JOB 2;
 ```
+
+`SHOW RAW IMPORT JOB <job-id>` returns the same output fields as `SHOW IMPORT JOB <job-id>`.
 
 ## MySQL compatibility
 
