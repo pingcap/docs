@@ -47,7 +47,7 @@ TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using 
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
-As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
+As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can store your data in either of the following ways:
 
 - Store data and their corresponding vector representations in different columns of the same table.
 - Store data and their corresponding vector representation in different tables. In this way, you need to use `JOIN` queries to combine the tables when retrieving data.
