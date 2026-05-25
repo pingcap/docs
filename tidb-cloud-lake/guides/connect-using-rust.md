@@ -13,7 +13,7 @@ Add the driver to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-lake-driver = "0.30"
+tidbcloudlake-driver = "0.30"
 tokio = { version = "1", features = ["full"] }
 ```
 
@@ -106,6 +106,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Resources
 
-- **Crates.io**: [lake-driver](https://crates.io/crates/databend-driver)
+- **Crates.io**: [tidbcloudlake-driver](https://crates.io/crates/databend-driver)
 - **GitHub Repository**: [LakeSQL/driver](https://github.com/tidbcloud/lakesql/tree/main/driver)
-- **Rust Documentation**: [docs.rs/lake-driver](https://docs.rs/databend-driver)
+- **Rust Documentation**: [docs.rs/tidbcloudlake-driver](https://docs.rs/databend-driver)

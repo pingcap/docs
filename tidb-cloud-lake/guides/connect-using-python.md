@@ -13,14 +13,14 @@ Choose your preferred approach:
 
 | Package | Best For | Installation |
 |---------|----------|-------------|
-| **lake-driver** | Direct database operations, async/await | `pip install lake-driver` |
+| **tidbcloudlake-driver** | Direct database operations, async/await | `pip install tidbcloudlake-driver` |
 | **databend-sqlalchemy** | ORM integration, existing SQLAlchemy apps | `pip install databend-sqlalchemy` |
 
 **Connection String**: See [driver overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
-## lake-driver (Recommended)
+## tidbcloudlake-driver (Recommended)
 
 ### Features
 
@@ -153,5 +153,5 @@ with engine.connect() as conn:
 
 ## Resources
 
-- **PyPI**: [lake-driver](https://pypi.org/project/databend-driver/) • [databend-sqlalchemy](https://pypi.org/project/databend-sqlalchemy/)
-- **GitHub**: [lake-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/python) • [lake-sqlalchemy](http://github.com/tidbcloud/lake-sqlalchemy)
+- **PyPI**: [tidbcloudlake-driver](https://pypi.org/project/databend-driver/) • [databend-sqlalchemy](https://pypi.org/project/databend-sqlalchemy/)
+- **GitHub**: [tidbcloudlake-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/python) • [lake-sqlalchemy](http://github.com/tidbcloud/lake-sqlalchemy)
