@@ -43,7 +43,7 @@ Currently, TiDB Cloud branches are in beta and free of charge.
 
     > **Note:**
     >
-    > To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Agent Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances in total, with each branch counted as a separate instance. To learn more, see the [Agent Plan](/tidb-cloud/select-cluster-tier.md#agent-plan).
+    > To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances in total, with each branch counted as a separate instance. To learn more, see the [Instance Capacity Plan](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan).
 
 - For each branch of a free {{{ .starter }}} instance, 10 GiB storage is allowed. For each branch of a {{{ .starter }}} instance with spending limit > 0, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
