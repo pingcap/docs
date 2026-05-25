@@ -84,10 +84,10 @@ for row in cursor.fetchall():
 
 ```python
 import asyncio
-from tidbcloudlake_driver import AsyncDatabendClient
+from tidbcloudlake_driver import AsyncLakeClient
 
 async def main():
-    client = AsyncDatabendClient('<your-dsn>')
+    client = AsyncLakeClient('tidbcloudlake://root:root@localhost:8000/?sslmode=disable')
     conn = await client.get_conn()
 
     # DDL: Create table
@@ -153,5 +153,5 @@ with engine.connect() as conn:
 
 ## Resources
 
-- **PyPI**: [tidbcloudlake-driver](https://pypi.org/project/databend-driver/) • [databend-sqlalchemy](https://pypi.org/project/databend-sqlalchemy/)
+- **PyPI**: [tidbcloudlake-driver](https://pypi.org/project/tidbcloudlake-driver/) • [databend-sqlalchemy](https://pypi.org/project/databend-sqlalchemy/)
 - **GitHub**: [tidbcloudlake-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/python) • [lake-sqlalchemy](http://github.com/tidbcloud/lake-sqlalchemy)

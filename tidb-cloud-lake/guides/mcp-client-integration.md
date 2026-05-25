@@ -5,7 +5,7 @@ summary: "{{{ .lake }}} MCP connects AI assistants to {{{ .lake }}} via Model Co
 
 # MCP Client Integration
 
-[{{{ .lake }}} MCP](https://github.com/databendlabs/mcp-databend) connects AI assistants to {{{ .lake }}} through the Model Context Protocol. It works with Codex, Kimi Code, Cursor, Claude Code, Claude Desktop, Gemini CLI, VS Code, and other MCP-compatible clients.
+[{{{ .lake }}} MCP](https://github.com/tidbcloud/lake-mcp) connects AI assistants to {{{ .lake }}} through the Model Context Protocol. It works with Codex, Kimi Code, Cursor, Claude Code, Claude Desktop, Gemini CLI, VS Code, and other MCP-compatible clients.
 
 **What you can do:**
 

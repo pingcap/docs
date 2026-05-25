@@ -106,6 +106,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Resources
 
-- **Crates.io**: [tidbcloudlake-driver](https://crates.io/crates/databend-driver)
+- **Crates.io**: [lake-driver](https://crates.io/crates/lake-driver)
 - **GitHub Repository**: [LakeSQL/driver](https://github.com/tidbcloud/lakesql/tree/main/driver)
-- **Rust Documentation**: [docs.rs/tidbcloudlake-driver](https://docs.rs/databend-driver)
+- **Rust Documentation**: [docs.rs/lake-driver](https://docs.rs/lake-driver)

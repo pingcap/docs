@@ -81,6 +81,6 @@ conn.close();
 
 ## Resources
 
-- **NPM Package**: [tidbcloudlake-driver](https://www.npmjs.com/package/databend-driver)
+- **NPM Package**: [tidbcloudlake-driver](https://www.npmjs.com/package/tidbcloudlake-driver)
 - **GitHub Repository**: [tidbcloudlake-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/nodejs)
 - **TypeScript Definitions**: Included in package
