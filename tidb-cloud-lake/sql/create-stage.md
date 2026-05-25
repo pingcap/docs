@@ -157,7 +157,7 @@ The procedure below creates an access policy named *lake-access* for the bucket 
 
 #### Step 2: Create IAM User
 
-The procedure below creates an IAM user named *lake* and attach the access policy *lake-access* to the user.
+The procedure below creates an IAM user named *lake* and attaches the access policy *lake-access* to the user.
 
 1. Select **Users** in the left navigation pane, then select **Add users** on the right page.
 2. Configure the user:
