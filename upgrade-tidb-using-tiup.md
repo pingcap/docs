@@ -207,7 +207,7 @@ tiup cluster upgrade <cluster-name> v8.5.0
 
 > **Note:**
 >
-> + An online upgrade upgrades all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes (300 seconds). The instance is directly stopped after this timeout time.
+> + An online upgrade upgrades all components one by one. According to the current TiUP upgrade logic, if the cluster contains TiFlash, TiFlash is upgraded first, followed by other components. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes (300 seconds). The instance is directly stopped after this timeout time.
 >
 > + You can use the `--force` parameter to upgrade the cluster immediately without evicting the leader. However, the errors that occur during the upgrade will be ignored, which means that you are not notified of any upgrade failure. Therefore, use the `--force` parameter with caution.
 >
