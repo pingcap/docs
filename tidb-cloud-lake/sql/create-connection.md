@@ -113,7 +113,7 @@ CREATE CONNECTION <connection_name>
     STORAGE_TYPE = 'oss'
     ACCESS_KEY_ID = '<your-ak>'
     ACCESS_KEY_SECRET = '<your-sk>'
-    ENDPOINT_URL = 'https://<bucket-name>.<region-id>[-internal].aliyuncs.com';
+    ENDPOINT_URL = 'https://<region-id>[-internal].aliyuncs.com';
 ```
 
 </div>

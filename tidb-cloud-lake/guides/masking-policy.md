@@ -159,6 +159,109 @@ id | email              | is_vip
  2 | *********          | false
 ```
 
+## Masking Variant Sub-Fields
+
+Use `object_delete` inside a masking policy to hide specific keys within a VARIANT column. All access paths (subscript, `json_path_query`, `get_path`, cast, `json_object_keys`) respect the mask—hidden keys return NULL or are absent from results.
+
+### Step 1: Create a table with sample data
+
+```sql
+CREATE TABLE events (
+  id INT,
+  data VARIANT
+);
+
+INSERT INTO events VALUES
+  (1, parse_json('{"name": "alice", "content": "secret data", "secret_key": "sk_123", "age": 30}')),
+  (2, parse_json('{"name": "bob", "content": "private info", "secret_key": "sk_456", "age": 25}'));
+```
+
+### Step 2: Create roles
+
+```sql
+-- Role that sees full VARIANT data
+CREATE ROLE data_admin;
+
+-- Role that cannot see sensitive keys
+CREATE ROLE data_reader;
+```
+
+### Step 3: Create the masking policy
+
+```sql
+-- Hide 'content' and 'secret_key' from users without data_admin role
+CREATE MASKING POLICY mask_variant_sensitive
+  AS (val VARIANT) RETURNS VARIANT ->
+    CASE
+      WHEN is_role_in_session('data_admin') OR is_role_in_session('account_admin') THEN val
+      ELSE object_delete(val, 'content', 'secret_key')
+    END;
+```
+
+> **Note:**
+>
+> `is_role_in_session` (available since v1.2.911) checks all roles granted to the user, regardless of which role is currently active. This is more secure than `current_role()` because users cannot bypass the mask by switching roles with `SET ROLE`.
+
+### Step 4: Attach the policy to the VARIANT column
+
+```sql
+ALTER TABLE events MODIFY COLUMN data SET MASKING POLICY mask_variant_sensitive;
+```
+
+### Step 5: Grant access
+
+```sql
+GRANT SELECT ON default.events TO ROLE data_admin;
+GRANT SELECT ON default.events TO ROLE data_reader;
+GRANT ROLE data_admin TO USER 'admin_user';
+GRANT ROLE data_reader TO USER 'normal_user';
+```
+
+### Step 6: Verify
+
+```sql
+-- As data_admin: full data visible
+SET ROLE data_admin;
+SELECT data FROM events;
+-- {"age":30,"content":"secret data","name":"alice","secret_key":"sk_123"}
+-- {"age":25,"content":"private info","name":"bob","secret_key":"sk_456"}
+
+-- As data_reader: sensitive keys removed
+SET ROLE data_reader;
+
+SELECT data FROM events;
+-- {"age":30,"name":"alice"}
+-- {"age":25,"name":"bob"}
+
+SELECT data['content'] FROM events;
+-- NULL
+-- NULL
+
+SELECT data['name'] FROM events;
+-- "alice"
+-- "bob"
+
+SELECT json_path_query_first(data, '$.content') FROM events;
+-- NULL
+
+SELECT data::STRING FROM events;
+-- {"age":30,"name":"alice"}
+
+SELECT json_object_keys(data) FROM events;
+-- ["age","name"]
+
+SELECT * FROM events WHERE data['content'] IS NOT NULL;
+-- (empty result)
+```
+
+> **Tip:**
+>
+> For nested keys, use `delete_by_keypath`:
+>
+> ```sql
+> ELSE delete_by_keypath(val, 'nested:secret')
+> ```
+
 ## Privileges & References
 
 - Grant `CREATE MASKING POLICY` on `*.*` to any role responsible for creating or replacing policies; the creator automatically owns the policy.
