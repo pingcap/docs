@@ -54,9 +54,11 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 
 ## Filtering import jobs
 
-Only `SHOW IMPORT JOBS` supports filtering import jobs with a `WHERE` clause. `SHOW IMPORT JOB <job-id>` does not support a `WHERE` clause.
+Only `SHOW IMPORT JOBS` supports filtering import jobs with a `WHERE` or `LIKE` clause. `SHOW IMPORT JOB <job-id>` does not support these clauses.
 
 The `WHERE` clause can reference the output fields of `SHOW IMPORT JOBS`, including `Job_ID`, `Group_Key`, `Data_Source`, `Target_Table`, `Table_ID`, `Phase`, `Status`, `Source_File_Size`, `Imported_Rows`, `Result_Message`, `Create_Time`, `Start_Time`, `End_Time`, `Created_By`, `Last_Update_Time`, `Cur_Step`, `Cur_Step_Processed_Size`, `Cur_Step_Total_Size`, `Cur_Step_Progress_Pct`, `Cur_Step_Speed`, and `Cur_Step_ETA`.
+
+The `LIKE` clause matches its pattern only against the first column `Job_ID` (compared as a string). For example, `SHOW IMPORT JOBS LIKE '%1'` returns the jobs whose `Job_ID` ends with `1`.
 
 ## Example
 
