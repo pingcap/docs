@@ -147,6 +147,7 @@
   - [Data Recovery](/tidb-cloud-lake/guides/data-recovery.md)
   - [Data Protection](/tidb-cloud-lake/guides/data-protection.md)
   - [Data Purge and Recycle](/tidb-cloud-lake/guides/data-purge-and-recycle.md)
+- [Troubleshooting](/tidb-cloud-lake/guides/troubleshooting.md)
 
 ## Tutorials
 

@@ -38,7 +38,7 @@ Result:
 ```
 
 ```sql
-INSERT INTO string_table VALUES('databend');
+INSERT INTO string_table VALUES('tidbcloudlake');
 ```
 
 ```
@@ -51,6 +51,6 @@ Result:
 ┌──────────────────┐
 │       text       │
 ├──────────────────┤
-│ databend         │
+│ tidbcloudlake    │
 └──────────────────┘
 ```
