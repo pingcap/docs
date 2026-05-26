@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Add two new AWS regions for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on TiDB Cloud Starter: `Tokyo (ap-northeast-1) and Oregon (us-west-2)`. The feature is now available in the following AWS regions:
+    - Add two new AWS regions for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on TiDB Cloud Starter: `Tokyo (ap-northeast-1)` and `Oregon (us-west-2)`. The feature is now available in the following AWS regions:
 
         - `Tokyo (ap-northeast-1)`
         - `Oregon (us-west-2)`
@@ -35,7 +35,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - TiDB Cloud IAM API (v1beta1) supports managing organization members programmatically.
 
-  The new Members endpoints let you manage organization membership and role assignments. You can use these endpoints to automate user lifecycle management tasks, such as onboarding new members with specific roles, adjusting permissions as responsibilities change, and removing members who leave the organization.
+  The new `Members` endpoints let you manage organization membership and role assignments. You can use these endpoints to automate user lifecycle management tasks, such as onboarding new members with specific roles, adjusting permissions as responsibilities change, and removing members who leave the organization.
 
   For more information, see [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/).
 
