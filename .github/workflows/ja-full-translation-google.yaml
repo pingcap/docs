@@ -18,18 +18,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Download translator repo
         with:
           repository: "pingcap/docs-toolkit"
           ref: "main"
           path: "docs-toolkit"
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Download specified branch of docs repo
         with:
           ref: ${{ github.event.inputs.from }}
           path: "docs"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         name: Setup node
         with:
           node-version: 20
