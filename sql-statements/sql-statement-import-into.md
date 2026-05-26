@@ -261,6 +261,14 @@ IMPORT INTO t FROM '/path/to/file.csv' WITH skip_rows=1;
 IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
 ```
 
+#### Assign a group key to the import job
+
+To group related import jobs so that you can monitor them together using [`SHOW IMPORT GROUPS`](/sql-statements/sql-statement-show-import-group.md), specify the `GROUP_KEY` option:
+
+```sql
+IMPORT INTO t FROM '/path/to/file.csv' WITH GROUP_KEY='user_group';
+```
+
 #### Skip importing a specific field in your data file
 
 Assume that your data file is in the CSV format and its content is as follows:
