@@ -215,4 +215,4 @@ TiDB is suitable for the following scenarios:
 - You do not want to do sharding
 - The access mode has no obvious hotspot
 - Transactions, strong consistency, and disaster recovery are required
-- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce storage links
+- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce data pipelines
