@@ -22,7 +22,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
 1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create a private endpoint on Alibaba Cloud](#step-2-create-a-private-endpoint-on-alibaba-cloud)
-3. [Authorize your private endpoint in TiDB Cloud](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+3. [Authorize your private endpoint in TiDB Cloud (optional)](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
 4. [Connect to your {{{ .starter }}} or Essential instance using the private endpoint](#step-4-connect-to-your-instance-using-the-private-endpoint)
 
 ### Step 1. Choose a {{{ .starter }}} or Essential instance {#step-1-choose-a-tidb-instance}
@@ -51,9 +51,13 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 8. Click **OK** to create the endpoint.
 9. Wait for the endpoint status to become **Active** and the connection status to become **Connected**.
 
-### Step 3. Authorize your private endpoint in TiDB Cloud
+### Step 3. Authorize your private endpoint in TiDB Cloud (optional)
 
-After creating the interface endpoint on Alibaba Cloud, you must add it to the allowlist of your target {{{ .starter }}} or {{{ .essential }}} instance.
+> **Note:**
+>
+> This step is optional. You only need to configure **Authorized Networks** when you want to restrict access to specific private endpoint connections. If no rules are configured, all private endpoint connections are allowed by default.
+
+After creating the interface endpoint on Alibaba Cloud, you can authorize it for your target {{{ .starter }}} or {{{ .essential }}} instance to restrict access.
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} instance to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
@@ -65,8 +69,9 @@ After creating the interface endpoint on Alibaba Cloud, you must add it to the a
     - **Your Endpoint ID**: paste your 23-character endpoint ID from the Alibaba Cloud Management Console (starts with `ep-`).
 
     > **Tip:**
-    > 
-    > To allow all Private Endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your Endpoint ID** field.
+    >
+    > - If you leave the **Authorized Networks** table empty, all private endpoint connections are allowed by default.
+    > - To allow all private endpoint connections from your cloud region (for testing or open access), enter a single asterisk (`*`) in the **Your Endpoint ID** field.
 
 5. Click **Submit**.
 
