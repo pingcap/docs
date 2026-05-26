@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout ZH branch
         with:
           ref: "${{ env.ZH_BRANCH }}"
@@ -32,7 +32,7 @@ jobs:
                -L "https://api.github.com/repos/${{ github.repository }}/contents/scripts/sync-en-cloud-toc-changes-to-zh.py" \
                -o temp_scripts/sync-en-cloud-toc-changes-to-zh.py
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         name: Setup Python 3.11
         with:
           python-version: '3.11'
@@ -80,7 +80,7 @@ jobs:
 
       - name: Create PR
         if: steps.check_changes.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           path: "docs"
           token: ${{ github.token }}
