@@ -33,7 +33,7 @@ The output fields of the `SHOW IMPORT GROUP` statement are described as follows:
 | Completed           | Number of completed jobs in this group |
 | Failed | Number of failed jobs in this group  |
 | Cancelled | Number of cancelled jobs in this group |
-| First_Job_Create_Time   | The earliest create time of the jobs in this group |
+| First_Job_Create_Time   | The earliest creation time of the jobs in this group |
 | Last_Job_Update_Time      | The latest update time of the jobs in this group |
 
 ## Example

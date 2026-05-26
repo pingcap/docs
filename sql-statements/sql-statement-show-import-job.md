@@ -30,8 +30,8 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 
 | Column           | Description             |
 |------------------|-------------------------|
-| Job_ID           | The ID of the task                  |
-| Group_Key        | The group key of the task                  |
+| Job_ID           | The ID of the job                  |
+| Group_Key        | The group key of the job                  |
 | Data_Source      | Information about the data source                  |
 | Target_Table     | The name of the target table                     |
 | Table_ID         | The ID of the target table                     |
@@ -44,7 +44,7 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 | Start_Time       | The time when the task is started                     |
 | End_Time         | The time when the task is ended            |
 | Created_By       | The name of the database user who creates the task         |
-| Last_Update_Time       | The time when the task is last updated         |
+| Last_Update_Time       | The time when the job was last updated         |
 | Cur_Step       | The specific sequential processing step of this job         |
 | Cur_Step_Processed_Size       | The amount of data that has been processed within the current step         |
 | Cur_Step_Total_Size       | The total size of the data to be processed in the current step         |
