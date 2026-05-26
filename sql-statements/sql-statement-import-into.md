@@ -141,7 +141,7 @@ The supported options are described as follows:
 
 | Option name | Supported data sources and formats | Description |
 |:---|:---|:---|
-| `GROUP_KEY='<string>'` | All file formats | Specifies the group key for the job. TiDB groups import jobs with the same group key, allowing you to monitor related jobs collectively using [`SHOW IMPORT GROUPS`](/sql-statements/sql-statement-show-import-group.md). The key can contain only alphanumeric characters, underscores (_), or hyphens (-), and can be up to 256 characters long. If no group key is set, the job does not belong to any group and does not appear in `SHOW IMPORT GROUPS` results. |
+| `GROUP_KEY='<string>'` | All file formats | Specifies an optional group key for the job. The group key does not affect the import itself; TiDB groups import jobs with the same group key so that you can monitor related jobs collectively using [`SHOW IMPORT GROUPS`](/sql-statements/sql-statement-show-import-group.md). The key can contain only alphanumeric characters, underscores (_), or hyphens (-), and can be up to 256 characters long. If no group key is set, the job does not belong to any group and does not appear in `SHOW IMPORT GROUPS` results. |
 | `CHARACTER_SET='<string>'` | CSV | Specifies the character set of the data file. The default character set is `utf8mb4`. The supported character sets include `binary`, `utf8`, `utf8mb4`, `gb18030`, `gbk`, `latin1`, and `ascii`. |
 | `FIELDS_TERMINATED_BY='<string>'` | CSV | Specifies the field separator. The default separator is `,`. |
 | `FIELDS_ENCLOSED_BY='<char>'` | CSV | Specifies the field delimiter. The default delimiter is `"`. |
