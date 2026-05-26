@@ -125,6 +125,6 @@ Please refer to the [official lake-jdbc Connection Guide](https://github.com/tid
 
 ## Resources
 
-- **Maven Central**: [lake-jdbc](https://repo1.maven.org/maven2/com/databend/databend-jdbc/)
+- **Maven Central**: [lake-jdbc](https://repo1.maven.org/maven2/com/tidbcloud/lake-jdbc/)
 - **GitHub Repository**: [lake-jdbc](https://github.com/tidbcloud/lake-jdbc)
 - **JDBC Documentation**: [Oracle JDBC Guide](https://docs.oracle.com/javase/tutorial/jdbc/)
