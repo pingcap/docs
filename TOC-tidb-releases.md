@@ -241,7 +241,7 @@
         -   [1.0.2](/releases/release-1.0.2.md)
         -   [1.0.1](/releases/release-1.0.1.md)
         -   [1.0](/releases/release-1.0-ga.md)
-        -   [事前総会](/releases/release-pre-ga.md)
+        -   [Pre-GA](/releases/release-pre-ga.md)
         -   [RC4](/releases/release-rc.4.md)
         -   [RC3](/releases/release-rc.3.md)
         -   [RC2](/releases/release-rc.2.md)

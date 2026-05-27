@@ -19,7 +19,7 @@
         -   [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
         -   [DBeaver](/develop/dev-guide-gui-dbeaver.md)
         -   [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
-        -   [MySQL Workchen](/develop/dev-guide-gui-mysql-workbench.md)
+        -   [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
         -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
     -   ドライバーとORM
         -   [DriverまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)
