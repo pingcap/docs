@@ -186,7 +186,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="7" style="background-color: white;">Observability</td>
+    <td rowspan="9" style="background-color: white;">Observability</td>
     <td>Built-in metrics</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -217,8 +217,8 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Top SQL</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU in Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU in Public preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -229,10 +229,24 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Third-party integrations, such as Datadog, Prometheus, and New Relic</td>
+    <td>Prometheus and Grafana integration</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Datadog integration</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>New Relic integration</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
