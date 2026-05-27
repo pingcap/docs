@@ -22,12 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-<<<<<<< HEAD
-      - run: |
-          ./scripts/check-keywords.py \
-          --download_from_url \
-          --parser_url https://github.com/pingcap/tidb/raw/refs/heads/${GITHUB_BASE_REF}/pkg/parser/parser.y
-=======
         with:
           fetch-depth: 0
 
@@ -123,4 +117,3 @@ jobs:
         with:
           title: "Weekly keywords check: mismatches found"
           content-filepath: keywords-report.md
->>>>>>> e9f32ff1e3 (workflow: run keywords check weekly (#22951))
