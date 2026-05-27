@@ -22,7 +22,7 @@ summary: 了解如何通过阿里云私有 endpoint 连接你的 TiDB Cloud Star
 
 1. [选择 {{{ .starter }}} 或 Essential 实例](#step-1-choose-a-tidb-instance)
 2. [在阿里云上创建私有 endpoint](#step-2-create-a-private-endpoint-on-alibaba-cloud)
-3. [在 TiDB Cloud 中授权你的私有 endpoint](#step-3-authorize-your-private-endpoint-in-tidb-cloud)
+3. [在 TiDB Cloud 中授权你的私有 endpoint（可选）](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
 4. [使用私有 endpoint 连接到你的 {{{ .starter }}} 或 Essential 实例](#step-4-connect-to-your-instance-using-the-private-endpoint)
 
 ### Step 1. 选择 {{{ .starter }}} 或 Essential 实例 {#step-1-choose-a-tidb-instance}
@@ -51,9 +51,13 @@ summary: 了解如何通过阿里云私有 endpoint 连接你的 TiDB Cloud Star
 8. 点击 **OK** 创建 endpoint。
 9. 等待 endpoint 状态变为 **Active**，连接状态变为 **Connected**。
 
-### Step 3. 在 TiDB Cloud 中授权你的私有 endpoint
+### Step 3. 在 TiDB Cloud 中授权你的私有 endpoint（可选）
 
-在阿里云上创建 interface endpoint 后，你需要将其添加到目标 {{{ .starter }}} 或 {{{ .essential }}} 实例的 allowlist 中。
+> **注意：**
+>
+> 此步骤为可选。仅当你希望将访问限制为特定的私有 endpoint 连接时，才需要配置 **Authorized Networks**。如果未配置任何规则，则默认允许所有私有 endpoint 连接。
+
+在阿里云上创建 interface endpoint 后，你可以为目标 {{{ .starter }}} 或 {{{ .essential }}} 实例授权该 endpoint 以限制访问。
 
 1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 TiDB Cloud Starter 或 TiDB Cloud Essential 实例的名称，进入其概览页面。
 2. 在左侧导航栏点击 **Settings** > **Networking**。
@@ -65,8 +69,9 @@ summary: 了解如何通过阿里云私有 endpoint 连接你的 TiDB Cloud Star
     - **Your Endpoint ID**：粘贴你在阿里云管理控制台获取的 23 位 endpoint ID（以 `ep-` 开头）。
 
     > **提示：**
-    > 
-    > 如果你希望允许来自云 Region 的所有 Private Endpoint 连接（用于测试或开放访问），可在 **Your Endpoint ID** 字段中输入一个星号（`*`）。
+    >
+    > - 如果你将 **Authorized Networks** 表格留空，则默认允许所有私有 endpoint 连接。
+    > - 如果你希望允许来自云 Region 的所有 private endpoint 连接（用于测试或开放访问），可在 **Your Endpoint ID** 字段中输入一个星号（`*`）。
 
 5. 点击 **Submit**。
 

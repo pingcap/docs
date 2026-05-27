@@ -186,7 +186,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="7" style="background-color: white;">可观测性</td>
+    <td rowspan="9" style="background-color: white;">可观测性</td>
     <td>内置指标</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -217,8 +217,8 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   <tr>
     <td>Top SQL</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU 公测中)</span></td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU 公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU 公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU 公测中)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -229,10 +229,24 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>第三方集成，如 Datadog、Prometheus 和 New Relic</td>
+    <td>Prometheus 和 Grafana 集成</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
     <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Datadog 集成</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>New Relic 集成</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
