@@ -43,10 +43,10 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Vector storage &amp; vector search</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">🚧</td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td>API</td>
@@ -130,24 +130,24 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Data migration from MySQL-compatible databases into TiDB Cloud</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center; vertical-align: top; font-size: 14px;">❌</td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td>Data export via CSV, Parquet, and SQL files to local or object storages</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">🔒</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">🔒</td>
+    <td style="text-align:center; vertical-align: top; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Change data replication to Kafka or other MySQL-compatible databases using changefeeds</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center; vertical-align: top; font-size: 14px;">❌</td>
+    <td style="text-align:center; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td rowspan="5" style="background-color: white;">Backup &amp; restore</td>
@@ -186,7 +186,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="7" style="background-color: white;">Observability</td>
+    <td rowspan="9" style="background-color: white;">Observability</td>
     <td>Built-in metrics</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -216,10 +216,10 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Top SQL</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center; vertical-align: top; font-size: 14px;">❌</td>
+    <td style="text-align:center; vertical-align: top; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Top RU in Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td>Events</td>
@@ -229,11 +229,25 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Third-party integrations, such as Datadog, Prometheus, and New Relic</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
+    <td>Prometheus and Grafana integration</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;vertical-align: top;">✅</td>
+  </tr>
+  <tr>
+    <td>Datadog integration</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
+    <td style="text-align:center;vertical-align: top;">✅</td>
+  </tr>
+  <tr>
+    <td>New Relic integration</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
+    <td style="text-align:center;vertical-align: top;">❌</td>
+    <td style="text-align:center;vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td rowspan="1" style="background-color: white;">High availability</td>
