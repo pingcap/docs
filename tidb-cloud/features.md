@@ -229,25 +229,25 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Prometheus and Grafana integrations</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;vertical-align: top;">✅</td>
+    <td>Prometheus and Grafana integration</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td>Datadog integration</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
-    <td style="text-align:center;vertical-align: top;">✅</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td>New Relic integration</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
-    <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
-    <td style="text-align:center;vertical-align: top;">❌</td>
-    <td style="text-align:center;vertical-align: top;">✅</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; font-size: 14px; vertical-align: top;">❌</td>
+    <td style="text-align:center; vertical-align: top;">✅</td>
   </tr>
   <tr>
     <td rowspan="1" style="background-color: white;">High availability</td>
