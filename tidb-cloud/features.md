@@ -229,7 +229,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Prometheus and Grafana integration</td>
+    <td>Prometheus and Grafana integrations</td>
     <td style="text-align:center; font-size: 14px;vertical-align: top;">❌</td>
     <td style="text-align:center; font-size: 14px;vertical-align: top;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center; font-size: 14px;vertical-align: top;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
