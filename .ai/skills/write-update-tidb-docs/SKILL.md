@@ -1,12 +1,13 @@
 ---
 name: write-update-tidb-docs
-description: Write new TiDB documentation or update existing TiDB documentation from code changes, engineering notes, PRs, issues, design docs, rough drafts, existing docs, or short feature descriptions. Use when R&D engineers need user-facing docs in pingcap/docs or pingcap/docs-cn.
+description: Write new TiDB documentation or update existing TiDB documentation from code changes, PRs, issues, design docs, rough drafts, existing docs, or short feature descriptions. Use when R&D engineers need user-facing docs in pingcap/docs based on code PRs in pingcap/tidb or other TiDB ecosystem repositories.
 ---
 
 # Write or Update TiDB Docs
 
 Use this skill to turn engineering context into user-facing TiDB documentation
-in `pingcap/docs` or `pingcap/docs-cn`. Inputs can be code diffs, PRs, issues,
+in `pingcap/docs`. The most common input is a code PR from `pingcap/tidb` or
+other TiDB ecosystem repositories. Other inputs include code diffs, issues,
 design notes, release notes, rough Markdown, existing docs, or a few sentences
 from an R&D engineer.
 
@@ -27,6 +28,11 @@ from an R&D engineer.
 - For substantial new docs or vague inputs, switch to co-authoring mode: gather
   context, agree on structure, draft section by section, and test whether the doc
   answers likely reader questions.
+- English documentation in `pingcap/docs` is the primary output. Do not write
+  Chinese docs directly. If Chinese docs are also needed, finish the English doc
+  first, then use the `create-or-update-zh-translation-pr` skill.
+- If the code change also needs release notes, flag that and offer to use the
+  `write-review-translate-release-notes` skill after the doc work is done.
 
 ## Load context progressively
 
@@ -38,8 +44,7 @@ Always read:
 Read only when relevant:
 
 - `.ai/shared/translation-rules.md` and `.ai/shared/translation-terms.md` when
-  the target is `docs-cn`, or the task involves English-to-Chinese translation
-  or Chinese documentation updates.
+  the task involves English-to-Chinese translation or Chinese documentation.
 - `resources/doc-templates/<template>.md` after choosing the doc type:
     - `template-new-feature.md`
     - `template-task.md`
@@ -54,7 +59,59 @@ Prefer existing structure and wording in the same documentation area.
 
 ## Workflow
 
-### 1. Plan with 5W1H
+### 0. Analyze the code PR
+
+When the input is a code PR URL or reference:
+
+1. Fetch the PR metadata and diff:
+
+   ```bash
+   gh pr view <PR-URL> --json title,body,labels,baseRefName,headRefName,files
+   gh pr diff <PR-URL>
+   ```
+
+2. Read the PR description, linked issues, and any design doc references in the
+   PR body. These often contain the user-facing motivation and scope.
+
+3. Scan the diff for documentation-relevant changes. Look for:
+
+   | Code pattern | Likely doc impact |
+   | --- | --- |
+   | New or changed `SysVar` / `DefValue` in session/variable code | Update `system-variables.md` |
+   | New or changed config struct fields / `toml` tags | Update the corresponding `*-configuration-file.md` |
+   | New or changed command-line flags | Update `command-line-flags-for-*-configuration.md` |
+   | New SQL statement or grammar change (parser `.y` files) | New or updated `sql-statements/sql-statement-*.md` |
+   | New built-in function registration | Update `functions-and-operators/` docs |
+   | New `INFORMATION_SCHEMA` table | New doc under `information-schema/` |
+   | New metrics or changed alert rules | Update `grafana-*.md` or monitoring docs |
+   | New feature flag or experimental feature gate | New feature doc or update existing feature doc |
+   | Changed default behavior or compatibility | Critical: update relevant docs + possibly release notes |
+   | New API endpoint | Update or create API reference |
+
+4. Determine the documentation scope: is this a new page, an update to an
+   existing page, or both? Check whether release notes, overview pages, or TOC
+   also need updates.
+
+5. If the code diff is large, focus on user-facing changes (exported APIs,
+   config, SQL grammar, error messages, system variables) and skip internal
+   refactors that do not affect user behavior.
+
+### 1. Map code branches to docs branches
+
+Use the code PR's target branch to determine the docs branch:
+
+| Code repo target branch | Docs repo target branch | Notes |
+| --- | --- | --- |
+| `master` | `master` | Default for new development |
+| `release-X.Y` | `release-X.Y` (if it exists in docs) | Version-specific behavior or compatibility changes |
+| Any branch, but change is user-facing across versions | `master` + cherry-pick labels | Use `needs-cherry-pick-release-X.Y` labels |
+
+When in doubt, target `master` and let the user decide about cherry-picks.
+
+For TiDB Cloud content (`/tidb-cloud/` path), target the `release-8.5` branch.
+For AI content (`/ai/` path), target the `release-8.5` branch.
+
+### 2. Plan with 5W1H
 
 - **Who**: target readers, role, technical level, and prior knowledge.
 - **What**: primary information versus secondary details.
@@ -74,7 +131,7 @@ notes, issue links, PR links, design docs, team decisions, rejected alternatives
 timeline constraints, stakeholder concerns, or rough bullets. Track what is
 known, what is assumed, and what still needs confirmation.
 
-### 2. Triage documentation impact
+### 3. Triage documentation impact
 
 Prioritize tasks:
 
@@ -92,7 +149,7 @@ Skip or consolidate docs that only:
 - document temporary workarounds or behavior expected to disappear soon
 - repeat the same information in multiple places
 
-### 3. Find the target doc and TOC placement
+### 4. Find the target doc and TOC placement
 
 Before deciding whether to update an existing doc or write a new page, inspect
 the relevant TOC file. TOC placement is often the fastest way to find the right
@@ -120,11 +177,7 @@ TOC file purposes in `pingcap/docs`:
 | `TOC-tidb-cloud-premium.md` | TiDB Cloud Premium docs |
 | `TOC-tidb-cloud-releases.md` | TiDB Cloud release notes and maintenance notifications |
 
-For `docs-cn`, check the corresponding TOC files in that repository, except for
-`/tidb-cloud/` and `/ai/` content. These two areas are maintained through English
-source updates only; do not manually update their Chinese translations.
-
-Common doc targets in `pingcap/docs`:
+Common doc targets (from code change patterns):
 
 | User request mentions | Start with |
 | --- | --- |
@@ -148,7 +201,7 @@ Common doc targets in `pingcap/docs`:
 Treat these as starting points, not final answers. Confirm placement in the
 appropriate TOC and inspect nearby entries before editing.
 
-### 4. Choose the doc type
+### 5. Choose the doc type
 
 - **New feature**: what it is, why it matters, when to use it, how to use it,
   limitations, compatibility, and related resources.
@@ -159,17 +212,29 @@ appropriate TOC and inspect nearby entries before editing.
 - **Reference**: syntax, APIs, configuration, system variables, parameters,
   functions, outputs, or limits.
 - **Troubleshooting**: symptoms, likely causes, checks, fixes, and prevention.
-- **Developer/API doc**: interfaces, parameters, examples, return values, errors,
-  compatibility, and migration impact.
-- **Architecture/design doc**: components, data flow, interfaces, tradeoffs,
-  scalability, security, and observability only when they affect users.
 - **Existing-doc update**: change only affected sections and preserve the
   surrounding structure, tone, and technical scope.
 
 For any update, check whether overview pages, reference pages, examples,
 `TOC.md`, aliases, links, or release notes also need changes.
 
-### 5. Write
+### 6. Write
+
+Follow `.ai/shared/writing-style.md` for all writing conventions. Key points
+for this workflow:
+
+- Start with useful information directly. Avoid internal background unless users
+  need it.
+- Start task docs with the most common use case or shortest path to first
+  success.
+- Put conditions before instructions. Tell users where to perform each action.
+- Explain placeholders and include expected output for commands, SQL, or APIs
+  when useful.
+- Keep code examples realistic and runnable when possible.
+- Define jargon on first use.
+- Preserve commands, SQL, API names, UI strings, config names, JSON fields,
+  outputs, and technical meaning unless they are factually wrong or confirmed
+  changed.
 
 For new feature docs, or substantial feature expansions, use this shape when
 applicable:
@@ -217,21 +282,6 @@ For substantial new docs or major rewrites, draft section by section:
 4. After several small edits, ask whether anything can be removed without losing
    important information.
 
-Writing rules that matter most:
-
-- Start with useful information directly. Avoid internal background unless users
-  need it.
-- Start task docs with the most common use case or shortest path to first
-  success.
-- Put conditions before instructions. Tell users where to perform each action.
-- Explain placeholders and include expected output for commands, SQL, or APIs
-  when useful.
-- Keep code examples realistic and runnable when possible. Use language IDs and
-  comments only for non-obvious logic.
-- Define jargon on first use.
-- Preserve commands, SQL, API names, UI strings, config names, JSON fields,
-  outputs, and technical meaning unless they are factually wrong or confirmed.
-
 ## TiDB docs gotchas
 
 - Target `master` by default. Use release branches only for version-specific
@@ -253,12 +303,17 @@ Writing rules that matter most:
   or navigation.
 - Preserve code samples, commands, SQL, config names, API fields, JSON, EBNF, and
   UI strings unless the task requires changing them or they are clearly wrong.
-- Front matter `title` must match the H1. English titles use title case; headings
-  below H1 use sentence case.
-- Summaries should be reader-focused and usually 115-145 characters. Add
-  `aliases` only when replacing, renaming, or deleting an existing page.
-- For `docs-cn`, preserve source meaning, structure, links, and terminology. Use
-  repo translation guidance instead of free paraphrasing.
+
+## Coordinating with other skills
+
+| Scenario | Skill to use |
+| --- | --- |
+| Chinese translation needed after English doc is done | `create-or-update-zh-translation-pr` |
+| Code change also needs release notes | `write-review-translate-release-notes` |
+| English doc PR needs review | `review-doc-pr` |
+| Doc pages need `summary` front matter written | `writing-doc-summaries` |
+
+Flag these needs to the user instead of silently switching skills.
 
 ## Validation loop
 
@@ -286,7 +341,8 @@ Writing rules that matter most:
 When proposing a plan before editing:
 
 ```markdown
-Target: <repo/path>
+Target: <repo/branch/path>
+Source: <code PR URL or other input>
 Change type: <update existing doc | write new page>
 Doc type: <task | concept | reference | new feature | troubleshooting | other>
 Outline: <short heading list>
@@ -302,9 +358,12 @@ When reporting completed edits:
 Changed files:
 - <path>: <what changed>
 
+Source PR: <link to the code PR that motivated the change>
+
 Checks:
 - <command>: <result>
 
 Notes:
 - <key decisions, maintenance triggers, or unresolved engineering questions>
+- <whether Chinese translation or release notes are also needed>
 ```
