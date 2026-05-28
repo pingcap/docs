@@ -11,8 +11,9 @@ When the telemetry feature is enabled, TiUP collects usage information and share
 > **Note:**
 >
 > - Starting from TiUP v1.11.3, the telemetry feature in TiUP is disabled by default, which means TiUP usage information is not collected by default. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
-> - For versions from v8.1.0 to v8.5.1, the telemetry feature in TiDB and TiDB Dashboard is removed.
-> - Starting from v8.5.3, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
+> - For versions from v8.1.0 to v8.5.2, the telemetry feature in TiDB and TiDB Dashboard is removed.
+> - For versions from v8.5.3 to v8.5.6, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
+> - Starting from v8.5.7, the telemetry feature in TiDB and TiDB Dashboard is removed again.
 
 ## What is shared when telemetry is enabled?
 
