@@ -8,6 +8,37 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 5 月 26 日
+
+**常规变更**
+
+- **TiDB Cloud Starter**
+
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 上的[全文搜索](https://docs.pingcap.com/ai/vector-search-full-text-search-python/)（公测）新增两个 AWS 区域：`Tokyo (ap-northeast-1)` 和 `Oregon (us-west-2)`。该功能现已在以下 AWS 区域可用：
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 现已在以下区域提供 Top RU 公测：
+
+        - AWS: `Oregon (us-west-2)`, `Frankfurt (eu-central-1)`, `Singapore (ap-southeast-1)`
+
+      该功能以分钟级粒度展示 RU 消耗最高的 SQL 语句，帮助你快速识别资源密集型查询以降低成本。
+
+      该功能将分阶段推出。如需申请抢先体验，请联系 [support@pingcap.com](mailto:support@pingcap.com)。
+
+**API 变更**
+
+- TiDB Cloud IAM API (v1beta1) 支持以编程方式管理组织成员。
+
+    新增的 `/members` 端点可让你管理组织成员资格和角色分配。你可以使用这些端点自动执行用户生命周期管理任务，例如为新成员分配特定角色、在职责发生变化时调整权限，以及移除离开组织的成员。
+
+    更多信息，参见 [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Member)。
+
 ## 2026 年 5 月 19 日
 
 **常规变更**
