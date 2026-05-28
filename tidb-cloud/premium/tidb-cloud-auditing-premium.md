@@ -121,6 +121,12 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 
 #### 第 2 步：配置 OSS 访问权限 {#step-2-configure-oss-access}
 
+在此步骤中，你将配置 Alibaba Cloud RAM 权限，以便 TiDB Cloud 可以将审计日志写入你的 OSS bucket。如果你的 OSS bucket 和 RAM 角色位于不同的 Alibaba Cloud 账户中，请按照本节中的跨账户配置说明进行操作。
+
+##### 标准 OSS bucket 配置
+
+如果存储审计日志的 OSS bucket 和访问该 OSS bucket 的角色位于同一个云账户中，请按如下方式配置 OSS 访问权限：
+
 1. 获取你要启用审计日志的 {{{ .premium }}} 实例的 Alibaba Cloud Service Account ID。
 
     1. 在 TiDB Cloud 控制台中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
@@ -176,6 +182,51 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
     - 点击 **Grant Permissions**。
 
 5. 复制 **Role ARN**（例如：`acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`）以供后续使用。
+
+##### 跨账户 OSS bucket 配置
+
+如果存储审计日志的 OSS bucket 和访问该 OSS bucket 的角色位于不同的云账户中，则配置过程略有不同。
+
+1. 配置 RAM policy。
+
+    创建 RAM policy 时，你需要在 **Resource** 字段中添加第二个用户账户的信息。使用以下 JSON 脚本定义该 policy：
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": "oss:PutObject",
+          "Resource": "acs:oss:*:<User Account 2>:<bucket-name>/*"
+        }
+      ]
+    }
+    ```
+
+2. 配置 bucket policy。
+
+    此外，你还需要在目标 OSS bucket 上配置 bucket policy，以允许来自不同账户的 assumed role 访问该 bucket。使用以下配置：
+
+    ```json
+    {
+        "Version": "1",
+        "Statement": [
+            {
+                "Action": [
+                    "oss:PutObject"
+                ],
+                "Effect": "Allow",
+                "Principal": [
+                    "arn:sts::<User Account 1>:assumed-role/<role-name>/*"
+                ],
+                "Resource": [
+                    "acs:oss:*:<User Account 2>:<bucket-name>/*"
+                ]
+            }
+        ]
+    }
+    ```
 
 #### Step 3. 启用审计日志 {#step-3-enable-audit-logging}
 
