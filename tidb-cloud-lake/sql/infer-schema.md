@@ -47,7 +47,7 @@ INFER_SCHEMA(
 | Parameter | Description | Default | Example |
 |-----------|-------------|---------|---------|
 | `LOCATION` | Stage location: `@<stage_name>[/<path>]` | Required | `'@my_stage/data/'` |
-| `PATTERN` | File name pattern to match | All files | `'*.csv'`, `'*.parquet'` |
+| `PATTERN` | Regular expression pattern to match staged files. It matches the file path portion after `@<stage_name>[/<path>]`. See [Filtering Staged Files with PATTERN](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern). | All files | `'.*[.]csv'`, `'.*[.]parquet'` |
 | `FILE_FORMAT` | File format name for parsing | Stage's format | `'csv_format'`, `'NDJSON'` |
 | `MAX_RECORDS_PRE_FILE` | Max records to sample per file | All records | `100`, `1000` |
 | `MAX_FILE_COUNT` | Max number of files to process | All files | `5`, `10` |
@@ -64,7 +64,7 @@ COPY INTO @test_parquet FROM (SELECT number FROM numbers(10)) FILE_FORMAT = (TYP
 -- Infer schema from parquet files using pattern
 SELECT * FROM INFER_SCHEMA(
     location => '@test_parquet',
-    pattern => '*.parquet'
+    pattern => '.*[.]parquet'
 );
 ```
 
@@ -91,7 +91,7 @@ CREATE FILE FORMAT csv_format TYPE = 'CSV';
 -- Infer schema using pattern and file format
 SELECT * FROM INFER_SCHEMA(
     location => '@test_csv',
-    pattern => '*.csv',
+    pattern => '.*[.]csv',
     file_format => 'csv_format'
 );
 ```
@@ -135,7 +135,7 @@ Limit records for faster inference:
 -- Sample only first 5 records for schema inference
 SELECT * FROM INFER_SCHEMA(
     location => '@test_csv',
-    pattern => '*.csv',
+    pattern => '.*[.]csv',
     file_format => 'csv_format',
     max_records_pre_file => 5
 );
@@ -151,7 +151,7 @@ COPY INTO @test_ndjson FROM (SELECT number FROM numbers(10)) FILE_FORMAT = (TYPE
 -- Infer schema using pattern and NDJSON format
 SELECT * FROM INFER_SCHEMA(
     location => '@test_ndjson',
-    pattern => '*.ndjson',
+    pattern => '.*[.]ndjson',
     file_format => 'NDJSON'
 );
 ```
@@ -172,7 +172,7 @@ Limit records for faster inference:
 -- Sample only first 5 records for schema inference
 SELECT * FROM INFER_SCHEMA(
     location => '@test_ndjson',
-    pattern => '*.ndjson',
+    pattern => '.*[.]ndjson',
     file_format => 'NDJSON',
     max_records_pre_file => 5
 );
@@ -190,7 +190,7 @@ When files have different schemas, `infer_schema` merges them intelligently:
 
 SELECT * FROM INFER_SCHEMA(
     location => '@my_stage/',
-    pattern => '*.csv',
+    pattern => '.*[.]csv',
     file_format => 'csv_format'
 );
 ```
@@ -215,7 +215,7 @@ Use pattern matching to infer schema from multiple files:
 -- Infer schema from all CSV files in the directory
 SELECT * FROM INFER_SCHEMA(
     location => '@my_stage/',
-    pattern => '*.csv'
+    pattern => '.*[.]csv'
 );
 ```
 
@@ -225,7 +225,7 @@ Limit the number of files processed to improve performance:
 -- Process only the first 5 matching files
 SELECT * FROM INFER_SCHEMA(
     location => '@my_stage/',
-    pattern => '*.csv',
+    pattern => '.*[.]csv',
     max_file_count => 5
 );
 ```
@@ -253,7 +253,7 @@ The `infer_schema` function displays the schema but doesn't create tables. To cr
 ```sql
 -- Create table structure from file schema
 CREATE TABLE my_table AS
-SELECT * FROM @my_stage/ (pattern=>'*.parquet')
+SELECT * FROM @my_stage/ (pattern=>'.*[.]parquet')
 LIMIT 0;
 
 -- Verify the table structure

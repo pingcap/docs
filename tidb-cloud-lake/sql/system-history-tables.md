@@ -50,8 +50,8 @@ GRANT ROLE audit_team TO USER compliance_officer;
 
 ### Self-Hosted {{{ .lake }}}
 
-<details open>
-<summary>📝 **Manual configuration required** - Click to expand configuration details</summary>
+<details>
+<summary>Manual configuration required - Click to expand configuration details</summary>
 
 #### Minimal Configuration
 
@@ -116,6 +116,8 @@ table_name = "login_history"
 table_name = "access_history"
 ```
 
-> ⚠️ **Note:** When changing storage configuration, existing history tables will be dropped and recreated.
+> **Note:**
+>
+> When changing storage configuration, existing history tables will be dropped and recreated.
 
 </details>

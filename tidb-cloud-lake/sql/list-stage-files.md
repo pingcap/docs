@@ -19,6 +19,8 @@ See also:
 LIST { userStage | internalStage | externalStage } [ PATTERN = '<regex_pattern>' ]
 ```
 
+`PATTERN` filters staged files by regular expression. It matches the file path portion after `@<stage_name>[/<path>]`. See [Filtering Staged Files with PATTERN](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern).
+
 ## Examples
 
 The stage below contains a file named **books.parquet** and a folder named **2023**.
@@ -54,10 +56,10 @@ LIST @my_internal_stage/2023/;
 +-----------------+------+------------------------------------+-------------------------------+---------+
 ```
 
-To list all the files with the extension *.log in the stage, run the following command:
+To list all the files with the extension `.log` in the stage, run the following command:
 
 ```sql
-LIST @my_internal_stage PATTERN = '.log';
+LIST @my_internal_stage PATTERN = '.*[.]log';
 +----------------+------+------------------------------------+-------------------------------+---------+
 |      name      | size |                md5                 |         last_modified         | creator |
 +----------------+------+------------------------------------+-------------------------------+---------+

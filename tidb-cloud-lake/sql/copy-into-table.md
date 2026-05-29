@@ -187,7 +187,7 @@ copyOptions ::=
 
 - **FILES**: Specifies one or more file names (separated by commas) to be loaded.
 
-- **PATTERN**: A [PCRE2](https://www.pcre.org/current/doc/html/)-based regular expression pattern string that specifies file names to match. See [Example 4: Filtering Files with Pattern](#example-4-filtering-files-with-pattern).
+- **PATTERN**: A [PCRE2](https://www.pcre.org/current/doc/html/)-based regular expression pattern string that specifies file names to match. When loading from a stage, the pattern matches the part of the file path after `@<stage_name>[/<path>]`. See [Filtering Staged Files with PATTERN](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern) and [Example 4: Filtering Files with Pattern](#example-4-filtering-files-with-pattern).
 
 ## Format Type Options
 
@@ -538,21 +538,21 @@ COPY INTO mytable
     );
 ```
 
-When specifying the pattern for a file path including multiple folders, consider your matching criteria:
+When specifying the pattern for staged files in paths with multiple folders, remember that the pattern matches only the path portion after `@<stage_name>[/<path>]`. For example, with `FROM @sales_stage/raw/`, the file `@sales_stage/raw/year=2025/month=01/sales_20250101.parquet` is matched as `year=2025/month=01/sales_20250101.parquet`.
 
-- If you want to match a specific subpath following a prefix, include the prefix in the pattern (e.g., 'multi_page/') and then specify the pattern you want to match within that subpath (e.g., '\_page_1').
+- If you want to match a specific subpath following a prefix, include the prefix in the pattern (e.g., 'year=2025/month=01/') and then specify the pattern you want to match within that subpath (e.g., 'sales_').
 
-```sql
--- File path: parquet/multi_page/multi_page_1.parquet
-COPY INTO ... FROM @data/parquet/ PATTERN = 'multi_page/.*_page_1.*') ...
-```
+    ```sql
+    -- File path: raw/year=2025/month=01/sales_20250101.parquet
+    COPY INTO ... FROM @sales_stage/raw/ PATTERN = 'year=2025/month=01/.*sales_.*[.]parquet') ...
+    ```
 
-- If you want to match any part of the file path that contains the desired pattern, use '.*' before and after the pattern (e.g., '.*multi_page_1.\*') to match any occurrences of 'multi_page_1' within the path.
+- If you want to match any part of the file path that contains the desired pattern, use '.*' before and after the pattern (e.g., '.*sales_20250101.*') to match any occurrences of 'sales_20250101' within the path.
 
-```sql
--- File path: parquet/multi_page/multi_page_1.parquet
-COPY INTO ... FROM @data/parquet/ PATTERN ='.*multi_page_1.*') ...
-```
+    ```sql
+    -- File path: raw/year=2025/month=01/sales_20250101.parquet
+    COPY INTO ... FROM @sales_stage/raw/ PATTERN = '.*sales_20250101.*') ...
+    ```
 
 ### Example 5: Loading to Table with Extra Columns
 
