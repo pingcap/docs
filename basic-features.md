@@ -22,6 +22,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data types, functions, and operators
 
+<StickyHeaderTable>
+
 | Data types, functions, and operators | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y |
@@ -46,7 +48,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y |
 | [User-level lock](/functions-and-operators/locking-functions.md) | Y | Y | Y | Y | Y | Y | N |
 
+</StickyHeaderTable>
+
 ## Indexing and constraints
+
+<StickyHeaderTable>
 
 | Indexing and constraints | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -69,7 +75,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Global indexes](/global-indexes.md) | Y |  N | N  | N | N | N | N |
 | [Vector indexes](/ai/reference/vector-search-index.md) | E | N | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## SQL statements
+
+<StickyHeaderTable>
 
 | SQL statements [^3] | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -94,7 +104,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | E | E | E | E | E | E | E |
 | [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | Y | Y | Y | Y | E | N | N |
 
+</StickyHeaderTable>
+
 ## Advanced SQL features
+
+<StickyHeaderTable>
 
 | Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -119,7 +133,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E |
 | [Runtime Filter](/runtime-filter.md) | Y | Y | Y | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Data definition language (DDL)
+
+<StickyHeaderTable>
 
 | Data definition language (DDL) | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -142,7 +160,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [TiDB Accelerated Table Creation](/accelerated-table-creation.md) | Y | E | N | N | N | N | N |
 | [Configure BDR role to replicate DDL statements in BDR mode](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) | Y | E | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Transactions
+
+<StickyHeaderTable>
 
 | Transactions | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -156,7 +178,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | Y | N | N | N | N | N |
 | [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Partitioning
+
+<StickyHeaderTable>
 
 | Partitioning | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -176,7 +202,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Partition an existing table](/partitioned-table.md#partition-an-existing-table) | Y | Y | Y | N | N | N | N |
 | [Global indexes](/global-indexes.md) | Y | N | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Statistics
+
+<StickyHeaderTable>
 
 | Statistics | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|---|---|---|---|---|---|---|
@@ -193,7 +223,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | Y | E | N | N | N |
 | [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | Y | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Security
+
+<StickyHeaderTable>
 
 | Security | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -212,7 +246,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y | Y |
 | [Redacted Log Files](/log-redaction.md) | Y | Y | Y | Y | Y | Y | Y |
 
+</StickyHeaderTable>
+
 ## Data import and export
+
+<StickyHeaderTable>
 
 | Data import and export | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|---|---|---|---|---|---|---|
@@ -229,7 +267,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md) | Y | Y | Y | Y | N | N | N |
 | [DM](/dm/dm-overview.md) supports migrating MySQL 8.0 | Y | Y | E | E | E | E | N |
 
+</StickyHeaderTable>
+
 ## Management, observability, and tools
+
+<StickyHeaderTable>
 
 | Management, observability, and tools | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -271,6 +313,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Global Sort](/tidb-global-sort.md) | Y | Y | E | N | N | N | N |
 | [TiProxy](/tiproxy/tiproxy-overview.md) | Y | Y | N | N | N | N | N |
 | [Schema cache](/schema-cache.md) | Y | N | N | N | N | N | N |
+
+</StickyHeaderTable>
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
