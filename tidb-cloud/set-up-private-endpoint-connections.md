@@ -79,13 +79,17 @@ Your service endpoint region is selected by default. Have a quick check and clic
 
 ### Step 3. Create an AWS interface endpoint
 
-TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes.
+TiDB Cloud begins creating an endpoint service, and it takes 3 to 4 minutes until you see **Endpoint Service Ready in**.
 
-When the endpoint service is created, take a note of your endpoint service name from the command in the lower area of the console.
+Once the endpoint service is created:
 
-```bash
-aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
-```
+- Take a note of your endpoint service name from the command in the console.
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
+    ```
+
+- Take a note of the supported availability zones (AZs) that follow **Endpoint Service Ready in**. You will need the information in the follow-up step.
 
 Then create an AWS interface endpoint either using the AWS Management Console or using the AWS CLI.
 
@@ -109,7 +113,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     > **Tip:**
     >
-    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > Select the AZs you have taken note from the TiDB Cloud console. TiDB Cloud only supports creating VPC Interface Endpoints in these AZs. Make sure that your service spans across the AZs in which the endpoint service is created. For more details, see [Troubleshooting](#troubleshooting).
 
 8. Select your security group properly in the **Security groups** area.
 
@@ -118,6 +122,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
     >  Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
 
 9. Click **Create endpoint**.
+10. Go back to the **Endpoints** page, select your newly created endpoint, and take a note of the VPC endpoint ID.
 
 </div>
 <div label="Use AWS CLI">
@@ -130,9 +135,6 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 > **Tip:**
 >
 > - Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
->
-> - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
->
 > - You cannot copy the command until TiDB Cloud finishes creating an endpoint service in the background.
 
 </div>
@@ -166,8 +168,10 @@ To enable private DNS in your AWS Management Console:
 To enable private DNS using your AWS CLI, copy the command and run it in your AWS CLI.
 
 ```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id <your_vpc_endpoint_id> --private-dns-enabled
+aws ec2 modify-vpc-endpoint --region <your_region> --vpc-endpoint-id <your_vpc_endpoint_id> --private-dns-enabled
 ```
+
+`<your_region>` is the region you have selected in [Step 2. Check the service endpoint region](#step-2-check-the-service-endpoint-region).
 
 </div>
 </SimpleTab>
@@ -208,6 +212,16 @@ The possible statuses of a private endpoint service are explained as follows:
 - **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
 
 ## Troubleshooting
+
+### I cannot create interface endpoint. An error is reported indicating that the VPC endpoint service does not support the AZ of the subnet
+
+Make sure that your service spans across the availability zones (AZs) in which the endpoint service is created. To check supported subnet IDs, use the following command and run it in your AWS CLI:
+
+```bash
+aws ec2 describe-subnets --filter Name=availability-zone-id,Values=<endpoint_service_az_1>,<endpoint_service_az_2>,<endpoint_service_az_3> --output text --query 'Subnets[].SubnetId' --subnet-ids <your_application_subnet_ids>
+```
+
+Remove the unsupported subnet IDs from the private endpoint creation page and retry.
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
