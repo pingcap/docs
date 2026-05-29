@@ -7,7 +7,7 @@ summary: The Amazon S3 data integration enables you to import files from S3 buck
 
 This page describes how to create an Amazon S3 integration task that imports files from an S3 bucket into {{{ .lake }}}. CSV, Parquet, and NDJSON file formats are supported, and the task can be configured for one-time import or continuous ingestion.
 
-If you need to create reusable AWS credentials first, see [AWS - Credentials](/tidb-cloud-lake/guides/aws-credentials.md).
+If you need to create reusable AWS credentials first, see [Amazon S3 - Credentials](/tidb-cloud-lake/guides/aws-credentials.md).
 
 ## Supported File Formats
 
@@ -19,7 +19,7 @@ If you need to create reusable AWS credentials first, see [AWS - Credentials](/t
 
 ## Prerequisites
 
-- An **AWS - Credentials** data source has already been created
+- An **Amazon S3 - Credentials** data source has already been created
 - The AWS credentials have read access to the target S3 bucket
 - If you plan to enable **Clean Up Original Files**, the credentials also need write and delete permissions
 
@@ -33,7 +33,7 @@ If you need to create reusable AWS credentials first, see [AWS - Credentials](/t
 
     | Field              | Required | Description                                                                                      |
     |--------------------|----------|--------------------------------------------------------------------------------------------------|
-    | **Data Source**    | Yes      | Select an existing **AWS - Credentials** data source from the dropdown                           |
+    | **Data Source**    | Yes      | Select an existing **Amazon S3 - Credentials** data source from the dropdown                     |
     | **Name**          | Yes      | A name for this integration task                                                                 |
     | **File Path**     | Yes      | S3 URI with optional wildcard pattern (e.g., `s3://mybucket/data/2025-*.csv`)                    |
     | **File Type**     | Auto     | Auto-detected from file extension. Supported: CSV, Parquet, NDJSON                              |
