@@ -215,7 +215,7 @@ def replace_heading_func(diff_level=0):
 
 
 # remove <StickyHeaderTable> / </StickyHeaderTable> tags for PDF output
-sticky_header_table_pattern = re.compile(r'^\s*</?StickyHeaderTable>\s*$')
+sticky_header_table_pattern = re.compile(r'^\s*</?StickyHeaderTable\s*/?>\s*$')
 
 def remove_sticky_header_table(text):
     lines = text.split('\n')
@@ -233,6 +233,7 @@ def remove_sticky_header_table(text):
             result.append(lines[i])
             i += 1
     return '\n'.join(result)
+
 
 # remove copyable snippet code
 def remove_copyable(match):
