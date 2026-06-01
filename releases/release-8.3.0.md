@@ -200,7 +200,7 @@ TiDBバージョン：8.3.0
 | -------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
 | PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 修正済み     | PD構成項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
-| ティクヴ           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 修正済み     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
+| TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 修正済み     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
 | TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 修正済み     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
 | BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`ままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
 
@@ -260,7 +260,7 @@ TiDBバージョン：8.3.0
     -   PDマイクロサービスに`--name`起動パラメータを追加して、デプロイ中にサービス名をより正確に表示します [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
     -   領域数に基づいて`PatrolRegionScanLimit`を動的に調整してリージョンスキャン時間を短縮する機能をサポート [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
 
--   ティクヴ
+-   TiKV
 
     -   `async-io`が有効になっている場合、 Raftログの書き込みバッチ処理ポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
     -   リージョン部分購読をより適切にサポートするために、TiCDCデリゲートとダウンストリームモジュールを再設計します [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
@@ -359,7 +359,7 @@ TiDBバージョン：8.3.0
     -   分散storageおよびコンピューティングアーキテクチャでTiFlash書き込みノードの再起動に失敗することがある問題を修正 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散storageおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正します [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
 
--   ティクヴ
+-   TiKV
 
     -   古いリージョンをクリーンアップすると、誤って有効なデータが削除される可能性がある問題を修正 [#17258](https://github.com/tikv/tikv/issues/17258) @[hbisheng](https://github.com/hbisheng)
     -   Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`が正しく表示されない問題を修正します [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)

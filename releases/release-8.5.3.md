@@ -35,7 +35,7 @@ TiDBバージョン：8.5.3
     -   `tidb_replica_read`を`closest-adaptive`に設定した場合のパフォーマンスを改善します [#61745](https://github.com/pingcap/tidb/issues/61745) @[you06](https://github.com/you06)
     -   大規模クラスタにおける監視メトリクスデータの量を減らすことで運用コストを削減する [#59990](https://github.com/pingcap/tidb/issues/59990) @[zimulala](https://github.com/zimulala)
 
--   ティクヴ
+-   TiKV
 
     -   フォアグラウンド書き込みをブロックせずにSSTファイルを取り込むことをサポートし、レイテンシーの影響を軽減します [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
     -   フローコントローラによって引き起こされるパフォーマンスのジッターを軽減します [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
@@ -100,7 +100,7 @@ TiDBバージョン：8.5.3
     -   クエリが終了したときに悲観的ロックが残る可能性がある問題を修正 [#61454](https://github.com/pingcap/tidb/issues/61454) @[zyguan](https://github.com/zyguan)
     -   TiDBがPDから単一のリクエストでリージョンを多数ロードしたために大規模なクエリを実行する際にエラーが発生する問題を修正しました [#1704](https://github.com/tikv/client-go/issues/1704) @[you06](https://github.com/you06)
 
--   ティクヴ
+-   TiKV
 
     -   TiKV が正常シャットダウン中に進行中の手動圧縮タスクを終了できない問題を修正 [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
     -   クラスターのアップグレード後にデフォルトのリージョンサイズが予期せず変更される問題を修正 [#18503](https://github.com/tikv/tikv/issues/18503) @[LykxSassinator](https://github.com/LykxSassinator)

@@ -49,7 +49,7 @@ TiDBバージョン：5.1.5
     -   `lock tables`フラグが有効になっていない場合に、 `unlock tables`と`enable-table-lock`に対する警告を追加する [#28967](https://github.com/pingcap/tidb/issues/28967)
     -   範囲パーティションで複数の`MAXVALUE`パーティションが許可される問題を修正 [#36329](https://github.com/pingcap/tidb/issues/36329)
 
--   ティクヴ
+-   TiKV
 
     -   `DATETIME`値に小数点が含まれる場合と`Z`値が含まれる場合に発生する時間解析エラーの問題を修正します。 [#12739](https://github.com/tikv/tikv/issues/12739)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正 [#12109](https://github.com/tikv/tikv/issues/12109)

@@ -194,7 +194,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   一部の高負荷書き込み状況で発生する可能性のある`Region is Unavailable`問題を修正します。
     -   キャッシュされた統計情報が最新の場合は、CPU使用率が高くなるのを避けるため、 `mysql.stats_histograms`テーブルを頻繁に読み込まないようにしてください [#24317](https://github.com/pingcap/tidb/pull/24317)
 
--   ティクヴ
+-   TiKV
 
     -   `zstd`を使用してリージョンスナップショットを圧縮し、負荷の高いスケジューリングやスケーリングの場合にノード間の大きなスペース差を防ぎます [#10005](https://github.com/tikv/tikv/pull/10005)
 
@@ -288,7 +288,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   `CONCAT`関数が照合順序を正しく処理しない問題を修正しました [#24296](https://github.com/pingcap/tidb/issues/24296)
     -   `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正しました [#24156](https://github.com/pingcap/tidb/pull/24156)
 
--   ティクヴ
+-   TiKV
 
     -   コプロセッサが`IN`式内の符号付きまたは符号なし整数型を正しく処理できない問題を修正します [#9821](https://github.com/tikv/tikv/issues/9821)
     -   SSTファイルをバッチ処理で取り込んだ後に、多数のリージョンが空になる問題を修正しました [#964](https://github.com/pingcap/br/issues/964)

@@ -187,7 +187,7 @@ TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエ
 
 ### TiDBクラスター {#tidb-cluster}
 
-TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[ティクヴ](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
+TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[TiKV](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
 
 ### TiDBノード {#tidb-node}
 
