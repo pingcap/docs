@@ -756,7 +756,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 3.  ターゲット接続プロファイルを入力してください。
 
-    -   **ユーザー名**: <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB クラウド<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>TiDB Cloud<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
+    -   **ユーザー名**: <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>TiDB Cloud<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のユーザー名を入力します。
     -   **パスワード**： TiDB Cloudのユーザー名のパスワードを入力してください。
 
 4.  入力した情報を検証するには、 **「接続を検証」をクリックし、「次へ」を**クリックしてください。

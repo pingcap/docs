@@ -582,7 +582,7 @@ TiDB Cloudが一般提供を開始しました。以下の[サインアップ](h
 
 -   サポート[PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 。
 
-    Prometheus と Grafana の統合により、 [プロメテウス](https://prometheus.io/)サービスを設定してTiDB Cloudエンドポイントから主要なメトリックを読み取り、 [グラファナ](https://grafana.com/)使用してメトリックを表示できます。
+    Prometheus と Grafana の統合により、 [プロメテウス](https://prometheus.io/)サービスを設定してTiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)使用してメトリックを表示できます。
 
 -   新しいクラスターの選択したリージョンに基づいてデフォルトのバックアップ時間を割り当てることをサポートします。
 

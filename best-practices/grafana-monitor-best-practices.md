@@ -1,12 +1,12 @@
 ---
-title: Best Practices for Monitoring TiDB Using Grafana
-summary: Grafanaを用いたTiDB監視のベストプラクティス。TiUPを使用してTiDBクラスターをデプロイ、監視用にGrafanaとPrometheusを追加します。メトリクスを使用してクラスターの状態を分析し、問題を診断します。PrometheusはTiDBコンポーネントからメトリクスを収集し、Grafanaはそれらを表示します。Grafanaを効率的に使用するためのヒントとしては、クエリ式の変更、Y軸スケールの切り替え、クエリ結果のAPI使用などが挙げられます。このプラットフォームは、TiDBクラスターの状態の分析と診断に非常に役立ちます。
+title: Best Practices for Monitoring TiDB Using グラファナ
+summary: グラファナを用いたTiDB監視のベストプラクティス。TiUPを使用してTiDBクラスターをデプロイ、監視用にグラファナとPrometheusを追加します。メトリクスを使用してクラスターの状態を分析し、問題を診断します。PrometheusはTiDBコンポーネントからメトリクスを収集し、グラファナはそれらを表示します。グラファナを効率的に使用するためのヒントとしては、クエリ式の変更、Y軸スケールの切り替え、クエリ結果のAPI使用などが挙げられます。このプラットフォームは、TiDBクラスターの状態の分析と診断に非常に役立ちます。
 aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/docs/dev/reference/best-practices/grafana-monitor/','/ja/tidb/stable/grafana-monitor-best-practices/','/ja/tidb/dev/grafana-monitor-best-practices/']
 ---
 
-# Grafana を使用した TiDB 監視のベストプラクティス {#best-practices-for-monitoring-tidb-using-grafana}
+# グラファナ を使用した TiDB 監視のベストプラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-トポロジ構成にGrafanaとPrometheus [TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
+トポロジ構成にグラファナとPrometheus [TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [グラファナ + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、グラファナを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
@@ -17,7 +17,7 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 TiDB 2.1.3以降のバージョンでは、TiDBモニタリングはプル方式をサポートしています。これは以下の利点を持つ優れた調整です。
 
 -   Prometheus を移行する必要がある場合、TiDB クラスター全体を再起動する必要はありません。調整前に Prometheus を移行するには、ターゲットアドレスを更新する必要があるため、クラスター全体を再起動する必要があります。
--   監視ポイントが単一になるのを防ぐために、Grafana + Prometheus 監視プラットフォーム (高可用性ではない) の 2 つの個別のセットを展開できます。
+-   監視ポイントが単一になるのを防ぐために、グラファナ + Prometheus 監視プラットフォーム (高可用性ではない) の 2 つの個別のセットを展開できます。
 -   単一障害点となる可能性のある Pushgateway が削除されます。
 
 ## 監視データのソースと表示 {#source-and-display-of-monitoring-data}
@@ -45,7 +45,7 @@ curl http://__tidb_ip__:10080/metrics |grep tidb_executor_statement_total
     tidb_executor_statement_total{type="Show"} 500531
     tidb_executor_statement_total{type="Use"} 466016
 
-上記のデータはPrometheusに保存され、Grafanaに表示されます。パネルを右クリックし、次の図に示すように**「編集」**ボタンをクリックするか、直接<kbd>E</kbd>キーを押します。
+上記のデータはPrometheusに保存され、グラファナに表示されます。パネルを右クリックし、次の図に示すように**「編集」**ボタンをクリックするか、直接<kbd>E</kbd>キーを押します。
 
 ![The Edit entry for the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
 
@@ -63,9 +63,9 @@ curl http://__tidb_ip__:10080/metrics |grep tidb_executor_statement_total
 
 Prometheusは多くのクエリ式と関数をサポートしています。詳細については[プロメテウス公式サイト](https://prometheus.io/docs/prometheus/latest/querying)を参照してください。
 
-## Grafanaのヒント {#grafana-tips}
+## グラファナのヒント {#grafana-tips}
 
-このセクションでは、Grafana を使用して TiDB のメトリックを効率的に監視および分析するための 7 つのヒントを紹介します。
+このセクションでは、グラファナ を使用して TiDB のメトリックを効率的に監視および分析するための 7 つのヒントを紹介します。
 
 ### ヒント1: すべてのディメンションをチェックしてクエリ式を編集する {#tip-1-check-all-dimensions-and-edit-the-query-expression}
 
@@ -143,7 +143,7 @@ PDダッシュボードには、現在のリーダーの指標のみが表示さ
 
 ### ヒント7: PrometheusのAPIを使用してクエリ式の結果を取得する {#tip-7-use-the-api-of-prometheus-to-obtain-the-result-of-query-expressions}
 
-GrafanaはPrometheusのAPIを介してデータを取得します。このAPIを使用して情報を取得することもできます。さらに、以下の用途もあります。
+グラファナはPrometheusのAPIを介してデータを取得します。このAPIを使用して情報を取得することもできます。さらに、以下の用途もあります。
 
 -   クラスターのサイズやステータスなどの情報を自動的に取得します。
 -   1 日あたりの QPS の合計量、1 日あたりの QPS のピーク値、1 日あたりの応答時間のカウントなど、レポートの情報を提供するために式に小さな変更を加えます。
@@ -195,4 +195,4 @@ curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/que
 
 ## まとめ {#summary}
 
-Grafana + Prometheus 監視プラットフォームは非常に強力なツールです。これを有効活用することで効率が向上し、TiDB クラスターの状態分析にかかる時間を大幅に節約できます。さらに重要なのは、問題の診断にも役立つことです。このツールは、特に大量のデータを扱う場合、TiDB クラスターの運用と保守に非常に役立ちます。
+グラファナ + Prometheus 監視プラットフォームは非常に強力なツールです。これを有効活用することで効率が向上し、TiDB クラスターの状態分析にかかる時間を大幅に節約できます。さらに重要なのは、問題の診断にも役立つことです。このツールは、特に大量のデータを扱う場合、TiDB クラスターの運用と保守に非常に役立ちます。
