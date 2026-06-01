@@ -50,7 +50,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 データ更新に関するベストプラクティスを以下に示します。
 
 -   `WHERE`ステートメントには、必ず`UPDATE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
--   大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
+-   大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
 
 ### <code>UPDATE</code>例 {#code-update-code-example}
 
