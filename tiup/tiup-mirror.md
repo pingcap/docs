@@ -111,7 +111,7 @@ export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
-`TIUP_MIRRORS`設定ではミラー構成を永続的に変更できます（例： `tiup mirror set` ）。詳細については[ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)参照してください。
+`TIUP_MIRRORS`設定ではミラー構成を永続的に変更できます（例： `tiup mirror set` ）。詳細については[tiup issue #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
 
 ### プライベートリポジトリを更新する {#update-the-private-repository}
 

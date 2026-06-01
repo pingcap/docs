@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 ## 前提条件 {#prerequisites}
 
--   [tidbcloud.com](https://tidbcloud.com/)にアクセスしてTiDB Cloud Starterインスタンスを無料で作成するか、 [ティアップ遊び場](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)を使用してローカル テスト用の TiDB 自己管理クラスターをデプロイします。
+-   [tidbcloud.com](https://tidbcloud.com/)にアクセスしてTiDB Cloud Starterインスタンスを無料で作成するか、 [TiUP Playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)を使用してローカル テスト用の TiDB 自己管理クラスターをデプロイします。
 
 ## インストール {#installation}
 
