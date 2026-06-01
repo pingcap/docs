@@ -216,7 +216,7 @@ Diagram(
 )
 ```
 
-テーブル スキャンおよびインデックス スキャン中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
+テーブル スキャンおよびインデックススキャン中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -284,7 +284,7 @@ tidb_session_execute_duration_seconds{type="general"} =
 req_per_copr = rate(tidb_distsql_handle_query_duration_seconds_count) / rate(tidb_distsql_scan_keys_partial_num_count)
 ```
 
-インデックス ルックアップは、パイプラインで処理されるインデックス スキャンとテーブル スキャンを組み合わせたものです。
+インデックス ルックアップは、パイプラインで処理されるインデックススキャンとテーブル スキャンを組み合わせたものです。
 
 ## クエリを書く {#write-queries}
 

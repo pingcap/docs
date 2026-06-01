@@ -37,7 +37,7 @@ summary: スケジュール構成フラグは、コマンド ライン フラグ
 
 ## <code>--data-dir</code> {#code-data-dir-code}
 
--   スケジューリング ノード上のデータ ディレクトリへのパス。
+-   スケジューリング ノード上のデータディレクトリへのパス。
 -   デフォルト: `"default.${name}"`
 
 ## <code>--key</code> {#code-key-code}

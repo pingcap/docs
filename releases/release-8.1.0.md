@@ -148,7 +148,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   取り込みモード[＃52596](https://github.com/pingcap/tidb/issues/52596) @ [lance6716](https://github.com/lance6716)で複数のインデックスを同時に追加できるようになりました
     -   システム変数`tidb_service_scope`さまざまな値で構成することをサポートし、分散実行フレームワーク（DXF） [＃52441](https://github.com/pingcap/tidb/issues/52441) @ [ywqzzy](https://github.com/ywqzzy)の利用率を高めます。
     -   常に`false`である DNF 項目の処理を強化し、そのようなフィルタ条件を直接無視することで、不要なテーブル全体のスキャンを回避します[＃40997](https://github.com/pingcap/tidb/issues/40997) @ [Rustin170506](https://github.com/Rustin170506)
-    -   オプティマイザがクエリ[＃52869](https://github.com/pingcap/tidb/issues/52869) @ [time-and-fate](https://github.com/time-and-fate)に対して単一インデックス スキャン方式 (フル テーブル スキャン以外) を選択できる場合、オプティマイザがクエリに対してインデックス マージを自動的に選択しないという制限を削除するために、オプティマイザ修正コントロールの使用をサポートします。
+    -   オプティマイザがクエリ[＃52869](https://github.com/pingcap/tidb/issues/52869) @ [time-and-fate](https://github.com/time-and-fate)に対して単一インデックススキャン方式 (フル テーブル スキャン以外) を選択できる場合、オプティマイザがクエリに対してインデックス マージを自動的に選択しないという制限を削除するために、オプティマイザ修正コントロールの使用をサポートします。
     -   コプロセッサー演算子[＃28937](https://github.com/pingcap/tidb/issues/28937) @ [cfzjywxk](https://github.com/cfzjywxk)の列`execution info`に`total_kv_read_wall_time`メトリックを追加します。
     -   リソースコントロールダッシュボードに`RU (max)`メトリックを追加する[＃49318](https://github.com/pingcap/tidb/issues/49318) @ [nolouch](https://github.com/nolouch)
     -   リソースロック（RLock）が[＃51883](https://github.com/pingcap/tidb/issues/51883)内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します[ヤンケオ](https://github.com/YangKeao)

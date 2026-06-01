@@ -101,7 +101,7 @@ block-cache-size = "20GB"
 
 ![point select](/media/sysbench_v3_point_select.png)
 
-上記の統計によると、TiDB 2.1 の`Point Select`クエリ パフォーマンスは TiDB 2.0 よりも**50%**向上しました。
+上記の統計によると、TiDB 2.1 の`Point Select`クエリパフォーマンスは TiDB 2.0 よりも**50%**向上しました。
 
 ### <code>Update Non-Index</code> {#code-update-non-index-code-test}
 

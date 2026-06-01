@@ -55,7 +55,7 @@ tiup dm display <cluster-name> [flags]
     -   `Ports` : サービスで使用されるポート番号。
     -   `OS/Arch` : ノードのオペレーティング システムとマシンアーキテクチャ。
     -   `Status` : ノード上のサービスの現在のステータス。
-    -   `Data Dir` : サービスのデータ ディレクトリ。2 `-`データ ディレクトリが存在しないことを意味します。
+    -   `Data Dir` : サービスのデータディレクトリ。2 `-`データディレクトリが存在しないことを意味します。
     -   `Deploy Dir` : サービスのデプロイメント ディレクトリ。
 
 [&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

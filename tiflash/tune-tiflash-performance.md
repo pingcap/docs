@@ -296,7 +296,7 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 
 ### 実行同時実行性を高める {#set-a-greater-execution-concurrency}
 
-実行の同時実行性が高まると、 TiFlash はシステムの CPU リソースをより多く占有できるようになり、クエリ パフォーマンスが向上します。
+実行の同時実行性が高まると、 TiFlash はシステムの CPU リソースをより多く占有できるようになり、クエリパフォーマンスが向上します。
 
 変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) 、 TiFlashがリクエストを実行する際の最大同時実行数を設定するために使用されます。単位はスレッドです。
 

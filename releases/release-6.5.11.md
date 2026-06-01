@@ -99,7 +99,7 @@ TiDBバージョン: 6.5.11
     -   TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラー[＃9243](https://github.com/pingcap/tiflash/issues/9243) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)が発生する可能性がある問題を修正しました。
     -   外部結合[＃9190](https://github.com/pingcap/tiflash/issues/9190) @ [windtalker](https://github.com/windtalker)を含むクエリの実行中にエラーが発生した場合にTiFlashがクラッシュする可能性がある問題を修正しました。
     -   データ型を`DECIMAL`に変換すると、一部のコーナーケースで誤ったクエリ結果が発生する可能性がある問題を修正しました[＃53892](https://github.com/pingcap/tidb/issues/53892) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   クラスタ内で長期間にわたって頻繁に`EXCHANGE PARTITION`と`DROP TABLE`操作を行うと、 TiFlashテーブル メタデータのレプリケーションが遅くなり、クエリ パフォーマンスが低下する可能性がある問題を修正しました[＃9227](https://github.com/pingcap/tiflash/issues/9227) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   クラスタ内で長期間にわたって頻繁に`EXCHANGE PARTITION`と`DROP TABLE`操作を行うと、 TiFlashテーブル メタデータのレプリケーションが遅くなり、クエリパフォーマンスが低下する可能性がある問題を修正しました[＃9227](https://github.com/pingcap/tiflash/issues/9227) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 

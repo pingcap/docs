@@ -402,9 +402,9 @@ sudo systemctl enable ntpd.service
     >
     > `[always] madvise never`出力された場合、THP が有効になっています。無効にする必要があります。
 
-2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/O Scheduler を確認します。
+2.  次のコマンドを実行して、データディレクトリが配置されているディスクのI/O Scheduler を確認します。
 
-    データ ディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
+    データディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -417,7 +417,7 @@ sudo systemctl enable ntpd.service
     >
     > `noop [deadline] cfq`出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
 
-    データ ディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
+    データディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/nvme[01]*/queue/scheduler
@@ -441,7 +441,7 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > -   複数のディスクにデータ ディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
+    > -   複数のディスクにデータディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
     > -   デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
 
 4.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
@@ -618,7 +618,7 @@ sudo systemctl enable ntpd.service
 
         always madvise [never]
 
-7.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/Oスケジューラを確認します。
+7.  次のコマンドを実行して、データディレクトリが配置されているディスクのI/Oスケジューラを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler

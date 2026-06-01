@@ -87,7 +87,7 @@ TiDB バージョン: 8.0.0
 
 -   オプティマイザーが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
 
-    TiDB v6.6.0 では[複数値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリ パフォーマンスが向上しました。v8.0.0 では、オプティマイザがマルチ値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
+    TiDB v6.6.0 では[複数値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリパフォーマンスが向上しました。v8.0.0 では、オプティマイザがマルチ値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
 
     -   オプティマイザは、複数値インデックスに関する統計情報を収集し、その統計情報に基づいて実行プランを決定します。SQL文で複数の複数値インデックスを選択できる場合、オプティマイザはコストが最も低いインデックスを特定できます。
     -   `OR`を使用して複数の`member of`条件を接続する場合、オプティマイザは各 DNF 項目 ( `member of`条件) に対して有効なインデックス部分パスを照合し、これらのパスを Union を使用して結合して`Index Merge`を形成できます。これにより、条件フィルタリングとデータ取得の効率が向上します。

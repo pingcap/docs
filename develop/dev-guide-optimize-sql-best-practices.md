@@ -1,16 +1,16 @@
 ---
 title: Performance Tuning Best Practices
-summary: TiDB パフォーマンスをチューニングするためのベスト プラクティスを紹介します。
+summary: TiDB パフォーマンスをチューニングするためのベストプラクティスを紹介します。
 aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-best-practices/','/ja/tidbcloud/dev-guide-optimize-sql-best-practices/']
 ---
 
 # 性能チューニングのベストプラクティス {#performance-tuning-best-practices}
 
-このドキュメントでは、TiDB データベースの使用に関するベスト プラクティスをいくつか紹介します。
+このドキュメントでは、TiDB データベースの使用に関するベストプラクティスをいくつか紹介します。
 
 ## DMLのベストプラクティス {#dml-best-practices}
 
-このセクションでは、TiDB で DML を使用する場合のベスト プラクティスについて説明します。
+このセクションでは、TiDB で DML を使用する場合のベストプラクティスについて説明します。
 
 ### 複数行のステートメントを使用する {#use-multi-row-statements}
 
@@ -119,7 +119,7 @@ DELETE FROM t;
 
 ## DDLのベストプラクティス {#ddl-best-practices}
 
-このセクションでは、TiDB の DDL を使用する際のベスト プラクティスについて説明します。
+このセクションでは、TiDB の DDL を使用する際のベストプラクティスについて説明します。
 
 ### 主キーのベストプラクティス {#primary-key-best-practices}
 
@@ -154,9 +154,9 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 トランザクションの競合を見つけて解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
 
-## TiDB を使用したJavaアプリケーション開発のベスト プラクティス {#best-practices-for-developing-java-applications-with-tidb}
+## TiDB を使用したJavaアプリケーション開発のベストプラクティス {#best-practices-for-developing-java-applications-with-tidb}
 
-[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)参照。
+[TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)参照。
 
 ### 参照 {#see-also}
 

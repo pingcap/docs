@@ -53,7 +53,7 @@ TiDBバージョン：8.5.5
 
 -   テーブルレベルのデータアフィニティをサポートしてクエリのパフォーマンスを向上させる（実験的） [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024)
 
-    バージョン 8.5.5 以降では、テーブルの作成または変更時に`AFFINITY`テーブル オプションを`table`または`partition`として構成できます。このオプションを有効にすると、PD は同じテーブルまたは同じパーティションに属するリージョンを単一のアフィニティ グループにグループ化します。スケジューリング中、PD はこれらのリージョンのリーダー レプリカと投票者レプリカを少数の TiKV ノードの同じサブセットに配置することを優先します。このシナリオでは、クエリで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用することで、オプティマイザにインデックス ルックアップを TiKV にプッシュダウンするように明示的に指示でき、ノード間分散クエリによって発生するレイテンシーを削減し、クエリ パフォーマンスを向上させることができます。
+    バージョン 8.5.5 以降では、テーブルの作成または変更時に`AFFINITY`テーブル オプションを`table`または`partition`として構成できます。このオプションを有効にすると、PD は同じテーブルまたは同じパーティションに属するリージョンを単一のアフィニティ グループにグループ化します。スケジューリング中、PD はこれらのリージョンのリーダー レプリカと投票者レプリカを少数の TiKV ノードの同じサブセットに配置することを優先します。このシナリオでは、クエリで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用することで、オプティマイザにインデックス ルックアップを TiKV にプッシュダウンするように明示的に指示でき、ノード間分散クエリによって発生するレイテンシーを削減し、クエリパフォーマンスを向上させることができます。
 
     この機能は現在実験的であり、デフォルトでは無効になっています。有効にするには、PD 設定項目[`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855)を`0`より大きい値に設定してください。この設定項目は、PD が同時に実行できるアフィニティ スケジューリング タスクの最大数を制御します。
 

@@ -188,7 +188,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスタサイズ構成エクスペリエンスを向上させます。
 
-    TiDB Cloud Dedicatedクラスターの [**クラスタを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**「クラスタサイズ」**セクションのレイアウトを調整します。さらに、 **「クラスタサイズ」**セクションには、適切なクラスター サイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
+    TiDB Cloud Dedicatedクラスターの [**クラスタを作成する**](/tidb-cloud/create-tidb-cluster.md)ページと「クラスター [**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページの**「クラスタサイズ」**セクションのレイアウトを調整します。さらに、 **「クラスタサイズ」**セクションには、適切なクラスターサイズの選択に役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
 
 ## 2024年7月23日 {#july-23-2024}
 

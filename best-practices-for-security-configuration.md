@@ -1,6 +1,6 @@
 ---
 title: Best Practices for TiDB Security Configuration
-summary: 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベスト プラクティスを学習します。
+summary: 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベストプラクティスを学習します。
 ---
 
 # TiDBSecurityコンフィグレーションのベストプラクティス {#best-practices-for-tidb-security-configuration}

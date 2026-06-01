@@ -33,7 +33,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlashは遅延マテリアライゼーション（GA） [＃5829](https://github.com/pingcap/tiflash/issues/5829) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)をサポートします
 
-    v7.0.0 では、クエリ パフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan 演算子にプッシュ ダウンすることをサポートします。つまり、 TiFlash は最初に TableScan 演算子にプッシュ ダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
+    v7.0.0 では、クエリパフォーマンスを最適化するための実験的機能として、 TiFlashに遅延マテリアライゼーションが導入されました。この機能はデフォルトでは無効になっています ( [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)システム変数はデフォルトで`OFF`に設定されます)。フィルタ条件 ( `WHERE`句) を含む`SELECT`ステートメントを処理する場合、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングおよび集計します。遅延マテリアライゼーションを有効にすると、TiDB はフィルタ条件の一部を TableScan 演算子にプッシュ ダウンすることをサポートします。つまり、 TiFlash は最初に TableScan 演算子にプッシュ ダウンされるフィルタ条件に関連する列データをスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列データをスキャンしてさらに計算を行うため、IO スキャンとデータ処理の計算が削減されます。
 
     バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザーは、クエリの統計情報とフィルター条件に基づいて、TableScan演算子にプッシュダウンするフィルターを決定します。
 

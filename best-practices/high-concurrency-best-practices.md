@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-
 
 # 高同時書き込みのベストプラクティス {#best-practices-for-high-concurrency-writes}
 
-このドキュメントでは、TiDB で同時実行性の高い書き込み負荷の高いワークロードを処理するためのベスト プラクティスについて説明します。これは、アプリケーション開発を容易にするのに役立ちます。
+このドキュメントでは、TiDB で同時実行性の高い書き込み負荷の高いワークロードを処理するためのベストプラクティスについて説明します。これは、アプリケーション開発を容易にするのに役立ちます。
 
 ## 対象読者 {#target-audience}
 

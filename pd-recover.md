@@ -137,7 +137,7 @@ grep "idAllocator allocates a new id" {{/path/to}}/pd*.log |  awk -F'=' '{print 
 
 ### ステップ3：新しいPDクラスタをデプロイ {#step-3-deploy-a-new-pd-cluster}
 
-新しい PD クラスターをデプロイする前に、既存の PD クラスターを停止し、以前のデータ ディレクトリを削除するか、 `--data-dir`を使用して新しいデータ ディレクトリを指定する必要があります。
+新しい PD クラスターをデプロイする前に、既存の PD クラスターを停止し、以前のデータディレクトリを削除するか、 `--data-dir`を使用して新しいデータディレクトリを指定する必要があります。
 
 ### ステップ4：pd-recoverを使用する {#step-4-use-pd-recover}
 

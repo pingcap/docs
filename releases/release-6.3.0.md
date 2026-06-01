@@ -175,7 +175,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### バックアップと復元 {#backup-and-restore}
 
--   PITR はバックアップ ストレージとして[GCSとAzure Blob Storage](/br/backup-and-restore-storages.md)サポートしています @[joccau](https://github.com/joccau)
+-   PITR はバックアップストレージとして[GCSとAzure Blob Storage](/br/backup-and-restore-storages.md)サポートしています @[joccau](https://github.com/joccau)
 
     TiDBクラスターがGoogle CloudまたはAzureにデプロイされている場合、クラスターをv6.3.0にアップグレードすると、PITR機能を使用できます。
 

@@ -203,7 +203,7 @@ TiDB Cloud Premiumは、クラウドstorage（Amazon S3やAlibaba Cloud Object S
 
 クラウドstorageからバックアップを復元するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **[クラウド ストレージから復元]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **[クラウドストレージから復元]**をクリックします。
 
 2.  **「バックアップ保存場所の選択」**ページで、以下の情報を入力してください。
 

@@ -34,7 +34,7 @@ TiUPを使用した DM クラスターのデプロイメントのトポロジ構
     -   `global.deploy_dir`絶対パスに設定すると、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
     -   `global.deploy_dir`相対パスに設定すると、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 -   `data_dir` : データディレクトリ。デフォルト値は「data」です。構築ルールは以下のとおりです。
-    -   絶対パス`data_dir`インスタンス レベルで構成されている場合、実際のデータ ディレクトリはインスタンスに構成されている`data_dir`なります。
+    -   絶対パス`data_dir`インスタンス レベルで構成されている場合、実際のデータディレクトリはインスタンスに構成されている`data_dir`なります。
     -   各インスタンスに対して`data_dir`が設定されていない場合、デフォルト値は`<global.data_dir>`なります。
     -   `data_dir`相対パスに設定されている場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に保存されます。 `<deploy_dir>`の構築規則については、 `deploy_dir`フィールドの構築規則を参照してください。
 -   `log_dir` : データディレクトリ。デフォルト値は「log」です。構築ルールは以下のとおりです。
