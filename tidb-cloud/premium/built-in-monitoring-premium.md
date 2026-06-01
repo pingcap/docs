@@ -44,6 +44,7 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 | Connection Count | All, active connection | All: the number of connections. <br/> Active connections: the number of active connections. |
 | Disconnection Count | {result} | The number of clients disconnected. |
 
+
 ### Database
 
 | Metric name  | Labels | Description                                   |
