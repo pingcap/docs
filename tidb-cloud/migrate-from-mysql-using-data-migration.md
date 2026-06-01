@@ -644,7 +644,7 @@ GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* 
 | `ALTER`       | 表           | スキーマ変更時にテーブル定義を修正します    |
 | `DROP`        | データベース、テーブル | スキーマ同期中にオブジェクトを削除します    |
 | `INDEX`       | 表           | インデックスを作成および変更します       |
-| `CREATE VIEW` | 閲覧数         | マイグレーションで使用されるビューを作成します |
+| `CREATE VIEW` | ビュー         | マイグレーションで使用されるビューを作成します |
 
 たとえば、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>TiDB Cloud Essential インスタンス<CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>インスタンスで次の`GRANT`ステートメントを実行して、対応する<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>を付与できます。
 

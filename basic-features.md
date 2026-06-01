@@ -124,7 +124,7 @@ summary: TiDBの機能概要について学びましょう。
 | ------------------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :---: | :-: | :-: |
 | 基本`CREATE` 、 `DROP` 、 `ALTER` 、 `RENAME` 、 `TRUNCATE`                                                                    |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [生成された列](/generated-columns.md)                                                                                          |  Y  |  Y  |  Y  |  Y  |   E   |  E  |  E  |
-| [閲覧数](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
+| [ビュー](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [自動インクリメント](/auto-increment.md)                                                                                          |  Y  |  Y  |  Y  |  Y  | Y[^4] |  Y  |  Y  |
 | [自動ランダム](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
