@@ -157,7 +157,7 @@ TiDBバージョン：8.5.4
     -   `Apply`演算子の同時実行（ `tidb_enable_parallel_apply = on` ）を有効にすると、クローン実装が欠落しているためにプラン生成が失敗する問題を修正しました [#59863](https://github.com/pingcap/tidb/issues/59863) @[hawkingrei](https://github.com/hawkingrei)
     -   `ATAN2`関数を使用すると誤った結果が生じる可能性がある問題を修正しました [#60093](https://github.com/pingcap/tidb/issues/60093) @[guo-shaoge](https://github.com/guo-shaoge)
     -   `select 1 from dual`がインスタンスレベルのプランキャッシュを使用できない問題を修正 [#63075](https://github.com/pingcap/tidb/issues/63075) @[time-and-fate](https://github.com/time-and-fate)
-    -   参加順序を変更するとプランナーが失敗する可能性がある問題を修正 [#61715](https://github.com/pingcap/tidb/issues/61715) @[hawkingrei](https://github.com/hawkingrei)
+    -   結合順序を変更するとプランナーが失敗する可能性がある問題を修正 [#61715](https://github.com/pingcap/tidb/issues/61715) @[hawkingrei](https://github.com/hawkingrei)
     -   `set_var`ヒントをバインディングで使用すると、変数が元の設定に戻らない問題を修正します [#59822](https://github.com/pingcap/tidb/issues/59822) @[wddevries](https://github.com/wddevries)
     -   `ONLY_FULL_GROUP_BY`負の値に設定すると検証が失敗する問題を修正 [#62617](https://github.com/pingcap/tidb/issues/62617) @[AilinKid](https://github.com/AilinKid)
     -   `ONLY_FULL_GROUP_BY`チェックで大文字と小文字が区別されない問題を修正 [#62672](https://github.com/pingcap/tidb/issues/62672) @[AilinKid](https://github.com/AilinKid)
