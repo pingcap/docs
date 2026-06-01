@@ -360,7 +360,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   ツール
 
-    -   TiDBダッシュボード
+    -   TiDB Dashboard
 
         -   TiFlashのメトリクスをモニタリングページに表示できるようにし、そのページでのメトリクスの表示を最適化する [#1440](https://github.com/pingcap/tidb-dashboard/issues/1440) @[YiniXu9506](https://github.com/YiniXu9506)
         -   スロークエリリストとSQLステートメントリストの結果の行数を表示する [#1443](https://github.com/pingcap/tidb-dashboard/issues/1443) @[baurine](https://github.com/baurine)
@@ -421,7 +421,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   ツール
 
-    -   TiDBダッシュボード
+    -   TiDB Dashboard
 
         -   特定の複雑なSQL文の実行プランを照会する際のTiDBのOOM問題を修正 [#1386](https://github.com/pingcap/tidb-dashboard/issues/1386) @[baurine](https://github.com/baurine)
         -   NgMonitoringがPDノードへの接続を失った場合にTop SQLスイッチが有効にならない可能性がある問題を修正しました [#164](https://github.com/pingcap/ng-monitoring/issues/164) @[zhongzc](https://github.com/zhongzc)

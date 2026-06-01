@@ -44,9 +44,9 @@ TiDBバージョン: 6.2.0-DMR
 
 ### 可観測性 {#observability}
 
--   TiDBダッシュボードをPDから分離
+-   TiDB DashboardをPDから分離
 
-    TiDBダッシュボードはPDから監視ノードに移動されました。これにより、TiDBダッシュボードがPDに与える影響が軽減され、PDの安定性が向上します。
+    TiDB DashboardはPDから監視ノードに移動されました。これにより、TiDB DashboardがPDに与える影響が軽減され、PDの安定性が向上します。
 
     @[Hawkson-jee](https://github.com/Hawkson-jee)
 

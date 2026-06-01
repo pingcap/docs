@@ -114,7 +114,7 @@ TiDB バージョン: 7.1.3
     -   リソース グループを削除すると DDL の原子性[＃45050](https://github.com/pingcap/tidb/issues/45050) @ [glorv](https://github.com/glorv)が損なわれる可能性がある問題を修正しました
     -   PDリーダーが転送され、新しいリーダーとPDクライアントの間にネットワークパーティションがある場合、PDクライアントがリーダー[＃7416](https://github.com/tikv/pd/issues/7416) @ [CabinfeverB](https://github.com/CabinfeverB)の情報を更新できない問題を修正しました。
     -   大規模クラスタに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[＃7248](https://github.com/tikv/pd/issues/7248) @ [rleungx](https://github.com/rleungx)
-    -   TiDBダッシュボードがPD `trace`データを正しく読み取れない問題を修正[＃7253](https://github.com/tikv/pd/issues/7253) @ [nolouch](https://github.com/nolouch)
+    -   TiDB DashboardがPD `trace`データを正しく読み取れない問題を修正[＃7253](https://github.com/tikv/pd/issues/7253) @ [nolouch](https://github.com/nolouch)
     -   Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[＃7438](https://github.com/tikv/pd/issues/7438) @ [niubell](https://github.com/niubell)
     -   ルールチェッカーが配置ルール[＃7185](https://github.com/tikv/pd/issues/7185) @ [nolouch](https://github.com/nolouch)設定に従って学習者を追加しない問題を修正しました
     -   TiKVノードが利用できない場合にPDが通常のピアを削除する可能性がある問題を修正[＃7249](https://github.com/tikv/pd/issues/7249) @ [lhy1024](https://github.com/lhy1024)

@@ -243,7 +243,7 @@
     -   [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
     -   [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
     -   [ニューレリック](/tidb-cloud/monitor-new-relic-integration.md)
-    -   [プロメテウスとグラファナ](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+    -   [プロメテウスとGrafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
     -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
     -   テラフォーム
         -   [Terraform統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)

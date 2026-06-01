@@ -401,7 +401,7 @@ TiDB バージョン: 6.1.0
     -   PDリーダー移転後に削除した墓石ストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   Top SQL機能が有効になる前に実行されていた SQL 文の CPU オーバーヘッドをTop SQLが収集できないバグを修正[＃33859](https://github.com/pingcap/tidb/issues/33859)
 

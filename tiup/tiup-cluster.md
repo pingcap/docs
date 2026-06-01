@@ -216,7 +216,7 @@ tiup cluster display prod-cluster
 
 `Status`列目では、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
-PDコンポーネントの場合、 `|L`または`|UI` `Up`または`Down`に追加されることがあります。 `|L` PD ノードがLeaderであることを示し、 `|UI` [TiDBダッシュボード](/dashboard/dashboard-intro.md) PD ノードで実行されていることを示します。
+PDコンポーネントの場合、 `|L`または`|UI` `Up`または`Down`に追加されることがあります。 `|L` PD ノードがLeaderであることを示し、 `|UI` [TiDB Dashboard](/dashboard/dashboard-intro.md) PD ノードで実行されていることを示します。
 
 ## クラスターのスケールイン {#scale-in-a-cluster}
 

@@ -97,7 +97,7 @@ TiDBで遅いクエリを表示するには<CustomContent plan="starter,essentia
 </CustomContent>
 <CustomContent plan="starter,essential,dedicated">
 
-詳細については[TiDBダッシュボードの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
+詳細については[TiDB Dashboardの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
 
 </CustomContent>
 
@@ -137,7 +137,7 @@ TiDBで遅いクエリを表示するには<CustomContent plan="starter,essentia
 
 <CustomContent plan="starter,essential,dedicated">
 
-詳細については[TiDBダッシュボードのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)参照してください。
+詳細については[TiDB Dashboardのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)参照してください。
 
 ## キービジュアライザー {#key-visualizer}
 

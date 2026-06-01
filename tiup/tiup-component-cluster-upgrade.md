@@ -94,7 +94,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --tidb-ダッシュボードバージョン {#tidb-dashboard-version}
 
--   TiDBダッシュボードのバージョンを指定します。このオプションを設定すると、TiDBダッシュボードのバージョンはクラスターのバージョンと一致しなくなります。
+-   TiDB Dashboardのバージョンを指定します。このオプションを設定すると、TiDB Dashboardのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiDB ダッシュボードのバージョンはクラスターのバージョンと一致したままになります。
 

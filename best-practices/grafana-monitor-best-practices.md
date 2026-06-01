@@ -10,7 +10,7 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
-[プロメテウス](https://prometheus.io/)は、多次元データ モデルと柔軟なクエリ言語を備えた時系列データベースです。2 [グラファナ](https://grafana.com/) 、メトリックを分析および視覚化するためのオープン ソースの監視システムです。
+[プロメテウス](https://prometheus.io/)は、多次元データ モデルと柔軟なクエリ言語を備えた時系列データベースです。2 [Grafana](https://grafana.com/) 、メトリックを分析および視覚化するためのオープン ソースの監視システムです。
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
-summary: 2022年9月30日にリリースされたTiDB 6.3.0-DMRでは、TiKVでのSM4アルゴリズムを使用した保存時の暗号化、TiDBでのSM3アルゴリズムを使用した認証、JSONデータ型と関数のサポートなど、新機能と改善点が導入されています。また、実行時間メトリクスをより細かい粒度で提供し、スローログとTRACE`ステートメントの出力を強化し、TiDBダッシュボードでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0では、新しいシステム変数と構成ファイルパラメータが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、バックアップと復元（BR）、TiCDC、TiDB Binlog、TiDBデータ移行（DM）、およびTiDB Lightningの改善も含まれています。
+summary: 2022年9月30日にリリースされたTiDB 6.3.0-DMRでは、TiKVでのSM4アルゴリズムを使用した保存時の暗号化、TiDBでのSM3アルゴリズムを使用した認証、JSONデータ型と関数のサポートなど、新機能と改善点が導入されています。また、実行時間メトリクスをより細かい粒度で提供し、スローログとTRACE`ステートメントの出力を強化し、TiDB Dashboardでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0では、新しいシステム変数と構成ファイルパラメータが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、バックアップと復元（BR）、TiCDC、TiDB Binlog、TiDBデータ移行（DM）、およびTiDB Lightningの改善も含まれています。
 ---
 
 # TiDB 6.3.0 リリースノート {#tidb-6-3-0-release-notes}
@@ -79,9 +79,9 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB v6.3.0 では、スロー ログと`TRACE`の出力が強化されています。TiDB の解析から KV RocksDB によるディスクへの書き込みまでの SQL クエリの[フルリンク期間](/latency-breakdown.md)を観察できるため、診断機能がさらに強化されます。
 
--   TiDBダッシュボードはデッドロック履歴情報を提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
+-   TiDB Dashboardはデッドロック履歴情報を提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    バージョン6.3.0以降、TiDBダッシュボードではデッドロック履歴が提供されます。TiDBダッシュボードのスローログを確認し、一部のSQLステートメントのロック待機時間が極端に長い場合は、デッドロック履歴を確認することで根本原因を特定でき、診断が容易になります。
+    バージョン6.3.0以降、TiDB Dashboardではデッドロック履歴が提供されます。TiDB Dashboardのスローログを確認し、一部のSQLステートメントのロック待機時間が極端に長い場合は、デッドロック履歴を確認することで根本原因を特定でき、診断が容易になります。
 
 ### パフォーマンス {#performance}
 
@@ -291,8 +291,8 @@ TiDBバージョン: 6.3.0-DMR
 
 -   PD
 
-    -   TiDBダッシュボードにおけるTiKV IO MBpsメトリックのクエリを改善する [#5366](https://github.com/tikv/pd/issues/5366) @[YiniXu9506](https://github.com/YiniXu9506)
-    -   TiDBダッシュボードのURLを`metrics`から`monitoring`に変更してください [#5366](https://github.com/tikv/pd/issues/5366) @[YiniXu9506](https://github.com/YiniXu9506)
+    -   TiDB DashboardにおけるTiKV IO MBpsメトリックのクエリを改善する [#5366](https://github.com/tikv/pd/issues/5366) @[YiniXu9506](https://github.com/YiniXu9506)
+    -   TiDB DashboardのURLを`metrics`から`monitoring`に変更してください [#5366](https://github.com/tikv/pd/issues/5366) @[YiniXu9506](https://github.com/YiniXu9506)
 
 -   TiFlash
 

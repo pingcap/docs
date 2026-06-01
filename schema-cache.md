@@ -18,8 +18,8 @@ summary: TiDBは、スキーマ情報に対してLRU（Least Recently Used：最
 ## ベストプラクティス {#best-practices}
 
 -   データベースとテーブルの数が非常に多い場合（例えば、10万を超えるデータベースとテーブルがある場合）、またはデータベースとテーブルの数がシステムのパフォーマンスに影響を与えるほど多い場合は、スキーマキャッシュ機能を有効にすることをお勧めします。
--   TiDBダッシュボードの**「スキーマロード**」セクションにあるサブパネル**「Infoschema v2 Cache Operation」**を確認することで、スキーマキャッシュのヒット率を監視できます。ヒット率が低い場合は、 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)の値を増やすことができます。
--   TiDBダッシュボードの**「スキーマロード」**セクションにあるサブパネル**「Infoschema v2 Cache Size」**を確認することで、現在使用されているスキーマキャッシュのサイズを監視できます。
+-   TiDB Dashboardの**「スキーマロード**」セクションにあるサブパネル**「Infoschema v2 Cache Operation」**を確認することで、スキーマキャッシュのヒット率を監視できます。ヒット率が低い場合は、 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)の値を増やすことができます。
+-   TiDB Dashboardの**「スキーマロード」**セクションにあるサブパネル**「Infoschema v2 Cache Size」**を確認することで、現在使用されているスキーマキャッシュのサイズを監視できます。
 
 <CustomContent platform="tidb">
 

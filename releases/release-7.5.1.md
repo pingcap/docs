@@ -74,7 +74,7 @@ TiDB バージョン: 7.5.1
 
     -   TiCDC
 
-        -   TiDBダッシュボード[＃10263](https://github.com/pingcap/tiflow/issues/10263) @ [CharlesCheung96](https://github.com/CharlesCheung96)でのTiCDCログの検索をサポート
+        -   TiDB Dashboard[＃10263](https://github.com/pingcap/tiflow/issues/10263) @ [CharlesCheung96](https://github.com/CharlesCheung96)でのTiCDCログの検索をサポート
         -   サポート[チェンジフィードの下流同期ステータスの照会](https://docs.pingcap.com/tidb/v7.5/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed)は、TiCDC が受信した上流データの変更が下流システムに完全に同期されているかどうかを判断するのに役立ちます[＃10289](https://github.com/pingcap/tiflow/issues/10289) @ [hongyunyan](https://github.com/hongyunyan)
         -   並列処理を[＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)に増やすことで、TiCDC がオブジェクトstorageにデータを複製する際のパフォーマンスが向上します。
 

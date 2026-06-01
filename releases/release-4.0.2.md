@@ -24,7 +24,7 @@ TiDB バージョン: 4.0.2
 
 ## 新たな変化 {#new-change}
 
--   デフォルトでは、TiDBとTiDBダッシュボードは、製品の改善方法を把握するために、PingCAPと使用状況の詳細を共有します[＃18180](https://github.com/pingcap/tidb/pull/18180)共有される情報と共有を無効にする方法については、 [テレメトリー](/telemetry.md)ご覧ください。
+-   デフォルトでは、TiDBとTiDB Dashboardは、製品の改善方法を把握するために、PingCAPと使用状況の詳細を共有します[＃18180](https://github.com/pingcap/tidb/pull/18180)共有される情報と共有を無効にする方法については、 [テレメトリー](/telemetry.md)ご覧ください。
 
 ## 新機能 {#new-features}
 

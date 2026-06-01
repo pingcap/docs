@@ -53,7 +53,7 @@ TiDB バージョン: 5.0.3
 
 -   PD
 
-    -   TiDBダッシュボードをv2021.06.15.1 [＃3798](https://github.com/pingcap/pd/pull/3798)に更新
+    -   TiDB Dashboardをv2021.06.15.1 [＃3798](https://github.com/pingcap/pd/pull/3798)に更新
 
 -   TiFlash
 

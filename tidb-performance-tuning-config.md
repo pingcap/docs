@@ -367,7 +367,7 @@ SET GLOBAL tidb_low_resolution_tso=ON;
 -   PDにおけるTSOの割り当ては、まだボトルネックに達していません。
 -   PDノードとTiDBノードは十分なCPUリソースを備えています。
 -   TiDBとPD間のネットワークレイテンシーは、PDがTSOを割り当てるのにかかる時間よりもかなり長い（つまり、TSO RPCの実行時間の大部分はネットワークレイテンシーによるものである）。
-    -   TSO RPCリクエストの所要時間を取得するには、Grafana TiDBダッシュボードのPDクライアントセクションにある**PD TSO RPC所要時間**パネルを確認してください。
+    -   TSO RPCリクエストの所要時間を取得するには、Grafana TiDB DashboardのPDクライアントセクションにある**PD TSO RPC所要時間**パネルを確認してください。
     -   PD TSO割り当ての期間を確認するには、Grafana PDダッシュボードのTiDBセクションにある**PDサーバーTSOハンドル期間**パネルを確認してください。
 -   TiDBとPD間のTSO RPCリクエストの増加（ `PARALLEL`の場合は2倍、 `PARALLEL-FAST`の場合は4倍）によって生じる追加のネットワークトラフィックは許容範囲内です。
 

@@ -39,7 +39,7 @@ resolved-ts）は、この値より小さいタイムスタンプを持つすべ
 
 ### 問題を特定する {#identify-issues}
 
-[Grafana &gt; TiDBダッシュボード &gt; **KVリクエスト**ダッシュボード](/grafana-tidb-dashboard.md#kv-request)では、次のパネルにステイル読み取りのヒット率、OPS、トラフィックが表示されます。
+[Grafana &gt; TiDB Dashboard &gt; **KVリクエスト**ダッシュボード](/grafana-tidb-dashboard.md#kv-request)では、次のパネルにステイル読み取りのヒット率、OPS、トラフィックが表示されます。
 
 ![Stale Read Hit/Miss OPS](/media/stale-read/metrics-hit-miss.png)
 

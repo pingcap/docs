@@ -169,7 +169,7 @@
     -   [モニタリングAPI](/tidb-monitoring-api.md)
     -   [監視サービスをデプロイ](/deploy-monitoring-services.md)
     -   [監視サービスのアップグレード](/upgrade-monitoring-services.md)
-    -   TiDBダッシュボード
+    -   TiDB Dashboard
         -   [概要](/dashboard/dashboard-intro.md)
         -   管理
             -   [デプロイ](/dashboard/dashboard-ops-deploy.md)

@@ -306,7 +306,7 @@ Diagram(
 )
 ```
 
-|         | 悲観的な取引          | 楽観的な取引    |
+|         | 悲観的トランザクション          | 楽観的トランザクション    |
 | ------- | --------------- | --------- |
 | 自動コミット  | 実行 + ロック + コミット | 実行 + コミット |
 | 非自動コミット | 実行 + ロック        | 実行する      |
@@ -863,7 +863,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 `SELECT`ステートメントがデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
 
-遅いクエリの実行プランは、TiDBダッシュボードの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って[ポイントゲット](#point-get) 、および[シンプルなコプロセッサクエリ](#table-scan--index-scan) [バッチポイント取得](#batch-point-get)できます。
+遅いクエリの実行プランは、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って[ポイントゲット](#point-get) 、および[シンプルなコプロセッサクエリ](#table-scan--index-scan) [バッチポイント取得](#batch-point-get)できます。
 
 ### 書き込みクエリが遅い {#slow-write-queries}
 

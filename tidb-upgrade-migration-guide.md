@@ -289,8 +289,8 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 9.  次の Grafana パネルを使用して、新しいクラスターの負荷と動作ステータスを監視します。
 
-    -   [**TiDBダッシュボード &gt; クエリサマリー**](/grafana-tidb-dashboard.md#query-summary) : 期間、QPS、失敗したクエリ OPM メトリックを確認します。
-    -   [**TiDBダッシュボード &gt; サーバー**](/grafana-tidb-dashboard.md#server) :**接続数**メトリックを監視して、ノード間で接続が均等に分散されていることを確認します。
+    -   [**TiDB Dashboard &gt; クエリサマリー**](/grafana-tidb-dashboard.md#query-summary) : 期間、QPS、失敗したクエリ OPM メトリックを確認します。
+    -   [**TiDB Dashboard &gt; サーバー**](/grafana-tidb-dashboard.md#server) :**接続数**メトリックを監視して、ノード間で接続が均等に分散されていることを確認します。
 
 この時点で、ビジネス トラフィックは新しいクラスターに正常に切り替えられ、TiCDC リバース レプリケーション チャネルが確立されます。
 

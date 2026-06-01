@@ -104,7 +104,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 <CustomContent platform="tidb">
 
-[TiDBダッシュボードのSQLステートメントページ](/dashboard/dashboard-statement-list.md#others)では、削除されたステートメントに関する情報が`Others`行に表示されます。
+[TiDB DashboardのSQLステートメントページ](/dashboard/dashboard-statement-list.md#others)では、削除されたステートメントに関する情報が`Others`行に表示されます。
 
 </CustomContent>
 

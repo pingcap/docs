@@ -23,7 +23,7 @@ tiup playground ${version} [flags]
 -   TiUP playgroundを使用してTiDB、TiKV、およびPDコンポーネントをインストールしていない場合、playgroundコンポーネントはこれらのコンポーネントの最新の安定版をインストールし、その後これらのインスタンスを起動します。
 -   このコマンドでは TiDB、PD、TiKVコンポーネントのバージョンが指定されていないため、 TiUP playground はデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v8.5.4 であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.5.4`と同じように動作します。
 -   このコマンドでは各コンポーネントの数を指定しないため、 TiUP playground はデフォルトで、TiDB インスタンス、TiKV インスタンス、PD インスタンス、 TiFlashインスタンスがそれぞれ 1 つずつで構成される最小のクラスタを起動します。
--   TiDB の各コンポーネントを起動した後、 TiUPプレイグラウンドはクラスターが正常に起動したことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や、 [TiDBダッシュボード](/dashboard/dashboard-intro.md)にアクセスする方法など、いくつかの有用な情報を提供します。
+-   TiDB の各コンポーネントを起動した後、 TiUPプレイグラウンドはクラスターが正常に起動したことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や、 [TiDB Dashboard](/dashboard/dashboard-intro.md)にアクセスする方法など、いくつかの有用な情報を提供します。
 
 プレイグラウンドコンポーネントのコマンドラインフラグを表示するには、次のコマンドを使用できます。
 
@@ -89,23 +89,23 @@ tiup playground --tag ${tag_name}
 
 このように起動したクラスターの場合、クラスター停止後もデータファイルは保持されます。次回クラスターを起動する際にこのタグを使用することで、クラスター停止以降に保持されたデータを利用することができます。
 
-## TiDBダッシュボードとGrafanaにアクセスする {#access-tidb-dashboard-and-grafana}
+## TiDB DashboardとGrafanaにアクセスする {#access-tidb-dashboard-and-grafana}
 
-TiUP playgroundを使用してTiDBクラスタを起動すると、ブラウザで次のアドレスにアクセスすることで、 [TiDBダッシュボード](/dashboard/dashboard-intro.md)とGrafanaにアクセスできます。
+TiUP playgroundを使用してTiDBクラスタを起動すると、ブラウザで次のアドレスにアクセスすることで、 [TiDB Dashboard](/dashboard/dashboard-intro.md)とGrafanaにアクセスできます。
 
--   TiDBダッシュボード： `http://127.0.0.1:2379/dashboard`
+-   TiDB Dashboard： `http://127.0.0.1:2379/dashboard`
 
     -   デフォルトのユーザー名: `root`
     -   デフォルトパスワード: `` (空欄の場合は、直接`Enter`を押してください)
 
--   グラファナ： `http://127.0.0.1:3000`
+-   Grafana： `http://127.0.0.1:3000`
 
     -   デフォルトのユーザー名: `admin`
     -   デフォルトパスワード: `admin`
 
 > **注記：**
 >
-> TiDB `root`ユーザーのパスワードを変更した場合は、新しいパスワードを使用してTiDBダッシュボードにログインしてください。
+> TiDB `root`ユーザーのパスワードを変更した場合は、新しいパスワードを使用してTiDB Dashboardにログインしてください。
 
 ## playground で起動した TiDB クラスターにすばやく接続します {#quickly-connect-to-the-tidb-cluster-started-by-playground}
 

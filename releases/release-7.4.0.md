@@ -190,7 +190,7 @@ TiDB バージョン: 7.4.0
 
     さらに、セッションレベルのシステム変数[`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740)設定することで、上記のログにカスタム識別子を追加できます。ログにアプリケーション識別情報を挿入できるこの機能により、ログの内容とアプリケーションを関連付け、アプリケーションからログへのリンクを構築し、診断の難易度を軽減できます。
 
--   TiDBダッシュボードは、実行計画をテーブルビューで表示することをサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @ [baurine](https://github.com/baurine)
+-   TiDB Dashboardは、実行計画をテーブルビューで表示することをサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @ [baurine](https://github.com/baurine)
 
     v7.4.0 では、TiDB ダッシュボードは、診断エクスペリエンスを向上させるために、**スロー クエリ ページ**と**SQL ステートメント**ページで実行プランをテーブル ビューで表示することをサポートしています。
 

@@ -127,7 +127,7 @@ TiDB バージョン: 4.0.8
 
 -   PD
 
-    -   TiDBダッシュボードのキービジュアライザーがPDpanicを引き起こす可能性があるバグを修正[＃3096](https://github.com/pingcap/pd/pull/3096)
+    -   TiDB DashboardのキービジュアライザーがPDpanicを引き起こす可能性があるバグを修正[＃3096](https://github.com/pingcap/pd/pull/3096)
     -   PDストアが10分以上ダウンした場合にPDがpanic可能性があるバグを修正[＃3069](https://github.com/pingcap/pd/pull/3069)
 
 -   TiFlash

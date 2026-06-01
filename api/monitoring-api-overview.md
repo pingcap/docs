@@ -5,7 +5,7 @@ summary: TiDB 監視サービスの API を学習します。
 
 # TiDB モニタリング API の概要 {#tidb-monitoring-api-overview}
 
-TiDB モニタリングフレームワークは、 [プロメテウス](https://prometheus.io)と[グラファナ](https://grafana.com/grafana)という2つのオープンソースプロジェクトを使用しています。TiDB は、監視およびパフォーマンスメトリクスの保存に Prometheus を使用し、これらのメトリクスの可視化には Grafana を使用しています。また、TiDB は TiDB クラスターの監視と診断用に組み込みの[TiDBダッシュボード](/dashboard/dashboard-intro.md)提供しています。
+TiDB モニタリングフレームワークは、 [プロメテウス](https://prometheus.io)と[Grafana](https://grafana.com/grafana)という2つのオープンソースプロジェクトを使用しています。TiDB は、監視およびパフォーマンスメトリクスの保存に Prometheus を使用し、これらのメトリクスの可視化には Grafana を使用しています。また、TiDB は TiDB クラスターの監視と診断用に組み込みの[TiDB Dashboard](/dashboard/dashboard-intro.md)提供しています。
 
 次のインターフェースを使用して、TiDB クラスターのステータスを監視できます。
 

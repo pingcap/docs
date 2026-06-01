@@ -89,7 +89,7 @@ TiDB Cloudコンソールのデフォルトの[**遅いクエリ**](/tidb-cloud/
 
 低速クエリの保持ポリシーは 7 日間です。
 
-詳細については[TiDBダッシュボードの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
+詳細については[TiDB Dashboardの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
 
 ## TopSQLを監視する {#monitor-topsql}
 
@@ -105,7 +105,7 @@ TopSQL を表示するには、次の手順を実行します。
 
 4.  TopSQL によって表示されるグラフと表を分析します。
 
-詳細については[TiDBダッシュボードのTopSQL](https://docs.pingcap.com/tidb/stable/top-sql)参照してください。
+詳細については[TiDB DashboardのTopSQL](https://docs.pingcap.com/tidb/stable/top-sql)参照してください。
 
 ## ベンチマークレポートを生成する {#generate-benchmark-reports}
 

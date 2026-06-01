@@ -69,6 +69,6 @@ TiDB Ansible バージョン: 3.0.10
 ## TiDB アンシブル {#tidb-ansible}
 
 -   一部のシナリオでPDリーダーの取得に失敗したためにコマンド実行が失敗する問題を修正[＃1121](https://github.com/pingcap/tidb-ansible/pull/1121)
--   TiDBダッシュボード[＃1127](https://github.com/pingcap/tidb-ansible/pull/1127)に`Deadlock Detect Duration`監視項目を追加する
--   TiDBダッシュボード[＃1132](https://github.com/pingcap/tidb-ansible/pull/1132)に`Statement Lock Keys Count`監視項目を追加する
--   TiDBダッシュボード[＃1133](https://github.com/pingcap/tidb-ansible/pull/1133)に`Statement Pessimistic Retry Count`監視項目を追加する
+-   TiDB Dashboard[＃1127](https://github.com/pingcap/tidb-ansible/pull/1127)に`Deadlock Detect Duration`監視項目を追加する
+-   TiDB Dashboard[＃1132](https://github.com/pingcap/tidb-ansible/pull/1132)に`Statement Lock Keys Count`監視項目を追加する
+-   TiDB Dashboard[＃1133](https://github.com/pingcap/tidb-ansible/pull/1133)に`Statement Pessimistic Retry Count`監視項目を追加する

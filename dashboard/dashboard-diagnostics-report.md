@@ -1,11 +1,11 @@
 ---
 title: TiDB Dashboard Diagnostic Report
-summary: TiDBダッシュボード診断レポートでは、基本情報、診断情報、負荷情報、概要情報、監視情報、構成情報など、診断レポートの内容を紹介します。また、比較レポートの詳細、DIFF_RATIOの説明、最大差異項目テーブルも含まれています。
+summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、負荷情報、概要情報、監視情報、構成情報など、診断レポートの内容を紹介します。また、比較レポートの詳細、DIFF_RATIOの説明、最大差異項目テーブルも含まれています。
 ---
 
-# TiDBダッシュボード診断レポート {#tidb-dashboard-diagnostic-report}
+# TiDB Dashboard診断レポート {#tidb-dashboard-diagnostic-report}
 
-このドキュメントでは、診断レポートの内容と表示に関するヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDBダッシュボードのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)参照してください。
+このドキュメントでは、診断レポートの内容と表示に関するヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)参照してください。
 
 ## レポートをビュー {#view-report}
 

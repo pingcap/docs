@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.1.1 Release Notes
-summary: TiDB 5.1.1は2021年7月30日にリリースされました。このリリースには、互換性の変更、機能強化、改善、バグ修正、そしてTiDBダッシュボード、 TiFlash、TiKV、そして各種ツールのアップデートが含まれています。主な変更点としては、変数のデフォルト値の変更、TiDBダッシュボードでのOIDC SSOのサポート、そしてデータ損失とpanicに関するバグ修正などが挙げられます。
+summary: TiDB 5.1.1は2021年7月30日にリリースされました。このリリースには、互換性の変更、機能強化、改善、バグ修正、そしてTiDB Dashboard、 TiFlash、TiKV、そして各種ツールのアップデートが含まれています。主な変更点としては、変数のデフォルト値の変更、TiDB DashboardでのOIDC SSOのサポート、そしてデータ損失とpanicに関するバグ修正などが挙げられます。
 ---
 
 # TiDB 5.1.1 リリースノート {#tidb-5-1-1-release-notes}
@@ -26,9 +26,9 @@ TiDB バージョン: 5.1.1
 
 ## 機能強化 {#feature-enhancements}
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
-    -   OIDC SSOをサポートします。OIDC対応のSSOサービス（OktaやAuth0など）を設定することで、ユーザーはSQLパスワードを入力せずにTiDBダッシュボードにログインできます[＃3883](https://github.com/tikv/pd/pull/3883)
+    -   OIDC SSOをサポートします。OIDC対応のSSOサービス（OktaやAuth0など）を設定することで、ユーザーはSQLパスワードを入力せずにTiDB Dashboardにログインできます[＃3883](https://github.com/tikv/pd/pull/3883)
 
 -   TiFlash
 
@@ -130,7 +130,7 @@ TiDB バージョン: 5.1.1
     -   MPPタスク実行時に発生する可能性のあるメモリリークの問題を修正
     -   集計関数`COUNT`または`COUNT DISTINCT`実行するときに予期しない結果が発生する問題を修正しました
     -   複数のディスクに展開されたときにTiFlash がデータを復元できない潜在的なバグを修正しました
-    -   TiDBダッシュボードがTiFlashのディスク情報を正しく表示できない問題を修正
+    -   TiDB DashboardがTiFlashのディスク情報を正しく表示できない問題を修正
     -   解体時に発生する可能性のあるpanic問題を修正`SharedQueryBlockInputStream`
     -   解体時に発生する可能性のあるpanic問題を修正`MPPTask`
     -   スナップショット経由でデータを同期した後に発生する可能性のあるデータの不整合の問題を修正

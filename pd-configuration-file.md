@@ -506,11 +506,11 @@ pd-server関連のコンフィグレーション項目
 
 ## <code>dashboard</code> {#code-dashboard-code}
 
-[TiDBダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目です。
+[TiDB Dashboard](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目です。
 
 ### <code>disable-custom-prom-addr</code> {#code-disable-custom-prom-addr-code}
 
--   [TiDBダッシュボード](/dashboard/dashboard-intro.md)でカスタム Prometheus データ ソース アドレスの構成を無効にするかどうか。
+-   [TiDB Dashboard](/dashboard/dashboard-intro.md)でカスタム Prometheus データ ソース アドレスの構成を無効にするかどうか。
 -   デフォルト値: `false`
 -   `true`に設定すると、TiDB ダッシュボードでカスタム Prometheus データ ソース アドレスを構成すると、TiDB ダッシュボードはエラーを報告します。
 
@@ -533,13 +533,13 @@ pd-server関連のコンフィグレーション項目
 
 -   TiDB ダッシュボードがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
--   リバースプロキシを経由せずにTiDBダッシュボードにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
+-   リバースプロキシを経由せずにTiDB Dashboardにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
 
 ### <code>enable-telemetry</code> {#code-enable-telemetry-code}
 
 > **警告：**
 >
-> v8.1.0以降、TiDBダッシュボードのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに残されています。
+> v8.1.0以降、TiDB Dashboardのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに残されています。
 
 -   v8.1.0 より前では、この構成項目は、TiDB ダッシュボードでテレメトリ収集を有効にするかどうかを制御します。
 -   デフォルト値: `false`

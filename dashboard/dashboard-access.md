@@ -1,23 +1,23 @@
 ---
 title: Access TiDB Dashboard
-summary: TiDBダッシュボードにアクセスするには、ブラウザで指定されたURLにアクセスしてください。複数のPDインスタンスの場合は、アドレスを任意のPDインスタンスのアドレスとポートに置き換えてください。Chrome、Firefox、またはEdgeブラウザ（最新バージョン）をご利用ください。TiDBルートアカウントまたはユーザー定義のSQLユーザーでサインインしてください。セッションは24時間有効です。言語は英語と中国語で切り替えられます。ログアウトするには、ユーザー名をクリックし、「ログアウト」ボタンをクリックしてください。
+summary: TiDB Dashboardにアクセスするには、ブラウザで指定されたURLにアクセスしてください。複数のPDインスタンスの場合は、アドレスを任意のPDインスタンスのアドレスとポートに置き換えてください。Chrome、Firefox、またはEdgeブラウザ（最新バージョン）をご利用ください。TiDBルートアカウントまたはユーザー定義のSQLユーザーでサインインしてください。セッションは24時間有効です。言語は英語と中国語で切り替えられます。ログアウトするには、ユーザー名をクリックし、「ログアウト」ボタンをクリックしてください。
 ---
 
-# TiDBダッシュボードにアクセスする {#access-tidb-dashboard}
+# TiDB Dashboardにアクセスする {#access-tidb-dashboard}
 
-TiDBダッシュボードにアクセスするには、ブラウザから[http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)アクセスしてください。3 `127.0.0.1:2379`実際のPDインスタンスのアドレスとポートに置き換えてください。
+TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)アクセスしてください。3 `127.0.0.1:2379`実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 > **注記：**
 >
 > TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB ダッシュボードをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)参照してください。
 
-## 複数のPDインスタンスがデプロイされている場合にTiDBダッシュボードにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
+## 複数のPDインスタンスがデプロイされている場合にTiDB Dashboardにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
 
 クラスターに複数の PD インスタンスがデプロイされていて、**すべての**PD インスタンスとポートに直接アクセスできる場合は、アドレス[http://127.0.0.1:2379/ダッシュボード/](http://127.0.0.1:2379/dashboard/)の`127.0.0.1:2379`**任意の**PD インスタンスのアドレスとポートに置き換えるだけです。
 
 > **注記：**
 >
-> ファイアウォールまたはリバースプロキシが設定されており、すべてのPDインスタンスに直接アクセスできない場合、TiDBダッシュボードにアクセスできない可能性があります。これは通常、ファイアウォールまたはリバースプロキシが正しく設定されていないことが原因です。複数のPDインスタンスがデプロイされている場合にファイアウォールまたはリバースプロキシを正しく設定する方法については、 [リバースプロキシの背後でTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDBダッシュボード](/dashboard/dashboard-ops-security.md)参照してください。
+> ファイアウォールまたはリバースプロキシが設定されており、すべてのPDインスタンスに直接アクセスできない場合、TiDB Dashboardにアクセスできない可能性があります。これは通常、ファイアウォールまたはリバースプロキシが正しく設定されていないことが原因です。複数のPDインスタンスがデプロイされている場合にファイアウォールまたはリバースプロキシを正しく設定する方法については、 [リバースプロキシの背後でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDB Dashboard](/dashboard/dashboard-ops-security.md)参照してください。
 
 ## ブラウザの互換性 {#browser-compatibility}
 
@@ -36,7 +36,7 @@ TiDB ダッシュボードは、比較的新しいバージョンの次の一般
 TiDB ダッシュボードにアクセスすると、ユーザー ログイン インターフェイスに移動します。
 
 -   TiDB `root`アカウントを使用して TiDB ダッシュボードにサインインできます。
--   TiDBダッシュボードには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDBダッシュボードのSSOを構成する](/dashboard/dashboard-session-sso.md)ご覧ください。
+-   TiDB Dashboardには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDB DashboardのSSOを構成する](/dashboard/dashboard-session-sso.md)ご覧ください。
 -   [ユーザー定義のSQLユーザー](/dashboard/dashboard-user.md)を作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
 
 次のいずれかの状況が存在する場合、ログインが失敗する可能性があります。
