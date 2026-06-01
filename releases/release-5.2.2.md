@@ -26,9 +26,9 @@ TiDB バージョン: 5.2.2
 -   PD
 
     -   ホットスポット スケジューラ[＃3869](https://github.com/tikv/pd/issues/3869)の QPS ディメンションに書き込みクエリの種類を追加する
-    -   バランス領域スケジューラの再試行制限を動的に調整して、スケジューラ[＃3744](https://github.com/tikv/pd/issues/3744)のパフォーマンスを向上させることをサポートしました。
+    -   バランスリージョンスケジューラの再試行制限を動的に調整して、スケジューラ[＃3744](https://github.com/tikv/pd/issues/3744)のパフォーマンスを向上させることをサポートしました。
     -   TiDBダッシュボードをv2021.10.08.1 [＃4070](https://github.com/tikv/pd/pull/4070)に更新
-    -   退去リーダースケジューラが不健全なピアを持つ領域をスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
+    -   退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
     -   スケジューラ[＃4146](https://github.com/tikv/pd/issues/4146)の終了プロセスを高速化
 
 -   ツール
@@ -92,7 +92,7 @@ TiDB バージョン: 5.2.2
 
     -   ピア数が設定されたピア数[＃4045](https://github.com/tikv/pd/issues/4045)を超えたために、PD がデータがあり保留中の状態のピアを誤って削除する問題を修正しました。
     -   PDが時間内にピアを修正しない問題を修正[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   散布範囲スケジューラが空の領域をスケジュールできない問題を修正[＃4118](https://github.com/tikv/pd/pull/4118)
+    -   散布範囲スケジューラが空のリージョンをスケジュールできない問題を修正[＃4118](https://github.com/tikv/pd/pull/4118)
     -   キーマネージャのCPU使用率が高すぎる問題を修正[＃4071](https://github.com/tikv/pd/issues/4071)
     -   ホットリージョンスケジューラ[＃4159](https://github.com/tikv/pd/issues/4159)の設定時に発生する可能性のあるデータ競合の問題を修正しました。
     -   リージョン同期が停止したことによるリーダー選出の遅延を修正[＃3936](https://github.com/tikv/pd/issues/3936)

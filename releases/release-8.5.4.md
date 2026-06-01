@@ -119,7 +119,7 @@ TiDBバージョン：8.5.4
 
     -   不要なエラーログを削減 [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
     -   Golangのバージョンを1.23.0から1.23.12にアップグレードし、関連する依存関係を更新します [#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
-    -   テーブルレベルでの散布領域をサポートして、 `scatter-role`と`engine`の次元全体にバランスの取れた分布を実現します [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies)
+    -   テーブルレベルでの散布リージョンをサポートして、 `scatter-role`と`engine`の次元全体にバランスの取れた分布を実現します [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies)
 
 -   TiFlash
 

@@ -334,7 +334,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   5.1.1 マージ
 
-    -   テーブルをまたいで空の領域はマージできません。TiKV の`[coprocessor] split-region-on-table`パラメータを変更する必要があります。このパラメータは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)参照してください。
+    -   テーブルをまたいで空のリージョンはマージできません。TiKV の`[coprocessor] split-region-on-table`パラメータを変更する必要があります。このパラメータは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)参照してください。
 
     -   リージョンのマージは遅いです。マージされたオペレーターが生成されているかどうかは、 **Grafana** -&gt; **PD** -&gt; **operator**のモニターダッシュボードにアクセスして確認できます。マージを高速化するには、 `merge-schedule-limit`の値を増やしてください。
 
