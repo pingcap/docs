@@ -30,7 +30,7 @@
     -   [再ランキング](/ai/guides/reranking.md)
     -   [結合クエリ](/ai/guides/join-queries.md)
     -   [生のSQLクエリ](/ai/guides/raw-queries.md)
-    -   [取引](/ai/guides/transactions.md)
+    -   [トランザクション](/ai/guides/transactions.md)
 
 ## 例 {#examples}
 

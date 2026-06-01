@@ -395,7 +395,7 @@ console.log(rsh.affectedRows);
 -   AWS Lambda関数でTiDBを使用する方法の詳細については、 [TiDB-Lambda統合/aws-lambda-bookstoreデモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)ご覧ください。また、AWS API Gatewayを使用して、アプリケーション用のRESTful APIを構築することもできます。
 -   `mysql2`の使用法について詳しくは、 [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)ご覧ください。
 -   AWS Lambda の使用方法の詳細については[AWS `Lambda`の開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)ご覧ください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [取引](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

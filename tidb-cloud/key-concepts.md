@@ -15,9 +15,9 @@ TiDB Cloudは、コンピューティングをstorageから分離するクラウ
 
 TiDB Cloudを使用すると、データベース、テーブル、列、インデックス、制約などのオブジェクトを使用してデータを整理および構造化できます。また、一時テーブル、ベクター インデックス、キャッシュされたテーブルなどの高度な機能もサポートしています。[データベーススキーマについて詳しくはこちらをご覧ください](/tidb-cloud/database-schema-concepts.md)。
 
-## 取引 {#transactions}
+## トランザクション {#transactions}
 
-TiDB は完全な分散トランザクションを提供し、モデルには[Googleパーコレーター](https://research.google.com/pubs/pub36726.html)に基づいていくつかの最適化が施さ[取引について詳しくはこちらをご覧ください](/tidb-cloud/transaction-concepts.md)ています。
+TiDB は完全な分散トランザクションを提供します。モデルは[Google Percolator](https://research.google.com/pubs/pub36726.html)に基づいており、いくつかの最適化が施されています。[トランザクションについて詳しくはこちらをご覧ください](/tidb-cloud/transaction-concepts.md)。
 
 ## SQL {#sql}
 

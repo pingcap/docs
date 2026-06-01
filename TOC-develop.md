@@ -83,9 +83,9 @@
         -   [ステイル読み取り](/develop/dev-guide-use-stale-read.md)
     -   [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
 -   [ベクトル検索](/develop/dev-guide-vector-search.md)![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
--   取引の管理
+-   トランザクションの管理
     -   [概要](/develop/dev-guide-transaction-overview.md)
-    -   [楽観的取引と悲観的取引](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+    -   [楽観的トランザクションと悲観的トランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
     -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
     -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
 -   最適化する
