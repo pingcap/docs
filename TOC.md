@@ -855,11 +855,11 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブル属性](/table-attributes.md)
-        -   取引
+        -   トランザクション
             -   [概要](/transaction-overview.md)
             -   [隔離レベル](/transaction-isolation-levels.md)
-            -   [楽観的な取引](/optimistic-transaction.md)
-            -   [悲観的な取引](/pessimistic-transaction.md)
+            -   [楽観的トランザクション](/optimistic-transaction.md)
+            -   [悲観的トランザクション](/pessimistic-transaction.md)
             -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
             -   [パイプラインDML](/pipelined-dml.md)
         -   [閲覧数](/views.md)

@@ -39,7 +39,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)以下のシナリオにおいて、大規模データ書き込みのコストを最大80%削減します。
 
     -   [自動コミットモード](/transaction-overview.md#autocommit)で 16 MiB を超える書き込み操作を実行したとき。
-    -   [楽観的取引モデル](/optimistic-transaction.md)で16 MiBを超える書き込み操作を実行した場合。
+    -   [楽観的トランザクションモデル](/optimistic-transaction.md)で16 MiBを超える書き込み操作を実行した場合。
     -   [TiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)とき。
 
     この改善により、データ運用の効率性とコスト効率が向上し、ワークロードの規模が拡大するにつれて、より大きなコスト削減効果が得られます。

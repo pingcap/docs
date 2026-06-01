@@ -706,7 +706,7 @@ mysql> SELECT * FROM T2;
 +------+
 ```
 
-## 大口取引制限 {#large-transaction-restrictions}
+## 大規模トランザクション制限 {#large-transaction-restrictions}
 
 基本原則は、トランザクションのサイズを制限することです。KVレベルでは、TiDBは単一トランザクションのサイズに制限を設けています。SQLレベルでは、1行のデータが1つのKVエントリにマッピングされ、インデックスを追加するたびに1つのKVエントリが追加されます。SQLレベルでの制限は以下のとおりです。
 
