@@ -42,5 +42,5 @@ DESC tidb_hot_regions;
 -   `REGION_ID` : ホットリージョンの ID。
 -   `TYPE` : ホットリージョンのタイプ。
 -   `MAX_HOT_DEGREE` :リージョンの最大暑さ度。
--   `REGION_COUNT` : インスタンス内のホット領域の数。
+-   `REGION_COUNT` : インスタンス内のホットリージョンの数。
 -   `FLOW_BYTES` :リージョン内で書き込まれたバイト数と読み取られたバイト数。

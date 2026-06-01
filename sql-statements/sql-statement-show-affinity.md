@@ -44,7 +44,7 @@ SHOW AFFINITY;
 -   `Leader_store_id` 、 `Voter_store_ids` : PDによって記録されたTiKVストアのID。テーブルまたはパーティションのターゲットLeaderとVoterレプリカをホストするストアを示します。アフィニティグループのターゲットレプリカの場所が決定されていない場合、または[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`に設定されている場合、値は`NULL`と表示されます。
 -   `Status` : アフィニティスケジューリングの現在の状態を示します。可能な値は次のとおりです。
     -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティ スケジューリングを開始していません。
-    -   `Preparing` : PD はアフィニティ要件を満たすように領域をスケジュールしています。
+    -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
     -   `Stable` : すべてのリージョンが目標配布に到達しました。
 -   `Region_count` : アフィニティ グループ内の現在のリージョン数。
 -   `Affinity_region_count` : 現在アフィニティレプリカ分散要件を満たしているリージョンの数。

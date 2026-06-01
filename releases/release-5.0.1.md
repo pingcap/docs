@@ -56,7 +56,7 @@ TiDB バージョン: 5.0.1
 -   TiKV
 
     -   コプロセッサが`IN`式[＃10018](https://github.com/tikv/tikv/pull/10018)の符号付きまたは符号なし整数型を適切に処理できない問題を修正しました。
-    -   SST ファイルのバッチ取り込み後に多くの空の領域が発生する問題を修正[＃10015](https://github.com/tikv/tikv/pull/10015)
+    -   SST ファイルのバッチ取り込み後に多くの空のリージョンが発生する問題を修正[＃10015](https://github.com/tikv/tikv/pull/10015)
     -   `cast_string_as_time`の入力が無効なUTF-8バイトである場合に発生する潜在的なpanicを修正[＃9995](https://github.com/tikv/tikv/pull/9995)
     -   ファイル辞書ファイルが破損した後にTiKVが起動できなくなるバグを修正[＃9992](https://github.com/tikv/tikv/pull/9992)
 

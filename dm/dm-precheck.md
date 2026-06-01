@@ -94,7 +94,7 @@ tiup dmctl check-task ./task.yaml
 
 タスク設定で`import-mode: "physical"`を設定した場合、 [物理的な輸入](/tidb-lightning/tidb-lightning-physical-import-mode.md)が正常に実行されることを確認するための以下のチェック項目が追加されます。指示に従っても、これらのチェック項目の要件を満たすことが難しい場合は、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
 
--   下流データベース内の空の領域
+-   下流データベース内の空のリージョン
 
     -   空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [PDスケジューリングのベストプラクティス - 低速リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照。
 

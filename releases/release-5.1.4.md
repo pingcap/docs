@@ -111,7 +111,7 @@ TiDB バージョン: 5.1.4
     -   リージョンスキャッタラーによって生成されたスケジュールによってピア数が減少する可能性があるバグを修正[＃4565](https://github.com/tikv/pd/issues/4565)
     -   リージョン統計が`flow-round-by-digit` [＃4295](https://github.com/tikv/pd/issues/4295)の影響を受けない問題を修正
     -   リージョン同期が停止したことによるリーダー選出の遅延を修正[＃3936](https://github.com/tikv/pd/issues/3936)
-    -   退去リーダースケジューラが不健全なピアを持つ領域をスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
+    -   退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
     -   ホットスポット統計からコールドホットスポットデータを削除できない問題を修正[＃4390](https://github.com/tikv/pd/issues/4390)
     -   TiKVノードが削除された後に発生するpanic問題を修正[＃4344](https://github.com/tikv/pd/issues/4344)
     -   ターゲットストアがダウンしているため、スケジューリングオペレータがフェイルファストを実行できない問題を修正しました[＃3353](https://github.com/tikv/pd/issues/3353)

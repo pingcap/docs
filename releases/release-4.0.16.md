@@ -82,7 +82,7 @@ TiDBバージョン: 4.0.16
 
     -   TiKVノードが削除された後に発生するpanic問題を修正[＃4344](https://github.com/tikv/pd/issues/4344)
     -   スタックしたリージョン同期機能[＃3936](https://github.com/tikv/pd/issues/3936)によって発生するリーダー選出の遅延を修正
-    -   退去リーダースケジューラが不健全なピアを持つ領域をスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
+    -   退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
 
 -   TiFlash
 
