@@ -621,7 +621,7 @@
         -   [パフォーマンス概要](/grafana-performance-overview-dashboard.md)
         -   [TiDB](/grafana-tidb-dashboard.md)
         -   [PD](/grafana-pd-dashboard.md)
-        -   [ティクヴ](/grafana-tikv-dashboard.md)
+        -   [TiKV](/grafana-tikv-dashboard.md)
         -   [TiFlash](/tiflash/monitor-tiflash.md)
         -   [TiCDC](/ticdc/monitor-ticdc.md)
         -   [リソース制御](/grafana-resource-control-dashboard.md)
