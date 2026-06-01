@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 <CustomContent language="en,zh">TiDB Cloudのリソース（ TiDB Cloud Starterインスタンス、 TiDB Cloud Essentialインスタンス、 TiDB Cloud Dedicatedクラスターなど）を作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">TiDB Cloudのリソース（ TiDB Cloud Starterインスタンス、 TiDB Cloud Essentialインスタンス、 TiDB Cloud Dedicatedクラスターなど）を作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 <CustomContent language="en,zh">TiDB Cloudのリソース（ TiDB Cloud Starterインスタンス、 TiDB Cloud Essentialインスタンス、 TiDB Cloud Dedicatedクラスターなど）を作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、およびAlibaba Cloud上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">TiDB Cloudのリソース（ TiDB Cloud Starterインスタンス、 TiDB Cloud Essentialインスタンス、 TiDB Cloud Dedicatedクラスターなど）を作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure上にミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
