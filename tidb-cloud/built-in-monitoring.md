@@ -23,6 +23,8 @@ To view the metrics on the **Metrics** page, take the following steps:
 
 In TiDB Cloud, the metrics data is kept for 7 days.
 
+<CustomContent plan="dedicated">
+
 ## Metrics for TiDB Cloud Dedicated clusters
 
 The following sections illustrate the metrics on the **Metrics** page for TiDB Cloud Dedicated clusters.
@@ -86,16 +88,20 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiProxy Throughput | node | The bytes transferred per second on each TiProxy node. |
 | TiProxy Sessions Migration Reasons | reason | The number of session migrations that happen every minute and the reasons for them. |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential">
+
 ## Metrics for {{{ .starter }}} and {{{ .essential }}} instances
 
 The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .essential }}} instances:
 
-- **Cluster Status**: displays the cluster-level main metrics.
+- **Instance Overview**: displays the instance-level main metrics.
 - **Database Status**: displays the database-level main metrics.
 
-### Cluster Status
+### Instance Overview
 
-The following table illustrates the cluster-level main metrics under the **Cluster Status** tab.
+The following table illustrates the instance-level main metrics under the **Instance Overview** tab.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -120,6 +126,8 @@ The following table illustrates the database-level main metrics under the **Data
 | QPS Per DB | All, {Database name} | The number of SQL statements executed per second on every database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Average Query Duration Per DB | All, {Database name} | The duration from receiving a request from the client to a database until the database executes the request and returns the result to the client.|
 | Failed Query Per DB | All, {Database name} | The statistics of error types according to the SQL statement execution errors per second on every database.|
+
+</CustomContent>
 
 ## FAQ
 
