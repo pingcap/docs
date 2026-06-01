@@ -80,7 +80,7 @@ TiDB Ansible バージョン: 3.0.5
 -   Tidb Binlog
     -   `ALTER DATABASE`関連する DDL 操作によりDrainerが異常終了する問題を修正[＃769](https://github.com/pingcap/tidb-binlog/pull/769)
     -   レプリケーション効率を向上させるためにコミットbinlog のトランザクション ステータス情報のクエリをサポートする[＃757](https://github.com/pingcap/tidb-binlog/pull/757)
-    -   ドレイナーの`start_ts`ポンプの最大値`commit_ts` [＃758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合にPumppanicが発生する可能性がある問題を修正しました。
+    -   Drainerの`start_ts`がPumpの最大値`commit_ts` [＃758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合にPump panicが発生する可能性がある問題を修正しました。
 -   TiDB Lightning
     -   Loaderの完全なロジックインポート機能を統合し、バックエンドモード[＃221](https://github.com/pingcap/tidb-lightning/pull/221)構成をサポートします。
 
