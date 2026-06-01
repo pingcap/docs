@@ -154,7 +154,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 
 <CustomContent platform="tidb">
 
-TiDB は[プロメテウスとGrafana](/tidb-monitoring-api.md)Grafanaの組み合わせを利用して、パフォーマンス監視メトリックの保存とクエリを実行します。 TiDB では、ほとんどの [パフォーマンススキーマテーブル](/performance-schema/performance-schema.md)結果を返しません。
+TiDB は[プロメテウスとグラファナ](/tidb-monitoring-api.md)グラファナの組み合わせを利用して、パフォーマンス監視メトリックの保存とクエリを実行します。 TiDB では、ほとんどの [パフォーマンススキーマテーブル](/performance-schema/performance-schema.md)結果を返しません。
 
 </CustomContent>
 

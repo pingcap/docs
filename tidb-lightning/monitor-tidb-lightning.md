@@ -33,7 +33,7 @@ scrape_configs:
 
 ## Grafanaダッシュボード {#grafana-dashboard}
 
-[Grafana](https://grafana.com/) 、Prometheus メトリックをダッシュボードとして視覚化するための Web インターフェースです。
+[グラファナ](https://grafana.com/) 、Prometheus メトリックをダッシュボードとして視覚化するための Web インターフェースです。
 
 ### 1行目: スピード {#row-1-speed}
 
