@@ -36,7 +36,7 @@ TiDB バージョン: 4.0.6
     -   `Cop Runtime`統計[＃19264](https://github.com/pingcap/tidb/pull/19264)でより多くのRPC実行時情報を記録
     -   `metrics_schema`と`performance_schema` [＃19792](https://github.com/pingcap/tidb/pull/19792)でのテーブル作成を禁止する
     -   ユニオンエグゼキュータ[＃19886](https://github.com/pingcap/tidb/pull/19886)の同時実行の調整をサポート
-    -   サポートアウト参加イン放送参加[＃19664](https://github.com/pingcap/tidb/pull/19664)
+    -   外部結合とブロードキャスト結合をサポート[＃19664](https://github.com/pingcap/tidb/pull/19664)
     -   プロセスリスト[＃19829](https://github.com/pingcap/tidb/pull/19829)のSQLダイジェストを追加する
     -   自動コミット文の再試行[＃19796](https://github.com/pingcap/tidb/pull/19796)ために悲観的トランザクションモードに切り替える
     -   `Str_to_date()` [＃19693](https://github.com/pingcap/tidb/pull/19693)の`%r`と`%T`データ形式をサポート
