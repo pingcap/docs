@@ -82,7 +82,7 @@ The **Overview** tab includes a **Top 3 DB Users (RU)** panel that shows a ranke
 To drill into a specific db user's SQL statements:
 
 1. Click the **Sliced by Users** tab.
-2. In the **User** filter, select the user you want to investigate. Up to 100 users are shown; users beyond 100 are grouped as **Other users**.
+2. In the **User** filter, select the user you want to investigate. The filter displays up to 100 users and groups any additional users as **Other users**.
 3. The **Top N SQL list** and trend chart now reflect only the selected user's queries.
 
 ## Drill down into a SQL statement
@@ -112,7 +112,7 @@ When plan data is not available, the following are not shown: Plan digest, SQL R
 
 #### Multiple plans
 
-When the SQL has multiple execution plans, a plan list is shown first:
+When the SQL has multiple execution plans, the panel displays a plan list first:
 
 - Click an **available plan** to expand its full details (same as the single available plan case).
 - Clicking an **unavailable plan** does not expand further.
@@ -122,21 +122,21 @@ When the SQL has multiple execution plans, a plan list is shown first:
 The following is a typical workflow for investigating an RU spike:
 
 1. Notice an RU spike in your instance metrics or a triggered alert.
-2. Open **Monitoring** > **Top RU** > **Overview** tab and select a time range covering the spike.
+2. Go to **Monitoring** > **Top RU**, click the **Overview** tab, and select a time range covering the spike.
 3. Identify the SQL statements with the highest Total RU. Hover over each to see its RU trend and identify when the spike started.
 4. Check the **Rank by Users** panel to see whether a specific user is driving the spike.
 5. If needed, go to the **Sliced by Users** tab, select the user, and focus on their top RU-consuming SQL statements.
 6. Click a SQL statement to open its detail panel. Review the execution plan to find optimization opportunities such as missing indexes.
 7. Use the **Query Template ID** to cross-reference Slow Query/SQL Statement for additional execution context.
 8. Apply optimizations: add indexes, rewrite the SQL, or adjust business logic.
-9. Return to Top RU and select a recent time range to confirm that RU consumption has decreased after the optimization.
+9. Return to the **Top RU** page and select a recent time range to confirm that RU consumption has decreased.
 
 ## Limitations
 
 - **Not equivalent to billing RU**: Top RU values are near-real-time observability data and do not match the billing RU in your TiDB Cloud invoice. Do not use Top RU for billing reconciliation or auditing.
-- **TopN grouping**: SQL statements with lower RU may be grouped into **Others** rather than shown individually.
+- **TopN grouping**: TiDB Cloud groups SQL statements with lower RU into **Others** instead of showing them individually.
 - **Data freshness**: minute-level.
-- **Maximum query window**: 24 hours per time range selection.
+- **Maximum query window**: the maximum time range that you can select for a single query is 24 hours.
 
 ## FAQ
 
@@ -150,7 +150,7 @@ The following is a typical workflow for investigating an RU spike:
 - Refresh the page after running workload for at least 1 min.
 - Check [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md) to confirm Top RU is available for your instance version/region.
 
-If the issue persists, contact [TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+If the issue persists, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### Is Top RU the same as billing RU?
 
