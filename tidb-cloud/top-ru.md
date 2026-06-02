@@ -57,13 +57,13 @@ The **Top N SQL list** shows the highest RU-consuming SQL statements for the sel
 | Column | Description |
 |---|---|
 | SQL Statement | Normalized SQL template |
-| Total RU | Total RU consumed by this SQL in the selected time range |
-| Mean RU | Mean RU consumed by this SQL in the selected time range, total ru/excecutions |
-| Share | Percentage of total instance RU consumed by this SQL. The top N SQL statements might not add up to 100%. Include the **Others** row to account for the remaining RU consumption and reach 100%.|
-| Executions | Number of times this SQL was executed in the selected time range |
-| Plans | Number of plans this SQL was executed in the selected time range |
-| Total latency | Total execution time cost by this SQL in the selected time range |
-| Mean latency | Mean execution time cost by this SQL in the selected time range, total latency/excecutions |
+| Total RU | Total RU consumed by this SQL statement in the selected time range |
+| Mean RU | Mean RU consumed by this SQL statement in the selected time range, total ru/excecutions |
+| Share | Percentage of total instance RU consumed by this SQL statement. The top N SQL statements might not add up to 100%. Include the **Others** row to account for the remaining RU consumption and reach 100%.|
+| Executions | Number of times this SQL statement was executed in the selected time range |
+| Plans | Number of plans this SQL statement was executed in the selected time range |
+| Total latency | Total execution time cost by this SQL statement in the selected time range |
+| Mean latency | Mean execution time cost by this SQL statement in the selected time range, total latency/excecutions |
 
 > **Note:**
 >
