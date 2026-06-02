@@ -43,8 +43,8 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 | Transaction Duration | avg-{transaction model}, 99-{transaction model} | The average or the 99th percentile duration of transactions. |
 | Connection Count | All, active connection | All: the number of connections. <br/> Active connections: the number of active connections. |
 | Disconnection Count | {result} | The number of clients disconnected. |
-| Table Count by TTL Schedule Delay | `{name}` | Shows how many TTL-enabled tables fall into each schedule delay range. The `name` label is a delay bucket. Possible bucket values: `01 hour`, `02 hour`, `06 hour`, `12 hour`, `24 hour`, `72 hour`, `one week`, `others`. |
-| TTL Insert/Delete Rows by Day | `insert current day`, `delete current day`, `insert last day`, `delete last day`, `insert 2 days ago`, `delete 2 days ago` | Shows the total number of rows written into TTL-tracked tables (insert) and rows deleted by TTL jobs (delete) within a calendar day. A persistent insert/delete imbalance — where inserts consistently exceed deletes — indicates TTL is not keeping pace with data ingestion, leading to storage growth. Day-over-day comparison helps distinguish normal traffic variation from a degradation trend. |
+| Table Count by TTL Schedule Delay | `{name}` | Shows the number of TTL-enabled tables grouped by schedule delay. The `name` label is a delay bucket. Possible bucket values: `01 hour`, `02 hour`, `06 hour`, `12 hour`, `24 hour`, `72 hour`, `one week`, and `others`. |
+| TTL Insert/Delete Rows by Day | `insert current day`, `delete current day`, `insert last day`, `delete last day`, `insert 2 days ago`, `delete 2 days ago` | Shows the number of rows inserted into TTL-managed tables and the number of rows deleted by TTL jobs for each calendar day. A sustained gap where inserts consistently exceed deletes indicates that TTL processing is falling behind data ingestion, which can lead to storage growth. Comparing values across multiple days helps distinguish normal workload fluctuations from a long-term backlog trend. |
 
 ### Database
 
