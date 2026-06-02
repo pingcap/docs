@@ -163,6 +163,5 @@ No. Top RU shows near-real-time RU statistics for diagnosing high-consumption SQ
 
 ### What is the difference between the RU usage in metrics and Top RU?
 
-The RU/s metric shows the 1-minute average RU rate (RU/s) at overall instance level.
-
-Top RU shows cumulative RU per SQL statement (RU/s × duration) over the selected time range — which statements consumed the most RU in total.
+- The RU/s metric shows the 1-minute average RU rate (RU/s) at overall instance level.
+- Top RU shows cumulative RU per SQL statement (RU/s × duration) over the selected time range — which statements consumed the most RU in total.
