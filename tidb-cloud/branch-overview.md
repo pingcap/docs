@@ -41,6 +41,10 @@ Currently, TiDB Cloud branches are in beta and free of charge.
 
 - For each organization in TiDB Cloud, you can create a maximum of five branches by default across all {{{ .starter }}} and Essential instances. The branches of a {{{ .starter }}} or Essential instance will be created in the same region as the instance, and you cannot create branches for a {{{ .starter }}} or Essential instance that is throttled or larger than 100 GiB.
 
+    > **Note:**
+    >
+    > For paid organizations building agent platforms or other services that require a large number of branches, TiDB Cloud offers the **Instance Capacity Plan**, which lets you create more than five branches. To learn more, see the [Instance Capacity Plan](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan).
+
 - For each branch of a free {{{ .starter }}} instance, 10 GiB storage is allowed. For each branch of a {{{ .starter }}} instance with spending limit > 0, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
 - Branches are intended for short-term feature development and functional testing. Because branches lack auto-scaling capability, they are not suitable for performance testing.

@@ -25,7 +25,8 @@ TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers a
 
 The free plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
 
-- **No cost**: This plan is completely free, with no credit card required to get started.
+- **No cost**: This plan is free when usage is within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
+
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
@@ -44,6 +45,16 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a {{{ .starter }}} instance exceeds 5 GiB for a free {{{ .starter }}} instance, the instance automatically restricts any new connection attempts.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+
+### Instance Capacity Plan
+
+For each organization in TiDB Cloud, you can create a maximum of five [branches](/tidb-cloud/branch-overview.md) across all {{{ .starter }}} and Essential instances by default.
+
+For each paid organization in TiDB Cloud, you can create up to 100 {{{ .starter }}} instances and branches in total, with each branch counted as a separate instance.
+
+For paid organizations building agent platforms or other services that require a large number of instances and branches, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each paid TiDB Cloud organization can create more than five branches and is not subject to the limit of 100 {{{ .starter }}} instances and branches. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. 
 
 ## {{{ .essential }}} {#essential}
 
