@@ -54,7 +54,6 @@ For each paid organization in TiDB Cloud, you can create up to 100 {{{ .starter 
 
 For paid organizations building agent platforms or other services that require a large number of instances and branches, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each paid TiDB Cloud organization can create more than five branches and is not subject to the limit of 100 {{{ .starter }}} instances and branches. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
 
-
 You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. 
 
 ## {{{ .essential }}} {#essential}
