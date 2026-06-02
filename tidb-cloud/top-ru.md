@@ -48,7 +48,7 @@ Use the filters at the top of the page to narrow down the data:
 - **Top N**: Select how many SQL statements to display.
 
     - {{{ .premium }}}: **10** by default. Options: **5**, **20**, and **100**.
-    - {{{ .essential }}}: **10** by default. Options: **5**, and **20**.
+    - {{{ .essential }}}: **10** by default. Options: **5** and **20**.
 
 ### Read the SQL list
 
