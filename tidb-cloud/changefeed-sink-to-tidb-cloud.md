@@ -36,7 +36,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 変更フィードを作成する前に、ソースのTiDB Cloud Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにロードする必要があります。
 
-1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
 
     -   既存データのエクスポートとインポートにかかる時間
     -   **Sink to TiDB Cloudを**作成する時間
@@ -109,7 +109,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
     変更フィード名をクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリックなど、変更フィードに関する詳細情報が表示されます。
 
-11. シンクが作成された後、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値（デフォルト値は`10m` ）に戻します。
+11. シンクが作成された後、 [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値（デフォルト値は`10m` ）に戻します。
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';

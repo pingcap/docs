@@ -58,7 +58,7 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold)変数または[インスタンス.tidb_slow_log_threshold](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDBパラメータを変更することで変更できます。
+デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)変数または[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDBパラメータを変更することで変更できます。
 
 この領域に表示される内容は、より詳細な[遅いクエリページ](/dashboard/dashboard-slow-query.md)内容と一致しています。 **「最近のスロークエリ」**というタイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [遅いクエリページ](/dashboard/dashboard-slow-query.md)をご覧ください。
 
