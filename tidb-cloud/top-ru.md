@@ -142,7 +142,7 @@ The following is a typical workflow for investigating an RU spike:
 
 ### What is the difference between Top RU and Top SQL?
 
-[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql) ranks SQL statements by CPU time on a specific TiDB or TiKV node and is for Dedicated Tiers. Top RU ranks SQL statements by Request Unit (RU) consumption at the instance level, and supports user-level breakdown.
+[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql) ranks SQL statements by CPU time on a specific TiDB or TiKV node and is for Dedicated Tiers. Top RU ranks SQL statements by Request Unit (RU) consumption at the instance level, and supports user-level breakdown and is for Premium&Essential.
 
 ### Why is there no data in Top RU?
 
