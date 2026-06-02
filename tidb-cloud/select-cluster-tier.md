@@ -48,10 +48,14 @@ To learn more about the RU consumption of different resources (including read, w
 
 ### Instance Capacity Plan
 
-To better support agent platform builders who need to create a large number of lightweight instances for their end users, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each TiDB Cloud organization can create up to 100 free {{{ .starter }}} instances in total, with each [branch](/tidb-cloud/branch-overview.md) counted as a separate instance. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+For each organization in TiDB Cloud, you can create a maximum of five [branches](/tidb-cloud/branch-overview.md) across all {{{ .starter }}} and Essential instances by default.
+
+For each paid organization in TiDB Cloud, you can create up to 100 {{{ .starter }}} instances and branches in total, with each branch counted as a separate instance.
+
+For paid organizations building agent platforms or other services that require a large number of instances and branches, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each paid TiDB Cloud organization can create more than five branches and is not subject to the limit of 100 {{{ .starter }}} instances and branches. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
 
 
-You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. You will also be notified via email and the TiDB Cloud console when the total number of free {{{ .starter }}} instances (including branches) in your organization reaches 80 and 100.
+You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. 
 
 ## {{{ .essential }}} {#essential}
 
