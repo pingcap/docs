@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-    - Top RU is now available in public preview for TiDB Cloud Essential in the following regions:
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
 
         - AWS: `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`
 
@@ -30,7 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Premium**
 
-    - Support Dual-Layer Data Encryption on Alibaba Cloud for TiDB Cloud Premium instances.
+    - Support Dual-Layer Data Encryption on Alibaba Cloud for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances.
 
         You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
 
