@@ -8,6 +8,50 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## June 2, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Introduce the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity) for organizations that require a large number of [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and branches.
+
+      By default, for each paid organization in TiDB Cloud, you can create up to 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance. To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+- **TiDB Cloud Essential**
+
+    - Top RU is now available in Public Preview for TiDB Cloud Essential in the following regions:
+
+        - AWS: `N.Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`
+
+      This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
+
+      This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+- **TiDB Cloud Premium**
+
+    - Support Dual-Layer Data Encryption on Alibaba Cloud for TiDB Cloud Premium instances.
+
+      You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
+
+      This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium/?plan=premium#gatsby-focus-wrapper).
+
+    - Provide two new TTL monitoring metrics on the **Metrics** page (**Instance Overview** tab) for TiDB Cloud Premium instances.
+
+        - Table Count by TTL Schedule Delay
+        - TTL Insert/Delete Rows by Day
+
+      These metrics help you observe TTL job health and detect data retention issues. For more information, see [{{{ .premium }}} Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md).
+
+**API changes**
+
+- **TiDB Cloud Starter**
+
+    - For a paid organization not enrolled in the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity), TiDB Cloud API now enforces a limit of 100 Starter instances and branches in total, with each branch counted as a separate instance.
+
+        - When the limit is reached, API requests to create new TiDB Cloud Starter instances or branches are rejected.
+        - To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
 ## May 26, 2026
 
 **General changes**
