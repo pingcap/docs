@@ -19,7 +19,7 @@ Different product tiers support different Top RU capabilities:
 |---|---|---|
 | **Overview** tab | ✓ | ✓ |
 | **Sliced by Users** tab | ✓ | ✓ |
-| **Top 3 DB Users (RU)** panel | ✓ | ✓ |
+| **Top DB Users (RU)** panel | ✓ | ✓ |
 | Top N options | 5, 10, 20, 100 | 5, 10, 20 |
 | Data retention | 30 days | 7 days |
 
@@ -87,7 +87,7 @@ To drill into a specific db user's SQL statements:
 
 ## Drill down into a SQL statement
 
-Click any SQL statement in the **Top N SQL list** to open its detail panel. The information displayed depends on how many execution plans the SQL has and whether plan data is available.
+Click any SQL statement in the **Top N SQL list** to open its detail panel. 
 
 ### Execution Summary
 
@@ -103,6 +103,8 @@ Click any SQL statement in the **Top N SQL list** to open its detail panel. The 
 | Mean latency | Mean execution time cost by this SQL in the selected time range, total latency/excecutions |
 
 ### Execution Plans
+
+The information displayed depends on how many execution plans the SQL has and whether plan data is available.
 
 #### Plans not available
 
@@ -140,7 +142,7 @@ The following is a typical workflow for investigating an RU spike:
 
 ### What is the difference between Top RU and Top SQL?
 
-[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql) ranks SQL statements by CPU time on a specific TiDB or TiKV node. Top RU ranks SQL statements by Request Unit (RU) consumption at the instance level, and supports user-level breakdown.
+[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql) ranks SQL statements by CPU time on a specific TiDB or TiKV node and is for Dedicated Tiers. Top RU ranks SQL statements by Request Unit (RU) consumption at the instance level, and supports user-level breakdown.
 
 ### Why is there no data in Top RU?
 
