@@ -20,9 +20,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-    - Top RU is now available in Public Preview for TiDB Cloud Essential in the following regions:
+    - Top RU is now available in public preview for TiDB Cloud Essential in the following regions:
 
-        - AWS: `N.Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`
+        - AWS: `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`
 
       This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
 
@@ -34,7 +34,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
 
-      This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium/?plan=premium#gatsby-focus-wrapper).
+      This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
 
     - Provide two new TTL monitoring metrics on the **Metrics** page (**Instance Overview** tab) for TiDB Cloud Premium instances.
 
@@ -47,7 +47,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - For a paid organization not enrolled in the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity), TiDB Cloud API now enforces a limit of 100 Starter instances and branches in total, with each branch counted as a separate instance.
+    - For a paid organization not enrolled in the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity), TiDB Cloud API now enforces a limit of 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance.
 
         - When the limit is reached, API requests to create new TiDB Cloud Starter instances or branches are rejected.
         - To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
