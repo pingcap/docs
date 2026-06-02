@@ -9,13 +9,13 @@ summary: Learn how to use Top RU to identify the SQL statements and database use
 
 > **Note:**
 >
-> Top RU is currently available for TiDB Cloud Premium and partial TiDB Cloud Essential instances for Public Preview, in gradual rollout.
+> Top RU is currently available for {{{ .premium }}} and partial {{{ .essential }}} instances for Public Preview, in gradual rollout.
 
 ## Product tier comparison
 
 Different product tiers support different Top RU capabilities:
 
-| Feature | Premium | Essential |
+| Feature | {{{ .premium }}} | {{{ .essential }}} |
 |---|---|---|
 | **Overview** tab | ✓ | ✓ |
 | **Sliced by Users** tab | ✓ | ✓ |
@@ -38,15 +38,17 @@ Use the filters at the top of the page to narrow down the data:
 
 - **Time range**: Select a preset interval or a custom range.
 
-    Preset options: **Last 15 min**, **30 min**, **1 hour**, **2 hours**, **6 hours**, **12 hours**, **1 day**.
+    Preset options: **Last 15 min**, **30 min**, **1 hour**, **2 hours**, **6 hours**, **12 hours**, and **1 day**.
 
     For custom time ranges:
-    - The earliest available start date depends on your data retention: **30 days ago** for Premium instances, **7 days ago** for Essential instances.
+    
+    - The earliest available start date depends on your data retention: **30 days ago** for {{{ .premium }}} instances, and **7 days ago** for {{{ .essential }}} instances.
     - The maximum window for a single query is **24 hours**.
 
 - **Top N**: Select how many SQL statements to display.
-    - Premium: default **10**, options: **5**, **20**, **100**.
-    - Essential: default **10**, options: **5**, **20**.
+
+    - {{{ .premium }}}: **10** by default. Options: **5**, **20**, and **100**.
+    - {{{ .essential }}}: **10** by default. Options: **5**, and **20**.
 
 ### Read the SQL list
 
@@ -57,7 +59,7 @@ The **Top N SQL list** shows the highest RU-consuming SQL statements for the sel
 | SQL Statement | Normalized SQL template |
 | Total RU | Total RU consumed by this SQL in the selected time range |
 | Mean RU | Mean RU consumed by this SQL in the selected time range, total ru/excecutions |
-| Share | Percentage of total instance RU consumed by this SQL. The top N SQLs together account for less than 100%; adding the **Others** row gives 100%. |
+| Share | Percentage of total instance RU consumed by this SQL. The top N SQL statements might not add up to 100%. Include the **Others** row to account for the remaining RU consumption and reach 100%.|
 | Executions | Number of times this SQL was executed in the selected time range |
 | Plans | Number of plans this SQL was executed in the selected time range |
 | Total latency | Total execution time cost by this SQL in the selected time range |
@@ -75,11 +77,11 @@ Hover over any SQL statement in the list to highlight its **RU trend line** in t
 
 ### Rank by Users panel
 
-The **Overview** tab includes a **Top 3 DB Users (RU)** panel that shows a ranked list of database users by their total RU consumption for the selected time range. Use this to quickly determine whether the RU spike is driven by a specific db user.
+The **Overview** tab includes a **Top 3 DB Users (RU)** panel that shows a ranked list of database users by their total RU consumption for the selected time range. Use this panel to quickly determine whether the RU spike is driven by a specific database user.
 
 ### Sliced by Users tab
 
-To drill into a specific db user's SQL statements:
+To drill into a specific database user's SQL statements:
 
 1. Click the **Sliced by Users** tab.
 2. In the **User** filter, select the user you want to investigate. The filter displays up to 100 users and groups any additional users as **Other users**.
@@ -87,13 +89,13 @@ To drill into a specific db user's SQL statements:
 
 ## Drill down into a SQL statement
 
-Click any SQL statement in the **Top N SQL list** to open its detail panel. 
+Click any SQL statement in the **Top N SQL list** to open its detail panel.
 
-### Execution Summary
+### Execution summary
 
 | Section | Content |
 |---|---|
-| SQL Digest | Normalized SQL template id |
+| SQL Digest | Normalized SQL template ID |
 | Total RU | Total RU consumed by this SQL in the selected time range |
 | Mean RU | Mean RU consumed by this SQL in the selected time range, total ru/excecutions |
 | Share | Percentage of total instance RU consumed by this SQL |
@@ -102,7 +104,7 @@ Click any SQL statement in the **Top N SQL list** to open its detail panel.
 | Total latency | Total execution time cost by this SQL in the selected time range |
 | Mean latency | Mean execution time cost by this SQL in the selected time range, total latency/excecutions |
 
-### Execution Plans
+### Execution plans
 
 The information displayed depends on how many execution plans the SQL has and whether plan data is available.
 
@@ -133,22 +135,24 @@ The following is a typical workflow for investigating an RU spike:
 
 ## Limitations
 
-- **Not equivalent to billing RU**: Top RU values are near-real-time observability data and do not match the billing RU in your TiDB Cloud invoice. Do not use Top RU for billing reconciliation or auditing.
-- **TopN grouping**: TiDB Cloud groups SQL statements with lower RU into **Others** instead of showing them individually.
-- **Data freshness**: minute-level.
-- **Maximum query window**: the maximum time range that you can select for a single query is 24 hours.
+- **Not equivalent to billing RU**: Top RU data is intended for near-real-time observability and might differ from the RU usage reported on your TiDB Cloud invoice. Do not use Top RU data for billing reconciliation or auditing.
+- **Top N aggregation**: Only the highest RU-consuming SQL statements are displayed individually. SQL statements with lower RU consumption are aggregated into the **Others** category.
+- **Data freshness**: Data is updated at minute-level granularity.
+- **Maximum query window**: You can query up to 24 hours of data at a time.
 
 ## FAQ
 
 ### What is the difference between Top RU and Top SQL?
 
-[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql) ranks SQL statements by CPU time on a specific TiDB or TiKV node and is for Dedicated Tiers. Top RU ranks SQL statements by Request Unit (RU) consumption at the instance level, and supports user-level breakdown and is for Premium&Essential.
+[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql) ranks SQL statements by CPU time on a specific TiDB or TiKV node. It applies to TiDB Cloud Dedicated.
+
+Top RU ranks SQL statements by Request Unit (RU) consumption at the instance level, and supports user-level breakdown. It applies to {{{ .premium }}} and {{{ .essential }}}.
 
 ### Why is there no data in Top RU?
 
 - Make sure the selected time range contains actual SQL workload.
 - Refresh the page after running workload for at least 1 min.
-- Check [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md) to confirm Top RU is available for your instance version/region.
+- Check [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md) to confirm that Top RU is available for your instance version and region.
 
 If the issue persists, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
