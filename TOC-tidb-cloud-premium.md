@@ -52,6 +52,7 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
+    - [Top RU](/tidb-cloud/top-ru.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
     - Subscribe to Alert Notifications

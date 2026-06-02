@@ -63,7 +63,6 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
-    - [Top RU](/tidb-cloud/top-ru.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - Subscribe to Alert Notifications
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
