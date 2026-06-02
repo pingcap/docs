@@ -1,11 +1,11 @@
 ---
 title: Dual-Layer Data Encryption
-summary: Learn how to enable and manage Dual-Layer Data Encryption for your {{{ .premium }}} instance hosted on AWS.
+summary: Learn how to enable and manage Dual-Layer Data Encryption for your {{{ .premium }}} instance.
 ---
 
 # Dual-Layer Data Encryption
 
-This document describes how to enable and manage Dual-Layer Data Encryption for your {{{ .premium }}} instance hosted on AWS.
+This document describes how to enable and manage Dual-Layer Data Encryption for your {{{ .premium }}} instance.
 
 > **Note:**
 >
@@ -41,7 +41,7 @@ Because backup data requires the original KMS master key for access, make sure t
 
 ### Key management options
 
-Dual-Layer Data Encryption uses AWS KMS to manage master keys for data-at-rest encryption. You can choose between two key management options:
+Dual-Layer Data Encryption uses your cloud provider KMS to manage master keys for data-at-rest encryption. You can choose between two key management options:
 
 - **Customer-Managed Encryption Key (CMEK)**
 
@@ -49,7 +49,7 @@ Dual-Layer Data Encryption uses AWS KMS to manage master keys for data-at-rest e
 
     > **Warning:**
     >
-    > You are fully responsible for maintaining the key's security and availability. If you delete the configured CMEK, your {{{ .premium }}} instance becomes unusable, and you cannot recover the encrypted data.
+    > You are fully responsible for maintaining the key's security and availability.  If your Customer-Managed Encryption Key (CMEK) is deleted or permanently damaged, your instance will malfunction and the encrypted data will become permanently unrecoverable. 
 
 - **Service-Managed Encryption Key**
 
@@ -62,11 +62,11 @@ Dual-Layer Data Encryption uses AWS KMS to manage master keys for data-at-rest e
 
 ## Limitations
 
-- This feature currently supports only AWS KMS. Support for Alibaba Cloud KMS is planned for a future release.
+- Currently, this feature only supports AWS KMS and Alibaba Cloud KMS.
 - Data encryption applies to data stored by TiKV, changefeed data, and backup data. Support for TiFlash data encryption is planned for a future release.
 - After you enable Dual-Layer Data Encryption, you cannot modify the encryption configuration of the {{{ .premium }}} instance.
 - Custom encryption algorithms are not supported. You can rotate only the KMS master key. Rotating other encryption keys is not supported.
-- Your AWS KMS key must be in the same region as your {{{ .premium }}} instance. As a result, cross-region restore operations are not supported for backups that use a CMEK.
+- Your cloud provider KMS key must reside in the same region as your {{{ .premium }}} instance. As a result, cross-region restore operations are not supported for backups that use a CMEK.
 
 ## Enable Dual-Layer Data Encryption
 
@@ -80,9 +80,11 @@ When you create a {{{ .premium }}} instance, you can enable Dual-Layer Data Encr
 
 To use your own encryption key, take the following steps:
 
-1. Create a symmetric encryption key in AWS KMS.
+1. Create a symmetric encryption key in your cloud provider KMS.
 
-    The key must be in the **same region** as the planned {{{ .premium }}} instance. For detailed instructions, see [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html).
+    Before proceeding, you must create a symmetric encryption key in your cloud provider KMS. Ensure the key resides in the **same region** as your planned TiDB service.  
+    - For AWS, see [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html).
+    - For Alibaba Cloud, see [Understanding KMS keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management).
 
 2. Configure the CMEK in the [TiDB Cloud console](https://tidbcloud.com):
 
@@ -90,9 +92,11 @@ To use your own encryption key, take the following steps:
     2. Select the {{{ .premium }}} plan and complete the basic configuration.
     3. In the **Dual-Layer Data Encryption** section, click **Enable**.
     4. Select **Customer-Managed Encryption Key (CMEK)**, and then click **Add KMS Key ARN**.
-    5. Copy the displayed JSON policy and save it as `ROLE-TRUST-POLICY.JSON`. This file defines the required trust relationship.
-    6. In the AWS KMS console, add this trust policy to your key. For more information, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-    7. Return to the TiDB Cloud console, scroll to the bottom of the key creation page, and enter the **KMS Key ARN** that you obtained from AWS KMS.
+    5. Copy the displayed JSON policy statement. This policy statement defines the required key access permissions for TiDB Cloud.
+    6. In your cloud provider KMS Console, append this policy statement to your key policy.
+        - For AWS, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+        - For Alibaba Cloud, refer to [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
+    7. Return to the TiDB Cloud console, scroll to the bottom of the key creation page, and enter the **KMS Key ARN** that you obtained from your cloud provider KMS.
     8. To verify the trust relationship, click **Test and Add KMS Key ARN**.
     9. After the verification succeeds, click **Create** to finish creating your {{{ .premium }}} instance.
 
@@ -116,15 +120,16 @@ If you do not enable encryption when creating an instance, you can enable it lat
 
 #### Option 1: Customer-Managed Encryption Key (CMEK)
 
-Before you begin, make sure that you have created a symmetric encryption key in AWS KMS. Then, take the following steps:
+Before you begin, make sure that you have created a symmetric encryption key in your cloud provider KMS. Then, take the following steps:
 
 1. On the **Security** page of your {{{ .premium }}} instance, click **Enable** in the **Dual-Layer Data Encryption** section.
 2. Select **Customer-Managed Encryption Key (CMEK)**, and then click **Add KMS Key ARN**.
-3. Copy the displayed JSON policy and save it as `ROLE-TRUST-POLICY.JSON`. This file defines the required trust relationship.
-4. In the AWS KMS console, add this trust policy to your key. For more information, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-5. Return to the TiDB Cloud console, scroll to the bottom of the page, and enter the **KMS Key ARN** that you obtained from AWS KMS.
-6. To verify the trust relationship, click **Test and Add KMS Key ARN**.
-7. To enable Dual-Layer Data Encryption, click **Enable**.
+3. Copy the displayed JSON policy statement. This policy statement defines the required key access permissions for TiDB Cloud.
+4. In your cloud provider KMS console, append this policy statement to your key policy.. 
+  - For AWS, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+  - For Alibaba Cloud, refer to [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
+5. Return to the TiDB Cloud console, scroll to the bottom of the page, and enter the **KMS Key ARN** that you obtained from your cloud provider KMS.
+6. Click **Test and Add KMS Key ARN** to verify the key access configuration and enable Dual-Layer Data Encryption.
 
 #### Option 2: Service-Managed Encryption Key
 
@@ -145,6 +150,15 @@ After you enable encryption, check the status in the following places:
 
 Backups created from an encrypted {{{ .premium }}} instance are also encrypted. When you restore an encrypted backup, the new instance must use consistent encryption settings.
 
+> **Note:**
+> 
+> Currently, you can only restore an encrypted backup to the **same account** and the **same region** as the original instance. Cross-region and cross-account restore operations are not supported.
+
+> **Warning:**
+>
+> You are fully responsible for maintaining the key's security and availability.  If your Customer-Managed Encryption Key (CMEK) is deleted or permanently damaged, any backup data associated with this key will also be completely unrecoverable.
+
+
 ### Restore a backup encrypted with a CMEK
 
 If the backup is encrypted with a CMEK, make sure that the new instance can access the KMS master key during the restore. The key ARN remains unchanged.
@@ -152,7 +166,7 @@ If the backup is encrypted with a CMEK, make sure that the new instance can acce
 To verify access, click **Check** to start the trust policy verification. TiDB Cloud then checks whether the authorized TiDB Cloud account in the key policy matches the account that is associated with the original backup:
 
 - If the accounts match, no further authorization is required.
-- If the accounts do not match, copy the provided key policy and update it in AWS KMS. This update re-authorizes the key and ensures that the new instance can access it.
+- If the accounts do not match, copy the provided key policy and update it in your cloud provider KMS. This update re-authorizes the key and ensures that the new instance can access it.
 
 ### Restore a backup encrypted with a Service-Managed Encryption Key
 
@@ -160,4 +174,6 @@ If the backup is encrypted with a Service-Managed Encryption Key, the restored i
 
 ## Rotate a Customer-Managed Encryption Key (CMEK)
 
-To rotate a CMEK, you can [enable automatic key rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable.html) in AWS KMS. No additional TiDB Cloud configuration is required.
+You can configure automatic CMEK rotation in your cloud provider KMS. No configuration updates are required in TiDB Cloud.
+- For AWS, see [automatic CMEK rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html).
+- For Alibaba Cloud, see [Key rotation](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation).
