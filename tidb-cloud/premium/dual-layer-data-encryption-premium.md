@@ -82,7 +82,7 @@ To use your own encryption key, take the following steps:
 
 1. Create a symmetric encryption key in your cloud provider KMS.
 
-    Before proceeding, you must create a symmetric encryption key in your cloud provider KMS. Ensure the key resides in the **same region** as your planned TiDB service.  
+    Before proceeding, you must create a symmetric encryption key in your cloud provider KMS. Ensure the key resides in the **same region** as your planned TiDB service.
 
     - For AWS, see [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html).
     - For Alibaba Cloud, see [Understanding KMS keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management).
