@@ -26,7 +26,7 @@ Different product tiers support different Top RU capabilities:
 ## Open Top RU
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to your instance.
-2. In the left navigation, click **Monitoring** > **Top RU**.
+2. In the left navigation pane, click **Monitoring** > **Top RU**.
 
 ## Analyze RU consumption by SQL
 
