@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Introduce the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity) for organizations that require a large number of [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and branches.
 
-      By default, for each paid organization in TiDB Cloud, you can create up to 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance. To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+        By default, for each paid organization in TiDB Cloud, you can create up to 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance. To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
 
 - **TiDB Cloud Essential**
 
@@ -26,15 +26,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
 
-      This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+        This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
 
 - **TiDB Cloud Premium**
 
     - Support Dual-Layer Data Encryption on Alibaba Cloud for TiDB Cloud Premium instances.
 
-      You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
+        You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
 
-      This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+        This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
 
     - Provide two new TTL monitoring metrics on the **Metrics** page (**Instance Overview** tab) for TiDB Cloud Premium instances.
 
