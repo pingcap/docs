@@ -34,7 +34,7 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 `swap_flag`の効果を示すために、同じ構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されたデータは`UUID_TO_BIN(?, 0)`使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`使用していることです。
 
-以下の Key Visualizer のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
+以下の Key Visualizer のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの 1 つのリージョンに書き込みが集中していることがわかります。
 
 ![Key Visualizer](/media/best-practices/uuid_keyviz.png)
 

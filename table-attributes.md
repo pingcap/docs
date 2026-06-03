@@ -84,7 +84,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
 
 ### 使用法 {#usage}
 
--   テーブルの領域が結合されないようにします。
+-   テーブルのリージョンが結合されないようにします。
 
     ```sql
     ALTER TABLE t ATTRIBUTES 'merge_option=deny';
@@ -102,13 +102,13 @@ ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
     ALTER TABLE t ATTRIBUTES DEFAULT;
     ```
 
--   パーティションの領域が結合されるのを防ぎます。
+-   パーティションのリージョンが結合されるのを防ぎます。
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=deny';
     ```
 
--   パーティションに属する領域の結合を許可します。
+-   パーティションに属するリージョンの結合を許可します。
 
     ```sql
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';

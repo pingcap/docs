@@ -26,7 +26,7 @@ TiDBバージョン：5.2.4
 
     -   TiDB Lightning
 
-        -   データインポート後に空の領域が多すぎるのを避けるため、 `regionMaxKeyCount`のデフォルト値を 1_440_000 から 1_280_000 に変更します [#30018](https://github.com/pingcap/tidb/issues/30018)
+        -   データインポート後に空のリージョンが多すぎるのを避けるため、 `regionMaxKeyCount`のデフォルト値を 1_440_000 から 1_280_000 に変更します [#30018](https://github.com/pingcap/tidb/issues/30018)
 
 ## 改善点 {#improvements}
 

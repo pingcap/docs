@@ -83,7 +83,7 @@ TiDB Lightning は、10 ギガビット ネットワーク カードで使用す
 
 1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスタを停止させる可能性があります。
 
-## TiDB Lightning がターゲット TiKV クラスターにこれほど多くの空き領域を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
+## TiDB Lightning がターゲット TiKV クラスターにこれほど多くの空き容量を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
 
 デフォルト設定のレプリカ数3の場合、ターゲットTiKVクラスターに必要な容量はデータソースの6倍になります。「2」という倍数は、以下の要素がデータソースに反映されていないため、控えめな見積もりです。
 

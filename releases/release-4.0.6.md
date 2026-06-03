@@ -88,7 +88,7 @@ TiDB バージョン: 4.0.6
 
     -   TiDB Lightning
 
-        -   より正確なサイズで領域を分割して取り込む[＃369](https://github.com/pingcap/tidb-lightning/pull/369)
+        -   より正確なサイズでリージョンを分割して取り込む[＃369](https://github.com/pingcap/tidb-lightning/pull/369)
 
     -   TiDBBinlog
 
