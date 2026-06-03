@@ -770,7 +770,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-log-compact-sync-interval</code> <span class="version-mark">v5.3で追加</span> {#code-raft-log-compact-sync-interval-code-span-class-version-mark-new-in-v5-3-span}
 
--   不要ないかだの丸太を圧縮する時間間隔
+-   不要なRaftログを圧縮する時間間隔
 -   デフォルト値: `"2s"`
 -   最小値: `"0s"`
 
@@ -794,7 +794,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-log-gc-size-limit</code> {#code-raft-log-gc-size-limit-code}
 
--   残余いかだRaftの許容サイズに関する厳格な制限
+-   残余Raftログの許容サイズに関する厳格な制限
 -   デフォルト値：リージョンサイズの3/4
 -   最小値: `0`より大きい
 
@@ -2071,7 +2071,7 @@ Titanに関連するコンフィグレーション項目。
 -   RaftDBのログレベル
 -   デフォルト値: `"info"`
 
-## いかだエンジン {#raft-engine}
+## Raft Engine {#raft-engine}
 
 Raft Engineに関連するコンフィグレーション項目。
 
