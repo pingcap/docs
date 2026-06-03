@@ -150,7 +150,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   TiKV
 
-    -   復元後に多くの空の領域が生成される問題を修正[＃7632](https://github.com/tikv/tikv/pull/7632)
+    -   復元後に多くの空のリージョンが生成される問題を修正[＃7632](https://github.com/tikv/tikv/pull/7632)
     -   順序がずれたインデックス読み取り応答を受け取ったときにRaftstoreがpanic問題を修正[＃7370](https://github.com/tikv/tikv/pull/7370)
     -   統合スレッドプールが有効な場合に、無効なstorageまたはコプロセッサ読み取りプール構成が拒否されない可能性がある問題を修正しました[＃7513](https://github.com/tikv/tikv/pull/7513)
     -   TiKVサーバーがシャットダウンされたときの`join`操作のpanic問題を修正しました[＃7713](https://github.com/tikv/tikv/pull/7713)

@@ -226,13 +226,13 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>compact_log_min_rows</code><span class="version-mark">バージョン5.0の新機能</span> {#code-compact-log-min-rows-code-span-class-version-mark-new-in-v5-0-span}
 
--   TiFlashによってキャッシュされた領域内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
+-   TiFlashによってキャッシュされたリージョン内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
 -   デフォルト値を維持することをお勧めします。
 -   デフォルト値: `40960`
 
 ##### <code>compact_log_min_bytes</code><span class="version-mark">バージョン5.0の新機能</span> {#code-compact-log-min-bytes-code-span-class-version-mark-new-in-v5-0-span}
 
--   TiFlashによってキャッシュされた領域内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
+-   TiFlashによってキャッシュされたリージョン内の行の数またはサイズが`compact_log_min_rows`または`compact_log_min_bytes`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクに書き込みます。
 -   デフォルト値を維持することをお勧めします。
 -   デフォルト値: `33554432`
 

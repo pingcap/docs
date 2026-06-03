@@ -281,7 +281,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
--   `Region Merge`のサイズ制限を制御します。リージョンのサイズが指定された値より大きい場合、PD はリージョンを隣接する領域と結合しません。
+-   `Region Merge`のサイズ制限を制御します。リージョンのサイズが指定された値より大きい場合、PD はリージョンを隣接するリージョンと結合しません。
 -   デフォルト値: `54` 。v8.4.0より前のバージョンでは、デフォルト値は`20`です。v8.4.0以降では、デフォルト値は`54`です。
 -   単位: MiB
 
@@ -293,7 +293,7 @@ pd-server関連のコンフィグレーション項目
 ### <code>max-affinity-merge-region-size</code> <span class="version-mark">v8.5.5 の新機能</span> {#code-max-affinity-merge-region-size-code-span-class-version-mark-new-in-v8-5-5-span}
 
 -   [親和性](/table-affinity.md)グループに属する隣接する小さなリージョンを自動的にマージするためのしきい値を制御します。リージョンがアフィニティグループに属し、そのサイズがこのしきい値より小さい場合、PD はこのリージョンを同じアフィニティグループ内の他の隣接する小さなリージョンとマージして、リージョン数を減らし、アフィニティ効果を維持しようとします。
--   これを`0`に設定すると、アフィニティ グループ内の隣接する小さな領域の自動マージが無効になります。
+-   これを`0`に設定すると、アフィニティ グループ内の隣接する小さいリージョンの自動マージが無効になります。
 -   デフォルト値: `256`
 -   単位: MiB
 
@@ -404,7 +404,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>enable-cross-table-merge</code> {#code-enable-cross-table-merge-code}
 
--   クロステーブル領域の結合を有効にするかどうかを決定します
+-   クロステーブルリージョンの結合を有効にするかどうかを決定します
 -   デフォルト値: `true`
 
 ### <code>region-score-formula-version</code> <span class="version-mark">v5.0 の新機能</span> {#code-region-score-formula-version-code-span-class-version-mark-new-in-v5-0-span}

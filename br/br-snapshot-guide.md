@@ -87,11 +87,11 @@ tiup br restore full --pd "${PD_IP}:2379" \
 -   `ranges-succeed` : 正常に復元されたファイルの数を示します。
 -   `ranges-failed` : 復元に失敗したファイルの数を示します。
 -   `merge-ranges` : データ範囲の結合にかかる時間を示します。
--   `split-region` : 領域を分割して分散するのにかかる時間を示します。
+-   `split-region` : リージョンを分割して分散するのにかかる時間を示します。
 -   `restore-files` : TiKV が SST ファイルをダウンロードして取り込むのにかかる時間を示します。
 -   `write-CF-files` : `write CF`データを含む復元された SST ファイルの数を示します。
 -   `default-CF-files` : `default CF`データを含む復元された SST ファイルの数を示します。
--   `split-keys` : 領域を分割するために生成されたキーの数を示します。
+-   `split-keys` : リージョンを分割するために生成されたキーの数を示します。
 
 ```shell
 Split&Scatter Region <--------------------------------------------------------------------> 100.00%

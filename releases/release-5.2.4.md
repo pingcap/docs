@@ -16,7 +16,7 @@ TiDBバージョン：5.2.4
 
     -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更します。 [#31748](https://github.com/pingcap/tidb/issues/31748)
 
--   ティクヴ
+-   TiKV
 
     -   不要なRaftログを圧縮する時間間隔 (デフォルトでは`"2s"` ) を制御するために[`raft-log-compact-sync-interval`](https://docs-archive.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524)を追加する [#11404](https://github.com/tikv/tikv/issues/11404)
     -   [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval)のデフォルト値を`"10s"`から`"3s"`に変更する [#11404](https://github.com/tikv/tikv/issues/11404)
@@ -26,11 +26,11 @@ TiDBバージョン：5.2.4
 
     -   TiDB Lightning
 
-        -   データインポート後に空の領域が多すぎるのを避けるため、 `regionMaxKeyCount`のデフォルト値を 1_440_000 から 1_280_000 に変更します [#30018](https://github.com/pingcap/tidb/issues/30018)
+        -   データインポート後に空のリージョンが多すぎるのを避けるため、 `regionMaxKeyCount`のデフォルト値を 1_440_000 から 1_280_000 に変更します [#30018](https://github.com/pingcap/tidb/issues/30018)
 
 ## 改善点 {#improvements}
 
--   ティクヴ
+-   TiKV
 
     -   レイテンシージッターを低減するために、リーダーシップをCDCオブザーバーに移管する [#12111](https://github.com/tikv/tikv/issues/12111)
     -   解決ロック手順 [#11993](https://github.com/tikv/tikv/issues/11993)を必要とするリージョンの数を減らすことで、TiCDCのリカバリ時間を短縮します。
@@ -95,7 +95,7 @@ TiDBバージョン：5.2.4
     -   STR_TO_DATE関数がマイクロ秒部分の先頭のゼロを正しく処理できない問題を修正しました [#30078](https://github.com/pingcap/tidb/issues/30078)
     -   TiFlashがまだ空の範囲のテーブル読み取りをサポートしていないにもかかわらず、TiDBが空の範囲のテーブルをスキャンする際に誤った結果を取得する問題を修正します。 [#33083](https://github.com/pingcap/tidb/issues/33083)
 
--   ティクヴ
+-   TiKV
 
     -   古いメッセージが原因で TiKV がpanicを起こすバグを修正しました [#12023](https://github.com/tikv/tikv/issues/12023)
     -   メモリメトリックのオーバーフローによって引き起こされる、断続的なパケット損失とメモリ不足（OOM）の問題を修正します [#12160](https://github.com/tikv/tikv/issues/12160)

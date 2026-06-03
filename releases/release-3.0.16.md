@@ -15,7 +15,7 @@ TiDB バージョン: 3.0.16
 
     -   ハッシュパーティションプルーニング[＃17308](https://github.com/pingcap/tidb/pull/17308)の`is null`フィルタ条件をサポート
     -   複数のリージョンリクエストが同時に失敗した場合にSQLタイムアウトの問題を回避するために、各リージョンに異なる`Backoffer`秒を割り当てます[＃17583](https://github.com/pingcap/tidb/pull/17583)
-    -   新しく追加されたパーティション[＃17668](https://github.com/pingcap/tidb/pull/17668)個別の領域を分割します
+    -   新しく追加されたパーティション[＃17668](https://github.com/pingcap/tidb/pull/17668)個別のリージョンを分割します
     -   `delete`または`update`ステートメント[＃17841](https://github.com/pingcap/tidb/pull/17841)から生成されたフィードバックを破棄します
     -   将来の Go バージョン[＃17887](https://github.com/pingcap/tidb/pull/17887)との互換性を保つために、 `json.Unmarshal` in `job.DecodeArgs`の使用法を修正します。
     -   スロークエリログとステートメントサマリーテーブル[＃18128](https://github.com/pingcap/tidb/pull/18128)から機密情報を削除します
@@ -37,7 +37,7 @@ TiDB バージョン: 3.0.16
     -   アクセスが拒否されたときのエラーメッセージを修正[＃17722](https://github.com/pingcap/tidb/pull/17722)
     -   `int`と`float`タイプのJSON比較の問題を修正[＃17715](https://github.com/pingcap/tidb/pull/17715)
     -   データ競合[＃17710](https://github.com/pingcap/tidb/pull/17710)原因となる障害ポイントを更新する
-    -   テーブル[＃17617](https://github.com/pingcap/tidb/pull/17617)作成時にタイムアウト前の分割領域が機能しない可能性がある問題を修正しました。
+    -   テーブル[＃17617](https://github.com/pingcap/tidb/pull/17617)作成時にタイムアウト前の分割リージョンが機能しない可能性がある問題を修正しました。
     -   送信失敗後のあいまいなエラーメッセージによって引き起こされるpanicを修正[＃17378](https://github.com/pingcap/tidb/pull/17378)
     -   `FLASHBACK TABLE`特殊なケースで失敗する可能性がある問題を修正[＃17165](https://github.com/pingcap/tidb/pull/17165)
     -   ステートメントに文字列列[＃16658](https://github.com/pingcap/tidb/pull/16658)のみがある場合に範囲計算結果が不正確になる問題を修正しました

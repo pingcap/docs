@@ -72,7 +72,7 @@
                 -   [MPPに関する質問](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
-                -   [閲覧数](/explain-views.md)
+                -   [ビュー](/explain-views.md)
                 -   [パーティション](/explain-partitions.md)
                 -   [インデックスマージ](/explain-index-merge.md)
             -   SQL最適化プロセス
@@ -370,7 +370,7 @@
         -   [楽観的な取引](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
         -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
-    -   [閲覧数](/views.md)
+    -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
@@ -446,7 +446,7 @@
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクヴ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

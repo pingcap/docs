@@ -873,7 +873,7 @@ time: 43.12698ms
 
 ### <code>region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]</code> {#code-region-check-miss-peer-extra-peer-down-peer-pending-peer-offline-peer-empty-region-hist-size-hist-keys-jq-x3c-query-string-code}
 
-このコマンドを使用して、異常状態にある領域を確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)参照してください。
+このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)参照してください。
 
 各種タイプの説明:
 
@@ -1097,7 +1097,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
 -   `read-priorities` 、 `write-leader-priorities` 、 `write-peer-priorities` 、ホットリージョンスケジューリングにおいてスケジューラがどのディメンションを優先するかを制御します。設定では2つのディメンションがサポートされています。
 
-    -   `read-priorities`と`write-leader-priorities` 、読み取りリーダー型および書き込みリーダー型のホット領域をスケジューリングする際に、スケジューラがどの次元を優先するかを制御します。次元のオプションは`query` 、 `byte` 、 `key`です。
+    -   `read-priorities`と`write-leader-priorities` 、読み取りリーダー型および書き込みリーダー型のホットリージョンをスケジューリングする際に、スケジューラがどの次元を優先するかを制御します。次元のオプションは`query` 、 `byte` 、 `key`です。
 
     -   `write-peer-priorities` 、書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
 

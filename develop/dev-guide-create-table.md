@@ -234,7 +234,7 @@ CREATE TABLE `bookshop`.`users` (
 
 このシナリオでは、OLTPとOLAPの両方のシナリオをサポートする**HTAP（ハイブリッド・トランザクション・アンド・アナリティカル・プロセッシング）**データベースであるTiDBが、理想的なワンストップデータベースソリューションとなります。
 
-TiDBでは、オンライン・トランザクション処理（OLTP）には行ベースのstorageエンジンである[ティクヴ](/tikv-overview.md)、オンライン分析処理（OLAP）には列指向storageエンジンである[TiFlash](/tiflash/tiflash-overview.md)を使用できます。設定後、 TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってTiKVからリアルタイムでデータを複製し、TiKVとTiFlash間のデータの一貫性を厳密に確保します。
+TiDBでは、オンライン・トランザクション処理（OLTP）には行ベースのstorageエンジンである[TiKV](/tikv-overview.md)、オンライン分析処理（OLAP）には列指向storageエンジンである[TiFlash](/tiflash/tiflash-overview.md)を使用できます。設定後、 TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってTiKVからリアルタイムでデータを複製し、TiKVとTiFlash間のデータの一貫性を厳密に確保します。
 
 ### 列ベースのデータを複製する {#replicate-column-based-data}
 

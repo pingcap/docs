@@ -215,7 +215,7 @@ TiDB は、次の`SELECT`構文をサポートしていません。
 
 [`UPDATE`](/sql-statements/sql-statement-update.md)文のリファレンスを参照してください。
 
-### 閲覧数 {#views}
+### ビュー {#views}
 
 TiDB のビューは更新できず、 `UPDATE` 、 `INSERT` 、 `DELETE`などの書き込み操作をサポートしていません。
 

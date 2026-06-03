@@ -17,7 +17,7 @@ TiDBバージョン：8.5.2
 
     -   TTLテーブルおよび関連する統計収集タスクのGC実行をオーナーノードに限定することで、オーバーヘッドを削減します [#59357](https://github.com/pingcap/tidb/issues/59357) @[lcwangchao](https://github.com/lcwangchao)
 
--   ティクヴ
+-   TiKV
 
     -   `import.num-threads`設定項目を動的に変更するサポート [#17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
 
@@ -69,7 +69,7 @@ TiDBバージョン：8.5.2
     -   `ADD INDEX` DDL 操作で、リージョンサイズが 256 MiB であるにもかかわらず、グローバルソート機能が有効になっている場合に SST ファイルが 96 MiB ずつ分割される問題を修正します。 [#59962](https://github.com/pingcap/tidb/issues/59962) @[D3Hunter](https://github.com/D3Hunter)
     -   グローバルソート機能を有効にした状態でデータインポート中にメモリ使用率が80%を超えるとTiDBサーバーがメモリ不足（OOM）になる問題を修正 [#59508](https://github.com/pingcap/tidb/issues/59508) @[D3Hunter](https://github.com/D3Hunter)
 
--   ティクヴ
+-   TiKV
 
     -   `txn_status_cache` [#18384](https://github.com/tikv/tikv/issues/18384)でデッドロックが発生する可能性がある問題を修正しました @[ekexium](https://github.com/ekexium)
     -   Resolved-TS の監視とログが異常になる可能性がある問題を修正 [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)

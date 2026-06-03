@@ -47,10 +47,10 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 -   DDL
     -   TiDB [＃10272](https://github.com/pingcap/tidb/pull/10272)の旧バージョンのstorage内の文字セット名の大文字の問題を修正しました
-    -   テーブル作成時にテーブル領域を事前割り当てして、 [＃10221](https://github.com/pingcap/tidb/pull/10221)作成後の書き込みホットスポットを回避するテーブルパーティションのサポート`preSplit`
+    -   テーブル作成時にテーブルリージョンを事前割り当てして、 [＃10221](https://github.com/pingcap/tidb/pull/10221)作成後の書き込みホットスポットを回避するテーブルパーティションのサポート`preSplit`
     -   TiDBがPDのバージョン情報を誤って更新する場合がある問題を修正[＃10324](https://github.com/pingcap/tidb/pull/10324)
     -   `ALTER DATABASE`文[＃10393](https://github.com/pingcap/tidb/pull/10393)を使用して文字セットと照合順序を変更することをサポートします
-    -   ホットスポットの問題を軽減するために、指定されたテーブルのインデックスと範囲に基づいて領域を分割することをサポートします[＃10203](https://github.com/pingcap/tidb/pull/10203)
+    -   ホットスポットの問題を軽減するために、指定されたテーブルのインデックスと範囲に基づいてリージョンを分割することをサポートします[＃10203](https://github.com/pingcap/tidb/pull/10203)
     -   `alter table`文[＃10433](https://github.com/pingcap/tidb/pull/10433)を使用して小数列の精度を変更することを禁止します。
     -   ハッシュパーティション[＃10273](https://github.com/pingcap/tidb/pull/10273)式と関数の制限を修正
     -   パーティションを含むテーブルにインデックスを追加すると、場合によっては TiDBpanicが発生する問題を修正しました[＃10475](https://github.com/pingcap/tidb/pull/10475)
@@ -77,7 +77,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     -   悲観的ロックトランザクションをサポート[＃4698](https://github.com/tikv/tikv/pull/4698)
 
 -   Raftstore
-    -   ラフトストアCPUの消費を減らすために休止状態領域をサポートする[＃4591](https://github.com/tikv/tikv/pull/4591)
+    -   ラフトストアCPUの消費を減らすために休止状態リージョンをサポートする[＃4591](https://github.com/tikv/tikv/pull/4591)
     -   リーダーが学習者[＃4653](https://github.com/tikv/tikv/pull/4653) `ReadIndex`リクエストに返信しない問題を修正
     -   一部のケースでリーダーの転送に失敗する問題を修正[＃4684](https://github.com/tikv/tikv/pull/4684)
     -   いくつかのケースでダーティリードの問題を修正[＃4688](https://github.com/tikv/tikv/pull/4688)
