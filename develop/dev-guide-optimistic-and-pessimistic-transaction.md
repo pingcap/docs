@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/
 
 # 楽観的なトランザクションと悲観的なトランザクション {#optimistic-transactions-and-pessimistic-transactions}
 
-[楽観的取引](/optimistic-transaction.md)モデルではトランザクションを直接コミットし、競合が発生した場合はロールバックします。一方、 [悲観的取引](/pessimistic-transaction.md)モデルでは、トランザクションを実際にコミットする前に、変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることが確認できた場合にのみコミットを開始します。
+[楽観的トランザクション](/optimistic-transaction.md)モデルではトランザクションを直接コミットし、競合が発生した場合はロールバックします。一方、 [悲観的トランザクション](/pessimistic-transaction.md)モデルでは、トランザクションを実際にコミットする前に、変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることが確認できた場合にのみコミットを開始します。
 
 楽観的トランザクションモデルは、直接コミットの成功確率が高いため、競合率が低いシナリオに適しています。しかし、トランザクションの競合が発生すると、ロールバックのコストが比較的高くなります。
 
@@ -14,7 +14,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/
 
 悲観的トランザクションモデルはより直感的で、アプリケーション側での実装が容易です。一方、楽観的トランザクションモデルでは、アプリケーション側で複雑な再試行メカニズムが必要になります。
 
-以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的取引と悲観的取引の長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
+以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的トランザクションと悲観的トランザクションの長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
 
 1.  在庫数量を更新する
 2.  注文を作成する
@@ -100,7 +100,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 </SimpleTab>
 
-### 悲観的取引の例を書く {#write-a-pessimistic-transaction-example}
+### 悲観的トランザクションの例を書く {#write-a-pessimistic-transaction-example}
 
 <SimpleTab groupId="language">
 
@@ -1183,13 +1183,13 @@ public class TxnExample {
 
 <div label="Golang" value="golang">
 
-セクション[悲観的取引の例を書く](#write-a-pessimistic-transaction-example)のGolang の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
+セクション[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)のGolang の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
 
 </div>
 
 <div label="Python" value="python">
 
-セクション[悲観的取引の例を書く](#write-a-pessimistic-transaction-example)の Python の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
+セクション[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)の Python の例では、すでに楽観的トランザクションがサポートされており、変更せずに直接使用できます。
 
 </div>
 

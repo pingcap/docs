@@ -121,7 +121,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB v6.2.0 では、オプティマイザに`MERGE`ヒントを導入し、CTE のインライン実行を可能にしました。これにより、CTE クエリ結果の利用者はTiFlashで並列実行できるようになりました。v6.3.0 では、セッション変数[`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)導入され、セッション内での CTE のインライン実行が可能になりました。これにより、使いやすさが大幅に向上します。
 
-### 取引 {#transactions}
+### トランザクション {#transactions}
 
 -   悲観的トランザクションにおける一意制約のチェックの延期をサポート [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium)
 
