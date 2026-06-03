@@ -3,7 +3,7 @@ title: DROP RESOURCE GROUP
 summary: TiDBにおけるDROP RESOURCE GROUPの使い方を学びましょう。
 ---
 
-# リソースグループを削除する {#drop-resource-group}
+# DROP RESOURCE GROUP {#drop-resource-group}
 
 `DROP RESOURCE GROUP`ステートメントを使用してリソース グループを削除できます。
 

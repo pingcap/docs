@@ -3,7 +3,7 @@ title: DELETE | TiDB SQL Statement Reference
 summary: TiDB データベースにおける DELETE の使用法の概要。
 ---
 
-# 消去 {#delete}
+# DELETE {#delete}
 
 `DELETE`ステートメントは、指定されたテーブルから行を削除します。
 

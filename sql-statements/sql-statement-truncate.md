@@ -3,7 +3,7 @@ title: TRUNCATE | TiDB SQL Statement Reference
 summary: TiDB データベースにおける TRUNCATE の使用法の概要。
 ---
 
-# 切り捨て {#truncate}
+# TRUNCATE {#truncate}
 
 `TRUNCATE`ステートメントは、非トランザクション方式でテーブルからすべてのデータを削除します。3 `TRUNCATE` 、前の定義の`DROP TABLE` + `CREATE TABLE`と意味的に同じであると考えることができます。
 
