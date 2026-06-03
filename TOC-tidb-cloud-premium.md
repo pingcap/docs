@@ -17,7 +17,7 @@
     -   [概要](/tidb-cloud/key-concepts.md)
     -   [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
     -   [データベーススキーマ](/tidb-cloud/database-schema-concepts.md)
-    -   [トランザクション](/tidb-cloud/transaction-concepts.md)
+    -   [取引](/tidb-cloud/transaction-concepts.md)
     -   [SQL](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
     -   [拡張性](/tidb-cloud/scalability-concepts.md)
@@ -53,6 +53,7 @@
     -   監視と警告
         -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
         -   [組み込みの指標](/tidb-cloud/premium/built-in-monitoring-premium.md)
+        -   [トップRU](/tidb-cloud/top-ru.md)
         -   [内蔵アラート機能](/tidb-cloud/monitor-built-in-alerting.md)
         -   [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)
         -   アラート通知を購読する
@@ -72,7 +73,7 @@
                 -   [MPPに関する質問](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
-                -   [ビュー](/explain-views.md)
+                -   [閲覧数](/explain-views.md)
                 -   [パーティション](/explain-partitions.md)
                 -   [インデックスマージ](/explain-index-merge.md)
             -   SQL最適化プロセス
@@ -152,6 +153,7 @@
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
         -   [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
+        -   [ユーザーによるログの編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   監査管理
         -   [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
@@ -364,13 +366,13 @@
     -   [生成された列](/generated-columns.md)
     -   [SQLモード](/sql-mode.md)
     -   [テーブル属性](/table-attributes.md)
-    -   トランザクション
+    -   取引
         -   [概要](/transaction-overview.md)
         -   [隔離レベル](/transaction-isolation-levels.md)
-        -   [楽観的トランザクション](/optimistic-transaction.md)
-        -   [悲観的トランザクション](/pessimistic-transaction.md)
+        -   [楽観的な取引](/optimistic-transaction.md)
+        -   [悲観的な取引](/pessimistic-transaction.md)
         -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
-    -   [ビュー](/views.md)
+    -   [閲覧数](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
@@ -446,7 +448,7 @@
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクヴ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

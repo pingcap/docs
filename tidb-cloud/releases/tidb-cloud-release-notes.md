@@ -8,6 +8,81 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年6月2日 {#june-2-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloud Starter**
+
+    -   多数の[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスとブランチを必要とする組織向けに[インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を導入します。
+
+        デフォルトでは、 TiDB Cloudの有料組織ごとに、合計で最大 100 個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。この制限を超える場合は[インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
+
+-   **TiDB Cloud Essential**
+
+    -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の Top RU が、以下のリージョンでパブリックプレビューとして利用可能になりました。
+
+        -   AWS: `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)`
+
+        この機能は、RUを最も多く消費するSQLステートメントを分単位で表示し、最もリソースを消費するクエリを迅速に特定してコスト削減に役立てます。
+
+        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
+
+-   **TiDB Cloudプレミアム**
+
+    -   [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二層データ暗号化をサポートします。
+
+        Alibaba Cloud Key Management Service (KMS) では、独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
+
+        この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)参照してください。
+
+    -   TiDB Cloud Premiumインスタンス向けに、**メトリクス**ページ（**インスタンス概要**タブ）に2つの新しいTTL監視メトリクスを追加します。
+
+        -   TTLスケジュール遅延によるテーブル数
+        -   日ごとのTTL挿入/削除行数
+
+        これらのメトリクスは、TTL ジョブの健全性を観察し、データ保持の問題を検出するのに役立ちます。詳細については、 [TiDB Cloud Premium の組み込みメトリクス](/tidb-cloud/premium/built-in-monitoring-premium.md)を参照してください。
+
+**APIの変更**
+
+-   **TiDB Cloud Starter**
+
+    -   [インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)に登録されていない有料組織の場合、 TiDB Cloud API では、 TiDB Cloud Starterインスタンスとブランチの合計数が 100 個という制限が適用され、各ブランチは個別のインスタンスとしてカウントされます。
+
+        -   制限に達すると、新しいTiDB Cloud Starterインスタンスまたはブランチを作成するためのAPIリクエストは拒否されます。
+        -   この制限を超える場合は[インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
+
+## 2026年5月26日 {#may-26-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloud Starter**
+
+    -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で[全文検索](https://docs.pingcap.com/ai/vector-search-full-text-search-python/)(パブリックプレビュー) 用の新しい AWS リージョンが 2 つ追加されました: `Tokyo (ap-northeast-1)`と`Oregon (us-west-2)` 。この機能は、以下の AWS リージョンで利用可能になりました。
+
+        -   `Tokyo (ap-northeast-1)`
+        -   `Oregon (us-west-2)`
+        -   `Frankfurt (eu-central-1)`
+        -   `Singapore (ap-southeast-1)`
+
+-   **TiDB Cloud Essential**
+
+    -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の Top RU が、以下のリージョンでパブリックプレビューとして利用可能になりました。
+
+        -   AWS: `Oregon (us-west-2)` 、 `Frankfurt (eu-central-1)` 、 `Singapore (ap-southeast-1)`
+
+        この機能は、RUを最も多く消費しているSQLステートメントを分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
+
+        この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
+
+**APIの変更**
+
+-   TiDB Cloud IAM API（v1beta1）は、組織メンバーをプログラムで管理することをサポートします。
+
+    新しい`/members`エンドポイントを使用すると、組織のメンバーシップと役割の割り当てを管理できます。これらのエンドポイントを使用して、特定の役割を持つ新規メンバーのオンボーディング、責任の変更に伴う権限の調整、組織を離れるメンバーの削除など、ユーザーライフサイクル管理タスクを自動化できます。
+
+    詳細については、 [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Member)参照してください。
+
 ## 2026年5月19日 {#may-19-2026}
 
 **全般的な変更**
@@ -26,7 +101,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **全般的な変更**
 
--   **TiDB Cloudプレミアム**
+-   **TiDB Cloud Premium**
 
     -   `AVG RU/s`メトリクスを[TiDB Cloudプレミアム](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)**Metrics**ページに追加します。
 
@@ -126,7 +201,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 -   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 
     -   アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
-    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターする場合)、 `type`フィールドの読み取りを開始します。
+    -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
 
 詳細については、 [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)参照してください。
 
@@ -264,7 +339,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Starter**
 
-    -   実際のクライアント IP アドレスを [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に表示します。
+    -   [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示します。
 
         TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビューと`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベースリクエストの真の送信元を正確に特定し、トラブルシューティングと分析を改善できます。
 
