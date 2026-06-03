@@ -8,6 +8,50 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 6 月 2 日
+
+**常规变更**
+
+- **TiDB Cloud Starter**
+
+    - 为需要大量 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例和分支的组织推出 [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)。
+
+        默认情况下，对于 TiDB Cloud 中的每个付费组织，你总共最多可以创建 100 个 TiDB Cloud Starter 实例和分支，其中每个分支都计为一个单独的实例。若要超过此限制，请申请 [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)。
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 现已在以下区域公开预览 Top RU 功能：
+
+        - AWS：`N. Virginia (us-east-1)`、`Tokyo (ap-northeast-1)`
+
+      此功能可显示按分钟统计的 RU 消耗最高的 SQL 语句，帮助你快速识别最耗费资源的查询以降低成本。
+
+        此功能正在分阶段推出。如需抢先体验，请联系 [support@pingcap.com](mailto:support@pingcap.com)。
+
+- **TiDB Cloud Premium**
+
+    - 支持在阿里云上为 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 实例启用双层数据加密。
+
+        你可以使用自己在阿里云 Key Management Service (KMS) 中的密钥对静态数据进行加密，从而更好地控制数据安全性和合规性。
+
+        此功能现可按需提供。更多信息，请参见 [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)。
+
+    - 为 TiDB Cloud Premium 实例在 **Metrics** 页面（**Instance Overview** 标签页）提供两个新的 TTL 监控指标。
+
+        - Table Count by TTL Schedule Delay
+        - TTL Insert/Delete Rows by Day
+
+      这些指标可帮助你观察 TTL 作业的健康状况并检测数据保留问题。更多信息，请参见 [{{{ .premium }}} Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)。
+
+**API 变更**
+
+- **TiDB Cloud Starter**
+
+    - 对于未加入 [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity) 的付费组织，TiDB Cloud API 现对 TiDB Cloud Starter 实例和分支总数强制实施 100 个的限制，其中每个分支都计为一个单独的实例。
+
+        - 达到限制后，创建新的 TiDB Cloud Starter 实例或分支的 API 请求将被拒绝。
+        - 若要超过此限制，请申请 [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)。
+
 ## 2026 年 5 月 26 日
 
 **常规变更**

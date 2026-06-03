@@ -23,6 +23,8 @@ TiDB Cloud 会在 **统计/指标（信息）** 页面收集并展示你的 TiDB
 
 在 TiDB Cloud 中，统计/指标（信息）数据会保留 7 天。
 
+<CustomContent plan="dedicated">
+
 ## TiDB Cloud Dedicated 集群的统计/指标（信息）
 
 以下章节介绍 TiDB Cloud Dedicated 集群在 **统计/指标（信息）** 页面上的统计/指标（信息）。
@@ -86,16 +88,20 @@ TiDB Cloud 会在 **统计/指标（信息）** 页面收集并展示你的 TiDB
 | TiProxy Throughput | node | 每个 TiProxy 节点每秒传输的字节数。 |
 | TiProxy Sessions Migration Reasons | reason | 每分钟发生的会话迁移次数及其原因。 |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential">
+
 ## {{{ .starter }}} 和 {{{ .essential }}} 实例的统计/指标（信息） {#metrics-for-starter-and-essential-instances}
 
 **Metrics** 页面为 {{{ .starter }}} 和 {{{ .essential }}} 实例提供两个统计/指标（信息）标签页：
 
-- **Cluster Status**：显示集群级别的主要统计/指标（信息）。
+- **Instance Overview**：显示实例级别的主要统计/指标（信息）。
 - **Database Status**：显示数据库级别的主要统计/指标（信息）。
 
-### Cluster Status
+### Instance Overview {#instance-overview}
 
-下表展示了 **Cluster Status** 标签页下的集群级别主要统计/指标（信息）。
+下表展示了 **Instance Overview** 标签页下的实例级别主要统计/指标（信息）。
 
 | 统计/指标（信息）名称  | 标签 | 描述                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -120,6 +126,8 @@ TiDB Cloud 会在 **统计/指标（信息）** 页面收集并展示你的 TiDB
 | QPS Per DB | All, {Database name} | 每个数据库每秒执行的 SQL 语句数量，按 SQL 类型（如 `SELECT`、`INSERT`、`UPDATE` 等）收集。 |
 | Average Query Duration Per DB | All, {Database name} | 从客户端发送请求到数据库，直到数据库执行请求并将结果返回给客户端的持续时间。|
 | Failed Query Per DB | All, {Database name} | 每个数据库每秒 SQL 语句执行错误的类型统计。|
+
+</CustomContent>
 
 ## 常见问题
 

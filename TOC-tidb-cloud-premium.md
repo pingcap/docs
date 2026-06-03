@@ -52,6 +52,7 @@
   - 监控和告警
     - [概览](/tidb-cloud/monitor-tidb-cluster.md)
     - [内置指标](/tidb-cloud/premium/built-in-monitoring-premium.md)
+    - [Top RU](/tidb-cloud/top-ru.md)
     - [内置告警](/tidb-cloud/monitor-built-in-alerting.md)
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](/tidb-cloud/prometheus-grafana-integration.md)
     - 订阅告警通知
