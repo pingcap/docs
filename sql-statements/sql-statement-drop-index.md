@@ -3,7 +3,7 @@ title: DROP INDEX | TiDB SQL Statement Reference
 summary: TiDB データベースの DROP INDEX の使用法の概要。
 ---
 
-# インデックスの削除 {#drop-index}
+# DROP INDEX {#drop-index}
 
 このステートメントは、指定されたテーブルからインデックスを削除し、TiKV 内の領域を空きとしてマークします。
 

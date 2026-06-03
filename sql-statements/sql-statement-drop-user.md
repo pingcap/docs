@@ -3,7 +3,7 @@ title: DROP USER | TiDB SQL Statement Reference
 summary: TiDB データベースの DROP USER の使用法の概要。
 ---
 
-# ユーザーを削除 {#drop-user}
+# DROP USER {#drop-user}
 
 この文は、TiDBシステムデータベースからユーザーを削除します。オプションのキーワード`IF EXISTS`使用すると、ユーザーが存在しない場合にエラーを出力しません。この文には`CREATE USER`権限が必要です。
 
