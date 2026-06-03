@@ -6,13 +6,13 @@ aliases: ['/ja/tidb/stable/dev-guide-transaction-overview/','/ja/tidbcloud/dev-g
 
 # トランザクションの概要 {#transaction-overview}
 
-TiDBは完全な分散トランザクションをサポートし、 [楽観的取引](/optimistic-transaction.md)と[悲観的取引](/pessimistic-transaction.md) （TiDB 3.0で導入）を提供します。この記事では主に、トランザクションステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、そして楽観的トランザクションにおけるアプリケーション側の再試行とエラー処理について紹介します。
+TiDBは完全な分散トランザクションをサポートし、 [楽観的トランザクション](/optimistic-transaction.md)と[悲観的トランザクション](/pessimistic-transaction.md) （TiDB 3.0で導入）を提供します。この記事では主に、トランザクションステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、そして楽観的トランザクションにおけるアプリケーション側の再試行とエラー処理について紹介します。
 
 ## 一般的な発言 {#common-statements}
 
 この章では、TiDBにおけるトランザクションの使用方法を紹介します。以下の例は、単純なトランザクションの処理を示しています。
 
-ボブはアリスに20ドルを送金したいと考えています。この取引には2つの操作が含まれます。
+ボブはアリスに20ドルを送金したいと考えています。このトランザクションには2つの操作が含まれます。
 
 -   ボブの口座残高は 20 ドル減少します。
 -   アリスの口座残高は 20 ドル増加しました。
@@ -49,7 +49,7 @@ COMMIT;
 
 ```
 
-### 取引を開始する {#start-a-transaction}
+### トランザクションを開始する {#start-a-transaction}
 
 新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`いずれかを使用できます。
 
@@ -61,7 +61,7 @@ BEGIN;
 START TRANSACTION;
 ```
 
-TiDBのデフォルトのトランザクションモードは悲観的です。1 [楽観的取引モデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)明示的に指定することもできます。
+TiDBのデフォルトのトランザクションモードは悲観的です。1 [楽観的トランザクションモデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)明示的に指定することもできます。
 
 ```sql
 BEGIN OPTIMISTIC;

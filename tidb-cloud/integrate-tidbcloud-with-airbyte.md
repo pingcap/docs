@@ -109,7 +109,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 -   TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソル機構に基づいて実行されます。
 -   TiDB の宛先では、デフォルトの正規化モードで`timestamp`型が`varchar`型に変換されます。これは、Airbyte が送信中にタイムスタンプ型を文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないためです。
--   一部の大規模な ELT ミッションでは、TiDB の[取引制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
+-   一部の大規模な ELT ミッションでは、TiDB の[トランザクション制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
 
 ## 関連リソース {#related-resources}
 

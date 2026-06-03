@@ -141,15 +141,15 @@ summary: TiDBの機能概要について学びましょう。
 | [TiDB高速テーブル作成](/accelerated-table-creation.md)                                                                           |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 | [BDRロールを構成して、BDRモードでDDLステートメントを複製するようにします。](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 
-## 取引 {#transactions}
+## トランザクション {#transactions}
 
-| 取引                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
+| トランザクション                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [大規模トランザクション（1 TiB）](/transaction-overview.md#transaction-size-limit)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [悲観的な取引](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [楽観的な取引](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [悲観的トランザクション](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [楽観的トランザクション](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [反復読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [リードコミット隔離](/transaction-isolation-levels.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [長時間実行されているアイドル状態のトランザクションを自動的に終了する](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
