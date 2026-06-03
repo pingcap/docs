@@ -65,7 +65,7 @@ TiDB Ansible バージョン: 2.1.18
 -   TiDBBinlog
     -   `ALTER DATABASE`関連する DDL 操作によりDrainerが異常終了する問題を修正[＃770](https://github.com/pingcap/tidb-binlog/pull/770)
     -   レプリケーション効率を向上させるためにコミットbinlog のトランザクション ステータス情報のクエリをサポートする[＃761](https://github.com/pingcap/tidb-binlog/pull/761)
-    -   ドレイナーの`start_ts`ポンプの最大値`commit_ts` [＃759](https://github.com/pingcap/tidb-binlog/pull/759)より大きい場合にPumppanicが発生する可能性がある問題を修正しました。
+    -   Drainerの`start_ts`がPumpの最大`commit_ts`より大きい場合にPump panicが発生する可能性がある問題を修正しました[＃759](https://github.com/pingcap/tidb-binlog/pull/759)
 
 ## TiDB アンシブル {#tidb-ansible}
 

@@ -33,7 +33,7 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
     <!---->
 
     -   `infoschema.profiling` [＃8096](https://github.com/pingcap/tidb/pull/8096)のテーブルデータを取得する際に発生したエラーを修正
-    -   バイナリログを書き込むために、UNIXソケットをポンプクライアントに置き換えます[＃8098](https://github.com/pingcap/tidb/pull/8098)
+    -   バイナリログを書き込むために、UNIXソケットをPumpクライアントに置き換えます[＃8098](https://github.com/pingcap/tidb/pull/8098)
     -   `tidb_slow_log_threshold`環境変数のしきい値を追加して、スローログ[＃8094](https://github.com/pingcap/tidb/pull/8094)動的に設定します。
     -   `tidb_query_log_max_len`環境変数が動的にログ[＃8200](https://github.com/pingcap/tidb/pull/8200)を設定する間に切り捨てられたSQL文の元の長さを追加します
     -   `tidb_opt_write_row_id`環境変数を追加して、書き込みを許可するかどうかを制御する`_tidb_rowid` [＃8218](https://github.com/pingcap/tidb/pull/8218)
