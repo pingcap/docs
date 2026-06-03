@@ -21,11 +21,11 @@ WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_N
 
 書き換え後、TiDBはウィンドウ関数とそれに続くフィルタ条件からTopN演算子を導出できます。元のSQL（ `ORDER BY` ）のSort演算子と比較して、TopN演算子は実行効率がはるかに高くなります。さらに、TiKVとTiFlashはどちらもTopN演算子のプッシュダウンをサポートしており、書き換えられたSQLのパフォーマンスをさらに向上させます。
 
-ウィンドウ関数からTopNまたはLimitを導出することはデフォルトで無効になっています。この機能を有効にするには、セッション変数[tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`ON`に設定します。
+ウィンドウ関数からTopNまたはLimitを導出することはデフォルトで無効になっています。この機能を有効にするには、セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`ON`に設定します。
 
 この機能を有効にした後、次のいずれかの操作を実行して無効にすることができます。
 
--   セッション変数[tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`OFF`に設定します。
+-   セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`OFF`に設定します。
 -   [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)に記載されている手順に従います。
 
 ## 制限事項 {#limitations}
