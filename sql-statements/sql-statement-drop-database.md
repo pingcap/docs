@@ -3,7 +3,7 @@ title: DROP DATABASE | TiDB SQL Statement Reference
 summary: TiDB データベースの DROP DATABASE の使用法の概要。
 ---
 
-# データベースの削除 {#drop-database}
+# DROP DATABASE {#drop-database}
 
 `DROP DATABASE`文は、指定されたデータベーススキーマと、その中に作成されたすべてのテーブルとビューを永久に削除します。削除されたデータベースに関連付けられているユーザー権限は影響を受けません。
 

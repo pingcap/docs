@@ -3,7 +3,7 @@ title: DROP TABLE | TiDB SQL Statement Reference
 summary: TiDB データベースの DROP TABLE の使用法の概要。
 ---
 
-# テーブルを削除 {#drop-table}
+# DROP TABLE {#drop-table}
 
 このステートメントは、現在選択されているデータベースからテーブルを削除します。テーブルが存在しない場合は、 `IF EXISTS`修飾子を使用しない限り、エラーが返されます。
 
