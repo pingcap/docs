@@ -45,7 +45,7 @@ Dual-Layer Data Encryption uses your cloud provider KMS to manage master keys fo
 
 - **Customer-Managed Encryption Key (CMEK)**
 
-    You create, own, and manage your AWS KMS master key. This option provides full control over encryption and is suitable for organizations with strict security requirements.
+    You create, own, and manage your KMS master key. This option provides full control over encryption and is suitable for organizations with strict security requirements.
 
     > **Warning:**
     >
@@ -155,13 +155,10 @@ After you enable encryption, check the status in the following places:
 
 Backups created from an encrypted {{{ .premium }}} instance are also encrypted. When you restore an encrypted backup, the new instance must use consistent encryption settings.
 
-> **Note:**
-> 
-> Currently, you can only restore an encrypted backup to the **same account** and the **same region** as the original instance. Cross-region and cross-account restore operations are not supported.
-
 > **Warning:**
->
-> You are fully responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, any backup data associated with this key also becomes permanently unrecoverable.
+> 
+> - Currently, you can only restore an encrypted backup to the **same account** and the **same region** as the original instance. Cross-region and cross-account restore operations are not supported.
+> - You are responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, any backup data associated with this key also becomes unrecoverable.
 
 ### Restore a backup encrypted with a CMEK
 
