@@ -6330,6 +6330,17 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+### tidb_stmt_summary_group_by_user <span class="version-mark">New in v8.5.7</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to include the user that executes SQL statements as an aggregation dimension in [statement summary tables](/statement-summary-tables.md). When the variable value is `OFF`, the same SQL digest executed by different users is aggregated into the same row, and the `SAMPLE_USER` field displays one sampled user. When the variable value is `ON`, the same SQL digest executed by different users is aggregated into different rows, and the `SAMPLE_USER` field of each row indicates the execution user corresponding to the row.
+- Modifying this variable clears the current in-memory statement summary data because data before and after the modification uses different aggregation dimensions. Historical data that has been persisted to the disk is not affected.
+- After this variable is enabled, the number of statement summary records might increase with the number of different execution users for the same SQL digest, which increases memory usage.
+
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
 > **Note:**
@@ -6404,6 +6415,17 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
 
 </CustomContent>
+
+### tidb_stmt_summary_persist_evicted <span class="version-mark">New in v8.5.7</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to write statement summary records that are evicted by LRU to the statement summary log after [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The written JSON records are marked with `"evicted": true` for downstream log consumers to identify.
+- This variable takes effect only for the persistent implementation of statement summary. Records marked with `"evicted": true` are not returned as query results of `statements_summary_history` or `cluster_statements_summary_history`.
+- After this variable is enabled, the amount of statement summary logs increases as LRU evictions become more frequent. Evicted records are written by using an asynchronous buffer mechanism. When the buffer queue is full, new evicted records might be dropped.
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
