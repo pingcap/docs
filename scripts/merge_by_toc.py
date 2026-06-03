@@ -226,6 +226,7 @@ def remove_sticky_header_table(text):
     return '\n'.join(result)
 
 
+
 # remove copyable snippet code
 def remove_copyable(match):
     return ""
