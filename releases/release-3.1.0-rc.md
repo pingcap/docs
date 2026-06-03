@@ -92,7 +92,7 @@ TiDB Ansible バージョン: 3.1.0-rc
     -   スナップショット[＃7249](https://github.com/tikv/tikv/pull/7249)を適用することでレプリカの読み取りがブロックされる可能性がある問題を修正
     -   リーダーの移行により TiKV がpanicを起こす可能性がある問題を修正[＃7240](https://github.com/tikv/tikv/pull/7240)
     -   S3 [＃6967](https://github.com/tikv/tikv/pull/6967)にデータをバックアップするときにすべての SST ファイルがゼロで埋められる問題を修正しました
-    -   バックアップ中に SST ファイルのサイズが記録されず、復元後に多くの空の領域が残る問題を修正しました[＃6983](https://github.com/tikv/tikv/pull/6983)
+    -   バックアップ中に SST ファイルのサイズが記録されず、復元後に多くの空のリージョンが残る問題を修正しました[＃6983](https://github.com/tikv/tikv/pull/6983)
     -   バックアップ[＃7297](https://github.com/tikv/tikv/pull/7297)用のAWS IAMウェブアイデンティティをサポート
 
 -   PD

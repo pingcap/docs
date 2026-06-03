@@ -541,11 +541,11 @@ SELECT MIN(id), MAX(id) FROM employees;
 -   複合主キーまたは複合インデックスの場合は、分割境界を定義するために左端の列のみを使用します。
 -   左端の列が文字列の場合は、データが均等に分散されるように、その長さと値の分散を考慮してください。
 
-##### ステップ4. 領域を事前に分割して散布する {#step-4-pre-split-and-scatter-regions}
+##### ステップ4. リージョンを事前に分割して散布する {#step-4-pre-split-and-scatter-regions}
 
 一般的な方法としては、TiKVノードの数に合わせてリージョン数を分割するか、TiKVノードの数の2倍に分割することが挙げられます。これにより、開始時からクラスター全体にデータがより均等に分散されます。
 
-##### ステップ5. 必要に応じてプライマリインデックスとセカンダリインデックスの領域を分割する {#step-5-split-regions-for-primary-and-secondary-indexes-if-needed}
+##### ステップ5. 必要に応じてプライマリインデックスとセカンダリインデックスのリージョンを分割する {#step-5-split-regions-for-primary-and-secondary-indexes-if-needed}
 
 パーティションテーブル内のすべてのパーティションの主キーのリージョンを分割するには、次の SQL ステートメントを使用します。
 
@@ -555,13 +555,13 @@ SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "1970-01-01") AND (1
 
 この例では、各パーティションの主キー範囲を指定された境界内の`<number_of_regions>`リージョンに分割します。
 
-パーティションテーブル内のすべてのパーティションのセカンダリ インデックスの領域を分割するには、次の SQL ステートメントを使用します。
+パーティションテーブル内のすべてのパーティションのセカンダリ インデックスのリージョンを分割するには、次の SQL ステートメントを使用します。
 
 ```sql
 SPLIT PARTITION TABLE employees INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 ```
 
-##### （オプション）ステップ6. 新しいパーティションを追加するときに手動で領域を分割する {#optional-step-6-manually-split-regions-when-adding-a-new-partition}
+##### （オプション）ステップ6. 新しいパーティションを追加するときに手動でリージョンを分割する {#optional-step-6-manually-split-regions-when-adding-a-new-partition}
 
 パーティションを追加するときに、主キーとインデックスのリージョンを手動で分割できます。
 

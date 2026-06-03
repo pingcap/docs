@@ -87,7 +87,7 @@ ALTER TABLE t1 AFFINITY = '';
 -   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)番目のステートメントを実行します。3 `Status`の列には、アフィニティが有効になっているテーブルまたはパーティションと、それらのスケジュールステータスが表示されます。5 `Status`の列の値の意味は次のとおりです。
 
     -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティ スケジューリングを開始していません。
-    -   `Preparing` : PD はアフィニティ要件を満たすように領域をスケジュールしています。
+    -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
     -   `Stable` : すべてのリージョンが目標配布に到達しました。
 
 -   [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列目でテーブルのアフィニティ レベルを確認します。
