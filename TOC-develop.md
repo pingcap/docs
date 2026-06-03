@@ -75,7 +75,7 @@
     -   [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)
     -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
     -   [結果のページ分割](/develop/dev-guide-paginate-results.md)
-    -   [閲覧数](/develop/dev-guide-use-views.md)
+    -   [ビュー](/develop/dev-guide-use-views.md)
     -   [一時テーブル](/develop/dev-guide-use-temporary-tables.md)
     -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
     -   レプリカデータの読み取り
