@@ -49,7 +49,7 @@ Dual-Layer Data Encryption uses your cloud provider KMS to manage master keys fo
 
     > **Warning:**
     >
-    > You are fully responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, your instance will malfunction and the encrypted data will become permanently unrecoverable. 
+    > You are fully responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, your instance becomes unusable and the encrypted data is permanently unrecoverable.
 
 - **Service-Managed Encryption Key**
 
@@ -82,7 +82,7 @@ To use your own encryption key, take the following steps:
 
 1. Create a symmetric encryption key in your cloud provider KMS.
 
-    Before proceeding, you must create a symmetric encryption key in your cloud provider KMS. Ensure the key resides in the **same region** as your planned TiDB service.
+    The key must be in the **same region** as the planned {{{ .premium }}} instance.
 
     - For AWS, see [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html).
     - For Alibaba Cloud, see [Understanding KMS keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management).
@@ -94,10 +94,10 @@ To use your own encryption key, take the following steps:
     3. In the **Dual-Layer Data Encryption** section, click **Enable**.
     4. Select **Customer-Managed Encryption Key (CMEK)**, and then click **Add KMS Key ARN**.
     5. Copy the displayed JSON policy statement. This policy statement defines the required key access permissions for TiDB Cloud.
-    6. In your cloud provider KMS Console, append this policy statement to your key policy.
+    6. In your cloud provider KMS console, append this policy statement to your key policy.
 
-        - For AWS, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-        - For Alibaba Cloud, refer to [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
+        - For AWS, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+        - For Alibaba Cloud, see [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
 
     7. Return to the TiDB Cloud console, scroll to the bottom of the key creation page, and enter the **KMS Key ARN** that you obtained from your cloud provider KMS.
     8. To verify the trust relationship, click **Test and Add KMS Key ARN**.
@@ -130,8 +130,8 @@ Before you begin, make sure that you have created a symmetric encryption key in 
 3. Copy the displayed JSON policy statement. This policy statement defines the required key access permissions for TiDB Cloud.
 4. In your cloud provider KMS console, append this policy statement to your key policy.
 
-    - For AWS, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-    - For Alibaba Cloud, refer to [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
+    - For AWS, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+    - For Alibaba Cloud, see [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
 
 5. Return to the TiDB Cloud console, scroll to the bottom of the page, and enter the **KMS Key ARN** that you obtained from your cloud provider KMS.
 6. Click **Test and Add KMS Key ARN** to verify the key access configuration and enable Dual-Layer Data Encryption.
@@ -161,7 +161,7 @@ Backups created from an encrypted {{{ .premium }}} instance are also encrypted. 
 
 > **Warning:**
 >
-> You are fully responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, any backup data associated with this key will also be completely unrecoverable.
+> You are fully responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, any backup data associated with this key also becomes permanently unrecoverable.
 
 ### Restore a backup encrypted with a CMEK
 
