@@ -341,7 +341,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `EXPLAIN`ステートメントの出力で、名前を小文字に変換せずに元のパーティション名を表示することをサポート[＃32719](https://github.com/pingcap/tidb/issues/32719)
     -   IN条件と文字列型列のRANGE COLUMNSパーティションのパーティションプルーニングを有効にする[＃32626](https://github.com/pingcap/tidb/issues/32626)
     -   システム変数がNULLに設定されている場合にエラーメッセージを返す[＃32850](https://github.com/pingcap/tidb/issues/32850)
-    -   非MPPモード[＃31465](https://github.com/pingcap/tidb/issues/31465)からブロードキャスト参加を削除する
+    -   非MPPモード[＃31465](https://github.com/pingcap/tidb/issues/31465)からブロードキャスト結合を削除する
     -   動的プルーニングモード[＃32347](https://github.com/pingcap/tidb/issues/32347)でパーティションテーブル上のMPPプランの実行をサポート
     -   共通テーブル式（CTE）の述語のプッシュダウンをサポート[＃28163](https://github.com/pingcap/tidb/issues/28163)
     -   `Statement Summary`と`Capture Plan Baselines`の構成を簡素化し、グローバルベースでのみ利用可能にする[＃30557](https://github.com/pingcap/tidb/issues/30557)

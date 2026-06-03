@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 -   SQLオプティマイザー
     -   列間の順序相関を使用してコスト見積りの精度を向上させます。相関を見積りに直接使用できない場合に、インデックススキャンの優先順位を制御するヒューリスティックパラメータ`tidb_opt_correlation_exp_factor`を導入します[＃9839](https://github.com/pingcap/tidb/pull/9839)
     -   フィルタ[＃10053](https://github.com/pingcap/tidb/pull/10053)に関連する列がある場合、複合インデックスのアクセス条件を抽出するときに、インデックスのプレフィックス列をさらに一致させます。
-    -   結合に参加するテーブルの数が`tidb_opt_join_reorder_threshold`未満の場合に、結合操作の実行順序を指定するには、動的プログラミング アルゴリズムを使用します[＃8816](https://github.com/pingcap/tidb/pull/8816)
+    -   結合に含まれるテーブルの数が`tidb_opt_join_reorder_threshold`未満の場合に、結合操作の実行順序を指定するには、動的計画法アルゴリズムを使用します[＃8816](https://github.com/pingcap/tidb/pull/8816)
     -   アクセス条件として複合インデックスを使用する場合、インデックス結合を構築する内部テーブル内のインデックスのプレフィックス列をさらに一致させる[＃8471](https://github.com/pingcap/tidb/pull/8471)
     -   NULL値を持つ単一列インデックスの行数推定の精度を向上[＃9474](https://github.com/pingcap/tidb/pull/9474)
     -   論理最適化フェーズで集計関数を削除するときに、誤った実行を防ぐために`GROUP_CONCAT`特別に処理します[＃9967](https://github.com/pingcap/tidb/pull/9967)
