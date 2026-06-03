@@ -4534,7 +4534,7 @@ mysql> desc select count(distinct a) from test.t;
 -   型: 整数
 -   デフォルト値: `0`
 -   範囲: `[0, 2147483647]`
--   この変数は、TiDBの結合したテーブルの再配置アルゴリズムの選択を制御するために使用されます。Join 結合したテーブルの再配置に参加するノード数がこのしきい値を超えると、TiDBは貪欲アルゴリズムを選択し、このしきい値を下回ると、TiDBは動的計画法アルゴリズムを選択します。
+-   この変数は、TiDBの結合したテーブルの再配置アルゴリズムの選択を制御するために使用されます。結合したテーブルの再配置に含まれるノード数がこのしきい値を超えると、TiDBは貪欲アルゴリズムを選択し、このしきい値を下回ると、TiDBは動的計画法アルゴリズムを選択します。
 -   現在、OLTPクエリの場合はデフォルト値を維持することを推奨します。OLAPクエリの場合は、OLAPシナリオでの接続順序を改善するために、変数の値を10～15に設定することをお勧めします。
 
 ### tidb_opt_join_reorder_through_sel <span class="version-mark">v8.5.6で追加</span> {#tidb-opt-join-reorder-through-sel-span-class-version-mark-new-in-v8-5-6-span}
