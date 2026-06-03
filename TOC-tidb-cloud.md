@@ -575,7 +575,7 @@
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクヴ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
