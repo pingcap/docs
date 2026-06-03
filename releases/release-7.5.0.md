@@ -122,12 +122,12 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                    | 種類を変更する  | 説明                                                                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサー要求のタイムアウトを設定します。                                                                                                              |
-| ティクヴ           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 修正済み     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
-| ティクヴ           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 修正済み     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の数を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`storageエンジンに対して有効になります。                                           |
-| ティクヴ           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 修正済み     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の割合を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`storageエンジンに対して有効になります。                                          |
-| ティクヴ           | [`raftstore.evict-cache-on-memory-ratio`](/tikv-configuration-file.md#evict-cache-on-memory-ratio-new-in-v750)                     | 新しく追加された | TiKV のメモリ使用量がシステムで使用可能なメモリの 90% を超え、Raftエントリ キャッシュによって占有されているメモリが使用済みメモリの`evict-cache-on-memory-ratio`を超えると、TiKV はRaftエントリ キャッシュを削除します。 |
-| ティクヴ           | [`memory.enable-heap-profiling`](/tikv-configuration-file.md#enable-heap-profiling-new-in-v750)                                    | 新しく追加された | TiKVのメモリ使用量を追跡するためにヒーププロファイリングを有効にするかどうかを制御します。                                                                                         |
-| ティクヴ           | [`memory.profiling-sample-per-bytes`](/tikv-configuration-file.md#profiling-sample-per-bytes-new-in-v750)                          | 新しく追加された | ヒーププロファイリングによって毎回サンプリングされるデータ量を指定します。値は2のべき乗に切り上げられます。                                                                                  |
+| TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 修正済み     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
+| TiKV           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 修正済み     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の数を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`storageエンジンに対して有効になります。                                           |
+| TiKV           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 修正済み     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の割合を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`storageエンジンに対して有効になります。                                          |
+| TiKV           | [`raftstore.evict-cache-on-memory-ratio`](/tikv-configuration-file.md#evict-cache-on-memory-ratio-new-in-v750)                     | 新しく追加された | TiKV のメモリ使用量がシステムで使用可能なメモリの 90% を超え、Raftエントリ キャッシュによって占有されているメモリが使用済みメモリの`evict-cache-on-memory-ratio`を超えると、TiKV はRaftエントリ キャッシュを削除します。 |
+| TiKV           | [`memory.enable-heap-profiling`](/tikv-configuration-file.md#enable-heap-profiling-new-in-v750)                                    | 新しく追加された | TiKVのメモリ使用量を追跡するためにヒーププロファイリングを有効にするかどうかを制御します。                                                                                         |
+| TiKV           | [`memory.profiling-sample-per-bytes`](/tikv-configuration-file.md#profiling-sample-per-bytes-new-in-v750)                          | 新しく追加された | ヒーププロファイリングによって毎回サンプリングされるデータ量を指定します。値は2のべき乗に切り上げられます。                                                                                  |
 | BR             | [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics)                                                                   | 新しく追加された | データベース統計情報のバックアップと復元を行うかどうかを制御します。このパラメーター`false`に設定すると、br コマンドラインツールは列、インデックス、およびテーブルの統計情報のバックアップと復元をサポートします。                          |
 | TiCDC          | [`case-sensitive`](/ticdc/ticdc-changefeed-config.md)                                                                              | 修正済み     | さらなるテストの結果、デフォルト値が`true`から`false`に変更されました。これは、TiCDC 構成ファイル内のテーブル名とデータベース名がデフォルトで大文字と小文字を区別しないことを意味します。                                  |
 | TiCDC          | [`sink.dispatchers.partition`](/ticdc/ticdc-changefeed-config.md)                                                                  | 修正済み     | TiCDC が増分データを Kafka パーティションにディスパッチする方法を制御します。v7.5.0 では、明示的に指定された列の値を使用してパーティション番号を計算する新しい値オプション`columns`が導入されました。                       |
@@ -168,7 +168,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     -   配置ポリシーの使用を最適化：ポリシーの範囲をグローバルに設定する機能をサポートし、一般的なシナリオにおける構文サポートを改善します。 [#45384](https://github.com/pingcap/tidb/issues/45384) @[nolouch](https://github.com/nolouch)
     -   `tidb_ddl_enable_fast_reorg`が有効になっている場合のインデックス追加のパフォーマンスを向上させます。内部テストでは、v7.5.0 は v6.5.0 と比較して最大 62.5% パフォーマンスが向上しています。 [#47757](https://github.com/pingcap/tidb/issues/47757) @[tangenta](https://github.com/tangenta)
 
--   ティクヴ
+-   TiKV
 
     -   Titanマニフェストファイルを書き込む際にミューテックスを保持しないようにして、他のスレッドへの影響を防ぐ [#15351](https://github.com/tikv/tikv/issues/15351) @[Connor1996](https://github.com/Connor1996)
 
@@ -204,7 +204,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     -   MySQLの圧縮プロトコルが大量のデータ（&gt;=16M）を処理できない問題を修正[#47152](https://github.com/pingcap/tidb/issues/47152) [#47157](https://github.com/pingcap/tidb/issues/47157) [#47161](https://github.com/pingcap/tidb/issues/47161) @[dveeden](https://github.com/dveeden)
     -   TiDBが`cgroup`で起動されたときに`systemd`のリソース制限を読み取らない問題を修正 [#47442](https://github.com/pingcap/tidb/issues/47442) @[hawkingrei](https://github.com/hawkingrei)
 
--   ティクヴ
+-   TiKV
 
     -   悲観的トランザクションモードでのプリライト要求の再試行が、まれにデータ不整合のリスクを引き起こす可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187) @[MyonKeminta](https://github.com/MyonKeminta)
 

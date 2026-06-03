@@ -106,9 +106,9 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 | コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                                                | 種類を変更する  | 説明                                                                               |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
-| ティクヴ                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応の圧縮を有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
-| ティクヴ                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
-| ティクヴ                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
+| TiKV                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応の圧縮を有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
+| TiKV                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
+| TiKV                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
 | TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                         | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
 
 ### システムテーブルの変更 {#system-table-changes}
@@ -130,7 +130,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
     -   印刷不可能なプリペアドステートメント引数を16進数として出力することで、スロークエリログの可読性を向上させる [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
     -   `cluster_id`を`mysql.tidb`に追加し、外部ツールが 2 つの TiDB インスタンスが同じクラスターに属しているかどうかを判断できるようにします [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
 
--   ティクヴ
+-   TiKV
 
     -   MVCCの読み取りオーバーヘッドを検出し、読み取りコストの高いリージョンの圧縮を優先することでクエリパフォーマンスを向上させる、負荷ベースの圧縮メカニズムを導入します [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     -   クラスタのスケールアウトおよびスケールイン操作中に、古いキーをSSTファイル取り込みでクリーンアップするのではなく直接削除することで、古いキーの範囲のクリーンアップロジックを最適化し、オンラインリクエストのレイテンシーへの影響を軽減します。 [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -159,7 +159,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
     -   `modify_count`の異常な更新により統計情報が更新されない可能性がある問題を修正しました [#65426](https://github.com/pingcap/tidb/issues/65426) @[0xPoe](https://github.com/0xPoe)
     -   フェアロックモードで最初のステートメントがロックを取得する際に、キープアライブメカニズムの失敗により悲観的トランザクションが予期せずロールバックされる可能性がある問題を修正 [#66571](https://github.com/pingcap/tidb/issues/66571) @[MyonKeminta](https://github.com/MyonKeminta)
 
--   ティクヴ
+-   TiKV
 
     -   クロスビームスキップリストのメモリリーク問題を修正 [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     -   パーティションテーブルの一意でない列のグローバルインデックスが、場合によっては不整合になり、誤った結果を返す可能性がある問題を修正しました [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)

@@ -162,8 +162,8 @@ TiDB バージョン: 8.2.0
 | TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 修正済み    | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。 |
 | TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 修正済み    | デフォルト値を`5`から`0`に変更し、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行数を自動的に調整します。                                                                                    |
 | TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 修正済み    | TiDB Server のメモリ不足エラー (OOM) が発生するのを避けるため、最大値を`18446744073709551615` (64 ビット プラットフォーム) および`4294967295` `1048576`に変更します。これにより、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
-| ティクヴ           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 修正済み    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、コミット済みだが永続化されていないRaftログの最大適用数が、デフォルトでは`1024`であることを意味します。                                      |
-| ティクヴ           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 修正済み    | この設定項目では、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御できるようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                           |
+| TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 修正済み    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、コミット済みだが永続化されていないRaftログの最大適用数が、デフォルトでは`1024`であることを意味します。                                      |
+| TiKV           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 修正済み    | この設定項目では、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御できるようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                           |
 | TiFlash        | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)               | 修正済み    | 新しい値オプション`marker`が導入されました。値を`marker`に設定すると、ログ内のすべてのユーザーデータが`‹ ›`で囲まれます。                                                                                               |
 
 ### システムテーブル {#system-tables}
@@ -209,7 +209,7 @@ TiDB バージョン: 8.2.0
     -   大量のデータ（&gt;1024行）を含むテーブルを検索する際の`IndexLookUp`演算子のパフォーマンスオーバーヘッドを最適化する [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
     -   MPPロードバランシング中にリージョンを持たないストアを削除する [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
--   ティクヴ
+-   TiKV
 
     -   単一の圧縮ジョブに関係する SST ファイルの数を表示する**圧縮ジョブサイズ (ファイル)**メトリックを追加します [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
     -   [早期応募](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラム ピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログを適用できるため、少数の TiKV ノードでのジッターが書き込みリクエストのレイテンシーに与える影響が軽減されます。 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
@@ -300,7 +300,7 @@ TiDB バージョン: 8.2.0
     -   メタデータロックの不適切な使用により、特定の状況下でプランキャッシュを使用する際に異常なデータが書き込まれる可能性がある問題を修正しました [#53634](https://github.com/pingcap/tidb/issues/53634) @[zimulala](https://github.com/zimulala)
     -   トランザクション内のステートメントがメモリ不足で強制終了された後、TiDB が同じトランザクション内の次のステートメントの実行を継続すると、 `Trying to start aggressive locking while it's already started`エラーが発生し、panicが発生する可能性がある問題を修正しました。 [#53540](https://github.com/pingcap/tidb/issues/53540) @[MyonKeminta](https://github.com/MyonKeminta)
 
--   ティクヴ
+-   TiKV
 
     -   `JSON_ARRAY_APPEND()`関数を TiKV にプッシュダウンすると TiKV がpanicを起こす問題を修正しました [#16930](https://github.com/tikv/tikv/issues/16930) @[dbsid](https://github.com/dbsid)
     -   リーダーが失敗したスナップショットファイルを時間内にクリーンアップしない問題を修正 [#16976](https://github.com/tikv/tikv/issues/16976) @[hbisheng](https://github.com/hbisheng)

@@ -313,10 +313,10 @@ TiDBバージョン: 6.4.0-DMR
 | TiDB           | [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)          | 新しく追加された | システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)のデフォルト値を制御します。デフォルト値は`true`です。         |
 | TiDB           | [`tidb-max-reuse-chunk`](/tidb-configuration-file.md#tidb-max-reuse-chunk-new-in-v640)                                                            | 新しく追加された | チャンク割り当てのキャッシュされたチャンクオブジェクトの最大数を制御します。デフォルト値は`64`です。                                                                                                                    |
 | TiDB           | [`tidb-max-reuse-column`](/tidb-configuration-file.md#tidb-max-reuse-column-new-in-v640)                                                          | 新しく追加された | チャンク割り当てのキャッシュされた列オブジェクトの最大数を制御します。デフォルト値は`256`です。                                                                                                                      |
-| ティクヴ           | [`cdc.raw-min-ts-outlier-threshold`](https://docs-archive.pingcap.com/tidb/v6.2/tikv-configuration-file#raw-min-ts-outlier-threshold-new-in-v620) | 非推奨      | この設定項目は無効になりました。                                                                                                                                                        |
-| ティクヴ           | [`causal-ts.alloc-ahead-buffer`](/tikv-configuration-file.md#alloc-ahead-buffer-new-in-v640)                                                      | 新しく追加された | 事前割り当て済みのTSOキャッシュサイズ（期間）。デフォルト値は`3s`です。                                                                                                                                 |
-| ティクヴ           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                                  | 新しく追加された | タイムスタンプ要求におけるTSOの最大数を制御します。デフォルト値は`8192`です。                                                                                                                             |
-| ティクヴ           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                              | 新しく追加された | Applyスレッドが1回のポーリングで1つのFSM（有限状態機械）に対して書き込める最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                                   |
+| TiKV           | [`cdc.raw-min-ts-outlier-threshold`](https://docs-archive.pingcap.com/tidb/v6.2/tikv-configuration-file#raw-min-ts-outlier-threshold-new-in-v620) | 非推奨      | この設定項目は無効になりました。                                                                                                                                                        |
+| TiKV           | [`causal-ts.alloc-ahead-buffer`](/tikv-configuration-file.md#alloc-ahead-buffer-new-in-v640)                                                      | 新しく追加された | 事前割り当て済みのTSOキャッシュサイズ（期間）。デフォルト値は`3s`です。                                                                                                                                 |
+| TiKV           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                                  | 新しく追加された | タイムスタンプ要求におけるTSOの最大数を制御します。デフォルト値は`8192`です。                                                                                                                             |
+| TiKV           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                              | 新しく追加された | Applyスレッドが1回のポーリングで1つのFSM（有限状態機械）に対して書き込める最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                                   |
 | PD             | [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)                                                          | 新しく追加された | バージョン6.4.0以降で有効になり、PDがTSOの物理時刻を更新する間隔を制御します。デフォルト値は`50ms`です。                                                                                                            |
 | TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                              | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                     |
 | DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                              | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたテーブルのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
@@ -338,7 +338,7 @@ TiDBバージョン: 6.4.0-DMR
     -   `AUTO_RANDOM`列をクラスタ化複合インデックスの最初の列としてサポートする [#38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
     -   内部トランザクションの再試行では悲観的トランザクションを使用して、再試行の失敗を回避し、時間の消費を削減します [#38136](https://github.com/pingcap/tidb/issues/38136) @[jackysp](https://github.com/jackysp)
 
--   ティクヴ
+-   TiKV
 
     -   Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size` -0-PLACEHOLDER-E}}を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     -   リージョンのリーダーを移行する前にエントリキャッシュをウォームアップして、リーダー転送プロセス中のQPSジッターを回避する [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
@@ -403,7 +403,7 @@ TiDBバージョン: 6.4.0-DMR
     -   外部結合が削除された際に`ORDER BY`内の`GROUP_CONCAT`が考慮されず、クエリ結果が誤る問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
     -   結合したテーブルの再配置 [#38736](https://github.com/pingcap/tidb/issues/38736)により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。@[winoros](https://github.com/winoros)
 
--   ティクヴ
+-   TiKV
 
     -   複数の`cgroup`および`mountinfo`が存在する場合に Gitpod で TiDB が起動に失敗する問題を修正 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
     -   TiKV メトリクスの間違った式を修正`tikv_gc_compaction_filtered` [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)

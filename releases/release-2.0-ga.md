@@ -128,7 +128,7 @@ summary: 2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLとの
     -   gRPCの`keepalive`構成する
     -   リージョン番号の増加によって発生するOOM問題を修正
 
-## ティスパーク {#tispark}
+## TiSpark {#tispark}
 
 TiSpark は個別のバージョン番号を使用します。現在の TiSpark バージョンは 1.0 GA です。TiSpark 1.0 のコンポーネントは、Apache Spark を使用した TiDB データの分散コンピューティングを提供します。
 
