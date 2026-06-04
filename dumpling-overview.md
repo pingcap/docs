@@ -77,6 +77,7 @@ Dumpling has the following advantages:
 - RELOAD: Required when the level of `consistency` is `flush`. When the upstream is an RDS database or a managed service, you can ignore this privilege.
 - LOCK TABLES: Required when the level of `consistency` is `lock`. This privilege must be granted for all the databases and tables to be exported.
 - REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional and you can ignore it if you do not need to export metadata.
+- SHOW VIEW: Required to collect view metadata for export.
 
 ### Export to SQL files
 
@@ -405,7 +406,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--cert`                     | The address of the client certificate file for TLS connection                                                                                                                                                                                                                                                                      |
 | `--key`                      | The address of the client private key file for TLS connection                                                                                                                                                                                                                                                                      |
 | `--csv-delimiter`            | Delimiter of character type variables in CSV files                                                                                                                                                                                                                                                                                 | '"'                                        |
-| `--csv-separator`            | Separator of each value in CSV files. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations| ','                                                                                                                                                                                                                                                                                               | ','                                        |
+| `--csv-separator`            | Separator for each value in CSV files. If your data contains commas, it is recommended to use a combination of uncommon characters as the separator. Invisible characters are also supported, for example: `--csv-separator $'\001'`. | ','                                        |
 | `--csv-null-value`           | Representation of null values in CSV files                                                                                                                                                                                                                                                                                         | "\\N"                                      |
 | `--csv-line-terminator`      | The terminator at the end of a line for CSV files. When exporting data to a CSV file, you can specify the desired terminator with this option. This option supports "\\r\\n" and "\\n". The default value is "\\r\\n", which is consistent with the earlier versions. Because quotes in bash have different escaping rules, if you want to specify LF (linefeed) as a terminator, you can use a syntax similar to `--csv-line-terminator $'\n'`. | "\\r\\n" |
 | `--csv-output-dialect`      | Indicates that the source data can be exported to a CSV file in a specific required format for the database. The option value can be `""`, `"snowflake"`, `"redshift"`, or `"bigquery"`.  The default value is `""`, which means to encode and export the source data according to UTF-8. If you set the option to `"snowflake"` or `"redshift"`, the binary data type in the source data will be converted to hexadecimal, but the `0x` prefix will be removed. For example, `0x61` will be represented as `61`. If you set the option to `"bigquery"`, the binary data type will be encoded using base64. In some cases, the binary strings might contain garbled characters. | `""`  |
@@ -450,3 +451,9 @@ In addition to output data files, you can define `--output-filename-template` to
 | view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
 
 For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `db.tbl:normal` into a file named `tbl%3Anormal.$schema.sql`, and write the data into files `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 7: Exporting Data Using Dumpling" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff6" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch08_en.png" duration="60 mins" />
+</RelatedResources>

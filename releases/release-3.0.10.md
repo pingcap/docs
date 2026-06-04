@@ -44,7 +44,7 @@ TiDB Ansible version: 3.0.10
 - Add the `tidb_session_ statement_lock_keys_count` monitoring item to monitor the number of lock keys for pessimistic transactions [#14634](https://github.com/pingcap/tidb/pull/14634)
 - Fix the issue that characters in JSON such as `&`, `<`, and `>` are incorrectly escaped [#14637](https://github.com/pingcap/tidb/pull/14637)
 - Fix the system panic issue caused by excessive memory usage when the `HashJoin` operation is building a hash table [#14642](https://github.com/pingcap/tidb/pull/14642)
-- Fix the panic issue caused by incorrect processing logic when an SQL binding processes illegal records [#14645](https://github.com/pingcap/tidb/pull/14645)
+- Fix the panic issue caused by incorrect processing logic when an SQL binding processes invalid records [#14645](https://github.com/pingcap/tidb/pull/14645)
 - ix a MySQL incompatibility issue by adding Truncated error detection to decimal division calculation [#14673](https://github.com/pingcap/tidb/pull/14673)
 - Fix the issue of successfully granting users privileges on a table that does not exist [#14611](https://github.com/pingcap/tidb/pull/14611)
 

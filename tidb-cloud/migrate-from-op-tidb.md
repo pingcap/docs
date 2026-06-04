@@ -5,7 +5,7 @@ summary: Learn how to migrate data from TiDB Self-Managed to TiDB Cloud.
 
 # Migrate from TiDB Self-Managed to TiDB Cloud
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud (AWS) through Dumpling and TiCDC.
+This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud (on AWS) through Dumpling and TiCDC.
 
 The overall procedure is as follows:
 
@@ -13,18 +13,18 @@ The overall procedure is as follows:
 2. Migrate full data. The process is as follows:
    1. Export data from TiDB Self-Managed to Amazon S3 using Dumpling.
    2. Import data from Amazon S3 to TiDB Cloud.
-3. Replicate incremental data by using TiCDC.
+3. Replicate incremental data using TiCDC.
 4. Verify the migrated data.
 
 ## Prerequisites
 
-It is recommended that you put the S3 bucket and the TiDB Cloud cluster in the same region. Cross-region migration might incur additional cost for data conversion.
+It is recommended that you put the S3 bucket and the TiDB Cloud resource in the same region. Cross-region migration might incur additional cost for data conversion.
 
 Before migration, you need to prepare the following:
 
 - An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target TiDB Cloud cluster hosted on AWS
+- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target TiDB Cloud resource hosted on AWS
 
 ## Prepare tools
 
@@ -39,7 +39,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB cluster in TiDB Cloud.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB Cloud resource.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -77,11 +77,11 @@ You need the following privileges to export data from the upstream database:
 
 ### Deploy TiCDC
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to TiDB Cloud.
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to the downstream TiDB Cloud resource.
 
-1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
+1. Confirm whether the current TiDB version of the upstream TiDB Self-Managed cluster supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the upstream TiDB Self-Managed cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
 
-2. Add the TiCDC component to the TiDB cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
+2. Add the TiCDC component to the upstream TiDB Self-Managed cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
 
     ```yaml
     cdc_servers:
@@ -111,7 +111,7 @@ To migrate data from the TiDB Self-Managed cluster to TiDB Cloud, perform a full
 
 You need to migrate data from the TiDB Self-Managed cluster to Amazon S3 using Dumpling.
 
-If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
+If your TiDB Self-Managed cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
 
 #### Step 1. Disable the GC mechanism of the upstream TiDB Self-Managed cluster temporarily
 
@@ -201,11 +201,10 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to TiDB Cloud.
 
-1. Get the Account ID and External ID of the cluster in the TiDB Cloud console. For more information, see [Step 2. Configure Amazon S3 access](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access).
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target TiDB resource according to the following documentation:
 
-    The following screenshot shows how to get the Account ID and External ID:
-
-    ![Get the Account ID and External ID](/media/tidb-cloud/op-to-cloud-get-role-arn.png)
+   - For TiDB Cloud Dedicated clusters, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
+   - For {{{ .starter }}} or {{{ .essential }}} instances, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn).
 
 2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
 
@@ -269,7 +268,10 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
 5. Get the Role-ARN. Go to [AWS Console > IAM > Access Management > Roles](https://console.aws.amazon.com/iamv2/home#/roles). Switch to your region. Click the role you have created, and note down the ARN. You will use it when importing data into TiDB Cloud.
 
-6. Import data to TiDB Cloud. See [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+6. Import data to TiDB Cloud.
+
+    - For TiDB Cloud Dedicated clusters, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+    - For {{{ .starter }}} or {{{ .essential }}} instances, see [Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-csv-files-serverless.md).
 
 ## Replicate incremental data
 
@@ -281,17 +283,17 @@ To replicate incremental data, do the following:
 
 2. Grant TiCDC to connect to TiDB Cloud.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/project/clusters), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target resource to go to its overview page.
     2. In the left navigation pane, click **Settings** > **Networking**.
     3. On the **Networking** page, click **Add IP Address**.
     4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
-3. Get the connection information of the downstream TiDB Cloud cluster.
+3. Get the connection information of the downstream TiDB Cloud resource.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/project/clusters), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud resource to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    4. From the connection information, you can get the host IP address and port of the TiDB Cloud resource. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
@@ -315,7 +317,7 @@ To replicate incremental data, do the following:
 
     For more information, see [CLI and Configuration Parameters of TiCDC Changefeeds](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config).
 
-5. Enable the GC mechanism again in the upstream cluster. If no error or delay is found in incremental replication, enable the GC mechanism to resume garbage collection of the cluster.
+5. Enable the GC mechanism again in the upstream cluster. If no error or delay is found in incremental replication, enable the GC mechanism to resume garbage collection of the upstream cluster.
 
     Run the following command to verify whether the setting works.
 
@@ -346,17 +348,17 @@ To replicate incremental data, do the following:
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster.
+    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud resource.
 
-7. Set the same timezone for the upstream and downstream clusters. By default, TiDB Cloud sets the timezone to UTC. If the timezone is different between the upstream and downstream clusters, you need to set the same timezone for both clusters.
+7. Set the same timezone for the upstream and downstream. By default, TiDB Cloud sets the timezone to UTC. If the timezone is different between the upstream and downstream, you need to set the same timezone for both upstream and downstream.
 
-    1. In the upstream cluster, run the following command to check the timezone:
+    1. In the upstream TiDB Self-Managed cluster, run the following command to check the timezone:
 
         ```sql
         SELECT @@global.time_zone;
         ```
 
-    2. In the downstream cluster, run the following command to set the timezone:
+    2. In the downstream TiDB Cloud resource, run the following command to set the timezone:
 
         ```sql
         SET GLOBAL time_zone = '+08:00';
@@ -368,7 +370,7 @@ To replicate incremental data, do the following:
         SELECT @@global.time_zone;
         ```
 
-8. Back up the [query bindings](/sql-plan-management.md) in the upstream cluster and restore them in the downstream cluster. You can use the following query to back up the query bindings:
+8. Back up the [query bindings](/sql-plan-management.md) in the upstream TiDB Self-Managed cluster and restore them in the downstream TiDB Cloud resource. You can use the following query to back up the query bindings:
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
@@ -376,9 +378,9 @@ To replicate incremental data, do the following:
 
     If you do not get any output, query bindings might not be used in the upstream cluster. In this case, you can skip this step.
 
-    After you get the query bindings, run them in the downstream cluster to restore the query bindings.
+    After you get the query bindings, run them in the downstream TiDB Cloud resource to restore the query bindings.
 
-9. Back up the user and privilege information in the upstream cluster and restore them in the downstream cluster. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
+9. Back up the user and privilege information in the upstream TiDB Self-Managed cluster and restore them in the downstream TiDB Cloud resource. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
 
     ```shell
     #!/bin/bash
@@ -407,4 +409,4 @@ To replicate incremental data, do the following:
     backup_user_priv
     ```
     
-    After you get the user and privilege information, run the generated SQL statements in the downstream cluster to restore the user and privilege information.
+    After you get the user and privilege information, run the generated SQL statements in the downstream TiDB Cloud resource to restore the user and privilege information.

@@ -32,7 +32,7 @@ Prepare the following based on the strategy you choose:
 
 TiDB is [compatible with MySQL](/mysql-compatibility.md), and MySQL and MariaDB have a lot of functionality in common. However, there might be MariaDB-specific features that might not be compatible with TiDB that you should be aware of before migrating.
 
-Besides checking the items in this section, it is recommended that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
+Besides checking the items in this section, it is recommended that you also check the [Compatibility and Differences](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences) in the MariaDB documentation.
 
 ### Authentication
 
@@ -61,7 +61,7 @@ GROUP BY
 
 ### System-versioned tables
 
-TiDB does not support [system-versioned tables](https://mariadb.com/kb/en/system-versioned-tables/). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system-versioned tables.
+TiDB does not support [system-versioned tables](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables). However, TiDB does support [`AS OF TIMESTAMP`](/as-of-timestamp.md) which might replace some of the use cases of system-versioned tables.
 
 You can check for affected tables with the following statement:
 
@@ -186,18 +186,22 @@ WHERE
 
 TiDB does not support the `latin1_swedish_ci` collation that is often used in MariaDB.
 
+TiDB does not support `utf8mb4_uca1400_ai_ci`, the default collation in MariaDB 11.6 and later versions. Use `utf8mb4_0900_ai_ci` instead. These two collations differ in their versions of the [Unicode Collation Algorithm (UCA)](http://www.unicode.org/reports/tr10/): `utf8mb4_0900_ai_ci` uses UCA 9.0.0, while `utf8mb4_uca1400_ai_ci` uses UCA 14.0.0.
+
 To see what collations TiDB supports, execute this statement on TiDB:
 
 ```sql
 SHOW COLLATION;
 ```
 
-```sql
+```
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | ascii_bin          | ascii   |  65 | Yes     | Yes      |       1 | PAD SPACE     |
 | binary             | binary  |  63 | Yes     | Yes      |       1 | NO PAD        |
+| gb18030_bin        | gb18030 | 249 |         | Yes      |       1 | PAD SPACE     |
+| gb18030_chinese_ci | gb18030 | 248 | Yes     | Yes      |       1 | PAD SPACE     |
 | gbk_bin            | gbk     |  87 |         | Yes      |       1 | PAD SPACE     |
 | gbk_chinese_ci     | gbk     |  28 | Yes     | Yes      |       1 | PAD SPACE     |
 | latin1_bin         | latin1  |  47 | Yes     | Yes      |       1 | PAD SPACE     |
@@ -210,7 +214,7 @@ SHOW COLLATION;
 | utf8mb4_general_ci | utf8mb4 |  45 |         | Yes      |       1 | PAD SPACE     |
 | utf8mb4_unicode_ci | utf8mb4 | 224 |         | Yes      |       8 | PAD SPACE     |
 +--------------------+---------+-----+---------+----------+---------+---------------+
-13 rows in set (0.00 sec)
+15 rows in set (0.000 sec)
 ```
 
 To check what collations the columns of your current tables are using, you can use this statement:
@@ -252,6 +256,84 @@ ORDER BY
 
 See also [Character Set and Collation](/character-set-and-collation.md).
 
+### Index length
+
+As the following example shows, MariaDB automatically converts an index to a prefix index and returns a warning if the index exceeds the maximum key length. Unlike MariaDB, TiDB follows the MySQL behavior: it does not perform this automatic conversion and returns an error instead. Therefore, when migrating MariaDB DDL to TiDB, if an indexed column might exceed the maximum key length supported by TiDB, you need to modify your scripts to create a prefix index explicitly.
+
+```
+MariaDB> \W
+Show warnings enabled.
+MariaDB> CREATE TABLE t1(id SERIAL, c1 VARCHAR(800));
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB> ALTER TABLE t1 ADD INDEX(c1);
+Query OK, 0 rows affected, 1 warning (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` varchar(800) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  KEY `c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
+
+MariaDB also has special handling for unique indexes that exceed the maximum key length. For example, in the following example, MariaDB creates a `USING HASH` unique index on a `TEXT` column. TiDB does not provide this feature.
+
+```
+MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB> ALTER TABLE t2 ADD INDEX regular_index_c1 (c1);
+Query OK, 0 rows affected, 1 warning (0.034 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> ALTER TABLE t2 ADD UNIQUE INDEX unique_index_c1 (c1);
+Query OK, 0 rows affected (0.048 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB> SHOW CREATE TABLE t2\G
+*************************** 1. row ***************************
+       Table: t2
+Create Table: CREATE TABLE `t2` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_c1` (`c1`) USING HASH,
+  KEY `regular_index_c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
+
+To enforce uniqueness on a long text column in TiDB, you can add a generated hash column and create a unique index on that generated hash column as follows:
+
+```
+tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT NOT NULL);
+Query OK, 0 rows affected (0.102 sec)
+
+tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
+Query OK, 0 rows affected (0.242 sec)
+
+tidb> ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
+Query OK, 0 rows affected (0.363 sec)
+
+tidb> INSERT INTO t1(id,c1) VALUES (1,'aaa');
+Query OK, 1 row affected (0.015 sec)
+
+tidb> INSERT INTO t1(id,c1) VALUES (2,'bbb');
+Query OK, 1 row affected (0.006 sec)
+
+tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
+ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
+tidb>
+```
+
 ## Dump data with Dumpling and restore data with TiDB Lightning
 
 This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
@@ -290,7 +372,7 @@ To use DM, you need to deploy a set of DM services either with a [TiUP cluster](
 
 ### Step 1. Prepare
 
-Make sure that binlogs are enabled on MariaDB and that the `binlog_format` is set to `ROW`. It is also recommended to set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
+Enable binlog on MariaDB and set `binlog_format=ROW`, `binlog_row_image=FULL`, and `binlog_legacy_event_pos=ON`. Also set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
 
 You also need an account with the `SUPER` permission or with the `BINLOG MONITOR` and `REPLICATION MASTER ADMIN` permissions. This account also needs read permission for the schemas you are going to migrate.
 

@@ -26,13 +26,13 @@ Guide for an easy way to get started with TiDB Cloud.
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidbcloud/dev-guide-overview" label="Developer Guide" icon="cloud-developer-mauve">
+<DocHomeCard href="/developer/" label="Developer Guide" icon="cloud-developer-mauve">
 
 Connect your application with the languages and frameworks you prefer.
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in TiDB Cloud (Beta)" icon="cloud-vector-mauve">
+<DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Beta)" icon="cloud-vector-mauve">
 
 Explore native support of Vector Search in TiDB Cloud to build your AI application.
 
@@ -74,21 +74,15 @@ Learn how to deploy TiDB locally in a production environment.
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidb/stable/dev-guide-overview" label="Developer Guide" icon="oss-developer-blue">
+<DocHomeCard href="/developer/" label="Developer Guide" icon="oss-developer-blue">
 
-For application developers using TiDB Self-Managed.
+Connect your application with the languages and frameworks you prefer.
 
 </DocHomeCard>
 
 <DocHomeCard href="/tidb/stable/mysql-compatibility" label="MySQL Compatibility" icon="oss-mysql-blue">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/dev/tidb-roadmap" label="TiDB Self-Managed Roadmap" icon="oss-roadmap-blue">
-
-Planned features and release dates for TiDB Self-Managed.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x.
 
 </DocHomeCard>
 

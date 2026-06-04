@@ -1,24 +1,24 @@
 ---
-title: Import Data into TiDB Cloud Serverless via MySQL CLI
-summary: Learn how to import Data into TiDB Cloud Serverless via MySQL CLI.
+title: Import Data into {{{ .starter }}} or Essential via MySQL CLI
+summary: Learn how to import Data into {{{ .starter }}} or {{{ .essential }}} via MySQL CLI.
 ---
 
-# Import Data into TiDB Cloud Serverless via MySQL CLI
+# Import Data into {{{ .starter }}} or Essential via MySQL CLI
 
-This document describes how to import data into TiDB Cloud Serverless via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
+This document describes how to import data into {{{ .starter }}} or {{{ .essential }}} via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
 
 ## Prerequisites
 
-Before you can import data via MySQL CLI to TiDB Cloud Serverless, you need the following prerequisites:
+Before you can import data via MySQL CLI to {{{ .starter }}} or {{{ .essential }}}, you need the following prerequisites:
 
-- You have access to your TiDB Cloud Serverless cluster. If you do not have, create one following the instructions in [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- You have access to your {{{ .starter }}} or {{{ .essential }}} instance. If you do not have, create one following the instructions in [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md).
 - Install MySQL CLI on your local computer.
 
-## Step 1. Connect to your TiDB Cloud Serverless cluster
+## Step 1. Connect to your {{{ .starter }}} or Essential instance
 
-Connect to your TiDB cluster.
+Connect to your {{{ .starter }}} or Essential instance.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -53,7 +53,7 @@ INSERT INTO products (product_id, product_name, price) VALUES
     (3, 'Tablet', 299.99);
 ```
 
-## Step 3. Import data from a SQL or CSV file
+## Step 3. Import data from an SQL or CSV file
 
 You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type.
 

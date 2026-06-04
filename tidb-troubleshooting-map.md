@@ -402,7 +402,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - The database related passwords in all the DM configuration files should be encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt the password. Cleartext passwords can be used since v1.0.6.
     - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](/dm/dm-precheck.md) automatically while starting the data replication task.
-    - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5) in Chinese.
+    - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5) in Chinese.
 
 - 6.1.3 A replication task is interrupted with the `driver: bad connection` error returned.
 
@@ -440,7 +440,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 6.1.7 The DM replication process returns an error `Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`.
 
-    - This value cannot be successfully written into MySQL 8.0 or TiDB, but can be written into MySQL 5.7. You can skip the data format check by enabling the `tidb_skip_utf8_check` parameter.
+    - This value cannot be successfully written into MySQL 8.x or TiDB, but can be written into MySQL 5.7. You can skip the data format check by enabling the `tidb_skip_utf8_check` parameter.
 
 ### 6.2 TiDB Lightning
 
@@ -498,19 +498,13 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     You can increase the GC lifetime by modifying the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) system variable. Generally, it is not recommended to modify this parameter, because changing it might cause many old versions to pile up if this transaction has a large number of `UPDATE` and `DELETE` statements.
 
-- 7.1.2 `txn takes too much time`.
-
-    This error is returned when you commit a transaction that has not been committed for a long time (over 590 seconds).
-
-    If your application needs to execute a transaction of such a long time, you can increase the `[tikv-client] max-txn-time-use = 590` parameter and the GC lifetime to avoid this issue. It is recommended to check whether your application needs such a long transaction time.
-
-- 7.1.3 `coprocessor.go` reports `request outdated`.
+- 7.1.2 `coprocessor.go` reports `request outdated`.
 
     This error is returned when the coprocessor request sent to TiKV waits in a queue at TiKV for over 60 seconds.
 
     You need to investigate why the TiKV coprocessor is in a long queue.
 
-- 7.1.4 `region_cache.go` reports a large number of `switch region peer to next due to send request fail`, and the error message is `context deadline exceeded`.
+- 7.1.3 `region_cache.go` reports a large number of `switch region peer to next due to send request fail`, and the error message is `context deadline exceeded`.
 
     The request for TiKV timed out and triggers the region cache to switch the request to other nodes. You can continue to run the `grep "<addr> cancelled` command on the `addr` field in the log and take the following steps according to the `grep` results:
 
@@ -521,7 +515,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - `wait response is cancelled`: The request timed out after it is sent to TiKV. You need to check the response time of the corresponding TiKV address and the Region logs in PD and KV at that time.
 
-- 7.1.5 `distsql.go` reports `inconsistent index`.
+- 7.1.4 `distsql.go` reports `inconsistent index`.
 
     The data index seems to be inconsistent. Run the `admin check table <TableName>` command on the table where the reported index is. If the check fails, disable garbage collection by running the following command, and [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md):
 

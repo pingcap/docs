@@ -67,11 +67,11 @@ The support plans in the Connected Care services introduce a completely new set 
 
 With these new features, the Connected Care services offer you better connectivity, more personalized support, and cost-effective solutions for different customer needs.
 
-- New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
+- New **Enterprise** and **Premium** plans: provide modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
 
-- New **Developer** plan: customers benefit from access to the same community and [TiDB.AI](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying direct connections with unlimited access to technical support.
+- New **Developer** plan: provides access to the same community channels ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG)) and [TiDB.AI](https://tidb.ai/) assistance as the **Basic** plan, along with direct connections and unlimited access to technical support.
 
-- New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [TiDB.AI](https://tidb.ai/) for technical assistance.
+- New **Basic** plan: you can join community channels ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG)) to engage with other community members and use [TiDB.AI](https://tidb.ai/) for technical assistance.
 
 ## Transition to Connected Care
 

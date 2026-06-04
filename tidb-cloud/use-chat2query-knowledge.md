@@ -11,7 +11,7 @@ Starting from v3, the Chat2Query API enables you to add or modify knowledge base
 
 > **Note:**
 >
-> Knowledge base related endpoints are available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters by default. To use knowledge base related endpoints on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> Knowledge base related endpoints are only available for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances hosted on AWS. To use knowledge base related endpoints on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Before you begin
 
@@ -38,7 +38,7 @@ The following is a general code example for calling this endpoint.
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
  --header 'content-type: application/json'\
  --data-raw '{
-    "cluster_id": "<The ID of the cluster to which the database belongs>",
+    "cluster_id": "<The ID of the {{{ .starter }}} instance to which the database belongs>",
     "database": "<The name of the target database>",
     "description": "<Your knowledge base description>"
 }'

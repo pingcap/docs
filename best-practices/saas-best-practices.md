@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
 summary: Learn best practices for TiDB in SaaS (Software as a Service) multi-tenant scenarios, especially for environments where the number of tables in a single cluster exceeds one million.
+aliases: ['/tidb/stable/saas-best-practices/','/tidb/dev/saas-best-practices/']
 ---
 
 # Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
@@ -89,7 +90,7 @@ When you use [Stale Read](/stale-read.md), an outdated schema version might trig
     - For one million tables, use BR instances with 32 GiB or more memory.
     - For three million tables, use BR instances with 64 GiB or more memory.
 * BR log backup and snapshot restore consume additional TiKV memory. It is recommended to use TiKV instances with 32 GiB or more memory.
-* Adjust BR configurations [`pitr-batch-count` and `pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) as needed to improve log restore speed.
+* Adjust BR configurations [`pitr-batch-count` and `pitr-concurrency`](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr) as needed to improve log restore speed.
 
 ## Import data with TiDB Lightning
 

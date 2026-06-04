@@ -15,7 +15,7 @@ Traditional log backups store write operations in a highly unstructured manner, 
 - **Write amplification**: all writes must be compacted from L0 to the bottommost level by level.
 - **Dependency on full backups**: frequent full backups are required to control the amount of recovery data, which can impact application operations.
 
-Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
+Starting from v8.5.5 and v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
 - SST files can be quickly imported into the cluster, **improving recovery performance**.
 - Redundant data is removed during compaction, **reducing storage space consumption**.

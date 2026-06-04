@@ -1,23 +1,33 @@
 ---
-title: TiDB Cloud Cluster Events
-summary: Learn how to view the events for TiDB Cloud clusters using the Events page.
+title: Events
+summary: Learn how to view the events for TiDB Cloud resources using the Events page.
 ---
 
-# TiDB Cloud Cluster Events
+# Events
 
-TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+<CustomContent plan="starter,essential">
 
-This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
+For {{{ .starter }}} and Essential instances, TiDB Cloud logs the historical events at the instance level. An *event* indicates a change in your {{{ .starter }}} or Essential instance. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
+For TiDB Cloud Dedicated clusters, TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud Dedicated cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+
+</CustomContent>
+
+This document describes how to view the historical events using the **Events** page and lists the supported event types.
 
 ## View the Events page
 
 To view the events on the **Events** page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter,essential">{{{ .starter }}} or Essential instance</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent> to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Monitoring** > **Events**.
 
@@ -42,8 +52,8 @@ TiDB Cloud logs the following types of cluster events:
 | ScaleChangefeed |   Scale the specification of a changefeed |  
 | FailedChangefeed |   Changefeed failures |  
 | ImportData |   Import data to a cluster |  
-| UpdateSpendingLimit |   Update spending limit of a TiDB Cloud Serverless scalable cluster |  
-| ResourceLimitation |   Update resource limitation of a TiDB Cloud Serverless cluster |  
+| UpdateSpendingLimit |   Update spending limit of a {{{ .starter }}} instance |  
+| ResourceLimitation |   Update resource limitation of a {{{ .starter }}} or {{{ .essential }}} instance |  
 
 For each event, the following information is logged:
 
