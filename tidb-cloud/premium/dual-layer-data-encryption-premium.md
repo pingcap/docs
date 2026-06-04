@@ -1,11 +1,11 @@
 ---
 title: 双层数据加密
-summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管理双层数据加密。
+summary: 了解如何为 {{{ .premium }}} 实例启用和管理双层数据加密。
 ---
 
 # 双层数据加密
 
-本文档介绍如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管理双层数据加密。
+本文档介绍如何为 {{{ .premium }}} 实例启用和管理双层数据加密。
 
 > **注意：**
 >
@@ -41,15 +41,15 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 
 ### 密钥管理选项 {#key-management-options}
 
-双层数据加密使用 AWS KMS 管理静态数据加密的主密钥。你可以在以下两种密钥管理选项之间进行选择：
+双层数据加密使用你的云服务提供商 KMS 管理静态数据加密的主密钥。你可以在以下两种密钥管理选项之间进行选择：
 
 - **Customer-Managed Encryption Key (CMEK)**
 
-    你可以创建、拥有并管理自己的 AWS KMS 主密钥。此选项可提供对加密的完全控制，适用于具有严格安全要求的组织。
+    你可以创建、拥有并管理自己的 KMS 主密钥。此选项可提供对加密的完全控制，适用于具有严格安全要求的组织。
 
     > **警告：**
     >
-    > 你需要对密钥的安全性和可用性负全部责任。如果你删除了已配置的 CMEK，你的 {{{ .premium }}} 实例将变得不可用，并且你将无法恢复已加密的数据。
+    > 你需要对密钥的安全性和可用性负全部责任。如果你的 CMEK 被删除或永久损坏，你的实例将变得不可用，且加密数据将永久无法恢复。
 
 - **Service-Managed Encryption Key**
 
@@ -62,11 +62,11 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 
 ## 限制 {#limitations}
 
-- 此功能当前仅支持 AWS KMS。对 Alibaba Cloud KMS 的支持计划在未来版本中提供。
+- 当前，此功能支持 AWS KMS 和 Alibaba Cloud KMS。
 - 数据加密适用于 TiKV 存储的数据、changefeed 数据和备份数据。对 TiFlash 数据加密的支持计划在未来版本中提供。
 - 启用双层数据加密后，你无法修改 {{{ .premium }}} 实例的加密配置。
 - 不支持自定义加密算法。你只能轮换 KMS 主密钥，不支持轮换其他加密密钥。
-- 你的 AWS KMS 密钥必须与 {{{ .premium }}} 实例位于同一区域。因此，对于使用 CMEK 的备份，不支持跨区域恢复操作。
+- 你的云服务提供商 KMS 密钥必须与 {{{ .premium }}} 实例位于同一区域。因此，对于使用 CMEK 的备份，不支持跨区域恢复操作。
 
 ## 启用双层数据加密 {#enable-dual-layer-data-encryption}
 
@@ -80,9 +80,12 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 
 如需使用你自己的加密密钥，请执行以下步骤：
 
-1. 在 AWS KMS 中创建一个对称加密密钥。
+1. 在你的云服务提供商 KMS 中创建一个对称加密密钥。
 
-    该密钥必须与计划创建的 {{{ .premium }}} 实例位于**同一区域**。详细说明请参见 [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html)。
+    该密钥必须与计划创建的 {{{ .premium }}} 实例位于**同一区域**。
+
+    - 对于 AWS，请参见 [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html)。
+    - 对于 Alibaba Cloud，请参见 [Understanding KMS keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management)。
 
 2. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中配置 CMEK：
 
@@ -90,9 +93,13 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
     2. 选择 {{{ .premium }}} 计划并完成基本配置。
     3. 在 **Dual-Layer Data Encryption** 部分，点击 **Enable**。
     4. 选择 **Customer-Managed Encryption Key (CMEK)**，然后点击 **Add KMS Key ARN**。
-    5. 复制显示的 JSON policy，并将其保存为 `ROLE-TRUST-POLICY.JSON`。该文件定义了所需的信任关系。
-    6. 在 AWS KMS 控制台中，将此 trust policy 添加到你的密钥。更多信息，请参见 [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)。
-    7. 返回 TiDB Cloud 控制台，滚动到密钥创建页面底部，输入你从 AWS KMS 获取的 **KMS Key ARN**。
+    5. 复制显示的 JSON policy 语句。该 policy 语句定义了 TiDB Cloud 所需的密钥访问权限。
+    6. 在你的云服务提供商 KMS 控制台中，将此 policy 语句附加到你的密钥策略中。
+
+        - 对于 AWS，请参见 [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)。
+        - 对于 Alibaba Cloud，请参见 [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2)。
+
+    7. 返回 TiDB Cloud 控制台，滚动到密钥创建页面底部，输入你从云服务提供商 KMS 获取的 **KMS Key ARN**。
     8. 要验证信任关系，点击 **Test and Add KMS Key ARN**。
     9. 验证成功后，点击 **Create** 完成 {{{ .premium }}} 实例创建。
 
@@ -116,15 +123,18 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 
 #### 选项 1：Customer-Managed Encryption Key (CMEK) {#option-1-customer-managed-encryption-key-cmek}
 
-开始之前，请确保你已在 AWS KMS 中创建对称加密密钥。然后，执行以下步骤：
+开始之前，请确保你已在你的云服务提供商 KMS 中创建对称加密密钥。然后，执行以下步骤：
 
 1. 在 {{{ .premium }}} 实例的 **Security** 页面中，在 **Dual-Layer Data Encryption** 部分点击 **Enable**。
 2. 选择 **Customer-Managed Encryption Key (CMEK)**，然后点击 **Add KMS Key ARN**。
-3. 复制显示的 JSON policy，并将其保存为 `ROLE-TRUST-POLICY.JSON`。该文件定义了所需的信任关系。
-4. 在 AWS KMS 控制台中，将此 trust policy 添加到你的密钥。更多信息，请参见 [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)。
-5. 返回 TiDB Cloud 控制台，滚动到页面底部，输入你从 AWS KMS 获取的 **KMS Key ARN**。
-6. 要验证信任关系，点击 **Test and Add KMS Key ARN**。
-7. 要启用双层数据加密，点击 **Enable**。
+3. 复制显示的 JSON policy 语句。该 policy 语句定义了 TiDB Cloud 所需的密钥访问权限。
+4. 在你的云服务提供商 KMS 控制台中，将此 policy 语句附加到你的密钥策略中。
+
+    - 对于 AWS，请参见 [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)。
+    - 对于 Alibaba Cloud，请参见 [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2)。
+
+5. 返回 TiDB Cloud 控制台，滚动到页面底部，输入你从云服务提供商 KMS 获取的 **KMS Key ARN**。
+6. 点击 **Test and Add KMS Key ARN** 以验证密钥访问配置并启用双层数据加密。
 
 #### 选项 2：Service-Managed Encryption Key {#option-2-service-managed-encryption-key}
 
@@ -145,6 +155,11 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 
 从启用了加密的 {{{ .premium }}} 实例创建的备份也会被加密。恢复加密备份时，新实例必须使用一致的加密设置。
 
+> **警告：**
+> 
+> - 当前，你只能将加密备份恢复到与原始实例**相同账户**且**相同区域**下。暂不支持跨区域和跨账户恢复操作。
+> - 你需要对密钥的安全性和可用性负责。如果你的 CMEK 被删除或永久损坏，与该密钥关联的任何备份数据也将无法恢复。
+
 ### 恢复使用 CMEK 加密的备份 {#restore-a-backup-encrypted-with-a-cmek}
 
 如果备份使用 CMEK 加密，请确保新实例在恢复期间能够访问 KMS 主密钥。密钥 ARN 保持不变。
@@ -152,7 +167,7 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 要验证访问权限，点击 **Check** 开始 trust policy 验证。随后，TiDB Cloud 会检查密钥策略中已授权的 TiDB Cloud 账户是否与原始备份关联的账户一致：
 
 - 如果账户一致，则无需进一步授权。
-- 如果账户不一致，请复制提供的密钥策略并在 AWS KMS 中更新。此更新会重新授权该密钥，并确保新实例能够访问它。
+- 如果账户不一致，请复制提供的密钥策略并在你的云服务提供商 KMS 中修改。此更新会重新授予该密钥权限，并确保新实例能够访问它。
 
 ### 恢复使用 Service-Managed Encryption Key 加密的备份 {#restore-a-backup-encrypted-with-a-service-managed-encryption-key}
 
@@ -160,4 +175,7 @@ summary: 了解如何为托管在 AWS 上的 {{{ .premium }}} 实例启用和管
 
 ## 轮换 Customer-Managed Encryption Key (CMEK) {#rotate-a-customer-managed-encryption-key-cmek}
 
-要轮换 CMEK，你可以在 AWS KMS 中[启用自动密钥轮换](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable.html)。无需额外的 TiDB Cloud 配置。
+你可以在你的云服务提供商 KMS 中配置 CMEK 自动轮转。TiDB Cloud 中无需更新配置。
+
+- 对于 AWS，请参见 [automatic CMEK rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)。
+- 对于 Alibaba Cloud，请参见 [Key rotation](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation).

@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: ee782aa621ec9d9822363050f42d235716c43ee6-->
+# 目录
 
 ## 快速开始
 
@@ -57,6 +57,7 @@
   - 监控和告警
     - [概览](/tidb-cloud/monitor-tidb-cluster.md)
     - [内置指标](/tidb-cloud/built-in-monitoring.md)
+    - [Top RU](/tidb-cloud/top-ru.md)
     - [内置告警](/tidb-cloud/monitor-built-in-alerting.md)
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](/tidb-cloud/prometheus-grafana-integration.md)
     - 订阅告警通知
