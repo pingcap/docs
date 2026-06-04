@@ -1,11 +1,15 @@
 ---
-title: Sink to Apache Kafka (Beta)
+title: Sink to Apache Kafka
 summary: This document explains how to create a changefeed to stream data from {{{ .essential }}} to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed.
 ---
 
-# Sink to Apache Kafka (Beta)
+# Sink to Apache Kafka
 
 This document describes how to create a changefeed to stream data from {{{ .essential }}} to Apache Kafka.
+
+> **Note:**
+> 
+> - Currently, the changefeed feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for changefeed" in the **Description** field, and then click **Submit**.
 
 ## Restrictions
 

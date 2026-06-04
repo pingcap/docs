@@ -1,11 +1,15 @@
 ---
-title: Sink to MySQL (Beta)
+title: Sink to MySQL
 summary: This document explains how to stream data from {{{ .essential }}} to MySQL using the Sink to MySQL changefeed. It includes restrictions, prerequisites, and steps to create a MySQL sink for data replication. The process involves setting up network connections, loading existing data to MySQL, and creating target tables in MySQL. After completing the prerequisites, users can create a MySQL sink to replicate data to MySQL.
 ---
 
-# Sink to MySQL (Beta)
+# Sink to MySQL
 
 This document describes how to stream data from {{{ .essential }}} to MySQL using the **Sink to MySQL** changefeed.
+
+> **Note:**
+> 
+> - Currently, the changefeed feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for changefeed" in the **Description** field, and then click **Submit**.
 
 ## Restrictions
 
