@@ -6,6 +6,7 @@ summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other da
 # Changefeed
 
 TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, {{{ .essential }}} supports streaming data to Apache Kafka and MySQL.
+
 > **Note:**
 >
 > - Currently, the changefeed feature for {{{ .essential }}} is only available upon request. To request this feature, do the following:
