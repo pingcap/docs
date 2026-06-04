@@ -5,11 +5,16 @@ summary: An overview of the usage of SHOW IMPORT JOB in TiDB.
 
 # SHOW IMPORT JOB
 
-The `SHOW IMPORT JOB` statement is used to show `IMPORT` jobs created in TiDB. By default, `SHOW IMPORT JOBS` shows jobs created by the current user. To view all import jobs, you need the `SUPER` privilege.
+The `SHOW IMPORT JOB` statement is used to show `IMPORT` jobs created in TiDB.
+
+It supports the following two forms:
+
+- `SHOW IMPORT JOBS`
+- `SHOW IMPORT JOB <job-id>`
 
 ## Required privileges
 
-- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
+- `SHOW IMPORT JOBS`: by default, this statement only shows jobs created by the current user. To view all import jobs, you need the `SUPER` privilege.
 - `SHOW IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
 
 ## Synopsis
@@ -52,7 +57,7 @@ The output fields of the `SHOW IMPORT JOB` statement are described as follows:
 | Cur_Step_Speed       | The current data processing speed         |
 | Cur_Step_ETA       | The estimated time remaining for the current step to complete       |
 
-## Filtering import jobs
+## Filter import jobs
 
 Only `SHOW IMPORT JOBS` supports filtering import jobs with a `WHERE` or `LIKE` clause. `SHOW IMPORT JOB <job-id>` does not support these clauses.
 
