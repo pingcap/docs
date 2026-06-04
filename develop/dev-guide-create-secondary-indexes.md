@@ -17,11 +17,11 @@ aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidb/dev/de
 -   [データベースを作成する](/develop/dev-guide-create-database.md)。
 -   [テーブルを作成する](/develop/dev-guide-create-table.md)。
 
-## 二次インデックスとは何ですか？ {#what-is-secondary-index}
+## セカンダリインデックスとは何ですか？ {#what-is-secondary-index}
 
 TiDBにおけるセカンダリインデックスは論理オブジェクトです。簡単に言えば、TiDBがクエリパフォーマンスを向上させるために使用するソートタイプのデータと考えることができます。TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み書き操作をブロックしません。TiDBは、各インデックスに対してテーブルの各行への参照を作成し、データ自体ではなく、選択された列に基づいて参照をソートします。
 
-二次インデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)参照してください。
+セカンダリインデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)参照してください。
 
 TiDB では、[既存のテーブルにセカンダリインデックスを追加する](#add-a-secondary-index-to-an-existing-table)か[新しいテーブルを作成する際にセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)ことができます。
 

@@ -27,7 +27,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 このクエリはMPPモードでは2つのフラグメントに分割されます。1つは第1段階の集計用、もう1つは第2段階の集計（最終集計）用です。このクエリが実行されると、各クエリフラグメントは1つ以上のMPPタスクにインスタンス化されます。
 
-## Exchange オペレータ {#exchange-operators}
+## Exchange 演算子 {#exchange-operators}
 
 `ExchangeReceiver`と`ExchangeSender` 、MPP実行プランに特有の2つの交換演算子です。4 演算子`ExchangeReceiver`下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
 

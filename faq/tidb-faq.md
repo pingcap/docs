@@ -25,7 +25,7 @@ TiDB [TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザ
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) [TiDBstorage](/tidb-storage.md)参照して[TiDB スケジューリング](/tidb-scheduling.md) [TiDBコンピューティング](/tidb-computing.md)
+TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、[TiDBアーキテクチャ](/tidb-architecture.md)、[TiDBストレージ](/tidb-storage.md)、[TiDBスケジューリング](/tidb-scheduling.md)、[TiDBコンピューティング](/tidb-computing.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
