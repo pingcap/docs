@@ -3,7 +3,7 @@ title: Transactions
 summary: TiDB Cloudのトランザクション概念について学習します。
 ---
 
-# 取引 {#transactions}
+# トランザクション {#transactions}
 
 TiDB は完全な分散トランザクションを提供し、モデルには[Google パーコレーター](https://research.google.com/pubs/pub36726.html)に基づいたいくつかの最適化が施されています。
 

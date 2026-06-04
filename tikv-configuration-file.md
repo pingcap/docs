@@ -1635,9 +1635,9 @@ Titanに関連するコンフィグレーション項目。
 
 ### <code>bottommost-level-compression</code> {#code-bottommost-level-compression-code}
 
--   最レイヤーの圧縮アルゴリズムを設定します。この設定項目は`compression-per-level`の設定を上書きします。
--   LSMツリーにデータが書き込まれると、RocksDBは最レイヤーに対して`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`使用すると、最レイヤーは最初から最も圧縮効果の高い圧縮アルゴリズムを使用できます。
--   最レイヤーの圧縮アルゴリズムを設定しない場合は、この設定項目の値を`disable`に設定してください。
+-   最下層の圧縮アルゴリズムを設定します。この設定項目は`compression-per-level`の設定を上書きします。
+-   LSMツリーにデータが書き込まれると、RocksDBは最下層に対して`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`使用すると、最下層は最初から最も圧縮効果の高い圧縮アルゴリズムを使用できます。
+-   最下層の圧縮アルゴリズムを設定しない場合は、この設定項目の値を`disable`に設定してください。
 -   デフォルト値: `"zstd"`
 
 ### <code>write-buffer-size</code> {#code-write-buffer-size-code}

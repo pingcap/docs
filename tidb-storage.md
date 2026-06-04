@@ -102,4 +102,4 @@ MVCC では、TiKV のキーと値のペアは次のようになります。
 
 ## 分散ACIDトランザクション {#distributed-acid-transaction}
 
-TiKVのトランザクションは、GoogleがBigTableで使用しているモデルを採用しています: [パーコレーター](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) 。TiKVの実装はこの論文に着想を得ており、多くの最適化が行われています。詳細は[取引の概要](/transaction-overview.md)ご覧ください。
+TiKVのトランザクションは、GoogleがBigTableで使用しているモデルを採用しています: [パーコレーター](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) 。TiKVの実装はこの論文に着想を得ており、多くの最適化が行われています。詳細は[トランザクションの概要](/transaction-overview.md)ご覧ください。
