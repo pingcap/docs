@@ -5,11 +5,18 @@ summary: An overview of the usage of SHOW IMPORT GROUP in TiDB.
 
 # SHOW IMPORT GROUP
 
-The `SHOW IMPORT GROUP` statement is used to show the groups of `IMPORT` jobs created in TiDB. By default, `SHOW IMPORT GROUPS` shows groups created by the current user. To view all import groups, you need the `SUPER` privilege.
+The `SHOW IMPORT GROUP` statement is used to show the groups of `IMPORT` jobs created in TiDB.
+
+It supports the following two forms:
+
+- `SHOW IMPORT GROUPS`
+- `SHOW IMPORT GROUP <group-key>`
+
+In `SHOW IMPORT GROUP <group-key>`, `<group-key>` is the key specified in the `GROUP_KEY` option when creating an import job. For more information, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
 
 ## Required privileges
 
-- `SHOW IMPORT GROUPS`: if a user has the `SUPER` privilege, this statement shows all import groups in TiDB. Otherwise, this statement only shows groups created by the current user.
+- `SHOW IMPORT GROUPS`: by default, this statement only shows groups created by the current user. To view all import groups, you need the `SUPER` privilege.
 - `SHOW IMPORT GROUP <group-key>`: only the creator of an import group or users with the `SUPER` privilege can use this statement to view a specific import group.
 
 ## Synopsis
