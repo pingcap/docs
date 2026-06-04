@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录
+# 目录 <!--Corresponding EN commit: ee782aa621ec9d9822363050f42d235716c43ee6-->
 
 ## 快速开始
 
@@ -28,11 +28,11 @@
 
 ## 指南
 
-- [选择您的方案](/tidb-cloud/select-cluster-tier.md)
+- [选择 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)
 - [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)
 - 管理 {{{ .essential }}} 实例
-  - [创建一个 {{{ .essential }}} 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
-  - 连接到您的 {{{ .essential }}} 实例
+  - [创建 {{{ .essential }}} 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - 连接到你的 {{{ .essential }}} 实例
     - [网络连接概述](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
     - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
@@ -54,23 +54,22 @@
     - [TiFlash 延迟物化](/tiflash/tiflash-late-materialization.md)
     - [TiFlash 兼容性说明](/tiflash/tiflash-compatibility.md)
     - [TiFlash Pipeline Model 执行模型](/tiflash/tiflash-pipeline-model.md)
-  - 订阅告警通知
+  - 监控和告警
     - [概览](/tidb-cloud/monitor-tidb-cluster.md)
     - [内置指标](/tidb-cloud/built-in-monitoring.md)
-    - [Top RU](/tidb-cloud/top-ru.md)
     - [内置告警](/tidb-cloud/monitor-built-in-alerting.md)
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](/tidb-cloud/prometheus-grafana-integration.md)
-    - 性能调优
+    - 订阅告警通知
       - [通过邮件订阅](/tidb-cloud/monitor-alert-email.md)
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
     - [事件](/tidb-cloud/tidb-cloud-events.md)
-  - SQL 调优
+  - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [分析性能](/tidb-cloud/tune-performance.md)
-    - 理解 TiDB 执行计划
+    - SQL 调优
       - [概览](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
-      - SQL 优化过程
+      - 理解 TiDB 执行计划
         - [TiDB 执行计划概览](/explain-overview.md)
         - [使用 `EXPLAIN` 解读执行计划](/explain-walkthrough.md)
         - [索引查询的执行计划](/explain-indexes.md)
@@ -81,9 +80,9 @@
         - [视图查询的执行计划](/explain-views.md)
         - [分区查询的执行计划](/explain-partitions.md)
         - [开启 IndexMerge 查询的执行计划](/explain-index-merge.md)
-      - 逻辑优化
+      - SQL 优化过程
         - [SQL 优化流程概览](/sql-optimization-concepts.md)
-        - 物理优化
+        - 逻辑优化
           - [逻辑优化概览](/sql-logical-optimization.md)
           - [子查询相关的优化](/subquery-optimization.md)
           - [列裁剪](/column-pruning.md)
@@ -94,7 +93,7 @@
           - [TopN 和 Limit 下推](/topn-limit-push-down.md)
           - [Join Reorder](/join-reorder.md)
           - [从窗口函数中推导 TopN 或 Limit](/derive-topn-from-window.md)
-        - 控制执行计划
+        - 物理优化
           - [物理优化概览](/sql-physical-optimization.md)
           - [索引的选择](/choose-index.md)
           - [常规统计信息](/statistics.md)
@@ -105,7 +104,7 @@
           - [Runtime Filter](/runtime-filter.md)
         - [Prepare 语句执行计划缓存](/sql-prepared-plan-cache.md)
         - [非 Prepare 语句执行计划缓存](/sql-non-prepared-plan-cache.md)
-      - 垃圾回收 (GC)
+      - 控制执行计划
         - [控制执行计划概览](/control-execution-plan.md)
         - [Optimizer Hints](/optimizer-hints.md)
         - [执行计划管理](/sql-plan-management.md)
@@ -113,51 +112,51 @@
         - [Optimizer Fix Controls](/optimizer-fix-controls.md)
     - [TiKV Follower Read](/follower-read.md)
     - [下推计算结果缓存](/coprocessor-cache.md)
-    - 迁移或导入数据
+    - 垃圾回收 (GC)
        - [GC 机制简介](/garbage-collection-overview.md)
        - [GC 配置](/garbage-collection-configuration.md)
     - [TiFlash 调优](/tiflash/tune-tiflash-performance.md)
   - [升级 TiDB 版本](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [删除一个 {{{ .essential }}} 实例](/tidb-cloud/delete-tidb-cluster.md)
-- 将数据迁移到 TiDB Cloud
+  - [删除 {{{ .essential }}} 实例](/tidb-cloud/delete-tidb-cluster.md)
+- 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
-  - 将数据导入 TiDB Cloud
+  - 将数据迁移到 TiDB Cloud
     - [使用 Data Migration 迁移现有和增量数据](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
     - [使用 Data Migration 迁移增量数据](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
     - [从本地部署的 TiDB 迁移到 TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-  - 参考
+  - 将数据导入 TiDB Cloud
     - [导入本地文件](/tidb-cloud/tidb-cloud-import-local-files.md)
     - [从云存储导入示例数据（SQL 文件）](/tidb-cloud/import-sample-data-serverless.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
     - [从云存储导入快照文件](/tidb-cloud/import-snapshot-files-serverless.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
-  - 同步数据 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - 参考
     - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/configure-external-storage-access.md)
     - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- 安全
+- 同步数据 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed 概述](/tidb-cloud/essential-changefeed-overview.md)
   - [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [同步到 Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
-- 身份访问控制
+- 安全
   - [安全概览](/tidb-cloud/security-overview.md)
-  - 网络访问控制
+  - 身份访问控制
     - [密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [标准 SSO 身份验证](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [组织 SSO 身份验证](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [身份访问管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
-  - Private Link 连接
+  - 网络访问控制
     - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-  - 审计管理
+  - Private Link 连接
     - [Private Link 连接概述](/tidb-cloud/serverless-private-link-connection.md)
     - [连接到 Amazon RDS](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
     - [连接到阿里云 RDS](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
@@ -165,10 +164,10 @@
     - [连接到 Amazon MSK Provisioned](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
     - [连接到阿里云上的自建 Kafka](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
     - [连接到 AWS 上的自建 Kafka](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
-  - 账单
+  - 审计管理
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
     - [数据库审计日志](/tidb-cloud/essential-database-audit-logging.md)
-- 集成
+- 账单
   - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [账单详情](/tidb-cloud/tidb-cloud-billing.md#billing-details)
   - [成本资源管理器](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
@@ -177,7 +176,7 @@
   - [支付方式设置](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [管理预算](/tidb-cloud/tidb-cloud-budget.md)
-- Terraform
+- 集成
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
@@ -199,10 +198,10 @@
 
 ## 参考
 
-- SQL 语言结构和语法
+- SQL 参考
   - [SQL 基本操作](/basic-sql-operations.md)
-  - 属性
-    - SQL 语句
+  - SQL 语言结构和语法
+    - 属性
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
       - [_tidb_rowid](/tidb-rowid.md)
@@ -213,7 +212,7 @@
     - [用户自定义变量](/user-defined-variables.md)
     - [表达式语法](/expression-syntax.md)
     - [注释语法](/comment-syntax.md)
-  - `ALTER TABLE`
+  - SQL 语句
     - [概览](/sql-statements/sql-statement-overview.md)
     - [`ADMIN`](/sql-statements/sql-statement-admin.md)
     - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
@@ -227,7 +226,7 @@
     - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
     - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
     - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
-    - 数据类型
+    - `ALTER TABLE`
       - [概述](/sql-statements/sql-statement-alter-table.md)
       - [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
@@ -342,14 +341,14 @@
     - [`UPDATE`](/sql-statements/sql-statement-update.md)
     - [`USE`](/sql-statements/sql-statement-use.md)
     - [`WITH`](/sql-statements/sql-statement-with.md)
-  - 函数与操作符
+  - 数据类型
     - [数据类型概述](/data-type-overview.md)
     - [数据类型默认值](/data-type-default-values.md)
     - [数值类型](/data-type-numeric.md)
     - [日期和时间类型](/data-type-date-and-time.md)
     - [字符串类型](/data-type-string.md)
     - [JSON 类型](/data-type-json.md)
-  - JSON 函数
+  - 函数与操作符
     - [函数与操作符概述](/functions-and-operators/functions-and-operators-overview.md)
     - [表达式求值的类型转换](/functions-and-operators/type-conversion-in-expression-evaluation.md)
     - [操作符](/functions-and-operators/operators.md)
@@ -362,7 +361,7 @@
     - [加密和压缩函数](/functions-and-operators/encryption-and-compression-functions.md)
     - [锁函数](/functions-and-operators/locking-functions.md)
     - [信息函数](/functions-and-operators/information-functions.md)
-    - 事务
+    - JSON 函数
       - [概览](/functions-and-operators/json-functions.md)
       - [创建 JSON 的函数](/functions-and-operators/json-functions/json-functions-create.md)
       - [搜索 JSON 的函数](/functions-and-operators/json-functions/json-functions-search.md)
@@ -385,7 +384,7 @@
   - [生成列](/generated-columns.md)
   - [SQL 模式](/sql-mode.md)
   - [表属性](/table-attributes.md)
-  - 字符集和排序规则
+  - 事务
     - [事务概览](/transaction-overview.md)
     - [隔离级别](/transaction-isolation-levels.md)
     - [乐观事务](/optimistic-transaction.md)
@@ -396,21 +395,21 @@
   - [临时表](/temporary-tables.md)
   - [缓存表](/cached-tables.md)
   - [外键约束](/foreign-key.md)
-  - 读取历史数据
+  - 字符集和排序规则
     - [概述](/character-set-and-collation.md)
     - [GBK](/character-set-gbk.md)
-  - 使用 Stale Read 功能读取历史数据（推荐）
-    - 系统表
+  - 读取历史数据
+    - 使用 Stale Read 功能读取历史数据（推荐）
       - [Stale Read 使用场景介绍](/stale-read.md)
       - [使用 `AS OF TIMESTAMP` 语法读取历史数据](/as-of-timestamp.md)
       - [使用系统变量 `tidb_read_staleness` 读取历史数据](/tidb-read-staleness.md)
       - [使用系统变量 `tidb_external_ts` 读取历史数据](/tidb-external-ts.md)
     - [使用系统变量 `tidb_snapshot` 读取历史数据](/read-historical-data.md)
-  - `mysql` Schema
-    - INFORMATION_SCHEMA
+  - 系统表
+    - `mysql` Schema
       - [概述](/mysql-schema/mysql-schema.md)
       - [`user`](/mysql-schema/mysql-schema-user.md)
-    - PERFORMANCE_SCHEMA
+    - INFORMATION_SCHEMA
       - [概述](/information-schema/information-schema.md)
       - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
       - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)
@@ -450,21 +449,21 @@
       - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
       - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
       - [`VIEWS`](/information-schema/information-schema-views.md)
-    - SYS
+    - PERFORMANCE_SCHEMA
       - [概述](/performance-schema/performance-schema.md)
       - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
-    - CLI 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - SYS
       - [概述](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元数据锁](/metadata-lock.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
-- auth
+- CLI 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/cli-reference.md)
-  - serverless
+  - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
-  - branch
+  - serverless
     - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - [create](/tidb-cloud/ticloud-cluster-create.md)
     - [delete](/tidb-cloud/ticloud-cluster-delete.md)
@@ -474,38 +473,38 @@
     - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
     - [region](/tidb-cloud/ticloud-serverless-region.md)
     - [shell](/tidb-cloud/ticloud-serverless-shell.md)
-    - import
+    - branch
       - [create](/tidb-cloud/ticloud-branch-create.md)
       - [delete](/tidb-cloud/ticloud-branch-delete.md)
       - [describe](/tidb-cloud/ticloud-branch-describe.md)
       - [list](/tidb-cloud/ticloud-branch-list.md)
       - [shell](/tidb-cloud/ticloud-branch-shell.md)
-    - export
+    - import
       - [cancel](/tidb-cloud/ticloud-import-cancel.md)
       - [describe](/tidb-cloud/ticloud-import-describe.md)
       - [list](/tidb-cloud/ticloud-import-list.md)
       - [start](/tidb-cloud/ticloud-import-start.md)
-    - sql-user
+    - export
       - [create](/tidb-cloud/ticloud-serverless-export-create.md)
       - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)
       - [list](/tidb-cloud/ticloud-serverless-export-list.md)
       - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
       - [download](/tidb-cloud/ticloud-serverless-export-download.md)
-    - authorized-network
+    - sql-user
       - [create](/tidb-cloud/ticloud-serverless-sql-user-create.md)
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
-    - audit-log
+    - authorized-network
       - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
       - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
       - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-    - config
-      - filter-rule
+    - audit-log
+      - config
         - [update](/tidb-cloud/ticloud-serverless-audit-log-config-update.md)
         - [describe](/tidb-cloud/ticloud-serverless-audit-log-config-describe.md)
-      - config
+      - filter-rule
         - [create](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-create.md)
         - [delete](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-delete.md)
         - [describe](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-describe.md)
@@ -514,7 +513,7 @@
         - [template](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)
       - [download](/tidb-cloud/ticloud-serverless-audit-log-download.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
-  - filter-rule
+  - config
     - [create](/tidb-cloud/ticloud-config-create.md)
     - [delete](/tidb-cloud/ticloud-config-delete.md)
     - [describe](/tidb-cloud/ticloud-config-describe.md)
@@ -522,26 +521,26 @@
     - [list](/tidb-cloud/ticloud-config-list.md)
     - [set](/tidb-cloud/ticloud-config-set.md)
     - [use](/tidb-cloud/ticloud-config-use.md)
-  - 通用参考
+  - project
     - [list](/tidb-cloud/ticloud-project-list.md)
   - [upgrade](/tidb-cloud/ticloud-upgrade.md)
   - [help](/tidb-cloud/ticloud-help.md)
-- TiDB 经典架构
-  - 存储引擎
+- 通用参考
+  - TiDB 经典架构
     - [概述](/tidb-architecture.md)
     - [存储](/tidb-storage.md)
     - [计算](/tidb-computing.md)
     - [调度](/tidb-scheduling.md)
     - [TSO](/tso.md)
   - [TiDB X 架构](/tidb-cloud/tidb-x-architecture.md)
-  - TiKV
-    - TiFlash
+  - 存储引擎
+    - TiKV
         - [TiKV 简介](/tikv-overview.md)
         - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
-    - TiDB Cloud 合作伙伴 Web 控制台
+    - TiFlash
       - [TiFlash 简介](/tiflash/tiflash-overview.md)
       - [TiFlash 数据落盘](/tiflash/tiflash-spill-disk.md)
-  - 支持计划
+  - TiDB Cloud 合作伙伴 Web 控制台
     - [TiDB Cloud 合作伙伴](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP 客户](/tidb-cloud/managed-service-provider-customer.md)
     - [经销商的客户](/tidb-cloud/cppo-customer.md)
@@ -554,21 +553,21 @@
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
-  - [{{{ .starter }}} 和 Essential 的项目 API 迁移指南](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
-- Connected Care 支持服务
+  - [适用于 {{{ .starter }}} 和 Essential 的项目 API 迁移指南](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
+- 支持计划
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
-  - Connected：通过 IM 订阅 TiDB Cloud 告警
+  - Connected Care 支持服务
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
-    - Connected：通过 IM 创建工单并订阅更新
+    - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
       - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
       - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
-    - Connected：通过 IM 与工单交互
+    - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
       - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)
-    - 常见问题
+    - Connected：通过 IM 与工单交互
       - [通过 Slack 与工单交互](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [通过 Lark 与工单交互](/tidb-cloud/connected-lark-ticket-interaction.md)
   - [获取支持](/tidb-cloud/tidb-cloud-support.md)
