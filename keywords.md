@@ -488,6 +488,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - OF (R)
 - OFF
 - OFFSET
+- OLD
 - OLTP_READ_ONLY
 - OLTP_READ_WRITE
 - OLTP_WRITE_ONLY
@@ -595,6 +596,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RESTORES
 - RESTRICT (R)
 - RESUME
+- RETAIN
 - RETURNING
 - REUSE
 - REVERSE
