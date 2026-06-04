@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: b7469123c65aa8409bf754e4a7909e16d8ed3082-->
+# 目录
 
 ## 快速开始
 
