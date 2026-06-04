@@ -9,7 +9,12 @@ This document describes how to stream data from {{{ .essential }}} to MySQL usin
 
 > **Note:**
 > 
-> - Currently, the changefeed feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for changefeed" in the **Description** field, and then click **Submit**.
+> Currently, the changefeed feature is only available upon request. To request this feature, do the following:
+>
+>     1. In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), click **?**.
+>     2. Click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+>     3. Create a ticket. In the "Description" field, fill in "Apply for changefeed".
+>     4. Click **Submit**.
 
 ## Restrictions
 
