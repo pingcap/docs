@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from {{{ .esse
 
 > **Note:**
 > 
-> Currently, the changefeed feature is only available upon request. To request this feature, do the following:
+> Currently, the changefeed feature for {{{ .essential }}} is only available upon request. To request this feature, do the following:
 >
 > 1. In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), click **?**.
 > 2. Click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
