@@ -26,7 +26,7 @@ You can delete a TiDB Cloud resource at any time by performing the following ste
     - If you have at least one manual or automatic backup, you can see the number of backups and the charging policy for backups. Click **Continue** and enter `<organization name>/<project name>/<resource name>`.
     - If you do not have any backups, just enter `<organization name>/<project name>/<resource name>`.
 
-    If you want to restore a deleted {{{ .essential }}} instance or {{{ .dedicated }}} cluster sometime in the future, make sure that you have a backup of it. Otherwise, you cannot restore it anymore.
+    If you want to restore a deleted {{{ .essential }}} instance or {{{ .dedicated }}} cluster in the future, make sure that you have a backup of it. Otherwise, you cannot restore it.
 
     - For more information about how to back up {{{ .essential }}} instances, see [Back Up and Restore {{{ .essential }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
     - For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
@@ -37,7 +37,7 @@ You can delete a TiDB Cloud resource at any time by performing the following ste
 
 5. Click **I understand, delete it**.
 
-    Once a backed up {{{ .essential }}} instance or TiDB Cloud Dedicated cluster is deleted, the existing backup files of it are moved to the Recycle Bin.
+    Once a backed-up {{{ .essential }}} instance or TiDB Cloud Dedicated cluster is deleted, its existing backup files are moved to the Recycle Bin.
 
     - Automatic backups will expire and be automatically deleted once the retention period ends, except for the latest one. The default retention period is 7 days if you don't modify it. The latest automatic backup will not be deleted unless you explicitly delete it.
     - Manual backups will be kept in the Recycle Bin until manually deleted.
