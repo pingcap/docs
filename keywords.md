@@ -714,7 +714,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 -   トレース
 -   伝統的
 -   トレーリング（R）
--   取引
+-   トランザクション
 -   トリガー（R）
 -   トリガー
 -   真（R）

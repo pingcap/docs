@@ -18,7 +18,7 @@
     -   [概要](/tidb-cloud/key-concepts.md)
     -   [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
     -   [データベーススキーマ](/tidb-cloud/database-schema-concepts.md)
-    -   [取引](/tidb-cloud/transaction-concepts.md)
+    -   [トランザクション](/tidb-cloud/transaction-concepts.md)
     -   [SQL](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
     -   [拡張性](/tidb-cloud/scalability-concepts.md)
@@ -79,7 +79,7 @@
                 -   [MPPに関する質問](/explain-mpp.md)
                 -   [サブクエリ](/explain-subqueries.md)
                 -   [集計](/explain-aggregation.md)
-                -   [閲覧数](/explain-views.md)
+                -   [ビュー](/explain-views.md)
                 -   [パーティション](/explain-partitions.md)
                 -   [インデックスマージ](/explain-index-merge.md)
             -   SQL最適化プロセス
@@ -386,13 +386,13 @@
     -   [生成された列](/generated-columns.md)
     -   [SQLモード](/sql-mode.md)
     -   [テーブル属性](/table-attributes.md)
-    -   取引
+    -   トランザクション
         -   [概要](/transaction-overview.md)
         -   [隔離レベル](/transaction-isolation-levels.md)
-        -   [楽観的な取引](/optimistic-transaction.md)
-        -   [悲観的な取引](/pessimistic-transaction.md)
+        -   [楽観的トランザクション](/optimistic-transaction.md)
+        -   [悲観的トランザクション](/pessimistic-transaction.md)
         -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
-    -   [閲覧数](/views.md)
+    -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
@@ -536,7 +536,7 @@
         -   [TSO](/tso.md)
     -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクヴ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

@@ -3,7 +3,7 @@ title: START TRANSACTION | TiDB SQL Statement Reference
 summary: TiDB データベースの START TRANSACTION の使用法の概要。
 ---
 
-# 取引を開始 {#start-transaction}
+# トランザクションを開始 {#start-transaction}
 
 この文はTiDB内で新しいトランザクションを開始します。これは文`BEGIN`と似ています。
 
@@ -49,4 +49,4 @@ Query OK, 0 rows affected (0.01 sec)
 -   [専念](/sql-statements/sql-statement-commit.md)
 -   [ロールバック](/sql-statements/sql-statement-rollback.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
--   [因果関係の一貫性のみで取引を開始する](/transaction-overview.md#causal-consistency)
+-   [因果関係の一貫性のみでトランザクションを開始する](/transaction-overview.md#causal-consistency)

@@ -33,7 +33,7 @@ summary: 2017年6月16日にリリースされたTiDB RC3は、MySQLとの互換
 -   MySQLの組み込み関数を追加する
 -   システム変数を使用して、大きなトランザクションをコミットする小さなトランザクションに自動的に分割することをサポートします。
 
-## 配置Driver（PD） {#placement-driver-pd}
+## Placement Driver（PD） {#placement-driver-pd}
 
 -   gRPC をサポート
 -   災害復旧ツールキットを提供する
