@@ -406,7 +406,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_PROCESSED_KEYS` :コプロセッサーが処理したキーの最大数。
 -   `AVG_TIKV_CPU_TIME` : このカテゴリの SQL ステートメントが消費する TiKVサーバーのCPU 時間の平均値。
 
-取引関連フィールド：
+トランザクション関連フィールド：
 
 -   `AVG_PREWRITE_TIME` : プリライトフェーズの平均時間。
 -   `MAX_PREWRITE_TIME` : プリライトフェーズの最長時間。
@@ -418,8 +418,8 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_COMMIT_BACKOFF_TIME` : コミットフェーズ中に再試行が必要なエラーがSQLステートメントで発生した場合、再試行までの最大待機時間。
 -   `AVG_RESOLVE_LOCK_TIME` : トランザクション間で発生したロック競合の解決にかかる平均時間。
 -   `MAX_RESOLVE_LOCK_TIME` : ロック競合の解決に最も時間がかかったのはトランザクション間です。
--   `AVG_LOCAL_LATCH_WAIT_TIME` : ローカル取引の平均待ち時間。
--   `MAX_LOCAL_LATCH_WAIT_TIME` : ローカル取引の最大待ち時間。
+-   `AVG_LOCAL_LATCH_WAIT_TIME` : ローカルトランザクションの平均待ち時間。
+-   `MAX_LOCAL_LATCH_WAIT_TIME` : ローカルトランザクションの最大待ち時間。
 -   `AVG_WRITE_KEYS` : 入力されたキーの平均数。
 -   `MAX_WRITE_KEYS` : 書き込まれたキーの最大数。
 -   `AVG_WRITE_SIZE` : 書き込まれたデータの平均量（バイト単位）。

@@ -25,13 +25,13 @@ TiDB [TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザ
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDBクラスタは、TiDBサーバー、PD（配置Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) [TiDBstorage](/tidb-storage.md)参照して[TiDB スケジューリング](/tidb-scheduling.md) [TiDBコンピューティング](/tidb-computing.md)
+TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、[TiDBアーキテクチャ](/tidb-architecture.md)、[TiDBストレージ](/tidb-storage.md)、[TiDBスケジューリング](/tidb-scheduling.md)、[TiDBコンピューティング](/tidb-computing.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
 いいえ。TiDB は MySQL の構文とプロトコルをサポートしていますが、PingCAP, Inc. によって開発および保守されている新しいオープン ソース データベースです。
 
-### TiDB、TiKV、PD (配置Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
+### TiDB、TiKV、PD (Placement Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
 -   TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリ プランの指定、エグゼキュータの生成を担当します。
 -   TiKVは分散型のキーバリューstorageエンジンとして動作し、実データの保存に使用されます。つまり、TiKVはTiDBのstorageエンジンです。
