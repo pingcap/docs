@@ -146,6 +146,10 @@ To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the 
 
 3. Locate the {{{ .essential }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance.
 
+    >**Note:**
+    >
+    > If a {{{ .essential }}} instance **has no backup**, the deleted instance is not displayed in the Recycle Bin.
+
 4. In the row of your desired backup, click **...**, and then select **Restore**.
 
 5. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
