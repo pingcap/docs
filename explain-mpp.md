@@ -27,7 +27,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 このクエリはMPPモードでは2つのフラグメントに分割されます。1つは第1段階の集計用、もう1つは第2段階の集計（最終集計）用です。このクエリが実行されると、各クエリフラグメントは1つ以上のMPPタスクにインスタンス化されます。
 
-## 取引所運営者 {#exchange-operators}
+## Exchange 演算子 {#exchange-operators}
 
 `ExchangeReceiver`と`ExchangeSender` 、MPP実行プランに特有の2つの交換演算子です。4 演算子`ExchangeReceiver`下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
 
@@ -60,7 +60,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 `ExchangeSender`演算子の`operator info`列目には、交換の種類に関する情報が表示されます。現在、交換の種類は 3 つあります。以下をご覧ください。
 
 -   ハッシュパーティション： `ExchangeSender`演算子は、まずハッシュ値に基づいてデータを分割し、次に上流のMPPタスクの`ExchangeReceiver`の演算子にデータを分配します。この交換タイプは、ハッシュ集計やシャッフルハッシュ結合アルゴリズムでよく使用されます。
--   ブロードキャスト： `ExchangeSender`オペレータは、ブロードキャストを介して上流のMPPタスクにデータを配信します。この交換タイプは、ブロードキャスト結合でよく使用されます。
+-   ブロードキャスト： `ExchangeSender`演算子は、ブロードキャストを介して上流のMPPタスクにデータを配信します。この交換タイプは、ブロードキャスト結合でよく使用されます。
 -   PassThrough: `ExchangeSender`演算子は、上流のMPPタスクのみにデータを送信します。これはブロードキャスト型とは異なります。この交換型は、TiDBにデータを返す際によく使用されます。
 
 実行プランの例では、演算子`ExchangeSender_28`の交換タイプはHashPartitionであり、ハッシュ集計アルゴリズムを実行することを意味します。演算子`ExchangeSender_30`の交換タイプはPassThroughであり、TiDBにデータを返すために使用されることを意味します。

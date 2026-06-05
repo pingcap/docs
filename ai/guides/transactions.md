@@ -3,7 +3,7 @@ title: Transactions
 summary: アプリケーションでトランザクションを使用する方法を学びます。
 ---
 
-# 取引 {#transactions}
+# トランザクション {#transactions}
 
 TiDB は、データの一貫性と信頼性を確保するためにACIDトランザクションをサポートします。
 
