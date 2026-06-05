@@ -62,7 +62,7 @@ Since this method relies on a minority PD node to recover the service, the node 
 
 ### Step 4: Restart the PD node
 
-Once you see the prompt message `recovery is successful`, stop the temporary PD process started with `--force-new-cluster` in Step 2, and then restart the PD node normally without the `--force-new-cluster` parameter.
+Once you see the prompt message `recovery is successful`, stop the temporary PD process that starts with `--force-new-cluster` in Step 2, and then restart the PD node normally without the `--force-new-cluster` parameter.
 
 ### Step 5: Scale out PD and start the cluster
 
