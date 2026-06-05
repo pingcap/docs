@@ -91,7 +91,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Recycle Bin is now available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It stores data from deleted TiDB Cloud resources that have valid backups.
 
-        When a [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instance with existing backups is deleted, its backup files are moved to the Recycle Bin. Backup files created by automatic backups are retained in the Recycle Bin for a specified period. To avoid data loss, restore the data to a new TiDB Cloud Essential instance before the retention period expires. Note that if a TiDB Cloud Essential instance **has no backup**, the deleted instance is not displayed in the Recycle Bin.
+        When a TiDB Cloud Essential instance with existing backups is deleted, its backup files are moved to the Recycle Bin. Backup files created by automatic backups are retained in the Recycle Bin for a specified period. To avoid data loss, restore the data to a new TiDB Cloud Essential instance before the retention period expires. Note that if a TiDB Cloud Essential instance **has no backup**, the deleted instance is not displayed in the Recycle Bin.
 
         For more information, see [Backup and Restore](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin).
 
