@@ -17,7 +17,7 @@ SELECT * FROM system.settings;
 
 | Name | Value | Default | Level | Description | Type |
 |------|-------|---------|-------|-------------|------|
-| acquire_lock_timeout | 30 | 30 | DEFAULT | Sets the maximum timeout in seconds for acquire a lock. | UInt64 |
+| acquire_lock_timeout | 30 | 30 | DEFAULT | Sets the maximum timeout in seconds to acquire a lock. | UInt64 |
 | aggregate_spilling_memory_ratio | 60 | 60 | LOCAL | Sets the maximum memory ratio in bytes that an aggregator can use before spilling data to storage during query execution. | UInt64 |
 | allow_query_exceeded_limit | 0 | 0 | DEFAULT | Allow queries to overshoot the configured memory limit, deferring error notification until memory contention is encountered. | UInt64 |
 | auto_compaction_imperfect_blocks_threshold | 25 | 25 | GLOBAL | Threshold for triggering auto compaction after write. Set to 0 to disable auto compaction. | UInt64 |
