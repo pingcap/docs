@@ -55,7 +55,7 @@ For applications experiencing growing workloads and needing scalability in real 
 - **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 
-{{{ .essential }}} offers Zonal High Availability: places all components within the same availability zone, which results in lower network latency. For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+{{{ .essential }}} offers zonal high availability, which places all components within the same availability zone to reduce network latency. For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
 
 ## {{{ .premium }}}
 

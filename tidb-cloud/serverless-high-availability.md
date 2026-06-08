@@ -86,7 +86,7 @@ The gateway and computing layers are stateless, so failover involves restarting 
 
 ## Regional high availability architecture
 
-When you create a {{{ .premium }}} instance with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximizing availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
+When you create a {{{ .premium }}} instance with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximize availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in the data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
 
 > **Note:**
 >
