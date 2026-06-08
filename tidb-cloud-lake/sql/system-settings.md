@@ -41,8 +41,8 @@ SELECT * FROM system.settings;
 | disable_variant_check | 0 | 0 | DEFAULT | Disable variant check to allow insert invalid JSON values. | UInt64 |
 | dynamic_sample_time_budget_ms | 0 | 0 | DEFAULT | Time budget for dynamic sample in milliseconds. | UInt64 |
 | enable_aggregating_index_scan | 1 | 1 | DEFAULT | Enables scanning aggregating index data while querying. | UInt64 |
-| enable_analyze_histogram | 0 | 0 | DEFAULT | Enables analyze histogram for query optimization during analyzing table. | UInt64 |
-| enable_auto_analyze | 1 | 1 | DEFAULT | Enables automatically analyze after write. 0 for disable, 1 for enable. | UInt64 |
+| enable_analyze_histogram | 0 | 0 | DEFAULT | Enables histogram analysis for query optimization when analyzing a table. | UInt64 |
+| enable_auto_analyze | 1 | 1 | DEFAULT | Enables automatic analysis after write. 0 to disable, 1 to enable. | UInt64 |
 | enable_auto_detect_datetime_format | 0 | 0 | DEFAULT | Enable auto-detection for non-ISO datetime formats. Works across functions, COPY, and VARIANT cast. | UInt64 |
 | enable_auto_fix_missing_bloom_index | 0 | 0 | DEFAULT | Enables auto fix missing bloom index. | UInt64 |
 | enable_auto_materialize_cte | 1 | 1 | DEFAULT | Enables auto materialize CTE. 0 for disable, 1 for enable. | UInt64 |
@@ -176,7 +176,7 @@ SELECT * FROM system.settings;
 | max_vacuum_temp_files_after_query | 18446744073709551615 | 18446744073709551615 | DEFAULT | The maximum temp files will be removed after query. Disable if 0. | UInt64 |
 | max_vacuum_threads | 1 | 1 | DEFAULT | Sets the maximum number of threads to execute vacuum operation. | UInt64 |
 | min_max_runtime_filter_threshold | 18446744073709551615 | 18446744073709551615 | DEFAULT | Sets the maximum number of rows for min-max runtime filter generation. | UInt64 |
-| nested_loop_join_threshold | 10000 | 10000 | DEFAULT | Set the threshold for use nested loop join. Setting it to 0 disables nested loop join. | UInt64 |
+| nested_loop_join_threshold | 10000 | 10000 | DEFAULT | Sets the threshold to use nested loop joins. Setting it to 0 disables nested loop joins. | UInt64 |
 | network_policy |  |  | DEFAULT | Network policy for all users in the tenant. | String |
 | numeric_cast_option | rounding | rounding | DEFAULT | Set numeric cast mode as "rounding" or "truncating". | String |
 | optimizer_skip_list |  |  | DEFAULT | Comma-separated list of optimizer names to skip during query optimization. | String |
