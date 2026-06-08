@@ -28,7 +28,7 @@
   - Data Sources
     - [Overview](/tidb-cloud-lake/guides/data-sources.md)
     - [Amazon S3 - Credentials](/tidb-cloud-lake/guides/aws-credentials.md)
-    - [Amazon SQS (S3) - IAM Role](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md)
+    - [Amazon SQS (S3) - IAM Role](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md)
     - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
@@ -36,7 +36,7 @@
     - [Overview](/tidb-cloud-lake/guides/integration-tasks.md)
     - [Task Management](/tidb-cloud-lake/guides/task-management.md)
     - [Amazon S3 Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
-    - [Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
+    - [Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
 - Connect

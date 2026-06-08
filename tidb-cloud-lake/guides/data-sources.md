@@ -14,7 +14,7 @@ Data sources do not execute synchronization by themselves. Their role is to cent
 | Type | Purpose |
 |------|---------|
 | [Amazon S3 - Credentials](/tidb-cloud-lake/guides/aws-credentials.md) | Stores the Access Key and Secret Key required to access Amazon S3. These credentials can be reused across multiple S3 import tasks. |
-| [Amazon SQS (S3) - IAM Role](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) | Stores the queue URL, Region, IAM Role, and S3 path scope required for SQS (S3) ingestion. It can be used to consume S3 object creation events. |
+| [Amazon SQS (S3) - IAM Role (Beta)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) | Stores the queue URL, Region, IAM Role, and S3 path scope required for SQS (S3) ingestion. It can be used to consume S3 object creation events. |
 | [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md) | Stores the host, port, username, password, and database information required to access MySQL. These settings can be reused across multiple MySQL sync tasks. |
 | [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) | Stores the host, port, username, password, and database information required to access PostgreSQL. These settings can be reused across multiple PostgreSQL sync tasks. |
 | [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md) | Stores a FeiShu bot webhook and message template for task failure notifications and similar scenarios. |

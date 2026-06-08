@@ -1,9 +1,9 @@
 ---
-title: Amazon SQS (S3) - IAM Role
+title: Amazon SQS (S3) - IAM Role (Beta)
 summary: Learn how to create an "Amazon SQS (S3) - IAM Role" data source in {{{ .lake }}}.
 ---
 
-# Amazon SQS (S3) - IAM Role
+# Amazon SQS (S3) - IAM Role (Beta)
 
 This page describes how to create an `Amazon SQS (S3) - IAM Role` data source. This data source stores the configuration required to access an Amazon SQS queue and the corresponding S3 bucket, and is used for consuming S3 object creation events delivered from Amazon S3 to SQS.
 
@@ -49,7 +49,7 @@ Before creating the data source, complete the following configuration in your AW
 5. Attach S3 read permissions and SQS consume permissions to the IAM Role.
 6. Upload a test object and confirm that S3 can deliver the event to SQS.
 
-Prepare the following variables first. `AWS_REGION` must be the Region where both the S3 bucket and SQS queue are located. `EXTERNAL_ID` is the organization ID from the {{{ .lake }}} console.
+Prepare the following variables first. `AWS_REGION` must be the Region where both the S3 bucket and SQS queue are located. `EXTERNAL_ID` is the organization ID from the {{{ .lake }}} platform console.
 
 ```bash
 export AWS_REGION="<bucket-and-sqs-region>"
@@ -231,9 +231,9 @@ aws s3api get-bucket-notification-configuration \
 
 Confirm that `QueueArn` points to the target SQS queue, `Events` includes `s3:ObjectCreated:*`, and `FilterRules` matches the `Object Key Prefix` / `Object Key Suffix` configured in the {{{ .lake }}} data source.
 
-## Step 4: Create an IAM Role for Platform to Assume
+## Step 4: Create an IAM Role for {{{ .lake }}} to Assume
 
-Generate `trust-policy.json`. `ExternalId` is the organization ID from the Platform console.
+Generate `trust-policy.json`. `ExternalId` is the organization ID from the {{{ .lake }}} (platform) console.
 
 ```bash
 jq -n \

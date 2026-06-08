@@ -23,7 +23,7 @@ Not every data source corresponds to an ingestion task. For example, `FeiShuBot`
 | Task Type | Description |
 |-----------|-------------|
 | [Amazon S3](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md) | Imports CSV, Parquet, or NDJSON files from Amazon S3 with support for one-time or continuous ingestion. |
-| [Amazon SQS (S3)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) | Consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}. |
+| [Amazon SQS (S3) (Beta)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) | Consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}. |
 | [MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md) | Synchronizes table data from MySQL using `Snapshot`, `CDC Only`, or `Snapshot + CDC` modes. |
 | [PostgreSQL](/tidb-cloud-lake/guides/integrate-with-postgresql.md) | Synchronizes table data from PostgreSQL using `Snapshot`, `CDC Only`, or `Snapshot + CDC` modes. |
 

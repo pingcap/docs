@@ -52,6 +52,6 @@ Click a task to view its execution history. The run history includes:
 For field-level configuration and detailed behavior, continue with the relevant task guide:
 
 - [Amazon S3 Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
-- [Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
+- [Amazon SQS (S3) Integration Task (Beta)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
 - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
 - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
