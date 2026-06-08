@@ -32,10 +32,10 @@ Choose your preferred approach:
 ### Synchronous Usage
 
 ```python
-from tidbcloudlake_driver import BlockingDatabendClient
+from tidbcloudlake_driver import BlockingLakeClient
 
 # Connect and execute
-client = BlockingDatabendClient('<your-dsn>')
+client = BlockingLakeClient('<your-dsn>')
 cursor = client.cursor()
 
 # DDL: Create table

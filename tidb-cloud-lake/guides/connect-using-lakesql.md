@@ -63,12 +63,12 @@ Github: https://github.com/tidbcloud/lakesql
 Install LakeSQL to a specified directory (e.g., /usr/local):
 
 ```bash
-curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
+curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
 ```
 
 ```bash title='Example:'
 # highlight-next-line
-curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
+curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
                                   L A K E S Q L
                                     Installer
 
@@ -88,6 +88,7 @@ Github: https://github.com/tidbcloud/lakesql
 >>> More information at https://github.com/tidbcloud/lakesql
 ```
 
+<!-- Note: tidbcloud/homebrew-tap is not a public repo. So don't display it for now.
 ### Homebrew (for macOS)
 
 LakeSQL can be easily installed on macOS using Homebrew with a simple command:
@@ -95,6 +96,7 @@ LakeSQL can be easily installed on macOS using Homebrew with a simple command:
 ```bash
 brew install tidbcloud/homebrew-tap/lakesql
 ```
+-->
 
 ### Apt (for Ubuntu/Debian)
 

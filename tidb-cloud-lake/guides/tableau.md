@@ -77,7 +77,7 @@ GRANT ROLE tableau_role TO tableau;
 
 ### Step 2. Install lake-jdbc
 
-1. Download the lake-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/lake-jdbc/>
+1. Download the lake-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/tidbcloud/lake-jdbc/>
 
 2. To install the lake-jdbc driver, move the jar file (for example, lake-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 

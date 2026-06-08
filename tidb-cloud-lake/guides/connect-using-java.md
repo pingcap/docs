@@ -13,21 +13,19 @@ The official JDBC driver provides standard JDBC 4.0 compatibility for seamless i
 
 ```xml
 <dependency>
-    <groupId>com.databend</groupId>
+    <groupId>com.tidbcloud</groupId>
     <artifactId>lake-jdbc</artifactId>
-    <version>0.4.1</version>
+    <version>0.4.6</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```gradle
-implementation 'com.databend:lake-jdbc:0.4.1'
+implementation 'com.tidbcloud:lake-jdbc:0.4.1'
 ```
 
 **Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
-
----
 
 ## Key Features
 

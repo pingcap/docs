@@ -13,7 +13,7 @@ Add the driver to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-tidbcloudlake-driver = "0.30"
+lake-driver = "0.1.5-alpha.2"
 tokio = { version = "1", features = ["full"] }
 ```
 
@@ -71,12 +71,12 @@ tokio = { version = "1", features = ["full"] }
 Here's a simple example demonstrating DDL, write, and query operations:
 
 ```rust
-use tidbcloudlake_driver::Client;
+use lake_driver::Client;
 use tokio_stream::StreamExt;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Connect to Databend
+    // Connect to TiDB Cloud Lake
     let client = Client::new("<your-dsn>".to_string());
     let conn = client.get_conn().await?;
 
