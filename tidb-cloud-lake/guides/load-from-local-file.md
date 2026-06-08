@@ -68,7 +68,7 @@ Alternatively, use a Python script:
 
 ```python
 import tidbcloudlake_driver
-dsn = "lake://root:@localhost:8000/?sslmode=disable",
+dsn = "lake://root:@localhost:8000/?sslmode=disable"
 client = tidbcloudlake_driver.BlockingLakeClient(dsn)
 conn = client.get_conn()
 query = "INSERT INTO book_db.books from @_tidbcloud_load file_format=(type=csv)"
