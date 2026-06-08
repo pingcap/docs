@@ -478,8 +478,7 @@ Requires `SUPER` privilege.
 
 ### KILL
 
-- When setting default roles for the current user, no extra privilege is required.
-- When setting default roles for other users, either the `UPDATE` privilege on mysql.default_roles or the `CREATE USER` privilege is required.
+Requires `SUPER` or `CONNECTION_ADMIN` privilege to kill other user sessions.
 
 ### CREATE RESOURCE GROUP
 
