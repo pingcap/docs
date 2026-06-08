@@ -22,12 +22,12 @@ LakeSQL provides a convenient Shell script for installation. You can choose betw
 Install LakeSQL to the user's home directory (~/.lakesql):
 
 ```bash
-curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash
+curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash
 ```
 
 ```bash title='Example:'
 # highlight-next-line
-curl -fsSL https://repo.tidbcloud.com/install/lakesql.sh | bash
+curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash
 
                                   L A K E S Q L
                                     Installer
