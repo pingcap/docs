@@ -20,9 +20,8 @@ TiDB Cloud extends these capabilities with zonal high availability and regional 
 
 > **Note:**
 >
-> - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .starter }}} and Essential instances, only zonal high availability is enabled, and it is not configurable.
 > - For {{{ .premium }}} instances, only regional high availability is enabled and is not configurable.
-> - For {{{ .essential }}} instances, only zonal high availability is enabled, and it is not configurable.
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
