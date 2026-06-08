@@ -38,7 +38,7 @@ Docs: https://docs.tidb.io/tidbcloudlake/
 Github: https://github.com/tidbcloud/lakesql
 --------------------------------------------------------------------------------
 
->>> We'll be installing LakeSQL via a pre-built archive at https://repo.tidbcloud.com/lakesql/v0.22.2/
+>>> We'll be installing LakeSQL via a pre-built archive at https://lakesql-bin.tidbcloud.com/lakesql/v0.22.2/
 >>> Ready to proceed? (y/n)
 
 >>> Please enter y or n.
