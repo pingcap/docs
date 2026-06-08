@@ -297,7 +297,7 @@ A column cannot be protected by both a masking policy and a row access policy si
 
 ## Best Practices
 
-### Use is_role_in_session() over current_role()
+### Use `is_role_in_session()` over `current_role()`
 
 `current_role()` only checks the currently active role. Users can bypass masking by switching to an unrestricted role with `SET ROLE`. `is_role_in_session()` checks all granted roles regardless of which is active — it cannot be bypassed.
 

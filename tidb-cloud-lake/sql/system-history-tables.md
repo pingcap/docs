@@ -118,6 +118,6 @@ table_name = "access_history"
 
 > **Note:**
 >
-> When changing storage configuration, existing history tables will be dropped and recreated.
+> When you change the storage configuration, {{{ .lake }}} drops and recreates existing history tables.
 
 </details>

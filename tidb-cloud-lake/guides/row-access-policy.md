@@ -418,7 +418,7 @@ ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 
 ## Best Practices
 
-### Use IS_ROLE_IN_SESSION() over current_role()
+### Use `IS_ROLE_IN_SESSION()` over `current_role()`
 
 `IS_ROLE_IN_SESSION()` checks all roles granted to the user, including secondary roles active in the session. Users cannot bypass the policy by switching roles with `SET ROLE`. `current_role()` only checks the single active role and can be circumvented.
 
