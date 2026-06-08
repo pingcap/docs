@@ -96,5 +96,4 @@ fmt.Printf("User: %d, %s\n", id, name)
 ## Resources
 
 - **GitHub Repository**: [lake-go](https://github.com/tidbcloud/lake-go)
-- **Go Package**: [pkg.go.dev](https://pkg.go.dev/github.com/datafuselabs/databend-go)
 - **Examples**: [GitHub Examples](https://github.com/tidbcloud/lake-go/tree/main/examples)
