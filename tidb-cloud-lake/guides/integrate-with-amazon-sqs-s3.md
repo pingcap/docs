@@ -65,7 +65,7 @@ Before creating an SQS (S3) integration task, make sure:
 
 After completing the basic settings, click **Next** to preview the source data.
 
-The preview result is the same as an [Amazon S3 Integration Task](./integrate-with-amazon-s3.md). The system locates the corresponding S3 objects based on the SQS (S3) configuration, reads file content, and displays:
+The preview result is the same as an [Amazon S3 Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md). The system locates the corresponding S3 objects based on the SQS (S3) configuration, reads file content, and displays:
 
 - Sample data with column names and data types
 - The matched S3 object list and object sizes
