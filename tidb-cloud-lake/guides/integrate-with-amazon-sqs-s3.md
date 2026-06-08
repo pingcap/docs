@@ -1,9 +1,9 @@
 ---
-title: Amazon SQS (S3) Integration Task
+title: Amazon SQS (S3) Integration Task (Beta)
 summary: Learn how to create an Amazon SQS (S3) integration task that consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}.
 ---
 
-# Amazon SQS (S3) Integration Task
+# Amazon SQS (S3) Integration Task (Beta)
 
 This page describes how to create an Amazon SQS (S3) integration task that consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}.
 
