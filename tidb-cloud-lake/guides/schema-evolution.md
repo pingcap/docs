@@ -163,7 +163,7 @@ The three `SCHEMA_EVOLUTION` sampling options accept either `AUTO` or a positive
 
 If `SCHEMA_EVOLUTION` is omitted, {{{ .lake }}} uses `AUTO` for all three sampling options. The current `AUTO` behavior samples up to 64 files, 1,000 records per file, and 10,000 records in total. These internal defaults may change in future versions. If your load is sensitive to the sampling strategy, set `SAMPLE_FILES`, `SAMPLE_RECORDS_PER_FILE`, and `SAMPLE_TOTAL_RECORDS` explicitly.
 
-### NDJSON Inference Rules
+#### NDJSON Inference Rules
 
 When running Schema Evolution for NDJSON, {{{ .lake }}} infers new columns using these rules:
 
