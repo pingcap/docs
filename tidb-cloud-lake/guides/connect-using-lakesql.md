@@ -100,26 +100,15 @@ brew install tidbcloud/homebrew-tap/lakesql
 
 ### Apt (for Ubuntu/Debian)
 
-On Ubuntu and Debian systems, LakeSQL can be installed via the Apt package manager. Choose the appropriate instructions based on the distribution version.
-
-#### DEB822-STYLE format (Ubuntu-22.04/Debian-12 and later)
+On Ubuntu and Debian systems, you can install LakeSQL using the Apt package manager:
 
 ```bash
-sudo curl -L -o /etc/apt/sources.list.d/tidbcloudlake.sources https://repo.tidbcloud.com/deb/tidbcloudlake.sources
-```
-
-#### Old format (Ubuntu-20.04/Debian-11 and earlier)
-
-```bash
-sudo curl -L -o /usr/share/keyrings/tidbcloudlake-keyring.gpg https://repo.tidbcloud.com/deb/tidbcloudlake.gpg
-sudo curl -L -o /etc/apt/sources.list.d/tidbcloudlake.list https://repo.tidbcloud.com/deb/tidbcloudlake.list
-```
-
-Finally, update the package list and install LakeSQL:
-
-```bash
-sudo apt update
-sudo apt install lakesql
+curl -fsSL https://lakesql-bin.tidbcloud.com/keys/lakesql-archive-keyring.gpg \
+  | sudo tee /usr/share/keyrings/lakesql-archive-keyring.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/lakesql-archive-keyring.gpg] https://lakesql-bin.tidbcloud.com/apt stable main" \
+  | sudo tee /etc/apt/sources.list.d/lakesql.list >/dev/null
+sudo apt-get update
+sudo apt-get install -y lakesql
 ```
 
 ### Cargo (Rust Package Manager)
