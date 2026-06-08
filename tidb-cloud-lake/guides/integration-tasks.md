@@ -14,6 +14,7 @@ Unlike data sources, integration tasks are the executable units that actually pe
 | Task Type | Description |
 |-----------|-------------|
 | [Amazon S3](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md) | Imports CSV, Parquet, or NDJSON files from Amazon S3 with support for one-time or continuous ingestion. |
+| [Amazon SQS (S3)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) | Consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}. |
 | [MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md) | Synchronizes table data from MySQL using `Snapshot`, `CDC Only`, or `Snapshot + CDC`. |
 | [PostgreSQL](/tidb-cloud-lake/guides/integrate-with-postgresql.md) | Synchronizes table data from PostgreSQL using `Snapshot`, `CDC Only`, or `Snapshot + CDC`. |
 
@@ -26,5 +27,6 @@ Recommended reading order:
 
 ## Task Type Differences
 
-- Amazon S3 tasks are designed for file import scenarios and mainly focus on file path patterns, file formats, and ingestion behavior.
+- S3 tasks are designed for file import scenarios and mainly focus on file path patterns, file formats, and ingestion behavior.
+- SQS (S3) tasks are designed for S3 event-driven data ingestion and mainly focus on the SQS queue, S3 event filters, IAM Role, and target table.
 - MySQL and PostgreSQL tasks are designed for table synchronization scenarios and mainly focus on sync modes, primary keys, incremental capture, and archive scheduling.

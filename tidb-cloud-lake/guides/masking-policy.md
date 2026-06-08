@@ -7,6 +7,15 @@ summary: Masking policies protect sensitive data by dynamically transforming col
 
 Masking policies protect sensitive data by dynamically transforming column values during query execution. They enable role-based access to confidential information—authorized users see actual data, while others see masked values.
 
+## When to Use
+
+- **Customer support systems**: agents see order records, but customer ID numbers display as `3201**********1234`.
+- **Data analytics**: analysts run reports where email fields show as `***@***.com` without affecting aggregate statistics.
+- **VARIANT logs**: everyone can query logs, but JSON fields like `secret_key` and `token` are invisible to non-admins.
+- **Partial redaction**: show the last 4 digits of a credit card (`****-****-****-5678`) to support staff for verification.
+
+If you need to hide entire rows rather than redact column values, use a [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md) instead.
+
 ## How Masking Works
 
 Policies transform column data at query time, usually based on the caller’s role.
@@ -262,9 +271,67 @@ SELECT * FROM events WHERE data['content'] IS NOT NULL;
 > ELSE delete_by_keypath(val, 'nested:secret')
 > ```
 
+## Masking Policy vs Row Access Policy
+
+| | Masking Policy | Row Access Policy |
+|---|---|---|
+| Scope | Column-level (transforms values) | Table-level (filters rows) |
+| Return type | Must match column type | Always BOOLEAN |
+| Per table | One per column | One per table |
+| Affects | SELECT only | SELECT, UPDATE, DELETE, MERGE |
+
+A column cannot be protected by both a masking policy and a row access policy simultaneously. Use masking when you want all users to see the row but with sensitive fields redacted. Use row access when certain rows should be completely invisible to unauthorized users.
+
+## Limits and Requirements
+
+- A column can have at most one masking policy at a time.
+- A column cannot be bound to both a masking policy and a row access policy simultaneously.
+- The policy return type must match the target column's data type.
+- A column protected by a masking policy cannot be directly altered or dropped — `UNSET MASKING POLICY` first.
+- A policy cannot be dropped while it is still referenced by any table. Use `POLICY_REFERENCES()` to find all bindings.
+- `CREATE OR REPLACE MASKING POLICY` is not supported. Drop and recreate instead.
+- Masking policies cannot be applied to temporary tables, views, or streams.
+- Masking only affects the read path (SELECT). INSERT, UPDATE, and DELETE operate on true values.
+- Policy names are globally unique across both masking policies and row access policies.
+- Policy argument names are normalized to lowercase at creation time.
+
+## Best Practices
+
+### Use `is_role_in_session()` over `current_role()`
+
+`current_role()` only checks the currently active role. Users can bypass masking by switching to an unrestricted role with `SET ROLE`. `is_role_in_session()` checks all granted roles regardless of which is active — it cannot be bypassed.
+
+```sql
+-- Preferred
+CASE WHEN is_role_in_session('managers') THEN val ELSE '*********' END
+
+-- Avoid: can be bypassed with SET ROLE
+CASE WHEN current_role() = 'managers' THEN val ELSE '*********' END
+```
+
+### Minimize conditional columns in USING
+
+Every column in the `USING` clause is evaluated at runtime. If your masking logic only depends on the caller's role, don't reference extra columns.
+
+### Keep masked values type-consistent
+
+Returning `'***'` for an email column works, but if downstream logic uses `LENGTH()` or `LIKE`, consider returning a fixed-format value like `'***@***.com'` to avoid breaking application assumptions.
+
+### Use object_delete for VARIANT columns
+
+When hiding specific keys in JSON data, `object_delete(val, 'secret_key', 'token')` is more precise than replacing the entire value — other fields remain queryable.
+
+### Unbind before dropping
+
+`DROP MASKING POLICY` fails if any column still references it. Query `POLICY_REFERENCES(POLICY_NAME => '<name>')` to find all bindings, then `UNSET MASKING POLICY` on each before dropping.
+
+### Test with restricted roles
+
+After creating a policy, use `SET ROLE` to switch to a restricted role and run SELECT queries to verify the masking effect. Don't assume correctness from admin-role testing alone.
+
 ## Privileges & References
 
-- Grant `CREATE MASKING POLICY` on `*.*` to any role responsible for creating or replacing policies; the creator automatically owns the policy.
+- Grant `CREATE MASKING POLICY` on `*.*` to any role responsible for creating policies; the creator automatically owns the policy.
 - Grant the global `APPLY MASKING POLICY` privilege or `APPLY ON MASKING POLICY <policy_name>` to roles that attach or detach policies via `ALTER TABLE`.
 - Audit access with `SHOW GRANTS ON MASKING POLICY <policy_name>`.
 - Additional references:

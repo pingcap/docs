@@ -42,7 +42,7 @@ userStage ::= @~[/<path>]
 
 ### PATTERN
 
-See [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md).
+Filters staged files by regular expression. It matches the file path portion after `@<stage_name>[/<path>]`. See [Filtering Staged Files with PATTERN](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern).
 
 ## Examples
 
@@ -56,5 +56,5 @@ SELECT * FROM list_stage(location => '@my_stage/', pattern => '.*[.]log');
 +----------------+------+------------------------------------+-------------------------------+---------+
 
 -- Equivalent to the following statement:
-LIST @my_stage PATTERN = '.log';
+LIST @my_stage PATTERN = '.*[.]log';
 ```

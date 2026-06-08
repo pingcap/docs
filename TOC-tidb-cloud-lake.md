@@ -27,7 +27,8 @@
   - [Overview](/tidb-cloud-lake/guides/data-integration-overview.md)
   - Data Sources
     - [Overview](/tidb-cloud-lake/guides/data-sources.md)
-    - [AWS - Credentials](/tidb-cloud-lake/guides/aws-credentials.md)
+    - [Amazon S3 - Credentials](/tidb-cloud-lake/guides/aws-credentials.md)
+    - [Amazon SQS (S3) - IAM Role](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md)
     - [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md)
     - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
@@ -35,6 +36,7 @@
     - [Overview](/tidb-cloud-lake/guides/integration-tasks.md)
     - [Task Management](/tidb-cloud-lake/guides/task-management.md)
     - [Amazon S3 Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
+    - [Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
     - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
 - Connect
@@ -135,11 +137,13 @@
     - [Roles](/tidb-cloud-lake/guides/roles.md)
     - [Ownership](/tidb-cloud-lake/guides/ownership.md)
   - [Audit Trail](/tidb-cloud-lake/guides/audit-trail.md)
+  - Data Protection
+    - [Overview](/tidb-cloud-lake/guides/data-protection-policies.md)
+    - [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md)
+    - [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md)
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
-  - [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md)
   - [Network Policy](/tidb-cloud-lake/guides/network-policy.md)
   - [Password Policy](/tidb-cloud-lake/guides/password-policy.md)
-  - [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md)
   - [Recovery from Operational Errors](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
 - Data Management
   - [Overview](/tidb-cloud-lake/guides/data-management.md)

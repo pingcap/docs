@@ -26,6 +26,7 @@ summary: "{{{ .lake }}}'s system history tables provide Data Governance capabili
 - Ownership cannot be transferred
 
 **Required Permissions:**
+
 To query system history tables, users need one of:
 
 - `GRANT SELECT ON *.*` (global access)
@@ -50,8 +51,8 @@ GRANT ROLE audit_team TO USER compliance_officer;
 
 ### Self-Hosted {{{ .lake }}}
 
-<details open>
-<summary>📝 **Manual configuration required** - Click to expand configuration details</summary>
+<details>
+<summary>Manual configuration required - Click to expand configuration details</summary>
 
 #### Minimal Configuration
 
@@ -116,6 +117,8 @@ table_name = "login_history"
 table_name = "access_history"
 ```
 
-> ⚠️ **Note:** When changing storage configuration, existing history tables will be dropped and recreated.
+> **Note:**
+>
+> When you change the storage configuration, {{{ .lake }}} drops and recreates existing history tables.
 
 </details>

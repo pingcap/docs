@@ -43,11 +43,15 @@ Click a task to view its execution history. The run history includes:
 ## Runtime Behavior by Task Type
 
 - S3 tasks can run once or continuously poll for new files.
+- SQS (S3) tasks continuously poll the SQS queue, consume S3 object creation events, and write data into the target table until manually stopped.
 - MySQL `Snapshot` tasks usually stop automatically after the full load completes.
 - MySQL `CDC Only` and `Snapshot + CDC` tasks continue running until manually stopped.
+- PostgreSQL `Snapshot` tasks usually stop automatically after the full load completes.
+- PostgreSQL `CDC Only` and `Snapshot + CDC` tasks continue running until manually stopped.
 
 For field-level configuration and detailed behavior, continue with the relevant task guide:
 
 - [Amazon S3 Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
+- [Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
 - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
 - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)

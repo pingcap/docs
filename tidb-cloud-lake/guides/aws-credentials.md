@@ -1,11 +1,11 @@
 ---
-title: AWS - Credentials
-summary: This page describes how to create an "AWS - Credentials" data source. This data source stores the credentials required to access Amazon S3 and can be reused across multiple S3 integration tasks.
+title: Amazon S3 - Credentials
+summary: This page describes how to create an "Amazon S3 - Credentials" data source. This data source stores the credentials required to access Amazon S3 and can be reused across multiple S3 integration tasks.
 ---
 
-# AWS - Credentials
+# Amazon S3 - Credentials
 
-This page describes how to create an `AWS - Credentials` data source. This data source stores the credentials required to access Amazon S3 and can be reused across multiple S3 integration tasks.
+This page describes how to create an `Amazon S3 - Credentials` data source. This data source stores the credentials required to access Amazon S3 and can be reused across multiple S3 integration tasks.
 
 ## Use Cases
 
@@ -13,10 +13,10 @@ This page describes how to create an `AWS - Credentials` data source. This data 
 - Avoid re-entering the same S3 access credentials in every task
 - Update credentials centrally when they are rotated
 
-## Create AWS - Credentials
+## Create Amazon S3 - Credentials
 
 1. Navigate to **Data** > **Data Sources** and click **Create Data Source**.
-2. Select **AWS - Credentials** as the service type, then fill in the credentials:
+2. Select **Amazon S3 - Credentials** as the service type, then fill in the credentials:
 
     | Field | Required | Description |
     |-------|----------|-------------|

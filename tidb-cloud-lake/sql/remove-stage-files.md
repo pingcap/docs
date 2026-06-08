@@ -34,7 +34,7 @@ externalStage ::= @<external_stage_name>[/<file>]
 
 ### PATTERN = 'regex_pattern'
 
-A regular expression pattern string, enclosed in single quotes, filters files to remove by their filename.
+A regular expression pattern string, enclosed in single quotes, filters staged files to remove. It matches the file path portion after `@<stage_name>[/<path>]`. See [Filtering Staged Files with PATTERN](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern).
 
 ## Examples
 

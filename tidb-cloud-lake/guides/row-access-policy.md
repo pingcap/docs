@@ -7,6 +7,15 @@ summary: Row access policies protect data by filtering table rows at query time.
 
 Row access policies protect data by filtering table rows at query time. They let you define centralized row-level predicates once, attach them to tables, and ensure users only see rows that satisfy the policy.
 
+## When to Use
+
+- **Multi-tenant SaaS**: each tenant only sees their own data — no need for separate tables or views per tenant.
+- **Regional isolation**: sales reps only see orders in their territory; managers see everything.
+- **Time-window control**: a real-time alerting system can only query the last 1 day; an offline analysis system can query 7 days.
+- **Compliance auditing**: external auditors only see data from a specific time period.
+
+If you need all users to see the same rows but with certain column values redacted, use a [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md) instead.
+
 > **Note:**
 >
 > Row access policy is currently experimental. Enable it with `SET enable_experimental_row_access_policy = 1` for the current session or `SET GLOBAL enable_experimental_row_access_policy = 1` for the account.
@@ -71,7 +80,7 @@ CREATE ROW ACCESS POLICY rap_engineering
 AS (dept STRING)
 RETURNS BOOLEAN ->
 CASE
-  WHEN current_role() = 'admin' THEN true
+  WHEN IS_ROLE_IN_SESSION('admin') THEN true
   WHEN dept = 'Engineering' THEN true
   ELSE false
 END;
@@ -402,7 +411,52 @@ ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 - `SELECT` is filtered by row access policies and only returns policy-visible rows.
 - `UPDATE`, `DELETE`, and `MERGE` are filtered by row access policies when matching target rows. Invisible target rows are not updated, deleted, or merged.
 - Drop or detach the policy before altering or dropping protected columns.
-- `CREATE OR REPLACE ROW ACCESS POLICY` and `ALTER ROW ACCESS POLICY` are not supported.
+- `CREATE OR REPLACE ROW ACCESS POLICY` and `ALTER ROW ACCESS POLICY` are not supported. Drop and recreate instead.
+- Policy names are globally unique across both row access policies and masking policies.
+- Policy argument names are normalized to lowercase at creation time.
+- Row access policies cannot be applied to tables in ICE-type databases.
+
+## Best Practices
+
+### Use `IS_ROLE_IN_SESSION()` over `current_role()`
+
+`IS_ROLE_IN_SESSION()` checks all roles granted to the user, including secondary roles active in the session. Users cannot bypass the policy by switching roles with `SET ROLE`. `current_role()` only checks the single active role and can be circumvented.
+
+```sql
+-- Preferred: accounts for role hierarchy
+CASE
+  WHEN IS_ROLE_IN_SESSION('admin') THEN true
+  WHEN IS_ROLE_IN_SESSION('sales_apac') THEN region = 'APAC'
+  ELSE false
+END
+
+-- Avoid: can be bypassed with SET ROLE
+CASE WHEN current_role() = 'admin' THEN true ELSE false END
+```
+
+### Order CASE branches from widest to narrowest
+
+CASE expressions evaluate top-down. Put the most permissive condition first (e.g., admin sees all) to short-circuit evaluation for privileged roles and reduce unnecessary computation.
+
+### Keep mapping tables in the same database
+
+If your policy references a lookup table (e.g., role-to-region mapping), store it in the same database as the protected table. This simplifies privilege management and avoids cross-database access issues.
+
+### Test with multiple roles
+
+After attaching a policy, connect as different users/roles and compare query results. Verify that:
+
+- Admin roles see all rows
+- Restricted roles see only their permitted subset
+- Roles with no matching condition see zero rows
+
+### Use account_admin for full-data access
+
+When you need to inspect all rows (debugging, auditing), use a role that satisfies the policy (like `account_admin`) rather than repeatedly detaching and reattaching the policy.
+
+### Detach before dropping
+
+`DROP ROW ACCESS POLICY` fails if the policy is still attached to a table. Use `ALTER TABLE ... DROP ROW ACCESS POLICY` or `DROP ALL ROW ACCESS POLICIES` first.
 
 ## Privileges & References
 
