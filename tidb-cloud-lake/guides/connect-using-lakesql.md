@@ -78,7 +78,7 @@ Docs: https://docs.pingcap.com
 Github: https://github.com/tidbcloud/lakesql
 --------------------------------------------------------------------------------
 
->>> Downloading LakeSQL via https://repo.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
+>>> Downloading LakeSQL via https://lakesql-bin.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
 >>> Unpacking archive to /usr/local ... ✓
 >>> Install succeeded! 🚀
 >>> To start LakeSQL:
