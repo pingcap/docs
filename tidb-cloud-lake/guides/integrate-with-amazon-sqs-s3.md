@@ -1,15 +1,15 @@
 ---
-title: Amazon SQS (S3) Integration Task
+title: Amazon SQS (S3) Integration Task (Beta)
 summary: Learn how to create an Amazon SQS (S3) integration task that consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}.
 ---
 
-# Amazon SQS (S3) Integration Task
+# Amazon SQS (S3) Integration Task (Beta)
 
 This page describes how to create an Amazon SQS (S3) integration task that consumes S3 object creation events from an SQS queue and writes the corresponding object data into {{{ .lake }}}.
 
 This task is designed for S3 event-driven data ingestion. After an upstream system writes an object to S3, S3 sends an `ObjectCreated` event to SQS. {{{ .lake }}} consumes the SQS message through AssumeRole and writes data into {{{ .lake }}} based on the bucket and object key in the event.
 
-If you need to create reusable SQS (S3) connection settings first, see [Amazon SQS (S3) - IAM Role](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md).
+If you need to create reusable SQS (S3) connection settings first, see [Amazon SQS (S3) - IAM Role (Beta)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md).
 
 ## Use Cases
 

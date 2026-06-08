@@ -173,7 +173,11 @@ copyOptions ::=
   [ MAX_FILES = <num> ]
   [ RETURN_FAILED_ONLY = <bool> ]
   [ COLUMN_MATCH_MODE = { case-sensitive | case-insensitive } ]
-
+  [ SCHEMA_EVOLUTION = (
+      [ SAMPLE_FILES = AUTO | <positive_integer> ]
+      [ , SAMPLE_RECORDS_PER_FILE = AUTO | <positive_integer> ]
+      [ , SAMPLE_TOTAL_RECORDS = AUTO | <positive_integer> ]
+    ) ]
 ```
 
 > **Note:**
@@ -278,6 +282,21 @@ These options are available for all file formats:
 | MAX_FILES | Maximum number of files to load (up to 15,000) | - |
 | RETURN_FAILED_ONLY | Only returns failed files in output | `false` |
 | COLUMN_MATCH_MODE | For Parquet: column name matching mode | `case-insensitive` |
+| SCHEMA_EVOLUTION | For NDJSON: sampling options used to infer columns that are missing from the target table. Requires `ENABLE_SCHEMA_EVOLUTION = true` and the `ALTER` privilege on the target table. | `AUTO` sampling |
+
+### SCHEMA_EVOLUTION Options
+
+`SCHEMA_EVOLUTION` controls how {{{ .lake }}} samples staged NDJSON files before loading. Use it with `FILE_FORMAT = (TYPE = NDJSON ...)` when the target table has `ENABLE_SCHEMA_EVOLUTION = true`.
+
+When schema evolution inference runs for a stage or location load, the role that runs `COPY INTO <table>` must have both `INSERT` and `ALTER` privileges on the target table. Query-based COPY, such as `COPY INTO <table> FROM (SELECT ... FROM @stage)`, keeps the existing privilege requirements.
+
+| Option | Description | Values |
+|--------|-------------|--------|
+| SAMPLE_FILES | Number of staged files to sample. | `AUTO` or a positive integer |
+| SAMPLE_RECORDS_PER_FILE | Maximum number of records sampled from each selected file. | `AUTO` or a positive integer |
+| SAMPLE_TOTAL_RECORDS | Maximum number of records sampled across all selected files. | `AUTO` or a positive integer |
+
+If `SCHEMA_EVOLUTION` is omitted, {{{ .lake }}} uses `AUTO` for all three sampling options. The current `AUTO` behavior samples up to 64 files, 1,000 records per file, and 10,000 records in total. These internal defaults may change in future versions. If your load is sensitive to the sampling strategy, set `SAMPLE_FILES`, `SAMPLE_RECORDS_PER_FILE`, and `SAMPLE_TOTAL_RECORDS` explicitly. If the sample misses a column that appears later during loading, COPY fails and reports the extra column names so you can increase the sampling values.
 
 > **Tip:**
 >
@@ -713,7 +732,7 @@ SELECT * FROM t2;
 
 ### Example 8: Loading with Schema Evolution
 
-When loading Parquet files whose schemas contain columns not present in the target table, you can use schema evolution to automatically add the missing columns. First, enable schema evolution on the table:
+When loading Parquet or NDJSON files whose schemas contain columns not present in the target table, you can use schema evolution to automatically add the missing columns. For stage or location loads that run schema evolution inference, make sure the loading role has `INSERT` and `ALTER` privileges on the target table. First, enable schema evolution on the table:
 
 ```sql
 CREATE OR REPLACE TABLE invoices(order_id INT);
@@ -721,6 +740,8 @@ CREATE OR REPLACE TABLE invoices(order_id INT);
 -- Enable schema evolution
 ALTER TABLE invoices SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = true);
 ```
+
+#### Parquet
 
 Then load Parquet files with different schemas. {{{ .lake }}} automatically adds new columns and fills missing values with `NULL`:
 
@@ -730,5 +751,27 @@ COPY INTO invoices
     FROM @my_stage/
     FILE_FORMAT = (TYPE = PARQUET MISSING_FIELD_AS = FIELD_DEFAULT);
 ```
+
+#### NDJSON
+
+For NDJSON, `COPY INTO` uses default sampling values to infer missing columns. Add `SCHEMA_EVOLUTION` only when you want to override how {{{ .lake }}} samples staged files:
+
+```sql
+CREATE OR REPLACE TABLE events(id INT);
+ALTER TABLE events SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = true);
+
+-- Assume @events_stage contains NDJSON records such as:
+-- {"id":1,"city":"SF","score":9}
+COPY INTO events
+    FROM @events_stage/
+    FILE_FORMAT = (TYPE = NDJSON MISSING_FIELD_AS = FIELD_DEFAULT)
+    SCHEMA_EVOLUTION = (
+        SAMPLE_FILES = AUTO,
+        SAMPLE_RECORDS_PER_FILE = AUTO,
+        SAMPLE_TOTAL_RECORDS = AUTO
+    );
+```
+
+{{{ .lake }}} samples the staged NDJSON files, appends inferred fields such as `city` and `score` as nullable columns, and then loads the data.
 
 For more details, see [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md).
