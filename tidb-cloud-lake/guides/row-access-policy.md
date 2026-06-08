@@ -445,6 +445,7 @@ If your policy references a lookup table (e.g., role-to-region mapping), store i
 ### Test with multiple roles
 
 After attaching a policy, connect as different users/roles and compare query results. Verify that:
+
 - Admin roles see all rows
 - Restricted roles see only their permitted subset
 - Roles with no matching condition see zero rows

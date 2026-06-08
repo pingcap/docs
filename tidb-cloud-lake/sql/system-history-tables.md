@@ -26,6 +26,7 @@ summary: "{{{ .lake }}}'s system history tables provide Data Governance capabili
 - Ownership cannot be transferred
 
 **Required Permissions:**
+
 To query system history tables, users need one of:
 
 - `GRANT SELECT ON *.*` (global access)
