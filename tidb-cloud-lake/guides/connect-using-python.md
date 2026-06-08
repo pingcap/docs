@@ -87,7 +87,7 @@ import asyncio
 from tidbcloudlake_driver import AsyncLakeClient
 
 async def main():
-    client = AsyncLakeClient('tidbcloudlake://root:root@localhost:8000/?sslmode=disable')
+    client = AsyncLakeClient('lake://root:root@localhost:8000/?sslmode=disable')
     conn = await client.get_conn()
 
     # DDL: Create table
