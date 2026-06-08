@@ -59,19 +59,19 @@ export BUCKET_NAME="<your-bucket-name>"
 export BUCKET_ARN="arn:aws:s3:::$BUCKET_NAME"
 
 export QUEUE_NAME="<your-sqs-standard-queue-name>"
-export ROLE_NAME="databend-s3-sqs-consumer-role"
+export ROLE_NAME="platform-s3-sqs-consumer-role"
 
 export PREFIX="<object-key-prefix>"
 export SUFFIX="<object-key-suffix>"
 
-export DATABEND_SETUP_ROLE_ARN="<databend-cloud-setup-role-arn>"
-export DATABEND_LOAD_ROLE_ARN="<databend-cloud-load-role-arn>"
-export EXTERNAL_ID="<databend-cloud-org-id>"
+export PLATFORM_SETUP_ROLE_ARN="<platform-setup-role-arn>"
+export PLATFORM_LOAD_ROLE_ARN="<platform-load-role-arn>"
+export EXTERNAL_ID="<platform-org-id>"
 ```
 
 > **Tip:**
 >
-> Use the role ARNs provided by {{{ .lake }}}: `DATABEND_SETUP_ROLE_ARN` is the ARN of **{{{ .lake }}} setup and validation role**, and `DATABEND_LOAD_ROLE_ARN` is the ARN of **{{{ .lake }}} data loading role**. In most cases, the trust policy of your IAM Role should trust both platform roles.
+> Use the role ARNs provided by Platform: `PLATFORM_SETUP_ROLE_ARN` is the ARN of **Platform setup and validation role**, and `PLATFORM_LOAD_ROLE_ARN` is the ARN of **Platform data loading role**. In most cases, the trust policy of your IAM Role should trust both platform roles.
 
 ## Step 1: Create or Get an SQS Standard Queue
 
@@ -231,23 +231,23 @@ aws s3api get-bucket-notification-configuration \
 
 Confirm that `QueueArn` points to the target SQS queue, `Events` includes `s3:ObjectCreated:*`, and `FilterRules` matches the `Object Key Prefix` / `Object Key Suffix` configured in the {{{ .lake }}} data source.
 
-## Step 4: Create an IAM Role for {{{ .lake }}} to Assume
+## Step 4: Create an IAM Role for Platform to Assume
 
-Generate `trust-policy.json`. `ExternalId` is the organization ID from the {{{ .lake }}} console.
+Generate `trust-policy.json`. `ExternalId` is the organization ID from the Platform console.
 
 ```bash
 jq -n \
-  --arg databendSetupRoleArn "$DATABEND_SETUP_ROLE_ARN" \
-  --arg databendLoadRoleArn "$DATABEND_LOAD_ROLE_ARN" \
+  --arg platformSetupRoleArn "$PLATFORM_SETUP_ROLE_ARN" \
+  --arg platformLoadRoleArn "$PLATFORM_LOAD_ROLE_ARN" \
   --arg externalId "$EXTERNAL_ID" \
   '{
     Version: "2012-10-17",
     Statement: [
       {
-        Sid: "AllowDatabendSetupAssumeRole",
+        Sid: "AllowPlatformSetupAssumeRole",
         Effect: "Allow",
         Principal: {
-          AWS: $databendSetupRoleArn
+          AWS: $platformSetupRoleArn
         },
         Action: "sts:AssumeRole",
         Condition: {
@@ -257,10 +257,10 @@ jq -n \
         }
       },
       {
-        Sid: "AllowDatabendLoadAssumeRole",
+        Sid: "AllowPlatformLoadAssumeRole",
         Effect: "Allow",
         Principal: {
-          AWS: $databendLoadRoleArn
+          AWS: $platformLoadRoleArn
         },
         Action: "sts:AssumeRole",
         Condition: {
@@ -346,7 +346,7 @@ Apply the permissions:
 ```bash
 aws iam put-role-policy \
   --role-name "$ROLE_NAME" \
-  --policy-name databend-s3-sqs-access \
+  --policy-name platform-s3-sqs-access \
   --policy-document file://permissions-policy.json
 ```
 
@@ -362,10 +362,10 @@ Permission checklist:
 Upload a test object that matches `PREFIX` / `SUFFIX`:
 
 ```bash
-echo 'a,b' > /tmp/databend-test.csv
+echo 'a,b' > /tmp/sqs-s3-local-test.csv
 
-aws s3 cp /tmp/databend-test.csv \
-  "s3://$BUCKET_NAME/${PREFIX}databend-test-$(date +%s)$SUFFIX" \
+aws s3 cp /tmp/sqs-s3-local-test.csv \
+  "s3://$BUCKET_NAME/${PREFIX}sqs-s3-local-test-$(date +%s)$SUFFIX" \
   --region "$AWS_REGION"
 ```
 
