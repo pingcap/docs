@@ -85,7 +85,7 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
 
--   **メトリクスの表示**：このリンクをクリックすると、Grafanaダッシュボードに移動し、クラスターの詳細な監視情報を確認できます。Grafanaダッシュボードの各監視メトリクスの詳細については、 [監視メトリック](/grafana-overview-dashboard.md)参照してください。
+-   **メトリクスの表示**：このリンクをクリックすると、Grafanaダッシュボードに移動し、クラスターの詳細な監視情報を確認できます。Grafanaダッシュボードの各監視メトリクスの詳細については、 [監視メトリック](/grafana-overview-dashboard.md)を参照してください。
 -   **アラートの表示**：このリンクをクリックすると、AlertManagerページに移動し、クラスターの詳細なアラート情報を確認できます。クラスターにアラートが存在する場合、アラートの数がリンクテキストに直接表示されます。
 -   **診断の実行**: このリンクをクリックすると、より詳細な[クラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
 
