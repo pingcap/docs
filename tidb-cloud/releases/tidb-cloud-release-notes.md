@@ -14,11 +14,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Add a new AWS region for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `N.Virginia (us-east-1)`. The feature is now available in the following AWS regions:
+    - Add a new AWS region for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `N. Virginia (us-east-1)`. The feature is now available in the following AWS regions:
 
         - `Tokyo (ap-northeast-1)`
         - `Oregon (us-west-2)`
-        - `N.Virginia (us-east-1)`
+        - `N. Virginia (us-east-1)`
         - `Frankfurt (eu-central-1)`
         - `Singapore (ap-southeast-1)`
 
@@ -30,7 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         If you need regional high availability and cross-AZ failover, consider choosing [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium).
 
-        Existing TiDB Cloud Essential instances are unaffected.
+        This change does not affect existing TiDB Cloud Essential instances.
 
 **API changes**
 
