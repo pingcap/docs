@@ -22,7 +22,7 @@ The official JDBC driver provides standard JDBC 4.0 compatibility for seamless i
 ### Gradle
 
 ```gradle
-implementation 'com.tidbcloud:lake-jdbc:0.4.1'
+implementation 'com.tidbcloud:lake-jdbc:0.4.6'
 ```
 
 **Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
