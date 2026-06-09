@@ -44,7 +44,7 @@ TiDB には、クラシック TiDBアーキテクチャと[TiDB Xアーキテク
 
 <CustomContent platform="tidb">
 
-[リージオン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉右開の区間である特定のキー範囲のデータが格納されます。
+[リージョン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉右開の区間である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
