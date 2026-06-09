@@ -131,7 +131,7 @@ AAFF
 
 このセクションでは、 `tikv-ctl`サポートするサブコマンドについて詳しく説明します。一部のサブコマンドは多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`実行してください。
 
-### Raftステートマシンの情報をビュー {#view-information-of-the-raft-state-machine}
+### Raftステートマシンの情報を表示する {#view-information-of-the-raft-state-machine}
 
 特定の時点におけるRaftステートマシンのステータスを表示するには、サブコマンド`raft`使用します。ステータス情報は、3つの構造体（ **RegionLocalState** 、 **RaftLocalState** 、 **RegionApplyState** ）と、特定のログの対応するエントリの2つの部分で構成されます。
 
@@ -192,7 +192,7 @@ tikv-ctl --host 127.0.0.1:20160 raft region --start 7480000000000000FF4E5F728000
         ...
     }
 
-### リージョンサイズをビュー {#view-the-region-size}
+### リージョンサイズを表示する {#view-the-region-size}
 
 リージョンのサイズを表示するには、 `size`コマンドを使用します。
 
@@ -221,7 +221,7 @@ tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,defa
              write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
              write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
 
-### 指定されたキーのMVCCをビュー {#view-mvcc-of-a-given-key}
+### 指定されたキーのMVCCを表示する {#view-mvcc-of-a-given-key}
 
 `scan`コマンドと同様に、 `mvcc`コマンドを使用して、特定のキーの MVCC を表示できます。
 
@@ -379,7 +379,7 @@ tikv-ctl --data-dir /path/to/tikv bad-regions
 
 コマンドが正常に実行された場合、上記の情報が出力。コマンドが失敗した場合、不良リージョンのリストが出力。現在検出可能なエラーには、 `last index` `commit index`不一致と、 Raftログの消失が含まれます。スナップショットファイルの破損など、その他`apply index`条件については、さらなるサポートが必要です。
 
-### リージョンのプロパティをビュー {#view-region-properties}
+### リージョンのプロパティを表示する {#view-region-properties}
 
 -   `/path/to/tikv`にデプロイされている TiKV インスタンスのリージョン2 のプロパティをローカルで表示するには、次の手順を実行します。
 

@@ -191,7 +191,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-## 一時テーブルをビュー {#view-temporary-tables}
+## 一時テーブルを表示する {#view-temporary-tables}
 
 `SHOW [FULL] TABLES`文では既存のグローバル一時テーブルのリストを表示できますが、リストにローカル一時テーブルは表示されません。現時点では、TiDB には一時テーブル情報を格納するための同様の`information_schema.INNODB_TEMP_TABLE_INFO`システムテーブルはありません。
 

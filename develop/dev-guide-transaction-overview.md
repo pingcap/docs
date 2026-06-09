@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-transaction-overview/','/ja/tidbcloud/dev-g
 
 TiDBは完全な分散トランザクションをサポートし、 [楽観的トランザクション](/optimistic-transaction.md)と[悲観的トランザクション](/pessimistic-transaction.md) （TiDB 3.0で導入）を提供します。この記事では主に、トランザクションステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、そして楽観的トランザクションにおけるアプリケーション側の再試行とエラー処理について紹介します。
 
-## 一般的な発言 {#common-statements}
+## よく使用されるステートメント {#common-statements}
 
 この章では、TiDBにおけるトランザクションの使用方法を紹介します。以下の例は、単純なトランザクションの処理を示しています。
 

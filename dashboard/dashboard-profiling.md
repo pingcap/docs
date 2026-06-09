@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Manual Profiling
-summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDBダッシュボードまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況をビュー、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴をビュー。
+summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDBダッシュボードまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認する。
 ---
 
 # TiDB ダッシュボードインスタンスプロファイリング - 手動プロファイリング {#tidb-dashboard-instance-profiling-manual-profiling}
@@ -51,7 +51,7 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 [継続的なプロファイリング](/dashboard/continuous-profiling.md)有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、 [継続的なプロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックしてください。
 
-## プロファイリングステータスのビュー {#view-profiling-status}
+## プロファイリングステータスを表示する {#view-profiling-status}
 
 プロファイリングが開始されると、プロファイリングのステータスと進行状況をリアルタイムで確認できます。
 
@@ -69,10 +69,10 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 ![Single instance result](/media/dashboard/dashboard-profiling-view-single.png)
 
-## プロファイリング履歴をビュー {#view-profiling-history}
+## プロファイリング履歴を表示する {#view-profiling-history}
 
 オンデマンドプロファイリングの履歴がページに表示されます。行をクリックすると詳細が表示されます。
 
 ![View profiling history](/media/dashboard/dashboard-profiling-history.png)
 
-プロファイリング ステータス ページでの詳細な操作については、 [プロファイリングステータスのビュー](#view-profiling-status)参照してください。
+プロファイリング ステータス ページでの詳細な操作については、 [プロファイリングステータスを表示する](#view-profiling-status)参照してください。

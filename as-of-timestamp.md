@@ -60,7 +60,7 @@ insert into t values (1), (2), (3);
 
     Query OK, 3 rows affected (0.00 sec)
 
-表内のデータをビュー。
+表内のデータを表示する。
 
 ```sql
 select * from t;
@@ -75,7 +75,7 @@ select * from t;
     +------+
     3 rows in set (0.00 sec)
 
-現在の時刻をビュー:
+現在の時刻を表示する:
 
 ```sql
 select now();

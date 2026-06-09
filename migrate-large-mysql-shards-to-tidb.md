@@ -204,8 +204,8 @@ CREATE TABLE `table5` (
 3.  移行タスクを開始した後、次のいずれかの方法で進行状況を確認できます。
 
     -   `grep`ツールを使用して、ログ内でキーワード`progress`検索します。デフォルトでは、進行状況を報告するメッセージが5分ごとにログファイルに書き込まれます。
-    -   監視ダッシュボードで進捗状況をビュー。詳細については、 [TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)参照してください。
-    -   進捗状況はWebページでビュー[ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)参照してください。
+    -   監視ダッシュボードで進捗状況を確認する。詳細については、 [TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)参照してください。
+    -   進捗状況はWebページで確認する[ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)参照してください。
 
 TiDB Lightningはインポートを完了すると自動的に終了します。最後の行の`tidb-lightning.log`に`the whole procedure completed`含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポートでエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 

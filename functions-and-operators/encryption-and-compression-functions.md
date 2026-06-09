@@ -281,7 +281,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     SET GLOBAL validate_password.enable=ON;
     ```
 
--   パスワード検証関連のシステム変数をビュー。
+-   パスワード検証関連のシステム変数を表示する。
 
     ```sql
     SHOW VARIABLES LIKE 'validate_password.%';

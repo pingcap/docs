@@ -31,7 +31,7 @@ CREATE RESOURCE GROUP rg1 RU_PER_SEC=100;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-`rg1`の定義をビュー。
+`rg1`の定義を表示する。
 
 ```sql
 SHOW CREATE RESOURCE GROUP rg1;

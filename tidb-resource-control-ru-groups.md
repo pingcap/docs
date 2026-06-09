@@ -263,11 +263,11 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 </CustomContent>
 
-## RU消費量をビュー {#view-ru-consumption}
+## RU消費量を表示する {#view-ru-consumption}
 
 RUの消費量に関する情報をご覧いただけます。
 
-### SQLによるRU消費量をビュー {#view-the-ru-consumption-by-sql}
+### SQLによるRU消費量を表示する {#view-the-ru-consumption-by-sql}
 
 SQL文のRU消費量は、以下の方法で確認できます。
 
@@ -276,7 +276,7 @@ SQL文のRU消費量は、以下の方法で確認できます。
 -   遅いクエリとそれに対応するシステムテーブル
 -   `statements_summary`
 
-#### システム変数<code>tidb_last_query_info</code>を照会することで、前回のSQL実行で消費されたRUをビュー。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-code-tidb-last-query-info-code}
+#### システム変数<code>tidb_last_query_info</code>を照会することで、前回のSQL実行で消費されたRUを表示する。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-code-tidb-last-query-info-code}
 
 TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)を提供します。このシステム変数には、最後に実行されたDMLステートメントの情報（SQL実行によって消費されたRUを含む）が記録されます。
 
@@ -306,7 +306,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
     結果として、 `ru_consumption`はこの SQL ステートメントの実行によって消費された RU です。
 
-#### SQL実行中に消費されたRUを<code>EXPLAIN ANALYZE</code>でビュー {#view-rus-consumed-during-sql-execution-by-code-explain-analyze-code}
+#### SQL実行中に消費されたRUを<code>EXPLAIN ANALYZE</code>で表示する {#view-rus-consumed-during-sql-execution-by-code-explain-analyze-code}
 
 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費される RU の量を取得できます。RU の量はキャッシュ (たとえば、[コプロセッサキャッシュ](/coprocessor-cache.md)) の影響を受けることに注意してください。同じ SQL を複数回実行すると、各実行で消費される RU の量は異なる場合があります。RU の値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
 
@@ -324,11 +324,11 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
 </CustomContent>
 
-#### RUの統計情報を<code>statements_summary</code>別にビュー {#view-ru-statistics-by-code-statements-summary-code}
+#### RUの統計情報を<code>statements_summary</code>別に表示する {#view-ru-statistics-by-code-statements-summary-code}
 
 TiDB のシステム テーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計情報が格納されます。このシステム テーブルを使用すると、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソース グループ名、RU 消費量、利用可能な RU の待機時間など、リソース制御に関する統計情報も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。 説明
 
-### リソースグループのRU消費量をビュー {#view-the-ru-consumption-of-resource-groups}
+### リソースグループのRU消費量を表示する {#view-the-ru-consumption-of-resource-groups}
 
 バージョン7.6.0以降、TiDBは各リソースグループのRU消費量の履歴レコードを保存するためのシステムテーブル[`mysql.request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を提供します。
 

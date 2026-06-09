@@ -117,7 +117,7 @@ tiup client
 
 このコマンドを実行すると、コンソールに、現在のマシン上でplaygroundによって起動されたTiDBクラスタの一覧が表示されます。接続するTiDBクラスタを選択してください。Enter<kbd>キー</kbd>を押すと、TiDBに接続するための組み込みのMySQLクライアントが開きます。
 
-## 起動したクラスターの情報をビュー {#view-information-of-the-started-cluster}
+## 起動したクラスターの情報を表示する {#view-information-of-the-started-cluster}
 
 ```shell
 tiup playground display
