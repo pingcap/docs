@@ -327,7 +327,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
 | [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Loads statistics into TiDB. |
-| [`REFRESH STATS`](/sql-statements/sql-statement-refresh-stats.md) | Reloads persisted statistics into memory for a specific table or the entire cluster. |
 | [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Shows statistics collection tasks. |
 | [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Shows created SQL bindings. |
 | [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) | Shows the last usage time and collection time of column statistics. |
