@@ -284,6 +284,9 @@ Dynamic privileges include:
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 * `TRAFFIC_CAPTURE_ADMIN` allows privilege owners to create, view, and cancel traffic capture jobs. For details, see [TiProxy traffic replay](/tiproxy/tiproxy-traffic-replay.md).
 * `TRAFFIC_REPLAY_ADMIN` allows privilege owners to create, view, and cancel traffic replay jobs. For details, see [TiProxy traffic replay](/tiproxy/tiproxy-traffic-replay.md).
+* `CREATE MASKING POLICY` allows creating column-level masking policies. For details, see [Column-level masking policies](/column-level-masking-policy.md).
+* `ALTER MASKING POLICY` allows modifying column-level masking policies (for example, enabling or disabling policies, and changing expressions). For details, see [Column-level masking policies](/column-level-masking-policy.md).
+* `DROP MASKING POLICY` allows deleting column-level masking policies. For details, see [Column-level masking policies](/column-level-masking-policy.md).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 

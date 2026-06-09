@@ -23,7 +23,7 @@ Key characteristics:
 
 ## Privileges required
 
-To manage masking policies, users need the following dynamic privileges:
+To manage masking policies, users need the following dynamic privileges (users with the `SUPER` privilege can also perform these operations):
 
 | Privilege | Description |
 |-----------|-------------|
@@ -58,7 +58,7 @@ Parameter descriptions:
 - `column_name`: the name of the column to which the masking policy to be applied.
 - `masking_expression`: A SQL expression that defines the masking logic.
 - `RESTRICT ON`: optional. It blocks users who can only view the masked value of the column from performing certain operations. For example, it blocks such users from writing data from the column to other tables through statements such as `INSERT ... SELECT` and `CREATE TABLE ... AS SELECT`, which helps prevent masking policies from being bypassed.
-- `ENABLE | DISABLE`: optional. It controls whether the policy takes effect immediately after it is created. The default value is `ENABLE`.
+- `ENABLE | DISABLE`: optional. It specifies whether the policy is enabled immediately after it is created. The default value is `ENABLE`.
 
 ### Example: Mask credit card numbers based on user identity
 

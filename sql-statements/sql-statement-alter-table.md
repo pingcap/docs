@@ -57,6 +57,29 @@ AlterTableSpec ::=
     )
 |   'AFFINITY' EqOpt stringLit
 |   PlacementPolicyOption
+|   MaskingPolicyOption
+
+MaskingPolicyOption ::=
+    'ADD' 'MASKING' 'POLICY' PolicyName 'ON' '(' Identifier ')' 'AS' Expression MaskingPolicyRestrictOnOpt MaskingPolicyStateOpt
+|   'ENABLE' 'MASKING' 'POLICY' PolicyName
+|   'DISABLE' 'MASKING' 'POLICY' PolicyName
+|   'DROP' 'MASKING' 'POLICY' PolicyName
+|   'MODIFY' 'MASKING' 'POLICY' PolicyName 'SET' Identifier EqOpt Expression
+|   'MODIFY' 'MASKING' 'POLICY' PolicyName 'SET' 'RESTRICT' 'ON' '(' MaskingPolicyRestrictOperationList ')'
+|   'MODIFY' 'MASKING' 'POLICY' PolicyName 'SET' 'RESTRICT' 'ON' 'NONE'
+
+MaskingPolicyRestrictOnOpt ::=
+    ( 'RESTRICT' 'ON' '(' MaskingPolicyRestrictOperationList ')' )?
+|   'RESTRICT' 'ON' 'NONE'
+
+MaskingPolicyRestrictOperationList ::=
+    MaskingPolicyRestrictOperation ( ',' MaskingPolicyRestrictOperation )*
+
+MaskingPolicyRestrictOperation ::=
+    Identifier
+
+MaskingPolicyStateOpt ::=
+    ( 'ENABLE' | 'DISABLE' )?
 
 PlacementPolicyOption ::=
     "PLACEMENT" "POLICY" EqOpt PolicyName
@@ -66,8 +89,6 @@ PlacementPolicyOption ::=
 ## Examples
 
 Create a table with some initial data:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -82,8 +103,6 @@ Records: 5  Duplicates: 0  Warnings: 0
 ```
 
 The following query requires a full table scan because the column c1 is not indexed:
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
@@ -101,8 +120,6 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 ```
 
 The statement [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md) can be used to add an index on the table t1. `EXPLAIN` confirms that the original query now uses an index range scan, which is more efficient:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1);
@@ -123,8 +140,6 @@ Query OK, 0 rows affected (0.30 sec)
 
 TiDB supports the ability to assert that DDL changes use a particular `ALTER` algorithm. Note that this is only an assertion, and does not change the actual algorithm used to modify the table:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
 ```
@@ -135,8 +150,6 @@ Query OK, 0 rows affected (0.24 sec)
 
 Using the `ALGORITHM=INSTANT` assertion on an operation that requires the `INPLACE` algorithm results in a statement error:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ```
@@ -146,8 +159,6 @@ ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter tab
 ```
 
 However, using the `ALGORITHM=COPY` assertion for an `INPLACE` operation generates a warning instead of an error. This is because TiDB interprets the assertion as _this algorithm or better_. This behavior difference is useful for MySQL compatibility because the algorithm TiDB uses might differ from MySQL:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=COPY;
@@ -164,6 +175,48 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 +-------+------+---------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+
+### Manage column masking policies
+
+`ALTER TABLE` supports managing [column masking policies](column-level-masking-policy.md) on tables, including adding, enabling, disabling, modifying, and dropping masking policies.
+
+Examples:
+
+Add and enable a masking policy:
+
+```sql
+ALTER TABLE t1 ADD MASKING POLICY p_mask_c1 ON (c1) AS MASK_FULL(c1) ENABLE;
+```
+
+```
+Query OK, 0 rows affected (0.10 sec)
+```
+
+Disable an existing masking policy:
+
+```sql
+ALTER TABLE t1 DISABLE MASKING POLICY p_mask_c1;
+```
+
+Re-enable the masking policy:
+
+```sql
+ALTER TABLE t1 ENABLE MASKING POLICY p_mask_c1;
+```
+
+Modify the masking expression of a masking policy:
+
+```sql
+ALTER TABLE t1 MODIFY MASKING POLICY p_mask_c1 SET c1 = MASK_PARTIAL(c1, 2, 2, '*');
+```
+
+Drop the masking policy:
+
+```sql
+ALTER TABLE t1 DROP MASKING POLICY p_mask_c1;
+```
+
+For more information about masking policies, see [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md) and [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md).
 
 ## MySQL compatibility
 
