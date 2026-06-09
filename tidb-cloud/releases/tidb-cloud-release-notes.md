@@ -8,6 +8,39 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## June 9, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Add a new AWS region for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `N.Virginia (us-east-1)`. The feature is now available in the following AWS regions:
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `N.Virginia (us-east-1)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+**High availability changes**
+
+- **TiDB Cloud Essential**
+
+    - Starting from June 9, 2026, newly created [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances are deployed in a single Availability Zone and do not support regional high availability.
+
+        If you need regional high availability and cross-AZ failover, consider choosing [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium).
+
+        Existing TiDB Cloud Essential instances are unaffected.
+
+**API changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce the following backup API endpoints for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), enabling unified management for both active and deleted instances within your organization.
+
+        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): lists backups for both active and deleted TiDB Cloud Premium instances (in the recycle bin) within your organization.
+        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): deletes a specific backup within your organization by `backupId`.
+
 ## June 2, 2026
 
 **General changes**
