@@ -28,7 +28,7 @@ CREATE TABLE t1(id INT PRIMARY KEY);
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
 
-表`t1`のデータをビュー。
+表`t1`のデータを表示する。
 
 ```sql
 TABLE t1;

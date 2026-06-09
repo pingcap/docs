@@ -599,7 +599,7 @@ SHOW GLOBAL BINDINGS;
     +--------------------------+
     ```
 
-5.  バインディングをビュー:
+5.  バインディングを表示する:
 
     ```sql
     SHOW GLOBAL BINDINGS;

@@ -70,6 +70,6 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 
 実行結果の列`execution info`は、コプロセッサーキャッシュのヒット率を示す「 `copr_cache_hit_ratio`という情報が表示されます。上記の例の「 `0.75`は、ヒット率が約75%であることを意味します。
 
-### Grafana 監視パネルをビュー {#view-the-grafana-monitoring-panel}
+### Grafana 監視パネルを表示する {#view-the-grafana-monitoring-panel}
 
 Grafanaでは、 `tidb`名前空間の`distsql`サブシステムに**copr-cache**パネルが表示されます。このパネルは、クラスター全体のコプロセッサーキャッシュのヒット数、ミス数、キャッシュ破棄数を監視します。

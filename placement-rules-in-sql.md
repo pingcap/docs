@@ -111,7 +111,7 @@ SHOW PLACEMENT LABELS;
 
     `PLACEMENT POLICY`どのデータベース スキーマにも関連付けられておらず、グローバル スコープに添付できます。したがって、 `CREATE TABLE`を使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
 
-### 配置ポリシーをビュー {#view-placement-policies}
+### 配置ポリシーを表示する {#view-placement-policies}
 
 -   既存の配置ポリシーを表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)ステートメントを使用できます。
 

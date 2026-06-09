@@ -45,6 +45,6 @@ Empty set (0.01 sec)
 ## 参照 {#see-also}
 
 -   [セーブポイント](/sql-statements/sql-statement-savepoint.md)
--   [専念](/sql-statements/sql-statement-commit.md)
+-   [COMMIT](/sql-statements/sql-statement-commit.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)

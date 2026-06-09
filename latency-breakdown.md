@@ -444,7 +444,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
 
 -   `lock write duration`はディスク上の書き込みロックの持続時間です。詳細については、 [非同期書き込み](#async-write)セクションを参照してください。
 
-### 専念 {#commit}
+### コミット {#commit}
 
 このセクションではコミットの所要時間について説明します。以下はコミット操作の時間コストのグラフです。
 
@@ -723,7 +723,7 @@ async write duration(async io enabled) =
 非同期書き込みは次の 3 つのフェーズに分けられます。
 
 -   提案する
--   専念
+-   コミット
 -   適用：上記の式に`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`代入する
 
 提案フェーズの期間は次のように計算されます。
@@ -872,4 +872,4 @@ tikv_raftstore_apply_log_duration_seconds =
 -   特定の TiKV インスタンスでこのメトリックが高い場合、ホットなリージョンで競合が発生している可能性があります。
 -   このメトリックがすべてのインスタンスにわたって高い場合、アプリケーションに競合が発生している可能性があります。
 
-アプリケーションからの競合の原因を確認した後、 [ロック](#lock)と[専念](#commit)期間を分析することで、書き込みが遅いクエリを調査できます。
+アプリケーションからの競合の原因を確認した後、 [ロック](#lock)と[コミット](#commit)期間を分析することで、書き込みが遅いクエリを調査できます。

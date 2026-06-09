@@ -80,7 +80,7 @@ ALTER TABLE t2 AFFINITY = 'table';
 ALTER TABLE t1 AFFINITY = '';
 ```
 
-### アフィニティ情報をビュー {#view-affinity-information}
+### アフィニティ情報を表示する {#view-affinity-information}
 
 テーブルまたはパーティションのアフィニティ情報は、次の方法で表示できます。
 
