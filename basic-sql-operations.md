@@ -105,7 +105,7 @@ CREATE TABLE person (
     );
 ```
 
-To view the statement that creates the table (DDL), use the `SHOW CREATE` statement:
+To view the statement that creates the table (DDL), use the `SHOW CREATE TABLE` statement:
 
 {{< copyable "sql" >}}
 
