@@ -409,7 +409,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
     mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
     ```
 
-## 統計情報をビュー {#view-statistics}
+## 統計情報を表示する {#view-statistics}
 
 `ANALYZE`の状態と統計情報は、以下のステートメントを使用して表示できます。
 

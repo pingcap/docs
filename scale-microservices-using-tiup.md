@@ -118,7 +118,7 @@ tiup cluster display <cluster-name>
 
 このセクションでは、複数の TSO ノードまたはスケジューリング ノードを持つ TiDB クラスターから TSO ノード (IP アドレス`10.0.1.8` ) とスケジューリング ノード (IP アドレス`10.0.1.9` ) を削除する方法を例示します。
 
-### 1. ノードID情報をビュー {#1-view-the-node-id-information}
+### 1. ノードID情報を表示する {#1-view-the-node-id-information}
 
 ```shell
 tiup cluster display <cluster-name>

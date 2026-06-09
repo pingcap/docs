@@ -160,7 +160,7 @@ Do you want to continue? [y/N]:
 Deployed cluster `prod-cluster` successfully
 ```
 
-## クラスターリストをビュー {#view-the-cluster-list}
+## クラスターリストを表示する {#view-the-cluster-list}
 
 クラスターが正常にデプロイされたら、次のコマンドを実行してクラスター リストを表示します。
 
@@ -513,7 +513,7 @@ tiup cluster import
 tiup cluster import --dir=/path/to/tidb-ansible
 ```
 
-## 操作ログをビュー {#view-the-operation-log}
+## 操作ログを表示する {#view-the-operation-log}
 
 操作ログを表示するには、 `audit`コマンドを使用します。3 コマンドの使用方法は`audit`のとおりです。
 

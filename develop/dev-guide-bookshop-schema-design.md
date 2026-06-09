@@ -106,7 +106,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)参照してください。
 
-### データインポート状況をビュー {#view-data-import-status}
+### データインポート状況を表示する {#view-data-import-status}
 
 インポートが完了したら、次のSQL文を実行することで、各テーブルのデータ量情報を表示できます。
 

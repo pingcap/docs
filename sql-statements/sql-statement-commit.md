@@ -3,7 +3,7 @@ title: COMMIT | TiDB SQL Statement Reference
 summary: TiDB データベースの COMMIT の使用法の概要。
 ---
 
-# 専念 {#commit}
+# COMMIT {#commit}
 
 このステートメントは、TiDBサーバー内でトランザクションをコミットします。
 

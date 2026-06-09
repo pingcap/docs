@@ -232,7 +232,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行プランをビュー。結果から、実行プランの`PromQL`と`step`値が30秒に変更されていることも確認できます。
+3.  実行プランを表示する。結果から、実行プランの`PromQL`と`step`値が30秒に変更されていることも確認できます。
 
     ```sql
     desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;

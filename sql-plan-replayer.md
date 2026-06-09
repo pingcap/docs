@@ -218,7 +218,7 @@ PLAN REPLAYER CAPTURE 'sql_digest' 'plan_digest';
 PLAN REPLAYER CAPTURE 'sql_digest' '*';
 ```
 
-### キャプチャタスクをビュー {#view-the-capture-tasks}
+### キャプチャタスクを表示する {#view-the-capture-tasks}
 
 次のステートメントを使用して、TiDB クラスター内の`PLAN REPLAYER CAPTURE`実行中のキャプチャ タスクを表示できます。
 
@@ -235,7 +235,7 @@ mysql> SELECT * FROM mysql.plan_replayer_task;
 1 row in set (0.01 sec)
 ```
 
-### キャプチャ結果をビュー {#view-the-capture-results}
+### キャプチャ結果を表示する {#view-the-capture-results}
 
 `PLAN REPLAYER CAPTURE`結果を正常に取得したら、次の SQL ステートメントを使用して、ファイルのダウンロードに使用されたトークンを表示できます。
 
@@ -288,6 +288,6 @@ Empty set (0.01 sec)
 
 `PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。4 `PLAN REPLAYER CONTINUOUS CAPTURE`有効にするには、システム変数の値を`ON`に設定します。
 
-### キャプチャ結果をビュー {#view-the-capture-results}
+### キャプチャ結果を表示する {#view-the-capture-results}
 
 `PLAN REPLAYER CONTINUOUS CAPTURE`のキャプチャ結果の閲覧方法は[`PLAN REPLAYER CAPTURE`のキャプチャ結果の表示](#view-the-capture-results)と同様です。

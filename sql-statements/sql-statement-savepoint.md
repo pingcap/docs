@@ -153,7 +153,7 @@ TiDB は MySQL 構文`ROLLBACK WORK TO SAVEPOINT ...`サポートしていませ
 
 ## 参照 {#see-also}
 
--   [専念](/sql-statements/sql-statement-commit.md)
+-   [COMMIT](/sql-statements/sql-statement-commit.md)
 -   [ロールバック](/sql-statements/sql-statement-rollback.md)
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
 -   [TiDB 楽観的トランザクションモード](/optimistic-transaction.md)

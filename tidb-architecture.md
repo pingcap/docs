@@ -40,17 +40,17 @@ TiDB には、クラシック TiDBアーキテクチャと[TiDB Xアーキテク
 
 ### TiKVサーバー {#tikv-server}
 
-[TiKVサーバー](/tidb-storage.md)はデータの保存を担当します。TiKVは分散トランザクションキーバリューstorageエンジンです。
+[TiKVサーバー](/tidb-storage.md)はデータの保存を担当します。TiKVは分散トランザクションキーバリューストレージエンジンです。
 
 <CustomContent platform="tidb">
 
-[リージョン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉じ右開きの区間である特定のキー範囲のデータが格納されます。
+[リージオン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉右開の区間である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[リージョン](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納する基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉じ右開きの区間である特定のキー範囲のデータが格納されます。
+[リージョン](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納する基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉右開の区間である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
@@ -58,4 +58,4 @@ TiDB には、クラシック TiDBアーキテクチャと[TiDB Xアーキテク
 
 ### TiFlashサーバー {#tiflash-server}
 
-[TiFlashサーバー](/tiflash/tiflash-overview.md)は特殊なタイプのstorageサーバーです。通常のTiKVノードとは異なり、 TiFlashはデータを列単位で保存し、主に分析処理の高速化を目的として設計されています。
+[TiFlashサーバー](/tiflash/tiflash-overview.md)は特殊なタイプのストレージサーバーです。通常のTiKVノードとは異なり、 TiFlashはデータを列単位で保存し、主に分析処理の高速化を目的として設計されています。

@@ -42,7 +42,7 @@ mysql
     -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
-## データベースをビュー {#view-databases}
+## データベースを表示する {#view-databases}
 
 データベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 

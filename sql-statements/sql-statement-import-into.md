@@ -247,7 +247,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
 ```
 
-### インポートジョブのビューと管理 {#view-and-manage-import-jobs}
+### インポートジョブの表示と管理 {#view-and-manage-import-jobs}
 
 `DETACHED`モードが有効になっているインポート ジョブの場合、 [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md)を使用して現在のジョブの進行状況を表示できます。
 

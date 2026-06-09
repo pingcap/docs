@@ -3,7 +3,7 @@ title: Explore SQL with TiDB
 summary: TiDB データベースの基本的な SQL ステートメントについて学習します。
 ---
 
-# TiDB で SQL を探索する {#explore-sql-with-tidb}
+# TiDB で SQL を試す {#explore-sql-with-tidb}
 
 TiDBはMySQLと互換性があり、ほとんどの場合MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)参照してください。
 
@@ -33,7 +33,7 @@ SQL は関数に応じて次の 4 つの種類に分けられます。
 
 TiDB のデータベースは、テーブルやインデックスなどのオブジェクトの集合として考えることができます。
 
-データベースのリストを表示するには、次`SHOW DATABASES`ステートメントを使用します。
+データベースのリストを表示するには、次の`SHOW DATABASES`ステートメントを使用します。
 
 ```sql
 SHOW DATABASES;
@@ -51,7 +51,7 @@ USE mysql;
 SHOW TABLES FROM mysql;
 ```
 
-データベースを作成するには、次`CREATE DATABASE`ステートメントを使用します。
+データベースを作成するには、次の`CREATE DATABASE`ステートメントを使用します。
 
 ```sql
 CREATE DATABASE db_name [options];
@@ -63,9 +63,9 @@ CREATE DATABASE db_name [options];
 CREATE DATABASE IF NOT EXISTS samp_db;
 ```
 
-データベースが存在する場合はエラーを防ぐために`IF NOT EXISTS`追加します。
+データベースが既に存在する場合にエラーを防ぐため、`IF NOT EXISTS`を追加します。
 
-データベースを削除するには、次`DROP DATABASE`ステートメントを使用します。
+データベースを削除するには、次の`DROP DATABASE`ステートメントを使用します。
 
 ```sql
 DROP DATABASE samp_db;
@@ -89,13 +89,13 @@ CREATE TABLE person (
     );
 ```
 
-テーブルを作成するステートメント (DDL) を表示するには、 `SHOW CREATE`ステートメントを使用します。
+テーブルを作成するステートメント (DDL) を表示するには、 `SHOW CREATE TABLE`ステートメントを使用します。
 
 ```sql
 SHOW CREATE table person;
 ```
 
-テーブルを削除するには、次`DROP TABLE`ステートメントを使用します。
+テーブルを削除するには、次の`DROP TABLE`ステートメントを使用します。
 
 ```sql
 DROP TABLE person;
@@ -133,7 +133,7 @@ ALTER TABLE person ADD UNIQUE person_unique_id (id);
 SHOW INDEX FROM person;
 ```
 
-インデックスを削除するには、 `DROP INDEX`または`ALTER TABLE`ステートメントを使用します。 `DROP INDEX` `ALTER TABLE`にネストできます。
+インデックスを削除するには、 `DROP INDEX`または`ALTER TABLE`ステートメントを使用します。 `DROP INDEX`は`ALTER TABLE`の中でネストできます。
 
 ```sql
 DROP INDEX person_id ON person;
@@ -163,7 +163,7 @@ INSERT INTO person VALUES(1,'tom','20170912');
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-テーブル内のレコードの一部のフィールドを更新するには、次`UPDATE`ステートメントを使用します。
+テーブル内のレコードの一部のフィールドを更新するには、次の`UPDATE`ステートメントを使用します。
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
@@ -177,7 +177,7 @@ DELETE FROM person WHERE id=2;
 
 > **注記：**
 >
-> フィルターとして`WHERE`節を使用しない`UPDATE`および`DELETE`ステートメントは、テーブル全体に対して動作します。
+> フィルターとして`WHERE`句を使用しない`UPDATE`および`DELETE`ステートメントは、テーブル全体に対して動作します。
 
 ## クエリデータ {#query-data}
 
@@ -214,13 +214,13 @@ SELECT * FROM person where id<5;
 
 DCL は通常、ユーザーの作成または削除、およびユーザー権限の管理に使用されます。
 
-ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では、名前が`tiuser` 、パスワードが`123456`ユーザーを作成します。
+ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では、ユーザー名が`tiuser` 、パスワードが`123456`のユーザーを作成します。
 
 ```sql
 CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
 ```
 
-`tiuser` `samp_db`データベース内のテーブルを取得する権限を付与するには:
+`tiuser`に`samp_db`データベース内のテーブルを取得する権限を付与するには:
 
 ```sql
 GRANT SELECT ON samp_db.* TO 'tiuser'@'localhost';
@@ -232,7 +232,7 @@ GRANT SELECT ON samp_db.* TO 'tiuser'@'localhost';
 SHOW GRANTS for tiuser@localhost;
 ```
 
-To delete `tiuser`:
+`tiuser`を削除するには:
 
 ```sql
 DROP USER 'tiuser'@'localhost';

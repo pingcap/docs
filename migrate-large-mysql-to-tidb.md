@@ -94,7 +94,7 @@ LIMIT
 
     `${data-path}`エクスポートされるすべてのアップストリームテーブルを保存できる容量があることを確認してください。必要な容量を計算するには、 [下流のstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。大きなテーブルがすべての容量を消費してエクスポートが中断されるのを防ぐため、 `-F`オプションを使用して1つのファイルのサイズを制限することを強くお勧めします。
 
-2.  `${data-path}`ディレクトリ内の`metadata`ファイルをビュー。これは Dumpling によって生成されたメタデータファイルです。ステップ 3 の増分レプリケーションに必要なbinlog位置情報を記録します。
+2.  `${data-path}`ディレクトリ内の`metadata`ファイルを確認する。これは Dumpling によって生成されたメタデータファイルです。ステップ 3 の増分レプリケーションに必要なbinlog位置情報を記録します。
 
         SHOW MASTER STATUS:
         Log: mysql-bin.000004

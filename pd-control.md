@@ -407,7 +407,7 @@ gRPC API リクエストの最大同時実行数（ `GetRegion` API リクエス
 config set service-middleware grpc-rate-limit GetRegion concurrency 10
 ```
 
-変更された構成をビュー。
+変更された構成を表示する。
 
 ```bash
 config show service-middleware
@@ -894,7 +894,7 @@ time: 43.12698ms
 
 ### <code>resource-manager [command]</code> {#code-resource-manager-command-code}
 
-#### リソース制御のコントローラ構成をビュー {#view-the-controller-configuration-of-resource-control}
+#### リソース制御のコントローラ構成を表示する {#view-the-controller-configuration-of-resource-control}
 
 ```bash
 resource-manager config controller show
