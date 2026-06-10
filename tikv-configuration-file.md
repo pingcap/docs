@@ -2694,7 +2694,7 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `bg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ Specifies the CPU utilization percentage threshold at which background task throttling begins. When CPU utilization reaches this value, TiKV starts to reduce the resource budget allocated to background tasks (such as compaction and garbage collection). The background task budget scales linearly from full down to zero as CPU utilization increases from this threshold toward [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold).
++ Specifies the CPU utilization percentage threshold at which background task throttling begins. Background tasks are tasks marked with a background resource group, including `import`, `br`, `ddl`, and `stats` task types (see [Background task types](/tidb-resource-control-background-tasks.md#background-parameters)). When CPU utilization reaches this value, TiKV starts to reduce the resource budget allocated to background tasks. The budget scales linearly from the configured limit down to a minimum floor of 1 CPU core as CPU utilization increases from this threshold toward [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold).
 + Default value: `60.0`
 + Unit: percentage (%)
 
