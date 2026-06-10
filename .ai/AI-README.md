@@ -20,10 +20,16 @@ Use `resources/terms.md` when terminology is uncertain or not covered by the qui
 
 ## Current skills
 
+- `.ai/skills/add-related-resources/`: produce and merge related resources cards for TiDB docs pages using the RelatedResources and ResourceCard MDX components for blog, video, and TiDB Lab links in English, Simplified Chinese, and Japanese docs
 - `.ai/skills/review-doc-pr/`: review documentation PRs and Markdown diffs for factual accuracy, user usefulness, completeness, version fit, related-doc impact, links, and style
 - `.ai/skills/create-or-update-zh-translation-pr/`: create a new docs translation PR or update an existing one by combining repo-local scripts with minimal-edit translation rules and incremental source-diff handling
 - `.ai/skills/writing-doc-summaries/`: write or update the `summary` front matter field in a document following the repo's 115-145 character SEO-friendly sentence rules
 - `.ai/skills/write-review-translate-release-notes/`: write, review, revise, and translate TiDB release note entries for the Compatibility changes, Improvements, and Bug fixes sections in English and Chinese
+
+The related resources skill includes bundled scripts under `.ai/skills/add-related-resources/scripts/` for:
+
+- fetching card metadata from blog, YouTube, and TiDB Lab URLs
+- validating `RelatedResources` blocks and `ResourceCard` formatting in modified docs
 
 The translation skill includes bundled scripts under `.ai/skills/create-or-update-zh-translation-pr/scripts/` for:
 

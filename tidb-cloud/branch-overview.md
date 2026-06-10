@@ -57,3 +57,9 @@ If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-sup
 ## What's next
 
 - [Learn how to manage branches](/tidb-cloud/branch-manage.md)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="What Happens to a Database When the User is an AI agent" type="blog" link="https://www.pingcap.com/blog/what-makes-a-database-for-ai-agents-different/" imgSrc="https://static.pingcap.com/files/2026/04/17143028/Blog-LinkedIn-1.png" author="Max Liu" date="2026-04-15" />
+</RelatedResources>
