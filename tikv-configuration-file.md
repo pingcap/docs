@@ -2751,7 +2751,7 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `admission-max-delayed-count` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ Specifies the maximum number of requests that can be concurrently held in admission control delay (reads and writes combined). When this limit is reached, additional over-baseline requests are rejected immediately rather than delayed. Set to `0` for unlimited concurrent delays.
++ Specifies the maximum number of concurrent requests (reads and writes combined) that TiKV can hold in the admission control delay. When this limit is reached, TiKV rejects additional over-baseline requests immediately instead of delaying them. Set this value to `0` for unlimited concurrent delays.
 + Default value: `10000`
 
 ## split
