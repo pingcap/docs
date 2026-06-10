@@ -8,6 +8,39 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 6 月 9 日
+
+**常规变更**
+
+- **TiDB Cloud Starter**
+
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 上的[全文搜索](https://docs.pingcap.com/ai/vector-search-full-text-search-python/)（公开预览）新增一个 AWS 区域：`N. Virginia (us-east-1)`。该功能现已在以下 AWS 区域可用：
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `N. Virginia (us-east-1)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+**高可用性变更**
+
+- **TiDB Cloud Essential**
+
+    - 从 2026 年 6 月 9 日起，新创建的 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例部署在单个可用区中，不支持区域高可用。
+
+        如果你需要区域高可用和跨可用区故障转移，建议选择 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)。
+
+        此变更不影响 2026 年 6 月 9 日之前创建的 TiDB Cloud Essential 实例。
+
+**API 变更**
+
+- **TiDB Cloud Premium**
+
+    - 为 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 引入以下备份 API 端点，以便对组织内的活动实例和已删除实例进行统一管理。
+
+        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups)：列出组织内活动和已删除的 TiDB Cloud Premium 实例（位于回收站中）的备份。
+        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup)：通过 `backupId` 删除组织内的特定备份。
+
 ## 2026 年 6 月 2 日
 
 **常规变更**
@@ -88,6 +121,12 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 **常规变更**
 
 - **TiDB Cloud Essential**
+
+    - 回收站现已支持 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)。它用于存储具有有效备份的已删除 TiDB Cloud 资源的数据。
+
+        当删除具有现有备份的 TiDB Cloud Essential 实例时，其备份文件会被移至回收站。自动备份创建的备份文件会在回收站中保留一段指定时间。为避免数据丢失，请在保留期到期前将数据恢复到新的 TiDB Cloud Essential 实例。请注意，如果 TiDB Cloud Essential 实例**没有备份**，则已删除的实例不会显示在回收站中。
+
+        更多信息，请参见[备份与恢复](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin)。
 
     - Top RU 现已在以下区域的 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 中开启公开预览：
 

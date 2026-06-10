@@ -1,11 +1,20 @@
 ---
-title: Sink to MySQL (Beta)
+title: Sink to MySQL
 summary: 本文档介绍如何使用 **Sink to MySQL** changefeed 将数据从 TiDB Cloud Essential 实时同步到 MySQL。内容包括限制、前置条件，以及创建 MySQL sink 进行数据复制的步骤。该过程涉及网络连接设置、将已有数据加载到 MySQL 以及在 MySQL 中创建目标表。完成前置条件后，用户即可创建 MySQL sink，将数据复制到 MySQL。
 ---
 
-# Sink to MySQL (Beta)
+# Sink to MySQL
 
 本文档描述如何使用 **Sink to MySQL** changefeed，将数据从 TiDB Cloud Essential 实时同步到 MySQL。
+
+> **注意：**
+>
+> 目前，{{{ .essential }}} 的 changefeed 功能仅可按需申请开通。要申请此功能，请执行以下操作：
+>
+> 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 的右下角，点击 **?**。
+> 2. 点击 **Support Tickets** 进入 [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals)。
+> 3. 创建一个工单。在 "Description" 字段中，填写 "Apply for changefeed"。
+> 4. 点击 **Submit**。
 
 ## 限制
 

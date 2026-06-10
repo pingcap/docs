@@ -16,7 +16,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
 - 🚧：**开发中**。
 - ❌：**当前不可用**。
 
-<table><thead>
+<table className="sticky-header"><thead>
   <tr>
     <th>类别</th>
     <th>功能</th>
@@ -116,7 +116,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   <tr>
     <td>备份文件回收站</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
@@ -145,7 +145,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   <tr>
     <td>使用 changefeed 将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
@@ -253,7 +253,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td rowspan="1" style="background-color: white;">高可用性</td>
     <td>跨可用区故障切换</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>

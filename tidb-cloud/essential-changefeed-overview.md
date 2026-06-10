@@ -1,15 +1,22 @@
 ---
-title: Changefeed (Beta)
+title: Changefeed
 summary: TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。
 ---
 
-# Changefeed (Beta)
+# Changefeed
 
-TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud 支持将数据流式传输到 Apache Kafka 和 MySQL。
+TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，{{{ .essential }}} 支持将数据流式传输到 Apache Kafka 和 MySQL。
 
 > **注意：**
 >
-> - 目前，TiDB Cloud 每个 {{{ .essential }}} 实例最多只允许创建 10 个 changefeed。
+> - 目前，{{{ .essential }}} 的 changefeed 功能仅可按需申请。要申请此功能，请执行以下操作：
+>
+>     1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 的右下角，点击 **?**。
+>     2. 点击 **Support Tickets** 进入 [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals)。
+>     3. 创建工单。在 "Description" 字段中，填写 "Apply for changefeed"。
+>     4. 点击 **Submit**。
+>
+> - TiDB Cloud 每个 {{{ .essential }}} 实例最多只允许创建 10 个 changefeed。
 > - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
 
 ## 限制
