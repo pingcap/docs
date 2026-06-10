@@ -9,47 +9,47 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 ## Schema management / Data definition statements (DDL)
 
-| SQL Statement                                                                                                                | Description                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)                                                          | Modifies a database.                                                                                   |
-| [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)                                                          | Modifies a sequence.                                                                                   |
-| [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md)                                                  | Adds a column to an existing table.                                                                    |
-| [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md)                                                    | Adds an index to an existing table.                                                                    |
-| [`ALTER TABLE ... ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)                                                | Changes an index definition.                                                                           |
-| [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)                                            | Changes a column definition.                                                                           |
-| [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)                                            | Compacts a table.                                                                                      |
-| [`ALTER TABLE ... DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)                                                | Drops a column from a table.                                                                           |
-| [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)                                            | Modifies a column definition.                                                                          |
-| [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)                                              | Renames an index.                                                                                      |
-| [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)                                                                | Changes a table definition.                                                                            |
-| [`ALTER TABLE ... ADD/DROP/ENABLE/DISABLE/MODIFY MASKING POLICY`](/sql-statements/sql-statement-alter-table.md)             | Manages column-level masking policies on a table.                                                      |
-| [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)                                                        | Creates a new database.                                                                                |
-| [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)                                                              | Creates a new index on a table.                                                                        |
-| [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)                                                        | Creates a new sequence object.                                                                         |
-| [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)                                                    | Copies the definition of an existing table, without copying any data.                                  |
-| [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md)                                            | Creates a data masking policy for columns in a table.                                                  |
-| [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)                                                              | Creates a new table.                                                                                   |
-| [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)                                                                | Creates a new view.                                                                                    |
-| [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)                                                            | Drops an existing database.                                                                            |
-| [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)                                                                  | Drops an index from a table.                                                                           |
-| [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)                                                            | Drops a sequence object.                                                                               |
-| [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)                                                                  | Drops an existing table.                                                                               |
-| [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)                                                                    | Drops an existing view.                                                                                |
-| [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)                                                              | Renames a table.                                                                                       |
-| [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)                                                    | Shows the columns from a table.                                                                        |
-| [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)                                              | Shows the CREATE statement for a database.                                                             |
-| [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)                                              | Shows the CREATE statement for a sequence.                                                             |
-| [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)                                                    | Shows the CREATE statement for a table.                                                                |
-| [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)                                                          | Shows a list of databases that the current user has privileges to.                                     |
-| [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)                                                      | Shows columns of a table.                                                                              |
-| [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)                                                              | Shows indexes of a table.                                                                              |
-| [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md)                                            | Shows the masking policies defined on a table.                                                         |
-| [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)                                                              | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
-| [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)                                           | Shows the next row ID for a table.                                                                     |
-| [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)                                                  | Shows the Region information of a table in TiDB.                                                       |
-| [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)                                                    | Shows various statistics about tables in TiDB.                                                         |
-| [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md)                                                                | Shows tables in a database.                                                                            |
-| [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)                                                                      | Truncates all data from a table.                                                                       |
+| SQL Statement                                                                      | Description                                                                                            |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)                | Modifies a database.                                                                                   |
+| [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)                | Modifies a sequence.                                                                                   |
+| [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md)        | Adds a column to an existing table.                                                                    |
+| [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md)          | Adds an index to an existing table.                                                                    |
+| [`ALTER TABLE ... ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)      | Changes an index definition.                                                                           |
+| [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)  | Changes a column definition.                                                                           |
+| [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)  | Compacts a table.                                                                                      |
+| [`ALTER TABLE ... DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)      | Drops a column from a table.                                                                           |
+| [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)  | Modifies a column definition.                                                                          |
+| [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)    | Renames an index.                                                                                      |
+| [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)                      | Changes a table definition.                                                                            |
+| [`ALTER TABLE ... ADD/DROP/ENABLE/DISABLE/MODIFY MASKING POLICY`](/sql-statements/sql-statement-alter-table.md) | Manages column-level masking policies on a table. |
+| [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)              | Creates a new database.                                                                                |
+| [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)                    | Creates a new index on a table.                                                                        |
+| [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)              | Creates a new sequence object.                                                                         |
+| [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)          | Copies the definition of an existing table, without copying any data.                                  |
+| [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md) | Creates a data masking policy for columns in a table. |
+| [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)                    | Creates a new table.                                                                                   |
+| [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)                      | Creates a new view.                                                                                    |
+| [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)                  | Drops an existing database.                                                                            |
+| [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)                        | Drops an index from a table.                                                                           |
+| [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)                  | Drops a sequence object.                                                                               |
+| [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)                        | Drops an existing table.                                                                               |
+| [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)                          | Drops an existing view.                                                                                |
+| [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)                    | Renames a table.                                                                                       |
+| [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)          | Shows the columns from a table.                                                                        |
+| [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)    | Shows the CREATE statement for a database.                                                             |
+| [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)    | Shows the CREATE statement for a sequence.                                                             |
+| [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)          | Shows the CREATE statement for a table.                                                                |
+| [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)                | Shows a list of databases that the current user has privileges to.                                     |
+| [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)            | Shows columns of a table.                                                                              |
+| [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)                    | Shows indexes of a table.                                                                              |
+| [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md) | Shows the masking policies defined on a table. |
+| [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)                    | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
+| [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table.                                                                     |
+| [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)        | Shows the Region information of a table in TiDB.                                                       |
+| [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)          | Shows various statistics about tables in TiDB.                                                         |
+| [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md)                      | Shows tables in a database.                                                                            |
+| [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)                            | Truncates all data from a table.                                                                       |
 
 ## Data manipulation statements (DML)
 
