@@ -48,4 +48,4 @@ lake://user:pwd@host[:port]/[database][?sslmode=disable][&arg1=value1]
 | **[Go](/tidb-cloud-lake/guides/connect-using-golang.md)**      | `lake-go`                               | • database/sql interface<br/>• Connection pooling<br/>• Bulk operations       |
 | **[Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)** | `tidbcloudlake-driver`                           | • TypeScript support<br/>• Promise-based API<br/>• Streaming results          |
 | **[Java](/tidb-cloud-lake/guides/connect-using-java.md)**      | `lake-jdbc`                             | • JDBC 4.0 compatible<br/>• Connection pooling<br/>• Prepared statements      |
-| **[Rust](/tidb-cloud-lake/guides/connect-using-rust.md)**      | `tidbcloudlake-driver`                           | • Async/await support<br/>• Type-safe queries<br/>• Zero-copy deserialization |
+| **[Rust](/tidb-cloud-lake/guides/connect-using-rust.md)**      | `lake-driver`                           | • Async/await support<br/>• Type-safe queries<br/>• Zero-copy deserialization |
