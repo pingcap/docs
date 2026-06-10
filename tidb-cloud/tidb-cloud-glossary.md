@@ -25,7 +25,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 ### Chat2Query {#chat2query}
 
-Chat2Query は SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
+Chat2Query は、SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
 
 さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、データサービスに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)参照してください。.
 
@@ -123,7 +123,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
 
 -   **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
--   **TiDB X プロジェクト**: このプロジェクトタイプは、TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**私のTiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクトタイプです。
+-   **TiDB X プロジェクト**: このプロジェクト タイプは TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**私のTiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
 -   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB CloudAPI 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 。
 
 これらのプロジェクト タイプの違いの詳細については、 [プロジェクト](/tidb-cloud/manage-user-access.md#projects)を参照してください。
@@ -140,13 +140,17 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 バックアップされたTiDB Cloudリソースが削除されると、その既存のバックアップ ファイルはごみ箱に移動されます。自動バックアップからのバックアップ ファイルについては、ごみ箱に指定された期間保持されます。バックアップの保持期間は**「バックアップ設定」**で設定でき、デフォルトは 7 日です。手動バックアップからのバックアップ ファイルには有効期限はありません。データ損失を防ぐため、新しいTiDB Cloudリソースにデータを速やかに復元してください。なお、 TiDB Cloudリソース**にバックアップがない**場合、削除されたリソースはごみ箱に表示されません。
 
-現在、ごみ箱機能はTiDB Cloud PremiumインスタンスとTiDB Cloud Dedicatedクラスタのみをサポートしています。
+現在、ごみ箱機能をサポートしているTiDB Cloudリソースの種類は以下のとおりです。
+
+-   TiDB Cloud Essentialインスタンス
+-   TiDB Cloud Premiumインスタンス
+-   TiDB Cloud Dedicatedクラスター
 
 ### 地域 {#region}
 
 -   TiDB Cloudリージョン
 
-    TiDB Cloudリソースがデプロイされる地理的領域。TiDB Cloudリージョンは少なくとも3つのアベイラビリティゾーンで構成され、クラスターまたはインスタンスはこれらのゾーンにまたがってデプロイされます。
+    TiDB Cloudリソースがデプロイされる地理的領域。TiDB TiDB Cloudリージョンは少なくとも3つのアベイラビリティゾーンで構成され、クラスターまたはインスタンスはこれらのゾーンにまたがってデプロイされます。
 
 -   TiDBリージョン
 
@@ -181,13 +185,13 @@ TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエ
 
 ### 支出限度額 {#spending-limit}
 
-は、特定のワークロードに対して1か月間に費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。支出[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出制限が0より大きい場合は、クレジットカードを追加する必要があります。
+は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)制限が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出制限が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
 ### TiDBクラスター {#tidb-cluster}
 
-TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[TiKV](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
+TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[ティクヴ](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
 
 ### TiDBノード {#tidb-node}
 

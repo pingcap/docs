@@ -1,39 +1,39 @@
 ---
 title: Explore SQL with TiDB
-summary: TiDB データベースの基本的な SQL ステートメントについて学習します。
+summary: TiDBデータベースの基本的なSQL文について学びましょう。
 ---
 
-# TiDB で SQL を試す {#explore-sql-with-tidb}
+# TiDBでSQLを探求しよう {#explore-sql-with-tidb}
 
-TiDBはMySQLと互換性があり、ほとんどの場合MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)参照してください。
+TiDBはMySQLと互換性があり、ほとんどの場合、MySQLのステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)参照してください。
 
 <CustomContent platform="tidb">
 
-SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)試すことができます。また、最初に TiDB クラスターをデプロイし、その中で SQL ステートメントを実行することもできます。
+SQLを試したり、TiDBとMySQLクエリの互換性をテストしたりするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)お試しください。また、まずTiDBクラスタをデプロイしてから、その中でSQL文を実行することもできます。
 
 </CustomContent>
 
-このページでは、DDL、DML、CRUD操作といったTiDB SQL文について解説します。TiDB文の完全なリストについては、 [SQL文の概要](/sql-statements/sql-statement-overview.md)ご覧ください。
+このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
 
 ## カテゴリ {#category}
 
-SQL は関数に応じて次の 4 つの種類に分けられます。
+SQLは、その関数に応じて以下の4種類に分類されます。
 
--   DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベース オブジェクトを定義するために使用されます。
+-   DDL（データ定義言語）：データベース、テーブル、ビュー、インデックスなど、データベースオブジェクトを定義するために使用されます。
 
--   DML (データ操作言語): アプリケーション関連のレコードを操作するために使用されます。
+-   DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。
 
--   DQL (データ クエリ言語): 条件付きフィルタリング後にレコードをクエリするために使用されます。
+-   DQL（データクエリ言語）：条件付きフィルタリング後にレコードをクエリするために使用されます。
 
--   DCL (データ制御言語): アクセス権限とセキュリティ レベルを定義するために使用されます。
+-   DCL（データ制御言語）：アクセス権限とセキュリティレベルを定義するために使用されます。
 
-一般的なDDL機能は、オブジェクト（テーブルやインデックスなど）の作成、変更、削除です。対応するコマンドは`CREATE` 、 `ALTER` 、 `DROP`です。
+一般的な DDL 機能には、オブジェクト (テーブルやインデックスなど) の作成、変更、削除があります。対応するコマンドは`CREATE` 、 `ALTER` 、 `DROP`です。
 
 ## データベースの表示、作成、削除 {#show-create-and-drop-a-database}
 
-TiDB のデータベースは、テーブルやインデックスなどのオブジェクトの集合として考えることができます。
+TiDBにおけるデータベースは、テーブルやインデックスなどのオブジェクトの集合体と考えることができます。
 
-データベースのリストを表示するには、次の`SHOW DATABASES`ステートメントを使用します。
+データベースの一覧を表示するには、 `SHOW DATABASES`ステートメントを使用します。
 
 ```sql
 SHOW DATABASES;
@@ -51,7 +51,7 @@ USE mysql;
 SHOW TABLES FROM mysql;
 ```
 
-データベースを作成するには、次の`CREATE DATABASE`ステートメントを使用します。
+データベースを作成するには、 `CREATE DATABASE`ステートメントを使用します。
 
 ```sql
 CREATE DATABASE db_name [options];
@@ -63,15 +63,15 @@ CREATE DATABASE db_name [options];
 CREATE DATABASE IF NOT EXISTS samp_db;
 ```
 
-データベースが既に存在する場合にエラーを防ぐため、`IF NOT EXISTS`を追加します。
+データベースが存在する場合にエラーが発生しないように、 `IF NOT EXISTS`を追加してください。
 
-データベースを削除するには、次の`DROP DATABASE`ステートメントを使用します。
+データベースを削除するには、 `DROP DATABASE`ステートメントを使用します。
 
 ```sql
 DROP DATABASE samp_db;
 ```
 
-## テーブルを作成、表示、削除する {#create-show-and-drop-a-table}
+## テーブルの作成、表示、削除 {#create-show-and-drop-a-table}
 
 テーブルを作成するには、 `CREATE TABLE`ステートメントを使用します。
 
@@ -79,7 +79,7 @@ DROP DATABASE samp_db;
 CREATE TABLE table_name column_name data_type constraint;
 ```
 
-たとえば、番号、名前、誕生日などのフィールドを含む`person`という名前のテーブルを作成するには、次のステートメントを使用します。
+例えば、数値、名前、誕生日などのフィールドを含む`person`という名前のテーブルを作成するには、次のステートメントを使用します。
 
 ```sql
 CREATE TABLE person (
@@ -89,13 +89,13 @@ CREATE TABLE person (
     );
 ```
 
-テーブルを作成するステートメント (DDL) を表示するには、 `SHOW CREATE TABLE`ステートメントを使用します。
+テーブルを作成するステートメント（DDL）を表示するには、 `SHOW CREATE TABLE`ステートメントを使用します。
 
 ```sql
-SHOW CREATE table person;
+SHOW CREATE TABLE person;
 ```
 
-テーブルを削除するには、次の`DROP TABLE`ステートメントを使用します。
+テーブルを削除するには、 `DROP TABLE`ステートメントを使用します。
 
 ```sql
 DROP TABLE person;
@@ -103,25 +103,25 @@ DROP TABLE person;
 
 ## インデックスの作成、表示、削除 {#create-show-and-drop-an-index}
 
-インデックスは、インデックス付き列に対するクエリを高速化するために使用されます。値が一意でない列にインデックスを作成するには、次の`CREATE INDEX`文を使用します。
+インデックスは、インデックス付き列に対するクエリの速度を向上させるために使用されます。値が一意でない列にインデックスを作成するには、 `CREATE INDEX`ステートメントを使用します。
 
 ```sql
 CREATE INDEX person_id ON person (id);
 ```
 
-または、 `ALTER TABLE`ステートメントを使用します。
+または、 `ALTER TABLE`ステートメントを使用してください。
 
 ```sql
 ALTER TABLE person ADD INDEX person_id (id);
 ```
 
-値が一意の列に一意のインデックスを作成するには、 `CREATE UNIQUE INDEX`ステートメントを使用します。
+値が一意である列に対して一意のインデックスを作成するには、 `CREATE UNIQUE INDEX`ステートメントを使用します。
 
 ```sql
 CREATE UNIQUE INDEX person_unique_id ON person (id);
 ```
 
-または、 `ALTER TABLE`ステートメントを使用します。
+または、 `ALTER TABLE`ステートメントを使用してください。
 
 ```sql
 ALTER TABLE person ADD UNIQUE person_unique_id (id);
@@ -133,7 +133,7 @@ ALTER TABLE person ADD UNIQUE person_unique_id (id);
 SHOW INDEX FROM person;
 ```
 
-インデックスを削除するには、 `DROP INDEX`または`ALTER TABLE`ステートメントを使用します。 `DROP INDEX`は`ALTER TABLE`の中でネストできます。
+インデックスを削除するには、 `DROP INDEX`または`ALTER TABLE`ステートメントを使用します。 `DROP INDEX` `ALTER TABLE`の中にネストできます。
 
 ```sql
 DROP INDEX person_id ON person;
@@ -145,11 +145,11 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 > **注記：**
 >
-> DDL操作はトランザクションではありません。DDL操作を実行する際に`COMMIT`文を実行する必要はありません。
+> DDL操作はトランザクションではありません。DDL操作を実行する際に`COMMIT`ステートメントを実行する必要はありません。
 
 ## データの挿入、更新、削除 {#insert-update-and-delete-data}
 
-一般的なDML機能は、テーブルレコードの追加、変更、削除です。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE`です。
+一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
 
 テーブルにデータを挿入するには、 `INSERT`ステートメントを使用します。
 
@@ -157,13 +157,13 @@ ALTER TABLE person DROP INDEX person_unique_id;
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、次の`INSERT`ステートメントを使用します。
+いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`ステートメントを使用します。
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-テーブル内のレコードの一部のフィールドを更新するには、次の`UPDATE`ステートメントを使用します。
+テーブル内のレコードの一部のフィールドを更新するには、 `UPDATE`ステートメントを使用します。
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
@@ -177,19 +177,19 @@ DELETE FROM person WHERE id=2;
 
 > **注記：**
 >
-> フィルターとして`WHERE`句を使用しない`UPDATE`および`DELETE`ステートメントは、テーブル全体に対して動作します。
+> `UPDATE`および`DELETE`ステートメントは、フィルターとして`WHERE`句を指定しない場合、テーブル全体に対して動作します。
 
 ## クエリデータ {#query-data}
 
-DQL は、1 つまたは複数のテーブルから必要なデータ行を取得するために使用されます。
+DQLは、テーブルまたは複数のテーブルから目的のデータ行を取得するために使用されます。
 
-テーブル内のデータを表示するには、 `SELECT`ステートメントを使用します。
+データを表形式で表示するには、 `SELECT`ステートメントを使用します。
 
 ```sql
 SELECT * FROM person;
 ```
 
-特定の列をクエリするには、 `SELECT`キーワードの後に列名を追加します。
+特定の列をクエリするには、 `SELECT`キーワードの後に​​列名を追加します。
 
 ```sql
 SELECT name FROM person;
@@ -212,27 +212,27 @@ SELECT * FROM person where id<5;
 
 ## ユーザーの作成、承認、削除 {#create-authorize-and-delete-a-user}
 
-DCL は通常、ユーザーの作成または削除、およびユーザー権限の管理に使用されます。
+DCLは通常、ユーザーの作成や削除、およびユーザー権限の管理に使用されます。
 
-ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では、ユーザー名が`tiuser` 、パスワードが`123456`のユーザーを作成します。
+ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では`tiuser`という名前のユーザーを`123456`というパスワードで作成します。
 
 ```sql
 CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
 ```
 
-`tiuser`に`samp_db`データベース内のテーブルを取得する権限を付与するには:
+`tiuser`に`samp_db`データベース内のテーブルを取得する権限を付与するには：
 
 ```sql
 GRANT SELECT ON samp_db.* TO 'tiuser'@'localhost';
 ```
 
-`tiuser`の権限を確認するには:
+`tiuser`の権限を確認するには：
 
 ```sql
 SHOW GRANTS for tiuser@localhost;
 ```
 
-`tiuser`を削除するには:
+`tiuser`を削除するには：
 
 ```sql
 DROP USER 'tiuser'@'localhost';

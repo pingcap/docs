@@ -21,6 +21,8 @@ summary: TiDBの機能概要について学びましょう。
 
 ## データ型、関数、演算子 {#data-types-functions-and-operators}
 
+<StickyHeaderTable>
+
 | データ型、関数、演算子                                                                    | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [数値型](/data-type-numeric.md)                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -45,7 +47,11 @@ summary: TiDBの機能概要について学びましょう。
 | [文字セットと照合](/character-set-and-collation.md)[^1]                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ユーザーレベルのロック](/functions-and-operators/locking-functions.md)                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 
+</StickyHeaderTable>
+
 ## インデックスと制約 {#indexing-and-constraints}
+
+<StickyHeaderTable>
 
 | インデックスと制約                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -68,7 +74,11 @@ summary: TiDBの機能概要について学びましょう。
 | [グローバルインデックス](/global-indexes.md)                                                           |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [ベクトルインデックス](/ai/reference/vector-search-index.md)                                          |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
 
+</StickyHeaderTable>
+
 ## SQL文 {#sql-statements}
+
+<StickyHeaderTable>
 
 | SQL文[^3]                                                                                          | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -93,7 +103,11 @@ summary: TiDBの機能概要について学びましょう。
 | [テーブルロック](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)                         |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md)                                   |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 
+</StickyHeaderTable>
+
 ## 高度なSQL機能 {#advanced-sql-features}
+
+<StickyHeaderTable>
 
 | 高度なSQL機能                                                                                                     | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -107,7 +121,7 @@ summary: TiDBの機能概要について学びましょう。
 | [コプロセッサーキャッシュ](/coprocessor-cache.md)                                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ステイル読み取り](/stale-read.md)                                                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Followerが読む](/follower-read.md)                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [履歴データ（tidb_snapshot）を読み込む](/read-historical-data.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [過去のデータ（tidb_snapshot）を読み込む](/read-historical-data.md)                                                       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [オプティマイザのヒント](/optimizer-hints.md)                                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [MPP実行エンジン](/explain-mpp.md)                                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [MPP実行エンジン - 圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)                                |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
@@ -118,13 +132,17 @@ summary: TiDBの機能概要について学びましょう。
 | [カスケードプランナー](/system-variables.md#tidb_enable_cascades_planner)                                              |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [ランタイムフィルタ](/runtime-filter.md)                                                                              |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 
+</StickyHeaderTable>
+
 ## データ定義言語（DDL） {#data-definition-language-ddl}
+
+<StickyHeaderTable>
 
 | データ定義言語（DDL）                                                                                                             | 8.5 | 8.1 | 7.5 | 7.1 |  6.5  | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :---: | :-: | :-: |
 | 基本`CREATE` 、 `DROP` 、 `ALTER` 、 `RENAME` 、 `TRUNCATE`                                                                    |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [生成された列](/generated-columns.md)                                                                                          |  Y  |  Y  |  Y  |  Y  |   E   |  E  |  E  |
-| [ビュー](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
+| [閲覧数](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [自動インクリメント](/auto-increment.md)                                                                                          |  Y  |  Y  |  Y  |  Y  | Y[^4] |  Y  |  Y  |
 | [自動ランダム](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
@@ -141,21 +159,29 @@ summary: TiDBの機能概要について学びましょう。
 | [TiDB高速テーブル作成](/accelerated-table-creation.md)                                                                           |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 | [BDRロールを構成して、BDRモードでDDLステートメントを複製するようにします。](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 
-## トランザクション {#transactions}
+</StickyHeaderTable>
 
-| トランザクション                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
+## 取引 {#transactions}
+
+<StickyHeaderTable>
+
+| 取引                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [大規模トランザクション（1 TiB）](/transaction-overview.md#transaction-size-limit)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [悲観的トランザクション](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [楽観的トランザクション](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [悲観的な取引](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [楽観的な取引](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [反復読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [リードコミット隔離](/transaction-isolation-levels.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [長時間実行されているアイドル状態のトランザクションを自動的に終了する](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
 | [一括DML実行モード（ `tidb_dml_type = &quot;bulk&quot;` ）](/system-variables.md#tidb_dml_type-new-in-v800)   |  E  |  E  |  N  |  N  |  N  |  N  |  N  |
 
+</StickyHeaderTable>
+
 ## パーティショニング {#partitioning}
+
+<StickyHeaderTable>
 
 | パーティショニング                                                                                                    | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -175,7 +201,11 @@ summary: TiDBの機能概要について学びましょう。
 | [既存のテーブルをパーティション分割する](/partitioned-table.md#partition-an-existing-table)                                     |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [グローバルインデックス](/global-indexes.md)                                                                            |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
 
+</StickyHeaderTable>
+
 ## 統計 {#statistics}
+
+<StickyHeaderTable>
 
 | 統計                                                                                        | 8.5              | 8.1              | 7.5              | 7.1              | 6.5              | 6.1              | 5.4              |
 | ----------------------------------------------------------------------------------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
@@ -192,7 +222,11 @@ summary: TiDBの機能概要について学びましょう。
 | [軽量統計初期化](/statistics.md#load-statistics)                                                 | Y                | Y                | Y                | E                | N                | N                | N                |
 | [統計情報の収集状況を表示する](/sql-statements/sql-statement-show-analyze-status.md)                    | Y                | Y                | Y                | N                | N                | N                | N                |
 
+</StickyHeaderTable>
+
 ## Security {#security}
+
+<StickyHeaderTable>
 
 | Security                                                                             | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -211,7 +245,11 @@ summary: TiDBの機能概要について学びましょう。
 | [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [編集済みログファイル](/log-redaction.md)                                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 
+</StickyHeaderTable>
+
 ## データのインポートとエクスポート {#data-import-and-export}
+
+<StickyHeaderTable>
 
 | データのインポートとエクスポート                                                                                     | 8.5  | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------- | ---- | --- | --- | --- | --- | --- | --- |
@@ -228,7 +266,11 @@ summary: TiDBの機能概要について学びましょう。
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)                                                      | Y    | Y   | Y   | Y   | N   | N   | N   |
 | [DM](/dm/dm-overview.md) MySQL 8.0の移行をサポートしています                                                      | Y    | Y   | E   | E   | E   | E   | N   |
 
+</StickyHeaderTable>
+
 ## 管理、可観測性、およびツール {#management-observability-and-tools}
+
+<StickyHeaderTable>
 
 | 管理、可観測性、およびツール                                                                                                                                                                                                                                                         | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -270,6 +312,8 @@ summary: TiDBの機能概要について学びましょう。
 | [グローバルソート](/tidb-global-sort.md)                                                                                                                                                                                                                                       |  Y  |  Y  |  E  |  N  |  N  |  N  |  N  |
 | [TiProxy](/tiproxy/tiproxy-overview.md)                                                                                                                                                                                                                                |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
 | [スキーマキャッシュ](/schema-cache.md)                                                                                                                                                                                                                                          |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
+
+</StickyHeaderTable>
 
 [^1]: TiDBはlatin1をutf8のサブセットとして誤って扱っています。詳細は[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
 

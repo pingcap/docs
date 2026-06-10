@@ -8,6 +8,39 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年6月9日 {#june-9-2026}
+
+**全般的な変更**
+
+-   **TiDB Cloud Starter**
+
+    -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)に[全文検索](https://docs.pingcap.com/ai/vector-search-full-text-search-python/)（パブリックプレビュー）用の新しい AWS リージョンを追加しました: `N. Virginia (us-east-1)` 。この機能は、以下の AWS リージョンで利用可能になりました。
+
+        -   `Tokyo (ap-northeast-1)`
+        -   `Oregon (us-west-2)`
+        -   `N. Virginia (us-east-1)`
+        -   `Frankfurt (eu-central-1)`
+        -   `Singapore (ap-southeast-1)`
+
+**高可用性の変更**
+
+-   **TiDB Cloud Essential**
+
+    -   2026年6月9日以降に新たに作成される[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスは、単一のアベイラビリティゾーンにデプロイされ、リージョンごとの高可用性はサポートされません。
+
+        リージョンの高可用性とクロス AZ フェイルオーバーが必要な場合は、 [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)選択を検討してください。
+
+        この変更は、2026年6月9日より前に作成されたTiDB Cloud Essentialインスタンスには影響しません。
+
+**APIの変更**
+
+-   **TiDB Cloudプレミアム**
+
+    -   [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)向けに以下のバックアップAPIエンドポイントを導入し、組織内のアクティブなインスタンスと削除されたインスタンスの両方を一元的に管理できるようにします。
+
+        -   バックアップの一覧を[バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloudプレミアム インスタンス (ごみ箱内) の両方のバックアップを一覧表示します。
+        -   [バックアップを削除する](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): `backupId`によって組織内の特定のバックアップを削除します。
+
 ## 2026年6月2日 {#june-2-2026}
 
 **全般的な変更**
@@ -89,6 +122,12 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Essential**
 
+    -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)でごみ箱機能が利用可能になりました。ごみ箱には、有効なバックアップが存在する削除済みTiDB Cloudリソースのデータが保存されます。
+
+        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップ ファイルはごみ箱に移動されます。自動バックアップによって作成されたバックアップ ファイルは、指定された期間、ごみ箱に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
+
+        詳細については、 [バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin)参照してください。
+
     -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の Top RU が、以下のリージョンでパブリックプレビューとして利用可能になりました。
 
         -   アリババクラウド: `Mexico (na-south-1)`
@@ -119,7 +158,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **全般的な変更**
 
--   **TiDB Cloudプレミアム**
+-   **TiDB Cloud Premium**
 
     -   [TiDB Cloudプレミアム](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)現在、AWS<CustomContent language="en,zh">アリババクラウド</CustomContent>でパブリック プレビュー中です。
 
@@ -196,7 +235,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **APIの変更**
 
--   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間でインスタンスを移動できるため、**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
+-   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間で移動できるため**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
 
 -   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 

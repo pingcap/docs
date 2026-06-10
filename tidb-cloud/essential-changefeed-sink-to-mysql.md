@@ -1,11 +1,20 @@
 ---
-title: Sink to MySQL (Beta)
+title: Sink to MySQL
 summary: このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloud Essentialから MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
 ---
 
-# MySQLへのシンク（ベータ版） {#sink-to-mysql-beta}
+# MySQLへのシンク {#sink-to-mysql}
 
 このドキュメントでは**、Sink to MySQL** changefeedを使用してTiDB Cloud EssentialからMySQLにデータをストリーミングする方法について説明します。
+
+> **注記：**
+>
+> 現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
+>
+> 1.  [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある?をクリックします**。** 。
+> 2.  **「サポート チケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
+> 3.  チケットを作成します。「説明」欄に「changefeedへの申請」と入力します。
+> 4.  **「送信」**をクリックしてください。
 
 ## 制限 {#restrictions}
 
@@ -47,11 +56,11 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 
 ### 既存データの読み込み（オプション） {#load-existing-data-optional}
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
 
 既存のデータを読み込むには：
 
-1.  [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、この期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の 2 つの操作の合計時間よりも長く設定することで、この期間中の履歴データが TiDB によってガベージ コレクションされないようにします。
 
     -   既存データのエクスポートとインポートにかかる時間
     -   **Sink to MySQL**を作成する時間
