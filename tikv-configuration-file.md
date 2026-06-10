@@ -2692,6 +2692,68 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
     + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
 + Default value: `moderate`.
 
+### `bg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the CPU utilization percentage threshold at which background task throttling begins. When CPU utilization reaches this value, TiKV starts to reduce the resource budget allocated to background tasks (such as compaction and garbage collection). The background task budget scales linearly from full down to zero as CPU utilization increases from this threshold toward [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold).
++ Default value: `60.0`
++ Unit: percentage (%)
+
+### `fg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the CPU utilization percentage threshold above which foreground traffic protection is fully activated. When CPU utilization reaches this value, background tasks are completely throttled to their minimum floor and the background utilization budget is capped at this value. This threshold must be greater than [`bg-cpu-throttle-threshold`](#bg-cpu-throttle-threshold).
++ Default value: `70.0`
++ Unit: percentage (%)
+
+### `bg-compaction-pressure-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the compaction pending bytes ratio threshold at which background write I/O throttling begins. Below this threshold, background write I/O ramps up toward [`bg-write-io-ceiling`](#bg-write-io-ceiling). At or above this threshold, background write I/O scales linearly down toward [`bg-write-io-floor`](#bg-write-io-floor) as compaction pressure approaches 100%.
++ Default value: `70.0`
++ Unit: percentage (%)
+
+### `bg-write-io-ceiling` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the maximum write I/O rate allowed for background tasks when compaction pressure is below [`bg-compaction-pressure-threshold`](#bg-compaction-pressure-threshold).
++ Default value: `"100GB"`
++ Unit: bytes per second
+
+### `bg-write-io-floor` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the minimum write I/O rate guaranteed to background tasks even at maximum compaction pressure. This floor prevents background tasks from being starved completely.
++ Default value: `"10MB"`
++ Unit: bytes per second
+
+### `enable-fair-scheduling` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Controls whether to enable two-phase RU-based fair scheduling for read requests. When enabled, resource groups whose current RU consumption rate exceeds their historical baseline are placed in a lower-priority phase in the unified read pool queue, protecting sustained workloads from traffic spikes without hard-rejecting requests.
++ Default value: `false`
+
+### `enable-read-admission-control` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Controls whether to enable admission control for read requests. When enabled, read requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold). This configuration takes effect only when [`enable-fair-scheduling`](#enable-fair-scheduling) is also enabled.
++ Default value: `false`
+
+### `enable-write-admission-control` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Controls whether to enable admission control for write requests. When enabled, write requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold). This configuration takes effect only when [`enable-fair-scheduling`](#enable-fair-scheduling) is also enabled.
++ Default value: `false`
+
+### `historical-usage-window-mins` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the size of the sliding time window (in minutes) used to compute per-resource-group historical RU baselines. A larger window smooths out short-term bursts, while a smaller window makes the baseline more responsive to recent usage. Valid range: `2`–`60`. **Modifying this configuration item requires a TiKV restart to take effect.**
++ Default value: `15`
++ Unit: minutes
+
+### `baseline-burst-pct` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the percentage of headroom above a resource group's historical RU baseline before the group is considered "over baseline." For example, a value of `20.0` means a group must exceed 1.2× its historical RU rate to be deprioritized by fair scheduling or limited by admission control.
++ Default value: `20.0`
++ Unit: percentage (%)
+
+### `admission-max-delayed-count` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+
++ Specifies the maximum number of requests that can be concurrently held in admission control delay (reads and writes combined). When this limit is reached, additional over-baseline requests are rejected immediately rather than delayed. Set to `0` for unlimited concurrent delays.
++ Default value: `10000`
+
 ## split
 
 Configuration items related to [Load Base Split](/configure-load-base-split.md).
