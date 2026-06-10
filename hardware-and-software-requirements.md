@@ -184,7 +184,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
 > - If you deploy TiDB clusters on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes instead of instance store. 
-
+>
 >     - Data durability is relatively low for instance store volumes. The lifecycle of an instance store is tied to the lifecycle of the virtual machine. Data might be lost if the instance is restarted, stopped, migrated, affected by hardware failures, or undergoes maintenance. Most cloud providers explicitly classify instance store as ephemeral storage. For example, according to [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html): “The data on an instance store volume persists only during the life of the associated instance; if you stop, hibernate, or terminate an instance, any data on instance store volumes is lost.”
 >     - Instance store volumes typically do not support snapshots or cross-node or cross-region replication. As a result, data cannot be quickly recovered in the event of corruption or hardware failure.
 >     - The capacity of an instance store is tied to the instance type and cannot be scaled independently.
