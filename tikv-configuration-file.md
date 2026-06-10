@@ -2739,7 +2739,7 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `historical-usage-window-mins` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ Specifies the size of the sliding time window (in minutes) used to compute per-resource-group historical RU baselines. A larger window smooths out short-term bursts, while a smaller window makes the baseline more responsive to recent usage. Valid range: `2`–`60`. **Modifying this configuration item requires a TiKV restart to take effect.**
++ Specifies the size of the sliding time window (in minutes) that TiKV uses to compute per-resource-group historical RU baselines. A larger window smooths out short-term bursts, while a smaller window makes the baseline more responsive to recent usage. Valid range: `2-60`. **You must restart TiKV for changes to this configuration to take effect.**
 + Default value: `15`
 + Unit: minutes
 
