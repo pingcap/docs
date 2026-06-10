@@ -2745,7 +2745,7 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `baseline-burst-pct` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ Specifies the percentage of headroom above a resource group's historical RU baseline before the group is considered "over baseline." For example, a value of `20.0` means a group must exceed 1.2× its historical RU rate to be deprioritized by fair scheduling or limited by admission control.
++ Specifies the percentage of headroom above a resource group's historical RU baseline before TiKV considers the group "over baseline." For example, if you set this value to `20.0`, a resource group must exceed 1.2× its historical RU rate before fair scheduling deprioritizes it or admission control limits it.
 + Default value: `20.0`
 + Unit: percentage (%)
 
