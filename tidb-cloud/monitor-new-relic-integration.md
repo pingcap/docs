@@ -129,7 +129,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 </div>
 </SimpleTab>
 
-## 事前に構築されたダッシュボードをビュー {#view-the-pre-built-dashboard}
+## 事前に構築されたダッシュボードを確認する {#view-the-pre-built-dashboard}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「統合」**ページに移動します。
 

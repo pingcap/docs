@@ -129,9 +129,9 @@ TiDB バージョン: 5.1.0
 
     ユーザー向けドキュメント：
 
-    -   クラスター内のすべての TiKV ノードで現在発生している悲観的ロックおよびその他のロックをビュー: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
-    -   TiDBノードで最近発生した複数のデッドロックエラーをビュー： [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
-    -   TiDBノードで現在実行されているトランザクション情報をビュー： [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+    -   クラスター内のすべての TiKV ノードで現在発生している悲観的ロックおよびその他のロックを確認する: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    -   TiDBノードで最近発生した複数のデッドロックエラーを確認する： [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
+    -   TiDBノードで現在実行されているトランザクション情報を確認する： [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 ### パフォーマンス {#performance}
 

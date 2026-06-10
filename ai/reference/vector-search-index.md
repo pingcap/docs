@@ -114,7 +114,7 @@ WHERE category = "document";
 -- Note that this query might return fewer than 5 results if some are filtered out.
 ```
 
-## インデックス構築の進行状況をビュー {#view-index-build-progress}
+## インデックス構築の進行状況を確認する {#view-index-build-progress}
 
 大量のデータを挿入した後、その一部がTiFlashに即座に保存されない場合があります。既に保存されているベクターデータの場合、ベクター検索インデックスは同期的に構築されます。まだ保存されていないデータの場合、データが保存された時点でインデックスが構築されます。このプロセスはデータの精度と一貫性に影響を与えません。ベクター検索はいつでも実行でき、完全な結果を得ることができます。ただし、ベクターインデックスが完全に構築されるまでは、パフォーマンスは最適ではありません。
 

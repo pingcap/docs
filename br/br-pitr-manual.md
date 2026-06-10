@@ -368,7 +368,7 @@ Clearing data files... DONE; take = 43.504161ms, kv-count = 53, kv-size = 4573(4
 Removing metadata... DONE; take = 24.038962ms
 ```
 
-### ログバックアップのメタデータをビュー {#view-the-log-backup-metadata}
+### ログバックアップのメタデータを確認する {#view-the-log-backup-metadata}
 
 `tiup br log metadata`コマンドを実行すると、復元できる最も古いタイムスタンプや最新のタイムスタンプなど、storageシステム内のログ バックアップ メタデータを表示できます。
 

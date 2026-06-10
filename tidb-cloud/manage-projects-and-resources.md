@@ -27,7 +27,7 @@ TiDB Cloudでは、 [プロジェクト](/tidb-cloud/tidb-cloud-glossary.md#proj
 
 このセクションでは[**私のTiDB**](https://tidbcloud.com/tidbs)ページを使用してTiDB Cloudのリソースを表示、作成、管理する方法について説明します。
 
-### TiDB Cloudのリソースをビュー {#view-tidb-cloud-resources}
+### TiDB Cloudのリソースを確認する {#view-tidb-cloud-resources}
 
 デフォルトでは、[**私のTiDB**](https://tidbcloud.com/tidbs)ページにはリソースビューが表示され、現在の組織内でアクセス権限を持つすべてのリソースが表示されます。
 
@@ -57,7 +57,7 @@ TiDB Cloudリソースを作成するには、組織の[**私のTiDB**](https://
 
 このセクションでは[**私のTiDB**](https://tidbcloud.com/tidbs)ページを使用してTiDB Cloudプロジェクトを表示、作成、管理する方法について説明します。
 
-### プロジェクトをビュー {#view-projects}
+### プロジェクトを確認する {#view-projects}
 
 TiDB Cloudのリソースをプロジェクトごとにグループ化して表示するには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**「プロジェクトビュー」**タブをクリックします。
 

@@ -23,10 +23,10 @@ TiDB Cloudの直接顧客とは異なり、リセラーの顧客はPingCAPに直
 
 移行の有効日に、電子メール通知が届きます。
 
-## 今後の請求書をビュー {#view-your-future-bills}
+## 今後の請求書を確認する {#view-your-future-bills}
 
 再販業者の顧客の場合、請求書は AWS Marketplace を通じて処理され、支払われます。
 
-## 過去の請求書をビュー {#view-your-historical-bills}
+## 過去の請求書を確認する {#view-your-historical-bills}
 
 TiDB Cloudの直接アカウントからリセラーの顧客アカウントに移行した場合でも、移行前の請求履歴にアクセスできます。アクセスするには、 TiDB Cloudコンソールで**「請求」** &gt; **「請求書」** &gt; **「履歴」**に移動してください。

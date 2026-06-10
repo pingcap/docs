@@ -258,7 +258,7 @@ TABLE_NAME                | child
 REFERENCED_TABLE_NAME     | parent
 ```
 
-## 外部キーを使用した実行計画をビュー {#view-execution-plans-with-foreign-keys}
+## 外部キーを使用した実行計画を確認する {#view-execution-plans-with-foreign-keys}
 
 `EXPLAIN`ステートメントを使用すると、実行プランを表示できます。 `Foreign_Key_Check`演算子は、実行される DML ステートメントに対して外部キー制約チェックを実行します。
 

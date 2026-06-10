@@ -12,7 +12,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 >
 > TiDB Cloud Dedicatedクラスター上のデータをバックアップおよび復元する方法については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)復元」を参照してください。
 
-## バックアップページをビュー {#view-the-backup-page}
+## バックアップページを確認する {#view-the-backup-page}
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
 
