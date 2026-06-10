@@ -48,7 +48,7 @@ The Amazon RDS instance must meet the following requirements:
 
 > **Note**
 >
-> To connect to a cross-region RDS instance, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Currently, cross-region connectivity is not supported for {{{ .essential }}}. If you need cross-region connections, use TiDB Cloud Premium and establish connectivity through VPC peering.
 
 ## Step 2. Expose the Amazon RDS instance as an endpoint service
 
