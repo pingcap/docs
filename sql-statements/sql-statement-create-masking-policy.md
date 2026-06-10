@@ -1,17 +1,17 @@
 ---
 title: CREATE MASKING POLICY
-summary: An overview of how to use CREATE MASKING POLICY in the TiDB database.
+summary: An overview of the usage of CREATE MASKING POLICY for the TiDB database.
 ---
 
 # CREATE MASKING POLICY
 
-`CREATE MASKING POLICY` is used to create a [data masking policy](column-level-masking-policy.md) for columns in a table. After a column masking policy is enabled, TiDB masks the results of the corresponding columns according to the policy definition when returning query results, preventing sensitive data from being viewed by unauthorized users.
+`CREATE MASKING POLICY` creates a [data masking policy](column-level-masking-policy.md) for columns in a table. After you enable a masking policy for a column, TiDB masks the results of that column according to the policy definition when returning query results, preventing sensitive data from being viewed by unauthorized users.
 
-A masking policy is bound to a column in a table. You can use the `CURRENT_USER()` or `CURRENT_ROLE()` function in the masking expression to implement conditional masking based on user identity or role.
+A masking policy is bound to a column in a table. You can use the `CURRENT_USER()` or `CURRENT_ROLE()` function in the masking expression to implement conditional masking based on the user identity or role.
 
 ## Required privileges
 
-To create a masking policy, you must have the `CREATE MASKING POLICY` privilege on the database where the target table resides (or the `SUPER` privilege).
+To create a masking policy, you must have the `CREATE MASKING POLICY` privilege on the database where the target table resides or have the `SUPER` privilege.
 
 ## Syntax diagram
 
@@ -42,9 +42,9 @@ MaskingPolicyStateOpt ::=
 | -------- | ---- |
 | `PolicyName` | The name of the masking policy, which must be unique within the same table. |
 | `TableName` | The name of the target table. |
-| `Identifier`（括号内） | The name of the target column. Each column can be bound to at most one masking policy. |
-| `Expression` | The masking expression. You can use built-in masking functions such as `MASK_FULL`, `MASK_PARTIAL`, `MASK_NULL`, and `MASK_DATE`, or use a custom expression containing `current_user()` or `current_role()` to implement identity-based conditional masking. |
-| `RESTRICT ON (...)` | Optional. Restricts the masked column from participating in specific operations to prevent the original data from being obtained indirectly through these operations. Supported operations include `INSERT INTO SELECT`, `UPDATE SELECT`, `DELETE SELECT`, and `CTAS`. |
+| `Identifier` (in parentheses) | The name of the target column. Each column can be bound to at most one masking policy. |
+| `Expression` | The masking expression. You can use built-in masking functions such as `MASK_FULL`, `MASK_PARTIAL`, `MASK_NULL`, and `MASK_DATE`, or use a custom expression containing `CURRENT_USER()` or `CURRENT_ROLE()` to implement identity-based conditional masking. |
+| `RESTRICT ON (...)` | Optional. Restricts specific operations on the masked column to prevent the original data from being obtained indirectly through these operations. The operations that can be restricted include `INSERT INTO SELECT`, `UPDATE SELECT`, `DELETE SELECT`, and `CTAS`. |
 | `ENABLE` \| `DISABLE` | Optional. Specifies whether the policy is enabled immediately after creation. The default is `ENABLE`. |
 
 ### Built-in masking functions
@@ -108,7 +108,7 @@ CREATE MASKING POLICY p_mask_ssn
 
 ### Create a masking policy with operation restrictions
 
-The following example creates a masking policy and also restricts the masked column from being used in `INSERT INTO SELECT` and `CTAS` operations:
+The following example creates a masking policy that restricts `INSERT INTO SELECT` and `CTAS` operations on the masked column:
 
 ```sql
 CREATE MASKING POLICY p_mask_credit_card
@@ -119,12 +119,12 @@ CREATE MASKING POLICY p_mask_credit_card
 
 ### Create a conditional masking policy
 
-The following example creates a role-based conditional masking policy. Only users with the `hr_manager` or `ceo` role can view the original data, while other users can see only masked results:
+The following example creates a role-based conditional masking policy. Only users with the `hr_manager` or `ceo` role can view the original data, while other users can only view masked results:
 
 ```sql
 CREATE MASKING POLICY p_mask_salary
   ON employees(salary)
-  AS IF(current_role() IN ('hr_manager', 'ceo'), salary, MASK_NULL(salary)) ENABLE;
+  AS IF(CURRENT_ROLE() IN ('hr_manager', 'ceo'), salary, MASK_NULL(salary)) ENABLE;
 ```
 
 ## MySQL compatibility

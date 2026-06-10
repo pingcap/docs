@@ -22,7 +22,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) | Modifies a column definition. |
 | [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md) | Renames an index. |
 | [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) | Changes a table definition. |
-| [`ALTER TABLE ... ADD/DROP/ENABLE/DISABLE/MODIFY MASKING POLICY`](/sql-statements/sql-statement-alter-table.md) | Manages column masking policies on a table. |
+| [`ALTER TABLE ... ADD/DROP/ENABLE/DISABLE/MODIFY MASKING POLICY`](/sql-statements/sql-statement-alter-table.md) | Manages column-level masking policies on a table. |
 | [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) | Creates a new database. |
 | [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md) | Creates a new index on a table. |
 | [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) | Creates a new sequence object. |

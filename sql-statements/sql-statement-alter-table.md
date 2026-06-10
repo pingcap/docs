@@ -176,13 +176,13 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 1 row in set (0.00 sec)
 ```
 
-### Manage column masking policies
+### Manage column-level masking policies
 
-`ALTER TABLE` supports managing [column masking policies](column-level-masking-policy.md) on tables, including adding, enabling, disabling, modifying, and dropping masking policies.
+You can use `ALTER TABLE` to manage [column-level masking policies](column-level-masking-policy.md) on tables, including adding, enabling, disabling, modifying, and dropping masking policies.
 
 Examples:
 
-Add and enable a masking policy:
+Add and enable a column-level masking policy:
 
 ```sql
 ALTER TABLE t1 ADD MASKING POLICY p_mask_c1 ON (c1) AS MASK_FULL(c1) ENABLE;
@@ -192,31 +192,31 @@ ALTER TABLE t1 ADD MASKING POLICY p_mask_c1 ON (c1) AS MASK_FULL(c1) ENABLE;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-Disable an existing masking policy:
+Disable an existing column-level masking policy:
 
 ```sql
 ALTER TABLE t1 DISABLE MASKING POLICY p_mask_c1;
 ```
 
-Re-enable the masking policy:
+Re-enable the column-level masking policy:
 
 ```sql
 ALTER TABLE t1 ENABLE MASKING POLICY p_mask_c1;
 ```
 
-Modify the masking expression of a masking policy:
+Modify the masking expression of a column-level masking policy:
 
 ```sql
 ALTER TABLE t1 MODIFY MASKING POLICY p_mask_c1 SET c1 = MASK_PARTIAL(c1, 2, 2, '*');
 ```
 
-Drop the masking policy:
+Drop the column-level masking policy:
 
 ```sql
 ALTER TABLE t1 DROP MASKING POLICY p_mask_c1;
 ```
 
-For more information about masking policies, see [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md) and [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md).
+For more information about column-level masking policies, see [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md) and [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md).
 
 ## MySQL compatibility
 

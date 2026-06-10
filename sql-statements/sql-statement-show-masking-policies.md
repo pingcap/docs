@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW MASKING POLICIES in the TiDB database.
 
 # SHOW MASKING POLICIES
 
-The `SHOW MASKING POLICIES` statement is used to view information about the [column-level masking policies](column-level-masking-policy.md) defined on a specified table.
+The `SHOW MASKING POLICIES` statement lets you view information about the [Column-level masking policies](column-level-masking-policy.md) defined on a specified table.
 
 ## Required privileges
 
@@ -65,7 +65,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 ### Filter results using the WHERE clause
 
-You can also use the `WHERE` clause to filter masking policies that meet specific conditions. For example, to view enabled masking policies on the `employee` table:
+You can also use the `WHERE` clause to filter masking policies that meet specific conditions. For example, you can view enabled masking policies on the `employee` table as follows:
 
 ```sql
 SHOW MASKING POLICIES FOR employees WHERE Status = 'ENABLE';
@@ -73,7 +73,7 @@ SHOW MASKING POLICIES FOR employees WHERE Status = 'ENABLE';
 
 ## MySQL compatibility
 
-This statement is an extension of MySQL syntax in TiDB.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
