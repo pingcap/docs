@@ -18,12 +18,21 @@ TiDB ensures high availability and data durability using the Raft consensus algo
 
 TiDB Cloud extends these capabilities with zonal high availability and regional high availability to meet different operational requirements.
 
+<CustomContent language="en,zh">
 > **Note:**
 > 
-> - <CustomContent language="ja"> For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable. </CustomContent>
-> - <CustomContent language="en,zh"> For {{{ .starter }}} and Essential instances, only zonal high availability is enabled, and it is not configurable. <CustomContent language="en,zh">
+> -  For {{{ .starter }}} and Essential instances, only zonal high availability is enabled, and it is not configurable. 
 > - For {{{ .premium }}} instances, only regional high availability is enabled and is not configurable.
-> - <CustomContent language="ja"> For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable. </CustomContent>
+</CustomContent>
+
+<CustomContent language="ja">
+> **Note:**
+>
+> - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .premium }}} instances, only regional high availability is enabled and is not configurable.
+> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+</CustomContent>
+
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
