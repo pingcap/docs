@@ -1,11 +1,20 @@
 ---
-title: Sink to Apache Kafka (Beta)
+title: Sink to Apache Kafka
 summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud Essential 流式传输到 Apache Kafka。内容包括限制、前提条件，以及为 Apache Kafka 配置 changefeed 的步骤。该过程涉及设置网络连接、为 Kafka ACL 授权添加权限，以及配置 changefeed。
 ---
 
-# Sink to Apache Kafka (Beta)
+# Sink to Apache Kafka
 
 本文档描述如何创建 changefeed，将数据从 TiDB Cloud Essential 流式传输到 Apache Kafka。
+
+> **注意：**
+>
+> 当前，TiDB Cloud Essential 的 changefeed 功能仅可按需申请。如需申请此功能，请执行以下操作：
+>
+> 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 的右下角，点击 **?**。
+> 2. 点击 **Support Tickets** 进入 [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals)。
+> 3. 创建工单。在 "Description" 字段中，填写 "Apply for changefeed"。
+> 4. 点击 **Submit**。
 
 ## 限制
 

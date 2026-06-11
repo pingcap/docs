@@ -48,7 +48,7 @@ Amazon RDS 实例必须满足以下要求：
 
 > **注意**
 >
-> 如需连接跨 Region 的 RDS 实例，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+> 目前，{{{ .essential }}} 不支持跨 Region 连接。如需跨 Region 连接，请使用 TiDB Cloud Premium 并通过 VPC Peering 建立连接。
 
 ## 第 2 步. 将 Amazon RDS 实例暴露为 endpoint service
 

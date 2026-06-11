@@ -52,15 +52,9 @@ Starter 方案非常适合刚开始使用 TiDB Cloud 的用户。它为开发者
 
 - **增强功能**：包含 Starter 方案的全部功能，并具备处理更大、更复杂负载的能力，以及高级安全特性。
 - **自动扩展**：自动调整存储和计算资源，高效应对不断变化的负载需求。
-- **高可用性**：内置容错和冗余机制，确保你的应用在基础设施故障时依然可用且具备弹性。
 - **可预测的定价**：根据存储和计算资源的 Request Capacity Units (RCUs) 计费，提供透明、按用量计费的定价模式，随需扩展，按实际使用付费，无隐藏费用。
 
-TiDB Cloud Essential 提供两种高可用性选项，以满足不同的运维需求。
-
-- Zonal High Availability：将所有组件部署在同一可用区内，从而降低网络延时。
-- Regional High Availability：将节点分布在多个可用区，提供最大的基础设施隔离和冗余。
-
-更多信息，参见 [TiDB Cloud 的高可用性](/tidb-cloud/serverless-high-availability.md)。
+TiDB Cloud Essential 提供 Zonal High Availability，将所有组件部署在同一可用区内，以降低网络延时。更多信息，参见 [TiDB Cloud 的高可用性](/tidb-cloud/serverless-high-availability.md)。
 
 ## {{{ .premium }}}
 

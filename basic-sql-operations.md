@@ -89,10 +89,10 @@ CREATE TABLE person (
     );
 ```
 
-要查看创建该表的语句（DDL），使用 `SHOW CREATE` 语句：
+要查看创建该表的语句（DDL），使用 `SHOW CREATE TABLE` 语句：
 
 ```sql
-SHOW CREATE table person;
+SHOW CREATE TABLE person;
 ```
 
 要删除表，使用 `DROP TABLE` 语句：
