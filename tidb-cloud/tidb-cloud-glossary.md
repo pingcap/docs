@@ -123,10 +123,10 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
 
 -   **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
--   **TiDB X プロジェクト**: このプロジェクト タイプは TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**私のTiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
--   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB CloudAPI 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 。
+-   **TiDB X プロジェクト**: このプロジェクトタイプは TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは [**My TiDB**](https://tidbcloud.com/tidbs) ページでプロジェクトを作成する際のデフォルトのプロジェクトタイプです。
+-   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用して TiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、 [**My TiDB**](https://tidbcloud.com/tidbs) ページのプロジェクト表示から取得できます。
 
-これらのプロジェクト タイプの違いの詳細については、 [プロジェクト](/tidb-cloud/manage-user-access.md#projects)を参照してください。
+これらのプロジェクトタイプの違いの詳細については、 [プロジェクト](/tidb-cloud/manage-user-access.md#projects)を参照してください。
 
 ### プロジェクトメンバー {#project-members}
 
@@ -150,7 +150,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 -   TiDB Cloudリージョン
 
-    TiDB Cloudリソースがデプロイされる地理的領域。TiDB TiDB Cloudリージョンは少なくとも3つのアベイラビリティゾーンで構成され、クラスターまたはインスタンスはこれらのゾーンにまたがってデプロイされます。
+    TiDB Cloudリソースがデプロイされる地理的領域。TiDB Cloudリージョンは少なくとも3つのアベイラビリティゾーンで構成され、クラスターまたはインスタンスはこれらのゾーンにまたがってデプロイされます。
 
 -   TiDBリージョン
 
@@ -185,13 +185,13 @@ TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエ
 
 ### 支出限度額 {#spending-limit}
 
-は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)制限が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出制限が0より大きい場合は、クレジットカードを追加する必要があります。
+は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
 ### TiDBクラスター {#tidb-cluster}
 
-TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[ティクヴ](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
+TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[TiKV](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
 
 ### TiDBノード {#tidb-node}
 

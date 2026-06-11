@@ -55,7 +55,7 @@ summary: TiDBの機能概要について学びましょう。
 
 | インデックスと制約                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| [発現インデックス](/sql-statements/sql-statement-create-index.md#expression-index)[^2]              |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
+| [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)[^2]              |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
 | [カラム型storage（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [FastScanを使用してOLAPシナリオにおけるクエリを高速化する](/tiflash/use-fastscan.md)                              |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [RocksDBエンジン](/storage-engine/rocksdb-overview.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -120,9 +120,9 @@ summary: TiDBの機能概要について学びましょう。
 | [過去の実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [コプロセッサーキャッシュ](/coprocessor-cache.md)                                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ステイル読み取り](/stale-read.md)                                                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [Followerが読む](/follower-read.md)                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [フォロワーリード](/follower-read.md)                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [過去のデータ（tidb_snapshot）を読み込む](/read-historical-data.md)                                                       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [オプティマイザのヒント](/optimizer-hints.md)                                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [オプティマイザヒント](/optimizer-hints.md)                                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [MPP実行エンジン](/explain-mpp.md)                                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [MPP実行エンジン - 圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)                                |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [TiFlashパイプラインモデル](/tiflash/tiflash-pipeline-model.md)                                                       |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
@@ -142,7 +142,7 @@ summary: TiDBの機能概要について学びましょう。
 | ------------------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :---: | :-: | :-: |
 | 基本`CREATE` 、 `DROP` 、 `ALTER` 、 `RENAME` 、 `TRUNCATE`                                                                    |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [生成された列](/generated-columns.md)                                                                                          |  Y  |  Y  |  Y  |  Y  |   E   |  E  |  E  |
-| [閲覧数](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
+| [ビュー](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [自動インクリメント](/auto-increment.md)                                                                                          |  Y  |  Y  |  Y  |  Y  | Y[^4] |  Y  |  Y  |
 | [自動ランダム](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
@@ -161,17 +161,17 @@ summary: TiDBの機能概要について学びましょう。
 
 </StickyHeaderTable>
 
-## 取引 {#transactions}
+## トランザクション {#transactions}
 
 <StickyHeaderTable>
 
-| 取引                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
+| トランザクション                                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ---------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50)                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [大規模トランザクション（1 TiB）](/transaction-overview.md#transaction-size-limit)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [悲観的な取引](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [楽観的な取引](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [悲観的トランザクション](/pessimistic-transaction.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [楽観的トランザクション](/optimistic-transaction.md)                                                                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [反復読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [リードコミット隔離](/transaction-isolation-levels.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [長時間実行されているアイドル状態のトランザクションを自動的に終了する](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
@@ -242,7 +242,7 @@ summary: TiDBの機能概要について学びましょう。
 | [パスワード管理](/password-management.md)                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |
 | [MySQL互換の`GRANT`システム](/privilege-management.md)                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [動的権限](/privilege-management.md#dynamic-privileges)                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [編集済みログファイル](/log-redaction.md)                                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 
 </StickyHeaderTable>
