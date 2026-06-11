@@ -12,7 +12,7 @@ In this tutorial, we'll walk you through uploading a sample Parquet file to an i
 Before you start, ensure you have the following prerequisites in place:
 
 - [Download the sample dataset](https://datasets.databend.com/iris.parquet) and save it to your local folder.
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- LakeSQL is installed on your local machine. See [Installing LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md#installing-lakesql) for instructions on how to install LakeSQL using various package managers.
 
 ### Step 1: Create an internal stage
 
@@ -20,9 +20,9 @@ Before you start, ensure you have the following prerequisites in place:
 CREATE STAGE my_internal_stage;
 ```
 
-### Step 2: Upload the sample file using BendSQL
+### Step 2: Upload the sample file using LakeSQL
 
-Assuming your sample dataset is located at `/Users/eric/Documents/iris.parquet`, run the following command in BendSQL to upload it to the stage:
+Assuming your sample dataset is located at `/Users/eric/Documents/iris.parquet`, run the following command in LakeSQL to upload it to the stage:
 
 ```sql
 PUT fs:///Users/eric/Documents/iris.parquet @my_internal_stage;

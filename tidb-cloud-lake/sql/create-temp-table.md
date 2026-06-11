@@ -17,7 +17,7 @@ Creates a temporary table that is automatically dropped at the end of the sessio
 - A temporary table with the same name as a normal table takes precedence, hiding the normal table until dropped. See [Example-2](#example-2).
 - No privileges are required to create or operate on a temporary table.
 - {{{ .lake }}} supports creating temporary tables with the [Fuse Engine](/tidb-cloud-lake/sql/table-engines.md).
-- To create temporary tables using BendSQL, ensure you are using the latest version of BendSQL.
+- To create temporary tables using LakeSQL, ensure you are using the latest version of LakeSQL.
 
 ## Syntax
 

@@ -120,7 +120,7 @@ The MySQL Source Connector supports three synchronization modes:
 
 1. Download the [{{{ .lake }}} Kafka Connector](https://github.com/databendcloud/databend-kafka-connect/releases) and place it in your Kafka `libs` directory
 
-2. Download the [{{{ .lake }}} JDBC Driver](https://central.sonatype.com/artifact/com.databend/databend-jdbc/) and copy it to your Kafka `libs` directory
+2. Download the [{{{ .lake }}} JDBC Driver](https://central.sonatype.com/artifact/com.tidbcloud/lake-jdbc) and copy it to your Kafka `libs` directory
 
 ### Create {{{ .lake }}} Sink Configuration
 

@@ -13,7 +13,7 @@ Add the driver to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-databend-driver = "0.30"
+lake-driver = "0.1.5-alpha.2"
 tokio = { version = "1", features = ["full"] }
 ```
 
@@ -71,12 +71,12 @@ tokio = { version = "1", features = ["full"] }
 Here's a simple example demonstrating DDL, write, and query operations:
 
 ```rust
-use databend_driver::Client;
+use lake_driver::Client;
 use tokio_stream::StreamExt;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Connect to Databend
+    // Connect to TiDB Cloud Lake
     let client = Client::new("<your-dsn>".to_string());
     let conn = client.get_conn().await?;
 
@@ -106,6 +106,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Resources
 
-- **Crates.io**: [databend-driver](https://crates.io/crates/databend-driver)
-- **GitHub Repository**: [BendSQL/driver](https://github.com/databendlabs/BendSQL/tree/main/driver)
-- **Rust Documentation**: [docs.rs/databend-driver](https://docs.rs/databend-driver)
+- **Crates.io**: [lake-driver](https://crates.io/crates/lake-driver)
+- **GitHub Repository**: [LakeSQL/driver](https://github.com/tidbcloud/lakesql/tree/main/driver)
+- **Rust Documentation**: [docs.rs/lake-driver](https://docs.rs/lake-driver)

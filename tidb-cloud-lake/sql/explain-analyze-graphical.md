@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN ANALYZE GRAPHICAL
-summary: Analyzes query performance with an interactive visual representation in your browser. Available exclusively in BendSQL v0.22.2+.
+summary: Analyzes query performance with an interactive visual representation in your browser. Available exclusively in LakeSQL v0.22.2+.
 ---
 
 # EXPLAIN ANALYZE GRAPHICAL
@@ -9,7 +9,7 @@ summary: Analyzes query performance with an interactive visual representation in
 >
 > Introduced or updated in v1.2.647.
 
-Analyzes query performance with an interactive visual representation in your browser. Available exclusively in BendSQL v0.22.2+.
+Analyzes query performance with an interactive visual representation in your browser. Available exclusively in LakeSQL v0.22.2+.
 
 ## Syntax
 
@@ -19,7 +19,7 @@ EXPLAIN ANALYZE GRAPHICAL <statement>
 
 ## Configuration
 
-Add to your BendSQL config file `~/.config/bendsql/config.toml`:
+Add to your LakeSQL config file `~/.config/lakesql/config.toml`:
 
 ```toml
 [server]

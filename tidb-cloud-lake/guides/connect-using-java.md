@@ -13,21 +13,19 @@ The official JDBC driver provides standard JDBC 4.0 compatibility for seamless i
 
 ```xml
 <dependency>
-    <groupId>com.databend</groupId>
-    <artifactId>databend-jdbc</artifactId>
-    <version>0.4.1</version>
+    <groupId>com.tidbcloud</groupId>
+    <artifactId>lake-jdbc</artifactId>
+    <version>0.4.6</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```gradle
-implementation 'com.databend:databend-jdbc:0.4.1'
+implementation 'com.tidbcloud:lake-jdbc:0.4.6'
 ```
 
 **Connection String**: See [drivers overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
-
----
 
 ## Key Features
 
@@ -114,17 +112,17 @@ conn.close();
 
 ## Configuration Reference
 
-For complete databend-jdbc driver configuration options including:
+For complete lake-jdbc driver configuration options including:
 
 - Connection string parameters
 - SSL/TLS configuration
 - Authentication methods
 - Performance tuning parameters
 
-Please refer to the [official databend-jdbc Connection Guide](https://github.com/databendlabs/databend-jdbc/blob/main/docs/Connection.md).
+Please refer to the [official lake-jdbc Connection Guide](https://github.com/tidbcloud/lake-jdbc/blob/main/docs/Connection.md).
 
 ## Resources
 
-- **Maven Central**: [databend-jdbc](https://repo1.maven.org/maven2/com/databend/databend-jdbc/)
-- **GitHub Repository**: [databend-jdbc](https://github.com/databendlabs/databend-jdbc)
+- **Maven Central**: [lake-jdbc](https://repo1.maven.org/maven2/com/tidbcloud/lake-jdbc/)
+- **GitHub Repository**: [lake-jdbc](https://github.com/tidbcloud/lake-jdbc)
 - **JDBC Documentation**: [Oracle JDBC Guide](https://docs.oracle.com/javase/tutorial/jdbc/)

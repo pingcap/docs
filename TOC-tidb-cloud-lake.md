@@ -42,7 +42,7 @@
 - Connect
   - [Overview](/tidb-cloud-lake/guides/connection-overview.md)
   - SQL Clients
-    - [BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md)
+    - [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)
     - [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md)
   - Drivers
     - [Overview](/tidb-cloud-lake/guides/driver-overview.md)
@@ -112,8 +112,6 @@
 - AI and ML Integration
   - [Overview](/tidb-cloud-lake/guides/ai-ml-integration.md)
   - [External AI Functions](/tidb-cloud-lake/guides/external-ai-functions.md)
-  - [MCP Server](/tidb-cloud-lake/guides/mcp-server.md)
-  - [MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)
 - Multimodal Data Analytics
   - [Overview](/tidb-cloud-lake/guides/multimodal-data-analytics.md)
   - [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md)

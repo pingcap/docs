@@ -1,11 +1,11 @@
 ---
 title: Tableau
-summary: Tableau is a visual analytics platform transforming the way we use data to solve problems—empowering people and organizations to make the most of their data. By leveraging the databend-jdbc driver (version 0.3.4 or higher), both {{{ .lake }}} and {{{ .lake }}} can integrate with Tableau, enabling seamless data access and efficient analysis. It is important to note that for optimal compatibility, it is advisable to use Tableau version 2022.3 or higher to avoid potential compatibility issues.
+summary: Tableau is a visual analytics platform transforming the way we use data to solve problems—empowering people and organizations to make the most of their data. By leveraging the lake-jdbc driver (version 0.3.4 or higher), both {{{ .lake }}} and {{{ .lake }}} can integrate with Tableau, enabling seamless data access and efficient analysis. It is important to note that for optimal compatibility, it is advisable to use Tableau version 2022.3 or higher to avoid potential compatibility issues.
 ---
 
 # Tableau
 
-[Tableau](https://www.tableau.com/) is a visual analytics platform transforming the way we use data to solve problems—empowering people and organizations to make the most of their data. By leveraging the [databend-jdbc driver](https://github.com/databendcloud/databend-jdbc) (version 0.3.4 or higher), both {{{ .lake }}} and {{{ .lake }}} can integrate with Tableau, enabling seamless data access and efficient analysis. It is important to note that for optimal compatibility, it is advisable to use Tableau version 2022.3 or higher to avoid potential compatibility issues.
+[Tableau](https://www.tableau.com/) is a visual analytics platform transforming the way we use data to solve problems—empowering people and organizations to make the most of their data. By leveraging the [lake-jdbc driver](https://github.com/tidbcloud/lake-jdbc) (version 0.3.4 or higher), both {{{ .lake }}} and {{{ .lake }}} can integrate with Tableau, enabling seamless data access and efficient analysis. It is important to note that for optimal compatibility, it is advisable to use Tableau version 2022.3 or higher to avoid potential compatibility issues.
 
 {{{ .lake }}} currently provides two integration methods with Tableau. The first approach utilizes the Other Databases (JDBC) interface within Tableau and is applicable to both {{{ .lake }}} and {{{ .lake }}}. The second method recommends using the [databend-tableau-connector-jdbc](https://github.com/databendcloud/databend-tableau-connector-jdbc) connector specifically developed by {{{ .lake }}} for optimal connectivity with {{{ .lake }}}.
 
@@ -28,11 +28,11 @@ CREATE USER tableau IDENTIFIED BY 'tableau' WITH DEFAULT_ROLE = 'tableau_role';
 GRANT ROLE tableau_role TO tableau;
 ```
 
-### Step 2. Install databend-jdbc
+### Step 2. Install lake-jdbc
 
-1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/databend-jdbc/>
+1. Download the lake-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/tidbcloud/lake-jdbc/>
 
-2. To install the databend-jdbc driver, move the jar file (for example, databend-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
+2. To install the lake-jdbc driver, move the jar file (for example, lake-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 
 | Operating System | Tableau's Driver Folder          |
 | ---------------- | -------------------------------- |
@@ -75,11 +75,11 @@ CREATE USER tableau IDENTIFIED BY 'tableau' WITH DEFAULT_ROLE = 'tableau_role';
 GRANT ROLE tableau_role TO tableau;
 ```
 
-### Step 2. Install databend-jdbc
+### Step 2. Install lake-jdbc
 
-1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/databend-jdbc/>
+1. Download the lake-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/tidbcloud/lake-jdbc/>
 
-2. To install the databend-jdbc driver, move the jar file (for example, databend-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
+2. To install the lake-jdbc driver, move the jar file (for example, lake-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 
 | Operating System | Tableau's Driver Folder          |
 | ---------------- | -------------------------------- |
@@ -119,11 +119,11 @@ In this tutorial, you'll integrate {{{ .lake }}} with [Tableau Desktop](https://
 
 Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
-### Step 2. Install databend-jdbc
+### Step 2. Install lake-jdbc
 
-1. Download the databend-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/databend/databend-jdbc/>
+1. Download the lake-jdbc driver (version 0.3.4 or higher) from the Maven Central Repository at <https://repo1.maven.org/maven2/com/tidbcloud/lake-jdbc/>
 
-2. To install the databend-jdbc driver, move the jar file (for example, databend-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
+2. To install the lake-jdbc driver, move the jar file (for example, lake-jdbc-0.3.4.jar) to Tableau's driver folder. Tableau's driver folder varies depending on the operating system:
 
 | Operating System | Tableau's Driver Folder          |
 | ---------------- | -------------------------------- |

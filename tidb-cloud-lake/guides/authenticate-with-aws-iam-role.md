@@ -86,7 +86,7 @@ After {{{ .lake }}} support shares the trusted principal information for your or
 
    Click `View Role`, and record the role ARN: `arn:aws:iam::987654321987:role/databend-test`
 
-4. Run the following SQL statement in {{{ .lake }}} cloud worksheet or `BendSQL`:
+4. Run the following SQL statement in {{{ .lake }}} cloud worksheet or `LakeSQL`:
 
    ```sql
    CREATE CONNECTION databend_test STORAGE_TYPE = 's3' ROLE_ARN = 'arn:aws:iam::987654321987:role/databend-test' EXTERNAL_ID = 'my-external-id-123';

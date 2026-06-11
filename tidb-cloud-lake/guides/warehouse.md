@@ -184,7 +184,7 @@ Connecting to a warehouse provides the compute resources required to run queries
 
 | Client                                     | Type            | Best For                      | Key Features                                          |
 | ------------------------------------------ | --------------- | ----------------------------- | ----------------------------------------------------- |
-| **[BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md)** | Command Line    | Developers, Scripts           | Native CLI, Rich formatting, Multiple install options |
+| **[LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)** | Command Line    | Developers, Scripts           | Native CLI, Rich formatting, Multiple install options |
 | **[DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md)**    | GUI Application | Data Analysis, Visual Queries | Built-in driver, Cross-platform, Query builder        |
 
 #### Developer Drivers

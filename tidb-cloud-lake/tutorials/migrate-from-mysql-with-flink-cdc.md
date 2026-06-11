@@ -15,7 +15,7 @@ Before you start, ensure you have the following prerequisites in place:
 
 - [Docker](https://www.docker.com/) is installed on your local machine, as it will be used to launch MySQL.
 - Java 8 or 11 is installed on your local machine, as it is required by the [Flink {{{ .lake }}} Connector](https://github.com/databendcloud/flink-connector-databend).
-- BendSQL is installed on your local machine. See [Installing BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md#installing-bendsql) for instructions on how to install BendSQL using various package managers.
+- LakeSQL is installed on your local machine. See [Installing LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md#installing-lakesql) for instructions on how to install LakeSQL using various package managers.
 
 ## Step 1: Launch MySQL in Docker
 
@@ -137,7 +137,7 @@ mysql> select * from products;
 
 ## Step 3: Set Up Target in {{{ .lake }}}
 
-1. Connect to {{{ .lake }}} using BendSQL. If you're unfamiliar with BendSQL, refer to this tutorial: [Connecting to {{{ .lake }}} using BendSQL](/tidb-cloud-lake/guides/connect-using-bendsql.md).
+1. Connect to {{{ .lake }}} using LakeSQL. If you're unfamiliar with LakeSQL, refer to this tutorial: [Connecting to {{{ .lake }}} using LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md).
 
 2. Copy and paste the following SQL to create a target table named **products**:
 
@@ -281,7 +281,7 @@ You can now open the Apache Flink Dashboard if you go to [http://localhost:8081]
 
     You can now see a running job in the Apache Flink Dashboard.
 
-    You're all set! If you go back to the BendSQL terminal and query the **products** table in {{{ .lake }}}, you will see that the data from MySQL has been successfully synchronized:
+    You're all set! If you go back to the LakeSQL terminal and query the **products** table in {{{ .lake }}}, you will see that the data from MySQL has been successfully synchronized:
 
     ```sql
     SELECT * FROM products;
@@ -309,7 +309,7 @@ You can now open the Apache Flink Dashboard if you go to [http://localhost:8081]
 INSERT INTO products VALUES (default, "bicycle", "Lightweight road bicycle");
 ```
 
-Next, in the BendSQL terminal, query the **products** table again to verify the new product has been synced:
+Next, in the LakeSQL terminal, query the **products** table again to verify the new product has been synced:
 
 ```sql
 SELECT * FROM products;

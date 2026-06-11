@@ -13,14 +13,14 @@ Choose your preferred approach:
 
 | Package | Best For | Installation |
 |---------|----------|-------------|
-| **databend-driver** | Direct database operations, async/await | `pip install databend-driver` |
+| **tidbcloudlake-driver** | Direct database operations, async/await | `pip install tidbcloudlake-driver` |
 | **databend-sqlalchemy** | ORM integration, existing SQLAlchemy apps | `pip install databend-sqlalchemy` |
 
 **Connection String**: See [driver overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
-## databend-driver (Recommended)
+## tidbcloudlake-driver (Recommended)
 
 ### Features
 
@@ -32,10 +32,10 @@ Choose your preferred approach:
 ### Synchronous Usage
 
 ```python
-from databend_driver import BlockingDatabendClient
+from tidbcloudlake_driver import BlockingLakeClient
 
 # Connect and execute
-client = BlockingDatabendClient('<your-dsn>')
+client = BlockingLakeClient('<your-dsn>')
 cursor = client.cursor()
 
 # DDL: Create table
@@ -53,7 +53,7 @@ cursor.execute("SELECT * FROM users")
 print(f"Columns: {[desc[0] for desc in cursor.description]}")
 
 for row in cursor.fetchall():
-    # row is a databend_driver.Row object
+    # row is a tidbcloudlake_driver.Row object
     # Access by column name
     print(f"id: {row['id']}, name: {row['name']}")
 
@@ -84,10 +84,10 @@ for row in cursor.fetchall():
 
 ```python
 import asyncio
-from databend_driver import AsyncDatabendClient
+from tidbcloudlake_driver import AsyncLakeClient
 
 async def main():
-    client = AsyncDatabendClient('<your-dsn>')
+    client = AsyncLakeClient('lake://root:root@localhost:8000/?sslmode=disable')
     conn = await client.get_conn()
 
     # DDL: Create table
@@ -153,5 +153,5 @@ with engine.connect() as conn:
 
 ## Resources
 
-- **PyPI**: [databend-driver](https://pypi.org/project/databend-driver/) • [databend-sqlalchemy](https://pypi.org/project/databend-sqlalchemy/)
-- **GitHub**: [databend-driver](https://github.com/databendlabs/bendsql/tree/main/bindings/python) • [databend-sqlalchemy](https://github.com/databendlabs/databend-sqlalchemy)
+- **PyPI**: [tidbcloudlake-driver](https://pypi.org/project/tidbcloudlake-driver/)
+- **GitHub**: [tidbcloudlake-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/python)

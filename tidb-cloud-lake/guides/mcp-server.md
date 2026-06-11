@@ -5,7 +5,7 @@ summary: mcp-databend is an MCP (Model Context Protocol) server that enables AI 
 
 # MCP Server for TiDB Cloud Lake
 
-[mcp-databend](https://github.com/databendlabs/mcp-databend) is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your {{{ .lake }}} database using natural language.
+[tidbcloud/lake-mcp](https://github.com/tidbcloud/lake-mcp) is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your {{{ .lake }}} database using natural language.
 
 ## What mcp-databend Can Do
 
@@ -232,7 +232,7 @@ cd agent-ui && npm run dev
 
 ## Resources
 
-- **GitHub Repository**: [databendlabs/mcp-databend](https://github.com/databendlabs/mcp-databend)
+- **GitHub Repository**: [tidbcloud/lake-mcp](https://github.com/tidbcloud/lake-mcp)
 - **PyPI Package**: [mcp-databend](https://pypi.org/project/mcp-databend)
 - **Agno Framework**: [Agno MCP](https://docs.agno.com/tools/mcp/overview)
 - **Agent UI**: [Agent UI](https://docs.agno.com/agent-ui/introduction)

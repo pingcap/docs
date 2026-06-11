@@ -65,15 +65,15 @@ The following are feature lists of {{{ .lake }}} among editions:
 | Iceberg tables for referencing data in a cloud storage data lake. | ✓ | ✓ | ✓ |
 | Schema detection for automatically detecting the schema in a set of staged semi-structured data files and retrieving the column definitions. | ✓ | ✓ | ✓ |
 | Schema evolution for automatically evolving tables to support the structure of new data received from the data sources. | ✓ | ✓ | ✓ |
-| Support for <a href="/sql/sql-commands/ddl/table/ddl-create-table-external-location" target="_self">creating table with external location</a>. | ✓ | ✓ | ✓ |
-| Supports for <a href="/sql/sql-commands/ddl/table/attach-table" target="_self">ATTACH TABLE</a>. | ✓ | ✓ | ✓ |
+| Support for [creating table with external location](/tidb-cloud-lake/sql/create-external-table.md). | ✓ | ✓ | ✓ |
+| Support for [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md). | ✓ | ✓ | ✓ |
 
 ### Interfaces & Tools
 
 | Features | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
 | The next-generation SQL worksheet for advanced query development, data analysis, and visualization. | ✓ | ✓ | ✓ |
-| BendSQL, a command line client for building/testing queries, loading/unloading bulk data, and automating DDL operations. | ✓ | ✓ | ✓ |
+| LakeSQL, a command line client for building/testing queries, loading/unloading bulk data, and automating DDL operations. | ✓ | ✓ | ✓ |
 | Programmatic interfaces for Rust, Python, Java, Node.js, .js, PHP, and Go. | ✓ | ✓ | ✓ |
 | Native support for JDBC. | ✓ | ✓ | ✓ |
 | Extensive ecosystem for connecting to ETL, BI, and other third-party vendors and technologies. | ✓ | ✓ | ✓ |
