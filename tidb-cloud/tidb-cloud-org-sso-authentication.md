@@ -160,15 +160,15 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        It is disabled by default. You can enable it according to your need.
+        It is disabled by default. You can enable it as needed.
 
     - **Allowed Email Domains**
 
-        This field is required for OIDC. Enter only domains that are already verified in the **Domains** area. Only users whose email domains match these domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
+        This field is required for OIDC. Enter only domains that you have verified in the **Domains** area. Only users with these email domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
-        > Before saving the settings, make sure that you include the verified email domain that you currently use for login, to avoid being locked out by TiDB Cloud.
+        > Before saving the settings, make sure that you include the verified email domain that you currently use for login, to avoid being locked out of TiDB Cloud.
 
 4. Click **Save**.
 
@@ -204,15 +204,15 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        It is disabled by default. You can enable it according to your need.
+        It is disabled by default. You can enable it as needed.
 
     - **Allowed Email Domains**
 
-        This field is required for SAML. Enter only domains that are already verified in the **Domains** area. Only users whose email domains match these domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
+        This field is required for SAML. Enter only domains that you have verified in the **Domains** area. Only users with these email domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
-        > Before saving the settings, make sure that you include the verified email domain that you currently use for login, to avoid being locked out by TiDB Cloud.
+        > Before saving the settings, make sure that you include the verified email domain that you currently use for login, to avoid being locked out of TiDB Cloud.
 
     - **SCIM Provisioning Accounts**
 
