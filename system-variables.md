@@ -2094,18 +2094,18 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Is controlled by the Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the Batch Query Region feature. When TiDB accesses data, it needs to query PD for Region routing information to update the local Region Cache. Among them, point query requests `GetRegion` (query the Region containing a Key), `GetPrevRegion` (query the previous adjacent Region by Key), and `GetRegionByID` (query by Region ID) are by default independent Unary gRPC requests. The Batch Query Region feature batches and merges these three types of requests.
-    - When this value is `OFF`, TiDB sends each point query for Region information to PD one by one as an independent Unary gRPC request.
-    - When this value is `ON`, TiDB batches concurrent point query requests for Region information within a short period through the QueryRegion gRPC Stream and sends them to PD in a merged way. PD then processes them uniformly and returns the results. Similar to the batching mechanism for TSO requests, this method can significantly reduce the number of gRPC requests, thereby reducing the CPU overhead of the PD leader when handling a large number of Region information query requests.
-- This variable does not affect scan requests such as `BatchScanRegions`: although `BatchScanRegions` can also merge queries for multiple Key ranges into one request, it is itself an independent Unary gRPC request and does not go through the QueryRegion batching path.
-- Changes to this variable take effect immediately across the whole cluster without restarting TiDB, so enabling and disabling it can both be controlled dynamically: after enabling it, TiDB switches to the preceding batching mode to obtain Region information; after disabling it, TiDB restores sending Unary gRPC requests one by one.
-- Scenarios suitable for enabling Batch Query Region:
-    - The cluster has a large number of Regions, TiDB query concurrency is high, and Region Cache misses or invalidations generate a large number of concurrent Region information query requests, resulting in high CPU pressure on the PD leader.
-    - Changes such as Region split, merge, or Leader migration occur frequently in the cluster, causing a large number of Region Cache invalidations and triggering concentrated retries of query requests, thereby generating a large number of Region information query requests.
-- This variable and [`pd_enable_follower_handle_region`](#pd_enable_follower_handle_region-从-v760-版本开始引入) optimize in complementary directions: the former reduces the number of requests sent to PD through batching, while the latter reduces the load on the PD leader by allowing PD followers to handle Region query requests. They can be enabled at the same time.
+- This variable controls whether to enable the Batch Query Region feature. When TiDB accesses data, it queries PD for Region routing information to update the local Region Cache. By default, point query requests such as `GetRegion` (queries the Region containing a key), `GetPrevRegion` (queries the previous adjacent Region by key), and `GetRegionByID` (queries by Region ID) are independent Unary gRPC requests. The Batch Query Region feature batches and merges these three types of requests.
+    - When this variable is set to `OFF`, TiDB sends each point query for Region information to PD as an independent Unary gRPC request.
+    - When this variable is set to `ON`, TiDB batches concurrent point query requests for Region information within a short period through the QueryRegion gRPC Stream and sends them to PD together. PD then processes them and returns the results. Similar to the batching mechanism for TSO requests, this feature can significantly reduce the number of gRPC requests, thereby reducing the CPU overhead of the PD leader when it handles a large number of Region query requests.
+- This variable does not affect scan requests such as `BatchScanRegions`. Although `BatchScanRegions` can merge queries for multiple key ranges into one request, it is an independent Unary gRPC request and does not go through the QueryRegion batching path.
+- Changes to this variable take effect immediately across the cluster without restarting TiDB, so you can enable or disable it dynamically. When you enable this variable, TiDB switches to the batching mode to obtain Region information. When you disable it, TiDB restores sending Unary gRPC requests one by one.
+- You can enable the Batch Query Region feature in the following scenarios:
+    - The cluster has a large number of Regions, TiDB query concurrency is high, and Region Cache misses or invalidations generate many concurrent Region query requests, resulting in high CPU pressure on the PD leader.
+    - Changes such as Region split, merge, or Leader migration occur frequently in the cluster, causing many Region Cache invalidations and triggering concentrated retries of query requests, which generates a large number of Region query requests.
+- This variable and [`pd_enable_follower_handle_region`](#pd_enable_follower_handle_region-new-in-v760) optimize performance in complementary directions: the former reduces the number of requests sent to PD through batching, while the latter reduces the load on the PD leader by allowing PD followers to handle Region query requests. You can enable both variables at the same time.
 
 ### tidb_enable_binding_usage <span class="version-mark">New in v9.0.0</span>
 
