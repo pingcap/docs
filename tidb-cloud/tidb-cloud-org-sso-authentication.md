@@ -60,7 +60,9 @@ Auto-provision is a feature that allows members to automatically join an organiz
 - When auto-provision is disabled for an authentication method, only users who have been invited by an `Organization Owner` or `Project Owner` can log in to your custom URL.
 - When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default `Organization Viewer` role within the organization.
 
-For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
+For OIDC and SAML authentication methods, you must configure allowed email domains when you [configure the authentication method details](#step-2-configure-authentication-methods). Before you can use a domain in the **Allowed Email Domains** field, add and verify it in the **Domains** area.
+
+For other authentication methods, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
 
 ### Notify your members about the Cloud Organization SSO migration plan
 
@@ -116,6 +118,23 @@ After enabling Cloud Organization Cloud, you can configure username and password
 
 4. Click **Save**.
 
+### Add and verify domains for OIDC and SAML
+
+Before configuring OIDC or SAML, add and verify the email domains that your organization members use to sign in. Only domains with the **Verified** status can be used in **Allowed Email Domains** for OIDC and SAML.
+
+To add and verify a domain, take the following steps:
+
+1. On the **Organization Settings** page, click the **Authentication** tab.
+2. In **Domains**, click **Add Domain**.
+3. Enter the domain that you want to allow, for example, `example.com`, and then click **Add domain and next**.
+4. In the verification dialog, copy the TXT record **Host** and **Value**.
+5. In your DNS provider, add a TXT record using the copied **Host** and **Value**.
+6. Wait for DNS propagation, return to TiDB Cloud, and then click **Verify**.
+
+    DNS changes can take several minutes to take effect. If verification fails, wait a few minutes, and then try again.
+
+7. Confirm that the domain status becomes **Verified**.
+
 ### Configure the OIDC authentication method
 
 If you have an identity provider that uses the OIDC identity protocol, you can enable the OIDC authentication method for TiDB Cloud login.
@@ -141,15 +160,15 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
+        It is disabled by default. You can enable it according to your need.
 
     - **Allowed Email Domains**
 
-        After this field is configured, only the specified email domains of this authentication method can log in to TiDB Cloud using the custom URL. When filling in domain names, you need to exclude the `@` symbol and separate them with commas. For example, `company1.com,company2.com`.
+        This field is required for OIDC. Enter only domains that are already verified in the **Domains** area. Only users whose email domains match these domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
-        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+        > Before saving the settings, make sure that you include the verified email domain that you currently use for login, to avoid being locked out by TiDB Cloud.
 
 4. Click **Save**.
 
@@ -185,15 +204,15 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
+        It is disabled by default. You can enable it according to your need.
 
     - **Allowed Email Domains**
 
-        After this field is configured, only the specified email domains of this authentication method can log in to TiDB Cloud using the custom URL. When filling in domain names, you need to exclude the `@` symbol and separate them with commas. For example, `company1.com,company2.com`.
+        This field is required for SAML. Enter only domains that are already verified in the **Domains** area. Only users whose email domains match these domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
-        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+        > Before saving the settings, make sure that you include the verified email domain that you currently use for login, to avoid being locked out by TiDB Cloud.
 
     - **SCIM Provisioning Accounts**
 
