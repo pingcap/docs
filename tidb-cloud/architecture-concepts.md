@@ -53,11 +53,13 @@ For applications experiencing growing workloads and needing scalability in real 
 
 - **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
 - **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+
 <CustomContent language="ja">
 
 - **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
 
 </CustomContent>
+
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 
 <CustomContent language="ja">
