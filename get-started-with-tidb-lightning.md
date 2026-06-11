@@ -13,7 +13,7 @@ This document provides a quick guide on getting started with TiDB Lightning by i
 
 ## Step 1: Prepare full backup data
 
-First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
+First, you can use [Dumpling](/dumpling-overview.md) to export data from MySQL.
 
 1. Run `tiup --version` to check if TiUP is already installed. If TiUP is installed, skip this step. If TiUP is not installed, run the following command:
 
