@@ -1,315 +1,250 @@
-# Reference: Update Existing TiDB Documentation
+# Update Existing TiDB Documentation
 
-This reference covers the full workflow for updating existing documentation pages
-in `pingcap/docs`. Read this after the main SKILL.md has determined that one or
-more existing pages need updating.
+Self-contained workflow for updating existing documentation pages in
+`pingcap/docs`. Follow these steps sequentially after SKILL.md has determined
+that existing pages need updating.
 
-## When to update existing docs
+## 1. Identify target docs
 
-Update rather than create when:
+### From code patterns
 
-- A feature gains a new option, parameter, configuration item, or behavior mode
-  that fits in the existing page structure.
-- A default value, behavior, or limitation changes.
-- A system variable, config parameter, or command-line flag is added or modified.
-- A code change affects user-visible behavior documented on an existing page.
-- A compatibility or deprecation note needs to be added.
-- An existing page has outdated, incomplete, or incorrect information.
-
-Prefer targeted edits over broad rewrites. Change only the sections affected by
-the update unless the existing structure is clearly inadequate.
-
-## Step 1: Identify target docs from code changes
-
-Use the code change patterns to find which docs likely need updating:
-
-| Code pattern | Primary target doc(s) |
+| Code pattern | Primary target |
 | --- | --- |
-| New/changed `SysVar` / `DefValue` | `system-variables.md`, `system-variable-reference.md` |
-| New/changed config struct field / `toml` tag | `tidb-configuration-file.md`, `tikv-configuration-file.md`, `tiflash/tiflash-configuration.md`, `pd-configuration-file.md`, or equivalent |
+| New/changed `SysVar` / `DefValue` | `system-variables.md` |
+| New/changed config field / `toml` tag | `tidb-configuration-file.md` / `tikv-configuration-file.md` / `pd-configuration-file.md` / `tiflash/tiflash-configuration.md` |
 | New/changed command-line flag | `command-line-flags-for-*-configuration.md` |
 | Changed SQL grammar (parser `.y`) | `sql-statements/sql-statement-<name>.md` |
-| New/changed built-in function | `functions-and-operators/` relevant file |
-| New `INFORMATION_SCHEMA` table column | `information-schema/information-schema-<name>.md` |
-| Changed metric or alert rule | `grafana-*.md` or monitoring docs |
-| Changed default behavior | Feature doc + possibly release notes |
-| New error code or message | Error reference docs |
-| Changed API endpoint or response | API reference docs |
+| New/changed function | `functions-and-operators/` |
+| New INFORMATION_SCHEMA column | `information-schema/information-schema-<name>.md` |
+| Changed metric or alert | `grafana-*.md` or component monitoring docs |
+| Changed default/behavior | Feature doc + compatibility notes |
+| New error code | Error reference docs |
+| Changed API | API reference docs |
 
 ### Search strategies
 
-Find existing docs by keyword, feature name, or path:
-
 ```bash
-rg -l "<system-variable-name>|<config-name>|<feature-keyword>" --type md
+# Find docs mentioning the feature/config/variable
+rg -l "<name-or-keyword>" --type md
+
+# Find where it appears in TOC
 rg -n "<keyword>" TOC*.md
+
+# Find docs that link to the target page
+rg -l "/path-to-target.md" --type md
 ```
 
-When the code change touches a specific component, also check the component's
-directory (`ticdc/`, `tiflash/`, `tiproxy/`, `dm/`, `br/`) for related docs.
+Also check component directories (`ticdc/`, `tiflash/`, `tiproxy/`, `dm/`,
+`br/`) when the change touches a specific component.
 
-## Step 2: Assess related and associated docs
+## 2. Assess related docs (impact radius)
 
-A single code change often affects multiple documentation pages. Assess the full
-impact before editing:
+A single code change often ripples into multiple pages.
 
-### Direct impact
+### Direct impact (update in the same edit)
 
-Pages that directly describe the changed behavior:
-
-- The primary reference page (config file, system variables, command flags)
-- The feature or task page that explains how to use the behavior
+- The primary reference page (config file, system variables, flags)
+- The feature/task page describing how to use the changed behavior
 - The SQL statement page if syntax changed
 
-### Indirect impact
+### Indirect impact (assess case by case)
 
-Pages that reference or summarize the changed behavior:
+| Category | Examples |
+| --- | --- |
+| Overview pages | `sql-statement-overview.md`, `functions-and-operators-overview.md` |
+| Feature lists | `basic-features.md` |
+| Compatibility | `mysql-compatibility.md`, feature compat tables |
+| Limitations | `tidb-limitations.md`, feature-specific limitations |
+| FAQ | Feature FAQ pages |
+| Best practices | Operational or schema best practices |
+| Troubleshooting | If the change resolves or introduces known issues |
+| Release notes | If user-facing in a specific version |
 
-- **Overview pages**: pages that list or summarize features in a category (for
-  example, `functions-and-operators-overview.md`, `sql-statement-overview.md`)
-- **Compatibility pages**: `mysql-compatibility.md`, feature compatibility tables
-- **Limitation pages**: `tidb-limitations.md`, feature-specific limitations
-- **Release notes**: if the change is user-facing in a specific version
-- **FAQ pages**: if the change affects commonly asked questions
-- **Best practice pages**: if the change affects recommended workflows
-- **Troubleshooting pages**: if the change resolves or introduces known issues
+**Scope rule:**
 
-### Discovering related pages
+- Direct-impact pages → update them.
+- Indirect pages where the current text would become **incorrect** → update them.
+- Indirect pages where the update is merely **nice to have** → flag in output
+  notes, do not expand scope without user confirmation.
 
-```bash
-# Find pages that mention the feature or config item
-rg -l "<feature-name>|<config-name>" --type md
+## 3. Read the existing page before editing
 
-# Find pages that link to the target page
-rg -l "/path-to-target-doc.md" --type md
+Before touching a file, understand:
 
-# Check if the feature appears in overview or summary docs
-rg -l "<feature-keyword>" *-overview.md basic-features.md
-```
+| Aspect | What to look for |
+| --- | --- |
+| Structure | Heading hierarchy, section order, content flow |
+| Voice | Terse vs. explanatory, imperative vs. descriptive |
+| Pattern | How similar items on this page are documented |
+| Terminology | Which terms are used — do not introduce synonyms |
+| Scope | What the page covers and explicitly excludes |
+| Sort order | Alphabetical, logical grouping, or chronological |
 
-### Scope discipline
+**Key principle:** the updated section must read as if written by the same author
+as the rest of the page. New content should not stand out stylistically.
 
-- Update direct-impact pages in the same edit.
-- For indirect-impact pages, assess whether the update is **required for
-  correctness** or merely **nice to have**.
-- If an indirect page update is required (for example, a limitation was removed
-  and the limitations page still lists it), include it.
-- If an indirect page update is nice to have (for example, an overview page could
-  mention the enhancement), flag it in the output notes but do not expand scope
-  unless the user confirms.
-
-## Step 3: Understand the existing page before editing
-
-Before making changes, read the target page (or relevant sections) to understand:
-
-1. **Existing structure**: heading hierarchy, section order, and content flow.
-2. **Existing tone and voice**: formal vs. conversational, level of detail,
-   whether the page uses imperative ("Configure X") or descriptive ("X is
-   configured by") style.
-3. **Existing patterns**: how similar items are documented on the same page. For
-   example, if system variables use a specific description format, follow it.
-4. **Existing terminology**: which terms the page uses for concepts. Do not
-   introduce synonyms or alternate terms.
-5. **Existing scope**: what the page covers and what it explicitly excludes. Do
-   not expand scope without reason.
-
-Key principle: **the updated section should read as if it were written by the
-same author as the rest of the page**. Do not let new content stand out
-stylistically.
-
-## Step 4: Plan the edit
+## 4. Plan the edit
 
 For each target page, determine:
 
-- **Where** in the page the new content goes (which section, which position
-  within the section).
-- **What** to add, change, or remove.
-- **How much** surrounding context to preserve or adjust for flow.
+- **Where**: which section, which position within the section.
+- **What**: add, change, or remove.
+- **How much**: surrounding context to adjust for flow.
 
-### Placement within a page
+### Placement conventions
 
-Follow existing ordering conventions on the page:
-
-| Page type | Typical ordering |
+| Page type | Typical order |
 | --- | --- |
-| System variables | Alphabetical by variable name |
-| Config parameters | Grouped by section, then by related functionality |
-| SQL statement | Synopsis → Description → Examples → See also |
-| Function reference | Syntax → Parameters → Return type → Examples |
-| Feature page sections | Conceptual intro → Usage → Limitations → Compatibility |
+| System variables | Alphabetical by name |
+| Config parameters | Grouped by `[section]`, then by functionality |
+| SQL statement page | Synopsis → Description → Examples → See also |
+| Function reference | Syntax → Parameters → Return → Examples |
+| Feature page | Intro → Usage → Limitations → Compatibility |
 
-When adding a new item to a list or table:
+When adding a new item to a list, table, or parameter section:
 
-- Insert in the correct sort order (alphabetical, logical grouping, or as
-  established by neighbors).
-- Match the existing column structure and description style exactly.
-- Do not reorder existing items unless correcting a clear sorting error.
+- Insert in the correct sort position.
+- Match the existing format exactly (fields, punctuation, backticks, spacing).
+- Do not reorder existing items unless fixing a clear sorting error.
 
-### Handling additions vs. modifications
+## 5. Write — match style and format
 
-**Adding new content** (new parameter, new section, new example):
+### Match the entry format
 
-- Follow the format of adjacent entries.
-- If adding a new section, maintain heading level hierarchy—do not skip levels.
-- Add transitional context if needed so the addition flows with surroundings.
+Study 2–3 neighboring entries on the same page and replicate their pattern.
 
-**Modifying existing content** (changed default, updated behavior):
-
-- Change only the specific facts that are wrong or outdated.
-- Preserve the sentence structure and style when possible.
-- If the behavioral change is breaking, add a version note or warning.
-- Update any version-specific statements (for example, "Starting from v8.4" →
-  adjust the version scope).
-
-**Removing content** (deprecated feature, removed limitation):
-
-- Remove cleanly without leaving orphaned references or broken flow.
-- Check if other parts of the same page reference the removed content.
-- If the removal is for a deprecated feature, consider adding a deprecation note
-  instead of deleting entirely.
-
-## Step 5: Maintain style consistency
-
-### Match the existing description format
-
-For structured reference docs (system variables, config files), each entry
-typically follows a pattern. Examples:
-
-**System variable entry pattern:**
+**System variable entry example:**
 
 ```markdown
 ### variable_name
 
-- Scope: SESSION | GLOBAL | SESSION | GLOBAL, SESSION
-- Persists to cluster: Yes | No
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes | No
-- Type: Boolean | Integer | Enum | ...
-- Default value: `<value>`
-- Range: `[min, max]` (for numeric types)
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `100`
+- Range: `[0, 10000]`
 - This variable controls ...
 ```
 
-**Config parameter entry pattern:**
+**Config parameter entry example:**
 
 ```markdown
 ### `parameter-name`
 
-- Default value: `<value>`
-- Range: ... (if applicable)
-- Description text explaining what the parameter controls.
+- Default value: `value`
+- Range: `[min, max]`
+- Description explaining what the parameter controls.
 ```
 
-When adding new entries, replicate the exact format including field order,
-punctuation, backtick usage, and description style.
+New entries must follow the identical field order, punctuation, and detail level.
 
-### Preserve voice and level of detail
+### Match voice and depth
 
-- If the page uses terse descriptions, keep new content terse.
-- If the page uses full explanatory paragraphs, write comparably.
-- If the page includes examples for each item, add an example for new items.
-- If the page does not include examples, do not add one only for the new item
-  unless it significantly aids understanding.
+- If the page uses terse descriptions → keep new content terse.
+- If the page writes full paragraphs → write comparably.
+- If the page includes examples for each item → add an example.
+- If the page omits examples → do not add one only for the new item unless
+  critical for understanding.
 
 ### Version annotations
 
-When a change is version-specific:
+For version-specific changes, use the established format on the page:
 
-- Use the established format: "Starting from vX.Y, ..." or "This variable was
-  introduced in vX.Y."
-- Place version notes consistently with how they appear elsewhere on the page.
-- For behavior changes, clearly state both the old and new behavior when helpful.
+- "Starting from vX.Y, ..." or "This variable was introduced in vX.Y."
+- For behavior changes, state both old and new behavior when helpful.
+- Ensure version notes are accurate for the target branch.
 
-## Step 6: Handle cross-document consistency
+### Additions vs. modifications vs. removals
 
-After editing, verify that related docs remain consistent:
+**Adding** (new param, new section, new example):
 
-1. **Same facts in multiple places**: if the same default value, limitation, or
-   behavior appears in multiple docs, update all of them.
-2. **Links still valid**: if you change a heading, check whether other docs link
-   to that anchor.
-3. **Feature lists and overviews**: if a feature gains new capabilities,
-   check whether summary pages need updating.
-4. **Compatibility tables**: if behavior changes for MySQL compatibility,
-   `mysql-compatibility.md` may need updating.
-5. **Code examples**: if a default changes, examples that rely on the old default
-   may produce different output.
+- Follow the format of adjacent entries.
+- Maintain heading level hierarchy.
+- Add transitional context if needed for flow.
 
-## Step 7: Handle version and branch scoping
+**Modifying** (changed default, updated behavior):
 
-Decide which branches the update targets:
+- Change only the specific facts that changed.
+- Preserve sentence structure and style when possible.
+- Add a version note if the change is version-specific.
+- If breaking, add a warning.
 
-| Change type | Target branch |
-| --- | --- |
-| New feature in development | `master` only |
-| Behavior change in released version | `master` + cherry-pick label for the release branch |
-| Bug fix in documentation (factual error) | `master` + cherry-pick label if error exists in release branch |
-| TiDB Cloud documentation | `release-8.5` |
-| AI / vector documentation | `release-8.5` |
-| Wording improvement not tied to a version | `master` only |
+**Removing** (deprecated feature, removed limitation):
 
-When the update includes version-specific notes, ensure the phrasing is accurate
-for the target branch. A note saying "Starting from v8.5" makes sense in
-`master` and `release-8.5` but not in `release-8.4`.
+- Remove cleanly; check for orphaned references on the same page.
+- For deprecated features, add a deprecation note rather than deleting docs for
+  still-functional features.
+- Link to the replacement or migration path.
 
-## Step 8: Validate
+## 6. Verify cross-document consistency
 
-1. Run `./scripts/markdownlint <changed-files>` to catch formatting issues.
-2. If headings changed, run `./scripts/verify-links.sh` to detect broken anchors.
-3. Re-read the changed section in context (at least 2–3 surrounding sections) to
-   verify it reads naturally and consistently.
-4. Verify facts against the source (code PR, issue, design doc).
-5. For procedural docs, mentally trace the steps with the new information.
-6. Check that no orphaned references remain if content was removed or moved.
+After editing, check:
+
+- [ ] Same fact appears in multiple docs → all updated?
+- [ ] Changed a heading → anchors/links from other docs still valid?
+- [ ] Feature gained capabilities → summary/overview pages still accurate?
+- [ ] Behavior changed for MySQL compat → `mysql-compatibility.md` updated?
+- [ ] Default changed → examples relying on old default still correct?
+- [ ] Removed content → no orphaned cross-references remain?
+
+## 7. Validate
+
+```bash
+./scripts/markdownlint <changed-files>
+./scripts/verify-links.sh  # if headings/anchors/links changed
+```
+
+Also:
+
+- [ ] Re-read the changed section with 2–3 surrounding sections — does it flow
+      naturally?
+- [ ] Facts match the source (code PR, issue, spec)?
+- [ ] For procedural content, mentally trace the steps with the new info.
+- [ ] No style discontinuity between new and existing content.
 
 ## Common update patterns
 
-### Adding a new system variable
+### New system variable
 
-1. Add the entry in `system-variables.md` in alphabetical order following the
-   existing entry format.
-2. If the variable is referenced in `system-variable-reference.md`, add it there
-   too.
-3. Check if the feature page that uses this variable should mention it.
-4. If the variable controls a new feature, the feature doc takes priority; the
+1. Add entry in `system-variables.md` in alphabetical order, matching format.
+2. Add to `system-variable-reference.md` if applicable.
+3. Update the feature page to mention the variable.
+4. If the variable controls a new feature, the feature doc is primary; the
    variable entry should link to it.
 
-### Adding a new config parameter
+### New config parameter
 
-1. Add the entry in the corresponding `*-configuration-file.md` under the
-   correct `[section]`.
-2. Follow the exact format of neighboring entries.
-3. If the parameter has a corresponding command-line flag, update the flag doc
-   too.
+1. Add entry in `*-configuration-file.md` under the correct `[section]`.
+2. Match the exact format of neighbors.
+3. If there is a corresponding CLI flag, update the flag doc too.
 
-### Updating default values or behavior
+### Changed default value
 
-1. Change the default value in the parameter/variable description.
-2. Add a version note if the change is version-specific.
-3. Check if examples elsewhere on the page (or in other docs) assume the old
-   default.
-4. If the change is breaking, add a compatibility or warning note.
+1. Change the value in the parameter/variable description.
+2. Add version note ("Starting from vX.Y, the default value changes to ...").
+3. Check if examples elsewhere assume the old default.
+4. If breaking, add a compatibility/warning note.
 
-### Adding a limitation or removing a limitation
+### Removed limitation
 
-1. Update the limitations section of the feature doc.
-2. If the limitation affects `tidb-limitations.md`, update that page too.
-3. If a limitation is removed, check whether workaround documentation should also
-   be removed or marked as no longer necessary.
+1. Update the feature doc's limitations section.
+2. Update `tidb-limitations.md` if listed there.
+3. Remove or mark as unnecessary any workaround documentation.
 
-### Documenting a deprecation
+### Deprecation
 
-1. Add a deprecation notice in the relevant section with the version it was
-   deprecated and expected removal timeline.
-2. Update any "recommended" guidance that points users to the deprecated feature.
-3. Link to the replacement feature or migration path.
-4. Do not delete documentation for deprecated features that are still functional.
+1. Add deprecation notice with version and expected removal timeline.
+2. Update "recommended" guidance that points to the deprecated feature.
+3. Link to the replacement.
+4. Keep documentation for still-functional deprecated features.
 
-## Common mistakes to avoid
+## Common mistakes
 
-- Changing only one occurrence of a fact that appears in multiple places.
-- Breaking the style or format consistency with surrounding entries.
-- Expanding scope into unrelated improvements while making a targeted fix.
-- Adding version notes that are inaccurate for the target branch.
-- Leaving orphaned cross-references when removing or moving content.
-- Introducing different terminology for the same concept within one page.
-- Rewriting surrounding content unnecessarily while making a targeted edit.
+- Updating one occurrence but missing the same fact in other docs.
+- Breaking format/style consistency with surrounding entries.
+- Expanding scope into unrelated improvements.
+- Adding version notes inaccurate for the target branch.
+- Leaving orphaned references when removing content.
+- Introducing new terminology that conflicts with existing usage on the page.
+- Rewriting surrounding text unnecessarily while making a targeted edit.
