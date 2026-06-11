@@ -22,6 +22,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
         -   `Frankfurt (eu-central-1)`
         -   `Singapore (ap-southeast-1)`
 
+<CustomContent language="en,zh">
+
 **高可用性の変更**
 
 -   **TiDB Cloud Essential**
@@ -32,9 +34,11 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         この変更は、2026年6月9日より前に作成されたTiDB Cloud Essentialインスタンスには影響しません。
 
+</CustomContent>
+
 **APIの変更**
 
--   **TiDB Cloudプレミアム**
+-   **TiDB Cloud Premium**
 
     -   [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)向けに以下のバックアップAPIエンドポイントを導入し、組織内のアクティブなインスタンスと削除されたインスタンスの両方を一元的に管理できるようにします。
 
@@ -61,7 +65,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         この機能は段階的に展開されます。早期アクセスをご希望の場合は、 [support@pi​​ngcap.com](mailto:support@pingcap.com)お問い合わせください。
 
--   **TiDB Cloudプレミアム**
+-   **TiDB Cloud Premium**
 
     -   [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二層データ暗号化をサポートします。
 
@@ -235,7 +239,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 **APIの変更**
 
--   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間で移動できるため**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
+-   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間でインスタンスを移動できるため、**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
 
 -   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 
@@ -342,7 +346,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   Azure Blob Storageからのデータインポートにおけるプライベートリンク接続をサポートします。
 
-        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントに対して、安全でネットワーク分離されたデータインポートが可能になります。
+        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントでも、安全でネットワーク分離されたデータインポートが可能になります。
 
         詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)参照してください。
 
@@ -378,7 +382,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Starter**
 
-    -   [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に実際のクライアント IP アドレスを表示します。
+    -   実際のクライアント IP アドレスを [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)と[`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブル (ベータ版) に表示します。
 
         TiDB CloudはクライアントIPパススルーをサポートするようになり、スロークエリビューと`INFORMATION_SCHEMA.PROCESSLIST`テーブルで、ロードバランサー（LB）のIPアドレスではなく、実際のクライアントIPアドレスを表示できるようになりました。この機能により、データベースリクエストの真の送信元を正確に特定し、トラブルシューティングと分析を改善できます。
 
