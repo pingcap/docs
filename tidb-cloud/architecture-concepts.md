@@ -53,9 +53,23 @@ For applications experiencing growing workloads and needing scalability in real 
 
 - **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
 - **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+<CustomContent language="ja">
+- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
+</CustomContent>
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 
+<CustomContent language="ja">
+{{{ .essential }}} offers two types of high availability to address varying operational requirements.
+
+- Zonal High Availability: places all components within the same availability zone, which results in lower network latency.
+- Regional High Availability: distributes nodes across multiple availability zones, providing maximum infrastructure isolation and redundancy.
+
+For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+</CustomContent>
+
+<CustomContent language="en,zh">
 {{{ .essential }}} offers zonal high availability, which places all components within the same availability zone to reduce network latency. For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+</CustomContent>
 
 ## {{{ .premium }}}
 
