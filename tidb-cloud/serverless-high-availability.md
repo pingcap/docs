@@ -33,7 +33,7 @@ TiDB Cloud extends these capabilities with zonal high availability and regional 
 >
 > - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
 > - For {{{ .premium }}} instances, only regional high availability is enabled and is not configurable.
-> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
 
 </CustomContent>
 
