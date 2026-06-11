@@ -255,11 +255,15 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
 
   <CustomContent language="ja">
+
      <td style="text-align:center;">✅</td>
+
   </CustomContent>  
 
   <CustomContent language="en,zh">
+
     <td style="text-align:center;">❌</td>
+    
   </CustomContent>
 
     <td style="text-align:center;">✅</td>

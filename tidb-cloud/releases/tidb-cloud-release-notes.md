@@ -23,6 +23,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - `Singapore (ap-southeast-1)`
 
 <CustomContent language="en,zh">
+
 **High availability changes**
 
 - **TiDB Cloud Essential**
@@ -32,6 +33,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         If you need regional high availability and cross-AZ failover, consider choosing [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium).
 
         This change does not affect TiDB Cloud Essential instances created before June 9, 2026.
+        
 </CustomContent>
 
 **API changes**
