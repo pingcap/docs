@@ -95,7 +95,7 @@ try (FileInputStream fileInputStream = new FileInputStream(file);
     LakeConnection lakeConnection = connection.unwrap(LakeConnection.class);
 
     String sql =
-        "INSERT INTO book_db.books FROM @_lake_load FILE_FORMAT=(TYPE=CSV)";
+        "INSERT INTO book_db.books FROM @_databend_load FILE_FORMAT=(TYPE=CSV)";
 
     int nUpdate = lakeConnection.loadStreamToTable(
         sql,
