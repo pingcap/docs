@@ -1,6 +1,6 @@
 # Bug fixes
 
-Rules for the `## Bug fixes` / `## 错误修复` section. The cross-cutting rules in SKILL.md (no trailing period, user perspective, inline-code conventions, and entry suffix) also apply here.
+Rules for the `## Bug fixes` / `## 错误修复` section. The cross-cutting rules in SKILL.md (user perspective, inline-code conventions, issue and contributor links, and no trailing period on single-line entries) also apply here.
 
 The section structure is identical to Improvements: use `+` for component groups and `-` for entries, with tools nested one level deeper under `+ Tools`. See [improvements.md](improvements.md) for the structure skeleton.
 
