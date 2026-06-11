@@ -253,19 +253,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td rowspan="1" style="background-color: white;">High availability</td>
     <td>Cross-AZ failover</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-
-  <CustomContent language="ja">
-
-     <td style="text-align:center;">✅</td>
-
-  </CustomContent>  
-
-  <CustomContent language="en,zh">
-
-    <td style="text-align:center;">❌</td>
-    
-  </CustomContent>
-
+     <td style="text-align:center;"><CustomContent language="en,zh">❌</CustomContent><CustomContent language="ja">✅</CustomContent></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
