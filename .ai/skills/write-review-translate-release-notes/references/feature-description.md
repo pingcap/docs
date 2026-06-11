@@ -1,378 +1,258 @@
 # Feature descriptions
 
-Rules for the `## Feature details` (major/DMR releases) and `## Features` (patch releases) sections. The cross-cutting rules in SKILL.md (user perspective, inline-code conventions, issue and contributor links, and component names) also apply here.
+Use this reference to write one TiDB release note feature description from PM or engineering input, such as a short feature brief, GitHub issue links, PR links, feature specification, benchmark results, and documentation links.
 
-## Contents
+The goal is not to summarize implementation work. The goal is to produce a user-facing entry that matches the `## Feature details` or `## Features` style in current TiDB release notes: clear title, concrete user problem, new capability in this version, user value, and a documentation link.
 
-- Section heading and grouping
-- Entry structure (anatomy of a feature description)
-- Title line conventions
-- Body paragraphs: structure and required content
-- Documentation link
-- GA, experimental, and version-lifecycle language
-- Style rules (tone, sentence structure, metrics, trailing periods, Chinese-specific)
-- Differences between major and patch releases
-- Common review findings
+The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user perspective, inline-code formatting, issue and contributor links, and component names.
 
-## Section heading and grouping
+## Quick workflow
 
-### Major and DMR releases
+1. Read the supplied issue, PR, feature brief, and related documentation.
+2. Extract only user-facing facts:
+    - What problem, limitation, or scenario does this feature address?
+    - What can users do starting from this version?
+    - How do users enable, configure, or use it?
+    - What benefit does it bring, such as performance, scalability, stability, compatibility, security, operability, or observability?
+    - What maturity state applies: GA, experimental, or no maturity tag?
+    - What caveats, unsupported cases, or benchmark conditions must be stated?
+3. Decide whether the change belongs in a feature entry. If it is a small behavior improvement, bug fix, or internal refactor with no new user-facing capability, use the Improvements or Bug fixes reference instead.
+4. Draft the entry using the standard structure: title line, context paragraph, new behavior paragraph, optional details, and documentation link.
+5. Check every technical claim against the source input. Do not invent defaults, limits, metrics, maturity state, or documentation links.
 
-Major releases (for example, v8.5.0) and DMR releases (for example, v8.4.0-DMR) use `## Feature details` as the section heading.
+## Section placement in the release note file
 
-Features are grouped under level-3 category headings. Common categories include:
+```markdown
+## Features
+```
+
+Use level-3 category headings when the release groups features by area. Common categories are:
 
 - `### Scalability`
 - `### Performance`
 - `### Reliability`
 - `### Availability`
 - `### SQL`
-- `### DB Operations and Observability` (or separate `### DB operations` and `### Observability`)
+- `### DB Operations and Observability`
+- `### DB operations`
+- `### Observability`
 - `### Security`
 - `### Data Migration`
 
-Each feature is a top-level bullet (`*`) followed by one or more indented body paragraphs.
+For Chinese heading mappings, see [SKILL.md](../SKILL.md).
 
-### Patch releases
+When writing the description for a feature, consider which category the feature belongs to and use the appropriate heading.
 
-Patch releases (for example, v8.5.4, v8.5.5) use `## Features` as the section heading.
+## Entry shape
 
-When there are enough features, they are grouped under the same level-3 category headings as major releases. When a patch has only a few features and no clear grouping, features may appear as direct children of `## Features` without level-3 headings (as in v8.5.4).
+Prefer this shape for a complete feature description:
 
-For the full EN/ZH heading mapping, see the section heading mapping table in [SKILL.md](../SKILL.md).
+```markdown
+* <Feature title> <maturity tag if needed> [#NNNNN](https://github.com/org/repo/issues/NNNNN) @[contributor](https://github.com/contributor)
 
-## Entry structure
+    Before vX.Y.Z, <describe the user-facing limitation, pain point, or scenario>.
 
-A complete feature description contains up to five parts, in order:
+    Starting from vX.Y.Z, <describe the new capability, how users use or configure it, and the user benefit>.
 
-### 1. Title line
+    <Optional details: caveats, limitations, examples, configuration notes, benchmark table, or sub-feature list.>
 
-The title line is the first line of the entry. It serves as a concise summary of the feature. It includes the feature name, maturity tag, issue/PR links, and contributor links.
-
-### 2. Before paragraph (the problem or limitation)
-
-Describes the situation before this feature exists, or the problem/limitation this feature addresses. This sets the context and motivation.
-
-### 3. After paragraph (what changes starting from this version)
-
-Describes what the feature does and how it works starting from this version. This is the core of the description.
-
-### 4. Additional details (optional)
-
-Provides supplementary information such as caveats, limitations, usage notes, configuration details, or performance benchmarks. May use sub-lists, tables, or code examples.
-
-### 5. Documentation link
-
-A closing line that points the reader to detailed documentation.
-
-Not all five parts are always present. The minimum viable entry includes the title line, the after paragraph, and the documentation link. The before paragraph is strongly recommended for any feature that changes existing behavior or solves a pre-existing limitation.
-
-## Title line conventions
-
-### Format
-
-The title line starts with `*` (not `-`), followed by the feature name and a maturity tag (if applicable), then issue/PR links and contributor links.
-
-```
-* Feature name (maturity tag) [#NNNNN](https://github.com/org/repo/issues/NNNNN) @[contributor](https://github.com/contributor)
+    For more information, see [documentation](/path-to-doc.md).
 ```
 
-### Maturity tags
+Minimum viable entry:
 
-| Tag | When to use | English | Chinese |
-|-----|-------------|---------|---------|
-| GA | Feature reaches general availability in this version | `(GA)` or `(GA in vX.Y.Z)` | `(GA)` |
-| Experimental | Feature is newly introduced as experimental | `(experimental)` | `(实验特性)` |
-| GA from experimental | Feature transitions from experimental to GA | Include version history in the title or body | Same |
+- Title line
+- One paragraph that states the new behavior and user value
+- Documentation link
 
-Examples:
+Add a before paragraph when the feature solves a known limitation, changes an existing workflow, or needs motivation to be understandable.
 
-- `* Support foreign keys (GA) [#36982](...)`
-- `* Support redistributing data of a specific table (experimental) [#63260](...)`
-- `* TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](...)`
+## Title line
 
-### Title style
+The title line should name the capability and, when useful, include the main benefit. It is usually a verb phrase.
 
-The title is a concise noun phrase or verb phrase that names the feature and its key benefit. Two common patterns:
+Common title patterns:
 
-**Pattern A: Verb phrase describing the capability**
-
-```
-* Support foreign keys (GA) [#36982](...) @[YangKeao](...)
-* Support pushing index lookups down to TiKV to improve query performance [#62575](...) @[lcwangchao](...)
-* Support gracefully shutting down TiFlash [#10266](...) @[gengliqi](...)
+```markdown
+* Support <capability> [#NNNNN](...) @[contributor](...)
+* Support <capability> to improve <benefit> [#NNNNN](...) @[contributor](...)
+* Introduce <feature or mechanism> for <benefit> [#NNNNN](...) @[contributor](...)
+* Add <field, variable, parameter, statement, or identifier> [#NNNNN](...) @[contributor](...)
+* Improve <workflow or capability>, with <sourced metric or concrete benefit> [#NNNNN](...) @[contributor](...)
+* <Feature name> becomes generally available (GA) [#NNNNN](...) @[contributor](...)
 ```
 
-**Pattern B: Noun phrase naming the feature with a benefit clause**
+Title rules:
 
-```
-* TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](...) @[D3Hunter](...)
-* Introduce significant performance improvements for certain lossy DDL operations ... [#63366](...) @[wjhuang2016](...)
-* Foreign key checks now support shared locks [#66154](...) @[you06](...)
-```
-
-**Pattern C: Descriptive phrase for GA transitions (version-history style)**
-
-```
-* Setting the memory limit for schema cache is now generally available (GA). When the number of tables reaches hundreds of thousands or even millions, this feature significantly reduces the memory usage of schema metadata [#50959](...) @[tiancaiamao](...)
-* Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](...) @[okJiang](...)
-```
-
-### Verbs used in title lines
-
-| Verb | Usage |
-|------|-------|
-| `Support` | New capability: `Support column-level privilege management`, `Support gracefully shutting down TiFlash` |
-| `Introduce` | New mechanism or architecture: `Introduce a new TiCDC architecture option for improved performance, scalability, and stability` |
-| `Provide` | Provide a feature or service: `Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service` |
-| `Add` | New element (field, parameter, identifier): `Add storage engine identifiers to statement summary tables and slow query logs` |
-| `Improve` | Enhancement: `Improve DDL performance in scenarios with a large number of foreign keys` |
-| `Accelerate` | Speed improvement: `Accelerate recovery of system tables from backups` |
-
-### No trailing period on title lines
-
-Title lines do not end with `.` (English) or `。` (Chinese).
+- Use the same bullet marker as the surrounding release file. Existing feature entries commonly use `*`; some patch release files use `-`.
+- Do not end the title line with `.` or `。`.
+- Include all relevant issue links and contributor links.
+- Use `(experimental)` for experimental features.
+- Use `(GA)` when a feature becomes generally available.
+- Keep the title concise. Move explanation, conditions, and caveats into the body.
 
 ## Body paragraphs
 
-### Before paragraph
+### Context paragraph
 
-Describes the world before this feature. Common patterns:
+Use the context paragraph to explain why the feature matters. It usually describes the previous limitation or user scenario.
 
-**English**
+Common English openings:
 
 - `Before vX.Y.Z, ...`
-- `In earlier versions, ...`
 - `In TiDB versions earlier than vX.Y.Z, ...`
-- Problem-oriented: directly states the limitation without a version prefix
+- `In earlier versions, ...`
+- `<Scenario or limitation sentence without a version prefix>.`
 
-**Chinese**
+Common Chinese openings:
 
 - `在 vX.Y.Z 之前，……`
-- `在此前版本中，……`
 - `在 vX.Y.Z 之前的版本中，……`
+- `在此前版本中，……`
 
-The before paragraph establishes the motivation: why the user should care about this feature. It typically describes a limitation, a pain point, or a suboptimal behavior.
+### New behavior paragraph
 
-### After paragraph
+Use the new behavior paragraph to explain what changes in this version and what users gain.
 
-Describes the new behavior starting from this version. Common patterns:
-
-**English**
+Common English openings:
 
 - `Starting from vX.Y.Z, ...`
 - `In vX.Y.Z, ...`
 - `TiDB vX.Y.Z introduces ...`
 - `TiDB vX.Y.Z optimizes ...`
 
-**Chinese**
+Common Chinese openings:
 
 - `从 vX.Y.Z 开始，……`
 - `在 vX.Y.Z 中，……`
 - `TiDB vX.Y.Z 引入……`
 - `TiDB vX.Y.Z 优化了……`
 
-The after paragraph answers: what the feature does, how it works (briefly), and what the user gains.
+The paragraph should answer:
 
-### Before-after structure examples
+- What is the capability?
+- How do users enable, configure, or use it, if applicable?
+- What concrete benefit does it provide?
 
-**Example 1: Problem → solution (v8.5.6, column-level privilege)**
+## Optional details
+
+Add extra details only when they help users evaluate or use the feature.
+
+- Configuration or usage: mention system variables, configuration items, SQL statements, command-line flags, and literal values in backticks.
+- Caveats and limitations: state unsupported cases, disabled-by-default behavior, compatibility notes, or known constraints.
+- Performance metrics: include the metric, magnitude, and test conditions when available. Do not use unsourced claims such as "significant" or "large" unless the input supports them.
+- Sub-feature lists: use indented `-` items for supported operations, optimization strategies, or new fields.
+- Benchmark tables: include only sourced results and enough environment details to make the numbers meaningful.
+
+## Documentation link
+
+End every complete feature description with a documentation link.
+
+English:
 
 ```markdown
-* Support column-level privilege management [#61706](...) @[CbcWestwolf](...) @[fzzf678](...)
+    For more information, see [documentation](/path-to-doc.md).
+```
+
+Chinese:
+
+```markdown
+    更多信息，请参考[用户文档](/path-to-doc.md)。
+```
+
+If no documentation page exists yet, do not invent one. Ask for the intended documentation link or leave a clear placeholder for human follow-up.
+
+## Maturity and version history
+
+For experimental features:
+
+- Add `(experimental)` to the title line.
+- State whether the feature is disabled by default, and explain how to enable it if the input provides that information.
+
+For features that become generally available (GA) from an experimental version:
+
+- Add `(GA)` to the title line when it reads naturally.
+- Mention the previous experimental version if known.
+- State whether the feature becomes enabled by default if that is part of the release behavior.
+
+For features that are new and GA from the start:
+
+- No need to add `(GA)` to the title line, which means that a feature is GA by default if `(experimental)` is not present.
+
+Useful patterns:
+
+```markdown
+TiDB vX.Y.Z introduces <feature> as an experimental feature. In vA.B.C, this feature becomes generally available (GA).
+
+Starting from vA.B.C, <feature> becomes generally available (GA) and is enabled by default.
+```
+
+Do not infer a maturity state from the PR alone. Use only information provided by the issue, PR, release plan, PM input, or existing documentation.
+
+## Style rules
+
+- Write for users, not implementers.
+- Prefer `you can ...`, `TiDB supports ...`, and `Starting from vX.Y.Z, ...`.
+- State the capability or benefit before implementation details.
+- Use present tense for product behavior.
+- Use active voice when natural.
+- Keep paragraphs short. Split long explanations into multiple paragraphs or a list.
+- Do not expose internal function names, package names, test names, or code-level refactors unless they are user-visible.
+- Do not overstate certainty. Use `can improve` or `helps reduce` when the benefit depends on workload.
+- Use normal sentence punctuation in body paragraphs. Only the title line omits the trailing period.
+
+Chinese-specific rules:
+
+- Use full-width punctuation in Chinese prose: `，`、`。`、`（`、`）`、`：`.
+- Use Chinese verbs that match release-note style: `支持`, `引入`, `提供`, `新增`, `提升`, `优化`, `加速`.
+- The Chinese documentation link sentence ends with `。`.
+- The Chinese title line does not end with `。`.
+
+## Examples
+
+### Standard before-and-after feature
+
+```markdown
+* Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678)
 
     Before v8.5.6, TiDB privilege control covers the database and table levels and does not support granting or revoking privileges on specific columns, unlike MySQL. As a result, you cannot restrict users to access only a subset of sensitive columns in a table.
 
     Starting from v8.5.6, TiDB supports column-level privilege management. You can use the `GRANT` and `REVOKE` statements to manage privileges on specific columns. TiDB performs privilege checks based on column-level privileges during query processing and execution plan construction, enabling finer-grained access control and better support for sensitive data isolation and the principle of least privilege.
 
-    For more information, see [documentation](...).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 ```
 
-**Example 2: GA transition with version history (v8.5.0, schema cache)**
+### Experimental feature with enablement
 
 ```markdown
-* Setting the memory limit for schema cache is now generally available (GA). When the number of tables reaches hundreds of thousands or even millions, this feature significantly reduces the memory usage of schema metadata [#50959](...) @[tiancaiamao](...)
+* Support table-level data affinity to improve query performance (experimental) [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024)
 
-    In some SaaS scenarios, where the number of tables reaches hundreds of thousands or even millions, schema metadata can consume a significant amount of memory. With this feature enabled, TiDB uses the Least Recently Used (LRU) algorithm to cache and evict the corresponding schema metadata, effectively reducing memory usage.
+    Starting from v8.5.5, you can configure the `AFFINITY` table option as `table` or `partition` when creating or altering a table. When this option is enabled, PD groups Regions that belong to the same table or partition into a single affinity group and prioritizes placing their Leaders and Voter replicas on the same subset of TiKV nodes. This reduces latency caused by cross-node scattered queries and can improve query performance.
 
-    Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512 MiB). You can adjust it as needed using the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
+    Note that this feature is currently experimental and is disabled by default. To enable it, set the PD configuration item `schedule.affinity-schedule-limit` to a value greater than `0`.
 
-    For more information, see [documentation](/schema-cache.md).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/table-affinity).
 ```
 
-**Example 3: New feature with performance benchmarks (v8.5.5, lossy DDL)**
+### GA transition
 
 ```markdown
-* Introduce significant performance improvements for certain lossy DDL operations (...) [#63366](...) @[wjhuang2016](...)
+* Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang)
 
-    The optimization strategies are as follows:
+    In a TiDB cluster with a large number of Regions, the PD leader might experience high CPU load due to the increased overhead of handling heartbeats and scheduling tasks. If the cluster has many TiDB instances and a high concurrency of Region information requests, the CPU pressure on the PD leader increases further and might cause PD services to become unavailable.
 
-    - In strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion.
-    - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible.
-    - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
+    TiDB v7.6.0 introduces Active PD Follower as an experimental feature. In v8.5.0, this feature becomes generally available (GA). After this feature is enabled, TiDB evenly distributes Region information requests to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader.
 
-  The following table shows example performance improvements based on benchmark tests ...
-
-    | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
-    |----------|----------------|---------------------|--------------------|--------------------------|
-    | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
-    | Indexed column | `BIGINT → INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
-    | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
-
-    Note that the preceding test results are based on the condition that no data truncation occurs ...
-
-    For more information, see [documentation](...).
+    For more information, see [documentation](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service).
 ```
 
-**Example 4: New architecture with caveats (v8.5.4, TiCDC architecture)**
+## Review checklist
 
-```markdown
-* Introduce a new TiCDC architecture option for improved performance, scalability, and stability [#442](...) @[CharlesCheung96](...)
-
-    This new architecture redesigns TiCDC core components and optimizes its data processing workflows, while maintaining compatibility with the configuration, usage, and APIs of the classic TiCDC architecture.
-
-    When configured to use this new architecture, TiCDC achieves near-linear scalability and can replicate millions of tables with lower resource consumption. It also reduces changefeed latency and delivers more stable performance in scenarios with high write workloads, frequent DDL operations, and cluster scaling. Note that the new architecture currently has some initial limitations.
-
-    To use the new architecture, set the TiCDC configuration item [`newarch`](...) to `true`.
-
-    For more information, see [documentation](...).
-```
-
-### Additional details
-
-When extra context is needed, use one or more of the following patterns after the before-after paragraphs:
-
-- **Configuration or usage instructions**: describe how to enable, configure, or use the feature. Include variable names, configuration items, SQL statements, or command-line flags in backticks.
-- **Performance benchmarks**: include a table or inline metrics when available. State the test conditions (cluster spec, data size).
-- **Caveats and limitations**: describe restrictions, unsupported scenarios, or known issues. Use phrasing like `Note that ...` or a separate paragraph.
-- **Sub-list of capabilities**: use `-` items indented under the main entry for enumerating sub-features, supported operations, or optimization strategies.
-- **Behavior details**: describe behavior for different conditions (for example, "If X finishes before timeout, Y. If X does not finish, Z.").
-
-## Documentation link
-
-Every feature entry ends with a documentation link.
-
-**English**
-
-```markdown
-    For more information, see [documentation](/path-to-doc.md).
-    For more information, see [documentation](/path-to-doc.md#anchor).
-```
-
-**Chinese**
-
-```markdown
-    更多信息，请参考[用户文档](/path-to-doc.md)。
-    更多信息，请参考[用户文档](/path-to-doc.md#锚点)。
-```
-
-The documentation link is indented at the same level as the body paragraphs (4 spaces under the `*` title line). Both English and Chinese doc link lines end with a period (`.` for English, `。` for Chinese), because they are full sentences within body paragraphs.
-
-## GA, experimental, and version-lifecycle language
-
-### GA features
-
-When a feature transitions to GA, the description should briefly mention its history:
-
-- `The foreign key feature becomes generally available (GA) in v8.5.0.`
-- `Starting from v8.5.0, this feature becomes generally available (GA).`
-- `In v8.2.0, this feature becomes generally available (GA) and is enabled by default.`
-- `TiDB v7.6.0 introduces X as an experimental feature. ... In v8.5.0, this feature becomes generally available (GA).`
-
-Chinese equivalents:
-
-- `外键功能在 v8.5.0 中正式 GA。`
-- `从 v8.5.0 开始，该功能正式 GA。`
-
-### Experimental features
-
-When a feature is introduced as experimental, state this clearly:
-
-- `(experimental)` in the title tag
-- `This feature is currently experimental and is disabled by default.` in the body (if applicable)
-
-### Version-history references
-
-For features first introduced in an earlier version, mention the version history:
-
-- `TiDB v7.6.0 introduces X as an experimental feature, controlled by the system variable [`Y`](...). Starting from v8.0.0, this system variable is renamed to [`Z`](...).`
-- `In v8.0.0, TiKV encryption at rest experimentally supports using Google Cloud KMS. Starting from v8.5.0, this feature becomes generally available (GA).`
-
-## Style rules
-
-### Tone and perspective
-
-- Write from the user's perspective. Describe what the user can do, what the user observes, or what changes for the user.
-- Use present tense for describing the feature's behavior: "TiDB supports ...", "You can use ...".
-- Use imperative mood for configuration instructions: "Set the variable to ...", "To enable this feature, ...".
-
-### Sentence structure
-
-- Lead with the most important information. State the capability or benefit before describing the mechanism.
-- Avoid passive voice when active voice is natural: prefer "TiDB supports X" over "X is supported by TiDB".
-- Use concise compound sentences. Avoid overly long sentences; break complex descriptions into separate sentences.
-
-### Metric claims
-
-Performance claims should include:
-
-- The metric type (for example, "performance", "QPS", "latency")
-- The magnitude (for example, "up to 25x", "by 62.5%", "from hours to seconds")
-- The test conditions when available (cluster spec, data size)
-
-### Trailing period convention
-
-Feature body paragraphs use normal sentence punctuation with trailing periods. Only the title line omits the trailing period. This differs from single-line improvement and bug-fix entries, which omit the trailing period entirely.
-
-### Chinese-specific rules
-
-Chinese title lines follow the same verb patterns as English but use Chinese verbs:
-
-| English verb | Chinese equivalent |
-|-------------|-------------------|
-| `Support` | `支持` |
-| `Introduce` | `引入` |
-| `Provide` | `提供` |
-| `Add` | `新增` |
-| `Improve` | `提升` / `优化` |
-| `Accelerate` | `加速` |
-
-Before-after phrasing:
-
-- Before: `在 vX.Y.Z 之前，……` / `在此前版本中，……`
-- After: `从 vX.Y.Z 开始，……` / `TiDB vX.Y.Z 引入了……`
-
-Punctuation:
-
-- Use full-width punctuation in Chinese prose: `，`、`。`、`（`、`）`、`：`
-- Documentation link sentence ends with `。`: `更多信息，请参考[用户文档](/path.md)。`
-- Title lines do not end with `。`
-
-## Differences between major and patch releases
-
-| Aspect | Major/DMR release | Patch release |
-|--------|-------------------|---------------|
-| Section heading | `## Feature details` | `## Features` |
-| Level-3 category headings | Always present | Present when there are enough features; may be omitted for a small number of features |
-| Highlight table | Major releases may include an HTML `<table>` summary of highlights at the top of the file, before `## Feature details` | Not present |
-| Scope | New features, GA transitions, and major capability additions | Backported features, GA transitions, and incremental capability additions |
-| Version-history detail | More detailed for features that evolved over multiple DMR cycles | Typically shorter; references the original introduction version |
-
-## Common review findings
-
-| Finding | Correct |
-|---------|---------|
-| Entry uses `-` instead of `*` for the title line | Use `*` for the feature title line (sub-items within the body use `-`) |
-| Missing before paragraph for a feature that addresses a pre-existing limitation | Add a before paragraph describing the limitation or pain point |
-| Missing documentation link | Add `For more information, see [documentation](/path.md).` |
-| Title line ends with `.` | Remove the trailing period from the title line |
-| Body omits the version number in `Starting from ...` | Always specify the version: `Starting from v8.5.5, ...` |
-| GA transition does not mention the original experimental version | Add version history: `Introduced as experimental in vX.Y.Z.` |
-| Feature description only explains what the code does, not the user benefit | Rewrite to explain what the user gains (capability, performance, stability) |
-| Chinese doc link missing `。` | Chinese doc link line ends with `。`: `更多信息，请参考[用户文档](/path.md)。` |
-| English doc link missing `.` | English doc link line ends with `.`: `For more information, see [documentation](/path.md).` |
-| Performance claim without test conditions | Add test environment details (cluster spec, data size) when available |
-| Maturity tag missing for experimental features | Add `(experimental)` to the title |
-| Maturity tag missing for GA transitions | Add `(GA)` or `(GA in vX.Y.Z)` to the title |
-| Chinese anchor uses English suffix | Change `-new-in-vXYZ` to `-从-vXYZ-版本开始引入` in Chinese entries |
-| Inline code not applied to variables, configs, or SQL keywords | Apply backtick formatting per the inline-code rules in SKILL.md |
+- The entry describes user-facing capability and value, not only implementation work.
+- The title line is concise, has issue and contributor links, and has no trailing period.
+- Existing limitations are explained when needed.
+- Enablement, configuration, caveats, and limitations are included when relevant.
+- Performance claims include metrics and test conditions when available.
+- Variables, config parameters, SQL statements, error messages, literal values, and links use the formatting rules in [SKILL.md](../SKILL.md).
+- The entry ends with a valid documentation link or an explicit placeholder for follow-up.
+- The wording follows nearby release note entries in the target file.
