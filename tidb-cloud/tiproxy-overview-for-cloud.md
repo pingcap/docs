@@ -40,7 +40,7 @@ TiProxyでは、2種類のコストが導入されています。
 -   ノードのコスト。詳細については、 [ノードコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)を参照してください。
 -   データ転送コスト。詳細については、 [データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)を参照してください。TiProxy は、同じアベイラビリティゾーン (AZ) 内の TiDB ノードへのトラフィックルーティングを優先します。ただし、TiDB のワークロードが不均一な場合は、他の AZ にもトラフィックをルーティングするため、追加のデータ転送コストが発生する可能性があります。
 
-TiProxy の請求書は、 **[請求]**ページで確認できます。詳細については、 [TiProxyの請求書をビュー](/tidb-cloud/tiproxy-management.md#view-tiproxy-bills)参照してください。
+TiProxy の請求書は、 **[請求]**ページで確認できます。詳細については、 [TiProxyの請求書を確認する](/tidb-cloud/tiproxy-management.md#view-tiproxy-bills)参照してください。
 
 ## SLAへの影響 {#sla-impact}
 

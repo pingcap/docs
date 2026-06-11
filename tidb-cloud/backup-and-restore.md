@@ -22,7 +22,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ## バックアップ {#backup}
 
-### バックアップページをビュー {#view-the-backup-page}
+### バックアップページを確認する {#view-the-backup-page}
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
 

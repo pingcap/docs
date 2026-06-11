@@ -287,7 +287,7 @@ SHOW MASTER STATUS;
 
 <CustomContent plan="essential">
 
-## ステップ6：移行の進捗状況をビュー {#step-6-view-the-migration-progress}
+## ステップ6：移行の進捗状況を確認する {#step-6-view-the-migration-progress}
 
 移行ジョブが作成されると、**移行ジョブの詳細**ページで移行の進行状況を確認できます。移行の進行状況は、 **「ステージ」と「ステータス」の**領域に表示されます。
 
@@ -309,7 +309,7 @@ SHOW MASTER STATUS;
 
 仕様を選択したら、 **「ジョブの作成」をクリックし、「開始」を**クリックして移行を開始します。
 
-## ステップ7：移行の進捗状況をビュー {#step-7-view-the-migration-progress}
+## ステップ7：移行の進捗状況を確認する {#step-7-view-the-migration-progress}
 
 移行ジョブが作成されると、**移行ジョブの詳細**ページで移行の進行状況を確認できます。移行の進行状況は、 **「ステージ」と「ステータス」の**領域に表示されます。
 

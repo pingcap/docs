@@ -57,7 +57,7 @@ tiup dm --help
           --wait-timeout int   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 60)
       -y, --yes                Skip all confirmations and assumes 'yes'
 
-## クラスターリストをビュー {#view-the-cluster-list}
+## クラスターリストを確認する {#view-the-cluster-list}
 
 クラスターが正常にデプロイされたら、次のコマンドを実行してクラスター リストを表示します。
 
@@ -267,7 +267,7 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 
 デプロイメントが完了したら、 `tiup dm start`コマンドを実行してクラスターを起動し、DM カーネルのアップグレード プロセスを開始できます。
 
-## 操作ログをビュー {#view-the-operation-log}
+## 操作ログを確認する {#view-the-operation-log}
 
 操作ログを表示するには、 `audit`コマンドを使用します。3 `audit`の使用方法は次のとおりです。
 

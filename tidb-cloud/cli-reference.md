@@ -21,20 +21,20 @@ TiDB Cloud CLIはコマンドラインインターフェースであり、ター
 
 ターミナルで`ticloud` CLIを使用するには、 `ticloud [command] [subcommand]`を実行してください。TiUP [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用している場合は、代わりに`tiup cloud [command] [subcommand]`を使用してください。
 
-| 指示            | サブコマンド                             | 説明                                                               |
+| コマンド            | サブコマンド                             | 説明                                                               |
 | ------------- | ---------------------------------- | ---------------------------------------------------------------- |
-| 認証            | ログイン、ログアウト、whoami                  | ログインとログアウト                                                       |
-| サーバーレス（別名：s）  | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを管理する             |
-| サーバーレスブランチ    | 作成、削除、説明、一覧表示、シェル                  | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのブランチを管理します。      |
-| サーバーレスインポート   | キャンセル、説明、リスト、開始                    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのインポートタスクを管理します。  |
-| サーバーレスエクスポート  | 作成、説明、一覧表示、キャンセル、ダウンロード            | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのエクスポートタスクを管理します。 |
-| サーバーレスSQLユーザー | 作成、一覧表示、削除、更新                      | TiDB Cloud StarterまたはTiDB Cloud EssentialインスタンスのSQLユーザーを管理する     |
-| サーバーレス監査ログ    | 設定、説明、フィルタルール（別名：フィルタ）、ダウンロード      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータベース監査ログを管理する  |
-| 完了            | bash、fish、powershell、zsh           | 指定されたシェル用の補完スクリプトを生成する                                           |
-| 設定            | 作成、削除、説明、編集、一覧表示、設定、使用             | ユーザープロファイルの設定                                                    |
-| プロジェクト        | リスト                                | プロジェクトを管理する                                                      |
-| アップグレード       | -                                  | CLIを最新バージョンにアップデートしてください                                         |
-| ヘルプ           | 認証、設定、サーバーレス、プロジェクト、アップグレード、ヘルプ、完了 | 任意のコマンドのヘルプをビュー                                                  |
+| auth            | login, logout, whoami                  | ログインとログアウト                                                       |
+| serverless (alias: s)  | create, delete, describe, list, update, spend-limit, region, shell    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを管理する             |
+| serverless branch    | create, delete, describe, list, shell                  | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのブランチを管理します。      |
+| serverless import   | cancel, describe, list, start                    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのインポートタスクを管理します。  |
+| serverless export  | create, describe, list, cancel, download            | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのエクスポートタスクを管理します。 |
+| serverless sql-user | create, list, delete, update                      | TiDB Cloud StarterまたはTiDB Cloud EssentialインスタンスのSQLユーザーを管理する     |
+| serverless audit-log    | set, describe, filter-rule (alias: filter), download      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータベース監査ログを管理する  |
+| completion            | bash, fish, powershell, zsh           | 指定されたシェル用の補完スクリプトを生成する                                           |
+| config            | create, delete, describe, edit, list, set, use             | ユーザープロファイルの設定                                                    |
+| project        | list                                | プロジェクトを管理する                                                      |
+| upgrade       | -                                  | CLIを最新バージョンにアップデートしてください                                         |
+| help           | auth, config, serverless, project, upgrade, completion | 任意のコマンドのヘルプを確認する                                                  |
 
 ## コマンドモード {#command-modes}
 

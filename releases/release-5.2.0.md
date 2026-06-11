@@ -119,9 +119,9 @@ TiDB バージョン: 5.2.0
 
     ユーザー向けドキュメント：
 
-    -   クラスタ内のすべての TiKV ノードで発生している悲観的ロック待機イベントをビュー: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
-    -   TiDBノードで最近発生したデッドロックエラーをビュー: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
-    -   TiDBノードで実行中のトランザクションをビュー: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+    -   クラスタ内のすべての TiKV ノードで発生している悲観的ロック待機イベントを確認する: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    -   TiDBノードで最近発生したデッドロックエラーを確認する: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
+    -   TiDBノードで実行中のトランザクションを確認する: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 -   `AUTO_RANDOM`または`SHARD_ROW_ID_BITS`属性を持つテーブルにインデックスを追加するユーザーシナリオを最適化します。
 

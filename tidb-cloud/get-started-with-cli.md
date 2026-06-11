@@ -129,7 +129,7 @@ ticloud serverless create
 
 ## TiDB Cloud CLIを使用する {#use-the-tidb-cloud-cli}
 
-利用可能なすべてのコマンドをビュー。
+利用可能なすべてのコマンドを確認する。
 
 ```shell
 ticloud --help
@@ -151,7 +151,7 @@ ticloud update
 
 TiDB Cloud CLI は[TiUP](https://tiup.io/)からも利用可能で、コンポーネント名は`cloud`です。
 
-利用可能なすべてのコマンドをビュー。
+利用可能なすべてのコマンドを確認する。
 
 ```shell
 tiup cloud --help

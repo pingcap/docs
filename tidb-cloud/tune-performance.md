@@ -32,7 +32,7 @@ TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](
 
 </CustomContent>
 
-## 診断ページをビュー {#view-the-diagnosis-page}
+## 診断ページを確認する {#view-the-diagnosis-page}
 
 <CustomContent plan="starter,essential,dedicated">
 

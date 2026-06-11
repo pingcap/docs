@@ -82,7 +82,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 -   [ログバックアップタスクを一時停止して再開する](/br/br-pitr-manual.md#pause-and-resume-a-log-backup-task)
 -   [ログバックアップタスクを停止して再開する](/br/br-pitr-manual.md#stop-and-restart-a-log-backup-task)
 -   [バックアップデータをクリーンアップする](/br/br-pitr-manual.md#clean-up-log-backup-data)
--   [バックアップメタデータをビュー](/br/br-pitr-manual.md#view-the-log-backup-metadata)
+-   [バックアップメタデータを確認する](/br/br-pitr-manual.md#view-the-log-backup-metadata)
 
 ## バックアップデータの復元コマンド {#commands-of-restoring-backup-data}
 

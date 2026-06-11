@@ -52,7 +52,7 @@ SELECT * FROM sequences\G
 1 row in set (0.01 sec)
 ```
 
-すべてのシーケンスをビュー:
+すべてのシーケンスを確認する:
 
 ```sql
 SELECT * FROM SEQUENCES\G

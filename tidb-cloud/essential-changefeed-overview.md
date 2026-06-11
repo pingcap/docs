@@ -34,7 +34,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 今後、対応地域は拡大していく予定です。特定の地域での緊急サポートについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
 
-## Changefeedページをビュー {#view-the-changefeed-page}
+## Changefeedページを確認する {#view-the-changefeed-page}
 
 変更フィード機能にアクセスするには、以下の手順に従ってください。
 
@@ -55,7 +55,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 -   [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
 -   [MySQLにシンクする](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
 
-## 変更フィードをビュー {#view-a-changefeed}
+## 変更フィードを確認する {#view-a-changefeed}
 
 変更フィードは、 TiDB CloudコンソールまたはTiDB Cloud CLIを使用して表示できます。
 
