@@ -2706,7 +2706,7 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `bg-compaction-pressure-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
-+ Specifies the compaction pending bytes ratio threshold at which background write I/O throttling begins. Below this threshold, background write I/O ramps up toward [`bg-write-io-ceiling`](#bg-write-io-ceiling). At or above this threshold, background write I/O scales linearly down toward [`bg-write-io-floor`](#bg-write-io-floor) as compaction pressure approaches 100%.
++ Specifies the threshold, as a percentage of [`storage.flow-control.soft-pending-compaction-bytes-limit`](#soft-pending-compaction-bytes-limit), at which background write I/O throttling begins. Below this threshold, background write I/O increases toward [`bg-write-io-ceiling`](#bg-write-io-ceiling). At or above this threshold, TiKV scales background write I/O linearly down toward [`bg-write-io-floor`](#bg-write-io-floor) as compaction pressure approaches 100%.
 + Default value: `70.0`
 + Unit: percentage (%)
 
