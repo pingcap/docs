@@ -72,11 +72,11 @@ sorted-kv-dir = "${path}"
 data-source-dir = "s3://my-bucket/schema-backup"
 ```
 
-TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB Lightning のコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lightningの構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 #### 1.3 スキーマファイルをTiDBにインポートする {#1-3-import-the-schema-file-to-tidb}
 
-TiDB Lightningを使用して、スキーマファイルを下流のTiDBにインポートします。
+TiDB Lightningを使用して、スキーマファイルをターゲットのTiDBにインポートします。
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -146,7 +146,7 @@ table = '$2'
 type = '$3'
 ```
 
-TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB Lightning のコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lightningの構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 #### 2.3 TiDBへの全データのインポート {#2-3-import-full-data-to-tidb}
 
@@ -160,11 +160,11 @@ TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB 
 
 2.  インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
-    -   {{B `progress` `grep`キーワードがログに記録されます。デフォルトでは、進行状況は 5 分ごとに更新されます。
+    -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
     -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
     -   [TiDB Lightning Webインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
-3.  TiDB Lightning はインポートが完了すると自動的に終了します。最後の行に`tidb-lightning.log`に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
+3.  TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
 > **注記：**
 >

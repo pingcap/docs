@@ -3,17 +3,17 @@ title: Explore SQL with TiDB
 summary: TiDBデータベースの基本的なSQL文について学びましょう。
 ---
 
-# TiDBでSQLを探求しよう {#explore-sql-with-tidb}
+# TiDBでSQLを試す {#explore-sql-with-tidb}
 
 TiDBはMySQLと互換性があり、ほとんどの場合、MySQLのステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)参照してください。
 
 <CustomContent platform="tidb">
 
-SQLを試したり、TiDBとMySQLクエリの互換性をテストしたりするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)お試しください。また、まずTiDBクラスタをデプロイしてから、その中でSQL文を実行することもできます。
+SQLを試したり、TiDBとMySQLクエリの互換性をテストしたりするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)を試すことができます。また、まずTiDBクラスターをデプロイしてから、その中でSQL文を実行することもできます。
 
 </CustomContent>
 
-このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
+このページでは、DDL、DML、CRUD操作などのTiDB SQL文について解説します。TiDB文の完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## カテゴリ {#category}
 
