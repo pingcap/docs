@@ -29,7 +29,7 @@ This tutorial guides you through an easy way to get started with TiDB Cloud Lake
 
 ## Step 3. Explore your lake workspace
 
-1. After initialization completes, confirm the Lake information on the home page, such as the Lake name, plan, cloud provider, and region.
+1. After initialization completes, confirm the lake information on the home page, such as the lake name, plan, cloud provider, and region.
 2. Use the entry points on the home page to continue:
 
     - **Connect**: get connection information.
