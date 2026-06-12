@@ -46,7 +46,7 @@ Before changing a PR body, read `.github/pull_request_template.md`.
    - Review that file against the PR template before calling `gh`.
 10. After any PR body update, re-read the PR to verify the structure is intact.
 
-## Version Checkbox Rules
+## Version checkbox rules
 
 The version checkboxes in the PR template follow a specific order from newest to oldest. When filling them in:
 
@@ -55,7 +55,7 @@ The version checkboxes in the PR template follow a specific order from newest to
 - Check only the versions where the change should apply.
 - If a version is not in the template list, do not invent a new checkbox line.
 
-## Cherry-pick and Label Conventions
+## Cherry-pick and label conventions
 
 - When a change applies to multiple versions, prefer a single PR on the latest applicable branch and use cherry-pick labels for remaining maintained versions.
 - Cherry-pick labels follow the pattern `needs-cherry-pick-release-X.Y` (e.g. `needs-cherry-pick-release-8.5`, `needs-cherry-pick-release-7.5`). There is also `needs-cherry-pick-master` for cherry-picks to master.
@@ -67,7 +67,7 @@ The version checkboxes in the PR template follow a specific order from newest to
     - `translation/from-docs-cn` when the PR is translated from a `docs-cn` PR.
     - `translation/welcome` to invite community translation; `translation/no-need` when translation is not needed.
 
-## Quick Checks
+## Quick checks
 
 - The PR body contains the "What is changed, added or deleted? (Required)" heading with a non-empty description below it.
 - At least one version checkbox is checked under "Which TiDB version(s) do your changes apply to? (Required)".

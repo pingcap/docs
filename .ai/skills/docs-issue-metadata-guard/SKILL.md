@@ -11,7 +11,7 @@ Before creating or editing an issue, read the matching file under `.github/ISSUE
 
 This repository has three issue templates and disables blank issues (`blank_issues_enabled: false` in `config.yml`). Every new issue must use one of the templates.
 
-## Issue Templates
+## Issue templates
 
 | Template | File | Use when |
 |---|---|---|
@@ -19,7 +19,7 @@ This repository has three issue templates and disables blank issues (`blank_issu
 | Change Request | `change-request.md` | Suggesting new content, restructuring, adding missing information, improving existing documentation |
 | Question | `question.md` | Usage questions about documentation that are not answered in existing docs or discussions |
 
-## Scope Boundary
+## Scope boundary
 
 All three templates include the same scope reminder:
 
@@ -47,14 +47,14 @@ Enforce this boundary:
    - Always add `--label` flags explicitly — `gh issue create` does not auto-apply labels from templates.
 5. Fill in all template fields with concrete information.
 
-### Error Report
+### Error report
 
 Fill in both required fields:
 
 - **What is the URL/path of the document related to this issue?** — provide the published doc URL or the repository file path. Do not leave this blank.
 - **How would you like to improve it?** — describe the specific error and the expected correction. Include the current incorrect text and the proposed fix when possible.
 
-### Change Request
+### Change request
 
 Fill in all three sections:
 
@@ -71,14 +71,14 @@ Before filing:
 
 Then describe the question clearly, including what you searched and why the existing documentation did not answer it.
 
-## Editing Existing Issues
+## Editing existing issues
 
 1. Fetch the current title, body, and labels first.
 2. Patch only the intended sections and preserve untouched sections, metadata, and still-valid context.
 3. Do not rewrite the issue body from scratch.
 4. Preserve the template structure: keep the headings and numbered prompts intact.
 
-## Preserving Template Structure
+## Preserving template structure
 
 - Keep the hidden HTML comment block (scope reminder and community links) unchanged.
 - Keep the template heading (`## Error Report`, `## Change Request`, or `## Question`) unchanged.
@@ -97,13 +97,13 @@ Then describe the question clearly, including what you searched and why the exis
     - **Workflow labels**: `good first issue`, `help wanted` for community contribution signaling.
 - If label permissions are missing, add a comment with `Suggested labels: ...` so maintainers can apply them.
 
-## File-based Editing
+## File-based editing
 
 - Materialize the intended issue body in a local Markdown file.
 - For new issues, review that file against the matching issue template before calling `gh`.
 - For existing issues, diff the patched body against the current issue body before calling `gh`.
 
-## Quick Checks
+## Quick checks
 
 - The issue title and body are in English.
 - The issue uses one of the three available templates (Error Report, Change Request, or Question) — blank issues are not allowed.
