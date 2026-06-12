@@ -60,7 +60,7 @@ Auto-provision is a feature that allows members to automatically join an organiz
 - When auto-provision is disabled for an authentication method, only users who have been invited by an `Organization Owner` or `Project Owner` can log in to your custom URL.
 - When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default `Organization Viewer` role within the organization.
 
-For OIDC and SAML authentication methods, you must configure allowed email domains when you [configure the authentication method details](#step-2-configure-authentication-methods). Before you can use a domain in the **Allowed Email Domains** field, add and verify it in the **Domains** area.
+For OIDC and SAML authentication methods, if you enable **Auto-provision Accounts**, you must configure **Allowed Email Domains** when you [configure the authentication method details](#step-2-configure-authentication-methods). For SAML, this requirement also applies if you enable **SCIM Provisioning Accounts**. Before you can use a domain in **Allowed Email Domains**, add and verify it in the **Domains** area.
 
 For other authentication methods, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
 
@@ -120,7 +120,9 @@ After enabling Cloud Organization Cloud, you can configure username and password
 
 ### Add and verify domains for OIDC and SAML
 
-Before configuring OIDC or SAML, add and verify the email domains that your organization members use to sign in. Only domains with the **Verified** status can be used in **Allowed Email Domains** for OIDC and SAML.
+If you want to enable **Auto-provision Accounts** for OIDC or SAML, or enable **SCIM Provisioning Accounts** for SAML, add and verify the email domains that your organization members use to sign in. In these cases, **Allowed Email Domains** is required, and only domains with the **Verified** status can be used.
+
+If auto-provision and SCIM provisioning are disabled, **Allowed Email Domains** is optional. If you enter any domains in this field, they must still be verified in the **Domains** area.
 
 To add and verify a domain, take the following steps:
 
@@ -164,7 +166,9 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - **Allowed Email Domains**
 
-        This field is required for OIDC. Enter only domains that you have verified in the **Domains** area. Only users with these email domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
+        This field is required if you enable **Auto-provision Accounts** for OIDC. Enter only domains that you have verified in the **Domains** area. Only users with these email domains can log in to TiDB Cloud using the custom URL and be auto-provisioned into your organization. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
+
+        If **Auto-provision Accounts** is disabled, this field is optional. If you enter any domains, they must still be verified in the **Domains** area.
 
         > **Note:**
         >
@@ -208,7 +212,9 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     - **Allowed Email Domains**
 
-        This field is required for SAML. Enter only domains that you have verified in the **Domains** area. Only users with these email domains can log in to TiDB Cloud using the custom URL. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
+        This field is required if you enable **Auto-provision Accounts** or **SCIM Provisioning Accounts** for SAML. Enter only domains that you have verified in the **Domains** area. Only users with these email domains can log in to TiDB Cloud using the custom URL and be provisioned into your organization. Exclude the `@` symbol and separate multiple domains with commas. For example, `company1.com,company2.com`.
+
+        If both **Auto-provision Accounts** and **SCIM Provisioning Accounts** are disabled, this field is optional. If you enter any domains, they must still be verified in the **Domains** area.
 
         > **Note:**
         >
@@ -217,6 +223,8 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
     - **SCIM Provisioning Accounts**
 
         It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM provisioning](#configure-scim-provisioning).
+
+        Before enabling **SCIM Provisioning Accounts**, add and verify the domains that can be provisioned, and configure them in **Allowed Email Domains**.
 
 4. Click **Save**.
 
