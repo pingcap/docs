@@ -5,7 +5,7 @@ summary: TiDB Cloudのブランチの概念を学びましょう。
 
 # TiDB Cloudブランチング（ベータ版）の概要 {#tidb-cloud-branching-beta-overview}
 
-TiDB Cloud、 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのブランチを作成できます。TiDB Cloud StarterまたはEssentialインスタンスのブランチは、元のTiDB Cloud StarterまたはEssentialインスタンスから分岐したデータコピーを含む独立したインスタンスです。これにより、隔離された環境が提供され、元のTiDB Cloud StarterまたはEssentialインスタンスへの影響を気にすることなく、自由に実験を行うことができます。
+TiDB Cloudでは、TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのブランチを作成できます。TiDB Cloud StarterまたはEssentialインスタンスのブランチは、元のTiDB Cloud StarterまたはEssentialインスタンスから分岐したデータコピーを含む独立したインスタンスです。これにより、隔離された環境が提供され、元のTiDB Cloud StarterまたはEssentialインスタンスへの影響を気にすることなく、自由に実験を行うことができます。
 
 ブランチ機能を使用することで、開発者は並行して作業を進め、新機能を迅速に反復開発し、本番データベースに影響を与えることなく問題をトラブルシューティングし、必要に応じて変更を簡単に元に戻すことができます。この機能は、開発およびデプロイプロセスを効率化すると同時に、本番データベースの高い安定性と信頼性を確保します。
 

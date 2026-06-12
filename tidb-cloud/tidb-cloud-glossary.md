@@ -185,13 +185,13 @@ TiDB Cloud Dedicatedおよび TiDB セルフマネージドの場合、リクエ
 
 ### 支出限度額 {#spending-limit}
 
-は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
+支出限度額は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
 ### TiDBクラスター {#tidb-cluster}
 
-TiDB Cloudでは、クラスターは TiDB の専用クラウド展開であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[TiKV](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、storage構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
+TiDB Cloudでは、クラスターはクラウド上に専用デプロイされたTiDB環境であり、ノードトポロジー ( [TiDB](/tidb-computing.md)ノード、[TiKV](/tidb-storage.md)、 [TiFlash](/tiflash/tiflash-overview.md)ノードの数を指定できます)、ストレージ構成、スケーリングモデルなどのインフラストラクチャの詳細が明示的に含まれています。
 
 ### TiDBノード {#tidb-node}
 
