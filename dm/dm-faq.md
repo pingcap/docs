@@ -231,7 +231,7 @@ If this issue occurs, you need to pause the task, delete all migrated data in th
 
 You can avoid this issue in advance by configuring in the following ways:
 
-1. Increase the value of `expire_logs_days` in the upstream MySQL database to avoid wrongly purging needed binlog files before the full migration task completes. If the data volume is large, we recommend that you use Dumpling and TiDB Lightning at the same time to speed up the task.
+1. Increase the value of `expire_logs_days` in the upstream MySQL database to avoid wrongly purging needed binlog files before the full migration task completes. If the data volume is large, it is recommended to use Dumpling and TiDB Lightning at the same time to speed up the task.
 2. Enable the relay log feature for this task so that DM can read data from relay logs even though the binlog position is purged.
 
 ## Why does the Grafana dashboard of a DM cluster display `failed to fetch dashboard` if the cluster is deployed using TiUP v1.3.0 or v1.3.1?
