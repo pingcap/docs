@@ -53,7 +53,7 @@ br operator base64ify --storage "s3://your/log/backup/storage/here" --load-creds
 
 #### Step 2: Execute log compaction
 
-Once you have the Base64-encoded string from the previous step, you can start compaction using `tikv-ctl`. Note that the default log level of `tikv-ctl` is `warning`. Use `--log-level info` to obtain more detailed information:
+Once you have the Base64-encoded string from the previous step, you can start compaction using `tikv-ctl`. By default, the log level of `tikv-ctl` is `warning`. Use `--log-level info` to get more detailed information:
 
 ```shell
 tikv-ctl --log-level info compact-log-backup \
