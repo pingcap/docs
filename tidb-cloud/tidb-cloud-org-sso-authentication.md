@@ -98,7 +98,7 @@ Enabling an authentication method in TiDB Cloud allows members using that method
 
 ### Configure username and password, Google, GitHub, or Microsoft authentication methods
 
-After enabling Cloud Organization Cloud, you can configure username and password, Google, GitHub, or Microsoft authentication methods as follows:
+After enabling Cloud Organization SSO, you can configure username and password, Google, GitHub, or Microsoft authentication methods as follows:
 
 1. On the **Organization Settings** page, enable or disable the Google, GitHub, or Microsoft authentication methods according to your need.
 2. For an enabled authentication method, you can click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to configure the method details.
@@ -141,7 +141,7 @@ To add and verify a domain, take the following steps:
 
 If you have an identity provider that uses the OIDC identity protocol, you can enable the OIDC authentication method for TiDB Cloud login.
 
-In TiDB Cloud, the OIDC authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the OIDC authentication method as follows:
+In TiDB Cloud, the OIDC authentication method is disabled by default. After enabling Cloud Organization SSO, you can enable and configure the OIDC authentication method as follows:
 
 1. Get the following information from your identity provider for TiDB Cloud Organization SSO:
 
@@ -184,7 +184,7 @@ If you have an identity provider that uses the SAML identity protocol, you can e
 >
 > TiDB Cloud uses email addresses as unique identifiers for different users. Therefore, ensure that the `email` attribute for your organization members is configured in your identity provider.
 
-In TiDB Cloud, the SAML authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the SAML authentication method as follows:
+In TiDB Cloud, the SAML authentication method is disabled by default. After enabling Cloud Organization SSO, you can enable and configure the SAML authentication method as follows:
 
 1. Get the following information from your identity provider for TiDB Cloud Organization SSO:
 
