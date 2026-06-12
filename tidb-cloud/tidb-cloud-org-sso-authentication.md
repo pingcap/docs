@@ -122,7 +122,7 @@ After enabling Cloud Organization SSO, you can configure username and password, 
 
 If you want to enable **Auto-provision Accounts** for OIDC or SAML, or enable **SCIM Provisioning Accounts** for SAML, add and verify the email domains that your organization members use to sign in. In these cases, **Allowed Email Domains** is required, and only domains with the **Verified** status can be used.
 
-If auto-provision and SCIM provisioning are disabled, **Allowed Email Domains** is optional. If you enter any domains in this field, they must still be verified in the **Domains** area.
+If **Auto-provision Accounts** and **SCIM Provisioning Accounts** are disabled, **Allowed Email Domains** is optional. If you enter any domains in this field, they must still be verified in the **Domains** area.
 
 To add and verify a domain, take the following steps:
 
@@ -224,7 +224,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
         It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM provisioning](#configure-scim-provisioning).
 
-        Before enabling **SCIM Provisioning Accounts**, add and verify the domains that can be provisioned, and configure them in **Allowed Email Domains**.
+        Before enabling **SCIM Provisioning Accounts**, add and verify the email domains for users to be provisioned, and configure them in the **Allowed Email Domains** field.
 
 4. Click **Save**.
 
