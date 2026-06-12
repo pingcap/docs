@@ -30,7 +30,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   2026年6月9日以降に新たに作成される[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスは、単一のアベイラビリティゾーンにデプロイされ、リージョンごとの高可用性はサポートされません。
 
-        リージョンの高可用性とクロス AZ フェイルオーバーが必要な場合は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)を選択することを検討してください。
+        リージョンの高可用性とクロスAZフェイルオーバーが必要な場合は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)を選択することを検討してください。
 
         この変更は、2026年6月9日より前に作成されたTiDB Cloud Essentialインスタンスには影響しません。
 
