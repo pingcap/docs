@@ -16,7 +16,7 @@ TiDB Lightningは、CSVファイルやタブ区切り値（TSV）などの他の
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
-すべてのCSVファイルを同じディレクトリに配置してください。TiDB TiDB LightningがすべてのCSVファイルを認識する必要がある場合は、ファイル名が以下の要件を満たす必要があります。
+すべてのCSVファイルを同じディレクトリに配置してください。TiDB LightningがすべてのCSVファイルを認識する必要がある場合は、ファイル名が以下の要件を満たす必要があります。
 
 -   CSV ファイルにテーブル全体のデータが含まれている場合は、ファイル名を`${db_name}.${table_name}.csv`とします。
 -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加してください。例： `${db_name}.${table_name}.003.csv` 。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
@@ -126,11 +126,11 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 
 インポートが開始された後、以下のいずれかの方法でインポートの進行状況を確認できます。
 
--   {{B `progress` `grep`キーワードがログに記録されます。デフォルトでは、進行状況は 5 分ごとに更新されます。
+-   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。進行状況は、デフォルトでは 5 分ごとに更新されます。
 -   [モニタリングダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
 -   [TiDB Lightning Webインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
-TiDB Lightning はインポートが完了すると自動的に終了します。最後の行に`tidb-lightning.log`に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
+TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
 > **注記：**
 >

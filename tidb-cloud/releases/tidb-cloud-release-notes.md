@@ -30,7 +30,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   2026年6月9日以降に新たに作成される[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスは、単一のアベイラビリティゾーンにデプロイされ、リージョンごとの高可用性はサポートされません。
 
-        リージョンの高可用性とクロス AZ フェイルオーバーが必要な場合は、 [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)選択を検討してください。
+        リージョンの高可用性とクロスAZフェイルオーバーが必要な場合は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)を選択することを検討してください。
 
         この変更は、2026年6月9日より前に作成されたTiDB Cloud Essentialインスタンスには影響しません。
 
@@ -40,9 +40,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Premium**
 
-    -   [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)向けに以下のバックアップAPIエンドポイントを導入し、組織内のアクティブなインスタンスと削除されたインスタンスの両方を一元的に管理できるようにします。
+    -   [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)向けに以下のバックアップAPIエンドポイントを導入し、組織内のアクティブなインスタンスと削除されたインスタンスの両方を一元的に管理できるようにします。
 
-        -   バックアップの一覧を[バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloudプレミアム インスタンス (ごみ箱内) の両方のバックアップを一覧表示します。
+        -   バックアップの一覧を[バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloud Premiumインスタンス (ごみ箱内) の両方のバックアップを一覧表示します。
         -   [バックアップを削除する](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): `backupId`によって組織内の特定のバックアップを削除します。
 
 ## 2026年6月2日 {#june-2-2026}
@@ -67,7 +67,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Premium**
 
-    -   [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二層データ暗号化をサポートします。
+    -   [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二層データ暗号化をサポートします。
 
         Alibaba Cloud Key Management Service (KMS) では、独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
 
@@ -146,7 +146,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Premium**
 
-    -   `AVG RU/s`メトリクスを[TiDB Cloudプレミアム](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)**Metrics**ページに追加します。
+    -   `AVG RU/s`メトリクスを[TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)**Metrics**ページに追加します。
 
         `AVG RU/s` 、選択した時間範囲における1秒あたりの平均RU消費数を表示し、リソース消費をよりよく理解するのに役立ちます。
 
@@ -164,7 +164,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Premium**
 
-    -   [TiDB Cloudプレミアム](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)現在、AWS<CustomContent language="en,zh">アリババクラウド</CustomContent>でパブリック プレビュー中です。
+    -   [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)は、現在AWS<CustomContent language="en,zh">アリババクラウド</CustomContent>でパブリックプレビュー中です。
 
         [TiDB X](/tidb-cloud/tidb-x-architecture.md)カーネルを搭載したTiDB Cloud Premiumは、ハイパースケール、妥協のないパフォーマンス、そしてクラウドネイティブな消費モデルによるコスト効率を必要とする、ミッションクリティカルなエンタープライズワークロード向けに特別に設計されています。
 

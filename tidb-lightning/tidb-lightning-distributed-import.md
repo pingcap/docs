@@ -122,7 +122,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 
 並列インポート中、 TiDB Lightning はタスクの開始後に次のチェックを自動的に実行します。
 
--   ローカルディスク（構成`sort-kv-dir`で制御）とTiKVクラスターに、データのインポートに必要な空き容量があるかどうかを確認してください。必要なディスク容量については、 [下流のstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)と[リソース要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)参照してください。TiDB Lightningはデータソースをサンプリングし、サンプル結果からインデックスサイズの割合を推定します。推定にはインデックスも含まれるため、ソースデータのサイズがローカルディスクの空き容量よりも小さい場合でも、チェックが失敗する場合があります。
+-   ローカルディスク（構成`sort-kv-dir`で制御）とTiKVクラスターに、データのインポートに必要な空き容量があるかどうかを確認してください。必要なディスク容量については、 [ターゲットデータベースのストレージ要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)と[リソース要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。TiDB Lightningはデータソースをサンプリングし、サンプル結果からインデックスサイズの割合を推定します。推定にはインデックスも含まれるため、ソースデータのサイズがローカルディスクの空き容量よりも小さい場合でも、チェックが失敗する場合があります。
 -   TiKVクラスタ内のリージョンが均等に分散されているか、また空きリージョンが多すぎないかを確認してください。空きリージョンの数がmax(1000, テーブル数 * 3)を超える場合、つまり「1000」または「テーブル数の3倍」のいずれか大きい方を超える場合、インポートは実行できません。
 -   データソースからデータが順番にインポートされているか確認します。確認結果に基づいて`mydumper.batch-size`のサイズが自動的に調整されます。そのため、 `mydumper.batch-size`構成は利用できなくなります。
 
