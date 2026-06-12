@@ -1,6 +1,6 @@
 # Improvements
 
-Rules for the `## Improvements` / `## 改进提升` section. The cross-cutting rules in SKILL.md (no trailing period, user perspective, inline-code conventions, and entry suffix) also apply here.
+Rules for the `## Improvements` / `## 改进提升` section. The cross-cutting rules in SKILL.md (user perspective, inline-code conventions, issue and contributor links, and no trailing period on single-line entries) also apply here.
 
 ## Contents
 
