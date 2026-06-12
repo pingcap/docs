@@ -5,10 +5,7 @@ description: Use when creating or editing GitHub issues in pingcap/docs so issue
 
 # Docs Issue Metadata Guard
 
-## Overview
-
-Use this skill for `pingcap/docs` GitHub issue metadata work.
-The goal is to preserve issue-template structure, scope discipline, and searchable issue descriptions.
+Use this skill for `pingcap/docs` GitHub issue metadata work. The goal is to preserve issue-template structure, scope discipline, and searchable issue descriptions.
 
 Before creating or editing an issue, read the matching file under `.github/ISSUE_TEMPLATE/`.
 
@@ -94,10 +91,10 @@ Then describe the question clearly, including what you searched and why the exis
 - For issues created with `gh issue create`, add labels via `-l` flag since the CLI does not auto-apply template labels.
 - For existing issues, use `gh issue edit` to update labels.
 - Label taxonomy in this repository:
-  - **Type labels**: `type/bug`, `type/enhancement`, `type/feature-request`, `type/question`, `type/refactor`. Pick the one that matches the issue intent.
-  - **Area labels**: `area/*` labels identify the documentation area (e.g. `area/tidb-cloud`, `area/planner`, `area/br`, `area/ticdc`, `area/dm`, `area/tidb-lightning`, `area/deploy-upgrade-maintain`, `area/security`, `area/general`). Add at least one when the issue clearly targets a specific area.
-  - **Priority labels**: `priority/P1`, `priority/P2`. Use when the issue affects published documentation accuracy or user-facing correctness.
-  - **Workflow labels**: `good first issue`, `help wanted` for community contribution signaling.
+    - **Type labels**: `type/bug`, `type/enhancement`, `type/feature-request`, `type/question`, `type/refactor`. Pick the one that matches the issue intent.
+    - **Area labels**: `area/*` labels identify the documentation area (e.g. `area/tidb-cloud`, `area/planner`, `area/br`, `area/ticdc`, `area/dm`, `area/tidb-lightning`, `area/deploy-upgrade-maintain`, `area/security`, `area/general`). Add at least one when the issue clearly targets a specific area.
+    - **Priority labels**: `priority/P1`, `priority/P2`. Use when the issue affects published documentation accuracy or user-facing correctness.
+    - **Workflow labels**: `good first issue`, `help wanted` for community contribution signaling.
 - If label permissions are missing, add a comment with `Suggested labels: ...` so maintainers can apply them.
 
 ## File-based Editing

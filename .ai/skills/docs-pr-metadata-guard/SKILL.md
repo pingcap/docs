@@ -5,10 +5,7 @@ description: Use when creating or editing pull requests in pingcap/docs so the P
 
 # Docs PR Metadata Guard
 
-## Overview
-
-Use this skill for `pingcap/docs` GitHub pull request metadata work.
-The goal is to preserve the repository-required PR structure while editing only the mutable fields.
+Use this skill for `pingcap/docs` GitHub pull request metadata work. The goal is to preserve the repository-required PR description structure while editing only the mutable fields.
 
 Before changing a PR body, read `.github/pull_request_template.md`.
 
@@ -20,12 +17,12 @@ Before changing a PR body, read `.github/pull_request_template.md`.
    - Submit with `gh pr create --body-file <local-file>`, or use `gh pr create -T .github/pull_request_template.md` to let `gh` load the template as the starting body text (the `-T` / `--template` flag for `gh pr create` takes a file path).
    - Review the local file against the template before calling `gh`.
 3. Fill in the required sections with concrete information.
-   - **What is changed, added or deleted? (Required)** — describe what changed and why in clear, specific language. Do not leave this blank or fill it with a generic placeholder.
-   - **Which TiDB version(s) do your changes apply to? (Required)** — check at least one version checkbox. Follow the affected-version rules in `.ai/shared/repo-conventions.md`:
+   - **What is changed, added or deleted? (Required)**: describe what changed and why in clear, specific language. Do not leave this blank or fill it with a generic placeholder.
+   - **Which TiDB version(s) do your changes apply to? (Required)**: check at least one version checkbox. Follow the affected-version rules in `.ai/shared/repo-conventions.md`:
      - Default to `master` only for general improvements, wording fixes, missing-content additions, and corrections not tied to a specific released behavior.
      - Check the affected release branch(es) together with `master` when the change involves version-specific behavior, compatibility changes, changed defaults, or fixes in published docs.
-   - **What is the related PR or file link(s)?** — fill in the translation source link under `This PR is translated from:` when the PR is a translation from `docs-cn`. Fill in other reference links such as product PRs, issues, or related doc PRs under `Other reference link(s):`.
-   - **Do your changes match any of the following descriptions?** — check all that apply. If the change needs different wording on another branch, check `Need modification after applied to another branch` and comment `/label version-specific-changes-required`.
+   - **What is the related PR or file link(s)?**: fill in the translation source link under `This PR is translated from:` when the PR is a translation from `docs-cn`. Fill in other reference links such as product PRs, issues, or related doc PRs under `Other reference link(s):`.
+   - **Do your changes match any of the following descriptions?**: check all that apply. If the change needs different wording on another branch, check `Need modification after applied to another branch` and comment `/label version-specific-changes-required`.
 4. Choose the correct base branch.
    - Default to `master` for most documentation PRs.
    - Use `release-8.5` for TiDB Cloud documentation changes (see `.ai/shared/repo-conventions.md` for TiDB Cloud conventions).
@@ -34,8 +31,6 @@ Before changing a PR body, read `.github/pull_request_template.md`.
    - Safe targets: the description text under "What is changed, added or deleted?", the version checkboxes, the related-link fields, and the description checkboxes.
    - Do not rename headings, reorder sections, or rewrite the template wholesale.
 6. Preserve hidden HTML comments exactly.
-   - Keep `<!--Thanks for your contribution to TiDB documentation. Please answer the following questions.-->` unchanged.
-   - Keep the doc-template reference comment block (`<!-- We provide several doc templates ... -->`) unchanged.
    - Keep `<!--Tell us what you did and why.-->` unchanged.
    - Keep `<!-- Fill in "x" in [] to tick the checkbox below.-->` unchanged.
    - Keep `<!--Reference link(s) will help reviewers review your PR quickly.-->` unchanged.
@@ -65,12 +60,12 @@ The version checkboxes in the PR template follow a specific order from newest to
 - When a change applies to multiple versions, prefer a single PR on the latest applicable branch and use cherry-pick labels for remaining maintained versions.
 - Cherry-pick labels follow the pattern `needs-cherry-pick-release-X.Y` (e.g. `needs-cherry-pick-release-8.5`, `needs-cherry-pick-release-7.5`). There is also `needs-cherry-pick-master` for cherry-picks to master.
 - If branch-specific wording differences are expected, check `Need modification after applied to another branch` and add the `requires-version-specific-changes` label so cherry-pick reviewers know follow-up edits are required.
-- Use the repository's cherry-pick label workflow; do not invent a custom multi-branch process.
+- Use the repository's cherry-pick label workflow. Do not invent a custom multi-branch process.
 - Common non-cherry-pick labels for PRs:
-  - `type/bugfix`, `type/enhancement`, `type/refactor`, `type/compatibility-or-feature-change` for change type.
-  - `area/*` labels (e.g. `area/tidb-cloud`, `area/planner`, `area/br`) for the documentation area.
-  - `translation/from-docs-cn` when the PR is translated from a `docs-cn` PR.
-  - `translation/welcome` to invite community translation; `translation/no-need` when translation is not needed.
+    - `type/bugfix`, `type/enhancement`, `type/refactor`, `type/compatibility-or-feature-change` for change type.
+    - `area/*` labels (e.g. `area/tidb-cloud`, `area/planner`, `area/br`) for the documentation area.
+    - `translation/from-docs-cn` when the PR is translated from a `docs-cn` PR.
+    - `translation/welcome` to invite community translation; `translation/no-need` when translation is not needed.
 
 ## Quick Checks
 
@@ -78,7 +73,6 @@ The version checkboxes in the PR template follow a specific order from newest to
 - At least one version checkbox is checked under "Which TiDB version(s) do your changes apply to? (Required)".
 - The version checkbox section preserves the template's canonical version list and order.
 - The "Tips for choosing the affected version(s)" paragraph and the `CONTRIBUTING.md` link are present between the version heading and the checkboxes.
-- All hidden HTML comments from the original template are still present and unmodified (there are six distinct comment blocks — verify none are missing).
 - The related-link fields (`This PR is translated from:` and `Other reference link(s):`) are present, even if left at their default values.
 - The "Do your changes match any of the following descriptions?" section is present with its checkboxes intact.
 - The first-time contributors' checklist is either correctly filled in or removed entirely as instructed.
