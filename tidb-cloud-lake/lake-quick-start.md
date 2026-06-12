@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Lake Quick Start
-summary: Get started with TiDB Cloud Lake in three steps — sign up, initialize TiDB Cloud Lake, and explore your workspace.
+summary: Get started with TiDB Cloud Lake in three steps — sign up, initialize your lake, and explore your workspace.
 ---
 
 # TiDB Cloud Lake Quick Start
