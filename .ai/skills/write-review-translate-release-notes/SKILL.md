@@ -1,22 +1,71 @@
 ---
 name: release-notes
-description: Write, review, revise, and translate TiDB release notes for the Feature details/Features, Compatibility changes, Improvements, and Bug fixes sections in English and Chinese. Use this skill when working with release note entries, aligning English and Chinese content, auditing `release-X.X.X.md` files, or editing files under `docs/releases/` or `docs-cn/releases/`.
+description: Evaluate whether a change needs a release note. If yes, write, review, revise, or translate TiDB release note entries for the features, compatibility changes, improvements, and bug fixes sections. Use this skill when triaging PRs for release-note relevance, working with release note entries, aligning English and Chinese content, auditing `release-X.X.X.md` files, or editing files under `docs/releases/` or `docs-cn/releases/`.
 ---
 
 # TiDB Release Notes
 
-When you write, review, or translate a release note entry (including feature descriptions, compatibility changes, improvements, and bug fixes), use this skill to load the right references, apply the correct patterns, and produce output that matches the published format in `releases/` (`pingcap/docs` for English, `pingcap/docs-cn` for Chinese) for v6.1.0 and later.
+When you evaluate whether a change needs a release note, write, review, or translate a release note entry (including feature descriptions, compatibility changes, improvements, and bug fixes), use this skill to load the right references, apply the correct patterns, and produce output that matches the published format in `releases/` (`pingcap/docs` for English, `pingcap/docs-cn` for Chinese) for v6.1.0 and later.
 
 ## When to use this skill
 
 Use this skill when the task involves any of the following:
 
+- **Evaluating whether a change needs a release note** based on a GitHub PR, issue, or set of changes — and returning a `Release note is not needed: <reason>` verdict when it does not
 - **Writing a new feature description** for the Feature details or Features section based on a GitHub PR, issue description, or product brief
 - **Writing a new entry** for the Compatibility changes, Improvements, or Bug fixes section based on a GitHub PR or issue description
 - **Reviewing or revising** an existing English or Chinese release note entry or section, such as correcting the structure, tightening the description, or fixing style issues
 - **Translating** an entry between English and Chinese, including updating document anchor suffixes and verifying bilingual alignment
 
 This skill applies to the recurring sections in every `release-X.X.X.md` file: Feature details / Features, Compatibility changes, Improvements, and Bug fixes.
+
+## Determine whether a change needs a release note
+
+Not every PR or change warrants a release note. Before writing, determine whether the change is visible to TiDB users or operators.
+
+### User-visible changes (write a release note)
+
+- Bug fixes that change query results, upgrade behavior, privilege checks, error messages, or compatibility
+- New features, new SQL syntax or function support, or new configuration options
+- Meaningful performance improvements observable in common operations
+- Behavior changes that affect upgrade paths, tooling integration, or operational workflows
+- Default value changes for system variables or configuration parameters
+
+### Internal-only changes (no release note needed)
+
+- Test-only changes: new test cases, flaky test fixes, test infrastructure updates
+- Pure refactors or internal data-structure changes with no user-observable effect
+- Added or improved debug/internal logs that do not surface in user-facing interfaces
+- Internal CI/CD pipeline changes or developer workflow changes
+- Code comments or source-code-only documentation changes (not user-facing docs)
+
+### Borderline cases
+
+If a PR is mostly internal but the outcome is user-visible, write a release note that describes the outcome and omit the implementation details. If the only user-facing effect is indirect or speculative, lean toward returning `Release note is not needed: <reason>`.
+
+### Return a "no release note needed" verdict
+
+When a change does not need a release note, return:
+
+```
+Release note is not needed: <reason>
+```
+
+Use a short reason. Examples:
+
+- `Release note is not needed: test-only change`
+- `Release note is not needed: internal refactor, no user-visible effect`
+- `Release note is not needed: flaky test fix`
+- `Release note is not needed: added internal debug logging`
+
+### Handle cherry-pick and backport PRs
+
+Cherry-pick or backport PRs sometimes contain sparse descriptions. When evaluating one:
+
+1. Read the backport PR first.
+2. If the backport PR body omits details, follow the link to the original upstream PR and its linked issues.
+3. Base the release note on the actual behavior change described in the original PR or issue, not the cherry-pick mechanics.
+4. Ignore cherry-pick metadata (such as `cherry-pick from #XXXXX`) in the release note text.
 
 ## Which reference to load
 
