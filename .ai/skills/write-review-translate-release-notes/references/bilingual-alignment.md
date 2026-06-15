@@ -14,7 +14,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 ### Must-be-identical items (no translation needed)
 
 - Issue/PR numbers and URLs: `[#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN)`
-- Contributor handles and URLs: `@[contributor](https://github.com/contributor)`
+- PR author handles and URLs: `@[pr_author](https://github.com/pr_author)` (the author of the PR that resolves the issue, not the issue author)
 - Inline code spans: `` `variable_name` ``, `` `COMMAND` ``, `` `--flag` ``
 - Component names in section headers: `TiDB`, `TiKV`, `PD`, `TiFlash`, `BR`, `TiCDC`, `TiDB Lightning`
 - Version numbers: `v7.5.0`, `v8.1.0`
@@ -59,7 +59,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 2. Check the opening pattern against section rules
 3. Verify trailing punctuation: single-line entries (improvements, bug fixes) must not end with `.` / `。`; feature body paragraphs use normal sentence punctuation
 4. Verify inline code spans for all technical terms: variables, configs, SQL keywords/functions, error messages
-5. Verify the issue link and contributor link at the end of the title line
+5. Verify the issue link and PR author link at the end of the title line
 6. For Chinese entries: verify `修复` as the opening verb for bug fixes, an approved opening verb for improvements, or the correct verb mapping for feature title lines (see [feature-description.md](feature-description.md))
 
 ### Writing a new entry from a PR or issue description

@@ -126,15 +126,17 @@ Use backticks for:
 
 Do not wrap product or component names in prose (TiDB, TiKV, PD, TiFlash, TiCDC), or generic nouns such as "query," "table," or "index," unless referring to a specific named object.
 
-### Issue and contributor links
+### Issue and PR author links
 
-Every entry (feature, improvement, or bug fix) ends with issue link(s) and contributor link(s) on the title line:
+Every entry (feature, improvement, or bug fix) ends with issue link(s) and PR author link(s) on the title line:
 
 ```
-[#NNNNN](https://github.com/org/repo/issues/NNNNN) @[contributor](https://github.com/contributor)
+[#NNNNN](https://github.com/org/repo/issues/NNNNN) @[pr_author](https://github.com/pr_author)
 ```
 
-For multiple issues: `[#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) [#MMMMM](https://github.com/pingcap/tidb/issues/MMMMM) @[contributor](https://github.com/contributor)`
+The `@` link is the **author of the PR that resolves the issue**, not the issue author. When an issue has linked PRs, find the PR author(s) from those PRs.
+
+For multiple issues: `[#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) [#MMMMM](https://github.com/pingcap/tidb/issues/MMMMM) @[pr_author](https://github.com/pr_author)`
 
 ### No trailing period on single-line entries
 
