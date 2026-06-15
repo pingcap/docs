@@ -1,6 +1,6 @@
 # Improvements
 
-Rules for the `## Improvements` / `## 改进提升` section. The cross-cutting rules in SKILL.md (user perspective, inline-code conventions, issue and contributor links, and no trailing period on single-line entries) also apply here.
+Rules for the `## Improvements` / `## 改进提升` section. The cross-cutting rules in SKILL.md (user perspective, inline-code conventions, issue and PR author links, and no trailing period on single-line entries) also apply here. In templates below, `@[contributor]` means the PR author who resolved the issue, not the issue author.
 
 ## Contents
 

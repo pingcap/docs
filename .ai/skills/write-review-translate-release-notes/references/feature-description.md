@@ -4,13 +4,14 @@ Use this reference as a decision framework to write one TiDB release note featur
 
 A quality feature description must answer four core questions for the reader:
 
-1. **What is this feature?** — Name the capability in user-facing terms.
-2. **What value does it provide?** — State the concrete benefit: performance, stability, security, operability, compatibility, or a new workflow that was previously impossible.
-3. **Is there anything to pay attention to?** — Call out enablement steps, maturity state, limitations, caveats, or benchmark conditions when they exist.
+1. **What is this feature?** — Describe the feature in user-facing terms, focusing on what is newly available or modified (avoid internal implementation details).
+2. **When users use this feature?** — Describe the specific user scenario or condition where this feature applies or is triggered.
+3. **What value does it provide?** — State the value in terms of what "you" (the user) can now do, such as "you can ...", "... lets you ...", "... enables you to ...". Ground the benefit in a concrete outcome (performance, stability, security, operability, compatibility, or a workflow that was previously impossible) rather than describing what the system does internally.
+4. **Is there anything to pay attention to?** — Call out enablement steps, maturity state, limitations, caveats, or benchmark conditions when they exist.
 
 Different features need different narratives. A GA transition reads differently from a brand-new experimental feature; a performance optimization with benchmark numbers reads differently from a small SQL compatibility fix. This reference helps you diagnose the feature first, then select the right narrative shape and depth.
 
-The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user perspective, inline-code formatting, issue and contributor links, and component names.
+The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user perspective, inline-code formatting, issue and PR author links, and component names.
 
 ## Quick workflow
 
@@ -80,7 +81,7 @@ These shapes can combine. For example, a GA transition that bundles multiple ben
 
 Every entry needs at least:
 
-- Title line with issue and contributor links
+- Title line with issue links and PR author links
 - One or two paragraphs that state what the feature is and the user value
 - Documentation link
 
@@ -102,19 +103,19 @@ The title line should name the capability and, when useful, include the main ben
 Common title patterns:
 
 ```markdown
-* Support <capability> [#NNNNN](...) @[contributor](...)
-* Support <capability> to improve <benefit> [#NNNNN](...) @[contributor](...)
-* Introduce <feature or mechanism> for <benefit> [#NNNNN](...) @[contributor](...)
-* Add <field, variable, parameter, statement, or identifier> [#NNNNN](...) @[contributor](...)
-* Improve <workflow or capability>, with <sourced metric or concrete benefit> [#NNNNN](...) @[contributor](...)
-* <Feature name> becomes generally available (GA) [#NNNNN](...) @[contributor](...)
+* Support <capability> [#NNNNN](...) @[pr_author](...)
+* Support <capability> to improve <benefit> [#NNNNN](...) @[pr_author](...)
+* Introduce <feature or mechanism> for <benefit> [#NNNNN](...) @[pr_author](...)
+* Add <field, variable, parameter, statement, or identifier> [#NNNNN](...) @[pr_author](...)
+* Improve <workflow or capability>, with <sourced metric or concrete benefit> [#NNNNN](...) @[pr_author](...)
+* <Feature name> becomes generally available (GA) [#NNNNN](...) @[pr_author](...)
 ```
 
 Title rules:
 
 - Use the same bullet marker as the surrounding release file. Existing feature entries commonly use `*`; some patch release files use `-`.
 - Do not end the title line with `.` or `。`.
-- Include all relevant issue links and contributor links.
+- Include all relevant issue links and PR author links. The `@` link is the author of the PR that resolves the issue, not the issue author.
 - Use `(experimental)` for experimental features.
 - Use `(GA)` when a feature becomes generally available.
 - Keep the title concise. Move explanation, conditions, and caveats into the body.
@@ -346,7 +347,7 @@ Shape and structure:
 
 - [ ] The narrative shape fits the feature. A simple feature is not padded with unnecessary context; a complex feature is not compressed into one paragraph.
 - [ ] The entry does not repeat the same opening pattern as neighboring entries in the target file.
-- [ ] The title line is concise, has issue and contributor links, and has no trailing period.
+- [ ] The title line is concise, has issue links and PR author links, and has no trailing period.
 - [ ] Performance claims include sourced metrics and test conditions, not vague adjectives.
 
 Formatting and accuracy:
