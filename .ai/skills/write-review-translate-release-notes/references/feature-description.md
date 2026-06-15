@@ -1,8 +1,14 @@
 # Feature descriptions
 
-Use this reference to write one TiDB release note feature description from PM or engineering input, such as a short feature brief, GitHub issue links, PR links, feature specification, benchmark results, and documentation links.
+Use this reference as a decision framework to write one TiDB release note feature description from PM or engineering input, such as a short feature brief, GitHub issue links, PR links, feature specification, benchmark results, and documentation links.
 
-The goal is not to summarize implementation work. The goal is to produce a user-facing entry that matches the `## Feature details` or `## Features` style in current TiDB release notes: clear title, concrete user problem, new capability in this version, user value, and a documentation link.
+Every feature description must answer three core questions for the reader:
+
+1. **What is this feature?** — Name the capability in user-facing terms.
+2. **What value does it provide?** — State the concrete benefit: performance, stability, security, operability, compatibility, or a new workflow that was previously impossible.
+3. **Is there anything to pay attention to?** — Call out enablement steps, maturity state, limitations, caveats, or benchmark conditions when they exist.
+
+Different features need different narratives. A GA transition reads differently from a brand-new experimental feature; a performance optimization with benchmark numbers reads differently from a small SQL compatibility fix. This reference helps you diagnose the feature first, then select the right narrative shape and depth.
 
 The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user perspective, inline-code formatting, issue and contributor links, and component names.
 
@@ -10,14 +16,15 @@ The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user p
 
 1. Read the supplied issue, PR, feature brief, and related documentation.
 2. Extract only user-facing facts:
+    - What is the feature, in one user-facing sentence?
     - What problem, limitation, or scenario does this feature address?
-    - What can users do starting from this version?
+    - What can users do in this version?
     - How do users enable, configure, or use it?
     - What benefit does it bring, such as performance, scalability, stability, compatibility, security, operability, or observability?
     - What maturity state applies: GA, experimental, or no maturity tag?
     - What caveats, unsupported cases, or benchmark conditions must be stated?
 3. Decide whether the change belongs in a feature entry. If it is a small behavior improvement, bug fix, or internal refactor with no new user-facing capability, use the Improvements or Bug fixes reference instead.
-4. Draft the entry using the standard structure: title line, context paragraph, new behavior paragraph, optional details, and documentation link.
+4. Diagnose the feature using the dimensions in [Diagnose the feature, then choose the narrative shape](#diagnose-the-feature-then-choose-the-narrative-shape). Select a narrative shape and draft the entry. Make sure the body answers the three core questions: what is the feature, what value it provides, and what users need to pay attention to.
 5. Check every technical claim against the source input. Do not invent defaults, limits, metrics, maturity state, or documentation links.
 
 ## Section placement in the release note file
@@ -43,29 +50,50 @@ For Chinese heading mappings, see [SKILL.md](../SKILL.md).
 
 When writing the description for a feature, consider which category the feature belongs to and use the appropriate heading.
 
-## Entry shape
+## Diagnose the feature, then choose the narrative shape
 
-Prefer this shape for a complete feature description:
+Before writing, diagnose the feature along these dimensions:
 
-```markdown
-* <Feature title> <maturity tag if needed> [#NNNNN](https://github.com/org/repo/issues/NNNNN) @[contributor](https://github.com/contributor)
+| Dimension | Questions to ask |
+|-----------|-----------------|
+| Complexity | Can a user understand this in one sentence, or does it need background context? |
+| Novelty | Is this entirely new, or does it change or improve something users already know? |
+| Maturity transition | Is this a new experimental feature, a new GA feature, or a GA promotion from experimental? |
+| Quantifiable impact | Are there sourced benchmark numbers, metrics, or concrete magnitudes? |
+| User action | Must users enable, configure, migrate, or opt in? Or is it automatic? |
+| Scope | Is this one capability, or does it bundle multiple sub-capabilities or benefits? |
 
-    Before vX.Y.Z, <describe the user-facing limitation, pain point, or scenario>.
+Use the diagnosis to select a narrative shape:
 
-    Starting from vX.Y.Z, <describe the new capability, how users use or configure it, and the user benefit>.
+| Signal | Recommended shape | What it prioritizes |
+|--------|-------------------|---------------------|
+| Easy to understand, no historical baggage | **Direct capability** | Lead with the capability and user value. Skip the context paragraph. |
+| Removes a known limitation or changes an established workflow | **Before-and-after** | Start with the previous limitation, then the new behavior. |
+| Value is hard to see without the user's environment or pain point | **Scenario-first** | Open with the user scenario, then introduce the capability as the solution. |
+| One feature bundles multiple operations, modes, or benefits | **Sub-feature list** | Short intro, then a bulleted list of what is included or what benefits it delivers. |
+| Sourced benchmark metrics and test conditions are available | **Benchmark-backed** | Explain the optimization strategy, then present a table with metrics and test environment. |
+| Experimental → GA transition with version history | **GA transition** | Trace the version history briefly, state the GA behavior, mention default changes. |
 
-    <Optional details: caveats, limitations, examples, configuration notes, benchmark table, or sub-feature list.>
+These shapes can combine. A before-and-after feature with benchmark numbers uses both the context paragraph and a benchmark table. A GA transition that bundles multiple benefits can use a sub-feature list inside the GA transition narrative.
 
-    For more information, see [documentation](/path-to-doc.md).
-```
+### Minimum viable entry
 
-Minimum viable entry:
+Every entry needs at least:
 
-- Title line
-- One paragraph that states the new behavior and user value
+- Title line with issue and contributor links
+- One paragraph that states what the feature is and the user value
 - Documentation link
 
-Add a before paragraph when the feature solves a known limitation, changes an existing workflow, or needs motivation to be understandable.
+Add more when the feature demands it:
+
+- **Context paragraph**: when the feature solves a known limitation, changes an established workflow, or is hard to understand without background.
+- **Enablement or configuration details**: when users must opt in, set a variable, or change a config item.
+- **Maturity state**: when the feature is experimental or transitions to GA.
+- **Caveats and limitations**: when there are unsupported cases, disabled-by-default behavior, or compatibility notes.
+- **Benchmark table**: when sourced metrics and test conditions are available.
+- **Sub-feature list**: when one entry covers multiple operations or benefits.
+
+Do not pad entries with optional sections just because they exist. A short, clear entry that answers the three core questions is better than a long entry that adds context, caveats, and enablement details the feature does not need.
 
 ## Title line
 
@@ -93,40 +121,69 @@ Title rules:
 
 ## Body paragraphs
 
+Opening patterns listed below are examples, not required templates. Vary the openings across entries in the same release file to avoid monotony. Choose based on the narrative shape and what the reader needs first.
+
+### How each shape uses the body
+
+**Direct capability** — Skip the context paragraph. Open with the capability and its value. Add configuration or enablement details if users must take action.
+
+> Example flow: capability sentence → user value → enablement (if needed) → doc link.
+
+**Before-and-after** — Start with a context paragraph describing the previous limitation, then a new behavior paragraph with the capability and benefit.
+
+> Example flow: previous limitation → new capability → user value → enablement (if needed) → doc link.
+
+**Scenario-first** — Start with the user scenario or pain point (without necessarily mentioning a version). Then introduce the capability as the solution.
+
+> Example flow: user scenario → new capability as solution → user value → doc link.
+
+**Sub-feature list** — Start with a short intro sentence, then list the sub-capabilities or benefits. Each list item should be self-explanatory.
+
+> Example flow: intro sentence → bulleted list → doc link.
+
+**Benchmark-backed** — Explain the optimization strategy, then present a table with metrics, test environment, and conditions. State conditions and caveats that scope the numbers.
+
+> Example flow: optimization strategy → benchmark table → conditions and caveats → doc link.
+
+**GA transition** — Briefly trace the version history (when introduced as experimental, what changed). State the GA behavior and whether the default changed.
+
+> Example flow: version history sentence → GA behavior → default or enablement change → doc link.
+
 ### Context paragraph
 
-Use the context paragraph to explain why the feature matters. It usually describes the previous limitation or user scenario.
+Add a context paragraph only when it helps users understand the value, risk, or reason for the feature. Skip it when the feature is self-explanatory.
 
 Common English openings:
 
 - `Before vX.Y.Z, ...`
-- `In TiDB versions earlier than vX.Y.Z, ...`
 - `In earlier versions, ...`
-- `<Scenario or limitation sentence without a version prefix>.`
+- `When <scenario>, ...` (scenario-first, no version prefix)
+- `In a TiDB cluster with <condition>, ...` (scenario-first, environment-based)
 
 Common Chinese openings:
 
 - `在 vX.Y.Z 之前，……`
-- `在 vX.Y.Z 之前的版本中，……`
 - `在此前版本中，……`
+- `当 <场景> 时，……`
 
 ### New behavior paragraph
 
-Use the new behavior paragraph to explain what changes in this version and what users gain.
+Use the new behavior paragraph to explain what changes in this version and what users gain. For direct capability features, this is the first and possibly only paragraph.
 
 Common English openings:
 
 - `Starting from vX.Y.Z, ...`
 - `In vX.Y.Z, ...`
 - `TiDB vX.Y.Z introduces ...`
-- `TiDB vX.Y.Z optimizes ...`
+- `The <feature> becomes generally available (GA) in vX.Y.Z.`
+- `<Feature noun phrase> <verb> ...` (no version prefix, when the capability is the natural lead)
 
 Common Chinese openings:
 
 - `从 vX.Y.Z 开始，……`
 - `在 vX.Y.Z 中，……`
 - `TiDB vX.Y.Z 引入……`
-- `TiDB vX.Y.Z 优化了……`
+- `<Feature 名词短语> <动词> ……`
 
 The paragraph should answer:
 
@@ -192,7 +249,7 @@ Do not infer a maturity state from the PR alone. Use only information provided b
 ## Style rules
 
 - Write for users, not implementers.
-- Prefer `you can ...`, `TiDB supports ...`, and `Starting from vX.Y.Z, ...`.
+- Use version-based openings such as `Starting from vX.Y.Z, ...` when the timing matters.
 - State the capability or benefit before implementation details.
 - Use present tense for product behavior.
 - Use active voice when natural.
@@ -210,7 +267,11 @@ Chinese-specific rules:
 
 ## Examples
 
-### Standard before-and-after feature
+Each example is annotated with its narrative shape so you can see why the shape was chosen and how it structures the entry differently.
+
+### Before-and-after: feature removes a known limitation
+
+Why this shape: users already know TiDB has privilege control at the database and table levels, so the previous limitation provides context that makes the new column-level capability meaningful.
 
 ```markdown
 * Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678)
@@ -222,7 +283,77 @@ Chinese-specific rules:
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 ```
 
-### Experimental feature with enablement
+### Direct capability: feature is self-explanatory, no historical context needed
+
+Why this shape: "foreign keys" is a well-known database concept. Users do not need a "before" paragraph to understand the value. The entry leads with the capability and goes straight to the benefit.
+
+```markdown
+* Support foreign keys (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520)
+
+    The foreign key feature becomes generally available (GA) in v8.5.0. Foreign key constraints help ensure data consistency and integrity. You can establish foreign key relationships between tables, with support for cascading updates and deletions, simplifying data management for applications with complex data relationships.
+
+    For more information, see [documentation](/foreign-key.md).
+```
+
+### Scenario-first: value emerges from the user's environment
+
+Why this shape: the feature (storage engine identifiers in logs) only makes sense when the reader understands the diagnostic scenario. Opening with the scenario makes the new fields feel like a natural answer.
+
+```markdown
+* Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
+
+    When both TiKV and TiFlash are deployed in a cluster, you might need to filter SQL statements by storage engine during database diagnostics and performance tuning. To support this workflow, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
+
+    The new fields help you identify whether a SQL statement accesses TiKV or TiFlash, making it easier to locate workload patterns and diagnose performance issues.
+
+    For more information, see [Statement Summary Tables](/statement-summary-tables.md) and [Identify Slow Queries](/identify-slow-queries.md).
+```
+
+### Sub-feature list: one feature with multiple user-facing benefits
+
+Why this shape: log backup compaction has three distinct benefits worth calling out. A bulleted list makes each benefit scannable instead of burying them in prose.
+
+```markdown
+* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen)
+
+    TiDB introduces offline compaction for log backups, which converts unstructured log backup data into structured SST files. This feature provides the following benefits:
+
+    - Improved recovery performance: SST files can be imported into the cluster more quickly.
+    - Reduced storage space consumption: redundant data is removed during compaction.
+    - Reduced impact on applications: Recovery Point Objectives (RPOs) can be maintained with less frequent full snapshot backups.
+
+    For more information, see [documentation](/br/br-compact-log-backup.md).
+```
+
+### Benchmark-backed: performance optimization with sourced metrics
+
+Why this shape: the optimization has dramatic and quantifiable impact, and the numbers only make sense with test conditions. The benchmark table is the core evidence, framed by the optimization strategy and caveats.
+
+```markdown
+* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016), @[tangenta](https://github.com/tangenta), @[fzzf678](https://github.com/fzzf678)
+
+    The optimization strategies are as follows:
+
+    - In strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion.
+    - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible.
+    - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
+
+  The following table shows example performance improvements based on benchmark tests on a table with 114 GiB of data and 600 million rows. The test cluster consists of 3 TiDB nodes, 6 TiKV nodes, and 1 PD node. All nodes are configured with 16 CPU cores and 32 GiB of memory.
+
+    | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
+    |----------|----------------|---------------------|--------------------|--------------------------|
+    | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
+    | Indexed column | `BIGINT → INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
+    | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
+
+    Note that the preceding test results are based on the condition that no data truncation occurs during the DDL execution. The optimizations do not apply to conversions between signed and unsigned integer types, conversions between character sets, or tables with TiFlash replicas.
+
+    For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
+```
+
+### Experimental feature with enablement details
+
+Why this shape: this is a new experimental feature that is disabled by default. Users need to know how to enable it and what to expect. The entry combines direct capability with explicit enablement and caveat information.
 
 ```markdown
 * Support table-level data affinity to improve query performance (experimental) [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024)
@@ -234,7 +365,9 @@ Chinese-specific rules:
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/table-affinity).
 ```
 
-### GA transition
+### GA transition: experimental feature promoted to GA
+
+Why this shape: users who enabled this feature experimentally need to know the version history and what changes with GA. Users who are new need to understand why the feature exists.
 
 ```markdown
 * Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang)
@@ -246,13 +379,38 @@ Chinese-specific rules:
     For more information, see [documentation](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service).
 ```
 
+### Concise capability: focused feature that needs minimal explanation
+
+Why this shape: the feature (graceful shutdown) is straightforward and focused. No historical pain point needs explaining; the entry just states the new behavior, the configurable timeout, and the edge cases.
+
+```markdown
+* Support gracefully shutting down TiFlash [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi)
+
+    When shutting down a TiFlash server, TiFlash now lets currently running MPP tasks continue for a configurable timeout duration, while rejecting new MPP task requests. The default timeout duration is 600 seconds, and you can adjust it using the `flash.graceful_wait_shutdown_timeout` configuration item.
+
+    - If all running MPP tasks finish before the timeout duration expires, TiFlash shuts down immediately.
+    - If there are still unfinished MPP tasks when the timeout duration expires, TiFlash shuts down forcibly.
+
+  For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854).
+```
+
 ## Review checklist
 
-- The entry describes user-facing capability and value, not only implementation work.
-- The title line is concise, has issue and contributor links, and has no trailing period.
-- Existing limitations are explained when needed.
-- Enablement, configuration, caveats, and limitations are included when relevant.
-- Performance claims include metrics and test conditions when available.
-- Variables, config parameters, SQL statements, error messages, literal values, and links use the formatting rules in [SKILL.md](../SKILL.md).
-- The entry ends with a valid documentation link or an explicit placeholder for follow-up.
-- The wording follows nearby release note entries in the target file.
+Three core questions (must all be answered):
+
+- [ ] **What is this feature?** — The entry clearly names the capability in user-facing terms.
+- [ ] **What value does it provide?** — The entry states a concrete benefit, not just what changed technically.
+- [ ] **Anything to pay attention to?** — Enablement, maturity state, caveats, and limitations are included when they exist; omitted when they do not.
+
+Shape and structure:
+
+- [ ] The narrative shape fits the feature. A simple feature is not padded with unnecessary context; a complex feature is not compressed into one paragraph.
+- [ ] The entry does not repeat the same opening pattern as neighboring entries in the target file.
+- [ ] The title line is concise, has issue and contributor links, and has no trailing period.
+- [ ] Performance claims include sourced metrics and test conditions, not vague adjectives.
+
+Formatting and accuracy:
+
+- [ ] Variables, config parameters, SQL statements, error messages, literal values, and links use the formatting rules in [SKILL.md](../SKILL.md).
+- [ ] Every technical claim is traceable to the source input.
+- [ ] The entry ends with a valid documentation link or an explicit placeholder for follow-up.
