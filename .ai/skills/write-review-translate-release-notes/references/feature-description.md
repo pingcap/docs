@@ -11,7 +11,7 @@ A quality feature description must answer four core questions for the reader:
 
 Different features need different narratives. A GA transition reads differently from a brand-new experimental feature; a performance optimization with benchmark numbers reads differently from a small SQL compatibility fix. This reference helps you diagnose the feature first, then select the right narrative shape and depth.
 
-The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user perspective, inline-code formatting, issue and PR author links, and component names.
+The cross-cutting rules in [SKILL.md](/ai/skills/write-review-translate-release-notes/SKILL.md) also apply, especially user perspective, inline-code formatting, issue and PR author links, and component names.
 
 ## Quick workflow
 
@@ -46,7 +46,7 @@ Use level-3 category headings when the release groups features by area. Common c
 - `### Security`
 - `### Data Migration`
 
-For Chinese heading mappings, see [SKILL.md](../SKILL.md).
+For Chinese heading mappings, see [SKILL.md](/ai/skills/write-review-translate-release-notes/SKILL.md).
 
 When writing the description for a feature, consider which category the feature belongs to and use the appropriate heading.
 
@@ -205,7 +205,7 @@ Do not infer a maturity state from the PR alone. Use only information provided b
 
 ## Style rules
 
-These rules supplement the cross-cutting rules in [SKILL.md](../SKILL.md).
+These rules supplement the cross-cutting rules in [SKILL.md](/ai/skills/write-review-translate-release-notes/SKILL.md).
 
 - Express value in terms of what "you" can do: prefer `you can ...`, `... lets you ...`, `... enables you to ...` over describing what the system does internally. The reader should see what changes for them, not just what the code does.
 - State the capability or benefit before implementation details.
@@ -352,6 +352,6 @@ Shape and structure:
 
 Formatting and accuracy:
 
-- [ ] Variables, config parameters, SQL statements, error messages, literal values, and links use the formatting rules in [SKILL.md](../SKILL.md).
+- [ ] Variables, config parameters, SQL statements, error messages, literal values, and links use the formatting rules in [SKILL.md](/ai/skills/write-review-translate-release-notes/SKILL.md).
 - [ ] Every technical claim is traceable to the source input.
 - [ ] The entry ends with a valid documentation link or an explicit placeholder for follow-up.
