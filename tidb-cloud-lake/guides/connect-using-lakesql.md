@@ -90,7 +90,7 @@ Github: https://github.com/tidbcloud/lakesql
 
 ### Homebrew (for macOS)
 
-LakeSQL can be easily installed on macOS using Homebrew with a simple command:
+You can easily install LakeSQL on macOS using Homebrew with a simple command:
 
 ```bash
 brew install tidbcloud/homebrew-tap/lakesql
