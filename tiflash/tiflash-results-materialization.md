@@ -127,4 +127,3 @@ The preceding example materializes the daily analysis results and saves them to 
     * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
     * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
     * Determine the concurrency based on testing results and specific circumstances.
-
