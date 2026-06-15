@@ -11,9 +11,9 @@ Starting from v6.5.0, TiDB supports saving TiFlash query results in a table, tha
 
 > **Note:**
 >
-> By default ([`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)), the optimizer intelligently decides whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. 
+> By default ([`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)), the optimizer intelligently decides whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica.
 >
-> - If the [SQL mode](/sql-mode.md) of the current session is not strict (which means the `sql_mode` value does not contain `STRICT_TRANS_TABLES`' and `STRICT_ALL_TABLES`), the optimizer intelligently decides whether to push the `SELECT` subquery in `INSERT INTO SELECT` down to TiFlash based on the cost estimates of the TiFlash replica. In this mode, if you want to ignore the cost estimates of the optimizer and enforce that the queries are pushed down to TiFlash, you can set the [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) system variable to `ON`. 
+> - If the [SQL mode](/sql-mode.md) of the current session is not strict (which means the `sql_mode` value does not contain `STRICT_TRANS_TABLES`' and `STRICT_ALL_TABLES`), the optimizer intelligently decides whether to push the `SELECT` subquery in `INSERT INTO SELECT` down to TiFlash based on the cost estimates of the TiFlash replica. In this mode, if you want to ignore the cost estimates of the optimizer and enforce that the queries are pushed down to TiFlash, you can set the [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) system variable to `ON`.
 > - If the [SQL mode](/sql-mode.md) of the current session is strict (which means the `sql_mode` value contains either `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`), the `SELECT` subquery in `INSERT INTO SELECT` cannot be pushed down to TiFlash.
 
 The syntax of `INSERT INTO SELECT` is as follows.
@@ -48,35 +48,6 @@ SELECT app_name, country FROM t1;
 - Serving online applications with TiFlash
 
     The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result table to support highly concurrent online requests. The data in the result table can be updated in the background at a low frequency (for example, at an interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
-
-## Execution process
-
-* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server in the cluster, and then writes the results to the target table, which can have a TiFlash replica.
-* The execution of the `INSERT INTO SELECT` statement guarantees ACID properties.
-
-## Restrictions
-
-<CustomContent platform="tidb">
-
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
-
-    For more information, see [TiDB memory control](/configure-memory-usage.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
-
-    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
-
-</CustomContent>
-
-* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
-
-    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
-    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
-    * Determine the concurrency based on testing results and specific circumstances.
 
 ## Example
 
@@ -127,3 +98,33 @@ SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MON
 ```
 
 The preceding example materializes the daily analysis results and saves them to the daily result table, based on which the monthly data analysis is accelerated, thus improving data analysis efficiency.
+
+## Execution process
+
+* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server in the cluster, and then writes the results to the target table, which can have a TiFlash replica.
+* The execution of the `INSERT INTO SELECT` statement guarantees ACID properties.
+
+## Restrictions
+
+<CustomContent platform="tidb">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](/configure-memory-usage.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+
+</CustomContent>
+
+* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
+
+    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
+    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
+    * Determine the concurrency based on testing results and specific circumstances.
+

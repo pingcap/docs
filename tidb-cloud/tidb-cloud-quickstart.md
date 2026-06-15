@@ -36,7 +36,8 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
         > **Note**
         >
-        > Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
+        > - Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
+        > - TiDB Cloud is a fully managed service. The underlying cloud infrastructure is operated and managed by PingCAP. You do not have access to the underlying cloud account or infrastructure resources hosting your TiDB Cloud deployment.
 
         </CustomContent>
 
@@ -44,7 +45,8 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
         > **Note**
         >
-        > Currently, {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
+        > - Currently, {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
+        > - TiDB Cloud is a fully managed service. The underlying cloud infrastructure is operated and managed by PingCAP. You do not have access to the underlying cloud account or infrastructure resources hosting your TiDB Cloud deployment.
 
         </CustomContent>
 
@@ -94,18 +96,18 @@ For {{{ .starter }}} instances hosted on AWS, you can use the built-in AI-assist
     </div>
     </SimpleTab>
 
-After running the queries, you can immediately see the query logs and results at the bottom of the page. 
+After running the queries, you can immediately see the query logs and results at the bottom of the page.
 
 To let AI generate more SQL statements, you can type more instructions as shown in the following example:
 
 ```sql
 use test;
 
--- create a new table t with id and name 
+-- create a new table t with id and name
 CREATE TABLE
   `t` (`id` INT, `name` VARCHAR(255));
 
--- add 3 rows 
+-- add 3 rows
 INSERT INTO
   `t` (`id`, `name`)
 VALUES
@@ -135,3 +137,4 @@ TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets
 - For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (Beta)](/tidb-cloud/cli-reference.md).
