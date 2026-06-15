@@ -71,4 +71,4 @@ In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem unde
 
 > **Note:**
 >
-> The **copr-cache** panel is not available on {{{ .starter }}} and {{{ .essential }}} instances.
+> The **copr-cache** panel is currently unavailable for {{{ .starter }}} and {{{ .essential }}} instances.
