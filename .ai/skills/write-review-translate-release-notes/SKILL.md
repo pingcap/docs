@@ -11,7 +11,7 @@ When you evaluate whether a change needs a release note, write, review, or trans
 
 Use this skill when the task involves any of the following:
 
-- **Evaluating whether a change needs a release note** based on a GitHub PR, issue, or set of changes — and returning a `None(reason)` verdict when it does not
+- **Evaluating whether a change needs a release note** based on a GitHub PR, issue, or set of changes — and returning a `Release note is not needed: <reason>` verdict when it does not
 - **Writing a new feature description** for the Feature details or Features section based on a GitHub PR, issue description, or product brief
 - **Writing a new entry** for the Compatibility changes, Improvements, or Bug fixes section based on a GitHub PR or issue description
 - **Reviewing or revising** an existing English or Chinese release note entry or section, such as correcting the structure, tightening the description, or fixing style issues
@@ -41,7 +41,7 @@ Not every PR or change warrants a release note. Before writing, determine whethe
 
 ### Borderline cases
 
-If a PR is mostly internal but the outcome is user-visible, write a release note that describes the outcome and omit the implementation details. If the only user-facing effect is indirect or speculative, lean toward `None(reason)`.
+If a PR is mostly internal but the outcome is user-visible, write a release note that describes the outcome and omit the implementation details. If the only user-facing effect is indirect or speculative, lean toward returning `Release note is not needed: <reason>`.
 
 ### Return a "no release note needed" verdict
 
@@ -51,7 +51,7 @@ When a change does not need a release note, return:
 Release note is not needed: <reason>
 ```
 
-Use a short reason in parentheses. Examples:
+Use a short reason. Examples:
 
 - `Release note is not needed: test-only change`
 - `Release note is not needed: internal refactor, no user-visible effect`
@@ -65,7 +65,7 @@ Cherry-pick or backport PRs sometimes contain sparse descriptions. When evaluati
 1. Read the backport PR first.
 2. If the backport PR body omits details, follow the link to the original upstream PR and its linked issues.
 3. Base the release note on the actual behavior change described in the original PR or issue, not the cherry-pick mechanics.
-4. Ignore cherry-pick metadata (such as "cherry-pick from #XXXXX") in the release note text.
+4. Ignore cherry-pick metadata (such as `cherry-pick from #XXXXX`) in the release note text.
 
 ## Which reference to load
 
