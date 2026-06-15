@@ -2,7 +2,7 @@
 
 Use this reference as a decision framework to write one TiDB release note feature description from PM or engineering input, such as a short feature brief, GitHub issue links, PR links, feature specification, benchmark results, and documentation links.
 
-Every feature description must answer three core questions for the reader:
+A quality feature description must answer four core questions for the reader:
 
 1. **What is this feature?** — Name the capability in user-facing terms.
 2. **What value does it provide?** — State the concrete benefit: performance, stability, security, operability, compatibility, or a new workflow that was previously impossible.
@@ -16,9 +16,8 @@ The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user p
 
 1. Read the supplied issue, PR, feature brief, and related documentation.
 2. Extract only user-facing facts:
-    - What is the feature, in one user-facing sentence?
+    - What is the feature, and what can users do with it?
     - What problem, limitation, or scenario does this feature address?
-    - What can users do in this version?
     - How do users enable, configure, or use it?
     - What benefit does it bring, such as performance, scalability, stability, compatibility, security, operability, or observability?
     - What maturity state applies: GA, experimental, or no maturity tag?
@@ -71,20 +70,21 @@ Use the diagnosis to select a narrative shape:
 | Removes a known limitation or changes an established workflow | **Before-and-after** | Start with the previous limitation, then the new behavior. |
 | Value is hard to see without the user's environment or pain point | **Scenario-first** | Open with the user scenario, then introduce the capability as the solution. |
 | One feature bundles multiple operations, modes, or benefits | **Sub-feature list** | Short intro, then a bulleted list of what is included or what benefits it delivers. |
-| Sourced benchmark metrics and test conditions are available | **Benchmark-backed** | Explain the optimization strategy, then present a table with metrics and test environment. |
 | Experimental → GA transition with version history | **GA transition** | Trace the version history briefly, state the GA behavior, mention default changes. |
 
-These shapes can combine. A before-and-after feature with benchmark numbers uses both the context paragraph and a benchmark table. A GA transition that bundles multiple benefits can use a sub-feature list inside the GA transition narrative.
+These shapes can combine. For example, a GA transition that bundles multiple benefits can use a sub-feature list inside the GA transition narrative.
+
+**Benchmark modifier**: When sourced benchmark metrics and test conditions are available, add a benchmark table to whichever shape you chose. Explain the optimization strategy, present the table with metrics and test environment, and state conditions that scope the numbers. Benchmark data supplements the narrative shape; it does not replace it.
 
 ### Minimum viable entry
 
 Every entry needs at least:
 
 - Title line with issue and contributor links
-- One paragraph that states what the feature is and the user value
+- One or two paragraphs that state what the feature is and the user value
 - Documentation link
 
-Add more when the feature demands it:
+Add more paragraphs before the documentation link when the feature demands it:
 
 - **Context paragraph**: when the feature solves a known limitation, changes an established workflow, or is hard to understand without background.
 - **Enablement or configuration details**: when users must opt in, set a variable, or change a config item.
@@ -121,33 +121,7 @@ Title rules:
 
 ## Body paragraphs
 
-Opening patterns listed below are examples, not required templates. Vary the openings across entries in the same release file to avoid monotony. Choose based on the narrative shape and what the reader needs first.
-
-### How each shape uses the body
-
-**Direct capability** — Skip the context paragraph. Open with the capability and its value. Add configuration or enablement details if users must take action.
-
-> Example flow: capability sentence → user value → enablement (if needed) → doc link.
-
-**Before-and-after** — Start with a context paragraph describing the previous limitation, then a new behavior paragraph with the capability and benefit.
-
-> Example flow: previous limitation → new capability → user value → enablement (if needed) → doc link.
-
-**Scenario-first** — Start with the user scenario or pain point (without necessarily mentioning a version). Then introduce the capability as the solution.
-
-> Example flow: user scenario → new capability as solution → user value → doc link.
-
-**Sub-feature list** — Start with a short intro sentence, then list the sub-capabilities or benefits. Each list item should be self-explanatory.
-
-> Example flow: intro sentence → bulleted list → doc link.
-
-**Benchmark-backed** — Explain the optimization strategy, then present a table with metrics, test environment, and conditions. State conditions and caveats that scope the numbers.
-
-> Example flow: optimization strategy → benchmark table → conditions and caveats → doc link.
-
-**GA transition** — Briefly trace the version history (when introduced as experimental, what changed). State the GA behavior and whether the default changed.
-
-> Example flow: version history sentence → GA behavior → default or enablement change → doc link.
+Opening patterns listed below are examples, not required templates. Vary the openings across entries in the same release file to avoid monotony. Choose based on the narrative shape and what the reader needs first. See the [Examples](#examples) section for how each shape uses the body in practice.
 
 ### Context paragraph
 
@@ -191,16 +165,6 @@ The paragraph should answer:
 - How do users enable, configure, or use it, if applicable?
 - What concrete benefit does it provide?
 
-## Optional details
-
-Add extra details only when they help users evaluate or use the feature.
-
-- Configuration or usage: mention system variables, configuration items, SQL statements, command-line flags, and literal values in backticks.
-- Caveats and limitations: state unsupported cases, disabled-by-default behavior, compatibility notes, or known constraints.
-- Performance metrics: include the metric, magnitude, and test conditions when available. Do not use unsourced claims such as "significant" or "large" unless the input supports them.
-- Sub-feature lists: use indented `-` items for supported operations, optimization strategies, or new fields.
-- Benchmark tables: include only sourced results and enough environment details to make the numbers meaningful.
-
 ## Documentation link
 
 End every complete feature description with a documentation link.
@@ -236,26 +200,17 @@ For features that are new and GA from the start:
 
 - No need to add `(GA)` to the title line, which means that a feature is GA by default if `(experimental)` is not present.
 
-Useful patterns:
-
-```markdown
-TiDB vX.Y.Z introduces <feature> as an experimental feature. In vA.B.C, this feature becomes generally available (GA).
-
-Starting from vA.B.C, <feature> becomes generally available (GA) and is enabled by default.
-```
-
 Do not infer a maturity state from the PR alone. Use only information provided by the issue, PR, release plan, PM input, or existing documentation.
 
 ## Style rules
 
-- Write for users, not implementers.
-- Use version-based openings such as `Starting from vX.Y.Z, ...` when the timing matters.
+These rules supplement the cross-cutting rules in [SKILL.md](../SKILL.md).
+
+- Express value in terms of what "you" can do: prefer `you can ...`, `... lets you ...`, `... enables you to ...` over describing what the system does internally. The reader should see what changes for them, not just what the code does.
 - State the capability or benefit before implementation details.
-- Use present tense for product behavior.
-- Use active voice when natural.
 - Keep paragraphs short. Split long explanations into multiple paragraphs or a list.
-- Do not expose internal function names, package names, test names, or code-level refactors unless they are user-visible.
 - Do not overstate certainty. Use `can improve` or `helps reduce` when the benefit depends on workload.
+- When the primary audience is an orchestrator or platform tool (such as TiDB Operator) rather than a human operator, describe what the mechanism provides and how operators or tools interact with it. The "you" might be an orchestration layer.
 - Use normal sentence punctuation in body paragraphs. Only the title line omits the trailing period.
 
 Chinese-specific rules:
@@ -325,9 +280,9 @@ Why this shape: log backup compaction has three distinct benefits worth calling 
     For more information, see [documentation](/br/br-compact-log-backup.md).
 ```
 
-### Benchmark-backed: performance optimization with sourced metrics
+### Benchmark modifier applied: performance optimization with sourced metrics
 
-Why this shape: the optimization has dramatic and quantifiable impact, and the numbers only make sense with test conditions. The benchmark table is the core evidence, framed by the optimization strategy and caveats.
+Why this combination: the entry uses a sub-feature list shape (optimization strategies as bullet points) combined with the benchmark modifier. The benchmark table is the core evidence, framed by the optimization strategy and caveats.
 
 ```markdown
 * Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016), @[tangenta](https://github.com/tangenta), @[fzzf678](https://github.com/fzzf678)
@@ -377,21 +332,6 @@ Why this shape: users who enabled this feature experimentally need to know the v
     TiDB v7.6.0 introduces Active PD Follower as an experimental feature. In v8.5.0, this feature becomes generally available (GA). After this feature is enabled, TiDB evenly distributes Region information requests to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader.
 
     For more information, see [documentation](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service).
-```
-
-### Concise capability: focused feature that needs minimal explanation
-
-Why this shape: the feature (graceful shutdown) is straightforward and focused. No historical pain point needs explaining; the entry just states the new behavior, the configurable timeout, and the edge cases.
-
-```markdown
-* Support gracefully shutting down TiFlash [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi)
-
-    When shutting down a TiFlash server, TiFlash now lets currently running MPP tasks continue for a configurable timeout duration, while rejecting new MPP task requests. The default timeout duration is 600 seconds, and you can adjust it using the `flash.graceful_wait_shutdown_timeout` configuration item.
-
-    - If all running MPP tasks finish before the timeout duration expires, TiFlash shuts down immediately.
-    - If there are still unfinished MPP tasks when the timeout duration expires, TiFlash shuts down forcibly.
-
-  For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854).
 ```
 
 ## Review checklist
