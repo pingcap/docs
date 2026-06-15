@@ -88,7 +88,6 @@ Github: https://github.com/tidbcloud/lakesql
 >>> More information at https://github.com/tidbcloud/lakesql
 ```
 
-<!-- Note: tidbcloud/homebrew-tap is not a public repo. So don't display it for now.
 ### Homebrew (for macOS)
 
 LakeSQL can be easily installed on macOS using Homebrew with a simple command:
@@ -96,7 +95,6 @@ LakeSQL can be easily installed on macOS using Homebrew with a simple command:
 ```bash
 brew install tidbcloud/homebrew-tap/lakesql
 ```
--->
 
 ### Apt (for Ubuntu/Debian)
 
