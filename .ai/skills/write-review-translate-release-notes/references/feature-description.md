@@ -1,11 +1,11 @@
 # Feature descriptions
 
-Use this reference as a decision framework to write one TiDB release note feature description from PM or engineering input, such as a short feature brief, GitHub issue links, PR links, feature specification, benchmark results, and documentation links.
+Use this reference to write one TiDB release note feature description from PM or engineering input, such as a short feature brief, GitHub issue links, PR links, feature specification, benchmark results, and documentation links.
 
 A quality feature description must answer four core questions for the reader:
 
 1. **What is this feature?** — Describe the feature in user-facing terms, focusing on what is newly available or modified (avoid internal implementation details).
-2. **When users use this feature?** — Describe the specific user scenario or condition where this feature applies or is triggered.
+2. **When do you use this feature?** — Describe the specific user scenario or condition where this feature applies or is triggered.
 3. **What value does it provide?** — State the value in terms of what "you" (the user) can now do, such as "you can ...", "... lets you ...", "... enables you to ...". Ground the benefit in a concrete outcome (performance, stability, security, operability, compatibility, or a workflow that was previously impossible) rather than describing what the system does internally.
 4. **Is there anything to pay attention to?** — Call out enablement steps, maturity state, limitations, caveats, or benchmark conditions when they exist.
 
@@ -24,7 +24,7 @@ The cross-cutting rules in [SKILL.md](../SKILL.md) also apply, especially user p
     - What maturity state applies: GA, experimental, or no maturity tag?
     - What caveats, unsupported cases, or benchmark conditions must be stated?
 3. Decide whether the change belongs in a feature entry. If it is a small behavior improvement, bug fix, or internal refactor with no new user-facing capability, use the Improvements or Bug fixes reference instead.
-4. Diagnose the feature using the dimensions in [Diagnose the feature, then choose the narrative shape](#diagnose-the-feature-then-choose-the-narrative-shape). Select a narrative shape and draft the entry. Make sure the body answers the three core questions: what is the feature, what value it provides, and what users need to pay attention to.
+4. Diagnose the feature using the dimensions in [Diagnose the feature, then choose the narrative shape](#diagnose-the-feature-then-choose-the-narrative-shape). Select a narrative shape and draft the entry. Make sure the body answers the four core questions: what the feature is, when to use it, what value it provides, and what to pay attention to.
 5. Check every technical claim against the source input. Do not invent defaults, limits, metrics, maturity state, or documentation links.
 
 ## Section placement in the release note file
@@ -94,7 +94,7 @@ Add more paragraphs before the documentation link when the feature demands it:
 - **Benchmark table**: when sourced metrics and test conditions are available.
 - **Sub-feature list**: when one entry covers multiple operations or benefits.
 
-Do not pad entries with optional sections just because they exist. A short, clear entry that answers the three core questions is better than a long entry that adds context, caveats, and enablement details the feature does not need.
+Do not pad entries with optional sections just because they exist. A short, clear entry that answers the core questions is better than a long entry that adds context, caveats, and enablement details the feature does not need.
 
 ## Title line
 
