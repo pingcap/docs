@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidb/dev/vector-sear
 
 ## ベクトルデータ型の制限 {#vector-data-type-limitations}
 
--   それぞれ最大 16383 次元 [ベクター](/ai/reference/vector-search-data-types.md)サポートします。
+-   それぞれ最大 16383 次元 [ベクトル](/ai/reference/vector-search-data-types.md)サポートします。
 -   ベクトルデータ型は、 `NaN` 、 `Infinity` 、または`-Infinity`の値を格納することはできません。
 -   ベクトルデータ型は倍精度浮動小数点数を格納することはできません。ベクトル列に倍精度浮動小数点数を挿入または格納すると、TiDBはそれらを単精度浮動小数点数に変換します。
 -   ベクトル列は、主キーとして、または主キーの一部として使用することはできません。
@@ -33,7 +33,7 @@ aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidb/dev/vector-sear
 
 -   TiDB Cloudの機能：
 
-    -   [TiDB Cloudコンソールのデータ移行機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)MySQL ベクター データ型のTiDB Cloudへの移行または複製をサポートしていません。
+    -   [TiDB Cloudコンソールのデータ移行機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)MySQL ベクトル データ型のTiDB Cloudへの移行または複製をサポートしていません。
 
 -   TiDBセルフマネージドツール：
 

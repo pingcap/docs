@@ -53,7 +53,7 @@
     -   [概要](/ai/integrations/vector-search-auto-embedding-overview.md)
     -   [オープンAI](/ai/integrations/vector-search-auto-embedding-openai.md)
     -   [OpenAI対応](/ai/integrations/embedding-openai-compatible.md)
-    -   [ジナ・アイ](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
+    -   [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
     -   [コヒア](/ai/integrations/vector-search-auto-embedding-cohere.md)
     -   [Google ジェミニ](/ai/integrations/vector-search-auto-embedding-gemini.md)
     -   [抱きしめる顔](/ai/integrations/vector-search-auto-embedding-huggingface.md)
@@ -61,7 +61,7 @@
     -   [アマゾンタイタン](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 -   AIフレームワーク
     -   [ランチェーン](/ai/integrations/vector-search-integrate-with-langchain.md)
-    -   [ラマインデックス](/ai/integrations/vector-search-integrate-with-llamaindex.md)
+    -   [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 -   ORMライブラリ
     -   [SQLアルケミー](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
     -   [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
@@ -81,7 +81,7 @@
 
 -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
 -   [関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ベクター検索インデックス](/ai/reference/vector-search-index.md)
+-   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
 -   [性能チューニング](/ai/reference/vector-search-improve-performance.md)
 -   [制限事項](/ai/reference/vector-search-limitations.md)
 -   [変更ログ](/ai/reference/vector-search-changelogs.md)

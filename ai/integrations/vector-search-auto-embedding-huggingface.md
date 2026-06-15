@@ -239,7 +239,7 @@ LIMIT 2;
 
 ## Pythonの使用例 {#python-usage-example}
 
-この例では、Hugging Face埋め込みモデルを使用して、ベクターテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、Hugging Face埋め込みモデルを使用して、ベクトルテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
 ### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
@@ -269,7 +269,7 @@ tidb_client.configure_embedding_provider(
 )
 ```
 
-### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
 ハギングフェイスモデルを使用して埋め込みを生成するベクトルフィールドを持つテーブルを作成します。
 
