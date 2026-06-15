@@ -136,6 +136,7 @@ Every entry (feature, improvement, or bug fix) ends with issue link(s) and PR au
 
 The `@` link is the **author of the PR that resolves the issue**, not the issue author. When an issue has linked PRs, find the PR author(s) from those PRs.
 
+For multiple issues: `[#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) [#MMMMM](https://github.com/pingcap/tidb/issues/MMMMM) @[pr_author](https://github.com/pr_author)`
 
 ### No trailing period on single-line entries
 
