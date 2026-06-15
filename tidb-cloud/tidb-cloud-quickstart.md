@@ -36,8 +36,8 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
         > **Note**
         >
-        > - Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
-        > - TiDB Cloud is a fully managed service. The underlying cloud infrastructure is operated and managed by PingCAP. You do not have access to the underlying cloud account or infrastructure resources hosting your TiDB Cloud deployment.
+        > - {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
+        > - TiDB Cloud is a fully managed service. PingCAP operates and manages the underlying cloud infrastructure. You do not have access to the underlying cloud account or infrastructure resources hosting your TiDB Cloud deployment.
 
         </CustomContent>
 
@@ -45,8 +45,8 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
         > **Note**
         >
-        > - Currently, {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
-        > - TiDB Cloud is a fully managed service. The underlying cloud infrastructure is operated and managed by PingCAP. You do not have access to the underlying cloud account or infrastructure resources hosting your TiDB Cloud deployment.
+        > - {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
+        > - TiDB Cloud is a fully managed service. PingCAP operates and manages the underlying cloud infrastructure. You do not have access to the underlying cloud account or infrastructure resources hosting your TiDB Cloud deployment.
 
         </CustomContent>
 
