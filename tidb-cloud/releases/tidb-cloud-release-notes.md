@@ -8,6 +8,19 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## June 16, 2026
+
+**General changes**
+
+- Add domain verification for [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md).
+
+    In the following scenarios, the **Allowed Email Domains** field is mandatory, and you must verify domains before entering them to improve security.
+
+    - Enable auto-provisioning for the OIDC or SAML authentication method
+    - Enable SCIM provisioning for the SAML authentication method
+
+  For more information, see [Add and verify domains for OIDC and SAML](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml).
+
 ## June 9, 2026
 
 **General changes**
