@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 # ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
 
-このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)[ラングチェーン](https://python.langchain.com/)する方法を説明します。
+このチュートリアルでは、[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)[LangChain](https://python.langchain.com/)する方法を説明します。
 
 > **注記：**
 >
