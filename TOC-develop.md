@@ -48,7 +48,7 @@
             -   [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
             -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
             -   [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
-        -   ルビー
+        -   Ruby
             -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
             -   [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
         -   C#

@@ -35,7 +35,7 @@ cd wordpress-tidb-docker
 
 ### ステップ2：依存関係をインストールする {#step-2-install-dependencies}
 
-1.  サンプルリポジトリでは、WordPressを起動するために[ドッカー](https://www.docker.com/)と[Docker Compose](https://docs.docker.com/compose/)必要です。既にインストール済みであれば、この手順はスキップできます。WordPressはLinux環境（Ubuntuなど）で実行することを強くお勧めします。DockerとDocker Composeをインストールするには、次のコマンドを実行してください。
+1.  サンプルリポジトリでは、WordPressを起動するために[Docker](https://www.docker.com/)と[Docker Compose](https://docs.docker.com/compose/)が必要です。既にインストール済みであれば、この手順はスキップできます。WordPressはLinux環境（Ubuntuなど）で実行することを強くお勧めします。DockerとDocker Composeをインストールするには、次のコマンドを実行してください。
 
     ```shell
     sudo sh install.sh

@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidb/d
 
 > **注記：**
 >
-> -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> -   ベクトル検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
@@ -210,7 +210,7 @@ if TIDB_CA_PATH:
 
 プロジェクトのルート ディレクトリに`.env`ファイルを作成し、環境変数`TIDB_HOST` 、 `TIDB_PORT` 、 `TIDB_USERNAME` 、 `TIDB_PASSWORD` 、 `TIDB_DATABASE` 、および`TIDB_CA_PATH` TiDB の実際の値で設定できます。
 
-### ベクターテーブルを作成する {#create-vector-tables}
+### ベクトルテーブルを作成する {#create-vector-tables}
 
 #### ベクトル列を定義する {#define-a-vector-column}
 
