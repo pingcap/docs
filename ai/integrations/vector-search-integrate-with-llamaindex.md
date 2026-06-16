@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 # ベクトル検索をLlamaIndexと統合する {#integrate-vector-search-with-llamaindex}
 
-このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)[ラマインデックス](https://www.llamaindex.ai)統合する方法を説明します。
+このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)[LlamaIndex](https://www.llamaindex.ai)統合する方法を説明します。
 
 > **注記：**
 >

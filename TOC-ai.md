@@ -61,7 +61,7 @@
     -   [アマゾンタイタン](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 -   AIフレームワーク
     -   [ランチェーン](/ai/integrations/vector-search-integrate-with-langchain.md)
-    -   [ラマインデックス](/ai/integrations/vector-search-integrate-with-llamaindex.md)
+    -   [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 -   ORMライブラリ
     -   [SQLアルケミー](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
     -   [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
