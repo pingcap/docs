@@ -21,7 +21,7 @@ TiDBは**ベクトル検索**による画像検索を可能にします。自動
 
 デモンストレーションには、Jina AI のマルチモーダル埋め込みモデルを使用できます。
 
-[ジナ・アイ](https://jina.ai/embeddings)に進み、API キーを作成し、次のように埋め込み関数を初期化します。
+[Jina AI](https://jina.ai/embeddings)に進み、API キーを作成し、次のように埋め込み関数を初期化します。
 
 ```python hl_lines="7"
 from pytidb.embeddings import EmbeddingFunction

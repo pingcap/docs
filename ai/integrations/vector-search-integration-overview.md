@@ -34,7 +34,7 @@ TiDB Vector Search は、最大 16383 次元のベクトルの保存をサポー
 
 | 埋め込みサービスプロバイダー | チュートリアル                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------- |
-| ジナ・アイ          | [Jina AI Embeddings APIとベクター検索を統合する](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) |
+| Jina AI          | [Jina AI Embeddings APIとベクター検索を統合する](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) |
 
 ## オブジェクトリレーショナルマッピング（ORM）ライブラリ {#object-relational-mapping-orm-libraries}
 
