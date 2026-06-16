@@ -189,7 +189,7 @@
 -   ストリームデータ
     -   [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
-    -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+    -   [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
     -   [パルサーシンクへ](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
     -   [TiDB Cloud Sinkへ](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)

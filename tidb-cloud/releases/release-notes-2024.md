@@ -194,7 +194,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)ベクター検索エンドポイントの自動生成をサポートしています。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)ベクトル検索エンドポイントの自動生成をサポートしています。
 
     テーブルに が含まれている場合、選択した距離関数に基づいてベクトル距離を計算する [ベクトルデータ型](/ai/reference/vector-search-data-types.md)検索エンドポイントを自動的に生成できます。
 

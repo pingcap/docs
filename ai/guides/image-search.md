@@ -66,7 +66,7 @@ table.bulk_insert([
 
 ### ステップ4. 画像検索を実行する {#step-4-perform-image-search}
 
-画像検索はベクター検索の一種です。自動埋め込み機能では、画像URL、PIL画像、またはキーワードテキストを直接入力すると、それぞれの入力が類似マッチングのための埋め込み情報に変換されます。
+画像検索はベクトル検索の一種です。自動埋め込み機能では、画像URL、PIL画像、またはキーワードテキストを直接入力すると、それぞれの入力が類似マッチングのための埋め込み情報に変換されます。
 
 #### オプション1: 画像のURLで検索 {#option-1-search-by-image-url}
 
@@ -107,5 +107,5 @@ results = table.search("orange tabby cat").limit(3).to_list()
 ## 参照 {#see-also}
 
 -   [自動埋め込みガイド](/ai/guides/auto-embedding.md)
--   [ベクター検索ガイド](/ai/concepts/vector-search-overview.md)
+-   [ベクトル検索ガイド](/ai/concepts/vector-search-overview.md)
 -   [画像検索の例](/ai/examples/image-search-with-pytidb.md)
