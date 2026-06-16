@@ -243,7 +243,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     ベクトル検索（ベータ版）機能は、文書、画像、音声、動画など、さまざまなデータタイプにわたる意味的類似性検索を実行するための高度な検索ソリューションを提供します。この機能により、開発者は使い慣れたMySQLのスキルを使用して、生成型人工知能（AI）機能を備えたスケーラブルなアプリケーションを容易に構築できます。主な機能は以下のとおりです。
 
     -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)、[ベクトルインデックス](/ai/reference/vector-search-index.md)、および[ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)。
-    -   [ラングチェーン](/ai/integrations/vector-search-integrate-with-langchain.md)、 [ラマインデックス](/ai/integrations/vector-search-integrate-with-llamaindex.md)インデックス、 [Jina AI](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)とのエコシステム統合。
+    -   [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)、 [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)、 [Jina AI](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)とのエコシステム統合。
     -   Python のプログラミング言語サポート: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) 、 [ピーウィー](/ai/integrations/vector-search-integrate-with-peewee.md)、および[Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md) 。
     -   サンプルアプリケーションとチュートリアル： [Python](/ai/quickstart-via-python.md)または[SQL](/ai/quickstart-via-sql.md)を使用してドキュメントのセマンティック検索を実行します。
 
