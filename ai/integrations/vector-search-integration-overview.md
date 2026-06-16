@@ -36,9 +36,9 @@ The following table lists the supported embedding providers. For details on how 
 
 ## AI frameworks
 
-TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed with these frameworks with TiDB Vector Search.
+TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed with these frameworks into TiDB Vector Search.
 
-| AI frameworks | Tutorial                                                                                          |
+| AI framework | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
 | LangChain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
@@ -55,7 +55,7 @@ The following table lists the supported ORM libraries and the corresponding inte
 |----------|--------------------|-----------------------------------|----------|
 | Python   | SQLAlchemy         | `pip install tidb-vector`         | [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
 | Python   | peewee             | `pip install tidb-vector`         | [Integrate TiDB Vector Search with peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
-| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDB Vector Search with Django](/ai/integrations/vector-search-integrate-with-django-orm.md)
+| Python   | Django             | `pip install django-tidb[vector]` | [Integrate TiDB Vector Search with Django](/ai/integrations/vector-search-integrate-with-django-orm.md) |
 
 ## Cloud services
 
@@ -79,5 +79,5 @@ The following table lists the supported MCP clients and the corresponding setup 
 | Claude Code    | [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)                |
 | Claude Desktop | [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)          |
 | Cursor         | [Cursor](/ai/integrations/tidb-mcp-cursor.md)                          |
-| VS Code        | [VS Code](/ai/integrations/tidb-mcp-vscode.md)                        |
+| VS Code        | [VS Code](/ai/integrations/tidb-mcp-vscode.md)                         |
 | Windsurf       | [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)                      |
