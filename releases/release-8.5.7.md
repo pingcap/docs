@@ -63,6 +63,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Observability
 
+* The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
+
+    In earlier versions, TiDB Dashboard identified Top SQL queries based only on CPU-related metrics, making it difficult to identify performance bottlenecks related to network or storage access in complex scenarios.
+
+    Starting from v8.5.7, you can enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to view metrics such as `Network Bytes` and `Logical IO Bytes` for TiKV nodes. You can also analyze these metrics across multiple dimensions, including `By Query`, `By Table`, `By DB`, and `By Region`, helping you identify resource hotspots more comprehensively.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
+
 * Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
 
     Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
