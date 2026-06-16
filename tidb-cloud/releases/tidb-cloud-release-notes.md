@@ -14,10 +14,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Add domain verification for [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md).
 
-    In the following scenarios, the **Allowed Email Domains** field is mandatory, and you must verify domains before entering them to improve security.
+    In the following scenarios, the **Allowed Email Domains** field is required. To improve security, you must verify domains before adding them:
 
-    - Enable auto-provisioning for the OIDC or SAML authentication method
-    - Enable SCIM provisioning for the SAML authentication method
+    - Enabling auto-provisioning for the OIDC or SAML authentication method
+    - Enabling SCIM provisioning for the SAML authentication method
 
   For more information, see [Add and verify domains for OIDC and SAML](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml).
 
