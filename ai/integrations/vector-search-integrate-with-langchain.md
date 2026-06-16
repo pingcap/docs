@@ -297,7 +297,7 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 ### 回収犬として使用する {#use-as-a-retriever}
 
-LangChainでは、 [レトリバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリのドキュメントを取得するインターフェースであり、ベクトルストアよりも多くの機能を提供します。以下のコードは、TiDBベクトルストアをレトリバーとして使用する方法を示しています。
+LangChainでは、 [Retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリのドキュメントを取得するインターフェースであり、ベクトルストアよりも多くの機能を提供します。以下のコードは、TiDBベクトルストアをRetrieverとして使用する方法を示しています。
 
 ```python
 retriever = vector_store.as_retriever(
