@@ -199,6 +199,8 @@ jobs:
             exit 0
           fi
 
+          # Intentionally advance the cursor even on partial sync failure.
+          # Most files are translated successfully; failed files are listed in the PR body so reviewers can manually translate or re-run them via workflow_dispatch with file_names. Do NOT gate this on sync outcome.
           if [ "${GITHUB_EVENT_NAME}" = "schedule" ]; then
             python -c 'import json, os; from pathlib import Path; Path("latest_translation_commit.json").write_text(json.dumps({"target": os.environ["SOURCE_BRANCH"], "sha": os.environ["HEAD_REF"]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")'
           else
