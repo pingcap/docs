@@ -12,7 +12,6 @@
 | atomic | アトミック |  |
 | Aurora | Aurora | Product name, keep in English. |
 | auto analyze | auto analyze | Technical term, keep in English. Do not translate to 「自動分析」. |
-| backup.hadoop | backup.hadoop | Configuration key, keep in English. |
 | Binlog | Binlog | Do not translate to 「ビンログ」. |
 | binlog | binlog | Do not translate to 「ビンログ」. |
 | block cache | ブロックキャッシュ |  |
@@ -29,7 +28,7 @@
 | Configuration | 設定 |  |
 | Coprocessor | コプロセッサー |  |
 | CTR | CTR | Encryption mode, keep in English. Do not translate to 「クリック率」. |
-| Dedicated | Dedicated | TiDB Cloud tier name, keep in English. |
+| Dedicated | Dedicated | TiDB Cloud plan name, keep in English. |
 | Deploy | デプロイ | Do not translate to 「配備」. |
 | disaster recovery | ディザスタリカバリ | No long vowel mark at end. |
 | Distinct Optimization | クエリの最適化 |  |
@@ -105,7 +104,6 @@
 | Secondary Cluster | セカンダリクラスター |  |
 | Secure | セキュリティ |  |
 | Security | Security | When used as a configuration section heading, keep in English. Do not translate to 「安全」. |
-| Self-Managed | Self-Managed | Product tier name, keep in English. |
 | Sequence | シーケンス |  |
 | server | サーバー | Use long vowel mark. |
 | single point of failure | 単一障害点 |  |
@@ -118,16 +116,17 @@
 | TiCDC Changefeed | TiCDC Changefeed | Keep space between TiCDC and Changefeed. |
 | TiDB Binlog | TiDB Binlog | Keep space between TiDB and Binlog. |
 | TiDB Cloud | TiDB Cloud | Product name, keep in English. Do not translate to 「TiDB クラウド」. |
-| TiDB Cloud Dedicated | TiDB Cloud Dedicated | Product tier name, keep in English. |
-| TiDB Cloud Essential | TiDB Cloud Essential | Product tier name, keep in English. |
-| TiDB Cloud Starter | TiDB Cloud Starter | Product tier name, keep in English. |
-| TiDB Dedicated | TiDB Dedicated | Product tier name, keep in English. |
+| TiDB Cloud Dedicated | TiDB Cloud Dedicated | Product plan name, keep in English. |
+| TiDB Cloud Essential | TiDB Cloud Essential | Product plan name, keep in English. |
+| TiDB Cloud Premium | TiDB Cloud Premium | Product plan name, keep in English. |
+| TiDB Cloud Starter | TiDB Cloud Starter | Product plan name, keep in English. |
 | TiDB HTAP | TiDB HTAP | Keep in English. |
 | TiDB Lightning | TiDB Lightning | Keep space between TiDB and Lightning. |
 | TiDB On-Premises | TiDB On-Premises | Product name, keep in English. |
 | TiDB Operator | TiDB Operator | Product name, keep in English. |
 | TiDB Playground | TiDB Playground | Product name, keep in English. |
 | TiDB Self-Hosted | TiDB Self-Hosted | Product name, keep in English. |
+| TiDB Self-Managed | TiDB Self-Managed | Product name, keep in English. |
 | TiDB Serverless | TiDB Serverless | Product name, keep in English. |
 | TiDB SQL | TiDB SQL | Keep space between TiDB and SQL. |
 | TiDB Toolkit | TiDB Toolkit | Product name, keep in English. |
