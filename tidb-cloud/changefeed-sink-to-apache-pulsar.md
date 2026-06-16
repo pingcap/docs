@@ -3,7 +3,7 @@ title: Sink to Apache Pulsar
 summary: このドキュメントでは、TiDB Cloudから Apache Pulsar へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制約事項、前提条件、および Apache Pulsar 用のチェンジフィードの設定手順が含まれています。このプロセスには、ネットワーク接続の設定とチェンジフィード仕様の設定が含まれます。
 ---
 
-# アパッチ・パルサーへシンク {#sink-to-apache-pulsar}
+# Apache・パルサーへシンク {#sink-to-apache-pulsar}
 
 このドキュメントでは、TiDB CloudからApache Pulsarにデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
 

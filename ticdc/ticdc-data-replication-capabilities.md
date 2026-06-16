@@ -20,7 +20,7 @@ summary: TiCDC のデータ複製機能について学びます。
 TiCDC は、次のようなさまざまな下流システムへのデータの複製をサポートしています。
 
 -   [TiDBデータベースまたはその他のMySQL互換データベース](/ticdc/ticdc-sink-to-mysql.md)
--   [アパッチカフカ](/ticdc/ticdc-sink-to-kafka.md)
+-   [Apacheカフカ](/ticdc/ticdc-sink-to-kafka.md)
 -   [メッセージキュー（MQ）タイプのシンク](/ticdc/ticdc-changefeed-config.md#sink) 、例えば[パルサー](/ticdc/ticdc-sink-to-pulsar.md)
 -   [ストレージ サービス (Amazon S3、GCS、Azure Blob Storage、NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
 -   [Confluent Cloud 統合による Snowflake、ksqlDB、SQL Server](/ticdc/integrate-confluent-using-ticdc.md)

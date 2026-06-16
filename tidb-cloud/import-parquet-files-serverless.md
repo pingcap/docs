@@ -5,7 +5,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object St
 
 # クラウドストレージからTiDB Cloud StarterまたはEssentialにApache Parquetファイルをインポートする {#import-apache-parquet-files-from-cloud-storage-into-tidb-cloud-starter-or-essential}
 
-TiDB Cloud StarterまたはTiDB Cloud Essential[アパッチ・パーケット](https://parquet.apache.org/)TiDB Cloud Starterファイルをインポートする方法についてTiDB Cloud Essential。
+TiDB Cloud StarterまたはTiDB Cloud Essential[Apache・パーケット](https://parquet.apache.org/)TiDB Cloud Starterファイルをインポートする方法についてTiDB Cloud Essential。
 
 > **注記：**
 >
