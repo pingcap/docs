@@ -111,7 +111,7 @@ You can configure and view options for the `RECOMMEND INDEX` statement to fine-t
 
 ```sql
 RECOMMEND INDEX SET <option> = <value>;
-RECOMMEND INDEX SHOW OPTION;
+RECOMMEND INDEX SHOW;
 ```
 
 The following options are available:
@@ -121,14 +121,14 @@ The following options are available:
 - `max_index_columns`: specifies the maximum number of columns allowed in multi-column indexes in the result.
 - `max_num_query`: specifies the maximum number of queries to select from the statement summary workload.
 
-To check your current option settings, execute the `RECOMMEND INDEX SHOW OPTION` statement:
+To check your current option settings, execute the `RECOMMEND INDEX SHOW` statement:
 
 ```sql
-RECOMMEND INDEX SHOW OPTION;
+RECOMMEND INDEX SHOW;
 +-------------------+-------+---------------------------------------------------------+
 | option            | value | description                                             |
 +-------------------+-------+---------------------------------------------------------+
-| max_num_index     | 5     | The maximum number of indexes to recommend.             |
+| max_num_index     | 5     | The maximum number of indexes to recommend for a table. |
 | max_index_columns | 3     | The maximum number of columns in an index.              |
 | max_num_query     | 1000  | The maximum number of queries to recommend indexes.     |
 | timeout           | 30s   | The timeout of index advisor.                           |
