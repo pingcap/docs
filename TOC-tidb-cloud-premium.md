@@ -134,7 +134,7 @@
 -   ストリームデータ
     -   [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
-    -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+    -   [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
     -   参照
         -   [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
         -   [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
@@ -153,7 +153,6 @@
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
         -   [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
-        -   [ユーザーによるログの編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   監査管理
         -   [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)

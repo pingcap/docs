@@ -102,7 +102,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = "{your-openai-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
 `openai/text-embedding-3-small`モデルを使用して 1536 次元ベクトルを生成するベクトルフィールドを持つテーブルを作成します。
 
