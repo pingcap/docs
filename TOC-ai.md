@@ -68,7 +68,7 @@
     -   [ピーウィー](/ai/integrations/vector-search-integrate-with-peewee.md)
 -   クラウドサービス
     -   [Jina AI埋め込み](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
-    -   [アマゾンの岩盤](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
+    -   [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
 -   MCP サーバー
     -   [概要](/ai/integrations/tidb-mcp-server.md)
     -   [クロード・コード](/ai/integrations/tidb-mcp-claude-code.md)
