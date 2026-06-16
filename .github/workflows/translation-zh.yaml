@@ -25,6 +25,7 @@ on:
 env:
   SOURCE_REPO: pingcap/docs
   SOURCE_BRANCH: release-8.5
+  TERMS_BRANCH: master
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
   CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
   CLOUD_INDEX_FILES: tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
@@ -54,6 +55,14 @@ jobs:
           ref: ${{ env.SOURCE_BRANCH }}
           path: docs-source
           fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/checkout@v6
+        name: Checkout docs terms branch
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ env.TERMS_BRANCH }}
+          path: docs-terms
           persist-credentials: false
 
       - uses: actions/checkout@v6
@@ -149,7 +158,7 @@ jobs:
           PREFER_LOCAL_TARGET_FOR_READ: "true"
           TARGET_REPO_PATH: ${{ github.workspace }}/docs
           AI_PROVIDER: azure
-          TERMS_PATH: ${{ github.workspace }}/docs-source/resources/terms.md
+          TERMS_PATH: ${{ github.workspace }}/docs-terms/resources/terms.md
           FAIL_ON_TRANSLATION_ERROR: "true"
           SKIP_TRANSLATING_CLOUD_DOCS_TO_ZH: "false"
           SKIP_TRANSLATING_AI_DOCS_TO_ZH: "true"

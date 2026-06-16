@@ -6,8 +6,8 @@ concurrency:
 
 on:
   schedule:
-    # Runs JA translation at 19:00 every Wednesday (Beijing time, UTC+8)
-    - cron: "0 11 * * 3"
+    # Runs JA translation at 20:00 every Wednesday (Beijing time, UTC+8)
+    - cron: "0 12 * * 3"
   workflow_dispatch:
     inputs:
       file_names:
@@ -27,6 +27,7 @@ on:
 env:
   SOURCE_REPO: pingcap/docs
   SOURCE_BRANCH: release-8.5
+  TERMS_BRANCH: master
   JA_BRANCH: i18n-ja-release-8.5
   AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
   AI_TRANSLATOR_REF: main
@@ -54,6 +55,14 @@ jobs:
           ref: ${{ env.SOURCE_BRANCH }}
           path: docs-source
           fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/checkout@v6
+        name: Checkout docs terms branch
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ env.TERMS_BRANCH }}
+          path: docs-terms
           persist-credentials: false
 
       - uses: actions/checkout@v6
@@ -165,7 +174,7 @@ jobs:
           PREFER_LOCAL_TARGET_FOR_READ: "true"
           TARGET_REPO_PATH: ${{ github.workspace }}/docs
           AI_PROVIDER: azure
-          TERMS_PATH: ${{ github.workspace }}/docs-source/resources/terms-en-ja.md
+          TERMS_PATH: ${{ github.workspace }}/docs-terms/resources/terms-en-ja.md
           FAIL_ON_TRANSLATION_ERROR: "true"
         run: |
           set -euo pipefail
