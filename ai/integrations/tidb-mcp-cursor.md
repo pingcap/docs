@@ -1,11 +1,11 @@
 ---
 title: Get started with Cursor and TiDB MCP Server
-summary: このガイドでは、カーソルエディタでTiDB MCPサーバーを設定する方法を説明します。
+summary: このガイドでは、CursorエディタでTiDB MCPサーバーを設定する方法を説明します。
 ---
 
 # CursorとTiDB MCPサーバーを使い始める {#get-started-with-cursor-and-tidb-mcp-server}
 
-このガイドでは、カーソルエディタでTiDB MCPサーバーを設定する方法を説明します。
+このガイドでは、CursorエディタでTiDB MCPサーバーを設定する方法を説明します。
 
 ワンクリックでインストールするには、次のボタンをクリックしてください。
 
@@ -21,11 +21,11 @@ summary: このガイドでは、カーソルエディタでTiDB MCPサーバー
 
 ## TiDB Cloud Starterに接続する（推奨） {#connect-to-tidb-cloud-starter-recommended}
 
-TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンスの認証情報でカーソル構成を作成します。
+TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンスの認証情報でCursor構成を作成します。
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
 
-2.  表示されたダイアログで、カーソルがアクセスする**ブランチ**と**データベース**を選択します。
+2.  表示されたダイアログで、Cursorがアクセスする**ブランチ**と**データベース**を選択します。
 
 3.  ダイアログに表示される**前提条件**リストを確認し、不足している依存関係があればインストールしてください。
 
@@ -35,7 +35,7 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
     -   パスワードが既に存在する場合は、 **「簡単なセットアップのためのパスワードを入力してください」**欄に入力してください。
     -   パスワードを忘れた場合は、 **「前提条件」**セクションの**「パスワードのリセット」**をクリックして新しいパスワードを生成してください。
 
-5.  **「カーソル」**タブを選択し、 **「カーソルに追加」**をクリックしてから、「カーソルに**インストール」を**クリックします。
+5.  **「Cursor」**タブを選択し、 **「Cursorに追加」**をクリックしてから、「Cursorに**インストール」を**クリックします。
 
 ## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
 

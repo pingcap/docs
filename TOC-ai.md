@@ -73,9 +73,9 @@
     -   [概要](/ai/integrations/tidb-mcp-server.md)
     -   [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
     -   [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
-    -   [カーソル](/ai/integrations/tidb-mcp-cursor.md)
-    -   [VSコード](/ai/integrations/tidb-mcp-vscode.md)
-    -   [ウィンドサーフィン](/ai/integrations/tidb-mcp-windsurf.md)
+    -   [Cursor](/ai/integrations/tidb-mcp-cursor.md)
+    -   [VS Code](/ai/integrations/tidb-mcp-vscode.md)
+    -   [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
 
 ## 参照 {#reference}
 
