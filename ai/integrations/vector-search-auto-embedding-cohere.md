@@ -125,7 +125,7 @@ LIMIT 2;
 
 ## 使用例（BYOK） {#usage-example-byok}
 
-この例では、Bring Your Own Key (BYOK) Cohere モデルを使用して、ベクター テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、Bring Your Own Key (BYOK) Cohere モデルを使用して、ベクトル テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
 ### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
@@ -187,7 +187,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = "{your-cohere-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
 `cohere/embed-v4.0`モデルを使用して 1536 次元ベクトル (デフォルトの次元) を生成するベクトルフィールドを持つテーブルを作成します。
 

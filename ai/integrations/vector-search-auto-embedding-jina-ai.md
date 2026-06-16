@@ -42,7 +42,7 @@ Jina AI APIキー（BYOK）をお持ちの場合は、 `jina_ai/`プレフィッ
 
 ## 使用例 {#usage-example}
 
-この例では、Jina AIの埋め込みモデルを使用して、ベクターテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、Jina AIの埋め込みモデルを使用して、ベクトルテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
 ### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 
@@ -104,7 +104,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = "{your-jina-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
 `jina_ai/jina-embeddings-v4`モデルを使用して 2048 次元ベクトルを生成するベクトルフィールドを持つテーブルを作成します。
 

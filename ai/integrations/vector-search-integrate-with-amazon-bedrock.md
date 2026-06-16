@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 > **注記：**
 >
-> -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> -   ベクトル検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
@@ -228,9 +228,9 @@ def generate_result(query: str, info_str: str):
     return completion
 ```
 
-### ステップ6. ベクターテーブルを作成する {#step-6-create-a-vector-table}
+### ステップ6. ベクトルテーブルを作成する {#step-6-create-a-vector-table}
 
-`demo.py`に、テキストとベクター埋め込みを格納するベクターテーブルを作成するための以下のコードを追加します。
+`demo.py`に、テキストとベクトル埋め込みを格納するベクトルテーブルを作成するための以下のコードを追加します。
 
 ```python
 # ---- TiDB Setup and Vector Index Creation ----
@@ -245,7 +245,7 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### ステップ7. ベクターデータをTiDB Cloud Starterに保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
+### ステップ7. ベクトルデータをTiDB Cloud Starterに保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
 
 `demo.py`に、ベクトルデータをTiDB Cloud Starterインスタンスに保存するための以下のコードを追加します。
 

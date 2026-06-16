@@ -135,7 +135,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_NVIDIA_NIM_API_KEY = "{your-nvidia-api-key}";
 </div>
 </SimpleTab>
 
-### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
 NVIDIA NIMモデルを使用して埋め込みを生成するベクトルフィールドを持つテーブルを作成します。
 

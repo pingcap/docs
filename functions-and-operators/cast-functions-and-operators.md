@@ -43,7 +43,7 @@ MySQL 8.0.27以降、 [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-fu
 | `SIGNED [INTEGER]`   | 符号付き整数                                    | はい                   |
 | `TIME(fsp)`          | 時間                                        | はい                   |
 | `UNSIGNED [INTEGER]` | 符号なし整数                                    | はい                   |
-| `VECTOR`             | ベクター                                      | いいえ                  |
+| `VECTOR`             | ベクトル                                      | いいえ                  |
 | `YEAR`               | 年                                         | いいえ                  |
 
 例:
