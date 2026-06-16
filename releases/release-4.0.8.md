@@ -80,7 +80,7 @@ TiDB バージョン: 4.0.8
 
     -   Dumpling
 
-        -   S3ストレージへのダンプリングデータの直接サポート[＃155](https://github.com/pingcap/dumpling/pull/155)
+        -   S3ストレージへのDumplingデータの直接サポート[＃155](https://github.com/pingcap/dumpling/pull/155)
         -   ダンプビューのサポート[＃158](https://github.com/pingcap/dumpling/pull/158)
         -   生成された列のみを含むテーブルのダンプをサポート[＃166](https://github.com/pingcap/dumpling/pull/166)
 
