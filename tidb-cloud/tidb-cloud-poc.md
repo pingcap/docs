@@ -117,7 +117,7 @@ TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQ
 
 SQL ステートメントの場合、データ ソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
 
-ご不明な点がございましたら[ピンキャップ](/tidb-cloud/tidb-cloud-support.md)までご相談ください。
+ご不明な点がございましたら[PingCAP](/tidb-cloud/tidb-cloud-support.md)までご相談ください。
 
 ## ステップ5. データのインポート {#step-5-import-data}
 

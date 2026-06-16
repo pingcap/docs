@@ -11,7 +11,7 @@ summary: Airbyte TiDBコネクタの使い方を学びましょう。
 
 Airbyteは、わずか数ステップでローカル環境にデプロイできます。
 
-1.  ワークスペースに[ドッカー](https://www.docker.com/products/docker-desktop)をインストールします。
+1.  ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
 
 2.  Airbyteのソースコードをクローンする。
 

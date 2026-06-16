@@ -11,7 +11,7 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 このドキュメントでは、SQL ステートメントだけを使用して TiDB Vector Search を開始する方法を説明します。 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)を使用して、次の操作を実行する方法を学習します。
 
 -   TiDBに接続します。
--   ベクターテーブルを作成します。
+-   ベクトルテーブルを作成します。
 -   ベクトル埋め込みを保存する。
 -   ベクトル検索クエリを実行します。
 
@@ -70,9 +70,9 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root
 
 </SimpleTab>
 
-### ステップ2. ベクターテーブルを作成する {#step-2-create-a-vector-table}
+### ステップ2. ベクトルテーブルを作成する {#step-2-create-a-vector-table}
 
-テーブルを作成する際、 `VECTOR`データ型を指定することで、列を[ベクター](/ai/concepts/vector-search-overview.md#vector-embedding)として定義できます。
+テーブルを作成する際、 `VECTOR`データ型を指定することで、列を[ベクトル](/ai/concepts/vector-search-overview.md#vector-embedding)として定義できます。
 
 例えば、3次元の列`embedded_documents`を持つテーブル`VECTOR` } を作成するには、MySQL CLI を使用して次の SQL ステートメントを実行します。
 

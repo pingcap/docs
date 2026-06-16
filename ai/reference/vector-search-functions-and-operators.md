@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 
 # ベクトル関数と演算子 {#vector-functions-and-operators}
 
-このドキュメントでは、ベクター データ型で使用できる関数と演算子の一覧を示します。
+このドキュメントでは、ベクトル データ型で使用できる関数と演算子の一覧を示します。
 
 > **注記：**
 >

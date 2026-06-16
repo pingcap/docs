@@ -40,7 +40,7 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 </div>
 <div label="Docker">
 
-1.  ワークスペースに[ドッカー](https://www.docker.com/products/docker-desktop)をインストールします。
+1.  ワークスペースに[Docker](https://www.docker.com/products/docker-desktop)をインストールします。
 2.  `docker`から n8n をダウンロードして起動します。
 
     ```shell

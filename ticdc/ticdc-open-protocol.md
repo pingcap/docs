@@ -299,7 +299,7 @@ COMMIT;
 | LONGTEXT/LONGBLOB     | 251    | {&quot;t&quot;:251,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | TEXT/BLOB             | 252    | {&quot;t&quot;:252,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | 文字/バイナリ               | 254    | {&quot;t&quot;:254,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:254,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;} | 値はUTF-8でエンコードされます。アップストリームの型がBINARYの場合、非表示の文字はエスケープされます。    |
-| TiDBベクターフロート32        | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
+| TiDBベクトルフロート32        | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
 | 幾何学                   | 255    |                                                                                                                          | Unsupported                                                 |
 
 ## DDLタイプコード {#ddl-type-code}
