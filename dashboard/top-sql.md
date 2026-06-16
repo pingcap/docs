@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Top SQL page
-summary: Use Top SQL to identify queries that consume the most CPU, network, and logical IO resources
+summary: Use Top SQL to identify queries that consume the most CPU, network, and logical I/O resources
 ---
 
 # TiDB Dashboard Top SQL Page
@@ -13,7 +13,7 @@ On the Top SQL page of TiDB Dashboard, you can view and analyze the most resourc
 Top SQL provides the following features:
 
 * Visualize the top `5`, `20`, or `100` SQL queries with the most resource consumption in the current time range through charts and tables, with the remaining records automatically summarized as `Others`.
-* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical IO bytes.
+* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical I/O bytes.
 * Display SQL and execution plan details by query. When selecting a TiKV node, you can also aggregate analysis in dimensions of `By Table`, `By DB`, and `By Region`.
 * Zoom in on a selected time range in the chart, manually refresh data, enable auto refresh, and export table data to CSV.
 * Collect all SQL statements that are executed, including those that are still running.
@@ -26,7 +26,7 @@ Top SQL is suitable for analyzing performance issues. The following are some typ
 * You discovered that an individual TiDB or TiKV node in the cluster has a very high CPU usage. You want to quickly locate which type of SQL is consuming a lot of CPU resources.
 * The overall cluster queries become slow. You want to find out which SQL is currently consuming the most resources, or compare the main query differences before and after the workload changes.
 * You need to locate hotspots from a higher dimension and want to aggregate and view resource consumption on the TiKV side by `Table`, `DB`, or `Region`.
-* You need to troubleshoot TiKV hotspots from the perspective of network traffic or logical IO, not just limited to the CPU dimension.
+* You need to troubleshoot TiKV hotspots from the perspective of network traffic or logical I/O, not just limited to the CPU dimension.
 
 Top SQL cannot be used in the following scenarios:
 
@@ -161,7 +161,7 @@ You can disable this feature by following these steps:
 3. Click **Save**.
 4. In the popped-up dialog box, click **Disable**.
 
-After you disable Top SQL, new Top SQL data collection will stop, but historical data can still be viewed before it expires.
+After you disable Top SQL, Top SQL stops collecting new data, but you can still view historical data before it expires.
 
 In addition to the UI, you can also disable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
 
