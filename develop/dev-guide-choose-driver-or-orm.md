@@ -235,7 +235,7 @@ go get -u gorm.io/driver/mysql
 
 GORM を使用して TiDB アプリケーションを構築する例については、 [GORMでTiDBに接続する](/develop/dev-guide-sample-application-golang-gorm.md)参照してください。
 
-## パイソン {#python}
+## Python {#python}
 
 このセクションでは、Python でドライバーと ORM フレームワークを使用する方法について説明します。
 
