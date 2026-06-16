@@ -22,7 +22,7 @@ TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/r
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [ルビー](https://www.ruby-lang.org/en/)&gt;= 3.0 がマシンにインストールされている
+-   [Ruby](https://www.ruby-lang.org/en/)&gt;= 3.0 がマシンにインストールされている
 -   あなたのマシンにインストールされている[バンドラー](https://bundler.io/)
 -   お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています
 -   TiDBクラスタが稼働中
