@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 >
 > このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
-このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
+このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 > **注記：**
 >
@@ -31,7 +31,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 -   [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
 
-    AWS CLI プロファイルがサポートされている[Amazon Bedrock](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされている地域のリストは[Amazon Bedrock地帯](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)でご覧いただけます。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
+    AWS CLI プロファイルがサポートされている[Amazon Bedrock](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされている地域のリストは[Amazon Bedrock リージョン](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)でご覧いただけます。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
 
     ```shell
     aws configure set region <your-region>
