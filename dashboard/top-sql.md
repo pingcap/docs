@@ -123,7 +123,7 @@ The following are the common steps to use Top SQL.
 
     > **Note**
     >
-    > `By Region` and `Order By Network`, `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
+    > `By Region`, `Order By Network`, and `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
 
 5. Observe the resource consumption hotspot records in the chart and table.
 
