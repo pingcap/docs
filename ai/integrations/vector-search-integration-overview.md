@@ -45,6 +45,6 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 | 言語   | ORM/クライアント      | インストール方法                          | チュートリアル                                                                                   |
 | ---- | --------------- | --------------------------------- | ----------------------------------------------------------------------------------------- |
 | Python | TiDB ベクタークライアント | `pip install tidb-vector[client]` | [Pythonを使ったベクトル検索を始めよう](/ai/quickstart-via-python.md)                                     |
-| Python | SQLアルケミー        | `pip install tidb-vector`         | [TiDBベクトル検索をSQLAlchemyと統合する](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) |
-| Python | ピーウィー           | `pip install tidb-vector`         | [TiDBベクトル検索をpeeweeと統合する](/ai/integrations/vector-search-integrate-with-peewee.md)         |
-| Python | ジャンゴ            | `pip install django-tidb[vector]` | [TiDBベクトル検索をDjangoに統合する](/ai/integrations/vector-search-integrate-with-django-orm.md)     |
+| Python | SQLAlchemy        | `pip install tidb-vector`         | [TiDBベクトル検索をSQLAlchemyと統合する](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) |
+| Python | peewee           | `pip install tidb-vector`         | [TiDBベクトル検索をpeeweeと統合する](/ai/integrations/vector-search-integrate-with-peewee.md)         |
+| Python | Django            | `pip install django-tidb[vector]` | [TiDBベクトル検索をDjangoに統合する](/ai/integrations/vector-search-integrate-with-django-orm.md)     |
