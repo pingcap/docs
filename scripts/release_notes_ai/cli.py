@@ -7,7 +7,7 @@ from pathlib import Path
 
 import openpyxl
 
-from .ai_client import AIClient
+from .ai_client import AzureOpenAIClient, CodexAIClient
 from .excel_workbook import (
     clear_output_columns,
     generate_notes_without_ai,
@@ -37,14 +37,25 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--sheet", default="pr_for_release_note", help="Workbook sheet name.")
     parser.add_argument(
+        "--ai-provider",
+        choices=["codex", "azure"],
+        default="codex",
+        help=(
+            "AI provider to use. 'codex' runs the Codex CLI as a subprocess "
+            "(requires codex to be installed). 'azure' calls Azure OpenAI via the "
+            "OpenAI Python SDK (requires AZURE_OPENAI_KEY and AZURE_OPENAI_BASE_URL "
+            "or OPENAI_BASE_URL environment variables). Default: codex."
+        ),
+    )
+    parser.add_argument(
         "--ai-command",
         default="codex --ask-for-approval never exec --sandbox read-only --ephemeral",
-        help="Command-line AI command. The prompt is passed through stdin.",
+        help="Command-line AI command (only used with --ai-provider codex). The prompt is passed through stdin.",
     )
     parser.add_argument(
         "--ai-model",
         default="gpt-5.4",
-        help="Model name passed to codex exec with -m.",
+        help="Model name. Passed to codex exec with -m, or used as the model parameter for Azure OpenAI.",
     )
     parser.add_argument(
         "--involve-ai-generation",
@@ -142,7 +153,13 @@ def main() -> int:
         raise SystemExit(f"error: {exc}") from None
     github = GitHubClient(token)
     involve_ai_generation = args.involve_ai_generation == "ON"
-    ai = AIClient(args.ai_command, args.ai_model, args.ai_timeout) if involve_ai_generation else None
+    if involve_ai_generation:
+        if args.ai_provider == "azure":
+            ai = AzureOpenAIClient(args.ai_model, args.ai_timeout)
+        else:
+            ai = CodexAIClient(args.ai_command, args.ai_model, args.ai_timeout)
+    else:
+        ai = None
 
     output_file = (
         Path(args.output_release_file)

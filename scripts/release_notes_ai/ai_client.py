@@ -21,10 +21,7 @@ from .models import GeneratedNote, RowContext
 
 
 class AIClient:
-    def __init__(self, command: str, model: str | None, timeout: int):
-        self.command = shlex.split(command)
-        self.model = model
-        self.timeout = timeout
+    """Base AI client with shared generation and validation logic."""
 
     def generate(self, prompt: str, expected_links: list[str], contributors: list[str]) -> GeneratedNote:
         result, errors = self._run_and_validate(prompt, expected_links, contributors)
@@ -46,6 +43,18 @@ class AIClient:
         except ValueError as exc:
             return None, [str(exc)]
         return validate_ai_response(data, expected_links, contributors)
+
+    def _run(self, prompt: str) -> str:
+        raise NotImplementedError("Subclasses must implement _run")
+
+
+class CodexAIClient(AIClient):
+    """AI client that invokes the Codex CLI as a subprocess."""
+
+    def __init__(self, command: str, model: str | None, timeout: int):
+        self.command = shlex.split(command)
+        self.model = model
+        self.timeout = timeout
 
     def _run(self, prompt: str) -> str:
         command = list(self.command)
@@ -95,6 +104,44 @@ class AIClient:
             return False
         executable = Path(command[0]).name
         return executable == "codex" and "exec" in command[1:]
+
+
+class AzureOpenAIClient(AIClient):
+    """AI client that calls Azure OpenAI via the OpenAI Python SDK."""
+
+    DEFAULT_MODEL = "gpt-5.4"
+    MAX_OUTPUT_TOKENS = 16384
+    TEMPERATURE = 0.1
+
+    def __init__(self, model: str | None, timeout: int):
+        from openai import OpenAI
+
+        key = os.environ.get("AZURE_OPENAI_KEY", "")
+        base_url = (
+            os.environ.get("AZURE_OPENAI_BASE_URL")
+            or os.environ.get("OPENAI_BASE_URL", "")
+        )
+        if not key:
+            raise ValueError(
+                "AZURE_OPENAI_KEY environment variable is required "
+                "when using --ai-provider azure"
+            )
+        if not base_url:
+            raise ValueError(
+                "AZURE_OPENAI_BASE_URL or OPENAI_BASE_URL environment variable "
+                "is required when using --ai-provider azure"
+            )
+        self.client = OpenAI(api_key=key, base_url=base_url, timeout=timeout)
+        self.model = model or self.DEFAULT_MODEL
+
+    def _run(self, prompt: str) -> str:
+        response = self.client.responses.create(
+            model=self.model,
+            input=[{"role": "user", "content": prompt}],
+            temperature=self.TEMPERATURE,
+            max_output_tokens=self.MAX_OUTPUT_TOKENS,
+        )
+        return response.output_text.strip()
 
 
 def is_executable_available(executable: str) -> bool:

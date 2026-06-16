@@ -48,7 +48,7 @@ The generator does not create a complete formal release note. It does not genera
     export GITHUB_TOKEN=<your-github-token>
     ```
 
-- Install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`.
+- Install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`. If you use `--ai-provider azure` instead, Codex CLI is not required; set `AZURE_OPENAI_KEY` and `AZURE_OPENAI_BASE_URL` (or `OPENAI_BASE_URL`) environment variables.
 
 ## Typical usage
 
@@ -67,8 +67,9 @@ python3 scripts/release_notes_generate_ai.py \
 | `--excel <workbook-path>` | Yes | None | `--excel /path/to/release-note-excel.xlsx` | Path to the source release note Excel file. The source workbook is not overwritten. The processed workbook is written to `<original-name>_processed.xlsx`. |
 | `--releases-dir <releases-dir>` | Yes | None | `--releases-dir releases` | Path to the existing English release notes directory. The script scans this directory for historical release notes and writes the generated Markdown under this directory unless `--output-release-file` is specified. |
 | `--sheet <sheet-name>` | No | `pr_for_release_note` | `--sheet pr_for_release_note` | Workbook sheet to process. |
-| `--ai-command <command>` | No | `codex --ask-for-approval never exec --sandbox read-only --ephemeral` | `--ai-command "codex --ask-for-approval never exec --sandbox read-only --ephemeral"` | Command used to invoke the AI generator. The prompt is passed through standard input. When the command is `codex exec`, the script also passes `--output-schema` and `--output-last-message`. |
-| `--ai-model <model>` | No | `gpt-5.4` | `--ai-model gpt-5.4` | Model name passed to `codex exec` with `-m`. |
+| `--ai-provider <provider>` | No | `codex` | `--ai-provider azure` | AI provider to use. `codex` runs the Codex CLI as a subprocess. `azure` calls Azure OpenAI via the OpenAI Python SDK (requires `AZURE_OPENAI_KEY` and `AZURE_OPENAI_BASE_URL` or `OPENAI_BASE_URL` environment variables). |
+| `--ai-command <command>` | No | `codex --ask-for-approval never exec --sandbox read-only --ephemeral` | `--ai-command "codex --ask-for-approval never exec --sandbox read-only --ephemeral"` | Command used to invoke the AI generator (only used with `--ai-provider codex`). The prompt is passed through standard input. When the command is `codex exec`, the script also passes `--output-schema` and `--output-last-message`. |
+| `--ai-model <model>` | No | `gpt-5.4` | `--ai-model gpt-5.4` | Model name. Passed to `codex exec` with `-m`, or used as the model parameter for Azure OpenAI. |
 | `--involve-ai-generation <ON-or-OFF>` | No | `ON` | `--involve-ai-generation OFF` | Whether to generate non-duplicate release notes with AI. Use `ON` to invoke AI, or `OFF` to use the source `formated_release_note` values. |
 | `--output-release-file <markdown-file>` | No | Conditional | `--output-release-file /path/to/release-8.5.7.md` | Write the generated Markdown to a custom path. By default, the output under `--releases-dir` is `release-<version>-updated-by-ai.md` if `release-<version>.md` already exists, otherwise `release-<version>.md`. |
 | `--ai-timeout <seconds>` | No | `600` | `--ai-timeout 600` | Timeout in seconds for each AI command invocation. |
