@@ -5,7 +5,7 @@ summary: TiCDC Avro プロトコルの概念とその使用方法を学びます
 
 # TiCDC Avroプロトコル {#ticdc-avro-protocol}
 
-TiCDC Avroプロトコルは、 [コンフルエントプラットフォーム](https://docs.confluent.io/platform/current/platform.html)で定義された[合流アブロ](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html)データ交換プロトコルのサードパーティ実装です。Avroは[アパッチ アブロ™](https://avro.apache.org/)で定義されたデータ形式です。
+TiCDC Avroプロトコルは、 [Confluent プラットフォーム](https://docs.confluent.io/platform/current/platform.html)で定義された[Confluent Avro](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html)データ交換プロトコルのサードパーティ実装です。Avroは[Apache Avro](https://avro.apache.org/)で定義されたデータ形式です。
 
 このドキュメントでは、TiCDC が Confluent Avro プロトコルを実装する方法と、Avro と[Confluent スキーマレジストリ](https://docs.confluent.io/platform/current/schema-registry/index.html)間の相互作用について説明します。
 

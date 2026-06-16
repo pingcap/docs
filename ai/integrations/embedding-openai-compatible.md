@@ -77,7 +77,7 @@ openai_like_embed = EmbeddingFunction(
 )
 ```
 
-### ステップ3：ベクターテーブルを作成する {#step-3-create-a-vector-table}
+### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
 Ollamaと`nomic-embed-text`モデルを使用するベクトルフィールドを持つテーブルを作成します。
 

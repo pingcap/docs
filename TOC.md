@@ -813,7 +813,7 @@
             -   [日付と時刻の種類](/data-type-date-and-time.md)
             -   [文字列型](/data-type-string.md)
             -   [JSONタイプ](/data-type-json.md)
-            -   [ベクタータイプ](/ai/reference/vector-search-data-types.md)
+            -   [ベクトルタイプ](/ai/reference/vector-search-data-types.md)
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)
             -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)

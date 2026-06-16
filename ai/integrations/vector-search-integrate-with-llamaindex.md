@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 > **注記：**
 >
-> -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> -   ベクトル検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
@@ -166,9 +166,9 @@ for index, document in enumerate(documents):
    document.metadata = {"book": "paul_graham"}
 ```
 
-### ステップ5．ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
+### ステップ5．ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-#### ステップ5.1 TiDBベクターストアの初期化 {#step-5-1-initialize-the-tidb-vector-store}
+#### ステップ5.1 TiDBベクトルストアの初期化 {#step-5-1-initialize-the-tidb-vector-store}
 
 以下のコードは、ベクトル検索に最適化されたTiDBに`paul_graham_test`という名前のテーブルを作成します。
 
