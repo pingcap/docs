@@ -58,7 +58,7 @@
     -   [Google ジェミニ](/ai/integrations/vector-search-auto-embedding-gemini.md)
     -   [抱きしめる顔](/ai/integrations/vector-search-auto-embedding-huggingface.md)
     -   [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
-    -   [アマゾンタイタン](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
+    -   [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 -   AIフレームワーク
     -   [ランチェーン](/ai/integrations/vector-search-integrate-with-langchain.md)
     -   [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
@@ -68,7 +68,7 @@
     -   [ピーウィー](/ai/integrations/vector-search-integrate-with-peewee.md)
 -   クラウドサービス
     -   [Jina AI埋め込み](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
-    -   [アマゾンの岩盤](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
+    -   [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
 -   MCP サーバー
     -   [概要](/ai/integrations/tidb-mcp-server.md)
     -   [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
