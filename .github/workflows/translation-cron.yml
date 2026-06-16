@@ -165,7 +165,7 @@ jobs:
           PREFER_LOCAL_TARGET_FOR_READ: "true"
           TARGET_REPO_PATH: ${{ github.workspace }}/docs
           AI_PROVIDER: azure
-          TERMS_PATH: ${{ github.workspace }}/docs-source/resources/terms.md
+          TERMS_PATH: ${{ github.workspace }}/docs-source/resources/terms-en-ja.md
           FAIL_ON_TRANSLATION_ERROR: "true"
         run: |
           set -euo pipefail
