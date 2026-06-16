@@ -241,7 +241,7 @@ def load_prompt_template(path: Path) -> str:
     except FileNotFoundError as exc:
         raise FileNotFoundError(
             f"Cannot find release-note prompt template: {path}. "
-            "Make sure scripts/release_notes_ai/prompts/generation.md exists."
+            "Make sure scripts/release-notes-ai-generator/prompts/generation.md exists."
         ) from exc
 
 

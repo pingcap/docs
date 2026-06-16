@@ -1,6 +1,6 @@
 # Release notes generator
 
-`scripts/release_notes_generate_ai.py` generates English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues in a Excel workbook.
+`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) generates English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues in a Excel workbook.
 
 The generator keeps the source workbook unchanged, writes all processing results to a processed workbook, and renders the generated entries to a Markdown release note file.
 
@@ -33,13 +33,12 @@ The generator keeps the source workbook unchanged, writes all processing results
 
 The generator does not create a complete formal release note. It does not generate sections such as compatibility changes, known issues, deprecations, or upgrade notes.
 
-
 ## Prerequisites
 
 - Install Python dependencies:
 
     ```bash
-    python3 -m pip install -r scripts/release_notes_ai/requirements.txt
+    python3 -m pip install -r scripts/release-notes-ai-generator/requirements.txt
     ```
 
 - Prepare a GitHub token with access to the public repositories and set the GitHub token in the `GITHUB_TOKEN` environment variable:
@@ -48,15 +47,38 @@ The generator does not create a complete formal release note. It does not genera
     export GITHUB_TOKEN=<your-github-token>
     ```
 
-- Install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`. If you use `--ai-provider azure` instead, Codex CLI is not required; set `AZURE_OPENAI_KEY` and `AZURE_OPENAI_BASE_URL` (or `OPENAI_BASE_URL`) environment variables.
+- Prepare the AI settings in your environment.
 
-## Typical usage
+    - If you use `--ai-provider azure` instead, set the following environment variables:
+
+    ```bash
+    export AZURE_OPENAI_KEY=<your-key>
+    export AZURE_OPENAI_BASE_URL=<your-endpoint>
+    ```
+
+    - If you use Codex CLI, install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`.
+
+## Typical usage examples
+
+Use Codex to generate release notes:
 
 ```bash
-python3 scripts/release_notes_generate_ai.py \
+cd scripts
+python3 -m release-notes-ai-generator \
     --version 8.5.7 \
     --excel /path/to/release-note-excel.xlsx \
     --releases-dir releases
+```
+
+Use Azure OpenAI to generate release notes:
+
+```bash
+cd scripts
+python3 -m release-notes-ai-generator \
+    --version 8.5.7 \
+    --excel /path/to/release-note-excel.xlsx \
+    --releases-dir releases \
+    --ai-provider azure
 ```
 
 ## Option descriptions
@@ -238,7 +260,7 @@ The prompt includes:
 - GitHub issue titles, bodies, and labels.
 - GitHub PR titles, bodies, authors, branches, merge times, and changed-file summaries.
 - The repository-local writing references for improvements and bug fixes.
-- The prompt template in `scripts/release_notes_ai/prompts/generation.md`.
+- The prompt template in `scripts/release-notes-ai-generator/prompts/generation.md`.
 
 The AI command must return a JSON object with these fields:
 

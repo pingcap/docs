@@ -3,18 +3,17 @@
 
 """Generate TiDB improvements and bug fixes for release notes according to PRs and issues in a specified excel file.
 
-Typical usage:
+Typical usage (run from the scripts/ directory):
 
-    python3 scripts/release_notes_generate_ai.py \
+    python3 -m release-notes-ai-generator \
         --version 8.5.7 \
         --excel /path/to/release-note-excel.xlsx \
         --releases-dir releases
+        --ai-provider azure
 
-For detailed usage and options, see scripts/release-notes-generator-readme.md.
+For detailed usage and options, see release-notes-generator-readme.md in this directory.
 """
 
-from release_notes_ai.cli import main
+from .cli import main
 
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+raise SystemExit(main())

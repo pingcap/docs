@@ -22,7 +22,7 @@ BUG_FIXES_REFERENCE = (
     / "bug-fixes.md"
 )
 GENERATION_PROMPT_TEMPLATE = (
-    REPO_ROOT / "scripts" / "release_notes_ai" / "prompts" / "generation.md"
+    REPO_ROOT / "scripts" / "release-notes-ai-generator" / "prompts" / "generation.md"
 )
 
 BOT_AUTHORS = {"ti-chi-bot", "ti-srebot"}
