@@ -66,7 +66,7 @@ TiDB Ansible version: 3.0.3
 
 + TiDB Binlog
     - Modify the default value of `defaultBinlogItemCount` in Drainer from 65536 to 512 to reduce the chance of OOM on Drainer startup [#721](https://github.com/pingcap/tidb-binlog/pull/721)
-    - Optimize the offline logic for pump server to avoid potential offline congestions [#701](https://github.com/pingcap/tidb-binlog/pull/701)
+    - Optimize the offline logic for Pump server to avoid potential offline congestions [#701](https://github.com/pingcap/tidb-binlog/pull/701)
 + TiDB Lightning:
     - Skip the system databases `mysql`, `information_schema`, `performance_schema`, and `sys` by default when importing [#225](https://github.com/pingcap/tidb-lightning/pull/225)
 
