@@ -20,7 +20,7 @@ TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、
 
     -   [Cursor](https://cursor.com)
     -   [クロード・コード](https://claude.com/product/claude-code)
-    -   [ビジュアルスタジオコード](https://code.visualstudio.com)
+    -   [Visual Studio Code](https://code.visualstudio.com)
     -   [Windsurf](https://windsurf.com)
 
 ## AIツールに接続する {#connect-to-ai-tools}
