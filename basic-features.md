@@ -29,7 +29,7 @@ summary: TiDBの機能概要について学びましょう。
 | [日付と時刻の種類](/data-type-date-and-time.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字列型](/data-type-string.md)                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [JSONタイプ](/data-type-json.md)                                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [ベクタータイプ](/ai/reference/vector-search-data-types.md)                           |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [ベクトルタイプ](/ai/reference/vector-search-data-types.md)                           |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [制御フロー関数](/functions-and-operators/control-flow-functions.md)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字列関数](/functions-and-operators/string-functions.md)                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [数値関数と数値演算子](/functions-and-operators/numeric-functions-and-operators.md)      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
